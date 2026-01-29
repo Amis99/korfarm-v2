@@ -279,14 +279,16 @@ function EngineShell({ content, moduleKey, onExit }) {
               </div>
             </header>
 
-              <main
-                className="engine-body"
-                style={{
-                  "--sheet-bg": content?.assets?.sheetBackground
-                    ? `url(${content.assets.sheetBackground})`
-                    : "url(/learning-paper.jpg)",
-                }}
-              >
+        <main
+          className={`engine-body ${
+            content?.payload?.pageStack && moduleKey === "worksheet_quiz" ? "stack" : ""
+          }`}
+          style={{
+            "--sheet-bg": content?.assets?.sheetBackground
+              ? `url(${content.assets.sheetBackground})`
+              : "url(/learning-paper.jpg)",
+          }}
+        >
                 <Module content={content} />
               </main>
 

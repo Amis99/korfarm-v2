@@ -1,15 +1,65 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 
 const getScoring = (question) => question.scoring || { correctDeltaSec: 0, wrongDeltaSec: 0 };
 
-const applyTemplate = (template, filled) => {
+const renderTemplate = (template, blanks, filled, activeIndex) => {
   const parts = template.split("____");
-  return parts.reduce((acc, part, idx) => {
-    const fill = filled[idx] ?? "____";
-    return `${acc}${part}${idx < parts.length - 1 ? fill : ""}`;
-  }, "");
+  return parts.map((part, idx) => (
+    <span key={`part-${idx}`}>
+      {part}
+      {idx < blanks.length ? (
+        <span
+          className={`worksheet-blank ${idx === activeIndex ? "active" : ""}`}
+        >
+          {filled[idx] || "____"}
+        </span>
+      ) : null}
+    </span>
+  ));
+};
+
+const renderTemplatePlain = (template, blanks) => {
+  const parts = template.split("____");
+  return parts.map((part, idx) => (
+    <span key={`plain-${idx}`}>
+      {part}
+      {idx < blanks.length ? <span className="worksheet-blank">____</span> : null}
+    </span>
+  ));
+};
+
+const renderHighlightedText = (text, highlight) => {
+  if (!highlight) return text;
+  if (highlight.range) {
+    const before = text.slice(0, highlight.range.start);
+    const target = text.slice(highlight.range.start, highlight.range.end);
+    const after = text.slice(highlight.range.end);
+    return (
+      <>
+        {before}
+        <span className="worksheet-highlight">{target}</span>
+        {after}
+      </>
+    );
+  }
+  if (highlight.text) {
+    const parts = text.split(highlight.text);
+    if (parts.length === 1) return text;
+    return parts.reduce((acc, part, idx) => {
+      acc.push(part);
+      if (idx < parts.length - 1) {
+        acc.push(
+          <span key={`hl-${idx}`} className="worksheet-highlight">
+            {highlight.text}
+          </span>
+        );
+      }
+      return acc;
+    }, []);
+  }
+  return text;
 };
 
 function WorksheetQuizModule({ content }) {
@@ -20,8 +70,17 @@ function WorksheetQuizModule({ content }) {
   const [showPdf, setShowPdf] = useState(false);
   const [blankIndex, setBlankIndex] = useState(0);
   const [blankAnswers, setBlankAnswers] = useState({});
+  const [blankResultMap, setBlankResultMap] = useState({});
   const [lastResult, setLastResult] = useState(null);
   const [statusMap, setStatusMap] = useState({});
+  const [itemHeights, setItemHeights] = useState([]);
+  const [anchorRect, setAnchorRect] = useState(null);
+  const measureRef = useRef(null);
+  const itemRefs = useRef({});
+
+  const columnHeight = 1123 - 48;
+  const itemGap = 14;
+  const usePageStack = payload.pageStack;
 
   const currentQuestion = questions[currentIndex];
   const isFillBlanks = currentQuestion?.type === "FILL_BLANKS";
@@ -30,8 +89,71 @@ function WorksheetQuizModule({ content }) {
   const isManuscript =
     currentQuestion?.render === "MANUSCRIPT" || content?.contentType === "WRITING_DESCRIPTIVE";
   const preparedTemplate = currentQuestion?.template
-    ? applyTemplate(currentQuestion.template, filled)
+    ? renderTemplate(currentQuestion.template, blanks, filled, blankIndex)
     : "";
+  const stemText = currentQuestion?.stem
+    ? renderHighlightedText(currentQuestion.stem, currentQuestion.highlight)
+    : "";
+
+  const measureItems = useMemo(
+    () =>
+      questions.map((question, idx) => {
+        const isBlank = question.type === "FILL_BLANKS";
+        const blankList = question.blanks || [];
+        const contentText = isBlank
+          ? renderTemplatePlain(question.template || "", blankList)
+          : question.stem || question.prompt || "";
+        return (
+          <li key={`measure-${question.id}`} className="worksheet-item">
+            <span className="worksheet-item-number">{idx + 1}.</span>
+            <span className="worksheet-item-text">{contentText}</span>
+          </li>
+        );
+      }),
+    [questions]
+  );
+
+  useLayoutEffect(() => {
+    if (!measureRef.current) return;
+    const nodes = Array.from(measureRef.current.querySelectorAll(".worksheet-item"));
+    if (!nodes.length) return;
+    setItemHeights(nodes.map((node) => node.getBoundingClientRect().height));
+  }, [measureItems]);
+
+  const pages = useMemo(() => {
+    if (!questions.length) return [];
+    if (!usePageStack || itemHeights.length !== questions.length) {
+      return [{ left: questions.map((_, idx) => idx), right: [] }];
+    }
+    const result = [];
+    let left = [];
+    let right = [];
+    let leftHeight = 0;
+    let rightHeight = 0;
+    itemHeights.forEach((height, idx) => {
+      const leftExtra = left.length > 0 ? itemGap : 0;
+      if (leftHeight + height + leftExtra <= columnHeight || left.length === 0) {
+        left.push(idx);
+        leftHeight += height + leftExtra;
+        return;
+      }
+      const rightExtra = right.length > 0 ? itemGap : 0;
+      if (rightHeight + height + rightExtra <= columnHeight || right.length === 0) {
+        right.push(idx);
+        rightHeight += height + rightExtra;
+        return;
+      }
+      result.push({ left, right });
+      left = [idx];
+      right = [];
+      leftHeight = height;
+      rightHeight = 0;
+    });
+    if (left.length || right.length) {
+      result.push({ left, right });
+    }
+    return result;
+  }, [itemHeights, questions.length, columnHeight, itemGap]);
 
   const handleNext = () => {
     if (currentIndex >= questions.length - 1) {
@@ -41,6 +163,7 @@ function WorksheetQuizModule({ content }) {
     setCurrentIndex((prev) => prev + 1);
     setBlankIndex(0);
     setBlankAnswers({});
+    setBlankResultMap({});
     setLastResult(null);
   };
 
@@ -69,17 +192,24 @@ function WorksheetQuizModule({ content }) {
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
     recordAnswer({ id: `${currentQuestion.id}-${blank.id}`, correct: isCorrect });
     setBlankAnswers((prev) => ({ ...prev, [blank.id]: blank.choices.find((c) => c.id === choiceId)?.text || "" }));
+    setBlankResultMap((prev) => ({
+      ...prev,
+      [blank.id]: isCorrect,
+    }));
     setLastResult(isCorrect ? "correct" : "wrong");
     if (!isCorrect && currentQuestion.requireCorrect) {
       return;
     }
     if (blankIndex >= blanks.length - 1) {
+      const resultMap = {
+        ...blankResultMap,
+        [blank.id]: isCorrect,
+      };
+      const allCorrect = blanks.every((item) => resultMap[item.id]);
       setStatusMap((prev) => ({
         ...prev,
-        [currentQuestion.id]: isCorrect ? "correct" : "wrong",
+        [currentQuestion.id]: allCorrect ? "correct" : "wrong",
       }));
-    }
-    if (blankIndex >= blanks.length - 1) {
       handleNext();
     } else {
       setBlankIndex((prev) => prev + 1);
@@ -93,6 +223,20 @@ function WorksheetQuizModule({ content }) {
       start();
     }
   }, [payload.requireStart, status, start]);
+
+  useLayoutEffect(() => {
+    const node = itemRefs.current[currentIndex];
+    if (!node) return;
+    const container = node.closest(".engine-body");
+    if (!container) return;
+    const containerRect = container.getBoundingClientRect();
+    const rect = node.getBoundingClientRect();
+    setAnchorRect({
+      left: rect.left - containerRect.left,
+      top: rect.top - containerRect.top,
+      height: rect.height,
+    });
+  }, [currentIndex, pages.length]);
 
   return (
     <div className="worksheet-module">
@@ -113,8 +257,118 @@ function WorksheetQuizModule({ content }) {
         <>
           <div className="worksheet-sheet">
             <div className="worksheet-stem">
-              <h3>{currentQuestion?.stem}</h3>
-              {isFillBlanks ? <p className="worksheet-template">{preparedTemplate}</p> : null}
+              <div className="worksheet-pages">
+                {pages.map((page, pageIndex) => (
+                  <div
+                    className={usePageStack ? "worksheet-page" : "worksheet-page single"}
+                    key={`page-${pageIndex}`}
+                  >
+                    <div className="worksheet-page-inner">
+                      <div className="worksheet-page-number">
+                        {pageIndex + 1} / {pages.length}
+                      </div>
+                      <div className="worksheet-columns">
+                        <ol className="worksheet-list">
+                          {page.left.map((idx) => {
+                            const question = questions[idx];
+                            const isActive = idx === currentIndex;
+                            const status = statusMap[question.id];
+                            const isBlank = question.type === "FILL_BLANKS";
+                            const blankList = question.blanks || [];
+                            const filledValues = isActive
+                              ? blankList.map((blank) => blankAnswers[blank.id])
+                              : [];
+                            const activeBlankIndex = isActive ? blankIndex : -1;
+                            const content = isBlank
+                              ? isActive
+                                ? renderTemplate(
+                                    question.template || "",
+                                    blankList,
+                                    filledValues,
+                                    activeBlankIndex
+                                  )
+                                : renderTemplatePlain(question.template || "", blankList)
+                              : isActive
+                                ? renderHighlightedText(
+                                    question.stem || question.prompt || "",
+                                    question.highlight
+                                  )
+                                : question.stem || question.prompt || "";
+
+                            return (
+                              <li
+                                key={question.id}
+                                ref={(el) => {
+                                  if (el) itemRefs.current[idx] = el;
+                                }}
+                                className={`worksheet-item ${isActive ? "active" : ""} ${
+                                  status ? `done ${status}` : ""
+                                }`}
+                              >
+                                <span className="worksheet-item-number">{idx + 1}.</span>
+                                <span className="worksheet-item-text">{content}</span>
+                                {status ? (
+                                  <span className={`worksheet-mark ${status}`}>
+                                    {status === "correct" ? "○" : "／"}
+                                  </span>
+                                ) : null}
+                              </li>
+                            );
+                          })}
+                        </ol>
+                        <ol className="worksheet-list">
+                          {page.right.map((idx) => {
+                            const question = questions[idx];
+                            const isActive = idx === currentIndex;
+                            const status = statusMap[question.id];
+                            const isBlank = question.type === "FILL_BLANKS";
+                            const blankList = question.blanks || [];
+                            const filledValues = isActive
+                              ? blankList.map((blank) => blankAnswers[blank.id])
+                              : [];
+                            const activeBlankIndex = isActive ? blankIndex : -1;
+                            const content = isBlank
+                              ? isActive
+                                ? renderTemplate(
+                                    question.template || "",
+                                    blankList,
+                                    filledValues,
+                                    activeBlankIndex
+                                  )
+                                : renderTemplatePlain(question.template || "", blankList)
+                              : isActive
+                                ? renderHighlightedText(
+                                    question.stem || question.prompt || "",
+                                    question.highlight
+                                  )
+                                : question.stem || question.prompt || "";
+
+                            return (
+                              <li
+                                key={question.id}
+                                ref={(el) => {
+                                  if (el) itemRefs.current[idx] = el;
+                                }}
+                                className={`worksheet-item ${isActive ? "active" : ""} ${
+                                  status ? `done ${status}` : ""
+                                }`}
+                              >
+                                <span className="worksheet-item-number">{idx + 1}.</span>
+                                <span className="worksheet-item-text">{content}</span>
+                                {status ? (
+                                  <span className={`worksheet-mark ${status}`}>
+                                    {status === "correct" ? "○" : "／"}
+                                  </span>
+                                ) : null}
+                              </li>
+                            );
+                          })}
+                        </ol>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
               {isManuscript ? (
                 <div className="manuscript-grid">
                   {blanks.map((blank) => (
@@ -164,6 +418,7 @@ function WorksheetQuizModule({ content }) {
               prompt={currentQuestion.prompt || currentQuestion.stem}
               choices={currentQuestion.choices || []}
               onSelect={handleChoice}
+              anchorRect={anchorRect}
             />
           ) : null}
 
@@ -173,6 +428,7 @@ function WorksheetQuizModule({ content }) {
               prompt={`${blankIndex + 1}번째 빈칸을 선택하세요.`}
               choices={blanks[blankIndex]?.choices || []}
               onSelect={handleBlankChoice}
+              anchorRect={anchorRect}
             />
           ) : null}
         </>
@@ -188,6 +444,10 @@ function WorksheetQuizModule({ content }) {
           </div>
         </div>
       ) : null}
+
+      <div className="worksheet-measure" ref={measureRef} aria-hidden="true">
+        <ol className="worksheet-list">{measureItems}</ol>
+      </div>
     </div>
   );
 }

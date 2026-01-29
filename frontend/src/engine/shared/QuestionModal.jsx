@@ -2,7 +2,15 @@ import { useEffect, useRef, useState } from "react";
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
-function QuestionModal({ title, prompt, choices = [], onSelect, onClose, footer }) {
+function QuestionModal({
+  title,
+  prompt,
+  choices = [],
+  onSelect,
+  onClose,
+  footer,
+  anchorRect,
+}) {
   const modalRef = useRef(null);
   const dragState = useRef(null);
   const [position, setPosition] = useState({ x: 28, y: 28 });
@@ -21,6 +29,20 @@ function QuestionModal({ title, prompt, choices = [], onSelect, onClose, footer 
       y: clamp(prev.y, 8, maxY),
     }));
   }, []);
+
+  useEffect(() => {
+    if (!anchorRect) return;
+    const modal = modalRef.current;
+    if (!modal) return;
+    const container = modal.closest(".engine-body") || document.body;
+    const containerRect = container.getBoundingClientRect();
+    const modalRect = modal.getBoundingClientRect();
+    const maxX = Math.max(8, containerRect.width - modalRect.width - 8);
+    const maxY = Math.max(8, containerRect.height - modalRect.height - 8);
+    const nextX = clamp(anchorRect.left || 28, 8, maxX);
+    const nextY = clamp(anchorRect.top || 28, 8, maxY);
+    setPosition({ x: nextX, y: nextY });
+  }, [anchorRect]);
 
   useEffect(() => {
     if (!isDragging) return undefined;
@@ -69,7 +91,10 @@ function QuestionModal({ title, prompt, choices = [], onSelect, onClose, footer 
       <div
         ref={modalRef}
         className={`question-modal ${isDragging ? "dragging" : ""}`}
-        style={{ transform: `translate3d(${position.x}px, ${position.y}px, 0)` }}
+        style={{
+          transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+          minHeight: anchorRect?.height ? `${anchorRect.height}px` : undefined,
+        }}
       >
         <div className="question-modal-header" onPointerDown={handleDragStart}>
           <h3>{title}</h3>

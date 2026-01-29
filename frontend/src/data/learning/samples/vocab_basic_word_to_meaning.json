@@ -1,10 +1,10 @@
 {
   "contentId": "b0e8b260-d386-4ad4-a2e6-b062ff545f4f",
-  "contentType": "VOCAB_BASIC_WORD_TO_MEANING",
+  "contentType": "VOCAB_BASIC",
   "version": 1,
   "status": "PUBLISHED",
   "title": "어휘 기본 학습 01",
-  "description": "낱말을 보고 뜻을 고르는 연습",
+  "description": "낱말-뜻-용례 20문항",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
     "min": 4,
@@ -26,23 +26,30 @@
     "multiplier": 1
   },
   "timeLimitSec": 180,
-  "assets": {},
+  "assets": {
+    "sheetBackground": "/learning-paper.jpg"
+  },
   "payload": {
+    "pageStack": true,
     "layout": "EXAM_SHEET",
     "questions": [
       {
-        "id": "v1",
+        "id": "vb-1",
         "type": "MULTI_CHOICE",
+        "questionKind": "WORD_TO_MEANING",
         "stem": "낱말: 관조",
+        "highlight": {
+          "text": "관조"
+        },
         "prompt": "뜻을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "부드럽게 감싸기"
+            "text": "사물이나 현상을 깊이 바라봄"
           },
           {
             "id": "B",
-            "text": "사물이나 현상을 깊이 바라봄"
+            "text": "부드럽게 감싸기"
           },
           {
             "id": "C",
@@ -53,33 +60,643 @@
             "text": "마음을 나눔"
           }
         ],
-        "answerId": "B",
+        "answerId": "A",
         "scoring": {
           "correctDeltaSec": 20,
           "wrongDeltaSec": -20
         }
       },
       {
-        "id": "v2",
+        "id": "vb-2",
         "type": "MULTI_CHOICE",
-        "stem": "낱말: 일목요연",
+        "questionKind": "MEANING_TO_WORD",
+        "stem": "뜻: 한눈에 알기 쉽게 정리됨",
+        "highlight": {
+          "text": "한눈에 알기 쉽게 정리됨"
+        },
+        "prompt": "낱말을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "일목요연"
+          },
+          {
+            "id": "B",
+            "text": "난해"
+          },
+          {
+            "id": "C",
+            "text": "분산"
+          },
+          {
+            "id": "D",
+            "text": "단절"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-3",
+        "type": "FILL_BLANKS",
+        "questionKind": "EXAMPLE_BLANK",
+        "stem": "용례 빈칸에 들어갈 낱말을 고르세요.",
+        "template": "그는 목표에 ____하여 밤늦게까지 작업했다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전념"
+              },
+              {
+                "id": "B",
+                "text": "유예"
+              },
+              {
+                "id": "C",
+                "text": "방관"
+              },
+              {
+                "id": "D",
+                "text": "동요"
+              }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-4",
+        "type": "MULTI_CHOICE",
+        "questionKind": "WORD_TO_MEANING",
+        "stem": "낱말: 간결",
+        "highlight": {
+          "text": "간결"
+        },
         "prompt": "뜻을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "한눈에 알기 쉽게 정리됨"
+            "text": "짧고 군더더기 없이 간단함"
           },
           {
             "id": "B",
-            "text": "하나씩 따로 놓음"
+            "text": "매우 복잡함"
           },
           {
             "id": "C",
-            "text": "여러 번 반복함"
+            "text": "무질서함"
           },
           {
             "id": "D",
-            "text": "먼저 말함"
+            "text": "어떠함"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-5",
+        "type": "MULTI_CHOICE",
+        "questionKind": "MEANING_TO_WORD",
+        "stem": "뜻: 깊이 생각하고 살펴봄",
+        "highlight": {
+          "text": "깊이 생각하고 살펴봄"
+        },
+        "prompt": "낱말을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "고찰"
+          },
+          {
+            "id": "B",
+            "text": "분별"
+          },
+          {
+            "id": "C",
+            "text": "완화"
+          },
+          {
+            "id": "D",
+            "text": "회피"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-6",
+        "type": "FILL_BLANKS",
+        "questionKind": "EXAMPLE_BLANK",
+        "stem": "용례 빈칸에 들어갈 낱말을 고르세요.",
+        "template": "주어진 단서로 결과를 ____해 보았다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "유추"
+              },
+              {
+                "id": "B",
+                "text": "분류"
+              },
+              {
+                "id": "C",
+                "text": "유예"
+              },
+              {
+                "id": "D",
+                "text": "호응"
+              }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-7",
+        "type": "MULTI_CHOICE",
+        "questionKind": "WORD_TO_MEANING",
+        "stem": "낱말: 배려",
+        "highlight": {
+          "text": "배려"
+        },
+        "prompt": "뜻을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "남을 생각하여 돕거나 보살핌"
+          },
+          {
+            "id": "B",
+            "text": "관심을 끊음"
+          },
+          {
+            "id": "C",
+            "text": "마음을 접음"
+          },
+          {
+            "id": "D",
+            "text": "가볍게 넘김"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-8",
+        "type": "MULTI_CHOICE",
+        "questionKind": "MEANING_TO_WORD",
+        "stem": "뜻: 분명하고 뚜렷함",
+        "highlight": {
+          "text": "분명하고 뚜렷함"
+        },
+        "prompt": "낱말을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "명료"
+          },
+          {
+            "id": "B",
+            "text": "모호"
+          },
+          {
+            "id": "C",
+            "text": "난해"
+          },
+          {
+            "id": "D",
+            "text": "산만"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-9",
+        "type": "FILL_BLANKS",
+        "questionKind": "EXAMPLE_BLANK",
+        "stem": "용례 빈칸에 들어갈 낱말을 고르세요.",
+        "template": "제출 기한을 ____해 달라고 요청했다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "유예"
+              },
+              {
+                "id": "B",
+                "text": "전념"
+              },
+              {
+                "id": "C",
+                "text": "심화"
+              },
+              {
+                "id": "D",
+                "text": "분별"
+              }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-10",
+        "type": "MULTI_CHOICE",
+        "questionKind": "WORD_TO_MEANING",
+        "stem": "낱말: 타당",
+        "highlight": {
+          "text": "타당"
+        },
+        "prompt": "뜻을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "논리적 근거가 충분함"
+          },
+          {
+            "id": "B",
+            "text": "우연히 일어남"
+          },
+          {
+            "id": "C",
+            "text": "관계가 없음"
+          },
+          {
+            "id": "D",
+            "text": "갑자기 변함"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-11",
+        "type": "MULTI_CHOICE",
+        "questionKind": "MEANING_TO_WORD",
+        "stem": "뜻: 엄격하고 정확함",
+        "highlight": {
+          "text": "엄격하고 정확함"
+        },
+        "prompt": "낱말을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "엄밀"
+          },
+          {
+            "id": "B",
+            "text": "관대"
+          },
+          {
+            "id": "C",
+            "text": "모호"
+          },
+          {
+            "id": "D",
+            "text": "우연"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-12",
+        "type": "FILL_BLANKS",
+        "questionKind": "EXAMPLE_BLANK",
+        "stem": "용례 빈칸에 들어갈 낱말을 고르세요.",
+        "template": "사실을 근거로 결론을 ____하였다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "추론"
+              },
+              {
+                "id": "B",
+                "text": "조명"
+              },
+              {
+                "id": "C",
+                "text": "유예"
+              },
+              {
+                "id": "D",
+                "text": "각색"
+              }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-13",
+        "type": "MULTI_CHOICE",
+        "questionKind": "WORD_TO_MEANING",
+        "stem": "낱말: 상반",
+        "highlight": {
+          "text": "상반"
+        },
+        "prompt": "뜻을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "서로 반대됨"
+          },
+          {
+            "id": "B",
+            "text": "점차 비슷해짐"
+          },
+          {
+            "id": "C",
+            "text": "같은 방향임"
+          },
+          {
+            "id": "D",
+            "text": "서로 섞임"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-14",
+        "type": "MULTI_CHOICE",
+        "questionKind": "MEANING_TO_WORD",
+        "stem": "뜻: 더욱 깊어짐",
+        "highlight": {
+          "text": "더욱 깊어짐"
+        },
+        "prompt": "낱말을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "심화"
+          },
+          {
+            "id": "B",
+            "text": "완화"
+          },
+          {
+            "id": "C",
+            "text": "경감"
+          },
+          {
+            "id": "D",
+            "text": "유예"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-15",
+        "type": "FILL_BLANKS",
+        "questionKind": "EXAMPLE_BLANK",
+        "stem": "용례 빈칸에 들어갈 낱말을 고르세요.",
+        "template": "옳고 그름을 ____하는 판단이 필요하다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "분별"
+              },
+              {
+                "id": "B",
+                "text": "전념"
+              },
+              {
+                "id": "C",
+                "text": "각색"
+              },
+              {
+                "id": "D",
+                "text": "유추"
+              }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-16",
+        "type": "MULTI_CHOICE",
+        "questionKind": "WORD_TO_MEANING",
+        "stem": "낱말: 유의미",
+        "highlight": {
+          "text": "유의미"
+        },
+        "prompt": "뜻을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "의미나 가치가 있음"
+          },
+          {
+            "id": "B",
+            "text": "전혀 의미가 없음"
+          },
+          {
+            "id": "C",
+            "text": "모두가 같음"
+          },
+          {
+            "id": "D",
+            "text": "일시적임"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-17",
+        "type": "MULTI_CHOICE",
+        "questionKind": "MEANING_TO_WORD",
+        "stem": "뜻: 해야 할 일이나 맡은 바에 대한 책임",
+        "highlight": {
+          "text": "해야 할 일이나 맡은 바에 대한 책임"
+        },
+        "prompt": "낱말을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "소명"
+          },
+          {
+            "id": "B",
+            "text": "유예"
+          },
+          {
+            "id": "C",
+            "text": "방관"
+          },
+          {
+            "id": "D",
+            "text": "분산"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-18",
+        "type": "FILL_BLANKS",
+        "questionKind": "EXAMPLE_BLANK",
+        "stem": "용례 빈칸에 들어갈 낱말을 고르세요.",
+        "template": "소설을 영화로 ____하여 새롭게 구성했다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "각색"
+              },
+              {
+                "id": "B",
+                "text": "전념"
+              },
+              {
+                "id": "C",
+                "text": "유추"
+              },
+              {
+                "id": "D",
+                "text": "반문"
+              }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-19",
+        "type": "MULTI_CHOICE",
+        "questionKind": "WORD_TO_MEANING",
+        "stem": "낱말: 반문",
+        "highlight": {
+          "text": "반문"
+        },
+        "prompt": "뜻을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "되묻는 물음"
+          },
+          {
+            "id": "B",
+            "text": "자신에게 묻는 질문"
+          },
+          {
+            "id": "C",
+            "text": "즉답하는 말"
+          },
+          {
+            "id": "D",
+            "text": "승낙을 뜻하는 말"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "vb-20",
+        "type": "MULTI_CHOICE",
+        "questionKind": "MEANING_TO_WORD",
+        "stem": "뜻: 질서가 잘 잡혀 있음",
+        "highlight": {
+          "text": "질서가 잘 잡혀 있음"
+        },
+        "prompt": "낱말을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "정연"
+          },
+          {
+            "id": "B",
+            "text": "혼잡"
+          },
+          {
+            "id": "C",
+            "text": "난맥"
+          },
+          {
+            "id": "D",
+            "text": "무정"
           }
         ],
         "answerId": "A",

@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAdminList } from "../hooks/useAdminList";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
+import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
 import "../styles/admin-detail.css";
 
 const CONTENTS = [
@@ -49,6 +50,7 @@ function AdminContentPage() {
   const [jsonText, setJsonText] = useState("");
   const [moduleKey, setModuleKey] = useState("worksheet_quiz");
   const [sampleId, setSampleId] = useState("");
+  const [templateId, setTemplateId] = useState("");
   const [previewError, setPreviewError] = useState("");
   const navigate = useNavigate();
 
@@ -69,10 +71,21 @@ function AdminContentPage() {
 
   const handleSampleLoad = (value) => {
     setSampleId(value);
+    setTemplateId("");
     const sample = LEARNING_CATALOG.find((item) => item.id === value);
     if (!sample) return;
     setModuleKey(sample.moduleKey);
     setJsonText(JSON.stringify(sample.content, null, 2));
+    setPreviewError("");
+  };
+
+  const handleTemplateLoad = (value) => {
+    setTemplateId(value);
+    setSampleId("");
+    const template = LEARNING_TEMPLATES.find((item) => item.id === value);
+    if (!template) return;
+    setModuleKey(template.moduleKey);
+    setJsonText(JSON.stringify(template.content, null, 2));
     setPreviewError("");
   };
 
@@ -197,6 +210,17 @@ function AdminContentPage() {
             <h2>학습 JSON 업로드</h2>
             <p>샘플을 불러오거나 JSON을 붙여넣고 미리보기로 확인하세요.</p>
             <div className="admin-detail-toolbar">
+              <select
+                value={templateId}
+                onChange={(event) => handleTemplateLoad(event.target.value)}
+              >
+                <option value="">표준 양식 불러오기</option>
+                {LEARNING_TEMPLATES.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.title}
+                  </option>
+                ))}
+              </select>
               <select value={sampleId} onChange={(event) => handleSampleLoad(event.target.value)}>
                 <option value="">샘플 불러오기</option>
                 {LEARNING_CATALOG.map((item) => (
