@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>국어농장 스마트폰 홈</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua&amp;family=Dongle:wght@300;400;700&amp;family=Gamja+Flower&amp;family=Noto+Sans+KR:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "meadow-light": "#e8f5e9",
+                        "meadow-green": "#81c784",
+                        "meadow-dark": "#4caf50",
+                        "earth-brown": "#8d6e63",
+                        "earth-dark": "#5d4037",
+                        "sun-yellow": "#fff176",
+                        "carrot-orange": "#ffb74d",
+                        "sky-blue": "#81d4fa",
+                        "card-bg": "#ffffff",
+                        "card-border": "#dcedc8",
+                    },
+                    fontFamily: {
+                        "sans": ["Gamja Flower", "Jua", "Noto Sans KR", "sans-serif"],
+                        "cute": ["Jua", "sans-serif"],
+                        "hand": ["Gamja Flower", "cursive"]
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 12px rgba(129, 199, 132, 0.2)',
+                        'wood': '0 4px 0 #5d4037',
+                        'green-btn': '0 4px 0 #388e3c',
+                        'yellow-btn': '0 4px 0 #fbc02d',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Gamja Flower', cursive;
+            background-color: #f1f8e9;
+        }
+        .text-shadow-sm {
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .pattern-diagonal-lines {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,0.2) 5px, rgba(255,255,255,0.2) 10px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-gradient-to-br from-[#f1f8e9] to-[#dcedc8] text-earth-dark h-screen flex flex-col overflow-hidden selection:bg-meadow-green selection:text-white">
+<div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-sun-yellow/30 rounded-full blur-3xl"></div>
+<div class="absolute top-1/4 -left-20 w-80 h-80 bg-meadow-green/10 rounded-full blur-3xl"></div>
+</div>
+<div class="flex-1 overflow-y-auto no-scrollbar relative z-10 pb-[100px]">
+<header class="bg-white/80 backdrop-blur-md border-b-2 border-meadow-green/20 rounded-b-[2rem] shadow-soft sticky top-0 z-40 px-5 pt-12 pb-5">
+<div class="flex items-center gap-4 mb-4">
+<div class="relative flex-none">
+<div class="w-16 h-16 rounded-full bg-cover bg-center border-2 border-white shadow-md" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAm_6TiKc4xe9lzKWYbgIX-8TwhBTy2SrOk8hdRLZUSajgbQWYS2ED0OafL3ten9uOxN2rlztROkTuKLuT0d056CyQRzIFYlpRBm6DoocSmWPfVJR6YJKuzhlrl5gT-5bGsopBj3abJpNqt_CKXvImE6qpANNYaUYhVOLOE0Xwchw90z1iB_0mU7HDTBDvGpUzAfTmNgzKLMvMwHyqLY5sePtVEJ-EHw4gabbOJPILQuaSb6euFgvG_b1Mnf6ONgRYEQ6r9A8r7-lSS');"></div>
+<div class="absolute -bottom-1 -right-1 bg-carrot-orange text-white text-[10px] font-bold px-2 py-0.5 rounded-full border border-white shadow-sm font-cute">
+                        LV.12
+                    </div>
+</div>
+<div class="flex-1 min-w-0">
+<h1 class="text-xl font-cute text-earth-dark leading-none mb-1">
+                        알렉스 농부님, <span class="text-meadow-dark">안녕!</span>
+</h1>
+<div class="flex justify-between text-xs text-earth-brown font-bold tracking-wide mb-1">
+<span>450 XP</span>
+<span>목표: 1000</span>
+</div>
+<div class="w-full h-3 bg-meadow-light rounded-full overflow-hidden border border-meadow-green/30 relative">
+<div class="h-full bg-meadow-green w-[45%] rounded-full relative pattern-diagonal-lines"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-meadow-light/50 border border-meadow-light rounded-xl p-2 flex flex-col items-center justify-center gap-1 hover:bg-meadow-light transition-colors">
+<span class="material-symbols-outlined text-meadow-dark text-xl">grass</span>
+<div class="text-xs font-bold text-earth-brown"><span class="text-meadow-dark text-sm font-cute">12</span> 씨앗</div>
+</div>
+<div class="bg-orange-50/50 border border-orange-100 rounded-xl p-2 flex flex-col items-center justify-center gap-1 hover:bg-orange-50 transition-colors">
+<span class="material-symbols-outlined text-carrot-orange text-xl">shopping_bag</span>
+<div class="text-xs font-bold text-earth-brown"><span class="text-carrot-orange text-sm font-cute">5</span> 비료</div>
+</div>
+<div class="bg-white/50 border border-earth-brown/10 rounded-xl p-2 flex flex-col items-center justify-center gap-1 hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-earth-brown text-xl">nutrition</span>
+<div class="text-xs font-bold text-earth-brown"><span class="text-earth-dark text-sm font-cute">24</span> 수확</div>
+</div>
+</div>
+</header>
+<div class="px-5 flex flex-col gap-6 mt-4">
+<div class="relative overflow-hidden rounded-2xl border-2 border-white shadow-md group cursor-pointer transform hover:scale-[1.01] transition-transform">
+<div class="absolute inset-0 bg-gradient-to-r from-carrot-orange to-orange-400 z-0"></div>
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1628126235206-5260b9ea6441?q=80&amp;w=300&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-20 z-0 mix-blend-overlay"></div>
+<div class="relative z-10 p-4 flex items-center justify-between">
+<div class="flex-1 text-white">
+<div class="inline-flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full text-xs font-bold mb-1 backdrop-blur-sm border border-white/30">
+<span class="material-symbols-outlined text-sm fill-1">stars</span> 프리미엄
+                        </div>
+<h3 class="font-cute text-xl leading-tight drop-shadow-md">무제한 씨앗 받기!</h3>
+</div>
+<button class="bg-white text-carrot-orange font-black text-sm px-4 py-2 rounded-xl shadow-sm hover:bg-orange-50 font-cute shrink-0">
+                        업그레이드
+                    </button>
+</div>
+</div>
+<section>
+<h2 class="text-earth-dark text-xl font-cute mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-meadow-dark">school</span>
+                    오늘의 무료 학습
+                </h2>
+<div class="flex flex-col gap-4">
+<div class="bg-white rounded-2xl p-5 border-2 border-transparent hover:border-meadow-green/30 transition-all shadow-soft relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-20 h-20 bg-meadow-light rounded-full opacity-50 z-0"></div>
+<div class="relative z-10 flex justify-between items-start">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-[10px] font-bold bg-meadow-green text-white px-1.5 py-0.5 rounded-md">무료</span>
+<h3 class="text-lg font-cute text-earth-dark">일일 퀴즈</h3>
+</div>
+<p class="text-earth-brown text-xs mb-3">맞춤법과 어휘 퀴즈 10문제</p>
+<div class="w-32 bg-gray-100 h-2 rounded-full overflow-hidden border border-gray-200">
+<div class="h-full bg-meadow-green w-[30%] rounded-full"></div>
+</div>
+</div>
+<div class="bg-meadow-light p-3 rounded-full text-meadow-green">
+<span class="material-symbols-outlined text-3xl">quiz</span>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-2xl p-5 border-2 border-transparent hover:border-sky-blue/30 transition-all shadow-soft relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-20 h-20 bg-sky-50 rounded-full opacity-50 z-0"></div>
+<div class="relative z-10 flex justify-between items-start">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-[10px] font-bold bg-sky-400 text-white px-1.5 py-0.5 rounded-md">무료</span>
+<h3 class="text-lg font-cute text-earth-dark">일일 독해</h3>
+</div>
+<p class="text-earth-brown text-xs mb-3">재미있는 농사 일지 읽기</p>
+<div class="w-32 bg-gray-100 h-2 rounded-full overflow-hidden border border-gray-200">
+<div class="h-full bg-sky-400 w-[0%] rounded-full"></div>
+</div>
+</div>
+<div class="bg-sky-50 p-3 rounded-full text-sky-400">
+<span class="material-symbols-outlined text-3xl">menu_book</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-earth-dark text-xl font-cute mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-carrot-orange">shopping_basket</span>
+                    과제 바구니 (유료)
+                </h2>
+<div class="relative bg-gradient-to-br from-earth-brown to-[#795548] rounded-2xl p-5 border-4 border-[#5d4037] shadow-wood overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')]"></div>
+<div class="relative z-10">
+<div class="flex items-start justify-between mb-4">
+<div>
+<div class="inline-flex items-center gap-1 bg-black/20 text-yellow-200 px-2 py-0.5 rounded-full text-xs font-bold mb-2 border border-white/10">
+<span class="material-symbols-outlined text-sm">lock_open</span> 특별 과제
+                                </div>
+<h3 class="text-2xl font-cute text-white leading-tight text-shadow-sm">선물 보따리<br/>도착!</h3>
+</div>
+<div class="w-20 h-20 rounded-xl bg-cover bg-center border-2 border-white/20 shadow-lg transform rotate-3" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCP7s3aU8goRpiLAUYXDsi_rdtmjdXgHPnfiFoRAZGqGV0j5yvEH5AGHpA04B9vjPyxiybnCv0nTa1esOE1OysghVFwTq27z0zhjjBry0AAn7Ri4CR4L-aeV9azXdAtcEuTwg60g0iOSDMtzNmE3va7p3fXD4ehUqkVAUIjP1d3KhRH1xjLwkXN89S4hyKxRwQISQkl5T8tl6vBUHXno2J8tPc8fLR8wPTu5crRuZfvzIpTMa1GVMz86-3egYHJzVC08s3zpftMC7YI');"></div>
+</div>
+<p class="text-orange-50 text-sm mb-4 leading-snug font-medium">
+                            완료하고 <span class="text-yellow-300 font-bold border-b border-yellow-300/50">희귀 씨앗</span>을 받으세요!
+                        </p>
+<button class="w-full bg-meadow-green hover:bg-meadow-dark text-white font-black text-lg py-2.5 rounded-xl shadow-green-btn active:shadow-none active:translate-y-[4px] transition-all flex justify-center items-center gap-2 font-cute">
+<span class="material-symbols-outlined">play_circle</span>
+                            학습 시작하기
+                        </button>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 gap-4">
+<div class="bg-white rounded-2xl p-5 border-2 border-meadow-light shadow-soft">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-earth-dark font-cute text-xl flex items-center gap-1">
+<span class="material-symbols-outlined text-sun-yellow text-2xl fill-1">emoji_events</span>
+                            시즌 랭킹
+                        </h3>
+<span class="text-xs text-earth-brown font-bold cursor-pointer">전체보기 &gt;</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 p-2 bg-yellow-50/80 rounded-xl border border-yellow-100">
+<div class="text-carrot-orange font-black text-lg w-5 text-center font-cute">1</div>
+<div class="w-8 h-8 rounded-full bg-gray-200 bg-cover border border-sun-yellow" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAY8HpqpOqlIgP2YvWHAoqeO-M5wewGpIsyMm5eC4yUUWLyOKFW9KhZ2emSTBZJVt12QnK-Tp9psUEvNZ0wGLrp_BwC-qoiCj8vnqpB-tTOvw8kK2OdqDSDHxeIzYykXyUvc7rG_-ijPLP8gGlKhHKM0NWO-ivwc7voXMZOl_XS_QH5cf6q8ESnPx2n2_z59SwFsyn_LTaFoOI_osLNe4d89LXptXzJJKwbTfjxj8pev83olq1CkObdZ0An_k36aYTVqpEs83-PLAcG');"></div>
+<div class="flex-1 min-w-0">
+<p class="text-earth-dark text-sm font-cute truncate">김치왕</p>
+<p class="text-earth-brown text-[10px] font-bold">5,240 XP</p>
+</div>
+<span class="material-symbols-outlined text-sun-yellow text-xl drop-shadow">trophy</span>
+</div>
+<div class="flex items-center gap-3 p-2 border-t border-dashed border-meadow-green/30">
+<div class="text-meadow-dark font-black text-lg w-5 text-center font-cute">14</div>
+<div class="w-8 h-8 rounded-full bg-gray-200 bg-cover border border-meadow-green" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAm_6TiKc4xe9lzKWYbgIX-8TwhBTy2SrOk8hdRLZUSajgbQWYS2ED0OafL3ten9uOxN2rlztROkTuKLuT0d056CyQRzIFYlpRBm6DoocSmWPfVJR6YJKuzhlrl5gT-5bGsopBj3abJpNqt_CKXvImE6qpANNYaUYhVOLOE0Xwchw90z1iB_0mU7HDTBDvGpUzAfTmNgzKLMvMwHyqLY5sePtVEJ-EHw4gabbOJPILQuaSb6euFgvG_b1Mnf6ONgRYEQ6r9A8r7-lSS');"></div>
+<div class="flex-1 min-w-0">
+<p class="text-earth-dark text-sm font-cute truncate">나 (알렉스)</p>
+<p class="text-earth-brown text-[10px] font-bold">450 XP</p>
+</div>
+<span class="material-symbols-outlined text-meadow-green text-sm animate-bounce">arrow_upward</span>
+</div>
+</div>
+</div>
+<div class="bg-[#ff8a80] rounded-2xl p-5 border-b-4 border-[#d32f2f] shadow-lg relative overflow-hidden group active:border-b-0 active:translate-y-1 transition-all cursor-pointer">
+<div class="absolute -right-4 -bottom-4 text-white/20 rotate-12">
+<span class="material-symbols-outlined" style="font-size: 100px;">swords</span>
+</div>
+<div class="relative z-10 flex items-center justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-xl font-cute text-white drop-shadow-md italic">대결 모드</h3>
+<div class="bg-white px-1.5 py-0.5 rounded text-[10px] font-black text-[#d32f2f] shadow-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#d32f2f] animate-pulse"></span> LIVE
+                                </div>
+</div>
+<p class="text-white text-xs font-bold opacity-90">친구들과 실시간 어휘력 대결!</p>
+</div>
+<div class="bg-white text-[#d32f2f] p-2 rounded-full shadow-md">
+<span class="material-symbols-outlined text-2xl block">play_arrow</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<nav class="fixed bottom-0 left-0 w-full h-[80px] bg-white border-t-2 border-meadow-light px-2 flex items-center justify-between z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-3 pt-2 safe-area-bottom">
+<a class="flex flex-col items-center gap-1 group flex-1" href="#">
+<div class="flex items-center justify-center bg-meadow-light w-10 h-6 rounded-xl transition-all group-hover:bg-meadow-green shadow-sm">
+<span class="material-symbols-outlined text-meadow-dark text-xl group-hover:text-white fill-1">cottage</span>
+</div>
+<span class="text-[11px] font-cute font-bold text-meadow-dark">홈</span>
+</a>
+<a class="flex flex-col items-center gap-1 group flex-1 text-earth-brown/60 hover:text-earth-dark transition-colors" href="#">
+<div class="flex items-center justify-center w-10 h-6 rounded-xl transition-all group-hover:bg-meadow-light">
+<span class="material-symbols-outlined text-xl">school</span>
+</div>
+<span class="text-[11px] font-cute font-bold">무료 학습</span>
+</a>
+<a class="flex flex-col items-center gap-1 group flex-1 text-earth-brown/60 hover:text-earth-dark transition-colors" href="#">
+<div class="flex items-center justify-center w-10 h-6 rounded-xl transition-all group-hover:bg-meadow-light">
+<span class="material-symbols-outlined text-xl">stars</span>
+</div>
+<span class="text-[11px] font-cute font-bold">유료 학습</span>
+</a>
+<a class="flex flex-col items-center gap-1 group flex-1 text-earth-brown/60 hover:text-earth-dark transition-colors" href="#">
+<div class="flex items-center justify-center w-10 h-6 rounded-xl transition-all group-hover:bg-meadow-light">
+<span class="material-symbols-outlined text-xl">swords</span>
+</div>
+<span class="text-[11px] font-cute font-bold">대결</span>
+</a>
+<a class="flex flex-col items-center gap-1 group flex-1 text-earth-brown/60 hover:text-earth-dark transition-colors" href="#">
+<div class="flex items-center justify-center w-10 h-6 rounded-xl transition-all group-hover:bg-meadow-light">
+<span class="material-symbols-outlined text-xl">forum</span>
+</div>
+<span class="text-[11px] font-cute font-bold">커뮤니티</span>
+</a>
+<a class="flex flex-col items-center gap-1 group flex-1 text-earth-brown/60 hover:text-earth-dark transition-colors" href="#">
+<div class="flex items-center justify-center w-10 h-6 rounded-xl transition-all group-hover:bg-meadow-light">
+<span class="material-symbols-outlined text-xl">storefront</span>
+</div>
+<span class="text-[11px] font-cute font-bold">쇼핑몰</span>
+</a>
+</nav>
+
+</body></html>

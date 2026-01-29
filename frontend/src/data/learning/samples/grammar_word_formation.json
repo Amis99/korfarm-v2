@@ -1,0 +1,86 @@
+{
+  "contentId": "b6f4c1c2-31b4-4961-b43b-6c7a207cc22a",
+  "contentType": "GRAMMAR_WORD_FORMATION",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "단어 형성 분석 01",
+  "description": "형태소 개수/이름/역할을 순차 분석",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": {
+    "min": 4,
+    "max": 6
+  },
+  "area": "GRAMMAR",
+  "subArea": "WORD_FORMATION",
+  "competencies": [
+    "VOCAB",
+    "READING"
+  ],
+  "tags": [],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 180,
+  "assets": {},
+  "payload": {
+    "items": [
+      {
+        "word": "거짓말쟁이",
+        "morphemes": [
+          "거짓",
+          "말",
+          "-쟁이"
+        ],
+        "steps": [
+          {
+            "type": "COUNT",
+            "choices": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "answer": 3,
+            "delta": {
+              "correct": 20,
+              "wrong": -20
+            }
+          },
+          {
+            "type": "NAME",
+            "index": 0,
+            "choices": [
+              "명사",
+              "접사",
+              "어미"
+            ],
+            "answer": "명사"
+          },
+          {
+            "type": "ROLE",
+            "index": 2,
+            "choices": [
+              "어근",
+              "접사",
+              "어미"
+            ],
+            "answer": "접사"
+          }
+        ],
+        "formationGame": {
+          "mergeQuestions": [
+            {
+              "ask": "다음으로 결합할 어근이나 접사는 어느 쪽입니까?",
+              "answer": "LEFT"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,2912 @@
+openapi: 3.0.3
+info:
+  title: KOR Farm v2 API
+  version: 0.1.0
+servers:
+  - url: http://localhost:8080
+security:
+  - bearerAuth: []
+tags:
+  - name: System
+  - name: Auth
+  - name: Learning
+  - name: Economy
+  - name: Season
+  - name: Duel
+  - name: Paid
+  - name: Assignments
+  - name: Boards
+  - name: Files
+  - name: Shop
+  - name: Payments
+  - name: Admin
+
+paths:
+  /v1/health:
+    get:
+      tags: [System]
+      security: []
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+
+  /v1/auth/signup:
+    post:
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SignupRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AuthResponse" }
+
+  /v1/auth/login:
+    post:
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LoginRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AuthResponse" }
+
+  /v1/auth/orgs:
+    get:
+      tags: [Auth]
+      security: []
+      responses:
+        "200": { $ref: "#/components/responses/OrgListResponse" }
+
+  /v1/auth/logout:
+    post:
+      tags: [Auth]
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+
+  /v1/auth/me:
+    get:
+      tags: [Auth]
+      responses:
+        "200": { $ref: "#/components/responses/UserProfileResponse" }
+
+  /v1/learning/daily-quiz:
+    get:
+      tags: [Learning]
+      responses:
+        "200": { $ref: "#/components/responses/DailyQuizResponse" }
+  /v1/learning/daily-quiz/submit:
+    post:
+      tags: [Learning]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SubmitRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/DailySubmitResponse" }
+  /v1/learning/daily-reading:
+    get:
+      tags: [Learning]
+      responses:
+        "200": { $ref: "#/components/responses/DailyReadingResponse" }
+  /v1/learning/daily-reading/submit:
+    post:
+      tags: [Learning]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SubmitRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/DailySubmitResponse" }
+
+  /v1/inventory:
+    get:
+      tags: [Economy]
+      responses:
+        "200": { $ref: "#/components/responses/InventoryResponse" }
+  /v1/harvest/craft:
+    post:
+      tags: [Economy]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/HarvestCraftRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/HarvestCraftResponse" }
+  /v1/ledger:
+    get:
+      tags: [Economy]
+      responses:
+        "200": { $ref: "#/components/responses/LedgerResponse" }
+
+  /v1/seasons/current:
+    get:
+      tags: [Season]
+      responses:
+        "200": { $ref: "#/components/responses/SeasonResponse" }
+  /v1/seasons/{seasonId}/harvest-rankings:
+    get:
+      tags: [Season]
+      parameters:
+        - in: path
+          name: seasonId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/HarvestRankingResponse" }
+  /v1/seasons/{seasonId}/duel-rankings:
+    get:
+      tags: [Season]
+      parameters:
+        - in: path
+          name: seasonId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/DuelSeasonRankingResponse" }
+  /v1/seasons/{seasonId}/awards:
+    get:
+      tags: [Season]
+      parameters:
+        - in: path
+          name: seasonId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/SeasonAwardsResponse" }
+
+  /v1/duel/rooms:
+    post:
+      tags: [Duel]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/DuelRoomCreateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/DuelRoomResponse" }
+    get:
+      tags: [Duel]
+      responses:
+        "200": { $ref: "#/components/responses/DuelRoomListResponse" }
+  /v1/duel/rooms/{roomId}/join:
+    post:
+      tags: [Duel]
+      parameters:
+        - in: path
+          name: roomId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/DuelRoomResponse" }
+  /v1/duel/rooms/{roomId}/leave:
+    post:
+      tags: [Duel]
+      parameters:
+        - in: path
+          name: roomId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/DuelRoomResponse" }
+  /v1/duel/queue/join:
+    post:
+      tags: [Duel]
+      responses:
+        "200": { $ref: "#/components/responses/DuelQueueResponse" }
+  /v1/duel/queue/leave:
+    post:
+      tags: [Duel]
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+  /v1/duel/stats:
+    get:
+      tags: [Duel]
+      responses:
+        "200": { $ref: "#/components/responses/DuelStatsResponse" }
+  /v1/duel/leaderboards:
+    get:
+      tags: [Duel]
+      responses:
+        "200": { $ref: "#/components/responses/DuelLeaderboardsResponse" }
+  /v1/duel/ws:
+    get:
+      tags: [Duel]
+      description: WebSocket upgrade endpoint for duel mode.
+      responses:
+        "101": { $ref: "#/components/responses/Ok" }
+
+  /v1/pro-mode/levels:
+    get:
+      tags: [Paid]
+      responses:
+        "200": { $ref: "#/components/responses/ProModeLevelListResponse" }
+  /v1/pro-mode/chapters/{chapterId}:
+    get:
+      tags: [Paid]
+      parameters:
+        - in: path
+          name: chapterId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/ProModeChapterResponse" }
+  /v1/pro-mode/chapters/{chapterId}/submit:
+    post:
+      tags: [Paid]
+      parameters:
+        - in: path
+          name: chapterId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SubmitRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/LearningSubmitResponse" }
+
+  /v1/farm-modes:
+    get:
+      tags: [Paid]
+      responses:
+        "200": { $ref: "#/components/responses/FarmModeListResponse" }
+  /v1/farm-modes/{modeId}/submit:
+    post:
+      tags: [Paid]
+      parameters:
+        - in: path
+          name: modeId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SubmitRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/LearningSubmitResponse" }
+
+  /v1/writing/prompts:
+    get:
+      tags: [Paid]
+      responses:
+        "200": { $ref: "#/components/responses/WritingPromptListResponse" }
+  /v1/writing/submit:
+    post:
+      tags: [Paid]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/WritingSubmitRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/WritingSubmitResponse" }
+
+  /v1/tests:
+    get:
+      tags: [Paid]
+      responses:
+        "200": { $ref: "#/components/responses/TestListResponse" }
+  /v1/tests/{testId}/submit:
+    post:
+      tags: [Paid]
+      parameters:
+        - in: path
+          name: testId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SubmitRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/LearningSubmitResponse" }
+
+  /v1/harvest-ledger:
+    get:
+      tags: [Economy]
+      responses:
+        "200": { $ref: "#/components/responses/HarvestLedgerResponse" }
+
+  /v1/assignments:
+    get:
+      tags: [Assignments]
+      responses:
+        "200": { $ref: "#/components/responses/AssignmentListResponse" }
+  /v1/assignments/{assignmentId}:
+    get:
+      tags: [Assignments]
+      parameters:
+        - in: path
+          name: assignmentId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/AssignmentDetailResponse" }
+  /v1/assignments/{assignmentId}/submit:
+    post:
+      tags: [Assignments]
+      parameters:
+        - in: path
+          name: assignmentId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AssignmentSubmitRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AssignmentSubmitResponse" }
+  /v1/assignments/{assignmentId}/progress:
+    get:
+      tags: [Assignments]
+      parameters:
+        - in: path
+          name: assignmentId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/AssignmentProgressResponse" }
+
+  /v1/boards:
+    get:
+      tags: [Boards]
+      responses:
+        "200": { $ref: "#/components/responses/BoardListResponse" }
+  /v1/boards/{boardId}/posts:
+    get:
+      tags: [Boards]
+      parameters:
+        - in: path
+          name: boardId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/PostListResponse" }
+    post:
+      tags: [Boards]
+      parameters:
+        - in: path
+          name: boardId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreatePostRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/PostDetailResponse" }
+  /v1/posts/{postId}:
+    get:
+      tags: [Boards]
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/PostDetailResponse" }
+    patch:
+      tags: [Boards]
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdatePostRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/PostDetailResponse" }
+    delete:
+      tags: [Boards]
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+  /v1/posts/{postId}/comments:
+    post:
+      tags: [Boards]
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateCommentRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/CommentResponse" }
+  /v1/comments/{commentId}:
+    delete:
+      tags: [Boards]
+      parameters:
+        - in: path
+          name: commentId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+  /v1/reports:
+    post:
+      tags: [Boards]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReportRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+
+  /v1/files/presign:
+    post:
+      tags: [Files]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PresignRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/PresignResponse" }
+  /v1/files/{fileId}/download:
+    get:
+      tags: [Files]
+      parameters:
+        - in: path
+          name: fileId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/FileDownloadResponse" }
+
+  /v1/shop/products:
+    get:
+      tags: [Shop]
+      responses:
+        "200": { $ref: "#/components/responses/ProductListResponse" }
+  /v1/shop/products/{productId}:
+    get:
+      tags: [Shop]
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/ProductDetailResponse" }
+  /v1/shop/orders:
+    post:
+      tags: [Shop]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OrderCreateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/OrderCreateResponse" }
+    get:
+      tags: [Shop]
+      responses:
+        "200": { $ref: "#/components/responses/OrderListResponse" }
+  /v1/shop/orders/{orderId}:
+    get:
+      tags: [Shop]
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/OrderDetailResponse" }
+
+  /v1/payments/checkout:
+    post:
+      tags: [Payments]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PaymentCheckoutRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/PaymentCheckoutResponse" }
+  /v1/subscription:
+    get:
+      tags: [Payments]
+      responses:
+        "200": { $ref: "#/components/responses/SubscriptionResponse" }
+  /v1/subscription/cancel:
+    post:
+      tags: [Payments]
+      responses:
+        "200": { $ref: "#/components/responses/SubscriptionCancelResponse" }
+  /v1/print/jobs:
+    post:
+      tags: [Print]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PrintJobRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/PrintJobResponse" }
+  /v1/payments/shop:
+    post:
+      tags: [Payments]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PaymentCheckoutRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/PaymentCheckoutResponse" }
+
+  /v1/admin/parents/links:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/ParentLinkListResponse" }
+    post:
+      tags: [Admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ParentLinkRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/ParentLinkResponse" }
+
+  /v1/admin/parents/links/{linkId}:
+    delete:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: linkId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+
+  /v1/admin/parents/links/{linkId}/approve:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: linkId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/ParentLinkResponse" }
+
+  /v1/admin/parents/links/{linkId}/reject:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: linkId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/ParentLinkResponse" }
+
+  /v1/parents/links:
+    get:
+      tags: [Auth]
+      responses:
+        "200": { $ref: "#/components/responses/ParentLinkListResponse" }
+
+  /v1/parents/links/request:
+    post:
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ParentLinkRequestCodeRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/ParentLinkResponse" }
+
+  /v1/students/links/confirm:
+    post:
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ParentLinkConfirmRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/ParentLinkResponse" }
+
+  /v1/admin/orgs:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminOrgListResponse" }
+    post:
+      tags: [Admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminOrgCreateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminOrgResponse" }
+  /v1/admin/orgs/{orgId}:
+    patch:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: orgId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminOrgUpdateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminOrgResponse" }
+  /v1/admin/orgs/{orgId}/deactivate:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: orgId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+  /v1/admin/orgs/{orgId}/admins:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: orgId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminOrgAdminCreateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminUserResponse" }
+  /v1/admin/students:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminStudentListResponse" }
+    post:
+      tags: [Admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminStudentCreateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminUserResponse" }
+  /v1/admin/students/{userId}:
+    patch:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminStudentUpdateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminUserResponse" }
+  /v1/admin/students/{userId}/disable:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+
+  /v1/admin/classes:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminClassListResponse" }
+    post:
+      tags: [Admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminClassCreateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminClassResponse" }
+  /v1/admin/classes/{classId}:
+    patch:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: classId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminClassUpdateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminClassResponse" }
+  /v1/admin/classes/{classId}/students:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: classId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminClassStudentsRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminClassResponse" }
+
+  /v1/admin/content:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminContentListResponse" }
+  /v1/admin/content/import:
+    post:
+      tags: [Admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminContentImportRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminContentImportResponse" }
+  /v1/admin/content/{contentId}/preview:
+    get:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: contentId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/AdminContentPreviewResponse" }
+
+  /v1/admin/assignments:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminAssignmentListResponse" }
+    post:
+      tags: [Admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminAssignmentCreateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminAssignmentResponse" }
+  /v1/admin/assignments/{assignmentId}:
+    patch:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: assignmentId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminAssignmentUpdateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminAssignmentResponse" }
+  /v1/admin/assignments/{assignmentId}/close:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: assignmentId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+  /v1/admin/assignments/overview:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminAssignmentOverviewResponse" }
+
+  /v1/admin/writing/submissions:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminWritingSubmissionListResponse" }
+  /v1/admin/writing/{submissionId}/feedback:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: submissionId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminWritingFeedbackRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminWritingFeedbackResponse" }
+
+  /v1/admin/tests:
+    post:
+      tags: [Admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminTestCreateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminTestResponse" }
+  /v1/admin/tests/{testId}/answers:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: testId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminTestAnswersRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminTestResponse" }
+  /v1/admin/tests/{testId}/grade:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: testId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/AdminTestGradeResponse" }
+
+  /v1/admin/boards/materials/{postId}/approve:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+  /v1/admin/boards/materials/{postId}/reject:
+    post:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+
+  /v1/admin/seasons:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminSeasonListResponse" }
+  /v1/admin/duel/seasons:
+    post:
+      tags: [Admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminDuelSeasonRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminDuelSeasonResponse" }
+  /v1/admin/duel/snapshots:
+    post:
+      tags: [Admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminDuelSnapshotRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminDuelSnapshotResponse" }
+  /v1/admin/duel/recalculate:
+    post:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminDuelRecalculateResponse" }
+
+  /v1/admin/reports:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminReportListResponse" }
+  /v1/admin/flags:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminFlagListResponse" }
+  /v1/admin/flags/{flagKey}:
+    patch:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: flagKey
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminFlagUpdateRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminFlagResponse" }
+
+  /v1/admin/shop/products:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminProductListResponse" }
+    post:
+      tags: [Admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminProductRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminProductResponse" }
+  /v1/admin/shop/products/{productId}:
+    patch:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AdminProductRequest" }
+      responses:
+        "200": { $ref: "#/components/responses/AdminProductResponse" }
+    delete:
+      tags: [Admin]
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { $ref: "#/components/responses/Ok" }
+  /v1/admin/shop/orders:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminOrderListResponse" }
+  /v1/admin/payments:
+    get:
+      tags: [Admin]
+      responses:
+        "200": { $ref: "#/components/responses/AdminPaymentListResponse" }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    Ok:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ApiResponse"
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ApiResponse"
+    AuthResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthResponse"
+    UserProfileResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserProfileResponse"
+    OrgListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OrgListResponse"
+    PrintJobResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PrintJobResponse"
+    InventoryResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InventoryResponse"
+    HarvestCraftResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HarvestCraftResponse"
+    DailyQuizResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DailyQuizResponse"
+    DailyReadingResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DailyReadingResponse"
+    DailySubmitResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DailySubmitResponse"
+    LedgerResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/LedgerResponse"
+    SeasonResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SeasonResponse"
+    HarvestRankingResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HarvestRankingResponse"
+    DuelSeasonRankingResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DuelSeasonRankingResponse"
+    SeasonAwardsResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SeasonAwardsResponse"
+    ProModeLevelListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProModeLevelListResponse"
+    ProModeChapterResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProModeChapterResponse"
+    LearningSubmitResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/LearningSubmitResponse"
+    FarmModeListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/FarmModeListResponse"
+    WritingPromptListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/WritingPromptListResponse"
+    WritingSubmitResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/WritingSubmitResponse"
+    TestListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TestListResponse"
+    HarvestLedgerResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HarvestLedgerResponse"
+    AdminOrgResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminOrgResponse"
+    AdminUserResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminUserResponse"
+    AdminClassResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminClassResponse"
+    AdminContentImportResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminContentImportResponse"
+    AdminContentPreviewResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminContentPreviewResponse"
+    AdminAssignmentResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminAssignmentResponse"
+    AdminAssignmentOverviewResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminAssignmentOverviewResponse"
+    AdminWritingFeedbackResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminWritingFeedbackResponse"
+    AdminTestResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminTestResponse"
+    AdminTestGradeResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminTestGradeResponse"
+    AdminDuelSeasonResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminDuelSeasonResponse"
+    AdminDuelSnapshotResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminDuelSnapshotResponse"
+    AdminDuelRecalculateResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminDuelRecalculateResponse"
+    AdminFlagListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminFlagListResponse"
+    AdminFlagResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminFlagResponse"
+    AdminProductResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminProductResponse"
+    AdminProductListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminProductListResponse"
+    AdminOrgListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminOrgListResponse"
+    AdminClassListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminClassListResponse"
+    AdminStudentListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminStudentListResponse"
+    AdminContentListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminContentListResponse"
+    AdminAssignmentListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminAssignmentListResponse"
+    AdminWritingSubmissionListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminWritingSubmissionListResponse"
+    AdminSeasonListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminSeasonListResponse"
+    AdminReportListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminReportListResponse"
+    AdminOrderListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminOrderListResponse"
+    AdminPaymentListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AdminPaymentListResponse"
+    ParentLinkResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ParentLinkResponse"
+    ParentLinkListResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ParentLinkListResponse"
+  schemas:
+    Empty:
+      type: object
+      additionalProperties: true
+    ApiResponse:
+      type: object
+      properties:
+        success: { type: boolean }
+        data:
+          oneOf:
+            - type: object
+              additionalProperties: true
+            - type: array
+              items: {}
+        error: { $ref: "#/components/schemas/Error" }
+        request_id: { type: string }
+      required: [success]
+    Error:
+      type: object
+      properties:
+        code: { type: string }
+        message: { type: string }
+    LoginRequest:
+      type: object
+      properties:
+        login_id: { type: string }
+        password: { type: string, format: password }
+      required: [login_id, password]
+    SignupRequest:
+      type: object
+      properties:
+        login_id: { type: string }
+        password: { type: string, format: password }
+        name: { type: string }
+        org_id: { type: string }
+        region: { type: string }
+        school: { type: string }
+        grade_label: { type: string }
+        level_id: { type: string }
+        student_phone: { type: string }
+        parent_phone: { type: string }
+        diagnostic_opt_in: { type: boolean }
+        account_type: { type: string }
+      required:
+        [
+          login_id,
+          password,
+          name,
+          org_id,
+          region,
+          school,
+          grade_label,
+          level_id,
+          student_phone,
+          parent_phone
+        ]
+    PrintJobRequest:
+      type: object
+      properties:
+        file_url: { type: string }
+        job_type: { type: string }
+        printer_name: { type: string }
+        copies: { type: integer }
+      required: [file_url]
+    PrintJobResponseData:
+      type: object
+      properties:
+        job_id: { type: string }
+        status: { type: string }
+        server_print: { type: boolean }
+      required: [job_id, status, server_print]
+    PrintJobResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/PrintJobResponseData" }
+    UserProfile:
+      type: object
+      properties:
+        id: { type: string }
+        login_id: { type: string }
+        name: { type: string }
+        roles:
+          type: array
+          items: { type: string }
+        status: { type: string }
+    OrgSummary:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+    AuthResponseData:
+      type: object
+      properties:
+        access_token: { type: string }
+        refresh_token: { type: string }
+        expires_in: { type: integer }
+        user: { $ref: "#/components/schemas/UserProfile" }
+      required: [access_token, refresh_token, expires_in, user]
+    AuthResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/AuthResponseData" }
+      example:
+        success: true
+        data:
+          access_token: "access-token"
+          refresh_token: "refresh-token"
+          expires_in: 3600
+          user:
+            id: "u_1001"
+            login_id: "parent01"
+            name: "User"
+            roles: ["STUDENT"]
+            status: "active"
+    OrgListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/OrgSummary" }
+    UserProfileResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/UserProfile" }
+      example:
+        success: true
+        data:
+          id: "u_1001"
+          login_id: "parent01"
+          name: "User"
+          roles: ["STUDENT"]
+          status: "active"
+    Inventory:
+      type: object
+      properties:
+        seeds:
+          type: object
+          additionalProperties: { type: integer }
+        crops:
+          type: object
+          additionalProperties: { type: integer }
+        fertilizer: { type: integer }
+        updated_at: { type: string, format: date-time }
+    InventoryResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/Inventory" }
+      example:
+        success: true
+        data:
+          seeds: { seed_wheat: 8, seed_oat: 12, seed_rice: 2, seed_grape: 0 }
+          crops: { crop_wheat: 4, crop_oat: 1, crop_rice: 0, crop_grape: 1 }
+          fertilizer: 1
+          updated_at: "2026-01-18T21:00:00+09:00"
+    HarvestCraftRequest:
+      type: object
+      properties:
+        seed_type: { type: string }
+        use_fertilizer: { type: boolean }
+      required: [seed_type]
+    HarvestCraftResult:
+      type: object
+      properties:
+        crop_type: { type: string }
+        crop_delta: { type: integer }
+        seed_spent: { type: integer }
+        fertilizer_spent: { type: integer }
+        inventory: { $ref: "#/components/schemas/Inventory" }
+    HarvestCraftResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/HarvestCraftResult" }
+      example:
+        success: true
+        data:
+          crop_type: "crop_wheat"
+          crop_delta: 3
+          seed_spent: 10
+          fertilizer_spent: 1
+          inventory:
+            seeds: { seed_wheat: 0 }
+            crops: { crop_wheat: 3 }
+            fertilizer: 0
+            updated_at: "2026-01-18T21:00:00+09:00"
+    Question:
+      type: object
+      properties:
+        question_id: { type: string }
+        text: { type: string }
+        type: { type: string }
+        choices:
+          type: array
+          items: { type: string }
+    DailyQuizContent:
+      type: object
+      properties:
+        content_id: { type: string }
+        title: { type: string }
+        questions:
+          type: array
+          items: { $ref: "#/components/schemas/Question" }
+    DailyReadingContent:
+      type: object
+      properties:
+        content_id: { type: string }
+        title: { type: string }
+        passage: { type: string }
+        questions:
+          type: array
+          items: { $ref: "#/components/schemas/Question" }
+    DailyQuizResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/DailyQuizContent" }
+      example:
+        success: true
+        data:
+          content_id: "dq_20260118"
+          title: "Daily Quiz"
+          questions:
+            - question_id: "q_1"
+              text: "Sample question?"
+              type: "mcq"
+              choices: ["A", "B", "C", "D"]
+    DailyReadingResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/DailyReadingContent" }
+      example:
+        success: true
+        data:
+          content_id: "dr_20260118"
+          title: "Daily Reading"
+          passage: "Sample passage text."
+          questions:
+            - question_id: "q_1"
+              text: "Sample question?"
+              type: "short"
+    SubmitAnswer:
+      type: object
+      properties:
+        question_id: { type: string }
+        answer: { type: string }
+      required: [question_id, answer]
+    SubmitRequest:
+      type: object
+      properties:
+        answers:
+          type: array
+          items: { $ref: "#/components/schemas/SubmitAnswer" }
+        content_level_id: { type: string }
+      required: [answers]
+    SeedGrant:
+      type: object
+      properties:
+        seed_type: { type: string }
+        count: { type: integer }
+    SubmitResult:
+      type: object
+      properties:
+        score: { type: integer }
+        correct_count: { type: integer }
+        seed_grant: { $ref: "#/components/schemas/SeedGrant" }
+    DailySubmitResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/SubmitResult" }
+      example:
+        success: true
+        data:
+          score: 8
+          correct_count: 8
+          seed_grant:
+            seed_type: "seed_wheat"
+            count: 3
+    LedgerEntry:
+      type: object
+      properties:
+        id: { type: string }
+        currency_type: { type: string }
+        item_type: { type: string }
+        delta: { type: integer }
+        reason: { type: string }
+        ref_type: { type: string }
+        ref_id: { type: string }
+        created_at: { type: string, format: date-time }
+    LedgerResponseData:
+      type: object
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/LedgerEntry" }
+    LedgerResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/LedgerResponseData" }
+    Season:
+      type: object
+      properties:
+        season_id: { type: string }
+        level_id: { type: string }
+        name: { type: string }
+        start_at: { type: string, format: date-time }
+        end_at: { type: string, format: date-time }
+        status: { type: string }
+    SeasonResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/Season" }
+      example:
+        success: true
+        data:
+          season_id: "season_2026_spring_01"
+          level_id: "frege1"
+          name: "2026 Spring"
+          start_at: "2026-03-01T00:00:00+09:00"
+          end_at: "2026-05-31T23:59:59+09:00"
+          status: "active"
+    DuelRoomCreateRequest:
+      type: object
+      properties:
+        level_id: { type: string }
+        room_size: { type: integer }
+        stake_amount: { type: integer }
+        stake_crop_type: { type: string }
+      required: [level_id, room_size, stake_amount]
+    DuelRoom:
+      type: object
+      properties:
+        room_id: { type: string }
+        level_id: { type: string }
+        room_size: { type: integer }
+        stake_amount: { type: integer }
+        status: { type: string }
+        players:
+          type: array
+          items: { $ref: "#/components/schemas/DuelRoomPlayer" }
+    DuelRoomPlayer:
+      type: object
+      properties:
+        user_id: { type: string }
+        stake_crop_type: { type: string }
+        status: { type: string }
+    DuelRoomResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/DuelRoom" }
+      example:
+        success: true
+        data:
+          room_id: "room_1001"
+          level_id: "frege1"
+          room_size: 2
+          stake_amount: 2
+          status: "open"
+          players:
+            - user_id: "u_1001"
+              stake_crop_type: "seed_wheat"
+              status: "ready"
+    DuelRoomListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/DuelRoom" }
+    DuelQueueResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                queue_id: { type: string }
+                estimated_wait_seconds: { type: integer }
+    DuelStatsItem:
+      type: object
+      properties:
+        season_id: { type: string }
+        level_id: { type: string }
+        wins: { type: integer }
+        losses: { type: integer }
+        win_rate: { type: number, format: float }
+        current_streak: { type: integer }
+        best_streak: { type: integer }
+        forfeit_losses: { type: integer }
+    DuelStatsResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/DuelStatsItem" }
+      example:
+        success: true
+        data:
+          - season_id: "season_2026_spring_01"
+            level_id: "frege1"
+            wins: 26
+            losses: 16
+            win_rate: 0.619
+            current_streak: 3
+            best_streak: 9
+            forfeit_losses: 1
+    DuelLeaderboardItem:
+      type: object
+      properties:
+        rank: { type: integer }
+        user_id: { type: string }
+        value: { type: number }
+        matches: { type: integer }
+    DuelLeaderboards:
+      type: object
+      properties:
+        wins:
+          type: array
+          items: { $ref: "#/components/schemas/DuelLeaderboardItem" }
+        win_rate:
+          type: array
+          items: { $ref: "#/components/schemas/DuelLeaderboardItem" }
+        best_streak:
+          type: array
+          items: { $ref: "#/components/schemas/DuelLeaderboardItem" }
+    DuelLeaderboardsResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/DuelLeaderboards" }
+      example:
+        success: true
+        data:
+          wins:
+            - rank: 1
+              user_id: "u_1003"
+              value: 26
+          win_rate:
+            - rank: 1
+              user_id: "u_1011"
+              value: 0.8125
+              matches: 32
+          best_streak:
+            - rank: 1
+              user_id: "u_1003"
+              value: 9
+    AssignmentSummary:
+      type: object
+      properties:
+        assignment_id: { type: string }
+        title: { type: string }
+        assignment_type: { type: string }
+        due_at: { type: string, format: date-time }
+        status: { type: string }
+    AssignmentDetail:
+      allOf:
+        - $ref: "#/components/schemas/AssignmentSummary"
+        - type: object
+          properties:
+            payload: { type: object }
+    AssignmentListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/AssignmentSummary" }
+      example:
+        success: true
+        data:
+          - assignment_id: "as_1001"
+            title: "Week 1 Pro Mode"
+            assignment_type: "pro_mode"
+            due_at: "2026-01-25T23:59:59+09:00"
+            status: "open"
+    AssignmentDetailResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/AssignmentDetail" }
+    AssignmentSubmitRequest:
+      type: object
+      properties:
+        content: { type: object }
+      required: [content]
+    AssignmentSubmitResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                submission_id: { type: string }
+                status: { type: string }
+    AssignmentProgressResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                completed: { type: boolean }
+                progress_rate: { type: number, format: float }
+    Board:
+      type: object
+      properties:
+        board_id: { type: string }
+        board_type: { type: string }
+        org_scope: { type: string }
+    BoardListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/Board" }
+    PostSummary:
+      type: object
+      properties:
+        post_id: { type: string }
+        title: { type: string }
+        author_id: { type: string }
+        created_at: { type: string, format: date-time }
+    PostDetail:
+      allOf:
+        - $ref: "#/components/schemas/PostSummary"
+        - type: object
+          properties:
+            content: { type: string }
+            attachments:
+              type: array
+              items: { $ref: "#/components/schemas/PostAttachment" }
+    PostAttachment:
+      type: object
+      properties:
+        file_id: { type: string }
+        name: { type: string }
+        mime: { type: string }
+        size: { type: integer }
+    PostListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/PostSummary" }
+    PostDetailResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/PostDetail" }
+      example:
+        success: true
+        data:
+          post_id: "post_1001"
+          title: "Sample Post"
+          author_id: "u_1001"
+          created_at: "2026-01-18T21:00:00+09:00"
+          content: "Sample content"
+    CreatePostRequest:
+      type: object
+      properties:
+        title: { type: string }
+        content: { type: string }
+        attachment_ids:
+          type: array
+          items: { type: string }
+      required: [title, content]
+    UpdatePostRequest:
+      type: object
+      properties:
+        title: { type: string }
+        content: { type: string }
+        attachment_ids:
+          type: array
+          items: { type: string }
+    Comment:
+      type: object
+      properties:
+        comment_id: { type: string }
+        post_id: { type: string }
+        author_id: { type: string }
+        content: { type: string }
+        created_at: { type: string, format: date-time }
+    CreateCommentRequest:
+      type: object
+      properties:
+        content: { type: string }
+      required: [content]
+    CommentResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/Comment" }
+    ReportRequest:
+      type: object
+      properties:
+        target_type: { type: string }
+        target_id: { type: string }
+        reason: { type: string }
+      required: [target_type, target_id, reason]
+    PresignRequest:
+      type: object
+      properties:
+        purpose: { type: string }
+        filename: { type: string }
+        mime: { type: string }
+        size: { type: integer }
+      required: [purpose, filename, mime, size]
+    PresignResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                file_id: { type: string }
+                upload_url: { type: string }
+                download_url: { type: string }
+      example:
+        success: true
+        data:
+          file_id: "f_9001"
+          upload_url: "https://s3.example.com/upload"
+          download_url: "https://cdn.example.com/download"
+    FileDownloadResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                download_url: { type: string }
+    Product:
+      type: object
+      properties:
+        product_id: { type: string }
+        name: { type: string }
+        price: { type: integer }
+        stock: { type: integer }
+        status: { type: string }
+    ProductListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/Product" }
+    ProductDetailResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/Product" }
+    OrderItemRequest:
+      type: object
+      properties:
+        product_id: { type: string }
+        quantity: { type: integer }
+      required: [product_id, quantity]
+    OrderCreateRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/OrderItemRequest" }
+        address: { type: object }
+      required: [items, address]
+    Order:
+      type: object
+      properties:
+        order_id: { type: string }
+        status: { type: string }
+        total_amount: { type: integer }
+        created_at: { type: string, format: date-time }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/OrderItem" }
+    OrderItem:
+      type: object
+      properties:
+        product_id: { type: string }
+        quantity: { type: integer }
+        unit_price: { type: integer }
+    OrderCreateResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/Order" }
+    OrderDetailResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/Order" }
+    OrderListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/Order" }
+    PaymentCheckoutRequest:
+      type: object
+      properties:
+        amount: { type: integer }
+        order_id: { type: string }
+        subscription: { type: boolean }
+        method: { type: string }
+      required: [amount, method]
+    PaymentCheckoutResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                payment_id: { type: string }
+                status: { type: string }
+                redirect_url: { type: string }
+      example:
+        success: true
+        data:
+          payment_id: "pay_1001"
+          status: "pending"
+          redirect_url: "https://pay.example.com/redirect"
+    Subscription:
+      type: object
+      properties:
+        status: { type: string }
+        start_at: { type: string, format: date-time }
+        end_at: { type: string, format: date-time }
+        next_billing_at: { type: string, format: date-time }
+    SubscriptionResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/Subscription" }
+      example:
+        success: true
+        data:
+          status: "active"
+          start_at: "2026-01-01T00:00:00+09:00"
+          end_at: "2026-02-01T00:00:00+09:00"
+          next_billing_at: "2026-02-01T00:00:00+09:00"
+    SubscriptionCancelResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                status: { type: string }
+    HarvestRankingItem:
+      type: object
+      properties:
+        rank: { type: integer }
+        user_id: { type: string }
+        value: { type: integer }
+    HarvestRankingResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/HarvestRankingItem" }
+      example:
+        success: true
+        data:
+          - rank: 1
+            user_id: "u_1002"
+            value: 183
+    DuelSeasonRankingResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/DuelLeaderboards" }
+    SeasonAwards:
+      type: object
+      properties:
+        harvest_awards: { type: object }
+        duel_awards: { type: object }
+    SeasonAwardsResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/SeasonAwards" }
+      example:
+        success: true
+        data:
+          harvest_awards:
+            harvest_king: { user_id: "u_1002", total_crops: 183 }
+            collector_king: { user_id: "u_1011", eligible_crop_types: 9, min_count_per_type: 3 }
+            attendance_king: { user_ids: ["u_1030", "u_1044", "u_1052"], days: 92 }
+          duel_awards:
+            wins_king: { user_id: "u_1003", wins: 110 }
+            win_rate_king: { user_id: "u_1011", win_rate: 0.8125, matches: 32, min_matches: 20 }
+            streak_king: { user_id: "u_1052", best_streak: 14 }
+    ProModeLevel:
+      type: object
+      properties:
+        level_id: { type: string }
+        title: { type: string }
+        chapter_count: { type: integer }
+    ProModeLevelListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/ProModeLevel" }
+      example:
+        success: true
+        data:
+          - level_id: "frege1"
+            title: "Frege 1"
+            chapter_count: 12
+    ProModeChapter:
+      type: object
+      properties:
+        chapter_id: { type: string }
+        title: { type: string }
+        content: { type: object }
+    ProModeChapterResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/ProModeChapter" }
+    LearningSubmitResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/SubmitResult" }
+    FarmMode:
+      type: object
+      properties:
+        mode_id: { type: string }
+        title: { type: string }
+        description: { type: string }
+    FarmModeListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/FarmMode" }
+    WritingPrompt:
+      type: object
+      properties:
+        prompt_id: { type: string }
+        title: { type: string }
+        prompt: { type: string }
+    WritingPromptListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/WritingPrompt" }
+    WritingSubmitRequest:
+      type: object
+      properties:
+        content: { type: string }
+        attachment_ids:
+          type: array
+          items: { type: string }
+      required: [content]
+    WritingSubmitResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                submission_id: { type: string }
+                status: { type: string }
+      example:
+        success: true
+        data:
+          submission_id: "ws_1001"
+          status: "submitted"
+    TestSummary:
+      type: object
+      properties:
+        test_id: { type: string }
+        title: { type: string }
+        status: { type: string }
+    TestListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/TestSummary" }
+      example:
+        success: true
+        data:
+          - test_id: "test_1001"
+            title: "Midterm 1"
+            status: "open"
+    HarvestLedgerResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/LedgerEntry" }
+      example:
+        success: true
+        data:
+          - id: "lg_1001"
+            currency_type: "crop"
+            item_type: "crop_wheat"
+            delta: 3
+            reason: "harvest_craft"
+            ref_type: "harvest"
+            ref_id: "hr_1001"
+            created_at: "2026-01-18T21:00:00+09:00"
+    AdminOrgCreateRequest:
+      type: object
+      properties:
+        name: { type: string }
+        plan: { type: string }
+        seat_limit: { type: integer }
+        status: { type: string }
+      required: [name]
+    AdminOrgUpdateRequest:
+      type: object
+      properties:
+        name: { type: string }
+        plan: { type: string }
+        seat_limit: { type: integer }
+        status: { type: string }
+    AdminOrg:
+      type: object
+      properties:
+        org_id: { type: string }
+        name: { type: string }
+        plan: { type: string }
+        seat_limit: { type: integer }
+        status: { type: string }
+    AdminOrgResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/AdminOrg" }
+      example:
+        success: true
+        data:
+          org_id: "org_1001"
+          name: "Sample Org"
+          plan: "basic"
+          seat_limit: 100
+          status: "active"
+    AdminOrgAdminCreateRequest:
+      type: object
+      properties:
+        email: { type: string, format: email }
+        name: { type: string }
+      required: [email]
+    AdminStudentCreateRequest:
+      type: object
+      properties:
+        email: { type: string, format: email }
+        name: { type: string }
+        org_id: { type: string }
+        class_ids:
+          type: array
+          items: { type: string }
+      required: [email, org_id]
+    AdminStudentUpdateRequest:
+      type: object
+      properties:
+        name: { type: string }
+        status: { type: string }
+        org_id: { type: string }
+        class_ids:
+          type: array
+          items: { type: string }
+    AdminUser:
+      type: object
+      properties:
+        user_id: { type: string }
+        email: { type: string, format: email }
+        name: { type: string }
+        status: { type: string }
+        role: { type: string }
+    AdminUserResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/AdminUser" }
+    AdminClassCreateRequest:
+      type: object
+      properties:
+        org_id: { type: string }
+        name: { type: string }
+        level_id: { type: string }
+        grade: { type: string }
+        status: { type: string }
+        start_at: { type: string, format: date }
+      required: [org_id, name]
+    AdminClassUpdateRequest:
+      type: object
+      properties:
+        name: { type: string }
+        level_id: { type: string }
+        grade: { type: string }
+        status: { type: string }
+        start_at: { type: string, format: date }
+    AdminClassStudentsRequest:
+      type: object
+      properties:
+        user_ids:
+          type: array
+          items: { type: string }
+      required: [user_ids]
+    AdminClass:
+      type: object
+      properties:
+        class_id: { type: string }
+        org_id: { type: string }
+        name: { type: string }
+        level_id: { type: string }
+        grade: { type: string }
+        status: { type: string }
+    AdminClassResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/AdminClass" }
+      example:
+        success: true
+        data:
+          class_id: "class_1001"
+          org_id: "org_1001"
+          name: "Class A"
+          level_id: "frege1"
+          grade: "2"
+          status: "active"
+    AdminContentImportRequest:
+      type: object
+      properties:
+        content_type: { type: string }
+        level_id: { type: string }
+        chapter_id: { type: string }
+        schema_version: { type: string }
+        content: { type: object }
+      required: [content_type, schema_version, content]
+    AdminContentImportResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                content_id: { type: string }
+                version_id: { type: string }
+                status: { type: string }
+    AdminContentPreviewResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { type: object }
+    AdminAssignmentCreateRequest:
+      type: object
+      properties:
+        assignment_type: { type: string }
+        title: { type: string }
+        payload: { type: object }
+        due_at: { type: string, format: date-time }
+        targets:
+          type: array
+          items: { type: object }
+      required: [assignment_type, title, payload]
+    AdminAssignmentUpdateRequest:
+      type: object
+      properties:
+        title: { type: string }
+        payload: { type: object }
+        due_at: { type: string, format: date-time }
+        status: { type: string }
+    AdminAssignmentResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                assignment_id: { type: string }
+                status: { type: string }
+    AdminAssignmentOverviewResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                total: { type: integer }
+                completed: { type: integer }
+                pending: { type: integer }
+                overdue: { type: integer }
+      example:
+        success: true
+        data:
+          total: 120
+          completed: 95
+          pending: 20
+          overdue: 5
+    AdminWritingFeedbackRequest:
+      type: object
+      properties:
+        rubric: { type: object }
+        comment: { type: string }
+      required: [rubric]
+    AdminWritingFeedbackResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                submission_id: { type: string }
+                status: { type: string }
+    AdminTestCreateRequest:
+      type: object
+      properties:
+        org_id: { type: string }
+        title: { type: string }
+        pdf_file_id: { type: string }
+      required: [org_id, title, pdf_file_id]
+    AdminTestAnswersRequest:
+      type: object
+      properties:
+        answers: { type: object }
+      required: [answers]
+    AdminTestResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                test_id: { type: string }
+                status: { type: string }
+    AdminTestGradeResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                test_id: { type: string }
+                average: { type: number, format: float }
+                std_dev: { type: number, format: float }
+      example:
+        success: true
+        data:
+          test_id: "test_1001"
+          average: 74.2
+          std_dev: 11.4
+    AdminDuelSeasonRequest:
+      type: object
+      properties:
+        level_id: { type: string }
+        name: { type: string }
+        start_at: { type: string, format: date-time }
+        end_at: { type: string, format: date-time }
+      required: [level_id, name, start_at, end_at]
+    AdminDuelSeasonResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                season_id: { type: string }
+                status: { type: string }
+    AdminDuelSnapshotRequest:
+      type: object
+      properties:
+        season_id: { type: string }
+        level_id: { type: string }
+      required: [season_id]
+    AdminDuelSnapshotResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                snapshot_id: { type: string }
+                status: { type: string }
+    AdminDuelRecalculateResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                status: { type: string }
+    AdminFlag:
+      type: object
+      properties:
+        flag_key: { type: string }
+        enabled: { type: boolean }
+        rollout_percent: { type: integer }
+        description: { type: string }
+    AdminFlagListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/AdminFlag" }
+      example:
+        success: true
+        data:
+          - flag_key: "feature.duel.mode"
+            enabled: false
+            rollout_percent: 0
+            description: "duel mode"
+    AdminFlagUpdateRequest:
+      type: object
+      properties:
+        enabled: { type: boolean }
+        rollout_percent: { type: integer }
+        description: { type: string }
+    AdminFlagResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/AdminFlag" }
+      example:
+        success: true
+        data:
+          flag_key: "feature.duel.mode"
+          enabled: false
+          rollout_percent: 0
+          description: "duel mode"
+    AdminOrg:
+      type: object
+      properties:
+        org_id: { type: string }
+        name: { type: string }
+        plan: { type: string }
+        seat_limit: { type: integer }
+        status: { type: string }
+    AdminOrgListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/AdminOrg" }
+    AdminClass:
+      type: object
+      properties:
+        class_id: { type: string }
+        name: { type: string }
+        level_id: { type: string }
+        grade: { type: string }
+        org_id: { type: string }
+        org_name: { type: string }
+        seat_count: { type: integer }
+        status: { type: string }
+    AdminClassListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/AdminClass" }
+    AdminStudent:
+      type: object
+      properties:
+        user_id: { type: string }
+        login_id: { type: string }
+        name: { type: string }
+        grade_label: { type: string }
+        level_id: { type: string }
+        org_id: { type: string }
+        org_name: { type: string }
+        status: { type: string }
+    AdminStudentListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/AdminStudent" }
+    AdminContentSummary:
+      type: object
+      properties:
+        content_id: { type: string }
+        content_type: { type: string }
+        level_id: { type: string }
+        chapter_id: { type: string }
+        title: { type: string }
+        status: { type: string }
+    AdminContentListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/AdminContentSummary" }
+    AdminWritingSubmission:
+      type: object
+      properties:
+        submission_id: { type: string }
+        user_id: { type: string }
+        student_name: { type: string }
+        prompt_id: { type: string }
+        status: { type: string }
+        submitted_at: { type: string, format: date-time }
+    AdminWritingSubmissionListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/AdminWritingSubmission" }
+    AdminAssignmentListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/AssignmentSummary" }
+    AdminSeasonListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/Season" }
+    AdminReport:
+      type: object
+      properties:
+        report_id: { type: string }
+        target_type: { type: string }
+        target_id: { type: string }
+        reason: { type: string }
+        status: { type: string }
+        created_at: { type: string, format: date-time }
+    AdminReportListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/AdminReport" }
+    AdminProductListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/Product" }
+    AdminOrder:
+      type: object
+      properties:
+        order_id: { type: string }
+        user_id: { type: string }
+        customer_name: { type: string }
+        status: { type: string }
+        total_amount: { type: integer }
+        created_at: { type: string, format: date-time }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/OrderItem" }
+    AdminProductRequest:
+      type: object
+      properties:
+        name: { type: string }
+        price: { type: integer }
+        stock: { type: integer }
+        status: { type: string }
+      required: [name, price]
+    AdminProductResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/Product" }
+    AdminOrderListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/AdminOrder" }
+      example:
+        success: true
+        data:
+          - order_id: "ord_1001"
+            user_id: "u_1001"
+            customer_name: "홍길동"
+            status: "paid"
+            total_amount: 32000
+            created_at: "2026-01-18T21:00:00+09:00"
+            items:
+              - product_id: "prod_1"
+                quantity: 1
+                unit_price: 32000
+    Payment:
+      type: object
+      properties:
+        payment_id: { type: string }
+        payment_type: { type: string }
+        amount: { type: integer }
+        status: { type: string }
+        created_at: { type: string, format: date-time }
+    AdminPaymentListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/Payment" }
+      example:
+        success: true
+        data:
+          - payment_id: "pay_1001"
+            payment_type: "subscription"
+            amount: 9900
+            status: "paid"
+            created_at: "2026-01-18T21:00:00+09:00"
+    ParentLinkRequest:
+      type: object
+      properties:
+        parent_user_id: { type: string }
+        parent_login_id: { type: string }
+        student_user_id: { type: string }
+        student_login_id: { type: string }
+    ParentLinkRequestCodeRequest:
+      type: object
+      properties:
+        student_user_id: { type: string }
+        student_login_id: { type: string }
+    ParentLinkConfirmRequest:
+      type: object
+      properties:
+        parent_user_id: { type: string }
+        parent_login_id: { type: string }
+        request_code: { type: string }
+      required: [request_code]
+    ParentLinkView:
+      type: object
+      properties:
+        link_id: { type: string }
+        parent_user_id: { type: string }
+        parent_login_id: { type: string }
+        student_user_id: { type: string }
+        student_login_id: { type: string }
+        student_name: { type: string }
+        status: { type: string }
+        request_code: { type: string }
+        requested_at: { type: string, format: date-time }
+        approved_at: { type: string, format: date-time }
+        approved_by: { type: string }
+        created_at: { type: string, format: date-time }
+    ParentLinkResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data: { $ref: "#/components/schemas/ParentLinkView" }
+    ParentLinkListResponse:
+      allOf:
+        - $ref: "#/components/schemas/ApiResponse"
+        - type: object
+          properties:
+            data:
+              type: array
+              items: { $ref: "#/components/schemas/ParentLinkView" }

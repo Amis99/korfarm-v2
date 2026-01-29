@@ -1,0 +1,32 @@
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: non_null
+    time-zone: Asia/Seoul
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/korfarm?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:korfarm}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: ${SERVER_PORT:8080}
+
+app:
+  jwt:
+    issuer: ${JWT_ISSUER:korfarm}
+    secret: ${JWT_SECRET:change-me}
+    access-token-seconds: ${JWT_ACCESS_SECONDS:3600}
+    refresh-token-seconds: ${JWT_REFRESH_SECONDS:1209600}
+  print:
+    enabled: false
+    command: ${PRINT_COMMAND:}
+    working-dir: ${PRINT_WORKDIR:}
+    timeout-seconds: ${PRINT_TIMEOUT_SECONDS:30}

@@ -1,0 +1,145 @@
+{
+  "contentId": "a0054d75-7602-4b58-94e4-1417568d0ffe",
+  "contentType": "CHOICE_JUDGEMENT",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "선택지 판별 연습 01",
+  "description": "명제 근거를 찾아 판별",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": {
+    "min": 4,
+    "max": 6
+  },
+  "area": "READING",
+  "subArea": "CHOICE_JUDGEMENT",
+  "competencies": [
+    "VOCAB",
+    "READING"
+  ],
+  "tags": [],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 180,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "모든 시민은 법 앞에 평등하다. 권리는 책임과 함께한다."
+        }
+      ],
+      "tokens": [
+        {
+          "tokenId": "p1_t1",
+          "paragraphId": "p1",
+          "text": "모든"
+        },
+        {
+          "tokenId": "p1_t2",
+          "paragraphId": "p1",
+          "text": "시민은"
+        },
+        {
+          "tokenId": "p1_t3",
+          "paragraphId": "p1",
+          "text": "법"
+        },
+        {
+          "tokenId": "p1_t4",
+          "paragraphId": "p1",
+          "text": "앞에"
+        },
+        {
+          "tokenId": "p1_t5",
+          "paragraphId": "p1",
+          "text": "평등하다."
+        },
+        {
+          "tokenId": "p1_t6",
+          "paragraphId": "p1",
+          "text": "권리는"
+        },
+        {
+          "tokenId": "p1_t7",
+          "paragraphId": "p1",
+          "text": "책임과"
+        },
+        {
+          "tokenId": "p1_t8",
+          "paragraphId": "p1",
+          "text": "함께한다."
+        }
+      ]
+    },
+    "items": [
+      {
+        "itemId": "i1",
+        "stem": "다음 중 적절하지 않은 것을 고르시오.",
+        "choices": [
+          {
+            "choiceId": "A",
+            "text": "시민은 법 앞에 평등하다.",
+            "propositions": [
+              {
+                "propId": "A1",
+                "text": "모든 시민은 법 앞에 평등하다.",
+                "evidenceTokens": [
+                  "p1_t1",
+                  "p1_t2",
+                  "p1_t3",
+                  "p1_t4",
+                  "p1_t5"
+                ],
+                "oxAnswer": "O"
+              }
+            ],
+            "finalIsCorrectChoice": false
+          },
+          {
+            "choiceId": "B",
+            "text": "권리는 책임과 함께한다.",
+            "propositions": [
+              {
+                "propId": "B1",
+                "text": "권리는 책임과 함께한다.",
+                "evidenceTokens": [
+                  "p1_t6",
+                  "p1_t7",
+                  "p1_t8"
+                ],
+                "oxAnswer": "O"
+              }
+            ],
+            "finalIsCorrectChoice": false
+          },
+          {
+            "choiceId": "C",
+            "text": "권리는 책임 없이 보장된다.",
+            "propositions": [
+              {
+                "propId": "C1",
+                "text": "권리는 책임과 함께한다.",
+                "evidenceTokens": [
+                  "p1_t6",
+                  "p1_t7",
+                  "p1_t8"
+                ],
+                "oxAnswer": "X"
+              }
+            ],
+            "finalIsCorrectChoice": true
+          }
+        ],
+        "rewardMultiplier": 3
+      }
+    ]
+  }
+}

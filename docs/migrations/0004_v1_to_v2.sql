@@ -1,0 +1,62 @@
+-- v1 -> v2 migration template
+-- Assumes v1 data is loaded into staging tables (replace table names as needed).
+
+-- 1) Users (example assumes same IDs)
+-- INSERT INTO users (id, email, password_hash, name, status, created_at, updated_at)
+-- SELECT user_id, email, password_hash, name, status, created_at, updated_at
+-- FROM v1_users;
+
+-- 2) Seed conversion (single count -> wheat/oat/rice split)
+-- v1 table placeholder: v1_user_seeds(user_id, seed_total)
+-- Rule: base = FLOOR(seed_total / 3), remainder = seed_total - base*3
+-- Assign: wheat = base + remainder, oat = base, rice = base
+-- INSERT INTO user_seeds (id, user_id, seed_type, count, created_at, updated_at)
+-- SELECT CONCAT('us_', user_id, '_w'), user_id, 'seed_wheat',
+--        (seed_total DIV 3) + (seed_total - (seed_total DIV 3) * 3),
+--        NOW(), NOW()
+-- FROM v1_user_seeds
+-- ON DUPLICATE KEY UPDATE count = VALUES(count);
+--
+-- INSERT INTO user_seeds (id, user_id, seed_type, count, created_at, updated_at)
+-- SELECT CONCAT('us_', user_id, '_o'), user_id, 'seed_oat',
+--        (seed_total DIV 3),
+--        NOW(), NOW()
+-- FROM v1_user_seeds
+-- ON DUPLICATE KEY UPDATE count = VALUES(count);
+--
+-- INSERT INTO user_seeds (id, user_id, seed_type, count, created_at, updated_at)
+-- SELECT CONCAT('us_', user_id, '_r'), user_id, 'seed_rice',
+--        (seed_total DIV 3),
+--        NOW(), NOW()
+-- FROM v1_user_seeds
+-- ON DUPLICATE KEY UPDATE count = VALUES(count);
+
+-- 3) Fertilizer, crops, inventory
+-- v1 placeholders: v1_user_fertilizer(user_id, count), v1_user_crops(user_id, crop_type, count)
+-- INSERT INTO user_fertilizer (id, user_id, count, created_at, updated_at)
+-- SELECT CONCAT('uf_', user_id), user_id, count, NOW(), NOW()
+-- FROM v1_user_fertilizer
+-- ON DUPLICATE KEY UPDATE count = VALUES(count);
+--
+-- INSERT INTO user_crops (id, user_id, crop_type, count, created_at, updated_at)
+-- SELECT CONCAT('uc_', user_id, '_', crop_type), user_id, crop_type, count, NOW(), NOW()
+-- FROM v1_user_crops
+-- ON DUPLICATE KEY UPDATE count = VALUES(count);
+
+-- 4) Learning history (map to contents/learning_attempts)
+-- v1 placeholders: v1_attempts(user_id, content_id, activity_type, score, started_at, submitted_at)
+-- INSERT INTO learning_attempts (id, user_id, content_id, activity_type, status, score, started_at, submitted_at, created_at, updated_at)
+-- SELECT CONCAT('la_', user_id, '_', content_id), user_id, content_id, activity_type, 'submitted', score, started_at, submitted_at, NOW(), NOW()
+-- FROM v1_attempts;
+
+-- 5) Paid entitlement
+-- v1 placeholder: v1_subscriptions(user_id, status, end_at)
+-- INSERT INTO subscriptions (id, user_id, status, start_at, end_at, next_billing_at, created_at, updated_at)
+-- SELECT CONCAT('sub_', user_id), user_id, status, NOW(), end_at, NULL, NOW(), NOW()
+-- FROM v1_subscriptions
+-- ON DUPLICATE KEY UPDATE status = VALUES(status), end_at = VALUES(end_at);
+
+-- 6) Mark migration done (optional flag)
+-- INSERT INTO system_settings (setting_key, setting_value, updated_at)
+-- VALUES ('migration.v1_to_v2.done', 'true', NOW())
+-- ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value), updated_at = NOW();

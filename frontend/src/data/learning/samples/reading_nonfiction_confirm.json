@@ -1,0 +1,79 @@
+{
+  "contentId": "e8ddd4d1-8762-4375-8b9f-4baa29b5601b",
+  "contentType": "READING_NONFICTION_CONFIRM",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "비문학 확인 학습 01",
+  "description": "지문에서 근거 표현을 클릭",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": {
+    "min": 4,
+    "max": 6
+  },
+  "area": "READING",
+  "subArea": "NONFICTION_PHILOSOPHY",
+  "competencies": [
+    "VOCAB",
+    "READING"
+  ],
+  "tags": [],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 180,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "사실에 대한 지배자는 해석이다."
+        }
+      ],
+      "tokens": [
+        {
+          "tokenId": "p1_t1",
+          "paragraphId": "p1",
+          "text": "사실에"
+        },
+        {
+          "tokenId": "p1_t2",
+          "paragraphId": "p1",
+          "text": "대한"
+        },
+        {
+          "tokenId": "p1_t3",
+          "paragraphId": "p1",
+          "text": "지배자는"
+        },
+        {
+          "tokenId": "p1_t4",
+          "paragraphId": "p1",
+          "text": "해석이다."
+        }
+      ]
+    },
+    "questions": [
+      {
+        "id": "q1",
+        "prompt": "정답 표현을 지문에서 클릭하세요.",
+        "answerTokenRefs": [
+          "p1_t1",
+          "p1_t2",
+          "p1_t3"
+        ],
+        "scoring": {
+          "correctDeltaSec": 30,
+          "wrongDeltaSec": -30
+        },
+        "revealOnWrong": true
+      }
+    ]
+  }
+}

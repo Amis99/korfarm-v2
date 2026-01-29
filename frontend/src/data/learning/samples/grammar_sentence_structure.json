@@ -1,0 +1,76 @@
+{
+  "contentId": "2727d7ec-da5f-4099-ada7-7e98e6c8c104",
+  "contentType": "GRAMMAR_SENTENCE_STRUCTURE",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "문장의 짜임 분석 01",
+  "description": "서술어와 호응 성분을 찾는 연습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": {
+    "min": 4,
+    "max": 6
+  },
+  "area": "GRAMMAR",
+  "subArea": "SENTENCE_STRUCTURE",
+  "competencies": [
+    "VOCAB",
+    "READING"
+  ],
+  "tags": [],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 180,
+  "assets": {},
+  "payload": {
+    "sentences": [
+      {
+        "sentenceId": "s1",
+        "tokens": [
+          {
+            "tokenId": "t1",
+            "text": "나는",
+            "role": "SUBJECT_1"
+          },
+          {
+            "tokenId": "t2",
+            "text": "밥을",
+            "role": "OBJECT_1"
+          },
+          {
+            "tokenId": "t3",
+            "text": "먹었다",
+            "role": "PREDICATE_1"
+          }
+        ],
+        "predicateTokens": [
+          "t3"
+        ],
+        "roleQueryOrder": [
+          {
+            "predicate": "t3",
+            "targetRoles": [
+              "SUBJECT_1",
+              "OBJECT_1"
+            ]
+          }
+        ],
+        "embeddedOrLinked": [
+          {
+            "type": "EMBEDDED",
+            "tokenRefs": [
+              "t1",
+              "t2"
+            ],
+            "clauseType": "NOUN_CLAUSE"
+          }
+        ]
+      }
+    ]
+  }
+}

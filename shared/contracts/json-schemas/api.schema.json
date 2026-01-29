@@ -1,0 +1,561 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KOR Farm v2 API Schemas",
+  "type": "object",
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "success": { "type": "boolean" },
+        "data": {},
+        "error": { "$ref": "#/definitions/Error" },
+        "request_id": { "type": "string" }
+      },
+      "required": ["success"]
+    },
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "password": { "type": "string" }
+      },
+      "required": ["email", "password"]
+    },
+    "SignupRequest": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "password": { "type": "string" },
+        "name": { "type": "string" }
+      },
+      "required": ["email", "password"]
+    },
+    "UserProfile": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "name": { "type": "string" },
+        "roles": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "status": { "type": "string" }
+      }
+    },
+    "AuthResponseData": {
+      "type": "object",
+      "properties": {
+        "access_token": { "type": "string" },
+        "refresh_token": { "type": "string" },
+        "expires_in": { "type": "integer" },
+        "user": { "$ref": "#/definitions/UserProfile" }
+      },
+      "required": ["access_token", "refresh_token", "expires_in", "user"]
+    },
+    "AuthResponse": {
+      "allOf": [
+        { "$ref": "#/definitions/ApiResponse" },
+        {
+          "type": "object",
+          "properties": {
+            "data": { "$ref": "#/definitions/AuthResponseData" }
+          }
+        }
+      ]
+    },
+    "Question": {
+      "type": "object",
+      "properties": {
+        "question_id": { "type": "string" },
+        "text": { "type": "string" },
+        "type": { "type": "string" },
+        "choices": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "DailyQuizContent": {
+      "type": "object",
+      "properties": {
+        "content_id": { "type": "string" },
+        "title": { "type": "string" },
+        "questions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Question" }
+        }
+      }
+    },
+    "DailyReadingContent": {
+      "type": "object",
+      "properties": {
+        "content_id": { "type": "string" },
+        "title": { "type": "string" },
+        "passage": { "type": "string" },
+        "questions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Question" }
+        }
+      }
+    },
+    "SubmitAnswer": {
+      "type": "object",
+      "properties": {
+        "question_id": { "type": "string" },
+        "answer": { "type": "string" }
+      },
+      "required": ["question_id", "answer"]
+    },
+    "SubmitRequest": {
+      "type": "object",
+      "properties": {
+        "answers": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/SubmitAnswer" }
+        }
+      },
+      "required": ["answers"]
+    },
+    "SeedGrant": {
+      "type": "object",
+      "properties": {
+        "seed_type": { "type": "string" },
+        "count": { "type": "integer" }
+      }
+    },
+    "SubmitResult": {
+      "type": "object",
+      "properties": {
+        "score": { "type": "integer" },
+        "correct_count": { "type": "integer" },
+        "seed_grant": { "$ref": "#/definitions/SeedGrant" }
+      }
+    },
+    "Inventory": {
+      "type": "object",
+      "properties": {
+        "seeds": { "type": "object", "additionalProperties": { "type": "integer" } },
+        "crops": { "type": "object", "additionalProperties": { "type": "integer" } },
+        "fertilizer": { "type": "integer" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "HarvestCraftRequest": {
+      "type": "object",
+      "properties": {
+        "seed_type": { "type": "string" },
+        "use_fertilizer": { "type": "boolean" }
+      },
+      "required": ["seed_type"]
+    },
+    "HarvestCraftResult": {
+      "type": "object",
+      "properties": {
+        "crop_type": { "type": "string" },
+        "crop_delta": { "type": "integer" },
+        "seed_spent": { "type": "integer" },
+        "fertilizer_spent": { "type": "integer" },
+        "inventory": { "$ref": "#/definitions/Inventory" }
+      }
+    },
+    "LedgerEntry": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "currency_type": { "type": "string" },
+        "item_type": { "type": "string" },
+        "delta": { "type": "integer" },
+        "reason": { "type": "string" },
+        "ref_type": { "type": "string" },
+        "ref_id": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "DuelRoomCreateRequest": {
+      "type": "object",
+      "properties": {
+        "level_id": { "type": "string" },
+        "room_size": { "type": "integer" },
+        "stake_amount": { "type": "integer" },
+        "stake_crop_type": { "type": "string" }
+      },
+      "required": ["level_id", "room_size", "stake_amount"]
+    },
+    "DuelRoomPlayer": {
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "stake_crop_type": { "type": "string" },
+        "status": { "type": "string" }
+      }
+    },
+    "DuelRoom": {
+      "type": "object",
+      "properties": {
+        "room_id": { "type": "string" },
+        "level_id": { "type": "string" },
+        "room_size": { "type": "integer" },
+        "stake_amount": { "type": "integer" },
+        "status": { "type": "string" },
+        "players": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/DuelRoomPlayer" }
+        }
+      }
+    },
+    "AssignmentSubmitRequest": {
+      "type": "object",
+      "properties": {
+        "content": { "type": "object" }
+      },
+      "required": ["content"]
+    },
+    "AssignmentSummary": {
+      "type": "object",
+      "properties": {
+        "assignment_id": { "type": "string" },
+        "title": { "type": "string" },
+        "assignment_type": { "type": "string" },
+        "due_at": { "type": "string", "format": "date-time" },
+        "status": { "type": "string" }
+      }
+    },
+    "PostSummary": {
+      "type": "object",
+      "properties": {
+        "post_id": { "type": "string" },
+        "title": { "type": "string" },
+        "author_id": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "PostDetail": {
+      "allOf": [
+        { "$ref": "#/definitions/PostSummary" },
+        {
+          "type": "object",
+          "properties": {
+            "content": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "CreatePostRequest": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "attachment_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["title", "content"]
+    },
+    "UpdatePostRequest": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "attachment_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "CreateCommentRequest": {
+      "type": "object",
+      "properties": {
+        "content": { "type": "string" }
+      },
+      "required": ["content"]
+    },
+    "ReportRequest": {
+      "type": "object",
+      "properties": {
+        "target_type": { "type": "string" },
+        "target_id": { "type": "string" },
+        "reason": { "type": "string" }
+      },
+      "required": ["target_type", "target_id", "reason"]
+    },
+    "PresignRequest": {
+      "type": "object",
+      "properties": {
+        "purpose": { "type": "string" },
+        "filename": { "type": "string" },
+        "mime": { "type": "string" },
+        "size": { "type": "integer" }
+      },
+      "required": ["purpose", "filename", "mime", "size"]
+    },
+    "WritingSubmitRequest": {
+      "type": "object",
+      "properties": {
+        "content": { "type": "string" },
+        "attachment_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["content"]
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "product_id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "integer" },
+        "stock": { "type": "integer" },
+        "status": { "type": "string" }
+      }
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "product_id": { "type": "string" },
+        "quantity": { "type": "integer" },
+        "unit_price": { "type": "integer" }
+      }
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "order_id": { "type": "string" },
+        "status": { "type": "string" },
+        "total_amount": { "type": "integer" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OrderItem" }
+        }
+      }
+    },
+    "OrderItemRequest": {
+      "type": "object",
+      "properties": {
+        "product_id": { "type": "string" },
+        "quantity": { "type": "integer" }
+      },
+      "required": ["product_id", "quantity"]
+    },
+    "OrderCreateRequest": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OrderItemRequest" }
+        },
+        "address": { "type": "object" }
+      },
+      "required": ["items", "address"]
+    },
+    "PaymentCheckoutRequest": {
+      "type": "object",
+      "properties": {
+        "amount": { "type": "integer" },
+        "order_id": { "type": "string" },
+        "subscription": { "type": "boolean" },
+        "method": { "type": "string" }
+      },
+      "required": ["amount", "method"]
+    },
+    "Payment": {
+      "type": "object",
+      "properties": {
+        "payment_id": { "type": "string" },
+        "payment_type": { "type": "string" },
+        "amount": { "type": "integer" },
+        "status": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "AdminOrgCreateRequest": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "plan": { "type": "string" },
+        "seat_limit": { "type": "integer" },
+        "status": { "type": "string" }
+      },
+      "required": ["name"]
+    },
+    "AdminOrgUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "plan": { "type": "string" },
+        "seat_limit": { "type": "integer" },
+        "status": { "type": "string" }
+      }
+    },
+    "AdminOrgAdminCreateRequest": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "name": { "type": "string" }
+      },
+      "required": ["email"]
+    },
+    "AdminStudentCreateRequest": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "name": { "type": "string" },
+        "org_id": { "type": "string" },
+        "class_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["email", "org_id"]
+    },
+    "AdminStudentUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "status": { "type": "string" },
+        "org_id": { "type": "string" },
+        "class_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "AdminClassCreateRequest": {
+      "type": "object",
+      "properties": {
+        "org_id": { "type": "string" },
+        "name": { "type": "string" },
+        "level_id": { "type": "string" },
+        "grade": { "type": "string" },
+        "status": { "type": "string" },
+        "start_at": { "type": "string", "format": "date" }
+      },
+      "required": ["org_id", "name"]
+    },
+    "AdminClassUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "level_id": { "type": "string" },
+        "grade": { "type": "string" },
+        "status": { "type": "string" },
+        "start_at": { "type": "string", "format": "date" }
+      }
+    },
+    "AdminClassStudentsRequest": {
+      "type": "object",
+      "properties": {
+        "user_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["user_ids"]
+    },
+    "AdminContentImportRequest": {
+      "type": "object",
+      "properties": {
+        "content_type": { "type": "string" },
+        "level_id": { "type": "string" },
+        "chapter_id": { "type": "string" },
+        "schema_version": { "type": "string" },
+        "content": { "type": "object" }
+      },
+      "required": ["content_type", "schema_version", "content"]
+    },
+    "AdminAssignmentCreateRequest": {
+      "type": "object",
+      "properties": {
+        "assignment_type": { "type": "string" },
+        "title": { "type": "string" },
+        "payload": { "type": "object" },
+        "due_at": { "type": "string", "format": "date-time" },
+        "targets": {
+          "type": "array",
+          "items": { "type": "object" }
+        }
+      },
+      "required": ["assignment_type", "title", "payload"]
+    },
+    "AdminAssignmentUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "payload": { "type": "object" },
+        "due_at": { "type": "string", "format": "date-time" },
+        "status": { "type": "string" }
+      }
+    },
+    "AdminWritingFeedbackRequest": {
+      "type": "object",
+      "properties": {
+        "rubric": { "type": "object" },
+        "comment": { "type": "string" }
+      },
+      "required": ["rubric"]
+    },
+    "AdminTestCreateRequest": {
+      "type": "object",
+      "properties": {
+        "org_id": { "type": "string" },
+        "title": { "type": "string" },
+        "pdf_file_id": { "type": "string" }
+      },
+      "required": ["org_id", "title", "pdf_file_id"]
+    },
+    "AdminTestAnswersRequest": {
+      "type": "object",
+      "properties": {
+        "answers": { "type": "object" }
+      },
+      "required": ["answers"]
+    },
+    "AdminDuelSeasonRequest": {
+      "type": "object",
+      "properties": {
+        "level_id": { "type": "string" },
+        "name": { "type": "string" },
+        "start_at": { "type": "string", "format": "date-time" },
+        "end_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["level_id", "name", "start_at", "end_at"]
+    },
+    "AdminDuelSnapshotRequest": {
+      "type": "object",
+      "properties": {
+        "season_id": { "type": "string" },
+        "level_id": { "type": "string" }
+      },
+      "required": ["season_id"]
+    },
+    "AdminFlagUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "rollout_percent": { "type": "integer" },
+        "description": { "type": "string" }
+      }
+    },
+    "AdminProductRequest": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "price": { "type": "integer" },
+        "stock": { "type": "integer" },
+        "status": { "type": "string" }
+      },
+      "required": ["name", "price"]
+    }
+  }
+}
+}

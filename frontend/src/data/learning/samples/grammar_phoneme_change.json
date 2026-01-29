@@ -1,0 +1,116 @@
+{
+  "contentId": "dfae52aa-2e61-4937-bb39-15dfd8d0df6d",
+  "contentType": "GRAMMAR_PHONEME_CHANGE",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "음운 변동 분석 01",
+  "description": "음운 변동을 고르고 칸을 수정",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": {
+    "min": 4,
+    "max": 6
+  },
+  "area": "GRAMMAR",
+  "subArea": "PHONEME_CHANGE",
+  "competencies": [
+    "VOCAB",
+    "READING"
+  ],
+  "tags": [],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 180,
+  "assets": {},
+  "payload": {
+    "words": [
+      {
+        "wordId": "w1",
+        "surface": "국밥",
+        "cells": [
+          {
+            "cellNo": 1,
+            "text": "국"
+          },
+          {
+            "cellNo": 2,
+            "text": "밥"
+          }
+        ],
+        "steps": [
+          {
+            "stepId": "st1",
+            "envCellNos": [
+              1
+            ],
+            "targetCellNo": 2,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구"
+              },
+              {
+                "id": "B",
+                "text": "국"
+              },
+              {
+                "id": "C",
+                "text": "궁"
+              },
+              {
+                "id": "D",
+                "text": "굽"
+              }
+            ],
+            "answerId": "C",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCellText": {
+                "cellNo": 2,
+                "newText": "궁"
+              }
+            },
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            }
+          },
+          {
+            "stepId": "st2",
+            "targetCellNo": 2,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비음화"
+              },
+              {
+                "id": "B",
+                "text": "유음화"
+              },
+              {
+                "id": "C",
+                "text": "구개음화"
+              },
+              {
+                "id": "D",
+                "text": "된소리되기"
+              }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

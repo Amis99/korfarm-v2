@@ -1,0 +1,117 @@
+{
+  "contentId": "11bfb753-3dfc-41b6-90c1-4122ca66dae4",
+  "contentType": "READING_NONFICTION_INTENSIVE",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "비문학 정독 훈련 01",
+  "description": "문장이 순차 하이라이트되는 정독 훈련",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": {
+    "min": 4,
+    "max": 6
+  },
+  "area": "READING",
+  "subArea": "NONFICTION_PHILOSOPHY",
+  "competencies": [
+    "VOCAB",
+    "READING"
+  ],
+  "tags": [],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 180,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "철학은 질문을 정교하게 만드는 학문이다. 질문의 형태가 곧 사유의 깊이를 결정한다."
+        }
+      ]
+    },
+    "timeline": [
+      {
+        "stepId": "s1",
+        "highlight": {
+          "paragraphId": "p1",
+          "range": {
+            "start": 0,
+            "end": 18
+          }
+        },
+        "question": {
+          "prompt": "이 문장의 핵심 진술은 무엇입니까?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "철학은 답을 찾는 학문이다"
+            },
+            {
+              "id": "B",
+              "text": "질문이 사유의 깊이를 결정한다"
+            },
+            {
+              "id": "C",
+              "text": "질문은 무의미하다"
+            },
+            {
+              "id": "D",
+              "text": "사유는 질문과 무관하다"
+            }
+          ],
+          "answerId": "B",
+          "scoring": {
+            "correctDeltaSec": 20,
+            "wrongDeltaSec": -20,
+            "eliminateWrongChoice": true
+          }
+        }
+      },
+      {
+        "stepId": "s2",
+        "highlight": {
+          "paragraphId": "p1",
+          "range": {
+            "start": 19,
+            "end": 48
+          }
+        },
+        "question": {
+          "prompt": "다음 중 바꿔 쓸 수 있는 말은?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "형태"
+            },
+            {
+              "id": "B",
+              "text": "무게"
+            },
+            {
+              "id": "C",
+              "text": "속도"
+            },
+            {
+              "id": "D",
+              "text": "규칙"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 20,
+            "wrongDeltaSec": -20,
+            "eliminateWrongChoice": true
+          }
+        }
+      }
+    ]
+  }
+}
