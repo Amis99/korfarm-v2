@@ -32,6 +32,7 @@ function QuestionModal({
 
   useEffect(() => {
     if (!anchorRect) return;
+    if (!anchorRect.align) return;
     const modal = modalRef.current;
     if (!modal) return;
     const container = modal.closest(".engine-body") || document.body;
@@ -39,7 +40,12 @@ function QuestionModal({
     const modalRect = modal.getBoundingClientRect();
     const maxX = Math.max(8, containerRect.width - modalRect.width - 8);
     const maxY = Math.max(8, containerRect.height - modalRect.height - 8);
-    const nextX = clamp(anchorRect.left || 28, 8, maxX);
+    const gap = 12;
+    const baseX =
+      anchorRect.align === "right"
+        ? (anchorRect.right ?? 28) + gap
+        : (anchorRect.left ?? 28) - modalRect.width - gap;
+    const nextX = clamp(baseX, 8, maxX);
     const nextY = clamp(anchorRect.top || 28, 8, maxY);
     setPosition({ x: nextX, y: nextY });
   }, [anchorRect]);

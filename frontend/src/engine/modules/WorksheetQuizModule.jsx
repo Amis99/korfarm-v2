@@ -230,11 +230,22 @@ function WorksheetQuizModule({ content }) {
     const container = node.closest(".engine-body");
     if (!container) return;
     const containerRect = container.getBoundingClientRect();
-    const rect = node.getBoundingClientRect();
+    const highlightNode =
+      node.querySelector(".worksheet-highlight") || node.querySelector(".worksheet-blank.active");
+    const rect = (highlightNode || node).getBoundingClientRect();
+    const left = rect.left - containerRect.left;
+    const right = rect.right - containerRect.left;
+    const top = rect.top - containerRect.top;
+    const height = rect.height;
+    const isDesktop = window.innerWidth >= 768;
+    const center = (left + right) / 2;
+    const align = isDesktop ? (center < containerRect.width / 2 ? "right" : "left") : null;
     setAnchorRect({
-      left: rect.left - containerRect.left,
-      top: rect.top - containerRect.top,
-      height: rect.height,
+      left,
+      right,
+      top,
+      height,
+      align,
     });
   }, [currentIndex, pages.length]);
 
@@ -305,13 +316,15 @@ function WorksheetQuizModule({ content }) {
                                   status ? `done ${status}` : ""
                                 }`}
                               >
-                                <span className="worksheet-item-number">{idx + 1}.</span>
+                                <span className="worksheet-item-number">
+                                  {idx + 1}.
+                                  {status ? (
+                                    <span className={`worksheet-number-mark ${status}`}>
+                                      {status === "correct" ? "○" : "／"}
+                                    </span>
+                                  ) : null}
+                                </span>
                                 <span className="worksheet-item-text">{content}</span>
-                                {status ? (
-                                  <span className={`worksheet-mark ${status}`}>
-                                    {status === "correct" ? "○" : "／"}
-                                  </span>
-                                ) : null}
                               </li>
                             );
                           })}
@@ -353,13 +366,15 @@ function WorksheetQuizModule({ content }) {
                                   status ? `done ${status}` : ""
                                 }`}
                               >
-                                <span className="worksheet-item-number">{idx + 1}.</span>
+                                <span className="worksheet-item-number">
+                                  {idx + 1}.
+                                  {status ? (
+                                    <span className={`worksheet-number-mark ${status}`}>
+                                      {status === "correct" ? "○" : "／"}
+                                    </span>
+                                  ) : null}
+                                </span>
                                 <span className="worksheet-item-text">{content}</span>
-                                {status ? (
-                                  <span className={`worksheet-mark ${status}`}>
-                                    {status === "correct" ? "○" : "／"}
-                                  </span>
-                                ) : null}
                               </li>
                             );
                           })}
@@ -391,20 +406,6 @@ function WorksheetQuizModule({ content }) {
               ) : null}
               <span>{currentIndex + 1} / {questions.length}</span>
             </div>
-          </div>
-          <div className="worksheet-status">
-            {questions.map((question) => (
-              <span
-                key={question.id}
-                className={`status-dot ${statusMap[question.id] || ""}`}
-              >
-                {statusMap[question.id] === "correct"
-                  ? "○"
-                  : statusMap[question.id] === "wrong"
-                    ? "／"
-                    : "·"}
-              </span>
-            ))}
           </div>
           {lastResult ? (
             <div className={`worksheet-feedback ${lastResult}`}>
