@@ -7,7 +7,7 @@
   --sheet-height: 1123px;
   --scale: min(1, calc((100vw - 24px) / var(--sheet-width)));
   min-height: 100vh;
-  padding: 24px 12px 40px;
+  padding: calc(24px + var(--header-height, 0px)) 12px 40px;
   color: var(--engine-ink);
   font-family: var(--font-body);
   display: grid;
@@ -58,18 +58,31 @@
 }
 
 .engine-header-wrap {
-  position: sticky;
-  top: 12px;
-  z-index: 40;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
   display: flex;
   justify-content: center;
   width: 100%;
   pointer-events: none;
-  min-height: var(--header-height, 0px);
+  padding: 12px 0;
 }
 
 .engine-header-wrap .engine-header {
   pointer-events: auto;
+}
+
+.engine-logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.engine-logo img {
+  width: 56px;
+  height: auto;
+  display: block;
 }
 
 .engine-header-row {

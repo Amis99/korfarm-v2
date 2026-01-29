@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import EngineContext from "./EngineContext";
 import TimeBar from "./TimeBar";
 import ResultSummary from "./ResultSummary";
@@ -255,12 +256,15 @@ function EngineShell({ content, moduleKey, onExit }) {
 
   return (
     <EngineContext.Provider value={contextValue}>
-      <div className="engine-shell">
+      <div className="engine-shell" style={{ "--header-height": `${headerHeight}px` }}>
         <div className="engine-viewport">
           <div className="engine-stage">
             <div className="engine-header-wrap" style={{ "--header-height": `${headerHeight}px` }}>
               <header ref={headerRef} className="engine-header engine-scale">
                 <div className="engine-header-row">
+                  <Link className="engine-logo" to="/">
+                    <img src="/korfarm-logo.png" alt="국어농장" />
+                  </Link>
                   <div className="engine-header-item engine-title">
                     <strong>{content?.title || "학습"}</strong>
                   </div>
