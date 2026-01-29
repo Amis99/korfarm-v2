@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import EngineContext from "./EngineContext";
 import TimeBar from "./TimeBar";
 import ResultSummary from "./ResultSummary";
@@ -17,6 +17,8 @@ function EngineShell({ content, moduleKey, onExit }) {
   const [seed, setSeed] = useState(content?.seedReward?.count ?? 3);
   const [startedAt, setStartedAt] = useState(null);
   const intervalRef = useRef(null);
+  const headerRef = useRef(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
   const Module = MODULES[moduleKey];
 
@@ -199,6 +201,17 @@ function EngineShell({ content, moduleKey, onExit }) {
     return () => clearTimeout(timer);
   }, [timePulse]);
 
+  useLayoutEffect(() => {
+    const measure = () => {
+      if (!headerRef.current) return;
+      const rect = headerRef.current.getBoundingClientRect();
+      setHeaderHeight(rect.height);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [content?.title, content?.targetLevel, content?.subArea, seed]);
+
   useEffect(() => {
     if (status !== "RUNNING") return;
     if (timeLeft > 0) return;
@@ -245,50 +258,52 @@ function EngineShell({ content, moduleKey, onExit }) {
       <div className="engine-shell">
         <div className="engine-viewport">
           <div className="engine-stage">
-            <div className="engine-stage-inner">
-            <header className="engine-header">
-              <div className="engine-header-row">
-                <div className="engine-header-item engine-title">
-                  <strong>{content?.title || "학습"}</strong>
-                </div>
-                <div className="engine-header-divider" />
-                <div className="engine-header-item">
-                  <strong>
-                    {getLearningTypeLabel(content?.contentType)} · {getLevelLabel(content?.targetLevel)}
-                  </strong>
-                </div>
-                <div className="engine-header-divider" />
-                <div className="engine-header-item">
-                  <strong>
-                    {getAreaLabel(content?.area, content?.subArea)} · {getSubAreaLabel(content?.subArea)}
-                  </strong>
-                </div>
-              </div>
-              <div className="engine-header-row secondary">
-                <div className="engine-header-item">
-                  <div className="seed-row" aria-label={`현재 씨앗 ${seed}개`}>
-                    {Array.from({ length: seed }, (_, idx) => (
-                      <span key={`seed-${idx}`} className="seed-icon" />
-                    ))}
+            <div className="engine-header-wrap" style={{ "--header-height": `${headerHeight}px` }}>
+              <header ref={headerRef} className="engine-header engine-scale">
+                <div className="engine-header-row">
+                  <div className="engine-header-item engine-title">
+                    <strong>{content?.title || "학습"}</strong>
+                  </div>
+                  <div className="engine-header-divider" />
+                  <div className="engine-header-item">
+                    <strong>
+                      {getLearningTypeLabel(content?.contentType)} · {getLevelLabel(content?.targetLevel)}
+                    </strong>
+                  </div>
+                  <div className="engine-header-divider" />
+                  <div className="engine-header-item">
+                    <strong>
+                      {getAreaLabel(content?.area, content?.subArea)} · {getSubAreaLabel(content?.subArea)}
+                    </strong>
                   </div>
                 </div>
-                <div className="engine-header-divider" />
-                <div className="engine-header-item engine-timebar">
-                  <TimeBar timeLeft={timeLeft} timeLimit={timeLimit} className={timePulse} />
+                <div className="engine-header-row secondary">
+                  <div className="engine-header-item">
+                    <div className="seed-row" aria-label={`현재 씨앗 ${seed}개`}>
+                      {Array.from({ length: seed }, (_, idx) => (
+                        <span key={`seed-${idx}`} className="seed-icon" />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="engine-header-divider" />
+                  <div className="engine-header-item engine-timebar">
+                    <TimeBar timeLeft={timeLeft} timeLimit={timeLimit} className={timePulse} />
+                  </div>
                 </div>
-              </div>
-            </header>
+              </header>
+            </div>
 
-        <main
-          className={`engine-body ${
-            content?.payload?.pageStack && moduleKey === "worksheet_quiz" ? "stack" : ""
-          }`}
-          style={{
-            "--sheet-bg": content?.assets?.sheetBackground
-              ? `url(${content.assets.sheetBackground})`
-              : "url(/learning-paper.jpg)",
-          }}
-        >
+            <div className="engine-stage-inner engine-scale">
+              <main
+                className={`engine-body ${
+                  content?.payload?.pageStack && moduleKey === "worksheet_quiz" ? "stack" : ""
+                }`}
+                style={{
+                  "--sheet-bg": content?.assets?.sheetBackground
+                    ? `url(${content.assets.sheetBackground})`
+                    : "url(/learning-paper.jpg)",
+                }}
+              >
                 <Module content={content} />
               </main>
 

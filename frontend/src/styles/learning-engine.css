@@ -26,20 +26,23 @@
   width: calc(var(--sheet-width) * var(--scale));
 }
 
-.engine-stage-inner {
+.engine-scale {
   width: var(--sheet-width);
+}
+
+.engine-stage-inner {
   display: grid;
   gap: 18px;
 }
 
 @supports (zoom: 1) {
-  .engine-stage-inner {
+  .engine-scale {
     zoom: var(--scale);
   }
 }
 
 @supports not (zoom: 1) {
-  .engine-stage-inner {
+  .engine-scale {
     transform: scale(var(--scale));
     transform-origin: top center;
   }
@@ -52,9 +55,21 @@
   box-shadow: 0 14px 24px rgba(255, 143, 43, 0.15);
   display: grid;
   gap: 12px;
+}
+
+.engine-header-wrap {
   position: sticky;
   top: 12px;
-  z-index: 30;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  pointer-events: none;
+  min-height: var(--header-height, 0px);
+}
+
+.engine-header-wrap .engine-header {
+  pointer-events: auto;
 }
 
 .engine-header-row {
@@ -403,6 +418,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  position: relative;
 }
 
 .worksheet-item-text {
@@ -490,13 +506,25 @@
 }
 
 .worksheet-number-mark {
-  font-size: 22px;
-  font-weight: 700;
-  color: #2f7a46;
+  position: absolute;
+  left: -6px;
+  top: -8px;
+  width: 34px;
+  height: 28px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.65;
+  color: transparent;
+  font-size: 0;
+  pointer-events: none;
 }
 
 .worksheet-number-mark.wrong {
-  color: #c0392b;
+  background-image: url("/%EC%98%A4%EB%8B%B5%20%EA%BA%BE%EC%9D%80%EC%84%A0.png");
+}
+
+.worksheet-number-mark.correct {
+  background-image: url("/%EC%A0%95%EB%8B%B5%20%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8.png");
 }
 
 .worksheet-template {
