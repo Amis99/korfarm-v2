@@ -62,10 +62,23 @@ const renderHighlightedText = (text, highlight) => {
   return text;
 };
 
+const replaceWordInExample = (example, word) => {
+  if (!example) return "";
+  if (!word) return example;
+  return example.split(word).join("____");
+};
+
 function WorksheetQuizModule({ content }) {
   const { status, start, adjustTime, recordAnswer, finish } = useEngine();
   const payload = content?.payload || {};
   const questions = payload.questions || [];
+  const wordMap = useMemo(() => {
+    if (!payload.words) return {};
+    return payload.words.reduce((acc, word) => {
+      acc[word.wordId] = word;
+      return acc;
+    }, {});
+  }, [payload.words]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showPdf, setShowPdf] = useState(false);
   const [blankIndex, setBlankIndex] = useState(0);
@@ -81,6 +94,7 @@ function WorksheetQuizModule({ content }) {
   const columnHeight = 1123 - 48;
   const itemGap = 14;
   const usePageStack = payload.pageStack;
+  const isDictionary = Array.isArray(payload.words) && payload.words.length > 0;
 
   const currentQuestion = questions[currentIndex];
   const isFillBlanks = currentQuestion?.type === "FILL_BLANKS";
@@ -88,21 +102,75 @@ function WorksheetQuizModule({ content }) {
   const filled = blanks.map((blank) => blankAnswers[blank.id]);
   const isManuscript =
     currentQuestion?.render === "MANUSCRIPT" || content?.contentType === "WRITING_DESCRIPTIVE";
-  const preparedTemplate = currentQuestion?.template
-    ? renderTemplate(currentQuestion.template, blanks, filled, blankIndex)
-    : "";
-  const stemText = currentQuestion?.stem
-    ? renderHighlightedText(currentQuestion.stem, currentQuestion.highlight)
-    : "";
+
+  const renderDictionaryCard = (question, options = {}) => {
+    const {
+      isActive = false,
+      blankList = [],
+      filledValues = [],
+      activeBlankIndex = -1,
+      forMeasure = false,
+    } = options;
+    const linkedWord = wordMap[question.linkWordId] || {};
+    const headword = linkedWord.headword || "";
+    const pos = linkedWord.pos || "";
+    const sense = question.definitionText || linkedWord.sense || "";
+    const exampleBase =
+      question.exampleTemplate ||
+      question.exampleText ||
+      linkedWord.exampleSentences?.[0] ||
+      "";
+    const headwordBlank =
+      question.headwordBlank ??
+      question.questionKind === "DICT_MEANING_TO_WORD" ||
+      question.questionKind === "HOMONYM_EXAMPLE";
+    const headwordNode = headwordBlank ? (
+      <span className={`worksheet-blank ${isActive && !forMeasure ? "active" : ""}`}>____</span>
+    ) : (
+      headword
+    );
+    const exampleText = headwordBlank ? replaceWordInExample(exampleBase, headword) : exampleBase;
+
+    let definitionNode = null;
+    if (question.questionKind === "WORD_TO_DICT_FILL") {
+      definitionNode = forMeasure
+        ? renderTemplatePlain(question.template || "", blankList)
+        : isActive
+          ? renderTemplate(question.template || "", blankList, filledValues, activeBlankIndex)
+          : renderTemplatePlain(question.template || "", blankList);
+    } else if (question.questionKind !== "HOMONYM_EXAMPLE") {
+      definitionNode = sense;
+    }
+
+    return (
+      <div className="worksheet-dict-card">
+        <div className="dict-headword">
+          <strong>{headwordNode}</strong>
+          {pos ? <span className="dict-pos">[{pos}]</span> : null}
+        </div>
+        {definitionNode ? <div className="dict-sense">{definitionNode}</div> : null}
+        {exampleText ? <div className="dict-example">{exampleText}</div> : null}
+      </div>
+    );
+  };
 
   const measureItems = useMemo(
     () =>
       questions.map((question, idx) => {
         const isBlank = question.type === "FILL_BLANKS";
         const blankList = question.blanks || [];
-        const contentText = isBlank
-          ? renderTemplatePlain(question.template || "", blankList)
-          : question.stem || question.prompt || "";
+        let contentText = question.stem || question.prompt || "";
+        if (isDictionary) {
+          contentText = renderDictionaryCard(question, {
+            isActive: false,
+            blankList,
+            filledValues: [],
+            activeBlankIndex: -1,
+            forMeasure: true,
+          });
+        } else if (isBlank) {
+          contentText = renderTemplatePlain(question.template || "", blankList);
+        }
         return (
           <li key={`measure-${question.id}`} className="worksheet-item">
             <span className="worksheet-item-number">{idx + 1}.</span>
@@ -110,7 +178,7 @@ function WorksheetQuizModule({ content }) {
           </li>
         );
       }),
-    [questions]
+    [questions, isDictionary, wordMap]
   );
 
   useLayoutEffect(() => {
@@ -290,21 +358,31 @@ function WorksheetQuizModule({ content }) {
                               ? blankList.map((blank) => blankAnswers[blank.id])
                               : [];
                             const activeBlankIndex = isActive ? blankIndex : -1;
-                            const content = isBlank
-                              ? isActive
+                            let content = null;
+                            if (isDictionary) {
+                              content = renderDictionaryCard(question, {
+                                isActive,
+                                blankList,
+                                filledValues,
+                                activeBlankIndex,
+                              });
+                            } else if (isBlank) {
+                              content = isActive
                                 ? renderTemplate(
                                     question.template || "",
                                     blankList,
                                     filledValues,
                                     activeBlankIndex
                                   )
-                                : renderTemplatePlain(question.template || "", blankList)
-                              : isActive
+                                : renderTemplatePlain(question.template || "", blankList);
+                            } else {
+                              content = isActive
                                 ? renderHighlightedText(
                                     question.stem || question.prompt || "",
                                     question.highlight
                                   )
                                 : question.stem || question.prompt || "";
+                            }
 
                             return (
                               <li
@@ -314,7 +392,7 @@ function WorksheetQuizModule({ content }) {
                                 }}
                                 className={`worksheet-item ${isActive ? "active" : ""} ${
                                   status ? `done ${status}` : ""
-                                }`}
+                                } ${isDictionary ? "dict" : ""}`}
                               >
                                 <span className="worksheet-item-number">
                                   {idx + 1}.
@@ -340,21 +418,31 @@ function WorksheetQuizModule({ content }) {
                               ? blankList.map((blank) => blankAnswers[blank.id])
                               : [];
                             const activeBlankIndex = isActive ? blankIndex : -1;
-                            const content = isBlank
-                              ? isActive
+                            let content = null;
+                            if (isDictionary) {
+                              content = renderDictionaryCard(question, {
+                                isActive,
+                                blankList,
+                                filledValues,
+                                activeBlankIndex,
+                              });
+                            } else if (isBlank) {
+                              content = isActive
                                 ? renderTemplate(
                                     question.template || "",
                                     blankList,
                                     filledValues,
                                     activeBlankIndex
                                   )
-                                : renderTemplatePlain(question.template || "", blankList)
-                              : isActive
+                                : renderTemplatePlain(question.template || "", blankList);
+                            } else {
+                              content = isActive
                                 ? renderHighlightedText(
                                     question.stem || question.prompt || "",
                                     question.highlight
                                   )
                                 : question.stem || question.prompt || "";
+                            }
 
                             return (
                               <li
@@ -364,7 +452,7 @@ function WorksheetQuizModule({ content }) {
                                 }}
                                 className={`worksheet-item ${isActive ? "active" : ""} ${
                                   status ? `done ${status}` : ""
-                                }`}
+                                } ${isDictionary ? "dict" : ""}`}
                               >
                                 <span className="worksheet-item-number">
                                   {idx + 1}.

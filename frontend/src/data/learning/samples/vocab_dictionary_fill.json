@@ -1,10 +1,10 @@
 {
-  "contentId": "d4c8fdaa-b68e-4941-838e-e9ee2a815c2f",
-  "contentType": "VOCAB_DICTIONARY_FILL",
+  "contentId": "6f7c8f58-3d6e-4f42-9b56-8ce4c8b1a91d",
+  "contentType": "VOCAB_DICTIONARY",
   "version": 1,
   "status": "PUBLISHED",
   "title": "사전 학습 01",
-  "description": "사전적 의미를 빈칸 채우기로 완성",
+  "description": "사전적 의미와 예문으로 푸는 어휘 학습",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
     "min": 4,
@@ -16,7 +16,9 @@
     "VOCAB",
     "READING"
   ],
-  "tags": [],
+  "tags": [
+    "dictionary"
+  ],
   "access": {
     "mode": "FREE"
   },
@@ -26,34 +28,154 @@
     "multiplier": 1
   },
   "timeLimitSec": 180,
-  "assets": {},
+  "assets": {
+    "sheetBackground": "/learning-paper.jpg"
+  },
   "payload": {
+    "pageStack": true,
     "layout": "EXAM_SHEET",
+    "words": [
+      {
+        "wordId": "w1",
+        "headword": "관조",
+        "pos": "명사",
+        "sense": "사물이나 현상을 깊이 관찰함",
+        "definitionParts": [
+          "사물이나",
+          "현상을",
+          "깊이",
+          "관찰함"
+        ],
+        "exampleSentences": [
+          "작품을 멀리서 관조하며 흐름을 읽었다."
+        ]
+      },
+      {
+        "wordId": "w2",
+        "headword": "일목요연",
+        "pos": "명사",
+        "sense": "한눈에 알기 쉽게 정리되어 있음",
+        "definitionParts": [
+          "한눈에",
+          "알기",
+          "쉽게",
+          "정리되어",
+          "있음"
+        ],
+        "exampleSentences": [
+          "자료가 일목요연하게 정리되어 있었다."
+        ]
+      },
+      {
+        "wordId": "w3",
+        "headword": "유추",
+        "pos": "명사",
+        "sense": "어떤 사실을 바탕으로 다른 사실을 미루어 짐작함",
+        "definitionParts": [
+          "어떤",
+          "사실을",
+          "바탕으로",
+          "다른",
+          "사실을",
+          "미루어",
+          "짐작함"
+        ],
+        "exampleSentences": [
+          "단서로 전체 상황을 유추했다."
+        ]
+      },
+      {
+        "wordId": "w4",
+        "headword": "각색",
+        "pos": "명사",
+        "sense": "기존 작품을 새롭게 고쳐 씀",
+        "definitionParts": [
+          "기존",
+          "작품을",
+          "새롭게",
+          "고쳐",
+          "씀"
+        ],
+        "exampleSentences": [
+          "원작을 영화용으로 각색했다."
+        ]
+      },
+      {
+        "wordId": "w5",
+        "headword": "반문",
+        "pos": "명사",
+        "sense": "상대의 말에 대해 되묻는 물음",
+        "definitionParts": [
+          "상대의",
+          "말에",
+          "대해",
+          "되묻는",
+          "물음"
+        ],
+        "exampleSentences": [
+          "그는 반문으로 대답을 피했다."
+        ]
+      }
+    ],
     "questions": [
       {
         "id": "d1",
+        "type": "MULTI_CHOICE",
+        "questionKind": "DICT_MEANING_TO_WORD",
+        "prompt": "사전적 의미를 보고 낱말을 고르세요.",
+        "linkWordId": "w1",
+        "definitionText": "사물이나 현상을 깊이 관찰함",
+        "choices": [
+          {
+            "id": "A",
+            "text": "관조"
+          },
+          {
+            "id": "B",
+            "text": "반문"
+          },
+          {
+            "id": "C",
+            "text": "각색"
+          },
+          {
+            "id": "D",
+            "text": "유예"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        },
+        "headwordBlank": true
+      },
+      {
+        "id": "d2",
         "type": "FILL_BLANKS",
-        "stem": "먹다의 사전적 의미를 완성하세요.",
-        "template": "[____] ‘____’ ____ 따위를 ____을 통하여 ____에 들여보내다.",
+        "questionKind": "WORD_TO_DICT_FILL",
+        "linkWordId": "w2",
+        "stem": "일목요연",
+        "template": "____ ____ ____ ____ ____",
         "blanks": [
           {
             "id": "b1",
             "choices": [
               {
                 "id": "A",
-                "text": "동사"
+                "text": "한눈에"
               },
               {
                 "id": "B",
-                "text": "명사"
+                "text": "멀리서"
               },
               {
                 "id": "C",
-                "text": "형용사"
+                "text": "불분명하게"
               },
               {
                 "id": "D",
-                "text": "부사"
+                "text": "복잡하게"
               }
             ],
             "answerId": "A"
@@ -63,41 +185,41 @@
             "choices": [
               {
                 "id": "A",
-                "text": "사물을"
+                "text": "알기"
               },
               {
                 "id": "B",
-                "text": "음식"
+                "text": "보이지"
               },
               {
                 "id": "C",
-                "text": "이야기"
+                "text": "더듬어"
               },
               {
                 "id": "D",
-                "text": "생각"
+                "text": "흐려"
               }
             ],
-            "answerId": "B"
+            "answerId": "A"
           },
           {
             "id": "b3",
             "choices": [
               {
                 "id": "A",
-                "text": "입"
+                "text": "쉽게"
               },
               {
                 "id": "B",
-                "text": "손"
+                "text": "어렵게"
               },
               {
                 "id": "C",
-                "text": "눈"
+                "text": "완전히"
               },
               {
                 "id": "D",
-                "text": "귀"
+                "text": "조금"
               }
             ],
             "answerId": "A"
@@ -107,22 +229,232 @@
             "choices": [
               {
                 "id": "A",
-                "text": "코"
+                "text": "정리되어"
               },
               {
                 "id": "B",
-                "text": "머리"
+                "text": "흩어져"
               },
               {
                 "id": "C",
-                "text": "배"
+                "text": "사라져"
               },
               {
                 "id": "D",
-                "text": "가슴"
+                "text": "기울어"
               }
             ],
-            "answerId": "C"
+            "answerId": "A"
+          },
+          {
+            "id": "b5",
+            "choices": [
+              {
+                "id": "A",
+                "text": "있음"
+              },
+              {
+                "id": "B",
+                "text": "없음"
+              },
+              {
+                "id": "C",
+                "text": "멀어짐"
+              },
+              {
+                "id": "D",
+                "text": "젖음"
+              }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "d3",
+        "type": "MULTI_CHOICE",
+        "questionKind": "HOMONYM_EXAMPLE",
+        "linkWordId": "w3",
+        "exampleText": "단서로 전체 상황을 유추했다.",
+        "prompt": "예문에 맞는 뜻을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "어떤 사실을 바탕으로 다른 사실을 미루어 짐작함"
+          },
+          {
+            "id": "B",
+            "text": "말을 바꾸어 표현함"
+          },
+          {
+            "id": "C",
+            "text": "되묻는 물음"
+          },
+          {
+            "id": "D",
+            "text": "작품을 고쳐 씀"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        },
+        "headwordBlank": true
+      },
+      {
+        "id": "d4",
+        "type": "MULTI_CHOICE",
+        "questionKind": "DICT_MEANING_TO_WORD",
+        "linkWordId": "w4",
+        "definitionText": "기존 작품을 새롭게 고쳐 씀",
+        "prompt": "사전적 의미를 보고 낱말을 고르세요.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "각색"
+          },
+          {
+            "id": "B",
+            "text": "관조"
+          },
+          {
+            "id": "C",
+            "text": "유예"
+          },
+          {
+            "id": "D",
+            "text": "반문"
+          }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        },
+        "headwordBlank": true
+      },
+      {
+        "id": "d5",
+        "type": "FILL_BLANKS",
+        "questionKind": "WORD_TO_DICT_FILL",
+        "linkWordId": "w5",
+        "stem": "반문",
+        "template": "____ ____ ____ ____ ____",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상대의"
+              },
+              {
+                "id": "B",
+                "text": "갑작스런"
+              },
+              {
+                "id": "C",
+                "text": "복잡한"
+              },
+              {
+                "id": "D",
+                "text": "비밀의"
+              }
+            ],
+            "answerId": "A"
+          },
+          {
+            "id": "b2",
+            "choices": [
+              {
+                "id": "A",
+                "text": "말에"
+              },
+              {
+                "id": "B",
+                "text": "행동에"
+              },
+              {
+                "id": "C",
+                "text": "목소리에"
+              },
+              {
+                "id": "D",
+                "text": "시선에"
+              }
+            ],
+            "answerId": "A"
+          },
+          {
+            "id": "b3",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대해"
+              },
+              {
+                "id": "B",
+                "text": "가끔"
+              },
+              {
+                "id": "C",
+                "text": "자주"
+              },
+              {
+                "id": "D",
+                "text": "늦게"
+              }
+            ],
+            "answerId": "A"
+          },
+          {
+            "id": "b4",
+            "choices": [
+              {
+                "id": "A",
+                "text": "되묻는"
+              },
+              {
+                "id": "B",
+                "text": "밀어내는"
+              },
+              {
+                "id": "C",
+                "text": "흐르는"
+              },
+              {
+                "id": "D",
+                "text": "세는"
+              }
+            ],
+            "answerId": "A"
+          },
+          {
+            "id": "b5",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물음"
+              },
+              {
+                "id": "B",
+                "text": "대답"
+              },
+              {
+                "id": "C",
+                "text": "생각"
+              },
+              {
+                "id": "D",
+                "text": "표현"
+              }
+            ],
+            "answerId": "A"
           }
         ],
         "scoring": {
@@ -130,7 +462,6 @@
           "wrongDeltaSec": -20
         }
       }
-    ],
-    "pageStack": true
+    ]
   }
 }

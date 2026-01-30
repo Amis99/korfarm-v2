@@ -415,6 +415,44 @@
   gap: 14px;
 }
 
+.worksheet-dict-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.worksheet-dict-card {
+  border: 2px solid rgba(75, 61, 54, 0.4);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: transparent;
+}
+
+.dict-headword {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 18px;
+  color: #3d2f28;
+}
+
+.dict-pos {
+  font-size: 14px;
+  color: rgba(75, 61, 54, 0.8);
+}
+
+.dict-sense {
+  margin-top: 6px;
+  font-size: 15px;
+  color: #4b3d36;
+}
+
+.dict-example {
+  margin-top: 6px;
+  font-size: 14px;
+  color: rgba(75, 61, 54, 0.8);
+}
+
 .worksheet-item {
   display: grid;
   grid-template-columns: 48px 1fr auto;
@@ -451,6 +489,12 @@
   box-shadow: 0 0 10px rgba(255, 214, 102, 0.45);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+}
+
+.worksheet-item.dict.active .worksheet-item-text {
+  background: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 .worksheet-pages {
