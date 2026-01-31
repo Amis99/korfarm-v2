@@ -12,6 +12,7 @@ function ResultSummary({ summary, onExit }) {
     if (!summary.total) return 0;
     return Math.round((summary.correct / summary.total) * 100);
   }, [summary]);
+  const summaryAccuracy = summary.accuracy ?? accuracy;
   const solved = summary.progressSolved ?? summary.total ?? 0;
   const total = summary.progressTotal ?? summary.total ?? 0;
   const earnedSeed = summary.earnedSeed ?? 0;
@@ -19,7 +20,7 @@ function ResultSummary({ summary, onExit }) {
   const progressPercent = total ? Math.min(100, Math.round((solved / total) * 100)) : 0;
   const correctPercent = total ? Math.min(100, Math.round((summary.correct / total) * 100)) : 0;
   const wrongPercent = total ? Math.min(100, Math.round((summary.wrong / total) * 100)) : 0;
-  const accuracyPercent = Math.min(100, Math.max(0, accuracy));
+  const accuracyPercent = Math.min(100, Math.max(0, summaryAccuracy));
   const timePercent = timeLimit
     ? Math.min(100, Math.round((summary.timeSpent / timeLimit) * 100))
     : 0;
@@ -36,6 +37,8 @@ function ResultSummary({ summary, onExit }) {
     <span key={`seed-${idx}`} className="seed-icon" />
   ));
   const progressLabel = total ? `${solved}/${total}` : "-";
+  const accuracyClass =
+    accuracyPercent === 100 ? "perfect" : accuracyPercent >= 70 ? "pass" : "fail";
 
   return (
     <div className="result-overlay">
@@ -76,7 +79,10 @@ function ResultSummary({ summary, onExit }) {
                 <span className="result-value">{accuracyPercent}%</span>
               </div>
               <div className="result-bar" aria-label={`${accuracyPercent}%`}>
-                <div className="result-bar-fill" style={{ width: `${accuracyPercent}%` }} />
+                <div
+                  className={`result-bar-fill ${accuracyClass}`}
+                  style={{ width: `${accuracyPercent}%` }}
+                />
               </div>
             </div>
             <div className="result-row">

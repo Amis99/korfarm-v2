@@ -146,27 +146,42 @@ function EngineShell({ content, moduleKey, onExit }) {
   const pause = () => setStatus("PAUSED");
   const resume = () => setStatus("RUNNING");
 
-  const finish = (success) => {
+  const finish = (success, options = {}) => {
     setStatus("FINISHED");
     const correct = records.filter((item) => item.correct).length;
     const wrong = records.filter((item) => item.correct === false).length;
     const total = records.length;
     const timeSpent = Math.max(0, timeLimit - timeLeft);
-    const baseReward = content?.seedReward?.count ?? 0;
-    const multiplier = content?.seedReward?.multiplier ?? 1;
-    const earnedSeed = success ? baseReward * multiplier : 0;
+    const accuracy = total ? Math.round((correct / total) * 100) : 0;
+    const finalSeed = typeof options.seed === "number" ? options.seed : seed;
+    let normalizedSuccess = success;
+    let earnedSeed = 0;
+    if (success) {
+      if (accuracy >= 70) {
+        earnedSeed = finalSeed;
+        if (accuracy === 100) {
+          earnedSeed += 1;
+        }
+        normalizedSuccess = true;
+      } else {
+        normalizedSuccess = false;
+      }
+    } else {
+      normalizedSuccess = false;
+    }
     const endedAt = new Date().toISOString();
     setSummary({
-      success,
+      success: normalizedSuccess,
       correct,
       wrong,
       total,
       timeSpent,
-      seed,
+      seed: finalSeed,
       earnedSeed,
       progressSolved: total,
       progressTotal,
       timeLimit,
+      accuracy,
     });
     const logEntry = {
       contentId: content?.contentId,
@@ -177,16 +192,17 @@ function EngineShell({ content, moduleKey, onExit }) {
       endedAt,
       records,
       summary: {
-        success,
+        success: normalizedSuccess,
         correct,
         wrong,
         total,
         timeSpent,
-        seed,
+        seed: finalSeed,
         earnedSeed,
         progressSolved: total,
         progressTotal,
         timeLimit,
+        accuracy,
       },
     };
     try {
@@ -239,7 +255,7 @@ function EngineShell({ content, moduleKey, onExit }) {
     setSeed((prev) => {
       const nextSeed = Math.max(0, prev - 1);
       if (nextSeed === 0) {
-        finish(false);
+        finish(false, { seed: 0 });
         return 0;
       }
       setTimeLeft(timeLimit);
