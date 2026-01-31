@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.http.HttpMethod
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
@@ -32,13 +33,14 @@ class SecurityConfig(
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val config = CorsConfiguration()
-        config.allowedOrigins = listOf(
-            "http://localhost:5173",
-            "http://127.0.0.1:5173"
+        config.allowedOriginPatterns = listOf(
+            "http://localhost:*",
+            "http://127.0.0.1:*"
         )
         config.allowedMethods = listOf("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
         config.allowedHeaders = listOf("*")
         config.allowCredentials = false
+        config.maxAge = 3600
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", config)
         return source
@@ -47,9 +49,10 @@ class SecurityConfig(
     @Bean
     fun filterChain(http: HttpSecurity, jwtService: JwtService): SecurityFilterChain {
         http.csrf { it.disable() }
-        http.cors { }
+        http.cors { it.configurationSource(corsConfigurationSource()) }
         http.sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         http.authorizeHttpRequests {
+            it.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             it.requestMatchers("/v1/health", "/v1/auth/**", "/v1/duel/ws").permitAll()
             it.anyRequest().authenticated()
         }
