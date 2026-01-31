@@ -3,6 +3,9 @@
   --engine-green: #6da475;
   --engine-ink: #2b221d;
   --engine-bg: #fffaf4;
+  --highlight-fill: rgba(120, 210, 140, 0.7);
+  --highlight-fill-soft: rgba(120, 210, 140, 0.6);
+  --highlight-shadow: rgba(96, 178, 120, 0.45);
   --sheet-width: 794px;
   --sheet-height: 1123px;
   --scale: min(1, calc((100vw - 24px) / var(--sheet-width)));
@@ -355,8 +358,8 @@
 .question-modal-mark {
   position: absolute;
   inset: 0;
-  width: 170px;
-  height: 140px;
+  width: 255px;
+  height: 210px;
   margin: auto;
   z-index: 2;
   background-repeat: no-repeat;
@@ -514,13 +517,13 @@
   background: linear-gradient(
     180deg,
     transparent 35%,
-    rgba(255, 233, 140, 0.7) 35%,
-    rgba(255, 233, 140, 0.7) 85%,
+    var(--highlight-fill) 35%,
+    var(--highlight-fill) 85%,
     transparent 85%
   );
   border-radius: 6px;
   padding: 0 4px;
-  box-shadow: 0 0 10px rgba(255, 214, 102, 0.45);
+  box-shadow: 0 0 10px var(--highlight-shadow);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
@@ -600,8 +603,8 @@
   position: absolute;
   left: -6px;
   top: -8px;
-  width: 34px;
-  height: 28px;
+  width: 51px;
+  height: 42px;
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0.65;
@@ -630,13 +633,13 @@
   background: linear-gradient(
     180deg,
     transparent 35%,
-    rgba(255, 233, 140, 0.7) 35%,
-    rgba(255, 233, 140, 0.7) 85%,
+    var(--highlight-fill) 35%,
+    var(--highlight-fill) 85%,
     transparent 85%
   );
   border-radius: 4px;
   padding: 0 2px;
-  box-shadow: 0 0 10px rgba(255, 214, 102, 0.45);
+  box-shadow: 0 0 10px var(--highlight-shadow);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
@@ -651,8 +654,8 @@
 }
 
 .worksheet-blank.active {
-  background: rgba(255, 233, 140, 0.6);
-  box-shadow: 0 0 8px rgba(255, 214, 102, 0.45);
+  background: var(--highlight-fill-soft);
+  box-shadow: 0 0 8px var(--highlight-shadow);
   border-bottom-color: rgba(255, 143, 43, 0.9);
 }
 
@@ -762,8 +765,8 @@
   background: linear-gradient(
     180deg,
     transparent 35%,
-    rgba(255, 233, 140, 0.7) 35%,
-    rgba(255, 233, 140, 0.7) 85%,
+    var(--highlight-fill) 35%,
+    var(--highlight-fill) 85%,
     transparent 85%
   );
   padding: 0 2px;
@@ -771,7 +774,7 @@
   color: inherit;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  box-shadow: 0 0 10px rgba(255, 214, 102, 0.45);
+  box-shadow: 0 0 10px var(--highlight-shadow);
   filter: saturate(1.15);
 }
 
@@ -901,12 +904,12 @@
   background: linear-gradient(
     180deg,
     transparent 35%,
-    rgba(255, 233, 140, 0.7) 35%,
-    rgba(255, 233, 140, 0.7) 85%,
+    var(--highlight-fill) 35%,
+    var(--highlight-fill) 85%,
     transparent 85%
   );
   border-radius: 4px;
-  box-shadow: 0 0 10px rgba(255, 214, 102, 0.45);
+  box-shadow: 0 0 10px var(--highlight-shadow);
 }
 
 .reading-confirm-question {
@@ -1006,12 +1009,12 @@
   background: linear-gradient(
     180deg,
     transparent 35%,
-    rgba(255, 233, 140, 0.68) 35%,
-    rgba(255, 233, 140, 0.68) 85%,
+    var(--highlight-fill) 35%,
+    var(--highlight-fill) 85%,
     transparent 85%
   );
   border-radius: 6px;
-  box-shadow: 0 0 10px rgba(255, 214, 102, 0.45);
+  box-shadow: 0 0 10px var(--highlight-shadow);
   filter: saturate(1.1);
 }
 
@@ -1148,12 +1151,12 @@
   background: linear-gradient(
     180deg,
     transparent 35%,
-    rgba(255, 233, 140, 0.68) 35%,
-    rgba(255, 233, 140, 0.68) 85%,
+    var(--highlight-fill) 35%,
+    var(--highlight-fill) 85%,
     transparent 85%
   );
   border-radius: 6px;
-  box-shadow: 0 0 10px rgba(255, 214, 102, 0.45);
+  box-shadow: 0 0 10px var(--highlight-shadow);
   filter: saturate(1.1);
 }
 
