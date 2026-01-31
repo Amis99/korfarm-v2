@@ -45,14 +45,16 @@ function ResultSummary({ summary, onExit }) {
               <span>소요 시간</span>
               <strong>{formatDuration(summary.timeSpent)}</strong>
             </div>
-            <div>
-              <span>획득 씨앗</span>
+          <div>
+            <span>획득 씨앗</span>
+            <div className="result-seed-row">
               <div className="result-seeds">
                 {seedIcons.length ? seedIcons : <span className="result-seed-empty">-</span>}
               </div>
-              <strong>{earnedSeed}</strong>
+              <strong className="result-seed-count">{earnedSeed}</strong>
             </div>
           </div>
+        </div>
           <div className="result-actions">
             <button type="button" onClick={onExit}>
               닫기
