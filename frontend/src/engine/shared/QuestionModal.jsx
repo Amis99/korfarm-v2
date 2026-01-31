@@ -32,6 +32,8 @@ function QuestionModal({
   const dragState = useRef(null);
   const [position, setPosition] = useState({ x: 28, y: 28 });
   const [isDragging, setIsDragging] = useState(false);
+  const [visibleMark, setVisibleMark] = useState(null);
+  const markTimerRef = useRef(null);
   const choiceSignature = useMemo(() => buildChoiceSignature(choices), [choices]);
   const resolvedShuffleKey = useMemo(() => {
     if (shuffleKey != null) {
@@ -95,6 +97,27 @@ function QuestionModal({
     setShuffledChoices(shuffleArray(choices));
     lastShuffleKeyRef.current = resolvedShuffleKey;
   }, [resolvedShuffleKey, choices]);
+
+  useEffect(() => {
+    if (markTimerRef.current) {
+      clearTimeout(markTimerRef.current);
+    }
+    if (!mark) {
+      setVisibleMark(null);
+      return undefined;
+    }
+    setVisibleMark(mark);
+    markTimerRef.current = setTimeout(() => {
+      setVisibleMark(null);
+      markTimerRef.current = null;
+    }, 1000);
+    return () => {
+      if (markTimerRef.current) {
+        clearTimeout(markTimerRef.current);
+        markTimerRef.current = null;
+      }
+    };
+  }, [mark]);
 
   useEffect(() => {
     if (!isDragging) return undefined;
@@ -167,7 +190,7 @@ function QuestionModal({
         </div>
         <p className="question-modal-prompt">{prompt}</p>
         <div className="question-modal-choices">
-          {mark ? <div className={`question-modal-mark ${mark}`} /> : null}
+          {visibleMark ? <div className={`question-modal-mark ${visibleMark}`} /> : null}
           {shuffledChoices.map((choice) => (
             <button
               type="button"
