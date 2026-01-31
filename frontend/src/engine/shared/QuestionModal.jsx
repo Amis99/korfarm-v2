@@ -1,6 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useEngine } from "../core/EngineContext";
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+const shuffleArray = (items) => {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+};
+
+const buildChoiceSignature = (items) =>
+  items.map((item) => `${item.id}:${item.text}`).join("|");
 
 function QuestionModal({
   title,
@@ -9,12 +22,27 @@ function QuestionModal({
   onSelect,
   onClose,
   footer,
+  mark,
   anchorRect,
+  shuffleKey,
 }) {
+  const engine = useEngine();
+  const status = engine?.status;
   const modalRef = useRef(null);
   const dragState = useRef(null);
   const [position, setPosition] = useState({ x: 28, y: 28 });
   const [isDragging, setIsDragging] = useState(false);
+  const choiceSignature = useMemo(() => buildChoiceSignature(choices), [choices]);
+  const resolvedShuffleKey = useMemo(() => {
+    if (shuffleKey != null) {
+      return `${shuffleKey}|${choiceSignature}`;
+    }
+    return `${title ?? ""}|${prompt ?? ""}|${choiceSignature}`;
+  }, [shuffleKey, title, prompt, choiceSignature]);
+  const lastShuffleKeyRef = useRef(resolvedShuffleKey);
+  const [shuffledChoices, setShuffledChoices] = useState(() =>
+    shuffleArray(choices)
+  );
 
   useEffect(() => {
     const modal = modalRef.current;
@@ -63,6 +91,12 @@ function QuestionModal({
   }, [anchorRect]);
 
   useEffect(() => {
+    if (resolvedShuffleKey === lastShuffleKeyRef.current) return;
+    setShuffledChoices(shuffleArray(choices));
+    lastShuffleKeyRef.current = resolvedShuffleKey;
+  }, [resolvedShuffleKey, choices]);
+
+  useEffect(() => {
     if (!isDragging) return undefined;
     const handleMove = (event) => {
       if (!dragState.current) return;
@@ -104,6 +138,10 @@ function QuestionModal({
     setIsDragging(true);
   };
 
+  if (status === "FINISHED") {
+    return null;
+  }
+
   return (
     <div className="question-modal-overlay">
       <div
@@ -129,14 +167,14 @@ function QuestionModal({
         </div>
         <p className="question-modal-prompt">{prompt}</p>
         <div className="question-modal-choices">
-          {choices.map((choice) => (
+          {mark ? <div className={`question-modal-mark ${mark}`} /> : null}
+          {shuffledChoices.map((choice) => (
             <button
               type="button"
               key={choice.id}
               className="question-choice"
               onClick={() => onSelect(choice.id)}
             >
-              <span className="choice-label">{choice.id}</span>
               <span>{choice.text}</span>
             </button>
           ))}
