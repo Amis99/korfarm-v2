@@ -166,6 +166,7 @@ function EngineShell({ content, moduleKey, onExit }) {
       earnedSeed,
       progressSolved: total,
       progressTotal,
+      timeLimit,
     });
     const logEntry = {
       contentId: content?.contentId,
@@ -185,6 +186,7 @@ function EngineShell({ content, moduleKey, onExit }) {
         earnedSeed,
         progressSolved: total,
         progressTotal,
+        timeLimit,
       },
     };
     try {

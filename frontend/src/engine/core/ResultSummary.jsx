@@ -15,6 +15,14 @@ function ResultSummary({ summary, onExit }) {
   const solved = summary.progressSolved ?? summary.total ?? 0;
   const total = summary.progressTotal ?? summary.total ?? 0;
   const earnedSeed = summary.earnedSeed ?? 0;
+  const timeLimit = summary.timeLimit ?? 0;
+  const progressPercent = total ? Math.min(100, Math.round((solved / total) * 100)) : 0;
+  const correctPercent = total ? Math.min(100, Math.round((summary.correct / total) * 100)) : 0;
+  const wrongPercent = total ? Math.min(100, Math.round((summary.wrong / total) * 100)) : 0;
+  const accuracyPercent = Math.min(100, Math.max(0, accuracy));
+  const timePercent = timeLimit
+    ? Math.min(100, Math.round((summary.timeSpent / timeLimit) * 100))
+    : 0;
   const seedIcons = Array.from({ length: Math.min(earnedSeed, 12) }, (_, idx) => (
     <span key={`seed-${idx}`} className="seed-icon" />
   ));
@@ -25,36 +33,43 @@ function ResultSummary({ summary, onExit }) {
         <div className="result-top" aria-hidden="true" />
         <div className="result-content">
           <div className="result-grid">
-            <div>
+            <div className="result-row">
               <span>진행도</span>
-              <strong>{solved}/{total}</strong>
+              <div className="result-bar" aria-label={`${solved}/${total}`}>
+                <div className="result-bar-fill" style={{ width: `${progressPercent}%` }} />
+              </div>
             </div>
-            <div>
+            <div className="result-row">
               <span>정답 수</span>
-              <strong>{summary.correct}</strong>
+              <div className="result-bar" aria-label={`${summary.correct}`}>
+                <div className="result-bar-fill correct" style={{ width: `${correctPercent}%` }} />
+              </div>
             </div>
-            <div>
+            <div className="result-row">
               <span>오답 수</span>
-              <strong>{summary.wrong}</strong>
+              <div className="result-bar" aria-label={`${summary.wrong}`}>
+                <div className="result-bar-fill wrong" style={{ width: `${wrongPercent}%` }} />
+              </div>
             </div>
-            <div>
+            <div className="result-row">
               <span>정확도</span>
-              <strong>{accuracy}%</strong>
+              <div className="result-bar" aria-label={`${accuracyPercent}%`}>
+                <div className="result-bar-fill" style={{ width: `${accuracyPercent}%` }} />
+              </div>
             </div>
-            <div>
+            <div className="result-row">
               <span>소요 시간</span>
-              <strong>{formatDuration(summary.timeSpent)}</strong>
+              <div className="result-bar" aria-label={formatDuration(summary.timeSpent)}>
+                <div className="result-bar-fill time" style={{ width: `${timePercent}%` }} />
+              </div>
             </div>
-          <div>
-            <span>획득 씨앗</span>
-            <div className="result-seed-row">
-              <div className="result-seeds">
+            <div className="result-row">
+              <span>획득 씨앗</span>
+              <div className="result-seeds" aria-label={`${earnedSeed}`}>
                 {seedIcons.length ? seedIcons : <span className="result-seed-empty">-</span>}
               </div>
-              <strong className="result-seed-count">{earnedSeed}</strong>
             </div>
           </div>
-        </div>
           <div className="result-actions">
             <button type="button" onClick={onExit}>
               닫기
