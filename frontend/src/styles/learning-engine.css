@@ -1192,19 +1192,23 @@
 }
 
 .result-card {
-  background: transparent;
+  background-image: url("/%ED%95%99%EC%8A%B5%20%EC%A2%85%EB%A3%8C%20%EB%AA%A8%EB%8B%AC.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 0;
-  padding: 20px;
   width: min(520px, 90vw);
+  aspect-ratio: 1 / 1;
   display: grid;
-  gap: 16px;
+  grid-template-rows: 1fr 1fr;
   border: 2px solid rgba(75, 61, 54, 0.35);
+  box-shadow: none;
 }
 
 .result-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
+  gap: 10px 14px;
 }
 
 .result-grid span {
@@ -1223,4 +1227,35 @@
   padding: 10px 16px;
   border-radius: 12px;
   cursor: pointer;
+}
+
+.result-top {
+  width: 100%;
+  height: 100%;
+}
+
+.result-content {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 18px 22px 20px;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.result-seeds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.result-seeds .seed-icon {
+  width: 18px;
+  height: 12px;
+}
+
+.result-seed-empty {
+  color: #9a8f85;
+  font-size: 12px;
 }

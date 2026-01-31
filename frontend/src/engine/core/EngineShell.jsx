@@ -75,6 +75,7 @@ function EngineShell({ content, moduleKey, onExit }) {
     const mapping = {
       NONFICTION_PHILOSOPHY: "인문",
       NONFICTION_SOCIAL: "사회",
+      LITERATURE: "Literature",
       SCIENCE: "과학/기술",
       CHOICE_JUDGEMENT: "선택지 판별",
       CONCEPT: "국어 개념",
@@ -92,9 +93,14 @@ function EngineShell({ content, moduleKey, onExit }) {
 
   const getProgressTotal = () => {
     const payload = content?.payload || {};
+    const readingTrainingTotal =
+      (payload.intensive?.timeline?.length ?? payload.timeline?.length ?? 0) +
+      (payload.recall ? 1 : 0) +
+      (payload.confirm?.questions?.length ?? 0);
     const guess = {
       worksheet_quiz: payload.questions?.length,
       reading_intensive: payload.timeline?.length,
+      reading_training: readingTrainingTotal,
       recall_cards: payload.cards?.length,
       confirm_click: payload.steps?.length,
       choice_judgement: payload.questions?.length,
@@ -158,6 +164,8 @@ function EngineShell({ content, moduleKey, onExit }) {
       timeSpent,
       seed,
       earnedSeed,
+      progressSolved: total,
+      progressTotal,
     });
     const logEntry = {
       contentId: content?.contentId,
@@ -167,7 +175,17 @@ function EngineShell({ content, moduleKey, onExit }) {
       startedAt,
       endedAt,
       records,
-      summary: { success, correct, wrong, total, timeSpent, seed, earnedSeed },
+      summary: {
+        success,
+        correct,
+        wrong,
+        total,
+        timeSpent,
+        seed,
+        earnedSeed,
+        progressSolved: total,
+        progressTotal,
+      },
     };
     try {
       const key = "korfarm_learning_logs";
