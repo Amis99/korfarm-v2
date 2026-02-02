@@ -40,9 +40,14 @@ function ResultSummary({ summary, onExit }) {
   const accuracyClass =
     accuracyPercent === 100 ? "perfect" : accuracyPercent >= 70 ? "pass" : "fail";
 
+  const resultClass = earnedSeed > 0 ? "result-card earned" : "result-card empty";
+
   return (
     <div className="result-overlay">
-      <div className="result-card">
+      <div className={resultClass}>
+        <button type="button" className="result-close" onClick={onExit}>
+          닫기
+        </button>
         <div className="result-top" aria-hidden="true" />
         <div className="result-content">
           <div className="result-grid">
@@ -103,11 +108,6 @@ function ResultSummary({ summary, onExit }) {
                 {seedIcons.length ? seedIcons : <span className="result-seed-empty">-</span>}
               </div>
             </div>
-          </div>
-          <div className="result-actions">
-            <button type="button" onClick={onExit}>
-              닫기
-            </button>
           </div>
         </div>
       </div>

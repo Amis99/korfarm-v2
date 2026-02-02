@@ -1306,7 +1306,6 @@
 }
 
 .result-card {
-  background-image: url("/%ED%95%99%EC%8A%B5%20%EC%A2%85%EB%A3%8C%20%EB%AA%A8%EB%8B%AC.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1317,6 +1316,29 @@
   grid-template-rows: 1fr 1fr;
   border: none;
   box-shadow: none;
+  position: relative;
+}
+
+.result-card.earned {
+  background-image: url("/%ED%95%99%EC%8A%B5%20%ED%86%B5%EA%B3%BC%20%EB%AA%A8%EB%8B%AC.png");
+}
+
+.result-card.empty {
+  background-image: url("/%ED%95%99%EC%8A%B5%20%EC%A2%85%EB%A3%8C%20%EB%AA%A8%EB%8B%AC.png");
+}
+
+.result-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: 2px solid #1f1b17;
+  background: #fff;
+  color: #1f1b17;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .result-grid {
