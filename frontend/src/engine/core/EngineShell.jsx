@@ -10,7 +10,7 @@ const getTimeLimit = (content) => content?.timeLimitSec ?? 180;
 
 function EngineShell({ content, moduleKey, onExit }) {
   const timeLimit = getTimeLimit(content);
-  const assetBase = import.meta.env.DEV ? "/" : import.meta.env.BASE_URL || "/";
+  const assetBase = import.meta.env.BASE_URL || "/";
   const resolveAssetUrl = (path) => {
     if (!path) return "";
     if (/^(https?:|data:|blob:)/.test(path)) return path;

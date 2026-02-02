@@ -21,16 +21,26 @@ const getContainerMetrics = (modal) => {
   const modalWidth = modal.offsetWidth || modalRect.width;
   const modalHeight = modal.offsetHeight || modalRect.height;
   let scale = 1;
-  const scaleHost = modal?.closest(".engine-scale");
-  if (scaleHost) {
-    const computed = window.getComputedStyle(scaleHost);
-    const zoom = Number.parseFloat(computed.zoom);
-    if (Number.isFinite(zoom) && zoom > 0 && zoom !== 1) {
-      scale = zoom;
-    } else {
-      const transformScale = parseTransformScale(computed.transform);
-      if (transformScale) {
-        scale = transformScale;
+  const shell = modal?.closest(".engine-shell");
+  if (shell) {
+    const rawScale = window.getComputedStyle(shell).getPropertyValue("--scale").trim();
+    const parsedScale = Number.parseFloat(rawScale);
+    if (Number.isFinite(parsedScale) && parsedScale > 0) {
+      scale = parsedScale;
+    }
+  }
+  if (!Number.isFinite(scale) || scale <= 0 || scale === 1) {
+    const scaleHost = modal?.closest(".engine-scale");
+    if (scaleHost) {
+      const computed = window.getComputedStyle(scaleHost);
+      const zoom = Number.parseFloat(computed.zoom);
+      if (Number.isFinite(zoom) && zoom > 0 && zoom !== 1) {
+        scale = zoom;
+      } else {
+        const transformScale = parseTransformScale(computed.transform);
+        if (transformScale) {
+          scale = transformScale;
+        }
       }
     }
   }
