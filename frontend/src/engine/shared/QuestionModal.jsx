@@ -21,23 +21,23 @@ const getContainerMetrics = (modal) => {
   const modalWidth = modal.offsetWidth || modalRect.width;
   const modalHeight = modal.offsetHeight || modalRect.height;
   let scale = 1;
-  const modalScale = modalWidth ? modalRect.width / modalWidth : 1;
-  if (Number.isFinite(modalScale) && modalScale > 0) {
-    scale = modalScale;
-  }
-  if (!Number.isFinite(scale) || scale <= 0) {
-    const scaleHost = modal?.closest(".engine-scale");
-    if (scaleHost) {
-      const computed = window.getComputedStyle(scaleHost);
-      const zoom = Number.parseFloat(computed.zoom);
-      if (Number.isFinite(zoom) && zoom > 0) {
-        scale = zoom;
-      } else {
-        const transformScale = parseTransformScale(computed.transform);
-        if (transformScale) {
-          scale = transformScale;
-        }
+  const scaleHost = modal?.closest(".engine-scale");
+  if (scaleHost) {
+    const computed = window.getComputedStyle(scaleHost);
+    const zoom = Number.parseFloat(computed.zoom);
+    if (Number.isFinite(zoom) && zoom > 0 && Math.abs(zoom - 1) > 0.001) {
+      scale = zoom;
+    } else {
+      const transformScale = parseTransformScale(computed.transform);
+      if (transformScale && Math.abs(transformScale - 1) > 0.001) {
+        scale = transformScale;
       }
+    }
+  }
+  if (Math.abs(scale - 1) < 0.001) {
+    const modalScale = modalWidth ? modalRect.width / modalWidth : 1;
+    if (Number.isFinite(modalScale) && modalScale > 0 && Math.abs(modalScale - 1) > 0.001) {
+      scale = modalScale;
     }
   }
   if (!Number.isFinite(scale) || scale <= 0 || Math.abs(scale - 1) < 0.001) {
