@@ -703,6 +703,22 @@
   -webkit-box-decoration-break: clone;
 }
 
+.highlight,
+mark.highlight {
+  background: var(--highlight-gradient);
+  border-radius: 4px;
+  padding: 0 2px;
+  box-shadow: 0 0 10px var(--highlight-shadow);
+  color: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+mark.highlight {
+  display: inline-block;
+  font-style: inherit;
+}
+
 .worksheet-blank {
   display: inline-block;
   padding: 0 6px;
@@ -1103,6 +1119,12 @@
 
 .token-chip.active {
   background: rgba(109, 164, 117, 0.35);
+}
+
+.token-chip.highlight {
+  background: var(--highlight-gradient);
+  box-shadow: 0 0 10px var(--highlight-shadow);
+  filter: saturate(1.1);
 }
 
 .choice-module .choice-body {
