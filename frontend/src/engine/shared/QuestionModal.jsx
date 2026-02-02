@@ -22,19 +22,24 @@ const getContainerMetrics = (modal) => {
   const modalHeight = modal.offsetHeight || modalRect.height;
   let scale = 1;
   const shell = modal?.closest(".engine-shell");
-  if (shell) {
-    const rawScale = window.getComputedStyle(shell).getPropertyValue("--scale").trim();
-    const parsedScale = Number.parseFloat(rawScale);
-    if (Number.isFinite(parsedScale) && parsedScale > 0) {
-      scale = parsedScale;
+  const stage = modal?.closest(".engine-stage");
+  if (shell && stage) {
+    const sheetWidthRaw = window.getComputedStyle(shell).getPropertyValue("--sheet-width").trim();
+    const sheetWidth = Number.parseFloat(sheetWidthRaw);
+    if (Number.isFinite(sheetWidth) && sheetWidth > 0) {
+      const stageRect = stage.getBoundingClientRect();
+      const stageScale = stageRect.width / sheetWidth;
+      if (Number.isFinite(stageScale) && stageScale > 0) {
+        scale = stageScale;
+      }
     }
   }
-  if (!Number.isFinite(scale) || scale <= 0 || scale === 1) {
+  if (!Number.isFinite(scale) || scale <= 0) {
     const scaleHost = modal?.closest(".engine-scale");
     if (scaleHost) {
       const computed = window.getComputedStyle(scaleHost);
       const zoom = Number.parseFloat(computed.zoom);
-      if (Number.isFinite(zoom) && zoom > 0 && zoom !== 1) {
+      if (Number.isFinite(zoom) && zoom > 0) {
         scale = zoom;
       } else {
         const transformScale = parseTransformScale(computed.transform);

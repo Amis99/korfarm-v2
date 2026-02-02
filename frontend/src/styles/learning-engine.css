@@ -152,7 +152,7 @@
   position: relative;
   overflow: hidden;
   background-color: var(--engine-bg);
-  background-image: var(--sheet-bg);
+  background-image: url(var(--sheet-bg));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -163,7 +163,8 @@
   min-height: var(--sheet-height);
   padding: 0;
   border: none;
-  background-image: none;
+  background-image: url(var(--sheet-bg));
+  background-color: var(--engine-bg);
   overflow: visible;
 }
 
@@ -311,7 +312,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url("/%EC%A7%88%EB%AC%B8%20%EB%AA%A8%EB%8B%AC.png");
+  background-image: url(var(--question-modal-bg));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -395,11 +396,11 @@
 }
 
 .question-modal-mark.correct {
-  background-image: url("/%EC%A0%95%EB%8B%B5%20%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8.png");
+  background-image: url(var(--mark-correct-bg));
 }
 
 .question-modal-mark.wrong {
-  background-image: url("/%EC%98%A4%EB%8B%B5%20%EA%BA%BE%EC%9D%80%EC%84%A0.png");
+  background-image: url(var(--mark-wrong-bg));
 }
 
 .question-choice {
@@ -606,7 +607,7 @@
   width: var(--sheet-width);
   height: var(--sheet-height);
   background-color: var(--engine-bg);
-  background-image: var(--sheet-bg);
+  background-image: url(var(--sheet-bg));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1320,15 +1321,15 @@
 }
 
 .result-card.earned {
-  background-image: url("/%ED%95%99%EC%8A%B5%20%ED%86%B5%EA%B3%BC%20%EB%AA%A8%EB%8B%AC.png");
+  background-image: url(var(--result-pass-bg));
 }
 
 .result-card.perfect {
-  background-image: url("/%ED%95%99%EC%8A%B5%20%EC%99%84%EB%A3%8C%20%EC%84%B1%EA%B3%B5%20%EB%AA%A8%EB%8B%AC.png");
+  background-image: url(var(--result-perfect-bg));
 }
 
 .result-card.empty {
-  background-image: url("/%ED%95%99%EC%8A%B5%20%EC%A2%85%EB%A3%8C%20%EB%AA%A8%EB%8B%AC.png");
+  background-image: url(var(--result-fail-bg));
 }
 
 .result-close {
