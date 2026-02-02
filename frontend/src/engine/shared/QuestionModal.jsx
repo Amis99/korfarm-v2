@@ -5,11 +5,39 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
 const parseTransformScale = (transform) => {
   if (!transform || transform === "none") return null;
-  const match = transform.match(/matrix\(([^)]+)\)/);
-  if (!match) return null;
-  const values = match[1].split(",").map((value) => Number.parseFloat(value.trim()));
+  const matrix3d = transform.match(/matrix3d\(([^)]+)\)/);
+  if (matrix3d) {
+    const values = matrix3d[1].split(",").map((value) => Number.parseFloat(value.trim()));
+    const scale = values[0];
+    return Number.isFinite(scale) && scale > 0 ? scale : null;
+  }
+  const matrix = transform.match(/matrix\(([^)]+)\)/);
+  if (!matrix) return null;
+  const values = matrix[1].split(",").map((value) => Number.parseFloat(value.trim()));
   const scale = values[0];
   return Number.isFinite(scale) && scale > 0 ? scale : null;
+};
+
+const getScaleFromHost = (host) => {
+  if (!host) return 1;
+  const computed = window.getComputedStyle(host);
+  const zoom = Number.parseFloat(computed.zoom);
+  if (Number.isFinite(zoom) && zoom > 0 && Math.abs(zoom - 1) > 0.001) {
+    return zoom;
+  }
+  const transformScale = parseTransformScale(computed.transform);
+  if (transformScale && Math.abs(transformScale - 1) > 0.001) {
+    return transformScale;
+  }
+  const rect = host.getBoundingClientRect();
+  const width = host.offsetWidth || Number.parseFloat(computed.width);
+  if (Number.isFinite(width) && width > 0) {
+    const ratio = rect.width / width;
+    if (Number.isFinite(ratio) && ratio > 0) {
+      return ratio;
+    }
+  }
+  return 1;
 };
 
 const getContainerMetrics = (modal) => {
@@ -21,28 +49,10 @@ const getContainerMetrics = (modal) => {
   const modalWidth = modal.offsetWidth || modalRect.width;
   const modalHeight = modal.offsetHeight || modalRect.height;
   let scale = 1;
-  const shell = modal?.closest(".engine-shell");
-  if (shell) {
-    const rawScale = window.getComputedStyle(shell).getPropertyValue("--scale").trim();
-    const parsedScale = Number.parseFloat(rawScale);
-    if (Number.isFinite(parsedScale) && parsedScale > 0) {
-      scale = parsedScale;
-    }
-  }
-  if (Math.abs(scale - 1) < 0.001) {
-    const scaleHost = modal?.closest(".engine-scale");
-    if (scaleHost) {
-      const computed = window.getComputedStyle(scaleHost);
-      const zoom = Number.parseFloat(computed.zoom);
-      if (Number.isFinite(zoom) && zoom > 0 && Math.abs(zoom - 1) > 0.001) {
-        scale = zoom;
-      } else {
-        const transformScale = parseTransformScale(computed.transform);
-        if (transformScale && Math.abs(transformScale - 1) > 0.001) {
-          scale = transformScale;
-        }
-      }
-    }
+  const scaleHost = modal?.closest(".engine-scale") || modal;
+  const hostScale = getScaleFromHost(scaleHost);
+  if (Number.isFinite(hostScale) && hostScale > 0) {
+    scale = hostScale;
   }
   if (Math.abs(scale - 1) < 0.001) {
     const modalScale = modalWidth ? modalRect.width / modalWidth : 1;

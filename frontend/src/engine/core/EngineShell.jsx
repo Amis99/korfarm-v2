@@ -278,20 +278,6 @@ function EngineShell({ content, moduleKey, onExit }) {
   }, [content?.title, content?.targetLevel, content?.subArea, seed]);
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (!root) return undefined;
-    const entries = Object.entries(shellStyle);
-    entries.forEach(([key, value]) => {
-      root.style.setProperty(key, value);
-    });
-    return () => {
-      entries.forEach(([key]) => {
-        root.style.removeProperty(key);
-      });
-    };
-  }, [shellStyle]);
-
-  useEffect(() => {
     if (status !== "RUNNING") return;
     if (timeLeft > 0) return;
     setSeed((prev) => {
@@ -343,6 +329,20 @@ function EngineShell({ content, moduleKey, onExit }) {
     "--result-perfect-bg": `url("${resolveAssetUrl("학습 완료 성공 모달.png")}")`,
     "--result-fail-bg": `url("${resolveAssetUrl("학습 종료 모달.png")}")`,
   };
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (!root) return undefined;
+    const entries = Object.entries(shellStyle);
+    entries.forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+    return () => {
+      entries.forEach(([key]) => {
+        root.style.removeProperty(key);
+      });
+    };
+  }, [shellStyle]);
 
   return (
     <EngineContext.Provider value={contextValue}>
