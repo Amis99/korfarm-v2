@@ -6,6 +6,13 @@
   --highlight-fill: rgba(120, 210, 140, 0.7);
   --highlight-fill-soft: rgba(120, 210, 140, 0.6);
   --highlight-shadow: rgba(96, 178, 120, 0.45);
+  --highlight-gradient: linear-gradient(
+    180deg,
+    var(--highlight-fill-soft) 0%,
+    var(--highlight-fill) 35%,
+    var(--highlight-fill) 75%,
+    var(--highlight-fill-soft) 100%
+  );
   --sheet-width: 794px;
   --sheet-height: 1123px;
   --scale: min(1, calc((100vw - 24px) / var(--sheet-width)));
@@ -578,13 +585,7 @@
 }
 
 .worksheet-item.active .worksheet-item-text {
-  background: linear-gradient(
-    180deg,
-    transparent 35%,
-    var(--highlight-fill) 35%,
-    var(--highlight-fill) 85%,
-    transparent 85%
-  );
+  background: var(--highlight-gradient);
   border-radius: 6px;
   padding: 0 4px;
   box-shadow: 0 0 10px var(--highlight-shadow);
@@ -694,13 +695,7 @@
 .worksheet-highlight {
   position: relative;
   display: inline-block;
-  background: linear-gradient(
-    180deg,
-    transparent 35%,
-    var(--highlight-fill) 35%,
-    var(--highlight-fill) 85%,
-    transparent 85%
-  );
+  background: var(--highlight-gradient);
   border-radius: 4px;
   padding: 0 2px;
   box-shadow: 0 0 10px var(--highlight-shadow);
@@ -827,13 +822,7 @@
 }
 
 .reading-passage .worksheet-highlight {
-  background: linear-gradient(
-    180deg,
-    transparent 35%,
-    var(--highlight-fill) 35%,
-    var(--highlight-fill) 85%,
-    transparent 85%
-  );
+  background: var(--highlight-gradient);
   padding: 0 2px;
   border-radius: 4px;
   color: inherit;
@@ -1002,13 +991,7 @@
 
 .confirm-char.worksheet-highlight {
   padding: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 35%,
-    var(--highlight-fill) 35%,
-    var(--highlight-fill) 85%,
-    transparent 85%
-  );
+  background: var(--highlight-gradient);
   border-radius: 4px;
   box-shadow: 0 0 10px var(--highlight-shadow);
 }
@@ -1112,13 +1095,7 @@
 }
 
 .token-chip.worksheet-highlight {
-  background: linear-gradient(
-    180deg,
-    transparent 35%,
-    var(--highlight-fill) 35%,
-    var(--highlight-fill) 85%,
-    transparent 85%
-  );
+  background: var(--highlight-gradient);
   border-radius: 6px;
   box-shadow: 0 0 10px var(--highlight-shadow);
   filter: saturate(1.1);
@@ -1254,13 +1231,7 @@
 }
 
 .token-chip.worksheet-highlight {
-  background: linear-gradient(
-    180deg,
-    transparent 35%,
-    var(--highlight-fill) 35%,
-    var(--highlight-fill) 85%,
-    transparent 85%
-  );
+  background: var(--highlight-gradient);
   border-radius: 6px;
   box-shadow: 0 0 10px var(--highlight-shadow);
   filter: saturate(1.1);
