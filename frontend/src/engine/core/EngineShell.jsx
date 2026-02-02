@@ -406,9 +406,8 @@ function EngineShell({ content, moduleKey, onExit }) {
             </div>
           </div>
         </div>
+            {summary ? <ResultSummary summary={summary} onExit={onExit} /> : null}
       </div>
-
-      {summary ? <ResultSummary summary={summary} onExit={onExit} /> : null}
     </EngineContext.Provider>
   );
 }
