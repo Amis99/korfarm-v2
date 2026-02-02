@@ -349,6 +349,32 @@
   font-size: 13px;
 }
 
+.question-modal-body {
+  display: grid;
+  gap: 12px;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.question-modal-body.switching {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.question-modal-body.enter {
+  animation: question-body-in 0.24s ease;
+}
+
+@keyframes question-body-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .question-modal-choices {
   display: grid;
   gap: 10px;
@@ -389,6 +415,43 @@
   font-size: 13px;
   position: relative;
   z-index: 1;
+  transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.question-choice.flash-correct {
+  border-color: rgba(72, 156, 98, 0.9);
+  background: rgba(196, 242, 210, 0.95);
+  animation: choice-flash-correct 0.48s ease;
+}
+
+.question-choice.flash-wrong {
+  border-color: rgba(213, 78, 64, 0.9);
+  background: rgba(255, 210, 205, 0.95);
+  animation: choice-flash-wrong 0.48s ease;
+}
+
+@keyframes choice-flash-correct {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes choice-flash-wrong {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .choice-label {
@@ -811,6 +874,21 @@
   gap: 10px;
 }
 
+.reading-recall-slot {
+  min-height: 52px;
+  border-radius: 12px;
+  border: 2px dashed rgba(75, 61, 54, 0.25);
+  padding: 6px;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+
+.reading-recall-slot.drop-target {
+  border-color: rgba(165, 109, 72, 0.7);
+  background: rgba(165, 109, 72, 0.08);
+}
+
 .reading-recall-pool {
   background: transparent;
   border-radius: 16px;
@@ -828,13 +906,29 @@
   border: 2px solid rgba(75, 61, 54, 0.35);
   cursor: grab;
   box-shadow: none;
+  touch-action: none;
+  width: 100%;
 }
 
 .reading-recall-placeholder {
   min-height: 44px;
-  border: 2px dashed rgba(75, 61, 54, 0.45);
-  border-radius: 12px;
+  border-radius: 10px;
+  background: rgba(75, 61, 54, 0.08);
+  opacity: 0.7;
+  flex: 1;
+}
+
+.reading-recall-slot.drop-target .reading-recall-placeholder {
   animation: recall-insert-pulse 0.9s ease-in-out infinite;
+}
+
+.reading-recall-result-icon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
 }
 
 @keyframes recall-insert-pulse {
@@ -855,6 +949,10 @@
 .reading-recall-card.correct {
   border-color: rgba(109, 164, 117, 0.85);
   background: transparent;
+}
+
+.reading-recall-card.dragging {
+  opacity: 0.55;
 }
 
 .reading-recall-footer {
@@ -900,6 +998,7 @@
   cursor: pointer;
 }
 
+
 .confirm-char.worksheet-highlight {
   padding: 0;
   background: linear-gradient(
@@ -920,6 +1019,11 @@
   border-radius: 16px;
   padding: 12px 16px;
   border: 2px solid rgba(75, 61, 54, 0.35);
+}
+
+.confirm-progress {
+  font-size: 12px;
+  color: rgba(75, 61, 54, 0.8);
 }
 
 .recall-dropzone {
