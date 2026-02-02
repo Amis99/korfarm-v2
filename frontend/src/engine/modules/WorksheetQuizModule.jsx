@@ -90,6 +90,9 @@ function WorksheetQuizModule({ content }) {
   const [anchorRect, setAnchorRect] = useState(null);
   const measureRef = useRef(null);
   const itemRefs = useRef({});
+  const advanceTimerRef = useRef(null);
+  const resultTimerRef = useRef(null);
+  const feedbackDelay = 420;
 
   const columnHeight = 1123 - 48;
   const itemGap = 14;
@@ -122,8 +125,8 @@ function WorksheetQuizModule({ content }) {
       "";
     const headwordBlank =
       question.headwordBlank ??
-      question.questionKind === "DICT_MEANING_TO_WORD" ||
-      question.questionKind === "HOMONYM_EXAMPLE";
+      (question.questionKind === "DICT_MEANING_TO_WORD" ||
+        question.questionKind === "HOMONYM_EXAMPLE");
     const headwordNode = headwordBlank ? (
       <span className={`worksheet-blank ${isActive && !forMeasure ? "active" : ""}`}>____</span>
     ) : (
@@ -235,6 +238,24 @@ function WorksheetQuizModule({ content }) {
     setLastResult(null);
   };
 
+  const queueResultReset = () => {
+    if (resultTimerRef.current) {
+      clearTimeout(resultTimerRef.current);
+    }
+    resultTimerRef.current = setTimeout(() => {
+      setLastResult(null);
+    }, feedbackDelay);
+  };
+
+  const queueNext = (nextAction) => {
+    if (advanceTimerRef.current) {
+      clearTimeout(advanceTimerRef.current);
+    }
+    advanceTimerRef.current = setTimeout(() => {
+      nextAction();
+    }, feedbackDelay);
+  };
+
   const handleChoice = (choiceId) => {
     if (!currentQuestion) return;
     const scoring = getScoring(currentQuestion);
@@ -242,6 +263,7 @@ function WorksheetQuizModule({ content }) {
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
     recordAnswer({ id: currentQuestion.id, correct: isCorrect });
     setLastResult(isCorrect ? "correct" : "wrong");
+    queueResultReset();
     setStatusMap((prev) => ({
       ...prev,
       [currentQuestion.id]: isCorrect ? "correct" : "wrong",
@@ -249,7 +271,7 @@ function WorksheetQuizModule({ content }) {
     if (!isCorrect && currentQuestion.requireCorrect) {
       return;
     }
-    handleNext();
+    queueNext(handleNext);
   };
 
   const handleBlankChoice = (choiceId) => {
@@ -257,17 +279,17 @@ function WorksheetQuizModule({ content }) {
     const blank = blanks[blankIndex];
     const scoring = getScoring(currentQuestion);
     const isCorrect = choiceId === blank.answerId;
+    const correctChoice = blank.choices?.find((choice) => choice.id === blank.answerId);
+    const correctText = correctChoice?.text || "";
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
     recordAnswer({ id: `${currentQuestion.id}-${blank.id}`, correct: isCorrect });
-    setBlankAnswers((prev) => ({ ...prev, [blank.id]: blank.choices.find((c) => c.id === choiceId)?.text || "" }));
+    setBlankAnswers((prev) => ({ ...prev, [blank.id]: correctText }));
     setBlankResultMap((prev) => ({
       ...prev,
       [blank.id]: isCorrect,
     }));
     setLastResult(isCorrect ? "correct" : "wrong");
-    if (!isCorrect && currentQuestion.requireCorrect) {
-      return;
-    }
+    queueResultReset();
     if (blankIndex >= blanks.length - 1) {
       const resultMap = {
         ...blankResultMap,
@@ -278,9 +300,9 @@ function WorksheetQuizModule({ content }) {
         ...prev,
         [currentQuestion.id]: allCorrect ? "correct" : "wrong",
       }));
-      handleNext();
+      queueNext(handleNext);
     } else {
-      setBlankIndex((prev) => prev + 1);
+      queueNext(() => setBlankIndex((prev) => prev + 1));
     }
   };
 
@@ -316,6 +338,18 @@ function WorksheetQuizModule({ content }) {
       align,
     });
   }, [currentIndex, pages.length]);
+
+  useEffect(
+    () => () => {
+      if (advanceTimerRef.current) {
+        clearTimeout(advanceTimerRef.current);
+      }
+      if (resultTimerRef.current) {
+        clearTimeout(resultTimerRef.current);
+      }
+    },
+    []
+  );
 
   return (
     <div className="worksheet-module">
@@ -508,6 +542,8 @@ function WorksheetQuizModule({ content }) {
               choices={currentQuestion.choices || []}
               onSelect={handleChoice}
               anchorRect={anchorRect}
+              mark={lastResult}
+              shuffleKey={currentQuestion.id}
             />
           ) : null}
 
@@ -518,6 +554,8 @@ function WorksheetQuizModule({ content }) {
               choices={blanks[blankIndex]?.choices || []}
               onSelect={handleBlankChoice}
               anchorRect={anchorRect}
+              mark={lastResult}
+              shuffleKey={`${currentQuestion?.id || "blank"}-${blankIndex}`}
             />
           ) : null}
         </>
