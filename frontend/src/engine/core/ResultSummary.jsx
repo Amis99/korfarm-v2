@@ -40,7 +40,12 @@ function ResultSummary({ summary, onExit }) {
   const accuracyClass =
     accuracyPercent === 100 ? "perfect" : accuracyPercent >= 70 ? "pass" : "fail";
 
-  const resultClass = earnedSeed > 0 ? "result-card earned" : "result-card empty";
+  const isPerfect = earnedSeed > 0 && accuracyPercent === 100;
+  const resultClass = isPerfect
+    ? "result-card perfect"
+    : earnedSeed > 0
+      ? "result-card earned"
+      : "result-card empty";
 
   return (
     <div className="result-overlay">
