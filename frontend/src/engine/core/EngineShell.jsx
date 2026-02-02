@@ -10,7 +10,7 @@ const getTimeLimit = (content) => content?.timeLimitSec ?? 180;
 
 function EngineShell({ content, moduleKey, onExit }) {
   const timeLimit = getTimeLimit(content);
-  const assetBase = import.meta.env.BASE_URL || "/";
+  const assetBase = import.meta.env.DEV ? "/" : import.meta.env.BASE_URL || "/";
   const resolveAssetUrl = (path) => {
     if (!path) return "";
     if (/^(https?:|data:|blob:)/.test(path)) return path;
@@ -339,7 +339,7 @@ function EngineShell({ content, moduleKey, onExit }) {
               <header ref={headerRef} className="engine-header engine-scale">
                 <div className="engine-header-row">
                   <Link className="engine-logo" to="/">
-                    <img src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt="국어농장" />
+                    <img src={resolveAssetUrl("korfarm-logo.png")} alt="국어농장" />
                   </Link>
                   <div className="engine-header-item engine-title">
                     <strong>{content?.title || "학습"}</strong>
