@@ -10,6 +10,13 @@ const getTimeLimit = (content) => content?.timeLimitSec ?? 180;
 
 function EngineShell({ content, moduleKey, onExit }) {
   const timeLimit = getTimeLimit(content);
+  const assetBase = import.meta.env.BASE_URL || "/";
+  const resolveAssetUrl = (path) => {
+    if (!path) return "";
+    if (/^(https?:|data:|blob:)/.test(path)) return path;
+    const normalized = path.startsWith("/") ? path.slice(1) : path;
+    return encodeURI(`${assetBase}${normalized}`);
+  };
   const [status, setStatus] = useState("READY");
   const [timeLeft, setTimeLeft] = useState(timeLimit);
   const [timePulse, setTimePulse] = useState(null);
@@ -311,16 +318,28 @@ function EngineShell({ content, moduleKey, onExit }) {
     );
   }
 
+  const sheetBackground = content?.assets?.sheetBackground || "learning-paper.jpg";
+  const shellStyle = {
+    "--header-height": `${headerHeight}px`,
+    "--sheet-bg": `url(${resolveAssetUrl(sheetBackground)})`,
+    "--question-modal-bg": `url(${resolveAssetUrl("질문 모달.png")})`,
+    "--mark-correct-bg": `url(${resolveAssetUrl("정답 동그라미.png")})`,
+    "--mark-wrong-bg": `url(${resolveAssetUrl("오답 꺾은선.png")})`,
+    "--result-pass-bg": `url(${resolveAssetUrl("학습 통과 모달.png")})`,
+    "--result-perfect-bg": `url(${resolveAssetUrl("학습 완료 성공 모달.png")})`,
+    "--result-fail-bg": `url(${resolveAssetUrl("학습 종료 모달.png")})`,
+  };
+
   return (
     <EngineContext.Provider value={contextValue}>
-      <div className="engine-shell" style={{ "--header-height": `${headerHeight}px` }}>
+      <div className="engine-shell" style={shellStyle}>
         <div className="engine-viewport">
           <div className="engine-stage">
             <div className="engine-header-wrap" style={{ "--header-height": `${headerHeight}px` }}>
               <header ref={headerRef} className="engine-header engine-scale">
                 <div className="engine-header-row">
                   <Link className="engine-logo" to="/">
-                    <img src="/korfarm-logo.png" alt="국어농장" />
+                    <img src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt="국어농장" />
                   </Link>
                   <div className="engine-header-item engine-title">
                     <strong>{content?.title || "학습"}</strong>
@@ -359,11 +378,6 @@ function EngineShell({ content, moduleKey, onExit }) {
                 className={`engine-body ${
                   content?.payload?.pageStack && moduleKey === "worksheet_quiz" ? "stack" : ""
                 }`}
-                style={{
-                  "--sheet-bg": content?.assets?.sheetBackground
-                    ? `url(${content.assets.sheetBackground})`
-                    : "url(/learning-paper.jpg)",
-                }}
               >
                 <Module content={content} />
               </main>

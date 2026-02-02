@@ -147,6 +147,13 @@ const isIndexInRanges = (ranges, paragraphId, index) =>
 
 function ReadingTrainingModule({ content }) {
   const { adjustTime, finish, recordAnswer, seed, setSeed, start, status } = useEngine();
+  const assetBase = import.meta.env.BASE_URL || "/";
+  const resolveAssetUrl = (path) => {
+    if (!path) return "";
+    if (/^(https?:|data:|blob:)/.test(path)) return path;
+    const normalized = path.startsWith("/") ? path.slice(1) : path;
+    return encodeURI(`${assetBase}${normalized}`);
+  };
   const payload = content?.payload || {};
   const passage = payload.passage || {};
   const intensive = payload.intensive || {};
@@ -702,8 +709,8 @@ function ReadingTrainingModule({ content }) {
                 dropTarget?.area === "top" && dropTarget.index === slotIndex;
               const showResultIcon = Boolean(recallResult);
               const iconSrc = isCorrect
-                ? "/정답 동그라미.png"
-                : "/오답 꺾은선.png";
+                ? resolveAssetUrl("정답 동그라미.png")
+                : resolveAssetUrl("오답 꺾은선.png");
               return (
                 <div
                   key={`slot-${slotIndex}`}
