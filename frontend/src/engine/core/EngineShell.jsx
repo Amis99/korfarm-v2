@@ -91,14 +91,21 @@ function EngineShell({ content, moduleKey, onExit }) {
     return mapping[subArea] || "세부 영역";
   };
 
-  const getProgressTotal = () => {
+  const baseProgressTotal = useMemo(() => {
     const payload = content?.payload || {};
     const readingTrainingTotal =
       (payload.intensive?.timeline?.length ?? payload.timeline?.length ?? 0) +
-      (payload.recall ? 1 : 0) +
+      (payload.recall?.cards?.length ? 1 : 0) +
       (payload.confirm?.questions?.length ?? 0);
+    const worksheetTotal = (payload.questions || []).reduce((sum, question) => {
+      if (!question) return sum;
+      if (question.type === "FILL_BLANKS") {
+        return sum + (question.blanks?.length ?? 0);
+      }
+      return sum + 1;
+    }, 0);
     const guess = {
-      worksheet_quiz: payload.questions?.length,
+      worksheet_quiz: worksheetTotal,
       reading_intensive: payload.timeline?.length,
       reading_training: readingTrainingTotal,
       recall_cards: payload.cards?.length,
@@ -109,14 +116,28 @@ function EngineShell({ content, moduleKey, onExit }) {
       sentence_structure: payload.sentences?.length,
     };
     return guess[moduleKey] || 0;
-  };
+  }, [content, moduleKey]);
 
-  const progressTotal = getProgressTotal();
+  const progressTotal = useMemo(() => {
+    if (moduleKey === "reading_training") {
+      const extraWrong = records.filter(
+        (entry) => entry.stage === "INTENSIVE" && entry.correct === false
+      ).length;
+      return baseProgressTotal + extraWrong;
+    }
+    return baseProgressTotal;
+  }, [baseProgressTotal, moduleKey, records]);
   const progressCurrent = useMemo(() => {
     if (!records.length) return 0;
     const unique = new Set(records.map((entry) => entry.stepId || entry.id));
+    if (moduleKey === "reading_training") {
+      const extraWrong = records.filter(
+        (entry) => entry.stage === "INTENSIVE" && entry.correct === false
+      ).length;
+      return unique.size + extraWrong;
+    }
     return unique.size;
-  }, [records]);
+  }, [records, moduleKey]);
 
   const adjustTime = (delta) => {
     setTimeLeft((prev) => Math.max(0, Math.min(timeLimit, prev + delta)));
