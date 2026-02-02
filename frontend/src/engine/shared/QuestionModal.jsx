@@ -60,6 +60,19 @@ const getContainerMetrics = (modal) => {
       scale = modalScale;
     }
   }
+  if (Math.abs(scale - 1) < 0.001) {
+    const shell = modal?.closest(".engine-shell");
+    if (shell) {
+      const computed = window.getComputedStyle(shell);
+      const sheetWidth = Number.parseFloat(computed.getPropertyValue("--sheet-width"));
+      if (Number.isFinite(sheetWidth) && sheetWidth > 0) {
+        const nextScale = Math.min(1, (window.innerWidth - 24) / sheetWidth);
+        if (Number.isFinite(nextScale) && nextScale > 0 && Math.abs(nextScale - 1) > 0.001) {
+          scale = nextScale;
+        }
+      }
+    }
+  }
   if (!Number.isFinite(scale) || scale <= 0 || Math.abs(scale - 1) < 0.001) {
     const ratio =
       containerWidth && containerRect.width ? containerRect.width / containerWidth : 1;
