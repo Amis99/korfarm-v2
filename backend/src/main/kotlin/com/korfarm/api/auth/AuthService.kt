@@ -125,7 +125,9 @@ class AuthService(
                 loginId = user.email,
                 name = user.name,
                 roles = roles,
-                status = user.status
+                status = user.status,
+                levelId = user.levelId,
+                gradeLabel = user.gradeLabel
             )
         )
     }

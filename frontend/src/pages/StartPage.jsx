@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/start.css";
 
 function StartPage() {
+  const navigate = useNavigate();
   return (
     <div className="start-page">
       <div className="start-shell">
@@ -52,7 +53,7 @@ function StartPage() {
               <span className="material-symbols-outlined">school</span>
               오늘의 무료 학습
             </h2>
-            <div className="start-card">
+            <div className="start-card" onClick={() => navigate("/daily-quiz")} style={{ cursor: "pointer" }}>
               <span className="badge">일일 퀴즈</span>
               <h3>맞춤법 퀴즈</h3>
               <p>총 10문제 도전!</p>

@@ -31,7 +31,7 @@ class LearningController(
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         featureFlagService.requireEnabled("feature.free.daily_quiz", userId)
-        val result = learningService.submit(userId, "daily_quiz", "dq_today", request)
+        val result = learningService.submit(userId, "daily_quiz", request.contentId ?: "dq_today", request)
         return ApiResponse(success = true, data = result)
     }
 

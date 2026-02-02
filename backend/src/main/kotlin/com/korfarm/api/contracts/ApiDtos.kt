@@ -33,7 +33,8 @@ data class SubmitAnswer(
 
 data class SubmitRequest(
     @field:NotNull val answers: List<SubmitAnswer>,
-    val contentLevelId: String? = null
+    val contentLevelId: String? = null,
+    val contentId: String? = null
 )
 
 data class HarvestCraftRequest(

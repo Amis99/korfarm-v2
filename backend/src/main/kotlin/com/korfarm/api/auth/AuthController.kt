@@ -68,7 +68,9 @@ class AuthController(
             loginId = user.email,
             name = user.name,
             roles = if (roles.isEmpty()) listOf("STUDENT") else roles,
-            status = user.status
+            status = user.status,
+            levelId = user.levelId,
+            gradeLabel = user.gradeLabel
         )
         return ApiResponse(success = true, data = profile)
     }
