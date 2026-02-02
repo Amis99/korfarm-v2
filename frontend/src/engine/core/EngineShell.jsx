@@ -278,6 +278,20 @@ function EngineShell({ content, moduleKey, onExit }) {
   }, [content?.title, content?.targetLevel, content?.subArea, seed]);
 
   useEffect(() => {
+    const root = document.documentElement;
+    if (!root) return undefined;
+    const entries = Object.entries(shellStyle);
+    entries.forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+    return () => {
+      entries.forEach(([key]) => {
+        root.style.removeProperty(key);
+      });
+    };
+  }, [shellStyle]);
+
+  useEffect(() => {
     if (status !== "RUNNING") return;
     if (timeLeft > 0) return;
     setSeed((prev) => {
