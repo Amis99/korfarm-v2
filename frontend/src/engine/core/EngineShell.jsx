@@ -321,13 +321,13 @@ function EngineShell({ content, moduleKey, onExit }) {
   const sheetBackground = content?.assets?.sheetBackground || "learning-paper.jpg";
   const shellStyle = {
     "--header-height": `${headerHeight}px`,
-    "--sheet-bg": resolveAssetUrl(sheetBackground),
-    "--question-modal-bg": resolveAssetUrl("질문 모달.png"),
-    "--mark-correct-bg": resolveAssetUrl("정답 동그라미.png"),
-    "--mark-wrong-bg": resolveAssetUrl("오답 꺾은선.png"),
-    "--result-pass-bg": resolveAssetUrl("학습 통과 모달.png"),
-    "--result-perfect-bg": resolveAssetUrl("학습 완료 성공 모달.png"),
-    "--result-fail-bg": resolveAssetUrl("학습 종료 모달.png"),
+    "--sheet-bg": `url("${resolveAssetUrl(sheetBackground)}")`,
+    "--question-modal-bg": `url("${resolveAssetUrl("질문 모달.png")}")`,
+    "--mark-correct-bg": `url("${resolveAssetUrl("정답 동그라미.png")}")`,
+    "--mark-wrong-bg": `url("${resolveAssetUrl("오답 꺾은선.png")}")`,
+    "--result-pass-bg": `url("${resolveAssetUrl("학습 통과 모달.png")}")`,
+    "--result-perfect-bg": `url("${resolveAssetUrl("학습 완료 성공 모달.png")}")`,
+    "--result-fail-bg": `url("${resolveAssetUrl("학습 종료 모달.png")}")`,
   };
 
   return (

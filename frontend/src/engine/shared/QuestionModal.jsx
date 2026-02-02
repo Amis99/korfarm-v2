@@ -21,18 +21,9 @@ const getContainerMetrics = (modal) => {
   const modalWidth = modal.offsetWidth || modalRect.width;
   const modalHeight = modal.offsetHeight || modalRect.height;
   let scale = 1;
-  const shell = modal?.closest(".engine-shell");
-  const stage = modal?.closest(".engine-stage");
-  if (shell && stage) {
-    const sheetWidthRaw = window.getComputedStyle(shell).getPropertyValue("--sheet-width").trim();
-    const sheetWidth = Number.parseFloat(sheetWidthRaw);
-    if (Number.isFinite(sheetWidth) && sheetWidth > 0) {
-      const stageRect = stage.getBoundingClientRect();
-      const stageScale = stageRect.width / sheetWidth;
-      if (Number.isFinite(stageScale) && stageScale > 0) {
-        scale = stageScale;
-      }
-    }
+  const modalScale = modalWidth ? modalRect.width / modalWidth : 1;
+  if (Number.isFinite(modalScale) && modalScale > 0) {
+    scale = modalScale;
   }
   if (!Number.isFinite(scale) || scale <= 0) {
     const scaleHost = modal?.closest(".engine-scale");
@@ -49,7 +40,7 @@ const getContainerMetrics = (modal) => {
       }
     }
   }
-  if (!Number.isFinite(scale) || scale <= 0 || scale === 1) {
+  if (!Number.isFinite(scale) || scale <= 0 || Math.abs(scale - 1) < 0.001) {
     const ratio =
       containerWidth && containerRect.width ? containerRect.width / containerWidth : 1;
     if (Number.isFinite(ratio) && ratio > 0) {
