@@ -12,9 +12,6 @@ import languageConceptQuiz from "./samples/language_concept_quiz.json";
 import logicReasoningQuiz from "./samples/logic_reasoning_quiz.json";
 import descriptivePractice from "./samples/descriptive_practice.json";
 import choiceJudgement from "./samples/choice_judgement.json";
-import readingNonfictionIntensive from "./samples/reading_nonfiction_intensive.json";
-import readingNonfictionRecall from "./samples/reading_nonfiction_recall.json";
-import readingNonfictionConfirm from "./samples/reading_nonfiction_confirm.json";
 
 export const SUB_AREA_LABELS = {
   BASIC: "기본",
@@ -22,9 +19,6 @@ export const SUB_AREA_LABELS = {
   NONFICTION: "비문학",
   NONFICTION_PHILOSOPHY: "비문학",
   NONFICTION_SOCIAL: "비문학",
-  NONFICTION_INTENSIVE: "정독",
-  NONFICTION_RECALL: "내용 회상",
-  NONFICTION_CONFIRM: "내용 확인",
   LITERATURE: "문학",
   PDF: "PDF",
   WORD_FORMATION: "단어 형성",
@@ -74,33 +68,6 @@ export const LEARNING_CATALOG = [
     contentType: readingLiteratureTraining.contentType,
     moduleKey: "reading_training",
     content: readingLiteratureTraining,
-  },
-  {
-    id: "reading-nonfiction-intensive",
-    category: "독해 연습",
-    title: readingNonfictionIntensive.title,
-    description: readingNonfictionIntensive.description,
-    contentType: readingNonfictionIntensive.contentType,
-    moduleKey: "reading_intensive",
-    content: readingNonfictionIntensive,
-  },
-  {
-    id: "reading-nonfiction-recall",
-    category: "독해 연습",
-    title: readingNonfictionRecall.title,
-    description: readingNonfictionRecall.description,
-    contentType: readingNonfictionRecall.contentType,
-    moduleKey: "recall_cards",
-    content: readingNonfictionRecall,
-  },
-  {
-    id: "reading-nonfiction-confirm",
-    category: "독해 연습",
-    title: readingNonfictionConfirm.title,
-    description: readingNonfictionConfirm.description,
-    contentType: readingNonfictionConfirm.contentType,
-    moduleKey: "confirm_click",
-    content: readingNonfictionConfirm,
   },
   {
     id: "content-pdf-quiz",
@@ -222,7 +189,7 @@ export const FARM_MAP = {
     emoji: "\uD83D\uDCD6",
     description: "비문학·문학 지문 독해 훈련",
     color: "#5a9e6f",
-    contentTypes: ["READING_NONFICTION", "READING_LITERATURE", "READING_NONFICTION_INTENSIVE", "READING_NONFICTION_RECALL", "READING_NONFICTION_CONFIRM"],
+    contentTypes: ["READING_NONFICTION", "READING_LITERATURE"],
   },
   content: {
     id: "content",
