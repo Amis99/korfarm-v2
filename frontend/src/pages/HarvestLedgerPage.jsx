@@ -99,18 +99,28 @@ function HarvestLedgerPage() {
           </thead>
           <tbody>
             {logs.map((log) => {
-              const catalog = catalogMap[log.contentId];
-              const date = log.startedAt ? new Date(log.startedAt).toLocaleDateString("ko-KR") : "-";
-              const title = catalog?.title ?? log.contentType;
+              const id = log.log_id ?? log.logId;
+              const catalog = catalogMap[log.content_id ?? log.contentId];
+              const contentType = log.content_type ?? log.contentType;
+              const startedAt = log.started_at ?? log.startedAt;
+              const completedAt = log.completed_at ?? log.completedAt;
+              const earnedSeed = log.earned_seed ?? log.earnedSeed ?? 0;
+              const date = startedAt
+                ? new Date(startedAt).toLocaleString("ko-KR", {
+                    year: "numeric", month: "2-digit", day: "2-digit",
+                    hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
+                  })
+                : "-";
+              const title = catalog?.title ?? contentType;
               const level = catalog?.targetLevel?.replace("_", " ") ?? "-";
               const area = catalog?.category ?? "-";
-              const duration = formatDuration(log.startedAt, log.completedAt);
+              const duration = formatDuration(startedAt, completedAt);
               const progress = log.status === "COMPLETED" ? "100%" : "진행중";
               const accuracy = log.accuracy != null ? `${log.accuracy}%` : "-";
-              const seed = log.earnedSeed > 0 ? log.earnedSeed : "-";
+              const seed = earnedSeed > 0 ? earnedSeed : "-";
 
               return (
-                <tr key={log.logId} style={{ borderBottom: "1px solid #e8ddd4" }}>
+                <tr key={id} style={{ borderBottom: "1px solid #e8ddd4" }}>
                   <td style={tdStyle}>{date}</td>
                   <td style={{ ...tdStyle, textAlign: "left" }}>{title}</td>
                   <td style={tdStyle}>{level}</td>
