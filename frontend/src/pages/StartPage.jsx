@@ -69,8 +69,8 @@ function StartPage() {
       .catch(() => {});
     apiGet("/v1/auth/me").then((data) => {
       setProfile(data);
-      const lid = data?.levelId;
-      const lsd = data?.learningStartDate || data?.learning_start_date || null;
+      const lid = data?.level_id || data?.levelId;
+      const lsd = data?.learning_start_date || data?.learningStartDate || null;
       if (lid) {
         const di = calcDayIndex(lsd);
         const dayStr = String(di).padStart(3, "0");
@@ -90,10 +90,10 @@ function StartPage() {
   }, [isLoggedIn]);
 
   const displayName = profile?.name || user?.name || "농부";
-  const displayLevel = profile?.levelId || "LV.1";
-  const levelId = profile?.levelId;
+  const levelId = profile?.level_id || profile?.levelId;
+  const displayLevel = levelId || "LV.1";
   const levelLabel = LEVEL_LABEL_MAP[levelId] || levelId || "";
-  const learningStartDate = profile?.learningStartDate || profile?.learning_start_date || null;
+  const learningStartDate = profile?.learning_start_date || profile?.learningStartDate || null;
   const dayOfYear = calcDayIndex(learningStartDate);
   const totalSeeds = Array.isArray(inventory?.seeds)
     ? inventory.seeds.reduce((s, e) => s + (e.count || 0), 0)

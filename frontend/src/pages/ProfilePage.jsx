@@ -52,15 +52,15 @@ function ProfilePage() {
   useEffect(() => {
     apiGet("/v1/auth/me")
       .then((profile) => {
-        setLoginId(profile.loginId || profile.login_id || "");
+        setLoginId(profile.login_id || profile.loginId || "");
         setName(profile.name || "");
         setRegion(profile.region || "");
         setSchool(profile.school || "");
-        setLevelId(profile.levelId || profile.level_id || "");
-        setStudentPhone(profile.studentPhone || profile.student_phone || "");
-        setParentPhone(profile.parentPhone || profile.parent_phone || "");
+        setLevelId(profile.level_id || profile.levelId || "");
+        setStudentPhone(profile.student_phone || profile.studentPhone || "");
+        setParentPhone(profile.parent_phone || profile.parentPhone || "");
         setLearningStartMode(
-          (profile.learningStartDate || profile.learning_start_date) ? "day1" : "calendar"
+          (profile.learning_start_date || profile.learningStartDate) ? "day1" : "calendar"
         );
       })
       .catch(() => navigate("/login"))

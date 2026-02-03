@@ -90,7 +90,7 @@ function DailyReadingPage() {
         }
 
         const folder = LEVEL_FOLDER_MAP[level] || "saussure1";
-        const learningStartDate = profile.learningStartDate || profile.learning_start_date || null;
+        const learningStartDate = profile.learning_start_date || profile.learningStartDate || null;
         let dayIndex;
         if (learningStartDate) {
           const start = new Date(learningStartDate);
