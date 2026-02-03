@@ -14,6 +14,7 @@ const CONTENTS = [
 const MODULE_OPTIONS = [
   { key: "worksheet_quiz", label: "공통 퀴즈형" },
   { key: "reading_intensive", label: "정독 훈련" },
+  { key: "reading_training", label: "Reading Training" },
   { key: "recall_cards", label: "복기 카드" },
   { key: "confirm_click", label: "확인 학습 클릭" },
   { key: "choice_judgement", label: "선택지 판별" },

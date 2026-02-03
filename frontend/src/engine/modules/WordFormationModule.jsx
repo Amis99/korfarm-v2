@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 
@@ -9,7 +9,10 @@ function WordFormationModule({ content }) {
   const [itemIndex, setItemIndex] = useState(0);
   const [stepIndex, setStepIndex] = useState(0);
   const [mergeIndex, setMergeIndex] = useState(0);
-  const [feedback, setFeedback] = useState("");
+  const [lastResult, setLastResult] = useState(null);
+  const advanceTimerRef = useRef(null);
+  const resultTimerRef = useRef(null);
+  const feedbackDelay = 420;
 
   const item = items[itemIndex];
   const steps = item?.steps || [];
@@ -24,12 +27,23 @@ function WordFormationModule({ content }) {
       const correct = choiceId === question.answer;
       adjustTime(correct ? 20 : -20);
       recordAnswer({ id: `merge-${mergeIndex}`, correct });
-      setFeedback(correct ? "정답입니다!" : "오답입니다.");
-      if (mergeIndex < mergeQuestions.length - 1) {
-        setMergeIndex((prev) => prev + 1);
-        return;
+      setLastResult(correct ? "correct" : "wrong");
+      if (resultTimerRef.current) {
+        clearTimeout(resultTimerRef.current);
       }
-      finish(true);
+      resultTimerRef.current = setTimeout(() => {
+        setLastResult(null);
+      }, feedbackDelay);
+      if (advanceTimerRef.current) {
+        clearTimeout(advanceTimerRef.current);
+      }
+      advanceTimerRef.current = setTimeout(() => {
+        if (mergeIndex < mergeQuestions.length - 1) {
+          setMergeIndex((prev) => prev + 1);
+          return;
+        }
+        finish(true);
+      }, feedbackDelay);
       return;
     }
 
@@ -43,21 +57,32 @@ function WordFormationModule({ content }) {
     const delta = correct ? step.delta?.correct || 20 : step.delta?.wrong || -20;
     adjustTime(delta);
     recordAnswer({ id: `${item.word}-${step.type}-${step.index ?? stepIndex}`, correct });
-    setFeedback(correct ? "정답입니다!" : "오답입니다.");
+    setLastResult(correct ? "correct" : "wrong");
+    if (resultTimerRef.current) {
+      clearTimeout(resultTimerRef.current);
+    }
+    resultTimerRef.current = setTimeout(() => {
+      setLastResult(null);
+    }, feedbackDelay);
     if (!correct) {
       return;
     }
     if (correct) {
-      if (stepIndex < steps.length - 1) {
-        setStepIndex((prev) => prev + 1);
-      } else if (mergeQuestions.length > 0) {
-        setStepIndex(steps.length);
-      } else if (itemIndex < items.length - 1) {
-        setItemIndex((prev) => prev + 1);
-        setStepIndex(0);
-      } else {
-        finish(true);
+      if (advanceTimerRef.current) {
+        clearTimeout(advanceTimerRef.current);
       }
+      advanceTimerRef.current = setTimeout(() => {
+        if (stepIndex < steps.length - 1) {
+          setStepIndex((prev) => prev + 1);
+        } else if (mergeQuestions.length > 0) {
+          setStepIndex(steps.length);
+        } else if (itemIndex < items.length - 1) {
+          setItemIndex((prev) => prev + 1);
+          setStepIndex(0);
+        } else {
+          finish(true);
+        }
+      }, feedbackDelay);
     }
   };
 
@@ -87,6 +112,7 @@ function WordFormationModule({ content }) {
     };
   };
 
+  const modalShuffleKey = inMerge ? `merge-${itemIndex}-${mergeIndex}` : `step-${itemIndex}-${stepIndex}`;
   const config = modalConfig();
 
   useEffect(() => {
@@ -94,6 +120,18 @@ function WordFormationModule({ content }) {
       start();
     }
   }, [status, start]);
+
+  useEffect(
+    () => () => {
+      if (advanceTimerRef.current) {
+        clearTimeout(advanceTimerRef.current);
+      }
+      if (resultTimerRef.current) {
+        clearTimeout(resultTimerRef.current);
+      }
+    },
+    []
+  );
 
   return (
     <div className="word-formation-module">
@@ -117,13 +155,19 @@ function WordFormationModule({ content }) {
               </span>
             ))}
           </div>
-          {feedback ? <div className="worksheet-feedback">{feedback}</div> : null}
+          {lastResult ? (
+            <div className={`worksheet-feedback ${lastResult}`}>
+              {lastResult === "correct" ? "정답입니다!" : "오답입니다."}
+            </div>
+          ) : null}
           {config ? (
             <QuestionModal
               title={config.title}
               prompt={config.prompt}
               choices={config.choices}
               onSelect={handleAnswer}
+              mark={lastResult}
+              shuffleKey={modalShuffleKey}
             />
           ) : null}
         </>

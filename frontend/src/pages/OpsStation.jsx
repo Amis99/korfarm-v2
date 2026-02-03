@@ -1923,7 +1923,7 @@ function OpsStation() {
       <header className="hero">
         <div className="hero-intro">
           <div className="brand-mark">
-            <img src="/korfarm-logo.png" alt="국어농장" />
+            <img src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt="국어농장" />
           </div>
           <div>
             <p className="hero-title">국어농장 운영 스테이션</p>

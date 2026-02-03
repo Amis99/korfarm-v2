@@ -1,5 +1,7 @@
 package com.korfarm.api.learning
 
+import com.korfarm.api.economy.SeedCatalogEntity
+
 object SeedRewardPolicy {
     private val levelOrder = listOf(
         "saussure1",
@@ -35,5 +37,14 @@ object SeedRewardPolicy {
             diff == -1 -> 2
             else -> 1
         }
+    }
+
+    fun randomSeedType(catalog: List<SeedCatalogEntity>): String {
+        if (catalog.isEmpty()) return "seed_wheat"
+        val weighted = catalog.flatMap { seed ->
+            val weight = if (seed.rarity == "common") 70 else 30
+            List(weight) { seed.seedType }
+        }
+        return weighted.random()
     }
 }

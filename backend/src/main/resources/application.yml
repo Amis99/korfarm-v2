@@ -15,6 +15,8 @@ spring:
   flyway:
     enabled: false
     locations: classpath:db/migration
+    validate-on-migrate: false
+    out-of-order: true
 
 server:
   port: ${SERVER_PORT:8080}

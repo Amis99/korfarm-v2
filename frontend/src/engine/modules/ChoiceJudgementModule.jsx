@@ -11,7 +11,7 @@ function ChoiceJudgementModule({ content }) {
   const [propIndex, setPropIndex] = useState(0);
   const [choiceMarks, setChoiceMarks] = useState({});
   const [propMarks, setPropMarks] = useState({});
-  const [feedback, setFeedback] = useState("");
+  const [lastResult, setLastResult] = useState(null);
 
   const currentItem = items[itemIndex];
   const currentChoice = currentItem?.choices?.find((choice) => choice.choiceId === choiceId);
@@ -25,7 +25,7 @@ function ChoiceJudgementModule({ content }) {
   const handleChoiceSelect = (id) => {
     setChoiceId(id);
     setPropIndex(0);
-    setFeedback("");
+    setLastResult(null);
   };
 
   const handleTokenClick = (token) => {
@@ -33,7 +33,7 @@ function ChoiceJudgementModule({ content }) {
     const correct = currentProp.evidenceTokens?.includes(token.tokenId);
     adjustTime(correct ? 20 : -20);
     recordAnswer({ id: currentProp.propId, correct });
-    setFeedback(correct ? "근거를 찾았습니다." : "근거가 아닙니다.");
+    setLastResult(correct ? "correct" : "wrong");
     if (!correct) return;
     setPropMarks((prev) => ({ ...prev, [currentProp.propId]: currentProp.oxAnswer }));
     const nextIndex = propIndex + 1;
@@ -58,7 +58,7 @@ function ChoiceJudgementModule({ content }) {
       setItemIndex((prev) => prev + 1);
       setChoiceId(null);
       setPropIndex(0);
-      setFeedback("");
+      setLastResult(null);
     } else {
       setChoiceId(null);
       setPropIndex(0);
@@ -70,6 +70,10 @@ function ChoiceJudgementModule({ content }) {
       start();
     }
   }, [status, start]);
+
+  useEffect(() => {
+    setLastResult(null);
+  }, [itemIndex]);
 
   return (
     <div className="choice-module">
@@ -91,7 +95,11 @@ function ChoiceJudgementModule({ content }) {
             ) : (
               <p>선택지를 클릭해 명제를 확인하세요.</p>
             )}
-            {feedback ? <span className="reading-feedback">{feedback}</span> : null}
+            {lastResult ? (
+              <span className={`worksheet-feedback ${lastResult}`}>
+                {lastResult === "correct" ? "정답입니다!" : "오답입니다."}
+              </span>
+            ) : null}
           </div>
           <div className="choice-body">
             <div className="choice-list">

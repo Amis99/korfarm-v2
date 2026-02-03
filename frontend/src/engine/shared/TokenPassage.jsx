@@ -32,7 +32,7 @@ function TokenPassage({ passage, highlightTokens = [], onTokenClick, activeToken
                 <span key={token.tokenId}>
                   <button
                     type="button"
-                    className={`token-chip ${isHighlight ? "highlight" : ""} ${
+                    className={`token-chip ${isHighlight ? "worksheet-highlight" : ""} ${
                       isActive ? "active" : ""
                     }`}
                     onClick={() => onTokenClick?.(token)}

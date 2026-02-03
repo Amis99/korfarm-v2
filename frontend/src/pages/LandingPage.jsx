@@ -50,7 +50,7 @@ function LandingPage() {
       <nav className="landing-nav">
         <div className="landing-wrap landing-nav-inner">
           <div className="landing-brand" aria-label="국어농장">
-            <img className="landing-logo" src="/korfarm-logo.png" alt="국어농장" />
+            <img className="landing-logo" src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt="국어농장" />
           </div>
           <div className="landing-nav-links">
             <a href="#program">프로그램</a>
@@ -160,7 +160,7 @@ function LandingPage() {
         <div className="landing-wrap landing-footer-grid">
           <div>
             <div className="landing-brand" aria-label="국어농장">
-              <img className="landing-logo" src="/korfarm-logo.png" alt="국어농장" />
+              <img className="landing-logo" src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt="국어농장" />
             </div>
             <p>
               국어 학습의 출발부터 성취까지, 국어농장이 함께 성장합니다.

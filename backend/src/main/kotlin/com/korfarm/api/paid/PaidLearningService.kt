@@ -13,6 +13,7 @@ import com.korfarm.api.learning.SeedGrant
 import com.korfarm.api.learning.SeedRewardPolicy
 import com.korfarm.api.economy.EconomyService
 import com.korfarm.api.economy.LedgerEntry
+import com.korfarm.api.economy.SeedCatalogRepository
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -28,6 +29,7 @@ class PaidLearningService(
     private val learningAttemptRepository: LearningAttemptRepository,
     private val economyService: EconomyService,
     private val userRepository: UserRepository,
+    private val seedCatalogRepository: SeedCatalogRepository,
     private val objectMapper: ObjectMapper
 ) {
     @Transactional(readOnly = true)
@@ -112,7 +114,9 @@ class PaidLearningService(
         val userLevelId = userRepository.findById(userId).orElse(null)?.levelId
         val contentLevelId = resolveContentLevelId(contentId, request)
         val seedCount = SeedRewardPolicy.seedCountFor(userLevelId, contentLevelId)
-        val seedGrant = SeedGrant(seedType = "seed_wheat", count = seedCount)
+        val catalog = seedCatalogRepository.findAll()
+        val seedType = SeedRewardPolicy.randomSeedType(catalog)
+        val seedGrant = SeedGrant(seedType = seedType, count = seedCount)
         economyService.addSeeds(userId, seedGrant.seedType, seedGrant.count, "paid_submit", "learning", contentId)
         val attempt = LearningAttemptEntity(
             id = IdGenerator.newId("la"),

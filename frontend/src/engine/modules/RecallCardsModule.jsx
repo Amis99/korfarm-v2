@@ -8,7 +8,7 @@ function RecallCardsModule({ content }) {
   const initialOrder = useMemo(() => cards.map((card) => card.id), [cards]);
   const [order, setOrder] = useState(initialOrder);
   const [seed, setSeed] = useState(payload.seedPool?.initial ?? 3);
-  const [feedback, setFeedback] = useState("");
+  const [lastResult, setLastResult] = useState(null);
   const [dragId, setDragId] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -28,7 +28,7 @@ function RecallCardsModule({ content }) {
     const correctOrder = payload.correctOrder || [];
     const isCorrect = correctOrder.join("|") === order.join("|");
     if (isCorrect) {
-      setFeedback("정확한 순서입니다!");
+      setLastResult(isCorrect ? "correct" : "wrong");
       setShowAnswer(false);
       finish(true);
       return;
@@ -37,7 +37,7 @@ function RecallCardsModule({ content }) {
     const penalty = payload.seedPool?.wrongPenaltySeed ?? 1;
     const nextSeed = Math.max(0, seed - penalty);
     setSeed(nextSeed);
-    setFeedback("순서가 틀렸습니다. 다시 정렬해 주세요.");
+    setLastResult(isCorrect ? "correct" : "wrong");
     setShowAnswer(true);
     if (nextSeed === 0) {
       finish(false);
@@ -118,7 +118,11 @@ function RecallCardsModule({ content }) {
               제출하기
             </button>
           </div>
-          {feedback ? <p className="recall-feedback">{feedback}</p> : null}
+          {lastResult ? (
+            <div className={`worksheet-feedback ${lastResult}`}>
+              {lastResult === "correct" ? "정답입니다!" : "오답입니다."}
+            </div>
+          ) : null}
         </>
       )}
     </div>

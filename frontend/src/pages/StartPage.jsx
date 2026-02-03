@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import { apiGet } from "../utils/api";
+import HarvestCraftModal from "../components/HarvestCraftModal";
 import "../styles/start.css";
 
 const TOKEN_KEY = "korfarm_token";
@@ -29,74 +32,44 @@ function getDayOfYear() {
 
 function StartPage() {
   const navigate = useNavigate();
+  const { isLoggedIn, user, isPremium } = useAuth();
+  const [showCraftModal, setShowCraftModal] = useState(false);
+
+  /* Phase 9: API data states */
   const [profile, setProfile] = useState(null);
-  const [seeds, setSeeds] = useState(0);
-  const [crops, setCrops] = useState(0);
-  const [streak, setStreak] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [inventory, setInventory] = useState(null);
+  const [harvestRanking, setHarvestRanking] = useState([]);
+  const [duelRanking, setDuelRanking] = useState([]);
+  const [seedLog, setSeedLog] = useState([]);
 
   useEffect(() => {
-    let cancelled = false;
-    async function load() {
-      const token = localStorage.getItem(TOKEN_KEY);
-      if (!token) {
-        navigate("/login");
-        return;
-      }
-      const headers = { Authorization: `Bearer ${token}` };
-
-      try {
-        const [meRes, invRes, streakRes] = await Promise.all([
-          fetch("/v1/auth/me", { headers }),
-          fetch("/v1/inventory", { headers }),
-          fetch("/v1/learning/streak", { headers }),
-        ]);
-
-        if (!meRes.ok) {
-          navigate("/login");
-          return;
+    if (!isLoggedIn) return;
+    apiGet("/v1/auth/me").then(setProfile).catch(() => {});
+    apiGet("/v1/inventory").then(setInventory).catch(() => {});
+    apiGet("/v1/seasons/current")
+      .then((season) => {
+        if (season?.id) {
+          apiGet(`/v1/seasons/${season.id}/harvest-rankings`).then((r) => setHarvestRanking(r?.items || r || [])).catch(() => {});
+          apiGet(`/v1/seasons/${season.id}/duel-rankings`).then((r) => setDuelRanking(r?.items || r || [])).catch(() => {});
         }
+      })
+      .catch(() => {});
+    apiGet("/v1/ledger")
+      .then((entries) => {
+        const seeds = (entries || []).filter((e) => e.currencyType === "seed").slice(0, 5);
+        setSeedLog(seeds);
+      })
+      .catch(() => {});
+  }, [isLoggedIn]);
 
-        const meData = await meRes.json();
-        if (!cancelled) setProfile(meData.data);
-
-        if (invRes.ok) {
-          const invData = await invRes.json();
-          const inv = invData.data;
-          if (!cancelled) {
-            setSeeds(Object.values(inv.seeds || {}).reduce((a, b) => a + b, 0));
-            setCrops(Object.values(inv.crops || {}).reduce((a, b) => a + b, 0));
-          }
-        }
-
-        if (streakRes.ok) {
-          const streakData = await streakRes.json();
-          if (!cancelled) setStreak(streakData.data?.currentStreak ?? 0);
-        }
-      } catch {
-        // network error — stay on page with defaults
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    }
-    load();
-    return () => { cancelled = true; };
-  }, [navigate]);
-
-  const name = profile?.name || "농부";
-  const levelId = profile?.levelId || profile?.level_id;
+  const displayName = profile?.name || user?.name || "농부";
+  const displayLevel = profile?.levelId || "LV.1";
+  const levelId = profile?.levelId;
   const levelLabel = LEVEL_LABEL_MAP[levelId] || levelId || "";
   const dayOfYear = ((getDayOfYear() - 1) % 365) + 1;
-
-  if (loading) {
-    return (
-      <div className="start-page">
-        <div className="start-shell" style={{ textAlign: "center", padding: "4rem 0" }}>
-          로딩 중…
-        </div>
-      </div>
-    );
-  }
+  const totalSeeds = inventory?.seeds?.reduce((s, e) => s + (e.count || 0), 0) ?? 0;
+  const totalCrops = inventory?.crops?.reduce((s, e) => s + (e.count || 0), 0) ?? 0;
+  const fertilizerCount = inventory?.fertilizer ?? 0;
 
   return (
     <div className="start-page">
@@ -104,35 +77,46 @@ function StartPage() {
         <header className="start-header">
           <div className="start-header-top">
             <div className="start-avatar">
-              <span className="start-level">{levelLabel}</span>
+              <span className="start-level">{levelLabel || displayLevel}</span>
             </div>
             <div className="start-greeting">
               <h1>
-                {name} 농부님, <span>안녕하세요!</span>
+                {displayName} 농부님, <span>안녕하세요!</span>
               </h1>
+              <div className="start-xp">
+                <span>{totalSeeds} 씨앗</span>
+                <span>{totalCrops} 수확물</span>
+              </div>
+              <div className="start-progress">
+                <span />
+              </div>
             </div>
           </div>
           <div className="start-stats">
             <div className="start-stat">
               <span className="material-symbols-outlined">grass</span>
-              <span>{seeds} 씨앗</span>
+              <span>{totalSeeds} 씨앗</span>
             </div>
             <div className="start-stat">
               <span className="material-symbols-outlined">shopping_bag</span>
-              <span>{crops} 수확물</span>
+              <span>{totalCrops} 수확물</span>
             </div>
             <div className="start-stat">
-              <span className="material-symbols-outlined">nutrition</span>
-              <span>{streak} 연속일</span>
+              <span className="material-symbols-outlined">spa</span>
+              <span>{fertilizerCount} 비료</span>
             </div>
           </div>
-          <div className="start-cta">
-            <div>
-              <strong>무제한 씨앗 받기!</strong>
-              <p>프리미엄으로 더 큰 성장과 보상을 만나보세요.</p>
+          {!isPremium && (
+            <div className="start-cta">
+              <div>
+                <strong>무제한 씨앗 받기!</strong>
+                <p>프리미엄으로 더 큰 성장과 보상을 만나보세요.</p>
+              </div>
+              <button type="button" onClick={() => navigate("/subscription")}>
+                업그레이드
+              </button>
             </div>
-            <button type="button">업그레이드</button>
-          </div>
+          )}
         </header>
 
         <div className="start-grid">
@@ -161,9 +145,11 @@ function StartPage() {
                 <span style={{ width: "0%", background: "#81d4fa" }} />
               </div>
             </div>
-            <h2 id="paid">
+
+            {/* 과제 바구니 */}
+            <h2>
               <span className="material-symbols-outlined">shopping_basket</span>
-              과제 바구니 (유료)
+              과제 바구니
             </h2>
             <div className="start-basket">
               <div>
@@ -173,37 +159,145 @@ function StartPage() {
                 <h3>특별 과제 도착!</h3>
                 <p>완료하고 과제 씨앗을 받아보세요.</p>
               </div>
-              <button type="button">과제 보러가기</button>
+              <button type="button" onClick={() => navigate("/assignments")}>
+                과제 보러가기
+              </button>
+            </div>
+
+            {/* 유료 학습 메뉴 그리드 */}
+            <h2 id="paid">
+              <span className="material-symbols-outlined">stars</span>
+              유료 학습
+            </h2>
+            <div className="start-paid-grid">
+              <div className="start-paid-card" onClick={() => navigate("/pro-mode")}>
+                <span className="material-symbols-outlined">military_tech</span>
+                <h3>프로 모드</h3>
+                <p>12레벨 심화 학습</p>
+                {!isPremium && <span className="start-lock-badge">구독 필요</span>}
+              </div>
+              <div className="start-paid-card" onClick={() => navigate("/farm-mode")}>
+                <span className="material-symbols-outlined">agriculture</span>
+                <h3>농장별 모드</h3>
+                <p>영역별 집중 학습</p>
+                {!isPremium && <span className="start-lock-badge">구독 필요</span>}
+              </div>
+              <div className="start-paid-card" onClick={() => navigate("/writing")}>
+                <span className="material-symbols-outlined">edit_note</span>
+                <h3>지식과 지혜</h3>
+                <p>글쓰기 훈련</p>
+                {!isPremium && <span className="start-lock-badge">구독 필요</span>}
+              </div>
+              <div className="start-paid-card" onClick={() => navigate("/tests")}>
+                <span className="material-symbols-outlined">quiz</span>
+                <h3>테스트 창고</h3>
+                <p>진단/챕터 시험</p>
+                {!isPremium && <span className="start-lock-badge">구독 필요</span>}
+              </div>
+              <div className="start-paid-card" onClick={() => navigate("/harvest-ledger")}>
+                <span className="material-symbols-outlined">menu_book</span>
+                <h3>수확 장부</h3>
+                <p>작물 거래 내역</p>
+                {!isPremium && <span className="start-lock-badge">구독 필요</span>}
+              </div>
+              <div className="start-paid-card" onClick={() => navigate("/seed-log")}>
+                <span className="material-symbols-outlined">history</span>
+                <h3>씨앗 내역</h3>
+                <p>씨앗 획득 기록</p>
+              </div>
+            </div>
+
+            {/* 씨앗 획득 내역 요약 */}
+            <h2>
+              <span className="material-symbols-outlined">history</span>
+              최근 씨앗 획득
+            </h2>
+            <div className="start-card">
+              {seedLog.length > 0 ? (
+                <ul className="start-seed-log">
+                  {seedLog.map((entry, i) => (
+                    <li key={entry.id || i}>
+                      {entry.itemType || entry.seedType || "씨앗"} +{entry.delta || 0}개 ·{" "}
+                      {entry.reason || ""}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>아직 씨앗 획득 내역이 없습니다.</p>
+              )}
+              <Link className="start-card-button" to="/seed-log">
+                전체 보기
+              </Link>
             </div>
           </div>
 
           <aside className="start-side">
+            {/* 시즌 수확 랭킹 */}
             <div className="start-rank">
               <h2>
                 <span className="material-symbols-outlined">emoji_events</span>
                 시즌 랭킹
               </h2>
               <ul>
-                <li>1위 수민 · 5,240 수확물</li>
-                <li>2위 준호 · 4,980 수확물</li>
-                <li>14위 알렉스 · 450 수확물</li>
+                {harvestRanking.length > 0
+                  ? harvestRanking.slice(0, 3).map((r, i) => (
+                      <li key={r.userId || i}>
+                        {i + 1}위 {r.userName || r.name || "?"} · {r.totalCrops ?? r.score ?? 0} 수확물
+                      </li>
+                    ))
+                  : [
+                      <li key="1">1위 — · 0 수확물</li>,
+                      <li key="2">2위 — · 0 수확물</li>,
+                      <li key="3">3위 — · 0 수확물</li>,
+                    ]}
               </ul>
               <Link className="start-rank-link" to="/ranking">
                 랭킹 확인
               </Link>
             </div>
+
+            {/* 대결 랭킹 요약 */}
+            <div className="start-rank">
+              <h2>
+                <span className="material-symbols-outlined">swords</span>
+                대결 랭킹
+              </h2>
+              <ul>
+                {duelRanking.length > 0
+                  ? duelRanking.slice(0, 3).map((r, i) => (
+                      <li key={r.userId || i}>
+                        {i + 1}위 {r.userName || r.name || "?"} · {r.wins ?? 0}승 {r.winRate ?? 0}%
+                      </li>
+                    ))
+                  : [
+                      <li key="1">1위 — · 0승</li>,
+                      <li key="2">2위 — · 0승</li>,
+                      <li key="3">3위 — · 0승</li>,
+                    ]}
+              </ul>
+            </div>
+
+            {/* 대결 */}
             <div className="start-duel" id="duel">
               <div>
                 <strong>대결하기</strong>
                 <p>씨앗을 걸고 실력을 겨뤄요</p>
               </div>
-              <button type="button">대결 신청</button>
+              <button type="button" onClick={() => navigate("/duel")}>
+                대결 신청
+              </button>
             </div>
+
+            {/* 씨앗 교환 */}
             <div className="start-card">
               <h3>씨앗 교환</h3>
-              <p>씨앗 3개를 모아 수확물 1개로 교환해요</p>
-              <button type="button">교환하기</button>
+              <p>씨앗 10개를 모아 수확물로 교환해요</p>
+              <button type="button" onClick={() => setShowCraftModal(true)}>
+                교환하기
+              </button>
             </div>
+
+            {/* 커뮤니티 */}
             <div className="start-card" id="community">
               <h3>커뮤니티</h3>
               <p>학습 신청 · 질문 · 자료 게시판을 이용하세요.</p>
@@ -211,6 +305,8 @@ function StartPage() {
                 게시판 이동
               </Link>
             </div>
+
+            {/* 쇼핑몰 */}
             <div className="start-card start-shop" id="shop">
               <div className="start-shop-title">
                 <span className="material-symbols-outlined">local_mall</span>
@@ -221,16 +317,11 @@ function StartPage() {
                 쇼핑몰 이동
               </Link>
             </div>
-            <div className="start-card" id="learning-preview">
-              <h3>학습 페이지 확인</h3>
-              <p>구현된 학습 페이지를 미리 둘러보세요.</p>
-              <Link className="start-card-button" to="/learning">
-                학습 허브로 이동
-              </Link>
-            </div>
           </aside>
         </div>
       </div>
+
+      <HarvestCraftModal open={showCraftModal} onClose={() => setShowCraftModal(false)} />
 
       <nav className="start-nav">
         <Link className="active" to="/start">
@@ -239,27 +330,23 @@ function StartPage() {
         </Link>
         <a href="#free">
           <span className="material-symbols-outlined">school</span>
-          무료 학습
+          무료학습
         </a>
         <a href="#paid">
           <span className="material-symbols-outlined">stars</span>
-          유료 학습
+          유료학습
         </a>
-        <a href="#duel">
+        <Link to="/duel">
           <span className="material-symbols-outlined">swords</span>
           대결
-        </a>
-        <a href="#community">
+        </Link>
+        <Link to="/community">
           <span className="material-symbols-outlined">forum</span>
           커뮤니티
-        </a>
+        </Link>
         <Link to="/shop">
           <span className="material-symbols-outlined">local_mall</span>
           쇼핑몰
-        </Link>
-        <Link to="/learning">
-          <span className="material-symbols-outlined">task</span>
-          학습 허브
         </Link>
       </nav>
     </div>

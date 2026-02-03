@@ -3,6 +3,7 @@ package com.korfarm.api.learning
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.contracts.SubmitRequest
 import com.korfarm.api.economy.EconomyService
+import com.korfarm.api.economy.SeedCatalogRepository
 import com.korfarm.api.user.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -15,7 +16,8 @@ class LearningService(
     private val economyService: EconomyService,
     private val learningAttemptRepository: LearningAttemptRepository,
     private val learningStreakRepository: LearningStreakRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val seedCatalogRepository: SeedCatalogRepository
 ) {
     fun getDailyQuiz(): DailyQuizContent {
         return DailyQuizContent(
@@ -59,7 +61,9 @@ class LearningService(
         } else {
             SeedRewardPolicy.seedCountFor(userLevelId, request.contentLevelId)
         }
-        val seedGrant = SeedGrant(seedType = "seed_wheat", count = seedCount)
+        val catalog = seedCatalogRepository.findAll()
+        val seedType = SeedRewardPolicy.randomSeedType(catalog)
+        val seedGrant = SeedGrant(seedType = seedType, count = seedCount)
         if (seedCount > 0) {
             economyService.addSeeds(userId, seedGrant.seedType, seedGrant.count, "daily_submit", "learning", null)
         }

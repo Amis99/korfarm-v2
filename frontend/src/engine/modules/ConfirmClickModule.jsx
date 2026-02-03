@@ -10,6 +10,7 @@ function ConfirmClickModule({ content }) {
   const [highlightTokens, setHighlightTokens] = useState([]);
   const [activeTokens, setActiveTokens] = useState([]);
   const [pendingNext, setPendingNext] = useState(false);
+  const [lastResult, setLastResult] = useState(null);
 
   const current = questions[currentIndex];
 
@@ -19,6 +20,7 @@ function ConfirmClickModule({ content }) {
     const correct = current.answerTokenRefs?.includes(token.tokenId);
     adjustTime(correct ? current.scoring?.correctDeltaSec || 0 : current.scoring?.wrongDeltaSec || 0);
     recordAnswer({ id: current.id, correct });
+    setLastResult(correct ? "correct" : "wrong");
     if (!correct && current.revealOnWrong) {
       setHighlightTokens(current.answerTokenRefs || []);
       setPendingNext(true);
@@ -51,6 +53,10 @@ function ConfirmClickModule({ content }) {
     }
   }, [status, start]);
 
+  useEffect(() => {
+    setLastResult(null);
+  }, [currentIndex]);
+
   return (
     <div className="confirm-module">
       {status === "READY" ? (
@@ -68,6 +74,11 @@ function ConfirmClickModule({ content }) {
               {currentIndex + 1}/{questions.length}
             </span>
           </div>
+          {lastResult ? (
+            <div className={`worksheet-feedback ${lastResult}`}>
+              {lastResult === "correct" ? "정답입니다!" : "오답입니다."}
+            </div>
+          ) : null}
           <TokenPassage
             passage={payload.passage}
             highlightTokens={highlightTokens}

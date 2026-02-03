@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 
@@ -9,6 +9,10 @@ function PhonemeChangeModule({ content }) {
   const [wordIndex, setWordIndex] = useState(0);
   const [stepIndex, setStepIndex] = useState(0);
   const [cellsState, setCellsState] = useState(() => words.map((word) => word.cells));
+  const [lastResult, setLastResult] = useState(null);
+  const advanceTimerRef = useRef(null);
+  const resultTimerRef = useRef(null);
+  const feedbackDelay = 420;
 
   const word = words[wordIndex];
   const step = word?.steps?.[stepIndex];
@@ -19,6 +23,13 @@ function PhonemeChangeModule({ content }) {
     const delta = isCorrect ? step.onCorrect?.deltaSec || 0 : step.onWrong?.deltaSec || 0;
     adjustTime(delta);
     recordAnswer({ id: step.stepId, correct: isCorrect });
+    setLastResult(isCorrect ? "correct" : "wrong");
+    if (resultTimerRef.current) {
+      clearTimeout(resultTimerRef.current);
+    }
+    resultTimerRef.current = setTimeout(() => {
+      setLastResult(null);
+    }, feedbackDelay);
     if (!isCorrect && step.onWrong?.retry) return;
     if (isCorrect && step.onCorrect?.applyCellText) {
       const { cellNo, newText } = step.onCorrect.applyCellText;
@@ -31,16 +42,21 @@ function PhonemeChangeModule({ content }) {
         })
       );
     }
-    if (stepIndex < word.steps.length - 1) {
-      setStepIndex((prev) => prev + 1);
-      return;
+    if (advanceTimerRef.current) {
+      clearTimeout(advanceTimerRef.current);
     }
-    if (wordIndex < words.length - 1) {
-      setWordIndex((prev) => prev + 1);
-      setStepIndex(0);
-      return;
-    }
-    finish(true);
+    advanceTimerRef.current = setTimeout(() => {
+      if (stepIndex < word.steps.length - 1) {
+        setStepIndex((prev) => prev + 1);
+        return;
+      }
+      if (wordIndex < words.length - 1) {
+        setWordIndex((prev) => prev + 1);
+        setStepIndex(0);
+        return;
+      }
+      finish(true);
+    }, feedbackDelay);
   };
 
   useEffect(() => {
@@ -48,6 +64,18 @@ function PhonemeChangeModule({ content }) {
       start();
     }
   }, [status, start]);
+
+  useEffect(
+    () => () => {
+      if (advanceTimerRef.current) {
+        clearTimeout(advanceTimerRef.current);
+      }
+      if (resultTimerRef.current) {
+        clearTimeout(resultTimerRef.current);
+      }
+    },
+    []
+  );
 
   return (
     <div className="phoneme-module">
@@ -82,12 +110,19 @@ function PhonemeChangeModule({ content }) {
               );
             })}
           </div>
+          {lastResult ? (
+            <div className={`worksheet-feedback ${lastResult}`}>
+              {lastResult === "correct" ? "정답입니다!" : "오답입니다."}
+            </div>
+          ) : null}
           {step ? (
             <QuestionModal
               title="음운 변동"
               prompt={step.questionType === "RULE_EXPLANATION" ? "규칙을 고르세요." : "변동 결과를 고르세요."}
               choices={step.choices || []}
               onSelect={handleAnswer}
+              mark={lastResult}
+              shuffleKey={step.stepId}
             />
           ) : null}
         </>

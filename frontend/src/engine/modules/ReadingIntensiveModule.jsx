@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 
@@ -10,7 +10,7 @@ const highlightText = (text, range) => {
   return (
     <>
       {before}
-      <mark className="highlight">{target}</mark>
+      <span className="worksheet-highlight">{target}</span>
       {after}
     </>
   );
@@ -21,7 +21,10 @@ function ReadingIntensiveModule({ content }) {
   const payload = content?.payload || {};
   const [stepIndex, setStepIndex] = useState(0);
   const [removedChoices, setRemovedChoices] = useState({});
-  const [feedback, setFeedback] = useState("");
+  const [lastResult, setLastResult] = useState(null);
+  const advanceTimerRef = useRef(null);
+  const resultTimerRef = useRef(null);
+  const feedbackDelay = 420;
 
   const step = payload.timeline?.[stepIndex];
   const paragraph = useMemo(() => {
@@ -40,13 +43,24 @@ function ReadingIntensiveModule({ content }) {
     const isCorrect = choiceId === step.question.answerId;
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
     recordAnswer({ id: step.stepId, correct: isCorrect });
-    setFeedback(isCorrect ? "정답입니다!" : "오답입니다.");
+    setLastResult(isCorrect ? "correct" : "wrong");
+    if (resultTimerRef.current) {
+      clearTimeout(resultTimerRef.current);
+    }
+    resultTimerRef.current = setTimeout(() => {
+      setLastResult(null);
+    }, feedbackDelay);
     if (isCorrect) {
-      if (stepIndex >= payload.timeline.length - 1) {
-        finish(true);
-        return;
+      if (advanceTimerRef.current) {
+        clearTimeout(advanceTimerRef.current);
       }
-      setStepIndex((prev) => prev + 1);
+      advanceTimerRef.current = setTimeout(() => {
+        if (stepIndex >= payload.timeline.length - 1) {
+          finish(true);
+          return;
+        }
+        setStepIndex((prev) => prev + 1);
+      }, feedbackDelay);
       return;
     }
     if (scoring.eliminateWrongChoice) {
@@ -62,6 +76,18 @@ function ReadingIntensiveModule({ content }) {
       start();
     }
   }, [status, start]);
+
+  useEffect(
+    () => () => {
+      if (advanceTimerRef.current) {
+        clearTimeout(advanceTimerRef.current);
+      }
+      if (resultTimerRef.current) {
+        clearTimeout(resultTimerRef.current);
+      }
+    },
+    []
+  );
 
   return (
     <div className="reading-module">
@@ -83,14 +109,20 @@ function ReadingIntensiveModule({ content }) {
           </div>
           <div className="reading-meta">
             <span>{stepIndex + 1} / {payload.timeline?.length || 0}</span>
-            {feedback ? <span className="reading-feedback">{feedback}</span> : null}
           </div>
+          {lastResult ? (
+            <div className={`worksheet-feedback ${lastResult}`}>
+              {lastResult === "correct" ? "정답입니다!" : "오답입니다."}
+            </div>
+          ) : null}
           {step?.question ? (
             <QuestionModal
               title="정독 질문"
               prompt={step.question.prompt}
               choices={choices}
               onSelect={handleAnswer}
+              mark={lastResult}
+              shuffleKey={step.stepId}
             />
           ) : null}
         </>

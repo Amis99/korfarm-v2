@@ -1,8 +1,7 @@
 import vocabBasicWordToMeaning from "./samples/vocab_basic_word_to_meaning.json";
 import vocabDictionaryFill from "./samples/vocab_dictionary_fill.json";
-import readingNonfictionIntensive from "./samples/reading_nonfiction_intensive.json";
-import readingNonfictionRecall from "./samples/reading_nonfiction_recall.json";
-import readingNonfictionConfirm from "./samples/reading_nonfiction_confirm.json";
+import readingLiteratureTraining from "./samples/reading_literature_training.json";
+import readingNonfictionTraining from "./samples/reading_nonfiction_training.json";
 import contentPdfQuiz from "./samples/content_pdf_quiz.json";
 import grammarWordFormation from "./samples/grammar_word_formation.json";
 import grammarSentenceStructure from "./samples/grammar_sentence_structure.json";
@@ -34,31 +33,22 @@ export const LEARNING_CATALOG = [
     content: vocabDictionaryFill,
   },
   {
-    id: "reading-intensive",
+    id: "reading-training",
     category: "독해 연습",
-    title: readingNonfictionIntensive.title,
-    description: readingNonfictionIntensive.description,
-    contentType: readingNonfictionIntensive.contentType,
-    moduleKey: "reading_intensive",
-    content: readingNonfictionIntensive,
+    title: readingNonfictionTraining.title,
+    description: readingNonfictionTraining.description,
+    contentType: readingNonfictionTraining.contentType,
+    moduleKey: "reading_training",
+    content: readingNonfictionTraining,
   },
   {
-    id: "reading-recall",
+    id: "reading-literature-training",
     category: "독해 연습",
-    title: readingNonfictionRecall.title,
-    description: readingNonfictionRecall.description,
-    contentType: readingNonfictionRecall.contentType,
-    moduleKey: "recall_cards",
-    content: readingNonfictionRecall,
-  },
-  {
-    id: "reading-confirm",
-    category: "독해 연습",
-    title: readingNonfictionConfirm.title,
-    description: readingNonfictionConfirm.description,
-    contentType: readingNonfictionConfirm.contentType,
-    moduleKey: "confirm_click",
-    content: readingNonfictionConfirm,
+    title: readingLiteratureTraining.title,
+    description: readingLiteratureTraining.description,
+    contentType: readingLiteratureTraining.contentType,
+    moduleKey: "reading_training",
+    content: readingLiteratureTraining,
   },
   {
     id: "content-pdf-quiz",

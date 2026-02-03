@@ -33,7 +33,7 @@ function AdminPage() {
       <div className="admin-shell">
         <aside className="admin-side">
           <div className="admin-brand" aria-label="국어농장 Admin">
-            <img className="admin-logo" src="/korfarm-logo.png" alt="국어농장" />
+            <img className="admin-logo" src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt="국어농장" />
             <span>Admin</span>
           </div>
           <nav className="admin-nav">

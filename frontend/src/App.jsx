@@ -35,11 +35,22 @@ import LearningHubPage from "./pages/LearningHubPage";
 import LearningRunnerPage from "./pages/LearningRunnerPage";
 import DailyQuizPage from "./pages/DailyQuizPage";
 import DailyReadingPage from "./pages/DailyReadingPage";
+import ProModePage from "./pages/ProModePage";
+import FarmModePage from "./pages/FarmModePage";
+import WritingPage from "./pages/WritingPage";
+import TestStoragePage from "./pages/TestStoragePage";
+import HarvestLedgerPage from "./pages/HarvestLedgerPage";
+import SeedLogPage from "./pages/SeedLogPage";
+import DuelMainPage from "./pages/DuelMainPage";
+import DuelWaitingRoomPage from "./pages/DuelWaitingRoomPage";
+import DuelMatchPage from "./pages/DuelMatchPage";
+import DuelResultPage from "./pages/DuelResultPage";
+import AssignmentsPage from "./pages/AssignmentsPage";
 
 function GlobalLogo() {
   const { pathname } = useLocation();
   const hideLogo =
-    pathname === "/" || pathname === "/admin" || pathname === "/ops" || pathname === "/community";
+    pathname === "/" || pathname === "/admin" || pathname === "/ops" || pathname === "/community" || pathname.startsWith("/duel/match");
   if (hideLogo) {
     return null;
   }
@@ -47,7 +58,7 @@ function GlobalLogo() {
   return (
     <div className="global-logo-bar">
       <Link className="global-logo-link" to="/" aria-label={label}>
-        <img src="/korfarm-logo.png" alt={label} />
+        <img src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt={label} />
       </Link>
     </div>
   );
@@ -55,7 +66,7 @@ function GlobalLogo() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <GlobalLogo />
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -93,6 +104,17 @@ function App() {
         <Route path="/daily-reading" element={<DailyReadingPage />} />
         <Route path="/learning" element={<LearningHubPage />} />
         <Route path="/learning/:learningId" element={<LearningRunnerPage />} />
+        <Route path="/pro-mode" element={<ProModePage />} />
+        <Route path="/farm-mode" element={<FarmModePage />} />
+        <Route path="/writing" element={<WritingPage />} />
+        <Route path="/tests" element={<TestStoragePage />} />
+        <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />
+        <Route path="/seed-log" element={<SeedLogPage />} />
+        <Route path="/duel" element={<DuelMainPage />} />
+        <Route path="/duel/room/:roomId" element={<DuelWaitingRoomPage />} />
+        <Route path="/duel/match/:matchId" element={<DuelMatchPage />} />
+        <Route path="/duel/result/:matchId" element={<DuelResultPage />} />
+        <Route path="/assignments" element={<AssignmentsPage />} />
         <Route path="/ops" element={<OpsStation />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

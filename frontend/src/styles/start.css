@@ -9,7 +9,8 @@
   --sky-blue: #81d4fa;
   --card-bg: #ffffff;
   --card-border: #f3d6bf;
-  background: linear-gradient(135deg, #f5f7f0 0%, #ffe6cf 100%);
+  background: linear-gradient(135deg, rgba(245,247,240,0.85) 0%, rgba(255,230,207,0.85) 100%),
+    url("/farm-bg.jpg") center/cover fixed no-repeat;
   color: var(--earth-dark);
   font-family: var(--font-body);
   min-height: 100vh;
@@ -356,6 +357,155 @@
   color: var(--meadow-dark);
 }
 
+/* Paid learning grid */
+.start-paid-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.start-paid-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 16px;
+  border: 2px solid var(--card-border);
+  box-shadow: 0 6px 14px rgba(255, 170, 92, 0.12);
+  display: grid;
+  gap: 6px;
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+  position: relative;
+}
+
+.start-paid-card:hover {
+  box-shadow: 0 8px 20px rgba(255, 170, 92, 0.28);
+}
+
+.start-paid-card .material-symbols-outlined {
+  font-size: 28px;
+  color: var(--meadow-dark);
+}
+
+.start-paid-card h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.start-paid-card p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--earth-brown);
+}
+
+.start-lock-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+/* Seed log list */
+.start-seed-log {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+}
+
+/* Harvest craft modal */
+.harvest-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+}
+
+.harvest-modal {
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px;
+  width: 340px;
+  max-width: 92vw;
+  display: grid;
+  gap: 16px;
+  position: relative;
+}
+
+.harvest-modal h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.harvest-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.harvest-field {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.harvest-field select {
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--card-border);
+  font-size: 14px;
+}
+
+.harvest-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.harvest-error {
+  color: #d32f2f;
+  font-size: 13px;
+}
+
+.harvest-result {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2e7d32;
+  font-weight: 700;
+}
+
+.harvest-submit {
+  border: none;
+  background: linear-gradient(135deg, #ffb26b, #f07f1a);
+  color: #fff;
+  font-weight: 800;
+  border-radius: 14px;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.harvest-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 @media (max-width: 1024px) {
   .start-grid {
     grid-template-columns: 1fr;
@@ -384,5 +534,8 @@
   }
   .start-nav {
     display: flex;
+  }
+  .start-paid-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

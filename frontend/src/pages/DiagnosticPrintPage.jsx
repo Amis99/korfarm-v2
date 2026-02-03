@@ -4,7 +4,7 @@ import "../styles/diagnostic.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
 const TOKEN_KEY = "korfarm_token";
-const PDF_URL = "/diagnostic-test.pdf";
+const PDF_URL = import.meta.env.BASE_URL + "diagnostic-test.pdf";
 
 const blockEvent = (event) => {
   event.preventDefault();

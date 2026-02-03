@@ -8,7 +8,7 @@ function SentenceStructureModule({ content }) {
   const [sentenceIndex, setSentenceIndex] = useState(0);
   const [queryIndex, setQueryIndex] = useState(0);
   const [selected, setSelected] = useState([]);
-  const [feedback, setFeedback] = useState("");
+  const [lastResult, setLastResult] = useState(null);
   const [showCorrect, setShowCorrect] = useState(false);
 
   const sentence = sentences[sentenceIndex];
@@ -34,20 +34,22 @@ function SentenceStructureModule({ content }) {
     adjustTime(correct ? 20 : -20);
     recordAnswer({ id: `${sentence.sentenceId}-${queryIndex}`, correct });
     if (!correct) {
-      setFeedback("오답입니다. 다시 선택해 주세요.");
+      setLastResult(correct ? "correct" : "wrong");
       setShowCorrect(true);
       setSelected([]);
       return;
     }
-    setFeedback("정답입니다!");
+    setLastResult(correct ? "correct" : "wrong");
     setShowCorrect(false);
     setSelected([]);
     if (queryIndex < sentence.roleQueryOrder.length - 1) {
       setQueryIndex((prev) => prev + 1);
+      setLastResult(null);
       return;
     }
     if (sentenceIndex < sentences.length - 1) {
       setSentenceIndex((prev) => prev + 1);
+      setLastResult(null);
       setQueryIndex(0);
       return;
     }
@@ -86,7 +88,11 @@ function SentenceStructureModule({ content }) {
               {sentence?.roleQueryOrder?.length || 0}
             </span>
           </div>
-          {feedback ? <div className="worksheet-feedback">{feedback}</div> : null}
+          {lastResult ? (
+            <div className={`worksheet-feedback ${lastResult}`}>
+              {lastResult === "correct" ? "정답입니다!" : "오답입니다."}
+            </div>
+          ) : null}
           <div className="sentence-tokens">
             {tokens.map((token) => (
               <button
@@ -94,7 +100,7 @@ function SentenceStructureModule({ content }) {
                 type="button"
                 className={`token-chip role-${token.role?.split("_")[1] || "1"} ${
                   selected.includes(token.tokenId) ? "active" : ""
-                } ${showCorrect && query?.targetRoles?.includes(token.role) ? "highlight" : ""}`}
+                } ${showCorrect && query?.targetRoles?.includes(token.role) ? "worksheet-highlight" : ""}`}
                 onClick={() => handleTokenClick(token.tokenId)}
               >
                 {token.text}

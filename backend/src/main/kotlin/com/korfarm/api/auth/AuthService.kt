@@ -14,8 +14,10 @@ import com.korfarm.api.user.UserRepository
 import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.user.ParentStudentLinkRepository
 import org.springframework.http.HttpStatus
+import org.springframework.dao.DataAccessException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.slf4j.LoggerFactory
 import java.time.LocalDateTime
 
 @Service
@@ -29,6 +31,8 @@ class AuthService(
     private val orgRepository: OrgRepository,
     private val parentStudentLinkRepository: ParentStudentLinkRepository
 ) {
+    private val logger = LoggerFactory.getLogger(AuthService::class.java)
+
     fun signup(
         loginId: String,
         password: String,
@@ -93,8 +97,12 @@ class AuthService(
         if (!passwordEncoder.matches(password, user.passwordHash)) {
             throw ApiException("INVALID_CREDENTIALS", "invalid credentials", HttpStatus.UNAUTHORIZED)
         }
-        user.lastLoginAt = LocalDateTime.now()
-        userRepository.save(user)
+        val now = LocalDateTime.now()
+        try {
+            userRepository.updateLastLoginAt(user.id, now, now)
+        } catch (ex: DataAccessException) {
+            logger.warn("Failed to update last login for userId={}", user.id, ex)
+        }
         return issueTokens(user)
     }
 
@@ -135,8 +143,12 @@ class AuthService(
     private fun resolveRoles(userId: String): List<String> {
         val memberships = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
         val roles = memberships.map { it.role }.distinct().toMutableSet()
-        if (parentStudentLinkRepository.existsByParentUserIdAndStatus(userId, "active")) {
-            roles.add("PARENT")
+        try {
+            if (parentStudentLinkRepository.existsByParentUserIdAndStatus(userId, "active")) {
+                roles.add("PARENT")
+            }
+        } catch (ex: DataAccessException) {
+            logger.warn("Failed to resolve parent role for userId={}", userId, ex)
         }
         if (roles.isEmpty()) {
             roles.add("STUDENT")

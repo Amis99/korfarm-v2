@@ -1,31 +1,18 @@
-﻿import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 import {
   COMMUNITY_BOARDS,
   COMMUNITY_POSTS,
-  COMMUNITY_RANKING,
 } from "../data/communityBoards";
 import "../styles/community.css";
 
 const DEFAULT_BOARD_ID = "community";
 
-const boardActionLabel = (boardId) => {
-  switch (boardId) {
-    case "learning_request":
-      return "학습 신청하기";
-    case "qna":
-      return "질문하기";
-    case "materials":
-      return "자료 공유하기";
-    default:
-      return "글쓰기";
-  }
-};
-
-const statusLabelForPost = (status) => {
+const statusLabel = (status) => {
   switch (status) {
     case "pending":
-      return "승인 대기";
+      return "대기";
     case "rejected":
       return "반려";
     default:
@@ -35,232 +22,236 @@ const statusLabelForPost = (status) => {
 
 function CommunityPage() {
   const [params] = useSearchParams();
+  const { user } = useAuth();
+  const isAdmin = user?.roles?.includes("ADMIN") || user?.roles?.includes("HQ_ADMIN") || user?.roles?.includes("ORG_ADMIN");
+
   const boardId = params.get("board") || DEFAULT_BOARD_ID;
   const board =
-    COMMUNITY_BOARDS.find((item) => item.id === boardId) || COMMUNITY_BOARDS[0];
-  const posts = COMMUNITY_POSTS.filter((post) => post.boardId === board.id);
-  const [selectedId, setSelectedId] = useState("");
-  const [viewMode, setViewMode] = useState("list");
+    COMMUNITY_BOARDS.find((b) => b.id === boardId) || COMMUNITY_BOARDS[0];
+  const posts = COMMUNITY_POSTS.filter((p) => p.boardId === board.id);
+
+  const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [selectedId, setSelectedId] = useState(null);
   const postsPerPage = 20;
-  const totalPages = Math.max(1, Math.ceil(posts.length / postsPerPage));
-  const pagedPosts = useMemo(() => {
-    const start = (page - 1) * postsPerPage;
-    return posts.slice(start, start + postsPerPage);
-  }, [page, posts]);
 
   useEffect(() => {
-    setSelectedId("");
-    setViewMode("list");
+    setSelectedId(null);
     setPage(1);
+    setSearch("");
   }, [boardId]);
 
-  const selectedPost = posts.find((post) => post.id === selectedId);
+  const filtered = useMemo(() => {
+    if (!search.trim()) return posts;
+    const q = search.trim().toLowerCase();
+    return posts.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.author.toLowerCase().includes(q)
+    );
+  }, [posts, search]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / postsPerPage));
+  const paged = useMemo(() => {
+    const s = (page - 1) * postsPerPage;
+    return filtered.slice(s, s + postsPerPage);
+  }, [page, filtered]);
+
+  const selectedPost = selectedId
+    ? posts.find((p) => p.id === selectedId)
+    : null;
+
+  /* 자료실은 관리자만 글쓰기 가능 */
+  const canWrite = board.writeRole === "admin" ? isAdmin : true;
 
   return (
-    <div className="community-page">
-      <nav className="community-nav">
-        <div className="community-wrap community-nav-inner">
-          <Link to="/" aria-label="국어농장">
-            <img className="community-logo" src="/korfarm-logo.png" alt="국어농장" />
+    <div className="comm">
+      {/* 상단 내비게이션 */}
+      <header className="comm-topbar">
+        <div className="comm-topbar-inner">
+          <Link to="/start" className="comm-home">
+            <span className="material-symbols-outlined">arrow_back</span>
+            홈으로
           </Link>
-          <div className="community-search">
-            <span className="material-symbols-outlined">search</span>
-            <input placeholder="게시글, 작성자 검색" />
+          <h1 className="comm-title">커뮤니티</h1>
+          <div className="comm-topbar-right">
+            {canWrite && (
+              <Link className="comm-write-btn" to={`/community/new?board=${board.id}`}>
+                <span className="material-symbols-outlined">edit</span>
+                글쓰기
+              </Link>
+            )}
           </div>
-          <div className="community-nav-actions">
-            <Link className="community-btn" to={`/community/new?board=${board.id}`}>
-              {boardActionLabel(board.id)}
+        </div>
+      </header>
+
+      {/* 게시판 탭 */}
+      <nav className="comm-tabs">
+        <div className="comm-tabs-inner">
+          {COMMUNITY_BOARDS.map((b) => (
+            <Link
+              key={b.id}
+              to={`/community?board=${b.id}`}
+              className={`comm-tab ${board.id === b.id ? "active" : ""}`}
+            >
+              {b.name}
+              {b.writeRole === "admin" && (
+                <span className="comm-tab-badge">관리자</span>
+              )}
             </Link>
-            <Link className="community-btn" to="/start">
-              스타트
-            </Link>
-          </div>
+          ))}
         </div>
       </nav>
 
-      <div className="community-wrap community-layout">
-        <aside className="community-card community-sidebar-left">
-          <h3>게시판 목록</h3>
-          <div className="community-board-list">
-            {COMMUNITY_BOARDS.map((item) => {
-              const count = COMMUNITY_POSTS.filter(
-                (post) => post.boardId === item.id
-              ).length;
-              return (
-                <Link
-                  key={item.id}
-                  to={`/community?board=${item.id}`}
-                  className={`community-board-item ${
-                    board.id === item.id ? "active" : ""
-                  }`}
-                >
-                  <div>
-                    <strong>{item.name}</strong>
-                    <p>{item.description}</p>
-                  </div>
-                  <div className="community-board-meta">
-                    {item.requiresApproval && (
-                      <span className="community-pill">승인형</span>
-                    )}
-                    {item.writeRole === "admin" && (
-                      <span className="community-pill admin">관리자 전용</span>
-                    )}
-                    <span>{count}건</span>
-                  </div>
-                </Link>
-              );
-            })}
+      <div className="comm-body">
+        {/* 게시판 헤더 */}
+        <div className="comm-board-head">
+          <div>
+            <h2>{board.name}</h2>
+            <p className="comm-board-desc">{board.description}</p>
           </div>
-        </aside>
-
-        <main className="community-list">
-          <div className="community-board-header">
-            <div>
-              <h2>{board.name}</h2>
-              <p>{board.description}</p>
-            </div>
-            {board.requiresApproval && (
-              <span className="community-board-note">관리자 승인 후 공개됩니다.</span>
-            )}
+          <div className="comm-search">
+            <span className="material-symbols-outlined">search</span>
+            <input
+              placeholder="제목, 작성자 검색"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setPage(1);
+              }}
+            />
           </div>
+        </div>
 
-          {posts.length === 0 ? (
-            <div className="community-empty">아직 등록된 게시글이 없습니다.</div>
-          ) : viewMode === "detail" && selectedPost ? (
-            <div className="community-post-view">
-              <div className="community-frame-header">
-                <div>
-                  <h3>{selectedPost.title}</h3>
-                  <div className="community-meta">
-                    <span>{board.name}</span>
-                    <span>{selectedPost.author}</span>
-                    <span>{selectedPost.time}</span>
-                  </div>
-                </div>
-                {statusLabelForPost(selectedPost.status) && (
-                  <span className="post-status">
-                    {statusLabelForPost(selectedPost.status)}
-                  </span>
+        {board.requiresApproval && (
+          <p className="comm-notice">관리자 승인 후 게시글이 공개됩니다.</p>
+        )}
+
+        {/* 상세 보기 */}
+        {selectedPost ? (
+          <div className="comm-detail">
+            <div className="comm-detail-head">
+              <h3>{selectedPost.title}</h3>
+              <div className="comm-detail-meta">
+                <span>{selectedPost.author}</span>
+                <span>{selectedPost.time}</span>
+                {statusLabel(selectedPost.status) && (
+                  <span className="comm-status">{statusLabel(selectedPost.status)}</span>
                 )}
               </div>
-              <div className="community-frame-body">{selectedPost.excerpt}</div>
-
-              {selectedPost.attachments && (
-                <div className="community-frame-files">
-                  <h4>첨부 자료</h4>
-                  <ul className="community-file-list">
-                    {selectedPost.attachments.map((file) => (
-                      <li key={file.id}>
-                        <div>
-                          <strong>{file.name}</strong>
-                          <span>{file.size}</span>
-                        </div>
-                        <a
-                          className="community-btn ghost"
-                          href={`/v1/files/${file.id}/download`}
-                        >
-                          다운로드
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              <div className="community-frame-actions">
-                <button
-                  type="button"
-                  className="community-btn ghost"
-                  onClick={() => setViewMode("list")}
-                >
-                  목록으로
-                </button>
-                <Link
-                  className="community-btn ghost"
-                  to={`/community/post/${selectedPost.id}?board=${board.id}`}
-                >
-                  전체 보기
-                </Link>
-              </div>
             </div>
-          ) : (
-            <div className="community-table">
-              <div className="community-table-header">
-                <span>제목</span>
-                <span>작성자</span>
-                <span>작성일</span>
-              </div>
-              {pagedPosts.map((post) => (
-                <button
-                  key={post.id}
-                  type="button"
-                  className="community-table-row"
-                  onClick={() => {
-                    setSelectedId(post.id);
-                    setViewMode("detail");
-                  }}
-                >
-                  <div className="community-table-title">
-                    <span className="community-tag">{board.tag}</span>
-                    <strong>{post.title}</strong>
-                    {statusLabelForPost(post.status) && (
-                      <span className="community-tag secondary">
-                        {statusLabelForPost(post.status)}
-                      </span>
-                    )}
+            <div className="comm-detail-body">{selectedPost.excerpt}</div>
+
+            {selectedPost.attachments && selectedPost.attachments.length > 0 && (
+              <div className="comm-attachments">
+                <h4>첨부파일</h4>
+                {selectedPost.attachments.map((file) => (
+                  <div key={file.id} className="comm-file-row">
+                    <span className="material-symbols-outlined">attach_file</span>
+                    <span className="comm-file-name">{file.name}</span>
+                    <span className="comm-file-size">{file.size}</span>
+                    <a href={`/v1/files/${file.id}/download`} className="comm-file-dl">
+                      다운로드
+                    </a>
                   </div>
-                  <span>{post.author}</span>
-                  <span>{post.time}</span>
-                </button>
-              ))}
-              <div className="community-pagination">
+                ))}
+              </div>
+            )}
+
+            <div className="comm-detail-actions">
+              <button
+                type="button"
+                className="comm-btn-text"
+                onClick={() => setSelectedId(null)}
+              >
+                목록으로
+              </button>
+              <Link
+                className="comm-btn-text"
+                to={`/community/post/${selectedPost.id}?board=${board.id}`}
+              >
+                전체 보기
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* 게시글 테이블 */}
+            <table className="comm-table">
+              <thead>
+                <tr>
+                  <th className="comm-th-num">번호</th>
+                  <th className="comm-th-title">제목</th>
+                  <th className="comm-th-author">작성자</th>
+                  <th className="comm-th-date">작성일</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paged.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="comm-empty">
+                      {search ? "검색 결과가 없습니다." : "등록된 게시글이 없습니다."}
+                    </td>
+                  </tr>
+                ) : (
+                  paged.map((post, idx) => (
+                    <tr
+                      key={post.id}
+                      className="comm-row"
+                      onClick={() => setSelectedId(post.id)}
+                    >
+                      <td className="comm-td-num">
+                        {filtered.length - ((page - 1) * postsPerPage + idx)}
+                      </td>
+                      <td className="comm-td-title">
+                        <span className="comm-tag">{board.tag}</span>
+                        {post.title}
+                        {post.attachments && post.attachments.length > 0 && (
+                          <span className="material-symbols-outlined comm-clip">attach_file</span>
+                        )}
+                        {statusLabel(post.status) && (
+                          <span className="comm-status">{statusLabel(post.status)}</span>
+                        )}
+                      </td>
+                      <td className="comm-td-author">{post.author}</td>
+                      <td className="comm-td-date">{post.time}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+
+            {/* 페이지네이션 */}
+            {totalPages > 1 && (
+              <div className="comm-paging">
                 <button
                   type="button"
-                  className="community-page-btn"
-                  onClick={() => setPage((prev) => Math.max(1, prev - 1))}
                   disabled={page === 1}
+                  onClick={() => setPage((p) => p - 1)}
                 >
                   이전
                 </button>
-                <span>
-                  {page} / {totalPages}
-                </span>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    className={page === n ? "active" : ""}
+                    onClick={() => setPage(n)}
+                  >
+                    {n}
+                  </button>
+                ))}
                 <button
                   type="button"
-                  className="community-page-btn"
-                  onClick={() =>
-                    setPage((prev) => Math.min(totalPages, prev + 1))
-                  }
                   disabled={page === totalPages}
+                  onClick={() => setPage((p) => p + 1)}
                 >
                   다음
                 </button>
               </div>
-            </div>
-          )}
-        </main>
-
-        <aside className="community-side">
-          <div className="community-card">
-            <h3>시즌 랭킹</h3>
-            <ul className="community-rank">
-              {COMMUNITY_RANKING.map((item) => (
-                <li key={item.name}>
-                  <span>{item.name}</span>
-                  <strong>{item.score}</strong>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="community-card">
-            <h3>운영 알림</h3>
-            <p>자료 게시판은 관리자 승인 후 공개됩니다.</p>
-            <Link className="community-btn" to="/start">
-              확인하기
-            </Link>
-          </div>
-        </aside>
+            )}
+          </>
+        )}
       </div>
     </div>
   );
