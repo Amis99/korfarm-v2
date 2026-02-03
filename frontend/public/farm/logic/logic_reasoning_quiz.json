@@ -6,25 +6,13 @@
   "title": "논리사고력 01",
   "description": "논리 추론 문제 풀이",
   "targetLevel": "RUSSELL_1",
-  "schoolGradeRange": {
-    "min": 4,
-    "max": 6
-  },
+  "schoolGradeRange": { "min": 4, "max": 6 },
   "area": "LOGIC",
   "subArea": "REASONING",
-  "competencies": [
-    "VOCAB",
-    "READING"
-  ],
+  "competencies": ["VOCAB", "READING"],
   "tags": [],
-  "access": {
-    "mode": "FREE"
-  },
-  "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
-    "multiplier": 1
-  },
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
   "timeLimitSec": 180,
   "assets": {},
   "payload": {
@@ -33,22 +21,53 @@
       {
         "id": "r1",
         "type": "OX",
-        "stem": "OX: 모든 A는 B이다. 어떤 A가 있다면 B도 있다.",
+        "stem": "모든 A는 B이다. 어떤 A가 있다면 B도 있다.",
         "choices": [
-          {
-            "id": "O",
-            "text": "O"
-          },
-          {
-            "id": "X",
-            "text": "X"
-          }
+          { "id": "O", "text": "O" },
+          { "id": "X", "text": "X" }
         ],
         "answerId": "O",
-        "scoring": {
-          "correctDeltaSec": 30,
-          "wrongDeltaSec": -30
-        }
+        "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+      },
+      {
+        "id": "r2",
+        "type": "MULTI_CHOICE",
+        "stem": "모든 고양이는 동물이다. 모든 동물은 생물이다. 다음 중 반드시 참인 것은?",
+        "choices": [
+          { "id": "A", "text": "모든 고양이는 생물이다" },
+          { "id": "B", "text": "모든 생물은 고양이다" },
+          { "id": "C", "text": "일부 동물은 고양이가 아니다" },
+          { "id": "D", "text": "고양이와 생물은 관계없다" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+      },
+      {
+        "id": "r3",
+        "type": "MULTI_CHOICE",
+        "stem": "'비가 오면 땅이 젖는다'가 참일 때, 반드시 참인 것은?",
+        "passage": "대우: 원래 명제가 참이면 대우도 참이다.",
+        "choices": [
+          { "id": "A", "text": "땅이 젖지 않으면 비가 오지 않았다" },
+          { "id": "B", "text": "땅이 젖으면 비가 왔다" },
+          { "id": "C", "text": "비가 오지 않으면 땅이 젖지 않는다" },
+          { "id": "D", "text": "비가 올 때만 땅이 젖는다" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+      },
+      {
+        "id": "r4",
+        "type": "MULTI_CHOICE",
+        "stem": "사과 10개를 관찰했더니 모두 빨간색이었다. 이로부터 '모든 사과는 빨간색이다'라고 결론지었다. 이 추론 방식은?",
+        "choices": [
+          { "id": "A", "text": "귀납 추론" },
+          { "id": "B", "text": "연역 추론" },
+          { "id": "C", "text": "유비 추론" },
+          { "id": "D", "text": "변증법" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
       }
     ],
     "pageStack": true

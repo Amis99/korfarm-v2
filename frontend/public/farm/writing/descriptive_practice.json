@@ -6,25 +6,13 @@
   "title": "서술형 연습 01",
   "description": "원고지 빈칸 채우기",
   "targetLevel": "RUSSELL_1",
-  "schoolGradeRange": {
-    "min": 4,
-    "max": 6
-  },
+  "schoolGradeRange": { "min": 4, "max": 6 },
   "area": "WRITING",
   "subArea": "DESCRIPTIVE",
-  "competencies": [
-    "VOCAB",
-    "READING"
-  ],
+  "competencies": ["VOCAB", "READING"],
   "tags": [],
-  "access": {
-    "mode": "FREE"
-  },
-  "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
-    "multiplier": 1
-  },
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
   "timeLimitSec": 180,
   "assets": {},
   "payload": {
@@ -35,55 +23,80 @@
         "type": "FILL_BLANKS",
         "stem": "서술형 문장을 완성하세요.",
         "render": "MANUSCRIPT",
-        "template": "카는 사실을 ‘____’, ‘____’, ‘____’로 구분했다.",
+        "template": "카는 사실을 '____', '____', '____'로 구분했다.",
         "blanks": [
           {
             "id": "b1",
             "choices": [
-              {
-                "id": "A",
-                "text": "과거에 대한 사실"
-              },
-              {
-                "id": "B",
-                "text": "미래에 대한 사실"
-              }
+              { "id": "A", "text": "과거에 대한 사실" },
+              { "id": "B", "text": "미래에 대한 사실" }
             ],
             "answerId": "A"
           },
           {
             "id": "b2",
             "choices": [
-              {
-                "id": "A",
-                "text": "역사상의 사실"
-              },
-              {
-                "id": "B",
-                "text": "감정의 사실"
-              }
+              { "id": "A", "text": "역사상의 사실" },
+              { "id": "B", "text": "감정의 사실" }
             ],
             "answerId": "A"
           },
           {
             "id": "b3",
             "choices": [
-              {
-                "id": "A",
-                "text": "역사적 사실"
-              },
-              {
-                "id": "B",
-                "text": "추측의 사실"
-              }
+              { "id": "A", "text": "역사적 사실" },
+              { "id": "B", "text": "추측의 사실" }
             ],
             "answerId": "A"
           }
         ],
-        "scoring": {
-          "correctDeltaSec": 30,
-          "wrongDeltaSec": -30
-        }
+        "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+      },
+      {
+        "id": "w2",
+        "type": "SENTENCE_BUILDING",
+        "stem": "다음 문장을 올바른 순서로 완성하세요.",
+        "sentenceParts": [
+          {
+            "answer": "주어는",
+            "distractors": ["목적어는", "부사는"]
+          },
+          {
+            "answer": "서술어와",
+            "distractors": ["주어와", "목적어와"]
+          },
+          {
+            "answer": "호응한다.",
+            "distractors": ["대립한다.", "무관하다."]
+          }
+        ],
+        "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+      },
+      {
+        "id": "w3",
+        "type": "FILL_BLANKS",
+        "stem": "빈칸에 알맞은 말을 골라 넣으세요.",
+        "render": "MANUSCRIPT",
+        "template": "음운은 뜻을 ____해 주는 소리의 가장 ____단위이다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              { "id": "A", "text": "구별" },
+              { "id": "B", "text": "설명" }
+            ],
+            "answerId": "A"
+          },
+          {
+            "id": "b2",
+            "choices": [
+              { "id": "A", "text": "작은" },
+              { "id": "B", "text": "큰" }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
       }
     ],
     "pageStack": true

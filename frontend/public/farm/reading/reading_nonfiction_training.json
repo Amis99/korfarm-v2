@@ -11,17 +11,105 @@
   "payload": {
     "passage": {
       "paragraphs": [
-        { "id": "p1", "text": "(샘플 지문 준비 중)" }
+        { "id": "p1", "text": "소쉬르는 언어를 랑그(langue)와 파롤(parole)로 구분했다. 랑그는 사회 구성원이 공유하는 언어 체계이며, 파롤은 개인이 실제로 사용하는 발화이다." },
+        { "id": "p2", "text": "이 구분은 언어학의 연구 대상을 명확히 하는 데 기여했다. 소쉬르는 랑그를 언어학의 진정한 연구 대상으로 보았다." }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 0, "end": 28 }
+            ]
+          },
+          "question": {
+            "prompt": "소쉬르가 언어를 구분한 두 개념은?",
+            "choices": [
+              { "id": "A", "text": "랑그와 파롤" },
+              { "id": "B", "text": "기표와 기의" },
+              { "id": "C", "text": "공시와 통시" },
+              { "id": "D", "text": "언어와 발화" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 30, "end": 72 }
+            ]
+          },
+          "question": {
+            "prompt": "랑그는 무엇인가?",
+            "choices": [
+              { "id": "A", "text": "사회 구성원이 공유하는 언어 체계" },
+              { "id": "B", "text": "개인의 발화" },
+              { "id": "C", "text": "문법 규칙" },
+              { "id": "D", "text": "음운 체계" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p2", "start": 0, "end": 38 }
+            ]
+          },
+          "question": {
+            "prompt": "이 구분이 기여한 바는?",
+            "choices": [
+              { "id": "A", "text": "연구 대상을 명확히 함" },
+              { "id": "B", "text": "새 언어를 발견함" },
+              { "id": "C", "text": "문법을 간소화함" },
+              { "id": "D", "text": "번역의 정확성을 높임" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": []
+      "cards": [
+        { "id": "r1", "text": "소쉬르는 언어를 랑그와 파롤로 구분" },
+        { "id": "r2", "text": "랑그는 사회 구성원이 공유하는 언어 체계" },
+        { "id": "r3", "text": "파롤은 개인의 실제 발화" },
+        { "id": "r4", "text": "소쉬르는 랑그를 진정한 연구 대상으로 봄" }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4"],
+      "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "소쉬르가 진정한 연구 대상으로 본 것을 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 25, "end": 27 }
+          ],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "'랑그'와 '파롤'이 등장하는 곳을 모두 찾으세요.",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 10, "end": 12 },
+            { "paragraphId": "p1", "start": 22, "end": 24 }
+          ],
+          "answerMatchMode": "ALL",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+        }
+      ]
     }
   }
 }

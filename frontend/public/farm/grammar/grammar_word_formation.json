@@ -6,69 +6,37 @@
   "title": "단어 형성 분석 01",
   "description": "형태소 개수/이름/역할을 순차 분석",
   "targetLevel": "RUSSELL_1",
-  "schoolGradeRange": {
-    "min": 4,
-    "max": 6
-  },
+  "schoolGradeRange": { "min": 4, "max": 6 },
   "area": "GRAMMAR",
   "subArea": "WORD_FORMATION",
-  "competencies": [
-    "VOCAB",
-    "READING"
-  ],
+  "competencies": ["VOCAB", "READING"],
   "tags": [],
-  "access": {
-    "mode": "FREE"
-  },
-  "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
-    "multiplier": 1
-  },
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
   "timeLimitSec": 180,
   "assets": {},
   "payload": {
     "items": [
       {
         "word": "거짓말쟁이",
-        "morphemes": [
-          "거짓",
-          "말",
-          "-쟁이"
-        ],
+        "morphemes": ["거짓", "말", "-쟁이"],
         "steps": [
           {
             "type": "COUNT",
-            "choices": [
-              1,
-              2,
-              3,
-              4
-            ],
+            "choices": [1, 2, 3, 4],
             "answer": 3,
-            "delta": {
-              "correct": 20,
-              "wrong": -20
-            }
+            "delta": { "correct": 20, "wrong": -20 }
           },
           {
             "type": "NAME",
             "index": 0,
-            "choices": [
-              "명사",
-              "접사",
-              "어미"
-            ],
+            "choices": ["명사", "접사", "어미"],
             "answer": "명사"
           },
           {
             "type": "ROLE",
             "index": 2,
-            "choices": [
-              "어근",
-              "접사",
-              "어미"
-            ],
+            "choices": ["어근", "접사", "어미"],
             "answer": "접사"
           }
         ],
@@ -77,6 +45,70 @@
             {
               "ask": "다음으로 결합할 어근이나 접사는 어느 쪽입니까?",
               "answer": "LEFT"
+            }
+          ]
+        }
+      },
+      {
+        "word": "풋사과",
+        "morphemes": ["풋-", "사과"],
+        "steps": [
+          {
+            "type": "COUNT",
+            "choices": [1, 2, 3, 4],
+            "answer": 2,
+            "delta": { "correct": 20, "wrong": -20 }
+          },
+          {
+            "type": "NAME",
+            "index": 0,
+            "choices": ["접두사", "접미사", "어근"],
+            "answer": "접두사"
+          },
+          {
+            "type": "ROLE",
+            "index": 1,
+            "choices": ["어근", "접사", "어미"],
+            "answer": "어근"
+          }
+        ],
+        "formationGame": {
+          "mergeQuestions": [
+            {
+              "ask": "'풋-'은 어떤 의미를 더해 주나요?",
+              "answer": "LEFT"
+            }
+          ]
+        }
+      },
+      {
+        "word": "헌책방",
+        "morphemes": ["헌", "책", "방"],
+        "steps": [
+          {
+            "type": "COUNT",
+            "choices": [1, 2, 3, 4],
+            "answer": 3,
+            "delta": { "correct": 20, "wrong": -20 }
+          },
+          {
+            "type": "NAME",
+            "index": 0,
+            "choices": ["관형사", "명사", "접사"],
+            "answer": "관형사"
+          },
+          {
+            "type": "ROLE",
+            "index": 2,
+            "choices": ["어근", "접사", "어미"],
+            "answer": "어근"
+          }
+        ],
+        "formationGame": {
+          "mergeQuestions": [
+            {
+              "ask": "'책'과 '방'이 결합하는 방향은?",
+              "answer": "RIGHT"
             }
           ]
         }

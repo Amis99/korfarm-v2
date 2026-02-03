@@ -11,17 +11,103 @@
   "payload": {
     "passage": {
       "paragraphs": [
-        { "id": "p1", "text": "(샘플 지문 준비 중)" }
+        { "id": "p1", "text": "가을 햇살이 마당 가득 쏟아지던 날, 할머니는 감나무 아래 평상에 앉아 이야기를 들려주셨다. 그 목소리는 바람에 실려 멀리멀리 퍼져 나갔다." },
+        { "id": "p2", "text": "할머니의 이야기 속에는 언제나 교훈이 숨어 있었다. 나는 그때는 몰랐지만, 그 이야기들이 내 삶의 나침반이 되었다는 것을 이제야 깨닫는다." }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 0, "end": 20 }
+            ]
+          },
+          "question": {
+            "prompt": "이 이야기의 배경 계절은?",
+            "choices": [
+              { "id": "A", "text": "가을" },
+              { "id": "B", "text": "봄" },
+              { "id": "C", "text": "여름" },
+              { "id": "D", "text": "겨울" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 22, "end": 60 }
+            ]
+          },
+          "question": {
+            "prompt": "할머니가 이야기를 들려준 장소는?",
+            "choices": [
+              { "id": "A", "text": "감나무 아래 평상" },
+              { "id": "B", "text": "방 안 이불 속" },
+              { "id": "C", "text": "학교 교실" },
+              { "id": "D", "text": "부엌 식탁" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p2", "start": 0, "end": 30 }
+            ]
+          },
+          "question": {
+            "prompt": "할머니의 이야기 속에 항상 숨어 있던 것은?",
+            "choices": [
+              { "id": "A", "text": "교훈" },
+              { "id": "B", "text": "비밀" },
+              { "id": "C", "text": "보물" },
+              { "id": "D", "text": "수수께끼" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": []
+      "cards": [
+        { "id": "r1", "text": "가을날 할머니가 감나무 아래에서 이야기를 들려줌" },
+        { "id": "r2", "text": "할머니의 이야기 속에는 교훈이 숨어 있었음" },
+        { "id": "r3", "text": "그 이야기들이 삶의 나침반이 되었음을 깨달음" }
+      ],
+      "correctOrder": ["r1", "r2", "r3"],
+      "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "화자가 할머니의 이야기를 비유한 표현을 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 42, "end": 46 }
+          ],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "할머니의 목소리가 퍼져 나간 매개체를 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 50, "end": 52 }
+          ],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+        }
+      ]
     }
   }
 }
