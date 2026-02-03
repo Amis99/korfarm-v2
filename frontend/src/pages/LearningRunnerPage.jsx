@@ -31,7 +31,7 @@ function LearningRunnerPage() {
     }
     setLoading(true);
     setError(null);
-    fetch(learning.jsonPath)
+    fetch(import.meta.env.BASE_URL + learning.jsonPath.replace(/^\//, ""))
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -50,10 +50,10 @@ function LearningRunnerPage() {
   useEffect(() => {
     if (!learning) return;
     apiPost("/v1/learning/farm/start", {
-      contentId: learning.contentId,
-      contentType: learning.contentType,
+      content_id: learning.contentId,
+      content_type: learning.contentType,
     })
-      .then((res) => setFarmLogId(res.logId))
+      .then((res) => setFarmLogId(res.log_id ?? res.logId))
       .catch(() => {});
   }, [learningId]);
 

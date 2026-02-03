@@ -4,11 +4,12 @@ import EngineContext from "./EngineContext";
 import TimeBar from "./TimeBar";
 import ResultSummary from "./ResultSummary";
 import { MODULES } from "../modules";
+import { apiPost } from "../../utils/api";
 import "../../styles/learning-engine.css";
 
 const getTimeLimit = (content) => content?.timeLimitSec ?? 180;
 
-function EngineShell({ content, moduleKey, onExit }) {
+function EngineShell({ content, moduleKey, onExit, farmLogId }) {
   const timeLimit = getTimeLimit(content);
   const assetBase = import.meta.env.BASE_URL || "/";
   const resolveAssetUrl = (path) => {
@@ -242,6 +243,15 @@ function EngineShell({ content, moduleKey, onExit }) {
       localStorage.setItem(key, JSON.stringify([logEntry, ...existing]));
     } catch {
       // ignore storage errors
+    }
+    if (farmLogId) {
+      apiPost("/v1/learning/farm/complete", {
+        log_id: farmLogId,
+        score: accuracy,
+        earned_seed: earnedSeed,
+        seed_type: content?.seedReward?.seedType,
+        accuracy,
+      }).catch(() => {});
     }
   };
 
