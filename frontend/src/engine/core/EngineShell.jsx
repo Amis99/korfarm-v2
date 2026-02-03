@@ -109,6 +109,9 @@ function EngineShell({ content, moduleKey, onExit }) {
       if (question.type === "FILL_BLANKS") {
         return sum + (question.blanks?.length ?? 0);
       }
+      if (question.type === "SENTENCE_BUILDING") {
+        return sum + (question.sentenceParts?.length ?? 0);
+      }
       return sum + 1;
     }, 0);
     const guess = {

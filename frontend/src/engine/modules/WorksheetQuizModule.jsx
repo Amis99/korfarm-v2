@@ -75,6 +75,11 @@ const replaceWordInExample = (example, word) => {
   return example.split(word).join("____");
 };
 
+const renderPassageBox = (passage) => {
+  if (!passage) return null;
+  return <div className="worksheet-passage-box">{passage}</div>;
+};
+
 function WorksheetQuizModule({ content }) {
   const { status, start, adjustTime, recordAnswer, finish } = useEngine();
   const payload = content?.payload || {};
@@ -107,11 +112,29 @@ function WorksheetQuizModule({ content }) {
   const isDictionary = Array.isArray(payload.words) && payload.words.length > 0;
 
   const currentQuestion = questions[currentIndex];
-  const isFillBlanks = currentQuestion?.type === "FILL_BLANKS";
-  const blanks = currentQuestion?.blanks || [];
+
+  const normalizedQuestion = useMemo(() => {
+    if (currentQuestion?.type !== "SENTENCE_BUILDING") return currentQuestion;
+    const parts = currentQuestion.sentenceParts || [];
+    const template = parts.map(() => "____").join(" ");
+    const blanks = parts.map((part, idx) => ({
+      id: `sb-${currentQuestion.id}-${idx}`,
+      answerId: `answer-${idx}`,
+      choices: [
+        { id: `answer-${idx}`, text: part.answer },
+        ...part.distractors.map((text, dIdx) => ({
+          id: `distractor-${idx}-${dIdx}`, text
+        }))
+      ]
+    }));
+    return { ...currentQuestion, type: "FILL_BLANKS", template, blanks };
+  }, [currentQuestion]);
+
+  const isFillBlanks = normalizedQuestion?.type === "FILL_BLANKS";
+  const blanks = normalizedQuestion?.blanks || [];
   const filled = blanks.map((blank) => blankAnswers[blank.id]);
   const isManuscript =
-    currentQuestion?.render === "MANUSCRIPT" || content?.contentType === "WRITING_DESCRIPTIVE";
+    normalizedQuestion?.render === "MANUSCRIPT" || content?.contentType === "WRITING_DESCRIPTIVE";
 
   const renderDictionaryCard = (question, options = {}) => {
     const {
@@ -167,9 +190,15 @@ function WorksheetQuizModule({ content }) {
   const measureItems = useMemo(
     () =>
       questions.map((question, idx) => {
-        const isBlank = question.type === "FILL_BLANKS";
-        const blankList = question.blanks || [];
+        const isBlank = question.type === "FILL_BLANKS" || question.type === "SENTENCE_BUILDING";
+        const blankList = question.type === "SENTENCE_BUILDING"
+          ? (question.sentenceParts || []).map((_, i) => ({ id: `sb-measure-${i}` }))
+          : (question.blanks || []);
+        const template = question.type === "SENTENCE_BUILDING"
+          ? (question.sentenceParts || []).map(() => "____").join(" ")
+          : (question.template || "");
         let contentText = question.stem || question.prompt || "";
+        const passageNode = !isDictionary ? renderPassageBox(question.passage) : null;
         if (isDictionary) {
           contentText = renderDictionaryCard(question, {
             isActive: false,
@@ -179,12 +208,15 @@ function WorksheetQuizModule({ content }) {
             forMeasure: true,
           });
         } else if (isBlank) {
-          contentText = renderTemplatePlain(question.template || "", blankList);
+          contentText = renderTemplatePlain(template, blankList);
         }
         return (
           <li key={`measure-${question.id}`} className="worksheet-item">
             <span className="worksheet-item-number">{idx + 1}.</span>
-            <span className="worksheet-item-text">{contentText}</span>
+            <span className="worksheet-item-text">
+              {passageNode}
+              {contentText}
+            </span>
           </li>
         );
       }),
@@ -264,32 +296,32 @@ function WorksheetQuizModule({ content }) {
   };
 
   const handleChoice = (choiceId) => {
-    if (!currentQuestion) return;
-    const scoring = getScoring(currentQuestion);
-    const isCorrect = choiceId === currentQuestion.answerId;
+    if (!normalizedQuestion) return;
+    const scoring = getScoring(normalizedQuestion);
+    const isCorrect = choiceId === normalizedQuestion.answerId;
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({ id: currentQuestion.id, correct: isCorrect });
+    recordAnswer({ id: normalizedQuestion.id, correct: isCorrect });
     setLastResult(isCorrect ? "correct" : "wrong");
     queueResultReset();
     setStatusMap((prev) => ({
       ...prev,
-      [currentQuestion.id]: isCorrect ? "correct" : "wrong",
+      [normalizedQuestion.id]: isCorrect ? "correct" : "wrong",
     }));
-    if (!isCorrect && currentQuestion.requireCorrect) {
+    if (!isCorrect && normalizedQuestion.requireCorrect) {
       return;
     }
     queueNext(handleNext);
   };
 
   const handleBlankChoice = (choiceId) => {
-    if (!currentQuestion) return;
+    if (!normalizedQuestion) return;
     const blank = blanks[blankIndex];
-    const scoring = getScoring(currentQuestion);
+    const scoring = getScoring(normalizedQuestion);
     const isCorrect = choiceId === blank.answerId;
     const correctChoice = blank.choices?.find((choice) => choice.id === blank.answerId);
     const correctText = correctChoice?.text || "";
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({ id: `${currentQuestion.id}-${blank.id}`, correct: isCorrect });
+    recordAnswer({ id: `${normalizedQuestion.id}-${blank.id}`, correct: isCorrect });
     setBlankAnswers((prev) => ({ ...prev, [blank.id]: correctText }));
     setBlankResultMap((prev) => ({
       ...prev,
@@ -305,7 +337,7 @@ function WorksheetQuizModule({ content }) {
       const allCorrect = blanks.every((item) => resultMap[item.id]);
       setStatusMap((prev) => ({
         ...prev,
-        [currentQuestion.id]: allCorrect ? "correct" : "wrong",
+        [normalizedQuestion.id]: allCorrect ? "correct" : "wrong",
       }));
       queueNext(handleNext);
     } else {
@@ -393,12 +425,18 @@ function WorksheetQuizModule({ content }) {
                             const question = questions[idx];
                             const isActive = idx === currentIndex;
                             const status = statusMap[question.id];
-                            const isBlank = question.type === "FILL_BLANKS";
-                            const blankList = question.blanks || [];
+                            const isBlank = question.type === "FILL_BLANKS" || question.type === "SENTENCE_BUILDING";
+                            const blankList = isActive && isBlank ? blanks : (question.type === "SENTENCE_BUILDING"
+                              ? (question.sentenceParts || []).map((_, i) => ({ id: `sb-${question.id}-${i}` }))
+                              : (question.blanks || []));
+                            const template = question.type === "SENTENCE_BUILDING"
+                              ? (question.sentenceParts || []).map(() => "____").join(" ")
+                              : (question.template || "");
                             const filledValues = isActive
                               ? blankList.map((blank) => blankAnswers[blank.id])
                               : [];
                             const activeBlankIndex = isActive ? blankIndex : -1;
+                            const passageNode = !isDictionary ? renderPassageBox(question.passage) : null;
                             let content = null;
                             if (isDictionary) {
                               content = renderDictionaryCard(question, {
@@ -410,12 +448,12 @@ function WorksheetQuizModule({ content }) {
                             } else if (isBlank) {
                               content = isActive
                                 ? renderTemplate(
-                                    question.template || "",
+                                    template,
                                     blankList,
                                     filledValues,
                                     activeBlankIndex
                                   )
-                                : renderTemplatePlain(question.template || "", blankList);
+                                : renderTemplatePlain(template, blankList);
                             } else {
                               content = isActive
                                 ? renderHighlightedText(
@@ -443,7 +481,10 @@ function WorksheetQuizModule({ content }) {
                                     </span>
                                   ) : null}
                                 </span>
-                                <span className="worksheet-item-text">{content}</span>
+                                <span className="worksheet-item-text">
+                                  {passageNode}
+                                  {content}
+                                </span>
                               </li>
                             );
                           })}
@@ -453,12 +494,18 @@ function WorksheetQuizModule({ content }) {
                             const question = questions[idx];
                             const isActive = idx === currentIndex;
                             const status = statusMap[question.id];
-                            const isBlank = question.type === "FILL_BLANKS";
-                            const blankList = question.blanks || [];
+                            const isBlank = question.type === "FILL_BLANKS" || question.type === "SENTENCE_BUILDING";
+                            const blankList = isActive && isBlank ? blanks : (question.type === "SENTENCE_BUILDING"
+                              ? (question.sentenceParts || []).map((_, i) => ({ id: `sb-${question.id}-${i}` }))
+                              : (question.blanks || []));
+                            const template = question.type === "SENTENCE_BUILDING"
+                              ? (question.sentenceParts || []).map(() => "____").join(" ")
+                              : (question.template || "");
                             const filledValues = isActive
                               ? blankList.map((blank) => blankAnswers[blank.id])
                               : [];
                             const activeBlankIndex = isActive ? blankIndex : -1;
+                            const passageNode = !isDictionary ? renderPassageBox(question.passage) : null;
                             let content = null;
                             if (isDictionary) {
                               content = renderDictionaryCard(question, {
@@ -470,12 +517,12 @@ function WorksheetQuizModule({ content }) {
                             } else if (isBlank) {
                               content = isActive
                                 ? renderTemplate(
-                                    question.template || "",
+                                    template,
                                     blankList,
                                     filledValues,
                                     activeBlankIndex
                                   )
-                                : renderTemplatePlain(question.template || "", blankList);
+                                : renderTemplatePlain(template, blankList);
                             } else {
                               content = isActive
                                 ? renderHighlightedText(
@@ -503,7 +550,10 @@ function WorksheetQuizModule({ content }) {
                                     </span>
                                   ) : null}
                                 </span>
-                                <span className="worksheet-item-text">{content}</span>
+                                <span className="worksheet-item-text">
+                                  {passageNode}
+                                  {content}
+                                </span>
                               </li>
                             );
                           })}
@@ -536,15 +586,15 @@ function WorksheetQuizModule({ content }) {
               <span>{currentIndex + 1} / {questions.length}</span>
             </div>
           </div>
-          {currentQuestion && currentQuestion.type !== "FILL_BLANKS" ? (
+          {normalizedQuestion && normalizedQuestion.type !== "FILL_BLANKS" ? (
             <QuestionModal
               title="문제"
-              prompt={currentQuestion.prompt || currentQuestion.stem}
-              choices={currentQuestion.choices || []}
+              prompt={normalizedQuestion.prompt || normalizedQuestion.stem}
+              choices={normalizedQuestion.choices || []}
               onSelect={handleChoice}
               anchorRect={anchorRect}
               mark={lastResult}
-              shuffleKey={currentQuestion.id}
+              shuffleKey={normalizedQuestion.id}
             />
           ) : null}
 
@@ -556,7 +606,7 @@ function WorksheetQuizModule({ content }) {
               onSelect={handleBlankChoice}
               anchorRect={anchorRect}
               mark={lastResult}
-              shuffleKey={`${currentQuestion?.id || "blank"}-${blankIndex}`}
+              shuffleKey={`${normalizedQuestion?.id || "blank"}-${blankIndex}`}
             />
           ) : null}
         </>
