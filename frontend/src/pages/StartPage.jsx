@@ -122,6 +122,25 @@ function StartPage() {
               <div className="start-progress">
                 <span />
               </div>
+              <button
+                type="button"
+                onClick={() => navigate("/profile")}
+                style={{
+                  marginTop: 6,
+                  padding: "6px 14px",
+                  border: "1px solid rgba(0,0,0,0.15)",
+                  borderRadius: 10,
+                  background: "#fff",
+                  fontSize: 13,
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 4,
+                }}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>settings</span>
+                내 정보 수정
+              </button>
             </div>
           </div>
           <div className="start-stats">
@@ -162,9 +181,6 @@ function StartPage() {
               <h3>{levelLabel} - {dayOfYear}일 차</h3>
               <p>총 10문제 도전!</p>
               <p className="start-card-notice">하루 첫 제출 시에만 씨앗이 지급됩니다.</p>
-              <div className="start-progress-mini">
-                <span />
-              </div>
             </div>
             <div className="start-card" onClick={() => navigate("/daily-reading")} style={{ cursor: "pointer" }}>
               <span className="badge" style={{ background: "#81d4fa" }}>
@@ -173,9 +189,6 @@ function StartPage() {
               <h3>{readingTitle || `${levelLabel} ${dayOfYear}일 차`}</h3>
               <p>지문 읽는 힘을 키워요</p>
               <p className="start-card-notice">제출할 때마다 씨앗이 지급됩니다.</p>
-              <div className="start-progress-mini">
-                <span style={{ width: "0%", background: "#81d4fa" }} />
-              </div>
             </div>
 
             {/* 과제 바구니 */}

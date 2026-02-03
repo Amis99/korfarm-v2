@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Lock
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
+interface SeedCatalogRepository : JpaRepository<SeedCatalogEntity, String>
+
 interface UserSeedRepository : JpaRepository<UserSeedEntity, String> {
     fun findByUserId(userId: String): List<UserSeedEntity>
 

@@ -4,12 +4,14 @@ import com.korfarm.api.common.ApiResponse
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.contracts.LoginRequest
 import com.korfarm.api.contracts.SignupRequest
+import com.korfarm.api.contracts.UpdateProfileRequest
 import com.korfarm.api.org.OrgService
 import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -72,8 +74,20 @@ class AuthController(
             status = user.status,
             levelId = user.levelId,
             gradeLabel = user.gradeLabel,
-            learningStartDate = user.learningStartDate?.toString()
+            learningStartDate = user.learningStartDate?.toString(),
+            region = user.region,
+            school = user.school,
+            studentPhone = user.studentPhone,
+            parentPhone = user.parentPhone
         )
+        return ApiResponse(success = true, data = profile)
+    }
+
+    @PutMapping("/me")
+    fun updateMe(@Valid @RequestBody request: UpdateProfileRequest): ApiResponse<UserProfile> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val profile = authService.updateProfile(userId, request)
         return ApiResponse(success = true, data = profile)
     }
 

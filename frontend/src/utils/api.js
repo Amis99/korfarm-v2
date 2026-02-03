@@ -37,3 +37,19 @@ export const apiPost = async (path, body) => {
   const payload = await response.json();
   return payload?.data ?? payload;
 };
+
+export const apiPut = async (path, body) => {
+  const response = await fetch(buildUrl(path), {
+    method: "PUT",
+    headers: {
+      ...authHeaders(),
+      "Content-Type": "application/json",
+    },
+    body: body ? JSON.stringify(body) : "{}",
+  });
+  if (!response.ok) {
+    throw new Error(`PUT ${path} failed: ${response.status}`);
+  }
+  const payload = await response.json();
+  return payload?.data ?? payload;
+};

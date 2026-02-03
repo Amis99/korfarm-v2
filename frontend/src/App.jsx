@@ -37,6 +37,7 @@ import DailyQuizPage from "./pages/DailyQuizPage";
 import DailyReadingPage from "./pages/DailyReadingPage";
 import ProModePage from "./pages/ProModePage";
 import FarmModePage from "./pages/FarmModePage";
+import FarmListPage from "./pages/FarmListPage";
 import WritingPage from "./pages/WritingPage";
 import TestStoragePage from "./pages/TestStoragePage";
 import HarvestLedgerPage from "./pages/HarvestLedgerPage";
@@ -46,6 +47,7 @@ import DuelWaitingRoomPage from "./pages/DuelWaitingRoomPage";
 import DuelMatchPage from "./pages/DuelMatchPage";
 import DuelResultPage from "./pages/DuelResultPage";
 import AssignmentsPage from "./pages/AssignmentsPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function GlobalLogo() {
   const { pathname } = useLocation();
@@ -74,6 +76,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/reset" element={<ResetPage />} />
         <Route path="/start" element={<StartPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/community/post/:postId" element={<PostDetailPage />} />
         <Route path="/community/new" element={<PostWritePage />} />
@@ -106,6 +109,7 @@ function App() {
         <Route path="/learning/:learningId" element={<LearningRunnerPage />} />
         <Route path="/pro-mode" element={<ProModePage />} />
         <Route path="/farm-mode" element={<FarmModePage />} />
+        <Route path="/farm-mode/:farmId" element={<FarmListPage />} />
         <Route path="/writing" element={<WritingPage />} />
         <Route path="/tests" element={<TestStoragePage />} />
         <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />

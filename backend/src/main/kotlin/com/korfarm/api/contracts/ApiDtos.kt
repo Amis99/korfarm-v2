@@ -27,6 +27,18 @@ data class SignupRequest(
     val learningStartMode: String? = "calendar"
 )
 
+data class UpdateProfileRequest(
+    val name: String? = null,
+    val region: String? = null,
+    val school: String? = null,
+    val gradeLabel: String? = null,
+    val levelId: String? = null,
+    val studentPhone: String? = null,
+    val parentPhone: String? = null,
+    val password: String? = null,
+    val learningStartMode: String? = null
+)
+
 data class SubmitAnswer(
     @field:NotBlank val questionId: String,
     @field:NotBlank val answer: String

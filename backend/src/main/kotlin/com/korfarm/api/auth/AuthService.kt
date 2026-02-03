@@ -1,5 +1,6 @@
 package com.korfarm.api.auth
 
+import com.korfarm.api.contracts.UpdateProfileRequest
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.common.TokenHasher
@@ -109,6 +110,41 @@ class AuthService(
         return issueTokens(user)
     }
 
+    fun updateProfile(userId: String, request: UpdateProfileRequest): UserProfile {
+        val user = userRepository.findById(userId).orElseThrow {
+            ApiException("NOT_FOUND", "user not found", HttpStatus.NOT_FOUND)
+        }
+        request.name?.let { user.name = it }
+        request.region?.let { user.region = it }
+        request.school?.let { user.school = it }
+        request.gradeLabel?.let { user.gradeLabel = it }
+        request.levelId?.let { user.levelId = it }
+        request.studentPhone?.let { user.studentPhone = it }
+        request.parentPhone?.let { user.parentPhone = it }
+        request.password?.let {
+            if (it.length >= 8) user.passwordHash = passwordEncoder.encode(it)
+        }
+        request.learningStartMode?.let {
+            user.learningStartDate = if (it == "day1") LocalDate.now() else null
+        }
+        userRepository.save(user)
+        val roles = resolveRoles(user.id)
+        return UserProfile(
+            id = user.id,
+            loginId = user.email,
+            name = user.name,
+            roles = roles,
+            status = user.status,
+            levelId = user.levelId,
+            gradeLabel = user.gradeLabel,
+            learningStartDate = user.learningStartDate?.toString(),
+            region = user.region,
+            school = user.school,
+            studentPhone = user.studentPhone,
+            parentPhone = user.parentPhone
+        )
+    }
+
     fun logout(userId: String) {
         val tokens = refreshTokenRepository.findByUserIdAndRevokedAtIsNull(userId)
         val now = LocalDateTime.now()
@@ -139,7 +175,11 @@ class AuthService(
                 status = user.status,
                 levelId = user.levelId,
                 gradeLabel = user.gradeLabel,
-                learningStartDate = user.learningStartDate?.toString()
+                learningStartDate = user.learningStartDate?.toString(),
+                region = user.region,
+                school = user.school,
+                studentPhone = user.studentPhone,
+                parentPhone = user.parentPhone
             )
         )
     }

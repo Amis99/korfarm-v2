@@ -9,6 +9,26 @@ import jakarta.persistence.Table
 import java.time.LocalDateTime
 
 @Entity
+@Table(name = "seed_catalog")
+class SeedCatalogEntity(
+    @Id
+    @Column(name = "seed_type")
+    var seedType: String,
+
+    @Column(nullable = false)
+    var name: String,
+
+    @Column(name = "crop_type", nullable = false)
+    var cropType: String,
+
+    @Column(nullable = false)
+    var rarity: String,
+
+    @Column(name = "season_point", nullable = false)
+    var seasonPoint: Int
+)
+
+@Entity
 @Table(name = "user_seeds")
 class UserSeedEntity(
     @Id

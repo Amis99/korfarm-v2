@@ -8,7 +8,11 @@ data class UserProfile(
     val status: String,
     val levelId: String? = null,
     val gradeLabel: String? = null,
-    val learningStartDate: String? = null
+    val learningStartDate: String? = null,
+    val region: String? = null,
+    val school: String? = null,
+    val studentPhone: String? = null,
+    val parentPhone: String? = null
 )
 
 data class AuthResponseData(
