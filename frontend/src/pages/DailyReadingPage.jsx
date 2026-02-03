@@ -90,7 +90,18 @@ function DailyReadingPage() {
         }
 
         const folder = LEVEL_FOLDER_MAP[level] || "saussure1";
-        const dayIndex = ((getDayOfYear() - 1) % 365) + 1;
+        const learningStartDate = profile.learningStartDate || profile.learning_start_date || null;
+        let dayIndex;
+        if (learningStartDate) {
+          const start = new Date(learningStartDate);
+          const now = new Date();
+          start.setHours(0, 0, 0, 0);
+          now.setHours(0, 0, 0, 0);
+          const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+          dayIndex = (diff % 365) + 1;
+        } else {
+          dayIndex = ((getDayOfYear() - 1) % 365) + 1;
+        }
         const dayStr = String(dayIndex).padStart(3, "0");
 
         const isJson = (res) =>

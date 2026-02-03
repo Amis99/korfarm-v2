@@ -65,6 +65,7 @@ function SignupPage() {
   const [studentPhone, setStudentPhone] = useState("");
   const [parentPhone, setParentPhone] = useState("");
   const [accountType, setAccountType] = useState("student");
+  const [learningStartMode, setLearningStartMode] = useState("calendar");
   const [diagnosticOptIn, setDiagnosticOptIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -152,6 +153,7 @@ function SignupPage() {
           parent_phone: trimmedParentPhone,
           diagnostic_opt_in: diagnosticOptIn,
           account_type: accountType,
+          learning_start_mode: learningStartMode,
         }),
       });
       const payload = await response.json();
@@ -299,6 +301,16 @@ function SignupPage() {
                   maxLength={13}
                   required
                 />
+              </label>
+              <label>
+                학습 시작일
+                <select
+                  value={learningStartMode}
+                  onChange={(event) => setLearningStartMode(event.target.value)}
+                >
+                  <option value="day1">1일 차부터 시작</option>
+                  <option value="calendar">오늘 날짜 기준</option>
+                </select>
               </label>
               <label>
                 진단 테스트 응시

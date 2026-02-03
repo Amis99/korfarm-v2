@@ -30,10 +30,24 @@ function getDayOfYear() {
   return Math.floor(diff / oneDay);
 }
 
+function calcDayIndex(learningStartDate) {
+  if (learningStartDate) {
+    const start = new Date(learningStartDate);
+    const now = new Date();
+    start.setHours(0, 0, 0, 0);
+    now.setHours(0, 0, 0, 0);
+    const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    return (diff % 365) + 1;
+  }
+  const doy = getDayOfYear();
+  return ((doy - 1) % 365) + 1;
+}
+
 function StartPage() {
   const navigate = useNavigate();
   const { isLoggedIn, user, isPremium } = useAuth();
   const [showCraftModal, setShowCraftModal] = useState(false);
+  const [readingTitle, setReadingTitle] = useState(null);
 
   /* Phase 9: API data states */
   const [profile, setProfile] = useState(null);
@@ -44,7 +58,6 @@ function StartPage() {
 
   useEffect(() => {
     if (!isLoggedIn) return;
-    apiGet("/v1/auth/me").then(setProfile).catch(() => {});
     apiGet("/v1/inventory").then(setInventory).catch(() => {});
     apiGet("/v1/seasons/current")
       .then((season) => {
@@ -54,6 +67,20 @@ function StartPage() {
         }
       })
       .catch(() => {});
+    apiGet("/v1/auth/me").then((data) => {
+      setProfile(data);
+      const lid = data?.levelId;
+      const lsd = data?.learningStartDate || data?.learning_start_date || null;
+      if (lid) {
+        const di = calcDayIndex(lsd);
+        const dayStr = String(di).padStart(3, "0");
+        const base = import.meta.env.BASE_URL || "/";
+        fetch(`${base}daily-reading/${lid}/${dayStr}.json`)
+          .then((r) => (r.ok ? r.json() : null))
+          .then((d) => { if (d?.title) setReadingTitle(d.title); })
+          .catch(() => {});
+      }
+    }).catch(() => {});
     apiGet("/v1/ledger")
       .then((entries) => {
         const seeds = (entries || []).filter((e) => e.currencyType === "seed").slice(0, 5);
@@ -66,7 +93,8 @@ function StartPage() {
   const displayLevel = profile?.levelId || "LV.1";
   const levelId = profile?.levelId;
   const levelLabel = LEVEL_LABEL_MAP[levelId] || levelId || "";
-  const dayOfYear = ((getDayOfYear() - 1) % 365) + 1;
+  const learningStartDate = profile?.learningStartDate || profile?.learning_start_date || null;
+  const dayOfYear = calcDayIndex(learningStartDate);
   const totalSeeds = Array.isArray(inventory?.seeds)
     ? inventory.seeds.reduce((s, e) => s + (e.count || 0), 0)
     : Object.values(inventory?.seeds || {}).reduce((a, b) => a + (typeof b === "number" ? b : 0), 0);
@@ -131,7 +159,7 @@ function StartPage() {
             </h2>
             <div className="start-card" onClick={() => navigate("/daily-quiz")} style={{ cursor: "pointer" }}>
               <span className="badge">일일 퀴즈</span>
-              <h3>{levelLabel} {dayOfYear}일 차</h3>
+              <h3>{levelLabel} - {dayOfYear}일 차</h3>
               <p>총 10문제 도전!</p>
               <p className="start-card-notice">하루 첫 제출 시에만 씨앗이 지급됩니다.</p>
               <div className="start-progress-mini">
@@ -142,7 +170,7 @@ function StartPage() {
               <span className="badge" style={{ background: "#81d4fa" }}>
                 일일 독해
               </span>
-              <h3>{levelLabel} {dayOfYear}일 차</h3>
+              <h3>{readingTitle || `${levelLabel} ${dayOfYear}일 차`}</h3>
               <p>지문 읽는 힘을 키워요</p>
               <p className="start-card-notice">제출할 때마다 씨앗이 지급됩니다.</p>
               <div className="start-progress-mini">

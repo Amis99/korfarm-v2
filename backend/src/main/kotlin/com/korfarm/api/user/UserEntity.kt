@@ -6,6 +6,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.PrePersist
 import jakarta.persistence.PreUpdate
 import jakarta.persistence.Table
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
@@ -40,6 +41,9 @@ class UserEntity(
 
     @Column(name = "diagnostic_opt_in")
     var diagnosticOptIn: Boolean = false,
+
+    @Column(name = "learning_start_date")
+    var learningStartDate: LocalDate? = null,
 
     @Column(nullable = false)
     var status: String,

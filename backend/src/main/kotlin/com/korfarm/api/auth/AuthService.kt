@@ -18,6 +18,7 @@ import org.springframework.dao.DataAccessException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.slf4j.LoggerFactory
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Service
@@ -45,7 +46,8 @@ class AuthService(
         studentPhone: String,
         parentPhone: String,
         diagnosticOptIn: Boolean,
-        accountType: String?
+        accountType: String?,
+        learningStartMode: String?
     ): AuthResponseData {
         if (userRepository.existsByEmail(loginId)) {
             throw ApiException("LOGIN_ID_EXISTS", "login id already registered", HttpStatus.CONFLICT)
@@ -72,6 +74,7 @@ class AuthService(
             studentPhone = studentPhone,
             parentPhone = parentPhone,
             diagnosticOptIn = diagnosticOptIn,
+            learningStartDate = if (learningStartMode == "day1") LocalDate.now() else null,
             status = "active"
         )
         userRepository.save(user)
@@ -135,7 +138,8 @@ class AuthService(
                 roles = roles,
                 status = user.status,
                 levelId = user.levelId,
-                gradeLabel = user.gradeLabel
+                gradeLabel = user.gradeLabel,
+                learningStartDate = user.learningStartDate?.toString()
             )
         )
     }

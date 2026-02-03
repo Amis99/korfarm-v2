@@ -7,7 +7,8 @@ data class UserProfile(
     val roles: List<String>,
     val status: String,
     val levelId: String? = null,
-    val gradeLabel: String? = null
+    val gradeLabel: String? = null,
+    val learningStartDate: String? = null
 )
 
 data class AuthResponseData(

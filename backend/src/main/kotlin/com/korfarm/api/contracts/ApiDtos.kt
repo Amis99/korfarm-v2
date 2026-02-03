@@ -23,7 +23,8 @@ data class SignupRequest(
     @field:NotBlank val studentPhone: String,
     @field:NotBlank val parentPhone: String,
     val diagnosticOptIn: Boolean = false,
-    val accountType: String? = "student"
+    val accountType: String? = "student",
+    val learningStartMode: String? = "calendar"
 )
 
 data class SubmitAnswer(

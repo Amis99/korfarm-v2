@@ -36,7 +36,8 @@ class AuthController(
             request.studentPhone,
             request.parentPhone,
             request.diagnosticOptIn,
-            request.accountType
+            request.accountType,
+            request.learningStartMode
         )
         return ApiResponse(success = true, data = data)
     }
@@ -70,7 +71,8 @@ class AuthController(
             roles = if (roles.isEmpty()) listOf("STUDENT") else roles,
             status = user.status,
             levelId = user.levelId,
-            gradeLabel = user.gradeLabel
+            gradeLabel = user.gradeLabel,
+            learningStartDate = user.learningStartDate?.toString()
         )
         return ApiResponse(success = true, data = profile)
     }
