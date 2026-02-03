@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import EngineShell from "../engine/core/EngineShell";
 
 const TOKEN_KEY = "korfarm_token";
+const BASE = import.meta.env.BASE_URL || "/";
 
 const LEVEL_FOLDER_MAP = {
   saussure1: "saussure1",
@@ -95,12 +96,12 @@ function DailyReadingPage() {
         const isJson = (res) =>
           res.ok && (res.headers.get("content-type") || "").includes("application/json");
 
-        const readingRes = await fetch(`/daily-reading/${folder}/${dayStr}.json`);
+        const readingRes = await fetch(`${BASE}daily-reading/${folder}/${dayStr}.json`);
         if (isJson(readingRes)) {
           const readingData = await readingRes.json();
           if (!cancelled) setContent(readingData);
         } else {
-          const fallbackRes = await fetch(`/daily-reading/${folder}/001.json`);
+          const fallbackRes = await fetch(`${BASE}daily-reading/${folder}/001.json`);
           if (!isJson(fallbackRes)) throw new Error("독해 데이터를 불러올 수 없습니다.");
           const fallbackData = await fallbackRes.json();
           if (!cancelled) setContent(fallbackData);

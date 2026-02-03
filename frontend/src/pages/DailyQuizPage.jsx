@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import EngineShell from "../engine/core/EngineShell";
 
 const TOKEN_KEY = "korfarm_token";
+const BASE = import.meta.env.BASE_URL || "/";
 
 const LEVEL_FOLDER_MAP = {
   saussure1: "saussure1",
@@ -95,12 +96,12 @@ function DailyQuizPage() {
         const isJson = (res) =>
           res.ok && (res.headers.get("content-type") || "").includes("application/json");
 
-        const quizRes = await fetch(`/daily-quiz/${folder}/${dayStr}.json`);
+        const quizRes = await fetch(`${BASE}daily-quiz/${folder}/${dayStr}.json`);
         if (isJson(quizRes)) {
           const quizData = await quizRes.json();
           if (!cancelled) setContent(quizData);
         } else {
-          const fallbackRes = await fetch(`/daily-quiz/${folder}/001.json`);
+          const fallbackRes = await fetch(`${BASE}daily-quiz/${folder}/001.json`);
           if (!isJson(fallbackRes)) throw new Error("퀴즈 데이터를 불러올 수 없습니다.");
           const fallbackData = await fallbackRes.json();
           if (!cancelled) setContent(fallbackData);

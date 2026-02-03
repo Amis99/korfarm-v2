@@ -67,8 +67,12 @@ function StartPage() {
   const levelId = profile?.levelId;
   const levelLabel = LEVEL_LABEL_MAP[levelId] || levelId || "";
   const dayOfYear = ((getDayOfYear() - 1) % 365) + 1;
-  const totalSeeds = inventory?.seeds?.reduce((s, e) => s + (e.count || 0), 0) ?? 0;
-  const totalCrops = inventory?.crops?.reduce((s, e) => s + (e.count || 0), 0) ?? 0;
+  const totalSeeds = Array.isArray(inventory?.seeds)
+    ? inventory.seeds.reduce((s, e) => s + (e.count || 0), 0)
+    : Object.values(inventory?.seeds || {}).reduce((a, b) => a + (typeof b === "number" ? b : 0), 0);
+  const totalCrops = Array.isArray(inventory?.crops)
+    ? inventory.crops.reduce((s, e) => s + (e.count || 0), 0)
+    : Object.values(inventory?.crops || {}).reduce((a, b) => a + (typeof b === "number" ? b : 0), 0);
   const fertilizerCount = inventory?.fertilizer ?? 0;
 
   return (

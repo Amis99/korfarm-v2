@@ -20,7 +20,7 @@ function LoginPage() {
       const response = await fetch(`${API_BASE}/v1/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ loginId: loginId.trim(), password }),
+        body: JSON.stringify({ login_id: loginId.trim(), password }),
       });
       const payload = await response.json();
       if (!response.ok || payload?.success === false) {

@@ -77,7 +77,7 @@ const replaceWordInExample = (example, word) => {
 
 const renderPassageBox = (passage) => {
   if (!passage) return null;
-  return <div className="worksheet-passage-box">{passage}</div>;
+  return <span className="worksheet-passage-box">{passage}</span>;
 };
 
 function WorksheetQuizModule({ content }) {
