@@ -30,3 +30,8 @@ data class SubmitResult(
     val correctCount: Int,
     val seedGrant: SeedGrant
 )
+
+data class StreakInfo(
+    val currentStreak: Int,
+    val bestStreak: Int
+)

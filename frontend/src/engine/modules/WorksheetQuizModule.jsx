@@ -2,7 +2,14 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 
-const getScoring = (question) => question.scoring || { correctDeltaSec: 0, wrongDeltaSec: 0 };
+const getScoring = (question) => {
+  const s = question.scoring;
+  if (!s) return { correctDeltaSec: 0, wrongDeltaSec: 0 };
+  return {
+    correctDeltaSec: s.correctDeltaSec ?? s.correct ?? 0,
+    wrongDeltaSec: s.wrongDeltaSec ?? s.wrong ?? 0,
+  };
+};
 
 const renderTemplate = (template, blanks, filled, activeIndex) => {
   const parts = template.split("____");
@@ -529,12 +536,6 @@ function WorksheetQuizModule({ content }) {
               <span>{currentIndex + 1} / {questions.length}</span>
             </div>
           </div>
-          {lastResult ? (
-            <div className={`worksheet-feedback ${lastResult}`}>
-              {lastResult === "correct" ? "정답입니다!" : "오답입니다."}
-            </div>
-          ) : null}
-
           {currentQuestion && currentQuestion.type !== "FILL_BLANKS" ? (
             <QuestionModal
               title="문제"

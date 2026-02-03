@@ -1,0 +1,89 @@
+{
+  "contentId": "dr-s2-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "봄이 오면",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "SAUSSURE_2",
+  "schoolGradeRange": { "min": 2, "max": 2 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "봄이 되면 날씨가 따뜻해져요. 겨울 동안 얼어 있던 땅이 녹기 시작하지요." },
+        { "id": "p2", "text": "나무에는 새 잎이 돋아나고, 꽃봉오리가 맺혀요. 개나리와 진달래가 가장 먼저 피어요." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": { "start": 0, "end": 16 }
+          },
+          "question": {
+            "prompt": "봄이 되면 날씨가 어떻게 변하나요?",
+            "choices": [
+              { "id": "A", "text": "추워져요" },
+              { "id": "B", "text": "따뜻해져요" },
+              { "id": "C", "text": "비가 와요" },
+              { "id": "D", "text": "눈이 와요" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": { "start": 22, "end": 44 }
+          },
+          "question": {
+            "prompt": "봄에 가장 먼저 피는 꽃은?",
+            "choices": [
+              { "id": "A", "text": "장미와 백합" },
+              { "id": "B", "text": "개나리와 진달래" },
+              { "id": "C", "text": "해바라기와 코스모스" },
+              { "id": "D", "text": "국화와 무궁화" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "봄이 되면 날씨가 따뜻해져요" },
+        { "id": "c2", "text": "얼어 있던 땅이 녹아요" },
+        { "id": "c3", "text": "개나리와 진달래가 먼저 피어요" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "봄에 가장 먼저 피는 꽃 이름을 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 22, "end": 25 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

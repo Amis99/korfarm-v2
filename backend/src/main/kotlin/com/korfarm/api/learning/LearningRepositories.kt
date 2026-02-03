@@ -11,3 +11,7 @@ interface LearningAttemptRepository : JpaRepository<LearningAttemptEntity, Strin
         end: LocalDateTime
     ): Boolean
 }
+
+interface LearningStreakRepository : JpaRepository<LearningStreakEntity, String> {
+    fun findByUserId(userId: String): LearningStreakEntity?
+}

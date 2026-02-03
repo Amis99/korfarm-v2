@@ -1,20 +1,36 @@
 {
-  "contentId": "dq-wittgenstein1-001",
+  "contentId": "dq-w1-001",
   "contentType": "DAILY_QUIZ",
   "version": 1,
   "status": "PUBLISHED",
   "title": "일일 퀴즈 - 비트겐슈타인1 Day 1",
-  "description": "맞춤법과 기초 어휘 10문항",
+  "description": "비트겐슈타인 1단계 1일차 퀴즈",
   "targetLevel": "WITTGENSTEIN_1",
-  "schoolGradeRange": { "min": 10, "max": 10 },
+  "schoolGradeRange": {
+    "min": 10,
+    "max": 10
+  },
   "area": "VOCAB",
   "subArea": "DAILY",
-  "competencies": ["VOCAB"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "competencies": [
+    "COMPREHENSIVE"
+  ],
+  "tags": [
+    "daily",
+    "science"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
   "timeLimitSec": 180,
-  "assets": { "sheetBackground": "/learning-paper.jpg" },
+  "assets": {
+    "sheetBackground": "/learning-paper.jpg"
+  },
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -23,161 +39,414 @@
         "id": "dq-w1-001-1",
         "type": "MULTI_CHOICE",
         "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 서사",
-        "highlight": { "text": "서사" },
-        "prompt": "뜻을 고르세요.",
+        "competency": "어휘력",
+        "passage": "과학 이론은 관찰된 현상을 설명하기 위해 제안되며, 새로운 증거에 의해 '수정'되거나 폐기될 수 있다.",
+        "stem": "'수정'의 문맥적 의미로 가장 적절한 것은?",
         "choices": [
-          { "id": "A", "text": "사건이나 이야기를 시간 순서대로 서술하는 것" },
-          { "id": "B", "text": "자신의 감정을 표현하는 글" },
-          { "id": "C", "text": "사실을 객관적으로 설명하는 글" },
-          { "id": "D", "text": "상대를 설득하기 위한 글" }
+          {
+            "id": "A",
+            "text": "잘못된 부분을 바로잡아 고침"
+          },
+          {
+            "id": "B",
+            "text": "아기의 생명이 시작됨"
+          },
+          {
+            "id": "C",
+            "text": "값을 지불하고 물건을 받음"
+          },
+          {
+            "id": "D",
+            "text": "결정을 내리고 확정함"
+          }
         ],
         "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "문맥상 기존 이론의 부족함이나 오류를 고친다는 의미이므로 '바로잡아 고침(修整)'이 적절해요.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-w1-001-2",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 은유",
-        "highlight": { "text": "은유" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "passage": "빅뱅 우주론에 따르면 초기 우주는 매우 고온 고밀도 상태였다. 우주가 팽창함에 따라 온도는 점차 낮아졌고, 이 과정에서 기본 입자들이 결합하여 양성자와 중성자가 생성되었다. 이후 약 38만 년이 지났을 때, 원자가 형성되면서 빛이 물질의 방해를 받지 않고 퍼져 나갈 수 있게 되었는데 이를 우주 배경 복사라고 한다.",
+        "stem": "이 글의 내용과 일치하지 않는 것은?",
         "choices": [
-          { "id": "A", "text": "원관념과 보조관념을 직접 연결하여 표현하는 비유" },
-          { "id": "B", "text": "'~처럼', '~같이'를 사용하여 비교하는 표현" },
-          { "id": "C", "text": "사물에 사람의 성격을 부여하는 표현" },
-          { "id": "D", "text": "사실을 과장하여 표현하는 것" }
+          {
+            "id": "A",
+            "text": "우주가 팽창하면서 온도는 낮아졌다."
+          },
+          {
+            "id": "B",
+            "text": "양성자와 중성자는 우주 탄생과 동시에 생성되었다."
+          },
+          {
+            "id": "C",
+            "text": "원자가 형성된 것은 빅뱅 후 약 38만 년이 지난 시점이다."
+          },
+          {
+            "id": "D",
+            "text": "우주 배경 복사는 빛이 물질로부터 분리되어 퍼져 나간 것이다."
+          }
         ],
-        "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "B",
+        "explanation": "글에서 '우주가 팽창함에 따라 온도가 낮아졌고, 이 과정에서(즉, 시간이 흐른 뒤) 기본 입자들이 결합하여 양성자와 중성자가 생성되었다'고 했습니다. 탄생과 동시는 아닙니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-w1-001-3",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 관조",
-        "highlight": { "text": "관조" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "passage": "유 전자 편집 기술인 크리스퍼(CRISPR)는 유전병 치료에 획기적인 도구로 주목받고 있다. [A] 하지만 이 기술을 인간 배아에 적용하는 문제에 대해서는 윤리적 논란이 거세다. [B] 치료 목적을 넘어 지능이나 외모를 개선하는 '맞춤형 아기'가 등장할 수 있다는 우려 때문이다. [C] 따라서 기술의 발전 속도에 맞춰 사회적 합의와 법적 규제 마련이 시급하다. [D]",
+        "stem": "글의 흐름상 [A]~[D] 중 '반론 또는 우려 제기'가 시작되는 위치는 어디인가?",
         "choices": [
-          { "id": "A", "text": "적극적으로 참여하는 것" },
-          { "id": "B", "text": "고요한 마음으로 사물을 바라보며 깊이 생각하는 것" },
-          { "id": "C", "text": "빠르게 판단하는 것" },
-          { "id": "D", "text": "의견을 강하게 주장하는 것" }
+          {
+            "id": "A",
+            "text": "[A]"
+          },
+          {
+            "id": "B",
+            "text": "[B]"
+          },
+          {
+            "id": "C",
+            "text": "[C]"
+          },
+          {
+            "id": "D",
+            "text": "[D]"
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "A",
+        "explanation": "[A] 뒤에 '하지만'이라는 접속어와 함께 긍정적 전망(획기적 도구)에 대한 윤리적 논란(우려)을 제시하고 있습니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-w1-001-4",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 형이상학",
-        "highlight": { "text": "형이상학" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "passage": "이 결합은 비금속 원소들이 서로 전자를 공유함으로써 형성된다. 산소 분자(O2)나 물 분자(H2O)가 대표적인 예이다.",
+        "stem": "이 화학 결합의 이름은?",
         "choices": [
-          { "id": "A", "text": "실험으로 증명할 수 있는 자연과학" },
-          { "id": "B", "text": "존재, 본질, 원리 등 감각 너머의 것을 탐구하는 철학" },
-          { "id": "C", "text": "수학의 한 분야" },
-          { "id": "D", "text": "역사적 사건을 연구하는 학문" }
+          {
+            "id": "A",
+            "text": "이온 결합"
+          },
+          {
+            "id": "B",
+            "text": "공유 결합"
+          },
+          {
+            "id": "C",
+            "text": "금속 결합"
+          },
+          {
+            "id": "D",
+            "text": "수소 결합"
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "전자를 '공유'하여 형성되는 결합은 공유 결합입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-w1-001-5",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 담론",
-        "highlight": { "text": "담론" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "passage": "별의 스펙트럼을 분석하면 별의 구성 성분을 알 수 있다. 태양의 스펙트럼에는 수많은 흡수선(검은 선)이 나타나는데, 이는 태양 대기에 존재하는 원소들이 특정 파장의 빛을 흡수했기 때문이다.",
+        "stem": "어떤 별의 스펙트럼을 관측했더니 태양과 흡수선의 위치가 거의 일치했다. 이 사실로부터 추론할 수 있는 것은?",
         "choices": [
-          { "id": "A", "text": "일상적인 잡담" },
-          { "id": "B", "text": "특정 주제에 관한 체계적 논의나 이야기 방식" },
-          { "id": "C", "text": "짧은 농담" },
-          { "id": "D", "text": "사적인 편지" }
+          {
+            "id": "A",
+            "text": "이 별은 태양보다 훨씬 뜨거운 별이다."
+          },
+          {
+            "id": "B",
+            "text": "이 별의 대기 성분은 태양과 비슷할 것이다."
+          },
+          {
+            "id": "C",
+            "text": "이 별은 태양보다 질량이 훨씬 클 것이다."
+          },
+          {
+            "id": "D",
+            "text": "이 별은 지구와 매우 가까이 있다."
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "흡수선의 위치는 원소의 종류에 따라 고유하게 나타납니다. 흡수선 위치가 태양과 일치한다는 것은 대기를 구성하는 원소의 종류가 태양과 유사하다는 것을 의미합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-w1-001-6",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 함의",
-        "highlight": { "text": "함의" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "passage": "주장: \"효소 세제는 따뜻한 물에서 세척력이 가장 좋다. 따라서 끓는 물에 빨래를 삶을 때 효소 세제를 넣으면 때가 더 잘 빠질 것이다.\"",
+        "stem": "이 주장의 과학적 오류를 지적한 것은?",
         "choices": [
-          { "id": "A", "text": "직접적으로 드러나는 뜻" },
-          { "id": "B", "text": "말이나 글 속에 담겨 있는 숨은 의미" },
-          { "id": "C", "text": "사전에 적힌 정의" },
-          { "id": "D", "text": "반대되는 뜻" }
+          {
+            "id": "A",
+            "text": "효소는 화학 물질이라 끓여도 성질이 변하지 않는다."
+          },
+          {
+            "id": "B",
+            "text": "효소는 단백질로 이루어져 있어 고온에서는 구조가 변형되어 기능을 잃는다."
+          },
+          {
+            "id": "C",
+            "text": "끓는 물에서는 물 분자의 운동이 너무 빨라 세제가 섞이지 않는다."
+          },
+          {
+            "id": "D",
+            "text": "세제는 찬물에서 가장 잘 녹는다."
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "효소의 주성분은 단백질이므로 최적 온도(보통 35~40도)를 넘어서 끓는 물과 같은 고온이 되면 변성되어 촉매 기능을 상실합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-w1-001-7",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 변증법",
-        "highlight": { "text": "변증법" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CREATIVE_THINKING",
+        "competency": "창의적 사고",
+        "stem": "'촉매'의 기능(자신은 변하지 않으면서 반응 속도를 변화시킴)을 인간관계에 비유할 때 가장 적절한 인물 유형은?",
         "choices": [
-          { "id": "A", "text": "정(正)·반(反)·합(合)의 과정으로 진리에 다가가는 논리 방법" },
-          { "id": "B", "text": "실험을 통해 가설을 검증하는 방법" },
-          { "id": "C", "text": "통계를 이용한 분석 방법" },
-          { "id": "D", "text": "다수결로 결론을 내리는 방법" }
+          {
+            "id": "A",
+            "text": "두 친구 사이를 오가며 화해를 주선하고 자신은 빠지는 중재자"
+          },
+          {
+            "id": "B",
+            "text": "친구의 싸움에 휘말려 같이 다투는 사람"
+          },
+          {
+            "id": "C",
+            "text": "아무런 관심 없이 방관하는 사람"
+          },
+          {
+            "id": "D",
+            "text": "모든 일을 혼자서 처리하는 리더"
+          }
         ],
         "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "자신은 반응 결과물에 포함되지 않으면서 반응을 돕는 촉매의 성질은, 갈등을 해결해주고(반응 촉진) 자신은 원래대로 남는 중재자와 유사합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-w1-001-8",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 해체",
-        "highlight": { "text": "해체" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "passage": "지구 온난화를 막기 위해 대기 중의 이산화 탄소를 줄여야 한다. 이를 위한 공학적 해결책을 고려하고 있다.",
+        "stem": "다음 중 가장 직접적이고 효과적인 '탄소 포집' 기술의 원리는?",
         "choices": [
-          { "id": "A", "text": "새로 만들어 세우는 것" },
-          { "id": "B", "text": "기존의 구조나 체계를 분해하여 재검토하는 것" },
-          { "id": "C", "text": "더 단단하게 결합하는 것" },
-          { "id": "D", "text": "원래 상태로 복원하는 것" }
+          {
+            "id": "A",
+            "text": "공장 굴뚝에 필터를 설치하여 이산화 탄소를 흡착제로 걸러내어 저장한다."
+          },
+          {
+            "id": "B",
+            "text": "더 많은 화석 연료를 태워 온도를 높인다."
+          },
+          {
+            "id": "C",
+            "text": "바닷물을 끓여 수증기를 만든다."
+          },
+          {
+            "id": "D",
+            "text": "에어컨을 더 많이 가동하여 공기를 식힌다."
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "A",
+        "explanation": "이산화 탄소를 물리적/화학적으로 포집(Capture)하여 격리하는 기술(CCS)이 대표적인 공학적 해결책입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-w1-001-9",
-        "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 맥락",
-        "highlight": { "text": "맥락" },
-        "prompt": "뜻을 고르세요.",
-        "choices": [
-          { "id": "A", "text": "개별 단어의 사전적 뜻" },
-          { "id": "B", "text": "글이나 상황의 앞뒤 관계와 흐름" },
-          { "id": "C", "text": "문장의 문법 구조" },
-          { "id": "D", "text": "글의 분량" }
+        "type": "SENTENCE_BUILDING",
+        "questionKind": "SENTENCE_BUILDING",
+        "competency": "표현력",
+        "passage": "이 로봇은 사람의 표정을 읽을 수 있다. 감정 상태를 파악한다. 그에 맞는 대화를 시도한다.",
+        "stem": "이 문장들을 '뿐만 아니라'를 사용하여 한 문장으로 완성하세요.",
+        "correctSentence": "이 로봇은 사람의 표정을 읽어 감정 상태를 파악할 뿐만 아니라 그에 맞는 대화를 시도한다.",
+        "sentenceParts": [
+          {
+            "answer": "이",
+            "distractors": [
+              "저",
+              "그",
+              "모든"
+            ]
+          },
+          {
+            "answer": "로봇은",
+            "distractors": [
+              "사람은",
+              "동물은",
+              "기계는"
+            ]
+          },
+          {
+            "answer": "사람의",
+            "distractors": [
+              "과학의",
+              "자연의",
+              "우주의"
+            ]
+          },
+          {
+            "answer": "표정을",
+            "distractors": [
+              "마음을",
+              "생각을",
+              "행동을"
+            ]
+          },
+          {
+            "answer": "읽어",
+            "distractors": [
+              "써서",
+              "그려",
+              "지워"
+            ]
+          },
+          {
+            "answer": "감정",
+            "distractors": [
+              "건강",
+              "재정",
+              "날씨"
+            ]
+          },
+          {
+            "answer": "상태를",
+            "distractors": [
+              "변화를",
+              "결과를",
+              "원인을"
+            ]
+          },
+          {
+            "answer": "파악할",
+            "distractors": [
+              "무시할",
+              "거부할",
+              "조작할"
+            ]
+          },
+          {
+            "answer": "뿐만",
+            "distractors": [
+              "만큼",
+              "대로",
+              "처럼"
+            ]
+          },
+          {
+            "answer": "아니라",
+            "distractors": [
+              "못해",
+              "안해",
+              "말고"
+            ]
+          },
+          {
+            "answer": "그에",
+            "distractors": [
+              "나에",
+              "서로",
+              "다시"
+            ]
+          },
+          {
+            "answer": "맞는",
+            "distractors": [
+              "틀린",
+              "다른",
+              "나쁜"
+            ]
+          },
+          {
+            "answer": "대화를",
+            "distractors": [
+              "싸움을",
+              "노래를",
+              "게임을"
+            ]
+          },
+          {
+            "answer": "시도한다.",
+            "distractors": [
+              "포기한다.",
+              "후회한다.",
+              "비난한다."
+            ]
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-w1-001-10",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 범주",
-        "highlight": { "text": "범주" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 중 밑줄 친 부분의 띄어쓰기가 옳은 것은?",
         "choices": [
-          { "id": "A", "text": "같은 성질의 것들을 묶은 부류나 영역" },
-          { "id": "B", "text": "하나의 구체적 사례" },
-          { "id": "C", "text": "예외적인 경우" },
-          { "id": "D", "text": "순서를 매기는 것" }
+          {
+            "id": "A",
+            "text": "나는 너를 **믿을수밖에** 없다."
+          },
+          {
+            "id": "B",
+            "text": "나는 너를 **믿을 수밖에** 없다."
+          },
+          {
+            "id": "C",
+            "text": "나는 너를 **믿을수 밖에** 없다."
+          },
+          {
+            "id": "D",
+            "text": "나는 너를 **믿을 수 밖에** 없다."
+          }
         ],
-        "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "B",
+        "explanation": "'수'는 의존 명사이므로 띄어 쓰고, '밖에'는 조사이므로 붙여 써야 합니다. 따라서 '믿을 수밖에'가 맞습니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       }
     ]
   }

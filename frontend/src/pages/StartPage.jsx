@@ -1,41 +1,129 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/start.css";
 
+const TOKEN_KEY = "korfarm_token";
+
+const LEVEL_LABEL_MAP = {
+  saussure1: "소쉬르 1",
+  saussure2: "소쉬르 2",
+  saussure3: "소쉬르 3",
+  frege1: "프레게 1",
+  frege2: "프레게 2",
+  frege3: "프레게 3",
+  russell1: "러셀 1",
+  russell2: "러셀 2",
+  russell3: "러셀 3",
+  wittgenstein1: "비트겐슈타인 1",
+  wittgenstein2: "비트겐슈타인 2",
+  wittgenstein3: "비트겐슈타인 3",
+};
+
+function getDayOfYear() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const diff = now - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay);
+}
+
 function StartPage() {
   const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
+  const [seeds, setSeeds] = useState(0);
+  const [crops, setCrops] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      const token = localStorage.getItem(TOKEN_KEY);
+      if (!token) {
+        navigate("/login");
+        return;
+      }
+      const headers = { Authorization: `Bearer ${token}` };
+
+      try {
+        const [meRes, invRes, streakRes] = await Promise.all([
+          fetch("/v1/auth/me", { headers }),
+          fetch("/v1/inventory", { headers }),
+          fetch("/v1/learning/streak", { headers }),
+        ]);
+
+        if (!meRes.ok) {
+          navigate("/login");
+          return;
+        }
+
+        const meData = await meRes.json();
+        if (!cancelled) setProfile(meData.data);
+
+        if (invRes.ok) {
+          const invData = await invRes.json();
+          const inv = invData.data;
+          if (!cancelled) {
+            setSeeds(Object.values(inv.seeds || {}).reduce((a, b) => a + b, 0));
+            setCrops(Object.values(inv.crops || {}).reduce((a, b) => a + b, 0));
+          }
+        }
+
+        if (streakRes.ok) {
+          const streakData = await streakRes.json();
+          if (!cancelled) setStreak(streakData.data?.currentStreak ?? 0);
+        }
+      } catch {
+        // network error — stay on page with defaults
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    load();
+    return () => { cancelled = true; };
+  }, [navigate]);
+
+  const name = profile?.name || "농부";
+  const levelId = profile?.levelId || profile?.level_id;
+  const levelLabel = LEVEL_LABEL_MAP[levelId] || levelId || "";
+  const dayOfYear = ((getDayOfYear() - 1) % 365) + 1;
+
+  if (loading) {
+    return (
+      <div className="start-page">
+        <div className="start-shell" style={{ textAlign: "center", padding: "4rem 0" }}>
+          로딩 중…
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="start-page">
       <div className="start-shell">
         <header className="start-header">
           <div className="start-header-top">
             <div className="start-avatar">
-              <span className="start-level">LV.12</span>
+              <span className="start-level">{levelLabel}</span>
             </div>
             <div className="start-greeting">
               <h1>
-                알렉스 농부님, <span>안녕하세요!</span>
+                {name} 농부님, <span>안녕하세요!</span>
               </h1>
-              <div className="start-xp">
-                <span>450 XP</span>
-                <span>목표: 1,000</span>
-              </div>
-              <div className="start-progress">
-                <span />
-              </div>
             </div>
           </div>
           <div className="start-stats">
             <div className="start-stat">
               <span className="material-symbols-outlined">grass</span>
-              <span>12 씨앗</span>
+              <span>{seeds} 씨앗</span>
             </div>
             <div className="start-stat">
               <span className="material-symbols-outlined">shopping_bag</span>
-              <span>5 수확물</span>
+              <span>{crops} 수확물</span>
             </div>
             <div className="start-stat">
               <span className="material-symbols-outlined">nutrition</span>
-              <span>24 연속일</span>
+              <span>{streak} 연속일</span>
             </div>
           </div>
           <div className="start-cta">
@@ -55,18 +143,20 @@ function StartPage() {
             </h2>
             <div className="start-card" onClick={() => navigate("/daily-quiz")} style={{ cursor: "pointer" }}>
               <span className="badge">일일 퀴즈</span>
-              <h3>맞춤법 퀴즈</h3>
+              <h3>{levelLabel} {dayOfYear}일 차</h3>
               <p>총 10문제 도전!</p>
+              <p className="start-card-notice">하루 첫 제출 시에만 씨앗이 지급됩니다.</p>
               <div className="start-progress-mini">
                 <span />
               </div>
             </div>
-            <div className="start-card">
+            <div className="start-card" onClick={() => navigate("/daily-reading")} style={{ cursor: "pointer" }}>
               <span className="badge" style={{ background: "#81d4fa" }}>
                 일일 독해
               </span>
-              <h3>농사 일지</h3>
+              <h3>{levelLabel} {dayOfYear}일 차</h3>
               <p>지문 읽는 힘을 키워요</p>
+              <p className="start-card-notice">제출할 때마다 씨앗이 지급됩니다.</p>
               <div className="start-progress-mini">
                 <span style={{ width: "0%", background: "#81d4fa" }} />
               </div>

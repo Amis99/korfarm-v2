@@ -1,0 +1,109 @@
+{
+  "contentId": "dr-r3-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "생태계의 먹이 사슬",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "RUSSELL_3",
+  "schoolGradeRange": { "min": 9, "max": 9 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "생태계에서 생물은 먹이 사슬이라는 관계로 연결되어 있다. 식물은 광합성을 통해 스스로 영양분을 만드는 생산자이며, 초식 동물은 식물을 먹는 1차 소비자이다." },
+        { "id": "p2", "text": "1차 소비자를 먹는 동물은 2차 소비자, 2차 소비자를 먹는 동물은 3차 소비자가 된다. 이러한 단계를 영양 단계라고 한다." },
+        { "id": "p3", "text": "먹이 사슬의 꼭대기에 있는 최상위 포식자가 사라지면 생태계 전체의 균형이 무너질 수 있다. 예를 들어 늑대가 사라진 지역에서 사슴이 폭발적으로 증가하여 숲이 황폐해진 사례가 있다." },
+        { "id": "p4", "text": "따라서 생태계의 균형을 유지하기 위해서는 먹이 사슬의 모든 단계가 건강하게 유지되어야 한다. 이것이 생물 다양성 보전이 중요한 이유이다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": { "start": 28, "end": 58 }
+          },
+          "question": {
+            "prompt": "생태계에서 '생산자'의 역할을 하는 것은?",
+            "choices": [
+              { "id": "A", "text": "식물" },
+              { "id": "B", "text": "초식 동물" },
+              { "id": "C", "text": "육식 동물" },
+              { "id": "D", "text": "분해자" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": { "start": 38, "end": 56 }
+          },
+          "question": {
+            "prompt": "먹이 사슬에서 소비자의 단계를 무엇이라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "먹이 그물" },
+              { "id": "B", "text": "영양 단계" },
+              { "id": "C", "text": "생태 피라미드" },
+              { "id": "D", "text": "에너지 흐름" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": { "start": 0, "end": 40 }
+          },
+          "question": {
+            "prompt": "최상위 포식자가 사라지면 어떤 일이 일어나나요?",
+            "choices": [
+              { "id": "A", "text": "아무 일도 일어나지 않는다" },
+              { "id": "B", "text": "생태계 전체의 균형이 무너진다" },
+              { "id": "C", "text": "식물만 더 많이 자란다" },
+              { "id": "D", "text": "모든 동물이 사라진다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "식물은 생산자, 초식 동물은 1차 소비자이다" },
+        { "id": "c2", "text": "소비자의 단계를 영양 단계라고 한다" },
+        { "id": "c3", "text": "최상위 포식자가 사라지면 생태계 균형이 무너진다" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "소비자의 단계를 부르는 용어를 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 43, "end": 48 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

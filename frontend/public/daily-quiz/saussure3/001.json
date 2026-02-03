@@ -1,20 +1,36 @@
 {
-  "contentId": "dq-saussure3-001",
+  "contentId": "dq-s3-001",
   "contentType": "DAILY_QUIZ",
   "version": 1,
   "status": "PUBLISHED",
   "title": "일일 퀴즈 - 소쉬르3 Day 1",
-  "description": "맞춤법과 기초 어휘 10문항",
+  "description": "소쉬르 3단계 1일차 퀴즈",
   "targetLevel": "SAUSSURE_3",
-  "schoolGradeRange": { "min": 3, "max": 3 },
+  "schoolGradeRange": {
+    "min": 3,
+    "max": 3
+  },
   "area": "VOCAB",
   "subArea": "DAILY",
-  "competencies": ["VOCAB"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "competencies": [
+    "COMPREHENSIVE"
+  ],
+  "tags": [
+    "daily",
+    "science"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
   "timeLimitSec": 180,
-  "assets": { "sheetBackground": "/learning-paper.jpg" },
+  "assets": {
+    "sheetBackground": "/learning-paper.jpg"
+  },
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -23,161 +39,334 @@
         "id": "dq-s3-001-1",
         "type": "MULTI_CHOICE",
         "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 도서관",
-        "highlight": { "text": "도서관" },
-        "prompt": "뜻을 고르세요.",
+        "competency": "어휘력",
+        "passage": "자석은 철로 된 물체를 '당기는' 성질이 있습니다.",
+        "stem": "'당기다'의 반대말은 무엇인가요?",
         "choices": [
-          { "id": "A", "text": "책을 모아 두고 빌려 보는 곳" },
-          { "id": "B", "text": "운동을 하는 곳" },
-          { "id": "C", "text": "음식을 만드는 곳" },
-          { "id": "D", "text": "물건을 파는 곳" }
+          {
+            "id": "A",
+            "text": "밀다"
+          },
+          {
+            "id": "B",
+            "text": "잡다"
+          },
+          {
+            "id": "C",
+            "text": "누르다"
+          },
+          {
+            "id": "D",
+            "text": "돌리다"
+          }
         ],
         "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "자기 쪽으로 오게 하는 '당기다'의 반대말은 반대쪽으로 가게 하는 '밀다'예요.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-s3-001-2",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 여행",
-        "highlight": { "text": "여행" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "passage": "자석에는 N극과 S극이 있습니다. 같은 극끼리는 서로 밀어내고, 다른 극끼리는 서로 끌어당깁니다. N극과 N극을 가까이 대면 서로 밀어냅니다.",
+        "stem": "이 글의 내용과 일치하는 것은 무엇인가요?",
         "choices": [
-          { "id": "A", "text": "집에서 쉬는 것" },
-          { "id": "B", "text": "다른 곳에 가서 구경하는 것" },
-          { "id": "C", "text": "학교에서 공부하는 것" },
-          { "id": "D", "text": "친구와 놀이하는 것" }
+          {
+            "id": "A",
+            "text": "자석의 같은 극끼리는 서로 당긴다."
+          },
+          {
+            "id": "B",
+            "text": "N극과 S극은 서로 밀어낸다."
+          },
+          {
+            "id": "C",
+            "text": "N극과 N극은 서로 밀어낸다."
+          },
+          {
+            "id": "D",
+            "text": "자석에는 극이 하나밖에 없다."
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "C",
+        "explanation": "글에서 '같은 극끼리는 서로 밀어내고'라고 했고, 예시로 'N극과 N극을 가까이 대면 서로 밀어냅니다'라고 했어요.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-s3-001-3",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 건강",
-        "highlight": { "text": "건강" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "passage": "물체는 고체, 액체, 기체로 나눌 수 있습니다. 고체는 담는 그릇이 바뀌어도 모양이 변하지 않습니다. 하지만 액체는 담는 그릇에 따라 모양이 변합니다.",
+        "stem": "이 글은 고체와 액체의 무엇을 중심으로 설명하고 있나요?",
         "choices": [
-          { "id": "A", "text": "아프고 힘든 상태" },
-          { "id": "B", "text": "슬프고 외로운 상태" },
-          { "id": "C", "text": "몸과 마음이 튼튼한 상태" },
-          { "id": "D", "text": "배가 고픈 상태" }
+          {
+            "id": "A",
+            "text": "차이점"
+          },
+          {
+            "id": "B",
+            "text": "공통점"
+          },
+          {
+            "id": "C",
+            "text": "무게"
+          },
+          {
+            "id": "D",
+            "text": "색깔"
+          }
         ],
-        "answerId": "C",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "A",
+        "explanation": "고체는 모양이 변하지 않지만 액체는 변한다는 '차이점'을 설명하고 있어요. 이를 '대조'라고 해요.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-s3-001-4",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 방학",
-        "highlight": { "text": "방학" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "passage": "우리 주변에는 자석에 붙는 물체와 붙지 않는 물체가 있습니다. 철로 만들어진 클립이나 가위는 자석에 붙습니다.",
+        "stem": "다음 중 자석에 붙지 않는 물체는 무엇일까요?",
         "choices": [
-          { "id": "A", "text": "학교에서 일정 기간 쉬는 것" },
-          { "id": "B", "text": "새 학기가 시작되는 것" },
-          { "id": "C", "text": "시험을 보는 기간" },
-          { "id": "D", "text": "숙제를 내는 것" }
+          {
+            "id": "A",
+            "text": "철 못"
+          },
+          {
+            "id": "B",
+            "text": "플라스틱 자"
+          },
+          {
+            "id": "C",
+            "text": "쇠구슬"
+          },
+          {
+            "id": "D",
+            "text": "철사"
+          }
         ],
-        "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "B",
+        "explanation": "철로 된 물체는 자석에 붙지만, 플라스틱, 나무, 유리 등은 자석에 붙지 않아요.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-s3-001-5",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 규칙",
-        "highlight": { "text": "규칙" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "passage": "얼음이 든 컵의 겉면에 물방울이 맺혔습니다. 컵 안의 물이 샌 것은 아닙니다.",
+        "stem": "컵 겉면의 물방울은 어디서 온 것일까요? (공기 중의 수증기와 관련지어 생각해보세요)",
         "choices": [
-          { "id": "A", "text": "마음대로 하는 것" },
-          { "id": "B", "text": "여러 사람이 지켜야 할 약속" },
-          { "id": "C", "text": "혼자 정한 비밀" },
-          { "id": "D", "text": "재미있는 놀이" }
+          {
+            "id": "A",
+            "text": "컵 안의 얼음이 뚫고 나왔다."
+          },
+          {
+            "id": "B",
+            "text": "공기 중의 수증기가 차가운 컵을 만나 물로 변했다."
+          },
+          {
+            "id": "C",
+            "text": "누군가 컵에 물을 뿌렸다."
+          },
+          {
+            "id": "D",
+            "text": "컵이 땀을 흘린 것이다."
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "차가운 컵 표면에 공기 중의 수증기가 닿아 식으면서 물방울이 된 것이에요. 이를 '응결'이라고 해요.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-s3-001-6",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 선물",
-        "highlight": { "text": "선물" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "passage": "광고: \"이 약을 먹으면 키가 10cm나 큽니다! 아무런 운동을 안 해도 됩니다!\"",
+        "stem": "이 광고를 보고 든 생각으로 가장 타당한 것은 무엇인가요?",
         "choices": [
-          { "id": "A", "text": "돈을 빌리는 것" },
-          { "id": "B", "text": "물건을 버리는 것" },
-          { "id": "C", "text": "축하하거나 고마워서 주는 물건" },
-          { "id": "D", "text": "자기가 쓸 물건을 사는 것" }
+          {
+            "id": "A",
+            "text": "무조건 사서 먹어야지."
+          },
+          {
+            "id": "B",
+            "text": "운동 없이 약만으로 키가 큰다는 건 과장된 말 같아."
+          },
+          {
+            "id": "C",
+            "text": "세상에 이런 좋은 약이 있다니 놀라워."
+          },
+          {
+            "id": "D",
+            "text": "친구들에게 빨리 소개해야겠어."
+          }
         ],
-        "answerId": "C",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "B",
+        "explanation": "과학적 근거 없이 너무 과한 효과를 장담하는 말은 비판적으로 의심해봐야 해요.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-s3-001-7",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 모험",
-        "highlight": { "text": "모험" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CREATIVE_THINKING",
+        "competency": "창의적 사고",
+        "stem": "자석의 성질(끌어당김)을 이용하여 생활용품을 만들려고 합니다. 적절하지 않은 것은?",
         "choices": [
-          { "id": "A", "text": "위험을 무릅쓰고 도전하는 것" },
-          { "id": "B", "text": "안전하게 집에 있는 것" },
-          { "id": "C", "text": "조용히 책을 읽는 것" },
-          { "id": "D", "text": "일찍 잠자리에 드는 것" }
+          {
+            "id": "A",
+            "text": "냉장고 문이 잘 닫히게 하는 장치"
+          },
+          {
+            "id": "B",
+            "text": "필통 뚜껑이 열리지 않게 잡는 장치"
+          },
+          {
+            "id": "C",
+            "text": "종이를 칠판에 붙이는 자석 핀"
+          },
+          {
+            "id": "D",
+            "text": "종이비행기가 더 멀리 날아가게 하는 장치"
+          }
         ],
-        "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "D",
+        "explanation": "자석은 철을 당기거나 붙이는 데 쓰여요. 종이비행기를 멀리 날리는 것은 자석의 성질과 직접적인 관련이 적어요.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-s3-001-8",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 감사",
-        "highlight": { "text": "감사" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "passage": "물과 소금과 모래가 섞여 있습니다. 이 중에서 모래만 분리해내고 싶습니다. 거름종이를 사용하면 물과 소금은 통과하고 모래는 남습니다.",
+        "stem": "모래를 분리하기 위해 가장 먼저 필요한 도구는 무엇인가요?",
         "choices": [
-          { "id": "A", "text": "화가 나는 마음" },
-          { "id": "B", "text": "고마운 마음" },
-          { "id": "C", "text": "슬픈 마음" },
-          { "id": "D", "text": "무서운 마음" }
+          {
+            "id": "A",
+            "text": "자석"
+          },
+          {
+            "id": "B",
+            "text": "거름종이"
+          },
+          {
+            "id": "C",
+            "text": "가열 장치"
+          },
+          {
+            "id": "D",
+            "text": "현미경"
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "물에 녹지 않는 모래를 걸러내려면 거름종이가 필요해요.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-s3-001-9",
-        "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 용기",
-        "highlight": { "text": "용기" },
-        "prompt": "뜻을 고르세요.",
-        "choices": [
-          { "id": "A", "text": "무서워서 도망치는 것" },
-          { "id": "B", "text": "남의 말을 따라 하는 것" },
-          { "id": "C", "text": "겁을 내지 않고 씩씩한 마음" },
-          { "id": "D", "text": "조용히 숨어 있는 것" }
+        "type": "SENTENCE_BUILDING",
+        "questionKind": "SENTENCE_BUILDING",
+        "competency": "표현력",
+        "passage": "나는 어제 도서관에 갔다. (원문: 나는 어제 도서관에 갈 것이다. - 시제 오류 수정)",
+        "stem": "다음 문장의 시제를 자연스럽게 고쳐서 문장을 완성하세요.",
+        "correctSentence": "나는 어제 도서관에 갔다.",
+        "sentenceParts": [
+          {
+            "answer": "나는",
+            "distractors": [
+              "너는",
+              "그는",
+              "우리는"
+            ]
+          },
+          {
+            "answer": "어제",
+            "distractors": [
+              "내일",
+              "모레",
+              "나중에"
+            ]
+          },
+          {
+            "answer": "도서관에",
+            "distractors": [
+              "시장에",
+              "학교에",
+              "공원에"
+            ]
+          },
+          {
+            "answer": "갔다.",
+            "distractors": [
+              "갈 것이다.",
+              "가고 싶다.",
+              "갈 예정이다."
+            ]
+          }
         ],
-        "answerId": "C",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-s3-001-10",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 지혜",
-        "highlight": { "text": "지혜" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 중 띄어쓰기가 바른 것은 무엇인가요?",
         "choices": [
-          { "id": "A", "text": "사물의 이치를 빠르게 깨닫는 슬기" },
-          { "id": "B", "text": "운동을 잘하는 능력" },
-          { "id": "C", "text": "노래를 잘 부르는 능력" },
-          { "id": "D", "text": "그림을 잘 그리는 능력" }
+          {
+            "id": "A",
+            "text": "어머니가방에들어가신다."
+          },
+          {
+            "id": "B",
+            "text": "어머니 가 방에 들어가신다."
+          },
+          {
+            "id": "C",
+            "text": "어머니가 방에 들어가신다."
+          },
+          {
+            "id": "D",
+            "text": "어머니가방에들어 가신다."
+          }
         ],
-        "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "C",
+        "explanation": "누가(어머니가), 어디에(방에), 무엇을 하신다(들어가신다)는 의미 단위로 띄어 써야 해요.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       }
     ]
   }

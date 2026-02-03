@@ -1,20 +1,36 @@
 {
-  "contentId": "dq-russell3-001",
+  "contentId": "dq-r3-001",
   "contentType": "DAILY_QUIZ",
   "version": 1,
   "status": "PUBLISHED",
   "title": "일일 퀴즈 - 러셀3 Day 1",
-  "description": "맞춤법과 기초 어휘 10문항",
+  "description": "러셀 3단계 1일차 퀴즈",
   "targetLevel": "RUSSELL_3",
-  "schoolGradeRange": { "min": 9, "max": 9 },
+  "schoolGradeRange": {
+    "min": 9,
+    "max": 9
+  },
   "area": "VOCAB",
   "subArea": "DAILY",
-  "competencies": ["VOCAB"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "competencies": [
+    "COMPREHENSIVE"
+  ],
+  "tags": [
+    "daily",
+    "science"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
   "timeLimitSec": 180,
-  "assets": { "sheetBackground": "/learning-paper.jpg" },
+  "assets": {
+    "sheetBackground": "/learning-paper.jpg"
+  },
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -23,161 +39,350 @@
         "id": "dq-r3-001-1",
         "type": "MULTI_CHOICE",
         "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 패러다임",
-        "highlight": { "text": "패러다임" },
-        "prompt": "뜻을 고르세요.",
+        "competency": "어휘력",
+        "passage": "위치 에너지는 높은 곳에 있는 물체가 가지는 잠재적인 에너지이다. '잠재적'이란 겉으로 드러나지 않고 숨어 있다는 뜻이다.",
+        "stem": "'잠재(潛在)하다'의 반의어는?",
         "choices": [
-          { "id": "A", "text": "한 시대의 사고나 인식을 지배하는 틀" },
-          { "id": "B", "text": "유행하는 옷의 스타일" },
-          { "id": "C", "text": "컴퓨터 프로그램의 종류" },
-          { "id": "D", "text": "건물의 설계 방식" }
+          {
+            "id": "A",
+            "text": "내재(內在)하다"
+          },
+          {
+            "id": "B",
+            "text": "현현(顯現)하다"
+          },
+          {
+            "id": "C",
+            "text": "은폐(隱蔽)하다"
+          },
+          {
+            "id": "D",
+            "text": "축적(蓄積)하다"
+          }
         ],
-        "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "B",
+        "explanation": "'잠재'는 숨어 있다는 뜻이고, '현현'은 뚜렷하게 겉으로 나타난다는 뜻입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r3-001-2",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 인과",
-        "highlight": { "text": "인과" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "passage": "순종 황색 완두(YY)와 순종 녹색 완두(yy)를 교배하면 잡종 1대(Yy)는 모두 황색 완두가 나온다. 이는 황색 유전자가 녹색 유전자보다 강하게 작용하여 겉으로 드러나기 때문이다. 이때 겉으로 드러나는 형질을 우성, 드러나지 않는 형질을 열성이라고 한다.",
+        "stem": "잡종 1대(Yy)가 황색인 이유는?",
         "choices": [
-          { "id": "A", "text": "서로 관련 없는 두 사건" },
-          { "id": "B", "text": "원인과 결과의 관계" },
-          { "id": "C", "text": "시간 순서대로 나열한 것" },
-          { "id": "D", "text": "우연히 일어난 일" }
+          {
+            "id": "A",
+            "text": "녹색 유전자가 없기 때문이다."
+          },
+          {
+            "id": "B",
+            "text": "황색 유전자가 우성이기 때문이다."
+          },
+          {
+            "id": "C",
+            "text": "돌연변이가 일어났기 때문이다."
+          },
+          {
+            "id": "D",
+            "text": "녹색 유전자가 파괴되었기 때문이다."
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "글에서 황색 유전자가 강하게 작용하여 겉으로 드러나기 때문(우성)이라고 설명했습니다. 녹색 유전자는 가지고 있지만(Yy) 발현되지 않은 것입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r3-001-3",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 함축",
-        "highlight": { "text": "함축" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "passage": "대기의 순환은 위도에 따른 태양 복사 에너지의 불균형 때문에 일어난다. 적도 지방은 에너지가 남고 극지방은 에너지가 부족하다. 대기와 해수는 이 불균형을 해소하기 위해 적도에서 극지방으로 열을 운반하며 순환한다.",
+        "stem": "이 글의 중심 문장은?",
         "choices": [
-          { "id": "A", "text": "말을 길게 늘여 설명하는 것" },
-          { "id": "B", "text": "속에 많은 뜻을 담고 있는 것" },
-          { "id": "C", "text": "뜻을 분명하게 드러내는 것" },
-          { "id": "D", "text": "아무 의미가 없는 것" }
+          {
+            "id": "A",
+            "text": "적도 지방은 에너지가 남는다."
+          },
+          {
+            "id": "B",
+            "text": "대기의 순환은 에너지 불균형 때문에 일어난다."
+          },
+          {
+            "id": "C",
+            "text": "해수는 열을 운반한다."
+          },
+          {
+            "id": "D",
+            "text": "극지방은 에너지가 부족하다."
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "첫 문장이 전체 내용을 포괄하는 주제문이며, 나머지는 그에 대한 구체적인 설명(상술)입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r3-001-4",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 비유",
-        "highlight": { "text": "비유" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "passage": "역학적 에너지는 위치 에너지와 운동 에너지의 합이다. 공기 저항이나 마찰이 없을 때, 물체가 낙하하면 위치 에너지는 감소하고 운동 에너지는 증가하지만 그 합은 항상 일정하다.",
+        "stem": "이 법칙은 무엇인가?",
         "choices": [
-          { "id": "A", "text": "사실을 그대로 전달하는 것" },
-          { "id": "B", "text": "숫자를 사용해 설명하는 것" },
-          { "id": "C", "text": "다른 사물에 빗대어 표현하는 것" },
-          { "id": "D", "text": "반복하여 강조하는 것" }
+          {
+            "id": "A",
+            "text": "역학적 에너지 보존 법칙"
+          },
+          {
+            "id": "B",
+            "text": "질량 보존 법칙"
+          },
+          {
+            "id": "C",
+            "text": "관성의 법칙"
+          },
+          {
+            "id": "D",
+            "text": "가속도 법칙"
+          }
         ],
-        "answerId": "C",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "A",
+        "explanation": "위치 에너지와 운동 에너지의 합이 일정하게 보존된다는 법칙은 '역학적 에너지 보존 법칙'입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r3-001-5",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 통찰",
-        "highlight": { "text": "통찰" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "passage": "구름은 공기가 상승하여 단열 팽창할 때 기온이 이슬점 아래로 내려가면 생성된다. 고기압 중심에서는 하강 기류가 발달한다.",
+        "stem": "고기압 지역의 날씨는 어떨지 추론하시오.",
         "choices": [
-          { "id": "A", "text": "겉만 대충 보는 것" },
-          { "id": "B", "text": "예리한 관찰력으로 사물의 본질을 꿰뚫어 보는 것" },
-          { "id": "C", "text": "남의 의견을 그대로 받아들이는 것" },
-          { "id": "D", "text": "자료를 수집하는 것" }
+          {
+            "id": "A",
+            "text": "구름이 많고 비가 올 것이다."
+          },
+          {
+            "id": "B",
+            "text": "구름이 소멸하여 맑을 것이다."
+          },
+          {
+            "id": "C",
+            "text": "강한 상승 기류로 태풍이 발생할 것이다."
+          },
+          {
+            "id": "D",
+            "text": "안개가 자욱할 것이다."
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "구름은 공기가 상승해야 만들어집니다. 고기압은 하강 기류가 생기므로 구름이 만들어지기 어렵고(오히려 소멸), 따라서 날씨가 맑을 것입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r3-001-6",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 역설",
-        "highlight": { "text": "역설" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "passage": "A: \"우성 형질이 열성 형질보다 더 우수해. 그러니까 열성 형질을 가진 생물은 도태되어야 해.\"",
+        "stem": "A의 생각에 대한 비판으로 가장 적절한 것은?",
         "choices": [
-          { "id": "A", "text": "겉으로는 모순되지만 그 속에 진리가 담긴 표현" },
-          { "id": "B", "text": "논리적으로 완벽한 주장" },
-          { "id": "C", "text": "사실을 있는 그대로 말하는 것" },
-          { "id": "D", "text": "과장하여 표현하는 것" }
+          {
+            "id": "A",
+            "text": "우성과 열성은 표현형의 발현 방식 차이일 뿐, 우열(좋고 나쁨)을 의미하는 것은 아니다."
+          },
+          {
+            "id": "B",
+            "text": "열성 형질이 우성보다 더 많이 나타나는 경우도 있다."
+          },
+          {
+            "id": "C",
+            "text": "우성 형질은 유전되지 않는다."
+          },
+          {
+            "id": "D",
+            "text": "생물은 모두 평등하다."
+          }
         ],
         "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "우성(Dominant)은 잡종 1대에서 드러나는 형질일 뿐, 생존에 유리하거나 우월하다는 뜻(Superior)이 아닙니다. 유전병 중에는 우성 유전병도 많습니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r3-001-7",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 합리적",
-        "highlight": { "text": "합리적" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CREATIVE_THINKING",
+        "competency": "창의적 사고",
+        "stem": "유전 정보를 담고 있는 'DNA'를 도서관에 비유한다면, '유전자(Gene)'는 무엇에 해당할까요?",
         "choices": [
-          { "id": "A", "text": "감정에 따라 판단하는 것" },
-          { "id": "B", "text": "이치나 도리에 맞는 것" },
-          { "id": "C", "text": "다수의 의견을 따르는 것" },
-          { "id": "D", "text": "전통을 중시하는 것" }
+          {
+            "id": "A",
+            "text": "도서관 건물 전체"
+          },
+          {
+            "id": "B",
+            "text": "의미 있는 정보를 담고 있는 책 한 권"
+          },
+          {
+            "id": "C",
+            "text": "종이 한 장"
+          },
+          {
+            "id": "D",
+            "text": "책을 만드는 잉크"
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "DNA라는 긴 사슬(서가) 속에 특정한 기능(단백질 합성 정보)을 담고 있는 의미 있는 구간이 유전자이므로, 책 한 권에 비유하는 것이 적절합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r3-001-8",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 귀납",
-        "highlight": { "text": "귀납" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "passage": "롤러코스터가 360도 회전 구간을 지날 때 떨어지지 않으려면 충분한 속력이 있어야 합니다. 그런데 출발점의 높이가 충분히 높지 않으면 회전 구간을 통과하지 못하고 멈추거나 떨어질 수 있습니다.",
+        "stem": "이 문제를 해결하기 위한 방법으로 가장 적절한 것은?",
         "choices": [
-          { "id": "A", "text": "일반 원리에서 구체적 사실을 이끌어 내는 것" },
-          { "id": "B", "text": "개별 사실을 모아 일반 원리를 이끌어 내는 것" },
-          { "id": "C", "text": "결론을 먼저 정해 놓는 것" },
-          { "id": "D", "text": "가설 없이 관찰만 하는 것" }
+          {
+            "id": "A",
+            "text": "출발점의 높이를 회전 구간보다 훨씬 높게 한다."
+          },
+          {
+            "id": "B",
+            "text": "롤러코스터의 무게를 아주 가볍게 한다."
+          },
+          {
+            "id": "C",
+            "text": "출발점의 높이를 낮춘다."
+          },
+          {
+            "id": "D",
+            "text": "레일에 기름을 칠해 마찰을 없앤다(마찰만으로는 해결 안 됨)."
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "A",
+        "explanation": "위치 에너지를 운동 에너지로 충분히 전환해야 원심력을 유지하여 회전할 수 있으므로, 초기 위치 에너지를 크게(출발점을 높게) 해야 합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r3-001-9",
-        "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 연역",
-        "highlight": { "text": "연역" },
-        "prompt": "뜻을 고르세요.",
-        "choices": [
-          { "id": "A", "text": "개별 사례를 모아 결론을 내리는 것" },
-          { "id": "B", "text": "경험에 의존하여 판단하는 것" },
-          { "id": "C", "text": "일반 원리에서 구체적 사실을 이끌어 내는 것" },
-          { "id": "D", "text": "직감으로 판단하는 것" }
+        "type": "SENTENCE_BUILDING",
+        "questionKind": "SENTENCE_BUILDING",
+        "competency": "표현력",
+        "passage": "순종 대립 형질끼리 교배했을 때, 잡종 1대에서 겉으로 드러나는 형질을 우성이라고 합니다. 반대로 드러나지 않는 형질을 열성이라고 합니다.",
+        "stem": "글의 내용을 바탕으로 빈칸을 채워 요약 문장을 완성하세요.",
+        "correctSentence": "완두의 잡종 1대에서는 우성 형질만 나타난다.",
+        "sentenceParts": [
+          {
+            "answer": "완두의",
+            "distractors": [
+              "사람의",
+              "동물의",
+              "장미의"
+            ]
+          },
+          {
+            "answer": "잡종",
+            "distractors": [
+              "순종",
+              "변종",
+              "신종"
+            ]
+          },
+          {
+            "answer": "1대에서는",
+            "distractors": [
+              "2대에서는",
+              "3대에서는",
+              "말대에서는"
+            ]
+          },
+          {
+            "answer": "우성",
+            "distractors": [
+              "열성",
+              "중성",
+              "양성"
+            ]
+          },
+          {
+            "answer": "형질만",
+            "distractors": [
+              "유전자만",
+              "세포만",
+              "모양만"
+            ]
+          },
+          {
+            "answer": "나타난다.",
+            "distractors": [
+              "사라진다.",
+              "숨겨진다.",
+              "섞인다."
+            ]
+          }
         ],
-        "answerId": "C",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r3-001-10",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 추론",
-        "highlight": { "text": "추론" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 중 '사동(시킴)'의 의미를 가진 문장은?",
         "choices": [
-          { "id": "A", "text": "사실을 있는 그대로 읽는 것" },
-          { "id": "B", "text": "알려진 사실로부터 새로운 판단을 이끌어 내는 것" },
-          { "id": "C", "text": "기억을 떠올리는 것" },
-          { "id": "D", "text": "질문을 던지는 것" }
+          {
+            "id": "A",
+            "text": "동생이 옷을 입었다."
+          },
+          {
+            "id": "B",
+            "text": "어머니가 동생에게 옷을 입히셨다."
+          },
+          {
+            "id": "C",
+            "text": "길이 넓어졌다."
+          },
+          {
+            "id": "D",
+            "text": "날씨가 풀렸다."
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "주어가 남에게 어떤 동작을 하도록 시키는 것을 사동이라고 합니다. '입히다'는 '입게 하다'는 사동사입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       }
     ]
   }

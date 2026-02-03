@@ -54,7 +54,7 @@ function getDayOfYear() {
   return Math.floor(diff / oneDay);
 }
 
-function DailyQuizPage() {
+function DailyReadingPage() {
   const navigate = useNavigate();
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -63,7 +63,7 @@ function DailyQuizPage() {
   useEffect(() => {
     let cancelled = false;
 
-    async function loadQuiz() {
+    async function loadReading() {
       try {
         const token = localStorage.getItem(TOKEN_KEY);
         if (!token) {
@@ -95,13 +95,13 @@ function DailyQuizPage() {
         const isJson = (res) =>
           res.ok && (res.headers.get("content-type") || "").includes("application/json");
 
-        const quizRes = await fetch(`/daily-quiz/${folder}/${dayStr}.json`);
-        if (isJson(quizRes)) {
-          const quizData = await quizRes.json();
-          if (!cancelled) setContent(quizData);
+        const readingRes = await fetch(`/daily-reading/${folder}/${dayStr}.json`);
+        if (isJson(readingRes)) {
+          const readingData = await readingRes.json();
+          if (!cancelled) setContent(readingData);
         } else {
-          const fallbackRes = await fetch(`/daily-quiz/${folder}/001.json`);
-          if (!isJson(fallbackRes)) throw new Error("퀴즈 데이터를 불러올 수 없습니다.");
+          const fallbackRes = await fetch(`/daily-reading/${folder}/001.json`);
+          if (!isJson(fallbackRes)) throw new Error("독해 데이터를 불러올 수 없습니다.");
           const fallbackData = await fallbackRes.json();
           if (!cancelled) setContent(fallbackData);
         }
@@ -112,14 +112,14 @@ function DailyQuizPage() {
       }
     }
 
-    loadQuiz();
+    loadReading();
     return () => { cancelled = true; };
   }, [navigate]);
 
   if (loading) {
     return (
       <div style={{ padding: 40, textAlign: "center", fontFamily: "var(--font-body)" }}>
-        <p>일일 퀴즈를 불러오는 중...</p>
+        <p>일일 독해를 불러오는 중...</p>
       </div>
     );
   }
@@ -127,7 +127,7 @@ function DailyQuizPage() {
   if (error || !content) {
     return (
       <div style={{ padding: 40, textAlign: "center", fontFamily: "var(--font-body)" }}>
-        <h2>퀴즈를 불러올 수 없습니다</h2>
+        <h2>독해 자료를 불러올 수 없습니다</h2>
         <p>{error || "데이터가 없습니다."}</p>
         <button type="button" onClick={() => navigate("/start")}>홈으로 돌아가기</button>
       </div>
@@ -137,10 +137,10 @@ function DailyQuizPage() {
   return (
     <EngineShell
       content={content}
-      moduleKey="worksheet_quiz"
+      moduleKey="reading_training"
       onExit={() => navigate("/start")}
     />
   );
 }
 
-export default DailyQuizPage;
+export default DailyReadingPage;

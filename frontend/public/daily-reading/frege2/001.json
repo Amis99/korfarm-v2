@@ -1,0 +1,90 @@
+{
+  "contentId": "dr-f2-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "지도의 역사",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "FREGE_2",
+  "schoolGradeRange": { "min": 5, "max": 5 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "사람들은 아주 오래전부터 지도를 만들었어요. 처음에는 땅바닥이나 나무껍질에 간단한 그림을 그렸어요." },
+        { "id": "p2", "text": "종이가 발명된 뒤에는 더 정밀한 지도를 그릴 수 있게 되었어요. 탐험가들이 새로운 땅을 발견할 때마다 지도는 점점 넓어졌어요." },
+        { "id": "p3", "text": "오늘날에는 인공위성과 컴퓨터를 이용하여 매우 정확한 디지털 지도를 만들어요. 스마트폰으로 언제든 지도를 볼 수 있게 되었지요." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": { "start": 18, "end": 49 }
+          },
+          "question": {
+            "prompt": "사람들이 처음 지도를 그린 곳은 어디인가요?",
+            "choices": [
+              { "id": "A", "text": "종이 위" },
+              { "id": "B", "text": "땅바닥이나 나무껍질" },
+              { "id": "C", "text": "컴퓨터 화면" },
+              { "id": "D", "text": "천 위" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": { "start": 0, "end": 38 }
+          },
+          "question": {
+            "prompt": "오늘날 정확한 지도를 만드는 데 이용하는 것은?",
+            "choices": [
+              { "id": "A", "text": "나침반과 돋보기" },
+              { "id": "B", "text": "인공위성과 컴퓨터" },
+              { "id": "C", "text": "비행기와 카메라" },
+              { "id": "D", "text": "망원경과 자" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "처음에는 땅바닥에 그림을 그렸어요" },
+        { "id": "c2", "text": "종이 발명 후 정밀한 지도를 그렸어요" },
+        { "id": "c3", "text": "오늘날은 인공위성으로 디지털 지도를 만들어요" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "오늘날 지도를 만드는 데 사용하는 기술을 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 7, "end": 11 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

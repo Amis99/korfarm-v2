@@ -1,0 +1,90 @@
+{
+  "contentId": "dr-s3-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "물의 여행",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "SAUSSURE_3",
+  "schoolGradeRange": { "min": 3, "max": 3 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "물은 끊임없이 돌고 돌아요. 바다의 물이 햇빛을 받으면 수증기가 되어 하늘로 올라가요." },
+        { "id": "p2", "text": "하늘 높이 올라간 수증기는 차가운 공기를 만나 구름이 돼요. 구름 속 물방울이 무거워지면 비나 눈이 되어 다시 땅으로 내려와요." },
+        { "id": "p3", "text": "이렇게 물이 바다에서 하늘로, 다시 땅으로 돌아오는 것을 '물의 순환'이라고 해요." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": { "start": 16, "end": 42 }
+          },
+          "question": {
+            "prompt": "바다의 물이 햇빛을 받으면 어떻게 되나요?",
+            "choices": [
+              { "id": "A", "text": "얼음이 돼요" },
+              { "id": "B", "text": "수증기가 되어 하늘로 올라가요" },
+              { "id": "C", "text": "바로 비가 돼요" },
+              { "id": "D", "text": "땅속으로 스며들어요" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": { "start": 0, "end": 30 }
+          },
+          "question": {
+            "prompt": "수증기가 차가운 공기를 만나면 무엇이 되나요?",
+            "choices": [
+              { "id": "A", "text": "무지개" },
+              { "id": "B", "text": "구름" },
+              { "id": "C", "text": "안개" },
+              { "id": "D", "text": "이슬" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "바다의 물이 수증기가 되어 올라가요" },
+        { "id": "c2", "text": "수증기가 구름이 돼요" },
+        { "id": "c3", "text": "비나 눈이 되어 땅으로 내려와요" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "물이 돌고 도는 현상의 이름을 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 29, "end": 34 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

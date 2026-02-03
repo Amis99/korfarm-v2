@@ -1,20 +1,36 @@
 {
-  "contentId": "dq-russell2-001",
+  "contentId": "dq-r2-001",
   "contentType": "DAILY_QUIZ",
   "version": 1,
   "status": "PUBLISHED",
   "title": "일일 퀴즈 - 러셀2 Day 1",
-  "description": "맞춤법과 기초 어휘 10문항",
+  "description": "러셀 2단계 1일차 퀴즈",
   "targetLevel": "RUSSELL_2",
-  "schoolGradeRange": { "min": 8, "max": 8 },
+  "schoolGradeRange": {
+    "min": 8,
+    "max": 8
+  },
   "area": "VOCAB",
   "subArea": "DAILY",
-  "competencies": ["VOCAB"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "competencies": [
+    "COMPREHENSIVE"
+  ],
+  "tags": [
+    "daily",
+    "science"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
   "timeLimitSec": 180,
-  "assets": { "sheetBackground": "/learning-paper.jpg" },
+  "assets": {
+    "sheetBackground": "/learning-paper.jpg"
+  },
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -23,161 +39,350 @@
         "id": "dq-r2-001-1",
         "type": "MULTI_CHOICE",
         "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 논리",
-        "highlight": { "text": "논리" },
-        "prompt": "뜻을 고르세요.",
+        "competency": "어휘력",
+        "passage": "이 물질은 열이나 전기를 잘 전달하는 '도체'이다. 구리나 철이 대표적이다.",
+        "stem": "'도체(導體)'의 반대말은?",
         "choices": [
-          { "id": "A", "text": "말이나 글에서 이치에 맞는 흐름" },
-          { "id": "B", "text": "감정에 따라 행동하는 것" },
-          { "id": "C", "text": "아무 근거 없이 말하는 것" },
-          { "id": "D", "text": "소리를 크게 내는 것" }
+          {
+            "id": "A",
+            "text": "부도체"
+          },
+          {
+            "id": "B",
+            "text": "반도체"
+          },
+          {
+            "id": "C",
+            "text": "초전도체"
+          },
+          {
+            "id": "D",
+            "text": "유전체"
+          }
         ],
         "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "전기나 열을 잘 전달하지 못하는 물체를 '부도체(아닐 부, 인도할 도)'라고 합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r2-001-2",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 본질",
-        "highlight": { "text": "본질" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "passage": "원자는 원자핵과 전자로 구성된다. 원자핵은 원자의 중심에 있으며 양전하를 띠고, 전자는 원자핵 주위를 돌며 음전하를 띤다. 원자 전체는 전기적으로 중성이다.",
+        "stem": "원자에 대한 설명으로 옳지 않은 것은?",
         "choices": [
-          { "id": "A", "text": "겉으로 보이는 모습" },
-          { "id": "B", "text": "사물의 근본적인 성질이나 핵심" },
-          { "id": "C", "text": "부수적인 특징" },
-          { "id": "D", "text": "변하는 모습" }
+          {
+            "id": "A",
+            "text": "원자핵은 양전하를 띤다."
+          },
+          {
+            "id": "B",
+            "text": "전자는 음전하를 띤다."
+          },
+          {
+            "id": "C",
+            "text": "원자핵은 원자 주위를 돈다."
+          },
+          {
+            "id": "D",
+            "text": "원자는 전기적으로 중성이다."
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "C",
+        "explanation": "전자가 원자핵 주위를 돕니다. C는 설명이 반대로 되어 있습니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r2-001-3",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 모순",
-        "highlight": { "text": "모순" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "passage": "화학 반응이 일어날 때, 원자들은 없어지거나 새로 생겨나지 않는다. 단지 원자들의 배열만 바뀔 뿐이다. 따라서 반응 전후의 물질의 총 질량은 변하지 않는다. 이를 질량 보존 법칙이라고 한다.",
+        "stem": "이 글의 논리적 구조는?",
         "choices": [
-          { "id": "A", "text": "서로 잘 어울리는 것" },
-          { "id": "B", "text": "앞뒤가 맞지 않아 어긋나는 것" },
-          { "id": "C", "text": "순서대로 진행되는 것" },
-          { "id": "D", "text": "완벽하게 일치하는 것" }
+          {
+            "id": "A",
+            "text": "원인(원자 배열만 바뀜) -> 결과(질량 보존)"
+          },
+          {
+            "id": "B",
+            "text": "주장 -> 반박 -> 재반박"
+          },
+          {
+            "id": "C",
+            "text": "문제점 -> 해결책"
+          },
+          {
+            "id": "D",
+            "text": "시간 순서에 따른 전개"
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "A",
+        "explanation": "원자가 없어지거나 생기지 않고 배열만 바뀐다는 원인을 근거로, 질량이 보존된다는 결과를 도출하고 있습니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r2-001-4",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 관점",
-        "highlight": { "text": "관점" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "passage": "전류의 세기는 전압에 비례하고 저항에 반비례한다. 이것은 전기 회로의 가장 기본적인 법칙이다.",
+        "stem": "이 법칙의 이름은?",
         "choices": [
-          { "id": "A", "text": "사물을 관찰하거나 판단하는 입장" },
-          { "id": "B", "text": "눈으로 보는 능력" },
-          { "id": "C", "text": "물건을 구경하는 곳" },
-          { "id": "D", "text": "사진을 찍는 위치" }
+          {
+            "id": "A",
+            "text": "옴의 법칙"
+          },
+          {
+            "id": "B",
+            "text": "보일의 법칙"
+          },
+          {
+            "id": "C",
+            "text": "샤를의 법칙"
+          },
+          {
+            "id": "D",
+            "text": "뉴턴의 법칙"
+          }
         ],
         "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "V(전압)=I(전류)R(저항), 즉 I=V/R의 관계를 나타내는 법칙은 '옴의 법칙'입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r2-001-5",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 혁신",
-        "highlight": { "text": "혁신" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "passage": "어떤 용액에 페놀프탈레인 용액을 떨어뜨렸더니 붉은색으로 변했습니다. 이 용액에 달걀 껍데기(탄산칼슘)를 넣었더니 아무런 변화가 없었습니다.",
+        "stem": "이 용액의 성질에 대해 추론한 것으로 옳은 것은?",
         "choices": [
-          { "id": "A", "text": "옛 방식을 그대로 유지하는 것" },
-          { "id": "B", "text": "묵은 것을 새롭게 뜯어고치는 것" },
-          { "id": "C", "text": "이미 있는 것을 반복하는 것" },
-          { "id": "D", "text": "변화를 거부하는 것" }
+          {
+            "id": "A",
+            "text": "산성 용액이다."
+          },
+          {
+            "id": "B",
+            "text": "염기성 용액이다."
+          },
+          {
+            "id": "C",
+            "text": "중성 용액이다."
+          },
+          {
+            "id": "D",
+            "text": "증류수이다."
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "페놀프탈레인 용액을 붉게 변화시키는 것은 염기성의 특징입니다. 산성은 페놀프탈레인 반응이 무색이며 달걀 껍데기를 넣으면 기포(이산화 탄소)가 발생합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r2-001-6",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 윤리",
-        "highlight": { "text": "윤리" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "passage": "광고: \"천연 성분 100% 샴푸! 화학 물질이 전혀 들어있지 않아 안전합니다.\"",
+        "stem": "이 광고의 과학적 오류는 무엇인가요?",
         "choices": [
-          { "id": "A", "text": "사람이 마땅히 지켜야 할 도리와 규범" },
-          { "id": "B", "text": "법으로 정해진 규칙" },
-          { "id": "C", "text": "과학적으로 증명된 사실" },
-          { "id": "D", "text": "개인의 취미 활동" }
+          {
+            "id": "A",
+            "text": "천연 성분은 세정력이 약하다."
+          },
+          {
+            "id": "B",
+            "text": "물(H2O)을 포함한 세상의 모든 물질은 화학 물질이다. 천연 성분도 화학 물질이다."
+          },
+          {
+            "id": "C",
+            "text": "100% 순수한 물질은 만들기 어렵다."
+          },
+          {
+            "id": "D",
+            "text": "샴푸는 원래 안전하다."
+          }
         ],
-        "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "B",
+        "explanation": "'화학 물질'이라는 단어를 인공적이거나 유해한 물질로 오용하고 있습니다. 자연계의 물, 공기, 식물 추출물 등 모든 물질은 화학 원소로 이루어진 화학 물질입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r2-001-7",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 객관적",
-        "highlight": { "text": "객관적" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CREATIVE_THINKING",
+        "competency": "창의적 사고",
+        "stem": "'전기 저항'은 전류의 흐름을 방해합니다. 이를 우리 생활 속 도로 상황에 비유한다면 무엇과 가장 비슷할까요?",
         "choices": [
-          { "id": "A", "text": "자기 감정대로 판단하는 것" },
-          { "id": "B", "text": "한쪽 편만 드는 것" },
-          { "id": "C", "text": "개인의 주관을 빼고 사실에 근거하는 것" },
-          { "id": "D", "text": "남의 말을 무조건 따르는 것" }
+          {
+            "id": "A",
+            "text": "쌩쌩 달릴 수 있는 고속도로"
+          },
+          {
+            "id": "B",
+            "text": "차가 다니지 않는 시골길"
+          },
+          {
+            "id": "C",
+            "text": "도로 폭이 좁고 울퉁불퉁한 비포장도로"
+          },
+          {
+            "id": "D",
+            "text": "새로 포장된 넓은 도로"
+          }
         ],
         "answerId": "C",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "저항이 클수록 전류가 흐르기 어렵습니다. 도로 폭이 좁고 상태가 안 좋으면(저항이 크면) 차(전하)가 이동하기 어려운 것과 비슷합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r2-001-8",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 근거",
-        "highlight": { "text": "근거" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "passage": "겨울철에 문손잡이를 잡을 때 정전기가 발생하여 따끔거립니다. 정전기는 건조할 때 잘 생깁니다.",
+        "stem": "정전기를 예방하기 위한 방법으로 적절하지 않은 것은?",
         "choices": [
-          { "id": "A", "text": "어떤 주장을 뒷받침하는 이유나 증거" },
-          { "id": "B", "text": "아무런 이유 없이 하는 말" },
-          { "id": "C", "text": "결론을 내리지 않는 것" },
-          { "id": "D", "text": "상상으로 만든 이야기" }
+          {
+            "id": "A",
+            "text": "실내 습도를 높인다(가습기 사용)."
+          },
+          {
+            "id": "B",
+            "text": "핸드크림을 발라 손을 촉촉하게 한다."
+          },
+          {
+            "id": "C",
+            "text": "합성 섬유 옷을 겹쳐 입는다."
+          },
+          {
+            "id": "D",
+            "text": "손잡이를 잡기 전 벽에 손을 대어 전자를 흘려보낸다(방전)."
+          }
         ],
-        "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "C",
+        "explanation": "합성 섬유는 정전기를 잘 발생시키므로, 천연 섬유를 입거나 섬유 유연제를 사용하는 것이 좋습니다. 습도를 높이는 것은 정전기 예방에 도움이 됩니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r2-001-9",
-        "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 맥락",
-        "highlight": { "text": "맥락" },
-        "prompt": "뜻을 고르세요.",
-        "choices": [
-          { "id": "A", "text": "서로 관련 없는 것들의 나열" },
-          { "id": "B", "text": "사물이나 일의 서로 이어지는 관계나 흐름" },
-          { "id": "C", "text": "짧은 한마디 말" },
-          { "id": "D", "text": "겉으로 보이는 모양" }
+        "type": "SENTENCE_BUILDING",
+        "questionKind": "SENTENCE_BUILDING",
+        "competency": "표현력",
+        "passage": "전압이 2배가 되면 전류도 2배가 됩니다. 하지만 저항이 2배가 되면 전류는 절반으로 줄어듭니다.",
+        "stem": "글의 내용을 바탕으로 빈칸을 채워 요약 문장을 완성하세요.",
+        "correctSentence": "전류의 세기는 전압에 비례하고, 저항에 반비례한다.",
+        "sentenceParts": [
+          {
+            "answer": "전류의",
+            "distractors": [
+              "전압의",
+              "자석의",
+              "빛의"
+            ]
+          },
+          {
+            "answer": "세기는",
+            "distractors": [
+              "방향은",
+              "색깔은",
+              "맛은"
+            ]
+          },
+          {
+            "answer": "전압에",
+            "distractors": [
+              "시간에",
+              "장소에",
+              "기분에"
+            ]
+          },
+          {
+            "answer": "비례하고,",
+            "distractors": [
+              "무관하고,",
+              "반대하고,",
+              "저항하고,"
+            ]
+          },
+          {
+            "answer": "저항에",
+            "distractors": [
+              "전선에",
+              "전구에",
+              "스위치에"
+            ]
+          },
+          {
+            "answer": "반비례한다.",
+            "distractors": [
+              "비례한다.",
+              "일치한다.",
+              "동조한다."
+            ]
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r2-001-10",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 성찰",
-        "highlight": { "text": "성찰" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 중 '피동(당함)'의 의미를 가진 문장은?",
         "choices": [
-          { "id": "A", "text": "남의 잘못을 지적하는 것" },
-          { "id": "B", "text": "자신의 마음이나 행동을 깊이 돌아보는 것" },
-          { "id": "C", "text": "미래를 예측하는 것" },
-          { "id": "D", "text": "과거를 잊는 것" }
+          {
+            "id": "A",
+            "text": "경찰이 도둑을 잡았다."
+          },
+          {
+            "id": "B",
+            "text": "도둑이 경찰에게 잡혔다."
+          },
+          {
+            "id": "C",
+            "text": "나는 밥을 먹었다."
+          },
+          {
+            "id": "D",
+            "text": "철수가 공을 찼다."
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "주어가 남의 행동에 의해 동작을 당하는 것을 피동이라고 합니다. '잡혔다'는 '잡음을 당했다(잡히다)'는 피동사입니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       }
     ]
   }

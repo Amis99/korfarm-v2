@@ -1,0 +1,110 @@
+{
+  "contentId": "dr-w2-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "귀납과 연역의 논리",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "WITTGENSTEIN_2",
+  "schoolGradeRange": { "min": 11, "max": 11 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "논리적 추론은 크게 연역적 추론과 귀납적 추론으로 나뉜다. 연역은 일반적 전제에서 구체적 결론을 이끌어 내는 방식이며, 전제가 참이면 결론도 반드시 참이 된다." },
+        { "id": "p2", "text": "반면 귀납적 추론은 개별적 사례를 관찰한 뒤 일반적 법칙을 도출하는 방식이다. '관찰한 백조가 모두 하얗다'에서 '모든 백조는 하얗다'로 결론짓는 것이 그 예이다." },
+        { "id": "p3", "text": "귀납의 한계는 아무리 많은 사례를 관찰하더라도 결론이 반드시 참이라고 보장할 수 없다는 점이다. 실제로 검은 백조가 발견되면서 이 한계가 극적으로 드러난 바 있다." },
+        { "id": "p4", "text": "철학자 칼 포퍼는 이 문제를 해결하기 위해 '반증가능성'이라는 개념을 제시하였다. 과학적 이론은 참임을 증명하는 것이 아니라, 거짓임을 반증할 수 있어야 한다는 것이다." },
+        { "id": "p5", "text": "연역과 귀납은 서로 대립하는 것이 아니라 보완적 관계에 있다. 과학적 탐구에서는 귀납으로 가설을 세우고, 연역으로 예측한 뒤, 실험으로 검증하는 과정을 반복한다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": { "start": 21, "end": 55 }
+          },
+          "question": {
+            "prompt": "연역적 추론의 특징으로 올바른 것은?",
+            "choices": [
+              { "id": "A", "text": "개별 사례에서 일반 법칙을 도출한다" },
+              { "id": "B", "text": "전제가 참이면 결론도 반드시 참이다" },
+              { "id": "C", "text": "결론이 항상 불확실하다" },
+              { "id": "D", "text": "관찰과 실험에 의존한다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": { "start": 0, "end": 42 }
+          },
+          "question": {
+            "prompt": "귀납적 추론의 근본적 한계는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "전제를 세울 수 없다" },
+              { "id": "B", "text": "관찰이 불가능하다" },
+              { "id": "C", "text": "결론이 반드시 참이라고 보장할 수 없다" },
+              { "id": "D", "text": "일반 법칙이 존재하지 않는다" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "paragraphId": "p4",
+            "range": { "start": 0, "end": 36 }
+          },
+          "question": {
+            "prompt": "칼 포퍼가 제시한 개념은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "실증주의" },
+              { "id": "B", "text": "반증가능성" },
+              { "id": "C", "text": "상대성 이론" },
+              { "id": "D", "text": "패러다임" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "연역은 일반에서 구체로, 귀납은 구체에서 일반으로 추론한다" },
+        { "id": "c2", "text": "귀납은 결론의 참을 보장할 수 없다는 한계가 있다" },
+        { "id": "c3", "text": "칼 포퍼는 반증가능성 개념을 제시하였다" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "칼 포퍼가 제시한 핵심 개념의 이름을 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 21, "end": 26 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

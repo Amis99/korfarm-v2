@@ -34,6 +34,7 @@ import StudentLinkConfirmPage from "./pages/StudentLinkConfirmPage";
 import LearningHubPage from "./pages/LearningHubPage";
 import LearningRunnerPage from "./pages/LearningRunnerPage";
 import DailyQuizPage from "./pages/DailyQuizPage";
+import DailyReadingPage from "./pages/DailyReadingPage";
 
 function GlobalLogo() {
   const { pathname } = useLocation();
@@ -89,6 +90,7 @@ function App() {
         <Route path="/parents/links" element={<ParentLinksPage />} />
         <Route path="/students/links/confirm" element={<StudentLinkConfirmPage />} />
         <Route path="/daily-quiz" element={<DailyQuizPage />} />
+        <Route path="/daily-reading" element={<DailyReadingPage />} />
         <Route path="/learning" element={<LearningHubPage />} />
         <Route path="/learning/:learningId" element={<LearningRunnerPage />} />
         <Route path="/ops" element={<OpsStation />} />

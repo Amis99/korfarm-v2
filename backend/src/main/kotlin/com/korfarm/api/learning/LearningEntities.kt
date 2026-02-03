@@ -52,3 +52,20 @@ class LearningAttemptEntity(
         updatedAt = LocalDateTime.now()
     }
 }
+
+@Entity
+@Table(name = "learning_streaks")
+class LearningStreakEntity(
+    @Id
+    @Column(name = "user_id")
+    var userId: String,
+
+    @Column(name = "current_streak", nullable = false)
+    var currentStreak: Int = 0,
+
+    @Column(name = "best_streak", nullable = false)
+    var bestStreak: Int = 0,
+
+    @Column(name = "last_submission_date")
+    var lastSubmissionDate: java.time.LocalDate? = null
+)

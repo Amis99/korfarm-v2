@@ -14,6 +14,7 @@ import java.time.ZoneId
 class LearningService(
     private val economyService: EconomyService,
     private val learningAttemptRepository: LearningAttemptRepository,
+    private val learningStreakRepository: LearningStreakRepository,
     private val userRepository: UserRepository
 ) {
     fun getDailyQuiz(): DailyQuizContent {
@@ -75,10 +76,45 @@ class LearningService(
         )
         learningAttemptRepository.save(attempt)
 
+        updateStreak(userId, today)
+
         return SubmitResult(
             score = score,
             correctCount = correctCount,
             seedGrant = seedGrant
+        )
+    }
+
+    private fun updateStreak(userId: String, today: LocalDate) {
+        val streak = learningStreakRepository.findByUserId(userId)
+            ?: LearningStreakEntity(userId = userId)
+
+        val last = streak.lastSubmissionDate
+        when {
+            last == today -> { /* already submitted today, no change */ }
+            last == today.minusDays(1) -> {
+                streak.currentStreak += 1
+                streak.lastSubmissionDate = today
+                if (streak.currentStreak > streak.bestStreak) {
+                    streak.bestStreak = streak.currentStreak
+                }
+            }
+            else -> {
+                streak.currentStreak = 1
+                streak.lastSubmissionDate = today
+                if (streak.bestStreak == 0) {
+                    streak.bestStreak = 1
+                }
+            }
+        }
+        learningStreakRepository.save(streak)
+    }
+
+    fun getStreak(userId: String): StreakInfo {
+        val streak = learningStreakRepository.findByUserId(userId)
+        return StreakInfo(
+            currentStreak = streak?.currentStreak ?: 0,
+            bestStreak = streak?.bestStreak ?: 0
         )
     }
 }

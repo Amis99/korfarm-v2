@@ -1,0 +1,109 @@
+{
+  "contentId": "dr-f3-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "화산과 지진",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "FREGE_3",
+  "schoolGradeRange": { "min": 6, "max": 6 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "지구의 표면은 여러 개의 판으로 이루어져 있어요. 이 판들은 아주 느리게 움직이고 있지요." },
+        { "id": "p2", "text": "판과 판이 부딪치거나 벌어지는 곳에서 화산 폭발이나 지진이 일어나요. 이런 곳을 '불의 고리'라고 부르기도 해요." },
+        { "id": "p3", "text": "화산이 폭발하면 뜨거운 용암이 흘러나와요. 지진이 일어나면 땅이 흔들리고 건물이 무너질 수 있어요." },
+        { "id": "p4", "text": "과학자들은 지진계를 이용하여 지진의 세기를 측정해요. 미리 대비하면 피해를 줄일 수 있어요." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": { "start": 0, "end": 24 }
+          },
+          "question": {
+            "prompt": "지구의 표면은 무엇으로 이루어져 있나요?",
+            "choices": [
+              { "id": "A", "text": "하나의 큰 돌" },
+              { "id": "B", "text": "여러 개의 판" },
+              { "id": "C", "text": "물과 흙" },
+              { "id": "D", "text": "모래와 자갈" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": { "start": 28, "end": 51 }
+          },
+          "question": {
+            "prompt": "화산과 지진이 자주 일어나는 곳을 무엇이라고 부르나요?",
+            "choices": [
+              { "id": "A", "text": "불의 고리" },
+              { "id": "B", "text": "태풍의 눈" },
+              { "id": "C", "text": "빙하 지대" },
+              { "id": "D", "text": "사막 지대" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "paragraphId": "p4",
+            "range": { "start": 0, "end": 25 }
+          },
+          "question": {
+            "prompt": "지진의 세기를 측정하는 도구는?",
+            "choices": [
+              { "id": "A", "text": "온도계" },
+              { "id": "B", "text": "지진계" },
+              { "id": "C", "text": "기압계" },
+              { "id": "D", "text": "습도계" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "지구 표면은 여러 판으로 이루어져 있어요" },
+        { "id": "c2", "text": "판이 부딪치는 곳에서 화산과 지진이 일어나요" },
+        { "id": "c3", "text": "지진계로 세기를 측정하고 대비해요" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "화산과 지진이 자주 일어나는 곳의 이름을 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 34, "end": 39 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

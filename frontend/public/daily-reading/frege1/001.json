@@ -1,0 +1,108 @@
+{
+  "contentId": "dr-f1-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "식물의 광합성",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "FREGE_1",
+  "schoolGradeRange": { "min": 4, "max": 4 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "식물은 햇빛을 이용하여 스스로 양분을 만들어요. 이것을 '광합성'이라고 해요." },
+        { "id": "p2", "text": "광합성을 하려면 햇빛, 물, 이산화탄소가 필요해요. 이 세 가지가 만나면 포도당과 산소가 만들어져요." },
+        { "id": "p3", "text": "광합성은 주로 잎에서 일어나요. 잎이 초록색인 것은 엽록소라는 물질 때문이에요. 엽록소가 햇빛을 흡수하는 역할을 해요." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": { "start": 0, "end": 38 }
+          },
+          "question": {
+            "prompt": "식물이 스스로 양분을 만드는 과정을 무엇이라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "호흡" },
+              { "id": "B", "text": "광합성" },
+              { "id": "C", "text": "소화" },
+              { "id": "D", "text": "증산" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": { "start": 0, "end": 28 }
+          },
+          "question": {
+            "prompt": "광합성에 필요한 것이 아닌 것은?",
+            "choices": [
+              { "id": "A", "text": "햇빛" },
+              { "id": "B", "text": "물" },
+              { "id": "C", "text": "이산화탄소" },
+              { "id": "D", "text": "질소" }
+            ],
+            "answerId": "D",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": { "start": 15, "end": 42 }
+          },
+          "question": {
+            "prompt": "잎이 초록색인 이유는 무엇 때문인가요?",
+            "choices": [
+              { "id": "A", "text": "엽록소" },
+              { "id": "B", "text": "포도당" },
+              { "id": "C", "text": "산소" },
+              { "id": "D", "text": "이산화탄소" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "식물은 광합성으로 양분을 만들어요" },
+        { "id": "c2", "text": "햇빛, 물, 이산화탄소가 필요해요" },
+        { "id": "c3", "text": "엽록소가 햇빛을 흡수해요" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "햇빛을 흡수하는 물질의 이름을 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 24, "end": 27 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

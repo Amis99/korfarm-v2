@@ -1,0 +1,111 @@
+{
+  "contentId": "dr-w3-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "언어와 사고의 관계",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "WITTGENSTEIN_3",
+  "schoolGradeRange": { "min": 12, "max": 12 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "언어가 사고를 결정하는가, 아니면 사고가 언어에 선행하는가? 이 질문은 언어철학과 인지과학의 오랜 쟁점이다." },
+        { "id": "p2", "text": "사피어-워프 가설에 따르면, 언어의 구조가 화자의 세계관과 사고방식을 형성한다. 강한 형태의 가설은 언어가 사고를 결정한다고 주장하며, 약한 형태는 언어가 사고에 영향을 미친다고 본다." },
+        { "id": "p3", "text": "비트겐슈타인은 전기 철학에서 '언어는 세계의 그림'이라고 보았다. 언어의 논리적 구조가 세계의 구조를 반영한다는 것이다. 그러나 후기에는 언어의 의미가 사용 맥락에 의해 결정된다는 '언어 게임' 개념으로 전환하였다." },
+        { "id": "p4", "text": "촘스키는 이와 달리 인간에게 선천적으로 내재된 보편 문법이 존재한다고 주장하였다. 언어 습득 장치라는 가설적 기제를 통해 모든 인간이 언어를 자연스럽게 습득할 수 있다는 것이다." },
+        { "id": "p5", "text": "최근 인지언어학에서는 언어와 사고가 상호작용하며 공진화하였다는 관점이 부상하고 있다. 언어가 사고를 제약하기도 하고, 새로운 개념이 새로운 언어 표현을 낳기도 한다는 것이다." },
+        { "id": "p6", "text": "이 논쟁은 단순한 학문적 호기심을 넘어, 인공지능의 언어 이해, 다문화 소통, 번역의 한계 등 현실적 문제와도 깊이 연결되어 있다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": { "start": 0, "end": 34 }
+          },
+          "question": {
+            "prompt": "사피어-워프 가설의 핵심 주장은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "사고가 언어를 결정한다" },
+              { "id": "B", "text": "언어의 구조가 사고방식을 형성한다" },
+              { "id": "C", "text": "언어와 사고는 무관하다" },
+              { "id": "D", "text": "모든 언어의 구조는 동일하다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": { "start": 55, "end": 103 }
+          },
+          "question": {
+            "prompt": "비트겐슈타인 후기 철학의 핵심 개념은?",
+            "choices": [
+              { "id": "A", "text": "세계의 그림" },
+              { "id": "B", "text": "보편 문법" },
+              { "id": "C", "text": "언어 게임" },
+              { "id": "D", "text": "언어 습득 장치" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "paragraphId": "p4",
+            "range": { "start": 0, "end": 38 }
+          },
+          "question": {
+            "prompt": "촘스키가 주장한 선천적 언어 능력의 기반은?",
+            "choices": [
+              { "id": "A", "text": "언어 게임" },
+              { "id": "B", "text": "사피어-워프 가설" },
+              { "id": "C", "text": "보편 문법" },
+              { "id": "D", "text": "구조주의 언어학" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "사피어-워프 가설: 언어가 사고방식을 형성한다" },
+        { "id": "c2", "text": "비트겐슈타인: 언어의 의미는 사용 맥락에서 결정된다" },
+        { "id": "c3", "text": "촘스키: 인간에게 보편 문법이 선천적으로 내재되어 있다" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "비트겐슈타인 후기의 핵심 개념을 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 91, "end": 96 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

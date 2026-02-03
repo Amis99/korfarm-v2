@@ -1,0 +1,89 @@
+{
+  "contentId": "dr-s1-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "강아지와 고양이",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "SAUSSURE_1",
+  "schoolGradeRange": { "min": 1, "max": 1 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "강아지는 꼬리를 흔들며 반가움을 표현해요. 주인을 보면 꼬리를 살랑살랑 흔들지요." },
+        { "id": "p2", "text": "고양이는 그르릉 소리를 내며 기분이 좋다는 것을 알려 줘요. 몸을 비비기도 해요." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": { "start": 0, "end": 27 }
+          },
+          "question": {
+            "prompt": "강아지는 반가울 때 어떻게 하나요?",
+            "choices": [
+              { "id": "A", "text": "짖어요" },
+              { "id": "B", "text": "꼬리를 흔들어요" },
+              { "id": "C", "text": "숨어요" },
+              { "id": "D", "text": "잠을 자요" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": { "start": 0, "end": 30 }
+          },
+          "question": {
+            "prompt": "고양이가 기분이 좋을 때 내는 소리는?",
+            "choices": [
+              { "id": "A", "text": "야옹" },
+              { "id": "B", "text": "멍멍" },
+              { "id": "C", "text": "그르릉" },
+              { "id": "D", "text": "짹짹" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "강아지는 꼬리를 흔들어요" },
+        { "id": "c2", "text": "고양이는 그르릉 소리를 내요" },
+        { "id": "c3", "text": "둘 다 기분을 표현하는 방법이에요" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "고양이가 기분 좋을 때 내는 소리를 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 4, "end": 7 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "contentId": "dr-r2-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "뉴턴의 운동 법칙",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "RUSSELL_2",
+  "schoolGradeRange": { "min": 8, "max": 8 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "뉴턴의 제1법칙은 관성의 법칙이다. 외부에서 힘이 작용하지 않는 한, 정지한 물체는 계속 정지해 있고, 운동하는 물체는 같은 속도로 직선 운동을 계속한다." },
+        { "id": "p2", "text": "제2법칙은 가속도의 법칙이다. 물체에 작용하는 힘은 물체의 질량과 가속도의 곱과 같다. 즉, F=ma라는 공식으로 표현된다." },
+        { "id": "p3", "text": "제3법칙은 작용과 반작용의 법칙이다. 한 물체가 다른 물체에 힘을 가하면, 그 물체도 같은 크기의 힘으로 반대 방향으로 밀어낸다." },
+        { "id": "p4", "text": "이 세 가지 법칙은 고전역학의 토대를 이루며, 일상생활에서 물체의 운동을 이해하는 데 핵심적인 역할을 한다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": { "start": 0, "end": 17 }
+          },
+          "question": {
+            "prompt": "뉴턴의 제1법칙은 어떤 법칙인가요?",
+            "choices": [
+              { "id": "A", "text": "관성의 법칙" },
+              { "id": "B", "text": "가속도의 법칙" },
+              { "id": "C", "text": "만유인력의 법칙" },
+              { "id": "D", "text": "작용과 반작용의 법칙" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": { "start": 30, "end": 56 }
+          },
+          "question": {
+            "prompt": "F=ma에서 F는 힘, m은 질량이라면 a는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "넓이" },
+              { "id": "B", "text": "속력" },
+              { "id": "C", "text": "가속도" },
+              { "id": "D", "text": "거리" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": { "start": 0, "end": 20 }
+          },
+          "question": {
+            "prompt": "제3법칙에서 한 물체가 힘을 가하면 상대 물체는 어떻게 하나요?",
+            "choices": [
+              { "id": "A", "text": "같은 방향으로 움직인다" },
+              { "id": "B", "text": "같은 크기의 힘으로 반대 방향으로 밀어낸다" },
+              { "id": "C", "text": "멈춘다" },
+              { "id": "D", "text": "두 배의 힘으로 밀어낸다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "제1법칙: 관성의 법칙" },
+        { "id": "c2", "text": "제2법칙: 가속도의 법칙 (F=ma)" },
+        { "id": "c3", "text": "제3법칙: 작용과 반작용의 법칙" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "힘, 질량, 가속도의 관계를 나타내는 공식을 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 44, "end": 48 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

@@ -50,4 +50,11 @@ class LearningController(
         val result = learningService.submit(userId, "daily_reading", "dr_today", request)
         return ApiResponse(success = true, data = result)
     }
+
+    @GetMapping("/streak")
+    fun streak(): ApiResponse<StreakInfo> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        return ApiResponse(success = true, data = learningService.getStreak(userId))
+    }
 }

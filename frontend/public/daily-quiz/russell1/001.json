@@ -1,20 +1,36 @@
 {
-  "contentId": "dq-russell1-001",
+  "contentId": "dq-r1-001",
   "contentType": "DAILY_QUIZ",
   "version": 1,
   "status": "PUBLISHED",
   "title": "일일 퀴즈 - 러셀1 Day 1",
-  "description": "맞춤법과 기초 어휘 10문항",
+  "description": "러셀 1단계 1일차 퀴즈",
   "targetLevel": "RUSSELL_1",
-  "schoolGradeRange": { "min": 7, "max": 7 },
+  "schoolGradeRange": {
+    "min": 7,
+    "max": 7
+  },
   "area": "VOCAB",
   "subArea": "DAILY",
-  "competencies": ["VOCAB"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "competencies": [
+    "COMPREHENSIVE"
+  ],
+  "tags": [
+    "daily",
+    "science"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
   "timeLimitSec": 180,
-  "assets": { "sheetBackground": "/learning-paper.jpg" },
+  "assets": {
+    "sheetBackground": "/learning-paper.jpg"
+  },
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -23,161 +39,366 @@
         "id": "dq-r1-001-1",
         "type": "MULTI_CHOICE",
         "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 민주주의",
-        "highlight": { "text": "민주주의" },
-        "prompt": "뜻을 고르세요.",
+        "competency": "어휘력",
+        "passage": "지진이 발생하면 땅이 흔들리고 건물이 붕괴될 수 있습니다. 지진의 '규모'는 지진 발생 시 방출되는 에너지의 양을 나타냅니다.",
+        "stem": "'규모(規模)'의 사전적 의미로 적절한 것은?",
         "choices": [
-          { "id": "A", "text": "한 사람이 모든 것을 결정하는 제도" },
-          { "id": "B", "text": "국민이 주인이 되어 스스로 다스리는 정치 원리" },
-          { "id": "C", "text": "왕이 나라를 다스리는 제도" },
-          { "id": "D", "text": "군인이 나라를 이끄는 제도" }
+          {
+            "id": "A",
+            "text": "사물이나 현상의 크기나 범위"
+          },
+          {
+            "id": "B",
+            "text": "어떤 일이 일어나는 횟수"
+          },
+          {
+            "id": "C",
+            "text": "물건의 무게나 질량"
+          },
+          {
+            "id": "D",
+            "text": "소리의 높낮이"
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "A",
+        "explanation": "'규모'는 어떤 조직이나 현상 따위의 크기나 범위를 뜻합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r1-001-2",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 편견",
-        "highlight": { "text": "편견" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "passage": "암석은 생성 과정에 따라 화성암, 퇴적암, 변성암으로 분류됩니다. 화성암은 마그마가 식어서 굳어진 암석이고, 퇴적암은 흙이나 모래가 쌓여서 굳어진 암석입니다. 변성암은 암석이 높은 열과 압력을 받아 성질이 변한 것입니다.",
+        "stem": "마그마가 식어서 만들어진 암석은 무엇입니까?",
         "choices": [
-          { "id": "A", "text": "공정하고 올바른 생각" },
-          { "id": "B", "text": "한쪽으로 치우친 잘못된 생각" },
-          { "id": "C", "text": "여러 사람의 의견" },
-          { "id": "D", "text": "과학적으로 증명된 사실" }
+          {
+            "id": "A",
+            "text": "퇴적암"
+          },
+          {
+            "id": "B",
+            "text": "화성암"
+          },
+          {
+            "id": "C",
+            "text": "변성암"
+          },
+          {
+            "id": "D",
+            "text": "화석"
+          }
         ],
         "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "글에서 '화성암은 마그마가 식어서 굳어진 암석'이라고 정의했습니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r1-001-3",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 가치",
-        "highlight": { "text": "가치" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "passage": "힘은 물체의 모양을 변하게 하거나 운동 상태를 변화시킵니다. 예를 들어, 고무찰흙을 누르면 모양이 변합니다. 굴러가는 공을 차면 공의 빠르기나 방향이 바뀝니다.",
+        "stem": "이 글의 설명 방식은?",
         "choices": [
-          { "id": "A", "text": "사물의 쓸모나 중요성" },
-          { "id": "B", "text": "물건의 무게" },
-          { "id": "C", "text": "사람의 나이" },
-          { "id": "D", "text": "거리의 길이" }
+          {
+            "id": "A",
+            "text": "개념을 정의하고 예시를 들고 있다."
+          },
+          {
+            "id": "B",
+            "text": "전문가의 말을 인용하여 신뢰성을 높이고 있다."
+          },
+          {
+            "id": "C",
+            "text": "역사적 사실을 시간 순서대로 서술하고 있다."
+          },
+          {
+            "id": "D",
+            "text": "서로 다른 두 대상을 대조하고 있다."
+          }
         ],
         "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "explanation": "'힘'의 작용(모양 변화, 운동 상태 변화)을 설명한 뒤, 고무찰흙과 공의 사례를 들어 이해를 돕고 있습니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r1-001-4",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 갈등",
-        "highlight": { "text": "갈등" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "passage": "모든 물체 사이에는 서로 끌어당기는 힘이 작용합니다. 질량이 클수록, 거리가 가까울수록 이 힘은 커집니다. 사과가 나무에서 떨어지는 것도 지구가 사과를 당기기 때문입니다.",
+        "stem": "이 힘의 이름은 무엇입니까?",
         "choices": [
-          { "id": "A", "text": "서로 화합하는 것" },
-          { "id": "B", "text": "서로의 이해가 달라 대립하거나 충돌하는 것" },
-          { "id": "C", "text": "함께 협력하는 것" },
-          { "id": "D", "text": "서로 칭찬하는 것" }
+          {
+            "id": "A",
+            "text": "자기력"
+          },
+          {
+            "id": "B",
+            "text": "탄성력"
+          },
+          {
+            "id": "C",
+            "text": "마찰력"
+          },
+          {
+            "id": "D",
+            "text": "중력(만유인력)"
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "D",
+        "explanation": "질량이 있는 모든 물체 사이에 작용하는 끌어당기는 힘은 '만유인력'이며, 지구가 물체를 당기는 힘을 '중력'이라고 합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r1-001-5",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 보존",
-        "highlight": { "text": "보존" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "passage": "어떤 지층에서 산호 화석이 발견되었습니다. 산호는 따뜻하고 얕은 바다에서만 삽니다.",
+        "stem": "이 지층이 만들어질 당시의 환경에 대해 추론한 내용으로 옳은 것은?",
         "choices": [
-          { "id": "A", "text": "잘 간직하여 남기는 것" },
-          { "id": "B", "text": "모두 없애 버리는 것" },
-          { "id": "C", "text": "새것으로 바꾸는 것" },
-          { "id": "D", "text": "남에게 나누어 주는 것" }
+          {
+            "id": "A",
+            "text": "이곳은 과거에 깊은 심해였을 것이다."
+          },
+          {
+            "id": "B",
+            "text": "이곳은 과거에 춥고 건조한 육지였을 것이다."
+          },
+          {
+            "id": "C",
+            "text": "이곳은 과거에 따뜻하고 얕은 바다였을 것이다."
+          },
+          {
+            "id": "D",
+            "text": "이곳은 과거에 화산 활동이 활발했을 것이다."
+          }
         ],
-        "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "C",
+        "explanation": "화석은 과거의 환경을 알려주는 증거(시상 화석)입니다. 산호 화석이 나왔으므로 당시 산호가 살기 좋은 따뜻하고 얕은 바다 환경이었음을 알 수 있습니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r1-001-6",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 타협",
-        "highlight": { "text": "타협" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "passage": "주장: \"과학 기술이 발달하면 모든 질병을 정복할 수 있을 것이다. 그러니 우리는 건강에 대해 미리 걱정할 필요가 없다.\"",
+        "stem": "이 주장을 비판하는 근거로 가장 적절한 것은?",
         "choices": [
-          { "id": "A", "text": "자기 주장만 고집하는 것" },
-          { "id": "B", "text": "싸우는 것" },
-          { "id": "C", "text": "서로 양보하여 의견을 조정하는 것" },
-          { "id": "D", "text": "상대를 무시하는 것" }
+          {
+            "id": "A",
+            "text": "과학 기술은 매우 빠르게 발전하고 있다."
+          },
+          {
+            "id": "B",
+            "text": "치료보다 예방이 중요하며, 새로운 변종 바이러스가 계속 출현할 수 있다."
+          },
+          {
+            "id": "C",
+            "text": "의료비가 점점 비싸지고 있다."
+          },
+          {
+            "id": "D",
+            "text": "오래 사는 것이 항상 행복한 것은 아니다."
+          }
         ],
-        "answerId": "C",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "B",
+        "explanation": "과학 기술이 발전해도 모든 질병을 완벽히 정복한다는 보장은 없으며(예: 신종 감염병), 건강은 잃고 나면 되돌리기 어려우므로 '걱정할 필요 없다'는 태도는 위험합니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r1-001-7",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 분석",
-        "highlight": { "text": "분석" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CREATIVE_THINKING",
+        "competency": "창의적 사고",
+        "stem": "'마찰력'이 없는 세상을 상상했을 때, 일어날 수 있는 일로 적절하지 않은 것은?",
         "choices": [
-          { "id": "A", "text": "복잡한 것을 나누어 자세히 살피는 것" },
-          { "id": "B", "text": "여러 가지를 합치는 것" },
-          { "id": "C", "text": "대충 훑어보는 것" },
-          { "id": "D", "text": "전부 외우는 것" }
+          {
+            "id": "A",
+            "text": "걸어갈 때 미끄러져서 앞으로 나아갈 수 없다."
+          },
+          {
+            "id": "B",
+            "text": "자동차 브레이크를 밟아도 멈추지 않는다."
+          },
+          {
+            "id": "C",
+            "text": "못을 박아도 나무에 고정되지 않고 쑥 빠진다."
+          },
+          {
+            "id": "D",
+            "text": "무거운 물체를 밀 때 더 많은 힘이 든다."
+          }
         ],
-        "answerId": "A",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "D",
+        "explanation": "마찰력이 없으면 방해하는 힘이 없으므로, 무거운 물체도 아주 작은 힘으로 밀 수 있습니다. 나머지는 마찰력이 없어서 생기는 현상이 맞습니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r1-001-8",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 의무",
-        "highlight": { "text": "의무" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "passage": "탄산음료는 차갑게 마셔야 톡 쏘는 맛이 강합니다. 온도가 높으면 기체(이산화 탄소)가 물에 잘 녹지 않고 빠져나가기 때문입니다. 탄산음료를 샀는데 미지근합니다.",
+        "stem": "톡 쏘는 맛을 살리기 위한 가장 좋은 방법은?",
         "choices": [
-          { "id": "A", "text": "하고 싶을 때만 하는 것" },
-          { "id": "B", "text": "마땅히 해야 할 일" },
-          { "id": "C", "text": "하면 좋지만 안 해도 되는 것" },
-          { "id": "D", "text": "남이 대신해 주는 것" }
+          {
+            "id": "A",
+            "text": "뚜껑을 열어 놓는다."
+          },
+          {
+            "id": "B",
+            "text": "음료수를 끓인다."
+          },
+          {
+            "id": "C",
+            "text": "냉장고에 넣어 충분히 식힌 후 뚜껑을 연다."
+          },
+          {
+            "id": "D",
+            "text": "설탕을 더 넣는다."
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "C",
+        "explanation": "기체의 용해도와 온도 관계를 이용해야 합니다. 온도를 낮춰야 이산화 탄소가 액체 속에 많이 녹아 있어 톡 쏘는 맛을 유지할 수 있습니다.",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r1-001-9",
-        "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 차별",
-        "highlight": { "text": "차별" },
-        "prompt": "뜻을 고르세요.",
-        "choices": [
-          { "id": "A", "text": "모두를 똑같이 대하는 것" },
-          { "id": "B", "text": "공정하게 나누는 것" },
-          { "id": "C", "text": "둘 이상을 다르게 구별하여 대우하는 것" },
-          { "id": "D", "text": "서로 존중하는 것" }
+        "type": "SENTENCE_BUILDING",
+        "questionKind": "SENTENCE_BUILDING",
+        "competency": "표현력",
+        "passage": "힘은 물체를 변형시킵니다. 또 힘은 물체의 빠르기나 방향을 바꿉니다. 이것을 운동 상태의 변화라고 합니다.",
+        "stem": "글의 내용을 바탕으로 빈칸을 채워 요약 문장을 완성하세요.",
+        "correctSentence": "힘은 물체의 모양을 변하게 하거나 운동 상태를 변화시킨다.",
+        "sentenceParts": [
+          {
+            "answer": "힘은",
+            "distractors": [
+              "에너지는",
+              "전기는",
+              "소리는"
+            ]
+          },
+          {
+            "answer": "물체의",
+            "distractors": [
+              "사람의",
+              "자연의",
+              "우주의"
+            ]
+          },
+          {
+            "answer": "모양을",
+            "distractors": [
+              "이름을",
+              "가격을",
+              "주인을"
+            ]
+          },
+          {
+            "answer": "변하게",
+            "distractors": [
+              "사라지게",
+              "멈추게",
+              "빛나게"
+            ]
+          },
+          {
+            "answer": "하거나",
+            "distractors": [
+              "하지만",
+              "해서",
+              "했는데"
+            ]
+          },
+          {
+            "answer": "운동",
+            "distractors": [
+              "정지",
+              "수면",
+              "식사"
+            ]
+          },
+          {
+            "answer": "상태를",
+            "distractors": [
+              "기분을",
+              "날씨를",
+              "시간을"
+            ]
+          },
+          {
+            "answer": "변화시킨다.",
+            "distractors": [
+              "유지시킨다.",
+              "고정시킨다.",
+              "파괴시킨다."
+            ]
+          }
         ],
-        "answerId": "C",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       },
       {
         "id": "dq-r1-001-10",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 비판",
-        "highlight": { "text": "비판" },
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 문장의 종류는 무엇입니까? \"창문을 닫아라.\"",
         "choices": [
-          { "id": "A", "text": "무조건 칭찬하는 것" },
-          { "id": "B", "text": "잘잘못을 따져 판단하는 것" },
-          { "id": "C", "text": "관심을 갖지 않는 것" },
-          { "id": "D", "text": "그냥 따라 하는 것" }
+          {
+            "id": "A",
+            "text": "평서문"
+          },
+          {
+            "id": "B",
+            "text": "의문문"
+          },
+          {
+            "id": "C",
+            "text": "명령문"
+          },
+          {
+            "id": "D",
+            "text": "감탄문"
+          }
         ],
-        "answerId": "B",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "answerId": "C",
+        "explanation": "상대방에게 행동을 요구하는 문장은 '명령문'입니다. (~해라, ~하시오 등)",
+        "scoring": {
+          "correct": 10,
+          "wrong": 0
+        }
       }
     ]
   }

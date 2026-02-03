@@ -1,0 +1,91 @@
+{
+  "contentId": "dr-r1-001",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "민주주의의 기본 원리",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 7, "max": 7 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        { "id": "p1", "text": "민주주의는 국민이 주권을 가지고 스스로 나라를 다스리는 정치 체제이다. 고대 그리스 아테네에서 시작된 민주주의는 오늘날 세계 많은 나라에서 채택하고 있다." },
+        { "id": "p2", "text": "민주주의의 핵심 원리는 다수결과 소수 의견의 존중이다. 다수의 의견을 따르되, 소수의 목소리도 귀 기울여 들어야 진정한 민주주의가 실현된다." },
+        { "id": "p3", "text": "또한 권력의 분립이 중요하다. 입법부, 행정부, 사법부가 서로 견제하고 균형을 이루어야 한 곳에 권력이 집중되는 것을 막을 수 있다." },
+        { "id": "p4", "text": "시민의 자유와 권리를 보장하는 것 역시 민주주의의 필수 요소이다. 표현의 자유, 집회의 자유 등이 보장될 때 건강한 민주사회가 유지된다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": { "start": 0, "end": 34 }
+          },
+          "question": {
+            "prompt": "민주주의에서 주권은 누구에게 있나요?",
+            "choices": [
+              { "id": "A", "text": "왕" },
+              { "id": "B", "text": "국민" },
+              { "id": "C", "text": "군대" },
+              { "id": "D", "text": "종교 지도자" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": { "start": 3, "end": 15 }
+          },
+          "question": {
+            "prompt": "권력 분립에서 서로 견제하는 세 기관은?",
+            "choices": [
+              { "id": "A", "text": "입법부, 행정부, 사법부" },
+              { "id": "B", "text": "군대, 경찰, 소방서" },
+              { "id": "C", "text": "학교, 병원, 법원" },
+              { "id": "D", "text": "국회, 언론, 시민단체" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "민주주의는 국민이 주권을 가진 정치 체제이다" },
+        { "id": "c2", "text": "다수결과 소수 의견 존중이 핵심 원리이다" },
+        { "id": "c3", "text": "입법부, 행정부, 사법부의 권력 분립이 중요하다" }
+      ],
+      "correctOrder": ["c1", "c2", "c3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "권력이 한곳에 집중되는 것을 막는 원리를 찾아 클릭하세요.",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 3, "end": 9 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}
