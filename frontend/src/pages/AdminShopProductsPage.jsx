@@ -1,18 +1,19 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { apiPost, apiPatch, apiDelete } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import "../styles/admin-detail.css";
 
 const PRODUCTS = [
-  { title: "국어농장 1단계 교재", category: "교재", stock: 120, status: "active" },
-  { title: "국어농장 학습 카드", category: "교구", stock: 60, status: "active" },
-  { title: "독해 심화 워크북", category: "교재", stock: 0, status: "sold_out" },
+  { id: "p1", title: "국어농장 1단계 교재", category: "교재", stock: 120, status: "active" },
 ];
 
 const mapProducts = (items) =>
   items.map((item) => ({
-    title: item.title,
+    id: item.id || item.product_id || item.title,
+    title: item.title || item.name || "-",
     category: item.category || "-",
+    price: item.price ?? 0,
     stock: item.stock ?? 0,
     status: item.status || "active",
   }));
@@ -23,23 +24,65 @@ function AdminShopProductsPage() {
     PRODUCTS,
     mapProducts
   );
+  const [rows, setRows] = useState(PRODUCTS);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [formData, setFormData] = useState({ name: "", price: 0, stock: 0 });
+  const [actionError, setActionError] = useState("");
+  const [actionLoading, setActionLoading] = useState(false);
+
+  useEffect(() => {
+    setRows(products);
+  }, [products]);
 
   const filteredProducts = useMemo(() => {
     const term = search.trim().toLowerCase();
-    return products.filter((product) => {
-      if (statusFilter !== "all" && product.status !== statusFilter) {
-        return false;
-      }
-      if (!term) {
-        return true;
-      }
+    return rows.filter((product) => {
+      if (statusFilter !== "all" && product.status !== statusFilter) return false;
+      if (!term) return true;
       return [product.title, product.category, product.status]
         .filter(Boolean)
-        .some((value) => value.toLowerCase().includes(term));
+        .some((v) => v.toLowerCase().includes(term));
     });
-  }, [products, search, statusFilter]);
+  }, [rows, search, statusFilter]);
+
+  const handleCreate = async () => {
+    setActionError("");
+    if (!formData.name.trim()) {
+      setActionError("상품명을 입력해 주세요.");
+      return;
+    }
+    setActionLoading(true);
+    try {
+      const result = await apiPost("/v1/admin/shop/products", {
+        name: formData.name.trim(),
+        price: Number(formData.price) || 0,
+        stock: Number(formData.stock) || 0,
+      });
+      const mapped = mapProducts([result])[0];
+      setRows((prev) => [mapped, ...prev]);
+      setShowCreateModal(false);
+      setFormData({ name: "", price: 0, stock: 0 });
+    } catch (err) {
+      setActionError(err.message);
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleDelete = async (productId) => {
+    if (!window.confirm("상품을 삭제하시겠습니까?")) return;
+    setActionLoading(true);
+    try {
+      await apiDelete(`/v1/admin/shop/products/${productId}`);
+      setRows((prev) => prev.filter((r) => r.id !== productId));
+    } catch (err) {
+      setActionError(err.message);
+    } finally {
+      setActionLoading(false);
+    }
+  };
 
   return (
     <div className="admin-detail-page">
@@ -47,7 +90,15 @@ function AdminShopProductsPage() {
         <div className="admin-detail-header">
           <h1>상품 관리</h1>
           <div className="admin-detail-actions">
-            <button className="admin-detail-btn" type="button">
+            <button
+              className="admin-detail-btn"
+              type="button"
+              onClick={() => {
+                setFormData({ name: "", price: 0, stock: 0 });
+                setActionError("");
+                setShowCreateModal(true);
+              }}
+            >
               상품 등록
             </button>
             <Link className="admin-detail-btn secondary" to="/admin">
@@ -78,35 +129,25 @@ function AdminShopProductsPage() {
                 <input
                   placeholder="상품 검색"
                   value={search}
-                  onChange={(event) => setSearch(event.target.value)}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
               <div className="admin-detail-filters">
-                <button
-                  className={`admin-filter ${statusFilter === "all" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("all")}
-                >
-                  전체
-                </button>
-                <button
-                  className={`admin-filter ${statusFilter === "active" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("active")}
-                >
-                  판매중
-                </button>
-                <button
-                  className={`admin-filter ${statusFilter === "sold_out" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("sold_out")}
-                >
-                  품절
-                </button>
+                {["all", "active", "sold_out"].map((f) => (
+                  <button
+                    key={f}
+                    className={`admin-filter ${statusFilter === f ? "active" : ""}`}
+                    type="button"
+                    onClick={() => setStatusFilter(f)}
+                  >
+                    {f === "all" ? "전체" : f === "active" ? "판매중" : "품절"}
+                  </button>
+                ))}
               </div>
             </div>
             {loading ? <p className="admin-detail-note">상품을 불러오는 중...</p> : null}
             {error ? <p className="admin-detail-note error">{error}</p> : null}
+            {actionError ? <p className="admin-detail-note error">{actionError}</p> : null}
             <table className="admin-detail-table">
               <thead>
                 <tr>
@@ -114,11 +155,12 @@ function AdminShopProductsPage() {
                   <th>카테고리</th>
                   <th>재고</th>
                   <th>상태</th>
+                  <th>조치</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredProducts.map((product) => (
-                  <tr key={product.title}>
+                  <tr key={product.id}>
                     <td>{product.title}</td>
                     <td>{product.category}</td>
                     <td>{product.stock}</td>
@@ -127,6 +169,17 @@ function AdminShopProductsPage() {
                         {product.status}
                       </span>
                     </td>
+                    <td>
+                      <button
+                        className="admin-detail-btn secondary"
+                        type="button"
+                        onClick={() => handleDelete(product.id)}
+                        disabled={actionLoading}
+                        style={{ fontSize: "12px", padding: "4px 8px" }}
+                      >
+                        삭제
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -134,11 +187,52 @@ function AdminShopProductsPage() {
           </div>
           <div className="admin-detail-card">
             <h3>재고 요약</h3>
-            <p>판매중 2개 · 품절 1개</p>
-            <div className="admin-detail-tag">재입고 요청 1건</div>
+            <p>전체 {rows.length}개</p>
+            <p>판매중 {rows.filter((r) => r.status === "active").length}개</p>
           </div>
         </div>
       </div>
+
+      {showCreateModal ? (
+        <div className="admin-modal-overlay" onClick={() => setShowCreateModal(false)}>
+          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>상품 등록</h2>
+            {actionError ? <p className="admin-detail-note error">{actionError}</p> : null}
+            <div className="admin-modal-field">
+              <label>상품명</label>
+              <input
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="상품명"
+              />
+            </div>
+            <div className="admin-modal-field">
+              <label>가격</label>
+              <input
+                type="number"
+                value={formData.price}
+                onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+              />
+            </div>
+            <div className="admin-modal-field">
+              <label>재고</label>
+              <input
+                type="number"
+                value={formData.stock}
+                onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
+              />
+            </div>
+            <div className="admin-modal-actions">
+              <button className="admin-detail-btn" onClick={handleCreate} disabled={actionLoading}>
+                등록
+              </button>
+              <button className="admin-detail-btn secondary" onClick={() => setShowCreateModal(false)}>
+                취소
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

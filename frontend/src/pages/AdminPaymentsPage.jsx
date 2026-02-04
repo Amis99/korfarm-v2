@@ -5,16 +5,16 @@ import "../styles/admin-detail.css";
 
 const PAYMENTS = [
   { id: "PAY-20260124-01", org: "Korfarm Academy", amount: 9900, status: "paid" },
-  { id: "PAY-20260124-02", org: "해든 국어학원", amount: 19900, status: "paid" },
-  { id: "PAY-20260124-03", org: "서울 초등학교", amount: 0, status: "failed" },
 ];
 
 const mapPayments = (items) =>
   items.map((item) => ({
     id: item.id || item.payment_id || "-",
     org: item.org_name || item.orgName || "-",
+    user: item.user_name || item.userName || item.user_id || "-",
     amount: item.amount ?? 0,
     status: item.status || "paid",
+    createdAt: item.created_at || item.createdAt || "-",
   }));
 
 const formatAmount = (value) => `₩${value.toLocaleString("ko-KR")}`;
@@ -27,19 +27,16 @@ function AdminPaymentsPage() {
   );
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [selectedPayment, setSelectedPayment] = useState(null);
 
   const filteredPayments = useMemo(() => {
     const term = search.trim().toLowerCase();
     return payments.filter((payment) => {
-      if (statusFilter !== "all" && payment.status !== statusFilter) {
-        return false;
-      }
-      if (!term) {
-        return true;
-      }
-      return [payment.id, payment.org, payment.status]
+      if (statusFilter !== "all" && payment.status !== statusFilter) return false;
+      if (!term) return true;
+      return [payment.id, payment.org, payment.user, payment.status]
         .filter(Boolean)
-        .some((value) => value.toLowerCase().includes(term));
+        .some((v) => v.toLowerCase().includes(term));
     });
   }, [payments, search, statusFilter]);
 
@@ -49,9 +46,6 @@ function AdminPaymentsPage() {
         <div className="admin-detail-header">
           <h1>결제 관리</h1>
           <div className="admin-detail-actions">
-            <button className="admin-detail-btn" type="button">
-              정산 리포트
-            </button>
             <Link className="admin-detail-btn secondary" to="/admin">
               대시보드
             </Link>
@@ -80,31 +74,20 @@ function AdminPaymentsPage() {
                 <input
                   placeholder="결제 검색"
                   value={search}
-                  onChange={(event) => setSearch(event.target.value)}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
               <div className="admin-detail-filters">
-                <button
-                  className={`admin-filter ${statusFilter === "all" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("all")}
-                >
-                  전체
-                </button>
-                <button
-                  className={`admin-filter ${statusFilter === "paid" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("paid")}
-                >
-                  결제 완료
-                </button>
-                <button
-                  className={`admin-filter ${statusFilter === "failed" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("failed")}
-                >
-                  실패
-                </button>
+                {["all", "paid", "failed"].map((f) => (
+                  <button
+                    key={f}
+                    className={`admin-filter ${statusFilter === f ? "active" : ""}`}
+                    type="button"
+                    onClick={() => setStatusFilter(f)}
+                  >
+                    {f === "all" ? "전체" : f === "paid" ? "결제 완료" : "실패"}
+                  </button>
+                ))}
               </div>
             </div>
             {loading ? <p className="admin-detail-note">결제를 불러오는 중...</p> : null}
@@ -116,6 +99,7 @@ function AdminPaymentsPage() {
                   <th>기관</th>
                   <th>금액</th>
                   <th>상태</th>
+                  <th>조치</th>
                 </tr>
               </thead>
               <tbody>
@@ -129,6 +113,16 @@ function AdminPaymentsPage() {
                         {payment.status}
                       </span>
                     </td>
+                    <td>
+                      <button
+                        className="admin-detail-btn secondary"
+                        type="button"
+                        onClick={() => setSelectedPayment(payment)}
+                        style={{ fontSize: "12px", padding: "4px 8px" }}
+                      >
+                        상세
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -136,11 +130,44 @@ function AdminPaymentsPage() {
           </div>
           <div className="admin-detail-card">
             <h3>결제 요약</h3>
-            <p>오늘 결제 32건 · 실패 2건</p>
-            <div className="admin-detail-tag">환불 요청 4건</div>
+            <p>전체 {payments.length}건</p>
+            <p>완료 {payments.filter((p) => p.status === "paid").length}건</p>
           </div>
         </div>
       </div>
+
+      {selectedPayment ? (
+        <div className="admin-modal-overlay" onClick={() => setSelectedPayment(null)}>
+          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>결제 상세</h2>
+            <div className="admin-modal-field">
+              <label>결제 ID</label>
+              <p>{selectedPayment.id}</p>
+            </div>
+            <div className="admin-modal-field">
+              <label>기관</label>
+              <p>{selectedPayment.org}</p>
+            </div>
+            <div className="admin-modal-field">
+              <label>금액</label>
+              <p>{formatAmount(selectedPayment.amount)}</p>
+            </div>
+            <div className="admin-modal-field">
+              <label>상태</label>
+              <p>{selectedPayment.status}</p>
+            </div>
+            <div className="admin-modal-field">
+              <label>일시</label>
+              <p>{selectedPayment.createdAt}</p>
+            </div>
+            <div className="admin-modal-actions">
+              <button className="admin-detail-btn secondary" onClick={() => setSelectedPayment(null)}>
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

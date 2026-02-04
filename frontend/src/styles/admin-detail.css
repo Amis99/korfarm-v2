@@ -259,3 +259,72 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Modal overlay */
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.admin-modal {
+  background: #1a2118;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 28px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 80vh;
+  overflow-y: auto;
+  color: var(--admin-ink, #f3f6f1);
+}
+
+.admin-modal h2 {
+  font-size: 18px;
+  margin: 0 0 16px;
+}
+
+.admin-modal-field {
+  margin-bottom: 14px;
+}
+
+.admin-modal-field label {
+  display: block;
+  font-size: 13px;
+  color: #a6b6a9;
+  margin-bottom: 4px;
+}
+
+.admin-modal-field input,
+.admin-modal-field select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f3f6f1;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.admin-modal-field input:focus,
+.admin-modal-field select:focus {
+  outline: none;
+  border-color: #f06c24;
+}
+
+.admin-modal-field p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.admin-modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+}

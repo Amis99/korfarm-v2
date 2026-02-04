@@ -10,6 +10,8 @@ import java.time.LocalDateTime
 interface UserRepository : JpaRepository<UserEntity, String> {
     fun findByEmail(email: String): UserEntity?
     fun existsByEmail(email: String): Boolean
+    fun countByStatus(status: String): Long
+    fun countByCreatedAtAfter(after: LocalDateTime): Long
 
     @Modifying
     @Transactional

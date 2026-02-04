@@ -1,45 +1,65 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { apiPost } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import "../styles/admin-detail.css";
 
 const SEASONS = [
   { name: "2026년 1월 시즌", start: "2026-01-01", end: "2026-01-31", status: "active" },
-  { name: "2025년 12월 시즌", start: "2025-12-01", end: "2025-12-31", status: "closed" },
-  { name: "2025년 11월 시즌", start: "2025-11-01", end: "2025-11-30", status: "closed" },
 ];
 
 const mapSeasons = (items) =>
   items.map((item) => ({
+    id: item.id || item.season_id || item.name,
     name: item.name,
-    start: item.start_date || item.startDate || "-",
-    end: item.end_date || item.endDate || "-",
+    start: item.start_date || item.startDate || item.start_at || item.startAt || "-",
+    end: item.end_date || item.endDate || item.end_at || item.endAt || "-",
     status: item.status || "active",
   }));
 
 function AdminSeasonsPage() {
-  const { data: seasons, loading, error } = useAdminList(
-    "/v1/admin/seasons",
-    SEASONS,
-    mapSeasons
-  );
+  const { data: seasons, loading, error } = useAdminList("/v1/admin/seasons", SEASONS, mapSeasons);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [formData, setFormData] = useState({ levelId: "", name: "", startAt: "", endAt: "" });
+  const [actionError, setActionError] = useState("");
+  const [actionLoading, setActionLoading] = useState(false);
 
   const filteredSeasons = useMemo(() => {
     const term = search.trim().toLowerCase();
     return seasons.filter((season) => {
-      if (statusFilter !== "all" && season.status !== statusFilter) {
-        return false;
-      }
-      if (!term) {
-        return true;
-      }
+      if (statusFilter !== "all" && season.status !== statusFilter) return false;
+      if (!term) return true;
       return [season.name, season.status, season.start, season.end]
         .filter(Boolean)
-        .some((value) => value.toLowerCase().includes(term));
+        .some((v) => v.toLowerCase().includes(term));
     });
   }, [seasons, search, statusFilter]);
+
+  const handleCreate = async () => {
+    setActionError("");
+    if (!formData.name.trim() || !formData.startAt || !formData.endAt) {
+      setActionError("시즌명, 시작일, 종료일을 모두 입력해 주세요.");
+      return;
+    }
+    setActionLoading(true);
+    try {
+      await apiPost("/v1/admin/duel/seasons", {
+        levelId: formData.levelId.trim() || "saussure1",
+        name: formData.name.trim(),
+        startAt: formData.startAt,
+        endAt: formData.endAt,
+      });
+      setShowCreateModal(false);
+      setFormData({ levelId: "", name: "", startAt: "", endAt: "" });
+      window.location.reload();
+    } catch (err) {
+      setActionError(err.message);
+    } finally {
+      setActionLoading(false);
+    }
+  };
 
   return (
     <div className="admin-detail-page">
@@ -47,7 +67,15 @@ function AdminSeasonsPage() {
         <div className="admin-detail-header">
           <h1>시즌 관리</h1>
           <div className="admin-detail-actions">
-            <button className="admin-detail-btn" type="button">
+            <button
+              className="admin-detail-btn"
+              type="button"
+              onClick={() => {
+                setFormData({ levelId: "", name: "", startAt: "", endAt: "" });
+                setActionError("");
+                setShowCreateModal(true);
+              }}
+            >
               시즌 생성
             </button>
             <Link className="admin-detail-btn secondary" to="/admin">
@@ -78,31 +106,20 @@ function AdminSeasonsPage() {
                 <input
                   placeholder="시즌 검색"
                   value={search}
-                  onChange={(event) => setSearch(event.target.value)}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
               <div className="admin-detail-filters">
-                <button
-                  className={`admin-filter ${statusFilter === "all" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("all")}
-                >
-                  전체
-                </button>
-                <button
-                  className={`admin-filter ${statusFilter === "active" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("active")}
-                >
-                  진행중
-                </button>
-                <button
-                  className={`admin-filter ${statusFilter === "closed" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("closed")}
-                >
-                  종료
-                </button>
+                {["all", "active", "closed"].map((f) => (
+                  <button
+                    key={f}
+                    className={`admin-filter ${statusFilter === f ? "active" : ""}`}
+                    type="button"
+                    onClick={() => setStatusFilter(f)}
+                  >
+                    {f === "all" ? "전체" : f === "active" ? "진행중" : "종료"}
+                  </button>
+                ))}
               </div>
             </div>
             {loading ? <p className="admin-detail-note">시즌을 불러오는 중...</p> : null}
@@ -118,7 +135,7 @@ function AdminSeasonsPage() {
               </thead>
               <tbody>
                 {filteredSeasons.map((season) => (
-                  <tr key={season.name}>
+                  <tr key={season.id}>
                     <td>{season.name}</td>
                     <td>{season.start}</td>
                     <td>{season.end}</td>
@@ -135,10 +152,58 @@ function AdminSeasonsPage() {
           <div className="admin-detail-card">
             <h3>시즌 안내</h3>
             <p>한 시즌은 한 달로 설정됩니다.</p>
-            <div className="admin-detail-tag">다음 시즌 준비 1건</div>
           </div>
         </div>
       </div>
+
+      {showCreateModal ? (
+        <div className="admin-modal-overlay" onClick={() => setShowCreateModal(false)}>
+          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>시즌 생성</h2>
+            {actionError ? <p className="admin-detail-note error">{actionError}</p> : null}
+            <div className="admin-modal-field">
+              <label>시즌명</label>
+              <input
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="2026년 2월 시즌"
+              />
+            </div>
+            <div className="admin-modal-field">
+              <label>레벨 ID</label>
+              <input
+                value={formData.levelId}
+                onChange={(e) => setFormData({ ...formData, levelId: e.target.value })}
+                placeholder="saussure1"
+              />
+            </div>
+            <div className="admin-modal-field">
+              <label>시작일</label>
+              <input
+                type="date"
+                value={formData.startAt}
+                onChange={(e) => setFormData({ ...formData, startAt: e.target.value })}
+              />
+            </div>
+            <div className="admin-modal-field">
+              <label>종료일</label>
+              <input
+                type="date"
+                value={formData.endAt}
+                onChange={(e) => setFormData({ ...formData, endAt: e.target.value })}
+              />
+            </div>
+            <div className="admin-modal-actions">
+              <button className="admin-detail-btn" onClick={handleCreate} disabled={actionLoading}>
+                생성
+              </button>
+              <button className="admin-detail-btn secondary" onClick={() => setShowCreateModal(false)}>
+                취소
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

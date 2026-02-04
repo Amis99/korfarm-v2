@@ -32,7 +32,9 @@ function LoginPage() {
       if (token) {
         localStorage.setItem(TOKEN_KEY, token);
       }
-      navigate("/start");
+      const roles = payload?.data?.user?.roles || [];
+      const isAdmin = roles.includes("HQ_ADMIN") || roles.includes("ORG_ADMIN");
+      navigate(isAdmin ? "/admin" : "/start");
     } catch (err) {
       setError(err.message);
     } finally {

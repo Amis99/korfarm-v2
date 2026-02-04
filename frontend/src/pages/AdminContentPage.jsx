@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { apiPost } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
@@ -7,8 +8,6 @@ import "../styles/admin-detail.css";
 
 const CONTENTS = [
   { title: "프로 모드 3챕터", type: "pro_mode", status: "review" },
-  { title: "일일 독해 세트 0214", type: "daily_reading", status: "scheduled" },
-  { title: "맞춤 리포트", type: "daily_quiz", status: "live" },
 ];
 
 const MODULE_OPTIONS = [
@@ -24,17 +23,14 @@ const MODULE_OPTIONS = [
 ];
 
 const normalizeContentStatus = (status) => {
-  if (!status) {
-    return "review";
-  }
-  if (status === "active") {
-    return "live";
-  }
+  if (!status) return "review";
+  if (status === "active") return "live";
   return status;
 };
 
 const mapContentList = (items) =>
   items.map((content) => ({
+    id: content.id || content.content_id || content.title,
     title: content.title,
     type: content.content_type || content.contentType,
     status: normalizeContentStatus(content.status),
@@ -53,20 +49,18 @@ function AdminContentPage() {
   const [sampleId, setSampleId] = useState("");
   const [templateId, setTemplateId] = useState("");
   const [previewError, setPreviewError] = useState("");
+  const [importLoading, setImportLoading] = useState(false);
+  const [importMessage, setImportMessage] = useState("");
   const navigate = useNavigate();
 
   const filteredContents = useMemo(() => {
     const term = search.trim().toLowerCase();
     return contents.filter((content) => {
-      if (statusFilter !== "all" && content.status !== statusFilter) {
-        return false;
-      }
-      if (!term) {
-        return true;
-      }
+      if (statusFilter !== "all" && content.status !== statusFilter) return false;
+      if (!term) return true;
       return [content.title, content.type, content.status]
         .filter(Boolean)
-        .some((value) => value.toLowerCase().includes(term));
+        .some((v) => v.toLowerCase().includes(term));
     });
   }, [contents, search, statusFilter]);
 
@@ -110,15 +104,42 @@ function AdminContentPage() {
     }
   };
 
+  const handleImport = async () => {
+    setPreviewError("");
+    setImportMessage("");
+    if (!jsonText.trim()) {
+      setPreviewError("JSON 내용을 입력해 주세요.");
+      return;
+    }
+    try {
+      const parsed = JSON.parse(jsonText);
+      if (!parsed.contentType || !parsed.payload) {
+        setPreviewError("contentType과 payload가 포함된 JSON이어야 합니다.");
+        return;
+      }
+      setImportLoading(true);
+      await apiPost("/v1/admin/content/import", {
+        contentType: parsed.contentType,
+        levelId: parsed.levelId || undefined,
+        chapterId: parsed.chapterId || undefined,
+        schemaVersion: parsed.schemaVersion || "1.0",
+        content: parsed.payload,
+      });
+      setImportMessage("콘텐츠가 등록되었습니다.");
+      setJsonText("");
+    } catch (err) {
+      setPreviewError(err.message || `등록 실패: ${err}`);
+    } finally {
+      setImportLoading(false);
+    }
+  };
+
   return (
     <div className="admin-detail-page">
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
           <h1>콘텐츠 관리</h1>
           <div className="admin-detail-actions">
-            <button className="admin-detail-btn" type="button">
-              콘텐츠 등록
-            </button>
             <Link className="admin-detail-btn secondary" to="/admin">
               대시보드
             </Link>
@@ -147,38 +168,20 @@ function AdminContentPage() {
                 <input
                   placeholder="콘텐츠 검색"
                   value={search}
-                  onChange={(event) => setSearch(event.target.value)}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
               <div className="admin-detail-filters">
-                <button
-                  className={`admin-filter ${statusFilter === "all" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("all")}
-                >
-                  전체
-                </button>
-                <button
-                  className={`admin-filter ${statusFilter === "review" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("review")}
-                >
-                  검토
-                </button>
-                <button
-                  className={`admin-filter ${statusFilter === "scheduled" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("scheduled")}
-                >
-                  예정
-                </button>
-                <button
-                  className={`admin-filter ${statusFilter === "live" ? "active" : ""}`}
-                  type="button"
-                  onClick={() => setStatusFilter("live")}
-                >
-                  배포
-                </button>
+                {["all", "review", "scheduled", "live"].map((f) => (
+                  <button
+                    key={f}
+                    className={`admin-filter ${statusFilter === f ? "active" : ""}`}
+                    type="button"
+                    onClick={() => setStatusFilter(f)}
+                  >
+                    {f === "all" ? "전체" : f === "review" ? "검토" : f === "scheduled" ? "예정" : "배포"}
+                  </button>
+                ))}
               </div>
             </div>
             {loading ? <p className="admin-detail-note">콘텐츠를 불러오는 중...</p> : null}
@@ -193,7 +196,7 @@ function AdminContentPage() {
               </thead>
               <tbody>
                 {filteredContents.map((content) => (
-                  <tr key={content.title}>
+                  <tr key={content.id}>
                     <td>{content.title}</td>
                     <td>{content.type}</td>
                     <td>
@@ -213,7 +216,7 @@ function AdminContentPage() {
             <div className="admin-detail-toolbar">
               <select
                 value={templateId}
-                onChange={(event) => handleTemplateLoad(event.target.value)}
+                onChange={(e) => handleTemplateLoad(e.target.value)}
               >
                 <option value="">표준 양식 불러오기</option>
                 {LEARNING_TEMPLATES.map((item) => (
@@ -222,7 +225,7 @@ function AdminContentPage() {
                   </option>
                 ))}
               </select>
-              <select value={sampleId} onChange={(event) => handleSampleLoad(event.target.value)}>
+              <select value={sampleId} onChange={(e) => handleSampleLoad(e.target.value)}>
                 <option value="">샘플 불러오기</option>
                 {LEARNING_CATALOG.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -230,7 +233,7 @@ function AdminContentPage() {
                   </option>
                 ))}
               </select>
-              <select value={moduleKey} onChange={(event) => setModuleKey(event.target.value)}>
+              <select value={moduleKey} onChange={(e) => setModuleKey(e.target.value)}>
                 {MODULE_OPTIONS.map((option) => (
                   <option key={option.key} value={option.key}>
                     {option.label}
@@ -241,14 +244,23 @@ function AdminContentPage() {
             <textarea
               className="admin-json-input"
               value={jsonText}
-              onChange={(event) => setJsonText(event.target.value)}
+              onChange={(e) => setJsonText(e.target.value)}
               placeholder="JSON을 입력하세요"
               rows={12}
             />
             {previewError ? <p className="admin-detail-note error">{previewError}</p> : null}
+            {importMessage ? <p className="admin-detail-note" style={{ color: "#27ae60" }}>{importMessage}</p> : null}
             <div className="admin-detail-actions">
               <button className="admin-detail-btn" type="button" onClick={handlePreview}>
                 미리보기
+              </button>
+              <button
+                className="admin-detail-btn"
+                type="button"
+                onClick={handleImport}
+                disabled={importLoading}
+              >
+                {importLoading ? "등록 중..." : "콘텐츠 등록"}
               </button>
             </div>
           </div>
