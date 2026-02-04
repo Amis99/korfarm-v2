@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { apiPost } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
+import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
 const CONTENTS = [
@@ -135,29 +136,10 @@ function AdminContentPage() {
   };
 
   return (
-    <div className="admin-detail-page">
+    <AdminLayout>
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
           <h1>콘텐츠 관리</h1>
-          <div className="admin-detail-actions">
-            <Link className="admin-detail-btn secondary" to="/admin">
-              대시보드
-            </Link>
-          </div>
-        </div>
-        <div className="admin-detail-nav">
-          <Link to="/admin/orgs">기관</Link>
-          <Link to="/admin/classes">반</Link>
-          <Link to="/admin/students">학생</Link>
-          <Link to="/admin/parents">학부모 관리</Link>
-          <Link to="/admin/content">콘텐츠</Link>
-          <Link to="/admin/assignments">과제</Link>
-          <Link to="/admin/seasons">시즌</Link>
-          <Link to="/admin/shop/products">상품</Link>
-          <Link to="/admin/shop/orders">주문</Link>
-          <Link to="/admin/payments">결제</Link>
-          <Link to="/admin/reports">보고</Link>
-          <Link to="/admin/flags">플래그</Link>
         </div>
         <div className="admin-detail-grid">
           <div className="admin-detail-card">
@@ -266,7 +248,7 @@ function AdminContentPage() {
           </div>
         </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 }
 

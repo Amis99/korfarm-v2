@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { apiGet } from "../utils/adminApi";
-import "../styles/admin.css";
+import AdminLayout from "../components/AdminLayout";
 import "../styles/wisdom.css";
 
 const LEVEL_OPTIONS = [
@@ -41,36 +41,15 @@ function AdminWisdomPage() {
   };
 
   return (
-    <div className="admin-page">
-      <div className="admin-shell">
-        <aside className="admin-side">
-          <div className="admin-brand" aria-label="국어농장 Admin">
-            <img className="admin-logo" src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt="국어농장" />
-            <span>Admin</span>
-          </div>
-          <nav className="admin-nav">
-            <Link to="/admin">
-              <span className="material-symbols-outlined">dashboard</span>
-              대시보드
-            </Link>
-            <Link to="/admin/wisdom" className="active">
-              <span className="material-symbols-outlined">menu_book</span>
-              지식과 지혜
-            </Link>
-            <Link to="/">랜딩</Link>
-            <Link to="/start">스타트</Link>
-          </nav>
-        </aside>
+    <AdminLayout>
+      <div className="admin-topbar">
+        <div>
+          <h1>지식과 지혜 관리</h1>
+          <p>학생 글 목록과 첨삭 관리</p>
+        </div>
+      </div>
 
-        <main className="admin-main">
-          <div className="admin-topbar">
-            <div>
-              <h1>지식과 지혜 관리</h1>
-              <p>학생 글 목록과 첨삭 관리</p>
-            </div>
-          </div>
-
-          <section style={{ padding: "0 24px" }}>
+      <section style={{ padding: "0 24px" }}>
             <div style={{ display: "flex", gap: 10, marginBottom: 16, flexWrap: "wrap" }}>
               <select
                 className="wis-filter-select"
@@ -143,10 +122,8 @@ function AdminWisdomPage() {
                 )}
               </>
             )}
-          </section>
-        </main>
-      </div>
-    </div>
+      </section>
+    </AdminLayout>
   );
 }
 

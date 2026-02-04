@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import ManuscriptGrid from "../components/ManuscriptGrid";
-import "../styles/admin.css";
+import AdminLayout from "../components/AdminLayout";
 import "../styles/wisdom.css";
 
 const GRID_CONFIG = {
@@ -90,71 +90,32 @@ function AdminWisdomDetailPage() {
 
   if (loading) {
     return (
-      <div className="admin-page">
-        <div className="admin-shell">
-          <aside className="admin-side">
-            <div className="admin-brand"><span>Admin</span></div>
-            <nav className="admin-nav">
-              <Link to="/admin/wisdom">목록으로</Link>
-            </nav>
-          </aside>
-          <main className="admin-main">
-            <p style={{ padding: 24, color: "#888" }}>불러오는 중...</p>
-          </main>
-        </div>
-      </div>
+      <AdminLayout>
+        <p style={{ padding: 24, color: "#888" }}>불러오는 중...</p>
+      </AdminLayout>
     );
   }
 
   if (!post) {
     return (
-      <div className="admin-page">
-        <div className="admin-shell">
-          <aside className="admin-side">
-            <div className="admin-brand"><span>Admin</span></div>
-            <nav className="admin-nav">
-              <Link to="/admin/wisdom">목록으로</Link>
-            </nav>
-          </aside>
-          <main className="admin-main">
-            <p style={{ padding: 24, color: "#888" }}>글을 찾을 수 없습니다.</p>
-          </main>
-        </div>
-      </div>
+      <AdminLayout>
+        <p style={{ padding: 24, color: "#888" }}>글을 찾을 수 없습니다.</p>
+      </AdminLayout>
     );
   }
 
   const comments = post.comments || [];
 
   return (
-    <div className="admin-page">
-      <div className="admin-shell">
-        <aside className="admin-side">
-          <div className="admin-brand" aria-label="국어농장 Admin">
-            <img className="admin-logo" src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt="국어농장" />
-            <span>Admin</span>
-          </div>
-          <nav className="admin-nav">
-            <Link to="/admin">
-              <span className="material-symbols-outlined">dashboard</span>
-              대시보드
-            </Link>
-            <Link to="/admin/wisdom" className="active">
-              <span className="material-symbols-outlined">menu_book</span>
-              지식과 지혜
-            </Link>
-          </nav>
-        </aside>
+    <AdminLayout>
+      <div className="admin-topbar">
+        <div>
+          <h1>첨삭 작성</h1>
+          <p>{post.topic_label} · {post.author_name || post.author_id}</p>
+        </div>
+      </div>
 
-        <main className="admin-main">
-          <div className="admin-topbar">
-            <div>
-              <h1>첨삭 작성</h1>
-              <p>{post.topic_label} · {post.author_name || post.author_id}</p>
-            </div>
-          </div>
-
-          <section style={{ padding: "0 24px 40px" }}>
+      <section style={{ padding: "0 24px 40px" }}>
             <div className="admin-card" style={{ marginBottom: 24 }}>
               <h2>글 정보</h2>
               <table className="admin-table">
@@ -265,10 +226,8 @@ function AdminWisdomDetailPage() {
                 </button>
               </div>
             </div>
-          </section>
-        </main>
-      </div>
-    </div>
+      </section>
+    </AdminLayout>
   );
 }
 

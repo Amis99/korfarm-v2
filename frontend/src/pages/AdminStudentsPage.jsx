@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { apiPost, apiPatch } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
+import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
 const STUDENTS = [
@@ -118,7 +118,7 @@ function AdminStudentsPage() {
   };
 
   return (
-    <div className="admin-detail-page">
+    <AdminLayout>
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
           <h1>학생 관리</h1>
@@ -134,24 +134,7 @@ function AdminStudentsPage() {
             >
               학생 등록
             </button>
-            <Link className="admin-detail-btn secondary" to="/admin">
-              대시보드
-            </Link>
           </div>
-        </div>
-        <div className="admin-detail-nav">
-          <Link to="/admin/orgs">기관</Link>
-          <Link to="/admin/classes">반</Link>
-          <Link to="/admin/students">학생</Link>
-          <Link to="/admin/parents">학부모 관리</Link>
-          <Link to="/admin/content">콘텐츠</Link>
-          <Link to="/admin/assignments">과제</Link>
-          <Link to="/admin/seasons">시즌</Link>
-          <Link to="/admin/shop/products">상품</Link>
-          <Link to="/admin/shop/orders">주문</Link>
-          <Link to="/admin/payments">결제</Link>
-          <Link to="/admin/reports">보고</Link>
-          <Link to="/admin/flags">플래그</Link>
         </div>
         <div className="admin-detail-grid">
           <div className="admin-detail-card">
@@ -308,7 +291,7 @@ function AdminStudentsPage() {
           </div>
         </div>
       ) : null}
-    </div>
+    </AdminLayout>
   );
 }
 
