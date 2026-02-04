@@ -28,8 +28,7 @@ data class AdminOrgView(
 data class AdminClassView(
     val classId: String,
     val name: String,
-    val levelId: String?,
-    val grade: String?,
+    val description: String?,
     val orgId: String,
     val orgName: String?,
     val seatCount: Int,

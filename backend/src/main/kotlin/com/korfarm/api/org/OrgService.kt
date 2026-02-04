@@ -41,6 +41,15 @@ class OrgService(
     }
 
     @Transactional(readOnly = true)
+    fun listUserOrgs(userId: String): List<OrgSummary> {
+        val memberships = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+        val orgIds = memberships.map { it.orgId }.distinct()
+        return orgRepository.findAllById(orgIds).map { org ->
+            OrgSummary(id = org.id, name = org.name)
+        }
+    }
+
+    @Transactional(readOnly = true)
     fun listOrgsAdmin(): List<AdminOrgView> {
         val userMap = userRepository.findAll().associateBy { it.id }
         val adminMemberships = orgMembershipRepository.findByStatus("active")
@@ -80,14 +89,87 @@ class OrgService(
             AdminClassView(
                 classId = classEntity.id,
                 name = classEntity.name,
-                levelId = classEntity.levelId,
-                grade = classEntity.grade,
+                description = classEntity.description,
                 orgId = classEntity.orgId,
                 orgName = orgName,
                 seatCount = seatCount,
                 status = classEntity.status
             )
         }
+    }
+
+    @Transactional(readOnly = true)
+    fun getClassView(classId: String): AdminClassView {
+        val classEntity = classRepository.findById(classId).orElseThrow {
+            ApiException("NOT_FOUND", "수강반을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val orgName = orgRepository.findById(classEntity.orgId).orElse(null)?.name
+        val seatCount = classMembershipRepository.countByClassIdAndStatus(classId, "active")
+        return AdminClassView(
+            classId = classEntity.id,
+            name = classEntity.name,
+            description = classEntity.description,
+            orgId = classEntity.orgId,
+            orgName = orgName,
+            seatCount = seatCount,
+            status = classEntity.status
+        )
+    }
+
+    @Transactional(readOnly = true)
+    fun listClassStudents(classId: String): List<AdminStudentView> {
+        classRepository.findById(classId).orElseThrow {
+            ApiException("NOT_FOUND", "수강반을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val memberships = classMembershipRepository.findByClassIdAndStatus(classId, "active")
+        val orgMap = orgRepository.findAll().associateBy { it.id }
+        val classMap = classRepository.findAll().associateBy { it.id }
+        return memberships.mapNotNull { cm ->
+            val user = userRepository.findById(cm.userId).orElse(null) ?: return@mapNotNull null
+            val orgMembership = orgMembershipRepository.findByUserIdAndStatus(user.id, "active")
+                .firstOrNull { it.role == "STUDENT" }
+            val orgId = orgMembership?.orgId
+            val orgName = orgId?.let { orgMap[it]?.name }
+            val userClassMemberships = classMembershipRepository.findByUserIdAndStatus(user.id, "active")
+            val classIds = userClassMemberships.map { it.classId }
+            val classNames = userClassMemberships.mapNotNull { classMap[it.classId]?.name }
+            val subscription = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(user.id)
+            AdminStudentView(
+                userId = user.id,
+                loginId = user.email,
+                name = user.name ?: user.email,
+                gradeLabel = user.gradeLabel,
+                levelId = user.levelId,
+                school = user.school,
+                region = user.region,
+                studentPhone = user.studentPhone,
+                parentPhone = user.parentPhone,
+                orgId = orgId,
+                orgName = orgName,
+                classIds = classIds,
+                classNames = classNames,
+                subscriptionStatus = subscription?.status,
+                subscriptionEndAt = subscription?.endAt?.toString(),
+                status = user.status
+            )
+        }
+    }
+
+    @Transactional
+    fun removeStudentFromClass(classId: String, userId: String) {
+        val membership = classMembershipRepository.findByClassIdAndUserId(classId, userId)
+            ?: throw ApiException("NOT_FOUND", "해당 학생의 수강반 멤버십을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        membership.status = "inactive"
+        classMembershipRepository.save(membership)
+    }
+
+    @Transactional
+    fun deactivateClass(classId: String) {
+        val classEntity = classRepository.findById(classId).orElseThrow {
+            ApiException("NOT_FOUND", "수강반을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        classEntity.status = "inactive"
+        classRepository.save(classEntity)
     }
 
     @Transactional(readOnly = true)
@@ -386,6 +468,7 @@ class OrgService(
             id = IdGenerator.newId("class"),
             orgId = request.orgId,
             name = request.name,
+            description = request.description,
             levelId = request.levelId,
             grade = request.grade,
             status = request.status ?: "active",
@@ -400,6 +483,7 @@ class OrgService(
             ApiException("NOT_FOUND", "class not found", HttpStatus.NOT_FOUND)
         }
         request.name?.let { classEntity.name = it }
+        request.description?.let { classEntity.description = it }
         request.levelId?.let { classEntity.levelId = it }
         request.grade?.let { classEntity.grade = it }
         request.status?.let { classEntity.status = it }

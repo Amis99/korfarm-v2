@@ -171,6 +171,7 @@ data class AdminSubscriptionRequest(
 data class AdminClassCreateRequest(
     @field:NotBlank val orgId: String,
     @field:NotBlank val name: String,
+    val description: String? = null,
     val levelId: String? = null,
     val grade: String? = null,
     val status: String? = null,
@@ -179,6 +180,7 @@ data class AdminClassCreateRequest(
 
 data class AdminClassUpdateRequest(
     val name: String? = null,
+    val description: String? = null,
     val levelId: String? = null,
     val grade: String? = null,
     val status: String? = null,
