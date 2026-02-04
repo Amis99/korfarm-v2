@@ -47,7 +47,7 @@
 }
 
 .admin-detail-card select {
-  background: rgba(15, 20, 16, 0.7);
+  background: #1a2118;
   border: 1px solid rgba(240, 108, 36, 0.28);
   color: var(--admin-ink);
   border-radius: 12px;
@@ -306,10 +306,16 @@
   padding: 8px 10px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.06);
+  background: #1e2620;
   color: #f3f6f1;
   font-size: 14px;
   box-sizing: border-box;
+}
+
+.admin-modal-field select option,
+.admin-detail-card select option {
+  background: #1e2620;
+  color: #f3f6f1;
 }
 
 .admin-modal-field input:focus,
@@ -327,4 +333,66 @@
   display: flex;
   gap: 8px;
   margin-top: 18px;
+}
+
+.admin-modal-actions .admin-detail-btn {
+  background: #f06c24;
+  color: #fff;
+}
+
+.admin-modal-actions .admin-detail-btn.secondary {
+  background: rgba(240, 108, 36, 0.2);
+  color: #f3f6f1;
+  border: 1px solid rgba(240, 108, 36, 0.4);
+}
+
+.admin-modal.admin-modal-wide {
+  max-width: 640px;
+}
+
+.admin-modal-section {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-modal-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.admin-modal-section h3 {
+  font-size: 14px;
+  color: #f06c24;
+  margin: 0 0 12px;
+}
+
+.admin-modal-row {
+  display: flex;
+  gap: 12px;
+}
+
+.admin-modal-row > .admin-modal-field {
+  flex: 1;
+}
+
+.admin-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #d4ddd6;
+  cursor: pointer;
+}
+
+.admin-checkbox-label input[type="checkbox"] {
+  width: auto;
+  accent-color: #f06c24;
 }

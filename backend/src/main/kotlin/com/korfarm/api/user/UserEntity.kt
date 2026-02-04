@@ -42,7 +42,7 @@ class UserEntity(
     @Column(name = "profile_image_url", columnDefinition = "MEDIUMTEXT")
     var profileImageUrl: String? = null,
 
-    @Column(name = "diagnostic_opt_in")
+    @Column(name = "diagnostic_opt_in", nullable = false, columnDefinition = "TINYINT(1) NOT NULL DEFAULT 0")
     var diagnosticOptIn: Boolean = false,
 
     @Column(name = "learning_start_date")

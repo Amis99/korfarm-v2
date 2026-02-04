@@ -103,6 +103,8 @@ class ClassEntity(
     @Column(nullable = false)
     var name: String,
 
+    var description: String? = null,
+
     @Column(name = "level_id")
     var levelId: String? = null,
 

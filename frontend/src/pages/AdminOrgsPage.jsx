@@ -82,10 +82,10 @@ function AdminOrgsPage() {
       const result = await apiPost("/v1/admin/orgs", {
         name: formData.name.trim(),
         plan: formData.plan,
-        seatLimit: Number(formData.seatLimit) || 50,
-        orgType: formData.orgType || undefined,
-        addressRegion: formData.addressRegion || undefined,
-        addressDetail: formData.addressDetail.trim() || undefined,
+        seat_limit: Number(formData.seatLimit) || 50,
+        org_type: formData.orgType || undefined,
+        address_region: formData.addressRegion || undefined,
+        address_detail: formData.addressDetail.trim() || undefined,
       });
       const mapped = mapOrgList([result])[0];
       setRows((prev) => [mapped, ...prev]);
@@ -103,17 +103,18 @@ function AdminOrgsPage() {
     setActionError("");
     setActionLoading(true);
     try {
-      const result = await apiPatch(`/v1/admin/orgs/${editOrg.id}`, {
+      await apiPatch(`/v1/admin/orgs/${editOrg.id}`, {
         name: formData.name.trim() || undefined,
         plan: formData.plan || undefined,
-        seatLimit: Number(formData.seatLimit) || undefined,
-        orgType: formData.orgType || undefined,
-        addressRegion: formData.addressRegion || undefined,
-        addressDetail: formData.addressDetail.trim() || undefined,
+        seat_limit: Number(formData.seatLimit) || undefined,
+        org_type: formData.orgType || undefined,
+        address_region: formData.addressRegion || undefined,
+        address_detail: formData.addressDetail.trim() || undefined,
       });
-      const mapped = mapOrgList([result])[0];
-      setRows((prev) => prev.map((r) => (r.id === mapped.id ? mapped : r)));
-      setEditOrg(mapped);
+      const freshOrgs = await apiGet("/v1/admin/orgs");
+      setRows(mapOrgList(Array.isArray(freshOrgs) ? freshOrgs : []));
+      setShowEditModal(false);
+      setEditOrg(null);
     } catch (err) {
       setActionError(err.message);
     } finally {
@@ -147,7 +148,7 @@ function AdminOrgsPage() {
     setActionLoading(true);
     try {
       const result = await apiPost(`/v1/admin/orgs/${editOrg.id}/admins`, {
-        loginId: adminLoginId.trim(),
+        login_id: adminLoginId.trim(),
       });
       const mapped = mapOrgList([result])[0];
       setRows((prev) => prev.map((r) => (r.id === mapped.id ? mapped : r)));
@@ -194,8 +195,7 @@ function AdminOrgsPage() {
   };
 
   const formatAddress = (org) => {
-    const parts = [org.addressRegion, org.addressDetail].filter(Boolean);
-    return parts.length > 0 ? parts.join(" ") : "-";
+    return org.addressRegion || "-";
   };
 
   return (
@@ -265,11 +265,7 @@ function AdminOrgsPage() {
                     <td>{formatAddress(org)}</td>
                     <td>{org.plan}</td>
                     <td>{org.seats}</td>
-                    <td>
-                      {org.admins.length > 0
-                        ? org.admins.map((a) => a.name || a.loginId).join(", ")
-                        : "-"}
-                    </td>
+                    <td>{org.admins.length > 0 ? `${org.admins.length}명` : "-"}</td>
                     <td>
                       <span className="status-pill" data-status={org.status}>
                         {org.status}
