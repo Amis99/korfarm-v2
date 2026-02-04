@@ -10,6 +10,9 @@ import com.korfarm.api.contracts.AdminOrgUpdateRequest
 import com.korfarm.api.contracts.AdminOrgAdminCreateRequest
 import com.korfarm.api.contracts.AdminStudentCreateRequest
 import com.korfarm.api.contracts.AdminStudentUpdateRequest
+import com.korfarm.api.contracts.AdminSubscriptionRequest
+import com.korfarm.api.payment.SubscriptionEntity
+import com.korfarm.api.payment.SubscriptionRepository
 import com.korfarm.api.user.UserEntity
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
@@ -17,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.UUID
 
 @Service
@@ -26,6 +30,7 @@ class OrgService(
     private val classRepository: ClassRepository,
     private val classMembershipRepository: ClassMembershipRepository,
     private val userRepository: UserRepository,
+    private val subscriptionRepository: SubscriptionRepository,
     private val passwordEncoder: PasswordEncoder
 ) {
     @Transactional(readOnly = true)
@@ -37,12 +42,30 @@ class OrgService(
 
     @Transactional(readOnly = true)
     fun listOrgsAdmin(): List<AdminOrgView> {
+        val userMap = userRepository.findAll().associateBy { it.id }
+        val adminMemberships = orgMembershipRepository.findByStatus("active")
+            .filter { it.role == "HQ_ADMIN" || it.role == "ORG_ADMIN" }
+            .groupBy { it.orgId }
         return orgRepository.findAll().sortedBy { it.name }.map { org ->
+            val admins = (adminMemberships[org.id] ?: emptyList()).mapNotNull { m ->
+                val u = userMap[m.userId] ?: return@mapNotNull null
+                AdminOrgAdminView(
+                    userId = u.id,
+                    loginId = u.email,
+                    name = u.name,
+                    phone = u.studentPhone,
+                    role = m.role
+                )
+            }
             AdminOrgView(
                 orgId = org.id,
                 name = org.name,
                 plan = org.plan,
+                orgType = org.orgType,
+                addressRegion = org.addressRegion,
+                addressDetail = org.addressDetail,
                 seatLimit = org.seatLimit,
+                admins = admins,
                 status = org.status
             )
         }
@@ -70,19 +93,43 @@ class OrgService(
     @Transactional(readOnly = true)
     fun listStudentsAdmin(): List<AdminStudentView> {
         val orgMap = orgRepository.findAll().associateBy { it.id }
-        val memberships = orgMembershipRepository.findByStatus("active").filter { it.role == "STUDENT" }
-        val orgByUser = memberships.groupBy { it.userId }.mapValues { it.value.first().orgId }
-        return userRepository.findAll().sortedBy { it.createdAt }.map { user ->
+        val classMap = classRepository.findAll().associateBy { it.id }
+        val allMemberships = orgMembershipRepository.findByStatus("active")
+        val adminUserIds = allMemberships
+            .filter { it.role == "HQ_ADMIN" || it.role == "ORG_ADMIN" }
+            .map { it.userId }.toSet()
+        val studentMemberships = allMemberships.filter { it.role == "STUDENT" }
+        val orgByUser = studentMemberships.groupBy { it.userId }.mapValues { it.value.first().orgId }
+        val allClassMemberships = classMembershipRepository.findAll()
+            .filter { it.status == "active" }
+            .groupBy { it.userId }
+        // 관리자가 아닌 사용자만 학생 목록에 표시
+        val students = userRepository.findAll()
+            .filter { it.id !in adminUserIds }
+            .sortedBy { it.createdAt }
+        return students.map { user ->
             val orgId = orgByUser[user.id]
             val orgName = orgId?.let { orgMap[it]?.name }
+            val userClassMemberships = allClassMemberships[user.id] ?: emptyList()
+            val classIds = userClassMemberships.map { it.classId }
+            val classNames = userClassMemberships.mapNotNull { classMap[it.classId]?.name }
+            val subscription = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(user.id)
             AdminStudentView(
                 userId = user.id,
                 loginId = user.email,
                 name = user.name ?: user.email,
                 gradeLabel = user.gradeLabel,
                 levelId = user.levelId,
+                school = user.school,
+                region = user.region,
+                studentPhone = user.studentPhone,
+                parentPhone = user.parentPhone,
                 orgId = orgId,
                 orgName = orgName,
+                classIds = classIds,
+                classNames = classNames,
+                subscriptionStatus = subscription?.status,
+                subscriptionEndAt = subscription?.endAt?.toString(),
                 status = user.status
             )
         }
@@ -95,6 +142,9 @@ class OrgService(
             name = request.name,
             status = request.status ?: "active",
             plan = request.plan,
+            orgType = request.orgType,
+            addressRegion = request.addressRegion,
+            addressDetail = request.addressDetail,
             seatLimit = request.seatLimit ?: 0
         )
         return orgRepository.save(org)
@@ -107,6 +157,9 @@ class OrgService(
         }
         request.name?.let { org.name = it }
         request.plan?.let { org.plan = it }
+        request.orgType?.let { org.orgType = it }
+        request.addressRegion?.let { org.addressRegion = it }
+        request.addressDetail?.let { org.addressDetail = it }
         request.seatLimit?.let { org.seatLimit = it }
         request.status?.let { org.status = it }
         return orgRepository.save(org)
@@ -121,23 +174,37 @@ class OrgService(
         orgRepository.save(org)
     }
 
-    @Transactional
-    fun createOrgAdmin(orgId: String, request: AdminOrgAdminCreateRequest): UserEntity {
-        val org = orgRepository.findById(orgId).orElseThrow {
-            ApiException("NOT_FOUND", "org not found", HttpStatus.NOT_FOUND)
-        }
-        val user = userRepository.findByEmail(request.email) ?: run {
-            val tempPassword = UUID.randomUUID().toString()
-            userRepository.save(
-                UserEntity(
-                    id = IdGenerator.newId("u"),
-                    email = request.email,
-                    passwordHash = passwordEncoder.encode(tempPassword),
-                    name = request.name,
-                    status = "active"
-                )
+    @Transactional(readOnly = true)
+    fun listOrgAdmins(orgId: String): List<AdminOrgAdminView> {
+        val memberships = orgMembershipRepository.findByOrgIdAndStatus(orgId, "active")
+            .filter { it.role == "HQ_ADMIN" || it.role == "ORG_ADMIN" }
+        return memberships.mapNotNull { m ->
+            val user = userRepository.findById(m.userId).orElse(null) ?: return@mapNotNull null
+            AdminOrgAdminView(
+                userId = user.id,
+                loginId = user.email,
+                name = user.name,
+                phone = user.studentPhone,
+                role = m.role
             )
         }
+    }
+
+    @Transactional
+    fun removeOrgAdmin(orgId: String, userId: String) {
+        val membership = orgMembershipRepository.findByOrgIdAndUserId(orgId, userId)
+            ?: throw ApiException("NOT_FOUND", "membership not found", HttpStatus.NOT_FOUND)
+        membership.status = "inactive"
+        orgMembershipRepository.save(membership)
+    }
+
+    @Transactional
+    fun createOrgAdmin(orgId: String, request: AdminOrgAdminCreateRequest): AdminOrgView {
+        val org = orgRepository.findById(orgId).orElseThrow {
+            ApiException("NOT_FOUND", "기관을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val user = userRepository.findByEmail(request.loginId)
+            ?: throw ApiException("NOT_FOUND", "해당 국어농장 아이디의 계정을 찾을 수 없습니다: ${request.loginId}", HttpStatus.NOT_FOUND)
         val existing = orgMembershipRepository.findByOrgIdAndUserId(org.id, user.id)
         if (existing == null) {
             orgMembershipRepository.save(
@@ -150,7 +217,26 @@ class OrgService(
                 )
             )
         }
-        return user
+        return getOrgView(orgId)
+    }
+
+    @Transactional(readOnly = true)
+    fun getOrgView(orgId: String): AdminOrgView {
+        val org = orgRepository.findById(orgId).orElseThrow {
+            ApiException("NOT_FOUND", "기관을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val admins = listOrgAdmins(orgId)
+        return AdminOrgView(
+            orgId = org.id,
+            name = org.name,
+            plan = org.plan,
+            orgType = org.orgType,
+            addressRegion = org.addressRegion,
+            addressDetail = org.addressDetail,
+            seatLimit = org.seatLimit,
+            admins = admins,
+            status = org.status
+        )
     }
 
     @Transactional
@@ -195,6 +281,12 @@ class OrgService(
         }
         request.name?.let { user.name = it }
         request.status?.let { user.status = it }
+        request.school?.let { user.school = it }
+        request.gradeLabel?.let { user.gradeLabel = it }
+        request.levelId?.let { user.levelId = it }
+        request.studentPhone?.let { user.studentPhone = it }
+        request.parentPhone?.let { user.parentPhone = it }
+        request.region?.let { user.region = it }
         userRepository.save(user)
         request.orgId?.let { orgId ->
             val existing = orgMembershipRepository.findByOrgIdAndUserId(orgId, user.id)
@@ -214,6 +306,78 @@ class OrgService(
             addStudentToClass(classId, user.id)
         }
         return user
+    }
+
+    @Transactional(readOnly = true)
+    fun getStudentView(userId: String): AdminStudentView {
+        val user = userRepository.findById(userId).orElseThrow {
+            ApiException("NOT_FOUND", "user not found", HttpStatus.NOT_FOUND)
+        }
+        val orgMap = orgRepository.findAll().associateBy { it.id }
+        val classMap = classRepository.findAll().associateBy { it.id }
+        val orgMembership = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+            .firstOrNull { it.role == "STUDENT" }
+        val orgId = orgMembership?.orgId
+        val orgName = orgId?.let { orgMap[it]?.name }
+        val userClassMemberships = classMembershipRepository.findByUserIdAndStatus(userId, "active")
+        val classIds = userClassMemberships.map { it.classId }
+        val classNames = userClassMemberships.mapNotNull { classMap[it.classId]?.name }
+        val subscription = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(userId)
+        return AdminStudentView(
+            userId = user.id,
+            loginId = user.email,
+            name = user.name ?: user.email,
+            gradeLabel = user.gradeLabel,
+            levelId = user.levelId,
+            school = user.school,
+            region = user.region,
+            studentPhone = user.studentPhone,
+            parentPhone = user.parentPhone,
+            orgId = orgId,
+            orgName = orgName,
+            classIds = classIds,
+            classNames = classNames,
+            subscriptionStatus = subscription?.status,
+            subscriptionEndAt = subscription?.endAt?.toString(),
+            status = user.status
+        )
+    }
+
+    @Transactional
+    fun updateSubscription(userId: String, request: AdminSubscriptionRequest) {
+        userRepository.findById(userId).orElseThrow {
+            ApiException("NOT_FOUND", "user not found", HttpStatus.NOT_FOUND)
+        }
+        val existing = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(userId)
+        if (request.status == "active") {
+            val startAt = request.startAt?.let { LocalDateTime.parse(it + "T00:00:00") } ?: LocalDateTime.now()
+            val endAt = request.endAt?.let { LocalDateTime.parse(it + "T23:59:59") }
+                ?: startAt.plusYears(1)
+            if (existing != null) {
+                existing.status = "active"
+                existing.startAt = startAt
+                existing.endAt = endAt
+                existing.canceledAt = null
+                subscriptionRepository.save(existing)
+            } else {
+                subscriptionRepository.save(
+                    SubscriptionEntity(
+                        id = IdGenerator.newId("sub"),
+                        userId = userId,
+                        status = "active",
+                        startAt = startAt,
+                        endAt = endAt
+                    )
+                )
+            }
+        } else {
+            // "free" — expire subscription
+            if (existing != null) {
+                existing.status = "expired"
+                existing.canceledAt = LocalDateTime.now()
+                subscriptionRepository.save(existing)
+            }
+        }
     }
 
     @Transactional

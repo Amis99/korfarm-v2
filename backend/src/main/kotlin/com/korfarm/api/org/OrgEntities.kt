@@ -23,6 +23,15 @@ class OrgEntity(
 
     var plan: String? = null,
 
+    @Column(name = "org_type")
+    var orgType: String? = null,
+
+    @Column(name = "address_region")
+    var addressRegion: String? = null,
+
+    @Column(name = "address_detail")
+    var addressDetail: String? = null,
+
     @Column(name = "seat_limit", nullable = false)
     var seatLimit: Int = 0,
 

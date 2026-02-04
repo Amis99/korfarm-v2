@@ -121,6 +121,9 @@ data class PaymentCheckoutRequest(
 data class AdminOrgCreateRequest(
     @field:NotBlank val name: String,
     val plan: String? = null,
+    val orgType: String? = null,
+    val addressRegion: String? = null,
+    val addressDetail: String? = null,
     val seatLimit: Int? = null,
     val status: String? = null
 )
@@ -128,13 +131,15 @@ data class AdminOrgCreateRequest(
 data class AdminOrgUpdateRequest(
     val name: String? = null,
     val plan: String? = null,
+    val orgType: String? = null,
+    val addressRegion: String? = null,
+    val addressDetail: String? = null,
     val seatLimit: Int? = null,
     val status: String? = null
 )
 
 data class AdminOrgAdminCreateRequest(
-    @field:Email @field:NotBlank val email: String,
-    val name: String? = null
+    @field:NotBlank val loginId: String
 )
 
 data class AdminStudentCreateRequest(
@@ -148,7 +153,19 @@ data class AdminStudentUpdateRequest(
     val name: String? = null,
     val status: String? = null,
     val orgId: String? = null,
-    val classIds: List<String> = emptyList()
+    val classIds: List<String> = emptyList(),
+    val school: String? = null,
+    val gradeLabel: String? = null,
+    val levelId: String? = null,
+    val studentPhone: String? = null,
+    val parentPhone: String? = null,
+    val region: String? = null
+)
+
+data class AdminSubscriptionRequest(
+    val status: String,       // "active" or "free"
+    val startAt: String? = null,
+    val endAt: String? = null
 )
 
 data class AdminClassCreateRequest(

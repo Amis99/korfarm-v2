@@ -9,6 +9,7 @@ import com.korfarm.api.contracts.AdminOrgCreateRequest
 import com.korfarm.api.contracts.AdminOrgUpdateRequest
 import com.korfarm.api.contracts.AdminStudentCreateRequest
 import com.korfarm.api.contracts.AdminStudentUpdateRequest
+import com.korfarm.api.contracts.AdminSubscriptionRequest
 import com.korfarm.api.security.AdminGuard
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
@@ -31,17 +32,17 @@ class OrgController(
     }
 
     @PostMapping("/orgs")
-    fun createOrg(@Valid @RequestBody request: AdminOrgCreateRequest): ApiResponse<Map<String, String>> {
+    fun createOrg(@Valid @RequestBody request: AdminOrgCreateRequest): ApiResponse<AdminOrgView> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
         val org = orgService.createOrg(request)
-        return ApiResponse(success = true, data = mapOf("org_id" to org.id))
+        return ApiResponse(success = true, data = orgService.getOrgView(org.id))
     }
 
     @PatchMapping("/orgs/{orgId}")
-    fun updateOrg(@PathVariable orgId: String, @Valid @RequestBody request: AdminOrgUpdateRequest): ApiResponse<Map<String, String>> {
+    fun updateOrg(@PathVariable orgId: String, @Valid @RequestBody request: AdminOrgUpdateRequest): ApiResponse<AdminOrgView> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
-        val org = orgService.updateOrg(orgId, request)
-        return ApiResponse(success = true, data = mapOf("org_id" to org.id))
+        orgService.updateOrg(orgId, request)
+        return ApiResponse(success = true, data = orgService.getOrgView(orgId))
     }
 
     @PostMapping("/orgs/{orgId}/deactivate")
@@ -51,21 +52,36 @@ class OrgController(
         return ApiResponse(success = true, data = mapOf("org_id" to orgId))
     }
 
+    @GetMapping("/orgs/{orgId}/admins")
+    fun listOrgAdmins(@PathVariable orgId: String): ApiResponse<List<AdminOrgAdminView>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        return ApiResponse(success = true, data = orgService.listOrgAdmins(orgId))
+    }
+
     @PostMapping("/orgs/{orgId}/admins")
     fun createOrgAdmin(
         @PathVariable orgId: String,
         @Valid @RequestBody request: AdminOrgAdminCreateRequest
+    ): ApiResponse<AdminOrgView> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        return ApiResponse(success = true, data = orgService.createOrgAdmin(orgId, request))
+    }
+
+    @PostMapping("/orgs/{orgId}/admins/{userId}/remove")
+    fun removeOrgAdmin(
+        @PathVariable orgId: String,
+        @PathVariable userId: String
     ): ApiResponse<Map<String, String>> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
-        val user = orgService.createOrgAdmin(orgId, request)
-        return ApiResponse(success = true, data = mapOf("user_id" to user.id))
+        orgService.removeOrgAdmin(orgId, userId)
+        return ApiResponse(success = true, data = mapOf("user_id" to userId))
     }
 
     @PostMapping("/students")
-    fun createStudent(@Valid @RequestBody request: AdminStudentCreateRequest): ApiResponse<Map<String, String>> {
+    fun createStudent(@Valid @RequestBody request: AdminStudentCreateRequest): ApiResponse<AdminStudentView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val user = orgService.createStudent(request)
-        return ApiResponse(success = true, data = mapOf("user_id" to user.id))
+        return ApiResponse(success = true, data = orgService.getStudentView(user.id))
     }
 
     @GetMapping("/students")
@@ -78,10 +94,10 @@ class OrgController(
     fun updateStudent(
         @PathVariable userId: String,
         @Valid @RequestBody request: AdminStudentUpdateRequest
-    ): ApiResponse<Map<String, String>> {
+    ): ApiResponse<AdminStudentView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        val user = orgService.updateStudent(userId, request)
-        return ApiResponse(success = true, data = mapOf("user_id" to user.id))
+        orgService.updateStudent(userId, request)
+        return ApiResponse(success = true, data = orgService.getStudentView(userId))
     }
 
     @PostMapping("/students/{userId}/disable")
@@ -91,11 +107,34 @@ class OrgController(
         return ApiResponse(success = true, data = mapOf("user_id" to user.id))
     }
 
+    @PostMapping("/students/{userId}/subscription")
+    fun updateSubscription(
+        @PathVariable userId: String,
+        @Valid @RequestBody request: AdminSubscriptionRequest
+    ): ApiResponse<AdminStudentView> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.updateSubscription(userId, request)
+        return ApiResponse(success = true, data = orgService.getStudentView(userId))
+    }
+
     @PostMapping("/classes")
-    fun createClass(@Valid @RequestBody request: AdminClassCreateRequest): ApiResponse<Map<String, String>> {
+    fun createClass(@Valid @RequestBody request: AdminClassCreateRequest): ApiResponse<AdminClassView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val classEntity = orgService.createClass(request)
-        return ApiResponse(success = true, data = mapOf("class_id" to classEntity.id))
+        val orgName = classEntity.orgId.let { orgId ->
+            orgService.getOrgView(orgId).name
+        }
+        val seatCount = 0
+        return ApiResponse(success = true, data = AdminClassView(
+            classId = classEntity.id,
+            name = classEntity.name,
+            levelId = classEntity.levelId,
+            grade = classEntity.grade,
+            orgId = classEntity.orgId,
+            orgName = orgName,
+            seatCount = seatCount,
+            status = classEntity.status
+        ))
     }
 
     @GetMapping("/classes")
