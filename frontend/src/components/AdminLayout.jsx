@@ -29,18 +29,6 @@ function AdminLayout({ children }) {
   return (
     <div className="admin-page">
       <div className={`admin-shell ${open ? "sidebar-open" : ""}`}>
-        {/* Hamburger toggle */}
-        <button
-          className="admin-hamburger"
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="메뉴 열기/닫기"
-        >
-          <span className="material-symbols-outlined">
-            {open ? "close" : "menu"}
-          </span>
-        </button>
-
         {/* Backdrop for mobile */}
         {open && (
           <div
@@ -73,7 +61,21 @@ function AdminLayout({ children }) {
           </nav>
         </aside>
 
-        <main className="admin-main">{children}</main>
+        <main className="admin-main">
+          <div className="admin-toolbar-row">
+            <button
+              className="admin-hamburger"
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label="메뉴 열기/닫기"
+            >
+              <span className="material-symbols-outlined">
+                {open ? "close" : "menu"}
+              </span>
+            </button>
+          </div>
+          {children}
+        </main>
       </div>
     </div>
   );

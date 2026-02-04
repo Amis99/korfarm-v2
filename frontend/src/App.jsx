@@ -45,6 +45,13 @@ import WisdomPostDetailPage from "./pages/WisdomPostDetailPage";
 import AdminWisdomPage from "./pages/AdminWisdomPage";
 import AdminWisdomDetailPage from "./pages/AdminWisdomDetailPage";
 import TestStoragePage from "./pages/TestStoragePage";
+import TestDetailPage from "./pages/TestDetailPage";
+import TestOmrPage from "./pages/TestOmrPage";
+import TestReportPage from "./pages/TestReportPage";
+import TestWrongNotePage from "./pages/TestWrongNotePage";
+import TestHistoryPage from "./pages/TestHistoryPage";
+import AdminTestPage from "./pages/AdminTestPage";
+import AdminTestDetailPage from "./pages/AdminTestDetailPage";
 import HarvestLedgerPage from "./pages/HarvestLedgerPage";
 import SeedLogPage from "./pages/SeedLogPage";
 import DuelMainPage from "./pages/DuelMainPage";
@@ -57,7 +64,7 @@ import ProfilePage from "./pages/ProfilePage";
 function GlobalLogo() {
   const { pathname } = useLocation();
   const hideLogo =
-    pathname === "/" || pathname === "/admin" || pathname === "/ops" || pathname === "/community" || pathname.startsWith("/duel/match");
+    pathname === "/" || pathname.startsWith("/admin") || pathname === "/ops" || pathname === "/community" || pathname.startsWith("/duel/match");
   if (hideLogo) {
     return null;
   }
@@ -122,6 +129,13 @@ function App() {
         <Route path="/admin/wisdom" element={<AdminWisdomPage />} />
         <Route path="/admin/wisdom/:postId" element={<AdminWisdomDetailPage />} />
         <Route path="/tests" element={<TestStoragePage />} />
+        <Route path="/tests/history" element={<TestHistoryPage />} />
+        <Route path="/tests/:testId" element={<TestDetailPage />} />
+        <Route path="/tests/:testId/omr" element={<TestOmrPage />} />
+        <Route path="/tests/:testId/report" element={<TestReportPage />} />
+        <Route path="/tests/:testId/wrong-note" element={<TestWrongNotePage />} />
+        <Route path="/admin/tests" element={<AdminTestPage />} />
+        <Route path="/admin/tests/:testId" element={<AdminTestDetailPage />} />
         <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />
         <Route path="/seed-log" element={<SeedLogPage />} />
         <Route path="/duel" element={<DuelMainPage />} />

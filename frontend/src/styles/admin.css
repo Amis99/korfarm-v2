@@ -18,18 +18,24 @@
 
 .admin-shell {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 1fr;
   min-height: 100vh;
   position: relative;
 }
 
+/* ── Toolbar row (contains hamburger) ── */
+.admin-toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
 /* ── Hamburger button ── */
 .admin-hamburger {
-  display: none;
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 1100;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: var(--admin-panel);
   border: 1px solid rgba(255, 154, 61, 0.25);
   border-radius: 10px;
@@ -37,6 +43,7 @@
   color: var(--admin-text);
   cursor: pointer;
   line-height: 1;
+  z-index: 1100;
 }
 
 .admin-hamburger .material-symbols-outlined {
@@ -48,8 +55,22 @@
   display: none;
 }
 
+.admin-shell.sidebar-open .admin-backdrop {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1040;
+}
+
 /* ── Sidebar ── */
 .admin-side {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  z-index: 1050;
   background: rgba(15, 20, 16, 0.97);
   border-right: 1px solid rgba(255, 154, 61, 0.1);
   padding: 28px 20px;
@@ -57,7 +78,13 @@
   flex-direction: column;
   gap: 24px;
   overflow-y: auto;
+  transform: translateX(-100%);
   transition: transform 0.25s ease;
+}
+
+.admin-side.open {
+  transform: translateX(0);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
 }
 
 .admin-brand {
@@ -102,7 +129,7 @@
 }
 
 .admin-main {
-  padding: 32px 36px 60px;
+  padding: 24px 36px 60px;
   display: grid;
   gap: 26px;
   align-content: start;
@@ -211,57 +238,6 @@
   align-items: center;
 }
 
-/* ── Collapsed sidebar (sub-pages) ── */
-@media (min-width: 769px) {
-  .admin-shell {
-    grid-template-columns: 240px 1fr;
-  }
-
-  /* When sidebar is hidden by default (sub-pages), show hamburger */
-  .admin-shell:not(.sidebar-open) .admin-hamburger {
-    display: block;
-  }
-
-  /* Sub-pages: sidebar hidden by default */
-  .admin-side {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 240px;
-    z-index: 1050;
-    transform: translateX(-100%);
-  }
-
-  .admin-side.open {
-    transform: translateX(0);
-    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
-  }
-
-  /* When sidebar is open, show backdrop */
-  .admin-shell.sidebar-open .admin-backdrop {
-    display: block;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1040;
-  }
-
-  /* Grid: full width since sidebar is overlay */
-  .admin-shell {
-    grid-template-columns: 1fr;
-  }
-
-  /* Hamburger always visible */
-  .admin-hamburger {
-    display: block;
-  }
-
-  .admin-main {
-    padding-top: 60px;
-  }
-}
-
 @media (max-width: 1100px) {
   .admin-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -272,38 +248,11 @@
 }
 
 @media (max-width: 768px) {
-  .admin-shell {
-    grid-template-columns: 1fr;
-  }
-
-  .admin-hamburger {
-    display: block;
-  }
-
   .admin-side {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
     width: 260px;
-    z-index: 1050;
-    transform: translateX(-100%);
-  }
-
-  .admin-side.open {
-    transform: translateX(0);
-    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
-  }
-
-  .admin-shell.sidebar-open .admin-backdrop {
-    display: block;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1040;
   }
 
   .admin-main {
-    padding: 60px 16px 40px;
+    padding: 20px 16px 40px;
   }
 }
