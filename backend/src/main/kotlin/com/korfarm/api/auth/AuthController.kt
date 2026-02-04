@@ -78,7 +78,8 @@ class AuthController(
             region = user.region,
             school = user.school,
             studentPhone = user.studentPhone,
-            parentPhone = user.parentPhone
+            parentPhone = user.parentPhone,
+            profileImageUrl = user.profileImageUrl
         )
         return ApiResponse(success = true, data = profile)
     }

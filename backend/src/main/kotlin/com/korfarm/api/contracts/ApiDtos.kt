@@ -35,6 +35,7 @@ data class UpdateProfileRequest(
     val levelId: String? = null,
     val studentPhone: String? = null,
     val parentPhone: String? = null,
+    val profileImageUrl: String? = null,
     val password: String? = null,
     val learningStartMode: String? = null
 )

@@ -12,7 +12,8 @@ data class UserProfile(
     val region: String? = null,
     val school: String? = null,
     val studentPhone: String? = null,
-    val parentPhone: String? = null
+    val parentPhone: String? = null,
+    val profileImageUrl: String? = null
 )
 
 data class AuthResponseData(

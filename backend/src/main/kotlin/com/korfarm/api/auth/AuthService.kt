@@ -121,6 +121,7 @@ class AuthService(
         request.levelId?.let { user.levelId = it }
         request.studentPhone?.let { user.studentPhone = it }
         request.parentPhone?.let { user.parentPhone = it }
+        request.profileImageUrl?.let { user.profileImageUrl = it }
         request.password?.let {
             if (it.length >= 8) user.passwordHash = passwordEncoder.encode(it)
         }
@@ -141,7 +142,8 @@ class AuthService(
             region = user.region,
             school = user.school,
             studentPhone = user.studentPhone,
-            parentPhone = user.parentPhone
+            parentPhone = user.parentPhone,
+            profileImageUrl = user.profileImageUrl
         )
     }
 
@@ -179,7 +181,8 @@ class AuthService(
                 region = user.region,
                 school = user.school,
                 studentPhone = user.studentPhone,
-                parentPhone = user.parentPhone
+                parentPhone = user.parentPhone,
+                profileImageUrl = user.profileImageUrl
             )
         )
     }

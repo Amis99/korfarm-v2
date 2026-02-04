@@ -48,6 +48,8 @@ function ProfilePage() {
   const [newPassword, setNewPassword] = useState("");
   const [learningStartMode, setLearningStartMode] = useState("calendar");
   const [loginId, setLoginId] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [avatarPreview, setAvatarPreview] = useState("");
 
   useEffect(() => {
     apiGet("/v1/auth/me")
@@ -62,6 +64,7 @@ function ProfilePage() {
         setLearningStartMode(
           (profile.learning_start_date || profile.learningStartDate) ? "day1" : "calendar"
         );
+        setAvatarUrl(profile.profile_image_url || profile.profileImageUrl || "");
       })
       .catch(() => navigate("/login"))
       .finally(() => setLoading(false));
@@ -92,13 +95,20 @@ function ProfilePage() {
       parent_phone: parentPhone.trim(),
       learning_start_mode: learningStartMode,
     };
+    if (avatarPreview || avatarUrl) {
+      body.profile_image_url = avatarPreview || avatarUrl;
+    }
     if (newPassword) body.password = newPassword;
 
     setSaving(true);
     try {
-      await apiPut("/v1/auth/me", body);
+      const result = await apiPut("/v1/auth/me", body);
       setSuccess("저장되었습니다.");
       setNewPassword("");
+      if (avatarPreview) {
+        setAvatarUrl(avatarPreview);
+        setAvatarPreview("");
+      }
     } catch (err) {
       setError("저장에 실패했습니다.");
     } finally {
@@ -121,6 +131,62 @@ function ProfilePage() {
           <div className="auth-card" style={{ maxWidth: 520, margin: "0 auto", width: "100%" }}>
             <h2>내 정보 수정</h2>
             <p>아이디: <strong>{loginId}</strong></p>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, margin: "12px 0" }}>
+              <div
+                style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: "50%",
+                  background: "#ddd",
+                  backgroundImage: (avatarPreview || avatarUrl) ? `url(${avatarPreview || avatarUrl})` : undefined,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  border: "2px solid #eee",
+                  overflow: "hidden",
+                  flexShrink: 0,
+                }}
+              >
+                {!(avatarPreview || avatarUrl) && (
+                  <span className="material-symbols-outlined" style={{ fontSize: 32, color: "#999" }}>person</span>
+                )}
+              </div>
+              <div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="avatar-input"
+                  style={{ display: "none" }}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    if (file.size > 2 * 1024 * 1024) {
+                      setError("이미지는 2MB 이하만 가능합니다.");
+                      return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = (ev) => setAvatarPreview(ev.target.result);
+                    reader.readAsDataURL(file);
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => document.getElementById("avatar-input").click()}
+                  style={{
+                    padding: "6px 14px",
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    borderRadius: 10,
+                    background: "#fff",
+                    fontSize: 13,
+                    cursor: "pointer",
+                  }}
+                >
+                  사진 변경
+                </button>
+              </div>
+            </div>
             <form onSubmit={handleSubmit}>
               <label>
                 이름

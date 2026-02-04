@@ -55,10 +55,17 @@ function StartPage() {
   const [harvestRanking, setHarvestRanking] = useState([]);
   const [duelRanking, setDuelRanking] = useState([]);
   const [seedLog, setSeedLog] = useState([]);
+  const [subActive, setSubActive] = useState(false);
 
   useEffect(() => {
     if (!isLoggedIn) return;
     apiGet("/v1/inventory").then(setInventory).catch(() => {});
+    apiGet("/v1/subscription")
+      .then((sub) => {
+        const st = sub?.status;
+        if (st === "active" || st === "canceled") setSubActive(true);
+      })
+      .catch(() => {});
     apiGet("/v1/seasons/current")
       .then((season) => {
         if (season?.id) {
@@ -77,7 +84,14 @@ function StartPage() {
         const base = import.meta.env.BASE_URL || "/";
         fetch(`${base}daily-reading/${lid}/${dayStr}.json`)
           .then((r) => (r.ok ? r.json() : null))
-          .then((d) => { if (d?.title) setReadingTitle(d.title); })
+          .then((d) => {
+            if (d?.title) { setReadingTitle(d.title); return; }
+            // fallback to 001.json when today's file doesn't exist
+            fetch(`${base}daily-reading/${lid}/001.json`)
+              .then((r2) => (r2.ok ? r2.json() : null))
+              .then((d2) => { if (d2?.title) setReadingTitle(d2.title); })
+              .catch(() => {});
+          })
           .catch(() => {});
       }
     }).catch(() => {});
@@ -89,6 +103,7 @@ function StartPage() {
       .catch(() => {});
   }, [isLoggedIn]);
 
+  const hasSub = isPremium || subActive;
   const displayName = profile?.name || user?.name || "농부";
   const levelId = profile?.level_id || profile?.levelId;
   const displayLevel = levelId || "LV.1";
@@ -103,24 +118,39 @@ function StartPage() {
     : Object.values(inventory?.crops || {}).reduce((a, b) => a + (typeof b === "number" ? b : 0), 0);
   const fertilizerCount = inventory?.fertilizer ?? 0;
 
+  const cropsObj = inventory?.crops || {};
+  const cropWheat = cropsObj.crop_wheat ?? 0;
+  const cropOat = cropsObj.crop_oat ?? 0;
+  const cropRice = cropsObj.crop_rice ?? 0;
+  const cropGrape = cropsObj.crop_grape ?? 0;
+  const seasonScore = (cropWheat * cropOat * cropRice * cropGrape * 10) + totalSeeds;
+
   return (
     <div className="start-page">
       <div className="start-shell">
         <header className="start-header">
           <div className="start-header-top">
-            <div className="start-avatar">
-              <span className="start-level">{levelLabel || displayLevel}</span>
+            <div
+              className="start-avatar"
+              style={
+                (profile?.profile_image_url || profile?.profileImageUrl)
+                  ? { backgroundImage: `url(${profile.profile_image_url || profile.profileImageUrl})` }
+                  : undefined
+              }
+            >
+              {!(profile?.profile_image_url || profile?.profileImageUrl) && (
+                <span className="material-symbols-outlined start-avatar-fallback">person</span>
+              )}
             </div>
             <div className="start-greeting">
               <h1>
                 {displayName} 농부님, <span>안녕하세요!</span>
               </h1>
-              <div className="start-xp">
-                <span>{totalSeeds} 씨앗</span>
-                <span>{totalCrops} 수확물</span>
-              </div>
-              <div className="start-progress">
-                <span />
+              <div className="start-season-score">
+                <span className="material-symbols-outlined">emoji_events</span>
+                <span className="start-level-label">{levelLabel || displayLevel}</span>
+                <span className="start-season-label">시즌 점수</span>
+                <strong>{seasonScore.toLocaleString()}</strong>
               </div>
               <button
                 type="button"
@@ -143,31 +173,16 @@ function StartPage() {
               </button>
             </div>
           </div>
-          <div className="start-stats">
-            <div className="start-stat">
-              <span className="material-symbols-outlined">grass</span>
-              <span>{totalSeeds} 씨앗</span>
-            </div>
-            <div className="start-stat">
-              <span className="material-symbols-outlined">shopping_bag</span>
-              <span>{totalCrops} 수확물</span>
-            </div>
-            <div className="start-stat">
-              <span className="material-symbols-outlined">spa</span>
-              <span>{fertilizerCount} 비료</span>
-            </div>
-          </div>
-          {!isPremium && (
-            <div className="start-cta">
-              <div>
-                <strong>무제한 씨앗 받기!</strong>
-                <p>프리미엄으로 더 큰 성장과 보상을 만나보세요.</p>
-              </div>
-              <button type="button" onClick={() => navigate("/subscription")}>
-                업그레이드
-              </button>
-            </div>
-          )}
+          <button
+            type="button"
+            className="start-sub-btn"
+            onClick={() => navigate("/subscription")}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
+              {hasSub ? "manage_accounts" : "upgrade"}
+            </span>
+            {hasSub ? "구독 관리" : "업그레이드"}
+          </button>
         </header>
 
         <div className="start-grid">
@@ -219,31 +234,31 @@ function StartPage() {
                 <span className="material-symbols-outlined">military_tech</span>
                 <h3>프로 모드</h3>
                 <p>12레벨 심화 학습</p>
-                {!isPremium && <span className="start-lock-badge">구독 필요</span>}
+                {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
               <div className="start-paid-card" onClick={() => navigate("/farm-mode")}>
                 <span className="material-symbols-outlined">agriculture</span>
                 <h3>농장별 모드</h3>
                 <p>영역별 집중 학습</p>
-                {!isPremium && <span className="start-lock-badge">구독 필요</span>}
+                {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
               <div className="start-paid-card" onClick={() => navigate("/writing")}>
                 <span className="material-symbols-outlined">edit_note</span>
                 <h3>지식과 지혜</h3>
                 <p>글쓰기 훈련</p>
-                {!isPremium && <span className="start-lock-badge">구독 필요</span>}
+                {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
               <div className="start-paid-card" onClick={() => navigate("/tests")}>
                 <span className="material-symbols-outlined">quiz</span>
                 <h3>테스트 창고</h3>
                 <p>진단/챕터 시험</p>
-                {!isPremium && <span className="start-lock-badge">구독 필요</span>}
+                {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
               <div className="start-paid-card" onClick={() => navigate("/harvest-ledger")}>
                 <span className="material-symbols-outlined">menu_book</span>
                 <h3>수확 장부</h3>
                 <p>작물 거래 내역</p>
-                {!isPremium && <span className="start-lock-badge">구독 필요</span>}
+                {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
               <div className="start-paid-card" onClick={() => navigate("/seed-log")}>
                 <span className="material-symbols-outlined">history</span>
@@ -277,7 +292,7 @@ function StartPage() {
           </div>
 
           <aside className="start-side">
-            {/* 시즌 수확 랭킹 */}
+            {/* 시즌 점수 랭킹 */}
             <div className="start-rank">
               <h2>
                 <span className="material-symbols-outlined">emoji_events</span>
@@ -287,13 +302,13 @@ function StartPage() {
                 {harvestRanking.length > 0
                   ? harvestRanking.slice(0, 3).map((r, i) => (
                       <li key={r.userId || i}>
-                        {i + 1}위 {r.userName || r.name || "?"} · {r.totalCrops ?? r.score ?? 0} 수확물
+                        {i + 1}위 {r.userName || r.name || "?"} · {(r.value ?? r.totalCrops ?? r.score ?? 0).toLocaleString()}점
                       </li>
                     ))
                   : [
-                      <li key="1">1위 — · 0 수확물</li>,
-                      <li key="2">2위 — · 0 수확물</li>,
-                      <li key="3">3위 — · 0 수확물</li>,
+                      <li key="1">1위 — · 0점</li>,
+                      <li key="2">2위 — · 0점</li>,
+                      <li key="3">3위 — · 0점</li>,
                     ]}
               </ul>
               <Link className="start-rank-link" to="/ranking">

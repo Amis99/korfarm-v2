@@ -39,6 +39,9 @@ class UserEntity(
     @Column(name = "parent_phone")
     var parentPhone: String? = null,
 
+    @Column(name = "profile_image_url", columnDefinition = "MEDIUMTEXT")
+    var profileImageUrl: String? = null,
+
     @Column(name = "diagnostic_opt_in")
     var diagnosticOptIn: Boolean = false,
 
