@@ -1,0 +1,78 @@
+{
+  "_comment": "음운 변동 분석 (GRAMMAR_PHONEME_CHANGE) — moduleKey: phoneme_change",
+  "_comment2": "words 배열: 각 단어의 cells(음절 칸)과 steps(분석 단계). onCorrect.applyCellText로 칸 텍스트 변경.",
+
+  "contentId": "UUID",
+  "contentType": "GRAMMAR_PHONEME_CHANGE",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "음운 변동 분석 01",
+  "description": "음운 변동을 고르고 칸을 수정",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 4, "max": 6 },
+  "area": "GRAMMAR",
+  "subArea": "PHONEME_CHANGE",
+  "competencies": ["VOCAB", "READING"],
+  "tags": [],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": {},
+
+  "payload": {
+    "words": [
+      {
+        "wordId": "w1",
+        "surface": "국밥",
+        "cells": [
+          { "cellNo": 1, "text": "국" },
+          { "cellNo": 2, "text": "밥" }
+        ],
+        "steps": [
+          {
+            "stepId": "st1",
+            "envCellNos": [1],
+            "targetCellNo": 2,
+            "questionType": "PHONEME_RESULT",
+            "_comment_questionType": "PHONEME_RESULT: 변동 결과 고르기 | RULE_EXPLANATION: 규칙 고르기",
+            "choices": [
+              { "id": "A", "text": "구" },
+              { "id": "B", "text": "국" },
+              { "id": "C", "text": "궁" },
+              { "id": "D", "text": "굽" }
+            ],
+            "answerId": "C",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCellText": {
+                "cellNo": 2,
+                "newText": "궁",
+                "_comment": "정답 시 해당 칸의 텍스트를 변경 (시각적 피드백)"
+              }
+            },
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true,
+              "_comment": "retry=true면 오답 시 같은 step을 반복"
+            }
+          },
+          {
+            "stepId": "st2",
+            "envCellNos": [1, 2],
+            "targetCellNo": 1,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "비음화" },
+              { "id": "B", "text": "경음화" },
+              { "id": "C", "text": "구개음화" },
+              { "id": "D", "text": "유음화" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 20 },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          }
+        ]
+      }
+    ]
+  }
+}

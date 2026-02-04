@@ -7,6 +7,19 @@ const formatDuration = (seconds) => {
   return `${mins}:${String(secs).padStart(2, "0")}`;
 };
 
+const SEED_DISPLAY = {
+  seed_wheat: { name: "밀", color: "#e8b84b", gradient: ["%23ffd27f", "%23e8a020"], stroke: "%23c48a18" },
+  seed_oat:   { name: "귀리", color: "#c4a55a", gradient: ["%23e8d4a8", "%23b89840"], stroke: "%239a7a28" },
+  seed_rice:  { name: "쌀", color: "#d4d4c0", gradient: ["%23f0efe4", "%23c8c4a8"], stroke: "%23a8a488" },
+  seed_grape: { name: "포도", color: "#9b6bb0", gradient: ["%23d4b8e8", "%238a50a8"], stroke: "%236a3888" },
+};
+
+function seedSvgUrl(seedType) {
+  const info = SEED_DISPLAY[seedType];
+  if (!info) return null;
+  return `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 28'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${info.gradient[0]}'/><stop offset='1' stop-color='${info.gradient[1]}'/></linearGradient></defs><ellipse cx='20' cy='14' rx='18' ry='10' fill='url(%23g)' stroke='${info.stroke}' stroke-width='2'/></svg>")`;
+}
+
 function ResultSummary({ summary, onExit }) {
   const accuracy = useMemo(() => {
     if (!summary.total) return 0;
@@ -33,9 +46,14 @@ function ResultSummary({ summary, onExit }) {
     const ratio = (seconds - 30) / 30;
     return Math.round(min + (max - min) * ratio);
   }, [summary.timeSpent]);
+  const seedType = summary.seedType || null;
+  const seedInfo = SEED_DISPLAY[seedType] || null;
+  const customSeedBg = seedType ? seedSvgUrl(seedType) : null;
+  const seedIconStyle = customSeedBg ? { backgroundImage: customSeedBg } : {};
   const seedIcons = Array.from({ length: Math.min(earnedSeed, 12) }, (_, idx) => (
-    <span key={`seed-${idx}`} className="seed-icon" />
+    <span key={`seed-${idx}`} className="seed-icon" style={seedIconStyle} />
   ));
+  const seedLabel = seedInfo ? `${seedInfo.name} 씨앗` : "획득 씨앗";
   const progressLabel = total ? `${solved}/${total}` : "-";
   const accuracyClass =
     accuracyPercent === 100 ? "perfect" : accuracyPercent >= 70 ? "pass" : "fail";
@@ -107,7 +125,8 @@ function ResultSummary({ summary, onExit }) {
             </div>
             <div className="result-row">
               <div className="result-row-label">
-                <span>획득 씨앗</span>
+                <span>{seedLabel}</span>
+                {earnedSeed > 0 && <span className="result-value">{earnedSeed}개</span>}
               </div>
               <div className="result-seeds" aria-label={`${earnedSeed}`}>
                 {seedIcons.length ? seedIcons : <span className="result-seed-empty">-</span>}

@@ -1,0 +1,83 @@
+{
+  "_comment": "서술형 연습 (WRITING_DESCRIPTIVE) — moduleKey: worksheet_quiz",
+  "_comment2": "FILL_BLANKS 타입 + render:'MANUSCRIPT'로 원고지 빈칸 채우기. SENTENCE_BUILDING 타입도 지원.",
+
+  "contentId": "UUID",
+  "contentType": "WRITING_DESCRIPTIVE",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "서술형 연습 01",
+  "description": "원고지 빈칸 채우기",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 4, "max": 6 },
+  "area": "WRITING",
+  "subArea": "DESCRIPTIVE",
+  "competencies": ["VOCAB", "READING"],
+  "tags": [],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": {},
+
+  "payload": {
+    "layout": "EXAM_SHEET",
+    "questions": [
+      {
+        "_comment": "FILL_BLANKS: template에 ____를 넣고 blanks로 선택지 제공",
+        "id": "w1",
+        "type": "FILL_BLANKS",
+        "stem": "서술형 문장을 완성하세요.",
+        "render": "MANUSCRIPT",
+        "template": "카는 사실을 '____', '____', '____'로 구분했다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              { "id": "A", "text": "과거에 대한 사실" },
+              { "id": "B", "text": "미래에 대한 사실" }
+            ],
+            "answerId": "A"
+          },
+          {
+            "id": "b2",
+            "choices": [
+              { "id": "A", "text": "역사상의 사실" },
+              { "id": "B", "text": "감정의 사실" }
+            ],
+            "answerId": "A"
+          },
+          {
+            "id": "b3",
+            "choices": [
+              { "id": "A", "text": "역사적 사실" },
+              { "id": "B", "text": "추측의 사실" }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": { "correctDeltaSec": 0, "wrongDeltaSec": 0 }
+      },
+      {
+        "_comment": "SENTENCE_BUILDING: 문장 조각을 순서대로 선택",
+        "id": "w2",
+        "type": "SENTENCE_BUILDING",
+        "stem": "다음 문장을 완성하세요.",
+        "sentenceParts": [
+          {
+            "answer": "주어는",
+            "distractors": ["목적어는", "부사는"]
+          },
+          {
+            "answer": "서술어와",
+            "distractors": ["주어와", "목적어와"]
+          },
+          {
+            "answer": "호응한다.",
+            "distractors": ["대립한다.", "무관하다."]
+          }
+        ],
+        "scoring": { "correctDeltaSec": 0, "wrongDeltaSec": 0 }
+      }
+    ]
+  }
+}

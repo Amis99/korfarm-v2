@@ -1,0 +1,72 @@
+{
+  "_comment": "문장의 짜임 분석 (GRAMMAR_SENTENCE_STRUCTURE) — moduleKey: sentence_structure",
+  "_comment2": "sentences 배열: 각 문장을 토큰으로 분해, roleQueryOrder로 서술어-호응 성분 찾기.",
+
+  "contentId": "UUID",
+  "contentType": "GRAMMAR_SENTENCE_STRUCTURE",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "문장의 짜임 분석 01",
+  "description": "서술어와 호응 성분을 찾는 연습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 4, "max": 6 },
+  "area": "GRAMMAR",
+  "subArea": "SENTENCE_STRUCTURE",
+  "competencies": ["VOCAB", "READING"],
+  "tags": [],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": {},
+
+  "payload": {
+    "sentences": [
+      {
+        "sentenceId": "s1",
+        "tokens": [
+          { "tokenId": "t1", "text": "나는", "role": "SUBJECT_1" },
+          { "tokenId": "t2", "text": "밥을", "role": "OBJECT_1" },
+          { "tokenId": "t3", "text": "먹었다", "role": "PREDICATE_1" }
+        ],
+        "predicateTokens": ["t3"],
+        "roleQueryOrder": [
+          {
+            "predicate": "t3",
+            "targetRoles": ["SUBJECT_1", "OBJECT_1"],
+            "_comment": "서술어 t3에 대해 주어/목적어를 모두 선택해야 정답"
+          }
+        ],
+        "embeddedOrLinked": [
+          {
+            "type": "EMBEDDED",
+            "tokenRefs": ["t1", "t2"],
+            "clauseType": "NOUN_CLAUSE",
+            "_comment": "안긴절/이어진절 정보 (UI 참고용)"
+          }
+        ]
+      },
+      {
+        "sentenceId": "s2",
+        "tokens": [
+          { "tokenId": "t4", "text": "비가", "role": "SUBJECT_1" },
+          { "tokenId": "t5", "text": "내려서", "role": "PREDICATE_1" },
+          { "tokenId": "t6", "text": "길이", "role": "SUBJECT_2" },
+          { "tokenId": "t7", "text": "미끄러웠다", "role": "PREDICATE_2" }
+        ],
+        "predicateTokens": ["t5", "t7"],
+        "roleQueryOrder": [
+          { "predicate": "t5", "targetRoles": ["SUBJECT_1"] },
+          { "predicate": "t7", "targetRoles": ["SUBJECT_2"] }
+        ],
+        "embeddedOrLinked": [
+          {
+            "type": "LINKED",
+            "tokenRefs": ["t4", "t5"],
+            "clauseType": "CAUSAL"
+          }
+        ]
+      }
+    ],
+    "pageStack": true
+  }
+}

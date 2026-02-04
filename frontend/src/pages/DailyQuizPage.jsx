@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EngineShell from "../engine/core/EngineShell";
+import { apiPost } from "../utils/api";
 
 const TOKEN_KEY = "korfarm_token";
 const BASE = import.meta.env.BASE_URL || "/";
@@ -60,6 +61,7 @@ function DailyQuizPage() {
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [farmLogId, setFarmLogId] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -108,14 +110,21 @@ function DailyQuizPage() {
           res.ok && (res.headers.get("content-type") || "").includes("application/json");
 
         const quizRes = await fetch(`${BASE}daily-quiz/${folder}/${dayStr}.json`);
+        let quizData = null;
         if (isJson(quizRes)) {
-          const quizData = await quizRes.json();
+          quizData = await quizRes.json();
           if (!cancelled) setContent(quizData);
         } else {
           const fallbackRes = await fetch(`${BASE}daily-quiz/${folder}/001.json`);
           if (!isJson(fallbackRes)) throw new Error("퀴즈 데이터를 불러올 수 없습니다.");
-          const fallbackData = await fallbackRes.json();
-          if (!cancelled) setContent(fallbackData);
+          quizData = await fallbackRes.json();
+          if (!cancelled) setContent(quizData);
+        }
+        if (quizData && !cancelled) {
+          apiPost("/v1/learning/farm/start", {
+            content_id: quizData.contentId || `daily-quiz-${folder}-${dayStr}`,
+            content_type: "DAILY_QUIZ",
+          }).then((res) => { if (!cancelled) setFarmLogId(res.log_id ?? res.logId); }).catch(() => {});
         }
       } catch (err) {
         if (!cancelled) setError(err.message);
@@ -151,6 +160,7 @@ function DailyQuizPage() {
       content={content}
       moduleKey="worksheet_quiz"
       onExit={() => navigate("/start")}
+      farmLogId={farmLogId}
     />
   );
 }

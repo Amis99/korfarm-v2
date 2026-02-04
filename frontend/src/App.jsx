@@ -39,6 +39,11 @@ import ProModePage from "./pages/ProModePage";
 import FarmModePage from "./pages/FarmModePage";
 import FarmListPage from "./pages/FarmListPage";
 import WritingPage from "./pages/WritingPage";
+import WisdomBoardPage from "./pages/WisdomBoardPage";
+import WisdomWritePage from "./pages/WisdomWritePage";
+import WisdomPostDetailPage from "./pages/WisdomPostDetailPage";
+import AdminWisdomPage from "./pages/AdminWisdomPage";
+import AdminWisdomDetailPage from "./pages/AdminWisdomDetailPage";
 import TestStoragePage from "./pages/TestStoragePage";
 import HarvestLedgerPage from "./pages/HarvestLedgerPage";
 import SeedLogPage from "./pages/SeedLogPage";
@@ -111,6 +116,11 @@ function App() {
         <Route path="/farm-mode" element={<FarmModePage />} />
         <Route path="/farm-mode/:farmId" element={<FarmListPage />} />
         <Route path="/writing" element={<WritingPage />} />
+        <Route path="/writing/post/:postId" element={<WisdomPostDetailPage />} />
+        <Route path="/writing/:levelId/new" element={<WisdomWritePage />} />
+        <Route path="/writing/:levelId" element={<WisdomBoardPage />} />
+        <Route path="/admin/wisdom" element={<AdminWisdomPage />} />
+        <Route path="/admin/wisdom/:postId" element={<AdminWisdomDetailPage />} />
         <Route path="/tests" element={<TestStoragePage />} />
         <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />
         <Route path="/seed-log" element={<SeedLogPage />} />

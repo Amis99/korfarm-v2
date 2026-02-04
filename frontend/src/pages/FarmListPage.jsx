@@ -50,7 +50,7 @@ function FarmListPage() {
     if (!allItems.length) return;
     const contentIds = allItems.map((item) => item.contentId).filter(Boolean);
     if (!contentIds.length) return;
-    apiPost("/v1/learning/farm/progress", { contentIds })
+    apiPost("/v1/learning/farm/progress", { content_ids: contentIds })
       .then((data) => setProgress(data))
       .catch(() => {});
   }, [allItems]);

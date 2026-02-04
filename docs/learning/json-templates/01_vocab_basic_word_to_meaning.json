@@ -1,0 +1,66 @@
+{
+  "_comment": "어휘 기본 학습 (VOCAB_BASIC) — moduleKey: worksheet_quiz",
+  "_comment2": "낱말-뜻 MULTI_CHOICE 문항. pageStack=true면 시험지 2단 레이아웃.",
+
+  "contentId": "UUID",
+  "contentType": "VOCAB_BASIC",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "어휘 기본 학습 01",
+  "description": "낱말-뜻-용례 20문항",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 4, "max": 6 },
+  "area": "VOCAB",
+  "subArea": "BASIC",
+  "competencies": ["VOCAB", "READING"],
+  "tags": [],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": { "sheetBackground": "/learning-paper.jpg" },
+
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+    "questions": [
+      {
+        "id": "vb-1",
+        "type": "MULTI_CHOICE",
+        "questionKind": "WORD_TO_MEANING",
+        "stem": "낱말: 관조",
+        "highlight": {
+          "text": "관조",
+          "_comment": "stem 안에서 하이라이트할 텍스트. range: {start, end} 형식도 가능."
+        },
+        "prompt": "뜻을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "사물이나 현상을 깊이 바라봄" },
+          { "id": "B", "text": "부드럽게 감싸기" },
+          { "id": "C", "text": "서로 힘을 겨룸" },
+          { "id": "D", "text": "마음을 나눔" }
+        ],
+        "answerId": "A",
+        "scoring": {
+          "correctDeltaSec": 0,
+          "wrongDeltaSec": 0,
+          "_comment": "정답/오답 시 남은 시간 증감(초). 0이면 시간 변동 없음."
+        }
+      },
+      {
+        "id": "vb-2",
+        "type": "MULTI_CHOICE",
+        "questionKind": "MEANING_TO_WORD",
+        "stem": "'사물이나 현상을 깊이 바라봄'을 뜻하는 낱말은?",
+        "prompt": "낱말을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "관조" },
+          { "id": "B", "text": "관망" },
+          { "id": "C", "text": "탐색" },
+          { "id": "D", "text": "회상" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 0, "wrongDeltaSec": 0 }
+      }
+    ]
+  }
+}

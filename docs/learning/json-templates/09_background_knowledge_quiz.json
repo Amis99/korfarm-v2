@@ -1,0 +1,44 @@
+{
+  "_comment": "배경지식 퀴즈 (BACKGROUND_KNOWLEDGE_QUIZ) — moduleKey: worksheet_quiz",
+  "_comment2": "일반 worksheet_quiz MULTI_CHOICE 구조. passage 필드로 지문 텍스트 제공 가능.",
+
+  "contentId": "UUID",
+  "contentType": "BACKGROUND_KNOWLEDGE_QUIZ",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "배경지식 퀴즈 01",
+  "description": "주제별 배경지식 퀴즈",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 4, "max": 6 },
+  "area": "BACKGROUND",
+  "subArea": "SCIENCE",
+  "competencies": ["VOCAB", "READING"],
+  "tags": [],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": {},
+
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+    "questions": [
+      {
+        "id": "bg-1",
+        "type": "MULTI_CHOICE",
+        "stem": "광합성에서 빛 에너지를 흡수하는 색소는?",
+        "passage": "식물은 광합성을 통해 이산화탄소와 물로 포도당을 합성한다.",
+        "_comment_passage": "passage 필드를 넣으면 문항 위에 지문 박스가 표시됨 (선택)",
+        "prompt": "색소를 고르세요.",
+        "choices": [
+          { "id": "A", "text": "엽록소" },
+          { "id": "B", "text": "멜라닌" },
+          { "id": "C", "text": "헤모글로빈" },
+          { "id": "D", "text": "카로틴" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 0, "wrongDeltaSec": 0 }
+      }
+    ]
+  }
+}

@@ -38,6 +38,18 @@ export const apiPost = async (path, body) => {
   return payload?.data ?? payload;
 };
 
+export const apiDelete = async (path) => {
+  const response = await fetch(buildUrl(path), {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+  if (!response.ok) {
+    throw new Error(`DELETE ${path} failed: ${response.status}`);
+  }
+  const payload = await response.json();
+  return payload?.data ?? payload;
+};
+
 export const apiPut = async (path, body) => {
   const response = await fetch(buildUrl(path), {
     method: "PUT",

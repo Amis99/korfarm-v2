@@ -1,0 +1,470 @@
+/* ===== Farm Mode – 농장별 모드 ===== */
+
+.farm {
+  --fm-orange: #ff8f2b;
+  --fm-green: #6da475;
+  --fm-dark: #2b221d;
+  --fm-muted: #7b6a62;
+  --fm-border: #e0d8d2;
+  --fm-bg: #faf8f6;
+  --fm-white: #fff;
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(250,248,246,0.88) 0%, rgba(255,238,222,0.88) 100%),
+    url("/farm-bg.jpg") center/cover fixed no-repeat;
+  color: var(--fm-dark);
+  font-family: var(--font-body);
+}
+
+.farm *,
+.farm *::before,
+.farm *::after {
+  box-sizing: border-box;
+}
+
+/* ── 상단 바 ── */
+.farm-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--fm-white);
+  border-bottom: 1px solid var(--fm-border);
+}
+
+.farm-topbar-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.farm-back {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--fm-muted);
+  font-size: 14px;
+}
+
+.farm-back .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.farm-topbar-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ── 히어로 영역 ── */
+.farm-hero {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 20px 8px;
+  text-align: center;
+}
+
+.farm-hero h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.farm-hero p {
+  font-size: 14px;
+  color: var(--fm-muted);
+  margin: 0;
+}
+
+/* ── 농장 그리드 ── */
+.farm-grid {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.farm-card {
+  background: var(--fm-white);
+  border: 1px solid var(--fm-border);
+  border-radius: 20px;
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.farm-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(255, 143, 43, 0.18);
+}
+
+.farm-card-icon {
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.farm-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.farm-card-desc {
+  font-size: 13px;
+  color: var(--fm-muted);
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.farm-card-count {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: var(--fm-white);
+}
+
+/* ── 농장 배너 (FarmListPage) ── */
+.farm-banner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.farm-banner-icon {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.farm-banner-info h2 {
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.farm-banner-info p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--fm-muted);
+}
+
+.farm-banner-count {
+  font-weight: 700;
+  color: var(--fm-orange);
+}
+
+/* ── 필터바 ── */
+.farm-filters {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.farm-filter-select {
+  padding: 7px 12px;
+  border: 1px solid var(--fm-border);
+  border-radius: 6px;
+  background: var(--fm-white);
+  font-size: 13px;
+  color: var(--fm-dark);
+  cursor: pointer;
+  outline: none;
+}
+
+.farm-filter-select:focus {
+  border-color: var(--fm-orange);
+}
+
+/* ── 테이블 (comm-table 패턴 활용) ── */
+.farm-body {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+.farm-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--fm-white);
+  border: 1px solid var(--fm-border);
+  font-size: 14px;
+}
+
+.farm-table thead {
+  background: #f5f2ef;
+}
+
+.farm-table th {
+  padding: 10px 12px;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--fm-muted);
+  text-align: left;
+  border-bottom: 1px solid var(--fm-border);
+}
+
+.farm-th-num {
+  width: 56px;
+  text-align: center !important;
+}
+
+.farm-th-level {
+  width: 90px;
+}
+
+.farm-th-area {
+  width: 100px;
+}
+
+.farm-th-count {
+  width: 60px;
+  text-align: center !important;
+}
+
+.farm-th-status {
+  width: 80px;
+  text-align: center !important;
+}
+
+.farm-row {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.farm-row:hover {
+  background: #fdf8f4;
+}
+
+.farm-row td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0ece8;
+}
+
+.farm-td-num {
+  text-align: center;
+  color: var(--fm-muted);
+  font-size: 13px;
+}
+
+.farm-td-title {
+  font-weight: 600;
+}
+
+.farm-td-level {
+  font-size: 13px;
+  color: var(--fm-muted);
+}
+
+.farm-td-area {
+  font-size: 13px;
+  color: var(--fm-muted);
+}
+
+.farm-td-count {
+  text-align: center;
+  font-size: 13px;
+  color: var(--fm-muted);
+}
+
+.farm-td-status {
+  text-align: center;
+}
+
+.farm-status-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.farm-status-badge.free {
+  background: rgba(109, 164, 117, 0.12);
+  color: var(--fm-green);
+}
+
+.farm-status-badge.premium {
+  background: rgba(255, 143, 43, 0.1);
+  color: var(--fm-orange);
+}
+
+.farm-status-badge.none {
+  background: rgba(187, 187, 187, 0.15);
+  color: #bbb;
+}
+
+.farm-status-badge.started {
+  background: rgba(255, 143, 43, 0.12);
+  color: #ff8f2b;
+}
+
+.farm-status-badge.completed {
+  background: rgba(109, 164, 117, 0.12);
+  color: #6da475;
+}
+
+/* ── 빈 상태 ── */
+.farm-empty {
+  padding: 48px 12px;
+  text-align: center;
+  color: var(--fm-muted);
+  font-size: 15px;
+}
+
+.farm-empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+/* ── 페이지네이션 ── */
+.farm-paging {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.farm-paging button {
+  padding: 6px 12px;
+  border: 1px solid var(--fm-border);
+  background: var(--fm-white);
+  color: var(--fm-dark);
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.farm-paging button.active {
+  background: var(--fm-orange);
+  color: #fff;
+  border-color: var(--fm-orange);
+}
+
+.farm-paging button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 768px) {
+  .farm-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .farm-topbar-inner {
+    padding: 0 12px;
+  }
+
+  .farm-hero {
+    padding: 20px 12px 4px;
+  }
+
+  .farm-hero h2 {
+    font-size: 20px;
+  }
+
+  .farm-grid {
+    padding: 16px 12px 60px;
+  }
+
+  .farm-card {
+    padding: 18px 12px;
+    border-radius: 16px;
+  }
+
+  .farm-card-icon {
+    font-size: 32px;
+  }
+
+  .farm-card-name {
+    font-size: 14px;
+  }
+
+  .farm-banner {
+    padding: 16px 12px 0;
+  }
+
+  .farm-filters {
+    padding: 12px 12px;
+  }
+
+  .farm-body {
+    padding: 0 12px 60px;
+  }
+
+  .farm-th-num,
+  .farm-td-num {
+    display: none;
+  }
+
+  .farm-th-area,
+  .farm-td-area {
+    display: none;
+  }
+
+  .farm-th-count,
+  .farm-td-count {
+    display: none;
+  }
+
+  .farm-th-level,
+  .farm-td-level {
+    width: 70px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .farm-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .farm-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+    padding: 16px;
+  }
+
+  .farm-card-icon {
+    font-size: 36px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .farm-card-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .farm-card-desc {
+    margin-bottom: 6px;
+  }
+
+  .farm-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}

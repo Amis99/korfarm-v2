@@ -1,0 +1,42 @@
+{
+  "_comment": "논리사고력 퀴즈 (LOGIC_REASONING_QUIZ) — moduleKey: worksheet_quiz",
+  "_comment2": "일반 worksheet_quiz MULTI_CHOICE 구조.",
+
+  "contentId": "UUID",
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "논리사고력 01",
+  "description": "논리 추론 문제 풀이",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 4, "max": 6 },
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["READING"],
+  "tags": [],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": {},
+
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+    "questions": [
+      {
+        "id": "lr-1",
+        "type": "MULTI_CHOICE",
+        "stem": "모든 A는 B이다. 모든 B는 C이다. 다음 중 참인 것은?",
+        "prompt": "결론을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "모든 A는 C이다" },
+          { "id": "B", "text": "모든 C는 A이다" },
+          { "id": "C", "text": "일부 C는 A가 아니다" },
+          { "id": "D", "text": "A와 C는 관계없다" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 0, "wrongDeltaSec": 0 }
+      }
+    ]
+  }
+}

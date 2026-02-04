@@ -239,3 +239,21 @@ data class AdminProductRequest(
     val stock: Int? = null,
     val status: String? = null
 )
+
+data class CreateWisdomPostRequest(
+    @field:NotBlank val levelId: String,
+    @field:NotBlank val topicKey: String,
+    @field:NotBlank val topicLabel: String,
+    @field:NotBlank val submissionType: String,
+    val content: String? = null,
+    val attachmentIds: List<String> = emptyList()
+)
+
+data class AdminWisdomFeedbackCreateRequest(
+    @field:NotBlank val comment: String,
+    val correction: String? = null
+)
+
+data class CreateWisdomCommentRequest(
+    @field:NotBlank val content: String
+)

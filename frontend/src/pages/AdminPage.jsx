@@ -57,6 +57,10 @@ function AdminPage() {
               <span className="material-symbols-outlined">tune</span>
               운영 설정
             </a>
+            <Link to="/admin/wisdom">
+              <span className="material-symbols-outlined">menu_book</span>
+              지식과 지혜
+            </Link>
             <Link to="/">랜딩</Link>
             <Link to="/start">스타트</Link>
           </nav>

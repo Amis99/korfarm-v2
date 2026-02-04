@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EngineShell from "../engine/core/EngineShell";
+import { apiPost } from "../utils/api";
 
 const TOKEN_KEY = "korfarm_token";
 const BASE = import.meta.env.BASE_URL || "/";
@@ -60,6 +61,7 @@ function DailyReadingPage() {
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [farmLogId, setFarmLogId] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -108,14 +110,21 @@ function DailyReadingPage() {
           res.ok && (res.headers.get("content-type") || "").includes("application/json");
 
         const readingRes = await fetch(`${BASE}daily-reading/${folder}/${dayStr}.json`);
+        let readingData = null;
         if (isJson(readingRes)) {
-          const readingData = await readingRes.json();
+          readingData = await readingRes.json();
           if (!cancelled) setContent(readingData);
         } else {
           const fallbackRes = await fetch(`${BASE}daily-reading/${folder}/001.json`);
           if (!isJson(fallbackRes)) throw new Error("독해 데이터를 불러올 수 없습니다.");
-          const fallbackData = await fallbackRes.json();
-          if (!cancelled) setContent(fallbackData);
+          readingData = await fallbackRes.json();
+          if (!cancelled) setContent(readingData);
+        }
+        if (readingData && !cancelled) {
+          apiPost("/v1/learning/farm/start", {
+            content_id: readingData.contentId || `daily-reading-${folder}-${dayStr}`,
+            content_type: "DAILY_READING",
+          }).then((res) => { if (!cancelled) setFarmLogId(res.log_id ?? res.logId); }).catch(() => {});
         }
       } catch (err) {
         if (!cancelled) setError(err.message);
@@ -151,6 +160,7 @@ function DailyReadingPage() {
       content={content}
       moduleKey="reading_training"
       onExit={() => navigate("/start")}
+      farmLogId={farmLogId}
     />
   );
 }

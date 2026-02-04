@@ -9,6 +9,23 @@ import "../../styles/learning-engine.css";
 
 const getTimeLimit = (content) => content?.timeLimitSec ?? 180;
 
+const SEED_TYPES = [
+  { type: "seed_wheat", name: "밀", weight: 70 },
+  { type: "seed_oat",   name: "귀리", weight: 70 },
+  { type: "seed_rice",  name: "쌀", weight: 70 },
+  { type: "seed_grape", name: "포도", weight: 30 },
+];
+
+function pickRandomSeed() {
+  const totalWeight = SEED_TYPES.reduce((s, e) => s + e.weight, 0);
+  let roll = Math.random() * totalWeight;
+  for (const seed of SEED_TYPES) {
+    roll -= seed.weight;
+    if (roll <= 0) return seed;
+  }
+  return SEED_TYPES[0];
+}
+
 function EngineShell({ content, moduleKey, onExit, farmLogId }) {
   const timeLimit = getTimeLimit(content);
   const assetBase = import.meta.env.BASE_URL || "/";
@@ -201,6 +218,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId }) {
     } else {
       normalizedSuccess = false;
     }
+    const chosenSeed = earnedSeed > 0 ? pickRandomSeed() : null;
     const endedAt = new Date().toISOString();
     setSummary({
       success: normalizedSuccess,
@@ -210,6 +228,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId }) {
       timeSpent,
       seed: finalSeed,
       earnedSeed,
+      seedType: chosenSeed?.type || null,
       progressSolved: total,
       progressTotal,
       timeLimit,
@@ -249,7 +268,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId }) {
         log_id: farmLogId,
         score: accuracy,
         earned_seed: earnedSeed,
-        seed_type: content?.seedReward?.seedType,
+        seed_type: chosenSeed?.type || content?.seedReward?.seedType,
         accuracy,
       }).catch(() => {});
     }

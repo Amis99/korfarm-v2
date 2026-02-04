@@ -1,0 +1,149 @@
+/* ===== ManuscriptGrid – 원고지 ===== */
+
+.ms-wrapper {
+  width: 100%;
+}
+
+.ms-grid {
+  display: grid;
+  gap: 0;
+  border: 2px solid #b8a99a;
+  border-radius: 4px;
+  background: #fffef9;
+  cursor: text;
+  user-select: none;
+  overflow-x: auto;
+}
+
+.ms-grid.ms-readonly {
+  cursor: default;
+}
+
+.ms-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e0d8d2;
+  font-size: 15px;
+  font-family: var(--font-body);
+  color: #2b221d;
+  min-width: 24px;
+  min-height: 24px;
+  line-height: 1;
+}
+
+.ms-cell.ms-filled {
+  background: rgba(255, 143, 43, 0.04);
+}
+
+.ms-textarea-hidden {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.ms-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ms-count {
+  font-size: 13px;
+  color: #7b6a62;
+  margin-left: auto;
+}
+
+/* ── 페이지 네비게이션 ── */
+.ms-page-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.ms-page-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e0d8d2;
+  border-radius: 6px;
+  background: #fff;
+  color: #2b221d;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ms-page-btn:hover:not(:disabled) {
+  background: #f5f2ef;
+  border-color: #b8a99a;
+}
+
+.ms-page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.ms-page-indicator {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2b221d;
+  min-width: 48px;
+  text-align: center;
+}
+
+/* ── 페이지 추가/삭제 버튼 ── */
+.ms-page-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ms-page-action-btn {
+  padding: 4px 12px;
+  border: 1px solid #e0d8d2;
+  border-radius: 4px;
+  background: #fff;
+  color: #7b6a62;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ms-page-action-btn:hover {
+  background: #f5f2ef;
+  border-color: #b8a99a;
+}
+
+.ms-page-action-remove {
+  color: #e74c3c;
+}
+
+.ms-page-action-remove:hover {
+  background: #fef2f0;
+  border-color: #e74c3c;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 720px) {
+  .ms-cell {
+    font-size: 13px;
+    min-width: 18px;
+    min-height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ms-cell {
+    font-size: 11px;
+    min-width: 14px;
+    min-height: 14px;
+  }
+}

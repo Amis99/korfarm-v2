@@ -10,17 +10,19 @@ export function useAuth() {
     if (!token) return null;
     try {
       const payload = JSON.parse(atob(token.split(".")[1]));
+      const roles = payload.roles || (payload.role ? [payload.role] : []);
       return {
         id: payload.sub || payload.userId,
         name: payload.name || "농부",
-        role: payload.role || "FREE",
+        roles,
       };
     } catch {
       return null;
     }
   }, [token]);
 
-  const isPremium = user?.role === "PAID" || user?.role === "ADMIN";
+  const roles = user?.roles || [];
+  const isPremium = roles.includes("PAID") || roles.includes("ADMIN") || roles.includes("PREMIUM");
 
   return { isLoggedIn, user, token, isPremium };
 }

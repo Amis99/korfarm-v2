@@ -1,0 +1,96 @@
+{
+  "_comment": "사전 학습 (VOCAB_DICTIONARY) — moduleKey: worksheet_quiz",
+  "_comment2": "words 배열(사전 단어 목록) + questions 배열. 카드형 사전 UI 렌더링.",
+
+  "contentId": "UUID",
+  "contentType": "VOCAB_DICTIONARY",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "사전 학습 01",
+  "description": "표준국어대사전 기준의 사전 의미 학습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 4, "max": 6 },
+  "area": "VOCAB",
+  "subArea": "DICTIONARY",
+  "competencies": ["VOCAB", "READING"],
+  "tags": ["dictionary"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": { "sheetBackground": "/learning-paper.jpg" },
+
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+
+    "words": [
+      {
+        "wordId": "w1",
+        "headword": "발",
+        "pos": "명사",
+        "sense": "사람이나 동물의 다리 맨 끝부분.",
+        "definitionParts": ["사람이나", "동물의", "다리", "맨 끝부분"],
+        "exampleSentences": ["발을 다치다."]
+      }
+    ],
+
+    "questions": [
+      {
+        "_comment": "questionKind별 동작:",
+        "_comment2": "  DICT_MEANING_TO_WORD: 뜻 → 낱말 고르기 (headwordBlank=true)",
+        "_comment3": "  HOMONYM_EXAMPLE: 동음이의어 예문 고르기 (headwordBlank=true)",
+        "_comment4": "  WORD_TO_DICT_FILL: 빈칸 채워 뜻 완성 (template + blanks 사용)",
+
+        "id": "q1",
+        "type": "MULTI_CHOICE",
+        "questionKind": "DICT_MEANING_TO_WORD",
+        "linkWordId": "w1",
+        "definitionText": "사람이나 동물의 다리 맨 끝부분.",
+        "headwordBlank": true,
+        "prompt": "낱말을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "발" },
+          { "id": "B", "text": "손" },
+          { "id": "C", "text": "팔" },
+          { "id": "D", "text": "목" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 0, "wrongDeltaSec": 0 }
+      },
+      {
+        "id": "q2",
+        "type": "FILL_BLANKS",
+        "questionKind": "WORD_TO_DICT_FILL",
+        "linkWordId": "w1",
+        "template": "____이나 ____의 ____끝부분.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              { "id": "A", "text": "사람" },
+              { "id": "B", "text": "물건" }
+            ],
+            "answerId": "A"
+          },
+          {
+            "id": "b2",
+            "choices": [
+              { "id": "A", "text": "동물" },
+              { "id": "B", "text": "식물" }
+            ],
+            "answerId": "A"
+          },
+          {
+            "id": "b3",
+            "choices": [
+              { "id": "A", "text": "다리 맨" },
+              { "id": "B", "text": "팔 맨" }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": { "correctDeltaSec": 0, "wrongDeltaSec": 0 }
+      }
+    ]
+  }
+}
