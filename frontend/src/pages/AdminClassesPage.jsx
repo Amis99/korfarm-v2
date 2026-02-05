@@ -580,7 +580,7 @@ function AdminClassesPage() {
                         type="button"
                         onClick={handlePanelBulkAssign}
                         disabled={actionLoading}
-                        style={{ marginTop: 6, fontSize: 12 }}
+                        style={{ marginTop: 6, fontSize: 12, background: "#ff7f2a", color: "#fff" }}
                       >
                         선택한 {panelSelectedIds.size}명 배정
                       </button>
@@ -795,7 +795,7 @@ function AdminClassesPage() {
                     type="button"
                     onClick={handleBulkAssign}
                     disabled={actionLoading}
-                    style={{ marginTop: 8, fontSize: 13 }}
+                    style={{ marginTop: 8, fontSize: 13, background: "#ff7f2a", color: "#fff" }}
                   >
                     선택한 {selectedStudentIds.size}명 배정
                   </button>
