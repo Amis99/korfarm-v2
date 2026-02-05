@@ -30,7 +30,7 @@ class MembershipApprovalController(
             orgId ?: userOrg
         }
         val result = membershipApprovalService.getPendingMemberships(effectiveOrgId)
-        return ApiResponse.success(result)
+        return ApiResponse(success = true, data = result)
     }
 
     @PostMapping("/{membershipId}/approve")
@@ -41,7 +41,7 @@ class MembershipApprovalController(
         @RequestBody(required = false) request: MembershipApproveRequest?
     ): ApiResponse<MembershipApprovalResult> {
         val result = membershipApprovalService.approveMembership(membershipId, user.userId)
-        return ApiResponse.success(result)
+        return ApiResponse(success = true, data = result)
     }
 
     @PostMapping("/{membershipId}/reject")
@@ -52,6 +52,6 @@ class MembershipApprovalController(
         @RequestBody request: MembershipRejectRequest
     ): ApiResponse<MembershipApprovalResult> {
         val result = membershipApprovalService.rejectMembership(membershipId, user.userId, request.reason)
-        return ApiResponse.success(result)
+        return ApiResponse(success = true, data = result)
     }
 }

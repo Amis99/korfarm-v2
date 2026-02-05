@@ -26,21 +26,7 @@ class AuthController(
 ) {
     @PostMapping("/signup")
     fun signup(@Valid @RequestBody request: SignupRequest): ApiResponse<AuthResponseData> {
-        val data = authService.signup(
-            request.loginId,
-            request.password,
-            request.name,
-            request.orgId,
-            request.region,
-            request.school,
-            request.gradeLabel,
-            request.levelId,
-            request.studentPhone,
-            request.parentPhone,
-            request.diagnosticOptIn,
-            request.accountType,
-            request.learningStartMode
-        )
+        val data = authService.signup(request)
         return ApiResponse(success = true, data = data)
     }
 
