@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.test.TestPaperEntity
 import com.korfarm.api.contracts.SubmitRequest
 import com.korfarm.api.contracts.WritingSubmitRequest
 import com.korfarm.api.learning.LearningAttemptEntity

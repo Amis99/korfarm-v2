@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { apiPost } from "../utils/adminApi";
+import { useEffect, useMemo, useState } from "react";
+import { apiPost, apiGet } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
@@ -19,6 +19,7 @@ const mapSeasons = (items) =>
 
 function AdminSeasonsPage() {
   const { data: seasons, loading, error } = useAdminList("/v1/admin/seasons", SEASONS, mapSeasons);
+  const [rows, setRows] = useState(SEASONS);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -26,16 +27,20 @@ function AdminSeasonsPage() {
   const [actionError, setActionError] = useState("");
   const [actionLoading, setActionLoading] = useState(false);
 
+  useEffect(() => {
+    setRows(seasons);
+  }, [seasons]);
+
   const filteredSeasons = useMemo(() => {
     const term = search.trim().toLowerCase();
-    return seasons.filter((season) => {
+    return rows.filter((season) => {
       if (statusFilter !== "all" && season.status !== statusFilter) return false;
       if (!term) return true;
       return [season.name, season.status, season.start, season.end]
         .filter(Boolean)
         .some((v) => v.toLowerCase().includes(term));
     });
-  }, [seasons, search, statusFilter]);
+  }, [rows, search, statusFilter]);
 
   const handleCreate = async () => {
     setActionError("");
@@ -53,7 +58,8 @@ function AdminSeasonsPage() {
       });
       setShowCreateModal(false);
       setFormData({ levelId: "", name: "", startAt: "", endAt: "" });
-      window.location.reload();
+      const refreshed = await apiGet("/v1/admin/seasons");
+      setRows(mapSeasons(refreshed));
     } catch (err) {
       setActionError(err.message);
     } finally {

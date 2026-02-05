@@ -133,6 +133,15 @@ class ShopService(
     }
 
     @Transactional
+    fun updateOrderStatus(orderId: String, status: String) {
+        val order = orderRepository.findById(orderId).orElseThrow {
+            ApiException("NOT_FOUND", "주문을 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+        }
+        order.status = status
+        orderRepository.save(order)
+    }
+
+    @Transactional
     fun createProduct(request: AdminProductRequest): ProductView {
         val product = ProductEntity(
             id = IdGenerator.newId("prod"),

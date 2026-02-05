@@ -3,6 +3,7 @@ import { apiGet, apiPost, apiPatch } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { useAuth } from "../hooks/useAuth";
 import AdminLayout from "../components/AdminLayout";
+import OrgSelect from "../components/OrgSelect";
 import "../styles/admin-detail.css";
 
 const mapClassList = (items) =>
@@ -534,7 +535,7 @@ function AdminClassesPage() {
                             return subStatus === "active";
                           });
                           // 반의 소속 기관에 따라 필터링 (국어농장 본사면 전체, 제휴기관이면 해당 기관만)
-                          const isHQOrg = selectedClass.orgName === "국어농장 본사";
+                          const isHQOrg = selectedClass.orgId === "org_hq";
                           const orgFilteredStudents = isHQOrg
                             ? paidStudents
                             : paidStudents.filter((s) => (s.orgId || s.org_id) === selectedClass.orgId);
@@ -606,15 +607,12 @@ function AdminClassesPage() {
             <div className="admin-modal-field">
               <label>기관</label>
               {isHQ ? (
-                <select
+                <OrgSelect
+                  orgs={orgs}
                   value={formData.orgId}
-                  onChange={(e) => setFormData({ ...formData, orgId: e.target.value })}
-                >
-                  <option value="">기관 선택</option>
-                  {orgs.map((o) => (
-                    <option key={o.id} value={o.id}>{o.name}</option>
-                  ))}
-                </select>
+                  onChange={(v) => setFormData({ ...formData, orgId: v })}
+                  placeholder="기관 선택"
+                />
               ) : (
                 <input
                   value={orgs.length > 0 ? orgs[0].name : ""}
@@ -743,7 +741,7 @@ function AdminClassesPage() {
                         return subStatus === "active";
                       });
                       // 반의 소속 기관에 따라 필터링 (국어농장 본사면 전체, 제휴기관이면 해당 기관만)
-                      const isHQOrg = editClass.orgName === "국어농장 본사";
+                      const isHQOrg = editClass.orgId === "org_hq";
                       const orgFilteredStudents = isHQOrg
                         ? paidStudents
                         : paidStudents.filter((s) => (s.orgId || s.org_id) === editClass.orgId);

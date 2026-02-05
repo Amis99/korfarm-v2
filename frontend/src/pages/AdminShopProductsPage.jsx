@@ -28,7 +28,10 @@ function AdminShopProductsPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editTarget, setEditTarget] = useState(null);
   const [formData, setFormData] = useState({ name: "", price: 0, stock: 0 });
+  const [editFormData, setEditFormData] = useState({ name: "", price: 0, stock: 0, status: "active" });
   const [actionError, setActionError] = useState("");
   const [actionLoading, setActionLoading] = useState(false);
 
@@ -77,6 +80,43 @@ function AdminShopProductsPage() {
     try {
       await apiDelete(`/v1/admin/shop/products/${productId}`);
       setRows((prev) => prev.filter((r) => r.id !== productId));
+    } catch (err) {
+      setActionError(err.message);
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const openEditModal = (product) => {
+    setEditTarget(product);
+    setEditFormData({
+      name: product.title || "",
+      price: product.price ?? 0,
+      stock: product.stock ?? 0,
+      status: product.status || "active",
+    });
+    setActionError("");
+    setShowEditModal(true);
+  };
+
+  const handleEdit = async () => {
+    setActionError("");
+    if (!editFormData.name.trim()) {
+      setActionError("상품명을 입력해 주세요.");
+      return;
+    }
+    setActionLoading(true);
+    try {
+      const result = await apiPatch(`/v1/admin/shop/products/${editTarget.id}`, {
+        name: editFormData.name.trim(),
+        price: Number(editFormData.price) || 0,
+        stock: Number(editFormData.stock) || 0,
+        status: editFormData.status,
+      });
+      const mapped = mapProducts([result])[0];
+      setRows((prev) => prev.map((r) => (r.id === editTarget.id ? mapped : r)));
+      setShowEditModal(false);
+      setEditTarget(null);
     } catch (err) {
       setActionError(err.message);
     } finally {
@@ -136,6 +176,7 @@ function AdminShopProductsPage() {
                 <tr>
                   <th>상품명</th>
                   <th>카테고리</th>
+                  <th>가격</th>
                   <th>재고</th>
                   <th>상태</th>
                   <th>조치</th>
@@ -146,6 +187,7 @@ function AdminShopProductsPage() {
                   <tr key={product.id}>
                     <td>{product.title}</td>
                     <td>{product.category}</td>
+                    <td>{product.price?.toLocaleString() ?? 0}원</td>
                     <td>{product.stock}</td>
                     <td>
                       <span className="status-pill" data-status={product.status}>
@@ -153,15 +195,26 @@ function AdminShopProductsPage() {
                       </span>
                     </td>
                     <td>
-                      <button
-                        className="admin-detail-btn secondary"
-                        type="button"
-                        onClick={() => handleDelete(product.id)}
-                        disabled={actionLoading}
-                        style={{ fontSize: "12px", padding: "4px 8px" }}
-                      >
-                        삭제
-                      </button>
+                      <div className="admin-detail-actions">
+                        <button
+                          className="admin-detail-btn"
+                          type="button"
+                          onClick={() => openEditModal(product)}
+                          disabled={actionLoading}
+                          style={{ fontSize: "12px", padding: "4px 8px" }}
+                        >
+                          수정
+                        </button>
+                        <button
+                          className="admin-detail-btn secondary"
+                          type="button"
+                          onClick={() => handleDelete(product.id)}
+                          disabled={actionLoading}
+                          style={{ fontSize: "12px", padding: "4px 8px" }}
+                        >
+                          삭제
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -175,6 +228,57 @@ function AdminShopProductsPage() {
           </div>
         </div>
       </div>
+
+      {showEditModal && editTarget ? (
+        <div className="admin-modal-overlay" onClick={() => setShowEditModal(false)}>
+          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>상품 수정</h2>
+            {actionError ? <p className="admin-detail-note error">{actionError}</p> : null}
+            <div className="admin-modal-field">
+              <label>상품명</label>
+              <input
+                value={editFormData.name}
+                onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
+                placeholder="상품명"
+              />
+            </div>
+            <div className="admin-modal-field">
+              <label>가격</label>
+              <input
+                type="number"
+                value={editFormData.price}
+                onChange={(e) => setEditFormData({ ...editFormData, price: e.target.value })}
+              />
+            </div>
+            <div className="admin-modal-field">
+              <label>재고</label>
+              <input
+                type="number"
+                value={editFormData.stock}
+                onChange={(e) => setEditFormData({ ...editFormData, stock: e.target.value })}
+              />
+            </div>
+            <div className="admin-modal-field">
+              <label>상태</label>
+              <select
+                value={editFormData.status}
+                onChange={(e) => setEditFormData({ ...editFormData, status: e.target.value })}
+              >
+                <option value="active">판매중</option>
+                <option value="sold_out">품절</option>
+              </select>
+            </div>
+            <div className="admin-modal-actions">
+              <button className="admin-detail-btn" onClick={handleEdit} disabled={actionLoading}>
+                저장
+              </button>
+              <button className="admin-detail-btn secondary" onClick={() => setShowEditModal(false)}>
+                취소
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       {showCreateModal ? (
         <div className="admin-modal-overlay" onClick={() => setShowCreateModal(false)}>

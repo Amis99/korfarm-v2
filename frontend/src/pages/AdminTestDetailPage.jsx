@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { apiGet, apiPost, apiPut, apiDelete } from "../utils/api";
+import { apiGet, apiPost, apiPut, apiDelete } from "../utils/adminApi";
+import AdminLayout from "../components/AdminLayout";
 import "../styles/test-storage.css";
 
 const TABS = [
@@ -47,7 +48,7 @@ function AdminTestDetailPage() {
   }, [testId]);
 
   useEffect(() => {
-    apiGet(`/v1/test-storage/${testId}`)
+    apiGet(`/v1/admin/test-papers/${testId}`)
       .then(t => {
         setTest(t);
         setInfoForm({
@@ -229,7 +230,7 @@ function AdminTestDetailPage() {
     }
   };
 
-  if (loading) return <div className="ts-page ts-center"><p>불러오는 중...</p></div>;
+  if (loading) return <AdminLayout><div className="ts-page ts-center"><p>불러오는 중...</p></div></AdminLayout>;
   if (!test) return null;
 
   // group questions into rows of 5 for OMR
@@ -239,6 +240,7 @@ function AdminTestDetailPage() {
   }
 
   return (
+    <AdminLayout>
     <div className="ts-page ts-admin">
       <div className="ts-back-row">
         <Link to="/admin/tests" className="ts-back-link">
@@ -540,6 +542,7 @@ function AdminTestDetailPage() {
         </div>
       )}
     </div>
+    </AdminLayout>
   );
 }
 

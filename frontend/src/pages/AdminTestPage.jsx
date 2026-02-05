@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { apiGet, apiPost } from "../utils/api";
+import { apiGet, apiPost } from "../utils/adminApi";
+import AdminLayout from "../components/AdminLayout";
 import "../styles/test-storage.css";
 
 function AdminTestPage() {
@@ -48,13 +49,8 @@ function AdminTestPage() {
   };
 
   return (
+    <AdminLayout>
     <div className="ts-page ts-admin">
-      <div className="ts-back-row">
-        <Link to="/admin" className="ts-back-link">
-          <span className="material-symbols-outlined">arrow_back</span> 관리자
-        </Link>
-      </div>
-
       <header className="ts-header">
         <h1>테스트 관리</h1>
         <button className="ts-btn ts-btn-primary" onClick={() => setShowCreate(!showCreate)}>
@@ -142,6 +138,7 @@ function AdminTestPage() {
         </table>
       )}
     </div>
+    </AdminLayout>
   );
 }
 

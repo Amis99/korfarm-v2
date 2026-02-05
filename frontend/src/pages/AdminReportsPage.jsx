@@ -40,13 +40,13 @@ function AdminReportsPage() {
     });
   }, [rows, search, statusFilter]);
 
-  const handleApprove = async (postId) => {
+  const handleApprove = async (reportId) => {
     setActionError("");
     setActionLoading(true);
     try {
-      await apiPost(`/v1/admin/boards/materials/${postId}/approve`);
+      await apiPost(`/v1/admin/reports/${reportId}/approve`);
       setRows((prev) =>
-        prev.map((r) => (r.targetId === postId ? { ...r, status: "done" } : r))
+        prev.map((r) => (r.id === reportId ? { ...r, status: "done" } : r))
       );
     } catch (err) {
       setActionError(err.message);
@@ -55,13 +55,13 @@ function AdminReportsPage() {
     }
   };
 
-  const handleReject = async (postId) => {
+  const handleReject = async (reportId) => {
     setActionError("");
     setActionLoading(true);
     try {
-      await apiPost(`/v1/admin/boards/materials/${postId}/reject`);
+      await apiPost(`/v1/admin/reports/${reportId}/reject`);
       setRows((prev) =>
-        prev.map((r) => (r.targetId === postId ? { ...r, status: "rejected" } : r))
+        prev.map((r) => (r.id === reportId ? { ...r, status: "rejected" } : r))
       );
     } catch (err) {
       setActionError(err.message);
@@ -128,7 +128,7 @@ function AdminReportsPage() {
                         <button
                           className="admin-detail-btn"
                           type="button"
-                          onClick={() => handleApprove(report.targetId)}
+                          onClick={() => handleApprove(report.id)}
                           disabled={actionLoading || report.status === "done"}
                           style={{ fontSize: "12px", padding: "4px 8px" }}
                         >
@@ -137,7 +137,7 @@ function AdminReportsPage() {
                         <button
                           className="admin-detail-btn secondary"
                           type="button"
-                          onClick={() => handleReject(report.targetId)}
+                          onClick={() => handleReject(report.id)}
                           disabled={actionLoading || report.status === "done"}
                           style={{ fontSize: "12px", padding: "4px 8px" }}
                         >

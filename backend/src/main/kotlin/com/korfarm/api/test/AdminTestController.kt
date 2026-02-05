@@ -70,6 +70,13 @@ class AdminTestController(
         return ApiResponse(success = true, data = mapOf("testId" to entity.id))
     }
 
+    @GetMapping("/{testId}")
+    fun getTestPaper(@PathVariable testId: String): ApiResponse<TestPaperEntity> {
+        requireAdmin()
+        val entity = testService.getTestPaper(testId)
+        return ApiResponse(success = true, data = entity)
+    }
+
     @GetMapping("/{testId}/questions")
     fun getQuestions(@PathVariable testId: String): ApiResponse<List<TestQuestionView>> {
         requireAdmin()

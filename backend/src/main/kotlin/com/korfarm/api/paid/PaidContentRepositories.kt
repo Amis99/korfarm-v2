@@ -1,5 +1,6 @@
 package com.korfarm.api.paid
 
+import com.korfarm.api.test.TestPaperEntity
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface ContentRepository : JpaRepository<ContentEntity, String> {

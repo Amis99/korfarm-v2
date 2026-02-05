@@ -9,6 +9,7 @@ import com.korfarm.api.contracts.AdminTestAnswersRequest
 import com.korfarm.api.contracts.AdminTestCreateRequest
 import com.korfarm.api.contracts.AdminTestGradeRequest
 import com.korfarm.api.contracts.AdminWritingFeedbackRequest
+import com.korfarm.api.test.TestPaperEntity
 import com.korfarm.api.files.FileRepository
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus

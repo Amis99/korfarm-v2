@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { apiPost } from "../utils/adminApi";
+import { useEffect, useMemo, useState } from "react";
+import { apiPost, apiGet } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
@@ -51,6 +51,7 @@ function AdminAssignmentsPage() {
     loading: feedbackLoading,
     error: feedbackError,
   } = useAdminList("/v1/admin/writing/submissions", FEEDBACK, mapFeedbackList);
+  const [rows, setRows] = useState(ASSIGNMENTS);
   const [assignmentSearch, setAssignmentSearch] = useState("");
   const [assignmentFilter, setAssignmentFilter] = useState("all");
   const [feedbackSearch, setFeedbackSearch] = useState("");
@@ -64,16 +65,20 @@ function AdminAssignmentsPage() {
   const [actionError, setActionError] = useState("");
   const [actionLoading, setActionLoading] = useState(false);
 
+  useEffect(() => {
+    setRows(assignments);
+  }, [assignments]);
+
   const filteredAssignments = useMemo(() => {
     const term = assignmentSearch.trim().toLowerCase();
-    return assignments.filter((a) => {
+    return rows.filter((a) => {
       if (assignmentFilter !== "all" && a.status !== assignmentFilter) return false;
       if (!term) return true;
       return [a.title, a.type, a.status, a.due]
         .filter(Boolean)
         .some((v) => v.toLowerCase().includes(term));
     });
-  }, [assignments, assignmentSearch, assignmentFilter]);
+  }, [rows, assignmentSearch, assignmentFilter]);
 
   const filteredFeedback = useMemo(() => {
     const term = feedbackSearch.trim().toLowerCase();
@@ -102,7 +107,8 @@ function AdminAssignmentsPage() {
       });
       setShowCreateModal(false);
       setFormData({ title: "", assignmentType: "writing", dueAt: "" });
-      window.location.reload();
+      const refreshed = await apiGet("/v1/admin/assignments");
+      setRows(mapAssignmentList(refreshed));
     } catch (err) {
       setActionError(err.message);
     } finally {

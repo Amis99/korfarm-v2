@@ -91,42 +91,7 @@ class ContentVersionEntity(
     }
 }
 
-@Entity
-@Table(name = "test_papers")
-class TestPaperEntity(
-    @Id
-    var id: String,
-
-    @Column(name = "org_id", nullable = false)
-    var orgId: String,
-
-    @Column(nullable = false)
-    var title: String,
-
-    @Column(name = "pdf_file_id", nullable = false)
-    var pdfFileId: String,
-
-    @Column(nullable = false)
-    var status: String,
-
-    @Column(name = "created_at", nullable = false)
-    var createdAt: LocalDateTime = LocalDateTime.now(),
-
-    @Column(name = "updated_at", nullable = false)
-    var updatedAt: LocalDateTime = LocalDateTime.now()
-) {
-    @PrePersist
-    fun onCreate() {
-        val now = LocalDateTime.now()
-        createdAt = now
-        updatedAt = now
-    }
-
-    @PreUpdate
-    fun onUpdate() {
-        updatedAt = LocalDateTime.now()
-    }
-}
+// TestPaperEntity moved to com.korfarm.api.test.TestEntities
 
 @Entity
 @Table(name = "writing_submissions")

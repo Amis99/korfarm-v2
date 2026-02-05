@@ -35,7 +35,8 @@ class OrgService(
 ) {
     @Transactional(readOnly = true)
     fun listActiveOrgs(): List<OrgSummary> {
-        return orgRepository.findByStatusOrderByNameAsc("active").map { org ->
+        // org_hq(국어농장)를 맨 위로, 나머지는 이름순 정렬
+        return orgRepository.findByStatusOrderByHqFirstThenNameAsc("active").map { org ->
             OrgSummary(id = org.id, name = org.name)
         }
     }
@@ -55,7 +56,8 @@ class OrgService(
         val adminMemberships = orgMembershipRepository.findByStatus("active")
             .filter { it.role == "HQ_ADMIN" || it.role == "ORG_ADMIN" }
             .groupBy { it.orgId }
-        return orgRepository.findAll().sortedBy { it.name }.map { org ->
+        // org_hq(국어농장)를 맨 위로, 나머지는 이름순 정렬
+        return orgRepository.findAll().sortedWith(compareBy({ if (it.id == "org_hq") 0 else 1 }, { it.name })).map { org ->
             val admins = (adminMemberships[org.id] ?: emptyList()).mapNotNull { m ->
                 val u = userMap[m.userId] ?: return@mapNotNull null
                 AdminOrgAdminView(

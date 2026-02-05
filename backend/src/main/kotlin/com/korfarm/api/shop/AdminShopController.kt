@@ -57,5 +57,20 @@ class AdminShopController(
         featureFlagService.requireEnabled("feature.shop.mall")
         return ApiResponse(success = true, data = shopService.listOrdersAdmin())
     }
+
+    @PatchMapping("/orders/{orderId}")
+    fun updateOrderStatus(
+        @PathVariable orderId: String,
+        @RequestBody body: Map<String, String>
+    ): ApiResponse<Map<String, String>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        featureFlagService.requireEnabled("feature.shop.mall")
+        val status = body["status"]
+            ?: throw com.korfarm.api.common.ApiException(
+                "BAD_REQUEST", "status is required", org.springframework.http.HttpStatus.BAD_REQUEST
+            )
+        shopService.updateOrderStatus(orderId, status)
+        return ApiResponse(success = true, data = mapOf("orderId" to orderId, "status" to status))
+    }
 }
 
