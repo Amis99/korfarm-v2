@@ -528,9 +528,19 @@ function AdminClassesPage() {
                         {(() => {
                           const assignedIds = new Set(panelStudents.map((s) => s.userId || s.user_id));
                           const term = panelStudentSearch.trim().toLowerCase();
-                          const filtered = panelAllStudents.filter((s) => {
+                          // 유료 회원(구독 활성)만 필터링
+                          const paidStudents = panelAllStudents.filter((s) => {
+                            const subStatus = s.subscriptionStatus || s.subscription_status;
+                            return subStatus === "active";
+                          });
+                          // 반의 소속 기관에 따라 필터링 (국어농장 본사면 전체, 제휴기관이면 해당 기관만)
+                          const isHQOrg = selectedClass.orgName === "국어농장 본사";
+                          const orgFilteredStudents = isHQOrg
+                            ? paidStudents
+                            : paidStudents.filter((s) => (s.orgId || s.org_id) === selectedClass.orgId);
+                          const filtered = orgFilteredStudents.filter((s) => {
                             if (!term) return true;
-                            const fields = [s.name, s.loginId || s.login_id, s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id];
+                            const fields = [s.name, s.loginId || s.login_id, s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id, s.orgName || s.org_name];
                             return fields.filter(Boolean).some((v) => v.toLowerCase().includes(term));
                           });
                           if (filtered.length === 0) {
@@ -538,6 +548,7 @@ function AdminClassesPage() {
                           }
                           return filtered.map((s) => {
                             const uid = s.userId || s.user_id;
+                            const orgName = s.orgName || s.org_name;
                             const isAssigned = assignedIds.has(uid);
                             const isSelected = panelSelectedIds.has(uid);
                             return (
@@ -554,7 +565,7 @@ function AdminClassesPage() {
                                   onChange={() => !isAssigned && togglePanelSelection(uid)} />
                                 <span style={{ fontWeight: 600, color: "#222" }}>{s.name || "-"}</span>
                                 <span style={{ color: "#555" }}>
-                                  {[s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id].filter(Boolean).join(" / ") || "-"}
+                                  {[orgName, s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id].filter(Boolean).join(" / ") || "-"}
                                 </span>
                                 {isAssigned ? <span style={{ color: "#2980b9", fontSize: 10, marginLeft: "auto" }}>배정됨</span> : null}
                               </label>
@@ -726,9 +737,19 @@ function AdminClassesPage() {
                     {(() => {
                       const assignedIds = new Set(classStudents.map((s) => s.userId || s.user_id));
                       const term = studentSearch.trim().toLowerCase();
-                      const filtered = allStudents.filter((s) => {
+                      // 유료 회원(구독 활성)만 필터링
+                      const paidStudents = allStudents.filter((s) => {
+                        const subStatus = s.subscriptionStatus || s.subscription_status;
+                        return subStatus === "active";
+                      });
+                      // 반의 소속 기관에 따라 필터링 (국어농장 본사면 전체, 제휴기관이면 해당 기관만)
+                      const isHQOrg = editClass.orgName === "국어농장 본사";
+                      const orgFilteredStudents = isHQOrg
+                        ? paidStudents
+                        : paidStudents.filter((s) => (s.orgId || s.org_id) === editClass.orgId);
+                      const filtered = orgFilteredStudents.filter((s) => {
                         if (!term) return true;
-                        const fields = [s.loginId || s.login_id, s.name, s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id];
+                        const fields = [s.loginId || s.login_id, s.name, s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id, s.orgName || s.org_name];
                         return fields.filter(Boolean).some((v) => v.toLowerCase().includes(term));
                       });
                       if (filtered.length === 0) {
@@ -736,7 +757,7 @@ function AdminClassesPage() {
                       }
                       return filtered.map((s) => {
                         const uid = s.userId || s.user_id;
-                        const loginId = s.loginId || s.login_id;
+                        const orgName = s.orgName || s.org_name;
                         const isAssigned = assignedIds.has(uid);
                         const isSelected = selectedStudentIds.has(uid);
                         return (
@@ -760,7 +781,7 @@ function AdminClassesPage() {
                               onChange={() => !isAssigned && toggleStudentSelection(uid)}
                             />
                             <span style={{ fontWeight: 600, color: "#222" }}>{s.name || "-"}</span>
-                            <span style={{ color: "#555" }}>{[s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id].filter(Boolean).join(" / ") || "-"}</span>
+                            <span style={{ color: "#555" }}>{[orgName, s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id].filter(Boolean).join(" / ") || "-"}</span>
                             {isAssigned ? <span style={{ color: "#2980b9", fontSize: 11, marginLeft: "auto" }}>배정됨</span> : null}
                           </label>
                         );
