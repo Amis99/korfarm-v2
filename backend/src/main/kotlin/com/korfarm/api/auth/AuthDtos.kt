@@ -13,7 +13,9 @@ data class UserProfile(
     val school: String? = null,
     val studentPhone: String? = null,
     val parentPhone: String? = null,
-    val profileImageUrl: String? = null
+    val profileImageUrl: String? = null,
+    val pendingApproval: Boolean = false,
+    val orgId: String? = null
 )
 
 data class AuthResponseData(

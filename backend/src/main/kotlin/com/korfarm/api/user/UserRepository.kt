@@ -23,4 +23,19 @@ interface UserRepository : JpaRepository<UserEntity, String> {
         @Param("lastLoginAt") lastLoginAt: LocalDateTime,
         @Param("updatedAt") updatedAt: LocalDateTime
     ): Int
+
+    // 학부모 매칭용: 이름과 전화번호로 학생 조회
+    @Query("SELECT u FROM UserEntity u WHERE u.name = :name AND u.studentPhone = :studentPhone AND u.status = 'active'")
+    fun findByNameAndStudentPhone(
+        @Param("name") name: String,
+        @Param("studentPhone") studentPhone: String
+    ): UserEntity?
+
+    // 학부모 매칭용: 이름, 학생 전화번호, 학부모 전화번호로 학생 조회
+    @Query("SELECT u FROM UserEntity u WHERE u.name = :name AND u.studentPhone = :studentPhone AND u.parentPhone = :parentPhone AND u.status = 'active'")
+    fun findByNameAndStudentPhoneAndParentPhone(
+        @Param("name") name: String,
+        @Param("studentPhone") studentPhone: String,
+        @Param("parentPhone") parentPhone: String
+    ): UserEntity?
 }

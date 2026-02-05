@@ -4,6 +4,7 @@ import "../styles/admin.css";
 
 const NAV_ITEMS = [
   { to: "/admin", icon: "dashboard", label: "대시보드" },
+  { to: "/admin/approvals", icon: "how_to_reg", label: "가입 승인" },
   { to: "/admin/orgs", icon: "business", label: "기관 관리" },
   { to: "/admin/classes", icon: "school", label: "반 관리" },
   { to: "/admin/students", icon: "group", label: "학생 관리" },
@@ -38,13 +39,23 @@ function AdminLayout({ children }) {
         )}
 
         <aside className={`admin-side ${open ? "open" : ""}`}>
-          <div className="admin-brand" aria-label="국어농장 Admin">
-            <img
-              className="admin-logo"
-              src={import.meta.env.BASE_URL + "korfarm-logo.png"}
-              alt="국어농장"
-            />
-            <span>Admin</span>
+          <div className="admin-side-header">
+            <div className="admin-brand" aria-label="국어농장 Admin">
+              <img
+                className="admin-logo"
+                src={import.meta.env.BASE_URL + "korfarm-logo.png"}
+                alt="국어농장"
+              />
+              <span>Admin</span>
+            </div>
+            <button
+              className="admin-side-close"
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="메뉴 닫기"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
           </div>
           <nav className="admin-nav">
             {NAV_ITEMS.map((item) => (
@@ -66,12 +77,10 @@ function AdminLayout({ children }) {
             <button
               className="admin-hamburger"
               type="button"
-              onClick={() => setOpen((v) => !v)}
-              aria-label="메뉴 열기/닫기"
+              onClick={() => setOpen(true)}
+              aria-label="메뉴 열기"
             >
-              <span className="material-symbols-outlined">
-                {open ? "close" : "menu"}
-              </span>
+              <span className="material-symbols-outlined">menu</span>
             </button>
           </div>
           {children}

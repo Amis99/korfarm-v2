@@ -56,6 +56,9 @@ function StartPage() {
   const [duelRanking, setDuelRanking] = useState([]);
   const [seedLog, setSeedLog] = useState([]);
   const [subActive, setSubActive] = useState(false);
+  const [adminLevelOverride, setAdminLevelOverride] = useState("");
+
+  const isAdmin = user?.roles?.some((r) => r === "HQ_ADMIN" || r === "ORG_ADMIN");
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -75,6 +78,12 @@ function StartPage() {
       })
       .catch(() => {});
     apiGet("/v1/auth/me").then((data) => {
+      // pending 상태 확인: 승인 대기 중이면 pending 페이지로 리다이렉트
+      const isPending = data?.pending_approval || data?.pendingApproval;
+      if (isPending) {
+        navigate("/pending");
+        return;
+      }
       setProfile(data);
       const lid = data?.level_id || data?.levelId;
       const lsd = data?.learning_start_date || data?.learningStartDate || null;
@@ -95,6 +104,7 @@ function StartPage() {
           .catch(() => {});
       }
     }).catch(() => {});
+    // 관리자인 경우 기본 레벨을 override 초기값으로 설정
     apiGet("/v1/ledger")
       .then((entries) => {
         const seeds = (entries || []).filter((e) => e.currencyType === "seed").slice(0, 5);
@@ -103,9 +113,29 @@ function StartPage() {
       .catch(() => {});
   }, [isLoggedIn]);
 
+  // 관리자 레벨 변경 시 daily reading 재로드
+  useEffect(() => {
+    if (!isAdmin || !adminLevelOverride) return;
+    const lsd = profile?.learning_start_date || profile?.learningStartDate || null;
+    const di = calcDayIndex(lsd);
+    const dayStr = String(di).padStart(3, "0");
+    const base = import.meta.env.BASE_URL || "/";
+    fetch(`${base}daily-reading/${adminLevelOverride}/${dayStr}.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.title) { setReadingTitle(d.title); return; }
+        fetch(`${base}daily-reading/${adminLevelOverride}/001.json`)
+          .then((r2) => (r2.ok ? r2.json() : null))
+          .then((d2) => { if (d2?.title) setReadingTitle(d2.title); })
+          .catch(() => {});
+      })
+      .catch(() => {});
+  }, [adminLevelOverride, isAdmin, profile]);
+
   const hasSub = isPremium || subActive;
   const displayName = profile?.name || user?.name || "농부";
-  const levelId = profile?.level_id || profile?.levelId;
+  const baseLevelId = profile?.level_id || profile?.levelId;
+  const levelId = (isAdmin && adminLevelOverride) ? adminLevelOverride : baseLevelId;
   const displayLevel = levelId || "LV.1";
   const levelLabel = LEVEL_LABEL_MAP[levelId] || levelId || "";
   const learningStartDate = profile?.learning_start_date || profile?.learningStartDate || null;
@@ -152,25 +182,67 @@ function StartPage() {
                 <span className="start-season-label">시즌 점수</span>
                 <strong>{seasonScore.toLocaleString()}</strong>
               </div>
-              <button
-                type="button"
-                onClick={() => navigate("/profile")}
-                style={{
-                  marginTop: 6,
-                  padding: "6px 14px",
-                  border: "1px solid rgba(0,0,0,0.15)",
-                  borderRadius: 10,
-                  background: "#fff",
-                  fontSize: 13,
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 4,
-                }}
-              >
-                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>settings</span>
-                내 정보 수정
-              </button>
+              {isAdmin ? (
+                <div style={{ marginTop: 6, display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                  <select
+                    value={adminLevelOverride || baseLevelId || ""}
+                    onChange={(e) => setAdminLevelOverride(e.target.value)}
+                    style={{
+                      padding: "6px 10px",
+                      borderRadius: 10,
+                      border: "1px solid rgba(0,0,0,0.15)",
+                      background: "#fff",
+                      fontSize: 13,
+                      color: "#222",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <option value="" disabled>레벨 선택</option>
+                    {Object.entries(LEVEL_LABEL_MAP).map(([key, label]) => (
+                      <option key={key} value={key}>{label}</option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    onClick={() => navigate("/admin")}
+                    style={{
+                      padding: "6px 14px",
+                      border: "1px solid rgba(240,108,36,0.4)",
+                      borderRadius: 10,
+                      background: "rgba(240,108,36,0.15)",
+                      fontSize: 13,
+                      cursor: "pointer",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 4,
+                      color: "#f06c24",
+                    }}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>admin_panel_settings</span>
+                    관리자 페이지
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => navigate("/profile")}
+                  style={{
+                    marginTop: 6,
+                    padding: "6px 14px",
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    borderRadius: 10,
+                    background: "#fff",
+                    fontSize: 13,
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 4,
+                  }}
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: 16 }}>settings</span>
+                  내 정보 수정
+                </button>
+              )}
             </div>
           </div>
           <button

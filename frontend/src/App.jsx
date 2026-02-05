@@ -60,6 +60,8 @@ import DuelMatchPage from "./pages/DuelMatchPage";
 import DuelResultPage from "./pages/DuelResultPage";
 import AssignmentsPage from "./pages/AssignmentsPage";
 import ProfilePage from "./pages/ProfilePage";
+import PendingApprovalPage from "./pages/PendingApprovalPage";
+import AdminMembershipApprovalPage from "./pages/AdminMembershipApprovalPage";
 
 function GlobalLogo() {
   const { pathname } = useLocation();
@@ -96,7 +98,9 @@ function App() {
         <Route path="/shop/products/:productId" element={<ProductDetailPage />} />
         <Route path="/payment/result" element={<PaymentResultPage />} />
         <Route path="/subscription" element={<SubscriptionPage />} />
+        <Route path="/pending" element={<PendingApprovalPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/approvals" element={<AdminMembershipApprovalPage />} />
         <Route path="/admin/orgs" element={<AdminOrgsPage />} />
         <Route path="/admin/classes" element={<AdminClassesPage />} />
         <Route path="/admin/students" element={<AdminStudentsPage />} />

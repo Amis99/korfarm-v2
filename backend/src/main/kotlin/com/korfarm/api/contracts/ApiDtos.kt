@@ -16,15 +16,24 @@ data class SignupRequest(
     @field:NotBlank @field:Size(min = 8) val password: String,
     @field:NotBlank val name: String,
     @field:NotBlank val orgId: String,
-    @field:NotBlank val region: String,
-    @field:NotBlank val school: String,
-    @field:NotBlank val gradeLabel: String,
-    @field:NotBlank val levelId: String,
-    @field:NotBlank val studentPhone: String,
-    @field:NotBlank val parentPhone: String,
+
+    // 학생 필수, 기관관리자 선택, 학부모 불필요
+    val region: String? = null,
+    val school: String? = null,
+    val gradeLabel: String? = null,
+    val levelId: String? = null,
+    val studentPhone: String? = null,
+    val parentPhone: String? = null,
     val diagnosticOptIn: Boolean = false,
+    val learningStartMode: String? = "calendar",
+
+    // 회원 유형: student, parent, org_admin
     val accountType: String? = "student",
-    val learningStartMode: String? = "calendar"
+
+    // 학부모 전용 (기존 학생 매칭용)
+    val linkedStudentName: String? = null,
+    val linkedStudentPhone: String? = null,
+    val linkedParentPhone: String? = null
 )
 
 data class UpdateProfileRequest(

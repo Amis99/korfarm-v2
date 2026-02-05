@@ -72,6 +72,27 @@ class OrgMembershipEntity(
     @Column(nullable = false)
     var status: String,
 
+    @Column(name = "requested_at")
+    var requestedAt: LocalDateTime? = null,
+
+    @Column(name = "approved_at")
+    var approvedAt: LocalDateTime? = null,
+
+    @Column(name = "approved_by")
+    var approvedBy: String? = null,
+
+    @Column(name = "rejection_reason")
+    var rejectionReason: String? = null,
+
+    @Column(name = "linked_student_name")
+    var linkedStudentName: String? = null,
+
+    @Column(name = "linked_student_phone")
+    var linkedStudentPhone: String? = null,
+
+    @Column(name = "linked_parent_phone")
+    var linkedParentPhone: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 
@@ -83,6 +104,9 @@ class OrgMembershipEntity(
         val now = LocalDateTime.now()
         createdAt = now
         updatedAt = now
+        if (requestedAt == null) {
+            requestedAt = now
+        }
     }
 
     @PreUpdate
