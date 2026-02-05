@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { apiGet } from "../utils/api";
+import { apiGet, apiDelete } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/wisdom.css";
 
@@ -23,6 +23,7 @@ function WisdomBoardPage() {
   const [topicKey, setTopicKey] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState(null);
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}wisdom-topics/${levelId}.json`)
@@ -50,10 +51,26 @@ function WisdomBoardPage() {
   const totalPages = Math.max(1, Math.ceil(posts.length / PER_PAGE));
   const visible = posts.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
-  const fmtDate = (d) => {
+  const handleDelete = async (e, postId) => {
+    e.stopPropagation();
+    if (!confirm("정말 삭제하시겠습니까?")) return;
+    setDeleting(postId);
+    try {
+      await apiDelete(`/v1/wisdom/posts/${postId}`);
+      setPosts((prev) => prev.filter((p) => p.post_id !== postId));
+    } catch {
+      alert("삭제에 실패했습니다.");
+    } finally {
+      setDeleting(null);
+    }
+  };
+
+  const fmtDateTime = (d) => {
     if (!d) return "";
     const dt = new Date(d);
-    return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, "0")}-${String(dt.getDate()).padStart(2, "0")}`;
+    const date = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, "0")}-${String(dt.getDate()).padStart(2, "0")}`;
+    const time = `${String(dt.getHours()).padStart(2, "0")}:${String(dt.getMinutes()).padStart(2, "0")}`;
+    return `${date} ${time}`;
   };
 
   return (
@@ -119,7 +136,8 @@ function WisdomBoardPage() {
                   <th className="wis-th-author">작성자</th>
                   <th className="wis-th-like">좋아요</th>
                   <th className="wis-th-feedback">피드백</th>
-                  <th className="wis-th-date">작성일</th>
+                  <th className="wis-th-date">작성일시</th>
+                  <th className="wis-th-action"></th>
                 </tr>
               </thead>
               <tbody>
@@ -144,7 +162,18 @@ function WisdomBoardPage() {
                         {post.has_feedback ? "완료" : "대기"}
                       </span>
                     </td>
-                    <td className="wis-td-date">{fmtDate(post.created_at)}</td>
+                    <td className="wis-td-date">{fmtDateTime(post.created_at)}</td>
+                    <td className="wis-td-action">
+                      {post.is_own && (
+                        <button
+                          className="wis-delete-btn"
+                          onClick={(e) => handleDelete(e, post.post_id)}
+                          disabled={deleting === post.post_id}
+                        >
+                          {deleting === post.post_id ? "..." : "삭제"}
+                        </button>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>

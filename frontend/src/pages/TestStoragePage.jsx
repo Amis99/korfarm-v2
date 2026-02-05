@@ -73,8 +73,14 @@ function TestStoragePage() {
   return (
     <div className="ts-page">
       <header className="ts-header">
-        <h1>테스트 창고</h1>
-        <p className="ts-subtitle">시험을 선택하고 OMR 답안을 입력하세요.</p>
+        <div>
+          <h1>테스트 창고</h1>
+          <p className="ts-subtitle">시험을 선택하고 OMR 답안을 입력하세요.</p>
+        </div>
+        <Link to="/start" className="ts-back-link">
+          <span className="material-symbols-outlined">home</span>
+          홈으로
+        </Link>
       </header>
 
       <div className="ts-toolbar">

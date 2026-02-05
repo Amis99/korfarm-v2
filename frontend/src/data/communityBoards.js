@@ -4,6 +4,7 @@ export const COMMUNITY_BOARDS = [
     name: "학습 신청 게시판",
     description: "학습 신청과 학습 일정 공유",
     tag: "학습 신청",
+    requiresPaid: true,
   },
   {
     id: "community",
@@ -16,6 +17,7 @@ export const COMMUNITY_BOARDS = [
     name: "학습 질문 게시판",
     description: "학습 관련 질문과 답변",
     tag: "질문 답변",
+    requiresPaid: true,
   },
   {
     id: "materials",
@@ -24,6 +26,7 @@ export const COMMUNITY_BOARDS = [
     tag: "자료 공유",
     requiresApproval: true,
     writeRole: "admin",
+    requiresPaid: true,
   },
 ];
 

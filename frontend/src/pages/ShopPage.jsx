@@ -59,6 +59,10 @@ function ShopPage() {
   return (
     <div className="commerce-page">
       <div className="commerce-wrap commerce-hero">
+        <Link to="/start" className="commerce-back-link">
+          <span className="material-symbols-outlined">arrow_back</span>
+          홈으로
+        </Link>
         <span className="commerce-pill">교재 · 교구 쇼핑</span>
         <h1>국어농장 쇼핑몰</h1>
         <p>

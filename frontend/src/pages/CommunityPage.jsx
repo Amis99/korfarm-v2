@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { apiGet } from "../utils/api";
 import {
   COMMUNITY_BOARDS,
   COMMUNITY_POSTS,
@@ -22,7 +23,7 @@ const statusLabel = (status) => {
 
 function CommunityPage() {
   const [params] = useSearchParams();
-  const { user } = useAuth();
+  const { user, isPremium, isLoggedIn } = useAuth();
   const isAdmin = user?.roles?.includes("ADMIN") || user?.roles?.includes("HQ_ADMIN") || user?.roles?.includes("ORG_ADMIN");
 
   const boardId = params.get("board") || DEFAULT_BOARD_ID;
@@ -33,7 +34,22 @@ function CommunityPage() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [selectedId, setSelectedId] = useState(null);
+  const [subActive, setSubActive] = useState(false);
   const postsPerPage = 20;
+
+  // 구독 상태 확인
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    apiGet("/v1/subscription")
+      .then((sub) => {
+        const st = sub?.status;
+        if (st === "active" || st === "canceled") setSubActive(true);
+      })
+      .catch(() => {});
+  }, [isLoggedIn]);
+
+  // 유료 회원 여부 (토큰 roles 또는 구독 상태)
+  const hasPremium = isPremium || subActive || isAdmin;
 
   useEffect(() => {
     setSelectedId(null);
@@ -95,6 +111,9 @@ function CommunityPage() {
               className={`comm-tab ${board.id === b.id ? "active" : ""}`}
             >
               {b.name}
+              {b.requiresPaid && !hasPremium && (
+                <span className="material-symbols-outlined comm-tab-lock">lock</span>
+              )}
               {b.writeRole === "admin" && (
                 <span className="comm-tab-badge">관리자</span>
               )}
@@ -104,6 +123,29 @@ function CommunityPage() {
       </nav>
 
       <div className="comm-body">
+        {/* 유료 회원 전용 게시판 접근 제한 */}
+        {board.requiresPaid && !hasPremium ? (
+          <div className="comm-upgrade-prompt">
+            <div className="comm-upgrade-icon">
+              <span className="material-symbols-outlined">lock</span>
+            </div>
+            <h3>유료 회원 전용 게시판입니다</h3>
+            <p>
+              <strong>{board.name}</strong>은 유료 회원만 이용할 수 있습니다.<br />
+              프리미엄 회원이 되시면 모든 게시판과 학습 콘텐츠를 이용하실 수 있습니다.
+            </p>
+            <div className="comm-upgrade-actions">
+              <Link to="/subscription" className="comm-upgrade-btn">
+                <span className="material-symbols-outlined">workspace_premium</span>
+                프리미엄 가입하기
+              </Link>
+              <Link to="/community?board=community" className="comm-upgrade-link">
+                무료 커뮤니티 게시판 이용하기
+              </Link>
+            </div>
+          </div>
+        ) : (
+        <>
         {/* 게시판 헤더 */}
         <div className="comm-board-head">
           <div>
@@ -251,6 +293,8 @@ function CommunityPage() {
               </div>
             )}
           </>
+        )}
+        </>
         )}
       </div>
     </div>
