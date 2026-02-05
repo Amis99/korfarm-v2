@@ -173,22 +173,27 @@ class OrgService(
     }
 
     @Transactional(readOnly = true)
-    fun listStudentsAdmin(): List<AdminStudentView> {
+    fun listStudentsAdmin(filterOrgId: String? = null): List<AdminStudentView> {
         val orgMap = orgRepository.findAll().associateBy { it.id }
         val classMap = classRepository.findAll().associateBy { it.id }
         val allMemberships = orgMembershipRepository.findByStatus("active")
-        val adminUserIds = allMemberships
-            .filter { it.role == "HQ_ADMIN" || it.role == "ORG_ADMIN" }
-            .map { it.userId }.toSet()
         val studentMemberships = allMemberships.filter { it.role == "STUDENT" }
+        val studentUserIds = studentMemberships.map { it.userId }.toSet()
         val orgByUser = studentMemberships.groupBy { it.userId }.mapValues { it.value.first().orgId }
         val allClassMemberships = classMembershipRepository.findAll()
             .filter { it.status == "active" }
             .groupBy { it.userId }
-        // 관리자가 아닌 사용자만 학생 목록에 표시
-        val students = userRepository.findAll()
-            .filter { it.id !in adminUserIds }
+        // STUDENT 역할인 사용자만 표시 (부모/관리자 제외)
+        var students = userRepository.findAll()
+            .filter { it.id in studentUserIds }
             .sortedBy { it.createdAt }
+        // 기관 필터: ORG_ADMIN인 경우 해당 기관 소속 학생만
+        if (filterOrgId != null) {
+            val orgStudentIds = studentMemberships
+                .filter { it.orgId == filterOrgId }
+                .map { it.userId }.toSet()
+            students = students.filter { it.id in orgStudentIds }
+        }
         return students.map { user ->
             val orgId = orgByUser[user.id]
             val orgName = orgId?.let { orgMap[it]?.name }

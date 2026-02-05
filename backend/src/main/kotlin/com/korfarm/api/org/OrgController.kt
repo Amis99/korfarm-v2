@@ -87,7 +87,15 @@ class OrgController(
     @GetMapping("/students")
     fun listStudents(): ApiResponse<List<AdminStudentView>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        return ApiResponse(success = true, data = orgService.listStudentsAdmin())
+        val roles = com.korfarm.api.security.SecurityUtils.currentRoles()
+        val filterOrgId = if (roles.contains("HQ_ADMIN")) {
+            null // 본사관리자: 전체 학생
+        } else {
+            // 기관관리자: 자기 기관 소속 학생만
+            val userId = com.korfarm.api.security.SecurityUtils.currentUserId()
+            orgService.listUserOrgs(userId!!).firstOrNull()?.id
+        }
+        return ApiResponse(success = true, data = orgService.listStudentsAdmin(filterOrgId))
     }
 
     @PatchMapping("/students/{userId}")
