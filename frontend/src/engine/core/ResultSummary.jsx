@@ -9,9 +9,10 @@ const formatDuration = (seconds) => {
 
 const SEED_DISPLAY = {
   seed_wheat: { name: "밀", color: "#e8b84b", gradient: ["%23ffd27f", "%23e8a020"], stroke: "%23c48a18" },
-  seed_oat:   { name: "귀리", color: "#c4a55a", gradient: ["%23e8d4a8", "%23b89840"], stroke: "%239a7a28" },
   seed_rice:  { name: "쌀", color: "#d4d4c0", gradient: ["%23f0efe4", "%23c8c4a8"], stroke: "%23a8a488" },
+  seed_corn:  { name: "옥수수", color: "#f5c542", gradient: ["%23ffe066", "%23e8b020"], stroke: "%23c49518" },
   seed_grape: { name: "포도", color: "#9b6bb0", gradient: ["%23d4b8e8", "%238a50a8"], stroke: "%236a3888" },
+  seed_apple: { name: "사과", color: "#e85050", gradient: ["%23ff7070", "%23d03030"], stroke: "%23a82020" },
 };
 
 function seedSvgUrl(seedType) {

@@ -34,11 +34,11 @@ class AssignmentController(
     fun submit(
         @PathVariable assignmentId: String,
         @Valid @RequestBody request: AssignmentSubmitRequest
-    ): ApiResponse<Map<String, String>> {
+    ): ApiResponse<AssignmentSubmitResponse> {
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        val submissionId = assignmentService.submitAssignment(userId, assignmentId, request)
-        return ApiResponse(success = true, data = mapOf("submission_id" to submissionId))
+        val response = assignmentService.submitAssignment(userId, assignmentId, request)
+        return ApiResponse(success = true, data = response)
     }
 
     @GetMapping("/{assignmentId}/progress")

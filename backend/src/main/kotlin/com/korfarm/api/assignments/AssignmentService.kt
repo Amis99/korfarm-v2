@@ -7,6 +7,9 @@ import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.contracts.AdminAssignmentCreateRequest
 import com.korfarm.api.contracts.AdminAssignmentUpdateRequest
 import com.korfarm.api.contracts.AssignmentSubmitRequest
+import com.korfarm.api.economy.EconomyService
+import com.korfarm.api.economy.SeedCatalogRepository
+import com.korfarm.api.learning.SeedRewardPolicy
 import com.korfarm.api.org.ClassMembershipRepository
 import com.korfarm.api.org.OrgMembershipRepository
 import org.springframework.http.HttpStatus
@@ -21,7 +24,9 @@ class AssignmentService(
     private val assignmentSubmissionRepository: AssignmentSubmissionRepository,
     private val classMembershipRepository: ClassMembershipRepository,
     private val orgMembershipRepository: OrgMembershipRepository,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
+    private val economyService: EconomyService,
+    private val seedCatalogRepository: SeedCatalogRepository
 ) {
     @Transactional
     fun createAssignment(orgId: String, createdBy: String, request: AdminAssignmentCreateRequest): AssignmentEntity {
@@ -97,15 +102,17 @@ class AssignmentService(
     }
 
     @Transactional
-    fun submitAssignment(userId: String, assignmentId: String, request: AssignmentSubmitRequest): String {
+    fun submitAssignment(userId: String, assignmentId: String, request: AssignmentSubmitRequest): AssignmentSubmitResponse {
         val existing = assignmentSubmissionRepository.findByAssignmentIdAndUserId(assignmentId, userId)
         if (existing != null) {
+            // 재제출: 씨앗 보상 없음
             existing.contentJson = objectMapper.writeValueAsString(request.content)
             existing.status = "submitted"
             existing.submittedAt = LocalDateTime.now()
             assignmentSubmissionRepository.save(existing)
-            return existing.id
+            return AssignmentSubmitResponse(submissionId = existing.id, seedGrant = null)
         }
+        // 첫 제출: 씨앗 보상 지급
         val submission = AssignmentSubmissionEntity(
             id = IdGenerator.newId("asub"),
             assignmentId = assignmentId,
@@ -115,7 +122,25 @@ class AssignmentService(
             contentJson = objectMapper.writeValueAsString(request.content)
         )
         assignmentSubmissionRepository.save(submission)
-        return submission.id
+
+        // 랜덤 씨앗 보상 (5종 중 가중치 기반)
+        val catalog = seedCatalogRepository.findAll()
+        val seedType = SeedRewardPolicy.randomSeedType(catalog)
+        val seedCount = 2 // 과제 완료 기본 씨앗 보상
+
+        economyService.addSeeds(
+            userId = userId,
+            seedType = seedType,
+            count = seedCount,
+            reason = "assignment_submit",
+            refType = "assignment",
+            refId = assignmentId
+        )
+
+        return AssignmentSubmitResponse(
+            submissionId = submission.id,
+            seedGrant = SeedGrant(seedType = seedType, count = seedCount)
+        )
     }
 
     @Transactional(readOnly = true)

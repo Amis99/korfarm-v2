@@ -24,6 +24,16 @@ data class AssignmentProgress(
     val progressRate: Double
 )
 
+data class AssignmentSubmitResponse(
+    val submissionId: String,
+    val seedGrant: SeedGrant?
+)
+
+data class SeedGrant(
+    val seedType: String,
+    val count: Int
+)
+
 internal fun AssignmentEntity.toSummary(): AssignmentSummary {
     return AssignmentSummary(
         assignmentId = id,

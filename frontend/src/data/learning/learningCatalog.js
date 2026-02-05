@@ -211,6 +211,7 @@ export const FARM_MAP = {
     description: "낱말과 뜻, 사전 활용까지",
     color: "#e8a742",
     contentTypes: ["VOCAB_BASIC", "VOCAB_DICTIONARY"],
+    seedType: "seed_wheat",
   },
   reading: {
     id: "reading",
@@ -219,6 +220,7 @@ export const FARM_MAP = {
     description: "비문학·문학 지문 독해 훈련",
     color: "#5a9e6f",
     contentTypes: ["READING_NONFICTION", "READING_LITERATURE"],
+    seedType: "seed_rice",
   },
   content: {
     id: "content",
@@ -227,6 +229,7 @@ export const FARM_MAP = {
     description: "PDF·텍스트 내용 확인 학습",
     color: "#7b8fb2",
     contentTypes: ["CONTENT_PDF", "CONTENT_PDF_QUIZ"],
+    seedType: "seed_rice",
   },
   grammar: {
     id: "grammar",
@@ -240,6 +243,7 @@ export const FARM_MAP = {
       "GRAMMAR_PHONEME_CHANGE",
       "GRAMMAR_POS",
     ],
+    seedType: "seed_wheat",
   },
   background: {
     id: "background",
@@ -248,6 +252,7 @@ export const FARM_MAP = {
     description: "교양과 배경지식 퀴즈",
     color: "#6a8db5",
     contentTypes: ["BACKGROUND_KNOWLEDGE", "BACKGROUND_KNOWLEDGE_QUIZ"],
+    seedType: "seed_corn",
   },
   concept: {
     id: "concept",
@@ -256,6 +261,7 @@ export const FARM_MAP = {
     description: "국어 핵심 개념과 이론 학습",
     color: "#9b6fb0",
     contentTypes: ["LANGUAGE_CONCEPT", "LANGUAGE_CONCEPT_QUIZ"],
+    seedType: "seed_corn",
   },
   logic: {
     id: "logic",
@@ -264,6 +270,7 @@ export const FARM_MAP = {
     description: "추론과 논리적 사고 훈련",
     color: "#c75a5a",
     contentTypes: ["LOGIC_REASONING", "LOGIC_REASONING_QUIZ"],
+    seedType: "seed_grape",
   },
   writing: {
     id: "writing",
@@ -272,6 +279,7 @@ export const FARM_MAP = {
     description: "서술형 문제 풀이 연습",
     color: "#4a8a7a",
     contentTypes: ["WRITING_DESCRIPTIVE"],
+    seedType: "seed_apple",
   },
   choice: {
     id: "choice",
@@ -280,6 +288,7 @@ export const FARM_MAP = {
     description: "선택지 적절성 판별 훈련",
     color: "#d48a3c",
     contentTypes: ["CHOICE_JUDGEMENT"],
+    seedType: "seed_grape",
   },
 };
 

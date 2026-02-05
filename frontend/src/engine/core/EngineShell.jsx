@@ -11,10 +11,63 @@ const getTimeLimit = (content) => content?.timeLimitSec ?? 180;
 
 const SEED_TYPES = [
   { type: "seed_wheat", name: "밀", weight: 70 },
-  { type: "seed_oat",   name: "귀리", weight: 70 },
   { type: "seed_rice",  name: "쌀", weight: 70 },
+  { type: "seed_corn",  name: "옥수수", weight: 70 },
   { type: "seed_grape", name: "포도", weight: 30 },
+  { type: "seed_apple", name: "사과", weight: 30 },
 ];
+
+// 농장ID → 씨앗타입 매핑
+const FARM_SEED_MAPPING = {
+  vocab: "seed_wheat",      // 어휘 농장 → 밀
+  grammar: "seed_wheat",    // 문법 농장 → 밀
+  reading: "seed_rice",     // 독해 농장 → 쌀
+  content: "seed_rice",     // 내용숙지 농장 → 쌀
+  background: "seed_corn",  // 배경지식 농장 → 옥수수
+  concept: "seed_corn",     // 국어개념 농장 → 옥수수
+  logic: "seed_grape",      // 논리사고력 농장 → 포도
+  choice: "seed_grape",     // 선택지판별 농장 → 포도
+  writing: "seed_apple",    // 서술형 농장 → 사과
+};
+
+// contentType → farmId 매핑
+const CONTENT_TYPE_FARM_MAPPING = {
+  VOCAB_BASIC: "vocab",
+  VOCAB_DICTIONARY: "vocab",
+  GRAMMAR_WORD_FORMATION: "grammar",
+  GRAMMAR_SENTENCE_STRUCTURE: "grammar",
+  GRAMMAR_PHONEME_CHANGE: "grammar",
+  GRAMMAR_POS: "grammar",
+  READING_NONFICTION: "reading",
+  READING_LITERATURE: "reading",
+  CONTENT_PDF: "content",
+  CONTENT_PDF_QUIZ: "content",
+  BACKGROUND_KNOWLEDGE: "background",
+  BACKGROUND_KNOWLEDGE_QUIZ: "background",
+  LANGUAGE_CONCEPT: "concept",
+  LANGUAGE_CONCEPT_QUIZ: "concept",
+  LOGIC_REASONING: "logic",
+  LOGIC_REASONING_QUIZ: "logic",
+  CHOICE_JUDGEMENT: "choice",
+  WRITING_DESCRIPTIVE: "writing",
+};
+
+// contentType으로 농장ID 조회
+function getFarmIdFromContentType(contentType) {
+  if (!contentType) return null;
+  return CONTENT_TYPE_FARM_MAPPING[contentType] || null;
+}
+
+// 농장 학습용: contentType 기반 씨앗 선택
+function pickSeedForFarm(contentType) {
+  const farmId = getFarmIdFromContentType(contentType);
+  if (farmId && FARM_SEED_MAPPING[farmId]) {
+    const seedType = FARM_SEED_MAPPING[farmId];
+    const seedInfo = SEED_TYPES.find((s) => s.type === seedType);
+    return seedInfo || SEED_TYPES[0];
+  }
+  return null; // 농장 매핑 없으면 null (랜덤 사용)
+}
 
 function pickRandomSeed() {
   const totalWeight = SEED_TYPES.reduce((s, e) => s + e.weight, 0);
@@ -218,7 +271,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId }) {
     } else {
       normalizedSuccess = false;
     }
-    const chosenSeed = earnedSeed > 0 ? pickRandomSeed() : null;
+    // 농장 학습이면 매핑된 씨앗, 아니면 랜덤
+    const farmSeed = pickSeedForFarm(content?.contentType);
+    const chosenSeed = earnedSeed > 0 ? (farmSeed || pickRandomSeed()) : null;
     const endedAt = new Date().toISOString();
     setSummary({
       success: normalizedSuccess,
