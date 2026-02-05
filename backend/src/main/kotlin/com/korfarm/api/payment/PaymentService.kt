@@ -123,6 +123,19 @@ class PaymentService(
         }
     }
 
+    @Transactional(readOnly = true)
+    fun listPaymentsByUser(userId: String): List<PaymentView> {
+        return paymentRepository.findByUserIdOrderByCreatedAtDesc(userId).map {
+            PaymentView(
+                paymentId = it.id,
+                paymentType = it.paymentType,
+                amount = it.amount,
+                status = it.status,
+                createdAt = it.createdAt
+            )
+        }
+    }
+
     private fun upsertSubscription(userId: String) {
         val now = LocalDateTime.now()
         val current = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(userId)
