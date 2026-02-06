@@ -47,6 +47,7 @@ function StartPage() {
   const navigate = useNavigate();
   const { isLoggedIn, user, isPremium } = useAuth();
   const [showCraftModal, setShowCraftModal] = useState(false);
+  const [showInventoryPopup, setShowInventoryPopup] = useState(false);
   const [readingTitle, setReadingTitle] = useState(null);
 
   /* Phase 9: API data states */
@@ -205,6 +206,13 @@ function StartPage() {
   const seedsObj = displayInventory?.seeds || {};
   const SEED_LABELS = { seed_wheat: "밀", seed_rice: "쌀", seed_corn: "옥수수", seed_grape: "포도", seed_apple: "사과" };
   const CROP_LABELS = { crop_wheat: "밀", crop_rice: "쌀", crop_corn: "옥수수", crop_grape: "포도", crop_apple: "사과" };
+  const INVENTORY_ITEMS = [
+    { seedKey: "seed_wheat", cropKey: "crop_wheat", emoji: "🌾", label: "밀" },
+    { seedKey: "seed_rice", cropKey: "crop_rice", emoji: "🍚", label: "쌀" },
+    { seedKey: "seed_corn", cropKey: "crop_corn", emoji: "🌽", label: "옥수수" },
+    { seedKey: "seed_grape", cropKey: "crop_grape", emoji: "🍇", label: "포도" },
+    { seedKey: "seed_apple", cropKey: "crop_apple", emoji: "🍎", label: "사과" },
+  ];
 
   // 부모용 네비게이션 함수 (자녀 ID 포함)
   const navWithChild = (path) => {
@@ -262,7 +270,7 @@ function StartPage() {
                   </p>
                 )}
                 {selectedChild && childProfile && (
-                  <div className="start-season-score" style={{ marginTop: 8 }}>
+                  <div className="start-season-score" onClick={() => setShowInventoryPopup(true)} style={{ cursor: "pointer", marginTop: 8 }}>
                     <span className="material-symbols-outlined">emoji_events</span>
                     <span className="start-level-label">{childLevelLabel}</span>
                     <span className="start-season-label">자녀 시즌 점수</span>
@@ -414,6 +422,41 @@ function StartPage() {
           </div>
         </div>
 
+        {showInventoryPopup && (
+          <div className="result-overlay" onClick={() => setShowInventoryPopup(false)}>
+            <div className="result-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 360, width: "92vw" }}>
+              <h2 style={{ margin: "0 0 12px", fontSize: 20 }}>보유 현황</h2>
+              <div style={{ display: "grid", gap: 8 }}>
+                {INVENTORY_ITEMS.map((item) => (
+                  <div key={item.seedKey} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14 }}>
+                    <span style={{ fontSize: 20 }}>{item.emoji}</span>
+                    <strong style={{ minWidth: 50 }}>{item.label}</strong>
+                    <span>씨앗 {seedsObj[item.seedKey] ?? 0}</span>
+                    <span style={{ color: "#888" }}>·</span>
+                    <span>수확물 {cropsObj[item.cropKey] ?? 0}</span>
+                  </div>
+                ))}
+              </div>
+              <div style={{ marginTop: 10, fontSize: 14, display: "flex", alignItems: "center", gap: 6 }}>
+                <span style={{ fontSize: 20 }}>🧪</span>
+                <strong>비료</strong>
+                <span>{fertilizerCount}개</span>
+              </div>
+              <div style={{ marginTop: 12, padding: "10px 12px", background: "rgba(240,108,36,0.08)", borderRadius: 12, fontSize: 12, color: "#6b5b50" }}>
+                <strong>시즌 점수 공식</strong><br />
+                (밀×쌀×옥수수×포도×사과)×50 + 총씨앗
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowInventoryPopup(false)}
+                style={{ marginTop: 12, padding: "8px 20px", border: "none", borderRadius: 12, background: "var(--meadow-green, #ffb26b)", color: "#fff", fontWeight: 700, cursor: "pointer" }}
+              >
+                닫기
+              </button>
+            </div>
+          </div>
+        )}
+
         <nav className="start-nav">
           <Link className="active" to="/start">
             <span className="material-symbols-outlined">cottage</span>
@@ -458,7 +501,7 @@ function StartPage() {
               <h1>
                 {displayName} 농부님, <span>안녕하세요!</span>
               </h1>
-              <div className="start-season-score">
+              <div className="start-season-score" onClick={() => setShowInventoryPopup(true)} style={{ cursor: "pointer" }}>
                 <span className="material-symbols-outlined">emoji_events</span>
                 <span className="start-level-label">{levelLabel || displayLevel}</span>
                 <span className="start-season-label">시즌 점수</span>
@@ -702,33 +745,6 @@ function StartPage() {
               </button>
             </div>
 
-            {/* 보유 현황 */}
-            {inventory && (
-              <div className="start-card">
-                <h3>보유 현황</h3>
-                <div style={{ marginBottom: 8 }}>
-                  <strong style={{ fontSize: 12, color: "#6b5b50" }}>씨앗 (총 {totalSeeds})</strong>
-                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4, fontSize: 12 }}>
-                    {Object.entries(SEED_LABELS).map(([key, label]) => (
-                      <span key={key}>{label} {seedsObj[key] ?? 0}</span>
-                    ))}
-                  </div>
-                </div>
-                <div style={{ marginBottom: 8 }}>
-                  <strong style={{ fontSize: 12, color: "#6b5b50" }}>수확물 (총 {totalCrops})</strong>
-                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4, fontSize: 12 }}>
-                    {Object.entries(CROP_LABELS).map(([key, label]) => (
-                      <span key={key}>{label} {cropsObj[key] ?? 0}</span>
-                    ))}
-                  </div>
-                </div>
-                <div style={{ fontSize: 12 }}>
-                  <strong style={{ color: "#6b5b50" }}>비료</strong>
-                  <span style={{ marginLeft: 6 }}>{fertilizerCount}개</span>
-                </div>
-              </div>
-            )}
-
             {/* 씨앗 교환 */}
             <div className="start-card">
               <h3>씨앗 교환</h3>
@@ -761,6 +777,41 @@ function StartPage() {
           </aside>
         </div>
       </div>
+
+      {showInventoryPopup && (
+        <div className="result-overlay" onClick={() => setShowInventoryPopup(false)}>
+          <div className="result-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 360, width: "92vw" }}>
+            <h2 style={{ margin: "0 0 12px", fontSize: 20 }}>보유 현황</h2>
+            <div style={{ display: "grid", gap: 8 }}>
+              {INVENTORY_ITEMS.map((item) => (
+                <div key={item.seedKey} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14 }}>
+                  <span style={{ fontSize: 20 }}>{item.emoji}</span>
+                  <strong style={{ minWidth: 50 }}>{item.label}</strong>
+                  <span>씨앗 {seedsObj[item.seedKey] ?? 0}</span>
+                  <span style={{ color: "#888" }}>·</span>
+                  <span>수확물 {cropsObj[item.cropKey] ?? 0}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: 10, fontSize: 14, display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ fontSize: 20 }}>🧪</span>
+              <strong>비료</strong>
+              <span>{fertilizerCount}개</span>
+            </div>
+            <div style={{ marginTop: 12, padding: "10px 12px", background: "rgba(240,108,36,0.08)", borderRadius: 12, fontSize: 12, color: "#6b5b50" }}>
+              <strong>시즌 점수 공식</strong><br />
+              (밀×쌀×옥수수×포도×사과)×50 + 총씨앗
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowInventoryPopup(false)}
+              style={{ marginTop: 12, padding: "8px 20px", border: "none", borderRadius: 12, background: "var(--meadow-green, #ffb26b)", color: "#fff", fontWeight: 700, cursor: "pointer" }}
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
 
       <HarvestCraftModal
         open={showCraftModal}
