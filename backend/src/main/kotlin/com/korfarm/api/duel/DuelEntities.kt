@@ -70,6 +70,9 @@ class DuelRoomPlayerEntity(
     @Column(name = "is_ready", nullable = false)
     var isReady: Boolean = false,
 
+    @Column(name = "stake_seed_type")
+    var stakeSeedType: String? = null,
+
     @Column(name = "joined_at", nullable = false)
     var joinedAt: LocalDateTime,
 

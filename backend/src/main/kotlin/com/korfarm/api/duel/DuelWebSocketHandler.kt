@@ -77,14 +77,28 @@ class DuelWebSocketHandler(
         val userId = session.attributes["userId"]?.toString() ?: return
         duelService.leaveRoom(userId, roomId)
         sessionsByRoom[roomId]?.remove(session)
-        broadcastRoomUpdate(roomId)
+        // 방이 닫혔으면 남은 세션에 알림 후 정리
+        try {
+            val detail = duelService.roomDetail(roomId)
+            if (detail.room.status == "closed") {
+                broadcastToRoom(roomId, "room.closed", mapOf("reason" to "방이 닫혔습니다"))
+                sessionsByRoom.remove(roomId)
+            } else {
+                broadcastToRoom(roomId, "room.update", detail)
+            }
+        } catch (e: Exception) {
+            // 방 조회 실패 시 (이미 삭제된 경우)
+            broadcastToRoom(roomId, "room.closed", mapOf("reason" to "방이 닫혔습니다"))
+            sessionsByRoom.remove(roomId)
+        }
     }
 
     private fun handleRoomReady(session: WebSocketSession, body: Map<*, *>) {
         val roomId = (body["room_id"] ?: body["roomId"])?.toString()
             ?: session.attributes["roomId"]?.toString() ?: return
         val userId = session.attributes["userId"]?.toString() ?: return
-        duelService.toggleReady(userId, roomId)
+        val stakeSeedType = (body["stake_seed_type"] ?: body["stakeSeedType"])?.toString()
+        duelService.toggleReady(userId, roomId, stakeSeedType)
         broadcastRoomUpdate(roomId)
     }
 

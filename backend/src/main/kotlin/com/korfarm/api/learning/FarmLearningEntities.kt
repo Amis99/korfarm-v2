@@ -33,6 +33,9 @@ class FarmLearningLogEntity(
     @Column(name = "earned_seed")
     var earnedSeed: Int = 0,
 
+    @Column(name = "earned_seed_type")
+    var earnedSeedType: String? = null,
+
     @Column(name = "started_at", nullable = false)
     var startedAt: LocalDateTime,
 

@@ -8,6 +8,11 @@ const catalogMap = Object.fromEntries(
   LEARNING_CATALOG.map((c) => [c.contentId, c])
 );
 
+const SEED_TYPE_LABEL = {
+  seed_wheat: "밀", seed_rice: "쌀", seed_corn: "옥수수",
+  seed_grape: "포도", seed_apple: "사과",
+};
+
 function formatDuration(startedAt, completedAt) {
   if (!completedAt) return "-";
   const ms = new Date(completedAt) - new Date(startedAt);
@@ -144,6 +149,7 @@ function HarvestLedgerPage() {
               const startedAt = log.started_at ?? log.startedAt;
               const completedAt = log.completed_at ?? log.completedAt;
               const earnedSeed = log.earned_seed ?? log.earnedSeed ?? 0;
+              const earnedSeedType = log.earned_seed_type ?? log.earnedSeedType;
               const date = startedAt
                 ? new Date(startedAt).toLocaleString("ko-KR", {
                     year: "numeric", month: "2-digit", day: "2-digit",
@@ -156,7 +162,8 @@ function HarvestLedgerPage() {
               const duration = formatDuration(startedAt, completedAt);
               const progress = log.status === "COMPLETED" ? "100%" : "진행중";
               const accuracy = log.accuracy != null ? `${log.accuracy}%` : "-";
-              const seed = earnedSeed > 0 ? earnedSeed : "-";
+              const seedTypeLabel = SEED_TYPE_LABEL[earnedSeedType] || "";
+              const seed = earnedSeed > 0 ? `${seedTypeLabel ? seedTypeLabel + " " : ""}${earnedSeed}개` : "-";
 
               return (
                 <tr key={id} style={{ borderBottom: "1px solid #e8ddd4" }}>

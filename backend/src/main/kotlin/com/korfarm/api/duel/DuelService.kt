@@ -9,6 +9,7 @@ import com.korfarm.api.season.DuelLeaderboardItem
 import com.korfarm.api.season.DuelLeaderboards
 import com.korfarm.api.season.SeasonService
 import com.korfarm.api.user.UserRepository
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -33,9 +34,11 @@ class DuelService(
     private val duelQuestionPoolRepo: DuelQuestionPoolRepository,
     private val objectMapper: ObjectMapper
 ) {
+    private val log = LoggerFactory.getLogger(DuelService::class.java)
+
     companion object {
         val SEED_TYPES = listOf("seed_wheat", "seed_rice", "seed_corn", "seed_grape", "seed_apple")
-        const val SYSTEM_FEE_RATE = 0.10 // 10% 수수료
+        const val SYSTEM_FEE_RATE = 0.0 // 수수료 없음
         const val TIME_LIMIT_SEC = 300
         const val TOTAL_QUESTIONS = 10
         val VALID_SERVERS = setOf("saussure", "frege", "russell", "wittgenstein")
@@ -130,8 +133,15 @@ class DuelService(
         duelRoomPlayerRepository.save(player)
 
         val remaining = duelRoomPlayerRepository.findByRoomIdOrderByJoinedAtAsc(roomId)
-            .count { it.status == "joined" }
-        if (remaining == 0) {
+            .filter { it.status == "joined" }
+        if (remaining.isEmpty()) {
+            // 아무도 없으면 방 닫기
+            duelRoomRepository.findById(roomId).ifPresent {
+                it.status = "closed"
+                duelRoomRepository.save(it)
+            }
+        } else if (remaining.size == 1) {
+            // 1명만 남으면 방 닫기 (혼자 대결 불가)
             duelRoomRepository.findById(roomId).ifPresent {
                 it.status = "closed"
                 duelRoomRepository.save(it)
@@ -139,8 +149,23 @@ class DuelService(
         }
     }
 
+    /**
+     * 30분 이상 오래된 open 상태 방을 자동 정리
+     */
     @Transactional
-    fun toggleReady(userId: String, roomId: String): Boolean {
+    fun cleanupStaleRooms() {
+        val cutoff = LocalDateTime.now().minusMinutes(30)
+        val staleRooms = duelRoomRepository.findByStatusOrderByCreatedAtDesc("open")
+            .filter { it.createdAt.isBefore(cutoff) }
+        staleRooms.forEach { room ->
+            room.status = "closed"
+            duelRoomRepository.save(room)
+            log.info("오래된 대기방 정리: ${room.id}")
+        }
+    }
+
+    @Transactional
+    fun toggleReady(userId: String, roomId: String, stakeSeedType: String? = null): Boolean {
         val player = duelRoomPlayerRepository.findByRoomIdAndUserId(roomId, userId)
             ?: throw ApiException("NOT_FOUND", "방에 참가하지 않았습니다", HttpStatus.NOT_FOUND)
         if (player.status != "joined") {
@@ -151,9 +176,18 @@ class DuelService(
             ApiException("NOT_FOUND", "방을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
         if (room.createdBy == userId) {
+            if (stakeSeedType != null) {
+                player.stakeSeedType = stakeSeedType
+                duelRoomPlayerRepository.save(player)
+            }
             return true
         }
         player.isReady = !player.isReady
+        if (player.isReady && stakeSeedType != null) {
+            // 준비 시 특정 씨앗 종류 잔액 검증
+            validateSpecificSeedBalance(userId, stakeSeedType, room.stakeAmount)
+            player.stakeSeedType = stakeSeedType
+        }
         duelRoomPlayerRepository.save(player)
         return player.isReady
     }
@@ -208,7 +242,11 @@ class DuelService(
 
         // 참가자 처리: 씨앗 에스크로 차감 + 매치 플레이어 생성
         players.forEach { rp ->
-            deductSeedsFromAny(rp.userId, room.stakeAmount, match.id)
+            if (rp.stakeSeedType != null) {
+                deductSpecificSeed(rp.userId, rp.stakeSeedType!!, room.stakeAmount, match.id)
+            } else {
+                deductSeedsFromAny(rp.userId, room.stakeAmount, match.id)
+            }
 
             val mp = DuelMatchPlayerEntity(
                 id = IdGenerator.newId("mp"),
@@ -316,14 +354,35 @@ class DuelService(
 
         winners.forEach { winner ->
             winner.rewardAmount = rewardPerWinner
-            // 승자에게 씨앗 지급 (seed_wheat 기본)
-            economyService.adjustSeed(winner.userId, "seed_wheat", rewardPerWinner, "duel_reward", "duel_match", matchId)
+            // 승자에게 씨앗 지급: 에스크로 seedType별 분배
+            val seedTypeAmounts = escrows.groupBy { it.seedType }
+                .mapValues { (_, escs) -> escs.sumOf { it.amount } }
+            val totalAmount = seedTypeAmounts.values.sum()
+            if (totalAmount > 0) {
+                var remaining = rewardPerWinner
+                seedTypeAmounts.entries.forEachIndexed { idx, (seedType, amount) ->
+                    val share = if (idx == seedTypeAmounts.size - 1) {
+                        remaining // 마지막은 나머지 전부
+                    } else {
+                        (rewardPerWinner.toLong() * amount / totalAmount).toInt()
+                    }
+                    if (share > 0) {
+                        economyService.adjustSeed(winner.userId, seedType, share, "duel_reward", "duel_match", matchId)
+                        remaining -= share
+                    }
+                }
+            }
         }
 
         // 에스크로 상태 업데이트
         escrows.forEach { esc ->
             esc.status = if (winners.any { it.userId == esc.userId }) "won" else "lost"
             duelEscrowRepository.save(esc)
+        }
+
+        // 플레이어별 답변 수 계산
+        val answeredCountMap = sorted.associate { player ->
+            player.userId to answers.count { it.userId == player.userId }
         }
 
         // 플레이어 저장 + 통계 업데이트
@@ -336,10 +395,14 @@ class DuelService(
         match.endedAt = LocalDateTime.now()
         duelMatchRepository.save(match)
 
+        // 매치 종료 후 방 재개방: 상태를 open으로, 준비 상태 리셋
+        reopenRoom(match.roomId)
+
         return DuelMatchResultDetailView(
             matchId = matchId,
             serverId = match.serverId,
-            results = sorted.map { toMatchResultView(it) },
+            roomId = match.roomId,
+            results = sorted.map { toMatchResultView(it, answeredCountMap[it.userId] ?: 0) },
             totalEscrow = totalEscrow,
             systemFee = systemFee
         )
@@ -397,6 +460,10 @@ class DuelService(
     fun getMatchResults(matchId: String): DuelMatchResultDetailView? {
         val match = duelMatchRepository.findById(matchId).orElse(null) ?: return null
         val players = duelMatchPlayerRepository.findByMatchId(matchId)
+        val answers = duelAnswerRepository.findByMatchId(matchId)
+        val answeredCountMap = players.associate { p ->
+            p.userId to answers.count { it.userId == p.userId }
+        }
         val escrows = duelEscrowRepository.findByMatchId(matchId)
         val totalEscrow = escrows.sumOf { it.amount }
         val systemFee = (totalEscrow * SYSTEM_FEE_RATE).toInt()
@@ -404,7 +471,8 @@ class DuelService(
         return DuelMatchResultDetailView(
             matchId = matchId,
             serverId = match.serverId,
-            results = players.sortedBy { it.rankPosition ?: 999 }.map { toMatchResultView(it) },
+            roomId = match.roomId,
+            results = players.sortedBy { it.rankPosition ?: 999 }.map { toMatchResultView(it, answeredCountMap[it.userId] ?: 0) },
             totalEscrow = totalEscrow,
             systemFee = systemFee
         )
@@ -459,7 +527,47 @@ class DuelService(
         return DuelLeaderboards(wins = wins, winRate = winRates, bestStreak = streaks)
     }
 
+    // === 방 재개방 ===
+
+    private fun reopenRoom(roomId: String?) {
+        if (roomId == null) return
+        val room = duelRoomRepository.findById(roomId).orElse(null) ?: return
+        room.status = "open"
+        duelRoomRepository.save(room)
+
+        // 기존 플레이어 준비 상태 리셋 (방장만 유지)
+        val players = duelRoomPlayerRepository.findByRoomIdOrderByJoinedAtAsc(roomId)
+            .filter { it.status == "joined" }
+        players.forEach { p ->
+            p.isReady = (p.userId == room.createdBy)
+            duelRoomPlayerRepository.save(p)
+        }
+    }
+
     // === 내부 헬퍼 ===
+
+    // 특정 씨앗 종류 잔액 검증
+    private fun validateSpecificSeedBalance(userId: String, seedType: String, amount: Int) {
+        val seed = userSeedRepository.findForUpdate(userId, seedType)
+        if (seed == null || seed.count < amount) {
+            throw ApiException("INSUFFICIENT_SEEDS", "해당 씨앗이 부족합니다", HttpStatus.BAD_REQUEST)
+        }
+    }
+
+    // 특정 씨앗 종류 차감 + 에스크로 기록
+    private fun deductSpecificSeed(userId: String, seedType: String, amount: Int, matchId: String) {
+        economyService.adjustSeed(userId, seedType, -amount, "duel_stake", "duel_match", matchId)
+        duelEscrowRepository.save(
+            DuelEscrowEntity(
+                id = IdGenerator.newId("esc"),
+                matchId = matchId,
+                userId = userId,
+                seedType = seedType,
+                amount = amount,
+                status = "locked"
+            )
+        )
+    }
 
     // 씨앗 종류 무관 총합 검증
     private fun validateSeedBalance(userId: String, amount: Int) {
@@ -560,29 +668,38 @@ class DuelService(
         val room = duelRoomRepository.findById(roomId).orElseThrow {
             ApiException("NOT_FOUND", "방을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
+        val season = seasonService.currentSeason()
         val players = duelRoomPlayerRepository.findByRoomIdOrderByJoinedAtAsc(roomId)
             .filter { it.status == "joined" }
-            .map { toRoomPlayerView(it) }
+            .map { toRoomPlayerView(it, room.serverId, season.seasonId) }
         return DuelRoomDetail(room = toRoomView(room), players = players)
     }
 
-    private fun toRoomPlayerView(player: DuelRoomPlayerEntity): DuelRoomPlayerView {
+    private fun toRoomPlayerView(player: DuelRoomPlayerEntity, serverId: String, seasonId: String): DuelRoomPlayerView {
+        val userEntity = userRepository.findById(player.userId).orElse(null)
+        val stat = duelStatRepository.findBySeasonIdAndServerIdAndUserId(seasonId, serverId, player.userId)
         return DuelRoomPlayerView(
             userId = player.userId,
-            userName = getUserName(player.userId),
+            userName = userEntity?.name ?: "익명",
             status = player.status,
             isReady = player.isReady,
-            joinedAt = player.joinedAt
+            joinedAt = player.joinedAt,
+            profileImageUrl = userEntity?.profileImageUrl,
+            levelId = userEntity?.levelId,
+            wins = stat?.wins ?: 0,
+            losses = stat?.losses ?: 0,
+            winRate = stat?.winRate?.toDouble() ?: 0.0
         )
     }
 
-    private fun toMatchResultView(player: DuelMatchPlayerEntity): DuelMatchResultView {
+    private fun toMatchResultView(player: DuelMatchPlayerEntity, answeredCount: Int): DuelMatchResultView {
         return DuelMatchResultView(
             userId = player.userId,
             userName = getUserName(player.userId),
             result = player.result,
             rankPosition = player.rankPosition,
             correctCount = player.correctCount,
+            answeredCount = answeredCount,
             totalTimeMs = player.totalTimeMs,
             rewardAmount = player.rewardAmount
         )

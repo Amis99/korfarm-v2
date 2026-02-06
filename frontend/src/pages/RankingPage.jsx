@@ -82,7 +82,7 @@ function RankingPage() {
         <header className="ranking-header">
           <div>
             <h1>랭킹 확인</h1>
-            <p className="ranking-subtitle">시즌 점수 = 밀 × 귀리 × 쌀 × 포도 × 10 + 씨앗</p>
+            <p className="ranking-subtitle">시즌 점수 = 밀 × 쌀 × 옥수수 × 포도 × 사과 × 50 + 씨앗</p>
           </div>
           <Link className="ranking-back" to="/start">
             홈으로
@@ -195,7 +195,7 @@ function RankingPage() {
         </section>
 
         <p className="ranking-note">
-          시즌 점수 = 밀 × 귀리 × 쌀 × 포도 × 10 + 총 씨앗 수
+          시즌 점수 = 밀 × 쌀 × 옥수수 × 포도 × 사과 × 50 + 총 씨앗 수
         </p>
       </div>
     </div>

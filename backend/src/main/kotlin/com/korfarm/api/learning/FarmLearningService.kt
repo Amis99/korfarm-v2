@@ -41,6 +41,7 @@ class FarmLearningService(
         log.score = request.score
         log.accuracy = request.accuracy
         log.earnedSeed = request.earnedSeed
+        log.earnedSeedType = request.seedType
         log.completedAt = now
         farmLearningLogRepository.save(log)
 
@@ -71,6 +72,7 @@ class FarmLearningService(
                 score = log.score,
                 accuracy = log.accuracy,
                 earnedSeed = log.earnedSeed,
+                earnedSeedType = log.earnedSeedType,
                 startedAt = log.startedAt.format(fmt),
                 completedAt = log.completedAt?.format(fmt)
             )

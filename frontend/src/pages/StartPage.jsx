@@ -196,10 +196,15 @@ function StartPage() {
 
   const cropsObj = displayInventory?.crops || {};
   const cropWheat = cropsObj.crop_wheat ?? 0;
-  const cropOat = cropsObj.crop_oat ?? 0;
   const cropRice = cropsObj.crop_rice ?? 0;
+  const cropCorn = cropsObj.crop_corn ?? 0;
   const cropGrape = cropsObj.crop_grape ?? 0;
-  const seasonScore = (cropWheat * cropOat * cropRice * cropGrape * 10) + totalSeeds;
+  const cropApple = cropsObj.crop_apple ?? 0;
+  const seasonScore = (cropWheat * cropRice * cropCorn * cropGrape * cropApple) * 50 + totalSeeds;
+
+  const seedsObj = displayInventory?.seeds || {};
+  const SEED_LABELS = { seed_wheat: "밀", seed_rice: "쌀", seed_corn: "옥수수", seed_grape: "포도", seed_apple: "사과" };
+  const CROP_LABELS = { crop_wheat: "밀", crop_rice: "쌀", crop_corn: "옥수수", crop_grape: "포도", crop_apple: "사과" };
 
   // 부모용 네비게이션 함수 (자녀 ID 포함)
   const navWithChild = (path) => {
@@ -333,19 +338,25 @@ function StartPage() {
                         자녀 보유 현황
                       </h2>
                       <div className="start-card">
-                        <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
-                          <div>
-                            <strong>씨앗</strong>
-                            <p>{totalSeeds}개</p>
+                        <div style={{ marginBottom: 8 }}>
+                          <strong style={{ fontSize: 13, color: "#6b5b50" }}>씨앗 (총 {totalSeeds}개)</strong>
+                          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 4, fontSize: 13 }}>
+                            {Object.entries(SEED_LABELS).map(([key, label]) => (
+                              <span key={key}>{label} {seedsObj[key] ?? 0}</span>
+                            ))}
                           </div>
-                          <div>
-                            <strong>작물</strong>
-                            <p>{totalCrops}개</p>
+                        </div>
+                        <div style={{ marginBottom: 8 }}>
+                          <strong style={{ fontSize: 13, color: "#6b5b50" }}>수확물 (총 {totalCrops}개)</strong>
+                          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 4, fontSize: 13 }}>
+                            {Object.entries(CROP_LABELS).map(([key, label]) => (
+                              <span key={key}>{label} {cropsObj[key] ?? 0}</span>
+                            ))}
                           </div>
-                          <div>
-                            <strong>비료</strong>
-                            <p>{fertilizerCount}개</p>
-                          </div>
+                        </div>
+                        <div>
+                          <strong style={{ fontSize: 13, color: "#6b5b50" }}>비료</strong>
+                          <span style={{ marginLeft: 8, fontSize: 13 }}>{fertilizerCount}개</span>
                         </div>
                       </div>
                     </>
@@ -691,6 +702,33 @@ function StartPage() {
               </button>
             </div>
 
+            {/* 보유 현황 */}
+            {inventory && (
+              <div className="start-card">
+                <h3>보유 현황</h3>
+                <div style={{ marginBottom: 8 }}>
+                  <strong style={{ fontSize: 12, color: "#6b5b50" }}>씨앗 (총 {totalSeeds})</strong>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4, fontSize: 12 }}>
+                    {Object.entries(SEED_LABELS).map(([key, label]) => (
+                      <span key={key}>{label} {seedsObj[key] ?? 0}</span>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ marginBottom: 8 }}>
+                  <strong style={{ fontSize: 12, color: "#6b5b50" }}>수확물 (총 {totalCrops})</strong>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4, fontSize: 12 }}>
+                    {Object.entries(CROP_LABELS).map(([key, label]) => (
+                      <span key={key}>{label} {cropsObj[key] ?? 0}</span>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ fontSize: 12 }}>
+                  <strong style={{ color: "#6b5b50" }}>비료</strong>
+                  <span style={{ marginLeft: 6 }}>{fertilizerCount}개</span>
+                </div>
+              </div>
+            )}
+
             {/* 씨앗 교환 */}
             <div className="start-card">
               <h3>씨앗 교환</h3>
@@ -724,7 +762,13 @@ function StartPage() {
         </div>
       </div>
 
-      <HarvestCraftModal open={showCraftModal} onClose={() => setShowCraftModal(false)} />
+      <HarvestCraftModal
+        open={showCraftModal}
+        onClose={() => setShowCraftModal(false)}
+        onCrafted={(data) => {
+          if (data?.inventory) setInventory(data.inventory);
+        }}
+      />
 
       <nav className="start-nav">
         <Link className="active" to="/start">

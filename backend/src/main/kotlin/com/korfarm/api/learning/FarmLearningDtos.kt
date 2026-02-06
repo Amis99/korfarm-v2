@@ -48,6 +48,7 @@ data class FarmHistoryEntry(
     val score: Int?,
     val accuracy: Int?,
     val earnedSeed: Int,
+    val earnedSeedType: String? = null,
     val startedAt: String,
     val completedAt: String?
 )
