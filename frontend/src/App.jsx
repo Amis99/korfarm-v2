@@ -58,6 +58,7 @@ import DuelMainPage from "./pages/DuelMainPage";
 import DuelWaitingRoomPage from "./pages/DuelWaitingRoomPage";
 import DuelMatchPage from "./pages/DuelMatchPage";
 import DuelResultPage from "./pages/DuelResultPage";
+import DuelLobbyPage from "./pages/DuelLobbyPage";
 import AssignmentsPage from "./pages/AssignmentsPage";
 import ProfilePage from "./pages/ProfilePage";
 import PendingApprovalPage from "./pages/PendingApprovalPage";
@@ -143,6 +144,7 @@ function App() {
         <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />
         <Route path="/seed-log" element={<SeedLogPage />} />
         <Route path="/duel" element={<DuelMainPage />} />
+        <Route path="/duel/lobby/:serverId" element={<DuelLobbyPage />} />
         <Route path="/duel/room/:roomId" element={<DuelWaitingRoomPage />} />
         <Route path="/duel/match/:matchId" element={<DuelMatchPage />} />
         <Route path="/duel/result/:matchId" element={<DuelResultPage />} />

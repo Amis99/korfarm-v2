@@ -21,76 +21,111 @@ class DuelController(
     private val duelService: DuelService,
     private val featureFlagService: FeatureFlagService
 ) {
+    // 서버별 방 목록 조회
+    @GetMapping("/rooms")
+    fun rooms(@RequestParam(required = false) serverId: String?): ApiResponse<List<DuelRoomView>> {
+        requireDuelEnabled(SecurityUtils.currentUserId())
+        return ApiResponse(success = true, data = duelService.listRooms(serverId))
+    }
+
+    // 방 생성
     @PostMapping("/rooms")
     fun createRoom(@Valid @RequestBody request: DuelRoomCreateRequest): ApiResponse<DuelRoomDetail> {
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val userId = requireUserId()
         requireDuelEnabled(userId)
         val data = duelService.createRoom(userId, request)
         return ApiResponse(success = true, data = data)
     }
 
-    @GetMapping("/rooms")
-    fun rooms(): ApiResponse<List<DuelRoomView>> {
-        requireDuelEnabled(SecurityUtils.currentUserId())
-        return ApiResponse(success = true, data = duelService.listRooms())
-    }
-
+    // 방 입장
     @PostMapping("/rooms/{roomId}/join")
     fun join(@PathVariable roomId: String): ApiResponse<DuelRoomJoinResult> {
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val userId = requireUserId()
         requireDuelEnabled(userId)
         val data = duelService.joinRoom(userId, roomId)
         return ApiResponse(success = true, data = data)
     }
 
+    // 방 퇴장
     @PostMapping("/rooms/{roomId}/leave")
     fun leave(@PathVariable roomId: String): ApiResponse<Map<String, String>> {
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val userId = requireUserId()
         requireDuelEnabled(userId)
         duelService.leaveRoom(userId, roomId)
         return ApiResponse(success = true, data = mapOf("status" to "left"))
     }
 
-    @PostMapping("/queue/join")
-    fun queueJoin(
-        @RequestParam(defaultValue = "frege1") levelId: String,
-        @RequestParam(defaultValue = "1") stakeAmount: Int,
-        @RequestParam(defaultValue = "seed_wheat") stakeCropType: String,
-        @RequestParam(defaultValue = "2") roomSize: Int
-    ): ApiResponse<DuelQueueStatus> {
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+    // 준비 토글
+    @PostMapping("/rooms/{roomId}/ready")
+    fun ready(@PathVariable roomId: String): ApiResponse<Map<String, Any>> {
+        val userId = requireUserId()
         requireDuelEnabled(userId)
-        val data = duelService.queueJoin(userId, levelId, stakeAmount, stakeCropType, roomSize)
-        return ApiResponse(success = true, data = data)
+        val isReady = duelService.toggleReady(userId, roomId)
+        return ApiResponse(success = true, data = mapOf("isReady" to isReady))
     }
 
-    @PostMapping("/queue/leave")
-    fun queueLeave(): ApiResponse<DuelQueueStatus> {
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        requireDuelEnabled(userId)
-        val data = duelService.queueLeave(userId)
-        return ApiResponse(success = true, data = data)
-    }
-
-    @GetMapping("/stats")
-    fun stats(@RequestParam(defaultValue = "frege1") levelId: String): ApiResponse<DuelStatsView> {
-        val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        requireDuelEnabled(userId)
-        val data = duelService.getStats(userId, levelId)
-        return ApiResponse(success = true, data = data)
-    }
-
-    @GetMapping("/leaderboards")
-    fun leaderboards(@RequestParam(defaultValue = "frege1") levelId: String): ApiResponse<com.korfarm.api.season.DuelLeaderboards> {
+    // 방 상세 조회
+    @GetMapping("/rooms/{roomId}")
+    fun roomDetail(@PathVariable roomId: String): ApiResponse<DuelRoomDetail> {
         requireDuelEnabled(SecurityUtils.currentUserId())
-        val data = duelService.leaderboards(levelId)
+        return ApiResponse(success = true, data = duelService.roomDetail(roomId))
+    }
+
+    // 매치 시작 (방장만)
+    @PostMapping("/rooms/{roomId}/start")
+    fun startMatch(@PathVariable roomId: String): ApiResponse<Map<String, String>> {
+        val userId = requireUserId()
+        requireDuelEnabled(userId)
+        val matchId = duelService.startMatch(userId, roomId)
+        return ApiResponse(success = true, data = mapOf("matchId" to matchId))
+    }
+
+    // 매치 상태 조회
+    @GetMapping("/matches/{matchId}")
+    fun matchDetail(@PathVariable matchId: String): ApiResponse<Map<String, Any>> {
+        requireDuelEnabled(SecurityUtils.currentUserId())
+        val data = duelService.getMatchDetail(matchId)
+            ?: throw ApiException("NOT_FOUND", "매치를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         return ApiResponse(success = true, data = data)
+    }
+
+    // 매치 문제 조회 (정답 제외)
+    @GetMapping("/matches/{matchId}/questions")
+    fun matchQuestions(@PathVariable matchId: String): ApiResponse<List<DuelQuestionView>> {
+        requireDuelEnabled(SecurityUtils.currentUserId())
+        val data = duelService.getMatchQuestionViews(matchId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    // 매치 결과 조회
+    @GetMapping("/matches/{matchId}/results")
+    fun matchResults(@PathVariable matchId: String): ApiResponse<DuelMatchResultDetailView> {
+        requireDuelEnabled(SecurityUtils.currentUserId())
+        val data = duelService.getMatchResults(matchId)
+            ?: throw ApiException("NOT_FOUND", "결과를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        return ApiResponse(success = true, data = data)
+    }
+
+    // 전적 조회
+    @GetMapping("/stats")
+    fun stats(@RequestParam(defaultValue = "frege") serverId: String): ApiResponse<DuelStatsView> {
+        val userId = requireUserId()
+        requireDuelEnabled(userId)
+        val data = duelService.getStats(userId, serverId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    // 리더보드
+    @GetMapping("/leaderboards")
+    fun leaderboards(@RequestParam(defaultValue = "frege") serverId: String): ApiResponse<com.korfarm.api.season.DuelLeaderboards> {
+        requireDuelEnabled(SecurityUtils.currentUserId())
+        val data = duelService.leaderboards(serverId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    private fun requireUserId(): String {
+        return SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "로그인이 필요합니다", HttpStatus.UNAUTHORIZED)
     }
 
     private fun requireDuelEnabled(userId: String?) {

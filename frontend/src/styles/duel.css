@@ -1,0 +1,865 @@
+/* === 대결 모드 스타일 === */
+
+/* 서버 선택 화면 */
+.duel-main {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.duel-main h1 {
+  text-align: center;
+  color: #3a2a1a;
+  margin-bottom: 8px;
+}
+
+.duel-main .subtitle {
+  text-align: center;
+  color: #8a7468;
+  margin-bottom: 32px;
+}
+
+.duel-servers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.duel-server-card {
+  background: #fff;
+  border: 2px solid #e8ddd0;
+  border-radius: 16px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.duel-server-card:hover {
+  border-color: #ff8f2b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 143, 43, 0.15);
+}
+
+.duel-server-card .server-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.duel-server-card .server-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3a2a1a;
+  margin-bottom: 4px;
+}
+
+.duel-server-card .server-desc {
+  font-size: 13px;
+  color: #8a7468;
+  margin-bottom: 12px;
+}
+
+.duel-server-card .server-stats {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #a08878;
+}
+
+/* 내 전적 요약 */
+.duel-my-stats {
+  background: #faf6f0;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.duel-my-stats h3 {
+  margin: 0 0 12px;
+  color: #3a2a1a;
+  font-size: 15px;
+}
+
+.duel-stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.duel-stat-item {
+  text-align: center;
+}
+
+.duel-stat-item .value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ff8f2b;
+}
+
+.duel-stat-item .label {
+  font-size: 12px;
+  color: #8a7468;
+}
+
+/* 로비 (방 목록) */
+.duel-lobby {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.duel-lobby-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.duel-lobby-header h1 {
+  font-size: 22px;
+  color: #3a2a1a;
+}
+
+.duel-create-btn {
+  background: #ff8f2b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.duel-create-btn:hover {
+  background: #e87d1f;
+}
+
+.duel-room-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.duel-room-item {
+  background: #fff;
+  border: 1px solid #e8ddd0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.duel-room-item:hover {
+  border-color: #ff8f2b;
+}
+
+.duel-room-info .room-name {
+  font-weight: 700;
+  color: #3a2a1a;
+  margin-bottom: 4px;
+}
+
+.duel-room-info .room-meta {
+  font-size: 13px;
+  color: #8a7468;
+}
+
+.duel-room-right {
+  text-align: right;
+}
+
+.duel-room-right .player-count {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff8f2b;
+}
+
+.duel-room-right .stake-info {
+  font-size: 12px;
+  color: #a08878;
+}
+
+.duel-empty-msg {
+  text-align: center;
+  padding: 40px;
+  color: #8a7468;
+}
+
+/* 방 생성 모달 */
+.duel-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.duel-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.duel-modal h2 {
+  margin: 0 0 20px;
+  color: #3a2a1a;
+}
+
+.duel-modal label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5a4a3a;
+}
+
+.duel-modal input,
+.duel-modal select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d0c4b8;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.duel-modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.duel-modal-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.duel-modal-actions .cancel-btn {
+  background: #e8ddd0;
+  color: #5a4a3a;
+}
+
+.duel-modal-actions .confirm-btn {
+  background: #ff8f2b;
+  color: #fff;
+}
+
+/* 대기방 */
+.duel-waiting {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.duel-waiting-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.duel-waiting-header h1 {
+  color: #3a2a1a;
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.duel-waiting-header .room-info {
+  font-size: 14px;
+  color: #8a7468;
+}
+
+.duel-players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.duel-player-row {
+  background: #fff;
+  border: 1px solid #e8ddd0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.duel-player-row .player-name {
+  font-weight: 600;
+  color: #3a2a1a;
+}
+
+.duel-player-row .host-badge {
+  background: #ff8f2b;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.duel-player-row .ready-badge {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.duel-player-row .ready-badge.ready {
+  color: #22c55e;
+}
+
+.duel-player-row .ready-badge.not-ready {
+  color: #a08878;
+}
+
+.duel-waiting-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.duel-waiting-actions button {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.duel-start-btn {
+  background: #ff8f2b;
+  color: #fff;
+}
+
+.duel-start-btn:disabled {
+  background: #d0c4b8;
+  cursor: not-allowed;
+}
+
+.duel-ready-btn {
+  background: #22c55e;
+  color: #fff;
+}
+
+.duel-ready-btn.not-ready {
+  background: #e8ddd0;
+  color: #5a4a3a;
+}
+
+.duel-leave-btn {
+  background: #e8ddd0;
+  color: #5a4a3a;
+}
+
+/* 대결 진행 */
+.duel-match {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.duel-match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.duel-timer {
+  background: #ff4444;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 6px 16px;
+  border-radius: 8px;
+  min-width: 70px;
+  text-align: center;
+}
+
+.duel-timer.safe {
+  background: #22c55e;
+}
+
+.duel-timer.warning {
+  background: #f59e0b;
+}
+
+.duel-timer.danger {
+  background: #ff4444;
+}
+
+.duel-progress-indicator {
+  font-size: 15px;
+  font-weight: 700;
+  color: #3a2a1a;
+}
+
+.duel-question-area {
+  background: #fff;
+  border: 1px solid #e8ddd0;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.duel-question-type-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.duel-question-type-badge.quiz {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.duel-question-type-badge.reading {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.duel-passage {
+  background: #faf6f0;
+  border-left: 3px solid #d0c4b8;
+  padding: 16px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #3a2a1a;
+  border-radius: 0 8px 8px 0;
+}
+
+.duel-stem {
+  font-size: 16px;
+  font-weight: 600;
+  color: #3a2a1a;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.duel-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.duel-choice-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  border: 2px solid #e8ddd0;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.duel-choice-btn:hover {
+  border-color: #ff8f2b;
+  background: #fff8f0;
+}
+
+.duel-choice-btn.selected {
+  border-color: #ff8f2b;
+  background: #fff3e8;
+  font-weight: 600;
+}
+
+.duel-choice-btn.correct {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+.duel-choice-btn.wrong {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+/* 참가자 진행도 */
+.duel-participants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.duel-participant {
+  background: #faf6f0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  min-width: 80px;
+}
+
+.duel-participant .name {
+  font-weight: 600;
+  color: #3a2a1a;
+  margin-bottom: 4px;
+}
+
+.duel-participant .progress-bar {
+  background: #e8ddd0;
+  border-radius: 4px;
+  height: 4px;
+  overflow: hidden;
+}
+
+.duel-participant .progress-fill {
+  background: #ff8f2b;
+  height: 100%;
+  transition: width 0.3s;
+}
+
+/* 결과 화면 */
+.duel-result {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.duel-result h1 {
+  text-align: center;
+  color: #3a2a1a;
+  margin-bottom: 24px;
+}
+
+.duel-result-card {
+  background: #fff;
+  border: 1px solid #e8ddd0;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.duel-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0ebe4;
+}
+
+.duel-result-row:last-child {
+  border-bottom: none;
+}
+
+.duel-result-row.winner {
+  background: #fff8f0;
+}
+
+.duel-result-row.me {
+  border-left: 3px solid #ff8f2b;
+}
+
+.duel-result-rank {
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 32px;
+  text-align: center;
+}
+
+.duel-result-rank.first {
+  color: #ff8f2b;
+}
+
+.duel-result-player {
+  flex: 1;
+  margin: 0 16px;
+}
+
+.duel-result-player .name {
+  font-weight: 600;
+  color: #3a2a1a;
+}
+
+.duel-result-player .score-detail {
+  font-size: 12px;
+  color: #8a7468;
+}
+
+.duel-result-reward {
+  text-align: right;
+}
+
+.duel-result-reward .reward-amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: #22c55e;
+}
+
+.duel-result-reward .reward-label {
+  font-size: 11px;
+  color: #8a7468;
+}
+
+.duel-result-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.duel-result-actions button,
+.duel-result-actions a {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+}
+
+.duel-result-actions .primary-btn {
+  background: #ff8f2b;
+  color: #fff;
+}
+
+.duel-result-actions .secondary-btn {
+  background: #e8ddd0;
+  color: #5a4a3a;
+}
+
+/* === 문제별 타이머 바 === */
+.duel-question-timer-bar {
+  width: 100%;
+  height: 6px;
+  background: #e8ddd0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.duel-question-timer-bar .timer-fill {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.duel-question-timer-bar .timer-fill.safe {
+  background: #22c55e;
+}
+
+.duel-question-timer-bar .timer-fill.warning {
+  background: #f59e0b;
+}
+
+.duel-question-timer-bar .timer-fill.danger {
+  background: #ef4444;
+}
+
+/* 타이머 텍스트 */
+.duel-timer-text {
+  background: #ff4444;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* 생존 인원 뱃지 */
+.duel-remaining-badge {
+  background: #fef3c7;
+  color: #92400e;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+
+/* 선택지 비활성화 */
+.duel-choice-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+.duel-choice-btn:disabled:hover {
+  border-color: #e8ddd0;
+  background: #fff;
+}
+
+.duel-choice-btn.selected:disabled:hover {
+  border-color: #ff8f2b;
+  background: #fff3e8;
+}
+
+.duel-choice-btn.correct:disabled:hover {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+.duel-choice-btn.wrong:disabled:hover {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+/* === 대기 중 오버레이 === */
+.duel-waiting-overlay {
+  text-align: center;
+  padding: 32px 20px;
+  background: #faf6f0;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.duel-waiting-overlay p {
+  font-size: 15px;
+  font-weight: 600;
+  color: #5a4a3a;
+  margin: 12px 0 8px;
+}
+
+.waiting-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e8ddd0;
+  border-top-color: #ff8f2b;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: duel-spin 0.8s linear infinite;
+}
+
+@keyframes duel-spin {
+  to { transform: rotate(360deg); }
+}
+
+.duel-waiting-progress {
+  font-size: 13px;
+  color: #8a7468;
+}
+
+/* === 라운드 결과 (탈락자 발표) === */
+.duel-round-result {
+  text-align: center;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid #e8ddd0;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  animation: duel-fadeIn 0.3s ease;
+}
+
+@keyframes duel-fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.duel-round-result .eliminated-info {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ef4444;
+  margin: 0;
+}
+
+.duel-round-result .no-eliminated {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f59e0b;
+  margin: 0;
+}
+
+/* === 탈락 화면 === */
+.duel-eliminated-screen {
+  text-align: center;
+  padding: 60px 20px;
+  animation: duel-fadeIn 0.4s ease;
+}
+
+.duel-eliminated-screen .eliminated-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.duel-eliminated-screen h2 {
+  font-size: 28px;
+  color: #ef4444;
+  margin: 0 0 12px;
+}
+
+.duel-eliminated-screen p {
+  font-size: 15px;
+  color: #5a4a3a;
+  margin: 6px 0;
+}
+
+.duel-eliminated-screen .remaining-info {
+  font-weight: 600;
+  color: #3a2a1a;
+}
+
+.duel-eliminated-screen .wait-info {
+  color: #8a7468;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+/* === 참가자 상태 (답변 완료 표시) === */
+.duel-participant {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  transition: background 0.2s;
+}
+
+.duel-participant.answered {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.duel-participant .status-indicator {
+  font-size: 13px;
+  font-weight: 700;
+  color: #a08878;
+}
+
+.duel-participant.answered .status-indicator {
+  color: #22c55e;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+  .duel-servers {
+    grid-template-columns: 1fr;
+  }
+
+  .duel-match-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .duel-eliminated-screen .eliminated-icon {
+    font-size: 48px;
+  }
+
+  .duel-eliminated-screen h2 {
+    font-size: 22px;
+  }
+}

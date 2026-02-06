@@ -66,10 +66,10 @@ data class HarvestCraftRequest(
 )
 
 data class DuelRoomCreateRequest(
-    @field:NotBlank val levelId: String,
-    @field:Min(2) val roomSize: Int,
-    @field:Min(1) val stakeAmount: Int,
-    val stakeCropType: String? = null
+    @field:NotBlank val serverId: String,
+    @field:NotBlank val roomName: String,
+    val roomSize: Int = 10,
+    @field:Min(1) val stakeAmount: Int
 )
 
 data class AssignmentSubmitRequest(

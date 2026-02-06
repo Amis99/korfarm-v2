@@ -108,25 +108,58 @@ export interface LedgerEntry {
 }
 
 export interface DuelRoomCreateRequest {
-  level_id: string;
-  room_size: number;
+  server_id: string;
+  room_name: string;
+  room_size?: number;
   stake_amount: number;
-  stake_crop_type?: string;
 }
 
 export interface DuelRoomPlayer {
   user_id?: string;
-  stake_crop_type?: string;
+  user_name?: string;
   status?: string;
+  is_ready?: boolean;
 }
 
 export interface DuelRoom {
   room_id?: string;
-  level_id?: string;
+  server_id?: string;
+  room_name?: string;
   room_size?: number;
   stake_amount?: number;
   status?: string;
+  player_count?: number;
+  created_by?: string;
   players?: DuelRoomPlayer[];
+}
+
+export interface DuelQuestionView {
+  question_id?: string;
+  order_index?: number;
+  question_type?: string;
+  category?: string;
+  stem?: string;
+  passage?: string;
+  choices?: { id: string; text: string }[];
+  time_limit_sec?: number;
+}
+
+export interface DuelMatchResult {
+  user_id?: string;
+  user_name?: string;
+  result?: string;
+  rank_position?: number;
+  correct_count?: number;
+  total_time_ms?: number;
+  reward_amount?: number;
+}
+
+export interface DuelMatchResultDetail {
+  match_id?: string;
+  server_id?: string;
+  results?: DuelMatchResult[];
+  total_escrow?: number;
+  system_fee?: number;
 }
 
 export interface AssignmentSubmitRequest {

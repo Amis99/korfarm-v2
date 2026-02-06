@@ -15,14 +15,14 @@ class DuelRoomEntity(
     @Id
     var id: String,
 
-    @Column(name = "mode_id", nullable = false)
-    var modeId: String,
+    @Column(name = "server_id", nullable = false)
+    var serverId: String,
 
-    @Column(name = "level_id", nullable = false)
-    var levelId: String,
+    @Column(name = "room_name", nullable = false)
+    var roomName: String = "",
 
     @Column(name = "room_size", nullable = false)
-    var roomSize: Int,
+    var roomSize: Int = 10,
 
     @Column(name = "stake_amount", nullable = false)
     var stakeAmount: Int,
@@ -64,11 +64,11 @@ class DuelRoomPlayerEntity(
     @Column(name = "user_id", nullable = false)
     var userId: String,
 
-    @Column(name = "stake_crop_type", nullable = false)
-    var stakeCropType: String,
-
     @Column(nullable = false)
     var status: String,
+
+    @Column(name = "is_ready", nullable = false)
+    var isReady: Boolean = false,
 
     @Column(name = "joined_at", nullable = false)
     var joinedAt: LocalDateTime,
@@ -101,11 +101,17 @@ class DuelMatchEntity(
     @Column(name = "season_id", nullable = false)
     var seasonId: String,
 
-    @Column(name = "level_id", nullable = false)
-    var levelId: String,
+    @Column(name = "room_id")
+    var roomId: String? = null,
+
+    @Column(name = "server_id", nullable = false)
+    var serverId: String,
 
     @Column(nullable = false)
     var status: String,
+
+    @Column(name = "time_limit_sec", nullable = false)
+    var timeLimitSec: Int = 300,
 
     @Column(name = "started_at")
     var startedAt: LocalDateTime? = null,
@@ -150,11 +156,17 @@ class DuelMatchPlayerEntity(
     @Column(name = "rank_position")
     var rankPosition: Int? = null,
 
-    @Column(name = "stake_crop_type", nullable = false)
-    var stakeCropType: String,
-
     @Column(name = "stake_amount", nullable = false)
     var stakeAmount: Int,
+
+    @Column(name = "correct_count", nullable = false)
+    var correctCount: Int = 0,
+
+    @Column(name = "total_time_ms", nullable = false)
+    var totalTimeMs: Long = 0,
+
+    @Column(name = "reward_amount", nullable = false)
+    var rewardAmount: Int = 0,
 
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
@@ -230,6 +242,9 @@ class DuelAnswerEntity(
     @Column(name = "is_correct")
     var isCorrect: Boolean? = null,
 
+    @Column(name = "time_ms", nullable = false)
+    var timeMs: Long = 0,
+
     @Column(name = "submitted_at")
     var submittedAt: LocalDateTime? = null,
 
@@ -261,8 +276,8 @@ class DuelStatEntity(
     @Column(name = "season_id", nullable = false)
     var seasonId: String,
 
-    @Column(name = "level_id", nullable = false)
-    var levelId: String,
+    @Column(name = "server_id", nullable = false)
+    var serverId: String,
 
     @Column(name = "user_id", nullable = false)
     var userId: String,
@@ -316,14 +331,54 @@ class DuelEscrowEntity(
     @Column(name = "user_id", nullable = false)
     var userId: String,
 
-    @Column(name = "crop_type", nullable = false)
-    var cropType: String,
+    @Column(name = "seed_type", nullable = false)
+    var seedType: String,
 
     @Column(nullable = false)
     var amount: Int,
 
     @Column(nullable = false)
     var status: String,
+
+    @Column(name = "created_at", nullable = false)
+    var createdAt: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "updated_at", nullable = false)
+    var updatedAt: LocalDateTime = LocalDateTime.now()
+) {
+    @PrePersist
+    fun onCreate() {
+        val now = LocalDateTime.now()
+        createdAt = now
+        updatedAt = now
+    }
+
+    @PreUpdate
+    fun onUpdate() {
+        updatedAt = LocalDateTime.now()
+    }
+}
+
+@Entity
+@Table(name = "duel_question_pool")
+class DuelQuestionPoolEntity(
+    @Id
+    var id: String,
+
+    @Column(name = "server_id", nullable = false)
+    var serverId: String,
+
+    @Column(name = "question_type", nullable = false)
+    var questionType: String,
+
+    @Column(nullable = false)
+    var category: String,
+
+    @Column(name = "question_json", columnDefinition = "json", nullable = false)
+    var questionJson: String,
+
+    @Column(nullable = false)
+    var status: String = "ACTIVE",
 
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),

@@ -51,8 +51,8 @@ class AdminDuelService(
         val season = seasonRepository.findById(request.seasonId).orElseThrow {
             ApiException("NOT_FOUND", "season not found", HttpStatus.NOT_FOUND)
         }
-        val levelId = request.levelId ?: season.levelId
-        val leaderboards = buildLeaderboards(season.id, levelId)
+        val serverId = request.levelId ?: season.levelId
+        val leaderboards = buildLeaderboards(season.id, serverId)
         val awards = mapOf(
             "duel_awards" to mapOf(
                 "wins" to leaderboards.wins.take(3),
@@ -71,29 +71,29 @@ class AdminDuelService(
     }
 
     @Transactional
-    fun recalculate(seasonId: String, levelId: String): SeasonDuelRankingEntity {
-        val leaderboards = buildLeaderboards(seasonId, levelId)
+    fun recalculate(seasonId: String, serverId: String): SeasonDuelRankingEntity {
+        val leaderboards = buildLeaderboards(seasonId, serverId)
         val ranking = SeasonDuelRankingEntity(
             id = IdGenerator.newId("drank"),
             seasonId = seasonId,
-            levelId = levelId,
+            levelId = serverId,
             rankingJson = objectMapper.writeValueAsString(leaderboards),
             generatedAt = LocalDateTime.now()
         )
         return seasonDuelRankingRepository.save(ranking)
     }
 
-    private fun buildLeaderboards(seasonId: String, levelId: String): DuelLeaderboards {
-        val wins = duelStatRepository.findTop50BySeasonIdAndLevelIdOrderByWinsDesc(seasonId, levelId)
+    private fun buildLeaderboards(seasonId: String, serverId: String): DuelLeaderboards {
+        val wins = duelStatRepository.findTop50BySeasonIdAndServerIdOrderByWinsDesc(seasonId, serverId)
             .mapIndexed { index, stat ->
                 DuelLeaderboardItem(rank = index + 1, userId = stat.userId, value = stat.wins.toDouble())
             }
-        val winRate = duelStatRepository.findTop50BySeasonIdAndLevelIdOrderByWinRateDesc(seasonId, levelId)
+        val winRate = duelStatRepository.findTop50BySeasonIdAndServerIdOrderByWinRateDesc(seasonId, serverId)
             .mapIndexed { index, stat ->
                 val matches = stat.wins + stat.losses
                 DuelLeaderboardItem(rank = index + 1, userId = stat.userId, value = stat.winRate.toDouble(), matches = matches)
             }
-        val bestStreak = duelStatRepository.findTop50BySeasonIdAndLevelIdOrderByBestStreakDesc(seasonId, levelId)
+        val bestStreak = duelStatRepository.findTop50BySeasonIdAndServerIdOrderByBestStreakDesc(seasonId, serverId)
             .mapIndexed { index, stat ->
                 DuelLeaderboardItem(rank = index + 1, userId = stat.userId, value = stat.bestStreak.toDouble())
             }

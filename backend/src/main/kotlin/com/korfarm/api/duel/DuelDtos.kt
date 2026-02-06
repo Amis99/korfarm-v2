@@ -4,11 +4,13 @@ import java.time.LocalDateTime
 
 data class DuelRoomView(
     val roomId: String,
-    val levelId: String,
+    val serverId: String,
+    val roomName: String,
     val roomSize: Int,
     val stakeAmount: Int,
     val status: String,
     val playerCount: Int,
+    val createdBy: String,
     val createdAt: LocalDateTime
 )
 
@@ -19,16 +21,10 @@ data class DuelRoomDetail(
 
 data class DuelRoomPlayerView(
     val userId: String,
+    val userName: String?,
     val status: String,
-    val stakeCropType: String,
+    val isReady: Boolean,
     val joinedAt: LocalDateTime
-)
-
-data class DuelQueueStatus(
-    val status: String,
-    val position: Int? = null,
-    val estimatedWaitSeconds: Int? = null,
-    val matchId: String? = null
 )
 
 data class DuelRoomJoinResult(
@@ -48,16 +44,50 @@ data class DuelStatsView(
 data class DuelMatchState(
     val matchId: String,
     val totalQuestions: Int,
+    val currentQuestionIndex: Int = 0,
+    val timeRemainingSec: Int? = null,
     val players: List<DuelPlayerProgress>
 )
 
 data class DuelPlayerProgress(
     val userId: String,
-    val answered: Int
+    val userName: String? = null,
+    val answered: Int,
+    val correctCount: Int = 0,
+    val answeredCurrent: Boolean = false,
+    val active: Boolean = true
+)
+
+data class DuelQuestionView(
+    val questionId: String,
+    val orderIndex: Int,
+    val questionType: String,
+    val category: String,
+    val stem: String,
+    val passage: String?,
+    val choices: List<DuelChoiceView>,
+    val timeLimitSec: Int? = null
+)
+
+data class DuelChoiceView(
+    val id: String,
+    val text: String
 )
 
 data class DuelMatchResultView(
     val userId: String,
+    val userName: String?,
     val result: String,
-    val rankPosition: Int?
+    val rankPosition: Int?,
+    val correctCount: Int,
+    val totalTimeMs: Long,
+    val rewardAmount: Int
+)
+
+data class DuelMatchResultDetailView(
+    val matchId: String,
+    val serverId: String,
+    val results: List<DuelMatchResultView>,
+    val totalEscrow: Int,
+    val systemFee: Int
 )
