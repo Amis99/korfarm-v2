@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import useHighlightAnchor from "../shared/useHighlightAnchor";
 
 function PhonemeChangeModule({ content }) {
   const { adjustTime, recordAnswer, finish, start, status } = useEngine();
@@ -13,9 +14,11 @@ function PhonemeChangeModule({ content }) {
   const advanceTimerRef = useRef(null);
   const resultTimerRef = useRef(null);
   const feedbackDelay = 420;
+  const moduleRef = useRef(null);
 
   const word = words[wordIndex];
   const step = word?.steps?.[stepIndex];
+  const anchorRect = useHighlightAnchor(moduleRef, ".phoneme-cell.target", [wordIndex, stepIndex]);
 
   const handleAnswer = (choiceId) => {
     if (!step) return;
@@ -78,7 +81,7 @@ function PhonemeChangeModule({ content }) {
   );
 
   return (
-    <div className="phoneme-module">
+    <div className="phoneme-module" ref={moduleRef}>
       {status === "READY" ? (
         <div className="worksheet-start">
           <div className="worksheet-empty">음운 변동 분석을 시작합니다.</div>
@@ -121,6 +124,7 @@ function PhonemeChangeModule({ content }) {
               prompt={step.questionType === "RULE_EXPLANATION" ? "규칙을 고르세요." : "변동 결과를 고르세요."}
               choices={step.choices || []}
               onSelect={handleAnswer}
+              anchorRect={anchorRect}
               mark={lastResult}
               shuffleKey={step.stepId}
             />

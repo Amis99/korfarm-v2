@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import useHighlightAnchor from "../shared/useHighlightAnchor";
 
 function WordFormationModule({ content }) {
   const { adjustTime, recordAnswer, finish, start, status } = useEngine();
@@ -12,6 +13,7 @@ function WordFormationModule({ content }) {
   const [lastResult, setLastResult] = useState(null);
   const advanceTimerRef = useRef(null);
   const resultTimerRef = useRef(null);
+  const moduleRef = useRef(null);
   const feedbackDelay = 420;
 
   const item = items[itemIndex];
@@ -114,6 +116,7 @@ function WordFormationModule({ content }) {
 
   const modalShuffleKey = inMerge ? `merge-${itemIndex}-${mergeIndex}` : `step-${itemIndex}-${stepIndex}`;
   const config = modalConfig();
+  const anchorRect = useHighlightAnchor(moduleRef, ".morpheme-chip.active", [itemIndex, stepIndex, mergeIndex]);
 
   useEffect(() => {
     if (status === "READY") {
@@ -134,7 +137,7 @@ function WordFormationModule({ content }) {
   );
 
   return (
-    <div className="word-formation-module">
+    <div className="word-formation-module" ref={moduleRef}>
       {status === "READY" ? (
         <div className="worksheet-start">
           <div className="worksheet-empty">단어 형성 분석을 시작합니다.</div>
@@ -166,6 +169,7 @@ function WordFormationModule({ content }) {
               prompt={config.prompt}
               choices={config.choices}
               onSelect={handleAnswer}
+              anchorRect={anchorRect}
               mark={lastResult}
               shuffleKey={modalShuffleKey}
             />

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import useHighlightAnchor from "../shared/useHighlightAnchor";
 
 const highlightText = (text, range) => {
   if (!range || range.start == null || range.end == null) return text;
@@ -19,6 +20,7 @@ const highlightText = (text, range) => {
 function ReadingIntensiveModule({ content }) {
   const { adjustTime, recordAnswer, finish, start, status } = useEngine();
   const payload = content?.payload || {};
+  const moduleRef = useRef(null);
   const [stepIndex, setStepIndex] = useState(0);
   const [removedChoices, setRemovedChoices] = useState({});
   const [lastResult, setLastResult] = useState(null);
@@ -36,6 +38,8 @@ function ReadingIntensiveModule({ content }) {
     const removed = removedChoices[step?.stepId] || [];
     return (step?.question?.choices || []).filter((choice) => !removed.includes(choice.id));
   }, [step, removedChoices]);
+
+  const anchorRect = useHighlightAnchor(moduleRef, ".worksheet-highlight", [stepIndex]);
 
   const handleAnswer = (choiceId) => {
     if (!step?.question) return;
@@ -90,7 +94,7 @@ function ReadingIntensiveModule({ content }) {
   );
 
   return (
-    <div className="reading-module">
+    <div className="reading-module" ref={moduleRef}>
       {status === "READY" ? (
         <div className="worksheet-start">
           <div className="worksheet-empty">정독 훈련을 시작합니다.</div>
@@ -121,6 +125,7 @@ function ReadingIntensiveModule({ content }) {
               prompt={step.question.prompt}
               choices={choices}
               onSelect={handleAnswer}
+              anchorRect={anchorRect}
               mark={lastResult}
               shuffleKey={step.stepId}
             />

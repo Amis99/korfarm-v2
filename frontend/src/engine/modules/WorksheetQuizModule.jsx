@@ -362,19 +362,11 @@ function WorksheetQuizModule({ content }) {
     const highlightNode =
       node.querySelector(".worksheet-highlight") || node.querySelector(".worksheet-blank.active");
     const rect = (highlightNode || node).getBoundingClientRect();
-    const left = rect.left - containerRect.left;
-    const right = rect.right - containerRect.left;
-    const top = rect.top - containerRect.top;
-    const height = rect.height;
-    const isDesktop = window.innerWidth >= 768;
-    const center = (left + right) / 2;
-    const align = isDesktop ? (center < containerRect.width / 2 ? "right" : "left") : null;
     setAnchorRect({
-      left,
-      right,
-      top,
-      height,
-      align,
+      left: rect.left - containerRect.left,
+      right: rect.right - containerRect.left,
+      top: rect.top - containerRect.top,
+      height: rect.height,
     });
   }, [currentIndex, pages.length]);
 

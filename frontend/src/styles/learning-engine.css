@@ -16,6 +16,7 @@
   --sheet-width: 794px;
   --sheet-height: 1123px;
   --scale: min(1, calc((100vw - 24px) / var(--sheet-width)));
+  --body-scale: var(--scale);
   min-height: 100vh;
   padding: calc(24px + var(--header-height, 0px)) 12px 40px;
   color: var(--engine-ink);
@@ -1494,4 +1495,34 @@ mark.highlight {
 .result-seed-empty {
   color: #9a8f85;
   font-size: 12px;
+}
+
+/* 모바일: 본문 50% 맞춤 스케일링 */
+@media (max-width: 768px) {
+  .engine-shell {
+    --body-scale: min(1, calc((100vw - 24px) / (var(--sheet-width) / 2)));
+    overflow-x: auto;
+  }
+
+  .engine-viewport {
+    justify-content: flex-start;
+  }
+
+  .engine-stage {
+    width: calc(var(--sheet-width) * var(--body-scale));
+  }
+}
+
+@media (max-width: 768px) {
+  @supports (zoom: 1) {
+    .engine-stage-inner.engine-scale {
+      zoom: var(--body-scale);
+    }
+  }
+  @supports not (zoom: 1) {
+    .engine-stage-inner.engine-scale {
+      transform: scale(var(--body-scale));
+      transform-origin: top left;
+    }
+  }
 }

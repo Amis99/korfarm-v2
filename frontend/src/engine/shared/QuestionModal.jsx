@@ -170,33 +170,51 @@ function QuestionModal({
     if (!modal) return;
     const { containerWidth, containerHeight, modalWidth, modalHeight, scale } =
       getContainerMetrics(modal);
-    const maxX = Math.max(8, containerWidth - modalWidth - 8);
-    const maxY = Math.max(8, containerHeight - modalHeight - 8);
-    const gap = 12;
+    const gap = 8;
+    const pad = 8;
+    const maxX = Math.max(pad, containerWidth - modalWidth - pad);
+    const maxY = Math.max(pad, containerHeight - modalHeight - pad);
+    const aLeft = (anchorRect.left ?? 0) / scale;
+    const aRight = (anchorRect.right ?? 0) / scale;
+    const aTop = (anchorRect.top ?? 0) / scale;
+    const aHeight = (anchorRect.height ?? 0) / scale;
+    const aBottom = aTop + aHeight;
+    const halfW = containerWidth / 2;
+
     const isMobile = window.innerWidth < 768;
-    const anchorLeft = (anchorRect.left ?? 28) / scale;
-    const anchorRight = (anchorRect.right ?? 28) / scale;
-    const anchorTop = (anchorRect.top ?? 28) / scale;
-    const anchorHeight = (anchorRect.height ?? 0) / scale;
-    if (isMobile) {
-      const spaceBelow = containerHeight - (anchorTop + anchorHeight);
-      const placeBelow = spaceBelow >= modalHeight + gap;
-      const baseY = placeBelow
-        ? (anchorTop + anchorHeight + gap)
-        : (anchorTop - modalHeight - gap);
-      const nextY = clamp(baseY, 8, maxY);
-      const nextX = clamp(anchorLeft || 28, 8, maxX);
-      setPosition({ x: nextX, y: nextY });
-      return;
+    const spaces = isMobile
+      ? [
+          { dir: "above", space: aTop },
+          { dir: "below", space: containerHeight - aBottom },
+        ]
+      : [
+          { dir: "above", space: aTop },
+          { dir: "below", space: containerHeight - aBottom },
+          { dir: "right", space: containerWidth - aRight },
+          { dir: "left", space: aLeft },
+        ];
+    spaces.sort((a, b) => b.space - a.space);
+    const bestDir = spaces[0].dir;
+
+    let nextX;
+    let nextY;
+    if (bestDir === "above") {
+      nextY = aTop - gap - modalHeight;
+      nextX = (aLeft + aRight) / 2 - modalWidth / 2;
+    } else if (bestDir === "below") {
+      nextY = aBottom + gap;
+      nextX = (aLeft + aRight) / 2 - modalWidth / 2;
+    } else if (bestDir === "right") {
+      nextX = halfW;
+      nextY = aTop + modalHeight <= containerHeight - pad ? aTop : aBottom - modalHeight;
+    } else {
+      nextX = halfW - modalWidth;
+      nextY = aTop + modalHeight <= containerHeight - pad ? aTop : aBottom - modalHeight;
     }
-    const align = anchorRect.align || "right";
-    const baseX =
-      align === "right"
-        ? (anchorRight ?? 28) + gap
-        : (anchorLeft ?? 28) - modalWidth - gap;
-    const nextX = clamp(baseX, 8, maxX);
-    const nextY = clamp(anchorTop || 28, 8, maxY);
-    setPosition({ x: nextX, y: nextY });
+    setPosition({
+      x: clamp(nextX, pad, maxX),
+      y: clamp(nextY, pad, maxY),
+    });
   }, [anchorRect]);
 
   useEffect(() => {

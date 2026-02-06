@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import useHighlightAnchor from "../shared/useHighlightAnchor";
 
 const DEFAULT_INTENSIVE_SCORING = {
   correctDeltaSec: 20,
@@ -182,6 +183,7 @@ function ReadingTrainingModule({ content }) {
 
   const intensiveAdvanceRef = useRef(null);
   const modalMarkRef = useRef(null);
+  const moduleRef = useRef(null);
   const cardRefs = useRef({});
   const positionsRef = useRef({});
   const recallAdvanceRef = useRef(null);
@@ -203,6 +205,8 @@ function ReadingTrainingModule({ content }) {
     const removed = removedChoices[step?.stepId] || [];
     return (stepQuestion?.choices || []).filter((choice) => !removed.includes(choice.id));
   }, [step, stepQuestion, removedChoices]);
+
+  const anchorRect = useHighlightAnchor(moduleRef, ".worksheet-highlight", [stepIndex, stage]);
 
   const recallCards = recall.cards || [];
   const recallCorrectOrder = recall.correctOrder?.length
@@ -660,7 +664,7 @@ function ReadingTrainingModule({ content }) {
   }
 
   return (
-    <div className="reading-training-module">
+    <div className="reading-training-module" ref={moduleRef}>
       {stage === "INTENSIVE" ? (
         <>
           <div className="reading-passage">
@@ -688,6 +692,7 @@ function ReadingTrainingModule({ content }) {
               prompt={stepQuestion.prompt}
               choices={stepChoices}
               onSelect={handleIntensiveAnswer}
+              anchorRect={anchorRect}
               mark={modalMark}
               shuffleKey={step.stepId || stepIndex}
             />
