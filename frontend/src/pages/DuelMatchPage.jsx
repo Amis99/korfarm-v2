@@ -219,9 +219,27 @@ function DuelMatchPage() {
         <div className="duel-progress-indicator">
           라운드 {questionIndex + 1}
         </div>
-        <div className="duel-remaining-badge">
-          {remainingCount || activeCount}명 생존
-        </div>
+      </div>
+
+      {/* 참가자 프로필 스트립 */}
+      <div className="duel-player-strip">
+        {players.map((p) => {
+          const pid = p.user_id ?? p.userId;
+          const name = pid === userId ? "나" : (p.user_name ?? p.userName ?? "?");
+          const isActive = p.active !== false;
+          const answeredCurrent = p.answered_current ?? p.answeredCurrent;
+          const isMe = pid === userId;
+          return (
+            <div
+              key={pid}
+              className={`duel-player-avatar${!isActive ? " eliminated" : ""}${answeredCurrent ? " answered" : ""}${isMe ? " me" : ""}`}
+              title={name}
+            >
+              <span className="avatar-letter">{name.charAt(0)}</span>
+              {answeredCurrent && isActive && <span className="avatar-check">✓</span>}
+            </div>
+          );
+        })}
       </div>
 
       {currentQuestion && (
@@ -286,28 +304,14 @@ function DuelMatchPage() {
             <p className="eliminated-info">
               💥 {roundResult.eliminated.length}명 탈락! 남은 참가자: {roundResult.remainingCount}명
             </p>
+          ) : answerResult?.isCorrect ? (
+            <p className="all-correct">전원 정답! 다음 문제로 진행합니다.</p>
           ) : (
             <p className="no-eliminated">전원 오답! 탈락 없이 다음 문제로 진행합니다.</p>
           )}
         </div>
       )}
 
-      {/* 참가자 상태 */}
-      <div className="duel-participants">
-        {players.filter((p) => p.active !== false).map((p) => {
-          const answeredCurrent = p.answered_current ?? p.answeredCurrent;
-          return (
-            <div key={p.user_id} className={`duel-participant ${answeredCurrent ? "answered" : ""}`}>
-              <div className="name">
-                {p.user_id === userId ? "나" : (p.user_name || "상대")}
-              </div>
-              <div className="status-indicator">
-                {answeredCurrent ? "✓" : "···"}
-              </div>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 }
