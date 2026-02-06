@@ -3,97 +3,6 @@ import { useEngine } from "../core/EngineContext";
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
-const parseTransformScale = (transform) => {
-  if (!transform || transform === "none") return null;
-  const matrix3d = transform.match(/matrix3d\(([^)]+)\)/);
-  if (matrix3d) {
-    const values = matrix3d[1].split(",").map((value) => Number.parseFloat(value.trim()));
-    const scale = values[0];
-    return Number.isFinite(scale) && scale > 0 ? scale : null;
-  }
-  const matrix = transform.match(/matrix\(([^)]+)\)/);
-  if (!matrix) return null;
-  const values = matrix[1].split(",").map((value) => Number.parseFloat(value.trim()));
-  const scale = values[0];
-  return Number.isFinite(scale) && scale > 0 ? scale : null;
-};
-
-const getScaleFromHost = (host) => {
-  if (!host) return 1;
-  const computed = window.getComputedStyle(host);
-  const zoom = Number.parseFloat(computed.zoom);
-  if (Number.isFinite(zoom) && zoom > 0 && Math.abs(zoom - 1) > 0.001) {
-    return zoom;
-  }
-  const transformScale = parseTransformScale(computed.transform);
-  if (transformScale && Math.abs(transformScale - 1) > 0.001) {
-    return transformScale;
-  }
-  const rect = host.getBoundingClientRect();
-  const width = host.offsetWidth || Number.parseFloat(computed.width);
-  if (Number.isFinite(width) && width > 0) {
-    const ratio = rect.width / width;
-    if (Number.isFinite(ratio) && ratio > 0) {
-      return ratio;
-    }
-  }
-  return 1;
-};
-
-const getContainerMetrics = (modal) => {
-  const container = modal?.closest(".engine-body") || document.body;
-  const containerRect = container.getBoundingClientRect();
-  const modalRect = modal.getBoundingClientRect();
-  const containerWidth = container.offsetWidth || containerRect.width;
-  const containerHeight = container.offsetHeight || containerRect.height;
-  const modalWidth = modal.offsetWidth || modalRect.width;
-  const modalHeight = modal.offsetHeight || modalRect.height;
-  let scale = 1;
-  const scaleHost = modal?.closest(".engine-scale") || modal;
-  const hostScale = getScaleFromHost(scaleHost);
-  if (Number.isFinite(hostScale) && hostScale > 0) {
-    scale = hostScale;
-  }
-  if (Math.abs(scale - 1) < 0.001) {
-    const modalScale = modalWidth ? modalRect.width / modalWidth : 1;
-    if (Number.isFinite(modalScale) && modalScale > 0 && Math.abs(modalScale - 1) > 0.001) {
-      scale = modalScale;
-    }
-  }
-  if (Math.abs(scale - 1) < 0.001) {
-    const shell = modal?.closest(".engine-shell");
-    if (shell) {
-      const computed = window.getComputedStyle(shell);
-      const sheetWidth = Number.parseFloat(computed.getPropertyValue("--sheet-width"));
-      if (Number.isFinite(sheetWidth) && sheetWidth > 0) {
-        const nextScale = Math.min(1, (window.innerWidth - 24) / sheetWidth);
-        if (Number.isFinite(nextScale) && nextScale > 0 && Math.abs(nextScale - 1) > 0.001) {
-          scale = nextScale;
-        }
-      }
-    }
-  }
-  if (!Number.isFinite(scale) || scale <= 0 || Math.abs(scale - 1) < 0.001) {
-    const ratio =
-      containerWidth && containerRect.width ? containerRect.width / containerWidth : 1;
-    if (Number.isFinite(ratio) && ratio > 0) {
-      scale = ratio;
-    } else {
-      scale = 1;
-    }
-  }
-  return {
-    container,
-    containerRect,
-    modalRect,
-    containerWidth,
-    containerHeight,
-    modalWidth,
-    modalHeight,
-    scale,
-  };
-};
-
 const shuffleArray = (items) => {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i -= 1) {
@@ -155,7 +64,11 @@ function QuestionModal({
   useEffect(() => {
     const modal = modalRef.current;
     if (!modal) return;
-    const { containerWidth, containerHeight, modalWidth, modalHeight } = getContainerMetrics(modal);
+    const container = modal.closest(".engine-body") || document.body;
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    const modalWidth = modal.offsetWidth;
+    const modalHeight = modal.offsetHeight;
     const maxX = Math.max(8, containerWidth - modalWidth - 8);
     const maxY = Math.max(8, containerHeight - modalHeight - 8);
     setPosition((prev) => ({
@@ -168,16 +81,19 @@ function QuestionModal({
     if (!anchorRect) return;
     const modal = modalRef.current;
     if (!modal) return;
-    const { containerWidth, containerHeight, modalWidth, modalHeight, scale } =
-      getContainerMetrics(modal);
+    const container = modal.closest(".engine-body") || document.body;
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    const modalWidth = modal.offsetWidth;
+    const modalHeight = modal.offsetHeight;
     const gap = 8;
     const pad = 8;
     const maxX = Math.max(pad, containerWidth - modalWidth - pad);
     const maxY = Math.max(pad, containerHeight - modalHeight - pad);
-    const aLeft = (anchorRect.left ?? 0) / scale;
-    const aRight = (anchorRect.right ?? 0) / scale;
-    const aTop = (anchorRect.top ?? 0) / scale;
-    const aHeight = (anchorRect.height ?? 0) / scale;
+    const aLeft = anchorRect.left ?? 0;
+    const aRight = anchorRect.right ?? 0;
+    const aTop = anchorRect.top ?? 0;
+    const aHeight = anchorRect.height ?? 0;
     const aBottom = aTop + aHeight;
     const halfW = containerWidth / 2;
 
@@ -371,15 +287,14 @@ function QuestionModal({
     const modal = modalRef.current;
     if (!modal) return;
     event.preventDefault();
-    const {
-      containerRect,
-      modalRect,
-      containerWidth,
-      containerHeight,
-      modalWidth,
-      modalHeight,
-      scale,
-    } = getContainerMetrics(modal);
+    const container = modal.closest(".engine-body") || document.body;
+    const containerRect = container.getBoundingClientRect();
+    const scale = containerRect.width / container.offsetWidth || 1;
+    const modalRect = modal.getBoundingClientRect();
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    const modalWidth = modal.offsetWidth;
+    const modalHeight = modal.offsetHeight;
     const offsetX = (event.clientX - modalRect.left) / (scale || 1);
     const offsetY = (event.clientY - modalRect.top) / (scale || 1);
     dragState.current = {

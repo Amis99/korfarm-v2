@@ -359,14 +359,15 @@ function WorksheetQuizModule({ content }) {
     const container = node.closest(".engine-body");
     if (!container) return;
     const containerRect = container.getBoundingClientRect();
+    const scale = containerRect.width / container.offsetWidth || 1;
     const highlightNode =
       node.querySelector(".worksheet-highlight") || node.querySelector(".worksheet-blank.active");
     const rect = (highlightNode || node).getBoundingClientRect();
     setAnchorRect({
-      left: rect.left - containerRect.left,
-      right: rect.right - containerRect.left,
-      top: rect.top - containerRect.top,
-      height: rect.height,
+      left: (rect.left - containerRect.left) / scale,
+      right: (rect.right - containerRect.left) / scale,
+      top: (rect.top - containerRect.top) / scale,
+      height: rect.height / scale,
     });
   }, [currentIndex, pages.length]);
 

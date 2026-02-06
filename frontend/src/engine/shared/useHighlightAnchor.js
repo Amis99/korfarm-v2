@@ -22,12 +22,13 @@ export default function useHighlightAnchor(rootRef, selector, deps) {
       return;
     }
     const containerRect = container.getBoundingClientRect();
+    const scale = containerRect.width / container.offsetWidth || 1;
     const rect = highlight.getBoundingClientRect();
     setAnchorRect({
-      left: rect.left - containerRect.left,
-      right: rect.right - containerRect.left,
-      top: rect.top - containerRect.top,
-      height: rect.height,
+      left: (rect.left - containerRect.left) / scale,
+      right: (rect.right - containerRect.left) / scale,
+      top: (rect.top - containerRect.top) / scale,
+      height: rect.height / scale,
     });
   }, deps);
 
