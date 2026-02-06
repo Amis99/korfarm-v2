@@ -38,12 +38,13 @@ function DuelResultPage() {
   }
 
   const results = result.results || [];
+  const roomId = result.room_id;
   const serverId = result.server_id;
 
-  const formatTime = (ms) => {
-    if (!ms) return "0.0초";
-    return (ms / 1000).toFixed(1) + "초";
-  };
+  // "다시 대결" 목적지: 방이 있으면 대기실, 없으면 로비
+  const rematchTo = roomId
+    ? `/duel/room/${roomId}`
+    : serverId ? `/duel/lobby/${serverId}` : "/duel";
 
   return (
     <div className="duel-result">
@@ -53,6 +54,7 @@ function DuelResultPage() {
         {results.map((r, idx) => {
           const isMe = r.user_id === userId;
           const isWinner = r.rank_position === 1;
+          const answered = r.answered_count ?? r.answeredCount ?? 0;
           return (
             <div
               key={r.user_id}
@@ -67,7 +69,7 @@ function DuelResultPage() {
                   {isMe && " (나)"}
                 </div>
                 <div className="score-detail">
-                  정답 {r.correct_count}/10 | 시간 {formatTime(r.total_time_ms)}
+                  {answered}문제 중 {r.correct_count}문제 정답
                 </div>
               </div>
               <div className="duel-result-reward">
@@ -85,14 +87,14 @@ function DuelResultPage() {
         })}
       </div>
 
-      {result.total_escrow > 0 && (
+      {result.total_escrow > 0 && result.system_fee > 0 && (
         <div style={{ textAlign: "center", fontSize: 13, color: "#8a7468", marginBottom: 20 }}>
           총 에스크로: {result.total_escrow}씨앗 | 수수료: {result.system_fee}씨앗
         </div>
       )}
 
       <div className="duel-result-actions">
-        <Link to={serverId ? `/duel/lobby/${serverId}` : "/duel"} className="primary-btn">
+        <Link to={rematchTo} className="primary-btn">
           다시 대결
         </Link>
         <Link to="/start" className="secondary-btn">홈으로</Link>

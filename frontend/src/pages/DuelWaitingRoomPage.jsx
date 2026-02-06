@@ -71,8 +71,8 @@ function DuelWaitingRoomPage() {
       }
 
       if (type === "room.closed") {
-        alert("방이 닫혔습니다.");
-        navigate(-1);
+        alert(payload?.reason || "방이 닫혔습니다.");
+        navigate("/duel");
         return;
       }
 

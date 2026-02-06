@@ -132,19 +132,19 @@ class DuelService(
         player.status = "left"
         duelRoomPlayerRepository.save(player)
 
-        val remaining = duelRoomPlayerRepository.findByRoomIdOrderByJoinedAtAsc(roomId)
-            .filter { it.status == "joined" }
-        if (remaining.isEmpty()) {
-            // 아무도 없으면 방 닫기
-            duelRoomRepository.findById(roomId).ifPresent {
-                it.status = "closed"
-                duelRoomRepository.save(it)
-            }
-        } else if (remaining.size == 1) {
-            // 1명만 남으면 방 닫기 (혼자 대결 불가)
-            duelRoomRepository.findById(roomId).ifPresent {
-                it.status = "closed"
-                duelRoomRepository.save(it)
+        val room = duelRoomRepository.findById(roomId).orElse(null) ?: return
+        val isHost = room.createdBy == userId
+
+        if (isHost) {
+            // 방장이 나가면 무조건 방 닫기
+            room.status = "closed"
+            duelRoomRepository.save(room)
+        } else {
+            val remaining = duelRoomPlayerRepository.findByRoomIdOrderByJoinedAtAsc(roomId)
+                .filter { it.status == "joined" }
+            if (remaining.isEmpty() || remaining.size == 1) {
+                room.status = "closed"
+                duelRoomRepository.save(room)
             }
         }
     }
