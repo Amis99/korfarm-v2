@@ -142,7 +142,7 @@ function App() {
         <Route path="/admin/tests" element={<AdminTestPage />} />
         <Route path="/admin/tests/:testId" element={<AdminTestDetailPage />} />
         <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />
-        <Route path="/seed-log" element={<SeedLogPage />} />
+        <Route path="/seed-log" element={<Navigate to="/tests/history" replace />} />
         <Route path="/duel" element={<DuelMainPage />} />
         <Route path="/duel/lobby/:serverId" element={<DuelLobbyPage />} />
         <Route path="/duel/room/:roomId" element={<DuelWaitingRoomPage />} />

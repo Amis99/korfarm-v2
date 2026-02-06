@@ -331,10 +331,10 @@ function StartPage() {
                       <h3>수확 장부</h3>
                       <p>작물 거래 내역</p>
                     </div>
-                    <div className="start-paid-card" onClick={() => navWithChild("/seed-log")}>
-                      <span className="material-symbols-outlined">history</span>
-                      <h3>씨앗 내역</h3>
-                      <p>씨앗 획득 기록</p>
+                    <div className="start-paid-card" onClick={() => navWithChild("/tests/history")}>
+                      <span className="material-symbols-outlined">assessment</span>
+                      <h3>테스트 기록실</h3>
+                      <p>성적표 및 오답 노트</p>
                     </div>
                   </div>
 
@@ -657,10 +657,10 @@ function StartPage() {
                 <p>작물 거래 내역</p>
                 {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
-              <div className="start-paid-card" onClick={() => navigate("/seed-log")}>
-                <span className="material-symbols-outlined">history</span>
-                <h3>씨앗 내역</h3>
-                <p>씨앗 획득 기록</p>
+              <div className="start-paid-card" onClick={() => navigate("/tests/history")}>
+                <span className="material-symbols-outlined">assessment</span>
+                <h3>테스트 기록실</h3>
+                <p>성적표 및 오답 노트</p>
               </div>
             </div>
 
