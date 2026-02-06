@@ -139,8 +139,10 @@ function DuelMatchPage() {
     return () => {
       cancelled = true;
       clearInterval(timerRef.current);
-      if (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING) {
+      if (ws.readyState === WebSocket.OPEN) {
         ws.close();
+      } else if (ws.readyState === WebSocket.CONNECTING) {
+        ws.addEventListener("open", () => ws.close(), { once: true });
       }
     };
   }, [matchId, token, navigate]);

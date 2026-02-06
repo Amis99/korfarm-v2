@@ -86,8 +86,11 @@ function DuelWaitingRoomPage() {
 
     return () => {
       cancelled = true;
-      if (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING) {
+      // StrictMode double-invoke 대응: OPEN 상태일 때만 닫기
+      if (ws.readyState === WebSocket.OPEN) {
         ws.close();
+      } else if (ws.readyState === WebSocket.CONNECTING) {
+        ws.addEventListener("open", () => ws.close(), { once: true });
       }
     };
   }, [roomId, token, navigate]);
