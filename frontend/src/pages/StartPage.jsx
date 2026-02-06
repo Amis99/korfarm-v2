@@ -424,7 +424,7 @@ function StartPage() {
 
         {showInventoryPopup && (
           <div className="result-overlay" onClick={() => setShowInventoryPopup(false)}>
-            <div className="result-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 360, width: "92vw" }}>
+            <div className="result-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 360, width: "92vw", background: "#fff", borderRadius: 24, padding: 24, aspectRatio: "auto", gridTemplateRows: "none", display: "grid", gap: 0, boxShadow: "0 12px 32px rgba(0,0,0,0.18)" }}>
               <h2 style={{ margin: "0 0 12px", fontSize: 20 }}>보유 현황</h2>
               <div style={{ display: "grid", gap: 8 }}>
                 {INVENTORY_ITEMS.map((item) => (
@@ -780,7 +780,7 @@ function StartPage() {
 
       {showInventoryPopup && (
         <div className="result-overlay" onClick={() => setShowInventoryPopup(false)}>
-          <div className="result-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 360, width: "92vw" }}>
+          <div className="result-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 360, width: "92vw", background: "#fff", borderRadius: 24, padding: 24, aspectRatio: "auto", gridTemplateRows: "none", display: "grid", gap: 0, boxShadow: "0 12px 32px rgba(0,0,0,0.18)" }}>
             <h2 style={{ margin: "0 0 12px", fontSize: 20 }}>보유 현황</h2>
             <div style={{ display: "grid", gap: 8 }}>
               {INVENTORY_ITEMS.map((item) => (
