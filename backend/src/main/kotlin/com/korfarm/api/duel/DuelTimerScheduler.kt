@@ -36,4 +36,14 @@ class DuelTimerScheduler(
             }
         }
     }
+
+    // 5분마다 30분 이상 된 오래된 대기방 정리
+    @Scheduled(fixedRate = 300_000)
+    fun cleanupStaleRooms() {
+        try {
+            duelService.cleanupStaleRooms()
+        } catch (e: Exception) {
+            log.error("대기방 정리 실패", e)
+        }
+    }
 }

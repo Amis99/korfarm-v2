@@ -24,7 +24,12 @@ data class DuelRoomPlayerView(
     val userName: String?,
     val status: String,
     val isReady: Boolean,
-    val joinedAt: LocalDateTime
+    val joinedAt: LocalDateTime,
+    val profileImageUrl: String? = null,
+    val levelId: String? = null,
+    val wins: Int = 0,
+    val losses: Int = 0,
+    val winRate: Double = 0.0
 )
 
 data class DuelRoomJoinResult(
@@ -80,6 +85,7 @@ data class DuelMatchResultView(
     val result: String,
     val rankPosition: Int?,
     val correctCount: Int,
+    val answeredCount: Int,
     val totalTimeMs: Long,
     val rewardAmount: Int
 )
@@ -87,6 +93,7 @@ data class DuelMatchResultView(
 data class DuelMatchResultDetailView(
     val matchId: String,
     val serverId: String,
+    val roomId: String? = null,
     val results: List<DuelMatchResultView>,
     val totalEscrow: Int,
     val systemFee: Int
