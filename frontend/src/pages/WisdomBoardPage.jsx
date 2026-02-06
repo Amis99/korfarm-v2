@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet, apiDelete } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/wisdom.css";
@@ -16,7 +16,12 @@ const PER_PAGE = 15;
 function WisdomBoardPage() {
   const { levelId } = useParams();
   const navigate = useNavigate();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
+  const [searchParams] = useSearchParams();
+  const studentId = searchParams.get("studentId");
+  const isParent = user?.roles?.includes("PARENT");
+  const isViewingChild = isParent && studentId;
+
   const [posts, setPosts] = useState([]);
   const [hasMyPost, setHasMyPost] = useState(true);
   const [topics, setTopics] = useState([]);
@@ -24,6 +29,16 @@ function WisdomBoardPage() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(null);
+  const [childName, setChildName] = useState("");
+
+  // 부모가 자녀 정보 가져오기
+  useEffect(() => {
+    if (isViewingChild) {
+      apiGet(`/v1/parents/children/${studentId}/profile`)
+        .then((profile) => setChildName(profile?.name || "자녀"))
+        .catch(() => {});
+    }
+  }, [isViewingChild, studentId]);
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}wisdom-topics/${levelId}.json`)
@@ -73,15 +88,19 @@ function WisdomBoardPage() {
     return `${date} ${time}`;
   };
 
+  const backLink = isViewingChild ? `/writing?studentId=${studentId}` : "/writing";
+
   return (
     <div className="wisdom">
       <div className="wis-topbar">
         <div className="wis-topbar-inner">
-          <Link to="/writing" className="wis-back">
+          <Link to={backLink} className="wis-back">
             <span className="material-symbols-outlined">arrow_back</span>
             레벨 선택
           </Link>
-          <h1 className="wis-topbar-title">{LEVEL_NAMES[levelId] || levelId}</h1>
+          <h1 className="wis-topbar-title">
+            {isViewingChild ? `${childName}의 ` : ""}{LEVEL_NAMES[levelId] || levelId}
+          </h1>
         </div>
       </div>
 
@@ -96,7 +115,7 @@ function WisdomBoardPage() {
             <option key={t.key} value={t.key}>{t.label}</option>
           ))}
         </select>
-        {isLoggedIn && (
+        {isLoggedIn && !isViewingChild && (
           <Link to={`/writing/${levelId}/new`} className="wis-btn">
             <span className="material-symbols-outlined">edit</span>
             글쓰기
@@ -107,7 +126,7 @@ function WisdomBoardPage() {
       <div className="wis-body">
         {loading ? (
           <div className="wis-empty">불러오는 중...</div>
-        ) : !hasMyPost && topicKey ? (
+        ) : !hasMyPost && topicKey && !isViewingChild ? (
           <div className="wis-empty">
             <div className="wis-empty-icon">
               <span className="material-symbols-outlined" style={{ fontSize: 48, color: "var(--wis-orange)" }}>lock</span>

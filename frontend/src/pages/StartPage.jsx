@@ -58,22 +58,60 @@ function StartPage() {
   const [subActive, setSubActive] = useState(false);
   const [adminLevelOverride, setAdminLevelOverride] = useState("");
 
+  // 부모용 상태
+  const [linkedChildren, setLinkedChildren] = useState([]);
+  const [selectedChild, setSelectedChild] = useState(null);
+  const [childProfile, setChildProfile] = useState(null);
+  const [childInventory, setChildInventory] = useState(null);
+
   const isAdmin = user?.roles?.some((r) => r === "HQ_ADMIN" || r === "ORG_ADMIN");
+  const isParent = user?.roles?.includes("PARENT");
+
+  // 부모인 경우 연결된 자녀 목록 가져오기
+  useEffect(() => {
+    if (!isLoggedIn || !isParent) return;
+    apiGet("/v1/parents/links")
+      .then((links) => {
+        const activeLinks = (links || []).filter((l) => l.status === "active");
+        setLinkedChildren(activeLinks);
+        if (activeLinks.length > 0 && !selectedChild) {
+          setSelectedChild(activeLinks[0]);
+        }
+      })
+      .catch(() => {});
+  }, [isLoggedIn, isParent]);
+
+  // 선택된 자녀 정보 가져오기
+  useEffect(() => {
+    if (!isParent || !selectedChild?.studentUserId) return;
+    const studentId = selectedChild.studentUserId;
+    apiGet(`/v1/parents/children/${studentId}/profile`)
+      .then(setChildProfile)
+      .catch(() => setChildProfile(null));
+    apiGet(`/v1/parents/children/${studentId}/inventory`)
+      .then(setChildInventory)
+      .catch(() => setChildInventory(null));
+  }, [isParent, selectedChild]);
 
   useEffect(() => {
     if (!isLoggedIn) return;
-    apiGet("/v1/inventory").then(setInventory).catch(() => {});
-    apiGet("/v1/subscription")
-      .then((sub) => {
-        const st = sub?.status;
-        if (st === "active" || st === "canceled") setSubActive(true);
-      })
-      .catch(() => {});
+    // 부모가 아닌 경우에만 자신의 인벤토리/구독 조회
+    if (!isParent) {
+      apiGet("/v1/inventory").then(setInventory).catch(() => {});
+      apiGet("/v1/subscription")
+        .then((sub) => {
+          const st = sub?.status;
+          if (st === "active" || st === "canceled") setSubActive(true);
+        })
+        .catch(() => {});
+    }
     apiGet("/v1/seasons/current")
       .then((season) => {
         if (season?.id) {
           apiGet(`/v1/seasons/${season.id}/harvest-rankings`).then((r) => setHarvestRanking(r?.items || r || [])).catch(() => {});
-          apiGet(`/v1/seasons/${season.id}/duel-rankings`).then((r) => setDuelRanking(r?.items || r || [])).catch(() => {});
+          if (!isParent) {
+            apiGet(`/v1/seasons/${season.id}/duel-rankings`).then((r) => setDuelRanking(r?.items || r || [])).catch(() => {});
+          }
         }
       })
       .catch(() => {});
@@ -87,7 +125,7 @@ function StartPage() {
       setProfile(data);
       const lid = data?.level_id || data?.levelId;
       const lsd = data?.learning_start_date || data?.learningStartDate || null;
-      if (lid) {
+      if (lid && !isParent) {
         const di = calcDayIndex(lsd);
         const dayStr = String(di).padStart(3, "0");
         const base = import.meta.env.BASE_URL || "/";
@@ -105,13 +143,15 @@ function StartPage() {
       }
     }).catch(() => {});
     // 관리자인 경우 기본 레벨을 override 초기값으로 설정
-    apiGet("/v1/ledger")
-      .then((entries) => {
-        const seeds = (entries || []).filter((e) => e.currencyType === "seed").slice(0, 5);
-        setSeedLog(seeds);
-      })
-      .catch(() => {});
-  }, [isLoggedIn]);
+    if (!isParent) {
+      apiGet("/v1/ledger")
+        .then((entries) => {
+          const seeds = (entries || []).filter((e) => e.currencyType === "seed").slice(0, 5);
+          setSeedLog(seeds);
+        })
+        .catch(() => {});
+    }
+  }, [isLoggedIn, isParent]);
 
   // 관리자 레벨 변경 시 daily reading 재로드
   useEffect(() => {
@@ -140,21 +180,252 @@ function StartPage() {
   const levelLabel = LEVEL_LABEL_MAP[levelId] || levelId || "";
   const learningStartDate = profile?.learning_start_date || profile?.learningStartDate || null;
   const dayOfYear = calcDayIndex(learningStartDate);
-  const totalSeeds = Array.isArray(inventory?.seeds)
-    ? inventory.seeds.reduce((s, e) => s + (e.count || 0), 0)
-    : Object.values(inventory?.seeds || {}).reduce((a, b) => a + (typeof b === "number" ? b : 0), 0);
-  const totalCrops = Array.isArray(inventory?.crops)
-    ? inventory.crops.reduce((s, e) => s + (e.count || 0), 0)
-    : Object.values(inventory?.crops || {}).reduce((a, b) => a + (typeof b === "number" ? b : 0), 0);
-  const fertilizerCount = inventory?.fertilizer ?? 0;
 
-  const cropsObj = inventory?.crops || {};
+  // 부모용 자녀 정보
+  const childLevelId = childProfile?.level_id || childProfile?.levelId;
+  const childLevelLabel = LEVEL_LABEL_MAP[childLevelId] || childLevelId || "";
+
+  const displayInventory = isParent ? childInventory : inventory;
+  const totalSeeds = Array.isArray(displayInventory?.seeds)
+    ? displayInventory.seeds.reduce((s, e) => s + (e.count || 0), 0)
+    : Object.values(displayInventory?.seeds || {}).reduce((a, b) => a + (typeof b === "number" ? b : 0), 0);
+  const totalCrops = Array.isArray(displayInventory?.crops)
+    ? displayInventory.crops.reduce((s, e) => s + (e.count || 0), 0)
+    : Object.values(displayInventory?.crops || {}).reduce((a, b) => a + (typeof b === "number" ? b : 0), 0);
+  const fertilizerCount = displayInventory?.fertilizer ?? 0;
+
+  const cropsObj = displayInventory?.crops || {};
   const cropWheat = cropsObj.crop_wheat ?? 0;
   const cropOat = cropsObj.crop_oat ?? 0;
   const cropRice = cropsObj.crop_rice ?? 0;
   const cropGrape = cropsObj.crop_grape ?? 0;
   const seasonScore = (cropWheat * cropOat * cropRice * cropGrape * 10) + totalSeeds;
 
+  // 부모용 네비게이션 함수 (자녀 ID 포함)
+  const navWithChild = (path) => {
+    if (isParent && selectedChild?.studentUserId) {
+      navigate(`${path}?studentId=${selectedChild.studentUserId}`);
+    } else {
+      navigate(path);
+    }
+  };
+
+  // 부모 전용 화면
+  if (isParent) {
+    return (
+      <div className="start-page">
+        <div className="start-shell">
+          <header className="start-header">
+            <div className="start-header-top">
+              <div className="start-avatar">
+                <span className="material-symbols-outlined start-avatar-fallback">family_restroom</span>
+              </div>
+              <div className="start-greeting">
+                <h1>
+                  {displayName} 학부모님, <span>안녕하세요!</span>
+                </h1>
+                {linkedChildren.length > 0 ? (
+                  <div style={{ marginTop: 8 }}>
+                    <label style={{ fontSize: 13, color: "#666", marginRight: 8 }}>자녀 선택:</label>
+                    <select
+                      value={selectedChild?.studentUserId || ""}
+                      onChange={(e) => {
+                        const child = linkedChildren.find((c) => c.studentUserId === e.target.value);
+                        setSelectedChild(child);
+                      }}
+                      style={{
+                        padding: "6px 10px",
+                        borderRadius: 10,
+                        border: "1px solid rgba(0,0,0,0.15)",
+                        background: "#fff",
+                        fontSize: 13,
+                        color: "#222",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {linkedChildren.map((child) => (
+                        <option key={child.studentUserId} value={child.studentUserId}>
+                          {child.studentName || child.studentLoginId}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : (
+                  <p style={{ marginTop: 8, fontSize: 13, color: "#888" }}>
+                    연결된 자녀가 없습니다.
+                    <Link to="/parents/links" style={{ marginLeft: 8, color: "#f06c24" }}>자녀 연결하기</Link>
+                  </p>
+                )}
+                {selectedChild && childProfile && (
+                  <div className="start-season-score" style={{ marginTop: 8 }}>
+                    <span className="material-symbols-outlined">emoji_events</span>
+                    <span className="start-level-label">{childLevelLabel}</span>
+                    <span className="start-season-label">자녀 시즌 점수</span>
+                    <strong>{seasonScore.toLocaleString()}</strong>
+                  </div>
+                )}
+                <button
+                  type="button"
+                  onClick={() => navigate("/profile")}
+                  style={{
+                    marginTop: 10,
+                    padding: "6px 14px",
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    borderRadius: 10,
+                    background: "#fff",
+                    fontSize: 13,
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 4,
+                  }}
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: 16 }}>settings</span>
+                  내 정보 수정
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <div className="start-grid">
+            <div className="start-section">
+              <h2>
+                <span className="material-symbols-outlined">visibility</span>
+                자녀 학습 현황
+              </h2>
+
+              {!selectedChild ? (
+                <div className="start-card">
+                  <p>자녀를 연결해 주세요.</p>
+                  <Link className="start-card-button" to="/parents/links">자녀 연결</Link>
+                </div>
+              ) : (
+                <>
+                  {/* 자녀 학습 메뉴 */}
+                  <div className="start-paid-grid">
+                    <div className="start-paid-card" onClick={() => navWithChild("/writing")}>
+                      <span className="material-symbols-outlined">edit_note</span>
+                      <h3>지식과 지혜</h3>
+                      <p>자녀 글쓰기 확인</p>
+                    </div>
+                    <div className="start-paid-card" onClick={() => navWithChild("/tests")}>
+                      <span className="material-symbols-outlined">quiz</span>
+                      <h3>테스트 창고</h3>
+                      <p>시험 결과 확인</p>
+                    </div>
+                    <div className="start-paid-card" onClick={() => navWithChild("/harvest-ledger")}>
+                      <span className="material-symbols-outlined">menu_book</span>
+                      <h3>수확 장부</h3>
+                      <p>작물 거래 내역</p>
+                    </div>
+                    <div className="start-paid-card" onClick={() => navWithChild("/seed-log")}>
+                      <span className="material-symbols-outlined">history</span>
+                      <h3>씨앗 내역</h3>
+                      <p>씨앗 획득 기록</p>
+                    </div>
+                  </div>
+
+                  {/* 자녀 인벤토리 요약 */}
+                  {childInventory && (
+                    <>
+                      <h2>
+                        <span className="material-symbols-outlined">inventory_2</span>
+                        자녀 보유 현황
+                      </h2>
+                      <div className="start-card">
+                        <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+                          <div>
+                            <strong>씨앗</strong>
+                            <p>{totalSeeds}개</p>
+                          </div>
+                          <div>
+                            <strong>작물</strong>
+                            <p>{totalCrops}개</p>
+                          </div>
+                          <div>
+                            <strong>비료</strong>
+                            <p>{fertilizerCount}개</p>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
+
+            <aside className="start-side">
+              {/* 시즌 랭킹 */}
+              <div className="start-rank">
+                <h2>
+                  <span className="material-symbols-outlined">emoji_events</span>
+                  시즌 랭킹
+                </h2>
+                <ul>
+                  {harvestRanking.length > 0
+                    ? harvestRanking.slice(0, 3).map((r, i) => (
+                        <li key={r.userId || i}>
+                          {i + 1}위 {r.userName || r.name || "?"} · {(r.value ?? r.totalCrops ?? r.score ?? 0).toLocaleString()}점
+                        </li>
+                      ))
+                    : [
+                        <li key="1">1위 — · 0점</li>,
+                        <li key="2">2위 — · 0점</li>,
+                        <li key="3">3위 — · 0점</li>,
+                      ]}
+                </ul>
+                <Link className="start-rank-link" to={selectedChild ? `/ranking?studentId=${selectedChild.studentUserId}` : "/ranking"}>
+                  랭킹 확인
+                </Link>
+              </div>
+
+              {/* 커뮤니티 */}
+              <div className="start-card" id="community">
+                <h3>커뮤니티</h3>
+                <p>학습 신청 · 질문 · 자료 게시판을 이용하세요.</p>
+                <Link className="start-card-button" to="/community">
+                  게시판 이동
+                </Link>
+              </div>
+
+              {/* 쇼핑몰 */}
+              <div className="start-card start-shop" id="shop">
+                <div className="start-shop-title">
+                  <span className="material-symbols-outlined">local_mall</span>
+                  <h3>쇼핑몰</h3>
+                </div>
+                <p>교재 · 교구를 한 곳에서 구매하세요.</p>
+                <Link className="start-card-button" to="/shop">
+                  쇼핑몰 이동
+                </Link>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <nav className="start-nav">
+          <Link className="active" to="/start">
+            <span className="material-symbols-outlined">cottage</span>
+            홈
+          </Link>
+          <Link to={selectedChild ? `/ranking?studentId=${selectedChild.studentUserId}` : "/ranking"}>
+            <span className="material-symbols-outlined">emoji_events</span>
+            랭킹
+          </Link>
+          <Link to="/community">
+            <span className="material-symbols-outlined">forum</span>
+            커뮤니티
+          </Link>
+          <Link to="/shop">
+            <span className="material-symbols-outlined">local_mall</span>
+            쇼핑몰
+          </Link>
+        </nav>
+      </div>
+    );
+  }
+
+  // 기존 학생/관리자 화면
   return (
     <div className="start-page">
       <div className="start-shell">

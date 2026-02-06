@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import "../styles/ranking.css";
 
@@ -21,14 +22,30 @@ const LEVEL_OPTIONS = [
 const formatNumber = (value) => value.toLocaleString("ko-KR");
 
 function RankingPage() {
+  const { user } = useAuth();
+  const [searchParams] = useSearchParams();
+  const studentId = searchParams.get("studentId");
+  const isParent = user?.roles?.includes("PARENT");
+  const isViewingChild = isParent && studentId;
+
   const [period, setPeriod] = useState("season");
   const [scope, setScope] = useState("level");
   const [level, setLevel] = useState(LEVEL_OPTIONS[0].id);
   const [rankings, setRankings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [childName, setChildName] = useState("");
 
   const levelLabel = LEVEL_OPTIONS.find((item) => item.id === level)?.label ?? "";
   const seasonLabel = `${new Date().getFullYear()}년 ${new Date().getMonth() + 1}월 시즌`;
+
+  // 부모가 자녀 순위를 볼 때 자녀 이름 가져오기
+  useEffect(() => {
+    if (isViewingChild) {
+      apiGet(`/v1/parents/children/${studentId}/profile`)
+        .then((profile) => setChildName(profile?.name || "자녀"))
+        .catch(() => {});
+    }
+  }, [isViewingChild, studentId]);
 
   useEffect(() => {
     setLoading(true);
@@ -54,8 +71,10 @@ function RankingPage() {
       rank: r.rank ?? i + 1,
       name: r.userName || r.name || "?",
       score: r.value ?? r.totalCrops ?? r.score ?? 0,
+      userId: r.userId,
+      isHighlighted: isViewingChild && r.userId === studentId,
     }));
-  }, [rankings]);
+  }, [rankings, isViewingChild, studentId]);
 
   return (
     <div className="ranking-page">
@@ -143,13 +162,24 @@ function RankingPage() {
           ) : rows.length > 0 ? (
             <ul className="ranking-list">
               {rows.map((row) => (
-                <li key={row.rank} className="ranking-item">
+                <li
+                  key={row.rank}
+                  className={`ranking-item${row.isHighlighted ? " ranking-item-highlight" : ""}`}
+                  style={row.isHighlighted ? {
+                    background: "linear-gradient(135deg, #fff5eb 0%, #ffe8d6 100%)",
+                    border: "2px solid #f06c24",
+                    borderRadius: 12,
+                  } : undefined}
+                >
                   <span className="ranking-avatar">
                     {(row.name || "?").charAt(0)}
                   </span>
                   <span className="ranking-badge">#{row.rank}</span>
                   <div className="ranking-name">
-                    <strong>{row.name}</strong>
+                    <strong>
+                      {row.name}
+                      {row.isHighlighted && <span style={{ marginLeft: 6, fontSize: 12, color: "#f06c24" }}>(자녀)</span>}
+                    </strong>
                     <span>{scope === "level" ? levelLabel : "전체 레벨"}</span>
                   </div>
                   <div className="ranking-score">

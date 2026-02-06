@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import "../styles/test-storage.css";
@@ -22,23 +22,39 @@ const COURSE_LEVELS = [
 const LEVEL_NAME_MAP = Object.fromEntries(COURSE_LEVELS.map(l => [l.id, l.name]));
 
 function TestStoragePage() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const studentId = searchParams.get("studentId");
+  const isParent = user?.roles?.includes("PARENT");
+  const isViewingChild = isParent && studentId;
+
   const [tests, setTests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sourceFilter, setSourceFilter] = useState(""); // "" | "hq" | "org"
   const [levelFilter, setLevelFilter] = useState("");   // "" | levelId
   const [userOrgName, setUserOrgName] = useState("");
+  const [childName, setChildName] = useState("");
 
-  // 유저 소속 기관 이름 가져오기
+  // 유저/자녀 소속 기관 이름 가져오기
   useEffect(() => {
     if (!isLoggedIn) return;
-    apiGet("/v1/auth/me")
-      .then(profile => {
-        setUserOrgName(profile.org_name || profile.orgName || "");
-      })
-      .catch(() => {});
-  }, [isLoggedIn]);
+    if (isViewingChild) {
+      apiGet(`/v1/parents/children/${studentId}/profile`)
+        .then(profile => {
+          setChildName(profile?.name || "자녀");
+          // 자녀 프로필에는 orgName이 없으므로 일단 빈 값
+          setUserOrgName("");
+        })
+        .catch(() => {});
+    } else {
+      apiGet("/v1/auth/me")
+        .then(profile => {
+          setUserOrgName(profile.org_name || profile.orgName || "");
+        })
+        .catch(() => {});
+    }
+  }, [isLoggedIn, isViewingChild, studentId]);
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -47,11 +63,16 @@ function TestStoragePage() {
     if (sourceFilter) params.set("source", sourceFilter);
     if (levelFilter) params.set("levelId", levelFilter);
     const qs = params.toString();
-    apiGet(`/v1/test-storage${qs ? `?${qs}` : ""}`)
+
+    const apiUrl = isViewingChild
+      ? `/v1/parents/children/${studentId}/test-storage${qs ? `?${qs}` : ""}`
+      : `/v1/test-storage${qs ? `?${qs}` : ""}`;
+
+    apiGet(apiUrl)
       .then(setTests)
       .catch(() => setTests([]))
       .finally(() => setLoading(false));
-  }, [isLoggedIn, sourceFilter, levelFilter]);
+  }, [isLoggedIn, isViewingChild, studentId, sourceFilter, levelFilter]);
 
   // 소속 기관이 있는지 판단 (tests에 orgName이 있으면)
   const hasOrgTests = useMemo(() => tests.some(t => t.orgId), [tests]);
@@ -74,8 +95,12 @@ function TestStoragePage() {
     <div className="ts-page">
       <header className="ts-header">
         <div>
-          <h1>테스트 창고</h1>
-          <p className="ts-subtitle">시험을 선택하고 OMR 답안을 입력하세요.</p>
+          <h1>{isViewingChild ? `${childName}의 테스트 창고` : "테스트 창고"}</h1>
+          <p className="ts-subtitle">
+            {isViewingChild
+              ? "자녀의 시험 응시 현황을 확인하세요."
+              : "시험을 선택하고 OMR 답안을 입력하세요."}
+          </p>
         </div>
         <Link to="/start" className="ts-back-link">
           <span className="material-symbols-outlined">home</span>
@@ -119,7 +144,10 @@ function TestStoragePage() {
             ))}
           </select>
 
-          <Link to="/tests/history" className="ts-history-link">
+          <Link
+            to={isViewingChild ? `/tests/history?studentId=${studentId}` : "/tests/history"}
+            className="ts-history-link"
+          >
             <span className="material-symbols-outlined">history</span>
             응시 이력
           </Link>

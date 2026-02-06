@@ -2,15 +2,37 @@ package com.korfarm.api.user
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.economy.EconomyService
+import com.korfarm.api.economy.Inventory
+import com.korfarm.api.learning.FarmHistoryResponse
+import com.korfarm.api.learning.FarmLearningService
+import com.korfarm.api.test.TestHistoryItem
+import com.korfarm.api.test.TestPaperSummary
+import com.korfarm.api.test.TestService
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
+data class ChildProfileView(
+    val userId: String,
+    val loginId: String,
+    val name: String,
+    val levelId: String?,
+    val gradeLabel: String?,
+    val school: String?,
+    val region: String?,
+    val studentPhone: String?,
+    val parentPhone: String?
+)
+
 @Service
 class ParentLinkService(
     private val parentStudentLinkRepository: ParentStudentLinkRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val economyService: EconomyService,
+    private val farmLearningService: FarmLearningService,
+    private val testService: TestService
 ) {
     @Transactional
     fun createLink(request: ParentLinkRequest, reviewerId: String): ParentLinkView {
@@ -205,5 +227,105 @@ class ParentLinkService(
             approvedBy = approvedBy,
             createdAt = createdAt
         )
+    }
+
+    /**
+     * 부모가 자녀의 프로필을 조회할 수 있는지 검증하고, 자녀 프로필 반환
+     */
+    @Transactional(readOnly = true)
+    fun getChildProfile(parentUserId: String, studentUserId: String): ChildProfileView {
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, studentUserId)
+            ?: throw ApiException("NOT_LINKED", "자녀와 연결되어 있지 않습니다", HttpStatus.FORBIDDEN)
+        if (link.status != "active") {
+            throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
+        }
+        val student = userRepository.findById(studentUserId).orElseThrow {
+            ApiException("NOT_FOUND", "학생을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        return ChildProfileView(
+            userId = student.id,
+            loginId = student.email,
+            name = student.name ?: "",
+            levelId = student.levelId,
+            gradeLabel = student.gradeLabel,
+            school = student.school,
+            region = student.region,
+            studentPhone = student.studentPhone,
+            parentPhone = student.parentPhone
+        )
+    }
+
+    /**
+     * 부모가 자녀의 인벤토리(씨앗, 작물, 비료)를 조회
+     */
+    @Transactional(readOnly = true)
+    fun getChildInventory(parentUserId: String, studentUserId: String): Inventory {
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, studentUserId)
+            ?: throw ApiException("NOT_LINKED", "자녀와 연결되어 있지 않습니다", HttpStatus.FORBIDDEN)
+        if (link.status != "active") {
+            throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
+        }
+        return economyService.getInventory(studentUserId)
+    }
+
+    /**
+     * 부모-자녀 연결 여부 검증 (다른 서비스에서 사용)
+     */
+    @Transactional(readOnly = true)
+    fun verifyParentChildLink(parentUserId: String, studentUserId: String): Boolean {
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, studentUserId)
+        return link != null && link.status == "active"
+    }
+
+    /**
+     * 부모가 자녀의 경제 원장(씨앗/작물/비료 내역) 조회
+     */
+    @Transactional(readOnly = true)
+    fun getChildLedger(parentUserId: String, studentUserId: String): List<com.korfarm.api.economy.LedgerEntry> {
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, studentUserId)
+            ?: throw ApiException("NOT_LINKED", "자녀와 연결되어 있지 않습니다", HttpStatus.FORBIDDEN)
+        if (link.status != "active") {
+            throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
+        }
+        return economyService.getLedger(studentUserId)
+    }
+
+    /**
+     * 부모가 자녀의 학습 히스토리 조회
+     */
+    @Transactional(readOnly = true)
+    fun getChildFarmHistory(parentUserId: String, studentUserId: String): FarmHistoryResponse {
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, studentUserId)
+            ?: throw ApiException("NOT_LINKED", "자녀와 연결되어 있지 않습니다", HttpStatus.FORBIDDEN)
+        if (link.status != "active") {
+            throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
+        }
+        return farmLearningService.getHistory(studentUserId)
+    }
+
+    /**
+     * 부모가 자녀의 테스트 목록 조회
+     */
+    @Transactional(readOnly = true)
+    fun getChildTestList(parentUserId: String, studentUserId: String, levelId: String?, source: String?): List<TestPaperSummary> {
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, studentUserId)
+            ?: throw ApiException("NOT_LINKED", "자녀와 연결되어 있지 않습니다", HttpStatus.FORBIDDEN)
+        if (link.status != "active") {
+            throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
+        }
+        return testService.listTests(studentUserId, levelId, source)
+    }
+
+    /**
+     * 부모가 자녀의 테스트 응시 히스토리 조회
+     */
+    @Transactional(readOnly = true)
+    fun getChildTestHistory(parentUserId: String, studentUserId: String): List<TestHistoryItem> {
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, studentUserId)
+            ?: throw ApiException("NOT_LINKED", "자녀와 연결되어 있지 않습니다", HttpStatus.FORBIDDEN)
+        if (link.status != "active") {
+            throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
+        }
+        return testService.getHistory(studentUserId)
     }
 }

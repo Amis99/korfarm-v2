@@ -2,6 +2,11 @@ package com.korfarm.api.user
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.economy.Inventory
+import com.korfarm.api.economy.LedgerEntry
+import com.korfarm.api.learning.FarmHistoryResponse
+import com.korfarm.api.test.TestHistoryItem
+import com.korfarm.api.test.TestPaperSummary
 import com.korfarm.api.security.AdminGuard
 import com.korfarm.api.security.SecurityUtils
 import jakarta.validation.Valid
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -85,5 +91,93 @@ class ParentLinkController(
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         parentLinkService.deactivate(linkId)
         return ApiResponse(success = true, data = mapOf("status" to "inactive"))
+    }
+
+    /**
+     * 부모가 연결된 자녀의 프로필 조회
+     */
+    @GetMapping("/parents/children/{studentId}/profile")
+    fun getChildProfile(@PathVariable studentId: String): ApiResponse<ChildProfileView> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildProfile(userId, studentId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    /**
+     * 부모가 연결된 자녀의 인벤토리 조회
+     */
+    @GetMapping("/parents/children/{studentId}/inventory")
+    fun getChildInventory(@PathVariable studentId: String): ApiResponse<Inventory> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildInventory(userId, studentId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    /**
+     * 부모가 연결된 자녀의 경제 원장(씨앗/작물/비료 내역) 조회
+     */
+    @GetMapping("/parents/children/{studentId}/ledger")
+    fun getChildLedger(@PathVariable studentId: String): ApiResponse<List<LedgerEntry>> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildLedger(userId, studentId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    /**
+     * 부모가 연결된 자녀의 학습 히스토리(수확 장부) 조회
+     */
+    @GetMapping("/parents/children/{studentId}/farm/history")
+    fun getChildFarmHistory(@PathVariable studentId: String): ApiResponse<FarmHistoryResponse> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildFarmHistory(userId, studentId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    /**
+     * 부모가 연결된 자녀의 테스트 목록 조회
+     */
+    @GetMapping("/parents/children/{studentId}/test-storage")
+    fun getChildTestList(
+        @PathVariable studentId: String,
+        @RequestParam(required = false) levelId: String?,
+        @RequestParam(required = false) source: String?
+    ): ApiResponse<List<TestPaperSummary>> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildTestList(userId, studentId, levelId, source)
+        return ApiResponse(success = true, data = data)
+    }
+
+    /**
+     * 부모가 연결된 자녀의 테스트 응시 히스토리 조회
+     */
+    @GetMapping("/parents/children/{studentId}/test-storage/history")
+    fun getChildTestHistory(@PathVariable studentId: String): ApiResponse<List<TestHistoryItem>> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildTestHistory(userId, studentId)
+        return ApiResponse(success = true, data = data)
     }
 }

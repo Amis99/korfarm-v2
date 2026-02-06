@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 import "../styles/wisdom.css";
 
 const LEVELS = [
@@ -17,6 +18,20 @@ const LEVELS = [
 ];
 
 function WritingPage() {
+  const { user } = useAuth();
+  const [searchParams] = useSearchParams();
+  const studentId = searchParams.get("studentId");
+  const isParent = user?.roles?.includes("PARENT");
+  const isViewingChild = isParent && studentId;
+
+  // 부모가 자녀 글을 볼 때 studentId를 레벨 링크에 전달
+  const getLevelLink = (levelId) => {
+    if (isViewingChild) {
+      return `/writing/${levelId}?studentId=${studentId}`;
+    }
+    return `/writing/${levelId}`;
+  };
+
   return (
     <div className="wisdom">
       <div className="wis-topbar">
@@ -31,18 +46,22 @@ function WritingPage() {
 
       <div className="wis-hero">
         <h2>레벨을 선택하세요</h2>
-        <p>레벨별 주제에 맞춰 글을 쓰고, 선생님의 첨삭을 받아보세요</p>
+        <p>
+          {isViewingChild
+            ? "자녀의 글을 레벨별로 확인하세요"
+            : "레벨별 주제에 맞춰 글을 쓰고, 선생님의 첨삭을 받아보세요"}
+        </p>
       </div>
 
       <div className="wis-level-grid">
         {LEVELS.map((level) => (
-          <Link key={level.id} to={`/writing/${level.id}`} className="wis-level-card">
+          <Link key={level.id} to={getLevelLink(level.id)} className="wis-level-card">
             <div className="wis-level-icon">{level.emoji}</div>
             <div>
               <p className="wis-level-name">{level.name}</p>
               <p className="wis-level-desc">{level.desc}</p>
               <span className="wis-level-badge" style={{ background: level.color }}>
-                글쓰기
+                {isViewingChild ? "글 보기" : "글쓰기"}
               </span>
             </div>
           </Link>

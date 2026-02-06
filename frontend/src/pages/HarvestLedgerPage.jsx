@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
@@ -19,21 +19,46 @@ function formatDuration(startedAt, completedAt) {
 }
 
 function HarvestLedgerPage() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
+  const [searchParams] = useSearchParams();
+  const studentId = searchParams.get("studentId");
+  const isParent = user?.roles?.includes("PARENT");
+  const isViewingChild = isParent && studentId;
+
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [childName, setChildName] = useState("");
 
   useEffect(() => {
     if (!isLoggedIn) {
       setLoading(false);
       return;
     }
-    apiGet("/v1/learning/farm/history")
-      .then((data) => setLogs(data.logs ?? []))
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
-  }, [isLoggedIn]);
+
+    setLoading(true);
+    setError(null);
+
+    if (isViewingChild) {
+      // 부모가 자녀 데이터 조회
+      Promise.all([
+        apiGet(`/v1/parents/children/${studentId}/farm/history`),
+        apiGet(`/v1/parents/children/${studentId}/profile`),
+      ])
+        .then(([historyData, profile]) => {
+          setLogs(historyData.logs ?? []);
+          setChildName(profile?.name || "자녀");
+        })
+        .catch((e) => setError(e.message))
+        .finally(() => setLoading(false));
+    } else {
+      // 자신의 데이터 조회
+      apiGet("/v1/learning/farm/history")
+        .then((data) => setLogs(data.logs ?? []))
+        .catch((e) => setError(e.message))
+        .finally(() => setLoading(false));
+    }
+  }, [isLoggedIn, isViewingChild, studentId]);
 
   if (!isLoggedIn) {
     return (
@@ -82,7 +107,21 @@ function HarvestLedgerPage() {
 
   return (
     <div style={{ maxWidth: 900, margin: "60px auto", padding: "0 20px" }}>
-      <h1 style={{ textAlign: "center", marginBottom: 24 }}>학습 히스토리</h1>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+        <div>
+          <h1 style={{ margin: 0 }}>
+            {isViewingChild ? `${childName}의 학습 히스토리` : "학습 히스토리"}
+          </h1>
+          {isViewingChild && (
+            <p style={{ margin: "8px 0 0", color: "#666", fontSize: 14 }}>
+              자녀의 학습 수행 기록입니다.
+            </p>
+          )}
+        </div>
+        <Link to="/start" style={{ color: "#ff8f2b", fontWeight: 700 }}>
+          홈으로
+        </Link>
+      </div>
       <div style={{ overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
           <thead>
