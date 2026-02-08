@@ -29,5 +29,6 @@ data class MembershipRejectRequest(
 data class MembershipApprovalResult(
     val membershipId: String,
     val status: String,
-    val message: String
+    val message: String,
+    val autoLinked: Boolean = false
 )

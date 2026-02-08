@@ -523,6 +523,7 @@ function AdminTestDetailPage() {
                   <th>정답률</th>
                   <th>입력자</th>
                   <th>제출일</th>
+                  <th>관리</th>
                 </tr>
               </thead>
               <tbody>
@@ -534,6 +535,26 @@ function AdminTestDetailPage() {
                     <td>{s.accuracy}%</td>
                     <td>{s.submittedBy === s.userId ? "본인" : "관리자"}</td>
                     <td>{s.submittedAt ? new Date(s.submittedAt).toLocaleDateString("ko-KR") : "-"}</td>
+                    <td>
+                      <div style={{ display: "flex", gap: 4 }}>
+                        <button
+                          className="ts-btn ts-btn-outline ts-btn-sm"
+                          onClick={() => navigate(`/tests/${testId}/report?studentId=${s.userId}`)}
+                          title="성적표 보기"
+                        >
+                          <span className="material-symbols-outlined" style={{ fontSize: 16 }}>assessment</span>
+                          성적표
+                        </button>
+                        <button
+                          className="ts-btn ts-btn-outline ts-btn-sm"
+                          onClick={() => navigate(`/tests/${testId}/wrong-note?studentId=${s.userId}`)}
+                          title="오답 노트 보기"
+                        >
+                          <span className="material-symbols-outlined" style={{ fontSize: 16 }}>error_outline</span>
+                          오답
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -21,6 +21,12 @@ interface OrgMembershipRepository : JpaRepository<OrgMembershipEntity, String> {
 
     // 전체 승인 대기 목록 조회 (본사용)
     fun findByStatusOrderByRequestedAtDesc(status: String): List<OrgMembershipEntity>
+
+    // 승인 대기 건수 (전체)
+    fun countByStatus(status: String): Long
+
+    // 승인 대기 건수 (특정 기관)
+    fun countByOrgIdAndStatus(orgId: String, status: String): Long
 }
 
 interface ClassRepository : JpaRepository<ClassEntity, String>

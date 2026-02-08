@@ -62,7 +62,9 @@ import DuelLobbyPage from "./pages/DuelLobbyPage";
 import AssignmentsPage from "./pages/AssignmentsPage";
 import ProfilePage from "./pages/ProfilePage";
 import PendingApprovalPage from "./pages/PendingApprovalPage";
+import AdminDuelQuestionsPage from "./pages/AdminDuelQuestionsPage";
 import AdminMembershipApprovalPage from "./pages/AdminMembershipApprovalPage";
+import AdminStudentDetailPage from "./pages/AdminStudentDetailPage";
 
 function GlobalLogo() {
   const { pathname } = useLocation();
@@ -105,6 +107,7 @@ function App() {
         <Route path="/admin/orgs" element={<AdminOrgsPage />} />
         <Route path="/admin/classes" element={<AdminClassesPage />} />
         <Route path="/admin/students" element={<AdminStudentsPage />} />
+        <Route path="/admin/students/:userId" element={<AdminStudentDetailPage />} />
         <Route path="/admin/content" element={<AdminContentPage />} />
         <Route path="/admin/content/preview" element={<AdminContentPreviewPage />} />
         <Route path="/admin/assignments" element={<AdminAssignmentsPage />} />
@@ -141,6 +144,7 @@ function App() {
         <Route path="/tests/:testId/wrong-note" element={<TestWrongNotePage />} />
         <Route path="/admin/tests" element={<AdminTestPage />} />
         <Route path="/admin/tests/:testId" element={<AdminTestDetailPage />} />
+        <Route path="/admin/duel/questions" element={<AdminDuelQuestionsPage />} />
         <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />
         <Route path="/seed-log" element={<Navigate to="/tests/history" replace />} />
         <Route path="/duel" element={<DuelMainPage />} />

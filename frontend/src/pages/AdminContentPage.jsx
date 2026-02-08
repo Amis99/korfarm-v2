@@ -1,15 +1,13 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiPost } from "../utils/adminApi";
+import { apiGet, apiPost } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
-const CONTENTS = [
-  { title: "프로 모드 3챕터", type: "pro_mode", status: "review" },
-];
+const CONTENTS = [];
 
 const MODULE_OPTIONS = [
   { key: "worksheet_quiz", label: "공통 퀴즈형" },
@@ -23,17 +21,43 @@ const MODULE_OPTIONS = [
   { key: "sentence_structure", label: "문장 짜임" },
 ];
 
+/* 상태값 정규화 */
 const normalizeContentStatus = (status) => {
   if (!status) return "review";
   if (status === "active") return "live";
   return status;
 };
 
+/* 상태 한글 라벨 */
+const STATUS_LABEL = {
+  review: "검토",
+  scheduled: "예정",
+  live: "배포",
+  draft: "초안",
+};
+
+/* contentType 한글 라벨 */
+const TYPE_LABEL = {
+  worksheet_quiz: "공통 퀴즈형",
+  reading_intensive: "정독 훈련",
+  reading_training: "Reading Training",
+  recall_cards: "복기 카드",
+  confirm_click: "확인 학습 클릭",
+  choice_judgement: "선택지 판별",
+  phoneme_change: "음운 변동",
+  word_formation: "단어 형성",
+  sentence_structure: "문장 짜임",
+  pro_mode: "프로 모드",
+};
+
+/* 목록 API 응답 → 테이블 데이터 변환 */
 const mapContentList = (items) =>
   items.map((content) => ({
-    id: content.id || content.content_id || content.title,
+    id: content.contentId || content.content_id || content.id || content.title,
     title: content.title,
-    type: content.content_type || content.contentType,
+    type: content.contentType || content.content_type || content.type || "",
+    levelId: content.levelId || content.level_id || "",
+    chapterId: content.chapterId || content.chapter_id || "",
     status: normalizeContentStatus(content.status),
   }));
 
@@ -52,6 +76,9 @@ function AdminContentPage() {
   const [previewError, setPreviewError] = useState("");
   const [importLoading, setImportLoading] = useState(false);
   const [importMessage, setImportMessage] = useState("");
+  /* 서버 콘텐츠 미리보기 상태 */
+  const [previewLoadingId, setPreviewLoadingId] = useState(null);
+  const [serverPreviewError, setServerPreviewError] = useState("");
   const navigate = useNavigate();
 
   const filteredContents = useMemo(() => {
@@ -59,11 +86,35 @@ function AdminContentPage() {
     return contents.filter((content) => {
       if (statusFilter !== "all" && content.status !== statusFilter) return false;
       if (!term) return true;
-      return [content.title, content.type, content.status]
+      return [content.title, content.type, content.status, content.levelId, content.chapterId]
         .filter(Boolean)
         .some((v) => v.toLowerCase().includes(term));
     });
   }, [contents, search, statusFilter]);
+
+  /* 서버에 등록된 콘텐츠를 미리보기 (preview API 호출) */
+  const handleServerPreview = async (contentId) => {
+    if (!contentId) return;
+    setPreviewLoadingId(contentId);
+    setServerPreviewError("");
+    try {
+      const preview = await apiGet(`/v1/admin/content/${contentId}/preview`);
+      /* EngineShell이 기대하는 형태로 변환 */
+      const previewData = {
+        contentType: preview.contentType || preview.content_type,
+        payload: preview.content,
+      };
+      localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
+      /* contentType을 moduleKey로 사용 */
+      const mk = preview.contentType || preview.content_type || "worksheet_quiz";
+      localStorage.setItem("korfarm_preview_module", mk);
+      navigate("/admin/content/preview");
+    } catch (err) {
+      setServerPreviewError(err.message || "미리보기 데이터를 불러오지 못했습니다.");
+    } finally {
+      setPreviewLoadingId(null);
+    }
+  };
 
   const handleSampleLoad = (value) => {
     setSampleId(value);
@@ -87,7 +138,7 @@ function AdminContentPage() {
 
   const handlePreview = () => {
     setPreviewError("");
-    if (!jsonText.trim()) {
+    if (!(jsonText || "").trim()) {
       setPreviewError("JSON 내용을 입력해 주세요.");
       return;
     }
@@ -108,7 +159,7 @@ function AdminContentPage() {
   const handleImport = async () => {
     setPreviewError("");
     setImportMessage("");
-    if (!jsonText.trim()) {
+    if (!(jsonText || "").trim()) {
       setPreviewError("JSON 내용을 입력해 주세요.");
       return;
     }
@@ -168,23 +219,49 @@ function AdminContentPage() {
             </div>
             {loading ? <p className="admin-detail-note">콘텐츠를 불러오는 중...</p> : null}
             {error ? <p className="admin-detail-note error">{error}</p> : null}
+            {serverPreviewError ? <p className="admin-detail-note error">{serverPreviewError}</p> : null}
             <table className="admin-detail-table">
               <thead>
                 <tr>
                   <th>제목</th>
                   <th>유형</th>
+                  <th>레벨/챕터</th>
                   <th>상태</th>
+                  <th style={{ width: "80px" }}>관리</th>
                 </tr>
               </thead>
               <tbody>
+                {filteredContents.length === 0 && !loading ? (
+                  <tr>
+                    <td colSpan={5} style={{ textAlign: "center", color: "var(--admin-muted)" }}>
+                      {contents.length === 0 ? "등록된 콘텐츠가 없습니다." : "검색 결과가 없습니다."}
+                    </td>
+                  </tr>
+                ) : null}
                 {filteredContents.map((content) => (
                   <tr key={content.id}>
                     <td>{content.title}</td>
-                    <td>{content.type}</td>
+                    <td>{TYPE_LABEL[content.type] || content.type}</td>
+                    <td>
+                      {content.levelId || content.chapterId
+                        ? [content.levelId, content.chapterId].filter(Boolean).join(" / ")
+                        : "-"}
+                    </td>
                     <td>
                       <span className="status-pill" data-status={content.status}>
-                        {content.status}
+                        {STATUS_LABEL[content.status] || content.status}
                       </span>
+                    </td>
+                    <td>
+                      <button
+                        className="admin-detail-btn secondary"
+                        type="button"
+                        style={{ padding: "4px 10px", fontSize: "12px" }}
+                        disabled={previewLoadingId === content.id}
+                        onClick={() => handleServerPreview(content.id)}
+                      >
+                        {previewLoadingId === content.id ? "로딩..." : "미리보기"}
+                      </button>
                     </td>
                   </tr>
                 ))}

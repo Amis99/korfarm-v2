@@ -7,4 +7,7 @@ interface ParentStudentLinkRepository : JpaRepository<ParentStudentLinkEntity, S
     fun findByParentUserIdAndStatus(parentUserId: String, status: String): List<ParentStudentLinkEntity>
     fun findByParentUserId(parentUserId: String): List<ParentStudentLinkEntity>
     fun findByParentUserIdAndStudentUserId(parentUserId: String, studentUserId: String): ParentStudentLinkEntity?
+
+    // 학부모 연결 대기 건수 (전체)
+    fun countByStatus(status: String): Long
 }

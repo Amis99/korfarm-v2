@@ -38,7 +38,10 @@ function AdminMembershipApprovalPage() {
     if (!window.confirm("해당 회원을 승인하시겠습니까?")) return;
     setActionLoading(membershipId);
     try {
-      await apiPost(`/v1/admin/memberships/${membershipId}/approve`, {});
+      const result = await apiPost(`/v1/admin/memberships/${membershipId}/approve`, {});
+      if (result?.autoLinked) {
+        alert("승인 완료! 자녀와 자동 연결되었습니다.");
+      }
       await loadPendingMemberships();
     } catch (err) {
       alert(err.message || "승인 처리에 실패했습니다.");
@@ -184,7 +187,18 @@ function AdminMembershipApprovalPage() {
                     </div>
                     <div className="match-status">
                       {(m.student_matched || m.studentMatched) ? (
-                        <span className="matched">학생 정보 매칭됨</span>
+                        <>
+                          <span className="matched">학생 정보 매칭됨</span>
+                          <span className="auto-link-badge" style={{
+                            marginLeft: '8px',
+                            padding: '2px 8px',
+                            backgroundColor: '#e8f5e9',
+                            color: '#2e7d32',
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            fontWeight: 'bold'
+                          }}>승인 시 자동 연결</span>
+                        </>
                       ) : (
                         <span className="unmatched">학생 정보 미매칭 - 수동 확인 필요</span>
                       )}

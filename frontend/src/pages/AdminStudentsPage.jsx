@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiPatch } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import AdminLayout from "../components/AdminLayout";
@@ -8,6 +9,208 @@ import "../styles/admin-detail.css";
 const STUDENTS = [
   { id: "s1", name: "김서연", email: "", level: "프레게1", org: "해든 국어학원", status: "active" },
 ];
+
+/* 씨앗/작물 아이템 정의 */
+const SEED_ITEMS = [
+  { key: "seed_wheat", label: "밀" },
+  { key: "seed_rice", label: "쌀" },
+  { key: "seed_corn", label: "옥수수" },
+  { key: "seed_grape", label: "포도" },
+  { key: "seed_apple", label: "사과" },
+];
+const CROP_ITEMS = [
+  { key: "crop_wheat", label: "밀" },
+  { key: "crop_rice", label: "쌀" },
+  { key: "crop_corn", label: "옥수수" },
+  { key: "crop_grape", label: "포도" },
+  { key: "crop_apple", label: "사과" },
+];
+
+/* 시즌 점수 계산 */
+const calcSeasonScore = (inv) => {
+  if (!inv) return 0;
+  const crops = inv.crops || {};
+  const seeds = inv.seeds || {};
+  const cropProduct =
+    (crops.crop_wheat || 0) * (crops.crop_rice || 0) * (crops.crop_corn || 0) *
+    (crops.crop_grape || 0) * (crops.crop_apple || 0);
+  const totalSeeds = Object.values(seeds).reduce((a, b) => a + b, 0);
+  return cropProduct * 50 + totalSeeds;
+};
+
+/* 인벤토리 관리 모달 */
+function InventoryModal({ student, onClose }) {
+  const [inventory, setInventory] = useState(null);
+  const [ledger, setLedger] = useState([]);
+  const [invLoading, setInvLoading] = useState(false);
+  const [invError, setInvError] = useState("");
+  const [grantType, setGrantType] = useState("seed");
+  const [grantItemType, setGrantItemType] = useState("seed_wheat");
+  const [grantAmount, setGrantAmount] = useState("");
+  const [grantReason, setGrantReason] = useState("");
+  const [grantMsg, setGrantMsg] = useState("");
+  const [grantMsgIsError, setGrantMsgIsError] = useState(false);
+  const [grantLoading, setGrantLoading] = useState(false);
+
+  useEffect(() => {
+    if (grantType === "seed") setGrantItemType("seed_wheat");
+    else if (grantType === "crop") setGrantItemType("crop_wheat");
+    else setGrantItemType("");
+  }, [grantType]);
+
+  const fetchInventory = useCallback(async () => {
+    setInvLoading(true);
+    setInvError("");
+    try {
+      const data = await apiGet(`/v1/admin/students/${student.id}/inventory`);
+      setInventory(data);
+    } catch (err) { setInvError(err.message); }
+    finally { setInvLoading(false); }
+  }, [student.id]);
+
+  const fetchLedger = useCallback(async () => {
+    try {
+      const data = await apiGet(`/v1/admin/students/${student.id}/ledger`);
+      setLedger(Array.isArray(data) ? data.slice(0, 20) : []);
+    } catch (_) {}
+  }, [student.id]);
+
+  useEffect(() => { fetchInventory(); fetchLedger(); }, [fetchInventory, fetchLedger]);
+
+  const doGrantOrDeduct = async (action) => {
+    setGrantMsg("");
+    const amt = parseInt(grantAmount, 10);
+    if (!amt || amt <= 0) { setGrantMsg("수량을 1 이상 입력하세요."); setGrantMsgIsError(true); return; }
+    if (!grantReason.trim()) { setGrantMsg("사유를 입력하세요."); setGrantMsgIsError(true); return; }
+    setGrantLoading(true);
+    try {
+      const body = { type: grantType, itemType: grantType === "fertilizer" ? undefined : grantItemType, amount: amt, reason: grantReason.trim() };
+      await apiPost(`/v1/admin/students/${student.id}/inventory/${action}`, body);
+      setGrantMsg(action === "grant" ? "지급 완료!" : "차감 완료!");
+      setGrantMsgIsError(false);
+      setGrantAmount(""); setGrantReason("");
+      fetchInventory(); fetchLedger();
+    } catch (err) { setGrantMsg(err.message); setGrantMsgIsError(true); }
+    finally { setGrantLoading(false); }
+  };
+
+  const sectionSt = { marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid rgba(255,255,255,0.08)" };
+  const gridSt = { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))", gap: 8 };
+  const cellSt = { background: "rgba(15,20,16,0.7)", borderRadius: 8, padding: "8px 10px", textAlign: "center", border: "1px solid rgba(240,108,36,0.15)" };
+  const selectSt = { width: "100%", padding: "8px 10px", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 6, background: "#1e2620", color: "#f3f6f1", fontSize: 14, boxSizing: "border-box" };
+  const thTdSt = { textAlign: "left", padding: "6px 6px", borderBottom: "1px solid rgba(255,255,255,0.08)" };
+
+  return (
+    <div className="admin-modal-overlay" onClick={onClose}>
+      <div className="admin-modal" style={{ maxWidth: 720, maxHeight: "85vh" }} onClick={(e) => e.stopPropagation()}>
+        <h2 style={{ marginBottom: 4 }}>인벤토리 관리</h2>
+        <p style={{ margin: "0 0 16px", fontSize: 14, color: "#a6b6a9" }}>{student.name} ({student.email || student.id})</p>
+        {invLoading && <p className="admin-detail-note">불러오는 중...</p>}
+        {invError && <p className="admin-detail-note error">{invError}</p>}
+        {inventory && (
+          <div style={sectionSt}>
+            <h3 style={{ fontSize: 14, color: "#f06c24", margin: "0 0 10px" }}>보유 현황</h3>
+            <p style={{ fontSize: 12, color: "#a6b6a9", margin: "0 0 6px" }}>씨앗</p>
+            <div style={gridSt}>
+              {SEED_ITEMS.map((s) => (
+                <div key={s.key} style={cellSt}>
+                  <div style={{ fontSize: 11, color: "#a6b6a9" }}>{s.label}</div>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: "#f3f6f1" }}>{(inventory.seeds || {})[s.key] || 0}</div>
+                </div>
+              ))}
+            </div>
+            <p style={{ fontSize: 12, color: "#a6b6a9", margin: "12px 0 6px" }}>수확물</p>
+            <div style={gridSt}>
+              {CROP_ITEMS.map((c) => (
+                <div key={c.key} style={cellSt}>
+                  <div style={{ fontSize: 11, color: "#a6b6a9" }}>{c.label}</div>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: "#f3f6f1" }}>{(inventory.crops || {})[c.key] || 0}</div>
+                </div>
+              ))}
+            </div>
+            <p style={{ fontSize: 12, color: "#a6b6a9", margin: "12px 0 6px" }}>비료</p>
+            <div style={{ ...gridSt, gridTemplateColumns: "100px" }}>
+              <div style={cellSt}>
+                <div style={{ fontSize: 11, color: "#a6b6a9" }}>비료</div>
+                <div style={{ fontSize: 18, fontWeight: 700, color: "#f3f6f1" }}>{inventory.fertilizer || 0}</div>
+              </div>
+            </div>
+            <div style={{ background: "rgba(240,108,36,0.12)", border: "1px solid rgba(240,108,36,0.3)", borderRadius: 10, padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>
+              <span style={{ fontSize: 14, fontWeight: 700 }}>시즌 점수</span>
+              <span style={{ fontSize: 20, fontWeight: 800, color: "#f06c24" }}>{calcSeasonScore(inventory).toLocaleString()}</span>
+            </div>
+          </div>
+        )}
+        <div style={sectionSt}>
+          <h3 style={{ fontSize: 14, color: "#f06c24", margin: "0 0 10px" }}>지급 / 차감</h3>
+          <div style={{ display: "flex", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
+            <div style={{ flex: 1, minWidth: 100 }}>
+              <label style={{ display: "block", fontSize: 13, color: "#a6b6a9", marginBottom: 4 }}>유형</label>
+              <select style={selectSt} value={grantType} onChange={(e) => setGrantType(e.target.value)}>
+                <option value="seed">씨앗</option>
+                <option value="crop">수확물</option>
+                <option value="fertilizer">비료</option>
+              </select>
+            </div>
+            {grantType !== "fertilizer" && (
+              <div style={{ flex: 1, minWidth: 100 }}>
+                <label style={{ display: "block", fontSize: 13, color: "#a6b6a9", marginBottom: 4 }}>아이템</label>
+                <select style={selectSt} value={grantItemType} onChange={(e) => setGrantItemType(e.target.value)}>
+                  {(grantType === "seed" ? SEED_ITEMS : CROP_ITEMS).map((it) => (
+                    <option key={it.key} value={it.key}>{it.label}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+            <div style={{ flex: 1, minWidth: 80, maxWidth: 100 }}>
+              <label style={{ display: "block", fontSize: 13, color: "#a6b6a9", marginBottom: 4 }}>수량</label>
+              <input type="number" min="1" style={selectSt} value={grantAmount} onChange={(e) => setGrantAmount(e.target.value)} placeholder="0" />
+            </div>
+          </div>
+          <div style={{ marginBottom: 10 }}>
+            <label style={{ display: "block", fontSize: 13, color: "#a6b6a9", marginBottom: 4 }}>사유</label>
+            <input style={selectSt} value={grantReason} onChange={(e) => setGrantReason(e.target.value)} placeholder="지급/차감 사유 입력" />
+          </div>
+          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <button className="admin-detail-btn" style={{ fontSize: 13, padding: "8px 18px" }} onClick={() => doGrantOrDeduct("grant")} disabled={grantLoading}>지급</button>
+            <button className="admin-detail-btn secondary" style={{ fontSize: 13, padding: "8px 18px" }} onClick={() => doGrantOrDeduct("deduct")} disabled={grantLoading}>차감</button>
+            {grantMsg && <span style={{ fontSize: 13, fontWeight: 600, color: grantMsgIsError ? "#f0a59c" : "#9dd6b0" }}>{grantMsg}</span>}
+          </div>
+        </div>
+        <div style={{ marginBottom: 10 }}>
+          <h3 style={{ fontSize: 14, color: "#f06c24", margin: "0 0 8px" }}>경제 내역 (최근 20건)</h3>
+          {ledger.length === 0 ? (
+            <p className="admin-detail-note">내역이 없습니다.</p>
+          ) : (
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13, marginTop: 8 }}>
+                <thead><tr><th style={thTdSt}>날짜</th><th style={thTdSt}>유형</th><th style={thTdSt}>아이템</th><th style={thTdSt}>변동량</th><th style={thTdSt}>사유</th></tr></thead>
+                <tbody>
+                  {ledger.map((entry, idx) => {
+                    const dt = entry.createdAt || entry.created_at || "";
+                    const delta = entry.amount || entry.delta || 0;
+                    return (
+                      <tr key={entry.id || idx}>
+                        <td style={thTdSt}>{dt ? new Date(dt).toLocaleString("ko-KR") : "-"}</td>
+                        <td style={thTdSt}>{entry.type || entry.currencyType || "-"}</td>
+                        <td style={thTdSt}>{entry.itemType || entry.item_type || "-"}</td>
+                        <td style={{ ...thTdSt, color: delta > 0 ? "#9dd6b0" : delta < 0 ? "#f0a59c" : "#a6b6a9", fontWeight: 700 }}>{delta > 0 ? `+${delta}` : delta}</td>
+                        <td style={thTdSt}>{entry.reason || "-"}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+        <div className="admin-modal-actions">
+          <button className="admin-detail-btn secondary" onClick={onClose}>닫기</button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const mapStudents = (items) =>
   items.map((s) => ({
@@ -37,6 +240,7 @@ const subscriptionLabel = (status) => {
 };
 
 function AdminStudentsPage() {
+  const navigate = useNavigate();
   const { data: students, loading, error } = useAdminList("/v1/admin/students", STUDENTS, mapStudents);
   const [rows, setRows] = useState(STUDENTS);
   const [search, setSearch] = useState("");
@@ -55,6 +259,8 @@ function AdminStudentsPage() {
   const [actionLoading, setActionLoading] = useState(false);
   const [orgs, setOrgs] = useState([]);
   const [classes, setClasses] = useState([]);
+  const [showInventoryModal, setShowInventoryModal] = useState(false);
+  const [inventoryStudent, setInventoryStudent] = useState(null);
 
   useEffect(() => {
     setRows(students);
@@ -190,6 +396,11 @@ function AdminStudentsPage() {
     setShowEditModal(true);
   };
 
+  const openInventory = (student) => {
+    setInventoryStudent(student);
+    setShowInventoryModal(true);
+  };
+
   const toggleClassId = (classId) => {
     setEditFormData((prev) => {
       const ids = prev.classIds.includes(classId)
@@ -261,7 +472,14 @@ function AdminStudentsPage() {
               <tbody>
                 {filteredStudents.map((s) => (
                   <tr key={s.id}>
-                    <td>{s.name}</td>
+                    <td>
+                      <span
+                        style={{ cursor: "pointer", color: "#f06c24", textDecoration: "underline" }}
+                        onClick={() => navigate(`/admin/students/${s.id}`)}
+                      >
+                        {s.name}
+                      </span>
+                    </td>
                     <td>{s.email || "-"}</td>
                     <td>{s.level}</td>
                     <td>{s.org}</td>
@@ -280,14 +498,24 @@ function AdminStudentsPage() {
                       </span>
                     </td>
                     <td>
-                      <button
-                        className="admin-detail-btn secondary"
-                        type="button"
-                        onClick={() => openEdit(s)}
-                        style={{ fontSize: "12px", padding: "4px 8px" }}
-                      >
-                        수정
-                      </button>
+                      <div style={{ display: "flex", gap: 4 }}>
+                        <button
+                          className="admin-detail-btn secondary"
+                          type="button"
+                          onClick={() => openEdit(s)}
+                          style={{ fontSize: "12px", padding: "4px 8px" }}
+                        >
+                          수정
+                        </button>
+                        <button
+                          className="admin-detail-btn secondary"
+                          type="button"
+                          onClick={() => openInventory(s)}
+                          style={{ fontSize: "12px", padding: "4px 8px" }}
+                        >
+                          인벤토리
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -506,6 +734,13 @@ function AdminStudentsPage() {
             </div>
           </div>
         </div>
+      ) : null}
+
+      {showInventoryModal && inventoryStudent ? (
+        <InventoryModal
+          student={inventoryStudent}
+          onClose={() => { setShowInventoryModal(false); setInventoryStudent(null); }}
+        />
       ) : null}
     </AdminLayout>
   );

@@ -151,6 +151,61 @@ class AssignmentService(
         return AssignmentProgress(completed = completed, progressRate = progressRate)
     }
 
+    /**
+     * 과제 현황 통계 집계
+     * HQ_ADMIN: 전체 과제, ORG_ADMIN: 자기 기관 과제만
+     */
+    @Transactional(readOnly = true)
+    fun getOverview(userId: String): Map<String, Any> {
+        val now = LocalDateTime.now()
+
+        // ORG_ADMIN이면 자기 기관 orgId 조회, HQ_ADMIN이면 null (전체)
+        val isHqAdmin = com.korfarm.api.security.SecurityUtils.hasAnyRole("HQ_ADMIN")
+        val orgId: String? = if (isHqAdmin) {
+            null
+        } else {
+            orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+                .firstOrNull()?.orgId
+        }
+
+        // 통계 집계
+        val total: Long
+        val completed: Long
+        val pending: Long
+        val overdue: Long
+        val recentAssignments: List<AssignmentSummary>
+
+        if (orgId != null) {
+            // ORG_ADMIN: 자기 기관 과제만
+            total = assignmentRepository.countByOrgIdAndStatus(orgId, "open") +
+                    assignmentRepository.countByOrgIdAndStatus(orgId, "closed")
+            completed = assignmentRepository.countByOrgIdAndStatus(orgId, "closed")
+            overdue = assignmentRepository.countByOrgIdAndStatusAndDueAtBefore(orgId, "open", now)
+            pending = assignmentRepository.countByOrgIdAndStatus(orgId, "open") - overdue
+            recentAssignments = assignmentRepository.findByOrgIdOrderByCreatedAtDesc(orgId)
+                .take(5)
+                .map { it.toSummary() }
+        } else {
+            // HQ_ADMIN: 전체 과제
+            total = assignmentRepository.count()
+            completed = assignmentRepository.countByStatus("closed")
+            overdue = assignmentRepository.countByStatusAndDueAtBefore("open", now)
+            pending = assignmentRepository.countByStatus("open") - overdue
+            recentAssignments = assignmentRepository.findAll()
+                .sortedByDescending { it.createdAt }
+                .take(5)
+                .map { it.toSummary() }
+        }
+
+        return mapOf(
+            "total" to total,
+            "completed" to completed,
+            "pending" to pending,
+            "overdue" to overdue,
+            "recentAssignments" to recentAssignments
+        )
+    }
+
     private fun resolveAssignmentIds(userId: String): Set<String> {
         val classIds = classMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.classId }
         val orgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }

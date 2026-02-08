@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface BoardRepository : JpaRepository<BoardEntity, String> {
     fun findByStatusOrderByBoardTypeAsc(status: String): List<BoardEntity>
+    fun findByBoardType(boardType: String): List<BoardEntity>
 }
 
 interface PostRepository : JpaRepository<PostEntity, String> {

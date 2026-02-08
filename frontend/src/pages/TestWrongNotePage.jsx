@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
+import { apiGet as adminApiGet } from "../utils/adminApi";
 import "../styles/test-storage.css";
 
 function TestWrongNotePage() {
   const { testId } = useParams();
+  const [searchParams] = useSearchParams();
+  const studentId = searchParams.get("studentId");
   const { isLoggedIn, user } = useAuth();
   const navigate = useNavigate();
   const [data, setData] = useState(null);
@@ -13,11 +16,14 @@ function TestWrongNotePage() {
 
   useEffect(() => {
     if (!isLoggedIn) return;
-    apiGet(`/v1/test-storage/${testId}/wrong-note`)
+    const fetchFn = studentId
+      ? () => adminApiGet(`/v1/admin/test-papers/${testId}/submissions/${studentId}/wrong-note`)
+      : () => apiGet(`/v1/test-storage/${testId}/wrong-note`);
+    fetchFn()
       .then(setData)
-      .catch(() => navigate(`/tests/${testId}`))
+      .catch(() => navigate(studentId ? `/admin/tests/${testId}` : `/tests/${testId}`))
       .finally(() => setLoading(false));
-  }, [isLoggedIn, testId, navigate]);
+  }, [isLoggedIn, testId, studentId, navigate]);
 
   if (loading) return <div className="ts-page ts-center"><p>불러오는 중...</p></div>;
   if (!data) return null;
@@ -25,8 +31,8 @@ function TestWrongNotePage() {
   return (
     <div className="ts-page ts-report-page">
       <div className="ts-back-row ts-no-print">
-        <Link to={`/tests/${testId}`} className="ts-back-link">
-          <span className="material-symbols-outlined">arrow_back</span> 시험 상세
+        <Link to={studentId ? `/admin/tests/${testId}` : `/tests/${testId}`} className="ts-back-link">
+          <span className="material-symbols-outlined">arrow_back</span> {studentId ? "시험 관리" : "시험 상세"}
         </Link>
       </div>
 
@@ -88,11 +94,13 @@ function TestWrongNotePage() {
           <span className="material-symbols-outlined">print</span>
           인쇄
         </button>
-        <button className="ts-btn ts-btn-outline" onClick={() => navigate(`/tests/${testId}/report`)}>
+        <button className="ts-btn ts-btn-outline" onClick={() => navigate(`/tests/${testId}/report${studentId ? `?studentId=${studentId}` : ""}`)}>
           <span className="material-symbols-outlined">assessment</span>
           성적표
         </button>
-        <Link to="/tests" className="ts-btn ts-btn-outline">목록으로</Link>
+        <Link to={studentId ? `/admin/tests/${testId}` : "/tests"} className="ts-btn ts-btn-outline">
+          {studentId ? "시험 관리로" : "목록으로"}
+        </Link>
       </div>
     </div>
   );

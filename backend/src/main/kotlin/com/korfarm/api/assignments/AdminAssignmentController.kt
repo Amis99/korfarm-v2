@@ -57,9 +57,11 @@ class AdminAssignmentController(
     }
 
     @GetMapping("/overview")
-    fun overview(): ApiResponse<Map<String, Int>> {
+    fun overview(): ApiResponse<Map<String, Any>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        val data = mapOf("total" to 0, "completed" to 0, "pending" to 0, "overdue" to 0)
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val data = assignmentService.getOverview(userId)
         return ApiResponse(success = true, data = data)
     }
 }

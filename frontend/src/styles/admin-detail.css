@@ -220,7 +220,8 @@
 .status-pill[data-status="paid"],
 .status-pill[data-status="live"],
 .status-pill[data-status="delivered"],
-.status-pill[data-status="on"] {
+.status-pill[data-status="on"],
+.status-pill[data-status="completed"] {
   color: #9dd6b0;
   background: rgba(78, 138, 96, 0.2);
   border-color: rgba(78, 138, 96, 0.4);
@@ -230,7 +231,8 @@
 .status-pill[data-status="scheduled"],
 .status-pill[data-status="trial"],
 .status-pill[data-status="shipping"],
-.status-pill[data-status="review"] {
+.status-pill[data-status="review"],
+.status-pill[data-status="reviewing"] {
   color: #f6d18d;
   background: rgba(240, 173, 78, 0.18);
   border-color: rgba(240, 173, 78, 0.4);
@@ -395,4 +397,40 @@
 .admin-checkbox-label input[type="checkbox"] {
   width: auto;
   accent-color: #f06c24;
+}
+
+/* 관리자 탭 */
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0;
+}
+
+.admin-tab {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  color: var(--admin-muted, #a6b6a9);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.admin-tab:hover {
+  color: var(--admin-ink, #f3f6f1);
+}
+
+.admin-tab.active {
+  color: var(--admin-orange, #ff7f2a);
+  border-bottom-color: var(--admin-orange, #ff7f2a);
+}
+
+.status-pill[data-status="rejected"] {
+  color: #f0a59c;
+  background: rgba(192, 57, 43, 0.18);
+  border-color: rgba(192, 57, 43, 0.4);
 }

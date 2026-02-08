@@ -127,4 +127,26 @@ class AdminTestController(
         val data = testService.getStudentsForTest(testId)
         return ApiResponse(success = true, data = data)
     }
+
+    // 관리자용: 특정 학생의 성적표 조회
+    @GetMapping("/{testId}/submissions/{userId}/report")
+    fun getStudentReport(
+        @PathVariable testId: String,
+        @PathVariable userId: String
+    ): ApiResponse<TestReportResponse> {
+        requireAdmin()
+        val data = testService.getReport(testId, userId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    // 관리자용: 특정 학생의 오답 노트 조회
+    @GetMapping("/{testId}/submissions/{userId}/wrong-note")
+    fun getStudentWrongNote(
+        @PathVariable testId: String,
+        @PathVariable userId: String
+    ): ApiResponse<WrongNoteResponse> {
+        requireAdmin()
+        val data = testService.getWrongNote(testId, userId)
+        return ApiResponse(success = true, data = data)
+    }
 }

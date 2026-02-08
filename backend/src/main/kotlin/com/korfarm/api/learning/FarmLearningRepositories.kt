@@ -32,6 +32,21 @@ interface FarmLearningLogRepository : JpaRepository<FarmLearningLogEntity, Strin
         "GROUP BY f.contentId"
     )
     fun countCompletedByContentIds(contentIds: List<String>): List<ContentCountProjection>
+
+    // 오늘 학습 완료한 고유 학생 수 (전체)
+    @Query(
+        "SELECT COUNT(DISTINCT f.userId) FROM FarmLearningLogEntity f " +
+        "WHERE f.completedAt >= :since"
+    )
+    fun countDistinctUserByCompletedAtAfter(since: java.time.LocalDateTime): Long
+
+    // 오늘 학습 완료한 고유 학생 수 (특정 기관 소속)
+    @Query(
+        "SELECT COUNT(DISTINCT f.userId) FROM FarmLearningLogEntity f " +
+        "WHERE f.completedAt >= :since " +
+        "AND f.userId IN (SELECT m.userId FROM com.korfarm.api.org.OrgMembershipEntity m WHERE m.orgId = :orgId AND m.status = 'active')"
+    )
+    fun countDistinctUserByCompletedAtAfterAndOrgId(since: java.time.LocalDateTime, orgId: String): Long
 }
 
 interface ContentCountProjection {

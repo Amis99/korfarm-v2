@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { apiGet } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 
@@ -7,6 +7,7 @@ function AdminPage() {
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     apiGet("/v1/admin/dashboard/summary")
@@ -34,6 +35,37 @@ function AdminPage() {
         { label: "활성 기관", value: "-" },
       ];
 
+  // 새 지표 카드 (클릭 이동 가능)
+  const extraCards = summary
+    ? [
+        {
+          label: "오늘 학습 참여",
+          value: String(summary.todayLearners ?? 0),
+          link: null,
+        },
+        {
+          label: "승인 대기",
+          value: String(summary.pendingApprovals ?? 0),
+          link: "/admin/approvals",
+        },
+        {
+          label: "학부모 연결 대기",
+          value: String(summary.pendingParentLinks ?? 0),
+          link: "/admin/parents",
+        },
+        {
+          label: "최근 7일 시험 응시",
+          value: String(summary.recentTestSubmissions ?? 0),
+          link: "/admin/tests",
+        },
+      ]
+    : [
+        { label: "오늘 학습 참여", value: "-", link: null },
+        { label: "승인 대기", value: "-", link: "/admin/approvals" },
+        { label: "학부모 연결 대기", value: "-", link: "/admin/parents" },
+        { label: "최근 7일 시험 응시", value: "-", link: "/admin/tests" },
+      ];
+
   return (
     <AdminLayout>
       <div className="admin-topbar">
@@ -51,6 +83,25 @@ function AdminPage() {
           <div className="admin-card" key={item.label}>
             <span>{item.label}</span>
             <strong>{item.value}</strong>
+          </div>
+        ))}
+      </section>
+
+      <section className="admin-summary" style={{ marginTop: 0 }}>
+        {extraCards.map((item) => (
+          <div
+            className="admin-card"
+            key={item.label}
+            style={item.link ? { cursor: "pointer" } : undefined}
+            onClick={item.link ? () => navigate(item.link) : undefined}
+          >
+            <span>{item.label}</span>
+            <strong>{item.value}</strong>
+            {item.link && (
+              <span style={{ fontSize: "11px", color: "var(--admin-muted)" }}>
+                클릭하여 이동
+              </span>
+            )}
           </div>
         ))}
       </section>
@@ -74,6 +125,7 @@ function AdminPage() {
             <Link className="admin-action" to="/admin/shop/products">상품 관리</Link>
             <Link className="admin-action" to="/admin/shop/orders">주문 관리</Link>
             <Link className="admin-action" to="/admin/reports">보고 관리</Link>
+            <Link className="admin-action" to="/admin/duel/questions">대결 문제 관리</Link>
           </div>
         </div>
       </section>
