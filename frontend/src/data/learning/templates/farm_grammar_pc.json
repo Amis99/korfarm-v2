@@ -1,0 +1,99 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "GRAMMAR_PHONEME_CHANGE",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "음운 변동 분석",
+  "description": "단어의 음운 변동을 단계별로 분석하는 학습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "GRAMMAR",
+  "subArea": "PHONEME_CHANGE",
+  "competencies": ["GRAMMAR"],
+  "tags": ["grammar-phoneme-change"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 240,
+  "assets": {},
+  "payload": {
+    "words": [
+      {
+        "wordId": "w1",
+        "surface": "국밥",
+        "cells": [
+          { "cellNo": 1, "text": "국" },
+          { "cellNo": 2, "text": "밥" }
+        ],
+        "steps": [
+          {
+            "stepId": "st1",
+            "envCellNos": [1],
+            "targetCellNo": 2,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "[궁밥]" },
+              { "id": "B", "text": "[국빱]" },
+              { "id": "C", "text": "[구밥]" },
+              { "id": "D", "text": "[궉밥]" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 20, "applyCellText": { "cellNo": 1, "newText": "궁" } },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st2",
+            "targetCellNo": 1,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "비음화" },
+              { "id": "B", "text": "구개음화" },
+              { "id": "C", "text": "된소리되기" },
+              { "id": "D", "text": "모음 조화" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          }
+        ]
+      },
+      {
+        "wordId": "w2",
+        "surface": "같이",
+        "cells": [
+          { "cellNo": 1, "text": "같" },
+          { "cellNo": 2, "text": "이" }
+        ],
+        "steps": [
+          {
+            "stepId": "st1",
+            "envCellNos": [2],
+            "targetCellNo": 1,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "[가치]" },
+              { "id": "B", "text": "[같이]" },
+              { "id": "C", "text": "[갓이]" },
+              { "id": "D", "text": "[가시]" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 20, "applyCellText": { "cellNo": 1, "newText": "가" } },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st2",
+            "targetCellNo": 1,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "구개음화" },
+              { "id": "B", "text": "비음화" },
+              { "id": "C", "text": "유음화" },
+              { "id": "D", "text": "된소리되기" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          }
+        ]
+      }
+    ],
+    "pageStack": true
+  }
+}

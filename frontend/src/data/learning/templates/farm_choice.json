@@ -1,0 +1,109 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "CHOICE_JUDGEMENT",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "선택지 판별 연습",
+  "description": "선택지의 적절성을 명제 단위로 판별하는 연습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "LOGIC",
+  "subArea": "JUDGEMENT",
+  "competencies": ["LOGIC", "READING"],
+  "tags": ["choice-judgement"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        { "id": "p1", "text": "조선 시대의 과거 제도는 문과, 무과, 잡과로 나뉘었다. 문과는 양반 자제가 응시하였으며, 무과는 무관을 선발하는 시험이었다. 잡과는 기술관을 뽑는 시험으로 중인이 주로 응시하였다." }
+      ],
+      "tokens": [
+        { "tokenId": "p1_t1", "paragraphId": "p1", "text": "조선 시대의" },
+        { "tokenId": "p1_t2", "paragraphId": "p1", "text": "과거 제도는" },
+        { "tokenId": "p1_t3", "paragraphId": "p1", "text": "문과," },
+        { "tokenId": "p1_t4", "paragraphId": "p1", "text": "무과," },
+        { "tokenId": "p1_t5", "paragraphId": "p1", "text": "잡과로" },
+        { "tokenId": "p1_t6", "paragraphId": "p1", "text": "나뉘었다." },
+        { "tokenId": "p1_t7", "paragraphId": "p1", "text": "문과는" },
+        { "tokenId": "p1_t8", "paragraphId": "p1", "text": "양반 자제가" },
+        { "tokenId": "p1_t9", "paragraphId": "p1", "text": "응시하였으며," },
+        { "tokenId": "p1_t10", "paragraphId": "p1", "text": "무과는" },
+        { "tokenId": "p1_t11", "paragraphId": "p1", "text": "무관을" },
+        { "tokenId": "p1_t12", "paragraphId": "p1", "text": "선발하는" },
+        { "tokenId": "p1_t13", "paragraphId": "p1", "text": "시험이었다." },
+        { "tokenId": "p1_t14", "paragraphId": "p1", "text": "잡과는" },
+        { "tokenId": "p1_t15", "paragraphId": "p1", "text": "기술관을" },
+        { "tokenId": "p1_t16", "paragraphId": "p1", "text": "뽑는" },
+        { "tokenId": "p1_t17", "paragraphId": "p1", "text": "시험으로" },
+        { "tokenId": "p1_t18", "paragraphId": "p1", "text": "중인이" },
+        { "tokenId": "p1_t19", "paragraphId": "p1", "text": "주로" },
+        { "tokenId": "p1_t20", "paragraphId": "p1", "text": "응시하였다." }
+      ]
+    },
+    "items": [
+      {
+        "itemId": "i1",
+        "stem": "다음 중 위 글의 내용과 일치하지 않는 것을 고르시오.",
+        "choices": [
+          {
+            "choiceId": "A",
+            "text": "과거 제도는 문과, 무과, 잡과로 나뉘었다.",
+            "propositions": [
+              {
+                "propId": "A1",
+                "text": "과거 제도가 문과, 무과, 잡과로 구분됨",
+                "evidenceTokens": ["p1_t2", "p1_t3", "p1_t4", "p1_t5"],
+                "oxAnswer": "O"
+              }
+            ],
+            "finalIsCorrectChoice": false
+          },
+          {
+            "choiceId": "B",
+            "text": "무과는 문관을 선발하는 시험이었다.",
+            "propositions": [
+              {
+                "propId": "B1",
+                "text": "무과가 문관을 선발함",
+                "evidenceTokens": ["p1_t10", "p1_t11", "p1_t12"],
+                "oxAnswer": "X"
+              }
+            ],
+            "finalIsCorrectChoice": true
+          },
+          {
+            "choiceId": "C",
+            "text": "잡과는 기술관을 뽑는 시험이었다.",
+            "propositions": [
+              {
+                "propId": "C1",
+                "text": "잡과가 기술관 선발 시험임",
+                "evidenceTokens": ["p1_t14", "p1_t15", "p1_t16", "p1_t17"],
+                "oxAnswer": "O"
+              }
+            ],
+            "finalIsCorrectChoice": false
+          },
+          {
+            "choiceId": "D",
+            "text": "문과에는 양반 자제가 응시하였다.",
+            "propositions": [
+              {
+                "propId": "D1",
+                "text": "문과에 양반 자제가 응시함",
+                "evidenceTokens": ["p1_t7", "p1_t8", "p1_t9"],
+                "oxAnswer": "O"
+              }
+            ],
+            "finalIsCorrectChoice": false
+          }
+        ],
+        "rewardMultiplier": 3
+      }
+    ],
+    "pageStack": true
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "논리사고력 문제",
+  "description": "논리적 추론 능력을 기르는 문제",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC", "READING"],
+  "tags": ["logic-reasoning"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": {},
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+    "questions": [
+      {
+        "id": "lr-1",
+        "type": "MULTI_CHOICE",
+        "stem": "전제: 모든 포유류는 폐로 호흡한다. 고래는 포유류이다.\n결론으로 옳은 것은?",
+        "prompt": "결론을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "고래는 폐로 호흡한다." },
+          { "id": "B", "text": "고래는 아가미로 호흡한다." },
+          { "id": "C", "text": "모든 동물은 폐로 호흡한다." },
+          { "id": "D", "text": "포유류는 물속에서 산다." }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "lr-2",
+        "type": "MULTI_CHOICE",
+        "stem": "다음 논증에서 오류가 있는 것은?\n'비가 오면 땅이 젖는다. 땅이 젖었다. 따라서 비가 왔다.'",
+        "prompt": "오류 유형을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "후건 긍정의 오류" },
+          { "id": "B", "text": "전건 부정의 오류" },
+          { "id": "C", "text": "순환 논증의 오류" },
+          { "id": "D", "text": "성급한 일반화의 오류" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "lr-3",
+        "type": "MULTI_CHOICE",
+        "stem": "다음 주장과 근거의 관계로 적절한 것은?\n주장: 독서는 어휘력을 향상시킨다.\n근거: 매일 30분 독서하는 학생의 어휘 시험 점수가 평균 20% 높다.",
+        "prompt": "관계를 고르세요.",
+        "choices": [
+          { "id": "A", "text": "통계적 근거로 주장을 뒷받침한다." },
+          { "id": "B", "text": "근거가 주장과 무관하다." },
+          { "id": "C", "text": "감정에 호소하는 논증이다." },
+          { "id": "D", "text": "권위에 의존하는 논증이다." }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      }
+    ]
+  }
+}

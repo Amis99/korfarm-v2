@@ -1,0 +1,54 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "CONFIRM_CLICK",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "일일 독해 - 확인",
+  "description": "지문에서 핵심 내용을 클릭으로 확인하는 학습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "READING",
+  "subArea": "CONFIRM",
+  "competencies": ["READING"],
+  "tags": ["daily-reading", "confirm"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 120,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        { "id": "p1", "text": "언어는 사회적 약속이다. 같은 대상을 가리키더라도 나라마다 서로 다른 말을 사용한다." }
+      ],
+      "tokens": [
+        { "tokenId": "p1_t1", "paragraphId": "p1", "text": "언어는" },
+        { "tokenId": "p1_t2", "paragraphId": "p1", "text": "사회적" },
+        { "tokenId": "p1_t3", "paragraphId": "p1", "text": "약속이다." },
+        { "tokenId": "p1_t4", "paragraphId": "p1", "text": "같은" },
+        { "tokenId": "p1_t5", "paragraphId": "p1", "text": "대상을" },
+        { "tokenId": "p1_t6", "paragraphId": "p1", "text": "가리키더라도" },
+        { "tokenId": "p1_t7", "paragraphId": "p1", "text": "나라마다" },
+        { "tokenId": "p1_t8", "paragraphId": "p1", "text": "서로" },
+        { "tokenId": "p1_t9", "paragraphId": "p1", "text": "다른" },
+        { "tokenId": "p1_t10", "paragraphId": "p1", "text": "말을" },
+        { "tokenId": "p1_t11", "paragraphId": "p1", "text": "사용한다." }
+      ]
+    },
+    "questions": [
+      {
+        "id": "q1",
+        "prompt": "언어가 무엇이라고 했나요? 해당 부분을 클릭하세요.",
+        "answerTokenRefs": ["p1_t2", "p1_t3"],
+        "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+        "revealOnWrong": true
+      },
+      {
+        "id": "q2",
+        "prompt": "나라마다 다른 것은 무엇인가요? 해당 부분을 클릭하세요.",
+        "answerTokenRefs": ["p1_t10"],
+        "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+        "revealOnWrong": true
+      }
+    ]
+  }
+}

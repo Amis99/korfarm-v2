@@ -1,0 +1,77 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "WRITING_DESCRIPTIVE",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "서술형 연습",
+  "description": "원고지 형식의 서술형 문제 풀이 연습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "WRITING",
+  "subArea": "DESCRIPTIVE",
+  "competencies": ["WRITING", "GRAMMAR"],
+  "tags": ["writing-descriptive"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "APPLE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+    "render": "MANUSCRIPT",
+    "questions": [
+      {
+        "id": "wr-1",
+        "type": "FILL_BLANKS",
+        "stem": "다음 문장의 빈칸에 알맞은 접속 표현을 넣어 완성하세요.",
+        "template": "비가 많이 내렸다. ____ 강물이 불어났다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              { "id": "A", "text": "그래서" },
+              { "id": "B", "text": "그러나" },
+              { "id": "C", "text": "그런데" },
+              { "id": "D", "text": "또한" }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "wr-2",
+        "type": "FILL_BLANKS",
+        "stem": "다음 글의 흐름에 맞게 빈칸을 채우세요.",
+        "template": "환경 보호를 위해 우리는 일회용품 사용을 ____해야 한다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              { "id": "A", "text": "줄여야" },
+              { "id": "B", "text": "늘려야" },
+              { "id": "C", "text": "유지해야" },
+              { "id": "D", "text": "무시해야" }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "wr-3",
+        "type": "MULTI_CHOICE",
+        "stem": "다음 글을 읽고 중심 문장으로 가장 적절한 것을 고르세요.\n'물은 생명의 근원이다. 지구 표면의 71%가 물로 덮여 있으며, 인체의 약 70%도 물로 구성되어 있다.'",
+        "prompt": "중심 문장을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "물은 생명의 근원이다." },
+          { "id": "B", "text": "지구 표면은 넓다." },
+          { "id": "C", "text": "인체는 복잡하다." },
+          { "id": "D", "text": "물은 차갑다." }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      }
+    ]
+  }
+}

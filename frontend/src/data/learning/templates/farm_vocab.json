@@ -1,0 +1,74 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "VOCAB_BASIC",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "어휘 기본 학습",
+  "description": "낱말-뜻-용례 기본 학습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "VOCAB",
+  "subArea": "BASIC",
+  "competencies": ["VOCAB"],
+  "tags": ["vocab-basic"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": { "sheetBackground": "/learning-paper.jpg" },
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+    "questions": [
+      {
+        "id": "vb-1",
+        "type": "MULTI_CHOICE",
+        "questionKind": "WORD_TO_MEANING",
+        "stem": "낱말: 관조",
+        "prompt": "뜻을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "사물이나 현상을 깊이 바라봄" },
+          { "id": "B", "text": "부드럽게 감싸기" },
+          { "id": "C", "text": "서로 힘을 겨룸" },
+          { "id": "D", "text": "마음을 나눔" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "vb-2",
+        "type": "MULTI_CHOICE",
+        "questionKind": "MEANING_TO_WORD",
+        "stem": "뜻: 한눈에 알기 쉽게 정리됨",
+        "prompt": "낱말을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "일목요연" },
+          { "id": "B", "text": "난해" },
+          { "id": "C", "text": "각색" },
+          { "id": "D", "text": "판별" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "vb-3",
+        "type": "FILL_BLANKS",
+        "questionKind": "EXAMPLE_BLANK",
+        "stem": "용례 빈칸에 들어갈 낱말을 고르세요.",
+        "template": "용례: 그는 ____를 통해 생각을 정리했다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              { "id": "A", "text": "관조" },
+              { "id": "B", "text": "대립" },
+              { "id": "C", "text": "전환" },
+              { "id": "D", "text": "분류" }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "GRAMMAR_SENTENCE_STRUCTURE",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "문장의 짜임 분석",
+  "description": "서술어와 호응 성분을 찾아 문장 구조를 분석",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "GRAMMAR",
+  "subArea": "SENTENCE_STRUCTURE",
+  "competencies": ["GRAMMAR"],
+  "tags": ["grammar-sentence-structure"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 240,
+  "assets": {},
+  "payload": {
+    "sentences": [
+      {
+        "sentenceId": "s1",
+        "tokens": [
+          { "tokenId": "t1", "text": "나는", "role": "SUBJECT_1" },
+          { "tokenId": "t2", "text": "밥을", "role": "OBJECT_1" },
+          { "tokenId": "t3", "text": "먹었다.", "role": "PREDICATE_1" }
+        ],
+        "predicateTokens": ["t3"],
+        "roleQueryOrder": [
+          { "predicate": "t3", "targetRoles": ["SUBJECT_1", "OBJECT_1"] }
+        ],
+        "embeddedOrLinked": []
+      },
+      {
+        "sentenceId": "s2",
+        "tokens": [
+          { "tokenId": "t1", "text": "꽃이", "role": "SUBJECT_EMBED" },
+          { "tokenId": "t2", "text": "핀", "role": "PREDICATE_EMBED" },
+          { "tokenId": "t3", "text": "들판을", "role": "OBJECT_1" },
+          { "tokenId": "t4", "text": "우리는", "role": "SUBJECT_1" },
+          { "tokenId": "t5", "text": "걸었다.", "role": "PREDICATE_1" }
+        ],
+        "predicateTokens": ["t2", "t5"],
+        "roleQueryOrder": [
+          { "predicate": "t5", "targetRoles": ["SUBJECT_1", "OBJECT_1"] },
+          { "predicate": "t2", "targetRoles": ["SUBJECT_EMBED"] }
+        ],
+        "embeddedOrLinked": [
+          { "type": "EMBEDDED", "tokenRefs": ["t1", "t2"], "clauseType": "RELATIVE_CLAUSE" }
+        ]
+      }
+    ],
+    "pageStack": true
+  }
+}

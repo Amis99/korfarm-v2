@@ -1,0 +1,52 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "GRAMMAR_WORD_FORMATION",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "단어 형성 분석",
+  "description": "형태소를 분석하고 단어 형성 원리를 학습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "GRAMMAR",
+  "subArea": "WORD_FORMATION",
+  "competencies": ["GRAMMAR"],
+  "tags": ["grammar-word-formation"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 240,
+  "assets": {},
+  "payload": {
+    "items": [
+      {
+        "word": "거짓말쟁이",
+        "morphemes": ["거짓", "말", "-쟁이"],
+        "steps": [
+          { "type": "COUNT", "choices": [1, 2, 3, 4], "answer": 3, "delta": { "correct": 20, "wrong": -20 } },
+          { "type": "NAME", "index": 0, "choices": ["명사", "접사", "어미", "조사"], "answer": "명사" },
+          { "type": "NAME", "index": 1, "choices": ["명사", "접사", "어미", "조사"], "answer": "명사" },
+          { "type": "ROLE", "index": 2, "choices": ["어근", "접두사", "접미사", "어미"], "answer": "접미사" }
+        ],
+        "formationGame": {
+          "mergeQuestions": [
+            { "ask": "먼저 결합되는 형태소는?", "answer": "LEFT" }
+          ]
+        }
+      },
+      {
+        "word": "풋사과",
+        "morphemes": ["풋-", "사과"],
+        "steps": [
+          { "type": "COUNT", "choices": [1, 2, 3, 4], "answer": 2, "delta": { "correct": 20, "wrong": -20 } },
+          { "type": "ROLE", "index": 0, "choices": ["어근", "접두사", "접미사", "어미"], "answer": "접두사" },
+          { "type": "NAME", "index": 1, "choices": ["명사", "동사", "형용사", "부사"], "answer": "명사" }
+        ],
+        "formationGame": {
+          "mergeQuestions": [
+            { "ask": "결합할 방향은?", "answer": "LEFT" }
+          ]
+        }
+      }
+    ],
+    "pageStack": true
+  }
+}

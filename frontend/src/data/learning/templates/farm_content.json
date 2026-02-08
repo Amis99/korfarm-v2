@@ -1,0 +1,105 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "CONTENT_PDF_QUIZ",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "내용 숙지 학습",
+  "description": "교과서·자료 내용을 정독-복기-확인하는 학습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "CONTENT",
+  "subArea": "PDF",
+  "competencies": ["READING"],
+  "tags": ["content-pdf"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        { "id": "p1", "text": "조선 시대의 신분 제도는 양인과 천인으로 크게 나뉘었다. 양인은 다시 양반, 중인, 상민으로 구분되었으며, 각 신분에 따라 권리와 의무가 달랐다." },
+        { "id": "p2", "text": "양반은 과거를 통해 관직에 나갈 수 있었고, 중인은 기술직에 종사하였다. 상민은 농업, 공업, 상업에 종사하며 세금을 부담하였다." },
+        { "id": "p3", "text": "천인은 주로 노비로서 개인이나 국가에 예속되었다. 이러한 신분 제도는 조선 후기에 이르러 점차 동요하기 시작하였다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 30 }] },
+          "question": {
+            "prompt": "조선 시대 신분 제도의 큰 구분은?",
+            "choices": [
+              { "id": "A", "text": "양인과 천인" },
+              { "id": "B", "text": "귀족과 평민" },
+              { "id": "C", "text": "왕족과 신하" },
+              { "id": "D", "text": "문반과 무반" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 25 }] },
+          "question": {
+            "prompt": "양반이 관직에 나가는 방법은?",
+            "choices": [
+              { "id": "A", "text": "과거 시험" },
+              { "id": "B", "text": "세습" },
+              { "id": "C", "text": "추천" },
+              { "id": "D", "text": "매관매직" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 25, "end": 55 }] },
+          "question": {
+            "prompt": "조선 후기 신분 제도에 어떤 변화가 나타났나요?",
+            "choices": [
+              { "id": "A", "text": "점차 동요하기 시작했다." },
+              { "id": "B", "text": "더욱 강화되었다." },
+              { "id": "C", "text": "완전히 폐지되었다." },
+              { "id": "D", "text": "외국 제도로 대체되었다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "조선 시대 신분: 양인(양반·중인·상민)과 천인" },
+        { "id": "r2", "text": "양반은 과거로 관직, 중인은 기술직, 상민은 농·공·상업" },
+        { "id": "r3", "text": "천인은 노비로 예속, 조선 후기에 신분 제도 동요" }
+      ],
+      "correctOrder": ["r1", "r2", "r3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "양인의 세부 구분을 설명하는 부분을 클릭하세요.",
+          "answerRanges": [{ "paragraphId": "p1", "start": 30, "end": 60 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "신분 제도가 동요하기 시작한 시기를 설명하는 부분을 클릭하세요.",
+          "answerRanges": [{ "paragraphId": "p3", "start": 25, "end": 55 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+        }
+      ]
+    }
+  }
+}

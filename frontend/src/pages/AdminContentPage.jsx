@@ -2,24 +2,60 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
-import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
 const CONTENTS = [];
 
-const MODULE_OPTIONS = [
-  { key: "worksheet_quiz", label: "공통 퀴즈형" },
-  { key: "reading_intensive", label: "정독 훈련" },
-  { key: "reading_training", label: "Reading Training" },
-  { key: "recall_cards", label: "복기 카드" },
-  { key: "confirm_click", label: "확인 학습 클릭" },
-  { key: "choice_judgement", label: "선택지 판별" },
-  { key: "phoneme_change", label: "음운 변동" },
-  { key: "word_formation", label: "단어 형성" },
-  { key: "sentence_structure", label: "문장 짜임" },
+const MODULE_GROUPS = [
+  {
+    label: "일일 퀴즈",
+    items: [
+      { value: "dailyQuiz:quiz:worksheet_quiz", label: "공통 퀴즈형" },
+    ],
+  },
+  {
+    label: "일일 독해",
+    items: [
+      { value: "dailyReading:intensive:reading_intensive", label: "정독 훈련" },
+      { value: "dailyReading:training:reading_training", label: "독해 훈련 (Reading Training)" },
+      { value: "dailyReading:recall:recall_cards", label: "복기 카드" },
+      { value: "dailyReading:confirm:confirm_click", label: "확인 학습 클릭" },
+    ],
+  },
+  {
+    label: "농장 모드",
+    items: [
+      { value: "farm:vocab:worksheet_quiz", label: "어휘 농장" },
+      { value: "farm:reading:reading_training", label: "독해 농장" },
+      { value: "farm:content:reading_training", label: "내용 숙지 농장" },
+      { value: "farm:grammar_wf:word_formation", label: "문법 - 단어 형성" },
+      { value: "farm:grammar_ss:sentence_structure", label: "문법 - 문장 짜임" },
+      { value: "farm:grammar_pc:phoneme_change", label: "문법 - 음운 변동" },
+      { value: "farm:grammar_pos:worksheet_quiz", label: "문법 - 품사" },
+      { value: "farm:background:worksheet_quiz", label: "배경지식 농장" },
+      { value: "farm:concept:worksheet_quiz", label: "국어 개념 농장" },
+      { value: "farm:logic:worksheet_quiz", label: "논리사고력 농장" },
+      { value: "farm:writing:worksheet_quiz", label: "서술형 농장" },
+      { value: "farm:choice:choice_judgement", label: "선택지 판별 농장" },
+    ],
+  },
+  {
+    label: "프로 모드",
+    items: [
+      { value: "pro:default:worksheet_quiz", label: "프로 모드 (준비 중)", disabled: true },
+    ],
+  },
 ];
+
+const extractModuleKey = (v) => v.split(":").pop();
+
+/* 선택된 모듈에 해당하는 표준 JSON 템플릿 ID (group_subModule) */
+const extractTemplateId = (v) => {
+  const parts = v.split(":");
+  return `${parts[0]}_${parts[1]}`;
+};
 
 /* 상태값 정규화 */
 const normalizeContentStatus = (status) => {
@@ -70,9 +106,8 @@ function AdminContentPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [jsonText, setJsonText] = useState("");
-  const [moduleKey, setModuleKey] = useState("worksheet_quiz");
-  const [sampleId, setSampleId] = useState("");
-  const [templateId, setTemplateId] = useState("");
+  const [selectedModule, setSelectedModule] = useState("dailyQuiz:quiz:worksheet_quiz");
+  const moduleKey = extractModuleKey(selectedModule);
   const [previewError, setPreviewError] = useState("");
   const [importLoading, setImportLoading] = useState(false);
   const [importMessage, setImportMessage] = useState("");
@@ -116,24 +151,19 @@ function AdminContentPage() {
     }
   };
 
-  const handleSampleLoad = (value) => {
-    setSampleId(value);
-    setTemplateId("");
-    const sample = LEARNING_CATALOG.find((item) => item.id === value);
-    if (!sample) return;
-    setModuleKey(sample.moduleKey);
-    setJsonText(JSON.stringify(sample.content, null, 2));
-    setPreviewError("");
-  };
+  const templateId = extractTemplateId(selectedModule);
+  const currentTemplate = LEARNING_TEMPLATES.find((t) => t.id === templateId);
 
-  const handleTemplateLoad = (value) => {
-    setTemplateId(value);
-    setSampleId("");
-    const template = LEARNING_TEMPLATES.find((item) => item.id === value);
-    if (!template) return;
-    setModuleKey(template.moduleKey);
-    setJsonText(JSON.stringify(template.content, null, 2));
-    setPreviewError("");
+  const handleDownloadTemplate = () => {
+    if (!currentTemplate) return;
+    const json = JSON.stringify(currentTemplate.content, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${templateId}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const handlePreview = () => {
@@ -271,34 +301,29 @@ function AdminContentPage() {
 
           <div className="admin-detail-card">
             <h2>학습 JSON 업로드</h2>
-            <p>샘플을 불러오거나 JSON을 붙여넣고 미리보기로 확인하세요.</p>
+            <p>모듈을 선택하고 JSON을 붙여넣은 뒤 미리보기로 확인하세요.</p>
             <div className="admin-detail-toolbar">
-              <select
-                value={templateId}
-                onChange={(e) => handleTemplateLoad(e.target.value)}
+              <select value={selectedModule} onChange={(e) => setSelectedModule(e.target.value)}>
+                {MODULE_GROUPS.map((group) => (
+                  <optgroup key={group.label} label={group.label}>
+                    {group.items.map((item) => (
+                      <option key={item.value} value={item.value} disabled={item.disabled}>
+                        {item.label}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+              <button
+                className="admin-detail-btn secondary admin-template-dl-btn"
+                type="button"
+                disabled={!currentTemplate}
+                onClick={handleDownloadTemplate}
+                title={currentTemplate ? `${currentTemplate.title} 표준 양식 다운로드` : "템플릿 없음"}
               >
-                <option value="">표준 양식 불러오기</option>
-                {LEARNING_TEMPLATES.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.title}
-                  </option>
-                ))}
-              </select>
-              <select value={sampleId} onChange={(e) => handleSampleLoad(e.target.value)}>
-                <option value="">샘플 불러오기</option>
-                {LEARNING_CATALOG.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.title}
-                  </option>
-                ))}
-              </select>
-              <select value={moduleKey} onChange={(e) => setModuleKey(e.target.value)}>
-                {MODULE_OPTIONS.map((option) => (
-                  <option key={option.key} value={option.key}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+                <span className="material-symbols-outlined" style={{ fontSize: 16, verticalAlign: "middle" }}>download</span>
+                {" "}표준 양식
+              </button>
             </div>
             <textarea
               className="admin-json-input"

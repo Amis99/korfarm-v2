@@ -1,0 +1,79 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "READING_INTENSIVE",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "일일 독해 - 정독",
+  "description": "지문을 정독하며 핵심 내용을 파악하는 훈련",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "READING",
+  "subArea": "INTENSIVE",
+  "competencies": ["READING"],
+  "tags": ["daily-reading", "intensive"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        { "id": "p1", "text": "언어는 사회적 약속이다. 같은 대상을 가리키더라도 나라마다 서로 다른 말을 사용한다. 이는 언어의 자의성을 보여 주는 대표적인 사례이다." },
+        { "id": "p2", "text": "그러나 언어가 완전히 자의적이기만 한 것은 아니다. 의성어나 의태어처럼 소리와 의미 사이에 일정한 관련이 있는 경우도 존재한다." }
+      ]
+    },
+    "timeline": [
+      {
+        "stepId": "int-1",
+        "highlight": {
+          "ranges": [{ "paragraphId": "p1", "start": 0, "end": 12 }]
+        },
+        "question": {
+          "prompt": "첫 문장에서 '언어'를 무엇이라 설명하고 있나요?",
+          "choices": [
+            { "id": "A", "text": "사회적 약속" },
+            { "id": "B", "text": "자연적 현상" },
+            { "id": "C", "text": "개인적 습관" },
+            { "id": "D", "text": "과학적 법칙" }
+          ],
+          "answerId": "A",
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+        }
+      },
+      {
+        "stepId": "int-2",
+        "highlight": {
+          "ranges": [{ "paragraphId": "p1", "start": 30, "end": 55 }]
+        },
+        "question": {
+          "prompt": "나라마다 다른 말을 사용하는 것은 언어의 어떤 특성을 보여 주나요?",
+          "choices": [
+            { "id": "A", "text": "자의성" },
+            { "id": "B", "text": "사회성" },
+            { "id": "C", "text": "역사성" },
+            { "id": "D", "text": "창조성" }
+          ],
+          "answerId": "A",
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+        }
+      },
+      {
+        "stepId": "int-3",
+        "highlight": {
+          "ranges": [{ "paragraphId": "p2", "start": 0, "end": 30 }]
+        },
+        "question": {
+          "prompt": "언어가 완전히 자의적이지 않은 사례로 제시된 것은?",
+          "choices": [
+            { "id": "A", "text": "의성어와 의태어" },
+            { "id": "B", "text": "외래어와 한자어" },
+            { "id": "C", "text": "존칭과 비속어" },
+            { "id": "D", "text": "방언과 표준어" }
+          ],
+          "answerId": "A",
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+        }
+      }
+    ]
+  }
+}

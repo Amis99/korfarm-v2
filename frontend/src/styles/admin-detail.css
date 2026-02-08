@@ -320,6 +320,12 @@
   color: #f3f6f1;
 }
 
+.admin-detail-card select optgroup {
+  background: #1a2118;
+  color: #ff7f2a;
+  font-weight: 700;
+}
+
 .admin-modal-field input:focus,
 .admin-modal-field select:focus {
   outline: none;
@@ -427,6 +433,21 @@
 .admin-tab.active {
   color: var(--admin-orange, #ff7f2a);
   border-bottom-color: var(--admin-orange, #ff7f2a);
+}
+
+/* 표준 양식 다운로드 버튼 */
+.admin-template-dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 14px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.admin-template-dl-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .status-pill[data-status="rejected"] {

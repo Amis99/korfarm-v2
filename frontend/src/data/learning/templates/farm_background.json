@@ -1,0 +1,71 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "BACKGROUND_KNOWLEDGE_QUIZ",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "배경지식 퀴즈",
+  "description": "국어 독해에 필요한 배경지식 문제",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "BACKGROUND",
+  "subArea": "KNOWLEDGE",
+  "competencies": ["READING", "BACKGROUND"],
+  "tags": ["background-knowledge"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "CORN", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": {},
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+    "questions": [
+      {
+        "id": "bg-1",
+        "type": "MULTI_CHOICE",
+        "stem": "다음 중 '르네상스'에 대한 설명으로 옳은 것은?",
+        "prompt": "알맞은 것을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "14~16세기 유럽의 문예 부흥 운동이다." },
+          { "id": "B", "text": "고대 이집트에서 시작된 종교 운동이다." },
+          { "id": "C", "text": "18세기 산업 혁명의 다른 이름이다." },
+          { "id": "D", "text": "20세기 미국에서 시작된 예술 운동이다." }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "bg-2",
+        "type": "MULTI_CHOICE",
+        "stem": "다음 중 '광합성'에 대한 설명으로 옳은 것은?",
+        "prompt": "알맞은 것을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "식물이 빛에너지로 양분을 만드는 과정이다." },
+          { "id": "B", "text": "동물이 산소를 만들어내는 과정이다." },
+          { "id": "C", "text": "세포가 분열하는 과정이다." },
+          { "id": "D", "text": "미생물이 에너지를 저장하는 과정이다." }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "bg-3",
+        "type": "FILL_BLANKS",
+        "stem": "빈칸에 들어갈 알맞은 말을 고르세요.",
+        "template": "민주주의에서 국민은 선거를 통해 ____을(를) 행사한다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              { "id": "A", "text": "주권" },
+              { "id": "B", "text": "특권" },
+              { "id": "C", "text": "면책권" },
+              { "id": "D", "text": "저작권" }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      }
+    ]
+  }
+}

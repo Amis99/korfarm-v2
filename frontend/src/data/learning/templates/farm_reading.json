@@ -1,0 +1,105 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "READING_NONFICTION",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "비문학 독해 훈련",
+  "description": "비문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["reading-nonfiction"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        { "id": "p1", "text": "생태계는 생물적 요소와 비생물적 요소로 구성된다. 생물적 요소에는 생산자, 소비자, 분해자가 있으며, 이들은 먹이 사슬을 통해 유기적으로 연결되어 있다." },
+        { "id": "p2", "text": "생산자는 광합성을 통해 무기물로부터 유기물을 합성하는 식물이다. 소비자는 다른 생물을 먹이로 삼는 동물이며, 분해자는 죽은 생물의 유기물을 무기물로 분해하는 미생물이다." },
+        { "id": "p3", "text": "이러한 먹이 사슬이 복잡하게 얽혀 먹이 그물을 형성한다. 먹이 그물의 한 부분이 파괴되면 전체 생태계에 영향을 미칠 수 있다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 25 }] },
+          "question": {
+            "prompt": "생태계를 구성하는 두 가지 요소는?",
+            "choices": [
+              { "id": "A", "text": "생물적 요소와 비생물적 요소" },
+              { "id": "B", "text": "유기물과 무기물" },
+              { "id": "C", "text": "동물과 식물" },
+              { "id": "D", "text": "에너지와 물질" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 35 }] },
+          "question": {
+            "prompt": "생산자가 유기물을 합성하는 방법은?",
+            "choices": [
+              { "id": "A", "text": "광합성" },
+              { "id": "B", "text": "호흡" },
+              { "id": "C", "text": "발효" },
+              { "id": "D", "text": "증산" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 25 }] },
+          "question": {
+            "prompt": "먹이 사슬이 복잡하게 얽힌 것을 무엇이라 하나요?",
+            "choices": [
+              { "id": "A", "text": "먹이 그물" },
+              { "id": "B", "text": "먹이 피라미드" },
+              { "id": "C", "text": "생태 지도" },
+              { "id": "D", "text": "영양 단계" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "생태계는 생물적 요소와 비생물적 요소로 구성된다." },
+        { "id": "r2", "text": "생물적 요소: 생산자(식물), 소비자(동물), 분해자(미생물)" },
+        { "id": "r3", "text": "먹이 사슬이 얽혀 먹이 그물을 형성한다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "생산자를 설명하는 부분을 클릭하세요.",
+          "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 35 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "먹이 그물에 대해 설명하는 부분을 클릭하세요.",
+          "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 25 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+        }
+      ]
+    }
+  }
+}

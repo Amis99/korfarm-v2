@@ -1,0 +1,71 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "LANGUAGE_CONCEPT_QUIZ",
+  "version": 1,
+  "status": "DRAFT",
+  "title": "국어 개념 퀴즈",
+  "description": "국어 핵심 개념과 이론을 확인하는 문제",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 1, "max": 3 },
+  "area": "CONCEPT",
+  "subArea": "CONCEPT",
+  "competencies": ["GRAMMAR", "READING"],
+  "tags": ["language-concept"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "CORN", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": {},
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+    "questions": [
+      {
+        "id": "lc-1",
+        "type": "MULTI_CHOICE",
+        "stem": "다음 중 '은유'에 해당하는 표현은?",
+        "prompt": "은유 표현을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "내 마음은 호수다." },
+          { "id": "B", "text": "내 마음은 호수 같다." },
+          { "id": "C", "text": "마음이 아프다." },
+          { "id": "D", "text": "마음을 열다." }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "lc-2",
+        "type": "MULTI_CHOICE",
+        "stem": "다음 중 '설명문'의 특징으로 알맞은 것은?",
+        "prompt": "알맞은 것을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "정보를 객관적으로 전달한다." },
+          { "id": "B", "text": "상대방의 행동 변화를 목적으로 한다." },
+          { "id": "C", "text": "감정을 중심으로 서술한다." },
+          { "id": "D", "text": "사건을 시간 순서로 나열한다." }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "lc-3",
+        "type": "FILL_BLANKS",
+        "stem": "빈칸에 들어갈 국어 개념 용어를 고르세요.",
+        "template": "'~처럼', '~같이'를 사용하여 비유하는 방법을 ____이라 한다.",
+        "blanks": [
+          {
+            "id": "b1",
+            "choices": [
+              { "id": "A", "text": "직유법" },
+              { "id": "B", "text": "은유법" },
+              { "id": "C", "text": "의인법" },
+              { "id": "D", "text": "활유법" }
+            ],
+            "answerId": "A"
+          }
+        ],
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      }
+    ]
+  }
+}
