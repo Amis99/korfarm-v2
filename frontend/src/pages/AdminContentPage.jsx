@@ -72,7 +72,7 @@ const normalizeContentStatus = (status) => {
 /* 상태 한글 라벨 */
 const STATUS_LABEL = { active: "활성", inactive: "비활성" };
 
-/* contentType 한글 라벨 */
+/* contentType 한글 라벨 (필터 드롭다운용 - 풀네임) */
 const TYPE_LABEL = {
   DAILY_QUIZ: "일일 퀴즈",
   DAILY_READING: "일일 독해",
@@ -105,6 +105,47 @@ const TYPE_LABEL = {
   word_formation: "단어 형성",
   sentence_structure: "문장 짜임",
   pro_mode: "프로 모드",
+};
+
+/* 테이블 셀용 축약 라벨 + 그룹 컬러 */
+const TYPE_SHORT = {
+  DAILY_QUIZ:  { label: "퀴즈", group: "daily" },
+  DAILY_READING: { label: "독해", group: "daily" },
+  VOCAB_BASIC: { label: "어휘", group: "vocab" },
+  VOCAB_DICTIONARY: { label: "사전", group: "vocab" },
+  GRAMMAR_WORD_FORMATION: { label: "단어형성", group: "grammar" },
+  GRAMMAR_SENTENCE_STRUCTURE: { label: "문장짜임", group: "grammar" },
+  GRAMMAR_PHONEME_CHANGE: { label: "음운변동", group: "grammar" },
+  GRAMMAR_POS: { label: "품사", group: "grammar" },
+  READING_NONFICTION: { label: "비문학", group: "reading" },
+  READING_LITERATURE: { label: "문학", group: "reading" },
+  CONTENT_PDF: { label: "내용숙지", group: "content" },
+  CONTENT_PDF_QUIZ: { label: "숙지퀴즈", group: "content" },
+  BACKGROUND_KNOWLEDGE: { label: "배경", group: "knowledge" },
+  BACKGROUND_KNOWLEDGE_QUIZ: { label: "배경퀴즈", group: "knowledge" },
+  LANGUAGE_CONCEPT: { label: "개념", group: "knowledge" },
+  LANGUAGE_CONCEPT_QUIZ: { label: "개념퀴즈", group: "knowledge" },
+  LOGIC_REASONING: { label: "논리", group: "logic" },
+  LOGIC_REASONING_QUIZ: { label: "논리퀴즈", group: "logic" },
+  CHOICE_JUDGEMENT: { label: "판별", group: "choice" },
+  WRITING_DESCRIPTIVE: { label: "서술형", group: "writing" },
+};
+const getTypeShort = (type) => TYPE_SHORT[type] || { label: type, group: "other" };
+
+/* 레벨 축약 (소1, 프2, 러3, 비1 ...) */
+const LEVEL_SHORT = {
+  SAUSSURE_1: "소1", SAUSSURE_2: "소2", SAUSSURE_3: "소3",
+  FREGE_1: "프1", FREGE_2: "프2", FREGE_3: "프3",
+  RUSSELL_1: "러1", RUSSELL_2: "러2", RUSSELL_3: "러3",
+  WITTGENSTEIN_1: "비1", WITTGENSTEIN_2: "비2", WITTGENSTEIN_3: "비3",
+};
+const getLevelShort = (level) => LEVEL_SHORT[level] || level || "-";
+
+/* jsonPath에서 day 번호 추출 (/daily-quiz/saussure1/041.json → "#041") */
+const extractDay = (jsonPath) => {
+  if (!jsonPath) return "";
+  const m = jsonPath.match(/\/(\d{3})\.json$/);
+  return m ? `#${m[1]}` : "";
 };
 
 /* 목록 API 응답 → 테이블 데이터 변환 */
@@ -247,10 +288,10 @@ function AdminContentPage() {
             <thead>
               <tr>
                 <th>제목</th>
-                <th>유형</th>
-                <th>레벨/챕터</th>
-                <th>상태</th>
-                <th style={{ width: "80px" }}>관리</th>
+                <th style={{ width: 70 }}>유형</th>
+                <th style={{ width: 40 }}>레벨</th>
+                <th style={{ width: 48 }}>상태</th>
+                <th style={{ width: 66 }}>관리</th>
               </tr>
             </thead>
             <tbody>
@@ -261,37 +302,44 @@ function AdminContentPage() {
                   </td>
                 </tr>
               ) : null}
-              {pagedContents.map((content) => (
-                <tr
-                  key={content.id}
-                  className="clickable-row"
-                  onClick={() => handleRowClick(content)}
-                >
-                  <td>{content.title}</td>
-                  <td>{TYPE_LABEL[content.type] || content.type}</td>
-                  <td>
-                    {content.levelId || content.chapterId
-                      ? [content.levelId, content.chapterId].filter(Boolean).join(" / ")
-                      : "-"}
-                  </td>
-                  <td>
-                    <span className="status-pill" data-status={content.status}>
-                      {STATUS_LABEL[content.status] || content.status}
-                    </span>
-                  </td>
-                  <td>
-                    <button
-                      className="admin-detail-btn secondary"
-                      type="button"
-                      style={{ padding: "4px 10px", fontSize: "12px" }}
-                      disabled={previewLoadingId === content.id}
-                      onClick={(e) => { e.stopPropagation(); handleServerPreview(content.id); }}
-                    >
-                      {previewLoadingId === content.id ? "로딩..." : "미리보기"}
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {pagedContents.map((content) => {
+                const ts = getTypeShort(content.type);
+                const day = extractDay(content.jsonPath);
+                return (
+                  <tr
+                    key={content.id}
+                    className="clickable-row"
+                    onClick={() => handleRowClick(content)}
+                  >
+                    <td>
+                      {content.title}
+                      {day ? <span style={{ color: "var(--admin-muted)", marginLeft: 6, fontSize: 11 }}>{day}</span> : null}
+                    </td>
+                    <td>
+                      <span className="type-pill" data-group={ts.group}>{ts.label}</span>
+                    </td>
+                    <td>
+                      <span className="level-pill">{getLevelShort(content.levelId)}</span>
+                    </td>
+                    <td>
+                      <span className="status-pill" data-status={content.status}>
+                        {STATUS_LABEL[content.status] || content.status}
+                      </span>
+                    </td>
+                    <td>
+                      <button
+                        className="admin-detail-btn secondary"
+                        type="button"
+                        style={{ padding: "4px 10px", fontSize: "12px" }}
+                        disabled={previewLoadingId === content.id}
+                        onClick={(e) => { e.stopPropagation(); handleServerPreview(content.id); }}
+                      >
+                        {previewLoadingId === content.id ? "..." : "미리보기"}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           {/* 페이지네이션 */}
