@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { apiGet, apiPost } from "../utils/adminApi";
+import { apiGet, apiPost, apiPut } from "../utils/adminApi";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import AdminLayout from "../components/AdminLayout";
@@ -306,7 +306,7 @@ function AdminContentUploadPage() {
     }
   };
 
-  /* 콘텐츠 등록 */
+  /* 콘텐츠 신규 등록 */
   const handleImport = async () => {
     setPreviewError("");
     setImportMessage("");
@@ -334,6 +334,37 @@ function AdminContentUploadPage() {
       setPreviewError(err.message || `등록 실패: ${err}`);
     } finally {
       setImportLoading(false);
+    }
+  };
+
+  /* 기존 콘텐츠 수정 (PUT) */
+  const [updateLoading, setUpdateLoading] = useState(false);
+  const handleUpdate = async () => {
+    setPreviewError("");
+    setImportMessage("");
+    if (!(jsonText || "").trim()) {
+      setPreviewError("JSON 내용을 입력해 주세요.");
+      return;
+    }
+    try {
+      const parsed = JSON.parse(jsonText);
+      if (!parsed.contentType || !parsed.payload) {
+        setPreviewError("contentType과 payload가 포함된 JSON이어야 합니다.");
+        return;
+      }
+      setUpdateLoading(true);
+      await apiPut(`/v1/admin/content/${editId}`, {
+        contentType: parsed.contentType,
+        levelId: parsed.levelId || undefined,
+        chapterId: parsed.chapterId || undefined,
+        schemaVersion: parsed.schemaVersion || "1.0",
+        content: parsed.payload,
+      });
+      setImportMessage("콘텐츠가 수정되었습니다.");
+    } catch (err) {
+      setPreviewError(err.message || `수정 실패: ${err}`);
+    } finally {
+      setUpdateLoading(false);
     }
   };
 
@@ -479,17 +510,28 @@ function AdminContentUploadPage() {
                 복사
               </button>
             ) : null}
-            <button className="admin-detail-btn" type="button" onClick={handlePreview}>
+            <button className="admin-detail-btn secondary" type="button" onClick={handlePreview}>
               미리보기
             </button>
-            <button
-              className="admin-detail-btn"
-              type="button"
-              onClick={handleImport}
-              disabled={importLoading}
-            >
-              {importLoading ? "등록 중..." : "콘텐츠 등록"}
-            </button>
+            {isEditMode && editSource !== "static" ? (
+              <button
+                className="admin-detail-btn"
+                type="button"
+                onClick={handleUpdate}
+                disabled={updateLoading}
+              >
+                {updateLoading ? "수정 중..." : "콘텐츠 수정"}
+              </button>
+            ) : (
+              <button
+                className="admin-detail-btn"
+                type="button"
+                onClick={handleImport}
+                disabled={importLoading}
+              >
+                {importLoading ? "등록 중..." : "콘텐츠 등록"}
+              </button>
+            )}
           </div>
         </div>
       </div>

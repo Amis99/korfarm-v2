@@ -66,6 +66,32 @@ class AdminContentService(
         return AdminContentImportResult(contentId = saved.id, versionId = version.id)
     }
 
+    @Transactional
+    fun updateContent(contentId: String, request: AdminContentImportRequest, userId: String): AdminContentImportResult {
+        val content = contentRepository.findById(contentId).orElseThrow {
+            ApiException("NOT_FOUND", "content not found", HttpStatus.NOT_FOUND)
+        }
+        val title = request.content["title"]?.toString() ?: content.title
+        content.title = title
+        content.contentType = request.contentType
+        content.levelId = request.levelId
+        content.chapterId = request.chapterId
+        content.status = "active"
+        contentRepository.save(content)
+
+        val version = ContentVersionEntity(
+            id = IdGenerator.newId("cv"),
+            contentId = contentId,
+            schemaVersion = request.schemaVersion,
+            contentJson = objectMapper.writeValueAsString(request.content),
+            uploadedBy = userId,
+            approvedBy = userId,
+            approvedAt = LocalDateTime.now()
+        )
+        contentVersionRepository.save(version)
+        return AdminContentImportResult(contentId = contentId, versionId = version.id)
+    }
+
     @Transactional(readOnly = true)
     fun previewContent(contentId: String): ContentPreview {
         val content = contentRepository.findById(contentId).orElseThrow {

@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -40,6 +41,19 @@ class AdminContentController(
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         featureFlagService.requireEnabled("feature.admin.console")
         val data = adminContentService.listContents()
+        return ApiResponse(success = true, data = data)
+    }
+
+    @PutMapping("/content/{contentId}")
+    fun updateContent(
+        @PathVariable contentId: String,
+        @Valid @RequestBody request: AdminContentImportRequest
+    ): ApiResponse<AdminContentImportResult> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val data = adminContentService.updateContent(contentId, request, userId)
         return ApiResponse(success = true, data = data)
     }
 
