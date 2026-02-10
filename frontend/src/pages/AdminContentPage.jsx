@@ -3,10 +3,58 @@ import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
+import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
 const CONTENTS = [];
+
+/* 레벨 라벨 헬퍼 */
+const LEVEL_LABEL_MAP = {
+  SAUSSURE_1: "소쉬르 1", SAUSSURE_2: "소쉬르 2", SAUSSURE_3: "소쉬르 3",
+  FREGE_1: "프레게 1", FREGE_2: "프레게 2", FREGE_3: "프레게 3",
+  RUSSELL_1: "러셀 1", RUSSELL_2: "러셀 2", RUSSELL_3: "러셀 3",
+  WITTGENSTEIN_1: "비트겐슈타인 1", WITTGENSTEIN_2: "비트겐슈타인 2", WITTGENSTEIN_3: "비트겐슈타인 3",
+};
+const getLevelLabel = (level) => LEVEL_LABEL_MAP[level] || level;
+
+const DAILY_LEVELS = [
+  "SAUSSURE_1","SAUSSURE_2","SAUSSURE_3",
+  "FREGE_1","FREGE_2","FREGE_3",
+  "RUSSELL_1","RUSSELL_2","RUSSELL_3",
+  "WITTGENSTEIN_1","WITTGENSTEIN_2","WITTGENSTEIN_3",
+];
+
+/* static JSON 콘텐츠 목록 (farm 14 + daily-quiz 12 + daily-reading 12 = 38) */
+const STATIC_CONTENTS = [
+  ...LEARNING_CATALOG.map((item) => ({
+    id: item.contentId,
+    title: item.title,
+    type: item.contentType,
+    levelId: item.targetLevel,
+    chapterId: "",
+    status: "static",
+    source: "static",
+  })),
+  ...DAILY_LEVELS.map((level) => ({
+    id: `dq-${level.toLowerCase()}`,
+    title: `일일 퀴즈 - ${getLevelLabel(level)}`,
+    type: "DAILY_QUIZ",
+    levelId: level,
+    chapterId: "",
+    status: "static",
+    source: "static",
+  })),
+  ...DAILY_LEVELS.map((level) => ({
+    id: `dr-${level.toLowerCase()}`,
+    title: `일일 독해 - ${getLevelLabel(level)}`,
+    type: "DAILY_READING",
+    levelId: level,
+    chapterId: "",
+    status: "static",
+    source: "static",
+  })),
+];
 
 const MODULE_GROUPS = [
   {
@@ -70,10 +118,32 @@ const STATUS_LABEL = {
   scheduled: "예정",
   live: "배포",
   draft: "초안",
+  static: "정적",
 };
 
 /* contentType 한글 라벨 */
 const TYPE_LABEL = {
+  DAILY_QUIZ: "일일 퀴즈",
+  DAILY_READING: "일일 독해",
+  VOCAB_BASIC: "어휘 기본",
+  VOCAB_DICTIONARY: "어휘 사전",
+  GRAMMAR_WORD_FORMATION: "문법 - 단어 형성",
+  GRAMMAR_SENTENCE_STRUCTURE: "문법 - 문장 짜임",
+  GRAMMAR_PHONEME_CHANGE: "문법 - 음운 변동",
+  GRAMMAR_POS: "문법 - 품사",
+  READING_NONFICTION: "독해 비문학",
+  READING_LITERATURE: "독해 문학",
+  CONTENT_PDF: "내용 숙지",
+  CONTENT_PDF_QUIZ: "내용 숙지 퀴즈",
+  BACKGROUND_KNOWLEDGE: "배경지식",
+  BACKGROUND_KNOWLEDGE_QUIZ: "배경지식 퀴즈",
+  LANGUAGE_CONCEPT: "국어 개념",
+  LANGUAGE_CONCEPT_QUIZ: "국어 개념 퀴즈",
+  LOGIC_REASONING: "논리사고력",
+  LOGIC_REASONING_QUIZ: "논리사고력 퀴즈",
+  CHOICE_JUDGEMENT: "선택지 판별",
+  WRITING_DESCRIPTIVE: "서술형",
+  /* 레거시 moduleKey 기반 (DB 콘텐츠 호환) */
   worksheet_quiz: "공통 퀴즈형",
   reading_intensive: "정독 훈련",
   reading_training: "Reading Training",
@@ -105,6 +175,7 @@ function AdminContentPage() {
   );
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [typeFilter, setTypeFilter] = useState("all");
   const [jsonText, setJsonText] = useState("");
   const [selectedModule, setSelectedModule] = useState("dailyQuiz:quiz:worksheet_quiz");
   const moduleKey = extractModuleKey(selectedModule);
@@ -116,16 +187,23 @@ function AdminContentPage() {
   const [serverPreviewError, setServerPreviewError] = useState("");
   const navigate = useNavigate();
 
+  /* DB 콘텐츠 + static 콘텐츠 병합 */
+  const allContents = useMemo(() => {
+    const dbItems = contents.map((c) => ({ ...c, source: "db" }));
+    return [...STATIC_CONTENTS, ...dbItems];
+  }, [contents]);
+
   const filteredContents = useMemo(() => {
     const term = search.trim().toLowerCase();
-    return contents.filter((content) => {
+    return allContents.filter((content) => {
       if (statusFilter !== "all" && content.status !== statusFilter) return false;
+      if (typeFilter !== "all" && content.type !== typeFilter) return false;
       if (!term) return true;
       return [content.title, content.type, content.status, content.levelId, content.chapterId]
         .filter(Boolean)
         .some((v) => v.toLowerCase().includes(term));
     });
-  }, [contents, search, statusFilter]);
+  }, [allContents, search, statusFilter, typeFilter]);
 
   /* 서버에 등록된 콘텐츠를 미리보기 (preview API 호출) */
   const handleServerPreview = async (contentId) => {
@@ -235,16 +313,28 @@ function AdminContentPage() {
                 />
               </div>
               <div className="admin-detail-filters">
-                {["all", "review", "scheduled", "live"].map((f) => (
+                {["all", "static", "review", "scheduled", "live"].map((f) => (
                   <button
                     key={f}
                     className={`admin-filter ${statusFilter === f ? "active" : ""}`}
                     type="button"
                     onClick={() => setStatusFilter(f)}
                   >
-                    {f === "all" ? "전체" : f === "review" ? "검토" : f === "scheduled" ? "예정" : "배포"}
+                    {f === "all" ? "전체" : STATUS_LABEL[f] || f}
                   </button>
                 ))}
+                <select
+                  value={typeFilter}
+                  onChange={(e) => setTypeFilter(e.target.value)}
+                  className="admin-type-filter-select"
+                >
+                  <option value="all">유형: 전체</option>
+                  {Object.entries(TYPE_LABEL)
+                    .filter(([key]) => key === key.toUpperCase()) /* 대문자 키만 (백엔드 contentType) */
+                    .map(([key, label]) => (
+                      <option key={key} value={key}>{label}</option>
+                    ))}
+                </select>
               </div>
             </div>
             {loading ? <p className="admin-detail-note">콘텐츠를 불러오는 중...</p> : null}
@@ -264,7 +354,7 @@ function AdminContentPage() {
                 {filteredContents.length === 0 && !loading ? (
                   <tr>
                     <td colSpan={5} style={{ textAlign: "center", color: "var(--admin-muted)" }}>
-                      {contents.length === 0 ? "등록된 콘텐츠가 없습니다." : "검색 결과가 없습니다."}
+                      {allContents.length === 0 ? "등록된 콘텐츠가 없습니다." : "검색 결과가 없습니다."}
                     </td>
                   </tr>
                 ) : null}
