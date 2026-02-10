@@ -1725,6 +1725,32 @@ mark.highlight {
     display: block;
   }
 
+  /* 레벨별 인쇄 글자 크기 - 소쉬르 +2pt */
+  .print-level-saussure .print-question-num,
+  .print-level-saussure .print-question-stem,
+  .print-level-saussure .print-fill-template { font-size: 14px; }
+  .print-level-saussure .print-choice,
+  .print-level-saussure .print-blank-label { font-size: 13px; }
+  .print-level-saussure .print-choice-id { font-size: 12px; }
+
+  /* 레벨별 인쇄 글자 크기 - 프레게 +1pt */
+  .print-level-frege .print-question-num,
+  .print-level-frege .print-question-stem,
+  .print-level-frege .print-fill-template { font-size: 13px; }
+  .print-level-frege .print-choice,
+  .print-level-frege .print-blank-label { font-size: 12px; }
+  .print-level-frege .print-choice-id { font-size: 11px; }
+
+  /* 러셀: 기본값 유지 (12/11/10) */
+
+  /* 레벨별 인쇄 글자 크기 - 비트겐슈타인 -1pt */
+  .print-level-wittgenstein .print-question-num,
+  .print-level-wittgenstein .print-question-stem,
+  .print-level-wittgenstein .print-fill-template { font-size: 11px; }
+  .print-level-wittgenstein .print-choice,
+  .print-level-wittgenstein .print-blank-label { font-size: 10px; }
+  .print-level-wittgenstein .print-choice-id { font-size: 9px; }
+
   /* 워터마크 */
   .engine-shell::after {
     content: "이 문서는 인쇄 전용입니다 - 국어농장";

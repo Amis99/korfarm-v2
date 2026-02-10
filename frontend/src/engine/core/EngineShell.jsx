@@ -170,6 +170,15 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     return mapping[subArea] || "세부 영역";
   };
 
+  // 인쇄 레벨 클래스 (글자 크기 조정)
+  const printLevelClass = useMemo(() => {
+    const level = content?.targetLevel || "";
+    if (level.startsWith("SAUSSURE") || level.startsWith("SOUSSURE")) return "print-level-saussure";
+    if (level.startsWith("FREGE")) return "print-level-frege";
+    if (level.startsWith("WITTGENSTEIN")) return "print-level-wittgenstein";
+    return "";
+  }, [content]);
+
   // 인쇄 전용: 페이지 그룹별 문제 추출
   const printPageGroups = useMemo(() => {
     const payload = content?.payload;
@@ -531,7 +540,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
 
               {/* 인쇄 전용 영역 - 학습 페이지당 문제 모음 1장 */}
               {printPageGroups.map((group, gi) => (
-                <div key={gi} className="print-only print-page-group">
+                <div key={gi} className={`print-only print-page-group ${printLevelClass}`}>
                   <h2 className="print-title">
                     {content?.title || "학습"}
                     {group.label ? ` — ${group.label}` : ""}
