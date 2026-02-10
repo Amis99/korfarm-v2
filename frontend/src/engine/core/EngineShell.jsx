@@ -92,6 +92,8 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const [timeLeft, setTimeLeft] = useState(timeLimit);
   const [timePulse, setTimePulse] = useState(null);
   const [records, setRecords] = useState([]);
+  const recordsRef = useRef(records);
+  recordsRef.current = records;
   const [summary, setSummary] = useState(null);
   const [seed, setSeed] = useState(content?.seedReward?.count ?? 3);
   const [seedExhausted, setSeedExhausted] = useState(false);
@@ -99,6 +101,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const intervalRef = useRef(null);
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const [pageProgress, setPageProgress] = useState(null);
 
   const Module = MODULES[moduleKey];
 
@@ -233,7 +236,12 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       phoneme_change: payload.items?.length,
       word_formation: payload.items?.length,
       sentence_structure: payload.sentences?.length,
-      content_pdf: payload.totalPages || payload.pages?.length || 0,
+      content_pdf: (payload.pages || []).reduce((sum, page) =>
+        sum + (page.questions || []).reduce((qs, q) => {
+          if (q.type === "FILL_BLANKS") return qs + (q.blanks?.length ?? 0);
+          if (q.type === "SENTENCE_BUILDING") return qs + (q.sentenceParts?.length ?? 0);
+          return qs + 1;
+        }, 0), 0),
     };
     return guess[moduleKey] || 0;
   }, [content, moduleKey]);
@@ -289,9 +297,10 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
 
   const finish = (success, options = {}) => {
     setStatus("FINISHED");
-    const correct = records.filter((item) => item.correct).length;
-    const wrong = records.filter((item) => item.correct === false).length;
-    const total = records.length;
+    const latestRecords = recordsRef.current;
+    const correct = latestRecords.filter((item) => item.correct).length;
+    const wrong = latestRecords.filter((item) => item.correct === false).length;
+    const total = latestRecords.length;
     const timeSpent = Math.max(0, timeLimit - timeLeft);
     const accuracy = total ? Math.round((correct / total) * 100) : 0;
     const finalSeed = typeof options.seed === "number" ? options.seed : seed;
@@ -335,7 +344,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       moduleKey,
       startedAt,
       endedAt,
-      records,
+      records: latestRecords,
       summary: {
         success: normalizedSuccess,
         correct,
@@ -446,6 +455,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       finish,
       seedExhausted,
       resetRound,
+      setPageProgress,
     }),
     [status, timeLeft, timeLimit, seed, seedExhausted]
   );
@@ -597,7 +607,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                 </button>
                 <div className="engine-footer-item">
                   <span className="engine-footer-label">
-                    진행 {progressCurrent} / {progressTotal || "-"}
+                    {pageProgress
+                      ? `페이지 ${pageProgress.current}/${pageProgress.total} · 문제 진행 ${progressCurrent}/${progressTotal || "-"}`
+                      : `진행 ${progressCurrent} / ${progressTotal || "-"}`}
                   </span>
                   <div className="engine-progress-track">
                     <div

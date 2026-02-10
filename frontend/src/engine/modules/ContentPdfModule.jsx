@@ -1,30 +1,84 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import PdfPageViewer from "./PdfPageViewer";
-import SeedExhaustedModal from "./SeedExhaustedModal";
 import QuestionModal from "../shared/QuestionModal";
 import { apiPost } from "../../utils/api";
 import "../../styles/content-pdf.css";
 
 const getScoring = (question) => {
   const s = question?.scoring;
-  if (!s) return { correctDeltaSec: 20, wrongDeltaSec: -20 };
+  if (!s) return { correctDeltaSec: 0, wrongDeltaSec: 0 };
   return {
-    correctDeltaSec: s.correctDeltaSec ?? 20,
-    wrongDeltaSec: s.wrongDeltaSec ?? -20,
+    correctDeltaSec: s.correctDeltaSec ?? s.correct ?? 0,
+    wrongDeltaSec: s.wrongDeltaSec ?? s.wrong ?? 0,
   };
 };
 
-// 상태: LOADING_PDF → PDF_VIEW → QUIZ → PAGE_RESULT → ... → SESSION_COMPLETE
-//                                 ↑         ↑
-//                                 └── SEED_EXHAUSTED (재도전/다음 선택)
+const renderTemplate = (template, blanks, filled, activeIndex) => {
+  const parts = template.split("____");
+  return parts.map((part, idx) => (
+    <span key={`part-${idx}`}>
+      {part}
+      {idx < blanks.length ? (
+        <span
+          className={`worksheet-blank ${idx === activeIndex ? "active" : ""}`}
+        >
+          {filled[idx] || "____"}
+        </span>
+      ) : null}
+    </span>
+  ));
+};
+
+const renderTemplatePlain = (template, blanks) => {
+  const parts = template.split("____");
+  return parts.map((part, idx) => (
+    <span key={`plain-${idx}`}>
+      {part}
+      {idx < blanks.length ? <span className="worksheet-blank">____</span> : null}
+    </span>
+  ));
+};
+
+const renderHighlightedText = (text, highlight) => {
+  if (!highlight) return text;
+  if (highlight.range) {
+    const before = text.slice(0, highlight.range.start);
+    const target = text.slice(highlight.range.start, highlight.range.end);
+    const after = text.slice(highlight.range.end);
+    return (
+      <>
+        {before}
+        <span className="worksheet-highlight">{target}</span>
+        {after}
+      </>
+    );
+  }
+  if (highlight.text) {
+    const parts = text.split(highlight.text);
+    if (parts.length === 1) return text;
+    return parts.reduce((acc, part, idx) => {
+      acc.push(part);
+      if (idx < parts.length - 1) {
+        acc.push(
+          <span key={`hl-${idx}`} className="worksheet-highlight">
+            {highlight.text}
+          </span>
+        );
+      }
+      return acc;
+    }, []);
+  }
+  return text;
+};
+
+const renderPassageBox = (passage) => {
+  if (!passage) return null;
+  return <span className="worksheet-passage-box">{passage}</span>;
+};
 
 function ContentPdfModule({ content }) {
-  const {
-    status, start, pause, resume, adjustTime, recordAnswer, finish,
-    seed, setSeed, seedExhausted, resetRound,
-  } = useEngine();
-
+  const { status, start, adjustTime, recordAnswer, finish, setPageProgress } = useEngine();
   const payload = content?.payload || {};
   const pdfUrl = useMemo(() => {
     const url = payload.pdfUrl;
@@ -34,299 +88,382 @@ function ContentPdfModule({ content }) {
     const normalized = url.startsWith("/") ? url.slice(1) : url;
     return `${base}${normalized}`;
   }, [payload.pdfUrl]);
-  const totalPages = payload.totalPages || payload.pages?.length || 0;
   const pagesData = payload.pages || [];
-
+  const totalContentPages = payload.totalPages || pagesData.length || 0;
   const startPage = content?._startPage || 1;
-
-  // 상태
-  const [phase, setPhase] = useState("LOADING_PDF");
-  const [currentPage, setCurrentPage] = useState(startPage);
-  const [pdfNumPages, setPdfNumPages] = useState(0);
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const [pageCorrect, setPageCorrect] = useState(0);
-  const [pageWrong, setPageWrong] = useState(0);
-  const [pageResults, setPageResults] = useState([]);
-  const [lastResult, setLastResult] = useState(null);
-  const [isReread, setIsReread] = useState(false);
-  const [savedQuestionIndex, setSavedQuestionIndex] = useState(0);
-  // 빈칸 채우기 state
-  const [blankIndex, setBlankIndex] = useState(0);
-  const [blankAnswers, setBlankAnswers] = useState({});
-  const feedbackTimer = useRef(null);
   const farmLogId = content?._farmLogId;
 
-  const currentPageData = pagesData.find((p) => p.pageNo === currentPage) || pagesData[currentPage - 1];
-  const questions = currentPageData?.questions || [];
-  const currentQuestion = questions[questionIndex];
-  const isLastPage = currentPage >= totalPages;
+  const [showingPdf, setShowingPdf] = useState(!!pdfUrl);
+  const [showPdfPopup, setShowPdfPopup] = useState(false);
+  const [currentContentPage, setCurrentContentPage] = useState(startPage);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [blankIndex, setBlankIndex] = useState(0);
+  const [blankAnswers, setBlankAnswers] = useState({});
+  const [blankResultMap, setBlankResultMap] = useState({});
+  const [lastResult, setLastResult] = useState(null);
+  const [statusMap, setStatusMap] = useState({});
+  const [itemHeights, setItemHeights] = useState([]);
+  const [anchorRect, setAnchorRect] = useState(null);
+  const measureRef = useRef(null);
+  const itemRefs = useRef({});
+  const advanceTimerRef = useRef(null);
+  const resultTimerRef = useRef(null);
+  const feedbackDelay = 420;
 
-  // 빈칸 정규화
+  const columnHeight = 1123 - 48;
+  const itemGap = 14;
+
+  // 현재 콘텐츠 페이지의 questions 추출
+  const currentPageData =
+    pagesData.find((p) => p.pageNo === currentContentPage) ||
+    pagesData[currentContentPage - 1];
+  const questions = currentPageData?.questions || [];
+  const currentQuestion = questions[currentIndex];
+
   const normalizedQuestion = useMemo(() => {
     if (!currentQuestion) return null;
-    if (currentQuestion.type !== "FILL_BLANKS") return currentQuestion;
-    return currentQuestion;
+    if (currentQuestion.type !== "SENTENCE_BUILDING") return currentQuestion;
+    const parts = currentQuestion.sentenceParts || [];
+    const template = parts.map(() => "____").join(" ");
+    const blanks = parts.map((part, idx) => ({
+      id: `sb-${currentQuestion.id}-${idx}`,
+      answerId: `answer-${idx}`,
+      choices: [
+        { id: `answer-${idx}`, text: part.answer },
+        ...part.distractors.map((text, dIdx) => ({
+          id: `distractor-${idx}-${dIdx}`,
+          text,
+        })),
+      ],
+    }));
+    return { ...currentQuestion, type: "FILL_BLANKS", template, blanks };
   }, [currentQuestion]);
 
   const isFillBlanks = normalizedQuestion?.type === "FILL_BLANKS";
   const blanks = normalizedQuestion?.blanks || [];
+  const filled = blanks.map((blank) => blankAnswers[blank.id]);
 
-  // PDF 로드 완료
-  const handlePdfReady = (numPages) => {
-    setPdfNumPages(numPages);
-    setPhase("PDF_VIEW");
+  // 높이 측정용 아이템
+  const measureItems = useMemo(
+    () =>
+      questions.map((question, idx) => {
+        const isBlank =
+          question.type === "FILL_BLANKS" ||
+          question.type === "SENTENCE_BUILDING";
+        const blankList =
+          question.type === "SENTENCE_BUILDING"
+            ? (question.sentenceParts || []).map((_, i) => ({
+                id: `sb-measure-${i}`,
+              }))
+            : question.blanks || [];
+        const template =
+          question.type === "SENTENCE_BUILDING"
+            ? (question.sentenceParts || []).map(() => "____").join(" ")
+            : question.template || "";
+        let contentText = question.stem || question.prompt || "";
+        const passageNode = renderPassageBox(question.passage);
+        if (isBlank) {
+          contentText = renderTemplatePlain(template, blankList);
+        }
+        return (
+          <li key={`measure-${question.id}`} className="worksheet-item">
+            <span className="worksheet-item-number">{idx + 1}.</span>
+            <span className="worksheet-item-text">
+              {passageNode}
+              {contentText}
+            </span>
+          </li>
+        );
+      }),
+    [questions]
+  );
+
+  useLayoutEffect(() => {
+    if (!measureRef.current) return;
+    const nodes = Array.from(
+      measureRef.current.querySelectorAll(".worksheet-item")
+    );
+    if (!nodes.length) return;
+    setItemHeights(nodes.map((node) => node.getBoundingClientRect().height));
+  }, [measureItems]);
+
+  // 2단 레이아웃 페이지 분할
+  const pages = useMemo(() => {
+    if (!questions.length) return [];
+    if (itemHeights.length !== questions.length) {
+      return [{ left: questions.map((_, idx) => idx), right: [] }];
+    }
+    const result = [];
+    let left = [];
+    let right = [];
+    let leftHeight = 0;
+    let rightHeight = 0;
+    itemHeights.forEach((height, idx) => {
+      const leftExtra = left.length > 0 ? itemGap : 0;
+      if (leftHeight + height + leftExtra <= columnHeight || left.length === 0) {
+        left.push(idx);
+        leftHeight += height + leftExtra;
+        return;
+      }
+      const rightExtra = right.length > 0 ? itemGap : 0;
+      if (
+        rightHeight + height + rightExtra <= columnHeight ||
+        right.length === 0
+      ) {
+        right.push(idx);
+        rightHeight += height + rightExtra;
+        return;
+      }
+      result.push({ left, right });
+      left = [idx];
+      right = [];
+      leftHeight = height;
+      rightHeight = 0;
+    });
+    if (left.length || right.length) {
+      result.push({ left, right });
+    }
+    return result;
+  }, [itemHeights, questions.length, columnHeight, itemGap]);
+
+  // 페이지 완료 API 호출
+  const reportPageComplete = () => {
+    apiPost("/v1/learning/farm/page-complete", {
+      logId: farmLogId || "",
+      contentId: content?.contentId || "",
+      pageNo: currentContentPage,
+    }).catch(() => {});
   };
 
-  // PDF 다 읽었습니다 버튼
-  const handleDoneReading = () => {
-    if (isReread) {
-      // 재읽기에서 돌아옴 - 문제 진행 유지
-      setIsReread(false);
-      setQuestionIndex(savedQuestionIndex);
-      setPhase("QUIZ");
-      resume();
+  const handleNext = () => {
+    if (currentIndex >= questions.length - 1) {
+      // 현재 콘텐츠 페이지 완료
+      reportPageComplete();
+
+      if (currentContentPage >= totalContentPages) {
+        finish(true);
+      } else {
+        // 다음 페이지로 전환 (상태 리셋)
+        setCurrentContentPage((prev) => prev + 1);
+        setCurrentIndex(0);
+        setStatusMap({});
+        setBlankIndex(0);
+        setBlankAnswers({});
+        setBlankResultMap({});
+        setLastResult(null);
+        setItemHeights([]);
+        if (pdfUrl) setShowingPdf(true);
+      }
       return;
     }
-    setQuestionIndex(0);
-    setPageCorrect(0);
-    setPageWrong(0);
+    setCurrentIndex((prev) => prev + 1);
     setBlankIndex(0);
     setBlankAnswers({});
-    setPhase("QUIZ");
-    start();
+    setBlankResultMap({});
+    setLastResult(null);
   };
 
-  // 다시 읽기 버튼 (퀴즈 중)
-  const handleReread = () => {
-    if (seed <= 0) return;
-    setSavedQuestionIndex(questionIndex);
-    setSeed((prev) => prev - 1);
-    pause();
-    setIsReread(true);
-    setPhase("PDF_VIEW");
+  const queueResultReset = () => {
+    if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
+    resultTimerRef.current = setTimeout(() => {
+      setLastResult(null);
+    }, feedbackDelay);
   };
 
-  // 퀴즈 선택지 핸들
+  const queueNext = (nextAction) => {
+    if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
+    advanceTimerRef.current = setTimeout(() => {
+      nextAction();
+    }, feedbackDelay);
+  };
+
   const handleChoice = (choiceId) => {
     if (!normalizedQuestion) return;
     const scoring = getScoring(normalizedQuestion);
     const isCorrect = choiceId === normalizedQuestion.answerId;
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({ id: normalizedQuestion.id, correct: isCorrect, pageNo: currentPage });
-
-    if (isCorrect) {
-      setPageCorrect((prev) => prev + 1);
-    } else {
-      setPageWrong((prev) => prev + 1);
-    }
-
+    recordAnswer({
+      id: normalizedQuestion.id,
+      correct: isCorrect,
+      pageNo: currentContentPage,
+    });
     setLastResult(isCorrect ? "correct" : "wrong");
-    if (feedbackTimer.current) clearTimeout(feedbackTimer.current);
-    feedbackTimer.current = setTimeout(() => {
-      setLastResult(null);
-      // 다음 문제 또는 페이지 결과
-      if (questionIndex >= questions.length - 1) {
-        handlePageComplete();
-      } else {
-        setQuestionIndex((prev) => prev + 1);
-        setBlankIndex(0);
-        setBlankAnswers({});
-      }
-    }, 450);
+    queueResultReset();
+    setStatusMap((prev) => ({
+      ...prev,
+      [normalizedQuestion.id]: isCorrect ? "correct" : "wrong",
+    }));
+    if (!isCorrect && normalizedQuestion.requireCorrect) {
+      return;
+    }
+    queueNext(handleNext);
   };
 
-  // 빈칸 채우기 핸들
   const handleBlankChoice = (choiceId) => {
     if (!normalizedQuestion) return;
     const blank = blanks[blankIndex];
     const scoring = getScoring(normalizedQuestion);
     const isCorrect = choiceId === blank.answerId;
-    const correctChoice = blank.choices?.find((c) => c.id === blank.answerId);
+    const correctChoice = blank.choices?.find(
+      (choice) => choice.id === blank.answerId
+    );
+    const correctText = correctChoice?.text || "";
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({ id: `${normalizedQuestion.id}-${blank.id}`, correct: isCorrect, pageNo: currentPage });
-
-    if (isCorrect) {
-      setPageCorrect((prev) => prev + 1);
-    } else {
-      setPageWrong((prev) => prev + 1);
-    }
-
-    setBlankAnswers((prev) => ({ ...prev, [blank.id]: correctChoice?.text || "" }));
+    recordAnswer({
+      id: `${normalizedQuestion.id}-${blank.id}`,
+      correct: isCorrect,
+      pageNo: currentContentPage,
+    });
+    setBlankAnswers((prev) => ({ ...prev, [blank.id]: correctText }));
+    setBlankResultMap((prev) => ({
+      ...prev,
+      [blank.id]: isCorrect,
+    }));
     setLastResult(isCorrect ? "correct" : "wrong");
-
-    if (feedbackTimer.current) clearTimeout(feedbackTimer.current);
-    feedbackTimer.current = setTimeout(() => {
-      setLastResult(null);
-      if (blankIndex >= blanks.length - 1) {
-        // 이 문제 완료
-        if (questionIndex >= questions.length - 1) {
-          handlePageComplete();
-        } else {
-          setQuestionIndex((prev) => prev + 1);
-          setBlankIndex(0);
-          setBlankAnswers({});
-        }
-      } else {
-        setBlankIndex((prev) => prev + 1);
-      }
-    }, 450);
-  };
-
-  // 페이지 완료 처리
-  const handlePageComplete = () => {
-    pause();
-    const total = pageCorrect + pageWrong + 1; // +1 현재 문제 포함
-    const correct = pageCorrect + (lastResult === "correct" ? 1 : 0);
-    const totalQ = questions.length;
-    // 빈칸 문제의 경우 blanks 개수만큼 기록이 나뉘므로 질문 수 기준으로 계산
-    const accuracy = totalQ > 0 ? Math.round((correct / totalQ) * 100) : 0;
-    const earnedSeed = accuracy >= 70 ? seed : 0;
-    const seedType = content?.seedReward?.seedType?.toLowerCase();
-    const seedTypeMapping = {
-      wheat: "seed_wheat",
-      rice: "seed_rice",
-      corn: "seed_corn",
-      grape: "seed_grape",
-      apple: "seed_apple",
-    };
-    const normalizedSeedType = seedTypeMapping[seedType] || `seed_${seedType}` || "seed_rice";
-
-    const result = {
-      pageNo: currentPage,
-      correct: pageCorrect,
-      wrong: pageWrong,
-      accuracy,
-      earnedSeed,
-    };
-    setPageResults((prev) => [...prev, result]);
-
-    // 서버에 페이지 완료 보고
-    apiPost("/v1/learning/farm/page-complete", {
-      logId: farmLogId || "",
-      contentId: content?.contentId || "",
-      pageNo: currentPage,
-      score: accuracy,
-      accuracy,
-      earnedSeed,
-      seedType: earnedSeed > 0 ? normalizedSeedType : null,
-    }).catch(() => {});
-
-    setPhase("PAGE_RESULT");
-  };
-
-  // 다음 페이지로
-  const handleNextPage = () => {
-    if (isLastPage) {
-      handleSessionComplete();
-      return;
+    queueResultReset();
+    if (blankIndex >= blanks.length - 1) {
+      const resultMap = {
+        ...blankResultMap,
+        [blank.id]: isCorrect,
+      };
+      const allCorrect = blanks.every((item) => resultMap[item.id]);
+      setStatusMap((prev) => ({
+        ...prev,
+        [normalizedQuestion.id]: allCorrect ? "correct" : "wrong",
+      }));
+      queueNext(handleNext);
+    } else {
+      queueNext(() => setBlankIndex((prev) => prev + 1));
     }
-    setCurrentPage((prev) => prev + 1);
-    resetRound();
-    setQuestionIndex(0);
-    setPageCorrect(0);
-    setPageWrong(0);
-    setBlankIndex(0);
-    setBlankAnswers({});
-    setIsReread(false);
-    setPhase("PDF_VIEW");
   };
 
-  // 세션 완료
-  const handleSessionComplete = () => {
-    setPhase("SESSION_COMPLETE");
-    const totalEarned = pageResults.reduce((sum, r) => sum + r.earnedSeed, 0);
-    finish(true, { seed: totalEarned });
+  // PDF 다 읽었습니다
+  const handleDoneReading = () => {
+    setShowingPdf(false);
+    if (status === "READY") start();
   };
 
-  // seedExhausted 감지
+  // 자동 시작 (PDF 없는 경우)
   useEffect(() => {
-    if (seedExhausted && phase === "QUIZ") {
-      setPhase("SEED_EXHAUSTED");
+    if (!showingPdf && status === "READY") {
+      start();
     }
-  }, [seedExhausted, phase]);
+  }, [showingPdf, status, start]);
 
-  // 씨앗 소진 - 재도전
-  const handleRetry = () => {
-    resetRound();
-    setQuestionIndex(0);
-    setPageCorrect(0);
-    setPageWrong(0);
-    setBlankIndex(0);
-    setBlankAnswers({});
-    setPhase("QUIZ");
-    start();
-  };
+  // 모달 위치 계산
+  useLayoutEffect(() => {
+    const node = itemRefs.current[currentIndex];
+    if (!node) return;
+    const container = node.closest(".engine-body");
+    if (!container) return;
+    const containerRect = container.getBoundingClientRect();
+    const scale = containerRect.width / container.offsetWidth || 1;
+    const highlightNode =
+      node.querySelector(".worksheet-highlight") ||
+      node.querySelector(".worksheet-blank.active");
+    const rect = (highlightNode || node).getBoundingClientRect();
+    setAnchorRect({
+      left: (rect.left - containerRect.left) / scale,
+      right: (rect.right - containerRect.left) / scale,
+      top: (rect.top - containerRect.top) / scale,
+      height: rect.height / scale,
+    });
+  }, [currentIndex, pages.length]);
 
-  // 씨앗 소진 - 다음 페이지
-  const handleExhaustedNext = () => {
-    const result = {
-      pageNo: currentPage,
-      correct: pageCorrect,
-      wrong: pageWrong,
-      accuracy: 0,
-      earnedSeed: 0,
+  // 페이지 진행도를 EngineShell footer에 전달
+  useEffect(() => {
+    if (totalContentPages > 1 && setPageProgress) {
+      setPageProgress({ current: currentContentPage, total: totalContentPages });
+    }
+    return () => {
+      if (setPageProgress) setPageProgress(null);
     };
-    setPageResults((prev) => [...prev, result]);
-    if (isLastPage) {
-      handleSessionComplete();
-      return;
-    }
-    setCurrentPage((prev) => prev + 1);
-    resetRound();
-    setQuestionIndex(0);
-    setPageCorrect(0);
-    setPageWrong(0);
-    setBlankIndex(0);
-    setBlankAnswers({});
-    setIsReread(false);
-    setPhase("PDF_VIEW");
-  };
+  }, [currentContentPage, totalContentPages, setPageProgress]);
 
   // 클린업
-  useEffect(() => {
-    return () => {
-      if (feedbackTimer.current) clearTimeout(feedbackTimer.current);
-    };
-  }, []);
+  useEffect(
+    () => () => {
+      if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
+      if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
+    },
+    []
+  );
 
-  // 렌더 빈칸 템플릿
-  const renderFillTemplate = () => {
-    if (!normalizedQuestion?.template) return null;
-    const parts = normalizedQuestion.template.split("____");
+  // 아이템 렌더 헬퍼
+  const renderItem = (idx) => {
+    const question = questions[idx];
+    const isActive = idx === currentIndex;
+    const qStatus = statusMap[question.id];
+    const isBlank =
+      question.type === "FILL_BLANKS" ||
+      question.type === "SENTENCE_BUILDING";
+    const blankList =
+      isActive && isBlank
+        ? blanks
+        : question.type === "SENTENCE_BUILDING"
+          ? (question.sentenceParts || []).map((_, i) => ({
+              id: `sb-${question.id}-${i}`,
+            }))
+          : question.blanks || [];
+    const template =
+      question.type === "SENTENCE_BUILDING"
+        ? (question.sentenceParts || []).map(() => "____").join(" ")
+        : question.template || "";
+    const filledValues = isActive
+      ? blankList.map((blank) => blankAnswers[blank.id])
+      : [];
+    const activeBlankIndex = isActive ? blankIndex : -1;
+    const passageNode = renderPassageBox(question.passage);
+    let itemContent = null;
+    if (isBlank) {
+      itemContent = isActive
+        ? renderTemplate(template, blankList, filledValues, activeBlankIndex)
+        : renderTemplatePlain(template, blankList);
+    } else {
+      itemContent = isActive
+        ? renderHighlightedText(
+            question.stem || question.prompt || "",
+            question.highlight
+          )
+        : question.stem || question.prompt || "";
+    }
+
     return (
-      <div className="cpdf-fill-template">
-        {parts.map((part, idx) => (
-          <span key={`ft-${idx}`}>
-            {part}
-            {idx < blanks.length ? (
-              <span className={`cpdf-fill-blank ${idx === blankIndex ? "active" : ""} ${blankAnswers[blanks[idx]?.id] ? "filled" : ""}`}>
-                {blankAnswers[blanks[idx]?.id] || "____"}
-              </span>
-            ) : null}
-          </span>
-        ))}
-      </div>
+      <li
+        key={question.id}
+        ref={(el) => {
+          if (el) itemRefs.current[idx] = el;
+        }}
+        className={`worksheet-item ${isActive ? "active" : ""} ${
+          qStatus ? `done ${qStatus}` : ""
+        }`}
+      >
+        <span className="worksheet-item-number">
+          {idx + 1}.
+          {qStatus ? (
+            <span className={`worksheet-number-mark ${qStatus}`}>
+              {qStatus === "correct" ? "\u25CB" : "\uFF0F"}
+            </span>
+          ) : null}
+        </span>
+        <span className="worksheet-item-text">
+          {passageNode}
+          {itemContent}
+        </span>
+      </li>
     );
   };
 
-  // === 렌더링 ===
-
-  if (phase === "LOADING_PDF") {
-    return (
-      <div className="cpdf-module">
-        <PdfPageViewer pdfUrl={pdfUrl} pageNo={1} onReady={handlePdfReady} />
-      </div>
-    );
-  }
-
-  if (phase === "PDF_VIEW") {
+  if (showingPdf) {
     return (
       <div className="cpdf-module">
         <div className="cpdf-status-bar">
-          <span className="cpdf-page-indicator">{currentPage} / {totalPages} 페이지</span>
-          <span className="cpdf-phase-label">{isReread ? "다시 읽기" : "PDF 읽기"}</span>
+          <span className="cpdf-page-indicator">
+            {currentContentPage} / {totalContentPages} 페이지
+          </span>
+          <span className="cpdf-phase-label">PDF 읽기</span>
         </div>
-        <PdfPageViewer pdfUrl={pdfUrl} pageNo={currentPage} />
+        <PdfPageViewer pdfUrl={pdfUrl} pageNo={currentContentPage} />
         <div className="cpdf-actions">
           <button type="button" className="cpdf-btn cpdf-btn-primary" onClick={handleDoneReading}>
             다 읽었습니다
@@ -336,148 +473,98 @@ function ContentPdfModule({ content }) {
     );
   }
 
-  if (phase === "QUIZ") {
-    return (
-      <div className="cpdf-module">
-        <div className="cpdf-status-bar">
-          <span className="cpdf-page-indicator">{currentPage} / {totalPages} 페이지</span>
-          <span className="cpdf-phase-label">
-            퀴즈 {questionIndex + 1} / {questions.length}
-          </span>
-        </div>
-        <div className="cpdf-quiz-area">
-          {normalizedQuestion && (
-            <div className="cpdf-question-card">
-              <div className="cpdf-question-stem">
-                <span className="cpdf-question-number">{questionIndex + 1}.</span>
-                {isFillBlanks ? renderFillTemplate() : (normalizedQuestion.stem || normalizedQuestion.prompt)}
-              </div>
-              {/* 4지선다는 QuestionModal로 처리 */}
-            </div>
-          )}
-        </div>
-        <div className="cpdf-actions">
-          <button
-            type="button"
-            className="cpdf-btn cpdf-btn-reread"
-            onClick={handleReread}
-            disabled={seed <= 0}
-          >
-            다시 읽기 (씨앗 -1)
-          </button>
-        </div>
-
-        {/* 4지선다 모달 */}
-        {normalizedQuestion && normalizedQuestion.type === "MULTI_CHOICE" && (
-          <QuestionModal
-            title="문제"
-            prompt={normalizedQuestion.stem || normalizedQuestion.prompt}
-            choices={normalizedQuestion.choices || []}
-            onSelect={handleChoice}
-            mark={lastResult}
-            shuffleKey={normalizedQuestion.id}
-          />
-        )}
-
-        {/* 빈칸 채우기 모달 */}
-        {isFillBlanks && blanks[blankIndex] && (
-          <QuestionModal
-            title="빈칸 채우기"
-            prompt={`${blankIndex + 1}번째 빈칸을 선택하세요.`}
-            choices={blanks[blankIndex]?.choices || []}
-            onSelect={handleBlankChoice}
-            mark={lastResult}
-            shuffleKey={`${normalizedQuestion?.id}-${blankIndex}`}
-          />
-        )}
-      </div>
-    );
-  }
-
-  if (phase === "PAGE_RESULT") {
-    const latestResult = pageResults[pageResults.length - 1];
-    const accuracy = latestResult?.accuracy || 0;
-    const earnedSeed = latestResult?.earnedSeed || 0;
-    return (
-      <div className="cpdf-module">
-        <div className="cpdf-status-bar">
-          <span className="cpdf-page-indicator">{currentPage} / {totalPages} 페이지</span>
-          <span className="cpdf-phase-label">결과</span>
-        </div>
-        <div className="cpdf-page-result">
-          <div className={`cpdf-result-accuracy ${accuracy < 70 ? "fail" : ""}`}>
-            {accuracy}%
-          </div>
-          <div className="cpdf-result-detail">
-            정답 {latestResult?.correct || 0}개 / 오답 {latestResult?.wrong || 0}개
-          </div>
-          {earnedSeed > 0 ? (
-            <div className="cpdf-result-seed">
-              씨앗 {earnedSeed}개 획득!
-            </div>
-          ) : (
-            <div className="cpdf-result-detail" style={{ color: "#c00" }}>
-              70% 이상 정답 시 씨앗을 획득합니다.
-            </div>
-          )}
-          <div className="cpdf-actions">
-            {isLastPage ? (
-              <button type="button" className="cpdf-btn cpdf-btn-primary" onClick={handleSessionComplete}>
-                학습 완료
-              </button>
-            ) : (
-              <button type="button" className="cpdf-btn cpdf-btn-primary" onClick={handleNextPage}>
-                다음 페이지
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (phase === "SEED_EXHAUSTED") {
-    return (
-      <div className="cpdf-module">
-        <SeedExhaustedModal
-          onRetry={handleRetry}
-          onNextPage={handleExhaustedNext}
-          isLastPage={isLastPage}
-        />
-      </div>
-    );
-  }
-
-  if (phase === "SESSION_COMPLETE") {
-    const totalEarned = pageResults.reduce((sum, r) => sum + r.earnedSeed, 0);
-    return (
-      <div className="cpdf-module">
-        <div className="cpdf-session-complete">
-          <h2 className="cpdf-session-title">학습 완료</h2>
-          <div className="cpdf-session-stats">
-            <div className="cpdf-stat-item">
-              <span className="cpdf-stat-value">{pageResults.length}</span>
-              <span className="cpdf-stat-label">완료 페이지</span>
-            </div>
-            <div className="cpdf-stat-item">
-              <span className="cpdf-stat-value">{totalEarned}</span>
-              <span className="cpdf-stat-label">총 획득 씨앗</span>
-            </div>
-          </div>
-          <div className="cpdf-page-list">
-            {pageResults.map((r) => (
-              <div key={r.pageNo} className="cpdf-page-list-item">
-                <span>{r.pageNo}페이지</span>
-                <span>정확도 {r.accuracy}% · 씨앗 {r.earnedSeed}개</span>
+  return (
+    <div className="worksheet-module">
+      <div className="worksheet-sheet">
+        <div className="worksheet-stem">
+          <div className="worksheet-pages">
+            {pages.map((page, pageIndex) => (
+              <div
+                className={
+                  pages.length > 1
+                    ? "worksheet-page"
+                    : "worksheet-page single"
+                }
+                key={`page-${pageIndex}`}
+              >
+                <div className="worksheet-page-inner">
+                  <div className="worksheet-page-number">
+                    {pageIndex + 1} / {pages.length}
+                  </div>
+                  <div className="worksheet-columns">
+                    <ol className="worksheet-list">
+                      {page.left.map((idx) => renderItem(idx))}
+                    </ol>
+                    <ol className="worksheet-list">
+                      {page.right.map((idx) => renderItem(idx))}
+                    </ol>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
+        <div className="worksheet-controls">
+          {pdfUrl ? (
+            <button
+              type="button"
+              className="worksheet-pdf-btn"
+              onClick={() => setShowPdfPopup(true)}
+            >
+              PDF 보기
+            </button>
+          ) : null}
+          {totalContentPages > 1 ? (
+            <span className="cpdf-page-badge">
+              {currentContentPage} / {totalContentPages} 페이지
+            </span>
+          ) : null}
+          <span>
+            {currentIndex + 1} / {questions.length}
+          </span>
+        </div>
       </div>
-    );
-  }
 
-  return null;
+      {normalizedQuestion && normalizedQuestion.type !== "FILL_BLANKS" ? (
+        <QuestionModal
+          title="문제"
+          prompt={normalizedQuestion.prompt || normalizedQuestion.stem}
+          choices={normalizedQuestion.choices || []}
+          onSelect={handleChoice}
+          anchorRect={anchorRect}
+          mark={lastResult}
+          shuffleKey={normalizedQuestion.id}
+        />
+      ) : null}
+
+      {isFillBlanks ? (
+        <QuestionModal
+          title="빈칸 채우기"
+          prompt={`${blankIndex + 1}번째 빈칸을 선택하세요.`}
+          choices={blanks[blankIndex]?.choices || []}
+          onSelect={handleBlankChoice}
+          anchorRect={anchorRect}
+          mark={lastResult}
+          shuffleKey={`${normalizedQuestion?.id || "blank"}-${blankIndex}`}
+        />
+      ) : null}
+
+      {showPdfPopup ? (
+        <div className="worksheet-pdf-overlay">
+          <div className="worksheet-pdf-card">
+            <PdfPageViewer pdfUrl={pdfUrl} pageNo={currentContentPage} />
+            <button type="button" onClick={() => setShowPdfPopup(false)}>
+              보기 종료
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      <div className="worksheet-measure" ref={measureRef} aria-hidden="true">
+        <ol className="worksheet-list">{measureItems}</ol>
+      </div>
+    </div>
+  );
 }
 
 export default ContentPdfModule;
