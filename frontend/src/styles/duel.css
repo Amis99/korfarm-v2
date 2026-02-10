@@ -854,29 +854,14 @@
   border: 1.5px solid #fff;
 }
 
-/* 탈락자: 회색 + 사선 */
+/* 탈락자: 깔끔한 회색 처리 */
 .duel-player-avatar.eliminated {
-  background: #ccc;
-  opacity: 0.6;
-  overflow: hidden;
+  background: #d1d5db;
+  opacity: 0.5;
 }
 
 .duel-player-avatar.eliminated .avatar-letter {
-  color: #888;
-}
-
-.duel-player-avatar.eliminated::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 3px,
-    rgba(0, 0, 0, 0.2) 3px,
-    rgba(0, 0, 0, 0.2) 5px
-  );
-  border-radius: 50%;
+  color: #9ca3af;
 }
 
 /* 선택지 비활성화 */
@@ -1034,6 +1019,177 @@
 
 .duel-participant.answered .status-indicator {
   color: #22c55e;
+}
+
+/* === AI 방 스타일 === */
+.duel-room-item.ai-room {
+  border-color: #c4b5fd;
+  background: linear-gradient(135deg, #faf5ff, #f5f3ff);
+}
+
+.duel-room-item.ai-room:hover {
+  border-color: #8b5cf6;
+}
+
+.ai-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+
+/* AI 아바타 */
+.duel-player-avatar.ai {
+  background: linear-gradient(135deg, #c4b5fd, #8b5cf6);
+}
+
+.duel-player-avatar.ai .avatar-letter {
+  font-size: 16px;
+}
+
+/* === O/X 마크 오버레이 === */
+.duel-question-area {
+  position: relative;
+}
+
+.duel-answer-mark {
+  position: absolute;
+  inset: 0;
+  width: 200px;
+  height: 165px;
+  margin: auto;
+  z-index: 10;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
+  animation: duel-mark-pop 0.3s ease;
+}
+
+.duel-answer-mark.correct {
+  background-image: url("/정답 동그라미.png");
+}
+
+.duel-answer-mark.wrong {
+  background-image: url("/오답 꺾은선.png");
+}
+
+@keyframes duel-mark-pop {
+  0% { transform: scale(0.3); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* === 탈락 오버레이 === */
+.duel-eliminated-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: duel-fadeIn 0.3s ease;
+}
+
+.eliminated-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+}
+
+.eliminated-card .eliminated-icon {
+  font-size: 64px;
+  margin-bottom: 12px;
+}
+
+.eliminated-card h2 {
+  font-size: 28px;
+  color: #ef4444;
+  margin: 0 0 12px;
+}
+
+.eliminated-card p {
+  font-size: 15px;
+  color: #5a4a3a;
+  margin: 6px 0;
+}
+
+.eliminated-card .remaining-info {
+  font-weight: 600;
+  color: #3a2a1a;
+}
+
+.eliminated-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: center;
+}
+
+.eliminated-actions button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.eliminated-actions .spectate-btn {
+  background: #6b7280;
+  color: #fff;
+}
+
+.eliminated-actions .spectate-btn:hover {
+  background: #4b5563;
+}
+
+.eliminated-actions .leave-btn {
+  background: #e8ddd0;
+  color: #5a4a3a;
+}
+
+.eliminated-actions .leave-btn:hover {
+  background: #d9cec0;
+}
+
+/* === 관전 배너 === */
+.duel-spectating-banner {
+  background: #6b7280;
+  color: #fff;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.duel-spectating-banner button {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 4px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.duel-spectating-banner button:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* 반응형 */

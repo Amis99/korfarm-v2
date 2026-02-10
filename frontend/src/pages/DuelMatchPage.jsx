@@ -19,7 +19,7 @@ function DuelMatchPage() {
   const [timeLimitSec, setTimeLimitSec] = useState(30);
   const [questionTimeLeft, setQuestionTimeLeft] = useState(30);
 
-  // phase: loading | answering | waiting | roundResult | eliminated | finished
+  // phase: loading | answering | waiting | roundResult | eliminated | spectating | finished
   const [phase, setPhase] = useState("loading");
   const [answers, setAnswers] = useState({});
   const [answerResult, setAnswerResult] = useState(null);
@@ -27,6 +27,7 @@ function DuelMatchPage() {
   const [players, setPlayers] = useState([]);
   const [eliminated, setEliminated] = useState(false);
   const [remainingCount, setRemainingCount] = useState(0);
+  const [visibleMark, setVisibleMark] = useState(null); // "correct" | "wrong" | null
 
   const userId = user?.id;
 
@@ -52,6 +53,14 @@ function DuelMatchPage() {
 
     return () => clearInterval(timerRef.current);
   }, [currentQuestion?.question_id, timeLimitSec]);
+
+  // 정답/오답 O/X 마크 표시
+  useEffect(() => {
+    if (!answerResult) { setVisibleMark(null); return; }
+    setVisibleMark(answerResult.isCorrect ? "correct" : "wrong");
+    const timer = setTimeout(() => setVisibleMark(null), 1000);
+    return () => clearTimeout(timer);
+  }, [answerResult]);
 
   // WebSocket 연결
   useEffect(() => {
@@ -121,7 +130,7 @@ function DuelMatchPage() {
           setEliminated(true);
           eliminatedRef.current = true;
           setPhase("eliminated");
-        } else {
+        } else if (!eliminatedRef.current) {
           setPhase("roundResult");
         }
       }
@@ -173,21 +182,6 @@ function DuelMatchPage() {
     );
   }
 
-  // 탈락 화면
-  if (phase === "eliminated") {
-    return (
-      <div className="duel-match">
-        <div className="duel-eliminated-screen">
-          <div className="eliminated-icon">💥</div>
-          <h2>탈락!</h2>
-          <p>아쉽지만 오답으로 탈락했습니다.</p>
-          <p className="remaining-info">남은 참가자: {remainingCount}명</p>
-          <p className="wait-info">결과를 기다리는 중...</p>
-        </div>
-      </div>
-    );
-  }
-
   // 종료 화면
   if (phase === "finished") {
     return (
@@ -231,18 +225,27 @@ function DuelMatchPage() {
           const isActive = p.active !== false;
           const answeredCurrent = p.answered_current ?? p.answeredCurrent;
           const isMe = pid === userId;
+          const isAi = pid?.startsWith("ai_player_");
           return (
             <div
               key={pid}
-              className={`duel-player-avatar${!isActive ? " eliminated" : ""}${answeredCurrent ? " answered" : ""}${isMe ? " me" : ""}`}
+              className={`duel-player-avatar${!isActive ? " eliminated" : ""}${answeredCurrent ? " answered" : ""}${isMe ? " me" : ""}${isAi ? " ai" : ""}`}
               title={name}
             >
-              <span className="avatar-letter">{name.charAt(0)}</span>
+              <span className="avatar-letter">{isAi ? "\uD83E\uDD16" : name.charAt(0)}</span>
               {answeredCurrent && isActive && <span className="avatar-check">✓</span>}
             </div>
           );
         })}
       </div>
+
+      {/* 관전 모드 배너 */}
+      {phase === "spectating" && (
+        <div className="duel-spectating-banner">
+          <span>탈락 - 관전 중</span>
+          <button onClick={() => navigate(`/duel/result/${matchId}`)}>나가기</button>
+        </div>
+      )}
 
       {currentQuestion && (
         <div className="duel-question-area">
@@ -285,6 +288,11 @@ function DuelMatchPage() {
               );
             })}
           </div>
+
+          {/* O/X 마크 오버레이 */}
+          {visibleMark && (
+            <div className={`duel-answer-mark ${visibleMark}`} />
+          )}
         </div>
       )}
 
@@ -311,6 +319,22 @@ function DuelMatchPage() {
           ) : (
             <p className="no-eliminated">전원 오답! 탈락 없이 다음 문제로 진행합니다.</p>
           )}
+        </div>
+      )}
+
+      {/* 탈락 오버레이 */}
+      {phase === "eliminated" && (
+        <div className="duel-eliminated-overlay">
+          <div className="eliminated-card">
+            <div className="eliminated-icon">💥</div>
+            <h2>탈락!</h2>
+            <p>아쉽지만 오답으로 탈락했습니다.</p>
+            <p className="remaining-info">남은 참가자: {remainingCount}명</p>
+            <div className="eliminated-actions">
+              <button className="spectate-btn" onClick={() => setPhase("spectating")}>관전하기</button>
+              <button className="leave-btn" onClick={() => navigate(`/duel/result/${matchId}`)}>나가기</button>
+            </div>
+          </div>
         </div>
       )}
 

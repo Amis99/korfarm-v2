@@ -160,9 +160,9 @@ function TestStoragePage() {
         <div className="ts-center"><p>등록된 시험이 없습니다.</p></div>
       ) : (
         <div className="ts-grid">
-          {tests.map(t => (
+          {tests.map((t, idx) => (
             <div
-              key={t.testId}
+              key={t.testId ?? idx}
               className="ts-card"
               onClick={() => navigate(`/tests/${t.testId}`)}
             >
