@@ -270,6 +270,27 @@
   border-color: rgba(166, 182, 169, 0.3);
 }
 
+/* 상태 도트 (축약 아이콘) */
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #a6b6a9;
+}
+
+.status-dot[data-status="active"] {
+  background: #4ade80;
+}
+
+.status-dot[data-status="trial"] {
+  background: #fbbf24;
+}
+
+.status-dot[data-status="inactive"] {
+  background: #f87171;
+}
+
 .admin-type-filter-select {
   padding: 4px 8px;
   border-radius: 6px;

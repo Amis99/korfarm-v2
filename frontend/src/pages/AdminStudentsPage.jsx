@@ -10,6 +10,14 @@ const STUDENTS = [
   { id: "s1", name: "김서연", email: "", level: "프레게1", org: "해든 국어학원", status: "active" },
 ];
 
+/* 레벨 약칭 */
+const LEVEL_SHORT = {
+  saussure1: "S1", saussure2: "S2", saussure3: "S3",
+  frege1: "F1", frege2: "F2", frege3: "F3",
+  russell1: "R1", russell2: "R2", russell3: "R3",
+  wittgenstein1: "W1", wittgenstein2: "W2", wittgenstein3: "W3",
+};
+
 /* 씨앗/작물 아이템 정의 */
 const SEED_ITEMS = [
   { key: "seed_wheat", label: "밀" },
@@ -419,11 +427,7 @@ function AdminStudentsPage() {
             <button
               className="admin-detail-btn"
               type="button"
-              onClick={() => {
-                setFormData({ email: "", name: "", orgId: "", password: "" });
-                setActionError("");
-                setShowCreateModal(true);
-              }}
+              onClick={() => navigate("/signup")}
             >
               학생 등록
             </button>
@@ -460,12 +464,11 @@ function AdminStudentsPage() {
               <thead>
                 <tr>
                   <th>학생</th>
-                  <th>아이디</th>
-                  <th>레벨</th>
+                  <th style={{ width: 36 }}>레벨</th>
                   <th>기관</th>
                   <th>학교</th>
                   <th>구독</th>
-                  <th>상태</th>
+                  <th style={{ width: 36, textAlign: "center" }}>상태</th>
                   <th>조치</th>
                 </tr>
               </thead>
@@ -480,8 +483,7 @@ function AdminStudentsPage() {
                         {s.name}
                       </span>
                     </td>
-                    <td>{s.email || "-"}</td>
-                    <td>{s.level}</td>
+                    <td style={{ whiteSpace: "nowrap" }} title={s.level}>{LEVEL_SHORT[s.level] || s.level}</td>
                     <td>{s.org}</td>
                     <td>{s.school || "-"}</td>
                     <td>
@@ -492,10 +494,12 @@ function AdminStudentsPage() {
                         {subscriptionLabel(s.subscriptionStatus)}
                       </span>
                     </td>
-                    <td>
-                      <span className="status-pill" data-status={s.status}>
-                        {s.status}
-                      </span>
+                    <td style={{ textAlign: "center" }}>
+                      <span
+                        className="status-dot"
+                        data-status={s.status}
+                        title={s.status === "active" ? "활성" : s.status === "trial" ? "체험" : "비활성"}
+                      />
                     </td>
                     <td>
                       <div style={{ display: "flex", gap: 4 }}>
@@ -536,11 +540,11 @@ function AdminStudentsPage() {
             <h2>학생 등록</h2>
             {actionError ? <p className="admin-detail-note error">{actionError}</p> : null}
             <div className="admin-modal-field">
-              <label>아이디 (이메일)</label>
+              <label>아이디</label>
               <input
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                placeholder="student@example.com"
+                placeholder="아이디를 입력하세요"
               />
             </div>
             <div className="admin-modal-field">
