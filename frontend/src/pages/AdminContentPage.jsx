@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
@@ -94,7 +94,6 @@ const TYPE_LABEL = {
   LOGIC_REASONING_QUIZ: "논리사고력 퀴즈",
   CHOICE_JUDGEMENT: "선택지 판별",
   WRITING_DESCRIPTIVE: "서술형",
-  DUEL_QUESTION: "대결 문제",
   /* 레거시 moduleKey 기반 (DB 콘텐츠 호환) */
   worksheet_quiz: "공통 퀴즈형",
   reading_intensive: "정독 훈련",
@@ -130,7 +129,6 @@ const TYPE_SHORT = {
   LOGIC_REASONING_QUIZ: { label: "논리퀴즈", group: "logic" },
   CHOICE_JUDGEMENT: { label: "판별", group: "choice" },
   WRITING_DESCRIPTIVE: { label: "서술형", group: "writing" },
-  DUEL_QUESTION: { label: "대결", group: "duel" },
 };
 const getTypeShort = (type) => TYPE_SHORT[type] || { label: type, group: "other" };
 
@@ -177,40 +175,11 @@ function AdminContentPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
-  /* 대결 문제 카운트 */
-  const DUEL_SERVERS = [
-    { id: "saussure", label: "소쉬르" },
-    { id: "frege", label: "프레게" },
-    { id: "russell", label: "러셀" },
-    { id: "wittgenstein", label: "비트겐슈타인" },
-  ];
-  const [duelCounts, setDuelCounts] = useState({});
-  useEffect(() => {
-    apiGet("/v1/admin/duel/questions/count")
-      .then((data) => setDuelCounts(data || {}))
-      .catch(() => {});
-  }, []);
-
-  /* DB 콘텐츠 + static 콘텐츠 + 대결 문제 병합 */
+  /* DB 콘텐츠 + static 콘텐츠 병합 */
   const allContents = useMemo(() => {
     const dbItems = contents.map((c) => ({ ...c, source: "db" }));
-    const duelItems = DUEL_SERVERS.map((s) => {
-      const c = duelCounts[s.id] || {};
-      const total = c.total || 0;
-      const quiz = c.quiz || 0;
-      const reading = c.reading || 0;
-      return {
-        id: `duel-${s.id}`,
-        title: `대결 문제 - ${s.label}` + (total ? ` (퀴즈 ${quiz}, 독해 ${reading})` : ""),
-        type: "DUEL_QUESTION",
-        levelId: "",
-        chapterId: s.id,
-        status: total > 0 ? "active" : "inactive",
-        source: "duel",
-      };
-    });
-    return [...STATIC_CONTENTS, ...duelItems, ...dbItems];
-  }, [contents, duelCounts]);
+    return [...STATIC_CONTENTS, ...dbItems];
+  }, [contents]);
 
   const filteredContents = useMemo(() => {
     const term = search.trim().toLowerCase();
@@ -241,10 +210,6 @@ function AdminContentPage() {
 
   /* 행 클릭 → 업로드/편집 페이지 이동 */
   const handleRowClick = (content) => {
-    if (content.source === "duel") {
-      navigate(`/admin/duel/questions`);
-      return;
-    }
     const params = new URLSearchParams({ id: content.id });
     if (content.source === "static") params.set("source", "static");
     navigate(`/admin/content/upload?${params.toString()}`);
@@ -367,26 +332,15 @@ function AdminContentPage() {
                       </span>
                     </td>
                     <td>
-                      {content.source === "duel" ? (
-                        <button
-                          className="admin-detail-btn secondary"
-                          type="button"
-                          style={{ padding: "4px 10px", fontSize: "12px" }}
-                          onClick={(e) => { e.stopPropagation(); navigate("/admin/duel/questions"); }}
-                        >
-                          관리
-                        </button>
-                      ) : (
-                        <button
-                          className="admin-detail-btn secondary"
-                          type="button"
-                          style={{ padding: "4px 10px", fontSize: "12px" }}
-                          disabled={previewLoadingId === content.id}
-                          onClick={(e) => { e.stopPropagation(); handleServerPreview(content.id); }}
-                        >
-                          {previewLoadingId === content.id ? "..." : "미리보기"}
-                        </button>
-                      )}
+                      <button
+                        className="admin-detail-btn secondary"
+                        type="button"
+                        style={{ padding: "4px 10px", fontSize: "12px" }}
+                        disabled={previewLoadingId === content.id}
+                        onClick={(e) => { e.stopPropagation(); handleServerPreview(content.id); }}
+                      >
+                        {previewLoadingId === content.id ? "..." : "미리보기"}
+                      </button>
                     </td>
                   </tr>
                 );
