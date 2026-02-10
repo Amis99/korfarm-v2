@@ -181,7 +181,7 @@ function AdminContentUploadPage() {
           const found = STATIC_CONTENTS.find((c) => c.id === editId);
           if (!found) throw new Error("해당 static 콘텐츠를 찾을 수 없습니다.");
           setEditMeta(found);
-          const resp = await fetch(found.jsonPath);
+          const resp = await fetch(import.meta.env.BASE_URL + found.jsonPath.replace(/^\//, ""));
           if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
           const data = await resp.json();
           if (!cancelled) setJsonText(JSON.stringify(data, null, 2));
