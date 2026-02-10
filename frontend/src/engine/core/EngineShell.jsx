@@ -505,6 +505,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                 <button type="button" className="engine-exit" onClick={onExit}>
                   학습 종료
                 </button>
+                <button type="button" className="engine-print" onClick={() => window.print()}>
+                  인쇄
+                </button>
                 <div className="engine-footer-item">
                   <span className="engine-footer-label">
                     진행 {progressCurrent} / {progressTotal || "-"}

@@ -200,6 +200,17 @@
   cursor: pointer;
 }
 
+.engine-print {
+  border: 2px solid var(--engine-orange);
+  background: #fff;
+  color: var(--engine-orange);
+  border-radius: 14px;
+  padding: 24px 32px;
+  font-weight: 700;
+  font-size: 28px;
+  cursor: pointer;
+}
+
 .engine-error {
   background: transparent;
   padding: 20px;
@@ -1524,5 +1535,74 @@ mark.highlight {
       transform: scale(var(--body-scale));
       transform-origin: top left;
     }
+  }
+}
+
+/* 인쇄 스타일 - PDF 저장 차단, 실제 프린터만 허용 */
+@media print {
+  /* 모달, 오버레이, 결과 화면 숨기기 */
+  .result-overlay,
+  .result-card,
+  .question-modal-overlay,
+  .question-modal,
+  .worksheet-pdf-overlay,
+  .cpdf-exhausted-card,
+  .engine-footer,
+  .engine-header-wrap {
+    display: none !important;
+  }
+
+  /* 배경/장식 제거하여 깔끔한 인쇄 */
+  .engine-shell {
+    padding: 0 !important;
+    background: #fff !important;
+    min-height: auto !important;
+  }
+
+  .engine-body {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-image: none !important;
+    background-color: #fff !important;
+    overflow: visible !important;
+    padding: 12px !important;
+  }
+
+  .engine-body.stack {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  .engine-stage,
+  .engine-viewport,
+  .engine-stage-inner,
+  .engine-scale {
+    width: 100% !important;
+    zoom: 1 !important;
+    transform: none !important;
+  }
+
+  .worksheet-page {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    background-image: none !important;
+    background-color: #fff !important;
+  }
+
+  /* PDF 저장(인쇄) 차단 워터마크 */
+  .engine-shell::after {
+    content: "이 문서는 인쇄 전용입니다 - 국어농장";
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    font-size: 9px;
+    color: #ccc;
   }
 }
