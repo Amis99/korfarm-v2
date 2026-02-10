@@ -85,7 +85,7 @@ const TYPE_LABEL = {
   READING_NONFICTION: "독해 비문학",
   READING_LITERATURE: "독해 문학",
   CONTENT_PDF: "내용 숙지",
-  CONTENT_PDF_QUIZ: "내용 숙지 퀴즈",
+  CONTENT_PDF_QUIZ: "내용 숙지",
   BACKGROUND_KNOWLEDGE: "배경지식",
   BACKGROUND_KNOWLEDGE_QUIZ: "배경지식 퀴즈",
   LANGUAGE_CONCEPT: "국어 개념",
@@ -120,7 +120,7 @@ const TYPE_SHORT = {
   READING_NONFICTION: { label: "비문학", group: "reading" },
   READING_LITERATURE: { label: "문학", group: "reading" },
   CONTENT_PDF: { label: "내용숙지", group: "content" },
-  CONTENT_PDF_QUIZ: { label: "숙지퀴즈", group: "content" },
+  CONTENT_PDF_QUIZ: { label: "내용숙지", group: "content" },
   BACKGROUND_KNOWLEDGE: { label: "배경", group: "knowledge" },
   BACKGROUND_KNOWLEDGE_QUIZ: { label: "배경퀴즈", group: "knowledge" },
   LANGUAGE_CONCEPT: { label: "개념", group: "knowledge" },
@@ -185,7 +185,12 @@ function AdminContentPage() {
     const term = search.trim().toLowerCase();
     return allContents.filter((content) => {
       if (statusFilter !== "all" && content.status !== statusFilter) return false;
-      if (typeFilter !== "all" && content.type !== typeFilter) return false;
+      if (typeFilter !== "all") {
+        const merged = typeFilter === "CONTENT_PDF"
+          ? (content.type !== "CONTENT_PDF" && content.type !== "CONTENT_PDF_QUIZ")
+          : content.type !== typeFilter;
+        if (merged) return false;
+      }
       if (!term) return true;
       return [content.title, content.type, content.status, content.levelId, content.chapterId]
         .filter(Boolean)
@@ -274,7 +279,7 @@ function AdminContentPage() {
               >
                 <option value="all">유형: 전체</option>
                 {Object.entries(TYPE_LABEL)
-                  .filter(([key]) => key === key.toUpperCase())
+                  .filter(([key]) => key === key.toUpperCase() && key !== "CONTENT_PDF_QUIZ")
                   .map(([key, label]) => (
                     <option key={key} value={key}>{label}</option>
                   ))}

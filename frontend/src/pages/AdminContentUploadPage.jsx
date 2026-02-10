@@ -70,7 +70,7 @@ const TYPE_LABEL = {
   READING_NONFICTION: "독해 비문학",
   READING_LITERATURE: "독해 문학",
   CONTENT_PDF: "내용 숙지",
-  CONTENT_PDF_QUIZ: "내용 숙지 퀴즈",
+  CONTENT_PDF_QUIZ: "내용 숙지",
   BACKGROUND_KNOWLEDGE: "배경지식",
   BACKGROUND_KNOWLEDGE_QUIZ: "배경지식 퀴즈",
   LANGUAGE_CONCEPT: "국어 개념",
