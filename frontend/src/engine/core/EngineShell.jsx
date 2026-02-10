@@ -170,6 +170,34 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     return mapping[subArea] || "세부 영역";
   };
 
+  // 인쇄 전용: 페이지 그룹별 문제 추출
+  const printPageGroups = useMemo(() => {
+    const payload = content?.payload;
+    if (!payload) return [];
+    // content_pdf: 페이지별 명확히 분리
+    if (payload.pages) {
+      return payload.pages
+        .filter((p) => p.questions?.length)
+        .map((p) => ({
+          label: `${p.pageNo}페이지 문제`,
+          questions: p.questions,
+        }));
+    }
+    // worksheet_quiz, choice_judgement 등
+    if (payload.questions) {
+      const qs = payload.questions.filter(Boolean);
+      if (!qs.length) return [];
+      return [{ label: "문제", questions: qs }];
+    }
+    // reading_training
+    if (payload.intensive?.timeline) {
+      const qs = payload.intensive.timeline.map((t) => t.question).filter(Boolean);
+      if (!qs.length) return [];
+      return [{ label: "문제", questions: qs }];
+    }
+    return [];
+  }, [content]);
+
   const baseProgressTotal = useMemo(() => {
     const payload = content?.payload || {};
     const readingTrainingTotal =
@@ -500,6 +528,56 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
               >
                 <Module content={content} />
               </main>
+
+              {/* 인쇄 전용 영역 - 학습 페이지당 문제 모음 1장 */}
+              {printPageGroups.map((group, gi) => (
+                <div key={gi} className="print-only print-page-group">
+                  <h2 className="print-title">
+                    {content?.title || "학습"}
+                    {group.label ? ` — ${group.label}` : ""}
+                  </h2>
+                  <div className="print-questions">
+                    {group.questions.map((q, idx) => (
+                      <div key={q.id || idx} className="print-question-box">
+                        <div className="print-question-header">
+                          <span className="print-question-num">{idx + 1}.</span>
+                          <span className="print-question-stem">
+                            {q.stem || q.prompt || ""}
+                          </span>
+                        </div>
+                        {q.type === "FILL_BLANKS" && q.template && (
+                          <div className="print-fill-template">
+                            {q.template.replace(/____/g, "(          )")}
+                          </div>
+                        )}
+                        {q.choices && (
+                          <div className="print-choices">
+                            {q.choices.map((c) => (
+                              <div key={c.id} className="print-choice">
+                                <span className="print-choice-id">{c.id}</span>
+                                <span>{c.text}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        {q.type === "FILL_BLANKS" && q.blanks && q.blanks.map((blank, bi) => (
+                          <div key={blank.id || bi} className="print-blank-group">
+                            <span className="print-blank-label">빈칸 {bi + 1}</span>
+                            <div className="print-choices">
+                              {(blank.choices || []).map((c) => (
+                                <div key={c.id} className="print-choice">
+                                  <span className="print-choice-id">{c.id}</span>
+                                  <span>{c.text}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
 
               <footer className="engine-footer">
                 <button type="button" className="engine-exit" onClick={onExit}>

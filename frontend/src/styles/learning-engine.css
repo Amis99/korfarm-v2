@@ -1538,21 +1538,54 @@ mark.highlight {
   }
 }
 
-/* 인쇄 스타일 - PDF 저장 차단, 실제 프린터만 허용 */
+/* 인쇄 전용 영역 - 화면에서 숨김 */
+.print-only {
+  display: none !important;
+}
+
+/* 인쇄 스타일 */
 @media print {
-  /* 모달, 오버레이, 결과 화면 숨기기 */
+  /* 인쇄 전용 영역 표시 */
+  .print-only {
+    display: block !important;
+  }
+
+  /* 모달, 오버레이, 결과, 푸터 숨기기 */
   .result-overlay,
   .result-card,
   .question-modal-overlay,
   .question-modal,
   .worksheet-pdf-overlay,
   .cpdf-exhausted-card,
-  .engine-footer,
-  .engine-header-wrap {
+  .engine-footer {
     display: none !important;
   }
 
-  /* 배경/장식 제거하여 깔끔한 인쇄 */
+  /* 헤더: 제목만 표시 */
+  .engine-header-wrap {
+    position: static !important;
+    padding: 0 !important;
+    pointer-events: auto !important;
+  }
+
+  .engine-header {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 8px 0 !important;
+    border-bottom: 2px solid #333 !important;
+  }
+
+  .engine-header-row.secondary,
+  .engine-logo,
+  .engine-header-divider {
+    display: none !important;
+  }
+
+  .engine-header-item {
+    font-size: 16px !important;
+  }
+
+  /* 배경/장식 제거 */
   .engine-shell {
     padding: 0 !important;
     background: #fff !important;
@@ -1596,7 +1629,102 @@ mark.highlight {
     background-color: #fff !important;
   }
 
-  /* PDF 저장(인쇄) 차단 워터마크 */
+  /* 인쇄 전용 문제 영역 - 각 그룹마다 새 페이지 */
+  .print-page-group {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .print-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: #222;
+    margin: 0 0 6px;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid #333;
+  }
+
+  .print-questions {
+    column-count: 2;
+    column-gap: 20px;
+    column-rule: 1px solid #ddd;
+  }
+
+  .print-question-box {
+    padding: 4px 0;
+    border-bottom: 1px solid #eee;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-question-header {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 3px;
+    line-height: 1.5;
+  }
+
+  .print-question-num {
+    font-weight: 800;
+    color: #333;
+    white-space: nowrap;
+    min-width: 24px;
+    font-size: 11px;
+  }
+
+  .print-question-stem {
+    color: #222;
+    font-size: 11px;
+  }
+
+  .print-fill-template {
+    margin: 2px 0 4px 28px;
+    font-size: 11px;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .print-choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 8px;
+    margin-left: 28px;
+  }
+
+  .print-choice {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 4px;
+    border: 1px solid #ccc;
+    font-size: 10px;
+  }
+
+  .print-choice-id {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #999;
+    font-weight: 700;
+    font-size: 9px;
+    flex-shrink: 0;
+  }
+
+  .print-blank-group {
+    margin: 3px 0 3px 28px;
+  }
+
+  .print-blank-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #666;
+    margin-bottom: 2px;
+    display: block;
+  }
+
+  /* 워터마크 */
   .engine-shell::after {
     content: "이 문서는 인쇄 전용입니다 - 국어농장";
     position: fixed;
