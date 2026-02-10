@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter
 @Service
 class FarmLearningService(
     private val farmLearningLogRepository: FarmLearningLogRepository,
+    private val contentPageProgressRepository: ContentPageProgressRepository,
     private val economyService: EconomyService
 ) {
     @Transactional
@@ -115,5 +116,45 @@ class FarmLearningService(
         }
 
         return FarmProgressResponse(stats = stats, myStatus = myStatus)
+    }
+
+    @Transactional
+    fun pageComplete(userId: String, request: PageCompleteRequest): PageCompleteResponse {
+        val entity = ContentPageProgressEntity(
+            id = IdGenerator.newId("cpp"),
+            userId = userId,
+            contentId = request.contentId,
+            logId = request.logId,
+            pageNo = request.pageNo,
+            score = request.score,
+            accuracy = request.accuracy,
+            earnedSeed = request.earnedSeed,
+            earnedSeedType = request.seedType,
+            completedAt = LocalDateTime.now()
+        )
+        contentPageProgressRepository.save(entity)
+
+        if (request.earnedSeed > 0 && !request.seedType.isNullOrBlank()) {
+            economyService.addSeeds(
+                userId,
+                request.seedType,
+                request.earnedSeed,
+                "farm_page_learning",
+                "content_page_progress",
+                entity.id
+            )
+        }
+
+        val allPages = contentPageProgressRepository.findByUserIdAndContentIdOrderByPageNoAsc(userId, request.contentId)
+        val totalEarned = allPages.sumOf { it.earnedSeed }
+        return PageCompleteResponse(success = true, totalEarnedSeed = totalEarned)
+    }
+
+    @Transactional(readOnly = true)
+    fun pageProgress(userId: String, request: PageProgressRequest): PageProgressResponse {
+        val pages = contentPageProgressRepository.findByUserIdAndContentIdOrderByPageNoAsc(userId, request.contentId)
+        val lastPage = pages.maxByOrNull { it.pageNo }?.pageNo ?: 0
+        val results = pages.map { PageResultDto(pageNo = it.pageNo, score = it.score, accuracy = it.accuracy, earnedSeed = it.earnedSeed) }
+        return PageProgressResponse(lastCompletedPage = lastPage, pageResults = results)
     }
 }

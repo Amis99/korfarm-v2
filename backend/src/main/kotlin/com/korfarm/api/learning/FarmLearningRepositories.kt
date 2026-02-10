@@ -53,3 +53,8 @@ interface ContentCountProjection {
     val contentId: String
     val cnt: Long
 }
+
+interface ContentPageProgressRepository : JpaRepository<ContentPageProgressEntity, String> {
+    fun findByUserIdAndContentIdOrderByPageNoAsc(userId: String, contentId: String): List<ContentPageProgressEntity>
+    fun findTopByUserIdAndContentIdOrderByPageNoDesc(userId: String, contentId: String): ContentPageProgressEntity?
+}

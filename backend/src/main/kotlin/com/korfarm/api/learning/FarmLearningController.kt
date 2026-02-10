@@ -42,4 +42,18 @@ class FarmLearningController(
         val userId = SecurityUtils.currentUserId()
         return ApiResponse(success = true, data = farmLearningService.getProgress(userId, request.contentIds))
     }
+
+    @PostMapping("/page-complete")
+    fun pageComplete(@Valid @RequestBody request: PageCompleteRequest): ApiResponse<PageCompleteResponse> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        return ApiResponse(success = true, data = farmLearningService.pageComplete(userId, request))
+    }
+
+    @PostMapping("/page-progress")
+    fun pageProgress(@Valid @RequestBody request: PageProgressRequest): ApiResponse<PageProgressResponse> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        return ApiResponse(success = true, data = farmLearningService.pageProgress(userId, request))
+    }
 }

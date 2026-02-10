@@ -42,6 +42,9 @@ function FarmListPage() {
   const [sort, setSort] = useState("title");
   const [page, setPage] = useState(1);
   const [progress, setProgress] = useState(null);
+  const [progressModal, setProgressModal] = useState(null);
+  const [pageProgress, setPageProgress] = useState(null);
+  const [pageProgressLoading, setPageProgressLoading] = useState(false);
 
   const allItems = useMemo(() => getLearningItemsByFarm(farmId), [farmId]);
 
@@ -54,6 +57,26 @@ function FarmListPage() {
       .then((data) => setProgress(data))
       .catch(() => {});
   }, [allItems]);
+
+  // progressModal이 열릴 때 page-progress API 호출
+  useEffect(() => {
+    if (!progressModal) {
+      setPageProgress(null);
+      return;
+    }
+    setPageProgressLoading(true);
+    apiPost("/v1/learning/farm/page-progress", {
+      contentId: progressModal.contentId,
+    })
+      .then((res) => {
+        setPageProgress(res?.data || res);
+        setPageProgressLoading(false);
+      })
+      .catch(() => {
+        setPageProgress(null);
+        setPageProgressLoading(false);
+      });
+  }, [progressModal]);
 
   // 세부영역 목록 수집
   const subAreas = useMemo(() => {
@@ -216,7 +239,13 @@ function FarmListPage() {
                     <tr
                       key={item.id}
                       className="farm-row"
-                      onClick={() => navigate(`/learning/${item.id}`)}
+                      onClick={() => {
+                        if (farmId === "content") {
+                          setProgressModal(item);
+                        } else {
+                          navigate(`/learning/${item.id}`);
+                        }
+                      }}
                     >
                       <td className="farm-td-num">{rowNum}</td>
                       <td className="farm-td-title">{item.title}</td>
@@ -276,6 +305,84 @@ function FarmListPage() {
           </>
         )}
       </div>
+
+      {progressModal && (
+        <div className="result-overlay" onClick={() => setProgressModal(null)}>
+          <div className="result-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 420, padding: 24 }}>
+            <h3 style={{ marginBottom: 12 }}>{progressModal.title}</h3>
+            {pageProgressLoading ? (
+              <p style={{ color: "#888" }}>불러오는 중...</p>
+            ) : pageProgress ? (
+              <>
+                <p style={{ marginBottom: 8 }}>
+                  {pageProgress.lastCompletedPage || 0} 페이지 완료
+                </p>
+                <div style={{ background: "#eee", borderRadius: 8, height: 8, marginBottom: 16 }}>
+                  <div style={{
+                    background: "#ff8f2b",
+                    borderRadius: 8,
+                    height: "100%",
+                    width: `${Math.min(100, ((pageProgress.lastCompletedPage || 0) / (pageProgress.pageResults?.length || 1)) * 100)}%`,
+                    transition: "width 0.3s",
+                  }} />
+                </div>
+                {pageProgress.pageResults?.length > 0 && (
+                  <div style={{ maxHeight: 200, overflow: "auto", marginBottom: 16 }}>
+                    {pageProgress.pageResults.map((r) => (
+                      <div key={r.pageNo} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", borderBottom: "1px solid #eee", fontSize: 14 }}>
+                        <span>{r.pageNo}페이지</span>
+                        <span>정확도 {r.accuracy}% · 씨앗 {r.earnedSeed}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+                  <button
+                    type="button"
+                    style={{ padding: "10px 20px", background: "#eee", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer" }}
+                    onClick={() => {
+                      setProgressModal(null);
+                      navigate(`/learning/${progressModal.id}?startPage=1`);
+                    }}
+                  >
+                    처음부터
+                  </button>
+                  <button
+                    type="button"
+                    style={{ padding: "10px 20px", background: "#ff8f2b", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer" }}
+                    onClick={() => {
+                      setProgressModal(null);
+                      navigate(`/learning/${progressModal.id}?startPage=${(pageProgress.lastCompletedPage || 0) + 1}`);
+                    }}
+                  >
+                    이어서 학습
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+                <button
+                  type="button"
+                  style={{ padding: "10px 20px", background: "#ff8f2b", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer" }}
+                  onClick={() => {
+                    setProgressModal(null);
+                    navigate(`/learning/${progressModal.id}`);
+                  }}
+                >
+                  학습 시작
+                </button>
+              </div>
+            )}
+            <button
+              type="button"
+              style={{ marginTop: 12, padding: "8px 16px", background: "none", border: "1px solid #ddd", borderRadius: 8, cursor: "pointer", width: "100%" }}
+              onClick={() => setProgressModal(null)}
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

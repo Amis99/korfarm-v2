@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import EngineShell from "../engine/core/EngineShell";
 import { getLearningById, FARM_LIST } from "../data/learning/learningCatalog";
 import { apiPost } from "../utils/api";
@@ -11,12 +11,17 @@ function findFarmForContentType(contentType) {
 
 function LearningRunnerPage() {
   const { learningId } = useParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const learning = getLearningById(learningId);
   const [farmLogId, setFarmLogId] = useState(null);
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [resolvedStartPage, setResolvedStartPage] = useState(null);
+
+  const startPageParam = searchParams.get("startPage");
+  const isContentPdf = learning?.moduleKey === "content_pdf";
 
   const exitPath = useMemo(() => {
     const farm = findFarmForContentType(learning?.contentType);
@@ -57,6 +62,40 @@ function LearningRunnerPage() {
       .catch(() => {});
   }, [learningId]);
 
+  // content_pdf인 경우 page-progress 조회하여 startPage 결정
+  useEffect(() => {
+    if (!isContentPdf || !learning) {
+      setResolvedStartPage(null);
+      return;
+    }
+    if (startPageParam) {
+      setResolvedStartPage(parseInt(startPageParam, 10) || 1);
+      return;
+    }
+    // startPage 미지정 시 서버에서 마지막 진행 페이지 조회
+    apiPost("/v1/learning/farm/page-progress", {
+      contentId: learning.contentId,
+    })
+      .then((res) => {
+        const lastPage = res?.data?.lastCompletedPage || res?.lastCompletedPage || 0;
+        setResolvedStartPage(lastPage + 1);
+      })
+      .catch(() => {
+        setResolvedStartPage(1);
+      });
+  }, [isContentPdf, learning, startPageParam]);
+
+  // content에 _startPage, _farmLogId 주입
+  const enrichedContent = useMemo(() => {
+    if (!content) return content;
+    if (!isContentPdf) return content;
+    return {
+      ...content,
+      _startPage: resolvedStartPage || 1,
+      _farmLogId: farmLogId,
+    };
+  }, [content, isContentPdf, resolvedStartPage, farmLogId]);
+
   if (!learning) {
     return (
       <div style={{ padding: "40px" }}>
@@ -66,7 +105,7 @@ function LearningRunnerPage() {
     );
   }
 
-  if (loading) {
+  if (loading || (isContentPdf && resolvedStartPage === null)) {
     return (
       <div style={{ padding: "40px", textAlign: "center" }}>
         <p>학습 데이터를 불러오는 중...</p>
@@ -86,10 +125,11 @@ function LearningRunnerPage() {
 
   return (
     <EngineShell
-      content={content}
+      content={enrichedContent}
       moduleKey={learning.moduleKey}
       onExit={() => navigate(exitPath)}
       farmLogId={farmLogId}
+      preventAutoFinish={isContentPdf}
     />
   );
 }

@@ -56,3 +56,34 @@ data class FarmHistoryEntry(
 data class FarmHistoryResponse(
     val logs: List<FarmHistoryEntry>
 )
+
+data class PageCompleteRequest(
+    val logId: String,
+    val contentId: String,
+    val pageNo: Int,
+    val score: Int,
+    val accuracy: Int,
+    val earnedSeed: Int,
+    val seedType: String?
+)
+
+data class PageCompleteResponse(
+    val success: Boolean,
+    val totalEarnedSeed: Int
+)
+
+data class PageProgressRequest(
+    val contentId: String
+)
+
+data class PageProgressResponse(
+    val lastCompletedPage: Int,
+    val pageResults: List<PageResultDto>
+)
+
+data class PageResultDto(
+    val pageNo: Int,
+    val score: Int,
+    val accuracy: Int,
+    val earnedSeed: Int
+)

@@ -60,3 +60,43 @@ class FarmLearningLogEntity(
         updatedAt = LocalDateTime.now()
     }
 }
+
+@Entity
+@Table(name = "content_page_progress")
+class ContentPageProgressEntity(
+    @Id
+    var id: String,
+
+    @Column(name = "user_id", nullable = false)
+    var userId: String,
+
+    @Column(name = "content_id", nullable = false)
+    var contentId: String,
+
+    @Column(name = "log_id", nullable = false)
+    var logId: String,
+
+    @Column(name = "page_no", nullable = false)
+    var pageNo: Int,
+
+    var score: Int = 0,
+
+    var accuracy: Int = 0,
+
+    @Column(name = "earned_seed")
+    var earnedSeed: Int = 0,
+
+    @Column(name = "earned_seed_type")
+    var earnedSeedType: String? = null,
+
+    @Column(name = "completed_at", nullable = false)
+    var completedAt: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "created_at", nullable = false)
+    var createdAt: LocalDateTime = LocalDateTime.now()
+) {
+    @PrePersist
+    fun onCreate() {
+        createdAt = LocalDateTime.now()
+    }
+}

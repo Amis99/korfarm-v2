@@ -77,7 +77,7 @@ export const LEARNING_CATALOG = [
     targetLevel: "RUSSELL_1",
     subArea: "NONFICTION_SOCIAL",
     contentId: "70eeb8fa-9163-4075-bbb3-2f1625a96f46",
-    moduleKey: "worksheet_quiz",
+    moduleKey: "content_pdf",
     jsonPath: "/farm/content/content_pdf_quiz.json",
   },
   {

@@ -1,0 +1,344 @@
+/* PDF 학습 모듈 전용 스타일 */
+
+.cpdf-module {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 12px;
+}
+
+/* 상태 바 */
+.cpdf-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cpdf-page-indicator {
+  color: #555;
+}
+
+.cpdf-phase-label {
+  color: #ff8f2b;
+}
+
+/* PDF 뷰어 영역 */
+.cpdf-viewer {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  background: #e8e0d4;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.cpdf-canvas {
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+.cpdf-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px;
+  color: #888;
+}
+
+.cpdf-spinner {
+  width: 36px;
+  height: 36px;
+  border: 4px solid #ddd;
+  border-top-color: #ff8f2b;
+  border-radius: 50%;
+  animation: cpdf-spin 0.8s linear infinite;
+}
+
+@keyframes cpdf-spin {
+  to { transform: rotate(360deg); }
+}
+
+.cpdf-error {
+  padding: 24px;
+  text-align: center;
+  color: #c00;
+}
+
+/* 액션 버튼 영역 */
+.cpdf-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.cpdf-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.cpdf-btn:active {
+  transform: scale(0.96);
+}
+
+.cpdf-btn-primary {
+  background: #ff8f2b;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(255,143,43,0.3);
+}
+
+.cpdf-btn-secondary {
+  background: #eee;
+  color: #555;
+}
+
+.cpdf-btn-reread {
+  background: #5a9e6f;
+  color: #fff;
+  font-size: 13px;
+  padding: 8px 16px;
+}
+
+.cpdf-btn-retry {
+  background: #5a9e6f;
+  color: #fff;
+}
+
+.cpdf-btn-next {
+  background: #ff8f2b;
+  color: #fff;
+}
+
+/* 퀴즈 영역 */
+.cpdf-quiz-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: auto;
+}
+
+.cpdf-question-card {
+  background: rgba(255,255,255,0.9);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+}
+
+.cpdf-question-stem {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.cpdf-question-number {
+  font-weight: 700;
+  color: #ff8f2b;
+  margin-right: 8px;
+}
+
+.cpdf-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cpdf-choice-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  text-align: left;
+}
+
+.cpdf-choice-btn:hover {
+  border-color: #ff8f2b;
+  background: #fff8f0;
+}
+
+.cpdf-choice-btn.correct {
+  border-color: #5a9e6f;
+  background: #eef7ee;
+}
+
+.cpdf-choice-btn.wrong {
+  border-color: #c05050;
+  background: #fef0f0;
+}
+
+.cpdf-choice-btn.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.cpdf-choice-id {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* 빈칸 채우기 */
+.cpdf-fill-template {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.cpdf-fill-blank {
+  display: inline-block;
+  min-width: 60px;
+  padding: 2px 8px;
+  border-bottom: 2px solid #ff8f2b;
+  text-align: center;
+  font-weight: 700;
+  color: #ff8f2b;
+}
+
+.cpdf-fill-blank.active {
+  background: #fff3e0;
+  border-bottom-width: 3px;
+}
+
+.cpdf-fill-blank.filled {
+  color: #333;
+}
+
+/* 페이지 결과 */
+.cpdf-page-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.cpdf-result-accuracy {
+  font-size: 48px;
+  font-weight: 800;
+  color: #ff8f2b;
+}
+
+.cpdf-result-accuracy.fail {
+  color: #999;
+}
+
+.cpdf-result-detail {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.cpdf-result-seed {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #5a9e6f;
+}
+
+/* 세션 완료 */
+.cpdf-session-complete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.cpdf-session-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #333;
+}
+
+.cpdf-session-stats {
+  display: flex;
+  gap: 24px;
+}
+
+.cpdf-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.cpdf-stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ff8f2b;
+}
+
+.cpdf-stat-label {
+  font-size: 13px;
+  color: #888;
+}
+
+.cpdf-page-list {
+  width: 100%;
+  max-width: 400px;
+}
+
+.cpdf-page-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* 씨앗 소진 모달 */
+.cpdf-exhausted-card {
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.cpdf-exhausted-card h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.cpdf-exhausted-card p {
+  color: #888;
+  margin-bottom: 24px;
+}
+
+.cpdf-exhausted-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}

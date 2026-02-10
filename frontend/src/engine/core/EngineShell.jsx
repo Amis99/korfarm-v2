@@ -79,7 +79,7 @@ function pickRandomSeed() {
   return SEED_TYPES[0];
 }
 
-function EngineShell({ content, moduleKey, onExit, farmLogId }) {
+function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish, startPage }) {
   const timeLimit = getTimeLimit(content);
   const assetBase = import.meta.env.BASE_URL || "/";
   const resolveAssetUrl = (path) => {
@@ -94,6 +94,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId }) {
   const [records, setRecords] = useState([]);
   const [summary, setSummary] = useState(null);
   const [seed, setSeed] = useState(content?.seedReward?.count ?? 3);
+  const [seedExhausted, setSeedExhausted] = useState(false);
   const [startedAt, setStartedAt] = useState(null);
   const intervalRef = useRef(null);
   const headerRef = useRef(null);
@@ -195,6 +196,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId }) {
       phoneme_change: payload.items?.length,
       word_formation: payload.items?.length,
       sentence_structure: payload.sentences?.length,
+      content_pdf: payload.totalPages || payload.pages?.length || 0,
     };
     return guess[moduleKey] || 0;
   }, [content, moduleKey]);
@@ -329,6 +331,15 @@ function EngineShell({ content, moduleKey, onExit, farmLogId }) {
     }
   };
 
+  const resetRound = (newSeedCount) => {
+    setSeed(newSeedCount ?? content?.seedReward?.count ?? 3);
+    setTimeLeft(timeLimit);
+    setRecords([]);
+    setSeedExhausted(false);
+    setSummary(null);
+    setStatus("READY");
+  };
+
   useEffect(() => {
     if (status !== "RUNNING") {
       if (intervalRef.current) {
@@ -370,13 +381,18 @@ function EngineShell({ content, moduleKey, onExit, farmLogId }) {
     setSeed((prev) => {
       const nextSeed = Math.max(0, prev - 1);
       if (nextSeed === 0) {
+        if (preventAutoFinish) {
+          setSeedExhausted(true);
+          setStatus("PAUSED");
+          return 0;
+        }
         finish(false, { seed: 0 });
         return 0;
       }
       setTimeLeft(timeLimit);
       return nextSeed;
     });
-  }, [timeLeft, status, timeLimit]);
+  }, [timeLeft, status, timeLimit, preventAutoFinish]);
 
   const contextValue = useMemo(
     () => ({
@@ -391,8 +407,10 @@ function EngineShell({ content, moduleKey, onExit, farmLogId }) {
       pause,
       resume,
       finish,
+      seedExhausted,
+      resetRound,
     }),
-    [status, timeLeft, timeLimit, seed]
+    [status, timeLeft, timeLimit, seed, seedExhausted]
   );
 
   if (!Module) {

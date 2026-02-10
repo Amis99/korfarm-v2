@@ -24,7 +24,7 @@ export const LEARNING_TEMPLATES = [
   { id: "dailyReading_confirm", title: "일일 독해 - 확인 학습", moduleKey: "confirm_click", content: dailyReadingConfirm },
   { id: "farm_vocab", title: "어휘 기본 학습", moduleKey: "worksheet_quiz", content: farmVocab },
   { id: "farm_reading", title: "비문학 독해 훈련", moduleKey: "reading_training", content: farmReading },
-  { id: "farm_content", title: "내용 숙지 학습", moduleKey: "reading_training", content: farmContent },
+  { id: "farm_content", title: "내용 숙지 학습", moduleKey: "content_pdf", content: farmContent },
   { id: "farm_grammar_wf", title: "단어 형성 분석", moduleKey: "word_formation", content: farmGrammarWf },
   { id: "farm_grammar_ss", title: "문장의 짜임 분석", moduleKey: "sentence_structure", content: farmGrammarSs },
   { id: "farm_grammar_pc", title: "음운 변동 분석", moduleKey: "phoneme_change", content: farmGrammarPc },
