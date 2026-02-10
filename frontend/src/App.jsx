@@ -25,6 +25,7 @@ import AdminShopProductsPage from "./pages/AdminShopProductsPage";
 import AdminShopOrdersPage from "./pages/AdminShopOrdersPage";
 import AdminPaymentsPage from "./pages/AdminPaymentsPage";
 import AdminParentLinksPage from "./pages/AdminParentLinksPage";
+import AdminContentUploadPage from "./pages/AdminContentUploadPage";
 import AdminContentPreviewPage from "./pages/AdminContentPreviewPage";
 import DiagnosticPrintPage from "./pages/DiagnosticPrintPage";
 import OmrEntryPage from "./pages/OmrEntryPage";
@@ -109,6 +110,7 @@ function App() {
         <Route path="/admin/students" element={<AdminStudentsPage />} />
         <Route path="/admin/students/:userId" element={<AdminStudentDetailPage />} />
         <Route path="/admin/content" element={<AdminContentPage />} />
+        <Route path="/admin/content/upload" element={<AdminContentUploadPage />} />
         <Route path="/admin/content/preview" element={<AdminContentPreviewPage />} />
         <Route path="/admin/assignments" element={<AdminAssignmentsPage />} />
         <Route path="/admin/seasons" element={<AdminSeasonsPage />} />
