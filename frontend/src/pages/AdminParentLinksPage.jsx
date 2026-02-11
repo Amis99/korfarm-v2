@@ -51,6 +51,8 @@ const formatStatus = (status) => {
   }
 };
 
+const PAGE_SIZE = 15;
+
 function AdminParentLinksPage() {
   const { data, loading, error } = useAdminList(
     "/v1/admin/parents/links",
@@ -62,9 +64,11 @@ function AdminParentLinksPage() {
   const [studentLoginId, setStudentLoginId] = useState("");
   const [actionError, setActionError] = useState("");
   const [actionLoading, setActionLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setRows(data);
+    setCurrentPage(1);
   }, [data]);
 
   const stats = useMemo(() => {
@@ -74,6 +78,9 @@ function AdminParentLinksPage() {
     });
     return summary;
   }, [rows]);
+
+  const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  const pagedRows = rows.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   const handleCreate = async () => {
     setActionError("");
@@ -191,7 +198,7 @@ function AdminParentLinksPage() {
                 </tr>
               </thead>
               <tbody>
-                {rows.map((row) => (
+                {pagedRows.map((row) => (
                   <tr key={row.linkId}>
                     <td>{row.parentLoginId}</td>
                     <td>{row.studentLoginId}</td>
@@ -230,6 +237,31 @@ function AdminParentLinksPage() {
                 ))}
               </tbody>
             </table>
+            {totalPages > 1 && (
+              <div className="admin-pagination">
+                <button
+                  disabled={currentPage <= 1}
+                  onClick={() => setCurrentPage((p) => p - 1)}
+                >
+                  이전
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                  <button
+                    key={p}
+                    className={p === currentPage ? "active" : ""}
+                    onClick={() => setCurrentPage(p)}
+                  >
+                    {p}
+                  </button>
+                ))}
+                <button
+                  disabled={currentPage >= totalPages}
+                  onClick={() => setCurrentPage((p) => p + 1)}
+                >
+                  다음
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

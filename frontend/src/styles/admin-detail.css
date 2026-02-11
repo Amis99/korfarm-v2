@@ -160,6 +160,46 @@
   background: rgba(240, 108, 36, 0.08);
 }
 
+/* 페이지네이션 */
+.admin-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-pagination button {
+  background: transparent;
+  color: #a6b6a9;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  min-width: 32px;
+}
+
+.admin-pagination button:hover:not(:disabled) {
+  background: rgba(240, 108, 36, 0.12);
+  color: #f06c24;
+  border-color: rgba(240, 108, 36, 0.3);
+}
+
+.admin-pagination button.active {
+  background: rgba(240, 108, 36, 0.2);
+  color: #f06c24;
+  border-color: #f06c24;
+  font-weight: 700;
+}
+
+.admin-pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 .admin-detail-table tbody tr.clickable-row.selected-row {
   background: rgba(240, 108, 36, 0.16);
   border-left: 3px solid #ff7f2a;
