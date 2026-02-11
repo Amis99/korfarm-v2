@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/v1/duel")
 class DuelController(
     private val duelService: DuelService,
-    private val featureFlagService: FeatureFlagService
+    private val featureFlagService: FeatureFlagService,
+    private val duelWebSocketHandler: DuelWebSocketHandler
 ) {
     // 서버별 방 목록 조회
     @GetMapping("/rooms")
@@ -44,6 +45,28 @@ class DuelController(
         requireDuelEnabled(userId)
         val data = duelService.joinRoom(userId, roomId)
         return ApiResponse(success = true, data = data)
+    }
+
+    // AI 방 참가 (방 생성 + AI 배치 + 매치 자동 시작)
+    @PostMapping("/rooms/ai-join")
+    fun aiJoin(@RequestBody body: Map<String, String>): ApiResponse<Map<String, String>> {
+        val userId = requireUserId()
+        requireDuelEnabled(userId)
+        val serverId = body["serverId"] ?: body["server_id"]
+            ?: throw ApiException("INVALID_REQUEST", "serverId가 필요합니다", HttpStatus.BAD_REQUEST)
+        val result = duelService.joinAiRoom(userId, serverId)
+
+        // 매치 상태 초기화 + 첫 문제 전송
+        val matchId = result.second
+        val questions = duelService.getMatchQuestionViews(matchId)
+        val playerIds = duelService.getMatchPlayers(matchId).map { it.userId }.toSet()
+        duelWebSocketHandler.initMatchState(matchId, questions, playerIds)
+        duelWebSocketHandler.triggerFirstQuestion(matchId)
+
+        return ApiResponse(success = true, data = mapOf(
+            "roomId" to result.first,
+            "matchId" to matchId
+        ))
     }
 
     // 방 퇴장

@@ -27,6 +27,12 @@ class DuelRoomEntity(
     @Column(name = "stake_amount", nullable = false)
     var stakeAmount: Int,
 
+    @Column(name = "level_id", nullable = false)
+    var levelId: String = "",
+
+    @Column(name = "mode_id", nullable = false)
+    var modeId: String = "",
+
     @Column(nullable = false)
     var status: String,
 
@@ -73,6 +79,9 @@ class DuelRoomPlayerEntity(
     @Column(name = "stake_seed_type")
     var stakeSeedType: String? = null,
 
+    @Column(name = "stake_crop_type", nullable = false)
+    var stakeCropType: String = "",
+
     @Column(name = "joined_at", nullable = false)
     var joinedAt: LocalDateTime,
 
@@ -109,6 +118,9 @@ class DuelMatchEntity(
 
     @Column(name = "server_id", nullable = false)
     var serverId: String,
+
+    @Column(name = "level_id", nullable = false)
+    var levelId: String = "",
 
     @Column(nullable = false)
     var status: String,
@@ -161,6 +173,9 @@ class DuelMatchPlayerEntity(
 
     @Column(name = "stake_amount", nullable = false)
     var stakeAmount: Int,
+
+    @Column(name = "stake_crop_type", nullable = false)
+    var stakeCropType: String = "",
 
     @Column(name = "correct_count", nullable = false)
     var correctCount: Int = 0,
@@ -282,6 +297,9 @@ class DuelStatEntity(
     @Column(name = "server_id", nullable = false)
     var serverId: String,
 
+    @Column(name = "level_id", nullable = false)
+    var levelId: String = "",
+
     @Column(name = "user_id", nullable = false)
     var userId: String,
 
@@ -336,6 +354,9 @@ class DuelEscrowEntity(
 
     @Column(name = "seed_type", nullable = false)
     var seedType: String,
+
+    @Column(name = "crop_type", nullable = false)
+    var cropType: String = "",
 
     @Column(nullable = false)
     var amount: Int,

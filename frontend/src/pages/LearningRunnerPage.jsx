@@ -129,7 +129,6 @@ function LearningRunnerPage() {
       moduleKey={learning.moduleKey}
       onExit={() => navigate(exitPath)}
       farmLogId={farmLogId}
-      preventAutoFinish={isContentPdf}
     />
   );
 }

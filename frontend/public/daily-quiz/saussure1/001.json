@@ -1,15 +1,9 @@
 {
   "contentId": "dq-s1-001",
   "contentType": "DAILY_QUIZ",
-  "version": 1,
-  "status": "PUBLISHED",
   "title": "일일 퀴즈 - 소쉬르 1 Day 1",
   "description": "봄의 날씨와 생활",
   "targetLevel": "SAUSSURE_1",
-  "schoolGradeRange": {
-    "min": 1,
-    "max": 1
-  },
   "area": "VOCAB",
   "subArea": "DAILY",
   "competencies": [
@@ -21,18 +15,12 @@
     "spring",
     "science"
   ],
-  "access": {
-    "mode": "FREE"
-  },
   "seedReward": {
     "seedType": "WHEAT",
     "count": 3,
     "multiplier": 1
   },
   "timeLimitSec": 180,
-  "assets": {
-    "sheetBackground": "/learning-paper.jpg"
-  },
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -41,7 +29,7 @@
         "id": "dq-s1-001-1",
         "type": "MULTI_CHOICE",
         "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 따뜻하다",
+        "stem": "지문에서 밑줄 친 '따뜻하다'의 뜻으로 알맞은 것은?",
         "highlight": {
           "text": "따뜻하다"
         },
@@ -67,15 +55,16 @@
         "answerId": "A",
         "explanation": "'따뜻하다'는 춥지 않고 알맞게 더운 느낌이 있다는 뜻입니다.",
         "scoring": {
-          "correct": 10,
-          "wrong": -10
-        }
+          "correctDeltaSec": 10,
+          "wrongDeltaSec": -10
+        },
+        "passage": "아침에 운동장에 나가니 찬 바람이 약하고 햇볕이 포근했습니다. 민지는 '오늘은 정말 따뜻하다'고 말했습니다."
       },
       {
         "id": "dq-s1-001-2",
         "type": "MULTI_CHOICE",
-        "questionKind": "WORD_TO_MEANING",
-        "stem": "낱말: 새싹",
+        "questionKind": "READING_COMPREHENSION",
+        "stem": "지문을 읽고 '새싹'의 뜻으로 알맞은 것을 고르세요.",
         "highlight": {
           "text": "새싹"
         },
@@ -101,14 +90,15 @@
         "answerId": "A",
         "explanation": "'새싹'은 씨앗에서 처음 나오는 어린 잎이나 줄기를 말합니다.",
         "scoring": {
-          "correct": 10,
-          "wrong": -10
-        }
+          "correctDeltaSec": 10,
+          "wrongDeltaSec": -10
+        },
+        "passage": "화분에 물을 주자 작은 줄기가 처음 올라왔습니다. 선생님은 '이런 것을 새싹이라고 해요'라고 설명했습니다."
       },
       {
         "id": "dq-s1-001-3",
         "type": "MULTI_CHOICE",
-        "questionKind": "READING_COMPREHENSION",
+        "questionKind": "STRUCTURE_READING",
         "stem": "봄이 오면 날씨가 어떻게 변하나요?",
         "passage": "겨울이 지나고 봄이 왔습니다. 봄에는 눈이 녹고 날씨가 따뜻해집니다.",
         "highlight": {
@@ -136,14 +126,14 @@
         "answerId": "B",
         "explanation": "지문에서 봄에는 눈이 녹고 날씨가 따뜻해진다고 했습니다.",
         "scoring": {
-          "correct": 10,
-          "wrong": -10
+          "correctDeltaSec": 10,
+          "wrongDeltaSec": -10
         }
       },
       {
         "id": "dq-s1-001-4",
         "type": "MULTI_CHOICE",
-        "questionKind": "READING_COMPREHENSION",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
         "stem": "봄에 볼 수 있는 것은 무엇인가요?",
         "passage": "따뜻한 봄바람이 붑니다. 개나리와 진달래 같은 예쁜 꽃이 핍니다.",
         "highlight": {
@@ -171,14 +161,14 @@
         "answerId": "B",
         "explanation": "봄에는 개나리와 진달래 같은 꽃이 핀다고 했습니다.",
         "scoring": {
-          "correct": 10,
-          "wrong": -10
+          "correctDeltaSec": 10,
+          "wrongDeltaSec": -10
         }
       },
       {
         "id": "dq-s1-001-5",
         "type": "MULTI_CHOICE",
-        "questionKind": "READING_COMPREHENSION",
+        "questionKind": "INFERENCE",
         "stem": "겨울잠에서 깬 동물은 누구인가요?",
         "passage": "봄이 되자 개구리가 겨울잠에서 깨어났습니다. '개굴개굴' 노래를 부릅니다.",
         "highlight": {
@@ -206,46 +196,47 @@
         "answerId": "C",
         "explanation": "지문에서 개구리가 겨울잠에서 깨어났다고 했습니다.",
         "scoring": {
-          "correct": 10,
-          "wrong": -10
+          "correctDeltaSec": 10,
+          "wrongDeltaSec": -10
         }
       },
       {
         "id": "dq-s1-001-6",
         "type": "MULTI_CHOICE",
-        "questionKind": "VOCAB",
-        "stem": "다음 중 '봄'과 가장 관련이 깊은 것은?",
+        "questionKind": "CRITICAL_THINKING",
+        "stem": "두 친구의 말 중 더 알맞은 것을 고르세요.",
         "prompt": "알맞은 것을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "눈싸움"
+            "text": "가은의 말이 알맞다"
           },
           {
             "id": "B",
-            "text": "새 학기"
+            "text": "도윤의 말이 알맞다"
           },
           {
             "id": "C",
-            "text": "물놀이"
+            "text": "둘 다 알맞다"
           },
           {
             "id": "D",
-            "text": "추석"
+            "text": "둘 다 알맞지 않다"
           }
         ],
-        "answerId": "B",
-        "explanation": "우리나라에서 새 학기는 봄(3월)에 시작합니다. 눈싸움은 겨울, 물놀이는 여름, 추석은 가을입니다.",
+        "answerId": "A",
+        "explanation": "새 학기는 봄에 시작하고, 추석은 가을 명절이므로 가은의 말이 더 타당합니다.",
         "scoring": {
-          "correct": 10,
-          "wrong": -10
-        }
+          "correctDeltaSec": 10,
+          "wrongDeltaSec": -10
+        },
+        "passage": "가은: '3월이 되면 새 학기가 시작되니 봄이라고 볼 수 있어.' 도윤: '봄 대표 명절은 추석이야.'"
       },
       {
         "id": "dq-s1-001-7",
         "type": "MULTI_CHOICE",
-        "questionKind": "VOCAB",
-        "stem": "빈칸에 알맞은 말은? '날씨가 너무 (   ) 소풍을 갔어요.'",
+        "questionKind": "CREATIVE_THINKING",
+        "stem": "빈칸에 들어갈 말로 가장 알맞은 것은?",
         "prompt": "알맞은 말을 고르세요.",
         "choices": [
           {
@@ -266,17 +257,18 @@
           }
         ],
         "answerId": "A",
-        "explanation": "소풍을 가기 좋은 상황은 날씨가 '좋아서'입니다.",
+        "explanation": "소풍을 가는 까닭을 나타내려면 '좋아서'가 가장 알맞습니다.",
         "scoring": {
-          "correct": 10,
-          "wrong": -10
-        }
+          "correctDeltaSec": 10,
+          "wrongDeltaSec": -10
+        },
+        "passage": "소풍 안내문입니다. '날씨가 너무 ____ 소풍을 갔어요.'"
       },
       {
         "id": "dq-s1-001-8",
         "type": "MULTI_CHOICE",
-        "questionKind": "LOGIC",
-        "stem": "다음 중 성격이 다른 하나는?",
+        "questionKind": "PROBLEM_SOLVING",
+        "stem": "계절이 다른 것을 찾아 문제를 해결하세요.",
         "prompt": "알맞은 것을 고르세요.",
         "choices": [
           {
@@ -299,9 +291,10 @@
         "answerId": "D",
         "explanation": "진달래, 개나리, 벚꽃은 봄에 피는 꽃이고, 눈사람은 겨울에 눈으로 만드는 것입니다.",
         "scoring": {
-          "correct": 10,
-          "wrong": -10
-        }
+          "correctDeltaSec": 10,
+          "wrongDeltaSec": -10
+        },
+        "passage": "봄꽃 이름표를 만들고 있습니다. '진달래, 개나리, 벚꽃, 눈사람' 중 하나는 계절이 다릅니다."
       },
       {
         "id": "dq-s1-001-9",
@@ -338,15 +331,15 @@
           }
         ],
         "scoring": {
-          "correct": 10,
-          "wrong": 0
+          "correctDeltaSec": 10,
+          "wrongDeltaSec": 0
         }
       },
       {
         "id": "dq-s1-001-10",
         "type": "MULTI_CHOICE",
         "questionKind": "GRAMMAR",
-        "stem": "맞춤법이 밎는 것은?",
+        "stem": "맞춤법이 맞는 것은?",
         "prompt": "알맞은 것을 고르세요.",
         "choices": [
           {
@@ -369,8 +362,8 @@
         "answerId": "A",
         "explanation": "'꽃'이 주어일 때는 '꽃이'라고 씁니다.",
         "scoring": {
-          "correct": 10,
-          "wrong": -10
+          "correctDeltaSec": 10,
+          "wrongDeltaSec": -10
         }
       }
     ]

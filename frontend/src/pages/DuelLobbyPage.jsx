@@ -56,10 +56,18 @@ function DuelLobbyPage() {
     }
   };
 
-  const handleJoinRoom = async (roomId) => {
+  const isAiRoom = (room) => room.room_id?.startsWith("ai-room-");
+
+  const handleJoinRoom = async (room) => {
     try {
-      await apiPost(`/v1/duel/rooms/${roomId}/join`);
-      navigate(`/duel/room/${roomId}`);
+      if (isAiRoom(room)) {
+        const data = await apiPost("/v1/duel/rooms/ai-join", { serverId });
+        const matchId = data?.matchId || data?.match_id;
+        if (matchId) navigate(`/duel/match/${matchId}`);
+        return;
+      }
+      await apiPost(`/v1/duel/rooms/${room.room_id}/join`);
+      navigate(`/duel/room/${room.room_id}`);
     } catch (err) {
       alert(err.message || "입장 실패");
     }
@@ -86,10 +94,16 @@ function DuelLobbyPage() {
       ) : (
         <div className="duel-room-list">
           {rooms.map((room) => (
-            <div key={room.room_id} className="duel-room-item" onClick={() => handleJoinRoom(room.room_id)}>
+            <div key={room.room_id} className={`duel-room-item${isAiRoom(room) ? " ai-room" : ""}`} onClick={() => handleJoinRoom(room)}>
               <div className="duel-room-info">
-                <div className="room-name">{room.room_name || "대결방"}</div>
-                <div className="room-meta">베팅 {room.stake_amount}씨앗 | 최대 {room.room_size}명</div>
+                <div className="room-name">
+                  {isAiRoom(room) && <span className="ai-badge">AI</span>}
+                  {room.room_name || "대결방"}
+                </div>
+                <div className="room-meta">
+                  베팅 {room.stake_amount}씨앗 | 최대 {room.room_size}명
+                  {isAiRoom(room) && " | 즉시 시작"}
+                </div>
               </div>
               <div className="duel-room-right">
                 <div className="player-count">{room.player_count}/{room.room_size}</div>

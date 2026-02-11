@@ -9,17 +9,20 @@ import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.WebSocketSession
 import org.springframework.web.socket.handler.TextWebSocketHandler
 import java.util.concurrent.*
+import java.util.concurrent.atomic.AtomicBoolean
 
 data class MatchRoundState(
     val questions: List<DuelQuestionView>,
     var currentIndex: Int = 0,
     val activePlayers: MutableSet<String>,
-    val allPlayers: Set<String>
+    val allPlayers: Set<String>,
+    var roundProcessed: AtomicBoolean = AtomicBoolean(false)
 )
 
 @Component
 class DuelWebSocketHandler(
     private val duelService: DuelService,
+    private val aiPlayerService: AiPlayerService,
     private val objectMapper: ObjectMapper
 ) : TextWebSocketHandler() {
     private val log = LoggerFactory.getLogger(DuelWebSocketHandler::class.java)
@@ -130,6 +133,9 @@ class DuelWebSocketHandler(
         // 첫 문제 전송
         sendCurrentQuestion(matchId)
         broadcastMatchState(matchId)
+
+        // AI 답변 스케줄링
+        scheduleAiAnswers(matchId)
     }
 
     // === 매치 핸들러 ===
@@ -184,18 +190,15 @@ class DuelWebSocketHandler(
         broadcastMatchState(matchId)
 
         // 모든 활성 플레이어가 답했는지 확인
-        val answeredUsers = duelService.getUsersWhoAnsweredQuestion(matchId, currentQ.questionId)
-        val activeAnswered = state.activePlayers.count { it in answeredUsers }
-        if (activeAnswered >= state.activePlayers.size) {
-            cancelQuestionTimer(matchId)
-            scheduler.schedule({ processRoundResult(matchId) }, 1500, TimeUnit.MILLISECONDS)
-        }
+        checkAllAnswered(matchId)
     }
 
     // === 라운드 결과 처리 (탈락제) ===
 
     private fun processRoundResult(matchId: String) {
         val state = matchStates[matchId] ?: return
+        // 동시성 보호: 중복 실행 방지
+        if (!state.roundProcessed.compareAndSet(false, true)) return
         val currentQ = state.questions.getOrNull(state.currentIndex) ?: return
 
         val results = duelService.getQuestionResults(matchId, currentQ.questionId)
@@ -247,8 +250,12 @@ class DuelWebSocketHandler(
                 if (state.currentIndex >= state.questions.size) {
                     state.currentIndex = 0
                 }
+                // 라운드 보호 리셋
+                state.roundProcessed = AtomicBoolean(false)
                 sendCurrentQuestion(matchId)
                 broadcastMatchState(matchId)
+                // AI 답변 스케줄링
+                scheduleAiAnswers(matchId)
             }, 2500, TimeUnit.MILLISECONDS)
         }
     }
@@ -269,6 +276,75 @@ class DuelWebSocketHandler(
         ))
 
         scheduleQuestionTimer(matchId, timeLimitSec.toLong())
+    }
+
+    // === AI 답변 처리 ===
+
+    private fun scheduleAiAnswers(matchId: String) {
+        val state = matchStates[matchId] ?: return
+        val currentQ = state.questions.getOrNull(state.currentIndex) ?: return
+
+        val aiPlayers = state.activePlayers.filter { aiPlayerService.isAiPlayer(it) }
+        for (aiId in aiPlayers) {
+            val delayMs = aiPlayerService.randomDelayMs()
+            scheduler.schedule({
+                try {
+                    handleAiAnswer(matchId, aiId, currentQ.questionId)
+                } catch (e: Exception) {
+                    log.error("AI 답변 처리 오류: $matchId, $aiId", e)
+                }
+            }, delayMs, TimeUnit.MILLISECONDS)
+        }
+    }
+
+    private fun handleAiAnswer(matchId: String, aiId: String, questionId: String) {
+        val state = matchStates[matchId] ?: return
+        val currentQ = state.questions.getOrNull(state.currentIndex) ?: return
+
+        // 현재 문제가 바뀌었으면 무시
+        if (questionId != currentQ.questionId) return
+        // 이미 탈락했으면 무시
+        if (aiId !in state.activePlayers) return
+
+        val aiPlayer = aiPlayerService.getAiPlayer(aiId) ?: return
+        val answer = aiPlayerService.decideAnswer(aiPlayer, questionId)
+        if (answer.isBlank()) return
+
+        val timeMs = aiPlayerService.randomDelayMs() // 답변 시간도 랜덤
+        duelService.recordAnswer(matchId, aiId, questionId, answer, timeMs)
+
+        broadcastMatchState(matchId)
+
+        // 모든 활성 플레이어가 답했는지 확인
+        checkAllAnswered(matchId)
+    }
+
+    private fun checkAllAnswered(matchId: String) {
+        val state = matchStates[matchId] ?: return
+        val currentQ = state.questions.getOrNull(state.currentIndex) ?: return
+        val answeredUsers = duelService.getUsersWhoAnsweredQuestion(matchId, currentQ.questionId)
+        val activeAnswered = state.activePlayers.count { it in answeredUsers }
+        if (activeAnswered >= state.activePlayers.size) {
+            cancelQuestionTimer(matchId)
+            scheduler.schedule({ processRoundResult(matchId) }, 1500, TimeUnit.MILLISECONDS)
+        }
+    }
+
+    /**
+     * 외부에서 AI 방 매치 시작 후 초기화 호출용
+     */
+    fun initMatchState(matchId: String, questions: List<DuelQuestionView>, playerIds: Set<String>) {
+        matchStates[matchId] = MatchRoundState(
+            questions = questions,
+            activePlayers = playerIds.toMutableSet(),
+            allPlayers = playerIds
+        )
+    }
+
+    fun triggerFirstQuestion(matchId: String) {
+        sendCurrentQuestion(matchId)
+        broadcastMatchState(matchId)
+        scheduleAiAnswers(matchId)
     }
 
     // === 타이머 관리 ===
