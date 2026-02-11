@@ -112,4 +112,14 @@ class AdminDuelController(
         featureFlagService.requireEnabled("feature.admin.console")
         return ApiResponse(success = true, data = questionPoolService.listByServer(serverId))
     }
+
+    // 개별 문제 상세 조회
+    @GetMapping("/questions/{questionId}")
+    fun questionDetail(@PathVariable questionId: String): ApiResponse<Map<String, Any?>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val detail = questionPoolService.getQuestionDetail(questionId)
+            ?: throw ApiException("NOT_FOUND", "문제를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        return ApiResponse(success = true, data = detail)
+    }
 }

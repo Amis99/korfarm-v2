@@ -166,4 +166,27 @@ class DuelQuestionPoolService(
             )
         }
     }
+
+    // 개별 문제 상세 조회 (questionJson 파싱 포함)
+    fun getQuestionDetail(questionId: String): Map<String, Any?>? {
+        val entity = duelQuestionPoolRepository.findById(questionId).orElse(null) ?: return null
+        val node = objectMapper.readTree(entity.questionJson)
+        val choices = node.get("choices")?.map { choice ->
+            mapOf("id" to choice.get("id").asText(), "text" to choice.get("text").asText())
+        } ?: emptyList()
+
+        return mapOf(
+            "id" to entity.id,
+            "serverId" to entity.serverId,
+            "questionType" to entity.questionType,
+            "category" to entity.category,
+            "status" to entity.status,
+            "stem" to (node.get("stem")?.asText() ?: ""),
+            "passage" to node.get("passage")?.asText(),
+            "choices" to choices,
+            "answerId" to (node.get("answerId")?.asText() ?: ""),
+            "timeLimitSec" to (node.get("timeLimitSec")?.asInt() ?: 15),
+            "createdAt" to entity.createdAt.toString()
+        )
+    }
 }
