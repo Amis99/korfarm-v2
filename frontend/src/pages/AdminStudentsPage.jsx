@@ -269,6 +269,7 @@ function AdminStudentsPage() {
   const [classes, setClasses] = useState([]);
   const [showInventoryModal, setShowInventoryModal] = useState(false);
   const [inventoryStudent, setInventoryStudent] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setRows(students);
@@ -284,6 +285,8 @@ function AdminStudentsPage() {
     return classes.filter((c) => (c.orgId || c.org_id) === editFormData.orgId);
   }, [classes, editFormData.orgId]);
 
+  const PAGE_SIZE = 15;
+
   const filteredStudents = useMemo(() => {
     const term = search.trim().toLowerCase();
     return rows.filter((s) => {
@@ -294,6 +297,14 @@ function AdminStudentsPage() {
         .some((v) => v.toLowerCase().includes(term));
     });
   }, [rows, search, statusFilter]);
+
+  // 필터/검색 변경 시 1페이지로 리셋
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, statusFilter]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredStudents.length / PAGE_SIZE));
+  const pagedStudents = filteredStudents.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   const handleCreate = async () => {
     setActionError("");
@@ -473,7 +484,7 @@ function AdminStudentsPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredStudents.map((s) => (
+                {pagedStudents.map((s) => (
                   <tr key={s.id}>
                     <td>
                       <span
@@ -525,6 +536,31 @@ function AdminStudentsPage() {
                 ))}
               </tbody>
             </table>
+            {totalPages > 1 && (
+              <div className="admin-pagination">
+                <button
+                  disabled={currentPage <= 1}
+                  onClick={() => setCurrentPage((p) => p - 1)}
+                >
+                  이전
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                  <button
+                    key={p}
+                    className={p === currentPage ? "active" : ""}
+                    onClick={() => setCurrentPage(p)}
+                  >
+                    {p}
+                  </button>
+                ))}
+                <button
+                  disabled={currentPage >= totalPages}
+                  onClick={() => setCurrentPage((p) => p + 1)}
+                >
+                  다음
+                </button>
+              </div>
+            )}
           </div>
           <div className="admin-detail-card">
             <h3>학생 요약</h3>
