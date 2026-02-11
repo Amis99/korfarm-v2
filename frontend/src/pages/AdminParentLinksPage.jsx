@@ -65,6 +65,7 @@ function AdminParentLinksPage() {
   const [actionError, setActionError] = useState("");
   const [actionLoading, setActionLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
     setRows(data);
@@ -79,8 +80,17 @@ function AdminParentLinksPage() {
     return summary;
   }, [rows]);
 
-  const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
-  const pagedRows = rows.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const filteredRows = useMemo(() => {
+    if (statusFilter === "all") return rows;
+    return rows.filter((r) => r.status === statusFilter);
+  }, [rows, statusFilter]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [statusFilter]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredRows.length / PAGE_SIZE));
+  const pagedRows = filteredRows.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   const handleCreate = async () => {
     setActionError("");
@@ -173,13 +183,13 @@ function AdminParentLinksPage() {
           <div className="admin-detail-card">
             <div className="admin-detail-toolbar">
               <div className="admin-detail-filters">
-                <button type="button" className="admin-filter active">
+                <button type="button" className={`admin-filter ${statusFilter === "all" ? "active" : ""}`} onClick={() => setStatusFilter("all")}>
                   전체 {rows.length}
                 </button>
-                <button type="button" className="admin-filter">
+                <button type="button" className={`admin-filter ${statusFilter === "active" ? "active" : ""}`} onClick={() => setStatusFilter("active")}>
                   연결됨 {stats.active}
                 </button>
-                <button type="button" className="admin-filter">
+                <button type="button" className={`admin-filter ${statusFilter === "pending" ? "active" : ""}`} onClick={() => setStatusFilter("pending")}>
                   승인 대기 {stats.pending}
                 </button>
               </div>

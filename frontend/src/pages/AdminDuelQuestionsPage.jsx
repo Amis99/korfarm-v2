@@ -144,6 +144,9 @@ function AdminDuelQuestionsPage() {
   const [importError, setImportError] = useState("");
   const [importResult, setImportResult] = useState("");
 
+  // 문제 상세 모달
+  const [detailQuestion, setDetailQuestion] = useState(null);
+
   // 재계산 상태
   const [recalcLoading, setRecalcLoading] = useState(false);
   const [recalcResult, setRecalcResult] = useState("");
@@ -357,6 +360,20 @@ function AdminDuelQuestionsPage() {
     }
   };
 
+  // 문제 상세 보기
+  const handleShowDetail = (q) => {
+    const sample = SAMPLE_QUESTIONS.find((s) => s.id === q.id);
+    if (sample) {
+      setDetailQuestion(sample);
+    } else if (q.stem || q.choices) {
+      setDetailQuestion(q);
+    } else {
+      apiGet(`/v1/admin/duel/questions/${q.id}`)
+        .then((data) => setDetailQuestion(data))
+        .catch(() => alert("문제 상세 정보를 불러올 수 없습니다."));
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="admin-detail-wrap">
@@ -516,7 +533,12 @@ function AdminDuelQuestionsPage() {
                     pagedQuestions.map((q) => (
                       <tr key={q.id}>
                         <td style={{ fontSize: 12, fontFamily: "monospace", maxWidth: 120, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                          {q.id}
+                          <span
+                            style={{ cursor: "pointer", color: "#f06c24", textDecoration: "underline" }}
+                            onClick={() => handleShowDetail(q)}
+                          >
+                            {q.id}
+                          </span>
                         </td>
                         <td>
                           <span
@@ -766,6 +788,90 @@ function AdminDuelQuestionsPage() {
                 type="button"
                 onClick={() => setShowImportForm(false)}
               >
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* 문제 상세 모달 */}
+      {detailQuestion && (
+        <div className="admin-modal-overlay" onClick={() => setDetailQuestion(null)}>
+          <div className="admin-modal admin-modal-wide" onClick={(e) => e.stopPropagation()}>
+            <h2>문제 상세</h2>
+
+            <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
+              <span className="status-pill" data-status={detailQuestion.questionType === "QUIZ" ? "active" : "pending"}>
+                {detailQuestion.questionType === "QUIZ" || detailQuestion.question_type === "QUIZ" ? "퀴즈" : "독해"}
+              </span>
+              <span className="admin-detail-tag">{detailQuestion.category}</span>
+              <span style={{ fontSize: 12, color: "#a6b6a9", fontFamily: "monospace" }}>{detailQuestion.id}</span>
+            </div>
+
+            {(detailQuestion.passage) && detailQuestion.passage !== "null" && (
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ display: "block", fontSize: 12, color: "#a6b6a9", marginBottom: 6 }}>지문</label>
+                <div style={{
+                  background: "rgba(15,20,16,0.7)",
+                  borderLeft: "3px solid #f06c24",
+                  borderRadius: "0 8px 8px 0",
+                  padding: "14px 16px",
+                  fontSize: 14,
+                  lineHeight: 1.7,
+                  color: "#f3f6f1",
+                  whiteSpace: "pre-wrap",
+                }}>
+                  {detailQuestion.passage}
+                </div>
+              </div>
+            )}
+
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ display: "block", fontSize: 12, color: "#a6b6a9", marginBottom: 6 }}>문제</label>
+              <div style={{ fontSize: 15, fontWeight: 600, color: "#f3f6f1", lineHeight: 1.5 }}>
+                {detailQuestion.stem}
+              </div>
+            </div>
+
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ display: "block", fontSize: 12, color: "#a6b6a9", marginBottom: 8 }}>선택지</label>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {(detailQuestion.choices || []).map((c) => {
+                  const answerId = detailQuestion.answerId ?? detailQuestion.answer_id;
+                  const isCorrect = String(c.id) === String(answerId);
+                  return (
+                    <div
+                      key={c.id}
+                      style={{
+                        padding: "10px 14px",
+                        borderRadius: 8,
+                        border: isCorrect ? "2px solid #4ade80" : "1px solid rgba(255,255,255,0.1)",
+                        background: isCorrect ? "rgba(78,138,96,0.15)" : "rgba(15,20,16,0.5)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 10,
+                      }}
+                    >
+                      <span style={{
+                        width: 24, height: 24, borderRadius: "50%", display: "grid", placeItems: "center",
+                        fontSize: 13, fontWeight: 700,
+                        background: isCorrect ? "#4ade80" : "rgba(255,255,255,0.1)",
+                        color: isCorrect ? "#0f1410" : "#a6b6a9",
+                      }}>
+                        {c.id}
+                      </span>
+                      <span style={{ color: isCorrect ? "#9dd6b0" : "#f3f6f1", fontWeight: isCorrect ? 600 : 400 }}>
+                        {c.text}
+                      </span>
+                      {isCorrect && <span style={{ marginLeft: "auto", fontSize: 12, color: "#4ade80", fontWeight: 700 }}>정답</span>}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="admin-modal-actions">
+              <button className="admin-detail-btn secondary" type="button" onClick={() => setDetailQuestion(null)}>
                 닫기
               </button>
             </div>
