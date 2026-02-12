@@ -49,7 +49,8 @@ data class AdminOrderView(
     val status: String,
     val totalAmount: Int,
     val createdAt: LocalDateTime,
-    val items: List<OrderItemView>
+    val items: List<OrderItemView>,
+    val address: Map<String, Any>? = null
 )
 
 data class AdminProductRequest(

@@ -14,7 +14,14 @@ const mapOrders = (items) =>
     customer: item.customer_name || item.customerName || item.user_name || item.userName || "-",
     amount: item.amount ?? item.total_amount ?? 0,
     status: item.status || "pending",
+    address: item.address || null,
   }));
+
+const formatAddress = (addr) => {
+  if (!addr) return "-";
+  const parts = [addr.address, addr.addressDetail].filter(Boolean);
+  return parts.join(" ") || "-";
+};
 
 const formatAmount = (value) => `₩${value.toLocaleString("ko-KR")}`;
 
@@ -119,6 +126,7 @@ function AdminShopOrdersPage() {
                   <th>주문 번호</th>
                   <th>고객</th>
                   <th>금액</th>
+                  <th>배송지</th>
                   <th>상태</th>
                   <th>조치</th>
                 </tr>
@@ -129,6 +137,10 @@ function AdminShopOrdersPage() {
                     <td>{order.id}</td>
                     <td>{order.customer}</td>
                     <td>{formatAmount(order.amount)}</td>
+                    <td style={{ maxWidth: "180px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", fontSize: "12px" }}
+                        title={formatAddress(order.address)}>
+                      {formatAddress(order.address)}
+                    </td>
                     <td>
                       <span className="status-pill" data-status={order.status}>
                         {STATUS_LABELS[order.status] || order.status}
@@ -171,6 +183,17 @@ function AdminShopOrdersPage() {
               <label>현재 상태</label>
               <p>{STATUS_LABELS[selectedOrder.status] || selectedOrder.status}</p>
             </div>
+            {selectedOrder.address ? (
+              <div className="admin-modal-field">
+                <label>배송지</label>
+                <div style={{ fontSize: "13px", lineHeight: "1.6" }}>
+                  {selectedOrder.address.recipientName ? <div>수령인: {selectedOrder.address.recipientName}</div> : null}
+                  {selectedOrder.address.phone ? <div>연락처: {selectedOrder.address.phone}</div> : null}
+                  <div>{formatAddress(selectedOrder.address)}</div>
+                  {selectedOrder.address.zipCode ? <div>우편번호: {selectedOrder.address.zipCode}</div> : null}
+                </div>
+              </div>
+            ) : null}
             <div className="admin-modal-field">
               <label>변경할 상태</label>
               <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)}>

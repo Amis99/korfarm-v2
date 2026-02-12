@@ -125,10 +125,17 @@ class ShopService(
         val orders = orderRepository.findAllByOrderByCreatedAtDesc()
         val userIds = orders.map { it.userId }.distinct()
         val userMap = userRepository.findAllById(userIds).associateBy { it.id }
+        val orderIds = orders.map { it.id }
+        val shipmentMap = shipmentRepository.findByOrderIdIn(orderIds).associateBy { it.orderId }
         return orders.map { order ->
             val items = orderItemRepository.findByOrderId(order.id)
             val user = userMap[order.userId]
-            order.toAdminView(items, user?.name ?: user?.email ?: order.userId)
+            val address = shipmentMap[order.id]?.addressJson?.let { json ->
+                try {
+                    objectMapper.readValue(json, Map::class.java) as Map<String, Any>
+                } catch (_: Exception) { null }
+            }
+            order.toAdminView(items, user?.name ?: user?.email ?: order.userId, address)
         }
     }
 
@@ -214,7 +221,7 @@ class ShopService(
         )
     }
 
-    private fun OrderEntity.toAdminView(items: List<OrderItemEntity>, customerName: String): AdminOrderView {
+    private fun OrderEntity.toAdminView(items: List<OrderItemEntity>, customerName: String, address: Map<String, Any>? = null): AdminOrderView {
         return AdminOrderView(
             orderId = id,
             userId = userId,
@@ -228,7 +235,8 @@ class ShopService(
                     quantity = it.quantity,
                     unitPrice = it.unitPrice
                 )
-            }
+            },
+            address = address
         )
     }
 }
