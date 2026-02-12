@@ -41,6 +41,7 @@ function AdminShopOrdersPage() {
   const [rows, setRows] = useState(ORDERS);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [showDetailModal, setShowDetailModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [newStatus, setNewStatus] = useState("shipping");
@@ -80,10 +81,16 @@ function AdminShopOrdersPage() {
     }
   };
 
+  const openDetail = (order) => {
+    setSelectedOrder(order);
+    setShowDetailModal(true);
+  };
+
   const openUpdate = (order) => {
     setSelectedOrder(order);
     setNewStatus(order.status === "pending" ? "shipping" : "delivered");
     setActionError("");
+    setShowDetailModal(false);
     setShowUpdateModal(true);
   };
 
@@ -126,7 +133,6 @@ function AdminShopOrdersPage() {
                   <th>주문 번호</th>
                   <th>고객</th>
                   <th>금액</th>
-                  <th>배송지</th>
                   <th>상태</th>
                   <th>조치</th>
                 </tr>
@@ -134,13 +140,16 @@ function AdminShopOrdersPage() {
               <tbody>
                 {filteredOrders.map((order) => (
                   <tr key={order.id}>
-                    <td>{order.id}</td>
+                    <td>
+                      <span
+                        style={{ color: "#4a7c59", cursor: "pointer", textDecoration: "underline" }}
+                        onClick={() => openDetail(order)}
+                      >
+                        {order.id}
+                      </span>
+                    </td>
                     <td>{order.customer}</td>
                     <td>{formatAmount(order.amount)}</td>
-                    <td style={{ maxWidth: "180px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", fontSize: "12px" }}
-                        title={formatAddress(order.address)}>
-                      {formatAddress(order.address)}
-                    </td>
                     <td>
                       <span className="status-pill" data-status={order.status}>
                         {STATUS_LABELS[order.status] || order.status}
@@ -170,17 +179,24 @@ function AdminShopOrdersPage() {
         </div>
       </div>
 
-      {showUpdateModal && selectedOrder ? (
-        <div className="admin-modal-overlay" onClick={() => setShowUpdateModal(false)}>
+      {showDetailModal && selectedOrder ? (
+        <div className="admin-modal-overlay" onClick={() => setShowDetailModal(false)}>
           <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
-            <h2>주문 상태 변경</h2>
-            {actionError ? <p className="admin-detail-note error">{actionError}</p> : null}
+            <h2>주문 상세</h2>
             <div className="admin-modal-field">
               <label>주문 번호</label>
               <p>{selectedOrder.id}</p>
             </div>
             <div className="admin-modal-field">
-              <label>현재 상태</label>
+              <label>고객</label>
+              <p>{selectedOrder.customer}</p>
+            </div>
+            <div className="admin-modal-field">
+              <label>금액</label>
+              <p>{formatAmount(selectedOrder.amount)}</p>
+            </div>
+            <div className="admin-modal-field">
+              <label>상태</label>
               <p>{STATUS_LABELS[selectedOrder.status] || selectedOrder.status}</p>
             </div>
             {selectedOrder.address ? (
@@ -194,6 +210,35 @@ function AdminShopOrdersPage() {
                 </div>
               </div>
             ) : null}
+            <div className="admin-modal-actions">
+              <button
+                className="admin-detail-btn"
+                onClick={() => openUpdate(selectedOrder)}
+                disabled={selectedOrder.status === "delivered"}
+              >
+                상태 변경
+              </button>
+              <button className="admin-detail-btn secondary" onClick={() => setShowDetailModal(false)}>
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {showUpdateModal && selectedOrder ? (
+        <div className="admin-modal-overlay" onClick={() => setShowUpdateModal(false)}>
+          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>주문 상태 변경</h2>
+            {actionError ? <p className="admin-detail-note error">{actionError}</p> : null}
+            <div className="admin-modal-field">
+              <label>주문 번호</label>
+              <p>{selectedOrder.id}</p>
+            </div>
+            <div className="admin-modal-field">
+              <label>현재 상태</label>
+              <p>{STATUS_LABELS[selectedOrder.status] || selectedOrder.status}</p>
+            </div>
             <div className="admin-modal-field">
               <label>변경할 상태</label>
               <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)}>
