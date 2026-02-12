@@ -65,6 +65,11 @@ class AuthController(
             school = user.school,
             studentPhone = user.studentPhone,
             parentPhone = user.parentPhone,
+            shippingName = user.shippingName,
+            shippingPhone = user.shippingPhone,
+            shippingZipCode = user.shippingZipCode,
+            shippingAddress = user.shippingAddress,
+            shippingAddressDetail = user.shippingAddressDetail,
             profileImageUrl = user.profileImageUrl
         )
         return ApiResponse(success = true, data = profile)

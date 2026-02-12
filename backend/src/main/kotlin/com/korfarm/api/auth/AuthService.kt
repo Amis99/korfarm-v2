@@ -212,6 +212,11 @@ class AuthService(
         request.studentPhone?.let { user.studentPhone = it }
         request.parentPhone?.let { user.parentPhone = it }
         request.profileImageUrl?.let { user.profileImageUrl = it }
+        request.shippingName?.let { user.shippingName = it }
+        request.shippingPhone?.let { user.shippingPhone = it }
+        request.shippingZipCode?.let { user.shippingZipCode = it }
+        request.shippingAddress?.let { user.shippingAddress = it }
+        request.shippingAddressDetail?.let { user.shippingAddressDetail = it }
         request.password?.let {
             if (it.length >= 8) user.passwordHash = passwordEncoder.encode(it)
         }
@@ -235,6 +240,11 @@ class AuthService(
             school = user.school,
             studentPhone = user.studentPhone,
             parentPhone = user.parentPhone,
+            shippingName = user.shippingName,
+            shippingPhone = user.shippingPhone,
+            shippingZipCode = user.shippingZipCode,
+            shippingAddress = user.shippingAddress,
+            shippingAddressDetail = user.shippingAddressDetail,
             profileImageUrl = user.profileImageUrl,
             pendingApproval = isPending,
             orgId = resolvedOrgId
@@ -281,6 +291,11 @@ class AuthService(
                 school = user.school,
                 studentPhone = user.studentPhone,
                 parentPhone = user.parentPhone,
+                shippingName = user.shippingName,
+                shippingPhone = user.shippingPhone,
+                shippingZipCode = user.shippingZipCode,
+                shippingAddress = user.shippingAddress,
+                shippingAddressDetail = user.shippingAddressDetail,
                 profileImageUrl = user.profileImageUrl,
                 pendingApproval = isPending,
                 orgId = resolvedOrgId

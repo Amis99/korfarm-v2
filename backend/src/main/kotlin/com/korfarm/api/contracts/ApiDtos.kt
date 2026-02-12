@@ -46,7 +46,12 @@ data class UpdateProfileRequest(
     val parentPhone: String? = null,
     val profileImageUrl: String? = null,
     val password: String? = null,
-    val learningStartMode: String? = null
+    val learningStartMode: String? = null,
+    val shippingName: String? = null,
+    val shippingPhone: String? = null,
+    val shippingZipCode: String? = null,
+    val shippingAddress: String? = null,
+    val shippingAddressDetail: String? = null
 )
 
 data class SubmitAnswer(

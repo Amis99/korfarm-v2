@@ -39,6 +39,21 @@ class UserEntity(
     @Column(name = "parent_phone")
     var parentPhone: String? = null,
 
+    @Column(name = "shipping_name")
+    var shippingName: String? = null,
+
+    @Column(name = "shipping_phone")
+    var shippingPhone: String? = null,
+
+    @Column(name = "shipping_zip_code")
+    var shippingZipCode: String? = null,
+
+    @Column(name = "shipping_address")
+    var shippingAddress: String? = null,
+
+    @Column(name = "shipping_address_detail")
+    var shippingAddressDetail: String? = null,
+
     @Column(name = "profile_image_url", columnDefinition = "MEDIUMTEXT")
     var profileImageUrl: String? = null,
 

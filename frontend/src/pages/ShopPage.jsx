@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   SHOP_CATEGORIES,
   SHOP_PRODUCTS,
   SHOP_SECTIONS,
 } from "../data/shopCatalog";
+import { apiGet, apiPut } from "../utils/api";
 import "../styles/commerce.css";
 
 const formatPrice = (value) =>
@@ -16,6 +17,61 @@ function ShopPage() {
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
   const [pages, setPages] = useState({ textBook: 1, tool: 1 });
+
+  // 배송지 관련 상태
+  const EMPTY_SHIPPING = {
+    shippingName: "",
+    shippingPhone: "",
+    shippingZipCode: "",
+    shippingAddress: "",
+    shippingAddressDetail: "",
+  };
+  const [shipping, setShipping] = useState(EMPTY_SHIPPING);
+  const [shippingEditing, setShippingEditing] = useState(false);
+  const [shippingSaved, setShippingSaved] = useState(false);
+  const [shippingSaving, setShippingSaving] = useState(false);
+
+  const hasShipping = shipping.shippingName && shipping.shippingAddress;
+
+  // 배송지 로드
+  useEffect(() => {
+    apiGet("/v1/auth/me")
+      .then((res) => {
+        if (res?.data) {
+          const d = res.data;
+          const loaded = {
+            shippingName: d.shippingName || "",
+            shippingPhone: d.shippingPhone || "",
+            shippingZipCode: d.shippingZipCode || "",
+            shippingAddress: d.shippingAddress || "",
+            shippingAddressDetail: d.shippingAddressDetail || "",
+          };
+          setShipping(loaded);
+          if (loaded.shippingName && loaded.shippingAddress) {
+            setShippingSaved(true);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleShippingChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setShipping((prev) => ({ ...prev, [name]: value }));
+  }, []);
+
+  const handleShippingSave = useCallback(async () => {
+    setShippingSaving(true);
+    try {
+      await apiPut("/v1/auth/me", shipping);
+      setShippingSaved(true);
+      setShippingEditing(false);
+    } catch {
+      alert("배송지 저장에 실패했습니다.");
+    } finally {
+      setShippingSaving(false);
+    }
+  }, [shipping]);
 
   useEffect(() => {
     setPages({ textBook: 1, tool: 1 });
@@ -227,10 +283,81 @@ function ShopPage() {
             </Link>
           </div>
           <div className="commerce-note">
-            <strong>배송 안내</strong>
-            <p>
-              평일 오후 2시 이전 주문은 당일 출고됩니다.
-            </p>
+            <strong>기본 배송지</strong>
+            {shippingSaved && !shippingEditing ? (
+              <div style={{ marginTop: "8px", fontSize: "13px", lineHeight: 1.6 }}>
+                <p style={{ margin: 0 }}>{shipping.shippingName} / {shipping.shippingPhone}</p>
+                <p style={{ margin: 0 }}>({shipping.shippingZipCode}) {shipping.shippingAddress}</p>
+                {shipping.shippingAddressDetail && (
+                  <p style={{ margin: 0 }}>{shipping.shippingAddressDetail}</p>
+                )}
+                <button
+                  type="button"
+                  className="commerce-btn ghost"
+                  style={{ marginTop: "8px", width: "100%", fontSize: "13px" }}
+                  onClick={() => setShippingEditing(true)}
+                >
+                  수정
+                </button>
+              </div>
+            ) : (
+              <div style={{ marginTop: "8px", display: "flex", flexDirection: "column", gap: "6px" }}>
+                <input
+                  name="shippingName"
+                  value={shipping.shippingName}
+                  onChange={handleShippingChange}
+                  placeholder="수령인"
+                  className="commerce-input"
+                />
+                <input
+                  name="shippingPhone"
+                  value={shipping.shippingPhone}
+                  onChange={handleShippingChange}
+                  placeholder="연락처"
+                  className="commerce-input"
+                />
+                <input
+                  name="shippingZipCode"
+                  value={shipping.shippingZipCode}
+                  onChange={handleShippingChange}
+                  placeholder="우편번호"
+                  className="commerce-input"
+                />
+                <input
+                  name="shippingAddress"
+                  value={shipping.shippingAddress}
+                  onChange={handleShippingChange}
+                  placeholder="기본주소"
+                  className="commerce-input"
+                />
+                <input
+                  name="shippingAddressDetail"
+                  value={shipping.shippingAddressDetail}
+                  onChange={handleShippingChange}
+                  placeholder="상세주소"
+                  className="commerce-input"
+                />
+                <button
+                  type="button"
+                  className="commerce-btn"
+                  style={{ width: "100%", fontSize: "13px" }}
+                  onClick={handleShippingSave}
+                  disabled={shippingSaving || !shipping.shippingName || !shipping.shippingAddress}
+                >
+                  {shippingSaving ? "저장 중..." : "배송지 저장"}
+                </button>
+                {shippingEditing && (
+                  <button
+                    type="button"
+                    className="commerce-btn ghost"
+                    style={{ width: "100%", fontSize: "13px" }}
+                    onClick={() => setShippingEditing(false)}
+                  >
+                    취소
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </aside>
       </div>
