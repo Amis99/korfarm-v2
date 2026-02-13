@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { apiPost } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
 import "../styles/wisdom.css";
@@ -32,6 +32,8 @@ const TOKEN_KEY = "korfarm_token";
 function WisdomWritePage() {
   const { levelId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const assignmentId = searchParams.get("assignmentId");
   const fileInputRef = useRef(null);
 
   const [topics, setTopics] = useState([]);
@@ -104,6 +106,21 @@ function WisdomWritePage() {
         content: tab === "manuscript" ? content : null,
         attachment_ids: attachmentIds,
       });
+
+      // 과제에서 시작한 경우 자동 제출
+      if (assignmentId) {
+        try {
+          await apiPost(`/v1/assignments/${assignmentId}/submit`, {
+            content: {
+              completedAt: new Date().toISOString(),
+              topicKey,
+              levelId,
+            },
+          });
+        } catch {}
+        navigate("/assignments");
+        return;
+      }
 
       navigate(`/writing/${levelId}`);
     } catch (err) {

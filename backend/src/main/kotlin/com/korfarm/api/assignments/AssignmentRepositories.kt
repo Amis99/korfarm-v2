@@ -23,4 +23,5 @@ interface AssignmentTargetRepository : JpaRepository<AssignmentTargetEntity, Str
 interface AssignmentSubmissionRepository : JpaRepository<AssignmentSubmissionEntity, String> {
     fun findByAssignmentIdAndUserId(assignmentId: String, userId: String): AssignmentSubmissionEntity?
     fun findByUserId(userId: String): List<AssignmentSubmissionEntity>
+    fun findByAssignmentId(assignmentId: String): List<AssignmentSubmissionEntity>
 }

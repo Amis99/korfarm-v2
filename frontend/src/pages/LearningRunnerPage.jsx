@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import EngineShell from "../engine/core/EngineShell";
 import { getLearningById, FARM_LIST } from "../data/learning/learningCatalog";
@@ -19,14 +19,17 @@ function LearningRunnerPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [resolvedStartPage, setResolvedStartPage] = useState(null);
+  const [assignmentSubmitted, setAssignmentSubmitted] = useState(false);
 
   const startPageParam = searchParams.get("startPage");
+  const assignmentId = searchParams.get("assignmentId");
   const isContentPdf = learning?.moduleKey === "content_pdf";
 
   const exitPath = useMemo(() => {
+    if (assignmentId) return "/assignments";
     const farm = findFarmForContentType(learning?.contentType);
     return farm ? `/farm-mode/${farm.id}` : "/farm-mode";
-  }, [learning]);
+  }, [learning, assignmentId]);
 
   // JSON fetch
   useEffect(() => {
@@ -72,7 +75,6 @@ function LearningRunnerPage() {
       setResolvedStartPage(parseInt(startPageParam, 10) || 1);
       return;
     }
-    // startPage 미지정 시 서버에서 마지막 진행 페이지 조회
     apiPost("/v1/learning/farm/page-progress", {
       contentId: learning.contentId,
     })
@@ -95,6 +97,20 @@ function LearningRunnerPage() {
       _farmLogId: farmLogId,
     };
   }, [content, isContentPdf, resolvedStartPage, farmLogId]);
+
+  // 학습 종료 시 과제 자동 제출
+  const handleExit = useCallback(() => {
+    if (assignmentId && !assignmentSubmitted) {
+      setAssignmentSubmitted(true);
+      apiPost(`/v1/assignments/${assignmentId}/submit`, {
+        content: {
+          completedAt: new Date().toISOString(),
+          contentId: learning?.contentId || learningId,
+        },
+      }).catch(() => {});
+    }
+    navigate(exitPath);
+  }, [assignmentId, assignmentSubmitted, exitPath, navigate, learning, learningId]);
 
   if (!learning) {
     return (
@@ -127,7 +143,7 @@ function LearningRunnerPage() {
     <EngineShell
       content={enrichedContent}
       moduleKey={learning.moduleKey}
-      onExit={() => navigate(exitPath)}
+      onExit={handleExit}
       farmLogId={farmLogId}
     />
   );

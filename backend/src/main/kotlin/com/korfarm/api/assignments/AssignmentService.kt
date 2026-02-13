@@ -88,8 +88,14 @@ class AssignmentService(
     }
 
     @Transactional(readOnly = true)
-    fun listAssignmentsAdmin(): List<AssignmentSummary> {
-        return assignmentRepository.findAll().sortedByDescending { it.createdAt }.map { it.toSummary() }
+    fun listAssignmentsAdmin(userId: String): List<AssignmentSummary> {
+        val isHqAdmin = com.korfarm.api.security.SecurityUtils.hasAnyRole("HQ_ADMIN")
+        if (isHqAdmin) {
+            return assignmentRepository.findAll().sortedByDescending { it.createdAt }.map { it.toSummary() }
+        }
+        val orgId = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+            .firstOrNull()?.orgId ?: return emptyList()
+        return assignmentRepository.findByOrgIdOrderByCreatedAtDesc(orgId).map { it.toSummary() }
     }
 
     @Transactional(readOnly = true)
@@ -203,6 +209,37 @@ class AssignmentService(
             "pending" to pending,
             "overdue" to overdue,
             "recentAssignments" to recentAssignments
+        )
+    }
+
+    /**
+     * 과제별 제출 현황 조회
+     */
+    @Transactional(readOnly = true)
+    fun getSubmissionStatus(assignmentId: String): Map<String, Any> {
+        val targets = assignmentTargetRepository.findByAssignmentId(assignmentId)
+        // 대상 학생 수 계산
+        var totalStudents = 0L
+        for (target in targets) {
+            when (target.targetType) {
+                "user" -> totalStudents++
+                "class" -> totalStudents += classMembershipRepository
+                    .findByClassIdAndStatus(target.targetId, "active").size
+                "org" -> totalStudents += orgMembershipRepository
+                    .countByOrgIdAndStatus(target.targetId, "active")
+            }
+        }
+        val submissions = assignmentSubmissionRepository.findByAssignmentId(assignmentId)
+        return mapOf(
+            "totalStudents" to totalStudents,
+            "submittedCount" to submissions.size,
+            "submissions" to submissions.map { sub ->
+                mapOf(
+                    "userId" to sub.userId,
+                    "status" to sub.status,
+                    "submittedAt" to sub.submittedAt?.toString()
+                )
+            }
         )
     }
 

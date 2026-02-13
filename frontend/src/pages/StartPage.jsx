@@ -68,6 +68,21 @@ function StartPage() {
   const isAdmin = user?.roles?.some((r) => r === "HQ_ADMIN" || r === "ORG_ADMIN");
   const isParent = user?.roles?.includes("PARENT");
 
+  // 과제 수
+  const [assignmentCount, setAssignmentCount] = useState(null);
+
+  // 과제 목록 가져오기
+  useEffect(() => {
+    if (!isLoggedIn || isParent) return;
+    apiGet("/v1/assignments")
+      .then((data) => {
+        const list = Array.isArray(data) ? data : [];
+        const pending = list.filter((a) => a.status !== "closed");
+        setAssignmentCount(pending.length);
+      })
+      .catch(() => setAssignmentCount(0));
+  }, [isLoggedIn, isParent]);
+
   // 부모인 경우 연결된 자녀 목록 가져오기
   useEffect(() => {
     if (!isLoggedIn || !isParent) return;
@@ -613,8 +628,16 @@ function StartPage() {
                 <span className="badge" style={{ background: "rgba(0,0,0,0.2)" }}>
                   특별 과제
                 </span>
-                <h3>특별 과제 도착!</h3>
-                <p>완료하고 과제 씨앗을 받아보세요.</p>
+                {assignmentCount === null ? (
+                  <h3>과제 확인 중...</h3>
+                ) : assignmentCount > 0 ? (
+                  <>
+                    <h3>특별 과제 {assignmentCount}건 도착!</h3>
+                    <p>완료하고 과제 씨앗을 받아보세요.</p>
+                  </>
+                ) : (
+                  <h3>배정된 과제가 없습니다</h3>
+                )}
               </div>
               <button type="button" onClick={() => navigate("/assignments")}>
                 과제 보러가기

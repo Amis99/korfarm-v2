@@ -35,7 +35,9 @@ class AdminAssignmentController(
     @GetMapping
     fun list(): ApiResponse<List<AssignmentSummary>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
-        val data = assignmentService.listAssignmentsAdmin()
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val data = assignmentService.listAssignmentsAdmin(userId)
         return ApiResponse(success = true, data = data)
     }
 
@@ -53,6 +55,20 @@ class AdminAssignmentController(
     fun close(@PathVariable assignmentId: String): ApiResponse<Map<String, String>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         assignmentService.closeAssignment(assignmentId)
+        return ApiResponse(success = true, data = mapOf("assignment_id" to assignmentId))
+    }
+
+    @GetMapping("/{assignmentId}/submissions")
+    fun submissionStatus(@PathVariable assignmentId: String): ApiResponse<Map<String, Any>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val data = assignmentService.getSubmissionStatus(assignmentId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    @PostMapping("/{assignmentId}/reopen")
+    fun reopen(@PathVariable assignmentId: String): ApiResponse<Map<String, String>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        assignmentService.updateAssignment(assignmentId, AdminAssignmentUpdateRequest(status = "open"))
         return ApiResponse(success = true, data = mapOf("assignment_id" to assignmentId))
     }
 
