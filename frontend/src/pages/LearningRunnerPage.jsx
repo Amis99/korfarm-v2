@@ -23,13 +23,16 @@ function LearningRunnerPage() {
 
   const startPageParam = searchParams.get("startPage");
   const assignmentId = searchParams.get("assignmentId");
+  const proChapter = searchParams.get("proChapter");
+  const proItemId = searchParams.get("proItemId");
   const isContentPdf = learning?.moduleKey === "content_pdf";
 
   const exitPath = useMemo(() => {
+    if (proChapter) return `/pro-mode/chapter/${proChapter}`;
     if (assignmentId) return "/assignments";
     const farm = findFarmForContentType(learning?.contentType);
     return farm ? `/farm-mode/${farm.id}` : "/farm-mode";
-  }, [learning, assignmentId]);
+  }, [learning, assignmentId, proChapter]);
 
   // JSON fetch
   useEffect(() => {
@@ -98,8 +101,11 @@ function LearningRunnerPage() {
     };
   }, [content, isContentPdf, resolvedStartPage, farmLogId]);
 
-  // 학습 종료 시 과제 자동 제출
+  // 학습 종료 시 과제 자동 제출 + 프로 모드 완료
   const handleExit = useCallback(() => {
+    if (proItemId) {
+      apiPost("/v1/pro/progress/complete", { itemId: proItemId }).catch(() => {});
+    }
     if (assignmentId && !assignmentSubmitted) {
       setAssignmentSubmitted(true);
       apiPost(`/v1/assignments/${assignmentId}/submit`, {
@@ -110,7 +116,7 @@ function LearningRunnerPage() {
       }).catch(() => {});
     }
     navigate(exitPath);
-  }, [assignmentId, assignmentSubmitted, exitPath, navigate, learning, learningId]);
+  }, [assignmentId, assignmentSubmitted, exitPath, navigate, learning, learningId, proItemId]);
 
   if (!learning) {
     return (

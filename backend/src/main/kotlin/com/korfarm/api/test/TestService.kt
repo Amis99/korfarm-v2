@@ -30,6 +30,7 @@ class TestService(
         val userOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }
 
         var papers = testPaperRepo.findByStatus("open")
+            .filter { it.series != "chapter" }  // 프로 모드 챕터 테스트 제외
 
         // source 필터: "hq" = 본사(orgId가 null), "org" = 소속 기관
         if (source == "hq") {

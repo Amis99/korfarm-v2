@@ -671,7 +671,7 @@ function StartPage() {
               <div className="start-paid-card" onClick={() => navigate("/tests")}>
                 <span className="material-symbols-outlined">quiz</span>
                 <h3>테스트 창고</h3>
-                <p>진단/챕터 시험</p>
+                <p>각종 시험 모음</p>
                 {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
               <div className="start-paid-card" onClick={() => navigate("/harvest-ledger")}>

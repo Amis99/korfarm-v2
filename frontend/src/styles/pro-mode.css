@@ -1,0 +1,490 @@
+/* ===== Pro Mode – 프로 모드 ===== */
+
+.pro {
+  --pro-green: #22c55e;
+  --pro-orange: #f59e0b;
+  --pro-red: #ef4444;
+  --pro-dark: #1e293b;
+  --pro-muted: #64748b;
+  --pro-border: #e2e8f0;
+  --pro-bg: #f8fafc;
+  --pro-white: #fff;
+  --pro-accent: #3b82f6;
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(248,250,252,0.92) 0%, rgba(219,234,254,0.88) 100%),
+    url("/farm-bg.jpg") center/cover fixed no-repeat;
+  color: var(--pro-dark);
+  font-family: var(--font-body);
+}
+
+.pro *,
+.pro *::before,
+.pro *::after {
+  box-sizing: border-box;
+}
+
+/* ── 상단 바 ── */
+.pro-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--pro-white);
+  border-bottom: 1px solid var(--pro-border);
+}
+
+.pro-topbar-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pro-back {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--pro-muted);
+  font-size: 14px;
+}
+
+.pro-back .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.pro-topbar-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ── 본문 영역 ── */
+.pro-body {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+}
+
+.pro-hero {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.pro-hero h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.pro-hero p {
+  font-size: 14px;
+  color: var(--pro-muted);
+  margin: 0;
+}
+
+/* ── 챕터 목록 테이블 ── */
+.pro-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--pro-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.pro-table th {
+  background: #f1f5f9;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  color: var(--pro-muted);
+  border-bottom: 1px solid var(--pro-border);
+}
+
+.pro-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.pro-row:hover {
+  background: #f8fafc;
+}
+
+.pro-row td {
+  padding: 14px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--pro-border);
+  vertical-align: middle;
+}
+
+.pro-row.passed {
+  border-left: 4px solid var(--pro-green);
+}
+
+.pro-row.passed td:first-child {
+  padding-left: 12px;
+}
+
+.pro-row.current {
+  background: #fffbeb;
+}
+
+.pro-row.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pro-row.locked:hover {
+  background: transparent;
+}
+
+/* ── 상태 배지 ── */
+.pro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pro-badge.passed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.pro-badge.current {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.pro-badge.locked {
+  background: #f1f5f9;
+  color: #94a3b8;
+}
+
+/* 진행률 바 */
+.pro-progress-bar {
+  width: 80px;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.pro-progress-fill {
+  height: 100%;
+  background: var(--pro-green);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+/* ── 학습 아이템 목록 ── */
+.pro-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pro-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--pro-white);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border-left: 4px solid transparent;
+}
+
+.pro-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.pro-item.completed {
+  border-left-color: var(--pro-green);
+}
+
+.pro-item.locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pro-item-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.pro-item-icon.reading { background: #dbeafe; color: #2563eb; }
+.pro-item-icon.vocab { background: #fef3c7; color: #d97706; }
+.pro-item-icon.background { background: #dcfce7; color: #16a34a; }
+.pro-item-icon.logic { background: #f3e8ff; color: #9333ea; }
+.pro-item-icon.answer { background: #fce7f3; color: #db2777; }
+.pro-item-icon.test { background: #fee2e2; color: #dc2626; }
+
+.pro-item-info {
+  flex: 1;
+}
+
+.pro-item-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+
+.pro-item-desc {
+  font-size: 13px;
+  color: var(--pro-muted);
+  margin: 0;
+}
+
+.pro-item-status {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.pro-item-status .material-symbols-outlined {
+  font-size: 22px;
+}
+
+.pro-item-status.done {
+  color: var(--pro-green);
+}
+
+.pro-item-status.lock {
+  color: #cbd5e1;
+}
+
+/* ── 테스트 페이지 ── */
+.pro-test-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.pro-test-info {
+  background: var(--pro-white);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  margin-bottom: 24px;
+}
+
+.pro-test-info h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.pro-test-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.pro-test-info-item {
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.pro-test-info-item .label {
+  font-size: 12px;
+  color: var(--pro-muted);
+  margin-bottom: 4px;
+}
+
+.pro-test-info-item .value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.pro-test-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.pro-test-btn.primary {
+  background: var(--pro-accent);
+  color: #fff;
+}
+
+.pro-test-btn.primary:hover {
+  background: #2563eb;
+}
+
+.pro-test-btn.secondary {
+  background: #f1f5f9;
+  color: var(--pro-dark);
+}
+
+.pro-test-btn.secondary:hover {
+  background: #e2e8f0;
+}
+
+/* ── 타이머 ── */
+.pro-test-timer {
+  font-size: 48px;
+  font-weight: 700;
+  text-align: center;
+  margin: 16px 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--pro-dark);
+}
+
+.pro-test-timer.warning {
+  color: var(--pro-red);
+  animation: pro-pulse 1s infinite;
+}
+
+@keyframes pro-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pro-test-timer-label {
+  text-align: center;
+  font-size: 13px;
+  color: var(--pro-muted);
+  margin-bottom: 24px;
+}
+
+/* ── 결과 카드 ── */
+.pro-result-card {
+  background: var(--pro-white);
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
+}
+
+.pro-result-card.passed {
+  border-top: 4px solid var(--pro-green);
+}
+
+.pro-result-card.failed {
+  border-top: 4px solid var(--pro-red);
+}
+
+.pro-result-score {
+  font-size: 56px;
+  font-weight: 800;
+  margin: 16px 0 8px;
+}
+
+.pro-result-card.passed .pro-result-score {
+  color: var(--pro-green);
+}
+
+.pro-result-card.failed .pro-result-score {
+  color: var(--pro-red);
+}
+
+.pro-result-label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.pro-result-desc {
+  font-size: 14px;
+  color: var(--pro-muted);
+  margin-bottom: 24px;
+}
+
+.pro-result-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── 로딩/빈 상태 ── */
+.pro-center {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--pro-muted);
+}
+
+.pro-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--pro-muted);
+  font-size: 15px;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 768px) {
+  .pro-table th:nth-child(3),
+  .pro-table td:nth-child(3) {
+    display: none;
+  }
+
+  .pro-test-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pro-test-timer {
+    font-size: 36px;
+  }
+
+  .pro-result-actions {
+    flex-direction: column;
+  }
+
+  .pro-result-actions .pro-test-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pro-item {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .pro-item-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .pro-topbar-inner {
+    padding: 0 12px;
+  }
+
+  .pro-body {
+    padding: 16px 12px 32px;
+  }
+}

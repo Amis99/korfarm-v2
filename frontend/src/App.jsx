@@ -37,6 +37,8 @@ import LearningRunnerPage from "./pages/LearningRunnerPage";
 import DailyQuizPage from "./pages/DailyQuizPage";
 import DailyReadingPage from "./pages/DailyReadingPage";
 import ProModePage from "./pages/ProModePage";
+import ProChapterPage from "./pages/ProChapterPage";
+import ProTestPage from "./pages/ProTestPage";
 import FarmModePage from "./pages/FarmModePage";
 import FarmListPage from "./pages/FarmListPage";
 import WritingPage from "./pages/WritingPage";
@@ -130,6 +132,8 @@ function App() {
         <Route path="/learning" element={<LearningHubPage />} />
         <Route path="/learning/:learningId" element={<LearningRunnerPage />} />
         <Route path="/pro-mode" element={<ProModePage />} />
+        <Route path="/pro-mode/chapter/:chapterId" element={<ProChapterPage />} />
+        <Route path="/pro-mode/chapter/:chapterId/test" element={<ProTestPage />} />
         <Route path="/farm-mode" element={<FarmModePage />} />
         <Route path="/farm-mode/:farmId" element={<FarmListPage />} />
         <Route path="/writing" element={<WritingPage />} />

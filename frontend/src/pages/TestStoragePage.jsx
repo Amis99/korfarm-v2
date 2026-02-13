@@ -69,7 +69,7 @@ function TestStoragePage() {
       : `/v1/test-storage${qs ? `?${qs}` : ""}`;
 
     apiGet(apiUrl)
-      .then(setTests)
+      .then(data => setTests((data || []).filter(t => t.series !== "chapter")))
       .catch(() => setTests([]))
       .finally(() => setLoading(false));
   }, [isLoggedIn, isViewingChild, studentId, sourceFilter, levelFilter]);
