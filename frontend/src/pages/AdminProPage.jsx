@@ -53,6 +53,7 @@ function AdminProPage() {
   // 테스트 등록
   const [testVersion, setTestVersion] = useState(1);
   const [testPaperId, setTestPaperId] = useState("");
+  const [testPapers, setTestPapers] = useState([]);
 
   const load = () => {
     setLoading(true);
@@ -96,6 +97,10 @@ function AdminProPage() {
     setItems(ITEM_TYPES.map((t, i) => ({ type: t.value, contentId: "", order: i + 1 })));
     setTestVersion(1);
     setTestPaperId("");
+    // 시험지 목록 불러오기
+    apiGet("/v1/admin/test-papers")
+      .then(setTestPapers)
+      .catch(() => setTestPapers([]));
   };
 
   const handleUpdateChapter = async () => {
@@ -129,7 +134,7 @@ function AdminProPage() {
   };
 
   const handleRegisterTest = async () => {
-    if (!testPaperId) { alert("시험지 ID를 입력하세요."); return; }
+    if (!testPaperId) { alert("시험지를 선택하세요."); return; }
     try {
       await apiPost(`/v1/admin/pro/chapters/${selectedChapter.id}/tests`, {
         version: Number(testVersion),
@@ -223,7 +228,7 @@ function AdminProPage() {
           <section style={{ background: "#fff", borderRadius: 12, padding: 24, boxShadow: "0 1px 3px rgba(0,0,0,0.08)" }}>
             <h3 style={{ margin: "0 0 16px", fontSize: 16 }}>챕터 테스트 버전 등록</h3>
             <p style={{ fontSize: 13, color: "#64748b", marginBottom: 12 }}>
-              테스트 관리에서 시험지를 먼저 생성한 뒤, 해당 시험지 ID를 입력하세요.
+              테스트 관리에서 시험지를 먼저 생성한 뒤, 아래에서 선택하세요.
             </p>
             <div style={{ display: "flex", gap: 12, alignItems: "flex-end", flexWrap: "wrap" }}>
               <label style={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -235,13 +240,19 @@ function AdminProPage() {
                 />
               </label>
               <label style={{ display: "flex", flexDirection: "column", gap: 4, flex: 1, minWidth: 200 }}>
-                시험지 ID
-                <input
+                시험지 선택
+                <select
                   value={testPaperId}
                   onChange={e => setTestPaperId(e.target.value)}
-                  placeholder="tp_xxxxxxxx"
                   style={{ padding: "6px 8px", border: "1px solid #e2e8f0", borderRadius: 6 }}
-                />
+                >
+                  <option value="">-- 시험지 선택 --</option>
+                  {testPapers.map(tp => (
+                    <option key={tp.testId} value={tp.testId}>
+                      {tp.title} ({tp.testId})
+                    </option>
+                  ))}
+                </select>
               </label>
               <button className="ts-btn ts-btn-primary" onClick={handleRegisterTest}>등록</button>
             </div>
