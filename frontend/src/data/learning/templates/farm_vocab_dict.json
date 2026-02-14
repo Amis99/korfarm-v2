@@ -1,0 +1,64 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "VOCAB_DICTIONARY",
+  "title": "어휘 사전 학습",
+  "description": "표준국어대사전 기반 사전 의미 학습",
+  "targetLevel": "RUSSELL_1",
+  "area": "VOCAB",
+  "subArea": "DICTIONARY",
+  "competencies": ["VOCAB"],
+  "tags": ["vocab-dictionary"],
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+    "questions": [
+      {
+        "id": "vd-1",
+        "type": "MULTI_CHOICE",
+        "questionKind": "DICT_MEANING",
+        "stem": "다음 사전 뜻풀이에 해당하는 낱말은?\n'어떤 일을 이루려고 애를 씀. 또는 그런 일.'",
+        "prompt": "알맞은 낱말을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "노력" },
+          { "id": "B", "text": "경험" },
+          { "id": "C", "text": "결과" },
+          { "id": "D", "text": "과정" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "vd-2",
+        "type": "MULTI_CHOICE",
+        "questionKind": "DICT_EXAMPLE",
+        "stem": "다음 밑줄 친 낱말의 사전적 의미로 알맞은 것은?\n'그는 사안의 _본질_을 꿰뚫어 보았다.'",
+        "prompt": "알맞은 뜻을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "사물의 근본적인 성질이나 모습" },
+          { "id": "B", "text": "겉으로 드러나는 현상" },
+          { "id": "C", "text": "사물의 양이나 크기" },
+          { "id": "D", "text": "특정 사건의 원인" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      },
+      {
+        "id": "vd-3",
+        "type": "MULTI_CHOICE",
+        "questionKind": "DICT_POLYSEMY",
+        "stem": "다음 문장에서 '차다'의 의미로 알맞은 것은?\n'겨울 바람이 매우 차다.'",
+        "prompt": "알맞은 뜻을 고르세요.",
+        "choices": [
+          { "id": "A", "text": "온도가 낮다" },
+          { "id": "B", "text": "공간이 꽉 들어차다" },
+          { "id": "C", "text": "발로 밀어 보내다" },
+          { "id": "D", "text": "시간이 다 되다" }
+        ],
+        "answerId": "A",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
+      }
+    ]
+  }
+}

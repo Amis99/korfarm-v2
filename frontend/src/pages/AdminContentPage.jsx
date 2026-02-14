@@ -94,6 +94,11 @@ const TYPE_LABEL = {
   LOGIC_REASONING_QUIZ: "논리사고력 퀴즈",
   CHOICE_JUDGEMENT: "선택지 판별",
   WRITING_DESCRIPTIVE: "서술형",
+  PRO_READING: "프로 독해",
+  PRO_VOCAB: "프로 어휘",
+  PRO_BACKGROUND: "프로 배경지식",
+  PRO_LOGIC: "프로 논리사고력",
+  PRO_ANSWER: "프로 모범답안",
   /* 레거시 moduleKey 기반 (DB 콘텐츠 호환) */
   worksheet_quiz: "공통 퀴즈형",
   reading_intensive: "정독 훈련",
@@ -129,6 +134,11 @@ const TYPE_SHORT = {
   LOGIC_REASONING_QUIZ: { label: "논리퀴즈", group: "logic" },
   CHOICE_JUDGEMENT: { label: "판별", group: "choice" },
   WRITING_DESCRIPTIVE: { label: "서술형", group: "writing" },
+  PRO_READING: { label: "프로독해", group: "pro" },
+  PRO_VOCAB: { label: "프로어휘", group: "pro" },
+  PRO_BACKGROUND: { label: "프로배경", group: "pro" },
+  PRO_LOGIC: { label: "프로논리", group: "pro" },
+  PRO_ANSWER: { label: "프로답안", group: "pro" },
 };
 const getTypeShort = (type) => TYPE_SHORT[type] || { label: type, group: "other" };
 

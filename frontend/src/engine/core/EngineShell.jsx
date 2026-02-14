@@ -50,6 +50,11 @@ const CONTENT_TYPE_FARM_MAPPING = {
   LOGIC_REASONING_QUIZ: "logic",
   CHOICE_JUDGEMENT: "choice",
   WRITING_DESCRIPTIVE: "writing",
+  PRO_READING: "reading",
+  PRO_VOCAB: "vocab",
+  PRO_BACKGROUND: "background",
+  PRO_LOGIC: "logic",
+  PRO_ANSWER: "reading",
 };
 
 // contentType으로 농장ID 조회

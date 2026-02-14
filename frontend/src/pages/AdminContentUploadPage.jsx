@@ -79,6 +79,11 @@ const TYPE_LABEL = {
   LOGIC_REASONING_QUIZ: "논리사고력 퀴즈",
   CHOICE_JUDGEMENT: "선택지 판별",
   WRITING_DESCRIPTIVE: "서술형",
+  PRO_READING: "프로 독해",
+  PRO_VOCAB: "프로 어휘",
+  PRO_BACKGROUND: "프로 배경지식",
+  PRO_LOGIC: "프로 논리사고력",
+  PRO_ANSWER: "프로 모범답안",
 };
 
 const MODULE_GROUPS = [
@@ -91,16 +96,14 @@ const MODULE_GROUPS = [
   {
     label: "일일 독해",
     items: [
-      { value: "dailyReading:intensive:reading_intensive", label: "정독 훈련" },
-      { value: "dailyReading:training:reading_training", label: "독해 훈련 (Reading Training)" },
-      { value: "dailyReading:recall:recall_cards", label: "복기 카드" },
-      { value: "dailyReading:confirm:confirm_click", label: "확인 학습 클릭" },
+      { value: "dailyReading:training:reading_training", label: "정독 훈련 (정독→복기→확인 통합)" },
     ],
   },
   {
     label: "농장 모드",
     items: [
-      { value: "farm:vocab:worksheet_quiz", label: "어휘 농장" },
+      { value: "farm:vocab:worksheet_quiz", label: "어휘 농장 - 기본" },
+      { value: "farm:vocab_dict:worksheet_quiz", label: "어휘 농장 - 사전 학습" },
       { value: "farm:reading:reading_training", label: "독해 농장" },
       { value: "farm:content:reading_training", label: "내용 숙지 농장" },
       { value: "farm:grammar_wf:word_formation", label: "문법 - 단어 형성" },
@@ -117,7 +120,11 @@ const MODULE_GROUPS = [
   {
     label: "프로 모드",
     items: [
-      { value: "pro:default:worksheet_quiz", label: "프로 모드 (준비 중)", disabled: true },
+      { value: "pro:reading:reading_training", label: "프로 독해" },
+      { value: "pro:vocab:worksheet_quiz", label: "프로 어휘" },
+      { value: "pro:background:worksheet_quiz", label: "프로 배경지식" },
+      { value: "pro:logic:worksheet_quiz", label: "프로 논리사고력" },
+      { value: "pro:answer:worksheet_quiz", label: "프로 모범답안/정답해설" },
     ],
   },
 ];
