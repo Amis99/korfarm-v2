@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, apiPost } from "../utils/api";
 import "../styles/test-storage.css";
 
 function TestOmrPage() {
   const { testId } = useParams();
+  const [searchParams] = useSearchParams();
+  const fromDiagnostic = searchParams.get("from") === "diagnostic";
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
   const [test, setTest] = useState(null);
@@ -19,7 +21,7 @@ function TestOmrPage() {
     if (!isLoggedIn) return;
     Promise.all([
       apiGet(`/v1/test-storage/${testId}`),
-      apiGet(`/v1/tests/${testId}/questions`).catch(() => [])
+      apiGet(`/v1/test-storage/${testId}/questions`).catch(() => [])
     ])
       .then(([testData, qs]) => {
         if (testData.hasSubmitted) {
@@ -56,8 +58,8 @@ function TestOmrPage() {
     }
     setSubmitting(true);
     try {
-      await apiPost(`/v1/tests/${testId}/submit`, { answers });
-      navigate(`/tests/${testId}/report`);
+      await apiPost(`/v1/test-storage/${testId}/submit`, { answers });
+      navigate(`/tests/${testId}/report${fromDiagnostic ? "?from=diagnostic" : ""}`);
     } catch (err) {
       setError(err.message || "제출에 실패했습니다.");
     } finally {
@@ -79,8 +81,8 @@ function TestOmrPage() {
   return (
     <div className="ts-page">
       <div className="ts-back-row">
-        <Link to={`/tests/${testId}`} className="ts-back-link">
-          <span className="material-symbols-outlined">arrow_back</span> 시험 상세
+        <Link to={fromDiagnostic ? "/diagnostic/print" : `/tests/${testId}`} className="ts-back-link">
+          <span className="material-symbols-outlined">arrow_back</span> {fromDiagnostic ? "진단 테스트" : "시험 상세"}
         </Link>
       </div>
 

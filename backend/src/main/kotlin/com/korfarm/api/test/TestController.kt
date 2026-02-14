@@ -33,6 +33,13 @@ class TestController(
         return ApiResponse(success = true, data = data)
     }
 
+    @GetMapping("/diagnostic")
+    fun listDiagnostic(): ApiResponse<List<TestPaperSummary>> {
+        val userId = currentUser()
+        val data = testService.listDiagnosticTests(userId)
+        return ApiResponse(success = true, data = data)
+    }
+
     @GetMapping("/{testId}")
     fun detail(@PathVariable testId: String): ApiResponse<TestPaperDetail> {
         val data = testService.getTestDetail(testId, currentUser())

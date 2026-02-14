@@ -16,45 +16,6 @@
   user-select: none;
 }
 
-.diagnostic-hero {
-  padding: 48px clamp(20px, 5vw, 80px) 24px;
-  display: grid;
-  gap: 14px;
-}
-
-.diagnostic-hero h1 {
-  margin: 0;
-  font-size: clamp(28px, 3.2vw, 44px);
-  font-weight: 800;
-  font-family: var(--font-display);
-}
-
-.diagnostic-hero p {
-  margin: 0;
-  color: #5a4a43;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-.diagnostic-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(240, 108, 36, 0.14);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
-
-.diagnostic-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  font-size: 13px;
-  color: #6b5b53;
-}
-
 .diagnostic-panel {
   padding: 0 clamp(20px, 5vw, 80px) 60px;
   display: grid;
@@ -104,22 +65,6 @@
   border: none;
 }
 
-.pdf-fallback {
-  display: grid;
-  place-items: center;
-  gap: 8px;
-  height: 100%;
-  text-align: center;
-  font-size: 15px;
-  color: #6b5b53;
-}
-
-.pdf-fallback a {
-  color: #d85a16;
-  font-weight: 700;
-  text-decoration: none;
-}
-
 .diagnostic-actions {
   display: flex;
   flex-wrap: wrap;
@@ -154,123 +99,97 @@
   cursor: default;
 }
 
-.print-hint {
-  font-size: 13px;
-  color: #6b5b53;
-}
-
-.omr-page .diagnostic-panel {
-  width: 100%;
-}
-
-.omr-sheet {
-  width: min(100%, 920px);
-  background: #fff;
-  border-radius: 24px;
-  border: 1px solid rgba(240, 108, 36, 0.18);
-  box-shadow: 0 20px 40px rgba(240, 108, 36, 0.12);
-  padding: 28px;
-  display: grid;
-  gap: 16px;
-}
-
-.omr-header {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.omr-title {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 700;
-}
-
-.omr-progress {
-  display: inline-flex;
-  gap: 12px;
-  font-size: 13px;
-  color: #6b5b53;
-}
-
-.omr-error {
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(192, 57, 43, 0.08);
-  color: #c0392b;
-  font-size: 13px;
-}
-
-.omr-success {
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(78, 138, 96, 0.12);
-  color: #3e6f4d;
-  font-size: 13px;
+/* ── 레벨 선택 화면 ── */
+.diag-select-header {
   text-align: center;
+  padding: 48px 20px 24px;
 }
 
-.omr-grid {
+.diag-select-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  font-family: var(--font-display);
+}
+
+.diag-select-header p {
+  margin: 0;
+  color: #5a4a43;
+  font-size: 15px;
+}
+
+.diag-level-grid {
   display: grid;
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  width: min(100%, 920px);
 }
 
-.omr-row {
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 12px;
-  align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px dashed rgba(43, 34, 29, 0.12);
-}
-
-.omr-row:last-child {
-  border-bottom: none;
-}
-
-.omr-number {
-  font-weight: 700;
-  color: #4d3c35;
-}
-
-.omr-choices {
+.diag-level-card {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
   gap: 8px;
-}
-
-.omr-choice {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(43, 34, 29, 0.16);
-  font-size: 14px;
-  cursor: pointer;
+  padding: 28px 20px;
   background: #fff;
+  border: 2px solid rgba(240, 108, 36, 0.18);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
 }
 
-.omr-choice input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.omr-choice.active {
+.diag-level-card:hover:not(:disabled) {
   border-color: #f06c24;
-  background: rgba(240, 108, 36, 0.12);
-  color: #a94f1b;
+  box-shadow: 0 8px 24px rgba(240, 108, 36, 0.18);
+  transform: translateY(-2px);
 }
 
-.omr-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
+.diag-level-card:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.diag-level-card.done {
+  border-color: rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.04);
+}
+
+.diag-level-icon {
+  font-size: 36px;
+  color: #f06c24;
+}
+
+.diag-level-card.done .diag-level-icon {
+  color: #22c55e;
+}
+
+.diag-level-label {
+  font-size: 18px;
+  font-weight: 800;
+  color: #2b221d;
+}
+
+.diag-level-desc {
+  font-size: 13px;
+  color: #6b5b53;
+}
+
+.diag-level-meta {
+  font-size: 12px;
+  color: #94857b;
+  margin-top: 4px;
+}
+
+.diag-level-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.14);
+  color: #16a34a;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 @media (max-width: 720px) {
@@ -280,11 +199,14 @@
   .pdf-shell {
     height: min(70vh, 720px);
   }
-  .omr-row {
-    grid-template-columns: 28px 1fr;
+  .diag-level-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .omr-sheet {
-    padding: 20px;
+}
+
+@media (max-width: 480px) {
+  .diag-level-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -292,11 +214,10 @@
   .diagnostic-page {
     background: #fff;
   }
-  .diagnostic-hero,
   .diagnostic-actions,
-  .print-hint,
   .watermark,
-  .screen-shield {
+  .screen-shield,
+  .diag-select-header {
     display: none;
   }
   .diagnostic-panel {

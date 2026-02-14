@@ -28,7 +28,7 @@ import AdminParentLinksPage from "./pages/AdminParentLinksPage";
 import AdminContentUploadPage from "./pages/AdminContentUploadPage";
 import AdminContentPreviewPage from "./pages/AdminContentPreviewPage";
 import DiagnosticPrintPage from "./pages/DiagnosticPrintPage";
-import OmrEntryPage from "./pages/OmrEntryPage";
+
 import RankingPage from "./pages/RankingPage";
 import ParentLinksPage from "./pages/ParentLinksPage";
 import StudentLinkConfirmPage from "./pages/StudentLinkConfirmPage";
@@ -124,7 +124,7 @@ function App() {
         <Route path="/admin/reports" element={<AdminReportsPage />} />
         <Route path="/admin/flags" element={<AdminFlagsPage />} />
         <Route path="/diagnostic/print" element={<DiagnosticPrintPage />} />
-        <Route path="/omr" element={<OmrEntryPage />} />
+
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/parents/links" element={<ParentLinksPage />} />
         <Route path="/students/links/confirm" element={<StudentLinkConfirmPage />} />

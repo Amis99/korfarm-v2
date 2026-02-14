@@ -120,7 +120,7 @@ function ProTestPage() {
     setError("");
     try {
       // 문항 정보 로드
-      const qs = await apiGet(`/v1/tests/${session.testId}/questions`);
+      const qs = await apiGet(`/v1/test-storage/${session.testId}/questions`);
       setQuestions(Array.isArray(qs) ? qs : []);
       setAnswers({});
       setPhase("omr_input");

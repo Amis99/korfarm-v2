@@ -9,6 +9,7 @@ function TestReportPage() {
   const { testId } = useParams();
   const [searchParams] = useSearchParams();
   const studentId = searchParams.get("studentId");
+  const fromDiagnostic = searchParams.get("from") === "diagnostic";
   const { isLoggedIn, user } = useAuth();
   const navigate = useNavigate();
   const [report, setReport] = useState(null);
@@ -33,8 +34,8 @@ function TestReportPage() {
   return (
     <div className="ts-page ts-report-page">
       <div className="ts-back-row ts-no-print">
-        <Link to={studentId ? `/admin/tests/${testId}` : `/tests/${testId}`} className="ts-back-link">
-          <span className="material-symbols-outlined">arrow_back</span> {studentId ? "시험 관리" : "시험 상세"}
+        <Link to={studentId ? `/admin/tests/${testId}` : fromDiagnostic ? "/diagnostic/print" : `/tests/${testId}`} className="ts-back-link">
+          <span className="material-symbols-outlined">arrow_back</span> {studentId ? "시험 관리" : fromDiagnostic ? "진단 테스트" : "시험 상세"}
         </Link>
       </div>
 
@@ -130,9 +131,14 @@ function TestReportPage() {
           <span className="material-symbols-outlined">error_outline</span>
           오답 노트
         </button>
-        <Link to={studentId ? `/admin/tests/${testId}` : "/tests"} className="ts-btn ts-btn-outline">
-          {studentId ? "시험 관리로" : "목록으로"}
+        <Link to={studentId ? `/admin/tests/${testId}` : fromDiagnostic ? "/diagnostic/print" : "/tests"} className="ts-btn ts-btn-outline">
+          {studentId ? "시험 관리로" : fromDiagnostic ? "진단 테스트로" : "목록으로"}
         </Link>
+        {fromDiagnostic && (
+          <Link to="/start" className="ts-btn ts-btn-primary">
+            학습 시작하기
+          </Link>
+        )}
       </div>
     </div>
   );

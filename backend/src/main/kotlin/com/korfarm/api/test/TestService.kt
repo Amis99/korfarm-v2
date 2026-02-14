@@ -30,7 +30,7 @@ class TestService(
         val userOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }
 
         var papers = testPaperRepo.findByStatus("open")
-            .filter { it.series != "chapter" }  // 프로 모드 챕터 테스트 제외
+            .filter { it.series != "chapter" && it.series != "diagnostic" }  // 프로 모드 챕터 테스트 + 진단 테스트 제외
 
         // source 필터: "hq" = 본사(orgId가 null), "org" = 소속 기관
         if (source == "hq") {
@@ -66,6 +66,34 @@ class TestService(
                 series = p.series,
                 orgId = p.orgId,
                 orgName = p.orgId?.let { orgMap[it]?.name },
+                hasSubmitted = sub != null,
+                score = sub?.score,
+                createdAt = p.createdAt
+            )
+        }
+    }
+
+    // ─── Student: 진단 테스트 목록 ───
+    @Transactional(readOnly = true)
+    fun listDiagnosticTests(userId: String): List<TestPaperSummary> {
+        val papers = testPaperRepo.findByStatus("open")
+            .filter { it.series == "diagnostic" }
+
+        val submissions = submissionRepo.findByUserId(userId).associateBy { it.testId }
+        return papers.sortedByDescending { it.createdAt }.map { p ->
+            val sub = submissions[p.id]
+            TestPaperSummary(
+                testId = p.id,
+                title = p.title,
+                description = p.description,
+                levelId = p.levelId,
+                totalQuestions = p.totalQuestions,
+                totalPoints = p.totalPoints,
+                timeLimitMinutes = p.timeLimitMinutes,
+                examDate = p.examDate?.toString(),
+                series = p.series,
+                orgId = p.orgId,
+                orgName = null,
                 hasSubmitted = sub != null,
                 score = sub?.score,
                 createdAt = p.createdAt
