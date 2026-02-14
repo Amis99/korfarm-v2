@@ -49,14 +49,14 @@ function AdminLayout({ children }) {
 
         <aside className={`admin-side ${open ? "open" : ""}`}>
           <div className="admin-side-header">
-            <div className="admin-brand" aria-label="국어농장 Admin">
+            <Link to="/" className="admin-brand" aria-label="국어농장 Admin">
               <img
                 className="admin-logo"
                 src={import.meta.env.BASE_URL + "korfarm-logo.png"}
                 alt="국어농장"
               />
               <span>Admin</span>
-            </div>
+            </Link>
             <button
               className="admin-side-close"
               type="button"
