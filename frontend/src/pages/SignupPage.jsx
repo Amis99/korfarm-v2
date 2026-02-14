@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OrgSelect from "../components/OrgSelect";
 import "../styles/auth.css";
@@ -72,6 +72,8 @@ function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [idCheckStatus, setIdCheckStatus] = useState(""); // "" | "checking" | "available" | "taken"
+  const idCheckTimer = useRef(null);
   const navigate = useNavigate();
 
   // 학부모 전용 필드
@@ -80,6 +82,36 @@ function SignupPage() {
   const [linkedParentPhone, setLinkedParentPhone] = useState("");
 
   const isAutoApprove = orgId === ORG_HQ_ID;
+
+  const checkLoginId = useCallback(async (value) => {
+    const trimmed = value.trim();
+    if (trimmed.length < 3) {
+      setIdCheckStatus("");
+      return;
+    }
+    setIdCheckStatus("checking");
+    try {
+      const res = await fetch(`${API_BASE}/v1/auth/check-login-id?loginId=${encodeURIComponent(trimmed)}`);
+      const payload = await res.json();
+      if (res.ok && payload?.success) {
+        setIdCheckStatus(payload.data.available ? "available" : "taken");
+      } else {
+        setIdCheckStatus("");
+      }
+    } catch {
+      setIdCheckStatus("");
+    }
+  }, []);
+
+  const handleLoginIdChange = (value) => {
+    setLoginId(value);
+    if (idCheckTimer.current) clearTimeout(idCheckTimer.current);
+    if (value.trim().length < 3) {
+      setIdCheckStatus("");
+      return;
+    }
+    idCheckTimer.current = setTimeout(() => checkLoginId(value), 500);
+  };
 
   useEffect(() => {
     const loadOrgs = async () => {
@@ -109,6 +141,11 @@ function SignupPage() {
 
     if (!orgId) {
       setError("소속 기관을 선택해 주세요.");
+      return;
+    }
+
+    if (idCheckStatus === "taken") {
+      setError("이미 사용 중인 아이디입니다. 다른 아이디를 입력해 주세요.");
       return;
     }
 
@@ -303,10 +340,19 @@ function SignupPage() {
                 <input
                   type="text"
                   value={loginId}
-                  onChange={(event) => setLoginId(event.target.value)}
-                  placeholder="아이디를 입력하세요"
+                  onChange={(event) => handleLoginIdChange(event.target.value)}
+                  placeholder="아이디를 입력하세요 (3자 이상)"
                   required
                 />
+                {idCheckStatus === "checking" && (
+                  <span style={{ fontSize: 12, color: "#999" }}>확인 중...</span>
+                )}
+                {idCheckStatus === "available" && (
+                  <span style={{ fontSize: 12, color: "#27ae60" }}>사용 가능한 아이디입니다.</span>
+                )}
+                {idCheckStatus === "taken" && (
+                  <span style={{ fontSize: 12, color: "#c0392b" }}>이미 사용 중인 아이디입니다.</span>
+                )}
               </label>
               <label>
                 비밀번호

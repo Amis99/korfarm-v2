@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import jakarta.validation.Valid
 
@@ -24,6 +25,12 @@ class AuthController(
     private val userRepository: UserRepository,
     private val orgService: OrgService
 ) {
+    @GetMapping("/check-login-id")
+    fun checkLoginId(@RequestParam loginId: String): ApiResponse<Map<String, Boolean>> {
+        val exists = userRepository.existsByEmail(loginId)
+        return ApiResponse(success = true, data = mapOf("available" to !exists))
+    }
+
     @PostMapping("/signup")
     fun signup(@Valid @RequestBody request: SignupRequest): ApiResponse<AuthResponseData> {
         val data = authService.signup(request)
