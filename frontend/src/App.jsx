@@ -55,6 +55,7 @@ import TestWrongNotePage from "./pages/TestWrongNotePage";
 import TestHistoryPage from "./pages/TestHistoryPage";
 import AdminTestPage from "./pages/AdminTestPage";
 import AdminTestDetailPage from "./pages/AdminTestDetailPage";
+import AdminProPage from "./pages/AdminProPage";
 import HarvestLedgerPage from "./pages/HarvestLedgerPage";
 import SeedLogPage from "./pages/SeedLogPage";
 import DuelMainPage from "./pages/DuelMainPage";
@@ -150,6 +151,7 @@ function App() {
         <Route path="/tests/:testId/wrong-note" element={<TestWrongNotePage />} />
         <Route path="/admin/tests" element={<AdminTestPage />} />
         <Route path="/admin/tests/:testId" element={<AdminTestDetailPage />} />
+        <Route path="/admin/pro" element={<AdminProPage />} />
         <Route path="/admin/duel/questions" element={<AdminDuelQuestionsPage />} />
         <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />
         <Route path="/seed-log" element={<Navigate to="/tests/history" replace />} />
