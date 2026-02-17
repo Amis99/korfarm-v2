@@ -80,7 +80,7 @@ function InventoryModal({ student, onClose }) {
     try {
       const data = await apiGet(`/v1/admin/students/${student.id}/ledger`);
       setLedger(Array.isArray(data) ? data.slice(0, 20) : []);
-    } catch (_) {}
+    } catch (e) { console.error(e); }
   }, [student.id]);
 
   useEffect(() => { fetchInventory(); fetchLedger(); }, [fetchInventory, fetchLedger]);
@@ -276,8 +276,8 @@ function AdminStudentsPage() {
   }, [students]);
 
   useEffect(() => {
-    apiGet("/v1/admin/orgs").then((data) => setOrgs(Array.isArray(data) ? data : [])).catch(() => {});
-    apiGet("/v1/admin/classes").then((data) => setClasses(Array.isArray(data) ? data : [])).catch(() => {});
+    apiGet("/v1/admin/orgs").then((data) => setOrgs(Array.isArray(data) ? data : [])).catch((e) => console.error(e));
+    apiGet("/v1/admin/classes").then((data) => setClasses(Array.isArray(data) ? data : [])).catch((e) => console.error(e));
   }, []);
 
   const filteredClasses = useMemo(() => {

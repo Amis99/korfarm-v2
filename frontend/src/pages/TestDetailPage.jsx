@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet } from "../utils/api";
+import { apiGet, API_BASE } from "../utils/api";
 import "../styles/test-storage.css";
 
 function TestDetailPage() {
@@ -23,7 +23,6 @@ function TestDetailPage() {
   if (loading) return <div className="ts-page ts-center"><p>불러오는 중...</p></div>;
   if (!test) return null;
 
-  const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
   const token = localStorage.getItem("korfarm_token");
   const pdfUrl = test.pdfFileId
     ? `${API_BASE}/v1/files/${test.pdfFileId}/download`

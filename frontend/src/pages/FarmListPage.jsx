@@ -55,7 +55,7 @@ function FarmListPage() {
     if (!contentIds.length) return;
     apiPost("/v1/learning/farm/progress", { content_ids: contentIds })
       .then((data) => setProgress(data))
-      .catch(() => {});
+      .catch((e) => console.error(e));
   }, [allItems]);
 
   // progressModal이 열릴 때 page-progress API 호출

@@ -90,6 +90,19 @@ class AuthController(
         return ApiResponse(success = true, data = profile)
     }
 
+    @PostMapping("/request-password-reset")
+    fun requestPasswordReset(@RequestBody body: Map<String, String>): ApiResponse<Map<String, String>> {
+        val loginId = body["loginId"]
+            ?: throw ApiException("BAD_REQUEST", "loginId 필수", HttpStatus.BAD_REQUEST)
+        val exists = userRepository.existsByEmail(loginId)
+        if (!exists) {
+            throw ApiException("NOT_FOUND", "해당 아이디를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+        }
+        return ApiResponse(success = true, data = mapOf(
+            "message" to "비밀번호 초기화 요청이 접수되었습니다. 선생님 또는 관리자에게 문의하세요."
+        ))
+    }
+
     @GetMapping("/orgs")
     fun orgs(): ApiResponse<List<com.korfarm.api.org.OrgSummary>> {
         val data = orgService.listActiveOrgs()

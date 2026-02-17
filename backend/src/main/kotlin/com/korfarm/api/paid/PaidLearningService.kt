@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
+@Deprecated("레거시 서비스 - 각 도메인별 전용 서비스로 대체됨")
 @Service
 class PaidLearningService(
     private val contentRepository: ContentRepository,

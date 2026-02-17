@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EngineShell from "../engine/core/EngineShell";
-import { apiPost } from "../utils/api";
-
-const TOKEN_KEY = "korfarm_token";
+import { apiPost, TOKEN_KEY } from "../utils/api";
 const BASE = import.meta.env.BASE_URL || "/";
 
 const LEVEL_FOLDER_MAP = {
@@ -124,7 +122,7 @@ function DailyQuizPage() {
           apiPost("/v1/learning/farm/start", {
             content_id: quizData.contentId || `daily-quiz-${folder}-${dayStr}`,
             content_type: "DAILY_QUIZ",
-          }).then((res) => { if (!cancelled) setFarmLogId(res.log_id ?? res.logId); }).catch(() => {});
+          }).then((res) => { if (!cancelled) setFarmLogId(res.log_id ?? res.logId); }).catch((e) => console.error(e));
         }
       } catch (err) {
         if (!cancelled) setError(err.message);

@@ -65,7 +65,7 @@ function LearningRunnerPage() {
       content_type: learning.contentType,
     })
       .then((res) => setFarmLogId(res.log_id ?? res.logId))
-      .catch(() => {});
+      .catch((e) => console.error(e));
   }, [learningId]);
 
   // content_pdf인 경우 page-progress 조회하여 startPage 결정
@@ -104,7 +104,7 @@ function LearningRunnerPage() {
   // 학습 종료 시 과제 자동 제출 + 프로 모드 완료
   const handleExit = useCallback(() => {
     if (proItemId) {
-      apiPost("/v1/pro/progress/complete", { itemId: proItemId }).catch(() => {});
+      apiPost("/v1/pro/progress/complete", { itemId: proItemId }).catch((e) => console.error(e));
     }
     if (assignmentId && !assignmentSubmitted) {
       setAssignmentSubmitted(true);
@@ -113,7 +113,7 @@ function LearningRunnerPage() {
           completedAt: new Date().toISOString(),
           contentId: learning?.contentId || learningId,
         },
-      }).catch(() => {});
+      }).catch((e) => console.error(e));
     }
     navigate(exitPath);
   }, [assignmentId, assignmentSubmitted, exitPath, navigate, learning, learningId, proItemId]);

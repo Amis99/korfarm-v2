@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_BASE, TOKEN_KEY } from "../utils/api";
 import "../styles/auth.css";
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
-const TOKEN_KEY = "korfarm_token";
 
 function LoginPage() {
   const [loginId, setLoginId] = useState("");

@@ -232,7 +232,7 @@ function ContentPdfModule({ content }) {
       logId: farmLogId || "",
       contentId: content?.contentId || "",
       pageNo: currentContentPage,
-    }).catch(() => {});
+    }).catch((e) => console.error(e));
   };
 
   const handleNext = () => {

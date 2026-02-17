@@ -51,7 +51,7 @@ function PdfPageViewer({ pdfUrl, pageNo, onReady }) {
       renderTaskRef.current = task;
       task.promise
         .then(() => { renderTaskRef.current = null; })
-        .catch(() => {});
+        .catch((e) => console.error(e));
     });
   }, [pdfDoc, pageNo]);
 

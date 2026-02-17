@@ -2,10 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
-import {
-  COMMUNITY_BOARDS,
-  COMMUNITY_POSTS,
-} from "../data/communityBoards";
+import { COMMUNITY_BOARDS } from "../data/communityBoards";
 import "../styles/community.css";
 
 const DEFAULT_BOARD_ID = "community";
@@ -21,6 +18,12 @@ const statusLabel = (status) => {
   }
 };
 
+const formatDate = (dt) => {
+  if (!dt) return "";
+  const d = new Date(dt);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};
+
 function CommunityPage() {
   const [params] = useSearchParams();
   const { user, isPremium, isLoggedIn } = useAuth();
@@ -29,8 +32,9 @@ function CommunityPage() {
   const boardId = params.get("board") || DEFAULT_BOARD_ID;
   const board =
     COMMUNITY_BOARDS.find((b) => b.id === boardId) || COMMUNITY_BOARDS[0];
-  const posts = COMMUNITY_POSTS.filter((p) => p.boardId === board.id);
 
+  const [posts, setPosts] = useState([]);
+  const [postsLoading, setPostsLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [selectedId, setSelectedId] = useState(null);
@@ -45,25 +49,38 @@ function CommunityPage() {
         const st = sub?.status;
         if (st === "active" || st === "canceled") setSubActive(true);
       })
-      .catch(() => {});
+      .catch((e) => console.error(e));
   }, [isLoggedIn]);
 
-  // 유료 회원 여부 (토큰 roles 또는 구독 상태)
-  const hasPremium = isPremium || subActive || isAdmin;
-
+  // 게시글 API 로드
   useEffect(() => {
+    setPostsLoading(true);
+    setPosts([]);
     setSelectedId(null);
     setPage(1);
     setSearch("");
+    apiGet(`/v1/boards/${boardId}/posts`)
+      .then((data) => {
+        const items = Array.isArray(data) ? data : data?.items || [];
+        setPosts(items);
+      })
+      .catch((e) => {
+        console.error(e);
+        setPosts([]);
+      })
+      .finally(() => setPostsLoading(false));
   }, [boardId]);
+
+  // 유료 회원 여부 (토큰 roles 또는 구독 상태)
+  const hasPremium = isPremium || subActive || isAdmin;
 
   const filtered = useMemo(() => {
     if (!search.trim()) return posts;
     const q = search.trim().toLowerCase();
     return posts.filter(
       (p) =>
-        p.title.toLowerCase().includes(q) ||
-        p.author.toLowerCase().includes(q)
+        (p.title || "").toLowerCase().includes(q) ||
+        (p.authorId || "").toLowerCase().includes(q)
     );
   }, [posts, search]);
 
@@ -74,7 +91,7 @@ function CommunityPage() {
   }, [page, filtered]);
 
   const selectedPost = selectedId
-    ? posts.find((p) => p.id === selectedId)
+    ? posts.find((p) => (p.postId || p.id) === selectedId)
     : null;
 
   /* 자료실은 관리자만 글쓰기 가능 */
@@ -175,30 +192,14 @@ function CommunityPage() {
             <div className="comm-detail-head">
               <h3>{selectedPost.title}</h3>
               <div className="comm-detail-meta">
-                <span>{selectedPost.author}</span>
-                <span>{selectedPost.time}</span>
+                <span>{selectedPost.authorId}</span>
+                <span>{formatDate(selectedPost.createdAt)}</span>
                 {statusLabel(selectedPost.status) && (
                   <span className="comm-status">{statusLabel(selectedPost.status)}</span>
                 )}
               </div>
             </div>
-            <div className="comm-detail-body">{selectedPost.excerpt}</div>
-
-            {selectedPost.attachments && selectedPost.attachments.length > 0 && (
-              <div className="comm-attachments">
-                <h4>첨부파일</h4>
-                {selectedPost.attachments.map((file) => (
-                  <div key={file.id} className="comm-file-row">
-                    <span className="material-symbols-outlined">attach_file</span>
-                    <span className="comm-file-name">{file.name}</span>
-                    <span className="comm-file-size">{file.size}</span>
-                    <a href={`/v1/files/${file.id}/download`} className="comm-file-dl">
-                      다운로드
-                    </a>
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="comm-detail-body">{selectedPost.content || selectedPost.excerpt}</div>
 
             <div className="comm-detail-actions">
               <button
@@ -210,7 +211,7 @@ function CommunityPage() {
               </button>
               <Link
                 className="comm-btn-text"
-                to={`/community/post/${selectedPost.id}?board=${board.id}`}
+                to={`/community/post/${selectedPost.postId || selectedPost.id}?board=${board.id}`}
               >
                 전체 보기
               </Link>
@@ -229,7 +230,11 @@ function CommunityPage() {
                 </tr>
               </thead>
               <tbody>
-                {paged.length === 0 ? (
+                {postsLoading ? (
+                  <tr>
+                    <td colSpan={4} className="comm-empty">불러오는 중...</td>
+                  </tr>
+                ) : paged.length === 0 ? (
                   <tr>
                     <td colSpan={4} className="comm-empty">
                       {search ? "검색 결과가 없습니다." : "등록된 게시글이 없습니다."}
@@ -238,9 +243,9 @@ function CommunityPage() {
                 ) : (
                   paged.map((post, idx) => (
                     <tr
-                      key={post.id}
+                      key={post.postId || post.id}
                       className="comm-row"
-                      onClick={() => setSelectedId(post.id)}
+                      onClick={() => setSelectedId(post.postId || post.id)}
                     >
                       <td className="comm-td-num">
                         {filtered.length - ((page - 1) * postsPerPage + idx)}
@@ -248,15 +253,12 @@ function CommunityPage() {
                       <td className="comm-td-title">
                         <span className="comm-tag">{board.tag}</span>
                         {post.title}
-                        {post.attachments && post.attachments.length > 0 && (
-                          <span className="material-symbols-outlined comm-clip">attach_file</span>
-                        )}
                         {statusLabel(post.status) && (
                           <span className="comm-status">{statusLabel(post.status)}</span>
                         )}
                       </td>
-                      <td className="comm-td-author">{post.author}</td>
-                      <td className="comm-td-date">{post.time}</td>
+                      <td className="comm-td-author">{post.authorId}</td>
+                      <td className="comm-td-date">{formatDate(post.createdAt)}</td>
                     </tr>
                   ))
                 )}

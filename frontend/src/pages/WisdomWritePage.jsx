@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useParams, useNavigate, useSearchParams } from "react-router-dom";
-import { apiPost } from "../utils/api";
+import { apiPost, API_BASE, TOKEN_KEY } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
 import "../styles/wisdom.css";
 
@@ -25,9 +25,6 @@ const GRID_CONFIG = {
   wittgenstein2: { cols: 20, rows: 25 },
   wittgenstein3: { cols: 20, rows: 25 },
 };
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
-const TOKEN_KEY = "korfarm_token";
 
 function WisdomWritePage() {
   const { levelId } = useParams();

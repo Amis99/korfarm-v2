@@ -22,7 +22,7 @@ function ProModePage() {
         setUserLevel(me?.levelId || "");
         setChapters(chaps || []);
       })
-      .catch(() => {})
+      .catch((e) => console.error(e))
       .finally(() => setLoading(false));
   }, [isLoggedIn]);
 

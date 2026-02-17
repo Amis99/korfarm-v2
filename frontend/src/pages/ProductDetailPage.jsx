@@ -1,5 +1,7 @@
-import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { SHOP_CATEGORIES, SHOP_PRODUCTS } from "../data/shopCatalog";
+import { apiPost } from "../utils/api";
 import "../styles/commerce.css";
 
 const formatPrice = (value) =>
@@ -7,10 +9,31 @@ const formatPrice = (value) =>
 
 function ProductDetailPage() {
   const { productId } = useParams();
+  const navigate = useNavigate();
+  const [ordering, setOrdering] = useState(false);
+  const [error, setError] = useState("");
+
   const product = SHOP_PRODUCTS.find((item) => item.id === productId);
   const categoryLabel = SHOP_CATEGORIES.find(
     (item) => item.id === product?.category
   )?.label;
+
+  const handleBuyNow = async () => {
+    setOrdering(true);
+    setError("");
+    try {
+      const data = await apiPost("/v1/shop/orders", {
+        items: [{ productId: product.id, quantity: 1 }],
+        address: {},
+      });
+      const orderId = data.orderId || data.id;
+      navigate(`/payment/result?orderId=${orderId}`);
+    } catch (e) {
+      setError(e.message || "주문에 실패했습니다.");
+    } finally {
+      setOrdering(false);
+    }
+  };
 
   if (!product) {
     return (
@@ -49,13 +72,16 @@ function ProductDetailPage() {
               <li key={item}>{item}</li>
             ))}
           </ul>
+          {error && <p style={{ color: "#e74c3c", fontSize: 14 }}>{error}</p>}
           <div className="commerce-summary-actions">
-            <button className="commerce-btn" type="button">
-              장바구니 담기
+            <button
+              className="commerce-btn"
+              type="button"
+              onClick={handleBuyNow}
+              disabled={ordering}
+            >
+              {ordering ? "주문 중..." : "바로 구매"}
             </button>
-            <Link className="commerce-btn" to="/payment/result">
-              바로 구매
-            </Link>
             <Link className="commerce-btn ghost" to="/shop">
               목록으로
             </Link>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
+@Deprecated("레거시 컨트롤러 - ProController, FarmLearningController, TestController, WisdomController, EconomyController로 대체됨")
 @RestController
 @RequestMapping("/v1")
 class PaidLearningController(

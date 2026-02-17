@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet, apiPost, apiPut } from "../utils/adminApi";
+import { API_BASE } from "../utils/api";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
 
 /* 레벨 라벨 헬퍼 */
 const LEVEL_LABEL_MAP = {
@@ -193,8 +192,8 @@ function AdminContentUploadPage() {
           const data = await resp.json();
           if (!cancelled) setJsonText(JSON.stringify(data, null, 2));
         } else {
-          /* DB 콘텐츠 */
-          const data = await apiGet(`/v1/admin/content/${editId}`);
+          /* DB 콘텐츠 — preview 엔드포인트로 상세 조회 */
+          const data = await apiGet(`/v1/admin/content/${editId}/preview`);
           if (!cancelled) {
             setEditMeta({
               id: editId,
@@ -202,7 +201,7 @@ function AdminContentUploadPage() {
               type: data.contentType || data.content_type || "",
               jsonPath: "",
             });
-            setJsonText(JSON.stringify(data, null, 2));
+            setJsonText(JSON.stringify(data.content || data, null, 2));
           }
         }
       } catch (err) {
@@ -276,7 +275,7 @@ function AdminContentUploadPage() {
   /* 클립보드 복사 */
   const handleCopyJson = () => {
     if (!jsonText) return;
-    navigator.clipboard.writeText(jsonText).catch(() => {});
+    navigator.clipboard.writeText(jsonText).catch((e) => console.error(e));
   };
 
   /* 표준 양식 다운로드 */

@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { API_BASE as DEFAULT_API_BASE, TOKEN_KEY } from "../utils/api";
 import "../App.css";
-
-const DEFAULT_API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
-const TOKEN_KEY = "korfarm_token";
 
 const SAMPLE_SUBMIT = {
   answers: [{ questionId: "q_001", answer: "A" }],
@@ -526,8 +524,8 @@ const ACTION_GROUPS = [
   },
   {
     id: "paid",
-    title: "유료 학습",
-    description: "구독 사용자 전용 콘텐츠",
+    title: "유료 학습 (레거시)",
+    description: "레거시 API - ProController, FarmLearningController 등으로 대체됨",
     actions: [
       {
         id: "proLevels",

@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet } from "../utils/api";
+import { apiGet, TOKEN_KEY } from "../utils/api";
 import HarvestCraftModal from "../components/HarvestCraftModal";
 import "../styles/start.css";
-
-const TOKEN_KEY = "korfarm_token";
 
 const LEVEL_LABEL_MAP = {
   saussure1: "소쉬르 1",
@@ -94,7 +92,7 @@ function StartPage() {
           setSelectedChild(activeLinks[0]);
         }
       })
-      .catch(() => {});
+      .catch((e) => console.error(e));
   }, [isLoggedIn, isParent]);
 
   // 선택된 자녀 정보 가져오기
@@ -113,24 +111,24 @@ function StartPage() {
     if (!isLoggedIn) return;
     // 부모가 아닌 경우에만 자신의 인벤토리/구독 조회
     if (!isParent) {
-      apiGet("/v1/inventory").then(setInventory).catch(() => {});
+      apiGet("/v1/inventory").then(setInventory).catch((e) => console.error(e));
       apiGet("/v1/subscription")
         .then((sub) => {
           const st = sub?.status;
           if (st === "active" || st === "canceled") setSubActive(true);
         })
-        .catch(() => {});
+        .catch((e) => console.error(e));
     }
     apiGet("/v1/seasons/current")
       .then((season) => {
         if (season?.id) {
-          apiGet(`/v1/seasons/${season.id}/harvest-rankings`).then((r) => setHarvestRanking(r?.items || r || [])).catch(() => {});
+          apiGet(`/v1/seasons/${season.id}/harvest-rankings`).then((r) => setHarvestRanking(r?.items || r || [])).catch((e) => console.error(e));
           if (!isParent) {
-            apiGet(`/v1/seasons/${season.id}/duel-rankings`).then((r) => setDuelRanking(r?.items || r || [])).catch(() => {});
+            apiGet(`/v1/seasons/${season.id}/duel-rankings`).then((r) => setDuelRanking(r?.items || r || [])).catch((e) => console.error(e));
           }
         }
       })
-      .catch(() => {});
+      .catch((e) => console.error(e));
     apiGet("/v1/auth/me").then((data) => {
       // pending 상태 확인: 승인 대기 중이면 pending 페이지로 리다이렉트
       const isPending = data?.pending_approval || data?.pendingApproval;
@@ -153,11 +151,11 @@ function StartPage() {
             fetch(`${base}daily-reading/${lid}/001.json`)
               .then((r2) => (r2.ok ? r2.json() : null))
               .then((d2) => { if (d2?.title) setReadingTitle(d2.title); })
-              .catch(() => {});
+              .catch((e) => console.error(e));
           })
-          .catch(() => {});
+          .catch((e) => console.error(e));
       }
-    }).catch(() => {});
+    }).catch((e) => console.error(e));
     // 관리자인 경우 기본 레벨을 override 초기값으로 설정
     if (!isParent) {
       apiGet("/v1/ledger")
@@ -165,7 +163,7 @@ function StartPage() {
           const seeds = (entries || []).filter((e) => e.currencyType === "seed").slice(0, 5);
           setSeedLog(seeds);
         })
-        .catch(() => {});
+        .catch((e) => console.error(e));
     }
   }, [isLoggedIn, isParent]);
 
@@ -183,9 +181,9 @@ function StartPage() {
         fetch(`${base}daily-reading/${adminLevelOverride}/001.json`)
           .then((r2) => (r2.ok ? r2.json() : null))
           .then((d2) => { if (d2?.title) setReadingTitle(d2.title); })
-          .catch(() => {});
+          .catch((e) => console.error(e));
       })
-      .catch(() => {});
+      .catch((e) => console.error(e));
   }, [adminLevelOverride, isAdmin, profile]);
 
   const hasSub = isPremium || subActive;

@@ -1,6 +1,5 @@
 import { useMemo } from "react";
-
-const TOKEN_KEY = "korfarm_token";
+import { TOKEN_KEY } from "../utils/api";
 
 export function useAuth() {
   const token = typeof window !== "undefined" ? localStorage.getItem(TOKEN_KEY) : null;

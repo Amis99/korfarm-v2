@@ -65,7 +65,7 @@ function HarvestCraftModal({ open, onClose, onCrafted }) {
     try {
       let lastData = null;
       for (let i = 0; i < quantity; i++) {
-        lastData = await apiPost("/v1/economy/harvest/craft", {
+        lastData = await apiPost("/v1/harvest/craft", {
           seedType: current.key,
           useFertilizer,
         });

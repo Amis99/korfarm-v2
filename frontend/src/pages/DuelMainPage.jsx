@@ -32,12 +32,12 @@ function DuelMainPage() {
             [server.id]: { roomCount: list.length },
           }));
         })
-        .catch(() => {});
+        .catch((e) => console.error(e));
     });
 
     apiGet("/v1/duel/stats?serverId=frege")
       .then((stats) => setMyStats(stats))
-      .catch(() => {});
+      .catch((e) => console.error(e));
   }, [isLoggedIn, navigate]);
 
   return (

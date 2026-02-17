@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { TOKEN_KEY } from "../utils/api";
 import "../styles/auth.css";
-
-const TOKEN_KEY = "korfarm_token";
 
 function PendingApprovalPage() {
   const navigate = useNavigate();

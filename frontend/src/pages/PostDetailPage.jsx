@@ -1,8 +1,15 @@
-﻿import { Link, useParams, useSearchParams } from "react-router-dom";
-import { COMMUNITY_BOARDS, COMMUNITY_POSTS } from "../data/communityBoards";
+import { useEffect, useState } from "react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import { apiGet, apiPost } from "../utils/api";
+import { COMMUNITY_BOARDS } from "../data/communityBoards";
 import "../styles/community.css";
 
-const formatSize = (size) => size;
+const formatDate = (dt) => {
+  if (!dt) return "";
+  const d = new Date(dt);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};
 
 const statusLabelForPost = (status) => {
   switch (status) {
@@ -19,11 +26,56 @@ function PostDetailPage() {
   const { postId } = useParams();
   const [params] = useSearchParams();
   const boardParam = params.get("board");
-  const post = COMMUNITY_POSTS.find((item) => item.id === postId);
+  const { isLoggedIn } = useAuth();
+
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
   const board =
-    COMMUNITY_BOARDS.find((item) => item.id === post?.boardId) ||
-    COMMUNITY_BOARDS.find((item) => item.id === boardParam) ||
+    COMMUNITY_BOARDS.find((b) => b.id === (post?.boardId || boardParam)) ||
     COMMUNITY_BOARDS[0];
+
+  useEffect(() => {
+    if (!postId) return;
+    setLoading(true);
+    apiGet(`/v1/posts/${postId}`)
+      .then((data) => {
+        setPost(data);
+        setComments(data?.comments || []);
+      })
+      .catch((e) => console.error(e))
+      .finally(() => setLoading(false));
+  }, [postId]);
+
+  const handleSubmitComment = async () => {
+    if (!newComment.trim() || submitting) return;
+    setSubmitting(true);
+    try {
+      const created = await apiPost(`/v1/posts/${postId}/comments`, {
+        content: newComment.trim(),
+      });
+      setComments((prev) => [...prev, created]);
+      setNewComment("");
+    } catch (e) {
+      console.error(e);
+      alert("댓글 등록에 실패했습니다.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="community-page post-detail">
+        <div className="community-wrap">
+          <p style={{ padding: 40, textAlign: "center" }}>불러오는 중...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -53,25 +105,24 @@ function PostDetailPage() {
           </div>
           <div className="community-meta">
             <span>{board.name}</span>
-            <span>{post.author}</span>
-            <span>{post.time}</span>
+            <span>{post.authorId}</span>
+            <span>{formatDate(post.createdAt)}</span>
           </div>
         </div>
-        <div className="post-body">{post.excerpt}</div>
+        <div className="post-body">{post.content}</div>
 
         {attachments.length > 0 && (
           <div className="post-attachments">
             <h3>첨부 자료</h3>
             <ul>
               {attachments.map((file) => (
-                <li key={file.id}>
+                <li key={file.id || file.fileId}>
                   <div>
-                    <strong>{file.name}</strong>
-                    <span>{formatSize(file.size)}</span>
+                    <strong>{file.name || file.fileName}</strong>
                   </div>
                   <a
                     className="community-btn ghost"
-                    href={`/v1/files/${file.id}/download`}
+                    href={`/v1/files/${file.id || file.fileId}/download`}
                   >
                     다운로드
                   </a>
@@ -82,9 +133,44 @@ function PostDetailPage() {
         )}
 
         <div className="post-comments">
-          <h3>댓글</h3>
-          <div className="post-comment">자료 감사합니다!</div>
-          <div className="post-comment">정리 노트가 도움이 되었어요.</div>
+          <h3>댓글 {comments.length > 0 && `(${comments.length})`}</h3>
+          {comments.length === 0 ? (
+            <p style={{ color: "#8a7468", fontSize: 14 }}>아직 댓글이 없습니다.</p>
+          ) : (
+            comments.map((c) => (
+              <div className="post-comment" key={c.commentId || c.id}>
+                <div style={{ fontSize: 12, color: "#8a7468", marginBottom: 4 }}>
+                  {c.authorId} · {formatDate(c.createdAt)}
+                </div>
+                {c.content}
+              </div>
+            ))
+          )}
+          {isLoggedIn && (
+            <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
+              <input
+                className="commerce-input"
+                style={{ flex: 1 }}
+                placeholder="댓글을 입력하세요"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSubmitComment();
+                  }
+                }}
+              />
+              <button
+                type="button"
+                className="comm-write-btn"
+                onClick={handleSubmitComment}
+                disabled={submitting || !newComment.trim()}
+              >
+                {submitting ? "등록 중..." : "등록"}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

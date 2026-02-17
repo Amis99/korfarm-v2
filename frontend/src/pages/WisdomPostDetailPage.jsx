@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { apiGet, apiPost, apiDelete } from "../utils/api";
+import { apiGet, apiPost, apiDelete, API_BASE, TOKEN_KEY } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
 import "../styles/wisdom.css";
 
@@ -18,9 +18,6 @@ const GRID_CONFIG = {
   wittgenstein2: { cols: 20, rows: 25 },
   wittgenstein3: { cols: 20, rows: 25 },
 };
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
-const TOKEN_KEY = "korfarm_token";
 
 function WisdomPostDetailPage() {
   const { postId } = useParams();

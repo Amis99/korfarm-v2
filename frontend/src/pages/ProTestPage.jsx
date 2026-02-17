@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, apiPost } from "../utils/api";
+import { apiGet, apiPost, API_BASE } from "../utils/api";
 import "../styles/pro-mode.css";
 import "../styles/test-storage.css";
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
 
 function ProTestPage() {
   const { chapterId } = useParams();

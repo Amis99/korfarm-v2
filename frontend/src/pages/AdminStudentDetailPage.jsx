@@ -63,7 +63,7 @@ function AdminStudentDetailPage() {
         const found = list.find((s) => (s.userId || s.id || s.user_id) === userId);
         setStudent(found || null);
       })
-      .catch(() => {})
+      .catch((e) => console.error(e))
       .finally(() => setLoadingInfo(false));
   }, [userId]);
 
@@ -72,14 +72,14 @@ function AdminStudentDetailPage() {
       setLoadingLearning(true);
       apiGet(`/v1/admin/students/${userId}/learning-logs`)
         .then((data) => { const logs = data?.logs || data || []; setLearningLogs(Array.isArray(logs) ? logs : []); })
-        .catch(() => {})
+        .catch((e) => console.error(e))
         .finally(() => { setLoadingLearning(false); setLearningLoaded(true); });
     }
     if (tab === "tests" && !testsLoaded) {
       setLoadingTests(true);
       apiGet(`/v1/admin/students/${userId}/test-history`)
         .then((data) => { setTestHistory(Array.isArray(data) ? data : []); })
-        .catch(() => {})
+        .catch((e) => console.error(e))
         .finally(() => { setLoadingTests(false); setTestsLoaded(true); });
     }
     if (tab === "inventory" && !inventoryLoaded) {
@@ -123,7 +123,7 @@ function AdminStudentDetailPage() {
       if (result?.inventory) setInventory(result.inventory);
       setGrantSuccess(mode === "grant" ? "지급 완료!" : "차감 완료!");
       setGrantForm({ ...grantForm, amount: 1, reason: "" });
-      apiGet(`/v1/admin/students/${userId}/ledger`).then((ldg) => setLedger(Array.isArray(ldg) ? ldg : [])).catch(() => {});
+      apiGet(`/v1/admin/students/${userId}/ledger`).then((ldg) => setLedger(Array.isArray(ldg) ? ldg : [])).catch((e) => console.error(e));
     } catch (err) { setGrantError(err.message); } finally { setGrantLoading(false); }
   };
 

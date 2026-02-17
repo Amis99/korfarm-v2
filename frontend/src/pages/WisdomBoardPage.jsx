@@ -36,7 +36,7 @@ function WisdomBoardPage() {
     if (isViewingChild) {
       apiGet(`/v1/parents/children/${studentId}/profile`)
         .then((profile) => setChildName(profile?.name || "자녀"))
-        .catch(() => {});
+        .catch((e) => console.error(e));
     }
   }, [isViewingChild, studentId]);
 

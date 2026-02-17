@@ -1,9 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { API_BASE } from "../utils/api";
 import "../styles/duel.css";
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
 
 function DuelMatchPage() {
   const { matchId } = useParams();

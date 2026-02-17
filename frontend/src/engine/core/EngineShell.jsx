@@ -378,7 +378,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
         earned_seed: earnedSeed,
         seed_type: chosenSeed?.type || content?.seedReward?.seedType,
         accuracy,
-      }).catch(() => {});
+      }).catch((e) => console.error(e));
     }
   };
 

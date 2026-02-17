@@ -46,7 +46,7 @@ function AdminClassesPage() {
         const list = Array.isArray(data) ? data : [];
         setOrgs(list.map((o) => ({ id: o.id || o.org_id, name: o.name })));
       })
-      .catch(() => {});
+      .catch((e) => console.error(e));
   }, []);
 
   // 생성 모달

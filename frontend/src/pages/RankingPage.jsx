@@ -43,7 +43,7 @@ function RankingPage() {
     if (isViewingChild) {
       apiGet(`/v1/parents/children/${studentId}/profile`)
         .then((profile) => setChildName(profile?.name || "자녀"))
-        .catch(() => {});
+        .catch((e) => console.error(e));
     }
   }, [isViewingChild, studentId]);
 
@@ -53,7 +53,8 @@ function RankingPage() {
       .then((season) => {
         if (season?.id || season?.seasonId) {
           const sid = season.id || season.seasonId;
-          return apiGet(`/v1/seasons/${sid}/harvest-rankings`);
+          const levelParam = scope === "level" ? `?level=${level}` : "";
+          return apiGet(`/v1/seasons/${sid}/harvest-rankings${levelParam}`);
         }
         return [];
       })
@@ -63,7 +64,7 @@ function RankingPage() {
       })
       .catch(() => setRankings([]))
       .finally(() => setLoading(false));
-  }, []);
+  }, [period, scope, level]);
 
   const rows = useMemo(() => {
     if (!rankings.length) return [];

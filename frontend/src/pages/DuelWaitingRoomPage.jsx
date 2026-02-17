@@ -1,10 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { apiGet, apiPost } from "../utils/api";
+import { apiGet, apiPost, API_BASE } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/duel.css";
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
 
 const LEVEL_LABELS = {
   saussure1: "소쉬르 1", saussure2: "소쉬르 2", saussure3: "소쉬르 3",
@@ -127,7 +125,7 @@ function DuelWaitingRoomPage() {
         payload: { roomId, stakeSeedType: selectedSeedType },
       }));
     } else {
-      apiPost(`/v1/duel/rooms/${roomId}/ready`).catch(() => {});
+      apiPost(`/v1/duel/rooms/${roomId}/ready`).catch((e) => console.error(e));
     }
   };
 
@@ -148,7 +146,7 @@ function DuelWaitingRoomPage() {
     if (wsRef.current?.readyState === WebSocket.OPEN) {
       wsRef.current.send(JSON.stringify({ type: "room.leave", payload: { roomId } }));
     }
-    apiPost(`/v1/duel/rooms/${roomId}/leave`).catch(() => {});
+    apiPost(`/v1/duel/rooms/${roomId}/leave`).catch((e) => console.error(e));
     navigate(-1);
   };
 

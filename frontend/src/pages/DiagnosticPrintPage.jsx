@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiGet } from "../utils/api";
+import { apiGet, API_BASE, TOKEN_KEY } from "../utils/api";
 import "../styles/diagnostic.css";
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
-const TOKEN_KEY = "korfarm_token";
 
 const LEVEL_INFO = {
   saussure: { label: "소쉬르", desc: "초등 저학년", icon: "eco" },

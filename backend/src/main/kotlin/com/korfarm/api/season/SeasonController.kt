@@ -5,6 +5,7 @@ import com.korfarm.api.system.FeatureFlagService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -19,17 +20,25 @@ class SeasonController(
     }
 
     @GetMapping("/{seasonId}/harvest-rankings")
-    fun harvestRankings(@PathVariable seasonId: String): ApiResponse<List<HarvestRankingItem>> {
+    fun harvestRankings(
+        @PathVariable seasonId: String,
+        @RequestParam(required = false) level: String?
+    ): ApiResponse<List<HarvestRankingItem>> {
         featureFlagService.requireEnabled("feature.season.ranking")
         val season = seasonService.getSeasonEntity(seasonId)
-        return ApiResponse(success = true, data = seasonService.harvestRankings(seasonId, season.levelId))
+        val levelId = level ?: season.levelId
+        return ApiResponse(success = true, data = seasonService.harvestRankings(seasonId, levelId))
     }
 
     @GetMapping("/{seasonId}/duel-rankings")
-    fun duelRankings(@PathVariable seasonId: String): ApiResponse<DuelLeaderboards> {
+    fun duelRankings(
+        @PathVariable seasonId: String,
+        @RequestParam(required = false) level: String?
+    ): ApiResponse<DuelLeaderboards> {
         featureFlagService.requireEnabled("feature.season.ranking")
         val season = seasonService.getSeasonEntity(seasonId)
-        return ApiResponse(success = true, data = seasonService.duelRankings(seasonId, season.levelId))
+        val levelId = level ?: season.levelId
+        return ApiResponse(success = true, data = seasonService.duelRankings(seasonId, levelId))
     }
 
     @GetMapping("/{seasonId}/awards")

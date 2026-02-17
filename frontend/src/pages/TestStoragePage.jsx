@@ -46,13 +46,13 @@ function TestStoragePage() {
           // 자녀 프로필에는 orgName이 없으므로 일단 빈 값
           setUserOrgName("");
         })
-        .catch(() => {});
+        .catch((e) => console.error(e));
     } else {
       apiGet("/v1/auth/me")
         .then(profile => {
           setUserOrgName(profile.org_name || profile.orgName || "");
         })
-        .catch(() => {});
+        .catch((e) => console.error(e));
     }
   }, [isLoggedIn, isViewingChild, studentId]);
 

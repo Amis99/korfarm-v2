@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { apiGet, apiPost, apiPut, apiDelete } from "../utils/adminApi";
+import { API_BASE } from "../utils/api";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/test-storage.css";
 
@@ -44,7 +45,7 @@ function AdminTestDetailPage() {
   const loadTest = useCallback(() => {
     apiGet(`/v1/admin/test-papers/${testId}/questions`)
       .then(qs => setQuestions(Array.isArray(qs) ? qs : []))
-      .catch(() => {});
+      .catch((e) => console.error(e));
   }, [testId]);
 
   useEffect(() => {
@@ -79,7 +80,7 @@ function AdminTestDetailPage() {
         .catch(() => setStudents([]));
       apiGet(`/v1/admin/test-papers/${testId}/questions`)
         .then(qs => setQuestions(Array.isArray(qs) ? qs : []))
-        .catch(() => {});
+        .catch((e) => console.error(e));
     } else if (tab === "submissions") {
       setSubLoading(true);
       apiGet(`/v1/admin/test-papers/${testId}/submissions`)
@@ -205,7 +206,7 @@ function AdminTestDetailPage() {
       setOmrMsg(`저장 완료 — 점수: ${res.score}, 정답: ${res.correctCount}`);
       setOmrAnswers({});
       // refresh students
-      apiGet(`/v1/admin/test-papers/${testId}/students`).then(setStudents).catch(() => {});
+      apiGet(`/v1/admin/test-papers/${testId}/students`).then(setStudents).catch((e) => console.error(e));
     } catch (err) {
       setOmrMsg(err.message || "저장 실패");
     } finally {
@@ -328,7 +329,7 @@ function AdminTestDetailPage() {
             <div className="ts-pdf-container" onContextMenu={e => e.preventDefault()}>
               <iframe
                 className="ts-pdf-iframe"
-                src={`${import.meta.env.VITE_API_BASE || "http://localhost:8080"}/v1/files/${test.pdfFileId}/download#toolbar=0&navpanes=0`}
+                src={`${API_BASE}/v1/files/${test.pdfFileId}/download#toolbar=0&navpanes=0`}
                 title="시험지 미리보기"
               />
             </div>

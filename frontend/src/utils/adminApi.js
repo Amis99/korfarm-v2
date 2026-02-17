@@ -1,5 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
-const TOKEN_KEY = "korfarm_token";
+import { API_BASE, TOKEN_KEY } from "./api";
 
 const buildUrl = (path) => {
   const base = API_BASE.replace(/\/$/, "");

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
+import { API_BASE } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/wisdom.css";
@@ -19,8 +20,6 @@ const GRID_CONFIG = {
   wittgenstein2: { cols: 20, rows: 25 },
   wittgenstein3: { cols: 20, rows: 25 },
 };
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
 
 function AdminWisdomDetailPage() {
   const { postId } = useParams();

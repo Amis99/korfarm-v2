@@ -1,16 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { apiPost } from "../utils/api";
 import "../styles/auth.css";
 
 function ResetPage() {
   const [loginId, setLoginId] = useState("");
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setMessage(
-      "입력한 아이디로 비밀번호 재설정 안내를 전송했습니다. 문자 메시지를 확인해 주세요."
-    );
+    if (!loginId.trim()) { setError("아이디를 입력하세요."); return; }
+    setLoading(true);
+    setError("");
+    setMessage("");
+    try {
+      const data = await apiPost("/v1/auth/request-password-reset", {
+        loginId: loginId.trim(),
+      });
+      setMessage(data.message || "비밀번호 초기화 요청이 접수되었습니다. 선생님 또는 관리자에게 문의하세요.");
+    } catch (e) {
+      setError(e.message || "요청에 실패했습니다.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -43,10 +57,11 @@ function ResetPage() {
                   required
                 />
               </label>
-              {message ? <div className="auth-error">{message}</div> : null}
+              {message && <div className="auth-error" style={{ color: "#2ecc71" }}>{message}</div>}
+              {error && <div className="auth-error">{error}</div>}
               <div className="auth-actions">
-                <button className="auth-primary" type="submit">
-                  안내 받기
+                <button className="auth-primary" type="submit" disabled={loading}>
+                  {loading ? "요청 중..." : "안내 받기"}
                 </button>
                 <Link className="auth-secondary" to="/login">
                   로그인으로

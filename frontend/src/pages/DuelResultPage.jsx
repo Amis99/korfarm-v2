@@ -15,7 +15,7 @@ function DuelResultPage() {
   useEffect(() => {
     apiGet(`/v1/duel/matches/${matchId}/results`)
       .then((data) => setResult(data))
-      .catch(() => {})
+      .catch((e) => console.error(e))
       .finally(() => setLoading(false));
   }, [matchId]);
 

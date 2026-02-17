@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_BASE, TOKEN_KEY } from "../utils/api";
 import OrgSelect from "../components/OrgSelect";
 import "../styles/auth.css";
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
-const TOKEN_KEY = "korfarm_token";
 const ORG_HQ_ID = "org_hq";
 
 const GRADE_LEVELS = [

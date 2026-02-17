@@ -52,7 +52,7 @@ function ShopPage() {
           }
         }
       })
-      .catch(() => {});
+      .catch((e) => console.error(e));
   }, []);
 
   const handleShippingChange = useCallback((e) => {
@@ -261,22 +261,15 @@ function ShopPage() {
         </div>
 
         <aside className="commerce-card commerce-sidebar">
-          <h3>장바구니 요약</h3>
-          <ul className="commerce-list">
-            <li>
-              교재 1종 <span>29,000원</span>
-            </li>
-            <li>
-              교구 1종 <span>15,000원</span>
-            </li>
-          </ul>
-          <div className="commerce-total">
-            <span>예상 결제금액</span>
-            <strong>44,000원</strong>
+          <h3>안내</h3>
+          <p style={{ fontSize: "14px", color: "#6b5b50", lineHeight: 1.6 }}>
+            상품 상세 페이지에서 바로 구매하실 수 있습니다.
+          </p>
+          <div style={{ marginTop: "12px" }}>
+            <Link className="commerce-btn ghost" to="/shop">
+              상품 목록 보기
+            </Link>
           </div>
-          <Link className="commerce-btn" to="/payment/result">
-            결제 진행
-          </Link>
           <div style={{ marginTop: "12px" }}>
             <Link className="commerce-btn ghost" to="/subscription">
               구독 관리
