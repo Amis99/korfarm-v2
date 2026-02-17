@@ -1,0 +1,1582 @@
+{
+  "contentId": "dr-w1-095",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "독해(비문학) Day 95",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "WITTGENSTEIN_1",
+  "schoolGradeRange": {
+    "min": 10,
+    "max": 10
+  },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": [
+    "READING"
+  ],
+  "tags": [
+    "daily"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "디지털카메라는 피사체에 반사된 빛이 렌즈를 통해 이미지 센서에 피사체의 상이 맺히도록 만들고, 이 상을 이미지 데이터로 변환하여 한 장의 사진으로 저장한다. 이미지 센서에서 상이 맺히는 곳은 많은 수의 아주 작은 화소가 격자 모양으로 배열된 ‘화소 평면’이다. 여기에 피사체의 상이 맺힐 때, 화소 각각의 위치에서 얻어진 빛의 밝기를 나타내는 데이터의 배열이 한 장의 사진이 된다.\n화소는 빛에 반응하는 소자로, 노출된 빛의 세기에 비례하는 전압을 출력한다. 화소를 여러 개 묶어서 마치 하나의 화소처럼 쓸 수도 있는데, 동일한 화소를 여러 개 묶어서 사용하면 하나를 사용할 때보다 약한 빛도 검출할 수 있다. 만일 빨강, 초록, 파랑의 서로 다른 파장의 빛에 반응하는 화소를 묶어 한 개의 화소를 구성하면, 색깔을 구별할 수 있다. 이미지 센서의 해상도는 화소 평면의 면적에 대한 화소의 전체 개수의 비율로 나타내는데, 이 값이 클수록 세밀하게 표현된 이미지를 얻을 수 있어 센서의 성능을 가늠하는 척도가 된다.\n디지털 이미지를 얻기 위해서는 각 화소에 노출된 빛의 세기를 데이터로 변환해야 하는데, 이를 위해 화소를 ‘아날로그 디지털 변환기(ADC)’에 연결하여 화소의 출력 전압에 해당하는 크기를 나타내는 데이터로 바꾼다. ADC는 입력 전압의 값을 데이터로 변환하여 출력할 때는 일정한 수의 비트로 표현한다. 이 비트의 개수를 데이터 폭이라고 한다. 분해능은 입력 허용 구간을 몇 개의 구간으로 나누어 표현할 수 있는지를 나타내는데, ADC의 성능을 나타내는 한 지표이다. 가령 어느 ADC의 입력 전압의 허용 구간이 0 ~ 1볼트(V)라고 하자. 만일 화소의 출력 전압에 대해 ADC의 데이터 폭이 1비트면, 빛의 세기를 0.5V를 기준으로 0V부터 0.5V보다 작은 구간은 흑으로, 0.5V부터 1V까지의 구간은 백으로 2단계로 명암을 구분한다."
+        },
+        {
+          "id": "p2",
+          "text": "만일 데이터 폭이 2비트면 0 ~ 1V의 구간을 4단계로, 4비트면 16단계로, 8비트면 256단계로 서로 다른 밝기의 명암으로 구분하여 데이터를 출력할 수 있다. 따라서 데이터 폭이 넓은 ADC를 쓰면 세밀한 명암의 표현이 가능한 이미지를 얻을 수 있다. 한편 ADC가 입력된 전압을 데이터로 바꾸는 데는 일정한 시간이 걸리는데 이를 변환 시간이라고 하며, 성능을 나타내는 또 다른 지표로 사용된다.\n이미지 센서가 온전한 한 장의 사진을 얻으려면 화소별로 빛의 세기를 나타낸 데이터를 화소와 같은 형태의 배열로 나타내어야 한다. 이미지 센서 내부에 화소의 수만큼 ADC가 있으면 일대일로 연결하여 한 번에 전체 데이터를 얻으면 된다. 하지만 일반적으로 이미지 센서에는 수백만 개의 화소가 있는데, 이만큼의 ADC를 이미지 센서에 만들어 넣기는 어렵다. 그래서 적은 수의 ADC로 전체 화소의 데이터를 얻기 위해 ‘다중 스위치’를 이용한다.\n다중 스위치는 M개의 입력을 N개씩 여러 개의 블록으로 나누고 블록 단위로 N개의 출력으로 연결해 주는 장치이다. 이때 N은 M과 같거나 M보다 작아야 한다. 화소 평면의 전체 화소를 순서에 따라 일정한 개수로 묶은 블록으로 나누고, 이것을 다중 스위치를 통해 순서대로 여러 번 ADC로 보내 블록 단위로 데이터로 바꾼 다음, 이것을 차례로 다시 모으면 한 장의 사진이 완성된다.\n가령 10,000개의 화소가 있고 10개의 ADC가 있다고 하자. 이런 경우 순서대로 화소를 10개씩 묶어 블록으로 만들고 각 블록을 10개의 ADC에 순서대로 1,000번으로 나누어 보낸다. 그러면 10개씩 묶인 데이터가 순서대로 1,000개로 변환되므로 이를 합쳐서 한 장의 사진으로 완성한다. 하지만 ADC가 1,000번의 동작을 해야 하므로 사진 한 장의 데이터를 얻는 전체 변환 시간은 ADC의 변환 시간의 1,000배가 된다."
+        }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 0,
+              "end": 7
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "목적어"
+              },
+              {
+                "id": "B",
+                "text": "주어"
+              },
+              {
+                "id": "C",
+                "text": "서술어"
+              },
+              {
+                "id": "D",
+                "text": "부사어"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 0,
+              "end": 87
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "디지털카메라는 피사체에 반사된 빛이 렌즈를 통해 이미지 센서에 피사체의 상이 맺히도록 만들고, 이 상을 이미지 데이터로 변환하여 한 장의 사진으로 저장한다."
+              },
+              {
+                "id": "B",
+                "text": "만일 화소의 출력 전압에 대해 ADC의 데이터 폭이 1비트면, 빛의 세기를 0."
+              },
+              {
+                "id": "C",
+                "text": "여기에 피사체의 상이 맺힐 때, 화소 각각의 위치에서 얻어진 빛의 밝기를 나타내는 데이터의 배열이 한 장의 사진이 된다."
+              },
+              {
+                "id": "D",
+                "text": "그러면 10개씩 묶인 데이터가 순서대로 1,000개로 변환되므로 이를 합쳐서 한 장의 사진으로 완성한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 88,
+              "end": 145
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "만일 빨강, 초록, 파랑의 서로 다른 파장의 빛에 반응하는 화소를 묶어 한 개의 화소를 구성하면, 색깔을 구별할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "화소는 빛에 반응하는 소자로, 노출된 빛의 세기에 비례하는 전압을 출력한다."
+              },
+              {
+                "id": "C",
+                "text": "이미지 센서가 온전한 한 장의 사진을 얻으려면 화소별로 빛의 세기를 나타낸 데이터를 화소와 같은 형태의 배열로 나타내어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "이미지 센서에서 상이 맺히는 곳은 많은 수의 아주 작은 화소가 격자 모양으로 배열된 ‘화소 평면’이다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 146,
+              "end": 213
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하지만 ADC가 1,000번의 동작을 해야 하므로 사진 한 장의 데이터를 얻는 전체 변환 시간은 ADC의 변환 시간의 1,000배가 된다."
+              },
+              {
+                "id": "B",
+                "text": "이미지 센서에서 상이 맺히는 곳은 많은 수의 아주 작은 화소가 격자 모양으로 배열된 ‘화소 평면’이다."
+              },
+              {
+                "id": "C",
+                "text": "한편 ADC가 입력된 전압을 데이터로 바꾸는 데는 일정한 시간이 걸리는데 이를 변환 시간이라고 하며, 성능을 나타내는 또 다른 지표로 사용된다."
+              },
+              {
+                "id": "D",
+                "text": "여기에 피사체의 상이 맺힐 때, 화소 각각의 위치에서 얻어진 빛의 밝기를 나타내는 데이터의 배열이 한 장의 사진이 된다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 214,
+              "end": 256
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다중 스위치는 M개의 입력을 N개씩 여러 개의 블록으로 나누고 블록 단위로 N개의 출력으로 연결해 주는 장치이다."
+              },
+              {
+                "id": "B",
+                "text": "화소는 빛에 반응하는 소자로, 노출된 빛의 세기에 비례하는 전압을 출력한다."
+              },
+              {
+                "id": "C",
+                "text": "이미지 센서의 해상도는 화소 평면의 면적에 대한 화소의 전체 개수의 비율로 나타내는데, 이 값이 클수록 세밀하게 표현된 이미지를 얻을 수 있어 센서의 성능을"
+              },
+              {
+                "id": "D",
+                "text": "하지만 ADC가 1,000번의 동작을 해야 하므로 사진 한 장의 데이터를 얻는 전체 변환 시간은 ADC의 변환 시간의 1,000배가 된다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 257,
+              "end": 341
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이미지 센서 내부에 화소의 수만큼 ADC가 있으면 일대일로 연결하여 한 번에 전체 데이터를 얻으면 된다."
+              },
+              {
+                "id": "B",
+                "text": "화소를 여러 개 묶어서 마치 하나의 화소처럼 쓸 수도 있는데, 동일한 화소를 여러 개 묶어서 사용하면 하나를 사용할 때보다 약한 빛도 검출할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "만일 화소의 출력 전압에 대해 ADC의 데이터 폭이 1비트면, 빛의 세기를 0."
+              },
+              {
+                "id": "D",
+                "text": "만일 빨강, 초록, 파랑의 서로 다른 파장의 빛에 반응하는 화소를 묶어 한 개의 화소를 구성하면, 색깔을 구별할 수 있다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 342,
+              "end": 410
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 비트의 개수를 데이터 폭이라고 한다."
+              },
+              {
+                "id": "B",
+                "text": "하지만 ADC가 1,000번의 동작을 해야 하므로 사진 한 장의 데이터를 얻는 전체 변환 시간은 ADC의 변환 시간의 1,000배가 된다."
+              },
+              {
+                "id": "C",
+                "text": "ADC는 입력 전압의 값을 데이터로 변환하여 출력할 때는 일정한 수의 비트로 표현한다."
+              },
+              {
+                "id": "D",
+                "text": "만일 빨강, 초록, 파랑의 서로 다른 파장의 빛에 반응하는 화소를 묶어 한 개의 화소를 구성하면, 색깔을 구별할 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 411,
+              "end": 511
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "5V부터 1V까지의 구간은 백으로 2단계로 명암을 구분한다."
+              },
+              {
+                "id": "B",
+                "text": "이때 N은 M과 같거나 M보다 작아야 한다."
+              },
+              {
+                "id": "C",
+                "text": "5V를 기준으로 0V부터 0."
+              },
+              {
+                "id": "D",
+                "text": "이미지 센서의 해상도는 화소 평면의 면적에 대한 화소의 전체 개수의 비율로 나타내는데, 이 값이 클수록 세밀하게 표현된 이미지를 얻을 수 있어 센서의 성능을"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 512,
+              "end": 631
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "디지털 이미지를 얻기 위해서는 각 화소에 노출된 빛의 세기를 데이터로 변환해야 하는데, 이를 위해 화소를 ‘아날로그 디지털 변환기(ADC)’에 연결하여 화소의"
+              },
+              {
+                "id": "B",
+                "text": "하지만 ADC가 1,000번의 동작을 해야 하므로 사진 한 장의 데이터를 얻는 전체 변환 시간은 ADC의 변환 시간의 1,000배가 된다."
+              },
+              {
+                "id": "C",
+                "text": "하지만 일반적으로 이미지 센서에는 수백만 개의 화소가 있는데, 이만큼의 ADC를 이미지 센서에 만들어 넣기는 어렵다."
+              },
+              {
+                "id": "D",
+                "text": "그러면 10개씩 묶인 데이터가 순서대로 1,000개로 변환되므로 이를 합쳐서 한 장의 사진으로 완성한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 632,
+              "end": 680
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "분해능은 입력 허용 구간을 몇 개의 구간으로 나누어 표현할 수 있는지를 나타내는데, ADC의 성능을 나타내는 한 지표이다."
+              },
+              {
+                "id": "B",
+                "text": "ADC는 입력 전압의 값을 데이터로 변환하여 출력할 때는 일정한 수의 비트로 표현한다."
+              },
+              {
+                "id": "C",
+                "text": "이미지 센서 내부에 화소의 수만큼 ADC가 있으면 일대일로 연결하여 한 번에 전체 데이터를 얻으면 된다."
+              },
+              {
+                "id": "D",
+                "text": "다중 스위치는 M개의 입력을 N개씩 여러 개의 블록으로 나누고 블록 단위로 N개의 출력으로 연결해 주는 장치이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 681,
+              "end": 703
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하지만 일반적으로 이미지 센서에는 수백만 개의 화소가 있는데, 이만큼의 ADC를 이미지 센서에 만들어 넣기는 어렵다."
+              },
+              {
+                "id": "B",
+                "text": "따라서 데이터 폭이 넓은 ADC를 쓰면 세밀한 명암의 표현이 가능한 이미지를 얻을 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "하지만 ADC가 1,000번의 동작을 해야 하므로 사진 한 장의 데이터를 얻는 전체 변환 시간은 ADC의 변환 시간의 1,000배가 된다."
+              },
+              {
+                "id": "D",
+                "text": "이 비트의 개수를 데이터 폭이라고 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 704,
+              "end": 772
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "ADC는 입력 전압의 값을 데이터로 변환하여 출력할 때는 일정한 수의 비트로 표현한다."
+              },
+              {
+                "id": "B",
+                "text": "분해능은 입력 허용 구간을 몇 개의 구간으로 나누어 표현할 수 있는지를 나타내는데, ADC의 성능을 나타내는 한 지표이다."
+              },
+              {
+                "id": "C",
+                "text": "화소를 여러 개 묶어서 마치 하나의 화소처럼 쓸 수도 있는데, 동일한 화소를 여러 개 묶어서 사용하면 하나를 사용할 때보다 약한 빛도 검출할 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "그래서 적은 수의 ADC로 전체 화소의 데이터를 얻기 위해 ‘다중 스위치’를 이용한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 773,
+              "end": 775
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대조"
+              },
+              {
+                "id": "B",
+                "text": "인과"
+              },
+              {
+                "id": "C",
+                "text": "첨가"
+              },
+              {
+                "id": "D",
+                "text": "예시"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 773,
+              "end": 814
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가령 어느 ADC의 입력 전압의 허용 구간이 0 ~ 1볼트(V)라고 하자."
+              },
+              {
+                "id": "B",
+                "text": "디지털카메라는 피사체에 반사된 빛이 렌즈를 통해 이미지 센서에 피사체의 상이 맺히도록 만들고, 이 상을 이미지 데이터로 변환하여 한 장의 사진으로 저장한다."
+              },
+              {
+                "id": "C",
+                "text": "이 비트의 개수를 데이터 폭이라고 한다."
+              },
+              {
+                "id": "D",
+                "text": "그래서 적은 수의 ADC로 전체 화소의 데이터를 얻기 위해 ‘다중 스위치’를 이용한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 815,
+              "end": 859
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가령 10,000개의 화소가 있고 10개의 ADC가 있다고 하자."
+              },
+              {
+                "id": "B",
+                "text": "하지만 일반적으로 이미지 센서에는 수백만 개의 화소가 있는데, 이만큼의 ADC를 이미지 센서에 만들어 넣기는 어렵다."
+              },
+              {
+                "id": "C",
+                "text": "화소를 여러 개 묶어서 마치 하나의 화소처럼 쓸 수도 있는데, 동일한 화소를 여러 개 묶어서 사용하면 하나를 사용할 때보다 약한 빛도 검출할 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "만일 화소의 출력 전압에 대해 ADC의 데이터 폭이 1비트면, 빛의 세기를 0."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 859,
+              "end": 875
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다중 스위치는 M개의 입력을 N개씩 여러 개의 블록으로 나누고 블록 단위로 N개의 출력으로 연결해 주는 장치이다."
+              },
+              {
+                "id": "B",
+                "text": "가령 어느 ADC의 입력 전압의 허용 구간이 0 ~ 1볼트(V)라고 하자."
+              },
+              {
+                "id": "C",
+                "text": "한편 ADC가 입력된 전압을 데이터로 바꾸는 데는 일정한 시간이 걸리는데 이를 변환 시간이라고 하며, 성능을 나타내는 또 다른 지표로 사용된다."
+              },
+              {
+                "id": "D",
+                "text": "5V를 기준으로 0V부터 0."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 875,
+              "end": 894
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이때 N은 M과 같거나 M보다 작아야 한다."
+              },
+              {
+                "id": "B",
+                "text": "이미지 센서가 온전한 한 장의 사진을 얻으려면 화소별로 빛의 세기를 나타낸 데이터를 화소와 같은 형태의 배열로 나타내어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "5V보다 작은 구간은 흑으로, 0."
+              },
+              {
+                "id": "D",
+                "text": "여기에 피사체의 상이 맺힐 때, 화소 각각의 위치에서 얻어진 빛의 밝기를 나타내는 데이터의 배열이 한 장의 사진이 된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 894,
+              "end": 927
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "5V를 기준으로 0V부터 0."
+              },
+              {
+                "id": "B",
+                "text": "5V부터 1V까지의 구간은 백으로 2단계로 명암을 구분한다."
+              },
+              {
+                "id": "C",
+                "text": "다중 스위치는 M개의 입력을 N개씩 여러 개의 블록으로 나누고 블록 단위로 N개의 출력으로 연결해 주는 장치이다."
+              },
+              {
+                "id": "D",
+                "text": "가령 10,000개의 화소가 있고 10개의 ADC가 있다고 하자."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 0,
+              "end": 927
+            }
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "따라서 데이터 폭이 넓은 ADC를 쓰면 세밀한 명암의 표현이 가능한 이미지를 얻을 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "화소를 여러 개 묶어서 마치 하나의 화소처럼 쓸 수도 있는데, 동일한 화소를 여러 개 묶어서 사용하면 하나를 사용할 때보다 약한 빛도 검출할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "디지털카메라는 피사체에 반사된 빛이 렌즈를 통해 이미지 센서에 피사체의 상이 맺히도록 만들고, 이 상을 이미지 데이터로 변환하여 한 장의 사진으로 저장한다."
+              },
+              {
+                "id": "D",
+                "text": "이 비트의 개수를 데이터 폭이라고 한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 23,
+              "end": 26
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서술어"
+              },
+              {
+                "id": "B",
+                "text": "목적어"
+              },
+              {
+                "id": "C",
+                "text": "주어"
+              },
+              {
+                "id": "D",
+                "text": "부사어"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 0,
+              "end": 91
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "5V부터 1V까지의 구간은 백으로 2단계로 명암을 구분한다."
+              },
+              {
+                "id": "B",
+                "text": "디지털 이미지를 얻기 위해서는 각 화소에 노출된 빛의 세기를 데이터로 변환해야 하는데, 이를 위해 화소를 ‘아날로그 디지털 변환기(ADC)’에 연결하여 화소의"
+              },
+              {
+                "id": "C",
+                "text": "하지만 일반적으로 이미지 센서에는 수백만 개의 화소가 있는데, 이만큼의 ADC를 이미지 센서에 만들어 넣기는 어렵다."
+              },
+              {
+                "id": "D",
+                "text": "만일 데이터 폭이 2비트면 0 ~ 1V의 구간을 4단계로, 4비트면 16단계로, 8비트면 256단계로 서로 다른 밝기의 명암으로 구분하여 데이터를 출력할 수"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 92,
+              "end": 95
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대조"
+              },
+              {
+                "id": "B",
+                "text": "인과"
+              },
+              {
+                "id": "C",
+                "text": "첨가"
+              },
+              {
+                "id": "D",
+                "text": "예시"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 92,
+              "end": 143
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "따라서 데이터 폭이 넓은 ADC를 쓰면 세밀한 명암의 표현이 가능한 이미지를 얻을 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "만일 데이터 폭이 2비트면 0 ~ 1V의 구간을 4단계로, 4비트면 16단계로, 8비트면 256단계로 서로 다른 밝기의 명암으로 구분하여 데이터를 출력할 수"
+              },
+              {
+                "id": "C",
+                "text": "ADC는 입력 전압의 값을 데이터로 변환하여 출력할 때는 일정한 수의 비트로 표현한다."
+              },
+              {
+                "id": "D",
+                "text": "여기에 피사체의 상이 맺힐 때, 화소 각각의 위치에서 얻어진 빛의 밝기를 나타내는 데이터의 배열이 한 장의 사진이 된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 144,
+              "end": 224
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하지만 일반적으로 이미지 센서에는 수백만 개의 화소가 있는데, 이만큼의 ADC를 이미지 센서에 만들어 넣기는 어렵다."
+              },
+              {
+                "id": "B",
+                "text": "한편 ADC가 입력된 전압을 데이터로 바꾸는 데는 일정한 시간이 걸리는데 이를 변환 시간이라고 하며, 성능을 나타내는 또 다른 지표로 사용된다."
+              },
+              {
+                "id": "C",
+                "text": "화소는 빛에 반응하는 소자로, 노출된 빛의 세기에 비례하는 전압을 출력한다."
+              },
+              {
+                "id": "D",
+                "text": "이 비트의 개수를 데이터 폭이라고 한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s25",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 225,
+              "end": 296
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이미지 센서가 온전한 한 장의 사진을 얻으려면 화소별로 빛의 세기를 나타낸 데이터를 화소와 같은 형태의 배열로 나타내어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "화소를 여러 개 묶어서 마치 하나의 화소처럼 쓸 수도 있는데, 동일한 화소를 여러 개 묶어서 사용하면 하나를 사용할 때보다 약한 빛도 검출할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "여기에 피사체의 상이 맺힐 때, 화소 각각의 위치에서 얻어진 빛의 밝기를 나타내는 데이터의 배열이 한 장의 사진이 된다."
+              },
+              {
+                "id": "D",
+                "text": "이런 경우 순서대로 화소를 10개씩 묶어 블록으로 만들고 각 블록을 10개의 ADC에 순서대로 1,000번으로 나누어 보낸다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s26",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 297,
+              "end": 355
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 비트의 개수를 데이터 폭이라고 한다."
+              },
+              {
+                "id": "B",
+                "text": "가령 어느 ADC의 입력 전압의 허용 구간이 0 ~ 1볼트(V)라고 하자."
+              },
+              {
+                "id": "C",
+                "text": "다중 스위치는 M개의 입력을 N개씩 여러 개의 블록으로 나누고 블록 단위로 N개의 출력으로 연결해 주는 장치이다."
+              },
+              {
+                "id": "D",
+                "text": "이미지 센서 내부에 화소의 수만큼 ADC가 있으면 일대일로 연결하여 한 번에 전체 데이터를 얻으면 된다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s27",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 356,
+              "end": 359
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인과"
+              },
+              {
+                "id": "B",
+                "text": "대조"
+              },
+              {
+                "id": "C",
+                "text": "예시"
+              },
+              {
+                "id": "D",
+                "text": "첨가"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s28",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 356,
+              "end": 421
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하지만 일반적으로 이미지 센서에는 수백만 개의 화소가 있는데, 이만큼의 ADC를 이미지 센서에 만들어 넣기는 어렵다."
+              },
+              {
+                "id": "B",
+                "text": "따라서 데이터 폭이 넓은 ADC를 쓰면 세밀한 명암의 표현이 가능한 이미지를 얻을 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "이미지 센서의 해상도는 화소 평면의 면적에 대한 화소의 전체 개수의 비율로 나타내는데, 이 값이 클수록 세밀하게 표현된 이미지를 얻을 수 있어 센서의 성능을"
+              },
+              {
+                "id": "D",
+                "text": "이미지 센서에서 상이 맺히는 곳은 많은 수의 아주 작은 화소가 격자 모양으로 배열된 ‘화소 평면’이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s29",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 422,
+              "end": 425
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "첨가"
+              },
+              {
+                "id": "B",
+                "text": "예시"
+              },
+              {
+                "id": "C",
+                "text": "대조"
+              },
+              {
+                "id": "D",
+                "text": "인과"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s30",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 422,
+              "end": 470
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이미지 센서에서 상이 맺히는 곳은 많은 수의 아주 작은 화소가 격자 모양으로 배열된 ‘화소 평면’이다."
+              },
+              {
+                "id": "B",
+                "text": "가령 10,000개의 화소가 있고 10개의 ADC가 있다고 하자."
+              },
+              {
+                "id": "C",
+                "text": "여기에 피사체의 상이 맺힐 때, 화소 각각의 위치에서 얻어진 빛의 밝기를 나타내는 데이터의 배열이 한 장의 사진이 된다."
+              },
+              {
+                "id": "D",
+                "text": "그래서 적은 수의 ADC로 전체 화소의 데이터를 얻기 위해 ‘다중 스위치’를 이용한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s31",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 471,
+              "end": 534
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다중 스위치는 M개의 입력을 N개씩 여러 개의 블록으로 나누고 블록 단위로 N개의 출력으로 연결해 주는 장치이다."
+              },
+              {
+                "id": "B",
+                "text": "이런 경우 순서대로 화소를 10개씩 묶어 블록으로 만들고 각 블록을 10개의 ADC에 순서대로 1,000번으로 나누어 보낸다."
+              },
+              {
+                "id": "C",
+                "text": "이미지 센서 내부에 화소의 수만큼 ADC가 있으면 일대일로 연결하여 한 번에 전체 데이터를 얻으면 된다."
+              },
+              {
+                "id": "D",
+                "text": "디지털 이미지를 얻기 위해서는 각 화소에 노출된 빛의 세기를 데이터로 변환해야 하는데, 이를 위해 화소를 ‘아날로그 디지털 변환기(ADC)’에 연결하여 화소의"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s32",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 535,
+              "end": 559
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "만일 빨강, 초록, 파랑의 서로 다른 파장의 빛에 반응하는 화소를 묶어 한 개의 화소를 구성하면, 색깔을 구별할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "이미지 센서의 해상도는 화소 평면의 면적에 대한 화소의 전체 개수의 비율로 나타내는데, 이 값이 클수록 세밀하게 표현된 이미지를 얻을 수 있어 센서의 성능을"
+              },
+              {
+                "id": "C",
+                "text": "이때 N은 M과 같거나 M보다 작아야 한다."
+              },
+              {
+                "id": "D",
+                "text": "따라서 데이터 폭이 넓은 ADC를 쓰면 세밀한 명암의 표현이 가능한 이미지를 얻을 수 있다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s33",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 560,
+              "end": 683
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화소를 여러 개 묶어서 마치 하나의 화소처럼 쓸 수도 있는데, 동일한 화소를 여러 개 묶어서 사용하면 하나를 사용할 때보다 약한 빛도 검출할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "이런 경우 순서대로 화소를 10개씩 묶어 블록으로 만들고 각 블록을 10개의 ADC에 순서대로 1,000번으로 나누어 보낸다."
+              },
+              {
+                "id": "C",
+                "text": "화소 평면의 전체 화소를 순서에 따라 일정한 개수로 묶은 블록으로 나누고, 이것을 다중 스위치를 통해 순서대로 여러 번 ADC로 보내 블록 단위로 데이터로 바꾼"
+              },
+              {
+                "id": "D",
+                "text": "가령 어느 ADC의 입력 전압의 허용 구간이 0 ~ 1볼트(V)라고 하자."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s34",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 684,
+              "end": 686
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "첨가"
+              },
+              {
+                "id": "B",
+                "text": "인과"
+              },
+              {
+                "id": "C",
+                "text": "대조"
+              },
+              {
+                "id": "D",
+                "text": "예시"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s35",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 684,
+              "end": 720
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이런 경우 순서대로 화소를 10개씩 묶어 블록으로 만들고 각 블록을 10개의 ADC에 순서대로 1,000번으로 나누어 보낸다."
+              },
+              {
+                "id": "B",
+                "text": "가령 10,000개의 화소가 있고 10개의 ADC가 있다고 하자."
+              },
+              {
+                "id": "C",
+                "text": "다중 스위치는 M개의 입력을 N개씩 여러 개의 블록으로 나누고 블록 단위로 N개의 출력으로 연결해 주는 장치이다."
+              },
+              {
+                "id": "D",
+                "text": "따라서 데이터 폭이 넓은 ADC를 쓰면 세밀한 명암의 표현이 가능한 이미지를 얻을 수 있다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s36",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 721,
+              "end": 791
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화소는 빛에 반응하는 소자로, 노출된 빛의 세기에 비례하는 전압을 출력한다."
+              },
+              {
+                "id": "B",
+                "text": "가령 어느 ADC의 입력 전압의 허용 구간이 0 ~ 1볼트(V)라고 하자."
+              },
+              {
+                "id": "C",
+                "text": "디지털 이미지를 얻기 위해서는 각 화소에 노출된 빛의 세기를 데이터로 변환해야 하는데, 이를 위해 화소를 ‘아날로그 디지털 변환기(ADC)’에 연결하여 화소의"
+              },
+              {
+                "id": "D",
+                "text": "이런 경우 순서대로 화소를 10개씩 묶어 블록으로 만들고 각 블록을 10개의 ADC에 순서대로 1,000번으로 나누어 보낸다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s37",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 792,
+              "end": 850
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다중 스위치는 M개의 입력을 N개씩 여러 개의 블록으로 나누고 블록 단위로 N개의 출력으로 연결해 주는 장치이다."
+              },
+              {
+                "id": "B",
+                "text": "하지만 일반적으로 이미지 센서에는 수백만 개의 화소가 있는데, 이만큼의 ADC를 이미지 센서에 만들어 넣기는 어렵다."
+              },
+              {
+                "id": "C",
+                "text": "그러면 10개씩 묶인 데이터가 순서대로 1,000개로 변환되므로 이를 합쳐서 한 장의 사진으로 완성한다."
+              },
+              {
+                "id": "D",
+                "text": "이미지 센서에서 상이 맺히는 곳은 많은 수의 아주 작은 화소가 격자 모양으로 배열된 ‘화소 평면’이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s38",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 851,
+              "end": 854
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "첨가"
+              },
+              {
+                "id": "B",
+                "text": "인과"
+              },
+              {
+                "id": "C",
+                "text": "예시"
+              },
+              {
+                "id": "D",
+                "text": "대조"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s39",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 851,
+              "end": 928
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하지만 ADC가 1,000번의 동작을 해야 하므로 사진 한 장의 데이터를 얻는 전체 변환 시간은 ADC의 변환 시간의 1,000배가 된다."
+              },
+              {
+                "id": "B",
+                "text": "그래서 적은 수의 ADC로 전체 화소의 데이터를 얻기 위해 ‘다중 스위치’를 이용한다."
+              },
+              {
+                "id": "C",
+                "text": "이미지 센서에서 상이 맺히는 곳은 많은 수의 아주 작은 화소가 격자 모양으로 배열된 ‘화소 평면’이다."
+              },
+              {
+                "id": "D",
+                "text": "만일 빨강, 초록, 파랑의 서로 다른 파장의 빛에 반응하는 화소를 묶어 한 개의 화소를 구성하면, 색깔을 구별할 수 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s40",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 0,
+              "end": 928
+            }
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "만일 데이터 폭이 2비트면 0 ~ 1V의 구간을 4단계로, 4비트면 16단계로, 8비트면 256단계로 서로 다른 밝기의 명암으로 구분하여 데이터를 출력할 수"
+              },
+              {
+                "id": "B",
+                "text": "이미지 센서가 온전한 한 장의 사진을 얻으려면 화소별로 빛의 세기를 나타낸 데이터를 화소와 같은 형태의 배열로 나타내어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "따라서 데이터 폭이 넓은 ADC를 쓰면 세밀한 명암의 표현이 가능한 이미지를 얻을 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "이미지 센서의 해상도는 화소 평면의 면적에 대한 화소의 전체 개수의 비율로 나타내는데, 이 값이 클수록 세밀하게 표현된 이미지를 얻을 수 있어 센서의 성능을"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "디지털카메라는 피사체에 반사된 빛이 렌즈를 통해 이미지 센서에 피사체의 상이 맺히도록 만들고, 이 상을 이미지 데이터로 변환하여 한 장의 사진으로 저장한다. 이미지 센서에서 상이 맺히는 곳은 많은 수의 아주 작은 화소가 격자 모양으로 배열된 ‘화소 평면’이다. 여기에 피사체의 상이 맺힐 때, 화소 각각의 위치에서 얻어진 빛의 밝기를 나타내는 데이터의 배열이 한 장의 사진이 된다.\n화소는 빛에 반응하는 소자로, 노출된 빛의 세기에 비례하는 전압을 출력한다. 화소를 여러 개 묶어서 마치 하나의 화소처럼 쓸 수도 있는데, 동일한 화소를 여러 개 묶어서 사용하면 하나를 사용할 때보다 약한 빛도 검출할 수 있다. 만일 빨강, 초록, 파랑의 서로 다른 파장의 빛에 반"
+        },
+        {
+          "id": "c2",
+          "text": "응하는 화소를 묶어 한 개의 화소를 구성하면, 색깔을 구별할 수 있다. 이미지 센서의 해상도는 화소 평면의 면적에 대한 화소의 전체 개수의 비율로 나타내는데, 이 값이 클수록 세밀하게 표현된 이미지를 얻을 수 있어 센서의 성능을 가늠하는 척도가 된다.\n디지털 이미지를 얻기 위해서는 각 화소에 노출된 빛의 세기를 데이터로 변환해야 하는데, 이를 위해 화소를 ‘아날로그 디지털 변환기(ADC)’에 연결하여 화소의 출력 전압에 해당하는 크기를 나타내는 데이터로 바꾼다. ADC는 입력 전압의 값을 데이터로 변환하여 출력할 때는 일정한 수의 비트로 표현한다. 이 비트의 개수를 데이터 폭이라고 한다. 분해능은 입력 허용 구간을 몇 개의 구간으로 나누어 표현할 수 있는지"
+        },
+        {
+          "id": "c3",
+          "text": "를 나타내는데, ADC의 성능을 나타내는 한 지표이다. 가령 어느 ADC의 입력 전압의 허용 구간이 0 ~ 1볼트(V)라고 하자. 만일 화소의 출력 전압에 대해 ADC의 데이터 폭이 1비트면, 빛의 세기를 0.5V를 기준으로 0V부터 0.5V보다 작은 구간은 흑으로, 0.5V부터 1V까지의 구간은 백으로 2단계로 명암을 구분한다. 만일 데이터 폭이 2비트면 0 ~ 1V의 구간을 4단계로, 4비트면 16단계로, 8비트면 256단계로 서로 다른 밝기의 명암으로 구분하여 데이터를 출력할 수 있다. 따라서 데이터 폭이 넓은 ADC를 쓰면 세밀한 명암의 표현이 가능한 이미지를 얻을 수 있다. 한편 ADC가 입력된 전압을 데이터로 바꾸는 데는 일정한 시간이 걸리는데"
+        },
+        {
+          "id": "c4",
+          "text": "이를 변환 시간이라고 하며, 성능을 나타내는 또 다른 지표로 사용된다.\n이미지 센서가 온전한 한 장의 사진을 얻으려면 화소별로 빛의 세기를 나타낸 데이터를 화소와 같은 형태의 배열로 나타내어야 한다. 이미지 센서 내부에 화소의 수만큼 ADC가 있으면 일대일로 연결하여 한 번에 전체 데이터를 얻으면 된다. 하지만 일반적으로 이미지 센서에는 수백만 개의 화소가 있는데, 이만큼의 ADC를 이미지 센서에 만들어 넣기는 어렵다. 그래서 적은 수의 ADC로 전체 화소의 데이터를 얻기 위해 ‘다중 스위치’를 이용한다.\n다중 스위치는 M개의 입력을 N개씩 여러 개의 블록으로 나누고 블록 단위로 N개의 출력으로 연결해 주는 장치이다. 이때 N은 M과 같거나 M보다 작아야"
+        },
+        {
+          "id": "c5",
+          "text": "한다. 화소 평면의 전체 화소를 순서에 따라 일정한 개수로 묶은 블록으로 나누고, 이것을 다중 스위치를 통해 순서대로 여러 번 ADC로 보내 블록 단위로 데이터로 바꾼 다음, 이것을 차례로 다시 모으면 한 장의 사진이 완성된다.\n가령 10,000개의 화소가 있고 10개의 ADC가 있다고 하자. 이런 경우 순서대로 화소를 10개씩 묶어 블록으로 만들고 각 블록을 10개의 ADC에 순서대로 1,000번으로 나누어 보낸다. 그러면 10개씩 묶인 데이터가 순서대로 1,000개로 변환되므로 이를 합쳐서 한 장의 사진으로 완성한다. 하지만 ADC가 1,000번의 동작을 해야 하므로 사진 한 장의 데이터를 얻는 전체 변환 시간은 ADC의 변환 시간의 1,000배가 된다"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "지문에서 '디지털카메라는'를 찾아 클릭하세요.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 7
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -30
+          },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

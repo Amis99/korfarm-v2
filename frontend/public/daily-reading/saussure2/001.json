@@ -3,24 +3,43 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "봄이 오면",
+  "title": "독해(비문학) Day 1",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "SAUSSURE_2",
-  "schoolGradeRange": { "min": 2, "max": 2 },
+  "schoolGradeRange": {
+    "min": 2,
+    "max": 2
+  },
   "area": "READING",
   "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "competencies": [
+    "READING"
+  ],
+  "tags": [
+    "daily"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
   "timeLimitSec": 300,
   "assets": {},
   "payload": {
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        { "id": "p1", "text": "봄이 되면 날씨가 따뜻해져요. 겨울 동안 얼어 있던 땅이 녹기 시작하지요." },
-        { "id": "p2", "text": "나무에는 새 잎이 돋아나고, 꽃봉오리가 맺혀요. 개나리와 진달래가 가장 먼저 피어요." }
+        {
+          "id": "p1",
+          "text": "‘세계’는 그것을 대면한 각 인식 주체들에 의해 다양하게 드러난다. 가장 일차적이고 일반적인 세계는 우리가 경험하는 현실 세계이며. 인식 주체들은 각자가 지닌 조건에 따라 현실 세계를 다양하게 인식한다. 한 예로. 각 인식 주체는 서로 다른 가시 및 가청 범위를 가지며. 이러한 신체적 지각의 차이에 따라 그들이 경험하는 세계에 대한 인식도 각기 달라진다. 그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인식한다. 예를 들어 연속된 시간을 시. 분으로 표현하는 것처럼 일상 언어는 연속된 세계를 분절하여 인식하게 만든다."
+        },
+        {
+          "id": "p2",
+          "text": "그런데 신체적 지각이나 일상 언어는 고정적이지 않다. 운동선수처럼 반복적 수련을 하거나 안경 등의 도구를 이용하면 인식 주체들이 지닌 조건은 달라질 수 있으며."
+        }
       ]
     },
     "intensive": {
@@ -29,58 +48,607 @@
           "stepId": "s1",
           "highlight": {
             "paragraphId": "p1",
-            "range": { "start": 0, "end": 16 }
+            "range": {
+              "start": 6,
+              "end": 9
+            }
           },
           "question": {
-            "prompt": "봄이 되면 날씨가 어떻게 변하나요?",
+            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
             "choices": [
-              { "id": "A", "text": "추워져요" },
-              { "id": "B", "text": "따뜻해져요" },
-              { "id": "C", "text": "비가 와요" },
-              { "id": "D", "text": "눈이 와요" }
+              {
+                "id": "A",
+                "text": "주어"
+              },
+              {
+                "id": "B",
+                "text": "목적어"
+              },
+              {
+                "id": "C",
+                "text": "서술어"
+              },
+              {
+                "id": "D",
+                "text": "부사어"
+              }
             ],
             "answerId": "B",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s2",
           "highlight": {
-            "paragraphId": "p2",
-            "range": { "start": 22, "end": 44 }
+            "paragraphId": "p1",
+            "range": {
+              "start": 0,
+              "end": 37
+            }
           },
           "question": {
-            "prompt": "봄에 가장 먼저 피는 꽃은?",
+            "prompt": "하이라이트된 문장에서 알 수 있는 것은?",
             "choices": [
-              { "id": "A", "text": "장미와 백합" },
-              { "id": "B", "text": "개나리와 진달래" },
-              { "id": "C", "text": "해바라기와 코스모스" },
-              { "id": "D", "text": "국화와 무궁화" }
+              {
+                "id": "A",
+                "text": "운동선수처럼 반복적 수련을 하거나 안경 등의 도구를 이용하면 인식 주체들이 지닌 조건은 달라질 수 있으며."
+              },
+              {
+                "id": "B",
+                "text": "예를 들어 연속된 시간을 시."
+              },
+              {
+                "id": "C",
+                "text": "‘세계’는 그것을 대면한 각 인식 주체들에 의해 다양하게 드러난다."
+              },
+              {
+                "id": "D",
+                "text": "그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인식한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 38,
+              "end": 73
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장에서 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그런데 신체적 지각이나 일상 언어는 고정적이지 않다."
+              },
+              {
+                "id": "B",
+                "text": "가장 일차적이고 일반적인 세계는 우리가 경험하는 현실 세계이며."
+              },
+              {
+                "id": "C",
+                "text": "‘세계’는 그것을 대면한 각 인식 주체들에 의해 다양하게 드러난다."
+              },
+              {
+                "id": "D",
+                "text": "그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인식한다."
+              }
             ],
             "answerId": "B",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 74,
+              "end": 113
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장에서 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인식한다."
+              },
+              {
+                "id": "B",
+                "text": "인식 주체들은 각자가 지닌 조건에 따라 현실 세계를 다양하게 인식한다."
+              },
+              {
+                "id": "C",
+                "text": "‘세계’는 그것을 대면한 각 인식 주체들에 의해 다양하게 드러난다."
+              },
+              {
+                "id": "D",
+                "text": "분으로 표현하는 것처럼 일상 언어는 연속된 세계를 분절하여 인식하게 만든다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 114,
+              "end": 151
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장에서 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이러한 신체적 지각의 차이에 따라 그들이 경험하는 세계에 대한 인식도 각기 달라진다."
+              },
+              {
+                "id": "B",
+                "text": "그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인식한다."
+              },
+              {
+                "id": "C",
+                "text": "한 예로. 각 인식 주체는 서로 다른 가시 및 가청 범위를 가지며."
+              },
+              {
+                "id": "D",
+                "text": "예를 들어 연속된 시간을 시."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 152,
+              "end": 199
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장에서 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그런데 신체적 지각이나 일상 언어는 고정적이지 않다."
+              },
+              {
+                "id": "B",
+                "text": "이러한 신체적 지각의 차이에 따라 그들이 경험하는 세계에 대한 인식도 각기 달라진다."
+              },
+              {
+                "id": "C",
+                "text": "한 예로. 각 인식 주체는 서로 다른 가시 및 가청 범위를 가지며."
+              },
+              {
+                "id": "D",
+                "text": "그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인식한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 200,
+              "end": 235
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장에서 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 예로. 각 인식 주체는 서로 다른 가시 및 가청 범위를 가지며."
+              },
+              {
+                "id": "B",
+                "text": "가장 일차적이고 일반적인 세계는 우리가 경험하는 현실 세계이며."
+              },
+              {
+                "id": "C",
+                "text": "인식 주체들은 각자가 지닌 조건에 따라 현실 세계를 다양하게 인식한다."
+              },
+              {
+                "id": "D",
+                "text": "그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인식한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 236,
+              "end": 241
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인과"
+              },
+              {
+                "id": "B",
+                "text": "대조"
+              },
+              {
+                "id": "C",
+                "text": "예시"
+              },
+              {
+                "id": "D",
+                "text": "첨가"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 236,
+              "end": 252
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장에서 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인식 주체들은 각자가 지닌 조건에 따라 현실 세계를 다양하게 인식한다."
+              },
+              {
+                "id": "B",
+                "text": "예를 들어 연속된 시간을 시."
+              },
+              {
+                "id": "C",
+                "text": "그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인식한다."
+              },
+              {
+                "id": "D",
+                "text": "그런데 신체적 지각이나 일상 언어는 고정적이지 않다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 253,
+              "end": 295
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장에서 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "분으로 표현하는 것처럼 일상 언어는 연속된 세계를 분절하여 인식하게 만든다."
+              },
+              {
+                "id": "B",
+                "text": "그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인식한다."
+              },
+              {
+                "id": "C",
+                "text": "이러한 신체적 지각의 차이에 따라 그들이 경험하는 세계에 대한 인식도 각기 달라진다."
+              },
+              {
+                "id": "D",
+                "text": "그런데 신체적 지각이나 일상 언어는 고정적이지 않다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 0,
+              "end": 295
+            }
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "운동선수처럼 반복적 수련을 하거나 안경 등의 도구를 이용하면 인식 주체들이 지닌 조건은 달라질 수 있으며."
+              },
+              {
+                "id": "B",
+                "text": "‘세계’는 그것을 대면한 각 인식 주체들에 의해 다양하게 드러난다."
+              },
+              {
+                "id": "C",
+                "text": "이러한 신체적 지각의 차이에 따라 그들이 경험하는 세계에 대한 인식도 각기 달라진다."
+              },
+              {
+                "id": "D",
+                "text": "예를 들어 연속된 시간을 시."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 16,
+              "end": 19
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부사어"
+              },
+              {
+                "id": "B",
+                "text": "서술어"
+              },
+              {
+                "id": "C",
+                "text": "목적어"
+              },
+              {
+                "id": "D",
+                "text": "주어"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 0,
+              "end": 29
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장에서 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그런데 신체적 지각이나 일상 언어는 고정적이지 않다."
+              },
+              {
+                "id": "B",
+                "text": "인식 주체들은 각자가 지닌 조건에 따라 현실 세계를 다양하게 인식한다."
+              },
+              {
+                "id": "C",
+                "text": "가장 일차적이고 일반적인 세계는 우리가 경험하는 현실 세계이며."
+              },
+              {
+                "id": "D",
+                "text": "그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인식한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 30,
+              "end": 89
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장에서 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 예로. 각 인식 주체는 서로 다른 가시 및 가청 범위를 가지며."
+              },
+              {
+                "id": "B",
+                "text": "운동선수처럼 반복적 수련을 하거나 안경 등의 도구를 이용하면 인식 주체들이 지닌 조건은 달라질 수 있으며."
+              },
+              {
+                "id": "C",
+                "text": "‘세계’는 그것을 대면한 각 인식 주체들에 의해 다양하게 드러난다."
+              },
+              {
+                "id": "D",
+                "text": "이러한 신체적 지각의 차이에 따라 그들이 경험하는 세계에 대한 인식도 각기 달라진다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 0,
+              "end": 89
+            }
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "‘세계’는 그것을 대면한 각 인식 주체들에 의해 다양하게 드러난다."
+              },
+              {
+                "id": "B",
+                "text": "그런데 신체적 지각이나 일상 언어는 고정적이지 않다."
+              },
+              {
+                "id": "C",
+                "text": "인식 주체들은 각자가 지닌 조건에 따라 현실 세계를 다양하게 인식한다."
+              },
+              {
+                "id": "D",
+                "text": "이러한 신체적 지각의 차이에 따라 그들이 경험하는 세계에 대한 인식도 각기 달라진다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "봄이 되면 날씨가 따뜻해져요" },
-        { "id": "c2", "text": "얼어 있던 땅이 녹아요" },
-        { "id": "c3", "text": "개나리와 진달래가 먼저 피어요" }
+        {
+          "id": "c1",
+          "text": "‘세계’는 그것을 대면한 각 인식 주체들에 의해 다양하게 드러난다. 가장 일차적이고 일반적인 세계는 우리가 경험하는 현실 세계이며. 인식"
+        },
+        {
+          "id": "c2",
+          "text": "주체들은 각자가 지닌 조건에 따라 현실 세계를 다양하게 인식한다. 한 예로. 각 인식 주체는 서로 다른 가시 및 가청 범위를 가지며. 이러"
+        },
+        {
+          "id": "c3",
+          "text": "한 신체적 지각의 차이에 따라 그들이 경험하는 세계에 대한 인식도 각기 달라진다. 그리고 인식 주체는 일상 언어를 바탕으로 현실 세계를 인"
+        },
+        {
+          "id": "c4",
+          "text": "식한다. 예를 들어 연속된 시간을 시. 분으로 표현하는 것처럼 일상 언어는 연속된 세계를 분절하여 인식하게 만든다. 그런데 신체적 지각이나"
+        },
+        {
+          "id": "c5",
+          "text": "일상 언어는 고정적이지 않다. 운동선수처럼 반복적 수련을 하거나 안경 등의 도구를 이용하면 인식 주체들이 지닌 조건은 달라질 수 있으며."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3"],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "봄에 가장 먼저 피는 꽃 이름을 찾아 클릭하세요.",
+          "prompt": "지문에서 '운동선수처럼'를 찾아 눌러 보세요.",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 22, "end": 25 }
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 36
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 },
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -30
+          },
           "revealOnWrong": true
         }
       ]

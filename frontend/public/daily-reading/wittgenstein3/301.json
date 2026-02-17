@@ -1,0 +1,1446 @@
+{
+  "contentId": "dr-w3-301",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "독해(비문학) Day 301",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "WITTGENSTEIN_3",
+  "schoolGradeRange": {
+    "min": 12,
+    "max": 12
+  },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": [
+    "READING"
+  ],
+  "tags": [
+    "daily"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "문장이나 영상, 음성을 만들어 내는 인공 지능 생성 모델 중 확산 모델은 영상의 복원, 생성 및 변환에 뛰어난 성능을 보인다. 확산 모델의 기본 발상은, 원본 이미지에 노이즈를 점진적으로 추가하였다가 그 노이즈를 다시 제거해 나가면 원본 이미지를 복원할 수 있다는 것이다. 노이즈는 불필요하거나 원하지 않는 값을 의미한다. 원하는 값만 들어 있는 원본 이미지에 노이즈를 단계별로 더하면 노이즈가 포함된 확산 이미지가 되고, 여러 단계를 거치면 결국 원본 이미지가 어떤 이미지였는지 전혀 알아볼 수 없는 노이즈 이미지가 된다. 역으로, 단계별로 더해진 노이즈를 알 수 있다면 노이즈 이미지에서 원본 이미지를 복원할 수 있다. 확산 모델은 노이즈 생성기, 이미지 연산기, 노이즈 예측기로 구성되며, 순확산 과정과 역확산 과정 순으로 작동한다."
+        },
+        {
+          "id": "p2",
+          "text": "순확산 과정은 이미지에 노이즈를 추가하면서 노이즈 예측기를 학습시키는 과정이다. 첫 단계에서는, 노이즈 생성기에서 노이즈를 만든 후 이미지 연산기가 이 노이즈를 원본 이미지에 더해서 노이즈가 포함된 확산 이미지를 출력한다. 다음 단계부터는 노이즈 생성기에서 만든 노이즈를 이전 단계에서 출력된 확산 이미지에 더한다. 이러한 단계를 충분히 반복하면 최종적으로 노이즈 이미지가 출력된다. 이때 더해지는 노이즈는 크기나 분포 양상 등 그 특성이 단계별로 다르다. 따라서 노이즈 예측기는 단계별로 확산 이미지를 입력받아 이미지에 포함된 노이즈의 특성을 추출하여 수치들로 표현하고, 이 수치들을 바탕으로 노이즈를 예측한다. 노이즈 예측기 내부의 이러한 수치들을 잠재 표현이라고 한다. 노이즈 예측기는 잠재 표현을 구하고 노이즈를 예측하는 방식을 학습한다."
+        },
+        {
+          "id": "p3",
+          "text": "노이즈 예측기의 학습 방법은 기계 학습 중에서 지도 학습에 해당한다. 지도 학습은 학습 데이터에 정답이 주어져 출력과 정답의 차이가 작아지도록 모델을 학습시키는 방법이다. 노이즈 예측기를 학습시킬 때는 노이즈 생성기에서 만들어 넣어 준 노이즈가 정답에 해당하며 이 노이즈와 예측된 노이즈 사이의 차이가 작아지도록 학습시킨다."
+        },
+        {
+          "id": "p4",
+          "text": "역확산 과정은 노이즈 이미지에서 노이즈를 제거하여 원본 이미지를 복원하는 과정이다. 노이즈를 제거하려면 이미지에 단계별로 어떤 특성의 노이즈가 더해졌는지 알아야 하는데 노이즈 예측기가 이 역할을 한다. 노이즈 이미지 또는 중간 단계에서의 확산 이미지를 노이즈 예측기에 입력하면 이미지에 포함된 노이즈의 특성을 추출하여 잠재 표현을 구하고 이를 바탕으로 노이즈를 예측한다. 이미지 연산기는 입력된 확산 이미지로부터 이 노이즈를 빼서 현 단계의 노이즈를 제거한 확산 이미지를 출력한다. 확산 이미지에 이런 단계를 반복하면 결국 노이즈가 대부분 제거되어 원본 이미지에 가까운 이미지만 남게 된다."
+        },
+        {
+          "id": "p5",
+          "text": "한편, 많은 종류의 이미지를 학습시킨 후 학습된 이미지의 잠재 표현에 고유 번호를 붙이면 역확산 과정에서 이미지를 선택하여 생성할 수 있다. 또한 잠재 표현의 수치들을 조정하면 다른 특성의 노이즈가 생성되어 여러 이미지를 혼합하거나 실재하지 않는 이미지를 만들어 낼 수도 있다."
+        }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 9,
+              "end": 12
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "목적어"
+              },
+              {
+                "id": "B",
+                "text": "주어"
+              },
+              {
+                "id": "C",
+                "text": "부사어"
+              },
+              {
+                "id": "D",
+                "text": "서술어"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 0,
+              "end": 70
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "역으로, 단계별로 더해진 노이즈를 알 수 있다면 노이즈 이미지에서 원본 이미지를 복원할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "노이즈를 제거하려면 이미지에 단계별로 어떤 특성의 노이즈가 더해졌는지 알아야 하는데 노이즈 예측기가 이 역할을 한다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 예측기는 잠재 표현을 구하고 노이즈를 예측하는 방식을 학습한다."
+              },
+              {
+                "id": "D",
+                "text": "문장이나 영상, 음성을 만들어 내는 인공 지능 생성 모델 중 확산 모델은 영상의 복원, 생성 및 변환에 뛰어난 성능을 보인다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 71,
+              "end": 152
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "또한 잠재 표현의 수치들을 조정하면 다른 특성의 노이즈가 생성되어 여러 이미지를 혼합하거나 실재하지 않는 이미지를 만들어 낼 수도 있다."
+              },
+              {
+                "id": "B",
+                "text": "첫 단계에서는, 노이즈 생성기에서 노이즈를 만든 후 이미지 연산기가 이 노이즈를 원본 이미지에 더해서 노이즈가 포함된 확산 이미지를 출력한다."
+              },
+              {
+                "id": "C",
+                "text": "확산 모델의 기본 발상은, 원본 이미지에 노이즈를 점진적으로 추가하였다가 그 노이즈를 다시 제거해 나가면 원본 이미지를 복원할 수 있다는 것이다."
+              },
+              {
+                "id": "D",
+                "text": "이미지 연산기는 입력된 확산 이미지로부터 이 노이즈를 빼서 현 단계의 노이즈를 제거한 확산 이미지를 출력한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 153,
+              "end": 180
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "노이즈는 불필요하거나 원하지 않는 값을 의미한다."
+              },
+              {
+                "id": "B",
+                "text": "노이즈를 제거하려면 이미지에 단계별로 어떤 특성의 노이즈가 더해졌는지 알아야 하는데 노이즈 예측기가 이 역할을 한다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 예측기의 학습 방법은 기계 학습 중에서 지도 학습에 해당한다."
+              },
+              {
+                "id": "D",
+                "text": "이때 더해지는 노이즈는 크기나 분포 양상 등 그 특성이 단계별로 다르다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 181,
+              "end": 293
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원하는 값만 들어 있는 원본 이미지에 노이즈를 단계별로 더하면 노이즈가 포함된 확산 이미지가 되고, 여러 단계를 거치면 결국 원본 이미지가 어떤 이미지였는지"
+              },
+              {
+                "id": "B",
+                "text": "노이즈를 제거하려면 이미지에 단계별로 어떤 특성의 노이즈가 더해졌는지 알아야 하는데 노이즈 예측기가 이 역할을 한다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 이미지 또는 중간 단계에서의 확산 이미지를 노이즈 예측기에 입력하면 이미지에 포함된 노이즈의 특성을 추출하여 잠재 표현을 구하고 이를 바탕으로 노이즈를"
+              },
+              {
+                "id": "D",
+                "text": "이때 더해지는 노이즈는 크기나 분포 양상 등 그 특성이 단계별로 다르다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 294,
+              "end": 348
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "역으로, 단계별로 더해진 노이즈를 알 수 있다면 노이즈 이미지에서 원본 이미지를 복원할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "또한 잠재 표현의 수치들을 조정하면 다른 특성의 노이즈가 생성되어 여러 이미지를 혼합하거나 실재하지 않는 이미지를 만들어 낼 수도 있다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 예측기를 학습시킬 때는 노이즈 생성기에서 만들어 넣어 준 노이즈가 정답에 해당하며 이 노이즈와 예측된 노이즈 사이의 차이가 작아지도록 학습시킨다."
+              },
+              {
+                "id": "D",
+                "text": "다음 단계부터는 노이즈 생성기에서 만든 노이즈를 이전 단계에서 출력된 확산 이미지에 더한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 349,
+              "end": 413
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이러한 단계를 충분히 반복하면 최종적으로 노이즈 이미지가 출력된다."
+              },
+              {
+                "id": "B",
+                "text": "확산 모델은 노이즈 생성기, 이미지 연산기, 노이즈 예측기로 구성되며, 순확산 과정과 역확산 과정 순으로 작동한다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 예측기 내부의 이러한 수치들을 잠재 표현이라고 한다."
+              },
+              {
+                "id": "D",
+                "text": "노이즈 예측기를 학습시킬 때는 노이즈 생성기에서 만들어 넣어 준 노이즈가 정답에 해당하며 이 노이즈와 예측된 노이즈 사이의 차이가 작아지도록 학습시킨다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "paragraphId": "p1",
+            "range": {
+              "start": 0,
+              "end": 413
+            }
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문장이나 영상, 음성을 만들어 내는 인공 지능 생성 모델 중 확산 모델은 영상의 복원, 생성 및 변환에 뛰어난 성능을 보인다."
+              },
+              {
+                "id": "B",
+                "text": "이러한 단계를 충분히 반복하면 최종적으로 노이즈 이미지가 출력된다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 예측기의 학습 방법은 기계 학습 중에서 지도 학습에 해당한다."
+              },
+              {
+                "id": "D",
+                "text": "순확산 과정은 이미지에 노이즈를 추가하면서 노이즈 예측기를 학습시키는 과정이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 4,
+              "end": 7
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주어"
+              },
+              {
+                "id": "B",
+                "text": "부사어"
+              },
+              {
+                "id": "C",
+                "text": "서술어"
+              },
+              {
+                "id": "D",
+                "text": "목적어"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 0,
+              "end": 44
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "순확산 과정은 이미지에 노이즈를 추가하면서 노이즈 예측기를 학습시키는 과정이다."
+              },
+              {
+                "id": "B",
+                "text": "노이즈를 제거하려면 이미지에 단계별로 어떤 특성의 노이즈가 더해졌는지 알아야 하는데 노이즈 예측기가 이 역할을 한다."
+              },
+              {
+                "id": "C",
+                "text": "확산 모델의 기본 발상은, 원본 이미지에 노이즈를 점진적으로 추가하였다가 그 노이즈를 다시 제거해 나가면 원본 이미지를 복원할 수 있다는 것이다."
+              },
+              {
+                "id": "D",
+                "text": "노이즈 예측기의 학습 방법은 기계 학습 중에서 지도 학습에 해당한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 45,
+              "end": 124
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이미지 연산기는 입력된 확산 이미지로부터 이 노이즈를 빼서 현 단계의 노이즈를 제거한 확산 이미지를 출력한다."
+              },
+              {
+                "id": "B",
+                "text": "역확산 과정은 노이즈 이미지에서 노이즈를 제거하여 원본 이미지를 복원하는 과정이다."
+              },
+              {
+                "id": "C",
+                "text": "따라서 노이즈 예측기는 단계별로 확산 이미지를 입력받아 이미지에 포함된 노이즈의 특성을 추출하여 수치들로 표현하고, 이 수치들을 바탕으로 노이즈를 예측한다."
+              },
+              {
+                "id": "D",
+                "text": "첫 단계에서는, 노이즈 생성기에서 노이즈를 만든 후 이미지 연산기가 이 노이즈를 원본 이미지에 더해서 노이즈가 포함된 확산 이미지를 출력한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 125,
+              "end": 176
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다음 단계부터는 노이즈 생성기에서 만든 노이즈를 이전 단계에서 출력된 확산 이미지에 더한다."
+              },
+              {
+                "id": "B",
+                "text": "역확산 과정은 노이즈 이미지에서 노이즈를 제거하여 원본 이미지를 복원하는 과정이다."
+              },
+              {
+                "id": "C",
+                "text": "첫 단계에서는, 노이즈 생성기에서 노이즈를 만든 후 이미지 연산기가 이 노이즈를 원본 이미지에 더해서 노이즈가 포함된 확산 이미지를 출력한다."
+              },
+              {
+                "id": "D",
+                "text": "이러한 단계를 충분히 반복하면 최종적으로 노이즈 이미지가 출력된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 177,
+              "end": 214
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문장이나 영상, 음성을 만들어 내는 인공 지능 생성 모델 중 확산 모델은 영상의 복원, 생성 및 변환에 뛰어난 성능을 보인다."
+              },
+              {
+                "id": "B",
+                "text": "노이즈 이미지 또는 중간 단계에서의 확산 이미지를 노이즈 예측기에 입력하면 이미지에 포함된 노이즈의 특성을 추출하여 잠재 표현을 구하고 이를 바탕으로 노이즈를"
+              },
+              {
+                "id": "C",
+                "text": "이러한 단계를 충분히 반복하면 최종적으로 노이즈 이미지가 출력된다."
+              },
+              {
+                "id": "D",
+                "text": "노이즈는 불필요하거나 원하지 않는 값을 의미한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 215,
+              "end": 255
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "노이즈 예측기를 학습시킬 때는 노이즈 생성기에서 만들어 넣어 준 노이즈가 정답에 해당하며 이 노이즈와 예측된 노이즈 사이의 차이가 작아지도록 학습시킨다."
+              },
+              {
+                "id": "B",
+                "text": "다음 단계부터는 노이즈 생성기에서 만든 노이즈를 이전 단계에서 출력된 확산 이미지에 더한다."
+              },
+              {
+                "id": "C",
+                "text": "이때 더해지는 노이즈는 크기나 분포 양상 등 그 특성이 단계별로 다르다."
+              },
+              {
+                "id": "D",
+                "text": "따라서 노이즈 예측기는 단계별로 확산 이미지를 입력받아 이미지에 포함된 노이즈의 특성을 추출하여 수치들로 표현하고, 이 수치들을 바탕으로 노이즈를 예측한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 256,
+              "end": 259
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인과"
+              },
+              {
+                "id": "B",
+                "text": "대조"
+              },
+              {
+                "id": "C",
+                "text": "첨가"
+              },
+              {
+                "id": "D",
+                "text": "예시"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 256,
+              "end": 343
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "따라서 노이즈 예측기는 단계별로 확산 이미지를 입력받아 이미지에 포함된 노이즈의 특성을 추출하여 수치들로 표현하고, 이 수치들을 바탕으로 노이즈를 예측한다."
+              },
+              {
+                "id": "B",
+                "text": "한편, 많은 종류의 이미지를 학습시킨 후 학습된 이미지의 잠재 표현에 고유 번호를 붙이면 역확산 과정에서 이미지를 선택하여 생성할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "이때 더해지는 노이즈는 크기나 분포 양상 등 그 특성이 단계별로 다르다."
+              },
+              {
+                "id": "D",
+                "text": "확산 모델의 기본 발상은, 원본 이미지에 노이즈를 점진적으로 추가하였다가 그 노이즈를 다시 제거해 나가면 원본 이미지를 복원할 수 있다는 것이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 344,
+              "end": 377
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "역으로, 단계별로 더해진 노이즈를 알 수 있다면 노이즈 이미지에서 원본 이미지를 복원할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "노이즈 예측기 내부의 이러한 수치들을 잠재 표현이라고 한다."
+              },
+              {
+                "id": "C",
+                "text": "역확산 과정은 노이즈 이미지에서 노이즈를 제거하여 원본 이미지를 복원하는 과정이다."
+              },
+              {
+                "id": "D",
+                "text": "순확산 과정은 이미지에 노이즈를 추가하면서 노이즈 예측기를 학습시키는 과정이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 378,
+              "end": 417
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "노이즈 이미지 또는 중간 단계에서의 확산 이미지를 노이즈 예측기에 입력하면 이미지에 포함된 노이즈의 특성을 추출하여 잠재 표현을 구하고 이를 바탕으로 노이즈를"
+              },
+              {
+                "id": "B",
+                "text": "노이즈 예측기를 학습시킬 때는 노이즈 생성기에서 만들어 넣어 준 노이즈가 정답에 해당하며 이 노이즈와 예측된 노이즈 사이의 차이가 작아지도록 학습시킨다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 예측기는 잠재 표현을 구하고 노이즈를 예측하는 방식을 학습한다."
+              },
+              {
+                "id": "D",
+                "text": "순확산 과정은 이미지에 노이즈를 추가하면서 노이즈 예측기를 학습시키는 과정이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "paragraphId": "p2",
+            "range": {
+              "start": 0,
+              "end": 417
+            }
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "확산 이미지에 이런 단계를 반복하면 결국 노이즈가 대부분 제거되어 원본 이미지에 가까운 이미지만 남게 된다."
+              },
+              {
+                "id": "B",
+                "text": "노이즈 예측기 내부의 이러한 수치들을 잠재 표현이라고 한다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈를 제거하려면 이미지에 단계별로 어떤 특성의 노이즈가 더해졌는지 알아야 하는데 노이즈 예측기가 이 역할을 한다."
+              },
+              {
+                "id": "D",
+                "text": "순확산 과정은 이미지에 노이즈를 추가하면서 노이즈 예측기를 학습시키는 과정이다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": {
+              "start": 12,
+              "end": 15
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서술어"
+              },
+              {
+                "id": "B",
+                "text": "부사어"
+              },
+              {
+                "id": "C",
+                "text": "목적어"
+              },
+              {
+                "id": "D",
+                "text": "주어"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": {
+              "start": 0,
+              "end": 38
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "노이즈 예측기를 학습시킬 때는 노이즈 생성기에서 만들어 넣어 준 노이즈가 정답에 해당하며 이 노이즈와 예측된 노이즈 사이의 차이가 작아지도록 학습시킨다."
+              },
+              {
+                "id": "B",
+                "text": "따라서 노이즈 예측기는 단계별로 확산 이미지를 입력받아 이미지에 포함된 노이즈의 특성을 추출하여 수치들로 표현하고, 이 수치들을 바탕으로 노이즈를 예측한다."
+              },
+              {
+                "id": "C",
+                "text": "확산 모델은 노이즈 생성기, 이미지 연산기, 노이즈 예측기로 구성되며, 순확산 과정과 역확산 과정 순으로 작동한다."
+              },
+              {
+                "id": "D",
+                "text": "노이즈 예측기의 학습 방법은 기계 학습 중에서 지도 학습에 해당한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": {
+              "start": 39,
+              "end": 95
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지도 학습은 학습 데이터에 정답이 주어져 출력과 정답의 차이가 작아지도록 모델을 학습시키는 방법이다."
+              },
+              {
+                "id": "B",
+                "text": "첫 단계에서는, 노이즈 생성기에서 노이즈를 만든 후 이미지 연산기가 이 노이즈를 원본 이미지에 더해서 노이즈가 포함된 확산 이미지를 출력한다."
+              },
+              {
+                "id": "C",
+                "text": "확산 모델은 노이즈 생성기, 이미지 연산기, 노이즈 예측기로 구성되며, 순확산 과정과 역확산 과정 순으로 작동한다."
+              },
+              {
+                "id": "D",
+                "text": "문장이나 영상, 음성을 만들어 내는 인공 지능 생성 모델 중 확산 모델은 영상의 복원, 생성 및 변환에 뛰어난 성능을 보인다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": {
+              "start": 96,
+              "end": 181
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다음 단계부터는 노이즈 생성기에서 만든 노이즈를 이전 단계에서 출력된 확산 이미지에 더한다."
+              },
+              {
+                "id": "B",
+                "text": "역으로, 단계별로 더해진 노이즈를 알 수 있다면 노이즈 이미지에서 원본 이미지를 복원할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 예측기를 학습시킬 때는 노이즈 생성기에서 만들어 넣어 준 노이즈가 정답에 해당하며 이 노이즈와 예측된 노이즈 사이의 차이가 작아지도록 학습시킨다."
+              },
+              {
+                "id": "D",
+                "text": "확산 모델의 기본 발상은, 원본 이미지에 노이즈를 점진적으로 추가하였다가 그 노이즈를 다시 제거해 나가면 원본 이미지를 복원할 수 있다는 것이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {
+            "paragraphId": "p3",
+            "range": {
+              "start": 0,
+              "end": 181
+            }
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "노이즈 예측기 내부의 이러한 수치들을 잠재 표현이라고 한다."
+              },
+              {
+                "id": "B",
+                "text": "원하는 값만 들어 있는 원본 이미지에 노이즈를 단계별로 더하면 노이즈가 포함된 확산 이미지가 되고, 여러 단계를 거치면 결국 원본 이미지가 어떤 이미지였는지"
+              },
+              {
+                "id": "C",
+                "text": "노이즈 예측기의 학습 방법은 기계 학습 중에서 지도 학습에 해당한다."
+              },
+              {
+                "id": "D",
+                "text": "이때 더해지는 노이즈는 크기나 분포 양상 등 그 특성이 단계별로 다르다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s25",
+          "highlight": {
+            "paragraphId": "p4",
+            "range": {
+              "start": 4,
+              "end": 7
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서술어"
+              },
+              {
+                "id": "B",
+                "text": "부사어"
+              },
+              {
+                "id": "C",
+                "text": "목적어"
+              },
+              {
+                "id": "D",
+                "text": "주어"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s26",
+          "highlight": {
+            "paragraphId": "p4",
+            "range": {
+              "start": 0,
+              "end": 46
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "역으로, 단계별로 더해진 노이즈를 알 수 있다면 노이즈 이미지에서 원본 이미지를 복원할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "따라서 노이즈 예측기는 단계별로 확산 이미지를 입력받아 이미지에 포함된 노이즈의 특성을 추출하여 수치들로 표현하고, 이 수치들을 바탕으로 노이즈를 예측한다."
+              },
+              {
+                "id": "C",
+                "text": "역확산 과정은 노이즈 이미지에서 노이즈를 제거하여 원본 이미지를 복원하는 과정이다."
+              },
+              {
+                "id": "D",
+                "text": "다음 단계부터는 노이즈 생성기에서 만든 노이즈를 이전 단계에서 출력된 확산 이미지에 더한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s27",
+          "highlight": {
+            "paragraphId": "p4",
+            "range": {
+              "start": 47,
+              "end": 112
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "노이즈를 제거하려면 이미지에 단계별로 어떤 특성의 노이즈가 더해졌는지 알아야 하는데 노이즈 예측기가 이 역할을 한다."
+              },
+              {
+                "id": "B",
+                "text": "노이즈 예측기를 학습시킬 때는 노이즈 생성기에서 만들어 넣어 준 노이즈가 정답에 해당하며 이 노이즈와 예측된 노이즈 사이의 차이가 작아지도록 학습시킨다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈는 불필요하거나 원하지 않는 값을 의미한다."
+              },
+              {
+                "id": "D",
+                "text": "첫 단계에서는, 노이즈 생성기에서 노이즈를 만든 후 이미지 연산기가 이 노이즈를 원본 이미지에 더해서 노이즈가 포함된 확산 이미지를 출력한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s28",
+          "highlight": {
+            "paragraphId": "p4",
+            "range": {
+              "start": 113,
+              "end": 207
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "노이즈 예측기 내부의 이러한 수치들을 잠재 표현이라고 한다."
+              },
+              {
+                "id": "B",
+                "text": "이러한 단계를 충분히 반복하면 최종적으로 노이즈 이미지가 출력된다."
+              },
+              {
+                "id": "C",
+                "text": "확산 모델은 노이즈 생성기, 이미지 연산기, 노이즈 예측기로 구성되며, 순확산 과정과 역확산 과정 순으로 작동한다."
+              },
+              {
+                "id": "D",
+                "text": "노이즈 이미지 또는 중간 단계에서의 확산 이미지를 노이즈 예측기에 입력하면 이미지에 포함된 노이즈의 특성을 추출하여 잠재 표현을 구하고 이를 바탕으로 노이즈를"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s29",
+          "highlight": {
+            "paragraphId": "p4",
+            "range": {
+              "start": 208,
+              "end": 269
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이미지 연산기는 입력된 확산 이미지로부터 이 노이즈를 빼서 현 단계의 노이즈를 제거한 확산 이미지를 출력한다."
+              },
+              {
+                "id": "B",
+                "text": "따라서 노이즈 예측기는 단계별로 확산 이미지를 입력받아 이미지에 포함된 노이즈의 특성을 추출하여 수치들로 표현하고, 이 수치들을 바탕으로 노이즈를 예측한다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 예측기 내부의 이러한 수치들을 잠재 표현이라고 한다."
+              },
+              {
+                "id": "D",
+                "text": "확산 모델은 노이즈 생성기, 이미지 연산기, 노이즈 예측기로 구성되며, 순확산 과정과 역확산 과정 순으로 작동한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s30",
+          "highlight": {
+            "paragraphId": "p4",
+            "range": {
+              "start": 270,
+              "end": 330
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다음 단계부터는 노이즈 생성기에서 만든 노이즈를 이전 단계에서 출력된 확산 이미지에 더한다."
+              },
+              {
+                "id": "B",
+                "text": "확산 이미지에 이런 단계를 반복하면 결국 노이즈가 대부분 제거되어 원본 이미지에 가까운 이미지만 남게 된다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈는 불필요하거나 원하지 않는 값을 의미한다."
+              },
+              {
+                "id": "D",
+                "text": "노이즈 예측기의 학습 방법은 기계 학습 중에서 지도 학습에 해당한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s31",
+          "highlight": {
+            "paragraphId": "p4",
+            "range": {
+              "start": 0,
+              "end": 330
+            }
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "역확산 과정은 노이즈 이미지에서 노이즈를 제거하여 원본 이미지를 복원하는 과정이다."
+              },
+              {
+                "id": "B",
+                "text": "문장이나 영상, 음성을 만들어 내는 인공 지능 생성 모델 중 확산 모델은 영상의 복원, 생성 및 변환에 뛰어난 성능을 보인다."
+              },
+              {
+                "id": "C",
+                "text": "이미지 연산기는 입력된 확산 이미지로부터 이 노이즈를 빼서 현 단계의 노이즈를 제거한 확산 이미지를 출력한다."
+              },
+              {
+                "id": "D",
+                "text": "또한 잠재 표현의 수치들을 조정하면 다른 특성의 노이즈가 생성되어 여러 이미지를 혼합하거나 실재하지 않는 이미지를 만들어 낼 수도 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s32",
+          "highlight": {
+            "paragraphId": "p5",
+            "range": {
+              "start": 11,
+              "end": 15
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "목적어"
+              },
+              {
+                "id": "B",
+                "text": "서술어"
+              },
+              {
+                "id": "C",
+                "text": "주어"
+              },
+              {
+                "id": "D",
+                "text": "부사어"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s33",
+          "highlight": {
+            "paragraphId": "p5",
+            "range": {
+              "start": 0,
+              "end": 78
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한편, 많은 종류의 이미지를 학습시킨 후 학습된 이미지의 잠재 표현에 고유 번호를 붙이면 역확산 과정에서 이미지를 선택하여 생성할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "순확산 과정은 이미지에 노이즈를 추가하면서 노이즈 예측기를 학습시키는 과정이다."
+              },
+              {
+                "id": "C",
+                "text": "다음 단계부터는 노이즈 생성기에서 만든 노이즈를 이전 단계에서 출력된 확산 이미지에 더한다."
+              },
+              {
+                "id": "D",
+                "text": "역으로, 단계별로 더해진 노이즈를 알 수 있다면 노이즈 이미지에서 원본 이미지를 복원할 수 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s34",
+          "highlight": {
+            "paragraphId": "p5",
+            "range": {
+              "start": 79,
+              "end": 81
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "예시"
+              },
+              {
+                "id": "B",
+                "text": "첨가"
+              },
+              {
+                "id": "C",
+                "text": "대조"
+              },
+              {
+                "id": "D",
+                "text": "인과"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s35",
+          "highlight": {
+            "paragraphId": "p5",
+            "range": {
+              "start": 79,
+              "end": 155
+            }
+          },
+          "question": {
+            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "또한 잠재 표현의 수치들을 조정하면 다른 특성의 노이즈가 생성되어 여러 이미지를 혼합하거나 실재하지 않는 이미지를 만들어 낼 수도 있다."
+              },
+              {
+                "id": "B",
+                "text": "따라서 노이즈 예측기는 단계별로 확산 이미지를 입력받아 이미지에 포함된 노이즈의 특성을 추출하여 수치들로 표현하고, 이 수치들을 바탕으로 노이즈를 예측한다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 이미지 또는 중간 단계에서의 확산 이미지를 노이즈 예측기에 입력하면 이미지에 포함된 노이즈의 특성을 추출하여 잠재 표현을 구하고 이를 바탕으로 노이즈를"
+              },
+              {
+                "id": "D",
+                "text": "역으로, 단계별로 더해진 노이즈를 알 수 있다면 노이즈 이미지에서 원본 이미지를 복원할 수 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s36",
+          "highlight": {
+            "paragraphId": "p5",
+            "range": {
+              "start": 0,
+              "end": 155
+            }
+          },
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한편, 많은 종류의 이미지를 학습시킨 후 학습된 이미지의 잠재 표현에 고유 번호를 붙이면 역확산 과정에서 이미지를 선택하여 생성할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "순확산 과정은 이미지에 노이즈를 추가하면서 노이즈 예측기를 학습시키는 과정이다."
+              },
+              {
+                "id": "C",
+                "text": "노이즈 예측기 내부의 이러한 수치들을 잠재 표현이라고 한다."
+              },
+              {
+                "id": "D",
+                "text": "노이즈를 제거하려면 이미지에 단계별로 어떤 특성의 노이즈가 더해졌는지 알아야 하는데 노이즈 예측기가 이 역할을 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -20,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "문장이나 영상, 음성을 만들어 내는 인공 지능 생성 모델 중 확산 모델은 영상의 복원, 생성 및 변환에 뛰어난 성능을 보인다. 확산 모델의 기본"
+        },
+        {
+          "id": "c2",
+          "text": "순확산 과정은 이미지에 노이즈를 추가하면서 노이즈 예측기를 학습시키는 과정이다. 첫 단계에서는, 노이즈 생성기에서 노이즈를 만든 후 이미지 연산"
+        },
+        {
+          "id": "c3",
+          "text": "노이즈 예측기의 학습 방법은 기계 학습 중에서 지도 학습에 해당한다. 지도 학습은 학습 데이터에 정답이 주어져 출력과 정답의 차이가 작아지도록"
+        },
+        {
+          "id": "c4",
+          "text": "역확산 과정은 노이즈 이미지에서 노이즈를 제거하여 원본 이미지를 복원하는 과정이다. 노이즈를 제거하려면 이미지에 단계별로 어떤 특성의 노이즈가"
+        },
+        {
+          "id": "c5",
+          "text": "한편, 많은 종류의 이미지를 학습시킨 후 학습된 이미지의 잠재 표현에 고유 번호를 붙이면 역확산 과정에서 이미지를 선택하여 생성할 수 있다. 또"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "지문에서 '추가하였다가'를 찾아 클릭하세요.",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 105,
+              "end": 111
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -30
+          },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}
