@@ -1,5 +1,5 @@
 {
-  "contentId": "dfae52aa-2e61-4937-bb39-15dfd8d0df6d",
+  "contentId": "pc-001",
   "contentType": "GRAMMAR_PHONEME_CHANGE",
   "version": 1,
   "status": "PUBLISHED",
@@ -20,38 +20,47 @@
       {
         "wordId": "w1",
         "surface": "국밥",
+        "pronunciation": "[국빱]",
         "cells": [
-          { "cellNo": 1, "text": "국" },
-          { "cellNo": 2, "text": "밥" }
+          { "cellNo": 0, "text": "ㄱ" },
+          { "cellNo": 1, "text": "ㅜ" },
+          { "cellNo": 2, "text": "ㄱ" },
+          { "cellNo": 3, "text": ",", "type": "sep" },
+          { "cellNo": 4, "text": "ㅂ" },
+          { "cellNo": 5, "text": "ㅏ" },
+          { "cellNo": 6, "text": "ㅂ" }
         ],
         "steps": [
           {
             "stepId": "st1",
-            "envCellNos": [1],
-            "targetCellNo": 2,
+            "envCellNos": [2],
+            "targetCellNo": 4,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "구" },
-              { "id": "B", "text": "국" },
-              { "id": "C", "text": "궁" },
-              { "id": "D", "text": "굽" }
+              { "id": "A", "text": "ㅃ" },
+              { "id": "B", "text": "ㅂ" },
+              { "id": "C", "text": "ㅁ" },
+              { "id": "D", "text": "ㄱ" }
             ],
-            "answerId": "C",
+            "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCellText": { "cellNo": 2, "newText": "궁" }
+              "applyCells": [
+                { "cellNo": 3, "newText": "" },
+                { "cellNo": 4, "newText": "ㅃ" }
+              ]
             },
             "onWrong": { "deltaSec": -20, "retry": true }
           },
           {
             "stepId": "st2",
-            "targetCellNo": 2,
+            "targetCellNo": 4,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "비음화" },
-              { "id": "B", "text": "유음화" },
-              { "id": "C", "text": "구개음화" },
-              { "id": "D", "text": "된소리되기" }
+              { "id": "A", "text": "된소리되기" },
+              { "id": "B", "text": "비음화" },
+              { "id": "C", "text": "유음화" },
+              { "id": "D", "text": "구개음화" }
             ],
             "answerId": "A",
             "onCorrect": { "deltaSec": 0, "next": true }
@@ -61,26 +70,34 @@
       {
         "wordId": "w2",
         "surface": "신라",
+        "pronunciation": "[실라]",
         "cells": [
-          { "cellNo": 1, "text": "신" },
-          { "cellNo": 2, "text": "라" }
+          { "cellNo": 0, "text": "ㅅ" },
+          { "cellNo": 1, "text": "ㅣ" },
+          { "cellNo": 2, "text": "ㄴ" },
+          { "cellNo": 3, "text": ",", "type": "sep" },
+          { "cellNo": 4, "text": "ㄹ" },
+          { "cellNo": 5, "text": "ㅏ" }
         ],
         "steps": [
           {
             "stepId": "st1",
-            "envCellNos": [1],
+            "envCellNos": [4],
             "targetCellNo": 2,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "나" },
-              { "id": "B", "text": "라" },
-              { "id": "C", "text": "다" },
-              { "id": "D", "text": "사" }
+              { "id": "A", "text": "ㄹ" },
+              { "id": "B", "text": "ㄴ" },
+              { "id": "C", "text": "ㅁ" },
+              { "id": "D", "text": "ㅇ" }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCellText": { "cellNo": 2, "newText": "나" }
+              "applyCells": [
+                { "cellNo": 2, "newText": "ㄹ" },
+                { "cellNo": 3, "newText": "" }
+              ]
             },
             "onWrong": { "deltaSec": -20, "retry": true }
           },
@@ -89,8 +106,8 @@
             "targetCellNo": 2,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "비음화" },
-              { "id": "B", "text": "유음화" },
+              { "id": "A", "text": "유음화" },
+              { "id": "B", "text": "비음화" },
               { "id": "C", "text": "구개음화" },
               { "id": "D", "text": "된소리되기" }
             ],
@@ -102,32 +119,41 @@
       {
         "wordId": "w3",
         "surface": "꽃밭",
+        "pronunciation": "[꼳빧]",
         "cells": [
-          { "cellNo": 1, "text": "꽃" },
-          { "cellNo": 2, "text": "밭" }
+          { "cellNo": 0, "text": "ㄲ" },
+          { "cellNo": 1, "text": "ㅗ" },
+          { "cellNo": 2, "text": "ㅊ" },
+          { "cellNo": 3, "text": ",", "type": "sep" },
+          { "cellNo": 4, "text": "ㅂ" },
+          { "cellNo": 5, "text": "ㅏ" },
+          { "cellNo": 6, "text": "ㅌ" }
         ],
         "steps": [
           {
             "stepId": "st1",
-            "envCellNos": [1],
-            "targetCellNo": 2,
+            "envCellNos": [2],
+            "targetCellNo": 4,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "빧" },
-              { "id": "B", "text": "밧" },
-              { "id": "C", "text": "빤" },
-              { "id": "D", "text": "빠" }
+              { "id": "A", "text": "ㅃ" },
+              { "id": "B", "text": "ㅂ" },
+              { "id": "C", "text": "ㅁ" },
+              { "id": "D", "text": "ㄷ" }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCellText": { "cellNo": 2, "newText": "빧" }
+              "applyCells": [
+                { "cellNo": 3, "newText": "" },
+                { "cellNo": 4, "newText": "ㅃ" }
+              ]
             },
             "onWrong": { "deltaSec": -20, "retry": true }
           },
           {
             "stepId": "st2",
-            "targetCellNo": 2,
+            "targetCellNo": 4,
             "questionType": "RULE_EXPLANATION",
             "choices": [
               { "id": "A", "text": "된소리되기" },
@@ -140,7 +166,6 @@
           }
         ]
       }
-    ],
-    "pageStack": true
+    ]
   }
 }

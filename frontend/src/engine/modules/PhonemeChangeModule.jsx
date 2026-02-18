@@ -9,7 +9,7 @@ function PhonemeChangeModule({ content }) {
   const words = payload.words || [];
   const [wordIndex, setWordIndex] = useState(0);
   const [stepIndex, setStepIndex] = useState(0);
-  const [cellsState, setCellsState] = useState(() => words.map((word) => word.cells));
+  const [cellsState, setCellsState] = useState(() => words.map((w) => w.cells));
   const [lastResult, setLastResult] = useState(null);
   const advanceTimerRef = useRef(null);
   const resultTimerRef = useRef(null);
@@ -18,7 +18,7 @@ function PhonemeChangeModule({ content }) {
 
   const word = words[wordIndex];
   const step = word?.steps?.[stepIndex];
-  const anchorRect = useHighlightAnchor(moduleRef, ".phoneme-cell.target", [wordIndex, stepIndex]);
+  const anchorRect = useHighlightAnchor(moduleRef, ".phoneme-box.target", [wordIndex, stepIndex]);
 
   const handleAnswer = (choiceId) => {
     if (!step) return;
@@ -27,27 +27,30 @@ function PhonemeChangeModule({ content }) {
     adjustTime(delta);
     recordAnswer({ id: step.stepId, correct: isCorrect });
     setLastResult(isCorrect ? "correct" : "wrong");
-    if (resultTimerRef.current) {
-      clearTimeout(resultTimerRef.current);
-    }
-    resultTimerRef.current = setTimeout(() => {
-      setLastResult(null);
-    }, feedbackDelay);
+    if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
+    resultTimerRef.current = setTimeout(() => setLastResult(null), feedbackDelay);
+
     if (!isCorrect && step.onWrong?.retry) return;
-    if (isCorrect && step.onCorrect?.applyCellText) {
-      const { cellNo, newText } = step.onCorrect.applyCellText;
-      setCellsState((prev) =>
-        prev.map((cellList, idx) => {
-          if (idx !== wordIndex) return cellList;
-          return cellList.map((cell) =>
-            cell.cellNo === cellNo ? { ...cell, text: newText } : cell
-          );
-        })
-      );
+
+    if (isCorrect) {
+      const updates = [...(step.onCorrect?.applyCells || [])];
+      if (step.onCorrect?.applyCellText) {
+        updates.push(step.onCorrect.applyCellText);
+      }
+      if (updates.length > 0) {
+        setCellsState((prev) =>
+          prev.map((cellList, idx) => {
+            if (idx !== wordIndex) return cellList;
+            return cellList.map((cell) => {
+              const upd = updates.find((u) => u.cellNo === cell.cellNo);
+              return upd ? { ...cell, text: upd.newText } : cell;
+            });
+          })
+        );
+      }
     }
-    if (advanceTimerRef.current) {
-      clearTimeout(advanceTimerRef.current);
-    }
+
+    if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
     advanceTimerRef.current = setTimeout(() => {
       if (stepIndex < word.steps.length - 1) {
         setStepIndex((prev) => prev + 1);
@@ -63,22 +66,37 @@ function PhonemeChangeModule({ content }) {
   };
 
   useEffect(() => {
-    if (status === "READY") {
-      start();
-    }
+    if (status === "READY") start();
   }, [status, start]);
 
   useEffect(
     () => () => {
-      if (advanceTimerRef.current) {
-        clearTimeout(advanceTimerRef.current);
-      }
-      if (resultTimerRef.current) {
-        clearTimeout(resultTimerRef.current);
-      }
+      if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
+      if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
     },
     []
   );
+
+  const renderBox = (cell, mode, step) => {
+    const isOriginal = mode === "original";
+    const isEnv = !isOriginal && step?.envCellNos?.includes(cell.cellNo);
+    const isTarget = !isOriginal && step?.targetCellNo === cell.cellNo;
+    const isSep = cell.type === "sep";
+    const isEmpty = cell.text === "";
+
+    let cls = "phoneme-box";
+    if (isOriginal) cls += " original";
+    if (isSep) cls += " sep";
+    else if (isEmpty) cls += " space";
+    if (isEnv) cls += " env";
+    if (isTarget) cls += " target";
+
+    return (
+      <div key={`${mode}-${cell.cellNo}`} className={cls}>
+        {isSep ? "," : cell.text}
+      </div>
+    );
+  };
 
   return (
     <div className="phoneme-module" ref={moduleRef}>
@@ -91,27 +109,24 @@ function PhonemeChangeModule({ content }) {
         </div>
       ) : (
         <>
-          <div className="phoneme-header">
+          <div className="phoneme-change-header">
             <h3>{word?.surface}</h3>
-            <span>
+            {word?.pronunciation && (
+              <span className="phoneme-change-pronunciation">{word.pronunciation}</span>
+            )}
+            <span className="phoneme-change-progress">
               {wordIndex + 1}/{words.length} · {stepIndex + 1}/{word?.steps?.length || 0}
             </span>
           </div>
-          <div className="phoneme-cells">
-            {cellsState[wordIndex]?.map((cell) => {
-              const isEnv = step?.envCellNos?.includes(cell.cellNo);
-              const isTarget = step?.targetCellNo === cell.cellNo;
-              return (
-                <div
-                  key={cell.cellNo}
-                  className={`phoneme-cell ${isEnv ? "env" : ""} ${
-                    isTarget ? "target" : ""
-                  }`}
-                >
-                  {cell.text}
-                </div>
-              );
-            })}
+          <div className="phoneme-change-rows">
+            <div className="phoneme-change-row">
+              <span className="phoneme-change-row-label">원형</span>
+              {word?.cells?.map((cell) => renderBox(cell, "original", null))}
+            </div>
+            <div className="phoneme-change-row">
+              <span className="phoneme-change-row-label">작업</span>
+              {cellsState[wordIndex]?.map((cell) => renderBox(cell, "working", step))}
+            </div>
           </div>
           {lastResult ? (
             <div className={`worksheet-feedback ${lastResult}`}>

@@ -1,0 +1,442 @@
+{
+  "contentId": "pc-029",
+  "contentType": "GRAMMAR_PHONEME_CHANGE",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "음운 변동 분석 029",
+  "description": "복합 변동 종합 연습 5 - 3~4단계 복합 변동 심화",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": { "min": 4, "max": 6 },
+  "area": "GRAMMAR",
+  "subArea": "PHONEME_CHANGE",
+  "competencies": ["VOCAB", "READING"],
+  "tags": [],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 180,
+  "assets": {},
+  "payload": {
+    "words": [
+      {
+        "wordId": "w1",
+        "surface": "흙냄새",
+        "pronunciation": "[흥냄새]",
+        "cells": [
+          { "cellNo": 0, "text": "ㅎ" },
+          { "cellNo": 1, "text": "ㅡ" },
+          { "cellNo": 2, "text": "ㄹ" },
+          { "cellNo": 3, "text": "ㄱ" },
+          { "cellNo": 4, "text": ",", "type": "sep" },
+          { "cellNo": 5, "text": "ㄴ" },
+          { "cellNo": 6, "text": "ㅐ" },
+          { "cellNo": 7, "text": "ㅁ" },
+          { "cellNo": 8, "text": ",", "type": "sep" },
+          { "cellNo": 9, "text": "ㅅ" },
+          { "cellNo": 10, "text": "ㅐ" }
+        ],
+        "steps": [
+          {
+            "stepId": "st1",
+            "envCellNos": [2, 3],
+            "targetCellNo": 2,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "(탈락)" },
+              { "id": "B", "text": "ㄹ" },
+              { "id": "C", "text": "ㄱ" },
+              { "id": "D", "text": "ㅇ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 2, "newText": "" },
+                { "cellNo": 4, "newText": "" },
+                { "cellNo": 8, "newText": "" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st2",
+            "targetCellNo": 2,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "자음군 단순화" },
+              { "id": "B", "text": "비음화" },
+              { "id": "C", "text": "된소리되기" },
+              { "id": "D", "text": "음절 끝소리 규칙" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          },
+          {
+            "stepId": "st3",
+            "envCellNos": [5],
+            "targetCellNo": 3,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "ㅇ" },
+              { "id": "B", "text": "ㄱ" },
+              { "id": "C", "text": "ㄴ" },
+              { "id": "D", "text": "ㅁ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 3, "newText": "ㅇ" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st4",
+            "targetCellNo": 3,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "비음화" },
+              { "id": "B", "text": "자음군 단순화" },
+              { "id": "C", "text": "유음화" },
+              { "id": "D", "text": "된소리되기" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          }
+        ]
+      },
+      {
+        "wordId": "w2",
+        "surface": "묽고",
+        "pronunciation": "[물꼬]",
+        "cells": [
+          { "cellNo": 0, "text": "ㅁ" },
+          { "cellNo": 1, "text": "ㅜ" },
+          { "cellNo": 2, "text": "ㄹ" },
+          { "cellNo": 3, "text": "ㄱ" },
+          { "cellNo": 4, "text": ",", "type": "sep" },
+          { "cellNo": 5, "text": "ㄱ" },
+          { "cellNo": 6, "text": "ㅗ" }
+        ],
+        "steps": [
+          {
+            "stepId": "st1",
+            "envCellNos": [3],
+            "targetCellNo": 5,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "ㄲ" },
+              { "id": "B", "text": "ㄱ" },
+              { "id": "C", "text": "ㅋ" },
+              { "id": "D", "text": "ㅇ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 4, "newText": "" },
+                { "cellNo": 5, "newText": "ㄲ" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st2",
+            "targetCellNo": 5,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "된소리되기" },
+              { "id": "B", "text": "비음화" },
+              { "id": "C", "text": "음절 끝소리 규칙" },
+              { "id": "D", "text": "유음화" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          },
+          {
+            "stepId": "st3",
+            "envCellNos": [2, 3],
+            "targetCellNo": 3,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "(탈락)" },
+              { "id": "B", "text": "ㄱ" },
+              { "id": "C", "text": "ㄹ" },
+              { "id": "D", "text": "ㅇ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 3, "newText": "" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st4",
+            "targetCellNo": 3,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "자음군 단순화" },
+              { "id": "B", "text": "된소리되기" },
+              { "id": "C", "text": "비음화" },
+              { "id": "D", "text": "음절 끝소리 규칙" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          }
+        ]
+      },
+      {
+        "wordId": "w3",
+        "surface": "짧지",
+        "pronunciation": "[짤찌]",
+        "cells": [
+          { "cellNo": 0, "text": "ㅉ" },
+          { "cellNo": 1, "text": "ㅏ" },
+          { "cellNo": 2, "text": "ㄹ" },
+          { "cellNo": 3, "text": "ㅂ" },
+          { "cellNo": 4, "text": ",", "type": "sep" },
+          { "cellNo": 5, "text": "ㅈ" },
+          { "cellNo": 6, "text": "ㅣ" }
+        ],
+        "steps": [
+          {
+            "stepId": "st1",
+            "envCellNos": [3],
+            "targetCellNo": 5,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "ㅉ" },
+              { "id": "B", "text": "ㅈ" },
+              { "id": "C", "text": "ㅊ" },
+              { "id": "D", "text": "ㅂ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 4, "newText": "" },
+                { "cellNo": 5, "newText": "ㅉ" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st2",
+            "targetCellNo": 5,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "된소리되기" },
+              { "id": "B", "text": "비음화" },
+              { "id": "C", "text": "자음군 단순화" },
+              { "id": "D", "text": "음절 끝소리 규칙" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          },
+          {
+            "stepId": "st3",
+            "envCellNos": [2, 3],
+            "targetCellNo": 3,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "(탈락)" },
+              { "id": "B", "text": "ㅂ" },
+              { "id": "C", "text": "ㄹ" },
+              { "id": "D", "text": "ㅁ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 3, "newText": "" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st4",
+            "targetCellNo": 3,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "자음군 단순화" },
+              { "id": "B", "text": "된소리되기" },
+              { "id": "C", "text": "비음화" },
+              { "id": "D", "text": "유음화" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          }
+        ]
+      },
+      {
+        "wordId": "w4",
+        "surface": "맑게",
+        "pronunciation": "[말께]",
+        "cells": [
+          { "cellNo": 0, "text": "ㅁ" },
+          { "cellNo": 1, "text": "ㅏ" },
+          { "cellNo": 2, "text": "ㄹ" },
+          { "cellNo": 3, "text": "ㄱ" },
+          { "cellNo": 4, "text": ",", "type": "sep" },
+          { "cellNo": 5, "text": "ㄱ" },
+          { "cellNo": 6, "text": "ㅔ" }
+        ],
+        "steps": [
+          {
+            "stepId": "st1",
+            "envCellNos": [3],
+            "targetCellNo": 5,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "ㄲ" },
+              { "id": "B", "text": "ㄱ" },
+              { "id": "C", "text": "ㅋ" },
+              { "id": "D", "text": "ㅇ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 4, "newText": "" },
+                { "cellNo": 5, "newText": "ㄲ" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st2",
+            "targetCellNo": 5,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "된소리되기" },
+              { "id": "B", "text": "비음화" },
+              { "id": "C", "text": "음절 끝소리 규칙" },
+              { "id": "D", "text": "자음군 단순화" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          },
+          {
+            "stepId": "st3",
+            "envCellNos": [2, 3],
+            "targetCellNo": 3,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "(탈락)" },
+              { "id": "B", "text": "ㄱ" },
+              { "id": "C", "text": "ㄹ" },
+              { "id": "D", "text": "ㅇ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 3, "newText": "" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st4",
+            "targetCellNo": 3,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "자음군 단순화" },
+              { "id": "B", "text": "된소리되기" },
+              { "id": "C", "text": "비음화" },
+              { "id": "D", "text": "유음화" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          }
+        ]
+      },
+      {
+        "wordId": "w5",
+        "surface": "넓고",
+        "pronunciation": "[널꼬]",
+        "cells": [
+          { "cellNo": 0, "text": "ㄴ" },
+          { "cellNo": 1, "text": "ㅓ" },
+          { "cellNo": 2, "text": "ㄹ" },
+          { "cellNo": 3, "text": "ㅂ" },
+          { "cellNo": 4, "text": ",", "type": "sep" },
+          { "cellNo": 5, "text": "ㄱ" },
+          { "cellNo": 6, "text": "ㅗ" }
+        ],
+        "steps": [
+          {
+            "stepId": "st1",
+            "envCellNos": [3],
+            "targetCellNo": 5,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "ㄲ" },
+              { "id": "B", "text": "ㄱ" },
+              { "id": "C", "text": "ㅋ" },
+              { "id": "D", "text": "ㅃ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 4, "newText": "" },
+                { "cellNo": 5, "newText": "ㄲ" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st2",
+            "targetCellNo": 5,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "된소리되기" },
+              { "id": "B", "text": "비음화" },
+              { "id": "C", "text": "음절 끝소리 규칙" },
+              { "id": "D", "text": "유음화" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          },
+          {
+            "stepId": "st3",
+            "envCellNos": [2, 3],
+            "targetCellNo": 3,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "(탈락)" },
+              { "id": "B", "text": "ㅂ" },
+              { "id": "C", "text": "ㄹ" },
+              { "id": "D", "text": "ㅁ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 3, "newText": "" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st4",
+            "targetCellNo": 3,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "자음군 단순화" },
+              { "id": "B", "text": "된소리되기" },
+              { "id": "C", "text": "비음화" },
+              { "id": "D", "text": "음절 끝소리 규칙" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          }
+        ]
+      }
+    ]
+  }
+}

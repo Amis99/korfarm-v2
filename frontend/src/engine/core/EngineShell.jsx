@@ -10,12 +10,39 @@ import "../../styles/learning-engine.css";
 const getTimeLimit = (content) => content?.timeLimitSec ?? 180;
 
 const SEED_TYPES = [
-  { type: "seed_wheat", name: "밀", weight: 70 },
-  { type: "seed_rice",  name: "쌀", weight: 70 },
-  { type: "seed_corn",  name: "옥수수", weight: 70 },
+  { type: "seed_wheat", name: "밀", weight: 50 },
+  { type: "seed_rice",  name: "쌀", weight: 50 },
+  { type: "seed_corn",  name: "옥수수", weight: 50 },
   { type: "seed_grape", name: "포도", weight: 30 },
   { type: "seed_apple", name: "사과", weight: 30 },
+  { type: "seed_barley", name: "보리", weight: 30 },
+  { type: "seed_potato", name: "감자", weight: 30 },
+  { type: "seed_sweet_potato", name: "고구마", weight: 20 },
+  { type: "seed_sesame", name: "참깨", weight: 20 },
+  { type: "seed_bean", name: "콩", weight: 20 },
 ];
+
+// 학습 레벨 → 숫자 매핑 (레벨 차이 보상 계산용)
+const LEVEL_ORDER = {
+  SAUSSURE_1: 1, SAUSSURE_2: 2, SAUSSURE_3: 3,
+  SOUSSURE_1: 1, SOUSSURE_2: 2, SOUSSURE_3: 3,
+  FREGE_1: 4, FREGE_2: 5, FREGE_3: 6,
+  RUSSELL_1: 7, RUSSELL_2: 8, RUSSELL_3: 9,
+  WITTGENSTEIN_1: 10, WITTGENSTEIN_2: 11, WITTGENSTEIN_3: 12,
+};
+
+// 유저 레벨 vs 콘텐츠 레벨 비교 → 기본 씨앗 수 결정
+function calcBaseSeedCount(userLevel, contentLevel) {
+  const userNum = LEVEL_ORDER[userLevel];
+  const contentNum = LEVEL_ORDER[contentLevel];
+  if (!userNum || !contentNum) return 3;
+  const diff = contentNum - userNum;
+  if (diff <= -2) return 1;
+  if (diff === -1) return 2;
+  if (diff === 0) return 3;
+  if (diff === 1) return 4;
+  return 5;
+}
 
 // 농장ID → 씨앗타입 매핑
 const FARM_SEED_MAPPING = {
@@ -38,6 +65,12 @@ const CONTENT_TYPE_FARM_MAPPING = {
   GRAMMAR_SENTENCE_STRUCTURE: "grammar",
   GRAMMAR_PHONEME_CHANGE: "grammar",
   GRAMMAR_POS: "grammar",
+  GRAMMAR_ELEMENT: "grammar",
+  GRAMMAR_ORTHOGRAPHY: "grammar",
+  GRAMMAR_HISTORY: "grammar",
+  GRAMMAR_PRACTICE: "grammar",
+  GRAMMAR_MORPHEME: "grammar",
+  GRAMMAR_PHONEME_ANALYSIS: "grammar",
   READING_NONFICTION: "reading",
   READING_LITERATURE: "reading",
   CONTENT_PDF: "content",
@@ -100,7 +133,10 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const recordsRef = useRef(records);
   recordsRef.current = records;
   const [summary, setSummary] = useState(null);
-  const [seed, setSeed] = useState(content?.seedReward?.count ?? 3);
+  const [seed, setSeed] = useState(() => {
+    if (content?.seedReward?.count != null) return content.seedReward.count;
+    return calcBaseSeedCount(content?.userLevel, content?.targetLevel);
+  });
   const [seedExhausted, setSeedExhausted] = useState(false);
   const [startedAt, setStartedAt] = useState(null);
   const intervalRef = useRef(null);
@@ -173,6 +209,12 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       WORD_FORMATION: "단어의 형성",
       SENTENCE_STRUCTURE: "문장의 짜임",
       PHONEME_CHANGE: "음운/음운 변동",
+      PHONEME_ANALYSIS: "음운 분석",
+      MORPHEME_ANALYSIS: "형태소 분석",
+      ELEMENT: "문법 요소",
+      ORTHOGRAPHY: "어문 규정",
+      HISTORY: "국어의 역사",
+      PRACTICE: "문법 실전",
       REASONING: "논리사고력",
     };
     return mapping[subArea] || "세부 영역";
@@ -238,9 +280,11 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       recall_cards: payload.cards?.length,
       confirm_click: payload.steps?.length,
       choice_judgement: payload.questions?.length,
-      phoneme_change: payload.items?.length,
+      phoneme_change: payload.words?.length,
       word_formation: payload.items?.length,
       sentence_structure: payload.sentences?.length,
+      morpheme_analysis: payload.sentences?.length,
+      phoneme_analysis: payload.items?.length,
       content_pdf: (payload.pages || []).reduce((sum, page) =>
         sum + (page.questions || []).reduce((qs, q) => {
           if (q.type === "FILL_BLANKS") return qs + (q.blanks?.length ?? 0);
@@ -314,8 +358,13 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     if (success) {
       if (accuracy >= 70) {
         earnedSeed = finalSeed;
+        // 선택지 판별 연습은 씨앗 3배 지급
+        if (moduleKey === "choice_judgement") {
+          earnedSeed *= 3;
+        }
+        // 만점 보너스: 씨앗 2배
         if (accuracy === 100) {
-          earnedSeed += 1;
+          earnedSeed *= 2;
         }
         normalizedSuccess = true;
       } else {
@@ -383,7 +432,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   };
 
   const resetRound = (newSeedCount) => {
-    setSeed(newSeedCount ?? content?.seedReward?.count ?? 3);
+    setSeed(newSeedCount ?? content?.seedReward?.count ?? calcBaseSeedCount(content?.userLevel, content?.targetLevel));
     setTimeLeft(timeLimit);
     setRecords([]);
     setSeedExhausted(false);

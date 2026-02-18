@@ -585,6 +585,7 @@
   font-size: 14px;
   line-height: 1.6;
   color: #4b3d36;
+  white-space: pre-line;
 }
 
 .worksheet-item.active .worksheet-passage-box {
@@ -670,19 +671,7 @@
 }
 
 .worksheet-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
   height: 100%;
-}
-
-.worksheet-measure {
-  position: absolute;
-  visibility: hidden;
-  pointer-events: none;
-  width: calc((var(--sheet-width) - 48px - 24px) / 2);
-  top: 0;
-  left: 0;
 }
 
 .worksheet-mark {
@@ -803,21 +792,46 @@ mark.highlight {
 
 .manuscript-grid {
   margin-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18px, 1fr));
-  gap: 6px;
-  max-width: 320px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 2px;
+  max-width: 680px;
+  padding: 8px;
+  background: rgba(255, 250, 244, 0.6);
+  border: 1px solid rgba(75, 61, 54, 0.2);
+}
+
+.manuscript-word {
+  display: inline-flex;
+  gap: 1px;
+  align-items: center;
+}
+
+.manuscript-word.manuscript-active {
+  background: rgba(120, 210, 140, 0.15);
+}
+
+.manuscript-space {
+  width: 10px;
 }
 
 .manuscript-cell {
-  width: 18px;
-  height: 18px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  display: grid;
+  width: 22px;
+  height: 26px;
+  display: inline-grid;
   place-items: center;
-  font-size: 10px;
+  font-size: 13px;
+  font-weight: 600;
   color: #2f7a46;
+}
+
+.manuscript-cell.filled {
+  border-bottom: 2px solid #2f7a46;
+}
+
+.manuscript-cell.empty {
+  border-bottom: 2px solid rgba(75, 61, 54, 0.3);
+  color: transparent;
 }
 .worksheet-feedback {
   margin-top: 12px;
@@ -1254,6 +1268,118 @@ mark.highlight {
   background: transparent;
 }
 
+/* 음운 변동 - 음소 단위 가로 2줄 구조 */
+.phoneme-change-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+.phoneme-change-header h3 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+.phoneme-change-pronunciation {
+  font-size: 20px;
+  color: #4d8bcc;
+  font-weight: 500;
+}
+.phoneme-change-progress {
+  font-size: 13px;
+  color: #6b5b53;
+  margin-left: auto;
+}
+
+.phoneme-change-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.phoneme-change-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  overflow-x: auto;
+  padding: 4px 0;
+}
+.phoneme-change-row-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #7f8c8d;
+  white-space: nowrap;
+  min-width: 40px;
+  text-align: right;
+}
+
+.phoneme-box {
+  width: 60px;
+  height: 60px;
+  border: 2.5px solid #3498db;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  background: white;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+.phoneme-box.original {
+  border-color: #95a5a6;
+  background: #f8f9fa;
+}
+.phoneme-box.env {
+  border-color: #27ae60;
+  background: #e8f8e8;
+}
+.phoneme-box.target {
+  border-color: #3498db;
+  background: #e8f0ff;
+  animation: pc-pulse 1.5s infinite;
+}
+.phoneme-box.changed {
+  background: #fff3cd;
+  border-color: #ffc107;
+}
+.phoneme-box.added {
+  background: #d4edda;
+  border-color: #28a745;
+}
+.phoneme-box.sep {
+  border: none;
+  background: transparent;
+  width: 20px;
+  font-size: 16px;
+  color: #aaa;
+}
+.phoneme-box.space {
+  background: transparent;
+  border: 2px dashed #ddd;
+  width: 60px;
+}
+
+@keyframes pc-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(52,152,219,0.7); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(52,152,219,0); }
+}
+
+@media (max-width: 768px) {
+  .phoneme-box { width: 42px; height: 42px; font-size: 15px; }
+  .phoneme-box.sep { width: 14px; }
+  .phoneme-box.space { width: 42px; }
+  .phoneme-change-row { gap: 4px; }
+}
+@media (max-width: 480px) {
+  .phoneme-box { width: 35px; height: 35px; font-size: 13px; border-width: 2px; }
+  .phoneme-box.sep { width: 10px; }
+  .phoneme-box.space { width: 35px; }
+  .phoneme-change-row { gap: 3px; }
+}
+
 .morpheme-strip {
   display: flex;
   flex-wrap: wrap;
@@ -1271,6 +1397,134 @@ mark.highlight {
 .morpheme-chip.active {
   background: transparent;
   border-color: var(--engine-orange);
+}
+
+.morpheme-chip.role-root {
+  border-color: #2f7a46;
+  position: relative;
+}
+
+.morpheme-chip.role-affix {
+  border-color: #4d8bcc;
+  position: relative;
+}
+
+.morpheme-chip.merged {
+  background: rgba(109, 164, 117, 0.12);
+}
+
+.morpheme-mark {
+  position: absolute;
+  pointer-events: none;
+}
+
+.morpheme-mark.root-mark {
+  inset: -4px;
+  border: 2px solid #2f7a46;
+  border-radius: 50%;
+}
+
+.morpheme-mark.affix-mark {
+  inset: -4px;
+  border: 2px solid #4d8bcc;
+  border-radius: 0;
+}
+
+.phoneme-analysis-module {
+  position: relative;
+  height: 100%;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.phoneme-analysis-header {
+  font-size: 12px;
+  color: #6b5b53;
+  text-align: right;
+}
+
+.phoneme-analysis-word {
+  font-size: 24px;
+  font-weight: 700;
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.phoneme-analysis-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  justify-content: center;
+}
+
+.phoneme-analysis-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.phoneme-analysis-chip {
+  min-width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid rgba(75, 61, 54, 0.35);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.phoneme-analysis-chip.active {
+  border-color: var(--engine-orange);
+  background: rgba(255, 143, 43, 0.1);
+}
+
+.phoneme-type-label {
+  font-size: 11px;
+  color: #4d8bcc;
+  font-weight: 600;
+  min-height: 16px;
+}
+
+.morpheme-analysis-module {
+  position: relative;
+  height: 100%;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.morpheme-analysis-header {
+  font-size: 12px;
+  color: #6b5b53;
+  text-align: right;
+}
+
+.morpheme-sentence {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 16px;
+  line-height: 1.6;
+}
+
+.morpheme-analysis-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.morpheme-info-label {
+  font-size: 11px;
+  color: #6b5b53;
+  min-height: 16px;
+}
+
+.morpheme-info-label.type {
+  color: #4d8bcc;
+  font-weight: 600;
 }
 
 .sentence-structure-module .sentence-tokens {
@@ -1299,6 +1553,45 @@ mark.highlight {
   filter: saturate(1.1);
 }
 
+.ox-modal {
+  width: 280px;
+}
+
+.ox-card-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.ox-card {
+  width: 100px;
+  height: 120px;
+  border: 3px solid rgba(75, 61, 54, 0.4);
+  background: #fff;
+  cursor: pointer;
+  font-size: 48px;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ox-card:hover {
+  transform: scale(1.05);
+}
+
+.ox-card.ox-o {
+  color: #2f7a46;
+  border-color: rgba(47, 122, 70, 0.5);
+}
+
+.ox-card.ox-x {
+  color: #c0392b;
+  border-color: rgba(192, 57, 43, 0.5);
+}
+
 .confirm-next {
   margin-top: 12px;
   text-align: right;
@@ -1319,6 +1612,72 @@ mark.highlight {
   align-items: center;
   font-size: 13px;
   color: #6b5b53;
+}
+
+.sentence-tokens-wrap {
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+.sentence-token-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sentence-token-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.sentence-label-box {
+  min-width: 48px;
+  height: 22px;
+  border: 1px solid rgba(75, 61, 54, 0.25);
+  font-size: 10px;
+  text-align: center;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.bracket-open,
+.bracket-close {
+  font-size: 24px;
+  font-weight: 300;
+  color: #c0392b;
+  line-height: 1;
+}
+
+.slash-mark {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4d8bcc;
+  margin-left: 2px;
+}
+
+.token-chip.clause-highlight {
+  background: rgba(255, 143, 43, 0.2);
+  box-shadow: 0 0 8px rgba(255, 143, 43, 0.3);
+}
+
+.sentence-instruction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.sentence-instruction p {
+  margin: 0;
+  font-size: 15px;
+}
+
+.sentence-instruction span {
+  font-size: 12px;
+  color: #6b5b53;
+  white-space: nowrap;
 }
 
 .sentence-actions button {
