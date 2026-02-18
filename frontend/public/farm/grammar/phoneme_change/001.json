@@ -132,6 +132,40 @@
         "steps": [
           {
             "stepId": "st1",
+            "envCellNos": [4],
+            "targetCellNo": 2,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "ㄷ" },
+              { "id": "B", "text": "ㅊ" },
+              { "id": "C", "text": "ㅌ" },
+              { "id": "D", "text": "ㅅ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 2, "newText": "ㄷ" },
+                { "cellNo": 3, "newText": "" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st2",
+            "targetCellNo": 2,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
+              { "id": "A", "text": "교체(음절 끝소리 규칙)" },
+              { "id": "B", "text": "된소리되기" },
+              { "id": "C", "text": "비음화" },
+              { "id": "D", "text": "구개음화" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          },
+          {
+            "stepId": "st3",
             "envCellNos": [2],
             "targetCellNo": 4,
             "questionType": "PHONEME_RESULT",
@@ -145,21 +179,20 @@
             "onCorrect": {
               "deltaSec": 20,
               "applyCells": [
-                { "cellNo": 3, "newText": "" },
                 { "cellNo": 4, "newText": "ㅃ" }
               ]
             },
             "onWrong": { "deltaSec": -20, "retry": true }
           },
           {
-            "stepId": "st2",
+            "stepId": "st4",
             "targetCellNo": 4,
             "questionType": "RULE_EXPLANATION",
             "choices": [
               { "id": "A", "text": "된소리되기" },
-              { "id": "B", "text": "비음화" },
-              { "id": "C", "text": "유음화" },
-              { "id": "D", "text": "구개음화" }
+              { "id": "B", "text": "교체(음절 끝소리 규칙)" },
+              { "id": "C", "text": "비음화" },
+              { "id": "D", "text": "유음화" }
             ],
             "answerId": "A",
             "onCorrect": { "deltaSec": 0, "next": true }

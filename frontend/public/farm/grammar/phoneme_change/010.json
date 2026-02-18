@@ -103,20 +103,20 @@
           },
           {
             "stepId": "st5",
-            "envCellNos": [8],
+            "envCellNos": [],
             "targetCellNo": 6,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "ㅊ" },
+              { "id": "A", "text": "ㄷ" },
               { "id": "B", "text": "ㅌ" },
-              { "id": "C", "text": "ㅈ" },
-              { "id": "D", "text": "ㄷ" }
+              { "id": "C", "text": "ㅊ" },
+              { "id": "D", "text": "ㅅ" }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
               "applyCells": [
-                { "cellNo": 6, "newText": "ㅊ" }
+                { "cellNo": 6, "newText": "ㄷ" }
               ]
             },
             "onWrong": { "deltaSec": -20, "retry": true }
@@ -126,9 +126,42 @@
             "targetCellNo": 6,
             "questionType": "RULE_EXPLANATION",
             "choices": [
+              { "id": "A", "text": "교체(음절 끝소리 규칙)" },
+              { "id": "B", "text": "구개음화" },
+              { "id": "C", "text": "된소리되기" },
+              { "id": "D", "text": "비음화" }
+            ],
+            "answerId": "A",
+            "onCorrect": { "deltaSec": 0, "next": true }
+          },
+          {
+            "stepId": "st7",
+            "envCellNos": [8],
+            "targetCellNo": 6,
+            "questionType": "PHONEME_RESULT",
+            "choices": [
+              { "id": "A", "text": "ㅈ" },
+              { "id": "B", "text": "ㄷ" },
+              { "id": "C", "text": "ㅊ" },
+              { "id": "D", "text": "ㅌ" }
+            ],
+            "answerId": "A",
+            "onCorrect": {
+              "deltaSec": 20,
+              "applyCells": [
+                { "cellNo": 6, "newText": "ㅈ" }
+              ]
+            },
+            "onWrong": { "deltaSec": -20, "retry": true }
+          },
+          {
+            "stepId": "st8",
+            "targetCellNo": 6,
+            "questionType": "RULE_EXPLANATION",
+            "choices": [
               { "id": "A", "text": "구개음화" },
-              { "id": "B", "text": "된소리되기" },
-              { "id": "C", "text": "축약(거센소리되기)" },
+              { "id": "B", "text": "교체(음절 끝소리 규칙)" },
+              { "id": "C", "text": "된소리되기" },
               { "id": "D", "text": "비음화" }
             ],
             "answerId": "A",
@@ -298,8 +331,8 @@
             "questionType": "RULE_EXPLANATION",
             "choices": [
               { "id": "A", "text": "된소리되기" },
-              { "id": "B", "text": "비음화" },
-              { "id": "C", "text": "탈락(자음군 단순화)" },
+              { "id": "B", "text": "탈락(자음군 단순화)" },
+              { "id": "C", "text": "비음화" },
               { "id": "D", "text": "유음화" }
             ],
             "answerId": "A",
