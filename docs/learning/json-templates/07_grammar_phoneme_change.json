@@ -1,12 +1,12 @@
 {
-  "_comment": "음운 변동 분석 (GRAMMAR_PHONEME_CHANGE) — moduleKey: phoneme_change",
-  "_comment2": "words 배열: 각 단어의 cells(음절 칸)과 steps(분석 단계). onCorrect.applyCellText로 칸 텍스트 변경.",
+  "_comment": "음운 변동 분석 (GRAMMAR_PHONEME_CHANGE) v2 — moduleKey: phoneme_change",
+  "_comment2": "sRow: 원형 행 (sep=쉼표), pRow: 작업 행 (sep=빈칸'_'). apply[].pos는 1-based.",
 
-  "contentId": "UUID",
+  "contentId": "pc-NNN",
   "contentType": "GRAMMAR_PHONEME_CHANGE",
-  "version": 1,
+  "version": 2,
   "status": "PUBLISHED",
-  "title": "음운 변동 분석 01",
+  "title": "음운 변동 분석 NN",
   "description": "음운 변동을 고르고 칸을 수정",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": { "min": 4, "max": 6 },
@@ -24,55 +24,92 @@
       {
         "wordId": "w1",
         "surface": "국밥",
-        "cells": [
-          { "cellNo": 1, "text": "국" },
-          { "cellNo": 2, "text": "밥" }
-        ],
+        "pronunciation": "[국빱]",
+        "_생성규칙_sRow": "단어를 음소 단위 분해 → 음절 경계에 쉼표 삽입",
+        "sRow": ["ㄱ","ㅜ","ㄱ",",","ㅂ","ㅏ","ㅂ"],
+        "_생성규칙_pRow": "sRow 복사 후 쉼표를 '_'로 치환",
+        "pRow": ["ㄱ","ㅜ","ㄱ","_","ㅂ","ㅏ","ㅂ"],
         "steps": [
           {
             "stepId": "st1",
-            "envCellNos": [1],
-            "targetCellNo": 2,
+            "_생성규칙": "PHONEME_RESULT: 변동 결과 고르기. envCells=환경 음소 pos(1-based), targetCell=대상 pos(1-based)",
+            "envCells": [3],
+            "targetCell": 5,
             "questionType": "PHONEME_RESULT",
-            "_comment_questionType": "PHONEME_RESULT: 변동 결과 고르기 | RULE_EXPLANATION: 규칙 고르기",
             "choices": [
-              { "id": "A", "text": "구" },
-              { "id": "B", "text": "국" },
-              { "id": "C", "text": "궁" },
-              { "id": "D", "text": "굽" }
+              { "id": "A", "text": "ㅃ" },
+              { "id": "B", "text": "ㅂ" },
+              { "id": "C", "text": "ㅁ" },
+              { "id": "D", "text": "ㄱ" }
             ],
-            "answerId": "C",
+            "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCellText": {
-                "cellNo": 2,
-                "newText": "궁",
-                "_comment": "정답 시 해당 칸의 텍스트를 변경 (시각적 피드백)"
-              }
+              "_생성규칙_apply": "pRow 변경 동작. pos=1-based 위치, val=변경값('_'=빈칸)",
+              "apply": [{ "pos": 5, "val": "ㅃ" }]
             },
-            "onWrong": {
-              "deltaSec": -20,
-              "retry": true,
-              "_comment": "retry=true면 오답 시 같은 step을 반복"
-            }
+            "onWrong": { "deltaSec": -20, "retry": true }
           },
           {
             "stepId": "st2",
-            "envCellNos": [1, 2],
-            "targetCellNo": 1,
+            "_생성규칙": "RULE_EXPLANATION: 규칙 고르기. PHONEME_RESULT와 쌍으로 배치",
+            "targetCell": 5,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "비음화" },
-              { "id": "B", "text": "경음화" },
-              { "id": "C", "text": "구개음화" },
-              { "id": "D", "text": "유음화" }
+              { "id": "A", "text": "된소리되기" },
+              { "id": "B", "text": "비음화" },
+              { "id": "C", "text": "유음화" },
+              { "id": "D", "text": "구개음화" }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 20 },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onCorrect": { "deltaSec": 0, "next": true }
           }
         ]
       }
     ]
+  },
+
+  "_변동유형별_apply_패턴": {
+    "교체(비음화/유음화/음절끝소리규칙)": {
+      "설명": "변경되는 음소의 pos에 새 값 적용",
+      "예시_비음화": "[{pos:3, val:'ㅇ'}]",
+      "예시_음절끝소리": "[{pos:3, val:'ㄷ'}]"
+    },
+    "된소리되기": {
+      "설명": "경음화되는 음소의 pos에 경음 적용",
+      "예시": "[{pos:5, val:'ㅃ'}]"
+    },
+    "축약(거센소리되기)": {
+      "설명": "앞자음→'_', sep위치→결과음, 뒷자음→'_' (3개 apply)",
+      "예시": "[{pos:3, val:'_'}, {pos:4, val:'ㅍ'}, {pos:5, val:'_'}]",
+      "주의": "결과음이 반드시 sep 위치(원래 빈칸)에 들어감"
+    },
+    "ㄴ첨가": {
+      "설명": "sep 위치(빈칸)에 'ㄴ' 삽입",
+      "예시": "[{pos:4, val:'ㄴ'}]"
+    },
+    "탈락(자음군단순화/ㅎ탈락)": {
+      "설명": "탈락되는 음소의 pos를 '_'(빈칸)으로",
+      "예시": "[{pos:3, val:'_'}]"
+    },
+    "구개음화": {
+      "설명": "ㄷ/ㅌ → ㅈ/ㅊ 교체",
+      "예시": "[{pos:3, val:'ㅈ'}]"
+    }
+  },
+
+  "_sRow_pRow_생성규칙": {
+    "1": "단어를 음소 단위로 분해 (초성+중성+종성, 반모음 w/j 포함)",
+    "2": "음절 경계에 쉼표 ',' 삽입 → sRow",
+    "3": "sRow 복사 후 쉼표를 '_'로 치환 → pRow",
+    "예시_국밥": "국 → ㄱ,ㅜ,ㄱ / 밥 → ㅂ,ㅏ,ㅂ → sRow=['ㄱ','ㅜ','ㄱ',',','ㅂ','ㅏ','ㅂ']"
+  },
+
+  "_steps_생성규칙": {
+    "1": "HTML 가로쓰기 정답의 변동 순서 그대로 적용",
+    "2": "각 변동: PHONEME_RESULT step + RULE_EXPLANATION step (쌍)",
+    "3": "envCells: 변동 환경 음소 1-based 위치 배열",
+    "4": "targetCell: 하이라이트 대상 1-based 위치",
+    "5": "apply: pRow 변경 동작 (val='_'이면 빈칸 처리)"
   }
 }

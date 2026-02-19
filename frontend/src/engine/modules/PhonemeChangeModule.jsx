@@ -9,12 +9,20 @@ function PhonemeChangeModule({ content }) {
   const words = payload.words || [];
   const [wordIndex, setWordIndex] = useState(0);
   const [stepIndex, setStepIndex] = useState(0);
-  const [cellsState, setCellsState] = useState(() => words.map((w) => w.cells));
+  const [pRowState, setPRowState] = useState(() => words.map((w) => [...(w.pRow || [])]));
   const [lastResult, setLastResult] = useState(null);
   const advanceTimerRef = useRef(null);
   const resultTimerRef = useRef(null);
   const feedbackDelay = 420;
   const moduleRef = useRef(null);
+
+  useEffect(() => {
+    if (words.length > 0) {
+      setPRowState(words.map((w) => [...(w.pRow || [])]));
+      setWordIndex(0);
+      setStepIndex(0);
+    }
+  }, [content]);
 
   const word = words[wordIndex];
   const step = word?.steps?.[stepIndex];
@@ -33,18 +41,14 @@ function PhonemeChangeModule({ content }) {
     if (!isCorrect && step.onWrong?.retry) return;
 
     if (isCorrect) {
-      const updates = [...(step.onCorrect?.applyCells || [])];
-      if (step.onCorrect?.applyCellText) {
-        updates.push(step.onCorrect.applyCellText);
-      }
+      const updates = step.onCorrect?.apply || [];
       if (updates.length > 0) {
-        setCellsState((prev) =>
-          prev.map((cellList, idx) => {
-            if (idx !== wordIndex) return cellList;
-            return cellList.map((cell) => {
-              const upd = updates.find((u) => u.cellNo === cell.cellNo);
-              return upd ? { ...cell, text: upd.newText } : cell;
-            });
+        setPRowState((prev) =>
+          prev.map((row, idx) => {
+            if (idx !== wordIndex) return row;
+            const newRow = [...row];
+            updates.forEach((u) => { newRow[u.pos - 1] = u.val; });
+            return newRow;
           })
         );
       }
@@ -77,23 +81,31 @@ function PhonemeChangeModule({ content }) {
     []
   );
 
-  const renderBox = (cell, mode, step) => {
-    const isOriginal = mode === "original";
-    const isEnv = !isOriginal && step?.envCellNos?.includes(cell.cellNo);
-    const isTarget = !isOriginal && step?.targetCellNo === cell.cellNo;
-    const isSep = cell.type === "sep";
-    const isEmpty = cell.text === "";
+  const renderSBox = (val, idx) => {
+    const isSep = val === ",";
+    let cls = "phoneme-box original";
+    if (isSep) cls += " sep";
+    return (
+      <div key={`s-${idx}`} className={cls}>
+        {val}
+      </div>
+    );
+  };
+
+  const renderPBox = (val, idx, step) => {
+    const pos = idx + 1;
+    const isSpace = val === "_";
+    const isEnv = step?.envCells?.includes(pos);
+    const isTarget = step?.targetCell === pos;
 
     let cls = "phoneme-box";
-    if (isOriginal) cls += " original";
-    if (isSep) cls += " sep";
-    else if (isEmpty) cls += " space";
+    if (isSpace) cls += " space";
     if (isEnv) cls += " env";
     if (isTarget) cls += " target";
 
     return (
-      <div key={`${mode}-${cell.cellNo}`} className={cls}>
-        {isSep ? "," : cell.text}
+      <div key={`p-${idx}`} className={cls}>
+        {isSpace ? "" : val}
       </div>
     );
   };
@@ -106,6 +118,10 @@ function PhonemeChangeModule({ content }) {
           <button type="button" className="worksheet-start-btn" onClick={start}>
             학습 시작
           </button>
+        </div>
+      ) : words.length === 0 ? (
+        <div className="worksheet-empty">
+          학습 데이터를 불러오는 중...
         </div>
       ) : (
         <>
@@ -121,11 +137,11 @@ function PhonemeChangeModule({ content }) {
           <div className="phoneme-change-rows">
             <div className="phoneme-change-row">
               <span className="phoneme-change-row-label">원형</span>
-              {word?.cells?.map((cell) => renderBox(cell, "original", null))}
+              {word?.sRow?.map((val, idx) => renderSBox(val, idx))}
             </div>
             <div className="phoneme-change-row">
               <span className="phoneme-change-row-label">작업</span>
-              {cellsState[wordIndex]?.map((cell) => renderBox(cell, "working", step))}
+              {pRowState[wordIndex]?.map((val, idx) => renderPBox(val, idx, step))}
             </div>
           </div>
           {lastResult ? (

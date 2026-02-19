@@ -1,18 +1,30 @@
 {
   "contentId": "pc-022",
   "contentType": "GRAMMAR_PHONEME_CHANGE",
-  "version": 1,
+  "version": 2,
   "status": "PUBLISHED",
   "title": "음운 변동 분석 022",
   "description": "3단계 이상 복합 변동 상급 2 - 축약, 비음화, 자음군 단순화가 결합된 변동",
   "targetLevel": "RUSSELL_1",
-  "schoolGradeRange": { "min": 4, "max": 6 },
+  "schoolGradeRange": {
+    "min": 4,
+    "max": 6
+  },
   "area": "GRAMMAR",
   "subArea": "PHONEME_CHANGE",
-  "competencies": ["VOCAB", "READING"],
+  "competencies": [
+    "VOCAB",
+    "READING"
+  ],
   "tags": [],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
   "timeLimitSec": 180,
   "assets": {},
   "payload": {
@@ -21,470 +33,924 @@
         "wordId": "w1",
         "surface": "읊고",
         "pronunciation": "[읍꼬]",
-        "cells": [
-          { "cellNo": 0, "text": "ㅡ" },
-          { "cellNo": 1, "text": "ㄹ" },
-          { "cellNo": 2, "text": "ㅍ" },
-          { "cellNo": 3, "text": ",", "type": "sep" },
-          { "cellNo": 4, "text": "ㄱ" },
-          { "cellNo": 5, "text": "ㅗ" }
-        ],
         "steps": [
           {
             "stepId": "st1",
-            "envCellNos": [1, 2],
-            "targetCellNo": 1,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "(탈락)" },
-              { "id": "B", "text": "ㄹ" },
-              { "id": "C", "text": "ㅂ" },
-              { "id": "D", "text": "ㄴ" }
+              {
+                "id": "A",
+                "text": "(탈락)"
+              },
+              {
+                "id": "B",
+                "text": "ㄹ"
+              },
+              {
+                "id": "C",
+                "text": "ㅂ"
+              },
+              {
+                "id": "D",
+                "text": "ㄴ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 1, "newText": "" },
-                { "cellNo": 3, "newText": "" }
+              "apply": [
+                {
+                  "pos": 2,
+                  "val": "_"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              2,
+              3
+            ],
+            "targetCell": 2
           },
           {
             "stepId": "st2",
-            "targetCellNo": 1,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "자음군 단순화" },
-              { "id": "B", "text": "비음화" },
-              { "id": "C", "text": "된소리되기" },
-              { "id": "D", "text": "음절 끝소리 규칙" }
+              {
+                "id": "A",
+                "text": "자음군 단순화"
+              },
+              {
+                "id": "B",
+                "text": "비음화"
+              },
+              {
+                "id": "C",
+                "text": "된소리되기"
+              },
+              {
+                "id": "D",
+                "text": "음절 끝소리 규칙"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 2
           },
           {
             "stepId": "st3",
-            "envCellNos": [2],
-            "targetCellNo": 2,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "ㅂ" },
-              { "id": "B", "text": "ㅍ" },
-              { "id": "C", "text": "ㅁ" },
-              { "id": "D", "text": "ㄹ" }
+              {
+                "id": "A",
+                "text": "ㅂ"
+              },
+              {
+                "id": "B",
+                "text": "ㅍ"
+              },
+              {
+                "id": "C",
+                "text": "ㅁ"
+              },
+              {
+                "id": "D",
+                "text": "ㄹ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 2, "newText": "ㅂ" }
+              "apply": [
+                {
+                  "pos": 3,
+                  "val": "ㅂ"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              3
+            ],
+            "targetCell": 3
           },
           {
             "stepId": "st4",
-            "targetCellNo": 2,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "음절 끝소리 규칙" },
-              { "id": "B", "text": "자음군 단순화" },
-              { "id": "C", "text": "된소리되기" },
-              { "id": "D", "text": "비음화" }
+              {
+                "id": "A",
+                "text": "음절 끝소리 규칙"
+              },
+              {
+                "id": "B",
+                "text": "자음군 단순화"
+              },
+              {
+                "id": "C",
+                "text": "된소리되기"
+              },
+              {
+                "id": "D",
+                "text": "비음화"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 3
           },
           {
             "stepId": "st5",
-            "envCellNos": [2],
-            "targetCellNo": 4,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "ㄲ" },
-              { "id": "B", "text": "ㄱ" },
-              { "id": "C", "text": "ㅂ" },
-              { "id": "D", "text": "ㅃ" }
+              {
+                "id": "A",
+                "text": "ㄲ"
+              },
+              {
+                "id": "B",
+                "text": "ㄱ"
+              },
+              {
+                "id": "C",
+                "text": "ㅂ"
+              },
+              {
+                "id": "D",
+                "text": "ㅃ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 4, "newText": "ㄲ" }
+              "apply": [
+                {
+                  "pos": 5,
+                  "val": "ㄲ"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              3
+            ],
+            "targetCell": 5
           },
           {
             "stepId": "st6",
-            "targetCellNo": 4,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "된소리되기" },
-              { "id": "B", "text": "비음화" },
-              { "id": "C", "text": "음절 끝소리 규칙" },
-              { "id": "D", "text": "자음군 단순화" }
+              {
+                "id": "A",
+                "text": "된소리되기"
+              },
+              {
+                "id": "B",
+                "text": "비음화"
+              },
+              {
+                "id": "C",
+                "text": "음절 끝소리 규칙"
+              },
+              {
+                "id": "D",
+                "text": "자음군 단순화"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 5
           }
+        ],
+        "sRow": [
+          "ㅡ",
+          "ㄹ",
+          "ㅍ",
+          ",",
+          "ㄱ",
+          "ㅗ"
+        ],
+        "pRow": [
+          "ㅡ",
+          "ㄹ",
+          "ㅍ",
+          "_",
+          "ㄱ",
+          "ㅗ"
         ]
       },
       {
         "wordId": "w2",
         "surface": "해맑다",
         "pronunciation": "[해막따]",
-        "cells": [
-          { "cellNo": 0, "text": "ㅎ" },
-          { "cellNo": 1, "text": "ㅐ" },
-          { "cellNo": 2, "text": ",", "type": "sep" },
-          { "cellNo": 3, "text": "ㅁ" },
-          { "cellNo": 4, "text": "ㅏ" },
-          { "cellNo": 5, "text": "ㄹ" },
-          { "cellNo": 6, "text": "ㄱ" },
-          { "cellNo": 7, "text": ",", "type": "sep" },
-          { "cellNo": 8, "text": "ㄷ" },
-          { "cellNo": 9, "text": "ㅏ" }
-        ],
         "steps": [
           {
             "stepId": "st1",
-            "envCellNos": [5, 6],
-            "targetCellNo": 5,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "(탈락)" },
-              { "id": "B", "text": "ㄹ" },
-              { "id": "C", "text": "ㄱ" },
-              { "id": "D", "text": "ㅇ" }
+              {
+                "id": "A",
+                "text": "(탈락)"
+              },
+              {
+                "id": "B",
+                "text": "ㄹ"
+              },
+              {
+                "id": "C",
+                "text": "ㄱ"
+              },
+              {
+                "id": "D",
+                "text": "ㅇ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 2, "newText": "" },
-                { "cellNo": 5, "newText": "" },
-                { "cellNo": 7, "newText": "" }
+              "apply": [
+                {
+                  "pos": 6,
+                  "val": "_"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              6,
+              7
+            ],
+            "targetCell": 6
           },
           {
             "stepId": "st2",
-            "targetCellNo": 5,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "자음군 단순화" },
-              { "id": "B", "text": "비음화" },
-              { "id": "C", "text": "음절 끝소리 규칙" },
-              { "id": "D", "text": "된소리되기" }
+              {
+                "id": "A",
+                "text": "자음군 단순화"
+              },
+              {
+                "id": "B",
+                "text": "비음화"
+              },
+              {
+                "id": "C",
+                "text": "음절 끝소리 규칙"
+              },
+              {
+                "id": "D",
+                "text": "된소리되기"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 6
           },
           {
             "stepId": "st3",
-            "envCellNos": [6],
-            "targetCellNo": 8,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "ㄸ" },
-              { "id": "B", "text": "ㄷ" },
-              { "id": "C", "text": "ㅌ" },
-              { "id": "D", "text": "ㄱ" }
+              {
+                "id": "A",
+                "text": "ㄸ"
+              },
+              {
+                "id": "B",
+                "text": "ㄷ"
+              },
+              {
+                "id": "C",
+                "text": "ㅌ"
+              },
+              {
+                "id": "D",
+                "text": "ㄱ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 8, "newText": "ㄸ" }
+              "apply": [
+                {
+                  "pos": 9,
+                  "val": "ㄸ"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              7
+            ],
+            "targetCell": 9
           },
           {
             "stepId": "st4",
-            "targetCellNo": 8,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "된소리되기" },
-              { "id": "B", "text": "비음화" },
-              { "id": "C", "text": "자음군 단순화" },
-              { "id": "D", "text": "구개음화" }
+              {
+                "id": "A",
+                "text": "된소리되기"
+              },
+              {
+                "id": "B",
+                "text": "비음화"
+              },
+              {
+                "id": "C",
+                "text": "자음군 단순화"
+              },
+              {
+                "id": "D",
+                "text": "구개음화"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 9
           }
+        ],
+        "sRow": [
+          "ㅎ",
+          "ㅐ",
+          ",",
+          "ㅁ",
+          "ㅏ",
+          "ㄹ",
+          "ㄱ",
+          ",",
+          "ㄷ",
+          "ㅏ"
+        ],
+        "pRow": [
+          "ㅎ",
+          "ㅐ",
+          "_",
+          "ㅁ",
+          "ㅏ",
+          "ㄹ",
+          "ㄱ",
+          "_",
+          "ㄷ",
+          "ㅏ"
         ]
       },
       {
         "wordId": "w3",
         "surface": "깨끗하다",
         "pronunciation": "[깨끄타다]",
-        "cells": [
-          { "cellNo": 0, "text": "ㄲ" },
-          { "cellNo": 1, "text": "ㅐ" },
-          { "cellNo": 2, "text": ",", "type": "sep" },
-          { "cellNo": 3, "text": "ㄲ" },
-          { "cellNo": 4, "text": "ㅡ" },
-          { "cellNo": 5, "text": "ㅅ" },
-          { "cellNo": 6, "text": ",", "type": "sep" },
-          { "cellNo": 7, "text": "ㅎ" },
-          { "cellNo": 8, "text": "ㅏ" },
-          { "cellNo": 9, "text": ",", "type": "sep" },
-          { "cellNo": 10, "text": "ㄷ" },
-          { "cellNo": 11, "text": "ㅏ" }
-        ],
         "steps": [
           {
             "stepId": "st1",
-            "envCellNos": [5],
-            "targetCellNo": 5,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "ㄷ" },
-              { "id": "B", "text": "ㅅ" },
-              { "id": "C", "text": "ㄴ" },
-              { "id": "D", "text": "ㅁ" }
+              {
+                "id": "A",
+                "text": "ㄷ"
+              },
+              {
+                "id": "B",
+                "text": "ㅅ"
+              },
+              {
+                "id": "C",
+                "text": "ㄴ"
+              },
+              {
+                "id": "D",
+                "text": "ㅁ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 2, "newText": "" },
-                { "cellNo": 5, "newText": "ㄷ" },
-                { "cellNo": 6, "newText": "" },
-                { "cellNo": 9, "newText": "" }
+              "apply": [
+                {
+                  "pos": 6,
+                  "val": "ㄷ"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              6
+            ],
+            "targetCell": 6
           },
           {
             "stepId": "st2",
-            "targetCellNo": 5,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "음절 끝소리 규칙" },
-              { "id": "B", "text": "된소리되기" },
-              { "id": "C", "text": "비음화" },
-              { "id": "D", "text": "자음군 단순화" }
+              {
+                "id": "A",
+                "text": "음절 끝소리 규칙"
+              },
+              {
+                "id": "B",
+                "text": "된소리되기"
+              },
+              {
+                "id": "C",
+                "text": "비음화"
+              },
+              {
+                "id": "D",
+                "text": "자음군 단순화"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 6
           },
           {
             "stepId": "st3",
-            "envCellNos": [5, 7],
-            "targetCellNo": 5,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "(탈락)" },
-              { "id": "B", "text": "ㄷ" },
-              { "id": "C", "text": "ㅌ" },
-              { "id": "D", "text": "ㅅ" }
+              {
+                "id": "A",
+                "text": "(탈락)"
+              },
+              {
+                "id": "B",
+                "text": "ㄷ"
+              },
+              {
+                "id": "C",
+                "text": "ㅌ"
+              },
+              {
+                "id": "D",
+                "text": "ㅅ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 5, "newText": "" },
-                { "cellNo": 6, "newText": "" },
-                { "cellNo": 7, "newText": "ㅌ" }
+              "apply": [
+                {
+                  "pos": 6,
+                  "val": "_"
+                },
+                {
+                  "pos": 7,
+                  "val": "ㅌ"
+                },
+                {
+                  "pos": 8,
+                  "val": "_"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              6,
+              8
+            ],
+            "targetCell": 6
           },
           {
             "stepId": "st4",
-            "targetCellNo": 7,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "축약(거센소리되기)" },
-              { "id": "B", "text": "된소리되기" },
-              { "id": "C", "text": "음절 끝소리 규칙" },
-              { "id": "D", "text": "비음화" }
+              {
+                "id": "A",
+                "text": "축약(거센소리되기)"
+              },
+              {
+                "id": "B",
+                "text": "된소리되기"
+              },
+              {
+                "id": "C",
+                "text": "음절 끝소리 규칙"
+              },
+              {
+                "id": "D",
+                "text": "비음화"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 8
           }
+        ],
+        "sRow": [
+          "ㄲ",
+          "ㅐ",
+          ",",
+          "ㄲ",
+          "ㅡ",
+          "ㅅ",
+          ",",
+          "ㅎ",
+          "ㅏ",
+          ",",
+          "ㄷ",
+          "ㅏ"
+        ],
+        "pRow": [
+          "ㄲ",
+          "ㅐ",
+          "_",
+          "ㄲ",
+          "ㅡ",
+          "ㅅ",
+          "_",
+          "ㅎ",
+          "ㅏ",
+          "_",
+          "ㄷ",
+          "ㅏ"
         ]
       },
       {
         "wordId": "w4",
         "surface": "국화꽃",
         "pronunciation": "[구콰꼳]",
-        "cells": [
-          { "cellNo": 0, "text": "ㄱ" },
-          { "cellNo": 1, "text": "ㅜ" },
-          { "cellNo": 2, "text": "ㄱ" },
-          { "cellNo": 3, "text": ",", "type": "sep" },
-          { "cellNo": 4, "text": "ㅎ" },
-          { "cellNo": 5, "text": "w" },
-          { "cellNo": 6, "text": "ㅏ" },
-          { "cellNo": 7, "text": ",", "type": "sep" },
-          { "cellNo": 8, "text": "ㄲ" },
-          { "cellNo": 9, "text": "ㅗ" },
-          { "cellNo": 10, "text": "ㅊ" }
-        ],
         "steps": [
           {
             "stepId": "st1",
-            "envCellNos": [2, 4],
-            "targetCellNo": 2,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "(탈락)" },
-              { "id": "B", "text": "ㄱ" },
-              { "id": "C", "text": "ㅋ" },
-              { "id": "D", "text": "ㅇ" }
+              {
+                "id": "A",
+                "text": "(탈락)"
+              },
+              {
+                "id": "B",
+                "text": "ㄱ"
+              },
+              {
+                "id": "C",
+                "text": "ㅋ"
+              },
+              {
+                "id": "D",
+                "text": "ㅇ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 2, "newText": "" },
-                { "cellNo": 3, "newText": "" },
-                { "cellNo": 4, "newText": "ㅋ" },
-                { "cellNo": 7, "newText": "" }
+              "apply": [
+                {
+                  "pos": 3,
+                  "val": "_"
+                },
+                {
+                  "pos": 4,
+                  "val": "ㅋ"
+                },
+                {
+                  "pos": 5,
+                  "val": "_"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              3,
+              5
+            ],
+            "targetCell": 3
           },
           {
             "stepId": "st2",
-            "targetCellNo": 4,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "축약(거센소리되기)" },
-              { "id": "B", "text": "된소리되기" },
-              { "id": "C", "text": "비음화" },
-              { "id": "D", "text": "음절 끝소리 규칙" }
+              {
+                "id": "A",
+                "text": "축약(거센소리되기)"
+              },
+              {
+                "id": "B",
+                "text": "된소리되기"
+              },
+              {
+                "id": "C",
+                "text": "비음화"
+              },
+              {
+                "id": "D",
+                "text": "음절 끝소리 규칙"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 5
           },
           {
             "stepId": "st3",
-            "envCellNos": [10],
-            "targetCellNo": 10,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "ㄷ" },
-              { "id": "B", "text": "ㅊ" },
-              { "id": "C", "text": "ㅌ" },
-              { "id": "D", "text": "ㅈ" }
+              {
+                "id": "A",
+                "text": "ㄷ"
+              },
+              {
+                "id": "B",
+                "text": "ㅊ"
+              },
+              {
+                "id": "C",
+                "text": "ㅌ"
+              },
+              {
+                "id": "D",
+                "text": "ㅈ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 10, "newText": "ㄷ" }
+              "apply": [
+                {
+                  "pos": 11,
+                  "val": "ㄷ"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              11
+            ],
+            "targetCell": 11
           },
           {
             "stepId": "st4",
-            "targetCellNo": 10,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "음절 끝소리 규칙" },
-              { "id": "B", "text": "축약(거센소리되기)" },
-              { "id": "C", "text": "된소리되기" },
-              { "id": "D", "text": "비음화" }
+              {
+                "id": "A",
+                "text": "음절 끝소리 규칙"
+              },
+              {
+                "id": "B",
+                "text": "축약(거센소리되기)"
+              },
+              {
+                "id": "C",
+                "text": "된소리되기"
+              },
+              {
+                "id": "D",
+                "text": "비음화"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 11
           }
+        ],
+        "sRow": [
+          "ㄱ",
+          "ㅜ",
+          "ㄱ",
+          ",",
+          "ㅎ",
+          "w",
+          "ㅏ",
+          ",",
+          "ㄲ",
+          "ㅗ",
+          "ㅊ"
+        ],
+        "pRow": [
+          "ㄱ",
+          "ㅜ",
+          "ㄱ",
+          "_",
+          "ㅎ",
+          "w",
+          "ㅏ",
+          "_",
+          "ㄲ",
+          "ㅗ",
+          "ㅊ"
         ]
       },
       {
         "wordId": "w5",
         "surface": "교육열",
         "pronunciation": "[교육녈]",
-        "cells": [
-          { "cellNo": 0, "text": "ㄱ" },
-          { "cellNo": 1, "text": "j" },
-          { "cellNo": 2, "text": "ㅗ" },
-          { "cellNo": 3, "text": ",", "type": "sep" },
-          { "cellNo": 4, "text": "j" },
-          { "cellNo": 5, "text": "ㅜ" },
-          { "cellNo": 6, "text": "ㄱ" },
-          { "cellNo": 7, "text": ",", "type": "sep" },
-          { "cellNo": 8, "text": "j" },
-          { "cellNo": 9, "text": "ㅓ" },
-          { "cellNo": 10, "text": "ㄹ" }
-        ],
         "steps": [
           {
             "stepId": "st1",
-            "envCellNos": [6, 8],
-            "targetCellNo": 7,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "ㄴ" },
-              { "id": "B", "text": "ㄱ" },
-              { "id": "C", "text": "ㅇ" },
-              { "id": "D", "text": "ㅁ" }
+              {
+                "id": "A",
+                "text": "ㄴ"
+              },
+              {
+                "id": "B",
+                "text": "ㄱ"
+              },
+              {
+                "id": "C",
+                "text": "ㅇ"
+              },
+              {
+                "id": "D",
+                "text": "ㅁ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 3, "newText": "" },
-                { "cellNo": 7, "newText": "ㄴ" }
+              "apply": [
+                {
+                  "pos": 8,
+                  "val": "ㄴ"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              7,
+              9
+            ],
+            "targetCell": 8
           },
           {
             "stepId": "st2",
-            "targetCellNo": 7,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "ㄴ첨가" },
-              { "id": "B", "text": "비음화" },
-              { "id": "C", "text": "유음화" },
-              { "id": "D", "text": "된소리되기" }
+              {
+                "id": "A",
+                "text": "ㄴ첨가"
+              },
+              {
+                "id": "B",
+                "text": "비음화"
+              },
+              {
+                "id": "C",
+                "text": "유음화"
+              },
+              {
+                "id": "D",
+                "text": "된소리되기"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 8
           },
           {
             "stepId": "st3",
-            "envCellNos": [7],
-            "targetCellNo": 6,
             "questionType": "PHONEME_RESULT",
             "choices": [
-              { "id": "A", "text": "ㅇ" },
-              { "id": "B", "text": "ㄴ" },
-              { "id": "C", "text": "ㄱ" },
-              { "id": "D", "text": "ㅁ" }
+              {
+                "id": "A",
+                "text": "ㅇ"
+              },
+              {
+                "id": "B",
+                "text": "ㄴ"
+              },
+              {
+                "id": "C",
+                "text": "ㄱ"
+              },
+              {
+                "id": "D",
+                "text": "ㅁ"
+              }
             ],
             "answerId": "A",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCells": [
-                { "cellNo": 6, "newText": "ㅇ" }
+              "apply": [
+                {
+                  "pos": 7,
+                  "val": "ㅇ"
+                }
               ]
             },
-            "onWrong": { "deltaSec": -20, "retry": true }
+            "onWrong": {
+              "deltaSec": -20,
+              "retry": true
+            },
+            "envCells": [
+              8
+            ],
+            "targetCell": 7
           },
           {
             "stepId": "st4",
-            "targetCellNo": 6,
             "questionType": "RULE_EXPLANATION",
             "choices": [
-              { "id": "A", "text": "비음화" },
-              { "id": "B", "text": "ㄴ첨가" },
-              { "id": "C", "text": "유음화" },
-              { "id": "D", "text": "된소리되기" }
+              {
+                "id": "A",
+                "text": "비음화"
+              },
+              {
+                "id": "B",
+                "text": "ㄴ첨가"
+              },
+              {
+                "id": "C",
+                "text": "유음화"
+              },
+              {
+                "id": "D",
+                "text": "된소리되기"
+              }
             ],
             "answerId": "A",
-            "onCorrect": { "deltaSec": 0, "next": true }
+            "onCorrect": {
+              "deltaSec": 0,
+              "next": true
+            },
+            "targetCell": 7
           }
+        ],
+        "sRow": [
+          "ㄱ",
+          "j",
+          "ㅗ",
+          ",",
+          "j",
+          "ㅜ",
+          "ㄱ",
+          ",",
+          "j",
+          "ㅓ",
+          "ㄹ"
+        ],
+        "pRow": [
+          "ㄱ",
+          "j",
+          "ㅗ",
+          "_",
+          "j",
+          "ㅜ",
+          "ㄱ",
+          "_",
+          "j",
+          "ㅓ",
+          "ㄹ"
         ]
       }
     ]
