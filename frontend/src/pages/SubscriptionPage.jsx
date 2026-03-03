@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/api";
 import "../styles/commerce.css";
 
+const PLANS = [
+  { months: 1, price: 65000, discount: 0, label: "1개월" },
+  { months: 3, price: 175500, discount: 10, label: "3개월" },
+  { months: 6, price: 312000, discount: 20, label: "6개월" },
+  { months: 12, price: 546000, discount: 30, label: "12개월" },
+];
+
 function formatDate(dt) {
   if (!dt) return "-";
   const d = new Date(dt);
@@ -33,8 +40,13 @@ function SubscriptionPage() {
   const [sub, setSub] = useState(null);
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedPlan, setSelectedPlan] = useState(1);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState("");
+  const [showRefundPolicy, setShowRefundPolicy] = useState(false);
 
-  useEffect(() => {
+  const loadData = () => {
+    setLoading(true);
     Promise.all([
       apiGet("/v1/subscription").catch(() => null),
       apiGet("/v1/payments").catch(() => [])
@@ -44,16 +56,39 @@ function SubscriptionPage() {
         setPayments(paymentData || []);
       })
       .finally(() => setLoading(false));
-  }, []);
+  };
+
+  useEffect(() => { loadData(); }, []);
 
   const status = sub?.status || "none";
   const isActive = status === "active" || status === "canceled";
+  const canSubscribe = !isActive;
 
   const handleCancel = () => {
     if (!confirm("정말 구독을 해지하시겠습니까?")) return;
     apiPost("/v1/subscription/cancel")
       .then(() => apiGet("/v1/subscription").then(setSub))
       .catch(() => alert("해지에 실패했습니다."));
+  };
+
+  const handleSubscribe = async () => {
+    const plan = PLANS.find((p) => p.months === selectedPlan);
+    if (!plan) return;
+    setCheckoutLoading(true);
+    setCheckoutError("");
+    try {
+      await apiPost("/v1/payments/checkout", {
+        amount: plan.price,
+        method: "card",
+        subscription: true,
+        months: plan.months,
+      });
+      loadData();
+    } catch (e) {
+      setCheckoutError(e.message || "결제에 실패했습니다.");
+    } finally {
+      setCheckoutLoading(false);
+    }
   };
 
   const statusLabel =
@@ -89,6 +124,59 @@ function SubscriptionPage() {
                     <div className="subscription-period-item">
                       <span className="label">다음 결제일</span>
                       <span className="value">{formatDate(sub.nextBillingAt)}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {canSubscribe && (
+              <div className="subscription-plans">
+                <h3>구독 플랜 선택</h3>
+                <div className="subscription-plan-grid">
+                  {PLANS.map((plan) => (
+                    <button
+                      key={plan.months}
+                      type="button"
+                      className={`subscription-plan-card${selectedPlan === plan.months ? " selected" : ""}`}
+                      onClick={() => setSelectedPlan(plan.months)}
+                    >
+                      <span className="plan-label">{plan.label}</span>
+                      <span className="plan-price">{plan.price.toLocaleString()}원</span>
+                      {plan.discount > 0 && (
+                        <span className="plan-discount">{plan.discount}% 할인</span>
+                      )}
+                      <span className="plan-monthly">
+                        월 {Math.round(plan.price / plan.months).toLocaleString()}원
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                {checkoutError && (
+                  <p style={{ color: "#e74c3c", fontSize: 14, marginTop: 12 }}>{checkoutError}</p>
+                )}
+                <button
+                  className="commerce-btn"
+                  type="button"
+                  style={{ width: "100%", marginTop: 16 }}
+                  onClick={handleSubscribe}
+                  disabled={checkoutLoading}
+                >
+                  {checkoutLoading ? "결제 중..." : "구독하기"}
+                </button>
+
+                <div className="subscription-refund-policy">
+                  <button
+                    type="button"
+                    className="refund-policy-toggle"
+                    onClick={() => setShowRefundPolicy(!showRefundPolicy)}
+                  >
+                    환불 규정 {showRefundPolicy ? "▲" : "▼"}
+                  </button>
+                  {showRefundPolicy && (
+                    <div className="refund-policy-content">
+                      <p>해지 시 월 65,000원 기준으로 이용 기간만큼 차감 후 나머지 금액을 환불합니다.</p>
+                      <p>예시: 3개월 플랜(175,500원) 구독 후 1개월 이용 시 → 175,500원 - 65,000원 = 110,500원 환불</p>
                     </div>
                   )}
                 </div>

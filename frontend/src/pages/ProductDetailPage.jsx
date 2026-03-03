@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { SHOP_CATEGORIES, SHOP_PRODUCTS } from "../data/shopCatalog";
-import { apiPost } from "../utils/api";
+import { apiGet, apiPost } from "../utils/api";
+import { useAuth } from "../hooks/useAuth";
 import "../styles/commerce.css";
 
 const formatPrice = (value) =>
@@ -10,23 +11,66 @@ const formatPrice = (value) =>
 function ProductDetailPage() {
   const { productId } = useParams();
   const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
   const [ordering, setOrdering] = useState(false);
   const [error, setError] = useState("");
+  const [address, setAddress] = useState(null);
+  const [addressLoading, setAddressLoading] = useState(false);
 
   const product = SHOP_PRODUCTS.find((item) => item.id === productId);
   const categoryLabel = SHOP_CATEGORIES.find(
     (item) => item.id === product?.category
   )?.label;
 
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    setAddressLoading(true);
+    apiGet("/v1/auth/me")
+      .then((data) => {
+        if (data.shippingAddress || data.shipping_address) {
+          setAddress(data.shippingAddress || data.shipping_address);
+        } else if (data.recipientName || data.recipient_name) {
+          setAddress({
+            recipientName: data.recipientName || data.recipient_name,
+            phone: data.phone,
+            zipCode: data.zipCode || data.zip_code,
+            address: data.address,
+            addressDetail: data.addressDetail || data.address_detail,
+          });
+        }
+      })
+      .catch(() => {})
+      .finally(() => setAddressLoading(false));
+  }, [isLoggedIn]);
+
   const handleBuyNow = async () => {
+    if (!isLoggedIn) {
+      setError("로그인 후 이용해주세요.");
+      return;
+    }
+    if (!address || !address.address) {
+      setError("쇼핑몰에서 배송지를 먼저 등록해주세요.");
+      return;
+    }
     setOrdering(true);
     setError("");
     try {
-      const data = await apiPost("/v1/shop/orders", {
+      const orderData = await apiPost("/v1/shop/orders", {
         items: [{ productId: product.id, quantity: 1 }],
-        address: {},
+        address: {
+          recipientName: address.recipientName,
+          phone: address.phone,
+          zipCode: address.zipCode,
+          address: address.address,
+          addressDetail: address.addressDetail,
+        },
       });
-      const orderId = data.orderId || data.id;
+      const orderId = orderData.orderId || orderData.id;
+      await apiPost("/v1/payments/shop", {
+        orderId,
+        amount: product.price,
+        method: "card",
+      });
       navigate(`/payment/result?orderId=${orderId}`);
     } catch (e) {
       setError(e.message || "주문에 실패했습니다.");
@@ -72,13 +116,29 @@ function ProductDetailPage() {
               <li key={item}>{item}</li>
             ))}
           </ul>
+          {!isLoggedIn && (
+            <p style={{ color: "#e74c3c", fontSize: 14 }}>
+              <Link to="/login" style={{ color: "#e74c3c", fontWeight: 600 }}>
+                로그인
+              </Link>
+              {" 후 이용해주세요."}
+            </p>
+          )}
+          {isLoggedIn && !addressLoading && !address && (
+            <p style={{ color: "#e74c3c", fontSize: 14 }}>
+              <Link to="/shop" style={{ color: "#e74c3c", fontWeight: 600 }}>
+                쇼핑몰
+              </Link>
+              {"에서 배송지를 먼저 등록해주세요."}
+            </p>
+          )}
           {error && <p style={{ color: "#e74c3c", fontSize: 14 }}>{error}</p>}
           <div className="commerce-summary-actions">
             <button
               className="commerce-btn"
               type="button"
               onClick={handleBuyNow}
-              disabled={ordering}
+              disabled={ordering || !isLoggedIn}
             >
               {ordering ? "주문 중..." : "바로 구매"}
             </button>

@@ -10,7 +10,8 @@ data class PaymentCheckoutRequest(
     val orderId: String? = null,
     val subscription: Boolean? = null,
     @field:NotBlank
-    val method: String
+    val method: String,
+    val months: Int? = null
 )
 
 data class PaymentCheckoutResult(

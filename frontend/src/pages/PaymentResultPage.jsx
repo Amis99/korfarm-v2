@@ -7,14 +7,74 @@ function PaymentResultPage() {
   const [params] = useSearchParams();
   const orderId = params.get("orderId");
   const [order, setOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    if (orderId) {
-      apiGet(`/v1/shop/orders/${orderId}`)
-        .then(setOrder)
-        .catch((e) => console.error(e));
+  const fetchOrder = () => {
+    if (!orderId) {
+      setLoading(false);
+      return;
     }
-  }, [orderId]);
+    setLoading(true);
+    setError("");
+    apiGet(`/v1/shop/orders/${orderId}`)
+      .then(setOrder)
+      .catch(() => setError("주문 정보를 불러올 수 없습니다."))
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => { fetchOrder(); }, [orderId]);
+
+  if (!orderId) {
+    return (
+      <div className="payment-page">
+        <div className="payment-card">
+          <span className="material-symbols-outlined" style={{ fontSize: "48px", color: "#e74c3c" }}>
+            error
+          </span>
+          <h1>잘못된 접근입니다</h1>
+          <p>주문 정보가 없습니다.</p>
+          <div style={{ display: "grid", gap: "10px", marginTop: "16px" }}>
+            <Link className="commerce-btn" to="/shop">
+              쇼핑몰로 이동
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="payment-page">
+        <div className="payment-card">
+          <p>주문 정보를 확인하는 중...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="payment-page">
+        <div className="payment-card">
+          <span className="material-symbols-outlined" style={{ fontSize: "48px", color: "#e74c3c" }}>
+            warning
+          </span>
+          <h1>오류 발생</h1>
+          <p>{error}</p>
+          <div style={{ display: "grid", gap: "10px", marginTop: "16px" }}>
+            <button className="commerce-btn" type="button" onClick={fetchOrder}>
+              다시 시도
+            </button>
+            <Link className="commerce-btn" to="/shop">
+              쇼핑몰로 이동
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="payment-page">

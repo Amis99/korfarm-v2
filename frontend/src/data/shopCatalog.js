@@ -46,7 +46,7 @@ export const SHOP_PRODUCTS = [
     id: "book_frege_grammar",
     name: "프레게 문법 집중 교재",
     category: "textbook",
-    level: "촄4~6",
+    level: "초4~6",
     price: 24000,
     badge: "신규",
     summary:
@@ -100,7 +100,7 @@ export const SHOP_PRODUCTS = [
     id: "tool_reading_board",
     name: "독해 전략 보드 게임",
     category: "tool",
-    level: "촃3~중1",
+    level: "초3~중1",
     price: 18000,
     badge: "교구",
     summary:

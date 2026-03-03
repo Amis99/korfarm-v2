@@ -21,6 +21,10 @@ class PaymentService(
     private val productRepository: ProductRepository,
     private val shipmentRepository: ShipmentRepository
 ) {
+    companion object {
+        val PLAN_PRICES = mapOf(1 to 65000, 3 to 175500, 6 to 312000, 12 to 546000)
+    }
+
     @Transactional
     fun checkoutSubscription(userId: String, request: PaymentCheckoutRequest): PaymentCheckoutResult {
         validateCardMethod(request.method)
@@ -29,6 +33,12 @@ class PaymentService(
         }
         if (request.subscription == false) {
             throw ApiException("INVALID_REQUEST", "subscription payment required", HttpStatus.BAD_REQUEST)
+        }
+        val months = request.months ?: 1
+        val expectedAmount = PLAN_PRICES[months]
+            ?: throw ApiException("INVALID_REQUEST", "invalid months: $months", HttpStatus.BAD_REQUEST)
+        if (request.amount != expectedAmount) {
+            throw ApiException("AMOUNT_MISMATCH", "expected $expectedAmount but got ${request.amount}", HttpStatus.BAD_REQUEST)
         }
         val payment = PaymentEntity(
             id = IdGenerator.newId("pay"),
@@ -42,7 +52,7 @@ class PaymentService(
             updatedAt = LocalDateTime.now()
         )
         paymentRepository.save(payment)
-        upsertSubscription(userId)
+        upsertSubscription(userId, months)
         return PaymentCheckoutResult(paymentId = payment.id, status = payment.status, redirectUrl = null)
     }
 
@@ -136,17 +146,17 @@ class PaymentService(
         }
     }
 
-    private fun upsertSubscription(userId: String) {
+    private fun upsertSubscription(userId: String, months: Int = 1) {
         val now = LocalDateTime.now()
         val current = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(userId)
         if (current != null && subscriptionService.isEntitled(current) && current.status == "active") {
-            current.endAt = current.endAt.plusMonths(1)
+            current.endAt = current.endAt.plusMonths(months.toLong())
             current.nextBillingAt = current.endAt
             subscriptionRepository.save(current)
             return
         }
         val startAt = if (current != null && current.endAt.isAfter(now)) current.endAt else now
-        val endAt = startAt.plusMonths(1)
+        val endAt = startAt.plusMonths(months.toLong())
         val subscription = SubscriptionEntity(
             id = IdGenerator.newId("sub"),
             userId = userId,
