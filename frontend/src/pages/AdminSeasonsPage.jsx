@@ -18,7 +18,7 @@ const mapSeasons = (items) =>
   }));
 
 function AdminSeasonsPage({ wrap = true }) {
-  const { data: seasons, loading, error } = useAdminList("/v1/admin/seasons", SEASONS, mapSeasons);
+  const { data: seasons, loading, error } = useAdminList("/v1/admin/duel/seasons", SEASONS, mapSeasons);
   const [rows, setRows] = useState(SEASONS);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -58,7 +58,7 @@ function AdminSeasonsPage({ wrap = true }) {
       });
       setShowCreateModal(false);
       setFormData({ levelId: "", name: "", startAt: "", endAt: "" });
-      const refreshed = await apiGet("/v1/admin/seasons");
+      const refreshed = await apiGet("/v1/admin/duel/seasons");
       setRows(mapSeasons(refreshed));
     } catch (err) {
       setActionError(err.message);

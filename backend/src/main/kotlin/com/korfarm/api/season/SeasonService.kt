@@ -29,6 +29,21 @@ class SeasonService(
         )
     }
 
+    fun allSeasons(): List<Season> {
+        return seasonRepository.findAll()
+            .sortedByDescending { it.startAt }
+            .map { season ->
+                Season(
+                    seasonId = season.id,
+                    levelId = season.levelId,
+                    name = season.name,
+                    startAt = season.startAt.toString(),
+                    endAt = season.endAt.toString(),
+                    status = season.status
+                )
+            }
+    }
+
     fun getSeasonEntity(seasonId: String): SeasonEntity {
         return seasonRepository.findById(seasonId).orElseThrow {
             ApiException("SEASON_NOT_FOUND", "season not found", HttpStatus.NOT_FOUND)

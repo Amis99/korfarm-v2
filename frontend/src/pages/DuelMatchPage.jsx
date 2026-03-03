@@ -27,6 +27,7 @@ function DuelMatchPage() {
   const [eliminated, setEliminated] = useState(false);
   const [remainingCount, setRemainingCount] = useState(0);
   const [visibleMark, setVisibleMark] = useState(null); // "correct" | "wrong" | null
+  const [wsError, setWsError] = useState(false);
 
   const userId = user?.id;
 
@@ -141,6 +142,10 @@ function DuelMatchPage() {
       }
     };
 
+    ws.onerror = () => {
+      setWsError(true);
+    };
+
     ws.onclose = () => {};
 
     return () => {
@@ -170,6 +175,18 @@ function DuelMatchPage() {
 
   const timerPercent = timeLimitSec > 0 ? (questionTimeLeft / timeLimitSec) * 100 : 0;
   const timerColorClass = timerPercent > 50 ? "safe" : timerPercent > 20 ? "warning" : "danger";
+
+  // 연결 오류
+  if (wsError && phase === "loading") {
+    return (
+      <div className="duel-match">
+        <div className="duel-empty-msg">
+          <p>서버 연결에 실패했습니다.</p>
+          <button className="duel-create-btn" onClick={() => navigate(-1)}>돌아가기</button>
+        </div>
+      </div>
+    );
+  }
 
   // 로딩
   if (phase === "loading" && !currentQuestion) {

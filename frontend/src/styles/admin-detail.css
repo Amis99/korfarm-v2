@@ -697,3 +697,59 @@
   outline: none;
   border-color: #f06c24;
 }
+
+/* === 대결 문제 관리 === */
+.admin-duel-server-tabs { margin-top: 20px; margin-bottom: 16px; }
+.admin-duel-stats-row { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+.admin-detail-tag.tag-reading { background: rgba(240,108,36,0.2); color: #f6d18d; }
+.admin-detail-tag.tag-db { background: rgba(166,182,169,0.18); color: #a6b6a9; }
+.admin-detail-tag.tag-sample { background: rgba(163,90,212,0.18); color: #c58be8; }
+
+.admin-duel-empty-cell { text-align: center; color: #a6b6a9; padding: 24px; }
+.admin-duel-id-cell { font-size: 12px; font-family: monospace; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.admin-duel-id-link { cursor: pointer; color: #f06c24; text-decoration: underline; }
+.admin-duel-date-cell { font-size: 12px; }
+.admin-duel-passage-textarea { min-height: 60px; }
+
+/* 문제 상세 모달 */
+.admin-duel-detail-tags { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.admin-duel-detail-id { font-size: 12px; color: #a6b6a9; font-family: monospace; }
+.admin-duel-detail-section { margin-bottom: 16px; }
+.admin-duel-detail-label { display: block; font-size: 12px; color: #a6b6a9; margin-bottom: 6px; }
+.admin-duel-passage-block {
+  background: rgba(15,20,16,0.7);
+  border-left: 3px solid #f06c24;
+  border-radius: 0 8px 8px 0;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #f3f6f1;
+  white-space: pre-wrap;
+}
+.admin-duel-stem-text { font-size: 15px; font-weight: 600; color: #f3f6f1; line-height: 1.5; }
+.admin-duel-choices-list { display: flex; flex-direction: column; gap: 6px; }
+.admin-duel-choice-item {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(15,20,16,0.5);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.admin-duel-choice-item.correct-choice {
+  border: 2px solid #4ade80;
+  background: rgba(78,138,96,0.15);
+}
+.admin-duel-choice-number {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 13px; font-weight: 700;
+  background: rgba(255,255,255,0.1); color: #a6b6a9;
+}
+.admin-duel-choice-number.correct-num { background: #4ade80; color: #0f1410; }
+.admin-duel-choice-text { color: #f3f6f1; font-weight: 400; }
+.admin-duel-choice-text.correct-text { color: #9dd6b0; font-weight: 600; }
+.admin-duel-correct-label { margin-left: auto; font-size: 12px; color: #4ade80; font-weight: 700; }
+.admin-duel-import-success { color: #9dd6b0; }
+.admin-duel-seed-modal-actions { display: flex; gap: 8px; justify-content: center; }

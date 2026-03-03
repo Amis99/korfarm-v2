@@ -61,6 +61,9 @@ class DuelWebSocketHandler(
     override fun afterConnectionClosed(session: WebSocketSession, status: CloseStatus) {
         sessionsByRoom.values.forEach { it.remove(session) }
         sessionsByMatch.values.forEach { it.remove(session) }
+        // 빈 맵 엔트리 정리 (메모리 누수 방지)
+        sessionsByRoom.entries.removeIf { it.value.isEmpty() }
+        sessionsByMatch.entries.removeIf { it.value.isEmpty() }
     }
 
     // === 대기방 핸들러 ===
@@ -235,6 +238,12 @@ class DuelWebSocketHandler(
                 try {
                     val result = duelService.finishMatch(matchId)
                     if (result != null) {
+                        // 보상 지급은 매치 결과 저장과 별도 트랜잭션으로 처리
+                        try {
+                            duelService.distributeMatchRewards(matchId)
+                        } catch (e: Exception) {
+                            log.error("매치 보상 지급 실패 (매치 결과는 저장됨): $matchId", e)
+                        }
                         broadcastMatchFinish(matchId, result)
                     }
                 } catch (e: Exception) {
@@ -364,6 +373,7 @@ class DuelWebSocketHandler(
     private fun cleanupMatch(matchId: String) {
         cancelQuestionTimer(matchId)
         matchStates.remove(matchId)
+        sessionsByMatch.remove(matchId)
     }
 
     // === 브로드캐스트 ===

@@ -28,6 +28,12 @@ class DuelTimerScheduler(
                 try {
                     val result = duelService.finishMatch(match.id)
                     if (result != null) {
+                        // 보상 지급은 매치 결과 저장과 별도 트랜잭션으로 처리
+                        try {
+                            duelService.distributeMatchRewards(match.id)
+                        } catch (e: Exception) {
+                            log.error("매치 보상 지급 실패 (매치 결과는 저장됨): ${match.id}", e)
+                        }
                         duelWebSocketHandler.broadcastMatchFinish(match.id, result)
                     }
                 } catch (e: Exception) {

@@ -28,6 +28,8 @@ function DuelWaitingRoomPage() {
   const [loading, setLoading] = useState(true);
   const wsRef = useRef(null);
 
+  const [wsError, setWsError] = useState(false);
+
   // 씨앗 선택 모달 상태
   const [showSeedModal, setShowSeedModal] = useState(false);
   const [myInventory, setMyInventory] = useState(null);
@@ -77,6 +79,10 @@ function DuelWaitingRoomPage() {
         const matchId = payload?.match_id || payload?.matchId;
         if (matchId) navigate(`/duel/match/${matchId}`);
       }
+    };
+
+    ws.onerror = () => {
+      setWsError(true);
     };
 
     ws.onclose = () => {};
@@ -156,6 +162,17 @@ function DuelWaitingRoomPage() {
   const stakeAmount = room?.stake_amount ?? 0;
 
   const seeds = myInventory?.seeds || {};
+
+  if (wsError && loading) {
+    return (
+      <div className="duel-waiting">
+        <div className="duel-empty-msg">
+          <p>서버 연결에 실패했습니다.</p>
+          <button className="duel-create-btn" onClick={() => navigate(-1)}>돌아가기</button>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return <div className="duel-waiting"><div className="duel-empty-msg">불러오는 중...</div></div>;

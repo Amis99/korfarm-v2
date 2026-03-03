@@ -27,6 +27,22 @@ class AdminDuelController(
     private val featureFlagService: FeatureFlagService,
     private val seasonService: com.korfarm.api.season.SeasonService
 ) {
+    @GetMapping("/seasons")
+    fun listSeasons(): ApiResponse<List<Map<String, Any?>>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val data = seasonService.allSeasons().map { season ->
+            mapOf<String, Any?>(
+                "id" to season.seasonId,
+                "name" to season.name,
+                "startAt" to season.startAt,
+                "endAt" to season.endAt,
+                "status" to season.status
+            )
+        }
+        return ApiResponse(success = true, data = data)
+    }
+
     @PostMapping("/seasons")
     fun createSeason(@Valid @RequestBody request: AdminDuelSeasonRequest): ApiResponse<Map<String, String>> {
         AdminGuard.requireAnyRole("HQ_ADMIN")

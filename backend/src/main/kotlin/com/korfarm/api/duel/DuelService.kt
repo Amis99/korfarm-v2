@@ -425,7 +425,7 @@ class DuelService(
             player.result = if (rank == 1) "win" else "lose"
         }
 
-        // 정산
+        // 정산 (보상 계산)
         val escrows = duelEscrowRepository.findByMatchId(matchId)
         val totalEscrow = escrows.sumOf { it.amount }
         val systemFee = (totalEscrow * SYSTEM_FEE_RATE).toInt()
@@ -436,27 +436,6 @@ class DuelService(
 
         winners.forEach { winner ->
             winner.rewardAmount = rewardPerWinner
-            // AI 승자는 보상 지급 건너뛰기
-            if (aiPlayerService.isAiPlayer(winner.userId)) return@forEach
-
-            // 승자에게 씨앗 지급: 에스크로 seedType별 분배
-            val seedTypeAmounts = escrows.groupBy { it.seedType }
-                .mapValues { (_, escs) -> escs.sumOf { it.amount } }
-            val totalAmount = seedTypeAmounts.values.sum()
-            if (totalAmount > 0) {
-                var remaining = rewardPerWinner
-                seedTypeAmounts.entries.forEachIndexed { idx, (seedType, amount) ->
-                    val share = if (idx == seedTypeAmounts.size - 1) {
-                        remaining // 마지막은 나머지 전부
-                    } else {
-                        (rewardPerWinner.toLong() * amount / totalAmount).toInt()
-                    }
-                    if (share > 0) {
-                        economyService.adjustSeed(winner.userId, seedType, share, "duel_reward", "duel_match", matchId)
-                        remaining -= share
-                    }
-                }
-            }
         }
 
         // 에스크로 상태 업데이트
@@ -503,6 +482,49 @@ class DuelService(
             totalEscrow = totalEscrow,
             systemFee = systemFee
         )
+    }
+
+    /**
+     * 매치 보상 지급 (finishMatch와 별도 호출하여 트랜잭션 분리)
+     * 매치 결과 저장 후 별도로 호출되므로, 보상 실패 시에도 매치 결과는 보존됨
+     */
+    @Transactional
+    fun distributeMatchRewards(matchId: String) {
+        val escrows = duelEscrowRepository.findByMatchId(matchId)
+        if (escrows.isEmpty()) return
+
+        val players = duelMatchPlayerRepository.findByMatchId(matchId)
+        val winners = players.filter { it.rankPosition == 1 }
+        if (winners.isEmpty()) return
+
+        val totalEscrow = escrows.sumOf { it.amount }
+        val systemFee = (totalEscrow * SYSTEM_FEE_RATE).toInt()
+        val winnerPool = totalEscrow - systemFee
+        val rewardPerWinner = winnerPool / winners.size
+
+        val seedTypeAmounts = escrows.groupBy { it.seedType }
+            .mapValues { (_, escs) -> escs.sumOf { it.amount } }
+        val totalAmount = seedTypeAmounts.values.sum()
+
+        winners.forEach { winner ->
+            // AI 승자는 보상 지급 건너뛰기
+            if (aiPlayerService.isAiPlayer(winner.userId)) return@forEach
+
+            if (totalAmount > 0) {
+                var remaining = rewardPerWinner
+                seedTypeAmounts.entries.forEachIndexed { idx, (seedType, amount) ->
+                    val share = if (idx == seedTypeAmounts.size - 1) {
+                        remaining
+                    } else {
+                        (rewardPerWinner.toLong() * amount / totalAmount).toInt()
+                    }
+                    if (share > 0) {
+                        economyService.adjustSeed(winner.userId, seedType, share, "duel_reward", "duel_match", matchId)
+                        remaining -= share
+                    }
+                }
+            }
+        }
     }
 
     // === 조회 ===
