@@ -24,10 +24,14 @@ class EconomyService(
         val crops = userCropRepository.findByUserId(userId)
         val fertilizer = userFertilizerRepository.findByUserId(userId)?.count ?: 0
         val updatedAt = LocalDateTime.now().toString()
+        val seedsMap = seeds.associate { it.seedType to it.count }
+        val cropsMap = crops.associate { it.cropType to it.count }
+        val totalSeeds = seedsMap.values.sum()
         return Inventory(
-            seeds = seeds.associate { it.seedType to it.count },
-            crops = crops.associate { it.cropType to it.count },
+            seeds = seedsMap,
+            crops = cropsMap,
             fertilizer = fertilizer,
+            seasonScore = SeasonScoreCalculator.calculate(cropsMap, totalSeeds),
             updatedAt = updatedAt
         )
     }
@@ -149,6 +153,57 @@ class EconomyService(
             cropType = cropType,
             cropDelta = cropDelta,
             seedSpent = seedRequired,
+            fertilizerSpent = fertilizerCost,
+            inventory = getInventory(userId)
+        )
+    }
+
+    @Transactional
+    fun harvestCraftBatch(userId: String, seedType: String, quantity: Int, useFertilizer: Boolean): HarvestCraftResult {
+        if (quantity < 1) throw ApiException("INVALID_QUANTITY", "quantity must be >= 1", HttpStatus.BAD_REQUEST)
+
+        val totalSeedCost = seedRequired * quantity
+        val seed = userSeedRepository.findForUpdate(userId, seedType)
+            ?: throw ApiException("INSUFFICIENT_SEEDS", "not enough seeds", HttpStatus.BAD_REQUEST)
+        if (seed.count < totalSeedCost) {
+            throw ApiException("INSUFFICIENT_SEEDS", "not enough seeds", HttpStatus.BAD_REQUEST)
+        }
+
+        val fertilizerCost = if (useFertilizer) fertilizerSpent * quantity else 0
+        val fertilizer = userFertilizerRepository.findForUpdate(userId)
+            ?: UserFertilizerEntity(id = IdGenerator.newId("uf"), userId = userId, count = 0)
+        if (fertilizerCost > 0 && fertilizer.count < fertilizerCost) {
+            throw ApiException("INSUFFICIENT_FERTILIZER", "not enough fertilizer", HttpStatus.BAD_REQUEST)
+        }
+
+        val cropType = seedType.replace("seed_", "crop_")
+        val cropDelta = quantity * (if (useFertilizer) fertilizerMultiplier else 1)
+
+        seed.count -= totalSeedCost
+        val crop = userCropRepository.findForUpdate(userId, cropType)
+            ?: UserCropEntity(id = IdGenerator.newId("uc"), userId = userId, cropType = cropType, count = 0)
+        crop.count += cropDelta
+
+        if (fertilizerCost > 0) {
+            fertilizer.count -= fertilizerCost
+        }
+
+        userSeedRepository.save(seed)
+        userCropRepository.save(crop)
+        if (fertilizerCost > 0 || fertilizer.count > 0) {
+            userFertilizerRepository.save(fertilizer)
+        }
+
+        addLedger(userId, "seed", seedType, -totalSeedCost, "harvest_craft_batch", "harvest", null)
+        addLedger(userId, "crop", cropType, cropDelta, "harvest_craft_batch", "harvest", null)
+        if (fertilizerCost > 0) {
+            addLedger(userId, "fertilizer", "fertilizer", -fertilizerCost, "harvest_craft_batch", "harvest", null)
+        }
+
+        return HarvestCraftResult(
+            cropType = cropType,
+            cropDelta = cropDelta,
+            seedSpent = totalSeedCost,
             fertilizerSpent = fertilizerCost,
             inventory = getInventory(userId)
         )

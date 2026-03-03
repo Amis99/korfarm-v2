@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, TOKEN_KEY } from "../utils/api";
 import HarvestCraftModal from "../components/HarvestCraftModal";
+import { calcSeasonScore, FORMULA_TEXT } from "../utils/seasonScore";
 import "../styles/start.css";
 
 const LEVEL_LABEL_MAP = {
@@ -209,12 +210,7 @@ function StartPage() {
   const fertilizerCount = displayInventory?.fertilizer ?? 0;
 
   const cropsObj = displayInventory?.crops || {};
-  const cropWheat = cropsObj.crop_wheat ?? 0;
-  const cropRice = cropsObj.crop_rice ?? 0;
-  const cropCorn = cropsObj.crop_corn ?? 0;
-  const cropGrape = cropsObj.crop_grape ?? 0;
-  const cropApple = cropsObj.crop_apple ?? 0;
-  const seasonScore = (cropWheat * cropRice * cropCorn * cropGrape * cropApple) * 50 + totalSeeds;
+  const seasonScore = calcSeasonScore(cropsObj, totalSeeds);
 
   const seedsObj = displayInventory?.seeds || {};
   const SEED_LABELS = { seed_wheat: "밀", seed_rice: "쌀", seed_corn: "옥수수", seed_grape: "포도", seed_apple: "사과" };
@@ -440,7 +436,7 @@ function StartPage() {
               </div>
               <div className="start-formula-box">
                 <strong>시즌 점수 공식</strong><br />
-                (밀×쌀×옥수수×포도×사과)×50 + 총씨앗
+                {FORMULA_TEXT}
               </div>
               <button type="button" className="start-modal-close" onClick={() => setShowInventoryPopup(false)}>
                 닫기

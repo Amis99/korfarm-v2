@@ -70,6 +70,12 @@ data class HarvestCraftRequest(
     val useFertilizer: Boolean = false
 )
 
+data class HarvestCraftBatchRequest(
+    @field:NotBlank val seedType: String,
+    @field:Min(1) val quantity: Int = 1,
+    val useFertilizer: Boolean = false
+)
+
 data class DuelRoomCreateRequest(
     @field:NotBlank val serverId: String,
     @field:NotBlank val roomName: String,
@@ -209,6 +215,10 @@ data class AdminContentImportRequest(
     @field:NotBlank val contentType: String,
     val levelId: String? = null,
     val chapterId: String? = null,
+    val area: String? = null,
+    val subArea: String? = null,
+    val dayIndex: Int? = null,
+    val moduleKey: String? = null,
     @field:NotBlank val schemaVersion: String,
     @field:NotNull val content: Map<String, Any>
 )

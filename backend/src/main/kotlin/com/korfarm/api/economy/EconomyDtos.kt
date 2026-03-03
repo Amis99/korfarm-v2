@@ -4,6 +4,7 @@ data class Inventory(
     val seeds: Map<String, Int>,
     val crops: Map<String, Int>,
     val fertilizer: Int,
+    val seasonScore: Int,
     val updatedAt: String
 )
 

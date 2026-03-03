@@ -2,6 +2,7 @@ package com.korfarm.api.economy
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.contracts.HarvestCraftBatchRequest
 import com.korfarm.api.contracts.HarvestCraftRequest
 import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.system.FeatureFlagService
@@ -32,6 +33,15 @@ class EconomyController(
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         featureFlagService.requireEnabled("feature.economy.harvest", userId)
         val result = economyService.harvestCraft(userId, request.seedType, request.useFertilizer)
+        return ApiResponse(success = true, data = result)
+    }
+
+    @PostMapping("/harvest/craft-batch")
+    fun harvestCraftBatch(@Valid @RequestBody request: HarvestCraftBatchRequest): ApiResponse<HarvestCraftResult> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        featureFlagService.requireEnabled("feature.economy.harvest", userId)
+        val result = economyService.harvestCraftBatch(userId, request.seedType, request.quantity, request.useFertilizer)
         return ApiResponse(success = true, data = result)
     }
 
