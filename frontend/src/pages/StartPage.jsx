@@ -230,7 +230,8 @@ function StartPage() {
   // 부모용 네비게이션 함수 (자녀 ID 포함)
   const navWithChild = (path) => {
     if (isParent && selectedChild?.studentUserId) {
-      navigate(`${path}?studentId=${selectedChild.studentUserId}`);
+      const sep = path.includes("?") ? "&" : "?";
+      navigate(`${path}${sep}studentId=${selectedChild.studentUserId}`);
     } else {
       navigate(path);
     }
@@ -252,21 +253,13 @@ function StartPage() {
                 </h1>
                 {linkedChildren.length > 0 ? (
                   <div style={{ marginTop: 8 }}>
-                    <label style={{ fontSize: 13, color: "#666", marginRight: 8 }}>자녀 선택:</label>
+                    <label className="start-label" style={{ marginRight: 8 }}>자녀 선택:</label>
                     <select
+                      className="start-select"
                       value={selectedChild?.studentUserId || ""}
                       onChange={(e) => {
                         const child = linkedChildren.find((c) => c.studentUserId === e.target.value);
                         setSelectedChild(child);
-                      }}
-                      style={{
-                        padding: "6px 10px",
-                        borderRadius: 10,
-                        border: "1px solid rgba(0,0,0,0.15)",
-                        background: "#fff",
-                        fontSize: 13,
-                        color: "#222",
-                        cursor: "pointer",
                       }}
                     >
                       {linkedChildren.map((child) => (
@@ -292,19 +285,9 @@ function StartPage() {
                 )}
                 <button
                   type="button"
+                  className="start-sub-btn"
                   onClick={() => navigate("/profile")}
-                  style={{
-                    marginTop: 10,
-                    padding: "6px 14px",
-                    border: "1px solid rgba(0,0,0,0.15)",
-                    borderRadius: 10,
-                    background: "#fff",
-                    fontSize: 13,
-                    cursor: "pointer",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 4,
-                  }}
+                  style={{ marginTop: 10 }}
                 >
                   <span className="material-symbols-outlined" style={{ fontSize: 16 }}>settings</span>
                   내 정보 수정
@@ -344,7 +327,7 @@ function StartPage() {
                       <h3>수확 장부</h3>
                       <p>작물 거래 내역</p>
                     </div>
-                    <div className="start-paid-card" onClick={() => navWithChild("/tests/history")}>
+                    <div className="start-paid-card" onClick={() => navWithChild("/tests?tab=history")}>
                       <span className="material-symbols-outlined">assessment</span>
                       <h3>테스트 기록실</h3>
                       <p>성적표 및 오답 노트</p>
@@ -360,23 +343,23 @@ function StartPage() {
                       </h2>
                       <div className="start-card">
                         <div style={{ marginBottom: 8 }}>
-                          <strong style={{ fontSize: 13, color: "#6b5b50" }}>씨앗 (총 {totalSeeds}개)</strong>
-                          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 4, fontSize: 13 }}>
+                          <strong className="start-label">씨앗 (총 {totalSeeds}개)</strong>
+                          <div className="start-flex-wrap">
                             {Object.entries(SEED_LABELS).map(([key, label]) => (
                               <span key={key}>{label} {seedsObj[key] ?? 0}</span>
                             ))}
                           </div>
                         </div>
                         <div style={{ marginBottom: 8 }}>
-                          <strong style={{ fontSize: 13, color: "#6b5b50" }}>수확물 (총 {totalCrops}개)</strong>
-                          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 4, fontSize: 13 }}>
+                          <strong className="start-label">수확물 (총 {totalCrops}개)</strong>
+                          <div className="start-flex-wrap">
                             {Object.entries(CROP_LABELS).map(([key, label]) => (
                               <span key={key}>{label} {cropsObj[key] ?? 0}</span>
                             ))}
                           </div>
                         </div>
                         <div>
-                          <strong style={{ fontSize: 13, color: "#6b5b50" }}>비료</strong>
+                          <strong className="start-label">비료</strong>
                           <span style={{ marginLeft: 8, fontSize: 13 }}>{fertilizerCount}개</span>
                         </div>
                       </div>
@@ -436,34 +419,30 @@ function StartPage() {
         </div>
 
         {showInventoryPopup && (
-          <div className="result-overlay" onClick={() => setShowInventoryPopup(false)}>
-            <div className="result-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 360, width: "92vw", background: "#fff", borderRadius: 24, padding: 24, aspectRatio: "auto", gridTemplateRows: "none", display: "grid", gap: 0, boxShadow: "0 12px 32px rgba(0,0,0,0.18)" }}>
-              <h2 style={{ margin: "0 0 12px", fontSize: 20 }}>보유 현황</h2>
+          <div className="start-modal-overlay" onClick={() => setShowInventoryPopup(false)}>
+            <div className="start-modal-card" onClick={(e) => e.stopPropagation()}>
+              <h2>보유 현황</h2>
               <div style={{ display: "grid", gap: 8 }}>
                 {INVENTORY_ITEMS.map((item) => (
-                  <div key={item.seedKey} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14 }}>
-                    <span style={{ fontSize: 20 }}>{item.emoji}</span>
-                    <strong style={{ minWidth: 50 }}>{item.label}</strong>
+                  <div key={item.seedKey} className="start-inv-row">
+                    <span className="inv-emoji">{item.emoji}</span>
+                    <strong>{item.label}</strong>
                     <span>씨앗 {seedsObj[item.seedKey] ?? 0}</span>
                     <span style={{ color: "#888" }}>·</span>
                     <span>수확물 {cropsObj[item.cropKey] ?? 0}</span>
                   </div>
                 ))}
               </div>
-              <div style={{ marginTop: 10, fontSize: 14, display: "flex", alignItems: "center", gap: 6 }}>
-                <span style={{ fontSize: 20 }}>🧪</span>
+              <div className="start-inv-row" style={{ marginTop: 10 }}>
+                <span className="inv-emoji">🧪</span>
                 <strong>비료</strong>
                 <span>{fertilizerCount}개</span>
               </div>
-              <div style={{ marginTop: 12, padding: "10px 12px", background: "rgba(240,108,36,0.08)", borderRadius: 12, fontSize: 12, color: "#6b5b50" }}>
+              <div className="start-formula-box">
                 <strong>시즌 점수 공식</strong><br />
                 (밀×쌀×옥수수×포도×사과)×50 + 총씨앗
               </div>
-              <button
-                type="button"
-                onClick={() => setShowInventoryPopup(false)}
-                style={{ marginTop: 12, padding: "8px 20px", border: "none", borderRadius: 12, background: "var(--meadow-green, #ffb26b)", color: "#fff", fontWeight: 700, cursor: "pointer" }}
-              >
+              <button type="button" className="start-modal-close" onClick={() => setShowInventoryPopup(false)}>
                 닫기
               </button>
             </div>
@@ -521,19 +500,11 @@ function StartPage() {
                 <strong>{seasonScore.toLocaleString()}</strong>
               </div>
               {isAdmin ? (
-                <div style={{ marginTop: 6, display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                <div className="start-flex-row" style={{ marginTop: 6, flexWrap: "wrap" }}>
                   <select
+                    className="start-select"
                     value={adminLevelOverride || baseLevelId || ""}
                     onChange={(e) => setAdminLevelOverride(e.target.value)}
-                    style={{
-                      padding: "6px 10px",
-                      borderRadius: 10,
-                      border: "1px solid rgba(0,0,0,0.15)",
-                      background: "#fff",
-                      fontSize: 13,
-                      color: "#222",
-                      cursor: "pointer",
-                    }}
                   >
                     <option value="" disabled>레벨 선택</option>
                     {Object.entries(LEVEL_LABEL_MAP).map(([key, label]) => (
@@ -542,19 +513,9 @@ function StartPage() {
                   </select>
                   <button
                     type="button"
+                    className="start-sub-btn"
                     onClick={() => navigate("/admin")}
-                    style={{
-                      padding: "6px 14px",
-                      border: "1px solid rgba(240,108,36,0.4)",
-                      borderRadius: 10,
-                      background: "rgba(240,108,36,0.15)",
-                      fontSize: 13,
-                      cursor: "pointer",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 4,
-                      color: "#f06c24",
-                    }}
+                    style={{ border: "1px solid rgba(240,108,36,0.4)", background: "rgba(240,108,36,0.15)", color: "#f06c24" }}
                   >
                     <span className="material-symbols-outlined" style={{ fontSize: 16 }}>admin_panel_settings</span>
                     관리자 페이지
@@ -563,19 +524,9 @@ function StartPage() {
               ) : (
                 <button
                   type="button"
+                  className="start-sub-btn"
                   onClick={() => navigate("/profile")}
-                  style={{
-                    marginTop: 6,
-                    padding: "6px 14px",
-                    border: "1px solid rgba(0,0,0,0.15)",
-                    borderRadius: 10,
-                    background: "#fff",
-                    fontSize: 13,
-                    cursor: "pointer",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 4,
-                  }}
+                  style={{ marginTop: 6 }}
                 >
                   <span className="material-symbols-outlined" style={{ fontSize: 16 }}>settings</span>
                   내 정보 수정
@@ -678,7 +629,7 @@ function StartPage() {
                 <p>작물 거래 내역</p>
                 {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
-              <div className="start-paid-card" onClick={() => navigate("/tests/history")}>
+              <div className="start-paid-card" onClick={() => navigate("/tests?tab=history")}>
                 <span className="material-symbols-outlined">assessment</span>
                 <h3>테스트 기록실</h3>
                 <p>성적표 및 오답 노트</p>
@@ -703,7 +654,7 @@ function StartPage() {
               ) : (
                 <p>아직 씨앗 획득 내역이 없습니다.</p>
               )}
-              <Link className="start-card-button" to="/seed-log">
+              <Link className="start-card-button" to="/tests?tab=history">
                 전체 보기
               </Link>
             </div>
@@ -800,34 +751,30 @@ function StartPage() {
       </div>
 
       {showInventoryPopup && (
-        <div className="result-overlay" onClick={() => setShowInventoryPopup(false)}>
-          <div className="result-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 360, width: "92vw", background: "#fff", borderRadius: 24, padding: 24, aspectRatio: "auto", gridTemplateRows: "none", display: "grid", gap: 0, boxShadow: "0 12px 32px rgba(0,0,0,0.18)" }}>
-            <h2 style={{ margin: "0 0 12px", fontSize: 20 }}>보유 현황</h2>
+        <div className="start-modal-overlay" onClick={() => setShowInventoryPopup(false)}>
+          <div className="start-modal-card" onClick={(e) => e.stopPropagation()}>
+            <h2>보유 현황</h2>
             <div style={{ display: "grid", gap: 8 }}>
               {INVENTORY_ITEMS.map((item) => (
-                <div key={item.seedKey} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14 }}>
-                  <span style={{ fontSize: 20 }}>{item.emoji}</span>
-                  <strong style={{ minWidth: 50 }}>{item.label}</strong>
+                <div key={item.seedKey} className="start-inv-row">
+                  <span className="inv-emoji">{item.emoji}</span>
+                  <strong>{item.label}</strong>
                   <span>씨앗 {seedsObj[item.seedKey] ?? 0}</span>
                   <span style={{ color: "#888" }}>·</span>
                   <span>수확물 {cropsObj[item.cropKey] ?? 0}</span>
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: 10, fontSize: 14, display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ fontSize: 20 }}>🧪</span>
+            <div className="start-inv-row" style={{ marginTop: 10 }}>
+              <span className="inv-emoji">🧪</span>
               <strong>비료</strong>
               <span>{fertilizerCount}개</span>
             </div>
-            <div style={{ marginTop: 12, padding: "10px 12px", background: "rgba(240,108,36,0.08)", borderRadius: 12, fontSize: 12, color: "#6b5b50" }}>
+            <div className="start-formula-box">
               <strong>시즌 점수 공식</strong><br />
               (밀×쌀×옥수수×포도×사과)×50 + 총씨앗
             </div>
-            <button
-              type="button"
-              onClick={() => setShowInventoryPopup(false)}
-              style={{ marginTop: 12, padding: "8px 20px", border: "none", borderRadius: 12, background: "var(--meadow-green, #ffb26b)", color: "#fff", fontWeight: 700, cursor: "pointer" }}
-            >
+            <button type="button" className="start-modal-close" onClick={() => setShowInventoryPopup(false)}>
               닫기
             </button>
           </div>

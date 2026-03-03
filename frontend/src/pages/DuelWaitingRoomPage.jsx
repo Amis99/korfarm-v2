@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { apiGet, apiPost, API_BASE } from "../utils/api";
+import { apiGet, apiPost, WS_BASE } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/duel.css";
 
@@ -48,8 +48,7 @@ function DuelWaitingRoomPage() {
       })
       .catch(() => { if (!cancelled) setLoading(false); });
 
-    const wsBase = API_BASE.replace(/^http/, "ws");
-    const ws = new WebSocket(`${wsBase}/v1/duel/ws?token=${token}`);
+    const ws = new WebSocket(`${WS_BASE}/v1/duel/ws?token=${token}`);
     wsRef.current = ws;
 
     ws.onopen = () => {
@@ -238,16 +237,15 @@ function DuelWaitingRoomPage() {
           onClick={() => setShowSeedModal(false)}
         >
           <div
-            className="result-card"
-            style={{ padding: 24, background: "#fff", maxWidth: 380, width: "90%", textAlign: "center" }}
+            className="result-card duel-seed-modal"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 style={{ marginBottom: 12, fontSize: 18 }}>베팅할 씨앗 종류 선택</h2>
+            <h2>베팅할 씨앗 종류 선택</h2>
             <p style={{ fontSize: 13, color: "#666", marginBottom: 16 }}>
               베팅: {stakeAmount}개
             </p>
 
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center", marginBottom: 20 }}>
+            <div className="seed-grid">
               {SEED_TYPES.map((s) => {
                 const count = seeds[s.key] ?? 0;
                 const enough = count >= stakeAmount;
@@ -256,18 +254,8 @@ function DuelWaitingRoomPage() {
                   <button
                     key={s.key}
                     type="button"
+                    className={`duel-seed-btn ${isSelected ? "selected" : enough ? "available" : "unavailable"}`}
                     onClick={() => enough && setSelectedSeedType(s.key)}
-                    style={{
-                      padding: "10px 16px",
-                      borderRadius: 10,
-                      border: isSelected ? "2px solid #ff8f2b" : "1px solid #ddd",
-                      background: isSelected ? "#fff5eb" : enough ? "#fff" : "#f5f5f5",
-                      color: enough ? "#333" : "#bbb",
-                      cursor: enough ? "pointer" : "not-allowed",
-                      fontWeight: isSelected ? 700 : 400,
-                      fontSize: 14,
-                      minWidth: 80,
-                    }}
                   >
                     {s.label} {count}개
                   </button>
@@ -278,34 +266,16 @@ function DuelWaitingRoomPage() {
             <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
               <button
                 type="button"
+                className="duel-confirm-btn"
                 onClick={handleSeedConfirm}
                 disabled={!selectedSeedType}
-                style={{
-                  border: "none",
-                  background: selectedSeedType ? "#ff8f2b" : "#ccc",
-                  color: "#fff",
-                  padding: "10px 24px",
-                  borderRadius: 10,
-                  cursor: selectedSeedType ? "pointer" : "not-allowed",
-                  fontWeight: 700,
-                  fontSize: 14,
-                }}
               >
                 확인
               </button>
               <button
                 type="button"
+                className="duel-cancel-btn"
                 onClick={() => setShowSeedModal(false)}
-                style={{
-                  border: "none",
-                  background: "#aaa",
-                  color: "#fff",
-                  padding: "10px 24px",
-                  borderRadius: 10,
-                  cursor: "pointer",
-                  fontWeight: 700,
-                  fontSize: 14,
-                }}
               >
                 취소
               </button>

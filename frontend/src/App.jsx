@@ -25,6 +25,7 @@ const RankingPage = lazy(() => import("./pages/RankingPage"));
 const ParentLinksPage = lazy(() => import("./pages/ParentLinksPage"));
 const StudentLinkConfirmPage = lazy(() => import("./pages/StudentLinkConfirmPage"));
 
+const DailyLearningPage = lazy(() => import("./pages/DailyLearningPage"));
 const DailyQuizPage = lazy(() => import("./pages/DailyQuizPage"));
 const DailyReadingPage = lazy(() => import("./pages/DailyReadingPage"));
 const LearningHubPage = lazy(() => import("./pages/LearningHubPage"));
@@ -47,7 +48,7 @@ const TestDetailPage = lazy(() => import("./pages/TestDetailPage"));
 const TestOmrPage = lazy(() => import("./pages/TestOmrPage"));
 const TestReportPage = lazy(() => import("./pages/TestReportPage"));
 const TestWrongNotePage = lazy(() => import("./pages/TestWrongNotePage"));
-const TestHistoryPage = lazy(() => import("./pages/TestHistoryPage"));
+
 
 const HarvestLedgerPage = lazy(() => import("./pages/HarvestLedgerPage"));
 const DuelMainPage = lazy(() => import("./pages/DuelMainPage"));
@@ -151,6 +152,7 @@ function App() {
           <Route path="/ranking" element={<RankingPage />} />
           <Route path="/parents/links" element={<ParentLinksPage />} />
           <Route path="/students/links/confirm" element={<StudentLinkConfirmPage />} />
+          <Route path="/daily" element={<DailyLearningPage />} />
           <Route path="/daily-quiz" element={<DailyQuizPage />} />
           <Route path="/daily-reading" element={<DailyReadingPage />} />
           <Route path="/learning" element={<LearningHubPage />} />
@@ -167,7 +169,7 @@ function App() {
           <Route path="/admin/wisdom" element={<AdminWisdomPage />} />
           <Route path="/admin/wisdom/:postId" element={<AdminWisdomDetailPage />} />
           <Route path="/tests" element={<TestStoragePage />} />
-          <Route path="/tests/history" element={<TestHistoryPage />} />
+          <Route path="/tests/history" element={<Navigate to="/tests?tab=history" replace />} />
           <Route path="/tests/:testId" element={<TestDetailPage />} />
           <Route path="/tests/:testId/omr" element={<TestOmrPage />} />
           <Route path="/tests/:testId/report" element={<TestReportPage />} />
@@ -177,7 +179,7 @@ function App() {
           <Route path="/admin/pro" element={<AdminProPage />} />
           <Route path="/admin/duel/questions" element={<Navigate to="/admin/duel?tab=questions" replace />} />
           <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />
-          <Route path="/seed-log" element={<Navigate to="/tests/history" replace />} />
+          <Route path="/seed-log" element={<Navigate to="/tests?tab=history" replace />} />
           <Route path="/duel" element={<DuelMainPage />} />
           <Route path="/duel/lobby/:serverId" element={<DuelLobbyPage />} />
           <Route path="/duel/room/:roomId" element={<DuelWaitingRoomPage />} />

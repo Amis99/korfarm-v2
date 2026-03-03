@@ -1,8 +1,9 @@
 import { useState, useMemo, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { getFarmById, getLearningItemsByFarm, SUB_AREA_LABELS } from "../data/learning/learningCatalog";
-import { apiPost } from "../utils/api";
+import { apiGet, apiPost } from "../utils/api";
 import "../styles/farm-mode.css";
+import "../styles/start.css";
 
 const LEVELS = [
   "FREGE_1", "FREGE_2", "FREGE_3",
@@ -46,7 +47,43 @@ function FarmListPage() {
   const [pageProgress, setPageProgress] = useState(null);
   const [pageProgressLoading, setPageProgressLoading] = useState(false);
 
-  const allItems = useMemo(() => getLearningItemsByFarm(farmId), [farmId]);
+  const staticItems = useMemo(() => getLearningItemsByFarm(farmId), [farmId]);
+  const [dbItems, setDbItems] = useState([]);
+
+  // DB 카탈로그에서 해당 농장 콘텐츠 조회
+  useEffect(() => {
+    if (!farm) return;
+    // area 파라미터를 농장 contentTypes의 첫번째로 사용
+    const contentTypes = farm.contentTypes || [];
+    if (!contentTypes.length) return;
+    // 각 contentType별로 DB 콘텐츠 조회
+    Promise.all(
+      contentTypes.map((ct) =>
+        apiGet(`/v1/learning/catalog/${farmId}?contentType=${ct}`).catch(() => [])
+      )
+    )
+      .then((results) => {
+        const flat = results.flat();
+        // 정적 카탈로그에 이미 있는 contentId는 제외
+        const staticIds = new Set(staticItems.map((i) => i.contentId));
+        const newItems = flat
+          .filter((item) => !staticIds.has(item.contentId))
+          .map((item) => ({
+            id: item.contentId,
+            contentId: item.contentId,
+            category: item.area || "",
+            title: item.title,
+            contentType: item.contentType,
+            targetLevel: item.levelId,
+            subArea: item.subArea,
+            moduleKey: item.moduleKey || "worksheet_quiz",
+          }));
+        setDbItems(newItems);
+      })
+      .catch(() => setDbItems([]));
+  }, [farmId, farm, staticItems]);
+
+  const allItems = useMemo(() => [...staticItems, ...dbItems], [staticItems, dbItems]);
 
   // 학습 진행 통계 조회
   useEffect(() => {
@@ -317,14 +354,11 @@ function FarmListPage() {
                 <p style={{ marginBottom: 8 }}>
                   {pageProgress.lastCompletedPage || 0} 페이지 완료
                 </p>
-                <div style={{ background: "#eee", borderRadius: 8, height: 8, marginBottom: 16 }}>
-                  <div style={{
-                    background: "#ff8f2b",
-                    borderRadius: 8,
-                    height: "100%",
-                    width: `${Math.min(100, ((pageProgress.lastCompletedPage || 0) / (pageProgress.pageResults?.length || 1)) * 100)}%`,
-                    transition: "width 0.3s",
-                  }} />
+                <div className="progress-bar" style={{ marginBottom: 16 }}>
+                  <div
+                    className="progress-bar-fill"
+                    style={{ width: `${Math.min(100, ((pageProgress.lastCompletedPage || 0) / (pageProgress.pageResults?.length || 1)) * 100)}%` }}
+                  />
                 </div>
                 {pageProgress.pageResults?.length > 0 && (
                   <div style={{ maxHeight: 200, overflow: "auto", marginBottom: 16 }}>
@@ -339,7 +373,7 @@ function FarmListPage() {
                 <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
                   <button
                     type="button"
-                    style={{ padding: "10px 20px", background: "#eee", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer" }}
+                    className="start-btn-secondary"
                     onClick={() => {
                       setProgressModal(null);
                       navigate(`/learning/${progressModal.id}?startPage=1`);
@@ -349,7 +383,7 @@ function FarmListPage() {
                   </button>
                   <button
                     type="button"
-                    style={{ padding: "10px 20px", background: "#ff8f2b", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer" }}
+                    className="start-btn-primary"
                     onClick={() => {
                       setProgressModal(null);
                       navigate(`/learning/${progressModal.id}?startPage=${(pageProgress.lastCompletedPage || 0) + 1}`);
@@ -363,7 +397,7 @@ function FarmListPage() {
               <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
                 <button
                   type="button"
-                  style={{ padding: "10px 20px", background: "#ff8f2b", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer" }}
+                  className="start-btn-primary"
                   onClick={() => {
                     setProgressModal(null);
                     navigate(`/learning/${progressModal.id}`);
@@ -375,7 +409,7 @@ function FarmListPage() {
             )}
             <button
               type="button"
-              style={{ marginTop: 12, padding: "8px 16px", background: "none", border: "1px solid #ddd", borderRadius: 8, cursor: "pointer", width: "100%" }}
+              className="start-btn-ghost"
               onClick={() => setProgressModal(null)}
             >
               닫기

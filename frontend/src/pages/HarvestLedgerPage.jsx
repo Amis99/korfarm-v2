@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
+import "../styles/start.css";
 
 const catalogMap = Object.fromEntries(
   LEARNING_CATALOG.map((c) => [c.contentId, c])
@@ -67,45 +68,39 @@ function HarvestLedgerPage() {
 
   if (!isLoggedIn) {
     return (
-      <div style={{ maxWidth: 700, margin: "80px auto", padding: "0 20px", textAlign: "center" }}>
+      <div className="page-center">
         <h1>학습 히스토리</h1>
-        <p style={{ color: "#8a7468", marginTop: 12 }}>로그인 후 학습 기록을 확인할 수 있습니다.</p>
-        <Link to="/login" style={{ display: "inline-block", marginTop: 24, color: "#ff8f2b", fontWeight: 700 }}>
-          로그인하기
-        </Link>
+        <p className="text-muted">로그인 후 학습 기록을 확인할 수 있습니다.</p>
+        <Link to="/login" className="link-action">로그인하기</Link>
       </div>
     );
   }
 
   if (loading) {
     return (
-      <div style={{ maxWidth: 700, margin: "80px auto", padding: "0 20px", textAlign: "center" }}>
+      <div className="page-center">
         <h1>학습 히스토리</h1>
-        <p style={{ color: "#8a7468", marginTop: 12 }}>불러오는 중...</p>
+        <p className="text-muted">불러오는 중...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div style={{ maxWidth: 700, margin: "80px auto", padding: "0 20px", textAlign: "center" }}>
+      <div className="page-center">
         <h1>학습 히스토리</h1>
-        <p style={{ color: "#c0392b", marginTop: 12 }}>오류가 발생했습니다: {error}</p>
-        <Link to="/start" style={{ display: "inline-block", marginTop: 24, color: "#ff8f2b", fontWeight: 700 }}>
-          홈으로 돌아가기
-        </Link>
+        <p className="text-error">오류가 발생했습니다: {error}</p>
+        <Link to="/start" className="link-action">홈으로 돌아가기</Link>
       </div>
     );
   }
 
   if (logs.length === 0) {
     return (
-      <div style={{ maxWidth: 700, margin: "80px auto", padding: "0 20px", textAlign: "center" }}>
+      <div className="page-center">
         <h1>학습 히스토리</h1>
-        <p style={{ color: "#8a7468", marginTop: 12 }}>아직 학습 기록이 없습니다.</p>
-        <Link to="/farm" style={{ display: "inline-block", marginTop: 24, color: "#ff8f2b", fontWeight: 700 }}>
-          학습하러 가기
-        </Link>
+        <p className="text-muted">아직 학습 기록이 없습니다.</p>
+        <Link to="/farm" className="link-action">학습하러 가기</Link>
       </div>
     );
   }
@@ -123,22 +118,20 @@ function HarvestLedgerPage() {
             </p>
           )}
         </div>
-        <Link to="/start" style={{ color: "#ff8f2b", fontWeight: 700 }}>
-          홈으로
-        </Link>
+        <Link to="/start" className="link-action" style={{ marginTop: 0 }}>홈으로</Link>
       </div>
       <div style={{ overflowX: "auto" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+        <table className="common-table">
           <thead>
-            <tr style={{ borderBottom: "2px solid #d4c5b9", color: "#6b5b50" }}>
-              <th style={thStyle}>날짜</th>
-              <th style={thStyle}>학습명</th>
-              <th style={thStyle}>레벨</th>
-              <th style={thStyle}>영역</th>
-              <th style={thStyle}>수행 시간</th>
-              <th style={thStyle}>진행률</th>
-              <th style={thStyle}>정답률</th>
-              <th style={thStyle}>획득 씨앗</th>
+            <tr>
+              <th>날짜</th>
+              <th>학습명</th>
+              <th>레벨</th>
+              <th>영역</th>
+              <th>수행 시간</th>
+              <th>진행률</th>
+              <th>정답률</th>
+              <th>획득 씨앗</th>
             </tr>
           </thead>
           <tbody>
@@ -166,19 +159,19 @@ function HarvestLedgerPage() {
               const seed = earnedSeed > 0 ? `${seedTypeLabel ? seedTypeLabel + " " : ""}${earnedSeed}개` : "-";
 
               return (
-                <tr key={id} style={{ borderBottom: "1px solid #e8ddd4" }}>
-                  <td style={tdStyle}>{date}</td>
-                  <td style={{ ...tdStyle, textAlign: "left" }}>{title}</td>
-                  <td style={tdStyle}>{level}</td>
-                  <td style={tdStyle}>{area}</td>
-                  <td style={tdStyle}>{duration}</td>
-                  <td style={tdStyle}>
+                <tr key={id}>
+                  <td>{date}</td>
+                  <td style={{ textAlign: "left" }}>{title}</td>
+                  <td>{level}</td>
+                  <td>{area}</td>
+                  <td>{duration}</td>
+                  <td>
                     <span style={{ color: log.status === "COMPLETED" ? "#27ae60" : "#e67e22" }}>
                       {progress}
                     </span>
                   </td>
-                  <td style={tdStyle}>{accuracy}</td>
-                  <td style={tdStyle}>{seed}</td>
+                  <td>{accuracy}</td>
+                  <td>{seed}</td>
                 </tr>
               );
             })}
@@ -186,15 +179,10 @@ function HarvestLedgerPage() {
         </table>
       </div>
       <div style={{ textAlign: "center", marginTop: 24 }}>
-        <Link to="/start" style={{ color: "#ff8f2b", fontWeight: 700 }}>
-          홈으로 돌아가기
-        </Link>
+        <Link to="/start" className="link-action">홈으로 돌아가기</Link>
       </div>
     </div>
   );
 }
-
-const thStyle = { padding: "10px 8px", textAlign: "center", whiteSpace: "nowrap" };
-const tdStyle = { padding: "10px 8px", textAlign: "center", whiteSpace: "nowrap" };
 
 export default HarvestLedgerPage;

@@ -1211,3 +1211,79 @@
     font-size: 22px;
   }
 }
+
+/* 씨앗 선택 모달 */
+.duel-seed-modal {
+  padding: 24px;
+  background: #fff;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+}
+
+.duel-seed-modal h2 {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.duel-seed-modal .seed-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.duel-seed-btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  min-width: 80px;
+  cursor: pointer;
+}
+
+.duel-seed-btn.selected {
+  border: 2px solid #ff8f2b;
+  background: #fff5eb;
+  font-weight: 700;
+}
+
+.duel-seed-btn.available {
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+}
+
+.duel-seed-btn.unavailable {
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  color: #bbb;
+  cursor: not-allowed;
+}
+
+.duel-confirm-btn {
+  border: none;
+  background: #ff8f2b;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.duel-confirm-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.duel-cancel-btn {
+  border: none;
+  background: #aaa;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+}
