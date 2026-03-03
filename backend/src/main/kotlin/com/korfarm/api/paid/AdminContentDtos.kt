@@ -63,3 +63,32 @@ data class TestGradeResult(
     val correct: Int,
     val gradedAt: LocalDateTime
 )
+
+// 배치 Import DTO
+data class AdminContentBatchImportRequest(
+    val items: List<BatchImportItem>
+)
+
+data class BatchImportItem(
+    val contentType: String,
+    val levelId: String? = null,
+    val area: String? = null,
+    val subArea: String? = null,
+    val dayIndex: Int? = null,
+    val moduleKey: String? = null,
+    val schemaVersion: String = "1.0",
+    val content: Map<String, Any>
+)
+
+data class BatchItemResult(
+    val index: Int,
+    val contentId: String? = null,
+    val success: Boolean,
+    val error: String? = null
+)
+
+data class AdminContentBatchImportResult(
+    val imported: Int,
+    val failed: Int,
+    val results: List<BatchItemResult>
+)

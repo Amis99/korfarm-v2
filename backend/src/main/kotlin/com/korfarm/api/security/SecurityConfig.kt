@@ -35,7 +35,8 @@ class SecurityConfig(
         val config = CorsConfiguration()
         config.allowedOriginPatterns = listOf(
             "http://localhost:*",
-            "http://127.0.0.1:*"
+            "http://127.0.0.1:*",
+            "https://gfv2.hak1ad.kr"
         )
         config.allowedMethods = listOf("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
         config.allowedHeaders = listOf("*")
@@ -53,7 +54,7 @@ class SecurityConfig(
         http.sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         http.authorizeHttpRequests {
             it.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            it.requestMatchers("/v1/health", "/v1/auth/**", "/v1/duel/ws", "/v1/learning/farm/**").permitAll()
+            it.requestMatchers("/v1/health", "/v1/auth/**", "/v1/duel/ws", "/v1/learning/farm/**", "/v1/learning/catalog/**", "/v1/learning/content/**").permitAll()
             it.anyRequest().authenticated()
         }
         http.addFilterBefore(JwtAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter::class.java)

@@ -2,18 +2,26 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import EngineShell from "../engine/core/EngineShell";
 import { getLearningById, FARM_LIST } from "../data/learning/learningCatalog";
-import { apiPost } from "../utils/api";
+import { apiGet, apiPost } from "../utils/api";
 
 function findFarmForContentType(contentType) {
   if (!contentType) return null;
   return FARM_LIST.find((farm) => farm.contentTypes.includes(contentType)) || null;
 }
 
+/* DB 콘텐츠 ID 여부 판단: content_ 접두사 */
+function isDbContentId(id) {
+  return id && id.startsWith("content_");
+}
+
 function LearningRunnerPage() {
   const { learningId } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const learning = getLearningById(learningId);
+  const staticLearning = getLearningById(learningId);
+  // DB 콘텐츠인 경우 API에서 메타 로드
+  const [dbMeta, setDbMeta] = useState(null);
+  const learning = staticLearning || dbMeta;
   const [farmLogId, setFarmLogId] = useState(null);
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,15 +42,41 @@ function LearningRunnerPage() {
     return farm ? `/farm-mode/${farm.id}` : "/farm-mode";
   }, [learning, assignmentId, proChapter]);
 
-  // JSON fetch
+  // DB 콘텐츠일 경우 API에서 콘텐츠 로드
   useEffect(() => {
-    if (!learning?.jsonPath) {
+    if (staticLearning) return; // 정적 카탈로그에 있으면 스킵
+    if (!isDbContentId(learningId)) {
       setLoading(false);
       return;
     }
     setLoading(true);
     setError(null);
-    fetch(import.meta.env.BASE_URL + learning.jsonPath.replace(/^\//, ""))
+    apiGet(`/v1/learning/content/${learningId}`)
+      .then((data) => {
+        // DB 콘텐츠에서 메타 + content 모두 추출
+        setDbMeta({
+          id: learningId,
+          contentId: data.contentId || learningId,
+          contentType: data.contentType || data.content_type,
+          moduleKey: data.content?.moduleKey || data.contentType?.toLowerCase() || "worksheet_quiz",
+          title: data.title,
+          jsonPath: null,
+        });
+        setContent(data.content);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [learningId, staticLearning]);
+
+  // 정적 콘텐츠: JSON fetch
+  useEffect(() => {
+    if (!staticLearning?.jsonPath) return;
+    setLoading(true);
+    setError(null);
+    fetch(import.meta.env.BASE_URL + staticLearning.jsonPath.replace(/^\//, ""))
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -55,18 +89,18 @@ function LearningRunnerPage() {
         setError(err.message);
         setLoading(false);
       });
-  }, [learning]);
+  }, [staticLearning]);
 
   // 학습 시작 로그
   useEffect(() => {
     if (!learning) return;
     apiPost("/v1/learning/farm/start", {
-      content_id: learning.contentId,
+      content_id: learning.contentId || learningId,
       content_type: learning.contentType,
     })
       .then((res) => setFarmLogId(res.log_id ?? res.logId))
       .catch((e) => console.error(e));
-  }, [learningId]);
+  }, [learningId, learning]);
 
   // content_pdf인 경우 page-progress 조회하여 startPage 결정
   useEffect(() => {

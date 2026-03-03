@@ -36,6 +36,16 @@ class AdminContentController(
         return ApiResponse(success = true, data = data)
     }
 
+    @PostMapping("/content/batch-import")
+    fun batchImportContent(@Valid @RequestBody request: AdminContentBatchImportRequest): ApiResponse<AdminContentBatchImportResult> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val data = adminContentService.batchImportContent(request, userId)
+        return ApiResponse(success = true, data = data)
+    }
+
     @GetMapping("/content")
     fun listContent(): ApiResponse<List<AdminContentSummary>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")

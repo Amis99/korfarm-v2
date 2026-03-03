@@ -6,6 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface ContentRepository : JpaRepository<ContentEntity, String> {
     fun findByContentTypeAndStatus(contentType: String, status: String): List<ContentEntity>
     fun findFirstByContentTypeAndChapterId(contentType: String, chapterId: String): ContentEntity?
+    fun findByStatus(status: String): List<ContentEntity>
+    fun findByAreaAndStatus(area: String, status: String): List<ContentEntity>
+    fun findByAreaAndLevelIdAndStatus(area: String, levelId: String, status: String): List<ContentEntity>
+    fun findByContentTypeAndLevelIdAndStatus(contentType: String, levelId: String, status: String): List<ContentEntity>
 }
 
 interface ContentVersionRepository : JpaRepository<ContentVersionEntity, String> {

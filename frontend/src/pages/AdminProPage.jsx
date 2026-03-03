@@ -50,6 +50,9 @@ function AdminProPage() {
   // 아이템 설정
   const [items, setItems] = useState([]);
 
+  // DB 콘텐츠 목록 (contentId 선택용)
+  const [dbContents, setDbContents] = useState([]);
+
   // 테스트 등록
   const [testVersion, setTestVersion] = useState(1);
   const [testPaperId, setTestPaperId] = useState("");
@@ -101,6 +104,10 @@ function AdminProPage() {
     apiGet("/v1/admin/test-papers")
       .then(setTestPapers)
       .catch(() => setTestPapers([]));
+    // DB 콘텐츠 목록 불러오기 (프로 모드 전용 포함)
+    apiGet("/v1/admin/content")
+      .then(setDbContents)
+      .catch(() => setDbContents([]));
   };
 
   const handleUpdateChapter = async () => {
@@ -189,14 +196,14 @@ function AdminProPage() {
           <section style={{ background: "#fff", borderRadius: 12, padding: 24, marginBottom: 20, boxShadow: "0 1px 3px rgba(0,0,0,0.08)" }}>
             <h3 style={{ margin: "0 0 16px", fontSize: 16 }}>학습 아이템 설정</h3>
             <p style={{ fontSize: 13, color: "#64748b", marginBottom: 12 }}>
-              각 유형의 contentId(learningCatalog ID)를 입력하세요. 저장 시 기존 아이템을 덮어씁니다.
+              각 유형에 맞는 DB 콘텐츠를 선택하세요. 저장 시 기존 아이템을 덮어씁니다.
             </p>
             <table className="ts-table" style={{ marginBottom: 12 }}>
               <thead>
                 <tr>
                   <th>순서</th>
                   <th>유형</th>
-                  <th>콘텐츠 ID</th>
+                  <th>콘텐츠 선택</th>
                 </tr>
               </thead>
               <tbody>
@@ -205,17 +212,26 @@ function AdminProPage() {
                     <td>{item.order}</td>
                     <td>{ITEM_TYPES.find(t => t.value === item.type)?.label || item.type}</td>
                     <td>
-                      <input
-                        style={{ width: "100%", padding: "6px 8px", border: "1px solid #e2e8f0", borderRadius: 6 }}
-                        placeholder={item.type === "test" ? "(테스트 — 별도 등록)" : "콘텐츠 ID"}
-                        value={item.contentId}
-                        disabled={item.type === "test"}
-                        onChange={e => {
-                          const next = [...items];
-                          next[idx] = { ...next[idx], contentId: e.target.value };
-                          setItems(next);
-                        }}
-                      />
+                      {item.type === "test" ? (
+                        <span style={{ color: "#94a3b8", fontSize: 13 }}>(테스트 — 별도 등록)</span>
+                      ) : (
+                        <select
+                          style={{ width: "100%", padding: "6px 8px", border: "1px solid #e2e8f0", borderRadius: 6 }}
+                          value={item.contentId}
+                          onChange={e => {
+                            const next = [...items];
+                            next[idx] = { ...next[idx], contentId: e.target.value };
+                            setItems(next);
+                          }}
+                        >
+                          <option value="">-- DB 콘텐츠 선택 --</option>
+                          {dbContents.map(c => (
+                            <option key={c.contentId} value={c.contentId}>
+                              {c.title} ({c.contentType}) [{c.contentId}]
+                            </option>
+                          ))}
+                        </select>
+                      )}
                     </td>
                   </tr>
                 ))}

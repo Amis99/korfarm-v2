@@ -44,13 +44,8 @@ function ProChapterPage() {
       navigate(`/pro-mode/chapter/${chapterId}/test`);
       return;
     }
-    if (item.type === "answer") {
-      if (item.contentId) {
-        navigate(`/learning/${item.contentId}?proChapter=${chapterId}&proItemId=${item.itemId}`);
-      }
-      return;
-    }
-    // 기본 학습: reading, vocab, background, logic
+    // contentId가 DB contents.id를 직접 참조 (content_ 접두사)
+    // LearningRunnerPage가 content_ 접두사를 감지하여 API에서 로드
     if (item.contentId) {
       navigate(`/learning/${item.contentId}?proChapter=${chapterId}&proItemId=${item.itemId}`);
     }

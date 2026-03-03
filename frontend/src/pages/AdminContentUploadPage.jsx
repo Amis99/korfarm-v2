@@ -145,6 +145,16 @@ function AdminContentUploadPage() {
   const editSource = searchParams.get("source");
   const isEditMode = !!editId;
 
+  /* 단건 / 배치 모드 토글 */
+  const [uploadMode, setUploadMode] = useState("single"); // "single" | "batch"
+
+  /* 배치 모드 상태 */
+  const batchInputRef = useRef(null);
+  const [batchFiles, setBatchFiles] = useState([]); // { file, name, size }
+  const [batchLoading, setBatchLoading] = useState(false);
+  const [batchResults, setBatchResults] = useState(null); // { imported, failed, results }
+  const [batchError, setBatchError] = useState("");
+
   /* 편집 모드에서 로드된 콘텐츠 메타 */
   const [editMeta, setEditMeta] = useState(null);
 
@@ -343,6 +353,77 @@ function AdminContentUploadPage() {
     }
   };
 
+  /* 배치: 파일 선택 */
+  const handleBatchFileSelect = (e) => {
+    const files = Array.from(e.target.files || []);
+    setBatchFiles(files.map((f) => ({ file: f, name: f.name, size: f.size })));
+    setBatchResults(null);
+    setBatchError("");
+  };
+
+  /* 배치: 업로드 실행 */
+  const handleBatchUpload = async () => {
+    if (!batchFiles.length) {
+      setBatchError("JSON 파일을 선택해주세요.");
+      return;
+    }
+    setBatchLoading(true);
+    setBatchError("");
+    setBatchResults(null);
+    try {
+      const items = [];
+      for (let i = 0; i < batchFiles.length; i++) {
+        const text = await batchFiles[i].file.text();
+        const parsed = JSON.parse(text);
+        items.push({
+          contentType: parsed.contentType,
+          levelId: parsed.levelId || undefined,
+          area: parsed.area || undefined,
+          subArea: parsed.subArea || undefined,
+          dayIndex: parsed.dayIndex ?? undefined,
+          moduleKey: parsed.moduleKey || extractModuleKey(selectedModule),
+          schemaVersion: parsed.schemaVersion || "1.0",
+          content: parsed.payload || parsed,
+        });
+      }
+      const result = await apiPost("/v1/admin/content/batch-import", { items });
+      // 파일명을 결과에 매핑
+      const enriched = {
+        ...result,
+        results: (result.results || []).map((r, idx) => ({
+          ...r,
+          fileName: batchFiles[idx]?.name || `파일 ${idx + 1}`,
+        })),
+      };
+      setBatchResults(enriched);
+    } catch (err) {
+      setBatchError(err.message || "배치 업로드에 실패했습니다.");
+    } finally {
+      setBatchLoading(false);
+    }
+  };
+
+  /* 배치 결과에서 미리보기 (기존 handleServerPreview 패턴) */
+  const [batchPreviewLoadingId, setBatchPreviewLoadingId] = useState(null);
+  const handleBatchPreview = async (contentId) => {
+    setBatchPreviewLoadingId(contentId);
+    try {
+      const preview = await apiGet(`/v1/admin/content/${contentId}/preview`);
+      const previewData = {
+        contentType: preview.contentType || preview.content_type,
+        payload: preview.content,
+      };
+      localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
+      const mk = preview.contentType || preview.content_type || "worksheet_quiz";
+      localStorage.setItem("korfarm_preview_module", mk);
+      navigate("/admin/content/preview");
+    } catch (err) {
+      setBatchError(err.message || "미리보기 데이터를 불러오지 못했습니다.");
+    } finally {
+      setBatchPreviewLoadingId(null);
+    }
+  };
+
   /* 기존 콘텐츠 수정 (PUT) */
   const [updateLoading, setUpdateLoading] = useState(false);
   const handleUpdate = async () => {
@@ -392,7 +473,163 @@ function AdminContentUploadPage() {
           </h1>
         </div>
 
-        <div className="admin-detail-card" style={{ marginTop: 24 }}>
+        {/* 모드 토글 (편집 모드가 아닐 때만) */}
+        {!isEditMode && (
+          <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
+            <button
+              className={`admin-detail-btn ${uploadMode === "single" ? "" : "secondary"}`}
+              type="button"
+              onClick={() => setUploadMode("single")}
+            >
+              단건 업로드
+            </button>
+            <button
+              className={`admin-detail-btn ${uploadMode === "batch" ? "" : "secondary"}`}
+              type="button"
+              onClick={() => setUploadMode("batch")}
+            >
+              배치 업로드
+            </button>
+          </div>
+        )}
+
+        {/* 배치 모드 UI */}
+        {!isEditMode && uploadMode === "batch" ? (
+          <div className="admin-detail-card" style={{ marginTop: 16 }}>
+            <h3 style={{ margin: "0 0 12px", fontSize: 15 }}>배치 업로드 (JSON 파일 복수 선택)</h3>
+            <p style={{ fontSize: 12, color: "var(--admin-muted)", marginBottom: 12 }}>
+              학습 1개 = JSON 파일 1개. 각 파일은 contentType, payload 등의 필드를 포함해야 합니다.
+            </p>
+
+            {/* 모듈 선택 */}
+            <div className="admin-detail-toolbar" style={{ marginBottom: 12 }}>
+              <select value={selectedModule} onChange={(e) => setSelectedModule(e.target.value)}>
+                {MODULE_GROUPS.map((group) => (
+                  <optgroup key={group.label} label={group.label}>
+                    {group.items.map((item) => (
+                      <option key={item.value} value={item.value}>{item.label}</option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+
+            {/* 파일 선택 */}
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+              <button
+                className="admin-detail-btn secondary"
+                type="button"
+                onClick={() => batchInputRef.current?.click()}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: 16, verticalAlign: "middle" }}>upload_file</span>
+                {" "}JSON 파일 선택
+              </button>
+              <input
+                ref={batchInputRef}
+                type="file"
+                accept=".json"
+                multiple
+                onChange={handleBatchFileSelect}
+                hidden
+              />
+              <span style={{ fontSize: 13, color: "var(--admin-muted)" }}>
+                {batchFiles.length > 0 ? `${batchFiles.length}개 파일 선택됨` : "파일을 선택하세요"}
+              </span>
+            </div>
+
+            {/* 선택된 파일 목록 */}
+            {batchFiles.length > 0 && (
+              <table style={{ width: "100%", fontSize: 13, marginBottom: 12, borderCollapse: "collapse" }}>
+                <thead>
+                  <tr style={{ borderBottom: "1px solid var(--admin-border, #e2e8f0)" }}>
+                    <th style={{ textAlign: "left", padding: "6px 8px" }}>#</th>
+                    <th style={{ textAlign: "left", padding: "6px 8px" }}>파일명</th>
+                    <th style={{ textAlign: "right", padding: "6px 8px" }}>크기</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {batchFiles.map((f, idx) => (
+                    <tr key={idx} style={{ borderBottom: "1px solid var(--admin-border, #f1f5f9)" }}>
+                      <td style={{ padding: "4px 8px" }}>{idx + 1}</td>
+                      <td style={{ padding: "4px 8px" }}>{f.name}</td>
+                      <td style={{ padding: "4px 8px", textAlign: "right" }}>
+                        {(f.size / 1024).toFixed(1)} KB
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+
+            {/* 업로드 버튼 */}
+            <button
+              className="admin-detail-btn"
+              type="button"
+              onClick={handleBatchUpload}
+              disabled={batchLoading || !batchFiles.length}
+            >
+              {batchLoading ? "업로드 중..." : `${batchFiles.length}개 배치 업로드`}
+            </button>
+
+            {batchError && <p className="admin-detail-note error" style={{ marginTop: 8 }}>{batchError}</p>}
+
+            {/* 결과 테이블 */}
+            {batchResults && (
+              <div style={{ marginTop: 16 }}>
+                <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>
+                  결과: 성공 {batchResults.imported}개 / 실패 {batchResults.failed}개
+                </p>
+                <table style={{ width: "100%", fontSize: 13, borderCollapse: "collapse" }}>
+                  <thead>
+                    <tr style={{ borderBottom: "2px solid var(--admin-border, #e2e8f0)" }}>
+                      <th style={{ textAlign: "left", padding: "6px 8px" }}>#</th>
+                      <th style={{ textAlign: "left", padding: "6px 8px" }}>파일명</th>
+                      <th style={{ textAlign: "left", padding: "6px 8px" }}>Content ID</th>
+                      <th style={{ textAlign: "center", padding: "6px 8px" }}>상태</th>
+                      <th style={{ textAlign: "left", padding: "6px 8px" }}>에러</th>
+                      <th style={{ textAlign: "center", padding: "6px 8px" }}>미리보기</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {batchResults.results.map((r) => (
+                      <tr key={r.index} style={{ borderBottom: "1px solid var(--admin-border, #f1f5f9)" }}>
+                        <td style={{ padding: "4px 8px" }}>{r.index + 1}</td>
+                        <td style={{ padding: "4px 8px" }}>{r.fileName}</td>
+                        <td style={{ padding: "4px 8px", fontSize: 11, fontFamily: "monospace" }}>
+                          {r.contentId || "-"}
+                        </td>
+                        <td style={{ padding: "4px 8px", textAlign: "center" }}>
+                          <span style={{
+                            padding: "2px 8px", borderRadius: 999, fontSize: 11, fontWeight: 600,
+                            background: r.success ? "#dcfce7" : "#fde2e2",
+                            color: r.success ? "#166534" : "#b91c1c",
+                          }}>
+                            {r.success ? "성공" : "실패"}
+                          </span>
+                        </td>
+                        <td style={{ padding: "4px 8px", fontSize: 11, color: "#b91c1c" }}>{r.error || ""}</td>
+                        <td style={{ padding: "4px 8px", textAlign: "center" }}>
+                          {r.success && r.contentId ? (
+                            <button
+                              className="admin-detail-btn secondary"
+                              type="button"
+                              style={{ fontSize: 11, padding: "2px 8px" }}
+                              disabled={batchPreviewLoadingId === r.contentId}
+                              onClick={() => handleBatchPreview(r.contentId)}
+                            >
+                              {batchPreviewLoadingId === r.contentId ? "..." : "미리보기"}
+                            </button>
+                          ) : "-"}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        ) : (
+        <div className="admin-detail-card" style={{ marginTop: isEditMode ? 24 : 16 }}>
           {/* 편집 모드: 콘텐츠 정보 표시 */}
           {isEditMode && editMeta ? (
             <>
@@ -540,6 +777,7 @@ function AdminContentUploadPage() {
             )}
           </div>
         </div>
+        )}
       </div>
     </AdminLayout>
   );

@@ -23,6 +23,18 @@ class ContentEntity(
     @Column(name = "chapter_id")
     var chapterId: String? = null,
 
+    @Column
+    var area: String? = null,
+
+    @Column(name = "sub_area")
+    var subArea: String? = null,
+
+    @Column(name = "day_index")
+    var dayIndex: Int? = null,
+
+    @Column(name = "module_key")
+    var moduleKey: String? = null,
+
     @Column(nullable = false)
     var title: String,
 

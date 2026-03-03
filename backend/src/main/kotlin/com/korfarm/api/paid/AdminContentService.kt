@@ -67,6 +67,48 @@ class AdminContentService(
     }
 
     @Transactional
+    fun batchImportContent(request: AdminContentBatchImportRequest, userId: String): AdminContentBatchImportResult {
+        val results = mutableListOf<BatchItemResult>()
+        var imported = 0
+        var failed = 0
+
+        request.items.forEachIndexed { index, item ->
+            try {
+                val title = item.content["title"]?.toString() ?: "Imported ${item.contentType}"
+                val content = ContentEntity(
+                    id = IdGenerator.newId("content"),
+                    contentType = item.contentType,
+                    levelId = item.levelId,
+                    area = item.area,
+                    subArea = item.subArea,
+                    dayIndex = item.dayIndex,
+                    moduleKey = item.moduleKey,
+                    title = title,
+                    status = "active"
+                )
+                val saved = contentRepository.save(content)
+                val version = ContentVersionEntity(
+                    id = IdGenerator.newId("cv"),
+                    contentId = saved.id,
+                    schemaVersion = item.schemaVersion,
+                    contentJson = objectMapper.writeValueAsString(item.content),
+                    uploadedBy = userId,
+                    approvedBy = userId,
+                    approvedAt = LocalDateTime.now()
+                )
+                contentVersionRepository.save(version)
+                results.add(BatchItemResult(index = index, contentId = saved.id, success = true))
+                imported++
+            } catch (e: Exception) {
+                results.add(BatchItemResult(index = index, success = false, error = e.message ?: "알 수 없는 오류"))
+                failed++
+            }
+        }
+
+        return AdminContentBatchImportResult(imported = imported, failed = failed, results = results)
+    }
+
+    @Transactional
     fun updateContent(contentId: String, request: AdminContentImportRequest, userId: String): AdminContentImportResult {
         val content = contentRepository.findById(contentId).orElseThrow {
             ApiException("NOT_FOUND", "content not found", HttpStatus.NOT_FOUND)

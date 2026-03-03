@@ -1789,7 +1789,8 @@ function OpsStation() {
   const wsBase = useMemo(() => {
     const base = apiBase.trim().replace(/\/$/, "");
     if (!base) {
-      return "";
+      const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
+      return `${proto}//${window.location.host}`;
     }
     if (base.startsWith("https")) {
       return base.replace(/^https/, "wss");

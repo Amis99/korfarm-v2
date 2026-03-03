@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { API_BASE } from "../utils/api";
+import { WS_BASE } from "../utils/api";
 import "../styles/duel.css";
 
 function DuelMatchPage() {
@@ -66,8 +66,7 @@ function DuelMatchPage() {
     if (!token) { navigate("/login"); return; }
     let cancelled = false;
 
-    const wsBase = API_BASE.replace(/^http/, "ws");
-    const ws = new WebSocket(`${wsBase}/v1/duel/ws?token=${token}`);
+    const ws = new WebSocket(`${WS_BASE}/v1/duel/ws?token=${token}`);
     wsRef.current = ws;
 
     ws.onopen = () => {

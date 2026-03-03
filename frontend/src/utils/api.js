@@ -65,3 +65,11 @@ export const apiPut = async (path, body) => {
   const payload = await response.json();
   return payload?.data ?? payload;
 };
+
+export const WS_BASE = (() => {
+  if (API_BASE && API_BASE.startsWith("http")) {
+    return API_BASE.replace(/^http/, "ws");
+  }
+  const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
+  return `${proto}//${window.location.host}`;
+})();

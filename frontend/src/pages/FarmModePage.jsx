@@ -1,8 +1,25 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FARM_LIST, getLearningItemsByFarm } from "../data/learning/learningCatalog";
+import { apiGet } from "../utils/api";
 import "../styles/farm-mode.css";
 
 function FarmModePage() {
+  // DB 카탈로그에서 농장별 추가 콘텐츠 수 조회
+  const [dbCounts, setDbCounts] = useState({});
+
+  useEffect(() => {
+    apiGet("/v1/learning/catalog")
+      .then((data) => {
+        if (data?.farms) {
+          const counts = {};
+          data.farms.forEach((f) => { counts[f.area] = f.totalCount || 0; });
+          setDbCounts(counts);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="farm">
       {/* 상단바 */}
@@ -25,7 +42,9 @@ function FarmModePage() {
       {/* 3×3 그리드 */}
       <div className="farm-grid">
         {FARM_LIST.map((farm) => {
-          const count = getLearningItemsByFarm(farm.id).length;
+          const staticCount = getLearningItemsByFarm(farm.id).length;
+          const dbCount = dbCounts[farm.id] || 0;
+          const count = staticCount + dbCount;
           return (
             <Link
               key={farm.id}
