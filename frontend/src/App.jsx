@@ -49,7 +49,6 @@ const TestOmrPage = lazy(() => import("./pages/TestOmrPage"));
 const TestReportPage = lazy(() => import("./pages/TestReportPage"));
 const TestWrongNotePage = lazy(() => import("./pages/TestWrongNotePage"));
 
-
 const HarvestLedgerPage = lazy(() => import("./pages/HarvestLedgerPage"));
 const DuelMainPage = lazy(() => import("./pages/DuelMainPage"));
 const DuelLobbyPage = lazy(() => import("./pages/DuelLobbyPage"));
@@ -82,6 +81,14 @@ const AdminTestDetailPage = lazy(() => import("./pages/AdminTestDetailPage"));
 const AdminProPage = lazy(() => import("./pages/AdminProPage"));
 // AdminDuelQuestionsPage는 AdminDuelPage 내부에서 직접 import됨
 const AdminMembershipApprovalPage = lazy(() => import("./pages/AdminMembershipApprovalPage"));
+
+/* /tests/history → /tests?tab=history 리다이렉트 (기존 쿼리 파라미터 보존) */
+function TestsHistoryRedirect() {
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  params.set("tab", "history");
+  return <Navigate to={`/tests?${params.toString()}`} replace />;
+}
 
 function GlobalLogo() {
   const { pathname } = useLocation();
@@ -169,7 +176,7 @@ function App() {
           <Route path="/admin/wisdom" element={<AdminWisdomPage />} />
           <Route path="/admin/wisdom/:postId" element={<AdminWisdomDetailPage />} />
           <Route path="/tests" element={<TestStoragePage />} />
-          <Route path="/tests/history" element={<Navigate to="/tests?tab=history" replace />} />
+          <Route path="/tests/history" element={<TestsHistoryRedirect />} />
           <Route path="/tests/:testId" element={<TestDetailPage />} />
           <Route path="/tests/:testId/omr" element={<TestOmrPage />} />
           <Route path="/tests/:testId/report" element={<TestReportPage />} />

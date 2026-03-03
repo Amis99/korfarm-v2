@@ -5,14 +5,12 @@ function DailyLearningPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="start-page" style={{ minHeight: "100vh" }}>
-      <div style={{ maxWidth: 500, margin: "0 auto", padding: "60px 16px" }}>
-        <h1 style={{ textAlign: "center", marginBottom: 8 }}>일일 학습</h1>
-        <p style={{ textAlign: "center", color: "#8a7468", marginBottom: 32 }}>
-          오늘의 학습을 선택하세요.
-        </p>
+    <div className="start-page">
+      <div className="start-daily-shell">
+        <h1>일일 학습</h1>
+        <p>오늘의 학습을 선택하세요.</p>
 
-        <div style={{ display: "grid", gap: 16 }}>
+        <div className="start-daily-grid">
           <div
             className="start-card"
             style={{ cursor: "pointer" }}

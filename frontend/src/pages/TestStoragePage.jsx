@@ -69,7 +69,7 @@ function TestStoragePage() {
   }, [isLoggedIn, isViewingChild, studentId]);
 
   useEffect(() => {
-    if (!isLoggedIn) return;
+    if (!isLoggedIn || activeTab === "history") return;
     setLoading(true);
     const params = new URLSearchParams();
     if (sourceFilter) params.set("source", sourceFilter);
@@ -84,10 +84,8 @@ function TestStoragePage() {
       .then(data => setTests((data || []).filter(t => t.series !== "chapter" && t.series !== "diagnostic")))
       .catch(() => setTests([]))
       .finally(() => setLoading(false));
-  }, [isLoggedIn, isViewingChild, studentId, sourceFilter, levelFilter]);
+  }, [isLoggedIn, isViewingChild, studentId, sourceFilter, levelFilter, activeTab]);
 
-  // 소속 기관이 있는지 판단 (tests에 orgName이 있으면)
-  const hasOrgTests = useMemo(() => tests.some(t => t.orgId), [tests]);
   const orgLabel = useMemo(() => {
     if (userOrgName) return userOrgName;
     const first = tests.find(t => t.orgName);
