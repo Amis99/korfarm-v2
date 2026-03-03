@@ -114,18 +114,17 @@ function AdminPage() {
             <Link className="admin-action" to="/admin/students">학생 관리</Link>
             <Link className="admin-action" to="/admin/content">콘텐츠 관리</Link>
             <Link className="admin-action" to="/admin/flags">운영 플래그</Link>
-            <Link className="admin-action" to="/admin/payments">결제 관리</Link>
+            <Link className="admin-action" to="/admin/orgs?tab=payments">결제 관리</Link>
           </div>
         </div>
         <div className="admin-card">
           <h2>관리 메뉴</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <Link className="admin-action" to="/admin/assignments">과제/피드백</Link>
-            <Link className="admin-action" to="/admin/seasons">시즌 관리</Link>
-            <Link className="admin-action" to="/admin/shop/products">상품 관리</Link>
-            <Link className="admin-action" to="/admin/shop/orders">주문 관리</Link>
+            <Link className="admin-action" to="/admin/duel?tab=seasons">시즌 관리</Link>
+            <Link className="admin-action" to="/admin/shop">상점 관리</Link>
             <Link className="admin-action" to="/admin/reports">보고 관리</Link>
-            <Link className="admin-action" to="/admin/duel/questions">대결 문제 관리</Link>
+            <Link className="admin-action" to="/admin/duel">대결 관리</Link>
           </div>
         </div>
       </section>

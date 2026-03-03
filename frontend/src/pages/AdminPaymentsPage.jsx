@@ -19,7 +19,7 @@ const mapPayments = (items) =>
 
 const formatAmount = (value) => `₩${value.toLocaleString("ko-KR")}`;
 
-function AdminPaymentsPage() {
+function AdminPaymentsPage({ wrap = true }) {
   const { data: payments, loading, error } = useAdminList(
     "/v1/admin/payments",
     PAYMENTS,
@@ -40,12 +40,13 @@ function AdminPaymentsPage() {
     });
   }, [payments, search, statusFilter]);
 
-  return (
-    <AdminLayout>
-      <div className="admin-detail-wrap">
-        <div className="admin-detail-header">
-          <h1>결제 관리</h1>
-        </div>
+  const content = (
+    <>
+        {wrap && (
+          <div className="admin-detail-header">
+            <h1>결제 관리</h1>
+          </div>
+        )}
         <div className="admin-detail-grid">
           <div className="admin-detail-card">
             <h2>결제 목록</h2>
@@ -96,10 +97,9 @@ function AdminPaymentsPage() {
                     </td>
                     <td>
                       <button
-                        className="admin-detail-btn secondary"
+                        className="admin-detail-btn secondary sm"
                         type="button"
                         onClick={() => setSelectedPayment(payment)}
-                        style={{ fontSize: "12px", padding: "4px 8px" }}
                       >
                         상세
                       </button>
@@ -115,7 +115,6 @@ function AdminPaymentsPage() {
             <p>완료 {payments.filter((p) => p.status === "paid").length}건</p>
           </div>
         </div>
-      </div>
 
       {selectedPayment ? (
         <div className="admin-modal-overlay" onClick={() => setSelectedPayment(null)}>
@@ -149,8 +148,17 @@ function AdminPaymentsPage() {
           </div>
         </div>
       ) : null}
-    </AdminLayout>
+    </>
   );
+
+  if (wrap) {
+    return (
+      <AdminLayout>
+        <div className="admin-detail-wrap">{content}</div>
+      </AdminLayout>
+    );
+  }
+  return content;
 }
 
 export default AdminPaymentsPage;

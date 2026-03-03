@@ -15,11 +15,8 @@ const NAV_ITEMS = [
   { to: "/admin/wisdom", icon: "auto_stories", label: "지식과 지혜", roles: ["HQ_ADMIN"] },
   { to: "/admin/tests", icon: "assignment", label: "테스트 관리" },
   { to: "/admin/pro", icon: "workspace_premium", label: "프로 모드", roles: ["HQ_ADMIN"] },
-  { to: "/admin/duel/questions", icon: "swords", label: "대결 문제" },
-  { to: "/admin/seasons", icon: "event", label: "시즌" },
-  { to: "/admin/shop/products", icon: "storefront", label: "상품" },
-  { to: "/admin/shop/orders", icon: "local_shipping", label: "주문" },
-  { to: "/admin/payments", icon: "receipt_long", label: "결제" },
+  { to: "/admin/duel", icon: "swords", label: "대결 관리" },
+  { to: "/admin/shop", icon: "storefront", label: "상점 관리" },
   { to: "/admin/reports", icon: "flag", label: "보고" },
   { to: "/admin/flags", icon: "tune", label: "운영 플래그", roles: ["HQ_ADMIN"] },
   { to: "/", icon: "home", label: "랜딩" },
@@ -68,17 +65,24 @@ function AdminLayout({ children }) {
             </button>
           </div>
           <nav className="admin-nav">
-            {visibleNavItems.map((item) => (
+            {visibleNavItems.map((item) => {
+              const isActive =
+                item.to === "/admin"
+                  ? location.pathname === "/admin"
+                  : location.pathname === item.to ||
+                    location.pathname.startsWith(item.to + "/");
+              return (
               <Link
                 key={item.to}
-                className={location.pathname === item.to ? "active" : ""}
+                className={isActive ? "active" : ""}
                 to={item.to}
                 onClick={() => setOpen(false)}
               >
                 <span className="material-symbols-outlined">{item.icon}</span>
                 {item.label}
               </Link>
-            ))}
+              );
+            })}
           </nav>
         </aside>
 

@@ -110,7 +110,7 @@ function InventoryModal({ student, onClose }) {
 
   return (
     <div className="admin-modal-overlay" onClick={onClose}>
-      <div className="admin-modal" style={{ maxWidth: 720, maxHeight: "85vh" }} onClick={(e) => e.stopPropagation()}>
+      <div className="admin-modal admin-modal-xl" onClick={(e) => e.stopPropagation()}>
         <h2 style={{ marginBottom: 4 }}>인벤토리 관리</h2>
         <p style={{ margin: "0 0 16px", fontSize: 14, color: "#a6b6a9" }}>{student.name} ({student.email || student.id})</p>
         {invLoading && <p className="admin-detail-note">불러오는 중...</p>}
@@ -515,18 +515,16 @@ function AdminStudentsPage() {
                     <td>
                       <div style={{ display: "flex", gap: 4 }}>
                         <button
-                          className="admin-detail-btn secondary"
+                          className="admin-detail-btn secondary sm"
                           type="button"
                           onClick={() => openEdit(s)}
-                          style={{ fontSize: "12px", padding: "4px 8px" }}
                         >
                           수정
                         </button>
                         <button
-                          className="admin-detail-btn secondary"
+                          className="admin-detail-btn secondary sm"
                           type="button"
                           onClick={() => openInventory(s)}
-                          style={{ fontSize: "12px", padding: "4px 8px" }}
                         >
                           인벤토리
                         </button>

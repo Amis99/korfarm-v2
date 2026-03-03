@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { apiGet, apiPost, apiPatch } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import AdminLayout from "../components/AdminLayout";
+import AdminPaymentsPage from "./AdminPaymentsPage";
 import "../styles/admin-detail.css";
 
 const REGIONS = [
@@ -40,7 +42,7 @@ const mapOrgList = (items) =>
     status: org.status || "active",
   }));
 
-function AdminOrgsPage() {
+function OrgsListContent() {
   const { data: orgs, loading, error } = useAdminList("/v1/admin/orgs", ORGS, mapOrgList);
   const [rows, setRows] = useState(ORGS);
   const [search, setSearch] = useState("");
@@ -199,25 +201,21 @@ function AdminOrgsPage() {
   };
 
   return (
-    <AdminLayout>
-      <div className="admin-detail-wrap">
-        <div className="admin-detail-header">
-          <h1>기관 관리</h1>
-          <div className="admin-detail-actions">
-            <button
-              className="admin-detail-btn"
-              type="button"
-              onClick={() => {
-                setFormData({ name: "", plan: "Basic", seatLimit: 50, orgType: "", addressRegion: "", addressDetail: "" });
-                setActionError("");
-                setShowCreateModal(true);
-              }}
-            >
-              신규 기관 등록
-            </button>
-          </div>
-        </div>
-        <div className="admin-detail-grid">
+    <>
+      <div className="admin-detail-actions" style={{ marginBottom: 12, display: "flex", justifyContent: "flex-end" }}>
+        <button
+          className="admin-detail-btn"
+          type="button"
+          onClick={() => {
+            setFormData({ name: "", plan: "Basic", seatLimit: 50, orgType: "", addressRegion: "", addressDetail: "" });
+            setActionError("");
+            setShowCreateModal(true);
+          }}
+        >
+          신규 기관 등록
+        </button>
+      </div>
+      <div className="admin-detail-grid">
           <div className="admin-detail-card">
             <h2>기관 목록</h2>
             <div className="admin-detail-toolbar">
@@ -273,10 +271,9 @@ function AdminOrgsPage() {
                     </td>
                     <td>
                       <button
-                        className="admin-detail-btn secondary"
+                        className="admin-detail-btn secondary sm"
                         type="button"
                         onClick={() => openEdit(org)}
-                        style={{ fontSize: "12px", padding: "4px 8px" }}
                       >
                         수정
                       </button>
@@ -292,7 +289,6 @@ function AdminOrgsPage() {
             <p>활성 {rows.filter((r) => r.status === "active").length}개</p>
           </div>
         </div>
-      </div>
 
       {showCreateModal ? (
         <div className="admin-modal-overlay" onClick={() => setShowCreateModal(false)}>
@@ -473,11 +469,10 @@ function AdminOrgsPage() {
                         </td>
                         <td>
                           <button
-                            className="admin-detail-btn secondary"
+                            className="admin-detail-btn secondary sm"
                             type="button"
                             onClick={() => handleRemoveAdmin(a.userId)}
                             disabled={actionLoading}
-                            style={{ fontSize: "11px", padding: "3px 8px" }}
                           >
                             해제
                           </button>
@@ -531,6 +526,30 @@ function AdminOrgsPage() {
           </div>
         </div>
       ) : null}
+    </>
+  );
+}
+
+function AdminOrgsPage() {
+  const [params, setParams] = useSearchParams();
+  const tab = params.get("tab") || "orgs";
+
+  return (
+    <AdminLayout>
+      <div className="admin-detail-wrap">
+        <div className="admin-detail-header">
+          <h1>기관 관리</h1>
+        </div>
+        <div className="admin-tabs">
+          <button className={`admin-tab ${tab === "orgs" ? "active" : ""}`} onClick={() => setParams({ tab: "orgs" })}>
+            기관 목록
+          </button>
+          <button className={`admin-tab ${tab === "payments" ? "active" : ""}`} onClick={() => setParams({ tab: "payments" })}>
+            결제 내역
+          </button>
+        </div>
+        {tab === "payments" ? <AdminPaymentsPage wrap={false} /> : <OrgsListContent />}
+      </div>
     </AdminLayout>
   );
 }

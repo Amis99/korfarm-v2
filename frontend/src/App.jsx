@@ -69,10 +69,8 @@ const AdminContentPage = lazy(() => import("./pages/AdminContentPage"));
 const AdminContentUploadPage = lazy(() => import("./pages/AdminContentUploadPage"));
 const AdminContentPreviewPage = lazy(() => import("./pages/AdminContentPreviewPage"));
 const AdminAssignmentsPage = lazy(() => import("./pages/AdminAssignmentsPage"));
-const AdminSeasonsPage = lazy(() => import("./pages/AdminSeasonsPage"));
-const AdminShopProductsPage = lazy(() => import("./pages/AdminShopProductsPage"));
-const AdminShopOrdersPage = lazy(() => import("./pages/AdminShopOrdersPage"));
-const AdminPaymentsPage = lazy(() => import("./pages/AdminPaymentsPage"));
+const AdminShopPage = lazy(() => import("./pages/AdminShopPage"));
+const AdminDuelPage = lazy(() => import("./pages/AdminDuelPage"));
 const AdminParentLinksPage = lazy(() => import("./pages/AdminParentLinksPage"));
 const AdminReportsPage = lazy(() => import("./pages/AdminReportsPage"));
 const AdminFlagsPage = lazy(() => import("./pages/AdminFlagsPage"));
@@ -81,7 +79,7 @@ const AdminWisdomDetailPage = lazy(() => import("./pages/AdminWisdomDetailPage")
 const AdminTestPage = lazy(() => import("./pages/AdminTestPage"));
 const AdminTestDetailPage = lazy(() => import("./pages/AdminTestDetailPage"));
 const AdminProPage = lazy(() => import("./pages/AdminProPage"));
-const AdminDuelQuestionsPage = lazy(() => import("./pages/AdminDuelQuestionsPage"));
+// AdminDuelQuestionsPage는 AdminDuelPage 내부에서 직접 import됨
 const AdminMembershipApprovalPage = lazy(() => import("./pages/AdminMembershipApprovalPage"));
 
 function GlobalLogo() {
@@ -139,10 +137,12 @@ function App() {
           <Route path="/admin/content/upload" element={<AdminContentUploadPage />} />
           <Route path="/admin/content/preview" element={<AdminContentPreviewPage />} />
           <Route path="/admin/assignments" element={<AdminAssignmentsPage />} />
-          <Route path="/admin/seasons" element={<AdminSeasonsPage />} />
-          <Route path="/admin/shop/products" element={<AdminShopProductsPage />} />
-          <Route path="/admin/shop/orders" element={<AdminShopOrdersPage />} />
-          <Route path="/admin/payments" element={<AdminPaymentsPage />} />
+          <Route path="/admin/shop" element={<AdminShopPage />} />
+          <Route path="/admin/shop/products" element={<Navigate to="/admin/shop?tab=products" replace />} />
+          <Route path="/admin/shop/orders" element={<Navigate to="/admin/shop?tab=orders" replace />} />
+          <Route path="/admin/duel" element={<AdminDuelPage />} />
+          <Route path="/admin/seasons" element={<Navigate to="/admin/duel?tab=seasons" replace />} />
+          <Route path="/admin/payments" element={<Navigate to="/admin/orgs?tab=payments" replace />} />
           <Route path="/admin/parents" element={<AdminParentLinksPage />} />
           <Route path="/admin/reports" element={<AdminReportsPage />} />
           <Route path="/admin/flags" element={<AdminFlagsPage />} />
@@ -175,7 +175,7 @@ function App() {
           <Route path="/admin/tests" element={<AdminTestPage />} />
           <Route path="/admin/tests/:testId" element={<AdminTestDetailPage />} />
           <Route path="/admin/pro" element={<AdminProPage />} />
-          <Route path="/admin/duel/questions" element={<AdminDuelQuestionsPage />} />
+          <Route path="/admin/duel/questions" element={<Navigate to="/admin/duel?tab=questions" replace />} />
           <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />
           <Route path="/seed-log" element={<Navigate to="/tests/history" replace />} />
           <Route path="/duel" element={<DuelMainPage />} />

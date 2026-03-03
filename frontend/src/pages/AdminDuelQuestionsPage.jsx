@@ -102,7 +102,7 @@ const IMPORT_EXAMPLE = `[
   }
 ]`;
 
-function AdminDuelQuestionsPage() {
+function AdminDuelQuestionsPage({ wrap = true }) {
   // 서버 탭 상태
   const [activeServer, setActiveServer] = useState("saussure");
   // 문제 수 카운트 (서버별)
@@ -374,12 +374,11 @@ function AdminDuelQuestionsPage() {
     }
   };
 
-  return (
-    <AdminLayout>
-      <div className="admin-detail-wrap">
+  const content = (
+    <>
         {/* 헤더 */}
         <div className="admin-detail-header">
-          <h1>대결 문제 관리</h1>
+          {wrap && <h1>대결 문제 관리</h1>}
           <div className="admin-detail-actions">
             <button
               className="admin-detail-btn"
@@ -560,8 +559,7 @@ function AdminDuelQuestionsPage() {
                         <td>
                           {q.status === "ACTIVE" && (
                             <button
-                              className="admin-detail-btn secondary"
-                              style={{ padding: "4px 10px", fontSize: 12 }}
+                              className="admin-detail-btn secondary sm"
                               type="button"
                               onClick={() => handleDeactivate(q.id)}
                             >
@@ -570,8 +568,7 @@ function AdminDuelQuestionsPage() {
                           )}
                           {q._source === "sample" && (
                             <button
-                              className="admin-detail-btn"
-                              style={{ padding: "4px 10px", fontSize: 12 }}
+                              className="admin-detail-btn sm"
                               type="button"
                               onClick={() => handleRegisterSample(q.id)}
                             >
@@ -587,30 +584,18 @@ function AdminDuelQuestionsPage() {
 
               {/* 페이지네이션 */}
               {totalPages > 1 && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: 8,
-                    marginTop: 16,
-                  }}
-                >
+                <div className="admin-pagination">
                   <button
-                    className="admin-detail-btn secondary"
-                    style={{ padding: "4px 12px", fontSize: 13 }}
                     type="button"
                     disabled={page === 0}
                     onClick={() => setPage((p) => Math.max(0, p - 1))}
                   >
                     이전
                   </button>
-                  <span style={{ fontSize: 13, color: "#a6b6a9" }}>
+                  <span>
                     {page + 1} / {totalPages} (총 {filteredQuestions.length}개)
                   </span>
                   <button
-                    className="admin-detail-btn secondary"
-                    style={{ padding: "4px 12px", fontSize: 13 }}
                     type="button"
                     disabled={page >= totalPages - 1}
                     onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
@@ -622,7 +607,6 @@ function AdminDuelQuestionsPage() {
             </>
           )}
         </div>
-      </div>
 
       {/* 문제 추가 모달 */}
       {showAddForm && (
@@ -878,8 +862,17 @@ function AdminDuelQuestionsPage() {
           </div>
         </div>
       )}
-    </AdminLayout>
+    </>
   );
+
+  if (wrap) {
+    return (
+      <AdminLayout>
+        <div className="admin-detail-wrap">{content}</div>
+      </AdminLayout>
+    );
+  }
+  return content;
 }
 
 export default AdminDuelQuestionsPage;

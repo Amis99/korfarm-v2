@@ -328,7 +328,6 @@ function AdminClassesPage() {
             <button
               className="admin-detail-btn"
               type="button"
-              style={{ background: "#ff7f2a", color: "#fff", padding: "8px 20px" }}
               onClick={() => {
                 setFormData({
                   orgId: isHQ ? "" : (orgs.length > 0 ? orgs[0].id : ""),
@@ -402,16 +401,15 @@ function AdminClassesPage() {
                     </td>
                     <td>
                       <button
-                        className="admin-detail-btn secondary"
+                        className="admin-detail-btn secondary sm"
                         type="button"
                         onClick={(e) => { e.stopPropagation(); openEdit(c); }}
-                        style={{ fontSize: "12px", padding: "4px 8px" }}
                       >
                         수정
                       </button>
                       {c.status === "active" ? (
                         <button
-                          className="admin-detail-btn secondary"
+                          className="admin-detail-btn danger sm"
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
@@ -419,7 +417,7 @@ function AdminClassesPage() {
                               handleDeactivate(c.id);
                             }
                           }}
-                          style={{ fontSize: "12px", padding: "4px 8px", marginLeft: 4, color: "#c0392b" }}
+                          style={{ marginLeft: 4 }}
                         >
                           삭제
                         </button>
@@ -431,10 +429,8 @@ function AdminClassesPage() {
             </table>
             {/* 페이지네이션 */}
             {totalPages > 1 ? (
-              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 6, marginTop: 12 }}>
+              <div className="admin-pagination">
                 <button
-                  className="admin-detail-btn secondary"
-                  style={{ fontSize: 12, padding: "4px 10px" }}
                   disabled={currentPage <= 1}
                   onClick={() => setCurrentPage((p) => p - 1)}
                 >
@@ -443,16 +439,13 @@ function AdminClassesPage() {
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                   <button
                     key={p}
-                    className={`admin-detail-btn ${p === currentPage ? "" : "secondary"}`}
-                    style={{ fontSize: 12, padding: "4px 10px", minWidth: 32 }}
+                    className={p === currentPage ? "active" : ""}
                     onClick={() => setCurrentPage(p)}
                   >
                     {p}
                   </button>
                 ))}
                 <button
-                  className="admin-detail-btn secondary"
-                  style={{ fontSize: 12, padding: "4px 10px" }}
                   disabled={currentPage >= totalPages}
                   onClick={() => setCurrentPage((p) => p + 1)}
                 >
@@ -495,11 +488,10 @@ function AdminClassesPage() {
                                   <td>{s.levelId || s.level_id || "-"}</td>
                                   <td>
                                     <button
-                                      className="admin-detail-btn secondary"
+                                      className="admin-detail-btn danger xs"
                                       type="button"
                                       onClick={() => handlePanelRemoveStudent(uid)}
                                       disabled={actionLoading}
-                                      style={{ fontSize: 11, padding: "2px 6px", color: "#c0392b" }}
                                     >
                                       제거
                                     </button>
@@ -516,25 +508,22 @@ function AdminClassesPage() {
 
                     {/* 학생 배정 드롭다운 */}
                     <h4 style={{ margin: "14px 0 4px", fontSize: 13 }}>학생 배정</h4>
-                    <div style={{ border: "1px solid #d5d9e2", borderRadius: 8, overflow: "hidden", background: "#fff" }}>
-                      <div style={{ padding: "6px 10px", borderBottom: "1px solid #eee" }}>
+                    <div className="admin-student-picker">
+                      <div className="admin-student-picker-search">
                         <input
                           value={panelStudentSearch}
                           onChange={(e) => setPanelStudentSearch(e.target.value)}
                           placeholder="학생 검색 (이름, 학교, 학년, 레벨)"
-                          style={{ width: "100%", border: "none", outline: "none", fontSize: 12 }}
                         />
                       </div>
-                      <div style={{ maxHeight: 200, overflowY: "auto", padding: "2px 0" }}>
+                      <div className="admin-student-picker-list">
                         {(() => {
                           const assignedIds = new Set(panelStudents.map((s) => s.userId || s.user_id));
                           const term = panelStudentSearch.trim().toLowerCase();
-                          // 유료 회원(구독 활성)만 필터링
                           const paidStudents = panelAllStudents.filter((s) => {
                             const subStatus = s.subscriptionStatus || s.subscription_status;
                             return subStatus === "active";
                           });
-                          // 반의 소속 기관에 따라 필터링 (국어농장 본사면 전체, 제휴기관이면 해당 기관만)
                           const isHQOrg = selectedClass.orgId === "org_hq";
                           const orgFilteredStudents = isHQOrg
                             ? paidStudents
@@ -545,7 +534,7 @@ function AdminClassesPage() {
                             return fields.filter(Boolean).some((v) => v.toLowerCase().includes(term));
                           });
                           if (filtered.length === 0) {
-                            return <p style={{ padding: "6px 12px", color: "#999", fontSize: 12 }}>검색 결과가 없습니다.</p>;
+                            return <p className="admin-detail-note" style={{ fontSize: 12, padding: "6px 12px" }}>검색 결과가 없습니다.</p>;
                           }
                           return filtered.map((s) => {
                             const uid = s.userId || s.user_id;
@@ -555,20 +544,15 @@ function AdminClassesPage() {
                             return (
                               <label
                                 key={uid}
-                                style={{
-                                  display: "flex", alignItems: "center", gap: 6,
-                                  padding: "4px 10px", cursor: isAssigned ? "default" : "pointer",
-                                  opacity: isAssigned ? 0.5 : 1,
-                                  background: isSelected ? "#d6e4ff" : "transparent", fontSize: 12,
-                                }}
+                                className={`admin-student-picker-item${isSelected ? " selected" : ""}${isAssigned ? " assigned" : ""}`}
                               >
                                 <input type="checkbox" checked={isSelected} disabled={isAssigned}
                                   onChange={() => !isAssigned && togglePanelSelection(uid)} />
-                                <span style={{ fontWeight: 600, color: "#222" }}>{s.name || "-"}</span>
-                                <span style={{ color: "#555" }}>
+                                <span className="name">{s.name || "-"}</span>
+                                <span className="meta">
                                   {[orgName, s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id].filter(Boolean).join(" / ") || "-"}
                                 </span>
-                                {isAssigned ? <span style={{ color: "#2980b9", fontSize: 10, marginLeft: "auto" }}>배정됨</span> : null}
+                                {isAssigned ? <span className="badge">배정됨</span> : null}
                               </label>
                             );
                           });
@@ -577,11 +561,11 @@ function AdminClassesPage() {
                     </div>
                     {panelSelectedIds.size > 0 ? (
                       <button
-                        className="admin-detail-btn"
+                        className="admin-detail-btn sm"
                         type="button"
                         onClick={handlePanelBulkAssign}
                         disabled={actionLoading}
-                        style={{ marginTop: 6, fontSize: 12, background: "#ff7f2a", color: "#fff" }}
+                        style={{ marginTop: 6 }}
                       >
                         선택한 {panelSelectedIds.size}명 배정
                       </button>
@@ -699,11 +683,10 @@ function AdminClassesPage() {
                         <td>{s.levelId || s.level_id || "-"}</td>
                         <td>
                           <button
-                            className="admin-detail-btn secondary"
+                            className="admin-detail-btn danger xs"
                             type="button"
                             onClick={() => handleRemoveStudent(s.userId || s.user_id)}
                             disabled={actionLoading}
-                            style={{ fontSize: "11px", padding: "3px 8px" }}
                           >
                             제거
                           </button>
@@ -717,30 +700,22 @@ function AdminClassesPage() {
               )}
               <div style={{ marginTop: 12 }}>
                 <label style={{ fontWeight: 600, fontSize: 13, marginBottom: 4, display: "block" }}>학생 배정</label>
-                <div style={{
-                  border: "1px solid #d5d9e2",
-                  borderRadius: 8,
-                  overflow: "hidden",
-                  background: "#fff",
-                }}>
-                  <div style={{ padding: "8px 10px", borderBottom: "1px solid #eee" }}>
+                <div className="admin-student-picker">
+                  <div className="admin-student-picker-search">
                     <input
                       value={studentSearch}
                       onChange={(e) => setStudentSearch(e.target.value)}
                       placeholder="학생 검색 (아이디 또는 이름)"
-                      style={{ width: "100%", border: "none", outline: "none", fontSize: 13 }}
                     />
                   </div>
-                  <div style={{ maxHeight: 240, overflowY: "auto", padding: "4px 0" }}>
+                  <div className="admin-student-picker-list" style={{ maxHeight: 240 }}>
                     {(() => {
                       const assignedIds = new Set(classStudents.map((s) => s.userId || s.user_id));
                       const term = studentSearch.trim().toLowerCase();
-                      // 유료 회원(구독 활성)만 필터링
                       const paidStudents = allStudents.filter((s) => {
                         const subStatus = s.subscriptionStatus || s.subscription_status;
                         return subStatus === "active";
                       });
-                      // 반의 소속 기관에 따라 필터링 (국어농장 본사면 전체, 제휴기관이면 해당 기관만)
                       const isHQOrg = editClass.orgId === "org_hq";
                       const orgFilteredStudents = isHQOrg
                         ? paidStudents
@@ -751,7 +726,7 @@ function AdminClassesPage() {
                         return fields.filter(Boolean).some((v) => v.toLowerCase().includes(term));
                       });
                       if (filtered.length === 0) {
-                        return <p style={{ padding: "8px 12px", color: "#999", fontSize: 13 }}>검색 결과가 없습니다.</p>;
+                        return <p className="admin-detail-note" style={{ fontSize: 13, padding: "8px 12px" }}>검색 결과가 없습니다.</p>;
                       }
                       return filtered.map((s) => {
                         const uid = s.userId || s.user_id;
@@ -761,16 +736,7 @@ function AdminClassesPage() {
                         return (
                           <label
                             key={uid}
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 8,
-                              padding: "5px 12px",
-                              cursor: isAssigned ? "default" : "pointer",
-                              opacity: isAssigned ? 0.5 : 1,
-                              background: isSelected ? "#d6e4ff" : "transparent",
-                              fontSize: 13,
-                            }}
+                            className={`admin-student-picker-item${isSelected ? " selected" : ""}${isAssigned ? " assigned" : ""}`}
                           >
                             <input
                               type="checkbox"
@@ -778,9 +744,9 @@ function AdminClassesPage() {
                               disabled={isAssigned}
                               onChange={() => !isAssigned && toggleStudentSelection(uid)}
                             />
-                            <span style={{ fontWeight: 600, color: "#222" }}>{s.name || "-"}</span>
-                            <span style={{ color: "#555" }}>{[orgName, s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id].filter(Boolean).join(" / ") || "-"}</span>
-                            {isAssigned ? <span style={{ color: "#2980b9", fontSize: 11, marginLeft: "auto" }}>배정됨</span> : null}
+                            <span className="name">{s.name || "-"}</span>
+                            <span className="meta">{[orgName, s.school, s.gradeLabel || s.grade_label, s.levelId || s.level_id].filter(Boolean).join(" / ") || "-"}</span>
+                            {isAssigned ? <span className="badge">배정됨</span> : null}
                           </label>
                         );
                       });
@@ -789,11 +755,11 @@ function AdminClassesPage() {
                 </div>
                 {selectedStudentIds.size > 0 ? (
                   <button
-                    className="admin-detail-btn"
+                    className="admin-detail-btn sm"
                     type="button"
                     onClick={handleBulkAssign}
                     disabled={actionLoading}
-                    style={{ marginTop: 8, fontSize: 13, background: "#ff7f2a", color: "#fff" }}
+                    style={{ marginTop: 8 }}
                   >
                     선택한 {selectedStudentIds.size}명 배정
                   </button>

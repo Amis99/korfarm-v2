@@ -526,9 +526,8 @@ function AdminAssignmentsPage() {
                     <td>{fmtDate(item.submittedAt)}</td>
                     <td>
                       <button
-                        className="admin-detail-btn"
+                        className="admin-detail-btn sm"
                         type="button"
-                        style={{ padding: "6px 12px", fontSize: 12 }}
                         onClick={() => openFeedbackModal(item)}
                       >
                         피드백 작성

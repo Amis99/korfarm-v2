@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
 import { apiGet, apiPost } from "../utils/api";
-import "../styles/admin.css";
+import "../styles/admin-detail.css";
 
 const ROLE_LABELS = {
   STUDENT: "학생",
   PARENT: "학부모",
   ORG_ADMIN: "기관 관리자",
+};
+
+const ROLE_STATUS_MAP = {
+  STUDENT: "active",
+  PARENT: "pending",
+  ORG_ADMIN: "scheduled",
 };
 
 function AdminMembershipApprovalPage() {
@@ -88,11 +94,13 @@ function AdminMembershipApprovalPage() {
 
   return (
     <AdminLayout>
-      <div className="admin-content">
-        <header className="admin-header">
+      <div className="admin-detail-wrap">
+        <div className="admin-detail-header">
           <h1>가입 승인 관리</h1>
-          <p>회원가입 승인 대기 목록입니다. 승인 또는 거절 처리를 할 수 있습니다.</p>
-        </header>
+        </div>
+        <p style={{ color: "var(--admin-muted)", marginTop: 4 }}>
+          회원가입 승인 대기 목록입니다. 승인 또는 거절 처리를 할 수 있습니다.
+        </p>
 
         {error && <div className="admin-error">{error}</div>}
 
@@ -104,8 +112,8 @@ function AdminMembershipApprovalPage() {
             <p>승인 대기 중인 회원이 없습니다.</p>
           </div>
         ) : (
-          <div className="admin-table-wrapper">
-            <table className="admin-table">
+          <div className="admin-detail-card" style={{ marginTop: 16 }}>
+            <table className="admin-detail-table">
               <thead>
                 <tr>
                   <th>이름</th>
@@ -123,7 +131,10 @@ function AdminMembershipApprovalPage() {
                     <td>{m.user_name || m.userName || "-"}</td>
                     <td>{m.user_login_id || m.userLoginId || "-"}</td>
                     <td>
-                      <span className={`role-badge role-${(m.role || "").toLowerCase()}`}>
+                      <span
+                        className="status-pill"
+                        data-status={ROLE_STATUS_MAP[m.role] || "hold"}
+                      >
                         {ROLE_LABELS[m.role] || m.role || "-"}
                       </span>
                     </td>
@@ -131,7 +142,12 @@ function AdminMembershipApprovalPage() {
                     <td>{formatDate(m.requested_at || m.requestedAt)}</td>
                     <td>
                       {m.role === "PARENT" ? (
-                        <span className={`match-badge ${(m.student_matched || m.studentMatched) ? "matched" : "unmatched"}`}>
+                        <span
+                          className="status-pill"
+                          data-status={
+                            (m.student_matched || m.studentMatched) ? "active" : "inactive"
+                          }
+                        >
                           {(m.student_matched || m.studentMatched) ? "매칭됨" : "미매칭"}
                         </span>
                       ) : (
@@ -139,16 +155,16 @@ function AdminMembershipApprovalPage() {
                       )}
                     </td>
                     <td>
-                      <div className="action-buttons">
+                      <div className="admin-detail-actions">
                         <button
-                          className="btn-approve"
+                          className="admin-detail-btn sm"
                           onClick={() => handleApprove(m.id)}
                           disabled={actionLoading === m.id}
                         >
                           {actionLoading === m.id ? "처리 중..." : "승인"}
                         </button>
                         <button
-                          className="btn-reject"
+                          className="admin-detail-btn danger sm"
                           onClick={() => openRejectModal(m)}
                           disabled={actionLoading === m.id}
                         >
@@ -165,42 +181,36 @@ function AdminMembershipApprovalPage() {
 
         {/* 학부모 정보 표시 */}
         {memberships.filter((m) => m.role === "PARENT").length > 0 && (
-          <div className="admin-section">
-            <h2>학부모 연결 정보</h2>
-            <div className="parent-info-grid">
+          <div style={{ marginTop: 24 }}>
+            <h2 style={{ fontSize: 18, marginBottom: 12 }}>학부모 연결 정보</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 16 }}>
               {memberships
                 .filter((m) => m.role === "PARENT")
                 .map((m) => (
-                  <div key={m.id} className="parent-info-card">
-                    <h3>{m.user_name || m.userName}</h3>
-                    <div className="info-row">
-                      <span className="label">연결 학생:</span>
+                  <div key={m.id} className="admin-detail-card">
+                    <h3 style={{ margin: "0 0 12px", fontSize: 16 }}>{m.user_name || m.userName}</h3>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, padding: "6px 0", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                      <span style={{ color: "var(--admin-muted)" }}>연결 학생:</span>
                       <span>{m.linked_student_name || m.linkedStudentName || "-"}</span>
                     </div>
-                    <div className="info-row">
-                      <span className="label">학생 전화번호:</span>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, padding: "6px 0", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                      <span style={{ color: "var(--admin-muted)" }}>학생 전화번호:</span>
                       <span>{m.linked_student_phone || m.linkedStudentPhone || "-"}</span>
                     </div>
-                    <div className="info-row">
-                      <span className="label">학부모 전화번호:</span>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, padding: "6px 0", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                      <span style={{ color: "var(--admin-muted)" }}>학부모 전화번호:</span>
                       <span>{m.linked_parent_phone || m.linkedParentPhone || "-"}</span>
                     </div>
-                    <div className="match-status">
+                    <div style={{ marginTop: 12 }}>
                       {(m.student_matched || m.studentMatched) ? (
                         <>
-                          <span className="matched">학생 정보 매칭됨</span>
-                          <span className="auto-link-badge" style={{
-                            marginLeft: '8px',
-                            padding: '2px 8px',
-                            backgroundColor: '#e8f5e9',
-                            color: '#2e7d32',
-                            borderRadius: '4px',
-                            fontSize: '12px',
-                            fontWeight: 'bold'
-                          }}>승인 시 자동 연결</span>
+                          <span className="status-pill" data-status="active">매칭됨</span>
+                          <span className="status-pill" data-status="completed" style={{ marginLeft: 8 }}>
+                            승인 시 자동 연결
+                          </span>
                         </>
                       ) : (
-                        <span className="unmatched">학생 정보 미매칭 - 수동 확인 필요</span>
+                        <span className="status-pill" data-status="inactive">미매칭 - 수동 확인 필요</span>
                       )}
                     </div>
                   </div>
@@ -212,30 +222,30 @@ function AdminMembershipApprovalPage() {
 
       {/* 거절 모달 */}
       {rejectModal && (
-        <div className="modal-backdrop" onClick={() => setRejectModal(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="admin-modal-overlay" onClick={() => setRejectModal(null)}>
+          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
             <h2>가입 거절</h2>
-            <p>
+            <p style={{ color: "var(--admin-muted)", margin: "0 0 16px" }}>
               <strong>{rejectModal.user_name || rejectModal.userName}</strong>님의 가입을 거절합니다.
             </p>
-            <label>
-              거절 사유
+            <div className="admin-modal-field">
+              <label>거절 사유</label>
               <textarea
                 value={rejectReason}
                 onChange={(e) => setRejectReason(e.target.value)}
                 placeholder="거절 사유를 입력해 주세요"
                 rows={3}
               />
-            </label>
-            <div className="modal-actions">
+            </div>
+            <div className="admin-modal-actions">
               <button
-                className="btn-reject"
+                className="admin-detail-btn danger"
                 onClick={handleReject}
                 disabled={actionLoading === rejectModal.id}
               >
                 {actionLoading === rejectModal.id ? "처리 중..." : "거절 처리"}
               </button>
-              <button className="btn-cancel" onClick={() => setRejectModal(null)}>
+              <button className="admin-detail-btn secondary" onClick={() => setRejectModal(null)}>
                 취소
               </button>
             </div>

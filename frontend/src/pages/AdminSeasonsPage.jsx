@@ -17,7 +17,7 @@ const mapSeasons = (items) =>
     status: item.status || "active",
   }));
 
-function AdminSeasonsPage() {
+function AdminSeasonsPage({ wrap = true }) {
   const { data: seasons, loading, error } = useAdminList("/v1/admin/seasons", SEASONS, mapSeasons);
   const [rows, setRows] = useState(SEASONS);
   const [search, setSearch] = useState("");
@@ -67,11 +67,10 @@ function AdminSeasonsPage() {
     }
   };
 
-  return (
-    <AdminLayout>
-      <div className="admin-detail-wrap">
+  const content = (
+    <>
         <div className="admin-detail-header">
-          <h1>시즌 관리</h1>
+          {wrap && <h1>시즌 관리</h1>}
           <div className="admin-detail-actions">
             <button
               className="admin-detail-btn"
@@ -143,7 +142,6 @@ function AdminSeasonsPage() {
             <p>한 시즌은 한 달로 설정됩니다.</p>
           </div>
         </div>
-      </div>
 
       {showCreateModal ? (
         <div className="admin-modal-overlay" onClick={() => setShowCreateModal(false)}>
@@ -193,8 +191,17 @@ function AdminSeasonsPage() {
           </div>
         </div>
       ) : null}
-    </AdminLayout>
+    </>
   );
+
+  if (wrap) {
+    return (
+      <AdminLayout>
+        <div className="admin-detail-wrap">{content}</div>
+      </AdminLayout>
+    );
+  }
+  return content;
 }
 
 export default AdminSeasonsPage;
