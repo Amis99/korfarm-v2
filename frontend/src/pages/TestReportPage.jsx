@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { apiGet as adminApiGet } from "../utils/adminApi";
+import DomainRadarChart from "../components/test-report/DomainRadarChart";
+import DomainDoughnutChart from "../components/test-report/DomainDoughnutChart";
+import { getDomainColor } from "../components/test-report/domainColors";
 import "../styles/test-storage.css";
 
 function TestReportPage() {
@@ -15,16 +18,45 @@ function TestReportPage() {
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const isParent = user?.roles?.includes("PARENT");
+
   useEffect(() => {
     if (!isLoggedIn) return;
-    const fetchFn = studentId
-      ? () => adminApiGet(`/v1/admin/test-papers/${testId}/submissions/${studentId}/report`)
-      : () => apiGet(`/v1/test-storage/${testId}/report`);
+    let fetchFn;
+    if (isParent && studentId) {
+      // 학부모: 자녀 성적표 조회 전용 API
+      fetchFn = () => apiGet(`/v1/parents/children/${studentId}/test-storage/${testId}/report`);
+    } else if (studentId) {
+      // 관리자: 학생 성적표 조회
+      fetchFn = () => adminApiGet(`/v1/admin/test-papers/${testId}/submissions/${studentId}/report`);
+    } else {
+      // 학생 본인: 자기 성적표 조회
+      fetchFn = () => apiGet(`/v1/test-storage/${testId}/report`);
+    }
     fetchFn()
       .then(setReport)
       .catch(() => navigate(studentId ? `/admin/tests/${testId}` : `/tests/${testId}`))
       .finally(() => setLoading(false));
-  }, [isLoggedIn, testId, studentId, navigate]);
+  }, [isLoggedIn, testId, studentId, navigate, isParent]);
+
+  // 객관식/서술형 분리 집계
+  const typeStats = useMemo(() => {
+    if (!report?.details) return { obj: { score: 0, total: 0 }, sub: { score: 0, total: 0 } };
+    const obj = { score: 0, total: 0 };
+    const sub = { score: 0, total: 0 };
+    for (const d of report.details) {
+      const earned = d.earnedPoints != null ? d.earnedPoints : (d.isCorrect ? d.points : 0);
+      const isSubjective = d.type === "서술형" || d.type === "서술";
+      if (isSubjective) {
+        sub.score += earned;
+        sub.total += d.points;
+      } else {
+        obj.score += earned;
+        obj.total += d.points;
+      }
+    }
+    return { obj, sub };
+  }, [report]);
 
   if (loading) return <div className="ts-page ts-center"><p>불러오는 중...</p></div>;
   if (!report) return null;
@@ -45,6 +77,7 @@ function TestReportPage() {
         {user && <p className="ts-report-student">{user.name}</p>}
       </div>
 
+      {/* 요약 카드 5개 */}
       <div className="ts-report-summary">
         <div className="ts-summary-card ts-summary-primary">
           <span className="ts-summary-label">총점</span>
@@ -58,8 +91,25 @@ function TestReportPage() {
           <span className="ts-summary-label">정답률</span>
           <strong className="ts-summary-value">{report.accuracy}%</strong>
         </div>
+        <div className="ts-summary-card">
+          <span className="ts-summary-label">객관식</span>
+          <strong className="ts-summary-value">{typeStats.obj.score} <small>/ {typeStats.obj.total}</small></strong>
+        </div>
+        <div className="ts-summary-card">
+          <span className="ts-summary-label">서술형</span>
+          <strong className="ts-summary-value">{typeStats.sub.score} <small>/ {typeStats.sub.total}</small></strong>
+        </div>
       </div>
 
+      {/* 레이더 + 도넛 차트 */}
+      {domains.length >= 2 && (
+        <div className="ts-charts-row">
+          <DomainRadarChart domainScores={report.domainScores} />
+          <DomainDoughnutChart domainScores={report.domainScores} />
+        </div>
+      )}
+
+      {/* 영역별 점수 테이블 + 인라인 막대 */}
       {domains.length > 0 && (
         <section className="ts-report-section">
           <h3>영역별 점수</h3>
@@ -74,15 +124,29 @@ function TestReportPage() {
               </tr>
             </thead>
             <tbody>
-              {domains.map(([domain, ds]) => (
-                <tr key={domain}>
-                  <td>{domain}</td>
-                  <td>{ds.score}</td>
-                  <td>{ds.maxScore}</td>
-                  <td>{ds.correct}/{ds.total}</td>
-                  <td>{ds.total > 0 ? Math.round((ds.correct / ds.total) * 100) : 0}%</td>
-                </tr>
-              ))}
+              {domains.map(([domain, ds]) => {
+                const rate = ds.total > 0 ? Math.round((ds.correct / ds.total) * 100) : 0;
+                const color = getDomainColor(domain);
+                return (
+                  <tr key={domain}>
+                    <td>{domain}</td>
+                    <td>{ds.score}</td>
+                    <td>{ds.maxScore}</td>
+                    <td>{ds.correct}/{ds.total}</td>
+                    <td>
+                      <div className="ts-domain-bar-cell">
+                        <div className="ts-domain-bar-bg">
+                          <div
+                            className="ts-domain-bar-fill"
+                            style={{ width: `${rate}%`, backgroundColor: color.main }}
+                          />
+                        </div>
+                        <span className="ts-domain-bar-label">{rate}%</span>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </section>

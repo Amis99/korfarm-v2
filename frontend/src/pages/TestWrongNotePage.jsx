@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { apiGet as adminApiGet } from "../utils/adminApi";
+import WrongNoteDomainChart from "../components/test-report/WrongNoteDomainChart";
+import { getDomainColor } from "../components/test-report/domainColors";
 import "../styles/test-storage.css";
 
 function TestWrongNotePage() {
@@ -14,16 +16,42 @@ function TestWrongNotePage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const isParent = user?.roles?.includes("PARENT");
+
   useEffect(() => {
     if (!isLoggedIn) return;
-    const fetchFn = studentId
-      ? () => adminApiGet(`/v1/admin/test-papers/${testId}/submissions/${studentId}/wrong-note`)
-      : () => apiGet(`/v1/test-storage/${testId}/wrong-note`);
+    let fetchFn;
+    if (isParent && studentId) {
+      // 학부모: 자녀 오답 노트 조회 전용 API
+      fetchFn = () => apiGet(`/v1/parents/children/${studentId}/test-storage/${testId}/wrong-note`);
+    } else if (studentId) {
+      // 관리자: 학생 오답 노트 조회
+      fetchFn = () => adminApiGet(`/v1/admin/test-papers/${testId}/submissions/${studentId}/wrong-note`);
+    } else {
+      // 학생 본인: 자기 오답 노트 조회
+      fetchFn = () => apiGet(`/v1/test-storage/${testId}/wrong-note`);
+    }
     fetchFn()
       .then(setData)
       .catch(() => navigate(studentId ? `/admin/tests/${testId}` : `/tests/${testId}`))
       .finally(() => setLoading(false));
-  }, [isLoggedIn, testId, studentId, navigate]);
+  }, [isLoggedIn, testId, studentId, navigate, isParent]);
+
+  // 오답 통계 계산
+  const wrongStats = useMemo(() => {
+    if (!data?.wrongItems) return null;
+    const items = data.wrongItems;
+    const totalWrong = items.length;
+    const lostPoints = items.reduce((sum, i) => sum + (i.points || 0), 0);
+    const domainGroups = {};
+    for (const item of items) {
+      const d = item.domain || "기타";
+      domainGroups[d] = (domainGroups[d] || 0) + 1;
+    }
+    const domainCount = Object.keys(domainGroups).length;
+    const topDomain = Object.entries(domainGroups).sort((a, b) => b[1] - a[1])[0];
+    return { totalWrong, lostPoints, domainGroups, domainCount, topDomain: topDomain?.[0] || "-" };
+  }, [data]);
 
   if (loading) return <div className="ts-page ts-center"><p>불러오는 중...</p></div>;
   if (!data) return null;
@@ -47,46 +75,88 @@ function TestWrongNotePage() {
           <p>틀린 문항이 없습니다. 만점입니다!</p>
         </div>
       ) : (
-        <div className="ts-wrong-list">
-          {data.wrongItems.map(item => (
-            <div key={item.questionNumber} className="ts-wrong-card">
-              <div className="ts-wrong-header">
-                <span className="ts-wrong-num">{item.questionNumber}번</span>
-                <span className="ts-wrong-type">{item.type}</span>
-                {item.domain && <span className="ts-wrong-domain">{item.domain}</span>}
-                <span className="ts-wrong-pts">{item.points}점</span>
+        <>
+          {/* 요약 카드 4개 */}
+          {wrongStats && (
+            <div className="ts-report-summary">
+              <div className="ts-summary-card ts-summary-primary">
+                <span className="ts-summary-label">오답 수</span>
+                <strong className="ts-summary-value">{wrongStats.totalWrong}문항</strong>
               </div>
-
-              {item.passage && (
-                <div className="ts-wrong-passage">
-                  <span className="ts-label">지문/작품:</span> {item.passage}
-                </div>
-              )}
-
-              <div className="ts-wrong-answers">
-                <div className="ts-wrong-my">
-                  <span className="ts-label">내 답:</span>
-                  <span className="ts-wrong-val ts-wrong-mine">{item.myAnswer || "-"}</span>
-                </div>
-                <div className="ts-wrong-correct">
-                  <span className="ts-label">정답:</span>
-                  <span className="ts-wrong-val ts-wrong-right">{item.correctAnswer}</span>
-                </div>
+              <div className="ts-summary-card">
+                <span className="ts-summary-label">손실 배점</span>
+                <strong className="ts-summary-value">{wrongStats.lostPoints}점</strong>
               </div>
-
-              {item.intent && (
-                <div className="ts-wrong-intent">
-                  <span className="ts-label">출제 의도:</span> {item.intent}
-                </div>
-              )}
-
-              <div className="ts-wrong-feedback">
-                <span className="ts-label">해설:</span>
-                <pre className="ts-wrong-feedback-text">{item.feedback}</pre>
+              <div className="ts-summary-card">
+                <span className="ts-summary-label">오답 영역 수</span>
+                <strong className="ts-summary-value">{wrongStats.domainCount}개</strong>
+              </div>
+              <div className="ts-summary-card">
+                <span className="ts-summary-label">최다 오답 영역</span>
+                <strong className="ts-summary-value" style={{ fontSize: 20 }}>{wrongStats.topDomain}</strong>
               </div>
             </div>
-          ))}
-        </div>
+          )}
+
+          {/* 영역별 오답 분포 차트 */}
+          {wrongStats && Object.keys(wrongStats.domainGroups).length >= 2 && (
+            <div style={{ marginBottom: 28 }}>
+              <WrongNoteDomainChart domainGroups={wrongStats.domainGroups} />
+            </div>
+          )}
+
+          {/* 오답 카드 리스트 */}
+          <div className="ts-wrong-list">
+            {data.wrongItems.map(item => {
+              const domainColor = getDomainColor(item.domain);
+              return (
+                <div key={item.questionNumber} className="ts-wrong-card">
+                  <div className="ts-wrong-header">
+                    <span className="ts-wrong-num">{item.questionNumber}번</span>
+                    <span className="ts-wrong-type">{item.type}</span>
+                    {item.domain && (
+                      <span
+                        className="ts-wrong-domain"
+                        style={{ backgroundColor: domainColor.bg, color: domainColor.main, borderColor: domainColor.main }}
+                      >
+                        {item.domain}
+                      </span>
+                    )}
+                    <span className="ts-wrong-pts">{item.points}점</span>
+                  </div>
+
+                  {item.passage && (
+                    <div className="ts-wrong-passage">
+                      <span className="ts-label">지문/작품:</span> {item.passage}
+                    </div>
+                  )}
+
+                  <div className="ts-wrong-answers">
+                    <div className="ts-wrong-my">
+                      <span className="ts-label">내 답:</span>
+                      <span className="ts-wrong-val ts-wrong-mine">{item.myAnswer || "-"}</span>
+                    </div>
+                    <div className="ts-wrong-correct">
+                      <span className="ts-label">정답:</span>
+                      <span className="ts-wrong-val ts-wrong-right">{item.correctAnswer}</span>
+                    </div>
+                  </div>
+
+                  {item.intent && (
+                    <div className="ts-wrong-intent">
+                      <span className="ts-label">출제 의도:</span> {item.intent}
+                    </div>
+                  )}
+
+                  <div className="ts-wrong-feedback">
+                    <span className="ts-label">해설:</span>
+                    <pre className="ts-wrong-feedback-text">{item.feedback}</pre>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
       )}
 
       <div className="ts-report-actions ts-no-print">

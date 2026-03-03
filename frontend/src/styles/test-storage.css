@@ -961,6 +961,57 @@
 }
 
 /* ── Print styles ── */
+/* ── 차트 영역 ── */
+.ts-charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.ts-chart-wrap {
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.ts-chart-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--text);
+}
+
+/* 영역별 인라인 막대 */
+.ts-domain-bar-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ts-domain-bar-bg {
+  flex: 1;
+  height: 8px;
+  background: var(--stroke);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ts-domain-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.ts-domain-bar-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  min-width: 36px;
+  text-align: right;
+}
+
 @media print {
   .ts-no-print {
     display: none !important;
@@ -992,6 +1043,21 @@
   }
 
   .ts-table th {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .ts-chart-wrap {
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .ts-charts-row {
+    break-inside: avoid;
+  }
+
+  .ts-domain-bar-fill {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -1027,6 +1093,10 @@
 
   .ts-tab .material-symbols-outlined {
     font-size: 16px;
+  }
+
+  .ts-charts-row {
+    grid-template-columns: 1fr;
   }
 
   .ts-detail-actions {
@@ -1086,4 +1156,96 @@
 .ts-tab.active {
   color: #f07f1a;
   border-bottom-color: #f07f1a;
+}
+
+/* ── AdminProPage 인라인 → 클래스 ── */
+.ts-section-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.ts-section-title {
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+.ts-section-hint {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.ts-section-card .ts-table {
+  margin-bottom: 12px;
+}
+
+.ts-save-row {
+  margin-top: 12px;
+}
+
+.ts-status-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ts-status-badge.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.ts-status-badge.archived {
+  background: #f1f5f9;
+  color: #94a3b8;
+}
+
+.ts-test-label {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.ts-content-select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.ts-test-register-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.ts-test-register-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ts-test-register-label.version input {
+  width: 80px;
+  padding: 6px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.ts-test-register-label.paper {
+  flex: 1;
+  min-width: 200px;
+}
+
+.ts-test-register-label select {
+  padding: 6px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.ts-level-filter {
+  margin-bottom: 16px;
 }
