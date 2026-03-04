@@ -2,8 +2,10 @@ import { useState, useMemo, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { getFarmById, getLearningItemsByFarm, SUB_AREA_LABELS } from "../data/learning/learningCatalog";
 import { apiGet, apiPost } from "../utils/api";
+import VideoModal from "../components/VideoModal";
 import "../styles/farm-mode.css";
 import "../styles/start.css";
+import "../styles/video-modal.css";
 
 const LEVELS = [
   "FREGE_1", "FREGE_2", "FREGE_3",
@@ -46,6 +48,7 @@ function FarmListPage() {
   const [progressModal, setProgressModal] = useState(null);
   const [pageProgress, setPageProgress] = useState(null);
   const [pageProgressLoading, setPageProgressLoading] = useState(false);
+  const [videoUrl, setVideoUrl] = useState(null);
 
   const staticItems = useMemo(() => getLearningItemsByFarm(farmId), [farmId]);
   const [dbItems, setDbItems] = useState([]);
@@ -77,6 +80,7 @@ function FarmListPage() {
             targetLevel: item.levelId,
             subArea: item.subArea,
             moduleKey: item.moduleKey || "worksheet_quiz",
+            videoUrl: item.videoUrl || null,
           }));
         setDbItems(newItems);
       })
@@ -262,6 +266,7 @@ function FarmListPage() {
                   <th className="farm-th-count">학습수</th>
                   <th className="farm-th-count">완료</th>
                   <th className="farm-th-status">상태</th>
+                  <th className="farm-th-video">영상</th>
                 </tr>
               </thead>
               <tbody>
@@ -305,6 +310,20 @@ function FarmListPage() {
                           {STATUS_LABELS[myStatus] || "학습전"}
                         </span>
                       </td>
+                      <td className="farm-td-video">
+                        {item.videoUrl ? (
+                          <button
+                            className="video-play-btn"
+                            title="영상 보기"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setVideoUrl(item.videoUrl);
+                            }}
+                          >
+                            <span className="material-symbols-outlined">play_circle</span>
+                          </button>
+                        ) : null}
+                      </td>
                     </tr>
                   );
                 })}
@@ -342,6 +361,10 @@ function FarmListPage() {
           </>
         )}
       </div>
+
+      {videoUrl && (
+        <VideoModal url={videoUrl} onClose={() => setVideoUrl(null)} />
+      )}
 
       {progressModal && (
         <div className="result-overlay" onClick={() => setProgressModal(null)}>

@@ -37,7 +37,7 @@ function AdminProPage() {
   // 챕터 생성 폼
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState({
-    levelId: "", bookNumber: 1, chapterNumber: 1, globalChapterNumber: 1, title: "", description: "",
+    levelId: "", bookNumber: 1, chapterNumber: 1, globalChapterNumber: 1, title: "", description: "", videoUrl: "",
   });
   const [creating, setCreating] = useState(false);
 
@@ -46,6 +46,7 @@ function AdminProPage() {
   const [editTitle, setEditTitle] = useState("");
   const [editDesc, setEditDesc] = useState("");
   const [editStatus, setEditStatus] = useState("active");
+  const [editVideoUrl, setEditVideoUrl] = useState("");
 
   // 아이템 설정
   const [items, setItems] = useState([]);
@@ -80,9 +81,10 @@ function AdminProPage() {
         globalChapterNumber: Number(form.globalChapterNumber),
         title: form.title,
         description: form.description || null,
+        videoUrl: form.videoUrl || null,
       });
       setShowCreate(false);
-      setForm({ levelId: "", bookNumber: 1, chapterNumber: 1, globalChapterNumber: 1, title: "", description: "" });
+      setForm({ levelId: "", bookNumber: 1, chapterNumber: 1, globalChapterNumber: 1, title: "", description: "", videoUrl: "" });
       load();
     } catch (err) {
       alert(err.message || "생성에 실패했습니다.");
@@ -96,6 +98,7 @@ function AdminProPage() {
     setEditTitle(ch.title);
     setEditDesc(ch.description || "");
     setEditStatus(ch.status);
+    setEditVideoUrl(ch.videoUrl || "");
     // 기본 6종 아이템 초기화
     setItems(ITEM_TYPES.map((t, i) => ({ type: t.value, contentId: "", order: i + 1 })));
     setTestVersion(1);
@@ -116,6 +119,7 @@ function AdminProPage() {
         title: editTitle,
         description: editDesc || null,
         status: editStatus,
+        videoUrl: editVideoUrl || null,
       });
       alert("수정 완료");
       setSelectedChapter(null);
@@ -185,6 +189,14 @@ function AdminProPage() {
               <label className="ts-form-full">
                 설명
                 <textarea value={editDesc} onChange={e => setEditDesc(e.target.value)} rows={2} />
+              </label>
+              <label className="ts-form-full">
+                영상 URL (유튜브)
+                <input
+                  value={editVideoUrl}
+                  onChange={e => setEditVideoUrl(e.target.value)}
+                  placeholder="https://www.youtube.com/watch?v=..."
+                />
               </label>
             </div>
             <div className="ts-save-row">
@@ -332,6 +344,14 @@ function AdminProPage() {
               <label className="ts-form-full">
                 설명
                 <textarea value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={2} />
+              </label>
+              <label className="ts-form-full">
+                영상 URL (유튜브)
+                <input
+                  value={form.videoUrl}
+                  onChange={e => setForm(f => ({ ...f, videoUrl: e.target.value }))}
+                  placeholder="https://www.youtube.com/watch?v=..."
+                />
               </label>
             </div>
             <div className="ts-form-actions">

@@ -219,6 +219,7 @@ data class AdminContentImportRequest(
     val subArea: String? = null,
     val dayIndex: Int? = null,
     val moduleKey: String? = null,
+    val videoUrl: String? = null,
     @field:NotBlank val schemaVersion: String,
     @field:NotNull val content: Map<String, Any>
 )

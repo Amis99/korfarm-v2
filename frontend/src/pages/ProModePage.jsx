@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
+import VideoModal from "../components/VideoModal";
 import "../styles/pro-mode.css";
+import "../styles/video-modal.css";
 
 function ProModePage() {
   const { isLoggedIn } = useAuth();
@@ -10,6 +12,7 @@ function ProModePage() {
   const [chapters, setChapters] = useState([]);
   const [userLevel, setUserLevel] = useState("");
   const [loading, setLoading] = useState(true);
+  const [videoUrl, setVideoUrl] = useState(null);
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -91,6 +94,7 @@ function ProModePage() {
                 <th>챕터</th>
                 <th className="pro-th-progress">진행률</th>
                 <th className="pro-th-status">상태</th>
+                <th className="pro-th-video">영상</th>
               </tr>
             </thead>
             <tbody>
@@ -119,12 +123,30 @@ function ProModePage() {
                     <span className="pro-progress-label">{ch.progressPercent}%</span>
                   </td>
                   <td>{getBadge(ch)}</td>
+                  <td className="pro-td-video">
+                    {ch.videoUrl ? (
+                      <button
+                        className="video-play-btn"
+                        title="영상 보기"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setVideoUrl(ch.videoUrl);
+                        }}
+                      >
+                        <span className="material-symbols-outlined">play_circle</span>
+                      </button>
+                    ) : null}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
       </div>
+
+      {videoUrl && (
+        <VideoModal url={videoUrl} onClose={() => setVideoUrl(null)} />
+      )}
     </div>
   );
 }

@@ -45,6 +45,7 @@ class AdminContentService(
             existing.subArea = request.subArea ?: existing.subArea
             existing.dayIndex = request.dayIndex ?: existing.dayIndex
             existing.moduleKey = request.moduleKey ?: existing.moduleKey
+            existing.videoUrl = request.videoUrl ?: existing.videoUrl
             existing
         } else {
             ContentEntity(
@@ -57,7 +58,8 @@ class AdminContentService(
                 dayIndex = request.dayIndex,
                 moduleKey = request.moduleKey,
                 title = title,
-                status = "active"
+                status = "active",
+                videoUrl = request.videoUrl
             )
         }
         val saved = contentRepository.save(content)
@@ -130,6 +132,7 @@ class AdminContentService(
         content.subArea = request.subArea ?: content.subArea
         content.dayIndex = request.dayIndex ?: content.dayIndex
         content.moduleKey = request.moduleKey ?: content.moduleKey
+        content.videoUrl = request.videoUrl ?: content.videoUrl
         content.status = "active"
         contentRepository.save(content)
 
@@ -164,6 +167,7 @@ class AdminContentService(
             chapterId = content.chapterId,
             title = content.title,
             status = content.status,
+            videoUrl = content.videoUrl,
             schemaVersion = version.schemaVersion,
             content = contentMap
         )
@@ -178,7 +182,8 @@ class AdminContentService(
                 levelId = content.levelId,
                 chapterId = content.chapterId,
                 title = content.title,
-                status = content.status
+                status = content.status,
+                videoUrl = content.videoUrl
             )
         }
     }

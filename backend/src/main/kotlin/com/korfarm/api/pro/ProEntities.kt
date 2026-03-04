@@ -29,6 +29,9 @@ class ProChapterEntity(
     @Column(nullable = false)
     var status: String = "active",
 
+    @Column(name = "video_url")
+    var videoUrl: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 

@@ -84,6 +84,7 @@ class ProModeService(
                 globalChapterNumber = chapter.globalChapterNumber,
                 title = chapter.title,
                 description = chapter.description,
+                videoUrl = chapter.videoUrl,
                 progressPercent = percent,
                 isTestPassed = isTestPassed,
                 isAccessible = isAccessible
@@ -223,7 +224,8 @@ class ProModeService(
             chapterNumber = request.chapterNumber,
             globalChapterNumber = request.globalChapterNumber,
             title = request.title,
-            description = request.description
+            description = request.description,
+            videoUrl = request.videoUrl
         )
         return chapterRepo.save(chapter)
     }
@@ -236,6 +238,7 @@ class ProModeService(
         request.title?.let { chapter.title = it }
         request.description?.let { chapter.description = it }
         request.status?.let { chapter.status = it }
+        request.videoUrl?.let { chapter.videoUrl = it }
         return chapterRepo.save(chapter)
     }
 

@@ -12,6 +12,7 @@ data class ProChapterSummary(
     val globalChapterNumber: Int,
     val title: String,
     val description: String?,
+    val videoUrl: String?,
     val progressPercent: Int,
     val isTestPassed: Boolean,
     val isAccessible: Boolean
@@ -90,13 +91,15 @@ data class CreateProChapterRequest(
     val chapterNumber: Int,
     val globalChapterNumber: Int,
     val title: String,
-    val description: String? = null
+    val description: String? = null,
+    val videoUrl: String? = null
 )
 
 data class UpdateProChapterRequest(
     val title: String? = null,
     val description: String? = null,
-    val status: String? = null
+    val status: String? = null,
+    val videoUrl: String? = null
 )
 
 data class SetProChapterItemsRequest(

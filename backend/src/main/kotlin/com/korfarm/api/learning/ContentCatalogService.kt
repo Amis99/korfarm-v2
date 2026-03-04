@@ -51,6 +51,7 @@ class ContentCatalogService(
         subArea = entity.subArea,
         dayIndex = entity.dayIndex,
         moduleKey = entity.moduleKey,
-        status = entity.status
+        status = entity.status,
+        videoUrl = entity.videoUrl
     )
 }

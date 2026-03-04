@@ -9,7 +9,8 @@ data class CatalogItem(
     val subArea: String?,
     val dayIndex: Int?,
     val moduleKey: String?,
-    val status: String
+    val status: String,
+    val videoUrl: String? = null
 )
 
 data class FarmCatalog(

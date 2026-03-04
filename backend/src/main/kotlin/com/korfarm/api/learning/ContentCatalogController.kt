@@ -65,6 +65,7 @@ class ContentCatalogController(
                 chapterId = content.chapterId,
                 title = content.title,
                 status = content.status,
+                videoUrl = content.videoUrl,
                 schemaVersion = version.schemaVersion,
                 content = contentMap
             )

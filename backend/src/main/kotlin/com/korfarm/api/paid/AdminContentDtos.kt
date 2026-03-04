@@ -13,7 +13,8 @@ data class AdminContentSummary(
     val levelId: String?,
     val chapterId: String?,
     val title: String,
-    val status: String
+    val status: String,
+    val videoUrl: String? = null
 )
 
 data class ContentPreview(
@@ -23,6 +24,7 @@ data class ContentPreview(
     val chapterId: String?,
     val title: String,
     val status: String,
+    val videoUrl: String?,
     val schemaVersion: String,
     val content: Map<String, Any>
 )

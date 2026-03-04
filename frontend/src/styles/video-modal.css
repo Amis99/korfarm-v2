@@ -1,0 +1,79 @@
+/* ===== VideoModal – 유튜브 영상 모달 ===== */
+
+.video-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+}
+
+.video-modal-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-modal-close .material-symbols-outlined {
+  font-size: 28px;
+}
+
+.video-modal-close:hover {
+  opacity: 0.8;
+}
+
+.video-modal-iframe-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-modal-iframe-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── 영상 아이콘 버튼 (프로/농장 공용) ── */
+.video-play-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef4444;
+  transition: transform 0.15s, color 0.15s;
+}
+
+.video-play-btn:hover {
+  color: #dc2626;
+  transform: scale(1.15);
+}
+
+.video-play-btn .material-symbols-outlined {
+  font-size: 22px;
+}

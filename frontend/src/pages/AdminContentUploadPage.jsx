@@ -130,6 +130,9 @@ function AdminContentUploadPage() {
   const [importLoading, setImportLoading] = useState(false);
   const [importMessage, setImportMessage] = useState("");
 
+  /* 영상 URL */
+  const [videoUrl, setVideoUrl] = useState("");
+
   /* PDF 업로드 */
   const pdfInputRef = useRef(null);
   const [pdfUploading, setPdfUploading] = useState(false);
@@ -168,6 +171,7 @@ function AdminContentUploadPage() {
               jsonPath: "",
             });
             setJsonText(JSON.stringify(data.content || data, null, 2));
+            setVideoUrl(data.videoUrl || data.video_url || "");
           }
         }
       } catch (err) {
@@ -301,6 +305,7 @@ function AdminContentUploadPage() {
         subArea: parsed.subArea || undefined,
         dayIndex: parsed.dayIndex || undefined,
         moduleKey: parsed.moduleKey || undefined,
+        videoUrl: videoUrl || undefined,
         schemaVersion: parsed.schemaVersion || "1.0",
         content: parsed.payload,
       });
@@ -408,6 +413,7 @@ function AdminContentUploadPage() {
         subArea: parsed.subArea || undefined,
         dayIndex: parsed.dayIndex || undefined,
         moduleKey: parsed.moduleKey || undefined,
+        videoUrl: videoUrl || undefined,
         schemaVersion: parsed.schemaVersion || "1.0",
         content: parsed.payload,
       });
@@ -675,6 +681,19 @@ function AdminContentUploadPage() {
               ) : null}
             </div>
           ) : null}
+
+          {/* 영상 URL 입력 */}
+          <div className="admin-pdf-box">
+            <strong className="admin-pdf-box-title">영상 URL (유튜브)</strong>
+            <input
+              type="text"
+              className="admin-json-input"
+              style={{ height: "auto", minHeight: "unset", padding: "8px 12px", fontFamily: "inherit", fontSize: "14px" }}
+              value={videoUrl}
+              onChange={(e) => setVideoUrl(e.target.value)}
+              placeholder="https://www.youtube.com/watch?v=..."
+            />
+          </div>
 
           {/* JSON 편집 영역 */}
           {jsonLoading ? (
