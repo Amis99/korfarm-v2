@@ -17,6 +17,7 @@ data class TestPaperSummary(
     val orgName: String?,
     val hasSubmitted: Boolean,
     val score: Int?,
+    val submissionCount: Int? = null,
     val createdAt: LocalDateTime
 )
 
@@ -128,7 +129,8 @@ data class CreateTestRequest(
     val totalPoints: Int = 0,
     val timeLimitMinutes: Int? = null,
     val examDate: String? = null,
-    val series: String? = null
+    val series: String? = null,
+    val orgId: String? = null
 )
 
 // ── Admin: Update test ──

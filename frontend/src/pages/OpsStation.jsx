@@ -307,15 +307,6 @@ const ACTION_GROUPS = [
     description: "일일 퀴즈와 독해를 제공합니다.",
     actions: [
       {
-        id: "dailyQuiz",
-        title: "일일 퀴즈 조회",
-        description: "오늘의 퀴즈 콘텐츠",
-        method: "GET",
-        path: "/v1/learning/daily-quiz",
-        scope: "user",
-        auth: true,
-      },
-      {
         id: "dailyQuizSubmit",
         title: "일일 퀴즈 제출",
         description: "정답 제출 후 씨앗 보상",
@@ -325,15 +316,6 @@ const ACTION_GROUPS = [
         auth: true,
         body: SAMPLE_SUBMIT,
         note: "daily-quiz 응답의 questionId를 사용하세요.",
-      },
-      {
-        id: "dailyReading",
-        title: "일일 독해 조회",
-        description: "오늘의 독해 지문",
-        method: "GET",
-        path: "/v1/learning/daily-reading",
-        scope: "user",
-        auth: true,
       },
       {
         id: "dailyReadingSubmit",

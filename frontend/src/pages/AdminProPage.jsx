@@ -168,8 +168,8 @@ function AdminProPage() {
           </header>
 
           {/* 챕터 정보 수정 */}
-          <section style={{ background: "#fff", borderRadius: 12, padding: 24, marginBottom: 20, boxShadow: "0 1px 3px rgba(0,0,0,0.08)" }}>
-            <h3 style={{ margin: "0 0 16px", fontSize: 16 }}>챕터 정보 수정</h3>
+          <section className="ts-section-card">
+            <h3 className="ts-section-title">챕터 정보 수정</h3>
             <div className="ts-form-grid">
               <label>
                 제목
@@ -187,18 +187,18 @@ function AdminProPage() {
                 <textarea value={editDesc} onChange={e => setEditDesc(e.target.value)} rows={2} />
               </label>
             </div>
-            <div style={{ marginTop: 12 }}>
+            <div className="ts-save-row">
               <button className="ts-btn ts-btn-primary" onClick={handleUpdateChapter}>저장</button>
             </div>
           </section>
 
           {/* 학습 아이템 설정 */}
-          <section style={{ background: "#fff", borderRadius: 12, padding: 24, marginBottom: 20, boxShadow: "0 1px 3px rgba(0,0,0,0.08)" }}>
-            <h3 style={{ margin: "0 0 16px", fontSize: 16 }}>학습 아이템 설정</h3>
-            <p style={{ fontSize: 13, color: "#64748b", marginBottom: 12 }}>
+          <section className="ts-section-card">
+            <h3 className="ts-section-title">학습 아이템 설정</h3>
+            <p className="ts-section-hint">
               각 유형에 맞는 DB 콘텐츠를 선택하세요. 저장 시 기존 아이템을 덮어씁니다.
             </p>
-            <table className="ts-table" style={{ marginBottom: 12 }}>
+            <table className="ts-table">
               <thead>
                 <tr>
                   <th>순서</th>
@@ -213,10 +213,10 @@ function AdminProPage() {
                     <td>{ITEM_TYPES.find(t => t.value === item.type)?.label || item.type}</td>
                     <td>
                       {item.type === "test" ? (
-                        <span style={{ color: "#94a3b8", fontSize: 13 }}>(테스트 — 별도 등록)</span>
+                        <span className="ts-test-label">(테스트 — 별도 등록)</span>
                       ) : (
                         <select
-                          style={{ width: "100%", padding: "6px 8px", border: "1px solid #e2e8f0", borderRadius: 6 }}
+                          className="ts-content-select"
                           value={item.contentId}
                           onChange={e => {
                             const next = [...items];
@@ -241,26 +241,24 @@ function AdminProPage() {
           </section>
 
           {/* 테스트 버전 등록 */}
-          <section style={{ background: "#fff", borderRadius: 12, padding: 24, boxShadow: "0 1px 3px rgba(0,0,0,0.08)" }}>
-            <h3 style={{ margin: "0 0 16px", fontSize: 16 }}>챕터 테스트 버전 등록</h3>
-            <p style={{ fontSize: 13, color: "#64748b", marginBottom: 12 }}>
+          <section className="ts-section-card">
+            <h3 className="ts-section-title">챕터 테스트 버전 등록</h3>
+            <p className="ts-section-hint">
               테스트 관리에서 시험지를 먼저 생성한 뒤, 아래에서 선택하세요.
             </p>
-            <div style={{ display: "flex", gap: 12, alignItems: "flex-end", flexWrap: "wrap" }}>
-              <label style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <div className="ts-test-register-row">
+              <label className="ts-test-register-label version">
                 버전
                 <input
                   type="number" min={1} value={testVersion}
                   onChange={e => setTestVersion(e.target.value)}
-                  style={{ width: 80, padding: "6px 8px", border: "1px solid #e2e8f0", borderRadius: 6 }}
                 />
               </label>
-              <label style={{ display: "flex", flexDirection: "column", gap: 4, flex: 1, minWidth: 200 }}>
+              <label className="ts-test-register-label paper">
                 시험지 선택
                 <select
                   value={testPaperId}
                   onChange={e => setTestPaperId(e.target.value)}
-                  style={{ padding: "6px 8px", border: "1px solid #e2e8f0", borderRadius: 6 }}
                 >
                   <option value="">-- 시험지 선택 --</option>
                   {testPapers.map(tp => (
@@ -289,7 +287,7 @@ function AdminProPage() {
         </header>
 
         {/* 레벨 필터 */}
-        <div style={{ marginBottom: 16 }}>
+        <div className="ts-level-filter">
           <select
             className="ts-level-select"
             value={levelFilter}
@@ -375,11 +373,7 @@ function AdminProPage() {
                   <td>{ch.chapterNumber}장</td>
                   <td>{ch.title}</td>
                   <td>
-                    <span style={{
-                      padding: "2px 8px", borderRadius: 999, fontSize: 12, fontWeight: 600,
-                      background: ch.status === "active" ? "#dcfce7" : "#f1f5f9",
-                      color: ch.status === "active" ? "#166534" : "#94a3b8",
-                    }}>
+                    <span className={`ts-status-badge ${ch.status === "active" ? "active" : "archived"}`}>
                       {ch.status}
                     </span>
                   </td>

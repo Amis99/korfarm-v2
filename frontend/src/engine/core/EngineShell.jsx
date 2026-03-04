@@ -57,6 +57,21 @@ const CONTENT_TYPE_FARM_MAPPING = {
   PRO_ANSWER: "reading",
 };
 
+// 씨앗 종류별 색상/그라디언트 (헤더 아이콘용)
+const SEED_DISPLAY = {
+  seed_wheat: { gradient: ["%23ffd27f", "%23e8a020"], stroke: "%23c48a18" },
+  seed_rice:  { gradient: ["%23f0efe4", "%23c8c4a8"], stroke: "%23a8a488" },
+  seed_corn:  { gradient: ["%23ffe066", "%23e8b020"], stroke: "%23c49518" },
+  seed_grape: { gradient: ["%23d4b8e8", "%238a50a8"], stroke: "%236a3888" },
+  seed_apple: { gradient: ["%23ff7070", "%23d03030"], stroke: "%23a82020" },
+};
+
+function seedSvgUrl(seedType) {
+  const info = SEED_DISPLAY[seedType];
+  if (!info) return null;
+  return `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 28'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${info.gradient[0]}'/><stop offset='1' stop-color='${info.gradient[1]}'/></linearGradient></defs><ellipse cx='20' cy='14' rx='18' ry='10' fill='url(%23g)' stroke='${info.stroke}' stroke-width='2'/></svg>")`;
+}
+
 // contentType으로 농장ID 조회
 function getFarmIdFromContentType(contentType) {
   if (!contentType) return null;
@@ -109,6 +124,18 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const [pageProgress, setPageProgress] = useState(null);
 
   const Module = MODULES[moduleKey];
+
+  // 현재 씨앗 종류 결정 (contentType 기반)
+  const currentSeedType = useMemo(() => {
+    const farmSeed = pickSeedForFarm(content?.contentType);
+    return farmSeed?.type || "seed_wheat";
+  }, [content?.contentType]);
+
+  // 헤더 seed-row용 인라인 스타일
+  const seedIconStyle = useMemo(() => {
+    const bg = seedSvgUrl(currentSeedType);
+    return bg ? { backgroundImage: bg } : {};
+  }, [currentSeedType]);
 
   const getLearningTypeLabel = (contentType) => {
     if (!contentType) return "학습";
@@ -233,10 +260,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     }, 0);
     const guess = {
       worksheet_quiz: worksheetTotal,
-      reading_intensive: payload.timeline?.length,
       reading_training: readingTrainingTotal,
-      recall_cards: payload.cards?.length,
-      confirm_click: payload.steps?.length,
       choice_judgement: payload.questions?.length,
       phoneme_change: payload.items?.length,
       word_formation: payload.items?.length,
@@ -315,7 +339,11 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       if (accuracy >= 70) {
         earnedSeed = finalSeed;
         if (accuracy === 100) {
-          earnedSeed += 1;
+          earnedSeed *= 2;
+        }
+        // 선택지 판별: 씨앗 무조건 기본의 3배 지급
+        if (moduleKey === "choice_judgement") {
+          earnedSeed *= 3;
         }
         normalizedSuccess = true;
       } else {
@@ -532,7 +560,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                   <div className="engine-header-item">
                     <div className="seed-row" aria-label={`현재 씨앗 ${seed}개`}>
                       {Array.from({ length: seed }, (_, idx) => (
-                        <span key={`seed-${idx}`} className="seed-icon" />
+                        <span key={`seed-${idx}`} className="seed-icon" style={seedIconStyle} />
                       ))}
                     </div>
                   </div>

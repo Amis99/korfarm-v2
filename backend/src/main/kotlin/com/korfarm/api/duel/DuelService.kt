@@ -688,10 +688,13 @@ class DuelService(
         )
     }
 
-    // 씨앗 종류 무관 총합 검증
+    // 씨앗 종류 무관 총합 검증 (Pessimistic Lock으로 동시성 보호)
     private fun validateSeedBalance(userId: String, amount: Int) {
-        val seeds = userSeedRepository.findByUserId(userId)
-        val total = seeds.sumOf { it.count }
+        var total = 0
+        for (seedType in SEED_TYPES) {
+            val seed = userSeedRepository.findForUpdate(userId, seedType)
+            if (seed != null) total += seed.count
+        }
         if (total < amount) {
             throw ApiException("INSUFFICIENT_SEEDS", "씨앗이 부족합니다 (보유: ${total}, 필요: ${amount})", HttpStatus.BAD_REQUEST)
         }

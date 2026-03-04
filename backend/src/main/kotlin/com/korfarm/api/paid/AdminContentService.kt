@@ -41,6 +41,10 @@ class AdminContentService(
             existing.status = "active"
             existing.levelId = request.levelId
             existing.chapterId = request.chapterId
+            existing.area = request.area ?: existing.area
+            existing.subArea = request.subArea ?: existing.subArea
+            existing.dayIndex = request.dayIndex ?: existing.dayIndex
+            existing.moduleKey = request.moduleKey ?: existing.moduleKey
             existing
         } else {
             ContentEntity(
@@ -48,6 +52,10 @@ class AdminContentService(
                 contentType = request.contentType,
                 levelId = request.levelId,
                 chapterId = request.chapterId,
+                area = request.area,
+                subArea = request.subArea,
+                dayIndex = request.dayIndex,
+                moduleKey = request.moduleKey,
                 title = title,
                 status = "active"
             )
@@ -118,6 +126,10 @@ class AdminContentService(
         content.contentType = request.contentType
         content.levelId = request.levelId
         content.chapterId = request.chapterId
+        content.area = request.area ?: content.area
+        content.subArea = request.subArea ?: content.subArea
+        content.dayIndex = request.dayIndex ?: content.dayIndex
+        content.moduleKey = request.moduleKey ?: content.moduleKey
         content.status = "active"
         contentRepository.save(content)
 

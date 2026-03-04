@@ -19,27 +19,6 @@ class LearningService(
     private val userRepository: UserRepository,
     private val seedCatalogRepository: SeedCatalogRepository
 ) {
-    fun getDailyQuiz(): DailyQuizContent {
-        return DailyQuizContent(
-            contentId = "dq_today",
-            title = "Daily Quiz",
-            questions = listOf(
-                Question("q_1", "Sample question?", "mcq", listOf("A", "B", "C", "D"))
-            )
-        )
-    }
-
-    fun getDailyReading(): DailyReadingContent {
-        return DailyReadingContent(
-            contentId = "dr_today",
-            title = "Daily Reading",
-            passage = "Sample passage text.",
-            questions = listOf(
-                Question("q_1", "Sample question?", "short")
-            )
-        )
-    }
-
     @Transactional
     fun submit(userId: String, activityType: String, contentId: String, request: SubmitRequest): SubmitResult {
         val now = LocalDateTime.now()

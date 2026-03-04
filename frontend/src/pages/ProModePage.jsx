@@ -48,7 +48,7 @@ function ProModePage() {
     if (ch.isAccessible) return <span className="pro-badge current">진행중</span>;
     return (
       <span className="pro-badge locked">
-        <span className="material-symbols-outlined" style={{ fontSize: 14 }}>lock</span>
+        <span className="material-symbols-outlined pro-badge-lock-icon">lock</span>
         잠김
       </span>
     );
@@ -87,10 +87,10 @@ function ProModePage() {
           <table className="pro-table">
             <thead>
               <tr>
-                <th style={{ width: 60 }}>번호</th>
+                <th className="pro-th-num">번호</th>
                 <th>챕터</th>
-                <th style={{ width: 120 }}>진행률</th>
-                <th style={{ width: 80 }}>상태</th>
+                <th className="pro-th-progress">진행률</th>
+                <th className="pro-th-status">상태</th>
               </tr>
             </thead>
             <tbody>
@@ -104,7 +104,7 @@ function ProModePage() {
                   <td>
                     <strong>{ch.title}</strong>
                     {ch.description && (
-                      <span style={{ marginLeft: 8, fontSize: 13, color: "#94a3b8" }}>
+                      <span className="pro-chapter-desc">
                         {ch.description}
                       </span>
                     )}
@@ -116,7 +116,7 @@ function ProModePage() {
                         style={{ width: `${ch.progressPercent}%` }}
                       />
                     </div>
-                    <span style={{ fontSize: 13, color: "#64748b" }}>{ch.progressPercent}%</span>
+                    <span className="pro-progress-label">{ch.progressPercent}%</span>
                   </td>
                   <td>{getBadge(ch)}</td>
                 </tr>

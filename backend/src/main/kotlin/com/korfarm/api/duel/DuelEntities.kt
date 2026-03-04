@@ -79,9 +79,6 @@ class DuelRoomPlayerEntity(
     @Column(name = "stake_seed_type")
     var stakeSeedType: String? = null,
 
-    @Column(name = "stake_crop_type", nullable = false)
-    var stakeCropType: String = "",
-
     @Column(name = "joined_at", nullable = false)
     var joinedAt: LocalDateTime,
 
@@ -173,9 +170,6 @@ class DuelMatchPlayerEntity(
 
     @Column(name = "stake_amount", nullable = false)
     var stakeAmount: Int,
-
-    @Column(name = "stake_crop_type", nullable = false)
-    var stakeCropType: String = "",
 
     @Column(name = "correct_count", nullable = false)
     var correctCount: Int = 0,

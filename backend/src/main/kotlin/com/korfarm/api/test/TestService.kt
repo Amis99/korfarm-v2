@@ -6,6 +6,7 @@ import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.org.OrgRepository
+import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -311,9 +312,19 @@ class TestService(
 
     // ─── Admin: create test ───
     @Transactional
-    fun createTest(req: CreateTestRequest): TestPaperEntity {
+    fun createTest(req: CreateTestRequest, callerUserId: String): TestPaperEntity {
+        // ORG_ADMIN이면 자동으로 소속 기관 ID 설정
+        val orgId = if (SecurityUtils.hasAnyRole("HQ_ADMIN")) {
+            req.orgId // HQ_ADMIN은 지정값 사용 (null이면 본사 시험)
+        } else {
+            // ORG_ADMIN: 자기 소속 기관 ID 자동 설정
+            orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active")
+                .firstOrNull()?.orgId
+                ?: throw ApiException("NO_ORG", "소속 기관이 없습니다.", HttpStatus.BAD_REQUEST)
+        }
         val entity = TestPaperEntity(
             id = IdGenerator.newId("test"),
+            orgId = orgId,
             title = req.title,
             description = req.description,
             levelId = req.levelId,
@@ -416,8 +427,15 @@ class TestService(
 
     // ─── Admin: list all tests ───
     @Transactional(readOnly = true)
-    fun listAllTests(): List<TestPaperSummary> {
-        val papers = testPaperRepo.findAll().sortedByDescending { it.createdAt }
+    fun listAllTests(callerUserId: String): List<TestPaperSummary> {
+        var papers = testPaperRepo.findAll().sortedByDescending { it.createdAt }
+
+        // ORG_ADMIN이면 본사(orgId=null) + 자기 기관 시험만 필터링
+        if (!SecurityUtils.hasAnyRole("HQ_ADMIN")) {
+            val callerOrgIds = orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active").map { it.orgId }
+            papers = papers.filter { it.orgId == null || callerOrgIds.contains(it.orgId) }
+        }
+
         val orgIds = papers.mapNotNull { it.orgId }.distinct()
         val orgMap = if (orgIds.isNotEmpty()) orgRepository.findAllById(orgIds).associateBy { it.id } else emptyMap()
         return papers.map { p ->
@@ -435,7 +453,8 @@ class TestService(
                 orgId = p.orgId,
                 orgName = p.orgId?.let { orgMap[it]?.name },
                 hasSubmitted = false,
-                score = subCount, // reuse score field for submission count in admin context
+                score = null,
+                submissionCount = subCount,
                 createdAt = p.createdAt
             )
         }
@@ -464,18 +483,68 @@ class TestService(
 
     // ─── Admin: student list for answer entry ───
     @Transactional(readOnly = true)
-    fun getStudentsForTest(testId: String): List<StudentForTest> {
-        findPaper(testId)
-        val allUsers = userRepository.findAll().filter { it.status == "active" }
+    fun getStudentsForTest(testId: String, callerUserId: String): List<StudentForTest> {
+        val paper = findPaper(testId)
+
+        // STUDENT 역할 멤버십만 필터링
+        val studentMemberships = if (paper.orgId != null) {
+            // 기관 시험: 해당 기관의 학생만
+            orgMembershipRepository.findByOrgIdAndStatus(paper.orgId!!, "active")
+                .filter { it.role == "STUDENT" }
+        } else if (SecurityUtils.hasAnyRole("HQ_ADMIN")) {
+            // 본사 시험 + HQ_ADMIN: 전체 학생
+            orgMembershipRepository.findByStatus("active")
+                .filter { it.role == "STUDENT" }
+        } else {
+            // 본사 시험 + ORG_ADMIN: 자기 기관 학생만
+            val callerOrgIds = orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active").map { it.orgId }
+            callerOrgIds.flatMap { orgId ->
+                orgMembershipRepository.findByOrgIdAndStatus(orgId, "active")
+                    .filter { it.role == "STUDENT" }
+            }
+        }
+
+        val studentUserIds = studentMemberships.map { it.userId }.distinct()
+        val users = userRepository.findAllById(studentUserIds).filter { it.status == "active" }.associateBy { it.id }
         val subs = submissionRepo.findByTestId(testId).associateBy { it.userId }
-        return allUsers.map { u ->
-            val sub = subs[u.id]
+        return studentUserIds.mapNotNull { uid ->
+            val u = users[uid] ?: return@mapNotNull null
+            val sub = subs[uid]
             StudentForTest(
                 userId = u.id,
                 name = u.name ?: u.email,
                 hasSubmitted = sub != null,
                 score = sub?.score
             )
+        }
+    }
+
+    // ─── Access control ───
+
+    /**
+     * 관리자(ORG_ADMIN)가 시험에 접근할 수 있는지 검증.
+     * HQ_ADMIN은 모든 시험 접근 가능. ORG_ADMIN은 본사 시험 + 자기 기관 시험만 가능.
+     */
+    fun verifyAdminTestAccess(testId: String, callerUserId: String) {
+        if (SecurityUtils.hasAnyRole("HQ_ADMIN")) return
+        val paper = findPaper(testId)
+        if (paper.orgId == null) return // 본사 시험은 모든 관리자 접근 가능
+        val callerOrgIds = orgMembershipRepository.findByUserIdAndStatus(callerUserId, "active").map { it.orgId }
+        if (!callerOrgIds.contains(paper.orgId)) {
+            throw ApiException("FORBIDDEN", "다른 기관의 시험에 접근할 수 없습니다.", HttpStatus.FORBIDDEN)
+        }
+    }
+
+    /**
+     * 학생이 시험에 접근할 수 있는지 검증.
+     * 본사 시험(orgId=null)은 모든 학생 접근 가능. 기관 시험은 해당 기관 소속만 가능.
+     */
+    fun verifyStudentTestAccess(testId: String, userId: String) {
+        val paper = findPaper(testId)
+        if (paper.orgId == null) return // 본사 시험은 모든 학생 접근 가능
+        val userOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }
+        if (!userOrgIds.contains(paper.orgId)) {
+            throw ApiException("FORBIDDEN", "해당 시험에 접근 권한이 없습니다.", HttpStatus.FORBIDDEN)
         }
     }
 

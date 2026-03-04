@@ -75,7 +75,11 @@ function AdminTestPage() {
             </label>
             <label>
               시리즈
-              <input value={form.series} onChange={e => setForm(f => ({ ...f, series: e.target.value }))} placeholder="예: 1학기 중간" />
+              <select value={form.series} onChange={e => setForm(f => ({ ...f, series: e.target.value }))}>
+                <option value="">일반</option>
+                <option value="diagnostic">진단(diagnostic)</option>
+                <option value="chapter">챕터(chapter)</option>
+              </select>
             </label>
             <label>
               총 문항
@@ -131,7 +135,7 @@ function AdminTestPage() {
                 <td>{t.examDate || "-"}</td>
                 <td>{t.totalQuestions}</td>
                 <td>{t.totalPoints}</td>
-                <td>{t.score ?? 0}명</td>
+                <td>{t.submissionCount ?? t.score ?? 0}명</td>
               </tr>
             ))}
           </tbody>

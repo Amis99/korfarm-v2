@@ -24,12 +24,23 @@ class TestController(
         SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
 
+    private fun requireStudent() {
+        if (SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "학부모 계정으로는 시험에 응시할 수 없습니다.", HttpStatus.FORBIDDEN)
+        }
+    }
+
     @GetMapping
     fun list(
         @RequestParam(required = false) levelId: String?,
         @RequestParam(required = false) source: String?
     ): ApiResponse<List<TestPaperSummary>> {
-        val data = testService.listTests(currentUser(), levelId, source)
+        val userId = currentUser()
+        // 학부모는 빈 목록 반환
+        if (SecurityUtils.hasAnyRole("PARENT")) {
+            return ApiResponse(success = true, data = emptyList())
+        }
+        val data = testService.listTests(userId, levelId, source)
         return ApiResponse(success = true, data = data)
     }
 
@@ -42,20 +53,24 @@ class TestController(
 
     @GetMapping("/{testId}")
     fun detail(@PathVariable testId: String): ApiResponse<TestPaperDetail> {
-        val data = testService.getTestDetail(testId, currentUser())
+        val userId = currentUser()
+        requireStudent()
+        testService.verifyStudentTestAccess(testId, userId)
+        val data = testService.getTestDetail(testId, userId)
         return ApiResponse(success = true, data = data)
     }
 
     @GetMapping("/{testId}/pdf")
     fun pdf(@PathVariable testId: String): ResponseEntity<String> {
-        currentUser()
+        val userId = currentUser()
+        requireStudent()
+        testService.verifyStudentTestAccess(testId, userId)
         val paper = testPaperRepo.findById(testId).orElseThrow {
             ApiException("NOT_FOUND", "test not found", HttpStatus.NOT_FOUND)
         }
         if (paper.pdfFileId.isNullOrBlank()) {
             throw ApiException("NO_PDF", "시험지 PDF가 없습니다.", HttpStatus.NOT_FOUND)
         }
-        // Return the file ID — the frontend will fetch the actual file via the file service
         val headers = HttpHeaders()
         headers.set("Content-Disposition", "inline")
         headers.set("Cache-Control", "no-store")
@@ -66,7 +81,9 @@ class TestController(
 
     @GetMapping("/{testId}/questions")
     fun questions(@PathVariable testId: String): ApiResponse<List<TestQuestionStub>> {
-        currentUser()
+        val userId = currentUser()
+        requireStudent()
+        testService.verifyStudentTestAccess(testId, userId)
         val data = testService.getQuestionStubs(testId)
         return ApiResponse(success = true, data = data)
     }
@@ -77,6 +94,8 @@ class TestController(
         @RequestBody request: SubmitOmrRequest
     ): ApiResponse<Map<String, Any>> {
         val userId = currentUser()
+        requireStudent()
+        testService.verifyStudentTestAccess(testId, userId)
         val sub = testService.submitOmr(testId, userId, userId, request.answers)
         return ApiResponse(
             success = true,
@@ -90,13 +109,17 @@ class TestController(
 
     @GetMapping("/{testId}/report")
     fun report(@PathVariable testId: String): ApiResponse<TestReportResponse> {
-        val data = testService.getReport(testId, currentUser())
+        val userId = currentUser()
+        testService.verifyStudentTestAccess(testId, userId)
+        val data = testService.getReport(testId, userId)
         return ApiResponse(success = true, data = data)
     }
 
     @GetMapping("/{testId}/wrong-note")
     fun wrongNote(@PathVariable testId: String): ApiResponse<WrongNoteResponse> {
-        val data = testService.getWrongNote(testId, currentUser())
+        val userId = currentUser()
+        testService.verifyStudentTestAccess(testId, userId)
+        val data = testService.getWrongNote(testId, userId)
         return ApiResponse(success = true, data = data)
     }
 

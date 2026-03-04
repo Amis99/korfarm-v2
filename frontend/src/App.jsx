@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { ProtectedRoute, AdminRoute } from "./components/ProtectedRoute";
 
 // 핵심 페이지 (정적 import - 초기 로딩 필수)
 import LandingPage from "./pages/LandingPage";
@@ -57,6 +58,7 @@ const DuelMatchPage = lazy(() => import("./pages/DuelMatchPage"));
 const DuelResultPage = lazy(() => import("./pages/DuelResultPage"));
 const AssignmentsPage = lazy(() => import("./pages/AssignmentsPage"));
 const DiagnosticPrintPage = lazy(() => import("./pages/DiagnosticPrintPage"));
+const UnifiedReportPage = lazy(() => import("./pages/UnifiedReportPage"));
 
 // 관리자 페이지
 const AdminPage = lazy(() => import("./pages/AdminPage"));
@@ -115,85 +117,95 @@ function LoadingFallback() {
   );
 }
 
+/* 인증 필요 라우트를 간결하게 작성하기 위한 헬퍼 */
+const P = (page) => <ProtectedRoute>{page}</ProtectedRoute>;
+const A = (page) => <AdminRoute>{page}</AdminRoute>;
+
 function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <GlobalLogo />
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
+          {/* 공개 페이지 */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/reset" element={<ResetPage />} />
-          <Route path="/start" element={<StartPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/community" element={<CommunityPage />} />
-          <Route path="/community/post/:postId" element={<PostDetailPage />} />
-          <Route path="/community/new" element={<PostWritePage />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/shop/products/:productId" element={<ProductDetailPage />} />
-          <Route path="/payment/result" element={<PaymentResultPage />} />
-          <Route path="/subscription" element={<SubscriptionPage />} />
-          <Route path="/pending" element={<PendingApprovalPage />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/approvals" element={<AdminMembershipApprovalPage />} />
-          <Route path="/admin/orgs" element={<AdminOrgsPage />} />
-          <Route path="/admin/classes" element={<AdminClassesPage />} />
-          <Route path="/admin/students" element={<AdminStudentsPage />} />
-          <Route path="/admin/students/:userId" element={<AdminStudentDetailPage />} />
-          <Route path="/admin/content" element={<AdminContentPage />} />
-          <Route path="/admin/content/upload" element={<AdminContentUploadPage />} />
-          <Route path="/admin/content/preview" element={<AdminContentPreviewPage />} />
-          <Route path="/admin/assignments" element={<AdminAssignmentsPage />} />
-          <Route path="/admin/shop" element={<AdminShopPage />} />
+
+          {/* 인증 필요 페이지 */}
+          <Route path="/start" element={P(<StartPage />)} />
+          <Route path="/profile" element={P(<ProfilePage />)} />
+          <Route path="/pending" element={P(<PendingApprovalPage />)} />
+          <Route path="/community" element={P(<CommunityPage />)} />
+          <Route path="/community/post/:postId" element={P(<PostDetailPage />)} />
+          <Route path="/community/new" element={P(<PostWritePage />)} />
+          <Route path="/shop" element={P(<ShopPage />)} />
+          <Route path="/shop/products/:productId" element={P(<ProductDetailPage />)} />
+          <Route path="/payment/result" element={P(<PaymentResultPage />)} />
+          <Route path="/subscription" element={P(<SubscriptionPage />)} />
+          <Route path="/ranking" element={P(<RankingPage />)} />
+          <Route path="/parents/links" element={P(<ParentLinksPage />)} />
+          <Route path="/students/links/confirm" element={P(<StudentLinkConfirmPage />)} />
+          <Route path="/daily" element={P(<DailyLearningPage />)} />
+          <Route path="/daily-quiz" element={P(<DailyQuizPage />)} />
+          <Route path="/daily-reading" element={P(<DailyReadingPage />)} />
+          <Route path="/learning" element={P(<LearningHubPage />)} />
+          <Route path="/learning/:learningId" element={P(<LearningRunnerPage />)} />
+          <Route path="/pro-mode" element={P(<ProModePage />)} />
+          <Route path="/pro-mode/chapter/:chapterId" element={P(<ProChapterPage />)} />
+          <Route path="/pro-mode/chapter/:chapterId/test" element={P(<ProTestPage />)} />
+          <Route path="/farm-mode" element={P(<FarmModePage />)} />
+          <Route path="/farm-mode/:farmId" element={P(<FarmListPage />)} />
+          <Route path="/writing" element={P(<WritingPage />)} />
+          <Route path="/writing/post/:postId" element={P(<WisdomPostDetailPage />)} />
+          <Route path="/writing/:levelId/new" element={P(<WisdomWritePage />)} />
+          <Route path="/writing/:levelId" element={P(<WisdomBoardPage />)} />
+          <Route path="/tests" element={P(<TestStoragePage />)} />
+          <Route path="/tests/history" element={<TestsHistoryRedirect />} />
+          <Route path="/tests/:testId" element={P(<TestDetailPage />)} />
+          <Route path="/tests/:testId/omr" element={P(<TestOmrPage />)} />
+          <Route path="/tests/:testId/report" element={P(<TestReportPage />)} />
+          <Route path="/tests/:testId/wrong-note" element={P(<TestWrongNotePage />)} />
+          <Route path="/harvest-ledger" element={P(<HarvestLedgerPage />)} />
+          <Route path="/seed-log" element={<Navigate to="/tests?tab=history" replace />} />
+          <Route path="/duel" element={P(<DuelMainPage />)} />
+          <Route path="/duel/lobby/:serverId" element={P(<DuelLobbyPage />)} />
+          <Route path="/duel/room/:roomId" element={P(<DuelWaitingRoomPage />)} />
+          <Route path="/duel/match/:matchId" element={P(<DuelMatchPage />)} />
+          <Route path="/duel/result/:matchId" element={P(<DuelResultPage />)} />
+          <Route path="/report" element={P(<UnifiedReportPage />)} />
+          <Route path="/assignments" element={P(<AssignmentsPage />)} />
+          <Route path="/diagnostic/print" element={P(<DiagnosticPrintPage />)} />
+
+          {/* 관리자 전용 페이지 */}
+          <Route path="/admin" element={A(<AdminPage />)} />
+          <Route path="/admin/approvals" element={A(<AdminMembershipApprovalPage />)} />
+          <Route path="/admin/orgs" element={A(<AdminOrgsPage />)} />
+          <Route path="/admin/classes" element={A(<AdminClassesPage />)} />
+          <Route path="/admin/students" element={A(<AdminStudentsPage />)} />
+          <Route path="/admin/students/:userId" element={A(<AdminStudentDetailPage />)} />
+          <Route path="/admin/content" element={A(<AdminContentPage />)} />
+          <Route path="/admin/content/upload" element={A(<AdminContentUploadPage />)} />
+          <Route path="/admin/content/preview" element={A(<AdminContentPreviewPage />)} />
+          <Route path="/admin/assignments" element={A(<AdminAssignmentsPage />)} />
+          <Route path="/admin/shop" element={A(<AdminShopPage />)} />
           <Route path="/admin/shop/products" element={<Navigate to="/admin/shop?tab=products" replace />} />
           <Route path="/admin/shop/orders" element={<Navigate to="/admin/shop?tab=orders" replace />} />
-          <Route path="/admin/duel" element={<AdminDuelPage />} />
+          <Route path="/admin/duel" element={A(<AdminDuelPage />)} />
           <Route path="/admin/seasons" element={<Navigate to="/admin/duel?tab=seasons" replace />} />
           <Route path="/admin/payments" element={<Navigate to="/admin/orgs?tab=payments" replace />} />
-          <Route path="/admin/parents" element={<AdminParentLinksPage />} />
-          <Route path="/admin/reports" element={<AdminReportsPage />} />
-          <Route path="/admin/flags" element={<AdminFlagsPage />} />
-          <Route path="/diagnostic/print" element={<DiagnosticPrintPage />} />
-
-          <Route path="/ranking" element={<RankingPage />} />
-          <Route path="/parents/links" element={<ParentLinksPage />} />
-          <Route path="/students/links/confirm" element={<StudentLinkConfirmPage />} />
-          <Route path="/daily" element={<DailyLearningPage />} />
-          <Route path="/daily-quiz" element={<DailyQuizPage />} />
-          <Route path="/daily-reading" element={<DailyReadingPage />} />
-          <Route path="/learning" element={<LearningHubPage />} />
-          <Route path="/learning/:learningId" element={<LearningRunnerPage />} />
-          <Route path="/pro-mode" element={<ProModePage />} />
-          <Route path="/pro-mode/chapter/:chapterId" element={<ProChapterPage />} />
-          <Route path="/pro-mode/chapter/:chapterId/test" element={<ProTestPage />} />
-          <Route path="/farm-mode" element={<FarmModePage />} />
-          <Route path="/farm-mode/:farmId" element={<FarmListPage />} />
-          <Route path="/writing" element={<WritingPage />} />
-          <Route path="/writing/post/:postId" element={<WisdomPostDetailPage />} />
-          <Route path="/writing/:levelId/new" element={<WisdomWritePage />} />
-          <Route path="/writing/:levelId" element={<WisdomBoardPage />} />
-          <Route path="/admin/wisdom" element={<AdminWisdomPage />} />
-          <Route path="/admin/wisdom/:postId" element={<AdminWisdomDetailPage />} />
-          <Route path="/tests" element={<TestStoragePage />} />
-          <Route path="/tests/history" element={<TestsHistoryRedirect />} />
-          <Route path="/tests/:testId" element={<TestDetailPage />} />
-          <Route path="/tests/:testId/omr" element={<TestOmrPage />} />
-          <Route path="/tests/:testId/report" element={<TestReportPage />} />
-          <Route path="/tests/:testId/wrong-note" element={<TestWrongNotePage />} />
-          <Route path="/admin/tests" element={<AdminTestPage />} />
-          <Route path="/admin/tests/:testId" element={<AdminTestDetailPage />} />
-          <Route path="/admin/pro" element={<AdminProPage />} />
+          <Route path="/admin/parents" element={A(<AdminParentLinksPage />)} />
+          <Route path="/admin/reports" element={A(<AdminReportsPage />)} />
+          <Route path="/admin/flags" element={A(<AdminFlagsPage />)} />
+          <Route path="/admin/wisdom" element={A(<AdminWisdomPage />)} />
+          <Route path="/admin/wisdom/:postId" element={A(<AdminWisdomDetailPage />)} />
+          <Route path="/admin/tests" element={A(<AdminTestPage />)} />
+          <Route path="/admin/tests/:testId" element={A(<AdminTestDetailPage />)} />
+          <Route path="/admin/pro" element={A(<AdminProPage />)} />
           <Route path="/admin/duel/questions" element={<Navigate to="/admin/duel?tab=questions" replace />} />
-          <Route path="/harvest-ledger" element={<HarvestLedgerPage />} />
-          <Route path="/seed-log" element={<Navigate to="/tests?tab=history" replace />} />
-          <Route path="/duel" element={<DuelMainPage />} />
-          <Route path="/duel/lobby/:serverId" element={<DuelLobbyPage />} />
-          <Route path="/duel/room/:roomId" element={<DuelWaitingRoomPage />} />
-          <Route path="/duel/match/:matchId" element={<DuelMatchPage />} />
-          <Route path="/duel/result/:matchId" element={<DuelResultPage />} />
-          <Route path="/assignments" element={<AssignmentsPage />} />
-          <Route path="/ops" element={<OpsStation />} />
+          <Route path="/ops" element={A(<OpsStation />)} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

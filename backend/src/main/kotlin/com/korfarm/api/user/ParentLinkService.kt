@@ -8,7 +8,9 @@ import com.korfarm.api.learning.FarmHistoryResponse
 import com.korfarm.api.learning.FarmLearningService
 import com.korfarm.api.test.TestHistoryItem
 import com.korfarm.api.test.TestPaperSummary
+import com.korfarm.api.test.TestReportResponse
 import com.korfarm.api.test.TestService
+import com.korfarm.api.test.WrongNoteResponse
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -327,5 +329,31 @@ class ParentLinkService(
             throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
         }
         return testService.getHistory(studentUserId)
+    }
+
+    /**
+     * 부모가 자녀의 시험 성적표 조회
+     */
+    @Transactional(readOnly = true)
+    fun getChildTestReport(parentUserId: String, studentUserId: String, testId: String): TestReportResponse {
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, studentUserId)
+            ?: throw ApiException("NOT_LINKED", "자녀와 연결되어 있지 않습니다", HttpStatus.FORBIDDEN)
+        if (link.status != "active") {
+            throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
+        }
+        return testService.getReport(testId, studentUserId)
+    }
+
+    /**
+     * 부모가 자녀의 시험 오답 노트 조회
+     */
+    @Transactional(readOnly = true)
+    fun getChildTestWrongNote(parentUserId: String, studentUserId: String, testId: String): WrongNoteResponse {
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, studentUserId)
+            ?: throw ApiException("NOT_LINKED", "자녀와 연결되어 있지 않습니다", HttpStatus.FORBIDDEN)
+        if (link.status != "active") {
+            throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
+        }
+        return testService.getWrongNote(testId, studentUserId)
     }
 }

@@ -19,13 +19,6 @@ class LearningController(
     private val learningService: LearningService,
     private val featureFlagService: FeatureFlagService
 ) {
-    @GetMapping("/daily-quiz")
-    fun dailyQuiz(): ApiResponse<DailyQuizContent> {
-        val userId = SecurityUtils.currentUserId()
-        featureFlagService.requireEnabled("feature.free.daily_quiz", userId)
-        return ApiResponse(success = true, data = learningService.getDailyQuiz())
-    }
-
     @PostMapping("/daily-quiz/submit")
     fun submitDailyQuiz(@Valid @RequestBody request: SubmitRequest): ApiResponse<SubmitResult> {
         val userId = SecurityUtils.currentUserId()
@@ -33,13 +26,6 @@ class LearningController(
         featureFlagService.requireEnabled("feature.free.daily_quiz", userId)
         val result = learningService.submit(userId, "daily_quiz", request.contentId ?: "dq_today", request)
         return ApiResponse(success = true, data = result)
-    }
-
-    @GetMapping("/daily-reading")
-    fun dailyReading(): ApiResponse<DailyReadingContent> {
-        val userId = SecurityUtils.currentUserId()
-        featureFlagService.requireEnabled("feature.free.daily_reading", userId)
-        return ApiResponse(success = true, data = learningService.getDailyReading())
     }
 
     @PostMapping("/daily-reading/submit")

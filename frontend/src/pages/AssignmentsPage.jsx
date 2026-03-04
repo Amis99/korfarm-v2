@@ -84,7 +84,7 @@ function AssignmentsPage() {
       const firstContentId = assignment.payload.contentIds[0];
       const learning = getLearningById(firstContentId);
       if (learning) {
-        navigate(`/learn/${learning.id}?assignmentId=${id}`);
+        navigate(`/learning/${learning.id}?assignmentId=${id}`);
         return;
       }
     }
@@ -96,7 +96,7 @@ function AssignmentsPage() {
         if (contentIds?.length > 0) {
           const learning = getLearningById(contentIds[0]);
           if (learning) {
-            navigate(`/learn/${learning.id}?assignmentId=${id}`);
+            navigate(`/learning/${learning.id}?assignmentId=${id}`);
             return;
           }
         }

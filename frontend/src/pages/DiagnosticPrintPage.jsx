@@ -121,8 +121,11 @@ function DiagnosticPrintPage() {
                   <button
                     key={key}
                     className={`diag-level-card ${done ? "done" : ""}`}
-                    disabled={done}
-                    onClick={() => handleSelectTest(test)}
+                    onClick={() =>
+                      done
+                        ? navigate(`/tests/${test.testId}/report?from=diagnostic`)
+                        : handleSelectTest(test)
+                    }
                   >
                     <span className="material-symbols-outlined diag-level-icon">
                       {info.icon}
@@ -134,7 +137,7 @@ function DiagnosticPrintPage() {
                     </div>
                     {done && (
                       <span className="diag-level-badge">
-                        응시 완료 ({test.score}점)
+                        응시 완료 ({test.score}점) · 성적표 보기
                       </span>
                     )}
                   </button>

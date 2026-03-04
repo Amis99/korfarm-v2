@@ -1,8 +1,14 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, lazy, Suspense } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
+
+const ReportSummaryCards = lazy(() => import("../components/report/ReportSummaryCards"));
+const ReportRadarChart = lazy(() => import("../components/report/ReportRadarChart"));
+const ReportTrendChart = lazy(() => import("../components/report/ReportTrendChart"));
+const ReportSectionDetail = lazy(() => import("../components/report/ReportSectionDetail"));
+import "../styles/unified-report.css";
 
 const SEED_LABELS = { seed_wheat: "밀", seed_rice: "쌀", seed_corn: "옥수수", seed_grape: "포도", seed_apple: "사과" };
 const CROP_LABELS = { crop_wheat: "밀", crop_rice: "쌀", crop_corn: "옥수수", crop_grape: "포도", crop_apple: "사과" };
@@ -20,6 +26,7 @@ const TABS = [
   { key: "tests", label: "테스트 성적" },
   { key: "inventory", label: "인벤토리" },
   { key: "duel", label: "대결 전적" },
+  { key: "report", label: "통합 성적표" },
 ];
 
 const contentTypeLabel = (t) => {
@@ -54,6 +61,15 @@ function AdminStudentDetailPage() {
   const [grantLoading, setGrantLoading] = useState(false);
   const [grantError, setGrantError] = useState("");
   const [grantSuccess, setGrantSuccess] = useState("");
+  // 통합 성적표 상태
+  const [reportData, setReportData] = useState(null);
+  const [loadingReport, setLoadingReport] = useState(false);
+  const [reportLoaded, setReportLoaded] = useState(false);
+  const [reportStartDate, setReportStartDate] = useState(() => {
+    const d = new Date(); d.setMonth(d.getMonth() - 1);
+    return d.toISOString().slice(0, 10);
+  });
+  const [reportEndDate, setReportEndDate] = useState(() => new Date().toISOString().slice(0, 10));
 
   useEffect(() => {
     setLoadingInfo(true);
@@ -97,6 +113,9 @@ function AdminStudentDetailPage() {
         .catch(() => setDuelStats({ wins: 0, losses: 0, winRate: 0, currentStreak: 0, bestStreak: 0, forfeitLosses: 0 }))
         .finally(() => { setLoadingDuel(false); setDuelLoaded(true); });
     }
+    if (tab === "report" && !reportLoaded) {
+      fetchReport();
+    }
   }, [tab, userId]);
 
   const seasonScore = useMemo(() => {
@@ -111,6 +130,16 @@ function AdminStudentDetailPage() {
     const ca = crops.crop_apple ?? 0;
     return (cw * cr * cc * cg * ca) * 50 + totalSeeds;
   }, [inventory]);
+
+  const fetchReport = (sd, ed) => {
+    setLoadingReport(true);
+    const s = sd || reportStartDate;
+    const e = ed || reportEndDate;
+    apiGet(`/v1/admin/students/${userId}/report/unified?startDate=${s}&endDate=${e}`)
+      .then(setReportData)
+      .catch(() => setReportData(null))
+      .finally(() => { setLoadingReport(false); setReportLoaded(true); });
+  };
 
   const handleGrant = async (mode) => {
     setGrantError(""); setGrantSuccess("");
@@ -335,6 +364,30 @@ function AdminStudentDetailPage() {
                   <div style={{ fontSize: 28, fontWeight: 700 }}>{duelStats.forfeitLosses}</div>
                 </div>
               </div>
+            )}
+          </div>
+        )}
+
+        {tab === "report" && (
+          <div>
+            <div className="ur-date-bar" style={{ marginBottom: 16 }}>
+              <label>기간</label>
+              <input type="date" value={reportStartDate} onChange={(e) => setReportStartDate(e.target.value)} />
+              <span>~</span>
+              <input type="date" value={reportEndDate} onChange={(e) => setReportEndDate(e.target.value)} />
+              <button className="ur-btn" onClick={() => { setReportLoaded(false); fetchReport(reportStartDate, reportEndDate); }}>조회</button>
+            </div>
+            {loadingReport && <p className="admin-detail-note">로딩 중...</p>}
+            {!loadingReport && !reportData && reportLoaded && <p className="admin-detail-note">성적 데이터가 없습니다.</p>}
+            {!loadingReport && reportData && (
+              <Suspense fallback={<p className="admin-detail-note">차트 로딩 중...</p>}>
+                <ReportSummaryCards summary={reportData.summary} />
+                <div className="ur-charts-row">
+                  <ReportRadarChart radarData={reportData.radarData} />
+                  <ReportTrendChart trend={reportData.trend} />
+                </div>
+                <ReportSectionDetail sections={reportData.sections} />
+              </Suspense>
             )}
           </div>
         )}

@@ -27,7 +27,7 @@ function WordFormationModule({ content }) {
     if (inMerge) {
       const question = mergeQuestions[mergeIndex];
       const correct = choiceId === question.answer;
-      adjustTime(correct ? 20 : -20);
+      adjustTime(correct ? 20 : -40);
       recordAnswer({ id: `merge-${mergeIndex}`, correct });
       setLastResult(correct ? "correct" : "wrong");
       if (resultTimerRef.current) {
@@ -56,7 +56,7 @@ function WordFormationModule({ content }) {
     } else {
       correct = choiceId === step.answer;
     }
-    const delta = correct ? step.delta?.correct || 20 : step.delta?.wrong || -20;
+    const delta = correct ? step.delta?.correct || 20 : step.delta?.wrong || -40;
     adjustTime(delta);
     recordAnswer({ id: `${item.word}-${step.type}-${step.index ?? stepIndex}`, correct });
     setLastResult(correct ? "correct" : "wrong");

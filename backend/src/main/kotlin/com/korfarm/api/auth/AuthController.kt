@@ -94,10 +94,8 @@ class AuthController(
     fun requestPasswordReset(@RequestBody body: Map<String, String>): ApiResponse<Map<String, String>> {
         val loginId = body["loginId"]
             ?: throw ApiException("BAD_REQUEST", "loginId 필수", HttpStatus.BAD_REQUEST)
-        val exists = userRepository.existsByEmail(loginId)
-        if (!exists) {
-            throw ApiException("NOT_FOUND", "해당 아이디를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
-        }
+        // 계정 존재 여부와 무관하게 동일한 응답 반환 (계정 열거 공격 방지)
+        userRepository.existsByEmail(loginId)
         return ApiResponse(success = true, data = mapOf(
             "message" to "비밀번호 초기화 요청이 접수되었습니다. 선생님 또는 관리자에게 문의하세요."
         ))

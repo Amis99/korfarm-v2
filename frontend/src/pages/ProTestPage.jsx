@@ -208,7 +208,7 @@ function ProTestPage() {
       <div className="pro-body">
         <div className="pro-test-container">
           {error && (
-            <p style={{ color: "#ef4444", textAlign: "center", marginBottom: 16 }}>{error}</p>
+            <p className="pro-test-error">{error}</p>
           )}
 
           {/* ── ready 단계 ── */}
@@ -229,7 +229,7 @@ function ProTestPage() {
                   <div className="value">{testStatus?.remainingVersions ?? "?"}</div>
                 </div>
               </div>
-              <p style={{ fontSize: 13, color: "#64748b", marginBottom: 20 }}>
+              <p className="pro-test-hint">
                 인쇄 버튼을 누르면 시험지가 출력되고 1시간 카운트다운이 시작됩니다.
               </p>
               <button className="pro-test-btn primary" onClick={handlePrint}>
@@ -238,15 +238,12 @@ function ProTestPage() {
               </button>
 
               {testStatus?.history?.length > 0 && (
-                <div style={{ marginTop: 32 }}>
-                  <h4 style={{ fontSize: 14, color: "#64748b", marginBottom: 8 }}>응시 기록</h4>
+                <div className="pro-test-history">
+                  <h4 className="pro-test-history-title">응시 기록</h4>
                   {testStatus.history.map(h => (
-                    <div key={h.sessionId} style={{
-                      display: "flex", justifyContent: "space-between", alignItems: "center",
-                      padding: "8px 12px", background: "#f8fafc", borderRadius: 8, marginBottom: 6, fontSize: 13
-                    }}>
+                    <div key={h.sessionId} className="pro-test-history-row">
                       <span>버전 {h.version}</span>
-                      <span style={{ color: h.status === "passed" ? "#22c55e" : h.status === "failed" ? "#ef4444" : "#94a3b8" }}>
+                      <span className={h.status === "passed" ? "pro-test-history-passed" : h.status === "failed" ? "pro-test-history-failed" : "pro-test-history-expired"}>
                         {h.status === "passed" ? "통과" : h.status === "failed" ? "불합격" : h.status === "expired" ? "만료" : h.status}
                         {h.score != null && ` (${h.score}점)`}
                       </span>
@@ -265,7 +262,7 @@ function ProTestPage() {
                 {formatTime(remainingSec)}
               </div>
               <p className="pro-test-timer-label">남은 시간</p>
-              <p style={{ fontSize: 13, color: "#64748b", marginBottom: 20 }}>
+              <p className="pro-test-hint">
                 시험지를 풀고 OMR 작성 버튼을 눌러 답안을 입력하세요.
               </p>
               <button className="pro-test-btn primary" onClick={handleStartOmr}>
@@ -278,14 +275,14 @@ function ProTestPage() {
           {/* ── omr_input 단계 ── */}
           {phase === "omr_input" && (
             <>
-              <div style={{ textAlign: "center", marginBottom: 16 }}>
+              <div className="pro-test-omr-header">
                 <div className={`pro-test-timer ${remainingSec < 300 ? "warning" : ""}`}>
                   {formatTime(remainingSec)}
                 </div>
                 <p className="pro-test-timer-label">남은 시간</p>
               </div>
 
-              <div className="ts-omr-status" style={{ marginBottom: 12 }}>
+              <div className="ts-omr-status pro-test-omr-status">
                 <span>{Object.keys(answers).length} / {questions.length} 응답</span>
               </div>
 
@@ -334,7 +331,7 @@ function ProTestPage() {
                 })()}
               </div>
 
-              <div style={{ textAlign: "center", marginTop: 24 }}>
+              <div className="pro-test-submit-area">
                 <button
                   className="pro-test-btn primary"
                   onClick={handleSubmit}
@@ -349,7 +346,7 @@ function ProTestPage() {
           {/* ── result 단계 ── */}
           {phase === "result" && result && (
             <div className={`pro-result-card ${result.passed ? "passed" : "failed"}`}>
-              <span className="material-symbols-outlined" style={{ fontSize: 48 }}>
+              <span className="material-symbols-outlined pro-result-icon">
                 {result.passed ? "emoji_events" : "sentiment_dissatisfied"}
               </span>
               {result.score > 0 && (

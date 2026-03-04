@@ -10,6 +10,13 @@ interface LearningAttemptRepository : JpaRepository<LearningAttemptEntity, Strin
         start: LocalDateTime,
         end: LocalDateTime
     ): Boolean
+
+    fun findByUserIdAndActivityTypeAndSubmittedAtBetween(
+        userId: String,
+        activityType: String,
+        start: LocalDateTime,
+        end: LocalDateTime
+    ): List<LearningAttemptEntity>
 }
 
 interface LearningStreakRepository : JpaRepository<LearningStreakEntity, String> {

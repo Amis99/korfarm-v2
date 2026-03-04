@@ -21,7 +21,7 @@ export function useAuth() {
   }, [token]);
 
   const roles = user?.roles || [];
-  const isPremium = roles.includes("PAID") || roles.includes("ADMIN") || roles.includes("PREMIUM");
+  const isPremium = roles.includes("HQ_ADMIN") || roles.includes("ORG_ADMIN") || roles.includes("PAID") || roles.includes("PREMIUM");
 
   return { isLoggedIn, user, token, isPremium };
 }

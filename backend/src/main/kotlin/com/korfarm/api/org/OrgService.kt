@@ -52,13 +52,17 @@ class OrgService(
 
     @Transactional(readOnly = true)
     fun listOrgsAdmin(): List<AdminOrgView> {
-        val userMap = userRepository.findAll().associateBy { it.id }
         val adminMemberships = orgMembershipRepository.findByStatus("active")
             .filter { it.role == "HQ_ADMIN" || it.role == "ORG_ADMIN" }
-            .groupBy { it.orgId }
+        // 관리자 사용자만 조회 (전체 사용자 로드 방지)
+        val adminUserIds = adminMemberships.map { it.userId }.distinct()
+        val userMap = if (adminUserIds.isNotEmpty()) {
+            userRepository.findAllById(adminUserIds).associateBy { it.id }
+        } else emptyMap()
+        val membershipsByOrg = adminMemberships.groupBy { it.orgId }
         // org_hq(국어농장)를 맨 위로, 나머지는 이름순 정렬
         return orgRepository.findAll().sortedWith(compareBy({ if (it.id == "org_hq") 0 else 1 }, { it.name })).map { org ->
-            val admins = (adminMemberships[org.id] ?: emptyList()).mapNotNull { m ->
+            val admins = (membershipsByOrg[org.id] ?: emptyList()).mapNotNull { m ->
                 val u = userMap[m.userId] ?: return@mapNotNull null
                 AdminOrgAdminView(
                     userId = u.id,
@@ -84,8 +88,12 @@ class OrgService(
 
     @Transactional(readOnly = true)
     fun listClassesAdmin(): List<AdminClassView> {
-        val orgMap = orgRepository.findAll().associateBy { it.id }
-        return classRepository.findAll().sortedBy { it.name }.map { classEntity ->
+        val classes = classRepository.findAll()
+        val orgIds = classes.map { it.orgId }.distinct()
+        val orgMap = if (orgIds.isNotEmpty()) {
+            orgRepository.findAllById(orgIds).associateBy { it.id }
+        } else emptyMap()
+        return classes.sortedBy { it.name }.map { classEntity ->
             val orgName = orgMap[classEntity.orgId]?.name
             val seatCount = classMembershipRepository.countByClassIdAndStatus(classEntity.id, "active")
             AdminClassView(

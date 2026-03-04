@@ -1,0 +1,58 @@
+export const LEVEL_FOLDER_MAP = {
+  saussure1: "saussure1",
+  saussure2: "saussure2",
+  saussure3: "saussure3",
+  frege1: "frege1",
+  frege2: "frege2",
+  frege3: "frege3",
+  russell1: "russell1",
+  russell2: "russell2",
+  russell3: "russell3",
+  wittgenstein1: "wittgenstein1",
+  wittgenstein2: "wittgenstein2",
+  wittgenstein3: "wittgenstein3",
+};
+
+export const GRADE_TO_LEVEL = {
+  "초1": "saussure1",
+  "초2": "saussure2",
+  "초3": "saussure3",
+  "초4": "frege1",
+  "초5": "frege2",
+  "초6": "frege3",
+  "중1": "russell1",
+  "중2": "russell2",
+  "중3": "russell3",
+  "고1": "wittgenstein1",
+  "고2": "wittgenstein2",
+  "고3": "wittgenstein3",
+  "1": "saussure1",
+  "2": "saussure2",
+  "3": "saussure3",
+  "4": "frege1",
+  "5": "frege2",
+  "6": "frege3",
+  "7": "russell1",
+  "8": "russell2",
+  "9": "russell3",
+  "10": "wittgenstein1",
+  "11": "wittgenstein2",
+  "12": "wittgenstein3",
+};
+
+export const LEVEL_LABELS = {
+  saussure1: "소쉬르 1",
+  saussure2: "소쉬르 2",
+  saussure3: "소쉬르 3",
+  frege1: "프레게 1",
+  frege2: "프레게 2",
+  frege3: "프레게 3",
+  russell1: "러셀 1",
+  russell2: "러셀 2",
+  russell3: "러셀 3",
+  wittgenstein1: "비트겐슈타인 1",
+  wittgenstein2: "비트겐슈타인 2",
+  wittgenstein3: "비트겐슈타인 3",
+};
+
+export const ALL_LEVEL_IDS = Object.keys(LEVEL_FOLDER_MAP);

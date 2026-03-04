@@ -11,12 +11,35 @@ const authHeaders = () => {
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
+// 401 응답 시 토큰 삭제 + 로그인 페이지 리다이렉트
+const handle401 = (path) => {
+  // 로그인/회원가입 관련 요청에서는 리다이렉트하지 않음
+  const authPaths = ["/v1/auth/login", "/v1/auth/signup", "/v1/auth/request-password-reset"];
+  if (authPaths.some((p) => path.includes(p))) return;
+  localStorage.removeItem(TOKEN_KEY);
+  window.location.href = import.meta.env.BASE_URL + "login";
+};
+
+const parseError = async (response, method, path) => {
+  if (response.status === 401) {
+    handle401(path);
+  }
+  try {
+    const payload = await response.json();
+    if (payload?.error?.message) return payload.error.message;
+    if (payload?.message) return payload.message;
+  } catch {
+    // JSON 파싱 실패 시 기본 메시지
+  }
+  return `${method} ${path} 요청 실패: ${response.status}`;
+};
+
 export const apiGet = async (path) => {
   const response = await fetch(buildUrl(path), {
     headers: authHeaders(),
   });
   if (!response.ok) {
-    throw new Error(`GET ${path} failed: ${response.status}`);
+    throw new Error(await parseError(response, "GET", path));
   }
   const payload = await response.json();
   return payload?.data ?? payload;
@@ -32,7 +55,7 @@ export const apiPost = async (path, body) => {
     body: body ? JSON.stringify(body) : "{}",
   });
   if (!response.ok) {
-    throw new Error(`POST ${path} failed: ${response.status}`);
+    throw new Error(await parseError(response, "POST", path));
   }
   const payload = await response.json();
   return payload?.data ?? payload;
@@ -44,7 +67,7 @@ export const apiDelete = async (path) => {
     headers: authHeaders(),
   });
   if (!response.ok) {
-    throw new Error(`DELETE ${path} failed: ${response.status}`);
+    throw new Error(await parseError(response, "DELETE", path));
   }
   const payload = await response.json();
   return payload?.data ?? payload;
@@ -60,7 +83,7 @@ export const apiPut = async (path, body) => {
     body: body ? JSON.stringify(body) : "{}",
   });
   if (!response.ok) {
-    throw new Error(`PUT ${path} failed: ${response.status}`);
+    throw new Error(await parseError(response, "PUT", path));
   }
   const payload = await response.json();
   return payload?.data ?? payload;

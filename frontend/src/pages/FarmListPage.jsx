@@ -169,7 +169,7 @@ function FarmListPage() {
         <div className="farm-empty">
           <div className="farm-empty-icon">🔍</div>
           <p>존재하지 않는 농장입니다.</p>
-          <Link to="/farm-mode" style={{ color: "#ff8f2b", fontWeight: 700, marginTop: 8, display: "inline-block" }}>
+          <Link to="/farm-mode" className="farm-empty-back">
             농장 목록으로 돌아가기
           </Link>
         </div>
@@ -345,32 +345,32 @@ function FarmListPage() {
 
       {progressModal && (
         <div className="result-overlay" onClick={() => setProgressModal(null)}>
-          <div className="result-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 420, padding: 24 }}>
-            <h3 style={{ marginBottom: 12 }}>{progressModal.title}</h3>
+          <div className="result-card farm-progress-card" onClick={(e) => e.stopPropagation()}>
+            <h3 className="farm-progress-title">{progressModal.title}</h3>
             {pageProgressLoading ? (
-              <p style={{ color: "#888" }}>불러오는 중...</p>
+              <p className="farm-progress-loading">불러오는 중...</p>
             ) : pageProgress ? (
               <>
-                <p style={{ marginBottom: 8 }}>
+                <p className="farm-progress-page-count">
                   {pageProgress.lastCompletedPage || 0} 페이지 완료
                 </p>
-                <div className="progress-bar" style={{ marginBottom: 16 }}>
+                <div className="progress-bar farm-progress-bar">
                   <div
                     className="progress-bar-fill"
                     style={{ width: `${Math.min(100, ((pageProgress.lastCompletedPage || 0) / (pageProgress.pageResults?.length || 1)) * 100)}%` }}
                   />
                 </div>
                 {pageProgress.pageResults?.length > 0 && (
-                  <div style={{ maxHeight: 200, overflow: "auto", marginBottom: 16 }}>
+                  <div className="farm-progress-results">
                     {pageProgress.pageResults.map((r) => (
-                      <div key={r.pageNo} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", borderBottom: "1px solid #eee", fontSize: 14 }}>
+                      <div key={r.pageNo} className="farm-progress-row">
                         <span>{r.pageNo}페이지</span>
                         <span>정확도 {r.accuracy}% · 씨앗 {r.earnedSeed}</span>
                       </div>
                     ))}
                   </div>
                 )}
-                <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+                <div className="farm-progress-actions">
                   <button
                     type="button"
                     className="start-btn-secondary"
@@ -394,7 +394,7 @@ function FarmListPage() {
                 </div>
               </>
             ) : (
-              <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+              <div className="farm-progress-actions">
                 <button
                   type="button"
                   className="start-btn-primary"

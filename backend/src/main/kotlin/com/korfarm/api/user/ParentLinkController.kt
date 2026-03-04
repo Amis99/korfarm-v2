@@ -7,6 +7,8 @@ import com.korfarm.api.economy.LedgerEntry
 import com.korfarm.api.learning.FarmHistoryResponse
 import com.korfarm.api.test.TestHistoryItem
 import com.korfarm.api.test.TestPaperSummary
+import com.korfarm.api.test.TestReportResponse
+import com.korfarm.api.test.WrongNoteResponse
 import com.korfarm.api.security.AdminGuard
 import com.korfarm.api.security.SecurityUtils
 import jakarta.validation.Valid
@@ -178,6 +180,40 @@ class ParentLinkController(
             throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
         }
         val data = parentLinkService.getChildTestHistory(userId, studentId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    /**
+     * 부모가 연결된 자녀의 시험 성적표 조회
+     */
+    @GetMapping("/parents/children/{studentId}/test-storage/{testId}/report")
+    fun getChildTestReport(
+        @PathVariable studentId: String,
+        @PathVariable testId: String
+    ): ApiResponse<TestReportResponse> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildTestReport(userId, studentId, testId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    /**
+     * 부모가 연결된 자녀의 시험 오답 노트 조회
+     */
+    @GetMapping("/parents/children/{studentId}/test-storage/{testId}/wrong-note")
+    fun getChildTestWrongNote(
+        @PathVariable studentId: String,
+        @PathVariable testId: String
+    ): ApiResponse<WrongNoteResponse> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildTestWrongNote(userId, studentId, testId)
         return ApiResponse(success = true, data = data)
     }
 }

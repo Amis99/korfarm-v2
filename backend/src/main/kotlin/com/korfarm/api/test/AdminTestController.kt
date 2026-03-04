@@ -30,14 +30,14 @@ class AdminTestController(
     @GetMapping
     fun list(): ApiResponse<List<TestPaperSummary>> {
         requireAdmin()
-        val data = testService.listAllTests()
+        val data = testService.listAllTests(currentUser())
         return ApiResponse(success = true, data = data)
     }
 
     @PostMapping
     fun create(@RequestBody request: CreateTestRequest): ApiResponse<Map<String, String>> {
         requireAdmin()
-        val entity = testService.createTest(request)
+        val entity = testService.createTest(request, currentUser())
         return ApiResponse(success = true, data = mapOf("testId" to entity.id))
     }
 
@@ -47,6 +47,7 @@ class AdminTestController(
         @RequestBody request: UpdateTestRequest
     ): ApiResponse<Map<String, String>> {
         requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
         val entity = testService.updateTest(testId, request)
         return ApiResponse(success = true, data = mapOf("testId" to entity.id))
     }
@@ -54,6 +55,7 @@ class AdminTestController(
     @DeleteMapping("/{testId}")
     fun delete(@PathVariable testId: String): ApiResponse<Map<String, String>> {
         requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
         testService.deleteTest(testId)
         return ApiResponse(success = true, data = mapOf("testId" to testId))
     }
@@ -64,6 +66,7 @@ class AdminTestController(
         @RequestBody body: Map<String, String>
     ): ApiResponse<Map<String, String>> {
         requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
         val fileId = body["fileId"]
             ?: throw ApiException("BAD_REQUEST", "fileId is required", HttpStatus.BAD_REQUEST)
         val entity = testService.setPdfFileId(testId, fileId)
@@ -73,6 +76,7 @@ class AdminTestController(
     @GetMapping("/{testId}")
     fun getTestPaper(@PathVariable testId: String): ApiResponse<TestPaperEntity> {
         requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
         val entity = testService.getTestPaper(testId)
         return ApiResponse(success = true, data = entity)
     }
@@ -80,6 +84,7 @@ class AdminTestController(
     @GetMapping("/{testId}/questions")
     fun getQuestions(@PathVariable testId: String): ApiResponse<List<TestQuestionView>> {
         requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
         val data = testService.getQuestions(testId)
         return ApiResponse(success = true, data = data)
     }
@@ -90,6 +95,7 @@ class AdminTestController(
         @RequestBody request: SetQuestionsRequest
     ): ApiResponse<Map<String, Any>> {
         requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
         testService.setQuestions(testId, request.questions)
         return ApiResponse(success = true, data = mapOf("count" to request.questions.size))
     }
@@ -97,6 +103,7 @@ class AdminTestController(
     @GetMapping("/{testId}/submissions")
     fun getSubmissions(@PathVariable testId: String): ApiResponse<List<SubmissionSummary>> {
         requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
         val data = testService.getSubmissions(testId)
         return ApiResponse(success = true, data = data)
     }
@@ -108,6 +115,7 @@ class AdminTestController(
     ): ApiResponse<Map<String, Any>> {
         requireAdmin()
         val adminId = currentUser()
+        testService.verifyAdminTestAccess(testId, adminId)
         val studentId = request.userId
             ?: throw ApiException("BAD_REQUEST", "userId is required for proxy submission", HttpStatus.BAD_REQUEST)
         val sub = testService.submitOmr(testId, studentId, adminId, request.answers)
@@ -124,7 +132,9 @@ class AdminTestController(
     @GetMapping("/{testId}/students")
     fun getStudents(@PathVariable testId: String): ApiResponse<List<StudentForTest>> {
         requireAdmin()
-        val data = testService.getStudentsForTest(testId)
+        val userId = currentUser()
+        testService.verifyAdminTestAccess(testId, userId)
+        val data = testService.getStudentsForTest(testId, userId)
         return ApiResponse(success = true, data = data)
     }
 
@@ -135,6 +145,7 @@ class AdminTestController(
         @PathVariable userId: String
     ): ApiResponse<TestReportResponse> {
         requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
         val data = testService.getReport(testId, userId)
         return ApiResponse(success = true, data = data)
     }
@@ -146,6 +157,7 @@ class AdminTestController(
         @PathVariable userId: String
     ): ApiResponse<WrongNoteResponse> {
         requireAdmin()
+        testService.verifyAdminTestAccess(testId, currentUser())
         val data = testService.getWrongNote(testId, userId)
         return ApiResponse(success = true, data = data)
     }

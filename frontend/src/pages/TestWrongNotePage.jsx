@@ -11,6 +11,7 @@ function TestWrongNotePage() {
   const { testId } = useParams();
   const [searchParams] = useSearchParams();
   const studentId = searchParams.get("studentId");
+  const fromDiagnostic = searchParams.get("from") === "diagnostic";
   const { isLoggedIn, user } = useAuth();
   const navigate = useNavigate();
   const [data, setData] = useState(null);
@@ -33,7 +34,7 @@ function TestWrongNotePage() {
     }
     fetchFn()
       .then(setData)
-      .catch(() => navigate(studentId ? `/admin/tests/${testId}` : `/tests/${testId}`))
+      .catch(() => navigate(studentId ? `/admin/tests/${testId}` : fromDiagnostic ? "/diagnostic/print" : `/tests/${testId}`))
       .finally(() => setLoading(false));
   }, [isLoggedIn, testId, studentId, navigate, isParent]);
 
@@ -59,8 +60,8 @@ function TestWrongNotePage() {
   return (
     <div className="ts-page ts-report-page">
       <div className="ts-back-row ts-no-print">
-        <Link to={studentId ? `/admin/tests/${testId}` : `/tests/${testId}`} className="ts-back-link">
-          <span className="material-symbols-outlined">arrow_back</span> {studentId ? "시험 관리" : "시험 상세"}
+        <Link to={studentId ? `/admin/tests/${testId}` : fromDiagnostic ? "/diagnostic/print" : `/tests/${testId}`} className="ts-back-link">
+          <span className="material-symbols-outlined">arrow_back</span> {studentId ? "시험 관리" : fromDiagnostic ? "진단 테스트" : "시험 상세"}
         </Link>
       </div>
 
@@ -164,12 +165,12 @@ function TestWrongNotePage() {
           <span className="material-symbols-outlined">print</span>
           인쇄
         </button>
-        <button className="ts-btn ts-btn-outline" onClick={() => navigate(`/tests/${testId}/report${studentId ? `?studentId=${studentId}` : ""}`)}>
+        <button className="ts-btn ts-btn-outline" onClick={() => navigate(`/tests/${testId}/report${studentId ? `?studentId=${studentId}` : fromDiagnostic ? "?from=diagnostic" : ""}`)}>
           <span className="material-symbols-outlined">assessment</span>
           성적표
         </button>
-        <Link to={studentId ? `/admin/tests/${testId}` : "/tests"} className="ts-btn ts-btn-outline">
-          {studentId ? "시험 관리로" : "목록으로"}
+        <Link to={studentId ? `/admin/tests/${testId}` : fromDiagnostic ? "/diagnostic/print" : "/tests"} className="ts-btn ts-btn-outline">
+          {studentId ? "시험 관리로" : fromDiagnostic ? "진단 테스트로" : "목록으로"}
         </Link>
       </div>
     </div>

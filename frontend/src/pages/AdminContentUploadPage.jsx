@@ -4,25 +4,9 @@ import { apiGet, apiPost, apiPut } from "../utils/adminApi";
 import { API_BASE } from "../utils/api";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
+import { TYPE_LABEL, getLevelLabel, DAILY_LEVELS, levelToFolder } from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
-
-/* 레벨 라벨 헬퍼 */
-const LEVEL_LABEL_MAP = {
-  SAUSSURE_1: "소쉬르 1", SAUSSURE_2: "소쉬르 2", SAUSSURE_3: "소쉬르 3",
-  FREGE_1: "프레게 1", FREGE_2: "프레게 2", FREGE_3: "프레게 3",
-  RUSSELL_1: "러셀 1", RUSSELL_2: "러셀 2", RUSSELL_3: "러셀 3",
-  WITTGENSTEIN_1: "비트겐슈타인 1", WITTGENSTEIN_2: "비트겐슈타인 2", WITTGENSTEIN_3: "비트겐슈타인 3",
-};
-const getLevelLabel = (level) => LEVEL_LABEL_MAP[level] || level;
-const levelToFolder = (level) => level.toLowerCase().replace("_", "");
-
-const DAILY_LEVELS = [
-  "SAUSSURE_1","SAUSSURE_2","SAUSSURE_3",
-  "FREGE_1","FREGE_2","FREGE_3",
-  "RUSSELL_1","RUSSELL_2","RUSSELL_3",
-  "WITTGENSTEIN_1","WITTGENSTEIN_2","WITTGENSTEIN_3",
-];
 
 const STATIC_CONTENTS = [
   ...LEARNING_CATALOG.map((item) => ({
@@ -56,34 +40,6 @@ const STATIC_CONTENTS = [
     jsonPath: `/daily-reading/${levelToFolder(level)}/001.json`,
   })),
 ];
-
-const TYPE_LABEL = {
-  DAILY_QUIZ: "일일 퀴즈",
-  DAILY_READING: "일일 독해",
-  VOCAB_BASIC: "어휘 기본",
-  VOCAB_DICTIONARY: "어휘 사전",
-  GRAMMAR_WORD_FORMATION: "문법 - 단어 형성",
-  GRAMMAR_SENTENCE_STRUCTURE: "문법 - 문장 짜임",
-  GRAMMAR_PHONEME_CHANGE: "문법 - 음운 변동",
-  GRAMMAR_POS: "문법 - 품사",
-  READING_NONFICTION: "독해 비문학",
-  READING_LITERATURE: "독해 문학",
-  CONTENT_PDF: "내용 숙지",
-  CONTENT_PDF_QUIZ: "내용 숙지",
-  BACKGROUND_KNOWLEDGE: "배경지식",
-  BACKGROUND_KNOWLEDGE_QUIZ: "배경지식 퀴즈",
-  LANGUAGE_CONCEPT: "국어 개념",
-  LANGUAGE_CONCEPT_QUIZ: "국어 개념 퀴즈",
-  LOGIC_REASONING: "논리사고력",
-  LOGIC_REASONING_QUIZ: "논리사고력 퀴즈",
-  CHOICE_JUDGEMENT: "선택지 판별",
-  WRITING_DESCRIPTIVE: "서술형",
-  PRO_READING: "프로 독해",
-  PRO_VOCAB: "프로 어휘",
-  PRO_BACKGROUND: "프로 배경지식",
-  PRO_LOGIC: "프로 논리사고력",
-  PRO_ANSWER: "프로 모범답안",
-};
 
 const MODULE_GROUPS = [
   {
@@ -341,6 +297,10 @@ function AdminContentUploadPage() {
         contentType: parsed.contentType,
         levelId: parsed.levelId || undefined,
         chapterId: parsed.chapterId || undefined,
+        area: parsed.area || undefined,
+        subArea: parsed.subArea || undefined,
+        dayIndex: parsed.dayIndex || undefined,
+        moduleKey: parsed.moduleKey || undefined,
         schemaVersion: parsed.schemaVersion || "1.0",
         content: parsed.payload,
       });
@@ -444,6 +404,10 @@ function AdminContentUploadPage() {
         contentType: parsed.contentType,
         levelId: parsed.levelId || undefined,
         chapterId: parsed.chapterId || undefined,
+        area: parsed.area || undefined,
+        subArea: parsed.subArea || undefined,
+        dayIndex: parsed.dayIndex || undefined,
+        moduleKey: parsed.moduleKey || undefined,
         schemaVersion: parsed.schemaVersion || "1.0",
         content: parsed.payload,
       });
@@ -461,12 +425,11 @@ function AdminContentUploadPage() {
         <div className="admin-detail-header">
           <h1>
             <button
-              className="admin-detail-btn secondary"
+              className="admin-detail-btn secondary admin-upload-back-btn"
               type="button"
-              style={{ marginRight: 12, fontSize: 13, padding: "4px 12px" }}
               onClick={() => navigate("/admin/content")}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: 16, verticalAlign: "middle" }}>arrow_back</span>
+              <span className="material-symbols-outlined admin-upload-back-icon">arrow_back</span>
               {" "}콘텐츠 목록
             </button>
             {isEditMode ? "콘텐츠 편집" : "콘텐츠 업로드"}
@@ -475,7 +438,7 @@ function AdminContentUploadPage() {
 
         {/* 모드 토글 (편집 모드가 아닐 때만) */}
         {!isEditMode && (
-          <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
+          <div className="admin-upload-mode-toggle">
             <button
               className={`admin-detail-btn ${uploadMode === "single" ? "" : "secondary"}`}
               type="button"
@@ -495,14 +458,14 @@ function AdminContentUploadPage() {
 
         {/* 배치 모드 UI */}
         {!isEditMode && uploadMode === "batch" ? (
-          <div className="admin-detail-card" style={{ marginTop: 16 }}>
-            <h3 style={{ margin: "0 0 12px", fontSize: 15 }}>배치 업로드 (JSON 파일 복수 선택)</h3>
-            <p style={{ fontSize: 12, color: "var(--admin-muted)", marginBottom: 12 }}>
+          <div className="admin-detail-card admin-batch-card">
+            <h3 className="admin-batch-title">배치 업로드 (JSON 파일 복수 선택)</h3>
+            <p className="admin-batch-desc">
               학습 1개 = JSON 파일 1개. 각 파일은 contentType, payload 등의 필드를 포함해야 합니다.
             </p>
 
             {/* 모듈 선택 */}
-            <div className="admin-detail-toolbar" style={{ marginBottom: 12 }}>
+            <div className="admin-detail-toolbar admin-batch-module-toolbar">
               <select value={selectedModule} onChange={(e) => setSelectedModule(e.target.value)}>
                 {MODULE_GROUPS.map((group) => (
                   <optgroup key={group.label} label={group.label}>
@@ -515,13 +478,13 @@ function AdminContentUploadPage() {
             </div>
 
             {/* 파일 선택 */}
-            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+            <div className="admin-batch-file-row">
               <button
                 className="admin-detail-btn secondary"
                 type="button"
                 onClick={() => batchInputRef.current?.click()}
               >
-                <span className="material-symbols-outlined" style={{ fontSize: 16, verticalAlign: "middle" }}>upload_file</span>
+                <span className="material-symbols-outlined admin-upload-back-icon">upload_file</span>
                 {" "}JSON 파일 선택
               </button>
               <input
@@ -532,27 +495,27 @@ function AdminContentUploadPage() {
                 onChange={handleBatchFileSelect}
                 hidden
               />
-              <span style={{ fontSize: 13, color: "var(--admin-muted)" }}>
+              <span className="admin-batch-file-count">
                 {batchFiles.length > 0 ? `${batchFiles.length}개 파일 선택됨` : "파일을 선택하세요"}
               </span>
             </div>
 
             {/* 선택된 파일 목록 */}
             {batchFiles.length > 0 && (
-              <table style={{ width: "100%", fontSize: 13, marginBottom: 12, borderCollapse: "collapse" }}>
+              <table className="admin-batch-table">
                 <thead>
-                  <tr style={{ borderBottom: "1px solid var(--admin-border, #e2e8f0)" }}>
-                    <th style={{ textAlign: "left", padding: "6px 8px" }}>#</th>
-                    <th style={{ textAlign: "left", padding: "6px 8px" }}>파일명</th>
-                    <th style={{ textAlign: "right", padding: "6px 8px" }}>크기</th>
+                  <tr>
+                    <th>#</th>
+                    <th>파일명</th>
+                    <th className="text-right">크기</th>
                   </tr>
                 </thead>
                 <tbody>
                   {batchFiles.map((f, idx) => (
-                    <tr key={idx} style={{ borderBottom: "1px solid var(--admin-border, #f1f5f9)" }}>
-                      <td style={{ padding: "4px 8px" }}>{idx + 1}</td>
-                      <td style={{ padding: "4px 8px" }}>{f.name}</td>
-                      <td style={{ padding: "4px 8px", textAlign: "right" }}>
+                    <tr key={idx}>
+                      <td>{idx + 1}</td>
+                      <td>{f.name}</td>
+                      <td className="text-right">
                         {(f.size / 1024).toFixed(1)} KB
                       </td>
                     </tr>
@@ -571,49 +534,42 @@ function AdminContentUploadPage() {
               {batchLoading ? "업로드 중..." : `${batchFiles.length}개 배치 업로드`}
             </button>
 
-            {batchError && <p className="admin-detail-note error" style={{ marginTop: 8 }}>{batchError}</p>}
+            {batchError && <p className="admin-detail-note error admin-batch-error-note">{batchError}</p>}
 
             {/* 결과 테이블 */}
             {batchResults && (
-              <div style={{ marginTop: 16 }}>
-                <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>
+              <div className="admin-batch-result-section">
+                <p className="admin-batch-result-summary">
                   결과: 성공 {batchResults.imported}개 / 실패 {batchResults.failed}개
                 </p>
-                <table style={{ width: "100%", fontSize: 13, borderCollapse: "collapse" }}>
+                <table className="admin-batch-result-table">
                   <thead>
-                    <tr style={{ borderBottom: "2px solid var(--admin-border, #e2e8f0)" }}>
-                      <th style={{ textAlign: "left", padding: "6px 8px" }}>#</th>
-                      <th style={{ textAlign: "left", padding: "6px 8px" }}>파일명</th>
-                      <th style={{ textAlign: "left", padding: "6px 8px" }}>Content ID</th>
-                      <th style={{ textAlign: "center", padding: "6px 8px" }}>상태</th>
-                      <th style={{ textAlign: "left", padding: "6px 8px" }}>에러</th>
-                      <th style={{ textAlign: "center", padding: "6px 8px" }}>미리보기</th>
+                    <tr>
+                      <th>#</th>
+                      <th>파일명</th>
+                      <th>Content ID</th>
+                      <th className="text-center">상태</th>
+                      <th>에러</th>
+                      <th className="text-center">미리보기</th>
                     </tr>
                   </thead>
                   <tbody>
                     {batchResults.results.map((r) => (
-                      <tr key={r.index} style={{ borderBottom: "1px solid var(--admin-border, #f1f5f9)" }}>
-                        <td style={{ padding: "4px 8px" }}>{r.index + 1}</td>
-                        <td style={{ padding: "4px 8px" }}>{r.fileName}</td>
-                        <td style={{ padding: "4px 8px", fontSize: 11, fontFamily: "monospace" }}>
-                          {r.contentId || "-"}
-                        </td>
-                        <td style={{ padding: "4px 8px", textAlign: "center" }}>
-                          <span style={{
-                            padding: "2px 8px", borderRadius: 999, fontSize: 11, fontWeight: 600,
-                            background: r.success ? "#dcfce7" : "#fde2e2",
-                            color: r.success ? "#166534" : "#b91c1c",
-                          }}>
+                      <tr key={r.index}>
+                        <td>{r.index + 1}</td>
+                        <td>{r.fileName}</td>
+                        <td className="mono">{r.contentId || "-"}</td>
+                        <td className="text-center">
+                          <span className={`admin-batch-status-pill ${r.success ? "success" : "fail"}`}>
                             {r.success ? "성공" : "실패"}
                           </span>
                         </td>
-                        <td style={{ padding: "4px 8px", fontSize: 11, color: "#b91c1c" }}>{r.error || ""}</td>
-                        <td style={{ padding: "4px 8px", textAlign: "center" }}>
+                        <td className="error-text">{r.error || ""}</td>
+                        <td className="text-center">
                           {r.success && r.contentId ? (
                             <button
-                              className="admin-detail-btn secondary"
+                              className="admin-detail-btn secondary admin-batch-preview-btn"
                               type="button"
-                              style={{ fontSize: 11, padding: "2px 8px" }}
                               disabled={batchPreviewLoadingId === r.contentId}
                               onClick={() => handleBatchPreview(r.contentId)}
                             >
@@ -629,18 +585,17 @@ function AdminContentUploadPage() {
             )}
           </div>
         ) : (
-        <div className="admin-detail-card" style={{ marginTop: isEditMode ? 24 : 16 }}>
+        <div className={`admin-detail-card admin-single-card${isEditMode ? " edit-mode" : ""}`}>
           {/* 편집 모드: 콘텐츠 정보 표시 */}
           {isEditMode && editMeta ? (
             <>
-              <p style={{ fontSize: 13, color: "var(--admin-muted)", marginBottom: 4 }}>
+              <p className="admin-edit-meta-title">
                 <strong>{editMeta.title}</strong>
               </p>
-              <p style={{ fontSize: 12, color: "var(--admin-muted)", marginBottom: 8 }}>
+              <p className="admin-edit-meta-type">
                 유형: {TYPE_LABEL[editMeta.type] || editMeta.type}
                 {editMeta.jsonPath ? ` | 경로: ${editMeta.jsonPath}` : ""}
               </p>
-
             </>
           ) : null}
 
@@ -664,50 +619,42 @@ function AdminContentUploadPage() {
               onClick={handleDownloadTemplate}
               title={currentTemplate ? `${currentTemplate.title} 표준 양식 다운로드` : "템플릿 없음"}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: 16, verticalAlign: "middle" }}>download</span>
+              <span className="material-symbols-outlined admin-template-icon">download</span>
               {" "}표준 양식
             </button>
           </div>
 
           {/* PDF 관리 박스 (내용 숙지 농장 또는 CONTENT_PDF_QUIZ 편집) */}
           {showPdfBox ? (
-            <div style={{
-              background: "rgba(59, 130, 199, 0.1)",
-              border: "1px solid rgba(59, 130, 199, 0.3)",
-              borderRadius: 10,
-              padding: "10px 14px",
-              marginBottom: 12,
-              fontSize: 12,
-            }}>
-              <strong style={{ color: "#8bb8e8" }}>PDF 관리</strong>
+            <div className="admin-pdf-box">
+              <strong className="admin-pdf-box-title">PDF 관리</strong>
               {parsedPdfUrl ? (
                 <>
-                  <p style={{ margin: "6px 0 4px", wordBreak: "break-all" }}>
-                    pdfUrl: <code style={{ color: "#9dd6b0" }}>{parsedPdfUrl}</code>
+                  <p className="admin-pdf-url-line">
+                    pdfUrl: <code className="admin-pdf-url-code">{parsedPdfUrl}</code>
                   </p>
                   <a
                     href={parsedPdfUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: "#8bb8e8", textDecoration: "underline" }}
+                    className="admin-pdf-link"
                   >
                     PDF 미리보기 (새 탭)
                   </a>
                 </>
               ) : (
-                <p style={{ margin: "6px 0 0", color: "var(--admin-muted)" }}>
+                <p className="admin-pdf-empty">
                   pdfUrl이 아직 설정되지 않았습니다.
                 </p>
               )}
-              <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 8 }}>
+              <div className="admin-pdf-upload-row">
                 <button
-                  className="admin-detail-btn secondary"
+                  className="admin-detail-btn secondary admin-pdf-upload-btn"
                   type="button"
-                  style={{ fontSize: 12, padding: "4px 12px" }}
                   disabled={pdfUploading}
                   onClick={() => pdfInputRef.current?.click()}
                 >
-                  <span className="material-symbols-outlined" style={{ fontSize: 16, verticalAlign: "middle" }}>upload_file</span>
+                  <span className="material-symbols-outlined admin-template-icon">upload_file</span>
                   {pdfUploading ? " 업로드 중..." : " PDF 업로드"}
                 </button>
                 <input
@@ -717,12 +664,12 @@ function AdminContentUploadPage() {
                   onChange={handlePdfUpload}
                   hidden
                 />
-                <span style={{ color: "var(--admin-muted)" }}>
+                <span className="admin-pdf-upload-hint">
                   업로드하면 JSON의 pdfUrl이 자동으로 갱신됩니다.
                 </span>
               </div>
               {pdfUploadMsg ? (
-                <p style={{ margin: "6px 0 0", color: pdfUploadMsg.startsWith("업로드 완료") ? "#27ae60" : "#e74c3c" }}>
+                <p className={`admin-pdf-upload-msg ${pdfUploadMsg.startsWith("업로드 완료") ? "success" : "error"}`}>
                   {pdfUploadMsg}
                 </p>
               ) : null}
@@ -745,9 +692,9 @@ function AdminContentUploadPage() {
           )}
 
           {previewError ? <p className="admin-detail-note error">{previewError}</p> : null}
-          {importMessage ? <p className="admin-detail-note" style={{ color: "#27ae60" }}>{importMessage}</p> : null}
+          {importMessage ? <p className="admin-detail-note admin-import-success">{importMessage}</p> : null}
 
-          <div className="admin-detail-actions" style={{ marginTop: 8 }}>
+          <div className="admin-detail-actions admin-detail-actions-mt">
             {isEditMode ? (
               <button className="admin-detail-btn secondary" type="button" onClick={handleCopyJson}>
                 복사

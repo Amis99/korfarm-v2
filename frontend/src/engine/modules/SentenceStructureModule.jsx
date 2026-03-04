@@ -31,7 +31,7 @@ function SentenceStructureModule({ content }) {
       correctIds.length === selectedSorted.length &&
       correctIds.every((id, idx) => id === selectedSorted[idx]);
 
-    adjustTime(correct ? 20 : -20);
+    adjustTime(correct ? 20 : -40);
     recordAnswer({ id: `${sentence.sentenceId}-${queryIndex}`, correct });
     if (!correct) {
       setLastResult(correct ? "correct" : "wrong");

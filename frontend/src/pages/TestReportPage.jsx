@@ -191,7 +191,7 @@ function TestReportPage() {
           <span className="material-symbols-outlined">print</span>
           인쇄
         </button>
-        <button className="ts-btn ts-btn-outline" onClick={() => navigate(`/tests/${testId}/wrong-note${studentId ? `?studentId=${studentId}` : ""}`)}>
+        <button className="ts-btn ts-btn-outline" onClick={() => navigate(`/tests/${testId}/wrong-note${studentId ? `?studentId=${studentId}` : fromDiagnostic ? "?from=diagnostic" : ""}`)}>
           <span className="material-symbols-outlined">error_outline</span>
           오답 노트
         </button>

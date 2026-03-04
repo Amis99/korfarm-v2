@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, apiPost } from "../utils/api";
+import { apiGet, apiPost, API_BASE } from "../utils/api";
 import { COMMUNITY_BOARDS } from "../data/communityBoards";
 import "../styles/community.css";
 
@@ -30,6 +30,7 @@ function PostDetailPage() {
 
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -38,16 +39,21 @@ function PostDetailPage() {
     COMMUNITY_BOARDS.find((b) => b.id === (post?.boardId || boardParam)) ||
     COMMUNITY_BOARDS[0];
 
-  useEffect(() => {
+  const loadPost = () => {
     if (!postId) return;
     setLoading(true);
+    setFetchError(null);
     apiGet(`/v1/posts/${postId}`)
       .then((data) => {
         setPost(data);
         setComments(data?.comments || []);
       })
-      .catch((e) => console.error(e))
+      .catch((e) => setFetchError(e.message || "게시글을 불러올 수 없습니다."))
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    loadPost();
   }, [postId]);
 
   const handleSubmitComment = async () => {
@@ -83,7 +89,17 @@ function PostDetailPage() {
         <div className="community-wrap">
           <div className="post-header">
             <Link to="/community">커뮤니티로 돌아가기</Link>
-            <h1>게시글을 찾을 수 없습니다.</h1>
+            {fetchError ? (
+              <>
+                <h1>게시글을 불러올 수 없습니다</h1>
+                <p style={{ color: "#e74c3c", margin: "12px 0" }}>{fetchError}</p>
+                <button className="community-btn" type="button" onClick={loadPost}>
+                  다시 시도
+                </button>
+              </>
+            ) : (
+              <h1>게시글을 찾을 수 없습니다.</h1>
+            )}
           </div>
         </div>
       </div>
@@ -122,7 +138,7 @@ function PostDetailPage() {
                   </div>
                   <a
                     className="community-btn ghost"
-                    href={`/v1/files/${file.id || file.fileId}/download`}
+                    href={`${API_BASE}/v1/files/${file.id || file.fileId}/download`}
                   >
                     다운로드
                   </a>

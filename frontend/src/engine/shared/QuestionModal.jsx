@@ -95,38 +95,20 @@ function QuestionModal({
     const aTop = anchorRect.top ?? 0;
     const aHeight = anchorRect.height ?? 0;
     const aBottom = aTop + aHeight;
-    const halfW = containerWidth / 2;
 
-    const isMobile = window.innerWidth < 768;
-    const spaces = isMobile
-      ? [
-          { dir: "above", space: aTop },
-          { dir: "below", space: containerHeight - aBottom },
-        ]
-      : [
-          { dir: "above", space: aTop },
-          { dir: "below", space: containerHeight - aBottom },
-          { dir: "right", space: containerWidth - aRight },
-          { dir: "left", space: aLeft },
-        ];
-    spaces.sort((a, b) => b.space - a.space);
-    const bestDir = spaces[0].dir;
-
+    // 50% 기준 상/하 배치: 하이라이트 중심이 컨테이너 상단 50%면 아래에, 하단 50%면 위에
+    const anchorMid = aTop + aHeight / 2;
+    const halfContainer = containerHeight / 2;
     let nextX;
     let nextY;
-    if (bestDir === "above") {
-      nextY = aTop - gap - modalHeight;
-      nextX = (aLeft + aRight) / 2 - modalWidth / 2;
-    } else if (bestDir === "below") {
+    if (anchorMid <= halfContainer) {
+      // 상단 50% → 모달을 하이라이트 아래에
       nextY = aBottom + gap;
-      nextX = (aLeft + aRight) / 2 - modalWidth / 2;
-    } else if (bestDir === "right") {
-      nextX = halfW;
-      nextY = aTop + modalHeight <= containerHeight - pad ? aTop : aBottom - modalHeight;
     } else {
-      nextX = halfW - modalWidth;
-      nextY = aTop + modalHeight <= containerHeight - pad ? aTop : aBottom - modalHeight;
+      // 하단 50% → 모달을 하이라이트 위에
+      nextY = aTop - gap - modalHeight;
     }
+    nextX = (aLeft + aRight) / 2 - modalWidth / 2;
     setPosition({
       x: clamp(nextX, pad, maxX),
       y: clamp(nextY, pad, maxY),

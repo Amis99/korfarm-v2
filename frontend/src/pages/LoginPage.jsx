@@ -30,6 +30,11 @@ function LoginPage() {
       if (token) {
         localStorage.setItem(TOKEN_KEY, token);
       }
+      const pendingApproval = payload?.data?.user?.pending_approval || payload?.data?.user?.pendingApproval;
+      if (pendingApproval) {
+        navigate("/pending");
+        return;
+      }
       const roles = payload?.data?.user?.roles || [];
       const isAdmin = roles.includes("HQ_ADMIN") || roles.includes("ORG_ADMIN");
       navigate(isAdmin ? "/admin" : "/start");

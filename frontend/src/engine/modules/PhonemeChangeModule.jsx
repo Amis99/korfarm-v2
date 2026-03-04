@@ -23,7 +23,7 @@ function PhonemeChangeModule({ content }) {
   const handleAnswer = (choiceId) => {
     if (!step) return;
     const isCorrect = choiceId === step.answerId;
-    const delta = isCorrect ? step.onCorrect?.deltaSec || 0 : step.onWrong?.deltaSec || 0;
+    const delta = isCorrect ? (step.onCorrect?.deltaSec ?? 20) : (step.onWrong?.deltaSec ?? -40);
     adjustTime(delta);
     recordAnswer({ id: step.stepId, correct: isCorrect });
     setLastResult(isCorrect ? "correct" : "wrong");

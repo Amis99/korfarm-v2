@@ -31,7 +31,7 @@ function ChoiceJudgementModule({ content }) {
   const handleTokenClick = (token) => {
     if (!currentProp) return;
     const correct = currentProp.evidenceTokens?.includes(token.tokenId);
-    adjustTime(correct ? 20 : -20);
+    adjustTime(correct ? 20 : -40);
     recordAnswer({ id: currentProp.propId, correct });
     setLastResult(correct ? "correct" : "wrong");
     if (!correct) return;

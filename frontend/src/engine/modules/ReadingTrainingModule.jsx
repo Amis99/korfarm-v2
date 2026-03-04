@@ -5,13 +5,13 @@ import useHighlightAnchor from "../shared/useHighlightAnchor";
 
 const DEFAULT_INTENSIVE_SCORING = {
   correctDeltaSec: 20,
-  wrongDeltaSec: -20,
+  wrongDeltaSec: -40,
   eliminateWrongChoice: true,
 };
 
 const DEFAULT_CONFIRM_SCORING = {
-  correctDeltaSec: 30,
-  wrongDeltaSec: -30,
+  correctDeltaSec: 20,
+  wrongDeltaSec: -40,
 };
 
 const normalizeMatchMode = (mode) => (mode || "ANY").toUpperCase();

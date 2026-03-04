@@ -1,32 +1,19 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
+import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
+import {
+  TYPE_LABEL, TYPE_SHORT, getTypeShort,
+  LEVEL_SHORT, getLevelShort,
+  getLevelLabel, DAILY_LEVELS, levelToFolder,
+} from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
 const CONTENTS = [];
 const PER_PAGE = 20;
-
-/* 레벨 라벨 헬퍼 */
-const LEVEL_LABEL_MAP = {
-  SAUSSURE_1: "소쉬르 1", SAUSSURE_2: "소쉬르 2", SAUSSURE_3: "소쉬르 3",
-  FREGE_1: "프레게 1", FREGE_2: "프레게 2", FREGE_3: "프레게 3",
-  RUSSELL_1: "러셀 1", RUSSELL_2: "러셀 2", RUSSELL_3: "러셀 3",
-  WITTGENSTEIN_1: "비트겐슈타인 1", WITTGENSTEIN_2: "비트겐슈타인 2", WITTGENSTEIN_3: "비트겐슈타인 3",
-};
-const getLevelLabel = (level) => LEVEL_LABEL_MAP[level] || level;
-
-/* 레벨 → 폴더명 변환 (SAUSSURE_1 → saussure1) */
-const levelToFolder = (level) => level.toLowerCase().replace("_", "");
-
-const DAILY_LEVELS = [
-  "SAUSSURE_1","SAUSSURE_2","SAUSSURE_3",
-  "FREGE_1","FREGE_2","FREGE_3",
-  "RUSSELL_1","RUSSELL_2","RUSSELL_3",
-  "WITTGENSTEIN_1","WITTGENSTEIN_2","WITTGENSTEIN_3",
-];
 
 /* static JSON 콘텐츠 목록 */
 const STATIC_CONTENTS = [
@@ -72,85 +59,6 @@ const normalizeContentStatus = (status) => {
 /* 상태 한글 라벨 */
 const STATUS_LABEL = { active: "활성", inactive: "비활성" };
 
-/* contentType 한글 라벨 (필터 드롭다운용 - 풀네임) */
-const TYPE_LABEL = {
-  DAILY_QUIZ: "일일 퀴즈",
-  DAILY_READING: "일일 독해",
-  VOCAB_BASIC: "어휘 기본",
-  VOCAB_DICTIONARY: "어휘 사전",
-  GRAMMAR_WORD_FORMATION: "문법 - 단어 형성",
-  GRAMMAR_SENTENCE_STRUCTURE: "문법 - 문장 짜임",
-  GRAMMAR_PHONEME_CHANGE: "문법 - 음운 변동",
-  GRAMMAR_POS: "문법 - 품사",
-  READING_NONFICTION: "독해 비문학",
-  READING_LITERATURE: "독해 문학",
-  CONTENT_PDF: "내용 숙지",
-  CONTENT_PDF_QUIZ: "내용 숙지",
-  BACKGROUND_KNOWLEDGE: "배경지식",
-  BACKGROUND_KNOWLEDGE_QUIZ: "배경지식 퀴즈",
-  LANGUAGE_CONCEPT: "국어 개념",
-  LANGUAGE_CONCEPT_QUIZ: "국어 개념 퀴즈",
-  LOGIC_REASONING: "논리사고력",
-  LOGIC_REASONING_QUIZ: "논리사고력 퀴즈",
-  CHOICE_JUDGEMENT: "선택지 판별",
-  WRITING_DESCRIPTIVE: "서술형",
-  PRO_READING: "프로 독해",
-  PRO_VOCAB: "프로 어휘",
-  PRO_BACKGROUND: "프로 배경지식",
-  PRO_LOGIC: "프로 논리사고력",
-  PRO_ANSWER: "프로 모범답안",
-  /* 레거시 moduleKey 기반 (DB 콘텐츠 호환) */
-  worksheet_quiz: "공통 퀴즈형",
-  reading_intensive: "정독 훈련",
-  reading_training: "Reading Training",
-  recall_cards: "복기 카드",
-  confirm_click: "확인 학습 클릭",
-  choice_judgement: "선택지 판별",
-  phoneme_change: "음운 변동",
-  word_formation: "단어 형성",
-  sentence_structure: "문장 짜임",
-  pro_mode: "프로 모드",
-};
-
-/* 테이블 셀용 축약 라벨 + 그룹 컬러 */
-const TYPE_SHORT = {
-  DAILY_QUIZ:  { label: "퀴즈", group: "daily" },
-  DAILY_READING: { label: "독해", group: "daily" },
-  VOCAB_BASIC: { label: "어휘", group: "vocab" },
-  VOCAB_DICTIONARY: { label: "사전", group: "vocab" },
-  GRAMMAR_WORD_FORMATION: { label: "단어형성", group: "grammar" },
-  GRAMMAR_SENTENCE_STRUCTURE: { label: "문장짜임", group: "grammar" },
-  GRAMMAR_PHONEME_CHANGE: { label: "음운변동", group: "grammar" },
-  GRAMMAR_POS: { label: "품사", group: "grammar" },
-  READING_NONFICTION: { label: "비문학", group: "reading" },
-  READING_LITERATURE: { label: "문학", group: "reading" },
-  CONTENT_PDF: { label: "내용숙지", group: "content" },
-  CONTENT_PDF_QUIZ: { label: "내용숙지", group: "content" },
-  BACKGROUND_KNOWLEDGE: { label: "배경", group: "knowledge" },
-  BACKGROUND_KNOWLEDGE_QUIZ: { label: "배경퀴즈", group: "knowledge" },
-  LANGUAGE_CONCEPT: { label: "개념", group: "knowledge" },
-  LANGUAGE_CONCEPT_QUIZ: { label: "개념퀴즈", group: "knowledge" },
-  LOGIC_REASONING: { label: "논리", group: "logic" },
-  LOGIC_REASONING_QUIZ: { label: "논리퀴즈", group: "logic" },
-  CHOICE_JUDGEMENT: { label: "판별", group: "choice" },
-  WRITING_DESCRIPTIVE: { label: "서술형", group: "writing" },
-  PRO_READING: { label: "프로독해", group: "pro" },
-  PRO_VOCAB: { label: "프로어휘", group: "pro" },
-  PRO_BACKGROUND: { label: "프로배경", group: "pro" },
-  PRO_LOGIC: { label: "프로논리", group: "pro" },
-  PRO_ANSWER: { label: "프로답안", group: "pro" },
-};
-const getTypeShort = (type) => TYPE_SHORT[type] || { label: type, group: "other" };
-
-/* 레벨 축약 (소1, 프2, 러3, 비1 ...) */
-const LEVEL_SHORT = {
-  SAUSSURE_1: "소1", SAUSSURE_2: "소2", SAUSSURE_3: "소3",
-  FREGE_1: "프1", FREGE_2: "프2", FREGE_3: "프3",
-  RUSSELL_1: "러1", RUSSELL_2: "러2", RUSSELL_3: "러3",
-  WITTGENSTEIN_1: "비1", WITTGENSTEIN_2: "비2", WITTGENSTEIN_3: "비3",
-};
-const getLevelShort = (level) => LEVEL_SHORT[level] || level || "-";
-
 /* jsonPath에서 day 번호 추출 (/daily-quiz/saussure1/041.json → "#041") */
 const extractDay = (jsonPath) => {
   if (!jsonPath) return "";
@@ -169,6 +77,13 @@ const mapContentList = (items) =>
     status: normalizeContentStatus(content.status),
   }));
 
+/* 템플릿 그룹 분류 */
+const TEMPLATE_GROUPS = [
+  { label: "일일 학습", prefix: "daily" },
+  { label: "농장 모드", prefix: "farm" },
+  { label: "프로 모드", prefix: "pro" },
+];
+
 function AdminContentPage() {
   const { data: contents, loading, error } = useAdminList(
     "/v1/admin/content",
@@ -183,7 +98,34 @@ function AdminContentPage() {
   const [serverPreviewError, setServerPreviewError] = useState("");
   /* 페이지네이션 */
   const [currentPage, setCurrentPage] = useState(1);
+  /* 표준 양식 드롭다운 */
+  const [showTemplatePanel, setShowTemplatePanel] = useState(false);
+  const templatePanelRef = useRef(null);
   const navigate = useNavigate();
+
+  /* 표준 양식 패널 외부 클릭 닫힘 */
+  useEffect(() => {
+    if (!showTemplatePanel) return;
+    const handler = (e) => {
+      if (templatePanelRef.current && !templatePanelRef.current.contains(e.target)) {
+        setShowTemplatePanel(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [showTemplatePanel]);
+
+  /* 템플릿 JSON 다운로드 */
+  const handleDownloadTemplate = (template) => {
+    const json = JSON.stringify(template.content, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${template.id}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   /* DB 콘텐츠 + static 콘텐츠 병합 */
   const allContents = useMemo(() => {
@@ -252,15 +194,54 @@ function AdminContentPage() {
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
           <h1>콘텐츠 관리</h1>
-          <button
-            className="admin-detail-btn"
-            type="button"
-            onClick={() => navigate("/admin/content/upload")}
-          >
-            콘텐츠 업로드
-          </button>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <div ref={templatePanelRef} style={{ position: "relative" }}>
+              <button
+                className="admin-detail-btn secondary"
+                type="button"
+                onClick={() => setShowTemplatePanel((v) => !v)}
+              >
+                표준 양식 {showTemplatePanel ? "\u25B2" : "\u25BC"}
+              </button>
+              {showTemplatePanel && (
+                <div className="admin-template-dropdown">
+                  {TEMPLATE_GROUPS.map((group) => {
+                    const items = LEARNING_TEMPLATES.filter((t) => t.id.startsWith(group.prefix));
+                    if (items.length === 0) return null;
+                    return (
+                      <div key={group.prefix} className="admin-template-group">
+                        <div className="admin-template-group-title">{group.label}</div>
+                        {items.map((t) => (
+                          <div key={t.id} className="admin-template-item">
+                            <div className="admin-template-item-info">
+                              <span className="admin-template-item-name">{t.title}</span>
+                              <span className="admin-template-item-key">{t.moduleKey}</span>
+                            </div>
+                            <button
+                              className="admin-detail-btn secondary xs"
+                              type="button"
+                              onClick={() => handleDownloadTemplate(t)}
+                            >
+                              다운로드
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            <button
+              className="admin-detail-btn"
+              type="button"
+              onClick={() => navigate("/admin/content/upload")}
+            >
+              콘텐츠 업로드
+            </button>
+          </div>
         </div>
-        <div className="admin-detail-card" style={{ marginTop: 24 }}>
+        <div className="admin-detail-card admin-single-card edit-mode">
           <h2>콘텐츠 파이프라인</h2>
           <div className="admin-detail-toolbar">
             <div className="admin-detail-search">
@@ -303,16 +284,16 @@ function AdminContentPage() {
             <thead>
               <tr>
                 <th>제목</th>
-                <th style={{ width: 70 }}>유형</th>
-                <th style={{ width: 40 }}>레벨</th>
-                <th style={{ width: 48 }}>상태</th>
-                <th style={{ width: 66 }}>관리</th>
+                <th className="admin-th-type">유형</th>
+                <th className="admin-th-level">레벨</th>
+                <th className="admin-th-status">상태</th>
+                <th className="admin-th-actions">관리</th>
               </tr>
             </thead>
             <tbody>
               {pagedContents.length === 0 && !loading ? (
                 <tr>
-                  <td colSpan={5} style={{ textAlign: "center", color: "var(--admin-muted)" }}>
+                  <td colSpan={5} className="admin-content-status-cell">
                     {allContents.length === 0 ? "등록된 콘텐츠가 없습니다." : "검색 결과가 없습니다."}
                   </td>
                 </tr>
@@ -328,7 +309,7 @@ function AdminContentPage() {
                   >
                     <td>
                       {content.title}
-                      {day ? <span style={{ color: "var(--admin-muted)", marginLeft: 6, fontSize: 11 }}>{day}</span> : null}
+                      {day ? <span className="admin-content-day">{day}</span> : null}
                     </td>
                     <td>
                       <span className="type-pill" data-group={ts.group}>{ts.label}</span>
@@ -343,9 +324,8 @@ function AdminContentPage() {
                     </td>
                     <td>
                       <button
-                        className="admin-detail-btn secondary"
+                        className="admin-detail-btn secondary admin-content-action-btn"
                         type="button"
-                        style={{ padding: "4px 10px", fontSize: "12px" }}
                         disabled={previewLoadingId === content.id}
                         onClick={(e) => { e.stopPropagation(); handleServerPreview(content.id); }}
                       >
@@ -359,10 +339,9 @@ function AdminContentPage() {
           </table>
           {/* 페이지네이션 */}
           {totalPages > 1 ? (
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 6, marginTop: 12 }}>
+            <div className="admin-pagination">
               <button
                 className="admin-detail-btn secondary"
-                style={{ fontSize: 12, padding: "4px 10px" }}
                 disabled={safePage <= 1}
                 onClick={() => setCurrentPage((p) => p - 1)}
               >
@@ -371,8 +350,7 @@ function AdminContentPage() {
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                 <button
                   key={p}
-                  className={`admin-detail-btn ${p === safePage ? "" : "secondary"}`}
-                  style={{ fontSize: 12, padding: "4px 10px", minWidth: 32 }}
+                  className={`admin-detail-btn ${p === safePage ? "active" : "secondary"}`}
                   onClick={() => setCurrentPage(p)}
                 >
                   {p}
@@ -380,7 +358,6 @@ function AdminContentPage() {
               ))}
               <button
                 className="admin-detail-btn secondary"
-                style={{ fontSize: 12, padding: "4px 10px" }}
                 disabled={safePage >= totalPages}
                 onClick={() => setCurrentPage((p) => p + 1)}
               >

@@ -17,11 +17,22 @@ interface ProProgressRepo : JpaRepository<ProProgressEntity, String> {
     fun findByUserIdAndChapterId(userId: String, chapterId: String): List<ProProgressEntity>
     fun findByUserIdAndItemId(userId: String, itemId: String): ProProgressEntity?
     fun findByUserIdAndChapterIdIn(userId: String, chapterIds: List<String>): List<ProProgressEntity>
+    fun findByUserIdAndCompletedTrueAndCompletedAtBetween(
+        userId: String,
+        start: java.time.LocalDateTime,
+        end: java.time.LocalDateTime
+    ): List<ProProgressEntity>
 }
 
 interface ProTestSessionRepo : JpaRepository<ProTestSessionEntity, String> {
     fun findByUserIdAndChapterId(userId: String, chapterId: String): List<ProTestSessionEntity>
     fun findByUserIdAndChapterIdAndStatusIn(userId: String, chapterId: String, statuses: List<String>): List<ProTestSessionEntity>
+    fun findByUserIdAndStatusInAndCreatedAtBetween(
+        userId: String,
+        statuses: List<String>,
+        start: java.time.LocalDateTime,
+        end: java.time.LocalDateTime
+    ): List<ProTestSessionEntity>
 }
 
 interface ProChapterTestRepo : JpaRepository<ProChapterTestEntity, String> {

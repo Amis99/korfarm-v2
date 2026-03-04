@@ -115,7 +115,9 @@ class DuelController(
     // 매치 문제 조회 (정답 제외)
     @GetMapping("/matches/{matchId}/questions")
     fun matchQuestions(@PathVariable matchId: String): ApiResponse<List<DuelQuestionView>> {
-        requireDuelEnabled(SecurityUtils.currentUserId())
+        val userId = requireUserId()
+        requireDuelEnabled(userId)
+        requireMatchParticipant(matchId, userId)
         val data = duelService.getMatchQuestionViews(matchId)
         return ApiResponse(success = true, data = data)
     }
@@ -123,7 +125,9 @@ class DuelController(
     // 매치 결과 조회
     @GetMapping("/matches/{matchId}/results")
     fun matchResults(@PathVariable matchId: String): ApiResponse<DuelMatchResultDetailView> {
-        requireDuelEnabled(SecurityUtils.currentUserId())
+        val userId = requireUserId()
+        requireDuelEnabled(userId)
+        requireMatchParticipant(matchId, userId)
         val data = duelService.getMatchResults(matchId)
             ?: throw ApiException("NOT_FOUND", "결과를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         return ApiResponse(success = true, data = data)
@@ -154,5 +158,12 @@ class DuelController(
     private fun requireDuelEnabled(userId: String?) {
         featureFlagService.requireNotKilled("ops.kill_switch.duel")
         featureFlagService.requireEnabled("feature.duel.mode", userId)
+    }
+
+    private fun requireMatchParticipant(matchId: String, userId: String) {
+        val players = duelService.getMatchPlayers(matchId)
+        if (players.none { it.userId == userId }) {
+            throw ApiException("FORBIDDEN", "이 매치의 참가자가 아닙니다", HttpStatus.FORBIDDEN)
+        }
     }
 }

@@ -58,7 +58,7 @@ function LearningRunnerPage() {
           id: learningId,
           contentId: data.contentId || learningId,
           contentType: data.contentType || data.content_type,
-          moduleKey: data.content?.moduleKey || data.contentType?.toLowerCase() || "worksheet_quiz",
+          moduleKey: data.moduleKey || data.content?.moduleKey || data.contentType?.toLowerCase() || "worksheet_quiz",
           title: data.title,
           jsonPath: null,
         });
@@ -154,7 +154,7 @@ function LearningRunnerPage() {
 
   if (!learning) {
     return (
-      <div style={{ padding: "40px" }}>
+      <div className="lr-loading">
         <h1>학습을 찾을 수 없습니다.</h1>
         <button type="button" onClick={() => navigate("/farm-mode")}>홈으로</button>
       </div>
@@ -163,7 +163,7 @@ function LearningRunnerPage() {
 
   if (loading || (isContentPdf && resolvedStartPage === null)) {
     return (
-      <div style={{ padding: "40px", textAlign: "center" }}>
+      <div className="lr-loading">
         <p>학습 데이터를 불러오는 중...</p>
       </div>
     );
@@ -171,9 +171,9 @@ function LearningRunnerPage() {
 
   if (error) {
     return (
-      <div style={{ padding: "40px", textAlign: "center" }}>
+      <div className="lr-loading">
         <h2>학습 데이터를 불러올 수 없습니다.</h2>
-        <p style={{ color: "#888" }}>{error}</p>
+        <p className="lr-error">{error}</p>
         <button type="button" onClick={() => navigate(exitPath)}>돌아가기</button>
       </div>
     );

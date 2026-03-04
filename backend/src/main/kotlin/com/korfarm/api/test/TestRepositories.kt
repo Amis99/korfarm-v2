@@ -17,6 +17,7 @@ interface TestSubmissionRepo : JpaRepository<TestSubmissionEntity, String> {
     fun findByTestIdAndUserId(testId: String, userId: String): TestSubmissionEntity?
     fun findByUserId(userId: String): List<TestSubmissionEntity>
     fun findByTestId(testId: String): List<TestSubmissionEntity>
+    fun findByUserIdAndCreatedAtBetween(userId: String, start: java.time.LocalDateTime, end: java.time.LocalDateTime): List<TestSubmissionEntity>
 
     // 최근 N일 이내 테스트 응시 건수 (전체)
     fun countByCreatedAtAfter(since: java.time.LocalDateTime): Long

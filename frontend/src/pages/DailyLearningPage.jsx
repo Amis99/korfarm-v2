@@ -13,7 +13,6 @@ function DailyLearningPage() {
         <div className="start-daily-grid">
           <div
             className="start-card"
-            style={{ cursor: "pointer" }}
             onClick={() => navigate("/daily-quiz")}
           >
             <span className="badge">일일 퀴즈</span>
@@ -23,10 +22,9 @@ function DailyLearningPage() {
 
           <div
             className="start-card"
-            style={{ cursor: "pointer" }}
             onClick={() => navigate("/daily-reading")}
           >
-            <span className="badge" style={{ background: "#81d4fa" }}>일일 독해</span>
+            <span className="badge badge-reading">일일 독해</span>
             <h3>일일 독해</h3>
             <p>지문 읽는 힘을 키워요. 제출할 때마다 씨앗 지급</p>
           </div>

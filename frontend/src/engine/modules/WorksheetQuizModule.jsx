@@ -2,13 +2,21 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 
+// 타이머 규칙 (전체 통일: 정답 +20초, 오답 -40초)
+const DEFAULT_SCORING = { correctDeltaSec: 20, wrongDeltaSec: -40 };
+
 const getScoring = (question) => {
   const s = question.scoring;
-  if (!s) return { correctDeltaSec: 0, wrongDeltaSec: 0 };
+  if (!s) return DEFAULT_SCORING;
   return {
-    correctDeltaSec: s.correctDeltaSec ?? s.correct ?? 0,
-    wrongDeltaSec: s.wrongDeltaSec ?? s.wrong ?? 0,
+    correctDeltaSec: s.correctDeltaSec ?? s.correct ?? DEFAULT_SCORING.correctDeltaSec,
+    wrongDeltaSec: s.wrongDeltaSec ?? s.wrong ?? DEFAULT_SCORING.wrongDeltaSec,
   };
+};
+
+// contentType별 기본 requireCorrect (JSON에 없을 때 적용)
+const DEFAULT_REQUIRE_CORRECT = {
+  GRAMMAR_POS: true,
 };
 
 const renderTemplate = (template, blanks, filled, activeIndex) => {
@@ -82,6 +90,7 @@ const renderPassageBox = (passage) => {
 
 function WorksheetQuizModule({ content }) {
   const { status, start, adjustTime, recordAnswer, finish } = useEngine();
+  const contentType = content?.contentType;
   const payload = content?.payload || {};
   const questions = payload.questions || [];
   const wordMap = useMemo(() => {
@@ -307,7 +316,8 @@ function WorksheetQuizModule({ content }) {
       ...prev,
       [normalizedQuestion.id]: isCorrect ? "correct" : "wrong",
     }));
-    if (!isCorrect && normalizedQuestion.requireCorrect) {
+    const requireCorrect = normalizedQuestion.requireCorrect ?? DEFAULT_REQUIRE_CORRECT[contentType] ?? false;
+    if (!isCorrect && requireCorrect) {
       return;
     }
     queueNext(handleNext);

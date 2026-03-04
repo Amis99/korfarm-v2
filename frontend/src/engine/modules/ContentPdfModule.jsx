@@ -5,12 +5,15 @@ import QuestionModal from "../shared/QuestionModal";
 import { apiPost } from "../../utils/api";
 import "../../styles/content-pdf.css";
 
+// 타이머 규칙 (전체 통일: 정답 +20초, 오답 -40초)
+const DEFAULT_CONTENT_PDF_SCORING = { correctDeltaSec: 20, wrongDeltaSec: -40 };
+
 const getScoring = (question) => {
   const s = question?.scoring;
-  if (!s) return { correctDeltaSec: 0, wrongDeltaSec: 0 };
+  if (!s) return DEFAULT_CONTENT_PDF_SCORING;
   return {
-    correctDeltaSec: s.correctDeltaSec ?? s.correct ?? 0,
-    wrongDeltaSec: s.wrongDeltaSec ?? s.wrong ?? 0,
+    correctDeltaSec: s.correctDeltaSec ?? s.correct ?? DEFAULT_CONTENT_PDF_SCORING.correctDeltaSec,
+    wrongDeltaSec: s.wrongDeltaSec ?? s.wrong ?? DEFAULT_CONTENT_PDF_SCORING.wrongDeltaSec,
   };
 };
 

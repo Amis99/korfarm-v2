@@ -328,6 +328,11 @@ function StartPage() {
                       <h3>테스트 기록실</h3>
                       <p>성적표 및 오답 노트</p>
                     </div>
+                    <div className="start-paid-card" onClick={() => navWithChild("/report")}>
+                      <span className="material-symbols-outlined">analytics</span>
+                      <h3>통합 성적표</h3>
+                      <p>자녀 전체 학습 분석</p>
+                    </div>
                   </div>
 
                   {/* 자녀 인벤토리 요약 */}
@@ -619,6 +624,11 @@ function StartPage() {
                 <p>각종 시험 모음</p>
                 {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
+              <div className="start-paid-card" onClick={() => navigate("/diagnostic/print")}>
+                <span className="material-symbols-outlined">biotech</span>
+                <h3>진단 테스트</h3>
+                <p>수준별 진단 평가</p>
+              </div>
               <div className="start-paid-card" onClick={() => navigate("/harvest-ledger")}>
                 <span className="material-symbols-outlined">menu_book</span>
                 <h3>수확 장부</h3>
@@ -629,6 +639,11 @@ function StartPage() {
                 <span className="material-symbols-outlined">assessment</span>
                 <h3>테스트 기록실</h3>
                 <p>성적표 및 오답 노트</p>
+              </div>
+              <div className="start-paid-card" onClick={() => navigate("/report")}>
+                <span className="material-symbols-outlined">analytics</span>
+                <h3>통합 성적표</h3>
+                <p>전 영역 학습 분석</p>
               </div>
             </div>
 

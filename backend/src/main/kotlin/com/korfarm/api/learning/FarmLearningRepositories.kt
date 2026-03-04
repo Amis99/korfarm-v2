@@ -17,6 +17,13 @@ interface FarmLearningLogRepository : JpaRepository<FarmLearningLogEntity, Strin
 
     fun findTop50ByUserIdOrderByCreatedAtDesc(userId: String): List<FarmLearningLogEntity>
 
+    fun findByUserIdAndStatusAndCompletedAtBetween(
+        userId: String,
+        status: String,
+        start: java.time.LocalDateTime,
+        end: java.time.LocalDateTime
+    ): List<FarmLearningLogEntity>
+
     @Query(
         "SELECT f.contentId AS contentId, COUNT(f) AS cnt " +
         "FROM FarmLearningLogEntity f " +
