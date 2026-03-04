@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { apiGet } from "../utils/api";
 import "../styles/wisdom.css";
 
 const LEVELS = [
@@ -18,11 +20,27 @@ const LEVELS = [
 ];
 
 function WritingPage() {
-  const { user } = useAuth();
+  const { user, isPremium } = useAuth();
   const [searchParams] = useSearchParams();
   const studentId = searchParams.get("studentId");
   const isParent = user?.roles?.includes("PARENT");
   const isViewingChild = isParent && studentId;
+  const [hasSub, setHasSub] = useState(isPremium || false);
+  const [subChecked, setSubChecked] = useState(isPremium || isParent || false);
+
+  useEffect(() => {
+    if (isPremium || isParent) { setHasSub(true); setSubChecked(true); return; }
+    apiGet("/v1/subscription")
+      .then((sub) => {
+        const st = sub?.status;
+        if (st === "active" || st === "canceled") setHasSub(true);
+      })
+      .catch((err) => {
+        // API가 명시적으로 거부(402 등)한 게 아닌 네트워크 에러면 접근 허용
+        if (!err?.status) setHasSub(true);
+      })
+      .finally(() => setSubChecked(true));
+  }, [isPremium, isParent]);
 
   // 부모가 자녀 글을 볼 때 studentId를 레벨 링크에 전달
   const getLevelLink = (levelId) => {
@@ -31,6 +49,29 @@ function WritingPage() {
     }
     return `/writing/${levelId}`;
   };
+
+  if (subChecked && !hasSub) {
+    return (
+      <div className="wisdom">
+        <div className="wis-topbar">
+          <div className="wis-topbar-inner">
+            <Link to="/start" className="wis-back">
+              <span className="material-symbols-outlined">arrow_back</span>
+              돌아가기
+            </Link>
+            <h1 className="wis-topbar-title">지식과 지혜</h1>
+          </div>
+        </div>
+        <div className="wis-hero">
+          <h2>구독이 필요합니다</h2>
+          <p>지식과 지혜 글쓰기는 구독 회원 전용 기능입니다.</p>
+          <Link to="/subscription" style={{ color: "#f06c24", fontWeight: 700, marginTop: 12, display: "inline-block", fontSize: 15 }}>
+            구독하러 가기
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="wisdom">

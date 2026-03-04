@@ -49,7 +49,15 @@ data class TestQuestionView(
     val points: Int,
     val correctAnswer: String?,
     val choiceExplanations: Map<String, String>?,
-    val intent: String?
+    val intent: String?,
+    val essayKeywords: List<EssayKeyword>?,
+    val essayRubric: String?,
+    val modelAnswer: String?
+)
+
+data class EssayKeyword(
+    val keyword: String,
+    val weight: Int = 1
 )
 
 // ── Student: Question stubs (no correct answer) ──
@@ -160,7 +168,10 @@ data class QuestionInput(
     val points: Int = 0,
     val correctAnswer: String? = null,
     val choiceExplanations: Map<String, String>? = null,
-    val intent: String? = null
+    val intent: String? = null,
+    val essayKeywords: List<EssayKeyword>? = null,
+    val essayRubric: String? = null,
+    val modelAnswer: String? = null
 )
 
 // ── Admin: Submission summary ──

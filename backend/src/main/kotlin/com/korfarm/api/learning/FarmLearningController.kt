@@ -2,6 +2,7 @@ package com.korfarm.api.learning
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.payment.SubscriptionService
 import com.korfarm.api.security.SecurityUtils
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/v1/learning/farm")
 class FarmLearningController(
-    private val farmLearningService: FarmLearningService
+    private val farmLearningService: FarmLearningService,
+    private val subscriptionService: SubscriptionService
 ) {
     @GetMapping("/history")
     fun history(): ApiResponse<FarmHistoryResponse> {
@@ -27,6 +29,7 @@ class FarmLearningController(
     fun start(@Valid @RequestBody request: FarmStartRequest): ApiResponse<FarmStartResponse> {
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        subscriptionService.requireActive(userId)
         return ApiResponse(success = true, data = farmLearningService.start(userId, request))
     }
 
@@ -34,6 +37,7 @@ class FarmLearningController(
     fun complete(@Valid @RequestBody request: FarmCompleteRequest): ApiResponse<FarmCompleteResponse> {
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        subscriptionService.requireActive(userId)
         return ApiResponse(success = true, data = farmLearningService.complete(userId, request))
     }
 
@@ -47,6 +51,7 @@ class FarmLearningController(
     fun pageComplete(@Valid @RequestBody request: PageCompleteRequest): ApiResponse<PageCompleteResponse> {
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        subscriptionService.requireActive(userId)
         return ApiResponse(success = true, data = farmLearningService.pageComplete(userId, request))
     }
 

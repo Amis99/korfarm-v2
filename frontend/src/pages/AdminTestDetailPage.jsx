@@ -11,9 +11,10 @@ const TABS = [
   { key: "questions", label: "문항 관리", icon: "quiz" },
   { key: "answer", label: "답안 입력", icon: "edit_note" },
   { key: "submissions", label: "응시 현황", icon: "leaderboard" },
+  { key: "essay", label: "서술형 채점", icon: "rate_review" },
 ];
 
-const EMPTY_Q = { number: 1, type: "객관식", domain: "", subDomain: "", passage: "", points: 0, correctAnswer: "", choiceExplanations: {}, intent: "" };
+const EMPTY_Q = { number: 1, type: "객관식", domain: "", subDomain: "", passage: "", points: 0, correctAnswer: "", choiceExplanations: {}, intent: "", essayKeywords: [], essayRubric: "", modelAnswer: "" };
 
 function AdminTestDetailPage() {
   const { testId } = useParams();
@@ -41,6 +42,13 @@ function AdminTestDetailPage() {
   // Submissions tab
   const [submissions, setSubmissions] = useState([]);
   const [subLoading, setSubLoading] = useState(false);
+
+  // Essay grading tab
+  const [essayStudents, setEssayStudents] = useState([]);
+  const [essaySelectedStudent, setEssaySelectedStudent] = useState("");
+  const [essayGradings, setEssayGradings] = useState([]);
+  const [essayLoading, setEssayLoading] = useState(false);
+  const [essayBatchLoading, setEssayBatchLoading] = useState(false);
 
   const loadTest = useCallback(() => {
     apiGet(`/v1/admin/test-papers/${testId}/questions`)
@@ -87,6 +95,10 @@ function AdminTestDetailPage() {
         .then(setSubmissions)
         .catch(() => setSubmissions([]))
         .finally(() => setSubLoading(false));
+    } else if (tab === "essay") {
+      apiGet(`/v1/admin/test-papers/${testId}/students`)
+        .then(s => setEssayStudents(s.filter(st => st.hasSubmitted)))
+        .catch(() => setEssayStudents([]));
     }
   }, [tab, testId]);
 
@@ -174,6 +186,9 @@ function AdminTestDetailPage() {
         correctAnswer: q.correctAnswer || null,
         choiceExplanations: q.choiceExplanations && Object.keys(q.choiceExplanations).length > 0 ? q.choiceExplanations : null,
         intent: q.intent || null,
+        essayKeywords: q.essayKeywords?.length > 0 ? q.essayKeywords : null,
+        essayRubric: q.essayRubric || null,
+        modelAnswer: q.modelAnswer || null,
       }));
       await apiPost(`/v1/admin/test-papers/${testId}/questions`, { questions: payload });
       alert("문항이 저장되었습니다.");
@@ -367,6 +382,9 @@ function AdminTestDetailPage() {
                       <th style={{ width: 120 }}>3번 해설</th>
                       <th style={{ width: 120 }}>4번 해설</th>
                       <th style={{ width: 120 }}>5번 해설</th>
+                      <th style={{ width: 140 }}>모범답안</th>
+                      <th style={{ width: 140 }}>키워드</th>
+                      <th style={{ width: 140 }}>채점기준</th>
                       <th style={{ width: 50 }}></th>
                     </tr>
                   </thead>
@@ -408,6 +426,42 @@ function AdminTestDetailPage() {
                             />
                           </td>
                         ))}
+                        <td>
+                          <textarea
+                            className="ts-sheet-textarea"
+                            value={q.modelAnswer || ""}
+                            onChange={e => updateQ(idx, "modelAnswer", e.target.value)}
+                            rows={1}
+                            disabled={q.type !== "서술형"}
+                            placeholder={q.type === "서술형" ? "서술형 모범답안" : ""}
+                          />
+                        </td>
+                        <td>
+                          <textarea
+                            className="ts-sheet-textarea"
+                            value={(q.essayKeywords || []).map(k => `${k.keyword}:${k.weight}`).join(", ")}
+                            onChange={e => {
+                              const parsed = e.target.value.split(",").map(s => s.trim()).filter(Boolean).map(s => {
+                                const [keyword, weight] = s.split(":");
+                                return { keyword: keyword?.trim() || "", weight: parseInt(weight) || 1 };
+                              });
+                              updateQ(idx, "essayKeywords", parsed);
+                            }}
+                            rows={1}
+                            disabled={q.type !== "서술형"}
+                            placeholder={q.type === "서술형" ? "키워드:가중치, ..." : ""}
+                          />
+                        </td>
+                        <td>
+                          <textarea
+                            className="ts-sheet-textarea"
+                            value={q.essayRubric || ""}
+                            onChange={e => updateQ(idx, "essayRubric", e.target.value)}
+                            rows={1}
+                            disabled={q.type !== "서술형"}
+                            placeholder={q.type === "서술형" ? "채점 기준" : ""}
+                          />
+                        </td>
                         <td>
                           <button className="ts-btn-icon" onClick={() => removeRow(idx)} title="삭제">
                             <span className="material-symbols-outlined">delete</span>
@@ -560,6 +614,202 @@ function AdminTestDetailPage() {
                 ))}
               </tbody>
             </table>
+          )}
+        </div>
+      )}
+
+      {/* ── Tab 6: Essay Grading ── */}
+      {tab === "essay" && (
+        <div className="ts-tab-content">
+          <div className="ts-answer-bar">
+            <div className="ts-answer-student-select">
+              <select
+                value={essaySelectedStudent}
+                onChange={e => {
+                  setEssaySelectedStudent(e.target.value);
+                  if (e.target.value) {
+                    setEssayLoading(true);
+                    apiGet(`/v1/admin/essay/gradings?testId=${testId}&userId=${e.target.value}`)
+                      .then(setEssayGradings)
+                      .catch(() => setEssayGradings([]))
+                      .finally(() => setEssayLoading(false));
+                  } else {
+                    setEssayGradings([]);
+                  }
+                }}
+                className="ts-student-dropdown"
+              >
+                <option value="">학생 선택...</option>
+                {essayStudents.map(s => (
+                  <option key={s.userId} value={s.userId}>
+                    {s.name || s.userId} ({s.score}점)
+                  </option>
+                ))}
+              </select>
+            </div>
+            {essaySelectedStudent && (
+              <div style={{ display: "flex", gap: 8 }}>
+                <button
+                  className="ts-btn ts-btn-outline"
+                  disabled={essayBatchLoading}
+                  onClick={async () => {
+                    if (!essayGradings.length) return;
+                    setEssayBatchLoading(true);
+                    try {
+                      const updated = [];
+                      for (const g of essayGradings) {
+                        const res = await apiPost("/v1/admin/essay/keyword-grade", {
+                          submissionId: g.submissionId,
+                          questionNumber: g.questionNumber,
+                        });
+                        updated.push(res);
+                      }
+                      setEssayGradings(prev => prev.map(x => {
+                        const u = updated.find(r => r.gradingId === x.gradingId);
+                        return u || x;
+                      }));
+                      alert("키워드 일괄 재채점 완료");
+                    } catch { alert("키워드 재채점 실패"); }
+                    finally { setEssayBatchLoading(false); }
+                  }}
+                >
+                  {essayBatchLoading ? "채점 중..." : "키워드 재채점"}
+                </button>
+                <button
+                  className="ts-btn ts-btn-outline"
+                  disabled={essayBatchLoading}
+                  onClick={async () => {
+                    if (!essayGradings.length) return;
+                    setEssayBatchLoading(true);
+                    try {
+                      const res = await apiPost("/v1/admin/essay/ai-grade-batch", {
+                        submissionId: essayGradings[0].submissionId,
+                      });
+                      setEssayGradings(res);
+                      alert("AI 일괄 채점 완료");
+                    } catch { alert("AI 채점 실패"); }
+                    finally { setEssayBatchLoading(false); }
+                  }}
+                >
+                  {essayBatchLoading ? "채점 중..." : "AI 일괄 채점"}
+                </button>
+              </div>
+            )}
+          </div>
+
+          {essayLoading ? (
+            <p>불러오는 중...</p>
+          ) : essayGradings.length === 0 && essaySelectedStudent ? (
+            <p className="ts-muted">서술형 채점 데이터가 없습니다.</p>
+          ) : (
+            <div className="ts-essay-cards">
+              {essayGradings.map(g => (
+                <div key={g.gradingId} className="ts-essay-card">
+                  <div className="ts-essay-card-header">
+                    <span className="ts-essay-qnum">{g.questionNumber}번</span>
+                    <span className={`ts-essay-status ts-essay-status-${g.status}`}>
+                      {g.status === "pending" ? "대기" :
+                       g.status === "keyword_graded" ? "키워드채점" :
+                       g.status === "ai_graded" ? "AI채점" :
+                       g.status === "confirmed" ? "확정" : g.status}
+                    </span>
+                    <span className="ts-essay-pts">{g.maxPoints}점 만점</span>
+                  </div>
+
+                  <div className="ts-essay-field">
+                    <label>학생 답안</label>
+                    <div className="ts-essay-answer">{g.studentAnswer || "(미응답)"}</div>
+                  </div>
+
+                  {g.modelAnswer && (
+                    <div className="ts-essay-field">
+                      <label>모범답안</label>
+                      <div className="ts-essay-model">{g.modelAnswer}</div>
+                    </div>
+                  )}
+
+                  {g.keywordDetail && (
+                    <div className="ts-essay-field">
+                      <label>키워드 매칭 ({g.keywordScore}점)</label>
+                      <div className="ts-essay-keywords">
+                        {g.keywordDetail.matched?.map(k => (
+                          <span key={k} className="ts-kw ts-kw-match">{k}</span>
+                        ))}
+                        {g.keywordDetail.missed?.map(k => (
+                          <span key={k} className="ts-kw ts-kw-miss">{k}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {g.aiScore != null && (
+                    <div className="ts-essay-field">
+                      <label>AI 채점 ({g.aiScore}점)</label>
+                      <div className="ts-essay-ai-feedback">{g.aiFeedback}</div>
+                    </div>
+                  )}
+
+                  <div className="ts-essay-card-actions">
+                    <button
+                      className="ts-btn ts-btn-outline ts-btn-sm"
+                      onClick={async () => {
+                        try {
+                          const res = await apiPost("/v1/admin/essay/keyword-grade", {
+                            submissionId: g.submissionId,
+                            questionNumber: g.questionNumber,
+                          });
+                          setEssayGradings(prev => prev.map(x => x.gradingId === res.gradingId ? res : x));
+                        } catch { alert("키워드 채점 실패"); }
+                      }}
+                    >
+                      키워드
+                    </button>
+                    <button
+                      className="ts-btn ts-btn-outline ts-btn-sm"
+                      onClick={async () => {
+                        try {
+                          const res = await apiPost("/v1/admin/essay/ai-grade", {
+                            submissionId: g.submissionId,
+                            questionNumber: g.questionNumber,
+                          });
+                          setEssayGradings(prev => prev.map(x => x.gradingId === res.gradingId ? res : x));
+                        } catch { alert("AI 채점 실패"); }
+                      }}
+                    >
+                      AI 채점
+                    </button>
+                    <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                      <input
+                        type="number"
+                        className="ts-sheet-input"
+                        style={{ width: 60 }}
+                        placeholder="점수"
+                        defaultValue={g.finalScore ?? g.aiScore ?? g.keywordScore ?? ""}
+                        id={`final-${g.gradingId}`}
+                      />
+                      <button
+                        className="ts-btn ts-btn-primary ts-btn-sm"
+                        onClick={async () => {
+                          const input = document.getElementById(`final-${g.gradingId}`);
+                          const score = parseInt(input?.value);
+                          if (isNaN(score)) { alert("점수를 입력해주세요."); return; }
+                          try {
+                            const res = await apiPut("/v1/admin/essay/confirm", {
+                              gradingId: g.gradingId,
+                              finalScore: score,
+                            });
+                            setEssayGradings(prev => prev.map(x => x.gradingId === res.gradingId ? res : x));
+                            alert("확정 완료");
+                          } catch { alert("확정 실패"); }
+                        }}
+                      >
+                        확정
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       )}

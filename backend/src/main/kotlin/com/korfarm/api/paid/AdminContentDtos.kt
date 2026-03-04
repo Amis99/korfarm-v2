@@ -20,6 +20,7 @@ data class AdminContentSummary(
 data class ContentPreview(
     val contentId: String,
     val contentType: String,
+    val moduleKey: String?,
     val levelId: String?,
     val chapterId: String?,
     val title: String,

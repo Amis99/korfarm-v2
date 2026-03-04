@@ -600,25 +600,25 @@ function StartPage() {
               유료 학습
             </h2>
             <div className="start-paid-grid">
-              <div className="start-paid-card" onClick={() => navigate("/pro-mode")}>
+              <div className={`start-paid-card${!hasSub ? " start-paid-card--locked" : ""}`} onClick={() => navigate(hasSub ? "/pro-mode" : "/subscription")}>
                 <span className="material-symbols-outlined">military_tech</span>
                 <h3>프로 모드</h3>
                 <p>12레벨 심화 학습</p>
                 {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
-              <div className="start-paid-card" onClick={() => navigate("/farm-mode")}>
+              <div className={`start-paid-card${!hasSub ? " start-paid-card--locked" : ""}`} onClick={() => navigate(hasSub ? "/farm-mode" : "/subscription")}>
                 <span className="material-symbols-outlined">agriculture</span>
                 <h3>농장별 모드</h3>
                 <p>영역별 집중 학습</p>
                 {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
-              <div className="start-paid-card" onClick={() => navigate("/writing")}>
+              <div className={`start-paid-card${!hasSub ? " start-paid-card--locked" : ""}`} onClick={() => navigate(hasSub ? "/writing" : "/subscription")}>
                 <span className="material-symbols-outlined">edit_note</span>
                 <h3>지식과 지혜</h3>
                 <p>글쓰기 훈련</p>
                 {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
-              <div className="start-paid-card" onClick={() => navigate("/tests")}>
+              <div className={`start-paid-card${!hasSub ? " start-paid-card--locked" : ""}`} onClick={() => navigate(hasSub ? "/tests" : "/subscription")}>
                 <span className="material-symbols-outlined">quiz</span>
                 <h3>테스트 창고</h3>
                 <p>각종 시험 모음</p>
@@ -633,7 +633,6 @@ function StartPage() {
                 <span className="material-symbols-outlined">menu_book</span>
                 <h3>수확 장부</h3>
                 <p>작물 거래 내역</p>
-                {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
               <div className="start-paid-card" onClick={() => navigate("/tests?tab=history")}>
                 <span className="material-symbols-outlined">assessment</span>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet } from "../utils/api";
+import { apiGet, isPaymentRequired } from "../utils/api";
 import VideoModal from "../components/VideoModal";
 import "../styles/pro-mode.css";
 import "../styles/video-modal.css";
@@ -12,6 +12,7 @@ function ProModePage() {
   const [chapters, setChapters] = useState([]);
   const [userLevel, setUserLevel] = useState("");
   const [loading, setLoading] = useState(true);
+  const [needSubscription, setNeedSubscription] = useState(false);
   const [videoUrl, setVideoUrl] = useState(null);
 
   useEffect(() => {
@@ -25,7 +26,13 @@ function ProModePage() {
         setUserLevel(me?.levelId || "");
         setChapters(chaps || []);
       })
-      .catch((e) => console.error(e))
+      .catch((e) => {
+        if (isPaymentRequired(e)) {
+          setNeedSubscription(true);
+        } else {
+          console.error(e);
+        }
+      })
       .finally(() => setLoading(false));
   }, [isLoggedIn]);
 
@@ -58,7 +65,10 @@ function ProModePage() {
   };
 
   const handleRowClick = (ch) => {
-    if (!ch.isAccessible) return;
+    if (!ch.isAccessible) {
+      alert("이전 챕터를 먼저 통과해야 잠금이 해제됩니다.");
+      return;
+    }
     navigate(`/pro-mode/chapter/${ch.chapterId}`);
   };
 
@@ -82,6 +92,13 @@ function ProModePage() {
 
         {loading ? (
           <div className="pro-loading">불러오는 중...</div>
+        ) : needSubscription ? (
+          <div className="pro-center">
+            <p>프로 모드는 구독 회원 전용 기능입니다.</p>
+            <Link to="/subscription" style={{ color: "#f06c24", fontWeight: 700, marginTop: 8, display: "inline-block" }}>
+              구독하러 가기
+            </Link>
+          </div>
         ) : chapters.length === 0 ? (
           <div className="pro-center">
             <p>등록된 챕터가 없습니다.</p>

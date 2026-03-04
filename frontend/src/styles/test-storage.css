@@ -478,6 +478,25 @@
   outline: none;
 }
 
+.ts-omr-essay-textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+  font-size: 13px;
+  background: var(--panel);
+  color: var(--text);
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+  font-family: inherit;
+}
+
+.ts-omr-essay-textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
 .ts-omr-footer {
   text-align: center;
   margin-top: 8px;
@@ -1248,4 +1267,136 @@
 
 .ts-level-filter {
   margin-bottom: 16px;
+}
+
+/* ── 서술형 채점 탭 ── */
+.ts-essay-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ts-essay-card {
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  padding: 16px;
+  background: var(--panel);
+}
+
+.ts-essay-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.ts-essay-qnum {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.ts-essay-status {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.ts-essay-status-pending {
+  background: #eee;
+  color: #666;
+}
+
+.ts-essay-status-keyword_graded {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.ts-essay-status-ai_graded {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.ts-essay-status-confirmed {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.ts-essay-pts {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.ts-essay-field {
+  margin-bottom: 10px;
+}
+
+.ts-essay-field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.ts-essay-answer {
+  padding: 8px 12px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.ts-essay-model {
+  padding: 8px 12px;
+  background: #e8f5e9;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.ts-essay-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ts-kw {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.ts-kw-match {
+  background: #c8e6c9;
+  color: #2e7d32;
+}
+
+.ts-kw-miss {
+  background: #ffcdd2;
+  color: #c62828;
+  text-decoration: line-through;
+}
+
+.ts-essay-ai-feedback {
+  padding: 8px 12px;
+  background: #e3f2fd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.ts-essay-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--stroke);
 }

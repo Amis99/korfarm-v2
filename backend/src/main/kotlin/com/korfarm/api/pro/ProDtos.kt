@@ -116,3 +116,10 @@ data class RegisterProChapterTestRequest(
     val version: Int,
     val testPaperId: String
 )
+
+// 모범답안 응답
+data class AnswerKeyResponse(
+    val contentId: String,
+    val title: String,
+    val payload: String?
+)

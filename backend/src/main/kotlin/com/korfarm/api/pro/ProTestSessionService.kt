@@ -17,7 +17,8 @@ class ProTestSessionService(
     private val progressRepo: ProProgressRepo,
     private val testPaperRepo: TestPaperRepo,
     private val testService: TestService,
-    private val proModeService: ProModeService
+    private val proModeService: ProModeService,
+    private val essayGradingService: EssayGradingService
 ) {
     companion object {
         const val PASS_SCORE = 70
@@ -126,6 +127,10 @@ class ProTestSessionService(
 
         // TestService로 채점
         val submission = testService.submitOmr(session.testId, userId, userId, request.answers)
+
+        // 서술형 채점 레코드 생성
+        essayGradingService.createGradingsForSubmission(submission.id, session.testId, userId, request.answers)
+
         val paper = testPaperRepo.findById(session.testId).orElse(null)
         val totalPoints = paper?.totalPoints ?: 100
 

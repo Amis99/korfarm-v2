@@ -61,6 +61,7 @@ class ContentCatalogController(
             data = ContentPreview(
                 contentId = content.id,
                 contentType = content.contentType,
+                moduleKey = content.moduleKey,
                 levelId = content.levelId,
                 chapterId = content.chapterId,
                 title = content.title,

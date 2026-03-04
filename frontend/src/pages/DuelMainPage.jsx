@@ -16,6 +16,7 @@ function DuelMainPage() {
   const { isLoggedIn } = useAuth();
   const [serverStats, setServerStats] = useState({});
   const [myStats, setMyStats] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -32,7 +33,10 @@ function DuelMainPage() {
             [server.id]: { roomCount: list.length },
           }));
         })
-        .catch((e) => console.error(e));
+        .catch((e) => {
+          console.error(e);
+          setError("대결 서버 정보를 불러오는 데 실패했습니다. 잠시 후 다시 시도해 주세요.");
+        });
     });
 
     apiGet("/v1/duel/stats?serverId=frege")
@@ -44,6 +48,12 @@ function DuelMainPage() {
     <div className="duel-main">
       <h1>대결하기</h1>
       <p className="subtitle">서버를 선택하여 대결에 참가하세요</p>
+
+      {error && (
+        <div style={{ background: "#fff3e0", color: "#e65100", padding: "12px 16px", borderRadius: 8, margin: "0 16px 16px", textAlign: "center", fontSize: 14 }}>
+          {error}
+        </div>
+      )}
 
       <div className="duel-servers">
         {SERVERS.map((server) => (

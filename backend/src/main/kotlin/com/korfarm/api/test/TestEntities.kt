@@ -104,6 +104,15 @@ class TestQuestionEntity(
     @Column(columnDefinition = "TEXT")
     var intent: String? = null,
 
+    @Column(name = "essay_keywords_json", columnDefinition = "TEXT")
+    var essayKeywordsJson: String? = null,
+
+    @Column(name = "essay_rubric_json", columnDefinition = "TEXT")
+    var essayRubricJson: String? = null,
+
+    @Column(name = "model_answer", columnDefinition = "TEXT")
+    var modelAnswer: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now()
 ) {

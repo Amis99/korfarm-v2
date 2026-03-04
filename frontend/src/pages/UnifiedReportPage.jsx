@@ -85,6 +85,10 @@ export default function UnifiedReportPage() {
       {loading && <div className="ur-loading">불러오는 중...</div>}
       {error && <div className="ur-empty">{error}</div>}
 
+      {!loading && !error && !report && (
+        <div className="ur-empty">해당 기간의 학습 데이터가 없습니다.</div>
+      )}
+
       {!loading && report && (
         <>
           <ReportSummaryCards summary={report.summary} />

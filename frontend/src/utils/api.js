@@ -1,6 +1,18 @@
 export const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
 export const TOKEN_KEY = "korfarm_token";
 
+// HTTP 상태 코드를 포함하는 커스텀 에러 클래스
+export class ApiError extends Error {
+  constructor(message, status) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
+  }
+}
+
+// 402 에러 여부 확인 헬퍼
+export const isPaymentRequired = (error) => error?.status === 402;
+
 const buildUrl = (path) => {
   const base = API_BASE.replace(/\/$/, "");
   return path.startsWith("http") ? path : `${base}${path}`;
@@ -39,7 +51,7 @@ export const apiGet = async (path) => {
     headers: authHeaders(),
   });
   if (!response.ok) {
-    throw new Error(await parseError(response, "GET", path));
+    throw new ApiError(await parseError(response, "GET", path), response.status);
   }
   const payload = await response.json();
   return payload?.data ?? payload;
@@ -55,7 +67,7 @@ export const apiPost = async (path, body) => {
     body: body ? JSON.stringify(body) : "{}",
   });
   if (!response.ok) {
-    throw new Error(await parseError(response, "POST", path));
+    throw new ApiError(await parseError(response, "POST", path), response.status);
   }
   const payload = await response.json();
   return payload?.data ?? payload;
@@ -67,7 +79,7 @@ export const apiDelete = async (path) => {
     headers: authHeaders(),
   });
   if (!response.ok) {
-    throw new Error(await parseError(response, "DELETE", path));
+    throw new ApiError(await parseError(response, "DELETE", path), response.status);
   }
   const payload = await response.json();
   return payload?.data ?? payload;
@@ -83,7 +95,7 @@ export const apiPut = async (path, body) => {
     body: body ? JSON.stringify(body) : "{}",
   });
   if (!response.ok) {
-    throw new Error(await parseError(response, "PUT", path));
+    throw new ApiError(await parseError(response, "PUT", path), response.status);
   }
   const payload = await response.json();
   return payload?.data ?? payload;

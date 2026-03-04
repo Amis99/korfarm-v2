@@ -48,6 +48,7 @@ function FarmListPage() {
   const [progressModal, setProgressModal] = useState(null);
   const [pageProgress, setPageProgress] = useState(null);
   const [pageProgressLoading, setPageProgressLoading] = useState(false);
+  const [pageProgressError, setPageProgressError] = useState(false);
   const [videoUrl, setVideoUrl] = useState(null);
 
   const staticItems = useMemo(() => getLearningItemsByFarm(farmId), [farmId]);
@@ -106,6 +107,7 @@ function FarmListPage() {
       return;
     }
     setPageProgressLoading(true);
+    setPageProgressError(false);
     apiPost("/v1/learning/farm/page-progress", {
       contentId: progressModal.contentId,
     })
@@ -115,6 +117,7 @@ function FarmListPage() {
       })
       .catch(() => {
         setPageProgress(null);
+        setPageProgressError(true);
         setPageProgressLoading(false);
       });
   }, [progressModal]);
@@ -418,6 +421,11 @@ function FarmListPage() {
               </>
             ) : (
               <div className="farm-progress-actions">
+                {pageProgressError && (
+                  <p style={{ color: "#c0564e", fontSize: 13, marginBottom: 8 }}>
+                    진행 정보를 불러오지 못했습니다.
+                  </p>
+                )}
                 <button
                   type="button"
                   className="start-btn-primary"

@@ -5,6 +5,7 @@ import PhonemeChangeModule from "./PhonemeChangeModule";
 import WordFormationModule from "./WordFormationModule";
 import SentenceStructureModule from "./SentenceStructureModule";
 import ContentPdfModule from "./ContentPdfModule";
+import AnswerKeyModule from "./AnswerKeyModule";
 
 export const MODULES = {
   worksheet_quiz: WorksheetQuizModule,
@@ -14,4 +15,5 @@ export const MODULES = {
   word_formation: WordFormationModule,
   sentence_structure: SentenceStructureModule,
   content_pdf: ContentPdfModule,
+  answer_key: AnswerKeyModule,
 };

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Service
 class TestService(
@@ -156,16 +157,28 @@ class TestService(
 
         for (q in questions) {
             val myAnswer = answers[q.number.toString()] ?: ""
-            val isCorrect = if (q.type == "객관식") {
-                myAnswer.isNotBlank() && myAnswer == q.correctAnswer
+            val isCorrect: Boolean
+            val earned: Int
+
+            if (q.type == "객관식") {
+                isCorrect = myAnswer.isNotBlank() && myAnswer == q.correctAnswer
+                earned = if (isCorrect) q.points else 0
             } else {
-                false // 서술형은 별도 채점
+                // 서술형: 키워드 매칭으로 임시 채점
+                val keywords = parseEssayKeywords(q.essayKeywordsJson)
+                if (keywords != null && keywords.isNotEmpty() && myAnswer.isNotBlank()) {
+                    val keywordResult = gradeByKeywords(myAnswer, keywords, q.points)
+                    earned = keywordResult.score
+                    isCorrect = earned >= q.points * 0.7
+                } else {
+                    isCorrect = false
+                    earned = 0
+                }
             }
-            val earned = if (isCorrect) q.points else 0
-            if (isCorrect) {
-                score += earned
-                correctCount++
-            }
+
+            if (isCorrect) correctCount++
+            score += earned
+
             details.add(
                 mapOf(
                     "q" to q.number,
@@ -385,7 +398,10 @@ class TestService(
                 points = q.points,
                 correctAnswer = q.correctAnswer,
                 choiceExplanations = parseExplanations(q.choiceExplanationsJson),
-                intent = q.intent
+                intent = q.intent,
+                essayKeywords = parseEssayKeywords(q.essayKeywordsJson),
+                essayRubric = q.essayRubricJson,
+                modelAnswer = q.modelAnswer
             )
         }
     }
@@ -407,7 +423,10 @@ class TestService(
                 points = inp.points,
                 correctAnswer = inp.correctAnswer,
                 choiceExplanationsJson = inp.choiceExplanations?.let { objectMapper.writeValueAsString(it) },
-                intent = inp.intent
+                intent = inp.intent,
+                essayKeywordsJson = inp.essayKeywords?.let { objectMapper.writeValueAsString(it) },
+                essayRubricJson = inp.essayRubric,
+                modelAnswer = inp.modelAnswer
             )
         }
         questionRepo.saveAll(entities)
@@ -563,6 +582,53 @@ class TestService(
     private fun parseExplanations(json: String?): Map<String, String>? {
         if (json.isNullOrBlank()) return null
         return objectMapper.readValue(json, object : TypeReference<Map<String, String>>() {})
+    }
+
+    data class KeywordGradeResult(
+        val score: Int,
+        val matched: List<String>,
+        val missed: List<String>
+    )
+
+    fun gradeByKeywords(answer: String, keywords: List<EssayKeyword>, maxPoints: Int): KeywordGradeResult {
+        val totalWeight = keywords.sumOf { it.weight }
+        if (totalWeight == 0) return KeywordGradeResult(0, emptyList(), keywords.map { it.keyword })
+        val matched = mutableListOf<String>()
+        val missed = mutableListOf<String>()
+        var matchedWeight = 0
+        for (kw in keywords) {
+            if (answer.contains(kw.keyword, ignoreCase = true)) {
+                matched.add(kw.keyword)
+                matchedWeight += kw.weight
+            } else {
+                missed.add(kw.keyword)
+            }
+        }
+        val score = (matchedWeight.toDouble() / totalWeight * maxPoints).toInt()
+        return KeywordGradeResult(score, matched, missed)
+    }
+
+    fun parseEssayKeywords(json: String?): List<EssayKeyword>? {
+        if (json.isNullOrBlank()) return null
+        return try {
+            objectMapper.readValue(json, object : TypeReference<List<EssayKeyword>>() {})
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    fun getQuestion(testId: String, questionNumber: Int): TestQuestionEntity? {
+        return questionRepo.findByTestIdOrderByNumberAsc(testId).find { it.number == questionNumber }
+    }
+
+    fun getSubmission(submissionId: String): TestSubmissionEntity? {
+        return submissionRepo.findById(submissionId).orElse(null)
+    }
+
+    fun updateSubmissionScore(submissionId: String, additionalScore: Int) {
+        val sub = submissionRepo.findById(submissionId).orElse(null) ?: return
+        sub.score = sub.score + additionalScore
+        submissionRepo.save(sub)
     }
 
     private fun buildFeedback(q: TestQuestionEntity, myAnswer: String, explanations: Map<String, String>?): String {

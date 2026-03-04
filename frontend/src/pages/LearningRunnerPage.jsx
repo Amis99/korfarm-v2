@@ -14,6 +14,19 @@ function isDbContentId(id) {
   return id && id.startsWith("content_");
 }
 
+/* contentType → moduleKey 매핑 (DB에 moduleKey가 없는 경우 fallback) */
+const CONTENT_TYPE_TO_MODULE = {
+  PRO_READING: "reading_training",
+  PRO_VOCAB: "worksheet_quiz",
+  PRO_BACKGROUND: "worksheet_quiz",
+  PRO_LOGIC: "worksheet_quiz",
+  PRO_ANSWER: "answer_key",
+};
+function resolveModuleKey(contentType) {
+  if (!contentType) return null;
+  return CONTENT_TYPE_TO_MODULE[contentType] || CONTENT_TYPE_TO_MODULE[contentType.toUpperCase()] || null;
+}
+
 function LearningRunnerPage() {
   const { learningId } = useParams();
   const [searchParams] = useSearchParams();
@@ -58,7 +71,7 @@ function LearningRunnerPage() {
           id: learningId,
           contentId: data.contentId || learningId,
           contentType: data.contentType || data.content_type,
-          moduleKey: data.moduleKey || data.content?.moduleKey || data.contentType?.toLowerCase() || "worksheet_quiz",
+          moduleKey: data.module_key || data.moduleKey || data.content?.moduleKey || resolveModuleKey(data.content_type || data.contentType) || "worksheet_quiz",
           title: data.title,
           jsonPath: null,
         });

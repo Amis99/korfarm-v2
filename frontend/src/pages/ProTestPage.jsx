@@ -315,12 +315,12 @@ function ProTestPage() {
                             </div>
                           ) : (
                             <div className="ts-omr-essay">
-                              <input
-                                type="text"
-                                placeholder="서술형"
+                              <textarea
+                                rows={4}
+                                placeholder="서술형 답안을 입력하세요"
                                 value={answers[String(q.number)] || ""}
                                 onChange={e => setAnswers(prev => ({ ...prev, [String(q.number)]: e.target.value }))}
-                                className="ts-omr-essay-input"
+                                className="ts-omr-essay-textarea"
                               />
                             </div>
                           )}

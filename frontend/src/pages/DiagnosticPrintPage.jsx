@@ -71,7 +71,12 @@ function DiagnosticPrintPage() {
     try {
       const pdfFileId = await apiGet(`/v1/test-storage/${test.testId}/pdf`);
       const token = localStorage.getItem(TOKEN_KEY);
-      setPdfUrl(`${API_BASE}/v1/files/${pdfFileId}/download?token=${token}`);
+      const resp = await fetch(`${API_BASE}/v1/files/${pdfFileId}/download`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!resp.ok) throw new Error("PDF 다운로드 실패");
+      const blob = await resp.blob();
+      setPdfUrl(URL.createObjectURL(blob));
       setPhase("print");
     } catch {
       alert("시험지 PDF를 불러올 수 없습니다.");
@@ -184,7 +189,10 @@ function DiagnosticPrintPage() {
           <button
             className="btn ghost"
             type="button"
-            onClick={() => { setPhase("select"); setPrinted(false); setPdfUrl(""); }}
+            onClick={() => {
+              if (pdfUrl.startsWith("blob:")) URL.revokeObjectURL(pdfUrl);
+              setPhase("select"); setPrinted(false); setPdfUrl(""); setSelectedTest(null);
+            }}
           >
             다른 레벨 선택
           </button>

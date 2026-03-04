@@ -1,0 +1,194 @@
+/* 모범답안 모듈 */
+.ak-module {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.ak-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.ak-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.ak-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ak-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ak-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.ak-btn-print {
+  background: #f0f0f0;
+  color: #333;
+}
+.ak-btn-print:hover {
+  background: #e0e0e0;
+}
+
+.ak-btn-complete {
+  background: #2e7d32;
+  color: #fff;
+}
+.ak-btn-complete:hover {
+  background: #1b5e20;
+}
+
+.ak-empty {
+  text-align: center;
+  color: #999;
+  padding: 40px 0;
+}
+
+.ak-section {
+  margin-bottom: 32px;
+}
+
+.ak-section-title {
+  margin: 0 0 16px;
+}
+
+.ak-section-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: #1565c0;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.ak-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ak-item {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.ak-item-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ak-item-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1565c0;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.ak-item-type {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #e3f2fd;
+  color: #1565c0;
+  font-weight: 600;
+}
+
+.ak-item-pts {
+  font-size: 0.8rem;
+  color: #666;
+  margin-left: auto;
+}
+
+.ak-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.ak-item-question p,
+.ak-item-explanation p,
+.ak-item-model p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.ak-item-answer {
+  margin: 8px 0;
+}
+
+.ak-answer-text {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1565c0;
+}
+
+.ak-item-explanation {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #e0e0e0;
+}
+
+.ak-item-model {
+  margin-top: 8px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+/* 인쇄 최적화 */
+@media print {
+  .ak-module {
+    padding: 0;
+    max-width: 100%;
+  }
+  .ak-actions {
+    display: none;
+  }
+  .ak-item {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+  }
+  .ak-section {
+    break-inside: avoid;
+  }
+}
