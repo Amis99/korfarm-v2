@@ -98,6 +98,9 @@ class TestQuestionEntity(
     @Column(name = "correct_answer")
     var correctAnswer: String? = null,
 
+    @Column(name = "choices_json", columnDefinition = "TEXT")
+    var choicesJson: String? = null,
+
     @Column(name = "choice_explanations_json", columnDefinition = "TEXT")
     var choiceExplanationsJson: String? = null,
 

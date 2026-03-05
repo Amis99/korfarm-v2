@@ -39,6 +39,11 @@ data class TestPaperDetail(
 )
 
 // ── Admin: Question view ──
+data class ChoiceItem(
+    val id: String,
+    val text: String
+)
+
 data class TestQuestionView(
     val questionId: String,
     val number: Int,
@@ -48,6 +53,7 @@ data class TestQuestionView(
     val passage: String?,
     val points: Int,
     val correctAnswer: String?,
+    val choices: List<ChoiceItem>?,
     val choiceExplanations: Map<String, String>?,
     val intent: String?,
     val essayKeywords: List<EssayKeyword>?,

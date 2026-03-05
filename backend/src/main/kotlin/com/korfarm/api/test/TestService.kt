@@ -397,6 +397,7 @@ class TestService(
                 passage = q.passage,
                 points = q.points,
                 correctAnswer = q.correctAnswer,
+                choices = parseChoices(q.choicesJson),
                 choiceExplanations = parseExplanations(q.choiceExplanationsJson),
                 intent = q.intent,
                 essayKeywords = parseEssayKeywords(q.essayKeywordsJson),
@@ -582,6 +583,11 @@ class TestService(
     private fun parseExplanations(json: String?): Map<String, String>? {
         if (json.isNullOrBlank()) return null
         return objectMapper.readValue(json, object : TypeReference<Map<String, String>>() {})
+    }
+
+    private fun parseChoices(json: String?): List<ChoiceItem>? {
+        if (json.isNullOrBlank()) return null
+        return objectMapper.readValue(json, object : TypeReference<List<ChoiceItem>>() {})
     }
 
     data class KeywordGradeResult(
