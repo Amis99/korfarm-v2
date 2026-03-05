@@ -378,9 +378,8 @@
 /* [5] 통계 */
 .start-stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  margin-bottom: 16px;
 }
 
 .start-stats-card {
@@ -424,68 +423,36 @@
   text-align: left;
 }
 
-.start-seed-section {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 14px;
-}
-
-.start-seed-log-card {
-  background: #fff;
-  border-radius: 18px;
-  padding: 16px;
-  border: 2px solid var(--card-border);
-}
-
-.start-seed-log-card h4 {
-  margin: 0 0 10px;
+/* 빠른 액션 버튼 행 */
+.start-quick-actions {
   display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.start-quick-btn {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 15px;
-}
-
-.start-seed-log-card h4 .material-symbols-outlined {
-  font-size: 20px;
-  color: var(--meadow-dark);
-}
-
-.start-seed-exchange-card {
-  background: linear-gradient(135deg, #e4f4e7, #d4ecd8);
-  border-radius: 18px;
-  padding: 16px;
-  border: 2px solid rgba(125, 191, 122, 0.4);
-  text-align: center;
+  padding: 8px 14px;
+  border: 2px solid var(--card-border);
+  border-radius: 12px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--earth-brown);
   cursor: pointer;
-  display: grid;
-  place-items: center;
-  gap: 6px;
   transition: all 0.15s;
 }
 
-.start-seed-exchange-card:hover {
-  box-shadow: 0 6px 18px rgba(125, 191, 122, 0.3);
+.start-quick-btn:hover {
+  background: rgba(255, 170, 92, 0.1);
+  border-color: rgba(255, 170, 92, 0.5);
 }
 
-.start-seed-exchange-card h4 {
-  margin: 0;
-  font-size: 15px;
-}
-
-.start-seed-exchange-card p {
-  margin: 0;
-  font-size: 13px;
-  color: #4a7a4a;
-}
-
-.start-seed-exchange-card button {
-  border: none;
-  background: #4caf50;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-weight: 800;
-  cursor: pointer;
+.start-quick-btn .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--meadow-dark);
 }
 
 /* [6] 외부 링크 */
@@ -1355,8 +1322,8 @@
   .start-learn-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .start-seed-section {
-    grid-template-columns: 1fr;
+  .start-quick-actions {
+    flex-wrap: wrap;
   }
 }
 

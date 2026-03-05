@@ -715,11 +715,6 @@ function StartPage() {
                     ]}
               </ul>
             </div>
-            <div className="start-stats-card" onClick={() => navigate("/harvest-ledger")}>
-              <span className="material-symbols-outlined">menu_book</span>
-              <h3>수확 장부</h3>
-              <p>작물 거래 내역</p>
-            </div>
             <div className="start-stats-card" onClick={() => navigate("/tests?tab=history")}>
               <span className="material-symbols-outlined">assessment</span>
               <h3>테스트 기록실</h3>
@@ -731,31 +726,19 @@ function StartPage() {
               <p>전 영역 학습 분석</p>
             </div>
           </div>
-          <div className="start-seed-section">
-            <div className="start-seed-log-card">
-              <h4>
-                <span className="material-symbols-outlined">history</span>
-                씨앗 획득 내역
-              </h4>
-              {seedLog.length > 0 ? (
-                <ul className="start-seed-log">
-                  {seedLog.map((entry, i) => (
-                    <li key={entry.id || i}>
-                      {SEED_LABELS[entry.itemType] || SEED_LABELS[entry.seedType] || entry.itemType || "씨앗"} +{entry.delta || 0}개 · {entry.reason || ""}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>아직 씨앗 획득 내역이 없습니다.</p>
-              )}
-              <Link className="start-card-button" to="/seed-log">전체 보기</Link>
-            </div>
-            <div className="start-seed-exchange-card" onClick={() => setShowCraftModal(true)}>
-              <span className="material-symbols-outlined" style={{ fontSize: 36, color: "#4caf50" }}>swap_horiz</span>
-              <h4>씨앗 교환</h4>
-              <p>씨앗 10개를 모아<br />수확물로 교환해요</p>
-              <button type="button">교환하기</button>
-            </div>
+          <div className="start-quick-actions">
+            <button type="button" className="start-quick-btn" onClick={() => navigate("/harvest-ledger")}>
+              <span className="material-symbols-outlined">menu_book</span>
+              수확 장부
+            </button>
+            <button type="button" className="start-quick-btn" onClick={() => navigate("/seed-log")}>
+              <span className="material-symbols-outlined">history</span>
+              씨앗 획득 내역
+            </button>
+            <button type="button" className="start-quick-btn" onClick={() => setShowCraftModal(true)}>
+              <span className="material-symbols-outlined">swap_horiz</span>
+              씨앗 교환
+            </button>
           </div>
         </section>
 
