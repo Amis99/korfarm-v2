@@ -116,7 +116,8 @@ class DiagnosticService(
             sessionId = session.id,
             status = session.status,
             answeredCount = session.answeredCount,
-            currentBatch = null // 클라이언트에서 관리
+            currentBatch = null, // 클라이언트에서 관리
+            mode = session.mode
         )
     }
 

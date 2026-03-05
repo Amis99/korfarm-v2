@@ -37,7 +37,8 @@ data class SessionStatusResponse(
     val sessionId: String,
     val status: String,
     val answeredCount: Int,
-    val currentBatch: List<QuestionDto>?
+    val currentBatch: List<QuestionDto>?,
+    val mode: String?
 )
 
 data class SubmitResponsesResponse(

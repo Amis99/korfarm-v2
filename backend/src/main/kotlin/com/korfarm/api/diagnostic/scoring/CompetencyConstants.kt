@@ -99,7 +99,7 @@ fun generateNarrative(name: String, score: Double, touchCount: Int): String {
 
 // 채점 설정 상수
 const val BASE_SCORE = 50.0
-const val CORRECT_WEIGHT = 0.5
-const val INCORRECT_WEIGHT = 0.8
+const val CORRECT_WEIGHT = 0.8
+const val INCORRECT_WEIGHT = 1.2
 const val MIN_QUESTIONS = 10
 const val FULL_CONFIDENCE_QUESTIONS = 40

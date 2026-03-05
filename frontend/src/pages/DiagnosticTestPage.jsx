@@ -79,7 +79,7 @@ function DiagnosticTestPage() {
             navigate(`/diagnostic/v2/report/${sessionId}`);
             return;
           }
-          dispatch({ type: "INIT", session: sess, batch: sess.currentBatch || [] });
+          dispatch({ type: "INIT", session: sess, batch: sess.currentBatch || [], mode: sess.mode });
         })
         .catch(() => navigate("/diagnostic/v2"));
     }
@@ -141,7 +141,7 @@ function DiagnosticTestPage() {
       </div>
 
       <div className="diag-test-batch-info">
-        <span>배치 내 {state.currentIndex + 1} / {state.currentBatch.length}</span>
+        <span>{state.currentIndex + 1} / {state.currentBatch.length}</span>
       </div>
 
       {state.mode === "cat" && state.totalAnswered === 0 && state.currentIndex === 0 && (
@@ -188,7 +188,7 @@ function DiagnosticTestPage() {
             onClick={handleSubmitBatch}
             disabled={state.isSubmitting}
           >
-            {state.isSubmitting ? "제출 중..." : "배치 제출"}
+            {state.isSubmitting ? "제출 중..." : state.mode === "cat" ? "배치 제출" : "제출"}
           </button>
         )}
       </div>
