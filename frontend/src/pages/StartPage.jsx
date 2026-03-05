@@ -210,10 +210,16 @@ function StartPage() {
     : Object.values(displayInventory?.crops || {}).reduce((a, b) => a + (typeof b === "number" ? b : 0), 0);
   const fertilizerCount = displayInventory?.fertilizer ?? 0;
 
-  const cropsObj = displayInventory?.crops || {};
+  const rawCrops = displayInventory?.crops || {};
+  const cropsObj = Array.isArray(rawCrops)
+    ? rawCrops.reduce((acc, e) => { acc[e.type || e.itemType] = e.count || 0; return acc; }, {})
+    : rawCrops;
   const seasonScore = calcSeasonScore(cropsObj, totalSeeds);
 
-  const seedsObj = displayInventory?.seeds || {};
+  const rawSeeds = displayInventory?.seeds || {};
+  const seedsObj = Array.isArray(rawSeeds)
+    ? rawSeeds.reduce((acc, e) => { acc[e.type || e.itemType] = e.count || 0; return acc; }, {})
+    : rawSeeds;
   const SEED_LABELS = { seed_wheat: "밀", seed_rice: "쌀", seed_corn: "옥수수", seed_grape: "포도", seed_apple: "사과" };
   const CROP_LABELS = { crop_wheat: "밀", crop_rice: "쌀", crop_corn: "옥수수", crop_grape: "포도", crop_apple: "사과" };
   const INVENTORY_ITEMS = [
