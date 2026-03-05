@@ -586,7 +586,14 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
             <div className="engine-stage-inner engine-scale">
               <main
                 className={`engine-body ${
-                  content?.payload?.pageStack && moduleKey === "worksheet_quiz" ? "stack" : ""
+                  (content?.payload?.pageStack && moduleKey === "worksheet_quiz") ||
+                  moduleKey === "content_pdf" ||
+                  moduleKey === "choice_judgement" ||
+                  moduleKey === "sentence_structure" ||
+                  moduleKey === "word_formation" ||
+                  moduleKey === "phoneme_change"
+                    ? "stack"
+                    : ""
                 }`}
               >
                 <Module content={content} />
