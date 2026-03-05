@@ -181,7 +181,7 @@ const FAQ_ITEMS = [
 
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
 
   return (
     <div className="landing-page">
@@ -203,9 +203,14 @@ function LandingPage() {
             <a href="#contact">상담 문의</a>
             <Link to="/shop">쇼핑몰</Link>
           </div>
-          <Link className="landing-nav-cta" to={isLoggedIn ? "/start" : "/login"}>
-            {isLoggedIn ? "학습하기" : "로그인"}
-          </Link>
+          {isLoggedIn ? (
+            <div className="landing-nav-auth">
+              <Link className="landing-nav-cta" to="/start">학습하기</Link>
+              <button className="landing-nav-logout" onClick={logout}>로그아웃</button>
+            </div>
+          ) : (
+            <Link className="landing-nav-cta" to="/login">로그인</Link>
+          )}
           <button
             className="landing-hamburger"
             onClick={() => setMobileMenuOpen((v) => !v)}
@@ -224,9 +229,14 @@ function LandingPage() {
             <a href="#faq" onClick={() => setMobileMenuOpen(false)}>자주 묻는 질문</a>
             <a href="#contact" onClick={() => setMobileMenuOpen(false)}>상담 문의</a>
             <Link to="/shop" onClick={() => setMobileMenuOpen(false)}>쇼핑몰</Link>
-            <Link className="landing-mobile-login" to={isLoggedIn ? "/start" : "/login"} onClick={() => setMobileMenuOpen(false)}>
-              {isLoggedIn ? "학습하기" : "로그인"}
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link className="landing-mobile-login" to="/start" onClick={() => setMobileMenuOpen(false)}>학습하기</Link>
+                <button className="landing-mobile-logout" onClick={() => { setMobileMenuOpen(false); logout(); }}>로그아웃</button>
+              </>
+            ) : (
+              <Link className="landing-mobile-login" to="/login" onClick={() => setMobileMenuOpen(false)}>로그인</Link>
+            )}
           </div>
         )}
       </nav>

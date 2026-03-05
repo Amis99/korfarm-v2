@@ -106,17 +106,26 @@ function TestsHistoryRedirect() {
 
 function GlobalLogo() {
   const { pathname } = useLocation();
+  const { isLoggedIn } = useAuth();
   const hideLogo =
-    pathname === "/" || pathname.startsWith("/admin") || pathname === "/ops" || pathname === "/community" || pathname.startsWith("/duel/match");
+    pathname === "/" || pathname.startsWith("/admin") || pathname === "/ops" || pathname.startsWith("/duel/match");
   if (hideLogo) {
     return null;
   }
   const label = "\uAD6D\uC5B4\uB18D\uC7A5";
+  const hideHomeBtn =
+    pathname === "/start" || pathname === "/daily-quiz" || pathname === "/daily-reading" || pathname === "/login" || pathname === "/signup";
   return (
     <div className="global-logo-bar">
       <Link className="global-logo-link" to="/" aria-label={label}>
         <img src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt={label} />
       </Link>
+      {isLoggedIn && !hideHomeBtn && (
+        <Link className="global-home-btn" to="/start">
+          <span className="material-symbols-outlined">cottage</span>
+          학습 홈
+        </Link>
+      )}
     </div>
   );
 }

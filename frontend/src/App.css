@@ -8,6 +8,9 @@
 
 .global-logo-bar {
   padding: 16px clamp(16px, 4vw, 48px) 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .global-logo-link {
@@ -22,6 +25,28 @@
   width: auto;
   max-width: 100%;
   display: block;
+}
+
+.global-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: rgba(255, 170, 92, 0.12);
+  color: #8a5f4f;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.global-home-btn:hover {
+  background: rgba(255, 170, 92, 0.25);
+}
+
+.global-home-btn .material-symbols-outlined {
+  font-size: 18px;
 }
 
 .hero {
