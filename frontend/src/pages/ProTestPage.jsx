@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, apiPost, API_BASE } from "../utils/api";
+import AnswerInputPanel from "../components/AnswerInputPanel";
 import "../styles/pro-mode.css";
 import "../styles/test-storage.css";
+import "../styles/test-online.css";
 
 function ProTestPage() {
   const { chapterId } = useParams();
@@ -117,7 +119,6 @@ function ProTestPage() {
   const handleStartOmr = async () => {
     setError("");
     try {
-      // 문항 정보 로드
       const qs = await apiGet(`/v1/test-storage/${session.testId}/questions`);
       setQuestions(Array.isArray(qs) ? qs : []);
       setAnswers({});
@@ -127,16 +128,15 @@ function ProTestPage() {
     }
   };
 
-  // 버블 클릭
-  const handleBubble = (qNum, choice) => {
+  // 답안 변경
+  const handleAnswer = (qNum, value) => {
     setAnswers(prev => {
-      const key = String(qNum);
-      if (prev[key] === String(choice)) {
+      if (value === null) {
         const next = { ...prev };
-        delete next[key];
+        delete next[String(qNum)];
         return next;
       }
-      return { ...prev, [key]: String(choice) };
+      return { ...prev, [String(qNum)]: String(value) };
     });
   };
 
@@ -272,73 +272,32 @@ function ProTestPage() {
             </div>
           )}
 
-          {/* ── omr_input 단계 ── */}
+          {/* ── omr_input 단계: PDF + 답안 패널 통합 ── */}
           {phase === "omr_input" && (
             <>
-              <div className="pro-test-omr-header">
+              <div className="pro-test-online-header">
                 <div className={`pro-test-timer ${remainingSec < 300 ? "warning" : ""}`}>
                   {formatTime(remainingSec)}
                 </div>
                 <p className="pro-test-timer-label">남은 시간</p>
               </div>
 
-              <div className="ts-omr-status pro-test-omr-status">
-                <span>{Object.keys(answers).length} / {questions.length} 응답</span>
-              </div>
-
-              <div className="ts-omr-grid">
-                {(() => {
-                  const rows = [];
-                  for (let i = 0; i < questions.length; i += 5) {
-                    rows.push(questions.slice(i, i + 5));
-                  }
-                  return rows.map((row, ri) => (
-                    <div key={ri} className="ts-omr-row">
-                      {row.map(q => (
-                        <div key={q.number} className="ts-omr-cell">
-                          <div className="ts-omr-qnum">
-                            <span className="ts-omr-num">{q.number}</span>
-                            <span className="ts-omr-type">{q.type === "서술형" ? "서" : ""}</span>
-                            <span className="ts-omr-pts">{q.points}점</span>
-                          </div>
-                          {q.type === "객관식" ? (
-                            <div className="ts-omr-bubbles">
-                              {[1, 2, 3, 4, 5].map(c => (
-                                <button
-                                  key={c}
-                                  className={`ts-omr-bubble ${answers[String(q.number)] === String(c) ? "selected" : ""}`}
-                                  onClick={() => handleBubble(q.number, c)}
-                                >
-                                  {c}
-                                </button>
-                              ))}
-                            </div>
-                          ) : (
-                            <div className="ts-omr-essay">
-                              <textarea
-                                rows={4}
-                                placeholder="서술형 답안을 입력하세요"
-                                value={answers[String(q.number)] || ""}
-                                onChange={e => setAnswers(prev => ({ ...prev, [String(q.number)]: e.target.value }))}
-                                className="ts-omr-essay-textarea"
-                              />
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  ));
-                })()}
-              </div>
-
-              <div className="pro-test-submit-area">
-                <button
-                  className="pro-test-btn primary"
-                  onClick={handleSubmit}
-                  disabled={submitting}
-                >
-                  {submitting ? "제출 중..." : "제출하기"}
-                </button>
+              <div className="pro-test-online-split">
+                {session?.pdfFileId && (
+                  <div className="test-online-pdf" onContextMenu={e => e.preventDefault()}>
+                    <iframe
+                      src={`${API_BASE}/v1/files/${session.pdfFileId}/download#toolbar=0&navpanes=0`}
+                      title="시험지"
+                    />
+                  </div>
+                )}
+                <AnswerInputPanel
+                  questions={questions}
+                  answers={answers}
+                  onAnswer={handleAnswer}
+                  onSubmit={handleSubmit}
+                  submitting={submitting}
+                />
               </div>
             </>
           )}

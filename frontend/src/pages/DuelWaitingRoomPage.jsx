@@ -183,7 +183,7 @@ function DuelWaitingRoomPage() {
       <div className="duel-waiting-header">
         <h1>{room?.room_name || "대기방"}</h1>
         <div className="room-info">
-          베팅 {stakeAmount}씨앗 | {players.length}/{room?.room_size ?? 10}명
+          베팅 {stakeAmount} {selectedSeedType ? (SEED_TYPES.find(s => s.key === selectedSeedType)?.label || "") + "씨앗" : "씨앗"} | {players.length}/{room?.room_size ?? 10}명
         </div>
       </div>
 

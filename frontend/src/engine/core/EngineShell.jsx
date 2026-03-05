@@ -55,6 +55,8 @@ const CONTENT_TYPE_FARM_MAPPING = {
   PRO_BACKGROUND: "background",
   PRO_LOGIC: "logic",
   PRO_ANSWER: "reading",
+  DAILY_QUIZ: "vocab",       // 일일퀴즈 → 밀 씨앗
+  DAILY_READING: "reading",  // 일일독해 → 쌀 씨앗
 };
 
 // 씨앗 종류별 색상/그라디언트 (헤더 아이콘용)
@@ -108,6 +110,8 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     const normalized = path.startsWith("/") ? path.slice(1) : path;
     return encodeURI(`${assetBase}${normalized}`);
   };
+  const farmLogIdRef = useRef(farmLogId);
+  farmLogIdRef.current = farmLogId;
   const [status, setStatus] = useState("READY");
   const [timeLeft, setTimeLeft] = useState(timeLimit);
   const [timePulse, setTimePulse] = useState(null);
@@ -399,9 +403,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     } catch {
       // ignore storage errors
     }
-    if (farmLogId) {
+    if (farmLogIdRef.current) {
       apiPost("/v1/learning/farm/complete", {
-        log_id: farmLogId,
+        log_id: farmLogIdRef.current,
         score: accuracy,
         earned_seed: earnedSeed,
         seed_type: chosenSeed?.type || content?.seedReward?.seedType,

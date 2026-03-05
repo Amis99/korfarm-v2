@@ -104,8 +104,7 @@ class DuelWebSocketHandler(
         val roomId = (body["room_id"] ?: body["roomId"])?.toString()
             ?: session.attributes["roomId"]?.toString() ?: return
         val userId = session.attributes["userId"]?.toString() ?: return
-        val stakeSeedType = (body["stake_seed_type"] ?: body["stakeSeedType"])?.toString()
-        duelService.toggleReady(userId, roomId, stakeSeedType)
+        duelService.toggleReady(userId, roomId)
         broadcastRoomUpdate(roomId)
     }
 

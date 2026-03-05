@@ -36,7 +36,7 @@ class SecurityConfig(
         config.allowedOriginPatterns = listOf(
             "http://localhost:*",
             "http://127.0.0.1:*",
-            "https://gfv2.hak1ad.kr"
+            "https://gf2.hak1ad.kr"
         )
         config.allowedMethods = listOf("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
         config.allowedHeaders = listOf("*")

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { API_BASE as DEFAULT_API_BASE, TOKEN_KEY } from "../utils/api";
-import "../App.css";
+
 
 const SAMPLE_SUBMIT = {
   answers: [{ questionId: "q_001", answer: "A" }],

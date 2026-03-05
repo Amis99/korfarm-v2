@@ -80,7 +80,10 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
             content_type: contentType,
           })
             .then((r) => { if (!cancelled) setFarmLogId(r.log_id ?? r.logId); })
-            .catch((e) => console.error(e));
+            .catch((e) => {
+              console.error("학습 시작 기록 실패:", e);
+              if (!cancelled) setError("학습 기록을 시작할 수 없습니다. 다시 시도해주세요.");
+            });
         }
       } catch (err) {
         if (!cancelled) setError(err.message);

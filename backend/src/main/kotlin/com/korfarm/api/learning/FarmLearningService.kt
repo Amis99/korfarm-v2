@@ -37,19 +37,24 @@ class FarmLearningService(
             return FarmCompleteResponse(success = false, earnedSeed = 0)
         }
 
+        // 서버 측에서 contentType 기반으로 씨앗 종류 결정 (프론트 값 무시)
+        val resolvedSeedType = SeedRewardPolicy.seedTypeForContentType(log.contentType)
+            ?: request.seedType
+            ?: "seed_wheat"
+
         val now = LocalDateTime.now()
         log.status = "COMPLETED"
         log.score = request.score
         log.accuracy = request.accuracy
         log.earnedSeed = request.earnedSeed
-        log.earnedSeedType = request.seedType
+        log.earnedSeedType = resolvedSeedType
         log.completedAt = now
         farmLearningLogRepository.save(log)
 
-        if (request.earnedSeed > 0 && !request.seedType.isNullOrBlank()) {
+        if (request.earnedSeed > 0) {
             economyService.addSeeds(
                 userId,
-                request.seedType,
+                resolvedSeedType,
                 request.earnedSeed,
                 "farm_learning",
                 "farm_learning_log",
@@ -120,6 +125,12 @@ class FarmLearningService(
 
     @Transactional
     fun pageComplete(userId: String, request: PageCompleteRequest): PageCompleteResponse {
+        // 서버 측에서 contentType 기반으로 씨앗 종류 결정
+        val parentLog = farmLearningLogRepository.findById(request.logId).orElse(null)
+        val resolvedSeedType = parentLog?.contentType?.let { SeedRewardPolicy.seedTypeForContentType(it) }
+            ?: request.seedType
+            ?: "seed_wheat"
+
         val entity = ContentPageProgressEntity(
             id = IdGenerator.newId("cpp"),
             userId = userId,
@@ -129,15 +140,15 @@ class FarmLearningService(
             score = request.score,
             accuracy = request.accuracy,
             earnedSeed = request.earnedSeed,
-            earnedSeedType = request.seedType,
+            earnedSeedType = resolvedSeedType,
             completedAt = LocalDateTime.now()
         )
         contentPageProgressRepository.save(entity)
 
-        if (request.earnedSeed > 0 && !request.seedType.isNullOrBlank()) {
+        if (request.earnedSeed > 0) {
             economyService.addSeeds(
                 userId,
-                request.seedType,
+                resolvedSeedType,
                 request.earnedSeed,
                 "farm_page_learning",
                 "content_page_progress",

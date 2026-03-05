@@ -624,6 +624,11 @@ function StartPage() {
                 <p>각종 시험 모음</p>
                 {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
+              <div className="start-paid-card" onClick={() => navigate("/diagnostic/v2")}>
+                <span className="material-symbols-outlined">neurology</span>
+                <h3>역량 진단 (v2)</h3>
+                <p>10대 역량 정밀 측정</p>
+              </div>
               <div className="start-paid-card" onClick={() => navigate("/diagnostic/print")}>
                 <span className="material-symbols-outlined">biotech</span>
                 <h3>진단 테스트</h3>
@@ -656,7 +661,7 @@ function StartPage() {
                 <ul className="start-seed-log">
                   {seedLog.map((entry, i) => (
                     <li key={entry.id || i}>
-                      {entry.itemType || entry.seedType || "씨앗"} +{entry.delta || 0}개 ·{" "}
+                      {SEED_LABELS[entry.itemType] || SEED_LABELS[entry.seedType] || entry.itemType || "씨앗"} +{entry.delta || 0}개 ·{" "}
                       {entry.reason || ""}
                     </li>
                   ))}
@@ -782,7 +787,7 @@ function StartPage() {
             </div>
             <div className="start-formula-box">
               <strong>시즌 점수 공식</strong><br />
-              (밀×쌀×옥수수×포도×사과)×50 + 총씨앗
+              {FORMULA_TEXT}
             </div>
             <button type="button" className="start-modal-close" onClick={() => setShowInventoryPopup(false)}>
               닫기

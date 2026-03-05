@@ -50,7 +50,9 @@ object SeedRewardPolicy {
         "LOGIC_REASONING" to "logic",
         "LOGIC_REASONING_QUIZ" to "logic",
         "CHOICE_JUDGEMENT" to "choice",
-        "WRITING_DESCRIPTIVE" to "writing"
+        "WRITING_DESCRIPTIVE" to "writing",
+        "DAILY_QUIZ" to "vocab",        // 일일퀴즈 → 밀 씨앗
+        "DAILY_READING" to "reading"    // 일일독해 → 쌀 씨앗
     )
 
     fun seedCountFor(userLevelId: String?, contentLevelId: String?): Int {

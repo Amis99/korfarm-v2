@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiGet, API_BASE, TOKEN_KEY } from "../utils/api";
+import { apiGet, apiPost, API_BASE, TOKEN_KEY } from "../utils/api";
+import AnswerInputPanel from "../components/AnswerInputPanel";
 import "../styles/diagnostic.css";
+import "../styles/test-online.css";
 
 const LEVEL_INFO = {
   saussure: { label: "소쉬르", desc: "초등 저학년", icon: "eco" },
@@ -16,7 +18,7 @@ const blockEvent = (event) => {
 };
 
 function DiagnosticPrintPage() {
-  const [phase, setPhase] = useState("select"); // select | print
+  const [phase, setPhase] = useState("select"); // select | print | online
   const [tests, setTests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTest, setSelectedTest] = useState(null);
@@ -24,6 +26,12 @@ function DiagnosticPrintPage() {
   const [printed, setPrinted] = useState(false);
   const [isObscured, setIsObscured] = useState(false);
   const navigate = useNavigate();
+
+  // 온라인 응시
+  const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [onlineError, setOnlineError] = useState("");
 
   // 진단 테스트 목록 로드
   useEffect(() => {
@@ -100,6 +108,49 @@ function DiagnosticPrintPage() {
     navigate(`/tests/${selectedTest.testId}/omr?from=diagnostic`);
   };
 
+  // 온라인 응시 시작
+  const handleOnlineTest = async () => {
+    if (!selectedTest) return;
+    try {
+      const qs = await apiGet(`/v1/test-storage/${selectedTest.testId}/questions`);
+      setQuestions(Array.isArray(qs) ? qs : []);
+      setAnswers({});
+      setOnlineError("");
+      setPhase("online");
+    } catch {
+      alert("문항 정보를 불러올 수 없습니다.");
+    }
+  };
+
+  const handleOnlineAnswer = (qNum, value) => {
+    setAnswers(prev => {
+      if (value === null) {
+        const next = { ...prev };
+        delete next[String(qNum)];
+        return next;
+      }
+      return { ...prev, [String(qNum)]: String(value) };
+    });
+  };
+
+  const handleOnlineSubmit = async () => {
+    setOnlineError("");
+    const unanswered = questions.filter(q => q.type === "객관식" && !answers[String(q.number)]);
+    if (unanswered.length > 0) {
+      const ok = window.confirm(`${unanswered.length}문항이 미응답입니다. 제출하시겠습니까?`);
+      if (!ok) return;
+    }
+    setSubmitting(true);
+    try {
+      await apiPost(`/v1/test-storage/${selectedTest.testId}/submit`, { answers });
+      navigate(`/tests/${selectedTest.testId}/report?from=diagnostic`);
+    } catch (err) {
+      setOnlineError(err.message || "제출에 실패했습니다.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   // ── select 단계: 레벨 선택 ──
   if (phase === "select") {
     return (
@@ -151,10 +202,46 @@ function DiagnosticPrintPage() {
             </div>
           )}
 
-          <div className="diagnostic-actions" style={{ marginTop: 32 }}>
+          <div className="diagnostic-actions" style={{ marginTop: 32, gap: 12, display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <button className="btn primary" type="button" onClick={() => navigate("/diagnostic/v2")}
+              style={{ width: "100%", maxWidth: 360 }}>
+              <span className="material-symbols-outlined" style={{ marginRight: 6, verticalAlign: "middle" }}>neurology</span>
+              온라인 역량 진단 (v2)
+            </button>
             <button className="btn ghost" type="button" onClick={() => navigate("/start")}>
               돌아가기
             </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // ── online 단계: PDF + 답안 패널 통합 ──
+  if (phase === "online") {
+    return (
+      <div className="diagnostic-page">
+        <main className="diagnostic-panel" style={{ maxWidth: "100%", padding: "16px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+            <h2 style={{ margin: 0 }}>{selectedTest?.title || "진단 테스트"}</h2>
+            <button className="btn ghost" onClick={() => setPhase("print")}>
+              돌아가기
+            </button>
+          </div>
+          {onlineError && <p className="ts-error">{onlineError}</p>}
+          <div className="test-online-split">
+            {pdfUrl && (
+              <div className="test-online-pdf" onContextMenu={e => e.preventDefault()}>
+                <iframe src={pdfUrl} title="시험지 PDF" />
+              </div>
+            )}
+            <AnswerInputPanel
+              questions={questions}
+              answers={answers}
+              onAnswer={handleOnlineAnswer}
+              onSubmit={handleOnlineSubmit}
+              submitting={submitting}
+            />
           </div>
         </main>
       </div>
@@ -185,6 +272,9 @@ function DiagnosticPrintPage() {
             disabled={!printed}
           >
             답안 입력하기
+          </button>
+          <button className="btn ghost" type="button" onClick={handleOnlineTest}>
+            온라인으로 풀기
           </button>
           <button
             className="btn ghost"

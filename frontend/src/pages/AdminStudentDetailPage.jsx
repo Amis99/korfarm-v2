@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo, lazy, Suspense } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
+import { calcSeasonScore, FORMULA_TEXT } from "../utils/seasonScore";
 import "../styles/admin-detail.css";
 
 const ReportSummaryCards = lazy(() => import("../components/report/ReportSummaryCards"));
@@ -123,12 +124,7 @@ function AdminStudentDetailPage() {
     const seeds = inventory.seeds || {};
     const crops = inventory.crops || {};
     const totalSeeds = Object.values(seeds).reduce((a, b) => a + (typeof b === "number" ? b : 0), 0);
-    const cw = crops.crop_wheat ?? 0;
-    const cr = crops.crop_rice ?? 0;
-    const cc = crops.crop_corn ?? 0;
-    const cg = crops.crop_grape ?? 0;
-    const ca = crops.crop_apple ?? 0;
-    return (cw * cr * cc * cg * ca) * 50 + totalSeeds;
+    return calcSeasonScore(crops, totalSeeds);
   }, [inventory]);
 
   const fetchReport = (sd, ed) => {
@@ -221,7 +217,7 @@ function AdminStudentDetailPage() {
                         <td><span className="status-pill" data-status={log.status === "COMPLETED" ? "active" : "pending"}>{log.status === "COMPLETED" ? "완료" : "진행중"}</span></td>
                         <td>{log.score ?? "-"}</td>
                         <td>{log.accuracy != null ? `${log.accuracy}%` : "-"}</td>
-                        <td>{log.earnedSeed > 0 ? `+${log.earnedSeed}` : "-"}</td>
+                        <td>{log.earnedSeed > 0 ? `${SEED_LABELS[log.earnedSeedType] || ""} +${log.earnedSeed}` : "-"}</td>
                         <td style={{ fontSize: 12 }}>{log.startedAt ? log.startedAt.replace("T", " ").slice(0, 16) : "-"}</td>
                         <td style={{ fontSize: 12 }}>{log.completedAt ? log.completedAt.replace("T", " ").slice(0, 16) : "-"}</td>
                       </tr>
@@ -278,7 +274,7 @@ function AdminStudentDetailPage() {
                     <span>비료: <strong>{inventory.fertilizer ?? 0}</strong></span>
                     <span style={{ color: "#f06c24", fontWeight: 700 }}>시즌 점수: {seasonScore.toLocaleString()}</span>
                   </div>
-                  <div style={{ padding: "8px 12px", background: "rgba(240,108,36,0.08)", borderRadius: 10, fontSize: 11, color: "#a6b6a9" }}>시즌 점수 = (밀 x 쌀 x 옥수수 x 포도 x 사과) x 50 + 총씨앗</div>
+                  <div style={{ padding: "8px 12px", background: "rgba(240,108,36,0.08)", borderRadius: 10, fontSize: 11, color: "#a6b6a9" }}>시즌 점수 = {FORMULA_TEXT}</div>
                 </>
               )}
             </div>

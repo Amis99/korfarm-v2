@@ -1,4 +1,4 @@
-export const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8080";
+export const API_BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:8080";
 export const TOKEN_KEY = "korfarm_token";
 
 // HTTP 상태 코드를 포함하는 커스텀 에러 클래스

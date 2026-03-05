@@ -1,0 +1,1224 @@
+/* 진단 테스트 v2 스타일 */
+
+.diag-v2-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.diag-v2-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.diag-v2-header h1 {
+  font-size: 24px;
+  color: #3d3028;
+  margin-bottom: 8px;
+}
+
+.diag-v2-header p {
+  color: #8b7e74;
+  font-size: 14px;
+}
+
+/* ── Tier 카드 그리드 ── */
+.diag-v2-tier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.diag-v2-tier-card {
+  background: #faf7f4;
+  border: 2px solid #e0d6ce;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.diag-v2-tier-card:hover {
+  border-color: #6b5b53;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.diag-v2-tier-card.completed {
+  border-color: #4caf50;
+  background: #f0faf0;
+}
+
+.diag-v2-tier-icon {
+  font-size: 40px;
+  color: #6b5b53;
+  margin-bottom: 8px;
+}
+
+.diag-v2-tier-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3d3028;
+  margin-bottom: 4px;
+}
+
+.diag-v2-tier-desc {
+  font-size: 13px;
+  color: #8b7e74;
+  margin-bottom: 8px;
+}
+
+.diag-v2-tier-meta {
+  font-size: 12px;
+  color: #a09588;
+}
+
+.diag-v2-tier-tci {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4caf50;
+}
+
+/* ── 모드 선택 모달 ── */
+.diag-v2-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.diag-v2-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.diag-v2-modal h2 {
+  font-size: 18px;
+  color: #3d3028;
+  margin-bottom: 16px;
+}
+
+.diag-v2-mode-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 10px;
+  border: 2px solid #e0d6ce;
+  border-radius: 10px;
+  background: #faf7f4;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s;
+}
+
+.diag-v2-mode-btn:hover {
+  border-color: #6b5b53;
+}
+
+.diag-v2-mode-btn .mode-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #3d3028;
+}
+
+.diag-v2-mode-btn .mode-desc {
+  font-size: 12px;
+  color: #8b7e74;
+  margin-top: 4px;
+}
+
+.diag-v2-modal-close {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: none;
+  color: #8b7e74;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ── 테스트 페이지 ── */
+.diag-test-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.diag-test-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.diag-test-topbar h2 {
+  font-size: 16px;
+  color: #3d3028;
+}
+
+.diag-test-progress {
+  background: #e0d6ce;
+  border-radius: 8px;
+  height: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.diag-test-progress-fill {
+  height: 100%;
+  background: #6b5b53;
+  border-radius: 8px;
+  transition: width 0.3s;
+}
+
+.diag-test-batch-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #8b7e74;
+}
+
+.diag-test-passage {
+  background: #faf7f4;
+  border: 1px solid #e0d6ce;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  line-height: 1.8;
+  font-size: 15px;
+  color: #3d3028;
+  white-space: pre-wrap;
+}
+
+.diag-test-question {
+  background: white;
+  border: 1px solid #e0d6ce;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.diag-test-stem {
+  font-size: 15px;
+  color: #3d3028;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.diag-test-box {
+  background: #f5f0eb;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 0;
+  font-size: 14px;
+  color: #5a4d42;
+}
+
+.diag-test-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.diag-test-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 2px solid #e0d6ce;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: white;
+}
+
+.diag-test-choice:hover {
+  border-color: #6b5b53;
+  background: #faf7f4;
+}
+
+.diag-test-choice.selected {
+  border-color: #6b5b53;
+  background: #f0ebe5;
+}
+
+.diag-test-choice-id {
+  font-weight: 700;
+  color: #6b5b53;
+  min-width: 20px;
+}
+
+.diag-test-choice-text {
+  font-size: 14px;
+  color: #3d3028;
+}
+
+.diag-test-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+.diag-test-nav-btn {
+  padding: 10px 24px;
+  border: 2px solid #e0d6ce;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  color: #3d3028;
+  transition: all 0.15s;
+}
+
+.diag-test-nav-btn:hover {
+  border-color: #6b5b53;
+}
+
+.diag-test-nav-btn.primary {
+  background: #6b5b53;
+  color: white;
+  border-color: #6b5b53;
+}
+
+.diag-test-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.diag-test-cat-notice {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #795548;
+  margin-bottom: 16px;
+}
+
+/* ── 리포트 페이지 ── */
+.diag-report-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.diag-report-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.diag-report-header h1 {
+  font-size: 22px;
+  color: #3d3028;
+  margin-bottom: 4px;
+}
+
+.diag-report-header .tier-label {
+  font-size: 14px;
+  color: #8b7e74;
+}
+
+/* TCI 게이지 */
+.tci-gauge {
+  background: #faf7f4;
+  border: 1px solid #e0d6ce;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.tci-gauge-value {
+  font-size: 48px;
+  font-weight: 700;
+  color: #3d3028;
+}
+
+.tci-gauge-label {
+  font-size: 13px;
+  color: #8b7e74;
+  margin-top: 4px;
+}
+
+.tci-gauge-bar {
+  position: relative;
+  height: 16px;
+  background: #e0d6ce;
+  border-radius: 8px;
+  margin: 16px 0 8px;
+  overflow: visible;
+}
+
+.tci-gauge-fill {
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ef5350, #ff9800, #4caf50, #2196f3);
+  transition: width 0.5s;
+}
+
+.tci-gauge-markers {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #a09588;
+  padding: 0 2px;
+}
+
+.tci-recommendation {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6b5b53;
+}
+
+/* 역량 섹션 */
+.diag-report-section {
+  margin-bottom: 24px;
+}
+
+.diag-report-section h2 {
+  font-size: 17px;
+  color: #3d3028;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0d6ce;
+}
+
+/* 역량 상세 테이블 */
+.competency-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.competency-table th,
+.competency-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #f0ebe5;
+  font-size: 13px;
+}
+
+.competency-table th {
+  color: #8b7e74;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.competency-bar-cell {
+  width: 50%;
+}
+
+.competency-bar {
+  height: 12px;
+  background: #e0d6ce;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.competency-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s;
+}
+
+.competency-bar-fill.high { background: #4caf50; }
+.competency-bar-fill.mid { background: #ff9800; }
+.competency-bar-fill.low { background: #ef5350; }
+
+.grade-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.grade-badge.high { background: #e8f5e9; color: #2e7d32; }
+.grade-badge.mid { background: #fff3e0; color: #e65100; }
+.grade-badge.low { background: #ffebee; color: #c62828; }
+
+/* 취약 역량 분석 */
+.bottleneck-card {
+  background: #faf7f4;
+  border: 1px solid #e0d6ce;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.bottleneck-card .comp-name {
+  font-weight: 600;
+  color: #3d3028;
+  margin-bottom: 4px;
+}
+
+.bottleneck-card .comp-score {
+  font-size: 13px;
+  color: #8b7e74;
+  margin-bottom: 8px;
+}
+
+.bottleneck-paths {
+  list-style: none;
+  padding: 0;
+}
+
+.bottleneck-paths li {
+  font-size: 13px;
+  color: #5a4d42;
+  padding: 4px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottleneck-paths .path-val {
+  color: #ef5350;
+  font-weight: 500;
+}
+
+/* 레이더 차트 컨테이너 */
+.diag-radar-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* 하단 액션 */
+.diag-report-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.diag-report-actions button {
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid #6b5b53;
+  transition: all 0.15s;
+}
+
+.diag-report-actions .btn-primary {
+  background: #6b5b53;
+  color: white;
+}
+
+.diag-report-actions .btn-secondary {
+  background: white;
+  color: #6b5b53;
+}
+
+/* 로딩 */
+.diag-v2-loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #8b7e74;
+}
+
+/* ── 종합 요약 카드 ── */
+.report-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  background: #faf7f4;
+  border: 1px solid #e0d6ce;
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
+}
+
+.summary-card-label {
+  font-size: 11px;
+  color: #8b7e74;
+  margin-bottom: 4px;
+}
+
+.summary-card-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #3d3028;
+}
+
+.summary-card-unit {
+  font-size: 13px;
+  font-weight: 400;
+  color: #8b7e74;
+  margin-left: 2px;
+}
+
+/* ── TCI 게이지 강화 ── */
+.tci-raw-compare {
+  font-size: 12px;
+  color: #8b7e74;
+  margin-top: 4px;
+}
+
+.tci-diff-up { color: #4caf50; font-weight: 600; margin-left: 4px; }
+.tci-diff-down { color: #ef5350; font-weight: 600; margin-left: 4px; }
+
+.tci-interpretation {
+  font-size: 13px;
+  color: #5a4d42;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.tci-marker {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.tci-marker-line {
+  width: 2px;
+  height: 28px;
+  margin: 0 auto;
+}
+
+.tci-marker.avg .tci-marker-line { background: #2196f3; }
+.tci-marker.high-mark .tci-marker-line { background: #4caf50; height: 22px; }
+.tci-marker.low-mark .tci-marker-line { background: #ef5350; height: 22px; }
+
+.tci-marker-label {
+  font-size: 9px;
+  color: #2196f3;
+  text-align: center;
+  margin-top: 1px;
+}
+
+.completed-at {
+  font-size: 12px;
+  color: #a09588;
+}
+
+/* ── Tier 통계 ── */
+.tier-stats-subtitle {
+  font-size: 13px;
+  color: #8b7e74;
+  margin-bottom: 12px;
+}
+
+.tier-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-card {
+  background: #faf7f4;
+  border: 1px solid #e0d6ce;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.stat-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3d3028;
+  margin-bottom: 8px;
+}
+
+.stat-card-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 3px 0;
+}
+
+.stat-label { color: #8b7e74; }
+.stat-value { color: #3d3028; font-weight: 500; }
+.stat-high { color: #4caf50; }
+.stat-low { color: #ef5350; }
+
+.stat-card-percentile {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #e0d6ce;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b5b53;
+  text-align: center;
+}
+
+/* ── 역량 상세 분석 (아코디언) ── */
+.competency-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.competency-detail-item {
+  border: 1px solid #e0d6ce;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.competency-detail-item.open {
+  border-color: #6b5b53;
+}
+
+.competency-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #faf7f4;
+  transition: background 0.15s;
+}
+
+.competency-detail-header:hover {
+  background: #f0ebe5;
+}
+
+.cd-rank {
+  font-size: 12px;
+  color: #a09588;
+  min-width: 22px;
+}
+
+.cd-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #3d3028;
+  min-width: 80px;
+  white-space: nowrap;
+}
+
+.cd-score-bar-wrap {
+  flex: 1;
+  min-width: 60px;
+}
+
+.cd-score-bar {
+  position: relative;
+  height: 10px;
+  background: #e0d6ce;
+  border-radius: 5px;
+  overflow: visible;
+}
+
+.cd-score-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s;
+}
+
+.cd-score-bar-fill.high { background: #4caf50; }
+.cd-score-bar-fill.mid { background: #ff9800; }
+.cd-score-bar-fill.low { background: #ef5350; }
+
+.cd-avg-marker {
+  position: absolute;
+  top: -3px;
+  width: 2px;
+  height: 16px;
+  background: #2196f3;
+  transform: translateX(-50%);
+}
+
+.cd-score {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3d3028;
+  min-width: 35px;
+  text-align: right;
+}
+
+.cd-percentile {
+  font-size: 11px;
+  color: #6b5b53;
+  background: #f0ebe5;
+  padding: 2px 6px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.cd-arrow {
+  font-size: 10px;
+  color: #a09588;
+  min-width: 14px;
+  text-align: center;
+}
+
+.competency-detail-body {
+  padding: 12px 16px;
+  border-top: 1px solid #e0d6ce;
+  background: white;
+}
+
+.cd-description {
+  font-size: 13px;
+  color: #5a4d42;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.cd-narrative {
+  font-size: 13px;
+  color: #3d3028;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  padding: 8px;
+  background: #f5f0eb;
+  border-radius: 6px;
+}
+
+.cd-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #8b7e74;
+  margin-bottom: 8px;
+}
+
+.cd-error-title {
+  font-size: 12px;
+  color: #8b7e74;
+  margin-bottom: 4px;
+}
+
+/* ── 문항 유형 / 장르 ── */
+.type-stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.type-stats-table th,
+.type-stats-table td {
+  padding: 6px 10px;
+  text-align: left;
+  border-bottom: 1px solid #f0ebe5;
+  font-size: 13px;
+}
+
+.type-stats-table th {
+  color: #8b7e74;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.genre-cards {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.genre-card {
+  flex: 1;
+  background: #faf7f4;
+  border: 1px solid #e0d6ce;
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+}
+
+.genre-card-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3d3028;
+  margin-bottom: 4px;
+}
+
+.genre-card-rate {
+  font-size: 22px;
+  font-weight: 700;
+  color: #6b5b53;
+}
+
+.genre-card-count {
+  font-size: 12px;
+  color: #8b7e74;
+}
+
+/* ── 지문별 분석 ── */
+.passage-analysis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.passage-card {
+  background: #faf7f4;
+  border: 1px solid #e0d6ce;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.passage-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.passage-genre-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: #6b5b53;
+  color: white;
+  border-radius: 8px;
+}
+
+.passage-level {
+  font-size: 11px;
+  color: #8b7e74;
+}
+
+.passage-accuracy {
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+.passage-count {
+  font-size: 12px;
+  color: #8b7e74;
+}
+
+.passage-preview {
+  font-size: 12px;
+  color: #5a4d42;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.passage-bar {
+  height: 6px;
+  background: #e0d6ce;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.passage-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s;
+}
+
+/* ── 전체 오류 분석 ── */
+.section-subtitle {
+  font-size: 13px;
+  color: #8b7e74;
+  margin-bottom: 12px;
+}
+
+.no-error {
+  font-size: 12px;
+  color: #a09588;
+  font-style: italic;
+}
+
+/* ── 개별 문항 리뷰 ── */
+.question-review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.qr-item {
+  border: 1px solid #e0d6ce;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.qr-item.open {
+  border-color: #6b5b53;
+}
+
+.qr-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  background: #faf7f4;
+  font-size: 13px;
+}
+
+.qr-header:hover {
+  background: #f0ebe5;
+}
+
+.qr-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.qr-badge.correct {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.qr-badge.wrong {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.qr-num {
+  font-weight: 600;
+  color: #6b5b53;
+  min-width: 26px;
+}
+
+.qr-type {
+  font-size: 11px;
+  color: #8b7e74;
+  background: #f0ebe5;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.qr-stem-preview {
+  flex: 1;
+  color: #5a4d42;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.qr-arrow {
+  font-size: 10px;
+  color: #a09588;
+}
+
+.qr-body {
+  padding: 14px 16px;
+  border-top: 1px solid #e0d6ce;
+  background: white;
+}
+
+.qr-stem-full {
+  font-size: 14px;
+  color: #3d3028;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.qr-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.qr-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #e0d6ce;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.qr-choice.correct {
+  border-color: #4caf50;
+  background: #f0faf0;
+}
+
+.qr-choice.wrong {
+  border-color: #ef5350;
+  background: #fff5f5;
+}
+
+.qr-choice.selected:not(.wrong) {
+  border-color: #4caf50;
+}
+
+.qr-choice-id {
+  font-weight: 700;
+  color: #6b5b53;
+  min-width: 16px;
+}
+
+.qr-choice-text {
+  flex: 1;
+  color: #3d3028;
+}
+
+.qr-tag {
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.correct-tag {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.wrong-tag {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.qr-meta {
+  font-size: 12px;
+  color: #8b7e74;
+}
+
+.qr-meta-label {
+  font-weight: 500;
+  margin-right: 6px;
+}
+
+.qr-competencies {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.qr-comp-tag {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: #f0ebe5;
+  border-radius: 4px;
+  color: #5a4d42;
+}
+
+.qr-error-path {
+  color: #ef5350;
+}
+
+/* ── 추천 학습 방향 ── */
+.learning-rec-card {
+  background: #faf7f4;
+  border: 1px solid #e0d6ce;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.rec-level {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.rec-level-label {
+  font-size: 13px;
+  color: #8b7e74;
+}
+
+.rec-level-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #6b5b53;
+}
+
+.rec-advice {
+  font-size: 14px;
+  color: #3d3028;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.rec-weak-areas {
+  margin-bottom: 12px;
+}
+
+.rec-weak-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3d3028;
+  margin-bottom: 6px;
+}
+
+.rec-weak-areas ul {
+  list-style: none;
+  padding: 0;
+}
+
+.rec-weak-areas li {
+  font-size: 13px;
+  color: #5a4d42;
+  padding: 3px 0;
+}
+
+.rec-weak-areas li::before {
+  content: "•";
+  color: #ef5350;
+  margin-right: 8px;
+}
+
+.rec-notice {
+  font-size: 12px;
+  color: #a09588;
+  font-style: italic;
+  padding-top: 8px;
+  border-top: 1px solid #e0d6ce;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 600px) {
+  .diag-v2-tier-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .tci-gauge-value {
+    font-size: 36px;
+  }
+  .report-summary-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .summary-card-value {
+    font-size: 18px;
+  }
+  .tier-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .competency-detail-header {
+    flex-wrap: wrap;
+  }
+  .cd-score-bar-wrap {
+    order: 10;
+    width: 100%;
+    flex-basis: 100%;
+    margin-top: 4px;
+  }
+  .genre-cards {
+    flex-direction: column;
+  }
+  .qr-stem-preview {
+    display: none;
+  }
+}
