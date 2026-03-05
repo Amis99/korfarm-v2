@@ -67,31 +67,28 @@ object ScoringEngine {
         return base + confidence * (rawTci - base)
     }
 
-    /** TCI + 신뢰도 기반 레벨 추천 */
-    fun calculateRecommendation(tierKey: String, tci: Double, confidence: Double = 1.0): RecommendedLevel {
+    /** TCI + 신뢰도 기반 레벨 추천 (raw TCI 사용, 낮은 신뢰도 시 "(참고)" 표시) */
+    fun calculateRecommendation(tierKey: String, rawTci: Double, confidence: Double = 1.0): RecommendedLevel {
         val idx = TEST_ORDER.indexOf(tierKey)
         if (idx < 0) return RecommendedLevel(tierKey, null, "Unknown")
 
         val label = TIER_LABELS[tierKey] ?: tierKey
+        val suffix = if (confidence < 0.5) " (참고)" else ""
 
-        if (confidence < 0.5) {
-            return RecommendedLevel(tierKey, null, "진단 불가 (응답 부족)")
-        }
-
-        if (tci < 35) {
-            if (idx == 0) return RecommendedLevel(tierKey, 1, "$label 1")
+        if (rawTci < 35) {
+            if (idx == 0) return RecommendedLevel(tierKey, 1, "$label 1$suffix")
             val prevKey = TEST_ORDER[idx - 1]
             val prevLabel = TIER_LABELS[prevKey] ?: prevKey
-            return RecommendedLevel(prevKey, 3, "$prevLabel 3")
+            return RecommendedLevel(prevKey, 3, "$prevLabel 3$suffix")
         }
-        if (tci < 45) return RecommendedLevel(tierKey, 1, "$label 1")
-        if (tci < 55) return RecommendedLevel(tierKey, 2, "$label 2")
-        if (tci < 65) return RecommendedLevel(tierKey, 3, "$label 3")
+        if (rawTci < 45) return RecommendedLevel(tierKey, 1, "$label 1$suffix")
+        if (rawTci < 55) return RecommendedLevel(tierKey, 2, "$label 2$suffix")
+        if (rawTci < 65) return RecommendedLevel(tierKey, 3, "$label 3$suffix")
 
-        if (idx == TEST_ORDER.size - 1) return RecommendedLevel(tierKey, 3, "$label 3")
+        if (idx == TEST_ORDER.size - 1) return RecommendedLevel(tierKey, 3, "$label 3$suffix")
         val nextKey = TEST_ORDER[idx + 1]
         val nextLabel = TIER_LABELS[nextKey] ?: nextKey
-        return RecommendedLevel(nextKey, 1, "$nextLabel 1")
+        return RecommendedLevel(nextKey, 1, "$nextLabel 1$suffix")
     }
 
     /** 초기 점수맵 생성 */

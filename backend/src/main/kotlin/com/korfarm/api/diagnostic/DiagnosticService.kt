@@ -223,7 +223,7 @@ class DiagnosticService(
         val rawTci = ScoringEngine.calculateTci(scores)
         val confidence = ScoringEngine.calculateConfidence(session.answeredCount)
         val adjTci = ScoringEngine.applyConfidenceToTci(rawTci, confidence)
-        val recommendation = ScoringEngine.calculateRecommendation(session.tier, adjTci, confidence)
+        val recommendation = ScoringEngine.calculateRecommendation(session.tier, rawTci, confidence)
 
         session.status = "completed"
         session.rawTci = BigDecimal.valueOf(rawTci).setScale(2, java.math.RoundingMode.HALF_UP)
@@ -245,7 +245,7 @@ class DiagnosticService(
         }
         val scores: MutableMap<String, Double> = objectMapper.readValue(session.scoresJson ?: "{}")
         val recommendation = ScoringEngine.calculateRecommendation(
-            session.tier, session.adjustedTci?.toDouble() ?: 50.0, session.confidence?.toDouble() ?: 0.0
+            session.tier, session.rawTci?.toDouble() ?: 50.0, session.confidence?.toDouble() ?: 0.0
         )
         return buildReport(session, scores, recommendation)
     }
@@ -306,7 +306,7 @@ class DiagnosticService(
         val report = if (session.status == "completed") {
             val scores: MutableMap<String, Double> = objectMapper.readValue(session.scoresJson ?: "{}")
             val rec = ScoringEngine.calculateRecommendation(
-                session.tier, session.adjustedTci?.toDouble() ?: 50.0, session.confidence?.toDouble() ?: 0.0
+                session.tier, session.rawTci?.toDouble() ?: 50.0, session.confidence?.toDouble() ?: 0.0
             )
             buildReport(session, scores, rec)
         } else null

@@ -47,7 +47,7 @@ function DuelLobbyPage() {
         room_name: roomName.trim(),
         stake_amount: Number(stakeAmount),
       });
-      const roomId = data?.room?.room_id || data?.room_id;
+      const roomId = data?.room?.roomId || data?.roomId;
       if (roomId) navigate(`/duel/room/${roomId}`);
     } catch (err) {
       alert(err.message || "방 생성 실패");
@@ -56,7 +56,7 @@ function DuelLobbyPage() {
     }
   };
 
-  const isAiRoom = (room) => room.room_id?.startsWith("ai-room-");
+  const isAiRoom = (room) => room.roomId?.startsWith("ai-room-");
 
   const handleJoinRoom = async (room) => {
     try {
@@ -66,8 +66,8 @@ function DuelLobbyPage() {
         if (matchId) navigate(`/duel/match/${matchId}`);
         return;
       }
-      await apiPost(`/v1/duel/rooms/${room.room_id}/join`);
-      navigate(`/duel/room/${room.room_id}`);
+      await apiPost(`/v1/duel/rooms/${room.roomId}/join`);
+      navigate(`/duel/room/${room.roomId}`);
     } catch (err) {
       alert(err.message || "입장 실패");
     }
@@ -94,19 +94,19 @@ function DuelLobbyPage() {
       ) : (
         <div className="duel-room-list">
           {rooms.map((room) => (
-            <div key={room.room_id} className={`duel-room-item${isAiRoom(room) ? " ai-room" : ""}`} onClick={() => handleJoinRoom(room)}>
+            <div key={room.roomId} className={`duel-room-item${isAiRoom(room) ? " ai-room" : ""}`} onClick={() => handleJoinRoom(room)}>
               <div className="duel-room-info">
                 <div className="room-name">
                   {isAiRoom(room) && <span className="ai-badge">AI</span>}
-                  {room.room_name || "대결방"}
+                  {room.roomName || "대결방"}
                 </div>
                 <div className="room-meta">
-                  베팅 {room.stake_amount}씨앗 | 최대 {room.room_size}명
+                  베팅 {room.stakeAmount}씨앗 | 최대 {room.roomSize}명
                   {isAiRoom(room) && " | 즉시 시작"}
                 </div>
               </div>
               <div className="duel-room-right">
-                <div className="player-count">{room.player_count}/{room.room_size}</div>
+                <div className="player-count">{room.playerCount}/{room.roomSize}</div>
                 <div className="stake-info">참가자</div>
               </div>
             </div>

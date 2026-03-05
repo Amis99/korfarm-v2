@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { apiGet, apiPost, WS_BASE } from "../utils/api";
+import { apiGet, apiPost, WS_BASE, camelize } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/duel.css";
 
@@ -60,8 +60,8 @@ function DuelWaitingRoomPage() {
 
     ws.onmessage = (event) => {
       if (cancelled) return;
-      const msg = JSON.parse(event.data);
-      const { type, payload } = msg;
+      const raw = JSON.parse(event.data);
+      const { type, payload } = camelize(raw);
 
       if (type === "room.state" || type === "room.update") {
         setRoom(payload?.room || payload);
@@ -76,7 +76,7 @@ function DuelWaitingRoomPage() {
       }
 
       if (type === "room.matchStarted") {
-        const matchId = payload?.match_id || payload?.matchId;
+        const matchId = payload?.matchId;
         if (matchId) navigate(`/duel/match/${matchId}`);
       }
     };
@@ -140,7 +140,7 @@ function DuelWaitingRoomPage() {
     } else {
       apiPost(`/v1/duel/rooms/${roomId}/start`)
         .then((data) => {
-          const matchId = data?.matchId || data?.match_id;
+          const matchId = data?.matchId;
           if (matchId) navigate(`/duel/match/${matchId}`);
         })
         .catch((err) => alert(err.message || "시작 실패"));
@@ -155,11 +155,11 @@ function DuelWaitingRoomPage() {
     navigate(-1);
   };
 
-  const isHost = room?.created_by === userId;
+  const isHost = room?.createdBy === userId;
   const canStart = isHost && players.length >= 2;
-  const myPlayer = players.find((p) => p.user_id === userId);
-  const myReady = myPlayer?.is_ready ?? false;
-  const stakeAmount = room?.stake_amount ?? 0;
+  const myPlayer = players.find((p) => p.userId === userId);
+  const myReady = myPlayer?.isReady ?? false;
+  const stakeAmount = room?.stakeAmount ?? 0;
 
   const seeds = myInventory?.seeds || {};
 
@@ -181,24 +181,24 @@ function DuelWaitingRoomPage() {
   return (
     <div className="duel-waiting">
       <div className="duel-waiting-header">
-        <h1>{room?.room_name || "대기방"}</h1>
+        <h1>{room?.roomName || "대기방"}</h1>
         <div className="room-info">
-          베팅 {stakeAmount} {selectedSeedType ? (SEED_TYPES.find(s => s.key === selectedSeedType)?.label || "") + "씨앗" : "씨앗"} | {players.length}/{room?.room_size ?? 10}명
+          베팅 {stakeAmount} {selectedSeedType ? (SEED_TYPES.find(s => s.key === selectedSeedType)?.label || "") + "씨앗" : "씨앗"} | {players.length}/{room?.roomSize ?? 10}명
         </div>
       </div>
 
       <div className="duel-players-list">
         {players.map((p) => {
-          const profileImg = p.profile_image_url || p.profileImageUrl;
-          const levelId = p.level_id || p.levelId;
+          const profileImg = p.profileImageUrl;
+          const levelId = p.levelId;
           const wins = p.wins ?? 0;
           const losses = p.losses ?? 0;
-          const winRate = p.win_rate ?? p.winRate ?? 0;
-          const isReady = p.is_ready ?? p.isReady;
+          const winRate = p.winRate ?? 0;
+          const isReady = p.isReady;
           const levelLabel = levelId ? (LEVEL_LABELS[levelId] || levelId) : null;
 
           return (
-            <div key={p.user_id} className={`duel-player-row${isReady ? " is-ready" : ""}`}>
+            <div key={p.userId} className={`duel-player-row${isReady ? " is-ready" : ""}`}>
               <div
                 className="player-avatar"
                 style={profileImg ? { backgroundImage: `url(${profileImg})` } : undefined}
@@ -210,8 +210,8 @@ function DuelWaitingRoomPage() {
 
               <div className="player-info">
                 <div className="player-name-row">
-                  <span className="player-name">{p.user_name || "참가자"}</span>
-                  {p.user_id === room?.created_by && <span className="host-badge">방장</span>}
+                  <span className="player-name">{p.userName || "참가자"}</span>
+                  {p.userId === room?.createdBy && <span className="host-badge">방장</span>}
                 </div>
                 {levelLabel && <span className="player-level">{levelLabel}</span>}
                 <span className="player-record">

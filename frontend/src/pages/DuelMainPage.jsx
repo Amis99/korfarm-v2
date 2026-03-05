@@ -88,14 +88,14 @@ function DuelMainPage() {
             </div>
             <div className="duel-stat-item">
               <div className="value">
-                {myStats.win_rate != null
-                  ? (myStats.win_rate * 100).toFixed(0) + "%"
+                {myStats.winRate != null
+                  ? (myStats.winRate * 100).toFixed(0) + "%"
                   : "0%"}
               </div>
               <div className="label">승률</div>
             </div>
             <div className="duel-stat-item">
-              <div className="value">{myStats.best_streak ?? 0}</div>
+              <div className="value">{myStats.bestStreak ?? 0}</div>
               <div className="label">최고 연승</div>
             </div>
           </div>

@@ -38,11 +38,11 @@ function DuelResultPage() {
   }
 
   const results = result.results || [];
-  const roomId = result.room_id;
-  const serverId = result.server_id;
+  const roomId = result.roomId;
+  const serverId = result.serverId;
 
   // "다시 대결" 목적지: AI 방이거나 방 없으면 로비, 그 외 대기실
-  const isAiMatch = results.some((r) => r.user_id?.startsWith("ai_player_"));
+  const isAiMatch = results.some((r) => r.userId?.startsWith("ai_player_"));
   const rematchTo = isAiMatch
     ? (serverId ? `/duel/lobby/${serverId}` : "/duel")
     : roomId
@@ -55,32 +55,32 @@ function DuelResultPage() {
 
       <div className="duel-result-card">
         {results.map((r, idx) => {
-          const isMe = r.user_id === userId;
-          const isWinner = r.rank_position === 1;
-          const isAi = r.user_id?.startsWith("ai_player_");
-          const answered = r.answered_count ?? r.answeredCount ?? 0;
+          const isMe = r.userId === userId;
+          const isWinner = r.rankPosition === 1;
+          const isAi = r.userId?.startsWith("ai_player_");
+          const answered = r.answeredCount ?? 0;
           return (
             <div
-              key={r.user_id}
+              key={r.userId}
               className={`duel-result-row ${isWinner ? "winner" : ""} ${isMe ? "me" : ""}`}
             >
               <div className={`duel-result-rank ${isWinner ? "first" : ""}`}>
-                {r.rank_position ?? idx + 1}
+                {r.rankPosition ?? idx + 1}
               </div>
               <div className="duel-result-player">
                 <div className="name">
                   {isAi && <span style={{ marginRight: 4 }}>{"\uD83E\uDD16"}</span>}
-                  {r.user_name || "참가자"}
+                  {r.userName || "참가자"}
                   {isMe && " (나)"}
                 </div>
                 <div className="score-detail">
-                  {answered}문제 중 {r.correct_count}문제 정답
+                  {answered}문제 중 {r.correctCount}문제 정답
                 </div>
               </div>
               <div className="duel-result-reward">
-                {!isAi && r.reward_amount > 0 ? (
+                {!isAi && r.rewardAmount > 0 ? (
                   <>
-                    <div className="reward-amount">+{r.reward_amount}</div>
+                    <div className="reward-amount">+{r.rewardAmount}</div>
                     <div className="reward-label">씨앗 획득</div>
                   </>
                 ) : (
@@ -92,9 +92,9 @@ function DuelResultPage() {
         })}
       </div>
 
-      {result.total_escrow > 0 && result.system_fee > 0 && (
+      {result.totalEscrow > 0 && result.systemFee > 0 && (
         <div style={{ textAlign: "center", fontSize: 13, color: "#8a7468", marginBottom: 20 }}>
-          총 에스크로: {result.total_escrow}씨앗 | 수수료: {result.system_fee}씨앗
+          총 에스크로: {result.totalEscrow}씨앗 | 수수료: {result.systemFee}씨앗
         </div>
       )}
 
