@@ -4,6 +4,7 @@ import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.economy.EconomyService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -13,6 +14,11 @@ class FarmLearningService(
     private val contentPageProgressRepository: ContentPageProgressRepository,
     private val economyService: EconomyService
 ) {
+    companion object {
+        val DAILY_SEED_LIMIT_TYPES = setOf("DAILY_QUIZ", "DAILY_READING")
+        const val DAILY_SEED_MAX = 10
+    }
+
     @Transactional
     fun start(userId: String, request: FarmStartRequest): FarmStartResponse {
         val now = LocalDateTime.now()
@@ -42,27 +48,39 @@ class FarmLearningService(
             ?: request.seedType
             ?: "seed_wheat"
 
+        // 일일 퀴즈/독해: 하루 씨앗 10개 제한
+        var actualEarned = request.earnedSeed
+        var dailySeedRemaining: Int? = null
+        if (log.contentType in DAILY_SEED_LIMIT_TYPES && actualEarned > 0) {
+            val todayStart = LocalDate.now().atStartOfDay()
+            val todayEarned = farmLearningLogRepository
+                .sumEarnedSeedByUserAndContentTypeSince(userId, log.contentType, todayStart)
+            val remaining = (DAILY_SEED_MAX - todayEarned).coerceAtLeast(0)
+            actualEarned = actualEarned.coerceAtMost(remaining)
+            dailySeedRemaining = (remaining - actualEarned).coerceAtLeast(0)
+        }
+
         val now = LocalDateTime.now()
         log.status = "COMPLETED"
         log.score = request.score
         log.accuracy = request.accuracy
-        log.earnedSeed = request.earnedSeed
+        log.earnedSeed = actualEarned
         log.earnedSeedType = resolvedSeedType
         log.completedAt = now
         farmLearningLogRepository.save(log)
 
-        if (request.earnedSeed > 0) {
+        if (actualEarned > 0) {
             economyService.addSeeds(
                 userId,
                 resolvedSeedType,
-                request.earnedSeed,
+                actualEarned,
                 "farm_learning",
                 "farm_learning_log",
                 log.id
             )
         }
 
-        return FarmCompleteResponse(success = true, earnedSeed = request.earnedSeed)
+        return FarmCompleteResponse(success = true, earnedSeed = actualEarned, dailySeedRemaining = dailySeedRemaining)
     }
 
     @Transactional(readOnly = true)
@@ -84,6 +102,18 @@ class FarmLearningService(
             )
         }
         return FarmHistoryResponse(logs = entries)
+    }
+
+    fun getDailySeedStatus(userId: String, contentType: String): DailySeedStatusResponse {
+        val todayStart = LocalDate.now().atStartOfDay()
+        val todayEarned = farmLearningLogRepository
+            .sumEarnedSeedByUserAndContentTypeSince(userId, contentType, todayStart)
+        val remaining = (DAILY_SEED_MAX - todayEarned).coerceAtLeast(0)
+        return DailySeedStatusResponse(
+            todayEarned = todayEarned,
+            dailyLimit = DAILY_SEED_MAX,
+            remaining = remaining
+        )
     }
 
     @Transactional(readOnly = true)

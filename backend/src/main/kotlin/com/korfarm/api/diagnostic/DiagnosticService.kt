@@ -28,6 +28,7 @@ class DiagnosticService(
         return TEST_ORDER.map { tier ->
             val label = TIER_LABELS[tier] ?: tier
             val count = questionRepo.countByTier(tier)
+            val objCount = questionRepo.countByTierAndQuestionTypeNot(tier, "서술형")
             val sessions = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
             val completed = sessions.find { it.status == "completed" }
             TierInfo(
@@ -35,7 +36,9 @@ class DiagnosticService(
                 label = label,
                 questionCount = count,
                 hasCompleted = completed != null,
-                lastTci = completed?.adjustedTci?.toDouble()
+                lastTci = completed?.adjustedTci?.toDouble(),
+                lastSessionId = completed?.id,
+                objectiveCount = objCount
             )
         }
     }
@@ -48,6 +51,13 @@ class DiagnosticService(
         val mode = request.mode
         if (tier !in TEST_ORDER) throw ApiException("INVALID_TIER", "유효하지 않은 tier", HttpStatus.BAD_REQUEST)
         if (mode !in listOf("full", "cat")) throw ApiException("INVALID_MODE", "유효하지 않은 mode", HttpStatus.BAD_REQUEST)
+
+        // 이미 완료한 tier는 재응시 차단
+        val completedExists = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
+            .any { it.status == "completed" }
+        if (completedExists) {
+            throw ApiException("ALREADY_COMPLETED", "이미 완료한 진단입니다. 결과를 확인하세요.", HttpStatus.CONFLICT)
+        }
 
         // 기존 활성 세션이 있으면 자동 폐기
         val active = sessionRepo.findByUserIdAndStatus(userId, "active")
@@ -270,6 +280,25 @@ class DiagnosticService(
 
     fun getReport(sessionId: String, userId: String): DiagnosticReport {
         val session = getSession(sessionId, userId)
+        if (session.status != "completed") {
+            throw ApiException("SESSION_NOT_COMPLETED", "세션이 완료되지 않았습니다", HttpStatus.BAD_REQUEST)
+        }
+        val scores: MutableMap<String, Double> = objectMapper.readValue(session.scoresJson ?: "{}")
+        val recommendation = ScoringEngine.calculateRecommendation(
+            session.tier, session.rawTci?.toDouble() ?: 50.0, session.confidence?.toDouble() ?: 0.0
+        )
+        return buildReport(session, scores, recommendation)
+    }
+
+    // ── 학부모용 리포트 조회 (studentUserId로 검증) ──
+
+    fun getReportForStudent(sessionId: String, studentUserId: String): DiagnosticReport {
+        val session = sessionRepo.findById(sessionId).orElseThrow {
+            ApiException("NOT_FOUND", "세션을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        if (session.userId != studentUserId) {
+            throw ApiException("FORBIDDEN", "접근 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
         if (session.status != "completed") {
             throw ApiException("SESSION_NOT_COMPLETED", "세션이 완료되지 않았습니다", HttpStatus.BAD_REQUEST)
         }
@@ -661,18 +690,21 @@ class DiagnosticService(
                     competencyStats = competencyStats,
                 )
 
-                // 백분위 계산
+                // 백분위 계산 ("상위 X%" 직접 계산: 1등→~0%, 꼴등→~100%)
                 val currentTci = session.adjustedTci?.toDouble() ?: 50.0
                 val currentAcc = accuracyRate
-                val tciPercentile = Math.round(tciValues.count { it < currentTci }.toDouble() / tciValues.size * 1000.0) / 10.0
-                val accPercentile = Math.round(accValues.count { it < currentAcc }.toDouble() / accValues.size * 1000.0) / 10.0
+                val tciRank = tciValues.size - tciValues.count { it < currentTci }
+                val tciPercentile = Math.round(tciRank.toDouble() / tciValues.size * 1000.0) / 10.0
+                val accRank = accValues.size - accValues.count { it < currentAcc }
+                val accPercentile = Math.round(accRank.toDouble() / accValues.size * 1000.0) / 10.0
 
                 val competencyPercentiles = mutableMapOf<String, Double>()
                 for (comp in COMPETENCIES) {
                     val vals = allScoresData.mapNotNull { it[comp] }
                     val myScore = scores[comp] ?: 50.0
                     if (vals.isNotEmpty()) {
-                        competencyPercentiles[comp] = Math.round(vals.count { it < myScore }.toDouble() / vals.size * 1000.0) / 10.0
+                        val rank = vals.size - vals.count { it < myScore }
+                        competencyPercentiles[comp] = Math.round(rank.toDouble() / vals.size * 1000.0) / 10.0
                     }
                 }
 

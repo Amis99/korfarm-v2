@@ -328,6 +328,11 @@ function StartPage() {
                       <h3>테스트 기록실</h3>
                       <p>성적표 및 오답 노트</p>
                     </div>
+                    <div className="start-paid-card" onClick={() => navWithChild("/diagnostic/v2")}>
+                      <span className="material-symbols-outlined">neurology</span>
+                      <h3>역량 진단</h3>
+                      <p>자녀 진단 결과 확인</p>
+                    </div>
                     <div className="start-paid-card" onClick={() => navWithChild("/report")}>
                       <span className="material-symbols-outlined">analytics</span>
                       <h3>통합 성적표</h3>
@@ -557,7 +562,7 @@ function StartPage() {
               <span className="badge">일일 퀴즈</span>
               <h3>{levelLabel} - {dayOfYear}일 차</h3>
               <p>총 10문제 도전!</p>
-              <p className="start-card-notice">하루 첫 제출 시에만 씨앗이 지급됩니다.</p>
+              <p className="start-card-notice">반복 학습 가능! 하루 최대 씨앗 10개</p>
             </div>
             <div className="start-card" onClick={() => navigate("/daily-reading")} style={{ cursor: "pointer" }}>
               <span className="badge" style={{ background: "#81d4fa" }}>
@@ -565,7 +570,7 @@ function StartPage() {
               </span>
               <h3>{readingTitle || `${levelLabel} ${dayOfYear}일 차`}</h3>
               <p>지문 읽는 힘을 키워요</p>
-              <p className="start-card-notice">제출할 때마다 씨앗이 지급됩니다.</p>
+              <p className="start-card-notice">반복 학습 가능! 하루 최대 씨앗 10개</p>
             </div>
 
             {/* 과제 바구니 */}

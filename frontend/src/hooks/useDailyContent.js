@@ -26,6 +26,7 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [farmLogId, setFarmLogId] = useState(null);
+  const [dailySeedStatus, setDailySeedStatus] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -74,6 +75,13 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
           data = await fallbackRes.json();
           if (!cancelled) setContent(data);
         }
+        // 일일 씨앗 현황 조회
+        if (!cancelled) {
+          apiGet(`/v1/learning/farm/daily-seed-status?contentType=${contentType}`)
+            .then((status) => { if (!cancelled) setDailySeedStatus(status); })
+            .catch(() => {});
+        }
+
         if (data && !cancelled) {
           apiPost("/v1/learning/farm/start", {
             content_id: data.contentId || `${folder}-${levelFolder}-${dayStr}`,
@@ -96,5 +104,5 @@ export default function useDailyContent({ folder, contentType, errorLabel }) {
     return () => { cancelled = true; };
   }, [navigate, folder, contentType, errorLabel]);
 
-  return { content, loading, error, farmLogId };
+  return { content, loading, error, farmLogId, dailySeedStatus };
 }

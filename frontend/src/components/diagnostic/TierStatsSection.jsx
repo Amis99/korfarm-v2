@@ -40,7 +40,7 @@ function StatCard({ title, stats, percentile, unit = "점" }) {
       </div>
       {percentile != null && (
         <div className="stat-card-percentile">
-          상위 {(100 - percentile).toFixed(1)}%
+          상위 {percentile.toFixed(1)}%
         </div>
       )}
     </div>

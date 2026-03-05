@@ -2,6 +2,9 @@ package com.korfarm.api.user
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.diagnostic.DiagnosticReport
+import com.korfarm.api.diagnostic.SessionHistoryItem
+import com.korfarm.api.diagnostic.TierInfo
 import com.korfarm.api.economy.Inventory
 import com.korfarm.api.economy.LedgerEntry
 import com.korfarm.api.learning.FarmHistoryResponse
@@ -214,6 +217,42 @@ class ParentLinkController(
             throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
         }
         val data = parentLinkService.getChildTestWrongNote(userId, studentId, testId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    @GetMapping("/parents/children/{studentId}/diagnostic/tiers")
+    fun getChildDiagnosticTiers(@PathVariable studentId: String): ApiResponse<List<TierInfo>> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildDiagnosticTiers(userId, studentId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    @GetMapping("/parents/children/{studentId}/diagnostic/history")
+    fun getChildDiagnosticHistory(@PathVariable studentId: String): ApiResponse<List<SessionHistoryItem>> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildDiagnosticHistory(userId, studentId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    @GetMapping("/parents/children/{studentId}/diagnostic/{sessionId}/report")
+    fun getChildDiagnosticReport(
+        @PathVariable studentId: String,
+        @PathVariable sessionId: String
+    ): ApiResponse<DiagnosticReport> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        if (!SecurityUtils.hasAnyRole("PARENT")) {
+            throw ApiException("FORBIDDEN", "부모 권한이 필요합니다", HttpStatus.FORBIDDEN)
+        }
+        val data = parentLinkService.getChildDiagnosticReport(userId, studentId, sessionId)
         return ApiResponse(success = true, data = data)
     }
 }

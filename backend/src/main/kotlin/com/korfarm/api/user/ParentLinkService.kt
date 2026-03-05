@@ -2,6 +2,10 @@ package com.korfarm.api.user
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.diagnostic.DiagnosticReport
+import com.korfarm.api.diagnostic.DiagnosticService
+import com.korfarm.api.diagnostic.SessionHistoryItem
+import com.korfarm.api.diagnostic.TierInfo
 import com.korfarm.api.economy.EconomyService
 import com.korfarm.api.economy.Inventory
 import com.korfarm.api.learning.FarmHistoryResponse
@@ -34,7 +38,8 @@ class ParentLinkService(
     private val userRepository: UserRepository,
     private val economyService: EconomyService,
     private val farmLearningService: FarmLearningService,
-    private val testService: TestService
+    private val testService: TestService,
+    private val diagnosticService: DiagnosticService
 ) {
     @Transactional
     fun createLink(request: ParentLinkRequest, reviewerId: String): ParentLinkView {
@@ -355,5 +360,40 @@ class ParentLinkService(
             throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
         }
         return testService.getWrongNote(testId, studentUserId)
+    }
+
+    /**
+     * 부모가 자녀의 진단 tier 목록 조회
+     */
+    @Transactional(readOnly = true)
+    fun getChildDiagnosticTiers(parentUserId: String, studentUserId: String): List<TierInfo> {
+        verifyLink(parentUserId, studentUserId)
+        return diagnosticService.getTiers(studentUserId)
+    }
+
+    /**
+     * 부모가 자녀의 진단 이력 조회
+     */
+    @Transactional(readOnly = true)
+    fun getChildDiagnosticHistory(parentUserId: String, studentUserId: String): List<SessionHistoryItem> {
+        verifyLink(parentUserId, studentUserId)
+        return diagnosticService.getHistory(studentUserId)
+    }
+
+    /**
+     * 부모가 자녀의 진단 리포트 조회
+     */
+    @Transactional(readOnly = true)
+    fun getChildDiagnosticReport(parentUserId: String, studentUserId: String, sessionId: String): DiagnosticReport {
+        verifyLink(parentUserId, studentUserId)
+        return diagnosticService.getReportForStudent(sessionId, studentUserId)
+    }
+
+    private fun verifyLink(parentUserId: String, studentUserId: String) {
+        val link = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(parentUserId, studentUserId)
+            ?: throw ApiException("NOT_LINKED", "자녀와 연결되어 있지 않습니다", HttpStatus.FORBIDDEN)
+        if (link.status != "active") {
+            throw ApiException("LINK_INACTIVE", "자녀 연결이 활성 상태가 아닙니다", HttpStatus.FORBIDDEN)
+        }
     }
 }

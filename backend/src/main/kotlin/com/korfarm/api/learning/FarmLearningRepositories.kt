@@ -3,6 +3,7 @@ package com.korfarm.api.learning
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
+@Suppress("SpringDataRepositoryMethodReturnTypeInspection")
 interface FarmLearningLogRepository : JpaRepository<FarmLearningLogEntity, String> {
 
     fun findTopByUserIdAndContentIdOrderByCreatedAtDesc(
@@ -54,6 +55,15 @@ interface FarmLearningLogRepository : JpaRepository<FarmLearningLogEntity, Strin
         "AND f.userId IN (SELECT m.userId FROM com.korfarm.api.org.OrgMembershipEntity m WHERE m.orgId = :orgId AND m.status = 'active')"
     )
     fun countDistinctUserByCompletedAtAfterAndOrgId(since: java.time.LocalDateTime, orgId: String): Long
+
+    @Query(
+        "SELECT COALESCE(SUM(f.earnedSeed), 0) FROM FarmLearningLogEntity f " +
+        "WHERE f.userId = :userId AND f.contentType = :contentType " +
+        "AND f.status = 'COMPLETED' AND f.completedAt >= :since"
+    )
+    fun sumEarnedSeedByUserAndContentTypeSince(
+        userId: String, contentType: String, since: java.time.LocalDateTime
+    ): Int
 }
 
 interface ContentCountProjection {

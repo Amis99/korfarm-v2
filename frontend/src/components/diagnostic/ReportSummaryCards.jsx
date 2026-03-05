@@ -8,7 +8,7 @@ function ReportSummaryCards({ report }) {
   ];
 
   if (report.percentiles?.tciPercentile != null) {
-    cards.push({ label: "TCI 백분위", value: `상위 ${(100 - report.percentiles.tciPercentile).toFixed(1)}`, unit: "%" });
+    cards.push({ label: "TCI 백분위", value: `상위 ${report.percentiles.tciPercentile.toFixed(1)}`, unit: "%" });
   }
 
   return (

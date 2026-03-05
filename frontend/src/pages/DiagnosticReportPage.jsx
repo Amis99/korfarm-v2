@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { apiGet } from "../utils/api";
 import CompetencyRadarChart from "../components/diagnostic/CompetencyRadarChart";
 import TciGaugeChart from "../components/diagnostic/TciGaugeChart";
@@ -17,18 +17,27 @@ import "../styles/diagnostic-v2.css";
 function DiagnosticReportPage() {
   const { sessionId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const studentId = searchParams.get("studentId");
+  const isParentMode = !!studentId;
+
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    apiGet(`/v1/diagnostic/sessions/${sessionId}/report`)
+    const url = isParentMode
+      ? `/v1/parents/children/${studentId}/diagnostic/${sessionId}/report`
+      : `/v1/diagnostic/sessions/${sessionId}/report`;
+    apiGet(url)
       .then(setReport)
-      .catch(() => navigate("/diagnostic/v2"))
+      .catch(() => navigate(isParentMode ? `/diagnostic/v2?studentId=${studentId}` : "/diagnostic/v2"))
       .finally(() => setLoading(false));
-  }, [sessionId, navigate]);
+  }, [sessionId, navigate, isParentMode, studentId]);
 
   if (loading) return <div className="diag-v2-loading">리포트를 불러오는 중...</div>;
   if (!report) return null;
+
+  const backUrl = isParentMode ? `/diagnostic/v2?studentId=${studentId}` : "/diagnostic/v2";
 
   return (
     <div className="diag-report-page">
@@ -99,8 +108,8 @@ function DiagnosticReportPage() {
 
       {/* 하단 버튼 */}
       <div className="diag-report-actions">
-        <button className="btn-secondary" onClick={() => navigate("/diagnostic/v2")}>다시 검사</button>
-        <button className="btn-primary" onClick={() => navigate("/start")}>학습 시작하기</button>
+        <button className="btn-secondary" onClick={() => navigate(backUrl)}>진단 목록</button>
+        {!isParentMode && <button className="btn-primary" onClick={() => navigate("/start")}>학습 시작하기</button>}
       </div>
     </div>
   );

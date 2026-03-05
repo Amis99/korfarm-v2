@@ -23,7 +23,9 @@ data class TierInfo(
     val label: String,
     val questionCount: Long,
     val hasCompleted: Boolean,
-    val lastTci: Double?
+    val lastTci: Double?,
+    val lastSessionId: String? = null,
+    val objectiveCount: Long = 0  // 서술형 제외 문항 수
 )
 
 data class SessionCreatedResponse(

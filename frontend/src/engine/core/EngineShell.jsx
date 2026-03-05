@@ -410,6 +410,13 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
         earned_seed: earnedSeed,
         seed_type: chosenSeed?.type || content?.seedReward?.seedType,
         accuracy,
+      }).then((res) => {
+        // 서버가 씨앗을 제한한 경우 실제 지급량으로 summary 갱신
+        if (res && typeof res.earnedSeed === "number" && res.earnedSeed !== earnedSeed) {
+          setSummary((prev) => prev ? { ...prev, earnedSeed: res.earnedSeed, dailySeedRemaining: res.dailySeedRemaining } : prev);
+        } else if (res && res.dailySeedRemaining != null) {
+          setSummary((prev) => prev ? { ...prev, dailySeedRemaining: res.dailySeedRemaining } : prev);
+        }
       }).catch((e) => console.error(e));
     }
   };

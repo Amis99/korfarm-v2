@@ -17,7 +17,7 @@ function DailyLearningPage() {
           >
             <span className="badge">일일 퀴즈</span>
             <h3>일일 퀴즈</h3>
-            <p>총 10문제 도전! 하루 첫 제출 시 씨앗 지급</p>
+            <p>반복 학습 가능! 하루 최대 씨앗 10개</p>
           </div>
 
           <div
@@ -26,7 +26,7 @@ function DailyLearningPage() {
           >
             <span className="badge badge-reading">일일 독해</span>
             <h3>일일 독해</h3>
-            <p>지문 읽는 힘을 키워요. 제출할 때마다 씨앗 지급</p>
+            <p>지문 읽는 힘을 키워요. 하루 최대 씨앗 10개</p>
           </div>
         </div>
       </div>

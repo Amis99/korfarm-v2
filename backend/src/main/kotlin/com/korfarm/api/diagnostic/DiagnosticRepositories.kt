@@ -11,6 +11,7 @@ interface DiagQuestionRepository : JpaRepository<DiagQuestionEntity, String> {
     fun findByPassageIdOrderByOrderInPassageAsc(passageId: String): List<DiagQuestionEntity>
     fun findByTierAndQuestionTypeNotOrderByIdAsc(tier: String, excludeType: String): List<DiagQuestionEntity>
     fun countByTier(tier: String): Long
+    fun countByTierAndQuestionTypeNot(tier: String, excludeType: String): Long
 }
 
 interface DiagSessionRepository : JpaRepository<DiagSessionEntity, String> {

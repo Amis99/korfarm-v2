@@ -19,7 +19,14 @@ data class FarmCompleteRequest(
 
 data class FarmCompleteResponse(
     val success: Boolean,
-    val earnedSeed: Int
+    val earnedSeed: Int,
+    val dailySeedRemaining: Int? = null
+)
+
+data class DailySeedStatusResponse(
+    val todayEarned: Int,
+    val dailyLimit: Int,
+    val remaining: Int
 )
 
 data class FarmProgressRequest(

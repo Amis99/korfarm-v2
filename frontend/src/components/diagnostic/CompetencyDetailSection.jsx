@@ -35,7 +35,7 @@ function CompetencyDetailSection({ details, statistics }) {
                 <div className="cd-score">{d.score.toFixed(1)}</div>
                 <span className={`grade-badge ${getGradeClass(d.grade)}`}>{d.grade}</span>
                 {d.percentile != null && (
-                  <span className="cd-percentile">상위 {(100 - d.percentile).toFixed(0)}%</span>
+                  <span className="cd-percentile">상위 {d.percentile.toFixed(0)}%</span>
                 )}
                 <span className="cd-arrow">{openIdx === i ? "▲" : "▼"}</span>
               </div>

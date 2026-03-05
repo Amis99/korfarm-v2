@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -23,6 +24,13 @@ class FarmLearningController(
         val userId = SecurityUtils.currentUserId()
             ?: return ApiResponse(success = true, data = FarmHistoryResponse(logs = emptyList()))
         return ApiResponse(success = true, data = farmLearningService.getHistory(userId))
+    }
+
+    @GetMapping("/daily-seed-status")
+    fun dailySeedStatus(@RequestParam contentType: String): ApiResponse<DailySeedStatusResponse> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        return ApiResponse(success = true, data = farmLearningService.getDailySeedStatus(userId, contentType))
     }
 
     @PostMapping("/start")
