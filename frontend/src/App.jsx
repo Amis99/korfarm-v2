@@ -51,6 +51,7 @@ const TestReportPage = lazy(() => import("./pages/TestReportPage"));
 const TestWrongNotePage = lazy(() => import("./pages/TestWrongNotePage"));
 
 const HarvestLedgerPage = lazy(() => import("./pages/HarvestLedgerPage"));
+const SeedLedgerPage = lazy(() => import("./pages/SeedLedgerPage"));
 const DuelMainPage = lazy(() => import("./pages/DuelMainPage"));
 const DuelLobbyPage = lazy(() => import("./pages/DuelLobbyPage"));
 const DuelWaitingRoomPage = lazy(() => import("./pages/DuelWaitingRoomPage"));
@@ -171,7 +172,7 @@ function App() {
           <Route path="/tests/:testId/report" element={P(<TestReportPage />)} />
           <Route path="/tests/:testId/wrong-note" element={P(<TestWrongNotePage />)} />
           <Route path="/harvest-ledger" element={P(<HarvestLedgerPage />)} />
-          <Route path="/seed-log" element={<Navigate to="/tests?tab=history" replace />} />
+          <Route path="/seed-log" element={P(<SeedLedgerPage />)} />
           <Route path="/duel" element={P(<DuelMainPage />)} />
           <Route path="/duel/lobby/:serverId" element={P(<DuelLobbyPage />)} />
           <Route path="/duel/room/:roomId" element={P(<DuelWaitingRoomPage />)} />

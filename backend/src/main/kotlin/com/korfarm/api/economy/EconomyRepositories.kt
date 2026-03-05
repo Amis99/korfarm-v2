@@ -34,4 +34,21 @@ interface UserFertilizerRepository : JpaRepository<UserFertilizerEntity, String>
 
 interface EconomyLedgerRepository : JpaRepository<EconomyLedgerEntity, String> {
     fun findByUserIdOrderByCreatedAtDesc(userId: String): List<EconomyLedgerEntity>
+
+    @Query(
+        "SELECT e.userId AS userId, SUM(e.delta) AS total " +
+        "FROM EconomyLedgerEntity e " +
+        "WHERE e.currencyType = 'seed' AND e.delta > 0 " +
+        "AND e.createdAt BETWEEN :start AND :end " +
+        "GROUP BY e.userId ORDER BY SUM(e.delta) DESC"
+    )
+    fun sumSeedEarningsByPeriod(
+        @Param("start") start: java.time.LocalDateTime,
+        @Param("end") end: java.time.LocalDateTime
+    ): List<SeedRankingProjection>
+}
+
+interface SeedRankingProjection {
+    fun getUserId(): String
+    fun getTotal(): Long
 }

@@ -40,8 +40,8 @@ function WisdomPostDetailPage() {
     apiGet(`/v1/wisdom/posts/${postId}`)
       .then((data) => {
         setPost(data);
-        setLikeCount(data.like_count || 0);
-        setIsLiked(data.is_liked_by_me || false);
+        setLikeCount(data.likeCount || 0);
+        setIsLiked(data.isLikedByMe || false);
         setComments(data.comments || []);
       })
       .catch(() => setPost(null))
@@ -57,7 +57,7 @@ function WisdomPostDetailPage() {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
-      navigate(`/writing/${post.level_id}`);
+      navigate(`/writing/${post.levelId}`);
     } catch {
       alert("삭제에 실패했습니다.");
     } finally {
@@ -100,7 +100,7 @@ function WisdomPostDetailPage() {
     if (!confirm("댓글을 삭제하시겠습니까?")) return;
     try {
       await apiDelete(`/v1/wisdom/comments/${commentId}`);
-      setComments((prev) => prev.filter((c) => c.comment_id !== commentId));
+      setComments((prev) => prev.filter((c) => c.commentId !== commentId));
     } catch {
       alert("댓글 삭제에 실패했습니다.");
     }
@@ -143,7 +143,7 @@ function WisdomPostDetailPage() {
     <div className="wisdom">
       <div className="wis-topbar">
         <div className="wis-topbar-inner">
-          <Link to={`/writing/${post.level_id}`} className="wis-back">
+          <Link to={`/writing/${post.levelId}`} className="wis-back">
             <span className="material-symbols-outlined">arrow_back</span>
             목록으로
           </Link>
@@ -153,21 +153,21 @@ function WisdomPostDetailPage() {
 
       <div className="wis-detail">
         <div className="wis-detail-header">
-          <h2>{post.topic_label}</h2>
+          <h2>{post.topicLabel}</h2>
           <div className="wis-detail-meta">
-            <span>작성자: {post.is_own ? (post.author_name || "나") : "익명"}</span>
-            <span>작성일: {fmtDate(post.created_at)}</span>
-            <span>유형: {post.submission_type === "manuscript" ? "원고지" : "파일 업로드"}</span>
+            <span>작성자: {post.isOwn ? (post.authorName || "나") : "익명"}</span>
+            <span>작성일: {fmtDate(post.createdAt)}</span>
+            <span>유형: {post.submissionType === "manuscript" ? "원고지" : "파일 업로드"}</span>
           </div>
         </div>
 
-        {post.submission_type === "manuscript" && post.content && (
+        {post.submissionType === "manuscript" && post.content && (
           <div className="wis-detail-content">
             <ManuscriptGrid
               value={post.content}
               readOnly
-              cols={GRID_CONFIG[post.level_id]?.cols || 20}
-              rows={GRID_CONFIG[post.level_id]?.rows || 25}
+              cols={GRID_CONFIG[post.levelId]?.cols || 20}
+              rows={GRID_CONFIG[post.levelId]?.rows || 25}
             />
           </div>
         )}
@@ -177,8 +177,8 @@ function WisdomPostDetailPage() {
             <h3>첨부파일</h3>
             {post.attachments.map((att) => (
               <a
-                key={att.file_id}
-                href={`${API_BASE}/v1/files/${att.file_id}/download`}
+                key={att.fileId}
+                href={`${API_BASE}/v1/files/${att.fileId}/download`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="wis-attachment-link"
@@ -203,7 +203,7 @@ function WisdomPostDetailPage() {
             <span>좋아요 {likeCount}</span>
           </button>
 
-          {post.is_own && (
+          {post.isOwn && (
             <button
               className="wis-btn wis-btn-danger"
               onClick={handleDelete}
@@ -228,9 +228,9 @@ function WisdomPostDetailPage() {
               </>
             )}
             <div className="wis-feedback-meta">
-              {post.feedback.reviewer_name && <span>첨삭자: {post.feedback.reviewer_name}</span>}
+              {post.feedback.reviewerName && <span>첨삭자: {post.feedback.reviewerName}</span>}
               {" · "}
-              {fmtDate(post.feedback.created_at)}
+              {fmtDate(post.feedback.createdAt)}
             </div>
           </div>
         )}
@@ -247,16 +247,16 @@ function WisdomPostDetailPage() {
           ) : (
             <div className="wis-comments-list">
               {comments.map((c) => (
-                <div key={c.comment_id} className="wis-comment-item">
+                <div key={c.commentId} className="wis-comment-item">
                   <div className="wis-comment-header">
                     <span className="wis-comment-author">
-                      {c.is_own ? (c.author_name || "나") : "익명"}
+                      {c.isOwn ? (c.authorName || "나") : "익명"}
                     </span>
-                    <span className="wis-comment-date">{fmtDateTime(c.created_at)}</span>
-                    {c.is_own && (
+                    <span className="wis-comment-date">{fmtDateTime(c.createdAt)}</span>
+                    {c.isOwn && (
                       <button
                         className="wis-comment-delete"
-                        onClick={() => handleCommentDelete(c.comment_id)}
+                        onClick={() => handleCommentDelete(c.commentId)}
                       >
                         삭제
                       </button>

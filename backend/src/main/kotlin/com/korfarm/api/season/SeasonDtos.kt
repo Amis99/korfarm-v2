@@ -12,6 +12,7 @@ data class Season(
 data class HarvestRankingItem(
     val rank: Int,
     val userId: String,
+    val userName: String = "",
     val value: Int
 )
 

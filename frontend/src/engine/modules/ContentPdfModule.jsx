@@ -203,15 +203,18 @@ function ContentPdfModule({ content }) {
     let leftHeight = 0;
     const left = [];
     const right = [];
+    let splitReached = false;
     for (let idx = 0; idx < questions.length; idx++) {
       const extra = left.length > 0 ? itemGap : 0;
       if (
-        leftHeight + itemHeights[idx] + extra <= halfHeight ||
-        (right.length === 0 && idx === questions.length - 1)
+        !splitReached &&
+        (leftHeight + itemHeights[idx] + extra <= halfHeight ||
+        (right.length === 0 && idx === questions.length - 1))
       ) {
         left.push(idx);
         leftHeight += itemHeights[idx] + extra;
       } else {
+        splitReached = true;
         right.push(idx);
       }
     }

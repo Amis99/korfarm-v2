@@ -59,11 +59,30 @@ class DuelWebSocketHandler(
     }
 
     override fun afterConnectionClosed(session: WebSocketSession, status: CloseStatus) {
+        val roomId = session.attributes["roomId"]?.toString()
+        val userId = session.attributes["userId"]?.toString()
+
         sessionsByRoom.values.forEach { it.remove(session) }
         sessionsByMatch.values.forEach { it.remove(session) }
         // 빈 맵 엔트리 정리 (메모리 누수 방지)
         sessionsByRoom.entries.removeIf { it.value.isEmpty() }
         sessionsByMatch.entries.removeIf { it.value.isEmpty() }
+
+        // 대기방에 있던 사용자의 비정상 퇴장 처리
+        if (roomId != null && userId != null) {
+            try {
+                duelService.leaveRoom(userId, roomId)
+                val detail = duelService.roomDetail(roomId)
+                if (detail.room.status == "closed") {
+                    broadcastToRoom(roomId, "room.closed", mapOf("reason" to "방장이 나가서 방이 닫혔습니다."))
+                    sessionsByRoom.remove(roomId)
+                } else {
+                    broadcastToRoom(roomId, "room.update", detail)
+                }
+            } catch (e: Exception) {
+                log.warn("비정상 퇴장 처리 중 오류: roomId=$roomId, userId=$userId", e)
+            }
+        }
     }
 
     // === 대기방 핸들러 ===
@@ -74,7 +93,8 @@ class DuelWebSocketHandler(
         sessions.add(session)
         session.attributes["roomId"] = roomId
         val detail = duelService.roomDetail(roomId)
-        send(session, "room.state", detail)
+        send(session, "room.state", detail)          // 입장자 본인에게 초기 상태 전송
+        broadcastToRoom(roomId, "room.update", detail) // 모든 대기자에게 업데이트 브로드캐스트
     }
 
     private fun handleRoomLeave(session: WebSocketSession, body: Map<*, *>) {

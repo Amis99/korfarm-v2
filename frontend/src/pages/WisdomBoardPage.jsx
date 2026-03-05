@@ -54,7 +54,7 @@ function WisdomBoardPage() {
     apiGet(`/v1/wisdom/posts?${params}`)
       .then((data) => {
         setPosts(data.posts || []);
-        setHasMyPost(data.has_my_post !== false);
+        setHasMyPost(data.hasMyPost !== false);
       })
       .catch(() => {
         setPosts([]);
@@ -72,7 +72,7 @@ function WisdomBoardPage() {
     setDeleting(postId);
     try {
       await apiDelete(`/v1/wisdom/posts/${postId}`);
-      setPosts((prev) => prev.filter((p) => p.post_id !== postId));
+      setPosts((prev) => prev.filter((p) => p.postId !== postId));
     } catch {
       alert("삭제에 실패했습니다.");
     } finally {
@@ -162,34 +162,34 @@ function WisdomBoardPage() {
               <tbody>
                 {visible.map((post, idx) => (
                   <tr
-                    key={post.post_id}
+                    key={post.postId}
                     className="wis-row"
-                    onClick={() => navigate(`/writing/post/${post.post_id}`)}
+                    onClick={() => navigate(`/writing/post/${post.postId}`)}
                   >
                     <td className="wis-td-num">{posts.length - ((page - 1) * PER_PAGE + idx)}</td>
-                    <td className="wis-td-topic">{post.topic_label}</td>
-                    <td className={`wis-td-author ${post.is_own ? "own" : ""}`}>
-                      {post.is_own ? "나의 글" : "익명"}
+                    <td className="wis-td-topic">{post.topicLabel}</td>
+                    <td className={`wis-td-author ${post.isOwn ? "own" : ""}`}>
+                      {post.isOwn ? "나의 글" : "익명"}
                     </td>
                     <td className="wis-td-like">
                       <span className="wis-like-count">
-                        {post.is_liked_by_me ? "\u2665" : "\u2661"} {post.like_count || 0}
+                        {post.isLikedByMe ? "\u2665" : "\u2661"} {post.likeCount || 0}
                       </span>
                     </td>
                     <td className="wis-td-feedback">
-                      <span className={`wis-feedback-badge ${post.has_feedback ? "done" : "pending"}`}>
-                        {post.has_feedback ? "완료" : "대기"}
+                      <span className={`wis-feedback-badge ${post.hasFeedback ? "done" : "pending"}`}>
+                        {post.hasFeedback ? "완료" : "대기"}
                       </span>
                     </td>
-                    <td className="wis-td-date">{fmtDateTime(post.created_at)}</td>
+                    <td className="wis-td-date">{fmtDateTime(post.createdAt)}</td>
                     <td className="wis-td-action">
-                      {post.is_own && (
+                      {post.isOwn && (
                         <button
                           className="wis-delete-btn"
-                          onClick={(e) => handleDelete(e, post.post_id)}
-                          disabled={deleting === post.post_id}
+                          onClick={(e) => handleDelete(e, post.postId)}
+                          disabled={deleting === post.postId}
                         >
-                          {deleting === post.post_id ? "..." : "삭제"}
+                          {deleting === post.postId ? "..." : "삭제"}
                         </button>
                       )}
                     </td>

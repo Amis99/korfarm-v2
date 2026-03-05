@@ -78,9 +78,7 @@ function DiagnosticV2Page() {
               <span className="material-symbols-outlined diag-v2-tier-icon">{info.icon}</span>
               <div className="diag-v2-tier-label">{info.label}</div>
               <div className="diag-v2-tier-desc">{info.desc}</div>
-              <div className="diag-v2-tier-meta">
-                {tier ? `${tier.objectiveCount || tier.questionCount}문항` : ""}
-              </div>
+              <div className="diag-v2-tier-meta"></div>
               {tier?.hasCompleted && tier.lastTci != null && (
                 <div className="diag-v2-tier-tci">TCI {tier.lastTci.toFixed(1)}</div>
               )}

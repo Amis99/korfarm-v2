@@ -573,31 +573,35 @@ function StartPage() {
               <p className="start-card-notice">반복 학습 가능! 하루 최대 씨앗 10개</p>
             </div>
 
-            {/* 과제 바구니 */}
-            <h2>
-              <span className="material-symbols-outlined">shopping_basket</span>
-              과제 바구니
-            </h2>
-            <div className="start-basket">
-              <div>
-                <span className="badge" style={{ background: "rgba(0,0,0,0.2)" }}>
-                  특별 과제
-                </span>
-                {assignmentCount === null ? (
-                  <h3>과제 확인 중...</h3>
-                ) : assignmentCount > 0 ? (
-                  <>
-                    <h3>특별 과제 {assignmentCount}건 도착!</h3>
-                    <p>완료하고 과제 씨앗을 받아보세요.</p>
-                  </>
-                ) : (
-                  <h3>배정된 과제가 없습니다</h3>
-                )}
-              </div>
-              <button type="button" onClick={() => navigate("/assignments")}>
-                과제 보러가기
-              </button>
-            </div>
+            {/* 과제 바구니 — 유료/관리자만 표시 */}
+            {hasSub && (
+              <>
+                <h2>
+                  <span className="material-symbols-outlined">shopping_basket</span>
+                  과제 바구니
+                </h2>
+                <div className="start-basket">
+                  <div>
+                    <span className="badge" style={{ background: "rgba(0,0,0,0.2)" }}>
+                      특별 과제
+                    </span>
+                    {assignmentCount === null ? (
+                      <h3>과제 확인 중...</h3>
+                    ) : assignmentCount > 0 ? (
+                      <>
+                        <h3>특별 과제 {assignmentCount}건 도착!</h3>
+                        <p>완료하고 과제 씨앗을 받아보세요.</p>
+                      </>
+                    ) : (
+                      <h3>배정된 과제가 없습니다</h3>
+                    )}
+                  </div>
+                  <button type="button" onClick={() => navigate("/assignments")}>
+                    과제 보러가기
+                  </button>
+                </div>
+              </>
+            )}
 
             {/* 유료 학습 메뉴 그리드 */}
             <h2 id="paid">
@@ -674,7 +678,7 @@ function StartPage() {
               ) : (
                 <p>아직 씨앗 획득 내역이 없습니다.</p>
               )}
-              <Link className="start-card-button" to="/tests?tab=history">
+              <Link className="start-card-button" to="/seed-log">
                 전체 보기
               </Link>
             </div>

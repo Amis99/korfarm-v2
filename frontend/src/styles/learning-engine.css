@@ -1382,6 +1382,28 @@ mark.highlight {
   background-image: var(--result-fail-bg);
 }
 
+.result-drag-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  cursor: grab;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+.result-drag-handle:active { cursor: grabbing; }
+.result-drag-hint {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+  user-select: none;
+  pointer-events: none;
+}
+
 .result-close {
   position: absolute;
   top: 10px;
@@ -1393,7 +1415,7 @@ mark.highlight {
   border-radius: 999px;
   font-weight: 700;
   cursor: pointer;
-  z-index: 2;
+  z-index: 4;
 }
 
 .result-grid {

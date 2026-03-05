@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.economy.EconomyLedgerRepository
+import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -14,6 +16,8 @@ class SeasonService(
     private val seasonHarvestRankingRepository: SeasonHarvestRankingRepository,
     private val seasonDuelRankingRepository: SeasonDuelRankingRepository,
     private val seasonAwardSnapshotRepository: SeasonAwardSnapshotRepository,
+    private val economyLedgerRepository: EconomyLedgerRepository,
+    private val userRepository: UserRepository,
     private val objectMapper: ObjectMapper
 ) {
     fun currentSeason(): Season {
@@ -51,9 +55,22 @@ class SeasonService(
     }
 
     fun harvestRankings(seasonId: String, levelId: String): List<HarvestRankingItem> {
-        val entity = seasonHarvestRankingRepository.findFirstBySeasonIdAndLevelIdOrderByGeneratedAtDesc(seasonId, levelId)
-            ?: return emptyList()
-        return objectMapper.readValue(entity.rankingJson, object : TypeReference<List<HarvestRankingItem>>() {})
+        // 시즌 기간 내 economy_ledger에서 실시간 씨앗 합산
+        val season = seasonRepository.findById(seasonId).orElse(null) ?: return emptyList()
+        val projections = economyLedgerRepository.sumSeedEarningsByPeriod(season.startAt, season.endAt)
+        if (projections.isEmpty()) return emptyList()
+
+        val userIds = projections.map { it.getUserId() }
+        val userMap = userRepository.findAllById(userIds).associateBy { it.id }
+
+        return projections.mapIndexed { idx, proj ->
+            HarvestRankingItem(
+                rank = idx + 1,
+                userId = proj.getUserId(),
+                userName = userMap[proj.getUserId()]?.name ?: "?",
+                value = proj.getTotal().toInt()
+            )
+        }
     }
 
     fun duelRankings(seasonId: String, levelId: String): DuelLeaderboards {

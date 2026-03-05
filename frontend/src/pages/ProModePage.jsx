@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, isPaymentRequired } from "../utils/api";
 import VideoModal from "../components/VideoModal";
@@ -9,6 +9,8 @@ import "../styles/video-modal.css";
 function ProModePage() {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const showList = searchParams.get("list") === "true";
   const [chapters, setChapters] = useState([]);
   const [userLevel, setUserLevel] = useState("");
   const [loading, setLoading] = useState(true);
@@ -35,6 +37,15 @@ function ProModePage() {
       })
       .finally(() => setLoading(false));
   }, [isLoggedIn]);
+
+  // 챕터 목록 로드 후 첫 접근 가능한 챕터로 자동 이동
+  useEffect(() => {
+    if (showList || loading || needSubscription) return;
+    if (chapters.length > 0) {
+      const first = chapters.find((ch) => ch.isAccessible);
+      if (first) navigate(`/pro-mode/chapter/${first.chapterId}`, { replace: true });
+    }
+  }, [chapters, loading, showList, needSubscription]);
 
   if (!isLoggedIn) {
     return (

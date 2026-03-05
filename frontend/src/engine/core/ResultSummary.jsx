@@ -1,4 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect, useRef, useCallback } from "react";
+
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
 const formatDuration = (seconds) => {
   const safe = Number.isFinite(seconds) ? Math.max(0, seconds) : 0;
@@ -22,6 +24,11 @@ function seedSvgUrl(seedType) {
 }
 
 function ResultSummary({ summary, onExit }) {
+  const cardRef = useRef(null);
+  const dragState = useRef(null);
+  const [position, setPosition] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+
   const accuracy = useMemo(() => {
     if (!summary.total) return 0;
     return Math.round((summary.correct / summary.total) * 100);
@@ -35,9 +42,6 @@ function ResultSummary({ summary, onExit }) {
   const correctPercent = total ? Math.min(100, Math.round((summary.correct / total) * 100)) : 0;
   const wrongPercent = total ? Math.min(100, Math.round((summary.wrong / total) * 100)) : 0;
   const accuracyPercent = Math.min(100, Math.max(0, summaryAccuracy));
-  const timePercent = timeLimit
-    ? Math.min(100, Math.round((summary.timeSpent / timeLimit) * 100))
-    : 0;
   const clockSize = useMemo(() => {
     const min = 18;
     const max = 34;
@@ -66,9 +70,76 @@ function ResultSummary({ summary, onExit }) {
       ? "result-card earned"
       : "result-card empty";
 
+  const handleDragStart = useCallback((event) => {
+    const card = cardRef.current;
+    if (!card) return;
+    event.preventDefault();
+    const overlay = card.parentElement;
+    const overlayRect = overlay.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const offsetX = event.clientX - cardRect.left;
+    const offsetY = event.clientY - cardRect.top;
+    dragState.current = {
+      overlayLeft: overlayRect.left,
+      overlayTop: overlayRect.top,
+      overlayWidth: overlayRect.width,
+      overlayHeight: overlayRect.height,
+      cardWidth: cardRect.width,
+      cardHeight: cardRect.height,
+      offsetX,
+      offsetY,
+    };
+    if (!position) {
+      setPosition({
+        x: cardRect.left - overlayRect.left,
+        y: cardRect.top - overlayRect.top,
+      });
+    }
+    setIsDragging(true);
+  }, [position]);
+
+  useEffect(() => {
+    if (!isDragging) return undefined;
+    const handleMove = (event) => {
+      if (!dragState.current) return;
+      const {
+        overlayLeft, overlayTop,
+        overlayWidth, overlayHeight,
+        cardWidth, cardHeight,
+        offsetX, offsetY,
+      } = dragState.current;
+      const maxX = Math.max(0, overlayWidth - cardWidth);
+      const maxY = Math.max(0, overlayHeight - cardHeight);
+      const nextX = clamp(event.clientX - overlayLeft - offsetX, 0, maxX);
+      const nextY = clamp(event.clientY - overlayTop - offsetY, 0, maxY);
+      setPosition({ x: nextX, y: nextY });
+    };
+    const handleUp = () => {
+      dragState.current = null;
+      setIsDragging(false);
+    };
+    window.addEventListener("pointermove", handleMove);
+    window.addEventListener("pointerup", handleUp);
+    return () => {
+      window.removeEventListener("pointermove", handleMove);
+      window.removeEventListener("pointerup", handleUp);
+    };
+  }, [isDragging]);
+
+  const cardStyle = position
+    ? { position: "absolute", left: position.x, top: position.y, cursor: isDragging ? "grabbing" : "grab" }
+    : { cursor: "grab" };
+
   return (
     <div className="result-overlay">
-      <div className={resultClass}>
+      <div
+        ref={cardRef}
+        className={resultClass}
+        style={cardStyle}
+      >
+        <div className="result-drag-handle" onPointerDown={handleDragStart}>
+          <span className="result-drag-hint">⠿</span>
+        </div>
         <button type="button" className="result-close" onClick={onExit}>
           닫기
         </button>
