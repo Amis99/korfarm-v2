@@ -1,6 +1,21 @@
 export const API_BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:8080";
 export const TOKEN_KEY = "korfarm_token";
 
+// snake_case ↔ camelCase 변환 (백엔드 SNAKE_CASE Jackson 설정 대응)
+const snakeToCamel = (s) => s.replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+const camelToSnake = (s) => s.replace(/[A-Z]/g, (c) => `_${c.toLowerCase()}`);
+function convertKeys(obj, fn) {
+  if (Array.isArray(obj)) return obj.map((v) => convertKeys(v, fn));
+  if (obj !== null && typeof obj === "object" && !(obj instanceof Date)) {
+    return Object.fromEntries(
+      Object.entries(obj).map(([k, v]) => [fn(k), convertKeys(v, fn)])
+    );
+  }
+  return obj;
+}
+export const camelize = (obj) => convertKeys(obj, snakeToCamel);
+export const snakeize = (obj) => convertKeys(obj, camelToSnake);
+
 // HTTP 상태 코드를 포함하는 커스텀 에러 클래스
 export class ApiError extends Error {
   constructor(message, status) {
@@ -54,7 +69,7 @@ export const apiGet = async (path) => {
     throw new ApiError(await parseError(response, "GET", path), response.status);
   }
   const payload = await response.json();
-  return payload?.data ?? payload;
+  return camelize(payload?.data ?? payload);
 };
 
 export const apiPost = async (path, body) => {
@@ -64,13 +79,13 @@ export const apiPost = async (path, body) => {
       ...authHeaders(),
       "Content-Type": "application/json",
     },
-    body: body ? JSON.stringify(body) : "{}",
+    body: body ? JSON.stringify(snakeize(body)) : "{}",
   });
   if (!response.ok) {
     throw new ApiError(await parseError(response, "POST", path), response.status);
   }
   const payload = await response.json();
-  return payload?.data ?? payload;
+  return camelize(payload?.data ?? payload);
 };
 
 export const apiDelete = async (path) => {
@@ -82,7 +97,7 @@ export const apiDelete = async (path) => {
     throw new ApiError(await parseError(response, "DELETE", path), response.status);
   }
   const payload = await response.json();
-  return payload?.data ?? payload;
+  return camelize(payload?.data ?? payload);
 };
 
 export const apiPut = async (path, body) => {
@@ -92,13 +107,13 @@ export const apiPut = async (path, body) => {
       ...authHeaders(),
       "Content-Type": "application/json",
     },
-    body: body ? JSON.stringify(body) : "{}",
+    body: body ? JSON.stringify(snakeize(body)) : "{}",
   });
   if (!response.ok) {
     throw new ApiError(await parseError(response, "PUT", path), response.status);
   }
   const payload = await response.json();
-  return payload?.data ?? payload;
+  return camelize(payload?.data ?? payload);
 };
 
 export const WS_BASE = (() => {
