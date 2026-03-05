@@ -275,10 +275,10 @@ class DuelService(
             throw ApiException("NOT_ENOUGH_PLAYERS", "2명 이상이어야 시작할 수 있습니다", HttpStatus.BAD_REQUEST)
         }
 
-        // 문제 선정
-        val questions = questionPoolService.selectQuestions(room.serverId, 6, 4)
-        if (questions.size < TOTAL_QUESTIONS) {
-            throw ApiException("NOT_ENOUGH_QUESTIONS", "문제가 부족합니다 (${questions.size}/${TOTAL_QUESTIONS})", HttpStatus.INTERNAL_SERVER_ERROR)
+        // 문제 선정 (풀 전체 셔플하여 중복 없이 출제)
+        val questions = questionPoolService.selectAllQuestions(room.serverId)
+        if (questions.size < 2) {
+            throw ApiException("NOT_ENOUGH_QUESTIONS", "문제가 부족합니다", HttpStatus.INTERNAL_SERVER_ERROR)
         }
 
         val season = seasonService.currentSeason()

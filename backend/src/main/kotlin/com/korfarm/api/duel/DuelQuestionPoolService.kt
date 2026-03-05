@@ -23,6 +23,15 @@ class DuelQuestionPoolService(
         return selectedQuiz + selectedReading
     }
 
+    // 풀의 모든 활성 문제를 셔플하여 반환 (문제 수 제한 없이 전체 출제)
+    fun selectAllQuestions(serverId: String): List<DuelQuestionPoolEntity> {
+        val quizPool = duelQuestionPoolRepository
+            .findByServerIdAndQuestionTypeAndStatus(serverId, "QUIZ", "ACTIVE")
+        val readingPool = duelQuestionPoolRepository
+            .findByServerIdAndQuestionTypeAndStatus(serverId, "READING", "ACTIVE")
+        return (quizPool + readingPool).shuffled()
+    }
+
     // 같은 카테고리에서 최대 2문제만 선정하여 다양성 보장
     private fun selectWithCategoryDiversity(
         pool: List<DuelQuestionPoolEntity>,

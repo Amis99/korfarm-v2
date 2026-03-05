@@ -272,11 +272,24 @@ class DuelWebSocketHandler(
                 }
             }, 2500, TimeUnit.MILLISECONDS)
         } else {
-            // 다음 문제로 진행 (문제 소진 시 처음부터 순환)
+            // 다음 문제로 진행
             scheduler.schedule({
                 state.currentIndex++
                 if (state.currentIndex >= state.questions.size) {
-                    state.currentIndex = 0
+                    // 문제 소진 → 매치 종료
+                    try {
+                        val result = duelService.finishMatch(matchId)
+                        if (result != null) {
+                            try { duelService.distributeMatchRewards(matchId) }
+                            catch (e: Exception) { log.error("매치 보상 지급 실패: $matchId", e) }
+                            broadcastMatchFinish(matchId, result)
+                        }
+                    } catch (e: Exception) {
+                        log.error("매치 종료 실패: $matchId", e)
+                    } finally {
+                        cleanupMatch(matchId)
+                    }
+                    return@schedule
                 }
                 // 라운드 보호 리셋
                 state.roundProcessed = AtomicBoolean(false)
