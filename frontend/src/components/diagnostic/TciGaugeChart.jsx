@@ -1,7 +1,9 @@
-function TciGaugeChart({ tci, rawTci, confidence, recommendation, statistics }) {
+function TciGaugeChart({ tci, rawTci, confidence, recommendation, statistics, accuracyRate }) {
   const pct = Math.min(Math.max(tci, 0), 100);
   const rawPct = Math.min(Math.max(rawTci || tci, 0), 100);
   const diff = tci - (rawTci || tci);
+  // 평가 문구는 rawTci 기준
+  const evalTci = rawTci != null ? rawTci : tci;
 
   return (
     <div className="tci-gauge">
@@ -50,12 +52,27 @@ function TciGaugeChart({ tci, rawTci, confidence, recommendation, statistics }) 
       </div>
 
       <div className="tci-interpretation">
-        {tci >= 75 && "매우 우수한 국어 종합 역량을 보유하고 있습니다."}
-        {tci >= 60 && tci < 75 && "우수한 역량입니다. 취약 부분을 보강하면 최상위권 진입이 가능합니다."}
-        {tci >= 45 && tci < 60 && "평균 수준의 역량입니다. 기본기 강화와 약점 보완이 필요합니다."}
-        {tci >= 35 && tci < 45 && "기초 역량 보강이 필요합니다. 체계적 학습을 시작하세요."}
-        {tci < 35 && "기초부터 차근차근 학습하는 것이 중요합니다."}
+        {evalTci >= 75 && "매우 우수한 국어 종합 역량을 보유하고 있습니다."}
+        {evalTci >= 60 && evalTci < 75 && "우수한 역량입니다. 취약 부분을 보강하면 최상위권 진입이 가능합니다."}
+        {evalTci >= 45 && evalTci < 60 && "평균 수준의 역량입니다. 기본기 강화와 약점 보완이 필요합니다."}
+        {evalTci >= 35 && evalTci < 45 && "기초 역량 보강이 필요합니다. 체계적 학습을 시작하세요."}
+        {evalTci < 35 && "기초부터 차근차근 학습하는 것이 중요합니다."}
       </div>
+
+      {confidence < 0.7 && (
+        <div className="tci-low-confidence-note">
+          적응형 검사 특성상 측정 문항이 적어 참고 수준의 결과입니다.
+          더 정확한 평가를 위해 전체 풀이 모드를 추천합니다.
+        </div>
+      )}
+
+      {accuracyRate != null && (
+        <div className="tci-accuracy-note">
+          {accuracyRate >= 85 && "높은 정답률을 기록했습니다."}
+          {accuracyRate >= 65 && accuracyRate < 85 && "양호한 정답률입니다."}
+          {accuracyRate < 65 && "정답률 향상이 필요합니다."}
+        </div>
+      )}
 
       {recommendation && (
         <div className="tci-recommendation">추천 레벨: {recommendation}</div>

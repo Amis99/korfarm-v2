@@ -244,35 +244,27 @@ function WorksheetQuizModule({ content }) {
     if (!usePageStack || itemHeights.length !== questions.length) {
       return [{ left: questions.map((_, idx) => idx), right: [] }];
     }
-    const result = [];
-    let left = [];
-    let right = [];
+    const totalHeight =
+      itemHeights.reduce((s, h) => s + h, 0) +
+      (questions.length - 1) * itemGap;
+    const halfHeight = totalHeight / 2;
     let leftHeight = 0;
-    let rightHeight = 0;
-    itemHeights.forEach((height, idx) => {
-      const leftExtra = left.length > 0 ? itemGap : 0;
-      if (leftHeight + height + leftExtra <= columnHeight || left.length === 0) {
+    const left = [];
+    const right = [];
+    for (let idx = 0; idx < questions.length; idx++) {
+      const extra = left.length > 0 ? itemGap : 0;
+      if (
+        leftHeight + itemHeights[idx] + extra <= halfHeight ||
+        (right.length === 0 && idx === questions.length - 1)
+      ) {
         left.push(idx);
-        leftHeight += height + leftExtra;
-        return;
-      }
-      const rightExtra = right.length > 0 ? itemGap : 0;
-      if (rightHeight + height + rightExtra <= columnHeight || right.length === 0) {
+        leftHeight += itemHeights[idx] + extra;
+      } else {
         right.push(idx);
-        rightHeight += height + rightExtra;
-        return;
       }
-      result.push({ left, right });
-      left = [idx];
-      right = [];
-      leftHeight = height;
-      rightHeight = 0;
-    });
-    if (left.length || right.length) {
-      result.push({ left, right });
     }
-    return result;
-  }, [itemHeights, questions.length, columnHeight, itemGap]);
+    return [{ left, right }];
+  }, [itemHeights, questions.length, itemGap]);
 
   const handleNext = () => {
     if (currentIndex >= questions.length - 1) {

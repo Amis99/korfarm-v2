@@ -48,6 +48,14 @@ val TIER_LABELS = mapOf(
 
 val TEST_ORDER = listOf("sohssure", "frege", "russell", "wittgenstein")
 
+/** tier별 대상 학년 매핑 */
+val TIER_GRADE_RANGES = mapOf(
+    "sohssure" to listOf("초1", "초2", "초3"),
+    "frege" to listOf("초4", "초5", "초6"),
+    "russell" to listOf("중1", "중2", "중3"),
+    "wittgenstein" to listOf("고1", "고2", "고3"),
+)
+
 /** 레벨 multiplier 계산 */
 fun getLevelMultiplier(tier: String, level: Int?): Double {
     if (level == null) return 1.0

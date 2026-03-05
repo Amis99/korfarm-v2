@@ -5,6 +5,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.diagnostic.scoring.*
+import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -17,6 +18,7 @@ class DiagnosticService(
     private val questionRepo: DiagQuestionRepository,
     private val sessionRepo: DiagSessionRepository,
     private val responseRepo: DiagResponseRepository,
+    private val userRepo: UserRepository,
     private val objectMapper: ObjectMapper
 ) {
 
@@ -73,6 +75,18 @@ class DiagnosticService(
         val pool = loadQuestionPool(tier)
         val firstBatch = if (mode == "cat") {
             val engine = CatEngine(pool, tier)
+
+            // 이전 완료 세션의 출제 문제 중복 방지
+            val prevSessions = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
+            val lastCompleted = prevSessions.firstOrNull { it.status == "completed" }
+            if (lastCompleted != null) {
+                val previousUsedIds = responseRepo.findBySessionIdOrderByResponseOrderAsc(lastCompleted.id)
+                    .map { it.questionId }.toSet()
+                if (pool.size - previousUsedIds.size >= 15) {
+                    engine.used.addAll(previousUsedIds)
+                }
+            }
+
             val batch = engine.selectNextBatch(5)
             // 세션에 사용된 문항 기록은 응답 시 처리
             batch.map { toQuestionDto(it) }
@@ -174,7 +188,9 @@ class DiagnosticService(
         session.errorAnalysisJson = objectMapper.writeValueAsString(errorContrib)
 
         val rawTci = ScoringEngine.calculateTci(scores)
-        val confidence = ScoringEngine.calculateConfidence(answeredCount)
+        val catFullQ = 25  // CAT 모드: 25문제면 신뢰도 100%
+        val fullQ = if (session.mode == "cat") catFullQ else FULL_CONFIDENCE_QUESTIONS
+        val confidence = ScoringEngine.calculateConfidence(answeredCount, fullQ = fullQ)
         val adjTci = ScoringEngine.applyConfidenceToTci(rawTci, confidence)
         session.rawTci = BigDecimal.valueOf(rawTci).setScale(2, java.math.RoundingMode.HALF_UP)
         session.adjustedTci = BigDecimal.valueOf(adjTci).setScale(2, java.math.RoundingMode.HALF_UP)
@@ -185,6 +201,18 @@ class DiagnosticService(
         // 다음 배치 / 종료 판단
         if (session.mode == "cat") {
             val pool = loadQuestionPool(session.tier)
+
+            // 이전 완료 세션의 출제 문제 중복 방지
+            val prevSessions = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, session.tier)
+            val lastCompleted = prevSessions.firstOrNull { it.status == "completed" && it.id != sessionId }
+            if (lastCompleted != null) {
+                val prevIds = responseRepo.findBySessionIdOrderByResponseOrderAsc(lastCompleted.id)
+                    .map { it.questionId }
+                if (pool.size - (usedIds.size + prevIds.size) >= 5) {
+                    usedIds.addAll(prevIds)
+                }
+            }
+
             val engine = restoreCatEngine(pool, session.tier, scores, touchCounts, usedIds, answeredCount, correctCount, errorContrib)
             val (stop, _) = engine.shouldStop()
 
@@ -221,7 +249,9 @@ class DiagnosticService(
 
         val scores: MutableMap<String, Double> = objectMapper.readValue(session.scoresJson ?: "{}")
         val rawTci = ScoringEngine.calculateTci(scores)
-        val confidence = ScoringEngine.calculateConfidence(session.answeredCount)
+        val catFullQ = 25  // CAT 모드: 25문제면 신뢰도 100%
+        val fullQ = if (session.mode == "cat") catFullQ else FULL_CONFIDENCE_QUESTIONS
+        val confidence = ScoringEngine.calculateConfidence(session.answeredCount, fullQ = fullQ)
         val adjTci = ScoringEngine.applyConfidenceToTci(rawTci, confidence)
         val recommendation = ScoringEngine.calculateRecommendation(session.tier, rawTci, confidence)
 
@@ -656,6 +686,27 @@ class DiagnosticService(
             percentileInfo = null
         }
 
+        // ── 학년 대비 tier 맥락 문구 ──
+        val gradeContext: String? = try {
+            val user = userRepo.findById(session.userId).orElse(null)
+            val gradeLabel = user?.gradeLabel
+            if (gradeLabel != null) {
+                val tierLabel = TIER_LABELS[session.tier] ?: session.tier
+                val tierGrades = TIER_GRADE_RANGES[session.tier]
+                if (tierGrades != null) {
+                    val tierIdx = TEST_ORDER.indexOf(session.tier)
+                    // 학년에 해당하는 tier 인덱스 찾기
+                    val gradeIdx = TIER_GRADE_RANGES.entries.indexOfFirst { gradeLabel in it.value }
+                    when {
+                        gradeLabel in tierGrades -> "현재 학년(${gradeLabel})에 적합한 $tierLabel 단계를 응시했습니다"
+                        gradeIdx >= 0 && gradeIdx > tierIdx -> "현재 학년(${gradeLabel}) 기준, ${tierLabel}은 이전 학년용 단계입니다. 참고 자료로 활용하세요"
+                        gradeIdx >= 0 && gradeIdx < tierIdx -> "현재 학년(${gradeLabel})보다 높은 $tierLabel 단계에 도전했습니다"
+                        else -> null
+                    }
+                } else null
+            } else null
+        } catch (_: Exception) { null }
+
         // CompetencyDetail에 백분위 추가
         val detailsWithPercentile = if (percentileInfo != null) {
             competencyDetails.map { d ->
@@ -691,6 +742,7 @@ class DiagnosticService(
             competencyNarratives = narratives,
             statistics = tierStatistics,
             percentiles = percentileInfo,
+            gradeContext = gradeContext,
         )
     }
 

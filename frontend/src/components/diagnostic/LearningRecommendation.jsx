@@ -1,6 +1,6 @@
 function LearningRecommendation({ report }) {
   const level = report.recommendedLevel;
-  const tci = report.adjustedTci;
+  const tci = report.rawTci;
 
   const getAdvice = () => {
     if (tci >= 75) return "높은 역량을 보유하고 있습니다. 고난도 문항과 심화 학습을 통해 최상위권을 목표로 하세요.";

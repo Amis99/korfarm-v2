@@ -637,7 +637,8 @@
 
 .worksheet-page {
   width: var(--sheet-width);
-  height: var(--sheet-height);
+  height: auto;
+  min-height: var(--sheet-height);
   background-color: var(--engine-bg);
   background-image: var(--sheet-bg);
   background-size: cover;
@@ -1335,8 +1336,10 @@ mark.highlight {
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
   display: grid;
-  place-items: center;
-  z-index: 50;
+  align-content: start;
+  justify-content: center;
+  padding-top: 60px;
+  z-index: 100;
 }
 
 .result-card {
@@ -1344,8 +1347,8 @@ mark.highlight {
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0;
-  width: min(520px, 90vw);
-  aspect-ratio: 1 / 1;
+  width: min(400px, 85vw);
+  aspect-ratio: 5 / 6;
   display: grid;
   grid-template-rows: 1fr 1fr;
   border: none;
@@ -1367,7 +1370,7 @@ mark.highlight {
 
 .result-close {
   position: absolute;
-  top: 12px;
+  top: 10px;
   right: 12px;
   border: 2px solid #1f1b17;
   background: #fff;
@@ -1382,7 +1385,7 @@ mark.highlight {
 .result-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 8px;
 }
 
 .result-grid span {
@@ -1414,7 +1417,7 @@ mark.highlight {
   display: grid;
   align-content: start;
   gap: 10px;
-  padding: 18px 24px 16px 22px;
+  padding: 14px 20px 12px 18px;
   background: transparent;
 }
 
@@ -1655,7 +1658,7 @@ mark.highlight {
 
   .print-questions {
     column-count: 2;
-    column-fill: auto;
+    column-fill: balance;
     column-gap: 20px;
     column-rule: 1px solid #ddd;
   }

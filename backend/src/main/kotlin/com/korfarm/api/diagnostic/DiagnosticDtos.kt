@@ -100,6 +100,7 @@ data class DiagnosticReport(
     val competencyNarratives: Map<String, String> = emptyMap(),
     val statistics: TierStatistics? = null,
     val percentiles: PercentileInfo? = null,
+    val gradeContext: String? = null,
 )
 
 data class RecommendedLevel(

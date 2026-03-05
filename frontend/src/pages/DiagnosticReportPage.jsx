@@ -38,6 +38,9 @@ function DiagnosticReportPage() {
           {report.tierLabel} · {report.mode === "cat" ? "적응형" : "전체 풀이"} · {report.answeredCount}문항
           {report.completedAt && <span className="completed-at"> · {report.completedAt.replace("T", " ").substring(0, 16)}</span>}
         </span>
+        {report.gradeContext && (
+          <div className="diag-grade-context">{report.gradeContext}</div>
+        )}
       </div>
 
       {/* 섹션 1: 종합 요약 카드 */}
@@ -50,6 +53,7 @@ function DiagnosticReportPage() {
         confidence={report.confidence}
         recommendation={report.recommendedLevel?.label}
         statistics={report.statistics}
+        accuracyRate={report.accuracyRate}
       />
 
       {/* 섹션 3: 전체 응시자 통계 */}
