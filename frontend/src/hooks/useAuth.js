@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { TOKEN_KEY } from "../utils/api";
 
 export function useAuth() {
@@ -20,8 +20,13 @@ export function useAuth() {
     }
   }, [token]);
 
+  const logout = useCallback(() => {
+    localStorage.removeItem(TOKEN_KEY);
+    window.location.href = import.meta.env.BASE_URL || "/";
+  }, []);
+
   const roles = user?.roles || [];
   const isPremium = roles.includes("HQ_ADMIN") || roles.includes("ORG_ADMIN") || roles.includes("PAID") || roles.includes("PREMIUM");
 
-  return { isLoggedIn, user, token, isPremium };
+  return { isLoggedIn, user, token, isPremium, logout };
 }

@@ -44,7 +44,7 @@ function calcDayIndex(learningStartDate) {
 
 function StartPage() {
   const navigate = useNavigate();
-  const { isLoggedIn, user, isPremium } = useAuth();
+  const { isLoggedIn, user, isPremium, logout } = useAuth();
   const [showCraftModal, setShowCraftModal] = useState(false);
   const [showInventoryPopup, setShowInventoryPopup] = useState(false);
   const [readingTitle, setReadingTitle] = useState(null);
@@ -533,17 +533,26 @@ function StartPage() {
                     <span className="material-symbols-outlined" style={{ fontSize: 16 }}>admin_panel_settings</span>
                     관리자 페이지
                   </button>
+                  <button type="button" className="start-sub-btn" onClick={logout}>
+                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>logout</span>
+                    로그아웃
+                  </button>
                 </div>
               ) : (
-                <button
-                  type="button"
-                  className="start-sub-btn"
-                  onClick={() => navigate("/profile")}
-                  style={{ marginTop: 6 }}
-                >
-                  <span className="material-symbols-outlined" style={{ fontSize: 16 }}>settings</span>
-                  내 정보 수정
-                </button>
+                <div className="start-flex-row" style={{ marginTop: 6, gap: 8 }}>
+                  <button
+                    type="button"
+                    className="start-sub-btn"
+                    onClick={() => navigate("/profile")}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>settings</span>
+                    내 정보 수정
+                  </button>
+                  <button type="button" className="start-sub-btn" onClick={logout}>
+                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>logout</span>
+                    로그아웃
+                  </button>
+                </div>
               )}
             </div>
           </div>

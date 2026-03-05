@@ -140,7 +140,7 @@ function App() {
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           {/* 공개 페이지 */}
-          <Route path="/" element={<PublicOnlyRoute><LandingPage /></PublicOnlyRoute>} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/reset" element={<ResetPage />} />
