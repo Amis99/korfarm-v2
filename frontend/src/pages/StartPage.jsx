@@ -122,10 +122,11 @@ function StartPage() {
     }
     apiGet("/v1/seasons/current")
       .then((season) => {
-        if (season?.id) {
-          apiGet(`/v1/seasons/${season.id}/harvest-rankings`).then((r) => setHarvestRanking(r?.items || r || [])).catch((e) => console.error(e));
+        const sid = season?.id || season?.seasonId;
+        if (sid) {
+          apiGet(`/v1/seasons/${sid}/harvest-rankings`).then((r) => setHarvestRanking(r?.items || r || [])).catch((e) => console.error(e));
           if (!isParent) {
-            apiGet(`/v1/seasons/${season.id}/duel-rankings`).then((r) => setDuelRanking(r?.items || r || [])).catch((e) => console.error(e));
+            apiGet(`/v1/seasons/${sid}/duel-rankings`).then((r) => setDuelRanking(r?.items || r || [])).catch((e) => console.error(e));
           }
         }
       })
@@ -637,11 +638,6 @@ function StartPage() {
                 <span className="material-symbols-outlined">neurology</span>
                 <h3>역량 진단 (v2)</h3>
                 <p>10대 역량 정밀 측정</p>
-              </div>
-              <div className="start-paid-card" onClick={() => navigate("/diagnostic/print")}>
-                <span className="material-symbols-outlined">biotech</span>
-                <h3>진단 테스트</h3>
-                <p>수준별 진단 평가</p>
               </div>
               <div className="start-paid-card" onClick={() => navigate("/harvest-ledger")}>
                 <span className="material-symbols-outlined">menu_book</span>

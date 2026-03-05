@@ -45,6 +45,9 @@ function DiagnosticV2Page() {
     }
   };
 
+  // 완료된 세션이 하나라도 있으면 재진단 차단
+  const hasAnyCompleted = tiers.some(t => t.hasCompleted);
+
   const handleCardClick = (key, tier) => {
     if (tier?.hasCompleted && tier.lastSessionId) {
       // 완료된 tier → 리포트로 이동
@@ -52,7 +55,8 @@ function DiagnosticV2Page() {
         ? `/diagnostic/v2/report/${tier.lastSessionId}?studentId=${studentId}`
         : `/diagnostic/v2/report/${tier.lastSessionId}`;
       navigate(reportUrl);
-    } else if (!isParentMode) {
+    } else if (!isParentMode && !hasAnyCompleted) {
+      // 완료된 세션이 없을 때만 새 테스트 허용
       setSelectedTier(key);
     }
   };
@@ -72,7 +76,7 @@ function DiagnosticV2Page() {
           return (
             <div
               key={key}
-              className={`diag-v2-tier-card ${tier?.hasCompleted ? "completed" : ""}`}
+              className={`diag-v2-tier-card ${tier?.hasCompleted ? "completed" : ""} ${!tier?.hasCompleted && hasAnyCompleted && !isParentMode ? "locked" : ""}`}
               onClick={() => handleCardClick(key, tier)}
             >
               <span className="material-symbols-outlined diag-v2-tier-icon">{info.icon}</span>
@@ -104,14 +108,9 @@ function DiagnosticV2Page() {
         })}
       </div>
 
-      {!isParentMode && (
-        <div style={{ textAlign: "center" }}>
-          <button
-            onClick={() => navigate("/diagnostic/print")}
-            style={{ border: "none", background: "none", color: "#8b7e74", cursor: "pointer", fontSize: 14 }}
-          >
-            기존 진단 테스트 (PDF 인쇄)
-          </button>
+      {!isParentMode && hasAnyCompleted && (
+        <div className="diag-v2-blocked-notice">
+          진단 테스트는 가입 시 1회만 응시 가능합니다. 결과 카드를 눌러 리포트를 확인하세요.
         </div>
       )}
 

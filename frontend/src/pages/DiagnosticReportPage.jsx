@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { apiGet } from "../utils/api";
+import { apiGet, apiPut } from "../utils/api";
+import { LEVEL_LABELS } from "../constants/levels";
 import CompetencyRadarChart from "../components/diagnostic/CompetencyRadarChart";
 import TciGaugeChart from "../components/diagnostic/TciGaugeChart";
 import ReportSummaryCards from "../components/diagnostic/ReportSummaryCards";
@@ -23,6 +24,8 @@ function DiagnosticReportPage() {
 
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState(null);
+  const [levelSaving, setLevelSaving] = useState(false);
 
   useEffect(() => {
     const url = isParentMode
@@ -33,6 +36,31 @@ function DiagnosticReportPage() {
       .catch(() => navigate(isParentMode ? `/diagnostic/v2?studentId=${studentId}` : "/diagnostic/v2"))
       .finally(() => setLoading(false));
   }, [sessionId, navigate, isParentMode, studentId]);
+
+  useEffect(() => {
+    if (!isParentMode) {
+      apiGet("/v1/auth/me").then(setProfile).catch(() => {});
+    }
+  }, [isParentMode]);
+
+  // testKey → levelId 매핑
+  const TIER_TO_PREFIX = { sohssure: "saussure", frege: "frege", russell: "russell", wittgenstein: "wittgenstein" };
+  const recommendedLevelId = report?.recommendedLevel?.testKey && report?.recommendedLevel?.level
+    ? `${TIER_TO_PREFIX[report.recommendedLevel.testKey] || report.recommendedLevel.testKey}${report.recommendedLevel.level}`
+    : null;
+
+  const currentLevelId = profile?.levelId || profile?.level_id;
+  const needsChoice = recommendedLevelId && currentLevelId && recommendedLevelId !== currentLevelId;
+
+  const handleLevelSelect = async (levelId) => {
+    setLevelSaving(true);
+    try {
+      await apiPut("/v1/auth/me", { levelId });
+      navigate("/start");
+    } catch {
+      navigate("/start");
+    }
+  };
 
   if (loading) return <div className="diag-v2-loading">리포트를 불러오는 중...</div>;
   if (!report) return null;
@@ -109,7 +137,27 @@ function DiagnosticReportPage() {
       {/* 하단 버튼 */}
       <div className="diag-report-actions">
         <button className="btn-secondary" onClick={() => navigate(backUrl)}>진단 목록</button>
-        {!isParentMode && <button className="btn-primary" onClick={() => navigate("/start")}>학습 시작하기</button>}
+        {!isParentMode && needsChoice ? (
+          <div className="diag-level-choice">
+            <h3>학습 레벨을 선택해 주세요</h3>
+            <div className="diag-level-options">
+              <button className="diag-level-option" onClick={() => handleLevelSelect(currentLevelId)} disabled={levelSaving}>
+                <span className="material-symbols-outlined">school</span>
+                <div className="diag-level-option-label">학년 기준</div>
+                <div className="diag-level-option-value">{LEVEL_LABELS[currentLevelId] || currentLevelId}</div>
+                <div className="diag-level-option-note">{profile?.gradeLabel || profile?.grade_label} 기준</div>
+              </button>
+              <button className="diag-level-option diag-level-option--recommended" onClick={() => handleLevelSelect(recommendedLevelId)} disabled={levelSaving}>
+                <span className="material-symbols-outlined">neurology</span>
+                <div className="diag-level-option-label">진단 결과</div>
+                <div className="diag-level-option-value">{LEVEL_LABELS[recommendedLevelId] || report.recommendedLevel?.label}</div>
+                <div className="diag-level-option-note">진단 테스트 추천</div>
+              </button>
+            </div>
+          </div>
+        ) : (
+          !isParentMode && <button className="btn-primary" onClick={() => navigate("/start")}>학습 시작하기</button>
+        )}
       </div>
     </div>
   );

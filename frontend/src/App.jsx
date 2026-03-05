@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { ProtectedRoute, AdminRoute } from "./components/ProtectedRoute";
+import { useAuth } from "./hooks/useAuth";
 
 // 핵심 페이지 (정적 import - 초기 로딩 필수)
 import LandingPage from "./pages/LandingPage";
@@ -88,6 +89,13 @@ const AdminProPage = lazy(() => import("./pages/AdminProPage"));
 // AdminDuelQuestionsPage는 AdminDuelPage 내부에서 직접 import됨
 const AdminMembershipApprovalPage = lazy(() => import("./pages/AdminMembershipApprovalPage"));
 
+/* 로그인 상태에서 공개 페이지 접근 시 /start로 리다이렉트 */
+function PublicOnlyRoute({ children }) {
+  const { isLoggedIn } = useAuth();
+  if (isLoggedIn) return <Navigate to="/start" replace />;
+  return children;
+}
+
 /* /tests/history → /tests?tab=history 리다이렉트 (기존 쿼리 파라미터 보존) */
 function TestsHistoryRedirect() {
   const { search } = useLocation();
@@ -132,7 +140,7 @@ function App() {
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           {/* 공개 페이지 */}
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<PublicOnlyRoute><LandingPage /></PublicOnlyRoute>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/reset" element={<ResetPage />} />
