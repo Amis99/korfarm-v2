@@ -553,221 +553,225 @@ function StartPage() {
           </button>
         </header>
 
-        <div className="start-grid">
-          <div className="start-section" id="free">
-            <h2>
-              <span className="material-symbols-outlined">school</span>
-              오늘의 무료 학습
-            </h2>
-            <div className="start-card" onClick={() => navigate("/daily-quiz")} style={{ cursor: "pointer" }}>
-              <span className="badge">일일 퀴즈</span>
-              <h3>{levelLabel} - {dayOfYear}일 차</h3>
-              <p>총 10문제 도전!</p>
-              <p className="start-card-notice">반복 학습 가능! 하루 최대 씨앗 10개</p>
-            </div>
-            <div className="start-card" onClick={() => navigate("/daily-reading")} style={{ cursor: "pointer" }}>
-              <span className="badge" style={{ background: "#81d4fa" }}>
-                일일 독해
-              </span>
-              <h3>{readingTitle || `${levelLabel} ${dayOfYear}일 차`}</h3>
-              <p>지문 읽는 힘을 키워요</p>
-              <p className="start-card-notice">반복 학습 가능! 하루 최대 씨앗 10개</p>
-            </div>
-
-            {/* 과제 바구니 — 유료/관리자만 표시 */}
-            {hasSub && (
-              <>
-                <h2>
-                  <span className="material-symbols-outlined">shopping_basket</span>
-                  과제 바구니
-                </h2>
-                <div className="start-basket">
-                  <div>
-                    <span className="badge" style={{ background: "rgba(0,0,0,0.2)" }}>
-                      특별 과제
-                    </span>
-                    {assignmentCount === null ? (
-                      <h3>과제 확인 중...</h3>
-                    ) : assignmentCount > 0 ? (
-                      <>
-                        <h3>특별 과제 {assignmentCount}건 도착!</h3>
-                        <p>완료하고 과제 씨앗을 받아보세요.</p>
-                      </>
-                    ) : (
-                      <h3>배정된 과제가 없습니다</h3>
-                    )}
-                  </div>
-                  <button type="button" onClick={() => navigate("/assignments")}>
-                    과제 보러가기
-                  </button>
-                </div>
-              </>
-            )}
-
-            {/* 유료 학습 메뉴 그리드 */}
-            <h2 id="paid">
-              <span className="material-symbols-outlined">stars</span>
-              유료 학습
-            </h2>
-            <div className="start-paid-grid">
-              <div className={`start-paid-card${!hasSub ? " start-paid-card--locked" : ""}`} onClick={() => navigate(hasSub ? "/pro-mode" : "/subscription")}>
-                <span className="material-symbols-outlined">military_tech</span>
-                <h3>프로 모드</h3>
-                <p>12레벨 심화 학습</p>
-                {!hasSub && <span className="start-lock-badge">구독 필요</span>}
-              </div>
-              <div className={`start-paid-card${!hasSub ? " start-paid-card--locked" : ""}`} onClick={() => navigate(hasSub ? "/farm-mode" : "/subscription")}>
-                <span className="material-symbols-outlined">agriculture</span>
-                <h3>농장별 모드</h3>
-                <p>영역별 집중 학습</p>
-                {!hasSub && <span className="start-lock-badge">구독 필요</span>}
-              </div>
-              <div className={`start-paid-card${!hasSub ? " start-paid-card--locked" : ""}`} onClick={() => navigate(hasSub ? "/writing" : "/subscription")}>
-                <span className="material-symbols-outlined">edit_note</span>
-                <h3>지식과 지혜</h3>
-                <p>글쓰기 훈련</p>
-                {!hasSub && <span className="start-lock-badge">구독 필요</span>}
-              </div>
-              <div className={`start-paid-card${!hasSub ? " start-paid-card--locked" : ""}`} onClick={() => navigate(hasSub ? "/tests" : "/subscription")}>
+        {/* [1] 무료 학습 */}
+        <section className="start-section-block" id="free">
+          <h2 className="start-section-title">
+            <span className="material-symbols-outlined">school</span>
+            오늘의 무료 학습
+          </h2>
+          <div className="start-free-row">
+            <div className="start-free-card" onClick={() => navigate("/daily-quiz")}>
+              <div className="start-free-card-icon quiz">
                 <span className="material-symbols-outlined">quiz</span>
-                <h3>테스트 창고</h3>
-                <p>각종 시험 모음</p>
-                {!hasSub && <span className="start-lock-badge">구독 필요</span>}
               </div>
-              <div className="start-paid-card" onClick={() => navigate("/diagnostic/v2")}>
-                <span className="material-symbols-outlined">neurology</span>
-                <h3>역량 진단 (v2)</h3>
-                <p>10대 역량 정밀 측정</p>
-              </div>
-              <div className="start-paid-card" onClick={() => navigate("/harvest-ledger")}>
-                <span className="material-symbols-outlined">menu_book</span>
-                <h3>수확 장부</h3>
-                <p>작물 거래 내역</p>
-              </div>
-              <div className="start-paid-card" onClick={() => navigate("/tests?tab=history")}>
-                <span className="material-symbols-outlined">assessment</span>
-                <h3>테스트 기록실</h3>
-                <p>성적표 및 오답 노트</p>
-              </div>
-              <div className="start-paid-card" onClick={() => navigate("/report")}>
-                <span className="material-symbols-outlined">analytics</span>
-                <h3>통합 성적표</h3>
-                <p>전 영역 학습 분석</p>
+              <div className="start-free-card-body">
+                <span className="badge">일일 퀴즈</span>
+                <h3>{levelLabel} - {dayOfYear}일 차</h3>
+                <p>총 10문제 도전!</p>
+                <p className="start-card-notice">반복 가능 · 하루 씨앗 10개</p>
               </div>
             </div>
+            <div className="start-free-card" onClick={() => navigate("/daily-reading")}>
+              <div className="start-free-card-icon reading">
+                <span className="material-symbols-outlined">auto_stories</span>
+              </div>
+              <div className="start-free-card-body">
+                <span className="badge" style={{ background: "#81d4fa" }}>일일 독해</span>
+                <h3>{readingTitle || `${levelLabel} ${dayOfYear}일 차`}</h3>
+                <p>지문 읽는 힘을 키워요</p>
+                <p className="start-card-notice">반복 가능 · 하루 씨앗 10개</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-            {/* 씨앗 획득 내역 요약 */}
-            <h2>
-              <span className="material-symbols-outlined">history</span>
-              최근 씨앗 획득
+        {/* [2] 과제 바구니 — 유료/관리자만 표시 */}
+        {hasSub && (
+          <section className="start-section-block">
+            <h2 className="start-section-title">
+              <span className="material-symbols-outlined">shopping_basket</span>
+              과제 바구니
             </h2>
-            <div className="start-card">
+            <div className="start-basket">
+              <div>
+                <span className="badge" style={{ background: "rgba(0,0,0,0.2)" }}>
+                  특별 과제
+                </span>
+                {assignmentCount === null ? (
+                  <h3>과제 확인 중...</h3>
+                ) : assignmentCount > 0 ? (
+                  <>
+                    <h3>특별 과제 {assignmentCount}건 도착!</h3>
+                    <p>완료하고 과제 씨앗을 받아보세요.</p>
+                  </>
+                ) : (
+                  <h3>배정된 과제가 없습니다</h3>
+                )}
+              </div>
+              <button type="button" onClick={() => navigate("/assignments")}>
+                과제 보러가기
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* [3] 학습 메뉴 */}
+        <section className="start-section-block" id="paid">
+          <h2 className="start-section-title">
+            <span className="material-symbols-outlined">stars</span>
+            학습 메뉴
+          </h2>
+          <div className="start-learn-grid">
+            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/pro-mode" : "/subscription")}>
+              <span className="material-symbols-outlined">military_tech</span>
+              <h3>프로 모드</h3>
+              <p>12레벨 심화 학습</p>
+              {!hasSub && <span className="start-lock-badge">구독 필요</span>}
+            </div>
+            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/farm-mode" : "/subscription")}>
+              <span className="material-symbols-outlined">agriculture</span>
+              <h3>농장별 모드</h3>
+              <p>영역별 집중 학습</p>
+              {!hasSub && <span className="start-lock-badge">구독 필요</span>}
+            </div>
+            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/writing" : "/subscription")}>
+              <span className="material-symbols-outlined">edit_note</span>
+              <h3>지식과 지혜</h3>
+              <p>글쓰기 훈련</p>
+              {!hasSub && <span className="start-lock-badge">구독 필요</span>}
+            </div>
+            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/tests" : "/subscription")}>
+              <span className="material-symbols-outlined">quiz</span>
+              <h3>테스트 창고</h3>
+              <p>각종 시험 모음</p>
+              {!hasSub && <span className="start-lock-badge">구독 필요</span>}
+            </div>
+            <div className="start-learn-card" onClick={() => navigate("/diagnostic/v2")}>
+              <span className="material-symbols-outlined">neurology</span>
+              <h3>역량 진단</h3>
+              <p>10대 역량 정밀 측정</p>
+            </div>
+          </div>
+        </section>
+
+        {/* [4] 대결 모드 */}
+        <section className="start-section-block" id="duel">
+          <h2 className="start-section-title">
+            <span className="material-symbols-outlined">swords</span>
+            대결 모드
+          </h2>
+          <div className="start-duel-banner">
+            <div className="start-duel-banner-left">
+              <strong>씨앗을 걸고 실력을 겨뤄요!</strong>
+              <p>실시간 1:1 대결</p>
+              <button type="button" onClick={() => navigate("/duel")}>대결 신청</button>
+            </div>
+            <div className="start-duel-ranking-mini">
+              <h4>대결 랭킹 TOP 3</h4>
+              <ol>
+                {duelRanking.length > 0
+                  ? duelRanking.slice(0, 3).map((r, i) => (
+                      <li key={r.userId || i}>
+                        {r.userName || r.name || "?"} · {r.wins ?? 0}승 {r.winRate ?? 0}%
+                      </li>
+                    ))
+                  : [
+                      <li key="1">— · 0승</li>,
+                      <li key="2">— · 0승</li>,
+                      <li key="3">— · 0승</li>,
+                    ]}
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        {/* [5] 통계·기록 */}
+        <section className="start-section-block">
+          <h2 className="start-section-title">
+            <span className="material-symbols-outlined">bar_chart</span>
+            통계 · 기록
+          </h2>
+          <div className="start-stats-grid">
+            <div className="start-stats-card" onClick={() => navigate("/ranking")}>
+              <span className="material-symbols-outlined">emoji_events</span>
+              <h3>시즌 랭킹</h3>
+              <ul className="start-rank-list">
+                {harvestRanking.length > 0
+                  ? harvestRanking.slice(0, 3).map((r, i) => (
+                      <li key={r.userId || i}>
+                        {i + 1}위 {r.userName || r.name || "?"}
+                      </li>
+                    ))
+                  : [
+                      <li key="1">1위 —</li>,
+                      <li key="2">2위 —</li>,
+                      <li key="3">3위 —</li>,
+                    ]}
+              </ul>
+            </div>
+            <div className="start-stats-card" onClick={() => navigate("/harvest-ledger")}>
+              <span className="material-symbols-outlined">menu_book</span>
+              <h3>수확 장부</h3>
+              <p>작물 거래 내역</p>
+            </div>
+            <div className="start-stats-card" onClick={() => navigate("/tests?tab=history")}>
+              <span className="material-symbols-outlined">assessment</span>
+              <h3>테스트 기록실</h3>
+              <p>성적표 및 오답 노트</p>
+            </div>
+            <div className="start-stats-card" onClick={() => navigate("/report")}>
+              <span className="material-symbols-outlined">analytics</span>
+              <h3>통합 성적표</h3>
+              <p>전 영역 학습 분석</p>
+            </div>
+          </div>
+          <div className="start-seed-section">
+            <div className="start-seed-log-card">
+              <h4>
+                <span className="material-symbols-outlined">history</span>
+                씨앗 획득 내역
+              </h4>
               {seedLog.length > 0 ? (
                 <ul className="start-seed-log">
                   {seedLog.map((entry, i) => (
                     <li key={entry.id || i}>
-                      {SEED_LABELS[entry.itemType] || SEED_LABELS[entry.seedType] || entry.itemType || "씨앗"} +{entry.delta || 0}개 ·{" "}
-                      {entry.reason || ""}
+                      {SEED_LABELS[entry.itemType] || SEED_LABELS[entry.seedType] || entry.itemType || "씨앗"} +{entry.delta || 0}개 · {entry.reason || ""}
                     </li>
                   ))}
                 </ul>
               ) : (
                 <p>아직 씨앗 획득 내역이 없습니다.</p>
               )}
-              <Link className="start-card-button" to="/seed-log">
-                전체 보기
-              </Link>
+              <Link className="start-card-button" to="/seed-log">전체 보기</Link>
+            </div>
+            <div className="start-seed-exchange-card" onClick={() => setShowCraftModal(true)}>
+              <span className="material-symbols-outlined" style={{ fontSize: 36, color: "#4caf50" }}>swap_horiz</span>
+              <h4>씨앗 교환</h4>
+              <p>씨앗 10개를 모아<br />수확물로 교환해요</p>
+              <button type="button">교환하기</button>
             </div>
           </div>
+        </section>
 
-          <aside className="start-side">
-            {/* 시즌 점수 랭킹 */}
-            <div className="start-rank">
-              <h2>
-                <span className="material-symbols-outlined">emoji_events</span>
-                시즌 랭킹
-              </h2>
-              <ul>
-                {harvestRanking.length > 0
-                  ? harvestRanking.slice(0, 3).map((r, i) => (
-                      <li key={r.userId || i}>
-                        {i + 1}위 {r.userName || r.name || "?"} · {(r.value ?? r.totalCrops ?? r.score ?? 0).toLocaleString()}점
-                      </li>
-                    ))
-                  : [
-                      <li key="1">1위 — · 0점</li>,
-                      <li key="2">2위 — · 0점</li>,
-                      <li key="3">3위 — · 0점</li>,
-                    ]}
-              </ul>
-              <Link className="start-rank-link" to="/ranking">
-                랭킹 확인
-              </Link>
-            </div>
-
-            {/* 대결 랭킹 요약 */}
-            <div className="start-rank">
-              <h2>
-                <span className="material-symbols-outlined">swords</span>
-                대결 랭킹
-              </h2>
-              <ul>
-                {duelRanking.length > 0
-                  ? duelRanking.slice(0, 3).map((r, i) => (
-                      <li key={r.userId || i}>
-                        {i + 1}위 {r.userName || r.name || "?"} · {r.wins ?? 0}승 {r.winRate ?? 0}%
-                      </li>
-                    ))
-                  : [
-                      <li key="1">1위 — · 0승</li>,
-                      <li key="2">2위 — · 0승</li>,
-                      <li key="3">3위 — · 0승</li>,
-                    ]}
-              </ul>
-            </div>
-
-            {/* 대결 */}
-            <div className="start-duel" id="duel">
-              <div>
-                <strong>대결하기</strong>
-                <p>씨앗을 걸고 실력을 겨뤄요</p>
-              </div>
-              <button type="button" onClick={() => navigate("/duel")}>
-                대결 신청
-              </button>
-            </div>
-
-            {/* 씨앗 교환 */}
-            <div className="start-card">
-              <h3>씨앗 교환</h3>
-              <p>씨앗 10개를 모아 수확물로 교환해요</p>
-              <button type="button" onClick={() => setShowCraftModal(true)}>
-                교환하기
-              </button>
-            </div>
-
-            {/* 커뮤니티 */}
-            <div className="start-card" id="community">
+        {/* [6] 커뮤니티 · 쇼핑몰 */}
+        <section className="start-section-block">
+          <h2 className="start-section-title">
+            <span className="material-symbols-outlined">groups</span>
+            커뮤니티 · 쇼핑몰
+          </h2>
+          <div className="start-external-row">
+            <div className="start-external-card" onClick={() => navigate("/community")} id="community">
+              <span className="material-symbols-outlined" style={{ fontSize: 32, color: "#6d4c41" }}>forum</span>
               <h3>커뮤니티</h3>
-              <p>학습 신청 · 질문 · 자료 게시판을 이용하세요.</p>
-              <Link className="start-card-button" to="/community">
-                게시판 이동
-              </Link>
+              <p>학습 신청 · 질문 · 자료 게시판</p>
             </div>
-
-            {/* 쇼핑몰 */}
-            <div className="start-card start-shop" id="shop">
-              <div className="start-shop-title">
-                <span className="material-symbols-outlined">local_mall</span>
-                <h3>쇼핑몰</h3>
-              </div>
-              <p>교재 · 교구를 한 곳에서 구매하세요.</p>
-              <Link className="start-card-button" to="/shop">
-                쇼핑몰 이동
-              </Link>
+            <div className="start-external-card start-shop" onClick={() => navigate("/shop")} id="shop">
+              <span className="material-symbols-outlined" style={{ fontSize: 32, color: "#f07f1a" }}>local_mall</span>
+              <h3>쇼핑몰</h3>
+              <p>교재 · 교구를 한 곳에서 구매</p>
             </div>
-          </aside>
-        </div>
+          </div>
+        </section>
       </div>
 
       {showInventoryPopup && (
@@ -814,17 +818,13 @@ function StartPage() {
           <span className="material-symbols-outlined">cottage</span>
           홈
         </Link>
-        <a href="#free">
-          <span className="material-symbols-outlined">school</span>
-          무료학습
-        </a>
-        <a href="#paid">
-          <span className="material-symbols-outlined">stars</span>
-          유료학습
-        </a>
         <Link to="/duel">
           <span className="material-symbols-outlined">swords</span>
           대결
+        </Link>
+        <Link to="/ranking">
+          <span className="material-symbols-outlined">emoji_events</span>
+          랭킹
         </Link>
         <Link to="/community">
           <span className="material-symbols-outlined">forum</span>
