@@ -192,3 +192,102 @@
     break-inside: avoid;
   }
 }
+
+/* ===== ProAnswerKeyPage 전용 스타일 ===== */
+
+.ak-print-btn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #1e293b;
+  transition: background 0.15s;
+}
+
+.ak-print-btn:hover {
+  background: #e2e8f0;
+}
+
+.ak-print-btn .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.ak-body {
+  max-width: 800px;
+}
+
+.ak-main-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 24px;
+  text-align: center;
+}
+
+/* 그룹 (객관식/단답형/서술형 구분) */
+.ak-group {
+  margin-bottom: 20px;
+}
+
+.ak-group-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0 0 10px;
+  padding: 4px 10px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* 모범답안 텍스트 강조 */
+.ak-model-text {
+  white-space: pre-wrap;
+  background: #f0fdf4;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #22c55e;
+}
+
+/* Pro 모드 내 정답 강조 */
+.ak-item-answer .ak-answer-highlight {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+/* Pro 모드 인쇄 */
+@media print {
+  .no-print,
+  .global-logo-bar {
+    display: none !important;
+  }
+
+  .pro {
+    background: white !important;
+    min-height: auto;
+  }
+
+  .ak-body {
+    padding: 0 !important;
+    max-width: 100%;
+  }
+
+  .ak-print-btn {
+    display: none !important;
+  }
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+  .ak-item-answer,
+  .ak-item-model,
+  .ak-item-explanation {
+    font-size: 0.9rem;
+  }
+}

@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, apiPost, API_BASE } from "../utils/api";
 import AnswerInputPanel from "../components/AnswerInputPanel";
+import OnlineTestRenderer from "../components/OnlineTestRenderer";
 import "../styles/pro-mode.css";
 import "../styles/test-storage.css";
 import "../styles/test-online.css";
@@ -13,6 +14,7 @@ function ProTestPage() {
   const navigate = useNavigate();
 
   // 상태 머신: ready → printed → omr_input → result
+  //            ready → online_solving → result
   const [phase, setPhase] = useState("ready");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -20,10 +22,10 @@ function ProTestPage() {
   // 테스트 상태 정보
   const [testStatus, setTestStatus] = useState(null);
 
-  // 인쇄 세션 정보
+  // 세션 정보
   const [session, setSession] = useState(null);
 
-  // OMR 관련
+  // OMR / 온라인 공통
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -51,7 +53,6 @@ function ProTestPage() {
       if (status.isTestPassed) {
         setPhase("result");
         setResult({ passed: true, score: 0, totalPoints: 0, nextAction: "next_chapter" });
-        // 통과 세션의 점수 찾기
         const passedSession = status.history?.find(s => s.status === "passed");
         if (passedSession) {
           setResult(prev => ({ ...prev, score: passedSession.score }));
@@ -59,12 +60,27 @@ function ProTestPage() {
       }
       // 활성 세션이 있는 경우
       else if (status.activeSession) {
+        const active = status.activeSession;
         setSession({
-          sessionId: status.activeSession.sessionId,
-          omrDeadline: status.activeSession.omrDeadline,
+          sessionId: active.sessionId,
+          testId: active.testId,
+          mode: active.mode || "print",
+          omrDeadline: active.omrDeadline,
         });
-        startTimer(new Date(status.activeSession.omrDeadline));
-        setPhase("printed");
+        startTimer(new Date(active.omrDeadline));
+
+        if (active.mode === "online" || active.status === "online_solving") {
+          // 온라인 모드 활성 세션 → 문항 로드 후 online_solving
+          try {
+            const qs = await apiGet(`/v1/test-storage/${active.testId}/questions`);
+            setQuestions(Array.isArray(qs) ? qs : []);
+          } catch {
+            // 문항 로드 실패 시 ready로 복귀
+          }
+          setPhase("online_solving");
+        } else {
+          setPhase("printed");
+        }
       }
     } catch {
       setError("테스트 정보를 불러올 수 없습니다.");
@@ -95,11 +111,11 @@ function ProTestPage() {
     };
   }, []);
 
-  // 인쇄 요청
+  // 인쇄 모드 시작
   const handlePrint = async () => {
     setError("");
     try {
-      const res = await apiPost("/v1/pro/test/print", { chapterId });
+      const res = await apiPost("/v1/pro/test/start", { chapterId, mode: "print" });
       setSession(res);
 
       // PDF 새 탭으로 열기
@@ -115,11 +131,30 @@ function ProTestPage() {
     }
   };
 
-  // OMR 입력 단계 진입
+  // 온라인 모드 시작
+  const handleOnlineStart = async () => {
+    setError("");
+    try {
+      const res = await apiPost("/v1/pro/test/start", { chapterId, mode: "online" });
+      setSession(res);
+      startTimer(new Date(res.omrDeadline));
+
+      // 문항 로드
+      const qs = await apiGet(`/v1/test-storage/${res.testId}/questions`);
+      setQuestions(Array.isArray(qs) ? qs : []);
+      setAnswers({});
+      setPhase("online_solving");
+    } catch (err) {
+      setError(err.message || "온라인 테스트 시작에 실패했습니다.");
+    }
+  };
+
+  // OMR 입력 단계 진입 (인쇄 모드)
   const handleStartOmr = async () => {
     setError("");
     try {
-      const qs = await apiGet(`/v1/test-storage/${session.testId}/questions`);
+      const testId = session?.testId;
+      const qs = await apiGet(`/v1/test-storage/${testId}/questions`);
       setQuestions(Array.isArray(qs) ? qs : []);
       setAnswers({});
       setPhase("omr_input");
@@ -140,7 +175,7 @@ function ProTestPage() {
     });
   };
 
-  // OMR 제출
+  // 제출 (OMR + 온라인 공통)
   const handleSubmit = async () => {
     setError("");
     const unanswered = questions.filter(q => q.type === "객관식" && !answers[String(q.number)]);
@@ -211,7 +246,7 @@ function ProTestPage() {
             <p className="pro-test-error">{error}</p>
           )}
 
-          {/* ── ready 단계 ── */}
+          {/* ── ready 단계: 인쇄하기 + 온라인 풀기 선택 ── */}
           {phase === "ready" && (
             <div className="pro-test-info">
               <h3>챕터 테스트</h3>
@@ -230,19 +265,30 @@ function ProTestPage() {
                 </div>
               </div>
               <p className="pro-test-hint">
-                인쇄 버튼을 누르면 시험지가 출력되고 1시간 카운트다운이 시작됩니다.
+                테스트 방식을 선택하세요. 두 방식 모두 60분 제한 시간이 적용됩니다.
               </p>
-              <button className="pro-test-btn primary" onClick={handlePrint}>
-                <span className="material-symbols-outlined">print</span>
-                인쇄하기
-              </button>
+              <div className="pro-test-mode-btns">
+                <button className="pro-test-btn primary" onClick={handlePrint}>
+                  <span className="material-symbols-outlined">print</span>
+                  인쇄하기
+                </button>
+                <button className="pro-test-btn secondary" onClick={handleOnlineStart}>
+                  <span className="material-symbols-outlined">computer</span>
+                  온라인 풀기
+                </button>
+              </div>
 
               {testStatus?.history?.length > 0 && (
                 <div className="pro-test-history">
                   <h4 className="pro-test-history-title">응시 기록</h4>
                   {testStatus.history.map(h => (
                     <div key={h.sessionId} className="pro-test-history-row">
-                      <span>버전 {h.version}</span>
+                      <span>
+                        버전 {h.version}
+                        <span className="pro-test-history-mode">
+                          {h.mode === "online" ? " (온라인)" : " (인쇄)"}
+                        </span>
+                      </span>
                       <span className={h.status === "passed" ? "pro-test-history-passed" : h.status === "failed" ? "pro-test-history-failed" : "pro-test-history-expired"}>
                         {h.status === "passed" ? "통과" : h.status === "failed" ? "불합격" : h.status === "expired" ? "만료" : h.status}
                         {h.score != null && ` (${h.score}점)`}
@@ -254,7 +300,7 @@ function ProTestPage() {
             </div>
           )}
 
-          {/* ── printed 단계 ── */}
+          {/* ── printed 단계 (인쇄 모드) ── */}
           {phase === "printed" && (
             <div className="pro-test-info">
               <h3>시험지가 출력되었습니다</h3>
@@ -272,7 +318,7 @@ function ProTestPage() {
             </div>
           )}
 
-          {/* ── omr_input 단계: PDF + 답안 패널 통합 ── */}
+          {/* ── omr_input 단계: PDF + 답안 패널 (인쇄 모드) ── */}
           {phase === "omr_input" && (
             <>
               <div className="pro-test-online-header">
@@ -300,6 +346,19 @@ function ProTestPage() {
                 />
               </div>
             </>
+          )}
+
+          {/* ── online_solving 단계: 문제 화면 표시 (온라인 모드) ── */}
+          {phase === "online_solving" && (
+            <OnlineTestRenderer
+              questions={questions}
+              answers={answers}
+              onAnswer={handleAnswer}
+              onSubmit={handleSubmit}
+              submitting={submitting}
+              remainingSec={remainingSec}
+              formatTime={formatTime}
+            />
           )}
 
           {/* ── result 단계 ── */}

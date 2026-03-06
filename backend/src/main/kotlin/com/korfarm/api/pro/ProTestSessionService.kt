@@ -27,6 +27,20 @@ class ProTestSessionService(
 
     @Transactional
     fun printTest(userId: String, chapterId: String): ProTestPrintResponse {
+        val result = startTest(userId, chapterId, "print")
+        return ProTestPrintResponse(
+            sessionId = result.sessionId,
+            testId = result.testId,
+            pdfFileId = result.pdfFileId,
+            omrDeadline = result.omrDeadline,
+            remainingMinutes = result.remainingMinutes,
+            totalQuestions = result.totalQuestions,
+            totalPoints = result.totalPoints
+        )
+    }
+
+    @Transactional
+    fun startTest(userId: String, chapterId: String, mode: String): ProTestStartResponse {
         // 1. 기본 학습 완료 확인
         if (!proModeService.checkAllBaseCompleted(userId, chapterId)) {
             throw ApiException("LOCKED", "기본 학습 4개를 모두 완료해야 테스트를 볼 수 있습니다.", HttpStatus.FORBIDDEN)
@@ -39,7 +53,8 @@ class ProTestSessionService(
         }
 
         // 3. 활성 세션 확인 → 만료 처리 또는 기존 세션 반환
-        val activeSessions = testSessionRepo.findByUserIdAndChapterIdAndStatusIn(userId, chapterId, listOf("printed"))
+        val activeStatuses = listOf("printed", "online_solving")
+        val activeSessions = testSessionRepo.findByUserIdAndChapterIdAndStatusIn(userId, chapterId, activeStatuses)
         for (session in activeSessions) {
             if (session.omrDeadline != null && session.omrDeadline!!.isBefore(LocalDateTime.now())) {
                 session.status = "expired"
@@ -48,9 +63,10 @@ class ProTestSessionService(
                 // 아직 유효한 세션이 있으면 그대로 반환
                 val paper = testPaperRepo.findById(session.testId).orElse(null)
                 val remaining = Duration.between(LocalDateTime.now(), session.omrDeadline).toMinutes()
-                return ProTestPrintResponse(
+                return ProTestStartResponse(
                     sessionId = session.id,
                     testId = session.testId,
+                    mode = session.mode,
                     pdfFileId = paper?.pdfFileId,
                     omrDeadline = session.omrDeadline!!,
                     remainingMinutes = remaining.coerceAtLeast(0),
@@ -79,22 +95,25 @@ class ProTestSessionService(
         // 5. 세션 생성
         val now = LocalDateTime.now()
         val deadline = now.plusMinutes(TIME_LIMIT_MINUTES)
+        val sessionStatus = if (mode == "online") "online_solving" else "printed"
         val session = ProTestSessionEntity(
             id = IdGenerator.newId("pts"),
             userId = userId,
             testId = nextTest.testPaperId,
             chapterId = chapterId,
             chapterTestId = nextTest.id,
-            printedAt = now,
+            mode = mode,
+            printedAt = if (mode == "print") now else null,
             omrDeadline = deadline,
-            status = "printed"
+            status = sessionStatus
         )
         testSessionRepo.save(session)
 
-        return ProTestPrintResponse(
+        return ProTestStartResponse(
             sessionId = session.id,
             testId = session.testId,
-            pdfFileId = paper.pdfFileId,
+            mode = mode,
+            pdfFileId = if (mode == "print") paper.pdfFileId else null,
             omrDeadline = deadline,
             remainingMinutes = TIME_LIMIT_MINUTES,
             totalQuestions = paper.totalQuestions,
@@ -113,8 +132,8 @@ class ProTestSessionService(
             throw ApiException("FORBIDDEN", "권한이 없습니다.", HttpStatus.FORBIDDEN)
         }
 
-        // 세션 상태 확인
-        if (session.status != "printed") {
+        // 세션 상태 확인 (인쇄 모드: printed, 온라인 모드: online_solving)
+        if (session.status != "printed" && session.status != "online_solving") {
             throw ApiException("INVALID_STATUS", "이미 제출했거나 만료된 세션입니다.", HttpStatus.BAD_REQUEST)
         }
 
@@ -200,17 +219,21 @@ class ProTestSessionService(
             val chapterTest = chapterTestRepo.findById(session.chapterTestId).orElse(null)
             val version = chapterTest?.version ?: 0
 
+            val activeStatuses = setOf("printed", "online_solving")
+            val effectiveStatus = if (activeStatuses.contains(session.status) && session.omrDeadline?.isBefore(now) == true) "expired" else session.status
+
             val view = ProTestSessionView(
                 sessionId = session.id,
                 version = version,
-                status = if (session.status == "printed" && session.omrDeadline?.isBefore(now) == true) "expired" else session.status,
+                status = effectiveStatus,
+                mode = session.mode,
                 score = session.score,
                 printedAt = session.printedAt,
                 omrDeadline = session.omrDeadline,
                 createdAt = session.createdAt
             )
 
-            if (session.status == "printed" && session.omrDeadline?.isAfter(now) == true) {
+            if (activeStatuses.contains(session.status) && session.omrDeadline?.isAfter(now) == true) {
                 activeSession = view
             } else {
                 history.add(view)

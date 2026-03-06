@@ -56,6 +56,14 @@ class ProController(
         return ApiResponse(success = true, data = result)
     }
 
+    @PostMapping("/test/start")
+    fun startTest(@Valid @RequestBody request: ProTestStartRequest): ApiResponse<ProTestStartResponse> {
+        val userId = requireUserId()
+        subscriptionService.requireActive(userId)
+        val result = proTestSessionService.startTest(userId, request.chapterId, request.mode)
+        return ApiResponse(success = true, data = result)
+    }
+
     @PostMapping("/test/submit")
     fun submitTest(@Valid @RequestBody request: ProTestSubmitRequest): ApiResponse<ProTestSubmitResponse> {
         val userId = requireUserId()

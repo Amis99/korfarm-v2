@@ -59,13 +59,13 @@ function AnswerInputPanel({ questions = [], answers = {}, onAnswer, onSubmit, re
                   </div>
                 ) : (
                   <div className="ts-omr-essay">
-                    <input
-                      type="text"
+                    <textarea
                       placeholder="서술형"
                       value={answers[String(q.number)] || ""}
                       onChange={e => onAnswer(q.number, e.target.value || null)}
-                      className="ts-omr-essay-input"
+                      className="ts-omr-essay-input ts-omr-essay-textarea"
                       disabled={readOnly}
+                      rows={3}
                     />
                   </div>
                 )}

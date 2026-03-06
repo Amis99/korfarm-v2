@@ -44,6 +44,10 @@ function ProChapterPage() {
       navigate(`/pro-mode/chapter/${chapterId}/test`);
       return;
     }
+    if (item.type === "answer") {
+      navigate(`/pro-mode/chapter/${chapterId}/answer-key`);
+      return;
+    }
     // contentId가 DB contents.id를 직접 참조 (content_ 접두사)
     // LearningRunnerPage가 content_ 접두사를 감지하여 API에서 로드
     if (item.contentId) {
@@ -86,7 +90,9 @@ function ProChapterPage() {
                     </span>
                   </div>
                   <div className="pro-item-info">
-                    <p className="pro-item-title">{TYPE_LABELS[item.type] || item.type}</p>
+                    <p className="pro-item-title">
+                      {item.label || TYPE_LABELS[item.type] || item.type}
+                    </p>
                     <p className="pro-item-desc">
                       {item.isLocked
                         ? "기본 학습 4개를 모두 완료하면 해제됩니다"

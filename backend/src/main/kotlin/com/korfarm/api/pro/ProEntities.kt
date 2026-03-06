@@ -54,7 +54,7 @@ class ProChapterEntity(
 @Entity
 @Table(
     name = "pro_chapter_items",
-    uniqueConstraints = [UniqueConstraint(columnNames = ["chapter_id", "type"])]
+    uniqueConstraints = [UniqueConstraint(columnNames = ["chapter_id", "type", "item_order"])]
 )
 class ProChapterItemEntity(
     @Id
@@ -71,6 +71,9 @@ class ProChapterItemEntity(
 
     @Column(name = "item_order", nullable = false)
     var itemOrder: Int,
+
+    @Column(name = "label")
+    var label: String? = null,
 
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
@@ -159,6 +162,9 @@ class ProTestSessionEntity(
 
     @Column(name = "chapter_test_id", nullable = false)
     var chapterTestId: String,
+
+    @Column(nullable = false)
+    var mode: String = "print",
 
     @Column(name = "printed_at")
     var printedAt: LocalDateTime? = null,

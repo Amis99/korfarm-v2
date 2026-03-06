@@ -23,6 +23,7 @@ data class ProChapterItemView(
     val type: String,
     val contentId: String?,
     val order: Int,
+    val label: String?,
     val isLocked: Boolean,
     val isCompleted: Boolean,
     val completedAt: LocalDateTime?,
@@ -44,9 +45,25 @@ data class ProTestPrintRequest(
     val chapterId: String
 )
 
+data class ProTestStartRequest(
+    val chapterId: String,
+    val mode: String = "print"
+)
+
 data class ProTestPrintResponse(
     val sessionId: String,
     val testId: String,
+    val pdfFileId: String?,
+    val omrDeadline: LocalDateTime,
+    val remainingMinutes: Long,
+    val totalQuestions: Int,
+    val totalPoints: Int
+)
+
+data class ProTestStartResponse(
+    val sessionId: String,
+    val testId: String,
+    val mode: String,
     val pdfFileId: String?,
     val omrDeadline: LocalDateTime,
     val remainingMinutes: Long,
@@ -77,6 +94,7 @@ data class ProTestSessionView(
     val sessionId: String,
     val version: Int,
     val status: String,
+    val mode: String,
     val score: Int?,
     val printedAt: LocalDateTime?,
     val omrDeadline: LocalDateTime?,
@@ -109,7 +127,8 @@ data class SetProChapterItemsRequest(
 data class ProChapterItemInput(
     val type: String,
     val contentId: String? = null,
-    val order: Int
+    val order: Int,
+    val label: String? = null
 )
 
 data class RegisterProChapterTestRequest(

@@ -36,6 +36,7 @@ const LearningRunnerPage = lazy(() => import("./pages/LearningRunnerPage"));
 const ProModePage = lazy(() => import("./pages/ProModePage"));
 const ProChapterPage = lazy(() => import("./pages/ProChapterPage"));
 const ProTestPage = lazy(() => import("./pages/ProTestPage"));
+const ProAnswerKeyPage = lazy(() => import("./pages/ProAnswerKeyPage"));
 
 const FarmModePage = lazy(() => import("./pages/FarmModePage"));
 const FarmListPage = lazy(() => import("./pages/FarmListPage"));
@@ -176,6 +177,7 @@ function App() {
           <Route path="/pro-mode" element={P(<ProModePage />)} />
           <Route path="/pro-mode/chapter/:chapterId" element={P(<ProChapterPage />)} />
           <Route path="/pro-mode/chapter/:chapterId/test" element={P(<ProTestPage />)} />
+          <Route path="/pro-mode/chapter/:chapterId/answer-key" element={P(<ProAnswerKeyPage />)} />
           <Route path="/farm-mode" element={P(<FarmModePage />)} />
           <Route path="/farm-mode/:farmId" element={P(<FarmListPage />)} />
           <Route path="/writing" element={P(<WritingPage />)} />

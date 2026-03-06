@@ -81,6 +81,44 @@ async function main() {
   console.log('DB 연결 성공\n');
 
   try {
+    // pro_chapter_items의 (chapter_id, type) 2컬럼 유니크 제약 제거
+    // V0025는 (chapter_id, type, item_order)로 변경해야 함
+    try {
+      console.log('pro_chapter_items 유니크 제약 확인 중...');
+      const [allIdx] = await conn.execute("SHOW INDEX FROM pro_chapter_items WHERE Non_unique = 0 AND Key_name != 'PRIMARY'");
+      // (chapter_id, type)만의 2컬럼 유니크 인덱스 찾아서 삭제
+      const uniqueNames = [...new Set(allIdx.map(r => r.Key_name))];
+      for (const keyName of uniqueNames) {
+        const cols = allIdx.filter(r => r.Key_name === keyName).sort((a,b) => a.Seq_in_index - b.Seq_in_index).map(r => r.Column_name);
+        const colStr = cols.join(',');
+        console.log(`  인덱스 ${keyName}: (${colStr})`);
+        // 2컬럼짜리 (chapter_id, type) 제거
+        if (colStr === 'chapter_id,type') {
+          console.log(`  → 삭제: ${keyName}`);
+          await conn.execute(`ALTER TABLE pro_chapter_items DROP INDEX \`${keyName}\``);
+        }
+      }
+      // (chapter_id, type, item_order) 인덱스 확인/생성
+      const [afterIdx] = await conn.execute("SHOW INDEX FROM pro_chapter_items WHERE Non_unique = 0 AND Key_name != 'PRIMARY'");
+      const afterNames = [...new Set(afterIdx.map(r => r.Key_name))];
+      let has3col = false;
+      for (const keyName of afterNames) {
+        const cols = afterIdx.filter(r => r.Key_name === keyName).sort((a,b) => a.Seq_in_index - b.Seq_in_index).map(r => r.Column_name);
+        if (cols.join(',') === 'chapter_id,type,item_order') has3col = true;
+      }
+      if (!has3col) {
+        console.log('  → uk_chapter_type_order 생성');
+        await conn.execute("ALTER TABLE pro_chapter_items ADD CONSTRAINT uk_chapter_type_order UNIQUE (chapter_id, type, item_order)");
+      }
+      // label 컬럼 확인/추가
+      try { await conn.execute("ALTER TABLE pro_chapter_items ADD COLUMN label VARCHAR(200) NULL AFTER item_order"); } catch(e) { /* 이미 존재 */ }
+      // mode 컬럼 확인/추가
+      try { await conn.execute("ALTER TABLE pro_test_sessions ADD COLUMN mode VARCHAR(20) NOT NULL DEFAULT 'print' AFTER chapter_test_id"); } catch(e) { /* 이미 존재 */ }
+      console.log('유니크 제약 설정 완료\n');
+    } catch(e) {
+      console.log('유니크 제약 확인 중 오류:', e.message);
+    }
+
     // 기존 데이터 확인
     const [existingContents] = await conn.execute("SELECT COUNT(*) as cnt FROM contents WHERE content_type LIKE 'PRO_%'");
     const [existingChapters] = await conn.execute("SELECT COUNT(*) as cnt FROM pro_chapters");
@@ -103,11 +141,24 @@ async function main() {
     console.log('2. 콘텐츠 임포트 중...');
     const idMapping = JSON.parse(fs.readFileSync(path.join(GEN_DIR, 'id-mapping.json'), 'utf8'));
 
-    // 레벨별로 id-mapping 분리
-    const mappingByLevel = {};
+    // generatedId 기반 빠른 조회용 맵 구성
+    const genIdLookup = {};
     for (const entry of idMapping) {
-      if (!mappingByLevel[entry.levelId]) mappingByLevel[entry.levelId] = [];
-      mappingByLevel[entry.levelId].push(entry);
+      genIdLookup[entry.generatedId] = entry;
+    }
+
+    // 배치 아이템에서 generatedId를 구성하는 헬퍼
+    function buildGeneratedId(item, levelFile) {
+      const lf = levelFile;
+      const ch = item.dayIndex;
+      switch (item.contentType) {
+        case 'PRO_READING':  return `pro_read_${lf}_ch${ch}_${item.subArea}`;
+        case 'PRO_VOCAB':    return `pro_vocab_${lf}_ch${ch}`;
+        case 'PRO_BACKGROUND': return `pro_bg_${lf}_ch${ch}`;
+        case 'PRO_LOGIC':    return `pro_logic_${lf}_ch${ch}`;
+        case 'PRO_ANSWER':   return `pro_answer_${lf}_ch${ch}`;
+        default:             return null;
+      }
     }
 
     // generatedId → content_UUID 매핑 저장
@@ -117,23 +168,18 @@ async function main() {
     for (const levelFile of LEVEL_FILES) {
       const levelId = levelFile.toUpperCase();
       const batchData = JSON.parse(fs.readFileSync(path.join(GEN_DIR, `batch-import-${levelFile}.json`), 'utf8'));
-      const levelMappings = mappingByLevel[levelId] || [];
-
-      if (batchData.items.length !== levelMappings.length) {
-        console.error(`경고: ${levelFile} 항목 수 불일치 - batch:${batchData.items.length} vs mapping:${levelMappings.length}`);
-      }
 
       const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
       for (let i = 0; i < batchData.items.length; i++) {
         const item = batchData.items[i];
-        const mapping = levelMappings[i];
+        const generatedId = buildGeneratedId(item, levelFile);
         const contentId = newId('content');
         const versionId = newId('cv');
 
         // generatedId → contentId 매핑 저장
-        if (mapping) {
-          contentIdMap[mapping.generatedId] = contentId;
+        if (generatedId) {
+          contentIdMap[generatedId] = contentId;
         }
 
         // contents 테이블 삽입
@@ -189,9 +235,9 @@ async function main() {
         }
 
         await conn.execute(
-          `INSERT INTO pro_chapter_items (id, chapter_id, type, content_id, item_order, created_at, updated_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?)`,
-          [itemId, ch.chapterId, item.type, resolvedContentId, item.order, now, now]
+          `INSERT INTO pro_chapter_items (id, chapter_id, type, content_id, item_order, label, created_at, updated_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [itemId, ch.chapterId, item.type, resolvedContentId, item.order, item.label || null, now, now]
         );
         totalItems++;
       }
@@ -219,10 +265,11 @@ async function main() {
       for (const q of test.questions) {
         const qId = newId('tq');
         await conn.execute(
-          `INSERT INTO test_questions (id, test_id, number, type, domain, points, correct_answer, choices_json, choice_explanations_json, passage, created_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          `INSERT INTO test_questions (id, test_id, number, type, domain, points, correct_answer, choices_json, choice_explanations_json, passage, model_answer, essay_keywords_json, essay_rubric_json, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [qId, paperId, q.number || 0, q.type || '객관식', q.domain || null, q.points || 0,
-           q.correctAnswer || null, JSON.stringify(q.choices || []), JSON.stringify(q.choiceExplanations || {}), q.passage || null, now]
+           q.correctAnswer || null, JSON.stringify(q.choices || []), JSON.stringify(q.choiceExplanations || {}), q.passage || null,
+           q.modelAnswer || null, q.essayKeywords ? JSON.stringify(q.essayKeywords) : null, q.essayRubric || null, now]
         );
       }
 

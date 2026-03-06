@@ -103,15 +103,38 @@ class ProModeService(
 
         val allBaseCompleted = checkAllBaseCompleted(items, completedMap)
 
+        // 동일 type 아이템이 여러 개인 경우 자동 라벨 생성
+        val typeCountMap = items.groupBy { it.type }.mapValues { it.value.size }
+
         return items.map { item ->
             val progress = completedMap[item.id]
             val isLocked = if (advancedTypes.contains(item.type)) !allBaseCompleted else false
+
+            // 라벨: DB에 직접 설정된 값 우선, 없으면 동일 type 다중 시 자동 생성
+            val label = item.label ?: run {
+                val count = typeCountMap[item.type] ?: 1
+                if (count > 1) {
+                    val sameTypeItems = items.filter { it.type == item.type }
+                    val idx = sameTypeItems.indexOf(item) + 1
+                    val typeLabel = when (item.type) {
+                        "reading" -> "독해 모드"
+                        "vocab" -> "어휘 학습"
+                        "background" -> "배경지식"
+                        "logic" -> "논리 사고력"
+                        "answer" -> "모범답안"
+                        "test" -> "테스트"
+                        else -> item.type
+                    }
+                    "$typeLabel ($idx/$count)"
+                } else null
+            }
 
             ProChapterItemView(
                 itemId = item.id,
                 type = item.type,
                 contentId = item.contentId,
                 order = item.itemOrder,
+                label = label,
                 isLocked = isLocked,
                 isCompleted = progress != null,
                 completedAt = progress?.completedAt,
@@ -255,7 +278,8 @@ class ProModeService(
                     chapterId = chapterId,
                     type = input.type,
                     contentId = input.contentId,
-                    itemOrder = input.order
+                    itemOrder = input.order,
+                    label = input.label
                 )
             )
         }
