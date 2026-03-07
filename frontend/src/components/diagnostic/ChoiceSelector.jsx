@@ -1,3 +1,5 @@
+import RichText from "../../utils/RichText";
+
 function ChoiceSelector({ choices = [], selected, onSelect }) {
   return (
     <div className="diag-test-choices">
@@ -8,7 +10,7 @@ function ChoiceSelector({ choices = [], selected, onSelect }) {
           onClick={() => onSelect(c.choiceId)}
         >
           <span className="diag-test-choice-id">{c.choiceId}</span>
-          <span className="diag-test-choice-text">{c.text}</span>
+          <span className="diag-test-choice-text"><RichText>{c.text}</RichText></span>
         </div>
       ))}
     </div>

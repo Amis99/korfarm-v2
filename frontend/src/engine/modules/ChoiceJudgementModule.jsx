@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import TokenPassage from "../shared/TokenPassage";
+import RichText from "../../utils/RichText";
 
 function ChoiceJudgementModule({ content }) {
   const { adjustTime, recordAnswer, finish, start, status } = useEngine();
@@ -87,10 +88,10 @@ function ChoiceJudgementModule({ content }) {
       ) : (
         <>
           <div className="choice-header">
-            <h3>{currentItem?.stem}</h3>
+            <h3><RichText>{currentItem?.stem}</RichText></h3>
             {currentProp ? (
               <p>
-                명제: {currentProp.text} ({currentProp.oxAnswer})
+                명제: <RichText>{currentProp.text}</RichText> ({currentProp.oxAnswer})
               </p>
             ) : (
               <p>선택지를 클릭해 명제를 확인하세요.</p>
@@ -111,7 +112,7 @@ function ChoiceJudgementModule({ content }) {
                   onClick={() => handleChoiceSelect(choice.choiceId)}
                 >
                   <span className="choice-label">{choice.choiceId}</span>
-                  <span>{choice.text}</span>
+                  <span><RichText>{choice.text}</RichText></span>
                   {choiceMarks[choice.choiceId] ? (
                     <span className="choice-mark">{choiceMarks[choice.choiceId]}</span>
                   ) : null}

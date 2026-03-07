@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import RichText from "../../utils/RichText";
 
 // 타이머 규칙 (전체 통일: 정답 +20초, 오답 -40초)
 const DEFAULT_SCORING = { correctDeltaSec: 20, wrongDeltaSec: -40 };
@@ -46,35 +47,35 @@ const renderTemplatePlain = (template, blanks) => {
 };
 
 const renderHighlightedText = (text, highlight) => {
-  if (!highlight) return text;
+  if (!highlight) return <RichText>{text}</RichText>;
   if (highlight.range) {
     const before = text.slice(0, highlight.range.start);
     const target = text.slice(highlight.range.start, highlight.range.end);
     const after = text.slice(highlight.range.end);
     return (
       <>
-        {before}
-        <span className="worksheet-highlight">{target}</span>
-        {after}
+        <RichText>{before}</RichText>
+        <span className="worksheet-highlight"><RichText>{target}</RichText></span>
+        <RichText>{after}</RichText>
       </>
     );
   }
   if (highlight.text) {
     const parts = text.split(highlight.text);
-    if (parts.length === 1) return text;
+    if (parts.length === 1) return <RichText>{text}</RichText>;
     return parts.reduce((acc, part, idx) => {
-      acc.push(part);
+      acc.push(<RichText key={`t-${idx}`}>{part}</RichText>);
       if (idx < parts.length - 1) {
         acc.push(
           <span key={`hl-${idx}`} className="worksheet-highlight">
-            {highlight.text}
+            <RichText>{highlight.text}</RichText>
           </span>
         );
       }
       return acc;
     }, []);
   }
-  return text;
+  return <RichText>{text}</RichText>;
 };
 
 const replaceWordInExample = (example, word) => {
@@ -85,7 +86,7 @@ const replaceWordInExample = (example, word) => {
 
 const renderPassageBox = (passage) => {
   if (!passage) return null;
-  return <span className="worksheet-passage-box">{passage}</span>;
+  return <span className="worksheet-passage-box"><RichText>{passage}</RichText></span>;
 };
 
 function WorksheetQuizModule({ content }) {
@@ -458,7 +459,7 @@ function WorksheetQuizModule({ content }) {
                                     question.stem || question.prompt || "",
                                     question.highlight
                                   )
-                                : question.stem || question.prompt || "";
+                                : <RichText>{question.stem || question.prompt || ""}</RichText>;
                             }
 
                             return (
@@ -527,7 +528,7 @@ function WorksheetQuizModule({ content }) {
                                     question.stem || question.prompt || "",
                                     question.highlight
                                   )
-                                : question.stem || question.prompt || "";
+                                : <RichText>{question.stem || question.prompt || ""}</RichText>;
                             }
 
                             return (

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import RichText from "../utils/RichText";
 import "../styles/online-test-renderer.css";
 
 /**
@@ -67,12 +68,12 @@ function OnlineTestRenderer({
 
         {/* 지문 */}
         {q.passage && (
-          <div className="otr-passage">{q.passage}</div>
+          <div className="otr-passage"><RichText>{q.passage}</RichText></div>
         )}
 
         {/* 문제 텍스트 */}
         {q.content && (
-          <div className="otr-q-content">{q.content}</div>
+          <div className="otr-q-content"><RichText>{q.content}</RichText></div>
         )}
 
         {/* 객관식 선택지 */}
@@ -88,7 +89,7 @@ function OnlineTestRenderer({
                   onClick={() => onAnswer(q.number, selected ? null : val)}
                 >
                   <span className="otr-choice-num">{ci + 1}</span>
-                  <span className="otr-choice-text">{choice}</span>
+                  <span className="otr-choice-text"><RichText>{choice}</RichText></span>
                 </button>
               );
             })}

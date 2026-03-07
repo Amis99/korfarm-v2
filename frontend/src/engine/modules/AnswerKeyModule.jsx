@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useEngine } from "../core/EngineContext";
+import RichText from "../../utils/RichText";
 import "../../styles/answer-key.css";
 
 function AnswerKeyModule({ content }) {
@@ -61,26 +62,26 @@ function AnswerKeyModule({ content }) {
                 {item.question && (
                   <div className="ak-item-question">
                     <span className="ak-label">문제</span>
-                    <p>{item.question}</p>
+                    <p><RichText>{item.question}</RichText></p>
                   </div>
                 )}
 
                 <div className="ak-item-answer">
                   <span className="ak-label">정답</span>
-                  <p className="ak-answer-text">{item.answer || "-"}</p>
+                  <p className="ak-answer-text"><RichText>{item.answer || "-"}</RichText></p>
                 </div>
 
                 {item.explanation && (
                   <div className="ak-item-explanation">
                     <span className="ak-label">해설</span>
-                    <p>{item.explanation}</p>
+                    <p><RichText>{item.explanation}</RichText></p>
                   </div>
                 )}
 
                 {item.modelAnswer && (
                   <div className="ak-item-model">
                     <span className="ak-label">모범답안</span>
-                    <p>{item.modelAnswer}</p>
+                    <p><RichText>{item.modelAnswer}</RichText></p>
                   </div>
                 )}
               </div>

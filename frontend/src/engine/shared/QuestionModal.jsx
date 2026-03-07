@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
+import RichText from "../../utils/RichText";
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -348,7 +349,7 @@ function QuestionModal({
             animateIn ? "enter" : ""
           }`}
         >
-          <p className="question-modal-prompt">{displayPrompt}</p>
+          <p className="question-modal-prompt"><RichText>{displayPrompt}</RichText></p>
           <div className="question-modal-choices">
             {visibleMark ? <div className={`question-modal-mark ${visibleMark}`} /> : null}
             {displayChoices.map((choice) => {
@@ -364,7 +365,7 @@ function QuestionModal({
                   onClick={() => handleChoiceClick(choice.id)}
                   disabled={interactionLocked || Boolean(flashChoiceId) || isSwitching}
                 >
-                  <span>{choice.text}</span>
+                  <span><RichText>{choice.text}</RichText></span>
                 </button>
               );
             })}

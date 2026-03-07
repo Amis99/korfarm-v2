@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/api";
 import PassageRenderer from "../components/diagnostic/PassageRenderer";
 import ChoiceSelector from "../components/diagnostic/ChoiceSelector";
+import RichText from "../utils/RichText";
 import "../styles/diagnostic-v2.css";
 
 const initialState = {
@@ -155,8 +156,8 @@ function DiagnosticTestPage() {
       )}
 
       <div className="diag-test-question">
-        <div className="diag-test-stem">{currentQ.stem}</div>
-        {currentQ.boxContent && <div className="diag-test-box">{currentQ.boxContent}</div>}
+        <div className="diag-test-stem"><RichText>{currentQ.stem}</RichText></div>
+        {currentQ.boxContent && <div className="diag-test-box"><RichText>{currentQ.boxContent}</RichText></div>}
         <ChoiceSelector
           choices={currentQ.choices}
           selected={state.batchAnswers[currentQ.questionId]}
