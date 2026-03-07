@@ -26,6 +26,6 @@ aws s3 sync dist/ "s3://${BUCKET}/" \
 echo "=== CloudFront 캐시 무효화 ==="
 aws cloudfront create-invalidation \
   --distribution-id "$DISTRIBUTION_ID" \
-  --paths "/index.html" "/"
+  --paths "/*"
 
 echo "=== 프론트엔드 배포 완료 ==="
