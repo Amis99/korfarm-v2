@@ -1,0 +1,205 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 우리 동네의 멋진 직업들",
+  "description": "비문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "SAUSSURE_1",
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "nonfiction"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passage": {
+      "title": "우리 동네의 멋진 직업들",
+      "paragraphs": [
+        { "id": "p1", "text": "우리 동네에는 주민들의 생활을 돕고 안전을 지키기 위해 노력하는 여러 가지 직업이 있습니다. 각자 맡은 역할은 다르지만 모두 우리에게 꼭 필요한 분들입니다." },
+        { "id": "p2", "text": "소방관은 화재가 발생했을 때 불을 끄고 사람들을 구조하는 일을 합니다. 불이 나지 않았을 때도 사고를 대비해 훈련하며 우리의 생명과 안전을 지켜 줍니다. 빨간 소방차와 '애앵~' 하는 사이렌 소리는 위급한 상황을 알리는 신호입니다." },
+        { "id": "p3", "text": "경찰관은 밤낮없이 우리 동네를 순찰하며 도둑이나 나쁜 사람들로부터 우리를 지켜 줍니다. 길을 잃은 아이를 부모님께 찾아주기도 하고, 복잡한 도로에서 차들이 안전하게 다닐 수 있도록 교통 정리를 하기도 합니다." },
+        { "id": "p4", "text": "간호사는 병원에서 몸이 아픈 사람들을 정성껏 돌봐 줍니다. 환자의 상태를 수시로 살피고, 주사를 놓거나 약을 챙겨 주며 환자가 빨리 건강을 되찾을 수 있도록 돕습니다. 따뜻한 말 한마디와 미소는 아픈 사람들에게 큰 힘이 됩니다." },
+        { "id": "p5", "text": "환경 미화원은 모두가 잠든 새벽부터 거리를 깨끗하게 청소합니다. 길가에 버려진 쓰레기를 줍고 정리하여 우리가 쾌적한 거리에서 다닐 수 있도록 땀 흘려 일하십니다. 이분들의 수고 덕분에 우리 동네는 항상 깨끗합니다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 50 }] },
+          "question": {
+            "prompt": "우리 동네에는 어떤 직업들이 있다고 했나요?",
+            "choices": [
+              { "id": "A", "text": "주민들의 생활을 돕고 안전을 지키는 직업" },
+              { "id": "B", "text": "놀이공원에서 일하는 직업" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 40 }] },
+          "question": {
+            "prompt": "소방관은 화재가 발생했을 때 무엇을 하나요?",
+            "choices": [
+              { "id": "A", "text": "불을 끄고 사람들을 구조한다" },
+              { "id": "B", "text": "교통 정리를 한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 40, "end": 80 }] },
+          "question": {
+            "prompt": "소방관은 불이 나지 않았을 때도 무엇을 하나요?",
+            "choices": [
+              { "id": "A", "text": "사고를 대비해 훈련한다" },
+              { "id": "B", "text": "집에서 쉰다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 50 }] },
+          "question": {
+            "prompt": "경찰관은 우리 동네에서 어떤 일을 하나요?",
+            "choices": [
+              { "id": "A", "text": "밤낮없이 순찰하며 우리를 지켜 준다" },
+              { "id": "B", "text": "병원에서 환자를 돌봐 준다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 50, "end": 100 }] },
+          "question": {
+            "prompt": "경찰관이 도로에서 하는 일은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "교통 정리를 한다" },
+              { "id": "B", "text": "쓰레기를 줍는다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 30 }] },
+          "question": {
+            "prompt": "간호사는 어디에서 일하나요?",
+            "choices": [
+              { "id": "A", "text": "병원" },
+              { "id": "B", "text": "소방서" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 30, "end": 90 }] },
+          "question": {
+            "prompt": "간호사가 환자에게 해주는 일은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "주사를 놓거나 약을 챙겨 준다" },
+              { "id": "B", "text": "불을 끄고 구조한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 30 }] },
+          "question": {
+            "prompt": "환경 미화원은 언제부터 일하나요?",
+            "choices": [
+              { "id": "A", "text": "모두가 잠든 새벽부터" },
+              { "id": "B", "text": "점심시간부터" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-9",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 30, "end": 90 }] },
+          "question": {
+            "prompt": "환경 미화원이 하는 일은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "쓰레기를 줍고 거리를 깨끗하게 청소한다" },
+              { "id": "B", "text": "도둑을 잡고 순찰한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-10",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 0, "end": 80 },
+              { "paragraphId": "p2", "start": 0, "end": 40 },
+              { "paragraphId": "p3", "start": 0, "end": 50 },
+              { "paragraphId": "p4", "start": 0, "end": 30 },
+              { "paragraphId": "p5", "start": 0, "end": 30 }
+            ]
+          },
+          "question": {
+            "prompt": "이 글 전체의 중심 내용은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "우리 동네에는 다양한 직업의 분들이 우리를 돕고 있다" },
+              { "id": "B", "text": "동물들이 우리를 지켜 준다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "우리 동네에는 생활을 돕고 안전을 지키는 여러 직업이 있어요." },
+        { "id": "r2", "text": "소방관은 불을 끄고 사람들을 구조하며, 평소에도 훈련해요." },
+        { "id": "r3", "text": "경찰관은 밤낮없이 순찰하고 교통 정리를 해요." },
+        { "id": "r4", "text": "간호사는 병원에서 환자를 돌보고 약을 챙겨 줘요." },
+        { "id": "r5", "text": "환경 미화원은 새벽부터 거리를 깨끗하게 청소해요." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4", "r5"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "소방관이 불이 나지 않았을 때도 하는 일이 나오는 부분을 찾아 터치하세요.",
+          "answerRanges": [{ "paragraphId": "p2", "start": 40, "end": 80 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "간호사가 환자를 돌보는 방법이 나오는 부분을 찾아 터치하세요.",
+          "answerRanges": [{ "paragraphId": "p4", "start": 30, "end": 90 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "환경 미화원이 일하는 시간이 나오는 부분을 찾아 터치하세요.",
+          "answerRanges": [{ "paragraphId": "p5", "start": 0, "end": 30 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

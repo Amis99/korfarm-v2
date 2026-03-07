@@ -1,0 +1,231 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 흥부와 놀부",
+  "description": "문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "FREGE_1",
+  "area": "READING",
+  "subArea": "LITERATURE",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "literature"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 600,
+  "payload": {
+    "passage": {
+      "title": "흥부와 놀부",
+      "paragraphs": [
+        { "id": "p1", "text": "옛날 옛날 아주 먼 옛날, 흥부와 놀부는 가난하지만 마음씨 착한 흥부와 욕심 많은 놀부 형제였습니다. 아버지가 돌아가시자, 놀부는 아버지의 재산을 모두 차지하고 흥부네 식구들을 내쫓았습니다. 흥부는 가족들을 데리고 가난하게 살았지만, 누구를 원망하지 않고 항상 웃음을 잃지 않았습니다." },
+        { "id": "p2", "text": "어느 날, 흥부네 집에 제비 한 마리가 날아와 둥지를 틀었습니다. 그런데 구렁이가 제비 새끼 한 마리를 잡아먹으려 하자, 흥부가 위험을 무릅쓰고 구렁이를 쫓아내고 떨어진 제비 새끼를 구했습니다. 다리가 부러진 제비 새끼를 흥부는 정성껏 치료해 주었습니다." },
+        { "id": "p3", "text": "다음 해 봄, 다 나은 제비가 강남으로 돌아갔다가 박 씨 하나를 물고 흥부에게 돌아왔습니다. 흥부는 그 박 씨를 심었습니다. 박이 열매를 맺고 커다랗게 자라자, 흥부네 식구들은 \"박 속에는 쌀이나 비단이 들어 있을 거야!\"라며 잔뜩 기대했습니다. 박을 타 보니, 온갖 귀한 보물이 가득 나와 흥부는 부자가 되었습니다." },
+        { "id": "p4", "text": "이 소식을 들은 놀부는 샘이 나서 배가 아팠습니다. 놀부는 일부러 건강한 제비를 잡아 다리를 부러뜨린 다음 치료해 주고 강남으로 돌려보냈습니다. 다음 해 봄, 제비가 박 씨 하나를 물고 놀부에게 왔습니다. 놀부는 기대감에 부풀어 박을 탔습니다. 하지만 박 속에서는 보물 대신 무시무시한 도깨비와 귀신들이 튀어나와 놀부의 재산을 모두 가져가고 놀부를 벌하였습니다." },
+        { "id": "p5", "text": "놀부가 잘못을 뉘우치고 흥부에게 용서를 빌자, 흥부는 착한 마음으로 놀부를 용서하고 자신의 재산을 나누어 주었습니다. 그 후 흥부와 놀부는 서로 도우며 행복하게 살았습니다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 50 }] },
+          "question": {
+            "prompt": "흥부와 놀부 형제 중 마음씨가 착한 사람은 누구인가요?",
+            "choices": [
+              { "id": "A", "text": "흥부" },
+              { "id": "B", "text": "놀부" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 50, "end": 120 }] },
+          "question": {
+            "prompt": "아버지가 돌아가신 후, 놀부는 어떤 행동을 했나요?",
+            "choices": [
+              { "id": "A", "text": "재산을 모두 차지하고 흥부를 내쫓았다" },
+              { "id": "B", "text": "재산을 공평하게 나누어 주었다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 120, "end": 175 }] },
+          "question": {
+            "prompt": "흥부는 가난하게 살면서 어떤 태도를 보였나요?",
+            "choices": [
+              { "id": "A", "text": "누구를 원망하지 않고 항상 웃음을 잃지 않았다" },
+              { "id": "B", "text": "매일 놀부를 원망하며 울었다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 130 }] },
+          "question": {
+            "prompt": "흥부가 제비 새끼를 구한 사건에서, 제비 새끼를 위협한 동물은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "구렁이" },
+              { "id": "B", "text": "고양이" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 130 }] },
+          "question": {
+            "prompt": "이 장면에서 알 수 있는 흥부의 성격은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "위험을 무릅쓰고 도와주는 착한 성격" },
+              { "id": "B", "text": "무관심하고 이기적인 성격" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 60 }] },
+          "question": {
+            "prompt": "제비가 흥부에게 돌아올 때 무엇을 물고 왔나요?",
+            "choices": [
+              { "id": "A", "text": "박 씨" },
+              { "id": "B", "text": "보물 상자" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 60, "end": 185 }] },
+          "question": {
+            "prompt": "흥부가 박을 탔을 때 어떤 결과가 나왔나요?",
+            "choices": [
+              { "id": "A", "text": "온갖 귀한 보물이 가득 나왔다" },
+              { "id": "B", "text": "도깨비들이 튀어나왔다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 30 }] },
+          "question": {
+            "prompt": "놀부가 흥부의 소식을 듣고 느낀 감정은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "샘이 나서 배가 아팠다" },
+              { "id": "B", "text": "기뻐서 축하해 주었다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-9",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 30, "end": 100 }] },
+          "question": {
+            "prompt": "놀부가 일부러 건강한 제비 다리를 부러뜨린 이유는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "자신도 박 씨를 받아 부자가 되고 싶어서" },
+              { "id": "B", "text": "제비가 불쌍해서 도와주려고" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-10",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 100, "end": 230 }] },
+          "question": {
+            "prompt": "놀부가 박을 탔을 때 어떤 결과가 나왔나요?",
+            "choices": [
+              { "id": "A", "text": "도깨비와 귀신들이 튀어나와 재산을 가져가고 벌하였다" },
+              { "id": "B", "text": "보물이 더 많이 나와 큰 부자가 되었다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-11",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 100 }] },
+          "question": {
+            "prompt": "놀부가 벌을 받은 뒤 어떻게 했나요?",
+            "choices": [
+              { "id": "A", "text": "잘못을 뉘우치고 흥부에게 용서를 빌었다" },
+              { "id": "B", "text": "도망쳐서 다른 마을로 갔다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-12",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 100 }] },
+          "question": {
+            "prompt": "흥부가 놀부를 용서하고 재산을 나누어 준 행동에서 알 수 있는 성격은?",
+            "choices": [
+              { "id": "A", "text": "착하고 너그러운 성격" },
+              { "id": "B", "text": "복수심이 강한 성격" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "놀부는 아버지의 재산을 독차지하고 착한 동생 흥부를 내쫓았다." },
+        { "id": "r2", "text": "흥부는 위험을 무릅쓰고 구렁이를 쫓아내어 다친 제비 새끼를 구하고 치료해 주었다." },
+        { "id": "r3", "text": "제비가 물고 온 박 씨를 심어 보물을 얻은 흥부는 부자가 되었다." },
+        { "id": "r4", "text": "놀부는 일부러 제비 다리를 부러뜨렸지만, 박에서 도깨비가 나와 벌을 받았다." },
+        { "id": "r5", "text": "놀부가 잘못을 뉘우치자 흥부는 용서하고 재산을 나누어 주었다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4", "r5"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "놀부가 아버지의 재산을 모두 차지하고 흥부를 내쫓은 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p1", "start": 50, "end": 120 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "흥부가 구렁이를 쫓아내고 제비 새끼를 구한 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p2", "start": 30, "end": 130 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "놀부가 도깨비에게 벌을 받은 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p4", "start": 140, "end": 230 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-4",
+          "prompt": "흥부가 놀부를 용서하고 재산을 나누어 준 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p5", "start": 0, "end": 60 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

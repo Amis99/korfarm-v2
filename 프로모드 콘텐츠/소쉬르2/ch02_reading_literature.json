@@ -1,0 +1,178 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 내 마음의 색깔",
+  "description": "문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "SAUSSURE_2",
+  "area": "READING",
+  "subArea": "LITERATURE",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "literature"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passage": {
+      "title": "내 마음의 색깔",
+      "paragraphs": [
+        { "id": "p1", "text": "내 마음은 알록달록 도화지." },
+        { "id": "p2", "text": "맛있는 아이스크림 먹을 땐 노랑노랑 기쁨의 색." },
+        { "id": "p3", "text": "넘어져서 무릎이 까진 날엔 파랑파랑 슬픔의 색." },
+        { "id": "p4", "text": "동생이 내 그림에 낙서하면 빨강빨강 화나는 색." },
+        { "id": "p5", "text": "오늘은 무슨 색을 칠해 볼까?" },
+        { "id": "p6", "text": "어떤 색이라도 괜찮아." },
+        { "id": "p7", "text": "모두 다 소중한 내 마음이니까." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 15 }] },
+          "question": {
+            "prompt": "시에서 '내 마음'을 무엇에 비유했나요?",
+            "choices": [
+              { "id": "A", "text": "알록달록 도화지" },
+              { "id": "B", "text": "하얀 스케치북" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 26 }] },
+          "question": {
+            "prompt": "아이스크림을 먹을 때 느끼는 감정은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "기쁨" },
+              { "id": "B", "text": "슬픔" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 26 }] },
+          "question": {
+            "prompt": "'기쁨'을 어떤 색으로 표현했나요?",
+            "choices": [
+              { "id": "A", "text": "노랑" },
+              { "id": "B", "text": "파랑" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 25 }] },
+          "question": {
+            "prompt": "넘어져서 무릎이 까진 날의 감정은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "화남" },
+              { "id": "B", "text": "슬픔" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 25 }] },
+          "question": {
+            "prompt": "'슬픔'을 어떤 색으로 표현했나요?",
+            "choices": [
+              { "id": "A", "text": "빨강" },
+              { "id": "B", "text": "파랑" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 26 }] },
+          "question": {
+            "prompt": "동생이 낙서를 했을 때 느끼는 감정은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "기쁨" },
+              { "id": "B", "text": "화남" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 26 }] },
+          "question": {
+            "prompt": "'화남'을 어떤 색으로 표현했나요?",
+            "choices": [
+              { "id": "A", "text": "빨강" },
+              { "id": "B", "text": "노랑" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p5", "start": 0, "end": 16 },
+              { "paragraphId": "p6", "start": 0, "end": 12 },
+              { "paragraphId": "p7", "start": 0, "end": 16 }
+            ]
+          },
+          "question": {
+            "prompt": "\"어떤 색이라도 괜찮아\"라는 말은 무슨 뜻인가요?",
+            "choices": [
+              { "id": "A", "text": "어떤 감정이든 모두 소중하다" },
+              { "id": "B", "text": "그림을 그릴 때 아무 색이나 쓰라는 뜻이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "내 마음은 알록달록 도화지에 비유되었다." },
+        { "id": "r2", "text": "기쁨은 노랑, 슬픔은 파랑, 화남은 빨강으로 표현했다." },
+        { "id": "r3", "text": "오늘은 무슨 색을 칠해 볼까? 어떤 색이라도 괜찮다." },
+        { "id": "r4", "text": "모든 감정은 소중한 내 마음이다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "'기쁨'의 색깔이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 26 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "'화남'의 색깔이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p4", "start": 0, "end": 26 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "모든 감정이 소중하다는 내용이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p7", "start": 0, "end": 16 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

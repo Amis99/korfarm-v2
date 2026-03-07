@@ -1,0 +1,234 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 숲속의 오케스트라",
+  "description": "문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "SAUSSURE_3",
+  "area": "READING",
+  "subArea": "LITERATURE",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "literature"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passage": {
+      "title": "숲속의 오케스트라",
+      "paragraphs": [
+        { "id": "p1", "text": "초록빛 나뭇잎이 살랑살랑" },
+        { "id": "p2", "text": "지휘자처럼 손을 흔들면" },
+        { "id": "p3", "text": "졸졸졸 시냇물이 노래를 시작해요" },
+        { "id": "p4", "text": "향긋한 꽃내음이 코끝을 간지럽히고" },
+        { "id": "p5", "text": "새콤달콤 산딸기는 입안에서 톡 터져요" },
+        { "id": "p6", "text": "숲속은 맛있는 냄새로 가득해요" },
+        { "id": "p7", "text": "보들보들 강아지풀이 다리에 스치면" },
+        { "id": "p8", "text": "찌르르 귀뚜라미가 바이올린을 켜요" },
+        { "id": "p9", "text": "눈을 감아도 숲속은 참 시끌벅적해요" }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 14 }] },
+          "question": {
+            "prompt": "'초록빛 나뭇잎'에서 느껴지는 감각은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "시각 (눈으로 보는 것)" },
+              { "id": "B", "text": "청각 (귀로 듣는 것)" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 13 }] },
+          "question": {
+            "prompt": "나뭇잎을 무엇에 비유했나요?",
+            "choices": [
+              { "id": "A", "text": "지휘자" },
+              { "id": "B", "text": "가수" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 17 }] },
+          "question": {
+            "prompt": "'졸졸졸'은 어떤 감각을 나타내는 표현인가요?",
+            "choices": [
+              { "id": "A", "text": "시각" },
+              { "id": "B", "text": "청각" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 0, "end": 14 },
+              { "paragraphId": "p2", "start": 0, "end": 13 },
+              { "paragraphId": "p3", "start": 0, "end": 17 }
+            ]
+          },
+          "question": {
+            "prompt": "1연(p1~p3)에서 사용된 감각은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "시각과 청각" },
+              { "id": "B", "text": "미각과 후각" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 18 }] },
+          "question": {
+            "prompt": "'향긋한 꽃내음'에서 느껴지는 감각은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "후각 (코로 맡는 것)" },
+              { "id": "B", "text": "촉각 (피부로 느끼는 것)" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 19 }] },
+          "question": {
+            "prompt": "'새콤달콤 산딸기는 입안에서 톡 터져요'에서 느껴지는 감각은?",
+            "choices": [
+              { "id": "A", "text": "미각 (혀로 맛보는 것)" },
+              { "id": "B", "text": "청각 (귀로 듣는 것)" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p4", "start": 0, "end": 18 },
+              { "paragraphId": "p5", "start": 0, "end": 19 },
+              { "paragraphId": "p6", "start": 0, "end": 16 }
+            ]
+          },
+          "question": {
+            "prompt": "2연(p4~p6)에서 사용된 감각은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "후각과 미각" },
+              { "id": "B", "text": "시각과 촉각" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [{ "paragraphId": "p7", "start": 0, "end": 18 }] },
+          "question": {
+            "prompt": "'보들보들 강아지풀이 다리에 스치면'에서 느껴지는 감각은?",
+            "choices": [
+              { "id": "A", "text": "촉각 (피부로 느끼는 것)" },
+              { "id": "B", "text": "미각 (혀로 맛보는 것)" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-9",
+          "highlight": { "ranges": [{ "paragraphId": "p8", "start": 0, "end": 17 }] },
+          "question": {
+            "prompt": "'찌르르 귀뚜라미가 바이올린을 켜요'에서 귀뚜라미를 무엇에 비유했나요?",
+            "choices": [
+              { "id": "A", "text": "바이올린 연주자" },
+              { "id": "B", "text": "지휘자" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-10",
+          "highlight": { "ranges": [{ "paragraphId": "p9", "start": 0, "end": 18 }] },
+          "question": {
+            "prompt": "'눈을 감아도 숲속은 참 시끌벅적해요'라는 말의 의미는?",
+            "choices": [
+              { "id": "A", "text": "눈으로 보지 않아도 다른 감각으로 숲을 느낄 수 있다" },
+              { "id": "B", "text": "숲속이 너무 시끄러워서 귀를 막아야 한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-11",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 0, "end": 14 },
+              { "paragraphId": "p3", "start": 0, "end": 17 },
+              { "paragraphId": "p4", "start": 0, "end": 18 },
+              { "paragraphId": "p5", "start": 0, "end": 19 },
+              { "paragraphId": "p7", "start": 0, "end": 18 },
+              { "paragraphId": "p8", "start": 0, "end": 17 }
+            ]
+          },
+          "question": {
+            "prompt": "이 시의 제목이 '숲속의 오케스트라'인 이유는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "여러 자연의 소리와 감각이 어우러져 오케스트라처럼 조화를 이루기 때문" },
+              { "id": "B", "text": "숲속에서 실제 오케스트라 공연이 열렸기 때문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "1연: 초록빛 나뭇잎이 지휘자처럼 손을 흔들고, 졸졸졸 시냇물이 노래해요. (시각, 청각)" },
+        { "id": "r2", "text": "2연: 향긋한 꽃내음과 새콤달콤 산딸기, 숲속은 맛있는 냄새로 가득해요. (후각, 미각)" },
+        { "id": "r3", "text": "3연: 보들보들 강아지풀이 스치고, 찌르르 귀뚜라미가 바이올린을 켜요. (촉각, 청각)" },
+        { "id": "r4", "text": "눈을 감아도 숲속은 참 시끌벅적해요. 다양한 감각으로 숲을 느낄 수 있어요." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "'졸졸졸 시냇물이 노래를 시작해요'가 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 17 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "'새콤달콤 산딸기'가 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p5", "start": 0, "end": 19 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "'보들보들'이라는 촉각 표현이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p7", "start": 0, "end": 18 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

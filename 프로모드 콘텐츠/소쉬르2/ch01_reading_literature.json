@@ -1,0 +1,197 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 나는 나야",
+  "description": "문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "SAUSSURE_2",
+  "area": "READING",
+  "subArea": "LITERATURE",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "literature"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passage": {
+      "title": "나는 나야",
+      "paragraphs": [
+        { "id": "p1", "text": "나는 나야, 특별한 나" },
+        { "id": "p2", "text": "세상에 하나뿐인 소중한 나" },
+        { "id": "p3", "text": "까만 머리, 반짝이는 눈" },
+        { "id": "p4", "text": "환하게 웃는 내 얼굴" },
+        { "id": "p5", "text": "거울 속에 비친 나를 봐" },
+        { "id": "p6", "text": "책 읽기를 좋아하는 나" },
+        { "id": "p7", "text": "친구들과 뛰노는 걸 좋아하는 나" },
+        { "id": "p8", "text": "엄마 아빠 사랑하는 착한 나" },
+        { "id": "p9", "text": "때로는 실수도 하지만" },
+        { "id": "p10", "text": "다시 일어서는 씩씩한 나" },
+        { "id": "p11", "text": "나는 나야, 멋진 나!" }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 11 }] },
+          "question": {
+            "prompt": "이 시의 첫 줄에서 '나'를 어떻게 표현하고 있나요?",
+            "choices": [
+              { "id": "A", "text": "특별한 나" },
+              { "id": "B", "text": "평범한 나" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 13 }] },
+          "question": {
+            "prompt": "'나'는 세상에 어떤 존재라고 했나요?",
+            "choices": [
+              { "id": "A", "text": "하나뿐인 소중한 존재" },
+              { "id": "B", "text": "많은 사람 중 한 명" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [
+            { "paragraphId": "p3", "start": 0, "end": 12 },
+            { "paragraphId": "p4", "start": 0, "end": 10 }
+          ] },
+          "question": {
+            "prompt": "시에서 '나'의 외모를 표현한 것이 아닌 것은?",
+            "choices": [
+              { "id": "A", "text": "까만 머리" },
+              { "id": "B", "text": "책 읽기를 좋아함" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 13 }] },
+          "question": {
+            "prompt": "'거울 속에 비친 나를 봐'에서 '나'는 무엇을 하고 있나요?",
+            "choices": [
+              { "id": "A", "text": "거울에 비친 자신을 바라보고 있다" },
+              { "id": "B", "text": "친구를 바라보고 있다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [
+            { "paragraphId": "p6", "start": 0, "end": 13 },
+            { "paragraphId": "p7", "start": 0, "end": 17 }
+          ] },
+          "question": {
+            "prompt": "시에서 '나'가 좋아하는 것 두 가지는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "책 읽기와 친구들과 뛰노는 것" },
+              { "id": "B", "text": "게임하기와 TV 보기" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p8", "start": 0, "end": 15 }] },
+          "question": {
+            "prompt": "'나'는 누구를 사랑하는 착한 사람인가요?",
+            "choices": [
+              { "id": "A", "text": "엄마 아빠" },
+              { "id": "B", "text": "선생님" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [
+            { "paragraphId": "p9", "start": 0, "end": 11 },
+            { "paragraphId": "p10", "start": 0, "end": 12 }
+          ] },
+          "question": {
+            "prompt": "'나'는 실수를 했을 때 어떻게 하나요?",
+            "choices": [
+              { "id": "A", "text": "다시 일어서는 씩씩한 모습을 보인다" },
+              { "id": "B", "text": "포기하고 울음을 터뜨린다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [
+            { "paragraphId": "p1", "start": 0, "end": 11 },
+            { "paragraphId": "p11", "start": 0, "end": 11 }
+          ] },
+          "question": {
+            "prompt": "시의 처음과 끝에서 '나'를 어떻게 표현하고 있나요?",
+            "choices": [
+              { "id": "A", "text": "특별하고 멋진 존재" },
+              { "id": "B", "text": "평범하고 조용한 존재" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "나는 세상에 하나뿐인 소중하고 특별한 존재이다." },
+        { "id": "r2", "text": "까만 머리, 반짝이는 눈, 환하게 웃는 얼굴을 가졌다." },
+        { "id": "r3", "text": "책 읽기와 친구들과 뛰노는 것을 좋아하고, 엄마 아빠를 사랑한다." },
+        { "id": "r4", "text": "때로는 실수도 하지만, 다시 일어서는 씩씩하고 멋진 나이다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "'나'의 외모를 표현한 부분을 찾아보세요.",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 0, "end": 12 },
+            { "paragraphId": "p4", "start": 0, "end": 10 }
+          ],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "'나'가 좋아하는 것이 나오는 부분을 찾아보세요.",
+          "answerRanges": [
+            { "paragraphId": "p6", "start": 0, "end": 13 },
+            { "paragraphId": "p7", "start": 0, "end": 17 }
+          ],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "'나'가 실수해도 다시 일어선다는 내용이 나오는 부분을 찾아보세요.",
+          "answerRanges": [
+            { "paragraphId": "p9", "start": 0, "end": 11 },
+            { "paragraphId": "p10", "start": 0, "end": 12 }
+          ],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

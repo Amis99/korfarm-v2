@@ -1,0 +1,169 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 날씨가 우리 생활에 미치는 영향",
+  "description": "비문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "SAUSSURE_1",
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "nonfiction"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passage": {
+      "title": "날씨가 우리 생활에 미치는 영향",
+      "paragraphs": [
+        { "id": "p1", "text": "날씨는 우리 생활에 아주 큰 영향을 줍니다. 날씨가 좋을 때와 나쁠 때, 우리 생활은 어떻게 달라질까요?" },
+        { "id": "p2", "text": "햇볕이 따뜻하고 맑은 날씨는 우리에게 도움을 줍니다. 농부 아저씨들은 곡식과 과일을 잘 기를 수 있고, 우리는 밖에서 신나게 뛰어놀 수 있습니다. 빨래도 뽀송뽀송하게 잘 마르고 기분도 상쾌해집니다." },
+        { "id": "p3", "text": "하지만 날씨가 심술을 부리면 피해를 입기도 합니다. 비가 오랫동안 오지 않는 가뭄이 들면 땅이 갈라져 식물이 말라 죽습니다. 반대로 비가 너무 많이 오는 홍수가 나면 집과 도로가 물에 잠겨 위험해집니다. 태풍이 불면 거센 바람에 나무가 쓰러지거나 간판이 날아가기도 합니다." },
+        { "id": "p4", "text": "이처럼 날씨는 고마운 친구가 되기도 하지만, 때로는 무서운 적으로 변하기도 합니다. 그래서 우리는 일기 예보를 확인하며 변덕스러운 날씨에 미리 대비해야 합니다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 22 }] },
+          "question": {
+            "prompt": "이 글은 무엇이 우리 생활에 영향을 준다고 했나요?",
+            "choices": [
+              { "id": "A", "text": "날씨" },
+              { "id": "B", "text": "음식" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 27 }] },
+          "question": {
+            "prompt": "맑은 날씨는 우리에게 무엇을 준다고 했나요?",
+            "choices": [
+              { "id": "A", "text": "도움" },
+              { "id": "B", "text": "피해" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 29, "end": 62 }] },
+          "question": {
+            "prompt": "맑은 날씨에 농부 아저씨들은 무엇을 할 수 있나요?",
+            "choices": [
+              { "id": "A", "text": "곡식과 과일을 잘 기를 수 있다" },
+              { "id": "B", "text": "눈사람을 만들 수 있다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 104 }] },
+          "question": {
+            "prompt": "두 번째 문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "맑은 날씨가 우리에게 주는 도움" },
+              { "id": "B", "text": "비가 올 때의 좋은 점" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 28, "end": 61 }] },
+          "question": {
+            "prompt": "가뭄이 들면 어떤 피해가 생기나요?",
+            "choices": [
+              { "id": "A", "text": "땅이 갈라져 식물이 말라 죽는다" },
+              { "id": "B", "text": "집이 물에 잠긴다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 63, "end": 102 }] },
+          "question": {
+            "prompt": "홍수가 나면 어떤 피해가 생기나요?",
+            "choices": [
+              { "id": "A", "text": "집과 도로가 물에 잠겨 위험해진다" },
+              { "id": "B", "text": "나무가 잘 자란다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 104, "end": 142 }] },
+          "question": {
+            "prompt": "태풍이 불면 어떤 피해가 생기나요?",
+            "choices": [
+              { "id": "A", "text": "나무가 쓰러지거나 간판이 날아간다" },
+              { "id": "B", "text": "땅이 갈라진다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 82 }] },
+          "question": {
+            "prompt": "글쓴이가 마지막에 우리에게 당부하는 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "일기 예보를 확인하며 날씨에 대비하라" },
+              { "id": "B", "text": "날씨가 나쁘면 학교에 가지 말라" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "날씨는 우리 생활에 큰 영향을 준다." },
+        { "id": "r2", "text": "맑은 날씨는 곡식을 기르고 뛰어놀 수 있어 도움이 된다." },
+        { "id": "r3", "text": "가뭄, 홍수, 태풍 같은 나쁜 날씨는 피해를 준다." },
+        { "id": "r4", "text": "일기 예보를 확인하며 변덕스러운 날씨에 대비해야 한다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "맑은 날씨가 주는 도움이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 62 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "가뭄의 피해가 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p3", "start": 28, "end": 61 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "날씨에 대비해야 한다는 내용이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p4", "start": 42, "end": 82 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

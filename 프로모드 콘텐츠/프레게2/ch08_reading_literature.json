@@ -1,0 +1,247 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 할머니께 드리는 편지",
+  "description": "문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "FREGE_2",
+  "area": "READING",
+  "subArea": "LITERATURE",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "literature"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passage": {
+      "title": "할머니께 드리는 편지",
+      "paragraphs": [
+        { "id": "p1", "text": "할머니, 안녕하세요? 저 민지예요." },
+        { "id": "p2", "text": "요즘 날씨가 많이 추워졌는데, 할머니께서는 감기에 걸리지 않으셨는지 걱정돼요. 지난번 추석 때 뵈었을 때 허리가 아프시다고 하셔서 마음이 많이 쓰였어요. 지금은 좀 괜찮으신가요?" },
+        { "id": "p3", "text": "어머니께서 할머니께 드릴 따뜻한 목도리를 사셨어요. 털이 아주 부드럽고 색깔도 고운 목도리예요. 이번 주말에 아버지가 할머니를 모시고 병원에 다녀오실 거래요. 그때 제가 같이 가서 목도리를 전해 드릴게요." },
+        { "id": "p4", "text": "할머니, 입맛이 없으시더라도 식사 거르지 말고 꼭 챙겨 드세요. 저도 학교에서 공부 열심히 하고 동생이랑 사이좋게 지내고 있을게요." },
+        { "id": "p5", "text": "할머니, 밤에 주무실 때 이불 꼭 덮고 따뜻하게 주무세요. 그럼 주말에 뵙겠습니다. 안녕히 계세요." },
+        { "id": "p6", "text": "2025년 11월 25일\n\n손녀 민지 올림" }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 30 }] },
+          "question": {
+            "prompt": "민지가 할머니를 걱정하는 이유는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "날씨가 추워져서 감기에 걸리셨을까 봐" },
+              { "id": "B", "text": "할머니가 이사를 가셔서" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 30, "end": 95 }] },
+          "question": {
+            "prompt": "민지가 추석 때 할머니를 뵈었을 때 알게 된 것은?",
+            "choices": [
+              { "id": "A", "text": "할머니가 허리가 아프시다는 것" },
+              { "id": "B", "text": "할머니가 새 집으로 이사하셨다는 것" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 25 }] },
+          "question": {
+            "prompt": "어머니께서 할머니께 드릴 선물로 산 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "따뜻한 목도리" },
+              { "id": "B", "text": "따뜻한 장갑" },
+              { "id": "C", "text": "따뜻한 모자" },
+              { "id": "D", "text": "따뜻한 양말" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 25, "end": 57 }] },
+          "question": {
+            "prompt": "목도리의 특징으로 맞는 것은?",
+            "choices": [
+              { "id": "A", "text": "털이 부드럽고 색깔이 고운 목도리" },
+              { "id": "B", "text": "크고 무거운 목도리" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 57, "end": 100 }] },
+          "question": {
+            "prompt": "이번 주말에 아버지가 하실 일은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "할머니를 모시고 병원에 다녀오기" },
+              { "id": "B", "text": "할머니 댁 수리하기" },
+              { "id": "C", "text": "할머니를 모시고 여행 가기" },
+              { "id": "D", "text": "할머니를 모시고 시장 가기" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 100, "end": 130 }] },
+          "question": {
+            "prompt": "민지는 목도리를 어떻게 전달할 계획인가요?",
+            "choices": [
+              { "id": "A", "text": "주말에 아버지를 따라가서 직접 전해 드리기" },
+              { "id": "B", "text": "택배로 보내기" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 40 }] },
+          "question": {
+            "prompt": "민지가 할머니께 당부한 내용은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "입맛이 없어도 식사를 챙겨 드시라는 것" },
+              { "id": "B", "text": "운동을 열심히 하시라는 것" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 40, "end": 80 }] },
+          "question": {
+            "prompt": "민지가 자신에 대해 약속한 것은?",
+            "choices": [
+              { "id": "A", "text": "공부 열심히 하고 동생이랑 사이좋게 지내기" },
+              { "id": "B", "text": "매일 일기를 쓰고 운동하기" },
+              { "id": "C", "text": "매일 할머니께 전화드리기" },
+              { "id": "D", "text": "집안일을 돕고 일찍 자기" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-9",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 35 }] },
+          "question": {
+            "prompt": "'주무실'은 어떤 말의 높임말인가요?",
+            "choices": [
+              { "id": "A", "text": "자다" },
+              { "id": "B", "text": "눕다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-10",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 40, "end": 60 }] },
+          "question": {
+            "prompt": "'뵈었을 때'는 어떤 말의 높임말인가요?",
+            "choices": [
+              { "id": "A", "text": "보다/만나다" },
+              { "id": "B", "text": "찾아가다" },
+              { "id": "C", "text": "돌보다" },
+              { "id": "D", "text": "바라보다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-11",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 0, "end": 20 },
+              { "paragraphId": "p5", "start": 0, "end": 50 },
+              { "paragraphId": "p6", "start": 0, "end": 25 }
+            ]
+          },
+          "question": {
+            "prompt": "이 글의 형식으로 가장 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "편지글" },
+              { "id": "B", "text": "일기" },
+              { "id": "C", "text": "설명문" },
+              { "id": "D", "text": "동화" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-12",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p2", "start": 0, "end": 95 },
+              { "paragraphId": "p3", "start": 0, "end": 130 },
+              { "paragraphId": "p4", "start": 0, "end": 80 }
+            ]
+          },
+          "question": {
+            "prompt": "이 편지에서 민지가 할머니께 전하고 싶은 마음으로 가장 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "할머니의 건강을 걱정하고 빨리 만나 뵙고 싶은 마음" },
+              { "id": "B", "text": "할머니께 용돈을 받고 싶은 마음" },
+              { "id": "C", "text": "할머니 댁으로 이사 가고 싶은 마음" },
+              { "id": "D", "text": "할머니와 여행을 떠나고 싶은 마음" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "민지는 날씨가 추워져 할머니의 건강을 걱정하며, 추석 때 허리가 아프셨던 일을 떠올렸다." },
+        { "id": "r2", "text": "어머니께서 할머니께 드릴 따뜻한 목도리를 사셨고, 주말에 아버지가 할머니를 모시고 병원에 가실 예정이다." },
+        { "id": "r3", "text": "민지는 식사를 챙겨 드시라고 당부하고, 자신도 공부와 동생과의 관계를 잘 하겠다고 약속했다." },
+        { "id": "r4", "text": "민지는 할머니께 따뜻하게 주무시라고 당부하며 주말에 뵙겠다는 인사로 편지를 마무리했다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "어머니께서 사신 선물에 대한 내용이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 57 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "민지가 할머니께 식사에 대해 당부하는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p4", "start": 0, "end": 40 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "민지가 할머니께 잠자리에 대해 당부하는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p5", "start": 0, "end": 35 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

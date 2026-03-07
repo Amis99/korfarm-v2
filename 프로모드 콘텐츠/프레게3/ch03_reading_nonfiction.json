@@ -1,0 +1,235 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 제로 칼로리 식품의 비밀",
+  "description": "비문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "FREGE_3",
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "nonfiction"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 600,
+  "payload": {
+    "passage": {
+      "title": "제로 칼로리 식품의 비밀",
+      "paragraphs": [
+        { "id": "p1", "text": "살이 찌는 것을 걱정하지 않고 맛있는 음식을 먹으며 건강을 관리하려는 사람들이 늘어나고 있다. 그래서 최근 제로 칼로리 식품이 인기를 끌고 있다. 제로 칼로리 식품은 설탕 대신 인공으로 만든 감미료를 사용해서 단맛을 내면서도 열량은 낮춘 제품이다." },
+        { "id": "p2", "text": "제로 칼로리라는 이름 때문에 실제 열량도 0이라고 생각할 수 있다. 하지만 우리나라 식품 관리 기관의 기준에 따르면, 식품 100밀리리터당 열량이 4칼로리보다 적으면 0칼로리로 표기할 수 있다. 따라서 제로 칼로리 식품의 실제 열량은 0칼로리가 아니라 매우 낮은 편이라고 보는 것이 맞다." },
+        { "id": "p3", "text": "제로 칼로리 식품에 사용되는 인공 감미료는 음식에 단맛을 내기 위해 화학적으로 만든 재료이다. 이 재료는 설탕보다 훨씬 강한 단맛을 가지고 있다. 제로 칼로리 음료에 쓰이는 수크랄로스라는 재료의 단맛은 설탕보다 600배나 더 강하다." },
+        { "id": "p4", "text": "이처럼 강한 단맛인데도 인공 감미료를 사용한 제품의 열량이 낮은 이유는 무엇일까? 에너지를 만들기 위해 당분으로 분해되어 우리 몸에 흡수되는 설탕과 달리, 인공 감미료는 우리 몸에서 에너지로 바뀌지 않는다. 또한 다른 형태로 변하지 않은 상태로 몸 밖으로 나간다. 수크랄로스의 경우, 우리 몸이 당분으로 알아보지 못해서 85퍼센트는 위와 장에서 흡수되지 않은 채 배출된다. 일부 흡수된 양도 소변을 통해 빠르게 나간다. 이와 같은 인공 감미료의 특성 때문에 제로 칼로리 식품을 만들 수 있는 것이다." },
+        { "id": "p5", "text": "그렇다면 인공 감미료로 단맛을 낸 제로 칼로리 식품은 마음 놓고 먹어도 좋은 것일까? 전문가들은 열량 부담 없이 단맛을 즐길 수 있는 인공 감미료의 장점이 우리 몸에 나쁜 영향을 줄 수도 있다고 경고한다. 우리 몸은 단맛을 에너지가 들어오는 것으로 여겨 왔기 때문에 단맛과 열량이 맞지 않으면 몸의 활동에 혼란을 줄 수 있다. 또한 인공 감미료가 들어간 제로 칼로리 식품을 자주 먹으면 단맛에 대한 감각이 둔해져서 더 강한 단맛을 찾는 단맛 중독 상태가 될 수 있다." },
+        { "id": "p6", "text": "제로 칼로리 식품은 열량 섭취를 줄이고 싶거나 혈액 속 당분을 관리해야 하는 사람들에게 하나의 방법이 될 수도 있다. 하지만 인공 감미료가 들어간 제로 칼로리 식품을 지나치게 먹을 경우 우리 몸에 나쁜 영향이 있을 수 있으므로 주의해야 한다. 인공 감미료가 건강에 미치는 영향은 개인의 건강 상태와 먹는 양에 따라 다르므로 이 점을 생각하여 제로 칼로리 식품을 이용하는 지혜가 필요하다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 60 }] },
+          "question": {
+            "prompt": "최근 어떤 사람들이 늘어나고 있나요?",
+            "choices": [
+              { "id": "A", "text": "살이 찌는 것을 걱정하지 않고 맛있는 음식을 먹으며 건강을 관리하려는 사람들" },
+              { "id": "B", "text": "돈을 많이 벌어 부자가 되려는 사람들" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 60, "end": 180 }] },
+          "question": {
+            "prompt": "제로 칼로리 식품은 설탕 대신 무엇을 사용하나요?",
+            "choices": [
+              { "id": "A", "text": "인공으로 만든 감미료" },
+              { "id": "B", "text": "천연 과일 농축액" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 50 }] },
+          "question": {
+            "prompt": "'제로 칼로리'라는 이름이 불러일으킬 수 있는 오해는?",
+            "choices": [
+              { "id": "A", "text": "실제 열량이 0칼로리일 것이라는 오해" },
+              { "id": "B", "text": "맛이 없을 것이라는 오해" },
+              { "id": "C", "text": "가격이 비쌀 것이라는 오해" },
+              { "id": "D", "text": "외국에서만 만들 것이라는 오해" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 50, "end": 140 }] },
+          "question": {
+            "prompt": "0칼로리로 표기하기 위한 기준은?",
+            "choices": [
+              { "id": "A", "text": "식품 100밀리리터당 열량이 4칼로리보다 적을 때" },
+              { "id": "B", "text": "식품 100밀리리터당 열량이 완전히 0일 때" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 120 }] },
+          "question": {
+            "prompt": "수크랄로스의 단맛은 설탕보다 몇 배 강한가요?",
+            "choices": [
+              { "id": "A", "text": "600배" },
+              { "id": "B", "text": "60배" },
+              { "id": "C", "text": "6배" },
+              { "id": "D", "text": "6000배" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 100 }] },
+          "question": {
+            "prompt": "설탕과 인공 감미료의 차이는?",
+            "choices": [
+              { "id": "A", "text": "설탕은 에너지로 바뀌지만, 인공 감미료는 에너지로 바뀌지 않는다" },
+              { "id": "B", "text": "설탕은 짠맛이고, 인공 감미료는 단맛이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 100, "end": 250 }] },
+          "question": {
+            "prompt": "수크랄로스가 대부분 흡수되지 않는 이유는?",
+            "choices": [
+              { "id": "A", "text": "우리 몸이 당분으로 알아보지 못해서" },
+              { "id": "B", "text": "크기가 너무 커서 위를 통과하지 못해서" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 80 }] },
+          "question": {
+            "prompt": "전문가들이 경고하는 내용은?",
+            "choices": [
+              { "id": "A", "text": "인공 감미료의 장점이 오히려 몸에 나쁜 영향을 줄 수 있다" },
+              { "id": "B", "text": "인공 감미료는 건강에 아무런 해가 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-9",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 80, "end": 230 }] },
+          "question": {
+            "prompt": "인공 감미료 식품을 자주 먹으면 생길 수 있는 문제는?",
+            "choices": [
+              { "id": "A", "text": "단맛에 대한 감각이 둔해져 단맛 중독 상태가 될 수 있다" },
+              { "id": "B", "text": "짠맛을 느끼지 못하게 된다" },
+              { "id": "C", "text": "식욕이 완전히 사라진다" },
+              { "id": "D", "text": "키가 줄어든다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-10",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 60 }] },
+          "question": {
+            "prompt": "제로 칼로리 식품이 도움이 될 수 있는 사람은?",
+            "choices": [
+              { "id": "A", "text": "열량 섭취를 줄이고 싶거나 혈당 관리가 필요한 사람" },
+              { "id": "B", "text": "운동을 전문적으로 하는 선수" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-11",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 60, "end": 200 }] },
+          "question": {
+            "prompt": "인공 감미료가 건강에 미치는 영향은 무엇에 따라 다른가요?",
+            "choices": [
+              { "id": "A", "text": "개인의 건강 상태와 먹는 양" },
+              { "id": "B", "text": "사는 지역과 날씨" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-12",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 0, "end": 180 },
+              { "paragraphId": "p6", "start": 0, "end": 200 }
+            ]
+          },
+          "question": {
+            "prompt": "이 글의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "제로 칼로리 식품의 의미와 장단점" },
+              { "id": "B", "text": "인공 감미료를 만드는 화학적 과정" },
+              { "id": "C", "text": "설탕이 우리 몸에 미치는 긍정적 영향" },
+              { "id": "D", "text": "올바른 식습관을 통한 건강 관리의 중요성" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "제로 칼로리 식품은 설탕 대신 인공 감미료를 사용해 단맛을 내면서 열량을 낮춘 제품이다." },
+        { "id": "r2", "text": "제로 칼로리의 실제 열량은 0이 아니라 매우 낮은 편이며, 인공 감미료는 에너지로 바뀌지 않고 몸 밖으로 배출된다." },
+        { "id": "r3", "text": "인공 감미료는 몸에 혼란을 주거나 단맛 중독을 일으킬 수 있어, 개인 상태에 따라 지혜롭게 이용해야 한다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "0칼로리 표기 기준이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p2", "start": 50, "end": 140 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "인공 감미료가 에너지로 바뀌지 않는다는 설명이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p4", "start": 0, "end": 100 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "인공 감미료의 단점이 설명된 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p5", "start": 80, "end": 230 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

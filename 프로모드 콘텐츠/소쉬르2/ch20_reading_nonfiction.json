@@ -1,0 +1,170 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 같은 것도 다르게 보여요",
+  "description": "비문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "SAUSSURE_2",
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "nonfiction"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passage": {
+      "title": "같은 것도 다르게 보여요",
+      "paragraphs": [
+        { "id": "p1", "text": "친구와 똑같은 그림을 보고 서로 다른 이야기를 한 적이 있나요? 나는 \"이건 토끼야!\"라고 했는데, 친구는 \"아니야, 이건 오리야!\"라고 말해서 말다툼을 했을지도 모릅니다. 하지만 두 친구의 말은 모두 맞을 수 있습니다. 같은 물건이라도 어디서 보느냐에 따라, 또 누가 보느냐에 따라 모습이 다르게 보이기 때문입니다." },
+        { "id": "p2", "text": "먼저 숫자 6을 생각해 볼까요? 종이에 숫자 6을 크게 써서 바닥에 놓아 보세요. 그리고 친구와 마주 보고 서서 숫자를 내려다보세요. 내 눈에는 분명히 6으로 보이지만, 맞은편에 있는 친구 눈에는 9로 보일 것입니다. 종이는 그대로 있지만, 서 있는 자리가 달라서 숫자가 다르게 보이는 것입니다. 이때는 서로 틀린 것이 아니라, 보는 위치가 다른 것뿐입니다." },
+        { "id": "p3", "text": "하늘에 떠 있는 구름을 볼 때도 마찬가지입니다. 같은 구름을 보면서 어떤 친구는 \"와, 솜사탕 같다!\"라고 말합니다. 하지만 옆에 있는 다른 친구는 \"아니야, 저건 달리는 강아지 모양이야.\"라고 말할 수도 있습니다. 구름의 모양은 하나지만, 사람마다 머릿속으로 상상하는 것이 달라서 서로 다른 모양을 떠올리는 것입니다." },
+        { "id": "p4", "text": "우리가 겪는 날씨나 상황도 생각하기에 따라 다르게 느껴집니다. 비가 주룩주룩 내리는 날, 축구를 하고 싶었던 친구는 \"비가 와서 밖에서 놀 수 없으니 정말 싫어.\"라고 생각하며 울상을 짓습니다. 하지만 목이 말랐던 꽃이나 농사를 짓는 농부 아저씨에게는 비가 아주 반가운 손님일 것입니다. 똑같은 비라도 누구에게는 슬픈 일이 되고, 누구에게는 기쁜 일이 될 수 있습니다." },
+        { "id": "p5", "text": "이처럼 세상에는 정답이 하나만 있는 것이 아닙니다. 내 생각과 친구의 생각이 달라도 잘못된 것이 아니에요. 같은 것도 이쪽저쪽 돌려 보고 다르게 생각해 보면, 우리가 사는 세상이 훨씬 더 재미있고 신기하게 보일 것입니다. 나와 다른 친구의 생각을 들어주면 생각 주머니가 더 커진다는 사실을 기억하세요." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 166 }] },
+          "question": {
+            "prompt": "같은 그림을 보고 두 친구가 다른 이야기를 한 이유는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "같은 것이라도 누가 보느냐에 따라 다르게 보이기 때문에" },
+              { "id": "B", "text": "그림이 계속 바뀌기 때문에" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 70 }] },
+          "question": {
+            "prompt": "숫자 6을 써서 바닥에 놓고 마주 보면 친구에게는 무엇으로 보이나요?",
+            "choices": [
+              { "id": "A", "text": "9" },
+              { "id": "B", "text": "8" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 70, "end": 175 }] },
+          "question": {
+            "prompt": "숫자가 다르게 보이는 이유는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "서 있는 자리(위치)가 다르기 때문에" },
+              { "id": "B", "text": "종이가 움직이기 때문에" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 170 }] },
+          "question": {
+            "prompt": "같은 구름을 보면서 사람들이 서로 다른 모양을 떠올리는 이유는?",
+            "choices": [
+              { "id": "A", "text": "사람마다 머릿속으로 상상하는 것이 달라서" },
+              { "id": "B", "text": "구름이 계속 모양을 바꾸어서" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 85 }] },
+          "question": {
+            "prompt": "비 오는 날 축구를 하고 싶었던 친구는 어떤 기분이었나요?",
+            "choices": [
+              { "id": "A", "text": "비가 와서 놀 수 없으니 싫다고 생각했다" },
+              { "id": "B", "text": "비가 와서 기쁘다고 생각했다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 85, "end": 185 }] },
+          "question": {
+            "prompt": "농부 아저씨에게 비는 어떤 존재였나요?",
+            "choices": [
+              { "id": "A", "text": "아주 반가운 손님" },
+              { "id": "B", "text": "싫은 손님" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 50 }] },
+          "question": {
+            "prompt": "글쓴이에 따르면 세상에는 정답이 몇 개 있을 수 있나요?",
+            "choices": [
+              { "id": "A", "text": "하나만 있는 것이 아니라 여러 개일 수 있다" },
+              { "id": "B", "text": "언제나 하나만 있다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 50, "end": 152 }] },
+          "question": {
+            "prompt": "글쓴이가 마지막에 기억하라고 한 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "나와 다른 친구의 생각을 들어주면 생각 주머니가 더 커진다" },
+              { "id": "B", "text": "내 생각이 언제나 가장 옳다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "같은 것이라도 보는 위치나 사람에 따라 다르게 보일 수 있다." },
+        { "id": "r2", "text": "숫자 6은 마주 보고 서면 9로 보이고, 같은 구름도 사람마다 다른 모양을 떠올린다." },
+        { "id": "r3", "text": "똑같은 비도 축구하고 싶은 아이에게는 싫지만, 농부에게는 반가운 손님이다." },
+        { "id": "r4", "text": "세상에 정답은 하나만 있는 것이 아니므로, 다른 사람의 생각을 들어주면 생각 주머니가 커진다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "숫자 6이 9로 보이는 이유가 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p2", "start": 70, "end": 175 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "농부 아저씨에게 비가 반가운 이유가 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p4", "start": 85, "end": 185 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "생각 주머니가 커지는 방법이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p5", "start": 50, "end": 152 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

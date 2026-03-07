@@ -1,0 +1,237 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 디저트 배는 정말 따로 있을까?",
+  "description": "비문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "FREGE_3",
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "nonfiction", "frege3-ch08"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 600,
+  "payload": {
+    "passage": {
+      "title": "디저트 배는 정말 따로 있을까?",
+      "paragraphs": [
+        { "id": "p1", "text": "식욕은 음식을 먹고 싶어 하는 마음이다. 우리가 살아가려면 영양분이 필요하기 때문에 식욕은 매우 중요하다. 그런데 우리 몸은 어떻게 언제 배가 고프고 언제 배가 부른지 알 수 있을까?" },
+        { "id": "p2", "text": "우리 뇌의 가운데 아래쪽에는 '시상하부'라는 식욕을 조절하는 부분이 있다. 이곳에는 배고픔을 느끼게 하는 부분과 배부름을 느끼게 하는 부분이 함께 있다. 몸에 영양분이 부족하면 배고픔을 느끼게 하는 부분이 신호를 보낸다. 그러면 우리는 배가 고프다고 느끼고 침이 나오기 시작한다. 반대로 영양분을 충분히 섭취하면 배부름을 느끼게 하는 부분이 작동해서 더 이상 먹고 싶지 않게 된다." },
+        { "id": "p3", "text": "그렇다면 뇌는 어떻게 우리 몸의 영양 상태를 알 수 있을까? 비밀은 혈액 속에 있는 영양소에 있다. 밥이나 빵을 먹으면 소장에서 소화되어 포도당이라는 물질이 만들어진다. 이 포도당이 혈액을 타고 온몸으로 퍼지는데, 포도당이 많아지면 뇌는 '이제 충분히 먹었구나'라고 판단한다. 그래서 배부름을 느끼게 된다." },
+        { "id": "p4", "text": "반대로 오랫동안 음식을 먹지 않으면 우리 몸에 저장되어 있던 지방이 분해되기 시작한다. 이때 지방산이라는 물질이 만들어져 혈액을 타고 뇌로 이동한다. 뇌가 이 지방산을 감지하면 '에너지가 부족하구나'라고 판단해서 배고픔을 느끼게 한다." },
+        { "id": "p5", "text": "하지만 우리가 항상 영양분 때문에만 음식을 먹는 것은 아니다. 스트레스를 받을 때 단 음식이 먹고 싶어지거나, 좋아하는 음식 냄새를 맡으면 배가 부른데도 먹고 싶어지는 경우가 있다. 이런 식욕은 뇌의 앞쪽에 있는 '전두엽'이라는 부분에서 조절된다. 이 부분은 원래 생각하고 판단하는 일을 담당하는 곳인데, 음식의 맛과 냄새를 기억하고 먹는 행동을 조절하는 역할도 한다." },
+        { "id": "p6", "text": "이 때문에 재미있는 현상이 일어난다. 예를 들어 저녁을 든든히 먹고 '이제 정말 배부르다'고 생각하는데도 디저트는 또 먹고 싶어진다. 이는 우리 뇌가 '맛있다'는 신호를 보내면서 위 속에 새로운 공간을 만들기 때문이다. 또한 밥과 반찬으로는 단맛을 충분히 느끼지 못했기 때문에 단 디저트를 원하게 되는 것이다." },
+        { "id": "p7", "text": "따라서 '디저트 먹을 배는 따로 있다'는 말은 과학적으로도 맞는 표현이다. 우리의 식욕은 단순히 배고픔과 배부름만으로 결정되는 것이 아니라, 뇌의 여러 부분이 복잡하게 작용한 결과인 것이다. 이렇게 보면 우리 몸이 식욕을 조절하는 방법은 정말 놀랍고 흥미롭다는 것을 알 수 있다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 50 }] },
+          "question": {
+            "prompt": "식욕이란 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "음식을 먹고 싶어 하는 마음" },
+              { "id": "B", "text": "잠을 자고 싶어 하는 마음" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 60 }] },
+          "question": {
+            "prompt": "식욕을 조절하는 뇌의 부분은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "시상하부" },
+              { "id": "B", "text": "소뇌" },
+              { "id": "C", "text": "전두엽" },
+              { "id": "D", "text": "뇌간" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 60, "end": 200 }] },
+          "question": {
+            "prompt": "배고픔 부분이 신호를 보내는 조건은?",
+            "choices": [
+              { "id": "A", "text": "몸에 영양분이 부족할 때" },
+              { "id": "B", "text": "영양분을 충분히 섭취했을 때" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 100 }] },
+          "question": {
+            "prompt": "뇌가 영양 상태를 파악하는 비밀은 어디에 있나요?",
+            "choices": [
+              { "id": "A", "text": "혈액 속 영양소" },
+              { "id": "B", "text": "위장의 크기" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 80, "end": 200 }] },
+          "question": {
+            "prompt": "포도당이 많아지면 뇌는 어떻게 판단하나요?",
+            "choices": [
+              { "id": "A", "text": "이제 충분히 먹었구나" },
+              { "id": "B", "text": "에너지가 부족하구나" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 150 }] },
+          "question": {
+            "prompt": "오랫동안 음식을 먹지 않으면 어떤 물질이 만들어지나요?",
+            "choices": [
+              { "id": "A", "text": "지방산" },
+              { "id": "B", "text": "포도당" },
+              { "id": "C", "text": "비타민" },
+              { "id": "D", "text": "단백질" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 100 }] },
+          "question": {
+            "prompt": "영양분 때문이 아닌 식욕의 예가 아닌 것은?",
+            "choices": [
+              { "id": "A", "text": "스트레스를 받을 때 단 음식이 먹고 싶은 것" },
+              { "id": "B", "text": "오랫동안 굶어서 배가 고픈 것" },
+              { "id": "C", "text": "좋아하는 음식 냄새를 맡고 먹고 싶어지는 것" },
+              { "id": "D", "text": "배가 부른데도 먹고 싶어지는 것" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 100, "end": 250 }] },
+          "question": {
+            "prompt": "영양분 외의 이유로 생기는 식욕은 뇌의 어디에서 조절되나요?",
+            "choices": [
+              { "id": "A", "text": "전두엽" },
+              { "id": "B", "text": "시상하부" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-9",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 200 }] },
+          "question": {
+            "prompt": "배부른데도 디저트를 먹고 싶어지는 이유는?",
+            "choices": [
+              { "id": "A", "text": "뇌가 '맛있다'는 신호를 보내 위에 새 공간을 만들기 때문" },
+              { "id": "B", "text": "위장이 디저트만 따로 소화하는 공간이 있기 때문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-10",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 130, "end": 250 }] },
+          "question": {
+            "prompt": "식사 후 특별히 '단' 디저트를 원하게 되는 또 다른 이유는?",
+            "choices": [
+              { "id": "A", "text": "밥과 반찬으로는 단맛을 충분히 느끼지 못했기 때문" },
+              { "id": "B", "text": "단 음식이 소화에 도움이 되기 때문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-11",
+          "highlight": { "ranges": [{ "paragraphId": "p7", "start": 0, "end": 100 }] },
+          "question": {
+            "prompt": "'디저트 배는 따로 있다'는 말에 대한 글쓴이의 견해는?",
+            "choices": [
+              { "id": "A", "text": "과학적으로도 맞는 표현이다" },
+              { "id": "B", "text": "과학적 근거가 전혀 없는 속설이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-12",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 0, "end": 100 },
+              { "paragraphId": "p7", "start": 0, "end": 150 }
+            ]
+          },
+          "question": {
+            "prompt": "이 글의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "뇌가 식욕을 조절하는 복잡한 원리" },
+              { "id": "B", "text": "올바른 식습관의 중요성" },
+              { "id": "C", "text": "디저트가 건강에 해로운 이유" },
+              { "id": "D", "text": "포도당과 지방산의 화학적 구조" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "시상하부는 영양분 상태에 따라 배고픔과 배부름을 조절한다." },
+        { "id": "r2", "text": "포도당이 많아지면 배부름, 지방산이 감지되면 배고픔을 느낀다." },
+        { "id": "r3", "text": "전두엽은 스트레스나 음식 냄새 기억 등 영양분 외 식욕을 조절한다." },
+        { "id": "r4", "text": "디저트 배가 따로 있는 것은 뇌가 맛있다는 신호를 보내 위에 공간을 만들기 때문이다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "시상하부의 역할이 설명된 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 200 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "전두엽의 역할이 설명된 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p5", "start": 100, "end": 250 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "디저트를 먹고 싶어지는 이유가 설명된 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p6", "start": 50, "end": 250 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

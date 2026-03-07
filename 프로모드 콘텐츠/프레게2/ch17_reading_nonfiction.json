@@ -1,0 +1,234 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 무대와 화면을 만드는 대본",
+  "description": "비문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "FREGE_2",
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "nonfiction"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 600,
+  "payload": {
+    "passage": {
+      "title": "무대와 화면을 만드는 대본",
+      "paragraphs": [
+        { "id": "p1", "text": "우리가 보는 연극이나 영화, 드라마는 배우들이 마음대로 즉흥 연기를 하는 것이 아닙니다. 그렇다면 배우들은 어떻게 연기를 할까요? 여러 사람이 힘을 합쳐 하나의 작품을 만들려면 배우가 해야 할 말과 행동, 표정을 자세히 적은 글이 필요합니다. 이것을 '대본'이라고 합니다. 대본은 연극을 위한 것인지, 영화나 방송을 위한 것인지에 따라 '희곡'과 '시나리오'로 나뉩니다. 두 가지는 관객에게 전달되는 방식이 다르기 때문에 서로 다른 특징을 지닙니다." },
+        { "id": "p2", "text": "먼저 '희곡'은 무대에서 공연될 연극을 위해 씁니다. 관객 앞에서 직접 공연하기 때문에 시간과 장소의 제약이 큽니다. 그래서 장소를 자주 바꾸지 않고, 무대의 막이 오르고 내리는 것에 따라 '막'과 '장'으로 이야기를 나눕니다. 반면 '시나리오'는 영화나 드라마를 만들기 위한 대본입니다. 카메라로 촬영하기 때문에 희곡에 비해 시간과 장소의 제약이 거의 없습니다. 그래서 장소나 시간이 바뀔 때마다 '장면 번호'를 붙여 이야기를 구분합니다." },
+        { "id": "p3", "text": "그렇다면 희곡과 시나리오는 서로 다르기만 할까요? 그렇지 않습니다. 두 갈래 모두 배우의 대사와 행동으로 이야기를 전개한다는 공통점이 있습니다. 그래서 희곡과 시나리오는 세 가지 요소로 이루어집니다. 무대나 장면의 상황을 설명하는 '해설', 등장인물이 주고받는 '대사', 그리고 인물의 동작이나 표정, 심리를 나타내는 '지문'입니다." },
+        { "id": "p4", "text": "희곡과 시나리오는 표현 방법과 특징이 다르지만, 배우의 연기가 시작되는 바탕이 된다는 점은 같습니다. 앞으로 영화나 드라마, 연극을 볼 때 대본의 역할을 생각해 보세요. 작가가 쓴 글이 배우의 목소리와 행동으로 어떻게 구현되는지 살펴본다면 작품을 더 깊이 이해할 수 있을 것입니다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 60 }] },
+          "question": {
+            "prompt": "연극이나 영화의 배우들은 어떻게 연기를 하나요?",
+            "choices": [
+              { "id": "A", "text": "마음대로 즉흥 연기를 한다" },
+              { "id": "B", "text": "대본에 적힌 대로 연기를 한다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 60, "end": 180 }] },
+          "question": {
+            "prompt": "'대본'이란 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "배우가 해야 할 말과 행동, 표정을 자세히 적은 글" },
+              { "id": "B", "text": "관객이 공연 후 작성하는 감상문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 150, "end": 260 }] },
+          "question": {
+            "prompt": "대본은 어떤 두 가지로 나뉘나요?",
+            "choices": [
+              { "id": "A", "text": "희곡과 시나리오" },
+              { "id": "B", "text": "소설과 수필" },
+              { "id": "C", "text": "대사와 지문" },
+              { "id": "D", "text": "연극과 영화" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 80 }] },
+          "question": {
+            "prompt": "'희곡'은 무엇을 위해 쓰는 글인가요?",
+            "choices": [
+              { "id": "A", "text": "무대에서 공연될 연극" },
+              { "id": "B", "text": "영화나 드라마 촬영" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 40, "end": 130 }] },
+          "question": {
+            "prompt": "희곡이 시간과 장소의 제약이 큰 이유는?",
+            "choices": [
+              { "id": "A", "text": "관객 앞에서 직접 공연하기 때문에" },
+              { "id": "B", "text": "카메라로 촬영하기 때문에" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 80, "end": 140 }] },
+          "question": {
+            "prompt": "희곡에서 이야기를 나누는 단위는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "막과 장" },
+              { "id": "B", "text": "장면 번호" },
+              { "id": "C", "text": "페이지" },
+              { "id": "D", "text": "쪽과 절" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 130, "end": 250 }] },
+          "question": {
+            "prompt": "시나리오에서 장면을 구분하는 방법은?",
+            "choices": [
+              { "id": "A", "text": "장면 번호를 붙인다" },
+              { "id": "B", "text": "막과 장으로 나눈다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 80 }] },
+          "question": {
+            "prompt": "희곡과 시나리오의 공통점은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "배우의 대사와 행동으로 이야기를 전개한다" },
+              { "id": "B", "text": "시간과 장소의 제약이 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-9",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 60, "end": 200 }] },
+          "question": {
+            "prompt": "희곡과 시나리오를 이루는 세 가지 요소가 아닌 것은?",
+            "choices": [
+              { "id": "A", "text": "해설" },
+              { "id": "B", "text": "대사" },
+              { "id": "C", "text": "지문" },
+              { "id": "D", "text": "장면 번호" }
+            ],
+            "answerId": "D",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-10",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 120, "end": 200 }] },
+          "question": {
+            "prompt": "'지문'이란 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "인물의 동작이나 표정, 심리를 나타내는 것" },
+              { "id": "B", "text": "무대 상황을 설명하는 것" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-11",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 80 }] },
+          "question": {
+            "prompt": "희곡과 시나리오의 공통된 역할은?",
+            "choices": [
+              { "id": "A", "text": "배우의 연기가 시작되는 바탕이 된다" },
+              { "id": "B", "text": "관객의 반응을 기록하는 자료이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-12",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 0, "end": 260 },
+              { "paragraphId": "p4", "start": 0, "end": 160 }
+            ]
+          },
+          "question": {
+            "prompt": "이 글의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "희곡과 시나리오의 차이점과 공통점" },
+              { "id": "B", "text": "유명한 영화 대본의 제작 과정" },
+              { "id": "C", "text": "배우가 되기 위한 훈련 방법" },
+              { "id": "D", "text": "연극 무대 장치를 만드는 법" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "대본은 배우가 해야 할 말과 행동, 표정을 적은 글로 희곡과 시나리오로 나뉜다." },
+        { "id": "r2", "text": "희곡은 연극을 위해 쓰며 시간과 장소의 제약이 크고, 막과 장으로 이야기를 나눈다." },
+        { "id": "r3", "text": "시나리오는 영화나 드라마를 위해 쓰며 제약이 적고, 장면 번호로 구분한다." },
+        { "id": "r4", "text": "둘 다 해설, 대사, 지문의 세 요소로 이루어지며 배우 연기의 바탕이 된다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "'대본'의 정의가 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p1", "start": 60, "end": 180 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "희곡과 시나리오의 세 가지 공통 요소가 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p3", "start": 60, "end": 200 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "글쓴이가 독자에게 권하는 내용이 나오는 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p4", "start": 50, "end": 160 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

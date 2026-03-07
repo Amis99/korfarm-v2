@@ -1,0 +1,219 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 기사문의 기본: 사실, 육하원칙, 그리고 구조",
+  "description": "비문학 지문을 읽고 정독-복기-확인 학습",
+  "targetLevel": "FREGE_1",
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "nonfiction"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 600,
+  "payload": {
+    "passage": {
+      "title": "기사문의 기본: 사실, 육하원칙, 그리고 구조",
+      "paragraphs": [
+        { "id": "p1", "text": "기사문은 독자에게 어떤 사건이나 정보를 신속하게 알리는 것을 목적으로 하는 글입니다. 기사문이 갖추어야 할 가장 중요한 특징은 사실 전달입니다." },
+        { "id": "p2", "text": "기사문은 기자 자신의 감정이나 주관적인 주장을 넣지 않고, 오직 객관적인 사실만을 전달하여 독자가 사건을 오해 없이 공정하게 판단할 수 있도록 돕습니다." },
+        { "id": "p3", "text": "사건을 명확하게 전달하기 위해 기사문은 육하원칙(六何原則)을 반드시 포함해야 합니다. 육하원칙이란 누가, 언제, 어디서, 무엇을, 어떻게, 왜 여섯 가지 질문에 답하는 형식으로 핵심 정보를 정리하는 것입니다. 육하원칙 중 하나라도 빠지면 독자는 사건을 명확하게 이해하기 어렵고 기사의 신뢰도가 떨어지게 됩니다." },
+        { "id": "p4", "text": "기사문은 독자가 사건의 내용을 빠르고 쉽게 파악할 수 있도록 가장 중요한 정보부터 순서대로 씁니다. 기사의 가장 위에는 표제가 있어 내용을 압축해 보여 주고 독자의 시선을 끕니다. 표제 아래의 부제는 표제에서 못한 말을 보충하거나 덧붙이는 작은 제목 역할을 합니다." },
+        { "id": "p5", "text": "특히 기사의 첫 문단인 전문은 육하원칙의 핵심 내용을 요약한 부분입니다. 덕분에 독자는 글을 끝까지 다 읽지 않고 전문만 읽어도 어떤 사건이 일어났는지 알 수 있습니다. 그리고 이어지는 본문은 전문의 내용을 더 구체적이고 자세하게 설명하거나 배경 정보를 알려 주는 부분입니다." },
+        { "id": "p6", "text": "기사문을 쓸 때는 이 모든 요소들을 잘 갖추어 독자에게 정확하고 명확한 정보를 제공해야 합니다." }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 50 }] },
+          "question": {
+            "prompt": "기사문의 목적은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "독자에게 사건이나 정보를 신속하게 알리는 것" },
+              { "id": "B", "text": "독자에게 감동을 주는 것" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 50, "end": 80 }] },
+          "question": {
+            "prompt": "기사문이 갖추어야 할 가장 중요한 특징은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "사실 전달" },
+              { "id": "B", "text": "재미있는 이야기" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 85 }] },
+          "question": {
+            "prompt": "기사문에 넣지 말아야 하는 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "기자 자신의 감정이나 주관적인 주장" },
+              { "id": "B", "text": "객관적인 사실" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 50 }] },
+          "question": {
+            "prompt": "기사문이 반드시 포함해야 하는 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "육하원칙" },
+              { "id": "B", "text": "기자의 의견" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 50, "end": 120 }] },
+          "question": {
+            "prompt": "육하원칙에 해당하지 않는 것은?",
+            "choices": [
+              { "id": "A", "text": "누가" },
+              { "id": "B", "text": "얼마나" },
+              { "id": "C", "text": "어디서" },
+              { "id": "D", "text": "왜" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-6",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 120, "end": 170 }] },
+          "question": {
+            "prompt": "육하원칙 중 하나라도 빠지면 어떤 일이 생기나요?",
+            "choices": [
+              { "id": "A", "text": "독자가 사건을 이해하기 어렵고 신뢰도가 떨어진다" },
+              { "id": "B", "text": "기사가 더 짧아져서 읽기 편해진다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-7",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 60 }] },
+          "question": {
+            "prompt": "기사문은 어떤 순서로 정보를 씁니까?",
+            "choices": [
+              { "id": "A", "text": "가장 중요한 정보부터 순서대로" },
+              { "id": "B", "text": "시간 순서대로" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-8",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 60, "end": 140 }] },
+          "question": {
+            "prompt": "표제 아래에서 보충 설명을 하는 작은 제목은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "부제" },
+              { "id": "B", "text": "본문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-9",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 50 }] },
+          "question": {
+            "prompt": "기사의 첫 문단인 '전문'의 역할은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "육하원칙의 핵심 내용을 요약하는 것" },
+              { "id": "B", "text": "기자의 감상을 적는 것" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-10",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 50, "end": 130 }] },
+          "question": {
+            "prompt": "'본문'의 역할은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "전문의 내용을 더 구체적이고 자세하게 설명하는 것" },
+              { "id": "B", "text": "기사의 제목을 정하는 것" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-11",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p1", "start": 0, "end": 80 },
+              { "paragraphId": "p6", "start": 0, "end": 50 }
+            ]
+          },
+          "question": {
+            "prompt": "이 글의 중심 내용으로 가장 알맞은 것은?",
+            "choices": [
+              { "id": "A", "text": "기사문이 가져야 할 세 가지 주요 요소(사실 전달, 육하원칙, 구조)와 그 중요성" },
+              { "id": "B", "text": "기자가 되는 방법과 조건" },
+              { "id": "C", "text": "신문의 역사와 발전 과정" },
+              { "id": "D", "text": "독자의 글읽기 습관" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "기사문은 독자에게 사건이나 정보를 신속하게 알리는 글이며, 사실 전달이 가장 중요하다." },
+        { "id": "r2", "text": "기사문은 육하원칙(누가, 언제, 어디서, 무엇을, 어떻게, 왜)을 반드시 포함해야 한다." },
+        { "id": "r3", "text": "기사의 구조는 표제, 부제, 전문(핵심 요약), 본문(구체적 설명)으로 이루어진다." },
+        { "id": "r4", "text": "전문만 읽어도 사건의 핵심을 파악할 수 있고, 본문은 이를 자세히 뒷받침한다." }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "기사문에 기자의 감정이나 주관적 주장을 넣지 않는 이유가 설명된 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 85 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "'전문'의 역할이 설명된 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p5", "start": 0, "end": 90 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "육하원칙이 빠졌을 때의 문제점이 설명된 부분을 찾아보세요.",
+          "answerRanges": [{ "paragraphId": "p3", "start": 120, "end": 170 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}

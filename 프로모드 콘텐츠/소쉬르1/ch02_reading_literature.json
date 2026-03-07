@@ -1,0 +1,145 @@
+{
+  "contentType": "PRO_READING",
+  "title": "독해 — 내 마음의 날씨",
+  "targetLevel": "SAUSSURE_1",
+  "area": "READING",
+  "subArea": "LITERATURE",
+  "competencies": ["READING"],
+  "tags": ["pro-reading", "literature"],
+  "seedReward": { "seedType": "RICE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        { "id": "p1", "text": "하하 호호 기쁠 때는 마음에 쨍하고 해가 떠요" },
+        { "id": "p2", "text": "흑흑 훌쩍 슬플 때는 마음에 주륵주륵 비가 내려요" },
+        { "id": "p3", "text": "씩씩 쿵쿵 화날 때는 마음에 우르릉 천둥이 쳐요" },
+        { "id": "p4", "text": "덜덜 깜짝 무서울 때는 마음에 캄캄한 밤이 찾아와요" },
+        { "id": "p5", "text": "내 마음은 알록달록 하루에도 몇 번씩 날씨가 바뀌어요" }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "int-1",
+          "highlight": {
+            "ranges": [{ "paragraphId": "p1", "start": 0, "end": 24 }]
+          },
+          "question": {
+            "prompt": "기쁠 때 마음에 무엇이 뜬다고 했나요?",
+            "choices": [
+              { "id": "A", "text": "해" },
+              { "id": "B", "text": "달" },
+              { "id": "C", "text": "무지개" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-2",
+          "highlight": {
+            "ranges": [{ "paragraphId": "p2", "start": 0, "end": 24 }]
+          },
+          "question": {
+            "prompt": "슬플 때 마음에 무엇이 내린다고 했나요?",
+            "choices": [
+              { "id": "A", "text": "눈" },
+              { "id": "B", "text": "비" },
+              { "id": "C", "text": "바람" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-3",
+          "highlight": {
+            "ranges": [{ "paragraphId": "p3", "start": 0, "end": 23 }]
+          },
+          "question": {
+            "prompt": "화날 때 마음의 날씨는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "천둥" },
+              { "id": "B", "text": "태풍" },
+              { "id": "C", "text": "안개" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-4",
+          "highlight": {
+            "ranges": [{ "paragraphId": "p4", "start": 0, "end": 25 }]
+          },
+          "question": {
+            "prompt": "무서울 때 마음에 찾아오는 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "캄캄한 밤" },
+              { "id": "B", "text": "차가운 눈" },
+              { "id": "C", "text": "무서운 바람" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "int-5",
+          "highlight": {
+            "ranges": [{ "paragraphId": "p5", "start": 0, "end": 27 }]
+          },
+          "question": {
+            "prompt": "내 마음은 하루에 몇 번 바뀐다고 했나요?",
+            "choices": [
+              { "id": "A", "text": "한 번" },
+              { "id": "B", "text": "몇 번씩" },
+              { "id": "C", "text": "바뀌지 않는다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "r1", "text": "기쁠 때는 마음에 해가 떠요" },
+        { "id": "r2", "text": "슬플 때는 마음에 비가 내려요" },
+        { "id": "r3", "text": "화날 때는 마음에 천둥이 쳐요" },
+        { "id": "r4", "text": "무서울 때는 캄캄한 밤이 찾아와요" },
+        { "id": "r5", "text": "내 마음은 하루에도 몇 번씩 바뀌어요" }
+      ],
+      "correctOrder": ["r1", "r2", "r3", "r4", "r5"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "cf-1",
+          "prompt": "'기쁠 때' 마음에 뜨는 것을 본문에서 찾아 터치하세요.",
+          "answerRanges": [{ "paragraphId": "p1", "start": 14, "end": 24 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-2",
+          "prompt": "'화날 때'의 날씨 표현을 본문에서 찾아 터치하세요.",
+          "answerRanges": [{ "paragraphId": "p3", "start": 13, "end": 23 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        },
+        {
+          "id": "cf-3",
+          "prompt": "마음이 '알록달록'하다는 표현이 있는 곳을 찾아 터치하세요.",
+          "answerRanges": [{ "paragraphId": "p5", "start": 5, "end": 9 }],
+          "answerMatchMode": "ANY",
+          "revealOnWrong": true,
+          "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+        }
+      ]
+    }
+  }
+}
