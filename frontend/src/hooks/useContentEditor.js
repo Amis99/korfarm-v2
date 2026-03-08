@@ -103,6 +103,12 @@ export function useContentEditor(contentId) {
     setContent((prev) => immutableReorder(prev, path, fromIndex, toIndex));
   }, [pushUndo]);
 
+  /* content 통째로 교체 (JSON 모드용) */
+  const setContentDirect = useCallback((newContent) => {
+    pushUndo();
+    setContent(newContent);
+  }, [pushUndo]);
+
   /* undo */
   const undo = useCallback(() => {
     if (undoStack.current.length === 0) return;
@@ -159,5 +165,6 @@ export function useContentEditor(contentId) {
     save,
     undo,
     revert,
+    setContentDirect,
   };
 }

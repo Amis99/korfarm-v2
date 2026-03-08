@@ -562,6 +562,7 @@
 .type-pill[data-group="logic"]    { color: #d47a7a; background: rgba(199,90,90,0.15); border-color: rgba(199,90,90,0.3); }
 .type-pill[data-group="writing"]  { color: #6ab89a; background: rgba(74,138,122,0.15); border-color: rgba(74,138,122,0.3); }
 .type-pill[data-group="choice"]   { color: #d4a04c; background: rgba(212,160,76,0.15); border-color: rgba(212,160,76,0.3); }
+.type-pill[data-group="pro"]      { color: #c98be8; background: rgba(163,90,212,0.15); border-color: rgba(163,90,212,0.3); }
 .type-pill[data-group="other"]    { color: #a0a0a0; background: rgba(160,160,160,0.12); border-color: rgba(160,160,160,0.25); }
 
 /* ── 레벨 축약 pill ── */
@@ -1046,7 +1047,73 @@
 .admin-th-type { width: 70px; }
 .admin-th-level { width: 40px; }
 .admin-th-status { width: 48px; }
-.admin-th-actions { width: 66px; }
+.admin-th-actions { width: 80px; }
+
+/* ── 제목 클릭 링크 ── */
+.admin-content-title-link {
+  color: #f06c24;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+.admin-content-title-link:hover {
+  color: #ff9f5a;
+  text-decoration: underline;
+}
+
+/* ── 아이콘 버튼 ── */
+.admin-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 28px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  background: transparent;
+  color: #a6b6a9;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+  font-family: monospace;
+  font-weight: 700;
+}
+.admin-icon-btn:hover:not(:disabled) {
+  background: rgba(240,108,36,0.15);
+  color: #f06c24;
+  border-color: rgba(240,108,36,0.3);
+}
+.admin-icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── 툴팁 (호버) ── */
+.admin-tooltip-wrap {
+  position: relative;
+}
+.admin-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a2118;
+  color: #f3f6f1;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(240,108,36,0.3);
+  white-space: nowrap;
+  z-index: 50;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.admin-tooltip-wrap:hover > .admin-tooltip {
+  display: block;
+}
 
 /* ── 표준 양식 드롭다운 ── */
 .admin-template-dropdown {

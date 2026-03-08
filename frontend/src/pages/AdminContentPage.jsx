@@ -4,10 +4,11 @@ import { apiGet } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
+import { Link } from "react-router-dom";
 import {
   TYPE_LABEL, TYPE_SHORT, getTypeShort,
   LEVEL_SHORT, getLevelShort,
-  getLevelLabel, DAILY_LEVELS, levelToFolder,
+  LEVEL_LABEL_MAP, getLevelLabel, DAILY_LEVELS, levelToFolder,
 } from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
@@ -160,13 +161,6 @@ function AdminContentPage() {
   const handleTypeFilter = (e) => { setTypeFilter(e.target.value); setCurrentPage(1); };
   const handleSearchChange = (e) => { setSearch(e.target.value); setCurrentPage(1); };
 
-  /* 행 클릭 → 업로드/편집 페이지 이동 */
-  const handleRowClick = (content) => {
-    const params = new URLSearchParams({ id: content.id });
-    if (content.source === "static") params.set("source", "static");
-    navigate(`/admin/content/upload?${params.toString()}`);
-  };
-
   /* 서버에 등록된 콘텐츠를 미리보기 (preview API 호출) */
   const handleServerPreview = async (contentId) => {
     if (!contentId) return;
@@ -242,7 +236,6 @@ function AdminContentPage() {
           </div>
         </div>
         <div className="admin-detail-card admin-single-card edit-mode">
-          <h2>콘텐츠 파이프라인</h2>
           <div className="admin-detail-toolbar">
             <div className="admin-detail-search">
               <span className="material-symbols-outlined">search</span>
@@ -301,78 +294,92 @@ function AdminContentPage() {
               {pagedContents.map((content) => {
                 const ts = getTypeShort(content.type);
                 const day = extractDay(content.jsonPath);
+                const levelFull = LEVEL_LABEL_MAP[content.levelId] || content.levelId || "";
+                const typeFull = TYPE_LABEL[content.type] || content.type || "";
                 return (
-                  <tr
-                    key={content.id}
-                    className="clickable-row"
-                    onClick={() => handleRowClick(content)}
-                  >
+                  <tr key={content.id}>
                     <td>
-                      {content.title}
+                      <Link
+                        to={`/admin/content/edit?id=${content.id}`}
+                        className="admin-content-title-link"
+                        title={content.title}
+                      >
+                        {content.title}
+                      </Link>
                       {day ? <span className="admin-content-day">{day}</span> : null}
                     </td>
                     <td>
-                      <span className="type-pill" data-group={ts.group}>{ts.label}</span>
-                    </td>
-                    <td>
-                      <span className="level-pill">{getLevelShort(content.levelId)}</span>
-                    </td>
-                    <td>
-                      <span className="status-pill" data-status={content.status}>
-                        {STATUS_LABEL[content.status] || content.status}
+                      <span className="type-pill admin-tooltip-wrap" data-group={ts.group}>
+                        {ts.label}
+                        {typeFull && <span className="admin-tooltip">{typeFull}</span>}
                       </span>
                     </td>
                     <td>
-                      <button
-                        className="admin-detail-btn secondary admin-content-action-btn"
-                        type="button"
-                        disabled={previewLoadingId === content.id}
-                        onClick={(e) => { e.stopPropagation(); handleServerPreview(content.id); }}
-                      >
-                        {previewLoadingId === content.id ? "..." : "미리보기"}
-                      </button>
-                      {content.source !== "static" && (
+                      <span className="level-pill admin-tooltip-wrap">
+                        {getLevelShort(content.levelId)}
+                        {levelFull && <span className="admin-tooltip">{levelFull}</span>}
+                      </span>
+                    </td>
+                    <td>
+                      <span className="admin-tooltip-wrap" style={{ cursor: "default" }}>
+                        <span
+                          className="status-dot"
+                          data-status={content.status}
+                        />
+                        <span className="admin-tooltip">{STATUS_LABEL[content.status] || content.status}</span>
+                      </span>
+                    </td>
+                    <td>
+                      <span className="admin-content-actions-cell">
                         <button
-                          className="admin-detail-btn secondary admin-content-action-btn"
+                          className="admin-icon-btn admin-tooltip-wrap"
                           type="button"
-                          onClick={(e) => { e.stopPropagation(); navigate(`/admin/content/edit?id=${content.id}`); }}
-                          style={{ marginLeft: 4 }}
+                          disabled={previewLoadingId === content.id}
+                          onClick={() => handleServerPreview(content.id)}
                         >
-                          편집
+                          {previewLoadingId === content.id ? "..." : "\uD83D\uDC41"}
+                          <span className="admin-tooltip">미리보기</span>
                         </button>
-                      )}
+                        <button
+                          className="admin-icon-btn admin-tooltip-wrap"
+                          type="button"
+                          onClick={() => {
+                            const params = new URLSearchParams({ id: content.id });
+                            if (content.source === "static") params.set("source", "static");
+                            navigate(`/admin/content/upload?${params.toString()}`);
+                          }}
+                        >
+                          {"{ }"}
+                          <span className="admin-tooltip">JSON 편집</span>
+                        </button>
+                      </span>
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-          {/* 페이지네이션 */}
+          {/* 페이지네이션 (윈도우 방식) */}
           {totalPages > 1 ? (
             <div className="admin-pagination">
-              <button
-                className="admin-detail-btn secondary"
-                disabled={safePage <= 1}
-                onClick={() => setCurrentPage((p) => p - 1)}
-              >
-                이전
-              </button>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                <button
-                  key={p}
-                  className={`admin-detail-btn ${p === safePage ? "active" : "secondary"}`}
-                  onClick={() => setCurrentPage(p)}
-                >
-                  {p}
-                </button>
-              ))}
-              <button
-                className="admin-detail-btn secondary"
-                disabled={safePage >= totalPages}
-                onClick={() => setCurrentPage((p) => p + 1)}
-              >
-                다음
-              </button>
+              <button disabled={safePage <= 1} onClick={() => setCurrentPage(1)} title="처음">&laquo;</button>
+              <button disabled={safePage <= 1} onClick={() => setCurrentPage((p) => p - 1)} title="이전">&lsaquo;</button>
+              {(() => {
+                const winStart = Math.max(1, safePage - 4);
+                const winEnd = Math.min(totalPages, winStart + 9);
+                const adjustedStart = Math.max(1, winEnd - 9);
+                return Array.from({ length: winEnd - adjustedStart + 1 }, (_, i) => adjustedStart + i).map((p) => (
+                  <button
+                    key={p}
+                    className={p === safePage ? "active" : ""}
+                    onClick={() => setCurrentPage(p)}
+                  >
+                    {p}
+                  </button>
+                ));
+              })()}
+              <button disabled={safePage >= totalPages} onClick={() => setCurrentPage((p) => p + 1)} title="다음">&rsaquo;</button>
+              <button disabled={safePage >= totalPages} onClick={() => setCurrentPage(totalPages)} title="마지막">&raquo;</button>
             </div>
           ) : null}
         </div>

@@ -51,6 +51,44 @@ export default function EditorShell({ contentId }) {
   const editor = useContentEditor(contentId);
   const { meta, content, loading, error, saving, dirty, saveMsg, canUndo } = editor;
 
+  /* JSON 모드 */
+  const [showJson, setShowJson] = useState(false);
+  const [jsonText, setJsonText] = useState("");
+  const [jsonError, setJsonError] = useState("");
+
+  /* JSON 모드 진입 시 현재 content를 텍스트로 변환 */
+  const handleToggleJson = useCallback(() => {
+    if (!showJson && content) {
+      setJsonText(JSON.stringify(content, null, 2));
+      setJsonError("");
+    }
+    setShowJson((v) => !v);
+  }, [showJson, content]);
+
+  /* JSON 텍스트 변경 */
+  const handleJsonChange = useCallback((e) => {
+    const text = e.target.value;
+    setJsonText(text);
+    try {
+      JSON.parse(text);
+      setJsonError("");
+    } catch (err) {
+      setJsonError("JSON 파싱 오류: " + err.message);
+    }
+  }, []);
+
+  /* JSON 적용 */
+  const handleApplyJson = useCallback(() => {
+    try {
+      const parsed = JSON.parse(jsonText);
+      editor.setContentDirect(parsed);
+      setJsonError("");
+      setShowJson(false);
+    } catch (err) {
+      setJsonError("JSON 파싱 오류: " + err.message);
+    }
+  }, [jsonText, editor]);
+
   /* 미리보기↔폼 연동: focusPath */
   const [focusPath, setFocusPath] = useState(null);
 
@@ -81,6 +119,14 @@ export default function EditorShell({ contentId }) {
         {saveMsg && <span className="ce-save-msg">{saveMsg}</span>}
         {error && <span style={{ color: "#ff6b6b", fontSize: 12 }}>{error}</span>}
         <button
+          className={`ce-btn ${showJson ? "ce-btn-primary" : "ce-btn-secondary"}`}
+          onClick={handleToggleJson}
+          title="JSON 직접 편집"
+          style={{ fontFamily: "monospace", fontWeight: 700 }}
+        >
+          {"{ }"}
+        </button>
+        <button
           className="ce-btn ce-btn-secondary"
           disabled={!canUndo}
           onClick={editor.undo}
@@ -105,62 +151,90 @@ export default function EditorShell({ contentId }) {
         </button>
       </div>
 
-      {/* 좌우 분할 */}
-      <div className="ce-split">
-        <div className="ce-preview-pane">
-          <div className="ce-preview-label">미리보기</div>
-          {editorType === "reading" && (
-            <ReadingPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
-          )}
-          {editorType === "worksheet" && (
-            <WorksheetPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
-          )}
-          {editorType === "answer" && (
-            <AnswerKeyPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
-          )}
-          {editorType === "choice" && (
-            <ChoiceJudgementPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
-          )}
-          {editorType === "phoneme" && (
-            <PhonemeChangePreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
-          )}
-          {editorType === "wordformation" && (
-            <WordFormationPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
-          )}
-          {editorType === "sentence" && (
-            <SentenceStructurePreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
-          )}
-          {editorType === "contentpdf" && (
-            <ContentPdfPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
-          )}
+      {showJson ? (
+        /* JSON 직접 편집 모드 */
+        <div className="ce-json-pane">
+          <textarea
+            className="ce-json-textarea"
+            value={jsonText}
+            onChange={handleJsonChange}
+            spellCheck={false}
+          />
+          {jsonError && <div className="ce-json-error">{jsonError}</div>}
+          <div className="ce-json-actions">
+            <button
+              className="ce-btn ce-btn-primary"
+              disabled={!!jsonError}
+              onClick={handleApplyJson}
+            >
+              JSON 적용
+            </button>
+            <button
+              className="ce-btn ce-btn-secondary"
+              onClick={() => setShowJson(false)}
+            >
+              비주얼 편집으로 돌아가기
+            </button>
+          </div>
         </div>
-        <div className="ce-form-pane">
-          {editorType === "reading" && (
-            <ReadingForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
-          )}
-          {editorType === "worksheet" && (
-            <WorksheetForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
-          )}
-          {editorType === "answer" && (
-            <AnswerKeyForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
-          )}
-          {editorType === "choice" && (
-            <ChoiceJudgementForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
-          )}
-          {editorType === "phoneme" && (
-            <PhonemeChangeForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
-          )}
-          {editorType === "wordformation" && (
-            <WordFormationForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
-          )}
-          {editorType === "sentence" && (
-            <SentenceStructureForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
-          )}
-          {editorType === "contentpdf" && (
-            <ContentPdfForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
-          )}
+      ) : (
+        /* 좌우 분할 (비주얼 편집) */
+        <div className="ce-split">
+          <div className="ce-preview-pane">
+            <div className="ce-preview-label">미리보기</div>
+            {editorType === "reading" && (
+              <ReadingPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+            )}
+            {editorType === "worksheet" && (
+              <WorksheetPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+            )}
+            {editorType === "answer" && (
+              <AnswerKeyPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+            )}
+            {editorType === "choice" && (
+              <ChoiceJudgementPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+            )}
+            {editorType === "phoneme" && (
+              <PhonemeChangePreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+            )}
+            {editorType === "wordformation" && (
+              <WordFormationPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+            )}
+            {editorType === "sentence" && (
+              <SentenceStructurePreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+            )}
+            {editorType === "contentpdf" && (
+              <ContentPdfPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+            )}
+          </div>
+          <div className="ce-form-pane">
+            {editorType === "reading" && (
+              <ReadingForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+            )}
+            {editorType === "worksheet" && (
+              <WorksheetForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+            )}
+            {editorType === "answer" && (
+              <AnswerKeyForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+            )}
+            {editorType === "choice" && (
+              <ChoiceJudgementForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+            )}
+            {editorType === "phoneme" && (
+              <PhonemeChangeForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+            )}
+            {editorType === "wordformation" && (
+              <WordFormationForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+            )}
+            {editorType === "sentence" && (
+              <SentenceStructureForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+            )}
+            {editorType === "contentpdf" && (
+              <ContentPdfForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
