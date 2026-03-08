@@ -181,7 +181,8 @@ const FAQ_ITEMS = [
 
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, user, logout } = useAuth();
+  const isAdmin = user?.roles?.some((r) => r === "HQ_ADMIN" || r === "ORG_ADMIN");
 
   return (
     <div className="landing-page">
@@ -205,7 +206,7 @@ function LandingPage() {
           </div>
           {isLoggedIn ? (
             <div className="landing-nav-auth">
-              <Link className="landing-nav-cta" to="/start">학습하기</Link>
+              <Link className="landing-nav-cta" to={isAdmin ? "/admin" : "/start"}>{isAdmin ? "관리하기" : "학습하기"}</Link>
               <button className="landing-nav-logout" onClick={logout}>로그아웃</button>
             </div>
           ) : (
@@ -231,7 +232,7 @@ function LandingPage() {
             <Link to="/shop" onClick={() => setMobileMenuOpen(false)}>쇼핑몰</Link>
             {isLoggedIn ? (
               <>
-                <Link className="landing-mobile-login" to="/start" onClick={() => setMobileMenuOpen(false)}>학습하기</Link>
+                <Link className="landing-mobile-login" to={isAdmin ? "/admin" : "/start"} onClick={() => setMobileMenuOpen(false)}>{isAdmin ? "관리하기" : "학습하기"}</Link>
                 <button className="landing-mobile-logout" onClick={() => { setMobileMenuOpen(false); logout(); }}>로그아웃</button>
               </>
             ) : (
