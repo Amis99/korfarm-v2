@@ -10,6 +10,12 @@ export default function AdminContentEditorPage() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const contentId = params.get("id");
+  const source = params.get("source");
+  const staticInfo = source === "static" ? {
+    jsonPath: params.get("jsonPath"),
+    contentType: params.get("type"),
+    title: params.get("title"),
+  } : null;
 
   if (!contentId) {
     return (
@@ -32,7 +38,7 @@ export default function AdminContentEditorPage() {
 
   return (
     <AdminLayout>
-      <EditorShell contentId={contentId} />
+      <EditorShell contentId={contentId} staticInfo={staticInfo} />
     </AdminLayout>
   );
 }

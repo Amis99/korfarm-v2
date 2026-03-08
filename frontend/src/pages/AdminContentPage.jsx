@@ -161,20 +161,29 @@ function AdminContentPage() {
   const handleTypeFilter = (e) => { setTypeFilter(e.target.value); setCurrentPage(1); };
   const handleSearchChange = (e) => { setSearch(e.target.value); setCurrentPage(1); };
 
-  /* 서버에 등록된 콘텐츠를 미리보기 (preview API 호출) */
-  const handleServerPreview = async (contentId) => {
-    if (!contentId) return;
-    setPreviewLoadingId(contentId);
+  /* 콘텐츠 미리보기 (DB → API, static → 정적 파일) */
+  const handleServerPreview = async (content) => {
+    if (!content?.id) return;
+    setPreviewLoadingId(content.id);
     setServerPreviewError("");
     try {
-      const preview = await apiGet(`/v1/admin/content/${contentId}/preview`);
-      const previewData = {
-        contentType: preview.contentType || preview.content_type,
-        payload: preview.content,
-      };
+      let previewData;
+      if (content.source === "static" && content.jsonPath) {
+        const base = import.meta.env.BASE_URL || "/";
+        const url = `${base}${content.jsonPath.replace(/^\//, "")}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`정적 파일 로드 실패: ${res.status}`);
+        const payload = await res.json();
+        previewData = { contentType: content.type, payload };
+      } else {
+        const preview = await apiGet(`/v1/admin/content/${content.id}/preview`);
+        previewData = {
+          contentType: preview.contentType || preview.content_type,
+          payload: preview.content,
+        };
+      }
       localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
-      const mk = preview.contentType || preview.content_type || "worksheet_quiz";
-      localStorage.setItem("korfarm_preview_module", mk);
+      localStorage.setItem("korfarm_preview_module", previewData.contentType || "worksheet_quiz");
       navigate("/admin/content/preview");
     } catch (err) {
       setServerPreviewError(err.message || "미리보기 데이터를 불러오지 못했습니다.");
@@ -300,7 +309,7 @@ function AdminContentPage() {
                   <tr key={content.id}>
                     <td>
                       <Link
-                        to={`/admin/content/edit?id=${content.id}`}
+                        to={`/admin/content/edit?id=${content.id}${content.source === "static" ? `&source=static&jsonPath=${encodeURIComponent(content.jsonPath)}&type=${encodeURIComponent(content.type)}&title=${encodeURIComponent(content.title)}` : ""}`}
                         className="admin-content-title-link"
                         title={content.title}
                       >
@@ -335,7 +344,7 @@ function AdminContentPage() {
                           className="admin-icon-btn admin-tooltip-wrap"
                           type="button"
                           disabled={previewLoadingId === content.id}
-                          onClick={() => handleServerPreview(content.id)}
+                          onClick={() => handleServerPreview(content)}
                         >
                           {previewLoadingId === content.id ? "..." : "\uD83D\uDC41"}
                           <span className="admin-tooltip">미리보기</span>

@@ -47,8 +47,8 @@ function resolveEditorType(ct) {
   return "worksheet";
 }
 
-export default function EditorShell({ contentId }) {
-  const editor = useContentEditor(contentId);
+export default function EditorShell({ contentId, staticInfo }) {
+  const editor = useContentEditor(contentId, staticInfo);
   const { meta, content, loading, error, saving, dirty, saveMsg, canUndo } = editor;
 
   /* JSON 모드 */

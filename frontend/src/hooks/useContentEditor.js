@@ -12,8 +12,9 @@ const MAX_UNDO = 20;
 /**
  * 콘텐츠 비주얼 에디터 상태 관리 훅
  * @param {string} contentId - 편집할 콘텐츠 ID
+ * @param {object|null} staticInfo - static 콘텐츠 정보 { jsonPath, contentType, title }
  */
-export function useContentEditor(contentId) {
+export function useContentEditor(contentId, staticInfo) {
   const [meta, setMeta] = useState(null); // { contentType, title, ... }
   const [content, setContent] = useState(null); // payload 데이터
   const [original, setOriginal] = useState(null); // 원본 (dirty 비교용)
@@ -23,6 +24,7 @@ export function useContentEditor(contentId) {
   const [saveMsg, setSaveMsg] = useState("");
   const undoStack = useRef([]);
   const [undoLen, setUndoLen] = useState(0);
+  const isStatic = !!staticInfo;
 
   /* 데이터 로드 */
   useEffect(() => {
@@ -36,16 +38,27 @@ export function useContentEditor(contentId) {
       setLoading(true);
       setError("");
       try {
-        const res = await apiGet(`/v1/admin/content/${contentId}/preview`);
+        let ct, payload, title, schemaVersion;
+        if (staticInfo?.jsonPath) {
+          /* static 콘텐츠: 정적 파일에서 직접 로드 */
+          const base = import.meta.env.BASE_URL || "/";
+          const url = `${base}${staticInfo.jsonPath.replace(/^\//, "")}`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`정적 파일 로드 실패: ${res.status}`);
+          payload = await res.json();
+          ct = staticInfo.contentType || "";
+          title = staticInfo.title || "";
+          schemaVersion = "1.0";
+        } else {
+          /* DB 콘텐츠: API 호출 */
+          const res = await apiGet(`/v1/admin/content/${contentId}/preview`);
+          ct = res.contentType || res.content_type || "";
+          payload = res.content || res.payload || {};
+          title = res.title || "";
+          schemaVersion = res.schemaVersion || res.schema_version || "1.0";
+        }
         if (cancelled) return;
-        const ct = res.contentType || res.content_type || "";
-        const payload = res.content || res.payload || {};
-        setMeta({
-          contentType: ct,
-          title: res.title || "",
-          contentId,
-          schemaVersion: res.schemaVersion || res.schema_version || "1.0",
-        });
+        setMeta({ contentType: ct, title, contentId, schemaVersion });
         setContent(payload);
         setOriginal(JSON.parse(JSON.stringify(payload)));
         undoStack.current = [];
@@ -57,7 +70,7 @@ export function useContentEditor(contentId) {
       }
     })();
     return () => { cancelled = true; };
-  }, [contentId]);
+  }, [contentId, staticInfo?.jsonPath]);
 
   /* dirty 판별 */
   const dirty = content !== null && original !== null && JSON.stringify(content) !== JSON.stringify(original);
@@ -121,6 +134,10 @@ export function useContentEditor(contentId) {
   /* 저장 */
   const save = useCallback(async () => {
     if (!meta || !content) return;
+    if (isStatic) {
+      setError("정적 콘텐츠는 서버 저장이 불가합니다. JSON을 다운로드해 주세요.");
+      return;
+    }
     setSaving(true);
     setSaveMsg("");
     setError("");
@@ -140,7 +157,7 @@ export function useContentEditor(contentId) {
     } finally {
       setSaving(false);
     }
-  }, [meta, content, contentId]);
+  }, [meta, content, contentId, isStatic]);
 
   /* 되돌리기 (원본으로 리셋) */
   const revert = useCallback(() => {
