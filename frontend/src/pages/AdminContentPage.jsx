@@ -331,6 +331,16 @@ function AdminContentPage() {
                       >
                         {previewLoadingId === content.id ? "..." : "미리보기"}
                       </button>
+                      {content.source !== "static" && (
+                        <button
+                          className="admin-detail-btn secondary admin-content-action-btn"
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); navigate(`/admin/content/edit?id=${content.id}`); }}
+                          style={{ marginLeft: 4 }}
+                        >
+                          편집
+                        </button>
+                      )}
                     </td>
                   </tr>
                 );

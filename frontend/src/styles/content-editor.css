@@ -1,0 +1,411 @@
+/* === 콘텐츠 비주얼 에디터 === */
+
+.ce-shell {
+  display: flex;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+  background: #0f1410;
+  color: #f3f6f1;
+}
+
+/* 툴바 */
+.ce-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #161d18;
+  border-bottom: 1px solid #2a3a2e;
+  flex-shrink: 0;
+}
+.ce-toolbar-title {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #a6b6a9;
+}
+.ce-toolbar-title strong {
+  color: #f3f6f1;
+  margin-right: 8px;
+}
+.ce-toolbar-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #2a3a2e;
+  color: #a6b6a9;
+}
+.ce-toolbar-badge.dirty {
+  background: #5a3a10;
+  color: #ffb84d;
+}
+.ce-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ce-btn-primary {
+  background: #ff7f2a;
+  color: #fff;
+}
+.ce-btn-primary:hover { background: #e06a1a; }
+.ce-btn-primary:disabled { background: #5a3a10; color: #887755; cursor: default; }
+.ce-btn-secondary {
+  background: #2a3a2e;
+  color: #c0d0c4;
+}
+.ce-btn-secondary:hover { background: #3a4a3e; }
+.ce-btn-secondary:disabled { color: #556055; cursor: default; }
+.ce-btn-danger {
+  background: #4a1a1a;
+  color: #ff6b6b;
+}
+.ce-btn-danger:hover { background: #5a2a2a; }
+
+/* 좌우 분할 */
+.ce-split {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+.ce-preview-pane {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  border-right: 1px solid #2a3a2e;
+  background: #111815;
+}
+.ce-form-pane {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: #0f1410;
+}
+
+/* 미리보기 공통 */
+.ce-preview-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6a7a6e;
+  margin-bottom: 12px;
+}
+.ce-preview-card {
+  background: #1a2420;
+  border: 1px solid #2a3a2e;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.ce-preview-card:hover {
+  border-color: #ff7f2a55;
+}
+.ce-preview-card.active {
+  border-color: #ff7f2a;
+  box-shadow: 0 0 0 1px #ff7f2a44;
+}
+
+/* 폼 공통 */
+.ce-form-section {
+  margin-bottom: 20px;
+}
+.ce-form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #a6b6a9;
+  margin-bottom: 4px;
+}
+.ce-form-input,
+.ce-form-textarea,
+.ce-form-select {
+  width: 100%;
+  padding: 8px 10px;
+  background: #1a2420;
+  border: 1px solid #2a3a2e;
+  border-radius: 6px;
+  color: #f3f6f1;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+.ce-form-input:focus,
+.ce-form-textarea:focus,
+.ce-form-select:focus {
+  border-color: #ff7f2a;
+}
+.ce-form-textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+.ce-form-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.ce-form-row > * {
+  flex: 1;
+}
+
+/* 접이식 섹션 */
+.ce-collapsible {
+  border: 1px solid #2a3a2e;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.ce-collapsible-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #1a2420;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+.ce-collapsible-header:hover {
+  background: #1e2a24;
+}
+.ce-collapsible-arrow {
+  font-size: 11px;
+  transition: transform 0.2s;
+  color: #6a7a6e;
+}
+.ce-collapsible-arrow.open {
+  transform: rotate(90deg);
+}
+.ce-collapsible-count {
+  font-size: 11px;
+  color: #6a7a6e;
+  margin-left: auto;
+}
+.ce-collapsible-body {
+  padding: 12px 14px;
+  border-top: 1px solid #2a3a2e;
+}
+
+/* 선택지 편집 */
+.ce-choice-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+.ce-choice-radio {
+  accent-color: #ff7f2a;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.ce-choice-num {
+  font-size: 12px;
+  color: #6a7a6e;
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.ce-choice-input {
+  flex: 1;
+}
+.ce-choice-del {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.ce-choice-del:hover {
+  background: #4a1a1a;
+}
+
+/* 스코어링 편집 */
+.ce-scoring-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 6px 0;
+}
+.ce-scoring-row label {
+  font-size: 12px;
+  color: #a6b6a9;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ce-scoring-input {
+  width: 70px;
+  padding: 4px 6px;
+  background: #1a2420;
+  border: 1px solid #2a3a2e;
+  border-radius: 4px;
+  color: #f3f6f1;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* 드래그 목록 */
+.ce-drag-handle {
+  cursor: grab;
+  color: #6a7a6e;
+  font-size: 16px;
+  padding: 0 4px;
+  flex-shrink: 0;
+  user-select: none;
+}
+.ce-drag-handle:active { cursor: grabbing; }
+.ce-drag-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 8px 0;
+  border-bottom: 1px solid #1a2420;
+}
+.ce-drag-item:last-child { border-bottom: none; }
+
+/* 하이라이트 편집 */
+.ce-highlight-range {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: #3a3a10;
+  border: 1px solid #5a5a20;
+  border-radius: 4px;
+  font-size: 12px;
+  margin: 2px;
+}
+.ce-highlight-del {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0 2px;
+}
+.ce-select-mode .ce-preview-passage {
+  cursor: text;
+  user-select: text;
+}
+.ce-select-mode .ce-preview-passage ::selection {
+  background: #ff7f2a55;
+}
+
+/* 미리보기: 지문 */
+.ce-preview-passage {
+  line-height: 1.9;
+  font-size: 14px;
+}
+.ce-preview-passage p {
+  margin: 0 0 8px;
+  text-indent: 1em;
+}
+.ce-preview-passage .highlight {
+  background: #ff7f2a33;
+  border-bottom: 2px solid #ff7f2a;
+}
+
+/* 미리보기: 문항 */
+.ce-preview-q {
+  padding: 10px 14px;
+  border-left: 3px solid #2a3a2e;
+  margin-bottom: 10px;
+}
+.ce-preview-q.active { border-left-color: #ff7f2a; }
+.ce-preview-q-stem {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+.ce-preview-q-choice {
+  font-size: 12px;
+  color: #a6b6a9;
+  padding: 2px 0 2px 12px;
+}
+.ce-preview-q-choice.correct {
+  color: #4ecb71;
+}
+
+/* 미리보기: 모범답안 */
+.ce-preview-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 0;
+  border-bottom: 1px solid #2a3a2e;
+  margin-bottom: 8px;
+}
+.ce-preview-answer-item {
+  display: flex;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 13px;
+}
+.ce-preview-answer-num {
+  color: #6a7a6e;
+  flex-shrink: 0;
+  width: 28px;
+}
+.ce-preview-answer-text {
+  flex: 1;
+}
+
+/* 아이템 추가 버튼 */
+.ce-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: none;
+  border: 1px dashed #3a4a3e;
+  border-radius: 6px;
+  color: #6a7a6e;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 8px;
+  width: 100%;
+  justify-content: center;
+}
+.ce-add-btn:hover {
+  border-color: #ff7f2a;
+  color: #ff7f2a;
+}
+
+/* 로딩/에러 상태 */
+.ce-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 300px;
+  color: #a6b6a9;
+  font-size: 14px;
+}
+.ce-status.error {
+  color: #ff6b6b;
+}
+
+/* 저장 메시지 */
+.ce-save-msg {
+  font-size: 12px;
+  color: #4ecb71;
+  animation: ceFadeIn 0.3s;
+}
+@keyframes ceFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

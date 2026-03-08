@@ -76,6 +76,7 @@ const AdminStudentDetailPage = lazy(() => import("./pages/AdminStudentDetailPage
 const AdminContentPage = lazy(() => import("./pages/AdminContentPage"));
 const AdminContentUploadPage = lazy(() => import("./pages/AdminContentUploadPage"));
 const AdminContentPreviewPage = lazy(() => import("./pages/AdminContentPreviewPage"));
+const AdminContentEditorPage = lazy(() => import("./pages/AdminContentEditorPage"));
 const AdminAssignmentsPage = lazy(() => import("./pages/AdminAssignmentsPage"));
 const AdminShopPage = lazy(() => import("./pages/AdminShopPage"));
 const AdminDuelPage = lazy(() => import("./pages/AdminDuelPage"));
@@ -214,6 +215,7 @@ function App() {
           <Route path="/admin/content" element={A(<AdminContentPage />)} />
           <Route path="/admin/content/upload" element={A(<AdminContentUploadPage />)} />
           <Route path="/admin/content/preview" element={A(<AdminContentPreviewPage />)} />
+          <Route path="/admin/content/edit" element={A(<AdminContentEditorPage />)} />
           <Route path="/admin/assignments" element={A(<AdminAssignmentsPage />)} />
           <Route path="/admin/shop" element={A(<AdminShopPage />)} />
           <Route path="/admin/shop/products" element={<Navigate to="/admin/shop?tab=products" replace />} />
