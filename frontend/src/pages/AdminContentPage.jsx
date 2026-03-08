@@ -16,6 +16,38 @@ import "../styles/admin-detail.css";
 const CONTENTS = [];
 const PER_PAGE = 20;
 
+/* contentType → EngineShell moduleKey 변환 */
+const CONTENT_TYPE_TO_MODULE = {
+  VOCAB_BASIC: "worksheet_quiz",
+  VOCAB_DICTIONARY: "worksheet_quiz",
+  READING_NONFICTION: "reading_training",
+  READING_LITERATURE: "reading_training",
+  CONTENT_PDF: "content_pdf",
+  CONTENT_PDF_QUIZ: "content_pdf",
+  CHOICE_JUDGEMENT: "choice_judgement",
+  GRAMMAR_PHONEME_CHANGE: "phoneme_change",
+  GRAMMAR_WORD_FORMATION: "word_formation",
+  GRAMMAR_SENTENCE_STRUCTURE: "sentence_structure",
+  GRAMMAR_POS: "worksheet_quiz",
+  BACKGROUND_KNOWLEDGE: "worksheet_quiz",
+  BACKGROUND_KNOWLEDGE_QUIZ: "worksheet_quiz",
+  LANGUAGE_CONCEPT: "worksheet_quiz",
+  LANGUAGE_CONCEPT_QUIZ: "worksheet_quiz",
+  LOGIC_REASONING: "worksheet_quiz",
+  LOGIC_REASONING_QUIZ: "worksheet_quiz",
+  WRITING_DESCRIPTIVE: "worksheet_quiz",
+  DAILY_QUIZ: "worksheet_quiz",
+  DAILY_READING: "reading_training",
+  PRO_READING: "reading_training",
+  PRO_BACKGROUND: "worksheet_quiz",
+  PRO_VOCAB: "worksheet_quiz",
+  PRO_LOGIC: "worksheet_quiz",
+  PRO_ANSWER: "answer_key",
+  PRO_TEST: "worksheet_quiz",
+};
+const resolveModuleKey = (contentType, fallback) =>
+  fallback || CONTENT_TYPE_TO_MODULE[contentType] || "worksheet_quiz";
+
 /* static JSON 콘텐츠 목록 */
 const STATIC_CONTENTS = [
   ...LEARNING_CATALOG.map((item) => ({
@@ -27,6 +59,7 @@ const STATIC_CONTENTS = [
     status: "active",
     source: "static",
     jsonPath: item.jsonPath,
+    moduleKey: item.moduleKey,
   })),
   ...DAILY_LEVELS.map((level) => ({
     id: `dq-${level.toLowerCase()}`,
@@ -37,6 +70,7 @@ const STATIC_CONTENTS = [
     status: "active",
     source: "static",
     jsonPath: `/daily-quiz/${levelToFolder(level)}/001.json`,
+    moduleKey: "worksheet_quiz",
   })),
   ...DAILY_LEVELS.map((level) => ({
     id: `dr-${level.toLowerCase()}`,
@@ -47,6 +81,7 @@ const STATIC_CONTENTS = [
     status: "active",
     source: "static",
     jsonPath: `/daily-reading/${levelToFolder(level)}/001.json`,
+    moduleKey: "reading_training",
   })),
 ];
 
@@ -168,6 +203,7 @@ function AdminContentPage() {
     setServerPreviewError("");
     try {
       let previewData;
+      let moduleKey;
       if (content.source === "static" && content.jsonPath) {
         const base = import.meta.env.BASE_URL || "/";
         const url = `${base}${content.jsonPath.replace(/^\//, "")}`;
@@ -175,15 +211,15 @@ function AdminContentPage() {
         if (!res.ok) throw new Error(`정적 파일 로드 실패: ${res.status}`);
         const payload = await res.json();
         previewData = { contentType: content.type, payload };
+        moduleKey = resolveModuleKey(content.type, content.moduleKey);
       } else {
         const preview = await apiGet(`/v1/admin/content/${content.id}/preview`);
-        previewData = {
-          contentType: preview.contentType || preview.content_type,
-          payload: preview.content,
-        };
+        const ct = preview.contentType || preview.content_type || "";
+        previewData = { contentType: ct, payload: preview.content };
+        moduleKey = resolveModuleKey(ct, preview.moduleKey || preview.module_key);
       }
       localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
-      localStorage.setItem("korfarm_preview_module", previewData.contentType || "worksheet_quiz");
+      localStorage.setItem("korfarm_preview_module", moduleKey);
       navigate("/admin/content/preview");
     } catch (err) {
       setServerPreviewError(err.message || "미리보기 데이터를 불러오지 못했습니다.");
