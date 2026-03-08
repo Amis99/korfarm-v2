@@ -52,11 +52,13 @@ function ProTestPage() {
       // 이미 통과한 경우
       if (status.isTestPassed) {
         setPhase("result");
-        setResult({ passed: true, score: 0, totalPoints: 0, nextAction: "next_chapter" });
         const passedSession = status.history?.find(s => s.status === "passed");
-        if (passedSession) {
-          setResult(prev => ({ ...prev, score: passedSession.score }));
-        }
+        setResult({
+          passed: true,
+          score: passedSession?.score ?? 0,
+          totalPoints: passedSession?.totalPoints ?? 100,
+          nextAction: "next_chapter"
+        });
       }
       // 활성 세션이 있는 경우
       else if (status.activeSession) {
@@ -261,7 +263,11 @@ function ProTestPage() {
                 </div>
                 <div className="pro-test-info-item">
                   <div className="label">남은 버전</div>
-                  <div className="value">{testStatus?.remainingVersions ?? "?"}</div>
+                  <div className="value">
+                    {testStatus?.remainingVersions > 0
+                      ? testStatus.remainingVersions
+                      : "재응시 가능"}
+                  </div>
                 </div>
               </div>
               <p className="pro-test-hint">
@@ -368,7 +374,9 @@ function ProTestPage() {
                 {result.passed ? "emoji_events" : "sentiment_dissatisfied"}
               </span>
               {result.score > 0 && (
-                <div className="pro-result-score">{result.score}점</div>
+                <div className="pro-result-score">
+                  {result.score}점{result.totalPoints ? ` / ${result.totalPoints}점` : ""}
+                </div>
               )}
               <div className="pro-result-label">
                 {result.passed ? "축하합니다! 통과했습니다" : "아쉽습니다"}
@@ -376,10 +384,10 @@ function ProTestPage() {
               <p className="pro-result-desc">
                 {result.passed
                   ? "다음 챕터로 진행할 수 있습니다."
-                  : result.nextAction === "retry_available"
-                    ? "다른 버전으로 재응시할 수 있습니다."
-                    : result.nextAction === "no_more_versions"
-                      ? "모든 테스트 버전을 소진했습니다. 학습을 복습해주세요."
+                  : result.nextAction === "retry_recycled"
+                    ? "기존 테스트 중 하나로 재응시할 수 있습니다."
+                    : result.nextAction === "retry_available"
+                      ? "다른 버전으로 재응시할 수 있습니다."
                       : ""}
               </p>
               <div className="pro-result-actions">
@@ -398,7 +406,7 @@ function ProTestPage() {
                     >
                       학습 복습하기
                     </button>
-                    {result.nextAction === "retry_available" && (
+                    {(result.nextAction === "retry_available" || result.nextAction === "retry_recycled") && (
                       <button className="pro-test-btn primary" onClick={handleRetry}>
                         재응시하기
                       </button>

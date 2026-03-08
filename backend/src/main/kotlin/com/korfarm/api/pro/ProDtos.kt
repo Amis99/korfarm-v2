@@ -96,6 +96,7 @@ data class ProTestSessionView(
     val status: String,
     val mode: String,
     val score: Int?,
+    val totalPoints: Int? = null,
     val printedAt: LocalDateTime?,
     val omrDeadline: LocalDateTime?,
     val createdAt: LocalDateTime

@@ -86,7 +86,15 @@ class ProTestSessionService(
             .map { it.chapterTestId }.toSet()
 
         val nextTest = allTests.firstOrNull { !usedTestIds.contains(it.id) }
-            ?: throw ApiException("NO_MORE_VERSIONS", "모든 테스트 버전을 이미 응시했습니다.", HttpStatus.CONFLICT)
+            ?: run {
+                // 모든 버전 소진 → 가장 오래 전 응시한 failed/expired 버전 재배정
+                val pastSessions = testSessionRepo.findByUserIdAndChapterId(userId, chapterId)
+                    .filter { it.status in listOf("failed", "expired") }
+                    .sortedBy { it.createdAt }
+                val oldestChapterTestId = pastSessions.firstOrNull()?.chapterTestId
+                allTests.firstOrNull { it.id == oldestChapterTestId }
+                    ?: allTests.first()
+            }
 
         val paper = testPaperRepo.findById(nextTest.testPaperId).orElseThrow {
             ApiException("NOT_FOUND", "시험지를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
@@ -194,7 +202,7 @@ class ProTestSessionService(
             val usedTestIds = testSessionRepo.findByUserIdAndChapterId(userId, session.chapterId)
                 .map { it.chapterTestId }.toSet()
             val remaining = allTests.count { !usedTestIds.contains(it.id) }
-            if (remaining > 0) "retry_available" else "no_more_versions"
+            if (remaining > 0) "retry_available" else "retry_recycled"
         }
 
         return ProTestSubmitResponse(
@@ -222,12 +230,14 @@ class ProTestSessionService(
             val activeStatuses = setOf("printed", "online_solving")
             val effectiveStatus = if (activeStatuses.contains(session.status) && session.omrDeadline?.isBefore(now) == true) "expired" else session.status
 
+            val paper = testPaperRepo.findById(session.testId).orElse(null)
             val view = ProTestSessionView(
                 sessionId = session.id,
                 version = version,
                 status = effectiveStatus,
                 mode = session.mode,
                 score = session.score,
+                totalPoints = paper?.totalPoints,
                 printedAt = session.printedAt,
                 omrDeadline = session.omrDeadline,
                 createdAt = session.createdAt
