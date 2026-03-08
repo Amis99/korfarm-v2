@@ -11,26 +11,34 @@ const getToken = () => {
   return token;
 };
 
-const parseError = async (response, method, path) => {
-  try {
-    const payload = await response.json();
-    if (payload?.error?.message) return payload.error.message;
-    if (payload?.message) return payload.message;
-  } catch {
-    // JSON 파싱 실패 시 기본 메시지
+/**
+ * 응답을 안전하게 JSON 파싱.
+ * CloudFront가 403/404를 200 + index.html로 변환하는 경우를 방어.
+ */
+const safeJson = async (response, method, path) => {
+  const ct = response.headers.get("content-type") || "";
+  if (!ct.includes("application/json")) {
+    throw new Error(
+      `${method} ${path} 요청 실패: 서버가 JSON이 아닌 응답을 반환했습니다 (${response.status})`
+    );
   }
-  return `${method} ${path} 요청 실패: ${response.status}`;
+  if (!response.ok) {
+    let msg = `${method} ${path} 요청 실패: ${response.status}`;
+    try {
+      const payload = await response.json();
+      msg = payload?.error?.message || payload?.message || msg;
+    } catch { /* ignore */ }
+    throw new Error(msg);
+  }
+  const payload = await response.json();
+  return payload?.data ?? payload;
 };
 
 export const apiGet = async (path) => {
   const response = await fetch(buildUrl(path), {
     headers: { Authorization: `Bearer ${getToken()}` },
   });
-  if (!response.ok) {
-    throw new Error(await parseError(response, "GET", path));
-  }
-  const payload = await response.json();
-  return payload?.data ?? payload;
+  return safeJson(response, "GET", path);
 };
 
 export const apiPost = async (path, body) => {
@@ -42,11 +50,7 @@ export const apiPost = async (path, body) => {
     },
     body: body ? JSON.stringify(body) : "{}",
   });
-  if (!response.ok) {
-    throw new Error(await parseError(response, "POST", path));
-  }
-  const payload = await response.json();
-  return payload?.data ?? payload;
+  return safeJson(response, "POST", path);
 };
 
 export const apiPut = async (path, body) => {
@@ -58,11 +62,7 @@ export const apiPut = async (path, body) => {
     },
     body: body ? JSON.stringify(body) : "{}",
   });
-  if (!response.ok) {
-    throw new Error(await parseError(response, "PUT", path));
-  }
-  const payload = await response.json();
-  return payload?.data ?? payload;
+  return safeJson(response, "PUT", path);
 };
 
 export const apiPatch = async (path, body) => {
@@ -74,11 +74,7 @@ export const apiPatch = async (path, body) => {
     },
     body: body ? JSON.stringify(body) : "{}",
   });
-  if (!response.ok) {
-    throw new Error(await parseError(response, "PATCH", path));
-  }
-  const payload = await response.json();
-  return payload?.data ?? payload;
+  return safeJson(response, "PATCH", path);
 };
 
 export const apiDelete = async (path) => {
@@ -86,9 +82,5 @@ export const apiDelete = async (path) => {
     method: "DELETE",
     headers: { Authorization: `Bearer ${getToken()}` },
   });
-  if (!response.ok) {
-    throw new Error(await parseError(response, "DELETE", path));
-  }
-  const payload = await response.json();
-  return payload?.data ?? payload;
+  return safeJson(response, "DELETE", path);
 };

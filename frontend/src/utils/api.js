@@ -47,29 +47,36 @@ const handle401 = (path) => {
   window.location.href = import.meta.env.BASE_URL + "login";
 };
 
-const parseError = async (response, method, path) => {
-  if (response.status === 401) {
-    handle401(path);
+/**
+ * 응답을 안전하게 처리.
+ * CloudFront가 403/404를 200 + index.html로 변환하는 경우를 방어.
+ */
+const safeJson = async (response, method, path) => {
+  const ct = response.headers.get("content-type") || "";
+  if (!ct.includes("application/json")) {
+    throw new ApiError(
+      `${method} ${path} 요청 실패: 서버가 JSON이 아닌 응답을 반환했습니다 (${response.status})`,
+      response.status
+    );
   }
-  try {
-    const payload = await response.json();
-    if (payload?.error?.message) return payload.error.message;
-    if (payload?.message) return payload.message;
-  } catch {
-    // JSON 파싱 실패 시 기본 메시지
+  if (!response.ok) {
+    if (response.status === 401) handle401(path);
+    let msg = `${method} ${path} 요청 실패: ${response.status}`;
+    try {
+      const payload = await response.json();
+      msg = payload?.error?.message || payload?.message || msg;
+    } catch { /* ignore */ }
+    throw new ApiError(msg, response.status);
   }
-  return `${method} ${path} 요청 실패: ${response.status}`;
+  const payload = await response.json();
+  return camelize(payload?.data ?? payload);
 };
 
 export const apiGet = async (path) => {
   const response = await fetch(buildUrl(path), {
     headers: authHeaders(),
   });
-  if (!response.ok) {
-    throw new ApiError(await parseError(response, "GET", path), response.status);
-  }
-  const payload = await response.json();
-  return camelize(payload?.data ?? payload);
+  return safeJson(response, "GET", path);
 };
 
 export const apiPost = async (path, body) => {
@@ -81,11 +88,7 @@ export const apiPost = async (path, body) => {
     },
     body: body ? JSON.stringify(snakeize(body)) : "{}",
   });
-  if (!response.ok) {
-    throw new ApiError(await parseError(response, "POST", path), response.status);
-  }
-  const payload = await response.json();
-  return camelize(payload?.data ?? payload);
+  return safeJson(response, "POST", path);
 };
 
 export const apiDelete = async (path) => {
@@ -93,11 +96,7 @@ export const apiDelete = async (path) => {
     method: "DELETE",
     headers: authHeaders(),
   });
-  if (!response.ok) {
-    throw new ApiError(await parseError(response, "DELETE", path), response.status);
-  }
-  const payload = await response.json();
-  return camelize(payload?.data ?? payload);
+  return safeJson(response, "DELETE", path);
 };
 
 export const apiPut = async (path, body) => {
@@ -109,11 +108,7 @@ export const apiPut = async (path, body) => {
     },
     body: body ? JSON.stringify(snakeize(body)) : "{}",
   });
-  if (!response.ok) {
-    throw new ApiError(await parseError(response, "PUT", path), response.status);
-  }
-  const payload = await response.json();
-  return camelize(payload?.data ?? payload);
+  return safeJson(response, "PUT", path);
 };
 
 export const WS_BASE = (() => {
