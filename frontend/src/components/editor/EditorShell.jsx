@@ -3,9 +3,19 @@ import { useContentEditor } from "../../hooks/useContentEditor";
 import ReadingPreview from "./preview/ReadingPreview";
 import WorksheetPreview from "./preview/WorksheetPreview";
 import AnswerKeyPreview from "./preview/AnswerKeyPreview";
+import ChoiceJudgementPreview from "./preview/ChoiceJudgementPreview";
+import PhonemeChangePreview from "./preview/PhonemeChangePreview";
+import WordFormationPreview from "./preview/WordFormationPreview";
+import SentenceStructurePreview from "./preview/SentenceStructurePreview";
+import ContentPdfPreview from "./preview/ContentPdfPreview";
 import ReadingForm from "./form/ReadingForm";
 import WorksheetForm from "./form/WorksheetForm";
 import AnswerKeyForm from "./form/AnswerKeyForm";
+import ChoiceJudgementForm from "./form/ChoiceJudgementForm";
+import PhonemeChangeForm from "./form/PhonemeChangeForm";
+import WordFormationForm from "./form/WordFormationForm";
+import SentenceStructureForm from "./form/SentenceStructureForm";
+import ContentPdfForm from "./form/ContentPdfForm";
 import "../../styles/content-editor.css";
 
 const TYPE_LABEL = {
@@ -15,6 +25,12 @@ const TYPE_LABEL = {
   PRO_LOGIC: "추론",
   PRO_ANSWER: "모범답안",
   PRO_TEST: "테스트",
+  CHOICE_JUDGEMENT: "선택지 판별",
+  GRAMMAR_PHONEME_CHANGE: "음운 변동",
+  GRAMMAR_WORD_FORMATION: "단어 형성",
+  GRAMMAR_SENTENCE_STRUCTURE: "문장 짜임",
+  CONTENT_PDF: "내용 숙지",
+  CONTENT_PDF_QUIZ: "내용 숙지",
 };
 
 /* contentType → 에디터 유형 매핑 */
@@ -23,6 +39,11 @@ function resolveEditorType(ct) {
   const up = ct.toUpperCase();
   if (up === "PRO_READING" || up.includes("READING_TRAINING")) return "reading";
   if (up === "PRO_ANSWER" || up.includes("ANSWER_KEY")) return "answer";
+  if (up === "CHOICE_JUDGEMENT" || up.includes("CHOICE_JUDGEMENT")) return "choice";
+  if (up === "GRAMMAR_PHONEME_CHANGE" || up.includes("PHONEME_CHANGE")) return "phoneme";
+  if (up === "GRAMMAR_WORD_FORMATION" || up.includes("WORD_FORMATION")) return "wordformation";
+  if (up === "GRAMMAR_SENTENCE_STRUCTURE" || up.includes("SENTENCE_STRUCTURE")) return "sentence";
+  if (up === "CONTENT_PDF" || up === "CONTENT_PDF_QUIZ" || up.includes("CONTENT_PDF")) return "contentpdf";
   return "worksheet";
 }
 
@@ -97,6 +118,21 @@ export default function EditorShell({ contentId }) {
           {editorType === "answer" && (
             <AnswerKeyPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
           )}
+          {editorType === "choice" && (
+            <ChoiceJudgementPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+          )}
+          {editorType === "phoneme" && (
+            <PhonemeChangePreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+          )}
+          {editorType === "wordformation" && (
+            <WordFormationPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+          )}
+          {editorType === "sentence" && (
+            <SentenceStructurePreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+          )}
+          {editorType === "contentpdf" && (
+            <ContentPdfPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+          )}
         </div>
         <div className="ce-form-pane">
           {editorType === "reading" && (
@@ -107,6 +143,21 @@ export default function EditorShell({ contentId }) {
           )}
           {editorType === "answer" && (
             <AnswerKeyForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+          )}
+          {editorType === "choice" && (
+            <ChoiceJudgementForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+          )}
+          {editorType === "phoneme" && (
+            <PhonemeChangeForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+          )}
+          {editorType === "wordformation" && (
+            <WordFormationForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+          )}
+          {editorType === "sentence" && (
+            <SentenceStructureForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+          )}
+          {editorType === "contentpdf" && (
+            <ContentPdfForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
           )}
         </div>
       </div>

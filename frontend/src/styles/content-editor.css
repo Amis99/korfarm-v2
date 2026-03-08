@@ -409,3 +409,205 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* === 음운 변동 (phoneme_change) === */
+.ce-phoneme-cells {
+  display: flex;
+  gap: 4px;
+  margin: 8px 0;
+  flex-wrap: wrap;
+}
+.ce-phoneme-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 10px;
+  background: #1a2420;
+  border: 1px solid #2a3a2e;
+  border-radius: 6px;
+  min-width: 40px;
+  text-align: center;
+}
+.ce-phoneme-cell.target {
+  border-color: #ff7f2a;
+  background: #2a1a10;
+}
+.ce-phoneme-cell.env {
+  border-color: #4ecb71;
+  background: #102a18;
+}
+.ce-phoneme-cell-no {
+  font-size: 10px;
+  color: #6a7a6e;
+}
+.ce-phoneme-cell-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* === 단어 형성 (word_formation) === */
+.ce-morpheme-chips {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+.ce-morpheme-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: #1a2a20;
+  border: 1px solid #3a5a3e;
+  border-radius: 16px;
+  font-size: 13px;
+  color: #c0e0c4;
+}
+.ce-morpheme-chip .ce-chip-idx {
+  font-size: 10px;
+  color: #6a7a6e;
+  margin-right: 2px;
+}
+.ce-morpheme-chip .ce-chip-del {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0 2px;
+  margin-left: 2px;
+}
+
+/* === 문장 짜임 (sentence_structure) === */
+.ce-token-chips {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+.ce-token-chip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 8px;
+  background: #1a2420;
+  border: 1px solid #2a3a2e;
+  border-radius: 6px;
+  font-size: 13px;
+  min-width: 30px;
+  text-align: center;
+}
+.ce-token-chip-text {
+  font-weight: 500;
+}
+.ce-token-chip-role {
+  font-size: 9px;
+  color: #ff7f2a;
+  margin-top: 2px;
+}
+
+/* === 내용 숙지 PDF (content_pdf) === */
+.ce-pdf-url {
+  margin-bottom: 16px;
+}
+.ce-pdf-url input {
+  width: 100%;
+}
+.ce-page-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.ce-page-tab {
+  padding: 4px 12px;
+  background: #1a2420;
+  border: 1px solid #2a3a2e;
+  border-radius: 6px;
+  color: #a6b6a9;
+  cursor: pointer;
+  font-size: 12px;
+}
+.ce-page-tab:hover { border-color: #ff7f2a55; }
+.ce-page-tab.active {
+  border-color: #ff7f2a;
+  color: #ff7f2a;
+  background: #2a1a10;
+}
+
+/* === 선택지 판별 (choice_judgement) === */
+.ce-proposition-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0 4px 16px;
+  font-size: 12px;
+}
+.ce-ox-toggle {
+  padding: 2px 8px;
+  border: 1px solid #2a3a2e;
+  border-radius: 4px;
+  background: #1a2420;
+  color: #a6b6a9;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 30px;
+  text-align: center;
+}
+.ce-ox-toggle.correct {
+  background: #102a18;
+  border-color: #4ecb71;
+  color: #4ecb71;
+}
+.ce-ox-toggle.wrong {
+  background: #2a1010;
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+.ce-evidence-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.ce-evidence-tag {
+  font-size: 10px;
+  padding: 1px 6px;
+  background: #2a3a2e;
+  border-radius: 3px;
+  color: #a6b6a9;
+}
+
+/* === 공통 미리보기 보조 === */
+.ce-preview-step {
+  padding: 6px 10px;
+  margin: 4px 0;
+  background: #161d18;
+  border-left: 2px solid #2a3a2e;
+  font-size: 12px;
+  color: #a6b6a9;
+}
+.ce-preview-badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #2a3a2e;
+  color: #a6b6a9;
+  margin-right: 4px;
+}
+.ce-preview-badge.correct {
+  background: #102a18;
+  color: #4ecb71;
+}
+
+/* O/X 뱃지 */
+.ce-ox-badge {
+  font-size: 11px;
+  font-weight: 700;
+  margin-right: 4px;
+}
+.ce-ox-badge.o { color: #4ecb71; }
+.ce-ox-badge.x { color: #ff6b6b; }
