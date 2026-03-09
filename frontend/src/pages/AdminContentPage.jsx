@@ -209,9 +209,9 @@ function AdminContentPage() {
         const url = `${base}${content.jsonPath.replace(/^\//, "")}`;
         const res = await fetch(url);
         if (!res.ok) throw new Error(`정적 파일 로드 실패: ${res.status}`);
-        const payload = await res.json();
-        previewData = { contentType: content.type, payload };
-        moduleKey = resolveModuleKey(content.type, content.moduleKey);
+        const fileData = await res.json();
+        previewData = fileData;
+        moduleKey = resolveModuleKey(fileData.contentType, content.moduleKey);
       } else {
         const preview = await apiGet(`/v1/admin/content/${content.id}/preview`);
         const ct = preview.contentType || preview.content_type || "";

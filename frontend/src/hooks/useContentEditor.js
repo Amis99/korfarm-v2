@@ -45,9 +45,10 @@ export function useContentEditor(contentId, staticInfo) {
           const url = `${base}${staticInfo.jsonPath.replace(/^\//, "")}`;
           const res = await fetch(url);
           if (!res.ok) throw new Error(`정적 파일 로드 실패: ${res.status}`);
-          payload = await res.json();
-          ct = staticInfo.contentType || "";
-          title = staticInfo.title || "";
+          const fileData = await res.json();
+          payload = fileData.payload || fileData;
+          ct = fileData.contentType || staticInfo.contentType || "";
+          title = fileData.title || staticInfo.title || "";
           schemaVersion = "1.0";
         } else {
           /* DB 콘텐츠: API 호출 */
