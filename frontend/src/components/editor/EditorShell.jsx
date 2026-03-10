@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { useContentEditor } from "../../hooks/useContentEditor";
 import ReadingPreview from "./preview/ReadingPreview";
 import WorksheetPreview from "./preview/WorksheetPreview";
@@ -31,13 +32,16 @@ const TYPE_LABEL = {
   GRAMMAR_SENTENCE_STRUCTURE: "문장 짜임",
   CONTENT_PDF: "내용 숙지",
   CONTENT_PDF_QUIZ: "내용 숙지",
+  READING_NONFICTION: "비문학 독해",
+  READING_LITERATURE: "문학 독해",
+  DAILY_READING: "일일 독해",
 };
 
 /* contentType → 에디터 유형 매핑 */
 function resolveEditorType(ct) {
   if (!ct) return "worksheet";
   const up = ct.toUpperCase();
-  if (up === "PRO_READING" || up.includes("READING_TRAINING")) return "reading";
+  if (up === "PRO_READING" || up === "DAILY_READING" || up === "READING_NONFICTION" || up === "READING_LITERATURE" || up.includes("READING_TRAINING")) return "reading";
   if (up === "PRO_ANSWER" || up.includes("ANSWER_KEY")) return "answer";
   if (up === "CHOICE_JUDGEMENT" || up.includes("CHOICE_JUDGEMENT")) return "choice";
   if (up === "GRAMMAR_PHONEME_CHANGE" || up.includes("PHONEME_CHANGE")) return "phoneme";
@@ -48,8 +52,10 @@ function resolveEditorType(ct) {
 }
 
 export default function EditorShell({ contentId, staticInfo }) {
+  const navigate = useNavigate();
   const editor = useContentEditor(contentId, staticInfo);
-  const { meta, content, loading, error, saving, dirty, saveMsg, canUndo } = editor;
+  const { meta, content, loading, error, saving, dirty, metaDirty, saveMsg, canUndo, isStatic } = editor;
+  const [metaOpen, setMetaOpen] = useState(false);
 
   /* JSON 모드 */
   const [showJson, setShowJson] = useState(false);
@@ -89,6 +95,12 @@ export default function EditorShell({ contentId, staticInfo }) {
     }
   }, [jsonText, editor]);
 
+  /* 목록으로 돌아가기 */
+  const handleBack = useCallback(() => {
+    if (dirty && !window.confirm("변경사항이 저장되지 않았습니다. 목록으로 이동하시겠습니까?")) return;
+    navigate("/admin/content");
+  }, [dirty, navigate]);
+
   /* 미리보기↔폼 연동: focusPath */
   const [focusPath, setFocusPath] = useState(null);
 
@@ -111,6 +123,9 @@ export default function EditorShell({ contentId, staticInfo }) {
     <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 60px)" }}>
       {/* 툴바 */}
       <div className="ce-toolbar">
+        <button className="ce-back-btn" onClick={handleBack} title="콘텐츠 목록으로">
+          ← 목록
+        </button>
         <div className="ce-toolbar-title">
           <strong>{meta?.title || contentId}</strong>
           <span className="ce-toolbar-badge">{typeLabel}</span>
@@ -150,6 +165,106 @@ export default function EditorShell({ contentId, staticInfo }) {
           {saving ? "저장 중..." : "저장"}
         </button>
       </div>
+
+      {/* 메타데이터 편집 패널 */}
+      {meta && (
+        <div className="ce-meta-panel">
+          <button className="ce-meta-toggle" onClick={() => setMetaOpen((v) => !v)}>
+            <span className={`arrow ${metaOpen ? "open" : ""}`}>▸</span>
+            메타데이터
+            {metaDirty && <span className="ce-meta-dirty-badge">변경됨</span>}
+          </button>
+          {metaOpen && (
+            <div className="ce-meta-grid">
+              <div className="ce-meta-field full-width">
+                <label>제목 (title)</label>
+                <input
+                  type="text"
+                  value={meta.title || ""}
+                  onChange={(e) => editor.updateMeta("title", e.target.value)}
+                  disabled={isStatic}
+                  placeholder="제목"
+                />
+              </div>
+              <div className="ce-meta-field">
+                <label>콘텐츠 유형 (contentType)</label>
+                <div className="ce-meta-readonly">{meta.contentType || "-"}</div>
+              </div>
+              <div className="ce-meta-field">
+                <label>레벨 (levelId)</label>
+                <input
+                  type="text"
+                  value={meta.levelId || ""}
+                  onChange={(e) => editor.updateMeta("levelId", e.target.value)}
+                  disabled={isStatic}
+                  placeholder="level_..."
+                />
+              </div>
+              <div className="ce-meta-field">
+                <label>챕터 (chapterId)</label>
+                <input
+                  type="text"
+                  value={meta.chapterId || ""}
+                  onChange={(e) => editor.updateMeta("chapterId", e.target.value)}
+                  disabled={isStatic}
+                  placeholder="chapter_..."
+                />
+              </div>
+              <div className="ce-meta-field">
+                <label>영역 (area)</label>
+                <input
+                  type="text"
+                  value={meta.area || ""}
+                  onChange={(e) => editor.updateMeta("area", e.target.value)}
+                  disabled={isStatic}
+                  placeholder="예: reading"
+                />
+              </div>
+              <div className="ce-meta-field">
+                <label>세부 영역 (subArea)</label>
+                <input
+                  type="text"
+                  value={meta.subArea || ""}
+                  onChange={(e) => editor.updateMeta("subArea", e.target.value)}
+                  disabled={isStatic}
+                  placeholder="예: nonfiction"
+                />
+              </div>
+              <div className="ce-meta-field">
+                <label>일차 (dayIndex)</label>
+                <input
+                  type="number"
+                  value={meta.dayIndex ?? ""}
+                  onChange={(e) => editor.updateMeta("dayIndex", e.target.value)}
+                  disabled={isStatic}
+                  placeholder="1"
+                  min="0"
+                />
+              </div>
+              <div className="ce-meta-field">
+                <label>모듈 키 (moduleKey)</label>
+                <input
+                  type="text"
+                  value={meta.moduleKey || ""}
+                  onChange={(e) => editor.updateMeta("moduleKey", e.target.value)}
+                  disabled={isStatic}
+                  placeholder="예: background"
+                />
+              </div>
+              <div className="ce-meta-field full-width">
+                <label>비디오 URL (videoUrl)</label>
+                <input
+                  type="text"
+                  value={meta.videoUrl || ""}
+                  onChange={(e) => editor.updateMeta("videoUrl", e.target.value)}
+                  disabled={isStatic}
+                  placeholder="https://..."
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {showJson ? (
         /* JSON 직접 편집 모드 */

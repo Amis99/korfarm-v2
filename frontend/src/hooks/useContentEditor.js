@@ -15,7 +15,8 @@ const MAX_UNDO = 20;
  * @param {object|null} staticInfo - static 콘텐츠 정보 { jsonPath, contentType, title }
  */
 export function useContentEditor(contentId, staticInfo) {
-  const [meta, setMeta] = useState(null); // { contentType, title, ... }
+  const [meta, setMeta] = useState(null); // { contentType, title, levelId, ... }
+  const [originalMeta, setOriginalMeta] = useState(null); // 메타 원본 (dirty 비교용)
   const [content, setContent] = useState(null); // payload 데이터
   const [original, setOriginal] = useState(null); // 원본 (dirty 비교용)
   const [loading, setLoading] = useState(true);
@@ -38,7 +39,7 @@ export function useContentEditor(contentId, staticInfo) {
       setLoading(true);
       setError("");
       try {
-        let ct, payload, title, schemaVersion;
+        let ct, payload, title, schemaVersion, apiRes = null;
         if (staticInfo?.jsonPath) {
           /* static 콘텐츠: 정적 파일에서 직접 로드 */
           const base = import.meta.env.BASE_URL || "/";
@@ -52,14 +53,26 @@ export function useContentEditor(contentId, staticInfo) {
           schemaVersion = "1.0";
         } else {
           /* DB 콘텐츠: API 호출 */
-          const res = await apiGet(`/v1/admin/content/${contentId}/preview`);
-          ct = res.contentType || res.content_type || "";
-          payload = res.content || res.payload || {};
-          title = res.title || "";
-          schemaVersion = res.schemaVersion || res.schema_version || "1.0";
+          apiRes = await apiGet(`/v1/admin/content/${contentId}/preview`);
+          ct = apiRes.contentType || apiRes.content_type || "";
+          payload = apiRes.content || apiRes.payload || {};
+          title = apiRes.title || "";
+          schemaVersion = apiRes.schemaVersion || apiRes.schema_version || "1.0";
         }
         if (cancelled) return;
-        setMeta({ contentType: ct, title, contentId, schemaVersion });
+        let levelId = "", chapterId = "", area = "", subArea = "", dayIndex = "", moduleKey = "", videoUrl = "";
+        if (apiRes) {
+          levelId = apiRes.levelId || apiRes.level_id || "";
+          chapterId = apiRes.chapterId || apiRes.chapter_id || "";
+          area = apiRes.area || "";
+          subArea = apiRes.subArea || apiRes.sub_area || "";
+          dayIndex = apiRes.dayIndex ?? apiRes.day_index ?? "";
+          moduleKey = apiRes.moduleKey || apiRes.module_key || "";
+          videoUrl = apiRes.videoUrl || apiRes.video_url || "";
+        }
+        const metaObj = { contentType: ct, title, contentId, schemaVersion, levelId, chapterId, area, subArea, dayIndex, moduleKey, videoUrl };
+        setMeta(metaObj);
+        setOriginalMeta(JSON.parse(JSON.stringify(metaObj)));
         setContent(payload);
         setOriginal(JSON.parse(JSON.stringify(payload)));
         undoStack.current = [];
@@ -74,7 +87,9 @@ export function useContentEditor(contentId, staticInfo) {
   }, [contentId, staticInfo?.jsonPath]);
 
   /* dirty 판별 */
-  const dirty = content !== null && original !== null && JSON.stringify(content) !== JSON.stringify(original);
+  const contentDirty = content !== null && original !== null && JSON.stringify(content) !== JSON.stringify(original);
+  const metaDirty = meta !== null && originalMeta !== null && JSON.stringify(meta) !== JSON.stringify(originalMeta);
+  const dirty = contentDirty || metaDirty;
 
   /* beforeunload 이탈 방지 */
   useEffect(() => {
@@ -123,6 +138,11 @@ export function useContentEditor(contentId, staticInfo) {
     setContent(newContent);
   }, [pushUndo]);
 
+  /* 메타 필드 업데이트 */
+  const updateMeta = useCallback((field, value) => {
+    setMeta((prev) => prev ? { ...prev, [field]: value } : prev);
+  }, []);
+
   /* undo */
   const undo = useCallback(() => {
     if (undoStack.current.length === 0) return;
@@ -143,12 +163,22 @@ export function useContentEditor(contentId, staticInfo) {
     setSaveMsg("");
     setError("");
     try {
+      /* content에 title 포함 (백엔드가 content["title"]에서 추출) */
+      const payload = meta.title ? { ...content, title: meta.title } : content;
       await apiPut(`/v1/admin/content/${contentId}`, {
         contentType: meta.contentType,
         schemaVersion: meta.schemaVersion || "1.0",
-        content,
+        levelId: meta.levelId || null,
+        chapterId: meta.chapterId || null,
+        area: meta.area || null,
+        subArea: meta.subArea || null,
+        dayIndex: meta.dayIndex !== "" && meta.dayIndex != null ? Number(meta.dayIndex) : null,
+        moduleKey: meta.moduleKey || null,
+        videoUrl: meta.videoUrl || null,
+        content: payload,
       });
       setOriginal(JSON.parse(JSON.stringify(content)));
+      setOriginalMeta(JSON.parse(JSON.stringify(meta)));
       undoStack.current = [];
       setUndoLen(0);
       setSaveMsg("저장 완료");
@@ -165,7 +195,8 @@ export function useContentEditor(contentId, staticInfo) {
     if (!original) return;
     pushUndo();
     setContent(JSON.parse(JSON.stringify(original)));
-  }, [original, pushUndo]);
+    if (originalMeta) setMeta(JSON.parse(JSON.stringify(originalMeta)));
+  }, [original, originalMeta, pushUndo]);
 
   return {
     meta,
@@ -173,10 +204,13 @@ export function useContentEditor(contentId, staticInfo) {
     loading,
     saving,
     dirty,
+    metaDirty,
     error,
     saveMsg,
     canUndo: undoLen > 0,
+    isStatic,
     updateField,
+    updateMeta,
     addItem,
     removeItem,
     reorderItems,
