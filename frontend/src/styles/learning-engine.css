@@ -1265,7 +1265,6 @@ mark.highlight {
   gap: 6px;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .phoneme-row-label {
@@ -1286,8 +1285,8 @@ mark.highlight {
 }
 
 .phoneme-cell {
-  min-width: 44px;
-  padding: 10px 8px;
+  width: 44px;
+  padding: 10px 0;
   border-radius: 10px;
   background: transparent;
   border: 1.5px solid rgba(75, 61, 54, 0.35);
@@ -1295,26 +1294,20 @@ mark.highlight {
   font-weight: 700;
   font-size: 16px;
   transition: border-color 0.15s;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .phoneme-cell.comma {
-  border: none;
+  border-color: rgba(75, 61, 54, 0.15);
+  border-style: dashed;
   background: none;
   color: #6b5b53;
-  min-width: 20px;
-  padding: 10px 2px;
-}
-
-.phoneme-cell.empty {
-  border-style: dashed;
-  color: transparent;
-  min-width: 44px;
 }
 
 .phoneme-cell.comma-slot {
   border-style: dashed;
   border-color: rgba(75, 61, 54, 0.2);
-  min-width: 44px;
 }
 
 .phoneme-cell.clickable {

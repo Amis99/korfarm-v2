@@ -192,31 +192,25 @@ function PhonemeChangeModule({ content }) {
           <div className="phoneme-row phoneme-row-dest">
             <span className="phoneme-row-label">도착</span>
             {destCells[wordIndex]?.map((cell) => {
-              const isCommaSlot =
-                word.cells.find((c) => c.cellNo === cell.cellNo)?.text === ",";
+              const srcCell = word.cells.find((c) => c.cellNo === cell.cellNo);
+              const isCommaSlot = srcCell?.text === ",";
+              const isEmpty = isCommaSlot && cell.text === "";
               const isTarget =
                 phase === "CLICK" && step?.targetCellNo === cell.cellNo;
               const isEnv =
                 phase === "CLICK" && step?.envCellNos?.includes(cell.cellNo);
-              const isEmpty = cell.text === "" && isCommaSlot;
               return (
                 <div
                   key={`d-${cell.cellNo}`}
                   className={[
                     "phoneme-cell",
-                    "clickable",
+                    isEmpty ? "comma" : "clickable",
                     isTarget ? "target" : "",
                     isEnv ? "env" : "",
-                    isEmpty ? "empty" : "",
-                    isCommaSlot && cell.text === "" ? "comma-slot" : "",
                   ]
                     .filter(Boolean)
                     .join(" ")}
-                  onClick={() =>
-                    !isCommaSlot || cell.text !== ""
-                      ? handleCellClick(cell.cellNo)
-                      : handleCellClick(cell.cellNo)
-                  }
+                  onClick={() => !isEmpty && handleCellClick(cell.cellNo)}
                 >
                   {cell.text}
                 </div>
