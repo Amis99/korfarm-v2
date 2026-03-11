@@ -1,13 +1,33 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FARM_LIST, getLearningItemsByFarm } from "../data/learning/learningCatalog";
+import {
+  FARM_LIST,
+  getLearningItemsByFarm,
+  LEVELS,
+  LEVEL_LABELS,
+  profileLevelToUpper,
+} from "../data/learning/learningCatalog";
 import { apiGet } from "../utils/api";
 import "../styles/farm-mode.css";
 
 function FarmModePage() {
-  // DB 카탈로그에서 농장별 추가 콘텐츠 수 조회
   const [dbCounts, setDbCounts] = useState({});
+  const [selectedLevel, setSelectedLevel] = useState("");
+  const [profileLoaded, setProfileLoaded] = useState(false);
 
+  // 프로필에서 레벨 가져오기
+  useEffect(() => {
+    apiGet("/v1/auth/me")
+      .then((profile) => {
+        const raw = profile.level_id || profile.levelId || "";
+        const upper = profileLevelToUpper(raw);
+        if (LEVELS.includes(upper)) setSelectedLevel(upper);
+        setProfileLoaded(true);
+      })
+      .catch(() => setProfileLoaded(true));
+  }, []);
+
+  // DB 카탈로그에서 농장별 콘텐츠 수 조회
   useEffect(() => {
     apiGet("/v1/learning/catalog")
       .then((data) => {
@@ -19,6 +39,13 @@ function FarmModePage() {
       })
       .catch(() => {});
   }, []);
+
+  // 레벨 필터된 정적 카운트 계산
+  const getFilteredCount = (farmId) => {
+    const items = getLearningItemsByFarm(farmId);
+    if (!selectedLevel) return items.length;
+    return items.filter((item) => item.targetLevel === selectedLevel).length;
+  };
 
   return (
     <div className="farm">
@@ -39,16 +66,34 @@ function FarmModePage() {
         <p>영역별로 분류된 학습 콘텐츠를 탐색합니다</p>
       </div>
 
-      {/* 3×3 그리드 */}
+      {/* 레벨 선택 */}
+      <div className="farm-level-selector">
+        <label className="farm-level-label">레벨</label>
+        <select
+          className="farm-filter-select"
+          value={selectedLevel}
+          onChange={(e) => setSelectedLevel(e.target.value)}
+        >
+          <option value="">전체 레벨</option>
+          {LEVELS.map((lv) => (
+            <option key={lv} value={lv}>
+              {LEVEL_LABELS[lv] || lv}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* 3x3 그리드 */}
       <div className="farm-grid">
         {FARM_LIST.map((farm) => {
-          const staticCount = getLearningItemsByFarm(farm.id).length;
+          const staticCount = getFilteredCount(farm.id);
           const dbCount = dbCounts[farm.id] || 0;
-          const count = staticCount + dbCount;
+          const count = selectedLevel ? staticCount : staticCount + dbCount;
+          const levelParam = selectedLevel ? `?level=${selectedLevel}` : "";
           return (
             <Link
               key={farm.id}
-              to={`/farm-mode/${farm.id}`}
+              to={`/farm-mode/${farm.id}${levelParam}`}
               className="farm-card"
             >
               <div className="farm-card-icon">{farm.emoji}</div>

@@ -1,3 +1,25 @@
+export const LEVELS = [
+  "FREGE_1", "FREGE_2", "FREGE_3",
+  "SAUSSURE_1", "SAUSSURE_2", "SAUSSURE_3",
+  "RUSSELL_1", "RUSSELL_2", "RUSSELL_3",
+  "WITTGENSTEIN_1", "WITTGENSTEIN_2", "WITTGENSTEIN_3",
+];
+
+export const LEVEL_LABELS = {
+  FREGE_1: "프레게 1", FREGE_2: "프레게 2", FREGE_3: "프레게 3",
+  SAUSSURE_1: "소쉬르 1", SAUSSURE_2: "소쉬르 2", SAUSSURE_3: "소쉬르 3",
+  RUSSELL_1: "러셀 1", RUSSELL_2: "러셀 2", RUSSELL_3: "러셀 3",
+  WITTGENSTEIN_1: "비트겐슈타인 1", WITTGENSTEIN_2: "비트겐슈타인 2", WITTGENSTEIN_3: "비트겐슈타인 3",
+};
+
+/** profile.level_id (예: "russell1") → UPPER_SNAKE (예: "RUSSELL_1") 변환 */
+export function profileLevelToUpper(levelId) {
+  if (!levelId) return "";
+  const m = levelId.match(/^([a-z]+)(\d+)$/i);
+  if (!m) return levelId.toUpperCase();
+  return `${m[1].toUpperCase()}_${m[2]}`;
+}
+
 export const SUB_AREA_LABELS = {
   BASIC: "기본",
   DICTIONARY: "사전",
@@ -116,6 +138,21 @@ export const LEARNING_CATALOG = [
     moduleKey: "phoneme_change",
     jsonPath: "/farm/grammar/grammar_phoneme_change.json",
   },
+  ...Array.from({ length: 37 }, (_, i) => {
+    const nn = String(i + 1).padStart(2, "0");
+    return {
+      id: `grammar-phoneme-change-${nn}`,
+      category: "문법 연습",
+      title: `음운 변동 분석 ${nn}`,
+      description: "음운 변동을 고르고 칸을 수정",
+      contentType: "GRAMMAR_PHONEME_CHANGE",
+      targetLevel: "RUSSELL_1",
+      subArea: "PHONEME_CHANGE",
+      contentId: `phoneme-change-${nn}`,
+      moduleKey: "phoneme_change",
+      jsonPath: `/farm/grammar/grammar_phoneme_change_${nn}.json`,
+    };
+  }),
   {
     id: "grammar-pos-quiz",
     category: "문법 연습",

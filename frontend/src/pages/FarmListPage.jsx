@@ -1,25 +1,18 @@
 import { useState, useMemo, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { getFarmById, getLearningItemsByFarm, SUB_AREA_LABELS } from "../data/learning/learningCatalog";
+import { Link, useParams, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  getFarmById,
+  getLearningItemsByFarm,
+  SUB_AREA_LABELS,
+  LEVELS,
+  LEVEL_LABELS,
+  profileLevelToUpper,
+} from "../data/learning/learningCatalog";
 import { apiGet, apiPost } from "../utils/api";
 import VideoModal from "../components/VideoModal";
 import "../styles/farm-mode.css";
 import "../styles/start.css";
 import "../styles/video-modal.css";
-
-const LEVELS = [
-  "FREGE_1", "FREGE_2", "FREGE_3",
-  "SAUSSURE_1", "SAUSSURE_2", "SAUSSURE_3",
-  "RUSSELL_1", "RUSSELL_2", "RUSSELL_3",
-  "WITTGENSTEIN_1", "WITTGENSTEIN_2", "WITTGENSTEIN_3",
-];
-
-const LEVEL_LABELS = {
-  FREGE_1: "프레게 1", FREGE_2: "프레게 2", FREGE_3: "프레게 3",
-  SAUSSURE_1: "소쉬르 1", SAUSSURE_2: "소쉬르 2", SAUSSURE_3: "소쉬르 3",
-  RUSSELL_1: "러셀 1", RUSSELL_2: "러셀 2", RUSSELL_3: "러셀 3",
-  WITTGENSTEIN_1: "비트겐슈타인 1", WITTGENSTEIN_2: "비트겐슈타인 2", WITTGENSTEIN_3: "비트겐슈타인 3",
-};
 
 const STATUS_LABELS = {
   NONE: "학습전",
@@ -38,9 +31,13 @@ const PER_PAGE = 20;
 function FarmListPage() {
   const { farmId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const farm = getFarmById(farmId);
 
-  const [levelFilter, setLevelFilter] = useState("");
+  // URL query param 또는 프로필 레벨로 초기값 설정
+  const urlLevel = searchParams.get("level") || "";
+  const [levelFilter, setLevelFilter] = useState(urlLevel);
+  const [profileLevelApplied, setProfileLevelApplied] = useState(Boolean(urlLevel));
   const [areaFilter, setAreaFilter] = useState("");
   const [sort, setSort] = useState("title");
   const [page, setPage] = useState(1);
@@ -50,6 +47,19 @@ function FarmListPage() {
   const [pageProgressLoading, setPageProgressLoading] = useState(false);
   const [pageProgressError, setPageProgressError] = useState(false);
   const [videoUrl, setVideoUrl] = useState(null);
+
+  // URL에 level이 없으면 프로필 레벨을 기본값으로 설정
+  useEffect(() => {
+    if (profileLevelApplied) return;
+    apiGet("/v1/auth/me")
+      .then((profile) => {
+        const raw = profile.level_id || profile.levelId || "";
+        const upper = profileLevelToUpper(raw);
+        if (LEVELS.includes(upper)) setLevelFilter(upper);
+        setProfileLevelApplied(true);
+      })
+      .catch(() => setProfileLevelApplied(true));
+  }, [profileLevelApplied]);
 
   const staticItems = useMemo(() => getLearningItemsByFarm(farmId), [farmId]);
   const [dbItems, setDbItems] = useState([]);
