@@ -1,0 +1,343 @@
+/* ── 학생 학습 계획표 ── */
+
+.sp-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px 100px;
+}
+.sp-header {
+  margin-bottom: 20px;
+}
+.sp-header h1 {
+  font-size: 1.3rem;
+  color: #3e2c1e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sp-plan-select {
+  margin-top: 8px;
+}
+.sp-plan-select select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.85rem;
+  background: #fff;
+}
+.sp-exam-scope {
+  margin-top: 8px;
+  padding: 10px 14px;
+  background: #fef3e5;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #6d4c41;
+  border-left: 3px solid #ff7f2a;
+}
+
+/* 탭 */
+.sp-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 20px;
+}
+.sp-tab {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  color: #999;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+.sp-tab:hover { color: #666; }
+.sp-tab.active { color: #f06c24; border-bottom-color: #f06c24; }
+
+/* 매트릭스 (공용) */
+.sp-matrix-wrap {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+.sp-matrix {
+  min-width: 500px;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.sp-matrix th,
+.sp-matrix td {
+  padding: 10px 8px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.sp-matrix thead th {
+  background: #f5f0eb;
+  color: #6d4c41;
+  font-weight: 700;
+  font-size: 0.78rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.sp-matrix thead th:first-child {
+  text-align: left;
+  min-width: 120px;
+}
+.sp-matrix tbody th {
+  text-align: left;
+  background: #faf7f4;
+  color: #5d4037;
+  font-weight: 600;
+}
+.sp-matrix td {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sp-matrix td:hover {
+  background: rgba(255,127,42,0.06);
+}
+
+/* 매트릭스 - 관리자 테마 (다크) */
+.sp-matrix.admin-theme th,
+.sp-matrix.admin-theme td {
+  border-color: rgba(255,255,255,0.06);
+}
+.sp-matrix.admin-theme thead th {
+  background: rgba(255,255,255,0.05);
+  color: #8a7468;
+}
+.sp-matrix.admin-theme tbody th {
+  background: rgba(255,255,255,0.03);
+  color: #ccc;
+}
+.sp-matrix.admin-theme td {
+  color: #d4c8be;
+}
+.sp-matrix.admin-theme td:hover {
+  background: rgba(255,127,42,0.1);
+}
+
+/* 셀 상태 뱃지 */
+.cell-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.cell-badge.pending { background: rgba(158,158,158,0.15); color: #999; }
+.cell-badge.submitted { background: rgba(33,150,243,0.15); color: #64b5f6; }
+.cell-badge.approved { background: rgba(76,175,80,0.2); color: #66bb6a; }
+.cell-badge.rejected { background: rgba(244,67,54,0.15); color: #ef5350; }
+.cell-badge.grading { background: rgba(255,152,0,0.15); color: #ffa726; }
+.cell-badge.passed { background: rgba(76,175,80,0.2); color: #66bb6a; }
+.cell-badge.retry { background: rgba(255,152,0,0.2); color: #ffa726; }
+.cell-badge.failed { background: rgba(244,67,54,0.2); color: #ef5350; }
+
+/* 거부 셀 강조 */
+.sp-matrix td.cell-rejected {
+  border: 2px solid rgba(244,67,54,0.4);
+  position: relative;
+}
+
+/* 캘린더 */
+.sp-calendar {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #eee;
+}
+.sp-calendar.admin-theme {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.06);
+}
+.sp-cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.sp-cal-header h3 {
+  font-size: 1rem;
+  color: #3e2c1e;
+}
+.sp-calendar.admin-theme .sp-cal-header h3 { color: #e8ddd4; }
+.sp-cal-nav {
+  display: flex;
+  gap: 8px;
+}
+.sp-cal-nav button {
+  background: none;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  color: inherit;
+}
+.sp-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.sp-cal-day-name {
+  text-align: center;
+  font-size: 0.72rem;
+  color: #999;
+  padding: 4px;
+  font-weight: 600;
+}
+.sp-cal-day {
+  min-height: 60px;
+  padding: 4px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  border: 1px solid transparent;
+}
+.sp-cal-day.in-range { background: rgba(255,127,42,0.04); }
+.sp-cal-day.today { border-color: #ff7f2a; }
+.sp-cal-day.other-month { opacity: 0.3; }
+.sp-cal-day-num {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.sp-cal-event {
+  display: block;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 0.68rem;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: rgba(255,127,42,0.12);
+  color: #e06820;
+}
+.sp-calendar.admin-theme .sp-cal-event {
+  background: rgba(255,127,42,0.15);
+  color: #ff9f5a;
+}
+
+/* 제출 페이지 */
+.sp-submit-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 16px 100px;
+}
+.sp-submit-info {
+  padding: 14px;
+  background: #fef3e5;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+  color: #6d4c41;
+}
+.sp-reject-reason {
+  padding: 12px;
+  background: rgba(244,67,54,0.08);
+  border-left: 3px solid #ef5350;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 0.82rem;
+  color: #c62828;
+}
+.sp-file-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.sp-file-thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f5f0eb;
+}
+.sp-upload-area {
+  border: 2px dashed #ddd;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  color: #999;
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.sp-upload-area:hover { border-color: #f06c24; }
+.sp-upload-area .material-symbols-outlined { font-size: 36px; display: block; margin-bottom: 8px; }
+.sp-submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #ff7f2a, #e06820);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sp-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 안내 모달 */
+.sp-reminder-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.sp-reminder-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+.sp-reminder-card h2 {
+  font-size: 1.1rem;
+  color: #3e2c1e;
+  margin-bottom: 12px;
+}
+.sp-reminder-card p {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 6px;
+}
+.sp-reminder-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+}
+.sp-reminder-actions button {
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+.sp-reminder-go {
+  background: linear-gradient(135deg, #ff7f2a, #e06820);
+  color: #fff;
+}
+.sp-reminder-dismiss {
+  background: #f5f0eb;
+  color: #8a7468;
+}

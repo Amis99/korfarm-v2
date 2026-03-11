@@ -1,0 +1,235 @@
+package com.korfarm.api.studyplan
+
+import com.korfarm.api.common.ApiException
+import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.org.OrgMembershipRepository
+import com.korfarm.api.security.AdminGuard
+import com.korfarm.api.security.SecurityUtils
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
+
+@RestController
+@RequestMapping("/v1/admin/study-plans")
+class AdminStudyPlanController(
+    private val service: StudyPlanService,
+    private val orgMembershipRepo: OrgMembershipRepository
+) {
+    private fun requireAdmin() {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+    }
+
+    private fun currentUser(): String =
+        SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+
+    private fun currentOrgId(): String {
+        val userId = currentUser()
+        return orgMembershipRepo.findByUserIdAndStatus(userId, "active")
+            .firstOrNull()?.orgId
+            ?: throw ApiException("FORBIDDEN", "no org membership", HttpStatus.FORBIDDEN)
+    }
+
+    // ── 계획표 CRUD ──
+
+    @PostMapping
+    fun create(@RequestBody request: CreateStudyPlanRequest): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        val plan = service.createPlan(currentOrgId(), currentUser(), request)
+        return ApiResponse(success = true, data = mapOf("planId" to plan.id))
+    }
+
+    @GetMapping
+    fun list(): ApiResponse<List<StudyPlanSummaryResponse>> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.listPlans(currentUser()))
+    }
+
+    @GetMapping("/{planId}")
+    fun detail(@PathVariable planId: String): ApiResponse<StudyPlanDetailResponse> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.getPlanDetail(planId))
+    }
+
+    @PatchMapping("/{planId}")
+    fun update(
+        @PathVariable planId: String,
+        @RequestBody request: UpdateStudyPlanRequest
+    ): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        service.updatePlan(planId, request)
+        return ApiResponse(success = true, data = mapOf("planId" to planId))
+    }
+
+    @PostMapping("/{planId}/archive")
+    fun archive(@PathVariable planId: String): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        service.archivePlan(planId)
+        return ApiResponse(success = true, data = mapOf("planId" to planId))
+    }
+
+    // ── 범위(행) 관리 ──
+
+    @PostMapping("/{planId}/scopes")
+    fun addScope(
+        @PathVariable planId: String,
+        @RequestBody request: AddScopeRequest
+    ): ApiResponse<ScopeResponse> {
+        requireAdmin()
+        val scope = service.addScope(planId, request)
+        return ApiResponse(success = true, data = scope.toResponse())
+    }
+
+    @PatchMapping("/{planId}/scopes/{scopeId}")
+    fun updateScope(
+        @PathVariable planId: String,
+        @PathVariable scopeId: String,
+        @RequestBody request: UpdateScopeRequest
+    ): ApiResponse<ScopeResponse> {
+        requireAdmin()
+        val scope = service.updateScope(planId, scopeId, request)
+        return ApiResponse(success = true, data = scope.toResponse())
+    }
+
+    @DeleteMapping("/{planId}/scopes/{scopeId}")
+    fun deleteScope(
+        @PathVariable planId: String,
+        @PathVariable scopeId: String
+    ): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        service.deleteScope(planId, scopeId)
+        return ApiResponse(success = true, data = mapOf("scopeId" to scopeId))
+    }
+
+    @PutMapping("/{planId}/scopes/reorder")
+    fun reorderScopes(
+        @PathVariable planId: String,
+        @RequestBody request: ReorderRequest
+    ): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        service.reorderScopes(planId, request.ids)
+        return ApiResponse(success = true, data = mapOf("planId" to planId))
+    }
+
+    // ── 에셋(열) 관리 ──
+
+    @PostMapping("/{planId}/assets")
+    fun addAsset(
+        @PathVariable planId: String,
+        @RequestBody request: AddAssetRequest
+    ): ApiResponse<AssetResponse> {
+        requireAdmin()
+        val asset = service.addAsset(planId, request)
+        return ApiResponse(success = true, data = asset.toResponse())
+    }
+
+    @PatchMapping("/{planId}/assets/{assetId}")
+    fun updateAsset(
+        @PathVariable planId: String,
+        @PathVariable assetId: String,
+        @RequestBody request: UpdateAssetRequest
+    ): ApiResponse<AssetResponse> {
+        requireAdmin()
+        val asset = service.updateAsset(planId, assetId, request)
+        return ApiResponse(success = true, data = asset.toResponse())
+    }
+
+    @DeleteMapping("/{planId}/assets/{assetId}")
+    fun deleteAsset(
+        @PathVariable planId: String,
+        @PathVariable assetId: String
+    ): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        service.deleteAsset(planId, assetId)
+        return ApiResponse(success = true, data = mapOf("assetId" to assetId))
+    }
+
+    @PutMapping("/{planId}/assets/reorder")
+    fun reorderAssets(
+        @PathVariable planId: String,
+        @RequestBody request: ReorderRequest
+    ): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        service.reorderAssets(planId, request.ids)
+        return ApiResponse(success = true, data = mapOf("planId" to planId))
+    }
+
+    // ── 학생 + 매트릭스 ──
+
+    @GetMapping("/{planId}/students")
+    fun students(@PathVariable planId: String): ApiResponse<List<StudentProgressResponse>> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.getStudentsWithProgress(planId))
+    }
+
+    @GetMapping("/{planId}/matrix")
+    fun matrix(
+        @PathVariable planId: String,
+        @RequestParam userId: String
+    ): ApiResponse<MatrixResponse> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.getMatrix(planId, userId))
+    }
+
+    // ── 셀 관리 ──
+
+    @PatchMapping("/cells/{cellId}/review")
+    fun reviewCell(
+        @PathVariable cellId: String,
+        @RequestBody request: ReviewCellRequest
+    ): ApiResponse<CellResponse> {
+        requireAdmin()
+        val cell = service.reviewCell(cellId, currentUser(), request)
+        return ApiResponse(success = true, data = cell.toResponse())
+    }
+
+    @PatchMapping("/cells/{cellId}/grade")
+    fun gradeCell(
+        @PathVariable cellId: String,
+        @RequestBody request: GradeCellRequest
+    ): ApiResponse<CellResponse> {
+        requireAdmin()
+        val cell = service.gradeCell(cellId, currentUser(), request)
+        return ApiResponse(success = true, data = cell.toResponse())
+    }
+
+    @GetMapping("/cells/{cellId}/files")
+    fun cellFiles(@PathVariable cellId: String): ApiResponse<List<CellFileResponse>> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.getCellFiles(cellId))
+    }
+
+    // ── 캘린더 일정 ──
+
+    @PostMapping("/{planId}/schedules")
+    fun createSchedule(
+        @PathVariable planId: String,
+        @RequestBody request: CreateScheduleRequest
+    ): ApiResponse<ScheduleResponse> {
+        requireAdmin()
+        val schedule = service.createSchedule(planId, request)
+        return ApiResponse(success = true, data = schedule.toResponse())
+    }
+
+    @PatchMapping("/schedules/{scheduleId}")
+    fun updateSchedule(
+        @PathVariable scheduleId: String,
+        @RequestBody request: UpdateScheduleRequest
+    ): ApiResponse<ScheduleResponse> {
+        requireAdmin()
+        val schedule = service.updateSchedule(scheduleId, request)
+        return ApiResponse(success = true, data = schedule.toResponse())
+    }
+
+    @DeleteMapping("/schedules/{scheduleId}")
+    fun deleteSchedule(@PathVariable scheduleId: String): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        service.deleteSchedule(scheduleId)
+        return ApiResponse(success = true, data = mapOf("scheduleId" to scheduleId))
+    }
+
+    @GetMapping("/{planId}/calendar")
+    fun calendar(@PathVariable planId: String): ApiResponse<List<ScheduleResponse>> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.getCalendar(planId))
+    }
+}

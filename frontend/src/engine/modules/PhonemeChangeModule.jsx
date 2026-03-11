@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 
@@ -25,6 +25,19 @@ function PhonemeChangeModule({ content }) {
   const steps = word?.steps || [];
   const step = steps[stepIndex];
 
+  // 현재 단어의 모든 PHONEME_RESULT 타겟 셀 번호 수집
+  // (변동이 일어나는 셀만 클릭 가능하도록)
+  const allTargetCellNos = useMemo(() => {
+    if (!word) return new Set();
+    const set = new Set();
+    for (const s of word.steps || []) {
+      if (s.questionType === "PHONEME_RESULT") {
+        set.add(s.targetCellNo);
+      }
+    }
+    return set;
+  }, [word]);
+
   // 셀 클릭 핸들러 (CLICK phase에서만 동작)
   const handleCellClick = (cellNo) => {
     if (phase !== "CLICK" || !step) return;
@@ -39,6 +52,19 @@ function PhonemeChangeModule({ content }) {
     }
   };
 
+  // 셀 업데이트 헬퍼 (단일/다중 모두 처리)
+  const applyCellUpdates = (updates) => {
+    setDestCells((prev) =>
+      prev.map((cellList, idx) => {
+        if (idx !== wordIndex) return cellList;
+        return cellList.map((c) => {
+          const match = updates.find((u) => u.cellNo === c.cellNo);
+          return match ? { ...c, text: match.newText } : c;
+        });
+      })
+    );
+  };
+
   // 음운 선택 핸들러 (PHONEME_MODAL)
   const handlePhonemeAnswer = (choiceId) => {
     if (!step || step.questionType !== "PHONEME_RESULT") return;
@@ -48,17 +74,13 @@ function PhonemeChangeModule({ content }) {
     showFeedback(isCorrect ? "correct" : "wrong");
 
     if (isCorrect) {
-      // 셀 업데이트
-      if (step.onCorrect?.applyCellText) {
-        const { cellNo, newText } = step.onCorrect.applyCellText;
-        setDestCells((prev) =>
-          prev.map((cellList, idx) => {
-            if (idx !== wordIndex) return cellList;
-            return cellList.map((c) =>
-              c.cellNo === cellNo ? { ...c, text: newText } : c
-            );
-          })
-        );
+      // 다중 셀 업데이트 (축약: applyCellTexts)
+      if (step.onCorrect?.applyCellTexts) {
+        applyCellUpdates(step.onCorrect.applyCellTexts);
+      }
+      // 단일 셀 업데이트 (기존: applyCellText)
+      else if (step.onCorrect?.applyCellText) {
+        applyCellUpdates([step.onCorrect.applyCellText]);
       }
       // 딜레이 후 다음 step (RULE_EXPLANATION)으로 전환
       advanceTimerRef.current = setTimeout(() => {
@@ -130,9 +152,9 @@ function PhonemeChangeModule({ content }) {
   // 모달용 현재 step 데이터
   const modalStep =
     phase === "PHONEME_MODAL"
-      ? steps[stepIndex - 0] // stepIndex는 아직 PHONEME step
+      ? steps[stepIndex]
       : phase === "RULE_MODAL"
-        ? steps[stepIndex] // stepIndex는 이미 RULE step
+        ? steps[stepIndex]
         : null;
 
   // phase에 따른 모달 핸들러
@@ -187,24 +209,27 @@ function PhonemeChangeModule({ content }) {
             ))}
           </div>
 
-          {/* 도착점 (D행) — 클릭 가능 */}
+          {/* 도착점 (D행) — 변동 대상 셀만 클릭 가능 */}
           <div className="phoneme-row phoneme-row-dest">
             <span className="phoneme-row-label">도착</span>
             {destCells[wordIndex]?.map((cell) => {
               const srcCell = word.cells.find((c) => c.cellNo === cell.cellNo);
               const isCommaSlot = srcCell?.text === ",";
               const isEmpty = isCommaSlot && cell.text === "";
+              const isTarget = allTargetCellNos.has(cell.cellNo);
+              const isDeleted = cell.text === "∅";
               return (
                 <div
                   key={`d-${cell.cellNo}`}
                   className={[
                     "phoneme-cell",
-                    "clickable",
+                    isTarget ? "clickable" : "",
                     isEmpty ? "empty-slot" : "",
+                    isDeleted ? "deleted" : "",
                   ]
                     .filter(Boolean)
                     .join(" ")}
-                  onClick={() => handleCellClick(cell.cellNo)}
+                  onClick={isTarget ? () => handleCellClick(cell.cellNo) : undefined}
                 >
                   {cell.text}
                 </div>

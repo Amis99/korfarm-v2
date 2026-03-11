@@ -248,76 +248,6 @@
             }
           },
           {
-            "stepId": "w2_s1_ph",
-            "targetCellNo": 5,
-            "envCellNos": [],
-            "questionType": "PHONEME_RESULT",
-            "prompt": "이 칸에 들어갈 음운을 고르세요.",
-            "choices": [
-              {
-                "id": "A",
-                "text": "ㄴ"
-              },
-              {
-                "id": "B",
-                "text": "ㅃ"
-              },
-              {
-                "id": "C",
-                "text": "ㅆ"
-              },
-              {
-                "id": "D",
-                "text": "ㅅ"
-              }
-            ],
-            "answerId": "D",
-            "onCorrect": {
-              "deltaSec": 20,
-              "applyCellText": {
-                "cellNo": 5,
-                "newText": "ㅅ"
-              }
-            },
-            "onWrong": {
-              "deltaSec": -40,
-              "retry": true
-            }
-          },
-          {
-            "stepId": "w2_s1_rule",
-            "targetCellNo": 5,
-            "envCellNos": [],
-            "questionType": "RULE_EXPLANATION",
-            "prompt": "이 음운 변동의 종류를 고르세요.",
-            "choices": [
-              {
-                "id": "A",
-                "text": "구개음화"
-              },
-              {
-                "id": "B",
-                "text": "ㄴ첨가"
-              },
-              {
-                "id": "C",
-                "text": "음절 끝소리 규칙"
-              },
-              {
-                "id": "D",
-                "text": "유음의 비음화"
-              }
-            ],
-            "answerId": "C",
-            "onCorrect": {
-              "deltaSec": 0
-            },
-            "onWrong": {
-              "deltaSec": -40,
-              "retry": true
-            }
-          },
-          {
             "stepId": "w2_s2_ph",
             "targetCellNo": 5,
             "envCellNos": [
@@ -515,80 +445,6 @@
         "steps": [
           {
             "stepId": "w3_s1_ph",
-            "targetCellNo": 4,
-            "envCellNos": [
-              6
-            ],
-            "questionType": "PHONEME_RESULT",
-            "prompt": "이 칸에 들어갈 음운을 고르세요.",
-            "choices": [
-              {
-                "id": "A",
-                "text": ","
-              },
-              {
-                "id": "B",
-                "text": "ㅃ"
-              },
-              {
-                "id": "C",
-                "text": "ㅈ"
-              },
-              {
-                "id": "D",
-                "text": "ㄱ"
-              }
-            ],
-            "answerId": "A",
-            "onCorrect": {
-              "deltaSec": 20,
-              "applyCellText": {
-                "cellNo": 4,
-                "newText": ","
-              }
-            },
-            "onWrong": {
-              "deltaSec": -40,
-              "retry": true
-            }
-          },
-          {
-            "stepId": "w3_s1_rule",
-            "targetCellNo": 4,
-            "envCellNos": [
-              6
-            ],
-            "questionType": "RULE_EXPLANATION",
-            "prompt": "이 음운 변동의 종류를 고르세요.",
-            "choices": [
-              {
-                "id": "A",
-                "text": "ㅡ탈락"
-              },
-              {
-                "id": "B",
-                "text": "유음화"
-              },
-              {
-                "id": "C",
-                "text": "거센소리되기"
-              },
-              {
-                "id": "D",
-                "text": "유음의 비음화"
-              }
-            ],
-            "answerId": "C",
-            "onCorrect": {
-              "deltaSec": 0
-            },
-            "onWrong": {
-              "deltaSec": -40,
-              "retry": true
-            }
-          },
-          {
-            "stepId": "w3_s1_ph",
             "targetCellNo": 5,
             "envCellNos": [
               6
@@ -616,10 +472,20 @@
             "answerId": "B",
             "onCorrect": {
               "deltaSec": 20,
-              "applyCellText": {
-                "cellNo": 5,
-                "newText": "ㅍ"
-              }
+              "applyCellTexts": [
+                {
+                  "cellNo": 5,
+                  "newText": "ㅍ"
+                },
+                {
+                  "cellNo": 4,
+                  "newText": "∅"
+                },
+                {
+                  "cellNo": 6,
+                  "newText": "∅"
+                }
+              ]
             },
             "onWrong": {
               "deltaSec": -40,
@@ -653,76 +519,6 @@
               }
             ],
             "answerId": "D",
-            "onCorrect": {
-              "deltaSec": 0
-            },
-            "onWrong": {
-              "deltaSec": -40,
-              "retry": true
-            }
-          },
-          {
-            "stepId": "w3_s1_ph",
-            "targetCellNo": 6,
-            "envCellNos": [],
-            "questionType": "PHONEME_RESULT",
-            "prompt": "이 칸에 들어갈 음운을 고르세요.",
-            "choices": [
-              {
-                "id": "A",
-                "text": ","
-              },
-              {
-                "id": "B",
-                "text": "ㅎ"
-              },
-              {
-                "id": "C",
-                "text": "ㅂ"
-              },
-              {
-                "id": "D",
-                "text": "ㅊ"
-              }
-            ],
-            "answerId": "A",
-            "onCorrect": {
-              "deltaSec": 20,
-              "applyCellText": {
-                "cellNo": 6,
-                "newText": ","
-              }
-            },
-            "onWrong": {
-              "deltaSec": -40,
-              "retry": true
-            }
-          },
-          {
-            "stepId": "w3_s1_rule",
-            "targetCellNo": 6,
-            "envCellNos": [],
-            "questionType": "RULE_EXPLANATION",
-            "prompt": "이 음운 변동의 종류를 고르세요.",
-            "choices": [
-              {
-                "id": "A",
-                "text": "거센소리되기"
-              },
-              {
-                "id": "B",
-                "text": "반모음화"
-              },
-              {
-                "id": "C",
-                "text": "ㅎ탈락"
-              },
-              {
-                "id": "D",
-                "text": "된소리되기"
-              }
-            ],
-            "answerId": "A",
             "onCorrect": {
               "deltaSec": 0
             },
@@ -934,80 +730,6 @@
               "deltaSec": -40,
               "retry": true
             }
-          },
-          {
-            "stepId": "w4_s2_ph",
-            "targetCellNo": 8,
-            "envCellNos": [
-              7
-            ],
-            "questionType": "PHONEME_RESULT",
-            "prompt": "이 칸에 들어갈 음운을 고르세요.",
-            "choices": [
-              {
-                "id": "A",
-                "text": "ㄷ"
-              },
-              {
-                "id": "B",
-                "text": "ㅂ"
-              },
-              {
-                "id": "C",
-                "text": "ㅈ"
-              },
-              {
-                "id": "D",
-                "text": "ㄴ"
-              }
-            ],
-            "answerId": "D",
-            "onCorrect": {
-              "deltaSec": 20,
-              "applyCellText": {
-                "cellNo": 8,
-                "newText": "ㄴ"
-              }
-            },
-            "onWrong": {
-              "deltaSec": -40,
-              "retry": true
-            }
-          },
-          {
-            "stepId": "w4_s2_rule",
-            "targetCellNo": 8,
-            "envCellNos": [
-              7
-            ],
-            "questionType": "RULE_EXPLANATION",
-            "prompt": "이 음운 변동의 종류를 고르세요.",
-            "choices": [
-              {
-                "id": "A",
-                "text": "유음의 비음화"
-              },
-              {
-                "id": "B",
-                "text": "ㅎ탈락"
-              },
-              {
-                "id": "C",
-                "text": "자음군 단순화"
-              },
-              {
-                "id": "D",
-                "text": "비음화"
-              }
-            ],
-            "answerId": "D",
-            "onCorrect": {
-              "deltaSec": 0
-            },
-            "onWrong": {
-              "deltaSec": -40,
-              "retry": true
-            }
           }
         ]
       },
@@ -1078,7 +800,7 @@
               },
               {
                 "id": "D",
-                "text": ","
+                "text": "∅"
               }
             ],
             "answerId": "D",
@@ -1086,7 +808,7 @@
               "deltaSec": 20,
               "applyCellText": {
                 "cellNo": 6,
-                "newText": ","
+                "newText": "∅"
               }
             },
             "onWrong": {
@@ -1119,76 +841,6 @@
               }
             ],
             "answerId": "A",
-            "onCorrect": {
-              "deltaSec": 0
-            },
-            "onWrong": {
-              "deltaSec": -40,
-              "retry": true
-            }
-          },
-          {
-            "stepId": "w5_s1_ph",
-            "targetCellNo": 9,
-            "envCellNos": [],
-            "questionType": "PHONEME_RESULT",
-            "prompt": "이 칸에 들어갈 음운을 고르세요.",
-            "choices": [
-              {
-                "id": "A",
-                "text": "ㄷ"
-              },
-              {
-                "id": "B",
-                "text": "ㅌ"
-              },
-              {
-                "id": "C",
-                "text": "ㄸ"
-              },
-              {
-                "id": "D",
-                "text": "ㅂ"
-              }
-            ],
-            "answerId": "A",
-            "onCorrect": {
-              "deltaSec": 20,
-              "applyCellText": {
-                "cellNo": 9,
-                "newText": "ㄷ"
-              }
-            },
-            "onWrong": {
-              "deltaSec": -40,
-              "retry": true
-            }
-          },
-          {
-            "stepId": "w5_s1_rule",
-            "targetCellNo": 9,
-            "envCellNos": [],
-            "questionType": "RULE_EXPLANATION",
-            "prompt": "이 음운 변동의 종류를 고르세요.",
-            "choices": [
-              {
-                "id": "A",
-                "text": "된소리되기"
-              },
-              {
-                "id": "B",
-                "text": "반모음화"
-              },
-              {
-                "id": "C",
-                "text": "비음화"
-              },
-              {
-                "id": "D",
-                "text": "자음군 단순화"
-              }
-            ],
-            "answerId": "D",
             "onCorrect": {
               "deltaSec": 0
             },

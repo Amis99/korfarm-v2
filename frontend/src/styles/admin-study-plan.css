@@ -1,0 +1,403 @@
+/* ── 관리자 학습 계획표 ── */
+
+.asp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.asp-header h1 {
+  font-size: 1.4rem;
+  color: #e8ddd4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.asp-create-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff7f2a, #e06820);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.asp-create-btn:hover {
+  filter: brightness(1.1);
+}
+
+/* 목록 테이블 */
+.asp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.asp-table th,
+.asp-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.asp-table th {
+  color: #8a7468;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+.asp-table td {
+  color: #d4c8be;
+}
+.asp-table tbody tr {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.asp-table tbody tr:hover {
+  background: rgba(255,127,42,0.07);
+}
+.asp-status {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.asp-status.active { background: rgba(76,175,80,0.2); color: #81c784; }
+.asp-status.archived { background: rgba(158,158,158,0.2); color: #aaa; }
+
+/* 상세 페이지 레이아웃 */
+.aspd-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  min-height: 60vh;
+}
+@media (max-width: 768px) {
+  .aspd-layout { grid-template-columns: 1fr; }
+}
+.aspd-sidebar {
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.aspd-sidebar h3 {
+  font-size: 0.85rem;
+  color: #8a7468;
+  margin-bottom: 12px;
+}
+.aspd-student-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.aspd-student-item {
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.15s;
+}
+.aspd-student-item:hover { background: rgba(255,255,255,0.04); }
+.aspd-student-item.selected { background: rgba(255,127,42,0.15); color: #ff9f5a; }
+.aspd-progress-bar {
+  width: 60px;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.aspd-progress-fill {
+  height: 100%;
+  background: #4caf50;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.aspd-main {
+  min-width: 0;
+}
+
+/* 탭 */
+.aspd-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.aspd-tab {
+  padding: 10px 18px;
+  background: none;
+  border: none;
+  color: #8a7468;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+.aspd-tab:hover { color: #d4c8be; }
+.aspd-tab.active { color: #ff9f5a; border-bottom-color: #ff7f2a; }
+
+/* 생성 폼 모달 */
+.asp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.asp-modal {
+  background: #1a2220;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 640px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.asp-modal h2 {
+  font-size: 1.2rem;
+  color: #e8ddd4;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.asp-modal-steps {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.asp-step {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.08);
+}
+.asp-step.done { background: #4caf50; }
+.asp-step.current { background: #ff7f2a; }
+
+.asp-form-group {
+  margin-bottom: 16px;
+}
+.asp-form-group label {
+  display: block;
+  font-size: 0.8rem;
+  color: #8a7468;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.asp-input,
+.asp-textarea,
+.asp-select {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: #e8ddd4;
+  font-size: 0.85rem;
+  box-sizing: border-box;
+}
+.asp-input:focus,
+.asp-textarea:focus,
+.asp-select:focus {
+  outline: none;
+  border-color: rgba(255,127,42,0.5);
+}
+.asp-textarea { min-height: 80px; resize: vertical; }
+.asp-date-row {
+  display: flex;
+  gap: 12px;
+}
+.asp-date-row > div { flex: 1; }
+
+.asp-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.asp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(255,127,42,0.12);
+  color: #ff9f5a;
+  border-radius: 12px;
+  font-size: 0.78rem;
+}
+.asp-chip button {
+  background: none;
+  border: none;
+  color: #ff9f5a;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+}
+
+.asp-add-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.asp-add-row .asp-input { flex: 1; }
+.asp-add-btn {
+  padding: 8px 16px;
+  background: rgba(255,127,42,0.15);
+  border: 1px solid rgba(255,127,42,0.3);
+  border-radius: 8px;
+  color: #ff9f5a;
+  font-size: 0.82rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.asp-form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+.asp-btn-prev,
+.asp-btn-next,
+.asp-btn-submit {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+.asp-btn-prev {
+  background: rgba(255,255,255,0.06);
+  color: #ccc;
+}
+.asp-btn-next {
+  background: rgba(255,127,42,0.2);
+  color: #ff9f5a;
+}
+.asp-btn-submit {
+  background: linear-gradient(135deg, #ff7f2a, #e06820);
+  color: #fff;
+}
+
+/* 셀 모달 */
+.asp-cell-modal {
+  max-width: 520px;
+}
+.asp-cell-files {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+.asp-cell-file-thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+}
+.asp-cell-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+.asp-cell-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+.asp-btn-approve { background: rgba(76,175,80,0.2); color: #81c784; }
+.asp-btn-reject { background: rgba(244,67,54,0.2); color: #ef9a9a; }
+.asp-btn-pass { background: rgba(76,175,80,0.2); color: #81c784; }
+.asp-btn-retry { background: rgba(255,152,0,0.2); color: #ffcc80; }
+.asp-btn-fail { background: rgba(244,67,54,0.2); color: #ef9a9a; }
+
+/* 설정 탭 */
+.aspd-settings-section {
+  margin-bottom: 24px;
+}
+.aspd-settings-section h3 {
+  font-size: 0.9rem;
+  color: #8a7468;
+  margin-bottom: 12px;
+}
+.aspd-edit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.aspd-edit-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+}
+.aspd-edit-item span { flex: 1; color: #ccc; font-size: 0.85rem; }
+.aspd-edit-item button {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.aspd-edit-item button:hover { color: #ef9a9a; }
+
+/* 빈 상태 */
+.asp-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #8a7468;
+}
+.asp-empty .material-symbols-outlined {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+/* 에러/로딩 */
+.asp-error {
+  color: #ef9a9a;
+  background: rgba(244,67,54,0.1);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  margin-bottom: 12px;
+}
+.asp-loading {
+  text-align: center;
+  padding: 40px;
+  color: #8a7468;
+}

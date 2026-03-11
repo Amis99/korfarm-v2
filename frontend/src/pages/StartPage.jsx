@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, TOKEN_KEY } from "../utils/api";
 import HarvestCraftModal from "../components/HarvestCraftModal";
+import StudyPlanReminderModal from "../components/StudyPlanReminderModal";
 import { calcSeasonScore, FORMULA_TEXT } from "../utils/seasonScore";
 import "../styles/start.css";
 
@@ -666,6 +667,12 @@ function StartPage() {
               <h3>역량 진단</h3>
               <p>10대 역량 정밀 측정</p>
             </div>
+            <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/study-plan" : "/subscription")}>
+              <span className="material-symbols-outlined">event_note</span>
+              <h3>시험 공부</h3>
+              <p>학습 계획표 실행</p>
+              {!hasSub && <span className="start-lock-badge">구독 필요</span>}
+            </div>
           </div>
         </section>
 
@@ -810,6 +817,8 @@ function StartPage() {
           if (data?.inventory) setInventory(data.inventory);
         }}
       />
+
+      {hasSub && <StudyPlanReminderModal />}
 
       <nav className="start-nav">
         <Link className="active" to="/start">

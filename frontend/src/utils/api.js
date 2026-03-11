@@ -99,6 +99,18 @@ export const apiDelete = async (path) => {
   return safeJson(response, "DELETE", path);
 };
 
+export const apiPatch = async (path, body) => {
+  const response = await fetch(buildUrl(path), {
+    method: "PATCH",
+    headers: {
+      ...authHeaders(),
+      "Content-Type": "application/json",
+    },
+    body: body ? JSON.stringify(snakeize(body)) : "{}",
+  });
+  return safeJson(response, "PATCH", path);
+};
+
 export const apiPut = async (path, body) => {
   const response = await fetch(buildUrl(path), {
     method: "PUT",

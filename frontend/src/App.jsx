@@ -88,6 +88,10 @@ const AdminWisdomDetailPage = lazy(() => import("./pages/AdminWisdomDetailPage")
 const AdminTestPage = lazy(() => import("./pages/AdminTestPage"));
 const AdminTestDetailPage = lazy(() => import("./pages/AdminTestDetailPage"));
 const AdminProPage = lazy(() => import("./pages/AdminProPage"));
+const AdminStudyPlansPage = lazy(() => import("./pages/AdminStudyPlansPage"));
+const AdminStudyPlanDetailPage = lazy(() => import("./pages/AdminStudyPlanDetailPage"));
+const StudyPlanPage = lazy(() => import("./pages/StudyPlanPage"));
+const StudyPlanSubmitPage = lazy(() => import("./pages/StudyPlanSubmitPage"));
 // AdminDuelQuestionsPage는 AdminDuelPage 내부에서 직접 import됨
 const AdminMembershipApprovalPage = lazy(() => import("./pages/AdminMembershipApprovalPage"));
 
@@ -204,6 +208,8 @@ function App() {
           <Route path="/diagnostic/v2" element={P(<DiagnosticV2Page />)} />
           <Route path="/diagnostic/v2/test/:sessionId" element={P(<DiagnosticTestPage />)} />
           <Route path="/diagnostic/v2/report/:sessionId" element={P(<DiagnosticReportPage />)} />
+          <Route path="/study-plan" element={P(<StudyPlanPage />)} />
+          <Route path="/study-plan/submit/:cellId" element={P(<StudyPlanSubmitPage />)} />
 
           {/* 관리자 전용 페이지 */}
           <Route path="/admin" element={A(<AdminPage />)} />
@@ -231,6 +237,8 @@ function App() {
           <Route path="/admin/tests" element={A(<AdminTestPage />)} />
           <Route path="/admin/tests/:testId" element={A(<AdminTestDetailPage />)} />
           <Route path="/admin/pro" element={A(<AdminProPage />)} />
+          <Route path="/admin/study-plans" element={A(<AdminStudyPlansPage />)} />
+          <Route path="/admin/study-plans/:planId" element={A(<AdminStudyPlanDetailPage />)} />
           <Route path="/admin/duel/questions" element={<Navigate to="/admin/duel?tab=questions" replace />} />
           <Route path="/ops" element={A(<OpsStation />)} />
 

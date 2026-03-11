@@ -14,6 +14,7 @@ const NAV_ITEMS = [
   { to: "/admin/assignments", icon: "task", label: "과제/피드백" },
   { to: "/admin/wisdom", icon: "auto_stories", label: "지식과 지혜", roles: ["HQ_ADMIN"] },
   { to: "/admin/tests", icon: "assignment", label: "테스트 관리" },
+  { to: "/admin/study-plans", icon: "event_note", label: "학습 계획표" },
   { to: "/admin/pro", icon: "workspace_premium", label: "프로 모드", roles: ["HQ_ADMIN"] },
   { to: "/admin/duel", icon: "swords", label: "대결 관리" },
   { to: "/admin/shop", icon: "storefront", label: "상점 관리" },
