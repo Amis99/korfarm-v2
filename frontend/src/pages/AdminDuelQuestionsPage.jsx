@@ -26,7 +26,7 @@ const IMPORT_EXAMPLE = `[
   {
     "serverId": "saussure",
     "questionType": "QUIZ",
-    "category": "어휘",
+    "category": "VOCAB",
     "stem": "다음 중 밑줄 친 단어의 뜻으로 알맞은 것은?",
     "passage": null,
     "choices": [
