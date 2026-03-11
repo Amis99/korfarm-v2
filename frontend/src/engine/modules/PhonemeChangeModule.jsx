@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
-import useHighlightAnchor from "../shared/useHighlightAnchor";
 
 function PhonemeChangeModule({ content }) {
   const { adjustTime, recordAnswer, finish, start, status } = useEngine();
@@ -19,17 +18,12 @@ function PhonemeChangeModule({ content }) {
   );
   const [lastResult, setLastResult] = useState(null);
   const resultTimerRef = useRef(null);
+  const advanceTimerRef = useRef(null);
   const moduleRef = useRef(null);
 
   const word = words[wordIndex];
   const steps = word?.steps || [];
   const step = steps[stepIndex];
-
-  const anchorRect = useHighlightAnchor(
-    moduleRef,
-    ".phoneme-row-dest .phoneme-cell.target",
-    [wordIndex, stepIndex, phase]
-  );
 
   // 셀 클릭 핸들러 (CLICK phase에서만 동작)
   const handleCellClick = (cellNo) => {
@@ -66,9 +60,11 @@ function PhonemeChangeModule({ content }) {
           })
         );
       }
-      // 다음 step (RULE_EXPLANATION)으로 전환
-      setStepIndex((prev) => prev + 1);
-      setPhase("RULE_MODAL");
+      // 딜레이 후 다음 step (RULE_EXPLANATION)으로 전환
+      advanceTimerRef.current = setTimeout(() => {
+        setStepIndex((prev) => prev + 1);
+        setPhase("RULE_MODAL");
+      }, 600);
     }
     // 오답: retry (phase 유지)
   };
@@ -88,17 +84,19 @@ function PhonemeChangeModule({ content }) {
     showFeedback(isCorrect ? "correct" : "wrong");
 
     if (isCorrect) {
-      const nextIdx = stepIndex + 1;
-      if (nextIdx < steps.length) {
-        setStepIndex(nextIdx);
-        setPhase("CLICK");
-      } else if (wordIndex < words.length - 1) {
-        setWordIndex((prev) => prev + 1);
-        setStepIndex(0);
-        setPhase("CLICK");
-      } else {
-        finish(true);
-      }
+      advanceTimerRef.current = setTimeout(() => {
+        const nextIdx = stepIndex + 1;
+        if (nextIdx < steps.length) {
+          setStepIndex(nextIdx);
+          setPhase("CLICK");
+        } else if (wordIndex < words.length - 1) {
+          setWordIndex((prev) => prev + 1);
+          setStepIndex(0);
+          setPhase("CLICK");
+        } else {
+          finish(true);
+        }
+      }, 600);
     }
     // 오답: retry (phase 유지)
   };
@@ -124,6 +122,7 @@ function PhonemeChangeModule({ content }) {
   useEffect(
     () => () => {
       if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
+      if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
     },
     []
   );
@@ -195,22 +194,17 @@ function PhonemeChangeModule({ content }) {
               const srcCell = word.cells.find((c) => c.cellNo === cell.cellNo);
               const isCommaSlot = srcCell?.text === ",";
               const isEmpty = isCommaSlot && cell.text === "";
-              const isTarget =
-                phase === "CLICK" && step?.targetCellNo === cell.cellNo;
-              const isEnv =
-                phase === "CLICK" && step?.envCellNos?.includes(cell.cellNo);
               return (
                 <div
                   key={`d-${cell.cellNo}`}
                   className={[
                     "phoneme-cell",
-                    isEmpty ? "comma" : "clickable",
-                    isTarget ? "target" : "",
-                    isEnv ? "env" : "",
+                    "clickable",
+                    isEmpty ? "empty-slot" : "",
                   ]
                     .filter(Boolean)
                     .join(" ")}
-                  onClick={() => !isEmpty && handleCellClick(cell.cellNo)}
+                  onClick={() => handleCellClick(cell.cellNo)}
                 >
                   {cell.text}
                 </div>
@@ -232,7 +226,6 @@ function PhonemeChangeModule({ content }) {
               prompt={modalStep.prompt}
               choices={modalStep.choices || []}
               onSelect={modalHandler}
-              anchorRect={anchorRect}
               mark={phase !== "CLICK" ? lastResult : null}
               shuffleKey={modalStep.stepId}
             />
