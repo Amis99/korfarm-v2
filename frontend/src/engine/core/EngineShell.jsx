@@ -266,7 +266,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       worksheet_quiz: worksheetTotal,
       reading_training: readingTrainingTotal,
       choice_judgement: payload.questions?.length,
-      phoneme_change: payload.items?.length,
+      phoneme_change: (payload.words || []).reduce((sum, w) => sum + (w.steps?.length || 0), 0),
       word_formation: payload.items?.length,
       sentence_structure: payload.sentences?.length,
       content_pdf: (payload.pages || []).reduce((sum, page) =>

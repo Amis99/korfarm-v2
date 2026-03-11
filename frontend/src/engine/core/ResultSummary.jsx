@@ -35,7 +35,7 @@ function ResultSummary({ summary, onExit }) {
   }, [summary]);
   const summaryAccuracy = summary.accuracy ?? accuracy;
   const solved = summary.progressSolved ?? summary.total ?? 0;
-  const total = summary.progressTotal ?? summary.total ?? 0;
+  const total = summary.progressTotal || summary.total || 0;
   const earnedSeed = summary.earnedSeed ?? 0;
   const timeLimit = summary.timeLimit ?? 0;
   const progressPercent = total ? Math.min(100, Math.round((solved / total) * 100)) : 0;
