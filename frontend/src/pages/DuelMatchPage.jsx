@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { WS_BASE } from "../utils/api";
+import RichText from "../utils/RichText";
 import "../styles/duel.css";
 
 function DuelMatchPage() {
@@ -269,10 +270,10 @@ function DuelMatchPage() {
           </span>
 
           {currentQuestion.passage && currentQuestion.passage !== "null" && (
-            <div className="duel-passage">{currentQuestion.passage}</div>
+            <div className="duel-passage"><RichText>{currentQuestion.passage}</RichText></div>
           )}
 
-          <div className="duel-stem">{currentQuestion.stem}</div>
+          <div className="duel-stem"><RichText>{currentQuestion.stem}</RichText></div>
 
           <div className="duel-choices">
             {currentQuestion.choices?.map((choice) => {
@@ -298,7 +299,7 @@ function DuelMatchPage() {
                   onClick={() => handleAnswer(choice.id)}
                   disabled={!!myAnswer || phase !== "answering"}
                 >
-                  {choice.text}
+                  <RichText>{choice.text}</RichText>
                 </button>
               );
             })}

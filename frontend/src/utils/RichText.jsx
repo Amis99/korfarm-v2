@@ -16,8 +16,14 @@ function RichText({ children }) {
     if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
       return <strong key={i}>{part.slice(2, -2)}</strong>;
     }
+    // 평문 내 \n을 <br/>로 변환
+    if (part.includes('\n')) {
+      return part.split('\n').flatMap((seg, j) =>
+        j === 0 ? [seg] : [<br key={`${i}-br-${j}`} />, seg]
+      );
+    }
     return part;
-  });
+  }).flat();
 }
 
 export default RichText;

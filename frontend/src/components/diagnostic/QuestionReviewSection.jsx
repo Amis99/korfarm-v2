@@ -1,4 +1,5 @@
 import { useState } from "react";
+import RichText from "../../utils/RichText";
 
 function QuestionReviewSection({ reviews }) {
   const [openIdx, setOpenIdx] = useState(null);
@@ -26,7 +27,7 @@ function QuestionReviewSection({ reviews }) {
             </div>
             {openIdx === i && (
               <div className="qr-body">
-                <div className="qr-stem-full">{r.stem}</div>
+                <div className="qr-stem-full"><RichText>{r.stem}</RichText></div>
                 <div className="qr-choices">
                   {r.choices.map((c) => (
                     <div
@@ -34,7 +35,7 @@ function QuestionReviewSection({ reviews }) {
                       className={`qr-choice ${c.isCorrect ? "correct" : ""} ${c.isSelected ? "selected" : ""} ${c.isSelected && !c.isCorrect ? "wrong" : ""}`}
                     >
                       <span className="qr-choice-id">{c.choiceId}</span>
-                      <span className="qr-choice-text">{c.text}</span>
+                      <span className="qr-choice-text"><RichText>{c.text}</RichText></span>
                       {c.isCorrect && <span className="qr-tag correct-tag">정답</span>}
                       {c.isSelected && !c.isCorrect && <span className="qr-tag wrong-tag">내 선택</span>}
                       {c.isSelected && c.isCorrect && <span className="qr-tag correct-tag">내 선택 (정답)</span>}
