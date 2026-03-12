@@ -88,7 +88,11 @@ const GAMIFICATION = [
 const FAQ_ITEMS = [
   {
     q: "어떤 학년에 적합한가요?",
-    a: "초등 1학년부터 중등 3학년까지 총 12레벨로 구성되어 있습니다. 진단 테스트를 통해 학년과 무관하게 실력에 맞는 레벨에 배정됩니다.",
+    a: "초등 1학년부터 고등 3학년까지 총 12레벨로 구성되어 있습니다. 진단 테스트를 통해 학년과 무관하게 실력에 맞는 레벨에 배정됩니다.",
+  },
+  {
+    q: "12레벨은 어떻게 구성되나요?",
+    a: "초등 1~6학년(레벨 1~6), 중등 1~3학년(레벨 7~9), 고등 1~3학년(레벨 10~12)으로 구성됩니다. 각 레벨은 해당 학년 수준에 맞는 어휘·문법·독해·논리 콘텐츠를 포함하며, 진단 결과에 따라 학년과 다른 레벨에 배정될 수도 있습니다.",
   },
   {
     q: "어떤 기능이 있나요?",
@@ -108,7 +112,148 @@ const FAQ_ITEMS = [
   },
 ];
 
-/* ── 컴포넌트 ── */
+/* ── 기능 미리보기 컴포넌트 ── */
+
+const FARM_AREAS = [
+  { name: "어휘", color: "#4caf50" },
+  { name: "문법", color: "#2196f3" },
+  { name: "독해", color: "#9c27b0" },
+  { name: "쓰기", color: "#ff9800" },
+  { name: "논리", color: "#f44336" },
+  { name: "화법", color: "#00bcd4" },
+  { name: "문학", color: "#e91e63" },
+  { name: "매체", color: "#607d8b" },
+  { name: "음운", color: "#795548" },
+];
+
+function FeaturePreview({ index }) {
+  if (index === 0) {
+    return (
+      <div className="landing-mockup">
+        <div className="mockup-chrome">
+          <span /><span /><span />
+          <div className="mockup-url">프로 모드</div>
+        </div>
+        <div className="mockup-body">
+          {[
+            { ch: "1장 · 어휘의 세계", pct: 75 },
+            { ch: "2장 · 문법 탐구", pct: 40 },
+            { ch: "3장 · 독해력 향상", pct: 10 },
+          ].map((item, i) => (
+            <div className="mockup-card" key={i}>
+              <div className="mockup-card-title">{item.ch}</div>
+              <div className="mockup-modules-row">
+                {["어휘", "배경", "논리", "테스트", "정답"].map((m) => (
+                  <span key={m} className="mockup-mod-badge">{m}</span>
+                ))}
+              </div>
+              <div className="mockup-progress-bar">
+                <div style={{ width: `${item.pct}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (index === 1) {
+    return (
+      <div className="landing-mockup">
+        <div className="mockup-chrome">
+          <span /><span /><span />
+          <div className="mockup-url">농장별 모드</div>
+        </div>
+        <div className="mockup-body">
+          <div className="mockup-farm-grid">
+            {FARM_AREAS.map((area) => (
+              <div key={area.name} className="mockup-farm-cell" style={{ borderColor: area.color }}>
+                <div className="mockup-farm-dot" style={{ background: area.color }} />
+                <span>{area.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (index === 2) {
+    const cx = 100, cy = 95, r = 70;
+    const angles = [0, 1, 2, 3, 4].map((i) => (Math.PI * 2 * i) / 5 - Math.PI / 2);
+    const labels = ["어휘", "문법", "독해", "논리", "서술"];
+    const values = [0.85, 0.7, 0.9, 0.6, 0.75];
+    const outerPts = angles.map((a) => `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`).join(" ");
+    const dataPts = angles.map((a, i) => `${cx + r * values[i] * Math.cos(a)},${cy + r * values[i] * Math.sin(a)}`).join(" ");
+    return (
+      <div className="landing-mockup">
+        <div className="mockup-chrome">
+          <span /><span /><span />
+          <div className="mockup-url">통합 성적표</div>
+        </div>
+        <div className="mockup-body mockup-report-body">
+          <svg viewBox="0 0 200 200" className="mockup-radar">
+            <polygon points={outerPts} fill="none" stroke="#e2eadf" strokeWidth="1.5" />
+            <polygon points={dataPts} fill="rgba(255,143,43,0.2)" stroke="#ff8f2b" strokeWidth="2" />
+            {angles.map((a, i) => (
+              <text key={i} x={cx + (r + 16) * Math.cos(a)} y={cy + (r + 16) * Math.sin(a)} textAnchor="middle" dominantBaseline="middle" fontSize="11" fill="#555" fontWeight="600">
+                {labels[i]}
+              </text>
+            ))}
+          </svg>
+          <div className="mockup-score-row">
+            <div className="mockup-score-item">
+              <span className="mockup-score-num">87</span>
+              <span className="mockup-score-label">종합 점수</span>
+            </div>
+            <div className="mockup-score-item">
+              <span className="mockup-score-num">Lv.8</span>
+              <span className="mockup-score-label">현재 레벨</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (index === 3) {
+    const students = [
+      { name: "김민준", lv: "Lv.6", score: 92 },
+      { name: "이서연", lv: "Lv.5", score: 88 },
+      { name: "박지호", lv: "Lv.7", score: 95 },
+      { name: "최수아", lv: "Lv.4", score: 79 },
+    ];
+    return (
+      <div className="landing-mockup">
+        <div className="mockup-chrome">
+          <span /><span /><span />
+          <div className="mockup-url">기관 관리</div>
+        </div>
+        <div className="mockup-body">
+          <div className="mockup-stats-row">
+            <div className="mockup-mini-stat"><strong>24</strong><span>학생 수</span></div>
+            <div className="mockup-mini-stat"><strong>3</strong><span>반</span></div>
+            <div className="mockup-mini-stat"><strong>87%</strong><span>과제 완료율</span></div>
+          </div>
+          <div className="mockup-table">
+            <div className="mockup-table-header">
+              <span>이름</span><span>레벨</span><span>점수</span>
+            </div>
+            {students.map((s) => (
+              <div className="mockup-table-row" key={s.name}>
+                <span>{s.name}</span><span>{s.lv}</span><span>{s.score}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
+/* ── 메인 컴포넌트 ── */
 
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -176,7 +321,7 @@ function LandingPage() {
         <div className="landing-wrap">
           <div className="landing-hero-content">
             <span className="landing-pill landing-display">
-              초등~중등 국어 전문 학습 플랫폼
+              초등~고등 국어 전문 학습 플랫폼
             </span>
             <h1 className="landing-display landing-hero-title">
               <span className="landing-hero-title-line">스스로 완성하는 국어 근육,</span>
@@ -221,7 +366,7 @@ function LandingPage() {
         </div>
       </div>
 
-      {/* ── 학습 흐름 (프로그램 대체) ── */}
+      {/* ── 학습 흐름 ── */}
       <section className="landing-section" id="program">
         <div className="landing-wrap">
           <div className="landing-section-title">
@@ -279,7 +424,7 @@ function LandingPage() {
                   </div>
                 </div>
                 <div className="landing-deep-visual">
-                  <span className="material-symbols-outlined">{feat.icon}</span>
+                  <FeaturePreview index={idx} />
                 </div>
               </div>
             ))}
@@ -287,11 +432,11 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* ── 게임화 시스템 ── */}
+      {/* ── 보상 시스템 ── */}
       <section className="landing-section landing-gamification">
         <div className="landing-wrap">
           <div className="landing-section-title">
-            <h2 className="landing-display">게임처럼 즐기는 국어 학습</h2>
+            <h2 className="landing-display">꾸준함을 만드는 보상 시스템</h2>
             <p>보상과 경쟁으로 학습 동기를 끌어올립니다.</p>
           </div>
           <div className="landing-game-grid">
@@ -326,7 +471,7 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* ── CTA + 문의 폼 ── */}
+      {/* ── CTA + 문의 ── */}
       <section className="landing-cta" id="contact">
         <div className="landing-cta-inner landing-wrap">
           <div className="landing-cta-text">
@@ -337,29 +482,26 @@ function LandingPage() {
               <span className="material-symbols-outlined">arrow_forward</span>
             </Link>
           </div>
-          <form
-            className="landing-contact-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const fd = new FormData(e.target);
-              const body = [...fd.entries()].map(([k, v]) => `${k}: ${v}`).join("\n");
-              window.location.href = `mailto:contact@korfarm.com?subject=국어농장 문의&body=${encodeURIComponent(body)}`;
-            }}
-          >
-            <h3>문의하기</h3>
-            <p className="landing-contact-phone">전화 문의: 010-8950-0655</p>
-            <input name="이름" placeholder="이름" required />
-            <input name="연락처" placeholder="연락처 (전화번호 또는 이메일)" required />
-            <select name="유형" required>
-              <option value="">문의 유형 선택</option>
-              <option value="학원/기관 도입">학원/기관 도입</option>
-              <option value="개인 학습 문의">개인 학습 문의</option>
-              <option value="제휴/협력">제휴/협력</option>
-              <option value="기타">기타</option>
-            </select>
-            <textarea name="메시지" placeholder="문의 내용을 입력하세요" rows="4" />
-            <button type="submit">문의 보내기</button>
-          </form>
+          <div className="landing-contact-info">
+            <h3>문의 안내</h3>
+            <p>도입 상담이나 궁금한 점은 아래로 연락주세요.</p>
+            <div className="landing-contact-methods">
+              <a href="tel:010-8950-0655" className="landing-contact-method">
+                <span className="material-symbols-outlined">call</span>
+                <div>
+                  <strong>전화 문의</strong>
+                  <span>010-8950-0655</span>
+                </div>
+              </a>
+              <a href="mailto:contact@korfarm.com" className="landing-contact-method">
+                <span className="material-symbols-outlined">mail</span>
+                <div>
+                  <strong>이메일 문의</strong>
+                  <span>contact@korfarm.com</span>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
