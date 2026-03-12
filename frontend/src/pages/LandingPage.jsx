@@ -686,7 +686,7 @@ function LandingPage() {
         </div>
         <div className="landing-wrap landing-footer-bottom">
           <p>&copy; 2026 국어농장. All rights reserved.</p>
-          <p className="landing-footer-biz">상호: (주)디셈버글로리 | 대표: 김대표 | 사업자등록번호: 226-86-00815 | 통신판매업신고: 제2021-부산해운대-0501호</p>
+          <p className="landing-footer-biz">상호: (주)디셈버글로리 | 대표: 박종찬 | 사업자등록번호: 226-86-00815 | 통신판매업신고: 제2021-부산해운대-0501호</p>
           <p className="landing-footer-biz">주소: 부산광역시 해운대구 세실로27번길 21 원재프라자 8층 | 연락처: 010-8950-0655</p>
         </div>
       </footer>
