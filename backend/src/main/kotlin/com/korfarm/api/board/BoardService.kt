@@ -135,6 +135,24 @@ class BoardService(
     }
 
     @Transactional(readOnly = true)
+    fun verifyPostAccess(postId: String, userId: String?, isAdmin: Boolean) {
+        val post = postRepository.findById(postId).orElseThrow {
+            ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
+        }
+        if (post.status == "deleted") {
+            throw ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
+        }
+        val board = getBoard(post.boardId)
+        // inquiry 게시판: 본인 글만 접근 가능 (관리자는 전체)
+        if (board.boardType == "inquiry" && !isAdmin && post.userId != userId) {
+            throw ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
+        }
+        if (!isAdmin && post.status != "active" && post.userId != userId) {
+            throw ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
+        }
+    }
+
+    @Transactional(readOnly = true)
     fun listComments(postId: String): List<CommentView> {
         val post = postRepository.findById(postId).orElseThrow {
             ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)

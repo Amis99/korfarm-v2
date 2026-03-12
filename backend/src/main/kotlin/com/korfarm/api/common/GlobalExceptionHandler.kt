@@ -37,7 +37,7 @@ class GlobalExceptionHandler {
         logger.error("Unhandled error", ex)
         val body = ApiResponse<Any>(
             success = false,
-            error = ApiError(code = "INTERNAL_ERROR", message = ex.message ?: "error")
+            error = ApiError(code = "INTERNAL_ERROR", message = "서버 오류가 발생했습니다")
         )
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body)
     }

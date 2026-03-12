@@ -2,6 +2,7 @@ package com.korfarm.api.org
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.contracts.AdminClassCreateRequest
 import com.korfarm.api.contracts.AdminClassStudentsRequest
 import com.korfarm.api.contracts.AdminClassUpdateRequest
@@ -33,6 +34,46 @@ class OrgService(
     private val subscriptionRepository: SubscriptionRepository,
     private val passwordEncoder: PasswordEncoder
 ) {
+    // ORG_ADMIN인 경우 대상 학생이 자기 기관 소속인지 검증 (HQ_ADMIN은 통과)
+    fun verifyOrgAdminAccessForStudent(targetUserId: String) {
+        if (SecurityUtils.hasAnyRole("HQ_ADMIN")) return
+        val adminUserId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "인증되지 않은 요청입니다", HttpStatus.UNAUTHORIZED)
+        val adminOrgs = orgMembershipRepository.findByUserIdAndStatus(adminUserId, "active")
+            .filter { it.role == "ORG_ADMIN" }
+            .map { it.orgId }
+            .toSet()
+        if (adminOrgs.isEmpty()) {
+            throw ApiException("FORBIDDEN", "기관 관리자 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
+        val studentOrgs = orgMembershipRepository.findByUserIdAndStatus(targetUserId, "active")
+            .map { it.orgId }
+            .toSet()
+        if (adminOrgs.intersect(studentOrgs).isEmpty()) {
+            throw ApiException("FORBIDDEN", "해당 학생에 대한 접근 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
+    }
+
+    // ORG_ADMIN인 경우 대상 클래스가 자기 기관 소속인지 검증 (HQ_ADMIN은 통과)
+    fun verifyOrgAdminAccessForClass(targetClassId: String) {
+        if (SecurityUtils.hasAnyRole("HQ_ADMIN")) return
+        val adminUserId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "인증되지 않은 요청입니다", HttpStatus.UNAUTHORIZED)
+        val adminOrgs = orgMembershipRepository.findByUserIdAndStatus(adminUserId, "active")
+            .filter { it.role == "ORG_ADMIN" }
+            .map { it.orgId }
+            .toSet()
+        if (adminOrgs.isEmpty()) {
+            throw ApiException("FORBIDDEN", "기관 관리자 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
+        val classEntity = classRepository.findById(targetClassId).orElseThrow {
+            ApiException("NOT_FOUND", "수강반을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        if (!adminOrgs.contains(classEntity.orgId)) {
+            throw ApiException("FORBIDDEN", "해당 수강반에 대한 접근 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
+    }
+
     @Transactional(readOnly = true)
     fun listActiveOrgs(): List<OrgSummary> {
         // org_hq(국어농장)를 맨 위로, 나머지는 이름순 정렬

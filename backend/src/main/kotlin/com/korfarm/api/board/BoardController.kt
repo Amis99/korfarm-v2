@@ -78,6 +78,9 @@ class BoardController(
 
     @GetMapping("/v1/posts/{postId}/comments")
     fun listComments(@PathVariable postId: String): ApiResponse<List<CommentView>> {
+        val userId = SecurityUtils.currentUserId()
+        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        boardService.verifyPostAccess(postId, userId, isAdmin)
         return ApiResponse(success = true, data = boardService.listComments(postId))
     }
 

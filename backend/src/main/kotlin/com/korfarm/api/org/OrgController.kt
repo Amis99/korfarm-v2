@@ -104,6 +104,7 @@ class OrgController(
         @Valid @RequestBody request: AdminStudentUpdateRequest
     ): ApiResponse<AdminStudentView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.verifyOrgAdminAccessForStudent(userId)
         orgService.updateStudent(userId, request)
         return ApiResponse(success = true, data = orgService.getStudentView(userId))
     }
@@ -111,6 +112,7 @@ class OrgController(
     @PostMapping("/students/{userId}/disable")
     fun disableStudent(@PathVariable userId: String): ApiResponse<Map<String, String>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.verifyOrgAdminAccessForStudent(userId)
         val user = orgService.updateStudent(userId, AdminStudentUpdateRequest(status = "inactive"))
         return ApiResponse(success = true, data = mapOf("user_id" to user.id))
     }
@@ -121,6 +123,7 @@ class OrgController(
         @Valid @RequestBody request: AdminSubscriptionRequest
     ): ApiResponse<AdminStudentView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.verifyOrgAdminAccessForStudent(userId)
         orgService.updateSubscription(userId, request)
         return ApiResponse(success = true, data = orgService.getStudentView(userId))
     }
@@ -144,6 +147,7 @@ class OrgController(
         @Valid @RequestBody request: AdminClassUpdateRequest
     ): ApiResponse<AdminClassView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.verifyOrgAdminAccessForClass(classId)
         orgService.updateClass(classId, request)
         return ApiResponse(success = true, data = orgService.getClassView(classId))
     }
@@ -151,6 +155,7 @@ class OrgController(
     @PostMapping("/classes/{classId}/deactivate")
     fun deactivateClass(@PathVariable classId: String): ApiResponse<AdminClassView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.verifyOrgAdminAccessForClass(classId)
         orgService.deactivateClass(classId)
         return ApiResponse(success = true, data = orgService.getClassView(classId))
     }
@@ -158,6 +163,7 @@ class OrgController(
     @GetMapping("/classes/{classId}/students")
     fun listClassStudents(@PathVariable classId: String): ApiResponse<List<AdminStudentView>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.verifyOrgAdminAccessForClass(classId)
         return ApiResponse(success = true, data = orgService.listClassStudents(classId))
     }
 
@@ -167,6 +173,7 @@ class OrgController(
         @Valid @RequestBody request: AdminClassStudentsRequest
     ): ApiResponse<AdminClassView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.verifyOrgAdminAccessForClass(classId)
         orgService.addStudentsToClass(classId, request)
         return ApiResponse(success = true, data = orgService.getClassView(classId))
     }
@@ -177,6 +184,7 @@ class OrgController(
         @PathVariable userId: String
     ): ApiResponse<AdminClassView> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        orgService.verifyOrgAdminAccessForClass(classId)
         orgService.removeStudentFromClass(classId, userId)
         return ApiResponse(success = true, data = orgService.getClassView(classId))
     }
