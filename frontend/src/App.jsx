@@ -21,6 +21,8 @@ const PostWritePage = lazy(() => import("./pages/PostWritePage"));
 const ShopPage = lazy(() => import("./pages/ShopPage"));
 const ProductDetailPage = lazy(() => import("./pages/ProductDetailPage"));
 const PaymentResultPage = lazy(() => import("./pages/PaymentResultPage"));
+const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
+const PaymentFailPage = lazy(() => import("./pages/PaymentFailPage"));
 const SubscriptionPage = lazy(() => import("./pages/SubscriptionPage"));
 
 const RankingPage = lazy(() => import("./pages/RankingPage"));
@@ -179,6 +181,8 @@ function App() {
           <Route path="/shop" element={P(<ShopPage />)} />
           <Route path="/shop/products/:productId" element={P(<ProductDetailPage />)} />
           <Route path="/payment/result" element={P(<PaymentResultPage />)} />
+          <Route path="/payment/success" element={P(<PaymentSuccessPage />)} />
+          <Route path="/payment/fail" element={P(<PaymentFailPage />)} />
           <Route path="/subscription" element={P(<SubscriptionPage />)} />
           <Route path="/ranking" element={P(<RankingPage />)} />
           <Route path="/parents/links" element={P(<ParentLinksPage />)} />

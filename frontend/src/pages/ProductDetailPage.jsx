@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { SHOP_CATEGORIES, SHOP_PRODUCTS } from "../data/shopCatalog";
 import { apiGet, apiPost } from "../utils/api";
+import { requestTossPayment } from "../utils/tossPayment";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/commerce.css";
 
@@ -66,14 +67,18 @@ function ProductDetailPage() {
         },
       });
       const orderId = orderData.orderId || orderData.id;
-      await apiPost("/v1/payments/shop", {
-        orderId,
-        amount: product.price,
-        method: "card",
+      const prepareResult = await apiPost("/v1/payments/prepare/shop", { orderId });
+      await requestTossPayment({
+        clientKey: prepareResult.clientKey,
+        method: "CARD",
+        amount: prepareResult.amount,
+        orderId: prepareResult.tossOrderId,
+        orderName: prepareResult.orderName,
       });
-      navigate(`/payment/result?orderId=${orderId}`);
     } catch (e) {
-      setError(e.message || "주문에 실패했습니다.");
+      if (e.code !== "USER_CANCEL") {
+        setError(e.message || "주문에 실패했습니다.");
+      }
     } finally {
       setOrdering(false);
     }

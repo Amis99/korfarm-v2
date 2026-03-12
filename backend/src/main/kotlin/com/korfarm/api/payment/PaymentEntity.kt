@@ -32,6 +32,36 @@ class PaymentEntity(
     @Column(name = "provider_ref")
     var providerRef: String? = null,
 
+    @Column(name = "order_name")
+    var orderName: String? = null,
+
+    @Column(name = "payment_key")
+    var paymentKey: String? = null,
+
+    @Column(name = "payment_method")
+    var paymentMethod: String? = null,
+
+    @Column(name = "toss_order_id")
+    var tossOrderId: String? = null,
+
+    @Column(name = "receipt_url")
+    var receiptUrl: String? = null,
+
+    @Column(name = "cancel_reason")
+    var cancelReason: String? = null,
+
+    @Column(name = "canceled_at")
+    var canceledAt: LocalDateTime? = null,
+
+    @Column(name = "metadata", columnDefinition = "JSON")
+    var metadata: String? = null,
+
+    @Column(name = "subscription_months")
+    var subscriptionMonths: Int? = null,
+
+    @Column(name = "shop_order_id")
+    var shopOrderId: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 

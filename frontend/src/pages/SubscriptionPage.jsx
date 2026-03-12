@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/api";
+import { requestTossPayment } from "../utils/tossPayment";
 import "../styles/commerce.css";
 
 const PLANS = [
@@ -77,15 +78,21 @@ function SubscriptionPage() {
     setCheckoutLoading(true);
     setCheckoutError("");
     try {
-      await apiPost("/v1/payments/checkout", {
-        amount: plan.price,
-        method: "card",
-        subscription: true,
+      const prepareResult = await apiPost("/v1/payments/prepare/subscription", {
         months: plan.months,
       });
-      loadData();
+      await requestTossPayment({
+        clientKey: prepareResult.clientKey,
+        method: "CARD",
+        amount: prepareResult.amount,
+        orderId: prepareResult.tossOrderId,
+        orderName: prepareResult.orderName,
+      });
     } catch (e) {
-      setCheckoutError(e.message || "결제에 실패했습니다.");
+      // 사용자가 결제창을 닫은 경우 등
+      if (e.code !== "USER_CANCEL") {
+        setCheckoutError(e.message || "결제에 실패했습니다.");
+      }
     } finally {
       setCheckoutLoading(false);
     }
