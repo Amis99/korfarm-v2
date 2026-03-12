@@ -60,8 +60,8 @@ const DEEP_FEATURES = [
     icon: "smart_toy",
     title: "AI 채점 + 통합 성적표",
     subtitle: "자동 채점, 레이더 차트 분석",
-    desc: "AI가 서술형 답안까지 자동 채점하고, 영역별 성취도를 레이더 차트로 시각화합니다. 학습 추이와 취약점을 한눈에 파악할 수 있습니다.",
-    highlights: ["서술형 자동 채점", "레이더 차트", "학습 추이 분석"],
+    desc: "AI가 자동 채점하고, 영역별 성취도를 레이더 차트로 시각화합니다. 학습 추이와 취약점을 한눈에 파악할 수 있습니다.",
+    highlights: ["AI 자동 채점", "레이더 차트", "학습 추이 분석"],
   },
   {
     icon: "dashboard",
@@ -90,6 +90,57 @@ const GAMIFICATION = [
   },
 ];
 
+const PLANS = [
+  {
+    tag: "무료",
+    title: "Basic",
+    price: "0",
+    subtitle: "월",
+    perks: [
+      "오늘의 퀴즈",
+      "오늘의 독해",
+      "기본 랭킹 참여",
+      "커뮤니티 이용",
+      "진단 테스트 1회",
+    ],
+    cta: "시작하기",
+  },
+  {
+    tag: "인기",
+    title: "Pro",
+    price: "65,000",
+    subtitle: "월",
+    perks: [
+      "Basic 전체 포함",
+      "프로 모드 전체",
+      "농장 모드 전체",
+      "AI 자동 채점",
+      "과제 시스템",
+      "테스트 창고",
+      "통합 성적표",
+      "수확물 보상 확대",
+    ],
+    cta: "학습 시작하기",
+    featured: true,
+    discount: "3개월 10% | 12개월 30% 할인",
+  },
+  {
+    tag: "기관",
+    title: "Academy",
+    price: "별도 문의",
+    subtitle: "",
+    perks: [
+      "Pro 전체 포함",
+      "기관 관리 대시보드",
+      "반 관리 시스템",
+      "과제 일괄 배포",
+      "학부모 연동 리포트",
+    ],
+    cta: "상담 문의",
+    isAcademy: true,
+  },
+];
+
 const FAQ_ITEMS = [
   {
     q: "어떤 학년에 적합한가요?",
@@ -100,12 +151,20 @@ const FAQ_ITEMS = [
     a: "4개 서버(프레게·소쉬르·러셀·비트겐슈타인) × 3단계로 총 12레벨입니다. 프레게 1~3, 소쉬르 1~3, 러셀 1~3, 비트겐슈타인 1~3 순서로 난이도가 올라가며, 진단 테스트 결과에 따라 학년과 무관하게 적합한 레벨에 배정됩니다.",
   },
   {
+    q: "무료로 어디까지 이용할 수 있나요?",
+    a: "Basic 플랜에서는 매일 제공되는 '오늘의 퀴즈'와 '오늘의 독해', 기본 랭킹 참여, 커뮤니티 이용, 그리고 진단 테스트 1회를 무료로 이용할 수 있습니다.",
+  },
+  {
     q: "어떤 기능이 있나요?",
     a: "오늘의 퀴즈·독해, 프로 모드(180+ 챕터), 농장별 모드(9개 영역), AI 자동 채점, 통합 성적표, 씨앗 보상 시스템, 시즌 랭킹, 1:1 대결, 기관 관리 대시보드 등을 제공합니다.",
   },
   {
     q: "학원이나 학교에서 단체로 사용할 수 있나요?",
-    a: "네, 기관 관리 대시보드를 통해 반 관리, 과제 일괄 배포, 학부모 리포트 연동 등의 기능을 이용할 수 있습니다. 자세한 내용은 상담 문의를 통해 안내받으실 수 있습니다.",
+    a: "네, Academy 플랜은 기관 전용으로 설계되었습니다. 반 관리, 과제 일괄 배포, 학부모 리포트 연동 등 기관 운영에 최적화된 기능을 제공합니다. 별도 상담을 통해 맞춤 견적을 안내드립니다.",
+  },
+  {
+    q: "결제와 환불은 어떻게 되나요?",
+    a: "Pro 플랜은 월 단위 자동 결제이며, 3개월(10% 할인)과 12개월(30% 할인) 장기 결제도 가능합니다. 결제일로부터 7일 이내 환불이 가능하며, 이후에는 잔여 기간에 대한 부분 환불이 적용됩니다.",
   },
   {
     q: "씨앗과 수확물은 무엇인가요?",
@@ -354,6 +413,7 @@ function LandingPage() {
           <div className="landing-nav-links">
             <a href="#program">학습 흐름</a>
             <a href="#features">핵심 기능</a>
+            <a href="#pricing">요금 안내</a>
             <a href="#faq">자주 묻는 질문</a>
             <a href="#contact">상담 문의</a>
             <Link to="/shop">쇼핑몰</Link>
@@ -380,6 +440,7 @@ function LandingPage() {
           <div className="landing-mobile-menu">
             <a href="#program" onClick={() => setMobileMenuOpen(false)}>학습 흐름</a>
             <a href="#features" onClick={() => setMobileMenuOpen(false)}>핵심 기능</a>
+            <a href="#pricing" onClick={() => setMobileMenuOpen(false)}>요금 안내</a>
             <a href="#faq" onClick={() => setMobileMenuOpen(false)}>자주 묻는 질문</a>
             <a href="#contact" onClick={() => setMobileMenuOpen(false)}>상담 문의</a>
             <Link to="/shop" onClick={() => setMobileMenuOpen(false)}>쇼핑몰</Link>
@@ -415,8 +476,8 @@ function LandingPage() {
                 학습 시작하기
                 <span className="material-symbols-outlined">arrow_forward</span>
               </Link>
-              <a className="landing-btn-ghost" href="#features">
-                기능 살펴보기
+              <a className="landing-btn-ghost" href="#pricing">
+                요금 안내
               </a>
             </div>
           </div>
@@ -510,6 +571,52 @@ function LandingPage() {
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 요금 안내 ── */}
+      <section className="landing-section landing-pricing" id="pricing">
+        <div className="landing-wrap">
+          <div className="landing-section-title">
+            <h2 className="landing-display">요금 안내</h2>
+            <p>학습 규모와 목적에 맞춰 선택할 수 있습니다.</p>
+          </div>
+          <div className="landing-pricing-grid">
+            {PLANS.map((plan) => (
+              <div
+                className={`landing-plan ${plan.featured ? "featured" : ""}`}
+                key={plan.title}
+              >
+                {plan.featured && <span className="landing-plan-badge">추천</span>}
+                <div>
+                  <span className="landing-pill landing-display">{plan.tag}</span>
+                  <h3 className="landing-display">{plan.title}</h3>
+                </div>
+                <div className="landing-plan-price-row">
+                  {plan.isAcademy ? (
+                    <span className="landing-plan-price landing-display">{plan.price}</span>
+                  ) : (
+                    <>
+                      <span className="landing-plan-price landing-display">{plan.price}</span>
+                      <span>원 / {plan.subtitle}</span>
+                    </>
+                  )}
+                </div>
+                {plan.discount && (
+                  <div className="landing-plan-discount">{plan.discount}</div>
+                )}
+                <ul>
+                  {plan.perks.map((perk) => (
+                    <li key={perk}>
+                      <span className="material-symbols-outlined">check_circle</span>
+                      {perk}
+                    </li>
+                  ))}
+                </ul>
+                <Link to={plan.isAcademy ? "#contact" : "/login"}>{plan.cta}</Link>
               </div>
             ))}
           </div>

@@ -563,6 +563,117 @@
   color: #555;
 }
 
+/* ── 요금 안내 ── */
+.landing-pricing {
+  background: #f2f7f1;
+}
+
+.landing-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.landing-plan {
+  background: #fff;
+  border-radius: 32px;
+  padding: 32px;
+  border: 1px solid #dde6d8;
+  display: grid;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-plan.featured {
+  border: 2px solid var(--landing-primary);
+  box-shadow: 0 24px 50px rgba(255, 154, 61, 0.25);
+  transform: scale(1.03);
+}
+
+.landing-plan-badge {
+  position: absolute;
+  top: 16px;
+  right: -24px;
+  transform: rotate(12deg);
+  background: var(--landing-primary);
+  color: var(--landing-ink);
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.landing-plan .landing-pill {
+  background: rgba(255, 143, 43, 0.15);
+  border-color: rgba(255, 143, 43, 0.3);
+  color: var(--landing-primary-dark);
+}
+
+.landing-plan h3 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.landing-plan-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.landing-plan-price {
+  font-size: 36px;
+  font-weight: 900;
+}
+
+.landing-plan-discount {
+  padding: 6px 14px;
+  border-radius: 12px;
+  background: rgba(255, 143, 43, 0.1);
+  color: var(--landing-primary-dark);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.landing-plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  color: var(--landing-secondary);
+}
+
+.landing-plan li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.landing-plan li .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--landing-primary);
+}
+
+.landing-plan button,
+.landing-plan a {
+  text-align: center;
+  border-radius: 20px;
+  padding: 14px 20px;
+  font-weight: 800;
+  text-decoration: none;
+  border: 2px solid #e0e8db;
+  color: var(--landing-ink);
+  background: #f7faf6;
+  transition: background 0.2s;
+}
+
+.landing-plan.featured a {
+  background: var(--landing-primary);
+  border-color: var(--landing-primary);
+}
+
 /* ── FAQ ── */
 .landing-faq {
   background: #f2f7f1;
@@ -860,6 +971,14 @@
     grid-template-columns: 1fr;
     max-width: 400px;
     margin: 0 auto;
+  }
+  .landing-pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .landing-plan.featured {
+    transform: none;
   }
   .landing-footer-nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
