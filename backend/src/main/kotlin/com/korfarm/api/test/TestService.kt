@@ -7,6 +7,9 @@ import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.org.OrgRepository
 import com.korfarm.api.security.SecurityUtils
+import com.korfarm.api.economy.EconomyService
+import com.korfarm.api.economy.SeedCatalogRepository
+import com.korfarm.api.learning.SeedRewardPolicy
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -22,7 +25,9 @@ class TestService(
     private val userRepository: UserRepository,
     private val orgRepository: OrgRepository,
     private val orgMembershipRepository: OrgMembershipRepository,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
+    private val economyService: EconomyService,
+    private val seedCatalogRepository: SeedCatalogRepository
 ) {
 
     // ─── Student: list tests ───
@@ -204,7 +209,24 @@ class TestService(
             statsJson = objectMapper.writeValueAsString(details),
             status = "graded"
         )
-        return submissionRepo.save(entity)
+        val saved = submissionRepo.save(entity)
+
+        // 씨앗 보상 지급 (점수 비율 기반)
+        val totalPoints = questions.sumOf { it.points }
+        val percentage = if (totalPoints > 0) (score * 100 / totalPoints) else 0
+        val seedReward = when {
+            percentage >= 90 -> 5
+            percentage >= 70 -> 3
+            percentage >= 50 -> 1
+            else -> 0
+        }
+        if (seedReward > 0) {
+            val catalog = seedCatalogRepository.findAll()
+            val seedType = SeedRewardPolicy.randomSeedType(catalog)
+            economyService.addSeeds(userId, seedType, seedReward, "테스트 완료", "test", testId)
+        }
+
+        return saved
     }
 
     // ─── Student: report (성적표) ───

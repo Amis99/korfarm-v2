@@ -46,7 +46,10 @@ function PostDetailPage() {
     apiGet(`/v1/posts/${postId}`)
       .then((data) => {
         setPost(data);
-        setComments(data?.comments || []);
+        // 댓글은 별도 API로 로드 (PostDetail DTO에 comments 미포함)
+        apiGet(`/v1/posts/${postId}/comments`)
+          .then((c) => setComments(Array.isArray(c) ? c : c?.items || []))
+          .catch(() => setComments([]));
       })
       .catch((e) => setFetchError(e.message || "게시글을 불러올 수 없습니다."))
       .finally(() => setLoading(false));
