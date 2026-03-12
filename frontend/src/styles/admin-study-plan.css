@@ -401,3 +401,182 @@
   padding: 40px;
   color: #8a7468;
 }
+
+/* ── 수강반 필터 ── */
+.aspd-class-filter {
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+}
+
+/* 전체 현황 항목 */
+.aspd-student-item.overview {
+  background: rgba(33,150,243,0.08);
+  border: 1px solid rgba(33,150,243,0.15);
+  color: #64b5f6;
+  margin-bottom: 4px;
+}
+.aspd-student-item.overview.selected {
+  background: rgba(33,150,243,0.2);
+  color: #90caf9;
+}
+
+/* ── 매트릭스 에셋 타입 뱃지 ── */
+.sp-asset-type-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.sp-asset-type-badge.korfarm { background: rgba(76,175,80,0.2); color: #66bb6a; }
+.sp-asset-type-badge.activity { background: rgba(33,150,243,0.2); color: #64b5f6; }
+.sp-asset-type-badge.test { background: rgba(255,152,0,0.2); color: #ffa726; }
+
+/* 에셋 헤더 레이아웃 */
+.sp-asset-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  position: relative;
+}
+.sp-asset-label {
+  font-size: 0.8rem;
+}
+
+/* 행/열 삭제 버튼 (호버 표시) */
+.sp-delete-btn {
+  display: none;
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: rgba(244,67,54,0.15);
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  cursor: pointer;
+  color: #ef9a9a;
+  line-height: 1;
+}
+.sp-delete-btn:hover {
+  background: rgba(244,67,54,0.3);
+}
+.sp-asset-header:hover .sp-delete-btn,
+.sp-scope-header:hover .sp-delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 범위 헤더 (행) */
+.sp-scope-header {
+  position: relative;
+}
+
+/* "+" 열 추가 버튼 */
+.sp-add-col-th {
+  width: 36px;
+  min-width: 36px;
+}
+.sp-add-col-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px dashed rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.03);
+  color: #8a7468;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sp-add-col-btn:hover {
+  background: rgba(255,127,42,0.1);
+  border-color: rgba(255,127,42,0.3);
+  color: #ff9f5a;
+}
+
+/* 에셋 추가 팝오버 */
+.sp-asset-popover {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 100;
+  background: #1a2220;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 12px;
+  min-width: 220px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sp-asset-type-select {
+  display: flex;
+  gap: 4px;
+}
+.sp-asset-type-option {
+  flex: 1;
+  padding: 5px 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: #aaa;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+.sp-asset-type-option.active,
+.sp-asset-type-option:hover {
+  border-color: rgba(255,127,42,0.4);
+}
+.sp-asset-type-option.korfarm.active { background: rgba(76,175,80,0.15); color: #66bb6a; border-color: rgba(76,175,80,0.4); }
+.sp-asset-type-option.activity.active { background: rgba(33,150,243,0.15); color: #64b5f6; border-color: rgba(33,150,243,0.4); }
+.sp-asset-type-option.test.active { background: rgba(255,152,0,0.15); color: #ffa726; border-color: rgba(255,152,0,0.4); }
+.sp-popover-input {
+  font-size: 0.82rem;
+  padding: 7px 10px;
+}
+.sp-popover-add {
+  width: 100%;
+  text-align: center;
+}
+
+/* "+" 행 추가 */
+.sp-add-row td,
+.sp-add-row th {
+  border-top: 1px dashed rgba(255,255,255,0.06);
+}
+.sp-add-row-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: #8a7468;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 6px 4px;
+  transition: color 0.15s;
+}
+.sp-add-row-btn:hover {
+  color: #ff9f5a;
+}
+.sp-add-scope-input-wrap {
+  display: flex;
+  gap: 6px;
+}
+.sp-add-scope-input {
+  font-size: 0.82rem;
+  padding: 6px 10px;
+  max-width: 220px;
+}
+
+/* 테스트 종류 셀 뱃지 강조 */
+.cell-badge.test-kind {
+  border-left: 2px solid rgba(255,152,0,0.5);
+}

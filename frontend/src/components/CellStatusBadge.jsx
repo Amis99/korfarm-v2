@@ -9,10 +9,11 @@ const LABELS = {
   failed: "미통과",
 };
 
-export default function CellStatusBadge({ status, score }) {
+export default function CellStatusBadge({ status, score, assetKind }) {
   const label = LABELS[status] || status;
+  const cls = `cell-badge ${status}${assetKind === "test" ? " test-kind" : ""}`;
   return (
-    <span className={`cell-badge ${status}`}>
+    <span className={cls}>
       {label}
       {score != null && ` ${score}점`}
     </span>

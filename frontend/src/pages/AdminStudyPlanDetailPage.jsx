@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { apiGet, apiPost, apiPatch, apiDelete } from "../utils/api";
 import AdminLayout from "../components/AdminLayout";
@@ -17,12 +17,13 @@ export default function AdminStudyPlanDetailPage() {
   const { planId } = useParams();
   const [plan, setPlan] = useState(null);
   const [students, setStudents] = useState([]);
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUserId, setSelectedUserId] = useState(null); // null = 전체 현황
   const [matrix, setMatrix] = useState(null);
   const [schedules, setSchedules] = useState([]);
   const [tab, setTab] = useState("matrix");
   const [loading, setLoading] = useState(true);
   const [cellModal, setCellModal] = useState(null);
+  const [classFilter, setClassFilter] = useState("all");
 
   // 설정 탭 상태
   const [newScopeLabel, setNewScopeLabel] = useState("");
@@ -38,14 +39,11 @@ export default function AdminStudyPlanDetailPage() {
     apiGet(`/v1/admin/study-plans/${planId}/students`).then((data) => {
       const list = Array.isArray(data) ? data : [];
       setStudents(list);
-      if (list.length > 0 && !selectedUserId) {
-        setSelectedUserId(list[0].userId);
-      }
     }).catch(() => {});
   }, [planId]);
 
   const loadMatrix = useCallback(() => {
-    if (!selectedUserId) return;
+    if (!selectedUserId) { setMatrix(null); return; }
     apiGet(`/v1/admin/study-plans/${planId}/matrix?userId=${selectedUserId}`)
       .then(setMatrix)
       .catch(() => setMatrix(null));
@@ -65,6 +63,25 @@ export default function AdminStudyPlanDetailPage() {
 
   useEffect(() => { loadMatrix(); }, [selectedUserId]);
 
+  // 수강반 목록 추출
+  const classTargets = useMemo(() => {
+    if (!plan?.targets) return [];
+    return plan.targets.filter((t) => t.targetType === "class");
+  }, [plan]);
+
+  // 학생 필터링
+  const filteredStudents = useMemo(() => {
+    if (classFilter === "all") return students;
+    return students.filter((s) => {
+      if (s.classId) return s.classId === classFilter;
+      if (s.className) {
+        const target = classTargets.find((t) => t.targetId === classFilter);
+        return target && s.className === (target.targetName || target.targetId);
+      }
+      return false;
+    });
+  }, [students, classFilter, classTargets]);
+
   const handleCellClick = (cell, scope, asset) => {
     if (!cell) return;
     setCellModal({ cell, scope, asset });
@@ -76,11 +93,12 @@ export default function AdminStudyPlanDetailPage() {
     loadStudents();
   };
 
-  // 설정: 범위 추가
-  const handleAddScope = async () => {
-    if (!newScopeLabel.trim()) return;
+  // 범위 추가 (인라인 + 설정 탭 공용)
+  const handleAddScope = async (label) => {
+    const text = typeof label === "string" ? label.trim() : newScopeLabel.trim();
+    if (!text) return;
     try {
-      await apiPost(`/v1/admin/study-plans/${planId}/scopes`, { label: newScopeLabel.trim() });
+      await apiPost(`/v1/admin/study-plans/${planId}/scopes`, { label: text });
       setNewScopeLabel("");
       loadPlan();
       loadMatrix();
@@ -99,14 +117,18 @@ export default function AdminStudyPlanDetailPage() {
     }
   };
 
-  // 설정: 에셋 추가
-  const handleAddAsset = async () => {
-    if (!newAssetLabel.trim()) return;
+  // 에셋 추가 (인라인 + 설정 탭 공용)
+  const handleAddAsset = async (opts) => {
+    const isInline = opts && typeof opts === "object" && opts.label;
+    const assetType = isInline ? opts.assetType : newAssetType;
+    const label = isInline ? opts.label.trim() : newAssetLabel.trim();
+    const assetKind = isInline ? opts.assetKind : newAssetKind;
+    if (!label) return;
     try {
       await apiPost(`/v1/admin/study-plans/${planId}/assets`, {
-        assetType: newAssetType, label: newAssetLabel.trim(), assetKind: newAssetKind,
+        assetType, label, assetKind,
       });
-      setNewAssetLabel("");
+      if (!isInline) setNewAssetLabel("");
       loadPlan();
       loadMatrix();
     } catch (e) {
@@ -158,9 +180,37 @@ export default function AdminStudyPlanDetailPage() {
       <div className="aspd-layout">
         {/* 좌측: 학생 목록 */}
         <div className="aspd-sidebar">
-          <h3>학생 ({students.length})</h3>
+          <h3>학생 ({filteredStudents.length})</h3>
+
+          {/* 수강반 필터 */}
+          {classTargets.length > 0 && (
+            <select
+              className="asp-select aspd-class-filter"
+              value={classFilter}
+              onChange={(e) => setClassFilter(e.target.value)}
+            >
+              <option value="all">전체 수강반</option>
+              {classTargets.map((ct) => (
+                <option key={ct.targetId} value={ct.targetId}>
+                  {ct.targetName || ct.targetId}
+                </option>
+              ))}
+            </select>
+          )}
+
           <ul className="aspd-student-list">
-            {students.map((s) => {
+            {/* 전체 현황 */}
+            <li
+              className={`aspd-student-item overview ${selectedUserId === null ? "selected" : ""}`}
+              onClick={() => setSelectedUserId(null)}
+            >
+              <span>
+                <span className="material-symbols-outlined" style={{ fontSize: 16, verticalAlign: "middle", marginRight: 4 }}>groups</span>
+                전체 현황
+              </span>
+            </li>
+
+            {filteredStudents.map((s) => {
               const pct = s.totalCells > 0 ? Math.round((s.completedCells / s.totalCells) * 100) : 0;
               return (
                 <li
@@ -198,13 +248,22 @@ export default function AdminStudyPlanDetailPage() {
 
           {/* 매트릭스 탭 */}
           {tab === "matrix" && (
-            matrix ? (
+            selectedUserId === null ? (
+              <div className="asp-empty" style={{ padding: "40px 20px" }}>
+                <span className="material-symbols-outlined">groups</span>
+                전체 현황 — 좌측에서 학생을 선택하면 개별 매트릭스를 확인할 수 있습니다.
+              </div>
+            ) : matrix ? (
               <StudyPlanMatrix
                 scopes={matrix.scopes}
                 assets={matrix.assets}
                 cells={matrix.cells}
                 admin
                 onCellClick={handleCellClick}
+                onAddScope={handleAddScope}
+                onDeleteScope={handleDeleteScope}
+                onAddAsset={handleAddAsset}
+                onDeleteAsset={handleDeleteAsset}
               />
             ) : (
               <div className="asp-empty">학생을 선택해 주세요.</div>
@@ -250,8 +309,8 @@ export default function AdminStudyPlanDetailPage() {
                   ))}
                 </div>
                 <div className="asp-add-row">
-                  <input className="asp-input" value={newScopeLabel} onChange={(e) => setNewScopeLabel(e.target.value)} placeholder="새 범위 추가" onKeyDown={(e) => e.key === "Enter" && handleAddScope()} />
-                  <button className="asp-add-btn" onClick={handleAddScope}>추가</button>
+                  <input className="asp-input" value={newScopeLabel} onChange={(e) => setNewScopeLabel(e.target.value)} placeholder="새 범위 추가" onKeyDown={(e) => e.key === "Enter" && handleAddScope(newScopeLabel)} />
+                  <button className="asp-add-btn" onClick={() => handleAddScope(newScopeLabel)}>추가</button>
                 </div>
               </div>
 
@@ -281,7 +340,7 @@ export default function AdminStudyPlanDetailPage() {
                 </div>
                 <div className="asp-add-row">
                   <input className="asp-input" value={newAssetLabel} onChange={(e) => setNewAssetLabel(e.target.value)} placeholder="새 에셋 추가" onKeyDown={(e) => e.key === "Enter" && handleAddAsset()} />
-                  <button className="asp-add-btn" onClick={handleAddAsset}>추가</button>
+                  <button className="asp-add-btn" onClick={() => handleAddAsset()}>추가</button>
                 </div>
               </div>
             </>
