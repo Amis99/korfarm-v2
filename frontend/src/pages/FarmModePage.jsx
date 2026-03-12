@@ -3,48 +3,58 @@ import { Link } from "react-router-dom";
 import {
   FARM_LIST,
   getLearningItemsByFarm,
-  LEVELS,
-  LEVEL_LABELS,
-  profileLevelToUpper,
+  SERVERS,
+  SERVER_LABELS,
+  profileLevelToServer,
+  levelBelongsToServer,
 } from "../data/learning/learningCatalog";
 import { apiGet } from "../utils/api";
 import "../styles/farm-mode.css";
 
 function FarmModePage() {
-  const [dbCounts, setDbCounts] = useState({});
-  const [selectedLevel, setSelectedLevel] = useState("");
+  const [dbItemsByFarm, setDbItemsByFarm] = useState({});
+  const [selectedServer, setSelectedServer] = useState("");
   const [profileLoaded, setProfileLoaded] = useState(false);
 
-  // 프로필에서 레벨 가져오기
+  // 프로필에서 서버 가져오기
   useEffect(() => {
     apiGet("/v1/auth/me")
       .then((profile) => {
         const raw = profile.level_id || profile.levelId || "";
-        const upper = profileLevelToUpper(raw);
-        if (LEVELS.includes(upper)) setSelectedLevel(upper);
+        const server = profileLevelToServer(raw);
+        if (SERVERS.includes(server)) setSelectedServer(server);
         setProfileLoaded(true);
       })
       .catch(() => setProfileLoaded(true));
   }, []);
 
-  // DB 카탈로그에서 농장별 콘텐츠 수 조회
+  // DB 카탈로그에서 농장별 콘텐츠 items 조회
   useEffect(() => {
     apiGet("/v1/learning/catalog")
       .then((data) => {
         if (data?.farms) {
-          const counts = {};
-          data.farms.forEach((f) => { counts[f.area] = f.totalCount || 0; });
-          setDbCounts(counts);
+          const itemsMap = {};
+          data.farms.forEach((f) => { itemsMap[f.area] = f.items || []; });
+          setDbItemsByFarm(itemsMap);
         }
       })
       .catch(() => {});
   }, []);
 
-  // 레벨 필터된 정적 카운트 계산
-  const getFilteredCount = (farmId) => {
-    const items = getLearningItemsByFarm(farmId);
-    if (!selectedLevel) return items.length;
-    return items.filter((item) => item.targetLevel === selectedLevel).length;
+  // 서버 필터된 카운트 계산
+  const getCount = (farmId) => {
+    const staticItems = getLearningItemsByFarm(farmId);
+    const dbFarmItems = dbItemsByFarm[farmId] || [];
+    const staticIds = new Set(staticItems.map((i) => i.contentId));
+    const allItems = [
+      ...staticItems,
+      ...dbFarmItems.filter((i) => !staticIds.has(i.contentId)),
+    ];
+    if (!selectedServer) return allItems.length;
+    return allItems.filter((item) => {
+      const level = item.targetLevel || item.levelId;
+      return levelBelongsToServer(level, selectedServer);
+    }).length;
   };
 
   return (
@@ -66,18 +76,18 @@ function FarmModePage() {
         <p>영역별로 분류된 학습 콘텐츠를 탐색합니다</p>
       </div>
 
-      {/* 레벨 선택 */}
+      {/* 서버 선택 */}
       <div className="farm-level-selector">
-        <label className="farm-level-label">레벨</label>
+        <label className="farm-level-label">서버</label>
         <select
           className="farm-filter-select"
-          value={selectedLevel}
-          onChange={(e) => setSelectedLevel(e.target.value)}
+          value={selectedServer}
+          onChange={(e) => setSelectedServer(e.target.value)}
         >
-          <option value="">전체 레벨</option>
-          {LEVELS.map((lv) => (
-            <option key={lv} value={lv}>
-              {LEVEL_LABELS[lv] || lv}
+          <option value="">전체</option>
+          {SERVERS.map((sv) => (
+            <option key={sv} value={sv}>
+              {SERVER_LABELS[sv]}
             </option>
           ))}
         </select>
@@ -86,14 +96,13 @@ function FarmModePage() {
       {/* 3x3 그리드 */}
       <div className="farm-grid">
         {FARM_LIST.map((farm) => {
-          const staticCount = getFilteredCount(farm.id);
-          const dbCount = dbCounts[farm.id] || 0;
-          const count = selectedLevel ? staticCount : staticCount + dbCount;
-          const levelParam = selectedLevel ? `?level=${selectedLevel}` : "";
+          const count = getCount(farm.id);
+          if (selectedServer && count === 0) return null;
+          const serverParam = selectedServer ? `?server=${selectedServer}` : "";
           return (
             <Link
               key={farm.id}
-              to={`/farm-mode/${farm.id}${levelParam}`}
+              to={`/farm-mode/${farm.id}${serverParam}`}
               className="farm-card"
             >
               <div className="farm-card-icon">{farm.emoji}</div>

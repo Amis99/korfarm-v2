@@ -20,6 +20,35 @@ export function profileLevelToUpper(levelId) {
   return `${m[1].toUpperCase()}_${m[2]}`;
 }
 
+export const SERVERS = ["FREGE", "SAUSSURE", "RUSSELL", "WITTGENSTEIN"];
+
+export const SERVER_LABELS = {
+  FREGE: "프레게",
+  SAUSSURE: "소쉬르",
+  RUSSELL: "러셀",
+  WITTGENSTEIN: "비트겐슈타인",
+};
+
+/** "RUSSELL_1" → "RUSSELL", "FREGE_3" → "FREGE" */
+export function getServerFromLevel(levelId) {
+  if (!levelId) return "";
+  const idx = levelId.lastIndexOf("_");
+  return idx > 0 ? levelId.substring(0, idx) : levelId;
+}
+
+/** profile.level_id (예: "russell1") → 서버명 (예: "RUSSELL") */
+export function profileLevelToServer(levelId) {
+  const upper = profileLevelToUpper(levelId);
+  return getServerFromLevel(upper);
+}
+
+/** 콘텐츠의 targetLevel이 선택한 서버에 속하는지 판별 */
+export function levelBelongsToServer(targetLevel, server) {
+  if (!server) return true;
+  if (!targetLevel) return false;
+  return targetLevel.startsWith(server);
+}
+
 export const SUB_AREA_LABELS = {
   BASIC: "기본",
   DICTIONARY: "사전",

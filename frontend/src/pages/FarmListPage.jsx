@@ -4,9 +4,12 @@ import {
   getFarmById,
   getLearningItemsByFarm,
   SUB_AREA_LABELS,
-  LEVELS,
   LEVEL_LABELS,
-  profileLevelToUpper,
+  SERVERS,
+  SERVER_LABELS,
+  getServerFromLevel,
+  profileLevelToServer,
+  levelBelongsToServer,
 } from "../data/learning/learningCatalog";
 import { apiGet, apiPost } from "../utils/api";
 import VideoModal from "../components/VideoModal";
@@ -34,10 +37,10 @@ function FarmListPage() {
   const [searchParams] = useSearchParams();
   const farm = getFarmById(farmId);
 
-  // URL query param 또는 프로필 레벨로 초기값 설정
-  const urlLevel = searchParams.get("level") || "";
-  const [levelFilter, setLevelFilter] = useState(urlLevel);
-  const [profileLevelApplied, setProfileLevelApplied] = useState(Boolean(urlLevel));
+  // URL query param 또는 프로필 서버로 초기값 설정
+  const urlServer = searchParams.get("server") || "";
+  const [serverFilter, setServerFilter] = useState(urlServer);
+  const [profileLevelApplied, setProfileLevelApplied] = useState(Boolean(urlServer));
   const [areaFilter, setAreaFilter] = useState("");
   const [sort, setSort] = useState("title");
   const [page, setPage] = useState(1);
@@ -48,14 +51,14 @@ function FarmListPage() {
   const [pageProgressError, setPageProgressError] = useState(false);
   const [videoUrl, setVideoUrl] = useState(null);
 
-  // URL에 level이 없으면 프로필 레벨을 기본값으로 설정
+  // URL에 server가 없으면 프로필 서버를 기본값으로 설정
   useEffect(() => {
     if (profileLevelApplied) return;
     apiGet("/v1/auth/me")
       .then((profile) => {
         const raw = profile.level_id || profile.levelId || "";
-        const upper = profileLevelToUpper(raw);
-        if (LEVELS.includes(upper)) setLevelFilter(upper);
+        const server = profileLevelToServer(raw);
+        if (SERVERS.includes(server)) setServerFilter(server);
         setProfileLevelApplied(true);
       })
       .catch(() => setProfileLevelApplied(true));
@@ -144,8 +147,8 @@ function FarmListPage() {
   // 필터 + 정렬
   const filtered = useMemo(() => {
     let list = [...allItems];
-    if (levelFilter) {
-      list = list.filter((item) => item.targetLevel === levelFilter);
+    if (serverFilter) {
+      list = list.filter((item) => levelBelongsToServer(item.targetLevel, serverFilter));
     }
     if (areaFilter) {
       list = list.filter((item) => item.subArea === areaFilter);
@@ -153,22 +156,22 @@ function FarmListPage() {
     list.sort((a, b) => {
       if (sort === "title") return a.title.localeCompare(b.title, "ko");
       if (sort === "level") {
-        const ai = LEVELS.indexOf(a.targetLevel);
-        const bi = LEVELS.indexOf(b.targetLevel);
+        const ai = SERVERS.indexOf(getServerFromLevel(a.targetLevel));
+        const bi = SERVERS.indexOf(getServerFromLevel(b.targetLevel));
         return ai - bi;
       }
       if (sort === "type") return (a.contentType || "").localeCompare(b.contentType || "");
       return 0;
     });
     return list;
-  }, [allItems, levelFilter, areaFilter, sort]);
+  }, [allItems, serverFilter, areaFilter, sort]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const currentPage = Math.min(page, totalPages);
   const paged = filtered.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
 
   // 필터 변경 시 1페이지로
-  const handleLevelChange = (v) => { setLevelFilter(v); setPage(1); };
+  const handleServerChange = (v) => { setServerFilter(v); setPage(1); };
   const handleAreaChange = (v) => { setAreaFilter(v); setPage(1); };
 
   if (!farm) {
@@ -223,13 +226,13 @@ function FarmListPage() {
       <div className="farm-filters">
         <select
           className="farm-filter-select"
-          value={levelFilter}
-          onChange={(e) => handleLevelChange(e.target.value)}
+          value={serverFilter}
+          onChange={(e) => handleServerChange(e.target.value)}
         >
-          <option value="">전체 레벨</option>
-          {LEVELS.map((lv) => (
-            <option key={lv} value={lv}>
-              {LEVEL_LABELS[lv] || lv}
+          <option value="">전체 서버</option>
+          {SERVERS.map((sv) => (
+            <option key={sv} value={sv}>
+              {SERVER_LABELS[sv]}
             </option>
           ))}
         </select>
