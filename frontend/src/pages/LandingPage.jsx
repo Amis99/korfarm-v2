@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { FARM_LIST } from "../data/learning/learningCatalog";
 import "../styles/landing.css";
+import "../styles/pro-mode.css";
+import "../styles/farm-mode.css";
+import "../styles/unified-report.css";
+import "../styles/admin.css";
 
 /* ── 데이터 상수 ── */
 
@@ -92,7 +97,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "12레벨은 어떻게 구성되나요?",
-    a: "초등 1~6학년(레벨 1~6), 중등 1~3학년(레벨 7~9), 고등 1~3학년(레벨 10~12)으로 구성됩니다. 각 레벨은 해당 학년 수준에 맞는 어휘·문법·독해·논리 콘텐츠를 포함하며, 진단 결과에 따라 학년과 다른 레벨에 배정될 수도 있습니다.",
+    a: "4개 서버(프레게·소쉬르·러셀·비트겐슈타인) × 3단계로 총 12레벨입니다. 프레게 1~3, 소쉬르 1~3, 러셀 1~3, 비트겐슈타인 1~3 순서로 난이도가 올라가며, 진단 테스트 결과에 따라 학년과 무관하게 적합한 레벨에 배정됩니다.",
   },
   {
     q: "어떤 기능이 있나요?",
@@ -112,146 +117,220 @@ const FAQ_ITEMS = [
   },
 ];
 
-/* ── 기능 미리보기 컴포넌트 ── */
+/* ── 실제 페이지 미리보기 ── */
 
-const FARM_AREAS = [
-  { name: "어휘", color: "#4caf50" },
-  { name: "문법", color: "#2196f3" },
-  { name: "독해", color: "#9c27b0" },
-  { name: "쓰기", color: "#ff9800" },
-  { name: "논리", color: "#f44336" },
-  { name: "화법", color: "#00bcd4" },
-  { name: "문학", color: "#e91e63" },
-  { name: "매체", color: "#607d8b" },
-  { name: "음운", color: "#795548" },
+const SAMPLE_CHAPTERS = [
+  { id: 1, num: 1, title: "어휘의 기초", desc: "낱말의 뜻과 쓰임", progress: 100, status: "passed" },
+  { id: 2, num: 2, title: "맞춤법과 띄어쓰기", desc: "올바른 표기법 익히기", progress: 65, status: "current" },
+  { id: 3, num: 3, title: "문장의 구조", desc: "주어와 서술어의 관계", progress: 0, status: "locked" },
+  { id: 4, num: 4, title: "독해의 기본", desc: "글의 중심 내용 파악", progress: 0, status: "locked" },
+  { id: 5, num: 5, title: "논리적 사고", desc: "근거와 주장의 관계", progress: 0, status: "locked" },
 ];
 
-function FeaturePreview({ index }) {
-  if (index === 0) {
+function ProModePreview() {
+  const getBadge = (status) => {
+    if (status === "passed") return <span className="pro-badge passed">통과</span>;
+    if (status === "current") return <span className="pro-badge current">진행중</span>;
     return (
-      <div className="landing-mockup">
-        <div className="mockup-chrome">
-          <span /><span /><span />
-          <div className="mockup-url">프로 모드</div>
-        </div>
-        <div className="mockup-body">
-          {[
-            { ch: "1장 · 어휘의 세계", pct: 75 },
-            { ch: "2장 · 문법 탐구", pct: 40 },
-            { ch: "3장 · 독해력 향상", pct: 10 },
-          ].map((item, i) => (
-            <div className="mockup-card" key={i}>
-              <div className="mockup-card-title">{item.ch}</div>
-              <div className="mockup-modules-row">
-                {["어휘", "배경", "논리", "테스트", "정답"].map((m) => (
-                  <span key={m} className="mockup-mod-badge">{m}</span>
+      <span className="pro-badge locked">
+        <span className="material-symbols-outlined pro-badge-lock-icon">lock</span>
+        잠김
+      </span>
+    );
+  };
+
+  return (
+    <div className="landing-preview-frame">
+      <div className="landing-preview-scale">
+        <div className="pro" style={{ minHeight: "auto", background: "#f8fafc" }}>
+          <div className="pro-topbar">
+            <div className="pro-topbar-inner">
+              <span className="pro-back"><span className="material-symbols-outlined" style={{ fontSize: 18 }}>arrow_back</span> 홈</span>
+              <h1 className="pro-topbar-title">프로 모드</h1>
+            </div>
+          </div>
+          <div className="pro-body" style={{ padding: "16px 20px" }}>
+            <div className="pro-hero"><h2>프로 모드 학습</h2><p>챕터를 순서대로 학습하고 테스트를 통과하세요.</p></div>
+            <table className="pro-table">
+              <thead>
+                <tr>
+                  <th className="pro-th-num">번호</th>
+                  <th>챕터</th>
+                  <th className="pro-th-progress">진행률</th>
+                  <th className="pro-th-status">상태</th>
+                </tr>
+              </thead>
+              <tbody>
+                {SAMPLE_CHAPTERS.map((ch) => (
+                  <tr key={ch.id} className={`pro-row ${ch.status}`}>
+                    <td>{ch.num}</td>
+                    <td><strong>{ch.title}</strong><span className="pro-chapter-desc">{ch.desc}</span></td>
+                    <td>
+                      <div className="pro-progress-bar"><div className="pro-progress-fill" style={{ width: `${ch.progress}%` }} /></div>
+                      <span className="pro-progress-label">{ch.progress}%</span>
+                    </td>
+                    <td>{getBadge(ch.status)}</td>
+                  </tr>
                 ))}
-              </div>
-              <div className="mockup-progress-bar">
-                <div style={{ width: `${item.pct}%` }} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (index === 1) {
-    return (
-      <div className="landing-mockup">
-        <div className="mockup-chrome">
-          <span /><span /><span />
-          <div className="mockup-url">농장별 모드</div>
-        </div>
-        <div className="mockup-body">
-          <div className="mockup-farm-grid">
-            {FARM_AREAS.map((area) => (
-              <div key={area.name} className="mockup-farm-cell" style={{ borderColor: area.color }}>
-                <div className="mockup-farm-dot" style={{ background: area.color }} />
-                <span>{area.name}</span>
-              </div>
-            ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-    );
-  }
-
-  if (index === 2) {
-    const cx = 100, cy = 95, r = 70;
-    const angles = [0, 1, 2, 3, 4].map((i) => (Math.PI * 2 * i) / 5 - Math.PI / 2);
-    const labels = ["어휘", "문법", "독해", "논리", "서술"];
-    const values = [0.85, 0.7, 0.9, 0.6, 0.75];
-    const outerPts = angles.map((a) => `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`).join(" ");
-    const dataPts = angles.map((a, i) => `${cx + r * values[i] * Math.cos(a)},${cy + r * values[i] * Math.sin(a)}`).join(" ");
-    return (
-      <div className="landing-mockup">
-        <div className="mockup-chrome">
-          <span /><span /><span />
-          <div className="mockup-url">통합 성적표</div>
-        </div>
-        <div className="mockup-body mockup-report-body">
-          <svg viewBox="0 0 200 200" className="mockup-radar">
-            <polygon points={outerPts} fill="none" stroke="#e2eadf" strokeWidth="1.5" />
-            <polygon points={dataPts} fill="rgba(255,143,43,0.2)" stroke="#ff8f2b" strokeWidth="2" />
-            {angles.map((a, i) => (
-              <text key={i} x={cx + (r + 16) * Math.cos(a)} y={cy + (r + 16) * Math.sin(a)} textAnchor="middle" dominantBaseline="middle" fontSize="11" fill="#555" fontWeight="600">
-                {labels[i]}
-              </text>
-            ))}
-          </svg>
-          <div className="mockup-score-row">
-            <div className="mockup-score-item">
-              <span className="mockup-score-num">87</span>
-              <span className="mockup-score-label">종합 점수</span>
-            </div>
-            <div className="mockup-score-item">
-              <span className="mockup-score-num">Lv.8</span>
-              <span className="mockup-score-label">현재 레벨</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (index === 3) {
-    const students = [
-      { name: "김민준", lv: "Lv.6", score: 92 },
-      { name: "이서연", lv: "Lv.5", score: 88 },
-      { name: "박지호", lv: "Lv.7", score: 95 },
-      { name: "최수아", lv: "Lv.4", score: 79 },
-    ];
-    return (
-      <div className="landing-mockup">
-        <div className="mockup-chrome">
-          <span /><span /><span />
-          <div className="mockup-url">기관 관리</div>
-        </div>
-        <div className="mockup-body">
-          <div className="mockup-stats-row">
-            <div className="mockup-mini-stat"><strong>24</strong><span>학생 수</span></div>
-            <div className="mockup-mini-stat"><strong>3</strong><span>반</span></div>
-            <div className="mockup-mini-stat"><strong>87%</strong><span>과제 완료율</span></div>
-          </div>
-          <div className="mockup-table">
-            <div className="mockup-table-header">
-              <span>이름</span><span>레벨</span><span>점수</span>
-            </div>
-            {students.map((s) => (
-              <div className="mockup-table-row" key={s.name}>
-                <span>{s.name}</span><span>{s.lv}</span><span>{s.score}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return null;
+    </div>
+  );
 }
+
+function FarmModePreview() {
+  return (
+    <div className="landing-preview-frame">
+      <div className="landing-preview-scale">
+        <div className="farm" style={{ minHeight: "auto", background: "linear-gradient(135deg, rgba(250,248,246,0.95), rgba(255,238,222,0.95))" }}>
+          <div className="farm-topbar">
+            <div className="farm-topbar-inner">
+              <span className="farm-back"><span className="material-symbols-outlined" style={{ fontSize: 18 }}>arrow_back</span> 돌아가기</span>
+              <h1 className="farm-topbar-title">농장별 모드</h1>
+            </div>
+          </div>
+          <div className="farm-hero"><h2>나의 농장을 선택하세요</h2><p>영역별로 분류된 학습 콘텐츠를 탐색합니다</p></div>
+          <div className="farm-grid" style={{ paddingBottom: 24 }}>
+            {FARM_LIST.map((farm) => (
+              <div key={farm.id} className="farm-card" style={{ cursor: "default" }}>
+                <div className="farm-card-icon">{farm.emoji}</div>
+                <div className="farm-card-body">
+                  <p className="farm-card-name">{farm.name}</p>
+                  <p className="farm-card-desc">{farm.description}</p>
+                  <span className="farm-card-count" style={{ background: farm.color }}>학습 12개</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReportPreview() {
+  const summaryCards = [
+    { label: "총 활동", value: "42", sub: "회" },
+    { label: "평균 점수", value: "87.5", sub: "점" },
+    { label: "학습 일수", value: "18", sub: "일" },
+    { label: "최강 영역", value: "어휘", sub: "" },
+    { label: "최약 영역", value: "논리", sub: "" },
+  ];
+  const labels = ["어휘", "문법", "독해", "논리", "서술"];
+  const scores = [85, 70, 90, 55, 75];
+  const cx = 120, cy = 110, r = 80;
+  const angles = labels.map((_, i) => (Math.PI * 2 * i) / labels.length - Math.PI / 2);
+  const gridLevels = [0.2, 0.4, 0.6, 0.8, 1.0];
+
+  return (
+    <div className="landing-preview-frame">
+      <div className="landing-preview-scale">
+        <div style={{ background: "radial-gradient(circle at top, #18231a, #0f1410)", minHeight: 600, padding: "20px 16px", color: "#f3f6f1" }}>
+          <div className="ur-header"><h1 style={{ fontSize: 20, fontWeight: 800, margin: 0 }}>통합 성적표</h1></div>
+          <div className="ur-summary-row">
+            {summaryCards.map((c) => (
+              <div key={c.label} className="ur-summary-card">
+                <div className="ur-card-label">{c.label}</div>
+                <div className="ur-card-value">{c.value}</div>
+                {c.sub && <div className="ur-card-sub">{c.sub}</div>}
+              </div>
+            ))}
+          </div>
+          <div className="ur-radar-wrap">
+            <h3>영역별 성취도</h3>
+            <svg viewBox="0 0 240 230" style={{ width: "100%", maxWidth: 320, display: "block", margin: "0 auto" }}>
+              {gridLevels.map((lv) => (
+                <polygon key={lv} points={angles.map((a) => `${cx + r * lv * Math.cos(a)},${cy + r * lv * Math.sin(a)}`).join(" ")} fill="none" stroke="rgba(163,182,169,0.15)" strokeWidth="1" />
+              ))}
+              {angles.map((a, i) => (
+                <line key={i} x1={cx} y1={cy} x2={cx + r * Math.cos(a)} y2={cy + r * Math.sin(a)} stroke="rgba(163,182,169,0.15)" strokeWidth="1" />
+              ))}
+              <polygon
+                points={angles.map((a, i) => `${cx + r * (scores[i] / 100) * Math.cos(a)},${cy + r * (scores[i] / 100) * Math.sin(a)}`).join(" ")}
+                fill="rgba(240,108,36,0.2)" stroke="rgba(240,108,36,0.8)" strokeWidth="2"
+              />
+              {angles.map((a, i) => {
+                const px = cx + r * (scores[i] / 100) * Math.cos(a);
+                const py = cy + r * (scores[i] / 100) * Math.sin(a);
+                return <circle key={`p${i}`} cx={px} cy={py} r="4" fill="rgba(240,108,36,1)" />;
+              })}
+              {angles.map((a, i) => (
+                <text key={`l${i}`} x={cx + (r + 18) * Math.cos(a)} y={cy + (r + 18) * Math.sin(a)} textAnchor="middle" dominantBaseline="middle" fontSize="12" fill="#f3f6f1" fontWeight="bold">{labels[i]}</text>
+              ))}
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AdminPreview() {
+  const cards = [
+    { label: "오늘 가입자", value: "3" },
+    { label: "활성 사용자", value: "127" },
+    { label: "전체 사용자", value: "584" },
+    { label: "활성 기관", value: "12" },
+  ];
+  const extraCards = [
+    { label: "오늘 학습 참여", value: "89" },
+    { label: "승인 대기", value: "5" },
+    { label: "학부모 연결 대기", value: "2" },
+    { label: "최근 7일 시험 응시", value: "156" },
+  ];
+  return (
+    <div className="landing-preview-frame">
+      <div className="landing-preview-scale">
+        <div className="admin-page" style={{ minHeight: "auto" }}>
+          <div style={{ maxWidth: 960, margin: "0 auto", padding: "20px 20px" }}>
+            <div className="admin-topbar" style={{ marginBottom: 16 }}>
+              <div><h1 style={{ fontSize: 20, fontWeight: 800, margin: 0 }}>운영 대시보드</h1><p style={{ margin: "4px 0 0", fontSize: 13, color: "var(--admin-muted)" }}>오늘의 운영 지표와 처리 현황을 확인하세요.</p></div>
+            </div>
+            <section className="admin-summary">
+              {cards.map((item) => (
+                <div className="admin-card" key={item.label}>
+                  <span>{item.label}</span>
+                  <strong>{item.value}</strong>
+                </div>
+              ))}
+            </section>
+            <section className="admin-summary" style={{ marginTop: 0 }}>
+              {extraCards.map((item) => (
+                <div className="admin-card" key={item.label}>
+                  <span>{item.label}</span>
+                  <strong>{item.value}</strong>
+                </div>
+              ))}
+            </section>
+            <section className="admin-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 16 }}>
+              <div className="admin-card">
+                <h2 style={{ fontSize: 15, fontWeight: 700, margin: "0 0 8px" }}>빠른 이동</h2>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <span className="admin-action">기관 관리</span>
+                  <span className="admin-action">학생 관리</span>
+                  <span className="admin-action">콘텐츠 관리</span>
+                </div>
+              </div>
+              <div className="admin-card">
+                <h2 style={{ fontSize: 15, fontWeight: 700, margin: "0 0 8px" }}>관리 메뉴</h2>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <span className="admin-action">과제/피드백</span>
+                  <span className="admin-action">시즌 관리</span>
+                  <span className="admin-action">상점 관리</span>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const FEATURE_PREVIEWS = [ProModePreview, FarmModePreview, ReportPreview, AdminPreview];
 
 /* ── 메인 컴포넌트 ── */
 
@@ -347,22 +426,10 @@ function LandingPage() {
       {/* ── 통계 바 ── */}
       <div className="landing-stats-bar">
         <div className="landing-wrap landing-stats-inner">
-          <div className="landing-stat">
-            <strong>9</strong>
-            <span>학습 영역</span>
-          </div>
-          <div className="landing-stat">
-            <strong>12</strong>
-            <span>레벨 체계</span>
-          </div>
-          <div className="landing-stat">
-            <strong>180+</strong>
-            <span>챕터</span>
-          </div>
-          <div className="landing-stat">
-            <strong>AI</strong>
-            <span>자동 채점</span>
-          </div>
+          <div className="landing-stat"><strong>9</strong><span>학습 영역</span></div>
+          <div className="landing-stat"><strong>12</strong><span>레벨 체계</span></div>
+          <div className="landing-stat"><strong>180+</strong><span>챕터</span></div>
+          <div className="landing-stat"><strong>AI</strong><span>자동 채점</span></div>
         </div>
       </div>
 
@@ -384,9 +451,7 @@ function LandingPage() {
                   </div>
                   <p>{item.desc}</p>
                   <div className="landing-flow-tags">
-                    {item.tags.map((tag) => (
-                      <span key={tag} className="landing-tag">{tag}</span>
-                    ))}
+                    {item.tags.map((tag) => (<span key={tag} className="landing-tag">{tag}</span>))}
                   </div>
                 </div>
               </div>
@@ -403,31 +468,29 @@ function LandingPage() {
             <p>국어농장만의 차별화된 학습 시스템을 자세히 살펴보세요.</p>
           </div>
           <div className="landing-deep-list">
-            {DEEP_FEATURES.map((feat, idx) => (
-              <div
-                className={`landing-deep-item ${idx % 2 === 1 ? "reverse" : ""}`}
-                key={feat.title}
-              >
-                <div className="landing-deep-text">
-                  <div className="landing-deep-icon-title">
-                    <span className="material-symbols-outlined">{feat.icon}</span>
-                    <div>
-                      <h3>{feat.title}</h3>
-                      <span className="landing-deep-subtitle">{feat.subtitle}</span>
+            {DEEP_FEATURES.map((feat, idx) => {
+              const Preview = FEATURE_PREVIEWS[idx];
+              return (
+                <div className={`landing-deep-item ${idx % 2 === 1 ? "reverse" : ""}`} key={feat.title}>
+                  <div className="landing-deep-text">
+                    <div className="landing-deep-icon-title">
+                      <span className="material-symbols-outlined">{feat.icon}</span>
+                      <div>
+                        <h3>{feat.title}</h3>
+                        <span className="landing-deep-subtitle">{feat.subtitle}</span>
+                      </div>
+                    </div>
+                    <p>{feat.desc}</p>
+                    <div className="landing-deep-highlights">
+                      {feat.highlights.map((h) => (<span key={h} className="landing-tag">{h}</span>))}
                     </div>
                   </div>
-                  <p>{feat.desc}</p>
-                  <div className="landing-deep-highlights">
-                    {feat.highlights.map((h) => (
-                      <span key={h} className="landing-tag">{h}</span>
-                    ))}
+                  <div className="landing-deep-visual">
+                    <Preview />
                   </div>
                 </div>
-                <div className="landing-deep-visual">
-                  <FeaturePreview index={idx} />
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -488,17 +551,11 @@ function LandingPage() {
             <div className="landing-contact-methods">
               <a href="tel:010-8950-0655" className="landing-contact-method">
                 <span className="material-symbols-outlined">call</span>
-                <div>
-                  <strong>전화 문의</strong>
-                  <span>010-8950-0655</span>
-                </div>
+                <div><strong>전화 문의</strong><span>010-8950-0655</span></div>
               </a>
               <a href="mailto:contact@korfarm.com" className="landing-contact-method">
                 <span className="material-symbols-outlined">mail</span>
-                <div>
-                  <strong>이메일 문의</strong>
-                  <span>contact@korfarm.com</span>
-                </div>
+                <div><strong>이메일 문의</strong><span>contact@korfarm.com</span></div>
               </a>
             </div>
           </div>
@@ -510,41 +567,20 @@ function LandingPage() {
         <div className="landing-wrap landing-footer-grid">
           <div>
             <div className="landing-brand" aria-label="국어농장">
-              <img
-                className="landing-logo"
-                src={import.meta.env.BASE_URL + "korfarm-logo.png"}
-                alt="국어농장"
-              />
+              <img className="landing-logo" src={import.meta.env.BASE_URL + "korfarm-logo.png"} alt="국어농장" />
             </div>
             <p>국어 학습의 출발부터 성취까지, 국어농장이 함께 성장합니다.</p>
           </div>
           <div className="landing-footer-nav">
-            <div>
-              <h4>서비스</h4>
-              <a href="#program">학습 흐름</a>
-              <a href="#features">핵심 기능</a>
-              <a href="#faq">자주 묻는 질문</a>
-            </div>
-            <div>
-              <h4>지원</h4>
-              <a href="#contact">상담 문의</a>
-              <Link to="/shop">쇼핑몰</Link>
-            </div>
-            <div>
-              <h4>법적 고지</h4>
-              <Link to="/terms">이용약관</Link>
-              <Link to="/privacy">개인정보처리방침</Link>
-            </div>
+            <div><h4>서비스</h4><a href="#program">학습 흐름</a><a href="#features">핵심 기능</a><a href="#faq">자주 묻는 질문</a></div>
+            <div><h4>지원</h4><a href="#contact">상담 문의</a><Link to="/shop">쇼핑몰</Link></div>
+            <div><h4>법적 고지</h4><Link to="/terms">이용약관</Link><Link to="/privacy">개인정보처리방침</Link></div>
           </div>
         </div>
         <div className="landing-wrap landing-footer-bottom">
           <p>&copy; 2026 국어농장. All rights reserved.</p>
-          <p className="landing-footer-biz">
-            상호: (주)디셈버글로리 | 대표: 김대표 | 사업자등록번호: 226-86-00815 | 통신판매업신고: 제2021-부산해운대-0501호
-          </p>
-          <p className="landing-footer-biz">
-            주소: 부산광역시 해운대구 세실로27번길 21 원재프라자 8층 | 연락처: 010-8950-0655
-          </p>
+          <p className="landing-footer-biz">상호: (주)디셈버글로리 | 대표: 김대표 | 사업자등록번호: 226-86-00815 | 통신판매업신고: 제2021-부산해운대-0501호</p>
+          <p className="landing-footer-biz">주소: 부산광역시 해운대구 세실로27번길 21 원재프라자 8층 | 연락처: 010-8950-0655</p>
         </div>
       </footer>
     </div>

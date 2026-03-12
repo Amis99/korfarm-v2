@@ -495,217 +495,23 @@
   min-height: 200px;
 }
 
-/* ── 기능 미리보기 목업 ── */
-.landing-mockup {
+/* ── 기능 미리보기 (실제 페이지 축소) ── */
+.landing-preview-frame {
   width: 100%;
-  background: #fff;
   border-radius: 16px;
   border: 1px solid #e2eadf;
   box-shadow: 0 12px 32px rgba(19, 24, 17, 0.08);
   overflow: hidden;
-}
-
-.mockup-chrome {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
-  background: #f5f7f4;
-  border-bottom: 1px solid #e2eadf;
-}
-
-.mockup-chrome > span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #dde5d9;
-}
-
-.mockup-chrome > span:first-child { background: #ffb5b5; }
-.mockup-chrome > span:nth-child(2) { background: #ffe0a3; }
-.mockup-chrome > span:nth-child(3) { background: #b5e6b5; }
-
-.mockup-url {
-  margin-left: 10px;
-  font-size: 11px;
-  color: #999;
-  font-weight: 600;
-  background: #eef2ec;
-  padding: 3px 10px;
-  border-radius: 6px;
-}
-
-.mockup-body {
-  padding: 16px;
-  display: grid;
-  gap: 10px;
-}
-
-/* 프로 모드 목업 */
-.mockup-card {
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #eef2ec;
-  background: #fafcf9;
-  display: grid;
-  gap: 8px;
-}
-
-.mockup-card-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--landing-ink);
-}
-
-.mockup-modules-row {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
-.mockup-mod-badge {
-  font-size: 10px;
-  padding: 2px 7px;
-  border-radius: 999px;
-  background: var(--landing-soft);
-  color: var(--landing-primary-dark);
-  font-weight: 600;
-}
-
-.mockup-progress-bar {
-  height: 6px;
-  border-radius: 3px;
-  background: #eef2ec;
-  overflow: hidden;
-}
-
-.mockup-progress-bar > div {
-  height: 100%;
-  border-radius: 3px;
-  background: var(--landing-primary);
-  transition: width 0.3s;
-}
-
-/* 농장별 모드 목업 */
-.mockup-farm-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.mockup-farm-cell {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1.5px solid #e2eadf;
   background: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--landing-ink);
+  height: 380px;
+  position: relative;
 }
 
-.mockup-farm-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* AI 채점 목업 */
-.mockup-report-body {
-  align-items: center;
-  justify-items: center;
-}
-
-.mockup-radar {
-  width: 160px;
-  height: 160px;
-}
-
-.mockup-score-row {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-}
-
-.mockup-score-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.mockup-score-num {
-  font-size: 22px;
-  font-weight: 900;
-  color: var(--landing-primary-dark);
-  font-family: var(--font-display);
-}
-
-.mockup-score-label {
-  font-size: 11px;
-  color: #999;
-  font-weight: 600;
-}
-
-/* 기관 관리 목업 */
-.mockup-stats-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 6px;
-}
-
-.mockup-mini-stat {
-  flex: 1;
-  padding: 8px;
-  border-radius: 8px;
-  background: var(--landing-soft);
-  text-align: center;
-}
-
-.mockup-mini-stat strong {
-  display: block;
-  font-size: 16px;
-  font-weight: 900;
-  color: var(--landing-primary-dark);
-}
-
-.mockup-mini-stat span {
-  font-size: 10px;
-  color: #888;
-  font-weight: 600;
-}
-
-.mockup-table {
-  border: 1px solid #eef2ec;
-  border-radius: 8px;
-  overflow: hidden;
-  font-size: 12px;
-}
-
-.mockup-table-header {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  padding: 6px 10px;
-  background: #f5f7f4;
-  font-weight: 700;
-  color: #888;
-  border-bottom: 1px solid #eef2ec;
-}
-
-.mockup-table-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  padding: 6px 10px;
-  border-bottom: 1px solid #f0f3ee;
-  color: var(--landing-ink);
-  font-weight: 600;
-}
-
-.mockup-table-row:last-child {
-  border-bottom: none;
+.landing-preview-scale {
+  width: 200%;
+  transform: scale(0.5);
+  transform-origin: top left;
+  pointer-events: none;
 }
 
 /* ── 게임화 시스템 ── */
