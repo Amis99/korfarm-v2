@@ -9,6 +9,9 @@ interface BoardRepository : JpaRepository<BoardEntity, String> {
 
 interface PostRepository : JpaRepository<PostEntity, String> {
     fun findByBoardIdOrderByCreatedAtDesc(boardId: String): List<PostEntity>
+    fun findByBoardIdAndIsGuestAndGuestNameAndGuestContactOrderByCreatedAtDesc(
+        boardId: String, isGuest: Boolean, guestName: String, guestContact: String
+    ): List<PostEntity>
 }
 
 interface PostAttachmentRepository : JpaRepository<PostAttachmentEntity, String> {

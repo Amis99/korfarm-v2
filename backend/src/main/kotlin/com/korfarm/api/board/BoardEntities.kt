@@ -54,6 +54,15 @@ class PostEntity(
     @Column(name = "user_id", nullable = false)
     var userId: String,
 
+    @Column(name = "guest_name")
+    var guestName: String? = null,
+
+    @Column(name = "guest_contact")
+    var guestContact: String? = null,
+
+    @Column(name = "is_guest", nullable = false)
+    var isGuest: Boolean = false,
+
     @Column(nullable = false)
     var title: String,
 

@@ -289,7 +289,7 @@ function LandingPage() {
                 <span className="material-symbols-outlined">mail</span>
                 <div><strong>이메일 문의</strong><span>contact@korfarm.com</span></div>
               </a>
-              <Link to="/community?board=inquiry" className="landing-contact-method">
+              <Link to="/inquiry" className="landing-contact-method">
                 <span className="material-symbols-outlined">forum</span>
                 <div><strong>문의 게시판</strong><span>온라인 문의하기</span></div>
               </Link>

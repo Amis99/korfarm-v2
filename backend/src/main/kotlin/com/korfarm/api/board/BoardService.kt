@@ -328,7 +328,10 @@ class BoardService(
             title = title,
             status = status,
             createdAt = createdAt,
-            authorId = userId
+            authorId = userId,
+            isGuest = isGuest,
+            guestName = guestName,
+            guestContact = guestContact
         )
     }
 
@@ -342,7 +345,10 @@ class BoardService(
             createdAt = createdAt,
             updatedAt = updatedAt,
             authorId = userId,
-            attachments = attachments
+            attachments = attachments,
+            isGuest = isGuest,
+            guestName = guestName,
+            guestContact = guestContact
         )
     }
 

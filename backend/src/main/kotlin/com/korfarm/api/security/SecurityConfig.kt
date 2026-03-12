@@ -54,7 +54,7 @@ class SecurityConfig(
         http.sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         http.authorizeHttpRequests {
             it.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            it.requestMatchers("/v1/health", "/v1/auth/**", "/v1/learning/catalog/**", "/v1/learning/content/**").permitAll()
+            it.requestMatchers("/v1/health", "/v1/auth/**", "/v1/learning/catalog/**", "/v1/learning/content/**", "/v1/public/**").permitAll()
             it.anyRequest().authenticated()
         }
         http.addFilterBefore(JwtAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter::class.java)

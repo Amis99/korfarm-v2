@@ -22,7 +22,10 @@ data class PostSummary(
     val title: String,
     val status: String,
     val createdAt: LocalDateTime,
-    val authorId: String
+    val authorId: String,
+    val isGuest: Boolean = false,
+    val guestName: String? = null,
+    val guestContact: String? = null
 )
 
 data class PostDetail(
@@ -34,7 +37,10 @@ data class PostDetail(
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
     val authorId: String,
-    val attachments: List<PostAttachmentView>
+    val attachments: List<PostAttachmentView>,
+    val isGuest: Boolean = false,
+    val guestName: String? = null,
+    val guestContact: String? = null
 )
 
 data class CommentView(

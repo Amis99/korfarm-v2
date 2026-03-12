@@ -28,7 +28,10 @@ class AdminInquiryController(
                 title = post.title,
                 status = post.status,
                 createdAt = post.createdAt,
-                authorId = post.userId
+                authorId = post.userId,
+                isGuest = post.isGuest,
+                guestName = post.guestName,
+                guestContact = post.guestContact
             )
         }
         return ApiResponse(success = true, data = posts)

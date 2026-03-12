@@ -97,9 +97,17 @@ function AdminInquiryPage() {
 
             <div className="admin-card" style={{ padding: 24, marginBottom: 20 }}>
               <h2 style={{ fontSize: 18, fontWeight: 800, margin: "0 0 8px" }}>{detail.title}</h2>
-              <div style={{ fontSize: 13, color: "#888", marginBottom: 16 }}>
-                <span>작성자: {detail.authorId}</span>
-                <span style={{ marginLeft: 16 }}>작성일: {formatDate(detail.createdAt)}</span>
+              <div style={{ fontSize: 13, color: "#888", marginBottom: 16, display: "flex", gap: 16, flexWrap: "wrap" }}>
+                {detail.isGuest ? (
+                  <>
+                    <span>이름: <strong style={{ color: "#2b221d" }}>{detail.guestName}</strong></span>
+                    <span>연락처: <strong style={{ color: "#2b221d" }}>{detail.guestContact}</strong></span>
+                    <span style={{ background: "#fff3e0", padding: "1px 8px", borderRadius: 4, fontSize: 11, fontWeight: 700, color: "#e65100" }}>비회원</span>
+                  </>
+                ) : (
+                  <span>작성자: {detail.authorId}</span>
+                )}
+                <span>작성일: {formatDate(detail.createdAt)}</span>
               </div>
               <div style={{ lineHeight: 1.8, fontSize: 15, whiteSpace: "pre-wrap" }}>
                 {detail.content}
@@ -182,7 +190,7 @@ function AdminInquiryPage() {
                 <tr style={{ background: "#f7faf6", borderBottom: "2px solid #e2eadf" }}>
                   <th style={{ padding: "12px 16px", textAlign: "left", fontSize: 13, fontWeight: 700 }}>번호</th>
                   <th style={{ padding: "12px 16px", textAlign: "left", fontSize: 13, fontWeight: 700 }}>제목</th>
-                  <th style={{ padding: "12px 16px", textAlign: "left", fontSize: 13, fontWeight: 700 }}>작성자</th>
+                  <th style={{ padding: "12px 16px", textAlign: "left", fontSize: 13, fontWeight: 700 }}>작성자 / 연락처</th>
                   <th style={{ padding: "12px 16px", textAlign: "left", fontSize: 13, fontWeight: 700 }}>작성일</th>
                 </tr>
               </thead>
@@ -210,7 +218,15 @@ function AdminInquiryPage() {
                     >
                       <td style={{ padding: "12px 16px", fontSize: 14 }}>{posts.length - idx}</td>
                       <td style={{ padding: "12px 16px", fontSize: 14, fontWeight: 600 }}>{post.title}</td>
-                      <td style={{ padding: "12px 16px", fontSize: 14, color: "#666" }}>{post.authorId}</td>
+                      <td style={{ padding: "12px 16px", fontSize: 14, color: "#666" }}>
+                        {post.isGuest ? (
+                          <span>
+                            {post.guestName}
+                            <span style={{ marginLeft: 6, fontSize: 12, color: "#999" }}>{post.guestContact}</span>
+                            <span style={{ marginLeft: 6, background: "#fff3e0", padding: "1px 6px", borderRadius: 4, fontSize: 10, fontWeight: 700, color: "#e65100" }}>비회원</span>
+                          </span>
+                        ) : post.authorId}
+                      </td>
                       <td style={{ padding: "12px 16px", fontSize: 14, color: "#888" }}>{formatDate(post.createdAt)}</td>
                     </tr>
                   ))

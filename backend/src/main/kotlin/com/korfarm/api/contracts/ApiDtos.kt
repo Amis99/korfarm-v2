@@ -301,3 +301,15 @@ data class AdminWisdomFeedbackCreateRequest(
 data class CreateWisdomCommentRequest(
     @field:NotBlank val content: String
 )
+
+data class CreateGuestInquiryRequest(
+    @field:NotBlank val guestName: String,
+    @field:NotBlank val guestContact: String,
+    @field:NotBlank val title: String,
+    @field:NotBlank val content: String
+)
+
+data class VerifyGuestInquiryRequest(
+    @field:NotBlank val guestName: String,
+    @field:NotBlank val guestContact: String
+)
