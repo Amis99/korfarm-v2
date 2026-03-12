@@ -76,6 +76,11 @@ class BoardController(
         return ApiResponse(success = true, data = mapOf("status" to "deleted"))
     }
 
+    @GetMapping("/v1/posts/{postId}/comments")
+    fun listComments(@PathVariable postId: String): ApiResponse<List<CommentView>> {
+        return ApiResponse(success = true, data = boardService.listComments(postId))
+    }
+
     @PostMapping("/v1/posts/{postId}/comments")
     fun createComment(
         @PathVariable postId: String,

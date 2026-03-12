@@ -563,6 +563,93 @@
   color: #555;
 }
 
+/* ── 자세히 보기 링크 ── */
+.landing-deep-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--landing-primary-dark);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  transition: gap 0.2s;
+}
+
+.landing-deep-more:hover {
+  gap: 8px;
+}
+
+.landing-pricing-more-wrap {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.landing-pricing-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--landing-primary-dark);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  transition: gap 0.2s;
+}
+
+.landing-pricing-more:hover {
+  gap: 8px;
+}
+
+/* ── 10대 역량 ── */
+.landing-competencies {
+  background: #fff;
+}
+
+.landing-competency-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.landing-competency-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fafbf9;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid #e2eadf;
+}
+
+.landing-competency-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 154, 61, 0.12);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.landing-competency-icon .material-symbols-outlined {
+  font-size: 26px;
+  color: var(--landing-primary);
+}
+
+.landing-competency-card h4 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.landing-competency-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+}
+
 /* ── 요금 안내 ── */
 .landing-pricing {
   background: #f2f7f1;
@@ -971,6 +1058,9 @@
     grid-template-columns: 1fr;
     max-width: 400px;
     margin: 0 auto;
+  }
+  .landing-competency-grid {
+    grid-template-columns: 1fr;
   }
   .landing-pricing-grid {
     grid-template-columns: 1fr;

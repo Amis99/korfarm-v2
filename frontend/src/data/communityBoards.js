@@ -28,4 +28,11 @@ export const COMMUNITY_BOARDS = [
     writeRole: "admin",
     requiresPaid: true,
   },
+  {
+    id: "inquiry",
+    name: "문의/상담",
+    description: "문의사항을 남겨주시면 관리자가 답변드립니다",
+    tag: "문의",
+    isSecret: true,
+  },
 ];

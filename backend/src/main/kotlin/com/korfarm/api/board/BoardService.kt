@@ -46,7 +46,11 @@ class BoardService(
                 else -> false
             }
         }
-        return visible.map { it.toSummary() }
+        // inquiry 게시판: 본인 글만 목록에 표시 (관리자는 전체 보기)
+        val finalList = if (board.boardType == "inquiry" && !isAdmin) {
+            visible.filter { it.userId == userId }
+        } else visible
+        return finalList.map { it.toSummary() }
     }
 
     @Transactional
@@ -78,6 +82,10 @@ class BoardService(
         val board = getBoard(post.boardId)
         requireBoardEnabled(board, userId)
         if (!isAdmin && post.status != "active" && post.userId != userId) {
+            throw ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
+        }
+        // inquiry 게시판: 본인 글만 열람 가능 (관리자는 전체 열람)
+        if (board.boardType == "inquiry" && !isAdmin && post.userId != userId) {
             throw ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
         }
         val attachments = postAttachmentRepository.findByPostId(post.id).map { it.toView() }
@@ -124,6 +132,19 @@ class BoardService(
         }
         post.status = "deleted"
         postRepository.save(post)
+    }
+
+    @Transactional(readOnly = true)
+    fun listComments(postId: String): List<CommentView> {
+        val post = postRepository.findById(postId).orElseThrow {
+            ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
+        }
+        if (post.status == "deleted") {
+            throw ApiException("NOT_FOUND", "post not found", HttpStatus.NOT_FOUND)
+        }
+        return commentRepository.findByPostIdOrderByCreatedAtAsc(postId)
+            .filter { it.status != "deleted" }
+            .map { it.toView() }
     }
 
     @Transactional
@@ -268,6 +289,7 @@ class BoardService(
             "community" -> "feature.community.community_board"
             "qna" -> "feature.community.qna"
             "materials" -> "feature.community.materials"
+            "inquiry" -> "feature.community.inquiry"
             else -> null
         }
     }

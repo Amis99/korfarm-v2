@@ -186,6 +186,13 @@ function CommunityPage() {
           <p className="comm-notice">관리자 승인 후 게시글이 공개됩니다.</p>
         )}
 
+        {board.isSecret && (
+          <p className="comm-notice">
+            <span className="material-symbols-outlined" style={{ fontSize: 16, verticalAlign: "middle", marginRight: 4 }}>lock</span>
+            비밀글 게시판입니다. 본인이 작성한 글만 볼 수 있으며, 관리자가 답변을 달아드립니다.
+          </p>
+        )}
+
         {/* 상세 보기 */}
         {selectedPost ? (
           <div className="comm-detail">

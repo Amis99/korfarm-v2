@@ -1,0 +1,427 @@
+/* ── 구독 안내 상세 페이지 ── */
+
+.pricing-page {
+  --pr-primary: #ff8f2b;
+  --pr-primary-dark: #e0700f;
+  --pr-secondary: #6da475;
+  --pr-ink: #131811;
+  min-height: 100vh;
+  background: #fafbf9;
+  color: var(--pr-ink);
+  font-family: var(--font-body);
+  word-break: keep-all;
+}
+
+.pricing-wrap {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── 히어로 ── */
+.pricing-hero {
+  background: linear-gradient(135deg, #142210 0%, #1a3a15 50%, #142210 100%);
+  color: #fff;
+  padding: 80px 0 60px;
+  text-align: center;
+}
+
+.pricing-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  margin: 0 0 16px;
+}
+
+.pricing-hero p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 auto;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.pricing-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.pricing-home-link:hover {
+  color: #fff;
+}
+
+/* ── 플랜 카드 ── */
+.pricing-plans {
+  padding: 72px 0;
+}
+
+.pricing-plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.pricing-plan-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 32px;
+  border: 1px solid #dde6d8;
+  display: grid;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-plan-card.featured {
+  border: 2px solid var(--pr-primary);
+  box-shadow: 0 24px 50px rgba(255, 154, 61, 0.2);
+  transform: scale(1.03);
+}
+
+.pricing-plan-badge {
+  position: absolute;
+  top: 16px;
+  right: -24px;
+  transform: rotate(12deg);
+  background: var(--pr-primary);
+  color: var(--pr-ink);
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.pricing-plan-tag {
+  display: inline-flex;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(255, 143, 43, 0.15);
+  border: 1px solid rgba(255, 143, 43, 0.3);
+  color: var(--pr-primary-dark);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  width: fit-content;
+}
+
+.pricing-plan-card h3 {
+  margin: 0;
+  font-size: 26px;
+  font-family: var(--font-display);
+}
+
+.pricing-plan-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.pricing-plan-price {
+  font-size: 36px;
+  font-weight: 900;
+  font-family: var(--font-display);
+}
+
+.pricing-plan-discount {
+  padding: 6px 14px;
+  border-radius: 12px;
+  background: rgba(255, 143, 43, 0.1);
+  color: var(--pr-primary-dark);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.pricing-plan-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  color: var(--pr-secondary);
+}
+
+.pricing-plan-card li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+
+.pricing-plan-card li .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--pr-primary);
+}
+
+.pricing-plan-card a {
+  text-align: center;
+  border-radius: 20px;
+  padding: 14px 20px;
+  font-weight: 800;
+  text-decoration: none;
+  border: 2px solid #e0e8db;
+  color: var(--pr-ink);
+  background: #f7faf6;
+  transition: background 0.2s;
+}
+
+.pricing-plan-card.featured a {
+  background: var(--pr-primary);
+  border-color: var(--pr-primary);
+}
+
+/* ── 기능 비교 테이블 ── */
+.pricing-compare {
+  padding: 0 0 72px;
+}
+
+.pricing-compare h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  text-align: center;
+  margin: 0 0 8px;
+}
+
+.pricing-compare > .pricing-wrap > p {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  margin: 0 0 36px;
+}
+
+.pricing-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: 14px 16px;
+  text-align: center;
+  border-bottom: 1px solid #e6efe2;
+  font-size: 15px;
+}
+
+.pricing-table th {
+  font-weight: 800;
+  background: #f2f7f1;
+  position: sticky;
+  top: 0;
+}
+
+.pricing-table th:first-child,
+.pricing-table td:first-child {
+  text-align: left;
+  font-weight: 700;
+}
+
+.pricing-table td:first-child {
+  color: #333;
+}
+
+.pricing-check {
+  color: var(--pr-primary);
+  font-weight: 800;
+}
+
+.pricing-cross {
+  color: #ccc;
+}
+
+/* ── Pro 혜택 상세 ── */
+.pricing-pro-detail {
+  padding: 72px 0;
+  background: #f2f7f1;
+}
+
+.pricing-pro-detail h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  text-align: center;
+  margin: 0 0 36px;
+}
+
+.pricing-pro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.pricing-pro-item {
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid #e2eadf;
+  display: grid;
+  gap: 8px;
+}
+
+.pricing-pro-item h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pricing-pro-item h4 .material-symbols-outlined {
+  font-size: 20px;
+  color: var(--pr-primary);
+}
+
+.pricing-pro-item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.pricing-pro-item a {
+  font-size: 13px;
+  color: var(--pr-primary-dark);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.pricing-pro-item a:hover {
+  text-decoration: underline;
+}
+
+/* ── 할인 안내 ── */
+.pricing-discount-section {
+  padding: 56px 0;
+  text-align: center;
+}
+
+.pricing-discount-section h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0 0 28px;
+}
+
+.pricing-discount-cards {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pricing-discount-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 36px;
+  border: 1px solid #e2eadf;
+  text-align: center;
+  min-width: 200px;
+}
+
+.pricing-discount-card strong {
+  display: block;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--pr-primary-dark);
+  font-family: var(--font-display);
+  margin-bottom: 4px;
+}
+
+.pricing-discount-card span {
+  font-size: 15px;
+  color: #555;
+  font-weight: 600;
+}
+
+/* ── 하단 CTA ── */
+.pricing-cta {
+  text-align: center;
+  padding: 72px 0;
+  background: linear-gradient(135deg, #142210 0%, #1a3a15 50%, #142210 100%);
+  color: #fff;
+}
+
+.pricing-cta h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0 0 12px;
+}
+
+.pricing-cta p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 28px;
+}
+
+.pricing-cta-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pricing-cta-actions a {
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 16px;
+  transition: transform 0.15s;
+}
+
+.pricing-cta-actions .pricing-btn-primary {
+  background: var(--pr-primary);
+  color: var(--pr-ink);
+}
+
+.pricing-cta-actions .pricing-btn-ghost {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 720px) {
+  .pricing-hero {
+    padding: 60px 0 40px;
+  }
+
+  .pricing-plans-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .pricing-plan-card.featured {
+    transform: none;
+  }
+
+  .pricing-pro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-plans,
+  .pricing-compare,
+  .pricing-pro-detail,
+  .pricing-cta {
+    padding: 52px 0;
+  }
+
+  .pricing-discount-section {
+    padding: 40px 0;
+  }
+}

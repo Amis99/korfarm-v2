@@ -18,6 +18,7 @@ const NAV_ITEMS = [
   { to: "/admin/pro", icon: "workspace_premium", label: "프로 모드", roles: ["HQ_ADMIN"] },
   { to: "/admin/duel", icon: "swords", label: "대결 관리" },
   { to: "/admin/shop", icon: "storefront", label: "상점 관리" },
+  { to: "/admin/inquiry", icon: "contact_support", label: "문의 관리" },
   { to: "/admin/reports", icon: "flag", label: "보고" },
   { to: "/admin/flags", icon: "tune", label: "운영 플래그", roles: ["HQ_ADMIN"] },
   { to: "/", icon: "home", label: "랜딩" },

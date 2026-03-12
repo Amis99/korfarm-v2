@@ -48,6 +48,7 @@ const DEEP_FEATURES = [
     subtitle: "180+ 챕터, 6단계 모듈 구성",
     desc: "어휘·문법·독해·논리·서술·문제해결까지 6단계 모듈로 체계적으로 진행합니다. 각 챕터는 난이도별로 세분화되어 학습자의 성장에 맞춰 자동 조절됩니다.",
     highlights: ["6단계 모듈", "180+ 챕터", "난이도 자동 조절"],
+    linkHash: "pro-mode",
   },
   {
     icon: "park",
@@ -55,6 +56,7 @@ const DEEP_FEATURES = [
     subtitle: "9개 영역 약점 집중 훈련",
     desc: "어휘농장, 문법농장, 독해농장 등 9개 영역별 전용 농장에서 약점을 집중적으로 보강합니다. 각 농장마다 고유한 훈련 방식으로 효과를 극대화합니다.",
     highlights: ["9개 전문 영역", "약점 집중", "영역별 특화 훈련"],
+    linkHash: "farm-mode",
   },
   {
     icon: "smart_toy",
@@ -62,6 +64,7 @@ const DEEP_FEATURES = [
     subtitle: "자동 채점, 레이더 차트 분석",
     desc: "AI가 자동 채점하고, 영역별 성취도를 레이더 차트로 시각화합니다. 학습 추이와 취약점을 한눈에 파악할 수 있습니다.",
     highlights: ["AI 자동 채점", "레이더 차트", "학습 추이 분석"],
+    linkHash: "ai-scoring",
   },
   {
     icon: "dashboard",
@@ -69,6 +72,7 @@ const DEEP_FEATURES = [
     subtitle: "반 관리, 과제 배포, 학부모 연동",
     desc: "학원·학교 관리자가 반을 구성하고, 과제를 일괄 배포하며, 학부모에게 학습 현황을 공유할 수 있습니다. 기관 운영 효율을 극대화합니다.",
     highlights: ["반 관리", "과제 일괄 배포", "학부모 리포트"],
+    linkHash: "org-management",
   },
 ];
 
@@ -90,6 +94,19 @@ const GAMIFICATION = [
   },
 ];
 
+const COMPETENCIES = [
+  { icon: "spellcheck", name: "어휘력", desc: "단어의 뜻과 쓰임을 정확히 이해하고 활용하는 능력" },
+  { icon: "article", name: "문장 독해력", desc: "문장 단위의 의미를 정확히 파악하고 해석하는 능력" },
+  { icon: "account_tree", name: "구조 독해력", desc: "글 전체의 구조와 논리적 흐름을 파악하는 능력" },
+  { icon: "psychology", name: "논리 사고력", desc: "근거와 주장의 관계를 분석하고 추론하는 능력" },
+  { icon: "edit_note", name: "어법·문법 능력", desc: "국어 어법과 문법 규칙을 이해하고 적용하는 능력" },
+  { icon: "lightbulb", name: "국어 개념 적용 능력", desc: "학습한 국어 개념을 실제 문제에 적용하는 능력" },
+  { icon: "history_edu", name: "국어 관련 배경지식", desc: "문학사, 국어학 등 국어 관련 배경지식 활용 능력" },
+  { icon: "science", name: "비문학 배경지식", desc: "인문·사회·과학·기술·예술 등 다양한 분야의 지식 활용 능력" },
+  { icon: "target", name: "문제 분석 및 전략 수립 능력", desc: "문제의 요구 사항을 정확히 파악하고 풀이 전략을 세우는 능력" },
+  { icon: "fact_check", name: "선택지 분석 및 전략 수립 능력", desc: "선택지의 적절성을 판단하고 정답을 도출하는 능력" },
+];
+
 const PLANS = [
   {
     tag: "무료",
@@ -99,11 +116,13 @@ const PLANS = [
     perks: [
       "오늘의 퀴즈",
       "오늘의 독해",
+      "대결 모드",
       "기본 랭킹 참여",
       "커뮤니티 이용",
-      "진단 테스트 1회",
+      "진단 테스트 1회 (10대 역량 진단)",
     ],
     cta: "시작하기",
+    linkTo: "/login",
   },
   {
     tag: "인기",
@@ -120,7 +139,8 @@ const PLANS = [
       "통합 성적표",
       "수확물 보상 확대",
     ],
-    cta: "학습 시작하기",
+    cta: "구독하기",
+    linkTo: "/subscription",
     featured: true,
     discount: "3개월 10% | 12개월 30% 할인",
   },
@@ -137,6 +157,7 @@ const PLANS = [
       "학부모 연동 리포트",
     ],
     cta: "상담 문의",
+    linkTo: "#contact",
     isAcademy: true,
   },
 ];
@@ -545,6 +566,11 @@ function LandingPage() {
                     <div className="landing-deep-highlights">
                       {feat.highlights.map((h) => (<span key={h} className="landing-tag">{h}</span>))}
                     </div>
+                    {feat.linkHash && (
+                      <Link to={`/features#${feat.linkHash}`} className="landing-deep-more">
+                        자세히 보기 →
+                      </Link>
+                    )}
                   </div>
                   <div className="landing-deep-visual">
                     <Preview />
@@ -571,6 +597,29 @@ function LandingPage() {
                 </div>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 10대 역량 ── */}
+      <section className="landing-section landing-competencies" id="competencies">
+        <div className="landing-wrap">
+          <div className="landing-section-title">
+            <h2 className="landing-display">국어 실력을 완성하는 10대 역량</h2>
+            <p>국어농장은 10가지 핵심 역량을 체계적으로 진단하고 훈련합니다.</p>
+          </div>
+          <div className="landing-competency-grid">
+            {COMPETENCIES.map((c) => (
+              <div className="landing-competency-card" key={c.name}>
+                <div className="landing-competency-icon">
+                  <span className="material-symbols-outlined">{c.icon}</span>
+                </div>
+                <div>
+                  <h4>{c.name}</h4>
+                  <p>{c.desc}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -616,9 +665,12 @@ function LandingPage() {
                     </li>
                   ))}
                 </ul>
-                <Link to={plan.isAcademy ? "#contact" : "/login"}>{plan.cta}</Link>
+                <Link to={plan.linkTo || "/login"}>{plan.cta}</Link>
               </div>
             ))}
+          </div>
+          <div className="landing-pricing-more-wrap">
+            <Link to="/pricing" className="landing-pricing-more">모든 기능 비교 보기 →</Link>
           </div>
         </div>
       </section>
@@ -679,7 +731,7 @@ function LandingPage() {
             <p>국어 학습의 출발부터 성취까지, 국어농장이 함께 성장합니다.</p>
           </div>
           <div className="landing-footer-nav">
-            <div><h4>서비스</h4><a href="#program">학습 흐름</a><a href="#features">핵심 기능</a><a href="#faq">자주 묻는 질문</a></div>
+            <div><h4>서비스</h4><a href="#program">학습 흐름</a><Link to="/features">기능 소개</Link><Link to="/pricing">요금 안내</Link><a href="#faq">자주 묻는 질문</a></div>
             <div><h4>지원</h4><a href="#contact">상담 문의</a><Link to="/shop">쇼핑몰</Link></div>
             <div><h4>법적 고지</h4><Link to="/terms">이용약관</Link><Link to="/privacy">개인정보처리방침</Link></div>
           </div>

@@ -1,0 +1,252 @@
+/* ── 기능 소개 페이지 ── */
+
+.features-page {
+  --ft-primary: #ff8f2b;
+  --ft-primary-dark: #e0700f;
+  --ft-secondary: #6da475;
+  --ft-ink: #131811;
+  min-height: 100vh;
+  background: #fafbf9;
+  color: var(--ft-ink);
+  font-family: var(--font-body);
+  word-break: keep-all;
+}
+
+.features-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── 히어로 ── */
+.features-hero {
+  background: linear-gradient(135deg, #142210 0%, #1a3a15 50%, #142210 100%);
+  color: #fff;
+  padding: 80px 0 60px;
+  text-align: center;
+}
+
+.features-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  margin: 0 0 16px;
+}
+
+.features-hero p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── 네비 ── */
+.features-nav {
+  background: #fff;
+  border-bottom: 1px solid #e2eadf;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+}
+
+.features-nav-inner {
+  display: flex;
+  gap: 4px;
+  padding: 12px 24px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.features-nav a {
+  padding: 8px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ft-secondary);
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.features-nav a:hover {
+  background: rgba(255, 143, 43, 0.1);
+  color: var(--ft-primary-dark);
+}
+
+/* ── 섹션 ── */
+.features-section {
+  padding: 72px 0;
+  border-bottom: 1px solid #e6efe2;
+}
+
+.features-section:nth-child(even) {
+  background: #f2f7f1;
+}
+
+.features-section-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.features-section-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(255, 154, 61, 0.12);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.features-section-icon .material-symbols-outlined {
+  font-size: 28px;
+  color: var(--ft-primary);
+}
+
+.features-section-head h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.features-section-head p {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--ft-secondary);
+  font-weight: 600;
+}
+
+.features-section > .features-wrap > p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  margin: 0 0 24px;
+}
+
+/* ── 특징 리스트 ── */
+.features-highlight-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.features-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e2eadf;
+}
+
+.features-highlight-item .material-symbols-outlined {
+  font-size: 22px;
+  color: var(--ft-primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.features-highlight-item span:last-child {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ── 하단 CTA ── */
+.features-cta {
+  text-align: center;
+  padding: 72px 0;
+  background: #fff;
+}
+
+.features-cta h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0 0 12px;
+}
+
+.features-cta p {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 28px;
+}
+
+.features-cta-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.features-cta-actions a {
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 16px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.features-cta-primary {
+  background: var(--ft-primary);
+  color: var(--ft-ink);
+  box-shadow: 0 12px 30px rgba(255, 154, 61, 0.3);
+}
+
+.features-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(255, 154, 61, 0.4);
+}
+
+.features-cta-secondary {
+  background: #f2f7f1;
+  color: var(--ft-ink);
+  border: 2px solid #dde6d8;
+}
+
+/* ── 홈 링크 ── */
+.features-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: var(--ft-secondary);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.features-home-link:hover {
+  color: var(--ft-primary-dark);
+}
+
+/* ── 반응형 ── */
+@media (max-width: 720px) {
+  .features-hero {
+    padding: 60px 0 40px;
+  }
+
+  .features-section {
+    padding: 52px 0;
+  }
+
+  .features-section-head h2 {
+    font-size: 22px;
+  }
+
+  .features-nav-inner {
+    padding: 10px 18px;
+  }
+
+  .features-cta {
+    padding: 52px 0;
+  }
+}
