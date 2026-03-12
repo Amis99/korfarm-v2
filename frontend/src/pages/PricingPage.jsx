@@ -187,7 +187,7 @@ function PricingPage() {
                   {item.title}
                 </h4>
                 <p>{item.desc}</p>
-                <Link to={`/features#${item.hash}`}>자세히 보기 →</Link>
+                <Link to={`/about`}>자세히 보기 →</Link>
               </div>
             ))}
           </div>

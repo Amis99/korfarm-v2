@@ -1,0 +1,216 @@
+/* ── 학습 안내 페이지 ── */
+
+.guide-page {
+  --gd-primary: #ff8f2b;
+  --gd-primary-dark: #e0700f;
+  --gd-secondary: #6da475;
+  --gd-ink: #131811;
+  min-height: 100vh;
+  background: #fafbf9;
+  color: var(--gd-ink);
+  font-family: var(--font-body);
+  word-break: keep-all;
+}
+
+.guide-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── 히어로 ── */
+.guide-hero {
+  background: linear-gradient(135deg, #142210 0%, #1a3a15 50%, #142210 100%);
+  color: #fff;
+  padding: 80px 0 60px;
+  text-align: center;
+}
+
+.guide-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  margin: 0 0 16px;
+}
+
+.guide-hero p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 auto;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.guide-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: var(--gd-secondary);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.guide-home-link:hover {
+  color: var(--gd-primary-dark);
+}
+
+/* ── 섹션 ── */
+.guide-section {
+  padding: 72px 0;
+  border-bottom: 1px solid #e6efe2;
+}
+
+.guide-section.guide-alt {
+  background: #f2f7f1;
+}
+
+.guide-section-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.guide-section-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(255, 154, 61, 0.12);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.guide-section-icon .material-symbols-outlined {
+  font-size: 28px;
+  color: var(--gd-primary);
+}
+
+.guide-section-head h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.guide-featured-badge {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 143, 43, 0.15);
+  color: var(--gd-primary-dark);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.guide-section-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  margin: 0 0 24px;
+}
+
+/* ── 하이라이트 리스트 ── */
+.guide-highlight-list {
+  display: grid;
+  gap: 12px;
+}
+
+.guide-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e2eadf;
+}
+
+.guide-alt .guide-highlight-item {
+  background: #fafbf9;
+}
+
+.guide-highlight-item .material-symbols-outlined {
+  font-size: 22px;
+  color: var(--gd-primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.guide-highlight-item span:last-child {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ── 하단 CTA ── */
+.guide-cta {
+  text-align: center;
+  padding: 72px 0;
+  background: #fff;
+}
+
+.guide-cta h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0 0 12px;
+}
+
+.guide-cta p {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 28px;
+}
+
+.guide-cta-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.guide-cta-actions a {
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 16px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.guide-cta-primary {
+  background: var(--gd-primary);
+  color: var(--gd-ink);
+  box-shadow: 0 12px 30px rgba(255, 154, 61, 0.3);
+}
+
+.guide-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(255, 154, 61, 0.4);
+}
+
+.guide-cta-secondary {
+  background: #f2f7f1;
+  color: var(--gd-ink);
+  border: 2px solid #dde6d8;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 720px) {
+  .guide-hero {
+    padding: 60px 0 40px;
+  }
+  .guide-section {
+    padding: 52px 0;
+  }
+  .guide-section-head h2 {
+    font-size: 22px;
+  }
+  .guide-cta {
+    padding: 52px 0;
+  }
+}

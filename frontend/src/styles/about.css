@@ -1,0 +1,268 @@
+/* ── 프로그램 소개 페이지 ── */
+
+.about-page {
+  --ab-primary: #ff8f2b;
+  --ab-primary-dark: #e0700f;
+  --ab-secondary: #6da475;
+  --ab-ink: #131811;
+  min-height: 100vh;
+  background: #fafbf9;
+  color: var(--ab-ink);
+  font-family: var(--font-body);
+  word-break: keep-all;
+}
+
+.about-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── 히어로 ── */
+.about-hero {
+  background: linear-gradient(135deg, #142210 0%, #1a3a15 50%, #142210 100%);
+  color: #fff;
+  padding: 80px 0 60px;
+  text-align: center;
+}
+
+.about-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  margin: 0 0 16px;
+}
+
+.about-hero p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 auto;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.about-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: var(--ab-secondary);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.about-home-link:hover {
+  color: var(--ab-primary-dark);
+}
+
+/* ── 섹션 ── */
+.about-section {
+  padding: 72px 0;
+  border-bottom: 1px solid #e6efe2;
+}
+
+.about-section.about-alt {
+  background: #f2f7f1;
+}
+
+.about-section h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.about-section-desc {
+  font-size: 16px;
+  color: #666;
+  margin: 12px 0 32px;
+  line-height: 1.6;
+}
+
+/* ── 10대 역량 그리드 ── */
+.about-competency-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.about-competency-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid #e2eadf;
+}
+
+.about-competency-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 154, 61, 0.12);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.about-competency-icon .material-symbols-outlined {
+  font-size: 26px;
+  color: var(--ab-primary);
+}
+
+.about-competency-card h4 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.about-competency-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* ── 기능 상세 ── */
+.about-feature-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.about-feature-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(255, 154, 61, 0.12);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.about-feature-icon .material-symbols-outlined {
+  font-size: 28px;
+  color: var(--ab-primary);
+}
+
+.about-feature-sub {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--ab-secondary);
+  font-weight: 600;
+}
+
+.about-feature-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #444;
+  margin: 0 0 24px;
+}
+
+/* ── 하이라이트 리스트 ── */
+.about-highlight-list {
+  display: grid;
+  gap: 12px;
+}
+
+.about-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e2eadf;
+}
+
+.about-alt .about-highlight-item {
+  background: #fafbf9;
+}
+
+.about-highlight-item .material-symbols-outlined {
+  font-size: 22px;
+  color: var(--ab-primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.about-highlight-item span:last-child {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ── 하단 CTA ── */
+.about-cta {
+  text-align: center;
+  padding: 72px 0;
+  background: #fff;
+}
+
+.about-cta h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0 0 12px;
+}
+
+.about-cta p {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 28px;
+}
+
+.about-cta-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.about-cta-actions a {
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 16px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.about-cta-primary {
+  background: var(--ab-primary);
+  color: var(--ab-ink);
+  box-shadow: 0 12px 30px rgba(255, 154, 61, 0.3);
+}
+
+.about-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(255, 154, 61, 0.4);
+}
+
+.about-cta-secondary {
+  background: #f2f7f1;
+  color: var(--ab-ink);
+  border: 2px solid #dde6d8;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 720px) {
+  .about-hero {
+    padding: 60px 0 40px;
+  }
+  .about-section {
+    padding: 52px 0;
+  }
+  .about-section h2 {
+    font-size: 22px;
+  }
+  .about-competency-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-cta {
+    padding: 52px 0;
+  }
+}

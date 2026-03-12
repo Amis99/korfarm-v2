@@ -314,6 +314,10 @@
   padding: 90px 0;
 }
 
+.landing-alt-bg {
+  background: #f2f7f1;
+}
+
 .landing-section-title {
   text-align: center;
   max-width: 640px;
@@ -345,308 +349,163 @@
   font-weight: 700;
 }
 
-/* ── 학습 흐름 타임라인 ── */
-.landing-flow {
-  display: grid;
-  gap: 32px;
-  max-width: 780px;
-  margin: 0 auto;
+/* ── "더보기" 링크 ── */
+.landing-more-wrap {
+  text-align: center;
+  margin-top: 36px;
 }
 
-.landing-flow-step {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  position: relative;
-}
-
-.landing-flow-step:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  left: 24px;
-  top: 56px;
-  bottom: -32px;
-  width: 2px;
-  background: var(--landing-border);
-}
-
-.landing-flow-number {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--landing-primary);
-  color: var(--landing-ink);
-  font-size: 20px;
-  font-weight: 900;
-  display: grid;
-  place-items: center;
-  font-family: var(--font-display);
-}
-
-.landing-flow-body {
-  background: #fff;
-  border-radius: 20px;
-  padding: 24px;
-  border: 1px solid #e2eadf;
-  box-shadow: 0 8px 24px rgba(19, 24, 17, 0.06);
-  flex: 1;
-  display: grid;
-  gap: 12px;
-}
-
-.landing-flow-head {
-  display: flex;
+.landing-more-link {
+  display: inline-flex;
   align-items: center;
+  gap: 6px;
+  color: var(--landing-primary-dark);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  transition: gap 0.2s;
+}
+
+.landing-more-link:hover {
   gap: 10px;
 }
 
-.landing-flow-head .material-symbols-outlined {
-  font-size: 24px;
-  color: var(--landing-primary);
-}
-
-.landing-flow-head h3 {
-  margin: 0;
+.landing-more-link .material-symbols-outlined {
   font-size: 20px;
-  font-weight: 800;
 }
 
-.landing-flow-body > p {
-  margin: 0;
-  line-height: 1.6;
-  color: #555;
-}
-
-.landing-flow-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-/* ── 핵심 기능 상세 ── */
-.landing-features-deep {
-  background: #f2f7f1;
-}
-
-.landing-deep-list {
+/* ── 섹션 1: 프로그램 소개 카드 그리드 ── */
+.landing-card-grid {
   display: grid;
-  gap: 48px;
-}
-
-.landing-deep-item {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-.landing-deep-item.reverse {
-  direction: rtl;
-}
-
-.landing-deep-item.reverse > * {
-  direction: ltr;
-}
-
-.landing-deep-text {
-  display: grid;
-  gap: 16px;
-}
-
-.landing-deep-icon-title {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.landing-deep-icon-title .material-symbols-outlined {
-  font-size: 36px;
-  color: var(--landing-primary);
-}
-
-.landing-deep-icon-title h3 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 800;
-}
-
-.landing-deep-subtitle {
-  font-size: 14px;
-  color: var(--landing-secondary);
-  font-weight: 600;
-}
-
-.landing-deep-text > p {
-  margin: 0;
-  line-height: 1.7;
-  color: #555;
-}
-
-.landing-deep-highlights {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.landing-deep-visual {
-  display: grid;
-  place-items: center;
-  min-height: 200px;
-}
-
-/* ── 기능 미리보기 (실제 페이지 축소) ── */
-.landing-preview-frame {
-  width: 100%;
-  border-radius: 16px;
-  border: 1px solid #e2eadf;
-  box-shadow: 0 12px 32px rgba(19, 24, 17, 0.08);
-  overflow: hidden;
-  background: #fff;
-  height: 380px;
-  position: relative;
-}
-
-.landing-preview-scale {
-  width: 200%;
-  transform: scale(0.5);
-  transform-origin: top left;
-  pointer-events: none;
-}
-
-/* ── 게임화 시스템 ── */
-.landing-gamification {
-  background: var(--landing-soft);
-}
-
-.landing-game-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
 }
 
-.landing-game-card {
+.landing-card {
   background: #fff;
-  border-radius: 28px;
-  padding: 32px;
+  border-radius: 24px;
+  padding: 32px 24px;
   border: 1px solid #e2eadf;
-  box-shadow: 0 16px 40px rgba(19, 24, 17, 0.08);
+  box-shadow: 0 8px 24px rgba(19, 24, 17, 0.06);
   display: grid;
-  gap: 16px;
+  gap: 12px;
   text-align: center;
 }
 
-.landing-game-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 20px;
+.landing-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
   display: grid;
   place-items: center;
   margin: 0 auto;
-  background: rgba(255, 154, 61, 0.15);
+  background: rgba(255, 154, 61, 0.12);
 }
 
-.landing-game-icon .material-symbols-outlined {
-  font-size: 32px;
+.landing-card-icon .material-symbols-outlined {
+  font-size: 28px;
   color: var(--landing-primary);
 }
 
-.landing-game-card h3 {
+.landing-card h3 {
   margin: 0;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 800;
 }
 
-.landing-game-card p {
+.landing-card p {
   margin: 0;
+  font-size: 14px;
   line-height: 1.6;
   color: #555;
 }
 
-/* ── 자세히 보기 링크 ── */
-.landing-deep-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--landing-primary-dark);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 15px;
-  transition: gap 0.2s;
-}
-
-.landing-deep-more:hover {
-  gap: 8px;
-}
-
-.landing-pricing-more-wrap {
-  text-align: center;
-  margin-top: 32px;
-}
-
-.landing-pricing-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--landing-primary-dark);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 16px;
-  transition: gap 0.2s;
-}
-
-.landing-pricing-more:hover {
-  gap: 8px;
-}
-
-/* ── 10대 역량 ── */
-.landing-competencies {
-  background: #fff;
-}
-
-.landing-competency-grid {
+/* ── 섹션 2: 학습 모드 그리드 ── */
+.landing-mode-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-  max-width: 900px;
+}
+
+.landing-mode-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px;
+  border: 1px solid #e2eadf;
+  box-shadow: 0 8px 24px rgba(19, 24, 17, 0.06);
+  display: grid;
+  gap: 10px;
+  text-align: center;
+}
+
+.landing-mode-card .material-symbols-outlined {
+  font-size: 36px;
+  color: var(--landing-primary);
   margin: 0 auto;
 }
 
-.landing-competency-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: #fafbf9;
-  border-radius: 20px;
-  padding: 24px;
-  border: 1px solid #e2eadf;
-}
-
-.landing-competency-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: rgba(255, 154, 61, 0.12);
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-}
-
-.landing-competency-icon .material-symbols-outlined {
-  font-size: 26px;
-  color: var(--landing-primary);
-}
-
-.landing-competency-card h4 {
-  margin: 0 0 4px;
-  font-size: 16px;
+.landing-mode-card h3 {
+  margin: 0;
+  font-size: 17px;
   font-weight: 800;
 }
 
-.landing-competency-card p {
+.landing-mode-card p {
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
+  color: #555;
+}
+
+/* ── 섹션 3: 진단 Tier 카드 ── */
+.landing-tier-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.landing-tier-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px 20px;
+  border: 1px solid #e2eadf;
+  box-shadow: 0 8px 24px rgba(19, 24, 17, 0.06);
+  display: grid;
+  gap: 8px;
+  text-align: center;
+  justify-items: center;
+}
+
+.landing-tier-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.landing-tier-icon .material-symbols-outlined {
+  font-size: 28px;
+}
+
+.landing-tier-card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.landing-tier-levels {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--landing-primary-dark);
+  background: rgba(255, 143, 43, 0.1);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.landing-tier-card p {
+  margin: 0;
+  font-size: 14px;
   color: #555;
 }
 
@@ -762,10 +621,6 @@
 }
 
 /* ── FAQ ── */
-.landing-faq {
-  background: #f2f7f1;
-}
-
 .landing-faq-list {
   max-width: 740px;
   margin: 0 auto;
@@ -805,7 +660,7 @@
 }
 
 .landing-faq-item[open] summary::after {
-  content: "−";
+  content: "\2212";
 }
 
 .landing-faq-item p {
@@ -815,7 +670,7 @@
   color: #555;
 }
 
-/* ── CTA + 문의 폼 ── */
+/* ── CTA + 문의 ── */
 .landing-cta {
   background: linear-gradient(135deg, #142210 0%, #1a3a15 50%, #142210 100%);
   color: #fff;
@@ -994,14 +849,11 @@
   .landing-hero {
     min-height: 520px;
   }
-  .landing-deep-item {
-    grid-template-columns: 1fr;
+  .landing-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .landing-deep-item.reverse {
-    direction: ltr;
-  }
-  .landing-deep-visual {
-    min-height: 160px;
+  .landing-tier-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .landing-cta-inner {
     grid-template-columns: 1fr;
@@ -1042,25 +894,16 @@
   .landing-section {
     padding: 70px 0;
   }
-  .landing-flow-step {
-    gap: 16px;
+  .landing-card-grid {
+    grid-template-columns: 1fr 1fr;
   }
-  .landing-flow-number {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
-  .landing-flow-step:not(:last-child)::after {
-    left: 20px;
-    top: 48px;
-  }
-  .landing-game-grid {
+  .landing-mode-grid {
     grid-template-columns: 1fr;
     max-width: 400px;
     margin: 0 auto;
   }
-  .landing-competency-grid {
-    grid-template-columns: 1fr;
+  .landing-tier-grid {
+    grid-template-columns: 1fr 1fr;
   }
   .landing-pricing-grid {
     grid-template-columns: 1fr;
@@ -1078,5 +921,16 @@
   }
   .landing-contact-info {
     padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-card-grid {
+    grid-template-columns: 1fr;
+  }
+  .landing-tier-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto;
   }
 }

@@ -95,6 +95,10 @@ const AdminStudyPlanDetailPage = lazy(() => import("./pages/AdminStudyPlanDetail
 const StudyPlanPage = lazy(() => import("./pages/StudyPlanPage"));
 const StudyPlanSubmitPage = lazy(() => import("./pages/StudyPlanSubmitPage"));
 const FeaturesPage = lazy(() => import("./pages/FeaturesPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const GuidePage = lazy(() => import("./pages/GuidePage"));
+const DiagnosticInfoPage = lazy(() => import("./pages/DiagnosticInfoPage"));
+const FaqPage = lazy(() => import("./pages/FaqPage"));
 const PricingDetailPage = lazy(() => import("./pages/PricingPage"));
 const TermsPage = lazy(() => import("./pages/TermsPage"));
 const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
@@ -166,7 +170,11 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/reset" element={<ResetPage />} />
-          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/guide" element={<GuidePage />} />
+          <Route path="/diagnostic-info" element={<DiagnosticInfoPage />} />
+          <Route path="/faq" element={<FaqPage />} />
+          <Route path="/features" element={<Navigate to="/about" replace />} />
           <Route path="/pricing" element={<PricingDetailPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
