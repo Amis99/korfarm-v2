@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { COMPETENCIES, FAQ_ITEMS, PLANS, LEARNING_MODES, TIER_INFO } from "../data/landingData";
 import "../styles/landing.css";
+
+const BASE = import.meta.env.BASE_URL + "images/landing/";
+const CardImg = ({ src, alt }) => {
+  const handleError = useCallback((e) => { e.target.style.display = "none"; }, []);
+  return (
+    <div className="landing-card-img">
+      <img src={BASE + src} alt={alt} loading="lazy" onError={handleError} />
+    </div>
+  );
+};
 
 /* ── 메인 컴포넌트 ── */
 
@@ -116,12 +126,13 @@ function LandingPage() {
           </div>
           <div className="landing-card-grid">
             {[
-              { icon: "target", title: "10대 핵심 역량", desc: "어휘력부터 선지분석력까지 10가지 역량을 체계적으로 진단하고 훈련합니다." },
-              { icon: "trending_up", title: "12레벨 맞춤 커리큘럼", desc: "초1부터 고3까지 12단계로 세분화하여 실력에 맞는 학습을 제공합니다." },
-              { icon: "smart_toy", title: "AI 자동 채점", desc: "AI가 자동으로 채점하고, 영역별 성취도를 레이더 차트로 분석합니다." },
-              { icon: "emoji_events", title: "보상 시스템", desc: "씨앗·수확물·시즌 랭킹·1:1 대결로 학습 동기를 유지합니다." },
+              { icon: "target", title: "10대 핵심 역량", desc: "어휘력부터 선지분석력까지 10가지 역량을 체계적으로 진단하고 훈련합니다.", img: "card-competency.jpg" },
+              { icon: "trending_up", title: "12레벨 맞춤 커리큘럼", desc: "초1부터 고3까지 12단계로 세분화하여 실력에 맞는 학습을 제공합니다.", img: "card-levels.jpg" },
+              { icon: "smart_toy", title: "AI 자동 채점", desc: "AI가 자동으로 채점하고, 영역별 성취도를 레이더 차트로 분석합니다.", img: "card-ai-grading.jpg" },
+              { icon: "emoji_events", title: "보상 시스템", desc: "씨앗·수확물·시즌 랭킹·1:1 대결로 학습 동기를 유지합니다.", img: "card-rewards.jpg" },
             ].map((card) => (
               <div className="landing-card" key={card.title}>
+                <CardImg src={card.img} alt={card.title} />
                 <div className="landing-card-icon">
                   <span className="material-symbols-outlined">{card.icon}</span>
                 </div>
@@ -146,6 +157,7 @@ function LandingPage() {
           <div className="landing-mode-grid">
             {LEARNING_MODES.map((mode) => (
               <div className="landing-mode-card" key={mode.title}>
+                <CardImg src={mode.img} alt={mode.title} />
                 <span className="material-symbols-outlined">{mode.icon}</span>
                 <h3>{mode.title}</h3>
                 <p>{mode.desc}</p>
@@ -168,6 +180,7 @@ function LandingPage() {
           <div className="landing-tier-grid">
             {TIER_INFO.map((tier) => (
               <div className="landing-tier-card" key={tier.name}>
+                <CardImg src={tier.img} alt={tier.name} />
                 <div className="landing-tier-icon" style={{ background: `${tier.color}20` }}>
                   <span className="material-symbols-outlined" style={{ color: tier.color }}>{tier.icon}</span>
                 </div>

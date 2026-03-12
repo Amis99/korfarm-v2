@@ -104,17 +104,17 @@ export const PLANS = [
 ];
 
 export const LEARNING_MODES = [
-  { icon: "quiz", title: "일일 퀴즈", desc: "매일 새로운 퀴즈로 국어 감각을 유지합니다." },
-  { icon: "auto_stories", title: "일일 독해", desc: "매일 지문을 읽고 독해력을 강화합니다." },
-  { icon: "swords", title: "대결 모드", desc: "씨앗을 걸고 1:1 실시간 퀴즈 대결에 도전합니다." },
-  { icon: "park", title: "농장별 모드", desc: "9개 영역 전문 농장에서 약점을 집중 보강합니다." },
-  { icon: "edit_note", title: "지식과 지혜", desc: "글쓰기 게시판에서 표현력을 키웁니다." },
-  { icon: "menu_book", title: "프로 모드", desc: "180+ 챕터, 6단계 모듈로 체계적 학습을 진행합니다." },
+  { icon: "quiz", title: "일일 퀴즈", desc: "매일 새로운 퀴즈로 국어 감각을 유지합니다.", img: "card-daily-quiz.jpg" },
+  { icon: "auto_stories", title: "일일 독해", desc: "매일 지문을 읽고 독해력을 강화합니다.", img: "card-daily-reading.jpg" },
+  { icon: "swords", title: "대결 모드", desc: "씨앗을 걸고 1:1 실시간 퀴즈 대결에 도전합니다.", img: "card-duel.jpg" },
+  { icon: "park", title: "농장별 모드", desc: "9개 영역 전문 농장에서 약점을 집중 보강합니다.", img: "card-farm-mode.jpg" },
+  { icon: "edit_note", title: "지식과 지혜", desc: "글쓰기 게시판에서 표현력을 키웁니다.", img: "card-wisdom.jpg" },
+  { icon: "menu_book", title: "프로 모드", desc: "180+ 챕터, 6단계 모듈로 체계적 학습을 진행합니다.", img: "card-pro-mode.jpg" },
 ];
 
 export const TIER_INFO = [
-  { name: "소쉬르", levels: "1~3", target: "초등 1~3학년", color: "#4caf50", icon: "eco" },
-  { name: "프레게", levels: "1~3", target: "초등 4~6학년", color: "#2196f3", icon: "science" },
-  { name: "러셀", levels: "1~3", target: "중등 1~3학년", color: "#9c27b0", icon: "psychology" },
-  { name: "비트겐슈타인", levels: "1~3", target: "고등 1~3학년", color: "#f44336", icon: "school" },
+  { name: "소쉬르", levels: "1~3", target: "초등 1~3학년", color: "#4caf50", icon: "eco", img: "card-tier-saussure.jpg" },
+  { name: "프레게", levels: "1~3", target: "초등 4~6학년", color: "#2196f3", icon: "science", img: "card-tier-frege.jpg" },
+  { name: "러셀", levels: "1~3", target: "중등 1~3학년", color: "#9c27b0", icon: "psychology", img: "card-tier-russell.jpg" },
+  { name: "비트겐슈타인", levels: "1~3", target: "고등 1~3학년", color: "#f44336", icon: "school", img: "card-tier-wittgenstein.jpg" },
 ];
