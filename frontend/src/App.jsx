@@ -92,6 +92,8 @@ const AdminStudyPlansPage = lazy(() => import("./pages/AdminStudyPlansPage"));
 const AdminStudyPlanDetailPage = lazy(() => import("./pages/AdminStudyPlanDetailPage"));
 const StudyPlanPage = lazy(() => import("./pages/StudyPlanPage"));
 const StudyPlanSubmitPage = lazy(() => import("./pages/StudyPlanSubmitPage"));
+const TermsPage = lazy(() => import("./pages/TermsPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 // AdminDuelQuestionsPage는 AdminDuelPage 내부에서 직접 import됨
 const AdminMembershipApprovalPage = lazy(() => import("./pages/AdminMembershipApprovalPage"));
 
@@ -159,6 +161,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/reset" element={<ResetPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
 
           {/* 인증 필요 페이지 */}
           <Route path="/start" element={P(<StartPage />)} />
