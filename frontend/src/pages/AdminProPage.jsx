@@ -48,6 +48,7 @@ const ANSWER_TEMPLATE = JSON.stringify({
 function AdminProPage() {
   const [chapters, setChapters] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
   const [levelFilter, setLevelFilter] = useState("");
 
   // 챕터별 콘텐츠 현황 캐시
@@ -79,18 +80,23 @@ function AdminProPage() {
 
   const load = useCallback(() => {
     setLoading(true);
+    setLoadError(null);
     const qs = levelFilter ? `?levelId=${levelFilter}` : "";
     apiGet(`/v1/admin/pro/chapters${qs}`)
       .then(data => {
         setChapters(data);
-        // 각 챕터의 콘텐츠 현황도 미리 로드
+        // 각 챕터의 콘텐츠 현황은 목록 렌더 후 비동기로 보강
         data.forEach(ch => {
           apiGet(`/v1/admin/pro/chapters/${ch.id}/content-status`)
             .then(st => setStatusCache(prev => ({ ...prev, [ch.id]: st })))
-            .catch(() => {});
+            .catch(err => console.error(`content-status 로드 실패 (${ch.id}):`, err));
         });
       })
-      .catch(() => setChapters([]))
+      .catch(err => {
+        console.error("챕터 목록 로드 실패:", err);
+        setChapters([]);
+        setLoadError(err.message || "챕터 목록을 불러오는데 실패했습니다.");
+      })
       .finally(() => setLoading(false));
   }, [levelFilter]);
 
@@ -468,6 +474,11 @@ function AdminProPage() {
 
         {loading ? (
           <div className="ts-center"><p>불러오는 중...</p></div>
+        ) : loadError ? (
+          <div className="ts-center">
+            <p className="ap-error">오류: {loadError}</p>
+            <button className="ts-btn ts-btn-outline" onClick={load} style={{ marginTop: 12 }}>다시 시도</button>
+          </div>
         ) : chapters.length === 0 ? (
           <div className="ts-center"><p>등록된 챕터가 없습니다.</p></div>
         ) : (

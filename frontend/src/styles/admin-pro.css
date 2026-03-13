@@ -1,7 +1,78 @@
 /* ─── 프로 모드 관리 페이지 ─── */
 
+/* 다크 테마 — admin 레이아웃 내부 전역 변수 오버라이드 */
 .ap-page {
+  --text: var(--admin-text, #f3f6f1);
+  --muted: var(--admin-muted, #a6b6a9);
+  --panel: var(--admin-panel, #161d18);
+  --bg: var(--admin-panel-light, #1e2620);
+  --stroke: rgba(255, 255, 255, 0.10);
+  --accent: var(--admin-accent, #ff7f2a);
+  --accent-strong: var(--admin-accent-strong, #e77b18);
+  --accent-soft: rgba(255, 127, 42, 0.10);
   max-width: 1100px;
+}
+
+/* ts-section-card 다크 배경 */
+.ap-page .ts-section-card {
+  background: var(--admin-panel, #161d18);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* 폼 입력 다크 */
+.ap-page .ts-form-grid input,
+.ap-page .ts-form-grid textarea,
+.ap-page .ts-form-grid select {
+  background: var(--admin-panel-light, #1e2620);
+  color: var(--admin-text, #f3f6f1);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.ap-page .ts-form-grid input:focus,
+.ap-page .ts-form-grid textarea:focus {
+  border-color: var(--admin-accent, #ff7f2a);
+  background: var(--admin-panel-light, #1e2620);
+}
+
+/* 테이블 다크 */
+.ap-page .ts-table th {
+  background: var(--admin-panel-light, #1e2620);
+  color: var(--admin-muted, #a6b6a9);
+}
+
+.ap-page .ts-table tbody tr:hover {
+  background: rgba(255, 127, 42, 0.06);
+}
+
+/* 레벨 필터 셀렉트 */
+.ap-page .ts-level-select {
+  background: var(--admin-panel, #161d18);
+  color: var(--admin-text, #f3f6f1);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* 상태 뱃지 다크 */
+.ap-page .ts-status-badge.active {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+.ap-page .ts-status-badge.archived {
+  background: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+}
+
+/* 테스트 등록 행 */
+.ap-page .ts-test-register-label.version input,
+.ap-page .ts-test-register-label select {
+  background: var(--admin-panel-light, #1e2620);
+  color: var(--admin-text, #f3f6f1);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.ap-page .ts-content-select {
+  background: var(--admin-panel-light, #1e2620);
+  color: var(--admin-text, #f3f6f1);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 /* 목록 테이블 */
@@ -44,24 +115,24 @@
   font-weight: 700;
 }
 .ap-icon.ok {
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
 }
 .ap-icon.miss {
-  background: #fce4ec;
-  color: #c62828;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
 }
 
 .ap-check {
   font-weight: 700;
   font-size: 1rem;
 }
-.ap-check.ok { color: #2e7d32; }
-.ap-check.miss { color: #c62828; }
+.ap-check.ok { color: #4ade80; }
+.ap-check.miss { color: #f87171; }
 
 .ap-test-count {
   font-weight: 600;
-  color: #1565c0;
+  color: #60a5fa;
 }
 
 .ap-overall {
@@ -74,9 +145,9 @@
   font-weight: 700;
   font-size: 0.9rem;
 }
-.ap-overall.complete { background: #e8f5e9; color: #2e7d32; }
-.ap-overall.partial { background: #fff8e1; color: #f57f17; }
-.ap-overall.empty { background: #fce4ec; color: #c62828; }
+.ap-overall.complete { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+.ap-overall.partial { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+.ap-overall.empty { background: rgba(239, 68, 68, 0.15); color: #f87171; }
 
 .ap-legend {
   display: flex;
@@ -114,18 +185,18 @@
   gap: 8px;
   padding: 10px 12px;
   border-radius: 8px;
-  background: #f9f9fb;
+  background: var(--admin-panel-light, #1e2620);
 }
-.ap-status-row.ok { background: #f1f8f1; }
-.ap-status-row.missing { background: #fef6f6; }
+.ap-status-row.ok { background: rgba(34, 197, 94, 0.08); }
+.ap-status-row.missing { background: rgba(239, 68, 68, 0.08); }
 
 .ap-status-icon { font-size: 1rem; flex-shrink: 0; }
 .ap-status-type { font-weight: 600; min-width: 40px; }
-.ap-status-count { color: #666; font-size: 0.85rem; min-width: 40px; }
+.ap-status-count { color: var(--admin-muted, #a6b6a9); font-size: 0.85rem; min-width: 40px; }
 .ap-status-contents { flex: 1; font-size: 0.85rem; }
 .ap-status-content-item { padding: 2px 0; }
-.ap-content-id { color: #999; font-size: 0.78rem; }
-.ap-no-content { color: #c62828; font-style: italic; }
+.ap-content-id { color: var(--admin-muted, #a6b6a9); font-size: 0.78rem; }
+.ap-no-content { color: #f87171; font-style: italic; }
 
 /* 정답해설 탭 */
 .ap-answer-tabs {
@@ -133,7 +204,7 @@
   gap: 4px;
   align-items: center;
   margin-bottom: 16px;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.10);
   padding-bottom: 0;
 }
 .ap-tab {
@@ -144,19 +215,19 @@
   cursor: pointer;
   border-bottom: 2px solid transparent;
   margin-bottom: -2px;
-  color: #666;
+  color: var(--admin-muted, #a6b6a9);
   font-weight: 500;
 }
 .ap-tab.active {
-  color: var(--color-primary, #1565c0);
-  border-bottom-color: var(--color-primary, #1565c0);
+  color: var(--admin-accent, #ff7f2a);
+  border-bottom-color: var(--admin-accent, #ff7f2a);
 }
-.ap-tab:hover { color: #333; }
+.ap-tab:hover { color: var(--admin-text, #f3f6f1); }
 
 .ap-answer-id {
   margin-left: auto;
   font-size: 0.78rem;
-  color: #999;
+  color: var(--admin-muted, #a6b6a9);
   font-family: monospace;
 }
 
@@ -175,9 +246,11 @@
 }
 .ap-answer-title-label input {
   padding: 8px 10px;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 6px;
   font-size: 0.9rem;
+  background: var(--admin-panel-light, #1e2620);
+  color: var(--admin-text, #f3f6f1);
 }
 .ap-json-editor {
   width: 100%;
@@ -185,16 +258,17 @@
   font-size: 0.82rem;
   line-height: 1.5;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
-  background: #fafafa;
+  background: var(--admin-panel-light, #1e2620);
+  color: var(--admin-text, #f3f6f1);
   resize: vertical;
   tab-size: 2;
 }
 .ap-json-editor:focus {
   outline: none;
-  border-color: var(--color-primary, #1565c0);
-  background: #fff;
+  border-color: var(--admin-accent, #ff7f2a);
+  background: #1a221c;
 }
 .ap-answer-actions {
   display: flex;
@@ -213,14 +287,14 @@
   align-items: center;
   gap: 8px;
   padding: 32px;
-  border: 2px dashed #ccc;
+  border: 2px dashed rgba(255, 255, 255, 0.15);
   border-radius: 12px;
-  background: #fafafa;
+  background: var(--admin-panel-light, #1e2620);
   cursor: pointer;
   position: relative;
 }
-.ap-drop-zone:hover { border-color: #999; background: #f5f5f5; }
-.ap-drop-icon { font-size: 2rem; color: #999; }
+.ap-drop-zone:hover { border-color: var(--admin-accent, #ff7f2a); background: rgba(255, 127, 42, 0.05); }
+.ap-drop-icon { font-size: 2rem; color: var(--admin-muted, #a6b6a9); }
 .ap-drop-zone input[type="file"] {
   position: absolute;
   inset: 0;
@@ -231,8 +305,8 @@
 /* 미리보기 */
 .ap-answer-preview {
   padding: 16px;
-  background: #fff;
-  border: 1px solid #e0e0e0;
+  background: var(--admin-panel-light, #1e2620);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: 8px;
   max-height: 600px;
   overflow-y: auto;
@@ -241,17 +315,17 @@
   font-size: 1.1rem;
   margin-bottom: 16px;
   padding-bottom: 8px;
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid var(--admin-text, #f3f6f1);
 }
 .ap-preview-section {
   margin-bottom: 20px;
 }
 .ap-preview-section-title {
   font-size: 1rem;
-  color: #1565c0;
+  color: #60a5fa;
   margin-bottom: 12px;
   padding: 6px 10px;
-  background: #e3f2fd;
+  background: rgba(96, 165, 250, 0.12);
   border-radius: 6px;
 }
 .ap-preview-group {
@@ -262,13 +336,13 @@
   font-size: 0.92rem;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #333;
+  color: var(--admin-text, #f3f6f1);
 }
 .ap-preview-item {
   padding: 10px 12px;
   margin-bottom: 8px;
-  border-left: 3px solid #e0e0e0;
-  background: #fafafa;
+  border-left: 3px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 0 6px 6px 0;
 }
 .ap-preview-item-header {
@@ -284,20 +358,20 @@
 .ap-preview-type {
   font-size: 0.78rem;
   padding: 2px 6px;
-  background: #e8eaf6;
+  background: rgba(96, 165, 250, 0.12);
   border-radius: 4px;
-  color: #3f51b5;
+  color: #60a5fa;
 }
 .ap-preview-pts {
   font-size: 0.78rem;
-  color: #666;
+  color: var(--admin-muted, #a6b6a9);
 }
-.ap-preview-problem { margin: 4px 0; color: #555; }
-.ap-preview-answer { color: #2e7d32; margin: 4px 0; }
-.ap-preview-model { color: #1565c0; margin: 4px 0; }
-.ap-preview-explanation { color: #666; margin: 4px 0; font-size: 0.88rem; }
+.ap-preview-problem { margin: 4px 0; color: var(--admin-muted, #a6b6a9); }
+.ap-preview-answer { color: #4ade80; margin: 4px 0; }
+.ap-preview-model { color: #60a5fa; margin: 4px 0; }
+.ap-preview-explanation { color: var(--admin-muted, #a6b6a9); margin: 4px 0; font-size: 0.88rem; }
 
-.ap-error { color: #c62828; }
+.ap-error { color: #f87171; }
 
 /* 테스트 관리 */
 .ap-test-table { margin-bottom: 16px; }

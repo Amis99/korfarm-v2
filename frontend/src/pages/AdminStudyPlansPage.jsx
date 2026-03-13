@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiGet, apiPost } from "../utils/api";
+import { apiGet, apiPost, apiDelete } from "../utils/api";
 import AdminLayout from "../components/AdminLayout";
 import StudyPlanCreateForm from "../components/StudyPlanCreateForm";
 import "../styles/admin-study-plan.css";
@@ -62,6 +62,37 @@ export default function AdminStudyPlansPage() {
     }
   };
 
+  const handleBatchUnarchive = async () => {
+    if (selectedIds.size === 0) return;
+    if (!window.confirm(`${selectedIds.size}개 계획표를 진행중으로 복원하시겠습니까?`)) return;
+    try {
+      await Promise.all(
+        [...selectedIds].map((id) => apiPost(`/v1/admin/study-plans/${id}/unarchive`))
+      );
+      load();
+    } catch (e) {
+      alert(e.message || "복원 실패");
+    }
+  };
+
+  const handleBatchDelete = async () => {
+    if (selectedIds.size === 0) return;
+    if (!window.confirm(`${selectedIds.size}개 계획표를 완전히 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.`)) return;
+    try {
+      await Promise.all(
+        [...selectedIds].map((id) => apiDelete(`/v1/admin/study-plans/${id}`))
+      );
+      load();
+    } catch (e) {
+      alert(e.message || "삭제 실패");
+    }
+  };
+
+  // 선택된 항목 중 보관/진행중 상태 분류
+  const selectedPlans = plans.filter((p) => selectedIds.has(p.planId));
+  const hasArchived = selectedPlans.some((p) => p.status === "archived");
+  const hasActive = selectedPlans.some((p) => p.status === "active");
+
   return (
     <AdminLayout>
       <div className="asp-header">
@@ -96,10 +127,24 @@ export default function AdminStudyPlansPage() {
           <button type="submit" className="asp-add-btn">검색</button>
         </form>
         {selectedIds.size > 0 && (
-          <button className="asp-archive-btn" onClick={handleBatchArchive}>
-            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>archive</span>
-            보관 ({selectedIds.size})
-          </button>
+          <div style={{ display: "flex", gap: 6 }}>
+            {hasActive && (
+              <button className="asp-archive-btn" onClick={handleBatchArchive}>
+                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>archive</span>
+                보관 ({selectedIds.size})
+              </button>
+            )}
+            {hasArchived && (
+              <button className="asp-add-btn" onClick={handleBatchUnarchive}>
+                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>unarchive</span>
+                복원 ({selectedIds.size})
+              </button>
+            )}
+            <button className="asp-archive-btn" onClick={handleBatchDelete} style={{ background: "#dc3545" }}>
+              <span className="material-symbols-outlined" style={{ fontSize: 16 }}>delete</span>
+              삭제 ({selectedIds.size})
+            </button>
+          </div>
         )}
       </div>
 
