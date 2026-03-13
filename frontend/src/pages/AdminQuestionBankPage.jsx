@@ -1,0 +1,259 @@
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { apiGet, apiPost } from "../utils/adminApi";
+import AdminLayout from "../components/AdminLayout";
+import FolderTree from "../components/question-bank/FolderTree";
+import "../styles/question-bank.css";
+
+const PER_PAGE = 20;
+
+const AREA_LABELS = {
+  LIT: "문학", READ: "독서", GRAM: "문법", SPEAK: "화법",
+  WRITE: "작문", MEDIA: "매체", INTEGRATED: "복합",
+};
+
+const SOURCE_LABELS = {
+  TEXTBOOK: "교과서", SELF_STUDY: "자습서", EVAL_WORKBOOK: "평가문제집",
+  PAST_EXAM: "기출", SCHOOL_EXAM: "학교 내신", ETC: "기타",
+};
+
+function AdminQuestionBankPage() {
+  const navigate = useNavigate();
+  const [records, setRecords] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [areaFilter, setAreaFilter] = useState("");
+  const [sourceFilter, setSourceFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [selectedFolder, setSelectedFolder] = useState(null);
+  const [page, setPage] = useState(1);
+  const [selectedIds, setSelectedIds] = useState(new Set());
+
+  useEffect(() => {
+    loadRecords();
+  }, []);
+
+  const loadRecords = async () => {
+    setLoading(true);
+    try {
+      const data = await apiGet("/v1/admin/question-bank/records");
+      setRecords(Array.isArray(data) ? data : []);
+    } catch (e) {
+      console.error("레코드 로드 실패:", e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 폴더 트리 데이터 구성
+  const treeData = useMemo(() => {
+    const map = {};
+    records.forEach((r) => {
+      const area = r.area || "미분류";
+      if (!map[area]) map[area] = {};
+      const sub = r.sub_area || "미분류";
+      if (!map[area][sub]) map[area][sub] = 0;
+      map[area][sub]++;
+    });
+    return map;
+  }, [records]);
+
+  // 필터 적용
+  const filtered = useMemo(() => {
+    const term = search.trim().toLowerCase();
+    return records.filter((r) => {
+      if (areaFilter && r.area !== areaFilter) return false;
+      if (sourceFilter && r.source_type !== sourceFilter) return false;
+      if (statusFilter && r.status !== statusFilter) return false;
+      if (selectedFolder) {
+        if (selectedFolder.sub) {
+          if (r.area !== selectedFolder.area || r.sub_area !== selectedFolder.sub) return false;
+        } else {
+          if (r.area !== selectedFolder.area) return false;
+        }
+      }
+      if (term) {
+        const haystack = [r.record_code, r.title, r.area, r.sub_area, r.author]
+          .filter(Boolean).join(" ").toLowerCase();
+        if (!haystack.includes(term)) return false;
+      }
+      return true;
+    });
+  }, [records, search, areaFilter, sourceFilter, statusFilter, selectedFolder]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+  const safePage = Math.min(page, totalPages);
+  const paged = filtered.slice((safePage - 1) * PER_PAGE, safePage * PER_PAGE);
+
+  const toggleSelect = (id) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.size === paged.length) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(paged.map((r) => r.id)));
+    }
+  };
+
+  const handleExport = async () => {
+    if (selectedIds.size === 0) return alert("내보낼 레코드를 선택하세요.");
+    try {
+      const data = await apiPost("/v1/admin/question-bank/export", {
+        record_ids: Array.from(selectedIds),
+      });
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `question-bank-export-${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      alert("내보내기 실패: " + e.message);
+    }
+  };
+
+  const handleFolderSelect = (folder) => {
+    setSelectedFolder(folder);
+    setPage(1);
+  };
+
+  return (
+    <AdminLayout>
+      <div className="qb-wrap">
+        <div className="qb-header">
+          <h1>문제은행</h1>
+          <div className="qb-header-actions">
+            <button className="qb-btn primary" onClick={() => navigate("/admin/question-bank/import")}>
+              <span className="material-symbols-outlined">upload</span>
+              임포트
+            </button>
+            <button className="qb-btn" onClick={() => navigate("/admin/question-bank/codes")}>
+              <span className="material-symbols-outlined">data_table</span>
+              코드표
+            </button>
+            <button className="qb-btn" onClick={handleExport} disabled={selectedIds.size === 0}>
+              <span className="material-symbols-outlined">download</span>
+              JSON 다운로드
+            </button>
+          </div>
+        </div>
+
+        <div className="qb-filters">
+          <input
+            className="qb-search"
+            placeholder="레코드 코드, 제목, 작가 검색..."
+            value={search}
+            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+          />
+          <select className="qb-select" value={areaFilter} onChange={(e) => { setAreaFilter(e.target.value); setPage(1); }}>
+            <option value="">전체 영역</option>
+            {Object.entries(AREA_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+          </select>
+          <select className="qb-select" value={sourceFilter} onChange={(e) => { setSourceFilter(e.target.value); setPage(1); }}>
+            <option value="">전체 소스</option>
+            {Object.entries(SOURCE_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+          </select>
+          <select className="qb-select" value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}>
+            <option value="">전체 상태</option>
+            <option value="draft">초안</option>
+            <option value="published">게시됨</option>
+          </select>
+        </div>
+
+        <div className="qb-list-layout">
+          <div className="qb-folder-panel">
+            <FolderTree
+              data={treeData}
+              areaLabels={AREA_LABELS}
+              selected={selectedFolder}
+              onSelect={handleFolderSelect}
+            />
+          </div>
+
+          <div className="qb-main-panel">
+            {loading ? (
+              <div className="qb-loading">불러오는 중...</div>
+            ) : filtered.length === 0 ? (
+              <div className="qb-empty">
+                <span className="material-symbols-outlined">quiz</span>
+                <p>레코드가 없습니다</p>
+              </div>
+            ) : (
+              <>
+                <div className="qb-table-card">
+                  <table className="qb-table">
+                    <thead>
+                      <tr>
+                        <th style={{ width: 36 }}>
+                          <input type="checkbox" checked={selectedIds.size === paged.length && paged.length > 0} onChange={toggleSelectAll} />
+                        </th>
+                        <th>코드</th>
+                        <th>제목</th>
+                        <th>영역</th>
+                        <th>소스</th>
+                        <th>난이도</th>
+                        <th>문제수</th>
+                        <th>상태</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {paged.map((r) => (
+                        <tr key={r.id}>
+                          <td>
+                            <input type="checkbox" checked={selectedIds.has(r.id)} onChange={() => toggleSelect(r.id)} />
+                          </td>
+                          <td className="clickable" onClick={() => navigate(`/admin/question-bank/records/${r.id}`)}>
+                            {r.record_code}
+                          </td>
+                          <td className="clickable" onClick={() => navigate(`/admin/question-bank/records/${r.id}`)}>
+                            {r.title || "-"}
+                          </td>
+                          <td>
+                            <span className="qb-tag">{AREA_LABELS[r.area] || r.area || "-"}</span>
+                          </td>
+                          <td>{SOURCE_LABELS[r.source_type] || r.source_type || "-"}</td>
+                          <td>{r.difficulty ?? "-"}</td>
+                          <td>{r.question_count ?? 0}</td>
+                          <td>
+                            <span className={`qb-status ${r.status}`}>
+                              {r.status === "draft" ? "초안" : r.status === "published" ? "게시됨" : r.status}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {totalPages > 1 && (
+                  <div className="qb-pagination">
+                    <button disabled={safePage <= 1} onClick={() => setPage(safePage - 1)}>&laquo;</button>
+                    {Array.from({ length: Math.min(totalPages, 10) }, (_, i) => {
+                      const p = i + 1;
+                      return (
+                        <button key={p} className={safePage === p ? "active" : ""} onClick={() => setPage(p)}>
+                          {p}
+                        </button>
+                      );
+                    })}
+                    <button disabled={safePage >= totalPages} onClick={() => setPage(safePage + 1)}>&raquo;</button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminQuestionBankPage;

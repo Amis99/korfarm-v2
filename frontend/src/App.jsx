@@ -106,6 +106,10 @@ const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AdminInquiryPage = lazy(() => import("./pages/AdminInquiryPage"));
 const InquiryPage = lazy(() => import("./pages/InquiryPage"));
 const AdminMembershipApprovalPage = lazy(() => import("./pages/AdminMembershipApprovalPage"));
+const AdminQuestionBankPage = lazy(() => import("./pages/AdminQuestionBankPage"));
+const AdminQBImportPage = lazy(() => import("./pages/AdminQBImportPage"));
+const AdminQBRecordDetailPage = lazy(() => import("./pages/AdminQBRecordDetailPage"));
+const AdminQBCodesPage = lazy(() => import("./pages/AdminQBCodesPage"));
 
 /* 로그인 상태에서 공개 페이지 접근 시 /start로 리다이렉트 */
 function PublicOnlyRoute({ children }) {
@@ -260,6 +264,10 @@ function App() {
           <Route path="/admin/wisdom/:postId" element={A(<AdminWisdomDetailPage />)} />
           <Route path="/admin/tests" element={A(<AdminTestPage />)} />
           <Route path="/admin/tests/:testId" element={A(<AdminTestDetailPage />)} />
+          <Route path="/admin/question-bank" element={A(<AdminQuestionBankPage />)} />
+          <Route path="/admin/question-bank/import" element={A(<AdminQBImportPage />)} />
+          <Route path="/admin/question-bank/records/:id" element={A(<AdminQBRecordDetailPage />)} />
+          <Route path="/admin/question-bank/codes" element={A(<AdminQBCodesPage />)} />
           <Route path="/admin/pro" element={A(<AdminProPage />)} />
           <Route path="/admin/study-plans" element={A(<AdminStudyPlansPage />)} />
           <Route path="/admin/study-plans/:planId" element={A(<AdminStudyPlanDetailPage />)} />
