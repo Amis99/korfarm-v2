@@ -39,9 +39,12 @@ class AdminStudyPlanController(
     }
 
     @GetMapping
-    fun list(): ApiResponse<List<StudyPlanSummaryResponse>> {
+    fun list(
+        @RequestParam(required = false) status: String?,
+        @RequestParam(required = false) search: String?
+    ): ApiResponse<List<StudyPlanSummaryResponse>> {
         requireAdmin()
-        return ApiResponse(success = true, data = service.listPlans(currentUser()))
+        return ApiResponse(success = true, data = service.listPlans(currentUser(), status, search))
     }
 
     @GetMapping("/{planId}")
@@ -231,5 +234,15 @@ class AdminStudyPlanController(
     fun calendar(@PathVariable planId: String): ApiResponse<List<ScheduleResponse>> {
         requireAdmin()
         return ApiResponse(success = true, data = service.getCalendar(planId))
+    }
+
+    @GetMapping("/{planId}/calendar/events")
+    fun calendarEvents(
+        @PathVariable planId: String,
+        @RequestParam month: String,
+        @RequestParam(required = false) userId: String?
+    ): ApiResponse<List<CalendarEventResponse>> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.getCalendarEvents(planId, userId, month))
     }
 }

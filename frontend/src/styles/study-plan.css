@@ -341,3 +341,154 @@
   background: #f5f0eb;
   color: #8a7468;
 }
+
+/* 캘린더 이벤트 점 */
+.sp-cal-event-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f06c24;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.sp-cal-day.has-events {
+  background: rgba(240, 108, 36, 0.08);
+}
+
+/* 캘린더 이벤트 모달 */
+.sp-event-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.sp-event-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.sp-event-modal-header h3 {
+  font-size: 1rem;
+  color: #3e2c1e;
+  margin: 0;
+}
+.sp-event-modal-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+}
+.sp-event-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sp-event-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0ebe6;
+}
+.sp-event-item:last-child { border-bottom: none; }
+.sp-event-icon { font-size: 20px; }
+.sp-event-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sp-event-type {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.sp-event-ref {
+  font-size: 0.78rem;
+  color: #666;
+}
+.sp-event-memo {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+/* 국어농장 콘텐츠 검색 모달 */
+.sp-content-search-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+.sp-csm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.sp-csm-header h3 {
+  font-size: 1rem;
+  color: #3e2c1e;
+  margin: 0;
+}
+.sp-csm-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+}
+.sp-csm-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.sp-csm-filters select,
+.sp-csm-filters input {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.82rem;
+}
+.sp-csm-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 400px;
+}
+.sp-csm-item {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0ebe6;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.15s;
+}
+.sp-csm-item:hover {
+  background: rgba(255, 127, 42, 0.06);
+}
+.sp-csm-item-title {
+  font-size: 0.85rem;
+  color: #3e2c1e;
+}
+.sp-csm-item-area {
+  font-size: 0.72rem;
+  color: #999;
+  background: #f5f0eb;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.sp-csm-empty {
+  text-align: center;
+  padding: 30px;
+  color: #999;
+  font-size: 0.85rem;
+}

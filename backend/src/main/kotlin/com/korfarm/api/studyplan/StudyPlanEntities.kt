@@ -235,6 +235,41 @@ class StudyPlanCellFileEntity(
 }
 
 @Entity
+@Table(name = "study_plan_events")
+class StudyPlanEventEntity(
+    @Id
+    var id: String,
+
+    @Column(name = "plan_id", nullable = false)
+    var planId: String,
+
+    @Column(name = "user_id", nullable = false)
+    var userId: String,
+
+    @Column(name = "event_type", nullable = false)
+    var eventType: String,
+
+    @Column(name = "event_date", nullable = false)
+    var eventDate: LocalDate,
+
+    @Column(name = "cell_id")
+    var cellId: String? = null,
+
+    @Column(name = "ref_label")
+    var refLabel: String? = null,
+
+    var memo: String? = null,
+
+    @Column(name = "created_at", nullable = false)
+    var createdAt: LocalDateTime = LocalDateTime.now()
+) {
+    @PrePersist
+    fun onCreate() {
+        createdAt = LocalDateTime.now()
+    }
+}
+
+@Entity
 @Table(name = "study_plan_schedules")
 class StudyPlanScheduleEntity(
     @Id

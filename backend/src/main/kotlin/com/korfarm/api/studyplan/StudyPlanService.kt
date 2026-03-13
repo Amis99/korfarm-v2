@@ -20,6 +20,7 @@ class StudyPlanService(
     private val cellRepo: StudyPlanCellRepository,
     private val cellFileRepo: StudyPlanCellFileRepository,
     private val scheduleRepo: StudyPlanScheduleRepository,
+    private val eventRepo: StudyPlanEventRepository,
     private val classMembershipRepo: ClassMembershipRepository,
     private val orgMembershipRepo: OrgMembershipRepository,
     private val classRepo: ClassRepository,
@@ -106,16 +107,27 @@ class StudyPlanService(
     }
 
     @Transactional(readOnly = true)
-    fun listPlans(userId: String): List<StudyPlanSummaryResponse> {
+    fun listPlans(userId: String, status: String? = null, search: String? = null): List<StudyPlanSummaryResponse> {
         val isHqAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN")
         val plans = if (isHqAdmin) {
-            planRepo.findAll().sortedByDescending { it.createdAt }
+            if (status != null) {
+                planRepo.findByStatusOrderByCreatedAtDesc(status)
+            } else {
+                planRepo.findAll().sortedByDescending { it.createdAt }
+            }
         } else {
             val orgId = orgMembershipRepo.findByUserIdAndStatus(userId, "active")
                 .firstOrNull()?.orgId ?: return emptyList()
-            planRepo.findByOrgIdAndStatusOrderByCreatedAtDesc(orgId, "active")
+            if (status != null) {
+                planRepo.findByOrgIdAndStatusOrderByCreatedAtDesc(orgId, status)
+            } else {
+                planRepo.findByOrgIdOrderByCreatedAtDesc(orgId)
+            }
         }
-        return plans.map { plan ->
+        val filtered = if (!search.isNullOrBlank()) {
+            plans.filter { it.title.contains(search, ignoreCase = true) }
+        } else plans
+        return filtered.map { plan ->
             val targetCount = targetRepo.findByPlanId(plan.id).size
             plan.toSummary(targetCount)
         }
@@ -330,7 +342,10 @@ class StudyPlanService(
         cell.adminNote = req.adminNote
         cell.reviewedBy = adminId
         cell.reviewedAt = LocalDateTime.now()
-        return cellRepo.save(cell)
+        cellRepo.save(cell)
+        // 이벤트 생성
+        createEvent(cell, req.status)
+        return cell
     }
 
     // ── 관리자: 테스트 채점 ──
@@ -346,7 +361,10 @@ class StudyPlanService(
         cell.adminNote = req.adminNote
         cell.reviewedBy = adminId
         cell.reviewedAt = LocalDateTime.now()
-        return cellRepo.save(cell)
+        cellRepo.save(cell)
+        // 이벤트 생성
+        createEvent(cell, req.status, if (req.score != null) "점수: ${req.score}" else null)
+        return cell
     }
 
     // ── 관리자: 셀 파일 조회 ──
@@ -465,7 +483,25 @@ class StudyPlanService(
         cell.status = "submitted"
         cell.submissionCount += 1
         cell.adminNote = null // 이전 거부 사유 초기화
-        return cellRepo.save(cell)
+        cellRepo.save(cell)
+        // 이벤트 생성
+        createEvent(cell, "submitted")
+        return cell
+    }
+
+    // ── 캘린더 이벤트 조회 ──
+
+    @Transactional(readOnly = true)
+    fun getCalendarEvents(planId: String, userId: String?, yearMonth: String): List<CalendarEventResponse> {
+        val ym = java.time.YearMonth.parse(yearMonth)
+        val start = ym.atDay(1)
+        val end = ym.atEndOfMonth()
+        val events = if (userId != null) {
+            eventRepo.findByPlanIdAndUserIdAndEventDateBetweenOrderByEventDate(planId, userId, start, end)
+        } else {
+            eventRepo.findByPlanIdAndEventDateBetweenOrderByEventDate(planId, start, end)
+        }
+        return events.map { it.toCalendarEvent() }
     }
 
     // ── 학생 API 접근 검증 ──
@@ -520,6 +556,22 @@ class StudyPlanService(
             targetRepo.findByTargetTypeAndTargetId("class", classId).forEach { planIds.add(it.planId) }
         }
         return planIds
+    }
+
+    private fun createEvent(cell: StudyPlanCellEntity, eventType: String, memo: String? = null) {
+        val scope = scopeRepo.findById(cell.scopeId).orElse(null)
+        val asset = assetRepo.findById(cell.assetId).orElse(null)
+        val label = listOfNotNull(scope?.label, asset?.label).joinToString(" / ")
+        eventRepo.save(StudyPlanEventEntity(
+            id = IdGenerator.newId("spe"),
+            planId = cell.planId,
+            userId = cell.userId,
+            eventType = eventType,
+            eventDate = LocalDate.now(),
+            cellId = cell.id,
+            refLabel = label.ifBlank { null },
+            memo = memo
+        ))
     }
 
     private fun createCellsForUsers(

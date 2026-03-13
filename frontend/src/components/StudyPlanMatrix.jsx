@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import CellStatusBadge from "./CellStatusBadge";
+import KorfarmContentSearchModal from "./KorfarmContentSearchModal";
 import "../styles/study-plan.css";
 
 const ASSET_TYPE_LABELS = {
@@ -25,6 +26,7 @@ export default function StudyPlanMatrix({
   const [showAssetPopover, setShowAssetPopover] = useState(false);
   const [newAssetType, setNewAssetType] = useState("activity");
   const [newAssetLabel, setNewAssetLabel] = useState("");
+  const [showContentSearch, setShowContentSearch] = useState(false);
   const popoverRef = useRef(null);
 
   useEffect(() => {
@@ -57,8 +59,28 @@ export default function StudyPlanMatrix({
     setShowAssetPopover(false);
   };
 
+  const handleContentSelected = (content) => {
+    if (!onAddAsset) return;
+    onAddAsset({
+      assetType: "korfarm",
+      label: content.title,
+      assetKind: "study",
+      refId: content.contentId,
+    });
+    setNewAssetLabel("");
+    setNewAssetType("activity");
+    setShowAssetPopover(false);
+    setShowContentSearch(false);
+  };
+
   return (
     <div className="sp-matrix-wrap">
+      {showContentSearch && (
+        <KorfarmContentSearchModal
+          onSelect={handleContentSelected}
+          onClose={() => setShowContentSearch(false)}
+        />
+      )}
       <table className={`sp-matrix${admin ? " admin-theme" : ""}`}>
         <thead>
           <tr>
@@ -100,15 +122,33 @@ export default function StudyPlanMatrix({
                         >{label}</button>
                       ))}
                     </div>
-                    <input
-                      className="asp-input sp-popover-input"
-                      value={newAssetLabel}
-                      onChange={(e) => setNewAssetLabel(e.target.value)}
-                      placeholder="에셋 이름"
-                      onKeyDown={(e) => e.key === "Enter" && handleAssetAdd()}
-                      autoFocus
-                    />
-                    <button className="asp-add-btn sp-popover-add" onClick={handleAssetAdd}>추가</button>
+                    {newAssetType === "korfarm" ? (
+                      <>
+                        <input
+                          className="asp-input sp-popover-input"
+                          value={newAssetLabel}
+                          onChange={(e) => setNewAssetLabel(e.target.value)}
+                          placeholder="콘텐츠 이름"
+                          readOnly
+                        />
+                        <button
+                          className="asp-add-btn sp-popover-add"
+                          onClick={() => setShowContentSearch(true)}
+                        >콘텐츠 검색</button>
+                      </>
+                    ) : (
+                      <>
+                        <input
+                          className="asp-input sp-popover-input"
+                          value={newAssetLabel}
+                          onChange={(e) => setNewAssetLabel(e.target.value)}
+                          placeholder="에셋 이름"
+                          onKeyDown={(e) => e.key === "Enter" && handleAssetAdd()}
+                          autoFocus
+                        />
+                        <button className="asp-add-btn sp-popover-add" onClick={handleAssetAdd}>추가</button>
+                      </>
+                    )}
                   </div>
                 )}
               </th>

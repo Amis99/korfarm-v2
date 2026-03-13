@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { apiGet } from "../utils/api";
 import StudyPlanMatrix from "../components/StudyPlanMatrix";
 import StudyPlanCalendar from "../components/StudyPlanCalendar";
 import CalendarEventModal from "../components/CalendarEventModal";
 import "../styles/study-plan.css";
 
-export default function StudyPlanPage() {
-  const navigate = useNavigate();
+export default function ParentStudyPlanPage() {
+  const { studentId } = useParams();
   const [plans, setPlans] = useState([]);
   const [selectedPlanId, setSelectedPlanId] = useState(null);
   const [planDetail, setPlanDetail] = useState(null);
@@ -17,9 +17,16 @@ export default function StudyPlanPage() {
   const [eventModal, setEventModal] = useState(null);
   const [tab, setTab] = useState("matrix");
   const [loading, setLoading] = useState(true);
+  const [studentName, setStudentName] = useState("");
+
+  const base = `/v1/parents/children/${studentId}/study-plans`;
 
   useEffect(() => {
-    apiGet("/v1/study-plans")
+    apiGet(`/v1/parents/children/${studentId}/profile`)
+      .then((data) => setStudentName(data?.name || ""))
+      .catch(() => {});
+
+    apiGet(base)
       .then((data) => {
         const list = Array.isArray(data) ? data : [];
         setPlans(list);
@@ -27,7 +34,7 @@ export default function StudyPlanPage() {
       })
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, []);
+  }, [studentId]);
 
   const loadCalendarEvents = useCallback((month) => {
     if (!selectedPlanId) return;
@@ -35,41 +42,26 @@ export default function StudyPlanPage() {
       const now = new Date();
       return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
     })();
-    apiGet(`/v1/study-plans/${selectedPlanId}/calendar/events?month=${ym}`)
+    apiGet(`${base}/${selectedPlanId}/calendar/events?month=${ym}`)
       .then((data) => setCalendarEvents(Array.isArray(data) ? data : []))
       .catch(() => setCalendarEvents([]));
-  }, [selectedPlanId]);
+  }, [selectedPlanId, base]);
 
   useEffect(() => {
     if (!selectedPlanId) return;
     const plan = plans.find((p) => p.planId === selectedPlanId);
     setPlanDetail(plan);
 
-    apiGet(`/v1/study-plans/${selectedPlanId}/matrix`)
+    apiGet(`${base}/${selectedPlanId}/matrix`)
       .then(setMatrix)
       .catch(() => setMatrix(null));
 
-    apiGet(`/v1/study-plans/${selectedPlanId}/calendar`)
+    apiGet(`${base}/${selectedPlanId}/calendar`)
       .then((data) => setSchedules(Array.isArray(data) ? data : []))
       .catch(() => setSchedules([]));
 
     loadCalendarEvents();
   }, [selectedPlanId]);
-
-  const handleCellClick = (cell, scope, asset) => {
-    if (!cell) return;
-    const aType = asset?.assetType || cell?.assetType;
-    const aKind = asset?.assetKind || cell?.assetKind;
-    const refId = asset?.refId || cell?.refId;
-
-    if (aType === "korfarm" && refId) {
-      navigate(`/learning/${refId}`);
-    } else if (aKind === "test" && refId) {
-      navigate(`/tests/${refId}/omr`);
-    } else if (cell.status === "pending" || cell.status === "rejected") {
-      navigate(`/study-plan/submit/${cell.cellId}`);
-    }
-  };
 
   if (loading) {
     return <div className="sp-page"><div className="asp-loading">불러오는 중...</div></div>;
@@ -91,7 +83,7 @@ export default function StudyPlanPage() {
       <div className="sp-header">
         <h1>
           <span className="material-symbols-outlined">event_note</span>
-          시험 공부
+          {studentName ? `${studentName}의 학습 계획표` : "학습 계획표"}
         </h1>
         {plans.length > 1 && (
           <div className="sp-plan-select">
@@ -110,7 +102,7 @@ export default function StudyPlanPage() {
       <div className="sp-tabs">
         <button className={`sp-tab ${tab === "matrix" ? "active" : ""}`} onClick={() => setTab("matrix")}>
           <span className="material-symbols-outlined" style={{ fontSize: 18 }}>grid_on</span>
-          할일 목록
+          학습 현황
         </button>
         <button className={`sp-tab ${tab === "calendar" ? "active" : ""}`} onClick={() => setTab("calendar")}>
           <span className="material-symbols-outlined" style={{ fontSize: 18 }}>calendar_month</span>
@@ -123,7 +115,6 @@ export default function StudyPlanPage() {
           scopes={matrix.scopes}
           assets={matrix.assets}
           cells={matrix.cells}
-          onCellClick={handleCellClick}
         />
       )}
 

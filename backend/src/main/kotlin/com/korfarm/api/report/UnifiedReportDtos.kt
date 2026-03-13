@@ -31,7 +31,8 @@ data class ReportSections(
     val farmMode: FarmModeSection,
     val dailyQuiz: DailyActivitySection,
     val dailyReading: DailyActivitySection,
-    val proMode: ProModeSection
+    val proMode: ProModeSection,
+    val studyPlan: StudyPlanSection? = null
 )
 
 // 시험 OMR 영역
@@ -106,6 +107,28 @@ data class ProModeItem(
     val createdAt: String?
 )
 
+// 학습 계획표 영역
+data class StudyPlanSection(
+    val totalCells: Int,
+    val completedCells: Int,
+    val submittedCells: Int,
+    val pendingCells: Int,
+    val rejectedCells: Int,
+    val completionRate: Double,
+    val normalizedScore: Double,
+    val items: List<StudyPlanItem>
+)
+
+data class StudyPlanItem(
+    val planTitle: String,
+    val scopeLabel: String?,
+    val assetLabel: String?,
+    val assetType: String?,
+    val status: String,
+    val score: Int?,
+    val reviewedAt: String?
+)
+
 // 추이 데이터
 data class TrendPoint(
     val date: String,
@@ -114,6 +137,7 @@ data class TrendPoint(
     val dailyQuiz: Double?,
     val dailyReading: Double?,
     val proMode: Double?,
+    val studyPlan: Double? = null,
     val overall: Double?
 )
 

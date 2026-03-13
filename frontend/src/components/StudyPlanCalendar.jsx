@@ -33,7 +33,7 @@ function fmt(d) {
   return `${y}-${m}-${dd}`;
 }
 
-export default function StudyPlanCalendar({ schedules, startDate, endDate, admin }) {
+export default function StudyPlanCalendar({ schedules, startDate, endDate, admin, events, onMonthChange, onDateClick }) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const [viewYear, setViewYear] = useState(today.getFullYear());
@@ -49,13 +49,29 @@ export default function StudyPlanCalendar({ schedules, startDate, endDate, admin
   const rangeStart = startDate ? new Date(startDate + "T00:00:00") : null;
   const rangeEnd = endDate ? new Date(endDate + "T00:00:00") : null;
 
+  // 이벤트 맵
+  const eventMap = {};
+  (events || []).forEach((ev) => {
+    if (!eventMap[ev.eventDate]) eventMap[ev.eventDate] = [];
+    eventMap[ev.eventDate].push(ev);
+  });
+
+  const changeMonth = (y, m) => {
+    setViewYear(y);
+    setViewMonth(m);
+    if (onMonthChange) {
+      const ym = `${y}-${String(m + 1).padStart(2, "0")}`;
+      onMonthChange(ym);
+    }
+  };
+
   const prev = () => {
-    if (viewMonth === 0) { setViewYear(viewYear - 1); setViewMonth(11); }
-    else setViewMonth(viewMonth - 1);
+    if (viewMonth === 0) changeMonth(viewYear - 1, 11);
+    else changeMonth(viewYear, viewMonth - 1);
   };
   const next = () => {
-    if (viewMonth === 11) { setViewYear(viewYear + 1); setViewMonth(0); }
-    else setViewMonth(viewMonth + 1);
+    if (viewMonth === 11) changeMonth(viewYear + 1, 0);
+    else changeMonth(viewYear, viewMonth + 1);
   };
 
   return (
@@ -77,24 +93,37 @@ export default function StudyPlanCalendar({ schedules, startDate, endDate, admin
           const ds = fmt(d.date);
           const isToday = ds === fmt(today);
           const inRange = rangeStart && rangeEnd && d.date >= rangeStart && d.date <= rangeEnd;
-          const events = scheduleMap[ds] || [];
+          const scheds = scheduleMap[ds] || [];
+          const dayEvents = eventMap[ds] || [];
+          const hasEvents = dayEvents.length > 0;
           const cls = [
             "sp-cal-day",
             d.otherMonth && "other-month",
             isToday && "today",
             inRange && "in-range",
+            hasEvents && "has-events",
           ].filter(Boolean).join(" ");
 
           return (
-            <div key={i} className={cls}>
-              <div className="sp-cal-day-num">{d.date.getDate()}</div>
-              {events.slice(0, 2).map((ev) => (
+            <div
+              key={i}
+              className={cls}
+              onClick={() => {
+                if (hasEvents && onDateClick) onDateClick(ds, dayEvents);
+              }}
+              style={hasEvents ? { cursor: "pointer" } : undefined}
+            >
+              <div className="sp-cal-day-num">
+                {d.date.getDate()}
+                {hasEvents && <span className="sp-cal-event-dot" />}
+              </div>
+              {scheds.slice(0, 2).map((ev) => (
                 <span key={ev.id} className="sp-cal-event" title={ev.memo || ""}>
                   {ev.label || "일정"}
                 </span>
               ))}
-              {events.length > 2 && (
-                <span className="sp-cal-event">+{events.length - 2}</span>
+              {scheds.length > 2 && (
+                <span className="sp-cal-event">+{scheds.length - 2}</span>
               )}
             </div>
           );

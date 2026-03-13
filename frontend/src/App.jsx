@@ -94,6 +94,7 @@ const AdminStudyPlansPage = lazy(() => import("./pages/AdminStudyPlansPage"));
 const AdminStudyPlanDetailPage = lazy(() => import("./pages/AdminStudyPlanDetailPage"));
 const StudyPlanPage = lazy(() => import("./pages/StudyPlanPage"));
 const StudyPlanSubmitPage = lazy(() => import("./pages/StudyPlanSubmitPage"));
+const ParentStudyPlanPage = lazy(() => import("./pages/ParentStudyPlanPage"));
 const FeaturesPage = lazy(() => import("./pages/FeaturesPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const GuidePage = lazy(() => import("./pages/GuidePage"));
@@ -237,6 +238,7 @@ function App() {
           <Route path="/diagnostic/v2/report/:sessionId" element={P(<DiagnosticReportPage />)} />
           <Route path="/study-plan" element={P(<StudyPlanPage />)} />
           <Route path="/study-plan/submit/:cellId" element={P(<StudyPlanSubmitPage />)} />
+          <Route path="/parents/children/:studentId/study-plan" element={P(<ParentStudyPlanPage />)} />
 
           {/* 관리자 전용 페이지 */}
           <Route path="/admin" element={A(<AdminPage />)} />

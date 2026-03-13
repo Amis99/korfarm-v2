@@ -116,6 +116,31 @@ const SECTIONS = [
     ),
     getSummary: (s) => `학습 ${s.completedItems}건, 테스트 ${s.testCount}회, 평균 ${s.averageTestScore?.toFixed(1)}점`,
   },
+  {
+    key: "studyPlan",
+    label: "학습 계획표",
+    dotClass: "ur-dot-studyplan",
+    renderItems: (items) => (
+      <table>
+        <thead>
+          <tr><th>계획표</th><th>범위</th><th>에셋</th><th>상태</th><th>점수</th><th>검토일</th></tr>
+        </thead>
+        <tbody>
+          {items.map((it, i) => (
+            <tr key={i}>
+              <td>{it.planTitle || "-"}</td>
+              <td>{it.scopeLabel || "-"}</td>
+              <td>{it.assetLabel || "-"}</td>
+              <td>{statusLabel(it.status)}</td>
+              <td style={{ fontWeight: 700 }}>{it.score ?? "-"}</td>
+              <td style={{ fontSize: 12 }}>{fmtDate(it.reviewedAt)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ),
+    getSummary: (s) => `${s.completedCells}/${s.totalCells}건 완료, 완료율 ${s.completionRate?.toFixed(1)}%`,
+  },
 ];
 
 function fmtDate(iso) {

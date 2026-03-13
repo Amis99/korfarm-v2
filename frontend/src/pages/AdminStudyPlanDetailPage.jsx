@@ -5,6 +5,7 @@ import AdminLayout from "../components/AdminLayout";
 import StudyPlanMatrix from "../components/StudyPlanMatrix";
 import StudyPlanCalendar from "../components/StudyPlanCalendar";
 import StudyPlanCellModal from "../components/StudyPlanCellModal";
+import CalendarEventModal from "../components/CalendarEventModal";
 import "../styles/admin-study-plan.css";
 
 const TABS = [
@@ -24,6 +25,8 @@ export default function AdminStudyPlanDetailPage() {
   const [loading, setLoading] = useState(true);
   const [cellModal, setCellModal] = useState(null);
   const [classFilter, setClassFilter] = useState("all");
+  const [calendarEvents, setCalendarEvents] = useState([]);
+  const [eventModal, setEventModal] = useState(null);
 
   // 설정 탭 상태
   const [newScopeLabel, setNewScopeLabel] = useState("");
@@ -55,9 +58,20 @@ export default function AdminStudyPlanDetailPage() {
       .catch(() => setSchedules([]));
   }, [planId]);
 
+  const loadCalendarEvents = useCallback((month) => {
+    const ym = month || (() => {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+    })();
+    const userParam = selectedUserId ? `&userId=${selectedUserId}` : "";
+    apiGet(`/v1/admin/study-plans/${planId}/calendar/events?month=${ym}${userParam}`)
+      .then((data) => setCalendarEvents(Array.isArray(data) ? data : []))
+      .catch(() => setCalendarEvents([]));
+  }, [planId, selectedUserId]);
+
   useEffect(() => {
     setLoading(true);
-    Promise.all([loadPlan(), loadStudents(), loadSchedules()])
+    Promise.all([loadPlan(), loadStudents(), loadSchedules(), loadCalendarEvents()])
       .finally(() => setLoading(false));
   }, [planId]);
 
@@ -124,9 +138,10 @@ export default function AdminStudyPlanDetailPage() {
     const label = isInline ? opts.label.trim() : newAssetLabel.trim();
     const assetKind = isInline ? opts.assetKind : newAssetKind;
     if (!label) return;
+    const refId = isInline ? opts.refId : undefined;
     try {
       await apiPost(`/v1/admin/study-plans/${planId}/assets`, {
-        assetType, label, assetKind,
+        assetType, label, assetKind, ...(refId ? { refId } : {}),
       });
       if (!isInline) setNewAssetLabel("");
       loadPlan();
@@ -277,6 +292,9 @@ export default function AdminStudyPlanDetailPage() {
               startDate={plan.startDate}
               endDate={plan.endDate}
               admin
+              events={calendarEvents}
+              onMonthChange={loadCalendarEvents}
+              onDateClick={(date, evts) => setEventModal({ date, events: evts })}
             />
           )}
 
@@ -347,6 +365,15 @@ export default function AdminStudyPlanDetailPage() {
           )}
         </div>
       </div>
+
+      {/* 이벤트 모달 */}
+      {eventModal && (
+        <CalendarEventModal
+          date={eventModal.date}
+          events={eventModal.events}
+          onClose={() => setEventModal(null)}
+        />
+      )}
 
       {/* 셀 모달 */}
       {cellModal && (

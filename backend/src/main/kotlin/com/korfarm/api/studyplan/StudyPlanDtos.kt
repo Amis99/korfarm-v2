@@ -217,6 +217,18 @@ data class StudentDashboardSummary(
     val upcomingSchedules: Int
 )
 
+// ── 캘린더 이벤트 응답 ──
+
+data class CalendarEventResponse(
+    val id: String,
+    val eventType: String,
+    val eventDate: String,
+    val cellId: String?,
+    val refLabel: String?,
+    val memo: String?,
+    val createdAt: String
+)
+
 // ── 변환 함수 ──
 
 internal fun StudyPlanEntity.toSummary(targetCount: Int): StudyPlanSummaryResponse {
@@ -257,6 +269,14 @@ internal fun StudyPlanCellEntity.toResponse(asset: StudyPlanAssetEntity? = null)
 internal fun StudyPlanCellFileEntity.toResponse(): CellFileResponse {
     return CellFileResponse(
         id = id, fileId = fileId, uploadedBy = uploadedBy,
+        createdAt = createdAt.toString()
+    )
+}
+
+internal fun StudyPlanEventEntity.toCalendarEvent(): CalendarEventResponse {
+    return CalendarEventResponse(
+        id = id, eventType = eventType, eventDate = eventDate.toString(),
+        cellId = cellId, refLabel = refLabel, memo = memo,
         createdAt = createdAt.toString()
     )
 }

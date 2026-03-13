@@ -7,6 +7,7 @@ import com.korfarm.api.pro.ProProgressRepo
 import com.korfarm.api.pro.ProTestSessionRepo
 import com.korfarm.api.test.TestPaperRepo
 import com.korfarm.api.test.TestSubmissionRepo
+import com.korfarm.api.studyplan.*
 import com.korfarm.api.user.ParentLinkService
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
@@ -26,7 +27,12 @@ class UnifiedReportService(
     private val proProgressRepo: ProProgressRepo,
     private val proTestSessionRepo: ProTestSessionRepo,
     private val userRepository: UserRepository,
-    private val parentLinkService: ParentLinkService
+    private val parentLinkService: ParentLinkService,
+    private val studyPlanCellRepo: StudyPlanCellRepository,
+    private val studyPlanRepo: StudyPlanRepository,
+    private val studyPlanScopeRepo: StudyPlanScopeRepository,
+    private val studyPlanAssetRepo: StudyPlanAssetRepository,
+    private val studyPlanTargetRepo: StudyPlanTargetRepository
 ) {
     private val dtFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
@@ -44,24 +50,28 @@ class UnifiedReportService(
         val dailyReading = buildDailySection(studentId, "daily_reading", start, end)
         val proMode = buildProModeSection(studentId, start, end)
 
+        val studyPlan = buildStudyPlanSection(studentId, start, end)
+
         val sections = ReportSections(
             examOmr = examOmr,
             farmMode = farmMode,
             dailyQuiz = dailyQuiz,
             dailyReading = dailyReading,
-            proMode = proMode
+            proMode = proMode,
+            studyPlan = studyPlan
         )
 
         val summary = buildSummary(sections)
         val trend = buildTrend(studentId, startDate, endDate)
         val radarData = RadarData(
-            labels = listOf("시험 OMR", "농장 모드", "일일 퀴즈", "일일 독해", "프로 모드"),
+            labels = listOf("시험 OMR", "농장 모드", "일일 퀴즈", "일일 독해", "프로 모드", "학습 계획표"),
             scores = listOf(
                 examOmr.normalizedScore,
                 farmMode.normalizedScore,
                 dailyQuiz.normalizedScore,
                 dailyReading.normalizedScore,
-                proMode.normalizedScore
+                proMode.normalizedScore,
+                studyPlan?.normalizedScore ?: 0.0
             )
         )
 
@@ -241,13 +251,16 @@ class UnifiedReportService(
 
     // 요약 생성
     private fun buildSummary(sections: ReportSections): ReportSummary {
-        val sectionData = listOf(
+        val sectionData = mutableListOf(
             "시험 OMR" to sections.examOmr.let { it.count to it.normalizedScore },
             "농장 모드" to sections.farmMode.let { it.count to it.normalizedScore },
             "일일 퀴즈" to sections.dailyQuiz.let { it.count to it.normalizedScore },
             "일일 독해" to sections.dailyReading.let { it.count to it.normalizedScore },
             "프로 모드" to sections.proMode.let { (it.completedItems + it.testCount) to it.normalizedScore }
         )
+        sections.studyPlan?.let {
+            sectionData.add("학습 계획표" to (it.totalCells to it.normalizedScore))
+        }
 
         val totalActivities = sectionData.sumOf { it.second.first }
         val activeSections = sectionData.filter { it.second.first > 0 }
@@ -275,6 +288,65 @@ class UnifiedReportService(
         )
     }
 
+    // 학습 계획표 영역
+    @Suppress("UNUSED_PARAMETER")
+    private fun buildStudyPlanSection(userId: String, start: LocalDateTime, end: LocalDateTime): StudyPlanSection? {
+        val targetLinks = studyPlanTargetRepo.findByTargetTypeAndTargetId("user", userId)
+        val planIds = targetLinks.map { it.planId }.toMutableSet()
+
+        if (planIds.isEmpty()) return null
+
+        val plans = studyPlanRepo.findAllById(planIds).filter { it.status == "active" }
+        if (plans.isEmpty()) return null
+        val activePlanIds = plans.map { it.id }.toSet()
+
+        val cells = activePlanIds.flatMap { studyPlanCellRepo.findByPlanIdAndUserId(it, userId) }
+        if (cells.isEmpty()) return null
+
+        // 기간 필터: updatedAt이 범위 내이거나, 항상 포함 (계획표 셀은 기간과 무관하게 전체 상태를 보여줌)
+        val totalCells = cells.size
+        val completedCells = cells.count { it.status in listOf("approved", "passed") }
+        val submittedCells = cells.count { it.status in listOf("submitted", "grading") }
+        val pendingCells = cells.count { it.status == "pending" }
+        val rejectedCells = cells.count { it.status == "rejected" }
+        val completionRate = if (totalCells > 0) round2(completedCells.toDouble() / totalCells * 100) else 0.0
+
+        // 정규화 점수: 완료율
+        val normalizedScore = completionRate
+
+        // plan, scope, asset 맵 구성
+        val planMap = plans.associateBy { it.id }
+        val scopeIds = cells.map { it.scopeId }.distinct()
+        val assetIds = cells.map { it.assetId }.distinct()
+        val scopeMap = if (scopeIds.isNotEmpty()) studyPlanScopeRepo.findAllById(scopeIds).associateBy { it.id } else emptyMap()
+        val assetMap = if (assetIds.isNotEmpty()) studyPlanAssetRepo.findAllById(assetIds).associateBy { it.id } else emptyMap()
+
+        // 완료된 셀만 items에 포함
+        val completedItems = cells.filter { it.status in listOf("approved", "passed") }
+        val items = completedItems.map { cell ->
+            StudyPlanItem(
+                planTitle = planMap[cell.planId]?.title ?: "",
+                scopeLabel = scopeMap[cell.scopeId]?.label,
+                assetLabel = assetMap[cell.assetId]?.label,
+                assetType = assetMap[cell.assetId]?.assetType,
+                status = cell.status,
+                score = cell.score,
+                reviewedAt = cell.reviewedAt?.format(dtFmt)
+            )
+        }
+
+        return StudyPlanSection(
+            totalCells = totalCells,
+            completedCells = completedCells,
+            submittedCells = submittedCells,
+            pendingCells = pendingCells,
+            rejectedCells = rejectedCells,
+            completionRate = completionRate,
+            normalizedScore = normalizedScore,
+            items = items
+        )
+    }
+
     // 추이 데이터 생성
     private fun buildTrend(userId: String, startDate: LocalDate, endDate: LocalDate): List<TrendPoint> {
         val start = startDate.atStartOfDay()
@@ -286,6 +358,13 @@ class UnifiedReportService(
         val readingAttempts = learningAttemptRepo.findByUserIdAndActivityTypeAndSubmittedAtBetween(userId, "daily_reading", start, end)
         val proSessions = proTestSessionRepo.findByUserIdAndStatusInAndCreatedAtBetween(userId, listOf("passed", "failed"), start, end)
 
+        // 학습 계획표 셀 (채점 완료된 것)
+        val spCells = studyPlanCellRepo.findByUserIdAndStatus(userId, "passed") +
+                studyPlanCellRepo.findByUserIdAndStatus(userId, "failed")
+        val spCellsInRange = spCells.filter { c ->
+            c.reviewedAt?.let { it >= start && it <= end } ?: false
+        }
+
         val testPaperCache = mutableMapOf<String, Int>() // testId -> totalPoints
 
         // 날짜별 집계
@@ -295,6 +374,7 @@ class UnifiedReportService(
         quizAttempts.forEach { it.submittedAt?.let { d -> allDates.add(d.toLocalDate()) } }
         readingAttempts.forEach { it.submittedAt?.let { d -> allDates.add(d.toLocalDate()) } }
         proSessions.forEach { allDates.add(it.createdAt.toLocalDate()) }
+        spCellsInRange.forEach { it.reviewedAt?.let { d -> allDates.add(d.toLocalDate()) } }
 
         return allDates.sorted().map { date ->
             val examScores = submissions.filter { it.createdAt.toLocalDate() == date }.map { sub ->
@@ -319,7 +399,11 @@ class UnifiedReportService(
             val readingAvg = if (readingScores.isNotEmpty()) round2(readingScores.average()) else null
             val proAvg = if (proScores.isNotEmpty()) round2(proScores.average()) else null
 
-            val allScores = listOfNotNull(examAvg, farmAvg, quizAvg, readingAvg, proAvg)
+            val spScores = spCellsInRange.filter { it.reviewedAt?.toLocalDate() == date }
+                .mapNotNull { it.score?.toDouble() }
+            val spAvg = if (spScores.isNotEmpty()) round2(spScores.average()) else null
+
+            val allScores = listOfNotNull(examAvg, farmAvg, quizAvg, readingAvg, proAvg, spAvg)
             val overall = if (allScores.isNotEmpty()) round2(allScores.average()) else null
 
             TrendPoint(
@@ -329,6 +413,7 @@ class UnifiedReportService(
                 dailyQuiz = quizAvg,
                 dailyReading = readingAvg,
                 proMode = proAvg,
+                studyPlan = spAvg,
                 overall = overall
             )
         }
