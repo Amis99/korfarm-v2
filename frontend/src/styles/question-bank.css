@@ -220,6 +220,39 @@
   text-decoration: underline;
 }
 
+/* ── 점검 상태 점 ── */
+.qb-review-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  cursor: help;
+  transition: box-shadow 0.2s;
+}
+
+.qb-review-dot.none {
+  background: transparent;
+  border: 2px solid #4a5a4e;
+}
+
+.qb-review-dot.in_progress {
+  background: #e8a040;
+  border: 2px solid #e8a040;
+  box-shadow: 0 0 6px rgba(232, 160, 64, 0.4);
+  animation: qb-pulse 2s ease-in-out infinite;
+}
+
+.qb-review-dot.done {
+  background: #50c070;
+  border: 2px solid #50c070;
+  box-shadow: 0 0 4px rgba(80, 192, 112, 0.3);
+}
+
+@keyframes qb-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
 /* ── 상태 뱃지 ── */
 .qb-status {
   display: inline-block;

@@ -25,6 +25,7 @@ function AdminQuestionBankPage() {
   const [areaFilter, setAreaFilter] = useState("");
   const [sourceFilter, setSourceFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [reviewFilter, setReviewFilter] = useState("");
   const [selectedFolder, setSelectedFolder] = useState(null);
   const [page, setPage] = useState(1);
   const [selectedIds, setSelectedIds] = useState(new Set());
@@ -65,6 +66,7 @@ function AdminQuestionBankPage() {
       if (areaFilter && r.area !== areaFilter) return false;
       if (sourceFilter && r.source_type !== sourceFilter) return false;
       if (statusFilter && r.status !== statusFilter) return false;
+      if (reviewFilter && r.review_status !== reviewFilter) return false;
       if (selectedFolder) {
         if (selectedFolder.sub) {
           if (r.area !== selectedFolder.area || r.sub_area !== selectedFolder.sub) return false;
@@ -79,7 +81,7 @@ function AdminQuestionBankPage() {
       }
       return true;
     });
-  }, [records, search, areaFilter, sourceFilter, statusFilter, selectedFolder]);
+  }, [records, search, areaFilter, sourceFilter, statusFilter, reviewFilter, selectedFolder]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const safePage = Math.min(page, totalPages);
@@ -166,6 +168,12 @@ function AdminQuestionBankPage() {
             <option value="draft">초안</option>
             <option value="published">게시됨</option>
           </select>
+          <select className="qb-select" value={reviewFilter} onChange={(e) => { setReviewFilter(e.target.value); setPage(1); }}>
+            <option value="">전체 점검</option>
+            <option value="none">점검 전</option>
+            <option value="in_progress">점검 중</option>
+            <option value="done">점검 완료</option>
+          </select>
         </div>
 
         <div className="qb-list-layout">
@@ -201,6 +209,7 @@ function AdminQuestionBankPage() {
                         <th>소스</th>
                         <th>난이도</th>
                         <th>문제수</th>
+                        <th style={{ width: 44, textAlign: "center" }}>점검</th>
                         <th>상태</th>
                       </tr>
                     </thead>
@@ -222,6 +231,16 @@ function AdminQuestionBankPage() {
                           <td>{SOURCE_LABELS[r.source_type] || r.source_type || "-"}</td>
                           <td>{r.difficulty ?? "-"}</td>
                           <td>{r.question_count ?? 0}</td>
+                          <td style={{ textAlign: "center" }}>
+                            <span
+                              className={`qb-review-dot ${r.review_status || "none"}`}
+                              title={
+                                (r.review_status === "done" ? "점검 완료" :
+                                 r.review_status === "in_progress" ? "점검 중" : "점검 전") +
+                                (r.reviewer ? ` (${r.reviewer})` : "")
+                              }
+                            />
+                          </td>
                           <td>
                             <span className={`qb-status ${r.status}`}>
                               {r.status === "draft" ? "초안" : r.status === "published" ? "게시됨" : r.status}

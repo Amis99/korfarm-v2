@@ -125,6 +125,9 @@ class QuestionBankService(
                 title = r.title,
                 difficulty = r.difficulty,
                 author = r.author,
+                reviewer = r.reviewer,
+                review_status = r.reviewStatus,
+                reviewed_at = r.reviewedAt,
                 status = r.status,
                 question_count = qCount,
                 created_at = r.createdAt,
@@ -154,6 +157,9 @@ class QuestionBankService(
             difficulty = r.difficulty,
             tags = parseJsonSafe(r.tags),
             author = r.author,
+            reviewer = r.reviewer,
+            review_status = r.reviewStatus,
+            reviewed_at = r.reviewedAt,
             status = r.status,
             meta_json = parseJsonSafe(r.metaJson),
             passages = passages.map { p ->
@@ -202,6 +208,16 @@ class QuestionBankService(
         req.difficulty?.let { r.difficulty = it }
         req.tags?.let { r.tags = objectMapper.writeValueAsString(it) }
         req.author?.let { r.author = it }
+        req.reviewer?.let { r.reviewer = it.ifBlank { null } }
+        req.review_status?.let {
+            val oldStatus = r.reviewStatus
+            r.reviewStatus = it
+            if (it == "done" && oldStatus != "done") {
+                r.reviewedAt = java.time.LocalDateTime.now()
+            } else if (it == "none") {
+                r.reviewedAt = null
+            }
+        }
         req.status?.let { r.status = it }
         req.meta?.let { r.metaJson = objectMapper.writeValueAsString(it) }
         recordRepo.save(r)

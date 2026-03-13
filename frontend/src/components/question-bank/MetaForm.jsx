@@ -87,6 +87,35 @@ function MetaForm({ data, codes, onChange }) {
         </div>
       </div>
 
+      <div style={{ marginTop: 16, padding: "14px", background: "#151f18", borderRadius: 10, border: "1px solid #2a3a2e" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+          <span className={`qb-review-dot ${data.review_status || "none"}`} />
+          <span style={{ fontSize: "0.82rem", color: "#c8bfb6", fontWeight: 600 }}>
+            {data.review_status === "done" ? "점검 완료" :
+             data.review_status === "in_progress" ? "점검 중" : "점검 전"}
+          </span>
+        </div>
+        <div className="qb-meta-grid">
+          <div className="qb-meta-field">
+            <label>점검자</label>
+            <input
+              className="qb-inline-input"
+              value={data.reviewer}
+              onChange={(e) => onChange("reviewer", e.target.value)}
+              placeholder="점검자 이름"
+            />
+          </div>
+          <div className="qb-meta-field">
+            <label>점검 상태</label>
+            <select className="qb-select" style={{ width: "100%" }} value={data.review_status} onChange={(e) => onChange("review_status", e.target.value)}>
+              <option value="none">점검 전</option>
+              <option value="in_progress">점검 중</option>
+              <option value="done">점검 완료</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <div style={{ marginTop: 12 }}>
         <label style={{ fontSize: "0.75rem", color: "#8a9a8e", display: "block", marginBottom: 6 }}>대상 학년</label>
         <div className="qb-tags">

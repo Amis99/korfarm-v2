@@ -43,6 +43,8 @@ function AdminQBRecordDetailPage() {
         difficulty: rec.difficulty || "",
         tags: Array.isArray(rec.tags) ? rec.tags : [],
         author: rec.author || "",
+        reviewer: rec.reviewer || "",
+        review_status: rec.review_status || "none",
         status: rec.status || "draft",
         passages: (rec.passages || []).map((p) => ({
           passage_code: p.passage_code,

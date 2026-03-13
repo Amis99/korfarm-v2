@@ -122,6 +122,15 @@ class QbRecordEntity(
     @Column
     var author: String? = null,
 
+    @Column
+    var reviewer: String? = null,
+
+    @Column(name = "review_status", nullable = false)
+    var reviewStatus: String = "none",
+
+    @Column(name = "reviewed_at")
+    var reviewedAt: LocalDateTime? = null,
+
     @Column(nullable = false)
     var status: String = "draft",
 
