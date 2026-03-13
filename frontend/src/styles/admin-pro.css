@@ -1,0 +1,309 @@
+/* ─── 프로 모드 관리 페이지 ─── */
+
+.ap-page {
+  max-width: 1100px;
+}
+
+/* 목록 테이블 */
+.ap-chapter-table th,
+.ap-chapter-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.ap-col-num { width: 50px; }
+.ap-col-chapter { text-align: left !important; }
+.ap-col-content { width: 140px; }
+.ap-col-answer { width: 60px; }
+.ap-col-test { width: 60px; }
+.ap-col-overall { width: 60px; }
+.ap-col-action { width: 40px; color: var(--color-text-muted, #999); }
+
+.ap-chapter-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.ap-chapter-num {
+  font-size: 0.8rem;
+  color: var(--color-text-muted, #888);
+}
+
+.ap-content-icons {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+.ap-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.ap-icon.ok {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+.ap-icon.miss {
+  background: #fce4ec;
+  color: #c62828;
+}
+
+.ap-check {
+  font-weight: 700;
+  font-size: 1rem;
+}
+.ap-check.ok { color: #2e7d32; }
+.ap-check.miss { color: #c62828; }
+
+.ap-test-count {
+  font-weight: 600;
+  color: #1565c0;
+}
+
+.ap-overall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.ap-overall.complete { background: #e8f5e9; color: #2e7d32; }
+.ap-overall.partial { background: #fff8e1; color: #f57f17; }
+.ap-overall.empty { background: #fce4ec; color: #c62828; }
+
+.ap-legend {
+  display: flex;
+  gap: 20px;
+  padding: 12px 0;
+  font-size: 0.82rem;
+  color: var(--color-text-muted, #888);
+}
+.ap-legend .ap-overall {
+  width: 20px;
+  height: 20px;
+  font-size: 0.72rem;
+  margin-right: 4px;
+}
+
+.ap-muted {
+  color: var(--color-text-muted, #999);
+  font-size: 0.88rem;
+}
+
+.ap-mono {
+  font-family: "Courier New", monospace;
+  font-size: 0.82rem;
+}
+
+/* 콘텐츠 현황 */
+.ap-content-status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ap-status-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f9f9fb;
+}
+.ap-status-row.ok { background: #f1f8f1; }
+.ap-status-row.missing { background: #fef6f6; }
+
+.ap-status-icon { font-size: 1rem; flex-shrink: 0; }
+.ap-status-type { font-weight: 600; min-width: 40px; }
+.ap-status-count { color: #666; font-size: 0.85rem; min-width: 40px; }
+.ap-status-contents { flex: 1; font-size: 0.85rem; }
+.ap-status-content-item { padding: 2px 0; }
+.ap-content-id { color: #999; font-size: 0.78rem; }
+.ap-no-content { color: #c62828; font-style: italic; }
+
+/* 정답해설 탭 */
+.ap-answer-tabs {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0;
+}
+.ap-tab {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  font-size: 0.88rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  color: #666;
+  font-weight: 500;
+}
+.ap-tab.active {
+  color: var(--color-primary, #1565c0);
+  border-bottom-color: var(--color-primary, #1565c0);
+}
+.ap-tab:hover { color: #333; }
+
+.ap-answer-id {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: #999;
+  font-family: monospace;
+}
+
+/* JSON 편집 */
+.ap-answer-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ap-answer-title-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+.ap-answer-title-label input {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+.ap-json-editor {
+  width: 100%;
+  font-family: "Courier New", "Consolas", monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  resize: vertical;
+  tab-size: 2;
+}
+.ap-json-editor:focus {
+  outline: none;
+  border-color: var(--color-primary, #1565c0);
+  background: #fff;
+}
+.ap-answer-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 파일 업로드 */
+.ap-answer-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ap-drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 32px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  background: #fafafa;
+  cursor: pointer;
+  position: relative;
+}
+.ap-drop-zone:hover { border-color: #999; background: #f5f5f5; }
+.ap-drop-icon { font-size: 2rem; color: #999; }
+.ap-drop-zone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* 미리보기 */
+.ap-answer-preview {
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+.ap-preview-title {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #333;
+}
+.ap-preview-section {
+  margin-bottom: 20px;
+}
+.ap-preview-section-title {
+  font-size: 1rem;
+  color: #1565c0;
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  background: #e3f2fd;
+  border-radius: 6px;
+}
+.ap-preview-group {
+  margin-bottom: 16px;
+  padding-left: 8px;
+}
+.ap-preview-group-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+.ap-preview-item {
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-left: 3px solid #e0e0e0;
+  background: #fafafa;
+  border-radius: 0 6px 6px 0;
+}
+.ap-preview-item-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.ap-preview-num {
+  font-weight: 700;
+  min-width: 24px;
+}
+.ap-preview-type {
+  font-size: 0.78rem;
+  padding: 2px 6px;
+  background: #e8eaf6;
+  border-radius: 4px;
+  color: #3f51b5;
+}
+.ap-preview-pts {
+  font-size: 0.78rem;
+  color: #666;
+}
+.ap-preview-problem { margin: 4px 0; color: #555; }
+.ap-preview-answer { color: #2e7d32; margin: 4px 0; }
+.ap-preview-model { color: #1565c0; margin: 4px 0; }
+.ap-preview-explanation { color: #666; margin: 4px 0; font-size: 0.88rem; }
+
+.ap-error { color: #c62828; }
+
+/* 테스트 관리 */
+.ap-test-table { margin-bottom: 16px; }
+.ap-test-register { margin-top: 16px; }
+.ap-test-register h4 {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}

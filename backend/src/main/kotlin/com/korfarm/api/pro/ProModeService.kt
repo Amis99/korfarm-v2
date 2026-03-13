@@ -1,9 +1,14 @@
 package com.korfarm.api.pro
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.economy.EconomyService
 import com.korfarm.api.learning.SeedRewardPolicy
+import com.korfarm.api.paid.ContentEntity
+import com.korfarm.api.paid.ContentRepository
+import com.korfarm.api.paid.ContentVersionEntity
+import com.korfarm.api.paid.ContentVersionRepository
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -17,8 +22,11 @@ class ProModeService(
     private val progressRepo: ProProgressRepo,
     private val testSessionRepo: ProTestSessionRepo,
     private val chapterTestRepo: ProChapterTestRepo,
+    private val contentRepository: ContentRepository,
+    private val contentVersionRepository: ContentVersionRepository,
     private val userRepository: UserRepository,
-    private val economyService: EconomyService
+    private val economyService: EconomyService,
+    private val objectMapper: ObjectMapper
 ) {
     // 학습 아이템 유형 중 기본 4개 (잠금 해제 조건)
     private val baseTypes = setOf("reading", "vocab", "background", "logic")
@@ -291,6 +299,155 @@ class ProModeService(
             chapterRepo.findByLevelIdOrderByGlobalChapterNumberAsc(levelId)
         } else {
             chapterRepo.findAll().sortedBy { it.globalChapterNumber }
+        }
+    }
+
+    // ─── 관리자: 콘텐츠 현황 ───
+
+    @Transactional(readOnly = true)
+    fun getContentStatus(chapterId: String): ChapterContentStatusResponse {
+        val chapter = chapterRepo.findById(chapterId).orElseThrow {
+            ApiException("NOT_FOUND", "챕터를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+        }
+        val items = itemRepo.findByChapterIdOrderByItemOrderAsc(chapterId)
+        val contentTypes = listOf("reading", "vocab", "background", "logic", "answer")
+
+        val contentTypeStatuses = contentTypes.map { type ->
+            val typeItems = items.filter { it.type == type && it.contentId != null }
+            val contents = typeItems.mapNotNull { item ->
+                item.contentId?.let { cid ->
+                    contentRepository.findById(cid).orElse(null)?.let { c ->
+                        LinkedContentInfo(
+                            contentId = c.id,
+                            title = c.title,
+                            updatedAt = c.updatedAt
+                        )
+                    }
+                }
+            }
+            ContentTypeStatus(type = type, count = contents.size, contents = contents)
+        }
+
+        val tests = chapterTestRepo.findByChapterIdAndStatusOrderByVersionAsc(chapterId, "active")
+        val testVersions = tests.map { t ->
+            TestVersionInfo(version = t.version, testPaperId = t.testPaperId, status = t.status)
+        }
+
+        return ChapterContentStatusResponse(
+            chapterId = chapter.id,
+            title = chapter.title,
+            levelId = chapter.levelId,
+            chapterNumber = chapter.chapterNumber,
+            items = contentTypeStatuses,
+            testVersions = testVersions
+        )
+    }
+
+    // ─── 관리자: 정답해설 조회 ───
+
+    @Transactional(readOnly = true)
+    fun getAnswerContent(chapterId: String): AdminAnswerContentResponse {
+        chapterRepo.findById(chapterId).orElseThrow {
+            ApiException("NOT_FOUND", "챕터를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+        }
+        val answerItems = itemRepo.findByChapterIdAndType(chapterId, "answer")
+        val answerItem = answerItems.firstOrNull { it.contentId != null }
+
+        if (answerItem?.contentId == null) {
+            return AdminAnswerContentResponse(null, null, null, null)
+        }
+
+        val content = contentRepository.findById(answerItem.contentId!!).orElse(null)
+            ?: return AdminAnswerContentResponse(null, null, null, null)
+
+        val version = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(content.id)
+        return AdminAnswerContentResponse(
+            contentId = content.id,
+            title = content.title,
+            payload = version?.contentJson,
+            lastUpdatedAt = version?.updatedAt ?: content.updatedAt
+        )
+    }
+
+    // ─── 관리자: 정답해설 저장 ───
+
+    @Transactional
+    fun updateAnswerContent(chapterId: String, request: UpdateAnswerContentRequest, userId: String): AdminAnswerContentResponse {
+        val chapter = chapterRepo.findById(chapterId).orElseThrow {
+            ApiException("NOT_FOUND", "챕터를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+        }
+        val answerItems = itemRepo.findByChapterIdAndType(chapterId, "answer")
+        val answerItem = answerItems.firstOrNull { it.contentId != null }
+
+        val contentJson = objectMapper.writeValueAsString(request.payload)
+        val now = LocalDateTime.now()
+
+        if (answerItem?.contentId != null) {
+            // 기존 answer 콘텐츠가 있으면 새 content_version 추가
+            val content = contentRepository.findById(answerItem.contentId!!).orElseThrow {
+                ApiException("NOT_FOUND", "콘텐츠를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+            }
+            content.title = request.title
+            contentRepository.save(content)
+
+            val version = ContentVersionEntity(
+                id = IdGenerator.newId("cv"),
+                contentId = content.id,
+                schemaVersion = "1.0",
+                contentJson = contentJson,
+                uploadedBy = userId,
+                approvedBy = userId,
+                approvedAt = now
+            )
+            contentVersionRepository.save(version)
+
+            return AdminAnswerContentResponse(
+                contentId = content.id,
+                title = content.title,
+                payload = contentJson,
+                lastUpdatedAt = now
+            )
+        } else {
+            // answer 콘텐츠 신규 생성
+            val content = ContentEntity(
+                id = IdGenerator.newId("content"),
+                contentType = "PRO_ANSWER",
+                levelId = chapter.levelId,
+                title = request.title,
+                status = "active"
+            )
+            val saved = contentRepository.save(content)
+
+            val version = ContentVersionEntity(
+                id = IdGenerator.newId("cv"),
+                contentId = saved.id,
+                schemaVersion = "1.0",
+                contentJson = contentJson,
+                uploadedBy = userId,
+                approvedBy = userId,
+                approvedAt = now
+            )
+            contentVersionRepository.save(version)
+
+            // pro_chapter_items에 answer 아이템 추가
+            val allItems = itemRepo.findByChapterIdOrderByItemOrderAsc(chapterId)
+            val nextOrder = if (allItems.isEmpty()) 1 else allItems.maxOf { it.itemOrder } + 1
+            itemRepo.save(
+                ProChapterItemEntity(
+                    id = IdGenerator.newId("pci"),
+                    chapterId = chapterId,
+                    type = "answer",
+                    contentId = saved.id,
+                    itemOrder = nextOrder
+                )
+            )
+
+            return AdminAnswerContentResponse(
+                contentId = saved.id,
+                title = saved.title,
+                payload = contentJson,
+                lastUpdatedAt = now
+            )
         }
     }
 }

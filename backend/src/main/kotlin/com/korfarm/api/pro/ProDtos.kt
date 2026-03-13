@@ -143,3 +143,44 @@ data class AnswerKeyResponse(
     val title: String,
     val payload: String?
 )
+
+// ─── 관리자용 콘텐츠 현황/정답해설 DTO ───
+
+data class ChapterContentStatusResponse(
+    val chapterId: String,
+    val title: String,
+    val levelId: String,
+    val chapterNumber: Int,
+    val items: List<ContentTypeStatus>,
+    val testVersions: List<TestVersionInfo>
+)
+
+data class ContentTypeStatus(
+    val type: String,
+    val count: Int,
+    val contents: List<LinkedContentInfo>
+)
+
+data class LinkedContentInfo(
+    val contentId: String,
+    val title: String,
+    val updatedAt: LocalDateTime?
+)
+
+data class TestVersionInfo(
+    val version: Int,
+    val testPaperId: String,
+    val status: String
+)
+
+data class AdminAnswerContentResponse(
+    val contentId: String?,
+    val title: String?,
+    val payload: String?,
+    val lastUpdatedAt: LocalDateTime?
+)
+
+data class UpdateAnswerContentRequest(
+    val title: String,
+    val payload: Map<String, Any>
+)

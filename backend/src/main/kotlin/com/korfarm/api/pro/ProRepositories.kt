@@ -6,10 +6,12 @@ interface ProChapterRepo : JpaRepository<ProChapterEntity, String> {
     fun findByLevelIdAndStatusOrderByGlobalChapterNumberAsc(levelId: String, status: String): List<ProChapterEntity>
     fun findByStatusOrderByGlobalChapterNumberAsc(status: String): List<ProChapterEntity>
     fun findByLevelIdOrderByGlobalChapterNumberAsc(levelId: String): List<ProChapterEntity>
+    fun findByLevelIdAndChapterNumber(levelId: String, chapterNumber: Int): ProChapterEntity?
 }
 
 interface ProChapterItemRepo : JpaRepository<ProChapterItemEntity, String> {
     fun findByChapterIdOrderByItemOrderAsc(chapterId: String): List<ProChapterItemEntity>
+    fun findByChapterIdAndType(chapterId: String, type: String): List<ProChapterItemEntity>
     fun deleteByChapterId(chapterId: String)
 }
 

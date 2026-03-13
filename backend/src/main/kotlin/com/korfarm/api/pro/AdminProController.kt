@@ -2,6 +2,7 @@ package com.korfarm.api.pro
 
 import com.korfarm.api.common.ApiResponse
 import com.korfarm.api.security.AdminGuard
+import com.korfarm.api.security.SecurityUtils
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 
@@ -53,5 +54,30 @@ class AdminProController(
         AdminGuard.requireAnyRole("HQ_ADMIN")
         val test = proTestSessionService.registerChapterTest(id, request)
         return ApiResponse(success = true, data = test)
+    }
+
+    @GetMapping("/chapters/{id}/content-status")
+    fun getContentStatus(@PathVariable id: String): ApiResponse<ChapterContentStatusResponse> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val status = proModeService.getContentStatus(id)
+        return ApiResponse(success = true, data = status)
+    }
+
+    @GetMapping("/chapters/{id}/answer-content")
+    fun getAnswerContent(@PathVariable id: String): ApiResponse<AdminAnswerContentResponse> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val answer = proModeService.getAnswerContent(id)
+        return ApiResponse(success = true, data = answer)
+    }
+
+    @PutMapping("/chapters/{id}/answer-content")
+    fun updateAnswerContent(
+        @PathVariable id: String,
+        @Valid @RequestBody request: UpdateAnswerContentRequest
+    ): ApiResponse<AdminAnswerContentResponse> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        val userId = SecurityUtils.currentUserId() ?: "system"
+        val result = proModeService.updateAnswerContent(id, request, userId)
+        return ApiResponse(success = true, data = result)
     }
 }

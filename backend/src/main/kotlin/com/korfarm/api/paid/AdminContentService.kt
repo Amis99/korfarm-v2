@@ -9,9 +9,14 @@ import com.korfarm.api.contracts.AdminTestAnswersRequest
 import com.korfarm.api.contracts.AdminTestCreateRequest
 import com.korfarm.api.contracts.AdminTestGradeRequest
 import com.korfarm.api.contracts.AdminWritingFeedbackRequest
+import com.korfarm.api.pro.ProChapterEntity
+import com.korfarm.api.pro.ProChapterItemEntity
+import com.korfarm.api.pro.ProChapterItemRepo
+import com.korfarm.api.pro.ProChapterRepo
 import com.korfarm.api.test.TestPaperEntity
 import com.korfarm.api.files.FileRepository
 import com.korfarm.api.user.UserRepository
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -28,8 +33,89 @@ class AdminContentService(
     private val testResultRepository: TestResultRepository,
     private val fileRepository: FileRepository,
     private val userRepository: UserRepository,
+    private val proChapterRepo: ProChapterRepo,
+    private val proChapterItemRepo: ProChapterItemRepo,
     private val objectMapper: ObjectMapper
 ) {
+    private val log = LoggerFactory.getLogger(AdminContentService::class.java)
+
+    // PRO contentType → pro_chapter_items type 매핑
+    private val proContentTypeMap = mapOf(
+        "PRO_READING" to "reading",
+        "PRO_VOCAB" to "vocab",
+        "PRO_BACKGROUND" to "background",
+        "PRO_LOGIC" to "logic",
+        "PRO_ANSWER" to "answer"
+    )
+
+    // 레벨별 한글 이름
+    private val levelNames = mapOf(
+        "saussure1" to "소쉬르1", "saussure2" to "소쉬르2", "saussure3" to "소쉬르3",
+        "frege1" to "프레게1", "frege2" to "프레게2", "frege3" to "프레게3",
+        "russell1" to "러셀1", "russell2" to "러셀2", "russell3" to "러셀3",
+        "wittgenstein1" to "비트겐슈타인1", "wittgenstein2" to "비트겐슈타인2", "wittgenstein3" to "비트겐슈타인3"
+    )
+
+    // 레벨 순서 (globalChapterNumber 계산용)
+    private val levelOrder = listOf(
+        "saussure1", "saussure2", "saussure3",
+        "frege1", "frege2", "frege3",
+        "russell1", "russell2", "russell3",
+        "wittgenstein1", "wittgenstein2", "wittgenstein3"
+    )
+
+    private fun normalizeLevelId(raw: String): String {
+        return raw.lowercase().replace("_", "")
+    }
+
+    private fun autoLinkProChapter(contentId: String, contentType: String, rawLevelId: String, dayIndex: Int) {
+        val itemType = proContentTypeMap[contentType] ?: return
+        val levelId = normalizeLevelId(rawLevelId)
+
+        // 챕터 조회 또는 생성
+        val chapter = proChapterRepo.findByLevelIdAndChapterNumber(levelId, dayIndex)
+            ?: run {
+                val levelName = levelNames[levelId] ?: levelId
+                val bookNumber = levelId.last().digitToIntOrNull() ?: 1
+                val levelIdx = levelOrder.indexOf(levelId).takeIf { it >= 0 } ?: 0
+                val globalChapterNumber = levelIdx * 20 + dayIndex
+
+                val created = proChapterRepo.save(
+                    ProChapterEntity(
+                        id = IdGenerator.newId("pch"),
+                        levelId = levelId,
+                        bookNumber = bookNumber,
+                        chapterNumber = dayIndex,
+                        globalChapterNumber = globalChapterNumber,
+                        title = "$levelName ${dayIndex}장"
+                    )
+                )
+                log.info("프로 모드 챕터 자동 생성: ${created.title} (${created.id})")
+                created
+            }
+
+        // 기존 같은 타입 아이템 개수 확인 → itemOrder 결정
+        val existingItems = proChapterItemRepo.findByChapterIdAndType(chapter.id, itemType)
+        // 같은 contentId가 이미 연결되어 있으면 스킵
+        if (existingItems.any { it.contentId == contentId }) {
+            log.info("이미 연결됨: contentId=$contentId → chapter=${chapter.id}, type=$itemType")
+            return
+        }
+
+        val allItems = proChapterItemRepo.findByChapterIdOrderByItemOrderAsc(chapter.id)
+        val nextOrder = if (allItems.isEmpty()) 1 else allItems.maxOf { it.itemOrder } + 1
+
+        proChapterItemRepo.save(
+            ProChapterItemEntity(
+                id = IdGenerator.newId("pci"),
+                chapterId = chapter.id,
+                type = itemType,
+                contentId = contentId,
+                itemOrder = nextOrder
+            )
+        )
+        log.info("프로 모드 아이템 자동 연결: contentId=$contentId → chapter=${chapter.id}, type=$itemType, order=$nextOrder")
+    }
     @Transactional
     fun importContent(request: AdminContentImportRequest, userId: String): AdminContentImportResult {
         val title = request.content["title"]?.toString() ?: "Imported ${request.contentType}"
@@ -107,6 +193,16 @@ class AdminContentService(
                     approvedAt = LocalDateTime.now()
                 )
                 contentVersionRepository.save(version)
+
+                // PRO_* 콘텐츠 → 프로 모드 챕터 자동 생성/연결
+                if (item.contentType.startsWith("PRO_") && item.levelId != null && item.dayIndex != null) {
+                    try {
+                        autoLinkProChapter(saved.id, item.contentType, item.levelId, item.dayIndex)
+                    } catch (proErr: Exception) {
+                        log.warn("프로 모드 자동 연결 실패: contentId=${saved.id}, error=${proErr.message}")
+                    }
+                }
+
                 results.add(BatchItemResult(index = index, contentId = saved.id, success = true))
                 imported++
             } catch (e: Exception) {
