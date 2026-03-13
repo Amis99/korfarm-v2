@@ -17,10 +17,12 @@ interface StudyPlanTargetRepository : JpaRepository<StudyPlanTargetEntity, Strin
 
 interface StudyPlanScopeRepository : JpaRepository<StudyPlanScopeEntity, String> {
     fun findByPlanIdOrderBySortOrder(planId: String): List<StudyPlanScopeEntity>
+    fun deleteByPlanId(planId: String)
 }
 
 interface StudyPlanAssetRepository : JpaRepository<StudyPlanAssetEntity, String> {
     fun findByPlanIdOrderBySortOrder(planId: String): List<StudyPlanAssetEntity>
+    fun deleteByPlanId(planId: String)
 }
 
 interface StudyPlanCellRepository : JpaRepository<StudyPlanCellEntity, String> {
@@ -30,14 +32,17 @@ interface StudyPlanCellRepository : JpaRepository<StudyPlanCellEntity, String> {
     fun findByScopeId(scopeId: String): List<StudyPlanCellEntity>
     fun findByAssetId(assetId: String): List<StudyPlanCellEntity>
     fun findByUserIdAndStatus(userId: String, status: String): List<StudyPlanCellEntity>
+    fun findByUserIdAndCellRefIdIn(userId: String, cellRefIds: Collection<String>): List<StudyPlanCellEntity>
     fun findByScopeIdAndAssetIdAndUserId(scopeId: String, assetId: String, userId: String): StudyPlanCellEntity?
     fun deleteByScopeId(scopeId: String)
     fun deleteByAssetId(assetId: String)
+    fun deleteByPlanId(planId: String)
 }
 
 interface StudyPlanCellFileRepository : JpaRepository<StudyPlanCellFileEntity, String> {
     fun findByCellId(cellId: String): List<StudyPlanCellFileEntity>
     fun deleteByCellId(cellId: String)
+    fun deleteByCellIdIn(cellIds: Collection<String>)
 }
 
 interface StudyPlanEventRepository : JpaRepository<StudyPlanEventEntity, String> {
@@ -50,6 +55,7 @@ interface StudyPlanEventRepository : JpaRepository<StudyPlanEventEntity, String>
     fun findByUserIdAndEventDateBetweenOrderByEventDate(
         userId: String, start: LocalDate, end: LocalDate
     ): List<StudyPlanEventEntity>
+    fun deleteByPlanId(planId: String)
 }
 
 interface StudyPlanCellDateProjection {

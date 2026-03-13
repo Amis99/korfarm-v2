@@ -134,18 +134,38 @@
   font-weight: 700;
   white-space: nowrap;
 }
+.cell-badge.unassigned { background: rgba(158,158,158,0.1); color: #bbb; border: 1px dashed rgba(158,158,158,0.4); }
 .cell-badge.pending { background: rgba(158,158,158,0.15); color: #999; }
+.cell-badge.in_progress { background: rgba(33,150,243,0.15); color: #64b5f6; }
 .cell-badge.submitted { background: rgba(33,150,243,0.15); color: #64b5f6; }
+.cell-badge.partial { background: rgba(255,152,0,0.15); color: #ffa726; }
+.cell-badge.completed { background: rgba(76,175,80,0.2); color: #66bb6a; }
+.cell-badge.scored { background: rgba(255,152,0,0.2); color: #ffa726; }
+.cell-badge.passed { background: rgba(76,175,80,0.2); color: #66bb6a; }
+.cell-badge.retry { background: rgba(244,67,54,0.15); color: #ef5350; }
+/* 하위 호환 */
 .cell-badge.approved { background: rgba(76,175,80,0.2); color: #66bb6a; }
 .cell-badge.rejected { background: rgba(244,67,54,0.15); color: #ef5350; }
 .cell-badge.grading { background: rgba(255,152,0,0.15); color: #ffa726; }
-.cell-badge.passed { background: rgba(76,175,80,0.2); color: #66bb6a; }
-.cell-badge.retry { background: rgba(255,152,0,0.2); color: #ffa726; }
 .cell-badge.failed { background: rgba(244,67,54,0.2); color: #ef5350; }
 
-/* 거부 셀 강조 */
-.sp-matrix td.cell-rejected {
-  border: 2px solid rgba(244,67,54,0.4);
+/* 테스트 판정 텍스트 (점수 아래 작게) */
+.cell-verdict {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 1px;
+}
+
+/* 미배정 셀 강조 (점선 테두리) */
+.sp-matrix td.cell-unassigned {
+  border: 1px dashed rgba(158,158,158,0.4);
+}
+
+/* 일부 완료 셀 강조 */
+.sp-matrix td.cell-partial {
+  border: 2px solid rgba(255,152,0,0.4);
   position: relative;
 }
 

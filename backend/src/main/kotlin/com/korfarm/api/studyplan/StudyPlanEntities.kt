@@ -177,6 +177,9 @@ class StudyPlanCellEntity(
     @Column(nullable = false)
     var status: String = "pending",
 
+    @Column(name = "cell_ref_id")
+    var cellRefId: String? = null,
+
     var score: Int? = null,
 
     @Column(name = "submission_count", nullable = false)

@@ -2,12 +2,7 @@ import { useState, useEffect } from "react";
 import { apiGet, apiPost } from "../utils/api";
 import "../styles/admin-study-plan.css";
 
-const STEPS = ["기본 정보", "대상 선택", "범위 추가", "에셋 추가", "확인"];
-const ASSET_TYPES = [
-  { value: "korfarm", label: "국어농장 학습" },
-  { value: "activity", label: "학습활동" },
-  { value: "test", label: "테스트" },
-];
+const STEPS = ["기본 정보", "대상 선택"];
 
 export default function StudyPlanCreateForm({ onClose, onCreated }) {
   const [step, setStep] = useState(0);
@@ -27,16 +22,6 @@ export default function StudyPlanCreateForm({ onClose, onCreated }) {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [students, setStudents] = useState([]);
   const [studentSearch, setStudentSearch] = useState("");
-
-  // 3단계
-  const [scopes, setScopes] = useState([]);
-  const [newScopeLabel, setNewScopeLabel] = useState("");
-
-  // 4단계
-  const [assets, setAssets] = useState([]);
-  const [newAssetLabel, setNewAssetLabel] = useState("");
-  const [newAssetType, setNewAssetType] = useState("activity");
-  const [newAssetKind, setNewAssetKind] = useState("study");
 
   useEffect(() => {
     apiGet("/v1/admin/classes").then((data) => {
@@ -65,27 +50,6 @@ export default function StudyPlanCreateForm({ onClose, onCreated }) {
     );
   };
 
-  const addScope = () => {
-    if (!newScopeLabel.trim()) return;
-    setScopes([...scopes, { label: newScopeLabel.trim(), sortOrder: scopes.length }]);
-    setNewScopeLabel("");
-  };
-
-  const removeScope = (idx) => setScopes(scopes.filter((_, i) => i !== idx));
-
-  const addAsset = () => {
-    if (!newAssetLabel.trim()) return;
-    setAssets([...assets, {
-      label: newAssetLabel.trim(),
-      assetType: newAssetType,
-      assetKind: newAssetKind,
-      sortOrder: assets.length,
-    }]);
-    setNewAssetLabel("");
-  };
-
-  const removeAsset = (idx) => setAssets(assets.filter((_, i) => i !== idx));
-
   const handleSubmit = async () => {
     setSaving(true);
     setError(null);
@@ -97,11 +61,8 @@ export default function StudyPlanCreateForm({ onClose, onCreated }) {
       await apiPost("/v1/admin/study-plans", {
         title, description, examScope, startDate, endDate,
         targets,
-        scopes: scopes.map((s, i) => ({ label: s.label, sortOrder: i })),
-        assets: assets.map((a, i) => ({
-          assetType: a.assetType, label: a.label,
-          assetKind: a.assetKind, sortOrder: i,
-        })),
+        scopes: [],
+        assets: [],
         schedules: [],
       });
       onCreated?.();
@@ -115,8 +76,6 @@ export default function StudyPlanCreateForm({ onClose, onCreated }) {
   const canNext = () => {
     if (step === 0) return title.trim() && startDate && endDate;
     if (step === 1) return selectedClasses.length > 0 || selectedUsers.length > 0;
-    if (step === 2) return scopes.length > 0;
-    if (step === 3) return assets.length > 0;
     return true;
   };
 
@@ -214,87 +173,10 @@ export default function StudyPlanCreateForm({ onClose, onCreated }) {
                 </span>
               ))}
             </div>
-          </>
-        )}
-
-        {/* 3단계: 범위 추가 */}
-        {step === 2 && (
-          <>
-            <div className="asp-form-group">
-              <label>범위 (매트릭스 행)</label>
-              <div className="asp-add-row">
-                <input className="asp-input" value={newScopeLabel} onChange={(e) => setNewScopeLabel(e.target.value)} placeholder="예: 1단원 소설" onKeyDown={(e) => e.key === "Enter" && addScope()} />
-                <button className="asp-add-btn" onClick={addScope}>추가</button>
-              </div>
-            </div>
-            <div className="asp-chip-list">
-              {scopes.map((s, i) => (
-                <span key={i} className="asp-chip">
-                  {s.label} <button onClick={() => removeScope(i)}>&times;</button>
-                </span>
-              ))}
+            <div style={{ fontSize: "0.75rem", color: "#8a7468", marginTop: 12, padding: "10px 12px", background: "rgba(255,127,42,0.08)", borderRadius: 8 }}>
+              범위(행)와 에셋(열)은 생성 후 상세 페이지에서 추가할 수 있습니다.
             </div>
           </>
-        )}
-
-        {/* 4단계: 에셋 추가 */}
-        {step === 3 && (
-          <>
-            <div className="asp-form-group">
-              <label>에셋 (매트릭스 열)</label>
-              <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-                <select className="asp-select" style={{ flex: 1 }} value={newAssetType} onChange={(e) => setNewAssetType(e.target.value)}>
-                  {ASSET_TYPES.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
-                </select>
-                <select className="asp-select" style={{ flex: 1 }} value={newAssetKind} onChange={(e) => setNewAssetKind(e.target.value)}>
-                  <option value="study">학습활동</option>
-                  <option value="test">테스트</option>
-                </select>
-              </div>
-              <div className="asp-add-row">
-                <input className="asp-input" value={newAssetLabel} onChange={(e) => setNewAssetLabel(e.target.value)} placeholder="예: 국어농장 학습, 자습서, 백지 test" onKeyDown={(e) => e.key === "Enter" && addAsset()} />
-                <button className="asp-add-btn" onClick={addAsset}>추가</button>
-              </div>
-            </div>
-            <div className="asp-chip-list">
-              {assets.map((a, i) => (
-                <span key={i} className="asp-chip">
-                  [{a.assetKind === "test" ? "테스트" : "학습"}] {a.label}
-                  <button onClick={() => removeAsset(i)}>&times;</button>
-                </span>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* 5단계: 확인 */}
-        {step === 4 && (
-          <div style={{ fontSize: "0.85rem", color: "#ccc" }}>
-            <div style={{ marginBottom: 12 }}>
-              <strong style={{ color: "#8a7468" }}>제목:</strong> {title}
-            </div>
-            <div style={{ marginBottom: 12 }}>
-              <strong style={{ color: "#8a7468" }}>기간:</strong> {startDate} ~ {endDate}
-            </div>
-            <div style={{ marginBottom: 12 }}>
-              <strong style={{ color: "#8a7468" }}>대상:</strong>{" "}
-              {selectedClasses.map((c) => c.name).join(", ")}
-              {selectedUsers.length > 0 && ` + ${selectedUsers.length}명`}
-            </div>
-            <div style={{ marginBottom: 12 }}>
-              <strong style={{ color: "#8a7468" }}>범위 ({scopes.length}):</strong>{" "}
-              {scopes.map((s) => s.label).join(", ")}
-            </div>
-            <div style={{ marginBottom: 12 }}>
-              <strong style={{ color: "#8a7468" }}>에셋 ({assets.length}):</strong>{" "}
-              {assets.map((a) => a.label).join(", ")}
-            </div>
-            {examScope && (
-              <div style={{ marginBottom: 12 }}>
-                <strong style={{ color: "#8a7468" }}>시험 범위:</strong> {examScope}
-              </div>
-            )}
-          </div>
         )}
 
         {/* 네비게이션 */}
@@ -306,10 +188,10 @@ export default function StudyPlanCreateForm({ onClose, onCreated }) {
           </div>
           <div style={{ display: "flex", gap: 8 }}>
             <button className="asp-btn-prev" onClick={onClose}>취소</button>
-            {step < 4 ? (
+            {step < STEPS.length - 1 ? (
               <button className="asp-btn-next" onClick={() => setStep(step + 1)} disabled={!canNext()}>다음</button>
             ) : (
-              <button className="asp-btn-submit" onClick={handleSubmit} disabled={saving}>
+              <button className="asp-btn-submit" onClick={handleSubmit} disabled={saving || !canNext()}>
                 {saving ? "생성 중..." : "계획표 생성"}
               </button>
             )}

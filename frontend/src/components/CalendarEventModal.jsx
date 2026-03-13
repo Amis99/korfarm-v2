@@ -6,7 +6,13 @@ const EVENT_TYPE_MAP = {
   rejected: { label: "반려", icon: "cancel", color: "#ef5350" },
   passed: { label: "합격", icon: "emoji_events", color: "#4caf50" },
   failed: { label: "불합격", icon: "close", color: "#ef5350" },
-  retry: { label: "재시도", icon: "refresh", color: "#ff9800" },
+  retry: { label: "재시험", icon: "refresh", color: "#ff9800" },
+  assigned: { label: "배정", icon: "assignment", color: "#9c27b0" },
+  in_progress: { label: "진행중", icon: "play_arrow", color: "#2196f3" },
+  completed: { label: "완료", icon: "check_circle", color: "#4caf50" },
+  partial: { label: "일부 완료", icon: "rule", color: "#ff9800" },
+  scored: { label: "채점", icon: "grade", color: "#ff9800" },
+  pending: { label: "배부", icon: "send", color: "#9e9e9e" },
 };
 
 export default function CalendarEventModal({ date, events, onClose }) {

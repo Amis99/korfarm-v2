@@ -73,6 +73,13 @@ export default function StudyPlanMatrix({
     setShowContentSearch(false);
   };
 
+  const getCellClassName = (cell) => {
+    if (!cell) return "";
+    if (cell.status === "unassigned") return "cell-unassigned";
+    if (cell.status === "partial") return "cell-partial";
+    return "";
+  };
+
   return (
     <div className="sp-matrix-wrap">
       {showContentSearch && (
@@ -172,16 +179,27 @@ export default function StudyPlanMatrix({
               </th>
               {(assets || []).map((asset) => {
                 const cell = cellMap[`${scope.id}_${asset.id}`];
-                const isRejected = cell?.status === "rejected";
+                const extraCls = getCellClassName(cell);
+                const handleClick = () => {
+                  // 학생 뷰: unassigned 클릭 시 무반응
+                  if (!admin && cell?.status === "unassigned") return;
+                  onCellClick?.(cell, scope, asset);
+                };
                 return (
                   <td
                     key={asset.id}
-                    className={isRejected ? "cell-rejected" : ""}
-                    onClick={() => onCellClick?.(cell, scope, asset)}
-                    title={isRejected && cell?.adminNote ? `거부 사유: ${cell.adminNote}` : undefined}
+                    className={extraCls}
+                    onClick={handleClick}
+                    title={cell?.status === "partial" && cell?.adminNote ? `사유: ${cell.adminNote}` : undefined}
+                    style={!admin && cell?.status === "unassigned" ? { cursor: "default" } : undefined}
                   >
                     {cell ? (
-                      <CellStatusBadge status={cell.status} score={cell.score} assetKind={asset.assetKind} />
+                      <CellStatusBadge
+                        status={cell.status}
+                        score={cell.score}
+                        assetType={asset.assetType}
+                        assetKind={asset.assetKind}
+                      />
                     ) : (
                       <span style={{ color: "#bbb", fontSize: "0.75rem" }}>-</span>
                     )}

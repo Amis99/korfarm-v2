@@ -70,6 +70,20 @@ class AdminStudyPlanController(
         return ApiResponse(success = true, data = mapOf("planId" to planId))
     }
 
+    @PostMapping("/{planId}/unarchive")
+    fun unarchive(@PathVariable planId: String): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        service.unarchivePlan(planId)
+        return ApiResponse(success = true, data = mapOf("planId" to planId))
+    }
+
+    @DeleteMapping("/{planId}")
+    fun delete(@PathVariable planId: String): ApiResponse<Map<String, String>> {
+        requireAdmin()
+        service.deletePlan(planId)
+        return ApiResponse(success = true, data = mapOf("planId" to planId))
+    }
+
     // ── 범위(행) 관리 ──
 
     @PostMapping("/{planId}/scopes")
@@ -174,6 +188,26 @@ class AdminStudyPlanController(
     }
 
     // ── 셀 관리 ──
+
+    @PatchMapping("/cells/{cellId}/assign")
+    fun assignCellContent(
+        @PathVariable cellId: String,
+        @RequestBody request: AssignCellContentRequest
+    ): ApiResponse<CellResponse> {
+        requireAdmin()
+        val cell = service.assignCellContent(cellId, request)
+        return ApiResponse(success = true, data = cell.toResponse())
+    }
+
+    @PatchMapping("/cells/{cellId}/status")
+    fun updateCellStatus(
+        @PathVariable cellId: String,
+        @RequestBody request: UpdateCellStatusRequest
+    ): ApiResponse<CellResponse> {
+        requireAdmin()
+        val cell = service.updateCellStatus(cellId, currentUser(), request)
+        return ApiResponse(success = true, data = cell.toResponse())
+    }
 
     @PatchMapping("/cells/{cellId}/review")
     fun reviewCell(

@@ -58,16 +58,32 @@ export default function StudyPlanPage() {
 
   const handleCellClick = (cell, scope, asset) => {
     if (!cell) return;
+
     const aType = asset?.assetType || cell?.assetType;
     const aKind = asset?.assetKind || cell?.assetKind;
-    const refId = asset?.refId || cell?.refId;
+    const refId = cell?.cellRefId || asset?.refId || cell?.refId;
 
+    // unassigned 셀은 학생이 클릭해도 무반응
+    if (cell.status === "unassigned") return;
+
+    // 국어농장: 콘텐츠로 이동
     if (aType === "korfarm" && refId) {
       navigate(`/learning/${refId}`);
-    } else if (aKind === "test" && refId) {
-      navigate(`/tests/${refId}/omr`);
-    } else if (cell.status === "pending" || cell.status === "rejected") {
+      return;
+    }
+
+    // 테스트: 응시/재응시
+    if (aKind === "test" && refId) {
+      if (cell.status === "pending" || cell.status === "retry") {
+        navigate(`/tests/${refId}/omr`);
+      }
+      return;
+    }
+
+    // 학습활동: pending/partial → 제출 페이지
+    if (aType === "activity" && (cell.status === "pending" || cell.status === "partial")) {
       navigate(`/study-plan/submit/${cell.cellId}`);
+      return;
     }
   };
 

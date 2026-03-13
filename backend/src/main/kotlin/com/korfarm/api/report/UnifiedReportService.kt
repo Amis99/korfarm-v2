@@ -305,10 +305,10 @@ class UnifiedReportService(
 
         // 기간 필터: updatedAt이 범위 내이거나, 항상 포함 (계획표 셀은 기간과 무관하게 전체 상태를 보여줌)
         val totalCells = cells.size
-        val completedCells = cells.count { it.status in listOf("approved", "passed") }
-        val submittedCells = cells.count { it.status in listOf("submitted", "grading") }
+        val completedCells = cells.count { it.status in listOf("completed", "passed") }
+        val submittedCells = cells.count { it.status in listOf("submitted", "scored") }
         val pendingCells = cells.count { it.status == "pending" }
-        val rejectedCells = cells.count { it.status == "rejected" }
+        val rejectedCells = 0
         val completionRate = if (totalCells > 0) round2(completedCells.toDouble() / totalCells * 100) else 0.0
 
         // 정규화 점수: 완료율
@@ -322,7 +322,7 @@ class UnifiedReportService(
         val assetMap = if (assetIds.isNotEmpty()) studyPlanAssetRepo.findAllById(assetIds).associateBy { it.id } else emptyMap()
 
         // 완료된 셀만 items에 포함
-        val completedItems = cells.filter { it.status in listOf("approved", "passed") }
+        val completedItems = cells.filter { it.status in listOf("completed", "passed") }
         val items = completedItems.map { cell ->
             StudyPlanItem(
                 planTitle = planMap[cell.planId]?.title ?: "",
@@ -360,7 +360,7 @@ class UnifiedReportService(
 
         // 학습 계획표 셀 (채점 완료된 것)
         val spCells = studyPlanCellRepo.findByUserIdAndStatus(userId, "passed") +
-                studyPlanCellRepo.findByUserIdAndStatus(userId, "failed")
+                studyPlanCellRepo.findByUserIdAndStatus(userId, "completed")
         val spCellsInRange = spCells.filter { c ->
             c.reviewedAt?.let { it >= start && it <= end } ?: false
         }

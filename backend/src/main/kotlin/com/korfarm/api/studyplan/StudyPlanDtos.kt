@@ -91,6 +91,16 @@ data class GradeCellRequest(
     val adminNote: String? = null
 )
 
+data class AssignCellContentRequest(
+    val cellRefId: String
+)
+
+data class UpdateCellStatusRequest(
+    val status: String,
+    val score: Int? = null,
+    val adminNote: String? = null
+)
+
 data class SubmitCellRequest(
     val fileIds: List<String> = emptyList()
 )
@@ -170,7 +180,9 @@ data class StudentProgressResponse(
     val completedCells: Int,
     val pendingCells: Int,
     val submittedCells: Int,
-    val rejectedCells: Int
+    val unassignedCells: Int,
+    val inProgressCells: Int,
+    val partialCells: Int
 )
 
 data class MatrixResponse(
@@ -190,7 +202,8 @@ data class CellResponse(
     val reviewedAt: String?,
     val assetType: String? = null,
     val assetKind: String? = null,
-    val refId: String? = null
+    val refId: String? = null,
+    val cellRefId: String? = null
 )
 
 data class CellFileResponse(
@@ -213,7 +226,7 @@ data class StudentDashboardSummary(
     val activePlans: Int,
     val totalPending: Int,
     val totalSubmitted: Int,
-    val totalRejected: Int,
+    val totalUnassigned: Int,
     val upcomingSchedules: Int
 )
 
@@ -262,7 +275,8 @@ internal fun StudyPlanCellEntity.toResponse(asset: StudyPlanAssetEntity? = null)
         cellId = id, scopeId = scopeId, assetId = assetId,
         status = status, score = score, submissionCount = submissionCount,
         adminNote = adminNote, reviewedAt = reviewedAt?.toString(),
-        assetType = asset?.assetType, assetKind = asset?.assetKind, refId = asset?.refId
+        assetType = asset?.assetType, assetKind = asset?.assetKind, refId = asset?.refId,
+        cellRefId = cellRefId
     )
 }
 

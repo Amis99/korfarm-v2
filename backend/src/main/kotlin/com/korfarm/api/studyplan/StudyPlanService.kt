@@ -2,8 +2,10 @@ package com.korfarm.api.studyplan
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
+import com.korfarm.api.learning.FarmLearningLogRepository
 import com.korfarm.api.org.*
 import com.korfarm.api.security.SecurityUtils
+import com.korfarm.api.test.TestSubmissionRepo
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -24,7 +26,9 @@ class StudyPlanService(
     private val classMembershipRepo: ClassMembershipRepository,
     private val orgMembershipRepo: OrgMembershipRepository,
     private val classRepo: ClassRepository,
-    private val userRepo: UserRepository
+    private val userRepo: UserRepository,
+    private val farmLearningLogRepo: FarmLearningLogRepository,
+    private val testSubmissionRepo: TestSubmissionRepo
 ) {
     // ── 관리자: 계획표 CRUD ──
 
@@ -53,7 +57,6 @@ class StudyPlanService(
         }
 
         // 범위(행) 저장
-        val scopeIdMap = mutableMapOf<Int, String>() // sortOrder → id (일정 매핑용)
         req.scopes.forEachIndexed { idx, s ->
             val scope = StudyPlanScopeEntity(
                 id = IdGenerator.newId("sps"),
@@ -62,11 +65,9 @@ class StudyPlanService(
                 sortOrder = s.sortOrder.takeIf { it != 0 } ?: idx
             )
             scopeRepo.save(scope)
-            scopeIdMap[idx] = scope.id
         }
 
         // 에셋(열) 저장
-        val assetIdMap = mutableMapOf<Int, String>()
         req.assets.forEachIndexed { idx, a ->
             val asset = StudyPlanAssetEntity(
                 id = IdGenerator.newId("spa"),
@@ -79,7 +80,6 @@ class StudyPlanService(
                 configJson = a.configJson
             )
             assetRepo.save(asset)
-            assetIdMap[idx] = asset.id
         }
 
         // 셀 자동 생성 (대상 학생 × 범위 × 에셋)
@@ -174,6 +174,29 @@ class StudyPlanService(
         planRepo.save(plan)
     }
 
+    @Transactional
+    fun unarchivePlan(planId: String) {
+        val plan = findPlan(planId)
+        plan.status = "active"
+        planRepo.save(plan)
+    }
+
+    @Transactional
+    fun deletePlan(planId: String) {
+        findPlan(planId)
+        val cellIds = cellRepo.findByPlanId(planId).map { it.id }
+        if (cellIds.isNotEmpty()) {
+            cellFileRepo.deleteByCellIdIn(cellIds)
+        }
+        cellRepo.deleteByPlanId(planId)
+        scopeRepo.deleteByPlanId(planId)
+        assetRepo.deleteByPlanId(planId)
+        targetRepo.deleteByPlanId(planId)
+        scheduleRepo.deleteByPlanId(planId)
+        eventRepo.deleteByPlanId(planId)
+        planRepo.deleteById(planId)
+    }
+
     // ── 관리자: 범위(행) 관리 ──
 
     @Transactional
@@ -186,18 +209,13 @@ class StudyPlanService(
             sortOrder = req.sortOrder
         )
         scopeRepo.save(scope)
-        // 대상 학생 전원에 대해 셀 보충
         val userIds = resolveAllPlanUserIds(planId)
         val assets = assetRepo.findByPlanIdOrderBySortOrder(planId)
         userIds.forEach { userId ->
             assets.forEach { asset ->
                 val existing = cellRepo.findByScopeIdAndAssetIdAndUserId(scope.id, asset.id, userId)
                 if (existing == null) {
-                    cellRepo.save(StudyPlanCellEntity(
-                        id = IdGenerator.newId("spc"),
-                        planId = planId, scopeId = scope.id,
-                        assetId = asset.id, userId = userId
-                    ))
+                    createCell(planId, scope.id, asset, userId)
                 }
             }
         }
@@ -216,7 +234,6 @@ class StudyPlanService(
 
     @Transactional
     fun deleteScope(planId: String, scopeId: String) {
-        // 관련 셀 파일 삭제
         val cells = cellRepo.findByScopeId(scopeId)
         cells.forEach { cellFileRepo.deleteByCellId(it.id) }
         cellRepo.deleteByScopeId(scopeId)
@@ -246,18 +263,13 @@ class StudyPlanService(
             configJson = req.configJson
         )
         assetRepo.save(asset)
-        // 셀 보충
         val userIds = resolveAllPlanUserIds(planId)
         val scopes = scopeRepo.findByPlanIdOrderBySortOrder(planId)
         userIds.forEach { userId ->
             scopes.forEach { scope ->
                 val existing = cellRepo.findByScopeIdAndAssetIdAndUserId(scope.id, asset.id, userId)
                 if (existing == null) {
-                    cellRepo.save(StudyPlanCellEntity(
-                        id = IdGenerator.newId("spc"),
-                        planId = planId, scopeId = scope.id,
-                        assetId = asset.id, userId = userId
-                    ))
+                    createCell(planId, scope.id, asset, userId)
                 }
             }
         }
@@ -307,64 +319,113 @@ class StudyPlanService(
                 userId = userId,
                 userName = userMap[userId]?.name,
                 totalCells = cells.size,
-                completedCells = cells.count { it.status in listOf("approved", "passed") },
+                completedCells = cells.count { it.status in listOf("completed", "passed") },
                 pendingCells = cells.count { it.status == "pending" },
-                submittedCells = cells.count { it.status in listOf("submitted", "grading") },
-                rejectedCells = cells.count { it.status == "rejected" }
+                submittedCells = cells.count { it.status in listOf("submitted", "scored") },
+                unassignedCells = cells.count { it.status == "unassigned" },
+                inProgressCells = cells.count { it.status == "in_progress" },
+                partialCells = cells.count { it.status == "partial" }
             )
         }
     }
 
-    // ── 관리자: 매트릭스 조회 ──
+    // ── 관리자: 매트릭스 조회 (자동 동기화 포함) ──
 
-    @Transactional(readOnly = true)
+    @Transactional
     fun getMatrix(planId: String, userId: String): MatrixResponse {
         val scopes = scopeRepo.findByPlanIdOrderBySortOrder(planId).map { it.toResponse() }
         val assets = assetRepo.findByPlanIdOrderBySortOrder(planId)
         val assetMap = assets.associateBy { it.id }
-        val cells = cellRepo.findByPlanIdAndUserId(planId, userId).map { it.toResponse(assetMap[it.assetId]) }
+        val cells = cellRepo.findByPlanIdAndUserId(planId, userId)
+
+        // 자동 상태 동기화
+        syncKorfarmCellStatus(cells, userId, assetMap)
+        syncTestCellStatus(cells, userId, assetMap)
+
+        val cellResponses = cells.map { it.toResponse(assetMap[it.assetId]) }
         return MatrixResponse(
             scopes = scopes,
             assets = assets.map { it.toResponse() },
-            cells = cells
+            cells = cellResponses
         )
     }
 
-    // ── 관리자: 셀 승인/거부 ──
+    // ── 관리자: 국어농장 셀 콘텐츠 배정 ──
 
     @Transactional
-    fun reviewCell(cellId: String, adminId: String, req: ReviewCellRequest): StudyPlanCellEntity {
+    fun assignCellContent(cellId: String, req: AssignCellContentRequest): StudyPlanCellEntity {
         val cell = findCell(cellId)
-        if (req.status !in listOf("approved", "rejected")) {
-            throw ApiException("BAD_REQUEST", "status must be approved or rejected", HttpStatus.BAD_REQUEST)
+        val asset = assetRepo.findById(cell.assetId).orElseThrow {
+            ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
         }
-        cell.status = req.status
-        cell.adminNote = req.adminNote
-        cell.reviewedBy = adminId
-        cell.reviewedAt = LocalDateTime.now()
+        if (asset.assetType != "korfarm") {
+            throw ApiException("BAD_REQUEST", "국어농장 에셋만 콘텐츠 배정이 가능합니다", HttpStatus.BAD_REQUEST)
+        }
+        if (cell.status != "unassigned") {
+            throw ApiException("BAD_REQUEST", "배정 전 상태의 셀만 콘텐츠를 배정할 수 있습니다", HttpStatus.BAD_REQUEST)
+        }
+        cell.cellRefId = req.cellRefId
+        cell.status = "pending"
         cellRepo.save(cell)
-        // 이벤트 생성
-        createEvent(cell, req.status)
+        createEvent(cell, "assigned")
         return cell
     }
 
-    // ── 관리자: 테스트 채점 ──
+    // ── 관리자: 통합 상태 변경 ──
 
     @Transactional
-    fun gradeCell(cellId: String, adminId: String, req: GradeCellRequest): StudyPlanCellEntity {
+    fun updateCellStatus(cellId: String, adminId: String, req: UpdateCellStatusRequest): StudyPlanCellEntity {
         val cell = findCell(cellId)
-        if (req.status !in listOf("passed", "retry", "failed")) {
-            throw ApiException("BAD_REQUEST", "status must be passed, retry, or failed", HttpStatus.BAD_REQUEST)
+        val asset = assetRepo.findById(cell.assetId).orElseThrow {
+            ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
+        }
+        if (!validateStatusTransition(asset.assetType, cell.status, req.status)) {
+            throw ApiException(
+                "BAD_REQUEST",
+                "${asset.assetType} 에셋에서 ${cell.status} → ${req.status} 전이는 허용되지 않습니다",
+                HttpStatus.BAD_REQUEST
+            )
         }
         cell.status = req.status
-        cell.score = req.score
-        cell.adminNote = req.adminNote
+        req.score?.let { cell.score = it }
+        req.adminNote?.let { cell.adminNote = it }
         cell.reviewedBy = adminId
         cell.reviewedAt = LocalDateTime.now()
         cellRepo.save(cell)
-        // 이벤트 생성
-        createEvent(cell, req.status, if (req.score != null) "점수: ${req.score}" else null)
+
+        val memo = if (req.score != null) "점수: ${req.score}" else null
+        createEvent(cell, req.status, memo)
         return cell
+    }
+
+    // ── 관리자: 셀 승인/거부 (하위 호환) ──
+
+    @Transactional
+    fun reviewCell(cellId: String, adminId: String, req: ReviewCellRequest): StudyPlanCellEntity {
+        val mappedStatus = when (req.status) {
+            "approved" -> "completed"
+            "rejected" -> "partial"
+            else -> req.status
+        }
+        return updateCellStatus(cellId, adminId, UpdateCellStatusRequest(
+            status = mappedStatus,
+            adminNote = req.adminNote
+        ))
+    }
+
+    // ── 관리자: 테스트 채점 (하위 호환) ──
+
+    @Transactional
+    fun gradeCell(cellId: String, adminId: String, req: GradeCellRequest): StudyPlanCellEntity {
+        val mappedStatus = when (req.status) {
+            "failed" -> "retry"
+            else -> req.status
+        }
+        return updateCellStatus(cellId, adminId, UpdateCellStatusRequest(
+            status = mappedStatus,
+            score = req.score,
+            adminNote = req.adminNote
+        ))
     }
 
     // ── 관리자: 셀 파일 조회 ──
@@ -442,8 +503,8 @@ class StudyPlanService(
 
         val cells = cellRepo.findByPlanIdInAndUserId(activePlanIds, userId)
         val totalPending = cells.count { it.status == "pending" }
-        val totalSubmitted = cells.count { it.status in listOf("submitted", "grading") }
-        val totalRejected = cells.count { it.status == "rejected" }
+        val totalSubmitted = cells.count { it.status in listOf("submitted", "scored") }
+        val totalUnassigned = cells.count { it.status == "unassigned" }
 
         val today = LocalDate.now()
         val weekLater = today.plusDays(7)
@@ -455,12 +516,12 @@ class StudyPlanService(
             activePlans = activePlans.size,
             totalPending = totalPending,
             totalSubmitted = totalSubmitted,
-            totalRejected = totalRejected,
+            totalUnassigned = totalUnassigned,
             upcomingSchedules = upcomingSchedules
         )
     }
 
-    // ── 학생: 셀 제출 ──
+    // ── 학생: 셀 제출 (학습활동만) ──
 
     @Transactional
     fun submitCell(cellId: String, userId: String, req: SubmitCellRequest): StudyPlanCellEntity {
@@ -468,8 +529,12 @@ class StudyPlanService(
         if (cell.userId != userId) {
             throw ApiException("FORBIDDEN", "not your cell", HttpStatus.FORBIDDEN)
         }
-        if (cell.status !in listOf("pending", "rejected")) {
-            throw ApiException("BAD_REQUEST", "cell is not in submittable state", HttpStatus.BAD_REQUEST)
+        val asset = assetRepo.findById(cell.assetId).orElse(null)
+        if (asset?.assetType != "activity") {
+            throw ApiException("BAD_REQUEST", "학습활동 에셋만 제출이 가능합니다", HttpStatus.BAD_REQUEST)
+        }
+        if (cell.status !in listOf("pending", "partial")) {
+            throw ApiException("BAD_REQUEST", "제출 가능한 상태가 아닙니다 (미수행/일부 완료만 가능)", HttpStatus.BAD_REQUEST)
         }
         // 파일 첨부
         req.fileIds.forEach { fileId ->
@@ -482,9 +547,8 @@ class StudyPlanService(
         }
         cell.status = "submitted"
         cell.submissionCount += 1
-        cell.adminNote = null // 이전 거부 사유 초기화
+        cell.adminNote = null
         cellRepo.save(cell)
-        // 이벤트 생성
         createEvent(cell, "submitted")
         return cell
     }
@@ -510,6 +574,99 @@ class StudyPlanService(
         val myPlanIds = resolveMyPlanIds(userId)
         if (planId !in myPlanIds) {
             throw ApiException("FORBIDDEN", "해당 계획표에 접근 권한이 없습니다", HttpStatus.FORBIDDEN)
+        }
+    }
+
+    // ── 상태 전이 검증 ──
+
+    private fun validateStatusTransition(assetType: String, from: String, to: String): Boolean {
+        val validTransitions = when (assetType) {
+            "korfarm" -> mapOf(
+                "unassigned" to setOf("pending"),
+                "pending" to setOf("in_progress"),
+                "in_progress" to setOf("completed")
+            )
+            "activity" -> mapOf(
+                "unassigned" to setOf("pending"),
+                "pending" to setOf("submitted"),
+                "submitted" to setOf("completed", "partial"),
+                "partial" to setOf("submitted")
+            )
+            "test" -> mapOf(
+                "pending" to setOf("scored"),
+                "scored" to setOf("passed", "retry"),
+                "retry" to setOf("scored")
+            )
+            else -> emptyMap()
+        }
+        return validTransitions[from]?.contains(to) ?: false
+    }
+
+    // ── 자동 동기화: 국어농장 학습 로그 ──
+
+    private fun syncKorfarmCellStatus(
+        cells: List<StudyPlanCellEntity>,
+        userId: String,
+        assetMap: Map<String, StudyPlanAssetEntity>
+    ) {
+        val korfarmCells = cells.filter {
+            assetMap[it.assetId]?.assetType == "korfarm" && it.status in listOf("pending", "in_progress")
+        }
+        if (korfarmCells.isEmpty()) return
+
+        val contentIds = korfarmCells.mapNotNull { it.cellRefId ?: assetMap[it.assetId]?.refId }.distinct()
+        if (contentIds.isEmpty()) return
+
+        val logs = farmLearningLogRepo.findByUserIdAndContentIdIn(userId, contentIds)
+        val logMap = logs.groupBy { it.contentId }
+
+        korfarmCells.forEach { cell ->
+            val contentId = cell.cellRefId ?: assetMap[cell.assetId]?.refId ?: return@forEach
+            val cellLogs = logMap[contentId] ?: return@forEach
+
+            val hasCompleted = cellLogs.any { it.status == "COMPLETED" }
+            val hasStarted = cellLogs.isNotEmpty()
+
+            val newStatus = when {
+                hasCompleted && cell.status != "completed" -> "completed"
+                hasStarted && cell.status == "pending" -> "in_progress"
+                else -> null
+            }
+
+            if (newStatus != null) {
+                cell.status = newStatus
+                cellRepo.save(cell)
+                createEvent(cell, newStatus)
+            }
+        }
+    }
+
+    // ── 자동 동기화: 테스트 제출 ──
+
+    private fun syncTestCellStatus(
+        cells: List<StudyPlanCellEntity>,
+        userId: String,
+        assetMap: Map<String, StudyPlanAssetEntity>
+    ) {
+        val testCells = cells.filter {
+            assetMap[it.assetId]?.assetType == "test" && it.status in listOf("pending", "retry")
+        }
+        if (testCells.isEmpty()) return
+
+        testCells.forEach { cell ->
+            val testId = assetMap[cell.assetId]?.refId ?: return@forEach
+            val submission = testSubmissionRepo.findByTestIdAndUserId(testId, userId) ?: return@forEach
+
+            // 재시험인 경우: 제출이 판정 이후인지 확인
+            if (cell.status == "retry") {
+                val retrySetAt = cell.reviewedAt ?: return@forEach
+                if (submission.createdAt <= retrySetAt) return@forEach
+            }
+
+            cell.status = "scored"
+            cell.score = submission.score
+            cellRepo.save(cell)
+            createEvent(cell, "scored", "점수: ${submission.score}")
         }
     }
 
@@ -548,9 +705,7 @@ class StudyPlanService(
 
     private fun resolveMyPlanIds(userId: String): Set<String> {
         val planIds = mutableSetOf<String>()
-        // 직접 배정
         targetRepo.findByTargetTypeAndTargetId("user", userId).forEach { planIds.add(it.planId) }
-        // 수강반 소속으로 배정
         val classIds = classMembershipRepo.findByUserIdAndStatus(userId, "active").map { it.classId }
         classIds.forEach { classId ->
             targetRepo.findByTargetTypeAndTargetId("class", classId).forEach { planIds.add(it.planId) }
@@ -574,6 +729,29 @@ class StudyPlanService(
         ))
     }
 
+    private fun initialCellStatus(asset: StudyPlanAssetEntity): String {
+        return when (asset.assetType) {
+            "korfarm" -> if (asset.refId != null) "pending" else "unassigned"
+            "activity" -> "unassigned"
+            "test" -> "pending"
+            else -> "pending"
+        }
+    }
+
+    private fun createCell(planId: String, scopeId: String, asset: StudyPlanAssetEntity, userId: String): StudyPlanCellEntity {
+        val status = initialCellStatus(asset)
+        val cellRefId = if (asset.assetType == "korfarm" && asset.refId != null) asset.refId else null
+        return cellRepo.save(StudyPlanCellEntity(
+            id = IdGenerator.newId("spc"),
+            planId = planId,
+            scopeId = scopeId,
+            assetId = asset.id,
+            userId = userId,
+            status = status,
+            cellRefId = cellRefId
+        ))
+    }
+
     private fun createCellsForUsers(
         planId: String,
         scopes: List<StudyPlanScopeEntity>,
@@ -583,13 +761,7 @@ class StudyPlanService(
         userIds.forEach { userId ->
             scopes.forEach { scope ->
                 assets.forEach { asset ->
-                    cellRepo.save(StudyPlanCellEntity(
-                        id = IdGenerator.newId("spc"),
-                        planId = planId,
-                        scopeId = scope.id,
-                        assetId = asset.id,
-                        userId = userId
-                    ))
+                    createCell(planId, scope.id, asset, userId)
                 }
             }
         }

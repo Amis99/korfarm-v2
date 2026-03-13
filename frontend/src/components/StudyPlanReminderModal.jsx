@@ -42,8 +42,8 @@ export default function StudyPlanReminderModal() {
         <h2>시험 공부 알림</h2>
         <p>진행 중인 학습 계획표가 {summary.activePlans}건 있습니다.</p>
         {summary.totalPending > 0 && <p>미수행 할일: {summary.totalPending}건</p>}
-        {summary.totalRejected > 0 && (
-          <p style={{ color: "#c62828" }}>거부된 항목: {summary.totalRejected}건 (재제출 필요)</p>
+        {summary.totalUnassigned > 0 && (
+          <p style={{ color: "#999" }}>미배정 항목: {summary.totalUnassigned}건</p>
         )}
         <div className="sp-reminder-actions">
           <button className="sp-reminder-go" onClick={() => { setShow(false); navigate("/study-plan"); }}>
