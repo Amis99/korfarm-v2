@@ -1,0 +1,923 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>국어농장 진단 테스트 - Sohssure</title>
+    <!-- Paged.js from CDN -->
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+    <style>
+        :root {
+            --color-primary: #1A365D;
+            --color-secondary: #2B6CB0;
+            --color-accent: #DD6B20;
+            --color-light-blue: #EBF4FF;
+            --color-light-yellow: #FEFCE8;
+            --color-light-green: #F0FDF4;
+            --color-border: #E2E8F0;
+            --color-text: #1A202C;
+        }
+
+        /* Paged.js Print Styles for A4 */
+        @page {
+            size: A4;
+            margin: 20mm 15mm 25mm;
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+                font-family: "Noto Sans KR", sans-serif;
+                font-size: 10pt;
+            }
+        }
+
+        /* Base Body Style */
+        body {
+            font-family: "Noto Serif KR", serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: white;
+        }
+
+        /* Main Container */
+        .test-paper-container {
+            width: 100%;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .test-header {
+            width: 100%;
+            border-bottom: 2px solid var(--color-primary);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .test-title {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .test-info {
+            font-size: 12pt;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-weight: bold;
+        }
+
+        /* Content Body - Two Columns */
+        .test-body {
+            column-count: 2;
+            column-fill: auto;
+            column-gap: 15mm;
+            text-align: left;
+            width: 100%;
+        }
+
+        /* Prevent Breakage Inside Questions */
+        .question-item, .question-block {
+            break-inside: avoid;
+            page-break-inside: avoid;
+            column-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+            margin-bottom: 2em;
+            border-bottom: 1px dotted var(--color-border);
+            padding-bottom: 1em;
+        }
+
+        /* Passages */
+        .passage-box, .passage-block {
+            text-align: left;
+            margin-bottom: 1.5em;
+            padding: 10px;
+            background: var(--color-light-blue);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            column-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+        }
+
+        .passage-text {
+            font-size: 10.5pt;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        /* Choices */
+        .choices {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 5px;
+            margin-top: 10px;
+            padding-left: 0;
+            list-style: none;
+            text-align: left; /* Ensure natural alignment */
+            break-inside: avoid;
+            page-break-inside: avoid;
+            column-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+        }
+
+        .choice-item {
+            font-size: 10.5pt;
+            padding-left: 5px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            column-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+        }
+
+        .question-box, .question-stem {
+            break-inside: avoid;
+            page-break-inside: avoid;
+            column-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+        }
+
+        .page-break {
+            break-after: page;
+        }
+        
+        /* Explanation Section Styles */
+        .answer-table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 30px; }
+        .answer-table th, .answer-table td { border: 1px solid var(--color-border); padding: 8px; text-align: left; }
+        .answer-table th { background-color: var(--color-light-yellow); }
+        .badge { display: inline-block; padding: 2px 5px; border-radius: 3px; font-size: 0.8em; margin-right: 5px; }
+        .badge-correct { background-color: var(--color-light-green); color: var(--color-primary); }
+        .badge-wrong { background-color: var(--color-light-yellow); color: var(--color-accent); }
+        .content-area { overflow: hidden; padding-bottom: 25mm; }
+        .answer-footer { max-height: 15mm; overflow: hidden; }
+
+        /* Fallback / Screen Styles & Paged.js Preview Styles */
+        @media screen {
+            body { background: var(--color-light-blue); }
+
+            .screen-pages {
+                display: none;
+            }
+
+            body.screen-paginated .screen-pages {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px;
+                background: var(--color-light-blue);
+            }
+
+            body.screen-paginated .test-paper-container {
+                display: none;
+            }
+
+            body.pagedjs-preview .test-paper-container {
+                display: none;
+            }
+
+            body.pagedjs-preview .screen-pages {
+                display: none;
+            }
+
+            body.pagedjs-preview .pagedjs_pages {
+                display: flex;
+            }
+            
+            .test-paper-container {
+                background: white;
+                padding: 40px;
+                min-height: 297mm;
+                border: 1px solid var(--color-border);
+            }
+
+            /* Paged.js creates these classes for preview */
+            .pagedjs_pages {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                background: var(--color-light-blue);
+            }
+            
+            .pagedjs_sheet {
+                background: white;
+                border: 1.5px solid var(--color-secondary);
+                margin-bottom: 20px; /* Space between pages */
+                width: 210mm;
+                height: 297mm;
+            }
+
+            .pagedjs_page {
+                background: white;
+            }
+
+            .screen-page {
+                width: 210mm;
+                height: 297mm;
+                background: white;
+                border: 1.5px solid var(--color-secondary);
+            }
+
+            .screen-page-inner {
+                height: 100%;
+                box-sizing: border-box;
+                padding: 20mm 15mm;
+                display: flex;
+                flex-direction: column;
+                gap: 6mm;
+            }
+
+            .screen-header {
+                border-bottom: 2px solid var(--color-primary);
+                padding-bottom: 3mm;
+                text-align: center;
+            }
+
+            .screen-title {
+                font-size: 18pt;
+                font-weight: bold;
+                margin-bottom: 4mm;
+            }
+
+            .screen-info {
+                font-size: 12pt;
+                display: flex;
+                justify-content: center;
+                gap: 12mm;
+                font-weight: bold;
+            }
+
+            .screen-body {
+                flex: 1 1 auto;
+                column-count: 2;
+                column-gap: 15mm;
+                overflow: hidden;
+            }
+
+            .screen-footer {
+                flex: 0 0 12mm;
+                max-height: 15mm;
+                overflow: hidden;
+                font-size: 10pt;
+                color: #666;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-paper-container">
+        <div class="test-header">
+            <div class="test-title">국어농장 진단 테스트 - Sohssure</div>
+            <div class="test-info">
+                <span>학년: __________</span>
+                <span>이름: __________</span>
+                <span>점수: __________</span>
+            </div>
+        </div>
+        <div class="test-body">
+<div class="passage-box"><div class="passage-text">어느 날, 작은 올챙이가 엄마 개구리에게 물었습니다.
+"엄마, 저는 언제 엄마처럼 될 수 있어요?"
+엄마 개구리는 웃으며 대답했습니다.
+"시간이 지나면 뒷다리가 쑥, 앞다리가 쑥 나올 거야. 그러면 꼬리는 점점 짧아지고 멋진 개구리가 된단다."
+올챙이는 매일매일 내 몸이 어떻게 변하는지 거울을 보며 기다렸습니다.
+며칠 뒤, 정말로 뒷다리가 조금씩 나오기 시작했습니다. 올챙이는 너무 기뻐서 연못을 헤엄쳐 다녔습니다.
+"야호! 나도 곧 개구리가 된다!"
+친구 물고기가 다가와 말했습니다.
+"축하해, 올챙이야. 하지만 개구리가 되면 우리랑 헤어져야 하니 조금 슬프네."
+올챙이는 잠시 생각에 잠기더니 말했습니다.
+"걱정 마. 내가 개구리가 되어도 자주 연못에 놀러 올게."
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">1. 윗글의 내용으로 알 수 있는 것은?</div><ul class="choices"><li class="choice-item">① 올챙이는 이미 완전한 개구리가 되었다.</li><li class="choice-item">② 물고기는 올챙이와 헤어지는 것을 좋아한다.</li><li class="choice-item">③ 올챙이는 개구리가 되기를 기다리고 있다.</li></ul></div><div class="question-item"><div class="question-stem">2. 물고기가 '조금 슬프네'라고 말한 이유는 무엇일까요?</div><ul class="choices"><li class="choice-item">① 친구인 올챙이와 물속에서 헤어져야 하기 때문에</li><li class="choice-item">② 올챙이에게 다리가 생긴 모습이 무서워서</li><li class="choice-item">③ 자신은 영원히 올챙이로 남아야 해서</li></ul></div><div class="question-item"><div class="question-stem">3. 다음 문장의 빈칸에 들어갈 낱말의 표기가 바른 것은 무엇인가요?</div><div class="question-box">내가 개구리가 되어서 너를 (          ).</div><ul class="choices"><li class="choice-item">① 기달릴게</li><li class="choice-item">② 기다릴께</li><li class="choice-item">③ 기달릴께</li><li class="choice-item">④ 기다려줄께</li><li class="choice-item">⑤ 기다릴게</li></ul></div><div class="question-item"><div class="question-stem">4. 올챙이가 개구리가 되는 순서로 알맞은 것은?</div><ul class="choices"><li class="choice-item">① 꼬리가 짧아진다 -> 앞다리가 나온다 -> 뒷다리가 나온다</li><li class="choice-item">② 뒷다리와 앞다리가 동시에 나온다</li><li class="choice-item">③ 뒷다리가 나온다 -> 앞다리가 나온다 -> 꼬리가 짧아진다</li><li class="choice-item">④ 앞다리가 나온다 -> 뒷다리가 나온다 -> 꼬리가 길어진다</li><li class="choice-item">⑤ 알에서 바로 개구리로 변한다</li></ul></div><div class="question-item"><div class="question-stem">5. 이 글에서 '쑥'은 어떤 모습일까요?</div><ul class="choices"><li class="choice-item">① 소리를 지르는 모양</li><li class="choice-item">② 천천히 아주 느리게 움직이는 모양</li><li class="choice-item">③ 빙글빙글 도는 모양</li><li class="choice-item">④ 갑자기 밖으로 나오는 모양</li><li class="choice-item">⑤ 작아지는 모양</li></ul></div><div class="question-item"><div class="question-stem">6. 올챙이의 몸에서 가장 먼저 나온 것은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 날개</li><li class="choice-item">② 뒷다리</li><li class="choice-item">③ 앞다리</li><li class="choice-item">④ 꼬리</li><li class="choice-item">⑤ 지느러미</li></ul></div><div class="question-item"><div class="question-stem">7. 엄마 개구리의 말에 따르면, 올챙이가 개구리가 되면 꼬리는 어떻게 되나요?</div><ul class="choices"><li class="choice-item">① 점점 짧아진다</li><li class="choice-item">② 다리로 변한다</li><li class="choice-item">③ 두 개로 갈라진다</li><li class="choice-item">④ 점점 길어진다</li><li class="choice-item">⑤ 색깔이 변한다</li></ul></div><div class="question-item"><div class="question-stem">8. 올챙이가 친구 물고기에게 한 약속은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 개구리가 되어도 자주 놀러 오겠다는 약속</li><li class="choice-item">② 엄마 말을 잘 듣겠다는 약속</li><li class="choice-item">③ 맛있는 먹이를 주겠다는 약속</li><li class="choice-item">④ 절대 개구리가 되지 않겠다는 약속</li><li class="choice-item">⑤ 물고기에게 수영을 배우겠다는 약속</li></ul></div><div class="question-item"><div class="question-stem">9. 친구가 슬퍼할 때 올챙이가 한 말은 무엇인지 지문에서 찾아 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div><div class="question-item"><div class="question-stem">10. 올챙이의 뒷다리가 나온 것을 보고 친구 물고기가 뭐라고 말했는지 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div></div><div class="passage-box"><div class="passage-text">나비는 어떻게 자랄까요? 나비는 알, 애벌레, 번데기, 그리고 어른벌레(성충)라는 네 가지 단계를 거쳐요.
+먼저, 나비 엄마는 나뭇잎 뒷면에 작은 알을 낳아요. 며칠이 지나면 알에서 애벌레가 나와요. 애벌레는 나뭇잎을 아주 많이 먹고 쑥쑥 자라지요.
+몸이 충분히 커지면 애벌레는 입에서 실을 뽑아 몸을 감싸고 번데기가 되어요. 번데기는 꼼짝 않고 가만히 있는 것 같지만, 그 안에서는 놀라운 변화가 일어나고 있답니다.
+따뜻한 봄날이 되면 번데기 껍질이 갈라지고, 마침내 예쁜 날개를 가진 나비가 나와요. 처음에는 날개가 젖어 있어서 날 수 없지만, 햇볕에 날개를 말리면 하늘을 훨훨 날아다닐 수 있답니다.
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">11. 나비가 자라는 순서로 알맞은 것은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 알 → 지렁이 → 번데기 → 나비</li><li class="choice-item">② 알 → 애벌레 → 번데기 → 어른벌레</li><li class="choice-item">③ 알 → 번데기 → 애벌레 → 어른벌레</li></ul></div><div class="question-item"><div class="question-stem">12. 갓 나온 나비가 바로 날지 못하는 이유는 무엇일까요?</div><ul class="choices"><li class="choice-item">① 비가 와서 날개가 젖었기 때문에</li><li class="choice-item">② 날개가 젖어 있어서 말라야 하기 때문에</li><li class="choice-item">③ 너무 오랫동안 번데기로 있어서 힘이 없어서</li></ul></div><div class="question-item"><div class="question-stem">13. 다음 문장의 빈칸에 들어갈 말로 알맞은 것은 무엇인가요?</div><div class="question-box">나비가 잎사귀에 알을 (          ).</div><ul class="choices"><li class="choice-item">① 낮았습니다</li><li class="choice-item">② 나았습니다</li><li class="choice-item">③ 났았습니다</li><li class="choice-item">④ 나앟습니다</li><li class="choice-item">⑤ 낳았습니다</li></ul></div><div class="question-item"><div class="question-stem">14. 나비가 자라는 순서로 알맞은 것은?</div><ul class="choices"><li class="choice-item">① 애벌레 - 번데기 - 알 - 어른벌레(성충)</li><li class="choice-item">② 알 - 번데기 - 애벌레 - 어른벌레(성충)</li><li class="choice-item">③ 알 - 애벌레 - 어른벌레(성충) - 번데기</li><li class="choice-item">④ 알 - 애벌레 - 번데기 - 어른벌레(성충)</li><li class="choice-item">⑤ 애벌레 - 알 - 번데기 - 어른벌레(성충)</li></ul></div><div class="question-item"><div class="question-stem">15. 이 글에서 '쑥쑥'은 어떤 모습일까요?</div><ul class="choices"><li class="choice-item">① 멀리 날아가는 모양</li><li class="choice-item">② 아주 잘 자라는 모양</li><li class="choice-item">③ 힘없이 축 늘어진 모양</li><li class="choice-item">④ 조용히 숨어 있는 모양</li><li class="choice-item">⑤ 빙글빙글 도는 모양</li></ul></div><div class="question-item"><div class="question-stem">16. 애벌레는 무엇을 먹고 자라나요?</div><ul class="choices"><li class="choice-item">① 꽃꿀</li><li class="choice-item">② 작은 벌레</li><li class="choice-item">③ 흙</li><li class="choice-item">④ 이슬</li><li class="choice-item">⑤ 나뭇잎</li></ul></div><div class="question-item"><div class="question-stem">17. 애벌레는 어디에서 실을 뽑아 몸을 감싸나요?</div><ul class="choices"><li class="choice-item">① 더듬이</li><li class="choice-item">② 등</li><li class="choice-item">③ 배</li><li class="choice-item">④ 입</li><li class="choice-item">⑤ 발</li></ul></div><div class="question-item"><div class="question-stem">18. 번데기 안에서는 어떤 일이 일어나고 있나요?</div><ul class="choices"><li class="choice-item">① 알을 낳고 있다</li><li class="choice-item">② 먹이를 먹고 있다</li><li class="choice-item">③ 아무 일도 일어나지 않는다</li><li class="choice-item">④ 잠만 자고 있다</li><li class="choice-item">⑤ 놀라운 변화가 일어나고 있다</li></ul></div><div class="question-item"><div class="question-stem">19. 애벌레가 번데기가 되기 위해 입에서 무엇을 뽑아내는지 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div><div class="question-item"><div class="question-stem">20. 나비가 하늘을 날아다니려면 날개를 어떻게 해야 하는지 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div></div><div class="passage-box"><div class="passage-text">[지문]
+(가)
+엄마야 누나야 강변 살자
+뜰에는 반짝이는 금모래 빛
+뒷문 밖에는 갈잎의 노래
+엄마야 누나야 강변 살자
+
+(나)
+푸른 하늘 은하수 하얀 쪽배에
+계수나무 한 나무 토끼 한 마리
+돛대도 아니 달고 삿대도 없이
+가기도 잘도 간다 서쪽 나라로
+
+은하수를 건너서 구름 나라로
+구름 나라 지나선 어디로 가나
+멀리서 반짝반짝 비치이는 건
+샛별이 등대란다 길을 찾아라
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">21. (가)에서 말하는 이가 살고 싶어 하는 곳은 어디인가요?</div><ul class="choices"><li class="choice-item">① 뒷문 밖</li><li class="choice-item">② 깊은 산속</li><li class="choice-item">③ 도시</li><li class="choice-item">④ 강변</li><li class="choice-item">⑤ 바닷가</li></ul></div><div class="question-item"><div class="question-stem">22. (나)의 '하얀 쪽배'에서 '쪽배'의 뜻으로 가장 알맞은 것은?</div><ul class="choices"><li class="choice-item">① 맛있는 과일</li><li class="choice-item">② 물건을 파는 가게</li><li class="choice-item">③ 하늘을 나는 비행기</li><li class="choice-item">④ 아주 큰 여객선</li><li class="choice-item">⑤ 작고 좁은 배</li></ul></div><div class="question-item"><div class="question-stem">23. 다음 문장의 빈칸에 들어갈 낱말로 알맞은 것은 무엇인가요?</div><div class="question-box">쪽배에 꿈을 (          ) 은하수로 갔다.</div><ul class="choices"><li class="choice-item">① 씯고</li><li class="choice-item">② 싿고</li><li class="choice-item">③ 실고</li><li class="choice-item">④ 싣고</li><li class="choice-item">⑤ 싯고</li></ul></div><div class="question-item"><div class="question-stem">24. (가)에서 첫 번째 행과 마지막 행이 같은 것은 어떤 효과를 주나요?</div><ul class="choices"><li class="choice-item">① 운율을 형성하고 의미를 강조한다</li><li class="choice-item">② 글을 읽는 속도를 빠르게 한다</li><li class="choice-item">③ 새로운 사건이 시작됨을 암시한다</li><li class="choice-item">④ 이야기가 끝났음을 알려 준다</li><li class="choice-item">⑤ 등장인물의 성격이 변했음을 보여 준다</li></ul></div><div class="question-item"><div class="question-stem">25. (나)에서 길을 잃지 않게 도와주는 '등대' 역할을 하는 것은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 돛대</li><li class="choice-item">② 계수나무</li><li class="choice-item">③ 샛별</li><li class="choice-item">④ 은하수</li><li class="choice-item">⑤ 토끼</li></ul></div><div class="question-item"><div class="question-stem">26. (가)와 (나)를 읽고 난 뒤의 느낌으로 가장 알맞은 것은?</div><ul class="choices"><li class="choice-item">① 화가 나고 답답하다</li><li class="choice-item">② 시끄럽고 정신이 없다</li><li class="choice-item">③ 슬프고 눈물이 날 것 같다</li><li class="choice-item">④ 아름답고 평화로운 느낌이 든다</li><li class="choice-item">⑤ 무섭고 조마조마한 느낌이 든다</li></ul></div><div class="question-item"><div class="question-stem">27. (가)의 '갈잎'은 무엇의 줄임말인가요?</div><ul class="choices"><li class="choice-item">① 가을 잎</li><li class="choice-item">② 가는 잎</li><li class="choice-item">③ 갈대 잎</li><li class="choice-item">④ 갈라진 잎</li><li class="choice-item">⑤ 갈색 잎</li></ul></div><div class="question-item"><div class="question-stem">28. (나)에서 '구름 나라'는 어떤 곳일까요? 가장 알맞은 상상을 골라 보세요.</div><ul class="choices"><li class="choice-item">① 자동차들이 쌩쌩 달리는 도로</li><li class="choice-item">② 아무것도 없는 텅 빈 사막</li><li class="choice-item">③ 시끄럽고 먼지가 많은 공사장</li><li class="choice-item">④ 무섭고 캄캄한 동굴 같은 곳</li><li class="choice-item">⑤ 꿈속처럼 신비롭고 재미있는 곳</li></ul></div><div class="question-item"><div class="question-stem">29. (가) 시에서 '뜰'과 '뒷문 밖'에 각각 무엇이 있다고 했는지 찾아 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div><div class="question-item"><div class="question-stem">30. (나) 시에서는 무엇이 '등대' 역할을 한다고 했는지 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div></div><div class="passage-box"><div class="passage-text">[지문]
+하늘에 둥둥 떠 있는 구름은 어떻게 만들어질까요?
+강이나 바다에 있는 물은 햇볕을 받으면 김이 되어 하늘로 올라갑니다. 이것을 '수증기'라고 합니다. 수증기는 눈에 보이지 않을 만큼 아주 작고 가볍습니다. 하늘 높이 올라간 수증기는 찬 공기를 만나면 다시 아주 작은 물방울로 변합니다. 이 작은 물방울들이 많이 모여서 우리 눈에 보이는 것이 바로 '구름'입니다.
+
+구름 속에 있는 물방울들은 서로 부딪치면서 점점 커집니다. 그러다가 물방울이 너무 무거워지면 더 이상 하늘에 떠 있지 못하고 아래로 떨어지게 됩니다. 이것이 우리가 맞이하는 '비'입니다. 만약 날씨가 아주 추우면 물방울이 얼어서 하얀 '눈'이 되어 내리기도 합니다.
+
+이렇게 물은 돌고 돕니다. 바다에서 하늘로, 하늘에서 다시 땅으로, 그리고 땅에서 다시 바다로 여행을 하는 것입니다. 이 여행 덕분에 식물들도 무럭무럭 자라고 우리도 시원한 물을 마실 수 있답니다.
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">31. 이 글은 무엇에 대해 설명하고 있나요?</div><ul class="choices"><li class="choice-item">① 바닷속 물고기들의 생활</li><li class="choice-item">② 시원한 물을 마시는 법</li><li class="choice-item">③ 눈과 얼음의 차이점</li><li class="choice-item">④ 식물이 잘 자라는 방법</li><li class="choice-item">⑤ 구름과 비가 만들어지는 과정</li></ul></div><div class="question-item"><div class="question-stem">32. 이 글에서 '수증기'에 대한 설명으로 알맞지 않은 것은?</div><ul class="choices"><li class="choice-item">① 눈에 잘 보이고 매우 무겁다</li><li class="choice-item">② 물이 햇볕을 받아 변한 것이다</li><li class="choice-item">③ 하늘 높이 올라간다</li><li class="choice-item">④ 아주 작고 가볍다</li><li class="choice-item">⑤ 찬 공기를 만나면 물방울로 변한다</li></ul></div><div class="question-item"><div class="question-stem">33. 다음 문장의 괄호 안에 들어갈 말로 알맞은 것은 무엇인가요?</div><div class="question-box">수증기가 찬 공기와 (          ) 물방울이 되었다.</div><ul class="choices"><li class="choice-item">① 부딧쳐</li><li class="choice-item">② 부딪쳐</li><li class="choice-item">③ 부딪혀</li><li class="choice-item">④ 부디쳐</li><li class="choice-item">⑤ 부딫쳐</li></ul></div><div class="question-item"><div class="question-stem">34. 비가 아니라 '눈'이 되어 내리기 위한 조건은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 날씨가 아주 추워야 한다</li><li class="choice-item">② 햇볕이 아주 강하게 비쳐야 한다</li><li class="choice-item">③ 바닷물이 더 많이 증발해야 한다</li><li class="choice-item">④ 바람이 아주 세게 불어야 한다</li><li class="choice-item">⑤ 구름이 아주 높이 떠 있어야 한다</li></ul></div><div class="question-item"><div class="question-stem">35. 이 글에서 물이 바다, 하늘, 땅을 돌고 도는 것을 무엇에 비유했나요?</div><ul class="choices"><li class="choice-item">① 이사</li><li class="choice-item">② 소풍</li><li class="choice-item">③ 여행</li><li class="choice-item">④ 놀이</li><li class="choice-item">⑤ 공부</li></ul></div><div class="question-item"><div class="question-stem">36. 이 글에서 '둥둥'은 어떤 모양을 나타내는 말인가요?</div><ul class="choices"><li class="choice-item">① 물이나 공기 중에 가볍게 떠 있는 모양</li><li class="choice-item">② 아기들이 걷는 모양</li><li class="choice-item">③ 북을 칠 때 나는 소리</li><li class="choice-item">④ 바람이 아주 세게 부는 모양</li><li class="choice-item">⑤ 무거운 물건이 바닥에 떨어지는 소리</li></ul></div><div class="question-item"><div class="question-stem">37. 물방울의 여행 덕분에 일어나는 좋은 일은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 식물들이 잘 자라고 시원한 물을 마실 수 있다</li><li class="choice-item">② 하늘이 더 높고 파랗게 변한다</li><li class="choice-item">③ 햇볕이 더 뜨겁게 비친다</li><li class="choice-item">④ 바닷물이 점점 줄어든다</li><li class="choice-item">⑤ 구름이 영원히 사라지지 않는다</li></ul></div><div class="question-item"><div class="question-stem">38. 물방울이 이동하는 순서로 알맞은 것은?</div><ul class="choices"><li class="choice-item">① 바다 -> 땅 -> 구름 -> 하늘</li><li class="choice-item">② 하늘 -> 바다 -> 땅 -> 구름</li><li class="choice-item">③ 바다 -> 하늘 -> 구름 -> 땅 -> 바다</li><li class="choice-item">④ 구름 -> 하늘 -> 바다 -> 땅</li><li class="choice-item">⑤ 땅 -> 구름 -> 하늘 -> 바다</li></ul></div><div class="question-item"><div class="question-stem">39. 하늘 높이 올라간 수증기가 찬 공기를 만나 변한 작은 물방울들이 많이 모여서 무엇이 되는지 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div><div class="question-item"><div class="question-stem">40. 물의 여행 덕분에 우리나 식물이 어떤 도움을 받는지 지문에서 한 가지만 찾아 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div></div><div class="passage-box"><div class="passage-text">[지문]
+(가)
+빨랫줄에 걸어 논
+요에다 그린 지도
+지난밤에 내 동생
+오줌 쏴 눈 지도.
+
+꿈에 가다 꿈에 가다
+돈 주워 넣고
+지난밤에 내 동생
+오줌 쏴 눈 지도.
+
+부엌 문 앞까지
+꿈에 가고
+아침에 일어나
+소금 얻으러 간 지도.
+
+(나)
+자주 꽃 핀 건
+자주 감자,
+파 보나 마나
+자주 감자.
+
+하얀 꽃 핀 건
+하얀 감자,
+파 보나 마나
+하얀 감자.
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">41. (가)에서 동생이 지난밤에 한 행동은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 이불에 오줌을 쌌다</li><li class="choice-item">② 정말로 지도를 그렸다</li><li class="choice-item">③ 빨래를 걷어 왔다</li><li class="choice-item">④ 진짜로 돈을 주웠다</li><li class="choice-item">⑤ 형과 싸웠다</li></ul></div><div class="question-item"><div class="question-stem">42. (가)에서 동생이 아침에 '소금'을 얻으러 간 이유는 무엇일까요?</div><ul class="choices"><li class="choice-item">① 오줌을 싼 벌로 심부름을 가서</li><li class="choice-item">② 아침 반찬을 만들어야 해서</li><li class="choice-item">③ 꿈속에서 돈을 잃어버려서</li><li class="choice-item">④ 빨래를 깨끗하게 하려고</li><li class="choice-item">⑤ 지도를 그리기 위해서</li></ul></div><div class="question-item"><div class="question-stem">43. (가)에서 '지도'는 실제로 무엇을 가리키나요?</div><ul class="choices"><li class="choice-item">① 이불에 오줌을 싼 자국</li><li class="choice-item">② 우리나라의 모습</li><li class="choice-item">③ 보물섬으로 가는 길</li><li class="choice-item">④ 동생이 그린 그림</li><li class="choice-item">⑤ 아침에 해가 뜨는 모양</li></ul></div><div class="question-item"><div class="question-stem">44. (가)를 읽을 때 느껴지는 리듬감에 대한 설명으로 알맞은 것은?</div><ul class="choices"><li class="choice-item">① '오줌 쏴 눈 지도'라는 말이 반복되어 리듬이 생긴다</li><li class="choice-item">② 글자 수가 모두 똑같아서 리듬이 생긴다</li><li class="choice-item">③ 이야기를 하듯이 길게 이어져서 리듬이 없다</li><li class="choice-item">④ 아무런 반복이 없어서 리듬이 느껴지지 않는다</li><li class="choice-item">⑤ 첫 글자가 모두 같아서 리듬이 생긴다</li></ul></div><div class="question-item"><div class="question-stem">45. (나)에서 '파 보나 마나'라고 말한 이유는 무엇일까요?</div><ul class="choices"><li class="choice-item">① 꽃의 색깔과 감자의 색깔이 똑같아서</li><li class="choice-item">② 감자를 파는 것이 귀찮아서</li><li class="choice-item">③ 감자가 아직 다 자라지 않아서</li><li class="choice-item">④ 누가 이미 감자를 다 캐가서</li><li class="choice-item">⑤ 감자 꽃이 시들어 버려서</li></ul></div><div class="question-item"><div class="question-stem">46. (나)에서 '파 보나 마나'라는 말의 뜻으로 가장 알맞은 것은?</div><ul class="choices"><li class="choice-item">① 결과가 뻔해서 확인할 필요도 없이</li><li class="choice-item">② 땅을 파는 것이 너무 힘들어서</li><li class="choice-item">③ 아무리 파 봐도 알 수가 없어서</li><li class="choice-item">④ 조금만 파도 금방 나오기 때문에</li><li class="choice-item">⑤ 남들이 보지 않을 때 몰래</li></ul></div><div class="question-item"><div class="question-stem">47. (가)와 (나)를 읽을 때 드는 느낌으로 가장 알맞은 것은?</div><ul class="choices"><li class="choice-item">① 재미있고 웃음이 난다</li><li class="choice-item">② 슬프고 눈물이 난다</li><li class="choice-item">③ 무섭고 깜짝 놀란다</li><li class="choice-item">④ 지루하고 하품이 난다</li><li class="choice-item">⑤ 화가 나고 답답하다</li></ul></div><div class="question-item"><div class="question-stem">48. (가)와 (나)에 공통으로 나오는 소재는 아니지만, 둘 다 우리 주변에서 흔히 볼 수 있는 것은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 가족과 자연</li><li class="choice-item">② 전쟁과 군인</li><li class="choice-item">③ 왕자와 공주</li><li class="choice-item">④ 우주선과 외계인</li><li class="choice-item">⑤ 로봇과 컴퓨터</li></ul></div><div class="question-item"><div class="question-stem">49. (가)의 '동생'에게 해주고 싶은 말로 알맞은 것은?</div><ul class="choices"><li class="choice-item">① 괜찮아, 다음부터는 자기 전에 화장실에 다녀오렴</li><li class="choice-item">② 지도를 아주 잘 그렸구나, 화가 해도 되겠다</li><li class="choice-item">③ 꿈속에서 돈을 잃어버려서 정말 안타깝다</li><li class="choice-item">④ 소금을 더 많이 받아와야지</li><li class="choice-item">⑤ 빨래는 네가 다 해야 해</li></ul></div><div class="question-item"><div class="question-stem">50. (가)와 (나)에 대한 설명으로 알맞지 않은 것은 무엇인가요?</div><ul class="choices"><li class="choice-item">① (나)는 감자 꽃의 색깔이 감자의 색깔과 다르다고 말한다</li><li class="choice-item">② (가)는 4행시처럼 '지도'라는 말로 끝난다</li><li class="choice-item">③ (가)의 '지도'는 오줌을 싼 자국을 빗댄 말이다</li><li class="choice-item">④ (나)의 자주 감자는 자주 꽃이 핀다</li><li class="choice-item">⑤ (가)와 (나)는 모두 짧지만 의미가 담겨 있다</li></ul></div></div><div class="passage-box"><div class="passage-text">[지문]
+자석은 참 신기한 물건입니다. 자석에는 N극과 S극이라는 두 극이 있습니다. N극은 북쪽을 가리키고, S극은 남쪽을 가리킵니다. 우리가 나침반을 이용해 길을 찾을 수 있는 것도 바로 이 성질 덕분입니다.
+
+자석은 서로 다른 극끼리는 끌어당기고, 같은 극끼리는 밀어내는 성질이 있습니다. N극과 S극이 만나면 착 달라붙지만, N극과 N극이 만나거나 S극과 S극이 만나면 서로 밀어냅니다.
+
+자석은 우리 생활 속에서도 많이 쓰입니다. 냉장고 문이 꽉 닫히는 것도 고무 패킹 안에 자석이 들어 있기 때문이고, 필통 뚜껑이 잘 닫히는 것도 자석 덕분입니다. 또 칠판에 종이를 붙일 때 쓰는 자석도 있습니다. 이렇게 자석은 작지만 우리에게 큰 도움을 줍니다.
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">51. 자석의 N극이 가리키는 방향은 어디인가요?</div><ul class="choices"><li class="choice-item">① 북쪽</li><li class="choice-item">② 남쪽</li><li class="choice-item">③ 동쪽</li><li class="choice-item">④ 서쪽</li><li class="choice-item">⑤ 위쪽</li></ul></div><div class="question-item"><div class="question-stem">52. 자석이 서로 '밀어내는' 경우는 언제인가요?</div><ul class="choices"><li class="choice-item">① 같은 극끼리 만났을 때</li><li class="choice-item">② 다른 극끼리 만났을 때</li><li class="choice-item">③ 철로 된 물건을 만났을 때</li><li class="choice-item">④ 물이 묻었을 때</li><li class="choice-item">⑤ 너무 뜨거워졌을 때</li></ul></div><div class="question-item"><div class="question-stem">53. 이 글에서 설명하는 자석이 쓰인 예가 아닌 것은?</div><ul class="choices"><li class="choice-item">① 유리창을 닦는 걸레</li><li class="choice-item">② 잘 닫히는 필통 뚜껑</li><li class="choice-item">③ 꽉 닫히는 냉장고 문</li><li class="choice-item">④ 나침반</li><li class="choice-item">⑤ 칠판에 종이를 붙이는 도구</li></ul></div><div class="question-item"><div class="question-stem">54. 자석의 N극과 S극이 서로 다른 점은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 가리키는 방향이 다르다</li><li class="choice-item">② 자석이 붙는 성질이 다르다</li><li class="choice-item">③ 생활 속에서 쓰이는 곳이 다르다</li><li class="choice-item">④ 철을 끌어당기는 힘의 세기가 다르다</li><li class="choice-item">⑤ 모양과 크기가 다르다</li></ul></div><div class="question-item"><div class="question-stem">55. 이 글에서 '꽉'이라는 말의 뜻으로 가장 알맞은 것은?</div><ul class="choices"><li class="choice-item">① 틈이 없이 아주 단단하게</li><li class="choice-item">② 아주 가볍고 부드럽게</li><li class="choice-item">③ 소리가 나지 않게 조용히</li><li class="choice-item">④ 멀리 떨어져서</li><li class="choice-item">⑤ 아주 빠르고 신속하게</li></ul></div><div class="question-item"><div class="question-stem">56. 이 글에서 '신기한'과 비슷한 뜻을 가진 말은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 놀라운</li><li class="choice-item">② 무거운</li><li class="choice-item">③ 단단한</li><li class="choice-item">④ 오래된</li><li class="choice-item">⑤ 차가운</li></ul></div><div class="question-item"><div class="question-stem">57. 나침반으로 길을 찾을 수 있는 이유는 무엇인가요?</div><ul class="choices"><li class="choice-item">① 자석의 N극이 항상 북쪽을 가리키기 때문에</li><li class="choice-item">② 나침반 바늘이 항상 움직이기 때문에</li><li class="choice-item">③ 나침반이 아주 가볍기 때문에</li><li class="choice-item">④ 나침반에 전기가 통하기 때문에</li><li class="choice-item">⑤ 나침반이 빛을 내기 때문에</li></ul></div><div class="question-item"><div class="question-stem">58. 냉장고 문 고무 패킹 안에 자석을 넣은 이유는 무엇일까요?</div><ul class="choices"><li class="choice-item">① 문이 저절로 열리지 않고 꽉 닫히게 하려고</li><li class="choice-item">② 냉장고 안을 시원하게 하려고</li><li class="choice-item">③ 전기를 아끼기 위해서</li><li class="choice-item">④ 냉장고 문을 가볍게 만들려고</li><li class="choice-item">⑤ 음식을 오랫동안 보관하려고</li></ul></div><div class="question-item"><div class="question-stem">59. 자석이 서로 밀어내는 경우는 언제인가요?</div><ul class="choices"><li class="choice-item">① N극과 N극이 만났을 때</li><li class="choice-item">② N극과 S극이 만났을 때</li><li class="choice-item">③ 자석이 철에 붙었을 때</li><li class="choice-item">④ 자석이 공기 중에 있을 때</li><li class="choice-item">⑤ 자석이 물속에 있을 때</li></ul></div><div class="question-item"><div class="question-stem">60. 이 글로 알 수 있는 내용이 아닌 것은 무엇인가요?</div><ul class="choices"><li class="choice-item">① 자석을 자르면 극이 사라진다</li><li class="choice-item">② 자석은 같은 극끼리 밀어낸다</li><li class="choice-item">③ 자석은 다른 극끼리 끌어당긴다</li><li class="choice-item">④ 나침반은 자석의 성질을 이용한다</li><li class="choice-item">⑤ 우리 생활 주변에 자석이 많이 쓰인다</li></ul></div></div><div class="page-break"></div><h2>정답 및 해설</h2><h3>S1_LIT_P1 (문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>1번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 시제 표현 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 문맥적 의미(반대 감정) 추론 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>2번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>②</span> 인물 심리 파악 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 국어 개념 적용 능력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 인과 관계 비약 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>3번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> '기다리다'는 '기달리다'가 아니라 '기다리다'가 올바른 표현입니다. <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 어휘력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 'ㄹ게'는 소리 나는 대로 'ㄹ께'로 적지 않습니다. <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 어휘력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 잘못된 표기입니다. <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>④</span> '줄게'가 맞습니다. <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 어휘력:-5]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 어휘력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>4번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 꼬리 변화가 가장 먼저라고 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 순차적 변화를 동시 발생으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>④</span> 순서를 반대로 알고 꼬리 변화를 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 변태 과정을 생략한 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>5번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 청각적 묘사로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 반대되는 속도감(느림)과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 회전하는 동작으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 성장(커짐/나옴)의 반대 의미 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 비문학 배경지식:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>6번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 개구리에게 없는 기관 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>③</span> 뒷다리 다음 단계를 먼저라고 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 원래 있던 꼬리를 새로 나온 것으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 물고기의 기관과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 비문학 배경지식:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>7번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>②</span> 잘못된 변태 과정 추측 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 본문에 없는 엉뚱한 변화 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 반대 변화(길어짐) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 언급되지 않은 변화 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>8번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 물고기가 아닌 엄마와의 관계 추측 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 지문에 없는 내용(행동:먹이주기) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 지킬 수 없는 약속을 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 지문에 없는 내용(행동:수영) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table>
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>9번</td>
+                    <td>"걱정 마. 내가 개구리가 되어도 자주 연못에 놀러 올게."</td>
+                    <td><div>- 올챙이가 한 말을 지문에서 정확하게 찾아 씀 (10점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10, 어휘력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>10번</td>
+                    <td>"축하해, 올챙이야. 하지만 개구리가 되면 우리랑 헤어져야 하니 조금 슬프네."</td>
+                    <td><div>- 물고기의 말을 지문에서 찾아 비슷하게 씀 (10점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10, 어휘력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                <h3>S1_NON_P1 (비문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>11번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 대상(애벌레) 지칭 어휘 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>③</span> 시간적 순서 구조 파악 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>12번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 존재하지 않는 상식(비)의 부적절한 개입 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>③</span> 인과 관계 정보 문장 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>13번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> '낮다(Low)'와 혼동했습니다. <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 어휘력:-3]</span></div><div><span class='badge badge-wrong'>②</span> '낫다(Recover)'와 혼동했습니다. <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 어휘력:-3]</span></div><div><span class='badge badge-wrong'>③</span> 없는 말입니다. 심각한 표기 오류. <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 어휘력:-5]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 어휘력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>14번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전체 순서 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>②</span> 애벌레와 번데기 순서 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>③</span> 번데기를 마지막 단계로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 알보다 애벌레가 먼저라고 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>15번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 비행 동작과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10]</span></div><div><span class='badge badge-wrong'>③</span> 반대 의미(시들다)와 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 은신과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 회전 동작과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>16번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 성충(나비)의 먹이와 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>②</span> 육식 곤충의 먹이와 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>③</span> 지렁이 등의 먹이와 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 지문에 없는 내용 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>17번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 감각 기관과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>②</span> 지문에 없는 내용(등) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 거미의 실 뽑는 곳과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 지문에 없는 내용(발) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>18번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 성충이 되어야 알을 낳음 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 번데기 시기에는 먹이를 먹지 않음 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 겉모습(가만히 있음)만 보고 내면 변화 무시 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 휴면 상태로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody></table>
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>19번</td>
+                    <td>실을 뽑아냅니다.</td>
+                    <td><div>- '실'이라는 단어가 포함됨 (10점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10, 어휘력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>20번</td>
+                    <td>햇볕에 날개를 말려야 합니다.</td>
+                    <td><div>- 햇볕에 말려야 한다는 내용 포함 (10점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                <h3>S1_LIT_P3 (문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>21번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 지문 속 장소(갈잎의 노래가 있는 곳)를 목적지로 착각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 일반적인 은거지 이미지에 기댄 추측 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 시의 정서(자연)와 정반대되는 공간 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> '금모래'라는 단어에서 연상된 오답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>22번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> '배'의 동음이의어(과일) 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>②</span> '배'라는 글자의 동음이의어 혼동 또는 문맥 상실 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 국어 관련 배경지식:-5]</span></div><div><span class='badge badge-wrong'>③</span> 은하수/하늘이라는 배경에만 주목하여 운송수단 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 단어의 뜻(작다)과 정반대되는 크기 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>23번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 없는 말 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 'ㄹ' 받침 오류 (불규칙 활용 미숙지) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 어휘력:-2]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 어휘력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 받침 오류 (심각) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 어휘력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>24번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>②</span> 반복의 기능(안정감)과 반대되는 효과(속도감) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 국어 관련 배경지식:-5]</span></div><div><span class='badge badge-wrong'>③</span> 반복의 의미(지속/강조)와 상충되는 해석(새로운 시작) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 구조 독해력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 단순한 종료 신호로 오해 (수미상관의 구조적 미학 간과) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 동일한 소망의 반복을 성격 변화로 잘못 해석 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>25번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 배의 부속품(없는 것)을 있는 것으로 착각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 본문에 나오는 다른 소재와 혼동 (배 안에 있는 사물) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>④</span> 배경 공간을 길잡이 역할로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 본문의 등장 동물을 길잡이로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>26번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 부정적인 감정으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 고요하고 정적인 분위기를 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 일반적인 이별 노래의 정서를 잘못 적용 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 국어 관련 배경지식:-5]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 정서와 정반대되는 감정 (공포) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>27번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 비슷한 발음(가을)에서 유추한 오답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 모양(가늘다)에서 유추한 오답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 구조 독해력:-5]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10]</span></div><div><span class='badge badge-wrong'>④</span> 형태(갈라지다)에서 유추한 오답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 색깔(갈색)에서 유추한 오답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>28번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 현실 세계의 복잡한 모습을 잘못 투영 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 국어 관련 배경지식:-5]</span></div><div><span class='badge badge-wrong'>②</span> 구름/은하수/계수나무 등 풍부한 소재를 무시 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 깨끗하고 푸른 하늘 이미지와 정반대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 반짝이는 샛별/은하수 이미지와 정반대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 문장 독해력:10]</span></div></td>
+                </tr>
+                </tbody></table>
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>29번</td>
+                    <td>뜰에는 금모래 빛, 뒷문 밖에는 갈잎의 노래</td>
+                    <td><div>- 금모래 빛과 갈잎의 노래를 정확하게 찾아 씀 (10점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10, 어휘력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>30번</td>
+                    <td>샛별</td>
+                    <td><div>- '샛별'이라고 씀 (10점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10, 어휘력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                <h3>S1_NON_P3 (비문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>31번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> '바다'라는 단어에 이끌려 전혀 다른 주제 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 마지막 문장의 세부 정보를 전체 주제로 착각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 지문 일부분(눈에 대한 언급)을 전체 주제로 확대 해석 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 구조 독해력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 마지막 문장의 부수적 효과를 전체 주제로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>32번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 (틀린 내용 찾기: '눈에 보이지 않을 만큼 작고 가볍다'고 설명됨) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 부정형 문항 오독: 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>④</span> 부정형 문항 오독: 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>33번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 받침 오류 (심각) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 어휘력:-5]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 어휘력:10]</span></div><div><span class='badge badge-wrong'>③</span> 피동/능동 혼동 (문맥상 어색) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-2, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 소리 나는 대로 잘못 쓴 표기 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 어휘력:-3]</span></div><div><span class='badge badge-wrong'>⑤</span> 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 어휘력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>34번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 눈이 녹는 조건을 생성 조건으로 착각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>③</span> 강수량 증가 원인을 강수 형태 변화 원인으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 강설 조건(기온)을 풍속으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 구름의 위치와 강수의 형태 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 구조 독해력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>35번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 장소를 옮긴다는 점(이동)만 생각한 오답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>②</span> 비슷한 개념(놀러감)과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10]</span></div><div><span class='badge badge-wrong'>④</span> 즐거운 활동이라는 점에서 착각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 비유적 표현과 전혀 관계없는 단어 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 어휘력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>36번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10]</span></div><div><span class='badge badge-wrong'>②</span> '아장아장'과 같은 의태어와 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 동음이의어(북소리 둥둥) 혼동 (문맥 무시) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 국어 관련 배경지식:-5]</span></div><div><span class='badge badge-wrong'>④</span> '씽씽'과 같은 의태어와 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> '쿵쿵'과 같은 소리 흉내말과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>37번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 지문과 관계없는 일반적인 날씨 묘사 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 물의 순환과 무관한 자연 현상 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>④</span> 순환(유지)의 개념과 반대되는 현상(고갈) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 과정의 일부(구름)를 영구적인 상태로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>38번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 비가 내리는 과정(구름->땅)을 반대로 이해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>②</span> 순서를 뒤죽박죽 섞음 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>④</span> 비가 땅으로 내리는 과정을 생략하거나 순서 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 땅에서 하늘로 바로 올라가는(증발 위치) 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table>
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>39번</td>
+                    <td>구름</td>
+                    <td><div>- '구름'이라고 씀 (10점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10, 비문학 배경지식:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>40번</td>
+                    <td>식물이 무럭무럭 자랄 수 있습니다. (또는 우리가 시원한 물을 마실 수 있습니다.)</td>
+                    <td><div>- 식물이 자라거나 물을 마실 수 있다는 내용 포함 (10점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10, 비문학 배경지식:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                <h3>S1_LIT_P4 (문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>41번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 비유적 표현(지도)을 사실적 행위(그림 그리기)로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 배경(빨랫줄)을 주체의 행동으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 꿈속의 내용을 현실의 행동으로 착각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 지문에 없는 내용을 상상 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>42번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 (한국의 전통 풍습 배경지식 활용) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 국어 관련 배경지식:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 소금의 일상적 용도(요리)만 생각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 꿈 내용과 현실 행동을 잘못 연결 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 빨랫줄 이미지와 소금의 세탁 효과(일반상식) 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 구조 독해력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 소금과 지도 그리기의 인과 관계 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>43번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 지도의 사전적 의미만 생각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 꿈속 내용(돈 주워 넣고)과 상상을 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> '그린'이라는 표현을 곧이곧대로 해석 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 지문과 관계없는 내용 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>44번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 (반복을 통한 운율 형성) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>②</span> 글자 수(음수율)의 변화(3/4조 등)를 무시하고 획일적으로 판단 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 운율이 있는 시를 산문으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 명백히 존재하는 반복을 파악하지 못함 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 두운(첫 글자 반복)이 나타나지 않는데 있다고 착각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 어휘력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>45번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>②</span> 화자의 태도(게으름)로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 농사 지식(수확 시기)과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 지문에 없는 상황 상상 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 꽃의 상태를 이유로 착각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>46번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10]</span></div><div><span class='badge badge-wrong'>②</span> 행위의 어려움으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 의미를 반대(불확실성)로 해석 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 시간의 빠름으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 비밀스러운 행동으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>47번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 (해학적 정서) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>②</span> 정반대의 정서(비극) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 국어 관련 배경지식:-5]</span></div><div><span class='badge badge-wrong'>③</span> 공포/놀람으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 감상의 부재 또는 흥미 없음 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정적 정서(분노) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 문장 독해력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>48번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 ((가) 동생/오줌, (나) 감자/꽃 - 일상적 소재) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 전혀 다른 무거운 주제 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 동화 속 환상적인 소재 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>④</span> SF적 소재 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 현대 기술 문명 소재 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>49번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 (따뜻한 위로와 조언) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 상황(실수)을 칭찬하는 엉뚱한 반응 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 핵심 사건(오줌)이 아닌 꿈 내용에만 반응 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 벌을 더 받으라는 부정적 반응 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 지나치게 가혹한 반응 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>50번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 (틀린 내용 찾기: 같다고 말함) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 부정형 문항 오독: 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 부정형 문항 오독: 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 국어 개념 적용 능력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><h3>S1_NON_P4 (비문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>51번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>②</span> S극이 가리키는 방향과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 지문에 나오지 않는 방향 (해 뜨는 곳) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>④</span> 지문에 나오지 않는 방향 (해 지는 곳) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 나침반의 평면 방향이 아닌 수직 방향 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>52번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>②</span> 인력(끌어당김)의 조건과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>③</span> 자석이 붙는 성질만 생각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 자력과 무관한 환경 요인 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 자력을 잃는 조건(고급 지식)을 밀어내는 조건으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>53번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 (지문에 언급되지 않은 물건) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 부정형 문항 오독: 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 부정형 문항 오독: 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>54번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 자력의 유무(둘 다 있음)를 차이점으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>③</span> 사용 용도(자석 전체)를 극의 차이로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 자력의 세기 차이(일반적으로 같음)를 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 물리적 형태가 극마다 다르다고 착각 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 어휘력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>55번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10]</span></div><div><span class='badge badge-wrong'>②</span> 반의어(느슨하게/가볍게)와 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 문맥상 상황(조용함)을 뜻으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>④</span> '착' 달라붙는 것과 반대되는 상황 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 속도를 나타내는 말('확')과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>56번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10]</span></div><div><span class='badge badge-wrong'>②</span> 물리적 무게와 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 물리적 경도와 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 시간적 오래됨과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 온도와 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>57번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>②</span> 움직임 자체를 원인으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>③</span> 무게를 원인으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 전자기력과 자력을 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 전혀 관계없는 현상을 원인으로 추측 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>58번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>②</span> 냉장고의 주 기능(냉각)을 자석의 기능으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 결과적인 효과(절전)를 직접적인 목적으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 무게 조절을 목적으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 냉장고의 목적을 자석의 목적으로 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 문장 독해력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>59번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>②</span> 반대 상황(인력) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 문장 독해력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 붙는 성질과 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 비문학 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 무관한 조건(매질-공기) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 무관한 조건(매질-물) 선택 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>60번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 (지문에 없는 내용이며 사실과도 다름) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>②</span> 부정형 문항 오독: 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 부정형 문항 오독: 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table>
+        </div> <!-- End of test-body -->
+    </div> <!-- End of test-paper-container -->
+    <script>
+    (function () {
+        function hasPagedJs() {
+            return typeof window.PagedPolyfill !== 'undefined';
+        }
+
+        function collectItems(body) {
+            const items = [];
+            Array.from(body.children).forEach((child) => {
+                if (child.classList && child.classList.contains('page-break')) {
+                    items.push({ type: 'page-break' });
+                    return;
+                }
+                if (child.classList.contains('questions')) {
+                    const qItems = child.querySelectorAll('.question-item');
+                    qItems.forEach((q) => items.push(q));
+                } else {
+                    items.push(child);
+                }
+            });
+
+            let node = body.nextElementSibling;
+            while (node) {
+                if (node.classList && node.classList.contains('page-break')) {
+                    items.push({ type: 'page-break' });
+                } else {
+                    items.push(node);
+                }
+                node = node.nextElementSibling;
+            }
+
+            return items;
+        }
+
+        function createHeaderClone(original) {
+            if (!original) {
+                return null;
+            }
+            const title = original.querySelector('.test-title');
+            const info = original.querySelector('.test-info');
+
+            const header = document.createElement('div');
+            header.className = 'screen-header';
+
+            const titleEl = document.createElement('div');
+            titleEl.className = 'screen-title';
+            titleEl.textContent = title ? title.textContent : '국어농장 진단 테스트';
+            header.appendChild(titleEl);
+
+            const infoEl = document.createElement('div');
+            infoEl.className = 'screen-info';
+            infoEl.innerHTML = info ? info.innerHTML : '';
+            header.appendChild(infoEl);
+
+            return header;
+        }
+
+        function buildScreenPages() {
+            if (document.querySelector('.screen-pages')) {
+                return;
+            }
+            const container = document.querySelector('.test-paper-container');
+            if (!container) {
+                return;
+            }
+            const body = container.querySelector('.test-body');
+            if (!body) {
+                return;
+            }
+
+            const items = collectItems(body);
+            const pages = document.createElement('div');
+            pages.className = 'screen-pages';
+
+            function newPage(isFirst) {
+                const page = document.createElement('div');
+                page.className = 'screen-page';
+
+                const inner = document.createElement('div');
+                inner.className = 'screen-page-inner';
+
+                if (isFirst) {
+                    const header = createHeaderClone(container.querySelector('.test-header'));
+                    if (header) {
+                        inner.appendChild(header);
+                    }
+                }
+
+                const bodyEl = document.createElement('div');
+                bodyEl.className = 'screen-body content-area';
+                inner.appendChild(bodyEl);
+
+                const footer = document.createElement('div');
+                footer.className = 'screen-footer answer-footer';
+                inner.appendChild(footer);
+
+                page.appendChild(inner);
+                pages.appendChild(page);
+                return { page, bodyEl, footer };
+            }
+
+            let pageObj = newPage(true);
+
+            items.forEach((item) => {
+                if (item && item.type === 'page-break') {
+                    pageObj = newPage(false);
+                    return;
+                }
+
+                const clone = item.cloneNode(true);
+                pageObj.bodyEl.appendChild(clone);
+
+                if (pageObj.bodyEl.scrollHeight > pageObj.bodyEl.clientHeight + 1) {
+                    pageObj.bodyEl.removeChild(clone);
+                    pageObj = newPage(false);
+                    pageObj.bodyEl.appendChild(clone);
+                }
+            });
+
+            const pageNodes = pages.querySelectorAll('.screen-page');
+            pageNodes.forEach((page, idx) => {
+                const footer = page.querySelector('.screen-footer');
+                if (footer) {
+                    footer.textContent = `Page ${idx + 1} of ${pageNodes.length}`;
+                }
+            });
+
+            document.body.classList.add('screen-paginated');
+            document.body.insertBefore(pages, container);
+        }
+
+        function initPagination() {
+            let attempts = 0;
+            const maxAttempts = 12;
+            const intervalMs = 200;
+
+            function checkPagedJs() {
+                const pagedPages = document.querySelector('.pagedjs_pages');
+                if (pagedPages) {
+                    document.body.classList.add('pagedjs-preview');
+                    return;
+                }
+
+                attempts += 1;
+                if (attempts >= maxAttempts) {
+                    buildScreenPages();
+                    return;
+                }
+
+                setTimeout(checkPagedJs, intervalMs);
+            }
+
+            if (!hasPagedJs()) {
+                buildScreenPages();
+                return;
+            }
+
+            checkPagedJs();
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(initPagination, 200);
+        });
+    })();
+    </script>
+</body>
+</html>

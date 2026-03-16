@@ -1,0 +1,1066 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>국어농장 진단 테스트 - Russell</title>
+    <!-- Paged.js from CDN -->
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+    <style>
+        :root {
+            --color-primary: #1A365D;
+            --color-secondary: #2B6CB0;
+            --color-accent: #DD6B20;
+            --color-light-blue: #EBF4FF;
+            --color-light-yellow: #FEFCE8;
+            --color-light-green: #F0FDF4;
+            --color-border: #E2E8F0;
+            --color-text: #1A202C;
+        }
+
+        /* Paged.js Print Styles for A4 */
+        @page {
+            size: A4;
+            margin: 20mm 15mm 25mm;
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+                font-family: "Noto Sans KR", sans-serif;
+                font-size: 10pt;
+            }
+        }
+
+        /* Base Body Style */
+        body {
+            font-family: "Noto Serif KR", serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: white;
+        }
+
+        /* Main Container */
+        .test-paper-container {
+            width: 100%;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .test-header {
+            width: 100%;
+            border-bottom: 2px solid var(--color-primary);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .test-title {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .test-info {
+            font-size: 12pt;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-weight: bold;
+        }
+
+        /* Content Body - Two Columns */
+        .test-body {
+            column-count: 2;
+            column-fill: auto;
+            column-gap: 15mm;
+            text-align: left;
+            width: 100%;
+        }
+
+        /* Prevent Breakage Inside Questions */
+        .question-item, .question-block {
+            break-inside: avoid;
+            page-break-inside: avoid;
+            column-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+            margin-bottom: 2em;
+            border-bottom: 1px dotted var(--color-border);
+            padding-bottom: 1em;
+        }
+
+        /* Passages */
+        .passage-box, .passage-block {
+            text-align: left;
+            margin-bottom: 1.5em;
+            padding: 10px;
+            background: var(--color-light-blue);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            column-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+        }
+
+        .passage-text {
+            font-size: 10.5pt;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        /* Choices */
+        .choices {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 5px;
+            margin-top: 10px;
+            padding-left: 0;
+            list-style: none;
+            text-align: left; /* Ensure natural alignment */
+            break-inside: avoid;
+            page-break-inside: avoid;
+            column-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+        }
+
+        .choice-item {
+            font-size: 10.5pt;
+            padding-left: 5px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            column-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+        }
+
+        .question-box, .question-stem {
+            break-inside: avoid;
+            page-break-inside: avoid;
+            column-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+        }
+
+        .page-break {
+            break-after: page;
+        }
+        
+        /* Explanation Section Styles */
+        .answer-table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 30px; }
+        .answer-table th, .answer-table td { border: 1px solid var(--color-border); padding: 8px; text-align: left; }
+        .answer-table th { background-color: var(--color-light-yellow); }
+        .badge { display: inline-block; padding: 2px 5px; border-radius: 3px; font-size: 0.8em; margin-right: 5px; }
+        .badge-correct { background-color: var(--color-light-green); color: var(--color-primary); }
+        .badge-wrong { background-color: var(--color-light-yellow); color: var(--color-accent); }
+        .content-area { overflow: hidden; padding-bottom: 25mm; }
+        .answer-footer { max-height: 15mm; overflow: hidden; }
+
+        /* Fallback / Screen Styles & Paged.js Preview Styles */
+        @media screen {
+            body { background: var(--color-light-blue); }
+
+            .screen-pages {
+                display: none;
+            }
+
+            body.screen-paginated .screen-pages {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px;
+                background: var(--color-light-blue);
+            }
+
+            body.screen-paginated .test-paper-container {
+                display: none;
+            }
+
+            body.pagedjs-preview .test-paper-container {
+                display: none;
+            }
+
+            body.pagedjs-preview .screen-pages {
+                display: none;
+            }
+
+            body.pagedjs-preview .pagedjs_pages {
+                display: flex;
+            }
+            
+            .test-paper-container {
+                background: white;
+                padding: 40px;
+                min-height: 297mm;
+                border: 1px solid var(--color-border);
+            }
+
+            /* Paged.js creates these classes for preview */
+            .pagedjs_pages {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                background: var(--color-light-blue);
+            }
+            
+            .pagedjs_sheet {
+                background: white;
+                border: 1.5px solid var(--color-secondary);
+                margin-bottom: 20px; /* Space between pages */
+                width: 210mm;
+                height: 297mm;
+            }
+
+            .pagedjs_page {
+                background: white;
+            }
+
+            .screen-page {
+                width: 210mm;
+                height: 297mm;
+                background: white;
+                border: 1.5px solid var(--color-secondary);
+            }
+
+            .screen-page-inner {
+                height: 100%;
+                box-sizing: border-box;
+                padding: 20mm 15mm;
+                display: flex;
+                flex-direction: column;
+                gap: 6mm;
+            }
+
+            .screen-header {
+                border-bottom: 2px solid var(--color-primary);
+                padding-bottom: 3mm;
+                text-align: center;
+            }
+
+            .screen-title {
+                font-size: 18pt;
+                font-weight: bold;
+                margin-bottom: 4mm;
+            }
+
+            .screen-info {
+                font-size: 12pt;
+                display: flex;
+                justify-content: center;
+                gap: 12mm;
+                font-weight: bold;
+            }
+
+            .screen-body {
+                flex: 1 1 auto;
+                column-count: 2;
+                column-gap: 15mm;
+                overflow: hidden;
+            }
+
+            .screen-footer {
+                flex: 0 0 12mm;
+                max-height: 15mm;
+                overflow: hidden;
+                font-size: 10pt;
+                color: #666;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-paper-container">
+        <div class="test-header">
+            <div class="test-title">국어농장 진단 테스트 - Russell</div>
+            <div class="test-info">
+                <span>학년: __________</span>
+                <span>이름: __________</span>
+                <span>점수: __________</span>
+            </div>
+        </div>
+        <div class="test-body">
+<div class="passage-box"><div class="passage-text">(가)
+나 보기가 역겨워
+가실 때에는
+말없이 고이 보내 드리우리다.
+
+영변(寧邊)에 약산(藥山)
+진달래꽃
+아름 따다 가실 길에 뿌리우리다.
+
+가시는 걸음 걸음
+놓인 그 꽃을
+사뿐히 즈려 밟고 가시옵소서.
+
+나 보기가 역겨워
+가실 때에는
+죽어도 아니 눈물 흘리우리다.
+
+- 김소월, <진달래꽃>
+
+(나)
+"이걸 보면 벌써 도둑은 저 건너 산을 넘었을 게다."
+하고 응칠이는 얼른 논둑에서 몽둥이를 집어 들었다. 그리고 벼를 훔쳐 간 놈의 발자국을 찾으려고 논바닥을 살폈다. 그러나 논바닥에는 아무런 흔적도 없었다.
+참 이상한 일이었다. 벼를 베어 간 흔적은 있는데 도둑이 들어온 발자국도, 나간 발자국도 없는 것이다.
+'이건 분명히 하늘에서 떨어진 도둑이 아니고는 못 할 짓인데…….'
+응칠이는 귀신에 홀린 듯하여 멍하니 서 있었다. 바로 이때였다.
+"악!"
+하는 비명 소리가 벼 포기 속에서 났다. 깜짝 놀라 그곳을 보니 검은 그림자가 벼 포기 속에서 꿈틀거리고 있었다. 응칠이는 달려들어 몽둥이로 그놈의 등을 후려갈겼다.
+"악!"
+하고 다시 비명을 지르며 그놈은 푹 고꾸라졌다. 응칠이는 놈의 허리를 잡고 일으켜 세웠다. 그리고 복면을 벗겨 보았다.
+"아니, 이게 웬일이냐?"
+응칠이는 눈을 의심했다. 복면을 벗은 그 얼굴은 바로 자기의 아우 응오가 아닌가!
+"네가, 네가 벼를 훔쳤단 말이냐?"
+응오의 얼굴은 흙투성이가 되어 있었다. 응칠이는 기가 막혀 입이 다물어지지 않았다.
+"형님!"
+하고 부르며 응오는 형의 가슴에 얼굴을 묻고 흐느껴 울었다.
+"왜, 왜 네 벼를 네가 훔쳐야 한단 말이냐?"
+응오의 입에서 나오는 말은 형의 가슴을 더욱 아프게 했다.
+"벼를 베어 봤자 남는 게 있어야지요. 지주에게 뺏기고, 빚 갚고 나면 빈털터린데, 차라리 도둑맞았다고 소문을 내고 제가 먹는 게 낫지요."
+응칠이는 몽둥이를 던져 버렸다. 그리고 아우의 손을 잡고 일으켰다.
+"가자, 집으로 가자."
+"형님, 저는 못 갑니다. 이 벼를 다 베어 가지고 가야 합니다."
+"그만두어라. 도둑질까지 해 가면서 농사를 지으면 뭘 하니. 다 집어치우고 나하고 같이 떠나자."
+응칠이는 아우의 등을 밀었다. 그러나 응오는 버티고 서서 움직이지 않았다.
+"형님, 저는 못 떠납니다. 아내와 늙으신 어머니를 두고 어디로 간단 말입니까?"
+응칠이는 더 이상 할 말이 없었다. 그는 하늘을 쳐다보며 긴 한숨을 내쉬었다. 달빛만이 차갑게 그들을 비추고 있었다.
+
+- 김유정, <만무방>
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">1. (가)에 대한 설명으로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① (가)와 (나)는 모두 대화 형식을 통해 갈등을 해소하고 있다.</li><li class="choice-item">② (가)와 (나)는 모두 자연물을 통해 현실 도피적 태도를 보여준다.</li><li class="choice-item">③ (가)는 이별의 상황을 가정하여 화자의 정서를 드러내고 있다.</li><li class="choice-item">④ (나)는 계절의 변화를 통해 인물의 심리를 묘사하고 있다.</li><li class="choice-item">⑤ (가)는 과거 회상을 통해, (나)는 미래에 대한 기대를 통해 주제를 강조한다.</li></ul></div><div class="question-item"><div class="question-stem">2. (나)에서 '응칠'이 '아우'의 정체를 확인하고 '기가 막혀 입이 다물어지지 않았다'고 한 이유로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 도둑이 아우라는 사실을 마을 사람들에게 들킬까 봐 걱정되어서</li><li class="choice-item">② 아우가 자신처럼 마을을 떠나고 싶어 한다는 것을 알게 되어서</li><li class="choice-item">③ 성실하게 농사짓던 아우가 도둑이 될 수밖에 없는 현실의 모순 때문에</li><li class="choice-item">④ 아우가 훔친 벼의 양이 예상보다 너무 적어서</li><li class="choice-item">⑤ 아우가 자신을 속이고 도둑질을 했다는 배신감 때문에</li></ul></div><div class="question-item"><div class="question-stem">3. 다음 <보기>의 빈칸에 들어갈 단어로 적절하지 않은 것은?</div><div class="question-box"><보기>
+(가)의 화자는 임을 떠나보내며 '죽어도 아니 눈물 (          )'라고 말하고 있다. 이는 슬픔을 참겠다는 반어적 표현이다.</div><ul class="choices"><li class="choice-item">① 드리우리다</li><li class="choice-item">② 흘리우리다</li><li class="choice-item">③ 삼키리다</li><li class="choice-item">④ 쏟으리다</li><li class="choice-item">⑤ 보이리다</li></ul></div><div class="question-item"><div class="question-stem">4. 다음 <보기>의 밑줄 친 단어 중 품사가 형용사인 것은?</div><div class="question-box"><보기>
+① 나 **보기**가 역겨워
+② 말없이 **고이** 보내 드리우리다
+③ 응오가 **아닌가**
+④ **바로** 이때였다
+⑤ **참** 이상한 일이었다</div><ul class="choices"><li class="choice-item">① 보기 (명사)</li><li class="choice-item">② 바로 (부사)</li><li class="choice-item">③ 아닌가 (형용사)</li><li class="choice-item">④ 참 (부사)</li><li class="choice-item">⑤ 고이 (부사)</li></ul></div><div class="question-item"><div class="question-stem">5. 다음 <보기>의 단어를 형태소로 분석할 때, 실질 형태소가 포함된 개수가 다른 하나는?</div><div class="question-box"><보기>
+① 맨손
+② 풋사과
+③ 짓밟다
+④ 밤나무
+⑤ 먹다</div><ul class="choices"><li class="choice-item">① 먹다</li><li class="choice-item">② 짓밟다</li><li class="choice-item">③ 맨손</li><li class="choice-item">④ 풋사과</li><li class="choice-item">⑤ 밤나무</li></ul></div><div class="question-item"><div class="question-stem">6. (가)의 '진달래꽃'이 가지는 시적 기능으로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 계절적 배경을 알려주는 단순한 소재</li><li class="choice-item">② 임을 떠나보내고 싶지 않은 화자의 집착</li><li class="choice-item">③ 임의 앞길을 축복하는 화자의 희생적 사랑</li><li class="choice-item">④ 화자의 가난한 처지를 상징하는 사물</li><li class="choice-item">⑤ 임을 향한 화자의 원망과 복수심</li></ul></div><div class="question-item"><div class="question-stem">7. (나)의 공간적 배경인 '논'이 가지는 상징적 의미로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 농민들의 삶의 터전이자 수탈과 모순의 현장</li><li class="choice-item">② 도둑을 잡기 위해 설치한 함정의 공간</li><li class="choice-item">③ 자연의 아름다움을 만끽할 수 있는 휴식의 공간</li><li class="choice-item">④ 응칠이가 과거의 잘못을 뉘우치는 참회의 공간</li><li class="choice-item">⑤ 형제가 화해하고 우애를 다지는 평화로운 공간</li></ul></div><div class="question-item"><div class="question-stem">8. (가)의 화자와 (나)의 응칠이 가질 법한 공통된 정서로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 상대방에 대한 강한 분노와 적개심</li><li class="choice-item">② 미래에 대한 막연한 희망과 기대</li><li class="choice-item">③ 현실에 안주하며 만족을 느끼는 평온함</li><li class="choice-item">④ 자신의 처지를 비관하며 느끼는 무력감</li><li class="choice-item">⑤ 사랑하는 대상을 지키지 못하는 안타까움과 슬픔</li></ul></div><div class="question-item"><div class="question-stem">9. (가)의 '반어법'이 사용된 시행을 찾아 쓰고, 그 의미를 서술하시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div><div class="question-item"><div class="question-stem">10. (나)에서 '응오'가 자신의 벼를 훔친 이유를 당시 농촌 현실과 관련지어 30자 내외로 서술하시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div></div><div class="passage-box"><div class="passage-text">시장에서 물건의 가격은 어떻게 결정될까? 이것은 '수요'와 '공급'의 상호작용으로 설명할 수 있다. '수요'란 소비자가 어떤 가격에 재화나 서비스를 구매하고자 하는 욕구를 말하고, '공급'은 생산자가 어떤 가격에 판매하고자 하는 욕구를 말한다.
+일반적으로 수요는 가격이 오르면 감소하고 가격이 내리면 증가한다. 이를 '수요의 법칙'이라고 한다. 반대로 공급은 가격이 오르면 이윤을 더 많이 남길 수 있으므로 증가하고, 가격이 내리면 감소한다. 이를 '공급의 법칙'이라고 한다. 시장에서는 사려는 사람(수요자)과 팔려는 사람(공급자)이 만나 거래가 이루어지는데, 수요량과 공급량이 일치하는 지점에서 가격이 결정된다. 이를 '균형 가격'이라고 한다.
+
+한편, 가격이 변할 때 수요량이나 공급량이 얼마나 민감하게 변하는지를 나타내는 개념이 있다. 바로 '가격 탄력성'이다. 가격 변화율에 비해 수요량 변화율이 더 크면 '탄력적'이라고 하고, 작으면 '비탄력적'이라고 한다.
+예를 들어, 쌀이나 소금 같은 생필품은 가격이 올라도 살 수밖에 없고, 가격이 내려도 많이 사둘 필요가 없으므로 수요량이 크게 변하지 않는다. 즉, 가격 탄력성이 비탄력적이다. 반면 보석이나 명품 가방 같은 사치품은 가격이 오르면 구매를 쉽게 포기하고, 가격이 내리면 수요가 급격히 늘어날 수 있다. 즉, 가격 탄력성이 탄력적이다.
+
+기업은 상품의 가격 탄력성을 고려하여 가격 정책을 세운다. 탄력적인 상품은 가격을 낮춰서 많이 파는 '박리다매' 전략이 유리하고, 비탄력적인 상품은 가격을 올려도 수요가 크게 줄지 않으므로 고가 전략을 쓰기도 한다. 이처럼 수요와 공급, 그리고 탄력성의 개념을 이해하면 우리 주변의 가격 변화를 더 잘 이해할 수 있다.
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">11. 윗글의 내용과 일치하지 않는 것은?</div><ul class="choices"><li class="choice-item">① 사치품은 가격 변화에 따른 수요량의 변화가 큰 편이다.</li><li class="choice-item">② 기업의 가격 정책은 해당 상품의 가격 탄력성에 영향을 받는다.</li><li class="choice-item">③ 균형 가격은 수요량과 공급량이 일치하는 지점에서 형성된다.</li><li class="choice-item">④ 쌀이나 소금 같은 생필품은 대체로 가격 탄력적이다.</li><li class="choice-item">⑤ 공급은 가격이 오르면 증가하는 경향이 있다.</li></ul></div><div class="question-item"><div class="question-stem">12. 윗글을 바탕으로 <보기>의 상황을 이해한 것으로 적절한 것은?</div><div class="question-box"><보기>
+A 기업은 신형 운동화를 출시하면서 가격을 10% 인하했다. 그랬더니 판매량이 30% 증가하여 전체 매출이 크게 늘었다.</div><ul class="choices"><li class="choice-item">① 이 운동화는 쌀이나 소금과 같은 필수품의 성격을 가진다.</li><li class="choice-item">② 이 운동화는 가격 변화에 둔감한 비탄력적인 상품이다.</li><li class="choice-item">③ 이 상황은 수요의 법칙이 적용되지 않는 예외적인 경우다.</li><li class="choice-item">④ 기업이 가격을 올렸다면 판매량이 더 늘었을 것이다.</li><li class="choice-item">⑤ 가격 인하율보다 판매량 증가율이 더 크므로 탄력적인 상품이다.</li></ul></div><div class="question-item"><div class="question-stem">13. 다음 문장의 빈칸에 들어갈 단어로 가장 적절한 것은?</div><div class="question-box">그는 자신의 이익을 (          )하기 위해 노력했다.</div><ul class="choices"><li class="choice-item">① 극렬화</li><li class="choice-item">② 극소화</li><li class="choice-item">③ 극적화</li><li class="choice-item">④ 극대화</li><li class="choice-item">⑤ 극한화</li></ul></div><div class="question-item"><div class="question-stem">14. 다음 <보기>의 밑줄 친 단어와 품사가 같은 것은?</div><div class="question-box"><보기>
+가격이 **오르면** 수요는 감소한다.</div><ul class="choices"><li class="choice-item">① 맑은 하늘</li><li class="choice-item">② 빠르게 달리다</li><li class="choice-item">③ 매우 크다</li><li class="choice-item">④ 밥을 먹다</li><li class="choice-item">⑤ 예쁜 꽃</li></ul></div><div class="question-item"><div class="question-stem">15. 다음 <보기>의 단어들 중 단어의 형성 방식(파생어/합성어)이 다른 하나는?</div><div class="question-box"><보기>
+① 밤나무
+② 풋사과
+③ 덮밥
+④ 고무신
+⑤ 힘들다</div><ul class="choices"><li class="choice-item">① 힘들다</li><li class="choice-item">② 덮밥</li><li class="choice-item">③ 고무신</li><li class="choice-item">④ 밤나무</li><li class="choice-item">⑤ 풋사과</li></ul></div><div class="question-item"><div class="question-stem">16. 윗글에서 설명하는 '균형 가격'의 형성과 관련된 설명으로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 정부가 물가 안정을 위해 지정한 가격</li><li class="choice-item">② 소비자가 희망하는 최저 가격</li><li class="choice-item">③ 사려는 양과 팔려는 양이 일치하는 지점의 가격</li><li class="choice-item">④ 공급자가 마음대로 정하는 가격</li><li class="choice-item">⑤ 생산 원가에 이윤을 더한 가격</li></ul></div><div class="question-item"><div class="question-stem">17. 윗글을 읽고 추론한 내용으로 적절하지 않은 것은?</div><ul class="choices"><li class="choice-item">① 겨울에 난방 수요가 늘어나면 난방용 기름 가격은 오를 것이다.</li><li class="choice-item">② 비탄력적인 상품일수록 기업은 가격을 낮추는 박리다매 전략을 쓸 것이다.</li><li class="choice-item">③ 가뭄으로 배추 수확이 줄어들면(공급 감소) 배추 가격은 오를 것이다.</li><li class="choice-item">④ 필수품일수록 가격 변동에 따른 소비량의 변화가 적을 것이다.</li><li class="choice-item">⑤ 생산 기술 발달로 물건을 많이 만들 수 있게 되면 가격은 내려갈 것이다.</li></ul></div><div class="question-item"><div class="question-stem">18. 윗글의 '수요의 법칙'에 대한 예시로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 월급이 올라서 외식을 더 자주 하게 되었다.</li><li class="choice-item">② 휘발유 가격이 내리자 주유소 사장님이 영업시간을 줄였다.</li><li class="choice-item">③ 배 가격이 오르자 사과를 대신 사 먹었다.</li><li class="choice-item">④ 날씨가 더워지자 에어컨 주문이 폭주했다.</li><li class="choice-item">⑤ 아이스크림 가격이 오르자 아이스크림을 덜 사 먹게 되었다.</li></ul></div><div class="question-item"><div class="question-stem">19. 윗글을 참고하여, '수요량과 가격이 반대 방향으로 움직인다'는 원리를 지칭하는 용어를 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div><div class="question-item"><div class="question-stem">20. 윗글을 바탕으로, 쌀이나 소금 같은 필수품의 가격 탄력성이 비탄력적인 이유를 30자 내외로 서술하시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div></div><div class="passage-box"><div class="passage-text">(가)
+넓은 벌 동쪽 끝으로
+옛이야기 지줄대는 실개천이 휘돌아 나가고,
+얼룩백이 황소가
+해설피 금빛 게으른 울음을 우는 곳,
+― 그곳이 차마 꿈엔들 잊힐 리야.
+
+질화로에 재가 식어지면
+비인 밭에 밤바람 소리 말을 달리고,
+엷은 졸음에 겨운 늙으신 아버지가
+짚베개를 돋아 고이시는 곳,
+― 그곳이 차마 꿈엔들 잊힐 리야.
+
+흙에서 자란 내 마음
+파아란 하늘빛이 그리워
+함부로 쏜 화살을 찾으러
+풀섶 이슬에 함추름 휘적시던 곳,
+― 그곳이 차마 꿈엔들 잊힐 리야.
+
+전설(傳說) 바다에 춤추는 밤물결 같은
+검은 귀밑머리 날리는 어린 누이와
+아무렇지도 않고 예쁠 것도 없는
+사철 발 벗은 아내가
+따가운 햇살을 등에 지고 이삭 줍던 곳,
+― 그곳이 차마 꿈엔들 잊힐 리야.
+
+하늘에는 성근 별
+알 수도 없는 모래성으로 발을 옮기고,
+서리 까마귀 우지짖고 지나가는 초라한 지붕,
+흐릿한 불빛에 돌아앉아 도란도란거리는 곳,
+― 그곳이 차마 꿈엔들 잊힐 리야.
+
+- 정지용, <향수(鄕愁)>
+
+(나)
+"닥터 리, 위대하오. 내 수술 솜씨는 제1전선 야전 병원에서 본 이후 처음이오."
+스텐코프는 엄지손가락을 쑥 내밀며 감탄에 마지않았다.
+이인국 박사는 스텐코프의 혹을 떼어 낸 수술을 성공적으로 마쳤던 것이다.
+(중략)
+이인국 박사는 회심의 미소를 지었다. 이제 소련군 점령 하에서도 살아남을 길이 열린 것이다. 그는 일제 시대에는 철저한 친일파로, 그리고 이제는 친소파로 변신에 성공했다.
+
+1·4 후퇴 때 남쪽으로 내려온 이인국 박사는 다시 새로운 길을 찾았다. 미군정이 시작되자 그는 능숙한 영어 실력을 발휘하여 미군 장교들과 친분을 쌓았다.
+"헬로, 캡틴 리. 닥터 리는 진정한 애국자요. 우리의 친구입니다."
+브라운 대사는 이인국 박사를 치켜세웠다. 이인국 박사는 브라운에게 고려청자를 선물하며 미국에 갈 수 있도록 주선해 줄 것을 부탁했다.
+"땡큐, 땡큐. 미국 국무성 초청 케이스로 갈 수 있도록 힘써 보리다."
+브라운의 확답을 듣자 이인국 박사는 안도의 숨을 내쉬었다. 딸 나미가 미국인 교수와 결혼하겠다고 했을 때 잠시 갈등했으나, 그는 곧 생각을 고쳐먹었다.
+'흥, 이왕이면 든든한 빽이 있는 게 낫지. 미국 사위, 나쁠 것 없잖아.'
+그는 창밖을 내다보며 중얼거렸다.
+"나보다 더 날뛰던 놈들도 있는데, 나쯤이야... 흥, 식민지 백성이 별수 있었어? 주는 떡을 안 먹는 놈이 바보지. 다 그놈이 그놈이었어."
+이인국 박사의 얼굴에는 시대의 격랑을 교묘하게 헤쳐 온 자만의 안도감과 비릿한 웃음이 서려 있었다.
+
+- 전광용, <꺼삐딴 리>
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">21. (가)에 대한 설명으로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① (가)는 후렴구를 반복하여 주제를 강조하고 운율을 형성한다.</li><li class="choice-item">② (가)와 (나)는 모두 시간에 따른 공간의 이동을 중심으로 서사가 전개된다.</li><li class="choice-item">③ (가)는 시각적 이미지만을, (나)는 청각적 이미지만을 사용하여 대상을 묘사한다.</li><li class="choice-item">④ (나)는 전지적 작가 시점을 통해 주인공의 내면 심리를 서술자가 직접 제시하지 않고 대화로만 보여준다.</li><li class="choice-item">⑤ (가)는 현실 비판적 태도를, (나)는 목가적이고 평화로운 분위기를 드러낸다.</li></ul></div><div class="question-item"><div class="question-stem">22. (나)의 '이인국 박사'에 대한 평가로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 시대의 변화에 순응하며 도덕적 가치를 지키려고 노력한 인물이다.</li><li class="choice-item">② 자신의 영달을 위해 권력의 흐름에 민감하게 반응하는 기회주의적 인물이다.</li><li class="choice-item">③ 민족의 비극적 현실을 고뇌하며 지식인으로서의 책무를 다하려 한 인물이다.</li><li class="choice-item">④ 가족을 위해 자신의 신념을 희생할 수밖에 없었던 비운의 가장이다.</li><li class="choice-item">⑤ 외세의 침략에 맞서 끝까지 저항 정신을 잃지 않은 의지적 인물이다.</li></ul></div><div class="question-item"><div class="question-stem">23. 다음 문장의 빈칸에 들어갈 단어로 적절하지 않은 것은?</div><div class="question-box">그는 자신의 행동을 (          )하기 위해 갖은 핑계를 댔다.</div><ul class="choices"><li class="choice-item">① 옹호</li><li class="choice-item">② 강화</li><li class="choice-item">③ 변호</li><li class="choice-item">④ 정당화</li><li class="choice-item">⑤ 합리화</li></ul></div><div class="question-item"><div class="question-stem">24. 다음 <보기>의 설명을 바탕으로 할 때, 시어 '풀섶'의 표준 발음과 관련된 음운 현상으로 적절한 것은?</div><div class="question-box"><보기>
+음운의 변동에는 교체, 탈락, 첨가, 축약이 있다. 그중 '풀섶'은 [풀섭]으로 발음된다.</div><ul class="choices"><li class="choice-item">① 음절의 끝소리 규칙 (교체)</li><li class="choice-item">② ㄴ첨가 (첨가)</li><li class="choice-item">③ 거센소리되기 (축약)</li><li class="choice-item">④ 두음 법칙 (교체)</li><li class="choice-item">⑤ 자음군 단순화 (탈락)</li></ul></div><div class="question-item"><div class="question-stem">25. 다음 <보기>는 훈민정음의 제자 원리에 대한 설명이다. ㉠과 ㉡에 해당하는 글자로 적절하게 짝지어진 것은?</div><div class="question-box"><보기>
+자음의 기본자는 발음 기관의 모양을 본떠 만들었다(상형). 여기에 획을 하나씩 더하여 소리가 세지는 글자(가획자)를 만들었다.
+- 기본자: ㄱ, ㄴ, ㅁ, ㅅ, ㅇ
+- 가획자 예시: ㉠, ㉡</div><ul class="choices"><li class="choice-item">① ㉠: ㅋ, ㉡: ㅌ</li><li class="choice-item">② ㉠: ㄲ, ㉡: ㄸ</li><li class="choice-item">③ ㉠: ㅁ, ㉡: ㅂ</li><li class="choice-item">④ ㉠: ㄹ, ㉡: ㅿ</li><li class="choice-item">⑤ ㉠: ㅏ, ㉡: ㅑ</li></ul></div><div class="question-item"><div class="question-stem">26. (가)의 시어 중 '공감각적 이미지'가 사용된 부분으로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 서리 까마귀 우지짖고 지나가는 초라한 지붕</li><li class="choice-item">② 풀섶 이슬에 함추름 휘적시던 곳</li><li class="choice-item">③ 파아란 하늘빛이 그리워</li><li class="choice-item">④ 해설피 금빛 게으른 울음</li><li class="choice-item">⑤ 옛이야기 지줄대는 실개천</li></ul></div><div class="question-item"><div class="question-stem">27. (나)에서 '이인국 박사'가 영어를 사용하고 고려청자를 선물하는 의도로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 새로운 권력인 미국 세력에 밀착하여 자신의 안위를 보장받기 위해</li><li class="choice-item">② 미국의 선진 문화를 배워 조국의 발전에 기여하기 위해</li><li class="choice-item">③ 한국의 전통문화를 세계에 널리 알리는 문화사절단이 되기 위해</li><li class="choice-item">④ 딸의 결혼을 반대하는 마음을 돌려서 사위를 환대하기 위해</li><li class="choice-item">⑤ 자신의 과거 친일 행적을 진심으로 반성하고 사과하기 위해</li></ul></div><div class="question-item"><div class="question-stem">28. (가)의 '고향'과 (나)의 '이인국 박사'에게 부족한 점을 연결하여 비판할 때 가장 적절한 속담은?</div><ul class="choices"><li class="choice-item">① 개천에서 용 난다 - 어려운 환경에서 훌륭한 사람이 되었다.</li><li class="choice-item">② 등잔 밑이 어둡다 - 가까운 곳의 사정을 잘 모른다.</li><li class="choice-item">③ 수구초심(首丘初心) - 고향을 그리워하는 마음이 없다.</li><li class="choice-item">④ 초록은 동색 - 끼리끼리 어울린다.</li><li class="choice-item">⑤ 감탄고토(甘呑苦吐) - 달면 삼키고 쓰면 뱉는 이기적인 태도</li></ul></div><div class="question-item"><div class="question-stem">29. (가)에서 '청각의 시각화'가 나타난 구절을 찾아 쓰고, 원관념과 보조관념을 서술하시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div><div class="question-item"><div class="question-stem">30. (나)에서 '꺼삐딴 리'라는 제목이 갖는 반어적 의미를 이인국 박사의 인물 유형과 관련지어 30자 내외로 서술하시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div></div><div class="passage-box"><div class="passage-text">우리가 살아가는 데 필요한 다양한 권리 중 재산권은 크게 '물권(物權)'과 '채권(債權)'으로 나뉜다.
+'물권'은 문자 그대로 특정한 물건을 직접 지배하여 이익을 얻을 수 있는 배타적인 권리다. 대표적인 예로 소유권이 있다. 내 소유인 자전거는 누구의 간섭도 받지 않고 내가 마음대로 사용하거나 처분할 수 있고, 누구에게나 "이건 내 거야"라고 주장할 수 있다. 이처럼 물권은 세상 모든 사람에게 자신의 권리를 주장할 수 있어 '절 대권'이라고도 불린다.
+반면 '채권'은 특정한 사람(채권자)이 다른 특정한 사람(채무자)에게 일정한 행위(급부)를 요구할 수 있는 권리다. 친구에게 돈을 빌려줬다면 나는 친구에게 돈을 갚으라고 요구할 수 있는 채권을 가진다. 하지만 이 권리는 오직 돈을 빌려 간 친구에게만 행사할 수 있지, 다른 친구에게 대신 갚으라고 요구할 수는 없다. 이처럼 채권은 특정한 상대방에게만 주장할 수 있어 '상대권'이라고 한다.
+
+물권과 채권이 충돌하면 원칙적으로 물권이 우선한다. 이를 '물권 우선주의'라고 한다. 예를 들어, 내가 전세를 살고 있는 집(임차권=채권)을 집주인이 다른 사람에게 팔아버리면, 새로운 집주인(소유권=물권)에게는 임차권을 주장하기 어려울 수 있다. 그래서 법은 등기와 같은 제도를 통해 채권을 물권처럼 보호받을 수 있는 장치를 마련해 두기도 한다.
+
+또한 채권자에게는 자신의 채권을 지키기 위해 채무자의 권리를 대신 행사할 수 있는 '채권자 대위권' 같은 특수한 권리도 주어진다. 이는 채무자가 빚을 갚을 능력이 있는데도 자신의 권리를 행사하지 않아 채권자가 돈을 돌려받지 못할 위험이 있을 때, 채권자가 채무자를 대신하여 그 권리를 행사하는 것이다. 이처럼 법은 다양한 권리 관계의 균형을 맞추기 위해 정교하게 설계되어 있다.
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">31. 윗글의 내용과 일치하는 것은?</div><ul class="choices"><li class="choice-item">① 물권과 채권이 충돌하면 원칙적으로 채권이 우선한다.</li><li class="choice-item">② 소유권은 물건을 배타적으로 지배할 수 있는 대표적인 물권이다.</li><li class="choice-item">③ 채권은 모든 사람에게 주장할 수 있는 절대적인 권리이다.</li><li class="choice-item">④ 물권은 특정한 사람에게 어떤 행위를 요구하는 권리이다.</li><li class="choice-item">⑤ 채권자 대위권은 채무자의 재산이 넉넉할 때만 행사할 수 있다.</li></ul></div><div class="question-item"><div class="question-stem">32. 윗글을 바탕으로 <보기>의 상황을 판단한 내용으로 적절하지 않은 것은?</div><div class="question-box"><보기>
+철수는 영희에게 100만 원을 빌려주었다(채권). 영희는 갚을 돈이 없다고 버티고 있지만, 사실 영희는 민수에게 받을 돈 200만 원이 있다. 그런데도 영희는 민수에게 돈을 달라고 하지 않고 있다.</div><ul class="choices"><li class="choice-item">① 철수는 직접 민수에게 찾아가 '내 돈 100만 원을 내놓으라'고 강제로 빼앗을 수 있는 물권이 있다.</li><li class="choice-item">② 영희는 민수에게 돈을 받을 권리, 즉 채권을 가지고 있다.</li><li class="choice-item">③ 영희가 권리를 행사하지 않으므로 철수는 영희를 대신해 민수에게 돈을 청구할 수 있는 '채권자 대위권'을 고려할 수 있다.</li><li class="choice-item">④ 철수는 영희에게 돈을 갚으라고 요구할 수 있는 채권자이다.</li><li class="choice-item">⑤ 철수의 채권은 영희라는 특정한 사람에게만 행사하는 것이 원칙이다.</li></ul></div><div class="question-item"><div class="question-stem">33. 다음 문장의 빈칸에 들어갈 단어로 가장 적절한 것은?</div><div class="question-box">그는 자신의 권리를 (          )으로 행사했다.</div><ul class="choices"><li class="choice-item">① 보편적</li><li class="choice-item">② 배타적</li><li class="choice-item">③ 의존적</li><li class="choice-item">④ 상대적</li><li class="choice-item">⑤ 이타적</li></ul></div><div class="question-item"><div class="question-stem">34. 다음 <보기>의 단어들을 '조음 위치'에 따라 분류할 때, 이질적인 하나는?</div><div class="question-box"><보기>
+① **권**리
+② **경**우
+③ **균**형
+④ **관**계
+⑤ **도**로</div><ul class="choices"><li class="choice-item">① 도 (ㄷ, 잇몸소리) - 정답</li><li class="choice-item">② 권 (ㄱ, 연구개음)</li><li class="choice-item">③ 관 (ㄱ, 연구개음)</li><li class="choice-item">④ 경 (ㄱ, 연구개음)</li><li class="choice-item">⑤ 균 (ㄱ, 연구개음)</li></ul></div><div class="question-item"><div class="question-stem">35. 다음 <보기>의 설명을 참고할 때, '가획의 원리'에 의해 만들어진 글자가 아닌 것은?</div><div class="question-box"><보기>
+훈민정음 자음의 기본자(ㄱ, ㄴ, ㅁ, ㅅ, ㅇ)에 획을 더하여 소리의 세기를 나타낸 글자를 가획자라고 한다.</div><ul class="choices"><li class="choice-item">① ㄷ (ㄴ에 가획)</li><li class="choice-item">② ㅊ (ㅈ에 가획)</li><li class="choice-item">③ ㅋ (ㄱ에 가획)</li><li class="choice-item">④ ㄹ (이체자) - 정답</li><li class="choice-item">⑤ ㅍ (ㅁ에서 ㅂ, 다시 ㅍ으로 가획 계열)</li></ul></div><div class="question-item"><div class="question-stem">36. 윗글에서 '물권'의 특성으로 언급되지 않은 것은?</div><ul class="choices"><li class="choice-item">① 우선성(물권 우선주의)</li><li class="choice-item">② 상대성</li><li class="choice-item">③ 절대성</li><li class="choice-item">④ 직접 지배성</li><li class="choice-item">⑤ 배타성</li></ul></div><div class="question-item"><div class="question-stem">37. 윗글을 통해 알 수 있는 사실은?</div><ul class="choices"><li class="choice-item">① 소유권은 특정한 사람에게만 주장할 수 있는 권리이다.</li><li class="choice-item">② 등기는 채권을 물권처럼 강력하게 보호하기 위한 수단이 될 수 있다.</li><li class="choice-item">③ 임차권은 대표적인 물권의 일종이다.</li><li class="choice-item">④ 채권자는 채무자의 동의 없이는 어떤 경우에도 채무자의 권리를 대신 행사할 수 없다.</li><li class="choice-item">⑤ 물권은 당사자 간의 계약으로 자유롭게 새로운 종류를 만들 수 있다.</li></ul></div><div class="question-item"><div class="question-stem">38. 다음 중 '채권'의 성격에 가장 가까운 예시는?</div><ul class="choices"><li class="choice-item">① 헬스장 관장님에게 환불을 요구했다.</li><li class="choice-item">② 주운 지갑의 주인을 찾아 돌려주었다.</li><li class="choice-item">③ 서점에서 책을 사서 내 책장에 꽂아 두었다.</li><li class="choice-item">④ 내가 산 노트북을 중고 장터에 팔았다.</li><li class="choice-item">⑤ 내 밭에 옥수수를 심어 수확했다.</li></ul></div><div class="question-item"><div class="question-stem">39. 윗글을 바탕으로, 물권이 채권보다 강력한 권리로 취급받는 이유인 '누구에게나 자신의 권리를 주장할 수 있는 성질'을 가리키는 3음절 단어를 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div><div class="question-item"><div class="question-stem">40. 윗글을 바탕으로 '채권자 대위권'이 필요한 이유를 30자 내외로 서술하시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div></div><div class="passage-box"><div class="passage-text">(가)
+동짓(冬至)달 기나긴 밤을 한 허리를 버혀 내여
+춘풍(春風) 니불 아레 서리서리 너헛다가
+어론 님 오신 날 밤이여든 구뷔구뷔 펴리라
+
+- 황진이
+
+(나)
+창(窓) 내고쟈 창을 내고쟈 이 내 가슴에 창 내고쟈
+고모장지 셰살장지 들장지 열장지 암돌져귀 수돌져귀 배목걸새 크나큰 장도리로 뚝딱 박아 이 내 가슴에 창 내고쟈
+잇다감 하 답답할 제면 여다져 볼가 하노라
+
+- 작자 미상
+
+(다)
+용왕이 대경(大驚)하야,
+"네 이놈 토끼야! 네가 이리 미련하단 말이냐? 사람이나 짐승이나 뱃속에 간이 들었거늘, 어찌 네놈은 간이 출입한단 말이냐? 네 말이 당토치 않은지라, 당장 네 배를 갈라 간을 보리라."
+하고 도부수(刀斧手)를 호령하니, 토끼란 놈이 긍경이나 할 놈이냐. 토끼 뱃속에 무엇이 꽉 찼는지 모르되, 제 꾀를 믿고 눈 하나 깜짝 아니 하고 썩 나서며,
+"아서라 왕(王)이야, 내 간 산 곳을 들어라. 간이라 하는 것은 보화(寶貨)라. 뱃속에 넣고 다니면 더운 뱃속에 썩기도 쉽고, 남의 눈에 띄면 끄집어 가기도 하는 고로 의구한 신선들이 바둑 두는 바위 아래 샘물 속에 깨끗이 씻어 심청 반석 위에 고이 얹어 두고 왔나니라."
+(중략)
+"왕은 그리 아오. 간을 내어다가 씻어서 방석 위에 널어 두고, 소신(小臣)의 배는 텅 비었으니 무엇을 가지고 와 약에 쓰려 하시오? 만약에 소신의 배를 갈라 보아 간이 있으면 좋거니와, 만일에 간이 없으면 불쌍하고 무죄한 소신만 죽을 뿐 아니라, 왕의 병도 차도가 없으리니 이 일을 어찌 하오리까?"
+용왕이 듣고 보니 그럴듯한지라, 토끼를 짐짓 다시 달래어 말하기를,
+"그러면 네가 육지로 나가서 간을 가지고 오겠느냐?"
+토끼가 대답하되,
+"소신이 비록 간은 육지에 두고 왔으나 목숨은 여기 있사오니, 왕의 병환이 나으실진대 어찌 간을 아끼오리까."
+하니 용왕이 크게 기뻐하여 잔치를 베풀고 토끼를 육지로 보내 주기로 하였더라.
+
+- 작자 미상, <수궁가(水宮歌)>
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">41. (가)~(다)에 대한 설명으로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① (가)와 (나)는 모두 중장과 종장의 길이가 제한 없이 길어진 사설시조이다.</li><li class="choice-item">② (다)는 서술자가 개입하지 않고 인물의 대화로만 사건이 전개되는 극 갈래이다.</li><li class="choice-item">③ (나)는 구체적인 사물들을 나열하여 화자의 답답한 심정을 해학적으로 표현하고 있다.</li><li class="choice-item">④ (나)와 (다)는 모두 양반 계층의 허위의식을 비판하는 것을 주된 목적으로 한다.</li><li class="choice-item">⑤ (가)와 (다)는 모두 의인화된 동물을 등장시켜 인간 세상을 풍자하고 있다.</li></ul></div><div class="question-item"><div class="question-stem">42. (가)의 '밤'과 (다)의 '간'에 대한 이해로 적절한 것은?</div><ul class="choices"><li class="choice-item">① '밤'은 화자가 피하고 싶은 부정적 시간이고, '간'은 용왕에게 불필요한 물건이다.</li><li class="choice-item">② '밤'은 임의 부재를 상징하고, '간'은 용왕의 권위를 상징한다.</li><li class="choice-item">③ '밤'은 임과 함께하고 싶은 긍정적 시간으로 변용 가능하며, '간'은 토끼와 용왕 모두에게 생명과 직결된 중요한 대상이다.</li><li class="choice-item">④ '밤'과 '간'은 모두 현실에서 존재하지 않는 환상적인 소재이다.</li><li class="choice-item">⑤ '밤'은 절대적인 길이를 가진 물리적 시간이고, '간'은 토끼가 숨길 수 있는 물리적 신체 부위이다.</li></ul></div><div class="question-item"><div class="question-stem">43. (다)의 밑줄 친 '미련하다'와 문맥적 의미가 가장 유사한 것은?</div><div class="question-box">네가 이리 **미련하단** 말이냐?</div><ul class="choices"><li class="choice-item">① 지난 일에 **미련** 갖지 마라.</li><li class="choice-item">② 그는 옛사랑에 **미련**이 남았다.</li><li class="choice-item">③ 그 사람은 곰처럼 **미련해서** 눈치라곤 없다.</li><li class="choice-item">④ 아직도 **미련**을 버리지 못했니?</li><li class="choice-item">⑤ 떠나는 마당에 무슨 **미련**을 두느냐</li></ul></div><div class="question-item"><div class="question-stem">44. 다음 <보기>의 단어에서 일어나는 음운 변동 현상으로 적절한 것은?</div><div class="question-box"><보기>
+**동짓달** [동/짇/딸]</div><ul class="choices"><li class="choice-item">① 구개음화, 음절의 끝소리 규칙</li><li class="choice-item">② 음절의 끝소리 규칙, 비음화</li><li class="choice-item">③ 자음군 단순화, 된소리되기</li><li class="choice-item">④ 음절의 끝소리 규칙, 된소리되기</li><li class="choice-item">⑤ 유음화, 된소리되기</li></ul></div><div class="question-item"><div class="question-stem">45. 다음 <보기>의 밑줄 친 문장의 짜임에 대한 설명으로 적절한 것은?</div><div class="question-box"><보기>
+이것은 **우리가 먹을** 사과다.</div><ul class="choices"><li class="choice-item">① 서술절을 안은문장</li><li class="choice-item">② 부사절을 안은문장</li><li class="choice-item">③ 인용절을 안은문장</li><li class="choice-item">④ 관형절을 안은문장</li><li class="choice-item">⑤ 명사절을 안은문장</li></ul></div><div class="question-item"><div class="question-stem">46. (가)에서 '추상적 개념의 구체화'가 가장 잘 드러난 구절은?</div><ul class="choices"><li class="choice-item">① 춘풍 니불 아레</li><li class="choice-item">② 어론 님 오신 날</li><li class="choice-item">③ 한 허리를 버혀 내여</li><li class="choice-item">④ 동짓달 기나긴 밤</li><li class="choice-item">⑤ 구뷔구뷔 펴리라</li></ul></div><div class="question-item"><div class="question-stem">47. (다)의 '용왕'의 태도로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 신하들의 반대에도 불구하고 독단적으로 결정을 내리는 카리스마를 보여준다.</li><li class="choice-item">② 자신의 권력을 이용해 약자를 무조건 힘으로 억누르려는 폭력성을 보인다.</li><li class="choice-item">③ 상대방의 뛰어난 언변과 지혜를 인정하고 겸손하게 배움을 청하고 있다.</li><li class="choice-item">④ 상대방의 거짓말을 이미 알고 있지만 재미를 위해 모른 척하고 있다.</li><li class="choice-item">⑤ 상대방의 말을 의심하면서도 자신의 병을 고치려는 욕심 때문에 속아 넘어가고 있다.</li></ul></div><div class="question-item"><div class="question-stem">48. 다음은 (가)에 대한 평론이다. 빈칸에 들어갈 한자 성어로 가장 적절한 것은?</div><div class="question-box">황진이는 임을 기다리는 간절한 마음을 (          )이라는 말처럼, 하루가 천 년 같은 긴 시간으로 느끼며 절절하게 표현하고 있다.</div><ul class="choices"><li class="choice-item">① 사면초가(四面楚歌)</li><li class="choice-item">② 일각여삼추(一刻如三秋)</li><li class="choice-item">③ 동병상련(同病相憐)</li><li class="choice-item">④ 오비이락(烏飛梨落)</li><li class="choice-item">⑤ 전화위복(轉禍爲福)</li></ul></div><div class="question-item"><div class="question-stem">49. (나)에서 자신의 답답한 심정을 해소하고 싶은 소망을 드러내기 위해 사용한 매개체가 무엇인지 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div><div class="question-item"><div class="question-stem">50. (다)에서 토끼가 용왕을 속이기 위해 내세운 논리를 30자 내외로 서술하시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div></div><div class="passage-box"><div class="passage-text">우리가 어떤 새로운 사실을 알게 되거나 주장을 펼칠 때, 논리적인 근거를 들어 설명하는 과정을 '추론'이라고 한다. 대표적인 추론 방식으로는 '연역법'과 '귀납법'이 있다.
+
+'연역법'은 이미 알고 있는 일반적인 원리나 법칙(대전제)을 바탕으로 구체적인 사실(소전제)을 대입하여 새로운 결론을 이끌어내는 방식이다. 가장 유명한 예는 다음과 같다.
+대전제: 모든 사람은 죽는다.
+소전제: 소크라테스는 사람이다.
+결론: 그러므로 소크라테스는 죽는다.
+연역법의 가장 큰 특징은 전제가 참이라면 결론도 반드시 참이라는 '필연성'을 가진다는 것이다. 하지만 대전제 자체가 잘못되었다면 결론도 틀릴 수 있으며, 이미 전제 속에 포함된 내용을 확인하는 것이어서 새로운 지식을 확장하는 데에는 한계가 있다.
+
+반면 '귀납법'은 여러 가지 구체적인 사실이나 경험을 관찰하여 그 속에 담긴 공통적인 법칙을 찾아내어 일반적인 결론을 도출하는 방식이다.
+관찰 1: 어제 뜬 해는 서쪽으로 졌다.
+관찰 2: 오늘 뜬 해도 서쪽으로 졌다.
+...
+결론: 그러므로 모든 해는 서쪽으로 질 것이다.
+귀납법은 우리의 지식을 넓히는 데 유용하지만, 결론이 참일 개연성(가능성)이 높을 뿐 '필연적'으로 참은 아니라는 한계가 있다. 단 하나의 반례(예외)만 나타나도 결론이 거짓이 될 수 있기 때문이다. 예를 들어, 오랫동안 모든 백조는 희다고 믿었지만 검은 백조(블랙 스완)가 발견되면서 그 결론이 깨진 것이 대표적이다.
+
+이처럼 연역법과 귀납법은 서로 다른 방향으로 사고를 전개하지만, 상호 보완적으로 작용하며 인류의 지식을 발전시켜 왔다.
+</div></div><div class="questions"><div class="question-item"><div class="question-stem">51. 윗글의 내용과 일치하지 않는 것은?</div><ul class="choices"><li class="choice-item">① 연역법은 새로운 지식을 크게 확장하는 데에는 한계가 있을 수 있다.</li><li class="choice-item">② 귀납법은 단 하나의 반례만 있어도 결론이 거짓이 될 수 있다.</li><li class="choice-item">③ 연역법은 일반적인 원리에서 구체적인 사실을 이끌어낸다.</li><li class="choice-item">④ 추론은 논리적인 근거를 들어 설명하는 과정이다.</li><li class="choice-item">⑤ 귀납법은 전제가 참이면 결론도 항상 반드시 참이 된다.</li></ul></div><div class="question-item"><div class="question-stem">52. 윗글을 바탕으로 <보기>의 추론 방식을 판단할 때 적절한 것은?</div><div class="question-box"><보기>
+A: 까마귀는 날 수 있다.
+B: 독수리도 날 수 있다.
+C: 참새도 날 수 있다.
+결론: 그러므로 모든 새는 날 수 있다.</div><ul class="choices"><li class="choice-item">① 연역법이며, 결론은 필연적으로 참이다.</li><li class="choice-item">② 귀납법이며, 많은 사례를 관찰했으므로 결론은 반드시 참이다.</li><li class="choice-item">③ 연역법과 귀납법이 혼합된 방식이다.</li><li class="choice-item">④ 귀납법이며, 펭귄이나 타조 같은 반례가 있으므로 결론이 틀릴 수 있다.</li><li class="choice-item">⑤ 연역법이며, 대전제가 잘못되었으므로 결론도 거짓이다.</li></ul></div><div class="question-item"><div class="question-stem">53. 다음 문장의 빈칸에 들어갈 단어로 가장 적절한 것은?</div><div class="question-box">귀납법은 결론이 참일 (          )이 높을 뿐이다.</div><ul class="choices"><li class="choice-item">① 우연성</li><li class="choice-item">② 당위성</li><li class="choice-item">③ 개연성</li><li class="choice-item">④ 특수성</li><li class="choice-item">⑤ 필연성</li></ul></div><div class="question-item"><div class="question-stem">54. 다음 <보기>의 밑줄 친 단어에서 일어나는 음운 변동에 대한 설명으로 옳은 것은?</div><div class="question-box"><보기>
+연역법의 **법칙**[법칙]은 중요하다.
+이 **백조**[백쪼]는 하얗다.</div><ul class="choices"><li class="choice-item">① '백조'는 모음 사이에서 된소리가 되므로 사잇소리 현상에 해당한다.</li><li class="choice-item">② '백조'의 'ㄱ' 받침 뒤에서 'ㅈ'이 된소리 [ㅉ]으로 발음되므로 된소리되기(교체)이다.</li><li class="choice-item">③ '법칙'과 '백조' 모두 음절의 끝소리 규칙이 적용되었다.</li><li class="choice-item">④ '법칙'은 원래 된소리로 발음되므로 음운 변동이 아니다.</li><li class="choice-item">⑤ '법칙'의 'ㅂ' 받침 뒤에서 'ㅊ'이 거센소리 [ㅊ]으로 발음되므로 축약이다.</li></ul></div><div class="question-item"><div class="question-stem">55. 다음 <보기>의 문장에서 '안긴문장'의 종류와 기능이 올바르게 연결된 것은?</div><div class="question-box"><보기>
+우리는 **그 말이 사실임**을 알았다.</div><ul class="choices"><li class="choice-item">① 관형절 - 주어 역할</li><li class="choice-item">② 명사절 - 주어 역할</li><li class="choice-item">③ 부사절 - 부사어 역할</li><li class="choice-item">④ 명사절 - 목적어 역할</li><li class="choice-item">⑤ 관형절 - 목적어 역할</li></ul></div><div class="question-item"><div class="question-stem">56. 윗글을 통해 '연역법'의 한계점으로 지적할 수 있는 것은?</div><ul class="choices"><li class="choice-item">① 전제 속에 이미 결론이 포함되어 있어 새로운 지식 확장에 제한적이다.</li><li class="choice-item">② 결론이 필연적으로 참이 아닐 수 있다.</li><li class="choice-item">③ 많은 사례를 관찰해야 하는 번거로움이 있다.</li><li class="choice-item">④ 과학적 탐구 방법으로 사용하기에는 부적절하다.</li><li class="choice-item">⑤ 개별적인 사실들로부터 공통점을 찾아내기가 어렵다.</li></ul></div><div class="question-item"><div class="question-stem">57. 윗글의 '검은 백조(블랙 스완)'가 의미하는 바로 가장 적절한 것은?</div><ul class="choices"><li class="choice-item">① 연역법의 대전제가 절대적으로 옳음을 증명하는 사례</li><li class="choice-item">② 자연의 신비와 아름다움을 상징하는 희귀한 동물</li><li class="choice-item">③ 과학 기술의 발달로 인해 새롭게 탄생한 생명체</li><li class="choice-item">④ 인류의 지식이 더 이상 발전할 수 없음을 나타내는 한계</li><li class="choice-item">⑤ 귀납적 결론이 언제든지 거짓이 될 수 있음을 보여주는 반례</li></ul></div><div class="question-item"><div class="question-stem">58. 다음 중 성격이 다른 하나는?</div><ul class="choices"><li class="choice-item">① 제주도의 까마귀는 검다.</li><li class="choice-item">② 모든 지역의 까마귀는 검다.</li><li class="choice-item">③ 부산의 까마귀는 검다.</li><li class="choice-item">④ 강원도의 까마귀는 검다.</li><li class="choice-item">⑤ 서울의 까마귀는 검다.</li></ul></div><div class="question-item"><div class="question-stem">59. 윗글에서 설명한 '연역법'과 '귀납법' 중 전제가 참일 때 결론도 반드시 참이 되는 추론 방식을 쓰시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div><div class="question-item"><div class="question-stem">60. 윗글을 바탕으로, 귀납법의 결론이 100% 확실하지 않은 이유를 '반례'라는 단어를 사용하여 30자 내외로 서술하시오.</div><div class="choices" style="border: 1px dashed #ccc; padding: 10px; color: #555;">(서술형 답안을 작성하세요)</div></div></div><div class="page-break"></div><h2>정답 및 해설</h2><h3>R1_LIT_P1 (문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>1번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 논리 사고력:-3]</span></div><div><span class='badge badge-wrong'>②</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 국어 관련 배경지식:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 국어 관련 배경지식:10]</span></div><div><span class='badge badge-wrong'>④</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 구조 독해력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-4, 문장 독해력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>2번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 논리 사고력:-3]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>④</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 논리 사고력:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>3번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 ('드리우다'는 늘어뜨린다는 뜻으로 눈물을 흘리는 행위와 어울리지 않음, '드리우리다'는 본문 1연 '보내 드리우리다'에서 쓰인 표현) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>②</span> 부정형 문항 오독: 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 문맥 부적합 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 부정형 문항 오독: 유의어 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 어휘 범주 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>4번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> '보다'의 명사형이지만 여기서는 문장의 목적어 역할을 하므로 명사로 볼 수도 있으나, 문제 의도상 동사의 명사형 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>②</span> 부사 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-correct'>③</span> '아니다'는 형용사임. 정답 (나머지는 명사/부사/관형사 등 다른 품사들과의 구별) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>④</span> 부사 (1) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>⑤</span> '곱다'에서 파생된 부사 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>5번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 먹(어간-실질) + 다(어미-형식) -> 실질 1개 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>②</span> 짓(접사-형식) + 밟(어근-실질) + 다(어미-형식) -> 실질 1개 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>③</span> 맨(접사-형식) + 손(어근-실질) -> 실질 1개 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>④</span> 풋(접사-형식) + 사과(어근-실질) -> 실질 1개 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-correct'>⑤</span> 정답: 밤(명사-실질) + 나무(명사-실질) -> 실질 2개 (합성어) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 개념 적용 능력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>6번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 구조 독해력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 관련 배경지식:-2]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 국어 관련 배경지식:10]</span></div><div><span class='badge badge-wrong'>④</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 논리 사고력:-3]</span></div><div><span class='badge badge-wrong'>⑤</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 국어 관련 배경지식:-4]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>7번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 국어 관련 배경지식:10]</span></div><div><span class='badge badge-wrong'>②</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 구조 독해력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 국어 관련 배경지식:-5]</span></div><div><span class='badge badge-wrong'>④</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 구조 독해력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>8번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 구조 독해력:-3]</span></div><div><span class='badge badge-wrong'>②</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 논리 사고력:-3]</span></div><div><span class='badge badge-wrong'>③</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>④</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody></table>
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>9번</td>
+                    <td>'죽어도 아니 눈물 흘리우리다' / 겉으로는 눈물을 흘리지 않겠다고 했지만, 속으로는 매우 슬퍼서 통곡하고 싶다는 의미를 강조한 것이다.</td>
+                    <td><div>- '죽어도 아니 눈물 흘리우리다'를 썼는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10]</span></div><div>- 슬픔을 참겠다는 의미 혹은 슬픔을 강조한다는 의미를 서술했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 국어 개념 적용 능력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>10번</td>
+                    <td>수확을 해도 지주에게 뺏기고 빚을 갚으면 남는 게 없는 비참한 현실 때문에 자신이 먹으려고 훔쳤다.</td>
+                    <td><div>- 지주/빚 등의 수탈 구조를 언급했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10]</span></div><div>- 생계를 유지하기 위한 어쩔 수 없는 선택이었음을 서술했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 구조 독해력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                <h3>R1_NON_P1 (비문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>11번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 부정형 문항 오독: 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>②</span> 부정형 문항 오독: 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>12번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 논리 사고력:-3]</span></div><div><span class='badge badge-wrong'>②</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 비문학 배경지식:-3]</span></div><div><span class='badge badge-wrong'>④</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-4]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 국어 개념 적용 능력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>13번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 의미 혼동 (맹렬해짐) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-4, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 반의어 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-3]</span></div><div><span class='badge badge-wrong'>③</span> 의미 혼동 (드라마틱해짐) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-4, 문장 독해력:-2]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 의미 혼동 (한계에 다다름) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-4, 문장 독해력:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>14번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 형용사 (1) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 형용사(빠르다)의 활용형 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 형용사 (2) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-correct'>④</span> 정답 (동사) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 형용사 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>15번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 힘(명사)+들다(동사) = 합성어 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 덮(어간)+밥(명사) = 합성어 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 고무(명사)+신(명사) = 합성어 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 밤(명사)+나무(명사) = 합성어 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-correct'>⑤</span> 정답: 풋(접사)+사과(어근) = 파생어 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 개념 적용 능력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>16번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>②</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 비문학 배경지식:-3]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>④</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 비문학 배경지식:-3]</span></div><div><span class='badge badge-wrong'>⑤</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 논리 사고력:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>17번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 부정형 문항 오독: 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>④</span> 부정형 문항 오독: 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>18번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>③</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>④</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 국어 개념 적용 능력:10]</span></div></td>
+                </tr>
+                </tbody></table>
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>19번</td>
+                    <td>수요의 법칙</td>
+                    <td><div>- '수요의 법칙'을 정확히 썼는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10, 국어 개념 적용 능력:10]</span></div><div>- 오탈자 없이 썼는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 어휘력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>20번</td>
+                    <td>살아가는데 꼭 필요해서 가격이 올라도 소비를 줄이기 어렵기 때문이다.</td>
+                    <td><div>- 필수품의 특성(꼭 필요함)을 언급했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10]</span></div><div>- 가격 변화에 따른 소비량 변화가 적음을 위와 연결하여 설명했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                <h3>R1_LIT_P3 (문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>21번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 구조 독해력:10]</span></div><div><span class='badge badge-wrong'>②</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>④</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-5, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>⑤</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>22번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>③</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 논리 사고력:-4]</span></div><div><span class='badge badge-wrong'>④</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 논리 사고력:-3]</span></div><div><span class='badge badge-wrong'>⑤</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>23번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 부정형 문항 오독: 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-2]</span></div><div><span class='badge badge-correct'>②</span> 정답: '행동을 강화하다'는 문맥(핑계)과 맞지 않음 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 문맥 부적합 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 부정형 문항 오독: 유의어 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 어휘 범주 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-5, 문장 독해력:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>24번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>②</span> 문법 규칙 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>③</span> 형태소 분석 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>④</span> 품사 판별 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>⑤</span> 음운 규칙 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-4, 국어 개념 적용 능력:-4]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>25번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 관련 배경지식:10]</span></div><div><span class='badge badge-wrong'>②</span> 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 국어 개념 적용 능력:-4]</span></div><div><span class='badge badge-wrong'>③</span> 문맥 부적합 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 유의어 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-4, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>⑤</span> 어휘 범주 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>26번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 개념 적용 능력:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>27번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>②</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 논리 사고력:-3]</span></div><div><span class='badge badge-wrong'>③</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 구조 독해력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>28번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-4, 논리 사고력:-3]</span></div><div><span class='badge badge-wrong'>②</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10, 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody></table>
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>29번</td>
+                    <td>해설피 금빛 게으른 울음 / 우는 소리(청각)를 금빛(시각)으로 표현했다.</td>
+                    <td><div>- '해설피 금빛 게으른 울음'을 찾았는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10]</span></div><div>- 청각을 시각적으로 표현했음을 설명했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 국어 개념 적용 능력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>30번</td>
+                    <td>기회주의적인 처세술을 비판하기 위해 그를 우두머리(캡틴)라고 치켜세우는 척하며 조롱하는 의미이다.</td>
+                    <td><div>- 기회주의적 태도에 대한 비판/풍자를 언급했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 논리 사고력:10]</span></div><div>- 반어적 명명(비꼬기, 조롱)임을 이해했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 국어 개념 적용 능력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                <h3>R1_NON_P3 (비문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>31번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>③</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>④</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 논리 사고력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>32번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>②</span> 부정형 문항 오독: 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 부정형 문항 오독: 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>33번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 의미 불일치 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-2]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>③</span> 의미 불일치 (1) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 개념 혼동 (배타적 의미를 상대적 의미로 오해) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-2, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 반의어 관계(남을 위함) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>34번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>②</span> 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 문맥 부적합 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 유의어 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 어휘 범주 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 국어 개념 적용 능력:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>35번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 부정형 문항 오독: 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 국어 관련 배경지식:-2]</span></div><div><span class='badge badge-wrong'>②</span> 부정형 문항 오독: 문맥 부적합 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 국어 관련 배경지식:-2]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 유의어 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 국어 관련 배경지식:-2]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 관련 배경지식:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 어휘 범주 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 국어 관련 배경지식:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>36번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 부정형 문항 오독: 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>④</span> 부정형 문항 오독: 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 부정형 문항 오독: 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>37번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>③</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div><div><span class='badge badge-wrong'>④</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 논리 사고력:-3]</span></div><div><span class='badge badge-wrong'>⑤</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-5]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>38번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>②</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>④</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 비문학 배경지식:-2]</span></div></td>
+                </tr>
+                </tbody></table>
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>39번</td>
+                    <td>절대권 (또는 배타성)</td>
+                    <td><div>- '절대권'을 썼는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 어휘력:10]</span></div><div>- 또는 '배타성'(배타적 권리)을 썼는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>40번</td>
+                    <td>채무자가 권리를 행사하지 않아 채권자가 돈을 떼일 위험을 막기 위해서이다.</td>
+                    <td><div>- 채무자의 권리 불행사를 언급했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10]</span></div><div>- 채권 보호의 필요성을 서술했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                <h3>R1_LIT_P5 (문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>41번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-4, 국어 관련 배경지식:-4]</span></div><div><span class='badge badge-wrong'>②</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 구조 독해력:-3, 국어 관련 배경지식:-3]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 국어 관련 배경지식:10]</span></div><div><span class='badge badge-wrong'>④</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 관련 배경지식:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>42번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 관련 배경지식:-2]</span></div><div><span class='badge badge-wrong'>②</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 관련 배경지식:-2]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>④</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-wrong'>⑤</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>43번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-3]</span></div><div><span class='badge badge-wrong'>②</span> 문맥 부적합 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-3]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>④</span> 유의어 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-3]</span></div><div><span class='badge badge-wrong'>⑤</span> 어휘 범주 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>44번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 문법 규칙 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>②</span> 형태소 분석 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>③</span> 품사 판별 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-4, 국어 개념 적용 능력:-4]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 음운 규칙 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>45번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>②</span> 문맥 부적합 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>③</span> 유의어 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 어휘 범주 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>46번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>④</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 국어 개념 적용 능력:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>47번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-4, 논리 사고력:-3]</span></div><div><span class='badge badge-wrong'>④</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-5]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>48번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>③</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 논리 사고력:-2]</span></div></td>
+                </tr>
+                </tbody></table>
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>49번</td>
+                    <td>창 (또는 창문)</td>
+                    <td><div>- '창' 혹은 '창문'을 썼는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10]</span></div><div>- 가슴에 내고 싶다는 맥락을 이해했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 국어 관련 배경지식:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>50번</td>
+                    <td>간은 귀한 보화라 뱃속에 넣으면 썩거나 잃어버릴 수 있어 육지에 따로 보관해 두었다.</td>
+                    <td><div>- 간을 육지에 두고 왔다는 핵심 거짓말을 서술했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10]</span></div><div>- 그럴듯한 이유(보화, 썩음 등)를 포함했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                <h3>R1_NON_P5 (비문학)</h3><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>51번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 부정형 문항 오독: 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>②</span> 부정형 문항 오독: 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>③</span> 부정형 문항 오독: 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>④</span> 부정형 문항 오독: 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 비문학 배경지식:-2]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>52번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-4]</span></div><div><span class='badge badge-wrong'>②</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-4, 비문학 배경지식:-3]</span></div><div><span class='badge badge-wrong'>③</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-3, 비문학 배경지식:-2]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 논리 사고력:-5, 비문학 배경지식:-4]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>53번</td>
+                    <td><strong>③</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 반대 의미에 가까움 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>②</span> 의미 불일치 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-2]</span></div><div><span class='badge badge-correct'>③</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:10, 문장 독해력:10]</span></div><div><span class='badge badge-wrong'>④</span> 의미 불일치 (1) <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 연역법의 특징 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어휘력:-3, 문장 독해력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>54번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 문법 규칙 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>③</span> 형태소 분석 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 품사 판별 오류 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-5, 국어 개념 적용 능력:-4]</span></div><div><span class='badge badge-wrong'>⑤</span> 음운 규칙 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-4, 국어 개념 적용 능력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>55번</td>
+                    <td><strong>④</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 어휘 의미 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-4, 국어 개념 적용 능력:-3]</span></div><div><span class='badge badge-wrong'>②</span> 문맥 부적합 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-wrong'>③</span> 유의어 오해 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-3, 국어 개념 적용 능력:-2]</span></div><div><span class='badge badge-correct'>④</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:10, 국어 개념 적용 능력:10]</span></div><div><span class='badge badge-wrong'>⑤</span> 어휘 범주 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 어법·문법 능력:-4, 국어 개념 적용 능력:-3]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>56번</td>
+                    <td><strong>①</strong></td>
+                    <td><div><span class='badge badge-correct'>①</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 비문학 배경지식:10]</span></div><div><span class='badge badge-wrong'>②</span> 지문 근거 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>③</span> 세부 정보 오독 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>④</span> 핵심 정보 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 과도한 일반화 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 비문학 배경지식:-2]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>57번</td>
+                    <td><strong>⑤</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-5, 논리 사고력:-4]</span></div><div><span class='badge badge-wrong'>②</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>③</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 비문학 배경지식:-2]</span></div><div><span class='badge badge-wrong'>④</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-3, 논리 사고력:-2]</span></div><div><span class='badge badge-correct'>⑤</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody></table><table class="answer-table"><thead><tr><th width="10%">문항</th><th width="10%">정답</th><th>선택지 분석, 오답 경로 및 벡터</th></tr></thead><tbody>
+                <tr>
+                    <td>58번</td>
+                    <td><strong>②</strong></td>
+                    <td><div><span class='badge badge-wrong'>①</span> 전제 누락 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div><div><span class='badge badge-correct'>②</span> 정답 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:10, 논리 사고력:10]</span></div><div><span class='badge badge-wrong'>③</span> 인과 관계 왜곡 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>④</span> 조건 혼동 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div><div><span class='badge badge-wrong'>⑤</span> 범위 과확대 <br><span style='font-size:0.8em; color:#666; margin-left: 20px;'>[벡터: 문장 독해력:-2, 논리 사고력:-2]</span></div></td>
+                </tr>
+                </tbody></table>
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>59번</td>
+                    <td>연역법</td>
+                    <td><div>- '연역법'을 정확히 썼는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 문장 독해력:10]</span></div><div>- 오탈자 없는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 어휘력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+                <table class="answer-table">
+                <thead><tr><th width="10%">문항</th><th width="20%">모범 답안</th><th>채점 기준 및 벡터</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>60번</td>
+                    <td>단 하나의 반례만 나타나도 그 결론이 거짓이 될 수 있기 때문이다.</td>
+                    <td><div>- '반례'라는 단어를 포함했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 어휘력:10]</span></div><div>- 반례로 인해 결론이 뒤집힐 가능성을 서술했는가 (5점) <br><span style='font-size:0.8em; color:#666;'>[벡터: 논리 사고력:10]</span></div></td>
+                </tr>
+                </tbody>
+                </table>
+                
+        </div> <!-- End of test-body -->
+    </div> <!-- End of test-paper-container -->
+    <script>
+    (function () {
+        function hasPagedJs() {
+            return typeof window.PagedPolyfill !== 'undefined';
+        }
+
+        function collectItems(body) {
+            const items = [];
+            Array.from(body.children).forEach((child) => {
+                if (child.classList && child.classList.contains('page-break')) {
+                    items.push({ type: 'page-break' });
+                    return;
+                }
+                if (child.classList.contains('questions')) {
+                    const qItems = child.querySelectorAll('.question-item');
+                    qItems.forEach((q) => items.push(q));
+                } else {
+                    items.push(child);
+                }
+            });
+
+            let node = body.nextElementSibling;
+            while (node) {
+                if (node.classList && node.classList.contains('page-break')) {
+                    items.push({ type: 'page-break' });
+                } else {
+                    items.push(node);
+                }
+                node = node.nextElementSibling;
+            }
+
+            return items;
+        }
+
+        function createHeaderClone(original) {
+            if (!original) {
+                return null;
+            }
+            const title = original.querySelector('.test-title');
+            const info = original.querySelector('.test-info');
+
+            const header = document.createElement('div');
+            header.className = 'screen-header';
+
+            const titleEl = document.createElement('div');
+            titleEl.className = 'screen-title';
+            titleEl.textContent = title ? title.textContent : '국어농장 진단 테스트';
+            header.appendChild(titleEl);
+
+            const infoEl = document.createElement('div');
+            infoEl.className = 'screen-info';
+            infoEl.innerHTML = info ? info.innerHTML : '';
+            header.appendChild(infoEl);
+
+            return header;
+        }
+
+        function buildScreenPages() {
+            if (document.querySelector('.screen-pages')) {
+                return;
+            }
+            const container = document.querySelector('.test-paper-container');
+            if (!container) {
+                return;
+            }
+            const body = container.querySelector('.test-body');
+            if (!body) {
+                return;
+            }
+
+            const items = collectItems(body);
+            const pages = document.createElement('div');
+            pages.className = 'screen-pages';
+
+            function newPage(isFirst) {
+                const page = document.createElement('div');
+                page.className = 'screen-page';
+
+                const inner = document.createElement('div');
+                inner.className = 'screen-page-inner';
+
+                if (isFirst) {
+                    const header = createHeaderClone(container.querySelector('.test-header'));
+                    if (header) {
+                        inner.appendChild(header);
+                    }
+                }
+
+                const bodyEl = document.createElement('div');
+                bodyEl.className = 'screen-body content-area';
+                inner.appendChild(bodyEl);
+
+                const footer = document.createElement('div');
+                footer.className = 'screen-footer answer-footer';
+                inner.appendChild(footer);
+
+                page.appendChild(inner);
+                pages.appendChild(page);
+                return { page, bodyEl, footer };
+            }
+
+            let pageObj = newPage(true);
+
+            items.forEach((item) => {
+                if (item && item.type === 'page-break') {
+                    pageObj = newPage(false);
+                    return;
+                }
+
+                const clone = item.cloneNode(true);
+                pageObj.bodyEl.appendChild(clone);
+
+                if (pageObj.bodyEl.scrollHeight > pageObj.bodyEl.clientHeight + 1) {
+                    pageObj.bodyEl.removeChild(clone);
+                    pageObj = newPage(false);
+                    pageObj.bodyEl.appendChild(clone);
+                }
+            });
+
+            const pageNodes = pages.querySelectorAll('.screen-page');
+            pageNodes.forEach((page, idx) => {
+                const footer = page.querySelector('.screen-footer');
+                if (footer) {
+                    footer.textContent = `Page ${idx + 1} of ${pageNodes.length}`;
+                }
+            });
+
+            document.body.classList.add('screen-paginated');
+            document.body.insertBefore(pages, container);
+        }
+
+        function initPagination() {
+            let attempts = 0;
+            const maxAttempts = 12;
+            const intervalMs = 200;
+
+            function checkPagedJs() {
+                const pagedPages = document.querySelector('.pagedjs_pages');
+                if (pagedPages) {
+                    document.body.classList.add('pagedjs-preview');
+                    return;
+                }
+
+                attempts += 1;
+                if (attempts >= maxAttempts) {
+                    buildScreenPages();
+                    return;
+                }
+
+                setTimeout(checkPagedJs, intervalMs);
+            }
+
+            if (!hasPagedJs()) {
+                buildScreenPages();
+                return;
+            }
+
+            checkPagedJs();
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(initPagination, 200);
+        });
+    })();
+    </script>
+</body>
+</html>

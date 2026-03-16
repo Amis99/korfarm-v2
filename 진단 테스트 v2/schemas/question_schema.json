@@ -1,0 +1,224 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Korean Farm v2 Diagnostic Question Schema",
+    "type": "object",
+    "required": [
+        "question_id",
+        "test_type",
+        "passage",
+        "question"
+    ],
+    "properties": {
+        "question_id": {
+            "type": "string",
+            "description": "Unique identifier for the question"
+        },
+        "test_type": {
+            "type": "string",
+            "enum": [
+                "소쉬르",
+                "프레게",
+                "러셀",
+                "비트겐슈타인"
+            ]
+        },
+        "passage": {
+            "type": "object",
+            "required": [
+                "passage_id",
+                "level",
+                "genre"
+            ],
+            "properties": {
+                "passage_id": {
+                    "type": "string"
+                },
+                "level": {
+                    "type": "integer",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12
+                    ]
+                },
+                "genre": {
+                    "type": "string",
+                    "enum": [
+                        "문학",
+                        "비문학"
+                    ]
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "question": {
+            "type": "object",
+            "required": [
+                "stem",
+                "type"
+            ],
+            "properties": {
+                "stem": {
+                    "type": "string"
+                },
+                "box": {
+                    "type": "string",
+                    "description": "Content to be displayed in a box (보기)"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "지문근거형",
+                        "외부지식형",
+                        "논리추론형",
+                        "어휘단독형",
+                        "서술형"
+                    ]
+                },
+                "pair_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "choices": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 5,
+            "items": {
+                "type": "object",
+                "required": [
+                    "choice_id",
+                    "text",
+                    "vector",
+                    "error_path"
+                ],
+                "properties": {
+                    "choice_id": {
+                        "type": "string",
+                        "enum": [
+                            "A",
+                            "B",
+                            "C",
+                            "D",
+                            "E"
+                        ]
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "vector": {
+                        "$ref": "#/definitions/vectorType"
+                    },
+                    "error_path": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                }
+            }
+        },
+        "correct_choice": {
+            "type": "string",
+            "enum": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ]
+        },
+        "model_answer": {
+            "type": "string",
+            "description": "Exemplary answer for descriptive questions"
+        },
+        "grading_criteria": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "criteria_id",
+                    "condition",
+                    "score",
+                    "vector"
+                ],
+                "properties": {
+                    "criteria_id": {
+                        "type": "integer"
+                    },
+                    "condition": {
+                        "type": "string"
+                    },
+                    "score": {
+                        "type": "integer"
+                    },
+                    "vector": {
+                        "$ref": "#/definitions/vectorType"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "vectorType": {
+            "type": "object",
+            "propertyNames": {
+                "enum": [
+                    "어휘력",
+                    "문장 독해력",
+                    "구조 독해력",
+                    "논리 사고력",
+                    "어법·문법 능력",
+                    "국어 개념 적용 능력",
+                    "국어 관련 배경지식",
+                    "비문학 배경지식",
+                    "문제 분석 및 전략 수립 능력",
+                    "선택지 분석 및 전략 수립 능력"
+                ]
+            },
+            "additionalProperties": {
+                "type": "integer"
+            }
+        }
+    },
+    "if": {
+        "properties": {
+            "question": {
+                "properties": {
+                    "type": {
+                        "const": "서술형"
+                    }
+                }
+            }
+        }
+    },
+    "then": {
+        "required": [
+            "question_id",
+            "test_type",
+            "passage",
+            "question",
+            "model_answer",
+            "grading_criteria"
+        ]
+    },
+    "else": {
+        "required": [
+            "question_id",
+            "test_type",
+            "passage",
+            "question",
+            "choices",
+            "correct_choice"
+        ]
+    }
+}

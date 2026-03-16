@@ -1,0 +1,103 @@
+/* Paged.js Print Styles for A4 */
+@page {
+    size: A4;
+    margin: 20mm 15mm;
+    @bottom-center {
+        content: "Page " counter(page) " of " counter(pages);
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: 10pt;
+    }
+}
+
+/* Base Body Style */
+body {
+    font-family: "Noto Serif KR", serif; /* Myeongjo for print */
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #111;
+    background: white;
+}
+
+/* Two-Column Layout */
+.test-paper-container {
+    column-count: 2;
+    column-gap: 15mm;
+    column-fill: auto;
+    width: 100%;
+    /* Ensure content flows properly */
+    text-align: justify;
+}
+
+/* Prevent Breakage Inside Questions */
+.question-block {
+    break-inside: avoid; /* Core Logic: Don't split a question */
+    margin-bottom: 2em;
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 1em;
+}
+
+/* Passages can break, but avoid orphans */
+.passage-block {
+    text-align: left;
+    margin-bottom: 1.5em;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.passage-title {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+.passage-text {
+    font-size: 10.5pt;
+    line-height: 1.8;
+}
+
+/* Header Section (Full Width) */
+.test-header {
+    column-span: all; /* Span across both columns */
+    border-bottom: 2px solid #333;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.test-title {
+    font-size: 24pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.test-info {
+    font-size: 12pt;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-weight: bold;
+}
+
+/* Choices Layout */
+.choices {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column for long choices */
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.choice-item {
+    font-size: 10.5pt;
+    padding-left: 5px;
+}
+
+/* Grid layout for short choices if needed */
+.choices.grid-2 {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* Debug Helper (Optional) */
+/* .pagedjs_page_content { border: 1px solid red; } */

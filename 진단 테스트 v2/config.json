@@ -1,0 +1,77 @@
+{
+  "test_order": [
+    "sohssure",
+    "frege",
+    "russell",
+    "wittgenstein"
+  ],
+  "tests": {
+    "sohssure": {
+      "label": "Sohssure",
+      "passages": [
+        "data/sohssure/S1_LIT_P1",
+        "data/sohssure/S1_NON_P1",
+        "data/sohssure/S1_LIT_P3",
+        "data/sohssure/S1_NON_P3",
+        "data/sohssure/S1_LIT_P4",
+        "data/sohssure/S1_NON_P4"
+      ]
+    },
+    "frege": {
+      "label": "Frege",
+      "passages": [
+        "data/frege/F1_LIT_P1",
+        "data/frege/F1_NON_P1",
+        "data/frege/F1_LIT_P3",
+        "data/frege/F1_NON_P3",
+        "data/frege/F1_LIT_P5",
+        "data/frege/F1_NON_P5"
+      ]
+    },
+    "russell": {
+      "label": "Russell",
+      "passages": [
+        "data/russell/R1_LIT_P1",
+        "data/russell/R1_NON_P1",
+        "data/russell/R1_LIT_P3",
+        "data/russell/R1_NON_P3",
+        "data/russell/R1_LIT_P5",
+        "data/russell/R1_NON_P5"
+      ]
+    },
+    "wittgenstein": {
+      "label": "Wittgenstein",
+      "passages": [
+        "data/wittgenstein/W1_LIT_P1",
+        "data/wittgenstein/W1_NON_P1",
+        "data/wittgenstein/W1_LIT_P3",
+        "data/wittgenstein/W1_NON_P3",
+        "data/wittgenstein/W1_LIT_P5",
+        "data/wittgenstein/W1_NON_P5"
+      ]
+    }
+  },
+  "scoring": {
+    "base_score": 50.0,
+    "correct_weight": 0.5,
+    "incorrect_weight": 0.8,
+    "apply_level_multiplier": true,
+    "level_band_ranges": {
+      "sohssure": [1, 3],
+      "frege": [4, 6],
+      "russell": [7, 9],
+      "wittgenstein": [10, 12]
+    },
+    "level_multipliers": {
+      "1": 1.0,
+      "2": 1.2,
+      "3": 1.4
+    }
+  },
+  "confidence": {
+    "enabled": true,
+    "min_questions": 10,
+    "full_confidence_questions": 40,
+    "low_confidence_label": "진단 불가 (응답 부족)"
+  }
+}

@@ -1,0 +1,1324 @@
+\documentclass[11pt, a4paper]{article}
+
+% === 인코딩 & 폰트 ===
+\usepackage{fontspec}
+
+% Noto Sans KR Variable Font
+\setmainfont{Noto Sans KR}[
+  Script=Hangul,
+  Renderer=HarfBuzz
+]
+\setsansfont{Noto Sans KR}[
+  Script=Hangul,
+  Renderer=HarfBuzz
+]
+
+% === 레이아웃 ===
+\usepackage[top=20mm, bottom=20mm, left=15mm, right=15mm]{geometry}
+\usepackage{multicol}
+\setlength{\columnsep}{8mm}
+\setlength{\columnseprule}{0.4pt}
+
+% === 색상 ===
+\usepackage[dvipsnames]{xcolor}
+\definecolor{accentbrown}{HTML}{8B6914}
+\definecolor{passagebg}{gray}{0.95}
+
+% === 그래픽 ===
+\usepackage{graphicx}
+\usepackage{tikz}
+
+% === 기타 패키지 ===
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{setspace}
+
+% === 폰트 크기 재설정 (레벨별) ===
+\makeatletter
+\renewcommand{\normalsize}{\@setfontsize\normalsize{11pt}{15.9pt}}
+\makeatother
+\normalsize
+
+% === 행간 ===
+\linespread{1.45}
+
+% === 지문 폰트 크기 ===
+\newcommand{\passagefontsize}{\fontsize{10.5pt}{15.2pt}\selectfont}
+
+% === 지문 박스 스타일 ===
+\newtcolorbox{passagebox}[1][]{
+  enhanced,
+  breakable,
+  colback=passagebg,
+  colframe=black!30,
+  boxrule=0.3pt,
+  left=4mm,
+  right=3mm,
+  top=2mm,
+  bottom=2mm,
+  borderline west={2pt}{0pt}{accentbrown},
+  fontupper=\passagefontsize,
+  before upper={\setstretch{1.45}},
+  #1
+}
+
+% === 보기 박스 스타일 ===
+\newtcolorbox{boxibox}[1][]{
+  enhanced,
+  colback=white,
+  colframe=accentbrown!60,
+  coltitle=white,
+  fonttitle=\small\bfseries,
+  title={보기},
+  boxrule=0.5pt,
+  attach boxed title to top left={xshift=4mm, yshift=-\tcboxedtitleheight/2},
+  boxed title style={colback=accentbrown, colframe=accentbrown, boxrule=0.5pt, sharp corners},
+  left=3mm, right=3mm, top=3mm, bottom=1.5mm,
+  #1
+}
+
+% === 페이지 번호 ===
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\small \thepage~/~\pageref{LastPage}}
+
+% === 하이픈 방지 ===
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\begin{document}
+
+
+% === 헤더 ===
+\noindent%
+\begin{minipage}[c]{0.12\textwidth}
+\includegraphics[width=\linewidth, keepaspectratio]{korfarm-logo.png}
+\end{minipage}%
+\hfill%
+\begin{minipage}[c]{0.50\textwidth}
+\centering
+{\fontsize{13pt}{16pt}\selectfont\bfseries 국어농장 시작하기}\\[4pt]
+{\fontsize{26pt}{30pt}\selectfont\bfseries 프레게}
+\end{minipage}%
+\hfill%
+\begin{minipage}[c]{0.30\textwidth}
+\raggedleft
+{\small \underline{\hspace{1.8cm}} 학교\enspace \underline{\hspace{0.8cm}} 학년}\\[2pt]
+{\small 이름 \underline{\hspace{2.5cm}}}
+\end{minipage}
+
+\vspace{4pt}
+\noindent\rule{\textwidth}{1pt}
+\vspace{-\baselineskip}
+\vspace{-\parskip}
+
+\begin{multicols}{2}
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [1~10]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}"너, 이노무 시키, 이리 안 와!" \\
+주인 영감의 고함 소리가 등 뒤에서 벼락같이 터졌다. 수남이는 자전거를 끌고 죽을힘을 다해 달렸다. 다리가 후들거리고 심장이 터질 것만 같았다. \\
+'내가 왜 그랬을까? 아무리 화가 났어도 도둑질을 하는 게 아니었는데...' \\
+수남이의 눈앞이 흐려졌다. 바람 때문에 눈물이 나는 건지, 무서워서 눈물이 나는 건지 알 수 없었다. \\
+오늘 낮에 있었던 일이다. 배달을 갔다가 바람이 불어 자전거가 넘어지는 바람에 고급 승용차에 흠집을 냈다. 차 주인은 수리비로 오천 원을 내오라며 자전거를 붙잡아 두었다. 수남이는 어쩔 줄 몰라 발만 동동 구르고 있는데, 구경하던 사람들이 소리쳤다. \\
+"얘, 도망가라! 그깟 흠집 가지고 무슨 오천 원이냐? 그냥 자전거 타고 도망가!" \\
+그 말에 홀린 듯 수남이는 자전거를 들고 튀었다. 하지만 지금 수남이의 가슴속은 쿵쾅거리는 소리로 가득 찼다. \\
+집에 돌아오니 아버지가 물끄러미 바라보셨다. \\
+"너, 얼굴이 왜 그 모양이냐?" \\
+수남이는 아무 말도 할 수 없었다. 아버지 앞에서 도둑질을 했다는 사실을 어떻게 말할 수 있을까? 수남이는 이불을 뒤집어쓰고 웅크렸다. 자전거 바퀴가 굴러가는 소리가 귓가에 맴도는 것 같았다.
+\\[0.5em]
+- 박완서, <자전거 도둑> 부분
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 1.}~수남이가 고급 승용차에 흠집을 낸 까닭은 무엇인가요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~바람이 불어 자전거가 넘어졌기 때문에\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~주인 영감이 밀었기 때문에\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~자전거를 타고 너무 빨리 달렸기 때문에\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~빗길에 미끄러졌기 때문에\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~일부러 차를 발로 찼기 때문에\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 2.}~수남이가 자전거를 들고 도망친 직접적인 계기는 무엇인가요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~아버지에게 혼날 것이 무서워서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~구경하던 사람들의 외침을 듣고\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~배달 시간이 늦어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~주인 영감이 때리려고 해서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~돈을 가지러 집에 가기 위해서\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 3.}~다음 문장의 빈칸에 들어갈 낱말로 알맞은 것은 무엇입니까?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+수남이는 그 일 때문에 \underline{\hspace{3cm}} 동안 잠을 못 잤다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~며칠}\hspace{1em}\mbox{②~며 칠}\hspace{1em}\mbox{③~몇 일}\hspace{1em}\mbox{④~몇일}\hspace{1em}\mbox{⑤~면일}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 4.}~수남이의 심장이 터질 것 같았던 이유로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~주인 영감과 싸워서 이겼기 때문에\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~자전거가 너무 무거워서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~아버지에게 칭찬받을 생각이 나서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~도둑질을 했다는 죄책감과 두려움 때문에\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~돈을 벌 수 있어서 기뻤기 때문에\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 5.}~차 주인이 수남이에게 요구한 수리비는 얼마인가요?\par}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~오천 원}\hspace{1em}\mbox{②~천 원}\hspace{1em}\mbox{③~일만 원}\hspace{1em}\mbox{④~십만 원}\hspace{1em}\mbox{⑤~오만 원}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 6.}~구경하던 사람들이 수남이에게 한 말의 의도로 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~수남이가 자전거를 훔치도록 부추기려는 악의\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~자전거가 본인들의 것이라고 주장하기 위해\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~작은 실수에 과한 돈을 요구하는 차 주인에 대한 반감\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~차 주인과 친하기 때문에 장난을 친 것\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~수남이를 경찰에 신고하기 위해서\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 7.}~'쿵쾅거리는 소리'가 의미하는 것은 무엇인가요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~공사장에서 나는 소음\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~자전거 바퀴가 굴러가는 소리\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~천둥이 치는 소리\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~주인 영감이 발을 구르는 소리\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~두려움과 긴장으로 심장이 뛰는 소리\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 8.}~수남이가 집에 돌아왔을 때, 아버지는 어떤 반응을 보였나요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~아무 말 없이 방으로 들어갔다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~수남이를 크게 꾸짖으며 때렸다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~경찰서에 신고하러 나갔다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~수남이의 얼굴을 물끄러미 바라보며 물었다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~자전거를 잘 가져왔다고 칭찬했다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 9.}~수남이가 어쩔 줄 몰라 할 때, 구경하던 사람들은 수남이에게 뭐라고 소리쳤는지 쓰시오.\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 10.}~수남이가 아버지에게 사실대로 말하지 못하고 이불을 뒤집어쓴 이유는 무엇인지 쓰시오.\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [11~20]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}[지문] \\
+식물은 움직일 수 없지만, 스스로 양분을 만들고 자손을 퍼뜨리며 살아갑니다. 식물이 살아남기 위해 사용하는 놀라운 전략들에 대해 알아봅시다.
+\\[0.5em]
+가장 대표적인 생존 전략은 '광합성'입니다. 식물은 잎에 있는 엽록소를 이용해 햇빛을 흡수합니다. 그리고 뿌리에서 빨아들인 물과 잎의 기공으로 들이마신 이산화탄소를 재료로 하여 포도당이라는 양분을 만듭니다. 이 과정에서 우리에게 꼭 필요한 산소가 부산물로 나옵니다. 식물은 이렇게 만든 양분으로 줄기를 키우고 꽃을 피웁니다.
+\\[0.5em]
+식물의 또 다른 중요한 과제는 '씨앗 퍼뜨리기'입니다. 움직일 수 없는 식물은 자손을 멀리 보내기 위해 다양한 방법을 씁니다. 민들레나 단풍나무는 씨앗에 날개나 털을 달아 바람에 날려 보냅니다. 도꼬마리 같은 식물은 씨앗 끝을 갈고리 모양으로 만들어 동물 털이나 사람 옷에 붙어서 이동합니다.
+\\[0.5em]
+또한 맛있는 열매를 맺어 동물이 먹게 한 뒤, 배설물을 통해 씨앗이 멀리 퍼지게 하는 식물들도 있습니다. 벚나무나 참나무가 대표적입니다. 이처럼 식물은 움직이지 못하지만, 지혜로운 방법으로 생명을 이어가고 있습니다.
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 11.}~식물이 광합성을 하기 위해 필요한 재료가 아닌 것은?\par}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~산소}\hspace{1em}\mbox{②~엽록소}\hspace{1em}\mbox{③~햇빛}\hspace{1em}\mbox{④~물}\hspace{1em}\mbox{⑤~이산화탄소}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 12.}~민들레나 단풍나무가 씨앗을 퍼뜨리는 방법은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~스스로 터져서 씨앗을 튕겨 낸다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~물에 띄워 멀리 보낸다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~씨앗에 날개나 털을 달아 바람에 날려 보낸다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~맛있는 열매를 동물이 먹게 한다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~갈고리 모양으로 동물의 털에 붙인다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 13.}~다음 문장의 빈칸에 들어갈 낱말로 알맞은 것은 무엇입니까?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+씨앗을 심고 물을 주자 \underline{\hspace{3cm}} 싹이 나왔다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~어느세}\hspace{1em}\mbox{②~금제}\hspace{1em}\mbox{③~금방에}\hspace{1em}\mbox{④~금세}\hspace{1em}\mbox{⑤~금새}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 14.}~이 글은 어떻게 전개되고 있나요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~시간의 흐름에 따라 식물이 자라는 과정을 나열하고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~식물의 생존 전략을 몇 가지 방법으로 나누어 설명하고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~동물과 식물의 공통점과 차이점을 비교하고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~식물 보호를 위해 우리가 해야 할 일을 주장하고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~식물이 사라져가는 원인을 분석하고 있다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 15.}~광합성 과정에서 부산물로 나오는 것으로, 우리에게 꼭 필요한 것은?\par}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~이산화탄소}\hspace{1em}\mbox{②~물}\hspace{1em}\mbox{③~햇빛}\hspace{1em}\mbox{④~산소}\hspace{1em}\mbox{⑤~포도당}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 16.}~식물이 자손을 멀리 퍼뜨리려고 노력하는 이유는 무엇일까요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~예쁜 꽃을 피우기 위해서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~동물들에게 먹이를 주기 위해서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~다른 식물과 친구가 되기 위해서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~햇빛을 피하기 위해서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~움직일 수 없는 식물이 생존하고 번식하기 위해서\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 17.}~씨앗을 동물 털이나 사람 옷에 붙여서 이동시키는 식물은?\par}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~민들레}\hspace{1em}\mbox{②~참나무}\hspace{1em}\mbox{③~벚나무}\hspace{1em}\mbox{④~도꼬마리}\hspace{1em}\mbox{⑤~단풍나무}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 18.}~씨앗을 퍼뜨리는 방법으로 '동물'을 이용하는 식물들의 공통점으로 알맞은 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~모두 물가에서 자란다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~밤에만 꽃을 피운다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~씨앗이 동물의 몸에 붙거나, 열매가 동물의 먹이가 된다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~모두 날개나 털을 가지고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~씨앗의 크기가 매우 작아서 눈에 보이지 않는다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 19.}~식물이 광합성을 할 때, 사람이 숨 쉬는 데 꼭 필요한 어떤 기체가 나오는지 쓰시오.\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 20.}~도꼬마리 씨앗 끝은 어떤 모양이라서 동물의 털에 잘 붙는지 쓰시오.\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [21~30]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}"이 바보." \\
+소녀가 조약돌을 집어 던졌다. \\
+소년은 저도 모르게 벌떡 일어섰다. \\
+단발머리를 나풀거리며 소녀가 막 달린다. 갈밭 사잇길로 들어섰다. 뒤에는 청량한 가을 햇살 아래 빛나는 갈꽃뿐. \\
+이제 저쯤 갈밭머리로 소녀가 나타나리라. 꽤 오랜 시간이 지났다고 생각됐다. 그런데도 소녀는 나타나지 않는다. 발돋움을 했다. 그러고도 상당한 시간이 지났다. \\
+저쪽 갈밭머리에 갈꽃이 한 옴큼 움직였다. 소녀가 갈꽃을 안고 있었다. 이제 천천히 걸어오고 있다. 유난히 맑은 가을 햇살이 소녀의 갈꽃 머리에서 반짝거렸다. 소녀 아닌 갈꽃이 들길을 걸어오는 것만 같았다. \\
+소년은 이 갈꽃이 아주 뵈지 않게 되기까지 그대로 서 있었다. 문득, 소녀가 던진 조약돌을 내려다보았다. 물기가 걷혀 있었다. 소년은 조약돌을 집어 주머니에 넣었다.
+\\[0.5em]
+다음 날부터 좀처럼 소녀는 보이지 않았다. 매일같이 개울가로 달려와 봐도 뵈지 않았다. \\
+학교에서는 쉬는 시간에 운동장을 살폈다. 남몰래 5학년 여자 반을 엿보기도 했다. 그러나 뵈지 않았다. \\
+그날도 소년은 주머니 속 조약돌을 만지작거리며 개울가로 나왔다.
+\\[0.5em]
+- 황순원, <소나기> 부분
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 21.}~소년이 조약돌을 집어 주머니에 넣은 행동의 이유는 무엇일까요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~소녀에게 다시 던지려고\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~실수로 주머니에 넣어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~소녀에 대한 관심과 그리움을 간직하고 싶어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~돌을 모으는 취미가 있어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~조약돌이 아주 예쁘게 생겨서\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 22.}~소년이 소녀를 기다리는 동안의 심정 변화를 잘 나타낸 문장은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~유난히 맑은 가을 햇살 (기쁨) -> 소녀 아닌 갈꽃 (실망)\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~이제 저쯤 갈밭머리로 소녀가 나타나리라. (기대) -> 그런데도 소녀는 나타나지 않는다. (초조)\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~학교에서는 쉬는 시간에 운동장을 살폈다. (무관심) -> 남몰래 5학년 여자 반을 엿보기도 했다. (호기심)\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~물기가 걷혀 있었다. (허무) -> 조약돌을 집어 주머니에 넣었다. (후회)\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~이 바보. (분노) -> 소년은 저도 모르게 벌떡 일어섰다. (놀람)\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 23.}~다음 문장의 빈칸에 들어갈 말로 알맞은 것은 무엇입니까?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+소녀를 만날 생각에 가슴이 \underline{\hspace{3cm}}. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~설레었다}\hspace{1em}\mbox{②~설레였다}\hspace{1em}\mbox{③~설레엤다}\hspace{1em}\mbox{④~설레이었다}\hspace{1em}\mbox{⑤~설렛다}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 24.}~'소녀 아닌 갈꽃이 들길을 걸어오는 것만 같았다'라는 표현의 효과로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~소녀가 걷는 속도가 매우 빠르다는 것을 강조한다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~소녀와 자연이 하나가 된 듯한 아름답고 신비로운 분위기를 준다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~소년이 시력이 좋지 않다는 것을 암시한다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~가을 날씨가 매우 춥다는 것을 보여준다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~소녀의 옷차림이 화려하다는 것을 나타낸다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 25.}~소녀가 던진 말을 '이 바보'라고 한 것에서 알 수 있는 소녀의 마음은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~자신의 조약돌을 주워 달라는 명령\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~아무 이유 없이 지나가는 사람에게 시비를 거는 태도\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~자신을 알아보지 못하거나 다가오지 않는 소년에 대한 서운함과 관심\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~소년이 정말로 지능이 낮다고 생각하는 무시\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~소년과 싸우고 싶어 하는 적대감\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 26.}~이 글의 시간적, 공간적 배경으로 알맞은 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~겨울, 눈 덮인 산\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~여름, 해수욕장\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~봄, 꽃이 핀 학교 운동장\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~가을, 갈밭(갈대밭)과 개울가\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~밤, 어두운 골목길\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 27.}~'나풀거리며'와 느낌이 비슷한 말은?\par}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~비틀비틀}\hspace{1em}\mbox{②~쿵쿵거리며}\hspace{1em}\mbox{③~하늘거리며}\hspace{1em}\mbox{④~살금살금}\hspace{1em}\mbox{⑤~버럭버럭}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 28.}~다음 날부터 소년이 한 행동으로 알맞지 않은 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~쉬는 시간에 운동장을 살폈다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~주머니 속 조약돌을 만지작거렸다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~5학년 여자 반을 엿보았다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~매일같이 개울가로 달려가 보았다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~소녀의 집 앞에 찾아가 문을 두드렸다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 29.}~소년이 소녀가 던진 조약돌을 주워 주머니에 넣은 것은 소녀에 대해 어떤 마음이 있었기 때문인지 쓰시오.\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 30.}~소년은 멀리서 걸어오는 소녀의 모습을 무엇 같다고 생각했는지 지문에서 찾아 쓰시오.\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [31~40]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}[지문] \\
+오늘날 우리는 인터넷과 스마트폰을 통해 수많은 사람과 소통하며 살아갑니다. 하지만 얼굴이 보이지 않는다는 점을 악용하여 남에게 상처를 주는 일이 빈번하게 발생하고 있습니다. 악성 댓글이나 근거 없는 소문 유포가 대표적인 예입니다. 이러한 사이버 폭력은 피해자에게 씻을 수 없는 고통을 줍니다. \\
+따라서 우리는 올바른 디지털 예절, 즉 '네티켓'을 지켜야 합니다. 첫째, 상대방을 존중하는 마음을 가져야 합니다. 화면 너머에 나와 똑같은 감정을 가진 사람이 있다는 사실을 기억해야 합니다. 내가 듣기 싫은 말은 남에게도 하지 말아야 합니다. \\
+둘째, 정확하지 않은 정보를 함부로 퍼뜨리지 말아야 합니다. 사실 확인이 되지 않은 소문을 공유하는 것은 큰 혼란을 일으킬 수 있습니다. 정보를 공유하기 전에 그것이 믿을 만한지, 누군가에게 피해를 주지는 않는지 신중하게 생각해야 합니다. \\
+셋째, 개인 정보를 소중히 다루어야 합니다. 자신의 정보뿐만 아니라 타인의 정보도 함부로 유출해서는 안 됩니다. \\
+디지털 세상은 우리가 함께 만들어가는 공간입니다. 서로 배려하고 존중하는 태도를 가질 때, 비로소 건강하고 행복한 디지털 세상을 만들 수 있을 것입니다.
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 31.}~이 글에서 말하는 '네티켓'의 의미는?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~스마트폰 사용법\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~인터넷 게임 규칙\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~올바른 디지털 예절\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~빠른 인터넷 속도\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~개인 정보 해킹 기술\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 32.}~글쓴이가 제안한 첫 번째 디지털 예절은 무엇인가요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~타인의 정보를 몰래 알아보는 것\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~상대방을 존중하는 마음을 가지는 것\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~화면 너머에 사람이 없다고 생각하는 것\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~정확하지 않은 정보를 공유하는 것\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~자신의 정보를 널리 퍼뜨리는 것\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 33.}~다음 문장의 빈칸에 들어갈 낱말로 알맞은 것은 무엇입니까?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+친구에게 나쁜 말을 하면 \underline{\hspace{3cm}}. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~안 돼}\hspace{1em}\mbox{②~않 돼}\hspace{1em}\mbox{③~안 대}\hspace{1em}\mbox{④~않 되}\hspace{1em}\mbox{⑤~안 되}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 34.}~정확하지 않은 정보를 함부로 퍼뜨리면 안 되는 이유는?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~인터넷 속도가 느려지기 때문에\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~해킹을 당할 위험이 있어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~정보를 만드는 데 돈이 많이 들어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~큰 혼란을 일으키거나 타인에게 피해를 줄 수 있어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~자신의 이름이 유명해질까 봐\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 35.}~글쓴이가 사이버 폭력의 예로 든 것이 아닌 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~바이러스 유포\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~근거 없는 소문 유포\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~악성 댓글\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~남에게 피해를 주는 일\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~상대방에게 상처를 주는 일\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 36.}~건강한 디지털 세상을 만들기 위해 우리에게 가장 필요한 태도는?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~인터넷 사용 시간을 늘리는 태도\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~서로 배려하고 존중하는 태도\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~자신의 의견을 끝까지 주장하는 태도\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~최신 기기를 빠르게 구매하는 태도\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~남의 일에 무관심한 태도\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 37.}~'유출하다'와 뜻이 반대되는 말은?\par}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~내보내다}\hspace{1em}\mbox{②~알려주다}\hspace{1em}\mbox{③~퍼뜨리다}\hspace{1em}\mbox{④~보호하다}\hspace{1em}\mbox{⑤~공개하다}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 38.}~이 글이 주장하는 방식에 대한 설명으로 옳은 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~전문가의 말을 인용하여 신뢰성을 높이고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~자신의 경험을 바탕으로 감동을 주고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~질문과 대답의 형식으로 독자의 흥미를 끌고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~통계 자료를 활용하여 객관적인 근거를 대고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~첫째, 둘째, 셋째와 같이 순서를 매겨 실천 방법을 제시하고 있다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 39.}~글쓴이가 말한 세 가지 네티켓 중, 첫 번째는 무엇인지 쓰시오.\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 40.}~사실 확인이 되지 않은 소문을 함부로 퍼뜨리면 어떤 문제가 생기는지 쓰시오.\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [41~50]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}"옥희야." \\
+하고 불렀습니다. 나는 \\
+"왜?" \\
+하고 대답하고 아저씨를 쳐다보았습니다. \\
+"너, 아범 보고 싶지 않니?" \\
+"아범?" \\
+나에게 아범이 있었던 것은 사실이나, 내가 세상에 나오기도 전에, 아범은 세상을 떠났다고 외할머니가 일러 주신 것이 생각났습니다. \\
+"응, 아범말이다. 네 아범은 참 훌륭한 사람이었단다. 나하구 아주 친한 친구였었단다." \\
+"아범은 어디 갔어?" \\
+"세상 떠났지." \\
+"세상 떠나면 못 와?" \\
+"못 오지." \\
+"왜?" \\
+"하늘나라로 갔으니까." \\
+나는 갑자기 서러워졌습니다. 아저씨도 아빠가 없는 것이 불쌍해 보였던지 나를 덥석 안아 올려 무릎 위에 앉히고, 머리를 쓰다듬어 주며 뺨에다 입을 맞추어 주었습니다. 그리고, \\
+"옥희는, 이제 누가 제일 좋으니?" \\
+하고 물었습니다. 나는, \\
+"어머니." \\
+하고 대답했습니다. \\
+"그 다음엔?" \\
+"그 다음엔, 아저씨." \\
+아저씨는 나를 꼭 껴안아 주었습니다. 그리고 내 뺨에다 입을 맞추었습니다.
+\\[0.5em]
+- 주요섭, <사랑손님과 어머니> 부분
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 41.}~이 글에 등장하는 인물 간의 관계에 대한 설명으로 알맞은 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~외할머니는 아저씨의 어머니이다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~아저씨는 '나(옥희)'의 아버지와 친한 친구 사이였다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~옥희는 어머니보다 아저씨를 더 좋아한다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~옥희는 아저씨를 매우 싫어한다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~아저씨는 옥희의 친아버지이다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 42.}~옥희의 아버지가 지금 계시지 않은 이유는?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~아저씨와 싸우고 집을 나가서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~병원에 입원해 있어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~돈을 벌러 멀리 떠나서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~외할머니 댁에 가 있어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~옥희가 태어나기도 전에 세상을 떠나서\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 43.}~다음 <보기>의 문장에서 밑줄 친 '친절했다'의 품사는 무엇입니까?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+아저씨는 나에게 참 친절했다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~부사}\hspace{1em}\mbox{②~관형사}\hspace{1em}\mbox{③~형용사}\hspace{1em}\mbox{④~동사}\hspace{1em}\mbox{⑤~명사}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 44.}~이 글의 서술자(말하는 사람)인 '나'에 대한 설명으로 옳은 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~순수한 어린아이의 시선으로 이야기를 전달하고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~매우 분석적이고 비판적인 성인 남성이다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~이야기 속에 등장하지 않고 관찰만 하는 사람이다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~작가가 직접 자신의 이야기를 하고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~모든 사건을 꿰뚫어 보는 전지전능한 신과 같은 존재이다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 45.}~아저씨가 옥희를 안아주고 뺨에 입을 맞춘 이유는 무엇일까요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~옥희에게 부탁할 일이 있어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~옥희가 울면서 떼를 썼기 때문에\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~옥희가 노래를 잘 불렀기 때문에\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~자신의 친구인 옥희 아버지를 닮지 않아서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~아버지가 없는 옥희에 대한 연민과 사랑스러움 때문에\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 46.}~이 글에서 '하늘나라'가 상징하는 의미는?\par}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~비행기}\hspace{1em}\mbox{②~해외여행}\hspace{1em}\mbox{③~죽음}\hspace{1em}\mbox{④~높은 산꼭대기}\hspace{1em}\mbox{⑤~꿈속 세상}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 47.}~옥희가 '갑자기 서러워진' 이유는 무엇일까요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~외할머니가 무서운 이야기를 해서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~아버지가 돌아가셔서 다시는 볼 수 없다는 사실을 깨달아서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~배가 고픈데 밥을 주지 않아서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~어머니가 보고 싶어서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~아저씨가 옥희를 혼냈기 때문에\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 48.}~옥희는 '누가 제일 좋으냐'는 아저씨의 질문에 누구라고 대답했나요?\par}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~아범(아버지)}\hspace{1em}\mbox{②~아저씨}\hspace{1em}\mbox{③~외할머니}\hspace{1em}\mbox{④~선생님}\hspace{1em}\mbox{⑤~어머니}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 49.}~옥희가 갑자기 서러워진 이유를 서술하시오. (30자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 50.}~아저씨가 옥희를 안아 올리고 뺨에 입맞춘 행동이 드러내는 태도를 서술하시오. (30자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [51~60]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}[지문] \\
+세종 대왕이 훈민정음을 창제한 것은 백성을 사랑하는 마음, 즉 '애민 정신'에서 비롯되었습니다. 당시에는 한자를 사용했는데, 한자는 배우기가 매우 어려워 일반 백성들은 자신의 생각을 글로 표현하기 힘들었습니다. 세종 대왕은 이러한 백성들의 고충을 안타깝게 여겨 누구나 쉽게 배우고 쓸 수 있는 우리 글자를 만들기로 결심했습니다.
+\\[0.5em]
+훈민정음은 매우 과학적인 원리로 만들어졌습니다. \\
+첫째, '상형의 원리'입니다. 자음은 발음 기관의 모양을 본떠 만들었고, 모음은 하늘(·), 땅(ㅡ), 사람(ㅣ)의 모양을 본떠 만들었습니다. 예를 들어 'ㄱ'은 혀뿌리가 목구멍을 막는 모양을, 'ㄴ'은 혀가 윗잇몸에 닿는 모양을 본뜬 것입니다. \\
+둘째, '가획의 원리'입니다. 기본 글자에 획을 더하여 소리의 세기를 나타냈습니다. 'ㄱ'에 획을 더하면 'ㅋ'이 되고, 'ㄴ'에 획을 더하면 'ㄷ', 'ㅌ'이 되는 식입니다.
+\\[0.5em]
+이처럼 훈민정음은 창제 동기가 숭고할 뿐만 아니라, 그 제자 원리가 매우 독창적이고 과학적이어서 세계적으로 그 우수성을 인정받고 있습니다. 유네스코에서는 '세종대왕 문해상'을 제정하여 문맹 퇴치에 기여한 사람들에게 상을 주고 있습니다.
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 51.}~세종 대왕이 훈민정음을 만든 가장 근본적인 이유는?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~자신의 똑똑함을 자랑하기 위해서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~외국 사신들을 접대하기 위해서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~신하들의 요청을 들어주기 위해서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~한자가 너무 쉬워서\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~백성을 사랑하는 애민 정신 때문에\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 52.}~훈민정음 자음 글자를 만든 원리는 무엇인가요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~기존 한자의 모양을 조금씩 고쳐서 만들었다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~동물의 울음소리를 흉내 내어 만들었다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~하늘, 땅, 사람의 모양을 본떠서 만들었다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~외국의 글자를 그대로 가져와서 만들었다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~발음 기관의 모양을 본떠서 만들었다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 53.}~다음 <보기>의 문장에서 밑줄 친 '백성'의 품사는 무엇입니까?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+세종 대왕은 백성을 사랑했다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~조사}\hspace{1em}\mbox{②~명사}\hspace{1em}\mbox{③~형용사}\hspace{1em}\mbox{④~동사}\hspace{1em}\mbox{⑤~감탄사}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 54.}~'비롯되었다'와 바꿔 쓰기에 가장 적절한 말은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~시작되었다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~발견되었다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~변화되었다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~마무리되었다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~사라졌다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 55.}~훈민정음 모음을 만들 때 본뜬 대상이 아닌 것은?\par}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~아래아(·)}\hspace{1em}\mbox{②~바다}\hspace{1em}\mbox{③~사람}\hspace{1em}\mbox{④~하늘}\hspace{1em}\mbox{⑤~땅}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 56.}~이 글에서 설명하는 훈민정음의 특징이 아닌 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~창제 동기가 숭고하다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~독창적인 글자이다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~세계적으로 우수성을 인정받고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~배우기가 매우 어렵다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~제자 원리가 과학적이다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 57.}~유네스코에서 주는 '세종대왕 문해상'은 어떤 사람들에게 주는 상일까요?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~한국 역사를 세계에 널리 알린 사람\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~새로운 글자를 많이 발명한 사람\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~글을 모르는 사람들을 위해 글을 가르치고 문맹 퇴치에 힘쓴 사람\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~과학 기술 발전에 기여한 사람\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~세종 대왕의 업적을 연구한 학자\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 58.}~이 글의 내용 전개 방식으로 알맞은 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~창제 동기를 밝히고 제자 원리를 나누어 설명하고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~세종 대왕의 어린 시절 일화를 소개하고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~훈민정음과 한자의 차이점을 대조하고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~훈민정음이 만들어진 과정을 시간 순서대로 기록하고 있다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~글자의 모양이 변해온 역사를 설명하고 있다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 59.}~훈민정음의 자음은 사람의 무엇을 본떠 만들었는지 쓰시오.\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 60.}~세종 대왕이 훈민정음을 만든 가장 큰 이유는 무엇입니까?\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\end{multicols}
+\newpage
+
+\noindent{\Large\bfseries 정답표}
+\vspace{3mm}
+\noindent\rule{\textwidth}{0.8pt}
+\vspace{3mm}
+
+\noindent{\bfseries 객관식 정답}
+\vspace{2mm}
+
+\begin{tabularx}{\textwidth}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{지문} & \textbf{번호} & ① & ② & ③ & ④ & ⑤ \\
+\hline
+[1]문 & 1 & \textbf{O} &  &  &  &  \\
+\hline
+[1]문 & 2 &  & \textbf{O} &  &  &  \\
+\hline
+[1]문 & 3 & \textbf{O} &  &  &  &  \\
+\hline
+[1]문 & 4 &  &  &  & \textbf{O} &  \\
+\hline
+[1]문 & 5 & \textbf{O} &  &  &  &  \\
+\hline
+[1]문 & 6 &  &  & \textbf{O} &  &  \\
+\hline
+[1]문 & 7 &  &  &  &  & \textbf{O} \\
+\hline
+[1]문 & 8 &  &  &  & \textbf{O} &  \\
+\hline
+[1]문 & 9 & -- & -- & -- & -- & -- \\
+\hline
+[1]문 & 10 & -- & -- & -- & -- & -- \\
+\hline
+[2]비 & 11 & \textbf{O} &  &  &  &  \\
+\hline
+[2]비 & 12 &  &  & \textbf{O} &  &  \\
+\hline
+[2]비 & 13 &  &  &  & \textbf{O} &  \\
+\hline
+[2]비 & 14 &  & \textbf{O} &  &  &  \\
+\hline
+[2]비 & 15 &  &  &  & \textbf{O} &  \\
+\hline
+[2]비 & 16 &  &  &  &  & \textbf{O} \\
+\hline
+[2]비 & 17 &  &  &  & \textbf{O} &  \\
+\hline
+[2]비 & 18 &  &  & \textbf{O} &  &  \\
+\hline
+[2]비 & 19 & -- & -- & -- & -- & -- \\
+\hline
+[2]비 & 20 & -- & -- & -- & -- & -- \\
+\hline
+[3]문 & 21 &  &  & \textbf{O} &  &  \\
+\hline
+[3]문 & 22 &  & \textbf{O} &  &  &  \\
+\hline
+[3]문 & 23 & \textbf{O} &  &  &  &  \\
+\hline
+[3]문 & 24 &  & \textbf{O} &  &  &  \\
+\hline
+[3]문 & 25 &  &  & \textbf{O} &  &  \\
+\hline
+[3]문 & 26 &  &  &  & \textbf{O} &  \\
+\hline
+[3]문 & 27 &  &  & \textbf{O} &  &  \\
+\hline
+[3]문 & 28 &  &  &  &  & \textbf{O} \\
+\hline
+[3]문 & 29 & -- & -- & -- & -- & -- \\
+\hline
+[3]문 & 30 & -- & -- & -- & -- & -- \\
+\hline
+[4]비 & 31 &  &  & \textbf{O} &  &  \\
+\hline
+[4]비 & 32 &  & \textbf{O} &  &  &  \\
+\hline
+[4]비 & 33 & \textbf{O} &  &  &  &  \\
+\hline
+[4]비 & 34 &  &  &  & \textbf{O} &  \\
+\hline
+[4]비 & 35 & \textbf{O} &  &  &  &  \\
+\hline
+[4]비 & 36 &  & \textbf{O} &  &  &  \\
+\hline
+[4]비 & 37 &  &  &  & \textbf{O} &  \\
+\hline
+[4]비 & 38 &  &  &  &  & \textbf{O} \\
+\hline
+[4]비 & 39 & -- & -- & -- & -- & -- \\
+\hline
+[4]비 & 40 & -- & -- & -- & -- & -- \\
+\hline
+[5]문 & 41 &  & \textbf{O} &  &  &  \\
+\hline
+[5]문 & 42 &  &  &  &  & \textbf{O} \\
+\hline
+[5]문 & 43 &  &  & \textbf{O} &  &  \\
+\hline
+[5]문 & 44 & \textbf{O} &  &  &  &  \\
+\hline
+[5]문 & 45 &  &  &  &  & \textbf{O} \\
+\hline
+[5]문 & 46 &  &  & \textbf{O} &  &  \\
+\hline
+[5]문 & 47 &  & \textbf{O} &  &  &  \\
+\hline
+[5]문 & 48 &  &  &  &  & \textbf{O} \\
+\hline
+[5]문 & 49 & -- & -- & -- & -- & -- \\
+\hline
+[5]문 & 50 & -- & -- & -- & -- & -- \\
+\hline
+[6]비 & 51 &  &  &  &  & \textbf{O} \\
+\hline
+[6]비 & 52 &  &  &  &  & \textbf{O} \\
+\hline
+[6]비 & 53 &  & \textbf{O} &  &  &  \\
+\hline
+[6]비 & 54 & \textbf{O} &  &  &  &  \\
+\hline
+[6]비 & 55 &  & \textbf{O} &  &  &  \\
+\hline
+[6]비 & 56 &  &  &  & \textbf{O} &  \\
+\hline
+[6]비 & 57 &  &  & \textbf{O} &  &  \\
+\hline
+[6]비 & 58 & \textbf{O} &  &  &  &  \\
+\hline
+[6]비 & 59 & -- & -- & -- & -- & -- \\
+\hline
+[6]비 & 60 & -- & -- & -- & -- & -- \\
+\hline
+\end{tabularx}
+\vspace{5mm}
+
+\noindent{\bfseries 서술형 모범답안}
+\vspace{2mm}
+
+\begin{enumerate}[label={}, leftmargin=0em, itemsep=2pt]
+\item \textbf{9번} (지문 [1]): "얘, 도망가라! 그깟 흠집 가지고 무슨 오천 원이냐? 그냥 자전거 타고 도망가!"
+\item \textbf{10번} (지문 [1]): 아버지 앞에서 도둑질을 했다는 사실을 말하기가 두려웠기 때문입니다.
+\item \textbf{19번} (지문 [2]): 산소
+\item \textbf{20번} (지문 [2]): 갈고리 모양
+\item \textbf{29번} (지문 [3]): 소녀를 좋아하거나 보고 싶어 하는 마음 (관심)
+\item \textbf{30번} (지문 [3]): 소녀 아닌 갈꽃 (또는 움직이는 갈꽃)
+\item \textbf{39번} (지문 [4]): 상대방을 존중하는 마음을 가져야 합니다.
+\item \textbf{40번} (지문 [4]): 큰 혼란을 일으킬 수 있습니다.
+\item \textbf{49번} (지문 [5]): 아버지가 세상을 떠나 다시 만날 수 없다는 사실이 서러웠기 때문이다.
+\item \textbf{50번} (지문 [5]): 아버지 없는 옥희를 안쓰럽게 여기며 따뜻하게 위로하고 사랑하는 태도이다.
+\item \textbf{59번} (지문 [6]): 발음 기관 (입, 혀, 목구멍 등)
+\item \textbf{60번} (지문 [6]): 백성들이 글자를 몰라 겪는 어려움을 해결하고, 누구나 쉽게 글을 쓰고 읽게 하기 위해서입니다.
+\end{enumerate}
+
+\end{document}

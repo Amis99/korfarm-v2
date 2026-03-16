@@ -1,0 +1,1547 @@
+\documentclass[10pt, a4paper]{article}
+
+% === 인코딩 & 폰트 ===
+\usepackage{fontspec}
+
+% Noto Sans KR Variable Font
+\setmainfont{Noto Sans KR}[
+  Script=Hangul,
+  Renderer=HarfBuzz
+]
+\setsansfont{Noto Sans KR}[
+  Script=Hangul,
+  Renderer=HarfBuzz
+]
+
+% === 레이아웃 ===
+\usepackage[top=20mm, bottom=20mm, left=15mm, right=15mm]{geometry}
+\usepackage{multicol}
+\setlength{\columnsep}{8mm}
+\setlength{\columnseprule}{0.4pt}
+
+% === 색상 ===
+\usepackage[dvipsnames]{xcolor}
+\definecolor{accentbrown}{HTML}{8B6914}
+\definecolor{passagebg}{gray}{0.95}
+
+% === 그래픽 ===
+\usepackage{graphicx}
+\usepackage{tikz}
+
+% === 기타 패키지 ===
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{setspace}
+
+% === 폰트 크기 재설정 (레벨별) ===
+\makeatletter
+\renewcommand{\normalsize}{\@setfontsize\normalsize{9.5pt}{12.8pt}}
+\makeatother
+\normalsize
+
+% === 행간 ===
+\linespread{1.35}
+
+% === 지문 폰트 크기 ===
+\newcommand{\passagefontsize}{\fontsize{9pt}{12.2pt}\selectfont}
+
+% === 지문 박스 스타일 ===
+\newtcolorbox{passagebox}[1][]{
+  enhanced,
+  breakable,
+  colback=passagebg,
+  colframe=black!30,
+  boxrule=0.3pt,
+  left=4mm,
+  right=3mm,
+  top=2mm,
+  bottom=2mm,
+  borderline west={2pt}{0pt}{accentbrown},
+  fontupper=\passagefontsize,
+  before upper={\setstretch{1.35}},
+  #1
+}
+
+% === 보기 박스 스타일 ===
+\newtcolorbox{boxibox}[1][]{
+  enhanced,
+  colback=white,
+  colframe=accentbrown!60,
+  coltitle=white,
+  fonttitle=\small\bfseries,
+  title={보기},
+  boxrule=0.5pt,
+  attach boxed title to top left={xshift=4mm, yshift=-\tcboxedtitleheight/2},
+  boxed title style={colback=accentbrown, colframe=accentbrown, boxrule=0.5pt, sharp corners},
+  left=3mm, right=3mm, top=3mm, bottom=1.5mm,
+  #1
+}
+
+% === 페이지 번호 ===
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\small \thepage~/~\pageref{LastPage}}
+
+% === 하이픈 방지 ===
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\begin{document}
+
+
+% === 헤더 ===
+\noindent%
+\begin{minipage}[c]{0.12\textwidth}
+\includegraphics[width=\linewidth, keepaspectratio]{korfarm-logo.png}
+\end{minipage}%
+\hfill%
+\begin{minipage}[c]{0.50\textwidth}
+\centering
+{\fontsize{13pt}{16pt}\selectfont\bfseries 국어농장 시작하기}\\[4pt]
+{\fontsize{26pt}{30pt}\selectfont\bfseries 비트겐슈타인}
+\end{minipage}%
+\hfill%
+\begin{minipage}[c]{0.30\textwidth}
+\raggedleft
+{\small \underline{\hspace{1.8cm}} 학교\enspace \underline{\hspace{0.8cm}} 학년}\\[2pt]
+{\small 이름 \underline{\hspace{2.5cm}}}
+\end{minipage}
+
+\vspace{4pt}
+\noindent\rule{\textwidth}{1pt}
+\vspace{-\baselineskip}
+\vspace{-\parskip}
+
+\begin{multicols}{2}
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [1~10]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}(가) \\
+아무 소리도 없이 말도 없이 \\
+등 뒤로 털썩 \\
+밧줄이 날아와 나는 \\
+뛰어가 밧줄을 잡아다 배를 맨다 \\
+아주 천천히 그리고 조용히 \\
+배는 멀리서부터 닿는다
+\\[0.5em]
+사랑은, \\
+호젓한 부둣가에 우연히, \\
+별 그럴 일도 없으면서 넋 놓고 앉았다가 \\
+배가 들어와 \\
+던져지는 밧줄을 받는 것 \\
+그래서 어찌할 수 없이 \\
+배를 매게 되는 것
+\\[0.5em]
+잔잔한 바닷물 위에 \\
+구름과 빛과 시간과 함께 \\
+떠 있는 배
+\\[0.5em]
+배를 매면 구름과 빛과 시간이 함께 \\
+매어진다는 것도 처음 알았다 \\
+사랑이란 그런 것을 처음 아는 것
+\\[0.5em]
+빛 가운데 배는 울렁이며 \\
+온종일을 떠 있다
+\\[0.5em]
+- 장석남, <배를 매며>
+\\[0.5em]
+(나) \\
+"그럼, 아까 그 늙은 중이……." \\
+"그가 바로 네 아비다." \\
+옥화는 갑자기 무엇을 생각한 듯이, 성기의 귓바퀴를 들추어 보았다. 거기에는 으레 있을 점이 하나 또렷하게 박혀 있었다. \\
+"네가 이번 여름에 장에 갔다가, 웬 낯선 영감을 만나지 않더냐? 왼손잡이더냐, 오른손잡이더냐?" \\
+"왼손잡이입디다." \\
+"그래, 몸집이 작고, 얼굴에 사마귀가 없더냐?" \\
+"얼굴은 자세히 못 보았지만, 몸집은 작아 보입디다." \\
+"음, 그가 외할아버지시다." \\
+성기는 고개를 들어 어머니의 얼굴을 쳐다보았다. 옥화는 마치 꿈꾸는 사람처럼 나직이 중얼거렸다. \\
+"네 이모(계연)의 왼쪽 귓바퀴 위에도, 너와 똑같은 점이 있더구나." \\
+성기는 그제야 모든 것을 깨달은 듯, 고개를 떨구었다. 그것은 너무나 엄청난 사실이었다. 옥화는 다시 성기의 손을 잡으며 말했다. \\
+"성기야, 이것은 다 하늘이 정한 운명이다. 누구를 원망하겠느냐. 계연이는 네 이모다. 그러니 이제 그만 단념해라." \\
+(중략) \\
+이튿날 아침, 성기는 춘천을 향해 떠나는 계연과 체장수 영감을 배웅하고 돌아왔다. 성기는 한동안 알 수 없는 병으로 자리에 눕게 되었다. 옥화는 성기가 죽을지도 모른다는 생각에, 굿도 하고 용하다는 의원도 불러 보았지만 차도가 없었다. 그러던 어느 날, 옥화는 성기에게 물었다. \\
+"성기야, 너 소원이 뭐냐? 네가 하고 싶은 대로 다 해 줄 테니 말해 보아라." \\
+성기는 힘없는 목소리로 대답했다. \\
+"어머니, 엿판 하나만 맞춰 주세요." \\
+옥화는 깜짝 놀랐지만, 곧 아들의 뜻을 알아차리고 엿판을 맞춰 주었다. \\
+성기가 병석에서 일어난 것은 그로부터 며칠 뒤였다. 성기는 옥화가 맞춰 준 새하얀 엿판을 걸머지고 대문 밖을 나섰다. \\
+"성기야, 어디로 가려느냐?" \\
+옥화의 물음에 성기는 잠시 생각에 잠겼다. 하동 쪽으로 가면 계연을 만날 수도 있었다. 그러나 성기는 하동과는 반대 방향인 구례 쪽을 향해 발걸음을 옮겼다. 그의 콧노래는 어느새 육자배기 가락으로 변해 있었다. 벚꽃이 눈처럼 흩날리는 길 위로, 성기의 뒷모습이 점점 멀어져 갔다.
+\\[0.5em]
+- 김동리, <역마>
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 1.}~(가)와 (나)에 대한 설명으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~(가)와 (나)는 모두 자연물에 인격을 부여하여 의지적인 삶의 태도를 예찬하고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~(가)는 색채 이미지의 대비를 통해, (나)는 배경 묘사와 인물 심리의 조화를 통해 비극적 분위기를 고조시키고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~(가)는 시간의 흐름에 따른 공간의 이동을 통해, (나)는 공간의 이동에 따른 시간의 역전을 통해 시상을 전개하고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~(가)는 유추의 방식을 통해 추상적인 관념을 구체화하고 있으며, (나)는 인물 간의 대화와 행동을 통해 내적 갈등의 해소 과정을 보여주고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~(가)는 반어적 표현을 사용하여 화자의 정서를 강조하고, (나)는 풍자적 어조를 사용하여 세태를 비판하고 있다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 2.}~(가)의 '배'와 (나)의 '엿판'에 대한 이해로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~'배'는 화자에게 예기치 않게 찾아온 사랑을 의미하고, '엿판'은 성기가 자신의 운명인 역마살을 수용했음을 상징하는 매개체이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~'배'는 화자가 떠나보내야 할 대상을, '엿판'은 성기가 세상과 단절하고자 하는 의지를 상징한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~'배'는 정착하고 싶은 화자의 소망을, '엿판'은 정착 생활에 실패한 성기의 좌절감을 나타낸다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~'배'와 '엿판'은 모두 이상향을 향한 동경을 형상화한 소재이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~'배'는 화자의 고독을 심화시키는 소재이고, '엿판'은 성기의 경제적 자립을 위한 수단이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 3.}~다음 <보기>의 설명을 참고하여 (나)의 밑줄 친 '단념'과 가장 가까운 의미를 지닌 단어는?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+\textbf{단념(斷念)}: 품었던 생각을 아주 끊어 버림. \\
+\textbf{체념(諦念)}: 희망을 버리고 아주 단념함. 도리를 깨닫는 마음. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~그는 \textbf{방심}하다가 컵을 떨어뜨렸다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~그는 가난 때문에 진학을 \textbf{포기}했다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~그는 친구의 제안을 단박에 \textbf{거절}했다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~그는 잠시 \textbf{망설}이다가 대답했다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~그는 \textbf{낙담}하여 어깨가 축 처졌다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 4.}~다음 <보기>의 단어들을 형태소 분석했을 때, 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+ㄱ. 밧줄 \\
+ㄴ. 부둣가 \\
+ㄷ. 콧노래 \\
+ㄹ. 낯선 \\
+ㅁ. 발걸음 \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~ㅁ(발걸음): 접두사 '발-'과 어근 '걸음'이 결합한 파생어이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~ㄴ(부둣가): '부두'와 '가' 사이에 사이시옷이 들어간 합성 명사이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~ㄹ(낯선): 형용사 어간 '낯설-'에 관형사형 어미 '-ㄴ'이 결합하면서 'ㄹ'이 탈락한 활용형이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~ㄷ(콧노래): '코'와 '노래' 사이에 사이시옷이 들어간 합성어이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~ㄱ(밧줄): 실질형태소 '바'(밧)와 실질형태소 '줄'이 결합된 합성어이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 5.}~다음 <보기>의 ⓐ\textasciitilde{}ⓔ에 사용된 문법 요소에 대한 설명으로 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+ⓐ 배가 들어와 던져지는 밧줄을 받는 것 \\
+ⓑ 그가 바로 네 아비다. \\
+ⓒ 왼손잡이더냐, 오른손잡이더냐? \\
+ⓓ 어머니, 엿판 하나만 맞춰 주세요. \\
+ⓔ 성기는 춘천을 향해 떠나는 계연과 체장수 영감을 배웅하고 돌아왔다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~ⓐ: '던져지는'은 '던지다'의 어간에 피동 접미사 '-어지-'가 결합된 피동 표현이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~ⓓ: '주세요'는 보조 용언 '주다'에 높임의 선어말 어미 '-시-'와 해요체 종결 어미가 결합된 형태이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~ⓒ: '-더냐'는 과거 회상의 의미를 담고 있는 의문형 종결 어미이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~ⓔ: '떠나는'은 현재 시제를 나타내는 관형사형 어미 '-는'이 사용되었으므로, 과거 시제 선어말 어미 '-았-'과 시제가 일치하지 않는다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~ⓑ: '네'는 2인칭 대명사 '너'에 관형격 조사 '의'가 결합하여 축약된 형태이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 6.}~(가)의 화자가 깨달은 '사랑'의 속성으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~사랑은 오랜 기다림 끝에 얻어지는 인내의 결실이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~사랑은 찰나의 순간에 불타오르다 쉽게 사라지는 것이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~사랑은 예고 없이 찾아와 거부할 수 없는 운명적인 것이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~사랑은 고통과 시련을 통해 성숙해지는 과정이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~사랑은 상대방의 자유를 구속하고 소유하려는 욕망이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 7.}~(나)에서 '육자배기 가락'이 갖는 기능으로 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~성기가 역마살이라는 운명을 긍정적으로 수용했음을 나타낸다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~떠나간 계연을 다시 만날 수 있을 것이라는 희망을 암시한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~어머니 옥화에 대한 성기의 원망과 분노를 표출한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~갈등의 고조를 알리며 긴장감을 조성한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~성기가 자신의 운명에 체념하지 않고 저항함을 보여준다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 8.}~(가)의 '밧줄'과 (나)의 '점(사마귀)'의 공통적인 속성을 한자 성어로 표현할 때 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~거자필반(去者必返) - 떠난 자는 반드시 돌아옴.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~자업자득(自業自得) - 자기가 저지른 일의 결과를 자기가 받음.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~불가항력(不可抗力) - 사람의 힘으로는 저항할 수 없음.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~새옹지마(塞翁之馬) - 인생의 길흉화복은 예측할 수 없음.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~결자해지(結者解之) - 일을 맺은 사람이 풀어야 함.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 9.}~(가)에서 사랑이 시작될 때 '구름과 빛과 시간'이 함께 매어진다는 것의 의미를 서술하시오. (30자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 10.}~(나)에서 옥화가 성기에게 '엿판'을 맞춰 준 행위가 갖는 의미를 서술하시오. (30자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [11~20]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}시장 경제에서 자원은 가격 기구를 통해 효율적으로 배분된다. 이때 시장 참여자들이 얻는 이득은 '잉여(Surplus)'라는 개념으로 설명할 수 있다. \\
+'소비자 잉여'란 소비자가 어떤 재화를 구매하기 위해 지불할 용의가 있는 최대 금액에서 실제로 지불한 가격을 뺀 차액을 말한다. 예를 들어, 어떤 소비자가 사과 한 개에 2,000원까지 낼 의향이 있었는데 실제 가격이 1,000원이라면, 그는 1,000원만큼의 소비자 잉여를 얻게 된다. 이는 그래프상에서 수요 곡선 아래이면서 시장 가격선 위의 면적으로 표시된다. \\
+반대로 '생산자 잉여'는 생산자가 재화를 판매하여 얻은 실제 수입에서 그 재화를 공급하기 위해 받아야만 했던 최소한의 금액(비용)을 뺀 차액이다. 이는 그래프상에서 시장 가격선 아래이면서 공급 곡선 위의 면적에 해당한다. 소비자 잉여와 생산자 잉여의 합을 '사회적 총잉여'라 하며, 완전 경쟁 시장의 균형 상태에서 이 사회적 총잉여는 극대화된다.
+\\[0.5em]
+그러나 정부는 형평성이나 사회적 안정을 위해 시장 가격에 개입하기도 하는데, 대표적인 것이 '가격 규제'이다. 그중 '최고 가격제(Price Ceiling)'는 물가 안정이나 소비자 보호를 위해 가격이 일정 수준 이상 오르지 못하도록 상한선을 두는 제도이다. 아파트 분양가 상한제나 이자율 제한 등이 이에 해당한다. 최고 가격이 시장 균형 가격보다 낮게 설정되면, 수요량은 늘어나고 공급량은 줄어들어 '초과 수요'가 발생한다. 이 경우 소비자 잉여는 증가할 수도 있지만(낮은 가격 혜택), 생산자 잉여는 감소하고 거래량이 줄어들어 결과적으로 사회적 총잉여의 감소, 즉 '자중 손실(Deadweight Loss)'이 발생한다. 또한 상품을 구하지 못한 소비자들이 웃돈을 주고 거래하는 암시장이 형성되거나 상품의 품질이 저하되는 부작용이 나타나기도 한다.
+\\[0.5em]
+이와 반대인 '최저 가격제(Price Floor)'는 공급자를 보호하기 위해 가격의 하한선을 설정하는 제도로, 최저 임금제가 대표적이다. 이 역시 시장 균형 가격보다 높게 설정될 때 효과가 있으며, 초과 공급(비자발적 실업 등)을 유발하고 자중 손실을 초래할 수 있다. 경제학에서는 이를 통해 정부의 개입이 의도와 달리 비효율성을 낳을 수 있음을 지적한다.
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 11.}~윗글의 내용과 일치하지 않는 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~정부의 가격 규제는 자원 배분의 효율성을 저해하여 자중 손실을 초래할 수 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~시장 균형 가격보다 낮은 최고 가격 설정은 초과 수요를 유발한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~최고 가격제는 주로 생산자의 이익을 보호하기 위해 시행된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~소비자 잉여는 소비자가 지불할 용의가 있는 최대 금액과 실제 지불 가격의 차이이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~완전 경쟁 시장의 균형 상태에서는 사회적 총잉여가 극대화된다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 12.}~윗글을 바탕으로 <보기>의 상황을 분석한 내용으로 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+A국 정부는 서민들의 주거 안정을 위해 임대료의 상한선을 시장 균형 가격보다 낮게 설정하는 '임대료 규제 정책'을 시행했다. 그 결과, 임대 주택을 구하려는 사람들은 줄을 섰지만 방을 구하지 못하는 상황이 벌어졌다. 일부 집주인들은 유지 보수 비용을 줄여 집 상태가 나빠지기도 했다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~이 정책은 '최고 가격제'의 일종으로 볼 수 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~집 상태가 나빠진 것은 가격 통제로 인한 품질 저하의 부작용이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~기존 세입자들 중 일부는 낮아진 임대료 덕분에 소비자 잉여가 증가했을 수 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~거래량이 줄어들어 사회 전체의 후생 손실(자중 손실)이 발생했을 것이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~임대료 규제로 인해 임대 주택 시장에 '초과 공급' 현상이 발생했다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 13.}~문맥상 ㉠\textasciitilde{}㉤과 바꿔 쓰기에 가장 적절한 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+㉠ 배분 (각자에게 몫을 나누어 줌) \\
+㉡ 용의 (어떤 일을 하려는 마음) \\
+㉢ 상한선 (위로 올라갈 수 있는 한계) \\
+㉣ 규제 (규칙이나 법규로 제한함) \\
+㉤ 초래 (어떤 결과를 가져오게 함) \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~㉤: 유래\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~㉡: 고의\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~㉠: 분배\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~㉢: 마지노선\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~㉣: 권장\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 14.}~다음 <보기>의 단어 구조 분석으로 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+① 웃돈 \\
+② 비효율성 \\
+③ 안팎 \\
+④ 드높다 \\
+⑤ 되찾다 \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~⑤: '되다'의 어근 '되'와 '찾다'의 어근 '찾'이 결합한 합성 용언이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~②: '효율(效率)'에 접두사 '비(非)-'가 붙은 후, 다시 접미사 '-성(性)'이 결합한 말이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~①: 접두사 '웃-'과 명사 '돈'이 결합한 파생어이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~④: '높다'의 어근에 '심하게'의 뜻을 더하는 접두사 '드-'가 결합한 파생어이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~③: '안'과 '밖'이 결합하면서 'ㅎ' 소리가 덧나는(곡용) 합성어이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 15.}~다음 <보기>의 밑줄 친 부분에서 일어나는 음운 변동에 대한 설명으로 옳은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+ㄱ. \textbf{막일}[망닐]을 하다. \\
+ㄴ. \textbf{꽃잎}[꼰닙]이 떨어진다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~ㄱ과 ㄴ 모두 모음 조화 현상이 일어난다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~ㄱ과 ㄴ 모두 'ㄴ' 첨가 현상이 일어난다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~ㄱ은 거센소리되기, ㄴ은 된소리되기가 일어난다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~ㄱ은 자음군 단순화, ㄴ은 음절의 끝소리 규칙만 적용된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~ㄱ은 비음화가 일어나지 않지만, ㄴ은 비음화가 일어난다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 16.}~윗글을 통해 추론할 수 있는 내용으로 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~자중 손실이 발생한다는 것은 자원이 비효율적으로 배분되고 있음을 의미한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~소비자 잉여가 극대화되면 생산자 잉여는 반드시 0이 된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~최저 가격제는 모든 노동자에게 항상 이익이 된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~시장 가격이 너무 낮아 공급자가 손해를 볼 때 최고 가격제를 실시한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~정부의 개입은 언제나 시장 실패를 완벽하게 해결한다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 17.}~시장 균형 가격이 5,000원인 상품에 대해 정부가 4,000원으로 최고 가격을 설정했을 때 예상되는 결과는?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~아무런 경제적 효과가 나타나지 않는다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~초과 공급이 발생하여 재고가 남게 된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~공급량이 수용량을 초과하여 가격 하락 압력이 발생한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~생산자 잉여는 증가하고 소비자 잉여는 감소한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~실제 거래량은 시장 균형 거래량보다 감소한다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 18.}~'최저 가격제'가 실효성을 갖기 위한 조건으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~정부의 시장 개입이 전혀 없어야 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~최저 가격이 시장 균형 가격보다 낮게 설정되어야 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~최저 가격과 시장 균형 가격이 일치해야 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~최저 가격이 시장 균형 가격보다 높게 설정되어야 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~공급의 가격 탄력성이 완전 비탄력적이어야 한다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 19.}~정부의 가격 규제로 인해 사회적 총잉여가 감소하는 현상을 일컫는 경제학 용어를 쓰시오.\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 20.}~최고 가격제가 초래할 수 있는 부작용을 본문 내용을 바탕으로 두 가지 이상 서술하시오. (50자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [21~30]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}(가) \\
+살어리 살어리랏다 쳥산(靑山)애 살어리랏다. \\
+멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다. \\
+얄리얄리 얄라셩 얄라리 얄라.
+\\[0.5em]
+우러라 우러라 새여 자고 니러 우러라 새여. \\
+널라와 시름 한 나도 자고 니러 우니노라. \\
+얄리얄리 얄라셩 얄라리 얄라.
+\\[0.5em]
+어듸라 더디던 돌코 누리라 마치던 돌코. \\
+믜리도 괴리도 업시 마자셔 우니노라. \\
+얄리얄리 얄라셩 얄라리 얄라.
+\\[0.5em]
+살어리 살어리랏다 바ᄅᆞ래 살어리랏다. \\
+ᄂᆞᄆᆞ자기 구조개랑 먹고 바ᄅᆞ래 살어리랏다. \\
+얄리얄리 얄라셩 얄라리 얄라.
+\\[0.5em]
+가다니 배브른 도긔 설진 강수를 비조라. \\
+조롱곳 누로기 매와 잡사와니 내 엇디 ᄒᆞ리잇고. \\
+얄리얄리 얄라셩 얄라리 얄라.
+\\[0.5em]
+- 작자 미상, <청산별곡>
+\\[0.5em]
+(나) \\
+운영이 붓을 들어 김 진사에게 답서를 쓰니 다음과 같았다. \\
+"박명한 첩 운영은 재배하고 낭군께 사뢰나이다. 삼가 생각건대, 궁궐 담장은 높고 깊은데 규방은 닫혀 있어, 편지를 전할 인편은 끊어지고 그리움만 해를 거듭하였습니다. \\
+(중략) \\
+낭군께서는 첩의 재주 없음을 생각지 않으시고, 첩이 지은 시의 보잘것없는 재주를 사랑하시어 잠 못 이루는 병을 앓기에 이르셨습니까? 이 몸은 비록 깊은 궁궐에 갇혀 있고 질곡에 매여 있는 몸이지만, 낭군을 사모하는 마음이야 어찌 금석(金石)보다 굳지 않겠습니까? \\
+하오나 대군께서 내리신 엄명은 서릿발 같고, 궁중의 법도는 지극히 엄합니다. 또한 제 곁에는 시기하고 질투하는 자들이 많아 눈과 귀가 곳곳에 도사리고 있습니다. 만약 이 일이 누설된다면 제 목숨이 보존되기 어려움은 말할 것도 없고, 낭군께도 큰 화가 미칠 것이니 두려운 마음 금할 길이 없습니다. \\
+바라옵건대 낭군께서는 마음을 굳게 잡수시고 병을 떨치고 일어나, 학업에 정진하여 과거에 급제하시고 가문을 빛내시옵소서. 이승에서 못다 한 인연은 후생을 기약하고자 하오니, 부디 옥체를 ⓐ보전하시어 만수무강하소서." \\
+운영은 편지를 다 쓰고 나자 흐르는 눈물을 걷잡을 수 없었다. 달빛은 더욱 희미해지고, 멀리서 들려오는 기러기 울음소리가 애간장을 녹이는 듯하였다.
+\\[0.5em]
+- 작자 미상, <운영전>
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 21.}~(가)와 (나)의 공통점으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~화자(또는 서술자)의 정서를 자연물에 의탁하여 표현하고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~대화 형식을 통해 인물 간의 갈등 해소 과정을 보여주고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~부정적 현실을 비판하며 사회 개혁의 의지를 드러내고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~현실의 고통을 잊기 위해 초월적 세계로의 도피를 꿈꾸고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~계절의 변화에 따라 시상을 전개하며 인생의 무상함을 강조하고 있다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 22.}~(가)의 '새'와 (나)의 '기러기'에 대한 설명으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~'새'와 '기러기'는 모두 화자가 지향하는 자유로운 삶을 상징한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~'새'는 화자의 분신으로서 현실 도피처를 안내하고, '기러기'는 화자와 낭군을 이어주는 매개체 역할을 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~'새'는 화자에게 위로를 주는 존재이고, '기러기'는 화자의 앞날을 예언하는 존재이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~'새'는 화자의 감정이 이입된 대상이고, '기러기'는 화자의 슬픔을 심화시키는 객관적 상관물이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~'새'는 화자와 대조되는 처지의 대상이고, '기러기'는 화자의 동경의 대상이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 23.}~다음 <보기>의 설명을 참고할 때, ⓐ와 바꿔 쓰기에 가장 적절한 한자어는?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+\textbf{보전(保全)}: 온전하게 보호하여 유지함. \\
+\textbf{보존(保存)}: 잘 보호하고 간수하여 남김. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~유지(維持)\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~건사(健事)\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~수호(守護)\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~보존(保存)\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~보위(保衛)\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 24.}~다음 <보기>의 밑줄 친 부분 중 '한글 맞춤법'에 어긋난 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+① 그는 나를 보자마자 \textbf{멋쩍게} 웃었다. \\
+② 시험에 합격할 수 있을지 \textbf{자신이 없다}. \\
+③ 며칠 밤을 새워 공부했더니 \textbf{눈곱}이 끼었다. \\
+④ 김치찌개를 끓일 때는 돼지고기를 \textbf{널찍하게} 썰어 넣어야 맛있다. \\
+⑤ 친구와 싸운 뒤 화해하려고 먼저 \textbf{알은체}를 했다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~② 자신이 없다\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~③ 눈곱\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~① 멋쩍게\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~④ 널찍하게\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~⑤ 알은체\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 25.}~(가)의 밑줄 친 '살어리랏다'에 대한 중세 국어 문법적 설명으로 적절한 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+고려 가요 '청산별곡'은 문자로 정착되기 전 오랫동안 구전되다가 훈민정음 창제 이후 문헌(악장가사 등)에 기록되었다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~주로 평서문에서 사용되는 종결 어미 '-다'가 쓰여 단순히 사실을 진술하고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~'살-(어근) + -어리(접미사) + -랏다(어미)'의 구조로, '살고 싶어라' 정도의 소망을 나타낸다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~'살-(어근) + -어(연결 어미) + -리(미래 시제) + -랏다(종결 어미)'로 분석된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~'ㄹ' 받침 뒤에서 매개 모음 '으'가 생략된 형태로, 현대 국어의 표기법과 일치한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~'살-'(Live)에 시제 선어말 어미 '-었-'이 결합된 형태이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 26.}~(가)의 화자가 현실을 대하는 태도의 변화 과정을 바르게 나열한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~현실 도피(청산) → 비애의 심화 → 현실 도피(바다) → 일시적 해소(술)\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~현실 비판 → 이상향 동경 → 현실 타협 → 운명 수용\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~개인적 고뇌 → 사회적 모순 인식 → 집단적 저항 → 이상적 세계 실현\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~자연 친화 → 속세에 대한 미련 → 고독감 토로 → 현실 극복 의지\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~현실 부정 → 이상향 모색 → 좌절과 체념 → 미래에 대한 희망\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 27.}~(나)에서 운영이 편지를 통해 전달하고자 하는 핵심 내용으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~자신의 처지를 비관하며 김 진사에게 이별을 통보한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~자신의 시를 칭찬해 준 김 진사에게 문학적 조언을 구한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~안평대군의 엄격한 감시를 피해 자신을 구출해 달라고 호소한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~김 진사와의 사랑을 위해 함께 도망칠 계획을 제안한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~현세에서의 만남이 어려움을 토로하며 후생의 기약을 당부한다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 28.}~(가)의 '술'과 (나)의 '편지'가 갖는 공통적인 문학적 기능은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~사회적 모순을 고발하고 저항 의지를 고취시키는 수단이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~화자와 청자 사이의 단절된 관계를 영구적으로 확인시켜 준다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~과거 회상을 통해 행복했던 시절을 떠올리게 하는 소재이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~화자의 정서를 일시적으로나마 해소하거나 전달하는 매개체이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~화자의 내적 갈등을 유발하는 원인이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 29.}~(가)에서 '돌'을 맞아서 운다고 표현한 화자의 심정을 한 문장으로 서술하시오. (30자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 30.}~(나)에서 운영이 김 진사와의 사랑을 이루기 어렵다고 판단하는 현실적 제약 두 가지를 본문에서 찾아 서술하시오. (30자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [31~40]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}언어 철학의 핵심 과제 중 하나는 언어 표현이 외부 세계의 대상을 어떻게 가리키는지, 즉 '지시(Reference)'의 문제를 해명하는 것이다. 이 문제에 대해 현대 분석 철학의 기초를 닦은 프레게와 러셀은 서로 다른 해법을 제시했다.
+\\[0.5em]
+프레게는 1892년 논문 <뜻과 지시체에 관하여>에서 언어 표현의 의미를 '뜻(Sinn, Sense)'과 '지시체(Bedeutung, Reference)'로 엄격히 구분했다. 그에 따르면 '지시체'는 단어가 가리키는 실제 대상이고, '뜻'은 그 지시체가 제시되는 방식이다. 예를 들어 '샛별'과 '개밥바라기'는 모두 금성이라는 동일한 '지시체'를 갖지만, 각각 '아침에 뜨는 별'과 '저녁에 뜨는 별'이라는 서로 다른 '뜻'을 지닌다. 프레게는 이러한 구분을 통해 "a=b"와 같은 동일성 진술이 어떻게 정보적 가치를 지닐 수 있는지 설명했다. 하지만 그의 이론은 "현 프랑스 국왕"처럼 현실에 존재하지 않는 대상을 가리키는 '빈 지시어'가 포함된 문장의 진리치를 설명하는 데 어려움이 있었다. 프레게는 이러한 문장은 뜻은 있지만 지시체(진리치)가 결여되어 있어 참도 거짓도 아니라고 보았다.
+\\[0.5em]
+반면 러셀은 프레게의 이원론적 의미론을 비판하며, '한정 기술구(Definite Description)'에 대한 분석을 통해 문제 해결을 시도했다. 그는 "현 프랑스 국왕은 대머리이다"와 같은 문장을 논리적으로 분석하면 세 가지 명제, 즉 '현 프랑스 국왕이 적어도 한 명 존재한다', '현 프랑스 국왕은 오직 한 명이다', '그는 대머리이다'의 연언(AND 결합)으로 환원된다고 주장했다. 따라서 현실 세계에 '현 프랑스 국왕'이 존재하지 않는다면 첫 번째 명제가 거짓이 되므로, 전체 문장은 무의미한 것이 아니라 '거짓'인 명제가 된다. 러셀은 고유명사처럼 보이는 많은 표현들이 사실은 위장된 한정 기술구이며, 그것을 논리적 구조로 풀어서 분석함으로써 존재하지 않는 대상에 대한 언급이 야기하는 혼란을 해소할 수 있다고 보았다. 그의 '기술 이론'은 언어의 표면적 문법 구조와 심층적 논리 구조가 다를 수 있음을 보여주었다.
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 31.}~윗글의 내용과 일치하는 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~프레게는 '샛별'과 '개밥바라기'가 뜻은 같지만 지시체가 다르다고 보았다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~프레게는 빈 지시어가 포함된 문장은 참도 거짓도 아닌 진리치 공백 상태라고 보았다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~프레게와 러셀은 모두 빈 지시어 문제를 해결하기 위해 '뜻'의 개념을 도입했다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~러셀은 한정 기술구를 고유명사와 동일한 기능을 하는 지시어로 간주했다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~러셀은 언어의 표면적 문법 구조와 논리적 구조가 일치한다고 주장했다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 32.}~러셀의 관점에서 '현재 한국의 왕은 미혼이다'라는 문장을 분석할 때 적절한 판단은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~지시하는 대상이 없으므로 무의미하다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~'한국의 왕'이라는 개념은 존재하므로 문장의 진리치는 상황에 따라 달라진다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~문법적으로 완벽한 문장이므로 무조건 참이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~'한국의 왕이 존재한다'는 명제가 거짓이므로 전체 문장은 거짓이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~뜻은 있지만 지시체가 없으므로 참도 거짓도 아니다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 33.}~다음 <보기>의 단어 뜻풀이가 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+① 해명(解明): 까닭이나 내용을 풀어서 밝힘. \\
+② 결여(缺如): 마땅히 있어야 할 것이 빠져서 없거나 모자람. \\
+③ 환원(還元): 본디의 상태나 형상으로 다시 돌아가게 함. \\
+④ 야기(惹起): 일이나 사건 따위를 끌어 일으킴. \\
+⑤ 해소(解消): 어떤 일의 결과를 미리 짐작하여 앎. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+\noindent
+\mbox{①~④ 야기}\hspace{1em}\mbox{②~① 해명}\hspace{1em}\mbox{③~③ 환원}\hspace{1em}\mbox{④~② 결여}\hspace{1em}\mbox{⑤~⑤ 해소}
+
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 34.}~다음 <보기>의 단어들의 표준 발음으로 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+① 맑다 \\
+② 흙 위 \\
+③ 넓다 \\
+④ 밟다 \\
+⑤ 핥다 \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~③ [널따]\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~⑤ [할따]\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~② [흘귀]\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~① [막따]\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~④ [발따]\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 35.}~다음 <보기>의 문장 구조에 대한 설명으로 옳은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+ㄱ. 우리는 그가 범인임을 깨달았다. \\
+ㄴ. 비가 소리도 없이 내린다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~ㄱ과 ㄴ 모두 주어와 서술어의 관계가 한 번만 나타나는 홑문장이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~ㄱ과 ㄴ 모두 이어진 문장 중 종속적으로 이어진 문장에 해당한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~ㄱ은 명사절을 안은 문장이고, ㄴ은 부사절을 안은 문장이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~ㄱ은 인용절을 안은 문장이고, ㄴ은 명사절을 안은 문장이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~ㄱ은 서술절을 안은 문장이고, ㄴ은 관형절을 안은 문장이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 36.}~프레게의 입장에서 '개밥바라기'와 '샛별'의 관계를 설명한 것으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~두 표현은 서로 아무런 관계가 없다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~뜻과 지시체가 모두 동일하다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~뜻과 지시체가 모두 다르다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~뜻은 같지만 지시체가 다르다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~뜻은 다르지만 지시체는 동일하다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 37.}~러셀이 '기술 이론'을 통해 해결하고자 했던 주된 철학적 문제는 무엇인가?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~존재하지 않는 대상을 지시하는 문장의 의미와 진리치 문제\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~도덕적 판단의 객관적 기준을 세우는 문제\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~국가 간의 언어 번역 가능성을 탐구하는 문제\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~인간의 언어 습득 능력이 선천적인지 후천적인지 밝히는 문제\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~과학적 지식의 확실성을 입증하는 문제\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 38.}~윗글을 바탕으로 <보기>의 주장에 대해 비판할 내용으로 가장 적절한 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+\textbf{철수}: "'황금산은 높다'라는 문장을 봐. 실제로 황금산은 없지만, 우리는 이 문장의 의미를 이해할 수 있어. 그렇다면 '황금산'이라는 단어는 어딘가에 존재하는 대상을 가리키고 있는 것이 분명해. 현실 세계가 아니라면, 일종의 관념 세계에라도 그 대상이 존재해야만 해." \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~관념 세계에 존재한다는 설명은 과학적으로 증명되었으므로 타당한 주장이야.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~프레게라면 '황금산'의 뜻은 있지만 지시체는 없다고 말할 거야. 의미를 이해한다고 해서 반드시 대상이 존재해야 하는 건 아니야.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~러셀의 입장에서 보면 '황금산'은 고유명사이므로 반드시 지시체가 있어야 해.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~맞아. 우리가 상상할 수 있는 모든 것은 현실에 존재한다고 봐야 해.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~'황금산'은 동음이의어일 가능성이 높으니 문맥을 더 살펴봐야 해.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 39.}~프레게가 '뜻'과 '지시체'를 구분하게 된 계기가 된 언어 현상은 무엇인지 서술하시오. (30자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 40.}~러셀이 '빈 지시어'가 포함된 문장의 진리치 문제를 해결한 방법을 서술하시오. (50자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [41~50]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}(가) \\
+나뭇잎은 햇빛에 싱싱하게 윤이 나고 \\
+그와 비슷한 촌수로 물결은 더욱 빛나는 무늬를 끊임없이 빚고 \\
+또한 바람은 연방 그리운 것 위에 볼 줄밖에 모르는 이것들. \\
+천날 만날 한결같은 오, 이것들을 보아라, \\
+물방울처럼 스러졌다가 이어져 마음은 움직이는 것을 통하여 \\
+사랑의 연습만을 부지런히 하고 \\
+그것을 영원토록 지치지 않고 하겠다는 그것 말고 나는 볼 수가 없구나. \\
+참으로 환장할 일은 이것이로다.
+\\[0.5em]
+- 박재삼, <그리움>
+\\[0.5em]
+(나) \\
+"아비는 어쩔 셈으로 송화 누이의 눈을 멀게 했는가." \\
+사내의 말은 이제 그것을 묻고 있었다. \\
+"아직도 나를 원망하고 있느냐?" \\
+노인은 그러나 사내의 말은 들이지 않고 자신의 말만을 뇌까리고 있었다. \\
+"원망이라니요? 다 지난 일을. 제가 묻고 싶은 것은……." \\
+"그렇다, 용서해라. 너는 내 자식이 아니었으니 나를 버리고 나간 것은 나무랄 일이 아니었다. 하나 송화는 그럴 수가 없었다. 제 어미가 없으니 내가 곁을 지켜 줘야 했다. 하지만 나도 이제는 너무 늙고 지쳤어. 내가 죽고 나면 송화는 누구를 의지해 살아가겠느냐. 눈을 잃어버리면…… 그러면 송화는 좋든 싫든 내 곁에 남을 수밖에 없지 않겠느냐. 몸이 성한 너까지 나를 버리고 떠나갔는데, 눈먼 누이가 내 곁을 떠나 어디로 가겠느냐. 내 욕심이었다. 너희와 끝까지 함께 있고 싶었던 내 욕심이……." \\
+노인의 목소리는 흐느낌에 섞여 끊어질 듯 이어지고 있었다. \\
+"하지만 그 때문만은 아니었다. 너도 알다시피 송화의 소리에는 결정적인 한(恨)이 부족했다. 소리는 맑고 고왔지만 마음 깊은 곳에서 우러나오는 그 무엇이 없었어. 그것을 채워 주고 싶었다. 사람의 한이라는 것은 일생을 살아가면서 이 가슴 저 가슴에 첩첩이 쌓여 맺히는 것인데, 송화는 아직 어려서 그런 한을 알 지 못했어. 어미를 일찍 여의었지만 내 그늘 시 하도 컸던 탓인지도 모를 일이지. 그래서 내가 나섰던 게다. 내 자식의 눈을 멀게 해서라도 그 가슴에 한을 심어 주고 싶었단 말이다. 소리의 완성을 위해서……." \\
+동호는 숨이 막힐 것 같았다. 소리의 완성, 그것이 무엇이기에 자식의 눈까지 멀게 했단 말인가. \\
+(중략) \\
+다음 날 아침, 사내는 다시 길을 떠났다. 잠에서 깨어난 여인은 사내가 떠난 길을 멍하니 바라보며 소리 한 대목을 흥얼거리고 있었다. 그것은 지난밤 사내와 함께 맞추었던 바로 그 춘향가의 이별 대목이었다. 여인의 소리는 맑고 애절했다. 그리고 그 소리에는 이제껏 보지 못했던 깊은 한이 서려 있었다.
+\\[0.5em]
+- 이청준, <서편제>
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 41.}~(가)와 (나)에 대한 설명으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~(가)는 과거와 현재를 교차하여, (나)는 공간의 이동을 통해 인물의 심리 변화를 보여준다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~(가)는 자연물의 속성을 통해, (나)는 인물의 행위와 대화를 통해 주제 의식을 드러낸다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~(가)는 화자의 내면 독백을 중심으로, (나)는 서술자의 직접 개입을 중심으로 사건을 전달한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~(가)는 감각적 이미지를 활용하여 자연 친화적 태도를, (나)는 향토적 소재를 활용하여 공동체적 유대감을 강조한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~(가)와 (나)는 모두 이상적인 세계에 대한 동경과 현실의 좌절감을 대비시키고 있다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 42.}~(가)의 '사랑의 연습'과 (나)의 '소리의 완성'에 대한 이해로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~'사랑의 연습'은 끊임없이 반복되는 자연의 순환적 속성을, '소리의 완성'은 고통과 희생을 통해 도달하는 예술적 경지를 의미한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~'사랑의 연습'은 미완성의 상태에 머무르는 안타까움을, '소리의 완성'은 인위적으로 도달할 수 있는 경지를 의미한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~'사랑의 연습'은 화자가 지향하는 이상적 삶을, '소리의 완성'은 유봉이 송화에게 강요하는 세속적 성공을 의미한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~'사랑의 연습'은 대상과의 합일을, '소리의 완성'은 대상과의 영원한 결별을 전제로 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~'사랑의 연습'과 '소리의 완성'은 모두 현실의 고통을 잊기 위한 도피처로서의 기능을 한다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 43.}~문맥상 ⓐ\textasciitilde{}ⓔ의 단어와 바꿔 쓰기에 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+ⓐ 윤이 나고 (빛이 나서 반짝이다) \\
+ⓑ 뇌까리고 (불만스러운 말투로 계속 말하다) \\
+ⓒ 의지(依支)해 (다른 것에 몸을 기대다) \\
+ⓓ 여의 어서 (죽어서 이별하다) \\
+ⓔ 애절(哀切)했다 (몹시 슬프다) \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~ⓒ: 기대로\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~ⓑ: 되뇌고\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~ⓐ: 반짝이고\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~ⓓ: 사별하고\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~ⓔ: 비통했다\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 44.}~다음 <보기>의 밑줄 친 부분에 대한 문법적 설명으로 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+① 나를 \textbf{버리고} 나간 것 \\
+② 송화는 누구를 \textbf{의지해} 살아가겠느냐 \\
+③ 내 자식의 눈을 멀게 \textbf{해서라도} \\
+④ 깊은 곳에서 \textbf{우러나오는} 그 무엇 \\
+⑤ \textbf{잠에서} 깨어난 여인 \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~③: '해서라도'는 '하- + -아서 + -라도'의 결합으로 분석할 수 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~①: '버리고'는 종결 어미 '-고'가 쓰여 문장을 끝내고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~⑤: '잠에서'의 '에서'는 부사격 조사로, 출발점이나 유래의 의미를 지닌다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~②: '의지해'는 '의지하-'에 어미 '-여'가 결합하여 '의지하여'가 된 후 줄어든 형태이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~④: '우러나오는'은 동사 '우러나오다'의 관형사형으로 뒤에 오는 명사를 수식한다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 45.}~다음 <보기>는 (나)의 문장들을 문법적으로 분석한 것이다. 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+ㄱ. 아비는 송화 누이의 눈을 멀게 했다. \\
+ㄴ. 소리의 완성을 위해서 가슴에 한을 심어 주고 싶었다. \\
+ㄷ. 너는 내 자식이 아니었으니 나를 버리고 나간 것은 나무랄 일이 아니었다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~ㄷ: '아니었으니'는 연결 어미 '-으니'를 사용하여 인과 관계를 나타내고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~ㄱ, ㄴ, ㄷ 모두 서술어의 자릿수를 채우기 위해 목적어가 필요한 문장이 포함되어 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~ㄱ: '눈을 멀게 했다'는 주동문을 사동문으로 바꾼 형태이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~ㄷ: '나무랄 일이 아니었다'에서 '나무랄'은 관형사형 어미 '-ㄹ'이 붙어 미래 시제를 나타낸다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~ㄴ: '심어 주고 싶었다'에는 본용언 '심다'와 보조 용언 '주다', '싶다'가 사용되었다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 46.}~(가)의 '이것들'과 (나)의 '그 무엇'에 대한 설명으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~'이것들'과 '그 무엇'은 모두 인간의 힘으로 통제할 수 없는 초자연적 힘을 가리킨다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~'이것들'은 화자를 현혹시키는 대상을, '그 무엇'은 송화가 극복해야 할 장애물을 의미한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~'이것들'은 화자가 깨달은 사랑의 속성을, '그 무엇'은 유봉이 추구하는 소리의 본질(한)을 의미한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~'이것들'은 변화무쌍한 세태를, '그 무엇'은 변하지 않는 진리를 상징한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~'이것들'은 현실의 구속을, '그 무엇'은 예술적 자유를 의미한다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 47.}~(나)에서 '송화'가 춘향가의 '이별 대목'을 부르는 행위에 담긴 의미로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~떠나간 동호에 대한 그리움과 재회에 대한 희망을 노래한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~아버지 유봉에 대한 원망을 간접적으로 표출한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~판소리 실력을 과시하여 동호의 마음을 돌리려 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~자신의 기구한 운명을 한탄하며 세상을 비관한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~동호와의 이별을 운명으로 받아들이고 한(恨)을 예술적으로 승화시킨다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 48.}~(가)의 화자가 지향하는 삶의 태도를 한자 성어로 표현할 때 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~맥수지탄(麥秀之嘆) - 나라가 망한 것을 한탄함.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~고진감래(苦盡甘來) - 고생 끝에 낙이 옴.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~일편단심(一片丹心) - 한 조각의 붉은 마음, 변치 않는 참된 마음.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~무아지경(無我之境) - 정신이 한곳에 쏠려 자신을 잊어버리는 경지.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~안빈낙도(安貧樂道) - 가난하면서도 편안한 마음으로 도를 즐김.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 49.}~(가)에서 '환장할 일'이라고 표현한 이유를 화자의 심리 상태와 관련지어 서술하시오. (40자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 50.}~(나)에서 유봉이 송화의 눈을 멀게 한 '예술적 이유'를 찾아 서술하시오. (30자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+
+\vspace{1mm}
+\noindent{\small\bfseries ◆ 다음 글을 읽고 물음에 답하시오. [51~60]}
+\vspace{0.5mm}
+
+\begin{passagebox}
+\noindent{}일반적으로 우리 몸의 면역 체계에서 '킬러 T세포(세포독성 T림프구)'는 바이러스에 감염된 세포나 암세포 표면의 특정 항원을 T세포 수용체(TCR)로 정확히 인식하여 제거한다고 알려져 있다. 그러나 최근 연구들은 특정 항원을 인지하지 않고도 주변 환경의 신호만으로 활성화되는 이른바 '방관자(Bystander) 킬러 T세포'의 존재와 역할에 주목하고 있다.
+\\[0.5em]
+방관자 킬러 T세포는 직접적으로 항원을 만나지 않아도, 감염 부위 주변에서 분비되는 인터루킨(IL-12, IL-15, IL-18 등)과 같은 염증성 사이토카인에 의해 활성화된다. 이렇게 깨어난 세포들은 항원 특이성과 무관하게 퍼포린이나 그랜자임 같은 독성 물질을 분비하거나, 면역 조절 물질인 인터페론 감마를 방출하여 주변 세포들에게 영향을 미친다.
+\\[0.5em]
+이러한 방관자 활성화 기제는 양날의 검과 같다. 긍정적인 측면에서는 초기 감염 시 특정 항원 특이 T세포가 충분히 증식하기 전에 신속하게 바이러스 증식을 억제하거나, 항원을 숨기고 도망가는(항원 회피) 바이러스나 암세포까지 공격하여 방어막을 형성할 수 있다. 이는 인체의 면역 방어 효율을 높이는 중요한 전략이 된다.
+\\[0.5em]
+하지만 부정적인 측면도 무시할 수 없다. 방관자 킬러 T세포는 적과 아군을 구별하는 항원 인식 과정이 생략되어 있기 때문에, 때로는 감염되지 않은 정상 조직까지 무차별적으로 공격하여 과도한 염증 반응이나 조직 손상을 유발할 수 있다. A형 간염 바이러스 감염 시 발생하는 심각한 간 손상이나, 류마티스 관절염, 다발성 경화증과 같은 자가면역 질환의 발병 및 악화 과정에 이들 방관자 T세포가 깊이 관여한다는 사실이 속속 밝혀지고 있다. 따라서 이들의 활성, 특히 'NKG2D'와 같은 수용체를 통한 작용 기제를 정밀하게 제어하는 기술은 자가면역 질환의 새로운 치료법 개발에 핵심적인 열쇠가 될 것이다.
+\end{passagebox}
+\vspace{1mm}
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 51.}~윗글의 내용과 일치하지 않는 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~방관자 킬러 T세포는 T세포 수용체를 통해 특정 항원을 인식한 후 활성화된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~자가면역 질환의 치료를 위해 방관자 T세포의 제어 기술이 연구되고 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~방관자 킬러 T세포의 과도한 활성화는 정상 조직에 손상을 줄 수 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~방관자 킬러 T세포는 초기 감염 시 빠른 방어 작용을 수행할 수 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~염증성 사이토카인은 방관자 킬러 T세포를 활성화시키는 신호 역할을 한다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 52.}~윗글을 바탕으로 추론한 내용으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~방관자 킬러 T세포는 항원 인식 과정이 없으므로 사이토카인에도 반응하지 않을 것이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~항원 회피 능력을 가진 암세포는 방관자 킬러 T세포의 공격을 완벽하게 피할 수 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~특정 항원 특이 T세포가 없는 환자는 방관자 킬러 T세포만으로 모든 질병을 완치할 수 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~NKG2D 등의 수용체를 억제하면 자가면역 질환의 증상을 완화할 수 있는 가능성이 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~면역 반응의 효율성만을 고려한다면 방관자 킬러 T세포를 모두 제거하는 것이 유리하다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 53.}~다음 <보기>의 설명을 참고하여 ㉠\textasciitilde{}㉤의 단어 뜻풀이가 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+㉠ 인지(認知): 어떤 사실을 인정하여 앎. \\
+㉡ 무관(無關): 관계가 없음. \\
+㉢ 증식(增殖): 늘어서 불어남. \\
+㉣ 관여(關與): 어떤 일에 관계하여 참여함. \\
+㉤ 정밀(精密): 아주 정교하고 치밀함. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~㉡ : 무관\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~㉣ : 관여\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~해당 단어들은 모두 문맥에 맞게 적절하게 사용되었다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~㉢ : 증식\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~㉠ : 인지\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 54.}~다음 <보기>는 윗글의 문장 성분을 분석한 것이다. 적절하지 않은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+① 면역 체계에서 킬러 T세포는 바이러스를 제거한다. \\
+② 최근 연구들은 방관자 킬러 T세포의 역할을 주목하고 있다. \\
+③ 이 세포들은 독성 물질을 분비하거나 인터페론 감마를 방출한다. \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~②에서 주어는 '역할'이고, '최근 연구들은'은 부사어이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~①에서 '면역 체계에서'는 장소를 나타내는 부사어이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~①에서 '제거한다'는 목적어 '바이러스를'을 필요로 하는 타동사이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~②에서 '주목하고 있다'는 본용언과 보조 용언이 결합하여 서술어 역할을 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~③은 '이 세포들은 독성 물질을 분비한다'와 '(이 세포들은) 인터페론 감마를 방출한다'가 대등하게 이어진 문장이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 55.}~윗글의 단어들에 적용된 음운 변동에 대한 설명으로 옳은 것은?\par}
+
+\vspace{1mm}
+\begin{boxibox}
+ㄱ. \textbf{생략}[생냑] \\
+ㄴ. \textbf{협력}[혐녁] \\
+ㄷ. \textbf{항원}[항원] \\
+ㄹ. \textbf{독립}[동닙] \\
+\end{boxibox}
+\vspace{1mm}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~ㄷ: 두음 법칙이 적용되어 [양원]으로 발음해야 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~ㄹ: 자음군 단순화가 적용되어 [도립]으로 발음해야 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~ㄱ, ㄴ, ㄷ, ㄹ 모두 거센소리되기가 일어난다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~ㄴ: 유음화가 일어나 [혈력]으로 발음해야 한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~ㄱ: 'ㄴ' 첨가 후 비음화가 일어난다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 56.}~윗글의 '방관자 킬러 T세포' 활성화 원리로 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~체온 상승과 같은 물리적 자극에 의해서만 활성화된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~주변 환경의 염증성 사이토카인 신호를 받아 활성화된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~T세포 수용체가 특정 항원과 결합하여 활성화된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~바이러스의 DNA를 직접 복제하여 활성화된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~암세포가 분비하는 항체와 반응하여 활성화된다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 57.}~윗글을 바탕으로 [A형 간염 환자]의 간 손상 원인을 추론한 내용으로 가장 적절한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~간세포가 사이토카인을 과다 분비하여 스스로 사멸했기 때문이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~바이러스가 간세포 내에서 증식하여 세포를 직접 터뜨렸기 때문이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~활성화된 방관자 킬러 T세포가 감염되지 않은 정상 간세포까지 공격했기 때문이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~항원 특이 T세포가 바이러스에 감염된 간세포만을 선택적으로 제거했기 때문이다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~면역 체계가 작동을 멈추어 바이러스 방어에 실패했기 때문이다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 58.}~방관자 킬러 T세포의 '두 얼굴(이중성)'을 가장 잘 요약한 것은?\par}
+
+\vspace{0.5mm}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}①~암세포는 잘 죽이지만 바이러스는 죽이지 못한다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}②~사이토카인에는 반응하지만 케모카인에는 반응하지 않는다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}③~초기 바이러스 방어에는 유리하지만, 과도하면 정상 조직 손상을 유발할 수 있다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}④~선천 면역에는 기여하지만 적응 면역에는 방해가 된다.\par}
+{\hangindent=1.3em \hangafter=1 \noindent\hspace{0.3em}⑤~낮에는 활성화되고 밤에는 비활성화된다.\par}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 59.}~방관자 킬러 T세포가 활성화되는 구체적인 조건을 본문에서 찾아 서술하시오. (30자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\noindent\begin{minipage}{\columnwidth}
+\vspace{2mm}
+{\hangindent=1.5em \hangafter=1 \noindent{\bfseries 60.}~윗글을 바탕으로 방관자 킬러 T세포와 관련된 질환의 발병 원인을 서술하시오. (40자 내외)\par}
+
+\vspace{3mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\noindent\hrulefill
+\vspace{2.5mm}
+\vspace{1mm}
+\vspace{4mm}
+\end{minipage}
+\par
+
+\end{multicols}
+\newpage
+
+\noindent{\Large\bfseries 정답표}
+\vspace{3mm}
+\noindent\rule{\textwidth}{0.8pt}
+\vspace{3mm}
+
+\noindent{\bfseries 객관식 정답}
+\vspace{2mm}
+
+\begin{tabularx}{\textwidth}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{지문} & \textbf{번호} & ① & ② & ③ & ④ & ⑤ \\
+\hline
+[1]문 & 1 &  &  &  & \textbf{O} &  \\
+\hline
+[1]문 & 2 & \textbf{O} &  &  &  &  \\
+\hline
+[1]문 & 3 &  & \textbf{O} &  &  &  \\
+\hline
+[1]문 & 4 & \textbf{O} &  &  &  &  \\
+\hline
+[1]문 & 5 &  &  &  & \textbf{O} &  \\
+\hline
+[1]문 & 6 &  &  & \textbf{O} &  &  \\
+\hline
+[1]문 & 7 & \textbf{O} &  &  &  &  \\
+\hline
+[1]문 & 8 &  &  & \textbf{O} &  &  \\
+\hline
+[1]문 & 9 & -- & -- & -- & -- & -- \\
+\hline
+[1]문 & 10 & -- & -- & -- & -- & -- \\
+\hline
+[2]비 & 11 &  &  & \textbf{O} &  &  \\
+\hline
+[2]비 & 12 &  &  &  &  & \textbf{O} \\
+\hline
+[2]비 & 13 &  &  & \textbf{O} &  &  \\
+\hline
+[2]비 & 14 & \textbf{O} &  &  &  &  \\
+\hline
+[2]비 & 15 &  & \textbf{O} &  &  &  \\
+\hline
+[2]비 & 16 & \textbf{O} &  &  &  &  \\
+\hline
+[2]비 & 17 &  &  &  &  & \textbf{O} \\
+\hline
+[2]비 & 18 &  &  &  & \textbf{O} &  \\
+\hline
+[2]비 & 19 & -- & -- & -- & -- & -- \\
+\hline
+[2]비 & 20 & -- & -- & -- & -- & -- \\
+\hline
+[3]문 & 21 & \textbf{O} &  &  &  &  \\
+\hline
+[3]문 & 22 &  &  &  & \textbf{O} &  \\
+\hline
+[3]문 & 23 &  &  &  & \textbf{O} &  \\
+\hline
+[3]문 & 24 &  &  &  &  & \textbf{O} \\
+\hline
+[3]문 & 25 &  & \textbf{O} &  &  &  \\
+\hline
+[3]문 & 26 & \textbf{O} &  &  &  &  \\
+\hline
+[3]문 & 27 &  &  &  &  & \textbf{O} \\
+\hline
+[3]문 & 28 &  &  &  & \textbf{O} &  \\
+\hline
+[3]문 & 29 & -- & -- & -- & -- & -- \\
+\hline
+[3]문 & 30 & -- & -- & -- & -- & -- \\
+\hline
+[4]비 & 31 &  & \textbf{O} &  &  &  \\
+\hline
+[4]비 & 32 &  &  &  & \textbf{O} &  \\
+\hline
+[4]비 & 33 &  &  &  &  & \textbf{O} \\
+\hline
+[4]비 & 34 &  &  &  &  & \textbf{O} \\
+\hline
+[4]비 & 35 &  &  & \textbf{O} &  &  \\
+\hline
+[4]비 & 36 &  &  &  &  & \textbf{O} \\
+\hline
+[4]비 & 37 & \textbf{O} &  &  &  &  \\
+\hline
+[4]비 & 38 &  & \textbf{O} &  &  &  \\
+\hline
+[4]비 & 39 & -- & -- & -- & -- & -- \\
+\hline
+[4]비 & 40 & -- & -- & -- & -- & -- \\
+\hline
+[5]문 & 41 &  & \textbf{O} &  &  &  \\
+\hline
+[5]문 & 42 & \textbf{O} &  &  &  &  \\
+\hline
+[5]문 & 43 &  & \textbf{O} &  &  &  \\
+\hline
+[5]문 & 44 &  & \textbf{O} &  &  &  \\
+\hline
+[5]문 & 45 &  &  &  & \textbf{O} &  \\
+\hline
+[5]문 & 46 &  &  & \textbf{O} &  &  \\
+\hline
+[5]문 & 47 &  &  &  &  & \textbf{O} \\
+\hline
+[5]문 & 48 &  &  & \textbf{O} &  &  \\
+\hline
+[5]문 & 49 & -- & -- & -- & -- & -- \\
+\hline
+[5]문 & 50 & -- & -- & -- & -- & -- \\
+\hline
+[6]비 & 51 & \textbf{O} &  &  &  &  \\
+\hline
+[6]비 & 52 &  &  &  & \textbf{O} &  \\
+\hline
+[6]비 & 53 &  &  & \textbf{O} &  &  \\
+\hline
+[6]비 & 54 & \textbf{O} &  &  &  &  \\
+\hline
+[6]비 & 55 &  &  &  &  & \textbf{O} \\
+\hline
+[6]비 & 56 &  & \textbf{O} &  &  &  \\
+\hline
+[6]비 & 57 &  &  & \textbf{O} &  &  \\
+\hline
+[6]비 & 58 &  &  & \textbf{O} &  &  \\
+\hline
+[6]비 & 59 & -- & -- & -- & -- & -- \\
+\hline
+[6]비 & 60 & -- & -- & -- & -- & -- \\
+\hline
+\end{tabularx}
+\vspace{5mm}
+
+\noindent{\bfseries 서술형 모범답안}
+\vspace{2mm}
+
+\begin{enumerate}[label={}, leftmargin=0em, itemsep=2pt]
+\item \textbf{9번} (지문 [1]): 사랑은 단순히 대상뿐만 아니라 그를 둘러싼 세계 전체를 받아들이는 것이다.
+\item \textbf{10번} (지문 [1]): 아들의 역마살을 인정하고 그가 운명에 순응하여 떠나는 것을 허락하는 행위이다.
+\item \textbf{19번} (지문 [2]): 자중 손실 (Deadweight Loss)
+\item \textbf{20번} (지문 [2]): 초과 수요로 인한 줄서기, 암시장 형성, 상품의 품질 저하 등이 발생할 수 있다.
+\item \textbf{29번} (지문 [3]): 피할 수 없는 운명적 비애와 이유 없는 고통에 대한 체념적 태도를 보인다.
+\item \textbf{30번} (지문 [3]): 대군의 엄한 명령(궁중 법도)과 주위의 시기 및 질투.
+\item \textbf{39번} (지문 [4]): 동일성 진술(a=b)이 정보적 가치를 지니는 현상을 설명하기 위해서.
+\item \textbf{40번} (지문 [4]): 문장을 논리적 구조로 분석하여 존재 연언이 거짓이면 전체 문장이 '거짓'이 되도록 하여 해결했다.
+\item \textbf{49번} (지문 [5]): 그리움이 너무나 간절하고 깊어 영원히 멈출 수 없다는 것을 깨달았을 때의 벅찬 감정 때문이다.
+\item \textbf{50번} (지문 [5]): 송화의 마음에 맺힌 한(恨)을 심어 주어 소리를 완성시키기 위해서였다.
+\item \textbf{59번} (지문 [6]): 감염 부위 주변에서 분비되는 염증성 사이토카인의 신호를 받을 때 활성화된다.
+\item \textbf{60번} (지문 [6]): 항원 인식 과정 없이 정상 조직을 무차별적으로 공격하여 염증과 조직 손상을 일으키기 때문이다.
+\end{enumerate}
+
+\end{document}
