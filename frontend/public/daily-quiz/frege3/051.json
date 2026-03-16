@@ -2,14 +2,14 @@
   "contentId": "dq-f3-051",
   "contentType": "DAILY_QUIZ",
   "title": "일일 퀴즈 - 프레게3 Day 51",
-  "description": "프레게3 51일차 퀴즈",
+  "description": "프레게3 51일차 퀴즈. 무역과 수출입, 상호 의존",
   "targetLevel": "FREGE_3",
   "area": "SOCIAL",
   "subArea": "ECONOMY",
   "competencies": [
-    "KNOWLEDGE",
+    "VOCAB",
     "READING",
-    "VOCAB"
+    "PROBLEM_SOLVING"
   ],
   "tags": [
     "daily",
@@ -18,8 +18,7 @@
     "trade",
     "export",
     "import",
-    "interdependence",
-    "global_market"
+    "interdependence"
   ],
   "seedReward": {
     "seedType": "WHEAT",
@@ -34,9 +33,14 @@
       {
         "id": "dq-f3-051-1",
         "type": "MULTI_CHOICE",
-        "stem": "나라와 나라 사이에 물건이나 서비스를 사고파는 활동을 무엇이라고 하나요?",
-        "passage": "개인이 시장에서 물건을 사고파는 것처럼, 국가 간에도 필요한 것을 주고받는 '무역'을 합니다.",
-        "prompt": "활동의 이름을 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "나라와 나라가 필요한 물건이나 기술을 주고받는 일을 무엇이라고 하는가",
+        "passage": "어떤 나라는 기계를 잘 만들고, 어떤 나라는 곡식을 많이 기른다. 서로 필요한 것을 바꾸어 얻는 일이 이어지면 경제 활동이 활발해진다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 말을 고르세요.",
         "choices": [
           {
             "id": "A",
@@ -48,201 +52,245 @@
           },
           {
             "id": "C",
-            "text": "기부"
+            "text": "분실"
           },
           {
             "id": "D",
-            "text": "재활용"
+            "text": "수집"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "무역은 나라와 나라가 필요한 것을 사고파는 경제 활동이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+        }
       },
       {
         "id": "dq-f3-051-2",
         "type": "MULTI_CHOICE",
-        "stem": "우리나라의 물건이나 기술을 다른 나라에 파는 것을 무엇이라고 하나요?",
-        "passage": "우리나라는 반도체, 자동차, 선박 등을 해외로 '수출'하여 돈을 법니다.",
-        "prompt": "활동을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "다른 나라에 우리 물건을 파는 일을 가리키는 말은 무엇인가",
+        "passage": "우리나라는 자동차와 반도체를 여러 나라에 판다. 이렇게 나라 밖으로 물건을 내보내는 일을 수출이라고 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 말을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "수출"
-          },
-          {
-            "id": "B",
             "text": "수입"
           },
           {
+            "id": "B",
+            "text": "수출"
+          },
+          {
             "id": "C",
-            "text": "수집"
+            "text": "환불"
           },
           {
             "id": "D",
-            "text": "수리"
+            "text": "교환"
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "나라 밖으로 물건을 내보내는 일은 수출이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+        }
       },
       {
         "id": "dq-f3-051-3",
         "type": "MULTI_CHOICE",
-        "stem": "다른 나라의 물건이나 자원을 우리나라로 사들여 오는 것을 무엇이라고 하나요?",
-        "passage": "우리나라는 석유나 천연가스 같은 자원이 부족하여 외국에서 '수입'해 옵니다.",
-        "prompt": "활동을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "글의 전개 방식으로 가장 알맞은 것은 무엇인가",
+        "passage": "글은 먼저 수출과 수입의 뜻을 짧게 설명한다. 그다음 우리나라가 원유를 들여오고 자동차를 내보내는 예를 들어 무역의 모습을 보여 준다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "전개 방식을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "수입"
+            "text": "개념을 설명한 뒤 예를 든다"
           },
           {
             "id": "B",
-            "text": "수출"
+            "text": "시간의 흐름에 따라 사건을 늘어놓는다"
           },
           {
             "id": "C",
-            "text": "수송"
+            "text": "문제를 던지고 결말만 말한다"
           },
           {
             "id": "D",
-            "text": "수확"
+            "text": "인물의 성격을 비교한다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "핵심 개념을 설명하고 구체적인 예를 붙인 구조이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+        }
       },
       {
         "id": "dq-f3-051-4",
         "type": "MULTI_CHOICE",
-        "stem": "나라마다 무역을 해야 하는 가장 근본적인 이유는 무엇인가요?",
-        "passage": "나라마다 자연환경, 자원, 기술 수준 등이 다르기 때문에 모든 것을 자급자족할 수 없습니다. 따라서 서로 부족한 것을 채우고 남는 것을 팔기 위해 무역이 필요합니다.",
-        "prompt": "이유를 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "나라들이 무역을 하는 가장 큰 까닭으로 알맞은 것은 무엇인가",
+        "passage": "나라마다 기후와 땅의 모양, 가진 자원, 잘 만드는 물건이 다르다. 그래서 스스로 만들기 어려운 것은 다른 나라와 주고받으며 채운다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "까닭을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "나라마다 자원과 기술이 달라서 필요한 것이 다르기 때문"
+            "text": "나라마다 가진 자원과 기술이 다르기 때문"
           },
           {
             "id": "B",
-            "text": "다른 나라와 전쟁을 하기 위해서"
+            "text": "지도를 예쁘게 꾸미기 위해서"
           },
           {
             "id": "C",
-            "text": "비행기를 타고 여행을 가기 위해서"
+            "text": "배를 더 크게 만들기 위해서"
           },
           {
             "id": "D",
-            "text": "외국 친구를 사귀기 위해서"
+            "text": "국경선을 자주 바꾸기 위해서"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "나라마다 자원과 기술이 달라 서로 필요한 것을 교환한다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+        }
       },
       {
         "id": "dq-f3-051-5",
         "type": "MULTI_CHOICE",
-        "stem": "무역을 통해 나라와 나라가 서로 도움을 주고받으며 긴밀하게 연결되는 관계를 무엇이라고 하나요?",
-        "passage": "한 나라의 경제 위기가 다른 나라에도 영향을 미치는 것처럼, 전 세계는 서로 의존하는 '상호 의존' 관계가 되었습니다.",
-        "prompt": "관계를 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "글을 읽고 추론한 내용으로 알맞은 것은 무엇인가",
+        "passage": "한 나라에서 큰 가뭄이 들어 곡식 생산이 줄었다. 그 나라에서 곡식을 사 오던 다른 나라도 식량 값을 더 치르게 되었다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 설명을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "상호 의존"
+            "text": "한 나라의 변화가 다른 나라 경제에도 영향을 준다"
           },
           {
             "id": "B",
-            "text": "상호 경쟁"
+            "text": "무역을 하면 언제나 물건 값이 내려간다"
           },
           {
             "id": "C",
-            "text": "상호 비방"
+            "text": "가뭄이 들면 모든 나라가 같은 양의 곡식을 잃는다"
           },
           {
             "id": "D",
-            "text": "독립 만세"
+            "text": "식량은 무역과 관계가 없다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "서로 물건을 주고받으면 한 나라의 변화가 다른 나라에도 영향을 미친다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+        }
       },
       {
         "id": "dq-f3-051-6",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '자원'의 뜻으로 알맞은 것은?",
-        "passage": "우리나라는 천연 __자원__이 부족합니다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 주장에 대한 비판으로 가장 알맞은 것은 무엇인가",
+        "passage": "값만 싸면 어떤 물건이든 좋은 무역이라고 볼 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "비판을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "자연에 존재하며 인간 생활에 도움을 주는 물질이나 에너지"
+            "text": "값이 싸도 품질이나 생산 과정이 적절한지 따져 봐야 한다"
           },
           {
             "id": "B",
-            "text": "어떤 것을 스스로 바라며 원함"
+            "text": "값이 싸면 글의 구조도 좋아진다"
           },
           {
             "id": "C",
-            "text": "글자나 말의 시작이 되는 근원"
+            "text": "값이 싼 물건은 언제나 우리나라에서만 만든다"
           },
           {
             "id": "D",
-            "text": "정원을 가꾸는 일을 하는 사람"
+            "text": "값이 비싸면 자동으로 공정한 무역이 된다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "무역은 가격뿐 아니라 품질과 노동 환경, 생산 과정까지 살펴야 판단할 수 있다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+        }
       },
       {
         "id": "dq-f3-051-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "서준는 무역과 상호 의존을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "서로 필요한 것을 주고받는 무역 관계를 잘 나타낸 비유는 무엇인가",
+        "passage": "비유는 대상의 기능이나 역할이 닮아 있어야 알맞다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 비유를 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "안내 표지는 길을 알려 주는 나침반과 같다"
+            "text": "부족한 재료를 서로 나누는 요리 모둠과 같다"
           },
           {
             "id": "B",
-            "text": "안내 표지는 멀리서도 보인다"
+            "text": "한쪽에서만 계속 말하는 방송과 같다"
           },
           {
             "id": "C",
-            "text": "안내 표지는 종이처럼 얇다"
+            "text": "멈춰 있는 돌멩이와 같다"
           },
           {
             "id": "D",
-            "text": "안내 표지는 비가 오면 젖는다"
+            "text": "색이 바랜 그림과 같다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "무역은 서로 필요한 것을 채우는 관계이므로 재료를 나누는 모습과 닮아 있다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
@@ -251,75 +299,102 @@
       {
         "id": "dq-f3-051-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '교류'의 뜻으로 알맞은 것은?",
-        "passage": "두 나라는 문화 __교류__를 활발히 하고 있습니다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "학교 장터에서 초콜릿 음료를 만들려는데 코코아 가루를 국내에서 구하기 어렵다. 가장 알맞은 해결 방법은 무엇인가",
+        "passage": "장터 준비 모둠은 비용과 품질, 배송 시기를 함께 따져 보아야 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 방법을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "서로 오고 가며 물건이나 문화, 생각 등을 주고받음"
+            "text": "여러 나라 상품 정보를 비교하고 믿을 만한 곳에서 들여온다"
           },
           {
             "id": "B",
-            "text": "전기가 흐름"
+            "text": "아무 정보도 보지 않고 가장 싼 상품만 고른다"
           },
           {
             "id": "C",
-            "text": "교통 정체"
+            "text": "재료가 없어도 같은 이름으로 그냥 판다"
           },
           {
             "id": "D",
-            "text": "학교 종류"
+            "text": "배송 날짜를 확인하지 않고 주문한다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "수입이 필요할 때는 가격만이 아니라 품질과 배송 가능성까지 함께 확인해야 한다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+        }
       },
       {
         "id": "dq-f3-051-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "지우는 무역과 상호 의존과 관련된 주장 글을 읽었다.\n글에는 사례가 두 개만 제시되어 있었다.\n사례가 적으면 일반화가 위험해질 수 있다.\n그래서 더 많은 근거가 필요하다고 했다.",
-        "correctSentence": "따라서 사례가 적으면 일반화하기 어렵다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "글을 읽고, 문맥에 맞게 빈칸에 들어갈 말을 순서대로 고르세요.",
+        "passage": "어느 나라는 기계를 잘 만들고, 어느 나라는 에너지 자원이 많다. 각 나라는 자기에게 부족한 것을 다른 나라와 바꾸어 얻는다. 이런 관계가 오래 이어지면 서로의 사정을 살피는 일이 중요해진다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "",
+        "choices": [],
+        "answerId": "",
+        "template": "이처럼 ____ ____ 관계다.",
+        "blanks": [
           {
-            "answer": "따라서",
-            "distractors": [
-              "즉,",
-              "그러므로",
-              "정리하면"
-            ]
+            "id": "dq-f3-051-9-blank-1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서로 필요한 것을"
+              },
+              {
+                "id": "B",
+                "text": "한쪽만 원하는 것을"
+              },
+              {
+                "id": "C",
+                "text": "아무 까닭 없이"
+              },
+              {
+                "id": "D",
+                "text": "값만 보고"
+              }
+            ],
+            "answerId": "A"
           },
           {
-            "answer": "사례가 적으면",
-            "distractors": [
-              "대충 하면",
-              "급하게 하면",
-              "차가운 곳에 두면"
-            ]
-          },
-          {
-            "answer": "일반화하기",
-            "distractors": [
-              "이 내용을",
-              "그 이유를",
-              "그 사실을"
-            ]
-          },
-          {
-            "answer": "어렵다.",
-            "distractors": [
-              "필요하다.",
-              "바람직하다.",
-              "중요하다."
-            ]
+            "id": "dq-f3-051-9-blank-2",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주고받는"
+              },
+              {
+                "id": "B",
+                "text": "숨겨 두는"
+              },
+              {
+                "id": "C",
+                "text": "끊어 버리는"
+              },
+              {
+                "id": "D",
+                "text": "잊어버린"
+              }
+            ],
+            "answerId": "A"
           }
         ],
+        "explanation": "무역은 각 나라가 필요한 것을 주고받는 관계라는 점을 정리한 문장이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": 0
@@ -328,33 +403,40 @@
       {
         "id": "dq-f3-051-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '원자재'의 뜻으로 알맞은 것은?",
-        "passage": "제품을 만들기 위해 필요한 __원자재__ 가격이 올랐습니다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "어법에 맞는 문장을 고르세요.",
+        "passage": "무역 관련 문장을 바르게 쓰는 문제입니다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 문장을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "공업 생산의 원료가 되는 자재"
+            "text": "우리나라는 기계를 수출해 온다."
           },
           {
             "id": "B",
-            "text": "원하는 사람"
+            "text": "우리나라는 기계를 수출해왼다."
           },
           {
             "id": "C",
-            "text": "원래 주인"
+            "text": "우리나라는 기계를 수출 해 온다."
           },
           {
             "id": "D",
-            "text": "원자력 발전"
+            "text": "우리나라는 기계를 수츨해 온다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "보조 용언은 띄어 쓰므로 수출해 온다가 알맞다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+        }
       }
     ]
   }

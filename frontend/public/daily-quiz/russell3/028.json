@@ -1,27 +1,26 @@
 {
   "contentId": "dq-r3-028",
   "contentType": "DAILY_QUIZ",
-  "title": "일일 퀴즈 - 러셀3 Day 28",
-  "description": "러셀 3단계 28일차 퀴즈",
+  "title": "일일 퀴즈 - 러셀3 028일차",
+  "description": "중3 수준의 황금비와 피보나치 수열 주제 일일 퀴즈",
   "targetLevel": "RUSSELL_3",
-  "area": "READING",
-  "subArea": "MIXED",
+  "area": "FUSION",
+  "subArea": "수학과 예술",
   "competencies": [
-    "VOCAB",
-    "READING",
-    "GRAMMAR"
+    "어휘력",
+    "독해력",
+    "문법"
   ],
   "tags": [
-    "daily",
-    "math",
-    "art",
-    "golden_ratio",
-    "fibonacci"
+    "일일퀴즈",
+    "황금비",
+    "피보나치",
+    "예술"
   ],
   "seedReward": {
-    "seedType": "WHEAT",
     "count": 1,
-    "multiplier": 1
+    "multiplier": 1,
+    "seedType": "WHEAT"
   },
   "timeLimitSec": 150,
   "payload": {
@@ -31,71 +30,128 @@
       {
         "id": "dq-r3-028-1",
         "type": "MULTI_CHOICE",
-        "stem": "인간이 인식하기에 가장 균형 잡히고 아름답다고 느끼는 비율로, 약 1:1.618의 값을 가지는 비율은?",
-        "passage": "'황금비(Golden Ratio)'입니다. 고대 그리스 시대부터 건축, 미술 등 다양한 분야에 적용되었습니다.",
-        "prompt": "비율을 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "지문에서 말하는 '조화롭다'의 뜻으로 가장 알맞은 것을 고르시오.",
+        "passage": "건축과 미술에서 어떤 부분의 길이 관계가 안정감 있게 느껴질 때, 사람들은 그 비율이 조화롭다고 말한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "뜻이 가장 가까운 것을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "황금비 1:1.618"
+            "text": "서로 잘 어울려 균형이 있다"
           },
           {
             "id": "B",
-            "text": "백은비 1:1.414"
+            "text": "속도가 아주 빠르다"
           },
           {
             "id": "C",
-            "text": "청동비"
+            "text": "색이 매우 어둡다"
           },
           {
             "id": "D",
-            "text": "원주율 3.14"
+            "text": "소리가 크게 울린다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "조화롭다는 서로 잘 어울리고 균형이 잡혀 있다는 뜻이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+        }
       },
       {
         "id": "dq-r3-028-2",
         "type": "MULTI_CHOICE",
-        "stem": "다음 중 황금비가 적용된 대표적인 건축물은?",
-        "passage": "'파르테논 신전'입니다. 신전의 정면 폭과 높이, 기둥의 배치 등이 황금비를 이루고 있어 안정감과 조화로움을 줍니다.",
-        "prompt": "건축물을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "지문을 읽고 알 수 있는 내용을 고르시오.",
+        "passage": "황금비는 약 1 대 1.6의 비율을 가리킨다. 이 비율은 건축물의 정면, 그림 속 인물 배치, 카드나 책 표지 디자인에서 자주 발견된다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "내용에 알맞은 것을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "파르테논 신전"
+            "text": "황금비는 음악의 빠르기만 설명한다."
           },
           {
             "id": "B",
-            "text": "피사의 사탑"
+            "text": "황금비는 여러 시각 디자인에서 쓰인다."
           },
           {
             "id": "C",
-            "text": "에펠탑"
+            "text": "황금비는 길이가 늘 같은 정수 비율이다."
           },
           {
             "id": "D",
-            "text": "자유의 여신상"
+            "text": "황금비는 자연에서는 찾을 수 없다."
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "지문은 건축, 그림, 표지 디자인 등 여러 시각 디자인에서 황금비가 발견된다고 말한다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+        }
       },
       {
         "id": "dq-r3-028-3",
         "type": "MULTI_CHOICE",
-        "stem": "자연계에서도 황금비를 찾을 수 있습니다. 황금비와 밀접한 관련이 있는 수열로, 앞의 두 수를 더하면 다음 수가 되는 수열은?",
-        "passage": "'피보나치 수열(Fibonacci Sequence)'입니다. 1, 1, 2, 3, 5, 8, 13... 과 같이 진행되며, 인접한 두 항의 비율이 점차 황금비(1.618...)에 수렴합니다.",
-        "prompt": "수열을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "지문의 전개 방식으로 가장 알맞은 것을 고르시오.",
+        "passage": "황금비는 약 1 대 1.6의 비율을 가리킨다. 이 비율은 건축물의 정면, 그림 속 인물 배치, 카드 디자인에서 자주 발견된다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "전개 방식을 고르시오.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "개념을 설명한 뒤 예를 든다"
+          },
+          {
+            "id": "B",
+            "text": "시간 순서대로 사건을 나열한다"
+          },
+          {
+            "id": "C",
+            "text": "갈등을 보여 준 뒤 해결책을 제시한다"
+          },
+          {
+            "id": "D",
+            "text": "두 입장을 번갈아 비판한다"
+          }
+        ],
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "먼저 황금비의 뜻을 설명하고, 뒤에서 건축물과 디자인의 예를 들고 있다.",
+        "scoring": {
+          "correctDeltaSec": 15,
+          "wrongDeltaSec": -15
+        }
+      },
+      {
+        "id": "dq-r3-028-4",
+        "type": "MULTI_CHOICE",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "지문과 관련 있는 개념으로 가장 알맞은 것을 고르시오.",
+        "passage": "1, 1, 2, 3, 5, 8처럼 앞의 두 수를 더해 다음 수를 만드는 수열을 피보나치 수열이라고 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "개념을 고르시오.",
         "choices": [
           {
             "id": "A",
@@ -103,255 +159,281 @@
           },
           {
             "id": "B",
-            "text": "등차 수열"
+            "text": "등차수열"
           },
           {
             "id": "C",
-            "text": "등비 수열"
+            "text": "제곱수"
           },
           {
             "id": "D",
-            "text": "소수 수열"
+            "text": "분수의 통분"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "앞의 두 수를 더해 다음 수를 만드는 수열은 피보나치 수열이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
-      },
-      {
-        "id": "dq-r3-028-4",
-        "type": "MULTI_CHOICE",
-        "stem": "다음 자연물 중 피보나치 수열 황금비의 패턴을 볼 수 있는 것은?",
-        "passage": "'해바라기 씨의 배열', '솔방울의 나선', '앵무조개 껍데기' 등입니다. 이들은 공간을 가장 효율적으로 채우거나 성장하기 위해 이러한 패턴을 가집니다.",
-        "prompt": "자연물을 고르세요.",
-        "choices": [
-          {
-            "id": "A",
-            "text": "해바라기 씨의 배열"
-          },
-          {
-            "id": "B",
-            "text": "바위의 모양"
-          },
-          {
-            "id": "C",
-            "text": "구름의 모양"
-          },
-          {
-            "id": "D",
-            "text": "강물의 흐름"
-          }
-        ],
-        "answerId": "A",
-        "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+        }
       },
       {
         "id": "dq-r3-028-5",
         "type": "MULTI_CHOICE",
-        "stem": "오늘날 우리가 사용하는 신용카드나 명함, A4 용지 등은 어떤 비율을 따르고 있나요?",
-        "passage": "신용카드는 '황금비(약 1:1.6)'를 따르지만, A4 용지는 '백은비(1:루트2, 약 1:1.414)'를 따릅니다. A4 용지는 반으로 잘라도 비율이 유지되는 실용적인 비율입니다.",
-        "prompt": "신용카드의 비율을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "지문을 바탕으로 추론한 내용으로 가장 알맞은 것을 고르시오.",
+        "passage": "디자인부는 포스터를 만들 때 가로 10칸, 세로 16칸짜리 격자를 써 보았다. 담당 교사는 길이의 관계가 안정적으로 보여서 내용을 눈에 잘 담을 수 있다고 했다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "추론한 내용을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "황금비"
+            "text": "가로와 세로의 비율을 의식해 화면을 구성했다."
           },
           {
             "id": "B",
-            "text": "백은비"
+            "text": "포스터는 색을 쓰지 않고 글만 넣었다."
           },
           {
             "id": "C",
-            "text": "1:1 정사각비"
+            "text": "세로가 짧을수록 눈에 더 편했다."
           },
           {
             "id": "D",
-            "text": "2:1"
+            "text": "격자를 쓰면 비율을 생각할 필요가 없었다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "가로 10칸, 세로 16칸이라는 정보와 안정적으로 보인다는 설명으로 보아 비율을 의식해 구성했음을 알 수 있다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+        }
       },
       {
         "id": "dq-r3-028-6",
         "type": "MULTI_CHOICE",
-        "stem": "르네상스 시대의 화가들은 작품에 황금비를 적극적으로 활용했습니다. 레오나르도 다 빈치의 <비트루비우스적 인간>은 무엇을 보여주나요?",
-        "passage": "인체의 비례에도 '황금비'가 숨어 있음을 보여줍니다. 배꼽을 중심으로 상반신과 하반신의 비율 등이 황금비에 가깝습니다.",
-        "prompt": "내용을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 주장에 대한 비판으로 가장 적절한 것을 고르시오.",
+        "passage": "황금비가 들어간 작품은 언제나 가장 아름답다. 아름다움은 오직 비율 하나만으로 결정되기 때문이다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 적절한 비판을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "인체의 황금 비율"
+            "text": "아름다움은 비율뿐 아니라 색, 주제, 맥락의 영향도 받는다."
           },
           {
             "id": "B",
-            "text": "근육의 구조"
+            "text": "황금비라는 말은 듣기에 어려워서 쓰면 안 된다."
           },
           {
             "id": "C",
-            "text": "혈액 순환"
+            "text": "예술 작품은 수학과 전혀 관련이 없다."
           },
           {
             "id": "D",
-            "text": "뇌의 기능"
+            "text": "작품은 반드시 복잡해야만 아름답다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "비율은 작품의 인상에 영향을 줄 수 있지만, 아름다움을 오직 한 요소만으로 설명하기는 어렵다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+        }
       },
       {
         "id": "dq-r3-028-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "민지는 황금비을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "지문을 바탕으로 떠올릴 수 있는 아이디어로 가장 알맞은 것을 고르시오.",
+        "passage": "축제에서 수학과 예술의 만남을 보여 주는 체험 부스를 준비하고 있다. 학생들이 비율이 바뀔 때 느낌이 어떻게 달라지는지 직접 체험하면 좋겠다는 의견이 나왔다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "아이디어를 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "가정은 종이의 질감과 같다"
+            "text": "틀의 가로와 세로 길이를 바꾸며 인상이 어떻게 달라지는지 비교하게 한다."
           },
           {
             "id": "B",
-            "text": "가정은 목소리의 크기와 같다"
+            "text": "모든 그림의 색을 하나로만 칠하게 한다."
           },
           {
             "id": "C",
-            "text": "가정은 논의를 움직이는 발판과 같다"
+            "text": "아무 설명 없이 문제만 길게 적어 둔다."
           },
           {
             "id": "D",
-            "text": "가정은 글자의 모양과 같다"
+            "text": "체험 대신 정답만 큰 글씨로 적어 둔다."
           }
         ],
-        "answerId": "C",
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "비율이 달라질 때 느낌이 어떻게 바뀌는지 직접 비교하게 하는 방법이 체험 부스의 목표에 가장 잘 맞는다.",
         "scoring": {
-          "correctDeltaSec": 18,
-          "wrongDeltaSec": -18
+          "correctDeltaSec": 15,
+          "wrongDeltaSec": -15
         }
       },
       {
         "id": "dq-r3-028-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '수렴'의 뜻으로 알맞은 것은?",
-        "passage": "의견이 하나로 __수렴__되었다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "문제를 해결하는 방법으로 가장 알맞은 것을 고르시오.",
+        "passage": "학교 홍보 포스터를 만들었더니 제목과 그림이 한쪽에 몰려 화면이 답답해 보였다. 마감 시간은 다가오고 있었지만 다시 정돈할 필요가 있었다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "해결 방법을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "여럿이 나뉘어 있는 것이 한곳으로 모임"
+            "text": "격자를 그려 여백을 나누고 가로와 세로의 비율을 맞춰 다시 배치한다."
           },
           {
             "id": "B",
-            "text": "돈을 거둠"
+            "text": "글자 크기를 무작정 키워 빈 곳을 채운다."
           },
           {
             "id": "C",
-            "text": "훈련을 받음"
+            "text": "그림을 하나 더 겹쳐 넣어 화면을 더 복잡하게 만든다."
           },
           {
             "id": "D",
-            "text": "물이 스며듦"
+            "text": "제목을 지우고 그림만 남겨 둔다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "문제는 배치가 한쪽에 몰린 것이므로, 격자와 비율을 이용해 여백을 조정하는 방법이 가장 적절하다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+        }
       },
       {
         "id": "dq-r3-028-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "하늘은 황금비와 관련된 주장 글을 읽었다.\n글에는 사례가 두 개만 제시되어 있었다.\n사례가 적으면 일반화가 위험해질 수 있다.\n그래서 더 많은 근거가 필요하다고 했다.",
-        "correctSentence": "따라서 사례가 적으면 일반화하기 어렵다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "지문을 바탕으로 문장을 완성하시오.",
+        "passage": "미술 동아리는 포스터를 만들며 가로와 세로 길이의 관계를 먼저 정했다. 수학 동아리는 그 비율이 1.6쯤 되면 안정적으로 보일 수 있다고 설명했다. 두 동아리는 설명을 듣고 비율을 살린 새 포스터를 완성했다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 말을 차례대로 고르시오.",
+        "choices": [],
+        "answerId": "",
+        "template": "학생들은 ____ ____ 포스터를 완성했다.",
+        "blanks": [
           {
-            "answer": "따라서",
-            "distractors": [
-              "즉,",
-              "그러므로",
-              "정리하면"
+            "id": "blank1",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "황금비를"
+              },
+              {
+                "id": "B",
+                "text": "소문을"
+              },
+              {
+                "id": "C",
+                "text": "감정을"
+              },
+              {
+                "id": "D",
+                "text": "악기를"
+              }
             ]
           },
           {
-            "answer": "사례가 적으면",
-            "distractors": [
-              "대충 하면",
-              "나중에 하면",
-              "차가운 곳에 두면"
-            ]
-          },
-          {
-            "answer": "일반화하기",
-            "distractors": [
-              "그 사실을",
-              "이 내용을",
-              "그 이유를"
-            ]
-          },
-          {
-            "answer": "어렵다.",
-            "distractors": [
-              "중요하다.",
-              "바람직하다.",
-              "가능하다."
+            "id": "blank2",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "살린"
+              },
+              {
+                "id": "B",
+                "text": "접은"
+              },
+              {
+                "id": "C",
+                "text": "지운"
+              },
+              {
+                "id": "D",
+                "text": "가린"
+              }
             ]
           }
         ],
+        "explanation": "지문은 안정적인 비율을 포스터에 적용했다는 점을 보여 주므로, 황금비를 살린 포스터라고 완성할 수 있다.",
         "scoring": {
-          "correctDeltaSec": 18,
-          "wrongDeltaSec": 0
+          "correctDeltaSec": 15,
+          "wrongDeltaSec": -15
         }
       },
       {
         "id": "dq-r3-028-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '비율'의 뜻으로 알맞은 것은?",
-        "passage": "남녀의 __비율__이 비슷하다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 중 피동 표현이 자연스럽게 쓰인 문장을 고르시오.",
+        "passage": "피동 표현은 어떤 대상이 다른 힘을 받아 행동을 입는 모습을 나타낸다. 피동 표현을 겹쳐 쓰면 문장이 어색해질 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "어법이 바른 문장을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "다른 수나 양에 대한 어떤 수나 양의 비"
+            "text": "전시 설명문은 벽면에 보기 쉽게 붙여졌다."
           },
           {
             "id": "B",
-            "text": "비밀을 지킴"
+            "text": "전시 설명문은 벽면에 보기 쉽게 붙여져졌다."
           },
           {
             "id": "C",
-            "text": "요령을 피움"
+            "text": "전시 설명문은 벽면에 보기 쉽게 붙이게 되었다."
           },
           {
             "id": "D",
-            "text": "비가 오는 날"
+            "text": "전시 설명문은 벽면에 보기 쉽게 붙여 보였다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "붙여졌다가 자연스러운 피동 표현이고, 붙여져졌다는 피동이 겹쳐 어색하다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+        }
       }
     ]
   }

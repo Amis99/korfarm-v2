@@ -2,25 +2,28 @@
   "contentId": "dq-f3-011",
   "contentType": "DAILY_QUIZ",
   "title": "일일 퀴즈 - 프레게3 Day 11",
-  "description": "프레게 3단계 11일차 퀴즈",
+  "description": "프레게 3단계 11일차 퀴즈. 디지털 정보의 신뢰도와 출처 확인",
   "targetLevel": "FREGE_3",
-  "area": "TECH",
-  "subArea": "DIGITAL_LITERACY",
+  "area": "DIGITAL_LITERACY",
+  "subArea": "INFORMATION_RELIABILITY",
   "competencies": [
-    "VOCAB",
+    "KNOWLEDGE",
     "READING",
-    "GRAMMAR"
+    "THINKING"
   ],
   "tags": [
     "daily",
-    "tech"
+    "digital-literacy",
+    "source",
+    "fact-checking",
+    "trust"
   ],
   "seedReward": {
     "seedType": "WHEAT",
-    "count": 1,
+    "count": 3,
     "multiplier": 1
   },
-  "timeLimitSec": 150,
+  "timeLimitSec": 180,
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -28,327 +31,410 @@
       {
         "id": "dq-f3-011-1",
         "type": "MULTI_CHOICE",
-        "stem": "디지털 환경에서 생성되는 데이터로, 그 규모가 방대하고 생성 속도가 빠르며 형태가 다양한 것을 무엇이라고 하나요?",
-        "passage": "'빅데이터(Big Data)'라고 합니다. 단순히 양만 많은 것이 아니라 다양하고 빠르게 변하는 데이터를 말합니다.",
-        "prompt": "용어를 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "정보가 나온 곳을 가리키는 말로 알맞은 것은 무엇인가요?",
+        "passage": "디지털 정보 읽기 단원을 떠올려 봅시다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 말을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "빅데이터"
+            "text": "출처"
           },
           {
             "id": "B",
-            "text": "스몰데이터"
+            "text": "장식"
           },
           {
             "id": "C",
-            "text": "바이러스"
+            "text": "속도"
           },
           {
             "id": "D",
-            "text": "메모장"
+            "text": "광고"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "정보가 나온 곳을 출처라고 합니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-011-2",
         "type": "MULTI_CHOICE",
-        "stem": "빅데이터를 실생활에 활용한 예로 알맞지 *않은* 것은?",
-        "passage": "유튜브가 내가 좋아할 만한 영상을 추천해주거나(추천 시스템), 내비게이션이 막히지 않는 길을 알려주는 것(교통 예측)이 빅데이터 활용의 예입니다.",
-        "prompt": "알맞지 않은 것을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "다음 글을 읽고 알맞은 내용을 고르세요.",
+        "passage": "인터넷에서 본 글이 흥미롭더라도 바로 믿으면 안 된다. 누가 썼는지, 언제 올라왔는지, 다른 자료와 같은 내용인지 살펴보면 더 안전하게 판단할 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "글의 내용으로 알맞은 것을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "주판으로 계산하기"
+            "text": "흥미로운 글은 확인 없이 믿어도 된다."
           },
           {
             "id": "B",
-            "text": "동영상 추천 서비스"
+            "text": "글쓴이와 날짜, 다른 자료를 함께 살피는 일이 중요하다."
           },
           {
             "id": "C",
-            "text": "실시간 교통 정보 안내"
+            "text": "인터넷 글은 날짜를 볼 필요가 없다."
           },
           {
             "id": "D",
-            "text": "쇼핑몰 상품 추천"
+            "text": "같은 주제의 다른 자료는 읽지 않는 편이 좋다."
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "글쓴이, 날짜, 다른 자료를 함께 확인해야 정보의 신뢰도를 판단하기 쉽습니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-011-3",
         "type": "MULTI_CHOICE",
-        "stem": "빅데이터 분석의 궁극적인 목적은 무엇인가요?",
-        "passage": "수많은 데이터 속에 숨겨진 '의미 있는 정보'나 '패턴'을 찾아내어 의사 결정을 돕는 것입니다.",
-        "prompt": "목적을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "다음 글의 짜임으로 가장 알맞은 것을 고르세요.",
+        "passage": "먼저 인터넷 정보는 바로 믿기 어렵다는 점을 말한다. 다음으로 확인해야 할 요소를 차례로 제시한다. 마지막에는 그 과정을 거치면 더 안전하게 판단할 수 있다고 정리한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "글의 짜임을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "유용한 정보와 가치 발견"
+            "text": "문제 제기, 확인 요소 제시, 정리"
           },
           {
             "id": "B",
-            "text": "컴퓨터 용량 채우기"
+            "text": "인물 소개, 대화, 반전"
           },
           {
             "id": "C",
-            "text": "전기세 많이 내기"
+            "text": "실험 준비, 결과, 실패"
           },
           {
             "id": "D",
-            "text": "남의 비밀 훔쳐보기"
+            "text": "여행 계획, 이동, 감상"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "문제를 제기한 뒤 확인 요소를 설명하고 정리하는 구조입니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-011-4",
         "type": "MULTI_CHOICE",
-        "stem": "다음 중 데이터가 아닌 것은?",
-        "passage": "숫자뿐만 아니라 문자, 사진, 영상, 위치 정보 등 디지털로 저장될 수 있는 모든 것이 데이터입니다. '내 머릿속의 상상' 자체는 기록되지 않으면 데이터가 아닙니다.",
-        "prompt": "데이터가 아닌 것을 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "인터넷 정보의 신뢰도를 판단할 때 가장 먼저 살피기 좋은 요소로 알맞은 것은 무엇인가요?",
+        "passage": "디지털 시민성의 기본을 떠올려 봅시다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 것을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "기록되지 않은 머릿속 생각"
+            "text": "글쓴이와 작성 날짜"
           },
           {
             "id": "B",
-            "text": "디지털 사진 파일"
+            "text": "화면 배경색"
           },
           {
             "id": "C",
-            "text": "SNS에 쓴 글"
+            "text": "광고의 개수"
           },
           {
             "id": "D",
-            "text": "GPS 위치 기록"
+            "text": "댓글 길이만"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "글쓴이와 작성 날짜는 정보의 신뢰도를 판단할 때 기본적으로 살펴볼 요소입니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-011-5",
         "type": "MULTI_CHOICE",
-        "stem": "사용자의 시청 기록이나 검색 기록을 분석하여 취향에 맞는 콘텐츠를 보여주는 기술은?",
-        "passage": "'추천 알고리즘'입니다. 넷플릭스나 유튜브 등이 이를 사용합니다.",
-        "prompt": "기술을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "같은 내용이 여러 믿을 만한 자료에 비슷하게 나온다면 무엇을 짐작할 수 있나요?",
+        "passage": "하나의 자료만 볼 때보다 판단 근거가 더 많아집니다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 내용을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "추천 알고리즘"
+            "text": "정보의 신뢰도가 더 높을 가능성이 있다."
           },
           {
             "id": "B",
-            "text": "압축 프로그램"
+            "text": "글의 제목이 짧아진다."
           },
           {
             "id": "C",
-            "text": "백신 프로그램"
+            "text": "사진이 더 예뻐진다."
           },
           {
             "id": "D",
-            "text": "문서 작성기"
+            "text": "자료를 읽을 필요가 없어진다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "여러 믿을 만한 자료가 비슷한 내용을 제시하면 신뢰도가 더 높을 수 있습니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-011-6",
         "type": "MULTI_CHOICE",
-        "stem": "빅데이터를 다룰 때 주의해야 할 점은?",
-        "passage": "개인 정보가 포함된 데이터가 유출되지 않도록 '보안'에 신경 써야 하며, 데이터를 '올바른 목적'으로 사용해야 합니다.",
-        "prompt": "주의할 점을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 주장에 대한 비판으로 가장 알맞은 것을 고르세요.",
+        "passage": "조회 수가 많으면 그 정보는 반드시 사실이다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "주장을 비판하는 내용을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "개인 정보 보호"
+            "text": "많이 본 정보라도 출처와 근거를 확인해야 사실인지 판단할 수 있다."
           },
           {
             "id": "B",
-            "text": "무조건 많이 모으기만 하기"
+            "text": "조회 수가 적은 글은 무조건 틀리다."
           },
           {
             "id": "C",
-            "text": "아무에게나 공유하기"
+            "text": "사실 여부는 사진 크기로 알 수 있다."
           },
           {
             "id": "D",
-            "text": "거짓 데이터 만들기"
+            "text": "인터넷에서는 사실을 따질 필요가 없다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "조회 수와 사실 여부는 같지 않으므로 출처와 근거를 함께 확인해야 합니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-011-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "하늘는 빅데이터와 통계을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "출처 확인을 비유한 말로 가장 알맞은 것을 고르세요.",
+        "passage": "출처를 확인하면 정보가 어디서 왔는지 길을 거슬러 올라가 볼 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 비유를 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "안내 표지는 종이처럼 얇다"
+            "text": "물길의 시작점을 찾아가는 일"
           },
           {
             "id": "B",
-            "text": "안내 표지는 비가 오면 젖는다"
+            "text": "불을 끄고 잠드는 일"
           },
           {
             "id": "C",
-            "text": "안내 표지는 멀리서도 보인다"
+            "text": "문을 잠그는 일"
           },
           {
             "id": "D",
-            "text": "안내 표지는 길을 알려 주는 나침반과 같다"
+            "text": "상자를 닫아 두는 일"
           }
         ],
-        "answerId": "D",
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "출처 확인은 정보가 흘러온 시작점을 찾아가는 일에 비유할 수 있습니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-f3-011-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '분석'의 뜻으로 알맞은 것은?",
-        "passage": "자료를 자세히 __분석__하여 원인을 찾았다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "친구가 인터넷에서 본 건강 정보를 바로 믿고 따라 하려 합니다. 가장 알맞은 조언을 고르세요.",
+        "passage": "정보의 신뢰도를 따져 보게 해야 하는 상황입니다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 조언을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "얽혀 있는 것을 풀어서 낱낱이 살펴봄"
+            "text": "공식 기관이나 여러 자료를 먼저 확인해 보자고 한다."
           },
           {
             "id": "B",
-            "text": "그냥 대충 훑어봄"
+            "text": "제목이 눈에 띄니 그냥 믿자고 한다."
           },
           {
             "id": "C",
-            "text": "쓰레기통에 버림"
+            "text": "댓글이 많으니 사실일 거라고 한다."
           },
           {
             "id": "D",
-            "text": "친구에게 선물함"
+            "text": "확인보다 속도가 중요하다고 한다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "건강 정보는 공식 기관과 여러 자료를 먼저 확인하는 편이 안전합니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-011-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "빅데이터와 통계를 다룬 글에서는 조건과 결과의 관계를 설명했다.\n조건이 달라지면 결과도 달라질 수 있다고 했다.\n그래서 결론을 내리기 전에 조건이 무엇인지 확인해야 한다.\n조건을 바꿔 보고 결과를 비교하면 이해가 깊어진다.",
-        "correctSentence": "결국 조건이 바뀌면 결과도 함께 달라진다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "다음 글을 읽고 빈칸에 들어갈 말을 순서대로 고르세요.",
+        "passage": "인터넷 정보는 편리하지만 누구나 올릴 수 있다. 그래서 글쓴이와 날짜를 확인하고 다른 자료와 비교하는 습관이 필요하다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "",
+        "choices": [],
+        "answerId": "",
+        "template": "정보를 볼 때 ____ ____ 필요하다.",
+        "blanks": [
           {
-            "answer": "결국",
-            "distractors": [
-              "즉,",
-              "따라서",
-              "그러므로"
-            ]
+            "id": "dq-f3-011-9-blank-1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "출처를 확인하는"
+              },
+              {
+                "id": "B",
+                "text": "화면을 꾸미는"
+              },
+              {
+                "id": "C",
+                "text": "속도를 높이는"
+              },
+              {
+                "id": "D",
+                "text": "댓글을 지우는"
+              }
+            ],
+            "answerId": "A"
           },
           {
-            "answer": "조건이 바뀌면",
-            "distractors": [
-              "차가운 곳에 두면",
-              "그대로 두면",
-              "급하게 하면"
-            ]
-          },
-          {
-            "answer": "결과도 함께",
-            "distractors": [
-              "이 문제를",
-              "그 이유를",
-              "그 사실을"
-            ]
-          },
-          {
-            "answer": "달라진다.",
-            "distractors": [
-              "변한다.",
-              "줄어든다.",
-              "바뀐다."
-            ]
+            "id": "dq-f3-011-9-blank-2",
+            "choices": [
+              {
+                "id": "A",
+                "text": "습관이"
+              },
+              {
+                "id": "B",
+                "text": "장식이"
+              },
+              {
+                "id": "C",
+                "text": "농담이"
+              },
+              {
+                "id": "D",
+                "text": "소문이"
+              }
+            ],
+            "answerId": "A"
           }
         ],
+        "explanation": "정보를 볼 때 출처를 확인하는 습관이 필요합니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": 0
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-f3-011-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '기반'의 뜻으로 알맞은 것은?",
-        "passage": "이 서비스는 빅데이터를 __기반__으로 한다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 중 표현이 자연스러운 문장을 고르세요.",
+        "passage": "안내 글을 쓰는 상황입니다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 문장을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "기초나 바탕"
+            "text": "정보를 읽기 전에 출처를 살핀다."
           },
           {
             "id": "B",
-            "text": "지붕"
+            "text": "정보를 읽기 전에 출처를 살피여 본다."
           },
           {
             "id": "C",
-            "text": "장식"
+            "text": "정보를 읽기 전에 출처를 살피지워야 한다."
           },
           {
             "id": "D",
-            "text": "결과"
+            "text": "정보를 읽기 전에 출처를 살피게져 있다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "살핀다가 자연스러운 표현입니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       }
     ]
   }

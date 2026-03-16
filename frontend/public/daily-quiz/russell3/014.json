@@ -2,25 +2,28 @@
   "contentId": "dq-r3-014",
   "contentType": "DAILY_QUIZ",
   "title": "일일 퀴즈 - 러셀3 Day 14",
-  "description": "러셀 3단계 14일차 퀴즈",
+  "description": "중학교 3학년 수준에서 질량 보존 법칙과 화학 반응을 이해하는 일일 퀴즈",
   "targetLevel": "RUSSELL_3",
-  "area": "MIXED",
-  "subArea": "SCIENCE_HISTORY",
+  "area": "SCIENCE",
+  "subArea": "CHEMISTRY",
   "competencies": [
     "VOCAB",
     "READING",
-    "GRAMMAR"
+    "CRITICAL_THINKING"
   ],
   "tags": [
     "daily",
-    "mixed"
+    "chemistry",
+    "mass-conservation",
+    "chemical-reaction",
+    "middle3"
   ],
   "seedReward": {
     "seedType": "WHEAT",
-    "count": 1,
+    "count": 3,
     "multiplier": 1
   },
-  "timeLimitSec": 150,
+  "timeLimitSec": 180,
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -28,9 +31,14 @@
       {
         "id": "dq-r3-014-1",
         "type": "MULTI_CHOICE",
-        "stem": "화학 반응 전후에 물질의 총 질량은 변하지 않는다는 법칙은?",
-        "passage": "'질량 보존 법칙'입니다. 라부아지에가 발견했습니다.",
-        "prompt": "법칙을 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "다음 설명에 알맞은 과학 용어를 고르세요.",
+        "passage": "화학 반응 전과 후에 전체 질량이 변하지 않는다는 내용을 설명하는 법칙이 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "이 법칙의 이름은 무엇인가요?",
         "choices": [
           {
             "id": "A",
@@ -38,317 +46,395 @@
           },
           {
             "id": "B",
-            "text": "일정 성분비 법칙"
+            "text": "중력 법칙"
           },
           {
             "id": "C",
-            "text": "기체 반응 법칙"
+            "text": "관성 법칙"
           },
           {
             "id": "D",
-            "text": "관성의 법칙"
+            "text": "비례식 법칙"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "질량 보존 법칙은 화학 반응 전후의 전체 질량이 같다는 내용을 말한다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-r3-014-2",
         "type": "MULTI_CHOICE",
-        "stem": "질량 보존 법칙을 확립하여 근대 화학의 아버지라 불리는 프랑스의 과학자는?",
-        "passage": "'라부아지에(Lavoisier)'입니다. 그는 연소 실험을 통해 산소의 존재를 밝히고 플로지스톤설을 타파했습니다.",
-        "prompt": "과학자를 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "지문을 읽고 알 수 있는 내용을 고르세요.",
+        "passage": "마개를 닫은 플라스크에서 식초와 베이킹소다를 반응시키면 기체가 생겨 거품이 보인다. 그러나 플라스크 전체의 질량을 재면 반응 전과 후가 같다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "지문에서 알 수 있는 내용은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "라부아지에"
+            "text": "기체가 생기면 질량은 반드시 줄어든다"
           },
           {
             "id": "B",
-            "text": "돌턴"
+            "text": "닫힌 용기에서는 반응 전후 전체 질량이 같다"
           },
           {
             "id": "C",
-            "text": "아인슈타인"
+            "text": "거품이 보이면 반응이 멈춘 것이다"
           },
           {
             "id": "D",
-            "text": "뉴턴"
+            "text": "식초는 반응 후에 그대로 남지 않는다"
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "닫힌 용기에서는 생긴 기체까지 포함하므로 전체 질량이 보존된다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-r3-014-3",
         "type": "MULTI_CHOICE",
-        "stem": "질량 보존 법칙이 성립하는 까닭은?",
-        "passage": "화학 반응이 일어날 때 원자의 배열만 바뀔 뿐, '원자의 종류와 개수'는 변하지 않기 때문입니다.",
-        "prompt": "까닭을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "글의 전개 방식으로 가장 알맞은 것을 고르세요.",
+        "passage": "철을 가열하면 산소와 결합해 산화철이 생긴다. 이때 겉으로는 질량이 늘어난 것처럼 보인다. 그러나 늘어난 만큼은 공기 중 산소가 더해진 것이다. 그래서 반응 전후 전체 질량은 그대로이다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "글의 전개 방식은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "원자의 종류와 개수가 변하지 않아서"
+            "text": "정의와 예시"
           },
           {
             "id": "B",
-            "text": "분자의 개수가 변하지 않아서"
+            "text": "문제와 해결"
           },
           {
             "id": "C",
-            "text": "물질의 상태가 변하지 않아서"
+            "text": "현상 제시 뒤 원인 설명"
           },
           {
             "id": "D",
-            "text": "부피가 변하지 않아서"
+            "text": "시간 순서 나열"
           }
         ],
-        "answerId": "A",
+        "answerId": "C",
+        "template": "",
+        "blanks": [],
+        "explanation": "겉으로 보이는 현상을 먼저 말한 뒤 왜 그런지 원인을 설명하고 있다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-r3-014-4",
         "type": "MULTI_CHOICE",
-        "stem": "나무가 탈 때 연소 질량이 줄어드는 것처럼 보이는 이유는?",
-        "passage": "나무가 타면서 생긴 이산화 탄소(기체)와 수증기(기체)가 공기 중으로 '날라가기 때문'입니다. 밀폐된 용기에서 태우면 질량은 같습니다.",
-        "prompt": "이유를 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "다음 중 질량 보존 법칙을 확인하기에 가장 알맞은 실험 조건을 고르세요.",
+        "passage": "기체가 생기는 반응에서는 기체가 빠져나가면 질량이 달라진 것처럼 보일 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "법칙을 정확히 확인하기 위한 조건은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "기체가 발생하여 날아가기 때문"
+            "text": "뚜껑을 닫은 상태에서 전체를 잰다"
           },
           {
             "id": "B",
-            "text": "원자가 사라지기 때문"
+            "text": "반응 후에 남은 액체만 잰다"
           },
           {
             "id": "C",
-            "text": "질량이 파괴되기 때문"
+            "text": "거품이 멈춘 뒤 기체를 날려 보낸다"
           },
           {
             "id": "D",
-            "text": "마법 때문에"
+            "text": "반응 전 질량은 재지 않는다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "생성된 기체까지 포함해 전체 질량을 재야 질량 보존을 바르게 확인할 수 있다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-r3-014-5",
         "type": "MULTI_CHOICE",
-        "stem": "강철솜을 공기 중에서 가열하면 산화 질량이 늘어나는 이유는?",
-        "passage": "공기 중의 '산소'가 강철솜(철)과 결합하기 때문입니다. (철 + 산소 -> 산화 철)",
-        "prompt": "이유를 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "다음 상황에서 가장 알맞게 추론한 내용을 고르세요.",
+        "passage": "열린 비커에서 금속과 산이 반응해 기체가 발생했더니 반응 후 질량이 줄었다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "이 결과를 보고 가장 알맞게 추론한 것은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "산소와 결합하기 때문"
+            "text": "질량 보존 법칙은 틀린 법칙이다"
           },
           {
             "id": "B",
-            "text": "철이 자라나기 때문"
+            "text": "기체가 밖으로 빠져나가 측정값이 줄었을 수 있다"
           },
           {
             "id": "C",
-            "text": "철이 부풀어 오르기 때문"
+            "text": "반응이 일어나지 않았는데도 거품이 생겼다"
           },
           {
             "id": "D",
-            "text": "먼지가 쌓이기 때문"
+            "text": "금속이 사라져서 질량이 없어졌다"
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "열린 용기에서는 생긴 기체가 빠져나가므로 측정 질량이 줄어든 것처럼 보일 수 있다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-r3-014-6",
         "type": "MULTI_CHOICE",
-        "stem": "물리 변화 예: 얼음이 녹아 물이 됨에서도 질량 보존 법칙은 성립할까요?",
-        "passage": "성립합니다. 상태만 변할 뿐 분자의 개수나 질량은 변하지 않습니다.",
-        "prompt": "정답을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 주장에 대한 비판으로 가장 적절한 것을 고르세요.",
+        "passage": "어떤 학생이 거품이 많이 생기면 질량도 그만큼 사라진다고 말했다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "이 주장을 가장 적절하게 비판한 것은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "성립한다"
+            "text": "거품이 생겼다는 사실만으로 질량이 없어졌다고 단정할 수 없다"
           },
           {
             "id": "B",
-            "text": "성립하지 않는다"
+            "text": "거품은 언제나 질량이 0이므로 생각할 필요가 없다"
           },
           {
             "id": "C",
-            "text": "그때그때 다르다"
+            "text": "질량은 눈으로 보이지 않으니 측정할 수 없다"
           },
           {
             "id": "D",
-            "text": "알 수 없다"
+            "text": "실험에서는 결과가 같아야 하므로 따질 필요가 없다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "거품은 기체가 생긴 모습일 뿐이며, 닫힌계 전체 질량이 유지되는지 따져 보아야 한다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-r3-014-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "민지는 질량 보존을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "질량 보존 법칙을 친구들에게 쉽게 설명하는 방법으로 가장 창의적인 것을 고르세요.",
+        "passage": "교실 발표에서 복잡한 식보다 이해하기 쉬운 비유가 필요하다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 적절한 방법은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "가정은 목소리의 크기와 같다"
+            "text": "풍선 안 공기를 옮겨 담아도 전체 양은 같다고 비유한다"
           },
           {
             "id": "B",
-            "text": "가정은 종이의 질감과 같다"
+            "text": "어렵더라도 식만 길게 적고 설명은 하지 않는다"
           },
           {
             "id": "C",
-            "text": "가정은 글자의 모양과 같다"
+            "text": "실험과 관련 없는 농담만 오래 말한다"
           },
           {
             "id": "D",
-            "text": "가정은 논의를 움직이는 발판과 같다"
+            "text": "결론만 말하고 근거는 숨긴다"
           }
         ],
-        "answerId": "D",
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "전체를 기준으로 보면 양이 보존된다는 점을 풍선 비유로 쉽게 설명할 수 있다.",
         "scoring": {
-          "correctDeltaSec": 18,
-          "wrongDeltaSec": -18
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-r3-014-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '보존'의 뜻으로 알맞은 것은?",
-        "passage": "문화재를 원형 그대로 __보존__해야 한다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "실험 결과가 이상하게 나왔을 때 가장 알맞은 해결 방법을 고르세요.",
+        "passage": "닫힌 장치를 써야 하는데 마개가 헐거워 기체가 조금씩 새는 것 같다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 먼저 할 일은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "잘 보호하고 간수하여 남김"
+            "text": "마개 상태를 점검하고 새지 않게 다시 고정한다"
           },
           {
             "id": "B",
-            "text": "부수어 없앰"
+            "text": "측정값이 다르더라도 그대로 발표한다"
           },
           {
             "id": "C",
-            "text": "새로 만듦"
+            "text": "기체가 빠져도 상관없다고 결론을 바꾼다"
           },
           {
             "id": "D",
-            "text": "팔아버림"
+            "text": "실험 전 질량 기록을 지운다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "측정 조건이 흔들리면 결과도 흔들리므로 장치 상태를 먼저 바로잡아야 한다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-r3-014-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "지우는 질량 보존과 관련된 주장 글을 읽었다.\n글에는 사례가 두 개만 제시되어 있었다.\n사례가 적으면 일반화가 위험해질 수 있다.\n그래서 더 많은 근거가 필요하다고 했다.",
-        "correctSentence": "따라서 사례가 적으면 일반화하기 어렵다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "지문을 바탕으로 알맞은 말을 차례대로 골라 문장을 완성하세요.",
+        "passage": "질량 보존 법칙은 화학 반응에서 물질의 모습은 달라져도 전체 질량은 같다는 뜻이다. 닫힌 용기에서 재면 이 법칙을 더 분명하게 확인할 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "빈칸에 들어갈 말을 순서대로 고르세요.",
+        "choices": [],
+        "answerId": "",
+        "template": "질량 보존 법칙은 ____ ____ 뜻이다.",
+        "blanks": [
           {
-            "answer": "따라서",
-            "distractors": [
-              "즉,",
-              "그러므로",
-              "정리하면"
+            "id": "b1",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반응 전후 전체 질량이"
+              },
+              {
+                "id": "B",
+                "text": "기체가 보이면 질량이"
+              },
+              {
+                "id": "C",
+                "text": "물질의 색깔이 항상"
+              },
+              {
+                "id": "D",
+                "text": "실험 기구의 모양이"
+              }
             ]
           },
           {
-            "answer": "사례가 적으면",
-            "distractors": [
-              "차가운 곳에 두면",
-              "급하게 하면",
-              "나중에 하면"
-            ]
-          },
-          {
-            "answer": "일반화하기",
-            "distractors": [
-              "이런 점을",
-              "이 내용을",
-              "이 문제를"
-            ]
-          },
-          {
-            "answer": "어렵다.",
-            "distractors": [
-              "필요하다.",
-              "가능하다.",
-              "좋다."
+            "id": "b2",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같다는"
+              },
+              {
+                "id": "B",
+                "text": "사라진다는"
+              },
+              {
+                "id": "C",
+                "text": "늘어난다는"
+              },
+              {
+                "id": "D",
+                "text": "무관하다는"
+              }
             ]
           }
         ],
+        "explanation": "지문은 화학 반응 전후 전체 질량이 같다는 뜻이라고 설명한다.",
         "scoring": {
-          "correctDeltaSec": 18,
-          "wrongDeltaSec": 0
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-r3-014-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '밀폐'의 뜻으로 알맞은 것은?",
-        "passage": "__밀폐__된 용기 안에서 실험했다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법",
+        "stem": "다음 문장 가운데 과학 보고서 문장으로 가장 적절한 것을 고르세요.",
+        "passage": "",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 문장을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "빠져나갈 틈이 없도록 꽉 막거나 닫음"
+            "text": "반응 전과 반응 후의 질량을 각각 측정하였다."
           },
           {
             "id": "B",
-            "text": "문이나 창문을 크게 열어 통하게 함"
+            "text": "질량을 재 봤는데 완전 신기했다."
           },
           {
             "id": "C",
-            "text": "단단한 것을 부수어 깨뜨림"
+            "text": "거품이 막 생겨서 대충 보니까 비슷했다."
           },
           {
             "id": "D",
-            "text": "보이지 않게 감추어 두는 것"
+            "text": "질량이 같았음 아마도 맞는 듯."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "과학 보고서 문장은 구어체보다 객관적이고 분명한 표현을 써야 한다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       }
     ]
   }

@@ -33,8 +33,13 @@
       {
         "id": "dq-r3-062-1",
         "type": "MULTI_CHOICE",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "",
         "stem": "국어의 품사 중에서, 형태가 변하지 않으며 다른 말을 꾸며 주는 역할을 하는 '관형사'와 '부사'를 묶어서 무엇이라고 하나요?",
-        "passage": "'수식언(Modifier)'이라고 합니다. 관형사는 체언을, 부사는 주로 용언을 수식합니다.",
+        "passage": "'수식언 Modifier'이라고 합니다. 관형사는 체언을, 부사는 주로 용언을 수식합니다.",
+        "highlight": {
+          "text": ""
+        },
         "prompt": "해당하는 품사 분류를 고르세요.",
         "choices": [
           {
@@ -55,48 +60,62 @@
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+        }
       },
       {
         "id": "dq-r3-062-2",
         "type": "MULTI_CHOICE",
-        "stem": "다음 밑줄 친 단어 중 품사가 '명사'가 아닌 것은? 형태는 명사 같지만 문맥에 따라 품사가 달라지는 경우를 주의하세요.",
-        "passage": "1. __사과__ 한 개 (명사)\n2. __오늘__은 날씨가 좋다. (명사)\n3. __어제__ 도착했다. (부사 - '어제'는 명사로도 쓰이지만 여기서는 용언을 수식하므로 부사로 쓰임, 그러나 단어의 품사 분류상 명사/부사 통용어라면 문맥을 봐야 함. 일반적으로 시간을 나타내는 말은 명사와 부사로 모두 쓰임. 그러나 여기서는 '도착했다'를 꾸미는 성분이므로 부사어 역할을 함. 품사 자체를 물을 때 '어제'는 명사이기도 하고 부사이기도 함.)\n\n명확한 구분을 위해 예시 수정:\n1. __꿈__을 꾸다. (명사)\n2. 춤을 __춤__. (명사형 어미가 붙은 동사)\n3. __잠__을 자다. (명사)",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "",
+        "stem": "다음 밑줄 친 단어 중 품사가 '명사'가 아닌 것은?",
+        "passage": "__사과__ 한 개를 샀다. __오늘__은 날씨가 좋고 __내일__을 준비한다. __어제__ 도착했다.",
+        "highlight": {
+          "text": ""
+        },
         "prompt": "명사가 아닌 것을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "춤을 춤"
+            "text": "사과"
           },
           {
             "id": "B",
-            "text": "꿈을 꿈"
+            "text": "오늘"
           },
           {
             "id": "C",
-            "text": "잠"
+            "text": "어제"
           },
           {
             "id": "D",
-            "text": "기쁨"
+            "text": "내일"
           }
         ],
-        "answerId": "A",
+        "answerId": "C",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+        }
       },
       {
         "id": "dq-r3-062-3",
         "type": "MULTI_CHOICE",
-        "stem": "단어 '다섯'의 품사를 구별하는 방법으로 옳은 것은? 예: 사과 **다섯** 개 / **다섯**이 모였다",
-        "passage": "뒤에 조사가 붙을 수 있으면(또는 주어, 목적어 등으로 쓰이면) '수사'이고, 체언(단위성 의존 명사 등)을 꾸며 주기만 하면 '관형사(수관형사)'입니다.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "",
+        "stem": "단어 '다섯'의 품사를 구별하는 방법으로 옳은 것은? 예: 사과 다섯 개 / 다섯이 모였다",
+        "passage": "뒤에 조사가 붙거나 주어, 목적어 등으로 쓰이면 '수사'이고, 체언을 꾸며 주기만 하면 '수관형사'입니다.",
+        "highlight": {
+          "text": ""
+        },
         "prompt": "옳은 구별법을 고르세요.",
         "choices": [
           {
@@ -109,7 +128,7 @@
           },
           {
             "id": "C",
-            "text": "숫자는 모두 관형사이다."
+            "text": "숫자는 다 관형사이다."
           },
           {
             "id": "D",
@@ -117,17 +136,24 @@
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+        }
       },
       {
         "id": "dq-r3-062-4",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '다른'의 품사는?\n\"**다른** 사람들은 모두 갔다.\"",
-        "passage": "여기서 '다른(Allother/Different)'은 '딴(Another)'의 의미로 뒤에 오는 체언(사람들)을 꾸며 주며, 서술 성(다르다)이 없으므로 '관형사'입니다. (비교: 모양이 **다른** 물건 - 이때는 형용사)",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "",
+        "stem": "다음 문장에서 밑줄 친 '다른'의 품사는 무엇인가요?",
+        "passage": "다른 사람들은 모두 갔다.\n여기서 '다른'은 뒤에 오는 체언 '사람들'을 꾸며 주므로 '관형사'입니다. 비교: 모양이 다른 물건에서 '다른'은 서술어로 쓰여 형용사입니다.",
+        "highlight": {
+          "text": ""
+        },
         "prompt": "품사를 고르세요.",
         "choices": [
           {
@@ -148,17 +174,24 @@
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+        }
       },
       {
         "id": "dq-r3-062-5",
         "type": "MULTI_CHOICE",
+        "questionKind": "INFERENCE",
+        "competency": "",
         "stem": "동사와 형용사를 구별하는 기준으로 적절하지 않은 것은?",
-        "passage": "현재 시제 선어말 어미 '-느-'나 '-ㄴ-'을 붙일 수 있으면 동사, 없으면 형용사입니다. 명령형(-아라/어라)과 청유형(-자) 어미 결합도 동사만 가능합니다.",
+        "passage": "현재 시제 선어말 어미 '-느-'나 '-ㄴ-'을 붙일 수 있으면 동사, 없으면 형용사입니다. 명령형 -아라/어라과 청유형 -자 어미 결합도 동사만 가능합니다.",
+        "highlight": {
+          "text": ""
+        },
         "prompt": "적절하지 않은 기준을 고르세요.",
         "choices": [
           {
@@ -179,17 +212,24 @@
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+        }
       },
       {
         "id": "dq-r3-062-6",
         "type": "MULTI_CHOICE",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "",
         "stem": "다음 문장에서 밑줄 친 '통용'의 뜻으로 알맞은 것은?",
         "passage": "이 단어는 명사와 부사로 __통용__된다.",
+        "highlight": {
+          "text": ""
+        },
         "prompt": "뜻을 고르세요.",
         "choices": [
           {
@@ -210,18 +250,24 @@
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+        }
       },
       {
         "id": "dq-r3-062-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
+        "competency": "",
         "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "현우는 품사의 통용 품사 분류 심화을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
+        "passage": "현우는 품사의 통용 품사 분류 심화를 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
+        "highlight": {
+          "text": ""
+        },
         "prompt": "알맞은 것을 고르세요.",
         "choices": [
           {
@@ -242,6 +288,9 @@
           }
         ],
         "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
           "correctDeltaSec": 18,
           "wrongDeltaSec": -18
@@ -250,8 +299,13 @@
       {
         "id": "dq-r3-062-8",
         "type": "MULTI_CHOICE",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "",
         "stem": "다음 문장에서 밑줄 친 '구별'의 뜻으로 알맞은 것은?",
         "passage": "품사를 정확하게 __구별__할 줄 알아야 한다.",
+        "highlight": {
+          "text": ""
+        },
         "prompt": "뜻을 고르세요.",
         "choices": [
           {
@@ -272,53 +326,75 @@
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+        }
       },
       {
         "id": "dq-r3-062-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
+        "competency": "",
+        "stem": "다음 글을 읽고, 빈칸에 들어갈 말을 순서대로 고르세요.",
         "passage": "품사의 통용 품사 분류 심화를 설명하는 글에서 한 가지 규칙이 제시되었다.\n규칙을 적용할 때는 문맥과 기능을 함께 살펴야 한다.\n표기만 보고 단정하면 의미를 놓치기 쉽다.\n따라서 앞뒤 문장을 함께 읽어야 한다.",
-        "correctSentence": "따라서 앞뒤 문장을 함께 읽어야 의미가 분명하다.",
-        "sentenceParts": [
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "",
+        "choices": [],
+        "answerId": "",
+        "template": "따라서 ____ ____ 의미가 분명하다.",
+        "blanks": [
           {
-            "answer": "따라서",
-            "distractors": [
-              "즉,",
-              "그러므로",
-              "정리하면"
-            ]
+            "id": "dq-r3-062-9-blank-1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그 말을"
+              },
+              {
+                "id": "B",
+                "text": "앞뒤 문장을"
+              },
+              {
+                "id": "C",
+                "text": "새 것을"
+              },
+              {
+                "id": "D",
+                "text": "뒤뒤 문장을"
+              }
+            ],
+            "answerId": "B"
           },
           {
-            "answer": "앞뒤 문장을",
-            "distractors": [
-              "새 것을",
-              "그 말을",
-              "뒤뒤 문장을"
-            ]
-          },
-          {
-            "answer": "함께 읽어야",
-            "distractors": [
-              "이런 점을",
-              "그 사실을",
-              "이 문제를"
-            ]
-          },
-          {
-            "answer": "의미가 분명하다.",
-            "distractors": [
-              "반박한다.",
-              "어렵다.",
-              "설명한다."
-            ]
+            "id": "dq-r3-062-9-blank-2",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그 사실을"
+              },
+              {
+                "id": "B",
+                "text": "함께 읽어야"
+              },
+              {
+                "id": "C",
+                "text": "이런 점을"
+              },
+              {
+                "id": "D",
+                "text": "이 문제를"
+              }
+            ],
+            "answerId": "B"
           }
         ],
+        "explanation": "",
         "scoring": {
           "correctDeltaSec": 18,
           "wrongDeltaSec": 0
@@ -327,33 +403,40 @@
       {
         "id": "dq-r3-062-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '역할'의 뜻으로 알맞은 것은?",
-        "passage": "부사는 문장을 풍부하게 만드는 __역할__을 한다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "",
+        "stem": "다음 중 띄어쓰기가 올바른 것은?",
+        "passage": "띄어쓰기를 살펴보는 문제입니다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "바르게 쓴 문장을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "자기가 마땅히 하여야 할 맡은 바 직책이나 임무"
+            "text": "그럴것 같다."
           },
           {
             "id": "B",
-            "text": "역을 옮김"
+            "text": "그럴 것 같다."
           },
           {
             "id": "C",
-            "text": "역에서 일하는 사람"
+            "text": "그럴 것같다."
           },
           {
             "id": "D",
-            "text": "물건을 나눔"
+            "text": "그럴것같다."
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "의존 명사 '것'은 앞말과 띄어 씁니다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+        }
       }
     ]
   }

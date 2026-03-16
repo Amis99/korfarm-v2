@@ -1,5 +1,7 @@
 # 일일 퀴즈 JSON 구조 명세서
 
+이 문서는 `frontend/public/daily-quiz`의 **실제 데이터 구조**와 프론트 엔진 템플릿(`frontend/src/data/learning/templates/dailyQuiz_quiz.json`)을 기준으로 작성합니다.
+
 ## 파일 경로 규칙
 
 ```
@@ -14,20 +16,20 @@ frontend/public/daily-quiz/{레벨폴더}/{일차}.json
 
 ## 레벨 목록
 
-| 레벨 ID | 레벨명 | 대상 학년 | schoolGradeRange |
-|---------|--------|----------|-----------------|
-| saussure1 | 소쉬르 1 | 초1 | min: 1, max: 1 |
-| saussure2 | 소쉬르 2 | 초2 | min: 2, max: 2 |
-| saussure3 | 소쉬르 3 | 초3 | min: 3, max: 3 |
-| frege1 | 프레게 1 | 초4 | min: 4, max: 4 |
-| frege2 | 프레게 2 | 초5 | min: 5, max: 5 |
-| frege3 | 프레게 3 | 초6 | min: 6, max: 6 |
-| russell1 | 러셀 1 | 중1 | min: 7, max: 7 |
-| russell2 | 러셀 2 | 중2 | min: 8, max: 8 |
-| russell3 | 러셀 3 | 중3 | min: 9, max: 9 |
-| wittgenstein1 | 비트겐슈타인 1 | 고1 | min: 10, max: 10 |
-| wittgenstein2 | 비트겐슈타인 2 | 고2 | min: 11, max: 11 |
-| wittgenstein3 | 비트겐슈타인 3 | 고3 | min: 12, max: 12 |
+| 레벨 ID | 레벨명 | 대상 학년 |
+|---------|--------|----------|
+| saussure1 | 소쉬르 1 | 초1 |
+| saussure2 | 소쉬르 2 | 초2 |
+| saussure3 | 소쉬르 3 | 초3 |
+| frege1 | 프레게 1 | 초4 |
+| frege2 | 프레게 2 | 초5 |
+| frege3 | 프레게 3 | 초6 |
+| russell1 | 러셀 1 | 중1 |
+| russell2 | 러셀 2 | 중2 |
+| russell3 | 러셀 3 | 중3 |
+| wittgenstein1 | 비트겐슈타인 1 | 고1 |
+| wittgenstein2 | 비트겐슈타인 2 | 고2 |
+| wittgenstein3 | 비트겐슈타인 3 | 고3 |
 
 ---
 
@@ -50,73 +52,7 @@ frontend/public/daily-quiz/{레벨폴더}/{일차}.json
 
 ---
 
-## JSON 전체 구조
-
-```json
-{
-  "contentId": "dq-{레벨약어}-{일차3자리}",
-  "contentType": "DAILY_QUIZ",
-  "version": 1,
-  "status": "PUBLISHED",
-  "title": "일일 퀴즈 - {레벨한글명} Day {일차}",
-  "description": "맞춤법과 기초 어휘 10문항",
-  "targetLevel": "{TARGET_LEVEL}",
-  "schoolGradeRange": {
-    "min": {학년숫자},
-    "max": {학년숫자}
-  },
-  "area": "VOCAB",
-  "subArea": "DAILY",
-  "competencies": ["VOCAB"],
-  "tags": ["daily"],
-  "access": {
-    "mode": "FREE"
-  },
-  "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
-    "multiplier": 1
-  },
-  "timeLimitSec": 180,
-  "assets": {
-    "sheetBackground": "/learning-paper.jpg"
-  },
-  "payload": {
-    "pageStack": true,
-    "layout": "EXAM_SHEET",
-    "questions": [ ... ]
-  }
-}
-```
-
----
-
-## 각 필드 설명
-
-### 최상위 메타데이터
-
-| 필드 | 타입 | 고정/변동 | 설명 |
-|------|------|----------|------|
-| contentId | string | 변동 | `"dq-{레벨약어}-{일차3자리}"` (예: `"dq-r1-042"`) |
-| contentType | string | 고정 | 항상 `"DAILY_QUIZ"` |
-| version | number | 고정 | 항상 `1` |
-| status | string | 고정 | 항상 `"PUBLISHED"` |
-| title | string | 변동 | `"일일 퀴즈 - {레벨한글명} Day {일차}"` |
-| description | string | 고정 | `"맞춤법과 기초 어휘 10문항"` |
-| targetLevel | string | 레벨별 고정 | 위 매핑표 참고 |
-| schoolGradeRange | object | 레벨별 고정 | `{ "min": N, "max": N }` |
-| area | string | 고정 | `"VOCAB"` |
-| subArea | string | 고정 | `"DAILY"` |
-| competencies | string[] | 고정 | `["VOCAB"]` |
-| tags | string[] | 고정 | `["daily"]` |
-| access.mode | string | 고정 | `"FREE"` |
-| seedReward | object | 고정 | `{ "seedType": "WHEAT", "count": 3, "multiplier": 1 }` |
-| timeLimitSec | number | 고정 | `180` (3분) |
-| assets.sheetBackground | string | 고정 | `"/learning-paper.jpg"` |
-| payload.pageStack | boolean | 고정 | `true` |
-| payload.layout | string | 고정 | `"EXAM_SHEET"` |
-
-### contentId 레벨 약어 규칙
+## contentId 레벨 약어 규칙
 
 | 레벨 | 약어 | 예시 (42일차) |
 |------|------|-------------|
@@ -135,20 +71,83 @@ frontend/public/daily-quiz/{레벨폴더}/{일차}.json
 
 ---
 
-## 문제(question) 구조
-
-`payload.questions` 배열 안에 10개의 문제가 들어갑니다.
+## JSON 전체 구조
 
 ```json
 {
-  "id": "dq-{레벨약어}-{일차3자리}-{문제번호}",
-  "type": "MULTI_CHOICE",
-  "questionKind": "WORD_TO_MEANING",
-  "stem": "낱말: {출제 단어}",
-  "highlight": {
-    "text": "{출제 단어}"
+  "contentId": "dq-{레벨약어}-{일차3자리}",
+  "contentType": "DAILY_QUIZ",
+  "title": "일일 퀴즈 - {레벨한글명} Day {일차}",
+  "description": "{일차별 설명 텍스트}",
+  "targetLevel": "{TARGET_LEVEL}",
+  "area": "GENERAL",
+  "subArea": "DAILY",
+  "competencies": ["VOCAB", "READING", "GRAMMAR"],
+  "tags": ["daily"],
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
   },
-  "prompt": "뜻을 고르세요.",
+  "timeLimitSec": 180,
+  "payload": {
+    "pageStack": true,
+    "layout": "EXAM_SHEET",
+    "questions": [ ... 10문항 ... ]
+  }
+}
+```
+
+---
+
+## 최상위 필드 설명
+
+| 필드 | 타입 | 고정/변동 | 설명 |
+|------|------|----------|------|
+| contentId | string | 변동 | `"dq-{레벨약어}-{일차3자리}"` |
+| contentType | string | 고정 | `"DAILY_QUIZ"` |
+| title | string | 변동 | `"일일 퀴즈 - {레벨명} Day {일차}"` |
+| description | string | 변동 | 일차별 주제/설명 텍스트 |
+| targetLevel | string | 레벨별 고정 | 위 매핑표 참고 |
+| area | string | 변동 가능 | 주로 `"GENERAL"` 또는 `"VOCAB"` |
+| subArea | string | 고정 | `"DAILY"` |
+| competencies | string[] | 변동 가능 | 예: `["VOCAB", "READING", "GRAMMAR"]` |
+| tags | string[] | 변동 가능 | 예: `["daily", "science"]` |
+| seedReward | object | 고정 | `{ "seedType": "WHEAT", "count": 3, "multiplier": 1 }` |
+| timeLimitSec | number | 고정 | `180` |
+| payload | object | 고정 | `pageStack/layout/questions` 포함 |
+
+---
+
+## questions(10문항) 규칙
+
+### questionKind 값(10슬롯)
+
+일일 퀴즈는 10문항이 아래 10종 `questionKind`를 1개씩 갖도록 운영합니다.
+
+1. `WORD_TO_MEANING`
+2. `READING_COMPREHENSION`
+3. `STRUCTURE_READING`
+4. `BACKGROUND_KNOWLEDGE`
+5. `INFERENCE`
+6. `CRITICAL_THINKING`
+7. `CREATIVE_THINKING`
+8. `PROBLEM_SOLVING`
+9. `SENTENCE_BUILDING` (표현력)
+10. `GRAMMAR`
+
+### 객관식(MULTI_CHOICE) 구조
+
+```json
+{
+  "id": "dq-{레벨약어}-{일차3자리}-{1~10}",
+  "type": "MULTI_CHOICE",
+  "questionKind": "{위 10종 중 1개(9번 제외)}",
+  "competency": "{역량명(선택)}",
+  "stem": "{발문}",
+  "passage": "{지문(선택)}",
+  "highlight": { "text": "{강조 텍스트(선택)}" },
+  "prompt": "{보조 문구(선택)}",
   "choices": [
     { "id": "A", "text": "{선지 A}" },
     { "id": "B", "text": "{선지 B}" },
@@ -156,128 +155,75 @@ frontend/public/daily-quiz/{레벨폴더}/{일차}.json
     { "id": "D", "text": "{선지 D}" }
   ],
   "answerId": "{정답 선지 id}",
-  "explanation": "'{출제 단어}'은(는) '{정답 텍스트}'을(를) 뜻합니다.",
+  "explanation": "{해설(선택)}",
   "scoring": {
-    "correct": 20,
-    "wrong": -20
+    "correctDeltaSec": 20,
+    "wrongDeltaSec": -20
   }
 }
 ```
 
-### 서술형(문장 완성) 문제 구조 (competency: 표현력)
+### 9번(표현력) 추론형 빈칸 채우기(FILL_BLANKS) 구조
 
-`type`이 `"SENTENCE_BUILDING"`인 경우의 구조입니다.
+9번 문항은 `type: "FILL_BLANKS"`를 사용합니다.
+
+- **답안 전체를 그대로 베끼는 형태를 피합니다.**
+  - 지문(`passage`)에 `template` 완성문을 그대로 넣지 말고, 읽고 추론할 수 있게 단서만 제공합니다.
+- **고정 제시 구간**: 빈칸 앞/뒤 1어절 정도는 고정 텍스트로 제시합니다.
+- **선택 구간**: 가운데만 빈칸으로 두고, **순서대로** 선택하게 합니다.
 
 ```json
 {
   "id": "dq-{레벨약어}-{일차3자리}-9",
-  "type": "SENTENCE_BUILDING",
+  "type": "FILL_BLANKS",
   "questionKind": "SENTENCE_BUILDING",
-  "competency": "표현력",
-  "stem": "글의 내용을 바탕으로 빈칸을 채워 요약 문장을 완성하세요.",
+  "stem": "다음 글을 읽고, 빈칸에 들어갈 말을 순서대로 고르세요.",
   "passage": "{관련 지문 텍스트}",
-  "correctSentence": "카는 사실을 '과거에 대한 사실', '역사상의 사실', '역사적 사실'로 구분했다.",
-  "sentenceParts": [
+  "template": "{고정 어절} ____ ____ {고정 어절}",
+  "blanks": [
     {
-      "answer": "카는",
-      "distractors": ["랑케는", "콜링우드는", "크로체는"]
-    },
-    {
-      "answer": "사실을",
-      "distractors": ["해석을", "기록을", "상상을"]
-    },
-    {
-      "answer": "'과거에 대한 사실',",
-      "distractors": ["'기록된 사실',", "'변형된 사실',", "'가공된 사실',"]
-    },
-    {
-      "answer": "'역사상의 사실',",
-      "distractors": ["'선별된 사실',", "'객관적 사실',", "'절대적 사실',"]
-    },
-    {
-      "answer": "'역사적 사실'로",
-      "distractors": ["'현재적 사실'로", "'미래적 사실'로", "'주관적 사실'로"]
-    },
-    {
-      "answer": "구분했다.",
-      "distractors": ["조명했다.", "비판했다.", "통합했다."]
+      "id": "dq-...-9-blank-1",
+      "choices": [
+        { "id": "A", "text": "{선지}" },
+        { "id": "B", "text": "{선지}" },
+        { "id": "C", "text": "{선지}" },
+        { "id": "D", "text": "{선지}" }
+      ],
+      "answerId": "B"
     }
   ],
   "scoring": {
-    "correct": 20,
-    "wrong": 0
+    "correctDeltaSec": 15,
+    "wrongDeltaSec": 0
   }
 }
 ```
 
-**필드 설명 (SENTENCE_BUILDING)**
-- `type`: `"SENTENCE_BUILDING"` 고정
-- `questionKind`: `"SENTENCE_BUILDING"` 고정
-- `correctSentence`: 완성된 정답 문장 전체 (참조용)
-- `sentenceParts`: 문장을 어절 단위로 쪼갠 배열
-  - `answer`: 정답 어절
-  - `distractors`: 오답 선택지 (배열) - **반드시 3개** (총 4지선다 구성)
-- `choices`, `answerId`: 사용하지 않음 (대신 `sentenceParts` 사용)
+---
 
-### 문제 필드 설명
+## 금지/권장 규칙(핵심)
 
-| 필드 | 타입 | 설명 |
-|------|------|------|
-| id | string | `"dq-{레벨약어}-{일차3자리}-{1~10}"` |
-| type | string | 고정 `"MULTI_CHOICE"` (4지선다) |
-| questionKind | string | 고정 `"WORD_TO_MEANING"` (단어→뜻 찾기) |
-| stem | string | `"낱말: {단어}"` 형식 |
-| highlight.text | string | stem에서 강조할 단어 |
-| prompt | string | 고정 `"뜻을 고르세요."` |
-| choices | array | A/B/C/D 4개 선지. 정답 위치는 랜덤 배치 |
-| answerId | string | 정답 선지의 id (`"A"`, `"B"`, `"C"`, `"D"` 중 하나) |
-| explanation | string | 해설 문장 |
-| scoring.correct | number | 고정 `20` (정답 시 +20점) |
-| scoring.wrong | number | 고정 `-20` (오답 시 -20점) |
+- 문항/선택지에 괄호 속 부연(`(`, `)`)을 사용하지 않습니다.
+- 정답은 반드시 유일해야 합니다.
+- 9번은 `template`을 지문에서 그대로 복사하지 말고, 추론형으로 구성합니다.
 
 ---
 
-## 대량 생산 시 변동 항목 요약
-
-파일 하나당 실제로 바꿔야 하는 값만 정리하면 다음과 같습니다.
-
-### 파일 단위 (레벨 + 일차에 따라 결정)
-- `contentId`
-- `title`
-- `targetLevel`, `schoolGradeRange` (레벨별 고정)
-
-### 문제 단위 (문제 10개 × 매일 다른 단어)
-- `id`
-- `stem` → 출제 단어
-- `highlight.text` → 출제 단어
-- `choices` → 선지 4개 텍스트
-- `answerId` → 정답 선지
-- `explanation` → 해설
-
-나머지 필드는 모두 고정값이므로 템플릿으로 복사하면 됩니다.
-
----
-
-## 완성 예시 (russell1/042.json)
+## 완성 예시 (russell1/042.json 일부)
 
 ```json
 {
   "contentId": "dq-r1-042",
   "contentType": "DAILY_QUIZ",
-  "version": 1,
-  "status": "PUBLISHED",
   "title": "일일 퀴즈 - 러셀1 Day 42",
-  "description": "맞춤법과 기초 어휘 10문항",
+  "description": "러셀 1단계 42일차 퀴즈",
   "targetLevel": "RUSSELL_1",
-  "schoolGradeRange": { "min": 7, "max": 7 },
-  "area": "VOCAB",
+  "area": "GENERAL",
   "subArea": "DAILY",
-  "competencies": ["VOCAB"],
+  "competencies": ["VOCAB", "READING", "GRAMMAR"],
   "tags": ["daily"],
-  "access": { "mode": "FREE" },
   "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
   "timeLimitSec": 180,
-  "assets": { "sheetBackground": "/learning-paper.jpg" },
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -296,20 +242,10 @@ frontend/public/daily-quiz/{레벨폴더}/{일차}.json
           { "id": "D", "text": "규칙을 어기는 것" }
         ],
         "answerId": "B",
-        "explanation": "'합리적'은(는) '이치에 맞고 논리적인 것'을(를) 뜻합니다.",
-        "scoring": { "correct": 20, "wrong": -20 }
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -20 }
       }
     ]
   }
 }
 ```
 
-(실제 파일에는 questions 배열 안에 문제 10개가 들어갑니다.)
-
----
-
-## 생산 규모
-
-- 12레벨 x 365일 = **4,380개 파일**
-- 파일당 10문제 = **총 43,800문제**
-- 파일당 용량 약 2~3KB

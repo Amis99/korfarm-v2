@@ -2,13 +2,20 @@
   "contentId": "dq-f3-042",
   "contentType": "DAILY_QUIZ",
   "title": "일일 퀴즈 - 프레게3 Day 42",
-  "description": "프레게 3단계 42일차 퀴즈",
+  "description": "프레게3 42일차 퀴즈. 기체 발생 실험과 관찰",
   "targetLevel": "FREGE_3",
-  "area": "READING",
-  "subArea": "MIXED",
+  "area": "SCIENCE",
+  "subArea": "GAS_GENERATION_EXPERIMENTS",
   "competencies": [
     "VOCAB",
     "READING",
+    "STRUCTURE",
+    "KNOWLEDGE",
+    "INFERENCE",
+    "CRITICAL_THINKING",
+    "CREATIVE_THINKING",
+    "PROBLEM_SOLVING",
+    "EXPRESSION",
     "GRAMMAR"
   ],
   "tags": [
@@ -23,10 +30,10 @@
   ],
   "seedReward": {
     "seedType": "WHEAT",
-    "count": 1,
+    "count": 3,
     "multiplier": 1
   },
-  "timeLimitSec": 150,
+  "timeLimitSec": 180,
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -34,40 +41,128 @@
       {
         "id": "dq-f3-042-1",
         "type": "MULTI_CHOICE",
-        "stem": "기체의 성질을 알아보기 위해 식초와 베이킹소다를 섞으면 거품이 보글보글 생깁니다. 이때 발생하는 기체는?",
-        "passage": "'이산화 탄소'입니다. 이 기체는 불을 끄는 성질이 있습니다.",
-        "prompt": "기체를 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "실험에서 기체가 만들어졌는지 알아보려고 관찰하는 대상으로 가장 알맞은 것을 고르시오.",
+        "passage": "과학 시간에는 거품, 냄새, 불꽃의 변화처럼 눈에 띄는 반응을 보고 어떤 기체가 생겼는지 짐작하기도 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 것을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "이산화 탄소"
+            "text": "관찰 결과"
           },
           {
             "id": "B",
-            "text": "산소"
+            "text": "소설 줄거리"
           },
           {
             "id": "C",
-            "text": "수소"
+            "text": "연표 순서"
           },
           {
             "id": "D",
-            "text": "질소"
+            "text": "시조 형식"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "기체 발생 실험에서는 눈에 보이는 변화와 관찰 결과가 중요한 단서가 된다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-042-2",
         "type": "MULTI_CHOICE",
-        "stem": "과산화 수소수에 이산화 망가니즈를 넣으면 거품이 생기며 발생하는 기체는?",
-        "passage": "'산소'입니다. 이 기체는 꺼져가는 불씨를 다시 타오르게 합니다.",
-        "prompt": "기체를 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "다음 글을 읽고 가장 알맞은 내용을 고르시오.",
+        "passage": "베이킹소다와 식초를 섞으면 거품이 생기며 이산화 탄소가 나온다. 또 과산화 수소에 촉매를 넣으면 산소가 생겨 꺼져 가던 불씨가 다시 살아나기도 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 내용을 고르시오.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "두 실험은 기체와 전혀 관계가 없다."
+          },
+          {
+            "id": "B",
+            "text": "실험에 따라 만들어지는 기체의 종류가 다를 수 있다."
+          },
+          {
+            "id": "C",
+            "text": "거품이 생기면 항상 산소만 나온다."
+          },
+          {
+            "id": "D",
+            "text": "불씨가 살아나면 이산화 탄소가 나온 것이다."
+          }
+        ],
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "글에는 한 실험에서는 이산화 탄소, 다른 실험에서는 산소가 나온다고 제시되어 있다.",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "dq-f3-042-3",
+        "type": "MULTI_CHOICE",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "다음 글의 전개 방식으로 가장 알맞은 것을 고르시오.",
+        "passage": "먼저 한 실험에서 어떤 기체가 나오는지 설명한다. 이어서 다른 실험을 제시하며 기체를 구별하는 방법을 비교해 보여 준다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "전개 방식을 고르시오.",
+        "choices": [
+          {
+            "id": "A",
+            "text": "두 사례를 나란히 제시하며 차이를 보여 준다."
+          },
+          {
+            "id": "B",
+            "text": "질문만 이어 가고 답은 주지 않는다."
+          },
+          {
+            "id": "C",
+            "text": "실험과 상관없는 느낌만 적는다."
+          },
+          {
+            "id": "D",
+            "text": "시간 순으로 사건만 나열한다."
+          }
+        ],
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "두 실험 사례를 비교해 기체 구별 방법을 설명하는 구조이다.",
+        "scoring": {
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
+      },
+      {
+        "id": "dq-f3-042-4",
+        "type": "MULTI_CHOICE",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "꺼져 가는 불씨가 다시 살아나는 기체로 가장 알맞은 것을 고르시오.",
+        "passage": "어떤 기체는 연소를 돕는 성질을 보여 실험에서 구별 단서가 된다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "배경지식을 바탕으로 고르시오.",
         "choices": [
           {
             "id": "A",
@@ -75,286 +170,281 @@
           },
           {
             "id": "B",
-            "text": "이산화 탄소"
-          },
-          {
-            "id": "C",
-            "text": "헬륨"
-          },
-          {
-            "id": "D",
             "text": "질소"
-          }
-        ],
-        "answerId": "A",
-        "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
-      },
-      {
-        "id": "dq-f3-042-3",
-        "type": "MULTI_CHOICE",
-        "stem": "발생한 기체를 모을 때, 물이 담긴 수조에 집기병을 거꾸로 세워 기체를 모으는 방법은?",
-        "passage": "'수상 치환(Water Displacement)'입니다. 물에 잘 녹지 않는 기체(산소, 수소 등)를 모을 때 사용합니다.",
-        "prompt": "실험 방법을 고르세요.",
-        "choices": [
-          {
-            "id": "A",
-            "text": "수상 치환"
-          },
-          {
-            "id": "B",
-            "text": "상방 치환"
           },
           {
             "id": "C",
-            "text": "하방 치환"
+            "text": "수증기"
           },
           {
             "id": "D",
-            "text": "공기 치환"
+            "text": "이산화 탄소"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "산소는 연소를 돕는 성질이 있어 불씨를 다시 살리는 데 쓰인다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
-      },
-      {
-        "id": "dq-f3-042-4",
-        "type": "MULTI_CHOICE",
-        "stem": "공기보다 무거운 기체 이산화 탄소 등를 모을 때, 집기병의 입구를 위로 하여 공기를 밀어내고 기체를 모으는 방법은?",
-        "passage": "'하방 치환'입니다. 기체가 무거워서 아래로 가라앉기 때문입니다.",
-        "prompt": "방법을 고르세요.",
-        "choices": [
-          {
-            "id": "A",
-            "text": "하방 치환"
-          },
-          {
-            "id": "B",
-            "text": "상방 치환"
-          },
-          {
-            "id": "C",
-            "text": "수상 치환"
-          },
-          {
-            "id": "D",
-            "text": "증류"
-          }
-        ],
-        "answerId": "A",
-        "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-042-5",
         "type": "MULTI_CHOICE",
-        "stem": "실험 보고서를 쓸 때, 실험을 통해 알게 된 사실이나 결과를 정리하는 부분을 무엇이라고 하나요?",
-        "passage": "'실험 결과(Observation, Result)'입니다. 그리고 결과를 통해 알 수 있는 원리를 '결론'이라고 합니다.",
-        "prompt": "부분을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "다음 상황에서 가장 타당한 추론을 고르시오.",
+        "passage": "한 학생이 기체를 모아 불붙은 나무 조각을 넣었더니 불이 바로 꺼졌다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 타당한 추론을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "실험 결과"
+            "text": "그 기체는 연소를 도와 산소일 가능성이 크다."
           },
           {
             "id": "B",
-            "text": "실험 준비물"
+            "text": "그 기체는 연소를 방해하는 성질이 있어 이산화 탄소일 가능성이 크다."
           },
           {
             "id": "C",
-            "text": "실험 동기"
+            "text": "기체가 아니라 액체였다고 볼 수 있다."
           },
           {
             "id": "D",
-            "text": "실험 날짜"
+            "text": "불이 꺼졌으므로 아무 반응도 없었다고 볼 수 있다."
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "불을 꺼지게 했다면 이산화 탄소처럼 연소를 방해하는 기체를 떠올릴 수 있다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-042-6",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '관찰'의 뜻으로 알맞은 것은?",
-        "passage": "발생하는 기포의 변화를 자세히 __관찰__했다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 주장에 대한 비판으로 가장 적절한 것을 고르시오.",
+        "passage": "거품만 생기면 어떤 실험이든 같은 기체가 나온다고 보면 된다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 적절한 비판을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "사물이나 현상을 주의 깊게 살펴봄"
+            "text": "거품은 반응의 단서일 뿐이며 어떤 기체인지는 다른 성질도 함께 확인해야 한다."
           },
           {
             "id": "B",
-            "text": "관을 뚫음"
+            "text": "거품이 나면 실험은 실패라고 보면 된다."
           },
           {
             "id": "C",
-            "text": "찰흙 놀이"
+            "text": "실험에서는 관찰보다 추측이 더 중요하다."
           },
           {
             "id": "D",
-            "text": "도망감"
+            "text": "기체는 눈에 안 보이므로 구별할 수 없다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "거품만으로 기체를 단정할 수 없고 불씨 반응 등 추가 관찰이 필요하다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-042-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "서연는 기체 실험을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "기체 실험 수업의 활동 제목으로 가장 알맞은 것을 고르시오.",
+        "passage": "수업에서는 여러 반응을 보고 어떤 기체가 만들어졌는지 추리하도록 할 계획이다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 제목을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "안내 표지는 길을 알려 주는 나침반과 같다"
+            "text": "보이지 않는 기체를 단서로 추리하기"
           },
           {
             "id": "B",
-            "text": "안내 표지는 멀리서도 보인다"
+            "text": "정답만 외우는 실험 암기장"
           },
           {
             "id": "C",
-            "text": "안내 표지는 종이처럼 얇다"
+            "text": "글자 수만 세는 과학 시간"
           },
           {
             "id": "D",
-            "text": "안내 표지는 비가 오면 젖는다"
+            "text": "도형 이름만 반복하는 수업"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "기체 실험의 핵심인 관찰과 추리 활동을 잘 드러낸 제목이다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-f3-042-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '반응'의 뜻으로 알맞은 것은?",
-        "passage": "두 물질이 만나 화학 __반응__을 일으킨다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "학생이 산소와 이산화 탄소를 헷갈릴 때 가장 적절한 해결 방법을 고르시오.",
+        "passage": "학생은 두 기체가 눈에 보이지 않아 구별하기 어렵다고 말한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 적절한 해결 방법을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "어떤 작용을 받아 상태가 변함"
+            "text": "불씨 반응처럼 각 기체의 대표 성질을 표로 정리해 비교한다."
           },
           {
             "id": "B",
-            "text": "반만 응답함"
+            "text": "실험을 하지 말고 기체 이름만 외운다."
           },
           {
             "id": "C",
-            "text": "미워함"
+            "text": "구별이 어렵다면 두 기체를 같은 것으로 본다."
           },
           {
             "id": "D",
-            "text": "도와줌"
+            "text": "반응을 기록하지 않고 기억에만 의존한다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "대표 성질을 정리해 비교하면 각 기체를 구별하기 쉬워진다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-042-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "하늘은 기체 실험과 관련된 주장 글을 읽었다.\n글에는 사례가 두 개만 제시되어 있었다.\n사례가 적으면 일반화가 위험해질 수 있다.\n그래서 더 많은 근거가 필요하다고 했다.",
-        "correctSentence": "따라서 사례가 적으면 일반화하기 어렵다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "글의 뜻을 살려 문장을 완성하시오.",
+        "passage": "기체 발생 실험에서는 반응 뒤에 생긴 거품, 불씨의 변화, 냄새처럼 여러 단서를 살핀다. 이런 관찰을 모아야 어떤 기체가 나왔는지 판단할 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 말을 순서대로 고르시오.",
+        "choices": [],
+        "answerId": "",
+        "template": "기체 실험에서는 반응 뒤 ____ ____ 살핀다.",
+        "blanks": [
           {
-            "answer": "따라서",
-            "distractors": [
-              "즉,",
-              "그러므로",
-              "정리하면"
+            "id": "b1",
+            "answerId": "C",
+            "choices": [
+              {
+                "id": "A",
+                "text": "답의 개수만"
+              },
+              {
+                "id": "B",
+                "text": "문장의 길이만"
+              },
+              {
+                "id": "C",
+                "text": "여러 단서를"
+              },
+              {
+                "id": "D",
+                "text": "그림의 색만"
+              }
             ]
           },
           {
-            "answer": "사례가 적으면",
-            "distractors": [
-              "그대로 두면",
-              "급하게 하면",
-              "대충 하면"
-            ]
-          },
-          {
-            "answer": "일반화하기",
-            "distractors": [
-              "이 내용을",
-              "이 문제를",
-              "이런 점을"
-            ]
-          },
-          {
-            "answer": "어렵다.",
-            "distractors": [
-              "가능하다.",
-              "필요하다.",
-              "좋다."
+            "id": "b2",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "꼼꼼히"
+              },
+              {
+                "id": "B",
+                "text": "갑자기"
+              },
+              {
+                "id": "C",
+                "text": "대충만"
+              },
+              {
+                "id": "D",
+                "text": "거꾸로"
+              }
             ]
           }
         ],
+        "explanation": "기체 실험은 여러 관찰 단서를 꼼꼼히 살펴 판단하는 활동이다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": 0
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-f3-042-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '주의'의 뜻으로 알맞은 것은?",
-        "passage": "실험을 할 때는 안전사고에 __주의__해야 한다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "어법상 가장 자연스러운 문장을 고르시오.",
+        "passage": "",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 자연스러운 문장을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "마음에 새겨 조심함"
+            "text": "산소는 꺼져 가는 불씨를 다시 타오르게 할 수 있다."
           },
           {
             "id": "B",
-            "text": "주변을 둘러봄"
+            "text": "산소는 꺼져 가는 불씨를 다시 타오르게 할 수 있다를."
           },
           {
             "id": "C",
-            "text": "주사를 맞음"
+            "text": "산소는 꺼져 가는 불씨를 다시 타오르게 하고이다."
           },
           {
             "id": "D",
-            "text": "달리기함"
+            "text": "산소는 꺼져 가는 불씨를 다시 타오르게 되어진다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "문장 종결과 표현이 자연스럽다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       }
     ]
   }

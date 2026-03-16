@@ -1,24 +1,22 @@
 {
   "contentId": "dq-w3-030",
   "contentType": "DAILY_QUIZ",
-  "title": "일일 퀴즈 - 비트겐슈타인3 Day 30",
-  "description": "비트겐슈타인 3단계 30일차 퀴즈",
+  "title": "일일 퀴즈 - 비트겐슈타인3 Day 030",
+  "description": "고등학교 3학년 수준에서 유전자 발현 조절과 락 오페론의 원리를 이해하는 일일 퀴즈",
   "targetLevel": "WITTGENSTEIN_3",
-  "area": "READING",
-  "subArea": "SCIENCE",
+  "area": "SCIENCE",
+  "subArea": "GENE_REGULATION",
   "competencies": [
-    "VOCAB",
     "READING",
-    "GRAMMAR"
+    "ANALYSIS",
+    "SCIENCE"
   ],
   "tags": [
     "daily",
-    "science",
     "biology",
-    "gene_expression",
     "operon",
-    "lac_operon",
-    "repressor"
+    "gene-expression",
+    "highschool3"
   ],
   "seedReward": {
     "seedType": "WHEAT",
@@ -33,9 +31,14 @@
       {
         "id": "dq-w3-030-1",
         "type": "MULTI_CHOICE",
-        "stem": "원핵생물에서 연관된 기능을 하는 유전자들이 모여 하나의 전사 단위로 조절되는 시스템을 무엇이라고 하나요?",
-        "passage": "'오페론(Operon)'입니다. 프로모터, 작동부위(Operator), 구조 유전자 등으로 구성됩니다.",
-        "prompt": "시스템을 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "세균에서 관련 유전자들이 하나의 단위처럼 함께 조절되는 체계를 가리키는 말로 알맞은 것을 고르시오.",
+        "passage": "세균은 여러 유전자를 하나의 조절 단위로 묶어 필요한 때에만 함께 발현시키는데, 이를 오페론이라고 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 용어를 고르시오.",
         "choices": [
           {
             "id": "A",
@@ -43,7 +46,7 @@
           },
           {
             "id": "B",
-            "text": "뉴클레오솜"
+            "text": "뉴런"
           },
           {
             "id": "C",
@@ -51,317 +54,431 @@
           },
           {
             "id": "D",
-            "text": "인트론"
+            "text": "염색분체"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "오페론은 관련 유전자들을 하나의 조절 단위로 묶어 발현시키는 체계이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+        }
       },
       {
         "id": "dq-w3-030-2",
         "type": "MULTI_CHOICE",
-        "stem": "대장균의 '젖당 오페론 Lac Operon'에서 젖당이 없을 때, 작동부위 Operator에 결합하여 전사를 방해하는 단백질은?",
-        "passage": "'억제 단백질(Repressor)'입니다. RNA 중합효소가 프로모터에 결합하여 이동하는 것을 막습니다.",
-        "prompt": "단백질을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "지문을 읽고 억제 단백질의 역할로 가장 알맞은 것을 고르시오.",
+        "passage": "락 오페론에서 유당이 없을 때 억제 단백질은 오페레이터에 결합해 전사가 일어나지 못하게 막는다. 유당이 들어오면 억제 단백질의 모양이 바뀌어 떨어져 나간다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 내용을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "억제 단백질"
+            "text": "오페레이터에 결합해 전사를 막는다"
           },
           {
             "id": "B",
-            "text": "촉진 단백질"
+            "text": "리보솜을 분해해 단백질 합성을 멈춘다"
           },
           {
             "id": "C",
-            "text": "히스톤 단백질"
+            "text": "DNA를 두 배로 복제하게 한다"
           },
           {
             "id": "D",
-            "text": "효소"
+            "text": "전사된 RNA를 곧바로 잘라 낸다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "유당이 없을 때 억제 단백질은 오페레이터에 붙어 전사가 일어나지 못하게 한다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+        }
       },
       {
         "id": "dq-w3-030-3",
         "type": "MULTI_CHOICE",
-        "stem": "젖당 오페론에서 젖당 유도물질이 있으면 어떤 일이 일어나나요?",
-        "passage": "젖당이 억제 단백질에 결합하여 억제 단백질의 구조를 변형시킵니다. 변형된 억제 단백질은 작동부위에서 떨어져 나가고, RNA 중합효소가 전사를 시작하여 젖당 분해 효소를 만듭니다.",
-        "prompt": "현상을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "글의 전개 방식으로 가장 알맞은 것을 고르시오.",
+        "passage": "먼저 유당이 없을 때 어떤 일이 일어나는지 설명한다. 다음으로 유당이 있을 때 억제 단백질의 모양이 바뀌며 전사가 시작되는 과정을 순서대로 제시한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "전개 방식을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "억제 단백질이 떨어져 나가 전사가 일어난다."
+            "text": "조건을 나눈 뒤 과정과 결과를 차례대로 설명하는 구조"
           },
           {
             "id": "B",
-            "text": "억제 단백질이 더욱 강하게 결합한다."
+            "text": "실험 결과만 시간 순서대로 나열하는 구조"
           },
           {
             "id": "C",
-            "text": "전사가 중단된다."
+            "text": "둘 이상의 이론을 대립시켜 반박하는 구조"
           },
           {
             "id": "D",
-            "text": "DNA가 복제된다."
+            "text": "주장 하나를 여러 번 되풀이하는 구조"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "유당이 없는 경우와 있는 경우를 나누어 조건에 따른 과정과 결과를 설명하고 있다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+        }
       },
       {
         "id": "dq-w3-030-4",
         "type": "MULTI_CHOICE",
-        "stem": "진핵생물의 유전자 발현 조절은 원핵생물보다 복잡합니다. 전사 단계에서 RNA 중합효소 외에 프로모터에 결합하여 전사를 돕는 단백질 복합체는?",
-        "passage": "'전사 인자(Transcription Factor)'입니다.",
-        "prompt": "복합체를 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "락 오페론에서 RNA 중합 효소가 처음 결합하는 DNA 영역으로 알맞은 것을 고르시오.",
+        "passage": "전사는 특정 DNA 구간에서 시작되며, RNA 중합 효소는 전사를 시작하기 전에 그 부위에 먼저 결합한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 용어를 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "전사 인자"
+            "text": "프로모터"
           },
           {
             "id": "B",
-            "text": "제한 효소"
+            "text": "오페레이터"
           },
           {
             "id": "C",
-            "text": "DNA 연결 효소"
+            "text": "리프레서"
           },
           {
             "id": "D",
-            "text": "운반 RNA"
+            "text": "인트론"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "RNA 중합 효소가 전사를 시작하기 전에 결합하는 DNA 영역은 프로모터이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+        }
       },
       {
         "id": "dq-w3-030-5",
         "type": "MULTI_CHOICE",
-        "stem": "세포가 필요할 때만 유전자를 발현시켜 단백질을 만드는 이유는?",
-        "passage": "에너지를 효율적으로 사용하고, 환경 변화에 적절히 대응하기 위해서입니다. (경제성)",
-        "prompt": "이유를 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "지문을 바탕으로 추론한 내용으로 가장 알맞은 것을 고르시오.",
+        "passage": "세포는 필요한 효소만 만들수록 에너지를 아낄 수 있다. 락 오페론은 유당이 있을 때에만 관련 효소를 만들게 하여 불필요한 단백질 합성을 줄인다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "추론한 내용을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "에너지 효율과 환경 적응을 위해"
+            "text": "세포는 필요한 상황에서만 효소를 합성해 에너지를 아끼려 한다"
           },
           {
             "id": "B",
-            "text": "돌연변이를 일으키기 위해"
+            "text": "세포는 항상 최대량의 효소를 미리 만들어 둔다"
           },
           {
             "id": "C",
-            "text": "세포를 파괴하기 위해"
+            "text": "유당이 없어도 락 오페론은 더 활발하게 작동한다"
           },
           {
             "id": "D",
-            "text": "DNA 양을 늘리기 위해"
+            "text": "전사는 에너지와 관계없이 같은 양으로 일어난다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "지문은 필요한 때에만 효소를 만들어 에너지를 효율적으로 사용한다고 설명한다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+        }
       },
       {
         "id": "dq-w3-030-6",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '발현'의 뜻으로 알맞은 것은?",
-        "passage": "특정 유전자가 __발현__되면 단백질이 합성된다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 주장에 대한 비판으로 가장 알맞은 것을 고르시오.",
+        "passage": "주장: 세포는 필요한 양보다 더 많은 효소를 늘 미리 만들어 두는 편이 가장 효율적이다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 비판을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "속에 있던 성질이나 정보가 밖으로 드러나 나타나는 것"
+            "text": "필요하지 않은 효소를 계속 만드는 것은 에너지와 물질을 낭비할 수 있다"
           },
           {
             "id": "B",
-            "text": "있던 것이 점점 없어져 더 이상 보이지 않게 되는 것"
+            "text": "효소는 한 번 만들어지면 어떤 상황에서도 무조건 사라진다"
           },
           {
             "id": "C",
-            "text": "숨어 있던 대상이나 사실을 찾아내 알아내는 것"
+            "text": "세포는 유전자를 전혀 조절하지 않는다"
           },
           {
             "id": "D",
-            "text": "이전에 없던 새로운 물건이나 방법을 처음으로 만들어 내는 것"
+            "text": "효소는 오직 동물 세포에서만 만들어진다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "불필요한 효소를 계속 만드는 것은 자원 낭비이므로, 필요할 때만 발현시키는 조절이 더 효율적이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+        }
       },
       {
         "id": "dq-w3-030-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "지민는 유전자 발현 조절 오페론을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "다음 중 락 오페론의 조절 방식을 가장 잘 비유한 상황을 고르시오.",
+        "passage": "조건이 맞을 때만 어떤 장치가 작동하는 사례를 떠올려 보자.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 비유를 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "가정은 글자의 모양과 같다"
+            "text": "어두울 때만 센서가 반응해 복도 불이 켜지는 장치"
           },
           {
             "id": "B",
-            "text": "가정은 논의를 움직이는 발판과 같다"
+            "text": "하루 종일 교실 불을 켜 둔 채 끄지 않는 장치"
           },
           {
             "id": "C",
-            "text": "가정은 종이의 질감과 같다"
+            "text": "버튼을 눌러도 아무 변화가 없는 장치"
           },
           {
             "id": "D",
-            "text": "가정은 목소리의 크기와 같다"
+            "text": "한 번 켜지면 조건과 상관없이 영원히 켜진 채 있는 장치"
           }
         ],
-        "answerId": "B",
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "조건이 맞을 때만 작동한다는 점에서 센서등은 락 오페론의 조절 방식과 비슷하다.",
         "scoring": {
-          "correctDeltaSec": 20,
-          "wrongDeltaSec": -20
+          "correctDeltaSec": 15,
+          "wrongDeltaSec": -15
         }
       },
       {
         "id": "dq-w3-030-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '전사'의 뜻으로 알맞은 것은?",
-        "passage": "DNA의 정보가 RNA로 __전사__된다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "유당의 유무에 따라 락 오페론의 작동 차이를 확인하는 실험을 하려 한다. 가장 적절한 방법을 고르시오.",
+        "passage": "한 집단의 세균은 유당이 들어 있는 배지에서, 다른 집단은 유당이 없는 배지에서 기른 뒤 관련 효소의 양을 비교하려고 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 적절한 방법을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "옮겨 베낌 Transcription"
+            "text": "유당의 유무만 다르게 하고 다른 조건은 같게 유지한다"
           },
           {
             "id": "B",
-            "text": "전쟁에서 싸우는 사람"
+            "text": "온도, 시간, 세균 수를 다르게 하여 차이를 크게 만든다"
           },
           {
             "id": "C",
-            "text": "죽음"
+            "text": "두 집단 중 한쪽만 하루 먼저 측정한다"
           },
           {
             "id": "D",
-            "text": "회사를 옮김"
+            "text": "결과가 마음에 들 때까지 측정값을 바꿔 적는다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "유당의 영향만 비교하려면 다른 조건을 같게 유지해야 한다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+        }
       },
       {
         "id": "dq-w3-030-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "유전자 발현 조절 오페론을 다룬 글은 단기와 장기의 차이를 구분해 설명했다.\n단기에는 일부 요소가 빠르게 반응하지만, 다른 요소는 늦게 반응할 수 있다.\n이 속도 차이 때문에 변화가 한 번에 멈추지 않고 과하게 나타나기도 한다.\n그 뒤에 늦게 반응하는 요소가 따라오면서 전체가 다시 균형을 찾아간다.\n따라서 현상을 이해할 때는 조정 속도의 차이를 함께 고려해야 한다.\n글쓴이는 이 점을 예시를 통해 강조했다.",
-        "correctSentence": "정리하면 조정 속도 차이로 변화가 과하게 나타날 수 있음을 이 글은 설명한다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "지문을 바탕으로 문장이 자연스럽게 완성되도록 알맞은 말을 순서대로 고르시오.",
+        "passage": "유당이 없을 때는 억제 단백질이 오페레이터에 붙어 전사를 막는다. 유당이 들어오면 억제 단백질의 모양이 달라져 오페레이터에서 떨어지고 전사가 시작된다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "빈칸에 들어갈 말을 순서대로 고르시오.",
+        "choices": [],
+        "answerId": "",
+        "template": "유당이 없으면 ____ ____ 붙어 ____ ____.",
+        "blanks": [
           {
-            "answer": "정리하면",
-            "distractors": [
-              "즉,",
-              "따라서",
-              "그러므로"
-            ]
+            "id": "b1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "억제"
+              },
+              {
+                "id": "B",
+                "text": "전사"
+              },
+              {
+                "id": "C",
+                "text": "유당"
+              },
+              {
+                "id": "D",
+                "text": "효소"
+              }
+            ],
+            "answerId": "A"
           },
           {
-            "answer": "조정 속도 차이로",
-            "distractors": [
-              "반대로",
-              "새 것으로",
-              "다른 것으로"
-            ]
+            "id": "b2",
+            "choices": [
+              {
+                "id": "A",
+                "text": "단백질이"
+              },
+              {
+                "id": "B",
+                "text": "오페론을"
+              },
+              {
+                "id": "C",
+                "text": "중합효소가"
+              },
+              {
+                "id": "D",
+                "text": "리보솜이"
+              }
+            ],
+            "answerId": "A"
           },
           {
-            "answer": "변화가 과하게 나타날 수 있음을",
-            "distractors": [
-              "새 것을",
-              "그 말을",
-              "그것을"
-            ]
+            "id": "b3",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전사가"
+              },
+              {
+                "id": "B",
+                "text": "유전자가"
+              },
+              {
+                "id": "C",
+                "text": "번역이"
+              },
+              {
+                "id": "D",
+                "text": "복제가"
+              }
+            ],
+            "answerId": "A"
           },
           {
-            "answer": "이 글은",
-            "distractors": [
-              "글쓴이는",
-              "사람들은",
-              "저자는"
-            ]
-          },
-          {
-            "answer": "설명한다.",
-            "distractors": [
-              "강조한다.",
-              "암시한다.",
-              "주장한다."
-            ]
+            "id": "b4",
+            "choices": [
+              {
+                "id": "A",
+                "text": "막힌다"
+              },
+              {
+                "id": "B",
+                "text": "늘어난다"
+              },
+              {
+                "id": "C",
+                "text": "복제된다"
+              },
+              {
+                "id": "D",
+                "text": "사라진다"
+              }
+            ],
+            "answerId": "A"
           }
         ],
+        "explanation": "유당이 없을 때는 억제 단백질이 작동하여 전사가 막힌다는 점을 써야 한다.",
         "scoring": {
-          "correctDeltaSec": 20,
-          "wrongDeltaSec": 0
+          "correctDeltaSec": 15,
+          "wrongDeltaSec": -15
         }
       },
       {
         "id": "dq-w3-030-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '조절'의 뜻으로 알맞은 것은?",
-        "passage": "유전자 발현을 정교하게 __조절__한다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 중 간접 인용 표현과 띄어쓰기가 모두 바른 문장을 고르시오.",
+        "passage": "",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "어법이 바른 문장을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "균형이 맞게 바로잡음"
+            "text": "연구자는 유당이 있으면 전사가 활발해질 수 있다고 설명했다."
           },
           {
             "id": "B",
-            "text": "포기함"
+            "text": "연구자는 유당이 있으면 전사가 활발해질수 있다고 설명했다."
           },
           {
             "id": "C",
-            "text": "만들어 냄"
+            "text": "연구자는 유당이 있으면 전사가 활발해질 수 있다라고 설명했다."
           },
           {
             "id": "D",
-            "text": "없애 버림"
+            "text": "연구자는 유당이 있으면 전사가 활발해 질 수 있다고 설명했다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "간접 인용은 '-다고'를 쓰고, '수 있다'는 띄어 써야 하므로 A가 알맞다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+        }
       }
     ]
   }

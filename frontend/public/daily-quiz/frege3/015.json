@@ -2,25 +2,28 @@
   "contentId": "dq-f3-015",
   "contentType": "DAILY_QUIZ",
   "title": "일일 퀴즈 - 프레게3 Day 15",
-  "description": "프레게 3단계 15일차 퀴즈",
+  "description": "프레게 3단계 15일차 퀴즈. 지구의 자전과 낮밤",
   "targetLevel": "FREGE_3",
-  "area": "READING",
-  "subArea": "SCIENCE",
+  "area": "SCIENCE",
+  "subArea": "EARTH_ROTATION_AND_DAY_NIGHT",
   "competencies": [
-    "VOCAB",
+    "KNOWLEDGE",
     "READING",
-    "GRAMMAR"
+    "THINKING"
   ],
   "tags": [
     "daily",
-    "science"
+    "science",
+    "earth",
+    "rotation",
+    "day-night"
   ],
   "seedReward": {
     "seedType": "WHEAT",
-    "count": 1,
+    "count": 3,
     "multiplier": 1
   },
-  "timeLimitSec": 150,
+  "timeLimitSec": 180,
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -28,102 +31,128 @@
       {
         "id": "dq-f3-015-1",
         "type": "MULTI_CHOICE",
-        "stem": "지구에서 낮과 밤이 반복되는 주된 원인은 무엇인가요?",
-        "passage": "'지구의 자전' 때문입니다. 지구가 하루에 한 바퀴씩 스스로 돌면서 태양 쪽을 향하는 곳은 낮이 되고, 반대쪽은 밤이 됩니다.",
-        "prompt": "원인을 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "지구가 스스로 한 바퀴씩 도는 운동을 무엇이라고 하나요?",
+        "passage": "과학 용어를 떠올려 봅시다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 말을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "지구의 자전"
+            "text": "자전"
           },
           {
             "id": "B",
-            "text": "지구의 공전"
+            "text": "공전"
           },
           {
             "id": "C",
-            "text": "달의 자전"
+            "text": "팽창"
           },
           {
             "id": "D",
-            "text": "태양의 이동"
+            "text": "증발"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "지구가 스스로 도는 운동은 자전입니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-015-2",
         "type": "MULTI_CHOICE",
-        "stem": "지구가 자전하는 방향은 어느 쪽인가요?",
-        "passage": "'서쪽에서 동쪽(반시계 방향)'으로 돕니다. 그래서 태양이 동쪽에서 떠서 서쪽으로 지는 것처럼 보입니다.",
-        "prompt": "자전 방향을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "다음 글을 읽고 알맞은 내용을 고르세요.",
+        "passage": "지구의 한쪽은 태양빛을 받아 밝고, 다른 한쪽은 빛을 받지 못해 어둡다. 지구가 자전하면서 같은 장소도 밝은 쪽과 어두운 쪽을 차례로 지나가게 된다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "글의 내용으로 알맞은 것을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "서에서 동 반시계"
+            "text": "지구의 자전 때문에 한 장소에 낮과 밤이 차례로 나타난다."
           },
           {
             "id": "B",
-            "text": "동에서 서 시계"
+            "text": "태양이 지구를 하루에 한 번 돌기 때문에 낮밤이 생긴다."
           },
           {
             "id": "C",
-            "text": "남에서 북"
+            "text": "지구는 늘 같은 방향만 비추므로 밤이 없어질 수 있다."
           },
           {
             "id": "D",
-            "text": "북에서 남"
+            "text": "지구의 자전은 계절 변화만 만들고 낮밤과는 상관이 없다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "지구가 스스로 돌면서 같은 장소가 밝은 쪽과 어두운 쪽을 차례로 지나가기 때문에 낮과 밤이 생깁니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-015-3",
         "type": "MULTI_CHOICE",
-        "stem": "우리나라가 낮일 때, 지구 반대편에 있는 나라는 어떤 상태일까요?",
-        "passage": "지구 반대편에 있는 나라는 태양 빛을 받지 못하므로 '밤'이 됩니다. 시차가 발생하는 이유도 지구의 자전 때문입니다.",
-        "prompt": "상태를 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "다음 글의 짜임으로 가장 알맞은 것을 고르세요.",
+        "passage": "먼저 지구의 한쪽은 밝고 다른 한쪽은 어둡다는 원리를 설명한다. 다음으로 지구가 자전하면 한 장소가 밝은 쪽과 어두운 쪽을 차례로 지나간다고 말한다. 마지막으로 그래서 낮과 밤이 생긴다고 정리한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "글의 짜임을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "밤"
+            "text": "원리를 설명한 뒤 결과를 정리한다."
           },
           {
             "id": "B",
-            "text": "낮"
+            "text": "문제를 제시한 뒤 인물을 평가한다."
           },
           {
             "id": "C",
-            "text": "항상 새벽"
+            "text": "자료를 비교한 뒤 통계를 계산한다."
           },
           {
             "id": "D",
-            "text": "알 수 없음"
+            "text": "여행 순서를 적은 뒤 감상을 덧붙인다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "지구가 빛을 받는 방식과 자전 원리를 설명한 뒤 낮밤이라는 결과를 정리하는 구조입니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-015-4",
         "type": "MULTI_CHOICE",
-        "stem": "지구가 한 바퀴 자전하는 데 걸리는 시간은 약 얼마인가요?",
-        "passage": "'하루(약 24시간)'입니다. 정확하게는 23시간 56분 4초 정도입니다.",
-        "prompt": "시간을 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "지구가 한 바퀴 자전하는 데 걸리는 시간으로 가장 알맞은 것은 무엇인가요?",
+        "passage": "기본 지식을 떠올려 봅시다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 것을 고르세요.",
         "choices": [
           {
             "id": "A",
@@ -131,224 +160,281 @@
           },
           {
             "id": "B",
-            "text": "약 365일"
+            "text": "약 1시간"
           },
           {
             "id": "C",
-            "text": "약 1년"
+            "text": "약 7일"
           },
           {
             "id": "D",
-            "text": "약 12시간"
+            "text": "약 1년"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "지구는 약 24시간에 한 번 자전합니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-015-5",
         "type": "MULTI_CHOICE",
-        "stem": "지구가 자전하기 때문에 나타나는 현상이 *아닌* 것은?",
-        "passage": "낮과 밤의 반복, 별의 일주 운동(동에서 떠서 서로 이동), 태양의 일주 운동 등은 자전 때문입니다. '계절의 변화'는 지구의 공전과 기울어진 자전축 때문에 생기는 현상입니다.",
-        "prompt": "자전 현상이 아닌 것을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "다음 글을 통해 추론할 수 있는 내용으로 가장 알맞은 것을 고르세요.",
+        "passage": "우리나라가 태양을 향해 있을 때, 지구 반대편의 어떤 지역은 태양을 등진 쪽에 놓이게 된다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 내용을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "계절의 변화"
+            "text": "우리나라가 낮일 때 지구 반대편 일부 지역은 밤일 수 있다."
           },
           {
             "id": "B",
-            "text": "낮과 밤의 반복"
+            "text": "지구 반대편 지역도 우리나라와 같은 시각에 반드시 낮이다."
           },
           {
             "id": "C",
-            "text": "태양이 동쪽에서 뜸"
+            "text": "지구 반대편은 태양빛을 받지 않아 항상 어둡다."
           },
           {
             "id": "D",
-            "text": "별들이 밤하늘을 이동함"
+            "text": "지구 반대편은 태양과 가까워 낮밤 구분이 없다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "한쪽이 태양을 향하면 반대편 일부 지역은 빛을 받지 못하므로 밤일 수 있습니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-015-6",
         "type": "MULTI_CHOICE",
-        "stem": "달이나 태양 등 천체들이 지구 주위를 하루에 한 바퀴씩 도는 것처럼 보이는 겉보기 운동을 무엇이라고 하나요?",
-        "passage": "'일주 운동'이라고 합니다. 실제로는 지구가 돌고 있지만, 우리가 볼 때는 천체들이 도는 것처럼 보이는 것입니다.",
-        "prompt": "운동을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 주장에 대한 비판으로 가장 알맞은 것을 고르세요.",
+        "passage": "낮과 밤은 태양이 지구 주위를 하루에 한 번 돌기 때문에 생긴다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 비판을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "일주 운동"
+            "text": "낮과 밤의 주된 원인은 태양의 이동이 아니라 지구의 자전이라는 점을 놓친 주장이다."
           },
           {
             "id": "B",
-            "text": "연주 운동"
+            "text": "낮과 밤은 계절 변화가 있어서 생기므로 맞는 주장이다."
           },
           {
             "id": "C",
-            "text": "진자 운동"
+            "text": "태양은 움직이지 않으므로 언제나 밤만 생긴다는 뜻이어서 맞는 주장이다."
           },
           {
             "id": "D",
-            "text": "낙하 운동"
+            "text": "지구는 도는 운동을 하지 않으므로 태양만 생각하면 된다는 뜻이어서 맞는 주장이다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "낮과 밤은 지구가 스스로 도는 자전 때문에 생기므로 태양이 지구를 돈다는 설명은 옳지 않습니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-015-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "유나는 낮과 밤이 생기는 까닭을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "지구의 자전과 낮밤을 어린 동생에게 설명할 비유로 가장 알맞은 것을 고르세요.",
+        "passage": "원리를 쉽게 떠올리게 해 주는 비유를 고르는 상황입니다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 것을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "안내 표지는 멀리서도 보인다"
+            "text": "불 켜진 손전등 앞에서 공을 천천히 돌리는 모습"
           },
           {
             "id": "B",
-            "text": "안내 표지는 길을 알려 주는 나침반과 같다"
+            "text": "책을 쌓아 높이를 재는 모습"
           },
           {
             "id": "C",
-            "text": "안내 표지는 종이처럼 얇다"
+            "text": "연필을 반으로 나누는 모습"
           },
           {
             "id": "D",
-            "text": "안내 표지는 비가 오면 젖는다"
+            "text": "컵에 물을 따라 색을 섞는 모습"
           }
         ],
-        "answerId": "B",
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "손전등을 태양으로, 공을 지구로 보면 밝은 쪽과 어두운 쪽이 자전에 따라 바뀌는 모습을 쉽게 설명할 수 있습니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-f3-015-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '자전'의 뜻으로 알맞은 것은?",
-        "passage": "지구는 하루에 한 번 __자전__한다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "교실에서 낮과 밤이 생기는 까닭을 실험으로 보여 주려 합니다. 가장 알맞은 준비를 고르세요.",
+        "passage": "직접 움직임을 보여 줄 수 있는 모형이 필요한 상황입니다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 방법을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "천체가 스스로 고정된 축을 중심으로 회전함"
+            "text": "손전등과 지구본을 준비해 지구본을 천천히 돌려 본다."
           },
           {
             "id": "B",
-            "text": "자전거를 탐"
+            "text": "종이만 준비하고 빛은 사용하지 않는다."
           },
           {
             "id": "C",
-            "text": "돈을 빌림"
+            "text": "지구본을 멈춰 두고 그림만 본다."
           },
           {
             "id": "D",
-            "text": "전기를 만듦"
+            "text": "물컵과 얼음만 준비해 온도만 잰다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "빛을 나타내는 손전등과 자전하는 지구본이 있어야 낮과 밤의 원리를 직접 보여 줄 수 있습니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-015-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "낮과 밤이 생기는 까닭을 다룬 글에서는 조건과 결과의 관계를 설명했다.\n조건이 달라지면 결과도 달라질 수 있다고 했다.\n그래서 결론을 내리기 전에 조건이 무엇인지 확인해야 한다.\n조건을 바꿔 보고 결과를 비교하면 이해가 깊어진다.",
-        "correctSentence": "결국 조건이 바뀌면 결과도 함께 달라진다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "다음 글을 읽고 빈칸에 들어갈 말을 순서대로 고르세요.",
+        "passage": "지구의 한쪽은 태양빛을 받고, 다른 한쪽은 그림자 쪽에 놓인다. 지구가 스스로 돌면서 같은 장소도 밝은 쪽과 어두운 쪽을 차례로 지나간다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "",
+        "choices": [],
+        "answerId": "",
+        "template": "낮과 밤은 ____ ____ 생긴다.",
+        "blanks": [
           {
-            "answer": "결국",
-            "distractors": [
-              "즉,",
-              "따라서",
-              "그러므로"
-            ]
+            "id": "dq-f3-015-9-blank-1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지구가 스스로"
+              },
+              {
+                "id": "B",
+                "text": "바다가 갑자기"
+              },
+              {
+                "id": "C",
+                "text": "구름이 멀리"
+              },
+              {
+                "id": "D",
+                "text": "별빛이 자주"
+              }
+            ],
+            "answerId": "A"
           },
           {
-            "answer": "조건이 바뀌면",
-            "distractors": [
-              "대충 하면",
-              "나중에 하면",
-              "그대로 두면"
-            ]
-          },
-          {
-            "answer": "결과도 함께",
-            "distractors": [
-              "그 이유를",
-              "이 내용을",
-              "그 사실을"
-            ]
-          },
-          {
-            "answer": "달라진다.",
-            "distractors": [
-              "변한다.",
-              "늘어난다.",
-              "멈춘다."
-            ]
+            "id": "dq-f3-015-9-blank-2",
+            "choices": [
+              {
+                "id": "A",
+                "text": "돌기 때문에"
+              },
+              {
+                "id": "B",
+                "text": "멈추기 때문에"
+              },
+              {
+                "id": "C",
+                "text": "사라지기 때문에"
+              },
+              {
+                "id": "D",
+                "text": "줄어들기 때문에"
+              }
+            ],
+            "answerId": "A"
           }
         ],
+        "explanation": "낮과 밤은 지구가 스스로 돌기 때문에 생깁니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": 0
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-f3-015-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '반복'의 뜻으로 알맞은 것은?",
-        "passage": "같은 실수를 __반복__하지 마라.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 중 어법에 맞는 문장을 고르세요.",
+        "passage": "과학 설명문을 다듬는 상황입니다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 문장을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "같은 일을 되풀이 함"
+            "text": "지구는 서쪽에서 동쪽으로 자전한다."
           },
           {
             "id": "B",
-            "text": "반만 함"
+            "text": "지구는 서쪽에서 동쪽으로 자젼한다."
           },
           {
             "id": "C",
-            "text": "복수함"
+            "text": "지구는 서쪽에서 동쪽으로 자전 한다."
           },
           {
             "id": "D",
-            "text": "포기함"
+            "text": "지구는 서쪽에서 동쪽으로 자전한다가."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "지구는 서쪽에서 동쪽으로 자전한다가 어법에 맞는 자연스러운 문장입니다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       }
     ]
   }

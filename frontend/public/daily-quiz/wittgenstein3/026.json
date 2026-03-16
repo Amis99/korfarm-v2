@@ -2,9 +2,9 @@
   "contentId": "dq-w3-026",
   "contentType": "DAILY_QUIZ",
   "title": "일일 퀴즈 - 비트겐슈타인3 Day 26",
-  "description": "비트겐슈타인 3단계 26일차 퀴즈",
+  "description": "비트겐슈타인3 26일차 일일 퀴즈. 품사 통용과 동사, 형용사 구별",
   "targetLevel": "WITTGENSTEIN_3",
-  "area": "READING",
+  "area": "KOREAN",
   "subArea": "GRAMMAR",
   "competencies": [
     "VOCAB",
@@ -13,10 +13,10 @@
   ],
   "tags": [
     "daily",
+    "korean",
     "grammar",
-    "parts_of_speech",
-    "class_shift",
-    "verb_adjective"
+    "parts-of-speech",
+    "class-shift"
   ],
   "seedReward": {
     "seedType": "WHEAT",
@@ -31,335 +31,410 @@
       {
         "id": "dq-w3-026-1",
         "type": "MULTI_CHOICE",
-        "stem": "단어의 품사가 바뀌지 않고 문장 성분으로서의 기능만 잠시 바뀌는 것 예: 동사의 명사형 '달리기'에서 '달리기'의 품사는 여전히 동사을 무엇이라고 하나요?",
-        "passage": "'전성(Conversion)' 또는 '품사의 활용'입니다. 반면, 접미사가 붙어 아예 새로운 품사로 바뀌는 것은 '파생(Derivation)'입니다.",
-        "prompt": "개념을 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "다음 글에서 뜻하는 말로 가장 알맞은 것을 고르시오.",
+        "passage": "하나의 낱말이 문맥에 따라 서로 다른 품사로 쓰이는 현상을 품사 통용이라고 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "뜻이 알맞은 것을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "용언의 활용 전성"
+            "text": "한 낱말이 문맥에 따라 다른 품사로 쓰이는 현상"
           },
           {
             "id": "B",
-            "text": "단어의 파생"
+            "text": "한 낱말의 뜻이 예전과 반대로 바뀌는 현상"
           },
           {
             "id": "C",
-            "text": "단어의 합성"
+            "text": "문장을 줄여 짧게 적는 현상"
           },
           {
             "id": "D",
-            "text": "단어의 굴절"
+            "text": "같은 소리를 억지로 반복하는 현상"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "품사 통용은 하나의 낱말이 상황에 따라 다른 품사 기능으로 쓰이는 현상이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+        }
       },
       {
         "id": "dq-w3-026-2",
         "type": "MULTI_CHOICE",
-        "stem": "어떤 단어가 두 가지 이상의 품사로 쓰이는 경우를 '품사 통용'이라고 합니다. '크다'는 동사와 형용사 중 무엇으로 쓰일 수 있나요?",
-        "passage": "'둘 다'입니다. '나무가 크다'에서는 형용사, '키가 큰다(자라다)'에서는 동사로 쓰입니다.",
-        "prompt": "가능한 품사를 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "글을 읽고 알 수 있는 내용으로 가장 알맞은 것을 고르시오.",
+        "passage": "동사는 움직임이나 변화를 나타내어 진행 표현이 자연스러운 경우가 많다. 반면 형용사는 성질이나 상태를 나타내어 진행 표현이 어색한 경우가 많다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "글의 내용으로 알맞은 것을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "동사와 형용사 둘 다"
+            "text": "형용사는 대체로 상태를 나타낸다."
           },
           {
             "id": "B",
-            "text": "형용사만"
+            "text": "동사는 진행 표현을 쓸 수 없다."
           },
           {
             "id": "C",
-            "text": "동사만"
+            "text": "형용사와 동사는 뜻 차이가 없다."
           },
           {
             "id": "D",
-            "text": "명사만"
+            "text": "형용사는 늘 명령형이 자연스럽다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "글에서는 형용사가 성질이나 상태를 나타낸다고 설명한다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+        }
       },
       {
         "id": "dq-w3-026-3",
         "type": "MULTI_CHOICE",
-        "stem": "서술성이 있으면 용언 동사/형용사의 명사형이고, 서술성이 없으면 명사 파생 명사입니다. 다음 중 밑줄 친 단어가 명사인 것은?",
-        "passage": "'멋진 __춤__을 춘다'에서 앞의 '__춤__'은 관형어(멋진)의 수식을 받으므로 명사이고, 뒤의 '춘다'는 서술어이므로 동사입니다. '꿈을 __꿈__'에서도 앞은 명사, 뒤는 동사입니다.",
-        "prompt": "명사인 것을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "다음 설명의 전개 방식으로 가장 알맞은 것을 고르시오.",
+        "passage": "설명은 먼저 품사 통용이 무엇인지 밝힌다. 다음으로 동사와 형용사를 구별하는 기준을 제시한다. 끝으로 실제 낱말을 예로 들어 판단 방법을 보여 준다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "전개 방식을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "멋진 춤을 춘다 앞의 춤"
+            "text": "개념을 제시한 뒤 기준과 예시를 차례로 설명한다."
           },
           {
             "id": "B",
-            "text": "나는 밥을 먹음 먹음"
+            "text": "인물의 대화만 연속으로 보여 준다."
           },
           {
             "id": "C",
-            "text": "그가 빨리 달림 달림"
+            "text": "시간 순서에 따라 사건만 기록한다."
           },
           {
             "id": "D",
-            "text": "꽃이 아름다움 아름다움"
+            "text": "정답만 말하고 이유는 생략한다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "글은 개념 제시, 구별 기준, 예시 제시의 순서로 전개된다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+        }
       },
       {
         "id": "dq-w3-026-4",
         "type": "MULTI_CHOICE",
-        "stem": "'오늘'은 명사뿐만 아니라 문장에서 로도 쓰입니다. 괄호 안에 들어갈 말은?",
-        "passage": "'부사'입니다. 예: '오늘 만납시다' (부사), '오늘은 날씨가 좋다' (명사).",
-        "prompt": "품사를 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "다음 중 일반적으로 형용사로 보는 낱말을 고르시오.",
+        "passage": "품사는 뜻과 쓰임을 함께 살펴 구별한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 낱말을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "부사"
+            "text": "맑다"
           },
           {
             "id": "B",
-            "text": "관형사"
+            "text": "웃다"
           },
           {
             "id": "C",
-            "text": "동사"
+            "text": "달리다"
           },
           {
             "id": "D",
-            "text": "감탄사"
+            "text": "닫다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "맑다는 상태나 성질을 나타내는 형용사이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+        }
       },
       {
         "id": "dq-w3-026-5",
         "type": "MULTI_CHOICE",
-        "stem": "'밝다'는 형용사로 주로 쓰이지만, '날이 밝는다'와 같이 쓰일 때는 어떤 품사인가요?",
-        "passage": "'동사'입니다. 시간의 흐름에 따라 상태가 변하는 과정을 나타내기 때문입니다. ('-는-' 결합 가능)",
-        "prompt": "품사를 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "다음 예를 보고 추론한 내용으로 가장 알맞은 것을 고르시오.",
+        "passage": "지금 문이 닫히고 있다는 자연스럽지만, 지금 하늘이 푸르고 있다는 매우 어색하다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "추론한 내용을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "동사"
+            "text": "닫히다는 변화 과정을 나타내어 동사로 볼 수 있다."
           },
           {
             "id": "B",
-            "text": "형용사"
+            "text": "푸르다는 변화 과정을 나타내어 동사로 볼 수 있다."
           },
           {
             "id": "C",
-            "text": "부사"
+            "text": "닫히다와 푸르다는 진행 표현 여부와 관계가 없다."
           },
           {
             "id": "D",
-            "text": "명사"
+            "text": "형용사는 진행 표현이 더 자연스러운 경우가 많다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "닫히다는 진행 표현이 자연스러워 동사의 성격이 드러나고, 푸르다는 상태를 나타내는 형용사로 볼 수 있다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+        }
       },
       {
         "id": "dq-w3-026-6",
         "type": "MULTI_CHOICE",
-        "stem": "'있다'는 동사와 형용사 중 어느 것으로 분류되나요?",
-        "passage": "둘 다 됩니다. '집에 있다(머무르다)'는 동사, '돈이 있다(소유)'는 형용사적 성격이 강했으나, 학교 문법에서는 주로 동사적 활용('-는-', 의도, 명령 등)이 가능한 경우 동사로 봅니다. (현재는 존재사로 따로 분류하지 않고 문맥에 따라 동사/형용사 구별)",
-        "prompt": "분류를 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 중 더 타당한 주장과 그 까닭을 고르시오.",
+        "passage": "한 학생은 활용만 하면 다 동사라고 말했다. 다른 학생은 활용 여부만으로는 부족하고, 상태를 나타내는지 움직임을 나타내는지도 함께 봐야 한다고 말했다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "더 타당한 주장과 까닭을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "문맥에 따라 동사 또는 형용사"
+            "text": "상태와 움직임까지 함께 봐야 한다는 주장이 타당하다. 활용만으로는 형용사와 동사를 정확히 구별하기 어렵기 때문이다."
           },
           {
             "id": "B",
-            "text": "무조건 동사"
+            "text": "활용만 보면 된다는 주장이 타당하다. 어미가 붙는 낱말은 같은 품사라고 볼 수 있기 때문이다."
           },
           {
             "id": "C",
-            "text": "무조건 형용사"
+            "text": "활용만 보면 된다는 주장이 타당하다. 의미는 품사 판단에 쓰이지 않기 때문이다."
           },
           {
             "id": "D",
-            "text": "조사"
+            "text": "상태와 움직임까지 함께 봐야 한다는 주장이 타당하다. 낱말 길이가 길수록 형용사이기 때문이다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "동사와 형용사는 함께 활용하므로 의미와 쓰임을 같이 봐야 더 정확하게 판단할 수 있다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+        }
       },
       {
         "id": "dq-w3-026-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "준호는 품사 통용 동사/형용사 등을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "동사와 형용사를 구별하는 기억법을 만들려고 한다. 가장 창의적이면서도 효과적인 방법을 고르시오.",
+        "passage": "짧은 시간에 친구들이 스스로 판단 기준을 떠올릴 수 있어야 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 방법을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "가정은 종이의 질감과 같다"
+            "text": "지금 하고 있다 시험과 명령형 시험을 카드로 만들어 낱말마다 직접 적용해 보게 한다."
           },
           {
             "id": "B",
-            "text": "가정은 논의를 움직이는 발판과 같다"
+            "text": "낱말 뜻은 보지 말고 글자 수만 세게 한다."
           },
           {
             "id": "C",
-            "text": "가정은 목소리의 크기와 같다"
+            "text": "틀린 낱말만 따로 외우게 한다."
           },
           {
             "id": "D",
-            "text": "가정은 글자의 모양과 같다"
+            "text": "문법 용어만 반복해 읽게 한다."
           }
         ],
-        "answerId": "B",
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "직접 판단 기준을 적용해 보는 활동은 동사와 형용사의 차이를 오래 기억하게 해 준다.",
         "scoring": {
-          "correctDeltaSec": 20,
-          "wrongDeltaSec": -20
+          "correctDeltaSec": 15,
+          "wrongDeltaSec": -15
         }
       },
       {
         "id": "dq-w3-026-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '통용'의 뜻으로 알맞은 것은?",
-        "passage": "이 단어는 여러 품사로 __통용__된다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "민수가 닮다와 비슷하다처럼 뜻이 비슷한 낱말을 만나면 같은 품사라고만 생각해 자꾸 헷갈린다. 가장 알맞은 해결 방법을 고르시오.",
+        "passage": "민수는 의미가 비슷하면 같은 품사라고 단정하는 버릇이 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 방법을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "일반적으로 두루 씀"
+            "text": "각 낱말에 진행 표현과 명령형을 넣어 보고 자연스러운지 비교해 판단하게 한다."
           },
           {
             "id": "B",
-            "text": "금지됨"
+            "text": "뜻이 비슷하면 무조건 같은 품사라고 외우게 한다."
           },
           {
             "id": "C",
-            "text": "사라짐"
+            "text": "문장 속에서 쓰임을 보지 않고 사전 첫 줄만 읽게 한다."
           },
           {
             "id": "D",
-            "text": "어려움"
+            "text": "헷갈리는 낱말은 시험에 나오지 않는다고 넘긴다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "의미만 보지 말고 진행 표현과 명령형 같은 쓰임을 비교해야 품사를 더 정확히 구별할 수 있다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+        }
       },
       {
         "id": "dq-w3-026-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "품사 통용 동사/형용사 등을 다룬 글은 단기와 장기의 차이를 구분해 설명했다.\n단기에는 일부 요소가 빠르게 반응하지만, 다른 요소는 늦게 반응할 수 있다.\n이 속도 차이 때문에 변화가 한 번에 멈추지 않고 과하게 나타나기도 한다.\n그 뒤에 늦게 반응하는 요소가 따라오면서 전체가 다시 균형을 찾아간다.\n따라서 현상을 이해할 때는 조정 속도의 차이를 함께 고려해야 한다.\n글쓴이는 이 점을 예시를 통해 강조했다.",
-        "correctSentence": "정리하면 조정 속도 차이로 변화가 과하게 나타날 수 있음을 이 글은 설명한다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "글을 바탕으로 문장을 완성하시오.",
+        "passage": "형용사는 사물의 성질이나 상태를 나타내고, 동사는 움직임이나 변화를 나타낸다. 그래서 형용사에는 진행 표현이 잘 어울리지 않는 경우가 많다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "빈칸에 들어갈 말을 순서대로 고르시오.",
+        "choices": [],
+        "answerId": "",
+        "template": "형용사는 ____ ____ 나타낸다.",
+        "blanks": [
           {
-            "answer": "정리하면",
-            "distractors": [
-              "즉,",
-              "따라서",
-              "그러므로"
+            "id": "B1",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사물의"
+              },
+              {
+                "id": "B",
+                "text": "사건의"
+              },
+              {
+                "id": "C",
+                "text": "시간의"
+              },
+              {
+                "id": "D",
+                "text": "장소의"
+              }
             ]
           },
           {
-            "answer": "조정 속도 차이로",
-            "distractors": [
-              "옆으로",
-              "다른 것으로",
-              "반대로"
-            ]
-          },
-          {
-            "answer": "변화가 과하게 나타날 수 있음을",
-            "distractors": [
-              "새 것을",
-              "그것을",
-              "다른 것을"
-            ]
-          },
-          {
-            "answer": "이 글은",
-            "distractors": [
-              "글쓴이는",
-              "사람들은",
-              "저자는"
-            ]
-          },
-          {
-            "answer": "설명한다.",
-            "distractors": [
-              "강조한다.",
-              "암시한다.",
-              "비판한다."
+            "id": "B2",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상태를"
+              },
+              {
+                "id": "B",
+                "text": "속도를"
+              },
+              {
+                "id": "C",
+                "text": "방향을"
+              },
+              {
+                "id": "D",
+                "text": "수량을"
+              }
             ]
           }
         ],
+        "explanation": "형용사는 사물의 상태나 성질을 나타내는 품사라는 점을 정리한 문장이다.",
         "scoring": {
-          "correctDeltaSec": 20,
-          "wrongDeltaSec": 0
+          "correctDeltaSec": 15,
+          "wrongDeltaSec": -15
         }
       },
       {
         "id": "dq-w3-026-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '전성'의 뜻으로 알맞은 것은?",
-        "passage": "용언의 __전성__ 어미.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 중 동사와 형용사의 특성을 바르게 이해한 문장을 고르시오.",
+        "passage": "품사 통용과 동사, 형용사 구별 기준을 정리하는 상황이다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "문법 이해가 가장 알맞은 문장을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "성질을 바꿈 품사의 성질을 임시로 바꿈"
+            "text": "닫히다는 지금 문이 닫히고 있다처럼 진행 표현이 자연스러워 동사로 볼 수 있다."
           },
           {
             "id": "B",
-            "text": "전체적인 성격"
+            "text": "푸르다는 지금 하늘이 푸르고 있다가 자연스러우므로 동사로 볼 수 있다."
           },
           {
             "id": "C",
-            "text": "전쟁에서 이김"
+            "text": "조용하다는 행동을 나타내므로 명령형이 자연스럽다."
           },
           {
             "id": "D",
-            "text": "별을 관찰함"
+            "text": "비슷하다는 변화 과정을 나타내므로 진행 표현이 자연스럽다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "닫히다는 변화 과정을 나타내어 진행 표현이 자연스럽고, 푸르다나 비슷하다는 상태를 나타내는 형용사로 보는 것이 알맞다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+        }
       }
     ]
   }

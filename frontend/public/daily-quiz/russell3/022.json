@@ -2,10 +2,10 @@
   "contentId": "dq-r3-022",
   "contentType": "DAILY_QUIZ",
   "title": "일일 퀴즈 - 러셀3 Day 22",
-  "description": "러셀 3단계 22일차 퀴즈",
+  "description": "러셀3 22일차 일일 퀴즈. 일정 성분비 법칙과 프루스트",
   "targetLevel": "RUSSELL_3",
-  "area": "READING",
-  "subArea": "SCIENCE",
+  "area": "SCIENCE",
+  "subArea": "CHEMISTRY",
   "competencies": [
     "VOCAB",
     "READING",
@@ -15,8 +15,9 @@
     "daily",
     "science",
     "chemistry",
-    "law_of_definite_proportions",
-    "proust"
+    "compound",
+    "proust",
+    "definite-proportions"
   ],
   "seedReward": {
     "seedType": "WHEAT",
@@ -31,9 +32,14 @@
       {
         "id": "dq-r3-022-1",
         "type": "MULTI_CHOICE",
-        "stem": "화합물을 구성하는 성분 원소 사이에는 일정한 질량비가 성립한다는 법칙은?",
-        "passage": "'일정 성분비 법칙(Law of Definite Proportions)'입니다. 1799년 프랑스의 화학자 프루스트가 발견했습니다. 화합물에서만 성립하며 환합물에서는 성립하지 않습니다.",
-        "prompt": "법칙을 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "다음 글에서 설명하는 법칙의 이름으로 알맞은 것을 고르시오.",
+        "passage": "프루스트는 화합물을 이루는 원소들의 질량비가 언제나 일정하다는 사실을 밝혔다. 물이 어디서 얻어졌든 수소와 산소의 질량비가 같다는 점이 그 예이다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "법칙의 이름을 고르시오.",
         "choices": [
           {
             "id": "A",
@@ -49,309 +55,387 @@
           },
           {
             "id": "D",
-            "text": "아보가드로 법칙"
+            "text": "보일 법칙"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "화합물을 이루는 원소들의 질량비가 항상 일정하다는 내용은 일정 성분비 법칙이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+        }
       },
       {
         "id": "dq-r3-022-2",
         "type": "MULTI_CHOICE",
-        "stem": "일정 성분비 법칙이 성립하는 이유는 무엇인가요?",
-        "passage": "화합물이 생성될 때 원자들이 '일정한 개수비'로 결합하기 때문입니다. 원자의 종류마다 질량이 다르므로, 개수비가 일정하면 질량비도 일정하게 됩니다.",
-        "prompt": "이유를 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "글을 읽고 알 수 있는 내용으로 알맞은 것을 고르시오.",
+        "passage": "화합물은 원소가 일정한 비율로 결합해 만들어진다. 그래서 같은 화합물이라면 만드는 방법이 달라도 원소의 질량비는 변하지 않는다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "글의 내용으로 알맞은 것을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "원자들이 일정한 개수비로 결합해서"
+            "text": "같은 화합물은 만드는 방법이 달라도 질량비가 같다."
           },
           {
             "id": "B",
-            "text": "원자의 크기가 모두 같아서"
+            "text": "같은 화합물은 섞는 순서에 따라 질량비가 달라진다."
           },
           {
             "id": "C",
-            "text": "원자가 쪼개져서"
+            "text": "화합물은 원소가 아무 비율로나 섞여도 된다."
           },
           {
             "id": "D",
-            "text": "온도가 일정해서"
+            "text": "혼합물과 화합물은 항상 같은 뜻이다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "같은 화합물이라면 만드는 방법과 관계없이 원소의 질량비가 변하지 않는다고 설명했다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+        }
       },
       {
         "id": "dq-r3-022-3",
         "type": "MULTI_CHOICE",
-        "stem": "물 H₂O을 구성하는 수소 H와 산소 O의 질량비는 항상 얼마인가요? 원자량 H=1, O=16",
-        "passage": "'1:8'입니다. 물 분자는 수소 원자 2개(질량 2)와 산소 원자 1개(질량 16)로 이루어지므로 질량비는 2:16, 즉 1:8이 됩니다.",
-        "prompt": "질량비를 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "다음 글의 전개 방식으로 가장 알맞은 것을 고르시오.",
+        "passage": "글은 먼저 일정 성분비 법칙의 뜻을 밝힌다. 다음으로 물과 이산화 탄소를 예로 들며 법칙이 어떻게 성립하는지 보여 준다. 끝으로 혼합물에는 이 법칙이 그대로 적용되지 않는다고 덧붙인다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "전개 방식을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "1:8"
+            "text": "정의를 제시한 뒤 예시와 예외를 차례로 설명한다."
           },
           {
             "id": "B",
-            "text": "1:16"
+            "text": "실험 기구의 모양만 비교한다."
           },
           {
             "id": "C",
-            "text": "2:1"
+            "text": "시간 순서만 따라 사건을 기록한다."
           },
           {
             "id": "D",
-            "text": "1:1"
+            "text": "인물의 대화만 모아 보여 준다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "뜻을 밝힌 뒤 예시를 제시하고, 마지막에 예외를 설명하는 구조이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+        }
       },
       {
         "id": "dq-r3-022-4",
         "type": "MULTI_CHOICE",
-        "stem": "구리 Cu를 공기 중에서 가열하면 산소 O와 반응하여 산화 구리 Ⅱ CuO가 됩니다. 이때 구리와 산소의 결합 질량비는?",
-        "passage": "'4:1'입니다. 구리 4g이 모두 반응하려면 산소 1g이 필요하며, 이때 산화 구리 5g이 생성됩니다.",
-        "prompt": "질량비를 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "일정 성분비 법칙이 성립하는 대상으로 알맞은 것을 고르시오.",
+        "passage": "일정 성분비 법칙은 원소가 일정한 비율로 결합하여 만들어진 물질에서 성립한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "대상을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "4:1"
+            "text": "화합물"
           },
           {
             "id": "B",
-            "text": "1:1"
+            "text": "혼합물"
           },
           {
             "id": "C",
-            "text": "3:2"
+            "text": "용액 전체"
           },
           {
             "id": "D",
-            "text": "1:8"
+            "text": "합금 전체"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "일정 성분비 법칙은 화합물에서 성립한다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+        }
       },
       {
         "id": "dq-r3-022-5",
         "type": "MULTI_CHOICE",
-        "stem": "다음 중 일정 성분비 법칙이 성립하지 *않는* 것은?",
-        "passage": "'소금물(혼합물)'입니다. 소금물은 소금과 물의 비율을 마음대로 조절할 수 있으므로 일정한 질량비가 성립하지 않습니다. 화합물(물, 이산화탄소, 산화마그네슘 등)에서만 성립합니다.",
-        "prompt": "성립하지 않는 것을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "다음 상황에서 내릴 수 있는 추론으로 가장 알맞은 것을 고르시오.",
+        "passage": "학생이 서로 다른 방법으로 만든 물 두 시료를 조사했더니 수소와 산소의 질량비가 같았다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "추론한 내용을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "소금물 혼합물"
+            "text": "같은 화합물이라면 만드는 과정이 달라도 질량비가 일정할 수 있다."
           },
           {
             "id": "B",
-            "text": "물 H₂O"
+            "text": "물은 혼합물이므로 성분비가 날마다 달라진다."
           },
           {
             "id": "C",
-            "text": "이산화 탄소 CO₂"
+            "text": "두 시료가 물인지 알려면 질량비는 볼 필요가 없다."
           },
           {
             "id": "D",
-            "text": "암모니아 NH₃"
+            "text": "질량비가 같으면 모든 물질이 물이다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "같은 화합물에서는 성분 원소의 질량비가 일정하므로 A와 같이 추론할 수 있다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+        }
       },
       {
         "id": "dq-r3-022-6",
         "type": "MULTI_CHOICE",
-        "stem": "구리 4g과 산소 3g을 반응시키면 산화 구리는 몇 g 생성되고, 어떤 물질이 얼마나 남을까요? 구리:산소 질량비 = 4:1",
-        "passage": "산화 구리는 5g 생성되고, '산소 2g'이 남습니다. 구리 4g은 산소 1g과만 반응하기 때문입니다. 남은 물질은 반응에 참여하지 않습니다.",
-        "prompt": "결과를 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 중 더 타당한 주장과 그 까닭을 고르시오.",
+        "passage": "한 학생은 같은 원소만 들어 있으면 어떤 비율로 섞어도 같은 화합물이라고 말했다. 다른 학생은 같은 원소라도 결합 비율이 달라지면 서로 다른 물질이 될 수 있다고 말했다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "더 타당한 주장과 그 까닭을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "산화 구리 5g 생성, 산소 2g 남음"
+            "text": "결합 비율이 달라지면 다른 물질이 될 수 있다는 주장이 타당하다. 화합물의 성질은 원소의 결합 비율과 관련이 깊기 때문이다."
           },
           {
             "id": "B",
-            "text": "산화 구리 7g 생성, 남는 것 없음"
+            "text": "결합 비율이 달라져도 같은 물질이라는 주장이 타당하다. 원소 이름만 같으면 성질도 늘 같기 때문이다."
           },
           {
             "id": "C",
-            "text": "산화 구리 5g 생성, 구리 1g 남음"
+            "text": "결합 비율이 달라지면 다른 물질이 될 수 있다는 주장이 타당하다. 계산이 복잡해 보이기 때문이다."
           },
           {
             "id": "D",
-            "text": "산화 구리 4g 생성, 산소 3g 남음"
+            "text": "결합 비율이 달라도 같은 물질이라는 주장이 타당하다. 원소 개수는 중요하지 않기 때문이다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "화합물은 원소의 종류뿐 아니라 결합 비율에 따라 성질이 달라질 수 있으므로 A가 타당하다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+        }
       },
       {
         "id": "dq-r3-022-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "도윤는 일정 성분비 법칙 프루스트을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "일정 성분비 법칙을 쉽게 이해하게 할 활동으로 가장 창의적인 것을 고르시오.",
+        "passage": "과학 동아리에서 후배들에게 이 법칙을 설명할 짧은 활동을 준비한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 활동을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "가정은 글자의 모양과 같다"
+            "text": "같은 화합물을 여러 방법으로 만들어도 질량비가 같다는 점을 색 카드 비율 놀이로 보여 준다."
           },
           {
             "id": "B",
-            "text": "가정은 종이의 질감과 같다"
+            "text": "법칙 이름만 크게 적은 종이를 벽에 붙인다."
           },
           {
             "id": "C",
-            "text": "가정은 목소리의 크기와 같다"
+            "text": "원소 기호를 외우게만 한다."
           },
           {
             "id": "D",
-            "text": "가정은 논의를 움직이는 발판과 같다"
+            "text": "법칙과 관계없는 실험 영상을 틀어 둔다."
           }
         ],
-        "answerId": "D",
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "비율을 눈으로 확인하게 하면 법칙의 핵심을 쉽고 새롭게 이해할 수 있다.",
         "scoring": {
-          "correctDeltaSec": 18,
-          "wrongDeltaSec": -18
+          "correctDeltaSec": 15,
+          "wrongDeltaSec": -15
         }
       },
       {
         "id": "dq-r3-022-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '성분'의 뜻으로 알맞은 것은?",
-        "passage": "약의 주요 __성분__을 분석했다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "혼합물과 화합물을 헷갈리는 친구를 도와주려 한다. 가장 알맞은 방법을 고르시오.",
+        "passage": "친구는 소금물과 물이 같은 종류의 물질인지 혼란스러워한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 해결 방법을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "물질을 구성하는 요소"
+            "text": "물과 소금물의 차이를 비교하고, 화합물과 혼합물의 성분비가 어떻게 다른지 표로 보여 준다."
           },
           {
             "id": "B",
-            "text": "성공한 부분"
+            "text": "물질 이름만 여러 번 따라 읽게 한다."
           },
           {
             "id": "C",
-            "text": "성질이 나쁨"
+            "text": "정답만 외우고 이유는 설명하지 않는다."
           },
           {
             "id": "D",
-            "text": "별이 나뉨"
+            "text": "혼합물과 화합물은 차이가 없다고 말한다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "개념이 헷갈릴 때는 성분비와 성질 차이를 비교해 보여 주는 것이 가장 효과적이다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+        }
       },
       {
         "id": "dq-r3-022-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "일정 성분비 법칙 프루스트를 다룬 글에서는 조건과 결과의 관계를 설명했다.\n조건이 달라지면 결과도 달라질 수 있다고 했다.\n그래서 결론을 내리기 전에 조건이 무엇인지 확인해야 한다.\n조건을 바꿔 보고 결과를 비교하면 이해가 깊어진다.",
-        "correctSentence": "결국 조건이 바뀌면 결과도 함께 달라진다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "글을 바탕으로 문장을 완성하시오.",
+        "passage": "프루스트는 물이 어디서 얻어졌든 수소와 산소의 질량비가 같다고 보았다. 이는 화합물 안에서 원소들이 제멋대로 섞이는 것이 아니라 일정한 관계를 이룬다는 뜻이다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "빈칸에 들어갈 말을 순서대로 고르시오.",
+        "choices": [],
+        "answerId": "",
+        "template": "화합물은 ____ ____ 이루어진다.",
+        "blanks": [
           {
-            "answer": "결국",
-            "distractors": [
-              "즉,",
-              "따라서",
-              "그러므로"
+            "id": "B1",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원소가"
+              },
+              {
+                "id": "B",
+                "text": "공기가"
+              },
+              {
+                "id": "C",
+                "text": "열이"
+              },
+              {
+                "id": "D",
+                "text": "빛이"
+              }
             ]
           },
           {
-            "answer": "조건이 바뀌면",
-            "distractors": [
-              "대충 하면",
-              "차가운 곳에 두면",
-              "그대로 두면"
-            ]
-          },
-          {
-            "answer": "결과도 함께",
-            "distractors": [
-              "이 문제를",
-              "그 이유를",
-              "이 내용을"
-            ]
-          },
-          {
-            "answer": "달라진다.",
-            "distractors": [
-              "변한다.",
-              "바뀐다.",
-              "줄어든다."
+            "id": "B2",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일정한 비율로"
+              },
+              {
+                "id": "B",
+                "text": "마음대로"
+              },
+              {
+                "id": "C",
+                "text": "날마다 다르게"
+              },
+              {
+                "id": "D",
+                "text": "아무렇게나"
+              }
             ]
           }
         ],
+        "explanation": "화합물은 원소가 일정한 비율로 결합해 이루어진다는 뜻을 정리한 문장이다.",
         "scoring": {
-          "correctDeltaSec": 18,
-          "wrongDeltaSec": 0
+          "correctDeltaSec": 15,
+          "wrongDeltaSec": -15
         }
       },
       {
         "id": "dq-r3-022-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '결합'의 뜻으로 알맞은 것은?",
-        "passage": "두 원자가 __결합__하여 분자가 되었다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "다음 중 과학 설명 문장으로 어법이 가장 알맞은 것을 고르시오.",
+        "passage": "프루스트의 설명을 보고서 문장으로 정리하려고 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "어법이 알맞은 문장을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "둘 이상의 사물이나 사람이 서로 맺어 하나가 됨"
+            "text": "프루스트는 화합물을 이루는 원소의 질량비가 일정하다고 설명했다."
           },
           {
             "id": "B",
-            "text": "함께 있던 것이 떨어져 갈라지는 것"
+            "text": "프루스트는 화합물을 이루는 원소의 질량비가 일정하다라고 설명했다."
           },
           {
             "id": "C",
-            "text": "서로 다투거나 다툼이 일어나는 것"
+            "text": "프루스트는 화합물을 이루는 원소의 질량비를 일정하다고 설명했다."
           },
           {
             "id": "D",
-            "text": "생각을 정리해 마지막 판단을 내리는 것"
+            "text": "프루스트는 화합물을 이루는 원소의 질량비가 일정하다고 설명하였다며."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "간접 인용 표현은 일정하다고 설명했다처럼 쓰는 것이 알맞다.",
         "scoring": {
           "correctDeltaSec": 15,
           "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+        }
       }
     ]
   }

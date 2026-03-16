@@ -2,27 +2,28 @@
   "contentId": "dq-w3-016",
   "contentType": "DAILY_QUIZ",
   "title": "일일 퀴즈 - 비트겐슈타인3 Day 16",
-  "description": "비트겐슈타인 3단계 16일차 퀴즈",
+  "description": "고등학교 3학년 수준에서 파동 함수와 양자역학의 기본 개념을 이해하는 일일 퀴즈",
   "targetLevel": "WITTGENSTEIN_3",
-  "area": "READING",
-  "subArea": "SCIENCE",
+  "area": "SCIENCE",
+  "subArea": "QUANTUM_MECHANICS",
   "competencies": [
     "VOCAB",
     "READING",
-    "GRAMMAR"
+    "CRITICAL_THINKING"
   ],
   "tags": [
     "daily",
     "physics",
-    "quantum_mechanics",
-    "wave_function"
+    "quantum-mechanics",
+    "wave-function",
+    "highschool3"
   ],
   "seedReward": {
     "seedType": "WHEAT",
-    "count": 1,
+    "count": 3,
     "multiplier": 1
   },
-  "timeLimitSec": 150,
+  "timeLimitSec": 180,
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -30,9 +31,14 @@
       {
         "id": "dq-w3-016-1",
         "type": "MULTI_CHOICE",
-        "stem": "양자 역학에서 계의 상태를 완벽하게 기술하는 수학적 도구로, 그리스 문자 프사이 Ψ로 표기하는 것은?",
-        "passage": "'파동 함수(Wave Function)'입니다. 슈뢰딩거 방정식을 통해 시간과 공간에 따른 파동 함수의 변화를 구할 수 있습니다.",
-        "prompt": "용어를 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "지문에서 설명하는 과학 용어로 가장 알맞은 것을 고르세요.",
+        "passage": "양자역학에서 입자의 상태를 수학적으로 나타내는 함수를 파동 함수라고 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "지문에서 설명하는 용어는 무엇인가요?",
         "choices": [
           {
             "id": "A",
@@ -40,205 +46,249 @@
           },
           {
             "id": "B",
-            "text": "로그 함수"
+            "text": "열역학 함수"
           },
           {
             "id": "C",
-            "text": "삼각 함수"
+            "text": "로그 함수"
           },
           {
             "id": "D",
-            "text": "지수 함수"
+            "text": "삼각 함수"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "파동 함수는 입자의 상태를 수학적으로 나타내는 양자역학의 기본 개념이다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-w3-016-2",
         "type": "MULTI_CHOICE",
-        "stem": "파동 함수 그 자체 Ψ는 물리적 의미가 명확하지 않지만, 파동 함수의 절댓값의 제곱 |Ψ|²은 명확한 물리적 의미를 가집니다. 막스 보른이 제시한 이 의미는 무엇인가요?",
-        "passage": "'입자가 특정 위치에서 발견될 확률 밀도'입니다. 즉, 전자가 어디에 있는지 정확히 알 수는 없지만, 어디에 있을 확률이 높은지는 계산할 수 있습니다.",
-        "prompt": "의미를 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "지문을 읽고 알 수 있는 내용으로 가장 알맞은 것을 고르세요.",
+        "passage": "파동 함수 자체를 직접 눈으로 보는 것은 아니지만, 파동 함수를 이용하면 어떤 위치에서 입자를 발견할 가능성을 계산할 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "지문에서 알 수 있는 내용은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "입자가 발견될 확률 밀도"
+            "text": "파동 함수는 입자의 정확한 위치를 곧바로 보여 준다"
           },
           {
             "id": "B",
-            "text": "입자의 정확한 위치"
+            "text": "파동 함수로 입자 발견 가능성을 계산할 수 있다"
           },
           {
             "id": "C",
-            "text": "입자의 정확한 속도"
+            "text": "파동 함수는 질량을 늘리기 위한 공식이다"
           },
           {
             "id": "D",
-            "text": "입자의 질량"
+            "text": "파동 함수는 고전 역학에서만 쓰인다"
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "지문은 파동 함수가 입자를 발견할 가능성을 계산하는 데 쓰인다고 설명한다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-w3-016-3",
         "type": "MULTI_CHOICE",
-        "stem": "양자 역학적 상태인 중첩 상태가 관측 측정에 의해 하나의 고유 상태로 확정되는 현상을 코펜하겐 해석에서는 무엇이라고 설명하나요?",
-        "passage": "'파동 함수의 붕괴(수축)'라고 합니다. 관측 전에는 여러 가능성이 파동처럼 퍼져 있다가(중첩), 관측하는 순간 하나의 값으로 쪼그라든다는 개념입니다.",
-        "prompt": "현상을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "글의 전개 방식으로 가장 알맞은 것을 고르세요.",
+        "passage": "먼저 파동 함수가 무엇인지 설명한다. 다음으로 절댓값 제곱이 어떤 의미를 가지는지 제시한다. 끝으로 이를 통해 입자 발견 가능성을 해석하는 방식을 정리한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "글의 전개 방식은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "파동 함수의 붕괴"
+            "text": "개념 설명 후 의미 확장"
           },
           {
             "id": "B",
-            "text": "파동 함수의 확산"
+            "text": "시간 순서 사건 나열"
           },
           {
             "id": "C",
-            "text": "파동 함수의 간섭"
+            "text": "인물 생애 소개"
           },
           {
             "id": "D",
-            "text": "파동 함수의 회절"
+            "text": "문제와 해결만 반복"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "개념을 설명하고 그 개념이 어떤 뜻을 가지는지 단계적으로 확장하고 있다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-w3-016-4",
         "type": "MULTI_CHOICE",
-        "stem": "전자가 벽 포텐셜 장벽보다 낮은 에너지를 가지고 있음에도 불구하고, 확률적으로 벽을 통과하여 반대편에서 발견되는 고전 역학으로는 불가능한 현상은?",
-        "passage": "'양자 터널링(Quantum Tunneling)'입니다. 주사 터널링 현미경(STM), 알파 붕괴, 핵융합 등의 원리가 됩니다.",
-        "prompt": "현상을 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "양자역학에서 파동 함수의 절댓값 제곱이 뜻하는 것으로 가장 알맞은 것을 고르세요.",
+        "passage": "보른은 파동 함수의 절댓값 제곱을 확률 밀도로 해석했다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 설명은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "양자 터널링"
+            "text": "입자가 어떤 위치에서 발견될 가능성의 세기"
           },
           {
             "id": "B",
-            "text": "광전 효과"
+            "text": "입자의 실제 질량 그 자체"
           },
           {
             "id": "C",
-            "text": "컴프턴 산란"
+            "text": "관측 장치의 크기 변화"
           },
           {
             "id": "D",
-            "text": "브라운 운동"
+            "text": "시간이 흐르는 속도"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "보른 해석에서는 절댓값 제곱이 위치별 발견 가능성의 크기를 뜻한다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-w3-016-5",
         "type": "MULTI_CHOICE",
-        "stem": "측정이 대상의 상태를 결정한다는 코펜하겐 해석에 반대하며, 우주가 관측과 무관하게 수많은 평행 우주로 갈라진다고 주장하는 해석은?",
-        "passage": "'다세계 해석(Many-Worlds Interpretation)'입니다. 슈뢰딩거의 고양이가 죽은 우주와 산 우주가 각각 존재한다고 봅니다. 파동 함수의 붕괴를 인정하지 않습니다.",
-        "prompt": "해석을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "다음 설명으로부터 추론한 내용으로 가장 적절한 것을 고르세요.",
+        "passage": "측정 전에는 입자의 위치를 하나로 딱 잘라 말하기 어렵지만, 특정 구간에서 발견될 가능성은 계산할 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 적절한 추론은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "다세계 해석"
+            "text": "양자역학은 어떤 예측도 하지 못한다"
           },
           {
             "id": "B",
-            "text": "코펜하겐 해석"
+            "text": "양자역학은 확률적 예측을 중요하게 다룬다"
           },
           {
             "id": "C",
-            "text": "드브로이-봄 해석"
+            "text": "입자의 위치는 언제나 같은 값이다"
           },
           {
             "id": "D",
-            "text": "앙상블 해석"
+            "text": "측정은 물리학과 관련이 없다"
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "지문은 측정 전 상태를 확률로 다루는 양자역학의 특징을 드러낸다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-w3-016-6",
         "type": "MULTI_CHOICE",
-        "stem": "양자 컴퓨터 Quantum Computer의 기본 정보 단위로, 0과 1이 중첩된 상태를 가질 수 있는 것은?",
-        "passage": "'큐비트(Qubit)'입니다. 고전 컴퓨터의 비트(Bit)는 0 또는 1 중 하나만 가지지만, 큐비트는 0과 1을 동시에 가질 수 있어 병렬 연산이 가능합니다.",
-        "prompt": "단위를 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 주장에 대한 비판으로 가장 적절한 것을 고르세요.",
+        "passage": "어떤 학생은 파동 함수가 확률을 말하니 양자역학은 아무 정보도 주지 못한다고 말했다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "이 주장에 대한 비판으로 가장 적절한 것은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "큐비트 Qubit"
+            "text": "확률 정보도 실험 결과를 예측하는 중요한 정보이기 때문이다"
           },
           {
             "id": "B",
-            "text": "비트 Bit"
+            "text": "확률은 수학이 아니므로 물리학과 관련이 없기 때문이다"
           },
           {
             "id": "C",
-            "text": "바이트 Byte"
+            "text": "양자역학에서는 계산이 필요 없기 때문이다"
           },
           {
             "id": "D",
-            "text": "픽셀 Pixel"
+            "text": "고전 역학과 같아야 하므로 확률은 틀렸기 때문이다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "확률은 불완전한 정보가 아니라 관측 결과를 예측하는 핵심 정보로 기능한다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-w3-016-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "서준는 양자 역학 파동 함수와 확률을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "파동 함수의 의미를 친구에게 쉽게 설명하는 방법으로 가장 적절한 것을 고르세요.",
+        "passage": "친구가 수식을 어려워해 직관적인 비유가 필요하다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 방법은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "가정은 종이의 질감과 같다"
+            "text": "비 오는 확률 지도를 비유로 들어 가능성 분포를 설명한다"
           },
           {
             "id": "B",
-            "text": "가정은 목소리의 크기와 같다"
+            "text": "수식만 길게 적고 설명은 생략한다"
           },
           {
             "id": "C",
-            "text": "가정은 글자의 모양과 같다"
+            "text": "양자역학과 전혀 상관없는 속담만 말한다"
           },
           {
             "id": "D",
-            "text": "가정은 논의를 움직이는 발판과 같다"
+            "text": "어렵다는 말만 반복하고 끝낸다"
           }
         ],
-        "answerId": "D",
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "가능성이 곳곳에 다르게 분포한다는 점을 날씨 확률 지도로 비유하면 이해를 돕기 쉽다.",
         "scoring": {
           "correctDeltaSec": 20,
           "wrongDeltaSec": -20
@@ -247,118 +297,144 @@
       {
         "id": "dq-w3-016-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '붕괴'의 뜻으로 알맞은 것은?",
-        "passage": "관측 순간 파동 함수가 __붕괴__하여 하나의 상태로 결정된다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "다음 상황에서 가장 알맞은 해결 방법을 고르세요.",
+        "passage": "친구가 파동 함수와 입자의 실제 궤적을 자꾸 같은 것으로 이해한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 설명 방법은 무엇인가요?",
         "choices": [
           {
             "id": "A",
-            "text": "여러 가능성이 무너져 하나의 상태로 줄어들듯 결정되는 것"
+            "text": "파동 함수는 상태를 나타내는 수학적 표현이고 궤적과 바로 같지 않다고 구분해 설명한다"
           },
           {
             "id": "B",
-            "text": "죽거나 끝날 뻔한 것이 다시 살아나 이어지는 것"
+            "text": "둘은 어차피 비슷하니 구분할 필요가 없다고 말한다"
           },
           {
             "id": "C",
-            "text": "크기나 규모가 이전보다 더 커져 증가하는 것"
+            "text": "양자역학은 너무 어려우니 포기하라고 말한다"
           },
           {
             "id": "D",
-            "text": "여러 요소가 얽혀 더 복잡해져 이해하기 어려워지는 것"
+            "text": "수업 내용을 보지 않고 외우기만 하라고 말한다"
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "개념을 정확히 구분해 주어야 오해를 줄일 수 있다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-w3-016-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "양자 역학 파동 함수와 확률을 다룬 글은 단기와 장기의 차이를 구분해 설명했다.\n단기에는 일부 요소가 빠르게 반응하지만, 다른 요소는 늦게 반응할 수 있다.\n이 속도 차이 때문에 변화가 한 번에 멈추지 않고 과하게 나타나기도 한다.\n그 뒤에 늦게 반응하는 요소가 따라오면서 전체가 다시 균형을 찾아간다.\n따라서 현상을 이해할 때는 조정 속도의 차이를 함께 고려해야 한다.\n글쓴이는 이 점을 예시를 통해 강조했다.",
-        "correctSentence": "정리하면 조정 속도 차이로 변화가 과하게 나타날 수 있음을 이 글은 설명한다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "지문을 바탕으로 알맞은 말을 차례대로 골라 문장을 완성하세요.",
+        "passage": "파동 함수는 입자의 상태를 나타내며, 그 절댓값 제곱은 입자를 발견할 가능성을 뜻한다. 따라서 양자역학은 정확한 한 점보다 가능성의 분포를 중요하게 다룬다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "빈칸에 들어갈 말을 순서대로 고르세요.",
+        "choices": [],
+        "answerId": "",
+        "template": "파동 함수는 ____ ____ 수학적 표현이다.",
+        "blanks": [
           {
-            "answer": "정리하면",
-            "distractors": [
-              "즉,",
-              "따라서",
-              "그러므로"
+            "id": "b1",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "입자의 상태를"
+              },
+              {
+                "id": "B",
+                "text": "질량의 합을"
+              },
+              {
+                "id": "C",
+                "text": "속력만을"
+              },
+              {
+                "id": "D",
+                "text": "온도 변화를"
+              }
             ]
           },
           {
-            "answer": "조정 속도 차이로",
-            "distractors": [
-              "다른 것으로",
-              "반대로",
-              "옆으로"
-            ]
-          },
-          {
-            "answer": "변화가 과하게 나타날 수 있음을",
-            "distractors": [
-              "그 말을",
-              "다른 것을",
-              "그것을"
-            ]
-          },
-          {
-            "answer": "이 글은",
-            "distractors": [
-              "글쓴이는",
-              "사람들은",
-              "저자는"
-            ]
-          },
-          {
-            "answer": "설명한다.",
-            "distractors": [
-              "비판한다.",
-              "암시한다.",
-              "강조한다."
+            "id": "b2",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나타내는"
+              },
+              {
+                "id": "B",
+                "text": "숨기는"
+              },
+              {
+                "id": "C",
+                "text": "지우는"
+              },
+              {
+                "id": "D",
+                "text": "멈추는"
+              }
             ]
           }
         ],
+        "explanation": "지문은 파동 함수를 입자의 상태를 나타내는 수학적 표현이라고 설명한다.",
         "scoring": {
           "correctDeltaSec": 20,
-          "wrongDeltaSec": 0
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-w3-016-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '중첩'의 뜻으로 알맞은 것은?",
-        "passage": "0과 1의 상태가 __중첩__되어 있다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법",
+        "stem": "다음 중 학술적 설명 문장으로 가장 적절한 것을 고르세요.",
+        "passage": "",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 문장을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "거듭 겹치거나 포개짐"
+            "text": "파동 함수의 해석은 양자역학의 이해에 중요한 의미를 가진다."
           },
           {
             "id": "B",
-            "text": "서로 떨어져 있음"
+            "text": "파동 함수는 진짜 엄청 신기해서 그냥 대박이다."
           },
           {
             "id": "C",
-            "text": "순서대로 나열됨"
+            "text": "파동 함수는 뭐랄까 아무튼 어렵다."
           },
           {
             "id": "D",
-            "text": "사라짐"
+            "text": "파동 함수 설명은 대충 이 정도면 된다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "학술적 설명에서는 객관적이고 분명한 문장을 쓰는 것이 적절하다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       }
     ]
   }

@@ -1,11 +1,11 @@
 {
   "contentId": "dq-f3-037",
   "contentType": "DAILY_QUIZ",
-  "title": "일일 퀴즈 - 프레게3 Day 37",
-  "description": "프레게 3단계 37일차 퀴즈",
+  "title": "일일 퀴즈 - 프레게 Day 37",
+  "description": "프레게3 37일차 퀴즈. 수요와 공급, 시장 가격",
   "targetLevel": "FREGE_3",
-  "area": "READING",
-  "subArea": "SOCIAL",
+  "area": "SOCIAL",
+  "subArea": "DEMAND_SUPPLY_AND_MARKET_PRICE",
   "competencies": [
     "VOCAB",
     "READING",
@@ -15,18 +15,17 @@
     "daily",
     "social",
     "economy",
-    "market",
-    "price",
     "demand",
     "supply",
+    "market_price",
     "equilibrium"
   ],
   "seedReward": {
     "seedType": "WHEAT",
-    "count": 1,
+    "count": 3,
     "multiplier": 1
   },
-  "timeLimitSec": 150,
+  "timeLimitSec": 180,
   "payload": {
     "pageStack": true,
     "layout": "EXAM_SHEET",
@@ -34,327 +33,410 @@
       {
         "id": "dq-f3-037-1",
         "type": "MULTI_CHOICE",
-        "stem": "시장 Market에서 물건을 사고자 하는 욕구, 또는 사려는 양을 무엇이라고 하나요?",
-        "passage": "'수요(Demand)'입니다. 물건을 필요한 만큼 사려고 하는 마음입니다.",
-        "prompt": "용어를 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "지문에 나온 수요의 뜻으로 가장 알맞은 것을 고르시오.",
+        "passage": "수요는 사람들이 어떤 물건을 사고 싶어 하는 정도를 뜻한다. 가격과 필요에 따라 수요의 크기는 달라질 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "뜻을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "수요"
+            "text": "물건을 만들려는 정도"
           },
           {
             "id": "B",
-            "text": "공급"
+            "text": "물건을 사고 싶어 하는 정도"
           },
           {
             "id": "C",
-            "text": "가격"
+            "text": "물건을 버리려는 정도"
           },
           {
             "id": "D",
-            "text": "생산"
+            "text": "물건을 숨겨 두는 정도"
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "수요는 소비자가 물건을 사고자 하는 정도를 뜻한다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-037-2",
         "type": "MULTI_CHOICE",
-        "stem": "시장에서 물건을 팔고자 하는 욕구, 또는 팔려는 양을 무엇이라고 하나요?",
-        "passage": "'공급(Supply)'입니다. 기업이 물건을 만들어 시장에 내놓는 것입니다.",
-        "prompt": "용어를 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "지문을 읽고 공급의 설명으로 가장 알맞은 것을 고르시오.",
+        "passage": "공급은 생산자가 시장에 물건을 내놓는 정도를 뜻한다. 보통 가격이 높아지면 공급을 늘리려는 경우가 많다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 설명을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "공급"
+            "text": "소비자가 물건을 사려는 정도이다."
           },
           {
             "id": "B",
-            "text": "수요"
+            "text": "생산자가 시장에 물건을 내놓는 정도이다."
           },
           {
             "id": "C",
-            "text": "소비"
+            "text": "가게의 문을 닫는 속도이다."
           },
           {
             "id": "D",
-            "text": "저축"
+            "text": "광고를 만드는 비용이다."
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "공급은 생산자가 시장에 물건을 내놓는 정도를 말한다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-037-3",
         "type": "MULTI_CHOICE",
-        "stem": "시장에서 가격은 어떻게 결정되나요?",
-        "passage": "'수요와 공급이 만나는 지점'에서 결정됩니다. 사려는 양과 팔려는 양이 일치하는 곳에서 균형 가격이 형성됩니다.",
-        "prompt": "결정 원리를 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "지문의 전개 방식으로 가장 알맞은 것을 고르시오.",
+        "passage": "먼저 수요와 공급이 무엇인지 설명한다. 다음으로 두 힘이 만나는 지점에서 가격이 형성된다고 말한다. 마지막에는 시장 가격이 왜 움직이는지 예를 들어 정리한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "전개 방식을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "수요와 공급의 균형"
+            "text": "개념을 설명한 뒤 관계와 예를 덧붙인다."
           },
           {
             "id": "B",
-            "text": "정부의 명령"
+            "text": "한 사람의 일생을 시간 순서로만 소개한다."
           },
           {
             "id": "C",
-            "text": "판매자의 마음대로"
+            "text": "대화만 이어 적는다."
           },
           {
             "id": "D",
-            "text": "구매자의 마음대로"
+            "text": "질문만 남기고 설명을 끝내지 않는다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "개념 설명 뒤 관계와 예를 붙이는 구조이다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-037-4",
         "type": "MULTI_CHOICE",
-        "stem": "수요는 많은데 공급이 부족하면 가격은 어떻게 되나요?",
-        "passage": "사려는 사람은 많은데 물건이 없으므로 가격은 '올라갑니다(상승)'.",
-        "prompt": "가격 변화를 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "균형 가격에 대한 설명으로 가장 알맞은 것을 고르시오.",
+        "passage": "시장에서는 수요와 공급이 서로 맞아떨어지는 지점에서 가격이 비교적 안정되게 정해질 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 설명을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "올라간다 상승"
+            "text": "생산자가 마음대로 정한 가격"
           },
           {
             "id": "B",
-            "text": "내려간다 하락"
+            "text": "광고를 가장 많이 한 날의 가격"
           },
           {
             "id": "C",
-            "text": "변화 없다"
+            "text": "수요와 공급이 맞아떨어지는 지점의 가격"
           },
           {
             "id": "D",
-            "text": "0원이 된다"
+            "text": "가격표가 없는 경우의 가격"
           }
         ],
-        "answerId": "A",
+        "answerId": "C",
+        "template": "",
+        "blanks": [],
+        "explanation": "균형 가격은 수요와 공급이 맞아떨어지는 지점에서 형성된다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-037-5",
         "type": "MULTI_CHOICE",
-        "stem": "공급은 많은데 수요가 적으면 가격은 어떻게 되나요?",
-        "passage": "물건은 넘쳐나는데 사려는 사람이 없으므로 가격은 '내려갑니다(하락)'.",
-        "prompt": "가격 변화를 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "다음 상황에서 가장 알맞게 추론한 것을 고르시오.",
+        "passage": "갑자기 더운 날씨가 이어지자 아이스크림을 찾는 사람이 늘었다. 같은 기간에 가게가 내놓는 양은 크게 달라지지 않았다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 추론을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "내려간다 하락"
+            "text": "가격이 내려갈 가능성이 크다."
           },
           {
             "id": "B",
-            "text": "올라간다 상승"
+            "text": "가격이 오를 가능성이 크다."
           },
           {
             "id": "C",
-            "text": "변화 없다"
+            "text": "수요가 줄어들 가능성이 크다."
           },
           {
             "id": "D",
-            "text": "폭등한다"
+            "text": "공급이 사라질 가능성이 크다."
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "수요가 늘고 공급이 비슷하면 가격이 오를 가능성이 커진다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-037-6",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '균형'의 뜻으로 알맞은 것은?",
-        "passage": "수요량과 공급량이 일치하여 시장 __균형__을 이룬다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 주장에 대한 비판으로 가장 알맞은 것을 고르시오.",
+        "passage": "시장 가격은 생산자가 정하기만 하면 언제나 그대로 유지된다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 타당한 비판을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "어느 한쪽으로 기울거나 치우치지 않고 고른 상태"
+            "text": "가격은 수요와 공급의 영향을 함께 받으므로 늘 그대로이기는 어렵다."
           },
           {
             "id": "B",
-            "text": "서로 다투며 싸우는 상태"
+            "text": "생산자는 가격을 적을 수 없다."
           },
           {
             "id": "C",
-            "text": "필요한 것이 모자라는 상태"
+            "text": "가격은 숫자로 나타내면 안 된다."
           },
           {
             "id": "D",
-            "text": "필요한 것보다 더 많은 상태"
+            "text": "시장에서는 소비자가 아예 필요하지 않다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "가격은 생산자의 의사만이 아니라 수요와 공급의 움직임에도 영향을 받는다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-037-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "지민는 시장의 가격 결정 원리을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "학교 경제 신문 기사 제목으로 가장 알맞은 것을 고르시오.",
+        "passage": "기사에서는 수요와 공급이 만나 가격이 정해지는 과정을 쉽게 설명하려고 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 제목을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "안내 표지는 종이처럼 얇다"
+            "text": "시장 가격은 어떻게 정해질까"
           },
           {
             "id": "B",
-            "text": "안내 표지는 멀리서도 보인다"
+            "text": "운동장 조회 순서 안내"
           },
           {
             "id": "C",
-            "text": "안내 표지는 길을 알려 주는 나침반과 같다"
+            "text": "우리 반 화분 키우기"
           },
           {
             "id": "D",
-            "text": "안내 표지는 비가 오면 젖는다"
+            "text": "급식 줄 서는 방법"
           }
         ],
-        "answerId": "C",
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "수요와 공급을 통해 가격이 정해지는 내용을 가장 잘 보여 주는 제목이다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-f3-037-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '변동'의 뜻으로 알맞은 것은?",
-        "passage": "농산물 가격은 날씨에 따라 __변동__이 심하다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "축제 날 떡볶이가 너무 빨리 팔려 학생들이 사지 못하고 있다. 가장 알맞은 해결책을 고르시오.",
+        "passage": "학생회는 인기 메뉴의 수요가 예상보다 크게 늘어난 상황을 파악했다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "가장 알맞은 해결책을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "바뀌어 달라짐"
+            "text": "행사 전에 준비 수량을 늘려 공급을 맞춘다."
           },
           {
             "id": "B",
-            "text": "고정됨"
+            "text": "아무 설명 없이 판매를 중단한다."
           },
           {
             "id": "C",
-            "text": "사라짐"
+            "text": "다른 메뉴 가격만 올린다."
           },
           {
             "id": "D",
-            "text": "동일함"
+            "text": "손님을 받지 않기로 한다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "수요가 크게 늘어난 상황이므로 공급을 늘리는 방법이 가장 직접적인 해결책이다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       },
       {
         "id": "dq-f3-037-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "현우는 시장의 가격 결정 원리와 관련된 주장 글을 읽었다.\n글에는 사례가 두 개만 제시되어 있었다.\n사례가 적으면 일반화가 위험해질 수 있다.\n그래서 더 많은 근거가 필요하다고 했다.",
-        "correctSentence": "따라서 사례가 적으면 일반화하기 어렵다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "지문을 바탕으로 문장이 자연스럽게 완성되도록 빈칸에 들어갈 말을 순서대로 고르시오.",
+        "passage": "시장에서 가격은 물건을 사고 싶어 하는 힘과 내놓는 힘이 함께 작용하며 정해진다. 이 두 힘이 비슷해지는 지점에서는 가격이 비교적 안정된다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "두 빈칸에 들어갈 말을 순서대로 고르시오.",
+        "choices": [],
+        "answerId": "",
+        "template": "수요와 ____ ____ 정해진다.",
+        "blanks": [
           {
-            "answer": "따라서",
-            "distractors": [
-              "즉,",
-              "그러므로",
-              "정리하면"
+            "id": "b1",
+            "answerId": "A",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공급의"
+              },
+              {
+                "id": "B",
+                "text": "교실의"
+              },
+              {
+                "id": "C",
+                "text": "연필의"
+              },
+              {
+                "id": "D",
+                "text": "운동의"
+              }
             ]
           },
           {
-            "answer": "사례가 적으면",
-            "distractors": [
-              "차가운 곳에 두면",
-              "그대로 두면",
-              "급하게 하면"
-            ]
-          },
-          {
-            "answer": "일반화하기",
-            "distractors": [
-              "이 내용을",
-              "이런 점을",
-              "그 사실을"
-            ]
-          },
-          {
-            "answer": "어렵다.",
-            "distractors": [
-              "가능하다.",
-              "필요하다.",
-              "바람직하다."
+            "id": "b2",
+            "answerId": "B",
+            "choices": [
+              {
+                "id": "A",
+                "text": "소문이"
+              },
+              {
+                "id": "B",
+                "text": "만남으로"
+              },
+              {
+                "id": "C",
+                "text": "그림이"
+              },
+              {
+                "id": "D",
+                "text": "음악이"
+              }
             ]
           }
         ],
+        "explanation": "시장 가격은 수요와 공급의 만남으로 정해진다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": 0
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
         }
       },
       {
         "id": "dq-f3-037-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '일치'의 뜻으로 알맞은 것은?",
-        "passage": "두 사람의 의견이 __일치__했다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "문장이 자연스러운 것을 고르시오.",
+        "passage": "어법에 맞는 문장을 고르시오.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 문장을 고르시오.",
         "choices": [
           {
             "id": "A",
-            "text": "비교되는 대상들이 서로 어긋나지 않고 같거나 들어맞음"
+            "text": "학생들은 수요와 공급의 뜻을 표로 정리했다."
           },
           {
             "id": "B",
-            "text": "서로 같지 않고 차이가 있는 상태"
+            "text": "학생들은 수요와 공급의 뜻을 표로 정리하였는 중이다."
           },
           {
             "id": "C",
-            "text": "서로 다투거나 다툼이 일어나는 것"
+            "text": "학생들은 수요와 공급의 뜻을 표로 정리하다를 했다."
           },
           {
             "id": "D",
-            "text": "함께 있던 사람이 서로 떨어져 갈라지는 것"
+            "text": "학생들은 수요와 공급의 뜻을 표로 정리한는 중이다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "A만 문장 성분과 활용이 자연스럽다.",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+          "correctDeltaSec": 20,
+          "wrongDeltaSec": -20
+        }
       }
     ]
   }

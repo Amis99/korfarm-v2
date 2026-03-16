@@ -1,11 +1,11 @@
 {
   "contentId": "dq-w2-046",
   "contentType": "DAILY_QUIZ",
-  "title": "일일 퀴즈 - 비트겐슈타인2 Day 46",
-  "description": "비트겐슈타인2 46일차 퀴즈",
+  "title": "일일 퀴즈 - 비트겐슈타인2 Day 046",
+  "description": "비트겐슈타인2 046일차 퀴즈. 데이터베이스와 SQL, NoSQL",
   "targetLevel": "WITTGENSTEIN_2",
-  "area": "READING",
-  "subArea": "TECH",
+  "area": "TECHNOLOGY",
+  "subArea": "DATABASE_SQL_AND_NOSQL",
   "competencies": [
     "VOCAB",
     "READING",
@@ -13,12 +13,11 @@
   ],
   "tags": [
     "daily",
-    "tech",
+    "technology",
     "database",
     "sql",
     "nosql",
-    "rdbms",
-    "data_management"
+    "high_school"
   ],
   "seedReward": {
     "seedType": "WHEAT",
@@ -33,327 +32,410 @@
       {
         "id": "dq-w2-046-1",
         "type": "MULTI_CHOICE",
-        "stem": "데이터를 체계적으로 정리하여 컴퓨터가 빠르고 효율적으로 검색, 수정, 삭제할 수 있도록 만든 데이터의 집합을 무엇이라고 하나요?",
-        "passage": "여러 사람이 공유하여 사용할 목적으로 통합 관리되는 데이터의 집합인 '데이터베이스(DB)'입니다.",
-        "prompt": "개념을 고르세요.",
+        "questionKind": "WORD_TO_MEANING",
+        "competency": "어휘력",
+        "stem": "지문에 쓰인 데이터베이스의 뜻으로 가장 알맞은 것을 고르세요.",
+        "passage": "데이터베이스는 필요한 정보를 체계적으로 모아 저장한 자료 집합이다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 답을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "데이터베이스"
+            "text": "인터넷 선의 굵기"
           },
           {
             "id": "B",
-            "text": "스프레드시트"
+            "text": "정보를 체계적으로 저장한 자료 집합"
           },
           {
             "id": "C",
-            "text": "워드 프로세서"
+            "text": "컴퓨터 화면의 밝기"
           },
           {
             "id": "D",
-            "text": "운영 체제"
+            "text": "문서의 글자 크기"
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "WORD_TO_MEANING"
+          "correctDeltaSec": 12,
+          "wrongDeltaSec": -12
+        }
       },
       {
         "id": "dq-w2-046-2",
         "type": "MULTI_CHOICE",
-        "stem": "데이터베이스에서 데이터를 정의하고, 조작하고, 제어하기 위해 사용하는 표준 언어는?",
-        "passage": "'구조화 질의 언어(SQL: Structured Query Language)'입니다. SELECT, INSERT, UPDATE, DELETE 등의 명령어를 사용합니다.",
-        "prompt": "언어의 이름을 고르세요.",
+        "questionKind": "READING_COMPREHENSION",
+        "competency": "문장 독해력",
+        "stem": "지문의 내용으로 가장 알맞은 것을 고르세요.",
+        "passage": "관계형 데이터베이스는 표 형태로 자료를 관리하고 SQL로 다루는 경우가 많다. NoSQL은 자료 구조가 더 유연해 대규모 데이터 처리에 쓰이기도 한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 답을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "SQL"
+            "text": "SQL과 NoSQL은 같은 방식으로만 자료를 저장한다."
           },
           {
             "id": "B",
-            "text": "Java"
+            "text": "관계형 데이터베이스와 NoSQL은 자료를 다루는 방식에 차이가 있다."
           },
           {
             "id": "C",
-            "text": "Python"
+            "text": "NoSQL은 표 형태 자료를 다룰 수 없다."
           },
           {
             "id": "D",
-            "text": "HTML"
+            "text": "데이터베이스는 자료를 정리하는 일과 관계없다."
           }
         ],
-        "answerId": "A",
+        "answerId": "B",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "READING_COMPREHENSION"
+          "correctDeltaSec": 12,
+          "wrongDeltaSec": -12
+        }
       },
       {
         "id": "dq-w2-046-3",
         "type": "MULTI_CHOICE",
-        "stem": "데이터를 표 Table 형태로 정리하고, 테이블 간의 관계 Relation를 이용하여 데이터를 관리하는 가장 일반적인 데이터베이스 시스템은?",
-        "passage": "행(Row)과 열(Column)로 구성된 2차원 표 구조를 사용하는 '관계형 데이터베이스 관리 시스템(RDBMS)'입니다. Oracle, MySQL 등이 대표적입니다.",
-        "prompt": "시스템의 이름을 고르세요.",
+        "questionKind": "STRUCTURE_READING",
+        "competency": "구조 독해력",
+        "stem": "글의 전개 방식으로 가장 알맞은 것을 고르세요.",
+        "passage": "먼저 데이터베이스의 뜻을 설명한다. 다음에는 SQL과 NoSQL의 특징을 비교한다. 마지막에는 어떤 상황에서 각각 유용한지 정리한다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 답을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "관계형 데이터베이스 RDBMS"
+            "text": "개념 설명에서 비교로, 다시 활용 상황 정리로 이어 간다."
           },
           {
             "id": "B",
-            "text": "계층형 데이터베이스"
+            "text": "기술 이름만 나열한다."
           },
           {
             "id": "C",
-            "text": "망형 데이터베이스"
+            "text": "예시 없이 결론만 적는다."
           },
           {
             "id": "D",
-            "text": "객체 지향 데이터베이스"
+            "text": "질문만 적고 답은 쓰지 않는다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "STRUCTURE_READING"
+          "correctDeltaSec": 12,
+          "wrongDeltaSec": -12
+        }
       },
       {
         "id": "dq-w2-046-4",
         "type": "MULTI_CHOICE",
-        "stem": "빅데이터 시대에 대량의 비정형 데이터 문서, 이미지, 영상 등를 빠르게 처리하기 위해 등장한, 고정된 테이블 스키마가 없는 데이터베이스는?",
-        "passage": "'Not Only SQL'이라는 의미의 'NoSQL'입니다. 확장성이 뛰어나고 유연한 데이터 모델을 지원합니다. MongoDB, Redis 등이 있습니다.",
-        "prompt": "데이터베이스 종류를 고르세요.",
+        "questionKind": "BACKGROUND_KNOWLEDGE",
+        "competency": "배경지식",
+        "stem": "데이터베이스에 대한 설명으로 가장 알맞은 것을 고르세요.",
+        "passage": "자료를 잘 저장해 두면 검색, 수정, 공유가 훨씬 수월해진다. 그래서 데이터베이스는 정보 시스템의 중요한 기반이 된다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 답을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "NoSQL"
+            "text": "데이터베이스는 자료를 체계적으로 다루게 해 주는 기반이다."
           },
           {
             "id": "B",
-            "text": "RDBMS"
+            "text": "데이터베이스는 자료를 숨기는 기술이다."
           },
           {
             "id": "C",
-            "text": "Excel"
+            "text": "데이터베이스는 그림만 저장하는 프로그램이다."
           },
           {
             "id": "D",
-            "text": "Notepad"
+            "text": "데이터베이스는 인터넷이 없어야만 쓸 수 있다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "BACKGROUND_KNOWLEDGE"
+          "correctDeltaSec": 12,
+          "wrongDeltaSec": -12
+        }
       },
       {
         "id": "dq-w2-046-5",
         "type": "MULTI_CHOICE",
-        "stem": "데이터베이스에서 중복을 최소화하고 데이터의 일관성을 유지하기 위해 지켜야 하는 성질은?",
-        "passage": "데이터의 정확성과 유효성을 보장하는 '무결성(Integrity)'입니다. 예를 들어, 나이에 음수가 들어갈 수 없도록 제약 조건을 거는 것입니다.",
-        "prompt": "성질의 이름을 고르세요.",
+        "questionKind": "INFERENCE",
+        "competency": "추론",
+        "stem": "지문으로부터 알 수 있는 내용으로 가장 알맞은 것을 고르세요.",
+        "passage": "데이터 양이 크고 구조가 자주 바뀌는 서비스라면 유연한 방식이 더 적합할 수 있다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 답을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "무결성"
+            "text": "데이터 특성에 따라 적합한 저장 방식이 달라질 수 있다."
           },
           {
             "id": "B",
-            "text": "복잡성"
+            "text": "데이터가 많으면 관계형 데이터베이스를 쓸 수 없다."
           },
           {
             "id": "C",
-            "text": "이중성"
+            "text": "저장 방식은 서비스 목적과 상관없다."
           },
           {
             "id": "D",
-            "text": "가변성"
+            "text": "모든 데이터는 한 가지 방식으로만 다루는 것이 가장 좋다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "INFERENCE"
+          "correctDeltaSec": 12,
+          "wrongDeltaSec": -12
+        }
       },
       {
         "id": "dq-w2-046-6",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '추출'의 뜻으로 알맞은 것은?",
-        "passage": "데이터베이스에서 원하는 조건의 데이터를 __추출__했습니다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "CRITICAL_THINKING",
+        "competency": "비판적 사고",
+        "stem": "다음 주장에 대한 비판으로 가장 알맞은 것을 고르세요.",
+        "passage": "데이터베이스는 종류가 달라도 성능과 쓰임이 거의 같다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 답을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "전체 속에서 어떤 물건이나 요소 따위를 뽑아냄"
+            "text": "자료 구조와 처리 목적이 다르면 적합한 데이터베이스 선택도 달라질 수 있다."
           },
           {
             "id": "B",
-            "text": "가을에 곡식을 거둠"
+            "text": "데이터베이스는 이름만 다른 같은 기술이다."
           },
           {
             "id": "C",
-            "text": "추위를 느낌"
+            "text": "자료 검색은 저장 방식과 관계가 없다."
           },
           {
             "id": "D",
-            "text": "춤을 춤"
+            "text": "데이터는 정리하지 않아도 시스템이 알아서 해결한다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "CRITICAL_THINKING"
+          "correctDeltaSec": 12,
+          "wrongDeltaSec": -12
+        }
       },
       {
         "id": "dq-w2-046-7",
         "type": "MULTI_CHOICE",
         "questionKind": "CREATIVE_THINKING",
-        "stem": "지문에 제시된 조건을 만족하는 비유로 가장 알맞은 것은?",
-        "passage": "서연는 데이터베이스 SQL/NoSQL을 설명하기 위해 비유를 고르려고 한다. 비유는 두 대상의 공통된 기능이나 역할을 이용해 설명을 쉽게 만드는 표현이다.",
-        "prompt": "알맞은 것을 고르세요.",
+        "competency": "창의적 사고",
+        "stem": "데이터베이스를 비유한 말로 가장 알맞은 것을 고르세요.",
+        "passage": "찾아야 할 책을 주제별로 잘 정리해 둔 도서관을 떠올려 보자.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 답을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "가정은 종이의 질감과 같다"
+            "text": "필요한 정보를 빠르게 찾도록 정리한 도서관과 같다."
           },
           {
             "id": "B",
-            "text": "가정은 글자의 모양과 같다"
+            "text": "책을 바닥에 뒤섞어 둔 창고와 같다."
           },
           {
             "id": "C",
-            "text": "가정은 논의를 움직이는 발판과 같다"
+            "text": "목록 없이 제목만 적힌 종이와 같다."
           },
           {
             "id": "D",
-            "text": "가정은 목소리의 크기와 같다"
+            "text": "읽지 않는 책을 숨겨 둔 상자와 같다."
           }
         ],
-        "answerId": "C",
+        "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
-          "correctDeltaSec": 18,
-          "wrongDeltaSec": -18
+          "correctDeltaSec": 12,
+          "wrongDeltaSec": -12
         }
       },
       {
         "id": "dq-w2-046-8",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '질의'의 뜻으로 알맞은 것은?",
-        "passage": "사용자가 데이터베이스에 __질의(Query)__를 보내 데이터를 요청했습니다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "PROBLEM_SOLVING",
+        "competency": "문제 해결",
+        "stem": "자료 관리 방식을 설명하는 방법으로 가장 알맞은 것을 고르세요.",
+        "passage": "친구가 학생 정보와 출석 기록을 왜 표 형태로 관리하는지 묻는다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 답을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "질문하거나 따져서 물음 데이터베이스에 정보를 요청함"
+            "text": "정해진 항목을 표로 묶으면 조회와 수정이 쉬워 관계형 방식이 잘 맞는다고 설명한다."
           },
           {
             "id": "B",
-            "text": "질이 나쁨"
+            "text": "표는 오래된 방식이라 의미가 없다고 설명한다."
           },
           {
             "id": "C",
-            "text": "병을 치료함"
+            "text": "자료를 메모장에만 적어도 똑같다고 설명한다."
           },
           {
             "id": "D",
-            "text": "짐을 옮김"
+            "text": "데이터베이스는 자료를 줄이기 위한 것이라고 설명한다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "PROBLEM_SOLVING"
+          "correctDeltaSec": 12,
+          "wrongDeltaSec": -12
+        }
       },
       {
         "id": "dq-w2-046-9",
-        "type": "SENTENCE_BUILDING",
+        "type": "FILL_BLANKS",
         "questionKind": "SENTENCE_BUILDING",
-        "stem": "다음 글을 읽고, 핵심을 한 문장으로 완성하세요.",
-        "passage": "데이터베이스 SQL/NoSQL를 다룬 글에서는 조건과 결과의 관계를 설명했다.\n조건이 달라지면 결과도 달라질 수 있다고 했다.\n그래서 결론을 내리기 전에 조건이 무엇인지 확인해야 한다.\n조건을 바꿔 보고 결과를 비교하면 이해가 깊어진다.",
-        "correctSentence": "결국 조건이 바뀌면 결과도 함께 달라진다.",
-        "sentenceParts": [
+        "competency": "표현력",
+        "stem": "글을 읽고 빈칸에 들어갈 말을 순서대로 고르세요.",
+        "passage": "데이터베이스는 정보를 체계적으로 저장하고 꺼내 쓰게 해 주며, SQL과 NoSQL은 자료의 성격에 따라 다른 장점을 보인다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "",
+        "choices": [],
+        "answerId": "",
+        "template": "데이터베이스는 ____ ____ 기반이다.",
+        "blanks": [
           {
-            "answer": "결국",
-            "distractors": [
-              "즉,",
-              "따라서",
-              "그러므로"
-            ]
+            "id": "dq-w2-046-9-blank-1",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정보를 정리하고 활용하는"
+              },
+              {
+                "id": "B",
+                "text": "화면을 밝게 만드는"
+              },
+              {
+                "id": "C",
+                "text": "그림을 색칠하는"
+              },
+              {
+                "id": "D",
+                "text": "소리를 크게 키우는"
+              }
+            ],
+            "answerId": "A"
           },
           {
-            "answer": "조건이 바뀌면",
-            "distractors": [
-              "대충 하면",
-              "나중에 하면",
-              "차가운 곳에 두면"
-            ]
-          },
-          {
-            "answer": "결과도 함께",
-            "distractors": [
-              "그 이유를",
-              "이 내용을",
-              "이 문제를"
-            ]
-          },
-          {
-            "answer": "달라진다.",
-            "distractors": [
-              "변한다.",
-              "늘어난다.",
-              "바뀐다."
-            ]
+            "id": "dq-w2-046-9-blank-2",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기술"
+              },
+              {
+                "id": "B",
+                "text": "운동"
+              },
+              {
+                "id": "C",
+                "text": "연극"
+              },
+              {
+                "id": "D",
+                "text": "놀이"
+              }
+            ],
+            "answerId": "A"
           }
         ],
+        "explanation": "",
         "scoring": {
-          "correctDeltaSec": 18,
+          "correctDeltaSec": 12,
           "wrongDeltaSec": 0
         }
       },
       {
         "id": "dq-w2-046-10",
         "type": "MULTI_CHOICE",
-        "stem": "다음 문장에서 밑줄 친 '구조'의 뜻으로 알맞은 것은?",
-        "passage": "이 데이터베이스는 표(Table) __구조__로 되어 있습니다.",
-        "prompt": "뜻을 고르세요.",
+        "questionKind": "GRAMMAR",
+        "competency": "문법 또는 어법",
+        "stem": "어법이 바른 문장을 고르세요.",
+        "passage": "데이터베이스를 설명하는 문장이다.",
+        "highlight": {
+          "text": ""
+        },
+        "prompt": "알맞은 답을 고르세요.",
         "choices": [
           {
             "id": "A",
-            "text": "부분이나 요소가 짜여져 이루어지는 생김새"
+            "text": "자료 구조를 알면 저장 방식을 더 잘 이해할 수 있다."
           },
           {
             "id": "B",
-            "text": "위험에 빠진 사람을 구함"
+            "text": "자료 구조를알면 저장 방식을 더 잘 이해할 수 있다."
           },
           {
             "id": "C",
-            "text": "오래된 조상"
+            "text": "자료 구조를 알면 저장방식을 더 잘 이해할 수 있다."
           },
           {
             "id": "D",
-            "text": "입과 발톱"
+            "text": "자료 구조를 알면 저장 방식을 더 잘이해할 수 있다."
           }
         ],
         "answerId": "A",
+        "template": "",
+        "blanks": [],
+        "explanation": "",
         "scoring": {
-          "correctDeltaSec": 15,
-          "wrongDeltaSec": -15
-        },
-        "questionKind": "GRAMMAR"
+          "correctDeltaSec": 12,
+          "wrongDeltaSec": -12
+        }
       }
     ]
   }
