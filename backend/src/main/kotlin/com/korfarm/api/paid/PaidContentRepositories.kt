@@ -33,3 +33,8 @@ interface TestAnswerKeyRepository : JpaRepository<TestAnswerKeyEntity, String> {
 interface TestResultRepository : JpaRepository<TestResultEntity, String> {
     fun findByTestIdAndUserId(testId: String, userId: String): TestResultEntity?
 }
+
+interface ContentEditLogRepository : JpaRepository<ContentEditLogEntity, String> {
+    fun findByContentIdOrderByCreatedAtDesc(contentId: String): List<ContentEditLogEntity>
+    fun findByEditorIdOrderByCreatedAtDesc(editorId: String): List<ContentEditLogEntity>
+}

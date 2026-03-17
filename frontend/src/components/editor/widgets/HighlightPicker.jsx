@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /**
  * 하이라이트 범위 편집기
@@ -14,80 +14,78 @@ import { useState, useCallback } from "react";
  */
 export default function HighlightPicker({ ranges = [], paragraphs = [], onAdd, onRemove, selectContainerId }) {
   const [selectMode, setSelectMode] = useState(false);
+  const onAddRef = useRef(onAdd);
+  onAddRef.current = onAdd;
 
-  const handleMouseUp = useCallback(() => {
-    if (!selectMode) return;
-    const sel = window.getSelection();
-    if (!sel || sel.isCollapsed) return;
-
-    const range = sel.getRangeAt(0);
+  /* useEffect로 선택 모드에 따른 이벤트 리스너 관리 — stale closure 방지 */
+  useEffect(() => {
     const container = document.getElementById(selectContainerId);
-    if (!container || !container.contains(range.commonAncestorContainer)) return;
+    if (!selectMode || !container) return;
 
-    /* 선택 범위에서 paragraphId와 offset 추출 */
-    const startNode = range.startContainer;
-    const endNode = range.endContainer;
+    container.classList.add("ce-select-mode");
 
-    const findParagraph = (node) => {
-      let cur = node;
-      while (cur && cur !== container) {
-        if (cur.dataset && cur.dataset.paragraphId) return cur;
-        cur = cur.parentElement;
+    const handleMouseUp = () => {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed) return;
+
+      const range = sel.getRangeAt(0);
+      if (!container.contains(range.commonAncestorContainer)) return;
+
+      /* 선택 범위에서 paragraphId와 offset 추출 */
+      const startNode = range.startContainer;
+      const endNode = range.endContainer;
+
+      const findParagraph = (node) => {
+        let cur = node;
+        while (cur && cur !== container) {
+          if (cur.dataset && cur.dataset.paragraphId) return cur;
+          cur = cur.parentElement;
+        }
+        return null;
+      };
+
+      const startPara = findParagraph(startNode);
+      const endPara = findParagraph(endNode);
+      if (!startPara || !endPara) return;
+
+      /* 단일 단락 내 선택만 지원 */
+      if (startPara.dataset.paragraphId !== endPara.dataset.paragraphId) {
+        alert("하이라이트는 단일 단락 내에서만 설정할 수 있습니다.");
+        sel.removeAllRanges();
+        return;
       }
-      return null;
-    };
 
-    const startPara = findParagraph(startNode);
-    const endPara = findParagraph(endNode);
-    if (!startPara || !endPara) return;
+      const paraId = startPara.dataset.paragraphId;
+      const paraText = startPara.textContent || "";
 
-    /* 단일 단락 내 선택만 지원 */
-    if (startPara.dataset.paragraphId !== endPara.dataset.paragraphId) {
-      alert("하이라이트는 단일 단락 내에서만 설정할 수 있습니다.");
+      /* TreeWalker로 정확한 문자 offset 계산 */
+      const getCharOffset = (containerEl, targetNode, targetOffset) => {
+        const walker = document.createTreeWalker(containerEl, NodeFilter.SHOW_TEXT, null);
+        let offset = 0;
+        let node;
+        while ((node = walker.nextNode())) {
+          if (node === targetNode) return offset + targetOffset;
+          offset += node.textContent.length;
+        }
+        return offset;
+      };
+
+      const start = getCharOffset(startPara, startNode, range.startOffset);
+      const end = getCharOffset(endPara, endNode, range.endOffset);
+
+      if (start === end) return;
+
+      const selectedText = paraText.slice(start, end);
+      onAddRef.current({ paragraphId: paraId, start, end, _text: selectedText });
       sel.removeAllRanges();
-      return;
-    }
-
-    const paraId = startPara.dataset.paragraphId;
-    const paraText = startPara.textContent || "";
-
-    /* TreeWalker로 정확한 문자 offset 계산 */
-    const getCharOffset = (container, targetNode, targetOffset) => {
-      const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null);
-      let offset = 0;
-      let node;
-      while ((node = walker.nextNode())) {
-        if (node === targetNode) return offset + targetOffset;
-        offset += node.textContent.length;
-      }
-      return offset;
     };
 
-    const start = getCharOffset(startPara, startNode, range.startOffset);
-    const end = getCharOffset(endPara, endNode, range.endOffset);
-
-    if (start === end) return;
-
-    const selectedText = paraText.slice(start, end);
-    onAdd({ paragraphId: paraId, start, end, _text: selectedText });
-    sel.removeAllRanges();
-  }, [selectMode, selectContainerId, onAdd]);
-
-  /* 선택 모드 토글 시 이벤트 등록 */
-  const toggleSelectMode = () => {
-    const next = !selectMode;
-    setSelectMode(next);
-    const container = document.getElementById(selectContainerId);
-    if (container) {
-      if (next) {
-        container.classList.add("ce-select-mode");
-        container.addEventListener("mouseup", handleMouseUp);
-      } else {
-        container.classList.remove("ce-select-mode");
-        container.removeEventListener("mouseup", handleMouseUp);
-      }
-    }
-  };
+    container.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      container.classList.remove("ce-select-mode");
+      container.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [selectMode, selectContainerId]);
 
   /* 범위의 텍스트 미리보기 */
   const getRangeText = (r) => {
@@ -101,7 +99,7 @@ export default function HighlightPicker({ ranges = [], paragraphs = [], onAdd, o
     <div>
       <button
         className={`ce-btn ${selectMode ? "ce-btn-primary" : "ce-btn-secondary"}`}
-        onClick={toggleSelectMode}
+        onClick={() => setSelectMode((prev) => !prev)}
         style={{ marginBottom: 8 }}
       >
         {selectMode ? "선택 모드 종료" : "하이라이트 설정"}

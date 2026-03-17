@@ -106,6 +106,35 @@ class ContentVersionEntity(
     }
 }
 
+@Entity
+@Table(name = "content_edit_logs")
+class ContentEditLogEntity(
+    @Id
+    var id: String,
+
+    @Column(name = "content_id", nullable = false)
+    var contentId: String,
+
+    @Column(name = "editor_id", nullable = false)
+    var editorId: String,
+
+    @Column(nullable = false)
+    var action: String,
+
+    var summary: String? = null,
+
+    @Column(name = "version_id")
+    var versionId: String? = null,
+
+    @Column(name = "created_at", nullable = false)
+    var createdAt: LocalDateTime = LocalDateTime.now()
+) {
+    @PrePersist
+    fun onCreate() {
+        createdAt = LocalDateTime.now()
+    }
+}
+
 // TestPaperEntity moved to com.korfarm.api.test.TestEntities
 
 @Entity

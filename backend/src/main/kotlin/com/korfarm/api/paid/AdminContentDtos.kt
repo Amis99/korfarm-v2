@@ -95,3 +95,23 @@ data class AdminContentBatchImportResult(
     val failed: Int,
     val results: List<BatchItemResult>
 )
+
+data class ContentEditLogDto(
+    val id: String,
+    val contentId: String,
+    val contentTitle: String?,
+    val editorId: String,
+    val editorName: String?,
+    val action: String,
+    val summary: String?,
+    val versionId: String?,
+    val createdAt: LocalDateTime
+)
+
+data class AdminUserDto(
+    val userId: String,
+    val email: String,
+    val name: String?,
+    val editCount: Int,
+    val lastEditAt: LocalDateTime?
+)

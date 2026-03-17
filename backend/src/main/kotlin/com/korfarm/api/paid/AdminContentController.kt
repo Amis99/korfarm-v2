@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -120,6 +121,30 @@ class AdminContentController(
         val userId = SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         val data = adminContentService.saveAnswerKey(testId, request, userId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    @GetMapping("/content/{contentId}/edit-history")
+    fun getContentEditHistory(@PathVariable contentId: String): ApiResponse<List<ContentEditLogDto>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val data = adminContentService.getEditLogsByContent(contentId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    @GetMapping("/edit-history/by-editor")
+    fun getEditorEditHistory(@RequestParam editorId: String): ApiResponse<List<ContentEditLogDto>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val data = adminContentService.getEditLogsByEditor(editorId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    @GetMapping("/editors")
+    fun listEditors(): ApiResponse<List<AdminUserDto>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val data = adminContentService.listAdminUsers()
         return ApiResponse(success = true, data = data)
     }
 

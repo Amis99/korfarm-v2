@@ -48,8 +48,30 @@ const CONTENT_TYPE_TO_MODULE = {
 const resolveModuleKey = (contentType, fallback) =>
   fallback || CONTENT_TYPE_TO_MODULE[contentType] || "worksheet_quiz";
 
-/* static JSON 콘텐츠 목록 */
+/* static JSON 콘텐츠 목록 — 일일 학습을 상단에 배치 */
 const STATIC_CONTENTS = [
+  ...DAILY_LEVELS.map((level) => ({
+    id: `dr-${level.toLowerCase()}`,
+    title: `일일 독해(${getLevelLabel(level)})`,
+    type: "DAILY_READING",
+    levelId: level,
+    chapterId: "",
+    status: "active",
+    source: "static",
+    jsonPath: `/daily-reading/${levelToFolder(level)}/001.json`,
+    moduleKey: "reading_training",
+  })),
+  ...DAILY_LEVELS.map((level) => ({
+    id: `dq-${level.toLowerCase()}`,
+    title: `일일 퀴즈(${getLevelLabel(level)})`,
+    type: "DAILY_QUIZ",
+    levelId: level,
+    chapterId: "",
+    status: "active",
+    source: "static",
+    jsonPath: `/daily-quiz/${levelToFolder(level)}/001.json`,
+    moduleKey: "worksheet_quiz",
+  })),
   ...LEARNING_CATALOG.map((item) => ({
     id: item.contentId,
     title: item.title,
@@ -60,28 +82,6 @@ const STATIC_CONTENTS = [
     source: "static",
     jsonPath: item.jsonPath,
     moduleKey: item.moduleKey,
-  })),
-  ...DAILY_LEVELS.map((level) => ({
-    id: `dq-${level.toLowerCase()}`,
-    title: `일일 퀴즈 - ${getLevelLabel(level)}`,
-    type: "DAILY_QUIZ",
-    levelId: level,
-    chapterId: "",
-    status: "active",
-    source: "static",
-    jsonPath: `/daily-quiz/${levelToFolder(level)}/001.json`,
-    moduleKey: "worksheet_quiz",
-  })),
-  ...DAILY_LEVELS.map((level) => ({
-    id: `dr-${level.toLowerCase()}`,
-    title: `일일 독해 - ${getLevelLabel(level)}`,
-    type: "DAILY_READING",
-    levelId: level,
-    chapterId: "",
-    status: "active",
-    source: "static",
-    jsonPath: `/daily-reading/${levelToFolder(level)}/001.json`,
-    moduleKey: "reading_training",
   })),
 ];
 

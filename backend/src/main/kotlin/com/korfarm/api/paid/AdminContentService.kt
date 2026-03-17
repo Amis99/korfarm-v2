@@ -26,6 +26,7 @@ import java.time.LocalDateTime
 class AdminContentService(
     private val contentRepository: ContentRepository,
     private val contentVersionRepository: ContentVersionRepository,
+    private val contentEditLogRepository: ContentEditLogRepository,
     private val writingSubmissionRepository: WritingSubmissionRepository,
     private val writingFeedbackRepository: WritingFeedbackRepository,
     private val testPaperRepository: TestPaperRepository,
@@ -159,6 +160,16 @@ class AdminContentService(
             approvedAt = LocalDateTime.now()
         )
         contentVersionRepository.save(version)
+
+        contentEditLogRepository.save(ContentEditLogEntity(
+            id = IdGenerator.newId("cel"),
+            contentId = saved.id,
+            editorId = userId,
+            action = if (existing != null) "UPDATE" else "CREATE",
+            summary = "콘텐츠 ${if (existing != null) "수정" else "생성"}: $title",
+            versionId = version.id
+        ))
+
         return AdminContentImportResult(contentId = saved.id, versionId = version.id)
     }
 
@@ -193,6 +204,15 @@ class AdminContentService(
                     approvedAt = LocalDateTime.now()
                 )
                 contentVersionRepository.save(version)
+
+                contentEditLogRepository.save(ContentEditLogEntity(
+                    id = IdGenerator.newId("cel"),
+                    contentId = saved.id,
+                    editorId = userId,
+                    action = "BATCH_CREATE",
+                    summary = "배치 생성: $title",
+                    versionId = version.id
+                ))
 
                 // PRO_* 콘텐츠 → 프로 모드 챕터 자동 생성/연결
                 if (item.contentType.startsWith("PRO_") && item.levelId != null && item.dayIndex != null) {
@@ -242,6 +262,16 @@ class AdminContentService(
             approvedAt = LocalDateTime.now()
         )
         contentVersionRepository.save(version)
+
+        contentEditLogRepository.save(ContentEditLogEntity(
+            id = IdGenerator.newId("cel"),
+            contentId = contentId,
+            editorId = userId,
+            action = "UPDATE",
+            summary = "콘텐츠 수정: $title",
+            versionId = version.id
+        ))
+
         return AdminContentImportResult(contentId = contentId, versionId = version.id)
     }
 
@@ -410,5 +440,63 @@ class AdminContentService(
             correct = correct,
             gradedAt = saved.gradedAt ?: now
         )
+    }
+
+    @Transactional(readOnly = true)
+    fun getEditLogsByContent(contentId: String): List<ContentEditLogDto> {
+        val userMap = userRepository.findAll().associateBy { it.id }
+        val content = contentRepository.findById(contentId).orElse(null)
+        return contentEditLogRepository.findByContentIdOrderByCreatedAtDesc(contentId).map { log ->
+            ContentEditLogDto(
+                id = log.id,
+                contentId = log.contentId,
+                contentTitle = content?.title,
+                editorId = log.editorId,
+                editorName = userMap[log.editorId]?.name,
+                action = log.action,
+                summary = log.summary,
+                versionId = log.versionId,
+                createdAt = log.createdAt
+            )
+        }
+    }
+
+    @Transactional(readOnly = true)
+    fun getEditLogsByEditor(editorId: String): List<ContentEditLogDto> {
+        val editor = userRepository.findById(editorId).orElse(null)
+        val contentMap = contentRepository.findAll().associateBy { it.id }
+        return contentEditLogRepository.findByEditorIdOrderByCreatedAtDesc(editorId).map { log ->
+            ContentEditLogDto(
+                id = log.id,
+                contentId = log.contentId,
+                contentTitle = contentMap[log.contentId]?.title,
+                editorId = log.editorId,
+                editorName = editor?.name,
+                action = log.action,
+                summary = log.summary,
+                versionId = log.versionId,
+                createdAt = log.createdAt
+            )
+        }
+    }
+
+    @Transactional(readOnly = true)
+    fun listAdminUsers(): List<AdminUserDto> {
+        val userMap = userRepository.findAll().associateBy { it.id }
+        // content_edit_logs에 기록된 editor들의 목록
+        val allLogs = contentEditLogRepository.findAll()
+        val editorIds = allLogs.map { it.editorId }.distinct()
+        return editorIds.mapNotNull { editorId ->
+            val user = userMap[editorId] ?: return@mapNotNull null
+            val editCount = allLogs.count { it.editorId == editorId }
+            val lastEdit = allLogs.filter { it.editorId == editorId }.maxByOrNull { it.createdAt }?.createdAt
+            AdminUserDto(
+                userId = user.id,
+                email = user.email,
+                name = user.name,
+                editCount = editCount,
+                lastEditAt = lastEdit
+            )
+        }.sortedByDescending { it.editCount }
     }
 }
