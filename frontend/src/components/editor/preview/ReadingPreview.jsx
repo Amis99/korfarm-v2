@@ -12,13 +12,21 @@ export default function ReadingPreview({ content, onClickPath, focusPath }) {
   const recall = content?.recall || {};
   const confirm = content?.confirm || {};
 
+  /* 하이라이트 형식 정규화 (ranges[] / paragraphId+range 둘 다 지원) */
+  const normalizeHighlightRanges = (highlight) => {
+    if (!highlight) return [];
+    if (Array.isArray(highlight.ranges)) return highlight.ranges;
+    if (highlight.paragraphId && highlight.range) {
+      return [{ paragraphId: highlight.paragraphId, start: highlight.range.start, end: highlight.range.end }];
+    }
+    return [];
+  };
+
   /* 모든 하이라이트 범위 수집 (미리보기에 표시용) */
   const allHighlights = useMemo(() => {
     const ranges = [];
     timeline.forEach((step) => {
-      if (step.highlight?.ranges) {
-        step.highlight.ranges.forEach((r) => ranges.push(r));
-      }
+      normalizeHighlightRanges(step.highlight).forEach((r) => ranges.push(r));
     });
     return ranges;
   }, [timeline]);

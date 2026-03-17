@@ -17,6 +17,16 @@ export default function ReadingForm({ editor, focusPath }) {
   const recallCards = content?.recall?.cards || [];
   const confirmQuestions = content?.confirm?.questions || [];
 
+  /* 하이라이트 형식 정규화 (ranges[] / paragraphId+range 둘 다 지원) */
+  const normalizeHighlightRanges = (highlight) => {
+    if (!highlight) return [];
+    if (Array.isArray(highlight.ranges)) return highlight.ranges;
+    if (highlight.paragraphId && highlight.range) {
+      return [{ paragraphId: highlight.paragraphId, start: highlight.range.start, end: highlight.range.end }];
+    }
+    return [];
+  };
+
   /* === 지문 편집 === */
   const handleParagraphChange = (idx, text) => {
     updateField(`passage.paragraphs[${idx}].text`, text);
@@ -140,7 +150,7 @@ export default function ReadingForm({ editor, focusPath }) {
                   <div className="ce-form-section">
                     <label className="ce-form-label">하이라이트 범위</label>
                     <HighlightPicker
-                      ranges={step.highlight?.ranges || []}
+                      ranges={normalizeHighlightRanges(step.highlight)}
                       paragraphs={paragraphs}
                       onAdd={(range) => handleAddHighlight(i, range)}
                       onRemove={(rangeIdx) => handleRemoveHighlight(i, rangeIdx)}

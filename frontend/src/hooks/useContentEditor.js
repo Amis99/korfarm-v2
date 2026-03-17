@@ -39,14 +39,14 @@ export function useContentEditor(contentId, staticInfo) {
       setLoading(true);
       setError("");
       try {
-        let ct, payload, title, schemaVersion, apiRes = null;
+        let ct, payload, title, schemaVersion, apiRes = null, fileData = null;
         if (staticInfo?.jsonPath) {
           /* static 콘텐츠: 정적 파일에서 직접 로드 */
           const base = import.meta.env.BASE_URL || "/";
           const url = `${base}${staticInfo.jsonPath.replace(/^\//, "")}`;
           const res = await fetch(url);
           if (!res.ok) throw new Error(`정적 파일 로드 실패: ${res.status}`);
-          const fileData = await res.json();
+          fileData = await res.json();
           payload = fileData.payload || fileData;
           ct = fileData.contentType || staticInfo.contentType || "";
           title = fileData.title || staticInfo.title || "";
@@ -55,21 +55,21 @@ export function useContentEditor(contentId, staticInfo) {
           /* DB 콘텐츠: API 호출 */
           apiRes = await apiGet(`/v1/admin/content/${contentId}/preview`);
           ct = apiRes.contentType || apiRes.content_type || "";
-          payload = apiRes.content || apiRes.payload || {};
+          const rawContent = apiRes.content || apiRes.payload || {};
+          payload = rawContent.payload || rawContent;
           title = apiRes.title || "";
           schemaVersion = apiRes.schemaVersion || apiRes.schema_version || "1.0";
         }
         if (cancelled) return;
-        let levelId = "", chapterId = "", area = "", subArea = "", dayIndex = "", moduleKey = "", videoUrl = "";
-        if (apiRes) {
-          levelId = apiRes.levelId || apiRes.level_id || "";
-          chapterId = apiRes.chapterId || apiRes.chapter_id || "";
-          area = apiRes.area || "";
-          subArea = apiRes.subArea || apiRes.sub_area || "";
-          dayIndex = apiRes.dayIndex ?? apiRes.day_index ?? "";
-          moduleKey = apiRes.moduleKey || apiRes.module_key || "";
-          videoUrl = apiRes.videoUrl || apiRes.video_url || "";
-        }
+        /* 메타데이터 추출 (DB 응답 / static 파일 / staticInfo 순으로 폴백) */
+        const metaSrc = apiRes || fileData || {};
+        const levelId = metaSrc.levelId || metaSrc.level_id || metaSrc.targetLevel || staticInfo?.levelId || "";
+        const chapterId = metaSrc.chapterId || metaSrc.chapter_id || "";
+        const area = metaSrc.area || staticInfo?.area || "";
+        const subArea = metaSrc.subArea || metaSrc.sub_area || "";
+        const dayIndex = metaSrc.dayIndex ?? metaSrc.day_index ?? "";
+        const moduleKey = metaSrc.moduleKey || metaSrc.module_key || staticInfo?.moduleKey || "";
+        const videoUrl = metaSrc.videoUrl || metaSrc.video_url || "";
         const metaObj = { contentType: ct, title, contentId, schemaVersion, levelId, chapterId, area, subArea, dayIndex, moduleKey, videoUrl };
         setMeta(metaObj);
         setOriginalMeta(JSON.parse(JSON.stringify(metaObj)));
