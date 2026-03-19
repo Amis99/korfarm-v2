@@ -892,8 +892,6 @@ mark.highlight {
   background: transparent;
   border-radius: 0;
   padding: 18px;
-  max-height: 360px;
-  overflow-y: auto;
   border: 2px solid rgba(75, 61, 54, 0.35);
 }
 
@@ -1683,6 +1681,27 @@ mark.highlight {
   .timebar-track {
     height: 14px;
   }
+}
+
+/* 모바일: 레벨별 글자 크기 조정 (화면용) */
+@media (max-width: 768px) {
+  /* 소쉬르 (초등 저학년): 글자 크기 대폭 확대 */
+  .screen-level-saussure .worksheet-passage-box,
+  .screen-level-saussure .reading-passage,
+  .screen-level-saussure .worksheet-text { font-size: 18px; }
+
+  .screen-level-saussure .question-modal-stem,
+  .screen-level-saussure .question-modal-option { font-size: 17px; }
+
+  .screen-level-saussure .worksheet-item-label { font-size: 16px; }
+
+  /* 프레게 (초등 고학년): 약간 확대 */
+  .screen-level-frege .worksheet-passage-box,
+  .screen-level-frege .reading-passage,
+  .screen-level-frege .worksheet-text { font-size: 16px; }
+
+  .screen-level-frege .question-modal-stem,
+  .screen-level-frege .question-modal-option { font-size: 15px; }
 }
 
 /* 인쇄 전용 영역 - 화면에서 숨김 */

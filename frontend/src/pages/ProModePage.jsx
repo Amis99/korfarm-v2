@@ -70,7 +70,7 @@ function ProModePage() {
       alert("이전 챕터를 먼저 통과해야 잠금이 해제됩니다.");
       return;
     }
-    navigate(`/pro-mode/chapter/${ch.chapterId}`);
+    navigate(`/pro-mode/chapter/${ch.chapterId}`, { state: { videoUrl: ch.videoUrl, title: ch.title } });
   };
 
   return (

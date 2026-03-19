@@ -218,6 +218,14 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     return "";
   }, [content]);
 
+  // 화면용 레벨 클래스 (모바일 글자 크기 조정)
+  const screenLevelClass = useMemo(() => {
+    const level = content?.targetLevel || "";
+    if (level.startsWith("SAUSSURE") || level.startsWith("SOUSSURE")) return "screen-level-saussure";
+    if (level.startsWith("FREGE")) return "screen-level-frege";
+    return "";
+  }, [content]);
+
   // 인쇄 전용: 페이지 그룹별 문제 추출
   const printPageGroups = useMemo(() => {
     const payload = content?.payload;
@@ -594,7 +602,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                   moduleKey === "phoneme_change"
                     ? "stack"
                     : ""
-                }`}
+                } ${screenLevelClass}`}
               >
                 <Module content={content} />
               </main>
