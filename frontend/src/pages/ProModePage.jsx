@@ -142,18 +142,17 @@ function ProModePage() {
                   </td>
                   <td>{getBadge(ch)}</td>
                   <td className="pro-td-video">
-                    {ch.videoUrl ? (
-                      <button
-                        className="video-play-btn"
-                        title="영상 보기"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setVideoUrl(ch.videoUrl);
-                        }}
-                      >
-                        <span className="material-symbols-outlined">play_circle</span>
-                      </button>
-                    ) : null}
+                    <button
+                      className="video-play-btn"
+                      title={ch.videoUrl ? "영상 보기" : "영상 없음"}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (ch.videoUrl) setVideoUrl(ch.videoUrl);
+                      }}
+                      disabled={!ch.videoUrl}
+                    >
+                      <span className="material-symbols-outlined">play_circle</span>
+                    </button>
                   </td>
                 </tr>
               ))}

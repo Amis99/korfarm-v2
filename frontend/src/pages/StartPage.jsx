@@ -57,6 +57,7 @@ function StartPage() {
   const [duelRanking, setDuelRanking] = useState([]);
   const [seedLog, setSeedLog] = useState([]);
   const [subActive, setSubActive] = useState(false);
+  const [subLoading, setSubLoading] = useState(true);
   const [adminLevelOverride, setAdminLevelOverride] = useState("");
 
   // 부모용 상태
@@ -119,7 +120,10 @@ function StartPage() {
           const st = sub?.status;
           if (st === "active" || st === "canceled") setSubActive(true);
         })
-        .catch((e) => console.error(e));
+        .catch((e) => console.error(e))
+        .finally(() => setSubLoading(false));
+    } else {
+      setSubLoading(false);
     }
     apiGet("/v1/seasons/current")
       .then((season) => {
@@ -189,7 +193,7 @@ function StartPage() {
       .catch((e) => console.error(e));
   }, [adminLevelOverride, isAdmin, profile]);
 
-  const hasSub = isPremium || subActive;
+  const hasSub = isPremium || subActive || subLoading;
   const displayName = profile?.name || user?.name || "농부";
   const baseLevelId = profile?.level_id || profile?.levelId;
   const levelId = (isAdmin && adminLevelOverride) ? adminLevelOverride : baseLevelId;
