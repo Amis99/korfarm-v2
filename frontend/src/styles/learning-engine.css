@@ -72,6 +72,8 @@
   box-shadow: 0 14px 24px rgba(255, 143, 43, 0.15);
   display: grid;
   gap: 12px;
+  max-width: calc(100vw - 24px);
+  box-sizing: border-box;
 }
 
 .engine-header-wrap {
@@ -135,6 +137,9 @@
 
 .engine-header-item.engine-title {
   min-width: 140px;
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .engine-badge {
@@ -322,6 +327,8 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  width: 100px;
+  flex-shrink: 0;
 }
 
 .seed-icon {
