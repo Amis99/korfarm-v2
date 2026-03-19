@@ -140,6 +140,19 @@ class DuelQuestionPoolService(
         return duelQuestionPoolRepository.save(entity)
     }
 
+    // 문제 수정
+    fun updateQuestion(questionId: String, questionJson: String): DuelQuestionPoolEntity {
+        val entity = duelQuestionPoolRepository.findById(questionId).orElseThrow {
+            IllegalArgumentException("문제를 찾을 수 없습니다: $questionId")
+        }
+        val node = objectMapper.readTree(questionJson)
+        entity.questionType = node.get("questionType")?.asText() ?: entity.questionType
+        entity.category = node.get("category")?.asText() ?: entity.category
+        entity.questionJson = questionJson
+        entity.updatedAt = LocalDateTime.now()
+        return duelQuestionPoolRepository.save(entity)
+    }
+
     // 문제 비활성화
     fun deactivateQuestion(questionId: String): Boolean {
         val entity = duelQuestionPoolRepository.findById(questionId).orElse(null) ?: return false

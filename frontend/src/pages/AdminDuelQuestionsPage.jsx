@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
+import { apiGet, apiPost, apiPut, apiDelete } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import SAMPLE_QUESTIONS from "../constants/duelSamples";
 import "../styles/admin-detail.css";
@@ -81,6 +81,9 @@ function AdminDuelQuestionsPage({ wrap = true }) {
   const [importLoading, setImportLoading] = useState(false);
   const [importError, setImportError] = useState("");
   const [importResult, setImportResult] = useState("");
+
+  // 수정 모드
+  const [editingQuestionId, setEditingQuestionId] = useState(null);
 
   // 문제 상세 모달
   const [detailQuestion, setDetailQuestion] = useState(null);
@@ -219,7 +222,11 @@ function AdminDuelQuestionsPage({ wrap = true }) {
         timeLimitSec: Number(addForm.timeLimitSec) || 15,
       };
 
-      await apiPost("/v1/admin/duel/questions", body);
+      if (editingQuestionId) {
+        await apiPut(`/v1/admin/duel/questions/${editingQuestionId}`, body);
+      } else {
+        await apiPost("/v1/admin/duel/questions", body);
+      }
 
       // 폼 초기화
       setAddForm({
@@ -235,6 +242,7 @@ function AdminDuelQuestionsPage({ wrap = true }) {
         answerId: "1",
         timeLimitSec: 15,
       });
+      setEditingQuestionId(null);
       setShowAddForm(false);
 
       await loadQuestions(activeServer);
@@ -298,6 +306,36 @@ function AdminDuelQuestionsPage({ wrap = true }) {
     }
   };
 
+  // 수정 모드 진입
+  const handleEditQuestion = async (q) => {
+    try {
+      let detail = q;
+      if (!q.stem && !q.choices) {
+        detail = await apiGet(`/v1/admin/duel/questions/${q.id}`);
+      }
+      const choices = detail.choices || [];
+      setAddForm({
+        serverId: detail.serverId ?? detail.server_id ?? activeServer,
+        questionType: detail.questionType ?? detail.question_type ?? "QUIZ",
+        category: detail.category || "",
+        stem: detail.stem || "",
+        passage: detail.passage || "",
+        choice1: choices[0]?.text || "",
+        choice2: choices[1]?.text || "",
+        choice3: choices[2]?.text || "",
+        choice4: choices[3]?.text || "",
+        answerId: String(detail.answerId ?? detail.answer_id ?? "1"),
+        timeLimitSec: detail.timeLimitSec ?? detail.time_limit_sec ?? 15,
+      });
+      setEditingQuestionId(detail.id);
+      setAddError("");
+      setShowAddForm(true);
+      setDetailQuestion(null);
+    } catch (err) {
+      alert("문제 정보를 불러올 수 없습니다: " + err.message);
+    }
+  };
+
   // 문제 상세 보기
   const handleShowDetail = (q) => {
     const sample = SAMPLE_QUESTIONS.find((s) => s.id === q.id);
@@ -322,7 +360,20 @@ function AdminDuelQuestionsPage({ wrap = true }) {
               className="admin-detail-btn"
               type="button"
               onClick={() => {
-                setAddForm((prev) => ({ ...prev, serverId: activeServer }));
+                setAddForm({
+                  serverId: activeServer,
+                  questionType: "QUIZ",
+                  category: "",
+                  stem: "",
+                  passage: "",
+                  choice1: "",
+                  choice2: "",
+                  choice3: "",
+                  choice4: "",
+                  answerId: "1",
+                  timeLimitSec: 15,
+                });
+                setEditingQuestionId(null);
                 setAddError("");
                 setShowAddForm(true);
               }}
@@ -493,13 +544,22 @@ function AdminDuelQuestionsPage({ wrap = true }) {
                         </td>
                         <td>
                           {q.status === "ACTIVE" && (
-                            <button
-                              className="admin-detail-btn secondary sm"
-                              type="button"
-                              onClick={() => handleDeactivate(q.id)}
-                            >
-                              비활성화
-                            </button>
+                            <>
+                              <button
+                                className="admin-detail-btn sm"
+                                type="button"
+                                onClick={() => handleEditQuestion(q)}
+                              >
+                                수정
+                              </button>
+                              <button
+                                className="admin-detail-btn secondary sm"
+                                type="button"
+                                onClick={() => handleDeactivate(q.id)}
+                              >
+                                비활성화
+                              </button>
+                            </>
                           )}
                           {q._source === "sample" && (
                             <button
@@ -547,7 +607,7 @@ function AdminDuelQuestionsPage({ wrap = true }) {
       {showAddForm && (
         <div className="admin-modal-overlay" onClick={() => setShowAddForm(false)}>
           <div className="admin-modal admin-modal-wide" onClick={(e) => e.stopPropagation()}>
-            <h2>문제 추가</h2>
+            <h2>{editingQuestionId ? "문제 수정" : "문제 추가"}</h2>
             {addError && <p className="admin-detail-note error">{addError}</p>}
 
             <div className="admin-modal-row">
@@ -556,6 +616,7 @@ function AdminDuelQuestionsPage({ wrap = true }) {
                 <select
                   value={addForm.serverId}
                   onChange={(e) => setAddForm({ ...addForm, serverId: e.target.value })}
+                  disabled={!!editingQuestionId}
                 >
                   {SERVERS.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -569,6 +630,7 @@ function AdminDuelQuestionsPage({ wrap = true }) {
                 <select
                   value={addForm.questionType}
                   onChange={(e) => setAddForm({ ...addForm, questionType: e.target.value })}
+                  disabled={!!editingQuestionId}
                 >
                   {QUESTION_TYPES.map((t) => (
                     <option key={t.id} value={t.id}>
@@ -652,12 +714,12 @@ function AdminDuelQuestionsPage({ wrap = true }) {
                 onClick={handleAddQuestion}
                 disabled={addLoading}
               >
-                {addLoading ? "등록 중..." : "등록"}
+                {addLoading ? (editingQuestionId ? "저장 중..." : "등록 중...") : (editingQuestionId ? "저장" : "등록")}
               </button>
               <button
                 className="admin-detail-btn secondary"
                 type="button"
-                onClick={() => setShowAddForm(false)}
+                onClick={() => { setShowAddForm(false); setEditingQuestionId(null); }}
               >
                 취소
               </button>
@@ -767,6 +829,11 @@ function AdminDuelQuestionsPage({ wrap = true }) {
             </div>
 
             <div className="admin-modal-actions">
+              {detailQuestion.status !== "INACTIVE" && (
+                <button className="admin-detail-btn" type="button" onClick={() => handleEditQuestion(detailQuestion)}>
+                  수정
+                </button>
+              )}
               <button className="admin-detail-btn secondary" type="button" onClick={() => setDetailQuestion(null)}>
                 닫기
               </button>
