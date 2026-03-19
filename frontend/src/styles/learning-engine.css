@@ -65,11 +65,11 @@
   }
 }
 .engine-header {
-  background: #fff;
+  background: transparent;
   border-radius: 0;
   padding: 20px 32px;
-  border: 1px solid rgba(255, 143, 43, 0.2);
-  box-shadow: 0 14px 24px rgba(255, 143, 43, 0.15);
+  border: none;
+  box-shadow: none;
   display: grid;
   gap: 12px;
   max-width: calc(100vw - 24px);
@@ -1688,20 +1688,40 @@ mark.highlight {
   /* 소쉬르 (초등 저학년): 글자 크기 대폭 확대 */
   .screen-level-saussure .worksheet-passage-box,
   .screen-level-saussure .reading-passage,
-  .screen-level-saussure .worksheet-text { font-size: 18px; }
+  .screen-level-saussure .reading-passage p,
+  .screen-level-saussure .worksheet-text,
+  .screen-level-saussure .worksheet-item-text { font-size: 36px; line-height: 1.8; }
 
   .screen-level-saussure .question-modal-stem,
-  .screen-level-saussure .question-modal-option { font-size: 17px; }
+  .screen-level-saussure .question-modal-option { font-size: 34px; line-height: 1.7; }
 
-  .screen-level-saussure .worksheet-item-label { font-size: 16px; }
+  .screen-level-saussure .worksheet-item-label { font-size: 32px; }
 
-  /* 프레게 (초등 고학년): 약간 확대 */
+  .screen-level-saussure .confirm-char { font-size: 34px; }
+
+  /* 프레게 (초등 고학년): 확대 */
   .screen-level-frege .worksheet-passage-box,
   .screen-level-frege .reading-passage,
-  .screen-level-frege .worksheet-text { font-size: 16px; }
+  .screen-level-frege .reading-passage p,
+  .screen-level-frege .worksheet-text,
+  .screen-level-frege .worksheet-item-text { font-size: 30px; line-height: 1.7; }
 
   .screen-level-frege .question-modal-stem,
-  .screen-level-frege .question-modal-option { font-size: 15px; }
+  .screen-level-frege .question-modal-option { font-size: 28px; line-height: 1.6; }
+
+  .screen-level-frege .confirm-char { font-size: 28px; }
+
+  /* 러셀/비트겐슈타인 (중고등): 기본 확대 */
+  .engine-body .worksheet-passage-box,
+  .engine-body .reading-passage,
+  .engine-body .reading-passage p,
+  .engine-body .worksheet-text,
+  .engine-body .worksheet-item-text { font-size: 24px; line-height: 1.6; }
+
+  .engine-body .question-modal-stem,
+  .engine-body .question-modal-option { font-size: 22px; line-height: 1.5; }
+
+  .engine-body .confirm-char { font-size: 22px; }
 }
 
 /* 인쇄 전용 영역 - 화면에서 숨김 */
