@@ -2,7 +2,7 @@ import { useMemo, useCallback } from "react";
 import { TOKEN_KEY } from "../utils/api";
 
 export function useAuth() {
-  const token = typeof window !== "undefined" ? localStorage.getItem(TOKEN_KEY) : null;
+  const token = typeof window !== "undefined" ? sessionStorage.getItem(TOKEN_KEY) : null;
   const isLoggedIn = Boolean(token);
 
   const user = useMemo(() => {
@@ -21,7 +21,7 @@ export function useAuth() {
   }, [token]);
 
   const logout = useCallback(() => {
-    localStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(TOKEN_KEY);
     window.location.href = import.meta.env.BASE_URL || "/";
   }, []);
 

@@ -63,7 +63,7 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
   };
 
   const fileUrl = (fileId) => {
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = sessionStorage.getItem(TOKEN_KEY);
     return `${API_BASE}/v1/files/${fileId}/download?token=${token}`;
   };
 

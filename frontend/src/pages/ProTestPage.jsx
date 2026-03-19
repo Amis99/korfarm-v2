@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, apiPost, API_BASE } from "../utils/api";
+import { apiGet, apiPost, API_BASE, TOKEN_KEY } from "../utils/api";
 import AnswerInputPanel from "../components/AnswerInputPanel";
 import OnlineTestRenderer from "../components/OnlineTestRenderer";
 import "../styles/pro-mode.css";
@@ -122,7 +122,7 @@ function ProTestPage() {
 
       // PDF 새 탭으로 열기
       if (res.pdfFileId) {
-        const token = localStorage.getItem("korfarm_token");
+        const token = sessionStorage.getItem(TOKEN_KEY);
         window.open(`${API_BASE}/v1/files/${res.pdfFileId}?token=${token}`, "_blank");
       }
 

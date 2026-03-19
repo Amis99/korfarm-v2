@@ -1464,7 +1464,7 @@ function ActionCard({ action, request }) {
 }
 function OpsStation() {
   const [apiBase, setApiBase] = useState(DEFAULT_API_BASE);
-  const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY) || "");
+  const [token, setToken] = useState(() => sessionStorage.getItem(TOKEN_KEY) || "");
   const [tokenInput, setTokenInput] = useState(token);
   const [profile, setProfile] = useState(null);
   const [subscription, setSubscription] = useState(null);
@@ -1589,9 +1589,9 @@ function OpsStation() {
   const applyToken = (value) => {
     setToken(value);
     if (value) {
-      localStorage.setItem(TOKEN_KEY, value);
+      sessionStorage.setItem(TOKEN_KEY, value);
     } else {
-      localStorage.removeItem(TOKEN_KEY);
+      sessionStorage.removeItem(TOKEN_KEY);
     }
   };
 

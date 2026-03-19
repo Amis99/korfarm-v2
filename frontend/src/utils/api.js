@@ -34,7 +34,7 @@ const buildUrl = (path) => {
 };
 
 const authHeaders = () => {
-  const token = localStorage.getItem(TOKEN_KEY);
+  const token = sessionStorage.getItem(TOKEN_KEY);
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
@@ -43,7 +43,7 @@ const handle401 = (path) => {
   // 로그인/회원가입 관련 요청에서는 리다이렉트하지 않음
   const authPaths = ["/v1/auth/login", "/v1/auth/signup", "/v1/auth/request-password-reset"];
   if (authPaths.some((p) => path.includes(p))) return;
-  localStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(TOKEN_KEY);
   window.location.href = import.meta.env.BASE_URL + "login";
 };
 

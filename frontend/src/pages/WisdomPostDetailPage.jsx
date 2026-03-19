@@ -52,7 +52,7 @@ function WisdomPostDetailPage() {
     if (!confirm("정말 삭제하시겠습니까?")) return;
     setDeleting(true);
     try {
-      const token = localStorage.getItem(TOKEN_KEY);
+      const token = sessionStorage.getItem(TOKEN_KEY);
       await fetch(`${API_BASE}/v1/wisdom/posts/${postId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },

@@ -28,7 +28,7 @@ function LoginPage() {
       }
       const token = payload?.data?.access_token || payload?.data?.accessToken;
       if (token) {
-        localStorage.setItem(TOKEN_KEY, token);
+        sessionStorage.setItem(TOKEN_KEY, token);
       }
       const pendingApproval = payload?.data?.user?.pending_approval || payload?.data?.user?.pendingApproval;
       if (pendingApproval) {
