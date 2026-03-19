@@ -158,17 +158,18 @@
 
 .engine-body {
   width: var(--sheet-width);
-  height: var(--sheet-height);
+  min-height: var(--sheet-height);
+  height: auto;
   border-radius: 0;
   padding: 24px;
   border: 1px solid rgba(109, 164, 117, 0.2);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   background-color: var(--engine-bg);
   background-image: var(--sheet-bg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: top center;
+  background-repeat: repeat-y;
 }
 
 .engine-body.stack {
