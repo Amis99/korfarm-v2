@@ -556,9 +556,6 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
             <div className="engine-header-wrap" style={{ "--header-height": `${headerHeight}px` }}>
               <header ref={headerRef} className="engine-header engine-scale">
                 <div className="engine-header-row">
-                  <Link className="engine-logo" to="/">
-                    <img src={resolveAssetUrl("korfarm-logo.png")} alt="국어농장" />
-                  </Link>
                   <div className="engine-header-item engine-title">
                     <strong>{content?.title || "학습"}</strong>
                   </div>
