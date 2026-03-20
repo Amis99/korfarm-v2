@@ -6,13 +6,26 @@
   "title": "일일 독해(러셀 1) Day 81 비문학",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
-  "schoolGradeRange": { "min": 7, "max": 8 },
+  "schoolGradeRange": {
+    "min": 7,
+    "max": 8
+  },
   "area": "READING",
   "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "competencies": [
+    "READING"
+  ],
+  "tags": [
+    "daily"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
   "timeLimitSec": 480,
   "assets": {},
   "payload": {
@@ -21,11 +34,19 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "디지털카메라는 렌즈를 지난 빛이 이미지 센서에 닿으면, 그 빛의 분포를 수많은 화소의 배열로 받아들여 한 장의 사진을 만든다. 화소는 닿은 빛의 세기에 따라 전기적 신호를 내보내므로, 같은 장면도 어느 위치에 빛이 더 많이 닿았는지에 따라 서로 다른 값으로 기록된다. 만약 여러 화소를 한 묶음처럼 쓰면 약한 빛도 더 안정적으로 검출할 수 있고, 빨강·초록·파랑에 반응하는 화소를 함께 배치하면 색 정보도 구별할 수 있다. 이렇게 화소가 얼마나 촘촘하게 놓였는지는 해상도와 연결되는데, 같은 면적에 더 많은 화소가 들어갈수록 더 세밀한 이미지를 얻기 쉽다. 다만 화소 수가 많아진다고 해서 곧바로 사진이 완성되는 것은 아니며, 각 화소가 받아들인 빛을 다시 읽어 낼 장치가 함께 마련되어야 한다. 그래서 이미지 센서의 성능을 이해하려면 빛을 받아들이는 화소 구조와 그 값을 처리하는 다음 단계를 함께 보아야 한다."
+          "text": "디지털카메라는 렌즈를 지난 빛이 이미지 센서에 피사체의 상을 맺게 한 뒤 그 상을 이미지 데이터로 바꾸어 사진으로 저장한다. 이미지 센서에서 상이 맺히는 곳은 아주 작은 화소가 촘촘히 배열된 화소 평면이며, 여기서 각 화소는 자기 자리에 닿은 빛을 따로 받아들인다. 피사체의 상이 이 평면에 맺히면 각 위치에서 얻은 빛의 밝기가 한 장의 사진을 이루는 데이터 배열로 남는다."
         },
         {
           "id": "p2",
-          "text": "화소가 내보낸 전기 신호를 사진 데이터로 바꾸는 장치가 ADC인데, 이 장치는 입력된 전압을 일정한 비트 수의 디지털 값으로 나누어 표현한다. 데이터 폭이 넓을수록 밝기를 더 많은 단계로 잘라 담을 수 있으므로, 같은 장면에서도 명암의 차이를 더 세밀하게 남길 수 있다. 그러나 ADC가 한 번 값을 바꾸는 데는 변환 시간이 필요하므로, 화소 수가 매우 많은 센서에 화소마다 ADC를 하나씩 두기는 현실적으로 어렵다. 그래서 실제 센서에서는 여러 화소를 블록으로 묶어 다중 스위치를 거쳐 차례대로 ADC로 보내고, 이렇게 바뀐 블록 데이터를 다시 이어 붙여 한 장의 사진을 만든다. 이 방식은 적은 수의 ADC로도 전체 화면을 읽을 수 있다는 장점이 있지만, 블록을 여러 번 나누어 보내야 하므로 전체 변환 시간은 그만큼 길어진다. 결국 디지털카메라는 화소가 빛을 얼마나 세밀하게 받는지뿐 아니라, 그 많은 신호를 어떤 순서와 속도로 데이터로 바꾸는지까지 맞물려야 또렷한 사진을 얻을 수 있다."
+          "text": "화소는 빛의 세기에 비례하는 전압을 내보내는 소자이므로, 같은 장면도 어디에 빛이 더 많이 닿았는지에 따라 서로 다른 값으로 기록된다. 같은 반응을 하는 화소를 여러 개 묶으면 하나만 쓸 때보다 약한 빛도 더 안정적으로 검출할 수 있다. 빨강, 초록, 파랑에 반응하는 화소를 함께 묶으면 색깔의 차이도 구별할 수 있다. 또 화소 평면의 면적에 비해 화소 수가 많을수록 해상도가 높아져 더 세밀한 이미지를 얻기 쉽다."
+        },
+        {
+          "id": "p3",
+          "text": "화소가 낸 전압을 실제 데이터로 바꾸려면 아날로그 디지털 변환기, 곧 ADC가 필요하다. ADC는 입력 전압을 일정한 비트 수의 디지털 값으로 나누어 표현하며, 이 비트 수를 데이터 폭이라고 한다. 데이터 폭이 넓을수록 밝기를 더 많은 단계로 잘라 담을 수 있어 명암 차이를 더 세밀하게 남길 수 있다. 예를 들어 같은 밝기 구간도 데이터 폭이 커지면 더 잘게 나누어 기록할 수 있으므로, 사진 속 어두운 부분과 밝은 부분의 차이도 더 풍부하게 담긴다. 하지만 ADC가 전압을 값으로 바꾸는 데는 변환 시간이 걸리므로, 화소가 매우 많은 센서에 ADC를 화소마다 하나씩 두기는 어렵다. 그래서 이미지 센서의 성능은 화소가 빛을 얼마나 잘 받는지뿐 아니라 그 신호를 얼마나 정교하게 데이터로 바꾸는지까지 함께 보아야 한다."
+        },
+        {
+          "id": "p4",
+          "text": "이미지 센서 안에 화소 수만큼 ADC를 넣기 어려울 때는 다중 스위치로 화소들을 여러 블록으로 나누어 차례대로 ADC에 보낸다. 이렇게 블록 단위로 바꾼 데이터를 다시 순서대로 모으면 한 장의 사진이 완성된다. 적은 수의 ADC로도 전체 화면을 읽을 수 있다는 점은 장점이지만, 블록을 여러 번 나누어 보내는 만큼 전체 변환 시간은 그만큼 길어진다. 결국 또렷한 사진을 얻으려면 화소의 배열과 민감도, 그리고 신호를 읽어 내는 순서와 속도가 함께 맞물려야 한다."
         }
       ]
     },
@@ -33,280 +54,973 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 68 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 68
+              }
+            ]
+          },
           "question": {
-            "prompt": "첫 문장을 보면 사진은 어떤 출발점에서 만들어지기 시작하나?",
+            "prompt": "첫 문장에서 사진은 어떤 출발점에서 만들어지기 시작하나?",
             "choices": [
-              { "id": "A", "text": "렌즈를 지난 빛이 이미지 센서의 화소 배열에 닿는 출발점" },
-              { "id": "B", "text": "메모리 카드가 사진 파일 이름을 만드는 출발점" },
-              { "id": "C", "text": "플래시가 강한 빛을 밖으로 쏘아 내는 출발점" },
-              { "id": "D", "text": "셔터 소리가 장면의 밝기를 고정하는 출발점" }
+              {
+                "id": "A",
+                "text": "렌즈를 지난 빛이 이미지 센서에 상을 맺는 출발점"
+              },
+              {
+                "id": "B",
+                "text": "메모리 카드가 파일 이름을 붙이는 출발점"
+              },
+              {
+                "id": "C",
+                "text": "플래시가 장면의 어둠을 지우는 출발점"
+              },
+              {
+                "id": "D",
+                "text": "셔터 소리가 밝기를 고정하는 출발점"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 71, "end": 147 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 70,
+                "end": 147
+              }
+            ]
+          },
           "question": {
-            "prompt": "그 출발점 뒤에 같은 장면이 서로 다른 값으로 남는 이유는 무엇인가?",
+            "prompt": "그 출발점 뒤에 상이 맺히는 자리는 어떤 구조로 설명되나?",
             "choices": [
-              { "id": "A", "text": "위치마다 닿는 빛의 세기가 달라 화소 신호가 달라지기 때문" },
-              { "id": "B", "text": "렌즈가 모든 화소에 같은 그림을 반복해 주기 때문" },
-              { "id": "C", "text": "센서가 빛의 색만 남기고 밝기는 지우기 때문" },
-              { "id": "D", "text": "화소가 장면의 거리와 상관없이 같은 값을 내기 때문" }
+              {
+                "id": "A",
+                "text": "작은 화소가 촘촘히 놓인 화소 평면으로 설명된다"
+              },
+              {
+                "id": "B",
+                "text": "색종이처럼 넓은 한 장의 필름으로 설명된다"
+              },
+              {
+                "id": "C",
+                "text": "빛을 모두 한곳에 모으는 거울판으로 설명된다"
+              },
+              {
+                "id": "D",
+                "text": "밝기와 상관없는 저장 창고로 설명된다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 150, "end": 234 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 149,
+                "end": 208
+              }
+            ]
+          },
           "question": {
-            "prompt": "앞의 설명에 이어 보면, 여러 화소를 묶고 색별 화소를 함께 두는 까닭은 무엇인가?",
+            "prompt": "그 화소 평면 설명에 이어 각 위치의 빛은 사진 안에서 무엇으로 남게 되나?",
             "choices": [
-              { "id": "A", "text": "약한 빛도 더 잘 잡고 색 정보도 구별하기 위해서" },
-              { "id": "B", "text": "센서 면적을 줄이고 렌즈를 없애기 위해서" },
-              { "id": "C", "text": "밝기 차이를 지우고 같은 값을 만들기 위해서" },
-              { "id": "D", "text": "사진을 바로 저장하고 변환 단계를 줄이기 위해서" }
+              {
+                "id": "A",
+                "text": "밝기를 담은 데이터 배열로 남게 된다"
+              },
+              {
+                "id": "B",
+                "text": "렌즈 바깥의 그림자로 흩어진다"
+              },
+              {
+                "id": "C",
+                "text": "화소와 무관한 소리 정보로 바뀐다"
+              },
+              {
+                "id": "D",
+                "text": "색만 남고 밝기는 모두 사라진다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 237, "end": 309 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 208
+              }
+            ]
+          },
           "question": {
-            "prompt": "그렇다면 화소가 촘촘히 놓인 정도가 해상도와 이어진다는 말은 무엇을 뜻하나?",
+            "prompt": "1문단 전체를 보면 사진의 첫 단계는 무엇으로 묶이나?",
             "choices": [
-              { "id": "A", "text": "같은 면적에 화소가 많을수록 이미지를 더 세밀하게 얻기 쉽다는 뜻" },
-              { "id": "B", "text": "화소가 적을수록 센서가 더 넓은 색을 구별한다는 뜻" },
-              { "id": "C", "text": "해상도는 렌즈 두께만으로 결정된다는 뜻" },
-              { "id": "D", "text": "화소 수가 적어야 빛의 세기를 정확히 나눈다는 뜻" }
+              {
+                "id": "A",
+                "text": "센서의 화소 평면이 빛의 밝기를 데이터 배열로 남기는 단계"
+              },
+              {
+                "id": "B",
+                "text": "메모리 카드가 사진 순서를 다시 섞는 단계"
+              },
+              {
+                "id": "C",
+                "text": "렌즈가 색을 지우고 소리만 남기는 단계"
+              },
+              {
+                "id": "D",
+                "text": "ADC가 블록을 해체해 필름을 만드는 단계"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 312, "end": 387 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 74
+              }
+            ]
+          },
           "question": {
-            "prompt": "하지만 화소 수가 많아져도 사진이 곧바로 완성되지 않는 이유는 무엇인가?",
+            "prompt": "앞에서 빛의 밝기가 배열로 남았다면, 이제 화소는 그 빛을 어떤 값으로 기록하나?",
             "choices": [
-              { "id": "A", "text": "받아들인 빛의 값을 다시 읽어 낼 장치가 따로 필요해서" },
-              { "id": "B", "text": "센서가 빛을 받는 즉시 밝기 차이를 잊어버려서" },
-              { "id": "C", "text": "화소가 많아질수록 색 정보가 자동으로 사라져서" },
-              { "id": "D", "text": "렌즈가 화소 수에 맞게 늘어나지 않아서" }
+              {
+                "id": "A",
+                "text": "빛의 세기에 따라 서로 다른 전압 값으로 기록한다"
+              },
+              {
+                "id": "B",
+                "text": "빛이 닿은 순서를 문자 이름으로 기록한다"
+              },
+              {
+                "id": "C",
+                "text": "장면의 거리를 일정한 길이 값으로 기록한다"
+              },
+              {
+                "id": "D",
+                "text": "렌즈의 두께만 따로 기록한다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 390, "end": 454 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 76,
+                "end": 131
+              }
+            ]
+          },
           "question": {
-            "prompt": "그래서 이미지 센서의 성능을 이해하려면 어떤 두 측면을 함께 봐야 하나?",
+            "prompt": "그렇게 값이 달라지는 상황에서 같은 반응의 화소를 묶는 까닭은 무엇인가?",
             "choices": [
-              { "id": "A", "text": "빛을 받는 화소 구조와 그 값을 처리하는 다음 단계" },
-              { "id": "B", "text": "렌즈의 무게와 사진 파일의 이름 붙이기 방식" },
-              { "id": "C", "text": "셔터 소리와 화면 밝기 조절 버튼의 위치" },
-              { "id": "D", "text": "카메라 외형 색과 배터리 충전 속도" }
+              {
+                "id": "A",
+                "text": "하나만 쓸 때보다 약한 빛도 더 안정적으로 검출하려고"
+              },
+              {
+                "id": "B",
+                "text": "센서 면적을 줄여 색 정보를 없애려고"
+              },
+              {
+                "id": "C",
+                "text": "화소마다 같은 값만 남기려고"
+              },
+              {
+                "id": "D",
+                "text": "ADC 없이 곧바로 저장하려고"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 454 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 133,
+                "end": 177
+              }
+            ]
+          },
           "question": {
-            "prompt": "1문단 전체를 보면 사진의 첫 단계는 무엇으로 정리되나?",
+            "prompt": "약한 빛 검출 설명에 이어 색의 차이는 어떤 화소 묶음에서 구별되나?",
             "choices": [
-              { "id": "A", "text": "센서의 화소 배열이 빛을 받아 서로 다른 값으로 남기는 단계" },
-              { "id": "B", "text": "메모리 카드가 사진 파일을 압축해 저장하는 단계" },
-              { "id": "C", "text": "렌즈가 셔터 시간을 나누어 밝기를 조절하는 단계" },
-              { "id": "D", "text": "ADC가 블록을 다시 묶어 화소를 만드는 단계" }
+              {
+                "id": "A",
+                "text": "빨강, 초록, 파랑에 반응하는 화소를 함께 묶을 때"
+              },
+              {
+                "id": "B",
+                "text": "밝기만 같은 화소 하나만 남길 때"
+              },
+              {
+                "id": "C",
+                "text": "이미지 센서를 렌즈 밖으로 빼낼 때"
+              },
+              {
+                "id": "D",
+                "text": "ADC의 비트 수를 줄일 때"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 77 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 179,
+                "end": 231
+              }
+            ]
+          },
           "question": {
-            "prompt": "이제 화소 신호를 사진 데이터로 바꾸는 장치로 무엇이 소개되나?",
+            "prompt": "이 화소 묶음과 평면 구성을 함께 보면 화소 수가 많을수록 무엇이 높아지나?",
             "choices": [
-              { "id": "A", "text": "입력 전압을 디지털 값으로 나누는 ADC" },
-              { "id": "B", "text": "빛의 방향을 바꾸는 보조 렌즈" },
-              { "id": "C", "text": "센서 표면을 식히는 냉각판" },
-              { "id": "D", "text": "색을 직접 저장하는 메모리 칩" }
+              {
+                "id": "A",
+                "text": "세밀한 이미지를 얻기 쉬운 해상도가 높아진다"
+              },
+              {
+                "id": "B",
+                "text": "빛의 색 차이를 모두 지우는 비율이 높아진다"
+              },
+              {
+                "id": "C",
+                "text": "센서 없이 사진을 만드는 가능성이 높아진다"
+              },
+              {
+                "id": "D",
+                "text": "전압을 글자로 적는 속도가 높아진다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 80, "end": 149 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 231
+              }
+            ]
+          },
           "question": {
-            "prompt": "그 장치의 데이터 폭이 넓어지면 밝기 표현은 어떻게 달라지나?",
+            "prompt": "2문단 전체를 보면 화소 단계의 핵심은 무엇으로 정리되나?",
             "choices": [
-              { "id": "A", "text": "밝기를 더 많은 단계로 나눠 명암 차이를 더 세밀하게 남긴다" },
-              { "id": "B", "text": "센서가 받아들인 모든 색 정보를 하나로 합친다" },
-              { "id": "C", "text": "화소 수를 줄여 화면을 단순하게 만든다" },
-              { "id": "D", "text": "변환 시간을 없애 사진을 즉시 완성한다" }
+              {
+                "id": "A",
+                "text": "화소가 빛을 값으로 받고 묶음과 해상도로 성능 차이를 만든다는 점"
+              },
+              {
+                "id": "B",
+                "text": "렌즈가 화소 대신 밝기를 모두 계산한다는 점"
+              },
+              {
+                "id": "C",
+                "text": "색 정보는 필요 없고 전압만 남는다는 점"
+              },
+              {
+                "id": "D",
+                "text": "화소 수가 줄수록 사진이 세밀해진다는 점"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 152, "end": 231 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 48
+              }
+            ]
+          },
           "question": {
-            "prompt": "하지만 화소마다 ADC를 하나씩 두기 어려운 까닭은 무엇인가?",
+            "prompt": "이제 화소가 낸 전압을 실제 데이터로 바꾸려면 무엇이 필요하나?",
             "choices": [
-              { "id": "A", "text": "변환 시간이 필요하고 화소 수가 너무 많아 현실적으로 어렵기 때문" },
-              { "id": "B", "text": "ADC가 색 정보만 읽고 밝기를 읽지 못하기 때문" },
-              { "id": "C", "text": "화소가 많을수록 렌즈가 센서에서 멀어지기 때문" },
-              { "id": "D", "text": "센서가 전기 신호를 만들지 못하게 되기 때문" }
+              {
+                "id": "A",
+                "text": "아날로그 전압을 바꾸는 ADC가 필요하다"
+              },
+              {
+                "id": "B",
+                "text": "렌즈를 두 장으로 겹치는 장치가 필요하다"
+              },
+              {
+                "id": "C",
+                "text": "색 화소만 골라 버리는 필터가 필요하다"
+              },
+              {
+                "id": "D",
+                "text": "메모리 카드의 이름표가 필요하다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 234, "end": 323 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 50,
+                "end": 109
+              }
+            ]
+          },
           "question": {
-            "prompt": "그래서 실제 센서에서는 화소 신호를 어떤 경로로 처리하나?",
+            "prompt": "그 ADC는 입력 전압을 어떤 기준으로 나누어 표현하나?",
             "choices": [
-              { "id": "A", "text": "화소를 블록으로 묶어 다중 스위치를 거쳐 차례대로 ADC로 보낸다" },
-              { "id": "B", "text": "모든 화소를 한 번에 센서 밖으로 내보내 손으로 정리한다" },
-              { "id": "C", "text": "렌즈가 밝기를 고른 뒤 메모리 카드에 직접 적어 넣는다" },
-              { "id": "D", "text": "색 화소만 남기고 나머지 화소는 바로 버린다" }
+              {
+                "id": "A",
+                "text": "일정한 비트 수의 디지털 값으로 나누어 표현한다"
+              },
+              {
+                "id": "B",
+                "text": "장면의 움직임을 음성 높낮이로 표현한다"
+              },
+              {
+                "id": "C",
+                "text": "렌즈 크기를 숫자 대신 색으로 표현한다"
+              },
+              {
+                "id": "D",
+                "text": "화소 개수를 문자 기호만으로 표현한다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 326, "end": 407 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 111,
+                "end": 168
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 방식의 장점과 함께 따라오는 부담은 무엇인가?",
+            "prompt": "그 기준인 데이터 폭이 넓어질수록 밝기 표현은 어떻게 달라지나?",
             "choices": [
-              { "id": "A", "text": "적은 수의 ADC로 읽을 수 있지만 전체 변환 시간은 길어진다" },
-              { "id": "B", "text": "명암은 선명해지지만 색 정보는 전부 사라진다" },
-              { "id": "C", "text": "센서 면적은 넓어지지만 화소 수는 줄어든다" },
-              { "id": "D", "text": "파일 저장은 쉬워지지만 렌즈는 쓸 수 없어진다" }
+              {
+                "id": "A",
+                "text": "더 많은 단계로 잘라 명암 차이를 더 세밀하게 남긴다"
+              },
+              {
+                "id": "B",
+                "text": "밝기 차이를 줄여 모든 부분을 비슷하게 만든다"
+              },
+              {
+                "id": "C",
+                "text": "색 정보만 커지고 밝기는 사라진다"
+              },
+              {
+                "id": "D",
+                "text": "변환 시간을 없애 사진을 바로 완성한다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s13",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 410, "end": 499 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 170,
+                "end": 252
+              }
+            ]
+          },
           "question": {
-            "prompt": "마지막 문장은 또렷한 사진을 얻으려면 무엇까지 맞물려야 한다고 정리하나?",
+            "prompt": "바로 앞 설명을 예로 풀면 데이터 폭이 큰 경우 사진의 어느 차이를 더 잘 담나?",
             "choices": [
-              { "id": "A", "text": "빛을 받는 세밀함과 신호를 바꾸는 순서와 속도까지" },
-              { "id": "B", "text": "센서 색상과 카메라 몸체 재질까지" },
-              { "id": "C", "text": "셔터 소리와 화면 크기까지" },
-              { "id": "D", "text": "메모리 카드 용량과 렌즈 길이까지" }
+              {
+                "id": "A",
+                "text": "어두운 부분과 밝은 부분 사이의 명암 차이를 더 풍부하게 담는다"
+              },
+              {
+                "id": "B",
+                "text": "화소 수를 줄여 같은 장면을 단순하게 만든다"
+              },
+              {
+                "id": "C",
+                "text": "이미지 센서 없이도 사진을 만들게 한다"
+              },
+              {
+                "id": "D",
+                "text": "색을 하나만 남겨 화면을 지운다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s14",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 499 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 254,
+                "end": 326
+              }
+            ]
+          },
           "question": {
-            "prompt": "2문단 전체를 읽으면 화소 값이 사진이 되는 과정은 무엇으로 묶이나?",
+            "prompt": "하지만 이렇게 세밀히 나누어도 화소마다 ADC 하나씩 두기 어려운 이유는 무엇인가?",
             "choices": [
-              { "id": "A", "text": "ADC와 블록 처리로 신호를 차례로 바꾸어 사진으로 잇는 과정" },
-              { "id": "B", "text": "렌즈와 셔터만으로 밝기를 고정해 바로 저장하는 과정" },
-              { "id": "C", "text": "색 화소를 줄여 메모리 사용량을 낮추는 과정" },
-              { "id": "D", "text": "센서 크기를 늘려 변환 단계를 없애는 과정" }
+              {
+                "id": "A",
+                "text": "ADC가 변환 시간을 필요로 하고 화소 수가 너무 많기 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "화소가 전압을 내보내지 못하게 되기 때문이다"
+              },
+              {
+                "id": "C",
+                "text": "데이터 폭이 넓어지면 색 정보를 없애기 때문이다"
+              },
+              {
+                "id": "D",
+                "text": "이미지 센서가 렌즈와 떨어져 있기 때문이다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 328,
+                "end": 402
+              }
+            ]
+          },
+          "question": {
+            "prompt": "그래서 센서의 성능을 볼 때 화소와 함께 무엇까지 같이 보아야 하나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "신호를 얼마나 정교하게 데이터로 바꾸는지까지 함께 봐야 한다"
+              },
+              {
+                "id": "B",
+                "text": "카메라 바깥 색상과 손잡이 크기만 보면 된다"
+              },
+              {
+                "id": "C",
+                "text": "메모리 카드 이름과 배터리 모양만 보면 된다"
+              },
+              {
+                "id": "D",
+                "text": "플래시 밝기만 높으면 다른 요소는 필요 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 402
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단 전체를 보면 화소 값이 사진 데이터가 되는 과정은 무엇으로 묶이나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "ADC가 전압을 단계화하고 그 성능 차이가 명암 표현을 좌우하는 과정"
+              },
+              {
+                "id": "B",
+                "text": "렌즈가 화소를 대신해 밝기를 직접 저장하는 과정"
+              },
+              {
+                "id": "C",
+                "text": "색 정보만 남기고 밝기를 버리는 과정"
+              },
+              {
+                "id": "D",
+                "text": "센서 바깥에서 손으로 화소를 다시 배열하는 과정"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 70
+              }
+            ]
+          },
+          "question": {
+            "prompt": "앞에서 화소마다 ADC를 두기 어렵다고 했으니, 실제 센서는 연결을 어떻게 처리하나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다중 스위치로 화소를 여러 블록으로 나누어 차례대로 보낸다"
+              },
+              {
+                "id": "B",
+                "text": "모든 화소를 한꺼번에 렌즈 뒤로 모은다"
+              },
+              {
+                "id": "C",
+                "text": "화소 일부를 아예 없애고 빈칸으로 둔다"
+              },
+              {
+                "id": "D",
+                "text": "밝기 차이를 버리고 색만 남긴다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 72,
+                "end": 116
+              }
+            ]
+          },
+          "question": {
+            "prompt": "그렇게 바뀐 블록 데이터를 다시 모으면 무엇이 완성되나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 장의 사진이 완성된다"
+              },
+              {
+                "id": "B",
+                "text": "렌즈의 초점 거리가 완성된다"
+              },
+              {
+                "id": "C",
+                "text": "화소 평면이 새로 만들어진다"
+              },
+              {
+                "id": "D",
+                "text": "빛의 세기가 모두 하나로 합쳐진다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 118,
+                "end": 194
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 방식의 장점 뒤에 따라오는 부담은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "적은 ADC로도 읽지만 전체 변환 시간은 길어진다"
+              },
+              {
+                "id": "B",
+                "text": "화소 수가 줄어들어 색을 구별할 수 없어진다"
+              },
+              {
+                "id": "C",
+                "text": "렌즈가 필요 없어져 센서가 멈춘다"
+              },
+              {
+                "id": "D",
+                "text": "데이터 폭이 좁아져 모든 부분이 검게 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 196,
+                "end": 257
+              }
+            ]
+          },
+          "question": {
+            "prompt": "결국 또렷한 사진을 얻으려면 무엇들이 함께 맞물려야 하나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화소 배열과 민감도, 신호를 읽는 순서와 속도가 함께 맞물려야 한다"
+              },
+              {
+                "id": "B",
+                "text": "렌즈 길이와 손잡이 색만 맞으면 된다"
+              },
+              {
+                "id": "C",
+                "text": "화소를 줄이고 변환 단계를 없애면 된다"
+              },
+              {
+                "id": "D",
+                "text": "ADC를 쓰지 않고 밝기를 추측하면 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 257
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단 전체를 보면 실제 센서의 마무리 단계는 무엇으로 정리되나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "블록 처리와 재조합으로 사진을 완성하되 속도 부담까지 함께 떠안는 단계"
+              },
+              {
+                "id": "B",
+                "text": "화소를 버리고 렌즈만 남겨 화면을 만드는 단계"
+              },
+              {
+                "id": "C",
+                "text": "빛을 전혀 읽지 않고 결과를 추정하는 단계"
+              },
+              {
+                "id": "D",
+                "text": "색 정보만 모아 밝기를 없애는 단계"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "센서가 빛 분포를 받는다" },
-        { "id": "c2", "text": "화소마다 값이 다르게 남는다" },
-        { "id": "c3", "text": "묶인 화소가 약한 빛도 잡는다" },
-        { "id": "c4", "text": "해상도가 세밀함과 이어진다" },
-        { "id": "c5", "text": "값을 읽을 장치도 필요하다" },
-        { "id": "c6", "text": "ADC가 전압을 데이터로 바꾼다" },
-        { "id": "c7", "text": "블록 데이터를 이어 사진을 만든다" },
-        { "id": "c8", "text": "순서와 속도가 선명함을 좌우한다" }
+        {
+          "id": "c1",
+          "text": "센서에 상이 맺힌다"
+        },
+        {
+          "id": "c2",
+          "text": "화소 평면이 빛을 받는다"
+        },
+        {
+          "id": "c3",
+          "text": "밝기가 데이터로 남는다"
+        },
+        {
+          "id": "c4",
+          "text": "화소 묶음이 약한 빛을 잡는다"
+        },
+        {
+          "id": "c5",
+          "text": "해상도와 색 구별이 갈린다"
+        },
+        {
+          "id": "c6",
+          "text": "ADC가 전압을 값으로 바꾼다"
+        },
+        {
+          "id": "c7",
+          "text": "블록 처리로 사진을 만든다"
+        },
+        {
+          "id": "c8",
+          "text": "순서와 속도가 선명함을 좌우한다"
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6",
+        "c7",
+        "c8"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "렌즈를 지난 빛이 처음 닿는 장치는 무엇이었나?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 18, "end": 23 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "렌즈를 지난 빛이 먼저 닿는 장치는 무엇이었나?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 18,
+              "end": 23
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "약한 빛을 더 안정적으로 검출하려고 한꺼번에 쓰는 대상은 무엇이었나?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 153, "end": 165 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "상이 맺히는 촘촘한 자리를 가리킨 말은 무엇이었나?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 107,
+              "end": 111
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "화소가 촘촘히 놓인 정도와 이어지는 성능 척도는 무엇이었나?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 260, "end": 262 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "화소 수가 많을수록 높아진다고 한 성능 척도는 무엇이었나?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 206,
+              "end": 208
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "전기 신호를 사진 데이터로 바꾸는 장치는 무엇이었나?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 31, "end": 33 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "화소의 전압을 실제 데이터로 바꾸는 장치는 무엇이었나?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "실제 센서가 여러 화소를 처리하는 두 단계는 무엇이었나?",
+          "prompt": "입력 전압을 몇 비트로 나눌지를 가리킨 말은 무엇이었나?",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 254, "end": 260 },
-            { "paragraphId": "p2", "start": 273, "end": 285 }
+            {
+              "paragraphId": "p3",
+              "start": 98,
+              "end": 102
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q6",
-          "prompt": "블록을 여러 번 나누어 보내며 길어지는 것은 무엇이었나?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 390, "end": 397 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "화소들을 여러 블록으로 나누어 보내는 장치는 무엇이었나?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 32,
+              "end": 37
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         }
