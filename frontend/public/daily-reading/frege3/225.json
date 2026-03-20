@@ -55,7 +55,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 79
+                "end": 74
               }
             ]
           },
@@ -93,8 +93,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 80,
-                "end": 161
+                "start": 75,
+                "end": 144
               }
             ]
           },
@@ -132,8 +132,8 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 162,
-                "end": 273
+                "start": 145,
+                "end": 231
               }
             ]
           },
@@ -172,7 +172,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 273
+                "end": 231
               }
             ]
           },
@@ -211,7 +211,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 36
+                "end": 30
               }
             ]
           },
@@ -249,8 +249,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 37,
-                "end": 107
+                "start": 31,
+                "end": 87
               }
             ]
           },
@@ -288,8 +288,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 108,
-                "end": 187
+                "start": 88,
+                "end": 159
               }
             ]
           },
@@ -327,8 +327,8 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 188,
-                "end": 265
+                "start": 160,
+                "end": 215
               }
             ]
           },
@@ -367,7 +367,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 265
+                "end": 215
               }
             ]
           },
@@ -406,7 +406,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 90
+                "end": 39
               }
             ]
           },
@@ -444,8 +444,8 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 91,
-                "end": 183
+                "start": 40,
+                "end": 133
               }
             ]
           },
@@ -483,8 +483,8 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 184,
-                "end": 281
+                "start": 134,
+                "end": 202
               }
             ]
           },
@@ -522,8 +522,8 @@
             "ranges": [
               {
                 "paragraphId": "p3",
-                "start": 282,
-                "end": 356
+                "start": 203,
+                "end": 256
               }
             ]
           },
@@ -562,7 +562,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 356
+                "end": 256
               }
             ]
           },
@@ -647,69 +647,105 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "플라시보 효과가 단순한 착각이 아닌 이유는 무엇인가요?",
-          "answer": "뇌에서 실제로 신경 전달 물질이 분비되는 생리적 변화를 동반하기 때문에",
-          "answerMatchMode": "ANY",
+          "prompt": "플라시보 효과가 실제 생리 변화와 연결된다고 설명하는 대목은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 145,
+              "end": 231
+            }
+          ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "노시보 효과란 어떤 현상인가요?",
-          "answer": "해롭지 않은 물질을 해롭다고 믿을 때 실제로 신체에 부정적인 증상이 나타나는 현상",
-          "answerMatchMode": "ANY",
+          "prompt": "노시보 효과의 뜻을 바로 설명하는 대목은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 87
+            }
+          ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "플라시보 효과와 노시보 효과가 공통으로 보여 주는 사실은 무엇인가요?",
-          "answer": "인간의 믿음과 기대가 신체 기능에 직접 영향을 줄 수 있다는 것",
-          "answerMatchMode": "ANY",
+          "prompt": "플라시보와 노시보가 함께 보여 주는 사실을 정리한 대목은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 160,
+              "end": 215
+            }
+          ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "의사가 환자에게 부정적 정보를 지나치게 강조하면 어떤 영향이 생기나요?",
-          "answer": "환자의 회복에 방해가 될 수 있다.",
-          "answerMatchMode": "ANY",
+          "prompt": "부정적인 정보를 지나치게 강조하면 회복에 방해가 될 수 있다고 설명하는 대목은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 133
+            }
+          ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "의료 윤리에서 소통 방식과 관련해 중요하게 다루는 원칙은 무엇인가요?",
-          "answer": "사실을 전달하되 불필요한 불안을 유발하지 않도록 소통하는 것",
-          "answerMatchMode": "ANY",
+          "prompt": "의료 윤리에서 불필요한 불안을 줄이는 소통이 중요하다고 설명하는 대목은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 134,
+              "end": 202
+            }
+          ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q6",
-          "prompt": "플라시보 효과의 예로 지문에서 든 구체적인 사례는 무엇인가요?",
-          "answer": "설탕으로 만든 알약을 진짜 약이라고 알려 주었을 때 통증이 줄거나 상태가 나아지는 경험",
-          "answerMatchMode": "ANY",
+          "prompt": "가짜 약을 진짜 약처럼 알려 주었을 때 상태가 나아지는 사례를 보여 주는 대목은 어디인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 75,
+              "end": 144
+            }
+          ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
-          "revealOnWrong": true
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         }
       ]
     }
