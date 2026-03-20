@@ -25,6 +25,7 @@ function WisdomPostDetailPage() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
+  const [error, setError] = useState("");
 
   // Like state
   const [likeCount, setLikeCount] = useState(0);
@@ -44,7 +45,14 @@ function WisdomPostDetailPage() {
         setIsLiked(data.isLikedByMe || false);
         setComments(data.comments || []);
       })
-      .catch(() => setPost(null))
+      .catch((e) => {
+        if (e.status === 403) {
+          setError("같은 주제에 글을 작성해야 다른 사람의 글을 볼 수 있습니다.");
+        } else {
+          setError(e.message || "글을 불러올 수 없습니다.");
+        }
+        setPost(null);
+      })
       .finally(() => setLoading(false));
   }, [postId]);
 
@@ -130,7 +138,7 @@ function WisdomPostDetailPage() {
     return (
       <div className="wisdom">
         <div className="wis-detail">
-          <div className="wis-empty">글을 찾을 수 없습니다.</div>
+          <div className="wis-empty">{error || "글을 찾을 수 없습니다."}</div>
           <Link to="/writing" className="wis-btn" style={{ margin: "20px auto", display: "inline-flex" }}>
             목록으로
           </Link>
@@ -161,15 +169,21 @@ function WisdomPostDetailPage() {
           </div>
         </div>
 
-        {post.submissionType === "manuscript" && post.content && (
-          <div className="wis-detail-content">
-            <ManuscriptGrid
-              value={post.content}
-              readOnly
-              cols={GRID_CONFIG[post.levelId]?.cols || 20}
-              rows={GRID_CONFIG[post.levelId]?.rows || 25}
-            />
-          </div>
+        {post.submissionType === "manuscript" && (
+          post.content ? (
+            <div className="wis-detail-content">
+              <ManuscriptGrid
+                value={post.content}
+                readOnly
+                cols={GRID_CONFIG[post.levelId]?.cols || 20}
+                rows={GRID_CONFIG[post.levelId]?.rows || 25}
+              />
+            </div>
+          ) : (
+            <div className="wis-detail-content">
+              <div className="wis-empty">내용이 없습니다.</div>
+            </div>
+          )
         )}
 
         {post.attachments && post.attachments.length > 0 && (
