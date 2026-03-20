@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import { API_BASE } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
+import ManuscriptReview from "../components/ManuscriptReview";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/wisdom.css";
 
@@ -26,7 +27,7 @@ function AdminWisdomDetailPage() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [comment, setComment] = useState("");
-  const [correction, setCorrection] = useState("");
+  const [annotations, setAnnotations] = useState([]);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
 
@@ -36,7 +37,15 @@ function AdminWisdomDetailPage() {
         setPost(data);
         if (data.feedback) {
           setComment(data.feedback.comment || "");
-          setCorrection(data.feedback.correction || "");
+          // correction 파싱
+          if (data.feedback.correction) {
+            try {
+              const parsed = JSON.parse(data.feedback.correction);
+              if (Array.isArray(parsed)) setAnnotations(parsed);
+            } catch {
+              // 레거시 텍스트 — 무시
+            }
+          }
         }
       })
       .catch(() => setPost(null))
@@ -44,13 +53,23 @@ function AdminWisdomDetailPage() {
   }, [postId]);
 
   const handleSave = async () => {
-    if (!comment.trim()) { setMsg("코멘트를 입력해주세요."); return; }
+    if (!comment.trim() && annotations.length === 0) {
+      setMsg("코멘트 또는 첨삭 어노테이션을 입력해주세요.");
+      return;
+    }
+    // 빈 코멘트 어노테이션 확인
+    const emptyAnn = annotations.find((a) => !a.comment.trim());
+    if (emptyAnn) {
+      setMsg(`${emptyAnn.id}번 첨삭 코멘트를 입력해주세요.`);
+      return;
+    }
     setSaving(true);
     setMsg("");
     try {
       await apiPost(`/v1/admin/wisdom/posts/${postId}/feedback`, {
-        comment,
-        correction: correction || null,
+        comment: comment || "",
+        correction:
+          annotations.length > 0 ? JSON.stringify(annotations) : null,
       });
       setMsg("저장되었습니다.");
       const updated = await apiGet(`/v1/admin/wisdom/posts/${postId}`);
@@ -104,6 +123,8 @@ function AdminWisdomDetailPage() {
   }
 
   const comments = post.comments || [];
+  const gridCols = GRID_CONFIG[post.level_id]?.cols || 20;
+  const gridRows = GRID_CONFIG[post.level_id]?.rows || 25;
 
   return (
     <AdminLayout>
@@ -131,13 +152,33 @@ function AdminWisdomDetailPage() {
 
             {post.submission_type === "manuscript" && post.content && (
               <div className="admin-card" style={{ marginBottom: 24 }}>
-                <h2>원고지 내용</h2>
+                <h2>원고지 첨삭</h2>
+                <p style={{ padding: "0 16px", fontSize: 13, color: "#7b6a62" }}>
+                  셀을 드래그하여 첨삭 영역을 선택하세요. 선택 후 아래 줄에 코멘트를 입력합니다.
+                </p>
+                <div style={{ padding: 16 }}>
+                  <ManuscriptReview
+                    value={post.content}
+                    cols={gridCols}
+                    rows={gridRows}
+                    annotations={annotations}
+                    onAnnotationsChange={setAnnotations}
+                    readOnly={false}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* 원고지가 아닌 경우 기존 ManuscriptGrid 표시 */}
+            {post.submission_type !== "manuscript" && post.content && (
+              <div className="admin-card" style={{ marginBottom: 24 }}>
+                <h2>내용</h2>
                 <div style={{ padding: 16 }}>
                   <ManuscriptGrid
                     value={post.content}
                     readOnly
-                    cols={GRID_CONFIG[post.level_id]?.cols || 20}
-                    rows={GRID_CONFIG[post.level_id]?.rows || 25}
+                    cols={gridCols}
+                    rows={gridRows}
                   />
                 </div>
               </div>
@@ -190,29 +231,20 @@ function AdminWisdomDetailPage() {
             )}
 
             <div className="admin-card">
-              <h2>첨삭 / 코멘트</h2>
+              <h2>코멘트</h2>
               <div className="wis-admin-feedback-form" style={{ padding: "0 16px 16px" }}>
                 <div className="wis-form-group">
-                  <label>코멘트 (필수)</label>
+                  <label>코멘트 (선택)</label>
                   <textarea
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    placeholder="첨삭 코멘트를 작성하세요..."
-                  />
-                </div>
-                <div className="wis-form-group">
-                  <label>교정 텍스트 (선택)</label>
-                  <textarea
-                    value={correction}
-                    onChange={(e) => setCorrection(e.target.value)}
-                    placeholder="교정이 필요한 경우 작성하세요..."
-                    style={{ minHeight: 80 }}
+                    placeholder="전반적인 코멘트를 작성하세요..."
                   />
                 </div>
 
                 {msg && (
                   <p style={{
-                    color: msg.includes("실패") ? "#e74c3c" : "#6da475",
+                    color: msg.includes("실패") || msg.includes("입력") ? "#e74c3c" : "#6da475",
                     fontSize: 14,
                     marginBottom: 12,
                   }}>
@@ -220,9 +252,18 @@ function AdminWisdomDetailPage() {
                   </p>
                 )}
 
-                <button className="admin-action" onClick={handleSave} disabled={saving}>
-                  {saving ? "저장 중..." : post.feedback ? "수정 저장" : "피드백 저장"}
-                </button>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  <button className="admin-action" onClick={handleSave} disabled={saving}>
+                    {saving ? "저장 중..." : post.feedback ? "수정 저장" : "피드백 저장"}
+                  </button>
+                  <button
+                    className="admin-action"
+                    style={{ background: "#8e44ad", opacity: 0.6, cursor: "not-allowed" }}
+                    disabled
+                  >
+                    AI첨삭...
+                  </button>
+                </div>
               </div>
             </div>
       </section>

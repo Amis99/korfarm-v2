@@ -294,7 +294,7 @@ data class CreateWisdomPostRequest(
 )
 
 data class AdminWisdomFeedbackCreateRequest(
-    @field:NotBlank val comment: String,
+    val comment: String = "",
     val correction: String? = null
 )
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiDelete, API_BASE, TOKEN_KEY } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
+import ManuscriptReview from "../components/ManuscriptReview";
 import "../styles/wisdom.css";
 
 const GRID_CONFIG = {
@@ -17,6 +18,27 @@ const GRID_CONFIG = {
   wittgenstein1: { cols: 20, rows: 25 },
   wittgenstein2: { cols: 20, rows: 25 },
   wittgenstein3: { cols: 20, rows: 25 },
+};
+
+// 어노테이션 파싱 유틸
+const parseAnnotations = (correction) => {
+  if (!correction) return [];
+  try {
+    const parsed = JSON.parse(correction);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
+
+const isLegacyCorrection = (correction) => {
+  if (!correction) return false;
+  try {
+    JSON.parse(correction);
+    return false;
+  } catch {
+    return true;
+  }
 };
 
 function WisdomPostDetailPage() {
@@ -147,6 +169,14 @@ function WisdomPostDetailPage() {
     );
   }
 
+  // 피드백 어노테이션 파싱
+  const feedbackAnnotations = post.feedback
+    ? parseAnnotations(post.feedback.correction)
+    : [];
+  const hasLegacyCorrection = post.feedback
+    ? isLegacyCorrection(post.feedback.correction)
+    : false;
+
   return (
     <div className="wisdom">
       <div className="wis-topbar">
@@ -172,12 +202,22 @@ function WisdomPostDetailPage() {
         {post.submissionType === "manuscript" && (
           post.content ? (
             <div className="wis-detail-content">
-              <ManuscriptGrid
-                value={post.content}
-                readOnly
-                cols={GRID_CONFIG[post.levelId]?.cols || 20}
-                rows={GRID_CONFIG[post.levelId]?.rows || 25}
-              />
+              {feedbackAnnotations.length > 0 ? (
+                <ManuscriptReview
+                  value={post.content}
+                  cols={GRID_CONFIG[post.levelId]?.cols || 20}
+                  rows={GRID_CONFIG[post.levelId]?.rows || 25}
+                  annotations={feedbackAnnotations}
+                  readOnly
+                />
+              ) : (
+                <ManuscriptGrid
+                  value={post.content}
+                  readOnly
+                  cols={GRID_CONFIG[post.levelId]?.cols || 20}
+                  rows={GRID_CONFIG[post.levelId]?.rows || 25}
+                />
+              )}
             </div>
           ) : (
             <div className="wis-detail-content">
@@ -234,12 +274,22 @@ function WisdomPostDetailPage() {
               <span className="material-symbols-outlined">rate_review</span>
               선생님 피드백
             </h3>
-            <div className="wis-feedback-comment">{post.feedback.comment}</div>
-            {post.feedback.correction && (
+            {/* 일반 코멘트 (있을 때만) */}
+            {post.feedback.comment && (
+              <div className="wis-feedback-comment">{post.feedback.comment}</div>
+            )}
+            {/* 레거시 교정 텍스트 (어노테이션이 아닌 경우만) */}
+            {hasLegacyCorrection && (
               <>
                 <div className="wis-feedback-correction-label">교정 내용</div>
                 <div className="wis-feedback-correction">{post.feedback.correction}</div>
               </>
+            )}
+            {/* 어노테이션이 있는 경우 안내 */}
+            {feedbackAnnotations.length > 0 && (
+              <p style={{ fontSize: 13, color: "#7b6a62", margin: "8px 0 0" }}>
+                위 원고지에서 빨간 밑줄 또는 번호를 클릭하면 첨삭 내용을 확인할 수 있습니다.
+              </p>
             )}
             <div className="wis-feedback-meta">
               {post.feedback.reviewerName && <span>첨삭자: {post.feedback.reviewerName}</span>}

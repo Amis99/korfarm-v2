@@ -2,6 +2,7 @@
 
 .ms-wrapper {
   width: 100%;
+  position: relative;
 }
 
 .ms-grid {
@@ -39,6 +40,7 @@
 
 .ms-textarea-hidden {
   position: absolute;
+  top: 0;
   left: -9999px;
   width: 1px;
   height: 1px;
@@ -131,12 +133,176 @@
   border-color: #e74c3c;
 }
 
+/* ===== 첨삭 리뷰 모드 (ManuscriptReview) ===== */
+
+.ms-review-wrapper {
+  width: 100%;
+  touch-action: none;
+}
+
+/* 행별 렌더링 */
+.ms-review-row {
+  display: grid;
+  gap: 0;
+  border-left: 2px solid #b8a99a;
+  border-right: 2px solid #b8a99a;
+  background: #fffef9;
+}
+
+.ms-review-row:first-child {
+  border-top: 2px solid #b8a99a;
+}
+
+/* 축소 셀 */
+.ms-review-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e0d8d2;
+  font-size: 13px;
+  font-family: var(--font-body);
+  color: #2b221d;
+  height: 28px;
+  min-width: 20px;
+  line-height: 1;
+  position: relative;
+  user-select: none;
+  cursor: default;
+}
+
+.ms-review-cell.ms-filled {
+  background: rgba(255, 143, 43, 0.04);
+}
+
+/* 어노테이션 밑줄 (빨간 색연필) */
+.ms-review-cell.ms-annotated {
+  border-bottom: 3px solid #e74c3c;
+  background: rgba(231, 76, 60, 0.05);
+}
+
+/* 드래그 중 임시 선택 */
+.ms-review-cell.ms-selecting {
+  background: rgba(231, 76, 60, 0.12);
+}
+
+/* 어노테이션 번호 배지 */
+.ms-ann-badge {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 16px;
+  height: 16px;
+  background: #e74c3c;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 첨삭줄 (correction line) */
+.ms-correction-line {
+  min-height: 4px;
+  border-left: 2px solid #b8a99a;
+  border-right: 2px solid #b8a99a;
+  background: #fef9f4;
+}
+
+.ms-correction-line.ms-has-items {
+  padding: 2px 4px;
+}
+
+.ms-correction-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 4px;
+  font-size: 13px;
+  color: #e74c3c;
+  position: relative;
+}
+
+.ms-correction-item .ms-expand-badge {
+  position: relative;
+  top: auto;
+  left: auto;
+  flex-shrink: 0;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.ms-correction-item input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px dashed #e74c3c;
+  background: transparent;
+  font-size: 13px;
+  color: #e74c3c;
+  font-family: var(--font-body);
+  padding: 2px 4px;
+  outline: none;
+}
+
+.ms-correction-item input::placeholder {
+  color: rgba(231, 76, 60, 0.4);
+}
+
+/* 삭제 버튼 */
+.ms-ann-remove {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.ms-ann-remove:hover {
+  color: #c0392b;
+}
+
+/* 학생 뷰: 접힘/펼침 */
+.ms-correction-item.ms-collapsed .ms-correction-text {
+  display: none;
+}
+
+.ms-correction-item.ms-expanded .ms-correction-text {
+  display: inline;
+}
+
+/* 클릭 가능한 어노테이션 셀 (학생 뷰) */
+.ms-review-cell.ms-annotated.ms-clickable {
+  cursor: pointer;
+}
+
+.ms-review-cell.ms-annotated.ms-clickable:hover {
+  background: rgba(231, 76, 60, 0.12);
+}
+
 /* ── 반응형 ── */
 @media (max-width: 720px) {
   .ms-cell {
     font-size: 13px;
     min-width: 18px;
     min-height: 18px;
+  }
+
+  .ms-review-cell {
+    font-size: 11px;
+    height: 24px;
+    min-width: 16px;
+  }
+
+  .ms-ann-badge {
+    width: 14px;
+    height: 14px;
+    font-size: 8px;
   }
 }
 
@@ -145,5 +311,25 @@
     font-size: 11px;
     min-width: 14px;
     min-height: 14px;
+  }
+
+  .ms-review-cell {
+    font-size: 10px;
+    height: 20px;
+    min-width: 13px;
+  }
+
+  .ms-ann-badge {
+    width: 12px;
+    height: 12px;
+    font-size: 7px;
+  }
+
+  .ms-correction-item {
+    font-size: 12px;
+  }
+
+  .ms-correction-item input {
+    font-size: 12px;
   }
 }
