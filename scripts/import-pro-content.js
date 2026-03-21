@@ -166,7 +166,7 @@ async function main() {
     let totalImported = 0;
 
     for (const levelFile of LEVEL_FILES) {
-      const levelId = levelFile.toUpperCase();
+      const levelId = levelFile.replace(/_/g, '');
       const batchData = JSON.parse(fs.readFileSync(path.join(GEN_DIR, `batch-import-${levelFile}.json`), 'utf8'));
 
       const now = new Date().toISOString().slice(0, 19).replace('T', ' ');

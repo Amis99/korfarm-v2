@@ -15,15 +15,15 @@ if (!existsSync(OUTPUT_DIR)) mkdirSync(OUTPUT_DIR, { recursive: true });
 
 // ─── 레벨 설정 ───
 const LEVELS = [
-  { folder: '소쉬르1', levelId: 'SAUSSURE_1', prefix: '소쉬르1', bookNum: 1, type: 'saussure' },
-  { folder: '소쉬르2', levelId: 'SAUSSURE_2', prefix: '소쉬르2', bookNum: 2, type: 'saussure' },
-  { folder: '소쉬르3', levelId: 'SAUSSURE_3', prefix: '소쉬르3', bookNum: 3, type: 'saussure' },
-  { folder: '프레게1', levelId: 'FREGE_1', prefix: '프레게1', bookNum: 1, type: 'frege' },
-  { folder: '프레게2', levelId: 'FREGE_2', prefix: '프레게2', bookNum: 2, type: 'frege' },
-  { folder: '프레게3', levelId: 'FREGE_3', prefix: '프레게3', bookNum: 3, type: 'frege' },
-  { folder: '러셀1', levelId: 'RUSSELL_1', prefix: '러셀1', bookNum: 1, type: 'russell' },
-  { folder: '러셀2', levelId: 'RUSSELL_2', prefix: '러셀2', bookNum: 2, type: 'russell' },
-  { folder: '러셀3', levelId: 'RUSSELL_3', prefix: '러셀3', bookNum: 3, type: 'russell' },
+  { folder: '소쉬르1', levelId: 'saussure1', prefix: '소쉬르1', bookNum: 1, type: 'saussure' },
+  { folder: '소쉬르2', levelId: 'saussure2', prefix: '소쉬르2', bookNum: 2, type: 'saussure' },
+  { folder: '소쉬르3', levelId: 'saussure3', prefix: '소쉬르3', bookNum: 3, type: 'saussure' },
+  { folder: '프레게1', levelId: 'frege1', prefix: '프레게1', bookNum: 1, type: 'frege' },
+  { folder: '프레게2', levelId: 'frege2', prefix: '프레게2', bookNum: 2, type: 'frege' },
+  { folder: '프레게3', levelId: 'frege3', prefix: '프레게3', bookNum: 3, type: 'frege' },
+  { folder: '러셀1', levelId: 'russell1', prefix: '러셀1', bookNum: 1, type: 'russell' },
+  { folder: '러셀2', levelId: 'russell2', prefix: '러셀2', bookNum: 2, type: 'russell' },
+  { folder: '러셀3', levelId: 'russell3', prefix: '러셀3', bookNum: 3, type: 'russell' },
 ];
 
 let idCounter = 0;
