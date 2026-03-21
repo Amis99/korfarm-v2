@@ -5,6 +5,49 @@ import { apiGet } from "../utils/api";
 import "../styles/pro-mode.css";
 import "../styles/answer-key.css";
 
+function AnswerItem({ item }) {
+  return (
+    <div className="ak-item">
+      <div className="ak-item-header">
+        <span className="ak-item-num">{item.number}</span>
+        {item.type && (
+          <span className="ak-item-type">{item.type}</span>
+        )}
+        {item.points && (
+          <span className="ak-item-pts">{item.points}점</span>
+        )}
+      </div>
+
+      {(item.problem || item.question) && (
+        <div className="ak-item-question">
+          <p>{item.problem || item.question}</p>
+        </div>
+      )}
+
+      {item.answer && (
+        <div className="ak-item-answer">
+          <div className="ak-label">정답</div>
+          <p className="ak-answer-text">{item.answer}</p>
+        </div>
+      )}
+
+      {item.modelAnswer && (
+        <div className="ak-item-model">
+          <div className="ak-label">모범답안</div>
+          <p className="ak-model-text">{item.modelAnswer}</p>
+        </div>
+      )}
+
+      {item.explanation && (
+        <div className="ak-item-explanation">
+          <div className="ak-label">해설</div>
+          <p>{item.explanation}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ProAnswerKeyPage() {
   const { chapterId } = useParams();
   const { isLoggedIn } = useAuth();
@@ -58,7 +101,8 @@ function ProAnswerKeyPage() {
     );
   }
 
-  const sections = data?.payload?.sections || [];
+  // content_json 구조: { payload: { sections: [{ label, items }] } }
+  const sections = data?.payload?.payload?.sections || data?.payload?.sections || [];
 
   return (
     <div className="pro">
@@ -88,55 +132,29 @@ function ProAnswerKeyPage() {
         {sections.map((section, si) => (
           <div key={si} className="ak-section">
             <h3 className="ak-section-title">
-              <span className="ak-section-badge">{section.title}</span>
+              <span className="ak-section-badge">{section.title || section.label}</span>
             </h3>
-            {section.groups?.map((group, gi) => (
-              <div key={gi} className="ak-group">
-                <h4 className="ak-group-title">{group.groupTitle}</h4>
+            {/* groups 구조 지원 (신규) + 플랫 items 구조 지원 (기존 데이터) */}
+            {section.groups ? (
+              section.groups.map((group, gi) => (
+                <div key={gi} className="ak-group">
+                  <h4 className="ak-group-title">{group.groupTitle}</h4>
+                  <div className="ak-items">
+                    {group.items?.map((item, ii) => (
+                      <AnswerItem key={ii} item={item} />
+                    ))}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="ak-group">
                 <div className="ak-items">
-                  {group.items?.map((item, ii) => (
-                    <div key={ii} className="ak-item">
-                      <div className="ak-item-header">
-                        <span className="ak-item-num">{item.number}</span>
-                        {item.type && (
-                          <span className="ak-item-type">{item.type}</span>
-                        )}
-                        {item.points && (
-                          <span className="ak-item-pts">{item.points}점</span>
-                        )}
-                      </div>
-
-                      {item.problem && (
-                        <div className="ak-item-question">
-                          <p>{item.problem}</p>
-                        </div>
-                      )}
-
-                      {item.answer && (
-                        <div className="ak-item-answer">
-                          <div className="ak-label">정답</div>
-                          <p className="ak-answer-text">{item.answer}</p>
-                        </div>
-                      )}
-
-                      {item.modelAnswer && (
-                        <div className="ak-item-model">
-                          <div className="ak-label">모범답안</div>
-                          <p className="ak-model-text">{item.modelAnswer}</p>
-                        </div>
-                      )}
-
-                      {item.explanation && (
-                        <div className="ak-item-explanation">
-                          <div className="ak-label">해설</div>
-                          <p>{item.explanation}</p>
-                        </div>
-                      )}
-                    </div>
+                  {section.items?.map((item, ii) => (
+                    <AnswerItem key={ii} item={item} />
                   ))}
                 </div>
               </div>
-            ))}
+            )}
           </div>
         ))}
       </div>
