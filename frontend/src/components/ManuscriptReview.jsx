@@ -79,19 +79,31 @@ export default function ManuscriptReview({
   };
 
   // --- 관리자 모드: 드래그 ---
+  const dragEndRef = useRef(null);
+
   const handleCellPointerDown = (cellIdx, e) => {
     if (readOnly) return;
-    // 이미 어노테이션이 있는 셀은 드래그 불가
     if (getAnnotationForCell(cellIdx)) return;
     e.preventDefault();
     isDragging.current = true;
+    dragEndRef.current = cellIdx;
     setDragStart(cellIdx);
     setDragEnd(cellIdx);
   };
 
-  const handleCellPointerEnter = (cellIdx) => {
+  // 터치 드래그 대응: pointermove에서 elementFromPoint로 셀 탐지
+  const handlePointerMove = (e) => {
     if (!isDragging.current) return;
-    setDragEnd(cellIdx);
+    e.preventDefault();
+    const el = document.elementFromPoint(e.clientX, e.clientY);
+    if (!el) return;
+    const cellEl = el.closest("[data-cell-idx]");
+    if (!cellEl) return;
+    const idx = Number(cellEl.dataset.cellIdx);
+    if (!isNaN(idx) && idx !== dragEndRef.current) {
+      dragEndRef.current = idx;
+      setDragEnd(idx);
+    }
   };
 
   const handlePointerUp = () => {
@@ -99,8 +111,8 @@ export default function ManuscriptReview({
     isDragging.current = false;
     if (dragStart === null) return;
 
-    const start = Math.min(dragStart, dragEnd ?? dragStart);
-    const end = Math.max(dragStart, dragEnd ?? dragStart);
+    const start = Math.min(dragStart, dragEndRef.current ?? dragStart);
+    const end = Math.max(dragStart, dragEndRef.current ?? dragStart);
 
     // 빈 셀만 있으면 무시
     const hasContent = cells.slice(start, end + 1).some((ch) => ch !== "");
@@ -126,6 +138,7 @@ export default function ManuscriptReview({
 
     setDragStart(null);
     setDragEnd(null);
+    dragEndRef.current = null;
   };
 
   // 어노테이션 삭제 (번호 재정렬)
@@ -155,6 +168,7 @@ export default function ManuscriptReview({
   return (
     <div
       className="ms-review-wrapper"
+      onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerLeave={() => {
         if (isDragging.current) handlePointerUp();
@@ -208,6 +222,7 @@ export default function ManuscriptReview({
                 return (
                   <div
                     key={cellIdx}
+                    data-cell-idx={cellIdx}
                     className={[
                       "ms-review-cell",
                       ch && "ms-filled",
@@ -218,7 +233,6 @@ export default function ManuscriptReview({
                       .filter(Boolean)
                       .join(" ")}
                     onPointerDown={(e) => handleCellPointerDown(cellIdx, e)}
-                    onPointerEnter={() => handleCellPointerEnter(cellIdx)}
                     onClick={() => readOnly && ann && toggleExpand(ann.id)}
                   >
                     {isFirst && (
