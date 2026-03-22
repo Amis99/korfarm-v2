@@ -51,15 +51,438 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 53 } ] },
+          "question": {
+            "prompt": "문단을 여는 이 문장은 반응 조건과 반응 속도를 어떤 개념으로 소개하나요?",
+            "choices": [
+              { "id": "A", "text": "화학 변화의 때와 빠르기를 설명하는 핵심 개념" },
+              { "id": "B", "text": "실험 도구를 분류하는 기준" },
+              { "id": "C", "text": "색 이름을 외우는 방법" },
+              { "id": "D", "text": "유리 기구를 보관하는 규칙" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 53, "end": 107 } ] },
+          "question": {
+            "prompt": "얼음이 녹는 현상을 다루는 이 문장은 어떤 식의 단순한 설명에 머물지 말라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "차갑던 것이 따뜻해졌다고만 말하는 설명" },
+              { "id": "B", "text": "고체와 액체를 구별하는 설명" },
+              { "id": "C", "text": "온도를 재는 기구를 소개하는 설명" },
+              { "id": "D", "text": "얼음의 모양을 묘사하는 설명" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 107, "end": 149 } ] },
+          "question": {
+            "prompt": "앞의 단순 설명과 이어 읽을 때, 이 문장은 상태 변화의 까닭을 무엇의 변화로 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "분자들의 움직임이 달라진 것" },
+              { "id": "B", "text": "그릇의 색이 달라진 것" },
+              { "id": "C", "text": "관찰자의 위치가 달라진 것" },
+              { "id": "D", "text": "물의 이름이 달라진 것" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 149, "end": 214 } ] },
+          "question": {
+            "prompt": "이 문장은 화학이 결과를 읽을 때 무엇을 함께 살핀다고 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "결과를 낳은 조건과 물질의 성질" },
+              { "id": "B", "text": "실험실의 조명과 책상 배치" },
+              { "id": "C", "text": "관찰자의 취향과 기분" },
+              { "id": "D", "text": "유리 기구의 이름과 가격" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 214 } ] },
+          "question": {
+            "prompt": "첫 문단 전체는 화학 변화를 어떤 방식으로 읽으라고 이끌고 있나요?",
+            "choices": [
+              { "id": "A", "text": "보이는 변화에서 조건과 입자 움직임까지 거슬러 읽기" },
+              { "id": "B", "text": "색과 냄새만 외워 두고 끝내기" },
+              { "id": "C", "text": "실험 순서만 외우고 이유는 지우기" },
+              { "id": "D", "text": "관찰 결과를 감상문처럼 적기" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 48 } ] },
+          "question": {
+            "prompt": "둘째 문단을 여는 이 문장은 자주 살피는 반응 조건으로 무엇을 제시하나요?",
+            "choices": [
+              { "id": "A", "text": "온도, 농도, 표면적, 촉매" },
+              { "id": "B", "text": "색, 냄새, 무게, 소리" },
+              { "id": "C", "text": "불꽃, 연기, 그릇, 기체" },
+              { "id": "D", "text": "이름, 가격, 길이, 넓이" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 48, "end": 94 } ] },
+          "question": {
+            "prompt": "이 문장은 온도가 높아질수록 반응이 빨라질 수 있는 까닭을 무엇으로 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "입자 운동이 활발해지기 때문" },
+              { "id": "B", "text": "물질 색이 밝아지기 때문" },
+              { "id": "C", "text": "용기 모양이 바뀌기 때문" },
+              { "id": "D", "text": "기록 시간이 줄어들기 때문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 94, "end": 161 } ] },
+          "question": {
+            "prompt": "가루 상태가 덩어리 상태보다 빨리 반응하는 까닭을 이 문장은 어떻게 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "표면적이 넓어 더 많은 입자들이 만날 수 있어서" },
+              { "id": "B", "text": "가루가 항상 더 뜨겁기 때문에" },
+              { "id": "C", "text": "덩어리는 물질이 아니기 때문에" },
+              { "id": "D", "text": "표면적과 반응은 관계가 없기 때문에" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 161, "end": 204 } ] },
+          "question": {
+            "prompt": "이 문장은 촉매의 역할을 어떻게 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "스스로 크게 변하지 않으면서 반응을 쉽게 돕는다" },
+              { "id": "B", "text": "물질을 모두 다른 물질로 바꾼다" },
+              { "id": "C", "text": "반응을 완전히 멈추게 만든다" },
+              { "id": "D", "text": "온도계를 대신해 준다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 204, "end": 280 } ] },
+          "question": {
+            "prompt": "앞의 조건 예시들을 모아, 이 문장은 결과를 읽을 때 무엇을 함께 보아야 한다고 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "물질의 종류와 조건이 속도와 방향에 준 영향" },
+              { "id": "B", "text": "실험자의 손놀림과 말투" },
+              { "id": "C", "text": "용기 색과 실험실 위치" },
+              { "id": "D", "text": "반응 이름의 길이와 순서" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 280 } ] },
+          "question": {
+            "prompt": "둘째 문단 전체는 반응 속도를 읽을 때 어떤 태도를 갖추라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "결과 뒤에 작용한 조건들을 함께 추적하기" },
+              { "id": "B", "text": "온도 하나만 보고 전체를 단정하기" },
+              { "id": "C", "text": "촉매만 찾고 다른 조건은 지우기" },
+              { "id": "D", "text": "물질 이름만 외우고 이유는 넘기기" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 29 } ] },
+          "question": {
+            "prompt": "셋째 문단을 여는 이 문장은 어떤 반응을 결과 읽기의 좋은 예로 듭나요?",
+            "choices": [
+              { "id": "A", "text": "산과 염기의 반응" },
+              { "id": "B", "text": "빛의 반사와 굴절" },
+              { "id": "C", "text": "금속의 열팽창" },
+              { "id": "D", "text": "전류의 직렬 연결" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 29, "end": 88 } ] },
+          "question": {
+            "prompt": "이 문장은 산성과 염기성 용액이 만나면 어떤 결과가 일어날 수 있다고 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "중화 반응이 일어나 새로운 물질과 물이 만들어질 수 있다" },
+              { "id": "B", "text": "언제나 같은 색으로만 변한다" },
+              { "id": "C", "text": "반응 없이 그대로 멈춘다" },
+              { "id": "D", "text": "온도와 상관없이 끓기만 한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 88, "end": 130 } ] },
+          "question": {
+            "prompt": "이 문장은 왜 두 용액을 섞었다고 해서 늘 같은 결과가 나오는 것은 아니라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "같은 만남이라도 조건이 달라지면 결과가 달라질 수 있어서" },
+              { "id": "B", "text": "산과 염기는 반응하지 않아서" },
+              { "id": "C", "text": "용액은 섞이지 못해서" },
+              { "id": "D", "text": "결과는 관찰할 수 없어서" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 130, "end": 178 } ] },
+          "question": {
+            "prompt": "이 문장은 반응 뒤 용액의 성질이 달라지는 기준을 무엇으로 제시하나요?",
+            "choices": [
+              { "id": "A", "text": "어느 쪽이 더 많은지와 농도가 어떤지" },
+              { "id": "B", "text": "비커의 높이와 색깔이 어떤지" },
+              { "id": "C", "text": "실험자의 필체가 어떤지" },
+              { "id": "D", "text": "용액 이름이 긴지 짧은지" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 178, "end": 241 } ] },
+          "question": {
+            "prompt": "앞의 비율 설명과 이어 볼 때, 이 문장은 결과를 설명하려면 무엇까지 함께 따져야 한다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "어떤 비율과 조건에서 섞였는지" },
+              { "id": "B", "text": "누가 먼저 비커를 들었는지" },
+              { "id": "C", "text": "용액 이름을 누가 지었는지" },
+              { "id": "D", "text": "실험실 벽의 색이 무엇인지" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 241 } ] },
+          "question": {
+            "prompt": "셋째 문단 전체는 산과 염기 예시를 통해 어떤 읽기 원리를 보여 주나요?",
+            "choices": [
+              { "id": "A", "text": "섞였다는 사실만이 아니라 비율과 조건까지 보아야 한다" },
+              { "id": "B", "text": "산과 염기는 만나면 언제나 같은 결과가 난다" },
+              { "id": "C", "text": "중화 반응은 조건과 무관하다" },
+              { "id": "D", "text": "결과는 색만 보면 모두 알 수 있다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 88 } ] },
+          "question": {
+            "prompt": "넷째 문단을 여는 이 문장은 관찰에서 어디까지 따라가야 반응을 이해한다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "그 변화를 만든 입자와 조건까지" },
+              { "id": "B", "text": "색 변화만 적어 두는 데까지" },
+              { "id": "C", "text": "냄새만 맡아 보는 데까지" },
+              { "id": "D", "text": "결과 이름을 외우는 데까지" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 88, "end": 146 } ] },
+          "question": {
+            "prompt": "이 문장은 보이는 결과와 원인의 관계를 어떻게 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "결과가 같아 보여도 원인은 다를 수 있다" },
+              { "id": "B", "text": "결과가 같으면 원인도 반드시 같다" },
+              { "id": "C", "text": "원인은 중요하지 않고 결과만 중요하다" },
+              { "id": "D", "text": "관찰은 원인과 결과를 늘 혼동하게 한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 146, "end": 197 } ] },
+          "question": {
+            "prompt": "비슷한 조건처럼 보여도 결과는 달라질 수 있다는 이 문장은 무엇을 경계하게 하나요?",
+            "choices": [
+              { "id": "A", "text": "겉모습만 보고 같은 반응이라 단정하는 태도" },
+              { "id": "B", "text": "관찰을 반복해 보는 태도" },
+              { "id": "C", "text": "조건을 세밀히 비교하는 태도" },
+              { "id": "D", "text": "개념을 써서 설명하는 태도" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 197, "end": 257 } ] },
+          "question": {
+            "prompt": "이 문장은 화학 설명문이 현상을 외우게 하기보다 무엇을 하게 만든다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "변화의 까닭을 개념으로 묶어 이해하게 만든다" },
+              { "id": "B", "text": "실험 순서를 그대로 베끼게 만든다" },
+              { "id": "C", "text": "기구 이름만 암기하게 만든다" },
+              { "id": "D", "text": "관찰 결과를 시처럼 외우게 만든다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 257, "end": 286 } ] },
+          "question": {
+            "prompt": "새로운 현상을 만났을 때도 설명할 수 있게 해 준다는 이 문장은 어떤 힘의 확장을 말하나요?",
+            "choices": [
+              { "id": "A", "text": "새 사례에도 개념을 적용해 설명하는 힘" },
+              { "id": "B", "text": "늘 같은 실험만 되풀이하는 힘" },
+              { "id": "C", "text": "관찰 없이 답을 외우는 힘" },
+              { "id": "D", "text": "냄새만 맡고 구분하는 힘" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 286, "end": 333 } ] },
+          "question": {
+            "prompt": "문단 끝의 이 문장은 같은 반응을 읽을 때 무엇까지 함께 보라고 강조하나요?",
+            "choices": [
+              { "id": "A", "text": "조건을 바꾸면 속도가 달라질 수 있다는 점" },
+              { "id": "B", "text": "반응은 언제나 같은 속도로만 간다는 점" },
+              { "id": "C", "text": "조건은 결과와 전혀 상관없다는 점" },
+              { "id": "D", "text": "관찰보다 이름 외우기가 중요하다는 점" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 333 } ] },
+          "question": {
+            "prompt": "넷째 문단 전체는 반응 조건과 반응 속도를 읽는 힘을 어떤 읽기 태도로 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "관찰과 개념을 연결해 변화의 까닭을 차분히 설명하는 태도" },
+              { "id": "B", "text": "변화를 외운 표로만 곧바로 정답 처리하는 태도" },
+              { "id": "C", "text": "결과가 같아 보이면 이유도 같다고 보는 태도" },
+              { "id": "D", "text": "조건을 지우고 물질 이름만 남기는 태도" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        { "id": "c1", "text": "화학 변화는 조건과 속도를 본다" },
+        { "id": "c2", "text": "보이는 결과만으론 부족하다" },
+        { "id": "c3", "text": "온도와 표면적이 반응을 바꾼다" },
+        { "id": "c4", "text": "촉매는 반응을 쉽게 돕는다" },
+        { "id": "c5", "text": "산과 염기도 비율이 중요하다" },
+        { "id": "c6", "text": "섞였다는 사실만으론 부족하다" },
+        { "id": "c7", "text": "관찰에서 조건과 입자를 찾는다" },
+        { "id": "c8", "text": "새 현상도 개념으로 설명한다" }
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "화학이 눈에 보이는 결과만이 아니라 그 결과를 낳은 조건과 물질의 성질까지 함께 살핀다고 설명한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 149, "end": 214 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "온도와 표면적이 반응 속도에 영향을 준다는 까닭을 설명한 부분들을 모두 고르려면 어디를 봐야 하나요?",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 48, "end": 94 },
+            { "paragraphId": "p2", "start": 94, "end": 161 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q3",
+          "prompt": "촉매가 스스로 크게 변하지 않으면서도 반응을 쉽게 돕는다고 설명한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 161, "end": 204 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "산성과 염기성 용액의 결과를 설명할 때 어느 쪽이 더 많은지와 농도까지 함께 따져야 한다고 말한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 130, "end": 241 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "관찰과 개념을 함께 보아야 새로운 현상도 차분히 설명할 수 있다고 정리한 부분들은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 197, "end": 286 },
+            { "paragraphId": "p4", "start": 286, "end": 333 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        }
+      ]
     }
   }
 }

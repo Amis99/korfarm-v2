@@ -51,15 +51,414 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 51 } ] },
+          "question": {
+            "prompt": "수요와 공급은 시장에서 무엇이 어떻게 달라지는지를 설명하는 기본 개념인가요?",
+            "choices": [
+              { "id": "A", "text": "가격과 거래량의 변화" },
+              { "id": "B", "text": "광고 문구의 길이" },
+              { "id": "C", "text": "가게 이름의 순서" },
+              { "id": "D", "text": "계산대 위치의 차이" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 51, "end": 112 } ] },
+          "question": {
+            "prompt": "이 문장은 시장 변화를 볼 때 사람들이 빠지기 쉬운 어떤 습관을 짚고 있나요?",
+            "choices": [
+              { "id": "A", "text": "눈에 보이는 한 가지 이유만 붙잡는 습관" },
+              { "id": "B", "text": "조건을 여러 갈래로 비교하는 습관" },
+              { "id": "C", "text": "거래량보다 가격을 늦게 보는 습관" },
+              { "id": "D", "text": "계절 변화를 먼저 확인하는 습관" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 112, "end": 180 } ] },
+          "question": {
+            "prompt": "앞 문장의 경계를 이어 받아, 이 문장은 경제 현상에 어떤 요소들이 함께 움직인다고 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "생산비, 수요, 공급, 정책, 계절, 기대 심리" },
+              { "id": "B", "text": "상점 이름, 광고 색, 계산기 모양" },
+              { "id": "C", "text": "오직 가격과 거래량만" },
+              { "id": "D", "text": "오직 생산자 수만" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 180, "end": 248 } ] },
+          "question": {
+            "prompt": "첫 문단의 끝은 시장 변화를 읽을 때 무엇과 무엇을 함께 보라고 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "무엇이 달라졌는지와 그 변화를 만든 조건" },
+              { "id": "B", "text": "가격표 글씨와 상점 간판" },
+              { "id": "C", "text": "광고 음악과 계산 속도" },
+              { "id": "D", "text": "손님 수와 가게 크기만" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 248 } ] },
+          "question": {
+            "prompt": "첫 문단 전체는 수요와 공급을 어떤 태도로 읽으라고 이끌고 있나요?",
+            "choices": [
+              { "id": "A", "text": "한 가지 이유가 아니라 여러 조건의 연결로 읽기" },
+              { "id": "B", "text": "눈에 띄는 이유 하나로 바로 단정하기" },
+              { "id": "C", "text": "계절 변화는 모두 무시하기" },
+              { "id": "D", "text": "정책은 가격과 무관하다고 보기" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 41 } ] },
+          "question": {
+            "prompt": "둘째 문단을 여는 문장은 수요와 공급을 경제에서 어떤 틀이라고 말하나요?",
+            "choices": [
+              { "id": "A", "text": "원인과 결과를 설명할 때 자주 쓰는 틀" },
+              { "id": "B", "text": "물건 이름을 외우는 표" },
+              { "id": "C", "text": "광고 문장을 꾸미는 법" },
+              { "id": "D", "text": "시장 조사만 기록하는 장부" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 41, "end": 102 } ] },
+          "question": {
+            "prompt": "이 문장은 수요가 커지고 같은 양만 남아 있을 때 어떤 변화가 생길 수 있다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "가격이 오를 수 있다" },
+              { "id": "B", "text": "공급이 사라질 수 있다" },
+              { "id": "C", "text": "정책이 자동으로 바뀐다" },
+              { "id": "D", "text": "계절이 즉시 달라진다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 102, "end": 150 } ] },
+          "question": {
+            "prompt": "바로 앞의 수요 설명과 이어서, 이 문장은 공급이 커질 때 가격이 어떻게 될 수 있다고 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "가격이 내려갈 수 있다" },
+              { "id": "B", "text": "가격이 반드시 두 배가 된다" },
+              { "id": "C", "text": "거래가 모두 멈춘다" },
+              { "id": "D", "text": "수요가 사라진다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 150, "end": 193 } ] },
+          "question": {
+            "prompt": "이 문장은 앞의 단순한 설명을 어떻게 한 번 더 복잡하게 보게 하나요?",
+            "choices": [
+              { "id": "A", "text": "수요와 공급이 서로 영향을 준다고 보게 한다" },
+              { "id": "B", "text": "수요와 공급은 전혀 만나지 않는다고 보게 한다" },
+              { "id": "C", "text": "가격은 아무 의미가 없다고 보게 한다" },
+              { "id": "D", "text": "생산자는 시장과 무관하다고 보게 한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 193, "end": 261 } ] },
+          "question": {
+            "prompt": "이 문장은 가격 변화가 다시 수요와 공급에 어떤 되먹임을 만든다고 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "소비를 줄이고 생산을 늘리는 되먹임" },
+              { "id": "B", "text": "소비와 생산을 모두 멈추게 하는 되먹임" },
+              { "id": "C", "text": "계절만 바꾸는 되먹임" },
+              { "id": "D", "text": "정책만 바꾸는 되먹임" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 261 } ] },
+          "question": {
+            "prompt": "둘째 문단 전체는 수요와 공급을 어떤 움직임으로 이해하게 하나요?",
+            "choices": [
+              { "id": "A", "text": "한쪽 변화가 다른 쪽을 다시 흔드는 상호작용" },
+              { "id": "B", "text": "가격이 한 번 정해지면 멈추는 고정 구조" },
+              { "id": "C", "text": "공급만 변하고 수요는 멈춘 구조" },
+              { "id": "D", "text": "수요만 변하고 가격은 같은 구조" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 27 } ] },
+          "question": {
+            "prompt": "셋째 문단을 여는 문장은 시장 변화에서 무엇도 중요한 원인으로 작용한다고 말하나요?",
+            "choices": [
+              { "id": "A", "text": "기대 심리" },
+              { "id": "B", "text": "가게 이름" },
+              { "id": "C", "text": "상품 색깔" },
+              { "id": "D", "text": "포장 모양" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 27, "end": 91 } ] },
+          "question": {
+            "prompt": "가격이 더 오를 것 같다는 예상이 퍼지면 사람들은 어떤 행동을 보인다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "지금이라도 사 두려는 행동" },
+              { "id": "B", "text": "무조건 판매를 멈추는 행동" },
+              { "id": "C", "text": "가격표를 지우는 행동" },
+              { "id": "D", "text": "계절을 바꾸는 행동" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 91, "end": 130 } ] },
+          "question": {
+            "prompt": "이 문장은 그 예상이 실제 시장에서 어떤 결과를 더 낳을 수 있다고 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "실제 수요 증가와 추가 가격 상승" },
+              { "id": "B", "text": "공급 완전 중단과 가격 하락" },
+              { "id": "C", "text": "거래량 감소와 기대 소멸" },
+              { "id": "D", "text": "생산비 고정과 소비 감소" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 130, "end": 192 } ] },
+          "question": {
+            "prompt": "이 문장은 사람들의 판단과 결과가 어떤 순환을 만든다고 말하나요?",
+            "choices": [
+              { "id": "A", "text": "판단이 결과를 만들고 결과가 다음 판단에 영향 준다" },
+              { "id": "B", "text": "결과는 판단과 완전히 무관하게 움직인다" },
+              { "id": "C", "text": "판단은 한 번만 작용하고 끝난다" },
+              { "id": "D", "text": "결과는 오직 정책만 바꾼다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 192, "end": 257 } ] },
+          "question": {
+            "prompt": "셋째 문단의 끝은 경제학의 읽기를 숫자만 보는 일이 아니라고 하며 무엇까지 함께 읽으라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "숫자 뒤의 선택과 기대" },
+              { "id": "B", "text": "그래프 색깔과 도표 크기" },
+              { "id": "C", "text": "광고 문구와 포장 모양" },
+              { "id": "D", "text": "시장 이름과 상호만" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 257 } ] },
+          "question": {
+            "prompt": "셋째 문단 전체는 기대 심리를 시장에서 어떻게 이해하게 하나요?",
+            "choices": [
+              { "id": "A", "text": "사람들의 예상이 실제 결과를 밀어 움직이는 요인으로" },
+              { "id": "B", "text": "시장과 상관없는 개인 기분으로" },
+              { "id": "C", "text": "가격표를 꾸미는 장식으로" },
+              { "id": "D", "text": "공급량을 대신하는 숫자로" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 49 } ] },
+          "question": {
+            "prompt": "마지막 문단을 여는 문장은 수요와 공급을 이해하는 일이 무엇에서 끝나지 않는다고 말하나요?",
+            "choices": [
+              { "id": "A", "text": "가격과 거래량 변화를 외우는 데서" },
+              { "id": "B", "text": "정책 이름을 기억하는 데서" },
+              { "id": "C", "text": "상품 사진을 보는 데서" },
+              { "id": "D", "text": "시장 위치를 찾는 데서" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 49, "end": 121 } ] },
+          "question": {
+            "prompt": "이 문장은 시장 변화를 볼 때 누구에게 어떤 영향이 가는지도 봐야 한다고 말하나요?",
+            "choices": [
+              { "id": "A", "text": "생산자와 소비자 각각에게 가는 영향" },
+              { "id": "B", "text": "광고 회사와 포장 회사에 가는 영향" },
+              { "id": "C", "text": "상점 간판과 계산대에 가는 영향" },
+              { "id": "D", "text": "오직 소비자에게만 가는 영향" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 121, "end": 191 } ] },
+          "question": {
+            "prompt": "이 문장은 한쪽 원인만 강조하면 어떤 문제가 생긴다고 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "경제 현상을 지나치게 단순하게 보게 된다" },
+              { "id": "B", "text": "수요와 공급이 완전히 사라진다" },
+              { "id": "C", "text": "모든 가격이 같아진다" },
+              { "id": "D", "text": "기대 심리가 없어지게 된다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 191, "end": 258 } ] },
+          "question": {
+            "prompt": "이 문장은 수요와 공급을 어떤 역할의 틀로 다시 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "시장 변화를 이해하게 하는 기본 틀" },
+              { "id": "B", "text": "가격을 고정시키는 계산 틀" },
+              { "id": "C", "text": "광고 문장을 만드는 장식 틀" },
+              { "id": "D", "text": "계절 변화를 예측하는 날씨 틀" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 258, "end": 291 } ] },
+          "question": {
+            "prompt": "마지막 문장은 경제 설명문이 무엇 뒤의 관계를 읽게 만든다고 말하나요?",
+            "choices": [
+              { "id": "A", "text": "숫자 뒤의 관계" },
+              { "id": "B", "text": "상품 이름 뒤의 광고" },
+              { "id": "C", "text": "정책 이름 뒤의 표어" },
+              { "id": "D", "text": "가게 위치 뒤의 지도" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 291 } ] },
+          "question": {
+            "prompt": "마지막 문단 전체는 수요와 공급을 어떤 방식으로 이해해야 한다고 마무리하나요?",
+            "choices": [
+              { "id": "A", "text": "가격과 거래량 뒤에서 연결되는 조건과 영향을 함께 보며" },
+              { "id": "B", "text": "숫자 하나만 외우고 다른 조건은 빼고" },
+              { "id": "C", "text": "생산자만 보고 소비자는 제외하며" },
+              { "id": "D", "text": "기대 심리 없이 현재 가격만 보며" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        { "id": "c1", "text": "수요와 공급은 시장 변화를 푼다" },
+        { "id": "c2", "text": "여러 조건이 함께 움직인다" },
+        { "id": "c3", "text": "수요 증가는 가격을 밀어올린다" },
+        { "id": "c4", "text": "공급 증가는 가격을 낮출 수 있다" },
+        { "id": "c5", "text": "기대 심리가 실제 수요를 바꾼다" },
+        { "id": "c6", "text": "판단이 결과를 다시 만든다" },
+        { "id": "c7", "text": "생산자와 소비자 영향도 본다" },
+        { "id": "c8", "text": "시장은 연결로 읽어야 한다" }
+      ],
+      "correctOrder": [ "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8" ],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "수요와 공급을 볼 때 눈에 띄는 이유 하나만 붙잡지 말고 조건을 함께 살펴야 한다고 설명한 부분은 어디였나요?",
+          "answerRanges": [ { "paragraphId": "p1", "start": 51, "end": 248 } ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "수요 증가는 가격 상승으로, 공급 증가는 가격 하락 가능성으로 이어질 수 있다고 설명한 부분들은 어디였나요?",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 41, "end": 102 },
+            { "paragraphId": "p2", "start": 102, "end": 150 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q3",
+          "prompt": "기대 심리가 실제 구매 행동을 바꾸고 그 결과가 다시 가격을 움직일 수 있다고 설명한 부분은 어디였나요?",
+          "answerRanges": [ { "paragraphId": "p3", "start": 27, "end": 192 } ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "시장 변화를 읽을 때 생산자와 소비자 각각의 영향과 다시 생기는 변화를 함께 봐야 한다고 설명한 부분은 어디였나요?",
+          "answerRanges": [ { "paragraphId": "p4", "start": 49, "end": 121 } ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "수요와 공급이 숫자 뒤의 관계를 읽게 하는 시장 이해의 기본 틀이라고 정리한 부분은 어디였나요?",
+          "answerRanges": [ { "paragraphId": "p4", "start": 191, "end": 291 } ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }
