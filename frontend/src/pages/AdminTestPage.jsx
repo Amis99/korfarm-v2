@@ -112,6 +112,7 @@ function AdminTestPage() {
       ) : tests.length === 0 ? (
         <div className="ts-center"><p>등록된 시험이 없습니다.</p></div>
       ) : (
+        <div className="ts-table-scroll">
         <table className="ts-table">
           <thead>
             <tr>
@@ -140,6 +141,7 @@ function AdminTestPage() {
             ))}
           </tbody>
         </table>
+        </div>
       )}
     </div>
     </AdminLayout>

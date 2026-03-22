@@ -12,7 +12,14 @@
 }
 
 .ts-page.ts-admin {
-  max-width: 1400px;
+  max-width: 1200px;
+  --text: var(--admin-text, #f3f6f1);
+  --muted: var(--admin-muted, #a6b6a9);
+  --panel: var(--admin-panel, #161d18);
+  --bg: var(--admin-panel-light, #1e2620);
+  --stroke: rgba(255, 255, 255, 0.10);
+  --accent: var(--admin-accent, #ff7f2a);
+  --accent-soft: rgba(255, 127, 42, 0.10);
 }
 
 .ts-center {
@@ -915,7 +922,7 @@
 .ts-sheet-select:focus,
 .ts-sheet-textarea:focus {
   border-color: var(--accent);
-  background: #fffbeb;
+  background: rgba(255, 127, 42, 0.08);
   outline: none;
 }
 
@@ -1082,8 +1089,26 @@
   }
 }
 
+/* ── 테이블 스크롤 래퍼 ── */
+.ts-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
+  .ts-page.ts-admin {
+    max-width: none;
+  }
+
+  .ts-test-register-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ts-test-register-label.paper {
+    min-width: 0;
+  }
   .ts-omr-row {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1147,43 +1172,14 @@
   }
 }
 
-/* 탭 네비게이션 */
-.ts-tabs {
-  display: flex;
-  gap: 0;
-  border-bottom: 2px solid #e8ddd4;
-  margin-bottom: 24px;
-}
-
-.ts-tab {
-  padding: 10px 20px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #8a7468;
-  background: none;
-  border: none;
-  border-bottom: 3px solid transparent;
-  cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
-  margin-bottom: -2px;
-}
-
-.ts-tab:hover {
-  color: #5a4a3a;
-}
-
-.ts-tab.active {
-  color: #f07f1a;
-  border-bottom-color: #f07f1a;
-}
 
 /* ── AdminProPage 인라인 → 클래스 ── */
 .ts-section-card {
-  background: #fff;
+  background: var(--panel);
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 .ts-section-title {
@@ -1193,7 +1189,7 @@
 
 .ts-section-hint {
   font-size: 13px;
-  color: #64748b;
+  color: var(--muted);
   margin-bottom: 12px;
 }
 
@@ -1213,25 +1209,27 @@
 }
 
 .ts-status-badge.active {
-  background: #dcfce7;
-  color: #166534;
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
 }
 
 .ts-status-badge.archived {
-  background: #f1f5f9;
+  background: rgba(255,255,255,0.06);
   color: #94a3b8;
 }
 
 .ts-test-label {
-  color: #94a3b8;
+  color: var(--muted);
   font-size: 13px;
 }
 
 .ts-content-select {
   width: 100%;
   padding: 6px 8px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--stroke);
   border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
 }
 
 .ts-test-register-row {
@@ -1250,8 +1248,10 @@
 .ts-test-register-label.version input {
   width: 80px;
   padding: 6px 8px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--stroke);
   border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
 }
 
 .ts-test-register-label.paper {
@@ -1261,8 +1261,10 @@
 
 .ts-test-register-label select {
   padding: 6px 8px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--stroke);
   border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
 }
 
 .ts-level-filter {
@@ -1305,29 +1307,29 @@
 }
 
 .ts-essay-status-pending {
-  background: #eee;
-  color: #666;
+  background: rgba(255,255,255,0.08);
+  color: var(--muted);
 }
 
 .ts-essay-status-keyword_graded {
-  background: #fff3e0;
-  color: #e65100;
+  background: rgba(255,152,0,0.15);
+  color: #ffb74d;
 }
 
 .ts-essay-status-ai_graded {
-  background: #e3f2fd;
-  color: #1565c0;
+  background: rgba(33,150,243,0.15);
+  color: #64b5f6;
 }
 
 .ts-essay-status-confirmed {
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: rgba(76,175,80,0.15);
+  color: #81c784;
 }
 
 .ts-essay-pts {
   margin-left: auto;
   font-size: 0.85rem;
-  color: #888;
+  color: var(--muted);
 }
 
 .ts-essay-field {
@@ -1338,13 +1340,13 @@
   display: block;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #888;
+  color: var(--muted);
   margin-bottom: 4px;
 }
 
 .ts-essay-answer {
   padding: 8px 12px;
-  background: #f9f9f9;
+  background: var(--bg);
   border-radius: 6px;
   font-size: 0.9rem;
   line-height: 1.5;
@@ -1353,7 +1355,7 @@
 
 .ts-essay-model {
   padding: 8px 12px;
-  background: #e8f5e9;
+  background: rgba(76,175,80,0.1);
   border-radius: 6px;
   font-size: 0.9rem;
   line-height: 1.5;
@@ -1374,19 +1376,19 @@
 }
 
 .ts-kw-match {
-  background: #c8e6c9;
-  color: #2e7d32;
+  background: rgba(76,175,80,0.2);
+  color: #81c784;
 }
 
 .ts-kw-miss {
-  background: #ffcdd2;
-  color: #c62828;
+  background: rgba(244,67,54,0.2);
+  color: #ef9a9a;
   text-decoration: line-through;
 }
 
 .ts-essay-ai-feedback {
   padding: 8px 12px;
-  background: #e3f2fd;
+  background: rgba(33,150,243,0.1);
   border-radius: 6px;
   font-size: 0.9rem;
   line-height: 1.5;

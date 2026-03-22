@@ -165,6 +165,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .admin-search {
@@ -280,6 +281,27 @@
   .admin-main {
     padding: 20px 16px 40px;
   }
+
+  .admin-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-topbar {
+    gap: 10px;
+  }
+
+  .admin-search {
+    max-width: none;
+    min-width: 0;
+  }
+}
+
+/* ── 테이블 스크롤 래퍼 (공용) ── */
+.admin-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -4px;
+  padding: 0 4px;
 }
 
 

@@ -176,6 +176,7 @@ export default function AdminStudyPlanDetailPage() {
 
   return (
     <AdminLayout>
+      <div className="asp-wrap">
       <div className="asp-header">
         <h1>
           <span className="material-symbols-outlined">event_note</span>
@@ -385,6 +386,7 @@ export default function AdminStudyPlanDetailPage() {
           onUpdated={handleCellUpdated}
         />
       )}
+      </div>
     </AdminLayout>
   );
 }

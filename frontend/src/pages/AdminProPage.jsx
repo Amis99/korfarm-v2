@@ -615,6 +615,7 @@ function AdminProPage() {
                 {selectedTestPaperId && !testQuestionsLoading && !testJsonMode && (
                   <>
                     {testQuestions.length > 0 ? (
+                      <div className="admin-table-scroll">
                       <table className="ts-table ap-q-table">
                         <thead>
                           <tr>
@@ -657,6 +658,7 @@ function AdminProPage() {
                           ))}
                         </tbody>
                       </table>
+                      </div>
                     ) : (
                       <p className="ap-muted">문항이 없습니다.</p>
                     )}
@@ -829,6 +831,7 @@ function AdminProPage() {
             {testMgmtTab === "versions" && (
               <div className="ap-test-versions">
                 {tests.length > 0 ? (
+                  <div className="admin-table-scroll">
                   <table className="ts-table ap-test-table">
                     <thead>
                       <tr><th>버전</th><th>시험지 ID</th><th>상태</th></tr>
@@ -843,6 +846,7 @@ function AdminProPage() {
                       ))}
                     </tbody>
                   </table>
+                  </div>
                 ) : (
                   <p className="ap-muted">등록된 테스트가 없습니다.</p>
                 )}
@@ -1019,6 +1023,7 @@ function AdminProPage() {
         ) : chapters.length === 0 ? (
           <div className="ts-center"><p>등록된 챕터가 없습니다.</p></div>
         ) : (
+          <div className="admin-table-scroll">
           <table className="ts-table ap-chapter-table">
             <thead>
               <tr>
@@ -1087,6 +1092,7 @@ function AdminProPage() {
               })}
             </tbody>
           </table>
+          </div>
         )}
 
         <div className="ap-legend">

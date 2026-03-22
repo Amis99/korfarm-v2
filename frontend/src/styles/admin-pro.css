@@ -10,7 +10,7 @@
   --accent: var(--admin-accent, #ff7f2a);
   --accent-strong: var(--admin-accent-strong, #e77b18);
   --accent-soft: rgba(255, 127, 42, 0.10);
-  max-width: 1100px;
+  max-width: 1200px;
 }
 
 /* ts-section-card 다크 배경 */
@@ -760,4 +760,80 @@
   padding: 8px 0;
   font-size: 0.88rem;
   color: var(--admin-muted, #a6b6a9);
+}
+
+/* ── 반응형 ── */
+@media (max-width: 768px) {
+  .ap-page {
+    max-width: none;
+  }
+
+  .ap-legend {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .ap-col-content { width: 100px; }
+  .ap-col-answer,
+  .ap-col-test,
+  .ap-col-overall { width: 44px; }
+  .ap-col-action { width: 32px; }
+
+  .ap-content-icons {
+    gap: 2px;
+  }
+  .ap-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 0.62rem;
+  }
+
+  .ap-q-edit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ap-q-choice-row {
+    flex-wrap: wrap;
+  }
+  .ap-q-choice-text,
+  .ap-q-choice-expl {
+    flex: 1 1 100%;
+  }
+
+  .ap-answer-tabs {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .ap-tab {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .ap-test-bottom-actions {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .ap-test-bottom-left,
+  .ap-test-bottom-right {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .ap-preview-nav {
+    gap: 3px;
+  }
+  .ap-preview-nav-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.72rem;
+  }
+
+  .ap-status-row {
+    flex-wrap: wrap;
+  }
+
+  .ap-test-version-select {
+    flex-wrap: wrap;
+  }
 }
