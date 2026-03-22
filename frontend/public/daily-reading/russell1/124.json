@@ -51,15 +51,468 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 47 } ] },
+          "question": {
+            "prompt": "문단을 여는 이 문장은 개요 짜기를 어떤 일에 비유하나요?",
+            "choices": [
+              { "id": "A", "text": "건물을 세우기 전 설계도를 그리는 일" },
+              { "id": "B", "text": "완성된 건물을 꾸미는 일" },
+              { "id": "C", "text": "종이를 접어 장식하는 일" },
+              { "id": "D", "text": "벽돌을 무작정 쌓는 일" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 48, "end": 98 } ] },
+          "question": {
+            "prompt": "개요가 없으면 쓰는 도중에 어떤 문제가 생기기 쉽다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "생각이 새고 같은 말이 되풀이되기 쉽다" },
+              { "id": "B", "text": "문장이 자동으로 길어진다" },
+              { "id": "C", "text": "주제가 늘 두 개가 된다" },
+              { "id": "D", "text": "예시를 전혀 쓸 수 없게 된다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 99, "end": 147 } ] },
+          "question": {
+            "prompt": "반대로 개요가 있으면 무엇을 먼저 말하고 무엇을 뒤로 미룰지 무엇을 잡을 수 있다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "큰 흐름" },
+              { "id": "B", "text": "글씨체의 모양" },
+              { "id": "C", "text": "종이의 크기" },
+              { "id": "D", "text": "문장 수의 정확한 개수" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 148, "end": 220 } ] },
+          "question": {
+            "prompt": "이 문장은 개요 짜기를 어떤 준비 단계로 다시 보게 하나요?",
+            "choices": [
+              { "id": "A", "text": "글을 더 빠르고 분명하게 쓰게 돕는 준비 단계" },
+              { "id": "B", "text": "시간만 빼앗는 쓸모없는 절차" },
+              { "id": "C", "text": "완성된 글을 꾸미는 마지막 장식" },
+              { "id": "D", "text": "자료를 모두 지우는 정리 작업" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 220 } ] },
+          "question": {
+            "prompt": "첫 문단 전체는 개요 짜기를 어떤 태도로 보라고 이끄나요?",
+            "choices": [
+              { "id": "A", "text": "귀찮은 절차가 아니라 흐름을 세우는 준비" },
+              { "id": "B", "text": "문장 쓰기를 늦추는 방해 요소" },
+              { "id": "C", "text": "예시만 따로 적는 부록" },
+              { "id": "D", "text": "글씨 연습을 위한 활동" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 30 } ] },
+          "question": {
+            "prompt": "둘째 문단을 여는 문장은 개요를 짤 때 무엇을 먼저 분명히 해야 한다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "글의 목적" },
+              { "id": "B", "text": "글의 제목 길이" },
+              { "id": "C", "text": "종이의 색깔" },
+              { "id": "D", "text": "문장 수의 제한" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 31, "end": 85 } ] },
+          "question": {
+            "prompt": "이 문장은 설명, 주장, 감상 글에 따라 필요한 내용이 달라지는 까닭을 무엇으로 드나요?",
+            "choices": [
+              { "id": "A", "text": "글의 목적이 서로 다르기 때문" },
+              { "id": "B", "text": "글의 길이가 항상 같기 때문" },
+              { "id": "C", "text": "독자는 한 종류만 좋아하기 때문" },
+              { "id": "D", "text": "문단 수가 정해져 있기 때문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 86, "end": 159 } ] },
+          "question": {
+            "prompt": "독서 행사 참여를 권하는 글의 예시는 행사 소개만으로 부족한 이유를 어떻게 보여 주나요?",
+            "choices": [
+              { "id": "A", "text": "왜 참여할 만한지 근거도 함께 필요하기 때문" },
+              { "id": "B", "text": "행사 날짜를 숨겨야 하기 때문" },
+              { "id": "C", "text": "감상문 형식만 써야 하기 때문" },
+              { "id": "D", "text": "주제와 상관없는 예시를 넣어야 하기 때문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 160, "end": 210 } ] },
+          "question": {
+            "prompt": "목적이 정해지면 개요에 무엇이 더 선명하게 드러난다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "중심 생각과 이를 뒷받침하는 재료" },
+              { "id": "B", "text": "문장 길이와 글씨 크기" },
+              { "id": "C", "text": "종이 위치와 문단 간격" },
+              { "id": "D", "text": "예시의 출처만" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 211, "end": 253 } ] },
+          "question": {
+            "prompt": "이 문장은 목적을 놓친 개요가 왜 힘을 잃기 쉽다고 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "항목이 많아 보여도 실제 글의 중심이 흔들리기 때문" },
+              { "id": "B", "text": "예시를 절대로 넣을 수 없기 때문" },
+              { "id": "C", "text": "문장을 한 줄도 쓸 수 없기 때문" },
+              { "id": "D", "text": "독자가 목적을 항상 알기 때문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 253 } ] },
+          "question": {
+            "prompt": "둘째 문단 전체는 개요를 세울 때 무엇이 가장 먼저 기준이 되어야 한다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "글이 이루려는 목적" },
+              { "id": "B", "text": "문단의 개수" },
+              { "id": "C", "text": "예시의 화려함" },
+              { "id": "D", "text": "표현의 길고 짧음" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 30 } ] },
+          "question": {
+            "prompt": "셋째 문단을 여는 문장은 다음 단계에서 무엇을 해야 한다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "중심 생각을 문단별로 나누어 배치한다" },
+              { "id": "B", "text": "개요를 모두 문장으로 길게 쓴다" },
+              { "id": "C", "text": "자료를 지우고 제목만 남긴다" },
+              { "id": "D", "text": "결론부터 쓰고 시작한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 31, "end": 98 } ] },
+          "question": {
+            "prompt": "이 문장은 기본적인 문단 배열을 어떻게 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "처음엔 주제, 가운데는 근거, 끝은 정리나 강조" },
+              { "id": "B", "text": "처음엔 예시, 가운데는 제목, 끝은 자료 목록" },
+              { "id": "C", "text": "처음엔 결론, 가운데는 제목, 끝은 목적" },
+              { "id": "D", "text": "처음엔 감상, 가운데는 묘사, 끝은 농담" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 99, "end": 153 } ] },
+          "question": {
+            "prompt": "이 문장은 개요를 길게 완성된 문장으로 쓰기보다 어떻게 적는 편이 좋다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "문단마다 다룰 내용을 짧고 선명하게 적는 편" },
+              { "id": "B", "text": "모든 문장을 미리 완성해 적는 편" },
+              { "id": "C", "text": "자료 출처만 길게 적는 편" },
+              { "id": "D", "text": "제목만 크게 적는 편" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 154, "end": 211 } ] },
+          "question": {
+            "prompt": "짧고 선명한 개요가 좋은 까닭을 이 문장은 어떻게 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "자료를 덧붙이거나 흐름을 바꿀 때 빠르게 고칠 수 있어서" },
+              { "id": "B", "text": "문장을 더 길게 꾸밀 수 있어서" },
+              { "id": "C", "text": "예시를 모두 없앨 수 있어서" },
+              { "id": "D", "text": "글의 목적을 바꾸기 쉬워서" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 212, "end": 253 } ] },
+          "question": {
+            "prompt": "문단 끝의 이 문장은 좋은 개요를 어떤 모습으로 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "뼈대를 보여 주되 실제 글쓰기의 여지를 남겨 둔 것" },
+              { "id": "B", "text": "완성 문장을 모두 대신 써 준 것" },
+              { "id": "C", "text": "주제와 무관한 재료까지 채운 것" },
+              { "id": "D", "text": "예시를 없애고 결론만 남긴 것" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 253 } ] },
+          "question": {
+            "prompt": "셋째 문단 전체는 좋은 개요가 어떻게 쓰기 과정과 연결된다고 말하나요?",
+            "choices": [
+              { "id": "A", "text": "문단 배치를 세우면서도 수정의 여지를 남겨 둔다" },
+              { "id": "B", "text": "한 번 쓰면 절대 바꾸지 않는다" },
+              { "id": "C", "text": "문단 순서보다 표현 꾸밈이 더 중요하다" },
+              { "id": "D", "text": "자료보다 문장 길이를 먼저 정한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 36 } ] },
+          "question": {
+            "prompt": "마지막 문단을 여는 이 문장은 개요 짜기의 마지막 단계를 무엇이라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "항목들 사이의 순서를 점검하는 일" },
+              { "id": "B", "text": "문장을 길게 꾸미는 일" },
+              { "id": "C", "text": "예시를 모두 지우는 일" },
+              { "id": "D", "text": "제목을 바꾸는 일" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 37, "end": 81 } ] },
+          "question": {
+            "prompt": "이 문장은 같은 재료라도 순서가 왜 중요한지 어떻게 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "놓이는 자리에 따라 설득력과 이해도가 달라지기 때문" },
+              { "id": "B", "text": "재료가 순서를 만나면 내용이 바뀌기 때문" },
+              { "id": "C", "text": "순서가 같으면 목적이 사라지기 때문" },
+              { "id": "D", "text": "재료는 언제나 뒤에만 놓여야 하기 때문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 82, "end": 151 } ] },
+          "question": {
+            "prompt": "문제 뒤 해결 방법, 정의 뒤 예시를 따져 보라는 이 문장은 무엇을 더 또렷하게 만든다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "글의 흐름" },
+              { "id": "B", "text": "글씨의 굵기" },
+              { "id": "C", "text": "문장 수의 많고 적음" },
+              { "id": "D", "text": "종이의 모양" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 152, "end": 210 } ] },
+          "question": {
+            "prompt": "이 문장은 개요를 한 번 적고 끝내는 종이가 아니라 무엇과 같다고 비유하나요?",
+            "choices": [
+              { "id": "A", "text": "글의 방향을 계속 확인하게 해 주는 지도" },
+              { "id": "B", "text": "지워 버릴 임시 메모지" },
+              { "id": "C", "text": "문장 꾸밈표" },
+              { "id": "D", "text": "자료 목록표" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 211, "end": 256 } ] },
+          "question": {
+            "prompt": "이 문장은 개요를 잘 짜면 문장을 쓰는 순간마다 무엇을 잃지 않게 된다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "글 전체의 방향" },
+              { "id": "B", "text": "예시의 개수" },
+              { "id": "C", "text": "종이의 순서" },
+              { "id": "D", "text": "문단 수의 규칙" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 257, "end": 289 } ] },
+          "question": {
+            "prompt": "개요가 출발점이면서 중간 점검표 역할도 한다는 이 문장은 개요의 쓰임을 어떻게 넓히나요?",
+            "choices": [
+              { "id": "A", "text": "시작과 점검을 함께 맡는 도구로 넓힌다" },
+              { "id": "B", "text": "쓰기 전까지만 쓰는 도구로 좁힌다" },
+              { "id": "C", "text": "결론만 적는 도구로 바꾼다" },
+              { "id": "D", "text": "예시를 모으는 도구로 한정한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 290, "end": 316 } ] },
+          "question": {
+            "prompt": "글이 길어질수록 이 점검표의 역할이 더 커진다고 하는 까닭은 무엇으로 이해할 수 있나요?",
+            "choices": [
+              { "id": "A", "text": "흐름을 잃지 않게 계속 방향을 확인해야 해서" },
+              { "id": "B", "text": "문장이 자동으로 짧아져서" },
+              { "id": "C", "text": "예시가 사라져서" },
+              { "id": "D", "text": "목적이 한 번에 정해져서" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s25",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 317, "end": 352 } ] },
+          "question": {
+            "prompt": "읽는 사람의 이해 순서를 미리 그려 보는 일까지 포함된다고 할 때, 개요는 누구의 흐름까지 고려해야 함을 보여 주나요?",
+            "choices": [
+              { "id": "A", "text": "읽는 사람의 이해 흐름" },
+              { "id": "B", "text": "자료를 만든 사람의 기분" },
+              { "id": "C", "text": "종이 크기의 변화" },
+              { "id": "D", "text": "문장 길이의 균등함" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s26",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 352 } ] },
+          "question": {
+            "prompt": "마지막 문단 전체는 개요 점검이 어떤 역할을 한다고 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "순서와 독자의 이해를 조정하며 글의 방향을 붙잡는 역할" },
+              { "id": "B", "text": "완성된 문장을 그대로 대신 써 주는 역할" },
+              { "id": "C", "text": "자료 출처만 모아 두는 역할" },
+              { "id": "D", "text": "문장을 무조건 짧게 만드는 역할" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        { "id": "c1", "text": "개요는 글의 설계도와 같다" },
+        { "id": "c2", "text": "개요 없이는 흐름이 흩어진다" },
+        { "id": "c3", "text": "먼저 글의 목적을 정한다" },
+        { "id": "c4", "text": "목적이 재료 선택을 이끈다" },
+        { "id": "c5", "text": "문단별 중심을 나누어 놓는다" },
+        { "id": "c6", "text": "짧고 선명하게 적는 편이 좋다" },
+        { "id": "c7", "text": "순서는 설득력과 이해를 바꾼다" },
+        { "id": "c8", "text": "개요는 출발점이자 점검표다" }
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "개요가 없으면 생각이 새거나 같은 말이 되풀이되기 쉽다고 설명한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 48, "end": 98 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "글의 목적이 정해져야 중심 생각과 뒷받침 재료가 선명해진다고 설명한 부분들은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 0, "end": 30 },
+            { "paragraphId": "p2", "start": 160, "end": 210 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q3",
+          "prompt": "문단마다 다룰 내용을 짧고 선명하게 적는 편이 좋다고 설명한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 99, "end": 153 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "문제 뒤 해결, 정의 뒤 예시를 따져 보며 글의 흐름을 또렷하게 만든다고 설명한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 82, "end": 151 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "개요가 지도이자 중간 점검표가 되어 읽는 사람의 이해 순서까지 미리 그려 본다고 설명한 부분들은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 152, "end": 210 },
+            { "paragraphId": "p4", "start": 257, "end": 352 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        }
+      ]
     }
   }
 }
