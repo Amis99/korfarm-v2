@@ -1,0 +1,1841 @@
+[
+  {
+    "contentType": "PRO_READING",
+    "title": "문장 성분 (목적어, 보어)",
+    "targetLevel": "frege2",
+    "area": "READING",
+    "subArea": "CONCEPT",
+    "timeLimitSec": 300,
+    "seedReward": {
+      "seedType": "seed_rice",
+      "count": 3,
+      "multiplier": 1
+    },
+    "payload": {
+      "passage": {
+        "format": "TEXT",
+        "paragraphs": [
+          {
+            "id": "p1",
+            "text": "목적어: “무엇을”에 해당합니다. 서술어(동작)의 대상이 되는 말입니다.\n　힌트: 단어 뒤에 '~을 / ~를'이 붙어요.\n　예) 나는 사과를 먹는다. (먹는 대상 = 사과)\n　보어: “무엇이” 되거나 아닌지를 보충해 주는 말입니다.\n　힌트: '되다', '아니다'라는 서술어 앞에 오며, '~이 / ~가'가 붙어요.\n　예) 나는 어른이 되었다. ('되다' 앞에 있음)\n　예) 이것은 소금이 아니다. ('아니다' 앞에 있음)"
+          },
+          {
+            "id": "p2",
+            "text": "[구별 꿀팁!]\n　• 을/를이 붙으면 목적어!\n　• 이/가 가 붙었는데 뒤에 '되다/아니다'가 오면 보어!"
+          }
+        ]
+      },
+      "intensive": {
+        "timeline": [
+          {
+            "stepId": "s1",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 0,
+                  "end": 18
+                }
+              ]
+            },
+            "question": {
+              "prompt": "목적어는 어떤 질문에 대한 답이 되나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "\"무엇을\"에 해당한다"
+                },
+                {
+                  "id": "B",
+                  "text": "\"누가\"에 해당한다"
+                },
+                {
+                  "id": "C",
+                  "text": "\"어떻게\"에 해당한다"
+                },
+                {
+                  "id": "D",
+                  "text": "\"언제\"에 해당한다"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s2",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 19,
+                  "end": 40
+                }
+              ]
+            },
+            "question": {
+              "prompt": "목적어는 서술어와 어떤 관계인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "서술어(동작)의 대상이 되는 말"
+                },
+                {
+                  "id": "B",
+                  "text": "서술어를 꾸며주는 말"
+                },
+                {
+                  "id": "C",
+                  "text": "서술어와 같은 뜻인 말"
+                },
+                {
+                  "id": "D",
+                  "text": "서술어를 대신하는 말"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s3",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 42,
+                  "end": 67
+                }
+              ]
+            },
+            "question": {
+              "prompt": "목적어를 찾을 때 힌트가 되는 조사는 무엇인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "'~이/가'"
+                },
+                {
+                  "id": "B",
+                  "text": "'~을/를'"
+                },
+                {
+                  "id": "C",
+                  "text": "'~은/는'"
+                },
+                {
+                  "id": "D",
+                  "text": "'~에서'"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s4",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 69,
+                  "end": 96
+                }
+              ]
+            },
+            "question": {
+              "prompt": "\"나는 사과를 먹는다.\"에서 목적어는 무엇인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "나는"
+                },
+                {
+                  "id": "B",
+                  "text": "사과를"
+                },
+                {
+                  "id": "C",
+                  "text": "먹는다"
+                },
+                {
+                  "id": "D",
+                  "text": "나는 사과를"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s5",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 98,
+                  "end": 129
+                }
+              ]
+            },
+            "question": {
+              "prompt": "보어는 어떤 역할을 하는 문장 성분인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "\"무엇이\" 되거나 아닌지를 보충해 주는 말"
+                },
+                {
+                  "id": "B",
+                  "text": "\"무엇을\" 하는지를 나타내는 말"
+                },
+                {
+                  "id": "C",
+                  "text": "\"어떻게\" 하는지를 설명하는 말"
+                },
+                {
+                  "id": "D",
+                  "text": "\"어디서\" 하는지를 가리키는 말"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s6",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 131,
+                  "end": 175
+                }
+              ]
+            },
+            "question": {
+              "prompt": "보어가 오는 서술어는 주로 어떤 것인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "'되다'와 '아니다'"
+                },
+                {
+                  "id": "B",
+                  "text": "'먹다'와 '마시다'"
+                },
+                {
+                  "id": "C",
+                  "text": "'가다'와 '오다'"
+                },
+                {
+                  "id": "D",
+                  "text": "'크다'와 '작다'"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s7",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 177,
+                  "end": 204
+                }
+              ]
+            },
+            "question": {
+              "prompt": "\"나는 어른이 되었다.\"에서 보어는 무엇인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "나는"
+                },
+                {
+                  "id": "B",
+                  "text": "어른이"
+                },
+                {
+                  "id": "C",
+                  "text": "되었다"
+                },
+                {
+                  "id": "D",
+                  "text": "나는 어른이"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s8",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 0,
+                  "end": 235
+                }
+              ]
+            },
+            "question": {
+              "prompt": "목적어와 보어의 가장 큰 차이점은 무엇인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "목적어는 '을/를'이 붙고, 보어는 '되다/아니다' 앞에서 '이/가'가 붙는다"
+                },
+                {
+                  "id": "B",
+                  "text": "목적어는 문장 앞에 오고, 보어는 문장 끝에 온다"
+                },
+                {
+                  "id": "C",
+                  "text": "목적어는 명사만 되고, 보어는 동사만 된다"
+                },
+                {
+                  "id": "D",
+                  "text": "목적어와 보어는 같은 개념의 다른 이름이다"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s9",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p2",
+                  "start": 0,
+                  "end": 59
+                }
+              ]
+            },
+            "question": {
+              "prompt": "구별 꿀팁에 따르면, '이/가'가 붙었을 때 보어인지 확인하려면 무엇을 봐야 하나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "뒤에 '되다'나 '아니다'가 오는지 확인한다"
+                },
+                {
+                  "id": "B",
+                  "text": "앞에 '은/는'이 있는지 확인한다"
+                },
+                {
+                  "id": "C",
+                  "text": "문장 전체의 글자 수를 센다"
+                },
+                {
+                  "id": "D",
+                  "text": "주어가 사람인지 사물인지 확인한다"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          }
+        ]
+      },
+      "recall": {
+        "cards": [
+          {
+            "id": "c1",
+            "text": "목적어는 '무엇을'에 해당하는 말"
+          },
+          {
+            "id": "c2",
+            "text": "목적어는 서술어 동작의 대상"
+          },
+          {
+            "id": "c3",
+            "text": "목적어 힌트: '~을/를'이 붙음"
+          },
+          {
+            "id": "c4",
+            "text": "보어는 되거나 아닌지 보충하는 말"
+          },
+          {
+            "id": "c5",
+            "text": "보어는 '되다/아니다' 앞에 위치"
+          },
+          {
+            "id": "c6",
+            "text": "보어 힌트: '~이/가' + 되다/아니다"
+          },
+          {
+            "id": "c7",
+            "text": "을/를 → 목적어로 판단"
+          },
+          {
+            "id": "c8",
+            "text": "이/가 + 되다/아니다 → 보어로 판단"
+          }
+        ],
+        "correctOrder": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5",
+          "c6",
+          "c7",
+          "c8"
+        ],
+        "seedPenalty": 1
+      },
+      "confirm": {
+        "questions": [
+          {
+            "id": "q1",
+            "prompt": "목적어는 어떤 질문에 해당하나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 18
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q2",
+            "prompt": "목적어를 찾는 힌트는 무엇인가요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p1",
+                "start": 42,
+                "end": 67
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q3",
+            "prompt": "보어는 어떤 역할을 하나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p1",
+                "start": 98,
+                "end": 129
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q4",
+            "prompt": "보어가 오는 서술어에는 어떤 것이 있나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p1",
+                "start": 131,
+                "end": 175
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q5",
+            "prompt": "목적어와 보어를 구별하는 꿀팁은 무엇인가요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p2",
+                "start": 10,
+                "end": 59
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "contentType": "PRO_READING",
+    "title": "우장춘 박사의 씨앗 이야기",
+    "targetLevel": "frege2",
+    "area": "READING",
+    "subArea": "LITERATURE",
+    "timeLimitSec": 300,
+    "seedReward": {
+      "seedType": "seed_rice",
+      "count": 3,
+      "multiplier": 1
+    },
+    "payload": {
+      "passage": {
+        "format": "TEXT",
+        "paragraphs": [
+          {
+            "id": "p1",
+            "text": "여러분은 '씨 없는 수박'을 들어본 적이 있나요? 많은 사람이 우장춘 박사를 '씨 없는 수박을 연구한 사람'으로만 알고 있습니다. 하지만 그가 진짜로 하고 싶었던 일은 따로 있었습니다. 바로 일본에 의존하던 우리나라의 씨앗을 우리 힘으로 만드는 것, 즉 '씨앗의 독립'이었습니다."
+          },
+          {
+            "id": "p2",
+            "text": "일본에서 태어나 식물학자로 활동하던 우장춘 박사는 광복 후 조국의 안타까운 소식을 들었습니다. 굶주림으로 죽어가는 사람들이 많다는 것이었습니다. 그는 가난과 배고픔에 시달리는 조국을 구하기 위해 한국행을 선택했습니다. 당시 1950년대 우리나라는 매우 가난했습니다. 우리는 매일 먹는 배추나 무의 씨앗조차 일본에서 비싼 돈을 주고 사 와야 했습니다. 우리 기술이 없었기 때문입니다. 우장춘 박사는 <u>㉠이 사실</u>을 누구보다 안타까워했습니다."
+          },
+          {
+            "id": "p3",
+            "text": "“나라를 되찾았는데, 먹거리의 씨앗을 남의 나라에 의지해서야 되겠습니까?”"
+          },
+          {
+            "id": "p4",
+            "text": "그는 낡은 고무신을 신고 진흙탕 밭을 누비기 시작했습니다. 편안한 연구실 대신 농민들과 함께 밭에서 땀을 흘렸습니다. 밤낮으로 연구에 매달린 결과, 우장춘 박사는 마침내 크고 병에 강한 한국형 배추와 무를 만들어냈습니다. 이제 우리는 일본에서 씨앗을 사오지 않아도 되었습니다. 진짜 '씨앗의 독립'을 이룬 것입니다. 그는 또 제주도에 감귤 재배 연구소를 세우고 귤나무를 심었습니다. 덕분에 오늘날 우리는 맛있는 제주 감귤을 먹을 수 있게 되었습니다."
+          },
+          {
+            "id": "p5",
+            "text": "우장춘 박사의 가장 유명한 연구 성과는 '종의 합성'입니다. 당시 과학자들은 서로 다른 종류의 식물끼리는 새로운 식물을 만들 수 없다고 생각했습니다. 하지만 우장춘 박사는 양배추와 무를 섞어서 완전히 새로운 식물을 만드는 데 성공했습니다. <u>㉡이것</u>은 당시 세계 생물학계를 깜짝 놀라게 한 대단한 발견이었습니다."
+          },
+          {
+            "id": "p6",
+            "text": "우장춘 박사는 세상을 떠나는 순간까지도 손에 연구하던 식물을 쥐고 있었다고 합니다. 그는 조국 대한민국을 위해 편안한 삶을 포기하고 흙투성이 연구자의 삶을 선택했습니다. 그의 땀방울 덕분에 오늘날 우리는 우리 땅에서 난 건강한 채소를 마음껏 먹을 수 있게 되었습니다. 이처럼 우장춘 박사는 우리에게 진정한 독립은 정치적 독립뿐만 아니라, 우리 생활에 필요한 것들을 스스로 만들어낼 수 있는 힘을 갖추는 것이라고 가르쳐 주었습니다."
+          }
+        ]
+      },
+      "intensive": {
+        "timeline": [
+          {
+            "stepId": "s1",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 0,
+                  "end": 27
+                }
+              ]
+            },
+            "question": {
+              "prompt": "많은 사람이 우장춘 박사를 무엇을 연구한 사람으로 아나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "씨 없는 수박"
+                },
+                {
+                  "id": "B",
+                  "text": "감귤 재배"
+                },
+                {
+                  "id": "C",
+                  "text": "벼 품종"
+                },
+                {
+                  "id": "D",
+                  "text": "약초 연구"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s2",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 73,
+                  "end": 156
+                }
+              ]
+            },
+            "question": {
+              "prompt": "우장춘 박사가 진짜 하고 싶었던 일은 무엇인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "씨 없는 수박 만들기"
+                },
+                {
+                  "id": "B",
+                  "text": "일본에서 더 유명해지기"
+                },
+                {
+                  "id": "C",
+                  "text": "우리나라의 씨앗을 우리 힘으로 만드는 씨앗의 독립"
+                },
+                {
+                  "id": "D",
+                  "text": "돈을 많이 버는 것"
+                }
+              ],
+              "answerId": "C",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s3",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 0,
+                  "end": 156
+                }
+              ]
+            },
+            "question": {
+              "prompt": "첫째 문단의 중심 내용으로 가장 적절한 것은?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "우장춘 박사의 진짜 목표는 씨 없는 수박이 아니라 씨앗의 독립이었다"
+                },
+                {
+                  "id": "B",
+                  "text": "우장춘 박사는 씨 없는 수박만 연구했다"
+                },
+                {
+                  "id": "C",
+                  "text": "우장춘 박사는 일본에서만 활동했다"
+                },
+                {
+                  "id": "D",
+                  "text": "우장춘 박사는 농업에 관심이 없었다"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s4",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p2",
+                  "start": 0,
+                  "end": 52
+                }
+              ]
+            },
+            "question": {
+              "prompt": "우장춘 박사는 광복 후 어떤 소식을 들었나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "경제가 크게 발전했다는 소식"
+                },
+                {
+                  "id": "B",
+                  "text": "굶주림으로 죽어가는 사람들이 많다는 소식"
+                },
+                {
+                  "id": "C",
+                  "text": "일본이 다시 침략한다는 소식"
+                },
+                {
+                  "id": "D",
+                  "text": "전쟁이 끝났다는 소식"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s5",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p2",
+                  "start": 149,
+                  "end": 195
+                }
+              ]
+            },
+            "question": {
+              "prompt": "당시 우리나라는 배추나 무의 씨앗을 어떻게 구했나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "직접 만들었다"
+                },
+                {
+                  "id": "B",
+                  "text": "일본에서 비싼 돈을 주고 사 왔다"
+                },
+                {
+                  "id": "C",
+                  "text": "미국에서 가져왔다"
+                },
+                {
+                  "id": "D",
+                  "text": "중국에서 수입했다"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s6",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p4",
+                  "start": 66,
+                  "end": 123
+                }
+              ]
+            },
+            "question": {
+              "prompt": "우장춘 박사가 만들어낸 것은 무엇인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "씨 없는 수박"
+                },
+                {
+                  "id": "B",
+                  "text": "크고 병에 강한 한국형 배추와 무"
+                },
+                {
+                  "id": "C",
+                  "text": "새로운 쌀 품종"
+                },
+                {
+                  "id": "D",
+                  "text": "약초"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s7",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p4",
+                  "start": 155,
+                  "end": 176
+                }
+              ]
+            },
+            "question": {
+              "prompt": "그 결과 이룬 것은 무엇인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "경제적 독립"
+                },
+                {
+                  "id": "B",
+                  "text": "씨앗의 독립"
+                },
+                {
+                  "id": "C",
+                  "text": "정치적 독립"
+                },
+                {
+                  "id": "D",
+                  "text": "문화적 독립"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s8",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p4",
+                  "start": 177,
+                  "end": 251
+                }
+              ]
+            },
+            "question": {
+              "prompt": "우장춘 박사는 제주도에서 무엇을 했나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "쌀 연구소를 세웠다"
+                },
+                {
+                  "id": "B",
+                  "text": "감귤 재배 연구소를 세우고 귤나무를 심었다"
+                },
+                {
+                  "id": "C",
+                  "text": "학교를 세웠다"
+                },
+                {
+                  "id": "D",
+                  "text": "병원을 세웠다"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s9",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p5",
+                  "start": 34,
+                  "end": 133
+                }
+              ]
+            },
+            "question": {
+              "prompt": "우장춘 박사의 가장 유명한 연구 성과인 '종의 합성'은 무엇인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "같은 종의 식물을 더 크게 만든 것"
+                },
+                {
+                  "id": "B",
+                  "text": "서로 다른 종의 식물을 섞어 새 식물을 만든 것"
+                },
+                {
+                  "id": "C",
+                  "text": "식물의 색을 바꾼 것"
+                },
+                {
+                  "id": "D",
+                  "text": "식물을 빨리 자라게 한 것"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s10",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p5",
+                  "start": 0,
+                  "end": 179
+                }
+              ]
+            },
+            "question": {
+              "prompt": "다섯째 문단의 중심 내용으로 가장 적절한 것은?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "종의 합성이라는 세계적 발견으로 생물학계를 놀라게 했다"
+                },
+                {
+                  "id": "B",
+                  "text": "우장춘 박사는 실패한 과학자였다"
+                },
+                {
+                  "id": "C",
+                  "text": "종의 합성은 이미 알려진 것이었다"
+                },
+                {
+                  "id": "D",
+                  "text": "다른 과학자들이 먼저 발견했다"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          }
+        ]
+      },
+      "recall": {
+        "cards": [
+          {
+            "id": "c1",
+            "text": "우장춘 박사의 진짜 목표는 씨앗의 독립"
+          },
+          {
+            "id": "c2",
+            "text": "광복 후 조국의 굶주림을 구하려 귀국"
+          },
+          {
+            "id": "c3",
+            "text": "배추·무 씨앗을 일본에서 사 오던 시절"
+          },
+          {
+            "id": "c4",
+            "text": "농민과 함께 밭에서 연구에 매달림"
+          },
+          {
+            "id": "c5",
+            "text": "한국형 배추와 무를 만들어 씨앗 독립 달성"
+          },
+          {
+            "id": "c6",
+            "text": "제주도에 감귤 재배 연구소를 세움"
+          },
+          {
+            "id": "c7",
+            "text": "종의 합성: 다른 종 식물로 새 식물 창조"
+          },
+          {
+            "id": "c8",
+            "text": "세계 생물학계를 놀라게 한 대단한 업적"
+          }
+        ],
+        "correctOrder": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5",
+          "c6",
+          "c7",
+          "c8"
+        ],
+        "seedPenalty": 1
+      },
+      "confirm": {
+        "questions": [
+          {
+            "id": "q1",
+            "prompt": "우장춘 박사의 진짜 목표는 무엇이었나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p1",
+                "start": 104,
+                "end": 156
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q2",
+            "prompt": "광복 후 조국의 상황은 어떠했나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p2",
+                "start": 53,
+                "end": 80
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q3",
+            "prompt": "우장춘 박사가 귀국을 결심한 이유를 보여주는 말은 무엇인가요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p3",
+                "start": 12,
+                "end": 40
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q4",
+            "prompt": "당시 씨앗을 어디서 구해 왔나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p2",
+                "start": 149,
+                "end": 195
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q5",
+            "prompt": "우장춘 박사가 만들어낸 것은 무엇인가요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p4",
+                "start": 66,
+                "end": 123
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q6",
+            "prompt": "제주도에서 무엇을 했나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p4",
+                "start": 177,
+                "end": 251
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q7",
+            "prompt": "종의 합성이란 무엇인가요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p5",
+                "start": 84,
+                "end": 133
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q8",
+            "prompt": "종의 합성은 당시 어떤 반응을 불러일으켰나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p5",
+                "start": 134,
+                "end": 179
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q9",
+            "prompt": "우장춘 박사의 헌신을 보여주는 마지막 일화는 무엇인가요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p6",
+                "start": 8,
+                "end": 46
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "contentType": "PRO_READING",
+    "title": "멘델의 완두콩 실험과 유전의 비밀",
+    "targetLevel": "frege2",
+    "area": "READING",
+    "subArea": "NONFICTION",
+    "timeLimitSec": 300,
+    "seedReward": {
+      "seedType": "seed_rice",
+      "count": 3,
+      "multiplier": 1
+    },
+    "payload": {
+      "passage": {
+        "format": "TEXT",
+        "paragraphs": [
+          {
+            "id": "p1",
+            "text": "“너는 아빠를 쏙 빼닮았구나!” 명절날 친척들이 모인 자리에서 <u>㉠이런 말</u>을 들어본 적이 있나요? 거울을 보면 나의 눈매나 웃는 모습이 부모님과 닮아 있어 신기할 때가 있습니다. 이처럼 생물이 가진 생김새나 성질을 '형질'이라고 하며, 부모의 형질이 자식에게 물려지는 현상을 '유전'이라고 합니다. 그렇다면 이 유전은 도대체 어떤 원리로 일어나는 것일까요? <u>㉡이 비밀</u>을 처음으로 밝혀낸 사람은 바로 '그레고어 멘델'입니다."
+          },
+          {
+            "id": "p2",
+            "text": "멘델은 19세기 오스트리아의 수도사였습니다. 그는 수도원 정원에서 완두콩을 키우며 유전의 비밀을 연구했습니다. 멘델은 키가 큰 완두와 키가 작은 완두를 교배하여 자손이 어떤 특징을 갖는지 관찰했습니다. 놀랍게도 첫 번째 자손은 모두 키가 컸습니다. 작은 키의 특징은 완전히 사라진 것처럼 보였습니다. 하지만 멘델은 <u>㉢여기서</u> 멈추지 않고 계속 실험을 이어 갔습니다."
+          },
+          {
+            "id": "p3",
+            "text": "멘델이 첫 번째 자손이 맺은 씨앗을 심어 다시 길렀더니, 두 번째 자손에서는 키가 큰 완두와 키가 작은 완두가 약 3 대 1의 비율로 나타났습니다. 즉, 네 그루 중 세 그루는 키가 크고, 한 그루는 키가 작았던 것입니다. 첫 번째 자손에서 잠시 사라진 줄 알았던 작은 키의 형질이 다시 모습을 드러낸 것이죠. 이 실험을 통해 멘델은 중요한 사실을 발견했습니다. 생물의 특징을 결정하는 '유전 인자'가 있으며, <u>㉣여기</u>에는 겉으로 잘 드러나는 성질과 숨어 있는 성질이 있다는 점입니다. 키가 큰 형질은 겉으로 잘 드러나지만, 키가 작은 형질은 숨어 있다가 다음 세대에서 비로소 다시 나타날 수 있다는 것입니다."
+          },
+          {
+            "id": "p4",
+            "text": "멘델의 발견은 처음에는 사람들의 주목을 받지 못했습니다. 하지만 그가 세상을 떠난 뒤 과학자들이 그의 연구를 다시 확인하면서, 멘델의 법칙은 생물학에서 가장 중요한 법칙 중 하나가 되었습니다. 오늘날 우리는 멘델이 말한 '유전 인자'를 '유전자'라고 부르며, DNA 속에 담겨 있다는 것을 알고 있습니다. 수도원 정원에서 시작된 멘델의 완두콩 실험은 현대 유전학의 기초가 되어 우리가 생명의 신비를 이해하는 데 큰 도움을 주고 있습니다."
+          }
+        ]
+      },
+      "intensive": {
+        "timeline": [
+          {
+            "stepId": "s1",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 106,
+                  "end": 172
+                }
+              ]
+            },
+            "question": {
+              "prompt": "부모의 형질이 자식에게 물려지는 현상을 무엇이라 하나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "진화"
+                },
+                {
+                  "id": "B",
+                  "text": "유전"
+                },
+                {
+                  "id": "C",
+                  "text": "성장"
+                },
+                {
+                  "id": "D",
+                  "text": "면역"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s2",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 206,
+                  "end": 249
+                }
+              ]
+            },
+            "question": {
+              "prompt": "유전의 비밀을 처음 밝혀낸 사람은 누구인가요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "다윈"
+                },
+                {
+                  "id": "B",
+                  "text": "뉴턴"
+                },
+                {
+                  "id": "C",
+                  "text": "그레고어 멘델"
+                },
+                {
+                  "id": "D",
+                  "text": "파스퇴르"
+                }
+              ],
+              "answerId": "C",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s3",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 0,
+                  "end": 249
+                }
+              ]
+            },
+            "question": {
+              "prompt": "첫째 문단의 중심 내용으로 가장 적절한 것은?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "부모의 형질이 자식에게 유전되며, 그 원리를 멘델이 처음 밝혔다"
+                },
+                {
+                  "id": "B",
+                  "text": "유전은 최근에야 발견되었다"
+                },
+                {
+                  "id": "C",
+                  "text": "멘델은 의사였다"
+                },
+                {
+                  "id": "D",
+                  "text": "형질은 유전과 관련이 없다"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s4",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p2",
+                  "start": 25,
+                  "end": 61
+                }
+              ]
+            },
+            "question": {
+              "prompt": "멘델은 어디서 무엇을 키우며 연구했나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "연구소에서 쥐"
+                },
+                {
+                  "id": "B",
+                  "text": "수도원 정원에서 완두콩"
+                },
+                {
+                  "id": "C",
+                  "text": "대학에서 옥수수"
+                },
+                {
+                  "id": "D",
+                  "text": "집에서 토마토"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s5",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p2",
+                  "start": 113,
+                  "end": 138
+                }
+              ]
+            },
+            "question": {
+              "prompt": "첫 번째 자손의 키는 어떠했나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "모두 키가 작았다"
+                },
+                {
+                  "id": "B",
+                  "text": "크고 작은 것이 섞여 나왔다"
+                },
+                {
+                  "id": "C",
+                  "text": "모두 키가 컸다"
+                },
+                {
+                  "id": "D",
+                  "text": "변화가 없었다"
+                }
+              ],
+              "answerId": "C",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s6",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p2",
+                  "start": 0,
+                  "end": 210
+                }
+              ]
+            },
+            "question": {
+              "prompt": "둘째 문단의 중심 내용으로 가장 적절한 것은?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "멘델이 완두콩을 교배했더니 첫 자손은 모두 키가 컸다"
+                },
+                {
+                  "id": "B",
+                  "text": "첫 자손에서 작은 키가 더 많이 나왔다"
+                },
+                {
+                  "id": "C",
+                  "text": "멘델은 실험을 한 번만 했다"
+                },
+                {
+                  "id": "D",
+                  "text": "완두콩은 모두 같은 키로 자란다"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s7",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p3",
+                  "start": 0,
+                  "end": 82
+                }
+              ]
+            },
+            "question": {
+              "prompt": "두 번째 자손에서 키가 큰 것과 작은 것의 비율은?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "1:1"
+                },
+                {
+                  "id": "B",
+                  "text": "2:1"
+                },
+                {
+                  "id": "C",
+                  "text": "3:1"
+                },
+                {
+                  "id": "D",
+                  "text": "4:1"
+                }
+              ],
+              "answerId": "C",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s8",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p3",
+                  "start": 125,
+                  "end": 173
+                }
+              ]
+            },
+            "question": {
+              "prompt": "사라진 줄 알았던 작은 키 형질은 어떻게 되었나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "영원히 사라졌다"
+                },
+                {
+                  "id": "B",
+                  "text": "두 번째 자손에서 다시 나타났다"
+                },
+                {
+                  "id": "C",
+                  "text": "세 번째 자손에서 나타났다"
+                },
+                {
+                  "id": "D",
+                  "text": "나타나지 않았다"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s9",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p3",
+                  "start": 203,
+                  "end": 277
+                }
+              ]
+            },
+            "question": {
+              "prompt": "멘델이 발견한 유전 인자에는 어떤 성질이 있나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "모두 겉으로 드러난다"
+                },
+                {
+                  "id": "B",
+                  "text": "표면에 나타나는 형질과 겉으로 보이지 않는 형질이 공존한다"
+                },
+                {
+                  "id": "C",
+                  "text": "성질이 하나뿐이다"
+                },
+                {
+                  "id": "D",
+                  "text": "성질이 매번 바뀐다"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s10",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p3",
+                  "start": 0,
+                  "end": 347
+                }
+              ]
+            },
+            "question": {
+              "prompt": "셋째 문단의 중심 내용으로 가장 적절한 것은?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "유전 인자에는 드러나는 것과 숨은 것이 있어 세대를 넘어 다시 나타난다"
+                },
+                {
+                  "id": "B",
+                  "text": "작은 키는 영원히 사라진다"
+                },
+                {
+                  "id": "C",
+                  "text": "3:1 비율은 우연이었다"
+                },
+                {
+                  "id": "D",
+                  "text": "멘델은 실험에 실패했다"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s11",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p4",
+                  "start": 108,
+                  "end": 170
+                }
+              ]
+            },
+            "question": {
+              "prompt": "오늘날 멘델이 말한 유전 인자를 무엇이라 부르나요?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "세포"
+                },
+                {
+                  "id": "B",
+                  "text": "유전자(DNA 속)"
+                },
+                {
+                  "id": "C",
+                  "text": "혈액형"
+                },
+                {
+                  "id": "D",
+                  "text": "호르몬"
+                }
+              ],
+              "answerId": "B",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          },
+          {
+            "stepId": "s12",
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p4",
+                  "start": 0,
+                  "end": 244
+                }
+              ]
+            },
+            "question": {
+              "prompt": "넷째 문단의 중심 내용으로 가장 적절한 것은?",
+              "choices": [
+                {
+                  "id": "A",
+                  "text": "멘델의 법칙은 현대 유전학의 기초가 되었다"
+                },
+                {
+                  "id": "B",
+                  "text": "멘델의 발견은 인정받지 못했다"
+                },
+                {
+                  "id": "C",
+                  "text": "유전자는 아직 발견되지 않았다"
+                },
+                {
+                  "id": "D",
+                  "text": "완두콩 실험은 의미가 없었다"
+                }
+              ],
+              "answerId": "A",
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
+            }
+          }
+        ]
+      },
+      "recall": {
+        "cards": [
+          {
+            "id": "c1",
+            "text": "부모 형질이 자식에게 전해지는 것이 유전"
+          },
+          {
+            "id": "c2",
+            "text": "멘델이 수도원에서 완두콩으로 실험"
+          },
+          {
+            "id": "c3",
+            "text": "첫 번째 자손은 모두 키가 큰 완두"
+          },
+          {
+            "id": "c4",
+            "text": "두 번째 자손에서 3:1 비율로 나타남"
+          },
+          {
+            "id": "c5",
+            "text": "사라진 형질이 다시 나타남을 발견"
+          },
+          {
+            "id": "c6",
+            "text": "유전 인자에는 드러나는 것과 숨은 것이 있음"
+          },
+          {
+            "id": "c7",
+            "text": "오늘날 유전 인자를 유전자(DNA)라 부름"
+          },
+          {
+            "id": "c8",
+            "text": "멘델의 법칙은 현대 유전학의 기초"
+          }
+        ],
+        "correctOrder": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5",
+          "c6",
+          "c7",
+          "c8"
+        ],
+        "seedPenalty": 1
+      },
+      "confirm": {
+        "questions": [
+          {
+            "id": "q1",
+            "prompt": "유전이란 무엇인가요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p1",
+                "start": 106,
+                "end": 172
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q2",
+            "prompt": "유전의 비밀을 처음 밝힌 사람은 누구인가요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p1",
+                "start": 206,
+                "end": 249
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q3",
+            "prompt": "멘델은 무엇을 키우며 연구했나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p2",
+                "start": 25,
+                "end": 61
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q4",
+            "prompt": "첫 번째 자손은 어떤 특징을 보였나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p2",
+                "start": 113,
+                "end": 138
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q5",
+            "prompt": "두 번째 자손에서 키 큰 것과 작은 것의 비율은?",
+            "answerRanges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 82
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q6",
+            "prompt": "유전 인자에는 어떤 두 가지 성질이 있나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p3",
+                "start": 203,
+                "end": 277
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          },
+          {
+            "id": "q7",
+            "prompt": "오늘날 유전 인자를 무엇이라 부르나요?",
+            "answerRanges": [
+              {
+                "paragraphId": "p4",
+                "start": 108,
+                "end": 170
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
+            "revealOnWrong": true,
+            "answerMatchMode": "ANY"
+          }
+        ]
+      }
+    }
+  }
+]

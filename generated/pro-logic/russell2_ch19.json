@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀2 19장 논리사고력",
+  "targetLevel": "russell2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "공기 청정기의 필터 방식은 HEPA 필터로 미세 입자를 물리적으로 걸러낸다. 필터의 섬유 사이 간격보다 큰 입자는 통과하지 못하고 걸러진다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "HEPA 필터가 미세 입자를 걸러내려면 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 입자의 크기가 동일해야 한다."
+              },
+              {
+                "id": "B",
+                "text": "필터가 없어도 공기가 자연적으로 깨끗해진다."
+              },
+              {
+                "id": "C",
+                "text": "필터 섬유의 간격이 제거 대상 입자보다 촘촘해야 한다."
+              },
+              {
+                "id": "D",
+                "text": "공기가 필터를 통과하지 않아도 된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "음운 변동에서 축약은 두 음운이 하나의 음운으로 합쳐지는 현상이다. '놓다'가 [노타]로 발음될 때 ㅎ+ㄷ→ㅌ으로 축약된다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "축약이 일어나려면 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모음끼리 만나야 한다."
+              },
+              {
+                "id": "B",
+                "text": "하나의 음운만 있어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "두 개의 서로 다른 음운이 인접해 있어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "음운이 탈락해야 한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "「숙향전」은 고전 소설로, 숙향이라는 여성 주인공이 수많은 고난을 겪지만 선행과 운명의 도움으로 행복한 결말을 맞는다. 이 작품에는 사회 비판적 요소도 담겨 있다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "숙향이 고난 없이 바로 행복한 결말을 맞았다면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서사적 긴장감이 높아진다."
+              },
+              {
+                "id": "B",
+                "text": "독자의 감동이 더 커진다."
+              },
+              {
+                "id": "C",
+                "text": "사회 비판이 더 강화된다."
+              },
+              {
+                "id": "D",
+                "text": "인물의 인내와 선행의 가치가 부각되지 않아 교훈적 효과가 약화된다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "공기 청정기에서 활성탄 필터는 화학적 흡착으로 유해 가스와 냄새를 제거한다. 활성탄의 표면적이 넓을수록 흡착 효과가 크다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "활성탄 필터가 포화 상태(더 이상 흡착 불가)에 이르면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "미세 먼지 제거 효율이 높아진다."
+              },
+              {
+                "id": "B",
+                "text": "필터 효율이 더 높아진다."
+              },
+              {
+                "id": "C",
+                "text": "활성탄이 자동으로 재생된다."
+              },
+              {
+                "id": "D",
+                "text": "유해 가스와 냄새가 제거되지 않고 그대로 통과한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "음운 변동에서 탈락은 원래 있던 음운이 사라지는 현상이다. '쓰어서'가 '써서'로 발음될 때 모음 'ㅡ'가 탈락한다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 탈락은 음운이 사라지는 현상이다. [소전제] '쓰어서'에서 'ㅡ'가 사라져 '써서'가 되었다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 현상은 교체이다."
+              },
+              {
+                "id": "B",
+                "text": "이 현상은 축약이다."
+              },
+              {
+                "id": "C",
+                "text": "이 현상은 첨가이다."
+              },
+              {
+                "id": "D",
+                "text": "이 현상은 탈락이다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "고전 소설에서 권선징악은 선한 인물이 보상받고 악한 인물이 벌받는 주제이다. 「숙향전」은 권선징악적 결말을 가진 고전 소설이다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 권선징악 소설에서 선한 인물은 보상을 받는다. [소전제] 숙향은 선한 인물이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "숙향은 악한 인물이다."
+              },
+              {
+                "id": "B",
+                "text": "숙향은 벌을 받는다."
+              },
+              {
+                "id": "C",
+                "text": "숙향은 보상도 벌도 받지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "숙향은 결국 보상(행복한 결말)을 받는다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "음운 첨가는 없던 음운이 새로 생기는 현상이다. '솜이불'이 [솜니불]로 발음될 때 'ㄴ'이 첨가된다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'음운 첨가가 일어났다'가 참이면, 반드시 참이어야 하는 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기존 음운이 다른 음운으로 교체되었다."
+              },
+              {
+                "id": "B",
+                "text": "원래 없던 음운이 발음 과정에서 새로 생겼다."
+              },
+              {
+                "id": "C",
+                "text": "두 음운이 하나로 합쳐졌다."
+              },
+              {
+                "id": "D",
+                "text": "기존 음운이 사라졌다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "HEPA 필터로 미세 먼지를 제거하고, 활성탄 필터로 유해 가스를 제거하는 복합 필터 시스템이 가장 효과적이다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'미세 먼지와 유해 가스가 모두 제거된다'를 P, 'HEPA 필터와 활성탄 필터가 모두 장착되어 있다'를 Q라 할 때, 올바른 필요조건 진술은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "~P이면 반드시 ~Q이다."
+              },
+              {
+                "id": "B",
+                "text": "Q이면 반드시 P이다."
+              },
+              {
+                "id": "C",
+                "text": "P이면서 ~Q인 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "P와 Q는 독립적이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "고전 소설에서 사회 비판은 기존 사회 제도나 관습의 문제점을 작품 속에서 드러내는 것이다. 「숙향전」에서 숙향이 겪는 고난에는 당시 사회의 불합리함이 반영되어 있다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'사회 비판적 요소가 있다'의 필요조건은 '사회 제도나 관습의 문제점이 드러난다'이다. 이 필요조건을 충족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자연의 아름다움만 묘사하는 시"
+              },
+              {
+                "id": "B",
+                "text": "영웅이 괴물을 물리치는 장면"
+              },
+              {
+                "id": "C",
+                "text": "숙향이 신분 차별로 인해 고난을 겪는 장면"
+              },
+              {
+                "id": "D",
+                "text": "연인이 재회하는 행복한 결말"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "축약은 두 음운이 하나로 합쳐지는 것이다. 'ㅎ+ㄷ→ㅌ', 'ㅎ+ㄱ→ㅋ', 'ㅎ+ㅂ→ㅍ' 등이 예이다. 축약 후 음운의 총 개수가 줄어든다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'축약이 일어났다'의 필요조건은 '두 음운이 하나로 합쳐져 음운 수가 감소했다'이다. 이 필요조건을 충족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'국물' [궁물] (교체, 개수 불변)"
+              },
+              {
+                "id": "B",
+                "text": "'놓다' [노타] (ㅎ+ㄷ→ㅌ, 축약)"
+              },
+              {
+                "id": "C",
+                "text": "'솜이불' [솜니불] (첨가, 개수 증가)"
+              },
+              {
+                "id": "D",
+                "text": "'쓰어서' [써서] (탈락, 개수 감소)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "공기 청정기에서 UV 살균 방식은 자외선으로 세균과 바이러스를 죽인다. UV 램프가 작동하면 공기 중 미생물이 사멸한다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'UV 램프가 작동한다(P)'는 '미생물이 사멸한다(Q)'의 충분조건이다. 올바르게 변환한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "UV 램프가 작동하지 않으면 미생물이 사멸하지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "미생물이 사멸하지 않으면 UV 램프가 작동하지 않았다. (대우, 타당)"
+              },
+              {
+                "id": "C",
+                "text": "미생물이 사멸하면 반드시 UV 램프가 작동했다."
+              },
+              {
+                "id": "D",
+                "text": "UV 램프가 작동해도 미생물이 사멸하지 않을 수 있다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "음운 탈락에서 'ㅡ' 탈락은 어간 끝 'ㅡ'가 모음 어미 앞에서 사라지는 현상이다. '쓰-' + '-어서' → '써서'가 된다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "P(어간 끝 ㅡ + 모음 어미) → Q(ㅡ 탈락)일 때, ~P이면서 Q인 경우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어간 끝 ㅡ와 모음 어미가 만나 ㅡ가 탈락한 경우"
+              },
+              {
+                "id": "B",
+                "text": "어간 끝이 ㅡ가 아닌데 다른 규칙에 의해 모음이 탈락한 경우"
+              },
+              {
+                "id": "C",
+                "text": "어간 끝이 자음이고 모음 어미가 와도 변동이 없는 경우"
+              },
+              {
+                "id": "D",
+                "text": "어간 끝 ㅡ 뒤에 자음 어미가 온 경우"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "「숙향전」에서 숙향은 하늘의 도움(초월적 존재의 개입)으로 위기를 벗어난다. 이는 고전 소설에서 전형적으로 나타나는 '천상계 개입' 모티프이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'초월적 존재의 개입이 있다'는 '고전 소설의 천상계 모티프이다'의 충분조건이다. 이 충분조건을 만족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하늘의 선녀가 숙향을 구해주는 장면"
+              },
+              {
+                "id": "B",
+                "text": "주인공이 자신의 노력만으로 위기를 극복하는 현대 소설"
+              },
+              {
+                "id": "C",
+                "text": "탐정이 논리적 추론으로 사건을 해결하는 추리 소설"
+              },
+              {
+                "id": "D",
+                "text": "과학자가 실험으로 문제를 해결하는 과학 소설"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "공기 청정기에서 음이온 발생 방식은 음전하를 띤 이온을 방출하여 먼지 입자에 붙게 하고, 무거워진 입자가 바닥에 떨어지게 한다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'음이온이 먼지에 부착되었다'의 충분조건을 만족하는 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "음이온이 먼지 입자에 달라붙어 무거워진 것"
+              },
+              {
+                "id": "B",
+                "text": "음이온에 의해 먼지가 바닥으로 가라앉은 것"
+              },
+              {
+                "id": "C",
+                "text": "정전기 방식으로 먼지를 포집한 것"
+              },
+              {
+                "id": "D",
+                "text": "HEPA 필터로 먼지를 물리적으로 걸러낸 것"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "음운 변동에서 축약은 음운 수가 줄고, 탈락도 음운 수가 줄고, 첨가는 음운 수가 늘고, 교체는 음운 수가 변하지 않는다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "다음 추론 중 논리적으로 타당한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "첨가이면 음운 수가 늘어난다. '솜이불'→[솜니불]은 첨가이다. 따라서 음운 수가 늘었다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "B",
+                "text": "음운 수가 줄었으므로 축약이다. (후건 긍정 — 부당, 탈락도 가능)"
+              },
+              {
+                "id": "C",
+                "text": "교체이므로 음운 수가 늘었다. (대전제 거짓)"
+              },
+              {
+                "id": "D",
+                "text": "B와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "HEPA 필터가 장착되면 0.3μm 이상 입자를 99.97% 이상 제거할 수 있다. 활성탄 필터가 장착되면 유해 가스를 흡착할 수 있다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'HEPA 필터가 장착되면(P) 미세 먼지가 제거된다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "미세 먼지가 제거되었으므로 HEPA가 있다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "미세 먼지가 제거되지 않았으므로 HEPA가 없다. (후건 부정 — 대우, 타당)"
+              },
+              {
+                "id": "C",
+                "text": "HEPA가 없으므로 미세 먼지가 제거되지 않는다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "「숙향전」에서 숙향의 고난의 횟수와 최종 보상의 크기가 함께 나타난다. 고난을 많이 겪을수록 행복한 결말의 감동이 커진다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'고난의 횟수'와 '결말의 감동 크기' 사이의 관계에 대한 설명으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 요소 사이에 양의 상관관계가 있으며, 서사적 긴장과 해소의 구조가 매개한다."
+              },
+              {
+                "id": "B",
+                "text": "고난이 감동의 직접 원인이다."
+              },
+              {
+                "id": "C",
+                "text": "감동이 클수록 고난이 줄어든다."
+              },
+              {
+                "id": "D",
+                "text": "두 요소는 완전히 독립적이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "실내 공기 오염도가 높을수록 공기 청정기의 필터 교체 주기가 짧아진다. 오염도와 필터 수명이 반비례 관계에 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'실내 오염도'와 '필터 수명' 사이의 관계에 대한 설명으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 요소 사이에 음의 상관관계가 있으며, 필터에 축적되는 오염 물질의 양이라는 매개 변수가 작용한다."
+              },
+              {
+                "id": "B",
+                "text": "오염도가 필터 수명의 유일한 결정 요인이다."
+              },
+              {
+                "id": "C",
+                "text": "필터 수명이 길면 오염도가 높아진다."
+              },
+              {
+                "id": "D",
+                "text": "두 요소는 완전히 독립적이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "음운 변동에서 'ㄴ' 첨가는 합성어나 파생어에서 앞말이 자음으로 끝나고 뒷말이 '이, 야, 여, 요, 유'로 시작할 때 발생한다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '솜이불'은 [소미불]로 발음된다. 이 가설을 반증하는 근거로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'솜이불'에서 ㄴ 첨가가 일어나 [솜니불]이 올바른 발음이다."
+              },
+              {
+                "id": "B",
+                "text": "'솜'은 비음 ㅁ으로 끝난다."
+              },
+              {
+                "id": "C",
+                "text": "'이불'은 '이'로 시작한다."
+              },
+              {
+                "id": "D",
+                "text": "'솜이불'은 합성어이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "공기 청정기의 CADR(깨끗한 공기 전달률)은 단위 시간당 청정기가 얼마나 많은 깨끗한 공기를 배출하는지 나타내는 수치이다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 'CADR이 높은 청정기가 항상 모든 오염 물질을 더 잘 제거한다.' 이 가설을 검증하기 위한 방법으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "청정기의 가격만 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "청정기의 무게만 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "CADR이 높은 제품과 낮은 제품에 동일한 오염 물질(먼지, 가스, 세균)을 투입하여 각각의 제거율을 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "청정기의 소음만 측정한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,204 @@
+const fs = require('fs');
+const path = require('path');
+
+// ── 유틸리티 함수 ──
+
+function findSentences(text) {
+  const sentences = [];
+  let start = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === '.' && (i === text.length - 1 || text[i+1] === ' ' || text[i+1] === '\n')) {
+      sentences.push({ start, end: i + 1, text: text.substring(start, i + 1) });
+      let next = i + 1;
+      while (next < text.length && (text[next] === ' ' || text[next] === '\n')) next++;
+      start = next;
+    }
+  }
+  if (start < text.length) sentences.push({ start, end: text.length, text: text.substring(start) });
+  return sentences;
+}
+
+function findRange(paragraphs, pid, searchText) {
+  const para = paragraphs.find(p => p.id === pid);
+  if (!para) throw new Error(`문단 ${pid} 없음`);
+  const start = para.text.indexOf(searchText);
+  if (start === -1) throw new Error(`"${searchText.substring(0, 30)}..." ${pid}에서 찾을 수 없음`);
+  return { paragraphId: pid, start, end: start + searchText.length };
+}
+
+function charLen(paragraphs) { return paragraphs.reduce((sum, p) => sum + p.text.length, 0); }
+
+function buildTimeline(paragraphs) {
+  let stepNum = 0; const timeline = [];
+  paragraphs.forEach((para) => {
+    const sents = findSentences(para.text);
+    sents.forEach((sent) => { stepNum++; timeline.push({ stepId: `s${stepNum}`, highlight: { ranges: [{ paragraphId: para.id, start: sent.start, end: sent.end }] } }); });
+    stepNum++; timeline.push({ stepId: `s${stepNum}`, highlight: { ranges: [{ paragraphId: para.id, start: 0, end: para.text.length }] } });
+  });
+  return timeline;
+}
+
+function buildRecallCards(paragraphs) {
+  const fullText = paragraphs.map(p => p.text).join('\n');
+  const totalLen = fullText.length; const chunkSize = Math.ceil(totalLen / 8); const cards = [];
+  for (let i = 0; i < 8; i++) { const s = i * chunkSize; const e = Math.min(s + chunkSize, totalLen); cards.push({ id: `c${i+1}`, text: fullText.substring(s, e) }); }
+  return cards;
+}
+
+function makeConfirmQ(id, prompt, ranges) {
+  return { id, prompt, answerRanges: ranges, scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true, answerMatchMode: "ANY" };
+}
+
+function assembleFull(dayIndex, subArea, subAreaKo, paragraphs, confirmQuestions) {
+  const timeline = buildTimeline(paragraphs); const cards = buildRecallCards(paragraphs);
+  const nn = String(dayIndex).padStart(3, '0');
+  return {
+    contentId: `dr-f2-${nn}`, contentType: "DAILY_READING", version: 1, status: "PUBLISHED",
+    title: `일일 독해(프레게 2) Day ${dayIndex} ${subAreaKo}`,
+    description: "일일 독해 - 정독·복기·확인",
+    targetLevel: "FREGE_2", schoolGradeRange: { min: 6, max: 6 },
+    area: "READING", subArea, competencies: ["READING"], tags: ["daily"],
+    access: { mode: "FREE" }, seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+    timeLimitSec: 480, assets: {},
+    payload: { passage: { format: "TEXT", paragraphs }, intensive: { timeline }, recall: { cards, correctOrder: cards.map(c => c.id), seedPenalty: 1 }, confirm: { questions: confirmQuestions } }
+  };
+}
+
+function wrapBatchItem(dayIndex, subArea, content) {
+  return { content_type: "DAILY_READING", level_id: "FREGE_2", area: "READING", sub_area: subArea, day_index: dayIndex, module_key: "reading_training", schema_version: "1.0", content };
+}
+
+// ── Day 244 (짝수 → 문학) ──
+function buildDay244() {
+  const paragraphs = [
+    { id: "p1", text: "마을 어귀의 느티나무 아래에는 언제나 할머니들이 모여 앉아 있었다. 여름이면 넓은 그늘 아래서 부채질을 하며 이야기꽃을 피웠고, 가을이면 마당에 널어놓은 고추를 말리며 서로의 안부를 물었다. 그 나무는 마을이 생긴 이래로 줄곧 그 자리에 서 있었다고 했는데, 둥치가 어찌나 굵은지 어른 서너 명이 팔을 벌려야 겨우 감쌀 수 있을 정도였다. 은수는 학교에서 돌아올 때마다 그 나무 앞을 지나며 할머니들에게 인사를 드리곤 했다." },
+    { id: "p2", text: "어느 해 봄, 군청에서 도로를 넓히기 위해 느티나무를 베어야 한다는 공문이 내려왔다. 마을 사람들은 크게 반발했지만, 행정 절차는 이미 진행되고 있었다. 은수의 할아버지는 마을 이장으로서 주민들의 뜻을 모아 탄원서를 제출하기로 했다. 은수도 학교 친구들과 함께 나무를 살리자는 캠페인을 벌였는데, 손으로 직접 만든 팻말에 '이 나무는 우리 마을의 심장입니다'라고 적어 나무 앞에 세워 두었다." },
+    { id: "p3", text: "여름이 한창이던 어느 날, 군청 직원들이 측량 장비를 들고 마을에 나타났다. 할머니들은 나무 아래를 떠나지 않았고, 아이들은 나무 주위에 둘러앉아 노래를 불렀다. 은수의 할아버지는 군청 직원에게 이 나무가 마을의 역사와 공동체 의식을 상징하는 존재라고 차분하게 설명했다. 직원들은 본래의 업무를 수행하지 못한 채 돌아갔고, 며칠 뒤 군청에서는 도로 설계를 변경하여 나무를 보존하기로 결정했다는 통보가 왔다." },
+    { id: "p4", text: "가을이 되자 느티나무는 황금빛 잎으로 물들었고, 마을 사람들은 나무 아래에서 작은 잔치를 열었다. 은수는 할아버지 옆에 앉아 떡과 막걸리를 나누어 드리며, 마을이 하나로 뭉쳐 소중한 것을 지켜 냈다는 사실에 가슴이 뿌듯했다. 할아버지는 은수의 머리를 쓰다듬으며 말했다. '사람이든 나무든, 오래도록 곁에 있는 것이 얼마나 귀한 건지 이제 알겠지.' 바람이 불자 황금빛 잎사귀들이 하나둘 떨어지며 잔치 자리를 아름답게 수놓았다." }
+  ];
+  console.log(`Day 244 지문 길이: ${charLen(paragraphs)}자`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "지문에서 '어른 서너 명이 팔을 벌려야 겨우 감쌀 수 있을 정도'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "어른 서너 명이 팔을 벌려야 겨우 감쌀 수 있을 정도")]),
+    makeConfirmQ("q2", "지문에서 '도로를 넓히기 위해 느티나무를 베어야 한다는 공문'을 찾아 클릭하세요.", [findRange(paragraphs, "p2", "도로를 넓히기 위해 느티나무를 베어야 한다는 공문")]),
+    makeConfirmQ("q3", "지문에서 '이 나무는 우리 마을의 심장입니다'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "이 나무는 우리 마을의 심장입니다")]),
+    makeConfirmQ("q4", "지문에서 '마을의 역사와 공동체 의식을 상징하는 존재'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "마을의 역사와 공동체 의식을 상징하는 존재")]),
+    makeConfirmQ("q5", "지문에서 '도로 설계를 변경하여 나무를 보존하기로 결정했다'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "도로 설계를 변경하여 나무를 보존하기로 결정했다")]),
+    makeConfirmQ("q6", "지문에서 '오래도록 곁에 있는 것이 얼마나 귀한 건지'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "오래도록 곁에 있는 것이 얼마나 귀한 건지")])
+  ];
+  return { content: assembleFull(244, "LITERATURE", "문학", paragraphs, confirmQuestions), subArea: "LITERATURE" };
+}
+
+// ── Day 245 (홀수 → 비문학) ──
+function buildDay245() {
+  const paragraphs = [
+    { id: "p1", text: "인류가 최초로 사용한 도구는 돌을 깨뜨려 만든 석기였다. 약 260만 년 전 아프리카에서 시작된 석기 제작 기술은 인류 문명의 출발점이라 할 수 있다. 초기의 석기는 단순히 돌을 깨뜨려 날카로운 모서리를 만든 것에 불과했지만, 시간이 지나면서 점차 정교한 형태로 발전하였다. 구석기 시대의 주먹도끼는 양면을 정밀하게 다듬어 만든 대표적인 도구로, 사냥과 식재료 가공에 두루 사용되었다." },
+    { id: "p2", text: "신석기 시대에 이르면 도구 제작 기술에 혁명적인 변화가 나타난다. 돌을 깨뜨리는 대신 갈아서 다듬는 마제석기 기법이 등장하면서 도구의 정밀도와 내구성이 크게 향상되었다. 이 시기에는 농경이 시작되면서 돌낫, 돌보습 같은 농기구가 만들어졌고, 토기의 발명으로 식량을 저장하고 조리하는 것이 가능해졌다. 정착 생활이 이루어지면서 마을이 형성되었고, 이는 곧 사회 조직의 발달로 이어졌다." },
+    { id: "p3", text: "청동기 시대와 철기 시대를 거치면서 인류의 도구는 금속으로 전환되었다. 청동은 구리와 주석의 합금으로 석기보다 단단하고 다양한 형태로 주조할 수 있었기에 무기와 의식용 도구로 널리 쓰였다. 이후 철의 사용이 보편화되면서 농업 생산성이 비약적으로 증가하였고, 대규모 건축과 군사 기술의 발전이 가능해졌다. 도구의 재료가 돌에서 금속으로 바뀌는 과정은 단순한 기술적 진보가 아니라, 인류 사회의 구조와 문화 전체를 근본적으로 변화시킨 혁명이었다." },
+    { id: "p4", text: "오늘날 우리가 사용하는 첨단 기술 역시 이러한 도구 발전의 연장선 위에 있다. 컴퓨터와 인공지능은 인간의 사고를 보조하는 새로운 형태의 도구이며, 이전의 석기나 금속 도구가 그랬듯이 사회와 문화를 빠르게 변화시키고 있다. 역사를 돌아보면 도구의 발전은 언제나 인간의 삶의 방식을 근본적으로 바꾸어 왔으며, 앞으로도 그러할 것이다." }
+  ];
+  console.log(`Day 245 지문 길이: ${charLen(paragraphs)}자`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "지문에서 '약 260만 년 전 아프리카에서 시작된 석기 제작 기술'을 찾아 클릭하세요.", [findRange(paragraphs, "p1", "약 260만 년 전 아프리카에서 시작된 석기 제작 기술")]),
+    makeConfirmQ("q2", "지문에서 '구석기 시대의 주먹도끼'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "구석기 시대의 주먹도끼")]),
+    makeConfirmQ("q3", "지문에서 '마제석기 기법이 등장하면서'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "마제석기 기법이 등장하면서")]),
+    makeConfirmQ("q4", "지문에서 '토기의 발명으로 식량을 저장하고 조리하는 것이 가능해졌다'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "토기의 발명으로 식량을 저장하고 조리하는 것이 가능해졌다")]),
+    makeConfirmQ("q5", "지문에서 '청동은 구리와 주석의 합금'을 찾아 클릭하세요.", [findRange(paragraphs, "p3", "청동은 구리와 주석의 합금")]),
+    makeConfirmQ("q6", "지문에서 '인류 사회의 구조와 문화 전체를 근본적으로 변화시킨 혁명'을 찾아 클릭하세요.", [findRange(paragraphs, "p3", "인류 사회의 구조와 문화 전체를 근본적으로 변화시킨 혁명")]),
+    makeConfirmQ("q7", "지문에서 '컴퓨터와 인공지능은 인간의 사고를 보조하는 새로운 형태의 도구'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "컴퓨터와 인공지능은 인간의 사고를 보조하는 새로운 형태의 도구")])
+  ];
+  return { content: assembleFull(245, "NONFICTION", "비문학", paragraphs, confirmQuestions), subArea: "NONFICTION" };
+}
+
+// ── Day 246 (짝수 → 문학) ──
+function buildDay246() {
+  const paragraphs = [
+    { id: "p1", text: "지수는 전학 온 첫날부터 교실 분위기가 낯설었다. 아이들은 이미 서로 짝을 지어 다녔고, 쉬는 시간마다 웃음소리가 터져 나왔지만 그 속에 자신이 끼어들 자리는 보이지 않았다. 점심시간에 혼자 급식판을 들고 빈자리를 찾아 앉았을 때, 옆 반 복도에서 바이올린 소리가 희미하게 들려왔다. 지수는 그 소리에 이끌려 젓가락을 내려놓고 소리가 나는 쪽으로 걸어갔다." },
+    { id: "p2", text: "음악실 문이 살짝 열려 있었고, 안에서는 한 남학생이 눈을 감은 채 바이올린을 켜고 있었다. 곡은 지수가 어릴 때 피아노 학원에서 들었던 비발디의 '사계' 중 겨울이었다. 차갑고도 아름다운 선율이 텅 빈 음악실을 가득 채우고 있었는데, 연주하는 학생의 표정에는 깊은 집중과 함께 약간의 외로움이 묻어 있는 것 같았다. 지수는 문틈 사이로 조용히 서서 연주가 끝날 때까지 그 자리를 떠나지 못했다." },
+    { id: "p3", text: "다음 날 지수는 용기를 내어 음악실 문을 두드렸다. 남학생은 놀란 눈으로 지수를 바라보더니, 어색하게 인사를 건넸다. 이름은 준혁이었고, 매일 점심시간에 혼자 연습을 한다고 했다. 지수가 피아노를 조금 칠 줄 안다고 말하자 준혁의 눈이 반짝였다. 준혁은 피아노 반주를 해 줄 사람이 없어서 늘 아쉬웠다며, 한번 같이 합주를 해 보자고 제안했다. 지수는 오랫동안 치지 않아서 자신이 없었지만, 고개를 끄덕였다." },
+    { id: "p4", text: "그 뒤로 두 사람은 매일 점심시간에 음악실에서 만났다. 처음에는 박자가 맞지 않아 웃음이 터졌고, 서로 틀린 부분을 짚어 주다 보면 어느새 쉬는 시간이 끝나 있었다. 연습이 거듭되면서 바이올린과 피아노는 점점 하나의 소리처럼 어우러졌고, 둘 사이에도 말하지 않아도 통하는 무언가가 싹트기 시작했다. 전학 온 첫날 그렇게 낯설기만 했던 학교가, 음악실의 작은 문 하나를 열고 나서부터 조금씩 따뜻한 곳으로 변해 가고 있었다." }
+  ];
+  console.log(`Day 246 지문 길이: ${charLen(paragraphs)}자`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "지문에서 '그 속에 자신이 끼어들 자리는 보이지 않았다'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "그 속에 자신이 끼어들 자리는 보이지 않았다")]),
+    makeConfirmQ("q2", "지문에서 '바이올린 소리가 희미하게 들려왔다'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "바이올린 소리가 희미하게 들려왔다")]),
+    makeConfirmQ("q3", "지문에서 '비발디의 사계 중 겨울'을 찾아 클릭하세요.", [findRange(paragraphs, "p2", "비발디의 '사계' 중 겨울")]),
+    makeConfirmQ("q4", "지문에서 '깊은 집중과 함께 약간의 외로움'을 찾아 클릭하세요.", [findRange(paragraphs, "p2", "깊은 집중과 함께 약간의 외로움")]),
+    makeConfirmQ("q5", "지문에서 '피아노 반주를 해 줄 사람이 없어서 늘 아쉬웠다'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "피아노 반주를 해 줄 사람이 없어서 늘 아쉬웠다")]),
+    makeConfirmQ("q6", "지문에서 '바이올린과 피아노는 점점 하나의 소리처럼 어우러졌고'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "바이올린과 피아노는 점점 하나의 소리처럼 어우러졌고")]),
+    makeConfirmQ("q7", "지문에서 '음악실의 작은 문 하나를 열고 나서부터'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "음악실의 작은 문 하나를 열고 나서부터")])
+  ];
+  return { content: assembleFull(246, "LITERATURE", "문학", paragraphs, confirmQuestions), subArea: "LITERATURE" };
+}
+
+// ── Day 247 (홀수 → 비문학) ──
+function buildDay247() {
+  const paragraphs = [
+    { id: "p1", text: "지진은 지구 내부의 에너지가 갑작스럽게 방출되면서 지표면이 흔들리는 자연 현상이다. 지구의 표면은 여러 개의 거대한 판으로 이루어져 있는데, 이 판들이 서로 부딪치거나 어긋나면서 축적된 응력이 한꺼번에 풀릴 때 지진이 발생한다. 지진의 강도를 측정하는 데는 리히터 규모가 널리 사용되며, 규모가 1 증가할 때마다 에너지는 약 32배씩 커진다. 규모 6 이상의 강한 지진은 건물 붕괴와 대규모 인명 피해를 유발할 수 있어서 각별한 대비가 필요하다." },
+    { id: "p2", text: "지진은 발생 지점과 전파 방식에 따라 여러 유형으로 나뉜다. 진원은 지진이 실제로 발생한 지하의 한 지점을 말하며, 진앙은 진원의 바로 위에 해당하는 지표면의 지점이다. 지진파는 크게 P파와 S파로 구분되는데, P파는 매질을 압축하고 팽창시키면서 전파되어 고체와 액체 모두를 통과할 수 있고, S파는 매질을 상하 또는 좌우로 진동시키면서 전파되어 고체만 통과한다. P파가 S파보다 빠르게 도달하므로 이 시간차를 이용하여 진앙까지의 거리를 계산할 수 있다." },
+    { id: "p3", text: "역사적으로 대규모 지진은 인류에게 막대한 피해를 안겨 왔다. 2011년 일본 도호쿠 지방에서 발생한 규모 9.0의 지진은 거대한 쓰나미를 동반하여 약 2만 명의 사상자를 냈으며, 후쿠시마 원자력 발전소 사고라는 2차 재난까지 초래하였다. 이러한 사례는 지진 자체뿐 아니라 연쇄적 재난에도 대비해야 한다는 교훈을 남겼다." },
+    { id: "p4", text: "지진에 대비하기 위해서는 평소의 준비가 무엇보다 중요하다. 가정에서는 무거운 가구를 벽에 고정하고 비상용품을 미리 준비해 두어야 하며, 대피 경로와 가족 간의 연락 방법을 사전에 정해 두는 것이 바람직하다. 지진이 발생했을 때는 튼튼한 탁자 아래로 들어가 머리와 몸을 보호하고, 흔들림이 멈춘 후에 신속하게 건물 밖으로 대피해야 한다. 또한 해안가에서는 지진 후 쓰나미가 발생할 수 있으므로 즉시 높은 곳으로 이동하는 것이 생존을 위한 핵심적인 행동 지침이다." }
+  ];
+  console.log(`Day 247 지문 길이: ${charLen(paragraphs)}자`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "지문에서 '판들이 서로 부딪치거나 어긋나면서 축적된 응력'을 찾아 클릭하세요.", [findRange(paragraphs, "p1", "판들이 서로 부딪치거나 어긋나면서 축적된 응력")]),
+    makeConfirmQ("q2", "지문에서 '규모가 1 증가할 때마다 에너지는 약 32배씩 커진다'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "규모가 1 증가할 때마다 에너지는 약 32배씩 커진다")]),
+    makeConfirmQ("q3", "지문에서 '진원은 지진이 실제로 발생한 지하의 한 지점'을 찾아 클릭하세요.", [findRange(paragraphs, "p2", "진원은 지진이 실제로 발생한 지하의 한 지점")]),
+    makeConfirmQ("q4", "지문에서 'P파는 매질을 압축하고 팽창시키면서 전파되어'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "P파는 매질을 압축하고 팽창시키면서 전파되어")]),
+    makeConfirmQ("q5", "지문에서 '후쿠시마 원자력 발전소 사고라는 2차 재난'을 찾아 클릭하세요.", [findRange(paragraphs, "p3", "후쿠시마 원자력 발전소 사고라는 2차 재난")]),
+    makeConfirmQ("q6", "지문에서 '튼튼한 탁자 아래로 들어가 머리와 몸을 보호하고'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "튼튼한 탁자 아래로 들어가 머리와 몸을 보호하고")]),
+    makeConfirmQ("q7", "지문에서 '쓰나미가 발생할 수 있으므로 즉시 높은 곳으로 이동하는 것'을 찾아 클릭하세요.", [findRange(paragraphs, "p4", "쓰나미가 발생할 수 있으므로 즉시 높은 곳으로 이동하는 것")])
+  ];
+  return { content: assembleFull(247, "NONFICTION", "비문학", paragraphs, confirmQuestions), subArea: "NONFICTION" };
+}
+
+// ── Day 248 (짝수 → 문학) ──
+function buildDay248() {
+  const paragraphs = [
+    { id: "p1", text: "윤아는 할머니 댁 마당 한쪽에 놓인 낡은 장독대 앞에 쪼그려 앉았다. 장독대 위에는 크고 작은 항아리들이 나란히 놓여 있었고, 항아리마다 소금으로 봉한 하얀 보자기가 씌워져 있었다. 할머니는 아침마다 이 항아리들의 뚜껑을 열어 햇볕을 쬐어 주고, 저녁이면 다시 정성스럽게 덮어 주었다. 윤아는 그 반복되는 일상이 지루하게 보였지만, 할머니의 손길에는 무언가 경건한 것이 깃들어 있었다." },
+    { id: "p2", text: "할머니는 윤아를 항아리 앞으로 불렀다. 가장 큰 항아리의 뚜껑을 열자 진한 된장 냄새가 훅 올라왔다. 할머니는 나무 주걱으로 된장을 천천히 저으며 말했다. '이 된장이 네 엄마가 시집올 때 담근 거란다. 스무 해 넘게 묵은 거야.' 윤아는 놀란 눈으로 항아리 속을 들여다보았다. 깊고 어두운 빛깔의 된장 표면에는 시간의 무게가 고스란히 담겨 있는 듯했고, 코끝을 스치는 그 냄새에서 어머니의 젊은 시절이 어렴풋이 느껴지는 것 같았다." },
+    { id: "p3", text: "점심때 할머니는 그 된장으로 찌개를 끓여 주었다. 윤아가 한 숟갈을 떠서 입에 넣자 깊고 구수한 맛이 입안 가득 퍼졌다. 마트에서 사 온 된장과는 비교할 수 없는 깊이가 있었다. 할머니는 맛있게 먹는 윤아를 바라보며 흐뭇하게 웃었다. '장이란 게 그래. 시간이 맛을 만들어 주는 거야. 사람도 마찬가지란다.' 윤아는 할머니의 말이 단순한 음식 이야기가 아니라는 것을 어렴풋이 느끼며 숟가락을 놓지 못했다." },
+    { id: "p4", text: "식사를 마친 뒤 윤아는 할머니와 함께 마당에 앉아 항아리들을 바라보았다. 오후의 햇살이 항아리 위에 고루 내려앉아 있었고, 멀리서 참새 소리가 들려왔다. 윤아는 문득 이 장독대가 할머니의 인생 그 자체 같다는 생각이 들었다. 매일 같은 자리에서 묵묵히 시간을 견디며 깊어지는 것, 그것이 할머니가 살아온 방식이었다. 윤아는 할머니의 거칠고 따뜻한 손을 꼭 잡으며 이 순간을 오래도록 기억하겠다고 마음속으로 다짐했다." }
+  ];
+  console.log(`Day 248 지문 길이: ${charLen(paragraphs)}자`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "지문에서 '소금으로 봉한 하얀 보자기'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "소금으로 봉한 하얀 보자기")]),
+    makeConfirmQ("q2", "지문에서 '할머니의 손길에는 무언가 경건한 것이 깃들어 있었다'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "할머니의 손길에는 무언가 경건한 것이 깃들어 있었다")]),
+    makeConfirmQ("q3", "지문에서 '네 엄마가 시집올 때 담근 거란다'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "네 엄마가 시집올 때 담근 거란다")]),
+    makeConfirmQ("q4", "지문에서 '시간의 무게가 고스란히 담겨 있는 듯했고'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "시간의 무게가 고스란히 담겨 있는 듯했고")]),
+    makeConfirmQ("q5", "지문에서 '시간이 맛을 만들어 주는 거야'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "시간이 맛을 만들어 주는 거야")]),
+    makeConfirmQ("q6", "지문에서 '매일 같은 자리에서 묵묵히 시간을 견디며 깊어지는 것'을 찾아 클릭하세요.", [findRange(paragraphs, "p4", "매일 같은 자리에서 묵묵히 시간을 견디며 깊어지는 것")]),
+    makeConfirmQ("q7", "지문에서 '이 순간을 오래도록 기억하겠다고'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "이 순간을 오래도록 기억하겠다고")])
+  ];
+  return { content: assembleFull(248, "LITERATURE", "문학", paragraphs, confirmQuestions), subArea: "LITERATURE" };
+}
+
+// ── 실행부 ──
+const results = [
+  { dayIndex: 244, ...buildDay244() },
+  { dayIndex: 245, ...buildDay245() },
+  { dayIndex: 246, ...buildDay246() },
+  { dayIndex: 247, ...buildDay247() },
+  { dayIndex: 248, ...buildDay248() }
+];
+
+const staticDir = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'frege2');
+const batchItems = [];
+results.forEach(({ dayIndex, content, subArea }) => {
+  const filePath = path.join(staticDir, `${String(dayIndex).padStart(3, '0')}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(content, null, 2), 'utf8');
+  console.log(`  OK ${filePath}`);
+  batchItems.push(wrapBatchItem(dayIndex, subArea, content));
+});
+const newDir = path.join(__dirname, '..', 'generated', 'new');
+if (!fs.existsSync(newDir)) fs.mkdirSync(newDir, { recursive: true });
+const tempBatchPath = path.join(newDir, 'batch-f2-244-248.json');
+fs.writeFileSync(tempBatchPath, JSON.stringify(batchItems, null, 2), 'utf8');
+console.log(`  OK 임시 배치: ${tempBatchPath}`);
+results.forEach(({ dayIndex, content }) => {
+  const p = content.payload;
+  const len = p.passage.paragraphs.reduce((s, pg) => s + pg.text.length, 0);
+  const rc = p.recall.cards.length;
+  const cq = p.confirm.questions.length;
+  const ok = len >= 850 && len <= 950 && rc === 8 && cq >= 5;
+  console.log(`Day ${dayIndex}: ${len}자 | recall=${rc} | confirm=${cq} | ${ok ? 'OK' : 'WARN'}`);
+});

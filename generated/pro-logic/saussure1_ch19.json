@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 19장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "말은 눈에 보이지 않지만 아주 강한 힘을 가지고 있습니다. 상대방에게 용기를 주기도 하고, 아픔을 주기도 합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "말이 힘을 가지려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "말은 아무 영향이 없다."
+              },
+              {
+                "id": "B",
+                "text": "말은 귀에만 들린다."
+              },
+              {
+                "id": "C",
+                "text": "말은 듣는 사람의 마음에 영향을 준다."
+              },
+              {
+                "id": "D",
+                "text": "큰 소리만 힘이 있다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "친구가 실수를 했을 때 \"괜찮아, 다시 하면 돼\"라고 따뜻하게 위로해 주면 친구는 다시 힘을 냅니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "따뜻한 말을 들으면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "더 슬퍼진다."
+              },
+              {
+                "id": "B",
+                "text": "아무 느낌이 없다."
+              },
+              {
+                "id": "C",
+                "text": "화가 난다."
+              },
+              {
+                "id": "D",
+                "text": "용기와 힘을 얻는다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "'꾸며 주는 말'을 넣으면 문장이 훨씬 생생해집니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'꾸며 주는 말은 문장을 생생하게 한다. 활짝은 꾸며 주는 말이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "활짝은 문장을 생생하게 한다."
+              },
+              {
+                "id": "B",
+                "text": "활짝은 쓸모없다."
+              },
+              {
+                "id": "C",
+                "text": "꾸며 주는 말은 불필요하다."
+              },
+              {
+                "id": "D",
+                "text": "활짝은 꾸며 주는 말이 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "민수는 미술 시간을 제일 싫어했습니다. 친구들이 \"정말 못 그렸다\"라며 놀렸기 때문입니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'자신감을 갖으려면 격려가 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "놀림을 당해도 자신감이 생긴다."
+              },
+              {
+                "id": "B",
+                "text": "격려가 없으면 자신감을 갖기 어렵다."
+              },
+              {
+                "id": "C",
+                "text": "격려 없이도 자신감이 생긴다."
+              },
+              {
+                "id": "D",
+                "text": "자신감과 격려는 관계없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "선생님께서 '와, 민수의 그림은 색감이 참 따뜻하구나!'라고 칭찬하셨습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'칭찬을 받으면 자신감이 생긴다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "칭찬을 안 받았는데 자신감이 생겼다."
+              },
+              {
+                "id": "B",
+                "text": "놀림을 당하자 자신감이 생겼다."
+              },
+              {
+                "id": "C",
+                "text": "선생님의 칭찬에 민수가 자신감을 얻었다."
+              },
+              {
+                "id": "D",
+                "text": "칭찬을 받으면 슬퍼진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "'고마워', '사랑해', '넌 할 수 있어' 같은 말은 듣는 사람의 기분을 좋게 만듭니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'좋은 말을 하면 기분이 좋아진다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "좋은 말은 기분과 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "기분이 좋으면 반드시 좋은 말을 들은 것이다."
+              },
+              {
+                "id": "C",
+                "text": "나쁜 말을 해도 기분이 좋아진다."
+              },
+              {
+                "id": "D",
+                "text": "좋은 말을 했는데 기분이 안 좋아지는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "친구들이 무심코 던진 말은 민수의 마음에 큰 상처가 되었습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'나쁜 말을 하면 상대방이 상처받는다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "못 그렸다는 놀림에 민수가 마음의 상처를 받았다."
+              },
+              {
+                "id": "B",
+                "text": "나쁜 말을 해도 상처받지 않았다."
+              },
+              {
+                "id": "C",
+                "text": "칭찬을 해서 상처받았다."
+              },
+              {
+                "id": "D",
+                "text": "아무 말도 안 했는데 상처받았다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "'꽃이 활짝 피었습니다'에서 '활짝'은 꾸며 주는 말입니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'꾸며 주는 말이 있으면 문장이 생생해진다. 이 문장에 꾸며 주는 말이 있다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 문장은 밋밋하다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "이 문장은 생생하다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "꾸며 주는 말은 없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "생생한 문장에는 꾸미는 말이 없다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "선생님의 칭찬 이후 민수는 미술을 좋아하게 되었습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'칭찬을 받은 뒤 성적이 올랐다.' 칭찬과 성적의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "칭찬이 성적을 반드시 올린다."
+              },
+              {
+                "id": "B",
+                "text": "성적이 오르면 칭찬을 받는다."
+              },
+              {
+                "id": "C",
+                "text": "칭찬이 자신감을 주어 관련 있지만 다른 원인도 있을 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "말은 상대방에게 용기를 주기도 하고, 상처를 주기도 합니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'좋은 말이 학습 의욕을 높인다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학생들의 키를 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "나쁜 말만 조사한다."
+              },
+              {
+                "id": "C",
+                "text": "말을 안 하는 그룹만 관찰한다."
+              },
+              {
+                "id": "D",
+                "text": "좋은 말을 들은 그룹과 안 들은 그룹의 학습 의욕을 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

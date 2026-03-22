@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 2장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "세상에 일어나는 모든 일에는 이유가 있습니다. 어떤 일이 일어나게 된 까닭을 원인이라 하고, 그 때문에 생겨난 일을 결과라 합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'밥을 먹지 않아서 배가 고프다'가 성립하려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사람은 음식을 먹어야 배가 부르다는 사실이 있어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "밥을 먹으면 배가 더 고파진다."
+              },
+              {
+                "id": "C",
+                "text": "배고픔과 식사는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "밥 대신 공기를 마시면 배가 부르다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "친구에게 칭찬을 들어서 기분이 좋다면, 칭찬을 들은 일은 원인이 되고 기쁜 마음은 결과가 됩니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "아끼던 장난감이 망가졌을 때 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기분이 좋아진다."
+              },
+              {
+                "id": "B",
+                "text": "속상한 감정이 생긴다."
+              },
+              {
+                "id": "C",
+                "text": "장난감이 저절로 고쳐진다."
+              },
+              {
+                "id": "D",
+                "text": "아무 감정도 느끼지 않는다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "감정은 대개 어떤 이유와 함께 생깁니다. 원인을 알면 마음을 조절하는 방법도 알 수 있습니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'감정에는 원인이 있다. 화는 감정이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화에도 원인이 있다."
+              },
+              {
+                "id": "B",
+                "text": "화에는 원인이 없다."
+              },
+              {
+                "id": "C",
+                "text": "화는 감정이 아니다."
+              },
+              {
+                "id": "D",
+                "text": "감정에는 원인이 없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "나의 감정을 잘 이해하려면 원인과 결과가 서로 짝을 이루는 인과 관계를 생각해보는 습관이 필요합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'감정을 조절하려면 원인을 파악해야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원인을 알면 감정이 사라진다."
+              },
+              {
+                "id": "B",
+                "text": "원인을 몰라도 감정을 완벽히 조절할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "감정과 원인은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "원인을 모르면 감정을 조절하기 어렵다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "후회란 이전에 자신이 한 일을 잘못된 것으로 느껴 뉘우치는 것입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'후회를 줄이려면 행동하기 전에 생각해야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "생각 없이 행동했는데 후회가 줄었다."
+              },
+              {
+                "id": "B",
+                "text": "동생에게 화내기 전에 왜 화가 나는지 먼저 생각했더니 후회할 일이 줄었다."
+              },
+              {
+                "id": "C",
+                "text": "아무 일도 하지 않고 가만히 있었다."
+              },
+              {
+                "id": "D",
+                "text": "남의 행동만 판단했다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "조절이란 균형이 맞게 바로잡거나 상황에 알맞게 맞추는 것입니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'화가 난 원인을 알면 마음을 가라앉힐 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "마음 조절과 원인 파악은 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "원인을 몰라도 마음이 가라앉는다."
+              },
+              {
+                "id": "C",
+                "text": "화가 나면 원인을 절대 알 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "원인을 알았는데 마음이 가라앉지 않는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "해소란 어려운 일이나 좋지 않은 상태를 풀어서 없애 버리는 것입니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'스트레스의 원인을 찾으면 해소 방법도 찾을 수 있다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원인을 찾았는데 더 스트레스를 받았다."
+              },
+              {
+                "id": "B",
+                "text": "스트레스 원인을 모른 채 그냥 참았다."
+              },
+              {
+                "id": "C",
+                "text": "시험 걱정이 스트레스 원인임을 알고 공부 계획을 세우니 마음이 편해졌다."
+              },
+              {
+                "id": "D",
+                "text": "스트레스를 무시하니 저절로 사라졌다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "밥을 먹지 않으면 배가 고프고, 식물이 물과 햇빛을 받으면 잘 자랍니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'원인이 있으면 결과가 따른다. 비가 오는 것은 구름이 두꺼워진 결과이다.' 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비와 구름은 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "비가 오려면 구름이 두꺼워지는 원인이 있어야 한다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "구름이 없어도 비가 온다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "비가 오면 구름이 사라진다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "민수는 어제 밤늦게까지 텔레비전을 보았습니다. 그래서 오늘 아침에 늦잠을 자고 말았습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'늦게 자는 것'과 '늦잠 자는 것'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "늦게 자면 반드시 일찍 일어난다."
+              },
+              {
+                "id": "B",
+                "text": "늦게 자는 것과 늦잠은 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "늦게 자면 늦잠 잘 가능성이 높지만 항상 그런 것은 아니다."
+              },
+              {
+                "id": "D",
+                "text": "늦잠을 자면 일찍 잔 것이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "나 지금 왜 화가 났지? 하고 스스로에게 물어보면, 화가 난 이유인 원인을 찾을 수 있습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'감정의 원인을 파악하면 감정 조절이 쉬워진다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화가 났을 때 원인을 찾아본 경우와 안 찾아본 경우의 감정 변화를 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "감정과 무관한 취미를 조사한다."
+              },
+              {
+                "id": "C",
+                "text": "화가 난 횟수만 센다."
+              },
+              {
+                "id": "D",
+                "text": "친구의 감정만 분석한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

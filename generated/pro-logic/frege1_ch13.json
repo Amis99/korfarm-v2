@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 13장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "에너지는 물체를 움직이거나 일을 할 수 있는 능력입니다. TV를 볼 때, 따뜻한 밥을 먹을 때, 뛰어놀 때 등 모든 활동이 에너지를 이용하는 것입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'모든 활동에는 에너지가 필요하다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "움직이거나 일을 하려면 반드시 에너지가 소비된다"
+              },
+              {
+                "id": "B",
+                "text": "에너지 없이도 활동이 가능하다"
+              },
+              {
+                "id": "C",
+                "text": "에너지는 일부 활동에만 필요하다"
+              },
+              {
+                "id": "D",
+                "text": "활동과 에너지는 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "현우는 냉장고 문을 한참 열어두고, TV를 켜놓고, 에어컨을 틀어놓았습니다. 아빠는 '이러다가 이번 달 전기요금이 폭탄처럼 나올 거야'라고 걱정했습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "아빠의 걱정에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전기는 무료이다"
+              },
+              {
+                "id": "B",
+                "text": "전기를 많이 사용하면 전기요금이 올라간다"
+              },
+              {
+                "id": "C",
+                "text": "냉장고는 문을 열어도 전기가 안 든다"
+              },
+              {
+                "id": "D",
+                "text": "에어컨은 전기를 사용하지 않는다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "화석 연료(석유, 석탄)는 언젠가 고갈됩니다. 화석 연료가 사라지면 자동차, 비행기, 공장이 멈출 수 있습니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "화석 연료가 고갈되기 전에 대체 에너지를 개발하지 않으면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 문제가 없다"
+              },
+              {
+                "id": "B",
+                "text": "화석 연료가 저절로 다시 생긴다"
+              },
+              {
+                "id": "C",
+                "text": "교통과 산업이 마비되어 큰 혼란이 생긴다"
+              },
+              {
+                "id": "D",
+                "text": "사람들이 에너지 없이도 잘 살 수 있다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "현우가 에어컨, TV, 냉장고 문을 동시에 방치하며 전기를 낭비했습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "현우가 에너지 낭비를 계속하면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전기요금이 크게 올라가고 환경에도 나쁜 영향을 미친다"
+              },
+              {
+                "id": "B",
+                "text": "전기요금이 줄어든다"
+              },
+              {
+                "id": "C",
+                "text": "환경이 좋아진다"
+              },
+              {
+                "id": "D",
+                "text": "아무 변화가 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "태양 에너지, 풍력 에너지, 수력 에너지는 재생 가능한 에너지입니다. 재생 가능한 에너지는 고갈되지 않습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 재생 가능 에너지는 고갈되지 않는다. 소전제: 태양 에너지는 재생 가능 에너지이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태양 에너지는 고갈된다"
+              },
+              {
+                "id": "B",
+                "text": "태양 에너지는 고갈되지 않는다"
+              },
+              {
+                "id": "C",
+                "text": "재생 에너지와 고갈은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "석유도 고갈되지 않는다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "에너지를 절약하면 자원이 보존되고 환경이 보호됩니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 에너지를 절약하면 환경이 보호된다. 소전제: 불필요한 전등을 끄는 것은 에너지 절약이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전등을 끄면 환경이 나빠진다"
+              },
+              {
+                "id": "B",
+                "text": "전등을 끄면 환경 보호에 도움이 된다"
+              },
+              {
+                "id": "C",
+                "text": "절약과 환경은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "전등을 켜야 환경이 보호된다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "지속 가능한 미래를 위해서는 재생 에너지 개발이 필요합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'지속 가능한 미래를 위해 재생 에너지가 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "재생 에너지를 개발하면 미래가 반드시 지속 가능하다"
+              },
+              {
+                "id": "B",
+                "text": "화석 연료만으로도 충분하다"
+              },
+              {
+                "id": "C",
+                "text": "재생 에너지와 미래는 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "재생 에너지 없이는 지속 가능한 미래가 불가능하다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "전기를 아끼려면 사용하지 않는 전자기기의 플러그를 뽑아야 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'전기 절약을 위해 대기 전력 차단이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "플러그를 뽑으면 반드시 전기가 절약된다"
+              },
+              {
+                "id": "B",
+                "text": "플러그와 전기 절약은 관계없다"
+              },
+              {
+                "id": "C",
+                "text": "플러그를 뽑지 않으면 전기를 절약할 수 없다"
+              },
+              {
+                "id": "D",
+                "text": "대기 전력은 무시해도 된다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "에너지 절약을 실천하는 방법에는 대중교통 이용, 전등 끄기, 적정 온도 유지 등이 있습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'환경 보호를 위해 에너지 절약이 필요하다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가까운 거리는 걷거나 자전거를 이용하기"
+              },
+              {
+                "id": "B",
+                "text": "에어컨을 최대로 틀어놓기"
+              },
+              {
+                "id": "C",
+                "text": "필요 없는 전등을 모두 켜놓기"
+              },
+              {
+                "id": "D",
+                "text": "일회용품을 많이 사용하기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "에너지에는 빛 에너지, 열 에너지, 운동 에너지, 전기 에너지 등 다양한 종류가 있습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'에너지를 이해하려면 종류를 아는 것이 필요하다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "난로의 따뜻함이 열 에너지임을 아는 것"
+              },
+              {
+                "id": "B",
+                "text": "전등의 밝음이 빛 에너지임을 아는 것"
+              },
+              {
+                "id": "C",
+                "text": "공이 굴러가는 것이 운동 에너지임을 아는 것"
+              },
+              {
+                "id": "D",
+                "text": "에너지 종류를 모르고 '에너지는 하나'라고 생각하는 것"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "태양광 패널을 설치하면 전기를 자체 생산할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'태양광 패널을 설치하면(P) 전기를 생산할 수 있다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전기를 생산하지 못했다면 패널을 설치하지 않은 것이다"
+              },
+              {
+                "id": "B",
+                "text": "패널을 설치하면서 전기를 생산하지 못하는 경우는 없다"
+              },
+              {
+                "id": "C",
+                "text": "전기를 생산하면 패널을 설치한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "패널과 전기 생산은 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "에너지를 낭비하면 전기요금이 오르고 환경이 나빠집니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'에너지를 낭비하면(P) 환경이 나빠진다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "환경이 나빠지면 에너지를 낭비한 것이다"
+              },
+              {
+                "id": "B",
+                "text": "에너지를 낭비하지 않으면 환경이 좋아진다"
+              },
+              {
+                "id": "C",
+                "text": "환경이 나빠지지 않았다면 에너지를 낭비하지 않은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "에너지와 환경은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "풍력 발전기를 설치하면 바람으로 전기를 만들 수 있습니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'재생 에너지를 활용하면 전기를 만들 수 있다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "재생 에너지를 사용하지 않고 화석 연료만 사용했다"
+              },
+              {
+                "id": "B",
+                "text": "석탄을 태워서 전기를 만들었다"
+              },
+              {
+                "id": "C",
+                "text": "전기를 사용하지 않고 생활했다"
+              },
+              {
+                "id": "D",
+                "text": "바람이 많이 부는 곳에 풍력 발전기를 설치하여 전기를 생산했다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "현우가 사용하지 않는 전등을 끄고 에어컨 온도를 적정하게 맞추자 전기요금이 줄었습니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'에너지를 절약하면 비용이 줄어든다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전기를 더 많이 써서 요금이 오른 경우"
+              },
+              {
+                "id": "B",
+                "text": "모든 전자기기를 동시에 켜서 전기를 많이 쓴 경우"
+              },
+              {
+                "id": "C",
+                "text": "에너지 절약을 하지 않았는데 요금이 줄어든 경우"
+              },
+              {
+                "id": "D",
+                "text": "전등을 끄고 에어컨 온도를 올려 전기요금이 줄어든 현우의 경우"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'화석 연료를 계속 사용하면(P) 자원이 고갈된다(Q)'가 참일 때.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화석 연료를 사용했으므로 자원이 고갈될 것이다 (전건 긍정)"
+              },
+              {
+                "id": "B",
+                "text": "자원이 고갈되었으므로 화석 연료를 사용한 것이다 (후건 긍정)"
+              },
+              {
+                "id": "C",
+                "text": "화석 연료를 사용하지 않았으므로 자원이 고갈되지 않는다 (전건 부정)"
+              },
+              {
+                "id": "D",
+                "text": "자원이 고갈되지 않았으므로 화석 연료를 사용하지 않은 것이다 (대우)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'에너지를 절약하면(P) 환경이 보호된다(Q)'가 참이고, 환경이 보호되지 않았습니다(~Q).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "환경과 에너지는 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "에너지를 절약한 것이다"
+              },
+              {
+                "id": "C",
+                "text": "에너지를 절약하지 않은 것이다 (대우)"
+              },
+              {
+                "id": "D",
+                "text": "에너지를 절약했지만 환경이 보호되지 않았다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "에너지 절약 교육을 받은 가정일수록 전기 사용량이 적다는 조사가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'에너지 절약 교육'과 '전기 사용량'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "교육을 받으면 전기 사용량이 반드시 줄어든다"
+              },
+              {
+                "id": "B",
+                "text": "둘은 아무 관계가 없다"
+              },
+              {
+                "id": "C",
+                "text": "전기를 적게 써서 교육을 받은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘 사이에 상관관계가 있으나, 가족 수나 생활 방식 등 다른 요인도 영향을 미친다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "현우네 집은 에너지 절약을 실천한 후 전기요금이 줄고 환경에도 도움이 되었습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'절약 실천'과 '요금 감소'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "절약만 하면 요금이 반드시 줄어든다"
+              },
+              {
+                "id": "B",
+                "text": "절약이 요금 감소에 기여했지만, 전기 단가 변동 등 다른 요인도 있을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "요금이 줄어서 절약을 시작한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'재생 에너지 사용을 늘리면 온실가스 배출이 줄어든다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "재생 에너지 비율이 높은 나라와 낮은 나라의 온실가스 배출량을 비교한다"
+              },
+              {
+                "id": "B",
+                "text": "한 나라의 에너지만 조사한다"
+              },
+              {
+                "id": "C",
+                "text": "재생 에너지의 종류만 나열한다"
+              },
+              {
+                "id": "D",
+                "text": "온실가스와 관계없는 요인만 분석한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'에너지를 절약하면 항상 생활이 불편해진다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전등을 끄자 어두워져서 불편했다"
+              },
+              {
+                "id": "B",
+                "text": "에너지를 절약하지 않아서 편했다"
+              },
+              {
+                "id": "C",
+                "text": "에어컨 온도를 적정하게 맞추었더니 쾌적하면서도 전기요금이 줄었다"
+              },
+              {
+                "id": "D",
+                "text": "에너지 절약을 하니 생활이 불편해졌다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

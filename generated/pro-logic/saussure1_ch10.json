@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 10장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "나뭇잎에는 '엽록소'라는 초록색 물감이 들어 있습니다. 엽록소는 나무가 햇빛을 이용해 영양분을 만드는 아주 중요한 일을 합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "여름에 나뭇잎이 초록색인 이유를 설명하려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "여름에는 나뭇잎이 없다."
+              },
+              {
+                "id": "B",
+                "text": "여름에는 엽록소가 많이 만들어진다."
+              },
+              {
+                "id": "C",
+                "text": "엽록소는 빨간색이다."
+              },
+              {
+                "id": "D",
+                "text": "겨울에 엽록소가 가장 많다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "가을이 되면 날씨가 서늘해지고 햇빛이 줄어들면서 엽록소가 사라집니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "엽록소가 사라지면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나뭇잎이 더 진한 초록색이 된다."
+              },
+              {
+                "id": "B",
+                "text": "나뭇잎이 파란색이 된다."
+              },
+              {
+                "id": "C",
+                "text": "숨어 있던 노란색, 빨간색이 나타난다."
+              },
+              {
+                "id": "D",
+                "text": "나뭇잎이 커진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "다람쥐가 빨간 단풍잎 편지를 흔들며 소리쳤어요. 토끼는 노란 은행잎 편지를 받았어요.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'가을에는 나뭇잎 색이 변한다. 지금은 가을이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지금 나뭇잎은 초록색이다."
+              },
+              {
+                "id": "B",
+                "text": "지금은 여름이다."
+              },
+              {
+                "id": "C",
+                "text": "나뭇잎은 항상 초록색이다."
+              },
+              {
+                "id": "D",
+                "text": "지금 나뭇잎 색이 변하고 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "단풍이 들려면 가을처럼 날씨가 서늘해져야 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'단풍이 들려면 서늘한 날씨가 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "날씨가 서늘하지 않으면 단풍이 들기 어렵다."
+              },
+              {
+                "id": "B",
+                "text": "더운 여름에도 단풍이 든다."
+              },
+              {
+                "id": "C",
+                "text": "서늘하면 꽃이 핀다."
+              },
+              {
+                "id": "D",
+                "text": "단풍이 들면 날씨가 더워진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "낙엽은 나뭇잎이 말라서 땅으로 떨어진 것입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'낙엽이 지려면 나뭇잎이 말라야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "푸른 잎이 떨어졌다."
+              },
+              {
+                "id": "B",
+                "text": "마른 잎이 바람에 우수수 떨어졌다."
+              },
+              {
+                "id": "C",
+                "text": "잎이 안 말라도 떨어졌다."
+              },
+              {
+                "id": "D",
+                "text": "꽃이 떨어졌다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "가을이 되면 산과 들은 초록색 옷을 벗고 빨간색, 노란색 옷으로 갈아입습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'가을이 되면 나뭇잎 색이 변한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "봄에 단풍이 든다."
+              },
+              {
+                "id": "B",
+                "text": "나뭇잎 색이 변하면 반드시 가을이다."
+              },
+              {
+                "id": "C",
+                "text": "가을인데 나뭇잎 색이 안 변하는 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "가을에도 초록색 그대로이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "다람쥐는 도토리를 주워 모자를 장식했고, 토끼는 노란 은행잎으로 목도리를 만들었어요.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'가을 열매를 모으면 겨울 준비가 된다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무것도 안 모았는데 겨울이 편했다."
+              },
+              {
+                "id": "B",
+                "text": "여름에 열매를 모았다."
+              },
+              {
+                "id": "C",
+                "text": "겨울에 열매를 심었다."
+              },
+              {
+                "id": "D",
+                "text": "다람쥐가 도토리를 모아 겨울 먹이를 준비했다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "엽록소가 사라지면 숨어 있던 노란색(카로틴)이 보이게 됩니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'엽록소가 없으면 노란색이 보인다. 이 잎에 엽록소가 없다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 잎은 노란색이다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "이 잎은 초록색이다. (틀린 추론)"
+              },
+              {
+                "id": "C",
+                "text": "이 잎에는 엽록소가 있다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "노란색 잎에는 엽록소가 많다. (맞는 추론)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "가을이 되면 날씨가 서늘해지고 나뭇잎이 울긋불긋해집니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'서늘한 날씨와 단풍이 함께 나타났다.' 이 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서늘한 날씨가 단풍의 직접적인 원인이다."
+              },
+              {
+                "id": "B",
+                "text": "둘 다 가을이라서 함께 나타나지만 서늘함이 단풍의 유일한 원인은 아닐 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "단풍이 날씨를 서늘하게 한다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "여름 내내 초록색이던 나뭇잎은 가을이 되면 빨간색이나 노란색으로 물듭니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'햇빛이 줄어들면 단풍이 든다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나뭇잎의 크기를 잰다."
+              },
+              {
+                "id": "B",
+                "text": "나뭇잎의 무게를 잰다."
+              },
+              {
+                "id": "C",
+                "text": "햇빛을 많이 받는 잎과 적게 받는 잎의 색 변화를 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "잎의 개수를 센다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

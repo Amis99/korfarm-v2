@@ -98,35 +98,63 @@ function toParagraphs(text) {
   }));
 }
 
+// ─── 수동 작성 파일 로드 경로 ───
+const PRO_READING_DIR = join(ROOT, 'generated', 'pro-reading');
+const PRO_VOCAB_DIR = join(ROOT, 'generated', 'pro-vocab');
+const PRO_BACKGROUND_DIR = join(ROOT, 'generated', 'pro-background');
+const PRO_LOGIC_DIR = join(ROOT, 'generated', 'pro-logic');
+const PRO_TESTS_DIR = join(ROOT, 'generated', 'pro-tests');
+
+// subArea 한글→영어 매핑
+const SUB_AREA_MAP = { '개념': 'CONCEPT', '문학': 'LITERATURE', '비문학': 'NONFICTION', '문법': 'GRAMMAR' };
+
 // ─── 1. 독해 콘텐츠 생성 (reading_training) ───
+// generated/pro-reading/ 에 수동 작성된 파일이 있으면 우선 사용, 없으면 자동 생성 fallback
 function generateReading(ms, level, chapterNum) {
+  // 수동 작성 파일 확인
+  const manualFile = join(PRO_READING_DIR, `${level.levelId}_ch${String(chapterNum).padStart(2, '0')}.json`);
+  if (existsSync(manualFile)) {
+    try {
+      const items = JSON.parse(readFileSync(manualFile, 'utf-8'));
+      return items.map(item => ({
+        id: `pro_read_${level.levelId.toLowerCase()}_ch${chapterNum}_${item.subArea}`,
+        contentType: 'PRO_READING',
+        levelId: level.levelId,
+        area: 'READING',
+        subArea: item.subArea,
+        moduleKey: 'reading_training',
+        title: item.title,
+        content: item
+      }));
+    } catch (e) {
+      console.warn(`  수동 파일 로드 실패 (fallback): ${manualFile} — ${e.message}`);
+    }
+  }
+
+  // fallback: 자동 생성
   const contents = [];
   const sections = [];
 
-  // 개념 지문
   const concept = ms['개념'];
   if (concept) {
-    const passage = getVal(concept, '개념_배경지식_지문', '개념_훈련_제목');
+    const passage = getVal(concept, '개념_배경지식_지문', '개념_지문', '개념_훈련_제목');
     if (passage && String(passage).length > 50) {
       sections.push({ label: '개념', passage: String(passage) });
     }
   }
 
-  // 비문학 지문
   const nonfic = ms['비문학'];
   if (nonfic) {
     const passage = getVal(nonfic, '비문학_지문');
     if (passage) sections.push({ label: '비문학', passage: String(passage) });
   }
 
-  // 문학 지문
   const lit = ms['문학'];
   if (lit) {
     const passage = getVal(lit, '문학_작품_지문');
     if (passage) sections.push({ label: '문학', passage: String(passage) });
   }
 
-  // 문법 지문 (프레게/러셀)
   const gram = ms['문법'];
   if (gram) {
     const passage = getVal(gram, '문법_지문');
@@ -139,7 +167,6 @@ function generateReading(ms, level, chapterNum) {
     const paragraphs = toParagraphs(sec.passage);
     if (paragraphs.length === 0) continue;
 
-    // 타임라인: 각 문단에 대해 간단한 이해 확인 문제 생성
     const timeline = paragraphs.slice(0, 5).map((p, i) => {
       const words = p.text.split(/\s+/);
       const keyPhrase = words.slice(0, Math.min(5, words.length)).join(' ');
@@ -159,20 +186,20 @@ function generateReading(ms, level, chapterNum) {
       };
     });
 
-    // 리콜 카드
     const recallCards = paragraphs.slice(0, 3).map((p, i) => ({
       id: `rc-${i + 1}`,
       front: p.text.slice(0, 60) + '...',
       back: p.text.slice(0, 120)
     }));
 
-    const contentId = `pro_read_${level.levelId.toLowerCase()}_ch${chapterNum}_${sec.label}`;
+    const subArea = SUB_AREA_MAP[sec.label] || sec.label.toUpperCase();
+    const contentId = `pro_read_${level.levelId.toLowerCase()}_ch${chapterNum}_${subArea}`;
     contents.push({
       id: contentId,
       contentType: 'PRO_READING',
       levelId: level.levelId,
       area: 'READING',
-      subArea: sec.label.toUpperCase(),
+      subArea,
       moduleKey: 'reading_training',
       title: `${level.prefix} ${chapterNum}장 ${sec.label} 독해`,
       content: {
@@ -180,7 +207,7 @@ function generateReading(ms, level, chapterNum) {
         title: `${level.prefix} ${chapterNum}장 ${sec.label} 독해`,
         targetLevel: level.levelId,
         area: 'READING',
-        subArea: sec.label.toUpperCase(),
+        subArea,
         timeLimitSec: 300,
         seedReward: { seedType: 'seed_rice', count: 3, multiplier: 1 },
         payload: {
@@ -197,7 +224,30 @@ function generateReading(ms, level, chapterNum) {
 }
 
 // ─── 2. 어휘 콘텐츠 생성 (worksheet_quiz, PRO_VOCAB) ───
+// generated/pro-vocab/ 에 수동 작성된 파일이 있으면 우선 사용, 없으면 자동 생성 fallback
 function generateVocab(ms, level, chapterNum) {
+  // 수동 작성 파일 확인
+  const manualFile = join(PRO_VOCAB_DIR, `${level.levelId}_ch${String(chapterNum).padStart(2, '0')}.json`);
+  if (existsSync(manualFile)) {
+    try {
+      const vocabData = JSON.parse(readFileSync(manualFile, 'utf-8'));
+      const contentId = `pro_vocab_${level.levelId.toLowerCase()}_ch${chapterNum}`;
+      return [{
+        id: contentId,
+        contentType: 'PRO_VOCAB',
+        levelId: level.levelId,
+        area: 'VOCAB',
+        subArea: 'PRO',
+        moduleKey: 'worksheet_quiz',
+        title: vocabData.title,
+        content: vocabData
+      }];
+    } catch (e) {
+      console.warn(`  어휘 수동 파일 로드 실패 (fallback): ${manualFile} — ${e.message}`);
+    }
+  }
+
+  // fallback: 기존 자동 생성
   const concept = ms['개념'];
   if (!concept) return [];
 
@@ -290,8 +340,31 @@ function generateVocab(ms, level, chapterNum) {
   }];
 }
 
-// ─── 3. 배경지식 콘텐츠 생성 (worksheet_quiz, PRO_BACKGROUND) ───
+// ─── 3. 배경지식 콘텐츠 생성 (background_knowledge, PRO_BACKGROUND) ───
 function generateBackground(ms, level, chapterNum) {
+  // 수동 작성 파일 우선 로드
+  const manualFile = join(PRO_BACKGROUND_DIR,
+    `${level.levelId}_ch${String(chapterNum).padStart(2, '0')}.json`);
+  if (existsSync(manualFile)) {
+    try {
+      const bgData = JSON.parse(readFileSync(manualFile, 'utf-8'));
+      const contentId = `pro_bg_${level.levelId.toLowerCase()}_ch${chapterNum}`;
+      return [{
+        id: contentId,
+        contentType: 'PRO_BACKGROUND',
+        levelId: level.levelId,
+        area: 'BACKGROUND',
+        subArea: 'PRO',
+        moduleKey: 'background_knowledge',
+        title: bgData.title,
+        content: bgData
+      }];
+    } catch (e) {
+      console.warn(`  배경지식 수동 파일 로드 실패 (fallback): ${manualFile}`);
+    }
+  }
+
+  // fallback: 기존 자동 생성
   const concept = ms['개념'];
   if (!concept) return [];
 
@@ -356,7 +429,7 @@ function generateBackground(ms, level, chapterNum) {
     levelId: level.levelId,
     area: 'BACKGROUND',
     subArea: 'PRO',
-    moduleKey: 'worksheet_quiz',
+    moduleKey: 'background_knowledge',
     title: `${level.prefix} ${chapterNum}장 배경지식`,
     content: {
       contentType: 'PRO_BACKGROUND',
@@ -371,83 +444,31 @@ function generateBackground(ms, level, chapterNum) {
   }];
 }
 
-// ─── 4. 논리사고력 콘텐츠 생성 (worksheet_quiz, PRO_LOGIC) ───
+// ─── 4. 논리사고력 콘텐츠 생성 (logic_reasoning, PRO_LOGIC) ───
+// 수동 작성 파일만 사용 (자동 생성 완전 제거)
 function generateLogic(ms, level, chapterNum) {
-  const questions = [];
-  let qIdx = 0;
-
-  // 문장 독해 문제에서 논리 문제 추출
-  const sources = [
-    ms['비문학'],
-    ms['문법'],
-    ms['문학'],
-  ].filter(Boolean);
-
-  for (const section of sources) {
-    // 문장 독해 문제
-    const sentences = getVal(section, '문장_독해_훈련_문장', '비문학_문장_독해_문장', '문학_문장_독해_문장', '문법_문장_독해_문제') || [];
-    const sentenceProblems = getVal(section, '문장_독해_훈련_문제', '비문학_문장_독해_문제', '문학_문장_독해_문제') || [];
-    const sentenceChoices = getVal(section, '비문학_문장_독해_선택지') || {};
-    const sentenceAnswers = getVal(section, '문장_독해_훈련_정답', '비문학_문장_독해_정답', '문학_문장_독해_정답') || {};
-
-    for (const prob of sentenceProblems) {
-      qIdx++;
-      const num = String(prob['번호'] || prob.번호 || qIdx);
-      const stem = prob['문제'] || prob.문제 || '';
-      const answer = sentenceAnswers[num] || '';
-      if (!stem) continue;
-
-      const choiceArr = sentenceChoices[num];
-      if (choiceArr && Array.isArray(choiceArr)) {
-        const choices = toChoices(choiceArr);
-        const answerId = circledToNum(answer);
-        questions.push({
-          id: `lg-${qIdx}`,
-          type: 'MULTI_CHOICE',
-          stem: stem,
-          choices,
-          answerId,
-          scoring: { correctDeltaSec: 15, wrongDeltaSec: -15 }
-        });
-      } else if (answer) {
-        // 단답형 → MULTI_CHOICE로 변환 (정답 + 오답 보기)
-        questions.push({
-          id: `lg-${qIdx}`,
-          type: 'MULTI_CHOICE',
-          stem: stem,
-          choices: [
-            { id: 'A', text: String(answer) },
-            { id: 'B', text: '해당 없음' },
-          ],
-          answerId: 'A',
-          scoring: { correctDeltaSec: 15, wrongDeltaSec: -15 }
-        });
-      }
+  const manualFile = join(PRO_LOGIC_DIR,
+    `${level.levelId}_ch${String(chapterNum).padStart(2, '0')}.json`);
+  if (existsSync(manualFile)) {
+    try {
+      const logicData = JSON.parse(readFileSync(manualFile, 'utf-8'));
+      const contentId = `pro_logic_${level.levelId.toLowerCase()}_ch${chapterNum}`;
+      return [{
+        id: contentId,
+        contentType: 'PRO_LOGIC',
+        levelId: level.levelId,
+        area: 'LOGIC',
+        subArea: 'PRO',
+        moduleKey: 'logic_reasoning',
+        title: logicData.title,
+        content: logicData
+      }];
+    } catch (e) {
+      console.warn(`  논리사고력 수동 파일 로드 실패: ${manualFile}`);
     }
   }
-
-  if (questions.length === 0) return [];
-
-  const contentId = `pro_logic_${level.levelId.toLowerCase()}_ch${chapterNum}`;
-  return [{
-    id: contentId,
-    contentType: 'PRO_LOGIC',
-    levelId: level.levelId,
-    area: 'LOGIC',
-    subArea: 'PRO',
-    moduleKey: 'worksheet_quiz',
-    title: `${level.prefix} ${chapterNum}장 논리사고력`,
-    content: {
-      contentType: 'PRO_LOGIC',
-      title: `${level.prefix} ${chapterNum}장 논리사고력`,
-      targetLevel: level.levelId,
-      area: 'LOGIC',
-      subArea: 'PRO',
-      timeLimitSec: 300,
-      seedReward: { seedType: 'seed_grape', count: 3, multiplier: 1 },
-      payload: { questions }
-    }
-  }];
+  // 수동 파일 없으면 빈 배열 반환
+  return [];
 }
 
 // ─── 정답과 해설 생성 헬퍼 ───
@@ -699,7 +720,28 @@ function generateAnswerKey(ms, level, chapterNum) {
 }
 
 // ─── 6. 테스트 문제 생성 ───
+// generated/pro-tests/ 에 수동 작성된 파일이 있으면 우선 사용, 없으면 원고 기반 자동 생성 fallback
 function generateTest(ms, level, chapterNum) {
+  // 수동 작성 파일 확인
+  const manualFile = join(PRO_TESTS_DIR,
+    `${level.levelId}_ch${String(chapterNum).padStart(2, '0')}.json`);
+  if (existsSync(manualFile)) {
+    try {
+      let raw = readFileSync(manualFile, 'utf-8');
+      if (raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1);
+      const testData = JSON.parse(raw);
+      // 수동 파일은 { questions: [...] } 형태 또는 배열 형태 지원
+      const questions = Array.isArray(testData) ? testData : (testData.questions || []);
+      if (questions.length > 0) {
+        console.log(`    ✓ 수동 테스트 로드: ${manualFile} (${questions.length}문항)`);
+        return { questions };
+      }
+    } catch (e) {
+      console.warn(`  수동 테스트 파일 로드 실패 (fallback): ${manualFile} — ${e.message}`);
+    }
+  }
+
+  // fallback: 원고 기반 자동 생성
   const questions = [];
   let qNum = 0;
 

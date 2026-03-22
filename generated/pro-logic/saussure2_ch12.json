@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 12장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "비행기 날개를 옆에서 자세히 살펴보면 위쪽은 둥글게 부풀고 아래쪽은 납작한 모양입니다. 이때 공기가 비행기를 위로 밀어 올리는 힘을 만듭니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "비행기가 하늘을 날려면 어떤 사실이 꼭 있어야 할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비행기 날개가 네모 모양이어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "날개 위아래를 지나는 공기의 속도가 달라야 한다."
+              },
+              {
+                "id": "C",
+                "text": "비행기가 물속에서 달려야 한다."
+              },
+              {
+                "id": "D",
+                "text": "날개가 없어도 하늘을 날 수 있어야 한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "비행기가 앞으로 빠르게 달려야 날개 주위로 바람이 불어오고, 위로 뜨는 힘도 생기기 때문입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "만약 비행기 엔진이 고장 나서 앞으로 달리지 못하면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비행기가 더 높이 올라간다."
+              },
+              {
+                "id": "B",
+                "text": "날개가 저절로 커진다."
+              },
+              {
+                "id": "C",
+                "text": "비행기가 물속으로 들어간다."
+              },
+              {
+                "id": "D",
+                "text": "양력이 생기지 않아 비행기가 뜰 수 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "우리가 하는 말은 크게 사실과 의견으로 나눌 수 있어요. 사실은 누가 봐도 똑같고 참인지 거짓인지 확인할 수 있는 말이에요.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'사실은 누구나 확인할 수 있다. 오늘은 수요일이다는 사실이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오늘이 수요일인지는 아무도 확인할 수 없다."
+              },
+              {
+                "id": "B",
+                "text": "오늘이 수요일인지는 사람마다 다르다."
+              },
+              {
+                "id": "C",
+                "text": "오늘이 수요일인지는 누구나 확인할 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "수요일은 의견이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "강력한 엔진과 특별한 모양의 날개가 힘을 합쳐 비행기를 하늘로 보내 주는 것입니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'비행기가 하늘을 날려면 엔진이 꼭 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "엔진이 없어도 비행기는 날 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "비행기가 날고 있다면 반드시 엔진이 있다."
+              },
+              {
+                "id": "C",
+                "text": "엔진이 있으면 자동차도 하늘을 난다."
+              },
+              {
+                "id": "D",
+                "text": "엔진과 비행은 관계가 없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "의견은 사람마다 생각이 다르고 나의 느낌을 나타내는 말이에요.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'의견이 되려면 사람마다 다르게 느낄 수 있어야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 꽃은 세상에서 제일 예쁘다."
+              },
+              {
+                "id": "B",
+                "text": "오늘은 월요일이다."
+              },
+              {
+                "id": "C",
+                "text": "지구는 둥글다."
+              },
+              {
+                "id": "D",
+                "text": "물은 0도에서 얼음이 된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "민수가 조심스럽게 구름 위에 앉았어요. 그러자 구름이 둥실 떠올랐어요.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'구름 위에 앉으면 둥실 떠오른다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "떠오르지 않으면 구름 위에 앉은 것이다."
+              },
+              {
+                "id": "B",
+                "text": "구름 위에 앉았는데 떠오르지 않는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "구름이 없어도 떠오른다."
+              },
+              {
+                "id": "D",
+                "text": "둥실 떠오르면 반드시 구름이 사라진다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "비행기는 쇠로 만들어져서 아주 무겁습니다. 양력 덕분에 비행기가 아래로 떨어지지 않고 하늘로 올라갈 수 있습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'양력이 생기면 비행기가 하늘로 올라간다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "빠르게 달려 양력이 생기자 비행기가 하늘로 떠올랐다."
+              },
+              {
+                "id": "B",
+                "text": "양력 없이 비행기가 하늘을 날았다."
+              },
+              {
+                "id": "C",
+                "text": "엔진을 끄니 비행기가 더 높이 올라갔다."
+              },
+              {
+                "id": "D",
+                "text": "날개를 떼어내자 비행기가 올라갔다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "사실은 누가 봐도 똑같고 참인지 거짓인지 확인할 수 있는 말이에요. 의견은 사람마다 생각이 다른 말이에요.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'예쁘다는 사람마다 다르게 느낀다. 사람마다 다르게 느끼는 것은 의견이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "예쁘다는 사실이다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "의견은 사실이다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "예쁘다는 누구나 같다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "예쁘다는 의견이다. (맞는 추론)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "아래를 내려다보니 자동차들이 장난감처럼 작게 보였어요. 높은 아파트는 레고 블록 같았지요.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'높이 올라갈수록 아래 물체가 작게 보인다.' 이 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "높이와 물체 크기는 전혀 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "높이 올라가면 물체가 실제로 줄어든다."
+              },
+              {
+                "id": "C",
+                "text": "높이가 올라가면 눈에 보이는 크기가 작아지는 관계가 있다."
+              },
+              {
+                "id": "D",
+                "text": "물체가 작아지면 높이가 올라간다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "비행기 날개의 위쪽은 둥글게 부풀고 아래쪽은 납작한 모양입니다. 이 모양 때문에 양력이 생깁니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'날개 모양이 양력을 만든다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "날개 위아래를 똑같이 납작하게 만들어서 양력이 생기는지 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "비행기의 색깔을 바꿔 본다."
+              },
+              {
+                "id": "C",
+                "text": "엔진의 크기만 바꿔 본다."
+              },
+              {
+                "id": "D",
+                "text": "조종사를 바꿔 본다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

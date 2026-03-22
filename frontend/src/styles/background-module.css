@@ -1,0 +1,85 @@
+/* 배경지식 모듈 스타일 */
+
+.bg-module {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 12px;
+}
+
+/* 상태 바 */
+.bg-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.bg-progress {
+  color: #555;
+}
+
+.bg-phase-label {
+  color: #ff8f2b;
+}
+
+/* 지문 읽기 화면 */
+.bg-passage-area {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,0.92);
+  border-radius: 10px;
+  padding: 24px 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+}
+
+.bg-passage-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ff8f2b;
+}
+
+.bg-passage-text {
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: #333;
+  word-break: keep-all;
+  white-space: pre-wrap;
+}
+
+/* 액션 버튼 영역 */
+.bg-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.bg-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.bg-btn:active {
+  transform: scale(0.96);
+}
+
+.bg-btn-primary {
+  background: #ff8f2b;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(255,143,43,0.3);
+}

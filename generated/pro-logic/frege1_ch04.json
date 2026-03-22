@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 4장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "옛날 사람들은 제비가 낮게 날면 비가 온다고 생각했습니다. 비가 오기 전에는 공기 상태가 달라져 곤충이 낮게 날 때가 있고, 제비도 먹이를 따라 낮게 날 수 있기 때문입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'제비가 낮게 날면 비가 온다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "제비는 비가 좋아서 일부러 낮게 난다"
+              },
+              {
+                "id": "B",
+                "text": "제비는 곤충을 먹이로 삼으며, 곤충은 비가 오기 전 기압 변화로 낮게 난다"
+              },
+              {
+                "id": "C",
+                "text": "모든 새는 비가 오면 낮게 난다"
+              },
+              {
+                "id": "D",
+                "text": "제비가 낮게 나는 것은 바람 때문이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "일기 예보 덕분에 우리는 우산을 챙기거나 태풍에 미리 대비할 수 있습니다. 기상청의 예보관들은 슈퍼컴퓨터의 분석 결과와 자신의 경험을 종합하여 날씨를 판단합니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'일기 예보를 보면 태풍에 대비할 수 있다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태풍 정보를 미리 알면 피해를 줄이는 행동을 할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "태풍은 예측이 불가능하다"
+              },
+              {
+                "id": "C",
+                "text": "일기 예보는 항상 100% 정확하다"
+              },
+              {
+                "id": "D",
+                "text": "태풍은 일기 예보와 상관없이 지나간다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "개미들은 다가올 비와 겨울을 대비해서 무더운 여름에도 식량을 모으고 있었습니다. 반면 베짱이는 나무 그늘에서 노래를 부르며 놀았습니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "베짱이가 여름 내내 놀기만 하면 겨울에 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "겨울에도 먹을 것이 넉넉할 것이다"
+              },
+              {
+                "id": "B",
+                "text": "겨울에 노래 실력이 좋아져 공연을 열 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "먹을 것과 쉴 곳이 없어 큰 어려움을 겪을 것이다"
+              },
+              {
+                "id": "D",
+                "text": "개미가 알아서 식량을 나누어 줄 것이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "인공위성과 레이더가 구름 이동, 바람의 세기, 대기의 상태 등을 실시간으로 관측합니다. 이 정보가 슈퍼컴퓨터로 보내져 미래의 날씨 변화를 계산해 냅니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "만약 인공위성과 레이더가 고장 나서 관측 데이터를 수집하지 못한다면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "슈퍼컴퓨터가 스스로 날씨를 예측할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "예보관들의 경험만으로 충분히 정확한 예보가 가능하다"
+              },
+              {
+                "id": "C",
+                "text": "일기 예보의 정확도가 크게 떨어질 것이다"
+              },
+              {
+                "id": "D",
+                "text": "날씨가 변하지 않아 예보가 필요 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "개미는 '하늘을 보니 곧 큰비가 쏟아질 것 같다'며 서쪽 하늘에 먹구름이 몰려오는 것을 근거로 들었습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 서쪽에서 먹구름이 몰려오면 비가 올 가능성이 높다. 소전제: 지금 서쪽 하늘에 먹구름이 몰려오고 있다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비가 올 가능성이 높다"
+              },
+              {
+                "id": "B",
+                "text": "날씨가 맑아질 것이다"
+              },
+              {
+                "id": "C",
+                "text": "먹구름은 비와 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "서쪽 하늘은 항상 맑다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "일기 예보가 만들어지는 과정은 관측, 분석, 예보의 세 단계입니다. 관측 단계에서는 현재의 날씨 상태를 정확하게 파악합니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 정확한 예보를 위해서는 관측, 분석, 예보 순서를 거쳐야 한다. 소전제: 관측 없이 바로 예보를 했다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정확한 예보가 이루어졌다"
+              },
+              {
+                "id": "B",
+                "text": "올바른 절차를 거치지 않았으므로 정확한 예보가 어렵다"
+              },
+              {
+                "id": "C",
+                "text": "분석은 필요 없다"
+              },
+              {
+                "id": "D",
+                "text": "예보가 더 빨리 이루어진다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "성실하게 일하며 먹이를 모아둔 개미들은 비가 와도 집 안에서 배불리 먹으며 편안하게 지냈습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'비가 와도 편안하게 지내려면 미리 식량을 모아두는 것이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "식량을 모아두면 반드시 편안하게 지낼 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "편안하게 지내지 못했다면 식량을 모아두지 않았을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "비가 오지 않으면 식량을 모을 필요가 없다"
+              },
+              {
+                "id": "D",
+                "text": "식량을 모아두지 않았다면 비가 와도 편안할 수 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "슈퍼컴퓨터는 복잡한 수학 공식으로 지구의 공기 흐름을 계산하여 미래의 날씨 변화를 그려냅니다. 이것을 '수치 예보 모델'이라고 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'수치 예보 모델이 작동하려면 관측 데이터 입력이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관측 데이터가 입력되면 모델이 반드시 정확하다"
+              },
+              {
+                "id": "B",
+                "text": "관측 데이터 없이는 수치 예보 모델이 작동할 수 없다"
+              },
+              {
+                "id": "C",
+                "text": "수치 예보 모델이 작동하면 관측 데이터는 필요 없다"
+              },
+              {
+                "id": "D",
+                "text": "관측 데이터와 모델 작동은 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "일기 예보를 만들 때 첫 번째 단계인 관측에서는 기온, 습도, 바람 등을 측정하고, 기상 위성은 구름의 이동을 촬영합니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'정확한 일기 예보를 하려면 다양한 관측이 필요하다'는 필요조건의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관측 장비 없이 하늘만 올려다보는 것"
+              },
+              {
+                "id": "B",
+                "text": "예보관이 경험에만 의존하여 날씨를 짐작하는 것"
+              },
+              {
+                "id": "C",
+                "text": "기상 위성으로 구름 이동을 촬영하고, 레이더로 비구름을 살피는 것"
+              },
+              {
+                "id": "D",
+                "text": "과거 날씨 기록만 참고하는 것"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "베짱이는 개미의 말을 무시하고 다시 신나게 노래를 불렀습니다. 며칠 뒤 개미의 예측대로 비가 쏟아졌고, 베짱이는 먹을 것이 없어 배가 고팠습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'어려움을 극복하려면 미리 대비하는 것이 필요하다'는 관계의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 준비 없이 시험을 보러 가기"
+              },
+              {
+                "id": "B",
+                "text": "태풍 경보를 듣고 창문을 단단히 고정하기"
+              },
+              {
+                "id": "C",
+                "text": "시험 전에 복습하여 좋은 성적을 받기"
+              },
+              {
+                "id": "D",
+                "text": "비가 올 것을 예상하고 우산을 챙기기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "오후에 비가 올 확률이 80%라면 비가 올 가능성이 매우 높다는 뜻입니다. 확률은 어떤 일이 일어날 가능성을 숫자로 나타낸 것입니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'비 올 확률이 80%이면(P) 우산을 챙기는 것이 합리적이다(Q)'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우산을 챙겼다면 비 올 확률이 80%였을 것이다"
+              },
+              {
+                "id": "B",
+                "text": "비 올 확률이 80% 미만이면 우산이 필요 없다"
+              },
+              {
+                "id": "C",
+                "text": "비 올 확률이 80%이면서 우산을 챙기는 것이 합리적이지 않은 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "우산을 챙기지 않으면 반드시 비를 맞는다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "개미는 미리 식량을 충분히 모아두었기 때문에 비가 며칠 동안 내려도 걱정이 없었습니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'식량을 충분히 모아두면(P) 비가 와도 걱정이 없다(Q)'에서 대우를 올바르게 표현한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비가 오지 않으면 식량을 모아둘 필요가 없다"
+              },
+              {
+                "id": "B",
+                "text": "식량을 모아두지 않으면 반드시 걱정된다"
+              },
+              {
+                "id": "C",
+                "text": "걱정이 있다면 식량을 충분히 모아두지 않은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "걱정이 없으면 반드시 식량을 모아둔 것이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "기상청에서 태풍 경보를 내리면 어선들은 항구로 돌아오고, 사람들은 외출을 자제합니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'태풍 경보가 발령되면 안전 조치를 취한다'는 충분조건의 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태풍 경보가 나오자 어선들이 항구로 피하고 창문을 보강했다"
+              },
+              {
+                "id": "B",
+                "text": "태풍 경보를 무시하고 바다로 나갔다"
+              },
+              {
+                "id": "C",
+                "text": "태풍 경보를 듣지 못해 아무 대비를 하지 않았다"
+              },
+              {
+                "id": "D",
+                "text": "태풍 경보가 없는데도 배가 항구로 돌아왔다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "개미는 여름에 열심히 일하며 식량을 모았고, 겨울에는 모아둔 식량 덕분에 배불리 먹으며 편안하게 지냈습니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'미리 준비하면 어려움을 이겨낼 수 있다'는 충분조건 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 준비 없이 시험에서 좋은 성적을 받았다"
+              },
+              {
+                "id": "B",
+                "text": "어려움이 없어서 준비가 필요 없었다"
+              },
+              {
+                "id": "C",
+                "text": "준비했지만 결국 어려움을 겪었다"
+              },
+              {
+                "id": "D",
+                "text": "여름에 모아둔 식량으로 겨울을 무사히 보낸 개미"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "베짱이는 '하늘이 이렇게 맑고 푸른데 비가 온다고?'라며 개미의 경고를 무시했습니다. 하지만 며칠 뒤 비가 쏟아졌습니다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'지금 하늘이 맑으면 앞으로도 비가 오지 않을 것이다'라는 베짱이의 추론이 부당한 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "개미의 말이 항상 틀리기 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "베짱이가 날씨 전문가이기 때문이다"
+              },
+              {
+                "id": "C",
+                "text": "하늘이 맑으면 비는 절대 오지 않기 때문이다"
+              },
+              {
+                "id": "D",
+                "text": "현재 상태가 미래에도 계속될 것이라는 근거가 없기 때문이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "예보관들은 슈퍼컴퓨터의 계산 결과와 자신의 경험, 우리나라의 지형적 특징을 종합하여 내일의 날씨를 판단합니다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'슈퍼컴퓨터가 비가 온다고 계산했으면(P) 비가 온다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "슈퍼컴퓨터가 비가 온다고 계산했으므로 비가 올 것이다 (전건 긍정)"
+              },
+              {
+                "id": "B",
+                "text": "비가 왔으므로 슈퍼컴퓨터가 계산한 것이다 (후건 긍정)"
+              },
+              {
+                "id": "C",
+                "text": "슈퍼컴퓨터가 계산하지 않았으므로 비가 오지 않는다 (전건 부정)"
+              },
+              {
+                "id": "D",
+                "text": "비가 오지 않았으므로 슈퍼컴퓨터가 고장이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "과학 기술이 발달할수록 일기 예보의 정확도가 높아지고 있습니다. 하지만 아직도 날씨 예측이 완벽하지는 않습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'과학 기술 발달'과 '일기 예보 정확도' 사이의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "과학 기술이 발달하면 일기 예보가 반드시 100% 정확해진다"
+              },
+              {
+                "id": "B",
+                "text": "둘 사이에는 아무런 관계가 없다"
+              },
+              {
+                "id": "C",
+                "text": "일기 예보가 정확해져서 과학 기술이 발달한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "과학 기술 발달과 예보 정확도 사이에 상관관계가 있으나, 자연 현상의 복잡성 때문에 완벽한 예측은 어렵다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "개미의 예측대로 비가 내렸습니다. 성실하게 준비한 개미는 편안했고, 준비하지 않은 베짱이는 곤란을 겪었습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'성실한 준비'와 '편안한 생활' 사이의 관계 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "성실하게 준비하면 반드시 모든 문제가 해결된다"
+              },
+              {
+                "id": "B",
+                "text": "성실한 준비와 편안한 생활 사이에 관련이 있지만, 예상치 못한 변수도 영향을 줄 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "편안한 생활을 하는 것은 순전히 운이다"
+              },
+              {
+                "id": "D",
+                "text": "준비 없이도 항상 편안하게 살 수 있다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "일기 예보는 관측, 분석, 예보의 세 단계를 거쳐 만들어집니다. 관측 데이터가 많을수록 예보가 정확해진다고 합니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'관측 데이터가 많을수록 일기 예보가 정확해진다'는 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "슈퍼컴퓨터의 성능만 비교한다"
+              },
+              {
+                "id": "B",
+                "text": "한 지역의 예보만 오랫동안 관찰한다"
+              },
+              {
+                "id": "C",
+                "text": "관측 데이터 없이 예보관의 경험만으로 예보한다"
+              },
+              {
+                "id": "D",
+                "text": "관측소가 많은 지역과 적은 지역의 예보 정확도를 비교한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "이 이야기의 교훈은 '미래를 예측하고 미리미리 준비하는 자세가 필요하다'는 것입니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'미리 준비하면 어려움을 잘 이겨낼 수 있다'는 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시험 공부를 열심히 해서 좋은 성적을 받았다"
+              },
+              {
+                "id": "B",
+                "text": "미리 준비했지만 예상하지 못한 큰 재해가 와서 어려움을 겪었다"
+              },
+              {
+                "id": "C",
+                "text": "태풍에 대비하여 창문을 보강했더니 피해가 없었다"
+              },
+              {
+                "id": "D",
+                "text": "아무 준비 없이 여행을 갔는데 날씨가 좋았다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

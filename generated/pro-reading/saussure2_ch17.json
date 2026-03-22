@@ -1,0 +1,109 @@
+[
+  {
+    "contentType": "PRO_READING", "title": "속담은 지혜의 보물창고", "targetLevel": "saussure2", "area": "READING", "subArea": "CONCEPT", "timeLimitSec": 300,
+    "seedReward": { "seedType": "seed_rice", "count": 3, "multiplier": 1 },
+    "payload": {
+      "passage": { "format": "TEXT", "paragraphs": [
+        { "id": "p1", "text": "옛날 사람들은 글을 모르는 사람도 쉽게 기억할 수 있도록 재미있는 말로 지혜를 전했어요." },
+        { "id": "p2", "text": "\"호랑이도 제 말 하면 온다\"처럼 동식물이나 주변에서 쉽게 볼 수 있는 것들로 속담을 만들었죠." },
+        { "id": "p3", "text": "속담은 길게 설명하지 않아도 뜻이 금방 통할 정도로 짧지만 강한 힘을 가졌어요." },
+        { "id": "p4", "text": "그래서 속담을 알면 우리에게 올바른 행동이 무엇이고 어떻게 살아야 하는지 잘 배울 수 있답니다." }
+      ]},
+      "intensive": { "timeline": [
+        { "stepId": "s1", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 49 }] }, "question": { "prompt": "옛날 사람들은 왜 속담을 만들었나요?", "choices": [{ "id": "A", "text": "글을 모르는 사람도 쉽게 기억할 수 있도록" }, { "id": "B", "text": "노래를 부르기 위해" }, { "id": "C", "text": "그림을 그리기 위해" }, { "id": "D", "text": "편지를 쓰기 위해" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s2", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 53 }] }, "question": { "prompt": "속담에는 주로 무엇이 등장하나요?", "choices": [{ "id": "A", "text": "동식물이나 주변에서 쉽게 볼 수 있는 것들" }, { "id": "B", "text": "로봇" }, { "id": "C", "text": "우주선" }, { "id": "D", "text": "컴퓨터" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s3", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 44 }] }, "question": { "prompt": "속담의 특징은 무엇인가요?", "choices": [{ "id": "A", "text": "짧지만 강한 힘을 가졌다" }, { "id": "B", "text": "매우 길다" }, { "id": "C", "text": "뜻을 알기 어렵다" }, { "id": "D", "text": "외국에서 만들어졌다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s4", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 53 }] }, "question": { "prompt": "속담을 알면 무엇을 배울 수 있나요?", "choices": [{ "id": "A", "text": "올바른 행동과 살아가는 방법" }, { "id": "B", "text": "요리하는 법" }, { "id": "C", "text": "자동차 운전법" }, { "id": "D", "text": "수학 공식" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s5", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 49 }, { "paragraphId": "p2", "start": 0, "end": 53 }, { "paragraphId": "p3", "start": 0, "end": 44 }, { "paragraphId": "p4", "start": 0, "end": 53 }] }, "question": { "prompt": "속담이 '지혜의 보물창고'라고 불리는 까닭은 무엇인가요?", "choices": [{ "id": "A", "text": "속담은 짧지만 깊은 지혜와 교훈이 담긴 소중한 말이다" }, { "id": "B", "text": "호랑이를 조심해야 한다" }, { "id": "C", "text": "속담은 필요 없다" }, { "id": "D", "text": "글을 모르면 안 된다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } }
+      ]},
+      "recall": { "cards": [
+        { "id": "c1", "text": "속담: 옛날부터 전해 내려오는 말" },
+        { "id": "c2", "text": "글 모르는 사람도 쉽게 기억" },
+        { "id": "c3", "text": "동식물 등 주변 것으로 비유" },
+        { "id": "c4", "text": "짧지만 강한 힘이 있음" },
+        { "id": "c5", "text": "뜻이 금방 통함" },
+        { "id": "c6", "text": "올바른 행동을 가르쳐 줌" },
+        { "id": "c7", "text": "조상들의 지혜가 담김" },
+        { "id": "c8", "text": "속담은 지혜의 보물창고" }
+      ], "correctOrder": ["c1","c2","c3","c4","c5","c6","c7","c8"], "seedPenalty": 1 },
+      "confirm": { "questions": [
+        { "id": "q1", "prompt": "옛날 사람들은 왜 속담을 만들었나요?", "answerRanges": [{ "paragraphId": "p1", "start": 0, "end": 49 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q2", "prompt": "속담에는 주로 무엇이 등장하나요?", "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 53 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q3", "prompt": "속담의 특징은 무엇인가요?", "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 44 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q4", "prompt": "속담을 알면 무엇을 배울 수 있나요?", "answerRanges": [{ "paragraphId": "p4", "start": 0, "end": 53 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" }
+      ]}
+    }
+  },
+  {
+    "contentType": "PRO_READING", "title": "닭 쫓던 개 지붕 쳐다본다", "targetLevel": "saussure2", "area": "READING", "subArea": "LITERATURE", "timeLimitSec": 300,
+    "seedReward": { "seedType": "seed_rice", "count": 3, "multiplier": 1 },
+    "payload": {
+      "passage": { "format": "TEXT", "paragraphs": [
+        { "id": "p1", "text": "평화로운 시골 마을의 마당에 강아지 바둑이가 살고 있었어요. 바둑이는 오늘도 마당 한쪽에서 모이를 먹고 있는 암탉 꼬꼬를 보며 장난을 치고 싶어졌어요. 바둑이는 살금살금 꼬꼬의 뒤로 다가갔어요. 그리고는 \"멍멍!\" 하고 크게 짖으며 꼬꼬를 쫓아가기 시작했답니다." },
+        { "id": "p2", "text": "깜짝 놀란 꼬꼬는 날개를 파닥거리며 도망쳤어요. 바둑이는 꼬꼬를 거의 다 잡았다고 생각했어요. 꼬꼬의 꽁지깃이 바둑이의 코앞까지 닿을 정도였기 때문이에요. 바둑이는 신이 나서 꼬리를 흔들며 더 빨리 달렸어요. 우물가를 지나고 장독대를 돌아 마당 끝까지 숨 가쁘게 달려갔지요." },
+        { "id": "p3", "text": "그런데 그 순간이었어요. 막다른 길에 다다른 꼬꼬가 갑자기 날개를 크게 휘두르더니, \"푸다닥!\" 소리를 내며 지붕 위로 높이 날아올랐어요. 바둑이는 너무 놀라 그 자리에 멈춰 서고 말았어요. 지붕은 바둑이가 아무리 높이 뛰어도 닿을 수 없을 만큼 아주 높았답니다." },
+        { "id": "p4", "text": "지붕 위에 안전하게 올라간 꼬꼬는 바둑이를 내려다보며 \"꼬꼬댁!\" 하고 울었어요. 바둑이는 닭을 잡으려고 온 힘을 다해 달렸지만, 이제는 지붕 위의 꼬꼬를 멍하니 바라볼 수밖에 없었지요. 애써 노력한 일이 헛수고가 되어 실망한 바둑이는 한참 동안이나 높은 지붕만 쳐다보았답니다." }
+      ]},
+      "intensive": { "timeline": [
+        { "stepId": "s1", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 146 }] }, "question": { "prompt": "바둑이가 꼬꼬에게 한 행동은 무엇인가요?", "choices": [{ "id": "A", "text": "크게 짖으며 꼬꼬를 쫓아가기 시작했다" }, { "id": "B", "text": "함께 모이를 먹었다" }, { "id": "C", "text": "잠을 잤다" }, { "id": "D", "text": "도망쳤다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s2", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 153 }] }, "question": { "prompt": "바둑이가 꼬꼬를 거의 잡았다고 생각한 이유는 무엇인가요?", "choices": [{ "id": "A", "text": "꼬꼬의 꽁지깃이 코앞까지 닿을 정도였으니까" }, { "id": "B", "text": "꼬꼬가 멈추어서" }, { "id": "C", "text": "꼬꼬가 잠들어서" }, { "id": "D", "text": "바둑이가 날 수 있어서" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s3", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 14, "end": 77 }] }, "question": { "prompt": "꼬꼬가 위기를 벗어난 방법은 무엇인가요?", "choices": [{ "id": "A", "text": "날개를 휘두르며 지붕 위로 날아올랐다" }, { "id": "B", "text": "땅속으로 파고들었다" }, { "id": "C", "text": "물속으로 뛰어들었다" }, { "id": "D", "text": "바둑이에게 싸움을 걸었다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s4", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 46, "end": 155 }] }, "question": { "prompt": "바둑이가 마지막에 한 행동은 무엇인가요?", "choices": [{ "id": "A", "text": "높은 지붕만 멍하니 쳐다보았다" }, { "id": "B", "text": "지붕 위로 올라갔다" }, { "id": "C", "text": "집으로 돌아가 잠을 잤다" }, { "id": "D", "text": "다른 닭을 쫓았다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s5", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 105, "end": 155 }] }, "question": { "prompt": "'닭 쫓던 개 지붕 쳐다본다'는 어떤 뜻인가요?", "choices": [{ "id": "A", "text": "애써 노력한 일이 헛수고가 되어 멍하니 바라본다" }, { "id": "B", "text": "강아지가 지붕을 좋아한다" }, { "id": "C", "text": "닭이 강아지보다 빠르다" }, { "id": "D", "text": "개가 지붕을 올라간다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } }
+      ]},
+      "recall": { "cards": [
+        { "id": "c1", "text": "바둑이가 꼬꼬를 장난으로 쫓음" },
+        { "id": "c2", "text": "꼬꼬를 거의 잡을 뻔했음" },
+        { "id": "c3", "text": "꼬꼬가 지붕 위로 날아오름" },
+        { "id": "c4", "text": "바둑이는 지붕에 닿지 못함" },
+        { "id": "c5", "text": "바둑이가 멍하니 지붕만 바라봄" },
+        { "id": "c6", "text": "애쓴 노력이 헛수고가 됨" },
+        { "id": "c7", "text": "속담: 닭 쫓던 개 지붕 쳐다본다" },
+        { "id": "c8", "text": "헛수고 후 허탈한 상황을 비유" }
+      ], "correctOrder": ["c1","c2","c3","c4","c5","c6","c7","c8"], "seedPenalty": 1 },
+      "confirm": { "questions": [
+        { "id": "q1", "prompt": "바둑이가 꼬꼬를 쫓기 시작한 이유는 무엇인가요?", "answerRanges": [{ "paragraphId": "p1", "start": 34, "end": 84 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q2", "prompt": "꼬꼬는 어떻게 바둑이를 피했나요?", "answerRanges": [{ "paragraphId": "p3", "start": 14, "end": 77 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q3", "prompt": "바둑이가 지붕에 오를 수 없었던 이유는 무엇인가요?", "answerRanges": [{ "paragraphId": "p3", "start": 107, "end": 147 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q4", "prompt": "바둑이의 노력은 결국 어떻게 되었나요?", "answerRanges": [{ "paragraphId": "p4", "start": 105, "end": 155 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q5", "prompt": "이 이야기와 관련된 속담의 뜻은 무엇인가요?", "answerRanges": [{ "paragraphId": "p4", "start": 105, "end": 155 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" }
+      ]}
+    }
+  },
+  {
+    "contentType": "PRO_READING", "title": "상황에 맞는 속담", "targetLevel": "saussure2", "area": "READING", "subArea": "NONFICTION", "timeLimitSec": 300,
+    "seedReward": { "seedType": "seed_rice", "count": 3, "multiplier": 1 },
+    "payload": {
+      "passage": { "format": "TEXT", "paragraphs": [
+        { "id": "p1", "text": "속담은 옛날 사람들로부터 전해 내려오는 지혜가 담긴 말입니다. 짧은 문장이지만 그 속에는 우리가 살아가면서 배울 수 있는 깊은 뜻이 숨어 있지요. 속담을 상황에 맞게 쓰면 나의 생각을 더 쉽고 재미있게 전달할 수 있습니다. 우리가 생활하면서 자주 쓸 수 있는 속담들을 함께 알아볼까요?" },
+        { "id": "p2", "text": "친구와 사이좋게 지내고 싶을 때는 \"가는 말이 고와야 오는 말이 곱다\"라는 속담을 기억하세요. 내가 남에게 좋게 말해야 남도 나에게 좋게 말한다는 뜻입니다. 친구가 나에게 다정하게 대해 주기를 바라나요? 그럼 내가 먼저 친구에게 예쁜 말을 써야 합니다. 고운 말은 친구와 나 사이를 더 가깝게 만들어 주는 힘이 있답니다." },
+        { "id": "p3", "text": "혼자서 하기 힘든 일이 생기면 친구들과 힘을 합쳐 보세요. 이럴 때는 \"백지장도 맞들면 낫다\"라는 속담이 어울립니다. 아무리 가벼운 종이 한 장이라도 둘이서 마주 들면 더 가볍고 쉽다는 뜻입니다. 청소 당번을 하거나 무거운 물건을 옮길 때 친구와 서로 도우면 어려운 일도 훨씬 쉽게 해결할 수 있습니다." },
+        { "id": "p4", "text": "작은 노력의 중요함을 알려 주는 속담도 있습니다. 바로 \"티끌 모아 태산\"입니다. 아주 작은 먼지 같은 티끌도 자꾸 모이면 거대한 산이 된다는 뜻이지요. 저금통에 동전을 하나씩 모으거나 매일 줄넘기를 연습하는 것처럼, 작고 사소한 일이라도 꾸준히 계속하면 나중에는 아주 큰 결과를 얻을 수 있다는 가르침을 줍니다." },
+        { "id": "p5", "text": "이처럼 속담은 우리가 겪는 여러 가지 상황에서 큰 도움을 줍니다. 오늘 배운 세 가지 속담을 마음속에 잘 기억해 보세요. 그리고 알맞은 상황이 생겼을 때 \"이럴 땐 이런 속담이 있지!\" 하고 사용해 보세요. 친구들과 나누는 대화가 훨씬 더 좋아질 것입니다." }
+      ]},
+      "intensive": { "timeline": [
+        { "stepId": "s1", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 87 }] }, "question": { "prompt": "\"가는 말이 고와야 오는 말이 곱다\"는 무슨 뜻인가요?", "choices": [{ "id": "A", "text": "내가 좋게 말해야 남도 나에게 좋게 말한다" }, { "id": "B", "text": "말을 많이 해야 한다" }, { "id": "C", "text": "큰 소리로 말해야 한다" }, { "id": "D", "text": "아무 말이나 해도 된다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s2", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 33, "end": 109 }] }, "question": { "prompt": "\"백지장도 맞들면 낫다\"는 무슨 뜻인가요?", "choices": [{ "id": "A", "text": "둘이서 힘을 합치면 더 쉽다" }, { "id": "B", "text": "종이가 무겁다" }, { "id": "C", "text": "혼자 하는 게 좋다" }, { "id": "D", "text": "종이를 들 필요가 없다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s3", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 28, "end": 85 }] }, "question": { "prompt": "\"티끌 모아 태산\"은 무슨 뜻인가요?", "choices": [{ "id": "A", "text": "작은 것도 모이면 큰 것이 된다" }, { "id": "B", "text": "먼지를 쓸어야 한다" }, { "id": "C", "text": "산에 가야 한다" }, { "id": "D", "text": "큰 것만 중요하다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s4", "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 143 }] }, "question": { "prompt": "세 가지 속담을 배운 뒤 알 수 있는 것은 무엇인가요?", "choices": [{ "id": "A", "text": "상황에 맞는 속담을 쓰면 생각을 잘 전달할 수 있다" }, { "id": "B", "text": "속담은 어렵다" }, { "id": "C", "text": "속담은 필요 없다" }, { "id": "D", "text": "속담은 하나만 알면 된다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } }
+      ]},
+      "recall": { "cards": [
+        { "id": "c1", "text": "속담: 지혜가 담긴 짧은 말" },
+        { "id": "c2", "text": "가는 말이 고와야 오는 말이 곱다" },
+        { "id": "c3", "text": "→ 내가 먼저 좋은 말을 하자" },
+        { "id": "c4", "text": "백지장도 맞들면 낫다" },
+        { "id": "c5", "text": "→ 함께 하면 더 쉽다" },
+        { "id": "c6", "text": "티끌 모아 태산" },
+        { "id": "c7", "text": "→ 작은 노력이 큰 결과를 만듦" },
+        { "id": "c8", "text": "상황에 맞게 속담을 쓰면 좋음" }
+      ], "correctOrder": ["c1","c2","c3","c4","c5","c6","c7","c8"], "seedPenalty": 1 },
+      "confirm": { "questions": [
+        { "id": "q1", "prompt": "\"가는 말이 고와야 오는 말이 곱다\"는 어떤 상황에 쓰나요?", "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 52 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q2", "prompt": "\"백지장도 맞들면 낫다\"는 어떤 상황에 쓰나요?", "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 32 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q3", "prompt": "\"티끌 모아 태산\"의 뜻은 무엇인가요?", "answerRanges": [{ "paragraphId": "p4", "start": 46, "end": 85 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q4", "prompt": "속담을 상황에 맞게 쓰면 어떤 점이 좋나요?", "answerRanges": [{ "paragraphId": "p1", "start": 82, "end": 124 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q5", "prompt": "\"티끌 모아 태산\"의 예시는 무엇인가요?", "answerRanges": [{ "paragraphId": "p4", "start": 86, "end": 175 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" }
+      ]}
+    }
+  }
+]

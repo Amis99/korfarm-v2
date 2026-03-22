@@ -96,7 +96,8 @@ data class ProModeSection(
     val testCount: Int,
     val averageTestScore: Double,
     val normalizedScore: Double,
-    val items: List<ProModeItem>
+    val items: List<ProModeItem>,
+    val competencyBreakdown: Map<String, CompetencyBreakdown>? = null
 )
 
 data class ProModeItem(
@@ -105,6 +106,13 @@ data class ProModeItem(
     val score: Int?,
     val status: String,
     val createdAt: String?
+)
+
+// 역량별 누적 분석 (프로 모드 테스트 전체 합산)
+data class CompetencyBreakdown(
+    val correct: Int,
+    val total: Int,
+    val accuracy: Double
 )
 
 // 학습 계획표 영역

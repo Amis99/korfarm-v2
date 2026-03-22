@@ -55,7 +55,7 @@ export default function ManuscriptGrid({ value = "", onChange, readOnly = false,
 
   const handleGridClick = () => {
     if (!readOnly && textareaRef.current) {
-      textareaRef.current.focus();
+      textareaRef.current.focus({ preventScroll: true });
     }
   };
 

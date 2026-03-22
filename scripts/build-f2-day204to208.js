@@ -1,0 +1,371 @@
+const fs = require('fs');
+const path = require('path');
+
+// === 유틸리티 함수 ===
+function findSentences(text) {
+  const sentences = [];
+  let start = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === '.' && (i === text.length - 1 || text[i+1] === ' ' || text[i+1] === '\n')) {
+      sentences.push({ start, end: i + 1, text: text.substring(start, i + 1) });
+      let next = i + 1;
+      while (next < text.length && (text[next] === ' ' || text[next] === '\n')) next++;
+      start = next;
+    }
+  }
+  if (start < text.length) sentences.push({ start, end: text.length, text: text.substring(start) });
+  return sentences;
+}
+
+function findRange(paragraphs, pid, searchText) {
+  const para = paragraphs.find(p => p.id === pid);
+  if (!para) throw new Error(`문단 ${pid} 없음`);
+  const start = para.text.indexOf(searchText);
+  if (start === -1) throw new Error(`"${searchText.substring(0, 30)}..." ${pid}에서 찾을 수 없음`);
+  return { paragraphId: pid, start, end: start + searchText.length };
+}
+
+function charLen(paragraphs) {
+  return paragraphs.reduce((sum, p) => sum + p.text.length, 0);
+}
+
+function buildTimeline(paragraphs) {
+  let stepNum = 0;
+  const timeline = [];
+  paragraphs.forEach((para) => {
+    const sents = findSentences(para.text);
+    sents.forEach((sent) => {
+      stepNum++;
+      const r = [{ paragraphId: para.id, start: sent.start, end: sent.end }];
+      timeline.push({ stepId: `s${stepNum}`, highlight: { ranges: r } });
+    });
+    stepNum++;
+    timeline.push({ stepId: `s${stepNum}`, highlight: { ranges: [{ paragraphId: para.id, start: 0, end: para.text.length }] } });
+  });
+  return timeline;
+}
+
+function buildRecallCards(paragraphs) {
+  const fullText = paragraphs.map(p => p.text).join('\n');
+  const totalLen = fullText.length;
+  const chunkSize = Math.ceil(totalLen / 8);
+  const cards = [];
+  for (let i = 0; i < 8; i++) {
+    const start = i * chunkSize;
+    const end = Math.min(start + chunkSize, totalLen);
+    cards.push({ id: `c${i+1}`, text: fullText.substring(start, end) });
+  }
+  return cards;
+}
+
+function makeConfirmQ(id, prompt, ranges) {
+  return {
+    id, prompt, answerRanges: ranges,
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true, answerMatchMode: "ANY"
+  };
+}
+
+function assembleFull(dayIndex, subArea, subAreaKo, paragraphs, confirmQuestions) {
+  const timeline = buildTimeline(paragraphs);
+  const cards = buildRecallCards(paragraphs);
+  const nn = String(dayIndex).padStart(3, '0');
+  return {
+    contentId: `dr-f2-${nn}`,
+    contentType: "DAILY_READING",
+    version: 1,
+    status: "PUBLISHED",
+    title: `일일 독해(프레게 2) Day ${dayIndex} ${subAreaKo}`,
+    description: "일일 독해 - 정독·복기·확인",
+    targetLevel: "FREGE_2",
+    schoolGradeRange: { min: 6, max: 6 },
+    area: "READING",
+    subArea,
+    competencies: ["READING"],
+    tags: ["daily"],
+    access: { mode: "FREE" },
+    seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+    timeLimitSec: 480,
+    assets: {},
+    payload: {
+      passage: { format: "TEXT", paragraphs },
+      intensive: { timeline },
+      recall: { cards, correctOrder: cards.map(c => c.id), seedPenalty: 1 },
+      confirm: { questions: confirmQuestions }
+    }
+  };
+}
+
+function wrapBatchItem(dayIndex, subArea, content) {
+  return {
+    content_type: "DAILY_READING",
+    level_id: "FREGE_2",
+    area: "READING",
+    sub_area: subArea,
+    day_index: dayIndex,
+    module_key: "reading_training",
+    schema_version: "1.0",
+    content
+  };
+}
+
+// ======================================================
+// Day 204 — 짝수 → LITERATURE(문학)
+// ======================================================
+function buildDay204() {
+  const paragraphs = [
+    {
+      id: "p1",
+      text: "소년은 매일 아침 해가 뜨기 전에 집을 나서 강가로 향했다. 납작하고 매끄러운 돌을 골라 주머니에 넣으면 하루가 든든해지는 기분이었다. 강물은 계절마다 색이 달랐고, 봄에는 연둣빛으로, 여름에는 짙은 초록빛으로 흘렀다. 가을에는 하늘빛을 담아 맑게 빛났고, 겨울에는 회색빛으로 조용히 흘렀다. 소년은 돌멩이를 하나씩 세며 강물의 색깔을 마음속에 기록했다. 누구에게 보여 줄 수는 없었지만, 그것은 소년만의 일기장이었다."
+    },
+    {
+      id: "p2",
+      text: "어느 가을 아침, 강가에 낯선 소녀가 앉아 있었다. 소녀는 돌멩이를 물 위로 튕기고 있었는데, 돌은 수면 위를 세 번 네 번 뛰어 건너편까지 날아갔다. 소년은 한 번도 그렇게 멀리 보낸 적이 없었다. 소년이 넋을 놓고 바라보자 소녀가 고개를 돌리며 말했다. 비결은 손목이 아니라 마음이라고, 돌이 물 위를 걷는 모습을 상상하면 된다고."
+    },
+    {
+      id: "p3",
+      text: "소년은 반신반의하면서도 소녀가 알려 준 대로 해 보았다. 눈을 감고 돌멩이가 물 위를 사뿐히 걷는 장면을 떠올렸다. 그리고 손목을 비틀어 힘껏 던졌다. 돌멩이는 수면을 두 번 튕긴 뒤 물속으로 빠졌다. 이전보다 한 번 더 튕긴 것이었다. 소녀가 박수를 치며 웃었고, 소년도 따라 웃었다. 그날 이후 소년은 주머니에 넣어 두기만 하던 돌멩이를 매일 강물 위로 날려 보냈다."
+    },
+    {
+      id: "p4",
+      text: "겨울이 오자 강물이 얼었고 소녀는 더 이상 나타나지 않았다. 소년은 얼음 위에 돌멩이를 올려놓고 미끄러뜨려 보았지만, 돌은 그저 길게 미끄러지다가 멈출 뿐이었다. 소년은 소녀의 말을 떠올리며 봄을 기다렸다. 봄이 되어 강물이 다시 흐르기 시작했을 때, 소년은 돌멩이를 던졌다. 돌은 다섯 번을 튕기며 강 건너편에 닿았다. 소년은 그제야 알았다. 소녀가 남긴 것은 돌을 던지는 기술이 아니라, 무언가를 상상하며 도전하는 용기였다는 것을."
+    }
+  ];
+
+  console.log(`Day 204 글자수: ${charLen(paragraphs)}`);
+
+  const confirmQuestions = [
+    makeConfirmQ("q1", "소년이 매일 아침 강가에서 한 일은 무엇인가요?",
+      [findRange(paragraphs, "p1", "납작하고 매끄러운 돌을 골라 주머니에 넣으면 하루가 든든해지는 기분이었다.")]),
+    makeConfirmQ("q2", "소년이 강물의 색깔을 기록한 방식은 무엇이었나요?",
+      [findRange(paragraphs, "p1", "소년은 돌멩이를 하나씩 세며 강물의 색깔을 마음속에 기록했다.")]),
+    makeConfirmQ("q3", "소녀가 돌멩이를 멀리 보내는 비결이라고 말한 것은 무엇인가요?",
+      [findRange(paragraphs, "p2", "비결은 손목이 아니라 마음이라고, 돌이 물 위를 걷는 모습을 상상하면 된다고.")]),
+    makeConfirmQ("q4", "소년이 소녀의 방법대로 처음 시도했을 때 돌멩이는 몇 번 튕겼나요?",
+      [findRange(paragraphs, "p3", "돌멩이는 수면을 두 번 튕긴 뒤 물속으로 빠졌다.")]),
+    makeConfirmQ("q5", "소녀가 더 이상 나타나지 않은 이유와 관련된 계절은 언제인가요?",
+      [findRange(paragraphs, "p4", "겨울이 오자 강물이 얼었고 소녀는 더 이상 나타나지 않았다.")]),
+    makeConfirmQ("q6", "봄에 소년이 던진 돌멩이는 몇 번 튕겼나요?",
+      [findRange(paragraphs, "p4", "돌은 다섯 번을 튕기며 강 건너편에 닿았다.")])
+  ];
+
+  const content = assembleFull(204, "LITERATURE", "문학", paragraphs, confirmQuestions);
+  return { content, subArea: "LITERATURE" };
+}
+
+// ======================================================
+// Day 205 — 홀수 → NONFICTION(비문학) - 주제: 해양 생태계
+// ======================================================
+function buildDay205() {
+  const paragraphs = [
+    {
+      id: "p1",
+      text: "바다는 지구 표면의 약 71퍼센트를 차지하며, 지구상 생물 다양성의 보고로 불린다. 해양 생태계는 크게 연안 생태계와 원양 생태계로 나뉜다. 연안 생태계는 해안선에서 가까운 얕은 바다를 포함하며, 산호초, 갯벌, 맹그로브 숲 등이 대표적이다. 원양 생태계는 깊은 바다를 중심으로 형성되며, 빛이 거의 닿지 않는 심해에서도 열수 분출공 주변에서 독특한 생물들이 살아간다. 이처럼 해양 생태계는 다양한 환경 조건에 따라 복잡하게 분화되어 있다."
+    },
+    {
+      id: "p2",
+      text: "산호초는 해양 생태계에서 특히 중요한 역할을 한다. 전체 바다 면적의 1퍼센트도 차지하지 않지만, 해양 생물 종의 약 25퍼센트가 산호초에 의존하여 살아간다. 산호는 작은 동물인 산호충이 모여 이루어진 군체로, 체내에 공생하는 조류가 광합성을 통해 에너지를 공급한다. 수온이 지나치게 올라가면 공생 조류가 빠져나가 산호가 하얗게 변하는 백화 현상이 발생한다. 이 상태가 오래 지속되면 산호는 결국 죽고 만다."
+    },
+    {
+      id: "p3",
+      text: "갯벌은 밀물과 썰물에 의해 드러나고 잠기기를 반복하는 지역이다. 갯벌에는 조개, 게, 갯지렁이 등 다양한 저서 생물이 서식하며, 이들은 유기물을 분해하여 바닷물을 정화하는 역할을 한다. 또한 갯벌은 철새들의 중간 기착지로서 생태학적 가치가 매우 높다. 한국의 서해안 갯벌은 세계적으로도 손꼽히는 규모를 자랑하며, 2021년에 유네스코 세계자연유산으로 등재되었다."
+    },
+    {
+      id: "p4",
+      text: "최근 해양 오염과 기후 변화로 인해 해양 생태계가 심각한 위협을 받고 있다. 플라스틱 쓰레기는 바다로 흘러들어 해양 생물의 먹이와 서식지를 오염시킨다. 미세 플라스틱은 먹이 사슬을 통해 축적되어 최종 소비자인 인간에게까지 영향을 미친다. 해양 생태계를 보전하기 위해서는 해양 쓰레기 감축, 이산화탄소 배출 저감, 해양 보호 구역 확대 등의 노력이 필요하다."
+    }
+  ];
+
+  console.log(`Day 205 글자수: ${charLen(paragraphs)}`);
+
+  const confirmQuestions = [
+    makeConfirmQ("q1", "해양 생태계는 크게 어떤 두 종류로 나뉘나요?",
+      [findRange(paragraphs, "p1", "해양 생태계는 크게 연안 생태계와 원양 생태계로 나뉜다.")]),
+    makeConfirmQ("q2", "산호초에 의존하여 살아가는 해양 생물 종은 전체의 약 몇 퍼센트인가요?",
+      [findRange(paragraphs, "p2", "해양 생물 종의 약 25퍼센트가 산호초에 의존하여 살아간다.")]),
+    makeConfirmQ("q3", "산호의 백화 현상은 어떤 조건에서 발생하나요?",
+      [findRange(paragraphs, "p2", "수온이 지나치게 올라가면 공생 조류가 빠져나가 산호가 하얗게 변하는 백화 현상이 발생한다.")]),
+    makeConfirmQ("q4", "갯벌이 바닷물을 정화하는 데 기여하는 생물은 무엇인가요?",
+      [findRange(paragraphs, "p3", "조개, 게, 갯지렁이 등 다양한 저서 생물이 서식하며, 이들은 유기물을 분해하여 바닷물을 정화하는 역할을 한다.")]),
+    makeConfirmQ("q5", "한국의 서해안 갯벌이 유네스코 세계자연유산으로 등재된 연도는 언제인가요?",
+      [findRange(paragraphs, "p3", "2021년에 유네스코 세계자연유산으로 등재되었다.")]),
+    makeConfirmQ("q6", "미세 플라스틱이 인간에게 영향을 미치는 경로는 무엇인가요?",
+      [findRange(paragraphs, "p4", "미세 플라스틱은 먹이 사슬을 통해 축적되어 최종 소비자인 인간에게까지 영향을 미친다.")]),
+    makeConfirmQ("q7", "해양 생태계를 보전하기 위해 필요한 노력으로 언급된 것은 무엇인가요?",
+      [findRange(paragraphs, "p4", "해양 쓰레기 감축, 이산화탄소 배출 저감, 해양 보호 구역 확대 등의 노력이 필요하다.")])
+  ];
+
+  const content = assembleFull(205, "NONFICTION", "비문학", paragraphs, confirmQuestions);
+  return { content, subArea: "NONFICTION" };
+}
+
+// ======================================================
+// Day 206 — 짝수 → LITERATURE(문학)
+// ======================================================
+function buildDay206() {
+  const paragraphs = [
+    {
+      id: "p1",
+      text: "할머니의 집 마당에는 오래된 감나무가 한 그루 서 있었다. 가지가 지붕보다 높이 뻗어 있어서, 가을이 되면 지붕 위로 감이 떨어지곤 했다. 할머니는 그 감나무를 자식처럼 아꼈다. 봄에는 거름을 주고, 여름에는 벌레를 잡아 주었으며, 가을에는 잘 익은 감을 따서 이웃에게 나누어 주었다. 이웃들은 할머니의 감이 유난히 달고 맛있다며 해마다 기다렸다. 감나무는 할머니의 삶 그 자체였다."
+    },
+    {
+      id: "p2",
+      text: "손녀인 은지는 여름 방학마다 할머니 집에 왔다. 은지가 가장 좋아하는 것은 감나무 아래에 놓인 평상에 누워 하늘을 올려다보는 일이었다. 감나무 잎사귀 사이로 비치는 햇살이 흔들리면, 마치 초록색 만화경을 들여다보는 것 같았다. 할머니는 부채질을 하며 옛이야기를 들려주었는데, 이야기 속에는 늘 감나무가 등장했다. 할아버지가 처음 이 집에 심었다는 이야기, 태풍에도 꺾이지 않았다는 이야기."
+    },
+    {
+      id: "p3",
+      text: "어느 해 겨울, 할머니가 돌아가셨다. 은지네 가족은 할머니의 집을 정리하러 갔다. 빈집에는 할머니의 온기가 아직 남아 있는 듯했다. 아버지는 집을 팔아야 한다고 했고, 어머니도 동의했다. 은지는 아무 말도 하지 못했지만, 마당의 감나무를 올려다보며 눈물을 흘렸다. 앙상한 가지 위로 까치 한 마리가 앉아 있었다. 할머니가 감을 따고 남긴 몇 알이 꼭대기에 매달려 있었는데, 까치가 그것을 쪼아 먹고 있었다."
+    },
+    {
+      id: "p4",
+      text: "집은 결국 팔렸지만, 새 주인은 감나무를 베지 않겠다고 약속했다. 은지는 이따금 그 동네를 지나갈 때 담장 너머로 감나무를 올려다보았다. 감나무는 여전히 봄이면 꽃을 피우고, 가을이면 주홍빛 열매를 맺었다. 은지는 그때마다 할머니의 부채질 소리와 옛이야기가 귀에 맴도는 것을 느꼈다. 감나무가 서 있는 한, 할머니의 기억도 함께 살아 있을 것이라고 은지는 믿었다."
+    }
+  ];
+
+  console.log(`Day 206 글자수: ${charLen(paragraphs)}`);
+
+  const confirmQuestions = [
+    makeConfirmQ("q1", "할머니가 감나무를 돌보던 방식으로 언급된 것은 무엇인가요?",
+      [findRange(paragraphs, "p1", "봄에는 거름을 주고, 여름에는 벌레를 잡아 주었으며, 가을에는 잘 익은 감을 따서 이웃에게 나누어 주었다.")]),
+    makeConfirmQ("q2", "은지가 감나무 아래 평상에서 좋아했던 일은 무엇인가요?",
+      [findRange(paragraphs, "p2", "감나무 아래에 놓인 평상에 누워 하늘을 올려다보는 일이었다.")]),
+    makeConfirmQ("q3", "할머니의 옛이야기 속에 등장했던 내용은 무엇인가요?",
+      [findRange(paragraphs, "p2", "할아버지가 처음 이 집에 심었다는 이야기, 태풍에도 꺾이지 않았다는 이야기.")]),
+    makeConfirmQ("q4", "은지가 감나무를 올려다보며 눈물을 흘린 이유는 무엇인가요?",
+      [findRange(paragraphs, "p3", "아버지는 집을 팔아야 한다고 했고, 어머니도 동의했다.")]),
+    makeConfirmQ("q5", "새 주인이 한 약속은 무엇인가요?",
+      [findRange(paragraphs, "p4", "새 주인은 감나무를 베지 않겠다고 약속했다.")]),
+    makeConfirmQ("q6", "은지가 감나무를 볼 때마다 느끼는 것은 무엇인가요?",
+      [findRange(paragraphs, "p4", "할머니의 부채질 소리와 옛이야기가 귀에 맴도는 것을 느꼈다.")])
+  ];
+
+  const content = assembleFull(206, "LITERATURE", "문학", paragraphs, confirmQuestions);
+  return { content, subArea: "LITERATURE" };
+}
+
+// ======================================================
+// Day 207 — 홀수 → NONFICTION(비문학) - 주제: 인공지능의 역사
+// ======================================================
+function buildDay207() {
+  const paragraphs = [
+    {
+      id: "p1",
+      text: "인공지능이라는 개념은 1956년 미국 다트머스 대학에서 열린 학회에서 처음 공식적으로 사용되었다. 이 학회에서 존 매카시, 마빈 민스키 등의 학자들은 기계가 인간처럼 사고할 수 있는 가능성에 대해 논의했다. 당시 학자들은 몇 년 안에 인간 수준의 지능을 가진 기계를 만들 수 있으리라 낙관했으나, 현실은 그렇게 간단하지 않았다. 인간의 사고 과정은 예상보다 훨씬 복잡했고, 컴퓨터의 성능도 당시에는 매우 제한적이었다."
+    },
+    {
+      id: "p2",
+      text: "인공지능 연구는 이후 두 차례의 긴 침체기를 겪었는데, 이를 인공지능의 겨울이라 부른다. 첫 번째 겨울은 1970년대에 찾아왔는데, 초기의 높은 기대와 달리 연구 성과가 미미하자 정부와 기업의 투자가 급격히 줄어들었다. 두 번째 겨울은 1980년대 후반부터 1990년대 초반까지 이어졌다. 전문가 시스템이라 불리는 규칙 기반 기술이 한때 주목받았으나, 복잡한 현실 문제를 해결하기에는 한계가 분명했다."
+    },
+    {
+      id: "p3",
+      text: "2010년대에 들어서면서 인공지능은 비약적으로 발전하기 시작했다. 그 핵심에는 딥러닝 기술이 있었다. 딥러닝은 인간 뇌의 신경망 구조를 모방한 알고리즘으로, 대량의 데이터를 학습하여 스스로 패턴을 찾아낸다. 인터넷의 발달로 학습에 필요한 방대한 데이터를 확보할 수 있게 된 것도 큰 역할을 했다. 2016년에는 구글의 알파고가 바둑 세계 챔피언 이세돌을 꺾으며 전 세계에 인공지능의 가능성을 보여 주었다."
+    },
+    {
+      id: "p4",
+      text: "오늘날 인공지능은 의료, 교육, 교통, 예술 등 거의 모든 분야에 활용되고 있다. 의료 분야에서는 영상 판독을 통해 질병을 조기에 발견하고, 교육 분야에서는 학생 개인의 수준에 맞는 맞춤형 학습을 제공한다. 그러나 인공지능이 가져올 일자리 감소, 개인 정보 침해, 판단의 편향성 등 윤리적 문제에 대한 사회적 논의도 활발히 이루어지고 있다."
+    }
+  ];
+
+  console.log(`Day 207 글자수: ${charLen(paragraphs)}`);
+
+  const confirmQuestions = [
+    makeConfirmQ("q1", "인공지능이라는 개념이 처음 공식적으로 사용된 시기와 장소는 어디인가요?",
+      [findRange(paragraphs, "p1", "1956년 미국 다트머스 대학에서 열린 학회에서 처음 공식적으로 사용되었다.")]),
+    makeConfirmQ("q2", "인공지능의 첫 번째 겨울이 찾아온 이유는 무엇인가요?",
+      [findRange(paragraphs, "p2", "초기의 높은 기대와 달리 연구 성과가 미미하자 정부와 기업의 투자가 급격히 줄어들었다.")]),
+    makeConfirmQ("q3", "전문가 시스템의 한계는 무엇이었나요?",
+      [findRange(paragraphs, "p2", "전문가 시스템이라 불리는 규칙 기반 기술이 한때 주목받았으나, 복잡한 현실 문제를 해결하기에는 한계가 분명했다.")]),
+    makeConfirmQ("q4", "딥러닝 기술은 어떤 구조를 모방한 알고리즘인가요?",
+      [findRange(paragraphs, "p3", "딥러닝은 인간 뇌의 신경망 구조를 모방한 알고리즘으로, 대량의 데이터를 학습하여 스스로 패턴을 찾아낸다.")]),
+    makeConfirmQ("q5", "2016년에 구글의 알파고가 보여 준 성과는 무엇인가요?",
+      [findRange(paragraphs, "p3", "구글의 알파고가 바둑 세계 챔피언 이세돌을 꺾으며 전 세계에 인공지능의 가능성을 보여 주었다.")]),
+    makeConfirmQ("q6", "인공지능이 교육 분야에서 활용되는 방식은 무엇인가요?",
+      [findRange(paragraphs, "p4", "교육 분야에서는 학생 개인의 수준에 맞는 맞춤형 학습을 제공한다.")]),
+    makeConfirmQ("q7", "인공지능과 관련하여 제기되는 윤리적 문제는 무엇인가요?",
+      [findRange(paragraphs, "p4", "일자리 감소, 개인 정보 침해, 판단의 편향성 등 윤리적 문제에 대한 사회적 논의도 활발히 이루어지고 있다.")])
+  ];
+
+  const content = assembleFull(207, "NONFICTION", "비문학", paragraphs, confirmQuestions);
+  return { content, subArea: "NONFICTION" };
+}
+
+// ======================================================
+// Day 208 — 짝수 → LITERATURE(문학)
+// ======================================================
+function buildDay208() {
+  const paragraphs = [
+    {
+      id: "p1",
+      text: "비가 내리는 토요일 오후, 도서관 한쪽 구석에서 민호는 낡은 책 한 권을 발견했다. 서가 맨 아래 칸에 먼지를 뒤집어쓴 채 끼어 있었다. 가죽 표지는 빛이 바래 있었고, 페이지 사이에서는 오래된 종이 냄새가 났다. 제목도 지은이도 적혀 있지 않았다. 민호는 호기심에 첫 장을 넘겼다. 거기에는 손글씨로 이렇게 쓰여 있었다. 이 책을 읽는 사람에게, 당신은 이 이야기의 마지막 독자입니다."
+    },
+    {
+      id: "p2",
+      text: "책에는 한 소녀의 이야기가 담겨 있었다. 소녀는 전쟁 중에 가족과 헤어져 낯선 마을에 홀로 남겨졌다. 소녀는 매일 마을 뒷산에 올라가 먼 곳을 바라보며 가족이 돌아오기를 기다렸다. 마을 사람들은 처음에는 어디서 온 아이인지 몰라 경계했지만, 소녀가 힘든 일을 마다하지 않고 돕는 모습을 보며 차츰 마음을 열었다. 소녀는 마을 아이들에게 글을 가르치기 시작했고, 아이들은 소녀를 선생님이라고 불렀다."
+    },
+    {
+      id: "p3",
+      text: "이야기의 마지막 장에는 소녀가 직접 쓴 듯한 편지가 끼워져 있었다. 편지에는 전쟁이 끝나고 가족을 다시 만났다는 소식이 적혀 있었다. 소녀는 마을을 떠나면서 이 책을 마을 도서관에 남겼다고 했다. 그리고 이 이야기를 읽는 누군가가 힘든 시간을 보내고 있다면, 기다림은 반드시 끝이 있다는 것을 기억해 달라고 부탁했다."
+    },
+    {
+      id: "p4",
+      text: "민호는 책을 덮고 창밖을 바라보았다. 비가 그치고 구름 사이로 햇살이 비치고 있었다. 민호는 요즘 전학 때문에 힘들었던 자신의 처지를 떠올렸다. 낯선 학교, 낯선 친구들 사이에서 외로웠던 날들이 소녀의 이야기와 겹쳐 보였다. 그러나 소녀가 결국 가족을 만났듯이, 자신도 이 낯선 곳에서 새로운 인연을 만들 수 있을 것이라는 희망이 생겼다. 민호는 책을 원래 자리에 꽂아 두었다. 다음에 이 책을 발견할 누군가를 위해서였다."
+    }
+  ];
+
+  console.log(`Day 208 글자수: ${charLen(paragraphs)}`);
+
+  const confirmQuestions = [
+    makeConfirmQ("q1", "민호가 발견한 책의 외형은 어떠했나요?",
+      [findRange(paragraphs, "p1", "가죽 표지는 빛이 바래 있었고, 페이지 사이에서는 오래된 종이 냄새가 났다.")]),
+    makeConfirmQ("q2", "책의 첫 장에 손글씨로 쓰여 있던 내용은 무엇인가요?",
+      [findRange(paragraphs, "p1", "이 책을 읽는 사람에게, 당신은 이 이야기의 마지막 독자입니다.")]),
+    makeConfirmQ("q3", "소녀가 마을 사람들의 마음을 연 계기는 무엇인가요?",
+      [findRange(paragraphs, "p2", "소녀가 힘든 일을 마다하지 않고 돕는 모습을 보며 차츰 마음을 열었다.")]
+    ),
+    makeConfirmQ("q4", "소녀가 마을에서 한 일은 무엇인가요?",
+      [findRange(paragraphs, "p2", "소녀는 마을 아이들에게 글을 가르치기 시작했고, 아이들은 소녀를 선생님이라고 불렀다.")]),
+    makeConfirmQ("q5", "소녀가 편지에서 독자에게 부탁한 내용은 무엇인가요?",
+      [findRange(paragraphs, "p3", "기다림은 반드시 끝이 있다는 것을 기억해 달라고 부탁했다.")]),
+    makeConfirmQ("q6", "민호가 책을 원래 자리에 꽂아 둔 이유는 무엇인가요?",
+      [findRange(paragraphs, "p4", "다음에 이 책을 발견할 누군가를 위해서였다.")])
+  ];
+
+  const content = assembleFull(208, "LITERATURE", "문학", paragraphs, confirmQuestions);
+  return { content, subArea: "LITERATURE" };
+}
+
+// ======================================================
+// 실행부
+// ======================================================
+const results = [
+  { dayIndex: 204, ...buildDay204() },
+  { dayIndex: 205, ...buildDay205() },
+  { dayIndex: 206, ...buildDay206() },
+  { dayIndex: 207, ...buildDay207() },
+  { dayIndex: 208, ...buildDay208() }
+];
+
+const staticDir = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'frege2');
+const batchItems = [];
+
+results.forEach(({ dayIndex, content, subArea }) => {
+  const filePath = path.join(staticDir, `${String(dayIndex).padStart(3, '0')}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(content, null, 2), 'utf8');
+  console.log(`  ✅ ${filePath}`);
+  batchItems.push(wrapBatchItem(dayIndex, subArea, content));
+});
+
+// 임시 배치 파일에 저장 (race condition 방지)
+const tempBatchPath = path.join(__dirname, '..', 'generated', 'new', 'batch-f2-204-208.json');
+fs.writeFileSync(tempBatchPath, JSON.stringify(batchItems, null, 2), 'utf8');
+console.log(`  ✅ 임시 배치: ${tempBatchPath}`);
+
+// 검증
+results.forEach(({ dayIndex, content }) => {
+  const p = content.payload;
+  const len = p.passage.paragraphs.reduce((s, pg) => s + pg.text.length, 0);
+  const rc = p.recall.cards.length;
+  const cq = p.confirm.questions.length;
+  const ok = len >= 850 && len <= 950 && rc === 8 && cq >= 5;
+  console.log(`Day ${dayIndex}: ${len}자 | recall=${rc} | confirm=${cq} | ${ok ? 'OK' : 'WARN'}`);
+});

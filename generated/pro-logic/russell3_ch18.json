@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀3 18장 논리사고력",
+  "targetLevel": "russell3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "다의어는 하나의 단어가 의미적으로 관련된 여러 뜻을 지니는 경우이고, 동음이의어는 형태는 같지만 뜻이 전혀 다른 별개의 단어이다. '눈'은 '신체 기관'과 '하늘에서 내리는 눈'으로 뜻이 무관하므로 동음이의어이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'배'가 다의어인지 동음이의어인지 판단하려면 반드시 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글자 수가 같으면 같은 단어이다."
+              },
+              {
+                "id": "B",
+                "text": "여러 뜻 사이에 의미적 관련성이 있으면 다의어, 없으면 동음이의어로 구분한다."
+              },
+              {
+                "id": "C",
+                "text": "발음이 같으면 뜻도 같다."
+              },
+              {
+                "id": "D",
+                "text": "모든 다의어는 동음이의어이기도 하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "간은 인체에서 가장 큰 장기로 해독, 대사, 담즙 생성 등 수백 가지 기능을 수행한다. 간문맥을 통해 소장에서 흡수된 영양소가 간으로 전달된다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "간이 '인체의 화학 공장'이라 불린다는 주장이 성립하려면 반드시 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "간은 하나의 기능만 수행한다."
+              },
+              {
+                "id": "B",
+                "text": "간은 재생 능력이 없다."
+              },
+              {
+                "id": "C",
+                "text": "간은 혈액을 순환시키는 펌프이다."
+              },
+              {
+                "id": "D",
+                "text": "간이 다양한 화학 반응(해독, 대사, 합성 등)을 수행하여 공장에 비유할 수 있을 정도로 다기능적이다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "곽재구의 '사평역에서'에서 겨울밤 간이역 대합실에서 막차를 기다리는 사람들이 등장한다. 함박눈과 톱밥난로가 분위기를 만들며, 지친 사람들이 서로의 체온과 존재로 위안을 나눈다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "이 시에서 '막차가 끝내 오지 않을 경우' 예상되는 시적 의미는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사람들이 행복하게 귀가한다."
+              },
+              {
+                "id": "B",
+                "text": "기다림 자체가 지속되며, 불확실한 희망 속에서도 서로의 존재로 위안받는 연대의 의미가 심화된다."
+              },
+              {
+                "id": "C",
+                "text": "사람들이 난로를 끄고 떠난다."
+              },
+              {
+                "id": "D",
+                "text": "눈이 그치고 날이 밝는다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "간의 해독 기능이 손상되면 체내에 독성 물질이 축적된다. 간경화 등으로 간 기능이 저하되면 여러 합병증이 발생할 수 있다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "간의 해독 기능이 심하게 손상될 경우 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독성 물질이 혈액에 축적되어 다른 장기에 악영향을 미친다."
+              },
+              {
+                "id": "B",
+                "text": "소화가 더 잘 된다."
+              },
+              {
+                "id": "C",
+                "text": "근육량이 증가한다."
+              },
+              {
+                "id": "D",
+                "text": "면역력이 강화된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "유의어는 뜻이 비슷한 단어이고, 반의어는 뜻이 반대인 단어이다. 상하위어는 의미 범위의 포함 관계를 가진 단어이다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 상하위어에서 상위어의 의미 범위가 하위어를 포함한다. [소전제] '동물'은 '개'의 상위어이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'동물'의 의미 범위가 '개'보다 좁다."
+              },
+              {
+                "id": "B",
+                "text": "'개'와 '동물'은 반의어이다."
+              },
+              {
+                "id": "C",
+                "text": "'개'와 '동물'은 유의어이다."
+              },
+              {
+                "id": "D",
+                "text": "'동물'의 의미 범위가 '개'를 포함한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "사평역에서에서 톱밥난로의 따뜻함은 물리적 온기인 동시에 인간적 연대의 상징이다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 시에서 사물이 물리적 의미와 상징적 의미를 동시에 가지면 상징적 기법이다. [소전제] 톱밥난로는 물리적 온기와 인간적 연대를 동시에 표현한다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "톱밥난로는 직유법이다."
+              },
+              {
+                "id": "B",
+                "text": "톱밥난로는 과학적 설명이다."
+              },
+              {
+                "id": "C",
+                "text": "톱밥난로는 의미가 없다."
+              },
+              {
+                "id": "D",
+                "text": "톱밥난로는 상징적 기법이 사용되었다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "다의어가 되려면 한 단어의 여러 뜻 사이에 의미적 관련성이 있어야 한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'다의어이다'의 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "뜻이 완전히 무관해야 한다."
+              },
+              {
+                "id": "B",
+                "text": "하나의 뜻만 있어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "여러 뜻 사이에 의미적 관련성이 있어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "형태가 달라야 한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "간이 정상적으로 기능하려면 간세포에 충분한 혈액이 공급되어야 한다. 간문맥과 간동맥을 통해 혈액이 유입된다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'간이 정상 기능한다'의 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "간이 재생되지 않아야 한다."
+              },
+              {
+                "id": "B",
+                "text": "간이 작아야 한다."
+              },
+              {
+                "id": "C",
+                "text": "담즙이 필요 없어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "간세포에 충분한 혈액이 공급되어야 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "반의어의 필요조건은 '두 단어의 뜻이 대립 관계에 있어야 한다'이다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "반의어의 필요조건을 충족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'배'(과일)와 '배'(신체) (동음이의어)"
+              },
+              {
+                "id": "B",
+                "text": "'크다'와 '거대하다' (유의어)"
+              },
+              {
+                "id": "C",
+                "text": "'동물'과 '개' (상하위어)"
+              },
+              {
+                "id": "D",
+                "text": "'크다'와 '작다' (크기의 대립)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "사평역에서에서 '연대'가 드러나려면 '고독한 개인들이 서로의 존재를 인식하고 위안받는 장면'이 필요하다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "이 필요조건을 충족하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대합실에서 사람들이 서로 무시하는 장면"
+              },
+              {
+                "id": "B",
+                "text": "막차를 기다리며 톱밥난로 곁에서 지친 사람들이 함께 온기를 나누는 장면"
+              },
+              {
+                "id": "C",
+                "text": "사람들이 각자 떠나는 장면"
+              },
+              {
+                "id": "D",
+                "text": "빈 대합실에 혼자 남아 있는 장면"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "'여러 뜻 사이에 의미적 관련성이 있다(P)'는 '다의어이다(Q)'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "P→Q에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다의어가 아니면 의미적 관련성이 없다. (대우, 타당)"
+              },
+              {
+                "id": "B",
+                "text": "관련성이 없으면 다의어가 아니다. (부당)"
+              },
+              {
+                "id": "C",
+                "text": "다의어이면 반드시 관련성이 있다. (부당)"
+              },
+              {
+                "id": "D",
+                "text": "B와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "'간문맥을 통해 영양소가 간에 전달된다(P)'는 '간이 영양소를 대사할 수 있다(Q)'의 충분조건이다. ~P이면서 Q인 경우는?",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "~P이면서 Q에 해당하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "간문맥을 통해 영양소가 전달되어 간이 대사하는 경우"
+              },
+              {
+                "id": "B",
+                "text": "간동맥을 통해 공급된 영양소를 간이 대사하는 경우"
+              },
+              {
+                "id": "C",
+                "text": "간문맥도 간동맥도 혈류가 차단되어 대사가 안 되는 경우"
+              },
+              {
+                "id": "D",
+                "text": "간문맥이 정상이지만 간세포가 손상되어 대사가 안 되는 경우"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "'겨울밤 간이역에서 지친 사람들이 온기를 나누는 묘사'는 '인간적 연대를 표현하는 문학'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "이 충분조건을 만족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사평역에서 함박눈 속 톱밥난로 곁에서 사람들이 서로의 체온으로 위안받는 장면"
+              },
+              {
+                "id": "B",
+                "text": "화려한 도시의 번화가를 묘사하는 장면"
+              },
+              {
+                "id": "C",
+                "text": "혼자서 산을 오르는 장면"
+              },
+              {
+                "id": "D",
+                "text": "과학 실험을 설명하는 장면"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "'두 단어의 의미 범위가 포함 관계에 있다'는 '상하위어 관계이다'의 충분조건이다. 부적절한 것은?",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "다음 중 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'크다'와 '작다' — 포함 관계가 아닌 대립 관계(반의어)"
+              },
+              {
+                "id": "B",
+                "text": "'과일'(상위어)과 '사과'(하위어) — 사과는 과일에 포함됨"
+              },
+              {
+                "id": "C",
+                "text": "'꽃'(상위어)과 '장미'(하위어) — 장미는 꽃에 포함됨"
+              },
+              {
+                "id": "D",
+                "text": "'동물'(상위어)과 '고양이'(하위어) — 고양이는 동물에 포함됨"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "동음이의어이면 뜻이 무관하다. 다의어이면 뜻이 관련되어 있다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "논리적으로 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다의어이면 뜻이 관련된다. '손'의 여러 뜻은 관련된다. 따라서 '손'은 다의어이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "동음이의어이면 뜻이 무관하다. '눈'(신체)과 '눈'(날씨)은 동음이의어이다. 따라서 뜻이 무관하다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "A와 B 모두 타당하다."
+              },
+              {
+                "id": "D",
+                "text": "A만 타당하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'간이 해독 기능을 수행하면(P) 독성 물질이 제거된다(Q)'. P→Q에서 타당한 추론은?",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "P→Q에서 타당한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독성 물질이 제거되었으므로 간이 기능했다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "간이 기능하지 않으므로 독성 물질이 제거되지 않는다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "독성 물질이 제거되지 않았으므로 간이 해독 기능을 수행하지 않았다. (후건 부정 — 대우, 타당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 B 모두 타당하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "사평역에서에서 '함박눈'과 '사람들의 고독'이 동시에 나타난다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "둘의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "눈이 고독을 직접 유발한다."
+              },
+              {
+                "id": "B",
+                "text": "무관하다."
+              },
+              {
+                "id": "C",
+                "text": "함박눈은 고독한 분위기를 시각적으로 심화시키며, 겨울이라는 계절적 배경이 공통 원인이다."
+              },
+              {
+                "id": "D",
+                "text": "고독이 눈을 내리게 한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "음주량과 간 질환 발병률 사이에 양의 상관관계가 관찰된다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "둘의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "간 질환이 음주를 유발한다."
+              },
+              {
+                "id": "B",
+                "text": "무관하다."
+              },
+              {
+                "id": "C",
+                "text": "음주가 간에 독성 물질을 축적시켜 간 질환 위험을 높이는 인과적 메커니즘이 상관관계를 설명한다."
+              },
+              {
+                "id": "D",
+                "text": "음주량이 적을수록 간 질환이 증가한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'손'은 '신체의 손', '사람의 힘/노동력(손이 부족하다)', '기술/솜씨(손이 크다)' 등 여러 뜻이 있다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '손'의 여러 뜻은 모두 '신체 기관 손'에서 의미가 확장된 다의어이다. 검증 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "각 뜻 사이에 '신체의 손'이라는 기본 의미에서 파생된 관련성이 있는지 분석한다."
+              },
+              {
+                "id": "B",
+                "text": "'손'이라는 글자의 획수를 센다."
+              },
+              {
+                "id": "C",
+                "text": "'손'이 들어간 단어의 수를 센다."
+              },
+              {
+                "id": "D",
+                "text": "다른 언어에서 '손'의 번역어를 조사한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "사평역에서에서 막차는 끝내 오지 않는 것으로 암시된다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 사평역에서의 '막차'는 구원이나 희망의 상징이다. 검증 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "곽재구의 출생 연도를 확인한다."
+              },
+              {
+                "id": "B",
+                "text": "사평역의 실제 기차 시간표를 조사한다."
+              },
+              {
+                "id": "C",
+                "text": "시 전체에서 '막차'가 어떤 맥락에서 등장하는지, 기다리는 행위가 희망의 표현인지 절망의 표현인지를 분석한다."
+              },
+              {
+                "id": "D",
+                "text": "시의 행 수를 센다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

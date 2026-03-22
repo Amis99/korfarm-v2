@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 8장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "지구가 뜨거워지는 가장 큰 원인은 석유나 석탄을 태울 때 나오는 이산화탄소입니다. 이산화탄소는 비닐우산처럼 지구를 감싸서 열이 밖으로 빠져나가지 못하게 합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'이산화탄소가 지구를 뜨겁게 만든다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이산화탄소는 지구를 시원하게 한다"
+              },
+              {
+                "id": "B",
+                "text": "이산화탄소는 지구의 열을 가두는 성질이 있다"
+              },
+              {
+                "id": "C",
+                "text": "모든 기체는 열을 가둔다"
+              },
+              {
+                "id": "D",
+                "text": "석유를 태우면 이산화탄소가 나오지 않는다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "연어 '연이'는 본능적으로 자신이 태어난 강으로 돌아갑니다. 하지만 강이 오염되어 알을 낳을 수 없게 되었습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'강 오염이 연어의 생존을 위협한다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "연어는 오염된 물에서도 잘 살 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "연어는 깨끗한 물에서만 알을 낳고 번식할 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "연어는 바다에서만 알을 낳는다"
+              },
+              {
+                "id": "D",
+                "text": "강 오염은 연어와 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "온실가스 배출이 계속 늘어나면 지구의 평균 기온이 올라가고, 북극의 얼음이 녹아 해수면이 높아집니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "해수면이 계속 높아지면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사막이 늘어난다"
+              },
+              {
+                "id": "B",
+                "text": "바다 생물이 더 건강해진다"
+              },
+              {
+                "id": "C",
+                "text": "해안가에 사는 사람들의 생활 터전이 물에 잠길 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "지구가 더 추워진다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "공장 폐수로 강이 오염되자 물고기가 떼죽음을 당하고, 그 물을 마시는 동물들도 병에 걸렸습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "강 오염이 계속되면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동물들이 다른 곳으로 이동하면 문제가 해결된다"
+              },
+              {
+                "id": "B",
+                "text": "물고기가 더 건강해진다"
+              },
+              {
+                "id": "C",
+                "text": "강물이 저절로 깨끗해진다"
+              },
+              {
+                "id": "D",
+                "text": "강 주변 생태계가 완전히 파괴될 수 있다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "온실가스를 줄이면 지구 온난화를 늦출 수 있습니다. 자동차 대신 자전거를 타면 온실가스 배출이 줄어듭니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 온실가스를 줄이면 온난화를 늦출 수 있다. 소전제: 자전거를 타면 온실가스가 줄어든다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자전거를 타면 온난화를 늦추는 데 도움이 된다"
+              },
+              {
+                "id": "B",
+                "text": "자전거를 타면 온난화가 심해진다"
+              },
+              {
+                "id": "C",
+                "text": "온실가스와 자전거는 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "자동차가 환경에 더 좋다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "생태계에서 한 생물이 사라지면 그 생물을 먹이로 하는 다른 생물도 영향을 받습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 먹이 사슬에서 한 종이 사라지면 다른 종도 영향을 받는다. 소전제: 개구리가 멸종했다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "뱀의 수가 늘어난다"
+              },
+              {
+                "id": "B",
+                "text": "생태계에 아무 변화가 없다"
+              },
+              {
+                "id": "C",
+                "text": "개구리를 먹이로 하는 뱀도 먹이가 부족해진다"
+              },
+              {
+                "id": "D",
+                "text": "개구리와 다른 생물은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "지구 온난화를 막으려면 온실가스 배출을 줄여야 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'온난화를 막으려면 온실가스 감축이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "온실가스를 줄이지 않으면 온난화를 막을 수 없다"
+              },
+              {
+                "id": "B",
+                "text": "온실가스를 줄이면 온난화가 반드시 멈춘다"
+              },
+              {
+                "id": "C",
+                "text": "온난화와 온실가스는 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "온실가스를 줄이지 않아도 온난화가 멈출 수 있다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "건강한 생태계가 유지되려면 깨끗한 물과 공기가 필요합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'생태계 유지를 위해 깨끗한 환경이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "깨끗한 환경이면 생태계가 반드시 건강하다"
+              },
+              {
+                "id": "B",
+                "text": "생태계는 오염되어도 괜찮다"
+              },
+              {
+                "id": "C",
+                "text": "깨끗한 환경 없이는 건강한 생태계가 유지될 수 없다"
+              },
+              {
+                "id": "D",
+                "text": "환경 보호와 생태계는 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "환경을 보호하기 위해 쓰레기를 줄이고, 에너지를 절약하고, 나무를 심는 등의 실천이 필요합니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'환경 보호를 위해 실천이 필요하다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일회용품 대신 텀블러를 사용하기"
+              },
+              {
+                "id": "B",
+                "text": "쓰레기를 강에 버리기"
+              },
+              {
+                "id": "C",
+                "text": "필요 없는 물건도 계속 사기"
+              },
+              {
+                "id": "D",
+                "text": "전기를 켜놓고 외출하기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "연어가 태어난 강으로 돌아가려면 강물이 깨끗해야 합니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'연어의 회귀를 위해 깨끗한 강이 필요하다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "강 주변 공장의 폐수 처리 시설을 설치하기"
+              },
+              {
+                "id": "B",
+                "text": "강에 쓰레기를 버리지 않도록 캠페인하기"
+              },
+              {
+                "id": "C",
+                "text": "강 오염을 방치하고 아무 조치를 취하지 않기"
+              },
+              {
+                "id": "D",
+                "text": "댐 건설 시 물고기 이동 통로를 만들기"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "전기를 절약하면 화석 연료 사용이 줄어들어 온실가스 배출이 감소합니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'전기를 절약하면(P) 온실가스가 줄어든다(Q)'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "온실가스가 줄어들지 않았다면 전기를 절약하지 않은 것이다"
+              },
+              {
+                "id": "B",
+                "text": "전기 절약과 온실가스는 관계없다"
+              },
+              {
+                "id": "C",
+                "text": "온실가스가 줄어들면 전기를 절약한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "전기를 절약하면서 온실가스가 줄어들지 않는 경우는 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "나무를 심으면 이산화탄소를 흡수하여 공기가 깨끗해집니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'나무를 심으면(P) 공기가 깨끗해진다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나무와 공기는 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "나무를 심지 않으면 공기가 더러워진다"
+              },
+              {
+                "id": "C",
+                "text": "공기가 깨끗하면 나무를 심은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "공기가 깨끗해지지 않았다면 나무를 심지 않은 것이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "에너지를 절약하면 환경을 보호하는 데 기여할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'에너지 절약이 환경 보호에 기여한다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "에너지 절약과 환경은 관계없다고 생각했다"
+              },
+              {
+                "id": "B",
+                "text": "에어컨을 하루 종일 틀어놓았다"
+              },
+              {
+                "id": "C",
+                "text": "불필요한 전자기기를 계속 충전했다"
+              },
+              {
+                "id": "D",
+                "text": "사용하지 않는 전등을 끄고 대중교통을 이용하여 탄소 배출을 줄였다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "마을 사람들이 함께 강가의 쓰레기를 치우자 물이 맑아지고 물고기가 돌아왔습니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'환경 정화 활동을 하면 생태계가 회복된다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "쓰레기를 치우지 않았는데 강이 맑아졌다"
+              },
+              {
+                "id": "B",
+                "text": "오염된 강에서 쓰레기를 제거하자 물고기가 돌아왔다"
+              },
+              {
+                "id": "C",
+                "text": "환경 정화 후에도 생태계가 전혀 변하지 않았다"
+              },
+              {
+                "id": "D",
+                "text": "강 오염이 심해져 물고기가 사라졌다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'온실가스가 늘어나면(P) 지구 기온이 올라간다(Q)'가 참일 때.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "온실가스가 늘었으므로 지구 기온이 올라갈 것이다 (전건 긍정)"
+              },
+              {
+                "id": "B",
+                "text": "지구 기온이 올라갔으므로 온실가스가 늘어난 것이다 (후건 긍정)"
+              },
+              {
+                "id": "C",
+                "text": "온실가스가 줄었으므로 기온이 내려간다 (전건 부정)"
+              },
+              {
+                "id": "D",
+                "text": "지구 기온이 올라가지 않았으므로 온실가스가 늘지 않은 것이다 (대우)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'강이 오염되면(P) 물고기가 살 수 없다(Q)'가 참일 때.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물고기가 살고 있으므로 강이 오염되지 않은 것이다 (대우)"
+              },
+              {
+                "id": "B",
+                "text": "물고기가 살 수 없으므로 강이 오염된 것이다 (후건 긍정)"
+              },
+              {
+                "id": "C",
+                "text": "강이 오염되지 않았으므로 물고기가 산다 (전건 부정)"
+              },
+              {
+                "id": "D",
+                "text": "A와 B 모두 타당하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "산업이 발달한 나라일수록 이산화탄소 배출량이 많습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'산업 발달'과 '이산화탄소 배출'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "산업이 발달하면 이산화탄소가 반드시 늘어난다"
+              },
+              {
+                "id": "B",
+                "text": "둘은 아무 관계가 없다"
+              },
+              {
+                "id": "C",
+                "text": "이산화탄소가 많아서 산업이 발달한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘 사이에 상관관계가 있으나, 에너지 정책이나 기술 발전 등으로 감소시킬 수 있다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "최근 지구 평균 기온이 올라가면서 북극곰의 서식지가 줄어들고 있습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'기온 상승'과 '북극곰 서식지 감소'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기온이 올라가면 북극곰이 반드시 멸종한다"
+              },
+              {
+                "id": "B",
+                "text": "기온 상승이 얼음을 녹여 서식지를 줄이는 원인이지만, 먹이 감소 등 다른 요인도 복합적으로 작용한다"
+              },
+              {
+                "id": "C",
+                "text": "둘은 우연히 동시에 일어나는 현상이다"
+              },
+              {
+                "id": "D",
+                "text": "북극곰이 줄어서 기온이 올라간다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'나무를 심으면 대기 중 이산화탄소가 줄어든다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나무 종류만 연구하고 이산화탄소는 측정하지 않는다"
+              },
+              {
+                "id": "B",
+                "text": "나무를 심지 않은 지역만 조사한다"
+              },
+              {
+                "id": "C",
+                "text": "나무를 심은 지역과 심지 않은 지역의 이산화탄소 농도를 비교한다"
+              },
+              {
+                "id": "D",
+                "text": "한 그루의 나무만 심고 결과를 본다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'재활용을 하면 쓰레기 매립량이 줄어든다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "재활용률이 높은 지역에서 매립량이 줄었다"
+              },
+              {
+                "id": "B",
+                "text": "재활용을 열심히 했지만 분리수거가 잘못되어 결국 매립되었다"
+              },
+              {
+                "id": "C",
+                "text": "재활용 캠페인 후 쓰레기 총량이 줄었다"
+              },
+              {
+                "id": "D",
+                "text": "재활용 제품을 만드는 공장이 늘어났다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

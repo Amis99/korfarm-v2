@@ -78,7 +78,7 @@ const MODULE_GROUPS = [
       { value: "pro:reading:reading_training", label: "프로 독해" },
       { value: "pro:vocab:worksheet_quiz", label: "프로 어휘" },
       { value: "pro:background:worksheet_quiz", label: "프로 배경지식" },
-      { value: "pro:logic:worksheet_quiz", label: "프로 논리사고력" },
+      { value: "pro:logic:logic_reasoning", label: "프로 논리사고력" },
       { value: "pro:answer:worksheet_quiz", label: "프로 모범답안/정답해설" },
     ],
   },

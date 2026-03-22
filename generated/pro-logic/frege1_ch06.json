@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 6장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "마트에 가면 장난감, 과자, 옷 등 갖고 싶은 것이 많지만 모든 것을 다 살 수는 없습니다. 우리가 가진 돈이나 시간은 한정되어 있기 때문입니다. 이것을 '희소성'이라고 합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'우리는 모든 것을 다 살 수 없다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물건의 가격은 항상 같다"
+              },
+              {
+                "id": "B",
+                "text": "돈이 있으면 모든 것을 살 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "마트에 물건이 부족하다"
+              },
+              {
+                "id": "D",
+                "text": "사람의 욕구는 무한하지만 자원은 한정되어 있다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "현우는 용돈을 떡볶이와 캐릭터 카드에 다 써버렸습니다. 엄마는 '용돈 기입장을 쓰면 계획적으로 쓸 수 있다'고 조언했습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "엄마의 조언에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지출 내역을 기록하면 낭비를 인식하고 줄일 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "용돈 기입장은 쓰기 어렵다"
+              },
+              {
+                "id": "C",
+                "text": "용돈은 쓰라고 주는 것이므로 기록할 필요가 없다"
+              },
+              {
+                "id": "D",
+                "text": "기입장을 쓰면 용돈이 늘어난다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "어떤 장난감이 인기가 많아서 사려는 사람이 늘어나면 수요가 증가합니다. 수요가 늘면 가격이 올라갑니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "새로 출시된 인기 캐릭터 인형의 수요가 급증하면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인형의 가격이 내려간다"
+              },
+              {
+                "id": "B",
+                "text": "인형의 가격이 올라간다"
+              },
+              {
+                "id": "C",
+                "text": "인형의 품질이 나빠진다"
+              },
+              {
+                "id": "D",
+                "text": "다른 장난감의 가격도 내려간다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "현우는 용돈을 받자마자 떡볶이, 카드 등에 충동적으로 써버려서 정작 사고 싶었던 무선 조종 자동차를 살 수 없게 되었습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "현우가 계속 충동적으로 소비하면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "저축이 쌓여 큰 물건을 살 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "용돈이 늘어난다"
+              },
+              {
+                "id": "C",
+                "text": "경제 관념이 좋아진다"
+              },
+              {
+                "id": "D",
+                "text": "정말 원하는 물건을 계속 사지 못하게 된다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "희소성이 있으면 선택을 해야 합니다. 게임기를 사면 자전거를 살 돈이 부족해지는 것처럼요.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 자원이 한정되면 선택을 해야 한다. 소전제: 현우의 용돈은 한정되어 있다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "현우는 원하는 것을 모두 살 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "현우에게는 희소성이 없다"
+              },
+              {
+                "id": "C",
+                "text": "현우는 무엇을 살지 선택해야 한다"
+              },
+              {
+                "id": "D",
+                "text": "용돈은 무한하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "공급이 줄어들면 가격이 올라갑니다. 올해 태풍으로 사과 농사가 크게 실패했습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 공급이 줄면 가격이 오른다. 소전제: 태풍으로 사과 공급이 줄었다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사과 가격이 내려간다"
+              },
+              {
+                "id": "B",
+                "text": "사과 가격이 올라간다"
+              },
+              {
+                "id": "C",
+                "text": "사과의 품질이 좋아진다"
+              },
+              {
+                "id": "D",
+                "text": "사과 가격이 변하지 않는다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "계획적인 소비를 하려면 지출 내역을 기록하는 것이 필요합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'계획적 소비를 하려면 지출 기록이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지출을 기록하면 반드시 계획적 소비가 된다"
+              },
+              {
+                "id": "B",
+                "text": "지출 기록 없이도 계획적 소비가 가능하다"
+              },
+              {
+                "id": "C",
+                "text": "계획적 소비와 지출 기록은 관계가 없다"
+              },
+              {
+                "id": "D",
+                "text": "지출을 기록하지 않으면 계획적 소비를 할 수 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "현명한 소비자가 되려면 '필요한 것'과 '갖고 싶은 것'을 구별하는 능력이 필요합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'현명한 소비자가 되려면 필요와 욕구를 구별해야 한다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "필요와 욕구를 구별하면 반드시 현명한 소비자이다"
+              },
+              {
+                "id": "B",
+                "text": "필요와 욕구를 구별하지 못하면 현명한 소비자가 될 수 없다"
+              },
+              {
+                "id": "C",
+                "text": "필요와 욕구 구별 없이도 현명한 소비자가 될 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "현명한 소비자가 아니라면 필요와 욕구를 구별하지 못한 것이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "용돈을 합리적으로 쓰려면 예산을 미리 세워야 합니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'합리적 소비를 위해 예산이 필요하다'는 필요조건의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "친구가 사는 것을 따라서 사기"
+              },
+              {
+                "id": "B",
+                "text": "용돈을 받자마자 눈에 띄는 것부터 사기"
+              },
+              {
+                "id": "C",
+                "text": "한 주 용돈에서 저축, 간식, 학용품 비용을 미리 나누어 계획하기"
+              },
+              {
+                "id": "D",
+                "text": "남은 용돈이 없을 때까지 쓰기"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "시장에서 물건의 가격은 수요와 공급이 만나는 곳에서 결정됩니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'가격이 공정하게 결정되려면 수요와 공급의 균형이 필요하다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사과가 풍년이라 공급이 늘어 가격이 내려간 경우"
+              },
+              {
+                "id": "B",
+                "text": "인기 장난감의 수요가 늘어 가격이 올라간 경우"
+              },
+              {
+                "id": "C",
+                "text": "가게 주인이 마음대로 비싸게 팔아도 아무도 모르는 경우"
+              },
+              {
+                "id": "D",
+                "text": "명절에 기차표 수요가 늘어 가격이 오른 경우"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "용돈 기입장을 꾸준히 쓰면 자신의 소비 습관을 파악할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'용돈 기입장을 꾸준히 쓰면(P) 소비 습관을 파악할 수 있다(Q)'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "소비 습관을 파악했다면 용돈 기입장을 썼을 것이다"
+              },
+              {
+                "id": "B",
+                "text": "용돈 기입장을 꾸준히 쓰면서 소비 습관을 파악하지 못하는 경우는 없다"
+              },
+              {
+                "id": "C",
+                "text": "용돈 기입장을 쓰지 않으면 소비 습관을 파악할 수 없다"
+              },
+              {
+                "id": "D",
+                "text": "소비 습관과 기입장은 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "저축을 꾸준히 하면 나중에 큰 물건을 살 수 있습니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'꾸준히 저축하면(P) 큰 물건을 살 수 있다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "저축하지 않으면 큰 물건을 살 수 없다"
+              },
+              {
+                "id": "B",
+                "text": "큰 물건을 살 수 없다면 꾸준히 저축하지 않은 것이다"
+              },
+              {
+                "id": "C",
+                "text": "큰 물건을 샀다면 저축한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "저축과 큰 물건 구매는 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "현우가 매주 용돈의 절반을 저축하면 한 달 뒤 무선 조종 자동차를 살 수 있습니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'계획적으로 저축하면 원하는 물건을 살 수 있다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "매주 2000원씩 모아 한 달 뒤 만 원짜리 책을 샀다"
+              },
+              {
+                "id": "B",
+                "text": "용돈을 받자마자 다 쓰고 나서 후회했다"
+              },
+              {
+                "id": "C",
+                "text": "저축하지 않고 부모에게 사달라고 졸랐다"
+              },
+              {
+                "id": "D",
+                "text": "친구에게 돈을 빌려서 물건을 샀다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "수요가 공급보다 많으면 가격이 오릅니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'수요 초과이면 가격이 오른다'의 충분조건 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수요와 공급이 같아 가격이 변하지 않았다"
+              },
+              {
+                "id": "B",
+                "text": "물건이 너무 많이 남아 가격이 내려갔다"
+              },
+              {
+                "id": "C",
+                "text": "명절에 고속버스표를 사려는 사람이 좌석보다 많아 가격이 올랐다"
+              },
+              {
+                "id": "D",
+                "text": "가게 주인이 할인 행사를 했다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'충동적으로 소비하면(P) 나중에 필요한 물건을 살 수 없다(Q)'가 참이라고 합시다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "위 명제가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "충동 소비를 했으므로 나중에 필요한 물건을 살 수 없을 것이다 (전건 긍정)"
+              },
+              {
+                "id": "B",
+                "text": "나중에 필요한 물건을 살 수 없었으므로 충동 소비를 한 것이다 (후건 긍정)"
+              },
+              {
+                "id": "C",
+                "text": "충동 소비를 하지 않았으므로 필요한 물건을 살 수 있다 (전건 부정)"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 타당하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'저축을 하면(P) 미래에 대비할 수 있다(Q)'가 참일 때.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "미래에 대비했으므로 저축을 한 것이다 (후건 긍정)"
+              },
+              {
+                "id": "B",
+                "text": "저축을 하지 않았으므로 미래에 대비할 수 없다 (전건 부정)"
+              },
+              {
+                "id": "C",
+                "text": "미래에 대비할 수 없었다면 저축을 하지 않은 것이다 (대우)"
+              },
+              {
+                "id": "D",
+                "text": "B와 C 모두 타당하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "용돈 기입장을 쓰는 학생이 그렇지 않은 학생보다 저축을 더 많이 한다는 조사 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'용돈 기입장 사용'과 '저축량' 사이의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기입장을 쓰면 저축이 반드시 늘어난다"
+              },
+              {
+                "id": "B",
+                "text": "둘은 아무 관계가 없다"
+              },
+              {
+                "id": "C",
+                "text": "저축을 많이 하는 학생이라서 기입장을 쓰는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘 사이에 상관관계가 있으나, 가정환경이나 용돈 액수 등 다른 요인도 영향을 미친다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "현우가 용돈 기입장을 쓴 후 불필요한 지출이 줄어들었습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'기입장 사용'과 '지출 감소'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기입장이 도움이 되었지만, 현우 스스로 절약하려는 의지도 함께 작용했을 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "지출이 줄어든 것은 기입장과 관계없이 우연이다"
+              },
+              {
+                "id": "C",
+                "text": "기입장만 쓰면 지출이 반드시 줄어든다"
+              },
+              {
+                "id": "D",
+                "text": "지출이 줄어서 기입장을 쓰게 된 것이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'필요한 것과 갖고 싶은 것을 구분하면 충동 소비가 줄어든다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 학생에게 같은 물건을 사게 한다"
+              },
+              {
+                "id": "B",
+                "text": "충동 소비를 많이 하는 학생에게만 용돈을 줄인다"
+              },
+              {
+                "id": "C",
+                "text": "한 학생의 소비만 관찰한다"
+              },
+              {
+                "id": "D",
+                "text": "구분 훈련을 받은 학생과 받지 않은 학생의 충동 소비 횟수를 비교한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'저축을 하면 나중에 큰 만족을 얻을 수 있다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "저축했지만 물건 가격이 올라서 결국 사지 못했다"
+              },
+              {
+                "id": "B",
+                "text": "매달 저축하여 원하던 자전거를 산 학생이 크게 기뻐했다"
+              },
+              {
+                "id": "C",
+                "text": "저축 없이 용돈을 다 써도 불만이 없었다"
+              },
+              {
+                "id": "D",
+                "text": "저축 습관이 생긴 학생이 용돈 관리를 잘하게 되었다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

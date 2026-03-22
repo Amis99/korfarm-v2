@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게3 4장 논리사고력",
+  "targetLevel": "frege3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "명사는 세상에 있는 모든 것의 이름을 나타낸다. 눈에 보이지 않는 사랑, 우정, 행복 같은 것의 이름도 명사이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "\"사랑\"이 명사라는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "마음으로 느끼거나 생각할 수 있는 개념의 이름도 명사에 포함된다"
+              },
+              {
+                "id": "B",
+                "text": "눈에 보이는 것만 명사이다"
+              },
+              {
+                "id": "C",
+                "text": "\"사랑\"은 동작을 나타내는 말이다"
+              },
+              {
+                "id": "D",
+                "text": "\"사랑\"은 다른 말을 꾸며주는 말이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "주몽 신화에서 주몽은 해모수(하늘)와 유화(물의 신 딸) 사이에서 태어난다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "주몽이 특별한 존재라는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주몽은 평범한 농부의 아들이다"
+              },
+              {
+                "id": "B",
+                "text": "주몽은 알에서 태어나지 않았다"
+              },
+              {
+                "id": "C",
+                "text": "하늘과 물의 신성한 혈통을 모두 받았다는 것은 특별함을 의미한다"
+              },
+              {
+                "id": "D",
+                "text": "금와왕이 주몽의 아버지이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "대명사는 명사를 대신하여 부르는 말이다. \"김철수\" 대신 \"그\"라고 한다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "대명사가 없다면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문장이 더 간결해진다"
+              },
+              {
+                "id": "B",
+                "text": "문장의 뜻이 더 명확해진다"
+              },
+              {
+                "id": "C",
+                "text": "같은 이름을 매번 반복해야 하므로 표현이 불편해진다"
+              },
+              {
+                "id": "D",
+                "text": "명사의 수가 줄어든다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "주몽 신화에서 금와왕이 알을 버렸더니 개와 돼지는 먹지 않고 새와 짐승은 덮어주었다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "동물들이 주몽의 알을 보호한 것에서 추론할 수 있는 의미는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "알에 독이 있었다"
+              },
+              {
+                "id": "B",
+                "text": "자연 세계가 주몽의 신성함을 인정했음을 보여준다"
+              },
+              {
+                "id": "C",
+                "text": "금와왕이 동물들에게 명령했다"
+              },
+              {
+                "id": "D",
+                "text": "알이 너무 커서 먹을 수 없었다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "수사는 수량이나 순서를 나타내는 말이다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 수량이나 순서를 나타내는 말은 수사이다. [소전제] \"첫째\"는 순서를 나타내는 말이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"첫째\"는 대명사이다"
+              },
+              {
+                "id": "B",
+                "text": "\"첫째\"는 수사이다"
+              },
+              {
+                "id": "C",
+                "text": "\"첫째\"는 명사이다"
+              },
+              {
+                "id": "D",
+                "text": "\"첫째\"는 조사이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "영웅의 일대기에서 비정상적 출생은 영웅이 평범하지 않음을 강조한다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 사람이 아닌 형태로 태어나면 비정상적 출생이다. [소전제] 주몽은 알의 형태로 태어났다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주몽의 출생은 비정상적 출생이다"
+              },
+              {
+                "id": "B",
+                "text": "주몽의 출생은 정상적이다"
+              },
+              {
+                "id": "C",
+                "text": "주몽은 사람 형태로 태어났다"
+              },
+              {
+                "id": "D",
+                "text": "알에서 태어나는 것은 평범하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "조사가 기능하려면 반드시 체언(명사, 대명사, 수사) 뒤에 붙어야 한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "\"조사가 기능하려면 체언 뒤에 붙어야 한다\"를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "체언 뒤에 붙으면 반드시 조사이다"
+              },
+              {
+                "id": "B",
+                "text": "조사가 기능하지 않으면 체언 뒤에 붙은 것이다"
+              },
+              {
+                "id": "C",
+                "text": "체언 뒤에 붙지 않으면서 조사가 기능하는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "조사와 체언은 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "건국 신화가 정당성을 갖추려면 영웅의 신성한 혈통이 제시되어야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "\"건국 신화의 정당성에는 신성한 혈통이 필요하다\"를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "신성한 혈통이 있으면 반드시 정당성이 확보된다"
+              },
+              {
+                "id": "B",
+                "text": "정당성이 확보되었다면 신성한 혈통이 제시된 것이다"
+              },
+              {
+                "id": "C",
+                "text": "신성한 혈통 없이도 정당성은 확보된다"
+              },
+              {
+                "id": "D",
+                "text": "혈통과 정당성은 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "조사 \"가\"는 주어임을, \"를\"은 대상임을 나타낸다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "\"영희가 노래를 부른다\"에서 조사를 올바르게 찾은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"부른다\"가 조사이다"
+              },
+              {
+                "id": "B",
+                "text": "\"영희\"와 \"노래\"가 조사이다"
+              },
+              {
+                "id": "C",
+                "text": "\"가\"와 \"를\"이 조사이다"
+              },
+              {
+                "id": "D",
+                "text": "\"노래를 부른다\" 전체가 조사이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "주몽의 비범한 능력은 7살에 활을 만들어 백발백중을 보인 것이다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "주몽의 비범한 능력을 가장 잘 보여주는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "7살에 활을 만들어 백 번 쏘면 백 번 맞힌 것"
+              },
+              {
+                "id": "B",
+                "text": "금와왕의 말을 기른 것"
+              },
+              {
+                "id": "C",
+                "text": "알에서 태어난 것"
+              },
+              {
+                "id": "D",
+                "text": "물고기와 자라가 다리를 만들어준 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "조사 \"도\"가 붙으면 \"함께한다\"는 의미가 추가된다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "\"도\"가 붙으면 함께한다는 의미가 생긴다를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "함께한다는 의미가 있으면 반드시 \"도\"가 붙은 것이다"
+              },
+              {
+                "id": "B",
+                "text": "\"도\" 없이도 함께한다는 의미가 항상 있다"
+              },
+              {
+                "id": "C",
+                "text": "\"도\"가 붙으면서 함께한다는 의미가 생기지 않는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "조사 \"도\"와 함께한다는 의미는 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "주몽 신화에서 물고기와 자라가 다리를 만들어주면 주몽이 물을 건널 수 있다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "위 조건을 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물고기와 자라가 다리를 만들어주면서 건너지 못하는 경우는 없다"
+              },
+              {
+                "id": "B",
+                "text": "다리와 건너는 것은 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "물고기와 자라 없이도 항상 건널 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "주몽이 물을 건넜으면 반드시 물고기와 자라가 도운 것이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "대명사는 사람(나, 너), 사물(이것, 저것), 장소(여기, 저기) 등을 대신한다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "장소를 대신 가리키는 대명사의 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"셋째\" — 순서를 나타냄"
+              },
+              {
+                "id": "B",
+                "text": "\"이것\" — 사물을 대신"
+              },
+              {
+                "id": "C",
+                "text": "\"나\" — 사람을 대신"
+              },
+              {
+                "id": "D",
+                "text": "\"저기\" — 장소를 대신"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "주몽 신화에서 \"햇빛\"은 하늘의 신성한 힘을 상징한다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "하늘의 신성한 힘을 상징하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "알"
+              },
+              {
+                "id": "B",
+                "text": "물고기와 자라"
+              },
+              {
+                "id": "C",
+                "text": "활과 화살"
+              },
+              {
+                "id": "D",
+                "text": "햇빛"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "조사는 혼자서는 쓰일 수 없고 항상 다른 말 뒤에 붙는다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "\"매우 빠르다\"에 조사가 사용되지 않았다는 주장이 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부당하다 — \"매우\"가 조사이다"
+              },
+              {
+                "id": "B",
+                "text": "부당하다 — \"빠르다\"가 조사이다"
+              },
+              {
+                "id": "C",
+                "text": "타당하다 — 둘 다 조사이다"
+              },
+              {
+                "id": "D",
+                "text": "타당하다 — \"매우\"는 부사이고 \"빠르다\"는 형용사이므로 조사가 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "주몽 신화의 목적은 고구려 건국의 신성성과 정당성을 보여주는 것이다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "\"주몽이 12살에 나라를 세운 것은 비범함과 활력을 상징한다\"는 해석이 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부당하다 — 12살은 너무 어려서 비범함과 관련이 없다"
+              },
+              {
+                "id": "B",
+                "text": "타당하다 — 12살은 당시 성인의 나이였다"
+              },
+              {
+                "id": "C",
+                "text": "부당하다 — 나이와 비범함은 무관하다"
+              },
+              {
+                "id": "D",
+                "text": "타당하다 — 어린 나이에 나라를 세운 것은 비범함을 강조하며 활력을 상징한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "문장에서 조사가 다양할수록 의미 전달이 정교해지는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "\"조사의 다양성\"과 \"의미 전달의 정교함\" 사이의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "조사의 다양성과 의미 전달은 전혀 관련이 없다"
+              },
+              {
+                "id": "B",
+                "text": "둘 사이에 상관관계가 있으나 어휘 선택 등 다른 요인도 영향을 준다"
+              },
+              {
+                "id": "C",
+                "text": "조사의 다양성만이 정교한 의미 전달을 결정한다"
+              },
+              {
+                "id": "D",
+                "text": "조사가 다양하면 의미 전달이 반드시 어렵다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "주몽 신화에서 시련이 많을수록 건국의 위대함이 강조된다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "\"시련 횟수\"와 \"건국의 위대함 강조\" 사이의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시련과 위대함은 전혀 관련이 없다"
+              },
+              {
+                "id": "B",
+                "text": "시련이 많으면 위대함 강조와 상관관계가 있지만 극복 방식 등도 영향을 준다"
+              },
+              {
+                "id": "C",
+                "text": "시련이 많으면 가치가 줄어든다"
+              },
+              {
+                "id": "D",
+                "text": "시련이 없으면 더 위대하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "\"셋\"이 수사인지 조사인지 판별해야 한다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "\"셋은 수사이다\"라는 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"셋\"이 포함된 시의 작가를 조사한다"
+              },
+              {
+                "id": "B",
+                "text": "\"셋\"의 글자 수를 센다"
+              },
+              {
+                "id": "C",
+                "text": "\"셋\"의 발음만 분석한다"
+              },
+              {
+                "id": "D",
+                "text": "\"셋\"이 수량을 나타내는지, 관계를 나타내는지 확인한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "주몽 신화에서 동물들이 주몽을 보호한 것은 자연과 인간의 조화를 보여준다는 해석이 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "위 가설을 반증하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "신화에서 동물이 인간을 공격하거나 무시하는 이야기가 존재하는 사례"
+              },
+              {
+                "id": "B",
+                "text": "금와왕이 주몽에게 말을 기르게 한 사례"
+              },
+              {
+                "id": "C",
+                "text": "주몽이 활을 잘 쏜 사례"
+              },
+              {
+                "id": "D",
+                "text": "동물들이 알을 보호하고 다리를 만들어준 사례"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

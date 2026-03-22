@@ -270,6 +270,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       }
       return sum + 1;
     }, 0);
+    const passagesTotal = (payload.passages || []).reduce(
+      (sum, p) => sum + (p.questions?.length || 0), 0
+    );
     const guess = {
       worksheet_quiz: worksheetTotal,
       reading_training: readingTrainingTotal,
@@ -283,6 +286,8 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
           if (q.type === "SENTENCE_BUILDING") return qs + (q.sentenceParts?.length ?? 0);
           return qs + 1;
         }, 0), 0),
+      logic_reasoning: passagesTotal > 0 ? passagesTotal : worksheetTotal,
+      background_knowledge: passagesTotal > 0 ? passagesTotal : worksheetTotal,
     };
     return guess[moduleKey] || 0;
   }, [content, moduleKey]);

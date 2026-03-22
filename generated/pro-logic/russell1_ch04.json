@@ -1,0 +1,433 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀1 4장 논리사고력",
+  "targetLevel": "russell1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {"seedType": "seed_grape", "count": 3, "multiplier": 1},
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "가상현실(VR)은 사용자가 고글 같은 장비를 쓰면 현실 세계가 완전히 차단되고, 컴퓨터가 만든 가상의 세계만 보이게 된다. 사용자는 현실이 아닌 완전히 새로운 환경 속에 들어간 것처럼 느낀다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'VR은 사용자에게 완전히 새로운 환경의 체험을 제공한다'는 주장이 성립하려면 숨겨진 전제는?",
+            "choices": [
+              {"id": "A", "text": "현실 세계의 감각을 차단하는 것만으로 몰입감을 줄 수 있다."},
+              {"id": "B", "text": "VR 장비는 가격이 저렴해야 한다."},
+              {"id": "C", "text": "인간의 뇌는 시각 정보만으로 환경을 새롭게 인식할 수 있다."},
+              {"id": "D", "text": "모든 사람이 VR을 즐길 수 있다."}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "시조는 고려 말에 발생하여 조선 시대를 거쳐 오늘날까지 이어지는 우리나라의 대표적인 정형시이다. 짧은 형식 속에 다양한 주제를 담아냈다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'시조가 오랫동안 이어져 온 것은 그 가치가 인정되기 때문이다'라는 주장의 숨겨진 전제는?",
+            "choices": [
+              {"id": "A", "text": "오래 지속되는 문학 형식은 그만한 가치가 있다."},
+              {"id": "B", "text": "시조는 조선 시대에만 유행했다."},
+              {"id": "C", "text": "정형시가 자유시보다 우수하다."},
+              {"id": "D", "text": "모든 고전 문학은 현대에도 가치가 있다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "증강현실(AR)은 현실 세계 위에 가상의 정보나 이미지를 겹쳐서 보여주는 기술이다. 스마트폰 카메라를 통해 내 방을 비추면 그 위에 공룡이 걸어 다니는 것처럼 보인다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "AR 기술이 교육 현장에 도입된다면 예상되는 결과로 가장 적절한 것은?",
+            "choices": [
+              {"id": "A", "text": "학생들이 현실 세계를 완전히 잊게 된다."},
+              {"id": "B", "text": "교과서의 그림이 3D로 보이는 등 실감 나는 학습이 가능해진다."},
+              {"id": "C", "text": "교사가 더 이상 필요 없게 된다."},
+              {"id": "D", "text": "학생들의 시력이 크게 향상된다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "동사는 사람이나 사물의 움직임을 나타내는 말이고, 형용사는 성질이나 상태를 나타내는 말이다. 동사는 현재 진행형(-고 있다)으로 쓸 수 있지만 형용사는 일반적으로 쓸 수 없다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "'예쁘다'가 형용사라면 예상되는 결과는?",
+            "choices": [
+              {"id": "A", "text": "'예쁘고 있다'라는 표현이 자연스럽다."},
+              {"id": "B", "text": "'예쁘고 있다'라는 표현은 부자연스럽다."},
+              {"id": "C", "text": "'예쁘다'는 명령형으로 쓸 수 있다."},
+              {"id": "D", "text": "'예쁘다'는 주어 없이 쓸 수 있다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "시조의 종장 첫 마디는 반드시 3음절이어야 한다는 규칙이 있다. 이것이 시조를 다른 시 형식과 구별하는 가장 큰 특징이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 시조는 종장 첫 마디가 반드시 3음절이다. [소전제] 이 작품의 종장 첫 마디가 4음절이다. 결론은?",
+            "choices": [
+              {"id": "A", "text": "이 작품은 시조이다."},
+              {"id": "B", "text": "이 작품은 시조가 아니다."},
+              {"id": "C", "text": "이 작품은 변형 시조이다."},
+              {"id": "D", "text": "결론을 내릴 수 없다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "자연에 봄이 오니 깊은 흥이 저절로 난다. 이 몸이 여유롭게 지내는 것도 임금님 덕분이다. 이 시조에서 화자는 자연 속 생활의 즐거움을 임금의 은혜로 돌리고 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 연시조에서 각 수가 같은 주제를 반복하면 주제 강조 효과가 있다. [소전제] 이 연시조는 사계절마다 '임금님 덕분'을 반복한다. 결론은?",
+            "choices": [
+              {"id": "A", "text": "이 연시조는 임금에 대한 불만을 표현한다."},
+              {"id": "B", "text": "이 연시조는 '임금님 덕분'이라는 주제를 강조하는 효과가 있다."},
+              {"id": "C", "text": "이 연시조는 자연의 아름다움만을 노래한다."},
+              {"id": "D", "text": "반복은 주제와 무관하다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "VR과 AR의 가장 큰 차이는 현실 세계를 볼 수 있느냐이다. VR은 현실을 완전히 차단하고, AR은 현실 위에 가상을 덧입힌다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'AR 기술이 사용되고 있다(Q)'의 필요조건이 '현실 세계가 보인다(P)'일 때, 올바른 변환은?",
+            "choices": [
+              {"id": "A", "text": "현실 세계가 보이지 않으면서 AR이 사용되는 경우는 없다."},
+              {"id": "B", "text": "현실 세계가 보이면 반드시 AR이 사용되고 있다."},
+              {"id": "C", "text": "AR이 사용되지 않으면 현실 세계가 보이지 않는다."},
+              {"id": "D", "text": "현실 세계가 보이는 것과 AR은 무관하다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "용언이 문장에서 쓰이려면 반드시 활용을 해야 한다. 활용이란 용언의 어간에 어미가 붙어 형태가 변하는 것이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'용언이 문장에서 쓰인다(Q)'의 필요조건이 '활용이 이루어진다(P)'일 때, ~Q이면 ~P인가?",
+            "choices": [
+              {"id": "A", "text": "아니다. 문장에서 쓰이지 않아도 활용은 가능하다."},
+              {"id": "B", "text": "그렇다. 용언이 문장에서 쓰이지 않으면 활용도 이루어지지 않는다."},
+              {"id": "C", "text": "필요조건의 대우는 ~Q → ~P가 아니다."},
+              {"id": "D", "text": "대우 관계가 성립하지 않는다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "시조는 3장 6구의 정형 형식을 가진다. 초장, 중장, 종장으로 이루어지며, 종장 첫 마디는 3음절이어야 한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'시조이다'의 필요조건은 '3장 6구 형식이다'이다. 이 필요조건을 충족하지 않는 예시는?",
+            "choices": [
+              {"id": "A", "text": "초장-중장-종장 3줄로 구성된 작품"},
+              {"id": "B", "text": "종장 첫 마디가 3음절인 3장 작품"},
+              {"id": "C", "text": "4줄로 구성되어 기승전결 형식을 따르는 작품"},
+              {"id": "D", "text": "각 장이 2구로 나뉘는 3장 작품"}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "VR 기술이 제대로 작동하려면 높은 해상도의 디스플레이, 빠른 응답 속도, 정확한 움직임 추적이 모두 필요하다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'VR이 제대로 작동한다'의 필요조건을 모두 갖춘 예시는?",
+            "choices": [
+              {"id": "A", "text": "해상도는 높지만 응답 속도가 느린 장비"},
+              {"id": "B", "text": "응답 속도는 빠르지만 움직임 추적이 부정확한 장비"},
+              {"id": "C", "text": "해상도, 응답 속도, 움직임 추적 모두 우수한 장비"},
+              {"id": "D", "text": "가격이 저렴하고 가벼운 장비"}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "동사는 명령형과 청유형으로 쓸 수 있다. '가자', '먹어라' 등이 그 예이다. 반면 형용사는 일반적으로 명령형이나 청유형으로 쓸 수 없다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'어떤 용언이 명령형으로 쓰일 수 있다(P)'는 '그 용언이 동사이다(Q)'의 충분조건이다. 올바른 변환은?",
+            "choices": [
+              {"id": "A", "text": "명령형으로 쓸 수 있으면서 동사가 아닌 경우는 없다."},
+              {"id": "B", "text": "동사이면 반드시 명령형으로 쓸 수 있다."},
+              {"id": "C", "text": "명령형으로 쓸 수 없으면 동사가 아니다."},
+              {"id": "D", "text": "동사가 아니면 명령형으로 쓸 수 없다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "평시조는 초장, 중장, 종장 모두 기본 음수율을 지키는 시조이다. 기본 음수율을 모두 지키면 평시조로 분류된다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'기본 음수율을 모두 지킨다(P)'는 '평시조이다(Q)'의 충분조건이다. 대우를 올바르게 구성한 것은?",
+            "choices": [
+              {"id": "A", "text": "평시조가 아니면 기본 음수율을 모두 지키지 않았다. (~Q → ~P)"},
+              {"id": "B", "text": "기본 음수율을 지키지 않으면 평시조가 아니다. (~P → ~Q)"},
+              {"id": "C", "text": "평시조이면 기본 음수율을 지킨다. (Q → P)"},
+              {"id": "D", "text": "A와 C 모두 올바르다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "AR은 현실 위에 가상 정보를 겹쳐 보여준다. 스마트폰 카메라로 거리를 비추면 상점 정보가 화면에 뜨는 것이 AR의 예이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'현실 세계 위에 디지털 정보가 겹쳐 보인다'는 'AR 기술이 적용되었다'의 충분조건이다. 이를 만족하는 예시는?",
+            "choices": [
+              {"id": "A", "text": "VR 고글로 가상의 우주를 체험하는 경우"},
+              {"id": "B", "text": "스마트폰으로 별자리를 비추면 별 이름이 화면에 표시되는 경우"},
+              {"id": "C", "text": "텔레비전으로 영화를 보는 경우"},
+              {"id": "D", "text": "컴퓨터 게임에서 가상 캐릭터를 조종하는 경우"}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "형용사는 성질이나 상태를 나타내며 '~고 있다' 형태로 쓰일 수 없다. 동사는 움직임을 나타내며 '~고 있다' 형태로 쓸 수 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'~고 있다' 형태로 자연스럽게 쓸 수 있다'는 '동사이다'의 충분조건이다. 이 조건을 만족하지 않는 것은?",
+            "choices": [
+              {"id": "A", "text": "'먹고 있다'의 '먹다'"},
+              {"id": "B", "text": "'달리고 있다'의 '달리다'"},
+              {"id": "C", "text": "'높고 있다'의 '높다'"},
+              {"id": "D", "text": "'읽고 있다'의 '읽다'"}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "VR 기술에서 사용자가 고개를 돌리면 화면도 따라서 바뀌어야 한다. 응답 속도가 느리면 어지러움을 느낄 수 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'응답 속도가 느리면(P) 어지러움을 느낀다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {"id": "A", "text": "어지러움을 느꼈으므로 응답 속도가 느렸다. (Q → P, 후건 긍정 — 부당)"},
+              {"id": "B", "text": "어지러움을 느끼지 않았으므로 응답 속도가 느리지 않았다. (~Q → ~P, 대우 — 타당)"},
+              {"id": "C", "text": "응답 속도가 빠르므로 어지러움을 느끼지 않는다. (~P → ~Q, 전건 부정 — 부당)"},
+              {"id": "D", "text": "A와 C 모두 타당하다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "연시조는 같은 주제를 여러 수에 걸쳐 노래하는 시조이다. 단일 주제를 반복적으로 다루면 주제 강조 효과가 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'연시조이면(P) 주제가 반복된다(Q)'가 참일 때, 다음 중 타당한 추론은?",
+            "choices": [
+              {"id": "A", "text": "주제가 반복되므로 연시조이다. (후건 긍정 — 부당)"},
+              {"id": "B", "text": "연시조이므로 주제가 반복된다. (전건 긍정 — 타당)"},
+              {"id": "C", "text": "연시조가 아니므로 주제가 반복되지 않는다. (전건 부정 — 부당)"},
+              {"id": "D", "text": "A와 B 모두 타당하다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "VR 기술을 사용하는 학생들의 학습 흥미도가 높다는 연구 결과가 있다. 동시에 VR 기기를 사용하는 학교는 대부분 IT 예산이 높다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'VR 사용'과 '학습 흥미도' 사이의 관계에 대한 올바른 분석은?",
+            "choices": [
+              {"id": "A", "text": "VR이 학습 흥미도를 직접적으로 높이는 인과관계이다."},
+              {"id": "B", "text": "학습 흥미도가 높은 학생이 VR을 더 많이 사용한다."},
+              {"id": "C", "text": "IT 예산이 높은 학교는 전반적 교육 환경이 좋아, VR과 흥미도 모두 높을 수 있는 교란변수가 존재한다."},
+              {"id": "D", "text": "두 요소는 완전히 독립적이다."}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "시조에서 자연을 소재로 한 작품이 많고, 자연 소재 시조에서 임금에 대한 충성을 표현하는 경우가 많다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'자연 소재'와 '충성 표현'의 관계에 대한 적절한 분석은?",
+            "choices": [
+              {"id": "A", "text": "자연이 충성심을 직접 유발하는 인과관계이다."},
+              {"id": "B", "text": "충성심이 자연 사랑을 유발한다."},
+              {"id": "C", "text": "조선 시대 양반 문화라는 공통 배경이 자연 소재와 충성 표현 모두에 영향을 준 것이다."},
+              {"id": "D", "text": "자연 소재와 충성 표현은 서로 반대 관계이다."}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "VR은 현실을 차단하고 AR은 현실을 유지한다. VR이 더 강한 몰입감을 준다고 알려져 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 'VR이 AR보다 항상 더 효과적인 학습 도구이다.' 이 가설을 반증할 수 있는 상황은?",
+            "choices": [
+              {"id": "A", "text": "VR로 우주 탐험을 체험하는 학생이 높은 학습 성취를 보인 경우"},
+              {"id": "B", "text": "AR로 실제 실험실에서 가상 실험 데이터를 겹쳐 보며 학습한 학생이 VR 학생보다 높은 성취를 보인 경우"},
+              {"id": "C", "text": "VR 장비가 AR보다 비싼 경우"},
+              {"id": "D", "text": "VR을 사용한 학생이 어지러움을 호소한 경우"}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "용언의 어간은 변하지 않는 부분이고, 어미는 상황에 따라 변하는 부분이다. '먹다'에서 '먹-'이 어간, '-다'가 어미이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '모든 용언의 어간은 활용 시 형태가 변하지 않는다.' 이 가설을 검증하기 위한 방법은?",
+            "choices": [
+              {"id": "A", "text": "'먹다 → 먹고, 먹으니'에서 어간 '먹-'이 변하지 않음을 확인한다."},
+              {"id": "B", "text": "'듣다 → 들으니'에서 어간 '듣-'이 '들-'로 변하는 불규칙 활용 사례를 찾는다."},
+              {"id": "C", "text": "어미의 종류를 분류한다."},
+              {"id": "D", "text": "명사의 형태 변화를 조사한다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      }
+    ]
+  }
+}

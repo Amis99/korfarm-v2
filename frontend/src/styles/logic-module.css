@@ -1,0 +1,64 @@
+/* 논리사고력 모듈 스타일 */
+
+.logic-module {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10px;
+}
+
+/* 상태 바 */
+.logic-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  flex: 0 0 auto;
+}
+
+.logic-progress {
+  color: #555;
+}
+
+.logic-phase-label {
+  color: #7c3aed;
+}
+
+/* 지문 영역 — 짧은 지문이므로 상단 고정 */
+.logic-passage-area {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,0.92);
+  border-radius: 10px;
+  padding: 20px 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+}
+
+.logic-passage-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #7c3aed;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #7c3aed;
+}
+
+.logic-passage-text {
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: #333;
+  word-break: keep-all;
+  white-space: pre-wrap;
+}
+
+/* 문제 영역 — 나머지 공간 차지 */
+.logic-question-area {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}

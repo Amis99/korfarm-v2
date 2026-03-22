@@ -1,0 +1,433 @@
+// 러셀2 Day 15 비문학 - 일일독해 콘텐츠 생성
+const fs = require('fs');
+const path = require('path');
+
+// ── 지문 (비문학: 경제학 - 수요와 공급의 원리) ──
+const p1 = "시장 경제에서 상품의 가격은 수요와 공급이 만나는 지점에서 결정된다. 이 원리는 자유 시장 경제의 가장 기본적인 메커니즘이다. 수요란 소비자가 일정 기간에 특정 가격으로 사려고 하는 상품의 양을 말하며, 일반적으로 가격이 오르면 수요량은 줄어들고 가격이 내리면 수요량은 늘어난다. 이를 수요의 법칙이라 한다. 반대로 공급은 생산자가 일정 기간에 특정 가격으로 팔려고 하는 상품의 양을 뜻한다. 가격이 오르면 생산자는 더 많은 이윤을 기대할 수 있으므로 공급량을 늘리고, 가격이 내리면 이윤이 줄어 공급량을 줄인다. 이를 공급의 법칙이라 한다.";
+const p2 = "수요 곡선과 공급 곡선이 그래프 위에서 교차하는 점을 균형점이라 하며, 이때의 가격을 균형 가격, 거래량을 균형 거래량이라 한다. 균형 가격보다 높은 가격이 설정되면 공급량이 수요량을 초과하여 초과 공급이 발생한다. 초과 공급 상태에서는 팔리지 않은 상품이 쌓이므로 생산자는 가격을 내리게 되고, 이에 따라 수요량은 늘고 공급량은 줄면서 시장은 다시 균형을 향해 움직인다. 반대로 균형 가격보다 낮은 가격이 설정되면 수요량이 공급량을 초과하는 초과 수요가 나타난다. 이때 소비자 사이에 경쟁이 발생하여 가격이 오르게 되고, 공급량은 늘고 수요량은 줄어 다시 균형에 이르게 된다.";
+const p3 = "그런데 수요와 공급은 가격 이외의 요인에 의해서도 변할 수 있다. 소비자의 소득이 증가하면 동일한 가격에서도 더 많이 사려는 경향이 생겨 수요 곡선 자체가 오른쪽으로 이동한다. 유행이나 소비자 취향의 변화 역시 수요 곡선을 이동시킨다. 공급 측면에서는 원자재 가격의 하락이나 기술 혁신이 생산 비용을 낮추어, 같은 가격에서도 더 많이 생산할 수 있게 되면 공급 곡선이 오른쪽으로 이동한다. 반대로 자연재해나 전쟁 등으로 생산이 어려워지면 공급 곡선은 왼쪽으로 이동하여 균형 가격이 올라가게 된다.";
+const p4 = "수요·공급의 원리는 일상생활 곳곳에서 확인할 수 있다. 예를 들어, 여름철 에어컨 수요가 급증하면 가격이 올라가고, 추석이 지나면 사과·배의 수요가 줄어 가격이 내려가는 것이 그러하다. 또한 정부가 특정 상품에 가격 상한제를 도입하면, 균형 가격보다 낮은 수준에서 가격이 고정되어 초과 수요가 발생하고 물량 부족이 나타날 수 있다. 반대로 가격 하한제를 설정하면 초과 공급이 발생하기도 한다. 이처럼 수요와 공급의 원리를 이해하면 시장에서 가격이 왜 변동하는지, 정부 정책이 시장에 어떤 영향을 미치는지를 보다 깊이 이해할 수 있다.";
+
+const paragraphs = [
+  { id: "p1", text: p1 },
+  { id: "p2", text: p2 },
+  { id: "p3", text: p3 },
+  { id: "p4", text: p4 }
+];
+
+const totalLen = p1.length + p2.length + p3.length + p4.length;
+console.log(`지문 총 글자 수: ${totalLen}`);
+console.log(`p1: ${p1.length}, p2: ${p2.length}, p3: ${p3.length}, p4: ${p4.length}`);
+
+function fi(text, keyword) {
+  const i = text.indexOf(keyword);
+  if (i === -1) throw new Error(`"${keyword}" not found`);
+  return { start: i, end: i + keyword.length };
+}
+
+// ── 정독 타임라인 ──
+const timeline = [
+  {
+    stepId: "s1",
+    highlight: { ranges: [{ paragraphId: "p1", start: 0, end: fi(p1, "결정된다.").end }] },
+    question: {
+      prompt: "첫 문장에서 상품 가격이 결정되는 원리로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "수요와 공급이 만나는 지점에서 결정된다." },
+        { id: "B", text: "정부가 일방적으로 정하여 결정된다." },
+        { id: "C", text: "생산자가 원하는 가격으로 결정된다." },
+        { id: "D", text: "소비자가 요구하는 가격으로만 결정된다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s2",
+    highlight: { ranges: [{ paragraphId: "p1", start: fi(p1, "수요란").start, end: fi(p1, "수요의 법칙이라 한다.").end }] },
+    question: {
+      prompt: "'수요의 법칙'이 말하는 가격과 수요량의 관계로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "가격이 오르면 수요량이 줄고, 내리면 늘어난다." },
+        { id: "B", text: "가격이 오르면 수요량도 늘어난다." },
+        { id: "C", text: "가격과 수요량은 아무 관계가 없다." },
+        { id: "D", text: "가격이 내리면 수요량이 줄어든다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s3",
+    highlight: { ranges: [{ paragraphId: "p1", start: fi(p1, "반대로 공급은").start, end: fi(p1, "공급의 법칙이라 한다.").end }] },
+    question: {
+      prompt: "'공급의 법칙'이 말하는 가격과 공급량의 관계로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "가격이 오르면 공급량이 늘고, 내리면 줄어든다." },
+        { id: "B", text: "가격이 오르면 공급량이 줄어든다." },
+        { id: "C", text: "가격과 공급량은 아무 관계가 없다." },
+        { id: "D", text: "가격이 내리면 공급량이 늘어난다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s4",
+    highlight: { ranges: [{ paragraphId: "p1", start: 0, end: p1.length }] },
+    question: {
+      prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "상품 가격은 수요와 공급이 만나는 지점에서 정해지며, 각각 법칙이 있다." },
+        { id: "B", text: "시장에서 가격은 오로지 정부의 규제로만 결정된다." },
+        { id: "C", text: "수요와 공급은 서로 관련이 없는 독립적 개념이다." },
+        { id: "D", text: "가격이 변해도 수요량과 공급량은 변하지 않는다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s5",
+    highlight: { ranges: [{ paragraphId: "p2", start: 0, end: fi(p2, "균형 거래량이라 한다.").end }] },
+    question: {
+      prompt: "'균형점'의 뜻으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "수요 곡선과 공급 곡선이 교차하는 점이다." },
+        { id: "B", text: "공급량이 0이 되는 점이다." },
+        { id: "C", text: "수요량이 최대가 되는 점이다." },
+        { id: "D", text: "가격이 가장 높은 점이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s6",
+    highlight: { ranges: [{ paragraphId: "p2", start: fi(p2, "균형 가격보다 높은").start, end: fi(p2, "움직인다.").end }] },
+    question: {
+      prompt: "균형 가격보다 높은 가격일 때 시장에서 일어나는 일로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "초과 공급이 발생하고, 생산자가 가격을 내려 다시 균형으로 향한다." },
+        { id: "B", text: "초과 수요가 발생하고, 소비자가 가격을 더 올린다." },
+        { id: "C", text: "수요량과 공급량이 모두 사라진다." },
+        { id: "D", text: "시장이 균형 상태를 영구히 유지한다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s7",
+    highlight: { ranges: [{ paragraphId: "p2", start: fi(p2, "반대로 균형 가격보다 낮은").start, end: fi(p2, "이르게 된다.").end }] },
+    question: {
+      prompt: "균형 가격보다 낮은 가격일 때 시장에서 일어나는 일로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "초과 수요가 발생하고, 가격이 올라 다시 균형에 이른다." },
+        { id: "B", text: "초과 공급이 발생하고, 가격이 계속 내려간다." },
+        { id: "C", text: "수요와 공급이 모두 사라진다." },
+        { id: "D", text: "시장 가격이 영원히 낮게 유지된다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s8",
+    highlight: { ranges: [{ paragraphId: "p2", start: 0, end: p2.length }] },
+    question: {
+      prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "균형 가격에서 벗어나면 초과 공급 또는 초과 수요가 생기지만, 시장은 자동으로 균형을 회복한다." },
+        { id: "B", text: "시장은 한번 균형에서 벗어나면 다시 돌아오지 못한다." },
+        { id: "C", text: "초과 공급과 초과 수요는 같은 현상이다." },
+        { id: "D", text: "균형 가격은 존재하지 않으며 가격은 항상 변동한다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s9",
+    highlight: { ranges: [{ paragraphId: "p3", start: 0, end: fi(p3, "이동한다.").end }] },
+    question: {
+      prompt: "소비자 소득 증가가 수요 곡선에 미치는 영향으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "같은 가격에서 더 많이 사려 해 수요 곡선이 오른쪽으로 이동한다." },
+        { id: "B", text: "수요 곡선이 왼쪽으로 이동한다." },
+        { id: "C", text: "수요 곡선은 전혀 변하지 않는다." },
+        { id: "D", text: "공급 곡선이 오른쪽으로 이동한다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s10",
+    highlight: { ranges: [{ paragraphId: "p3", start: fi(p3, "유행이나").start, end: fi(p3, "이동시킨다.").end }] },
+    question: {
+      prompt: "수요 곡선을 이동시키는 가격 이외의 요인으로 추가로 제시된 것은?",
+      choices: [
+        { id: "A", text: "유행이나 소비자 취향의 변화이다." },
+        { id: "B", text: "원자재 가격의 하락이다." },
+        { id: "C", text: "기술 혁신에 의한 생산비 절감이다." },
+        { id: "D", text: "자연재해로 인한 생산 감소이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s11",
+    highlight: { ranges: [{ paragraphId: "p3", start: fi(p3, "공급 측면에서는").start, end: fi(p3, "오른쪽으로 이동한다.").end }] },
+    question: {
+      prompt: "공급 곡선이 오른쪽으로 이동하는 원인으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "원자재 가격 하락이나 기술 혁신으로 생산 비용이 낮아지는 것이다." },
+        { id: "B", text: "소비자 소득이 증가하는 것이다." },
+        { id: "C", text: "자연재해로 생산이 어려워지는 것이다." },
+        { id: "D", text: "유행이 바뀌어 수요가 줄어드는 것이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s12",
+    highlight: { ranges: [{ paragraphId: "p3", start: fi(p3, "반대로 자연재해나").start, end: fi(p3, "된다.").end }] },
+    question: {
+      prompt: "자연재해나 전쟁이 공급 곡선에 미치는 영향으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "공급 곡선이 왼쪽으로 이동하여 균형 가격이 올라간다." },
+        { id: "B", text: "공급 곡선이 오른쪽으로 이동하여 균형 가격이 내려간다." },
+        { id: "C", text: "수요 곡선이 왼쪽으로 이동한다." },
+        { id: "D", text: "가격과 거래량이 모두 변하지 않는다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s13",
+    highlight: { ranges: [{ paragraphId: "p3", start: 0, end: p3.length }] },
+    question: {
+      prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "가격 이외에도 소득·유행·기술·재해 등이 수요·공급 곡선을 이동시킨다." },
+        { id: "B", text: "수요와 공급은 오직 가격에 의해서만 변한다." },
+        { id: "C", text: "기술 혁신은 공급 곡선을 왼쪽으로 이동시킨다." },
+        { id: "D", text: "소비자 소득은 공급 곡선에만 영향을 준다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s14",
+    highlight: { ranges: [{ paragraphId: "p4", start: 0, end: fi(p4, "그러하다.").end }] },
+    question: {
+      prompt: "수요·공급 원리의 일상 사례로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "여름철 에어컨 수요 급증으로 가격 상승, 추석 후 과일 수요 감소로 가격 하락이다." },
+        { id: "B", text: "모든 상품의 가격이 항상 일정하게 유지된다." },
+        { id: "C", text: "에어컨 수요가 늘면 가격이 내려간다." },
+        { id: "D", text: "추석 후 과일 수요가 늘어 가격이 올라간다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s15",
+    highlight: { ranges: [{ paragraphId: "p4", start: fi(p4, "또한 정부가").start, end: fi(p4, "수 있다.").end }] },
+    question: {
+      prompt: "가격 상한제를 도입했을 때 나타나는 현상으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "균형 가격보다 낮게 고정되어 초과 수요와 물량 부족이 발생한다." },
+        { id: "B", text: "균형 가격보다 높게 고정되어 초과 공급이 발생한다." },
+        { id: "C", text: "시장에 아무런 변화가 없다." },
+        { id: "D", text: "소비자와 생산자 모두 이익을 본다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s16",
+    highlight: { ranges: [{ paragraphId: "p4", start: fi(p4, "이처럼").start, end: fi(p4, "있다.").end }] },
+    question: {
+      prompt: "마지막 문장이 제시하는 수요·공급 원리 이해의 효용으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "가격 변동의 원인과 정부 정책의 시장 영향을 깊이 이해할 수 있다." },
+        { id: "B", text: "주식 시장의 미래를 정확히 예측할 수 있다." },
+        { id: "C", text: "모든 상품을 무료로 얻을 수 있다." },
+        { id: "D", text: "생산 비용을 0으로 만들 수 있다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s17",
+    highlight: { ranges: [{ paragraphId: "p4", start: 0, end: p4.length }] },
+    question: {
+      prompt: "넷째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "수요·공급 원리는 일상에서 확인 가능하며, 정부 정책의 시장 영향도 설명한다." },
+        { id: "B", text: "수요·공급 원리는 이론에만 존재하며 현실에서는 적용되지 않는다." },
+        { id: "C", text: "정부 정책은 시장에 아무런 영향을 미치지 않는다." },
+        { id: "D", text: "가격 상한제는 항상 시장에 긍정적 영향만 준다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  }
+];
+
+// ── 복기 카드 (8장) ──
+const recall = {
+  cards: [
+    { id: "c1", text: "수요의 법칙: 가격이 오르면 수요량이 줄고, 내리면 늘어난다." },
+    { id: "c2", text: "공급의 법칙: 가격이 오르면 공급량이 늘고, 내리면 줄어든다." },
+    { id: "c3", text: "균형점에서 균형 가격과 균형 거래량이 결정된다." },
+    { id: "c4", text: "균형에서 벗어나면 초과 공급·수요가 생기지만 시장은 자동 조절된다." },
+    { id: "c5", text: "소득 증가, 유행 변화 등은 수요 곡선을 이동시킨다." },
+    { id: "c6", text: "기술 혁신, 원자재 하락은 공급 곡선을 오른쪽으로 이동시킨다." },
+    { id: "c7", text: "여름 에어컨, 추석 과일 등 일상에서 수요·공급 원리가 확인된다." },
+    { id: "c8", text: "가격 상한제는 초과 수요와 물량 부족을 일으킬 수 있다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+// ── 확인 문항 (7문항) ──
+const confirm = {
+  questions: [
+    {
+      id: "q1",
+      prompt: "지문에서 '수요의 법칙'이라는 표현을 찾아 클릭하세요.",
+      answerRanges: [{ paragraphId: "p1", ...fi(p1, "수요의 법칙") }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true,
+      answerMatchMode: "ANY"
+    },
+    {
+      id: "q2",
+      prompt: "지문에서 '공급의 법칙'이라는 표현을 찾아 클릭하세요.",
+      answerRanges: [{ paragraphId: "p1", ...fi(p1, "공급의 법칙") }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true,
+      answerMatchMode: "ANY"
+    },
+    {
+      id: "q3",
+      prompt: "지문에서 '균형점'이라는 용어를 찾아 클릭하세요.",
+      answerRanges: [{ paragraphId: "p2", ...fi(p2, "균형점") }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true,
+      answerMatchMode: "ANY"
+    },
+    {
+      id: "q4",
+      prompt: "지문에서 '초과 공급'이라는 표현을 찾아 클릭하세요.",
+      answerRanges: [{ paragraphId: "p2", ...fi(p2, "초과 공급이") , end: fi(p2, "초과 공급이").start + 5 }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true,
+      answerMatchMode: "ANY"
+    },
+    {
+      id: "q5",
+      prompt: "지문에서 '기술 혁신'이라는 표현을 찾아 클릭하세요.",
+      answerRanges: [{ paragraphId: "p3", ...fi(p3, "기술 혁신") }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true,
+      answerMatchMode: "ANY"
+    },
+    {
+      id: "q6",
+      prompt: "지문에서 '가격 상한제'라는 표현을 찾아 클릭하세요.",
+      answerRanges: [{ paragraphId: "p4", ...fi(p4, "가격 상한제") }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true,
+      answerMatchMode: "ANY"
+    },
+    {
+      id: "q7",
+      prompt: "지문에서 '물량 부족'이라는 표현을 찾아 클릭하세요.",
+      answerRanges: [{ paragraphId: "p4", ...fi(p4, "물량 부족") }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true,
+      answerMatchMode: "ANY"
+    }
+  ]
+};
+
+const content = {
+  contentId: "dr-r2-015",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 2) Day 15 비문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_2",
+  schoolGradeRange: { min: 8, max: 9 },
+  area: "READING",
+  subArea: "NONFICTION",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 480,
+  assets: {},
+  payload: {
+    passage: { format: "TEXT", paragraphs },
+    intensive: { timeline },
+    recall,
+    confirm
+  }
+};
+
+// 검증
+function verifyRanges(content) {
+  const pMap = {};
+  for (const p of content.payload.passage.paragraphs) pMap[p.id] = p.text;
+  let errors = 0;
+  for (const q of content.payload.confirm.questions) {
+    for (const r of q.answerRanges) {
+      const text = pMap[r.paragraphId];
+      if (!text) { console.error(`없는 문단: ${r.paragraphId}`); errors++; continue; }
+      const slice = text.substring(r.start, r.end);
+      console.log(`[확인 ${q.id}] [${r.start}:${r.end}] = "${slice}"`);
+    }
+  }
+  for (const step of content.payload.intensive.timeline) {
+    for (const r of step.highlight.ranges) {
+      const text = pMap[r.paragraphId];
+      if (r.end > text.length) { console.error(`[정독 ${step.stepId}] 범위 초과: ${r.end} > ${text.length}`); errors++; }
+    }
+  }
+  if (errors === 0) console.log('\n모든 범위 검증 통과');
+  else console.error(`\n${errors}개 오류`);
+  return errors;
+}
+
+const errs = verifyRanges(content);
+
+const staticDir = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'russell2');
+fs.writeFileSync(path.join(staticDir, '015.json'), JSON.stringify(content, null, 2), 'utf8');
+console.log('static 파일 생성: 015.json');
+
+const batchPath = path.join(__dirname, '..', 'generated', 'daily-batch-reading-russell2.json');
+const batch = JSON.parse(fs.readFileSync(batchPath, 'utf8'));
+const batchItem = {
+  content_type: "DAILY_READING", level_id: "RUSSELL_2", area: "READING",
+  sub_area: "NONFICTION", day_index: 15, module_key: "reading_training",
+  schema_version: "1.0", content
+};
+const idx = batch.items.findIndex(i => i.day_index === 15 && i.level_id === "RUSSELL_2");
+if (idx >= 0) { batch.items[idx] = batchItem; console.log('배치 Day 15 교체'); }
+else { batch.items.push(batchItem); console.log('배치 Day 15 추가'); }
+fs.writeFileSync(batchPath, JSON.stringify(batch, null, 2), 'utf8');
+console.log('배치 파일 갱신');
+
+if (errs > 0) process.exit(1);

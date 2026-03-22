@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 17장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "바둑이는 닭 꼬꼬를 쫓아갔지만 꼬꼬가 지붕 위로 날아올라서 잡지 못했어요.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "바둑이가 꼬꼬를 잡지 못한 이유로 꼭 필요한 사실은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "바둑이는 날 수 없고, 꼬꼬는 날 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "바둑이가 달리기를 못해서이다."
+              },
+              {
+                "id": "C",
+                "text": "꼬꼬가 물속으로 들어갔기 때문이다."
+              },
+              {
+                "id": "D",
+                "text": "지붕이 너무 낮아서이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "속담은 예전부터 전해 내려오는, 교훈이 담긴 짧은 말입니다. 속담을 알면 올바른 행동이 무엇인지 잘 배울 수 있답니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "속담을 많이 배우면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "속담을 잊어버린다."
+              },
+              {
+                "id": "B",
+                "text": "글을 못 읽게 된다."
+              },
+              {
+                "id": "C",
+                "text": "삶의 지혜를 깨달아 올바르게 행동할 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "조상들이 다시 돌아온다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "'손이 크다'는 씀씀이가 크거나 음식을 많이 장만하다는 뜻의 관용어입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'손이 크다는 음식을 많이 만든다는 뜻이다. 할머니는 손이 크시다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "할머니는 음식을 많이 만드신다."
+              },
+              {
+                "id": "B",
+                "text": "할머니는 음식을 적게 만드신다."
+              },
+              {
+                "id": "C",
+                "text": "할머니의 손바닥이 크다."
+              },
+              {
+                "id": "D",
+                "text": "할머니는 장갑을 못 끼신다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "바둑이는 닭을 잡으려고 힘껏 달렸지만 지붕은 너무 높아 닿을 수 없었어요. 애써 노력한 일이 헛수고가 되었습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'닭을 잡으려면 지붕 위까지 올라갈 수 있어야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지붕 없이도 닭을 잡을 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "지붕에 올라가지 못하면 닭을 잡을 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "닭은 항상 땅에 있다."
+              },
+              {
+                "id": "D",
+                "text": "바둑이는 날 수 있다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "비유란 어떤 것을 설명하기 위해 그것과 비슷한 다른 것에 빗대어 말하는 것입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'비유를 하려면 서로 비슷한 점이 있어야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비유 없이 설명만 했다."
+              },
+              {
+                "id": "B",
+                "text": "비슷한 점이 없는 두 가지를 비교했다."
+              },
+              {
+                "id": "C",
+                "text": "동그란 달을 보고 '떡 같다'고 말했다."
+              },
+              {
+                "id": "D",
+                "text": "그림으로만 표현했다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "'콩 심은 데 콩 나고 팥 심은 데 팥 난다'는 원인에 따라 결과가 나온다는 뜻의 속담입니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'콩을 심으면 콩이 난다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "콩을 심었는데 팥이 나는 경우가 있다."
+              },
+              {
+                "id": "B",
+                "text": "심지 않아도 콩이 난다."
+              },
+              {
+                "id": "C",
+                "text": "팥을 심으면 콩이 난다."
+              },
+              {
+                "id": "D",
+                "text": "콩을 심었는데 콩이 안 나는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "'입이 무겁다'는 비밀을 잘 지킨다는 뜻의 관용어입니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'입이 무거운 사람이면 비밀을 지킨다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수는 입이 무거워서 밥을 많이 먹었다."
+              },
+              {
+                "id": "B",
+                "text": "민수는 입이 무거워서 친구의 비밀을 아무에게도 말하지 않았다."
+              },
+              {
+                "id": "C",
+                "text": "민수는 비밀을 바로 다른 친구에게 말했다."
+              },
+              {
+                "id": "D",
+                "text": "민수는 입이 가벼워서 비밀을 잘 지켰다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "속담에는 조상들의 경험과 지혜가 짧은 말 속에 담겨 있습니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'속담에는 교훈이 있다. 닭 쫓던 개 지붕 쳐다본다는 속담이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 속담에는 교훈이 없다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "이 속담에는 교훈이 있다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "이 속담은 최근에 만들어졌다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "속담과 교훈은 관계없다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "'귀가 얇다'는 남의 말을 쉽게 믿는다는 뜻이고, '발이 넓다'는 아는 사람이 많다는 뜻입니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "관용어의 겉뜻과 속뜻의 관계로 맞는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "겉뜻과 속뜻은 항상 같다."
+              },
+              {
+                "id": "B",
+                "text": "겉뜻과 속뜻은 전혀 관계없이 정해진다."
+              },
+              {
+                "id": "C",
+                "text": "관용어는 원래 뜻 그대로만 쓰인다."
+              },
+              {
+                "id": "D",
+                "text": "겉뜻(신체 부위)에서 비유하여 속뜻(성격·행동)이 만들어진 것이다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "닭 쫓던 개 지붕 쳐다본다 — 애써 쫓아다녔지만 결국 허탈하게 멍하니 바라볼 수밖에 없었다는 이야기입니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'준비 없이 무작정 시작하면 헛수고가 된다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "계획 없이 시작한 일과 계획을 세워 시작한 일의 결과를 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "닭의 크기를 잰다."
+              },
+              {
+                "id": "C",
+                "text": "개의 달리기 속도를 측정한다."
+              },
+              {
+                "id": "D",
+                "text": "지붕의 높이를 잰다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게3 9장 논리사고력",
+  "targetLevel": "frege3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "형태소는 뜻을 가진 채로 더 이상 쪼갤 수 없는 가장 작은 단위이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "\"책가방\"이 두 개의 형태소로 이루어져 있다는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"책\"은 의미가 없는 소리이다"
+              },
+              {
+                "id": "B",
+                "text": "\"책가방\"은 더 이상 나눌 수 없다"
+              },
+              {
+                "id": "C",
+                "text": "\"책\"과 \"가방\" 각각이 독립적인 의미를 가진 최소 단위이다"
+              },
+              {
+                "id": "D",
+                "text": "\"가방\"은 형태소가 아니다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "운수 좋은 날에서 김 첨지는 아내가 아픈 줄 알면서도 돈을 벌러 나간다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "김 첨지가 아내를 두고 돈을 벌러 나간 것이 가난 때문이라는 해석의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "극심한 가난이 아내의 간호보다 생계를 우선하게 만들었다"
+              },
+              {
+                "id": "B",
+                "text": "김 첨지는 아내의 병을 모르고 있었다"
+              },
+              {
+                "id": "C",
+                "text": "김 첨지는 아내에게 관심이 없었다"
+              },
+              {
+                "id": "D",
+                "text": "김 첨지는 돈이 충분했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "\"책\"이라는 형태소를 자음과 모음(ㅊ, ㅐ, ㄱ)으로 쪼개면 의미가 사라진다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "형태소를 음소 단위로 더 쪼개면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "의미가 사라지고 아무 뜻 없는 소리 조각만 남는다"
+              },
+              {
+                "id": "B",
+                "text": "새로운 단어가 생긴다"
+              },
+              {
+                "id": "C",
+                "text": "의미가 더 풍부해진다"
+              },
+              {
+                "id": "D",
+                "text": "문법이 바뀐다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "운수 좋은 날에서 김 첨지가 집에 도착했을 때 \"무덤 같은 조용함\"이 지배하고 있다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "\"무덤 같은 조용함\"이라는 묘사에서 예상할 수 있는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아내가 건강해져서 기다리고 있다"
+              },
+              {
+                "id": "B",
+                "text": "김 첨지가 길을 잘못 찾았다"
+              },
+              {
+                "id": "C",
+                "text": "아내가 이미 죽었음을 암시한다"
+              },
+              {
+                "id": "D",
+                "text": "아이들이 밖에서 놀고 있다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "하나의 형태소로만 이루어진 단어가 있고, 여러 형태소로 이루어진 단어도 있다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 더 이상 의미 있는 조각으로 나눌 수 없으면 하나의 형태소이다. [소전제] \"하늘\"은 더 이상 의미 있는 조각으로 나눌 수 없다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"하늘\"은 형태소가 아니다"
+              },
+              {
+                "id": "B",
+                "text": "\"하늘\"은 세 개의 형태소이다"
+              },
+              {
+                "id": "C",
+                "text": "\"하늘\"은 두 개의 형태소이다"
+              },
+              {
+                "id": "D",
+                "text": "\"하늘\"은 하나의 형태소이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "운수 좋은 날은 결말에서 반전이 일어나는 역설적 구조의 소설이다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 제목과 결말이 정반대의 의미를 가지면 역설적 구조이다. [소전제] 운수 좋은 날의 제목은 \"좋은 날\"이지만 결말은 아내의 죽음이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 작품은 해피엔딩이다"
+              },
+              {
+                "id": "B",
+                "text": "이 작품에는 반전이 없다"
+              },
+              {
+                "id": "C",
+                "text": "이 작품의 제목과 내용은 일치한다"
+              },
+              {
+                "id": "D",
+                "text": "이 작품은 역설적 구조이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "형태소 분석이 올바르려면 각 조각이 독립적 의미를 가져야 한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "위 조건을 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독립적 의미가 있으면 반드시 올바른 형태소 분석이다"
+              },
+              {
+                "id": "B",
+                "text": "독립적 의미 없이도 올바른 형태소 분석이 가능하다"
+              },
+              {
+                "id": "C",
+                "text": "형태소 분석과 의미는 무관하다"
+              },
+              {
+                "id": "D",
+                "text": "올바른 형태소 분석이라면 각 조각이 독립적 의미를 가지는 것이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "운수 좋은 날에서 비극적 결말의 감동이 크려면 독자의 기대가 뒤집혀야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "위 조건을 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비극적 결말의 감동이 컸다면 독자의 기대가 뒤집힌 것이다"
+              },
+              {
+                "id": "B",
+                "text": "기대와 감동은 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "기대가 뒤집히지 않아도 감동은 크다"
+              },
+              {
+                "id": "D",
+                "text": "기대가 뒤집히면 반드시 감동이 크다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "\"꽃잎\"은 \"꽃\"과 \"잎\"이라는 두 개의 형태소로 이루어져 있다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "두 개의 형태소로 이루어진 단어의 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"하늘\" — 하나의 형태소"
+              },
+              {
+                "id": "B",
+                "text": "\"물고기\" — \"물\"과 \"고기\" 두 개의 형태소"
+              },
+              {
+                "id": "C",
+                "text": "\"나무\" — 하나의 형태소"
+              },
+              {
+                "id": "D",
+                "text": "\"바다\" — 하나의 형태소"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "운수 좋은 날에서 김 첨지의 불안한 심리를 보여주는 행동이 있다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "김 첨지의 내면 불안을 가장 잘 보여주는 행동은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "돈을 많이 번 것"
+              },
+              {
+                "id": "B",
+                "text": "웃다가 갑자기 울고, 아내가 안 죽었다고 반복하며 자신도 믿으려고 애쓰는 모습"
+              },
+              {
+                "id": "C",
+                "text": "인력거를 끄는 것"
+              },
+              {
+                "id": "D",
+                "text": "설렁탕을 사는 것"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "단어를 형태소로 나누면 단어의 구조를 이해할 수 있다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "위 조건을 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구조를 이해하면 반드시 형태소로 나눈 것이다"
+              },
+              {
+                "id": "B",
+                "text": "형태소로 나누지 않아도 구조를 항상 이해한다"
+              },
+              {
+                "id": "C",
+                "text": "형태소로 나누면서 구조를 이해하지 못하는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "형태소 분석과 구조 이해는 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "운수 좋은 날에서 \"설렁탕을 사다 놓았는데 왜 먹지를 못하니\"라는 대사를 읽으면 독자는 슬픔을 느낀다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "위 조건을 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "슬픔을 느끼면 반드시 이 대사를 읽은 것이다"
+              },
+              {
+                "id": "B",
+                "text": "대사와 슬픔은 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "이 대사를 읽으면서 슬픔을 느끼지 않는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "이 대사 없이도 항상 슬프다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "\"바다\"는 더 이상 쪼갤 수 없는 하나의 형태소이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "형태소 분석이 틀린 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"구경꾼\" → \"구경\" + \"-꾼\" — 올바름"
+              },
+              {
+                "id": "B",
+                "text": "\"한여름\" → \"한-\" + \"여름\" — 올바름"
+              },
+              {
+                "id": "C",
+                "text": "\"바다\" → \"바\" + \"다\" — 틀림"
+              },
+              {
+                "id": "D",
+                "text": "\"감나무\" → \"감\" + \"나무\" — 올바름"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "운수 좋은 날에서 \"궂은비는 여전히 추적추적 내렸습니다\"라는 묘사가 있다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "이 비 묘사가 작품에서 하는 역할로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화창한 날씨를 표현한다"
+              },
+              {
+                "id": "B",
+                "text": "어둡고 우울한 분위기를 조성하여 비극적 결말을 암시한다"
+              },
+              {
+                "id": "C",
+                "text": "김 첨지가 행복함을 보여준다"
+              },
+              {
+                "id": "D",
+                "text": "아무런 역할이 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "\"바다\"는 하나의 형태소이다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "\"바다를 바 + 다로 나누는 것이 올바르다\"는 주장이 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하다 — \"바\"와 \"다\" 각각 의미가 있다"
+              },
+              {
+                "id": "B",
+                "text": "부당하다 — \"바다\"는 더 이상 쪼갤 수 없는 하나의 형태소이므로 \"바\"와 \"다\"로 나누면 의미가 사라진다"
+              },
+              {
+                "id": "C",
+                "text": "타당하다 — 모든 단어는 두 글자로 나눌 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "부당하다 — \"바다\"는 세 개의 형태소이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "운수 좋은 날에서 김 첨지는 아내에게 \"이년, 밤낮으로 누워만 있으면 제일이야\"라고 호통친다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "\"김 첨지가 아내에게 진심으로 화가 난 것이다\"라는 해석이 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하다 — 호통을 쳤으므로 화가 난 것이다"
+              },
+              {
+                "id": "B",
+                "text": "부당하다 — 김 첨지는 아내에게 말을 하지 않았다"
+              },
+              {
+                "id": "C",
+                "text": "타당하다 — 김 첨지는 아내를 미워한다"
+              },
+              {
+                "id": "D",
+                "text": "부당하다 — 김 첨지의 호통은 아내가 죽었을까 봐 두려운 마음을 감추려는 행동이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "단어를 이루는 형태소의 수가 많을수록 단어의 의미가 복합적인 경향이 있다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "\"형태소의 수\"와 \"단어 의미의 복합성\" 사이의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "둘 사이에 상관관계가 있으나 각 형태소의 의미 등 다른 요인도 영향을 준다"
+              },
+              {
+                "id": "B",
+                "text": "형태소의 수만이 의미의 복합성을 결정한다"
+              },
+              {
+                "id": "C",
+                "text": "형태소의 수와 의미의 복합성은 전혀 관련이 없다"
+              },
+              {
+                "id": "D",
+                "text": "형태소가 많으면 의미가 반드시 단순해진다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "운수 좋은 날에서 김 첨지가 벌어들인 돈의 양과 이야기의 비극성 사이에 관계가 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "\"김 첨지의 수입\"과 \"비극의 깊이\" 사이의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수입과 비극은 전혀 관련이 없다"
+              },
+              {
+                "id": "B",
+                "text": "수입이 적으면 더 행복하다"
+              },
+              {
+                "id": "C",
+                "text": "수입이 늘면 비극이 사라진다"
+              },
+              {
+                "id": "D",
+                "text": "돈을 많이 벌수록 비극이 깊어지는 아이러니한 상관관계가 있지만, 비극의 근본 원인은 가난과 사회 구조이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "\"눈사람\"을 형태소로 올바르게 나누었는지 확인해야 한다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "\"눈사람\"이 \"눈\" + \"사람\"으로 나뉜다는 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "단어가 포함된 문장의 수를 조사한다"
+              },
+              {
+                "id": "B",
+                "text": "\"눈\"과 \"사람\" 각각이 독립적 의미를 가지는지 확인한다 — \"눈\"은 하늘에서 내리는 것, \"사람\"은 사람이므로 올바르다"
+              },
+              {
+                "id": "C",
+                "text": "\"눈사람\"의 글자 수를 센다"
+              },
+              {
+                "id": "D",
+                "text": "단어의 발음만 분석한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "운수 좋은 날의 결말에서 \"이상하게도 오늘은 운수가 좋더니만\"이라는 대사가 작품 전체를 관통하는 아이러니를 완성한다는 해석이 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "위 가설을 반증하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 대사가 단순히 운에 대한 김 첨지의 개인적 소감이며 작품 전체의 아이러니와는 무관하다는 해석이 가능한 경우"
+              },
+              {
+                "id": "B",
+                "text": "김 첨지가 설렁탕을 사가는 장면"
+              },
+              {
+                "id": "C",
+                "text": "김 첨지가 아내의 죽음을 확인하는 장면"
+              },
+              {
+                "id": "D",
+                "text": "제목과 결말의 비극적 대조가 아이러니를 완성한다는 분석"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

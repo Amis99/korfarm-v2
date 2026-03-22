@@ -41,7 +41,7 @@ const CONTENT_TYPE_TO_MODULE = {
   PRO_READING: "reading_training",
   PRO_BACKGROUND: "worksheet_quiz",
   PRO_VOCAB: "worksheet_quiz",
-  PRO_LOGIC: "worksheet_quiz",
+  PRO_LOGIC: "logic_reasoning",
   PRO_ANSWER: "answer_key",
   PRO_TEST: "worksheet_quiz",
 };

@@ -18,9 +18,11 @@ function isDbContentId(id) {
 const CONTENT_TYPE_TO_MODULE = {
   PRO_READING: "reading_training",
   PRO_VOCAB: "worksheet_quiz",
-  PRO_BACKGROUND: "worksheet_quiz",
-  PRO_LOGIC: "worksheet_quiz",
+  PRO_BACKGROUND: "background_knowledge",
+  PRO_LOGIC: "logic_reasoning",
   PRO_ANSWER: "answer_key",
+  BACKGROUND_KNOWLEDGE: "background_knowledge",
+  BACKGROUND_KNOWLEDGE_QUIZ: "background_knowledge",
 };
 function resolveModuleKey(contentType) {
   if (!contentType) return null;

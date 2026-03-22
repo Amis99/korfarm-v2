@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 7장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "소방관은 화재가 발생했을 때 불을 끄고 사람들을 구조하는 일을 합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "소방관이 사람을 구조하려면 어떤 사실이 숨어 있어야 할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "소방관은 노래를 부른다."
+              },
+              {
+                "id": "B",
+                "text": "소방관은 요리를 잘한다."
+              },
+              {
+                "id": "C",
+                "text": "소방관은 불을 끄는 훈련을 받았다."
+              },
+              {
+                "id": "D",
+                "text": "소방관은 동물만 돌본다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "우리 동네에는 주민들의 생활을 돕고 안전을 지키기 위해 노력하는 여러 가지 직업이 있습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "동네에 안전을 지키는 사람들이 있으면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동네가 위험해진다."
+              },
+              {
+                "id": "B",
+                "text": "동네에 사람이 없어진다."
+              },
+              {
+                "id": "C",
+                "text": "아무도 일하지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "주민들이 안전하게 생활할 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "경찰관 아저씨는 민수의 눈높이에 맞춰 무릎을 굽히고 다정하게 물으셨습니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'이웃을 돕는 사람은 착하다. 경찰관은 이웃을 돕는다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경찰관은 착하다."
+              },
+              {
+                "id": "B",
+                "text": "경찰관은 이웃을 돕지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "착한 사람은 모두 경찰관이다."
+              },
+              {
+                "id": "D",
+                "text": "이웃을 돕는 것은 나쁘다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "이웃들은 서로 인사를 나누고, 어려운 일이 생기면 돕기도 합니다. 이를 협동이라고 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'협동하려면 서로 도와야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "혼자 해도 협동이다."
+              },
+              {
+                "id": "B",
+                "text": "서로 돕지 않으면 협동이 아니다."
+              },
+              {
+                "id": "C",
+                "text": "도움이 없어도 협동할 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "협동하면 혼자가 된다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "불이 나지 않았을 때도 사고를 대비해 훈련하며 우리의 생명과 안전을 지켜 줍니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'안전을 지키려면 미리 훈련이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "훈련 없이도 불을 잘 껐다."
+              },
+              {
+                "id": "B",
+                "text": "훈련하면 오히려 위험하다."
+              },
+              {
+                "id": "C",
+                "text": "평소 훈련을 해두어 화재 때 빠르게 대처했다."
+              },
+              {
+                "id": "D",
+                "text": "아무것도 안 해도 안전하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "민수는 놀이터 그네에 앉아 울고 있었습니다. 친구들과 신나게 놀다가 그만 아끼던 지갑을 잃어버렸기 때문입니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'소중한 물건을 잃어버리면 슬프다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "잃어버리면 기쁘다."
+              },
+              {
+                "id": "B",
+                "text": "슬프면 반드시 물건을 잃어버린 것이다."
+              },
+              {
+                "id": "C",
+                "text": "물건을 찾으면 슬퍼진다."
+              },
+              {
+                "id": "D",
+                "text": "물건을 잃어버렸는데 슬프지 않은 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "경찰관 아저씨가 지갑을 찾아주자 민수는 환하게 웃으며 인사했습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'도움을 받으면 고마움을 느낀다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경찰관이 지갑을 찾아주어 민수가 고마워했다."
+              },
+              {
+                "id": "B",
+                "text": "아무도 안 도와줬는데 고마웠다."
+              },
+              {
+                "id": "C",
+                "text": "도움을 받았는데 화가 났다."
+              },
+              {
+                "id": "D",
+                "text": "도움을 받고 무시했다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "각자 맡은 역할은 다르지만 모두 우리에게 꼭 필요한 분들입니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'동네를 위해 일하는 사람은 필요하다. 환경 미화원은 동네를 위해 일한다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "환경 미화원은 필요 없다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "환경 미화원은 필요하다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "모든 사람이 환경 미화원이다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "동네에는 직업이 없다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "우리는 혼자 살 수 없습니다. 우리 집 주변에는 많은 이웃이 함께 살고 있습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'이웃이 많은 동네는 안전하다.' 이웃 수와 안전의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이웃이 많으면 반드시 안전하다."
+              },
+              {
+                "id": "B",
+                "text": "안전한 곳에만 이웃이 산다."
+              },
+              {
+                "id": "C",
+                "text": "이웃이 많은 것과 안전한 것이 같이 나타나지만 다른 이유가 있을 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "소방관은 화재가 발생했을 때 불을 끄고 사람들을 구조합니다. 경찰관은 범인을 잡고 주민의 안전을 지킵니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'직업마다 하는 일이 다르다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 가지 직업만 조사한다."
+              },
+              {
+                "id": "B",
+                "text": "모든 직업이 같은 일을 하는지 확인한다."
+              },
+              {
+                "id": "C",
+                "text": "직업의 이름만 모은다."
+              },
+              {
+                "id": "D",
+                "text": "여러 직업의 하는 일을 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

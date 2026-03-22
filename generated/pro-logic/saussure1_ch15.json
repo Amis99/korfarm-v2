@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 15장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "옛날 조선 시대에는 우리말은 있었지만, 우리 글자가 없어서 중국의 한자를 빌려 썼습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "백성들이 글을 몰랐던 이유를 설명하려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "백성들은 글을 배울 필요가 없었다."
+              },
+              {
+                "id": "B",
+                "text": "한자는 누구나 쉽게 배울 수 있었다."
+              },
+              {
+                "id": "C",
+                "text": "한자는 배우기가 매우 어렵고 복잡했다."
+              },
+              {
+                "id": "D",
+                "text": "모든 백성이 학교에 다녔다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "세종대왕은 백성들이 쉽게 익히고 쓸 수 있는 우리 글자를 만들기로 결심했습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "세종대왕이 한글을 만들면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글자가 사라진다."
+              },
+              {
+                "id": "B",
+                "text": "백성들이 더 불편해진다."
+              },
+              {
+                "id": "C",
+                "text": "한자가 더 어려워진다."
+              },
+              {
+                "id": "D",
+                "text": "백성들이 글을 읽고 쓸 수 있게 된다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "슬기로운 사람은 하루 아침에, 어리석은 사람도 열흘이면 배운대요.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'한글은 배우기 쉽다. 민수는 한글을 배우고 있다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수는 한글을 쉽게 배울 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "민수는 한글을 못 배운다."
+              },
+              {
+                "id": "C",
+                "text": "한글은 어렵다."
+              },
+              {
+                "id": "D",
+                "text": "민수는 한자를 배운다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "문장이 끝날 때는 마침표(.)를 찍고, 궁금한 것을 물어볼 때는 물음표(?)를 씁니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'올바른 문장을 쓰려면 문장 부호가 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부호 없이도 올바른 문장이다."
+              },
+              {
+                "id": "B",
+                "text": "문장 부호가 없으면 올바른 문장을 쓰기 어렵다."
+              },
+              {
+                "id": "C",
+                "text": "마침표만 있으면 된다."
+              },
+              {
+                "id": "D",
+                "text": "부호를 쓰면 문장이 틀린다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "궁금할 땐 물음표 콕! 신날 땐 느낌표 쾅!",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'감정을 나타내려면 알맞은 부호가 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "마침표를 쓰니 놀란 마음이 전해졌다."
+              },
+              {
+                "id": "B",
+                "text": "부호 없이도 감정이 전달됐다."
+              },
+              {
+                "id": "C",
+                "text": "물음표를 쓰니 궁금한 마음이 잘 드러났다."
+              },
+              {
+                "id": "D",
+                "text": "부호를 쓰면 감정이 사라진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "기역 니은 디귿 리을, 소리 나는 대로 적어 봐요.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'한글로 쓰면 소리를 나타낼 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한자로만 소리를 쓸 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "소리를 나타내면 반드시 한글이다."
+              },
+              {
+                "id": "C",
+                "text": "한글로 소리를 못 쓴다."
+              },
+              {
+                "id": "D",
+                "text": "한글로 썼는데 소리를 못 나타내는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "세종대왕님이 만드신 세상에서 제일 쉬운 글자.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'쉬운 글자이면 빨리 배울 수 있다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한글이 쉬워서 열흘 만에 배웠다."
+              },
+              {
+                "id": "B",
+                "text": "어려운 글자인데 빨리 배웠다."
+              },
+              {
+                "id": "C",
+                "text": "쉬운데 평생 못 배웠다."
+              },
+              {
+                "id": "D",
+                "text": "글자 없이 소통했다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "가난하고 바쁜 백성들은 글을 몰라 억울한 일을 당해도 관청에 알릴 수가 없었습니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'글을 모르면 억울함을 알릴 수 없다. 백성은 글을 모른다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "백성은 글을 안다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "백성은 억울함을 알릴 수 없다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "글을 알면 억울하다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "백성은 관청에 잘 알렸다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "한글이 만들어지고 백성들이 글을 배우게 되었습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'한글을 배운 마을에서 읽기 능력이 올라갔다.' 한글과 읽기 능력의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한글이 읽기 능력의 원인이다."
+              },
+              {
+                "id": "B",
+                "text": "읽기 능력이 좋으면 한글을 만든다."
+              },
+              {
+                "id": "C",
+                "text": "한글 학습이 읽기 능력 향상과 관련 있지만 다른 요인도 있을 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "한글은 세상에서 가장 과학적인 글자 중 하나로 평가받습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'한글이 한자보다 배우기 쉽다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 글자 모두 안 배워본 사람에게 물어보지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "한글만 조사한다."
+              },
+              {
+                "id": "C",
+                "text": "한자의 모양만 관찰한다."
+              },
+              {
+                "id": "D",
+                "text": "한글과 한자를 처음 배우는 사람들의 학습 시간을 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

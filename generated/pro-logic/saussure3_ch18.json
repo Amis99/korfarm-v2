@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 18장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "행성이란 별(항성) 주위를 도는 큰 천체입니다. 지구는 태양 주위를 도는 행성입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "지구가 태양 주위를 돌려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태양의 중력이 지구를 잡아당기고 있어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "지구가 태양보다 커야 한다."
+              },
+              {
+                "id": "C",
+                "text": "태양이 지구 주위를 돌아야 한다."
+              },
+              {
+                "id": "D",
+                "text": "중력이 없어야 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "궤도란 행성이나 인공위성 등이 운동하면서 그리는 일정한 길입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "인공위성을 궤도에 올리면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 역할도 못한다."
+              },
+              {
+                "id": "B",
+                "text": "즉시 떨어진다."
+              },
+              {
+                "id": "C",
+                "text": "태양으로 날아간다."
+              },
+              {
+                "id": "D",
+                "text": "지구 주위를 계속 돌며 통신이나 관측 역할을 할 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "관측이란 육안이나 기계를 써서 자연 현상을 자세히 관찰하여 측정하는 것입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'천체를 연구하려면 관측이 필요하다. 별의 밝기를 재는 것은 관측이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "천체 연구에 관측은 불필요하다."
+              },
+              {
+                "id": "B",
+                "text": "관측과 천체 연구는 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "별의 밝기를 재는 것은 관측이 아니다."
+              },
+              {
+                "id": "D",
+                "text": "별의 밝기를 재는 것은 천체 연구에 필요하다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "우주를 탐사하려면 로켓이 지구의 중력을 벗어나야 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'우주에 가려면 중력을 벗어나야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "중력을 벗어나지 않아도 우주에 간다."
+              },
+              {
+                "id": "B",
+                "text": "중력을 벗어나지 못하면 우주에 갈 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "우주와 중력은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "중력이 강할수록 쉽게 간다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "태양계에는 지구를 포함하여 여러 행성이 태양을 중심으로 돌고 있습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'행성이 궤도를 유지하려면 중심 별의 중력이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "중력 없이도 지구가 궤도를 돈다."
+              },
+              {
+                "id": "B",
+                "text": "태양의 중력 덕분에 지구가 일정한 궤도를 돌고 있다."
+              },
+              {
+                "id": "C",
+                "text": "지구가 태양에서 멀어지고 있다."
+              },
+              {
+                "id": "D",
+                "text": "중력이 없으면 궤도가 더 안정적이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "망원경을 사용하면 맨눈으로 볼 수 없는 먼 천체도 관측할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'망원경을 쓰면 먼 별을 볼 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "망원경과 별 관측은 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "맨눈으로도 모든 별을 볼 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "망원경을 썼는데 먼 별을 못 보는 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "망원경을 쓰면 별이 사라진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "로켓 기술의 발전으로 인류는 달에 발자국을 남길 수 있게 되었습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'우주 기술이 발전하면 새로운 탐사가 가능해진다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화성 탐사 로봇이 화성 토양을 분석하여 새로운 정보를 얻었다."
+              },
+              {
+                "id": "B",
+                "text": "기술 발전 없이 화성에 도착했다."
+              },
+              {
+                "id": "C",
+                "text": "기술이 발전했지만 탐사를 하지 못했다."
+              },
+              {
+                "id": "D",
+                "text": "탐사 없이도 화성의 모든 것을 알게 되었다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "지구는 태양으로부터 적당한 거리에 있어 물이 액체로 존재할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'물이 존재하려면 적당한 온도가 필요하다. 지구는 적당한 온도이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "온도와 물은 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "지구에는 물이 없다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "지구에는 물이 존재할 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "지구는 너무 뜨겁다. (맞는 추론)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "태양에서 멀어질수록 행성의 표면 온도가 낮아지는 경향이 있습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'태양과의 거리'와 '행성 온도'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "거리와 온도는 전혀 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "거리가 멀면 온도가 낮아지는 경향이 있지만, 대기 성분 등 다른 요인도 영향을 준다."
+              },
+              {
+                "id": "C",
+                "text": "거리가 멀면 반드시 온도가 높아진다."
+              },
+              {
+                "id": "D",
+                "text": "온도가 낮으면 태양에 가까운 것이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "화성에 물의 흔적이 발견되어 과거에 생명체가 있었을 가능성이 제기됩니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'화성에 과거 생명체가 있었다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화성 토양에서 미생물 화석이나 유기물 흔적을 탐사하여 분석한다."
+              },
+              {
+                "id": "B",
+                "text": "화성의 크기를 잰다."
+              },
+              {
+                "id": "C",
+                "text": "지구의 생물 수를 센다."
+              },
+              {
+                "id": "D",
+                "text": "화성의 색깔을 관찰한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

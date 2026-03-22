@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게3 2장 논리사고력",
+  "targetLevel": "frege3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "품사는 단어를 문장 속 역할에 따라 9가지로 나눈 것이다. 명사는 사물의 이름, 대명사는 명사를 대신하는 말, 수사는 수량이나 순서를 나타내는 말이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "\"하늘, 사랑, 컴퓨터는 모두 같은 품사이다\"라는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세 단어 모두 사물이나 개념의 이름을 나타내는 역할을 한다"
+              },
+              {
+                "id": "B",
+                "text": "세 단어 모두 동작을 나타낸다"
+              },
+              {
+                "id": "C",
+                "text": "세 단어 모두 수량을 나타낸다"
+              },
+              {
+                "id": "D",
+                "text": "세 단어 모두 다른 말을 꾸며준다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "이규보의 이옥설에서 글쓴이는 행랑채 수리 경험을 통해 잘못을 바로 고쳐야 한다는 교훈을 이끌어낸다. 오래 비가 샌 두 칸은 나무가 썩어 비용이 많이 들었고, 즉시 고친 한 칸은 비용을 아낄 수 있었다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "이규보가 집 수리 경험에서 인격 수양과 정치 개혁의 교훈을 이끌어내는 논리의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문제를 방치하면 피해가 커진다는 원리가 집, 인격, 정치에 공통으로 적용된다"
+              },
+              {
+                "id": "B",
+                "text": "집 수리는 정치와 완전히 동일한 행위이다"
+              },
+              {
+                "id": "C",
+                "text": "행랑채 수리에만 이 원리가 적용된다"
+              },
+              {
+                "id": "D",
+                "text": "비가 새는 것과 잘못은 아무런 공통점이 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "조사는 명사, 대명사, 수사 뒤에 붙어서 그 말이 문장 속에서 어떤 역할을 하는지 알려준다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "조사 없이 \"영희 밥 먹다\"라고만 쓰면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "영희가 밥을 먹는 것인지 밥이 영희를 먹는 것인지 구별할 수 없게 된다"
+              },
+              {
+                "id": "B",
+                "text": "문장이 자동으로 완성된다"
+              },
+              {
+                "id": "C",
+                "text": "문장의 뜻이 더 명확해진다"
+              },
+              {
+                "id": "D",
+                "text": "조사가 없어도 역할 구분에 전혀 문제가 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "이옥설에서 이규보는 오래 비가 샌 두 칸의 서까래, 추녀, 기둥, 들보가 모두 썩어 쓸 수 없게 되었다고 서술한다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "이규보의 논리에 따르면 나라의 문제를 임시방편으로만 처리하고 제대로 바꾸지 않으면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "백성의 삶이 더 나아진다"
+              },
+              {
+                "id": "B",
+                "text": "백성이 살기 어려워지고 나라를 지키기 어렵게 된다"
+              },
+              {
+                "id": "C",
+                "text": "수리 비용만 절약된다"
+              },
+              {
+                "id": "D",
+                "text": "나라가 자연스럽게 안정된다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "감탄사는 문장의 다른 말들과 큰 상관없이 혼자서 감정을 표현하는 단어이다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 홀로 감정을 표현하면 감탄사이다. [소전제] \"어머나\"는 홀로 놀라움을 표현한다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"어머나\"는 명사이다"
+              },
+              {
+                "id": "B",
+                "text": "\"어머나\"는 조사이다"
+              },
+              {
+                "id": "C",
+                "text": "\"어머나\"는 감탄사이다"
+              },
+              {
+                "id": "D",
+                "text": "\"어머나\"는 부사이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "이옥설은 구체적인 경험에서 교훈을 이끌어내는 2단 구성의 한문 수필인 설(說)이다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 구체적 경험에서 교훈을 이끌어내는 2단 구성의 한문 수필은 \"설\"이다. [소전제] 이옥설은 행랑채 수리 경험에서 교훈을 이끌어내는 2단 구성이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이옥설은 시이다"
+              },
+              {
+                "id": "B",
+                "text": "이옥설은 일기이다"
+              },
+              {
+                "id": "C",
+                "text": "이옥설은 소설이다"
+              },
+              {
+                "id": "D",
+                "text": "이옥설은 \"설\"이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "조사는 혼자서 쓰일 수 없고 반드시 명사, 대명사, 수사 뒤에 붙어서만 의미를 가진다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "\"조사가 의미를 가지려면 체언 뒤에 붙어야 한다\"를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "체언 뒤에 붙으면 반드시 조사이다"
+              },
+              {
+                "id": "B",
+                "text": "체언 뒤에 붙지 않으면서 조사가 의미를 가지는 경우는 없다"
+              },
+              {
+                "id": "C",
+                "text": "조사가 의미를 가지지 않으면 체언 뒤에 붙은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "조사와 체언은 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "이옥설에서 유추법이 성립하려면 비교 대상들 사이에 공통 원리가 존재해야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "\"유추법이 성립하려면 공통 원리가 필요하다\"를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공통 원리가 있으면 반드시 유추법이 성립한다"
+              },
+              {
+                "id": "B",
+                "text": "유추법이 성립했다면 공통 원리가 존재한 것이다"
+              },
+              {
+                "id": "C",
+                "text": "공통 원리 없이도 유추법은 성립할 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "유추법과 공통 원리는 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "관형사는 명사 앞에서 그 명사를 꾸며주는 역할을 한다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "다음 중 관형사의 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"빨리 달린다\"의 \"빨리\""
+              },
+              {
+                "id": "B",
+                "text": "\"헌 신발\"의 \"헌\""
+              },
+              {
+                "id": "C",
+                "text": "\"우와, 멋지다!\"의 \"우와\""
+              },
+              {
+                "id": "D",
+                "text": "\"먹는다\"는 동사이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "이옥설은 집 수리 → 인격 수양 → 나라 정치로 논의를 확장하는 점층적 확대 구조이다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "이옥설의 점층적 확대 구조를 올바르게 나타낸 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "집 수리 → 인격 수양 → 나라 정치"
+              },
+              {
+                "id": "B",
+                "text": "나라 정치 → 인격 수양 → 집 수리"
+              },
+              {
+                "id": "C",
+                "text": "집 수리 → 나라 정치 → 인격 수양"
+              },
+              {
+                "id": "D",
+                "text": "인격 수양 → 집 수리 → 나라 정치"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "부사는 동사나 형용사를 꾸며서 행동이나 상태를 더 자세하게 설명해 준다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "\"부사가 동사를 꾸미면 행동이 더 자세하게 표현된다\"를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "행동이 자세하면 반드시 부사가 사용된 것이다"
+              },
+              {
+                "id": "B",
+                "text": "부사 없이도 행동은 항상 자세하다"
+              },
+              {
+                "id": "C",
+                "text": "부사가 동사를 꾸미면서 행동이 더 자세해지지 않는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "부사와 자세한 표현은 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "이옥설의 마지막에 이규보는 설의적 표현을 사용하여 독자에게 강한 인상을 남긴다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "\"설의적 표현을 사용하면 강한 인상을 남긴다\"를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "강한 인상이면 반드시 설의적 표현이다"
+              },
+              {
+                "id": "B",
+                "text": "설의적 표현과 인상은 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "설의적 표현 없이도 항상 강한 인상을 남긴다"
+              },
+              {
+                "id": "D",
+                "text": "설의적 표현을 사용하면서 강한 인상을 남기지 못하는 경우는 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "동사는 주어의 행동, 형용사는 주어의 상태를 나타낸다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "\"하늘이 파랗다\"에서 형용사를 올바르게 찾은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"파랗다\" — 하늘의 움직임이므로 동사이다"
+              },
+              {
+                "id": "B",
+                "text": "\"하늘\" — 사물의 이름이므로 형용사이다"
+              },
+              {
+                "id": "C",
+                "text": "\"파랗다\" — 하늘의 상태를 나타내므로 형용사이다"
+              },
+              {
+                "id": "D",
+                "text": "\"이\" — 하늘을 꾸며주므로 형용사이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "이규보는 행랑채 수리에서 오래 방치한 칸과 즉시 수리한 칸을 비교한다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "즉시 수리한 한 칸의 결과에 해당하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서까래와 기둥이 모두 썩어 비용이 많이 들었다"
+              },
+              {
+                "id": "B",
+                "text": "비가 더 많이 새서 피해가 커졌다"
+              },
+              {
+                "id": "C",
+                "text": "행랑채가 무너졌다"
+              },
+              {
+                "id": "D",
+                "text": "재목이 멀쩡해서 다시 쓸 수 있었고 비용을 아꼈다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "명사는 사물의 이름이고, \"우리\"는 대명사이다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "\"하늘, 사랑, 컴퓨터, 우리, 부산은 모두 명사이다\"라는 주장이 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하다 — 모두 사물의 이름이다"
+              },
+              {
+                "id": "B",
+                "text": "부당하다 — \"부산\"은 동사이다"
+              },
+              {
+                "id": "C",
+                "text": "부당하다 — \"우리\"는 대명사이므로 모두 명사라는 주장은 틀렸다"
+              },
+              {
+                "id": "D",
+                "text": "타당하다 — 대명사도 명사에 포함된다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "이옥설에서 이규보는 잘못을 바로 고치지 않으면 자신을 망친다고 주장한다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "이규보의 주장을 뒷받침하는 타당한 근거는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오래 비가 샌 두 칸의 나무가 모두 썩은 실제 경험 (전건 긍정 — 타당)"
+              },
+              {
+                "id": "B",
+                "text": "즉시 수리한 칸의 비용이 적었으므로 방치해도 비용이 적다 (후건 긍정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "비가 새지 않는 칸이 있으므로 모든 칸이 안전하다 (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "행랑채는 집이므로 인격과 관련이 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "품사를 정확히 알면 문장을 더 정확하게 만들 수 있다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "\"품사 학습 시간\"과 \"작문 점수\" 사이의 관계 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "작문 점수가 높으면 반드시 품사 학습 시간이 길다"
+              },
+              {
+                "id": "B",
+                "text": "둘 사이에 상관관계가 있으나 독서량 등 다른 요인도 영향을 준다"
+              },
+              {
+                "id": "C",
+                "text": "품사 학습 시간만이 작문 점수를 결정한다"
+              },
+              {
+                "id": "D",
+                "text": "품사 학습 시간과 작문 점수는 반비례한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "이옥설에서 비가 샌 기간이 길수록 나무의 손상이 크다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "\"비가 샌 기간\"과 \"나무의 손상\" 사이의 관계 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비가 샌 기간과 나무 손상은 전혀 관련이 없다"
+              },
+              {
+                "id": "B",
+                "text": "비가 샌 기간이 길면 나무가 더 튼튼해진다"
+              },
+              {
+                "id": "C",
+                "text": "비가 샌 기간이 길면 손상이 커지는 상관관계가 있지만 나무 종류 등도 영향을 줄 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "비가 샌 기간이 짧으면 나무가 반드시 썩는다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "조사 \"도\"가 붙으면 \"나도\"(함께), \"만\"이 붙으면 \"나만\"(오직)이라는 뜻이 된다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "\"조사를 바꾸면 문장의 의미가 달라진다\"는 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "조사의 글자 수만 센다"
+              },
+              {
+                "id": "B",
+                "text": "문장에서 명사를 모두 제거해 본다"
+              },
+              {
+                "id": "C",
+                "text": "형용사의 활용 형태만 조사한다"
+              },
+              {
+                "id": "D",
+                "text": "같은 문장에서 조사 \"도\"와 \"만\"을 바꿔 넣은 후 의미 변화를 비교한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "이규보는 이옥설에서 \"잘못을 즉시 고치면 피해가 적다\"는 교훈을 제시한다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "위 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "즉시 고친 한 칸의 비용이 적었다는 사례"
+              },
+              {
+                "id": "B",
+                "text": "비가 새지 않는 칸이 무사했다는 사례"
+              },
+              {
+                "id": "C",
+                "text": "오래 방치한 칸의 나무가 썩었다는 사례"
+              },
+              {
+                "id": "D",
+                "text": "잘못을 즉시 고쳤는데도 피해가 오히려 커진 사례가 존재한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

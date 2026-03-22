@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 17장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "구름은 생김새와 높이에 따라 이름이 다릅니다. 뭉게구름은 솜뭉치처럼 뭉게뭉게 피어오르는 구름입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "구름의 이름이 다르려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구름의 모양과 높이가 서로 다르다."
+              },
+              {
+                "id": "B",
+                "text": "모든 구름은 같은 모양이다."
+              },
+              {
+                "id": "C",
+                "text": "구름에는 이름이 없다."
+              },
+              {
+                "id": "D",
+                "text": "구름은 한 종류뿐이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "먹구름이 하늘을 뒤덮으면 곧 비가 내리게 됩니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "먹구름이 나타나면 어떤 일이 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "맑은 날이 된다."
+              },
+              {
+                "id": "B",
+                "text": "비가 내릴 가능성이 높다."
+              },
+              {
+                "id": "C",
+                "text": "구름이 사라진다."
+              },
+              {
+                "id": "D",
+                "text": "눈이 내린다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "어떤 대상을 '~같이', '~처럼'으로 표현하는 것을 '비유'라고 합니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'비유는 ~같이, ~처럼을 쓴 표현이다. 구름이 솜사탕 같다는 표현은 ~같이를 썼다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이것은 비유가 아니다."
+              },
+              {
+                "id": "B",
+                "text": "비유는 소리를 나타낸다."
+              },
+              {
+                "id": "C",
+                "text": "이것은 비유이다."
+              },
+              {
+                "id": "D",
+                "text": "구름은 솜사탕이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "파란 도화지 위에 하얀 솜사탕이 둥실둥실. 바람이 후 불었더니 양 떼가 되었네.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'구름 모양이 바뀌려면 바람이 불어야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "바람이 불면 구름이 사라진다."
+              },
+              {
+                "id": "B",
+                "text": "바람 없이도 모양이 바뀐다."
+              },
+              {
+                "id": "C",
+                "text": "구름은 모양이 없다."
+              },
+              {
+                "id": "D",
+                "text": "바람이 불지 않으면 구름 모양이 바뀌지 않는다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "새털구름은 아주 높은 하늘에 새의 깃털처럼 가볍게 흩어져 있습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'구름 이름을 알려면 모양을 관찰해야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구름 모양이 깃털 같아서 새털구름이라고 알았다."
+              },
+              {
+                "id": "B",
+                "text": "모양을 안 보고 이름을 알았다."
+              },
+              {
+                "id": "C",
+                "text": "이름만 듣고 모양을 몰랐다."
+              },
+              {
+                "id": "D",
+                "text": "모양과 이름은 관계없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "구름은 참 멋진 마술사야. 매일매일 다른 모습으로 우리를 즐겁게 해 줘.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'하늘을 보면 구름의 변화를 볼 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구름 변화를 보면 반드시 하늘을 본 것이다."
+              },
+              {
+                "id": "B",
+                "text": "하늘을 봤는데 구름 변화를 못 보는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "하늘을 안 봐도 구름을 볼 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "하늘을 보면 구름이 사라진다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "뭉게구름은 파란 하늘에 하얀 솜사탕을 뜯어 놓은 것처럼 보입니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'비유를 쓰면 모양이 더 잘 상상된다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비유 없이도 똑같이 상상됐다."
+              },
+              {
+                "id": "B",
+                "text": "비유를 쓰면 상상이 안 된다."
+              },
+              {
+                "id": "C",
+                "text": "솜사탕 같다고 하니 구름 모양이 눈에 떠올랐다."
+              },
+              {
+                "id": "D",
+                "text": "비유는 모양과 관계없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "'내 동생은 청개구리 같아요'는 동생이 진짜 개구리라는 뜻이 아니라, 말을 안 듣는다는 뜻입니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'비유는 닮은 점으로 표현한다. 구름을 솜사탕에 비유했다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "닮은 점이 없어도 비유할 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "구름은 정말 솜사탕이다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "비유는 같은 것이라는 뜻이다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "구름과 솜사탕은 닮은 점이 있다. (맞는 추론)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "맑은 날에는 뭉게구름이, 비 오기 전에는 먹구름이 많이 나타납니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'뭉게구름이 많은 날 기분이 좋았다.' 뭉게구름과 기분의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "맑은 날씨 때문에 둘 다 나타났을 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "기분이 좋으면 뭉게구름이 생긴다."
+              },
+              {
+                "id": "C",
+                "text": "뭉게구름이 기분을 좋게 한다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "구름의 모양과 높이가 다양합니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'구름의 높이에 따라 모양이 달라진다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 높이의 구름만 관찰한다."
+              },
+              {
+                "id": "B",
+                "text": "다른 높이에 있는 구름들의 모양을 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "구름의 색깔만 관찰한다."
+              },
+              {
+                "id": "D",
+                "text": "구름의 수를 센다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

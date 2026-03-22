@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 20장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "규범이란 마땅히 따르고 지켜야 할 본보기나 법, 도덕입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "규범이 사회에서 필요한 이유로 꼭 있어야 할 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "여러 사람이 함께 살려면 공통의 약속이 있어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "사람은 혼자 살아야 한다."
+              },
+              {
+                "id": "C",
+                "text": "규범 없이도 사회가 유지된다."
+              },
+              {
+                "id": "D",
+                "text": "모든 사람이 같은 생각을 해야 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "권리란 어떤 일을 하거나 타인에게 요구할 수 있는 정당한 힘입니다. 의무란 마땅히 해야 할 일입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "모든 사람이 권리만 주장하고 의무를 다하지 않으면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 문제도 없다."
+              },
+              {
+                "id": "B",
+                "text": "사회가 더 좋아진다."
+              },
+              {
+                "id": "C",
+                "text": "의무가 저절로 이행된다."
+              },
+              {
+                "id": "D",
+                "text": "사회 질서가 무너지고 서로 피해를 주게 된다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "의무란 사회 구성원으로서 마땅히 해야 할 일입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'학생은 수업에 참여할 의무가 있다. 민수는 학생이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수는 수업에 참여하지 않아도 된다."
+              },
+              {
+                "id": "B",
+                "text": "민수는 수업에 참여할 의무가 있다."
+              },
+              {
+                "id": "C",
+                "text": "학생과 의무는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "민수는 학생이 아니다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "법을 지키는 것은 사회 구성원 모두의 의무입니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'평화로운 사회를 만들려면 규범을 지켜야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "규범 없이도 평화로운 사회가 된다."
+              },
+              {
+                "id": "B",
+                "text": "규범을 지키지 않으면 평화로운 사회를 만들 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "규범과 평화는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "규범을 어기면 더 평화롭다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "교통 규칙은 도로에서 안전하게 다니기 위한 규범입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'안전을 위해 규범을 지켜야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "교통 규칙을 무시했는데 사고가 안 났다."
+              },
+              {
+                "id": "B",
+                "text": "빨간불에 뛰어가도 안전했다."
+              },
+              {
+                "id": "C",
+                "text": "횡단보도에서 초록불에 건너 안전하게 길을 건넜다."
+              },
+              {
+                "id": "D",
+                "text": "규칙 없이도 모두 안전했다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "권리와 의무는 동전의 앞뒷면처럼 함께 다닙니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'의무를 다하면 권리를 정당하게 요구할 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "의무를 다했는데 권리를 요구할 수 없는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "의무를 안 해도 권리를 요구할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "권리와 의무는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "의무를 다하면 권리가 사라진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "학교에서는 수업을 받을 권리가 있고, 수업 규칙을 지킬 의무가 있습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'규범을 잘 지키면 모두가 행복한 학교가 된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "규칙을 지켰더니 학교가 불편해졌다."
+              },
+              {
+                "id": "B",
+                "text": "규칙을 안 지켰는데 학교가 더 좋아졌다."
+              },
+              {
+                "id": "C",
+                "text": "모두가 수업 시간에 규칙을 지키니 집중할 수 있어 학교가 즐거웠다."
+              },
+              {
+                "id": "D",
+                "text": "규칙 없이도 학교가 완벽하게 운영되었다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "모든 국민은 법 앞에 평등하며 차별받지 않을 권리가 있습니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'권리가 있으면 그에 따르는 의무도 있다. 교육받을 권리가 있다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "의무만 있고 권리는 없다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "교육 권리에는 의무가 없다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "권리만 있고 의무는 없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "교육받을 권리에는 성실히 학습할 의무가 따른다. (맞는 추론)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "규범 의식이 높은 사회일수록 시민들의 안전감이 높은 경향이 있습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'규범 준수율'과 '사회 안전도'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "규범과 안전은 전혀 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "규범을 잘 지키면 안전도가 높아지는 경향이 있지만 치안 등 다른 요인도 영향을 준다."
+              },
+              {
+                "id": "C",
+                "text": "규범을 어기면 안전도가 높아진다."
+              },
+              {
+                "id": "D",
+                "text": "안전하면 반드시 규범을 잘 지킨 것이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "권리를 행사하면서 동시에 의무를 다하는 것이 성숙한 시민의 자세입니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'규범 교육을 받은 학생이 학교 규칙을 더 잘 지킨다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "규범 교육을 받은 반과 안 받은 반의 규칙 위반 횟수를 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "학생들의 몸무게를 잰다."
+              },
+              {
+                "id": "C",
+                "text": "교실 벽 색깔을 바꿔본다."
+              },
+              {
+                "id": "D",
+                "text": "급식 메뉴를 조사한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

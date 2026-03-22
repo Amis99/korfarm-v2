@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 10장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "깊은 바닷속은 햇빛이 전혀 닿지 않아 한밤중처럼 캄캄합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "깊은 바다가 캄캄하려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "바닷속은 항상 밝다."
+              },
+              {
+                "id": "B",
+                "text": "햇빛이 깊은 물속까지 도달하지 못한다."
+              },
+              {
+                "id": "C",
+                "text": "깊은 바다에도 해가 있다."
+              },
+              {
+                "id": "D",
+                "text": "물은 빛을 통과시킨다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "초롱아귀의 머리 위에서 반짝반짝 빛이 납니다. 이 빛으로 작은 물고기를 유인합니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "초롱아귀가 빛을 내면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물고기가 도망간다."
+              },
+              {
+                "id": "B",
+                "text": "빛이 사라진다."
+              },
+              {
+                "id": "C",
+                "text": "작은 물고기가 빛에 끌려 다가온다."
+              },
+              {
+                "id": "D",
+                "text": "바다가 밝아진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "아기 문어 '덤보'는 머리에 코끼리 귀처럼 생긴 지느러미가 달려 있어서 펄럭펄럭 헤엄칩니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'지느러미가 있으면 헤엄칠 수 있다. 덤보에게 지느러미가 있다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "덤보는 헤엄칠 수 없다."
+              },
+              {
+                "id": "B",
+                "text": "덤보는 물고기가 아니다."
+              },
+              {
+                "id": "C",
+                "text": "지느러미가 없어도 헤엄친다."
+              },
+              {
+                "id": "D",
+                "text": "덤보는 헤엄칠 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "얕은 바다는 햇빛이 잘 들어와서 따뜻하고, 깊은 바다는 차갑습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'바다가 따뜻하려면 햇빛이 들어와야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "햇빛이 안 들어오면 바다가 따뜻하지 않다."
+              },
+              {
+                "id": "B",
+                "text": "햇빛 없이도 바다가 따뜻하다."
+              },
+              {
+                "id": "C",
+                "text": "깊은 바다가 더 따뜻하다."
+              },
+              {
+                "id": "D",
+                "text": "햇빛과 수온은 관계없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "깊은 바다에는 스스로 빛을 내는 생물들이 삽니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'캄캄한 곳에서 살려면 특별한 능력이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 능력 없이도 캄캄한 곳에서 잘 살았다."
+              },
+              {
+                "id": "B",
+                "text": "초롱아귀가 빛을 내어 먹이를 잡았다."
+              },
+              {
+                "id": "C",
+                "text": "밝은 곳에서만 살 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "특별한 능력이 필요 없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "덤보는 귀를 펄럭펄럭 흔들며 헤엄쳤습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'지느러미를 움직이면 앞으로 갈 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지느러미 없이 앞으로 간다."
+              },
+              {
+                "id": "B",
+                "text": "앞으로 가면 지느러미를 움직인 것이다."
+              },
+              {
+                "id": "C",
+                "text": "지느러미를 움직였는데 앞으로 못 가는 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "움직이면 뒤로 간다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "깊은 바다에는 아주 특이하게 생긴 생물들이 살고 있습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'환경이 특별하면 생물도 특별하다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "평범한 환경에서 특이한 생물이 살았다."
+              },
+              {
+                "id": "B",
+                "text": "환경과 생물은 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "특별한 환경에서 평범한 생물만 살았다."
+              },
+              {
+                "id": "D",
+                "text": "캄캄한 깊은 바다에서 빛을 내는 물고기가 살았다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "얕은 바다: 밝고 따뜻, 알록달록 산호. 깊은 바다: 캄캄하고 차가움, 특이한 생물.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'깊은 바다는 캄캄하다. 이 생물은 빛을 스스로 낸다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 생물은 깊은 바다에 살 가능성이 높다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "이 생물은 얕은 바다에 산다. (틀린 추론)"
+              },
+              {
+                "id": "C",
+                "text": "깊은 바다는 밝다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "빛을 내면 얕은 바다이다. (맞는 추론)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "깊은 바다에 사는 생물의 크기가 다양했다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'바다 깊이와 생물 크기의 관계는?'",
+            "choices": [
+              {
+                "id": "A",
+                "text": "깊으면 반드시 크다."
+              },
+              {
+                "id": "B",
+                "text": "깊이와 크기가 관련 있을 수 있지만 다른 요인도 있다."
+              },
+              {
+                "id": "C",
+                "text": "크면 반드시 깊은 바다에 산다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "바다는 깊이에 따라 환경이 달라집니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'깊은 바다일수록 빛을 내는 생물이 많다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "생물의 색깔만 관찰한다."
+              },
+              {
+                "id": "B",
+                "text": "얕은 바다만 조사한다."
+              },
+              {
+                "id": "C",
+                "text": "다양한 깊이에서 빛을 내는 생물의 수를 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "바다의 넓이를 잰다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

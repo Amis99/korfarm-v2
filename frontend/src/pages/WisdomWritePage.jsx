@@ -34,7 +34,7 @@ function WisdomWritePage() {
   const fileInputRef = useRef(null);
 
   const [topics, setTopics] = useState([]);
-  const [topicKey, setTopicKey] = useState("");
+  const [topicKey, setTopicKey] = useState(searchParams.get("topicKey") || "");
   const [tab, setTab] = useState("manuscript");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState([]);

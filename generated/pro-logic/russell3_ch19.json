@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀3 19장 논리사고력",
+  "targetLevel": "russell3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "훈민정음의 자음은 발음 기관의 모양을 본떠 만들었다. 'ㄱ'은 혀뿌리가 목구멍을 막는 모양, 'ㄴ'은 혀끝이 윗잇몸에 닿는 모양을 본뜬 것이다. 가획 원리를 적용하여 획을 더하면 더 센 소리가 된다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'ㅋ'이 'ㄱ'에 획을 더한 글자라는 결론이 나오려면 반드시 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 자음은 모음과 같은 원리로 만들었다."
+              },
+              {
+                "id": "B",
+                "text": "가획 원리에 따라 기본 글자에 획을 더하면 같은 조음 위치에서 더 센 소리를 나타낸다."
+              },
+              {
+                "id": "C",
+                "text": "가획은 글자의 의미를 변화시킨다."
+              },
+              {
+                "id": "D",
+                "text": "'ㅋ'은 'ㄴ'에서 파생되었다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "CT는 X선을 여러 각도에서 투과시켜 3D 단면 영상을 만드는 기술이다. 기존 X선 사진은 2D 투과 영상이라 앞뒤 조직이 겹쳐 보이는 한계가 있었다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "CT가 X선 사진보다 진단에 유리하다는 주장이 성립하려면 반드시 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "3D 단면 영상은 조직의 겹침 없이 각 부위를 정확히 구분할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "2D 영상은 3D 영상과 같은 수준의 정보를 제공한다."
+              },
+              {
+                "id": "C",
+                "text": "X선은 인체를 통과하지 못한다."
+              },
+              {
+                "id": "D",
+                "text": "CT는 방사선을 사용하지 않는다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "채만식의 '태평천하'에서 윤 직원 영감은 일제강점기를 '태평천하'라고 여기는 지독한 구두쇠이다. 그는 재산과 가문 유지에만 집착하며, 손자들을 군수와 경찰서장으로 만들고자 한다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "윤 직원 영감이 일제 식민 통치에 순응하며 재산 유지에만 몰두할 경우, 작가가 의도하는 풍자적 효과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "윤 직원 영감의 현명함을 보여준다."
+              },
+              {
+                "id": "B",
+                "text": "식민 지배에 순응하는 기득권층의 비도덕성과 시대적 무감각을 폭로한다."
+              },
+              {
+                "id": "C",
+                "text": "일제강점기가 실제로 평화로웠음을 증명한다."
+              },
+              {
+                "id": "D",
+                "text": "가문의 번영을 축하한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "CT에서 X선이 인체를 통과할 때 조직의 밀도에 따라 흡수량이 다르다. 뼈는 X선을 많이 흡수하고, 공기는 거의 흡수하지 않는다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "CT 영상에서 뼈와 폐(공기가 차 있는 장기)가 어떻게 나타나는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "뼈와 폐가 같은 밝기로 나타난다."
+              },
+              {
+                "id": "B",
+                "text": "뼈는 어둡게, 폐는 밝게 나타난다."
+              },
+              {
+                "id": "C",
+                "text": "뼈는 밝게, 폐는 어둡게 나타난다. (X선 흡수량 차이)"
+              },
+              {
+                "id": "D",
+                "text": "두 부위 모두 보이지 않는다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "훈민정음의 모음은 천(·), 지(ㅡ), 인(ㅣ) 삼재를 본떠 만들었다. 이 기본 모음의 조합으로 다른 모음들이 파생된다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 훈민정음 모음은 삼재(천지인) 원리로 만들어졌다. [소전제] 'ㅏ'는 'ㅣ'와 '·'의 결합이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'ㅏ'는 삼재 원리와 무관하다."
+              },
+              {
+                "id": "B",
+                "text": "'ㅏ'는 자음 원리로 만들어졌다."
+              },
+              {
+                "id": "C",
+                "text": "'ㅏ'는 외국 문자에서 차용되었다."
+              },
+              {
+                "id": "D",
+                "text": "'ㅏ'는 삼재 원리에 따라 기본 모음의 조합으로 만들어졌다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "태평천하에서 윤 직원 영감의 손자 종학이 사회주의 운동에 가담하여 경찰에 잡힌다. 윤 직원은 손자가 '빨갱이'가 된 것에 분노하며 재산 상속에서 제외하겠다고 한다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 윤 직원에게 재산이 가장 중요한 가치이다. [소전제] 종학의 사회주의 운동이 재산을 위험에 빠뜨린다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "윤 직원은 종학을 지지한다."
+              },
+              {
+                "id": "B",
+                "text": "윤 직원은 종학에게 무관심하다."
+              },
+              {
+                "id": "C",
+                "text": "윤 직원은 사회주의를 이해한다."
+              },
+              {
+                "id": "D",
+                "text": "윤 직원은 종학을 배척한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "한글이 과학적 문자로 평가받으려면 '글자의 창제 원리가 체계적이고 규칙적이어야 한다'는 것이 필요조건이다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'한글이 과학적 문자이다'의 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글자 수가 매우 많아야 한다."
+              },
+              {
+                "id": "B",
+                "text": "글자가 무작위로 만들어져야 한다."
+              },
+              {
+                "id": "C",
+                "text": "다른 문자에서 차용해야 한다."
+              },
+              {
+                "id": "D",
+                "text": "글자의 창제 원리가 체계적이고 규칙적이어야 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "CT가 정확한 진단을 제공하려면 X선이 여러 각도에서 인체를 통과한 데이터가 충분히 수집되어야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'CT가 정확한 3D 영상을 제공한다'의 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "여러 각도에서 충분한 X선 투과 데이터가 수집되어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "단일 각도에서만 X선을 쏘아야 한다."
+              },
+              {
+                "id": "C",
+                "text": "X선 대신 초음파를 사용해야 한다."
+              },
+              {
+                "id": "D",
+                "text": "환자가 움직여야 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "가획 원리의 필요조건은 '기본 글자에 획을 더하면 같은 조음 위치에서 더 센 소리가 된다'이다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "가획 원리를 충족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'ㄱ'에 획을 더해 'ㅋ'이 됨 (여린입천장소리 → 거센소리)"
+              },
+              {
+                "id": "B",
+                "text": "'ㄱ'에 획을 더해 'ㄴ'이 됨 (조음 위치가 달라짐)"
+              },
+              {
+                "id": "C",
+                "text": "'ㅏ'에 획을 더해 'ㅓ'가 됨 (모음 변화)"
+              },
+              {
+                "id": "D",
+                "text": "'ㄱ'을 두 번 써서 'ㄲ'이 됨 (병서)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "태평천하에서 '풍자'가 성립하려면 '표면적 칭찬과 이면적 비판의 괴리'가 있어야 한다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "이 필요조건을 충족하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일제강점기를 객관적으로 서술하는 역사서"
+              },
+              {
+                "id": "B",
+                "text": "일제강점기를 '태평천하'라고 부르면서 실제로는 식민 통치의 비참함을 드러내는 서술"
+              },
+              {
+                "id": "C",
+                "text": "윤 직원 영감을 직접적으로 비판하는 논설문"
+              },
+              {
+                "id": "D",
+                "text": "일제강점기의 경제 통계를 나열하는 보고서"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "'발음 기관의 모양을 본떠 만들었다(P)'는 '상형 원리가 적용되었다(Q)'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "P→Q에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상형 원리이면 발음 기관 모양을 본뜬 것이다. (부당)"
+              },
+              {
+                "id": "B",
+                "text": "발음 기관 모양을 본뜨지 않았으면 상형 원리가 아니다. (부당)"
+              },
+              {
+                "id": "C",
+                "text": "상형 원리가 적용되지 않았으면 발음 기관 모양을 본뜨지 않았다. (대우, 타당)"
+              },
+              {
+                "id": "D",
+                "text": "B와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "'X선을 360도 회전시키며 촬영한다(P)'는 '3D 단면 영상을 얻을 수 있다(Q)'의 충분조건이다. ~P이면서 Q인 경우는?",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "~P이면서 Q에 해당하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "X선 360도 회전으로 3D 영상을 얻은 경우"
+              },
+              {
+                "id": "B",
+                "text": "MRI처럼 자기장을 이용하여 3D 단면 영상을 얻은 경우"
+              },
+              {
+                "id": "C",
+                "text": "X선을 한 방향에서만 쏘아 2D 영상을 얻은 경우"
+              },
+              {
+                "id": "D",
+                "text": "촬영 없이 영상을 얻은 경우"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "'일제강점기를 태평천하라 부르며 기득권층의 탐욕을 풍자하는 것'은 '식민지 시대 비판 문학'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "이 충분조건을 만족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "윤 직원이 독립운동에 헌신하는 장면"
+              },
+              {
+                "id": "B",
+                "text": "일제강점기의 군사 전략을 분석한 논문"
+              },
+              {
+                "id": "C",
+                "text": "윤 직원이 식민 통치에 순응하며 재산에만 집착하는 모습을 풍자적으로 그린 장면"
+              },
+              {
+                "id": "D",
+                "text": "자연의 아름다움을 묘사하는 시"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "'자음 창제에서 기본 글자 5개(ㄱ,ㄴ,ㅁ,ㅅ,ㅇ)를 발음 기관 모양으로 만든 것'은 '체계적 문자 설계'의 충분조건이다. 부적절한 것은?",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "다음 중 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'ㄱ': 혀뿌리가 목구멍을 막는 모양"
+              },
+              {
+                "id": "B",
+                "text": "'ㄴ': 혀끝이 윗잇몸에 닿는 모양"
+              },
+              {
+                "id": "C",
+                "text": "'ㅎ': 물결 모양에서 차용 (실제로는 목구멍 모양+가획)"
+              },
+              {
+                "id": "D",
+                "text": "'ㅁ': 입 모양"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "가획 원리이면 획을 더할수록 센 소리가 된다. ㄱ→ㅋ→ㄲ(병서)의 순서이다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "논리적으로 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "센 소리이면 가획이다. 'ㄲ'은 센 소리이다. 따라서 가획이다. (후건 긍정 — 부당: 병서일 수 있음)"
+              },
+              {
+                "id": "B",
+                "text": "가획이면 센 소리이다. 'ㅋ'은 'ㄱ'에 가획한 것이다. 따라서 'ㅋ'은 'ㄱ'보다 센 소리이다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "A와 B 모두 타당하다."
+              },
+              {
+                "id": "D",
+                "text": "B만 타당하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'X선을 360도 회전시키면(P) 3D 영상을 얻는다(Q)'. P→Q에서 타당한 추론은?",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "P→Q에서 타당한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "3D 영상을 못 얻었으므로 360도 회전하지 않았다. (후건 부정 — 대우, 타당)"
+              },
+              {
+                "id": "B",
+                "text": "360도 회전하지 않았으므로 3D 영상을 못 얻는다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "3D 영상을 얻었으므로 360도 회전했다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 B 모두 타당하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "태평천하에서 '윤 직원의 재산 집착'과 '식민 통치에 대한 순응'이 동시에 나타난다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "둘의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "재산 집착이 식민 통치를 유발했다."
+              },
+              {
+                "id": "B",
+                "text": "식민 통치가 끝나면 재산 집착도 사라진다."
+              },
+              {
+                "id": "C",
+                "text": "무관하다."
+              },
+              {
+                "id": "D",
+                "text": "식민 통치 체제가 기득권의 재산을 보호하는 구조여서, 재산 유지를 위해 식민 체제에 순응하는 구조적 관계이다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "CT 기술의 발전과 조기 질환 발견율이 동시에 증가하고 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "둘의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "조기 발견이 CT 기술을 발전시킨다."
+              },
+              {
+                "id": "B",
+                "text": "CT 기술이 발전하면 질환이 증가한다."
+              },
+              {
+                "id": "C",
+                "text": "무관하다."
+              },
+              {
+                "id": "D",
+                "text": "CT 해상도 향상이 이전에 보이지 않던 미세 병변을 감지하게 하여 조기 발견에 기여한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "훈민정음은 28자로, 자음 17자와 모음 11자로 구성된다. 현재 한글은 24자(자음 14 + 모음 10)이다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 훈민정음의 28자가 모두 현재까지 사용되고 있다. 반증 근거는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "현재 한글의 모음 수는 10개이다."
+              },
+              {
+                "id": "B",
+                "text": "현재 한글의 자음 수는 14개이다."
+              },
+              {
+                "id": "C",
+                "text": "현재 한글은 24자로, 아래아(ㆍ) 등 4개의 글자가 소멸하였으므로 모든 글자가 유지되지는 않았다."
+              },
+              {
+                "id": "D",
+                "text": "한글은 1443년에 창제되었다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "태평천하에서 윤 직원 영감은 제목처럼 세상이 태평하다고 믿지만, 독자는 그렇지 않음을 안다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 태평천하의 제목은 윤 직원의 관점을 그대로 반영한 것이다. 검증 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "작품 전체에서 제목이 윤 직원의 무지를 풍자하기 위한 아이러니인지, 아니면 실제로 태평한 세상을 묘사한 것인지를 분석한다."
+              },
+              {
+                "id": "B",
+                "text": "채만식의 다른 작품 제목을 나열한다."
+              },
+              {
+                "id": "C",
+                "text": "일제강점기의 기후 데이터를 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "윤 직원의 재산 규모를 확인한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

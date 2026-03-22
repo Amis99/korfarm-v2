@@ -1,0 +1,343 @@
+// Day 17 - 비문학 (NONFICTION) - 인공지능과 언어 모델
+const fs = require('fs');
+
+const p1 = "인공지능은 인간의 지적 능력을 기계로 구현하는 기술을 총칭한다. 초기 인공지능은 사람이 직접 규칙을 입력하는 방식이었으나, 데이터의 양이 폭발적으로 늘어나면서 기계가 스스로 규칙을 발견하는 기계 학습이 주류가 되었다. 기계 학습은 대량의 데이터 속에서 패턴을 찾아내어 새로운 입력에 대해 예측하거나 분류하는 능력을 갖추게 된다. 이 과정에서 특히 주목받는 것이 심층 학습, 곧 딥러닝이다. 딥러닝은 인간 뇌의 신경 세포를 본뜬 인공 신경망을 여러 겹으로 쌓아 올려, 데이터의 복잡한 특징을 단계별로 추출한다. 이미지 인식, 음성 인식, 자연어 처리 등 다양한 분야에서 딥러닝이 뛰어난 성과를 보이면서 인공지능은 비약적으로 발전하였다.";
+
+const p2 = "자연어 처리는 인간의 언어를 컴퓨터가 이해하고 생성할 수 있도록 하는 기술 분야이다. 과거에는 문법 규칙을 일일이 프로그래밍하는 방식이었으나, 딥러닝 등장 이후 대규모 텍스트 데이터를 학습하여 언어의 구조와 의미를 스스로 파악하는 모델이 개발되었다. 이 가운데 가장 큰 변화를 가져온 것이 대규모 언어 모델이다. 대규모 언어 모델은 수십억 개 이상의 매개변수를 가진 신경망으로, 방대한 양의 텍스트를 학습하여 문맥을 파악하고 그에 어울리는 다음 단어를 예측하는 방식으로 작동한다. 이 모델은 번역, 요약, 질의응답 등 다양한 언어 과제에서 인간에 버금가는 성능을 보여 주고 있다.";
+
+const p3 = "대규모 언어 모델의 핵심 구조는 트랜스포머이다. 트랜스포머는 입력된 문장의 각 단어가 다른 단어와 맺는 관계를 동시에 계산하는 주의 집중 메커니즘을 사용한다. 기존의 순환 신경망은 단어를 하나씩 순서대로 처리해야 했기 때문에 긴 문장에서 앞부분의 정보가 뒤로 갈수록 희미해지는 한계가 있었다. 반면 트랜스포머는 문장 전체를 한꺼번에 살펴보므로 먼 거리에 있는 단어 사이의 관계도 놓치지 않는다. 또한 병렬 처리가 가능하여 학습 속도가 크게 향상되었다. 이러한 구조적 장점 덕분에 트랜스포머는 현재 자연어 처리 분야의 사실상 표준 모델로 자리 잡았다.";
+
+const p4 = "인공지능 언어 모델의 발전은 사회 여러 분야에 깊은 영향을 미치고 있다. 교육 분야에서는 학생 개인에게 맞춤형 학습 자료를 제공하는 지능형 교사 역할이 기대되고, 의료 분야에서는 방대한 논문과 진료 기록을 분석하여 진단을 보조하는 데 활용된다. 그러나 한편으로는 잘못된 정보를 그럴듯하게 생성하는 환각 현상, 학습 데이터에 내재한 편향의 재생산, 개인 정보 유출 등의 윤리적 문제도 제기된다. 따라서 인공지능 기술을 올바르게 활용하기 위해서는 기술적 성능 향상과 함께 윤리적 기준을 마련하고, 사용자가 인공지능의 한계를 정확히 인식하는 태도가 필수적이다.";
+
+const paragraphs = [
+  { id: "p1", text: p1 },
+  { id: "p2", text: p2 },
+  { id: "p3", text: p3 },
+  { id: "p4", text: p4 }
+];
+
+const totalLen = p1.length + p2.length + p3.length + p4.length;
+console.log("총 글자 수:", totalLen);
+console.log("p1:", p1.length, "p2:", p2.length, "p3:", p3.length, "p4:", p4.length);
+
+function r(pid, text, searchStr) {
+  const start = text.indexOf(searchStr);
+  if (start === -1) throw new Error("NOT FOUND in " + pid + ": " + searchStr.substring(0, 30));
+  return { paragraphId: pid, start, end: start + searchStr.length };
+}
+
+const timeline = [
+  // p1
+  { stepId: "s1", highlight: { ranges: [r("p1", p1, "인공지능은 인간의 지적 능력을 기계로 구현하는 기술을 총칭한다.")] }, question: {
+    prompt: "첫 문장에서 인공지능의 정의로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "인간의 지적 능력을 기계로 구현하는 기술이다." },
+      { id: "B", text: "기계가 스스로 에너지를 생산하는 기술이다." },
+      { id: "C", text: "인간의 신체 능력을 기계로 대체하는 기술이다." },
+      { id: "D", text: "로봇이 감정을 느끼도록 하는 기술이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s2", highlight: { ranges: [r("p1", p1, "초기 인공지능은 사람이 직접 규칙을 입력하는 방식이었으나, 데이터의 양이 폭발적으로 늘어나면서 기계가 스스로 규칙을 발견하는 기계 학습이 주류가 되었다.")] }, question: {
+    prompt: "둘째 문장에서 인공지능 발전 방향의 변화로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "사람이 규칙을 입력하는 방식에서 기계가 스스로 규칙을 발견하는 기계 학습으로 바뀌었다." },
+      { id: "B", text: "기계 학습에서 사람이 직접 규칙을 입력하는 방식으로 돌아갔다." },
+      { id: "C", text: "데이터의 양이 줄어들면서 인공지능 발전이 멈추었다." },
+      { id: "D", text: "기계 학습은 처음부터 존재했으며 변화가 없었다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s3", highlight: { ranges: [r("p1", p1, "기계 학습은 대량의 데이터 속에서 패턴을 찾아내어 새로운 입력에 대해 예측하거나 분류하는 능력을 갖추게 된다.")] }, question: {
+    prompt: "셋째 문장에서 기계 학습의 핵심 능력으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "데이터 속 패턴을 찾아 새 입력에 대해 예측하거나 분류한다." },
+      { id: "B", text: "사람의 명령 없이 자율적으로 하드웨어를 설계한다." },
+      { id: "C", text: "데이터 없이도 스스로 학습하여 결론을 내린다." },
+      { id: "D", text: "기존 규칙을 반복 실행하는 것만 가능하다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s4", highlight: { ranges: [r("p1", p1, "이 과정에서 특히 주목받는 것이 심층 학습, 곧 딥러닝이다. 딥러닝은 인간 뇌의 신경 세포를 본뜬 인공 신경망을 여러 겹으로 쌓아 올려, 데이터의 복잡한 특징을 단계별로 추출한다.")] }, question: {
+    prompt: "넷째·다섯째 문장에서 딥러닝의 원리로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "인공 신경망을 여러 겹으로 쌓아 데이터의 복잡한 특징을 단계별로 추출한다." },
+      { id: "B", text: "하나의 신경망만 사용하여 모든 데이터를 한 번에 처리한다." },
+      { id: "C", text: "인간의 뇌를 직접 연결하여 데이터를 처리한다." },
+      { id: "D", text: "규칙을 사람이 직접 입력하여 특징을 분류한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s5", highlight: { ranges: [r("p1", p1, "이미지 인식, 음성 인식, 자연어 처리 등 다양한 분야에서 딥러닝이 뛰어난 성과를 보이면서 인공지능은 비약적으로 발전하였다.")] }, question: {
+    prompt: "마지막 문장에서 딥러닝이 성과를 보인 분야로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "이미지 인식, 음성 인식, 자연어 처리 등 다양한 분야이다." },
+      { id: "B", text: "오직 이미지 인식 분야에서만 성과를 보였다." },
+      { id: "C", text: "기계 조립과 건축 분야에서만 활용된다." },
+      { id: "D", text: "딥러닝은 아직 실용적인 성과를 내지 못했다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s6", highlight: { ranges: [{ paragraphId: "p1", start: 0, end: p1.length }] }, question: {
+    prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은?",
+    choices: [
+      { id: "A", text: "인공지능은 기계 학습과 딥러닝의 발전으로 다양한 분야에서 비약적으로 발전하였다." },
+      { id: "B", text: "인공지능은 여전히 사람이 규칙을 입력해야 작동하는 수준에 머물러 있다." },
+      { id: "C", text: "딥러닝은 인공지능과 별개의 기술로 서로 관련이 없다." },
+      { id: "D", text: "기계 학습은 데이터 없이 스스로 지식을 창출하는 기술이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p2
+  { stepId: "s7", highlight: { ranges: [r("p2", p2, "자연어 처리는 인간의 언어를 컴퓨터가 이해하고 생성할 수 있도록 하는 기술 분야이다.")] }, question: {
+    prompt: "첫 문장에서 자연어 처리의 정의로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "인간의 언어를 컴퓨터가 이해하고 생성할 수 있도록 하는 기술이다." },
+      { id: "B", text: "컴퓨터 프로그래밍 언어를 자동으로 만드는 기술이다." },
+      { id: "C", text: "인간이 기계어를 배워 컴퓨터와 소통하는 기술이다." },
+      { id: "D", text: "자연 환경에서 발생하는 소리를 녹음하는 기술이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s8", highlight: { ranges: [r("p2", p2, "과거에는 문법 규칙을 일일이 프로그래밍하는 방식이었으나, 딥러닝 등장 이후 대규모 텍스트 데이터를 학습하여 언어의 구조와 의미를 스스로 파악하는 모델이 개발되었다.")] }, question: {
+    prompt: "둘째 문장에서 자연어 처리 방식의 변화로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "문법 규칙 프로그래밍에서 대규모 텍스트 데이터를 학습하는 모델로 바뀌었다." },
+      { id: "B", text: "데이터 학습 방식에서 문법 규칙 프로그래밍으로 되돌아갔다." },
+      { id: "C", text: "자연어 처리 방식은 처음부터 지금까지 변함이 없다." },
+      { id: "D", text: "딥러닝은 자연어 처리와 전혀 관련이 없다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s9", highlight: { ranges: [r("p2", p2, "이 가운데 가장 큰 변화를 가져온 것이 대규모 언어 모델이다. 대규모 언어 모델은 수십억 개 이상의 매개변수를 가진 신경망으로, 방대한 양의 텍스트를 학습하여 문맥을 파악하고 그에 어울리는 다음 단어를 예측하는 방식으로 작동한다.")] }, question: {
+    prompt: "셋째·넷째 문장에서 대규모 언어 모델의 작동 방식으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "방대한 텍스트를 학습하여 문맥을 파악하고 다음 단어를 예측한다." },
+      { id: "B", text: "소수의 규칙만으로 모든 언어를 완벽히 이해한다." },
+      { id: "C", text: "매개변수 없이 텍스트를 그대로 복사한다." },
+      { id: "D", text: "문맥과 무관하게 무작위로 단어를 나열한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s10", highlight: { ranges: [r("p2", p2, "이 모델은 번역, 요약, 질의응답 등 다양한 언어 과제에서 인간에 버금가는 성능을 보여 주고 있다.")] }, question: {
+    prompt: "마지막 문장에서 대규모 언어 모델의 성능으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "번역, 요약, 질의응답 등에서 인간에 버금가는 성능을 보여 준다." },
+      { id: "B", text: "번역만 가능하고 다른 과제는 수행하지 못한다." },
+      { id: "C", text: "인간보다 항상 뛰어나며 실수가 전혀 없다." },
+      { id: "D", text: "아직 실용적인 수준에 이르지 못했다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s11", highlight: { ranges: [{ paragraphId: "p2", start: 0, end: p2.length }] }, question: {
+    prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은?",
+    choices: [
+      { id: "A", text: "자연어 처리는 딥러닝을 통해 대규모 언어 모델로 발전하여 다양한 과제에서 높은 성능을 보인다." },
+      { id: "B", text: "자연어 처리는 여전히 문법 규칙에 의존하며 발전이 더딘 분야이다." },
+      { id: "C", text: "대규모 언어 모델은 매개변수가 적을수록 성능이 좋아진다." },
+      { id: "D", text: "자연어 처리와 대규모 언어 모델은 서로 관련이 없는 별개의 기술이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p3
+  { stepId: "s12", highlight: { ranges: [r("p3", p3, "대규모 언어 모델의 핵심 구조는 트랜스포머이다.")] }, question: {
+    prompt: "첫 문장에서 대규모 언어 모델의 핵심 구조로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "트랜스포머이다." },
+      { id: "B", text: "순환 신경망이다." },
+      { id: "C", text: "규칙 기반 시스템이다." },
+      { id: "D", text: "의사결정 나무이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s13", highlight: { ranges: [r("p3", p3, "트랜스포머는 입력된 문장의 각 단어가 다른 단어와 맺는 관계를 동시에 계산하는 주의 집중 메커니즘을 사용한다.")] }, question: {
+    prompt: "둘째 문장에서 트랜스포머가 사용하는 핵심 메커니즘으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "각 단어가 다른 단어와 맺는 관계를 동시에 계산하는 주의 집중 메커니즘이다." },
+      { id: "B", text: "단어를 하나씩 순서대로 처리하는 순차 메커니즘이다." },
+      { id: "C", text: "문장의 첫 단어만 분석하는 초점 메커니즘이다." },
+      { id: "D", text: "무작위로 단어를 선택하는 확률 메커니즘이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s14", highlight: { ranges: [r("p3", p3, "기존의 순환 신경망은 단어를 하나씩 순서대로 처리해야 했기 때문에 긴 문장에서 앞부분의 정보가 뒤로 갈수록 희미해지는 한계가 있었다.")] }, question: {
+    prompt: "셋째 문장에서 순환 신경망의 한계로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "긴 문장에서 앞부분의 정보가 뒤로 갈수록 희미해진다." },
+      { id: "B", text: "짧은 문장만 처리할 수 있고 긴 문장은 입력이 불가능하다." },
+      { id: "C", text: "모든 단어를 동시에 처리하여 순서를 무시한다." },
+      { id: "D", text: "학습 속도가 너무 빨라 정확도가 떨어진다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s15", highlight: { ranges: [r("p3", p3, "반면 트랜스포머는 문장 전체를 한꺼번에 살펴보므로 먼 거리에 있는 단어 사이의 관계도 놓치지 않는다. 또한 병렬 처리가 가능하여 학습 속도가 크게 향상되었다.")] }, question: {
+    prompt: "넷째·다섯째 문장에서 트랜스포머의 장점으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "문장 전체를 한꺼번에 살펴보고 병렬 처리로 학습 속도가 향상되었다." },
+      { id: "B", text: "단어를 하나씩 처리하여 정확도가 매우 높다." },
+      { id: "C", text: "데이터가 적을수록 성능이 좋아진다." },
+      { id: "D", text: "먼 거리의 단어 관계는 무시하고 인접 단어만 분석한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s16", highlight: { ranges: [{ paragraphId: "p3", start: 0, end: p3.length }] }, question: {
+    prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은?",
+    choices: [
+      { id: "A", text: "트랜스포머는 주의 집중 메커니즘과 병렬 처리로 순환 신경망의 한계를 극복한 표준 모델이다." },
+      { id: "B", text: "순환 신경망이 트랜스포머보다 모든 면에서 우수하다." },
+      { id: "C", text: "트랜스포머는 이미지 처리 전용 모델로 언어와는 관련이 없다." },
+      { id: "D", text: "주의 집중 메커니즘은 성능이 낮아 실제로는 사용되지 않는다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p4
+  { stepId: "s17", highlight: { ranges: [r("p4", p4, "인공지능 언어 모델의 발전은 사회 여러 분야에 깊은 영향을 미치고 있다.")] }, question: {
+    prompt: "첫 문장이 말하는 내용으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "인공지능 언어 모델의 발전이 사회 여러 분야에 깊은 영향을 미치고 있다." },
+      { id: "B", text: "인공지능 언어 모델은 사회에 아무런 영향도 미치지 않는다." },
+      { id: "C", text: "언어 모델의 발전이 멈추어 사회적 영향이 줄고 있다." },
+      { id: "D", text: "인공지능은 오직 과학 분야에서만 활용된다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s18", highlight: { ranges: [r("p4", p4, "교육 분야에서는 학생 개인에게 맞춤형 학습 자료를 제공하는 지능형 교사 역할이 기대되고, 의료 분야에서는 방대한 논문과 진료 기록을 분석하여 진단을 보조하는 데 활용된다.")] }, question: {
+    prompt: "둘째 문장에서 인공지능 언어 모델의 활용 분야로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "교육에서는 맞춤형 학습 자료 제공, 의료에서는 진단 보조에 활용된다." },
+      { id: "B", text: "오직 교육 분야에서만 활용되고 의료에는 사용되지 않는다." },
+      { id: "C", text: "교육과 의료 모두에서 아직 활용 가능성이 없다." },
+      { id: "D", text: "의료 분야에서만 활용되며 교육에는 부적합하다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s19", highlight: { ranges: [r("p4", p4, "그러나 한편으로는 잘못된 정보를 그럴듯하게 생성하는 환각 현상, 학습 데이터에 내재한 편향의 재생산, 개인 정보 유출 등의 윤리적 문제도 제기된다.")] }, question: {
+    prompt: "셋째 문장에서 인공지능 언어 모델의 윤리적 문제로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "환각 현상, 편향 재생산, 개인 정보 유출 등이 제기된다." },
+      { id: "B", text: "인공지능에는 윤리적 문제가 전혀 존재하지 않는다." },
+      { id: "C", text: "환각 현상은 발생하지만 편향과 개인 정보 문제는 없다." },
+      { id: "D", text: "윤리적 문제는 이미 완전히 해결되었다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s20", highlight: { ranges: [r("p4", p4, "따라서 인공지능 기술을 올바르게 활용하기 위해서는 기술적 성능 향상과 함께 윤리적 기준을 마련하고, 사용자가 인공지능의 한계를 정확히 인식하는 태도가 필수적이다.")] }, question: {
+    prompt: "마지막 문장에서 강조하는 태도로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "윤리적 기준 마련과 인공지능의 한계를 정확히 인식하는 태도가 필요하다." },
+      { id: "B", text: "기술적 성능만 높이면 모든 문제가 자동으로 해결된다." },
+      { id: "C", text: "인공지능을 사용하지 않는 것이 최선의 방법이다." },
+      { id: "D", text: "사용자의 인식보다 법적 규제만이 중요하다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s21", highlight: { ranges: [{ paragraphId: "p4", start: 0, end: p4.length }] }, question: {
+    prompt: "넷째 문단의 중심 내용으로 가장 알맞은 것은?",
+    choices: [
+      { id: "A", text: "인공지능 언어 모델은 교육·의료 등에 활용되나 윤리적 문제도 있어 올바른 인식이 필요하다." },
+      { id: "B", text: "인공지능은 윤리적 문제가 없으므로 모든 분야에서 자유롭게 활용해야 한다." },
+      { id: "C", text: "인공지능 기술은 사회에 부정적 영향만 미치므로 중단해야 한다." },
+      { id: "D", text: "인공지능은 의료 분야에서만 유용하고 나머지 분야에서는 무용하다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }}
+];
+
+const recall = {
+  cards: [
+    { id: "c1", text: "인공지능은 기계 학습과 딥러닝을 거치며 비약적으로 발전하였다." },
+    { id: "c2", text: "딥러닝은 인공 신경망을 여러 겹으로 쌓아 복잡한 특징을 단계별로 추출한다." },
+    { id: "c3", text: "자연어 처리는 딥러닝 이후 대규모 언어 모델로 발전하였다." },
+    { id: "c4", text: "대규모 언어 모델은 문맥을 파악하고 다음 단어를 예측하는 방식으로 작동한다." },
+    { id: "c5", text: "트랜스포머는 주의 집중 메커니즘으로 먼 거리 단어 관계까지 파악한다." },
+    { id: "c6", text: "트랜스포머는 병렬 처리가 가능하여 순환 신경망의 한계를 극복했다." },
+    { id: "c7", text: "인공지능 언어 모델은 교육과 의료 등 다양한 분야에서 활용된다." },
+    { id: "c8", text: "환각 현상과 편향 등 윤리적 문제가 있어 올바른 인식과 기준이 필요하다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+const confirm = {
+  questions: [
+    { id: "q1",
+      prompt: "기계가 데이터에서 스스로 규칙을 발견하는 방식을 무엇이라 하나요?",
+      answerText: "기계 학습",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p1", p1, "기계 학습")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q2",
+      prompt: "인간 뇌의 신경 세포를 본뜬 구조를 여러 겹 쌓아 올리는 기술을 무엇이라 하나요?",
+      answerText: "딥러닝",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p1", p1, "딥러닝")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q3",
+      prompt: "인간의 언어를 컴퓨터가 이해하고 생성할 수 있도록 하는 기술 분야를 무엇이라 하나요?",
+      answerText: "자연어 처리",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p2", p2, "자연어 처리")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q4",
+      prompt: "대규모 언어 모델이 문맥을 파악한 뒤 하는 작업은 무엇인가요?",
+      answerText: "다음 단어를 예측",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p2", p2, "다음 단어를 예측")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q5",
+      prompt: "대규모 언어 모델의 핵심 구조인, 단어 사이 관계를 동시에 계산하는 모델의 이름은 무엇인가요?",
+      answerText: "트랜스포머",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p3", p3, "트랜스포머")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q6",
+      prompt: "트랜스포머가 사용하는 핵심 메커니즘의 이름은 무엇인가요?",
+      answerText: "주의 집중 메커니즘",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p3", p3, "주의 집중 메커니즘")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q7",
+      prompt: "인공지능이 잘못된 정보를 그럴듯하게 생성하는 현상을 무엇이라 하나요?",
+      answerText: "환각 현상",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p4", p4, "환각 현상")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q8",
+      prompt: "인공지능을 올바르게 활용하기 위해 기술적 성능 향상과 함께 마련해야 하는 것은 무엇인가요?",
+      answerText: "윤리적 기준",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p4", p4, "윤리적 기준")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true }
+  ]
+};
+
+const content = {
+  contentId: "dr-r2-017",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 2) Day 17 비문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_2",
+  schoolGradeRange: { min: 8, max: 9 },
+  area: "READING",
+  subArea: "NONFICTION",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 480,
+  assets: {},
+  payload: {
+    passage: { format: "TEXT", paragraphs },
+    intensive: { timeline },
+    recall,
+    confirm
+  }
+};
+
+const batch = {
+  content_type: "DAILY_READING",
+  level_id: "RUSSELL_2",
+  area: "READING",
+  sub_area: "NONFICTION",
+  day_index: 17,
+  module_key: "reading_training",
+  schema_version: "1.0",
+  content
+};
+
+const staticPath = "C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/frontend/public/daily-reading/russell2/017.json";
+fs.writeFileSync(staticPath, JSON.stringify(content, null, 2), 'utf8');
+console.log("017.json 저장 완료");
+
+const batchPath = "C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/generated/day17-batch.json";
+fs.writeFileSync(batchPath, JSON.stringify(batch, null, 2), 'utf8');
+console.log("day17-batch.json 저장 완료");

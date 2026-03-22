@@ -92,6 +92,9 @@ class TestQuestionEntity(
     @Column
     var passage: String? = null,
 
+    @Column(columnDefinition = "TEXT")
+    var stem: String? = null,
+
     @Column(nullable = false)
     var points: Int = 0,
 

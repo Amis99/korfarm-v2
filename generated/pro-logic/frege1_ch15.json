@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 15장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "기행문은 단순히 여행 일정을 기록하는 글이 아닙니다. 여행을 통해 세상을 넓게 보고 새로운 것을 배우는 경험을 기록으로 남기는 일입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'기행문은 단순 일정 기록이 아니다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "여행 일정만 적으면 충분하다"
+              },
+              {
+                "id": "B",
+                "text": "좋은 기행문에는 여정뿐 아니라 견문과 감상이 포함되어야 한다"
+              },
+              {
+                "id": "C",
+                "text": "기행문에는 감상이 필요 없다"
+              },
+              {
+                "id": "D",
+                "text": "기행문은 사실만 나열하면 된다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "안동 하회마을은 600년이 넘는 역사를 자랑합니다. 마을 이름 '하회'는 '강물이 휘돌아 간다'는 뜻입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'하회마을이 살아있는 박물관 같다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "박물관은 인공적이고 마을은 자연적이다"
+              },
+              {
+                "id": "B",
+                "text": "오래된 전통과 유물이 현재까지 보존되어 있어 역사를 직접 체험할 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "마을에는 박물관이 있다"
+              },
+              {
+                "id": "D",
+                "text": "모든 마을은 박물관과 같다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "기행문에는 여정, 견문, 감상이라는 세 가지 요소가 필수적입니다. 특히 감상이 중요합니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "기행문에서 감상을 빼고 여정과 견문만 적으면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글이 더 풍부해진다"
+              },
+              {
+                "id": "B",
+                "text": "여행의 의미와 깨달음이 전달되지 않아 단조로운 일정표가 된다"
+              },
+              {
+                "id": "C",
+                "text": "독자가 더 흥미를 느낀다"
+              },
+              {
+                "id": "D",
+                "text": "기행문이 더 좋아진다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "하회마을에서 하회별신굿탈놀이를 관람했습니다. 배우가 양반 탈을 쓰고 양반의 허세를 풍자하는 장면이 인상적이었습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "탈놀이 관람 경험을 기행문에 생생하게 기록하면 예상되는 효과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독자가 관심을 잃는다"
+              },
+              {
+                "id": "B",
+                "text": "독자가 마치 직접 관람한 것 같은 느낌을 받을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "글이 너무 길어져 지루해진다"
+              },
+              {
+                "id": "D",
+                "text": "사실 전달에 방해가 된다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "좋은 기행문에는 여정, 견문, 감상이 균형 있게 들어가야 합니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 좋은 기행문에는 감상이 포함되어야 한다. 소전제: 수진이의 기행문에는 감상이 없다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수진이의 기행문은 좋은 기행문이 아니다"
+              },
+              {
+                "id": "B",
+                "text": "수진이의 기행문은 완벽하다"
+              },
+              {
+                "id": "C",
+                "text": "감상은 기행문에 필요 없다"
+              },
+              {
+                "id": "D",
+                "text": "수진이가 감상을 쓸 필요가 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "여정은 글의 뼈대가 되며, '언제, 어디를 거쳐, 어디까지 갔는지'를 시간 순서대로 제시해야 합니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 여정은 시간 순서대로 써야 한다. 소전제: 민호가 기행문에서 도착지를 먼저 쓰고 출발지를 나중에 썼다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민호의 여정 서술은 올바른 순서이다"
+              },
+              {
+                "id": "B",
+                "text": "여정 순서는 상관없다"
+              },
+              {
+                "id": "C",
+                "text": "민호의 여정 서술은 시간 순서를 따르지 않았다"
+              },
+              {
+                "id": "D",
+                "text": "도착지를 먼저 쓰는 것이 더 좋다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "생생한 기행문을 쓰려면 여행 중 보고 들은 것(견문)을 자세히 기록해야 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'생생한 기행문을 위해 견문 기록이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "견문 기록 없이는 생생한 기행문을 쓸 수 없다"
+              },
+              {
+                "id": "B",
+                "text": "견문을 기록하면 반드시 생생한 기행문이 된다"
+              },
+              {
+                "id": "C",
+                "text": "견문과 기행문은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "감상만 있으면 충분하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "기행문에서 독자의 공감을 얻으려면 자신만의 감상을 솔직하게 표현해야 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'독자 공감을 위해 솔직한 감상이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "솔직한 감상을 쓰면 공감을 반드시 얻는다"
+              },
+              {
+                "id": "B",
+                "text": "사실만 나열하면 공감을 얻을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "감상과 공감은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "솔직한 감상 없이는 독자의 공감을 얻을 수 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "기행문에 여정, 견문, 감상을 모두 포함해야 합니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'좋은 기행문을 위해 세 요소가 필요하다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "본 것만 나열한 글"
+              },
+              {
+                "id": "B",
+                "text": "이동 경로만 자세히 적은 글"
+              },
+              {
+                "id": "C",
+                "text": "자신의 감상만 적은 글"
+              },
+              {
+                "id": "D",
+                "text": "서울에서 안동까지의 이동 경로, 하회마을에서 본 기와집과 탈놀이, 600년 역사를 느끼며 받은 감동을 모두 담은 글"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "하회마을에서 수백 년 된 기와집, 낙동강의 S자 곡류, 하회탈 공연 등을 보았습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'견문을 풍부하게 하려면 다양한 관찰이 필요하다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기와집의 모양과 나이를 관찰하기"
+              },
+              {
+                "id": "B",
+                "text": "낙동강의 물줄기를 직접 보고 기록하기"
+              },
+              {
+                "id": "C",
+                "text": "탈놀이 공연을 관람하고 배우의 연기를 관찰하기"
+              },
+              {
+                "id": "D",
+                "text": "여행지에 가지 않고 인터넷 사진만 보기"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "자신만의 감상을 솔직하게 담으면 독자의 마음을 움직이는 기행문이 됩니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'솔직한 감상을 담으면(P) 독자의 마음을 움직인다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독자의 마음이 움직이지 않았다면 솔직한 감상이 없었다"
+              },
+              {
+                "id": "B",
+                "text": "독자의 마음이 움직이면 감상이 있는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "솔직한 감상을 담으면서 독자의 마음이 움직이지 않는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "감상과 독자 반응은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "여행 중 메모를 해두면 나중에 기행문을 쓸 때 도움이 됩니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'메모를 하면(P) 기행문 쓰기가 쉬워진다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "메모와 기행문은 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "메모를 하지 않으면 기행문을 쓸 수 없다"
+              },
+              {
+                "id": "C",
+                "text": "기행문을 잘 썼다면 메모를 한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "기행문 쓰기가 어려웠다면 메모를 하지 않은 것이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "하회마을에서 느낀 '600년 전 조상들의 삶이 이 자리에 살아 숨 쉬는 것 같다'는 감상은 독자에게도 깊은 인상을 줍니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'깊은 감상을 쓰면 독자에게 감동을 준다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이동 수단만 기록한 글"
+              },
+              {
+                "id": "B",
+                "text": "'하회마을에 갔다 왔다'라고만 적은 일지"
+              },
+              {
+                "id": "C",
+                "text": "'옛 기와집을 보며 조상들의 지혜에 감탄했다'라는 솔직한 감상을 적은 기행문"
+              },
+              {
+                "id": "D",
+                "text": "감상 없이 사실만 나열한 보고서"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "마을 전체가 낙동강에 S자 모양으로 둘러싸여 마치 물 위에 떠 있는 연꽃 같았다는 견문 묘사가 인상적입니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'생생한 견문 묘사를 하면 독자가 현장감을 느낀다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "풍경 묘사 없이 이동 경로만 적은 글"
+              },
+              {
+                "id": "B",
+                "text": "'마을을 보았다'라고만 적은 글"
+              },
+              {
+                "id": "C",
+                "text": "'강이 마을을 감싸고 있었다'와 같은 비유적 표현으로 풍경을 그린 기행문"
+              },
+              {
+                "id": "D",
+                "text": "다른 사람의 기행문을 베낀 글"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'감상이 포함된 기행문이면(P) 독자가 감동을 받는다(Q)'가 참이고, 이 기행문에 감상이 포함되어 있습니다(P).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독자가 감동을 받을 것이다 (전건 긍정)"
+              },
+              {
+                "id": "B",
+                "text": "독자가 감동받았으므로 감상이 있다 (후건 긍정)"
+              },
+              {
+                "id": "C",
+                "text": "감상이 없으므로 감동받지 못한다 (전건 부정)"
+              },
+              {
+                "id": "D",
+                "text": "감동과 감상은 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'여정을 시간 순서대로 쓰면(P) 글의 흐름이 자연스럽다(Q)'가 참이고, 글의 흐름이 부자연스럽습니다(~Q).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시간 순서대로 쓴 것이다"
+              },
+              {
+                "id": "B",
+                "text": "시간 순서대로 쓰지 않은 것이다 (대우)"
+              },
+              {
+                "id": "C",
+                "text": "글의 흐름과 순서는 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "순서대로 쓰지 않아서 흐름이 좋다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "여행을 많이 다닌 학생일수록 기행문을 잘 쓴다는 조사 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'여행 경험'과 '기행문 능력'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "여행을 많이 다니면 기행문을 반드시 잘 쓴다"
+              },
+              {
+                "id": "B",
+                "text": "기행문을 잘 써서 여행을 많이 다니는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "둘 사이에 상관관계가 있으나, 글쓰기 연습이나 관찰력 등 다른 요인도 영향을 미친다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 아무 관계가 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "하회마을 방문 후 학생들의 전통문화에 대한 관심이 높아졌습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'현장 체험'과 '관심 증가'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "현장 체험만 하면 관심이 반드시 높아진다"
+              },
+              {
+                "id": "B",
+                "text": "관심이 높아서 체험한 것이다"
+              },
+              {
+                "id": "C",
+                "text": "둘은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "체험이 관심 증가에 기여했지만, 사전 학습이나 안내 등 다른 요인도 작용했을 수 있다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'기행문을 쓰면 여행 경험이 더 오래 기억된다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기행문을 쓴 학생과 쓰지 않은 학생의 여행 기억 지속 기간을 비교한다"
+              },
+              {
+                "id": "B",
+                "text": "기행문을 쓴 학생만 조사한다"
+              },
+              {
+                "id": "C",
+                "text": "기행문의 분량만 비교한다"
+              },
+              {
+                "id": "D",
+                "text": "여행을 가지 않은 학생을 조사한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'모든 여행은 기행문으로 남겨야 가치가 있다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기행문을 쓰지 않았지만 사진과 대화로 여행 경험을 충분히 공유하고 간직했다"
+              },
+              {
+                "id": "B",
+                "text": "기행문을 쓴 후 여행이 더 의미 있게 느껴졌다"
+              },
+              {
+                "id": "C",
+                "text": "기행문을 써서 좋은 성적을 받았다"
+              },
+              {
+                "id": "D",
+                "text": "기행문 쓰기가 여행의 필수 요소이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

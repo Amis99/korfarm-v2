@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 9장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "숲속에는 보이지 않는 식사 규칙이 있습니다. 풀을 메뚜기가 먹고, 메뚜기를 개구리가 먹고, 개구리를 뱀이 먹습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "먹이 사슬이 유지되려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 생물이 같은 먹이를 먹어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "각 단계의 생물이 적절한 수로 존재해야 한다."
+              },
+              {
+                "id": "C",
+                "text": "생산자가 없어도 된다."
+              },
+              {
+                "id": "D",
+                "text": "먹이 사슬에 단 하나의 생물만 있으면 된다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "만약 개구리가 사라지면 메뚜기가 너무 많아져서 숲속의 풀이 다 사라질지도 모릅니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "먹이 사슬의 중간 단계 생물이 사라지면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다른 생물이 저절로 그 역할을 대신한다."
+              },
+              {
+                "id": "B",
+                "text": "생태계가 더 안정된다."
+              },
+              {
+                "id": "C",
+                "text": "아무 변화가 없다."
+              },
+              {
+                "id": "D",
+                "text": "그 생물을 먹던 생물은 먹이가 없어지고, 그 생물이 먹던 생물은 늘어나 생태계 균형이 깨진다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "생산자는 스스로 양분을 만드는 식물입니다. 소비자는 다른 생물을 먹어서 양분을 얻는 동물입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'생산자는 스스로 양분을 만든다. 풀은 생산자이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "풀은 다른 생물을 먹어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "풀은 소비자이다."
+              },
+              {
+                "id": "C",
+                "text": "풀은 스스로 양분을 만든다."
+              },
+              {
+                "id": "D",
+                "text": "풀은 양분이 필요 없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "자연은 서로 먹고 먹히며 생태계 평형이라는 균형을 이루고 있습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'생태계 평형을 유지하려면 먹이 사슬이 유지되어야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "평형과 먹이 사슬은 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "먹이 사슬 없이도 평형이 유지된다."
+              },
+              {
+                "id": "C",
+                "text": "먹이 사슬이 끊어지면 생태계 평형이 무너진다."
+              },
+              {
+                "id": "D",
+                "text": "먹이 사슬이 끊어지면 평형이 더 좋아진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "분해자는 죽은 생물을 썩게 하여 흙으로 돌려보내는 생물입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'생태계가 순환하려면 분해자가 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "죽은 생물이 썩지 않고 영원히 남아 있었다."
+              },
+              {
+                "id": "B",
+                "text": "죽은 나뭇잎을 버섯과 곰팡이가 분해하여 흙의 양분으로 되돌렸다."
+              },
+              {
+                "id": "C",
+                "text": "분해자 없이도 흙이 양분으로 가득 찼다."
+              },
+              {
+                "id": "D",
+                "text": "동물이 죽은 생물을 전부 먹었다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "생산자인 풀이 충분하면 1차 소비자인 메뚜기도 잘 살 수 있습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'생산자가 충분하면 소비자도 살아갈 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "생산자가 충분한데 소비자가 못 사는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "생산자가 없어도 소비자가 잘 산다."
+              },
+              {
+                "id": "C",
+                "text": "소비자가 잘 살면 생산자가 충분한 것이다."
+              },
+              {
+                "id": "D",
+                "text": "생산자와 소비자는 관계없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "먹이 사슬은 생물들 사이에서 먹고 먹히는 관계가 사슬처럼 연결된 것입니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'먹이 사슬이 건강하면 생태계가 안정된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "풀-메뚜기-개구리-뱀이 적절한 수로 유지되어 숲이 건강하게 유지되었다."
+              },
+              {
+                "id": "B",
+                "text": "모든 동물이 같은 먹이를 먹어 생태계가 안정되었다."
+              },
+              {
+                "id": "C",
+                "text": "먹이 사슬이 끊어졌는데 생태계가 더 좋아졌다."
+              },
+              {
+                "id": "D",
+                "text": "생산자가 사라졌는데 평형이 유지되었다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "평형이란 어느 한쪽으로 치우치지 않고 고른 상태입니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'먹이 사슬이 끊어지면 생태계 평형이 무너진다. 호랑이가 멸종하면 먹이 사슬이 끊어진다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "먹이 사슬과 평형은 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "호랑이 멸종과 생태계는 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "호랑이가 멸종하면 생태계가 더 좋아진다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "호랑이가 멸종하면 생태계 평형이 무너질 수 있다. (맞는 추론)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "메뚜기가 많아지면 풀이 줄어들고, 풀이 줄어들면 메뚜기도 결국 줄어듭니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'포식자 수'와 '피식자 수'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서로 영향을 주며 변동하지만, 환경 요인도 함께 작용한다."
+              },
+              {
+                "id": "B",
+                "text": "포식자와 피식자는 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "포식자가 늘면 피식자도 반드시 늘어난다."
+              },
+              {
+                "id": "D",
+                "text": "피식자가 줄면 포식자가 반드시 늘어난다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "자연은 서로 먹고 먹히며 균형을 이루고 있습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'특정 동물이 사라지면 생태계 균형이 깨진다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동물의 색깔을 조사한다."
+              },
+              {
+                "id": "B",
+                "text": "특정 동물이 사라진 지역과 건재한 지역의 생태계 변화를 비교 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "나무의 높이만 측정한다."
+              },
+              {
+                "id": "D",
+                "text": "바람의 방향을 기록한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

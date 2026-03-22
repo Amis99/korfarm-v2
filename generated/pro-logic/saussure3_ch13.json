@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 13장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "공기, 물, 땅이 더러운 물질로 오염되면 생물들이 살기 어려워집니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "오염이 생물에 해로우려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오염이 없는 곳은 없어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "오염된 환경이 더 좋아야 한다."
+              },
+              {
+                "id": "C",
+                "text": "생물은 환경과 관계없어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "생물은 깨끗한 공기, 물, 땅에서만 건강하게 살 수 있어야 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "재활용이란 다 쓴 물건을 다시 쓸 수 있도록 가공하는 것입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "재활용을 많이 하면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자원이 낭비된다."
+              },
+              {
+                "id": "B",
+                "text": "쓰레기가 더 늘어난다."
+              },
+              {
+                "id": "C",
+                "text": "쓰레기가 줄어들고 자원이 절약된다."
+              },
+              {
+                "id": "D",
+                "text": "환경이 더 오염된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "환경 보호란 자연 환경이 파괴되지 않도록 보살피고 지키는 것입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'재활용은 환경 보호 방법이다. 유리병 분리배출은 재활용이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "분리배출과 환경 보호는 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "유리병은 재활용할 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "유리병 분리배출은 환경 보호에 도움이 된다."
+              },
+              {
+                "id": "D",
+                "text": "유리병은 환경을 오염시킨다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "지구 온난화를 막으려면 탄소 배출을 줄여야 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'지구를 보호하려면 탄소 배출을 줄여야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "탄소 배출을 늘려도 지구가 보호된다."
+              },
+              {
+                "id": "B",
+                "text": "탄소 배출을 줄이지 않으면 지구 보호가 어렵다."
+              },
+              {
+                "id": "C",
+                "text": "탄소와 지구 보호는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "탄소 배출을 줄이면 지구가 더 더워진다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "일회용품 사용을 줄이면 쓰레기를 줄일 수 있습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'환경을 보호하려면 일회용품을 줄여야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일회용 컵을 매일 더 많이 사용했다."
+              },
+              {
+                "id": "B",
+                "text": "텀블러를 가져가서 종이컵 사용을 줄였다."
+              },
+              {
+                "id": "C",
+                "text": "일회용품을 줄이지 않아도 환경이 깨끗해졌다."
+              },
+              {
+                "id": "D",
+                "text": "쓰레기를 강에 버렸다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "쓰레기를 올바르게 분리배출하면 재활용률이 높아집니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'분리배출을 잘하면 재활용률이 올라간다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "분리배출 없이도 재활용률이 올라간다."
+              },
+              {
+                "id": "B",
+                "text": "분리배출을 잘했는데 재활용률이 안 오르는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "분리배출과 재활용은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "분리배출하면 재활용률이 떨어진다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "나무를 심으면 공기가 깨끗해지고 동물들의 서식지가 만들어집니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'나무를 심으면 환경이 개선된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학교 운동장에 나무를 심었더니 공기가 맑아지고 새가 찾아왔다."
+              },
+              {
+                "id": "B",
+                "text": "나무를 심었더니 공기가 더 나빠졌다."
+              },
+              {
+                "id": "C",
+                "text": "나무를 심지 않아도 공기가 맑아졌다."
+              },
+              {
+                "id": "D",
+                "text": "나무를 베었더니 환경이 좋아졌다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "플라스틱은 자연에서 분해되는 데 수백 년이 걸립니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'분해가 오래 걸리는 물질은 환경에 해롭다. 플라스틱은 분해가 오래 걸린다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "플라스틱은 환경에 해롭다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "플라스틱은 환경에 좋다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "플라스틱은 빨리 분해된다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "분해 속도와 환경은 관계없다. (맞는 추론)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "산업화가 진행될수록 대기 오염 물질 배출이 늘어났습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'산업 발전'과 '환경 오염'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "산업 발전은 오염을 늘릴 수 있지만, 친환경 기술로 줄일 수도 있다."
+              },
+              {
+                "id": "B",
+                "text": "산업과 환경은 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "산업이 발전하면 오염이 반드시 줄어든다."
+              },
+              {
+                "id": "D",
+                "text": "오염이 심하면 산업이 발전한 것이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "환경 보호는 지구의 미래를 위해 반드시 실천해야 합니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'재활용 교육을 받은 학생이 분리배출을 더 잘한다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "쓰레기통 색깔을 바꿔본다."
+              },
+              {
+                "id": "B",
+                "text": "학생들의 키를 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "교실 온도를 측정한다."
+              },
+              {
+                "id": "D",
+                "text": "교육을 받은 학생과 안 받은 학생의 분리배출 정확도를 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 8장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "우리가 사는 지구는 잠시도 쉬지 않고 빙글빙글 돌고 있습니다. 해님을 바라보는 쪽은 낮이 됩니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "낮과 밤이 생기려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "달이 낮을 만든다."
+              },
+              {
+                "id": "B",
+                "text": "지구는 멈춰 있다."
+              },
+              {
+                "id": "C",
+                "text": "해는 밤에만 뜬다."
+              },
+              {
+                "id": "D",
+                "text": "지구가 스스로 돌고 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "아침이면 둥실 떠오르는 해님. 쨍쨍 비추는 따스한 빛 덕분에 꽃들도 활짝.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "해가 비치면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "밝아지고 따뜻해진다."
+              },
+              {
+                "id": "B",
+                "text": "밤이 된다."
+              },
+              {
+                "id": "C",
+                "text": "어두워진다."
+              },
+              {
+                "id": "D",
+                "text": "추워진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "'콩 심은 데 콩 나고 팥 심은 데 팥 난다'는 원인과 결과를 나타내는 속담입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'원인이 있으면 결과가 있다. 비가 오는 것은 원인이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과가 없다."
+              },
+              {
+                "id": "B",
+                "text": "비가 온 결과(옷이 젖는 등)가 생긴다."
+              },
+              {
+                "id": "C",
+                "text": "원인은 결과가 아니다."
+              },
+              {
+                "id": "D",
+                "text": "비는 원인이 아니다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "지구가 돌기 때문에 낮과 밤이 번갈아 찾아옵니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'낮이 되려면 지구가 해를 바라봐야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "밤에도 해를 바라본다."
+              },
+              {
+                "id": "B",
+                "text": "해를 안 바라봐도 낮이 된다."
+              },
+              {
+                "id": "C",
+                "text": "해를 안 바라보면 낮이 안 된다."
+              },
+              {
+                "id": "D",
+                "text": "해가 없어도 낮이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "낮을 밝혀 주는 해님은 우리에게 없어서는 안 될 소중한 존재입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'식물이 자라려면 햇빛이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "햇빛 없이 식물이 잘 자랐다."
+              },
+              {
+                "id": "B",
+                "text": "햇빛과 식물은 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "어두운 곳에서 식물이 더 잘 자랐다."
+              },
+              {
+                "id": "D",
+                "text": "햇빛이 있는 곳에서 꽃이 활짝 피었다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "밤이면 살며시 찾아오는 달님. 은은하게 비추는 부드러운 빛.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'밤이 되면 달이 보인다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "밤인데 달이 안 보이는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "달이 보이면 반드시 밤이다."
+              },
+              {
+                "id": "C",
+                "text": "낮에도 달이 보인다."
+              },
+              {
+                "id": "D",
+                "text": "밤에 달이 안 보인다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "비가 와서(원인) 옷이 젖었어요(결과).",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'원인이 있으면 결과가 생긴다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원인 없이 결과가 생겼다."
+              },
+              {
+                "id": "B",
+                "text": "비가 와서 우산을 썼다."
+              },
+              {
+                "id": "C",
+                "text": "원인이 있어도 결과가 없다."
+              },
+              {
+                "id": "D",
+                "text": "결과가 먼저 생기고 원인이 나왔다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "낮에는 해님, 밤에는 달님. 사이좋은 오누이처럼 세상을 밝게 비춰 줘.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'해가 비추면 낮이다. 지금 밝다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지금은 밤이다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "밝으면 밤이다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "지금은 낮일 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "낮에는 어둡다. (맞는 추론)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "해가 비추는 시간이 길면 날씨가 따뜻하다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'해가 오래 비추는 날 사람들이 더 활동적이었다.' 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "해가 활동의 원인이다."
+              },
+              {
+                "id": "B",
+                "text": "활동적이면 해가 뜬다."
+              },
+              {
+                "id": "C",
+                "text": "전혀 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "밝고 따뜻해서 관련 있지만 다른 이유도 있을 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "지구는 매일 스스로 돌기 때문에 낮과 밤이 번갈아 옵니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'지구가 도는 속도가 바뀌면 낮밤 길이가 달라진다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지구의 회전 속도와 낮밤 시간의 관계를 과학적으로 조사한다."
+              },
+              {
+                "id": "B",
+                "text": "지구의 색깔을 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "달의 모양만 관찰한다."
+              },
+              {
+                "id": "D",
+                "text": "지구의 크기를 잰다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

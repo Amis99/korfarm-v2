@@ -1,0 +1,603 @@
+// Day 8 - 문학 (LITERATURE) 생성 스크립트
+const fs = require('fs');
+const path = require('path');
+
+// === 지문 정의 (1100자 ±50 목표) ===
+const paragraphs = [
+  {
+    id: "p1",
+    text: "겨울 방학 마지막 날, 민준이는 방을 정리하다가 책상 서랍 깊숙한 곳에서 오래된 편지 한 통을 발견했다. 누렇게 바랜 편지지를 조심스럽게 펼치자, 그리운 할아버지의 낯익은 글씨가 눈에 들어왔다. 할아버지는 삼 년 전 봄에 조용히 세상을 떠나셨는데, 편지에는 민준이가 초등학교에 입학하던 해에 쓴 날짜가 또박또박 적혀 있었다. 편지의 첫 문장은 이러했다. \"민준아, 네가 오늘 교문 앞에서 활짝 웃으며 손을 흔들던 모습을 할아버지는 영원히 잊지 못할 거란다.\" 그 문장을 읽는 순간, 민준이는 가슴 한편이 뜨거워지는 것을 느꼈다. 그때의 기억은 아련하지만, 할아버지의 크고 따뜻한 손을 꼭 잡고 학교 정문까지 함께 걸어갔던 장면만큼은 아직도 선명하게 남아 있었다."
+  },
+  {
+    id: "p2",
+    text: "편지는 계속 이어졌다. \"학교에 가면 새로운 친구들을 만나게 될 거야. 처음에는 서로 낯설고 어색하겠지만, 마음을 열고 먼저 다가가면 금세 친해질 수 있단다. 할아버지도 어린 시절에 전학을 간 적이 있어서, 아무도 모르는 교실에 혼자 앉아 있던 그 외로운 기분을 잘 안단다. 그때 옆자리 친구가 먼저 말을 걸어 주었고, 그 친구와 할아버지는 평생을 함께하는 깊은 우정을 나누었단다.\" 민준이는 할아버지가 이렇게 다정하고 긴 이야기를 정성껏 써 두셨다는 사실에 놀라면서도, 어딘가 코끝이 찡해졌다. 편지를 읽으며 할아버지가 자신을 얼마나 깊이 아끼고 사랑하셨는지 새삼 깨닫게 되었기 때문이다."
+  },
+  {
+    id: "p3",
+    text: "편지의 마지막 부분에는 따뜻한 당부가 적혀 있었다. \"힘든 일이 생기더라도 절대 포기하지 말렴. 비가 내린 뒤에야 무지개가 뜨는 것처럼, 어려운 시간 뒤에는 반드시 좋은 날이 찾아온단다. 할아버지는 언제나 네 곁에서 응원하고 있을 거야.\" 민준이는 편지를 가슴에 꼭 안았다. 비록 할아버지는 이제 더 이상 곁에 계시지 않지만, 편지 속의 따뜻한 말씀은 마치 할아버지가 바로 옆에 앉아서 직접 말씀하시는 것처럼 생생하게 느껴졌다. 민준이는 조용히 눈물을 닦고 편지를 다시 서랍에 소중히 넣었다. 그리고 새 학기를 맞이할 준비를 하면서, 할아버지의 당부처럼 앞으로 어떤 어려움이 와도 결코 포기하지 않겠다고 마음속으로 단단히 다짐했다."
+  }
+];
+
+// 글자 수 확인
+const totalChars = paragraphs.reduce((sum, p) => sum + p.text.length, 0);
+console.log(`총 글자 수: ${totalChars}`);
+if (totalChars < 1050 || totalChars > 1150) {
+  console.warn(`경고: 목표 범위(1050~1150)를 벗어납니다.`);
+}
+
+// === 유틸리티 함수 ===
+function findRange(paragraphId, searchText) {
+  const para = paragraphs.find(p => p.id === paragraphId);
+  if (!para) throw new Error(`문단 ${paragraphId}을 찾을 수 없습니다.`);
+  const start = para.text.indexOf(searchText);
+  if (start === -1) throw new Error(`"${searchText}"을(를) ${paragraphId}에서 찾을 수 없습니다.`);
+  return { paragraphId, start, end: start + searchText.length };
+}
+
+function sentenceRange(paragraphId, startText, endText) {
+  const para = paragraphs.find(p => p.id === paragraphId);
+  if (!para) throw new Error(`문단 ${paragraphId}을 찾을 수 없습니다.`);
+  const start = para.text.indexOf(startText);
+  if (start === -1) throw new Error(`시작:"${startText}"을(를) ${paragraphId}에서 찾을 수 없습니다.`);
+  const endIdx = para.text.indexOf(endText, start);
+  if (endIdx === -1) throw new Error(`끝:"${endText}"을(를) ${paragraphId}에서 찾을 수 없습니다 (시작위치:${start})`);
+  return { paragraphId, start, end: endIdx + endText.length };
+}
+
+function fullParagraphRange(paragraphId) {
+  const para = paragraphs.find(p => p.id === paragraphId);
+  return { paragraphId, start: 0, end: para.text.length };
+}
+
+// === 문장 경계 계산 ===
+// p1 문장들
+const p1s1 = sentenceRange("p1", "겨울 방학 마지막 날,", "발견했다.");
+const p1s2 = sentenceRange("p1", "누렇게 바랜 편지지를", "들어왔다.");
+const p1s3 = sentenceRange("p1", "할아버지는 삼 년 전", "있었다.");
+const p1s4 = sentenceRange("p1", "편지의 첫 문장은", "이러했다.");
+const p1s5 = sentenceRange("p1", "\"민준아,", "거란다.\"");
+const p1s6 = sentenceRange("p1", "그 문장을 읽는", "느꼈다.");
+const p1s7 = sentenceRange("p1", "그때의 기억은", "있었다.");
+
+// p2 문장들
+const p2s1 = sentenceRange("p2", "편지는 계속 이어졌다.", "이어졌다.");
+const p2s2 = sentenceRange("p2", "\"학교에 가면", "있단다.");
+const p2s3 = sentenceRange("p2", "할아버지도 어린 시절에", "안단다.");
+const p2s4 = sentenceRange("p2", "그때 옆자리 친구가", "나누었단다.\"");
+const p2s5 = sentenceRange("p2", "민준이는 할아버지가", "찡해졌다.");
+const p2s6 = sentenceRange("p2", "편지를 읽으며", "때문이다.");
+
+// p3 문장들
+const p3s1 = sentenceRange("p3", "편지의 마지막 부분에는", "있었다.");
+const p3s2 = sentenceRange("p3", "\"힘든 일이", "말렴.");
+const p3s3 = sentenceRange("p3", "비가 내린 뒤에야", "찾아온단다.");
+const p3s4 = sentenceRange("p3", "할아버지는 언제나", "거야.\"");
+const p3s5 = sentenceRange("p3", "민준이는 편지를 가슴에", "안았다.");
+const p3s6 = sentenceRange("p3", "비록 할아버지는", "느껴졌다.");
+const p3s7 = sentenceRange("p3", "민준이는 조용히", "넣었다.");
+const p3s8 = sentenceRange("p3", "그리고 새 학기를", "다짐했다.");
+
+console.log("=== 문장 범위 검증 ===");
+const allRanges = {
+  p1: [p1s1, p1s2, p1s3, p1s4, p1s5, p1s6, p1s7],
+  p2: [p2s1, p2s2, p2s3, p2s4, p2s5, p2s6],
+  p3: [p3s1, p3s2, p3s3, p3s4, p3s5, p3s6, p3s7, p3s8]
+};
+for (const [pId, ranges] of Object.entries(allRanges)) {
+  ranges.forEach((r, i) => {
+    const para = paragraphs.find(p => p.id === pId);
+    const text = para.text.substring(r.start, Math.min(r.end, r.start + 25));
+    console.log(`${pId} s${i+1}: [${r.start}, ${r.end}] "${text}..."`);
+  });
+}
+
+// === intensive timeline ===
+const timeline = [
+  // p1 문장별
+  {
+    stepId: "s1", highlight: { ranges: [p1s1] },
+    question: {
+      prompt: "민준이가 발견한 것으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "방을 정리하다가 책상 서랍에서 오래된 편지를 발견했다." },
+        { id: "B", text: "거실을 청소하다가 책장에서 오래된 일기장을 발견했다." },
+        { id: "C", text: "학교 사물함을 정리하다가 친구의 생일 카드를 발견했다." },
+        { id: "D", text: "다락방을 정리하다가 오래된 사진 앨범을 발견했다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s2", highlight: { ranges: [p1s2] },
+    question: {
+      prompt: "편지지를 펼쳤을 때 눈에 들어온 것으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "그리운 할아버지의 낯익은 글씨가 눈에 들어왔다." },
+        { id: "B", text: "할머니가 그려 놓은 풍경화가 눈에 들어왔다." },
+        { id: "C", text: "아버지가 적어 놓은 전화번호가 눈에 들어왔다." },
+        { id: "D", text: "어머니가 쓴 장 볼 목록이 눈에 들어왔다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s3", highlight: { ranges: [p1s3] },
+    question: {
+      prompt: "편지에 적힌 날짜에 대한 설명으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "민준이가 초등학교에 입학하던 해에 쓴 날짜가 적혀 있었다." },
+        { id: "B", text: "할아버지가 돌아가시기 직전의 날짜가 적혀 있었다." },
+        { id: "C", text: "민준이가 태어난 해의 날짜가 적혀 있었다." },
+        { id: "D", text: "가족 여행을 떠나던 날의 날짜가 적혀 있었다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s4", highlight: { ranges: [p1s4] },
+    question: {
+      prompt: "이 문장이 알려 주는 내용으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "편지의 첫 문장 내용을 소개하려는 것이다." },
+        { id: "B", text: "편지가 여기서 끝났다는 것이다." },
+        { id: "C", text: "민준이가 답장을 쓰기 시작했다는 것이다." },
+        { id: "D", text: "편지에 그림이 그려져 있다는 것이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s5", highlight: { ranges: [p1s5] },
+    question: {
+      prompt: "할아버지가 잊지 못한다고 한 민준이의 모습으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "교문 앞에서 활짝 웃으며 손을 흔들던 모습이다." },
+        { id: "B", text: "교실에서 조용히 책을 읽고 있던 모습이다." },
+        { id: "C", text: "운동장에서 친구들과 달리기를 하던 모습이다." },
+        { id: "D", text: "집에서 할아버지에게 노래를 불러 드리던 모습이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s6", highlight: { ranges: [p1s6] },
+    question: {
+      prompt: "편지의 첫 문장을 읽은 민준이의 반응으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "가슴 한편이 뜨거워지는 것을 느꼈다." },
+        { id: "B", text: "글씨를 읽을 수 없어서 답답함을 느꼈다." },
+        { id: "C", text: "편지 내용이 재미없어서 서랍에 다시 넣었다." },
+        { id: "D", text: "빨리 읽고 놀러 나가고 싶은 마음이 들었다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s7", highlight: { ranges: [p1s7] },
+    question: {
+      prompt: "민준이가 아직도 선명하게 기억하는 장면으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "할아버지의 따뜻한 손을 잡고 학교 정문까지 걸어간 장면이다." },
+        { id: "B", text: "할아버지와 함께 놀이공원에서 놀았던 장면이다." },
+        { id: "C", text: "할아버지가 생일 선물을 주시던 장면이다." },
+        { id: "D", text: "할아버지와 함께 영화관에 갔던 장면이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p1 중심내용
+  {
+    stepId: "s8", highlight: { ranges: [fullParagraphRange("p1")] },
+    question: {
+      prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "민준이가 돌아가신 할아버지의 편지를 발견하고 입학 때의 따뜻한 기억을 떠올렸다." },
+        { id: "B", text: "민준이는 겨울 방학에 할아버지 댁을 방문하여 즐거운 시간을 보냈다." },
+        { id: "C", text: "민준이는 책상 서랍을 정리하다가 성적표를 발견하여 놀랐다." },
+        { id: "D", text: "할아버지는 민준이에게 초등학교 입학 선물로 가방을 사 주셨다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p2 문장별
+  {
+    stepId: "s9", highlight: { ranges: [p2s1] },
+    question: {
+      prompt: "이 문장이 알려 주는 내용으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "편지의 내용이 계속 이어진다는 것이다." },
+        { id: "B", text: "편지가 여기서 끝났다는 것이다." },
+        { id: "C", text: "새로운 편지를 하나 더 발견했다는 것이다." },
+        { id: "D", text: "민준이가 답장을 쓰기 시작했다는 것이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s10", highlight: { ranges: [p2s2] },
+    question: {
+      prompt: "할아버지가 말씀하신 친구 사귀기 방법으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "마음을 열고 먼저 다가가면 금세 친해질 수 있다고 하셨다." },
+        { id: "B", text: "혼자서 조용히 기다리면 친구가 먼저 올 것이라고 하셨다." },
+        { id: "C", text: "선생님께 부탁하여 친구를 소개받으라고 하셨다." },
+        { id: "D", text: "선물을 준비해서 나누어 주면 된다고 하셨다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s11", highlight: { ranges: [p2s3] },
+    question: {
+      prompt: "할아버지의 어린 시절 경험으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "전학을 가서 아무도 모르는 교실에 혼자 앉아 있었다." },
+        { id: "B", text: "같은 학교에 계속 다녀서 친구가 아주 많았다." },
+        { id: "C", text: "공부를 잘하여 매번 반장으로 뽑히셨다." },
+        { id: "D", text: "운동을 좋아해서 학교 대표 선수가 되셨다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s12", highlight: { ranges: [p2s4] },
+    question: {
+      prompt: "할아버지와 옆자리 친구의 관계에 대한 설명으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "옆자리 친구가 먼저 말을 걸어 주어 평생 깊은 우정을 나누었다." },
+        { id: "B", text: "옆자리 친구와 처음부터 사이가 좋지 않았다." },
+        { id: "C", text: "옆자리 친구가 곧 다른 학교로 전학을 갔다." },
+        { id: "D", text: "할아버지가 먼저 말을 걸었지만 친구가 대답하지 않았다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s13", highlight: { ranges: [p2s5] },
+    question: {
+      prompt: "민준이가 편지를 읽으며 느낀 감정으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "할아버지의 다정한 이야기에 놀라면서도 코끝이 찡해졌다." },
+        { id: "B", text: "할아버지의 이야기가 지루해서 읽기 싫어졌다." },
+        { id: "C", text: "편지 내용이 무서워서 울음을 터뜨렸다." },
+        { id: "D", text: "할아버지의 이야기가 재미있어서 큰 소리로 웃었다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s14", highlight: { ranges: [p2s6] },
+    question: {
+      prompt: "민준이의 코끝이 찡해진 까닭으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "할아버지가 자신을 얼마나 깊이 아끼고 사랑하셨는지 깨달았기 때문이다." },
+        { id: "B", text: "편지의 글씨가 너무 작아서 눈이 아팠기 때문이다." },
+        { id: "C", text: "할아버지의 전학 이야기가 슬펐기 때문이다." },
+        { id: "D", text: "방에 찬바람이 들어와서 코가 시려웠기 때문이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p2 중심내용
+  {
+    stepId: "s15", highlight: { ranges: [fullParagraphRange("p2")] },
+    question: {
+      prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "할아버지는 친구 사귀기에 대한 조언을 담았고, 민준이는 그 사랑을 새삼 느꼈다." },
+        { id: "B", text: "민준이는 할아버지의 옛 친구에게 연락하여 이야기를 나누었다." },
+        { id: "C", text: "할아버지는 민준이에게 공부를 열심히 하라는 당부를 남기셨다." },
+        { id: "D", text: "민준이는 편지를 읽다가 잠이 들어 할아버지 꿈을 꾸었다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p3 문장별
+  {
+    stepId: "s16", highlight: { ranges: [p3s1] },
+    question: {
+      prompt: "편지의 마지막 부분에 담긴 내용으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "따뜻한 당부가 적혀 있었다." },
+        { id: "B", text: "할아버지의 일상 이야기가 적혀 있었다." },
+        { id: "C", text: "할아버지가 좋아하는 음식 목록이 적혀 있었다." },
+        { id: "D", text: "할아버지가 여행했던 장소 목록이 적혀 있었다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s17", highlight: { ranges: [p3s2] },
+    question: {
+      prompt: "할아버지가 민준이에게 당부한 내용으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "힘든 일이 생기더라도 절대 포기하지 말라고 하셨다." },
+        { id: "B", text: "매일 운동을 해서 몸을 건강하게 하라고 하셨다." },
+        { id: "C", text: "항상 일등을 해서 좋은 학교에 가라고 하셨다." },
+        { id: "D", text: "집안일을 열심히 도와야 한다고 하셨다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s18", highlight: { ranges: [p3s3] },
+    question: {
+      prompt: "할아버지가 비유적으로 표현한 내용으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "비가 내린 뒤에 무지개가 뜨듯 어려움 뒤에 좋은 날이 온다는 것이다." },
+        { id: "B", text: "비가 오면 밖에 나가지 말고 집에 있어야 한다는 것이다." },
+        { id: "C", text: "무지개를 보려면 높은 산에 올라가야 한다는 것이다." },
+        { id: "D", text: "비가 오는 날에는 우산을 꼭 챙겨야 한다는 것이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s19", highlight: { ranges: [p3s4] },
+    question: {
+      prompt: "할아버지가 마지막으로 전한 말로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "언제나 민준이 곁에서 응원하고 있겠다고 하셨다." },
+        { id: "B", text: "다음에 만나면 선물을 사 주겠다고 하셨다." },
+        { id: "C", text: "할아버지 댁에 자주 놀러 오라고 하셨다." },
+        { id: "D", text: "편지를 읽으면 바로 전화하라고 하셨다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s20", highlight: { ranges: [p3s5] },
+    question: {
+      prompt: "민준이가 편지를 읽고 난 뒤 한 행동으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "편지를 가슴에 꼭 안았다." },
+        { id: "B", text: "편지를 접어서 쓰레기통에 버렸다." },
+        { id: "C", text: "편지를 친구에게 보여 주러 밖으로 나갔다." },
+        { id: "D", text: "편지를 복사하여 벽에 붙여 놓았다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s21", highlight: { ranges: [p3s6] },
+    question: {
+      prompt: "편지 속 말씀이 민준이에게 어떻게 느껴졌는지 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "할아버지가 바로 옆에 앉아서 직접 말씀하시는 것처럼 느껴졌다." },
+        { id: "B", text: "먼 나라에서 보내온 소포를 여는 것처럼 느껴졌다." },
+        { id: "C", text: "오래된 역사책을 읽는 것처럼 멀게 느껴졌다." },
+        { id: "D", text: "누군가가 장난으로 쓴 편지처럼 느껴졌다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s22", highlight: { ranges: [p3s7] },
+    question: {
+      prompt: "민준이가 편지를 보관한 방법으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "눈물을 닦고 편지를 다시 서랍에 소중히 넣었다." },
+        { id: "B", text: "편지를 액자에 넣어 책상 위에 놓았다." },
+        { id: "C", text: "편지를 봉투에 넣어 우체통에 넣었다." },
+        { id: "D", text: "편지를 어머니께 보여 드리고 맡겼다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s23", highlight: { ranges: [p3s8] },
+    question: {
+      prompt: "민준이가 마음속으로 다짐한 것으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "앞으로 어떤 어려움이 와도 결코 포기하지 않겠다고 다짐했다." },
+        { id: "B", text: "할아버지처럼 편지를 많이 쓰겠다고 다짐했다." },
+        { id: "C", text: "매일 서랍에서 편지를 꺼내 읽겠다고 다짐했다." },
+        { id: "D", text: "새 학기에 반장 선거에 반드시 나가겠다고 다짐했다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p3 중심내용
+  {
+    stepId: "s24", highlight: { ranges: [fullParagraphRange("p3")] },
+    question: {
+      prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "할아버지의 당부를 읽은 민준이는 편지를 소중히 간직하며 포기하지 않겠다고 다짐했다." },
+        { id: "B", text: "민준이는 편지가 너무 슬퍼서 새 학기를 맞이하고 싶지 않았다." },
+        { id: "C", text: "할아버지는 민준이에게 비 오는 날에는 집에만 있으라고 당부하셨다." },
+        { id: "D", text: "민준이는 편지를 버리고 새로운 일기를 쓰기로 마음먹었다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  }
+];
+
+// === recall 카드 (정확히 8장) ===
+const recall = {
+  cards: [
+    { id: "c1", text: "겨울 방학 마지막 날, 민준이는 책상 서랍에서 돌아가신 할아버지의 편지를 발견했다." },
+    { id: "c2", text: "편지에는 입학날 교문 앞에서 웃으며 손 흔들던 모습을 잊지 못한다는 내용이 있었다." },
+    { id: "c3", text: "할아버지는 마음을 열고 먼저 다가가면 친구와 친해질 수 있다고 조언하셨다." },
+    { id: "c4", text: "할아버지도 전학 가서 외로웠지만 옆자리 친구 덕분에 평생 우정을 나누셨다." },
+    { id: "c5", text: "민준이는 할아버지가 자신을 깊이 아끼셨다는 것을 새삼 깨달으며 코끝이 찡해졌다." },
+    { id: "c6", text: "편지 마지막에는 힘든 일이 있어도 절대 포기하지 말라는 당부가 적혀 있었다." },
+    { id: "c7", text: "비가 내린 뒤 무지개가 뜨듯 어려움 뒤에 좋은 날이 온다는 격려의 말씀이 담겨 있었다." },
+    { id: "c8", text: "민준이는 편지를 소중히 간직하고 어떤 어려움에도 포기하지 않겠다고 다짐했다." }
+  ],
+  correctOrder: ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
+  seedPenalty: 1
+};
+
+// === confirm 문항 (7문항) ===
+const confirmQuestions = [
+  {
+    id: "q1",
+    prompt: "민준이가 편지를 발견한 장소는 어디인가요?",
+    answerText: "책상 서랍",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", "책상 서랍")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q2",
+    prompt: "할아버지가 영원히 잊지 못한다고 한 장소는 어디인가요?",
+    answerText: "교문",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", "교문")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q3",
+    prompt: "할아버지가 어린 시절 전학 가서 먼저 말을 걸어 준 사람은 누구인가요?",
+    answerText: "옆자리 친구",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "옆자리 친구")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q4",
+    prompt: "할아버지가 비유에서 비가 내린 뒤에 뜬다고 한 것은 무엇인가요?",
+    answerText: "무지개",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "무지개")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q5",
+    prompt: "할아버지가 민준이에게 힘든 일이 있어도 하지 말라고 한 것은 무엇인가요?",
+    answerText: "포기",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "포기하지 말렴")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q6",
+    prompt: "할아버지와 옆자리 친구가 평생을 함께하며 나눈 것은 무엇인가요?",
+    answerText: "우정",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "우정")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q7",
+    prompt: "민준이가 편지를 마지막에 소중히 넣어 둔 곳은 어디인가요?",
+    answerText: "서랍",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "서랍에 소중히")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  }
+];
+
+// === 최종 JSON 조립 ===
+const content = {
+  contentId: "dr-r1-008",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 1) Day 8 문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_1",
+  schoolGradeRange: { min: 7, max: 8 },
+  area: "READING",
+  subArea: "LITERATURE",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 300,
+  assets: {},
+  payload: {
+    passage: { format: "TEXT", paragraphs },
+    intensive: { timeline },
+    recall,
+    confirm: { questions: confirmQuestions }
+  }
+};
+
+// === 검증 ===
+console.log("\n=== 최종 검증 ===");
+console.log(`총 글자 수: ${totalChars}`);
+console.log(`intensive steps: ${timeline.length}`);
+console.log(`recall cards: ${recall.cards.length}`);
+console.log(`confirm questions: ${confirmQuestions.length}`);
+
+let errors = 0;
+timeline.forEach((step) => {
+  step.highlight.ranges.forEach(r => {
+    const para = paragraphs.find(p => p.id === r.paragraphId);
+    if (r.start < 0 || r.end > para.text.length || r.start >= r.end) {
+      console.error(`ERROR step ${step.stepId}: 범위 [${r.start}, ${r.end}] 오류 (문단길이: ${para.text.length})`);
+      errors++;
+    }
+  });
+});
+
+confirmQuestions.forEach((q, i) => {
+  q.answerRanges.forEach(r => {
+    const para = paragraphs.find(p => p.id === r.paragraphId);
+    if (r.start < 0 || r.end > para.text.length || r.start >= r.end) {
+      console.error(`ERROR confirm q${i+1}: 범위 [${r.start}, ${r.end}] 오류 (문단길이: ${para.text.length})`);
+      errors++;
+    }
+    const actual = para.text.substring(r.start, r.end);
+    console.log(`  confirm q${i+1}: "${q.answerText}" → [${r.start}, ${r.end}] = "${actual}"`);
+  });
+});
+
+if (errors > 0) {
+  console.error(`\n${errors}개의 오류 발생. 파일 미생성.`);
+  process.exit(1);
+}
+
+// === 파일 저장 ===
+const staticPath = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'russell1', '008.json');
+fs.writeFileSync(staticPath, JSON.stringify(content, null, 2), 'utf-8');
+console.log(`\nstatic 파일 저장: ${staticPath}`);
+
+const batchPath = path.join(__dirname, '..', 'generated', 'daily-batch-reading-russell1.json');
+const batch = JSON.parse(fs.readFileSync(batchPath, 'utf-8'));
+batch.items[7] = {
+  content_type: "DAILY_READING",
+  level_id: "RUSSELL_1",
+  area: "READING",
+  sub_area: "LITERATURE",
+  day_index: 8,
+  module_key: "reading_training",
+  schema_version: "1.0",
+  content
+};
+fs.writeFileSync(batchPath, JSON.stringify(batch, null, 2), 'utf-8');
+console.log(`배치 파일 업데이트: items[7]`);
+console.log("\nDay 8 완료!");

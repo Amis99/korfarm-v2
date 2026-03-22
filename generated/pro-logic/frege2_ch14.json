@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게2 14장 논리사고력",
+  "targetLevel": "frege2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "홍길동은 양반 아버지 홍 판서의 아들이었지만, 어머니가 시비인 서얼이었기에 아버지를 아버지라 부르지 못하고 과거 시험도 볼 수 없었다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'길동이 과거를 볼 수 없다'는 결론에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "홍 판서가 길동의 과거 응시를 반대했다"
+              },
+              {
+                "id": "B",
+                "text": "길동의 재주가 부족했다"
+              },
+              {
+                "id": "C",
+                "text": "길동이 과거에 관심이 없었다"
+              },
+              {
+                "id": "D",
+                "text": "조선의 법은 서얼에게 과거 응시 자격을 허락하지 않았다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "영웅 소설에서 영웅은 고귀한 혈통, 비범한 능력, 위기와 시련, 위기 극복의 단계를 거친다. 홍길동은 이 구조에 맞는 대표적 영웅이다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'홍길동이 영웅 소설의 주인공이다'라는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 소설의 주인공은 영웅이다"
+              },
+              {
+                "id": "B",
+                "text": "홍길동의 이야기가 영웅 소설의 일대기 구조에 부합한다"
+              },
+              {
+                "id": "C",
+                "text": "영웅은 반드시 왕이 되어야 한다"
+              },
+              {
+                "id": "D",
+                "text": "홍길동은 실제 역사 인물이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "길동은 서얼이라는 신분 때문에 아버지를 아버지라 부르지 못하고 형을 형이라 부르지 못했다. 달 밝은 밤 마당을 거닐며 탄식했다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "길동이 겪는 신분 차별이 계속된다면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "길동이 신분 제도에 순응하여 평범하게 살 것이다"
+              },
+              {
+                "id": "B",
+                "text": "형 인형이 길동을 형이라 부르게 해줄 것이다"
+              },
+              {
+                "id": "C",
+                "text": "아버지가 길동에게 적자의 대우를 해줄 것이다"
+              },
+              {
+                "id": "D",
+                "text": "길동이 불합리한 제도에 반발하여 집을 떠날 것이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "길동은 활빈당을 만들어 나쁜 관리의 재물을 빼앗어 백성들에게 나누어 주었다. 나라에서는 길동을 잡지 못했다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "길동이 활빈당 활동을 계속하면서 나라가 길동을 잡지 못할 때 예상되는 조정의 대응은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "길동을 무시하고 방치할 것이다"
+              },
+              {
+                "id": "B",
+                "text": "나쁜 관리들을 더 많이 등용할 것이다"
+              },
+              {
+                "id": "C",
+                "text": "길동의 요구를 들어주거나 타협을 시도할 것이다"
+              },
+              {
+                "id": "D",
+                "text": "백성들에게 길동을 잡으라고 명령할 것이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "영웅 소설에서 영웅은 고귀한 혈통을 타고난다. 홍길동은 명문 거족인 양반 홍 판서의 아들이다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 영웅 소설의 주인공은 고귀한 혈통을 타고난다. [소전제] 홍길동은 양반 홍 판서의 아들이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "홍길동은 고귀한 혈통의 조건을 충족한다"
+              },
+              {
+                "id": "B",
+                "text": "홍길동은 평민 출신이다"
+              },
+              {
+                "id": "C",
+                "text": "홍 판서는 영웅이다"
+              },
+              {
+                "id": "D",
+                "text": "서얼은 고귀한 혈통이 아니다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "편견이란 공정하지 못하고 한쪽으로 치우친 생각이다. 조선 시대에 서얼은 능력과 관계없이 낮은 대우를 받았다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 태어난 신분만으로 능력과 무관하게 차별하는 것은 편견이다. [소전제] 조선은 서얼이라는 출생만으로 과거 응시를 막았다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "조선의 서얼 차별은 합리적인 제도이다"
+              },
+              {
+                "id": "B",
+                "text": "조선의 서얼 차별은 편견에 기반한 제도이다"
+              },
+              {
+                "id": "C",
+                "text": "서얼은 능력이 부족하다"
+              },
+              {
+                "id": "D",
+                "text": "편견과 차별은 관련이 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "영웅 소설의 주인공이 위기를 극복하려면 스승이나 조력자의 도움이 필요하다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'영웅이 위기를 극복하려면 조력자가 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "위기를 극복했다면 조력자의 도움이 있었을 것이다"
+              },
+              {
+                "id": "B",
+                "text": "조력자가 있으면 반드시 위기를 극복한다"
+              },
+              {
+                "id": "C",
+                "text": "조력자 없이도 위기를 극복할 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "위기를 극복하지 못하면 조력자가 있었다는 뜻이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "평등한 사회가 되려면 신분이나 출생에 의한 차별이 없어야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'평등한 사회이려면 차별이 없어야 한다'를 필요조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "차별이 존재하면서 평등한 사회인 경우는 없다"
+              },
+              {
+                "id": "B",
+                "text": "차별이 없으면 반드시 평등한 사회이다"
+              },
+              {
+                "id": "C",
+                "text": "평등하지 않으면 차별이 있다"
+              },
+              {
+                "id": "D",
+                "text": "차별과 평등은 무관하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "길동은 도술을 부려 분신을 만들고 무예가 뛰어났다. 이는 영웅 소설의 '비범한 능력' 단계에 해당한다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "영웅 소설의 '비범한 능력'에 해당하는 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "길동이 아버지의 재산을 물려받은 것"
+              },
+              {
+                "id": "B",
+                "text": "길동이 평범한 학생처럼 공부만 한 것"
+              },
+              {
+                "id": "C",
+                "text": "길동이 도술로 분신을 만들어 관군을 따돌린 것"
+              },
+              {
+                "id": "D",
+                "text": "길동이 서울로 이사한 것"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "차별이란 둘 이상의 대상을 등급이나 수준의 차이를 두어 구별하는 것이다. 평등이란 권리가 차별 없이 고르고 한결같은 것이다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'차별 없는 사회'의 필요조건 예시로 적절하지 않은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "누구나 능력에 따라 공정한 기회를 얻는 것"
+              },
+              {
+                "id": "B",
+                "text": "법 앞에 모든 사람이 평등한 것"
+              },
+              {
+                "id": "C",
+                "text": "성별에 관계없이 동일한 교육을 받는 것"
+              },
+              {
+                "id": "D",
+                "text": "태어난 신분에 따라 벼슬길을 제한하는 것"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "길동은 불합리한 신분 제도에 반발하여 집을 떠났다. 사회 제도가 부당하면 저항이 일어날 수 있다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'부당한 제도가 존재하면 저항이 일어난다'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부당한 제도가 존재하면서 저항이 일어나지 않는 경우는 없다"
+              },
+              {
+                "id": "B",
+                "text": "저항이 일어났으면 반드시 부당한 제도가 있었다"
+              },
+              {
+                "id": "C",
+                "text": "부당한 제도가 없으면 저항도 없다"
+              },
+              {
+                "id": "D",
+                "text": "저항이 없으면 부당한 제도가 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "길동은 율도국이라는 새로운 나라를 세워 왕이 되어 차별 없는 세상을 만들었다. 이는 영웅의 최종 성취에 해당한다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'영웅이 새 나라를 세우면 차별 없는 세상이 실현된다'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "차별 없는 세상이면 반드시 영웅이 나라를 세운 것이다"
+              },
+              {
+                "id": "B",
+                "text": "차별이 남아 있으면 영웅이 나라를 세운 것이다"
+              },
+              {
+                "id": "C",
+                "text": "나라를 세우지 않으면 차별이 사라질 수 없다"
+              },
+              {
+                "id": "D",
+                "text": "영웅이 나라를 세우면서 차별이 남아 있는 경우는 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "홍길동전은 신분 제도의 부당함을 비판하는 사회 비판 소설이다. 작가 허균은 서얼 차별에 문제의식을 가지고 있었다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'사회 비판 소설이면 부당한 사회 제도를 문제 삼는다'의 충분조건 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우정을 다룬 동화"
+              },
+              {
+                "id": "B",
+                "text": "자연의 아름다움을 노래한 시조"
+              },
+              {
+                "id": "C",
+                "text": "홍길동전이 서얼 차별 제도를 비판한 것"
+              },
+              {
+                "id": "D",
+                "text": "과학 원리를 설명하는 교과서"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "홍 판서는 속으로는 길동을 안타깝게 여겼으나 겉으로는 크게 꾸짖었다. 조선의 엄격한 법도 때문이었다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'조선의 법도가 엄격하면 개인의 감정보다 규범이 우선된다'의 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "홍 판서가 길동을 불쌍히 여기면서도 규범에 따라 꾸짖은 것"
+              },
+              {
+                "id": "B",
+                "text": "홍 판서가 법도를 어기고 길동에게 적자의 대우를 해준 것"
+              },
+              {
+                "id": "C",
+                "text": "서얼은 아무리 재주가 뛰어나도 벼슬길에 오를 수 없었던 것"
+              },
+              {
+                "id": "D",
+                "text": "길동이 아버지를 '대감마님'이라고 불러야 했던 것"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "서얼이면 과거를 볼 수 없다. 길동은 서얼이다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "위 두 전제로부터 논리적으로 타당한 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "과거를 볼 수 없는 사람은 모두 서얼이다 (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "길동은 과거를 볼 수 없다 (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "서얼이 아니면 과거를 반드시 볼 수 있다 (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "과거를 본 사람은 서얼이 아니다 (후건 부정 — 타당)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "영웅 소설의 주인공은 반드시 시련을 겪는다. 길동은 서자라는 신분 때문에 아버지를 아버지라 부르지 못하는 시련을 겪었다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'영웅이면 시련을 겪는다'가 참일 때, 다음 중 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시련을 겪었으므로 반드시 영웅이다 (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "A와 C 모두 타당하다"
+              },
+              {
+                "id": "C",
+                "text": "영웅이 아니므로 시련을 겪지 않는다 (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "시련을 겪지 않았다면 영웅이 아니다 (후건 부정 — 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "홍길동전이 쓰인 조선 시대에는 서얼 출신의 불만이 매우 높았다. 이 시기에 서얼의 관직 진출을 요구하는 상소가 자주 올라왔다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'서얼 차별 제도'와 '서얼의 사회적 불만' 사이의 관계 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "차별 제도와 서얼의 불만 사이에 상관관계가 있으나, 경제적 어려움 등 다른 요인도 불만에 기여했을 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "불만이 차별 제도를 만든 원인이다"
+              },
+              {
+                "id": "C",
+                "text": "차별 제도가 불만의 유일한 원인이므로 완전한 인과관계이다"
+              },
+              {
+                "id": "D",
+                "text": "차별 제도와 불만은 전혀 관련이 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "홍길동전은 영웅 소설의 구조를 따르면서도 사회 비판적 성격을 띤다. 영웅 소설 중 사회 비판을 담은 작품일수록 후대에 많이 읽히는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'사회 비판적 내용'과 '후대의 인기' 사이의 관계 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사회 비판이 인기의 유일한 원인이다"
+              },
+              {
+                "id": "B",
+                "text": "사회 비판적 작품이 더 많이 읽히는 경향이 있으나, 문학적 완성도나 주인공의 매력 등도 인기에 영향을 준다"
+              },
+              {
+                "id": "C",
+                "text": "인기가 높아서 사회 비판적 내용이 추가된 것이다"
+              },
+              {
+                "id": "D",
+                "text": "사회 비판과 인기는 반비례한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "길동은 조선의 차별적 신분 제도를 벗어나 율도국에서 차별 없는 세상을 만들었다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'신분 차별을 없애면 사회 구성원의 만족도가 높아진다'는 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "홍길동전의 판매량을 조사한다"
+              },
+              {
+                "id": "B",
+                "text": "율도국의 존재를 역사적으로 확인한다"
+              },
+              {
+                "id": "C",
+                "text": "신분 차별이 있는 사회와 없는 사회의 구성원 만족도를 비교 조사한다"
+              },
+              {
+                "id": "D",
+                "text": "조선 시대 양반의 만족도만 조사한다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "영웅 소설의 주인공이 반드시 고귀한 혈통이어야 독자의 몰입도가 높다는 주장이 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "위 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "왕족 출신 영웅이 등장하는 소설에 독자가 열광했다"
+              },
+              {
+                "id": "B",
+                "text": "고귀한 혈통의 영웅이 시련을 극복하여 감동을 주었다"
+              },
+              {
+                "id": "C",
+                "text": "평민 출신 영웅이 등장하는 소설이 귀족 출신 영웅 소설보다 더 높은 몰입도를 얻었다"
+              },
+              {
+                "id": "D",
+                "text": "혈통이 불분명한 영웅이 등장하는 소설이 인기가 없었다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

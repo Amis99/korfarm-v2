@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게2 8장 논리사고력",
+  "targetLevel": "frege2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "높임법은 말하는 사람이 듣는 사람이나 이야기의 대상을 높여 대우하는 표현 방법입니다. 우리말에는 직접 높임과 간접 높임이 있습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'높임법을 써야 한다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사회에는 상대방을 존중하는 언어 예절이 필요하다"
+              },
+              {
+                "id": "B",
+                "text": "모든 사람에게 같은 말투를 사용해야 한다"
+              },
+              {
+                "id": "C",
+                "text": "높임법은 의사소통을 방해한다"
+              },
+              {
+                "id": "D",
+                "text": "어른과 아이에게 같은 말투를 써도 예의에 어긋나지 않는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "민지는 할머니께 '할머니, 진지 잡수셨어요?'라고 편지를 썼습니다. '진지'와 '잡수시다'는 높임 표현입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "민지가 '밥'이 아니라 '진지'라고 쓴 데 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "할머니는 윗사람이므로 음식을 높여 '진지'라고 표현해야 한다"
+              },
+              {
+                "id": "B",
+                "text": "'밥'과 '진지'는 완전히 같은 뜻으로 아무 때나 바꿔 쓸 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "높임말을 쓰면 할머니가 불편해하신다"
+              },
+              {
+                "id": "D",
+                "text": "편지에서는 높임법을 쓸 필요가 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "직접 높임은 문장의 주체를 직접 높이는 것이고(주체 높임), 간접 높임은 주체와 관련된 대상이나 상대를 높이는 것입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "윗사람에게 말할 때 높임법을 사용하지 않으면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상대방이 더 편안하게 느낀다"
+              },
+              {
+                "id": "B",
+                "text": "의사소통이 더 효율적이 된다"
+              },
+              {
+                "id": "C",
+                "text": "상대방이 무례하다고 느껴 관계가 나빠질 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "높임법 사용 여부는 인간관계에 영향을 주지 않는다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "'선생님께서 말씀하셨다'에서 '-께서'와 '-시-'는 주체를 높이는 표현입니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "'선생님이 말했다'로 쓰면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문장이 더 존경스러워진다"
+              },
+              {
+                "id": "B",
+                "text": "높임법이 없어도 문법적으로 완벽하다"
+              },
+              {
+                "id": "C",
+                "text": "선생님을 높이지 않아 예의에 어긋나는 표현이 된다"
+              },
+              {
+                "id": "D",
+                "text": "듣는 사람이 불편함을 느끼지 않는다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "주체 높임법에서는 주어에 '-께서'를 붙이고 서술어에 '-시-'를 넣어 문장의 주체를 높입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: '-께서'와 '-시-'가 사용되면 주체 높임법이다. 소전제: '할머니께서 주무신다'에는 '-께서'와 '-시-'가 사용되었다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 문장은 주체 높임법이다"
+              },
+              {
+                "id": "B",
+                "text": "이 문장은 상대 높임법이다"
+              },
+              {
+                "id": "C",
+                "text": "이 문장은 객체 높임법이다"
+              },
+              {
+                "id": "D",
+                "text": "높임법이 사용되지 않았다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "간접 높임에서는 윗사람의 몸이나 소유물을 높여 표현합니다. '밥'은 '진지', '나이'는 '연세'로 바꿉니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 윗사람의 소유물이나 신체를 높여 표현하는 것은 간접 높임이다. 소전제: '할머니의 연세'에서 '나이' 대신 '연세'를 사용했다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 표현은 직접 높임이다"
+              },
+              {
+                "id": "B",
+                "text": "'연세'는 낮춤 표현이다"
+              },
+              {
+                "id": "C",
+                "text": "높임법이 사용되지 않았다"
+              },
+              {
+                "id": "D",
+                "text": "이 표현은 간접 높임이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "올바른 높임법 사용을 위해서는 말의 대상과 상대방의 관계를 파악해야 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'올바른 높임법을 위해 대상 파악이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대상을 파악하면 높임법을 반드시 올바르게 사용한다"
+              },
+              {
+                "id": "B",
+                "text": "대상을 파악하지 않으면 높임법을 올바르게 사용하기 어렵다"
+              },
+              {
+                "id": "C",
+                "text": "높임법을 올바르게 사용하면 대상 파악은 불필요하다"
+              },
+              {
+                "id": "D",
+                "text": "대상 파악과 높임법은 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "편지에서 진심을 전하려면 상대방에 맞는 적절한 언어 표현을 선택해야 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'진심 전달을 위해 적절한 표현 선택이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "적절한 표현을 선택하면 진심이 반드시 전달된다"
+              },
+              {
+                "id": "B",
+                "text": "표현과 진심은 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "진심이 전달되면 표현은 중요하지 않다"
+              },
+              {
+                "id": "D",
+                "text": "적절한 표현을 선택하지 않으면 진심이 제대로 전달되기 어렵다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "주체 높임에서 '-시-'는 서술어에 반드시 붙어야 하는 필수 요소입니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'주체 높임이 사용되려면 서술어에 -시-가 있어야 한다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'선생님이 왔다'"
+              },
+              {
+                "id": "B",
+                "text": "'할머니께서 주무신다'"
+              },
+              {
+                "id": "C",
+                "text": "'엄마가 밥을 먹는다'"
+              },
+              {
+                "id": "D",
+                "text": "'친구가 학교에 간다'"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "민지의 편지에서 '할머니, 진지 잡수셨어요?'는 간접 높임(진지)과 직접 높임(잡수시다)이 함께 사용된 예입니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'높임법이 올바르게 쓰인 사례'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "할머니께 '진지 잡수셨어요?'라고 말했다"
+              },
+              {
+                "id": "B",
+                "text": "선생님께 '선생님께서 말씀하셨습니다'라고 보고했다"
+              },
+              {
+                "id": "C",
+                "text": "친구에게 '할머니가 밥 먹었어'라고 전했다"
+              },
+              {
+                "id": "D",
+                "text": "할아버지께 '연세가 어떻게 되세요?'라고 여쭤봤다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "윗사람에게 반말을 사용하면 무례한 사람으로 여겨집니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'윗사람에게 반말을 쓰면(P) 무례하게 여겨진다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무례하면 반말을 쓴 것이다"
+              },
+              {
+                "id": "B",
+                "text": "반말을 쓰지 않으면 무례하지 않다"
+              },
+              {
+                "id": "C",
+                "text": "무례하게 여겨지지 않았다면 반말을 쓰지 않은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "반말과 무례함은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "편지에서 높임법을 올바르게 사용하면 상대방에 대한 존경심이 전달됩니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'높임법을 올바르게 사용하면(P) 존경심이 전달된다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "존경심이 전달되면 높임법을 쓴 것이다"
+              },
+              {
+                "id": "B",
+                "text": "높임법을 쓰지 않으면 존경심이 없다"
+              },
+              {
+                "id": "C",
+                "text": "존경심이 전달되지 않았다면 높임법을 올바르게 사용하지 않은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "높임법과 존경심은 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "'밥' 대신 '진지', '먹다' 대신 '잡수시다'로 바꾸면 높임 표현이 됩니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'일반 어휘를 높임 어휘로 바꾸면 높임법이 성립한다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'이름'을 그대로 사용했다"
+              },
+              {
+                "id": "B",
+                "text": "'나이'를 '연세'로 바꿔 사용했다"
+              },
+              {
+                "id": "C",
+                "text": "'집'을 '집'으로 그대로 사용했다"
+              },
+              {
+                "id": "D",
+                "text": "'친구'를 '동무'로 바꿔 사용했다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "민지는 편지에서 '할머니, 보고 싶어요'라고 써서 존경과 사랑을 동시에 표현했습니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'적절한 높임 표현과 감정 표현을 함께 쓰면 진심이 전달된다'의 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'할머니, 건강하세요. 보고 싶습니다.'"
+              },
+              {
+                "id": "B",
+                "text": "'할머니한테 연락 안 해서 미안. 바빠.'"
+              },
+              {
+                "id": "C",
+                "text": "'할머니, 진지 맛있게 잡수셨나요?'"
+              },
+              {
+                "id": "D",
+                "text": "'할머니, 빨리 뵙고 싶어요.'"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'주체 높임법이 사용되면(P) 서술어에 -시-가 포함된다(Q)'가 참이고, 이 문장에 -시-가 포함되어 있습니다(Q).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'Q이므로 P이다'라는 추론은 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부당하다. P이면 Q이지만, Q라고 해서 반드시 P인 것은 아닐 수 있다 (후건 긍정의 오류)"
+              },
+              {
+                "id": "B",
+                "text": "타당하다. -시-가 있으므로 주체 높임법이다"
+              },
+              {
+                "id": "C",
+                "text": "타당하다. 대우에 해당한다"
+              },
+              {
+                "id": "D",
+                "text": "P와 Q는 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'윗사람에게 높임법을 쓰면(P) 예의 바른 사람으로 인정받는다(Q)'가 참이고, 예의 바른 사람으로 인정받지 못했습니다(~Q).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "높임법과 예의는 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "높임법을 썼을 것이다"
+              },
+              {
+                "id": "C",
+                "text": "인정받았으므로 높임법을 쓴 것이다 (후건 긍정, 부당)"
+              },
+              {
+                "id": "D",
+                "text": "높임법을 쓰지 않은 것이다 (대우, 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "높임법을 잘 사용하는 학생일수록 교우 관계가 좋다는 설문 조사 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'높임법 사용 능력'과 '교우 관계'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "높임법을 잘 쓰면 교우 관계가 반드시 좋아진다"
+              },
+              {
+                "id": "B",
+                "text": "둘은 아무 관계가 없다"
+              },
+              {
+                "id": "C",
+                "text": "교우 관계가 좋아서 높임법을 잘 쓰는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘 사이에 상관관계가 있으나, 성격이나 공감 능력 등 다른 요인도 영향을 미친다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "편지를 자주 쓰는 학생일수록 높임법을 정확하게 사용하는 경향이 있습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'편지 쓰기 빈도'와 '높임법 정확도'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "편지를 쓰면 높임법이 반드시 정확해진다"
+              },
+              {
+                "id": "B",
+                "text": "높임법이 정확해서 편지를 많이 쓰는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "둘은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "편지 쓰기가 높임법 연습에 도움이 되지만, 국어 수업이나 독서 등 다른 요인도 영향을 미친다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'높임법 교육을 받으면 학생들의 언어 예절이 향상된다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학생들의 키와 몸무게를 측정한다"
+              },
+              {
+                "id": "B",
+                "text": "높임법 교육을 받은 학생과 받지 않은 학생의 언어 예절 수준을 비교한다"
+              },
+              {
+                "id": "C",
+                "text": "높임법의 종류만 나열한다"
+              },
+              {
+                "id": "D",
+                "text": "한 학생의 성적만 관찰한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'높임법은 한국어에만 있는 고유한 현상이다'라는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일본어에도 존경어와 겸양어가 있어 높임 표현이 발달해 있다"
+              },
+              {
+                "id": "B",
+                "text": "한국어에 다양한 높임법 체계가 있다"
+              },
+              {
+                "id": "C",
+                "text": "영어에는 높임법이 없다"
+              },
+              {
+                "id": "D",
+                "text": "한국어의 높임법이 매우 복잡하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

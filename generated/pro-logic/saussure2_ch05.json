@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 5장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "악기들도 저마다 특별한 소리를 가지고 있습니다. 북은 가죽 면을 채로 두드리면 둥둥 소리가 납니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "악기마다 소리가 다르려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "악기의 재료와 연주 방법이 다르다."
+              },
+              {
+                "id": "B",
+                "text": "모든 악기는 같은 소리를 낸다."
+              },
+              {
+                "id": "C",
+                "text": "악기에 소리가 없다."
+              },
+              {
+                "id": "D",
+                "text": "한 가지 악기만 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "톡 토독! 우산 위로 빗방울이 춤을 춰요. 첨벙 첨벙! 장화 신은 내 발이 물웅덩이를 만나요.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "비가 오면 밖에서 어떤 소리가 들릴까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 소리도 안 난다."
+              },
+              {
+                "id": "B",
+                "text": "빗소리, 첨벙 소리 등 다양한 소리가 들린다."
+              },
+              {
+                "id": "C",
+                "text": "새소리만 들린다."
+              },
+              {
+                "id": "D",
+                "text": "바람 소리만 들린다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "사람이나 사물의 소리를 흉내 낸 말을 '의성어'라고 합니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'의성어는 소리를 흉내 낸 말이다. 둥둥은 의성어이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "둥둥은 모양을 나타낸다."
+              },
+              {
+                "id": "B",
+                "text": "의성어는 냄새를 나타낸다."
+              },
+              {
+                "id": "C",
+                "text": "둥둥은 소리를 흉내 낸 말이다."
+              },
+              {
+                "id": "D",
+                "text": "둥둥은 의성어가 아니다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "두드려서 소리를 내는 악기가 있고, 불어서 소리를 내는 악기가 있습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'악기를 구분하려면 연주 방법을 알아야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구분과 연주는 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "연주 방법 없이도 구분할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "모든 악기는 같은 방법이다."
+              },
+              {
+                "id": "D",
+                "text": "연주 방법을 모르면 악기를 구분하기 어렵다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "강아지가 '멍멍' 짖어요보다 그냥 '강아지가 짖어요'보다 의성어가 더 실감 난다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'의성어를 쓰면 글이 더 생생해진다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "둥둥이라고 쓰니 북소리가 들리는 것 같았다."
+              },
+              {
+                "id": "B",
+                "text": "의성어 없이도 똑같이 생생했다."
+              },
+              {
+                "id": "C",
+                "text": "의성어를 쓰면 재미없다."
+              },
+              {
+                "id": "D",
+                "text": "소리 없는 글이 더 좋다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "콰르릉, 쾅! 저 멀리 천둥 할아버지가 심벌즈를 쳐요.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'천둥이 치면 큰 소리가 난다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "큰 소리가 나면 반드시 천둥이다."
+              },
+              {
+                "id": "B",
+                "text": "천둥이 쳤는데 소리가 안 나는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "천둥이 쳐도 조용하다."
+              },
+              {
+                "id": "D",
+                "text": "소리가 나면 천둥이 아니다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "개굴 개굴! 풀잎 뒤에 숨은 청개구리가 노래해요.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'의성어를 쓰면 장면이 떠오른다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "의성어 없이 장면이 잘 떠올랐다."
+              },
+              {
+                "id": "B",
+                "text": "의성어를 쓰면 장면이 안 떠오른다."
+              },
+              {
+                "id": "C",
+                "text": "개굴개굴이라고 하니 개구리가 눈앞에 보이는 것 같다."
+              },
+              {
+                "id": "D",
+                "text": "조용한 글이 더 생생하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "북은 두드리고, 리코더는 불고, 바이올린은 활로 켭니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'불어서 소리를 내는 악기가 관악기이다. 리코더는 불어서 소리를 낸다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "리코더는 타악기이다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "모든 악기는 관악기이다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "리코더는 현악기이다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "리코더는 관악기이다. (맞는 추론)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "음악을 듣는 아이가 기분이 더 좋았다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'음악과 기분의 관계는?'",
+            "choices": [
+              {
+                "id": "A",
+                "text": "음악이 기분에 영향을 줄 수 있지만 다른 원인도 있을 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "기분이 좋으면 음악을 듣는다."
+              },
+              {
+                "id": "C",
+                "text": "음악이 기분의 원인이다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "여러 가지 악기를 만납니다. 악기의 생김새와 연주 방법에 따라 소리가 다릅니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'악기 크기가 클수록 소리가 낮다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 가지 악기만 연주한다."
+              },
+              {
+                "id": "B",
+                "text": "크기가 다른 악기들의 소리 높낮이를 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "악기 색깔을 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "악기 무게만 잰다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

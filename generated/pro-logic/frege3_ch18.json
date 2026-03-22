@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게3 18장 논리사고력",
+  "targetLevel": "frege3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "열팽창이란 물체의 온도가 올라감에 따라 크기가 늘어나는 현상이다. 기찻길 레일 사이에 틈을 두는 것은 여름에 레일이 늘어나 서로 부딪혀 휘어지는 것을 막기 위함이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "레일 사이에 틈을 두는 것이 효과적이려면 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "틈이 없어도 레일은 휘어지지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "레일은 온도 변화에 영향을 받지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "여름에는 레일이 줄어든다."
+              },
+              {
+                "id": "D",
+                "text": "레일의 열팽창 정도를 미리 계산할 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "종결 표현에 따라 문장의 종류가 달라진다. 평서문은 '-다'로, 의문문은 '-니?'로, 명령문은 '-어라'로, 청유문은 '-자'로, 감탄문은 '-구나!'로 끝난다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "종결 표현으로 문장의 종류를 구분할 수 있다는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "끝맺음말은 말하는 사람의 의도를 반영하지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "문장의 의미는 끝맺음말과 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "모든 문장은 같은 끝맺음말을 사용한다."
+              },
+              {
+                "id": "D",
+                "text": "끝맺음말이 같으면 문장의 의도도 같을 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "인바는 철과 니켈을 섞어 만든 합금으로, 열을 받으면 늘어나려는 힘과 줄어들려는 힘이 동시에 작용하여 크기가 거의 변하지 않는다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "인바를 정밀 시계의 부품으로 사용하면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "온도 변화에 따라 시계가 빨라지거나 느려진다."
+              },
+              {
+                "id": "B",
+                "text": "온도가 변해도 부품 크기가 거의 변하지 않아 시계의 정확성이 유지된다."
+              },
+              {
+                "id": "C",
+                "text": "시계가 더 무거워진다."
+              },
+              {
+                "id": "D",
+                "text": "자석의 성질 때문에 시계가 멈춘다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "'어서 밥을 먹어라'는 명령문이고, '같이 가자'는 청유문이다. 명령문은 행동을 시키고, 청유문은 함께 하자고 제안한다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "선생님이 '조용히 해라'라고 말했다면 예상되는 의도는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학생들에게 조용히 하라는 행동을 지시하는 것이다."
+              },
+              {
+                "id": "B",
+                "text": "감탄을 표현하는 것이다."
+              },
+              {
+                "id": "C",
+                "text": "학생들과 함께 조용히 하자고 제안하는 것이다."
+              },
+              {
+                "id": "D",
+                "text": "학생들에게 질문을 하고 싶은 것이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "물질마다 열에 팽창하는 정도가 다르다. 열팽창 정도가 작을수록 정밀한 기계를 만드는 데 유리하다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 열팽창 정도가 작은 물질이 정밀 기계에 유리하다. 소전제: 인바는 열팽창 정도가 매우 작다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인바는 정밀 기계에 유리하다."
+              },
+              {
+                "id": "B",
+                "text": "정밀 기계에는 열팽창이 큰 물질이 필요하다."
+              },
+              {
+                "id": "C",
+                "text": "인바는 열팽창 정도가 크다."
+              },
+              {
+                "id": "D",
+                "text": "인바는 정밀 기계에 부적합하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "의문문은 궁금한 것이 있어서 상대방의 대답을 원할 때 사용한다. '어디에 가니?'는 상대방에게 대답을 요구하는 의문문이다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 상대방의 대답을 원하는 문장은 의문문이다. 소전제: '숙제는 언제까지 제출해야 합니까?'는 대답을 원하는 문장이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 문장은 평서문이다."
+              },
+              {
+                "id": "B",
+                "text": "이 문장은 명령문이다."
+              },
+              {
+                "id": "C",
+                "text": "이 문장은 감탄문이다."
+              },
+              {
+                "id": "D",
+                "text": "이 문장은 의문문이다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "인바도 한계가 있다. 아주 높은 온도에서는 자석의 성질을 잃어버려 보통 금속처럼 늘어난다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'인바가 크기를 유지하려면 자석의 성질이 유지되어야 한다'에서 필요조건 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자석 성질이 유지되면 반드시 크기가 유지된다."
+              },
+              {
+                "id": "B",
+                "text": "자석 성질과 크기 변화는 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "자석 성질이 사라지면 인바도 보통 금속처럼 팽창한다."
+              },
+              {
+                "id": "D",
+                "text": "크기가 변하면 자석 성질은 있는 것이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "감탄문은 놀람이나 기쁨 같은 느낌을 나타낸다. 감탄문이 되려면 '-구나', '-네' 등 감탄의 종결 표현이 필요하다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'감탄문이 되려면 감탄 종결 표현이 필요하다'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "감탄 종결 표현이 있으면 반드시 감탄문이다."
+              },
+              {
+                "id": "B",
+                "text": "감탄문이 아니면 종결 표현이 있다."
+              },
+              {
+                "id": "C",
+                "text": "감탄 종결 표현이 없으면 감탄문이 될 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "종결 표현과 문장 종류는 무관하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "열팽창을 고려하지 않으면 위험한 문제가 생길 수 있다. 다리, 건물 등 큰 구조물에서 특히 중요하다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'구조물 안전'의 필요조건은 '열팽창을 고려한 설계여야 한다'이다. 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "건물을 지을 때 온도 변화를 전혀 고려하지 않은 것"
+              },
+              {
+                "id": "B",
+                "text": "열팽창을 무시하고 레일을 빈틈없이 연결한 것"
+              },
+              {
+                "id": "C",
+                "text": "다리에 신축 이음장치를 설치하여 열팽창에 대비한 것"
+              },
+              {
+                "id": "D",
+                "text": "여름에 도로 표면이 늘어나도록 일부러 방치한 것"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "문장의 종류에는 평서문, 의문문, 명령문, 청유문, 감탄문의 5가지가 있다. 각각 다른 끝맺음말을 사용한다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'청유문'의 필요조건은 '함께 하자는 제안의 의도가 있어야 한다'이다. 청유문이 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "빨리 해라."
+              },
+              {
+                "id": "B",
+                "text": "내일 만납시다."
+              },
+              {
+                "id": "C",
+                "text": "같이 공부하자."
+              },
+              {
+                "id": "D",
+                "text": "우리 함께 가자."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "인바에서 늘어나려는 힘과 줄어들려는 힘이 균형을 이루면 크기가 거의 변하지 않는다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'두 힘이 균형을 이루면(P) 크기가 변하지 않는다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "크기가 변하지 않으면 반드시 두 힘이 균형이다."
+              },
+              {
+                "id": "B",
+                "text": "두 힘과 크기 변화는 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "크기가 변하면 두 힘이 균형인 것이다."
+              },
+              {
+                "id": "D",
+                "text": "두 힘이 균형이면서 크기가 변하는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "문장 끝을 '-다'로 마치면 평서문이 된다. '오늘은 날씨가 좋다'처럼 사실을 그대로 전달한다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "''-다'로 끝나면(P) 평서문이다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'-다'로 끝나면서 평서문이 아닌 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "평서문이면 반드시 '-다'로 끝난다."
+              },
+              {
+                "id": "C",
+                "text": "평서문이 아니면 '-다'로 끝나지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "'-다'와 평서문은 무관하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "과학자 기욤이 철과 니켈을 섞어 인바를 발명했다. 인바는 정밀 측정 장비, 시계 부품 등에 사용된다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'열팽창이 거의 없는 합금이면 정밀 장비에 적합하다'의 충분조건 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일반 철로 만든 시계가 여름에 느려지는 경우"
+              },
+              {
+                "id": "B",
+                "text": "인바를 사용한 정밀 시계가 온도 변화에도 정확성을 유지하는 경우"
+              },
+              {
+                "id": "C",
+                "text": "나무로 만든 자가 습기로 늘어나는 경우"
+              },
+              {
+                "id": "D",
+                "text": "플라스틱 자가 열에 의해 휘어지는 경우"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "종결 표현 중 감탄문은 '정말 예쁘구나!', '와, 대단하네!'처럼 느낌을 생생하게 나타낸다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'감탄의 종결 표현이 사용되면 감탄문이다'의 충분조건 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세상에, 이렇게 큰 나무가 있구나!"
+              },
+              {
+                "id": "B",
+                "text": "나는 학교에 간다."
+              },
+              {
+                "id": "C",
+                "text": "아, 정말 아름답네!"
+              },
+              {
+                "id": "D",
+                "text": "우와, 눈이 많이 오는구나!"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "인바는 온도가 변해도 크기가 거의 변하지 않는다. 하지만 아주 높은 온도에서는 자석 성질을 잃어 팽창한다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'자석 성질이 유지되면(P) 인바 크기가 안정적이다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "B와 C 모두 타당하다."
+              },
+              {
+                "id": "B",
+                "text": "인바 크기가 안정적이므로 자석 성질이 유지된 것이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "자석 성질이 사라졌으므로 인바 크기가 안정적이다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "인바 크기가 불안정해졌으므로 자석 성질이 사라진 것이다. (대우 — 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "명령문은 상대방에게 행동을 시킬 때 사용한다. '교실에서는 조용히 해라'는 명령문이다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'명령문이면(P) 상대방에게 행동을 시키는 것이다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상대방에게 행동을 시켰으므로 명령문이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "'조용히 해라'는 명령문이므로 행동을 시키는 것이다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "명령문이 아니므로 행동을 시키지 않는다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "온도가 올라갈수록 대부분의 물체는 크기가 커진다. 하지만 물질의 종류에 따라 팽창 정도는 다르다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'온도 상승'과 '물체 크기 증가'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "온도 상승과 팽창 사이에 양의 상관관계가 있으나, 물질의 종류에 따라 팽창 정도가 달라진다."
+              },
+              {
+                "id": "B",
+                "text": "온도가 올라가면 모든 물체가 동일한 비율로 팽창한다."
+              },
+              {
+                "id": "C",
+                "text": "온도와 팽창은 아무 관계가 없다."
+              },
+              {
+                "id": "D",
+                "text": "온도가 올라가면 물체가 줄어든다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "문장 종류가 다르면 말하는 사람의 의도도 다르다. 같은 상황에서도 종결 표현에 따라 전달되는 의미가 달라진다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'종결 표현'과 '화자의 의도' 사이의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "종결 표현이 화자의 의도를 완전히 결정한다."
+              },
+              {
+                "id": "B",
+                "text": "화자의 의도가 종결 표현을 결정한다."
+              },
+              {
+                "id": "C",
+                "text": "종결 표현과 화자의 의도는 상호 영향을 주며, 맥락과 억양도 함께 의미 전달에 기여한다."
+              },
+              {
+                "id": "D",
+                "text": "종결 표현과 의도는 관계가 없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "오늘날에는 인바보다 더 발전된 '슈퍼 인바' 같은 새로운 물질도 개발되었다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '슈퍼 인바는 인바보다 더 넓은 온도 범위에서 크기가 안정적이다.' 이 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "슈퍼 인바의 화학 성분만 분석한다."
+              },
+              {
+                "id": "B",
+                "text": "인바와 슈퍼 인바를 같은 온도 범위에서 팽창률을 비교 측정한다."
+              },
+              {
+                "id": "C",
+                "text": "인바의 발명 연도를 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "슈퍼 인바의 가격을 비교한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "종결 표현은 말하는 사람의 의도와 상황에 맞게 바뀌며 문장의 성격을 나타낸다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '같은 내용도 종결 표현을 바꾸면 상대방의 반응이 달라진다.' 이 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문장의 길이와 반응의 관계를 조사한다."
+              },
+              {
+                "id": "B",
+                "text": "종결 표현의 종류를 목록으로 정리한다."
+              },
+              {
+                "id": "C",
+                "text": "같은 내용을 평서문, 명령문, 청유문으로 각각 전달한 후 상대방의 반응을 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "한 종류의 종결 표현만 반복 사용하여 반응을 관찰한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

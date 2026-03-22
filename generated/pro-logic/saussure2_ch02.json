@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 2장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "누군가 내 장난감을 망가뜨리거나 나를 놀리면 기분이 나빠지기 마련입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "기분이 나빠지려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "장난감은 마음과 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "소중한 것이 상하면 마음이 상한다."
+              },
+              {
+                "id": "C",
+                "text": "놀림당해도 기분이 좋다."
+              },
+              {
+                "id": "D",
+                "text": "기분은 변하지 않는다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "화가 머리 끝까지 날 때 마음속으로 숫자를 천천히 세면 마음이 가라앉습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "숫자를 천천히 세면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "더 화가 난다."
+              },
+              {
+                "id": "B",
+                "text": "졸려진다."
+              },
+              {
+                "id": "C",
+                "text": "마음이 차분해진다."
+              },
+              {
+                "id": "D",
+                "text": "배가 고파진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "내 마음은 알록달록 도화지. 어떤 색이라도 괜찮아. 모두 다 소중한 내 마음이니까.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'모든 감정은 소중하다. 화나는 마음은 감정이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화나는 마음은 나쁘다."
+              },
+              {
+                "id": "B",
+                "text": "화는 감정이 아니다."
+              },
+              {
+                "id": "C",
+                "text": "감정은 소중하지 않다."
+              },
+              {
+                "id": "D",
+                "text": "화나는 마음도 소중하다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "화가 난다고 해서 소리를 지르거나 화풀이를 하면 기분이 더 안 좋아질 수 있습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'기분을 다스리려면 올바른 방법을 써야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "올바른 방법을 안 쓰면 기분이 다스려지지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "아무렇게나 해도 기분이 좋아진다."
+              },
+              {
+                "id": "C",
+                "text": "화풀이하면 기분이 좋아진다."
+              },
+              {
+                "id": "D",
+                "text": "방법은 필요 없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "마음이 힘들 때 좋아하는 노래를 부르거나 그림을 그리면 마음이 편해집니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'마음을 가꾸려면 자신만의 방법이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무것도 안 해도 기분이 좋아졌다."
+              },
+              {
+                "id": "B",
+                "text": "좋아하는 노래를 불러 기분이 나아졌다."
+              },
+              {
+                "id": "C",
+                "text": "방법 없이도 마음이 편해졌다."
+              },
+              {
+                "id": "D",
+                "text": "남의 방법을 따라 해도 안 됐다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "넘어져서 무릎이 까진 날엔 파랑파랑 슬픔의 색.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'다치면 슬프다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다치면 기쁘다."
+              },
+              {
+                "id": "B",
+                "text": "슬프면 반드시 다친 것이다."
+              },
+              {
+                "id": "C",
+                "text": "다쳤는데 슬프지 않은 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "슬픔과 다침은 관계없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "동생이 내 그림에 낙서하면 빨강빨강 화나는 색.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'소중한 것이 망가지면 화가 난다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그림에 낙서해도 기쁘다."
+              },
+              {
+                "id": "B",
+                "text": "칭찬받아서 화가 났다."
+              },
+              {
+                "id": "C",
+                "text": "아무것도 안 됐는데 화가 났다."
+              },
+              {
+                "id": "D",
+                "text": "동생이 그림에 낙서해서 화가 났다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "감정은 마치 하늘의 날씨와 비슷해요. 맑은 날이 있으면 흐린 날도 있어요.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'감정은 변한다. 오늘 기분이 좋다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내일은 기분이 달라질 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "내일도 반드시 기분이 좋다. (틀린 추론)"
+              },
+              {
+                "id": "C",
+                "text": "감정은 변하지 않는다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "기분은 항상 좋다. (맞는 추론)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "숫자를 세는 방법으로 화를 다스린 아이가 친구와 더 잘 지냈다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'화를 잘 다스리는 아이가 친구가 많다.' 이 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화 다스리기가 친구의 원인이다."
+              },
+              {
+                "id": "B",
+                "text": "화를 다스리면 관계가 좋아져 관련 있지만, 다른 이유도 있을 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "친구가 많으면 화를 안 낸다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "화가 날 때 마음을 지키는 방법을 사용해 보아야 합니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'심호흡을 하면 화가 줄어든다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화나는 상황을 만들지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "심호흡만 계속한다."
+              },
+              {
+                "id": "C",
+                "text": "심호흡 한 그룹과 안 한 그룹의 화난 정도를 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "화의 원인을 조사한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

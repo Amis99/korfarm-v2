@@ -8,6 +8,40 @@ import "../styles/pro-mode.css";
 import "../styles/test-storage.css";
 import "../styles/test-online.css";
 
+/** 역량별 점수 분석 컴포넌트 */
+function CompetencyAnalysis({ scores }) {
+  const entries = Object.entries(scores).sort((a, b) => a[1].accuracy - b[1].accuracy);
+  const weakTop3 = entries.slice(0, 3);
+
+  return (
+    <div className="pro-competency-analysis">
+      <h4 className="pro-competency-title">역량 분석</h4>
+      <div className="pro-competency-bars">
+        {entries.map(([domain, data]) => {
+          const isWeak = weakTop3.some(([d]) => d === domain);
+          return (
+            <div key={domain} className={`pro-competency-row ${isWeak ? "weak" : ""}`}>
+              <div className="pro-competency-label">
+                {domain}
+                {isWeak && <span className="pro-competency-weak-badge">보강 필요</span>}
+              </div>
+              <div className="pro-competency-bar-wrap">
+                <div
+                  className="pro-competency-bar-fill"
+                  style={{ width: `${Math.min(100, data.accuracy)}%` }}
+                />
+              </div>
+              <div className="pro-competency-pct">
+                {data.correct}/{data.total} ({Math.round(data.accuracy)}%)
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function ProTestPage() {
   const { chapterId } = useParams();
   const { isLoggedIn } = useAuth();
@@ -390,6 +424,12 @@ function ProTestPage() {
                       ? "다른 버전으로 재응시할 수 있습니다."
                       : ""}
               </p>
+
+              {/* 역량 분석 섹션 */}
+              {result.competencyScores && Object.keys(result.competencyScores).length > 0 && (
+                <CompetencyAnalysis scores={result.competencyScores} />
+              )}
+
               <div className="pro-result-actions">
                 {result.passed ? (
                   <button

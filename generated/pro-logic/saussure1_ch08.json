@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 8장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "따뜻한 햇볕과 물을 먹은 씨앗은 단단한 껍질을 뚫고 하얀 뿌리를 내립니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "씨앗이 자라려면 어떤 사실이 꼭 있어야 할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "햇볕은 씨앗에 해롭다."
+              },
+              {
+                "id": "B",
+                "text": "씨앗은 돌로 만들어졌다."
+              },
+              {
+                "id": "C",
+                "text": "물을 주면 씨앗이 사라진다."
+              },
+              {
+                "id": "D",
+                "text": "씨앗에는 자랄 수 있는 힘이 들어 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "뿌리가 자리를 잡으면 흙 위로 귀여운 새싹이 파릇파릇 돋아납니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "뿌리가 잘 자리를 잡으면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "새싹이 땅 위로 올라온다."
+              },
+              {
+                "id": "B",
+                "text": "씨앗이 사라진다."
+              },
+              {
+                "id": "C",
+                "text": "뿌리가 물 위로 나온다."
+              },
+              {
+                "id": "D",
+                "text": "흙이 돌로 변한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "봄비가 톡톡 문을 두드려요. 햇님이 반짝 고개를 내밀어요. 씨앗은 그제야 눈을 비벼요.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'식물은 물과 햇빛이 있어야 자란다. 씨앗은 식물이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "씨앗은 물과 햇빛 없이도 자란다."
+              },
+              {
+                "id": "B",
+                "text": "씨앗은 물과 햇빛이 있어야 자란다."
+              },
+              {
+                "id": "C",
+                "text": "씨앗은 식물이 아니다."
+              },
+              {
+                "id": "D",
+                "text": "물만 있으면 자란다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "뿌리는 흙 속으로 구불구불 뻗어 나가며 물을 빨아들입니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'식물이 자라려면 뿌리가 물을 흡수해야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "뿌리가 없어도 물을 먹을 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "물이 없어도 식물이 잘 자란다."
+              },
+              {
+                "id": "C",
+                "text": "뿌리가 물을 안 흡수하면 식물이 자라기 어렵다."
+              },
+              {
+                "id": "D",
+                "text": "물을 흡수하면 뿌리가 사라진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "작은 씨앗이 땅에 심어지면 놀라운 변화가 일어납니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'변화가 일어나려면 씨앗을 땅에 심어야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "씨앗을 서랍에 넣어두었더니 꽃이 피었다."
+              },
+              {
+                "id": "B",
+                "text": "씨앗 없이 나무가 자랐다."
+              },
+              {
+                "id": "C",
+                "text": "씨앗을 안 심었는데 꽃이 폈다."
+              },
+              {
+                "id": "D",
+                "text": "씨앗을 흙에 심고 물을 주었더니 싹이 났다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "씨앗은 기지개를 쭈욱 켜고 고개를 쏘옥 내미니 세상은 온통 울긋불긋 꽃동산.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'봄이 오면 꽃이 핀다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "봄이 왔는데 꽃이 안 피는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "꽃이 피면 반드시 봄이다."
+              },
+              {
+                "id": "C",
+                "text": "겨울에 꽃이 핀다."
+              },
+              {
+                "id": "D",
+                "text": "봄이 와도 꽃은 안 핀다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "봄바람이 불 때 나뭇가지가 흔들리는 모양은 '하늘하늘', 아기 오리가 걷는 모양은 '뒤뚱뒤뚱'이라고 해요.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'의태어를 쓰면 모양이 생생해진다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "의태어를 썼더니 더 이해가 안 됐다."
+              },
+              {
+                "id": "B",
+                "text": "'파릇파릇'이라고 하니 새싹이 눈앞에 보이는 것 같다."
+              },
+              {
+                "id": "C",
+                "text": "의태어 없이도 똑같이 생생하다."
+              },
+              {
+                "id": "D",
+                "text": "의태어를 쓰면 모양이 사라진다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "새싹이 돋아나는 푸른 모양은 '파릇파릇'이라고 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'의태어는 모양을 흉내 낸 말이다. 파릇파릇은 의태어이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "파릇파릇은 소리를 흉내 낸 말이다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "모든 말이 의태어이다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "파릇파릇은 모양을 흉내 낸 말이다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "의태어는 소리를 나타낸다. (맞는 추론)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "씨앗을 흙 속에 심고 물을 줍니다. 따뜻한 햇볕과 물을 먹은 씨앗은 뿌리를 내립니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'비가 많이 오는 해에 꽃이 많이 피었다.' 비와 꽃의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비가 꽃을 반드시 피게 한다."
+              },
+              {
+                "id": "B",
+                "text": "꽃이 피면 비가 온다."
+              },
+              {
+                "id": "C",
+                "text": "둘은 전혀 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "비가 많은 것과 꽃이 많은 것이 함께 나타났지만, 다른 이유도 있을 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "씨앗이 자라 예쁜 꽃을 피우기까지는 어떤 과정을 거칠까요?",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'물을 더 많이 주면 식물이 더 빨리 자란다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 씨앗에 물 양을 다르게 주고 성장 속도를 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "씨앗을 심지 않고 기다린다."
+              },
+              {
+                "id": "C",
+                "text": "물 대신 우유를 준다."
+              },
+              {
+                "id": "D",
+                "text": "씨앗의 색깔을 관찰한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 18장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "미디어 리터러시란 정보를 무조건 믿지 않고, 출처가 어디인지, 편향된 의견이 숨어 있지는 않은지 비판적으로 생각하고 판단하는 능력입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'미디어 리터러시가 필요하다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비판적 사고는 정보를 이해하는 데 불필요하다"
+              },
+              {
+                "id": "B",
+                "text": "인터넷에 올라온 정보는 모두 검증을 거친 사실이다"
+              },
+              {
+                "id": "C",
+                "text": "출처가 불분명한 정보도 믿어야 한다"
+              },
+              {
+                "id": "D",
+                "text": "모든 미디어 정보가 반드시 사실만 담고 있는 것은 아니다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "수진이는 블로그에 올라온 '급식 메뉴에서 치킨과 떡볶이가 사라진다'는 글을 보고 클릭 수가 많다는 이유로 사실이라고 믿었습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "수진이가 그 정보를 믿은 판단에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "블로그 글은 학교 공지사항보다 신뢰도가 높다"
+              },
+              {
+                "id": "B",
+                "text": "익명의 영양사가 쓴 글은 전문가의 의견과 같다"
+              },
+              {
+                "id": "C",
+                "text": "클릭 수가 많으면 그 정보는 사실일 가능성이 높다"
+              },
+              {
+                "id": "D",
+                "text": "친구에게 전하면 정보의 사실 여부가 확인된다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "인터넷 매체는 누구나 쉽게 정보를 올릴 수 있어 정보량이 많지만, 출처가 불분명한 가짜 뉴스가 매우 빠르게 퍼져 사람들에게 혼란을 줍니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "인터넷에서 출처 확인 없이 정보를 공유하면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가짜 뉴스가 빠르게 퍼져 더 많은 사람에게 혼란을 준다"
+              },
+              {
+                "id": "B",
+                "text": "정보의 신뢰도가 자동으로 높아진다"
+              },
+              {
+                "id": "C",
+                "text": "전통 매체의 팩트 체크가 불필요해진다"
+              },
+              {
+                "id": "D",
+                "text": "모든 정보가 객관적 사실로 검증된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "신문과 텔레비전 같은 전통 매체는 여러 차례 사실 확인 과정을 거치므로 정보의 신뢰도가 비교적 높은 편입니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "전통 매체가 사실 확인 과정을 생략하면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "신뢰도가 떨어져 인터넷 매체와 차이가 없어진다"
+              },
+              {
+                "id": "B",
+                "text": "뉴스 전달 속도만 빨라지고 정확도는 변함없다"
+              },
+              {
+                "id": "C",
+                "text": "독자가 더 쉽게 사실과 의견을 구별할 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "기자의 주관적 감정이 더 잘 전달된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "미디어 정보를 접할 때는 반드시 정보가 객관적인 사실인지 주관적인 의견인지를 구별해야 합니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 주관적 의견이 포함된 정보는 사실이 아닐 수 있다. 소전제: '급식을 바꿔야 한다'는 개인의 주관적 의견이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "급식 변경은 반드시 일어나는 사실이다"
+              },
+              {
+                "id": "B",
+                "text": "급식을 바꿔야 한다는 정보는 사실이 아닐 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "주관적 의견은 항상 사실이다"
+              },
+              {
+                "id": "D",
+                "text": "개인의 의견은 검증할 필요가 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "익명의 출처에서 나온 정보는 신뢰도가 낮습니다. 수진이가 본 급식 기사는 익명의 영양사가 올린 것입니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 익명의 출처에서 나온 정보는 신뢰도가 낮다. 소전제: 수진이가 본 급식 기사는 익명의 영양사가 올렸다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수진이가 본 급식 기사는 공식 보도 자료이다"
+              },
+              {
+                "id": "B",
+                "text": "익명의 영양사는 전문가이므로 믿을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "수진이가 본 급식 기사는 신뢰도가 낮다"
+              },
+              {
+                "id": "D",
+                "text": "신뢰도와 출처는 관계가 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "미디어를 현명하게 사용하려면 정보를 읽을 때마다 '이것은 사실일까, 의견일까?'라고 스스로 질문해 보는 습관이 중요합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'미디어를 현명하게 사용하려면 사실과 의견 구별 습관이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사실과 의견을 구별하는 습관이 없으면 미디어를 현명하게 사용할 수 없다"
+              },
+              {
+                "id": "B",
+                "text": "사실과 의견을 구별하면 반드시 미디어를 현명하게 사용할 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "미디어를 사용하지 않으면 사실과 의견을 구별할 필요가 없다"
+              },
+              {
+                "id": "D",
+                "text": "사실과 의견 구별은 미디어 사용과 무관하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "정보의 신뢰도를 판단하려면 정보의 출처가 공신력 있는 기관인지 확인해야 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'신뢰도 판단을 위해 출처 확인이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "출처를 확인하면 신뢰도 판단이 반드시 정확하다"
+              },
+              {
+                "id": "B",
+                "text": "신뢰도가 높으면 출처 확인이 불필요하다"
+              },
+              {
+                "id": "C",
+                "text": "출처를 확인하지 않으면 신뢰도를 바르게 판단할 수 없다"
+              },
+              {
+                "id": "D",
+                "text": "출처와 신뢰도는 별개의 문제이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "사실은 실제로 일어났거나 증명할 수 있는 내용이고, 의견은 개인의 생각이나 주장입니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'사실에 해당하려면 객관적으로 증명 가능해야 한다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학교에 가지 않는 것이 더 좋다"
+              },
+              {
+                "id": "B",
+                "text": "우리 학교 급식이 세상에서 가장 맛있다"
+              },
+              {
+                "id": "C",
+                "text": "비가 오는 날은 기분이 우울하다"
+              },
+              {
+                "id": "D",
+                "text": "대한민국은 1948년에 정부가 수립되었다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "민호는 수진이에게 '학교 공지사항에 뜬 사실이 아니잖아'라며 출처의 중요성을 지적했습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'정보의 신뢰도를 높이려면 공신력 있는 출처가 필요하다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학교 공식 홈페이지의 공지사항을 확인했다"
+              },
+              {
+                "id": "B",
+                "text": "기상청의 공식 발표를 근거로 날씨를 확인했다"
+              },
+              {
+                "id": "C",
+                "text": "교육부의 보도자료를 통해 정책 변경을 확인했다"
+              },
+              {
+                "id": "D",
+                "text": "익명의 블로그 글을 클릭 수만 보고 믿었다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "정보가 편향된 주장만 담고 있으면 객관적인 사실이 아닐 가능성이 높습니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'편향된 주장만 담고 있으면(P) 객관적 사실이 아닐 가능성이 높다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "편향된 주장만 담으면서 객관적 사실인 경우는 없다"
+              },
+              {
+                "id": "B",
+                "text": "편향된 주장이 없다면 반드시 객관적 사실이다"
+              },
+              {
+                "id": "C",
+                "text": "객관적 사실이 아닌 정보는 반드시 편향된 주장을 담고 있다"
+              },
+              {
+                "id": "D",
+                "text": "편향된 주장과 객관적 사실은 구분할 수 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "클릭 수가 많다고 해서 그 정보가 사실인 것은 아닙니다. 가짜 뉴스도 자극적일수록 클릭 수가 높을 수 있습니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'자극적인 제목이면(P) 클릭 수가 높아진다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자극적인 제목이 아니면 클릭 수가 높지 않다"
+              },
+              {
+                "id": "B",
+                "text": "클릭 수가 높지 않다면 자극적인 제목이 아니다"
+              },
+              {
+                "id": "C",
+                "text": "클릭 수가 높으면 자극적인 제목이다"
+              },
+              {
+                "id": "D",
+                "text": "자극적인 제목과 클릭 수는 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "'~해야 한다', '가장 좋다', '~라고 생각한다' 등의 표현이 있다면 의견일 가능성이 높습니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'주관적 표현이 포함되면 의견이다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태조 이성계가 조선을 세웠다"
+              },
+              {
+                "id": "B",
+                "text": "학교는 급식 메뉴를 바꿔야 한다"
+              },
+              {
+                "id": "C",
+                "text": "어제 서울의 최저 기온이 영하 5도였다"
+              },
+              {
+                "id": "D",
+                "text": "2024년 12월 25일은 수요일이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "선생님은 사실과 의견을 구별하는 방법을 가르쳐 주셨습니다. 사실은 증명 가능한 객관적 내용이고, 의견은 개인의 주관적 생각입니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'증명 가능한 내용이면 사실이다'의 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지구는 태양 주위를 1년에 한 바퀴 돈다"
+              },
+              {
+                "id": "B",
+                "text": "기상청이 어제 서울 기온을 영상 15도로 발표했다"
+              },
+              {
+                "id": "C",
+                "text": "금요일 급식 떡볶이는 세상에서 가장 맛있다"
+              },
+              {
+                "id": "D",
+                "text": "우리 학교 운동장에는 축구 골대가 두 개 있다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'미디어 리터러시가 있으면(P) 가짜 뉴스에 속지 않는다(Q)'가 참이고, 수진이는 가짜 뉴스에 속았습니다(~Q).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수진이는 미디어 리터러시가 부족하다 (대우, 타당)"
+              },
+              {
+                "id": "B",
+                "text": "수진이는 미디어 리터러시가 있다"
+              },
+              {
+                "id": "C",
+                "text": "가짜 뉴스에 속지 않으면 미디어 리터러시가 있다 (후건 긍정, 부당)"
+              },
+              {
+                "id": "D",
+                "text": "미디어 리터러시와 가짜 뉴스는 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'출처가 공신력 있는 기관이면(P) 정보의 신뢰도가 높다(Q)'가 참이고, 이 기사의 출처는 공신력 있는 기관입니다(P).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정보의 신뢰도가 높으므로 출처가 공신력 있다 (후건 긍정, 부당)"
+              },
+              {
+                "id": "B",
+                "text": "신뢰도와 출처는 서로 관계없다"
+              },
+              {
+                "id": "C",
+                "text": "출처가 공신력 없으면 신뢰도가 낮다 (전건 부정, 부당)"
+              },
+              {
+                "id": "D",
+                "text": "이 기사의 정보는 신뢰도가 높다 (전건 긍정, 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "인터넷 사용 시간이 긴 학생일수록 가짜 뉴스에 노출되는 빈도가 높다는 조사 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'인터넷 사용 시간'과 '가짜 뉴스 노출'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인터넷을 오래 사용하면 반드시 가짜 뉴스에 속는다"
+              },
+              {
+                "id": "B",
+                "text": "가짜 뉴스에 노출되어서 인터넷을 오래 사용하는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "둘 사이에 상관관계가 있으나, 미디어 리터러시 수준 등 다른 요인도 영향을 미친다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 아무런 관계가 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "미디어 리터러시 교육을 받은 학생들이 가짜 뉴스를 더 잘 구별한다는 연구 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'미디어 리터러시 교육'과 '가짜 뉴스 구별 능력'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "교육만 받으면 가짜 뉴스를 완벽하게 구별할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "교육이 도움이 되었지만, 독서나 비판적 사고 훈련 등 다른 요인도 영향을 미쳤을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "가짜 뉴스를 잘 구별해서 교육을 받은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "교육과 구별 능력은 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'출처를 확인하는 습관을 기르면 가짜 뉴스에 속는 횟수가 줄어든다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "클릭 수가 높은 기사만 모아 분석한다"
+              },
+              {
+                "id": "B",
+                "text": "가짜 뉴스의 종류만 나열한다"
+              },
+              {
+                "id": "C",
+                "text": "한 학생의 인터넷 사용 시간만 측정한다"
+              },
+              {
+                "id": "D",
+                "text": "출처 확인 교육을 받은 학생과 받지 않은 학생이 가짜 뉴스를 구별하는 횟수를 비교한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'클릭 수가 많은 정보는 항상 사실이다'라는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "클릭 수가 많은 공식 보도 기사가 사실로 확인되었다"
+              },
+              {
+                "id": "B",
+                "text": "클릭 수가 매우 높은 익명 블로그 글이 출처 불분명한 거짓 정보로 밝혀졌다"
+              },
+              {
+                "id": "C",
+                "text": "클릭 수가 적은 기사가 가짜 뉴스였다"
+              },
+              {
+                "id": "D",
+                "text": "클릭 수가 많은 기사를 모두가 공유했다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

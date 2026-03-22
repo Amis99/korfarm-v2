@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 7장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "우리나라에는 봄, 여름, 가을, 겨울이라는 네 가지 계절이 있습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "계절이 바뀌려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "계절은 두 가지뿐이다."
+              },
+              {
+                "id": "B",
+                "text": "날씨는 항상 같다."
+              },
+              {
+                "id": "C",
+                "text": "지구가 태양 주위를 돌면서 날씨가 변한다."
+              },
+              {
+                "id": "D",
+                "text": "지구는 움직이지 않는다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "여름이 되면 햇볕이 쨍쨍하고 비도 많이 옵니다. 날씨가 아주 덥습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "여름에 날씨가 더우면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두꺼운 옷을 입는다."
+              },
+              {
+                "id": "B",
+                "text": "단풍을 구경한다."
+              },
+              {
+                "id": "C",
+                "text": "눈사람을 만든다."
+              },
+              {
+                "id": "D",
+                "text": "시원한 옷을 입고 물놀이를 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "우리 집 앞 나무는 계절마다 옷을 갈아입습니다. 봄에는 연두색 셔츠를 입고, 겨울에는 가지만 남습니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'낙엽이 지는 나무는 겨울에 잎이 없다. 이 나무는 낙엽이 진다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 나무는 겨울에 잎이 없다."
+              },
+              {
+                "id": "B",
+                "text": "이 나무는 겨울에 잎이 있다."
+              },
+              {
+                "id": "C",
+                "text": "모든 나무는 잎이 없다."
+              },
+              {
+                "id": "D",
+                "text": "이 나무는 상록수이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "계절마다 날씨가 다르기 때문에 알맞은 옷을 입어야 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'건강하려면 계절에 맞는 옷을 입어야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 옷이나 입어도 건강하다."
+              },
+              {
+                "id": "B",
+                "text": "맞지 않는 옷을 입으면 건강하기 어렵다."
+              },
+              {
+                "id": "C",
+                "text": "옷과 건강은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "겨울에 반팔을 입어도 괜찮다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "가을에는 알록달록한 단풍이 듭니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'단풍이 들려면 가을이 되어야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "여름에 단풍이 들었다."
+              },
+              {
+                "id": "B",
+                "text": "겨울에 단풍이 들었다."
+              },
+              {
+                "id": "C",
+                "text": "가을이 되자 나뭇잎이 빨갛고 노랗게 변했다."
+              },
+              {
+                "id": "D",
+                "text": "봄에 단풍이 들었다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "따스한 봄바람 불면 연두색 셔츠 꺼내 입고 방긋.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'봄이 오면 새싹이 돋는다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "봄에 새싹이 안 돋는다."
+              },
+              {
+                "id": "B",
+                "text": "새싹이 돋으면 반드시 봄이다."
+              },
+              {
+                "id": "C",
+                "text": "겨울에 새싹이 돋는다."
+              },
+              {
+                "id": "D",
+                "text": "봄이 왔는데 새싹이 안 돋는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "추운 겨울 눈 내리면 가지만 남은 몸에 하얀 솜이불 덮고 쿨쿨.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'겨울에 눈이 오면 나무가 하얗게 덮인다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "눈이 내려 나뭇가지가 하얀 눈으로 덮였다."
+              },
+              {
+                "id": "B",
+                "text": "눈이 안 왔는데 나무가 하얘졌다."
+              },
+              {
+                "id": "C",
+                "text": "비가 와서 나무가 하얘졌다."
+              },
+              {
+                "id": "D",
+                "text": "눈이 와도 나무가 안 변했다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "봄: 꽃 핌, 여름: 무더위, 가을: 단풍, 겨울: 눈",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'겨울에는 눈이 온다. 지금 눈이 오고 있다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지금은 여름이다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "지금은 겨울일 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "눈이 오면 반드시 봄이다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "겨울에는 눈이 안 온다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "봄에 꽃이 피는 것과 기분이 좋은 것.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'봄에 사람들이 기분이 좋았다.' 봄과 기분의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "봄이 기분의 원인이다."
+              },
+              {
+                "id": "B",
+                "text": "기분이 좋으면 봄이다."
+              },
+              {
+                "id": "C",
+                "text": "따뜻한 날씨와 꽃이 관련 있지만 다른 이유도 있을 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "계절에 따라 날씨가 달라집니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'계절에 따라 입는 옷이 달라진다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "계절과 상관없이 같은 옷을 입게 한다."
+              },
+              {
+                "id": "B",
+                "text": "한 계절만 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "옷 색깔만 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "각 계절에 사람들이 입는 옷을 조사하여 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

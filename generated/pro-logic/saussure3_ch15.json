@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 15장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "시행착오란 여러 번 시도하고 실패하면서 알맞은 방법을 찾아가는 과정입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "시행착오로 배우려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시도 자체가 불필요해야 한다."
+              },
+              {
+                "id": "B",
+                "text": "한 번에 성공해야 한다."
+              },
+              {
+                "id": "C",
+                "text": "실패하면 바로 포기해야 한다."
+              },
+              {
+                "id": "D",
+                "text": "실패에서 교훈을 얻고 다시 시도하려는 의지가 있어야 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "극복이란 어려움이나 장애를 이겨내는 것입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "어려움을 극복하면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어려움이 더 커진다."
+              },
+              {
+                "id": "B",
+                "text": "더 약해진다."
+              },
+              {
+                "id": "C",
+                "text": "더 강해지고 자신감이 생긴다."
+              },
+              {
+                "id": "D",
+                "text": "아무 변화도 없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "개척이란 거친 땅을 일구거나 새로운 영역을 처음으로 열어 나가는 것입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'개척에는 용기가 필요하다. 우주 탐사는 새로운 영역의 개척이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우주 탐사에는 용기가 필요 없다."
+              },
+              {
+                "id": "B",
+                "text": "우주 탐사에는 용기가 필요하다."
+              },
+              {
+                "id": "C",
+                "text": "개척과 용기는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "우주 탐사는 개척이 아니다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "도전 없이는 성장할 수 없습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'성장하려면 도전이 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "도전하지 않으면 성장하기 어렵다."
+              },
+              {
+                "id": "B",
+                "text": "도전 없이도 성장한다."
+              },
+              {
+                "id": "C",
+                "text": "도전과 성장은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "도전하면 퇴보한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "실패를 두려워하지 않는 마음이 도전의 시작입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'성공하려면 실패를 두려워하지 않아야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "라이트 형제가 수백 번 실패해도 포기하지 않아 비행기를 만들어냈다."
+              },
+              {
+                "id": "B",
+                "text": "한 번 실패하고 바로 포기했더니 성공했다."
+              },
+              {
+                "id": "C",
+                "text": "시도하지 않았는데 성공했다."
+              },
+              {
+                "id": "D",
+                "text": "두려움에 아무것도 하지 않았다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "끈기를 가지고 노력하면 어려운 목표도 이룰 수 있습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'끈기 있게 노력하면 목표를 달성한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "포기하면 목표를 달성한다."
+              },
+              {
+                "id": "B",
+                "text": "노력 없이도 목표를 달성한다."
+              },
+              {
+                "id": "C",
+                "text": "끈기와 목표 달성은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "끈기 있게 노력했는데 목표를 달성 못 하는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "역경을 이겨낸 사람들의 이야기는 많은 사람에게 용기를 줍니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'극복 경험을 나누면 다른 사람에게도 용기가 된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "장애를 극복한 선수의 이야기를 듣고 다른 학생들도 포기하지 않겠다고 다짐했다."
+              },
+              {
+                "id": "B",
+                "text": "극복 경험을 나눴는데 아무도 영향받지 않았다."
+              },
+              {
+                "id": "C",
+                "text": "경험을 나누지 않았는데 모두 용기가 생겼다."
+              },
+              {
+                "id": "D",
+                "text": "극복 이야기를 듣고 오히려 포기했다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "시행착오를 거치면 더 좋은 방법을 찾게 됩니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'시행착오를 거치면 발전한다. 에디슨은 수천 번의 시행착오를 거쳤다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "에디슨은 시행착오를 안 했다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "에디슨은 발전했다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "시행착오와 발전은 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "에디슨은 퇴보했다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "도전 횟수가 많은 사람일수록 성공 확률이 높아지는 경향이 있습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'도전 횟수'와 '성공'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "도전과 성공은 전혀 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "도전이 많으면 성공 확률이 높아지지만 운이나 재능 등 다른 요인도 있다."
+              },
+              {
+                "id": "C",
+                "text": "도전하면 반드시 성공한다."
+              },
+              {
+                "id": "D",
+                "text": "성공하면 반드시 도전을 많이 한 것이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "어려움을 극복하면 인내력과 자신감이 함께 자랍니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'실패 후 다시 도전한 사람이 더 큰 성취를 이룬다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "도전 횟수만 세어본다."
+              },
+              {
+                "id": "B",
+                "text": "성공한 사람의 나이만 조사한다."
+              },
+              {
+                "id": "C",
+                "text": "실패 후 재도전한 사람과 포기한 사람의 성취 수준을 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "운동 시간을 비교한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

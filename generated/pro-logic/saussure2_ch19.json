@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 19장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "머지않아 집안일을 돕거나 운전을 대신해 주는 똑똑한 로봇 친구가 생길 거예요.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "로봇이 집안일을 도우려면 어떤 사실이 꼭 있어야 할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "로봇이 학교에 다녀야 한다."
+              },
+              {
+                "id": "B",
+                "text": "로봇이 밥을 먹어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "로봇에게 사람의 명령을 이해하고 따르는 인공 지능이 있어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "사람이 직접 로봇의 팔다리를 움직여야 한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "자율 주행 자동차는 사람의 도움 없이 스스로 운전하는 자동차입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "자율 주행 자동차가 보편화되면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사람이 직접 운전할 필요가 줄어든다."
+              },
+              {
+                "id": "B",
+                "text": "자동차가 사라진다."
+              },
+              {
+                "id": "C",
+                "text": "걸어 다녀야 한다."
+              },
+              {
+                "id": "D",
+                "text": "비행기가 없어진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "인공 지능은 사람처럼 생각하고 학습하는 컴퓨터 프로그램입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'인공 지능은 학습할 수 있다. 챗봇은 인공 지능이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "챗봇은 학습할 수 없다."
+              },
+              {
+                "id": "B",
+                "text": "인공 지능은 학습할 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "챗봇은 사람이다."
+              },
+              {
+                "id": "D",
+                "text": "챗봇은 학습할 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "매연 대신 태양이나 바람으로 깨끗한 에너지를 만들어 공기가 맑아질 거예요.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'깨끗한 에너지를 만들려면 태양이나 바람이 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태양이나 바람 없이도 깨끗한 에너지를 만들 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "태양이나 바람이 없으면 깨끗한 에너지를 만들 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "매연으로도 깨끗한 에너지를 만들 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "에너지와 태양은 관계없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "발명이란 전에 없던 물건이나 방법을 새로 만들어 내는 일입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'발명을 하려면 새로운 아이디어가 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "에디슨이 새로운 생각으로 전구를 발명했다."
+              },
+              {
+                "id": "B",
+                "text": "이미 있는 물건을 그대로 복사했다."
+              },
+              {
+                "id": "C",
+                "text": "아무 생각 없이 물건이 저절로 만들어졌다."
+              },
+              {
+                "id": "D",
+                "text": "발명 없이 옛날 물건만 사용했다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "과학이 발달하면 생활이 더 편리해집니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'과학이 발달하면 생활이 편리해진다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "편리함과 과학은 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "생활이 편리하면 반드시 과학이 발달한 것이다."
+              },
+              {
+                "id": "C",
+                "text": "과학이 발달하면 생활이 불편해진다."
+              },
+              {
+                "id": "D",
+                "text": "과학이 발달했는데 생활이 불편해지는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "가상 현실은 현실이 아닌데도 실제처럼 생각하고 보이게 하는 기술입니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'가상 현실 장비를 쓰면 실제와 비슷한 경험을 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "안경 없이 롤러코스터를 직접 탔다."
+              },
+              {
+                "id": "B",
+                "text": "가상 현실 안경을 쓰니 롤러코스터를 탄 것처럼 느꼈다."
+              },
+              {
+                "id": "C",
+                "text": "가상 현실 장비를 끄니 현실이 사라졌다."
+              },
+              {
+                "id": "D",
+                "text": "가상 현실 장비를 쓰니 아무것도 안 보였다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "편지를 보낼 때는 '부치다'를 쓰고, 우표를 붙일 때는 '붙이다'를 씁니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'편지를 보내는 것은 부치다이다. 민수는 편지를 보냈다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수는 편지를 붙였다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "민수는 편지를 찢었다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "민수는 편지를 부쳤다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "부치다와 보내다는 다른 뜻이다. (맞는 추론)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "미래에는 로봇이 많아지고, 사람들의 생활도 편리해질 거예요.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'로봇 기술 발달'과 '생활 편리함'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "로봇이 늘면 생활이 편해질 수 있지만, 다른 요인도 영향을 줄 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "로봇과 편리함은 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "생활이 편하면 반드시 로봇 때문이다."
+              },
+              {
+                "id": "D",
+                "text": "로봇이 많아지면 생활이 불편해진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "우주선을 타고 달나라나 화성으로 우주여행을 떠나는 날도 올 거예요.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'인공 지능 로봇이 사람의 일을 도울 수 있다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "로봇의 색깔을 바꿔 본다."
+              },
+              {
+                "id": "B",
+                "text": "로봇에게 설거지나 청소를 시켜 보고 잘하는지 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "로봇의 무게를 잰다."
+              },
+              {
+                "id": "D",
+                "text": "로봇의 이름을 바꿔 본다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

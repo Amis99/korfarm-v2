@@ -1,0 +1,129 @@
+const fs = require('fs');
+const path = require('path');
+
+const paragraphs = [
+  {
+    id: "p1",
+    text: "인공지능은 인간의 학습 능력, 추론 능력, 판단 능력 등을 컴퓨터 프로그램으로 구현한 기술을 총칭한다. 초기의 인공지능은 전문가가 미리 정해 준 규칙과 논리에 따라 작동하는 규칙 기반 시스템이었으나, 이 방식은 현실 세계의 규칙이 복잡하고 예외가 많아질수록 한계가 뚜렷해졌다. 이러한 한계를 근본적으로 극복하기 위해 등장한 것이 기계 학습이다. 기계 학습은 컴퓨터가 대량의 데이터를 분석하여 스스로 패턴과 규칙을 찾아내고, 이를 바탕으로 새로운 상황에 대한 예측이나 판단을 수행하는 기술이다. 즉, 사람이 일일이 규칙을 입력하지 않아도 데이터를 통해 컴퓨터가 스스로 학습할 수 있다는 점에서 기존의 규칙 기반 방식과 근본적으로 다르다."
+  },
+  {
+    id: "p2",
+    text: "기계 학습에는 대표적으로 지도 학습, 비지도 학습, 강화 학습이라는 세 가지 유형이 있다. 지도 학습은 정답이 포함된 데이터를 컴퓨터에 제공하여 입력과 정답 사이의 관계를 학습하게 하는 방식이다. 예를 들어 수천 장의 고양이 사진과 개 사진에 각각 올바른 정답 표지를 붙여 학습시키면, 컴퓨터는 새로운 사진이 고양이인지 개인지를 스스로 판별할 수 있게 된다. 비지도 학습은 정답 표지 없이 데이터만 제공하여 컴퓨터가 데이터 속에 숨겨진 구조나 패턴을 스스로 발견하도록 하는 방식이다. 강화 학습은 컴퓨터가 주어진 환경에서 시행착오를 거듭하며 보상을 최대화하는 최적의 행동 전략을 스스로 터득하는 방식으로, 바둑이나 로봇 제어와 같은 분야에서 뛰어난 성과를 보이고 있다."
+  },
+  {
+    id: "p3",
+    text: "기계 학습이 비약적으로 발전할 수 있었던 배경에는 딥러닝이라는 핵심 기술이 있다. 딥러닝은 인간의 뇌 신경망 구조를 모방한 인공 신경망을 여러 층으로 깊게 쌓아 올려 복잡한 데이터의 특징을 단계적으로 추출하는 방법이다. 신경망의 층이 깊어질수록 더 추상적이고 고차원적인 특징을 학습할 수 있어, 이미지 인식, 음성 인식, 자연어 처리 등 다양한 분야에서 혁신적인 성능 향상을 이루었다. 딥러닝이 이처럼 성공을 거둘 수 있었던 것은 인터넷의 발달로 대규모 데이터가 축적되고, 그래픽 처리 장치의 발달로 대표되는 컴퓨팅 능력이 비약적으로 향상되었기 때문이다."
+  },
+  {
+    id: "p4",
+    text: "인공지능과 기계 학습은 의료 진단, 자율 주행, 금융 분석, 언어 번역 등 사회 전반에 걸쳐 광범위하게 활용되고 있다. 그러나 이러한 기술에는 우려되는 점도 존재한다. 기계 학습 모델이 편향된 데이터로 학습하면 부정확하거나 차별적인 결과를 도출할 수 있으며, 복잡한 딥러닝 모델의 의사 결정 과정은 사람이 이해하기 어려운 블랙박스 문제를 야기한다. 또한 인공지능이 기존의 일자리를 대체할 가능성에 대한 사회적 불안도 점점 커지고 있다. 따라서 인공지능 기술의 발전과 함께 공정성, 투명성, 책임성을 확보하기 위한 윤리적 기준의 수립과 사회적 합의가 반드시 병행되어야 한다."
+  }
+];
+
+const totalLen = paragraphs.reduce((s, p) => s + p.text.length, 0);
+console.log("총 글자 수:", totalLen);
+if (totalLen < 1350 || totalLen > 1450) console.warn("경고: 1400±50 범위 밖!");
+
+function findRange(pid, search) {
+  const p = paragraphs.find(x => x.id === pid);
+  if (!p) throw new Error("문단 " + pid + " 없음");
+  const s = p.text.indexOf(search);
+  if (s === -1) throw new Error(`"${search}" not found in ${pid}`);
+  return { paragraphId: pid, start: s, end: s + search.length };
+}
+
+const timeline = [];
+let stepNum = 1;
+function addStep(pid, sentence, question) {
+  const r = findRange(pid, sentence);
+  timeline.push({ stepId: `s${stepNum}`, highlight: { ranges: [r] }, question: { ...question, scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true } } });
+  stepNum++;
+}
+function addParagraphSummary(pid, question) {
+  const p = paragraphs.find(x => x.id === pid);
+  timeline.push({ stepId: `s${stepNum}`, highlight: { ranges: [{ paragraphId: pid, start: 0, end: p.text.length }] }, question: { ...question, scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true } } });
+  stepNum++;
+}
+
+// p1
+addStep("p1", "인공지능은 인간의 학습 능력, 추론 능력, 판단 능력 등을 컴퓨터 프로그램으로 구현한 기술을 총칭한다.", { prompt: "첫 문장이 정의하는 인공지능의 의미로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "인간의 학습·추론·판단 능력을 컴퓨터 프로그램으로 구현한 기술의 총칭이다." }, { id: "B", text: "인간이 직접 규칙을 입력하는 단순한 프로그램이다." }, { id: "C", text: "컴퓨터가 자체적으로 의식을 가진 존재를 말한다." }, { id: "D", text: "로봇의 물리적 움직임만을 제어하는 기술이다." }], answerId: "A" });
+addStep("p1", "초기의 인공지능은 전문가가 미리 정해 준 규칙과 논리에 따라 작동하는 규칙 기반 시스템이었으나, 이 방식은 현실 세계의 규칙이 복잡하고 예외가 많아질수록 한계가 뚜렷해졌다.", { prompt: "둘째 문장이 말하는 초기 인공지능의 한계로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "규칙 기반 시스템으로 현실의 복잡성과 예외에 대처하기 어려웠다." }, { id: "B", text: "데이터가 부족하여 학습 자체가 불가능했다." }, { id: "C", text: "컴퓨터의 처리 속도가 너무 빨라서 오류가 발생했다." }, { id: "D", text: "규칙이 단순할수록 더 큰 한계가 있었다." }], answerId: "A" });
+addStep("p1", "이러한 한계를 근본적으로 극복하기 위해 등장한 것이 기계 학습이다.", { prompt: "셋째 문장이 소개하는 새로운 기술로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "규칙 기반 시스템의 한계를 극복하기 위해 기계 학습이 등장했다." }, { id: "B", text: "규칙 기반 방식이 더욱 발전하여 한계가 해소되었다." }, { id: "C", text: "인공지능 연구가 중단되었다." }, { id: "D", text: "딥러닝이 곧바로 등장하여 모든 문제를 해결했다." }], answerId: "A" });
+addStep("p1", "기계 학습은 컴퓨터가 대량의 데이터를 분석하여 스스로 패턴과 규칙을 찾아내고, 이를 바탕으로 새로운 상황에 대한 예측이나 판단을 수행하는 기술이다.", { prompt: "넷째 문장이 정의하는 기계 학습의 핵심으로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "컴퓨터가 대량의 데이터에서 스스로 패턴을 찾아 예측과 판단을 수행한다." }, { id: "B", text: "사람이 모든 패턴과 규칙을 미리 정해 준다." }, { id: "C", text: "컴퓨터가 데이터 없이 스스로 지식을 창출한다." }, { id: "D", text: "기존 방식과 동일하게 규칙에 따라 작동한다." }], answerId: "A" });
+addStep("p1", "즉, 사람이 일일이 규칙을 입력하지 않아도 데이터를 통해 컴퓨터가 스스로 학습할 수 있다는 점에서 기존의 규칙 기반 방식과 근본적으로 다르다.", { prompt: "다섯째 문장이 강조하는 기계 학습과 기존 방식의 차이로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "사람이 규칙을 입력하지 않아도 데이터를 통해 스스로 학습한다는 점이다." }, { id: "B", text: "기존보다 더 많은 규칙을 사람이 입력해야 한다는 점이다." }, { id: "C", text: "데이터가 필요 없다는 점이다." }, { id: "D", text: "기존 방식과 차이가 없다는 점이다." }], answerId: "A" });
+addParagraphSummary("p1", { prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "기계 학습은 규칙 기반 초기 인공지능의 한계를 극복하여 데이터로부터 스스로 학습하는 기술이다." }, { id: "B", text: "인공지능은 규칙 기반 방식이 가장 효과적이다." }, { id: "C", text: "기계 학습은 데이터 없이도 작동할 수 있다." }, { id: "D", text: "초기 인공지능과 기계 학습은 본질적으로 동일하다." }], answerId: "A" });
+
+// p2
+addStep("p2", "기계 학습에는 대표적으로 지도 학습, 비지도 학습, 강화 학습이라는 세 가지 유형이 있다.", { prompt: "첫 문장에서 기계 학습의 세 가지 유형으로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "지도 학습, 비지도 학습, 강화 학습이다." }, { id: "B", text: "입력 학습, 출력 학습, 변환 학습이다." }, { id: "C", text: "딥러닝, 신경망, 데이터 마이닝이다." }, { id: "D", text: "규칙 학습, 패턴 학습, 예측 학습이다." }], answerId: "A" });
+addStep("p2", "지도 학습은 정답이 포함된 데이터를 컴퓨터에 제공하여 입력과 정답 사이의 관계를 학습하게 하는 방식이다.", { prompt: "둘째 문장에서 지도 학습의 특징으로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "정답이 포함된 데이터를 제공하여 입력과 정답의 관계를 학습한다." }, { id: "B", text: "정답 없이 데이터 속 패턴을 스스로 발견한다." }, { id: "C", text: "시행착오를 통해 보상을 최대화하는 전략을 학습한다." }, { id: "D", text: "데이터 없이 규칙만으로 학습한다." }], answerId: "A" });
+addStep("p2", "예를 들어 수천 장의 고양이 사진과 개 사진에 각각 올바른 정답 표지를 붙여 학습시키면, 컴퓨터는 새로운 사진이 고양이인지 개인지를 스스로 판별할 수 있게 된다.", { prompt: "셋째 문장이 제시하는 지도 학습의 예로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "정답 표지가 붙은 사진으로 학습하여 새로운 사진을 스스로 판별한다." }, { id: "B", text: "정답 없이 사진을 분류한다." }, { id: "C", text: "보상을 통해 사진 판별 전략을 터득한다." }, { id: "D", text: "사람이 직접 모든 사진을 분류한다." }], answerId: "A" });
+addStep("p2", "비지도 학습은 정답 표지 없이 데이터만 제공하여 컴퓨터가 데이터 속에 숨겨진 구조나 패턴을 스스로 발견하도록 하는 방식이다.", { prompt: "넷째 문장에서 비지도 학습의 특징으로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "정답 없이 데이터 속의 숨겨진 구조나 패턴을 스스로 발견한다." }, { id: "B", text: "정답이 포함된 데이터로 학습한다." }, { id: "C", text: "시행착오를 통해 보상을 최대화한다." }, { id: "D", text: "사람이 직접 패턴을 알려 준다." }], answerId: "A" });
+addStep("p2", "강화 학습은 컴퓨터가 주어진 환경에서 시행착오를 거듭하며 보상을 최대화하는 최적의 행동 전략을 스스로 터득하는 방식으로, 바둑이나 로봇 제어와 같은 분야에서 뛰어난 성과를 보이고 있다.", { prompt: "다섯째 문장에서 강화 학습의 특징과 활용 분야로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "시행착오로 보상을 최대화하는 전략을 터득하며, 바둑과 로봇 제어에 활용된다." }, { id: "B", text: "정답 데이터를 이용하여 사진을 분류하는 데 활용된다." }, { id: "C", text: "데이터 속 패턴을 발견하여 고객 분석에 활용된다." }, { id: "D", text: "사람이 정한 규칙에 따라 작동한다." }], answerId: "A" });
+addParagraphSummary("p2", { prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "기계 학습은 지도·비지도·강화 학습의 세 유형으로 나뉘며 각각 학습 방식이 다르다." }, { id: "B", text: "기계 학습의 유형은 모두 동일한 방식으로 작동한다." }, { id: "C", text: "지도 학습만이 기계 학습의 유일한 방법이다." }, { id: "D", text: "기계 학습의 유형 구분은 실질적으로 무의미하다." }], answerId: "A" });
+
+// p3
+addStep("p3", "기계 학습이 비약적으로 발전할 수 있었던 배경에는 딥러닝이라는 핵심 기술이 있다.", { prompt: "첫 문장이 소개하는 기계 학습 발전의 핵심 기술로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "딥러닝이라는 핵심 기술이 기계 학습의 비약적 발전을 이끌었다." }, { id: "B", text: "규칙 기반 프로그래밍이 기계 학습의 발전을 이끌었다." }, { id: "C", text: "비지도 학습이 단독으로 발전을 이끌었다." }, { id: "D", text: "인공지능의 발전은 특정 기술과 무관하다." }], answerId: "A" });
+addStep("p3", "딥러닝은 인간의 뇌 신경망 구조를 모방한 인공 신경망을 여러 층으로 깊게 쌓아 올려 복잡한 데이터의 특징을 단계적으로 추출하는 방법이다.", { prompt: "둘째 문장이 정의하는 딥러닝의 원리로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "인공 신경망을 여러 층으로 깊게 쌓아 데이터의 특징을 단계적으로 추출한다." }, { id: "B", text: "단일 층의 신경망으로 모든 데이터를 한 번에 분석한다." }, { id: "C", text: "규칙을 직접 입력하여 데이터를 분류한다." }, { id: "D", text: "데이터 없이 뇌의 구조만으로 판단한다." }], answerId: "A" });
+addStep("p3", "신경망의 층이 깊어질수록 더 추상적이고 고차원적인 특징을 학습할 수 있어, 이미지 인식, 음성 인식, 자연어 처리 등 다양한 분야에서 혁신적인 성능 향상을 이루었다.", { prompt: "셋째 문장이 말하는 딥러닝의 성과로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "이미지·음성 인식, 자연어 처리 등에서 혁신적 성능 향상을 이루었다." }, { id: "B", text: "단순한 계산만 빨라졌을 뿐 실질적 성능 향상은 없었다." }, { id: "C", text: "이미지 인식 분야에서만 성능이 향상되었다." }, { id: "D", text: "층이 깊어질수록 성능이 오히려 저하되었다." }], answerId: "A" });
+addStep("p3", "딥러닝이 이처럼 성공을 거둘 수 있었던 것은 인터넷의 발달로 대규모 데이터가 축적되고, 그래픽 처리 장치의 발달로 대표되는 컴퓨팅 능력이 비약적으로 향상되었기 때문이다.", { prompt: "넷째 문장이 말하는 딥러닝 성공의 배경으로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "대규모 데이터 축적과 그래픽 처리 장치 발달에 따른 컴퓨팅 능력 향상이다." }, { id: "B", text: "데이터의 양이 줄어들어 효율이 높아진 것이다." }, { id: "C", text: "컴퓨터의 처리 속도가 느려져 정확도가 높아진 것이다." }, { id: "D", text: "인간이 직접 모든 학습 과정을 감독한 것이다." }], answerId: "A" });
+addParagraphSummary("p3", { prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "딥러닝은 다층 인공 신경망으로 복잡한 특징을 추출하며, 대규모 데이터와 컴퓨팅 발달에 힘입어 성공했다." }, { id: "B", text: "딥러닝은 단순한 규칙 기반 방식으로 작동한다." }, { id: "C", text: "딥러닝은 데이터 없이도 효과적으로 학습할 수 있다." }, { id: "D", text: "딥러닝의 성공은 오직 알고리즘의 개선 덕분이다." }], answerId: "A" });
+
+// p4
+addStep("p4", "인공지능과 기계 학습은 의료 진단, 자율 주행, 금융 분석, 언어 번역 등 사회 전반에 걸쳐 광범위하게 활용되고 있다.", { prompt: "첫 문장이 열거하는 인공지능의 활용 분야로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "의료 진단, 자율 주행, 금융 분석, 언어 번역 등이다." }, { id: "B", text: "오직 금융 분야에서만 활용된다." }, { id: "C", text: "인공지능은 아직 실용화 단계에 이르지 못했다." }, { id: "D", text: "언어 번역에서만 성과를 보이고 있다." }], answerId: "A" });
+addStep("p4", "그러나 이러한 기술에는 우려되는 점도 존재한다.", { prompt: "둘째 문장이 제기하는 내용으로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "인공지능과 기계 학습 기술에 우려되는 점이 존재한다는 것이다." }, { id: "B", text: "인공지능 기술에는 문제점이 전혀 없다는 것이다." }, { id: "C", text: "기계 학습이 완벽한 기술이라는 것이다." }, { id: "D", text: "기술 발전이 멈추었다는 것이다." }], answerId: "A" });
+addStep("p4", "기계 학습 모델이 편향된 데이터로 학습하면 부정확하거나 차별적인 결과를 도출할 수 있으며, 복잡한 딥러닝 모델의 의사 결정 과정은 사람이 이해하기 어려운 블랙박스 문제를 야기한다.", { prompt: "셋째 문장이 지적하는 구체적 문제로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "편향된 데이터로 인한 차별적 결과와 블랙박스 문제이다." }, { id: "B", text: "데이터가 부족하여 학습이 불가능한 문제이다." }, { id: "C", text: "컴퓨터가 너무 느리게 작동하는 문제이다." }, { id: "D", text: "인공지능이 스스로 의식을 가지게 되는 문제이다." }], answerId: "A" });
+addStep("p4", "또한 인공지능이 기존의 일자리를 대체할 가능성에 대한 사회적 불안도 점점 커지고 있다.", { prompt: "넷째 문장이 말하는 사회적 우려로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "인공지능이 기존 일자리를 대체할 가능성에 대한 불안이다." }, { id: "B", text: "인공지능이 새로운 일자리를 만들지 못한다는 우려이다." }, { id: "C", text: "인공지능이 인간보다 열등하다는 인식이다." }, { id: "D", text: "인공지능 기술이 퇴보하고 있다는 우려이다." }], answerId: "A" });
+addStep("p4", "따라서 인공지능 기술의 발전과 함께 공정성, 투명성, 책임성을 확보하기 위한 윤리적 기준의 수립과 사회적 합의가 반드시 병행되어야 한다.", { prompt: "마지막 문장이 주장하는 내용으로 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "공정성·투명성·책임성을 위한 윤리적 기준 수립과 사회적 합의가 병행되어야 한다." }, { id: "B", text: "인공지능 기술의 발전을 중단해야 한다." }, { id: "C", text: "윤리적 논의 없이 기술만 발전시키면 된다." }, { id: "D", text: "인공지능은 규제할 필요가 전혀 없다." }], answerId: "A" });
+addParagraphSummary("p4", { prompt: "넷째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?", choices: [{ id: "A", text: "인공지능은 광범위하게 활용되지만 편향·블랙박스·일자리 대체 등의 우려가 있어 윤리적 논의가 필요하다." }, { id: "B", text: "인공지능은 문제점이 전혀 없는 완벽한 기술이다." }, { id: "C", text: "인공지능 기술의 발전은 더 이상 불가능하다." }, { id: "D", text: "인공지능의 활용 분야는 매우 제한적이다." }], answerId: "A" });
+
+const recall = {
+  cards: [
+    { id: "c1", text: "인공지능은 인간의 학습·추론·판단 능력을 컴퓨터로 구현한 기술이며, 초기에는 규칙 기반 시스템이었다." },
+    { id: "c2", text: "기계 학습은 데이터에서 스스로 패턴을 찾아 예측과 판단을 수행하며, 규칙 기반 방식의 한계를 극복했다." },
+    { id: "c3", text: "기계 학습은 지도 학습(정답 제공), 비지도 학습(정답 없음), 강화 학습(시행착오와 보상)으로 나뉜다." },
+    { id: "c4", text: "딥러닝은 다층 인공 신경망으로 복잡한 데이터의 특징을 단계적으로 추출하는 기술이다." },
+    { id: "c5", text: "딥러닝은 이미지·음성 인식, 자연어 처리 등에서 혁신적 성능 향상을 이루었으며 대규모 데이터와 컴퓨팅 발달이 배경이다." },
+    { id: "c6", text: "인공지능은 의료·자율 주행·금융·번역 등 사회 전반에 광범위하게 활용되고 있다." },
+    { id: "c7", text: "편향 데이터에 의한 차별적 결과, 블랙박스 문제, 일자리 대체 가능성 등이 우려된다." },
+    { id: "c8", text: "인공지능 발전과 함께 공정성·투명성·책임성을 위한 윤리적 기준 수립과 사회적 합의가 병행되어야 한다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+const confirm = {
+  questions: [
+    { id: "q1", prompt: "초기 인공지능의 한계를 극복하기 위해 등장한 기술은 무엇인가요?", answerText: "기계 학습", answerMatchMode: "ANY", answerRanges: [findRange("p1", "기계 학습")], scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q2", prompt: "정답이 포함된 데이터를 제공하여 학습시키는 방식을 무엇이라 하나요?", answerText: "지도 학습", answerMatchMode: "ANY", answerRanges: [findRange("p2", "지도 학습")], scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q3", prompt: "정답 없이 데이터의 숨겨진 구조를 스스로 발견하는 학습은 무엇인가요?", answerText: "비지도 학습", answerMatchMode: "ANY", answerRanges: [findRange("p2", "비지도 학습")], scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q4", prompt: "시행착오로 보상을 최대화하는 행동 전략을 터득하는 학습은 무엇인가요?", answerText: "강화 학습", answerMatchMode: "ANY", answerRanges: [findRange("p2", "강화 학습")], scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q5", prompt: "인간의 뇌 신경망을 모방하여 여러 층으로 쌓은 인공 신경망 기술을 무엇이라 하나요?", answerText: "딥러닝", answerMatchMode: "ANY", answerRanges: [findRange("p3", "딥러닝")], scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q6", prompt: "딥러닝 성공의 두 가지 배경은 무엇인가요?", answerText: "대규모 데이터 축적과 컴퓨팅 능력 향상", answerMatchMode: "ANY", answerRanges: [findRange("p3", "대규모 데이터가 축적되고, 그래픽 처리 장치의 발달로 대표되는 컴퓨팅 능력이 비약적으로 향상")], scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q7", prompt: "딥러닝 모델의 의사 결정을 사람이 이해하기 어려운 문제를 무엇이라 하나요?", answerText: "블랙박스 문제", answerMatchMode: "ANY", answerRanges: [findRange("p4", "블랙박스 문제")], scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q8", prompt: "인공지능 기술 발전과 함께 확보해야 할 세 가지 가치는 무엇인가요?", answerText: "공정성, 투명성, 책임성", answerMatchMode: "ANY", answerRanges: [findRange("p4", "공정성, 투명성, 책임성")], scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true }
+  ]
+};
+
+const content = {
+  contentId: "dr-w1-007", contentType: "DAILY_READING", version: 1, status: "PUBLISHED",
+  title: "일일 독해(비트겐슈타인 1) Day 7 비문학", description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "WITTGENSTEIN_1", schoolGradeRange: { min: 9, max: 10 },
+  area: "READING", subArea: "NONFICTION", competencies: ["READING"], tags: ["daily"],
+  access: { mode: "FREE" }, seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 300, assets: {},
+  payload: { passage: { format: "TEXT", paragraphs }, intensive: { timeline }, recall, confirm }
+};
+
+const staticDir = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'wittgenstein1');
+fs.mkdirSync(staticDir, { recursive: true });
+fs.writeFileSync(path.join(staticDir, '007.json'), JSON.stringify(content, null, 2), 'utf8');
+console.log("007.json 저장 완료");
+
+const batchPath = path.join(__dirname, '..', 'generated', 'daily-batch-reading-wittgenstein1.json');
+const batch = JSON.parse(fs.readFileSync(batchPath, 'utf8'));
+const idx = batch.items.findIndex(i => i.day_index === 7 && i.level_id === "WITTGENSTEIN_1");
+const batchItem = { content_type: "DAILY_READING", level_id: "WITTGENSTEIN_1", area: "READING", sub_area: "NONFICTION", day_index: 7, module_key: "reading_training", schema_version: "1.0", content };
+if (idx >= 0) batch.items[idx] = batchItem; else batch.items.push(batchItem);
+fs.writeFileSync(batchPath, JSON.stringify(batch, null, 2), 'utf8');
+console.log("배치 파일 Day 7 업데이트 완료");
+console.log("intensive steps:", timeline.length, "| recall:", recall.cards.length, "| confirm:", confirm.questions.length);

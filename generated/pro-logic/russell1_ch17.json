@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀1 17장 논리사고력",
+  "targetLevel": "russell1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "관세를 매기면 수입품 가격이 올라 국내 생산자는 이익을 보지만, 소비자는 비싼 가격에 덜 사게 된다. 소비자가 잃는 이익이 생산자가 얻는 것보다 크므로 전체 이익은 줄어든다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'관세가 전체 이익을 줄인다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관세를 매기면 수입품 가격은 변하지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "관세는 소비자에게만 영향을 준다."
+              },
+              {
+                "id": "C",
+                "text": "생산자의 이익은 항상 소비자의 손해보다 크다."
+              },
+              {
+                "id": "D",
+                "text": "소비자의 이익 감소분과 생산자의 이익 증가분을 합산하여 사회 전체 이익을 계산할 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "홑문장은 주어와 서술어가 한 번만 있는 문장이고, 겹문장은 주어와 서술어가 두 번 이상 있는 문장이다. '봄이 왔다'는 홑문장이고, '여름은 덥고 겨울은 춥다'는 겹문장이다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "홑문장과 겹문장을 주어-서술어 수로 구분할 수 있다는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 문장은 홑문장이다."
+              },
+              {
+                "id": "B",
+                "text": "문장에서 주어-서술어 쌍을 명확히 식별할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "주어와 서술어의 수는 문장 구조와 무관하다."
+              },
+              {
+                "id": "D",
+                "text": "겹문장에는 주어가 없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "정부가 국내 초콜릿 회사를 보호하려고 외국 초콜릿에 높은 관세를 붙이면 초콜릿 가격이 오른다. 초콜릿을 재료로 쓰는 과자나 빵도 함께 비싸진다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "초콜릿에 높은 관세를 오래 유지하면 예상되는 연쇄적 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "국내 초콜릿 회사의 기술력이 자동으로 향상된다."
+              },
+              {
+                "id": "B",
+                "text": "초콜릿 관련 제품만 비싸지고 다른 산업에는 영향이 없다."
+              },
+              {
+                "id": "C",
+                "text": "과자와 빵 등 초콜릿 사용 제품도 비싸져 소비가 줄고, 관련 산업까지 위축된다."
+              },
+              {
+                "id": "D",
+                "text": "외국 초콜릿이 더 많이 수입된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "풍자는 현실의 문제를 꼬집어 비판하면서 웃음을 주는 기법이다. 「허생전」에서 허생은 도둑들에게 글을 가르치겠다고 하여 당시 양반 사회의 무능함을 풍자한다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "「허생전」에서 허생이 양반들의 무능함을 풍자하면 독자에게 예상되는 효과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독자가 양반 사회를 동경하게 된다."
+              },
+              {
+                "id": "B",
+                "text": "웃음 속에서 당시 사회의 모순을 비판적으로 인식하게 된다."
+              },
+              {
+                "id": "C",
+                "text": "독자가 허생의 행동을 비난하게 된다."
+              },
+              {
+                "id": "D",
+                "text": "독자가 소설을 사실로 받아들인다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "관세가 없을 때 300원짜리 외국 초콜릿이 들어오면 국내 가격도 300원으로 내려간다. 소비자는 이익을 보고 생산자는 손해를 보지만, 나라 전체로는 이익이다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 소비자 이익이 생산자 손해보다 크면 나라 전체로 이익이다. 소전제: 관세 없이 수입할 때 소비자 이익이 생산자 손해보다 크다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관세 없이 수입하면 나라 전체로 손해이다."
+              },
+              {
+                "id": "B",
+                "text": "관세 없이 수입하면 나라 전체로 이익이다."
+              },
+              {
+                "id": "C",
+                "text": "생산자와 소비자 모두 손해이다."
+              },
+              {
+                "id": "D",
+                "text": "관세가 있어야 나라 전체로 이익이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "홑문장은 간결하고 분명하게 전달하는 효과가 있다. 겹문장은 여러 내용을 자연스럽게 연결하여 풍부하게 표현한다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 간결하고 분명하게 전달하는 문장은 홑문장이다. 소전제: '하늘이 파랗다'는 간결하고 분명하게 전달되는 문장이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'하늘이 파랗다'는 겹문장이다."
+              },
+              {
+                "id": "B",
+                "text": "간결한 문장은 항상 겹문장이다."
+              },
+              {
+                "id": "C",
+                "text": "'하늘이 파랗다'에는 주어가 두 개이다."
+              },
+              {
+                "id": "D",
+                "text": "'하늘이 파랗다'는 홑문장이다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "관세를 오래 유지하면 국내 기업의 경쟁력이 약화될 수 있다. 보호 없이도 경쟁할 수 있으려면 기업 스스로 기술력을 높여야 한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'국제 경쟁력을 갖추려면 기업의 기술력 향상이 필요하다'에서 필요조건 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기술력이 향상되면 반드시 경쟁력이 생긴다."
+              },
+              {
+                "id": "B",
+                "text": "기술력과 경쟁력은 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "경쟁력이 없으면 기술력이 높은 것이다."
+              },
+              {
+                "id": "D",
+                "text": "기술력이 향상되지 않으면 경쟁력을 갖출 수 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "겹문장이 되려면 주어와 서술어가 두 번 이상 나타나야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'겹문장이 되려면 주어-서술어 쌍이 둘 이상이어야 한다'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주어-서술어가 하나이면 겹문장이 될 수 없다."
+              },
+              {
+                "id": "B",
+                "text": "주어-서술어 수와 문장 종류는 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "겹문장이 아니면 주어-서술어가 둘 이상이다."
+              },
+              {
+                "id": "D",
+                "text": "주어-서술어가 둘 이상이면 반드시 겹문장이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "관세의 장점은 국내 산업을 보호하는 것이고, 단점은 소비자 가격 상승과 사회 전체 이익 감소이다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'관세의 부정적 효과'의 필요조건은 '수입품 가격이 올라 소비자에게 불이익이 생겨야 한다'이다. 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관세 없이 수입하여 소비자가 저렴하게 구매하는 경우"
+              },
+              {
+                "id": "B",
+                "text": "외국 자동차에 관세를 매겨 국내 가격이 올라 소비자가 비싸게 사는 경우"
+              },
+              {
+                "id": "C",
+                "text": "국내 기업이 자체 기술로 가격을 낮춘 경우"
+              },
+              {
+                "id": "D",
+                "text": "수입 없이 국내 생산만으로 수요를 충족하는 경우"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "겹문장은 홑문장이 둘 이상 합쳐진 것이다. '비가 오면 땅이 젖는다'는 '비가 온다'와 '땅이 젖는다'가 합쳐진 겹문장이다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'겹문장'의 필요조건은 '홑문장 둘 이상이 합쳐져야 한다'이다. 겹문장이 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나는 학생이다."
+              },
+              {
+                "id": "B",
+                "text": "비가 오면 땅이 젖는다."
+              },
+              {
+                "id": "C",
+                "text": "여름은 덥고 겨울은 춥다."
+              },
+              {
+                "id": "D",
+                "text": "나는 밥을 먹고 동생은 잠을 잔다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "관세를 매기면 수입품 가격이 오른다. 수입품 가격이 오르면 국내 생산자는 더 비싸게 팔 수 있다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'관세를 매기면(P) 수입품 가격이 오른다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수입품 가격이 오르면 반드시 관세를 매긴 것이다."
+              },
+              {
+                "id": "B",
+                "text": "관세와 가격은 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "수입품 가격이 오르지 않으면 관세를 매긴 것이다."
+              },
+              {
+                "id": "D",
+                "text": "관세를 매기면서 수입품 가격이 오르지 않는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "풍자와 해학은 모두 웃음을 주지만 목적이 다르다. 풍자는 현실 비판이 목적이고, 해학은 따뜻한 웃음이 목적이다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'현실을 날카롭게 비판하는 웃음이면(P) 풍자이다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "풍자이면 반드시 비판적 웃음이다."
+              },
+              {
+                "id": "B",
+                "text": "현실 비판의 웃음이면서 풍자가 아닌 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "풍자가 아니면 비판이 없다."
+              },
+              {
+                "id": "D",
+                "text": "비판과 풍자는 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "지나친 관세는 나라 간 무역을 줄이고 무역 분쟁을 일으킬 수 있다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'지나친 관세가 무역 분쟁을 일으킨다'의 충분조건 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관세 없이 자유롭게 무역하는 경우"
+              },
+              {
+                "id": "B",
+                "text": "두 나라가 관세를 낮춰 무역이 활발해진 경우"
+              },
+              {
+                "id": "C",
+                "text": "A국이 B국 제품에 높은 관세를 매기자 B국도 보복 관세를 매겨 무역이 줄어든 경우"
+              },
+              {
+                "id": "D",
+                "text": "한 나라가 모든 수입을 금지한 경우"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "해학은 인간의 약점이나 실수를 따뜻하게 감싸 안으며 웃음을 주는 기법이다. 풍자와 달리 공격적이지 않다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'따뜻하게 감싸며 웃음을 주면 해학이다'의 충분조건 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실수한 사람을 너그럽게 웃으며 감싸주는 이야기"
+              },
+              {
+                "id": "B",
+                "text": "어리숙한 인물의 행동을 사랑스럽게 묘사하는 이야기"
+              },
+              {
+                "id": "C",
+                "text": "권력자의 부패를 날카롭게 비판하며 조롱하는 이야기"
+              },
+              {
+                "id": "D",
+                "text": "할머니가 스마트폰 사용에 서투른 모습을 따뜻하게 그리는 이야기"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "관세를 매기면 수입품 가격이 오르고, 가격이 오르면 소비자가 줄어든다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'관세를 매기면(P) 소비자가 줄어든다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "소비자가 줄었으므로 관세를 매긴 것이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "A와 C 모두 타당하다."
+              },
+              {
+                "id": "C",
+                "text": "관세를 매기지 않았으므로 소비자가 줄지 않는다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "관세를 매겼으므로 소비자가 줄어들 것이다. (전건 긍정 — 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'여름은 덥고 겨울은 춥다'는 주어-서술어가 두 번 나타나므로 겹문장이다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'주어-서술어가 두 번 이상이면(P) 겹문장이다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "B와 C 모두 타당하다."
+              },
+              {
+                "id": "B",
+                "text": "겹문장이 아니므로 주어-서술어가 한 번이다. (대우 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "이 문장은 주어-서술어가 두 번이므로 겹문장이다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "D",
+                "text": "겹문장이므로 주어-서술어가 두 번 이상이다. (후건 긍정 — 부당)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "관세율이 높을수록 수입품 가격이 올라가고, 가격이 올라갈수록 소비량이 줄어드는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'관세율'과 '소비량'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관세율을 높이면 소비량이 반드시 0이 된다."
+              },
+              {
+                "id": "B",
+                "text": "소비량이 줄면 반드시 관세 때문이다."
+              },
+              {
+                "id": "C",
+                "text": "관세율과 소비량 사이에 음의 상관관계가 있으나, 소득 수준이나 대체재 유무 등 다른 변수도 작용한다."
+              },
+              {
+                "id": "D",
+                "text": "관세율과 소비량은 무관하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "풍자 문학이 많이 등장하는 시대는 사회적 모순이 심한 시대와 겹치는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'사회적 모순의 심각성'과 '풍자 문학의 활발함'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사회적 모순이 풍자 문학의 배경이 되지만, 작가의 의식과 표현의 자유 등 다른 요인도 함께 작용한다."
+              },
+              {
+                "id": "B",
+                "text": "사회적 모순이 풍자 문학의 유일한 원인이다."
+              },
+              {
+                "id": "C",
+                "text": "풍자 문학이 사회적 모순을 만들어낸다."
+              },
+              {
+                "id": "D",
+                "text": "둘은 아무 관계가 없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "관세를 매기면 국내 산업을 보호할 수 있지만, 사회 전체 이익은 줄어들 수 있다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '관세가 국내 기업의 장기적 경쟁력 향상에 도움이 된다.' 이 가설을 반증하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관세 보호를 받은 기업이 혁신 동기를 잃어 오히려 경쟁력이 약화된 경우"
+              },
+              {
+                "id": "B",
+                "text": "관세 보호를 받은 기업이 기술 개발에 투자하여 경쟁력이 높아진 경우"
+              },
+              {
+                "id": "C",
+                "text": "관세 없이 경쟁에서 살아남은 기업"
+              },
+              {
+                "id": "D",
+                "text": "관세를 매기지 않아 국내 기업이 도산한 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "홑문장은 간결하고 분명하게 전달하는 효과가 있고, 겹문장은 풍부하게 표현하는 효과가 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '홑문장이 겹문장보다 항상 의미 전달에 효과적이다.' 이 가설을 반증하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "홑문장으로 간결하게 정보를 전달한 안내문"
+              },
+              {
+                "id": "B",
+                "text": "홑문장만 사용한 연설이 호평받은 경우"
+              },
+              {
+                "id": "C",
+                "text": "여러 내용의 관계를 겹문장으로 연결했을 때 오히려 이해가 쉬워진 경우"
+              },
+              {
+                "id": "D",
+                "text": "긴 겹문장이 어렵게 느껴진 경우"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

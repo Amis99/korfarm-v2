@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 6장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "집은 비바람이 몰아쳐도 끄떡없는 튼튼한 안식처입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "이 말이 맞으려면 어떤 사실이 숨어 있어야 할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "집은 약한 재료로 만들어졌다."
+              },
+              {
+                "id": "B",
+                "text": "집은 비바람을 막을 수 있는 튼튼한 구조이다."
+              },
+              {
+                "id": "C",
+                "text": "비가 오면 집이 무너진다."
+              },
+              {
+                "id": "D",
+                "text": "안식처는 밖에 있다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "아파트는 높은 건물 안에 여러 집이 모여 있는 형태입니다. 한 건물에 많은 가족이 살 수 있어서 좁은 땅을 효율적으로 사용할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "좁은 땅에 아파트를 지으면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 가족만 살 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "땅이 더 넓어진다."
+              },
+              {
+                "id": "C",
+                "text": "많은 가족이 함께 살 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "건물이 낮아진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "집은 더위나 추위, 비바람 같은 날씨 변화로부터 우리 몸을 안전하게 보호해 줍니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'집은 날씨로부터 우리를 보호한다. 민지네 아파트는 집이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민지는 밖에서 산다."
+              },
+              {
+                "id": "B",
+                "text": "민지네 아파트는 집이 아니다."
+              },
+              {
+                "id": "C",
+                "text": "집은 보호하지 못한다."
+              },
+              {
+                "id": "D",
+                "text": "민지네 아파트는 날씨로부터 민지를 보호한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "민지는 거실로 나갔습니다. 소파 위에는 아빠가 앉아 계셨고, 소파 아래에는 강아지 몽몽이가 엎드려 있었습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'위치를 알려면 기준이 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기준이 없으면 위치를 알기 어렵다."
+              },
+              {
+                "id": "B",
+                "text": "기준 없이도 위치를 잘 알 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "위치를 알면 기준이 사라진다."
+              },
+              {
+                "id": "D",
+                "text": "기준이 있으면 위치를 모른다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "만약 집이 없다면 비가 올 때 몸이 젖거나 추운 겨울에 덜덜 떨게 될 것입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'몸을 보호하려면 집이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "집이 없어도 비를 맞지 않았다."
+              },
+              {
+                "id": "B",
+                "text": "집이 없어서 추운 겨울에 몸이 떨렸다."
+              },
+              {
+                "id": "C",
+                "text": "집 밖에서 더 따뜻했다."
+              },
+              {
+                "id": "D",
+                "text": "비가 올 때 밖이 더 편했다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "비가 세차게 쏟아지는 소리에 민지는 깜짝 놀라 이불 속으로 숨었습니다. 하지만 곧 따뜻한 집 안에 있다는 생각에 마음이 놓였습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'집 안에 있으면 마음이 놓인다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "밖에 있어도 마음이 놓인다."
+              },
+              {
+                "id": "B",
+                "text": "마음이 놓이면 반드시 집 안이다."
+              },
+              {
+                "id": "C",
+                "text": "집 안에 있는데 마음이 불안한 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "집 안에 있으면 더 무섭다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "집은 가족과 함께 맛있는 밥을 먹고, 편안히 잠을 자는 휴식의 공간이기도 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'집에 있으면 편안히 쉴 수 있다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "집이 없어도 잘 쉬었다."
+              },
+              {
+                "id": "B",
+                "text": "집에 있는데 밖보다 불편했다."
+              },
+              {
+                "id": "C",
+                "text": "밖에서 더 푹 잤다."
+              },
+              {
+                "id": "D",
+                "text": "집에 왔더니 피곤이 풀렸다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "사람들이 사는 집의 모양은 환경과 생활 방식에 따라 아주 다양합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'추운 곳에 사는 사람은 두꺼운 벽의 집을 짓는다. 이누이트는 추운 곳에 산다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이누이트는 두꺼운 벽의 집을 짓는다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "이누이트는 얇은 벽의 집에 산다. (틀린 추론)"
+              },
+              {
+                "id": "C",
+                "text": "모든 사람이 같은 집에 산다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "추운 곳에는 집이 없다. (맞는 추론)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "집은 우리에게 단순한 건물이 아니라 소중한 보금자리이자 안식처입니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'넓은 집에 사는 사람은 행복하다.' 넓은 집과 행복의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "넓은 집이 행복의 원인이다."
+              },
+              {
+                "id": "B",
+                "text": "둘 다 함께 나타날 수 있지만 넓은 집이 행복의 원인은 아닐 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "행복하면 반드시 넓은 집에 산다."
+              },
+              {
+                "id": "D",
+                "text": "넓은 집은 불행의 원인이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "집은 더위나 추위, 비바람 같은 날씨 변화로부터 우리 몸을 안전하게 보호해 줍니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'집의 모양은 날씨에 따라 달라진다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 날씨인 곳의 집 모양만 조사한다."
+              },
+              {
+                "id": "B",
+                "text": "한 가지 집 모양만 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "더운 나라와 추운 나라의 집 모양을 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "집의 색깔을 조사한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

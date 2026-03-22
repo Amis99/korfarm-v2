@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 1장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "자아 성찰이란 자신의 마음과 행동을 깊이 살펴보고 반성하는 것을 말합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "자아 성찰을 하려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반드시 거울 앞에 서야 한다."
+              },
+              {
+                "id": "B",
+                "text": "다른 사람이 대신 반성해 주어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "자기 자신의 행동을 객관적으로 돌아볼 수 있는 능력이 있어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "글을 잘 써야만 가능하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "내가 어떤 사람인지, 무엇을 잘하고 무엇이 부족한지 알아야 더 나은 사람으로 성장할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "자신의 장점과 단점을 정확히 파악하면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "단점이 저절로 사라진다."
+              },
+              {
+                "id": "B",
+                "text": "부족한 점을 보완하고 잘하는 점을 살려 성장할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "장점도 함께 없어진다."
+              },
+              {
+                "id": "D",
+                "text": "아무런 변화가 생기지 않는다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "뒷받침 문장은 중심 문장을 예시나 이유를 들어 자세히 설명하는 문장입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'뒷받침 문장은 중심 문장을 설명한다. 예시를 드는 문장은 뒷받침 문장이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "예시를 드는 문장은 중심 문장을 설명하는 역할을 한다."
+              },
+              {
+                "id": "B",
+                "text": "뒷받침 문장은 예시를 들지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "예시를 드는 문장은 중심 문장이다."
+              },
+              {
+                "id": "D",
+                "text": "중심 문장과 뒷받침 문장은 같다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "거울이 겉모습을 비추듯이, 성찰은 내면의 모습을 살펴보는 도구입니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'성장하려면 자아 성찰이 꼭 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자아 성찰 없이도 충분히 성장할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "자아 성찰이 없으면 진정한 성장이 어렵다."
+              },
+              {
+                "id": "C",
+                "text": "성찰만 하면 자동으로 완벽해진다."
+              },
+              {
+                "id": "D",
+                "text": "성장과 성찰은 관계없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "성격이란 개인이 가진 고유한 행동 양식이나 특성입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'자아를 이해하려면 자신의 성격을 알아야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "성격을 몰라도 자아를 완벽히 이해했다."
+              },
+              {
+                "id": "B",
+                "text": "자신의 성격을 모른 채 아무 준비도 하지 않았다."
+              },
+              {
+                "id": "C",
+                "text": "친구의 성격만 조사하고 나는 돌아보지 않았다."
+              },
+              {
+                "id": "D",
+                "text": "수줍음이 많은 성격을 알고 발표 연습을 미리 준비했다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "자신의 장점을 알면 자신감이 생기고, 단점을 알면 고쳐나갈 수 있습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'장점을 파악하면 자신감이 생긴다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "장점과 자신감은 전혀 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "자신감이 있으면 반드시 장점을 안다."
+              },
+              {
+                "id": "C",
+                "text": "장점을 몰라도 자신감이 넘친다."
+              },
+              {
+                "id": "D",
+                "text": "장점을 알았는데 자신감이 안 생기는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "내면이란 마음속이나 정신의 안쪽 세계를 뜻합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'내면을 성찰하면 자신을 더 잘 이해하게 된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일기를 쓰며 오늘 느낀 감정을 돌아보니 내가 왜 화가 났는지 알게 되었다."
+              },
+              {
+                "id": "B",
+                "text": "성찰하지 않았는데 자신을 완전히 이해했다."
+              },
+              {
+                "id": "C",
+                "text": "거울만 보고 머리 모양만 확인했다."
+              },
+              {
+                "id": "D",
+                "text": "남의 내면만 분석했다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "자아란 자기 자신을 깨닫는 의식의 주체입니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'성찰하는 사람은 자아를 깨닫는다. 민수는 매일 일기를 쓰며 성찰한다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수는 성찰하지 않는다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "성찰과 자아는 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "민수는 자아를 깨달을 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "민수는 자아를 모른다. (맞는 추론)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "거울을 볼 때마다 겉모습뿐만 아니라 내면의 나도 함께 살펴보는 시간을 가져봅시다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'일기를 자주 쓰는 학생이 자기 이해력이 높다.' 이 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일기 쓰기와 자기 이해는 전혀 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "일기 쓰기가 성찰 기회가 되어 자기 이해에 도움이 되지만 다른 요인도 있을 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "일기를 쓰면 반드시 자기 이해가 완벽해진다."
+              },
+              {
+                "id": "D",
+                "text": "자기 이해가 높으면 반드시 일기를 쓴다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "문단을 읽을 때 전체 내용을 포괄하는 문장을 찾으면 중심 문장을 파악할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'자아 성찰을 하면 행동이 개선된다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "성찰 일기를 쓴 학생과 안 쓴 학생의 행동 변화를 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "학생들의 키를 측정한다."
+              },
+              {
+                "id": "C",
+                "text": "거울의 크기를 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "학생들의 이름을 외운다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

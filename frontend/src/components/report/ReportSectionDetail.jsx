@@ -97,22 +97,49 @@ const SECTIONS = [
     key: "proMode",
     label: "프로 모드",
     dotClass: "ur-dot-pro",
-    renderItems: (items) => (
-      <table>
-        <thead>
-          <tr><th>챕터</th><th>점수</th><th>상태</th><th>일시</th></tr>
-        </thead>
-        <tbody>
-          {items.map((it, i) => (
-            <tr key={i}>
-              <td style={{ fontSize: 12 }}>{it.chapterId}</td>
-              <td style={{ fontWeight: 700 }}>{it.score ?? "-"}</td>
-              <td>{statusLabel(it.status)}</td>
-              <td style={{ fontSize: 12 }}>{fmtDate(it.createdAt)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    renderItems: (items, sectionData) => (
+      <>
+        <table>
+          <thead>
+            <tr><th>챕터</th><th>점수</th><th>상태</th><th>일시</th></tr>
+          </thead>
+          <tbody>
+            {items.map((it, i) => (
+              <tr key={i}>
+                <td style={{ fontSize: 12 }}>{it.chapterId}</td>
+                <td style={{ fontWeight: 700 }}>{it.score ?? "-"}</td>
+                <td>{statusLabel(it.status)}</td>
+                <td style={{ fontSize: 12 }}>{fmtDate(it.createdAt)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {sectionData?.competencyBreakdown && Object.keys(sectionData.competencyBreakdown).length > 0 && (
+          <div style={{ marginTop: 16 }}>
+            <h4 style={{ fontSize: 14, fontWeight: 700, margin: "0 0 10px" }}>역량별 누적 분석</h4>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {Object.entries(sectionData.competencyBreakdown)
+                .sort(([,a], [,b]) => a.accuracy - b.accuracy)
+                .map(([domain, data]) => (
+                  <div key={domain} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ flex: "0 0 140px", fontSize: 12, color: "#374151" }}>{domain}</span>
+                    <div style={{ flex: 1, height: 12, background: "#e5e7eb", borderRadius: 6, overflow: "hidden" }}>
+                      <div style={{
+                        height: "100%",
+                        width: `${Math.min(100, data.accuracy)}%`,
+                        background: data.accuracy < 50 ? "#ef4444" : "#f06c24",
+                        borderRadius: 6,
+                      }} />
+                    </div>
+                    <span style={{ flex: "0 0 80px", fontSize: 11, color: "#6b7280", textAlign: "right" }}>
+                      {data.correct}/{data.total} ({Math.round(data.accuracy)}%)
+                    </span>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
+      </>
     ),
     getSummary: (s) => `학습 ${s.completedItems}건, 테스트 ${s.testCount}회, 평균 ${s.averageTestScore?.toFixed(1)}점`,
   },
@@ -186,7 +213,7 @@ export default function ReportSectionDetail({ sections }) {
                 {items.length === 0 ? (
                   <p style={{ color: "#a6b6a9", fontSize: 13 }}>데이터가 없습니다.</p>
                 ) : (
-                  <div style={{ overflowX: "auto" }}>{sec.renderItems(items)}</div>
+                  <div style={{ overflowX: "auto" }}>{sec.renderItems(items, data)}</div>
                 )}
               </div>
             )}

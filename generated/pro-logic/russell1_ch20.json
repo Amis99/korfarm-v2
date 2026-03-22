@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀1 20장 논리사고력",
+  "targetLevel": "russell1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "NFT는 블록체인 기술을 사용하여 디지털 아트 작품마다 고유한 이름표를 달아준다. 이 이름표에는 원본 증명서와 소유자 정보가 담긴다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "NFT가 디지털 아트의 원본을 증명할 수 있다는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "NFT가 없어도 원본 증명이 가능하다."
+              },
+              {
+                "id": "B",
+                "text": "디지털 파일은 복사할 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "블록체인에 기록된 정보는 위조하거나 변경할 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "블록체인은 한 대의 컴퓨터에만 저장된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "사동 표현은 주어가 다른 대상에게 동작을 하도록 시키는 것이다. '엄마가 아이에게 옷을 입힌다'에서 엄마는 직접 행동하는 것이 아니라 아이에게 시키는 것이다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "사동 표현이 필요하다는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사동문은 피동문과 동일하다."
+              },
+              {
+                "id": "B",
+                "text": "모든 행동은 직접 하는 것만 표현할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "직접 행동하는 것과 시켜서 행동하게 하는 것은 구별해야 할 다른 상황이다."
+              },
+              {
+                "id": "D",
+                "text": "시키는 행위는 언어로 표현할 수 없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "디지털 아트는 원본과 똑같이 복사하기 쉽다. 친구에게 그림 파일을 보내면 원본과 동일한 복사본을 갖게 된다. 이 때문에 유일한 원본으로서의 가치를 인정받기 어려웠다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "NFT가 디지털 아트에 고유한 이름표를 달아주면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 복사본이 원본과 같은 가치를 갖게 된다."
+              },
+              {
+                "id": "B",
+                "text": "디지털 파일을 복사할 수 없게 된다."
+              },
+              {
+                "id": "C",
+                "text": "복사본과 원본의 구분이 가능해져 원본에 유일한 가치를 부여할 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "디지털 아트의 창작이 불가능해진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "사동 표현은 '-이-, -히-, -리-, -기-, -우-, -구-, -추-'를 붙이거나 '-게 하다'를 붙여 만든다. '먹다'에 '-이-'를 붙이면 '먹이다'가 된다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "선생님이 '철수에게 책을 읽게 하신다'라고 말하면 예상되는 상황은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "선생님이 직접 책을 읽는다."
+              },
+              {
+                "id": "B",
+                "text": "아무도 책을 읽지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "선생님이 철수에게 책을 읽도록 지시하는 것이다."
+              },
+              {
+                "id": "D",
+                "text": "철수가 선생님에게 책을 읽어주는 것이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "블록체인은 정보를 여러 컴퓨터에 분산 저장하여 위조를 방지한다. NFT는 블록체인 위에서 작동한다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 블록체인 위에서 작동하는 기술은 위조 방지 기능을 갖는다. 소전제: NFT는 블록체인 위에서 작동한다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "NFT는 위조가 쉽다."
+              },
+              {
+                "id": "B",
+                "text": "NFT는 위조 방지 기능을 갖는다."
+              },
+              {
+                "id": "C",
+                "text": "블록체인은 위조에 취약하다."
+              },
+              {
+                "id": "D",
+                "text": "NFT는 블록체인과 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "사동 표현은 용언에 '-이-'를 붙이거나 '-게 하다'를 붙여 만든다. '먹다'에 '-이-'를 붙이면 '먹이다(먹게 하다)'가 된다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 동사에 '-게 하다'를 붙이면 사동 표현이 된다. 소전제: '읽다'에 '-게 하다'를 붙이면 '읽게 하다'가 된다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'읽게 하다'는 피동 표현이다."
+              },
+              {
+                "id": "B",
+                "text": "'읽게 하다'는 사동 표현이다."
+              },
+              {
+                "id": "C",
+                "text": "'읽게 하다'는 높임 표현이다."
+              },
+              {
+                "id": "D",
+                "text": "'읽게 하다'는 부정 표현이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "디지털 아트가 원본으로 인정받으려면 NFT 같은 원본 증명 기술이 필요하다. 증명이 없으면 복사본과 구분할 수 없기 때문이다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'디지털 아트가 원본으로 인정받으려면 원본 증명이 필요하다'에서 필요조건 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원본 증명이 없으면 원본으로 인정받을 수 없다."
+              },
+              {
+                "id": "B",
+                "text": "증명과 인정은 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "원본으로 인정받지 못하면 증명이 있는 것이다."
+              },
+              {
+                "id": "D",
+                "text": "원본 증명이 있으면 반드시 원본으로 인정받는다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "사동문이 성립하려면 주어가 다른 대상에게 행동을 시키는 관계가 있어야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'사동문이 성립하려면 시키는 관계가 있어야 한다'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시키는 관계가 있으면 반드시 사동문이다."
+              },
+              {
+                "id": "B",
+                "text": "시키는 관계가 없으면 사동문이 성립하지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "사동문이 아니면 시키는 관계가 있다."
+              },
+              {
+                "id": "D",
+                "text": "시키기와 사동문은 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "블록체인은 정보를 여러 컴퓨터에 분산 저장한다. 마치 반 친구들 모두가 공책에 같은 내용을 적으면 누구도 몰래 고칠 수 없는 것과 같다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'블록체인의 위조 방지'의 필요조건은 '여러 곳에 분산 저장되어야 한다'이다. 이에 해당하지 않는 경우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전 세계 수천 대의 컴퓨터에 동일한 기록을 저장하는 것"
+              },
+              {
+                "id": "B",
+                "text": "모든 참여자가 같은 거래 내역을 공유하는 것"
+              },
+              {
+                "id": "C",
+                "text": "한 대의 서버에만 데이터를 저장하는 것"
+              },
+              {
+                "id": "D",
+                "text": "새로운 거래가 발생하면 모든 참여자에게 동시에 기록되는 것"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "사동 표현은 '-이-, -히-, -리-, -기-, -우-, -구-, -추-' 또는 '-게 하다'를 붙여 만든다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'사동 표현'의 필요조건은 '시키는 행위가 있어야 한다'이다. 사동 표현이 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "엄마가 아이에게 밥을 먹인다. (먹게 시킴)"
+              },
+              {
+                "id": "B",
+                "text": "선생님이 학생에게 청소를 하게 했다. (하게 시킴)"
+              },
+              {
+                "id": "C",
+                "text": "형이 동생을 앉혔다. (앉게 시킴)"
+              },
+              {
+                "id": "D",
+                "text": "나는 혼자 책을 읽었다. (직접 행동)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "NFT 덕분에 디지털 아트는 세상에 단 하나뿐인 원본으로 인정받을 수 있게 되었다. 이를 통해 안심하고 디지털 아트를 거래할 수 있다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'NFT로 원본이 증명되면(P) 안심하고 거래할 수 있다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "NFT로 원본이 증명되면서 거래가 불안한 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "안심 거래가 이루어지면 반드시 NFT가 있다."
+              },
+              {
+                "id": "C",
+                "text": "거래가 불안하면 NFT가 있는 것이다."
+              },
+              {
+                "id": "D",
+                "text": "NFT와 거래 안전은 무관하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "가전체 문학은 사물을 사람처럼 의인화하여 이야기하는 문학 형식이다. 「공방전」에서 술과 누에가 사람처럼 말다툼을 한다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'사물을 사람처럼 의인화하여 서사를 전개하면(P) 가전체이다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가전체이면 반드시 사물이 의인화되어 있다."
+              },
+              {
+                "id": "B",
+                "text": "사물을 의인화하여 서사를 전개하면서 가전체가 아닌 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "가전체가 아니면 의인화가 없다."
+              },
+              {
+                "id": "D",
+                "text": "의인화와 가전체는 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "디지털 아트에 NFT를 붙이면 누가 만들었는지, 지금 누가 소유하는지 기록된다. 유명 화가의 서명과 비슷한 역할이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'NFT가 작품의 소유권을 증명하면 작가의 권리가 보호된다'의 충분조건 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "디지털 아티스트가 NFT를 발행하여 작품 소유권을 블록체인에 기록하고, 무단 복제 시 원작자를 입증할 수 있는 경우"
+              },
+              {
+                "id": "B",
+                "text": "디지털 파일을 아무런 증명 없이 인터넷에 공유한 경우"
+              },
+              {
+                "id": "C",
+                "text": "전통 미술 작품에 서명 없이 판매한 경우"
+              },
+              {
+                "id": "D",
+                "text": "NFT 없이 디지털 작품을 무료로 배포한 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "사동 표현에서 '-이-'를 붙이면 '먹이다', '-히-'를 붙이면 '앉히다', '-우-'를 붙이면 '재우다'가 된다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'동사에 사동 접미사를 붙이면 사동사가 된다'의 충분조건 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'잠을 자다'가 그대로 사용된 경우"
+              },
+              {
+                "id": "B",
+                "text": "'앉다'에 '-히-'를 붙여 '앉히다'가 된 경우"
+              },
+              {
+                "id": "C",
+                "text": "'먹다'에 '-이-'를 붙여 '먹이다'가 된 경우"
+              },
+              {
+                "id": "D",
+                "text": "'자다'에 '-우-'를 붙여 '재우다'가 된 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "블록체인에 기록되면 위조할 수 없다. NFT는 블록체인 위에서 작동하므로 NFT 기록은 위조할 수 없다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'블록체인에 기록되면(P) 위조할 수 없다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "NFT 기록은 블록체인에 있으므로 위조할 수 없다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "B",
+                "text": "위조할 수 없으므로 블록체인에 기록된 것이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "블록체인이 아니므로 위조할 수 없다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "사동문에서 주어는 행동을 직접 하지 않고 다른 대상에게 시킨다. '엄마가 아이에게 옷을 입힌다'에서 엄마는 시키는 쪽이다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'사동문이면(P) 주어가 행동을 직접 하지 않는다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주어가 직접 행동하지 않으므로 사동문이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "A와 C 모두 타당하다."
+              },
+              {
+                "id": "C",
+                "text": "사동문이 아니므로 주어가 직접 행동하지 않는다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "주어가 직접 행동했으므로 사동문이 아니다. (대우 — 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "NFT 시장의 성장과 디지털 아트에 대한 관심이 동시에 높아졌다. NFT 거래량이 늘수록 디지털 아티스트의 수익도 증가하는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'NFT 거래량'과 '디지털 아티스트 수익'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "NFT 거래량이 늘면 모든 아티스트의 수익이 반드시 늘어난다."
+              },
+              {
+                "id": "B",
+                "text": "아티스트 수익이 늘면 반드시 NFT 때문이다."
+              },
+              {
+                "id": "C",
+                "text": "NFT와 아티스트 수익은 무관하다."
+              },
+              {
+                "id": "D",
+                "text": "NFT 거래량과 아티스트 수익 사이에 양의 상관관계가 있으나, 작품의 질, 마케팅, 시장 분위기 등 다른 변수도 영향을 미친다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "사동 표현과 피동 표현은 모두 용언에 '-이-, -히-, -리-, -기-'를 붙여 만들 수 있어 혼동되기 쉽다. 문맥을 파악하여 구분해야 한다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'사동과 피동의 형태적 유사성'과 '학습자의 혼동 빈도'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "형태가 유사하면 반드시 혼동한다."
+              },
+              {
+                "id": "B",
+                "text": "혼동하면 반드시 형태가 유사한 것이다."
+              },
+              {
+                "id": "C",
+                "text": "형태와 혼동은 무관하다."
+              },
+              {
+                "id": "D",
+                "text": "형태적 유사성이 높을수록 혼동 빈도가 높아지는 양의 상관관계가 있으나, 문맥 이해력 등 다른 요인도 작용한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "NFT는 디지털 세상에 새로운 가치를 만들어가고 있다. 하지만 환경 문제와 투기적 거래에 대한 우려도 존재한다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 'NFT가 예술 시장을 더 민주적으로 만든다.' 이 가설을 반증하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무명 아티스트가 NFT를 통해 직접 작품을 판매하여 수익을 올린 경우"
+              },
+              {
+                "id": "B",
+                "text": "NFT 거래에서 소수의 부유한 수집가만 참여하여 시장이 독점된 경우"
+              },
+              {
+                "id": "C",
+                "text": "다양한 장르의 아티스트가 NFT 시장에 참여한 경우"
+              },
+              {
+                "id": "D",
+                "text": "NFT 플랫폼이 전 세계에서 접근 가능한 경우"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "사동 표현은 주어가 다른 대상에게 행동을 시키는 것을 표현한다. 같은 사건도 능동문, 피동문, 사동문으로 다르게 표현할 수 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '사동문은 능동문보다 행동의 원인자를 더 명확하게 드러낸다.' 이 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피동문과 사동문의 차이를 설명한다."
+              },
+              {
+                "id": "B",
+                "text": "사동 접미사의 종류를 분류한다."
+              },
+              {
+                "id": "C",
+                "text": "능동문의 문장 길이를 측정한다."
+              },
+              {
+                "id": "D",
+                "text": "같은 사건을 능동문과 사동문으로 제시한 후, 독자가 행동의 원인자를 파악하는 정확도를 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

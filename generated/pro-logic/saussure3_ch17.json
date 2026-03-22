@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 17장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "신화란 신이나 영웅의 업적을 다룬 고대의 이야기입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "신화가 오늘날까지 전해지려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무도 기억하지 않아도 전해져야 한다."
+              },
+              {
+                "id": "B",
+                "text": "신화는 저절로 만들어져야 한다."
+              },
+              {
+                "id": "C",
+                "text": "사람들이 이야기를 입에서 입으로 전하거나 글로 기록해야 한다."
+              },
+              {
+                "id": "D",
+                "text": "신화는 최근에 만들어져야 한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "영웅이란 뛰어난 지혜와 용맹으로 보통 사람이 하기 어려운 일을 해내는 사람입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "영웅이 어려운 과업을 완수하면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사람들에게 존경받고 본보기가 된다."
+              },
+              {
+                "id": "B",
+                "text": "아무도 관심을 갖지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "영웅이 벌을 받는다."
+              },
+              {
+                "id": "D",
+                "text": "과업이 사라진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "과업이란 맡아서 해야 할 일이나 사명입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'영웅은 어려운 과업을 해낸다. 주몽은 고구려를 세운 영웅이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주몽은 과업을 포기했다."
+              },
+              {
+                "id": "B",
+                "text": "주몽은 영웅이 아니다."
+              },
+              {
+                "id": "C",
+                "text": "영웅과 과업은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "주몽은 어려운 과업인 나라 세우기를 해냈다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "신화 속 영웅은 위기를 극복하기 위해 지혜와 용기를 발휘합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'영웅이 되려면 위기를 극복해야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "영웅과 위기는 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "위기 없이도 영웅이 된다."
+              },
+              {
+                "id": "C",
+                "text": "위기를 극복하지 못하면 영웅이 될 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "위기를 피하면 영웅이 된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "신화에는 그 민족의 가치관과 세계관이 담겨 있습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'신화를 이해하려면 그 민족의 문화를 알아야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문화를 모르고도 신화를 완벽히 이해했다."
+              },
+              {
+                "id": "B",
+                "text": "그리스 신화를 이해하기 위해 고대 그리스인의 생활과 믿음을 공부했다."
+              },
+              {
+                "id": "C",
+                "text": "신화 속 단어만 외웠더니 다 이해되었다."
+              },
+              {
+                "id": "D",
+                "text": "신화는 문화와 관계없이 만들어졌다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "신화를 읽으면 옛 사람들의 생각과 가치관을 이해할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'신화를 읽으면 옛 사람들의 가치관을 알게 된다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "신화 없이도 가치관을 알 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "신화를 읽었는데 가치관을 모르는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "신화와 가치관은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "신화를 읽으면 가치관을 잊는다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "단군 신화는 우리 민족의 건국 이야기입니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'건국 신화를 알면 민족의 정체성을 이해하게 된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다른 나라 신화로 우리 민족을 이해했다."
+              },
+              {
+                "id": "B",
+                "text": "건국 신화를 몰라도 민족 정체성을 완벽히 이해했다."
+              },
+              {
+                "id": "C",
+                "text": "신화를 읽었지만 아무것도 몰랐다."
+              },
+              {
+                "id": "D",
+                "text": "단군 신화를 배우니 우리 민족이 '널리 인간을 이롭게 하라'는 뜻의 홍익인간을 중요시했음을 알게 되었다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "영웅 이야기는 어려움을 극복하는 과정을 보여주어 교훈을 줍니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'신화에는 교훈이 있다. 단군 신화는 신화이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "단군 신화에는 교훈이 있다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "단군 신화는 신화가 아니다. (틀린 추론)"
+              },
+              {
+                "id": "C",
+                "text": "신화에는 교훈이 없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "교훈과 신화는 관계없다. (맞는 추론)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "세계 여러 나라에는 각기 다른 신화가 있지만 공통된 주제가 나타나기도 합니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'다양한 신화'와 '공통된 주제'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문화가 달라도 인간의 보편적 고민이 있어 공통 주제가 나타나지만, 세부 내용은 다를 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "모든 신화는 완전히 같은 내용이다."
+              },
+              {
+                "id": "C",
+                "text": "신화 간에는 공통점이 전혀 없다."
+              },
+              {
+                "id": "D",
+                "text": "한 나라의 신화만 참이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "영웅 신화에는 '탄생 - 시련 - 극복 - 성취'의 구조가 반복됩니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'영웅 신화는 공통 구조를 갖고 있다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "신화의 글자 수를 센다."
+              },
+              {
+                "id": "B",
+                "text": "여러 나라의 영웅 신화를 비교하여 공통된 구조가 있는지 분석한다."
+              },
+              {
+                "id": "C",
+                "text": "영웅의 이름만 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "신화가 쓰인 종이를 분석한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

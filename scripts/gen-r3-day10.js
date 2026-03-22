@@ -1,0 +1,326 @@
+// 러셀3 Day 10 문학 - 일일독해 콘텐츠 생성
+const fs = require('fs');
+const path = require('path');
+
+// ── 지문 (4문단, 목표 1300자 ±50) ──
+const paragraphs = [
+  {
+    id: "p1",
+    text: "기차에서 내려 역 앞 광장에 섰을 때, 민혁은 자신이 알던 풍경이 남아 있는지 확인하듯 천천히 고개를 돌렸다. 역 건물은 예전 그대로였지만 광장을 가로지르던 은행나무 길은 아스팔트 주차장으로 바뀌어 있었다. 나무가 있던 자리에 하얀 페인트 선만 줄지어 있는 모습이 묘하게 낯설었다. 십 년 전 이곳을 떠날 때 마지막으로 올려다보았던 은행나무의 노란 잎사귀가 불현듯 떠올랐다. 그때도 가을이었고, 그때도 혼자였다. 바람이 광장을 훑고 지나가자 민혁은 존재하지 않는 나뭇잎 소리가 들리는 듯한 착각에 빠졌다. 그는 배낭 끈을 고쳐 매고 역을 등진 채 마을 쪽으로 걸음을 옮겼다."
+  },
+  {
+    id: "p2",
+    text: "골목길은 예상보다 좁았다. 어릴 적에는 자전거 두 대가 나란히 지나갈 수 있을 만큼 넓다고 느꼈는데, 지금은 한 사람이 겨우 지나갈 폭이었다. 담장 위로 감나무 가지가 삐죽 고개를 내밀고 있었고, 그 아래에는 누군가 놓아둔 노란 고무 대야에 빗물이 가득 고여 있었다. 민혁은 문득 할머니가 이 대야에 수박을 담가 두시던 여름날을 떠올렸다. 수박을 두 손으로 들어 올리면 차가운 물이 손목을 타고 흘러내렸고, 할머니는 웃으시며 \"얼른 쪼개 먹자\" 하고 말씀하셨다. 감각이 되살아나자 가슴 한편이 아릿해졌다. 할머니는 삼 년 전 돌아가셨고, 빈집이 된 그 집 마당에는 풀이 무성히 자라 있을 터였다."
+  },
+  {
+    id: "p3",
+    text: "마을 끝 언덕에 올라서자 논이 내려다보였다. 벼가 누렇게 익어 가는 들판 위로 바람이 물결처럼 지나갔다. 민혁은 잠시 멈추어 서서 그 풍경을 바라보았다. 도시에서는 좀처럼 느낄 수 없었던 바람의 결이 피부에 닿았다. 여기서는 바람에도 무게가 있는 것 같다고 생각했다. 어릴 적 아버지와 함께 논둑을 걸으며 허수아비를 세우던 기억이 떠올랐다. 아버지는 허수아비의 팔을 직접 매듭지으며 \"이게 벼를 지키는 거다\"라고 말씀하셨다. 그 목소리는 여전히 귓가에 맴돌았지만, 아버지가 서 있던 논둑의 정확한 위치는 기억나지 않았다. 시간은 목소리는 남기면서 장소는 지워 버리는 것일까."
+  },
+  {
+    id: "p4",
+    text: "해가 기울어 논 위에 주황빛이 번지기 시작했다. 민혁은 언덕 풀밭에 앉아 배낭에서 물병을 꺼내 한 모금 마셨다. 목을 넘기는 물이 차가웠고, 그 차가움이 몸 안의 긴장을 조금씩 풀어 주었다. 십 년간 돌아오지 못한 이유를 스스로에게 물었지만 뚜렷한 답은 나오지 않았다. 바쁘다는 핑계, 돌아가 봐야 달라진 것이 없으리라는 예단, 그리고 그 밑에 깔린 막연한 두려움. 돌아온 지금, 달라진 것은 풍경만이 아니라 자기 자신이기도 하다는 사실을 민혁은 알아차리고 있었다. 노을이 논밭을 물들이는 동안, 그는 이곳에 다시 올 수 있겠다는 조용한 확신을 느꼈다."
+  }
+];
+
+const totalLen = paragraphs.reduce((s, p) => s + p.text.length, 0);
+console.log(`지문 총 글자 수: ${totalLen}`);
+
+function r(pid, s, e) { return { paragraphId: pid, start: s, end: e }; }
+const scoring_i = { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true };
+
+const intensive = { timeline: [
+  // p1
+  { stepId: "s1", highlight: { ranges: [r("p1", 0, 68)] },
+    question: { prompt: "첫 문장에서 민혁의 행동으로 알 수 있는 심리로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "자신이 기억하는 풍경이 남아 있는지 확인하려는 기대와 불안이다." },
+        { id: "B", text: "낯선 도시에 처음 도착하여 느끼는 호기심과 설렘이다." },
+        { id: "C", text: "오랜 여행에 지쳐 빨리 쉬고 싶어 하는 피로감이다." },
+        { id: "D", text: "누군가를 만나기로 약속하여 서두르는 초조함이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s2", highlight: { ranges: [r("p1", 69, 126)] },
+    question: { prompt: "둘째 문장이 보여주는 변화로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "은행나무 길이 아스팔트 주차장으로 바뀌었다." },
+        { id: "B", text: "역 건물이 완전히 새로 지어져 모습이 달라졌다." },
+        { id: "C", text: "광장에 새로운 나무들이 더 많이 심어져 있었다." },
+        { id: "D", text: "역 앞에 대형 쇼핑몰이 들어서 있었다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s3", highlight: { ranges: [r("p1", 127, 179)] },
+    question: { prompt: "'하얀 페인트 선만 줄지어 있는 모습'이 주는 느낌으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "자연이 사라진 자리를 인공적 표시만 채운 낯설음을 나타낸다." },
+        { id: "B", text: "깔끔하게 정리된 주차장의 현대적 아름다움을 표현한다." },
+        { id: "C", text: "새로운 도로가 놓여 마을이 발전한 기쁨을 전달한다." },
+        { id: "D", text: "주차장이 가득 차 있어 마을이 번화해졌음을 강조한다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s4", highlight: { ranges: [r("p1", 180, 237)] },
+    question: { prompt: "넷째 문장에서 민혁이 떠올린 기억으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "십 년 전 이곳을 떠날 때 올려다보았던 은행나무의 노란 잎사귀이다." },
+        { id: "B", text: "어린 시절 친구들과 은행나무 아래에서 놀던 여름 추억이다." },
+        { id: "C", text: "은행나무를 심기 위해 마을 사람들이 모였던 행사이다." },
+        { id: "D", text: "가족과 함께 은행나무 열매를 주워 담던 기억이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s5", highlight: { ranges: [r("p1", 238, 265)] },
+    question: { prompt: "'그때도 가을이었고, 그때도 혼자였다.'라는 문장의 효과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "과거와 현재의 상황을 겹쳐 보여 주어 고독감과 회한을 부각한다." },
+        { id: "B", text: "가을이라는 계절이 주는 활기와 기대감을 강조한다." },
+        { id: "C", text: "혼자 여행하는 것의 자유로움과 즐거움을 나타낸다." },
+        { id: "D", text: "시간이 빠르게 흘렀다는 사실에 대한 놀라움을 표현한다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s6", highlight: { ranges: [r("p1", 266, 310)] },
+    question: { prompt: "'존재하지 않는 나뭇잎 소리가 들리는 듯한 착각'이 의미하는 바로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "사라진 은행나무에 대한 기억이 감각적 환상으로 나타난 것이다." },
+        { id: "B", text: "바람 소리가 너무 커서 나뭇잎 소리로 착각한 것이다." },
+        { id: "C", text: "근처 다른 나무에서 나는 소리를 은행나무 소리로 오해한 것이다." },
+        { id: "D", text: "민혁의 청력에 이상이 생겨 환청을 경험하는 것이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s7", highlight: { ranges: [r("p1", 0, 340)] },
+    question: { prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "오랜만에 고향에 돌아온 민혁이 변해 버린 풍경에서 과거를 떠올리고 있다." },
+        { id: "B", text: "민혁이 새로 이사 온 마을에 처음 도착하여 주변을 살피고 있다." },
+        { id: "C", text: "마을의 발전된 모습에 감탄하며 기쁜 마음으로 걸어가고 있다." },
+        { id: "D", text: "기차에서 내린 민혁이 누군가를 만나기 위해 서둘러 이동하고 있다." }
+      ], answerId: "A", scoring: scoring_i } },
+
+  // p2
+  { stepId: "s8", highlight: { ranges: [r("p2", 0, 79)] },
+    question: { prompt: "골목길이 예상보다 좁게 느껴지는 이유로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "어릴 때 넓다고 느꼈던 감각과 성인이 된 지금의 체감이 다르기 때문이다." },
+        { id: "B", text: "담장이 새로 쌓여져 실제로 길 폭이 줄어들었기 때문이다." },
+        { id: "C", text: "길 양옆에 주차된 차들이 통행을 방해하고 있기 때문이다." },
+        { id: "D", text: "도시의 넓은 도로에 익숙해져 시골길이 초라해 보이기 때문이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s9", highlight: { ranges: [r("p2", 80, 168)] },
+    question: { prompt: "감나무 가지와 노란 고무 대야의 묘사가 전달하는 분위기로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "시간이 멈춘 듯한 시골 골목의 정적이고 소박한 분위기이다." },
+        { id: "B", text: "마을 주민들의 활기차고 바쁜 일상을 보여 주는 분위기이다." },
+        { id: "C", text: "비가 와서 우울하고 음산한 분위기이다." },
+        { id: "D", text: "아무도 살지 않는 폐허 같은 황량한 분위기이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s10", highlight: { ranges: [r("p2", 169, 219)] },
+    question: { prompt: "민혁이 대야를 보고 떠올린 기억으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "할머니가 대야에 수박을 담가 두시던 여름날의 기억이다." },
+        { id: "B", text: "할머니와 함께 빨래를 하던 겨울철 기억이다." },
+        { id: "C", text: "동네 아이들과 물놀이를 하던 봄날의 기억이다." },
+        { id: "D", text: "아버지가 대야에 물고기를 넣어 두시던 기억이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s11", highlight: { ranges: [r("p2", 220, 297)] },
+    question: { prompt: "수박을 들어 올리는 장면과 할머니의 말씀이 보여주는 서술 특징으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "촉각적 감각과 직접 인용을 통해 과거의 기억을 생생하게 되살리고 있다." },
+        { id: "B", text: "시각적 이미지를 활용하여 풍경의 아름다움을 강조하고 있다." },
+        { id: "C", text: "청각적 묘사를 사용하여 골목의 소리를 전달하고 있다." },
+        { id: "D", text: "후각적 감각을 동원하여 여름의 더위를 표현하고 있다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s12", highlight: { ranges: [r("p2", 298, 374)] },
+    question: { prompt: "문단 마지막 부분에서 드러나는 민혁의 감정으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "할머니를 잃은 상실감과 빈집에 대한 아련한 슬픔이다." },
+        { id: "B", text: "집을 물려받지 못한 것에 대한 분노와 억울함이다." },
+        { id: "C", text: "새로운 사람이 들어와 마을이 활기를 되찾은 것에 대한 기쁨이다." },
+        { id: "D", text: "할머니 집을 다시 찾아 복원하겠다는 강한 의지이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s13", highlight: { ranges: [r("p2", 0, 374)] },
+    question: { prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "골목길의 사물들이 할머니와의 추억을 되살리며 상실감을 일으킨다." },
+        { id: "B", text: "좁아진 골목길 때문에 민혁이 길을 잃고 헤매고 있다." },
+        { id: "C", text: "비가 오는 골목에서 민혁이 우산 없이 걸어가고 있다." },
+        { id: "D", text: "감나무와 대야의 묘사를 통해 마을의 풍요로움을 보여 준다." }
+      ], answerId: "A", scoring: scoring_i } },
+
+  // p3
+  { stepId: "s14", highlight: { ranges: [r("p3", 0, 60)] },
+    question: { prompt: "언덕에서 바라본 풍경으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "벼가 누렇게 익어 가는 들판 위로 바람이 물결처럼 지나가는 모습이다." },
+        { id: "B", text: "논이 모두 매립되어 공장이 들어선 풍경이다." },
+        { id: "C", text: "들판에 눈이 쌓여 하얗게 덮인 겨울 풍경이다." },
+        { id: "D", text: "논에 물이 가득 차 모내기를 준비하는 봄 풍경이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s15", highlight: { ranges: [r("p3", 61, 134)] },
+    question: { prompt: "'여기서는 바람에도 무게가 있는 것 같다'는 표현의 의미로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "도시에서 느끼지 못하던 자연의 실재감과 깊이를 감각적으로 표현한 것이다." },
+        { id: "B", text: "바람이 너무 강해서 걷기 어려운 상황을 과장한 것이다." },
+        { id: "C", text: "시골의 습한 공기가 무겁다는 과학적 사실을 서술한 것이다." },
+        { id: "D", text: "민혁이 체력이 약해져 바람조차 버겁다는 뜻이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s16", highlight: { ranges: [r("p3", 135, 220)] },
+    question: { prompt: "민혁이 떠올린 아버지와의 기억으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "논둑을 걸으며 함께 허수아비를 세우던 기억이다." },
+        { id: "B", text: "논에서 벼를 베며 수확하던 가을날의 기억이다." },
+        { id: "C", text: "아버지가 트랙터를 운전하며 밭을 갈던 기억이다." },
+        { id: "D", text: "마을 축제에서 아버지와 함께 음식을 나누던 기억이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s17", highlight: { ranges: [r("p3", 221, 325)] },
+    question: { prompt: "아버지의 목소리는 기억나지만 논둑 위치는 기억나지 않는다는 서술과 마지막 질문이 보여주는 것은?",
+      choices: [
+        { id: "A", text: "감정적 기억은 선명하지만 장소의 기억은 희미해지는 시간의 속성을 성찰한다." },
+        { id: "B", text: "민혁이 아버지의 말씀을 중요하게 여기지 않았음을 드러낸다." },
+        { id: "C", text: "논둑이 실제로 사라져 찾을 수 없게 되었음을 뜻한다." },
+        { id: "D", text: "민혁의 기억력이 좋지 않아 과거를 잘 떠올리지 못함을 나타낸다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s18", highlight: { ranges: [r("p3", 0, 325)] },
+    question: { prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "자연 풍경이 아버지와의 추억을 불러오지만 기억은 완전하지 않다." },
+        { id: "B", text: "논의 풍경이 크게 달라져 민혁이 실망하고 있다." },
+        { id: "C", text: "아버지와의 갈등이 민혁의 귀향을 어렵게 만들었다." },
+        { id: "D", text: "허수아비의 의미를 이해하지 못한 어린 시절을 후회하고 있다." }
+      ], answerId: "A", scoring: scoring_i } },
+
+  // p4
+  { stepId: "s19", highlight: { ranges: [r("p4", 0, 80)] },
+    question: { prompt: "물을 마시는 장면이 전달하는 효과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "차가운 물의 감각이 내면의 긴장을 풀어 주며 안정감을 부여한다." },
+        { id: "B", text: "목이 마를 정도로 오래 걸었다는 피로를 강조한다." },
+        { id: "C", text: "물병을 챙긴 민혁의 꼼꼼한 성격을 보여 준다." },
+        { id: "D", text: "배낭 여행의 낭만적 분위기를 조성한다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s20", highlight: { ranges: [r("p4", 81, 200)] },
+    question: { prompt: "민혁이 십 년간 돌아오지 못한 이유로 언급된 것이 아닌 것은?",
+      choices: [
+        { id: "A", text: "고향 사람들과의 심각한 갈등이다." },
+        { id: "B", text: "바쁘다는 핑계이다." },
+        { id: "C", text: "돌아가 봐야 달라진 것이 없으리라는 예단이다." },
+        { id: "D", text: "그 밑에 깔린 막연한 두려움이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s21", highlight: { ranges: [r("p4", 201, 274)] },
+    question: { prompt: "'달라진 것은 풍경만이 아니라 자기 자신이기도 하다'는 민혁의 깨달음이 뜻하는 바는?",
+      choices: [
+        { id: "A", text: "외부의 변화뿐 아니라 자신의 내면도 세월과 함께 달라졌음을 인식한 것이다." },
+        { id: "B", text: "자신은 전혀 변하지 않았는데 풍경만 달라져 서글프다는 뜻이다." },
+        { id: "C", text: "풍경이 변한 것처럼 자신도 외모가 달라졌다는 뜻이다." },
+        { id: "D", text: "고향에 다시 오기 싫다는 결심을 나타낸 것이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s22", highlight: { ranges: [r("p4", 275, 340)] },
+    question: { prompt: "마지막 문장에서 민혁이 느낀 감정으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "이곳에 다시 올 수 있겠다는 조용한 확신이다." },
+        { id: "B", text: "다시는 돌아오고 싶지 않다는 결별의 감정이다." },
+        { id: "C", text: "고향을 완전히 떠나 도시에서 성공하겠다는 의지이다." },
+        { id: "D", text: "노을이 아름다워 사진을 찍고 싶다는 충동이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s23", highlight: { ranges: [r("p4", 0, 340)] },
+    question: { prompt: "넷째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "자기 변화를 깨달은 민혁이 다시 고향에 올 수 있겠다는 화해의 감정에 이른다." },
+        { id: "B", text: "해가 지면서 민혁이 서둘러 마을을 떠나려 하고 있다." },
+        { id: "C", text: "십 년간의 후회가 분노로 바뀌어 내면 갈등이 심화된다." },
+        { id: "D", text: "노을 풍경의 아름다움을 객관적으로 묘사하고 있다." }
+      ], answerId: "A", scoring: scoring_i } },
+]};
+
+// ── 복기 (recall) - 정확히 8카드 ──
+const recall = {
+  cards: [
+    { id: "c1", text: "민혁은 십 년 만에 고향에 돌아와 은행나무 길이 주차장으로 바뀐 것을 발견한다." },
+    { id: "c2", text: "사라진 나뭇잎 소리가 들리는 듯한 착각이 기억의 환상을 보여 준다." },
+    { id: "c3", text: "골목길의 좁은 폭과 감나무, 대야 등이 어린 시절의 감각과 대비된다." },
+    { id: "c4", text: "노란 고무 대야가 할머니와의 여름날 기억을 되살리며 상실감을 일으킨다." },
+    { id: "c5", text: "언덕의 논 풍경과 바람이 아버지와 허수아비를 세우던 추억을 불러온다." },
+    { id: "c6", text: "아버지의 목소리는 남았지만 논둑의 위치는 흐릿해져 시간의 속성을 성찰한다." },
+    { id: "c7", text: "바쁨, 예단, 두려움이 십 년간 고향에 돌아오지 못한 이유였다." },
+    { id: "c8", text: "달라진 것이 풍경만이 아니라 자기 자신임을 깨닫고 다시 올 수 있겠다고 느낀다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+// ── 확인 (confirm) - 7문항 ──
+const scoring_c = { correctDeltaSec: 30, wrongDeltaSec: -45 };
+const confirm = { questions: [
+  { id: "q1", prompt: "민혁이 역 앞에서 발견한 변화는 무엇인가?",
+    answerText: "은행나무 길이 아스팔트 주차장으로 바뀌었다",
+    answerMatchMode: "ALL",
+    answerRanges: [r("p1", 92, 115)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q2", prompt: "민혁이 노란 고무 대야를 보고 떠올린 기억의 인물은 누구인가?",
+    answerText: "할머니",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p2", 174, 177), r("p2", 335, 338)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q3", prompt: "수박을 들어 올릴 때 되살아난 것은 어떤 종류의 감각인가?",
+    answerText: "촉각",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p2", 237, 268)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q4", prompt: "'바람에도 무게가 있는 것 같다'는 표현에서 도시와 대비되는 공간은 어디인가?",
+    answerText: "고향 마을",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p3", 106, 109)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q5", prompt: "아버지가 허수아비를 매듭지으며 한 말의 핵심 내용은 무엇인가?",
+    answerText: "벼를 지키는 것",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p3", 200, 214)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q6", prompt: "민혁이 십 년간 돌아오지 못한 이유 중 가장 깊은 감정적 요인은 무엇인가?",
+    answerText: "막연한 두려움",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p4", 155, 163)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q7", prompt: "민혁이 마지막에 깨달은 것은 풍경 외에 무엇이 달라졌다는 사실인가?",
+    answerText: "자기 자신",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p4", 226, 231)],
+    scoring: scoring_c, revealOnWrong: true },
+]};
+
+// ── content 객체 조립 ──
+const content = {
+  contentId: "dr-r3-010",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 3) Day 10 문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_3",
+  schoolGradeRange: { min: 9, max: 10 },
+  area: "READING",
+  subArea: "LITERATURE",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 480,
+  assets: {},
+  payload: {
+    passage: { format: "TEXT", paragraphs },
+    intensive,
+    recall,
+    confirm
+  }
+};
+
+const batchItem = {
+  content_type: "DAILY_READING",
+  level_id: "RUSSELL_3",
+  area: "READING",
+  sub_area: "LITERATURE",
+  day_index: 10,
+  module_key: "reading_training",
+  schema_version: "1.0",
+  content
+};
+
+const staticDir = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'russell3');
+fs.writeFileSync(path.join(staticDir, '010.json'), JSON.stringify(content, null, 2), 'utf8');
+console.log('static 010.json 저장 완료');
+
+const batchPath = path.join(__dirname, '..', 'generated', 'daily-batch-reading-russell3.json');
+const batch = JSON.parse(fs.readFileSync(batchPath, 'utf8'));
+batch.items[9] = batchItem;
+fs.writeFileSync(batchPath, JSON.stringify(batch, null, 2), 'utf8');
+console.log('배치 파일 day_index 10 업데이트 완료');

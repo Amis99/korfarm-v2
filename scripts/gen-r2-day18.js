@@ -1,0 +1,325 @@
+// Day 18 - 문학 (LITERATURE) - 가을 편지 (서간문 형식 현대소설)
+const fs = require('fs');
+
+const p1 = "할머니, 안녕하세요. 저 은채예요. 이번 주에 학교에서 가을 현장 학습을 다녀왔어요. 버스를 타고 두 시간을 달려 도착한 곳은 깊은 산골 마을이었는데, 마을 입구에 들어서자마자 코끝을 스치는 나뭇잎 냄새가 할머니 댁 뒷산과 똑같았어요. 저는 순간 할머니가 가을마다 뒷산에서 밤을 주워 오시던 모습이 떠올라 가슴이 먹먹해졌어요. 산길을 걸으며 친구들은 단풍이 예쁘다고 사진을 찍느라 바빴지만, 저는 자꾸만 발밑에 떨어진 밤송이만 내려다보게 되었어요. 할머니가 밤송이를 까실 때 손가락에 가시가 박혀도 괜찮다며 웃으시던 얼굴이 생생하게 그려졌기 때문이에요.";
+
+const p2 = "산길 중턱에 작은 정자가 있었어요. 선생님이 잠깐 쉬어 가자고 하셔서 저는 정자 난간에 앉아 골짜기를 내려다보았어요. 바람이 불 때마다 나뭇잎들이 우수수 쏟아져 내렸는데, 그 모습이 마치 누군가 편지를 한 장씩 던져 주는 것 같았어요. 그때 옆에 앉은 친구 지수가 \"너 지금 뭐 생각해?\" 하고 물었어요. 저는 망설이다가 \"할머니 생각\" 하고 짧게 대답했어요. 지수는 아무 말 없이 제 옆에 바짝 붙어 앉아 같이 골짜기를 바라봐 주었어요. 그 순간 바람결에 실려 온 나뭇잎 한 장이 제 무릎 위에 살포시 내려앉았는데, 저는 그것이 할머니가 보내 주신 답장 같아서 눈시울이 뜨거워졌어요.";
+
+const p3 = "하산할 때 저는 주머니에서 작은 수첩을 꺼내 짧은 글을 적었어요. '오늘 산에서 할머니 냄새를 맡았습니다. 밤송이도 보았습니다. 보고 싶습니다.' 그 몇 줄을 적고 나니 마음이 한결 가벼워졌어요. 예전에 할머니께서 제게 말씀하셨잖아요. \"글로 적으면 마음이 정리된단다.\" 그 말씀이 정말이었어요. 수첩을 닫고 다시 걸음을 옮기니 햇빛이 산등성이 너머로 길게 기울어져 있었어요. 노을빛에 물든 나뭇잎들이 금빛으로 빛나는 것을 보면서, 저는 슬픔이 아니라 따뜻함을 느꼈어요. 할머니와 함께한 시간이 저를 여기까지 데려다주었다는 것을 깨달았기 때문이에요.";
+
+const p4 = "할머니, 저는 이제 할머니가 보고 싶을 때마다 글을 쓰기로 했어요. 오늘 이 편지도 그 시작이에요. 편지를 쓰다 보면 할머니의 목소리가 들리는 것 같고, 할머니와 마주 앉아 이야기하는 기분이 들어요. 지수도 옆에서 응원해 주겠다고 했어요. 다음에는 봄에 할머니 댁 마당에 피던 매화 이야기를 쓸게요. 할머니가 매화를 보며 \"겨울을 견딘 꽃이 가장 향기롭다\" 하셨던 말씀, 저는 잊지 않고 있어요. 할머니, 가을 바람이 차가워지고 있으니 늘 건강하세요. 사랑하는 은채 올림.";
+
+const paragraphs = [
+  { id: "p1", text: p1 },
+  { id: "p2", text: p2 },
+  { id: "p3", text: p3 },
+  { id: "p4", text: p4 }
+];
+
+const totalLen = p1.length + p2.length + p3.length + p4.length;
+console.log("총 글자 수:", totalLen);
+console.log("p1:", p1.length, "p2:", p2.length, "p3:", p3.length, "p4:", p4.length);
+
+function r(pid, text, searchStr) {
+  const start = text.indexOf(searchStr);
+  if (start === -1) throw new Error("NOT FOUND in " + pid + ": " + searchStr.substring(0, 30));
+  return { paragraphId: pid, start, end: start + searchStr.length };
+}
+
+const timeline = [
+  // p1
+  { stepId: "s1", highlight: { ranges: [r("p1", p1, "할머니, 안녕하세요. 저 은채예요. 이번 주에 학교에서 가을 현장 학습을 다녀왔어요.")] }, question: {
+    prompt: "첫 문장들에서 '은채'가 알리는 소식으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "이번 주에 학교에서 가을 현장 학습을 다녀왔다." },
+      { id: "B", text: "이번 주에 할머니 댁에 놀러 갔다 왔다." },
+      { id: "C", text: "이번 주에 학교 운동회에 참가했다." },
+      { id: "D", text: "이번 주에 친구와 놀이공원에 다녀왔다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s2", highlight: { ranges: [r("p1", p1, "버스를 타고 두 시간을 달려 도착한 곳은 깊은 산골 마을이었는데, 마을 입구에 들어서자마자 코끝을 스치는 나뭇잎 냄새가 할머니 댁 뒷산과 똑같았어요.")] }, question: {
+    prompt: "은채가 산골 마을에서 할머니를 떠올린 계기로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "나뭇잎 냄새가 할머니 댁 뒷산과 똑같았다." },
+      { id: "B", text: "마을 입구에서 할머니를 직접 만났다." },
+      { id: "C", text: "버스에서 할머니의 전화를 받았다." },
+      { id: "D", text: "친구가 할머니 이야기를 꺼냈다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s3", highlight: { ranges: [r("p1", p1, "저는 순간 할머니가 가을마다 뒷산에서 밤을 주워 오시던 모습이 떠올라 가슴이 먹먹해졌어요.")] }, question: {
+    prompt: "은채의 감정 변화로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "할머니가 밤을 주워 오시던 모습이 떠올라 가슴이 먹먹해졌다." },
+      { id: "B", text: "단풍이 너무 아름다워 기쁨이 넘쳤다." },
+      { id: "C", text: "산길이 무서워서 불안해졌다." },
+      { id: "D", text: "친구들과 함께여서 신이 났다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s4", highlight: { ranges: [r("p1", p1, "산길을 걸으며 친구들은 단풍이 예쁘다고 사진을 찍느라 바빴지만, 저는 자꾸만 발밑에 떨어진 밤송이만 내려다보게 되었어요. 할머니가 밤송이를 까실 때 손가락에 가시가 박혀도 괜찮다며 웃으시던 얼굴이 생생하게 그려졌기 때문이에요.")] }, question: {
+    prompt: "은채가 친구들과 다르게 행동한 이유로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "밤송이를 보며 할머니의 모습이 생생하게 떠올랐기 때문이다." },
+      { id: "B", text: "단풍에 관심이 없어 지루했기 때문이다." },
+      { id: "C", text: "사진기를 가져오지 않아 사진을 찍을 수 없었기 때문이다." },
+      { id: "D", text: "밤을 주워 할머니께 가져다 드리려 했기 때문이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s5", highlight: { ranges: [{ paragraphId: "p1", start: 0, end: p1.length }] }, question: {
+    prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은?",
+    choices: [
+      { id: "A", text: "가을 현장 학습에서 산골 마을의 냄새와 밤송이가 할머니에 대한 그리움을 불러일으킨다." },
+      { id: "B", text: "은채가 친구들과 단풍 사진을 즐겁게 찍은 경험을 이야기한다." },
+      { id: "C", text: "할머니 댁에 직접 방문하여 밤을 함께 주운 이야기를 전한다." },
+      { id: "D", text: "버스 여행이 길어서 은채가 지루해한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p2
+  { stepId: "s6", highlight: { ranges: [r("p2", p2, "산길 중턱에 작은 정자가 있었어요. 선생님이 잠깐 쉬어 가자고 하셔서 저는 정자 난간에 앉아 골짜기를 내려다보았어요.")] }, question: {
+    prompt: "은채가 정자에서 한 행동으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "정자 난간에 앉아 골짜기를 내려다보았다." },
+      { id: "B", text: "정자에서 간식을 먹으며 친구들과 놀았다." },
+      { id: "C", text: "정자에서 선생님께 질문을 했다." },
+      { id: "D", text: "정자에서 낮잠을 잤다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s7", highlight: { ranges: [r("p2", p2, "바람이 불 때마다 나뭇잎들이 우수수 쏟아져 내렸는데, 그 모습이 마치 누군가 편지를 한 장씩 던져 주는 것 같았어요.")] }, question: {
+    prompt: "떨어지는 나뭇잎을 은채가 무엇에 비유했는지 알맞은 것은?",
+    choices: [
+      { id: "A", text: "누군가 편지를 한 장씩 던져 주는 것 같다고 비유했다." },
+      { id: "B", text: "빗방울이 떨어지는 것 같다고 비유했다." },
+      { id: "C", text: "새들이 날아가는 것 같다고 비유했다." },
+      { id: "D", text: "종이비행기가 날리는 것 같다고 비유했다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s8", highlight: { ranges: [r("p2", p2, "그때 옆에 앉은 친구 지수가 \"너 지금 뭐 생각해?\" 하고 물었어요. 저는 망설이다가 \"할머니 생각\" 하고 짧게 대답했어요. 지수는 아무 말 없이 제 옆에 바짝 붙어 앉아 같이 골짜기를 바라봐 주었어요.")] }, question: {
+    prompt: "은채의 대답을 들은 지수의 반응으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "아무 말 없이 옆에 바짝 붙어 앉아 같이 바라봐 주었다." },
+      { id: "B", text: "위로의 말을 길게 늘어놓았다." },
+      { id: "C", text: "다른 친구들을 불러 모았다." },
+      { id: "D", text: "관심을 보이지 않고 자리를 떠났다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s9", highlight: { ranges: [r("p2", p2, "그 순간 바람결에 실려 온 나뭇잎 한 장이 제 무릎 위에 살포시 내려앉았는데, 저는 그것이 할머니가 보내 주신 답장 같아서 눈시울이 뜨거워졌어요.")] }, question: {
+    prompt: "나뭇잎이 무릎에 내려앉았을 때 은채의 감정으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "할머니가 보내 주신 답장 같아서 눈시울이 뜨거워졌다." },
+      { id: "B", text: "나뭇잎이 더러워서 불쾌했다." },
+      { id: "C", text: "재미있어서 크게 웃었다." },
+      { id: "D", text: "놀라서 벌떡 일어났다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s10", highlight: { ranges: [{ paragraphId: "p2", start: 0, end: p2.length }] }, question: {
+    prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은?",
+    choices: [
+      { id: "A", text: "정자에서 쉬며 나뭇잎을 편지에, 무릎 위 나뭇잎을 할머니의 답장에 비유하며 그리움이 깊어진다." },
+      { id: "B", text: "지수와 다투어 기분이 나빠진 경험을 이야기한다." },
+      { id: "C", text: "정자에서 간식을 먹으며 즐거운 시간을 보낸다." },
+      { id: "D", text: "선생님이 가을 나뭇잎의 과학적 원리를 설명해 주신다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p3
+  { stepId: "s11", highlight: { ranges: [r("p3", p3, "하산할 때 저는 주머니에서 작은 수첩을 꺼내 짧은 글을 적었어요. '오늘 산에서 할머니 냄새를 맡았습니다. 밤송이도 보았습니다. 보고 싶습니다.'")] }, question: {
+    prompt: "하산하면서 은채가 수첩에 적은 내용으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "산에서 할머니 냄새를 맡고 밤송이를 보았으며 보고 싶다고 적었다." },
+      { id: "B", text: "현장 학습의 일정과 관찰 기록을 적었다." },
+      { id: "C", text: "친구 지수와의 대화 내용을 적었다." },
+      { id: "D", text: "다음 현장 학습 계획을 적었다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s12", highlight: { ranges: [r("p3", p3, "그 몇 줄을 적고 나니 마음이 한결 가벼워졌어요. 예전에 할머니께서 제게 말씀하셨잖아요. \"글로 적으면 마음이 정리된단다.\"")] }, question: {
+    prompt: "글을 적은 뒤 은채의 마음 변화와 그 까닭으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "글을 적으니 마음이 가벼워졌고, 할머니의 '글로 적으면 마음이 정리된다'는 말씀이 맞았다." },
+      { id: "B", text: "글을 적고 나서 오히려 마음이 더 무거워졌다." },
+      { id: "C", text: "글 쓰기가 귀찮아서 수첩을 버렸다." },
+      { id: "D", text: "지수가 글을 대신 써 주어서 편해졌다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s13", highlight: { ranges: [r("p3", p3, "수첩을 닫고 다시 걸음을 옮기니 햇빛이 산등성이 너머로 길게 기울어져 있었어요. 노을빛에 물든 나뭇잎들이 금빛으로 빛나는 것을 보면서, 저는 슬픔이 아니라 따뜻함을 느꼈어요.")] }, question: {
+    prompt: "노을빛 나뭇잎을 보며 은채가 느낀 감정으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "슬픔이 아니라 따뜻함을 느꼈다." },
+      { id: "B", text: "더 큰 슬픔에 빠졌다." },
+      { id: "C", text: "아무 감정도 느끼지 못했다." },
+      { id: "D", text: "노을이 무서워 빨리 내려가고 싶었다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s14", highlight: { ranges: [r("p3", p3, "할머니와 함께한 시간이 저를 여기까지 데려다주었다는 것을 깨달았기 때문이에요.")] }, question: {
+    prompt: "마지막 문장에서 은채가 깨달은 것으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "할머니와 함께한 시간이 자신을 여기까지 데려다주었다는 것이다." },
+      { id: "B", text: "할머니를 빨리 잊어야 한다는 것이다." },
+      { id: "C", text: "현장 학습이 공부에 도움이 된다는 것이다." },
+      { id: "D", text: "친구 지수가 가장 소중한 존재라는 것이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s15", highlight: { ranges: [{ paragraphId: "p3", start: 0, end: p3.length }] }, question: {
+    prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은?",
+    choices: [
+      { id: "A", text: "글쓰기를 통해 마음을 정리하고 할머니와의 추억에서 따뜻함을 발견한다." },
+      { id: "B", text: "하산 중에 길을 잃어 선생님이 구해 준다." },
+      { id: "C", text: "수첩에 숙제를 적으며 학업에 집중한다." },
+      { id: "D", text: "노을을 보며 친구들과 사진을 찍는다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p4
+  { stepId: "s16", highlight: { ranges: [r("p4", p4, "할머니, 저는 이제 할머니가 보고 싶을 때마다 글을 쓰기로 했어요. 오늘 이 편지도 그 시작이에요.")] }, question: {
+    prompt: "은채가 새로 시작하기로 한 일로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "할머니가 보고 싶을 때마다 글을 쓰기로 했고 이 편지가 그 시작이다." },
+      { id: "B", text: "매일 할머니 댁에 전화를 걸기로 했다." },
+      { id: "C", text: "할머니 대신 지수와 편지를 주고받기로 했다." },
+      { id: "D", text: "더 이상 할머니를 생각하지 않기로 했다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s17", highlight: { ranges: [r("p4", p4, "편지를 쓰다 보면 할머니의 목소리가 들리는 것 같고, 할머니와 마주 앉아 이야기하는 기분이 들어요.")] }, question: {
+    prompt: "편지를 쓸 때 은채가 느끼는 감정으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "할머니의 목소리가 들리고 마주 앉아 이야기하는 기분이 든다." },
+      { id: "B", text: "편지가 귀찮고 지루하게 느껴진다." },
+      { id: "C", text: "할머니의 모습이 점점 흐려지는 것 같다." },
+      { id: "D", text: "편지를 쓸수록 슬픔만 커진다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s18", highlight: { ranges: [r("p4", p4, "다음에는 봄에 할머니 댁 마당에 피던 매화 이야기를 쓸게요. 할머니가 매화를 보며 \"겨울을 견딘 꽃이 가장 향기롭다\" 하셨던 말씀, 저는 잊지 않고 있어요.")] }, question: {
+    prompt: "은채가 다음 편지에 쓰겠다고 한 내용과 관련된 할머니의 말씀으로 알맞은 것은?",
+    choices: [
+      { id: "A", text: "매화 이야기를 쓸 것이며 '겨울을 견딘 꽃이 가장 향기롭다'는 말씀이다." },
+      { id: "B", text: "단풍 이야기를 쓸 것이며 '가을이 가장 아름답다'는 말씀이다." },
+      { id: "C", text: "밤송이 이야기를 쓸 것이며 '가시가 있어야 열매가 달다'는 말씀이다." },
+      { id: "D", text: "눈 이야기를 쓸 것이며 '겨울은 쉬어 가는 계절이다'라는 말씀이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s19", highlight: { ranges: [{ paragraphId: "p4", start: 0, end: p4.length }] }, question: {
+    prompt: "넷째 문단의 중심 내용으로 가장 알맞은 것은?",
+    choices: [
+      { id: "A", text: "은채가 글쓰기를 통해 할머니와 이어지겠다는 다짐을 편지로 전한다." },
+      { id: "B", text: "은채가 할머니를 잊고 새 생활에 집중하겠다고 결심한다." },
+      { id: "C", text: "은채가 지수와 함께 할머니 댁을 방문하겠다고 약속한다." },
+      { id: "D", text: "은채가 매화나무를 학교에 심겠다고 계획한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }}
+];
+
+const recall = {
+  cards: [
+    { id: "c1", text: "가을 현장 학습에서 나뭇잎 냄새와 밤송이가 할머니에 대한 그리움을 불러일으킨다." },
+    { id: "c2", text: "산길에서 친구들과 달리 은채는 밤송이만 바라보며 할머니를 떠올린다." },
+    { id: "c3", text: "정자에서 떨어지는 나뭇잎을 편지에 비유하고 무릎 위 나뭇잎을 할머니의 답장으로 느낀다." },
+    { id: "c4", text: "친구 지수가 말없이 옆에 붙어 앉아 위로해 준다." },
+    { id: "c5", text: "수첩에 짧은 글을 쓰자 마음이 가벼워지며 할머니의 '글쓰기' 조언이 맞았음을 깨닫는다." },
+    { id: "c6", text: "노을빛 나뭇잎에서 슬픔이 아닌 따뜻함을 느끼며 할머니와의 시간이 자신을 성장시켰음을 안다." },
+    { id: "c7", text: "보고 싶을 때마다 글을 쓰기로 하고 이 편지가 그 시작이라고 말한다." },
+    { id: "c8", text: "할머니의 '겨울을 견딘 꽃이 가장 향기롭다'는 말씀을 잊지 않겠다고 다짐한다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+const confirm = {
+  questions: [
+    { id: "q1",
+      prompt: "산골 마을에서 은채가 할머니를 떠올린 직접적 계기는 무엇인가요?",
+      answerText: "나뭇잎 냄새",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p1", p1, "나뭇잎 냄새")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q2",
+      prompt: "산길에서 은채가 자꾸 내려다본 것은 무엇인가요?",
+      answerText: "밤송이",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p1", p1, "밤송이")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q3",
+      prompt: "떨어지는 나뭇잎을 은채가 무엇에 비유했나요?",
+      answerText: "편지",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p2", p2, "편지를 한 장씩 던져 주는 것")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q4",
+      prompt: "은채가 할머니 생각을 하고 있을 때 옆에서 위로해 준 친구의 이름은 누구인가요?",
+      answerText: "지수",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p2", p2, "지수")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q5",
+      prompt: "할머니가 은채에게 알려 준 마음 정리 방법은 무엇인가요?",
+      answerText: "글로 적으면 마음이 정리된단다",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p3", p3, "글로 적으면 마음이 정리된단다")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q6",
+      prompt: "노을빛 나뭇잎을 보며 은채가 슬픔 대신 느낀 감정은 무엇인가요?",
+      answerText: "따뜻함",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p3", p3, "따뜻함")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q7",
+      prompt: "은채가 다음 편지에 쓰겠다고 한 꽃의 이름은 무엇인가요?",
+      answerText: "매화",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p4", p4, "매화")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true },
+    { id: "q8",
+      prompt: "할머니가 매화를 보며 하신 말씀은 무엇인가요?",
+      answerText: "겨울을 견딘 꽃이 가장 향기롭다",
+      answerMatchMode: "ANY",
+      answerRanges: [r("p4", p4, "겨울을 견딘 꽃이 가장 향기롭다")],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true }
+  ]
+};
+
+const content = {
+  contentId: "dr-r2-018",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 2) Day 18 문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_2",
+  schoolGradeRange: { min: 8, max: 9 },
+  area: "READING",
+  subArea: "LITERATURE",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 480,
+  assets: {},
+  payload: {
+    passage: { format: "TEXT", paragraphs },
+    intensive: { timeline },
+    recall,
+    confirm
+  }
+};
+
+const batch = {
+  content_type: "DAILY_READING",
+  level_id: "RUSSELL_2",
+  area: "READING",
+  sub_area: "LITERATURE",
+  day_index: 18,
+  module_key: "reading_training",
+  schema_version: "1.0",
+  content
+};
+
+const staticPath = "C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/frontend/public/daily-reading/russell2/018.json";
+fs.writeFileSync(staticPath, JSON.stringify(content, null, 2), 'utf8');
+console.log("018.json 저장 완료");
+
+const batchPath = "C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/generated/day18-batch.json";
+fs.writeFileSync(batchPath, JSON.stringify(batch, null, 2), 'utf8');
+console.log("day18-batch.json 저장 완료");

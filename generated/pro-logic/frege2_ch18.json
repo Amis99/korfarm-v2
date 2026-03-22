@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게2 18장 논리사고력",
+  "targetLevel": "frege2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "'박씨전'에서 박씨 부인은 처음에 흉측한 외모 때문에 남편에게 구박받았지만, 나중에 허물을 벗고 절세미인이 되었다. 겉모습보다 내면의 능력이 중요하다는 메시지를 담고 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'박씨 부인의 변신이 의미 있다'는 해석의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "외모로 사람을 평가하는 것은 잘못이며, 진정한 가치는 내면에 있다"
+              },
+              {
+                "id": "B",
+                "text": "아름다운 외모가 곧 내면의 능력이다"
+              },
+              {
+                "id": "C",
+                "text": "모든 사람은 변신할 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "외모가 좋아야 영웅이 될 수 있다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "소설의 시간적 배경은 사건이 일어나는 시간이나 시대이다. 공간적 배경은 사건이 일어나는 장소이다. 배경은 분위기를 조성하고 사건을 암시한다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'배경이 분위기를 조성한다'는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "배경은 이야기와 무관하다"
+              },
+              {
+                "id": "B",
+                "text": "모든 소설의 배경은 동일하다"
+              },
+              {
+                "id": "C",
+                "text": "시간과 장소는 인물의 감정이나 사건의 성격에 영향을 미친다"
+              },
+              {
+                "id": "D",
+                "text": "장소만 바뀌면 분위기가 바뀐다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "병자호란 때 청나라 군대가 조선을 침략했다. 박씨 부인은 피화당에서 신비한 부채로 불길을 일으켜 용골대의 군사를 물리쳤다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "박씨가 부채로 용골대를 물리친 후 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "용골대가 더 강하게 공격할 것이다"
+              },
+              {
+                "id": "B",
+                "text": "박씨가 청나라로 도망칠 것이다"
+              },
+              {
+                "id": "C",
+                "text": "용골대가 박씨의 도술에 항복하고 물러날 것이다"
+              },
+              {
+                "id": "D",
+                "text": "피화당이 무너질 것이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "같은 사건이라도 배경에 따라 분위기가 달라진다. 문을 두드리는 소리가 천둥 치는 밤 오두막에서 들리면 무섭지만, 벚꽃 피는 봄날 공원에서 들리면 설렌다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "'토끼와 거북이'의 배경을 숲속 육지에서 바닷속으로 바꾸면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "토끼가 여전히 빠르므로 결과는 같다"
+              },
+              {
+                "id": "B",
+                "text": "거북이가 헤엄을 잘 치므로 토끼보다 유리해진다"
+              },
+              {
+                "id": "C",
+                "text": "배경이 바뀌어도 이야기에 변화가 없다"
+              },
+              {
+                "id": "D",
+                "text": "둘 다 달리기를 할 수 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "전기적 요소란 현실에서 일어날 수 없는 신비한 사건을 뜻한다. 박씨가 부채를 부쳐 불길을 일으키고 화살을 되돌린 것은 현실에서 불가능하다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 현실에서 불가능한 신비한 사건이 나타나면 전기적 요소이다. [소전제] 박씨의 부채로 불길을 일으키는 것은 현실에서 불가능하다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "박씨의 부채 장면은 전기적 요소이다"
+              },
+              {
+                "id": "B",
+                "text": "박씨의 부채 장면은 사실적 묘사이다"
+              },
+              {
+                "id": "C",
+                "text": "전기적 요소는 현실에서 가능하다"
+              },
+              {
+                "id": "D",
+                "text": "박씨는 실제 역사 인물이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "남존여비란 남자를 높이고 여자를 낮추는 사상이다. 조선 시대는 남존여비 사상이 강했다. 박씨전에서 여자인 박씨가 나라를 구한다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 남존여비 사회에서 여성 영웅의 활약은 독자에게 통쾌함을 준다. [소전제] 박씨전은 남존여비 사회에서 여성 박씨가 영웅으로 활약한다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "박씨전은 독자에게 통쾌함을 준다"
+              },
+              {
+                "id": "B",
+                "text": "박씨전은 남존여비를 강화한다"
+              },
+              {
+                "id": "C",
+                "text": "여성 영웅은 존재할 수 없다"
+              },
+              {
+                "id": "D",
+                "text": "박씨전은 슬픈 이야기이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "소설에서 시간적 배경이 사건의 분위기를 암시하려면 배경 묘사가 구체적이어야 한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'배경이 분위기를 암시하려면 구체적 묘사가 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구체적 묘사가 있으면 반드시 분위기가 암시된다"
+              },
+              {
+                "id": "B",
+                "text": "구체적 묘사 없이도 분위기가 암시된다"
+              },
+              {
+                "id": "C",
+                "text": "분위기가 암시되었다면 구체적 배경 묘사가 있었을 것이다"
+              },
+              {
+                "id": "D",
+                "text": "묘사와 분위기는 관련이 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "박씨가 용골대를 물리치려면 도술이라는 비범한 능력이 필요했다. 일반 무기로는 대군을 상대할 수 없었다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'박씨가 용골대를 물리치려면 도술이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "도술이 있으면 반드시 용골대를 물리친다"
+              },
+              {
+                "id": "B",
+                "text": "도술 없이 용골대를 물리치는 것은 불가능하다"
+              },
+              {
+                "id": "C",
+                "text": "B와 C 모두 맞다"
+              },
+              {
+                "id": "D",
+                "text": "용골대를 물리쳤다면 도술을 사용했을 것이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "공간적 배경이란 사건이 일어나는 구체적 장소이다. '학교 운동장', '용궁', '화성 탐사 기지' 등이 그 예시이다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "공간적 배경의 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "병자호란이 일어난 추운 겨울"
+              },
+              {
+                "id": "B",
+                "text": "피화당이라는 별채"
+              },
+              {
+                "id": "C",
+                "text": "2050년 1월 1일"
+              },
+              {
+                "id": "D",
+                "text": "무더운 여름날"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "복선은 뒷날 벌어질 사건을 미리 암시한다. 박씨전에서 박씨의 비범한 능력이 일찍부터 드러난 것은 나중에 나라를 구하는 활약의 복선이다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "복선의 적절한 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "박씨가 도술로 집안 어려움을 해결한 장면"
+              },
+              {
+                "id": "B",
+                "text": "날씨가 좋은 날 산책하는 평범한 장면"
+              },
+              {
+                "id": "C",
+                "text": "박씨가 허물을 벗고 미인이 되는 장면"
+              },
+              {
+                "id": "D",
+                "text": "먹구름이 몰려와 폭풍을 암시하는 장면"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "용골대는 박씨의 도술에 항복했다. 상대의 능력이 압도적이면 항복할 수밖에 없다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'압도적 능력을 보이면 상대가 항복한다'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "압도적 능력을 보이면서 상대가 항복하지 않는 경우는 없다"
+              },
+              {
+                "id": "B",
+                "text": "항복했으면 반드시 압도적 능력을 본 것이다"
+              },
+              {
+                "id": "C",
+                "text": "항복하지 않으면 압도적 능력이 아니다"
+              },
+              {
+                "id": "D",
+                "text": "능력과 항복은 무관하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "박씨전에서 박씨는 '내 비록 여자이나 재주가 있다'고 말했다. 재주가 있으면 성별에 관계없이 큰일을 해낼 수 있다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'재주가 있으면 성별에 관계없이 활약할 수 있다'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "활약했으면 반드시 재주가 있다"
+              },
+              {
+                "id": "B",
+                "text": "성별이 재주를 결정한다"
+              },
+              {
+                "id": "C",
+                "text": "재주가 없어도 활약할 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "재주가 있으면서 활약하지 못하는 경우는 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "시간적 배경이 '비 오는 밤 낡은 폐가'이면 공포 분위기가 조성된다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'무서운 배경이면 공포 분위기가 조성된다'의 충분조건 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "벚꽃이 흩날리는 따뜻한 봄날 오후의 공원"
+              },
+              {
+                "id": "B",
+                "text": "천둥번개가 치는 깜깜한 밤의 낡은 오두막에서 문 두드리는 소리"
+              },
+              {
+                "id": "C",
+                "text": "맑은 가을 하늘 아래 운동장"
+              },
+              {
+                "id": "D",
+                "text": "햇살 가득한 교실"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "박씨는 용골대에게 '세자와 대군을 함부로 대하면 너희 나라까지 쫓아가겠다'고 경고했다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'강한 경고를 하면 상대가 약속을 지킨다'의 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "박씨의 경고에 용골대가 맹세하고 물러간 것"
+              },
+              {
+                "id": "B",
+                "text": "선생님의 경고에 학생이 규칙을 지킨 것"
+              },
+              {
+                "id": "C",
+                "text": "부모의 경고에 아이가 위험한 행동을 멈춘 것"
+              },
+              {
+                "id": "D",
+                "text": "아무 경고 없이 상대가 스스로 약속을 지킨 것"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "전기적 요소가 있으면 비현실적 사건이 나타난다. 박씨전에는 부채로 불길을 일으키는 전기적 요소가 있다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "위 전제로부터 타당한 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비현실적 사건이 나타나므로 전기적 요소가 있다 (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "박씨전에는 비현실적 사건이 나타난다 (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "전기적 요소가 없으므로 사실적이다 (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "B가 타당하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "남존여비 사상이 강한 사회에서 여성은 큰일을 하기 어렵다. 박씨는 이 사회에서 나라를 구했다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'남존여비 사회에서 여성이 큰일을 하면 기존 관념에 도전한 것이다'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "B와 C 모두 타당하다"
+              },
+              {
+                "id": "B",
+                "text": "기존 관념에 도전했으므로 여성이다 (후건 긍정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "여성이 아니므로 기존 관념에 도전할 필요가 없다 (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "기존 관념에 도전하지 않았다면 큰일을 하지 않은 것이다 (후건 부정 — 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "박씨전은 병자호란이라는 역사적 사건을 배경으로 한다. 실제 역사에서 패배한 기억이 있는 독자에게 박씨의 활약은 대리 만족을 주었다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'역사적 패배 경험'과 '영웅 소설의 인기' 사이의 관계 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "패배 경험이 인기의 유일한 원인이다"
+              },
+              {
+                "id": "B",
+                "text": "인기가 높아서 패배한 것이다"
+              },
+              {
+                "id": "C",
+                "text": "역사적 패배와 영웅 소설 인기 사이에 상관관계가 있으나, 문학적 재미나 전기적 요소 등 다른 요인도 인기에 영향을 준다"
+              },
+              {
+                "id": "D",
+                "text": "패배 경험과 인기는 반비례한다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "소설에서 배경 묘사가 풍부할수록 독자의 몰입감이 높다는 연구 결과가 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'배경 묘사의 풍부함'과 '독자 몰입감' 사이의 관계 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "둘 사이에 상관관계가 있으나, 인물의 매력이나 사건의 긴장감 등 다른 요인도 몰입감에 영향을 준다"
+              },
+              {
+                "id": "B",
+                "text": "몰입감이 높으면 배경 묘사가 풍부한 것이다"
+              },
+              {
+                "id": "C",
+                "text": "배경 묘사가 몰입감의 유일한 원인이다"
+              },
+              {
+                "id": "D",
+                "text": "배경 묘사와 몰입감은 관련이 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "박씨전에서 용골대는 실존 인물이지만, 소설에서는 박씨에게 혼쭐이 나도록 허구적으로 각색되었다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'역사 소설에서 실존 인물을 허구적으로 각색하면 독자의 만족감이 높아진다'는 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "조선 시대 출판 기술을 분석한다"
+              },
+              {
+                "id": "B",
+                "text": "용골대의 실제 역사만 조사한다"
+              },
+              {
+                "id": "C",
+                "text": "박씨전의 판본 수만 조사한다"
+              },
+              {
+                "id": "D",
+                "text": "실존 인물이 허구적으로 각색된 작품과 그렇지 않은 작품의 독자 만족도를 비교한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "배경을 바꾸면 같은 이야기라도 전혀 다른 분위기가 된다는 주장이 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "위 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "숲속에서 바닷속으로 배경을 바꾸자 이야기 분위기가 완전히 달라졌다"
+              },
+              {
+                "id": "B",
+                "text": "계절을 여름에서 겨울로 바꾸자 차가운 분위기가 되었다"
+              },
+              {
+                "id": "C",
+                "text": "밤에서 낮으로 배경을 바꾸자 공포 분위기가 사라졌다"
+              },
+              {
+                "id": "D",
+                "text": "배경을 도시에서 시골로 바꾸었는데 분위기에 차이가 전혀 없었다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

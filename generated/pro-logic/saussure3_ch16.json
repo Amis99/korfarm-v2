@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 16장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "목표란 어떤 목적을 이루려고 지향하는 실제적 대상입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "목표를 이루려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 계획 없이 기다려야 한다."
+              },
+              {
+                "id": "B",
+                "text": "달성하고 싶은 구체적인 방향이 정해져 있어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "목표가 없어도 된다."
+              },
+              {
+                "id": "D",
+                "text": "남이 대신 이루어줘야 한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "재능이란 어떤 일을 남보다 잘할 수 있는 타고난 능력입니다. 적성이란 어떤 일에 알맞은 성질이나 능력입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "자신의 적성에 맞는 직업을 선택하면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일에 흥미를 느끼고 즐겁게 일할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "일이 힘들고 지루해진다."
+              },
+              {
+                "id": "C",
+                "text": "적성과 직업은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "직업을 바꿔야 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "꿈을 이루려면 구체적인 목표를 세우고 노력해야 합니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'목표를 세우면 방향이 생긴다. 민수는 과학자가 되겠다는 목표를 세웠다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "목표와 방향은 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "민수는 목표가 없다."
+              },
+              {
+                "id": "C",
+                "text": "민수에게 과학자가 되기 위한 방향이 생겼다."
+              },
+              {
+                "id": "D",
+                "text": "민수는 방향을 잃었다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "재능만으로는 부족하고 꾸준한 노력이 함께 해야 꿈을 이룰 수 있습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'꿈을 이루려면 노력이 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "노력하지 않으면 꿈을 이루기 어렵다."
+              },
+              {
+                "id": "B",
+                "text": "노력 없이도 꿈을 이룬다."
+              },
+              {
+                "id": "C",
+                "text": "재능만 있으면 된다."
+              },
+              {
+                "id": "D",
+                "text": "노력과 꿈은 관계없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "자신이 무엇을 좋아하고 잘하는지 아는 것이 진로 선택의 첫걸음입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'진로를 정하려면 자기 이해가 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자신이 무엇을 좋아하는지 모른 채 직업을 정했다."
+              },
+              {
+                "id": "B",
+                "text": "수학이 좋고 잘한다는 것을 알고 수학 관련 직업을 탐색했다."
+              },
+              {
+                "id": "C",
+                "text": "자기 이해 없이 남이 시키는 대로 했다."
+              },
+              {
+                "id": "D",
+                "text": "관심사를 무시하고 아무 직업이나 선택했다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "관심 있는 분야에 대해 체험하면 꿈이 더 뚜렷해집니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'직업 체험을 하면 진로가 뚜렷해진다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "체험과 진로는 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "체험 없이도 진로가 뚜렷하다."
+              },
+              {
+                "id": "C",
+                "text": "직업 체험을 했는데 진로가 불분명한 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "체험하면 진로가 더 불분명해진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "목표를 세우고 매일 조금씩 노력하면 큰 성과를 거둘 수 있습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'매일 꾸준히 노력하면 실력이 는다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "노력 없이 재능만으로 완벽하게 연주했다."
+              },
+              {
+                "id": "B",
+                "text": "한 번도 연습하지 않았는데 잘 치게 되었다."
+              },
+              {
+                "id": "C",
+                "text": "매일 연습했는데 실력이 떨어졌다."
+              },
+              {
+                "id": "D",
+                "text": "매일 30분씩 피아노를 연습했더니 어려운 곡도 칠 수 있게 되었다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "적성에 맞는 일을 하면 즐겁고 보람을 느낍니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'적성에 맞으면 즐겁다. 지수는 그림 그리기가 적성에 맞다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지수는 그림을 싫어한다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "지수는 그림을 그릴 때 즐겁다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "적성과 즐거움은 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "지수의 적성은 수학이다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "어릴 때부터 다양한 경험을 하면 적성을 발견하기 쉬워집니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'경험의 다양성'과 '적성 발견'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "적성을 찾으면 경험이 필요 없다."
+              },
+              {
+                "id": "B",
+                "text": "경험과 적성 발견은 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "경험이 많으면 반드시 적성을 찾는다."
+              },
+              {
+                "id": "D",
+                "text": "다양한 경험이 적성 발견에 도움이 되지만, 깊이 있는 탐색도 중요하다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "꿈은 구체적일수록 이루어지기 쉽습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'구체적인 목표를 세운 학생이 성적이 더 오른다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구체적 목표를 세운 학생과 안 세운 학생의 성적 변화를 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "학생들의 키를 잰다."
+              },
+              {
+                "id": "C",
+                "text": "목표의 글자 수를 센다."
+              },
+              {
+                "id": "D",
+                "text": "학생들의 좋아하는 색을 조사한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

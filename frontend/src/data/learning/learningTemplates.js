@@ -34,6 +34,6 @@ export const LEARNING_TEMPLATES = [
   { id: "pro_reading", title: "프로 독해 모드", moduleKey: "reading_training", content: farmReading },
   { id: "pro_vocab", title: "프로 어휘 학습", moduleKey: "worksheet_quiz", content: farmVocab },
   { id: "pro_background", title: "프로 배경지식", moduleKey: "worksheet_quiz", content: farmBackground },
-  { id: "pro_logic", title: "프로 논리사고력", moduleKey: "worksheet_quiz", content: farmLogic },
+  { id: "pro_logic", title: "프로 논리사고력", moduleKey: "logic_reasoning", content: farmLogic },
   { id: "pro_answer", title: "프로 모범답안/정답해설", moduleKey: "worksheet_quiz", content: proAnswer },
 ];

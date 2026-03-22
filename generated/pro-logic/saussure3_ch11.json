@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 11장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "뉴턴은 떨어지는 사과를 보고 만유인력의 법칙을 발견했습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "뉴턴이 사과를 보고 법칙을 발견하려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사과를 먹어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "자연 현상에 숨어 있는 원리를 궁금해하는 호기심이 있어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "사과나무를 심어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "다른 사람이 알려줘야 한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "발명이란 전에 없던 물건이나 기술을 새로 만들어 내는 것입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "에디슨이 전구를 발명하면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "밤에도 밝은 빛 아래에서 활동할 수 있게 된다."
+              },
+              {
+                "id": "B",
+                "text": "밤이 더 어두워진다."
+              },
+              {
+                "id": "C",
+                "text": "전기가 사라진다."
+              },
+              {
+                "id": "D",
+                "text": "아무 변화가 없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "원리란 사물의 근본이 되는 이치입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'발견은 숨어 있는 원리를 찾아내는 것이다. 만유인력 법칙은 발견이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "만유인력 법칙은 숨어 있던 원리를 찾아낸 것이다."
+              },
+              {
+                "id": "B",
+                "text": "만유인력은 발명이다."
+              },
+              {
+                "id": "C",
+                "text": "발견과 원리는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "만유인력은 만들어낸 것이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "발명을 하려면 기존에 없던 새로운 아이디어가 필요합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'발명하려면 창의적 아이디어가 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "발명과 아이디어는 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "아이디어 없이도 발명할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "창의적 아이디어 없이는 발명이 어렵다."
+              },
+              {
+                "id": "D",
+                "text": "이미 있는 것을 그대로 쓰면 발명이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "호기심이란 새롭고 신기한 것을 탐구하려는 마음입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'위대한 발견에는 호기심이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호기심 없이 우연히 중력을 만들어냈다."
+              },
+              {
+                "id": "B",
+                "text": "뉴턴이 사과가 왜 떨어지는지 궁금해한 끝에 중력을 발견했다."
+              },
+              {
+                "id": "C",
+                "text": "아무 관심 없이 지나갔더니 법칙이 발견되었다."
+              },
+              {
+                "id": "D",
+                "text": "호기심을 가졌지만 아무것도 발견하지 못했다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "꾸준히 관찰하고 실험하면 새로운 원리를 발견할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'꾸준히 탐구하면 발견할 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "탐구하지 않아도 발견할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "꾸준히 탐구했는데 아무것도 발견하지 못하는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "탐구와 발견은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "한 번만 시도해도 반드시 발견한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "발견은 이미 존재하지만 알려지지 않은 것을 찾아내는 것이고, 발명은 아예 없던 것을 새로 만드는 것입니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'발명이 이루어지면 사람들의 생활이 편리해진다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전화기를 발견했다."
+              },
+              {
+                "id": "B",
+                "text": "전화기를 발명했는데 생활이 불편해졌다."
+              },
+              {
+                "id": "C",
+                "text": "발명 없이도 모든 것이 편리했다."
+              },
+              {
+                "id": "D",
+                "text": "전화기가 발명되어 멀리 있는 사람과 대화할 수 있게 되었다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "발견과 발명은 모두 인류의 발전에 기여합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'발명은 새로운 물건을 만드는 것이다. 비행기는 발명품이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비행기는 새로 만들어진 물건이다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "비행기는 자연에서 발견된 것이다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "발명과 비행기는 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "비행기는 발견품이다. (맞는 추론)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "과학 기술이 발전할수록 새로운 발명품이 등장합니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'과학 기술 수준'과 '발명품 수'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "과학 기술이 높으면 발명이 반드시 줄어든다."
+              },
+              {
+                "id": "B",
+                "text": "과학 기술과 발명은 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "과학 기술이 높으면 발명이 늘어나지만 사회적 필요 등 다른 요인도 있다."
+              },
+              {
+                "id": "D",
+                "text": "발명이 많으면 과학 기술이 반드시 높은 것이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "에디슨은 수천 번의 실패를 거쳐 전구를 발명했습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'실패를 많이 경험한 사람이 더 좋은 발명을 한다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실패 횟수만 세어본다."
+              },
+              {
+                "id": "B",
+                "text": "발명가의 키를 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "발명가의 이름만 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "많이 실패한 발명가와 적게 실패한 발명가의 발명품 질을 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

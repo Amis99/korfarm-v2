@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 18장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "첫 번째 양반은 거만하게 말했고 백정은 고기를 툭 잘라 주었어요. 두 번째 양반은 공손하게 말했고 백정은 좋은 고기를 넉넉하게 잘라 주었어요.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "백정이 고기 양을 다르게 준 이유로 꼭 필요한 사실은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "백정이 두 번째 양반의 친척이었다."
+              },
+              {
+                "id": "B",
+                "text": "두 양반이 다른 종류의 고기를 주문했다."
+              },
+              {
+                "id": "C",
+                "text": "말하는 태도에 따라 사람의 마음이 달라진다."
+              },
+              {
+                "id": "D",
+                "text": "첫 번째 양반이 돈을 덜 냈다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "우리가 뱉은 말은 한 번 입 밖으로 나오면 다시 주워 담을 수 없어요.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "친구에게 나쁜 말을 하면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "친구가 더 좋아한다."
+              },
+              {
+                "id": "B",
+                "text": "친구의 마음에 상처가 남고 되돌릴 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "아무 일도 생기지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "말을 다시 주워 담을 수 있다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "나쁜 말은 친구의 마음에 상처를 줍니다. '바보'는 나쁜 말입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'나쁜 말은 상처를 준다. 바보는 나쁜 말이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "바보라는 말은 친구에게 상처를 준다."
+              },
+              {
+                "id": "B",
+                "text": "바보라는 말은 상처를 주지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "바보라는 말은 친구를 기쁘게 한다."
+              },
+              {
+                "id": "D",
+                "text": "나쁜 말은 좋은 말이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "사과할 때는 진심을 담아야 합니다. 거짓이 없는 참되고 바른 마음이 진심입니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'진정한 사과를 하려면 진심이 꼭 있어야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "진심 없이도 사과가 된다."
+              },
+              {
+                "id": "B",
+                "text": "진심이 없으면 진정한 사과가 될 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "사과와 진심은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "진심만 있으면 사과하지 않아도 된다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "격려란 용기를 북돋워 주기 위해 기운을 내도록 하는 일입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'격려를 하려면 상대방을 응원하는 마음이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "친구에게 '네가 왜 넘어지니?'라고 화를 냈다."
+              },
+              {
+                "id": "B",
+                "text": "넘어진 친구를 비웃었다."
+              },
+              {
+                "id": "C",
+                "text": "친구가 넘어진 것을 모른 척했다."
+              },
+              {
+                "id": "D",
+                "text": "넘어진 친구에게 '괜찮아? 넌 할 수 있어'라고 말했다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "말 한마디에 천 냥 빚도 갚는다는 말이 딱 맞았습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'공손한 말을 하면 상대방의 호감을 산다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공손하게 말했는데 호감을 못 사는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "호감을 사면 공손하게 말한 것이다."
+              },
+              {
+                "id": "C",
+                "text": "거만하게 말해도 호감을 산다."
+              },
+              {
+                "id": "D",
+                "text": "공손한 말과 호감은 관계없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "'넌 할 수 있어'라는 말은 힘을 주지만, '넌 못해'라는 말은 힘을 빠지게 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'격려하는 말을 하면 상대방에게 힘이 된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시험 못 본 친구에게 '넌 못해'라고 했더니 힘이 났다."
+              },
+              {
+                "id": "B",
+                "text": "친구에게 아무 말도 하지 않았더니 용기가 생겼다."
+              },
+              {
+                "id": "C",
+                "text": "시험 못 본 친구에게 '다음엔 잘할 수 있어'라고 했더니 기운을 냈다."
+              },
+              {
+                "id": "D",
+                "text": "친구를 놀렸더니 더 열심히 공부했다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "두 번째 양반은 공손하게 인사를 건넸고, 백정은 좋은 고기를 넉넉하게 잘라 주었습니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'공손하면 좋은 대접을 받는다. 두 번째 양반은 공손했다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 번째 양반은 나쁜 대접을 받았다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "거만하면 좋은 대접을 받는다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "공손함과 대접은 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "두 번째 양반은 좋은 대접을 받았다. (맞는 추론)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "첫 번째 양반은 거만했고 고기를 적게 받았어요. 두 번째 양반은 공손했고 고기를 넉넉히 받았어요.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'말하는 태도'와 '대접의 질'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공손한 태도와 좋은 대접은 서로 관련이 있지만 항상 그런 것은 아닐 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "태도와 대접은 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "거만하면 항상 좋은 대접을 받는다."
+              },
+              {
+                "id": "D",
+                "text": "대접이 좋으면 반드시 거만한 것이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "말을 하기 전에는 친구의 기분이 어떨지 마음속으로 꼭 3초만 생각해 보는 것이 좋아요.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'말하기 전에 생각하면 상처 주는 말이 줄어든다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "친구의 키를 재본다."
+              },
+              {
+                "id": "B",
+                "text": "3초 생각하고 말한 날과 바로 말한 날의 다툼 횟수를 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "친구가 좋아하는 색을 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "말하는 속도를 측정한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

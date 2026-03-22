@@ -1,0 +1,402 @@
+[
+  {
+    "contentType": "PRO_READING",
+    "title": "자연도 옷을 갈아입어요",
+    "targetLevel": "saussure2",
+    "area": "READING",
+    "subArea": "CONCEPT",
+    "timeLimitSec": 300,
+    "seedReward": { "seedType": "seed_rice", "count": 3, "multiplier": 1 },
+    "payload": {
+      "passage": {
+        "format": "TEXT",
+        "paragraphs": [
+          { "id": "p1", "text": "사람들이 계절에 따라 옷을 갈아입듯이 자연도 옷을 갈아입어요." },
+          { "id": "p2", "text": "봄에는 겨우내 웅크렸던 나무에서 연두색 새싹이 돋아나 초록 옷을 입어요." },
+          { "id": "p3", "text": "여름이 되어 햇볕이 강해지면 나뭇잎이 더 크고 진한 초록색 옷으로 갈아입어요." },
+          { "id": "p4", "text": "서늘한 가을에는 알록달록한 단풍이 들고, 겨울에는 잎을 떨어뜨린 뒤 하얀 눈으로 몸을 덮는답니다." }
+        ]
+      },
+      "intensive": {
+        "timeline": [
+          {
+            "stepId": "s1",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 34 }] },
+            "question": {
+              "prompt": "이 글에서 자연의 변화를 무엇에 비유하나요?",
+              "choices": [
+                { "id": "A", "text": "옷을 갈아입는 것" },
+                { "id": "B", "text": "음식을 바꾸는 것" },
+                { "id": "C", "text": "집을 이사하는 것" },
+                { "id": "D", "text": "노래를 바꾸는 것" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s2",
+            "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 40 }] },
+            "question": {
+              "prompt": "봄에 자연은 어떤 옷을 입나요?",
+              "choices": [
+                { "id": "A", "text": "연두색 새싹의 초록 옷" },
+                { "id": "B", "text": "빨간 단풍 옷" },
+                { "id": "C", "text": "하얀 눈 옷" },
+                { "id": "D", "text": "진한 초록 옷" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s3",
+            "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 43 }] },
+            "question": {
+              "prompt": "여름에 나뭇잎은 어떻게 변하나요?",
+              "choices": [
+                { "id": "A", "text": "더 크고 진한 초록색으로 변한다" },
+                { "id": "B", "text": "빨갛게 변한다" },
+                { "id": "C", "text": "떨어진다" },
+                { "id": "D", "text": "하얗게 변한다" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s4",
+            "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 54 }] },
+            "question": {
+              "prompt": "가을과 겨울 자연의 모습은 어떠한가요?",
+              "choices": [
+                { "id": "A", "text": "가을은 단풍, 겨울은 하얀 눈" },
+                { "id": "B", "text": "가을과 겨울 모두 초록색" },
+                { "id": "C", "text": "가을에 눈이 오고 겨울에 단풍이 든다" },
+                { "id": "D", "text": "가을과 겨울 모두 꽃이 핀다" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s5",
+            "highlight": {
+              "ranges": [
+                { "paragraphId": "p1", "start": 0, "end": 34 },
+                { "paragraphId": "p2", "start": 0, "end": 40 },
+                { "paragraphId": "p3", "start": 0, "end": 43 },
+                { "paragraphId": "p4", "start": 0, "end": 54 }
+              ]
+            },
+            "question": {
+              "prompt": "자연이 '옷을 갈아입는다'는 말은 무슨 뜻인가요?",
+              "choices": [
+                { "id": "A", "text": "자연은 사계절마다 다른 모습으로 변한다" },
+                { "id": "B", "text": "자연은 항상 같은 모습이다" },
+                { "id": "C", "text": "봄에만 자연이 변한다" },
+                { "id": "D", "text": "겨울이 가장 아름다운 계절이다" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          }
+        ]
+      },
+      "recall": {
+        "cards": [
+          { "id": "c1", "text": "자연도 사람처럼 옷을 갈아입음" },
+          { "id": "c2", "text": "봄: 연두색 새싹 초록 옷" },
+          { "id": "c3", "text": "여름: 진한 초록색 나뭇잎" },
+          { "id": "c4", "text": "가을: 알록달록 단풍" },
+          { "id": "c5", "text": "겨울: 잎 떨어지고 하얀 눈" },
+          { "id": "c6", "text": "계절마다 자연의 모습이 달라짐" },
+          { "id": "c7", "text": "사계절의 변화가 자연의 특징" },
+          { "id": "c8", "text": "자연은 쉬지 않고 변화함" }
+        ],
+        "correctOrder": ["c1","c2","c3","c4","c5","c6","c7","c8"],
+        "seedPenalty": 1
+      },
+      "confirm": {
+        "questions": [
+          { "id": "q1", "prompt": "봄에 자연은 어떤 모습인가요?", "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 40 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q2", "prompt": "여름에 나뭇잎은 어떻게 변하나요?", "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 43 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q3", "prompt": "가을에 자연은 어떤 모습인가요?", "answerRanges": [{ "paragraphId": "p4", "start": 0, "end": 20 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q4", "prompt": "겨울에 나무는 어떻게 되나요?", "answerRanges": [{ "paragraphId": "p4", "start": 21, "end": 54 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q5", "prompt": "자연의 변화를 무엇에 비유했나요?", "answerRanges": [{ "paragraphId": "p1", "start": 0, "end": 34 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" }
+        ]
+      }
+    }
+  },
+  {
+    "contentType": "PRO_READING",
+    "title": "나무의 옷장",
+    "targetLevel": "saussure2",
+    "area": "READING",
+    "subArea": "LITERATURE",
+    "timeLimitSec": 300,
+    "seedReward": { "seedType": "seed_rice", "count": 3, "multiplier": 1 },
+    "payload": {
+      "passage": {
+        "format": "TEXT",
+        "paragraphs": [
+          { "id": "p1", "text": "우리 집 앞 커다란 나무는\n멋쟁이 옷장을 가지고 있나 봐.\n따스한 봄바람 불면\n연두색 셔츠 꺼내 입고 방긋.\n무더운 여름 햇살 비치면\n진한 초록 반팔 입고 활짝.\n시원한 가을바람 불면\n울긋불긋 코트 입고 살랑.\n추운 겨울 눈 내리면\n가지만 남은 몸에\n하얀 솜이불 덮고 쿨쿨.\n계절마다 척척\n옷을 갈아입는 멋쟁이 나무." }
+        ]
+      },
+      "intensive": {
+        "timeline": [
+          {
+            "stepId": "s1",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 32 }] },
+            "question": {
+              "prompt": "시에서 나무가 가지고 있다고 한 것은 무엇인가요?",
+              "choices": [
+                { "id": "A", "text": "멋쟁이 옷장" },
+                { "id": "B", "text": "맛있는 열매" },
+                { "id": "C", "text": "새의 둥지" },
+                { "id": "D", "text": "큰 그늘" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s2",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 33, "end": 60 }] },
+            "question": {
+              "prompt": "봄에 나무가 꺼내 입는 옷은 무엇인가요?",
+              "choices": [
+                { "id": "A", "text": "연두색 셔츠" },
+                { "id": "B", "text": "진한 초록 반팔" },
+                { "id": "C", "text": "울긋불긋 코트" },
+                { "id": "D", "text": "하얀 솜이불" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s3",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 61, "end": 90 }] },
+            "question": {
+              "prompt": "여름에 나무가 입는 옷은 무엇인가요?",
+              "choices": [
+                { "id": "A", "text": "연두색 셔츠" },
+                { "id": "B", "text": "진한 초록 반팔" },
+                { "id": "C", "text": "울긋불긋 코트" },
+                { "id": "D", "text": "하얀 솜이불" }
+              ],
+              "answerId": "B",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s4",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 91, "end": 117 }] },
+            "question": {
+              "prompt": "가을에 나무가 입는 옷은 무엇인가요?",
+              "choices": [
+                { "id": "A", "text": "울긋불긋 코트" },
+                { "id": "B", "text": "연두색 셔츠" },
+                { "id": "C", "text": "진한 초록 반팔" },
+                { "id": "D", "text": "하얀 솜이불" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s5",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 118, "end": 153 }] },
+            "question": {
+              "prompt": "겨울에 나무는 어떤 모습인가요?",
+              "choices": [
+                { "id": "A", "text": "가지만 남은 몸에 하얀 솜이불 덮고 쿨쿨" },
+                { "id": "B", "text": "초록 잎으로 가득" },
+                { "id": "C", "text": "빨간 꽃이 핀다" },
+                { "id": "D", "text": "열매가 주렁주렁" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s6",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 154, "end": 177 }] },
+            "question": {
+              "prompt": "이 시에서 나무를 무엇이라고 표현했나요?",
+              "choices": [
+                { "id": "A", "text": "계절마다 척척 옷을 갈아입는 멋쟁이" },
+                { "id": "B", "text": "움직이지 못하는 불쌍한 존재" },
+                { "id": "C", "text": "항상 같은 모습의 나무" },
+                { "id": "D", "text": "빠르게 자라는 나무" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          }
+        ]
+      },
+      "recall": {
+        "cards": [
+          { "id": "c1", "text": "나무는 멋쟁이 옷장을 가지고 있음" },
+          { "id": "c2", "text": "봄: 연두색 셔츠 입고 방긋" },
+          { "id": "c3", "text": "여름: 진한 초록 반팔 입고 활짝" },
+          { "id": "c4", "text": "가을: 울긋불긋 코트 입고 살랑" },
+          { "id": "c5", "text": "겨울: 하얀 솜이불 덮고 쿨쿨" },
+          { "id": "c6", "text": "계절마다 척척 옷을 갈아입음" },
+          { "id": "c7", "text": "나무를 멋쟁이에 비유한 시" },
+          { "id": "c8", "text": "의태어로 계절 느낌을 생동감 있게" }
+        ],
+        "correctOrder": ["c1","c2","c3","c4","c5","c6","c7","c8"],
+        "seedPenalty": 1
+      },
+      "confirm": {
+        "questions": [
+          { "id": "q1", "prompt": "봄에 나무는 어떤 옷을 입나요?", "answerRanges": [{ "paragraphId": "p1", "start": 44, "end": 60 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q2", "prompt": "여름에 나무는 어떤 옷을 입나요?", "answerRanges": [{ "paragraphId": "p1", "start": 75, "end": 90 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q3", "prompt": "가을에 나무는 어떤 옷을 입나요?", "answerRanges": [{ "paragraphId": "p1", "start": 103, "end": 117 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q4", "prompt": "겨울에 나무는 어떤 모습인가요?", "answerRanges": [{ "paragraphId": "p1", "start": 118, "end": 153 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q5", "prompt": "나무를 무엇이라고 표현했나요?", "answerRanges": [{ "paragraphId": "p1", "start": 162, "end": 177 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" }
+        ]
+      }
+    }
+  },
+  {
+    "contentType": "PRO_READING",
+    "title": "계절 따라 달라지는 생활",
+    "targetLevel": "saussure2",
+    "area": "READING",
+    "subArea": "NONFICTION",
+    "timeLimitSec": 300,
+    "seedReward": { "seedType": "seed_rice", "count": 3, "multiplier": 1 },
+    "payload": {
+      "passage": {
+        "format": "TEXT",
+        "paragraphs": [
+          {
+            "id": "p1",
+            "text": "우리나라에는 봄, 여름, 가을, 겨울이라는 네 가지 계절이 있습니다. 계절마다 날씨가 다르기 때문에 우리는 날씨에 알맞은 옷을 입어야 합니다.\n먼저 따뜻한 봄이 오면 꽃이 활짝 핍니다. 이때는 겨울에 입던 두꺼운 외투를 벗고, 가벼운 긴 소매 옷이나 카디건을 입고 나들이를 갑니다.\n여름이 되면 햇볕이 쨍쨍하고 비도 많이 옵니다. 날씨가 아주 덥기 때문에 땀이 잘 마르는 시원한 반팔과 반바지를 입습니다. 물놀이를 할 때는 수영복을 입습니다.\n가을은 파란 하늘이 높게 보이고 시원한 바람이 살랑살랑 붑니다. 그리고 맛있는 곡식과 과일이 익어가는 계절이지요. 하지만 아침과 저녁으로는 날씨가 쌀쌀합니다. 그래서 감기에 걸리지 않도록 바람막이 점퍼를 챙겨 입는 것이 좋습니다.\n겨울에는 찬 바람이 쌩쌩 불고 하얀 눈이 내립니다. 날씨가 매우 춥기 때문에 우리 몸을 따뜻하게 보호해야 합니다. 두꺼운 패딩을 입고 장갑을 끼거나 목도리를 두르면 추위를 이겨낼 수 있습니다.\n이렇게 계절에 맞는 옷을 입으면 건강하게 지낼 수 있습니다."
+          }
+        ]
+      },
+      "intensive": {
+        "timeline": [
+          {
+            "stepId": "s1",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 79 }] },
+            "question": {
+              "prompt": "계절마다 알맞은 옷을 입어야 하는 이유는 무엇인가요?",
+              "choices": [
+                { "id": "A", "text": "계절마다 날씨가 다르기 때문" },
+                { "id": "B", "text": "옷이 많기 때문" },
+                { "id": "C", "text": "패션이 중요해서" },
+                { "id": "D", "text": "친구와 맞추기 위해" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s2",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 80, "end": 157 }] },
+            "question": {
+              "prompt": "봄에는 어떤 옷을 입나요?",
+              "choices": [
+                { "id": "A", "text": "가벼운 긴 소매 옷이나 카디건" },
+                { "id": "B", "text": "두꺼운 패딩" },
+                { "id": "C", "text": "수영복" },
+                { "id": "D", "text": "반팔과 반바지" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s3",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 158, "end": 247 }] },
+            "question": {
+              "prompt": "여름에 반팔과 반바지를 입는 이유는 무엇인가요?",
+              "choices": [
+                { "id": "A", "text": "날씨가 아주 덥기 때문" },
+                { "id": "B", "text": "비가 오기 때문" },
+                { "id": "C", "text": "바람이 불기 때문" },
+                { "id": "D", "text": "눈이 오기 때문" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s4",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 337, "end": 376 }] },
+            "question": {
+              "prompt": "가을에 바람막이 점퍼를 챙기는 이유는 무엇인가요?",
+              "choices": [
+                { "id": "A", "text": "아침저녁 날씨가 쌀쌀해서 감기 예방" },
+                { "id": "B", "text": "멋을 부리기 위해" },
+                { "id": "C", "text": "비를 막기 위해" },
+                { "id": "D", "text": "눈이 오기 때문" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s5",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 377, "end": 484 }] },
+            "question": {
+              "prompt": "겨울에 추위를 이겨내려면 어떻게 해야 하나요?",
+              "choices": [
+                { "id": "A", "text": "두꺼운 패딩, 장갑, 목도리 착용" },
+                { "id": "B", "text": "반팔을 입는다" },
+                { "id": "C", "text": "수영복을 입는다" },
+                { "id": "D", "text": "카디건만 입는다" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          },
+          {
+            "stepId": "s6",
+            "highlight": { "ranges": [{ "paragraphId": "p1", "start": 485, "end": 518 }] },
+            "question": {
+              "prompt": "봄·여름·가을·겨울 옷 이야기를 통해 알 수 있는 것은 무엇인가요?",
+              "choices": [
+                { "id": "A", "text": "계절에 맞는 옷을 입으면 건강하게 지낼 수 있다" },
+                { "id": "B", "text": "겨울이 가장 좋은 계절이다" },
+                { "id": "C", "text": "봄에만 옷을 바꾸면 된다" },
+                { "id": "D", "text": "날씨와 옷은 관계가 없다" }
+              ],
+              "answerId": "A",
+              "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            }
+          }
+        ]
+      },
+      "recall": {
+        "cards": [
+          { "id": "c1", "text": "계절마다 날씨가 달라 옷도 다름" },
+          { "id": "c2", "text": "봄: 가벼운 긴 소매, 카디건" },
+          { "id": "c3", "text": "여름: 시원한 반팔, 반바지, 수영복" },
+          { "id": "c4", "text": "가을: 바람막이 점퍼로 감기 예방" },
+          { "id": "c5", "text": "겨울: 패딩, 장갑, 목도리" },
+          { "id": "c6", "text": "계절에 맞는 옷으로 건강 지키기" },
+          { "id": "c7", "text": "사계절 날씨 특징을 알아야 함" },
+          { "id": "c8", "text": "옷차림이 건강에 영향을 줌" }
+        ],
+        "correctOrder": ["c1","c2","c3","c4","c5","c6","c7","c8"],
+        "seedPenalty": 1
+      },
+      "confirm": {
+        "questions": [
+          { "id": "q1", "prompt": "봄에는 어떤 옷을 입나요?", "answerRanges": [{ "paragraphId": "p1", "start": 104, "end": 157 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q2", "prompt": "여름에는 왜 반팔과 반바지를 입나요?", "answerRanges": [{ "paragraphId": "p1", "start": 185, "end": 226 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q3", "prompt": "가을에 주의해야 할 것은 무엇인가요?", "answerRanges": [{ "paragraphId": "p1", "start": 312, "end": 376 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q4", "prompt": "겨울에 추위를 이기려면 무엇을 착용하나요?", "answerRanges": [{ "paragraphId": "p1", "start": 441, "end": 484 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+          { "id": "q5", "prompt": "계절에 맞는 옷을 입으면 어떻게 되나요?", "answerRanges": [{ "paragraphId": "p1", "start": 485, "end": 518 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" }
+        ]
+      }
+    }
+  }
+]

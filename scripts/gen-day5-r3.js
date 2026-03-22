@@ -1,0 +1,491 @@
+// Day 5 - NONFICTION (비문학) - 러셀3
+// 주제: 생태계에서의 공생 관계
+
+const paragraphs = [
+  {
+    id: "p1",
+    text: "자연에서 서로 다른 종의 생물이 밀접한 관계를 맺으며 함께 살아가는 현상을 공생이라 한다. 공생은 관계를 맺는 두 생물 사이의 이해득실에 따라 상리 공생, 편리 공생, 기생의 세 가지 유형으로 나뉜다. 상리 공생은 두 생물 모두 이익을 얻는 관계이고, 편리 공생은 한쪽만 이익을 얻되 다른 쪽은 해를 입지 않는 관계이며, 기생은 한쪽이 이익을 얻는 대신 다른 쪽이 피해를 보는 관계이다. 이러한 구분은 생태계 내 생물 간의 복잡한 상호 작용을 이해하는 데 핵심적인 틀이 되며, 종의 진화 방향과 생태계 전체의 안정성을 설명하는 데에도 중요한 역할을 한다."
+  },
+  {
+    id: "p2",
+    text: "상리 공생의 가장 대표적인 예로는 꽃과 벌의 관계를 들 수 있다. 벌은 꽃에서 달콤한 꿀과 꽃가루를 얻어 먹이로 삼고, 꽃은 벌이 여러 꽃을 오가며 꽃가루를 옮겨 주는 덕분에 수분이 이루어진다. 이처럼 양쪽 모두 생존에 필수적인 이익을 서로 교환하는 것이 상리 공생의 핵심이다. 또 다른 예로 토양 속 뿌리혹박테리아와 콩과 식물의 관계가 있다. 뿌리혹박테리아는 공기 중의 질소를 고정하여 식물에 영양분을 공급하고, 식물은 광합성으로 만든 탄수화물을 박테리아에 제공한다. 이 관계는 실제 농업에서도 널리 활용되어 콩과 식물을 심으면 토양의 질소 함량이 자연스럽게 높아지는 효과를 얻을 수 있다."
+  },
+  {
+    id: "p3",
+    text: "편리 공생은 한쪽만 혜택을 받고 상대방에게는 이득도 해도 없는 관계를 뜻한다. 바다에서 상어에 붙어 다니는 빨판상어가 대표적인 예인데, 빨판상어는 상어의 몸에 달라붙어 함께 이동하면서 상어가 먹고 남긴 먹이 찌꺼기를 얻는다. 상어는 빨판상어가 붙어 있든 없든 별다른 영향을 받지 않으므로 이 관계는 전형적인 편리 공생에 해당한다. 한편 기생은 한쪽이 다른 쪽의 영양분이나 에너지를 빼앗아 살아가는 관계이다. 겨우살이는 나무의 줄기에 뿌리를 깊이 박고 수분과 양분을 흡수하여 살아가는 기생 식물로, 숙주 나무는 양분을 빼앗겨 성장이 저해되거나 심한 경우 결국 고사하기도 한다."
+  },
+  {
+    id: "p4",
+    text: "공생 관계는 영원히 고정된 것이 아니라 환경의 변화에 따라 얼마든지 달라질 수 있다. 예를 들어 평소에는 편리 공생이던 관계가 먹이가 부족해지면 기생으로 전환되기도 하고, 상리 공생 관계에 있던 두 종 가운데 한쪽의 개체 수가 급증하면 상대 종에 큰 부담을 주어 관계의 성격이 바뀔 수도 있다. 이처럼 공생은 단순한 이분법으로 나눌 수 없는 역동적인 현상이며, 생태계 내 에너지 흐름과 물질 순환에 깊이 관여하고 있다. 공생에 대한 이해는 생물 다양성의 보전과 지속 가능한 생태계 관리의 밑바탕이 되므로, 인간 역시 다른 생물들과의 공생을 적극적으로 모색하는 자세가 필요하다."
+  }
+];
+
+const totalLength = paragraphs.reduce((sum, p) => sum + p.text.length, 0);
+console.log(`총 글자수: ${totalLength}`);
+if (totalLength < 1250 || totalLength > 1350) {
+  console.warn(`경고: 목표 범위(1250~1350)를 벗어남!`);
+}
+
+function findRange(paragraphId, searchText) {
+  const para = paragraphs.find(p => p.id === paragraphId);
+  if (!para) throw new Error(`문단 ${paragraphId}을 찾을 수 없음`);
+  const start = para.text.indexOf(searchText);
+  if (start === -1) throw new Error(`"${searchText}"을(를) ${paragraphId}에서 찾을 수 없음`);
+  return { paragraphId, start, end: start + searchText.length };
+}
+
+function splitSentences(text) {
+  const sentences = [];
+  const regex = /[.?!](?:\s|$)/g;
+  let start = 0;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    const end = match.index + 1;
+    const sent = text.substring(start, end).trim();
+    if (sent) {
+      const actualStart = text.indexOf(sent, start);
+      sentences.push({ start: actualStart, end: actualStart + sent.length, text: sent });
+    }
+    start = match.index + match[0].length;
+  }
+  if (start < text.length) {
+    const remaining = text.substring(start).trim();
+    if (remaining) {
+      const actualStart = text.indexOf(remaining, start);
+      sentences.push({ start: actualStart, end: actualStart + remaining.length, text: remaining });
+    }
+  }
+  return sentences;
+}
+
+const paragraphSentences = {};
+for (const para of paragraphs) {
+  const sentences = splitSentences(para.text);
+  paragraphSentences[para.id] = sentences;
+  console.log(`${para.id}: ${sentences.length}문장, 길이: ${para.text.length}자`);
+}
+
+const timeline = [];
+let stepCount = 0;
+
+const questionData = {
+  p1: [
+    {
+      prompt: "첫 문장에서 정의하는 '공생'이란 무엇인가?",
+      choices: [
+        { id: "A", text: "서로 다른 종의 생물이 밀접한 관계를 맺으며 함께 사는 현상이다." },
+        { id: "B", text: "같은 종의 생물이 먹이를 나누어 먹는 현상을 말한다." },
+        { id: "C", text: "생물이 환경에 적응하여 모습을 바꾸는 현상이다." },
+        { id: "D", text: "동물이 계절에 따라 이동하는 현상을 가리킨다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "둘째 문장이 제시하는 공생의 세 가지 유형으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "상리 공생, 편리 공생, 기생으로 나뉜다." },
+        { id: "B", text: "포식, 경쟁, 협력으로 나뉜다." },
+        { id: "C", text: "생산, 소비, 분해로 나뉜다." },
+        { id: "D", text: "동화, 이화, 합성으로 나뉜다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "셋째 문장이 각각의 유형을 설명하는 기준으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "두 생물 사이의 이익과 손해 관계를 기준으로 구분한다." },
+        { id: "B", text: "생물의 크기와 서식 환경을 기준으로 구분한다." },
+        { id: "C", text: "생물이 살아가는 지역의 기후를 기준으로 구분한다." },
+        { id: "D", text: "생물의 먹이 사슬 내 위치를 기준으로 구분한다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "넷째 문장이 말하는 공생 구분의 의의로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "종의 진화와 생태계 안정성을 설명하는 데 중요한 역할을 한다." },
+        { id: "B", text: "의학 발전과 신약 개발에만 활용되는 분류 체계이다." },
+        { id: "C", text: "농업 기술의 발전에만 한정적으로 쓰이는 개념이다." },
+        { id: "D", text: "기후 변화의 원인을 밝히기 위해 고안된 분류이다." }
+      ],
+      answerId: "A"
+    },
+    // 중심내용
+    {
+      prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "공생은 이해득실에 따라 상리·편리·기생으로 나뉘며 생태계 이해의 핵심이다." },
+        { id: "B", text: "공생은 오직 동물들 사이에서만 나타나는 특수한 현상이다." },
+        { id: "C", text: "공생 관계는 모든 생물에서 동일한 형태로 나타난다." },
+        { id: "D", text: "공생은 생태계와 무관한 개별 생물의 생존 전략일 뿐이다." }
+      ],
+      answerId: "A"
+    }
+  ],
+  p2: [
+    {
+      prompt: "첫 문장이 드는 상리 공생의 대표적 예로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "꽃과 벌의 관계를 예로 들고 있다." },
+        { id: "B", text: "상어와 빨판상어의 관계를 예로 들었다." },
+        { id: "C", text: "겨우살이와 나무의 관계를 예로 들었다." },
+        { id: "D", text: "사자와 얼룩말의 관계를 예로 들었다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "둘째 문장에서 벌과 꽃이 교환하는 이익으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "벌은 꿀과 꽃가루를 얻고 꽃은 수분을 이루게 된다." },
+        { id: "B", text: "벌은 꽃잎을 먹고 꽃은 벌의 배설물로 영양분을 얻는다." },
+        { id: "C", text: "벌은 꽃에 알을 낳고 꽃은 벌의 체온으로 따뜻해진다." },
+        { id: "D", text: "벌은 꽃의 씨앗을 먹고 꽃은 벌에게 은신처를 제공한다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "셋째 문장이 말하는 상리 공생의 핵심으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "양쪽 모두 생존에 필수적인 이익을 교환하는 것이다." },
+        { id: "B", text: "한쪽만 이익을 얻고 다른 쪽은 피해를 보는 것이다." },
+        { id: "C", text: "두 생물이 같은 먹이를 놓고 경쟁하는 것이다." },
+        { id: "D", text: "한쪽이 다른 쪽을 잡아먹는 포식 관계이다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "넷째 문장이 소개하는 또 다른 상리 공생의 예로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "뿌리혹박테리아와 콩과 식물의 관계이다." },
+        { id: "B", text: "빨판상어와 상어의 관계이다." },
+        { id: "C", text: "겨우살이와 참나무의 관계이다." },
+        { id: "D", text: "진딧물과 개미의 관계이다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "다섯째 문장에서 뿌리혹박테리아가 식물에 공급하는 것으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "공기 중의 질소를 고정하여 영양분을 공급한다." },
+        { id: "B", text: "토양 속 수분을 흡수하여 식물 뿌리에 전달한다." },
+        { id: "C", text: "해충을 먹어 치워 식물의 잎을 보호한다." },
+        { id: "D", text: "광합성에 필요한 이산화탄소를 직접 생산한다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "여섯째 문장이 말하는 농업적 활용 효과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "콩과 식물을 심으면 토양의 질소 함량이 높아진다." },
+        { id: "B", text: "콩과 식물을 심으면 토양의 산도가 낮아진다." },
+        { id: "C", text: "콩과 식물을 심으면 잡초가 자라지 않게 된다." },
+        { id: "D", text: "콩과 식물을 심으면 해충이 자연스럽게 사라진다." }
+      ],
+      answerId: "A"
+    },
+    // 중심내용
+    {
+      prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "꽃과 벌, 뿌리혹박테리아와 콩과 식물 등 상리 공생의 구체적 사례와 원리이다." },
+        { id: "B", text: "편리 공생과 기생의 차이를 구체적인 예를 통해 설명하고 있다." },
+        { id: "C", text: "공생의 개념을 처음 정의하고 분류 기준을 제시하고 있다." },
+        { id: "D", text: "공생 관계가 환경 변화에 따라 달라질 수 있음을 설명하고 있다." }
+      ],
+      answerId: "A"
+    }
+  ],
+  p3: [
+    {
+      prompt: "첫 문장이 정의하는 편리 공생의 특징으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "한쪽만 혜택을 받고 상대방에게는 이득도 해도 없다." },
+        { id: "B", text: "두 생물 모두 이익을 얻는 관계이다." },
+        { id: "C", text: "한쪽이 이익을 얻고 다른 쪽이 피해를 입는 관계이다." },
+        { id: "D", text: "두 생물 모두 피해를 주고받는 관계이다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "둘째 문장이 드는 편리 공생의 예로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "빨판상어가 상어에 붙어 먹이 찌꺼기를 얻는 것이다." },
+        { id: "B", text: "벌이 꽃에서 꿀을 얻고 꽃가루를 옮기는 것이다." },
+        { id: "C", text: "겨우살이가 나무에서 양분을 빼앗는 것이다." },
+        { id: "D", text: "사자가 다른 동물을 잡아먹는 것이다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "셋째 문장에서 상어에 대한 설명으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "빨판상어가 붙어 있든 없든 별다른 영향을 받지 않는다." },
+        { id: "B", text: "빨판상어 덕분에 이동 속도가 빨라진다." },
+        { id: "C", text: "빨판상어 때문에 먹이를 잡기 어려워진다." },
+        { id: "D", text: "빨판상어가 상어의 기생충을 제거해 준다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "넷째 문장이 정의하는 기생의 특징으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "한쪽이 다른 쪽의 영양분이나 에너지를 빼앗아 살아간다." },
+        { id: "B", text: "두 생물이 영양분을 서로 교환하며 살아간다." },
+        { id: "C", text: "한쪽만 이익을 얻되 상대에게 해가 없다." },
+        { id: "D", text: "두 생물 모두 손해를 보며 경쟁하는 관계이다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "다섯째 문장이 드는 기생의 예에서 숙주에 미치는 영향으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "숙주 나무가 양분을 빼앗겨 성장이 저해되거나 고사한다." },
+        { id: "B", text: "숙주 나무가 겨우살이 덕분에 더 빠르게 성장한다." },
+        { id: "C", text: "숙주 나무에 아무런 영향이 없다." },
+        { id: "D", text: "숙주 나무가 겨우살이와 영양분을 교환하여 이익을 얻는다." }
+      ],
+      answerId: "A"
+    },
+    // 중심내용
+    {
+      prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "편리 공생과 기생의 개념을 빨판상어와 겨우살이 사례로 설명하고 있다." },
+        { id: "B", text: "상리 공생의 다양한 사례를 추가로 제시하고 있다." },
+        { id: "C", text: "공생의 정의를 다시 정리하고 분류 기준을 수정하고 있다." },
+        { id: "D", text: "공생 관계의 진화적 변천 과정을 시간순으로 서술하고 있다." }
+      ],
+      answerId: "A"
+    }
+  ],
+  p4: [
+    {
+      prompt: "첫 문장이 말하는 공생 관계의 특성으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "공생 관계는 고정된 것이 아니라 환경에 따라 달라질 수 있다." },
+        { id: "B", text: "공생 관계는 한번 형성되면 절대로 변하지 않는다." },
+        { id: "C", text: "공생 관계는 오직 동물들 사이에서만 나타난다." },
+        { id: "D", text: "공생 관계는 인위적으로 만들어 낼 수 없다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "둘째 문장이 드는 관계 변화의 예로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "편리 공생이 먹이 부족 시 기생으로, 개체 수 급증 시 관계가 바뀔 수 있다." },
+        { id: "B", text: "기생 관계가 항상 상리 공생으로 발전하게 된다." },
+        { id: "C", text: "상리 공생은 어떤 상황에서도 변하지 않는다." },
+        { id: "D", text: "편리 공생은 시간이 지나면 반드시 소멸한다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "셋째 문장이 강조하는 공생의 성격으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "단순한 이분법으로 나눌 수 없는 역동적인 현상이다." },
+        { id: "B", text: "정적이고 변화가 없는 안정적인 현상이다." },
+        { id: "C", text: "과학적으로 측정이 불가능한 추상적 개념이다." },
+        { id: "D", text: "오직 실험실에서만 관찰할 수 있는 현상이다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "넷째 문장이 강조하는 공생 이해의 필요성으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "생물 다양성 보전과 지속 가능한 생태계 관리의 밑바탕이 된다." },
+        { id: "B", text: "경제 성장과 산업 발전에만 직접적으로 기여한다." },
+        { id: "C", text: "인간의 의료 기술 향상에만 활용될 수 있다." },
+        { id: "D", text: "우주 탐사와 외계 생명체 연구에만 필요하다." }
+      ],
+      answerId: "A"
+    },
+    // 중심내용
+    {
+      prompt: "넷째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "공생은 환경에 따라 변하는 역동적 현상이며 자연과의 공생이 필요하다." },
+        { id: "B", text: "공생 관계는 한번 정해지면 절대 바뀌지 않는다." },
+        { id: "C", text: "공생은 인간 사회와는 무관한 자연 현상일 뿐이다." },
+        { id: "D", text: "기생만이 생태계에 영향을 미치는 유일한 공생 유형이다." }
+      ],
+      answerId: "A"
+    }
+  ]
+};
+
+for (const para of paragraphs) {
+  const sentences = paragraphSentences[para.id];
+  const questions = questionData[para.id];
+
+  for (let i = 0; i < sentences.length; i++) {
+    stepCount++;
+    timeline.push({
+      stepId: `s${stepCount}`,
+      highlight: {
+        ranges: [{ paragraphId: para.id, start: sentences[i].start, end: sentences[i].end }]
+      },
+      question: {
+        ...questions[i],
+        scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+      }
+    });
+  }
+
+  stepCount++;
+  const paraEnd = sentences[sentences.length - 1].end;
+  timeline.push({
+    stepId: `s${stepCount}`,
+    highlight: {
+      ranges: [{ paragraphId: para.id, start: 0, end: paraEnd }]
+    },
+    question: {
+      ...questions[questions.length - 1],
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  });
+}
+
+const recallCards = [
+  { id: "c1", text: "공생은 서로 다른 종이 함께 살아가는 현상으로 상리·편리·기생으로 나뉜다." },
+  { id: "c2", text: "상리 공생은 두 생물 모두 이익을 얻고, 편리 공생은 한쪽만 이익을 얻는다." },
+  { id: "c3", text: "꽃과 벌은 꿀과 수분을 교환하는 대표적인 상리 공생 관계이다." },
+  { id: "c4", text: "뿌리혹박테리아는 질소를 고정해 콩과 식물에 영양분을 공급하는 상리 공생이다." },
+  { id: "c5", text: "빨판상어가 상어에 붙어 먹이 찌꺼기를 얻는 것은 편리 공생에 해당한다." },
+  { id: "c6", text: "겨우살이는 숙주 나무의 양분을 빼앗는 기생 식물로 숙주에 해를 끼친다." },
+  { id: "c7", text: "공생 관계는 환경 변화에 따라 편리에서 기생으로 전환될 수 있다." },
+  { id: "c8", text: "공생 이해는 생물 다양성 보전과 지속 가능한 생태계 관리에 필수적이다." }
+];
+
+const confirmQuestions = [
+  {
+    id: "q1",
+    prompt: "서로 다른 종의 생물이 밀접한 관계를 맺으며 함께 사는 현상을 무엇이라 하는가?",
+    answerText: "공생",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", "공생이라 한다")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q2",
+    prompt: "두 생물 모두 이익을 얻는 공생 유형을 무엇이라 하는가?",
+    answerText: "상리 공생",
+    answerMatchMode: "ANY",
+    answerRanges: [
+      findRange("p1", "상리 공생"),
+      findRange("p2", "상리 공생의 핵심이다")
+    ],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q3",
+    prompt: "뿌리혹박테리아가 식물에 공급하는 영양분의 원천은 무엇인가?",
+    answerText: "공기 중의 질소",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "공기 중의 질소를 고정하여 식물에 영양분을 공급")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q4",
+    prompt: "빨판상어가 상어에 붙어 다니며 얻는 것은 무엇인가?",
+    answerText: "먹이 찌꺼기",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "상어가 먹고 남긴 먹이 찌꺼기를 얻는다")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q5",
+    prompt: "나무의 줄기에 뿌리를 박고 양분을 빼앗는 기생 식물은 무엇인가?",
+    answerText: "겨우살이",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "겨우살이는 나무의 줄기에 뿌리를 깊이 박고 수분과 양분을 흡수하여 살아가는 기생 식물")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q6",
+    prompt: "평소 편리 공생이던 관계가 어떤 조건에서 기생으로 전환될 수 있는가?",
+    answerText: "먹이가 부족해지면",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p4", "먹이가 부족해지면 기생으로 전환되기도 하고")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q7",
+    prompt: "공생에 대한 이해가 밑바탕이 되는 것은 무엇인가?",
+    answerText: "생물 다양성의 보전과 지속 가능한 생태계 관리",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p4", "생물 다양성의 보전과 지속 가능한 생태계 관리")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  }
+];
+
+const content = {
+  contentId: "dr-r3-005",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 3) Day 5 비문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_3",
+  schoolGradeRange: { min: 9, max: 10 },
+  area: "READING",
+  subArea: "NONFICTION",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 300,
+  assets: {},
+  payload: {
+    passage: { format: "TEXT", paragraphs },
+    intensive: { timeline },
+    recall: {
+      cards: recallCards,
+      correctOrder: recallCards.map(c => c.id),
+      seedPenalty: 1
+    },
+    confirm: { questions: confirmQuestions }
+  }
+};
+
+// 검증
+console.log(`\n=== 검증 ===`);
+console.log(`intensive steps: ${timeline.length}`);
+console.log(`recall cards: ${recallCards.length}`);
+console.log(`confirm questions: ${confirmQuestions.length}`);
+
+let errors = 0;
+for (const step of timeline) {
+  for (const range of step.highlight.ranges) {
+    const para = paragraphs.find(p => p.id === range.paragraphId);
+    if (range.start < 0 || range.end > para.text.length || range.start >= range.end) {
+      console.error(`오류: ${step.stepId} - 범위 초과 (${range.start}-${range.end}, 문단 길이: ${para.text.length})`);
+      errors++;
+    }
+  }
+}
+
+for (const q of confirmQuestions) {
+  for (const range of q.answerRanges) {
+    const para = paragraphs.find(p => p.id === range.paragraphId);
+    if (range.start < 0 || range.end > para.text.length) {
+      console.error(`오류: ${q.id} - answerRange 범위 초과`);
+      errors++;
+    }
+    console.log(`  ${q.id}: "${para.text.substring(range.start, range.end)}"`);
+  }
+}
+
+if (errors === 0) console.log(`\n모든 검증 통과!`);
+else { console.error(`\n${errors}개 오류 발견!`); process.exit(1); }
+
+const fs = require('fs');
+const outputPath = process.argv[2] || 'day5-output.json';
+fs.writeFileSync(outputPath, JSON.stringify(content, null, 2), 'utf8');
+console.log(`\n파일 저장: ${outputPath}`);

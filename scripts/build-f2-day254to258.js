@@ -1,0 +1,204 @@
+const fs = require('fs');
+const path = require('path');
+
+// -- 유틸리티 함수 --
+
+function findSentences(text) {
+  const sentences = [];
+  let start = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === '.' && (i === text.length - 1 || text[i+1] === ' ' || text[i+1] === '\n')) {
+      sentences.push({ start, end: i + 1, text: text.substring(start, i + 1) });
+      let next = i + 1;
+      while (next < text.length && (text[next] === ' ' || text[next] === '\n')) next++;
+      start = next;
+    }
+  }
+  if (start < text.length) sentences.push({ start, end: text.length, text: text.substring(start) });
+  return sentences;
+}
+
+function findRange(paragraphs, pid, searchText) {
+  const para = paragraphs.find(p => p.id === pid);
+  if (!para) throw new Error(`문단 ${pid} 없음`);
+  const start = para.text.indexOf(searchText);
+  if (start === -1) throw new Error(`"${searchText.substring(0, 30)}..." ${pid}에서 찾을 수 없음`);
+  return { paragraphId: pid, start, end: start + searchText.length };
+}
+
+function charLen(paragraphs) { return paragraphs.reduce((sum, p) => sum + p.text.length, 0); }
+
+function buildTimeline(paragraphs) {
+  let stepNum = 0; const timeline = [];
+  paragraphs.forEach((para) => {
+    const sents = findSentences(para.text);
+    sents.forEach((sent) => { stepNum++; timeline.push({ stepId: `s${stepNum}`, highlight: { ranges: [{ paragraphId: para.id, start: sent.start, end: sent.end }] } }); });
+    stepNum++; timeline.push({ stepId: `s${stepNum}`, highlight: { ranges: [{ paragraphId: para.id, start: 0, end: para.text.length }] } });
+  });
+  return timeline;
+}
+
+function buildRecallCards(paragraphs) {
+  const fullText = paragraphs.map(p => p.text).join('\n');
+  const totalLen = fullText.length; const chunkSize = Math.ceil(totalLen / 8); const cards = [];
+  for (let i = 0; i < 8; i++) { const s = i * chunkSize; const e = Math.min(s + chunkSize, totalLen); cards.push({ id: `c${i+1}`, text: fullText.substring(s, e) }); }
+  return cards;
+}
+
+function makeConfirmQ(id, prompt, ranges) {
+  return { id, prompt, answerRanges: ranges, scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true, answerMatchMode: "ANY" };
+}
+
+function assembleFull(dayIndex, subArea, subAreaKo, paragraphs, confirmQuestions) {
+  const timeline = buildTimeline(paragraphs); const cards = buildRecallCards(paragraphs);
+  const nn = String(dayIndex).padStart(3, '0');
+  return {
+    contentId: `dr-f2-${nn}`, contentType: "DAILY_READING", version: 1, status: "PUBLISHED",
+    title: `일일 독해(프레게 2) Day ${dayIndex} ${subAreaKo}`,
+    description: "일일 독해 - 정독·복기·확인",
+    targetLevel: "FREGE_2", schoolGradeRange: { min: 6, max: 6 },
+    area: "READING", subArea, competencies: ["READING"], tags: ["daily"],
+    access: { mode: "FREE" }, seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+    timeLimitSec: 480, assets: {},
+    payload: { passage: { format: "TEXT", paragraphs }, intensive: { timeline }, recall: { cards, correctOrder: cards.map(c => c.id), seedPenalty: 1 }, confirm: { questions: confirmQuestions } }
+  };
+}
+
+function wrapBatchItem(dayIndex, subArea, content) {
+  return { content_type: "DAILY_READING", level_id: "FREGE_2", area: "READING", sub_area: subArea, day_index: dayIndex, module_key: "reading_training", schema_version: "1.0", content };
+}
+
+// -- Day 254 (짝수 -> 문학) --
+function buildDay254() {
+  const paragraphs = [
+    { id: "p1", text: "수현이는 매년 여름방학이면 외할머니 댁이 있는 바닷가 마을로 내려갔다. 해안 도로를 따라 늘어선 낡은 집들 사이로 소금기 머금은 바람이 불어왔고, 마을 입구의 방파제 위에서는 아이들이 낚싯줄을 드리우고 있었다. 외할머니 댁은 바다가 내려다보이는 언덕 위에 자리 잡고 있었는데, 마당에 서면 수평선 너머로 지는 석양이 온 하늘을 붉게 물들이는 광경을 볼 수 있었다." },
+    { id: "p2", text: "그해 여름, 외할머니는 예전과 달리 기운이 없어 보였다. 부엌에서 조개탕을 끓이던 손놀림도 느려졌고, 마당의 텃밭을 돌보는 시간도 줄어들었다. 수현이는 할머니 대신 텃밭에 물을 주고 장독대를 여닫으며 하루를 보냈다. 어느 저녁, 할머니는 마루에 앉아 바다를 바라보며 말했다. '이 바다가 네 엄마를 키웠고, 그 엄마가 너를 키웠단다. 바다는 언제나 여기 있으니, 보고 싶을 때면 언제든 돌아오렴.' 수현이는 할머니의 말에 담긴 무게를 온전히 이해하지는 못했지만, 가슴 한쪽이 뭉클해지는 것을 느꼈다." },
+    { id: "p3", text: "방학이 끝나갈 무렵, 수현이는 해변에서 조개껍데기를 모아 작은 액자를 만들었다. 조개껍데기를 하나하나 붙이면서 할머니와 함께한 여름날들을 떠올렸다. 새벽에 그물을 손질하던 일, 마루에 나란히 앉아 수박을 먹던 일, 밤하늘의 별을 세며 옛이야기를 듣던 일이 선명했다. 완성된 액자에는 둘이 함께 찍은 사진을 넣었고, 할머니께 드리자 할머니는 한참 동안 말없이 액자를 바라보았다." },
+    { id: "p4", text: "서울로 돌아가는 버스에 올라탄 수현이는 창밖으로 점점 멀어지는 바다를 바라보았다. 방파제 위에서 손을 흔드는 할머니의 모습이 작아지다가 이윽고 보이지 않게 되었다. 수현이는 주머니 속 조개껍데기 하나를 꺼내 손바닥 위에 올려놓았다. 그 작은 껍데기에서 파도 소리가 들리는 것만 같았고, 할머니의 따뜻한 목소리가 바람결에 실려 오는 듯했다. 수현이는 다음 여름에도 반드시 이 바다로 돌아오겠다고 조용히 다짐하며 눈을 감았다." }
+  ];
+  console.log(`Day 254 지문 길이: ${charLen(paragraphs)}자`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "지문에서 '수평선 너머로 지는 석양이 온 하늘을 붉게 물들이는 광경'을 찾아 클릭하세요.", [findRange(paragraphs, "p1", "수평선 너머로 지는 석양이 온 하늘을 붉게 물들이는 광경")]),
+    makeConfirmQ("q2", "지문에서 '이 바다가 네 엄마를 키웠고, 그 엄마가 너를 키웠단다'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "이 바다가 네 엄마를 키웠고, 그 엄마가 너를 키웠단다")]),
+    makeConfirmQ("q3", "지문에서 '가슴 한쪽이 뭉클해지는 것을 느꼈다'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "가슴 한쪽이 뭉클해지는 것을 느꼈다")]),
+    makeConfirmQ("q4", "지문에서 '조개껍데기를 하나하나 붙이면서 할머니와 함께한 여름날들을 떠올렸다'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "조개껍데기를 하나하나 붙이면서 할머니와 함께한 여름날들을 떠올렸다")]),
+    makeConfirmQ("q5", "지문에서 '그물을 손질하던 일, 마루에 나란히 앉아 수박을 먹던 일'을 찾아 클릭하세요.", [findRange(paragraphs, "p3", "그물을 손질하던 일, 마루에 나란히 앉아 수박을 먹던 일")]),
+    makeConfirmQ("q6", "지문에서 '할머니는 한참 동안 말없이 액자를 바라보았다'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "할머니는 한참 동안 말없이 액자를 바라보았다")]),
+    makeConfirmQ("q7", "지문에서 '그 작은 껍데기에서 파도 소리가 들리는 것만 같았고'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "그 작은 껍데기에서 파도 소리가 들리는 것만 같았고")])
+  ];
+  return { content: assembleFull(254, "LITERATURE", "문학", paragraphs, confirmQuestions), subArea: "LITERATURE" };
+}
+
+// -- Day 255 (홀수 -> 비문학) --
+function buildDay255() {
+  const paragraphs = [
+    { id: "p1", text: "미세 플라스틱은 크기가 5밀리미터 이하인 작은 플라스틱 조각을 가리킨다. 이들은 크게 두 가지 경로로 만들어지는데, 하나는 화장품이나 세제에 의도적으로 넣는 마이크로비즈처럼 처음부터 작게 제조되는 경우이고, 다른 하나는 큰 플라스틱 제품이 자외선과 파도에 의해 잘게 부서져 생기는 경우이다. 세계 바다에는 해마다 수백만 톤의 플라스틱 쓰레기가 유입되고 있으며, 상당량이 미세 플라스틱으로 분해되어 해양 생태계를 위협하고 있다." },
+    { id: "p2", text: "미세 플라스틱이 해양 생물에 미치는 영향은 심각하다. 플랑크톤부터 고래에 이르기까지 다양한 해양 생물이 미세 플라스틱을 먹이로 착각하여 섭취하고 있다. 미세 플라스틱은 소화 기관에 축적되어 영양 흡수를 방해하고, 플라스틱 표면에 흡착된 유해 화학 물질이 체내로 흡수되면서 생식 능력 저하와 면역 기능 약화를 유발할 수 있다. 먹이 사슬을 따라 상위 포식자로 올라갈수록 농도가 높아지는 생물 농축 현상도 확인되고 있다." },
+    { id: "p3", text: "미세 플라스틱의 위협은 바다에만 국한되지 않는다. 최근 연구에 따르면 수돗물, 생수, 소금 등 일상적인 식품에서도 미세 플라스틱이 검출되었으며, 대기 중에 떠다니는 미세 플라스틱이 호흡을 통해 인체에 유입될 수 있다는 사실도 밝혀졌다. 인체 내 미세 플라스틱이 장기적으로 어떤 건강 영향을 미치는지는 아직 규명되지 않았지만, 체내 염증 반응을 촉진하거나 세포 손상을 일으킬 가능성이 제기되어 우려가 커지고 있다." },
+    { id: "p4", text: "이러한 문제를 해결하기 위해서는 다방면의 노력이 필요하다. 일회용 플라스틱 사용을 줄이고 재활용률을 높이는 것이 가장 기본적인 대책이며, 마이크로비즈의 사용을 법적으로 금지하는 국가도 늘어나고 있다. 또한 바다에 유입된 미세 플라스틱을 수거하는 기술 개발도 활발히 진행되고 있다. 궁극적으로는 생분해성 소재의 개발과 보급을 통해 플라스틱 자체를 대체하는 방향으로 나아가야 한다는 데 전문가들의 의견이 모이고 있다." }
+  ];
+  console.log(`Day 255 지문 길이: ${charLen(paragraphs)}자`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "지문에서 '화장품이나 세제에 의도적으로 넣는 마이크로비즈'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "화장품이나 세제에 의도적으로 넣는 마이크로비즈")]),
+    makeConfirmQ("q2", "지문에서 '해마다 수백만 톤의 플라스틱 쓰레기가 유입되고 있으며'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "해마다 수백만 톤의 플라스틱 쓰레기가 유입되고 있으며")]),
+    makeConfirmQ("q3", "지문에서 '플라스틱 표면에 흡착된 유해 화학 물질이 체내로 흡수되면서'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "플라스틱 표면에 흡착된 유해 화학 물질이 체내로 흡수되면서")]),
+    makeConfirmQ("q4", "지문에서 '농도가 높아지는 생물 농축 현상도 확인되고 있다'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "농도가 높아지는 생물 농축 현상도 확인되고 있다")]),
+    makeConfirmQ("q5", "지문에서 '대기 중에 떠다니는 미세 플라스틱이 호흡을 통해 인체에 유입될 수 있다'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "대기 중에 떠다니는 미세 플라스틱이 호흡을 통해 인체에 유입될 수 있다")]),
+    makeConfirmQ("q6", "지문에서 '마이크로비즈의 사용을 법적으로 금지하는 국가도 늘어나고 있다'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "마이크로비즈의 사용을 법적으로 금지하는 국가도 늘어나고 있다")]),
+    makeConfirmQ("q7", "지문에서 '생분해성 소재의 개발과 보급을 통해 플라스틱 자체를 대체하는 방향'을 찾아 클릭하세요.", [findRange(paragraphs, "p4", "생분해성 소재의 개발과 보급을 통해 플라스틱 자체를 대체하는 방향")])
+  ];
+  return { content: assembleFull(255, "NONFICTION", "비문학", paragraphs, confirmQuestions), subArea: "NONFICTION" };
+}
+
+// -- Day 256 (짝수 -> 문학) --
+function buildDay256() {
+  const paragraphs = [
+    { id: "p1", text: "도윤이는 오래된 골목 끝에 있는 작은 시계 수리점을 좋아했다. 가게 문을 열면 째깍째깍 소리가 사방에서 들려왔고, 벽면 가득 걸린 시계들이 저마다 다른 시각을 가리키고 있었다. 주인인 장 할아버지는 두꺼운 돋보기를 쓰고 앉아 미세한 부품들을 핀셋으로 다루며 하루를 보냈다. 도윤이는 학교가 끝나면 종종 이 가게에 들러 할아버지가 시계를 고치는 모습을 구경하곤 했다." },
+    { id: "p2", text: "어느 날 도윤이는 다락방에서 아버지의 낡은 손목시계를 발견했다. 유리 덮개가 금이 가 있었고, 초침은 멈춘 지 오래인 듯 꿈쩍도 하지 않았다. 어머니에게 물어보니 아버지가 젊은 시절 쓰시던 것인데 고장 난 뒤로 서랍에 넣어 두었다고 했다. 도윤이는 그 시계를 조심스럽게 손수건에 싸서 장 할아버지의 가게로 가져갔다. 할아버지는 시계를 받아 돋보기 너머로 한참을 들여다보더니, 고칠 수 있을 것 같다며 고개를 끄덕였다." },
+    { id: "p3", text: "며칠 뒤 할아버지에게서 연락이 왔다. 도윤이가 가게에 도착하자 할아버지는 환하게 웃으며 시계를 내밀었다. 금이 간 유리는 새것으로 교체되어 있었고, 초침이 가볍게 움직이며 째깍째깍 소리를 내고 있었다. 할아버지는 태엽 장치에 녹이 슬어서 분해하고 기름칠을 다시 했다고 설명해 주었다. 도윤이가 수리비를 물었지만 할아버지는 손을 저으며 말했다. '누군가 소중히 여기는 물건을 다시 살려 주는 게 이 일의 보람이야. 돈은 됐다.'" },
+    { id: "p4", text: "집에 돌아온 도윤이는 아버지의 시계를 거실 탁자 위에 올려놓았다. 퇴근하고 돌아온 아버지는 탁자 위의 시계를 보더니 한동안 말을 잇지 못했다. 천천히 시계를 집어 들고 귀에 대자 째깍째깍 소리가 선명하게 울렸다. 아버지는 이것을 대학교 입학 선물로 받았다며 잊고 있던 추억이 모두 돌아오는 것 같다고 말했다. 멈추어 있던 시계가 다시 움직이듯, 아버지의 얼굴에도 오랫동안 잊고 있던 환한 미소가 번져 나갔다." }
+  ];
+  console.log(`Day 256 지문 길이: ${charLen(paragraphs)}자`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "지문에서 '벽면 가득 걸린 시계들이 저마다 다른 시각을 가리키고 있었다'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "벽면 가득 걸린 시계들이 저마다 다른 시각을 가리키고 있었다")]),
+    makeConfirmQ("q2", "지문에서 '유리 덮개가 금이 가 있었고, 초침은 멈춘 지 오래인 듯'을 찾아 클릭하세요.", [findRange(paragraphs, "p2", "유리 덮개가 금이 가 있었고, 초침은 멈춘 지 오래인 듯")]),
+    makeConfirmQ("q3", "지문에서 '시계를 조심스럽게 손수건에 싸서'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "시계를 조심스럽게 손수건에 싸서")]),
+    makeConfirmQ("q4", "지문에서 '태엽 장치에 녹이 슬어서 분해하고 기름칠을 다시 했다'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "태엽 장치에 녹이 슬어서 분해하고 기름칠을 다시 했다")]),
+    makeConfirmQ("q5", "지문에서 '누군가 소중히 여기는 물건을 다시 살려 주는 게 이 일의 보람이야'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "누군가 소중히 여기는 물건을 다시 살려 주는 게 이 일의 보람이야")]),
+    makeConfirmQ("q6", "지문에서 '멈추어 있던 시계가 다시 움직이듯'을 찾아 클릭하세요.", [findRange(paragraphs, "p4", "멈추어 있던 시계가 다시 움직이듯")])
+  ];
+  return { content: assembleFull(256, "LITERATURE", "문학", paragraphs, confirmQuestions), subArea: "LITERATURE" };
+}
+
+// -- Day 257 (홀수 -> 비문학) --
+function buildDay257() {
+  const paragraphs = [
+    { id: "p1", text: "인공위성은 지구 궤도를 돌며 다양한 임무를 수행하는 인공 물체이다. 최초의 인공위성은 1957년 소련이 발사한 스푸트니크 1호로, 직경 약 58센티미터의 금속 구체에 불과했지만 우주 시대의 개막을 알린 역사적 사건이었다. 오늘날에는 수천 기의 인공위성이 지구 주위를 돌며, 통신, 기상 관측, 항법, 군사 정찰, 과학 연구 등 현대 사회의 필수적인 기능을 담당하고 있다." },
+    { id: "p2", text: "인공위성은 궤도 높이에 따라 크게 세 종류로 나뉜다. 저궤도 위성은 지표면에서 약 200~2000킬로미터 높이에서 빠르게 지구를 돌며, 해상도가 높아 지구 관측에 적합하다. 중궤도 위성은 약 2000~3만 5786킬로미터 사이에 위치하며, 항법 위성인 GPS가 대표적이다. 정지 궤도 위성은 약 3만 5786킬로미터 높이에서 지구의 자전과 같은 속도로 돌기 때문에 항상 같은 위치에 머물러 있는 것처럼 보여 기상 관측과 통신 중계에 주로 사용된다." },
+    { id: "p3", text: "인공위성의 발사에는 막대한 비용이 든다. 로켓 제작비뿐 아니라 위성 자체의 개발과 시험에도 오랜 시간과 자금이 투입된다. 최근에는 민간 기업이 재사용 로켓을 개발하여 발사 비용을 대폭 낮추고 있으며, 소형 위성을 여러 개 동시에 발사하는 군집 발사 방식도 확산되고 있다. 이러한 기술 혁신 덕분에 과거 국가 차원에서만 가능했던 위성 운용이 이제는 대학이나 스타트업 기업도 시도할 수 있는 영역으로 바뀌고 있다." },
+    { id: "p4", text: "그러나 인공위성의 급격한 증가는 우주 쓰레기라는 새로운 문제를 낳고 있다. 수명이 다한 위성이나 발사체의 잔해가 지구 궤도에 남아 빠른 속도로 떠돌고 있으며, 운용 중인 위성이나 우주 정거장과 충돌할 위험이 커지고 있다. 국제 사회는 우주 쓰레기를 줄이기 위한 가이드라인을 마련하고 있으며, 쓰레기를 능동적으로 수거하는 기술도 연구 단계에 있다. 우주 공간을 지속 가능하게 이용하기 위한 노력이 더욱 중요해질 것이다." }
+  ];
+  console.log(`Day 257 지문 길이: ${charLen(paragraphs)}자`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "지문에서 '1957년 소련이 발사한 스푸트니크 1호'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "1957년 소련이 발사한 스푸트니크 1호")]),
+    makeConfirmQ("q2", "지문에서 '통신, 기상 관측, 항법, 군사 정찰, 과학 연구'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "통신, 기상 관측, 항법, 군사 정찰, 과학 연구")]),
+    makeConfirmQ("q3", "지문에서 '지구의 자전과 같은 속도로 돌기 때문에'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "지구의 자전과 같은 속도로 돌기 때문에")]),
+    makeConfirmQ("q4", "지문에서 '민간 기업이 재사용 로켓을 개발하여 발사 비용을 대폭 낮추고 있으며'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "민간 기업이 재사용 로켓을 개발하여 발사 비용을 대폭 낮추고 있으며")]),
+    makeConfirmQ("q5", "지문에서 '대학이나 스타트업 기업도 시도할 수 있는 영역'을 찾아 클릭하세요.", [findRange(paragraphs, "p3", "대학이나 스타트업 기업도 시도할 수 있는 영역")]),
+    makeConfirmQ("q6", "지문에서 '수명이 다한 위성이나 발사체의 잔해가 지구 궤도에 남아'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "수명이 다한 위성이나 발사체의 잔해가 지구 궤도에 남아")]),
+    makeConfirmQ("q7", "지문에서 '쓰레기를 능동적으로 수거하는 기술도 연구 단계에 있다'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "쓰레기를 능동적으로 수거하는 기술도 연구 단계에 있다")])
+  ];
+  return { content: assembleFull(257, "NONFICTION", "비문학", paragraphs, confirmQuestions), subArea: "NONFICTION" };
+}
+
+// -- Day 258 (짝수 -> 문학) --
+function buildDay258() {
+  const paragraphs = [
+    { id: "p1", text: "하늘이는 그림 그리기를 좋아했지만 자신의 실력에 자신이 없었다. 미술 시간에 다른 아이들이 화려한 색채로 도화지를 채울 때, 하늘이는 언제나 연필로만 조용히 스케치를 했다. 선생님은 하늘이의 그림을 보고 선이 매우 섬세하다며 칭찬했지만, 하늘이는 그것이 진심인지 의심하며 고개를 숙였다. 교실 뒤편 게시판에 친구들의 알록달록한 그림이 붙어 있는 것을 보면 왠지 모를 주눅이 들었다." },
+    { id: "p2", text: "어느 날 방과 후, 하늘이는 미술실에 혼자 남아 창밖 풍경을 스케치하고 있었다. 운동장 너머로 지는 노을이 붉고 노랗게 번지고 있었지만, 도화지 위에는 연필의 흑백 선만이 놓여 있었다. 그때 미술 선생님이 조용히 다가와 옆에 앉았다. 선생님은 한참 동안 그림을 바라보다가 말했다. '색이 없어도 이 그림에는 빛이 있어. 연필만으로 이렇게 명암을 표현하는 건 아무나 할 수 있는 게 아니란다.' 하늘이는 처음으로 선생님의 말이 빈말이 아닐 수 있다고 느꼈다." },
+    { id: "p3", text: "선생님은 하늘이에게 시 미술 대회에 출품해 보라고 권유했다. 하늘이는 망설였지만 용기를 내어 운동장의 은행나무를 연필 하나로 그려 출품했다. 나뭇잎 하나하나의 결을 살리고, 나무 아래 벤치에 앉아 있는 아이의 뒷모습을 섬세하게 묘사했다. 그림 속 아이는 사실 하늘이 자신이었는데, 나무를 올려다보는 그 작은 뒷모습에는 혼자서 품어 온 외로움과 동경이 고스란히 담겨 있었다." },
+    { id: "p4", text: "대회 결과가 발표되던 날, 하늘이의 그림은 은상을 받았다. 심사평에는 화려한 색 없이도 깊은 감정을 전달하는 뛰어난 표현력이라는 문장이 적혀 있었다. 교실로 돌아온 하늘이에게 친구들이 축하를 건넸고, 게시판 한가운데에 흑백 그림이 걸렸다. 알록달록한 그림들 사이에서 오히려 더 눈에 띄는 그 작품을 보며, 하늘이는 자신만의 색깔이 따로 있다는 것을 비로소 깨달았다. 집으로 돌아가는 길, 노을빛 하늘 아래에서 하늘이는 처음으로 색연필 세트를 사고 싶다는 생각이 들었다." }
+  ];
+  console.log(`Day 258 지문 길이: ${charLen(paragraphs)}자`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "지문에서 '언제나 연필로만 조용히 스케치를 했다'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "언제나 연필로만 조용히 스케치를 했다")]),
+    makeConfirmQ("q2", "지문에서 '왠지 모를 주눅이 들었다'를 찾아 클릭하세요.", [findRange(paragraphs, "p1", "왠지 모를 주눅이 들었다")]),
+    makeConfirmQ("q3", "지문에서 '색이 없어도 이 그림에는 빛이 있어'를 찾아 클릭하세요.", [findRange(paragraphs, "p2", "색이 없어도 이 그림에는 빛이 있어")]),
+    makeConfirmQ("q4", "지문에서 '나뭇잎 하나하나의 결을 살리고'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "나뭇잎 하나하나의 결을 살리고")]),
+    makeConfirmQ("q5", "지문에서 '혼자서 품어 온 외로움과 동경이 고스란히 담겨 있었다'를 찾아 클릭하세요.", [findRange(paragraphs, "p3", "혼자서 품어 온 외로움과 동경이 고스란히 담겨 있었다")]),
+    makeConfirmQ("q6", "지문에서 '화려한 색 없이도 깊은 감정을 전달하는 뛰어난 표현력'을 찾아 클릭하세요.", [findRange(paragraphs, "p4", "화려한 색 없이도 깊은 감정을 전달하는 뛰어난 표현력")]),
+    makeConfirmQ("q7", "지문에서 '자신만의 색깔이 따로 있다는 것을 비로소 깨달았다'를 찾아 클릭하세요.", [findRange(paragraphs, "p4", "자신만의 색깔이 따로 있다는 것을 비로소 깨달았다")])
+  ];
+  return { content: assembleFull(258, "LITERATURE", "문학", paragraphs, confirmQuestions), subArea: "LITERATURE" };
+}
+
+// -- 실행부 --
+const results = [
+  { dayIndex: 254, ...buildDay254() },
+  { dayIndex: 255, ...buildDay255() },
+  { dayIndex: 256, ...buildDay256() },
+  { dayIndex: 257, ...buildDay257() },
+  { dayIndex: 258, ...buildDay258() }
+];
+
+const staticDir = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'frege2');
+const batchItems = [];
+results.forEach(({ dayIndex, content, subArea }) => {
+  const filePath = path.join(staticDir, `${String(dayIndex).padStart(3, '0')}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(content, null, 2), 'utf8');
+  console.log(`  OK ${filePath}`);
+  batchItems.push(wrapBatchItem(dayIndex, subArea, content));
+});
+const newDir = path.join(__dirname, '..', 'generated', 'new');
+if (!fs.existsSync(newDir)) fs.mkdirSync(newDir, { recursive: true });
+const tempBatchPath = path.join(newDir, 'batch-f2-254-258.json');
+fs.writeFileSync(tempBatchPath, JSON.stringify(batchItems, null, 2), 'utf8');
+console.log(`  OK 임시 배치: ${tempBatchPath}`);
+results.forEach(({ dayIndex, content }) => {
+  const p = content.payload;
+  const len = p.passage.paragraphs.reduce((s, pg) => s + pg.text.length, 0);
+  const rc = p.recall.cards.length;
+  const cq = p.confirm.questions.length;
+  const ok = len >= 850 && len <= 950 && rc === 8 && cq >= 5;
+  console.log(`Day ${dayIndex}: ${len}자 | recall=${rc} | confirm=${cq} | ${ok ? 'OK' : 'WARN'}`);
+});

@@ -1,0 +1,433 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀1 2장 논리사고력",
+  "targetLevel": "russell1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {"seedType": "seed_grape", "count": 3, "multiplier": 1},
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "가장 널리 쓰이는 투표 방식은 단순 과반수제이다. 사람들이 가장 좋다고 생각하는 한 가지에만 표를 던지고, 가장 많은 표를 받은 것이 최종 선택된다. 이 방식은 빠르고 쉽다는 장점이 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "단순 과반수제가 합리적 결정을 보장한다는 주장이 성립하려면 숨겨진 전제는?",
+            "choices": [
+              {"id": "A", "text": "투표자들이 자신의 선호를 정확히 알고 있다."},
+              {"id": "B", "text": "후보가 항상 두 개뿐이다."},
+              {"id": "C", "text": "가장 많은 표를 받은 선택지가 전체의 진정한 선호를 반영한다."},
+              {"id": "D", "text": "투표에 참여하지 않은 사람은 반대한 것이다."}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "소설의 배경은 인물의 행동과 감정에 영향을 주고 작품의 분위기를 만드는 중요한 역할을 한다. 배경은 크게 시간적 배경과 공간적 배경으로 나누어진다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'배경이 인물의 행동에 영향을 준다'는 주장의 숨겨진 전제는?",
+            "choices": [
+              {"id": "A", "text": "인물은 자신이 처한 환경에 반응하는 존재이다."},
+              {"id": "B", "text": "배경은 항상 현실 세계를 반영한다."},
+              {"id": "C", "text": "모든 소설에는 반드시 시간적 배경이 있다."},
+              {"id": "D", "text": "공간적 배경이 시간적 배경보다 중요하다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "보르다 계수법은 자신이 좋아하는 순서대로 모든 후보에 점수를 매기는 방식이다. 1순위에 가장 높은 점수, 꼴찌에 가장 낮은 점수를 주어 합산한다. 이 방식은 모든 후보에 대한 선호를 반영할 수 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "후보가 A, B, C 세 명이고, A를 1순위로 뽑은 사람이 가장 많지만 나머지 사람들이 A를 모두 3순위로 놓았다면 보르다 계수법에서 예상되는 결과는?",
+            "choices": [
+              {"id": "A", "text": "A가 반드시 1위가 된다."},
+              {"id": "B", "text": "A가 1위가 되지 못할 수 있다."},
+              {"id": "C", "text": "모든 후보의 점수가 동일해진다."},
+              {"id": "D", "text": "투표 자체가 무효가 된다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "명사는 세상 모든 것의 '이름'을 나타내는 말이다. 대명사는 명사를 대신하여 쓰는 말이다. 수사는 수량이나 순서를 나타내는 말이다. 이 세 품사를 체언이라 한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "만약 한국어에서 대명사가 없어진다면 예상되는 결과는?",
+            "choices": [
+              {"id": "A", "text": "문장이 더 간결해진다."},
+              {"id": "B", "text": "명사를 반복해서 사용해야 하므로 문장이 길고 어색해진다."},
+              {"id": "C", "text": "수사가 대명사의 역할을 대신한다."},
+              {"id": "D", "text": "문장 구조에 아무 변화가 없다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "허 생원은 장돌뱅이로 나귀와 함께 장에서 장으로 다니며 물건을 판다. 장돌뱅이들은 정해진 일정에 따라 여러 장터를 돌아다닌다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 장돌뱅이는 정해진 일정에 따라 장터를 돌아다닌다. [소전제] 허 생원은 장돌뱅이이다. 결론은?",
+            "choices": [
+              {"id": "A", "text": "허 생원은 한 곳에 정착하여 산다."},
+              {"id": "B", "text": "허 생원은 정해진 일정에 따라 장터를 돌아다닌다."},
+              {"id": "C", "text": "허 생원은 장사를 그만두었다."},
+              {"id": "D", "text": "허 생원은 나귀 없이 다닌다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "결선 투표제는 1차 투표에서 과반수를 얻은 후보가 없으면, 가장 많은 표를 받은 상위 두 후보만으로 2차 투표를 실시하는 방식이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 결선 투표제에서 1차 투표에서 과반수 미달 시 상위 두 후보로 2차 투표를 한다. [소전제] 이번 선거에서 1차 투표 결과 어떤 후보도 과반수를 얻지 못했다. 결론은?",
+            "choices": [
+              {"id": "A", "text": "가장 많은 표를 받은 후보가 당선된다."},
+              {"id": "B", "text": "선거를 처음부터 다시 실시한다."},
+              {"id": "C", "text": "상위 두 후보만으로 2차 투표를 실시한다."},
+              {"id": "D", "text": "모든 후보가 탈락한다."}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "하나의 문장이 만들어지려면 '누가' 또는 '무엇이'에 해당하는 주인공이 반드시 있어야 한다. 이러한 주인공 역할을 하는 대표적인 말에는 명사, 대명사, 수사가 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'문장이 성립한다(Q)'의 필요조건이 '주어에 해당하는 주인공이 있다(P)'일 때, 올바른 변환은?",
+            "choices": [
+              {"id": "A", "text": "주인공이 없으면서 문장이 성립하는 경우는 없다."},
+              {"id": "B", "text": "주인공이 있으면 반드시 문장이 성립한다."},
+              {"id": "C", "text": "문장이 성립하지 않으면 주인공이 있다."},
+              {"id": "D", "text": "주인공과 문장 성립은 무관하다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "시간적 배경은 이야기가 일어나는 때를 나타내며, 공간적 배경은 이야기가 벌어지는 장소를 나타낸다. 소설에 배경이 있어야 인물의 행동이 설명된다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'인물의 행동이 설명된다(Q)'의 필요조건이 '배경이 있다(P)'일 때, ~Q이면 ~P인가?",
+            "choices": [
+              {"id": "A", "text": "그렇다. 인물의 행동이 설명되지 않으면 배경이 없다는 뜻이다. (대우, 타당)"},
+              {"id": "B", "text": "아니다. 인물의 행동이 설명되지 않아도 배경은 있을 수 있다."},
+              {"id": "C", "text": "배경이 없어도 인물의 행동은 설명될 수 있다."},
+              {"id": "D", "text": "필요조건의 대우는 성립하지 않는다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "단순 과반수제의 단점은 소수의 의견이 무시될 수 있다는 것이다. 예를 들어 병원 30표, 학교 25표, 경찰서 20표면 병원이 선택되지만, 학교와 경찰서를 합치면 45표로 더 많다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'단순 과반수제가 공정하다'의 필요조건은 '다수의 의견이 전체의 진정한 선호를 대표해야 한다'이다. 이 필요조건이 충족되지 않는 예시는?",
+            "choices": [
+              {"id": "A", "text": "후보가 2명이고 한 명이 70%의 표를 받은 경우"},
+              {"id": "B", "text": "후보가 5명이고 1위가 22%만 받은 경우"},
+              {"id": "C", "text": "모든 유권자가 투표에 참여한 경우"},
+              {"id": "D", "text": "후보가 2명이고 51%로 당선된 경우"}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "허 생원은 봉평 장에서 장사를 마친 후 달밤에 충주까지 길을 나선다. 메밀꽃이 핀 들판을 지나며 동이와 함께 걷는다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'소설에서 배경이 분위기를 조성한다'의 필요조건은 '배경 묘사가 인물의 심리나 정서와 관련이 있어야 한다'이다. 적절한 예시는?",
+            "choices": [
+              {"id": "A", "text": "달밤의 메밀꽃 들판이 허 생원의 낭만적 회상과 어우러지는 장면"},
+              {"id": "B", "text": "장터에서 물건 가격을 흥정하는 장면"},
+              {"id": "C", "text": "동이가 말대꾸하지 않고 나가는 장면"},
+              {"id": "D", "text": "주막에서 술을 마시며 잡담하는 장면"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "결선 투표제는 최종 당선자가 반드시 과반의 지지를 얻게 되므로 대표성이 높다는 장점이 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'결선 투표제를 사용한다(P)'가 '최종 당선자가 과반 지지를 얻는다(Q)'의 충분조건이라면, 올바른 변환은?",
+            "choices": [
+              {"id": "A", "text": "P이면서 ~Q인 경우는 없다."},
+              {"id": "B", "text": "~P이면서 Q인 경우는 없다."},
+              {"id": "C", "text": "Q이면 반드시 P이다."},
+              {"id": "D", "text": "~Q이면 반드시 ~P이다. 이것이 충분조건 변환이다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "조사는 다른 말 뒤에 주로 붙어서 그 말과 다른 말의 문법적 관계를 나타낸다. '동생이 빵을 먹는다'에서 '이'와 '을'이 조사이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'어떤 말이 체언 뒤에 붙어 문법 관계를 나타낸다(P)'는 '그 말이 조사이다(Q)'의 충분조건이다. 대우를 올바르게 구성한 것은?",
+            "choices": [
+              {"id": "A", "text": "조사가 아니면 체언 뒤에 붙어 문법 관계를 나타내지 않는다."},
+              {"id": "B", "text": "조사이면 반드시 체언 뒤에 붙는다."},
+              {"id": "C", "text": "체언 뒤에 붙지 않으면 조사이다."},
+              {"id": "D", "text": "문법 관계를 나타내면 반드시 조사이다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "콩도르세 방식은 모든 후보를 일대일로 비교하여, 어떤 후보와 맞붙어도 이기는 후보(콩도르세 승자)를 찾는 방식이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'콩도르세 승자이다'의 충분조건은 '모든 일대일 대결에서 승리한다'이다. 다음 중 충분조건을 만족하는 예시는?",
+            "choices": [
+              {"id": "A", "text": "A가 B에게 이기고, C에게도 이기고, D에게도 이긴 경우"},
+              {"id": "B", "text": "A가 1차 투표에서 가장 많은 표를 받은 경우"},
+              {"id": "C", "text": "A가 B에게는 이기지만 C에게는 진 경우"},
+              {"id": "D", "text": "A가 보르다 계수법에서 총점 1위인 경우"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "대명사는 명사를 대신하여 쓰는 말이다. '그', '이것', '나', '너' 등이 대명사에 해당한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'명사를 대신하여 쓰인다'는 '대명사이다'의 충분조건이다. 다음 중 이 충분조건을 충족하지 않는 것은?",
+            "choices": [
+              {"id": "A", "text": "'나는 학생이다'에서 '나'"},
+              {"id": "B", "text": "'이것은 연필이다'에서 '이것'"},
+              {"id": "C", "text": "'셋이 함께 갔다'에서 '셋'"},
+              {"id": "D", "text": "'그가 왔다'에서 '그'"}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "보르다 계수법에서 투표자가 모든 후보에 순위를 매기면, 1순위에 가장 높은 점수가 부여된다. 모든 투표자의 점수를 합산하여 최종 순위를 결정한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "다음 추론 중 논리적으로 타당한 것은?",
+            "choices": [
+              {"id": "A", "text": "보르다 계수법 1위이면 모든 투표자가 1순위로 뽑았다. B는 1위이다. 따라서 모든 투표자가 B를 1순위로 뽑았다. (전건이 거짓이므로 부당)"},
+              {"id": "B", "text": "보르다 계수법에서 총점이 가장 높으면 1위이다. A의 총점이 가장 높다. 따라서 A가 1위이다. (전건 긍정, 타당)"},
+              {"id": "C", "text": "보르다 계수법에서 1위이면 총점이 높다. C는 총점이 높다. 따라서 C가 1위이다. (후건 긍정, 부당)"},
+              {"id": "D", "text": "B와 C 모두 타당하다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "장돌뱅이들은 정해진 일정에 따라 장터를 돌아다닌다. 특정 날짜에 특정 장이 열리므로 이동 경로가 정해져 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'장돌뱅이이면(P) 정해진 일정에 따라 이동한다(Q)'가 참일 때, 다음 중 타당한 추론은?",
+            "choices": [
+              {"id": "A", "text": "정해진 일정에 따라 이동하지 않는 사람은 장돌뱅이가 아니다. (~Q → ~P, 대우, 타당)"},
+              {"id": "B", "text": "장돌뱅이가 아니면 정해진 일정에 따라 이동하지 않는다. (~P → ~Q, 전건 부정의 오류)"},
+              {"id": "C", "text": "정해진 일정에 따라 이동하면 장돌뱅이이다. (Q → P, 후건 긍정의 오류)"},
+              {"id": "D", "text": "B와 C 모두 타당하다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "단순 과반수제를 사용하는 나라에서 후보가 3명 이상인 경우, 당선자의 득표율이 낮아지는 경향이 있다. 동시에 투표율도 하락하는 경향이 관찰된다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'후보 수 증가'와 '투표율 하락' 사이의 관계를 올바르게 분석한 것은?",
+            "choices": [
+              {"id": "A", "text": "후보가 많아지면 투표율이 반드시 떨어진다는 인과관계가 증명되었다."},
+              {"id": "B", "text": "투표율 하락이 후보 수를 증가시킨다."},
+              {"id": "C", "text": "두 현상 사이에 상관관계가 있으나, '유권자의 선택 피로' 같은 제3의 변수가 개입했을 수 있다."},
+              {"id": "D", "text": "두 현상은 완전히 독립적이다."}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "달밤에 메밀꽃이 핀 들판을 지나며 허 생원은 과거의 기억을 떠올린다. 자연의 아름다움과 인물의 감정이 함께 고조된다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'자연 풍경의 아름다움'과 '인물의 감정 고조' 사이의 관계를 올바르게 분석한 것은?",
+            "choices": [
+              {"id": "A", "text": "자연 풍경이 직접적으로 감정을 유발하는 인과관계이다."},
+              {"id": "B", "text": "감정이 고조되어 풍경이 아름답게 보이는 역인과관계이다."},
+              {"id": "C", "text": "작가가 의도적으로 배경과 심리를 일치시킨 문학적 기법으로, 실제 인과가 아닌 상관적 배치이다."},
+              {"id": "D", "text": "자연 풍경과 인물 감정은 무관하다."}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "콩도르세 방식에서는 모든 후보를 일대일로 비교하여 승자를 결정한다. 그런데 A가 B를 이기고, B가 C를 이기고, C가 A를 이기는 '순환'이 생길 수 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '콩도르세 방식은 항상 명확한 승자를 결정할 수 있다.' 이 가설을 반증하는 근거는?",
+            "choices": [
+              {"id": "A", "text": "A > B > C > A라는 순환이 발생하면 명확한 승자가 없다."},
+              {"id": "B", "text": "후보가 2명이면 반드시 승자가 있다."},
+              {"id": "C", "text": "대부분의 투표에서 콩도르세 승자가 존재한다."},
+              {"id": "D", "text": "콩도르세 방식은 모든 선호를 반영한다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "수사는 수량이나 순서를 나타내는 말이다. '하나, 둘, 셋'은 양수사이고, '첫째, 둘째, 셋째'는 서수사이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '모든 수를 나타내는 단어는 수사이다.' 이 가설을 검증하기 위한 적절한 방법은?",
+            "choices": [
+              {"id": "A", "text": "'하나, 둘, 셋'이 수사인지 확인한다."},
+              {"id": "B", "text": "수를 나타내지만 수사가 아닌 단어(예: '두 개'의 '두')가 있는지 조사한다."},
+              {"id": "C", "text": "수사의 정의를 다시 읽어본다."},
+              {"id": "D", "text": "명사 중 숫자를 포함하는 것을 모두 수집한다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      }
+    ]
+  }
+}
