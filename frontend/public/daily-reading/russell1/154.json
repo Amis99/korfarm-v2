@@ -39,15 +39,366 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 50}]},
+          "question": {
+            "prompt": "이 문장은 부정 표현을 어떤 문법 장치로 소개하나요?",
+            "choices": [
+              {"id": "A", "text": "아니라는 뜻을 드러내는 문법 장치로 소개한다"},
+              {"id": "B", "text": "강조만 더하는 감탄 표현으로 소개한다"},
+              {"id": "C", "text": "높임만 나타내는 예절 표현으로 소개한다"},
+              {"id": "D", "text": "질문만 만드는 종결 표현으로 소개한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 50, "end": 129}]},
+          "question": {
+            "prompt": "이 문장은 부정 표현의 대표적인 꼴을 어떻게 묶어 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "안·못 같은 부사와 지 않다·지 못하다 꼴을 함께 보여 준다"},
+              {"id": "B", "text": "명사와 조사만 부정 표현으로 보여 준다"},
+              {"id": "C", "text": "높임 선어말어미만 부정 표현으로 보여 준다"},
+              {"id": "D", "text": "감탄문 끝맺음만 부정 표현으로 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 129, "end": 158}]},
+          "question": {
+            "prompt": "앞의 여러 꼴 설명 뒤에, 이 문장은 뜻의 차이를 어떻게 잡아 주나요?",
+            "choices": [
+              {"id": "A", "text": "겉모양이 비슷해도 뜻은 조금씩 다르다고 잡아 준다"},
+              {"id": "B", "text": "꼴이 다르면 뜻도 항상 완전히 다르다고 잡아 준다"},
+              {"id": "C", "text": "모든 부정 표현은 결국 같은 뜻이라고 잡아 준다"},
+              {"id": "D", "text": "뜻보다 꼴만 보면 된다고 잡아 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 158, "end": 229}]},
+          "question": {
+            "prompt": "안 먹다와 못 먹다의 차이를 이 문장은 어떻게 설명하나요?",
+            "choices": [
+              {"id": "A", "text": "안 먹다는 선택, 못 먹다는 능력이나 조건의 막힘 쪽을 드러낸다"},
+              {"id": "B", "text": "안 먹다는 능력 부족, 못 먹다는 선택 쪽을 드러낸다"},
+              {"id": "C", "text": "둘 다 같은 뜻이라 차이가 없다고 설명한다"},
+              {"id": "D", "text": "둘 다 감탄을 더하는 꼴이라고 설명한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 229, "end": 266}]},
+          "question": {
+            "prompt": "문단 끝은 부정 표현을 읽을 때 무엇이 막혔는지도 함께 살피라고 하나요?",
+            "choices": [
+              {"id": "A", "text": "선택인지 조건인지 무엇이 막혔는지도 함께 살피라고 한다"},
+              {"id": "B", "text": "문장 길이만 함께 세라고 한다"},
+              {"id": "C", "text": "부정어 위치는 보지 말라고 한다"},
+              {"id": "D", "text": "모든 부정을 같은 뜻으로 읽으라고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 266}]},
+          "question": {
+            "prompt": "이 문단 전체는 부정 표현 읽기의 첫 기준을 무엇으로 세우나요?",
+            "choices": [
+              {"id": "A", "text": "겉꼴뿐 아니라 어떤 막힘인지까지 살피는 기준"},
+              {"id": "B", "text": "부정어만 찾으면 된다는 기준"},
+              {"id": "C", "text": "뜻 차이는 무시해도 된다는 기준"},
+              {"id": "D", "text": "안과 못을 언제나 바꿔 써도 된다는 기준"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 33}]},
+          "question": {
+            "prompt": "이 문장은 부정 표현이 문장 뜻에서 어디까지 영향을 준다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "뜻을 단순히 뒤집는 데서 끝나지 않는다고 한다"},
+              {"id": "B", "text": "뜻을 반대로만 바꾼다고 한다"},
+              {"id": "C", "text": "어미 모양만 살짝 바꾼다고 한다"},
+              {"id": "D", "text": "강조점에는 영향을 주지 않는다고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 33, "end": 60}]},
+          "question": {
+            "prompt": "이 문장은 부정의 위치가 왜 중요하다고 말하나요?",
+            "choices": [
+              {"id": "A", "text": "무엇을 부정하느냐에 따라 강조점도 달라지기 때문이다"},
+              {"id": "B", "text": "부정어는 항상 문장 맨 앞에 와야 하기 때문이다"},
+              {"id": "C", "text": "부정은 뜻보다 길이가 중요하기 때문이다"},
+              {"id": "D", "text": "부정은 모든 상황에서 같은 힘을 가지기 때문이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 60, "end": 146}]},
+          "question": {
+            "prompt": "두 예문 비교는 같은 부정이라도 어떤 차이를 만든다는 점을 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "일부 부정의 뜻은 비슷해도 전달되는 태도와 범위가 달라질 수 있음을 보여 준다"},
+              {"id": "B", "text": "부정어가 둘 있으면 뜻이 완전히 사라짐을 보여 준다"},
+              {"id": "C", "text": "모든 부정 표현은 늘 단정적으로만 들림을 보여 준다"},
+              {"id": "D", "text": "부정은 예문이 달라도 뜻이 같음을 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 146, "end": 205}]},
+          "question": {
+            "prompt": "문단 끝은 부정이 놓인 자리에 따라 무엇이 달라질 수 있다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "독자가 받아들이는 범위와 힘이 달라질 수 있다고 한다"},
+              {"id": "B", "text": "문장 길이와 맞춤법만 달라질 수 있다고 한다"},
+              {"id": "C", "text": "주어와 목적어가 모두 사라진다고 한다"},
+              {"id": "D", "text": "뜻은 같고 발음만 달라진다고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 205}]},
+          "question": {
+            "prompt": "이 문단 전체는 부정 표현의 배치를 어떤 관점으로 읽게 하나요?",
+            "choices": [
+              {"id": "A", "text": "무엇을 부정하느냐에 따라 태도와 범위가 달라지는 관점"},
+              {"id": "B", "text": "부정어만 있으면 뜻이 같다는 관점"},
+              {"id": "C", "text": "부정은 강조와 무관하다는 관점"},
+              {"id": "D", "text": "예문 비교는 필요 없다는 관점"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 34}]},
+          "question": {
+            "prompt": "이 문장은 부정 표현이 어떤 꼴로도 나타날 수 있다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "이중 부정처럼 헷갈리는 꼴로도 나타날 수 있다고 한다"},
+              {"id": "B", "text": "명령문 꼴로만 나타날 수 있다고 한다"},
+              {"id": "C", "text": "높임 표현으로만 나타날 수 있다고 한다"},
+              {"id": "D", "text": "질문 꼴로는 나타날 수 없다고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 34, "end": 105}]},
+          "question": {
+            "prompt": "불가능하지 않다의 예시는 왜 곧바로 가능하다라고 말하는 것과 다르다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "뜻은 가능 쪽이지만 더 조심스럽고 완곡한 느낌을 만들기 때문이다"},
+              {"id": "B", "text": "결국 전혀 다른 반대 뜻을 만들기 때문이다"},
+              {"id": "C", "text": "부정을 두 번 쓰면 뜻이 사라지기 때문이다"},
+              {"id": "D", "text": "이중 부정은 언제나 강한 단정이 되기 때문이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 105, "end": 143}]},
+          "question": {
+            "prompt": "이런 이중 부정은 어떤 태도를 피하려 할 때 쓰인다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "단정적인 태도를 피하려 할 때 쓰인다고 한다"},
+              {"id": "B", "text": "말을 더 공격적으로 하려 할 때 쓰인다고 한다"},
+              {"id": "C", "text": "높임을 강하게 하려 할 때 쓰인다고 한다"},
+              {"id": "D", "text": "주어를 감추려 할 때 쓰인다고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 143, "end": 204}]},
+          "question": {
+            "prompt": "문단 끝은 부정 표현을 이해할 때 무엇까지 함께 읽으라고 하나요?",
+            "choices": [
+              {"id": "A", "text": "문장이 전하려는 태도와 거리감까지 함께 읽으라고 한다"},
+              {"id": "B", "text": "부정어 글자 수만 함께 읽으라고 한다"},
+              {"id": "C", "text": "예문 위치만 함께 읽으라고 한다"},
+              {"id": "D", "text": "문장 뜻은 빼고 꼴만 읽으라고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 204}]},
+          "question": {
+            "prompt": "이 문단 전체는 이중 부정을 어떤 읽기 태도로 묶어 주나요?",
+            "choices": [
+              {"id": "A", "text": "뜻뿐 아니라 말의 세기와 거리까지 함께 읽는 태도"},
+              {"id": "B", "text": "부정을 만나면 바로 반대 뜻만 적는 태도"},
+              {"id": "C", "text": "완곡함은 무시하고 단정만 보는 태도"},
+              {"id": "D", "text": "문장 맥락은 빼고 낱말만 보는 태도"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 64}]},
+          "question": {
+            "prompt": "이 문장은 부정 표현이 드러내는 뜻을 어떻게 묶어 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "하지 않음, 할 수 없음, 조심스러운 판단, 범위 제한을 묶어 정리한다"},
+              {"id": "B", "text": "모두 같은 뜻 하나로만 묶어 정리한다"},
+              {"id": "C", "text": "강한 부정만 따로 묶어 정리한다"},
+              {"id": "D", "text": "예외 없이 선택의 뜻으로만 묶어 정리한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 64, "end": 108}]},
+          "question": {
+            "prompt": "이 문장은 왜 부정을 모두 같은 뜻으로 읽으면 안 된다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "모두 같은 뜻으로 읽으면 오해가 생길 수 있기 때문이다"},
+              {"id": "B", "text": "뜻이 같을수록 더 정확해지기 때문이다"},
+              {"id": "C", "text": "부정은 언제나 하나의 뜻만 가지기 때문이다"},
+              {"id": "D", "text": "오해는 부정과 상관없기 때문이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 108, "end": 197}]},
+          "question": {
+            "prompt": "마지막 문장은 부정 표현의 차이를 정확히 이해하려면 무엇을 살펴보라고 하나요?",
+            "choices": [
+              {"id": "A", "text": "무엇을 부정했는지, 왜 그 꼴을 골랐는지까지 살펴보라고 한다"},
+              {"id": "B", "text": "부정어 하나만 찾고 바로 뜻을 정하라고 한다"},
+              {"id": "C", "text": "예문은 빼고 규칙만 외우라고 한다"},
+              {"id": "D", "text": "직접적인 말과의 차이는 보지 말라고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 197}]},
+          "question": {
+            "prompt": "이 문단 전체는 부정 표현을 어떤 구별의 눈으로 마무리하나요?",
+            "choices": [
+              {"id": "A", "text": "무엇을 부정했는지와 왜 그렇게 말했는지를 가르는 눈"},
+              {"id": "B", "text": "부정이면 모두 같은 뜻으로 묶는 눈"},
+              {"id": "C", "text": "표현의 차이를 지워 버리는 눈"},
+              {"id": "D", "text": "완곡함과 단정을 나누지 않는 눈"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {"id": "c1", "text": "부정은 아니라는 뜻을 드러낸다"},
+        {"id": "c2", "text": "안과 못의 막힘이 다르다"},
+        {"id": "c3", "text": "부정 위치가 강조점을 바꾼다"},
+        {"id": "c4", "text": "같은 부정도 범위가 달라진다"},
+        {"id": "c5", "text": "이중 부정은 완곡함을 만든다"},
+        {"id": "c6", "text": "단정 피하기에 쓰이기도 한다"},
+        {"id": "c7", "text": "부정은 뜻이 하나만이 아니다"},
+        {"id": "c8", "text": "무엇을 부정했는지까지 본다"}
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "안 먹다와 못 먹다의 차이를 선택과 조건의 막힘으로 나누어 설명한 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p1", "start": 158, "end": 229}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "같은 부정이라도 무엇을 부정하느냐에 따라 강조점이 달라진다고 설명한 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p2", "start": 33, "end": 60}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "모두가 찬성한 것은 아니다와 모두가 찬성하지는 않았다의 차이를 통해 실제 상황을 더 조심스럽게 전하는 느낌을 보여 준 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p2", "start": 60, "end": 146}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "불가능하지 않다가 가능하다보다 더 조심스럽고 완곡한 느낌을 만든다고 설명한 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p3", "start": 34, "end": 105}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "부정 표현의 차이를 정확히 이해하려면 무엇을 부정했는지와 왜 그런 표현을 골랐는지까지 살펴봐야 한다고 설명한 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p4", "start": 108, "end": 197}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }
