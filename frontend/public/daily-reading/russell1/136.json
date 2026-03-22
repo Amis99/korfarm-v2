@@ -51,15 +51,408 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 73 } ] },
+          "question": {
+            "prompt": "문단을 여는 이 문장은 정렬과 탐색 효율을 어떤 개념으로 소개하나요?",
+            "choices": [
+              { "id": "A", "text": "자료 형태와 처리 규칙이 결과를 바꾸는 개념" },
+              { "id": "B", "text": "자료 색깔만 비교하는 개념" },
+              { "id": "C", "text": "정답만 빠르게 외우는 개념" },
+              { "id": "D", "text": "기계를 꾸미는 법을 다루는 개념" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 73, "end": 138 } ] },
+          "question": {
+            "prompt": "같은 정보를 다뤄도 결과가 달라지는 까닭을 이 문장은 무엇으로 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "자료가 정리된 방식에 따라 속도와 출력 모습이 달라지기 때문" },
+              { "id": "B", "text": "자료 이름이 길고 짧기 때문" },
+              { "id": "C", "text": "문제를 읽는 사람이 바뀌기 때문" },
+              { "id": "D", "text": "자료 수가 항상 같기 때문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 138, "end": 238 } ] },
+          "question": {
+            "prompt": "데이터알고리즘 설명문이 함께 보여 준다고 한 세 가지는 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "입력, 절차, 그 결과 빨라지거나 달라진 점" },
+              { "id": "B", "text": "제목, 글씨체, 문단 길이" },
+              { "id": "C", "text": "사람 수, 장소, 시간" },
+              { "id": "D", "text": "자료 색, 종이 크기, 줄 수" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 238, "end": 285 } ] },
+          "question": {
+            "prompt": "문단 끝은 정렬과 탐색 효율의 차이를 읽어야 무엇을 판단할 수 있다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "알고리즘의 장점과 한계" },
+              { "id": "B", "text": "문단의 길이와 문장 수" },
+              { "id": "C", "text": "자료 이름의 보기 좋음" },
+              { "id": "D", "text": "출력 색상의 밝기" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 285 } ] },
+          "question": {
+            "prompt": "첫 문단 전체는 정렬과 탐색 효율을 어떤 시선으로 읽으라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "입력과 절차, 결과가 연결되는 시선으로 읽으라고 한다" },
+              { "id": "B", "text": "정답만 보면 된다고 한다" },
+              { "id": "C", "text": "자료 모양은 중요하지 않다고 한다" },
+              { "id": "D", "text": "속도 차이는 우연이라고 한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 62 } ] },
+          "question": {
+            "prompt": "둘째 문단 첫 문장은 자료가 무작위로 섞여 있으면 어떤 탐색이 필요하다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "처음부터 끝까지 차례로 살펴봐야 할 수 있다" },
+              { "id": "B", "text": "가운데만 보면 바로 찾을 수 있다" },
+              { "id": "C", "text": "자료가 저절로 정렬된다" },
+              { "id": "D", "text": "탐색이 필요 없어질 수 있다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 62, "end": 112 } ] },
+          "question": {
+            "prompt": "자료가 가나다순이나 숫자순으로 정리되어 있을 때 이 문장은 어떤 변화가 가능하다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "찾는 범위를 빠르게 줄일 수 있다" },
+              { "id": "B", "text": "정답이 달라질 수 있다" },
+              { "id": "C", "text": "자료 수가 자동으로 줄어든다" },
+              { "id": "D", "text": "비교가 불가능해진다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 112, "end": 152 } ] },
+          "question": {
+            "prompt": "이 문장은 데이터의 정렬 여부라는 원인이 어떤 결과를 바꾼다고 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "탐색 속도라는 결과" },
+              { "id": "B", "text": "자료 제목이라는 결과" },
+              { "id": "C", "text": "문단 개수라는 결과" },
+              { "id": "D", "text": "자료 색깔이라는 결과" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 152, "end": 209 } ] },
+          "question": {
+            "prompt": "알고리즘 자체가 복잡하지 않아도 수행 시간이 달라질 수 있다고 하는 까닭은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "입력 자료의 구조가 달라지면 수행 시간도 크게 달라지기 때문" },
+              { "id": "B", "text": "자료 이름이 달라지면 무조건 느려지기 때문" },
+              { "id": "C", "text": "출력 모양이 같으면 빨라지기 때문" },
+              { "id": "D", "text": "자료 수가 적을수록 항상 느리기 때문" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 209, "end": 267 } ] },
+          "question": {
+            "prompt": "문단 끝은 데이터알고리즘에서 무엇도 중요한 판단이라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "자료를 어떤 형태로 준비할지 결정하는 판단" },
+              { "id": "B", "text": "출력 글씨를 어떻게 꾸밀지 판단" },
+              { "id": "C", "text": "자료 이름을 어떻게 붙일지 판단" },
+              { "id": "D", "text": "문단을 몇 줄로 나눌지 판단" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 267 } ] },
+          "question": {
+            "prompt": "둘째 문단 전체는 정렬 여부를 어떤 변화로 읽게 하나요?",
+            "choices": [
+              { "id": "A", "text": "자료 구조가 탐색 범위와 시간 차이를 만드는 변화" },
+              { "id": "B", "text": "자료 모양만 보기 좋게 만드는 변화" },
+              { "id": "C", "text": "출력 값을 바꾸지 않는 변화" },
+              { "id": "D", "text": "문제와 무관한 형식 변화" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 27 } ] },
+          "question": {
+            "prompt": "셋째 문단을 여는 이 문장은 자료 양이 커질수록 무엇이 더 분명해진다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "방법 사이의 차이" },
+              { "id": "B", "text": "자료 이름의 길이" },
+              { "id": "C", "text": "출력 색깔의 차이" },
+              { "id": "D", "text": "문장 수의 차이" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 27, "end": 110 } ] },
+          "question": {
+            "prompt": "자료가 많아질수록 차이가 커진다고 하는 이 대목은 무엇의 차이를 강조하나요?",
+            "choices": [
+              { "id": "A", "text": "비교 횟수와 이동 횟수의 차이" },
+              { "id": "B", "text": "자료 이름의 획수 차이" },
+              { "id": "C", "text": "출력 종이 크기 차이" },
+              { "id": "D", "text": "문단 길이 차이" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 110, "end": 194 } ] },
+          "question": {
+            "prompt": "같은 정렬 문제라도 처리 시간 증가가 다르다는 이 문장은 무엇을 비교해 보여 주나요?",
+            "choices": [
+              { "id": "A", "text": "알고리즘마다 자료 증가에 따라 시간이 늘어나는 방식" },
+              { "id": "B", "text": "자료 이름이 길어지는 방식" },
+              { "id": "C", "text": "출력 색이 변하는 방식" },
+              { "id": "D", "text": "정답 위치가 바뀌는 방식" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 194, "end": 251 } ] },
+          "question": {
+            "prompt": "이 문장은 알고리즘 선택이라는 원인이 어떤 결과들로 이어진다고 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "계산 효율, 메모리 사용량, 실제 체감 속도" },
+              { "id": "B", "text": "자료 이름, 문단 길이, 종이 색" },
+              { "id": "C", "text": "출력 모양, 제목 길이, 그림 수" },
+              { "id": "D", "text": "장소 변화, 사람 수, 말의 속도" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 251, "end": 288 } ] },
+          "question": {
+            "prompt": "문단 끝은 데이터알고리즘 설명문이 무엇을 구체적인 상황으로 보여 준다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "선택한 알고리즘이 만든 효율 차이의 연결" },
+              { "id": "B", "text": "자료 꾸밈 방법의 차이" },
+              { "id": "C", "text": "출력 종이의 질감 차이" },
+              { "id": "D", "text": "문장 배열의 장식 효과" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 288 } ] },
+          "question": {
+            "prompt": "셋째 문단 전체는 자료가 많아질수록 무엇을 더 신중히 봐야 한다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "알고리즘 선택이 만들어 내는 효율 차이" },
+              { "id": "B", "text": "자료 이름의 규칙성" },
+              { "id": "C", "text": "문단 수의 균형" },
+              { "id": "D", "text": "표현의 길고 짧음" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 71 } ] },
+          "question": {
+            "prompt": "마지막 문단 첫 문장은 정렬과 탐색 효율을 읽을 때 무엇보다 무엇의 관계를 보라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "입력, 절차, 출력이 이어지는 관계" },
+              { "id": "B", "text": "자료 색과 제목의 관계" },
+              { "id": "C", "text": "문단 길이와 여백의 관계" },
+              { "id": "D", "text": "사람 수와 문제 수의 관계" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 71, "end": 166 } ] },
+          "question": {
+            "prompt": "이 문장은 왜 시간이 더 걸리는지, 왜 결과가 달라지는지를 어떻게 따지라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "정리 여부와 규칙 변화, 절차 차이를 차례로 따지라고 한다" },
+              { "id": "B", "text": "정답만 먼저 외우라고 한다" },
+              { "id": "C", "text": "출력 형태만 보고 판단하라고 한다" },
+              { "id": "D", "text": "자료 양은 무시하라고 한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 166, "end": 233 } ] },
+          "question": {
+            "prompt": "이 문장은 알고리즘을 무엇으로 다시 정의하나요?",
+            "choices": [
+              { "id": "A", "text": "특정한 조건 아래 특정한 결과를 만드는 규칙 모음" },
+              { "id": "B", "text": "정답을 마법처럼 만들어 내는 장치" },
+              { "id": "C", "text": "자료를 꾸며 보기 좋게 하는 틀" },
+              { "id": "D", "text": "입력과 무관하게 같은 답을 내는 장치" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 233, "end": 291 } ] },
+          "question": {
+            "prompt": "문단 끝은 정렬과 탐색 효율을 함께 읽는 힘이 무엇으로 이어진다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "상황에 맞게 데이터와 알고리즘을 선택하는 판단" },
+              { "id": "B", "text": "출력 화면을 꾸미는 판단" },
+              { "id": "C", "text": "자료 이름을 길게 붙이는 판단" },
+              { "id": "D", "text": "문단 수를 줄이는 판단" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 291 } ] },
+          "question": {
+            "prompt": "마지막 문단 전체는 알고리즘을 어떤 태도로 읽으라고 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "입력 조건과 절차, 결과 차이를 함께 따져 읽으라고 한다" },
+              { "id": "B", "text": "정답만 맞으면 과정은 안 봐도 된다고 한다" },
+              { "id": "C", "text": "자료가 많을수록 같은 방법만 쓰라고 한다" },
+              { "id": "D", "text": "정렬과 탐색은 따로 읽으라고 한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        { "id": "c1", "text": "자료 구조가 결과를 바꾼다" },
+        { "id": "c2", "text": "정렬 여부가 탐색 속도를 바꾼다" },
+        { "id": "c3", "text": "자료 준비도 중요한 판단이다" },
+        { "id": "c4", "text": "자료가 많을수록 차이 커진다" },
+        { "id": "c5", "text": "선택한 알고리즘이 효율을 가른다" },
+        { "id": "c6", "text": "입력·절차·출력을 함께 본다" },
+        { "id": "c7", "text": "규칙이 달라지면 결과도 달라진다" },
+        { "id": "c8", "text": "상황에 맞게 알고리즘을 고른다" }
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "같은 정보를 다뤄도 자료가 정리된 방식에 따라 찾는 속도와 출력 모습이 달라질 수 있다고 설명한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 73, "end": 138 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "자료가 순서대로 정리되어 있으면 찾는 범위를 빠르게 줄일 수 있고, 그 정렬 여부가 탐색 속도를 바꾼다고 설명한 부분들은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 62, "end": 112 },
+            { "paragraphId": "p2", "start": 112, "end": 152 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q3",
+          "prompt": "자료 수가 커질수록 비교 횟수와 이동 횟수 차이가 커지고, 알고리즘마다 처리 시간 증가 방식이 다를 수 있다고 설명한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 27, "end": 194 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "알고리즘 선택이 계산 효율, 메모리 사용량, 실제 체감 속도까지 바꾼다고 설명한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 194, "end": 251 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "정렬과 탐색 효율을 읽을 때 입력, 절차, 출력의 관계를 보고 왜 시간이 더 걸리고 결과가 달라지는지 차례로 따져야 한다고 설명한 부분들은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 0, "end": 71 },
+            { "paragraphId": "p4", "start": 71, "end": 166 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        }
+      ]
     }
   }
 }
