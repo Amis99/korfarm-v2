@@ -6,92 +6,214 @@
     "area": "READING",
     "subArea": "CONCEPT",
     "timeLimitSec": 300,
-    "seedReward": {"seedType":"seed_rice","count":3,"multiplier":1},
+    "seedReward": {
+      "seedType": "seed_rice",
+      "count": 3,
+      "multiplier": 1
+    },
     "payload": {
       "passage": {
         "format": "TEXT",
         "paragraphs": [
-          {"id":"p1","text":"위대한 발견은 가끔 실수나 우연에서 시작되기도 합니다. 이것을 '세런디피티(Serendipity)'라고 부릅니다."},
-          {"id":"p2","text":"예를 들어, 페니실린을 발견한 플레밍은 실험실 창문을 실수로 열어두었다가 곰팡이가 피어난 것을 보고 발견을 해냈습니다. 전자레인지나 포스트잇도 연구 도중 우연히 발명된 물건들입니다."},
-          {"id":"p3","text":"하지만 단순히 운이 좋았던 것만은 아닙니다. 평소에 끊임없이 탐구하고 호기심을 가졌던 사람들만이 그 우연을 놓치지 않고 위대한 발견으로 연결할 수 있었던 것입니다."}
+          {
+            "id": "p1",
+            "text": "위대한 발견은 가끔 실수나 우연에서 시작되기도 합니다. 이것을 '세런디피티(Serendipity)'라고 부릅니다."
+          },
+          {
+            "id": "p2",
+            "text": "예를 들어, 페니실린을 발견한 플레밍은 실험실 창문을 실수로 열어두었다가 곰팡이가 피어난 것을 보고 발견을 해냈습니다. 전자레인지나 포스트잇도 연구 도중 우연히 발명된 물건들입니다."
+          },
+          {
+            "id": "p3",
+            "text": "하지만 단순히 운이 좋았던 것만은 아닙니다. 평소에 끊임없이 탐구하고 호기심을 가졌던 사람들만이 그 우연을 놓치지 않고 위대한 발견으로 연결할 수 있었던 것입니다."
+          }
         ]
       },
       "intensive": {
         "timeline": [
           {
             "stepId": "s1",
-            "highlight": {"ranges":[{"paragraphId":"p1","start":0,"end":63}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 0,
+                  "end": 63
+                }
+              ]
+            },
             "question": {
               "prompt": "세런디피티란 무엇인가요?",
               "choices": [
-                {"id":"A","text":"계획적으로 실험하여 얻은 결과"},
-                {"id":"B","text":"실수나 우연에서 시작된 위대한 발견"},
-                {"id":"C","text":"과학자들이 사용하는 실험 도구"},
-                {"id":"D","text":"실패를 반복한 끝에 얻는 성공"}
+                {
+                  "id": "A",
+                  "text": "계획적으로 실험하여 얻은 결과"
+                },
+                {
+                  "id": "B",
+                  "text": "실수나 우연에서 시작된 위대한 발견"
+                },
+                {
+                  "id": "C",
+                  "text": "과학자들이 사용하는 실험 도구"
+                },
+                {
+                  "id": "D",
+                  "text": "실패를 반복한 끝에 얻는 성공"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s2",
-            "highlight": {"ranges":[{"paragraphId":"p2","start":0,"end":66}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p2",
+                  "start": 0,
+                  "end": 66
+                }
+              ]
+            },
             "question": {
               "prompt": "페니실린 발견의 계기는 무엇이었나요?",
               "choices": [
-                {"id":"A","text":"오랜 계획에 따른 실험 성공"},
-                {"id":"B","text":"실험실 창문을 실수로 열어두어 곰팡이가 핀 것"},
-                {"id":"C","text":"다른 과학자의 논문을 읽고 영감을 얻은 것"},
-                {"id":"D","text":"환자를 치료하다가 우연히 발견한 것"}
+                {
+                  "id": "A",
+                  "text": "오랜 계획에 따른 실험 성공"
+                },
+                {
+                  "id": "B",
+                  "text": "실험실 창문을 실수로 열어두어 곰팡이가 핀 것"
+                },
+                {
+                  "id": "C",
+                  "text": "다른 과학자의 논문을 읽고 영감을 얻은 것"
+                },
+                {
+                  "id": "D",
+                  "text": "환자를 치료하다가 우연히 발견한 것"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s3",
-            "highlight": {"ranges":[{"paragraphId":"p2","start":67,"end":101}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p2",
+                  "start": 67,
+                  "end": 101
+                }
+              ]
+            },
             "question": {
               "prompt": "우연히 발명된 물건의 예시로 제시된 것은 무엇인가요?",
               "choices": [
-                {"id":"A","text":"스마트폰과 컴퓨터"},
-                {"id":"B","text":"전자레인지와 포스트잇"},
-                {"id":"C","text":"자동차와 비행기"},
-                {"id":"D","text":"텔레비전과 라디오"}
+                {
+                  "id": "A",
+                  "text": "스마트폰과 컴퓨터"
+                },
+                {
+                  "id": "B",
+                  "text": "전자레인지와 포스트잇"
+                },
+                {
+                  "id": "C",
+                  "text": "자동차와 비행기"
+                },
+                {
+                  "id": "D",
+                  "text": "텔레비전과 라디오"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s4",
-            "highlight": {"ranges":[{"paragraphId":"p3","start":0,"end":91}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p3",
+                  "start": 0,
+                  "end": 91
+                }
+              ]
+            },
             "question": {
               "prompt": "우연을 발견으로 연결할 수 있었던 이유는 무엇인가요?",
               "choices": [
-                {"id":"A","text":"운이 매우 좋았기 때문"},
-                {"id":"B","text":"평소에 끊임없이 탐구하고 호기심을 가졌기 때문"},
-                {"id":"C","text":"다른 사람의 도움을 받았기 때문"},
-                {"id":"D","text":"실험 장비가 뛰어났기 때문"}
+                {
+                  "id": "A",
+                  "text": "운이 매우 좋았기 때문"
+                },
+                {
+                  "id": "B",
+                  "text": "평소에 끊임없이 탐구하고 호기심을 가졌기 때문"
+                },
+                {
+                  "id": "C",
+                  "text": "다른 사람의 도움을 받았기 때문"
+                },
+                {
+                  "id": "D",
+                  "text": "실험 장비가 뛰어났기 때문"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           }
         ]
       },
       "recall": {
         "cards": [
-          {"id":"c1","text":"위대한 발견은 우연에서 시작되기도 함"},
-          {"id":"c2","text":"이것을 세런디피티라고 부름"},
-          {"id":"c3","text":"페니실린은 실수로 열린 창문에서 발견됨"},
-          {"id":"c4","text":"전자레인지, 포스트잇도 우연의 발명"},
-          {"id":"c5","text":"단순한 운이 아닌 준비된 사람의 발견"},
-          {"id":"c6","text":"탐구심과 호기심이 핵심 조건"},
-          {"id":"c7","text":"우연을 놓치지 않는 관찰력이 필요"},
-          {"id":"c8","text":"준비된 사람에게 행운이 찾아옴"}
+          {
+            "id": "c1",
+            "text": "위대한 발견은 우연에서 시작되기도 한다"
+          },
+          {
+            "id": "c2",
+            "text": "페니실린과 포스트잇도 우연히 발명되었다"
+          },
+          {
+            "id": "c3",
+            "text": "호기심을 가진 사람만이 우연을 발견으로 만든다"
+          },
+          {
+            "id": "c4",
+            "text": "준비된 사람에게 행운이 찾아온다"
+          }
         ],
-        "correctOrder": ["c1","c2","c3","c4","c5","c6","c7","c8"],
+        "correctOrder": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ],
         "seedPenalty": 1
       },
       "confirm": {
@@ -99,40 +221,85 @@
           {
             "id": "q1",
             "prompt": "세런디피티의 정의가 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p1","start":0,"end":63}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 63
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q2",
             "prompt": "페니실린 발견 사례가 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p2","start":0,"end":66}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 66
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q3",
             "prompt": "우연을 발견으로 연결할 수 있는 조건이 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p3","start":25,"end":91}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p3",
+                "start": 25,
+                "end": 91
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q4",
             "prompt": "우연히 발명된 물건 예시가 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p2","start":67,"end":101}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p2",
+                "start": 67,
+                "end": 101
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q5",
             "prompt": "단순한 운이 아니라는 반론이 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p3","start":0,"end":24}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 24
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           }
@@ -147,127 +314,312 @@
     "area": "READING",
     "subArea": "LITERATURE",
     "timeLimitSec": 300,
-    "seedReward": {"seedType":"seed_rice","count":3,"multiplier":1},
+    "seedReward": {
+      "seedType": "seed_rice",
+      "count": 3,
+      "multiplier": 1
+    },
     "payload": {
       "passage": {
         "format": "TEXT",
         "paragraphs": [
-          {"id":"p1","text":"영국의 한 시골 마을에 살던 아이작 뉴턴은 평소 자연 현상에 대해 깊이 탐구하는 것을 좋아했습니다. 어느 화창한 오후, 청년이 된 뉴턴은 사과나무 아래에 앉아 생각에 잠겨 있었습니다."},
-          {"id":"p2","text":"\"달은 왜 지구 주위를 돌까? 별들은 어떤 힘으로 움직이는 걸까?\""},
-          {"id":"p3","text":"그때였습니다. 머리 위에서 잘 익은 사과 하나가 '툭' 하고 땅으로 떨어졌습니다."},
-          {"id":"p4","text":"보통 사람이라면 사과를 주워 맛있게 먹고 말았을 것입니다. 하지만 뉴턴은 사과가 떨어진 모습을 보며 엉뚱한 질문을 던졌습니다."},
-          {"id":"p5","text":"\"이상하다. 왜 사과는 위로 솟거나 옆으로 날아가지 않고, 꼭 아래로만 떨어질까?\""},
-          {"id":"p6","text":"뉴턴의 머릿속에는 꼬리에 꼬리를 무는 질문들이 이어졌습니다."},
-          {"id":"p7","text":"'혹시 지구가 사과를 당기고 있는 건 아닐까? 만약 그렇다면 저 하늘에 떠 있는 달도 지구가 당기고 있는 걸까?'"},
-          {"id":"p8","text":"뉴턴은 이 작은 의문을 풀기 위해 오랫동안 연구를 거듭했습니다. 그리고 마침내 '지구는 모든 물체를 끌어당기는 힘인 중력을 가지고 있다'는 놀라운 원리를 발견해 냈습니다. 사과 하나가 떨어지는 사소한 일이었지만, 뉴턴의 끈기 있는 탐구 덕분에 인류는 우주의 비밀을 푸는 열쇠를 얻게 되었습니다. 오늘날 이 원리는 인공위성이나 로켓을 쏘아 올리는 데에도 중요하게 응용되고 있습니다."}
+          {
+            "id": "p1",
+            "text": "영국의 한 시골 마을에 살던 아이작 뉴턴은 평소 자연 현상에 대해 깊이 탐구하는 것을 좋아했습니다. 어느 화창한 오후, 청년이 된 뉴턴은 사과나무 아래에 앉아 생각에 잠겨 있었습니다."
+          },
+          {
+            "id": "p2",
+            "text": "\"달은 왜 지구 주위를 돌까? 별들은 어떤 힘으로 움직이는 걸까?\""
+          },
+          {
+            "id": "p3",
+            "text": "그때였습니다. 머리 위에서 잘 익은 사과 하나가 '툭' 하고 땅으로 떨어졌습니다."
+          },
+          {
+            "id": "p4",
+            "text": "보통 사람이라면 사과를 주워 맛있게 먹고 말았을 것입니다. 하지만 뉴턴은 사과가 떨어진 모습을 보며 엉뚱한 질문을 던졌습니다."
+          },
+          {
+            "id": "p5",
+            "text": "\"이상하다. 왜 사과는 위로 솟거나 옆으로 날아가지 않고, 꼭 아래로만 떨어질까?\""
+          },
+          {
+            "id": "p6",
+            "text": "뉴턴의 머릿속에는 꼬리에 꼬리를 무는 질문들이 이어졌습니다."
+          },
+          {
+            "id": "p7",
+            "text": "'혹시 지구가 사과를 당기고 있는 건 아닐까? 만약 그렇다면 저 하늘에 떠 있는 달도 지구가 당기고 있는 걸까?'"
+          },
+          {
+            "id": "p8",
+            "text": "뉴턴은 이 작은 의문을 풀기 위해 오랫동안 연구를 거듭했습니다. 그리고 마침내 '지구는 모든 물체를 끌어당기는 힘인 중력을 가지고 있다'는 놀라운 원리를 발견해 냈습니다. 사과 하나가 떨어지는 사소한 일이었지만, 뉴턴의 끈기 있는 탐구 덕분에 인류는 우주의 비밀을 푸는 열쇠를 얻게 되었습니다. 오늘날 이 원리는 인공위성이나 로켓을 쏘아 올리는 데에도 중요하게 응용되고 있습니다."
+          }
         ]
       },
       "intensive": {
         "timeline": [
           {
             "stepId": "s1",
-            "highlight": {"ranges":[{"paragraphId":"p1","start":0,"end":55}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 0,
+                  "end": 55
+                }
+              ]
+            },
             "question": {
               "prompt": "뉴턴의 평소 관심사는 무엇이었나요?",
               "choices": [
-                {"id":"A","text":"음악과 미술"},
-                {"id":"B","text":"자연 현상에 대한 깊은 탐구"},
-                {"id":"C","text":"요리와 농사"},
-                {"id":"D","text":"운동과 체력 단련"}
+                {
+                  "id": "A",
+                  "text": "음악과 미술"
+                },
+                {
+                  "id": "B",
+                  "text": "자연 현상에 대한 깊은 탐구"
+                },
+                {
+                  "id": "C",
+                  "text": "요리와 농사"
+                },
+                {
+                  "id": "D",
+                  "text": "운동과 체력 단련"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s2",
-            "highlight": {"ranges":[{"paragraphId":"p3","start":0,"end":45}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p3",
+                  "start": 0,
+                  "end": 45
+                }
+              ]
+            },
             "question": {
               "prompt": "뉴턴에게 영감을 준 사건은 무엇이었나요?",
               "choices": [
-                {"id":"A","text":"별똥별이 떨어진 것"},
-                {"id":"B","text":"사과가 땅으로 떨어진 것"},
-                {"id":"C","text":"나뭇잎이 바람에 날린 것"},
-                {"id":"D","text":"비가 내리기 시작한 것"}
+                {
+                  "id": "A",
+                  "text": "별똥별이 떨어진 것"
+                },
+                {
+                  "id": "B",
+                  "text": "사과가 땅으로 떨어진 것"
+                },
+                {
+                  "id": "C",
+                  "text": "나뭇잎이 바람에 날린 것"
+                },
+                {
+                  "id": "D",
+                  "text": "비가 내리기 시작한 것"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s3",
-            "highlight": {"ranges":[{"paragraphId":"p4","start":0,"end":70}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p4",
+                  "start": 0,
+                  "end": 70
+                }
+              ]
+            },
             "question": {
               "prompt": "뉴턴이 보통 사람과 다른 점은 무엇이었나요?",
               "choices": [
-                {"id":"A","text":"사과를 먹지 않았다는 것"},
-                {"id":"B","text":"사과가 떨어지는 것을 보고 의문을 품었다는 것"},
-                {"id":"C","text":"사과나무를 직접 심었다는 것"},
-                {"id":"D","text":"사과 떨어지는 소리를 무시했다는 것"}
+                {
+                  "id": "A",
+                  "text": "사과를 먹지 않았다는 것"
+                },
+                {
+                  "id": "B",
+                  "text": "사과가 떨어지는 것을 보고 의문을 품었다는 것"
+                },
+                {
+                  "id": "C",
+                  "text": "사과나무를 직접 심었다는 것"
+                },
+                {
+                  "id": "D",
+                  "text": "사과 떨어지는 소리를 무시했다는 것"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s4",
-            "highlight": {"ranges":[{"paragraphId":"p5","start":0,"end":46}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p5",
+                  "start": 0,
+                  "end": 46
+                }
+              ]
+            },
             "question": {
               "prompt": "뉴턴이 던진 핵심 질문은 무엇이었나요?",
               "choices": [
-                {"id":"A","text":"사과는 왜 나무에서 자라는 걸까?"},
-                {"id":"B","text":"왜 사과는 꼭 아래로만 떨어질까?"},
-                {"id":"C","text":"사과가 얼마나 빨리 떨어지는 걸까?"},
-                {"id":"D","text":"사과나무는 왜 이곳에 있는 걸까?"}
+                {
+                  "id": "A",
+                  "text": "사과는 왜 나무에서 자라는 걸까?"
+                },
+                {
+                  "id": "B",
+                  "text": "왜 사과는 꼭 아래로만 떨어질까?"
+                },
+                {
+                  "id": "C",
+                  "text": "사과가 얼마나 빨리 떨어지는 걸까?"
+                },
+                {
+                  "id": "D",
+                  "text": "사과나무는 왜 이곳에 있는 걸까?"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s5",
-            "highlight": {"ranges":[{"paragraphId":"p8","start":36,"end":95}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p8",
+                  "start": 36,
+                  "end": 95
+                }
+              ]
+            },
             "question": {
               "prompt": "뉴턴이 발견한 원리는 무엇인가요?",
               "choices": [
-                {"id":"A","text":"빛은 여러 색으로 나뉜다는 원리"},
-                {"id":"B","text":"지구가 모든 물체를 끌어당기는 중력의 원리"},
-                {"id":"C","text":"물체는 힘을 받으면 움직인다는 원리"},
-                {"id":"D","text":"지구는 태양 주위를 돈다는 원리"}
+                {
+                  "id": "A",
+                  "text": "빛은 여러 색으로 나뉜다는 원리"
+                },
+                {
+                  "id": "B",
+                  "text": "지구가 모든 물체를 끌어당기는 중력의 원리"
+                },
+                {
+                  "id": "C",
+                  "text": "물체는 힘을 받으면 움직인다는 원리"
+                },
+                {
+                  "id": "D",
+                  "text": "지구는 태양 주위를 돈다는 원리"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s6",
-            "highlight": {"ranges":[{"paragraphId":"p8","start":96,"end":212}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p8",
+                  "start": 96,
+                  "end": 212
+                }
+              ]
+            },
             "question": {
               "prompt": "뉴턴의 발견이 오늘날 응용되는 분야는 무엇인가요?",
               "choices": [
-                {"id":"A","text":"음식 조리와 요리 분야"},
-                {"id":"B","text":"인공위성이나 로켓 발사 분야"},
-                {"id":"C","text":"농업과 과수원 관리 분야"},
-                {"id":"D","text":"건축과 인테리어 분야"}
+                {
+                  "id": "A",
+                  "text": "음식 조리와 요리 분야"
+                },
+                {
+                  "id": "B",
+                  "text": "인공위성이나 로켓 발사 분야"
+                },
+                {
+                  "id": "C",
+                  "text": "농업과 과수원 관리 분야"
+                },
+                {
+                  "id": "D",
+                  "text": "건축과 인테리어 분야"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           }
         ]
       },
       "recall": {
         "cards": [
-          {"id":"c1","text":"뉴턴은 자연 현상 탐구를 좋아했음"},
-          {"id":"c2","text":"사과나무 아래서 사과가 떨어짐"},
-          {"id":"c3","text":"보통 사람과 달리 의문을 품었음"},
-          {"id":"c4","text":"왜 아래로만 떨어지는지 질문함"},
-          {"id":"c5","text":"지구가 물체를 당기는 것 아닌지 추론"},
-          {"id":"c6","text":"오랜 연구 끝에 중력을 발견함"},
-          {"id":"c7","text":"작은 의문이 우주의 비밀을 풀 열쇠가 됨"},
-          {"id":"c8","text":"오늘날 인공위성과 로켓에 응용됨"}
+          {
+            "id": "c1",
+            "text": "뉴턴이 사과나무 아래서 자연을 탐구했다"
+          },
+          {
+            "id": "c2",
+            "text": "사과가 아래로만 떨어지는 것에 의문을 품었다"
+          },
+          {
+            "id": "c3",
+            "text": "지구가 물체를 당기는 것은 아닌지 생각했다"
+          },
+          {
+            "id": "c4",
+            "text": "오랜 연구 끝에 중력의 원리를 발견했다"
+          }
         ],
-        "correctOrder": ["c1","c2","c3","c4","c5","c6","c7","c8"],
+        "correctOrder": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ],
         "seedPenalty": 1
       },
       "confirm": {
@@ -275,40 +627,85 @@
           {
             "id": "q1",
             "prompt": "뉴턴의 평소 성격이 나타난 곳은?",
-            "answerRanges": [{"paragraphId":"p1","start":0,"end":55}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 55
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q2",
             "prompt": "뉴턴이 던진 핵심 질문이 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p5","start":0,"end":46}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 46
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q3",
             "prompt": "중력의 발견이 서술된 곳은?",
-            "answerRanges": [{"paragraphId":"p8","start":36,"end":95}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p8",
+                "start": 36,
+                "end": 95
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q4",
             "prompt": "오늘날 중력 원리가 응용되는 분야가 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p8","start":165,"end":212}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p8",
+                "start": 165,
+                "end": 212
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q5",
             "prompt": "뉴턴이 보통 사람과 달랐던 점이 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p4","start":33,"end":70}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p4",
+                "start": 33,
+                "end": 70
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           }
@@ -323,108 +720,257 @@
     "area": "READING",
     "subArea": "NONFICTION",
     "timeLimitSec": 300,
-    "seedReward": {"seedType":"seed_rice","count":3,"multiplier":1},
+    "seedReward": {
+      "seedType": "seed_rice",
+      "count": 3,
+      "multiplier": 1
+    },
     "payload": {
       "passage": {
         "format": "TEXT",
         "paragraphs": [
-          {"id":"p1","text":"우리가 사는 세상은 과학자들의 발견 덕분에 점점 더 살기 좋은 곳으로 개선되었습니다. 과학적 발견은 주로 우리 생활의 불편한 점이나 문제점을 해결하기 위해 시작됩니다."},
-          {"id":"p2","text":"옛날 사람들은 밤이 되면 어둠 속에서 아무것도 할 수 없어 무척 불편했습니다. 이러한 어둠 때문에 생긴 불편을 해결하기 위해 에디슨은 수천 번의 실험을 했습니다. 그 결과 오랫동안 빛을 내는 전구를 발명했습니다. 덕분에 우리는 깜깜한 밤에도 대낮처럼 환하게 생활할 수 있게 되었습니다."},
-          {"id":"p3","text":"또한 과거에는 작은 상처에도 세균이 들어가 목숨을 잃는 사람들이 많아 큰 문제였습니다. 영국의 과학자 플레밍은 실험 도중 우연히 푸른곰팡이가 세균을 없애는 것을 발견했습니다. 이 원리를 응용해 만든 약이 바로 최초의 항생제인 페니실린입니다. 이 위대한 발견 덕분에 인류는 수많은 질병을 치료하고 소중한 생명을 구할 수 있게 되었습니다."},
-          {"id":"p4","text":"이처럼 과학적 발견은 단순히 신기한 일이 아닙니다. 사람들이 겪는 어려움과 고통을 해결해 주고, 세상을 더 안전하고 편리하게 만들어 주는 소중한 보물입니다."}
+          {
+            "id": "p1",
+            "text": "우리가 사는 세상은 과학자들의 발견 덕분에 점점 더 살기 좋은 곳으로 개선되었습니다. 과학적 발견은 주로 우리 생활의 불편한 점이나 문제점을 해결하기 위해 시작됩니다."
+          },
+          {
+            "id": "p2",
+            "text": "옛날 사람들은 밤이 되면 어둠 속에서 아무것도 할 수 없어 무척 불편했습니다. 이러한 어둠 때문에 생긴 불편을 해결하기 위해 에디슨은 수천 번의 실험을 했습니다. 그 결과 오랫동안 빛을 내는 전구를 발명했습니다. 덕분에 우리는 깜깜한 밤에도 대낮처럼 환하게 생활할 수 있게 되었습니다."
+          },
+          {
+            "id": "p3",
+            "text": "또한 과거에는 작은 상처에도 세균이 들어가 목숨을 잃는 사람들이 많아 큰 문제였습니다. 영국의 과학자 플레밍은 실험 도중 우연히 푸른곰팡이가 세균을 없애는 것을 발견했습니다. 이 원리를 응용해 만든 약이 바로 최초의 항생제인 페니실린입니다. 이 위대한 발견 덕분에 인류는 수많은 질병을 치료하고 소중한 생명을 구할 수 있게 되었습니다."
+          },
+          {
+            "id": "p4",
+            "text": "이처럼 과학적 발견은 단순히 신기한 일이 아닙니다. 사람들이 겪는 어려움과 고통을 해결해 주고, 세상을 더 안전하고 편리하게 만들어 주는 소중한 보물입니다."
+          }
         ]
       },
       "intensive": {
         "timeline": [
           {
             "stepId": "s1",
-            "highlight": {"ranges":[{"paragraphId":"p1","start":48,"end":93}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p1",
+                  "start": 48,
+                  "end": 93
+                }
+              ]
+            },
             "question": {
               "prompt": "과학적 발견이 시작되는 주된 동기는 무엇인가요?",
               "choices": [
-                {"id":"A","text":"호기심과 재미를 위해"},
-                {"id":"B","text":"생활의 불편한 점이나 문제점을 해결하기 위해"},
-                {"id":"C","text":"다른 나라보다 앞서기 위해"},
-                {"id":"D","text":"상을 받기 위해"}
+                {
+                  "id": "A",
+                  "text": "호기심과 재미를 위해"
+                },
+                {
+                  "id": "B",
+                  "text": "생활의 불편한 점이나 문제점을 해결하기 위해"
+                },
+                {
+                  "id": "C",
+                  "text": "다른 나라보다 앞서기 위해"
+                },
+                {
+                  "id": "D",
+                  "text": "상을 받기 위해"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s2",
-            "highlight": {"ranges":[{"paragraphId":"p2","start":0,"end":90}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p2",
+                  "start": 0,
+                  "end": 90
+                }
+              ]
+            },
             "question": {
               "prompt": "에디슨이 해결하려 한 문제는 무엇이었나요?",
               "choices": [
-                {"id":"A","text":"사람들이 물을 쉽게 구하지 못하는 문제"},
-                {"id":"B","text":"밤에 어둠 속에서 아무것도 할 수 없는 문제"},
-                {"id":"C","text":"소리를 멀리 전달할 수 없는 문제"},
-                {"id":"D","text":"음식을 오래 보관할 수 없는 문제"}
+                {
+                  "id": "A",
+                  "text": "사람들이 물을 쉽게 구하지 못하는 문제"
+                },
+                {
+                  "id": "B",
+                  "text": "밤에 어둠 속에서 아무것도 할 수 없는 문제"
+                },
+                {
+                  "id": "C",
+                  "text": "소리를 멀리 전달할 수 없는 문제"
+                },
+                {
+                  "id": "D",
+                  "text": "음식을 오래 보관할 수 없는 문제"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s3",
-            "highlight": {"ranges":[{"paragraphId":"p3","start":49,"end":97}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p3",
+                  "start": 49,
+                  "end": 97
+                }
+              ]
+            },
             "question": {
               "prompt": "플레밍이 발견한 것은 무엇인가요?",
               "choices": [
-                {"id":"A","text":"전기를 만드는 방법"},
-                {"id":"B","text":"푸른곰팡이가 세균을 없애는 것"},
-                {"id":"C","text":"물에 떠 있는 물질을 분리하는 방법"},
-                {"id":"D","text":"빛이 색으로 나뉘는 원리"}
+                {
+                  "id": "A",
+                  "text": "전기를 만드는 방법"
+                },
+                {
+                  "id": "B",
+                  "text": "푸른곰팡이가 세균을 없애는 것"
+                },
+                {
+                  "id": "C",
+                  "text": "물에 떠 있는 물질을 분리하는 방법"
+                },
+                {
+                  "id": "D",
+                  "text": "빛이 색으로 나뉘는 원리"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s4",
-            "highlight": {"ranges":[{"paragraphId":"p3","start":98,"end":134}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p3",
+                  "start": 98,
+                  "end": 134
+                }
+              ]
+            },
             "question": {
               "prompt": "플레밍의 발견으로 만들어진 약은 무엇인가요?",
               "choices": [
-                {"id":"A","text":"소화제"},
-                {"id":"B","text":"페니실린(최초의 항생제)"},
-                {"id":"C","text":"진통제"},
-                {"id":"D","text":"비타민"}
+                {
+                  "id": "A",
+                  "text": "소화제"
+                },
+                {
+                  "id": "B",
+                  "text": "페니실린(최초의 항생제)"
+                },
+                {
+                  "id": "C",
+                  "text": "진통제"
+                },
+                {
+                  "id": "D",
+                  "text": "비타민"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           },
           {
             "stepId": "s5",
-            "highlight": {"ranges":[{"paragraphId":"p4","start":0,"end":87}]},
+            "highlight": {
+              "ranges": [
+                {
+                  "paragraphId": "p4",
+                  "start": 0,
+                  "end": 87
+                }
+              ]
+            },
             "question": {
               "prompt": "글의 결론에서 과학적 발견을 무엇이라고 평가했나요?",
               "choices": [
-                {"id":"A","text":"공부를 잘하는 사람만 할 수 있는 특별한 일"},
-                {"id":"B","text":"어려움을 해결하고 세상을 안전하고 편리하게 만드는 소중한 보물"},
-                {"id":"C","text":"부자가 될 수 있는 기회"},
-                {"id":"D","text":"언젠가는 사라질 일시적 유행"}
+                {
+                  "id": "A",
+                  "text": "공부를 잘하는 사람만 할 수 있는 특별한 일"
+                },
+                {
+                  "id": "B",
+                  "text": "어려움을 해결하고 세상을 안전하고 편리하게 만드는 소중한 보물"
+                },
+                {
+                  "id": "C",
+                  "text": "부자가 될 수 있는 기회"
+                },
+                {
+                  "id": "D",
+                  "text": "언젠가는 사라질 일시적 유행"
+                }
               ],
               "answerId": "B",
-              "scoring": {"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}
+              "scoring": {
+                "correctDeltaSec": 20,
+                "wrongDeltaSec": -40,
+                "eliminateWrongChoice": true
+              }
             }
           }
         ]
       },
       "recall": {
         "cards": [
-          {"id":"c1","text":"과학적 발견은 생활의 문제 해결에서 시작"},
-          {"id":"c2","text":"에디슨은 어둠 문제를 전구로 해결함"},
-          {"id":"c3","text":"수천 번의 실험 끝에 전구를 발명함"},
-          {"id":"c4","text":"플레밍은 곰팡이가 세균을 없앰을 발견"},
-          {"id":"c5","text":"이를 응용해 최초 항생제 페니실린을 만듦"},
-          {"id":"c6","text":"페니실린으로 수많은 생명을 구하게 됨"},
-          {"id":"c7","text":"과학 발견은 단순히 신기한 일이 아님"},
-          {"id":"c8","text":"세상을 안전하고 편리하게 만드는 보물"}
+          {
+            "id": "c1",
+            "text": "과학적 발견은 불편을 해결하기 위해 시작된다"
+          },
+          {
+            "id": "c2",
+            "text": "에디슨이 수천 번 실험해 전구를 만들었다"
+          },
+          {
+            "id": "c3",
+            "text": "플레밍이 곰팡이에서 페니실린을 발견했다"
+          },
+          {
+            "id": "c4",
+            "text": "과학적 발견은 세상을 안전하고 편리하게 만든다"
+          }
         ],
-        "correctOrder": ["c1","c2","c3","c4","c5","c6","c7","c8"],
+        "correctOrder": [
+          "c1",
+          "c2",
+          "c3",
+          "c4"
+        ],
         "seedPenalty": 1
       },
       "confirm": {
@@ -432,40 +978,85 @@
           {
             "id": "q1",
             "prompt": "과학적 발견의 주된 동기가 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p1","start":48,"end":93}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p1",
+                "start": 48,
+                "end": 93
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q2",
             "prompt": "에디슨의 전구 발명 과정이 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p2","start":44,"end":118}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p2",
+                "start": 44,
+                "end": 118
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q3",
             "prompt": "페니실린 발견 과정이 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p3","start":49,"end":134}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p3",
+                "start": 49,
+                "end": 134
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q4",
             "prompt": "과학적 발견의 가치를 결론으로 평가한 곳은?",
-            "answerRanges": [{"paragraphId":"p4","start":0,"end":87}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 87
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           },
           {
             "id": "q5",
             "prompt": "페니실린이 인류에 미친 영향이 나온 곳은?",
-            "answerRanges": [{"paragraphId":"p3","start":135,"end":187}],
-            "scoring": {"correctDeltaSec":30,"wrongDeltaSec":-45},
+            "answerRanges": [
+              {
+                "paragraphId": "p3",
+                "start": 135,
+                "end": 187
+              }
+            ],
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -45
+            },
             "revealOnWrong": true,
             "answerMatchMode": "ANY"
           }
