@@ -40,15 +40,396 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 86}]},
+          "question": {
+            "prompt": "이 문장이 먼저 대비해 보여 주는 직접 인용과 간접 인용의 차이로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "직접 인용은 말을 그대로 옮기고, 간접 인용은 전하는 사람의 문장에 맞게 바꾸어 전한다"},
+              {"id": "B", "text": "직접 인용은 내용만 남기고, 간접 인용은 말투를 그대로 살린다"},
+              {"id": "C", "text": "직접 인용과 간접 인용은 구조가 늘 같다"},
+              {"id": "D", "text": "직접 인용은 글에서 쓰지 않고 간접 인용만 쓴다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 86, "end": 160}]},
+          "question": {
+            "prompt": "앞의 기본 차이와 이어 볼 때, 이 문장이 직접 인용과 간접 인용의 느낌 차이를 어떻게 설명하나요?",
+            "choices": [
+              {"id": "A", "text": "직접 인용은 어투와 느낌이 살아나고, 간접 인용은 내용이 문장 속에 자연스럽게 녹아든다"},
+              {"id": "B", "text": "직접 인용은 느낌이 사라지고, 간접 인용은 말투가 더 강해진다"},
+              {"id": "C", "text": "직접 인용과 간접 인용은 어투 차이가 없다"},
+              {"id": "D", "text": "간접 인용만 느낌을 드러낼 수 있다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 160, "end": 191}]},
+          "question": {
+            "prompt": "이 문장이 첫 문단의 결론으로 정리하는 내용은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "같은 말을 전해도 문장 구조와 표현이 달라진다"},
+              {"id": "B", "text": "같은 말을 전하면 구조도 느낌도 언제나 같다"},
+              {"id": "C", "text": "직접 인용만 문장 구조를 바꾼다"},
+              {"id": "D", "text": "간접 인용은 구조가 없는 말이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 191}]},
+          "question": {
+            "prompt": "첫 문단 전체가 직접 인용과 간접 인용을 비교하며 세우는 기본 기준은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "같은 말을 옮기더라도 그대로 살릴지, 전하는 문장에 맞게 바꿀지에 따라 구조와 느낌이 달라진다"},
+              {"id": "B", "text": "직접 인용과 간접 인용은 말의 느낌만 다르고 구조는 같다"},
+              {"id": "C", "text": "간접 인용은 내용을 바꾸지 않으므로 항상 직접 인용보다 정확하다"},
+              {"id": "D", "text": "직접 인용은 글에서 거의 쓰이지 않는 표현이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 73}]},
+          "question": {
+            "prompt": "이 문장이 직접 인용 예문을 통해 보여 주는 성격으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "말한 사람의 말모양이 비교적 그대로 살아 있다"},
+              {"id": "B", "text": "말한 사람의 시점과 인칭이 이미 바뀌어 있다"},
+              {"id": "C", "text": "말한 사람의 어투가 모두 지워져 있다"},
+              {"id": "D", "text": "내용만 남기고 표현은 새로 만든다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 73, "end": 136}]},
+          "question": {
+            "prompt": "바로 앞 직접 인용 예문과 이어 볼 때, 간접 인용으로 바뀌며 달라지는 요소로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "시점과 인칭 표현이 달라질 수 있다"},
+              {"id": "B", "text": "말한 내용이 모두 사라진다"},
+              {"id": "C", "text": "문장 안의 동사가 모두 과거형이 된다"},
+              {"id": "D", "text": "직접 인용보다 반드시 길어진다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 136, "end": 184}]},
+          "question": {
+            "prompt": "이 문장이 두 표현의 핵심 차이를 어떻게 한마디로 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "말을 베껴 적는가, 전하는 사람의 문장 안에 맞게 바꾸는가의 차이"},
+              {"id": "B", "text": "따옴표를 쓰는가 쓰지 않는가의 차이만 있을 뿐이다"},
+              {"id": "C", "text": "말한 사람이 중요한가 듣는 사람이 중요한가의 차이"},
+              {"id": "D", "text": "직접 인용은 문법이고 간접 인용은 작문이라는 차이"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 184}]},
+          "question": {
+            "prompt": "둘째 문단 전체가 예문 비교를 통해 세우는 기준으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "직접 인용은 말의 모양을 살리고, 간접 인용은 전하는 사람의 문장에 맞게 시점과 인칭까지 바꾸며 전달한다"},
+              {"id": "B", "text": "직접 인용과 간접 인용은 예문을 바꾸어도 차이가 거의 없다"},
+              {"id": "C", "text": "간접 인용은 발화 상황과 관계없이 같은 구조를 유지한다"},
+              {"id": "D", "text": "직접 인용은 내용만 남기고 말투를 없앤다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 30}]},
+          "question": {
+            "prompt": "이 문장이 직접 인용의 효과로 먼저 꺼내는 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "말한 사람의 느낌을 살릴 때 효과적이라는 점"},
+              {"id": "B", "text": "시점과 장소를 바꾸기 쉽다는 점"},
+              {"id": "C", "text": "여러 사람의 말을 한꺼번에 묶기 좋다는 점"},
+              {"id": "D", "text": "글의 흐름을 가장 매끄럽게 잇는다는 점"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 30, "end": 82}]},
+          "question": {
+            "prompt": "이 문장은 직접 인용이 특히 잘 어울리는 경우를 어떻게 설명하나요?",
+            "choices": [
+              {"id": "A", "text": "질문, 감탄, 명령처럼 말의 분위기가 중요할 때"},
+              {"id": "B", "text": "내용만 짧게 정리할 때"},
+              {"id": "C", "text": "여러 사람의 말을 하나로 묶을 때"},
+              {"id": "D", "text": "시점 변화를 강조할 때"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 82, "end": 118}]},
+          "question": {
+            "prompt": "이 문장이 간접 인용의 장점으로 먼저 꼽는 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "글의 흐름을 매끄럽게 이어 주는 데 유리하다는 점"},
+              {"id": "B", "text": "말한 사람의 어투를 그대로 살린다는 점"},
+              {"id": "C", "text": "감탄과 명령의 분위기를 가장 잘 살린다는 점"},
+              {"id": "D", "text": "시점 표현이 바뀌지 않는다는 점"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 118, "end": 177}]},
+          "question": {
+            "prompt": "이 문장은 간접 인용이 더 알맞은 경우를 어떻게 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "여러 사람의 말을 정리하거나 내용을 중심으로 간단히 전달할 때"},
+              {"id": "B", "text": "말한 사람의 감탄을 그대로 살릴 때"},
+              {"id": "C", "text": "말의 모양을 가능한 한 그대로 옮길 때"},
+              {"id": "D", "text": "질문과 명령의 어투를 그대로 들려줄 때"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 177}]},
+          "question": {
+            "prompt": "셋째 문단 전체가 직접 인용과 간접 인용의 쓰임을 비교하며 세우는 기준은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "느낌과 분위기를 살릴지, 내용 중심으로 흐름을 매끄럽게 이을지에 따라 고른다"},
+              {"id": "B", "text": "문장이 길면 직접, 짧으면 간접으로 고른다"},
+              {"id": "C", "text": "모든 인용은 직접 인용이 더 낫다고 본다"},
+              {"id": "D", "text": "간접 인용은 느낌을 전할 수 없다고 본다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 56}]},
+          "question": {
+            "prompt": "이 문장이 직접 인용을 간접 인용으로 바꿀 때 함께 달라질 수 있다고 한 요소로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "시점 표현, 장소 표현, 인칭 표현"},
+              {"id": "B", "text": "문단 수와 제목"},
+              {"id": "C", "text": "말의 길이만"},
+              {"id": "D", "text": "주제와 결론"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 56, "end": 93}]},
+          "question": {
+            "prompt": "이 예시는 앞의 설명을 어떻게 구체화하나요?",
+            "choices": [
+              {"id": "A", "text": "오늘, 여기, 나처럼 발화 시점과 위치와 인물이 전하는 문장에 맞게 달라질 수 있음을 보여 준다"},
+              {"id": "B", "text": "어떤 말도 바꾸지 않아야 함을 보여 준다"},
+              {"id": "C", "text": "직접 인용은 예시가 필요 없음을 보여 준다"},
+              {"id": "D", "text": "간접 인용은 장소 표현이 사라짐을 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 93, "end": 151}]},
+          "question": {
+            "prompt": "이 문장은 이런 변화가 무엇에 따라 결정된다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "누가 누구에게 어떤 입장에서 전하는가에 따라 결정된다"},
+              {"id": "B", "text": "말을 얼마나 길게 옮기는가에 따라 결정된다"},
+              {"id": "C", "text": "문단 수가 몇 개인가에 따라 결정된다"},
+              {"id": "D", "text": "따옴표를 넣는가에 따라만 결정된다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 151, "end": 197}]},
+          "question": {
+            "prompt": "이 문장이 인용 표현을 비교할 때 특히 함께 보라고 하는 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "말의 내용뿐 아니라 발화 상황도 함께 보아야 한다"},
+              {"id": "B", "text": "발화 상황보다 낱말 길이만 보아야 한다"},
+              {"id": "C", "text": "직접 인용은 상황과 무관하게 읽어야 한다"},
+              {"id": "D", "text": "간접 인용은 내용보다 따옴표만 보면 된다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 197}]},
+          "question": {
+            "prompt": "넷째 문단 전체가 인용 표현을 비교하며 세우는 읽기 기준은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "시점·장소·인칭의 변화와 발화 상황을 함께 보아야 직접과 간접의 차이를 정확히 읽을 수 있다"},
+              {"id": "B", "text": "인용은 낱말만 바꾸면 끝이므로 상황은 보지 않아도 된다"},
+              {"id": "C", "text": "직접 인용은 인칭이 절대 바뀌지 않는다"},
+              {"id": "D", "text": "간접 인용은 시점 변화가 일어나지 않는다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 47}]},
+          "question": {
+            "prompt": "이 문장이 마지막에 다시 세우는 직접 인용과 간접 인용의 구별 기준으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "같은 말을 어떻게 전달하느냐"},
+              {"id": "B", "text": "말한 사람이 누구냐"},
+              {"id": "C", "text": "문단 수가 몇 개냐"},
+              {"id": "D", "text": "문장 길이가 얼마냐"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 47, "end": 101}]},
+          "question": {
+            "prompt": "이 문장이 전달 방식에 따라 달라진다고 묶는 항목으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "문장의 구조와 느낌"},
+              {"id": "B", "text": "말한 사람의 기억"},
+              {"id": "C", "text": "문단 수와 제목"},
+              {"id": "D", "text": "어휘의 개수만"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 101, "end": 173}]},
+          "question": {
+            "prompt": "이 문장은 이런 차이를 이해하면 글 읽기에서 무엇을 더 정확하게 파악할 수 있다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "누가 실제로 한 말인지와 글쓴이가 그 말을 어떤 방식으로 엮었는지"},
+              {"id": "B", "text": "문장의 길이가 왜 다른지"},
+              {"id": "C", "text": "직접 인용만 더 중요하다는 점"},
+              {"id": "D", "text": "간접 인용은 모두 줄여 써야 한다는 점"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 173}]},
+          "question": {
+            "prompt": "마지막 문단 전체가 직접 인용과 간접 인용 비교를 통해 강조하는 중심 내용은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "전달 방식의 차이를 이해해야 실제 발화와 글쓴이의 엮는 방식을 더 정확히 읽을 수 있다"},
+              {"id": "B", "text": "직접 인용만 알면 인용 표현은 충분하다"},
+              {"id": "C", "text": "간접 인용은 구조와 느낌을 바꾸지 않는다"},
+              {"id": "D", "text": "인용 표현은 발화 상황과 관계가 없다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {"id": "c1", "text": "직접 인용은 말을 그대로 옮긴다"},
+        {"id": "c2", "text": "간접 인용은 문장에 맞게 바꾼다"},
+        {"id": "c3", "text": "어투와 느낌 보존 정도가 다르다"},
+        {"id": "c4", "text": "시점과 인칭 표현도 달라진다"},
+        {"id": "c5", "text": "직접 인용은 분위기 살리기 좋다"},
+        {"id": "c6", "text": "간접 인용은 흐름 잇기에 좋다"},
+        {"id": "c7", "text": "발화 상황을 함께 봐야 한다"},
+        {"id": "c8", "text": "전달 방식 따라 구조와 느낌 달라진다"}
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "직접 인용은 원래 말의 표현을 살리고, 간접 인용은 전하는 사람의 문장에 맞게 바꾸어 전한다는 기본 차이가 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p1", "start": 0, "end": 191}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "직접 인용 예문과 간접 인용 예문을 비교하며, 시점과 인칭까지 달라질 수 있다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p2", "start": 0, "end": 184}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "직접 인용은 말의 분위기를 살리고, 간접 인용은 여러 말을 정리하거나 글의 흐름을 매끄럽게 잇는 데 알맞다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p3", "start": 0, "end": 177}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "직접 인용을 간접 인용으로 바꿀 때 시점과 장소와 인칭이 달라질 수 있으며, 이런 변화는 발화 상황에 따라 정해진다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p4", "start": 0, "end": 197}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "결국 직접 인용과 간접 인용의 차이는 같은 말을 어떻게 전달하느냐에 있으며, 그 차이를 이해해야 실제 발화와 글쓴이의 엮는 방식을 정확히 읽을 수 있다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p5", "start": 0, "end": 173}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }
