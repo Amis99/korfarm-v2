@@ -40,15 +40,426 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 55}]},
+          "question": {
+            "prompt": "이 문장이 발표의 도입과 마무리를 함께 보자고 꺼내는 까닭으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "처음과 끝에서 발표자가 무엇을 하려는지 살피는 일이 중요하기 때문이다"},
+              {"id": "B", "text": "발표의 중간 내용은 모두 비슷해서 따로 볼 필요가 없기 때문이다"},
+              {"id": "C", "text": "도입보다 마무리가 언제나 더 길기 때문이다"},
+              {"id": "D", "text": "발표에서는 주제보다 분위기가 더 중요하기 때문이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 55, "end": 119}]},
+          "question": {
+            "prompt": "이 문장은 도입의 역할을 어떻게 정리하고 있나요?",
+            "choices": [
+              {"id": "A", "text": "청중의 관심을 모으고 주제를 드러내며 발표의 방향을 잡아 준다고 본다"},
+              {"id": "B", "text": "발표 내용을 모두 결론으로 묶어 주는 부분이라고 본다"},
+              {"id": "C", "text": "새로운 자료를 가장 많이 덧붙이는 부분이라고 본다"},
+              {"id": "D", "text": "청중과의 질의응답만 담당하는 부분이라고 본다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 119, "end": 184}]},
+          "question": {
+            "prompt": "도입의 역할과 이어 보면, 이 문장이 정리하는 마무리의 역할로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "앞에서 말한 내용을 정리하고 듣는 이를 어떤 생각으로 남길지 정한다고 본다"},
+              {"id": "B", "text": "도입에서 부족했던 자료를 끝에서 새로 채워 넣는다고 본다"},
+              {"id": "C", "text": "주제를 밝히지 않고 분위기만 남기는 부분이라고 본다"},
+              {"id": "D", "text": "발표와 관계없는 일화를 덧붙이는 부분이라고 본다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 184, "end": 238}]},
+          "question": {
+            "prompt": "앞에서 정리한 두 역할을 바탕으로 할 때, 이 문장이 강조하는 핵심은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "도입과 마무리가 어떻게 짜였는지에 따라 청중의 기억이 달라질 수 있다는 점"},
+              {"id": "B", "text": "도입과 마무리는 발표 내용과 거의 상관이 없다는 점"},
+              {"id": "C", "text": "청중은 발표의 처음보다 중간만 기억한다는 점"},
+              {"id": "D", "text": "발표의 길이가 길수록 도입은 쓸모없어진다는 점"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 238}]},
+          "question": {
+            "prompt": "첫 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "발표의 도입과 마무리는 각각 다른 역할을 맡지만 둘 다 전체 인상을 좌우한다"},
+              {"id": "B", "text": "발표에서는 마무리만 중요하고 도입은 생략해도 무방하다"},
+              {"id": "C", "text": "발표의 구조는 중간 정보량만 많으면 자연스럽게 살아난다"},
+              {"id": "D", "text": "도입과 마무리는 형식이 같을수록 언제나 좋은 발표가 된다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 46}]},
+          "question": {
+            "prompt": "앞 문단에서 본 도입의 역할을 떠올릴 때, 이 문장이 보여 주는 도입 장치의 예로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "질문, 사례, 통계, 경험담처럼 관심을 끌 수 있는 장치"},
+              {"id": "B", "text": "발표 후 평가표를 돌리는 장치"},
+              {"id": "C", "text": "청중에게 즉시 과제를 내주는 장치"},
+              {"id": "D", "text": "발표 내용을 끝까지 숨기는 장치"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 46, "end": 85}]},
+          "question": {
+            "prompt": "이 문장이 앞의 예시를 바로 경계하는 뜻으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "흥미를 끄는 장치가 많다고 해서 모두 좋은 도입이 되는 것은 아니라는 뜻"},
+              {"id": "B", "text": "도입에서는 장치를 아예 쓰지 말아야 한다는 뜻"},
+              {"id": "C", "text": "질문과 통계는 발표에서 금지된다는 뜻"},
+              {"id": "D", "text": "도입은 반드시 경험담으로만 시작해야 한다는 뜻"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 85, "end": 136}]},
+          "question": {
+            "prompt": "앞의 경계와 이어 볼 때, 이 문장이 도입의 적절함을 판단하는 기준으로 내세우는 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "도입 장치가 발표 주제와 자연스럽게 이어지는가"},
+              {"id": "B", "text": "도입이 본론보다 더 길고 화려한가"},
+              {"id": "C", "text": "도입이 청중을 웃게 만드는가"},
+              {"id": "D", "text": "도입에서 새로운 정보를 최대한 많이 주는가"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 136, "end": 200}]},
+          "question": {
+            "prompt": "이 문장은 도입을 읽을 때 무엇을 더 중시해야 한다고 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "얼마나 재미있는가보다 주제와 어떻게 이어지는가를 더 살펴야 한다고 본다"},
+              {"id": "B", "text": "주제와의 연결보다 청중 반응이 더 중요하다고 본다"},
+              {"id": "C", "text": "재미가 있으면 내용 연결은 보지 않아도 된다고 본다"},
+              {"id": "D", "text": "도입은 발표와 독립된 장면처럼 읽어야 한다고 본다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 200}]},
+          "question": {
+            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "도입 장치는 청중의 관심을 끌되, 주제와 자연스럽게 이어질 때 의미가 있다"},
+              {"id": "B", "text": "도입 장치는 많을수록 좋고, 주제와의 연결은 크게 중요하지 않다"},
+              {"id": "C", "text": "도입에서는 사례나 질문 대신 결론만 먼저 말해야 한다"},
+              {"id": "D", "text": "발표의 도입은 청중 반응만 살피는 장면으로 읽어야 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 49}]},
+          "question": {
+            "prompt": "앞에서 본 도입의 역할과 대비해, 이 문장이 먼저 정리하는 마무리의 역할로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "핵심 내용을 정리하고 청중에게 남길 생각을 분명히 하는 역할"},
+              {"id": "B", "text": "새로운 자료를 가장 많이 넣는 역할"},
+              {"id": "C", "text": "주제를 감추고 분위기만 남기는 역할"},
+              {"id": "D", "text": "도입에서 빠진 내용을 모두 덧붙이는 역할"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 49, "end": 131}]},
+          "question": {
+            "prompt": "이 문장이 예로 드는 마무리 방식들을 하나로 묶어 설명하면 무엇이라고 할 수 있나요?",
+            "choices": [
+              {"id": "A", "text": "앞의 내용을 되묶어 청중에게 남길 방향을 또렷하게 하는 방식들"},
+              {"id": "B", "text": "본론에 없던 자료를 끝에 갑자기 보태는 방식들"},
+              {"id": "C", "text": "도입에서 제시한 문제를 취소하는 방식들"},
+              {"id": "D", "text": "청중을 혼란스럽게 만들어 기억에 남기는 방식들"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 131, "end": 195}]},
+          "question": {
+            "prompt": "이 문장이 좋지 않은 마무리를 경계하는 기준으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "앞 내용과 이어지지 않는 새 내용을 갑자기 더하지 않아야 한다는 기준"},
+              {"id": "B", "text": "도입에서 했던 말을 끝에서 모두 지워야 한다는 기준"},
+              {"id": "C", "text": "발표 마지막에는 반드시 통계를 넣어야 한다는 기준"},
+              {"id": "D", "text": "청중 반응이 좋으면 내용 연결은 따지지 않아도 된다는 기준"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 195, "end": 237}]},
+          "question": {
+            "prompt": "이 문장은 마무리를 보며 발표자의 무엇을 읽어 내라고 하나요?",
+            "choices": [
+              {"id": "A", "text": "발표자가 가장 중요하게 여긴 것이 무엇인지"},
+              {"id": "B", "text": "발표자가 준비한 자료의 총 개수"},
+              {"id": "C", "text": "청중이 발표를 얼마나 길게 들었는지"},
+              {"id": "D", "text": "본론에서 빠진 세부 사례가 몇 개인지"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 237}]},
+          "question": {
+            "prompt": "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "마무리는 앞의 내용을 정리하며 발표의 핵심과 남길 생각을 또렷하게 붙잡아 주어야 한다"},
+              {"id": "B", "text": "마무리는 새 내용을 많이 넣을수록 강한 인상을 준다"},
+              {"id": "C", "text": "마무리는 도입과 전혀 다르게 끝내야 기억에 남는다"},
+              {"id": "D", "text": "마무리에서는 발표자의 의도를 읽어 낼 필요가 없다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 40}]},
+          "question": {
+            "prompt": "앞에서 도입과 마무리를 따로 본 내용을 이어, 이 문장이 비교 읽기의 효과로 내세우는 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "발표의 짜임이 더 분명하게 드러난다는 점"},
+              {"id": "B", "text": "도입과 마무리 중 하나만 보면 충분하다는 점"},
+              {"id": "C", "text": "비교하면 발표 내용이 모두 같아진다는 점"},
+              {"id": "D", "text": "처음과 끝의 연결은 오히려 방해가 된다는 점"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 40, "end": 113}]},
+          "question": {
+            "prompt": "이 문장이 든 예시들은 도입과 마무리가 어떤 방식으로 연결될 수 있음을 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "처음의 질문이나 사례가 끝에서 응답이나 재언급으로 이어질 수 있음을 보여 준다"},
+              {"id": "B", "text": "도입은 질문, 마무리는 통계처럼 반드시 형식이 달라야 함을 보여 준다"},
+              {"id": "C", "text": "도입의 사례는 마무리에서 버려야 함을 보여 준다"},
+              {"id": "D", "text": "마무리는 도입과 무관할수록 좋음을 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 113, "end": 161}]},
+          "question": {
+            "prompt": "이 문장은 처음과 끝이 이어질 때 발표가 주는 인상을 어떻게 설명하나요?",
+            "choices": [
+              {"id": "A", "text": "앞뒤가 이어지면 발표가 한 덩어리처럼 안정감 있게 느껴진다고 본다"},
+              {"id": "B", "text": "앞뒤가 이어지면 오히려 주제가 흐려진다고 본다"},
+              {"id": "C", "text": "앞뒤가 이어지면 청중의 관심이 중간으로만 몰린다고 본다"},
+              {"id": "D", "text": "앞뒤가 이어지면 마무리의 역할이 사라진다고 본다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 161, "end": 202}]},
+          "question": {
+            "prompt": "앞의 안정감 설명과 대비해, 이 문장이 경계하는 발표의 모습으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "도입과 마무리가 따로 놀아 중심이 흐려지는 발표"},
+              {"id": "B", "text": "도입과 마무리가 서로 응답하며 구조를 완성하는 발표"},
+              {"id": "C", "text": "처음의 질문이 끝에서 다시 회수되는 발표"},
+              {"id": "D", "text": "처음의 사례가 마지막에 다시 정리되는 발표"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 202}]},
+          "question": {
+            "prompt": "넷째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "도입과 마무리를 함께 비교하면 발표의 구조와 호응 관계가 더 또렷하게 드러난다"},
+              {"id": "B", "text": "도입과 마무리는 발표의 중간보다 중요하지 않으므로 비교할 필요가 없다"},
+              {"id": "C", "text": "도입과 마무리는 일부러 따로 놀게 해야 기억에 남는다"},
+              {"id": "D", "text": "발표의 구조는 처음과 끝이 아니라 자료 양으로만 판단해야 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 59}]},
+          "question": {
+            "prompt": "마지막 문단 첫 문장은 도입과 마무리의 비교 읽기를 어떤 능력으로 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "발표의 처음과 끝이 서로 어떻게 호응하는지 읽어 내는 능력"},
+              {"id": "B", "text": "발표 중간 정보만 빠르게 외우는 능력"},
+              {"id": "C", "text": "도입의 장치 개수만 세는 능력"},
+              {"id": "D", "text": "마무리에서 새 자료를 더하는 능력"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 59, "end": 110}]},
+          "question": {
+            "prompt": "이 문장은 도입과 마무리의 역할 관계를 어떻게 비유적으로 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "도입이 주제를 열고 마무리가 그 뜻을 다시 붙잡는다고 정리한다"},
+              {"id": "B", "text": "도입이 결론을 감추고 마무리가 새 주제를 연다고 정리한다"},
+              {"id": "C", "text": "도입과 마무리는 서로 독립되어야 한다고 정리한다"},
+              {"id": "D", "text": "도입과 마무리는 모두 자료 제시에만 머문다고 정리한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 110, "end": 182}]},
+          "question": {
+            "prompt": "앞의 정리를 바탕으로 할 때, 이 문장이 발표 읽기의 방향으로 내세우는 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "중간 정보만 따라가지 말고 처음과 끝을 함께 보며 전체 구조를 이해하는 것"},
+              {"id": "B", "text": "도입과 마무리는 빼고 본론만 읽는 것"},
+              {"id": "C", "text": "처음과 끝보다 자료의 양만 비교하는 것"},
+              {"id": "D", "text": "주제 연결보다 흥미 요소를 먼저 세는 것"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 182}]},
+          "question": {
+            "prompt": "마지막 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "발표 읽기에서는 처음과 끝의 호응을 살펴 전체 구조와 중심 방향을 읽어 내야 한다"},
+              {"id": "B", "text": "발표 읽기에서는 도입과 마무리를 지우고 본론 정보만 정리하면 된다"},
+              {"id": "C", "text": "발표 읽기에서는 도입의 장치가 많을수록 좋은 발표라고 보면 된다"},
+              {"id": "D", "text": "발표 읽기에서는 마무리의 새 정보가 많을수록 구조가 선명해진다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {"id": "c1", "text": "도입과 마무리 역할을 나눈다"},
+        {"id": "c2", "text": "도입은 관심과 주제를 연다"},
+        {"id": "c3", "text": "장치는 주제와 이어져야 한다"},
+        {"id": "c4", "text": "마무리는 핵심을 붙잡는다"},
+        {"id": "c5", "text": "새 내용 덧붙임은 경계한다"},
+        {"id": "c6", "text": "처음과 끝의 호응을 본다"},
+        {"id": "c7", "text": "연결되면 구조가 선명해진다"},
+        {"id": "c8", "text": "전체 흐름을 함께 읽는다"}
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "도입은 관심을 모으고 주제를 열며, 마무리는 앞내용을 정리해 남길 생각을 붙잡는다는 점이 함께 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p1", "start": 55, "end": 184}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "흥미를 끄는 장치가 많다고 좋은 도입이 되는 것이 아니라, 주제와 자연스럽게 이어져야 한다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p2", "start": 46, "end": 200}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "마무리는 새 내용을 더하는 곳이 아니라 핵심을 정리하고 남길 생각을 또렷하게 하는 곳이라는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p3", "start": 0, "end": 237}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "처음의 질문이나 사례가 끝에서 다시 이어질 때 발표의 구조가 더 안정감 있게 느껴진다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p4", "start": 40, "end": 161}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "발표 읽기에서는 중간 정보만 따라가지 말고 처음과 끝의 호응을 함께 보며 전체 구조를 이해해야 한다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p5", "start": 0, "end": 182}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }

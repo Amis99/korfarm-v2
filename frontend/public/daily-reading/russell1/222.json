@@ -40,15 +40,441 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 68}]},
+          "question": {
+            "prompt": "이 문장이 설명문 조직을 무엇으로 정의하는지 가장 알맞게 고른 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "내용을 읽기 쉬운 순서로 배열하는 글쓰기 과정으로 정의한다"},
+              {"id": "B", "text": "긴 문장을 짧게 줄이는 맞춤법 과정으로 정의한다"},
+              {"id": "C", "text": "예시를 많이 모아 두는 자료 수집 과정으로 정의한다"},
+              {"id": "D", "text": "어려운 낱말을 쉬운 말로만 바꾸는 과정으로 정의한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 68, "end": 153}]},
+          "question": {
+            "prompt": "이 문장은 설명문의 목적을 생각할 때 글쓴이가 먼저 정해야 할 것으로 무엇을 말하나요?",
+            "choices": [
+              {"id": "A", "text": "무엇을 중심으로 설명할지 정하고 그에 맞는 조직 방식을 고르는 일"},
+              {"id": "B", "text": "도입을 길게 끌어 주제를 마지막까지 숨기는 일"},
+              {"id": "C", "text": "예시를 최대한 많이 늘어놓아 분량을 채우는 일"},
+              {"id": "D", "text": "문단마다 다른 중심 내용을 섞어 변화를 주는 일"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 153, "end": 197}]},
+          "question": {
+            "prompt": "앞의 설명과 이어 볼 때, 이 문장이 말하는 순서의 중요성은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "같은 내용도 어떤 순서로 놓는지에 따라 이해 정도가 달라진다는 점"},
+              {"id": "B", "text": "순서는 바뀌어도 설명문 이해에는 차이가 없다는 점"},
+              {"id": "C", "text": "설명문에서는 순서보다 분량이 더 중요하다는 점"},
+              {"id": "D", "text": "설명문은 언제나 시간 순서만 따라야 한다는 점"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 197, "end": 233}]},
+          "question": {
+            "prompt": "이 문장이 설명문 조직을 어떤 수준의 문제로 끌어올려 말하는지 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "내용 선정만큼이나 중요한 글쓰기 설계의 문제로 본다"},
+              {"id": "B", "text": "맞춤법만 바로잡으면 저절로 해결되는 문제로 본다"},
+              {"id": "C", "text": "문장 길이만 조절하면 충분한 문제로 본다"},
+              {"id": "D", "text": "설명문보다 감상문에서만 필요한 문제로 본다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 233}]},
+          "question": {
+            "prompt": "첫 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "설명문 조직은 내용을 읽기 쉬운 질서로 배열하는 설계이며 이해를 좌우하는 핵심 요소다"},
+              {"id": "B", "text": "설명문에서는 내용보다 문장 길이가 더 중요하므로 조직은 부차적이다"},
+              {"id": "C", "text": "설명문은 대상을 정하는 순간 구조도 자동으로 정해진다"},
+              {"id": "D", "text": "설명문은 조직을 바꿔도 읽는 이의 이해가 거의 달라지지 않는다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 26}]},
+          "question": {
+            "prompt": "앞 문단에서 조직 방식을 고른다고 했을 때, 이 문장이 먼저 깔아 두는 전제로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "설명문을 조직하는 방식은 한 가지가 아니라 여러 가지라는 점"},
+              {"id": "B", "text": "설명문은 언제나 같은 틀로만 써야 한다는 점"},
+              {"id": "C", "text": "조직 방식은 문학 작품에서만 중요하다는 점"},
+              {"id": "D", "text": "예시를 넣으면 조직 방식은 따질 필요가 없다는 점"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 26, "end": 105}]},
+          "question": {
+            "prompt": "이 문장이 나열한 방식들을 하나로 묶어 설명하면 무엇이라고 할 수 있나요?",
+            "choices": [
+              {"id": "A", "text": "정의-특징, 원인-결과처럼 대상의 성격에 따라 골라 쓸 수 있는 설명 방식들"},
+              {"id": "B", "text": "설명문에서는 피해야 하는 잘못된 방식들"},
+              {"id": "C", "text": "시에서만 쓰고 설명문에서는 쓰지 않는 방식들"},
+              {"id": "D", "text": "모든 설명문에 동시에 넣어야 하는 고정 순서들"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 105, "end": 150}]},
+          "question": {
+            "prompt": "앞의 방식들에 이어 이 문장이 더하는 비교 방식의 특징으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "둘 이상의 대상을 나란히 두고 공통점과 차이점을 드러내는 방식"},
+              {"id": "B", "text": "한 대상을 시간 순서대로만 늘어놓는 방식"},
+              {"id": "C", "text": "결론을 먼저 숨기고 마지막에만 밝히는 방식"},
+              {"id": "D", "text": "문단마다 중심을 계속 바꾸어 혼란을 주는 방식"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 150, "end": 192}]},
+          "question": {
+            "prompt": "이 문장이 조직 방식 선택의 기준으로 내세우는 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "조직 방식이 설명하려는 대상의 성격과 맞아야 한다는 점"},
+              {"id": "B", "text": "조직 방식은 글쓴이 취향만 맞으면 된다는 점"},
+              {"id": "C", "text": "대상 성격보다 문단 수가 더 중요하다는 점"},
+              {"id": "D", "text": "비교 방식은 어떤 대상에도 무조건 가장 좋다는 점"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 192, "end": 227}]},
+          "question": {
+            "prompt": "이 문장은 맞지 않는 조직을 고르면 글이 어떻게 된다고 보나요?",
+            "choices": [
+              {"id": "A", "text": "글이 어색해지고 설명의 흐름이 흔들릴 수 있다고 본다"},
+              {"id": "B", "text": "오히려 내용이 더 풍부해진다고 본다"},
+              {"id": "C", "text": "문단만 많아지면 문제없다고 본다"},
+              {"id": "D", "text": "예시가 많으면 조직이 어긋나도 괜찮다고 본다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 227}]},
+          "question": {
+            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "설명문에는 여러 조직 방식이 있고, 대상의 성격에 맞는 방식을 골라야 글이 자연스럽다"},
+              {"id": "B", "text": "설명문에는 하나의 조직 방식만 있으므로 선택은 중요하지 않다"},
+              {"id": "C", "text": "비교 방식만이 유일하게 올바른 설명문 조직이다"},
+              {"id": "D", "text": "대상과 조직의 어울림보다는 글 길이가 더 중요하다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 31}]},
+          "question": {
+            "prompt": "앞 문단에서 방식을 고르는 문제를 본 뒤, 이 문장이 새로 강조하는 조직 요소는 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "문단 사이의 연결"},
+              {"id": "B", "text": "문장 길이의 통일"},
+              {"id": "C", "text": "예시의 개수 경쟁"},
+              {"id": "D", "text": "도입의 화려함"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 31, "end": 96}]},
+          "question": {
+            "prompt": "이 문장이 문단 연결에서 요구하는 기준으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "앞 문단과 다음 문단이 왜 이어지는지 드러나야 한다는 기준"},
+              {"id": "B", "text": "문단 사이가 갑자기 끊겨도 상관없다는 기준"},
+              {"id": "C", "text": "문단마다 전혀 다른 화제를 넣어야 한다는 기준"},
+              {"id": "D", "text": "연결보다 문단 길이를 비슷하게 맞추는 것이 우선이라는 기준"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 96, "end": 172}]},
+          "question": {
+            "prompt": "이 문장이 제시하는 연결 표현의 쓰임을 가장 알맞게 설명한 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "문단과 문단의 방향을 드러내어 읽는 이가 흐름을 놓치지 않게 하는 역할"},
+              {"id": "B", "text": "같은 문장을 반복해 분량만 늘리는 역할"},
+              {"id": "C", "text": "중심 내용 없이 분위기만 바꾸는 역할"},
+              {"id": "D", "text": "설명 대상을 감추고 결론을 흐리는 역할"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 172, "end": 222}]},
+          "question": {
+            "prompt": "앞의 연결 표현 설명과 이어 볼 때, 이 문장이 말하는 읽기 쉬운 글의 조건은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "정보가 자연스럽게 이어져 흐름이 끊기지 않는 글"},
+              {"id": "B", "text": "문단마다 주제가 완전히 바뀌는 글"},
+              {"id": "C", "text": "예시만 이어지고 중심 설명이 없는 글"},
+              {"id": "D", "text": "연결은 약하지만 문장만 짧은 글"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 222}]},
+          "question": {
+            "prompt": "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "설명문 조직에서는 문단 사이 연결이 분명해야 정보 흐름이 자연스럽고 읽기 쉬워진다"},
+              {"id": "B", "text": "설명문 조직에서는 문단마다 화제를 바꿔야 흥미가 생긴다"},
+              {"id": "C", "text": "설명문 조직에서는 연결보다 예시 양이 더 중요하다"},
+              {"id": "D", "text": "설명문 조직에서는 문단 관계를 굳이 드러낼 필요가 없다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 32}]},
+          "question": {
+            "prompt": "이 문장이 설명문을 다 쓴 뒤 요구하는 태도로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "조직이 적절한지 다시 점검하는 태도"},
+              {"id": "B", "text": "문단 순서를 절대 바꾸지 않는 태도"},
+              {"id": "C", "text": "예시를 무조건 더 붙이는 태도"},
+              {"id": "D", "text": "중심 내용을 새로 바꾸어 버리는 태도"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 32, "end": 114}]},
+          "question": {
+            "prompt": "이 문장이 조직 점검에서 살피라고 하는 문제들로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "중심이 빠지지 않았는지, 예시가 설명을 돕는지, 순서가 뒤섞이지 않았는지"},
+              {"id": "B", "text": "글씨 크기와 종이 종류가 어울리는지"},
+              {"id": "C", "text": "문단 수가 짝수인지 홀수인지"},
+              {"id": "D", "text": "주제와 상관없는 사례가 더 재미있는지"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 114, "end": 156}]},
+          "question": {
+            "prompt": "이 문장이 한 문단을 점검할 때 묻는 핵심으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "한 문단 안에 서로 다른 중심 생각이 뒤섞여 있지 않은지"},
+              {"id": "B", "text": "한 문단 안에 문장이 최대한 많이 들어갔는지"},
+              {"id": "C", "text": "한 문단 안에 질문이 반드시 두 개 있는지"},
+              {"id": "D", "text": "한 문단 안에 어려운 낱말이 많은지"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 156, "end": 194}]},
+          "question": {
+            "prompt": "앞의 점검 결과가 잘 반영되면 글은 어떻게 된다고 보나요?",
+            "choices": [
+              {"id": "A", "text": "글이 더 분명하고 읽기 쉬워진다고 본다"},
+              {"id": "B", "text": "글이 더 길고 복잡해진다고 본다"},
+              {"id": "C", "text": "글의 중심이 흐려진다고 본다"},
+              {"id": "D", "text": "조직보다 분위기만 남는다고 본다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 194}]},
+          "question": {
+            "prompt": "넷째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "설명문은 쓴 뒤에도 중심, 예시, 순서, 문단 역할이 맞는지 다시 점검해야 더 분명해진다"},
+              {"id": "B", "text": "설명문은 한 번 쓰면 구조를 다시 손볼 필요가 없다"},
+              {"id": "C", "text": "설명문은 예시만 많으면 중심과 순서를 따질 필요가 없다"},
+              {"id": "D", "text": "설명문은 문단마다 여러 중심이 섞일수록 풍부해진다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 45}]},
+          "question": {
+            "prompt": "이 문장이 설명문 조직을 어떤 글쓰기 능력으로 다시 묶어 말하는지 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "내용을 질서 있게 배치하여 이해를 돕는 기술"},
+              {"id": "B", "text": "문장을 길게 늘여 분량을 늘리는 기술"},
+              {"id": "C", "text": "예시만 나열해 흥미를 끄는 기술"},
+              {"id": "D", "text": "중심 없이 다양한 정보를 섞는 기술"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 45, "end": 120}]},
+          "question": {
+            "prompt": "이 문장이 읽는 이의 이해가 자연스러워지는 조건으로 묶어 내는 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "대상에 맞는 조직 방식과 문단 사이 관계를 분명히 드러내는 것"},
+              {"id": "B", "text": "문단 수를 많이 늘리고 예시를 반복하는 것"},
+              {"id": "C", "text": "중심보다 세부 자료를 먼저 쏟아 놓는 것"},
+              {"id": "D", "text": "연결 표현을 줄이고 독자가 짐작하게 두는 것"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 120, "end": 196}]},
+          "question": {
+            "prompt": "마지막 문장은 설명문 쓰기를 어떤 과정으로 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "지식을 많이 아는 데서 그치지 않고 그것을 어떻게 조직해 보여 줄지까지 고르는 과정"},
+              {"id": "B", "text": "지식을 많이 모아 두고 그대로 늘어놓는 과정"},
+              {"id": "C", "text": "문장 표현만 다듬고 구조는 그대로 두는 과정"},
+              {"id": "D", "text": "예시를 줄이고 결론만 남겨 두는 과정"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s25",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 196}]},
+          "question": {
+            "prompt": "마지막 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "설명문 조직은 지식을 읽기 쉬운 질서로 보여 주기 위한 설계이며, 무엇을 어떻게 배열할지까지 고르는 과정이다"},
+              {"id": "B", "text": "설명문 조직은 내용을 다 알고 나면 자연히 생기므로 따로 고민할 필요가 없다"},
+              {"id": "C", "text": "설명문 조직은 문단 수만 맞추면 해결되는 형식 문제다"},
+              {"id": "D", "text": "설명문 조직은 자료가 많을수록 무조건 성공하는 방식이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {"id": "c1", "text": "설명문 조직은 배열의 기술"},
+        {"id": "c2", "text": "대상에 맞는 방식을 고른다"},
+        {"id": "c3", "text": "정의·원인·비교 방식이 있다"},
+        {"id": "c4", "text": "문단 연결이 흐름을 만든다"},
+        {"id": "c5", "text": "연결 표현이 방향을 잡는다"},
+        {"id": "c6", "text": "쓴 뒤 구조를 다시 점검한다"},
+        {"id": "c7", "text": "중심과 예시의 어울림을 본다"},
+        {"id": "c8", "text": "지식을 보여 주는 설계다"}
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "설명문 조직이 내용을 읽기 쉬운 순서로 배열하는 과정이며 이해 정도를 크게 바꾼다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p1", "start": 0, "end": 233}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "정의-특징, 원인-결과, 비교처럼 여러 조직 방식이 있고 대상의 성격에 맞게 골라야 한다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p2", "start": 0, "end": 227}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "문단 사이의 연결이 분명해야 정보 흐름이 자연스럽고 읽기 쉬워진다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p3", "start": 0, "end": 222}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "글을 쓴 뒤에도 중심, 예시, 순서, 문단 역할이 맞는지 다시 점검해야 설명문이 더 분명해진다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p4", "start": 0, "end": 194}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "설명문 조직이란 지식을 많이 아는 데서 그치지 않고 그것을 어떻게 질서 있게 보여 줄지까지 고르는 과정이라는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p5", "start": 0, "end": 196}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }
