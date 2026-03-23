@@ -4,6 +4,8 @@
   max-width: 800px;
   font-size: 15px;
   line-height: 1.7;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* 페이지 제목 */
@@ -116,6 +118,8 @@
 
 .ak-expl-text {
   color: #555;
+  word-break: break-word;
+  min-width: 0;
 }
 
 /* ─── 빈칸 채우기 ─── */
@@ -129,6 +133,8 @@
   color: #1a1a1a;
   white-space: pre-wrap;
   line-height: 1.8;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ─── 서술형/글쓰기 모범답안 ─── */
@@ -161,6 +167,8 @@
   line-height: 1.7;
   color: #1a1a1a;
   white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ─── 인쇄 버튼 ─── */
@@ -235,6 +243,10 @@
 @media (max-width: 480px) {
   .ak-compact {
     gap: 2px 12px;
+  }
+
+  .ak-compact-item {
+    white-space: normal;
   }
 
   .ak-body {

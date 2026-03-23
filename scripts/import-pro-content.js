@@ -265,11 +265,11 @@ async function main() {
       for (const q of test.questions) {
         const qId = newId('tq');
         await conn.execute(
-          `INSERT INTO test_questions (id, test_id, number, type, domain, points, correct_answer, choices_json, choice_explanations_json, passage, model_answer, essay_keywords_json, essay_rubric_json, created_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          `INSERT INTO test_questions (id, test_id, number, type, domain, points, correct_answer, choices_json, choice_explanations_json, passage, stem, model_answer, essay_keywords_json, essay_rubric_json, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [qId, paperId, q.number || 0, q.type || '객관식', q.domain || null, q.points || 0,
            q.correctAnswer || null, JSON.stringify(q.choices || []), JSON.stringify(q.choiceExplanations || {}), q.passage || null,
-           q.modelAnswer || null, q.essayKeywords ? JSON.stringify(q.essayKeywords) : null, q.essayRubric || null, now]
+           q.stem || null, q.modelAnswer || null, q.essayKeywords ? JSON.stringify(q.essayKeywords) : null, q.essayRubric || null, now]
         );
       }
 

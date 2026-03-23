@@ -895,6 +895,7 @@ mark.highlight {
   border-radius: 0;
   padding: 18px;
   border: 2px solid rgba(75, 61, 54, 0.35);
+  white-space: pre-wrap;
 }
 
 .reading-passage .worksheet-highlight {
@@ -928,6 +929,7 @@ mark.highlight {
 .reading-recall-stage {
   display: grid;
   gap: 12px;
+  position: relative;
 }
 
 .reading-recall-top {
@@ -1040,11 +1042,112 @@ mark.highlight {
   color: #a6530b;
 }
 
+/* 지문 보기 버튼 */
+.reading-recall-passage-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.7);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.reading-recall-passage-btn.active {
+  background: var(--engine-orange, #f07f1a);
+  color: #fff;
+  border-color: var(--engine-orange, #f07f1a);
+}
+
+/* 지문 오버레이 */
+.reading-recall-passage-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,252,245,0.97);
+  z-index: 10;
+  overflow-y: auto;
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+.reading-recall-passage-content {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #1f1b16;
+}
+.reading-recall-passage-content p {
+  margin-bottom: 12px;
+  text-indent: 1em;
+  white-space: pre-wrap;
+}
+.reading-recall-passage-warn {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e65100;
+  padding: 8px;
+}
+.reading-recall-passage-close {
+  display: block;
+  margin: 12px auto 0;
+  padding: 10px 32px;
+  border-radius: 8px;
+  border: none;
+  background: var(--engine-orange, #f07f1a);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(255,152,0,0.1);
+  border-radius: 6px;
+  margin-top: 12px;
+}
+
+/* 카드 잠금 시각 피드백 */
+.reading-recall-stage.locked .reading-recall-card {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.reading-recall-stage.locked .reading-recall-slot {
+  pointer-events: none;
+}
+
 .reading-confirm-stage {
+  position: relative;
   display: grid;
   grid-template-rows: 4fr 1fr;
   gap: 12px;
   height: min(70vh, 640px);
+}
+
+.confirm-ox-mark {
+  position: absolute;
+  inset: 0;
+  width: 200px;
+  height: 170px;
+  margin: auto;
+  z-index: 10;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
+  animation: confirmMarkPop 0.3s ease-out;
+}
+
+.confirm-ox-mark.correct {
+  background-image: var(--mark-correct-bg);
+}
+
+.confirm-ox-mark.wrong {
+  background-image: var(--mark-wrong-bg);
+}
+
+@keyframes confirmMarkPop {
+  0% { transform: scale(0.3); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .reading-confirm-passage {

@@ -103,7 +103,7 @@ function ProTestPage() {
           mode: active.mode || "print",
           omrDeadline: active.omrDeadline,
         });
-        startTimer(new Date(active.omrDeadline));
+        startTimer(parseDeadline(active.omrDeadline));
 
         if (active.mode === "online" || active.status === "online_solving") {
           // 온라인 모드 활성 세션 → 문항 로드 후 online_solving
@@ -125,9 +125,21 @@ function ProTestPage() {
     }
   };
 
+  // Jackson LocalDateTime 배열/문자열 파싱
+  const parseDeadline = (val) => {
+    if (!val) return null;
+    if (Array.isArray(val)) {
+      // Jackson 배열: [y, m, d, h, min, sec, nano?]
+      return new Date(val[0], (val[1] || 1) - 1, val[2] || 1, val[3] || 0, val[4] || 0, val[5] || 0);
+    }
+    const d = new Date(val);
+    return isNaN(d.getTime()) ? null : d;
+  };
+
   // 타이머 시작
   const startTimer = (deadline) => {
     if (timerRef.current) clearInterval(timerRef.current);
+    if (!deadline || isNaN(deadline.getTime())) return;
     const deadlineMs = deadline.getTime();
     const update = () => {
       const diff = Math.max(0, Math.floor((deadlineMs - Date.now()) / 1000));
@@ -160,7 +172,7 @@ function ProTestPage() {
         window.open(`${API_BASE}/v1/files/${res.pdfFileId}?token=${token}`, "_blank");
       }
 
-      startTimer(new Date(res.omrDeadline));
+      startTimer(parseDeadline(res.omrDeadline));
       setPhase("printed");
     } catch (err) {
       setError(err.message || "인쇄 세션 생성에 실패했습니다.");
@@ -173,7 +185,7 @@ function ProTestPage() {
     try {
       const res = await apiPost("/v1/pro/test/start", { chapterId, mode: "online" });
       setSession(res);
-      startTimer(new Date(res.omrDeadline));
+      startTimer(parseDeadline(res.omrDeadline));
 
       // 문항 로드
       const qs = await apiGet(`/v1/test-storage/${res.testId}/questions`);

@@ -72,7 +72,10 @@ data class TestQuestionStub(
     val number: Int,
     val type: String,
     val domain: String?,
-    val points: Int
+    val points: Int,
+    val passage: String? = null,
+    val content: String? = null,
+    val choices: List<String>? = null
 )
 
 // ── Student: OMR submit request ──

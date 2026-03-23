@@ -26,8 +26,20 @@ function OnlineTestRenderer({
   const totalQ = questions.length;
   const answeredCount = Object.keys(answers).length;
 
-  const q = questions[currentIdx];
-  if (!q) return null;
+  const raw = questions[currentIdx];
+  if (!raw) return null;
+
+  // content가 없고 passage만 있을 때 passage를 문제 텍스트로 사용
+  // passage에 <보기> 구분자가 있으면 그 전까지를 지문으로 분리
+  const q = (() => {
+    if (raw.content) return raw;
+    if (!raw.passage) return raw;
+    const marker = raw.passage.indexOf("<보기>");
+    if (marker > 0) {
+      return { ...raw, content: raw.passage.slice(0, marker).trim(), passage: null };
+    }
+    return { ...raw, content: raw.passage, passage: null };
+  })();
 
   const goTo = (idx) => {
     if (idx >= 0 && idx < totalQ) setCurrentIdx(idx);

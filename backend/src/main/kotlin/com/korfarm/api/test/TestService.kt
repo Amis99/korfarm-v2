@@ -139,7 +139,10 @@ class TestService(
                 number = q.number,
                 type = q.type,
                 domain = q.domain,
-                points = q.points
+                points = q.points,
+                passage = q.passage,
+                content = q.stem ?: q.passage,
+                choices = parseChoices(q.choicesJson)?.map { it.text }
             )
         }
     }

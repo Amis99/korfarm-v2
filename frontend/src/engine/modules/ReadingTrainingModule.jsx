@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import RichText from "../../utils/RichText";
 import useHighlightAnchor from "../shared/useHighlightAnchor";
 
 const DEFAULT_INTENSIVE_SCORING = {
@@ -147,7 +148,7 @@ const isIndexInRanges = (ranges, paragraphId, index) =>
   );
 
 function ReadingTrainingModule({ content }) {
-  const { adjustTime, finish, recordAnswer, seed, setSeed, start, status } = useEngine();
+  const { adjustTime, finish, recordAnswer, seed, setSeed, start, status, setTimeSpeed } = useEngine();
   const assetBase = import.meta.env.BASE_URL || "/";
   const resolveAssetUrl = (path) => {
     if (!path) return "";
@@ -172,6 +173,7 @@ function ReadingTrainingModule({ content }) {
   const [dragging, setDragging] = useState(null);
   const [dropTarget, setDropTarget] = useState(null);
   const [pointerDrag, setPointerDrag] = useState(null);
+  const [showPassage, setShowPassage] = useState(false);
   const [recallResult, setRecallResult] = useState(null);
   const [recallCorrectSlots, setRecallCorrectSlots] = useState([]);
 
@@ -363,6 +365,8 @@ function ReadingTrainingModule({ content }) {
   }, [stage, stageAvailability, finish]);
 
   const advanceStage = (currentStage) => {
+    setShowPassage(false);
+    setTimeSpeed(1);
     const currentIndex = stageOrder.indexOf(currentStage);
     for (let idx = currentIndex + 1; idx < stageOrder.length; idx += 1) {
       const nextStage = stageOrder[idx];
@@ -426,6 +430,7 @@ function ReadingTrainingModule({ content }) {
   };
 
   const handleDragStart = (id, from, slotIndex = null) => (event) => {
+    if (showPassage) return;
     event.dataTransfer.effectAllowed = "move";
     setDragging({ id, from, slotIndex });
   };
@@ -519,6 +524,7 @@ function ReadingTrainingModule({ content }) {
   };
 
   const handlePointerDown = (id, from, slotIndex = null) => (event) => {
+    if (showPassage) return;
     if (event.pointerType === "mouse") return;
     event.preventDefault();
     event.currentTarget.setPointerCapture?.(event.pointerId);
@@ -566,6 +572,7 @@ function ReadingTrainingModule({ content }) {
   }, [pointerDrag, dropTarget, topSlots, poolOrder]);
 
   const handleRecallSubmit = () => {
+    if (showPassage) return;
     const correctOrder = recallCorrectOrder;
     const penalty = recall.seedPenalty ?? recall.seedPool?.wrongPenaltySeed ?? 1;
     const isComplete = topSlots.length === correctOrder.length && topSlots.every(Boolean);
@@ -596,6 +603,14 @@ function ReadingTrainingModule({ content }) {
     });
   };
 
+  const handleTogglePassage = () => {
+    setShowPassage((prev) => {
+      const next = !prev;
+      setTimeSpeed(next ? 2 : 1);
+      return next;
+    });
+  };
+
   const handleConfirmClick = (paragraphId, index) => {
     if (!confirmQuestion) return;
     if (confirmLockRef.current) return;
@@ -620,6 +635,11 @@ function ReadingTrainingModule({ content }) {
       correct: isCorrectClick,
       rangeKey: matchedRange ? toRangeKey(matchedRange) : null,
     });
+    setRevealRanges(confirmAnswerRanges);
+    confirmLockRef.current = true;
+    if (confirmAdvanceRef.current) {
+      clearTimeout(confirmAdvanceRef.current);
+    }
     if (isCorrectClick) {
       if (usesAllMatches && matchedRange) {
         const key = toRangeKey(matchedRange);
@@ -629,27 +649,29 @@ function ReadingTrainingModule({ content }) {
         setConfirmedRangeKeys(nextKeys);
         setConfirmResult("correct");
         if (nextKeys.length >= confirmRangeKeys.length) {
-          advanceConfirm();
+          confirmAdvanceRef.current = setTimeout(() => {
+            confirmLockRef.current = false;
+            advanceConfirm();
+          }, 1000);
+        } else {
+          confirmLockRef.current = false;
+          setRevealRanges([]);
         }
         return;
       }
       setConfirmResult("correct");
-      advanceConfirm();
+      confirmAdvanceRef.current = setTimeout(() => {
+        confirmLockRef.current = false;
+        advanceConfirm();
+      }, 1000);
       return;
     }
     setConfirmResult("wrong");
-    if (revealOnWrong) {
-      setRevealRanges(confirmAnswerRanges);
-    }
     setAwaitingRevealClick(false);
-    confirmLockRef.current = true;
-    if (confirmAdvanceRef.current) {
-      clearTimeout(confirmAdvanceRef.current);
-    }
     confirmAdvanceRef.current = setTimeout(() => {
       confirmLockRef.current = false;
       advanceConfirm();
-    }, 900);
+    }, 1200);
   };
 
   if (status === "READY") {
@@ -676,7 +698,7 @@ function ReadingTrainingModule({ content }) {
                 <p key={paragraph.id}>
                   {ranges.length
                     ? renderHighlightedParagraph(paragraph.text, ranges)
-                    : paragraph.text}
+                    : <RichText>{paragraph.text}</RichText>}
                 </p>
               );
             })}
@@ -701,7 +723,7 @@ function ReadingTrainingModule({ content }) {
       ) : null}
 
       {stage === "RECALL" ? (
-        <div className="reading-recall-stage">
+        <div className={`reading-recall-stage ${showPassage ? "locked" : ""}`}>
           <div
             className="reading-recall-top"
             ref={recallTopRef}
@@ -793,6 +815,32 @@ function ReadingTrainingModule({ content }) {
               );
             })}
           </div>
+          <button
+            type="button"
+            className={`reading-recall-passage-btn ${showPassage ? "active" : ""}`}
+            onClick={handleTogglePassage}
+          >
+            {showPassage ? "지문 닫기" : "지문 보기"}
+          </button>
+          {showPassage && (
+            <div className="reading-recall-passage-overlay">
+              <div className="reading-recall-passage-content">
+                {(passage.paragraphs || []).map((p) => (
+                  <p key={p.id}><RichText>{p.text}</RichText></p>
+                ))}
+              </div>
+              <div className="reading-recall-passage-warn">
+                ⏱ 지문을 보는 동안 시간이 2배로 흐릅니다
+              </div>
+              <button
+                type="button"
+                className="reading-recall-passage-close"
+                onClick={handleTogglePassage}
+              >
+                지문 닫기
+              </button>
+            </div>
+          )}
           <div className="reading-recall-footer">
             <span>Seeds: {seed}</span>
             <button type="button" onClick={handleRecallSubmit}>
@@ -809,6 +857,9 @@ function ReadingTrainingModule({ content }) {
 
       {stage === "CONFIRM" ? (
         <div className="reading-confirm-stage">
+          {confirmResult ? (
+            <div className={`confirm-ox-mark ${confirmResult}`} />
+          ) : null}
           <div className="reading-confirm-passage">
             {(confirmPassage.paragraphs || []).map((paragraph) => {
               const ranges = activeConfirmRanges.filter(

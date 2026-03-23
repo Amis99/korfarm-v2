@@ -122,6 +122,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const [seed, setSeed] = useState(content?.seedReward?.count ?? 3);
   const [seedExhausted, setSeedExhausted] = useState(false);
   const [startedAt, setStartedAt] = useState(null);
+  const [timeSpeed, setTimeSpeed] = useState(1);
   const intervalRef = useRef(null);
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(0);
@@ -457,9 +458,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
         }
         return prev - 1;
       });
-    }, 1000);
+    }, 1000 / timeSpeed);
     return () => clearInterval(intervalRef.current);
-  }, [status]);
+  }, [status, timeSpeed]);
 
   useEffect(() => {
     if (!timePulse) return undefined;
@@ -513,8 +514,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       seedExhausted,
       resetRound,
       setPageProgress,
+      setTimeSpeed,
     }),
-    [status, timeLeft, timeLimit, seed, seedExhausted]
+    [status, timeLeft, timeLimit, seed, seedExhausted, timeSpeed]
   );
 
   if (!Module) {
