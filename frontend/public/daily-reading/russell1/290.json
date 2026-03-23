@@ -40,15 +40,456 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 62}]},
+          "question": {
+            "prompt": "문단을 여는 문장은 과실을 어떤 법학 개념으로 설명하나요?",
+            "choices": [
+              {"id": "A", "text": "주의를 기울였더라면 피할 수 있었던 손해를 부주의 때문에 일으킨 상태를 뜻하는 법학 개념으로 설명한다"},
+              {"id": "B", "text": "고의로 해를 끼친 행위만을 뜻하는 법학 개념으로 설명한다"},
+              {"id": "C", "text": "결과와 상관없는 우연만을 뜻하는 개념으로 설명한다"},
+              {"id": "D", "text": "사람 기분을 위로하는 화법 개념으로 설명한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 64, "end": 112}]},
+          "question": {
+            "prompt": "이 문장은 과실을 고의와 어떻게 구별하나요?",
+            "choices": [
+              {"id": "A", "text": "일부러 해를 끼치려는 고의와 달리, 조심하지 못해 문제가 생긴 경우로 구별한다"},
+              {"id": "B", "text": "과실과 고의가 늘 같은 뜻이라고 구별한다"},
+              {"id": "C", "text": "과실이 더 강한 의도를 가진 경우라고 구별한다"},
+              {"id": "D", "text": "고의가 늘 책임이 없다고 구별한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 114, "end": 147}]},
+          "question": {
+            "prompt": "앞의 구별과 이어서, 이 문장은 고의가 아니어도 무엇을 바로 지워 주지는 않는다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "책임이 언제나 사라지는 것은 아니라고 한다"},
+              {"id": "B", "text": "손해가 언제나 커지는 것은 아니라고 한다"},
+              {"id": "C", "text": "주의 의무가 없어지는 것은 아니라고 한다"},
+              {"id": "D", "text": "법이 사라지는 것은 아니라고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 149, "end": 214}]},
+          "question": {
+            "prompt": "이 문장은 왜 부주의가 책임 문제로 이어질 수 있다고 설명하나요?",
+            "choices": [
+              {"id": "A", "text": "법이 일정한 주의 의무를 요구하고, 그 의무를 지키지 않아 손해가 생기면 책임을 물을 수 있기 때문이라고 설명한다"},
+              {"id": "B", "text": "법이 모든 실수를 그냥 넘어가기 때문이라고 설명한다"},
+              {"id": "C", "text": "주의 의무는 손해와 무관하기 때문이라고 설명한다"},
+              {"id": "D", "text": "책임은 오직 고의에만 생기기 때문이라고 설명한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 216, "end": 243}]},
+          "question": {
+            "prompt": "이 마지막 문장은 과실과 책임을 왜 함께 이해해야 한다고 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "부주의와 그 결과가 법적으로 이어지는 관계를 함께 보아야 하기 때문이라고 정리한다"},
+              {"id": "B", "text": "두 개념이 서로 완전히 무관하기 때문이라고 정리한다"},
+              {"id": "C", "text": "과실만 알면 책임은 필요 없기 때문이라고 정리한다"},
+              {"id": "D", "text": "책임만 알면 과실은 필요 없기 때문이라고 정리한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 243}]},
+          "question": {
+            "prompt": "첫 문단 전체는 과실과 책임을 어떤 법적 연결의 출발점으로 묶어 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "부주의가 어떤 법적 책임으로 이어질 수 있는지 읽는 출발점으로 묶어 보여 준다"},
+              {"id": "B", "text": "실수는 언제나 법과 무관하다는 출발점으로 묶어 보여 준다"},
+              {"id": "C", "text": "고의만 법적 문제가 된다는 출발점으로 묶어 보여 준다"},
+              {"id": "D", "text": "책임은 느낌으로 정한다는 출발점으로 묶어 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 75}]},
+          "question": {
+            "prompt": "둘째 문단의 사례는 어떤 상황을 과실 문제로 보게 하나요?",
+            "choices": [
+              {"id": "A", "text": "자전거를 타며 앞을 살피지 않아 다른 사람을 다치게 한 상황을 과실 문제로 보게 한다"},
+              {"id": "B", "text": "일부러 충돌하려고 달린 상황만을 과실 문제로 보게 한다"},
+              {"id": "C", "text": "아무 일도 일어나지 않은 상황을 과실 문제로 보게 한다"},
+              {"id": "D", "text": "책을 읽는 장면을 과실 문제로 보게 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 77, "end": 119}]},
+          "question": {
+            "prompt": "이 문장은 자전거를 타는 사람에게 어떤 의무가 있다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "주위를 살피고 안전하게 운전할 의무가 있다고 한다"},
+              {"id": "B", "text": "빨리 달리기만 하면 되는 의무가 있다고 한다"},
+              {"id": "C", "text": "상대를 피하지 않아도 되는 의무가 있다고 한다"},
+              {"id": "D", "text": "아무 의무도 없다고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 121, "end": 186}]},
+          "question": {
+            "prompt": "앞의 의무 설명과 이어서, 이 문장은 그 의무를 다하지 않으면 어떤 결과가 생길 수 있다고 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "치료비나 손해를 일정 부분 배상해야 할 책임이 생길 수 있다고 보여 준다"},
+              {"id": "B", "text": "오히려 보상을 받게 된다고 보여 준다"},
+              {"id": "C", "text": "책임과 손해가 완전히 사라진다고 보여 준다"},
+              {"id": "D", "text": "항상 형벌만 받는다고 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 188, "end": 218}]},
+          "question": {
+            "prompt": "이 마지막 문장은 과실이 어떤 관계를 따지게 한다고 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "부주의와 손해 사이의 관계를 따지게 한다고 정리한다"},
+              {"id": "B", "text": "칭찬과 기분 사이의 관계를 따지게 한다고 정리한다"},
+              {"id": "C", "text": "운과 점수 사이의 관계를 따지게 한다고 정리한다"},
+              {"id": "D", "text": "날씨와 계절 사이의 관계를 따지게 한다고 정리한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 218}]},
+          "question": {
+            "prompt": "둘째 문단 전체는 자전거 사례를 어떤 책임 판단의 흐름으로 묶어 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "주의 의무가 있었는지, 그 의무를 어겼는지, 그 결과 손해 배상 책임이 생기는지를 보는 흐름으로 묶어 보여 준다"},
+              {"id": "B", "text": "실수는 모두 우연이라 책임이 없다는 흐름으로 묶어 보여 준다"},
+              {"id": "C", "text": "고의가 아니면 의무도 없다는 흐름으로 묶어 보여 준다"},
+              {"id": "D", "text": "사례보다 기분이 먼저라는 흐름으로 묶어 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 53}]},
+          "question": {
+            "prompt": "셋째 문단을 여는 문장은 과실 판단에서 무엇을 살핀다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "그 사람이 당시 상황에서 어느 정도 주의를 기울였어야 했는지를 살핀다고 한다"},
+              {"id": "B", "text": "사람의 기분이 좋았는지만 살핀다고 한다"},
+              {"id": "C", "text": "손해가 컸는지만 살핀다고 한다"},
+              {"id": "D", "text": "이름과 나이만 살핀다고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 55, "end": 133}]},
+          "question": {
+            "prompt": "이 문장은 왜 과실 판단에서 상황이 중요하다고 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "어두운 길이나 위험한 물건처럼 상황에 따라 요구되는 주의의 정도가 달라질 수 있다고 보여 주기 때문이다"},
+              {"id": "B", "text": "상황과 상관없이 늘 같은 판단만 한다고 보여 주기 때문이다"},
+              {"id": "C", "text": "주의의 정도는 아예 따질 필요 없다고 보여 주기 때문이다"},
+              {"id": "D", "text": "결과만 보면 충분하다고 보여 주기 때문이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 135, "end": 186}]},
+          "question": {
+            "prompt": "앞의 상황 설명과 이어서, 이 문장은 법학이 결과를 어떻게 읽는다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "결과만 보지 않고 어떤 부주의에서 생겼는지 함께 따져 읽는다고 한다"},
+              {"id": "B", "text": "결과만 보고 바로 끝낸다고 한다"},
+              {"id": "C", "text": "사람 성격만 보고 판단한다고 한다"},
+              {"id": "D", "text": "피해 규모만 보고 판단한다고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 188, "end": 220}]},
+          "question": {
+            "prompt": "이 마지막 문장은 같은 사고라도 무엇이 달라질 수 있다고 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "상황이 다르면 과실의 정도도 달라질 수 있다고 정리한다"},
+              {"id": "B", "text": "사람 이름이 다르면 법이 달라진다고 정리한다"},
+              {"id": "C", "text": "시간만 지나면 책임이 사라진다고 정리한다"},
+              {"id": "D", "text": "사고는 모두 같은 정도라고 정리한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 220}]},
+          "question": {
+            "prompt": "셋째 문단 전체는 과실을 어떤 상황 판단의 문제로 묶어 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "당시 상황에서 요구된 주의의 정도와 실제 부주의를 함께 따지는 상황 판단의 문제로 묶어 보여 준다"},
+              {"id": "B", "text": "결과만 세는 계산의 문제로 묶어 보여 준다"},
+              {"id": "C", "text": "말솜씨만 보는 화법 문제로 묶어 보여 준다"},
+              {"id": "D", "text": "사람 기분만 보는 문제로 묶어 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 45}]},
+          "question": {
+            "prompt": "넷째 문단을 여는 문장은 책임을 어떤 문제와 연결하나요?",
+            "choices": [
+              {"id": "A", "text": "손해가 났을 때 그 결과를 누가 감당해야 하는지 정하는 문제와 연결한다"},
+              {"id": "B", "text": "칭찬을 누가 받을지 정하는 문제와 연결한다"},
+              {"id": "C", "text": "점수를 누가 매길지 정하는 문제와 연결한다"},
+              {"id": "D", "text": "날씨를 누가 바꿀지 정하는 문제와 연결한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 47, "end": 89}]},
+          "question": {
+            "prompt": "이 문장은 과실이 인정되면 어떤 조치가 따를 수 있다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "손해 배상이나 원상회복에 가까운 조치가 따를 수 있다고 한다"},
+              {"id": "B", "text": "언제나 아무 조치도 없다고 한다"},
+              {"id": "C", "text": "칭찬부터 준다고 한다"},
+              {"id": "D", "text": "과실이 더 커진다고만 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 91, "end": 162}]},
+          "question": {
+            "prompt": "이 문장은 책임 범위가 달라질 수 있는 까닭을 어떻게 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "피해자에게도 잘못이 있거나 특별한 사정이 있으면 책임이 나뉘거나 범위가 달라질 수 있다고 보여 준다"},
+              {"id": "B", "text": "책임은 언제나 한 사람에게만 간다고 보여 준다"},
+              {"id": "C", "text": "피해자 사정은 전혀 보지 않는다고 보여 준다"},
+              {"id": "D", "text": "특별한 사정은 책임을 더 크게만 만든다고 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 164, "end": 217}]},
+          "question": {
+            "prompt": "이 마지막 문장은 법학이 과실과 무엇을 함께 본다고 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "그 과실이 손해와 어떻게 연결되는지도 함께 본다고 정리한다"},
+              {"id": "B", "text": "과실의 이름만 함께 본다고 정리한다"},
+              {"id": "C", "text": "결과와 무관하다고 정리한다"},
+              {"id": "D", "text": "느낌만 함께 본다고 정리한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 217}]},
+          "question": {
+            "prompt": "넷째 문단 전체는 책임을 어떤 결과 감당의 판단으로 묶어 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "과실이 낳은 손해를 누가 어느 범위까지 감당할지를 따지는 결과 감당의 판단으로 묶어 보여 준다"},
+              {"id": "B", "text": "손해와 무관한 기분 판단으로 묶어 보여 준다"},
+              {"id": "C", "text": "말하기 태도 판단으로 묶어 보여 준다"},
+              {"id": "D", "text": "이름 분류 판단으로 묶어 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 49}]},
+          "question": {
+            "prompt": "마지막 문단을 여는 문장은 과실과 책임을 어떤 핵심 개념으로 다시 부르나요?",
+            "choices": [
+              {"id": "A", "text": "부주의한 행동이 법적으로 어떤 결과를 낳는지 보여 주는 핵심 개념으로 다시 부른다"},
+              {"id": "B", "text": "사고와 무관한 예절 개념으로 다시 부른다"},
+              {"id": "C", "text": "문장 길이를 다루는 개념으로 다시 부른다"},
+              {"id": "D", "text": "감상문 쓰기 개념으로 다시 부른다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 51, "end": 109}]},
+          "question": {
+            "prompt": "이 문장은 과실과 책임을 각각 어떻게 다시 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "과실은 주의 의무를 다하지 못한 상태이고, 책임은 그 손해를 감당해야 하는 법적 효과라고 다시 정리한다"},
+              {"id": "B", "text": "과실은 결과이고 책임은 원인이라고 다시 정리한다"},
+              {"id": "C", "text": "과실과 책임이 늘 같은 뜻이라고 다시 정리한다"},
+              {"id": "D", "text": "과실은 감정이고 책임은 기분이라고 다시 정리한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 111, "end": 190}]},
+          "question": {
+            "prompt": "앞의 정의를 알고 나면, 이 문장은 사고를 어떻게 더 차분히 보게 하나요?",
+            "choices": [
+              {"id": "A", "text": "사고나 손해를 단순한 불운으로만 보지 않고 어떤 주의 의무가 깨졌는지까지 보게 한다"},
+              {"id": "B", "text": "사고는 언제나 우연으로만 보게 한다"},
+              {"id": "C", "text": "결과만 보고 원인은 보지 않게 한다"},
+              {"id": "D", "text": "책임이 없다고만 보게 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s25",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 192, "end": 235}]},
+          "question": {
+            "prompt": "이 마지막 문장은 법학에서 무엇도 중요한 판단 기준으로 다룬다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "의도만이 아니라 부주의의 문제도 중요한 판단 기준으로 다룬다고 한다"},
+              {"id": "B", "text": "결과보다 기분만 중요한 판단 기준으로 다룬다고 한다"},
+              {"id": "C", "text": "책임과 무관한 말투만 중요한 판단 기준으로 다룬다고 한다"},
+              {"id": "D", "text": "오직 고의만 판단 기준으로 다룬다고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s26",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 235}]},
+          "question": {
+            "prompt": "마지막 문단 전체는 과실과 책임을 어떤 법적 읽기의 기준으로 묶어 보여 주나요?",
+            "choices": [
+              {"id": "A", "text": "부주의가 어떤 손해와 책임으로 이어지는지 차근차근 따지는 법적 읽기의 기준으로 묶어 보여 준다"},
+              {"id": "B", "text": "사고를 모두 운으로만 보는 읽기의 기준으로 묶어 보여 준다"},
+              {"id": "C", "text": "의도만 보면 끝난다는 읽기의 기준으로 묶어 보여 준다"},
+              {"id": "D", "text": "책임을 전혀 묻지 않는 읽기의 기준으로 묶어 보여 준다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
+      "cards": [
+        {"id": "c1", "text": "과실은 부주의의 문제"},
+        {"id": "c2", "text": "고의와 과실은 다르다"},
+        {"id": "c3", "text": "주의 의무가 책임을 낳는다"},
+        {"id": "c4", "text": "사고는 부주의와 연결된다"},
+        {"id": "c5", "text": "상황 따라 과실도 달라진다"},
+        {"id": "c6", "text": "책임은 손해 감당 문제"},
+        {"id": "c7", "text": "피해자 사정도 함께 본다"},
+        {"id": "c8", "text": "부주의도 법 판단 기준"}
+      ],
       "correctOrder": [],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "과실은 고의와 달리 부주의 때문에 손해를 일으킨 상태를 뜻하며, 법은 주의 의무를 지키지 않아 손해가 생기면 책임을 물을 수 있다는 내용은 어디에 드러나나요?",
+          "answerRanges": [{"paragraphId": "p1", "start": 0, "end": 243}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "자전거 사례에서 앞을 살피고 안전하게 운전할 의무를 다하지 않아 사고가 나면, 부주의와 손해의 연결 속에서 배상 책임이 생길 수 있다는 내용은 어디에 드러나나요?",
+          "answerRanges": [{"paragraphId": "p2", "start": 0, "end": 218}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "과실 판단에서는 결과만 보는 것이 아니라 당시 상황에서 어느 정도 주의했어야 했는지와 그 부주의의 정도를 함께 따져야 한다는 내용은 어디에 드러나나요?",
+          "answerRanges": [{"paragraphId": "p3", "start": 0, "end": 220}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "책임은 손해를 누가 감당할지 정하는 문제이며, 피해자의 잘못이나 특별한 사정에 따라 책임 범위가 달라질 수 있다는 내용은 어디에 드러나나요?",
+          "answerRanges": [{"paragraphId": "p4", "start": 0, "end": 217}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "과실과 책임을 함께 이해하면 사고를 단순한 불운으로만 보지 않고, 어떤 주의 의무가 깨졌고 그 결과를 누가 감당해야 하는지까지 차분히 읽게 된다는 내용은 어디에 드러나나요?",
+          "answerRanges": [{"paragraphId": "p5", "start": 0, "end": 235}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }
