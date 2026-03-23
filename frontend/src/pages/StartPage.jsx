@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, TOKEN_KEY } from "../utils/api";
+import { apiGet, TOKEN_KEY, normalizeInventoryKeys } from "../utils/api";
 import HarvestCraftModal from "../components/HarvestCraftModal";
 import StudyPlanReminderModal from "../components/StudyPlanReminderModal";
 import SearchBar from "../components/SearchBar";
@@ -107,7 +107,7 @@ function StartPage() {
       .then(setChildProfile)
       .catch(() => setChildProfile(null));
     apiGet(`/v1/parents/children/${studentId}/inventory`)
-      .then(setChildInventory)
+      .then((d) => setChildInventory(normalizeInventoryKeys(d)))
       .catch(() => setChildInventory(null));
   }, [isParent, selectedChild]);
 
@@ -115,7 +115,7 @@ function StartPage() {
     if (!isLoggedIn) return;
     // 부모가 아닌 경우에만 자신의 인벤토리/구독 조회
     if (!isParent) {
-      apiGet("/v1/inventory").then(setInventory).catch((e) => console.error(e));
+      apiGet("/v1/inventory").then((d) => setInventory(normalizeInventoryKeys(d))).catch((e) => console.error(e));
       apiGet("/v1/subscription")
         .then((sub) => {
           const st = sub?.status;
@@ -840,7 +840,7 @@ function StartPage() {
         open={showCraftModal}
         onClose={() => setShowCraftModal(false)}
         onCrafted={(data) => {
-          if (data?.inventory) setInventory(data.inventory);
+          if (data?.inventory) setInventory(normalizeInventoryKeys(data.inventory));
         }}
       />
 

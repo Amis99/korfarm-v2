@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { apiGet, apiPost } from "../utils/api";
+import { apiGet, apiPost, normalizeInventoryKeys } from "../utils/api";
 
 const SEED_TYPES = [
   { key: "seed_wheat", cropKey: "crop_wheat", label: "밀", emoji: "🌾" },
@@ -28,7 +28,7 @@ function HarvestCraftModal({ open, onClose, onCrafted }) {
     setResult(null);
     setError(null);
     apiGet("/v1/inventory")
-      .then(setInventory)
+      .then((d) => setInventory(normalizeInventoryKeys(d)))
       .catch(() => setInventory(null));
   }, [open]);
 
@@ -69,7 +69,7 @@ function HarvestCraftModal({ open, onClose, onCrafted }) {
       });
       setResult({ seedSpent: seedCost, cropGain, label: current.label, emoji: current.emoji });
       if (data?.inventory) {
-        setInventory(data.inventory);
+        setInventory(normalizeInventoryKeys(data.inventory));
         if (onCrafted) onCrafted(data);
       }
     } catch (e) {

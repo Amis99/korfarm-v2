@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { apiGet, apiPost, WS_BASE, camelize } from "../utils/api";
+import { apiGet, apiPost, WS_BASE, camelize, normalizeInventoryKeys } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/duel.css";
 
@@ -110,7 +110,7 @@ function DuelWaitingRoomPage() {
     // 인벤토리 조회 후 모달 표시
     apiGet("/v1/inventory")
       .then((inv) => {
-        setMyInventory(inv);
+        setMyInventory(normalizeInventoryKeys(inv));
         setSelectedSeedType(null);
         setShowSeedModal(true);
       })
