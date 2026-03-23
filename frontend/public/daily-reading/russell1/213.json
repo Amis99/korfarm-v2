@@ -40,15 +40,396 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 64}]},
+          "question": {
+            "prompt": "이 문장은 예·인과 무위를 어떤 성격의 개념으로 소개하나요?",
+            "choices": [
+              {"id": "A", "text": "삶의 태도와 실천 방식까지 함께 보게 하는 핵심 개념으로 소개한다"},
+              {"id": "B", "text": "고전 낱말의 사전 뜻만 외우게 하는 암기 개념으로 소개한다"},
+              {"id": "C", "text": "서로 상관없이 따로 배워야 하는 낱말 묶음으로 소개한다"},
+              {"id": "D", "text": "동양철학 바깥의 정치 제도를 설명하는 용어로 소개한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 64, "end": 143}]},
+          "question": {
+            "prompt": "방금 제시한 관점에 비추어, 예와 인의 관계를 어떻게 읽어야 한다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "예는 겉의 질서, 인은 그 질서를 떠받치는 마음이라는 관계로 읽게 한다"},
+              {"id": "B", "text": "예와 인은 뜻이 완전히 같아 구분할 필요가 없다고 읽게 한다"},
+              {"id": "C", "text": "예는 마음이고 인은 겉행동이라는 반대 관계로 읽게 한다"},
+              {"id": "D", "text": "예와 인은 유교 밖 사상에서만 쓰이는 개념으로 읽게 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 143, "end": 196}]},
+          "question": {
+            "prompt": "앞의 예시를 묶어 보면, 이 문장이 강조하는 동양철학 개념의 특징은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "개념들이 따로 흩어지기보다 서로 기대어 뜻을 이룬다는 점이다"},
+              {"id": "B", "text": "개념 하나만 알면 다른 낱말은 모두 몰라도 된다는 점이다"},
+              {"id": "C", "text": "개념보다 시대 배경만 알면 충분하다는 점이다"},
+              {"id": "D", "text": "동양철학은 같은 낱말을 되풀이할 뿐 차이가 없다는 점이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 196}]},
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "예·인 같은 개념은 삶의 태도와 연결되고 서로의 관계 속에서 읽혀야 한다"},
+              {"id": "B", "text": "동양철학의 개념은 모두 뜻이 같아 하나만 익혀도 충분하다"},
+              {"id": "C", "text": "유교 자료는 질서만 설명하고 마음은 다루지 않는다"},
+              {"id": "D", "text": "개념을 읽을 때는 사례를 빼고 낱말 풀이만 남겨야 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 37}]},
+          "question": {
+            "prompt": "앞 문단에서 개념 사이 관계를 보았다면, 이 문장은 무엇을 더 살피라고 하나요?",
+            "choices": [
+              {"id": "A", "text": "개념이 쓰인 상황과 적용 맥락까지 함께 보라고 한다"},
+              {"id": "B", "text": "낱말의 한자 뜻만 따로 떼어 외우라고 한다"},
+              {"id": "C", "text": "개념이 등장한 횟수만 세어 보라고 한다"},
+              {"id": "D", "text": "사상가의 이름을 개념보다 앞세워 보라고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 37, "end": 88}]},
+          "question": {
+            "prompt": "공자가 배움과 실천을 함께 말한 이유를 가장 바르게 풀어쓴 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "아는 것과 행동하는 것을 떼어 놓지 않았기 때문이다"},
+              {"id": "B", "text": "배움은 중요하지만 실천은 필요 없다고 보았기 때문이다"},
+              {"id": "C", "text": "행동만 중요하고 배움은 뒤로 미루어야 한다고 보았기 때문이다"},
+              {"id": "D", "text": "배움과 실천은 전혀 다른 사람에게 맡겨야 한다고 보았기 때문이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 88, "end": 169}]},
+          "question": {
+            "prompt": "맹자의 의로움 설명을 앞 문장과 연결해 보면, 무엇을 경계하는 뜻이 더해지나요?",
+            "choices": [
+              {"id": "A", "text": "이익만 좇는 태도를 경계하며 사람다운 판단 기준을 세우는 뜻이 더해진다"},
+              {"id": "B", "text": "올바른 말을 피하고 침묵해야 한다는 뜻이 더해진다"},
+              {"id": "C", "text": "배움보다 이익을 앞세우라는 뜻이 더해진다"},
+              {"id": "D", "text": "의로움은 상황과 상관없이 장식용 말이라는 뜻이 더해진다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 169, "end": 213}]},
+          "question": {
+            "prompt": "이 문장은 앞의 공자와 맹자 예를 묶어 어떤 해석 방향으로 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "동양철학 자료는 개념을 생활의 태도 속에 놓고 읽어야 한다고 정리한다"},
+              {"id": "B", "text": "동양철학 자료는 실생활과 떼어 낱말 뜻만 읽어야 한다고 정리한다"},
+              {"id": "C", "text": "유교 자료는 맹자의 말만 중심에 두어야 한다고 정리한다"},
+              {"id": "D", "text": "개념보다 등장 인물의 감정만 읽어야 한다고 정리한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 213}]},
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "동양철학 개념은 실제 삶의 태도와 판단 기준 속에서 읽어야 뜻이 살아난다"},
+              {"id": "B", "text": "동양철학 개념은 서로 연결되지 않으므로 사례를 볼 필요가 없다"},
+              {"id": "C", "text": "공자와 맹자의 차이는 없으므로 한 사람만 읽어도 충분하다"},
+              {"id": "D", "text": "배움과 의로움은 생활과 관계없는 관념적 말에 가깝다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 31}]},
+          "question": {
+            "prompt": "이 문장은 앞서 살핀 유교 쪽 설명에 이어 무엇을 더 보게 하나요?",
+            "choices": [
+              {"id": "A", "text": "노자와 장자의 자료도 같은 읽기 기준으로 보게 한다"},
+              {"id": "B", "text": "유교와 도가는 전혀 비교할 수 없다고 보게 한다"},
+              {"id": "C", "text": "이제부터는 개념보다 인물 일화만 읽게 한다"},
+              {"id": "D", "text": "동양철학을 유교 하나로만 좁혀 읽게 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 31, "end": 110}]},
+          "question": {
+            "prompt": "무위의 뜻을 가장 바르게 바꾸어 말한 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "억지로 꾸미지 않고 사물의 이치에 맞게 따르는 태도"},
+              {"id": "B", "text": "아무 일도 하지 않고 움직이지 않는 태도"},
+              {"id": "C", "text": "남보다 앞서 결과를 독차지하려는 태도"},
+              {"id": "D", "text": "질서를 만들기 위해 규칙만 늘리는 태도"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 110, "end": 176}]},
+          "question": {
+            "prompt": "방금 무위의 뜻을 바로잡았으니, 이 문장은 무엇까지 함께 따지라고 하나요?",
+            "choices": [
+              {"id": "A", "text": "겉뜻을 넘어서 그 말이 겨누는 삶의 방식까지 함께 따지라고 한다"},
+              {"id": "B", "text": "개념의 소리와 운율만 따지라고 한다"},
+              {"id": "C", "text": "다른 사상과 비교하지 말고 하나만 보라고 한다"},
+              {"id": "D", "text": "삶의 문제는 빼고 낱말 풀이만 남기라고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 176, "end": 206}]},
+          "question": {
+            "prompt": "마지막 문장이 앞의 설명 위에 덧붙이는 효과로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "서로 다른 사상의 차이를 더 또렷하게 드러낸다고 정리한다"},
+              {"id": "B", "text": "도가와 유교의 차이는 결국 없다고 정리한다"},
+              {"id": "C", "text": "무위는 예와 인의 하위 개념이라고 정리한다"},
+              {"id": "D", "text": "개념 해석보다 암기가 더 중요하다고 정리한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 206}]},
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "무위는 겉뜻이 아니라 삶의 방식 속에서 해석해야 하며, 그래야 사상 차이도 보인다"},
+              {"id": "B", "text": "무위는 아무것도 하지 않는 뜻으로만 외워 두면 충분하다"},
+              {"id": "C", "text": "도가는 유교와 같으므로 비교할 필요가 없다"},
+              {"id": "D", "text": "동양철학 개념은 사상 차이를 지우기 위해 쓰인다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 51}]},
+          "question": {
+            "prompt": "이 문장이 자료 해석에서 새롭게 짚는 주의점은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "같은 개념도 글마다 강조되는 무게가 조금씩 다를 수 있다는 점"},
+              {"id": "B", "text": "같은 개념은 언제나 같은 뜻과 비중으로만 쓰인다는 점"},
+              {"id": "C", "text": "글마다 개념을 다르게 읽으면 안 된다는 점"},
+              {"id": "D", "text": "자료 해석은 개념보다 문장의 길이가 더 중요하다는 점"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 51, "end": 109}]},
+          "question": {
+            "prompt": "이 문장이 보여 주는 강조점의 차이로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "어떤 글은 질서, 어떤 글은 자기 수양의 태도를 더 앞세울 수 있다"},
+              {"id": "B", "text": "모든 글은 질서만 강조하고 자기 수양은 다루지 않는다"},
+              {"id": "C", "text": "자기 수양만 중요하고 질서는 중요하지 않다고 말한다"},
+              {"id": "D", "text": "강조점의 차이는 자료 해석과 관계없다고 말한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 109, "end": 195}]},
+          "question": {
+            "prompt": "앞의 차이를 살펴보면, 이 문장은 동양철학 자료를 어떤 글로 보게 하나요?",
+            "choices": [
+              {"id": "A", "text": "같은 개념을 서로 다른 문제 상황에 맞추어 펼쳐 보이는 글로 보게 한다"},
+              {"id": "B", "text": "비슷한 말을 뜻 없이 되풀이하는 글로 보게 한다"},
+              {"id": "C", "text": "문제 상황과 무관한 추상적 낱말 모음으로 보게 한다"},
+              {"id": "D", "text": "한 가지 개념만 고집하는 닫힌 글로 보게 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 195}]},
+          "question": {
+            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "같은 개념도 글마다 강조점이 달라지므로 문제 상황과 함께 읽어야 한다"},
+              {"id": "B", "text": "개념은 글마다 뜻이 달라질 수 없으므로 하나로만 읽어야 한다"},
+              {"id": "C", "text": "동양철학 자료는 문제 상황이 아니라 문체만 살피면 충분하다"},
+              {"id": "D", "text": "질서와 수양은 서로 대립하므로 함께 다룰 수 없다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 44}]},
+          "question": {
+            "prompt": "이 문장은 예·인과 무위를 함께 읽는 일을 어떻게 묶어 부르나요?",
+            "choices": [
+              {"id": "A", "text": "개념과 삶의 관계를 함께 보는 읽기라고 부른다"},
+              {"id": "B", "text": "낱말 뜻만 따로 떼어 외우는 읽기라고 부른다"},
+              {"id": "C", "text": "서로 다른 사상을 섞어 없애는 읽기라고 부른다"},
+              {"id": "D", "text": "생활과는 관계없이 고전만 모으는 읽기라고 부른다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 44, "end": 115}]},
+          "question": {
+            "prompt": "앞 문장에서 삶과의 관계를 보았다면, 이번 문장은 무엇까지 더 살피게 하나요?",
+            "choices": [
+              {"id": "A", "text": "개념이 어떤 태도와 판단을 이끌어 내는지까지 살피게 한다"},
+              {"id": "B", "text": "용어를 뜻풀이로만 끝내고 더 넓히지 않게 한다"},
+              {"id": "C", "text": "태도와 판단은 모두 지우고 문체만 보게 한다"},
+              {"id": "D", "text": "실천보다 낱말의 발음 차이만 따지게 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 115, "end": 164}]},
+          "question": {
+            "prompt": "마지막 문장이 동양철학 읽기를 훈련으로 보는 이유로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "오래된 말을 오늘의 삶과 연결해 해석하게 하기 때문이다"},
+              {"id": "B", "text": "옛말을 현재와 끊어 두고 박제로 만들기 때문이다"},
+              {"id": "C", "text": "고전을 외우기만 해도 해석이 끝나기 때문이다"},
+              {"id": "D", "text": "삶의 문제보다 학자 이름을 기억하게 하기 때문이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 164}]},
+          "question": {
+            "prompt": "마지막 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "동양철학 읽기는 개념이 이끄는 삶의 태도와 판단을 오늘과 연결해 보는 훈련이다"},
+              {"id": "B", "text": "동양철학 읽기는 낱말 풀이만 정확하면 더 볼 것이 없는 공부이다"},
+              {"id": "C", "text": "예·인과 무위는 서로 달라 함께 읽을 수 없는 개념이다"},
+              {"id": "D", "text": "동양철학은 오늘의 삶과 연결할수록 오히려 뜻이 흐려진다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {"id": "c1", "text": "예와 인은 함께 읽힌다"},
+        {"id": "c2", "text": "개념은 상황 속에서 읽는다"},
+        {"id": "c3", "text": "배움과 실천은 이어진다"},
+        {"id": "c4", "text": "의는 이익 경계를 품는다"},
+        {"id": "c5", "text": "무위는 억지 없는 태도다"},
+        {"id": "c6", "text": "글마다 강조점이 달라진다"},
+        {"id": "c7", "text": "문제 상황과 함께 해석한다"},
+        {"id": "c8", "text": "삶과 연결해 읽는 훈련이다"}
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "예와 인이 겉으로 드러난 질서와 그 질서를 떠받치는 마음의 관계로 설명되는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p1", "start": 64, "end": 143}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "배움과 실천, 의로움과 이익의 대비를 통해 개념을 생활 태도 속에서 읽어야 함이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p2", "start": 37, "end": 213}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "무위가 아무것도 하지 않는 뜻이 아니라 억지 없이 이치에 따르는 태도라는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p3", "start": 31, "end": 110}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "같은 개념도 글마다 강조점이 달라 서로 다른 문제 상황에 맞추어 펼쳐질 수 있음을 보여 주는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p4", "start": 0, "end": 195}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "동양철학 읽기가 오래된 말을 오늘의 삶과 연결해 해석하는 훈련이라는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p5", "start": 0, "end": 164}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }
