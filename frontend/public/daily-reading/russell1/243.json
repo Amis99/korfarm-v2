@@ -40,15 +40,396 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 48}]},
+          "question": {
+            "prompt": "이 문장이 자료 사용하기를 어떻게 바로잡아 소개하는지 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "자료 사용은 베끼기가 아니라 글 속에서 뜻 있게 쓰는 일이다"},
+              {"id": "B", "text": "자료 사용은 자료를 길게 옮겨 적는 일이다"},
+              {"id": "C", "text": "자료 사용은 출처를 숨기는 일이다"},
+              {"id": "D", "text": "자료 사용은 글의 목적과 상관없는 장식이다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 48, "end": 135}]},
+          "question": {
+            "prompt": "앞의 경계와 이어 볼 때, 이 부분이 자료 사용의 바른 방향으로 가장 강조하는 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "자료 내용을 이해하고 글의 목적에 맞게 연결하는 일"},
+              {"id": "B", "text": "자료 수를 늘려 글을 길게 만드는 일"},
+              {"id": "C", "text": "자료를 해석하지 않고 그대로 붙이는 일"},
+              {"id": "D", "text": "자료와 글의 목적을 따로 떼어 보는 일"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 135, "end": 181}]},
+          "question": {
+            "prompt": "이 문장은 앞의 설명을 어떤 기준으로 묶어 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "많이 모으는 것보다 왜 쓰는지 아는 일이 더 중요하다고 정리한다"},
+              {"id": "B", "text": "많이 모을수록 무조건 좋은 글이 된다고 정리한다"},
+              {"id": "C", "text": "자료는 적을수록 좋다고 정리한다"},
+              {"id": "D", "text": "자료 목적은 나중에 봐도 된다고 정리한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 181}]},
+          "question": {
+            "prompt": "이 문단 전체에서 자료 사용의 출발점으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "자료를 가져오는 이유와 글의 목적을 먼저 맞추는 일"},
+              {"id": "B", "text": "자료 양을 늘리는 일"},
+              {"id": "C", "text": "자료 문장을 그대로 옮기는 일"},
+              {"id": "D", "text": "출처를 숨기고 중심을 흐리는 일"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 28}]},
+          "question": {
+            "prompt": "이 문장은 같은 자료라도 무엇에 따라 쓰임이 달라진다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "글의 종류"},
+              {"id": "B", "text": "자료의 길이만"},
+              {"id": "C", "text": "문단 수만"},
+              {"id": "D", "text": "글씨 크기만"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 28, "end": 102}]},
+          "question": {
+            "prompt": "앞의 구분과 이어 볼 때, 설명하는 글과 주장하는 글에서 자료가 맡는 일로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "설명글에서는 예시가 되고 주장글에서는 근거를 받치는 증거가 된다"},
+              {"id": "B", "text": "설명글과 주장글 모두 장식만 맡는다"},
+              {"id": "C", "text": "설명글에서는 증거가 될 수 없고 주장글에서는 예시가 될 수 없다"},
+              {"id": "D", "text": "두 글 모두 자료를 길게 붙여 두는 데 그친다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 102, "end": 171}]},
+          "question": {
+            "prompt": "이 부분은 감상문이나 체험 중심 글에서 자료를 어떻게 쓰는 편이 알맞다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "필요한 부분만 참고해 생각을 넓히는 데 쓰는 편이 알맞다"},
+              {"id": "B", "text": "자료를 길게 제시해 글보다 크게 드러내는 편이 알맞다"},
+              {"id": "C", "text": "자료를 전혀 쓰지 않는 편이 알맞다"},
+              {"id": "D", "text": "근거와 상관없이 통계를 먼저 붙이는 편이 알맞다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 171, "end": 200}]},
+          "question": {
+            "prompt": "이 문장은 자료의 쓰임을 구별해야 하는 이유를 무엇으로 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "글의 중심이 흐려지지 않게 하기 위해서"},
+              {"id": "B", "text": "자료 수를 늘리기 위해서"},
+              {"id": "C", "text": "출처를 숨기기 위해서"},
+              {"id": "D", "text": "문단을 줄이기 위해서"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 200}]},
+          "question": {
+            "prompt": "이 문단 전체에서 글 종류에 따른 자료 쓰임 비교로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "글의 목적이 다르면 자료의 자리와 길이와 역할도 함께 달라진다"},
+              {"id": "B", "text": "글 종류가 달라도 자료 쓰임은 모두 같다"},
+              {"id": "C", "text": "감상문에서는 자료가 늘 중심이 되어야 한다"},
+              {"id": "D", "text": "주장글은 자료 없이도 근거가 충분하다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 44}]},
+          "question": {
+            "prompt": "이 문장은 자료를 사용할 때 무엇을 먼저 분명히 해야 한다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "무엇을 보여 주는 자료인지 독자가 알 수 있게 해야 한다"},
+              {"id": "B", "text": "자료는 숨길수록 좋다"},
+              {"id": "C", "text": "자료 이름만 밝히면 충분하다"},
+              {"id": "D", "text": "자료의 종류는 밝히지 않아도 된다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 44, "end": 122}]},
+          "question": {
+            "prompt": "앞의 원칙과 이어 볼 때, 표·그래프나 다른 글의 일부를 가져왔을 때 해야 할 일로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "무엇을 비교한 자료인지, 누가 어떤 맥락에서 한 말인지 드러내야 한다"},
+              {"id": "B", "text": "숫자만 남기고 비교 항목은 숨겨야 한다"},
+              {"id": "C", "text": "인용은 출처를 밝히면 안 된다"},
+              {"id": "D", "text": "자료의 맥락은 글 흐름과 무관하다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 122, "end": 180}]},
+          "question": {
+            "prompt": "이 문장은 자료의 출처와 성격을 숨기면 어떤 문제가 생긴다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "설명이 약해지고 독자가 자료를 잘못 이해할 위험이 커진다"},
+              {"id": "B", "text": "글이 저절로 더 간단해진다"},
+              {"id": "C", "text": "자료 의미가 더 또렷해진다"},
+              {"id": "D", "text": "출처를 숨겨야 글 중심이 살아난다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {"ranges": [{"paragraphId": "p3", "start": 0, "end": 180}]},
+          "question": {
+            "prompt": "이 문단 전체에서 자료 정보 밝히기의 필요로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "독자가 자료의 내용과 맥락을 정확히 이해하도록 돕는 일"},
+              {"id": "B", "text": "자료 출처를 감추어 글만 돋보이게 하는 일"},
+              {"id": "C", "text": "그래프를 설명 없이 붙여 두는 일"},
+              {"id": "D", "text": "표의 항목 이름을 지워 간단하게 만드는 일"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 23}]},
+          "question": {
+            "prompt": "이 짧은 문장은 자료 사용에서 어떤 새 기준을 열어 주나요?",
+            "choices": [
+              {"id": "A", "text": "자료는 글 속에서 해석되어야 한다는 기준"},
+              {"id": "B", "text": "자료는 설명 없이 놓아두면 된다는 기준"},
+              {"id": "C", "text": "자료는 길수록 좋다는 기준"},
+              {"id": "D", "text": "자료는 글과 떨어질수록 좋다는 기준"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 23, "end": 82}]},
+          "question": {
+            "prompt": "앞의 기준과 이어 볼 때, 자료만 제시하고 설명하지 않으면 어떤 일이 생긴다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "독자가 수치나 문장을 보고도 글쓴이 뜻을 파악하기 어렵다"},
+              {"id": "B", "text": "자료 의미가 저절로 더 분명해진다"},
+              {"id": "C", "text": "글쓴이 뜻과 상관없이 결론이 곧 드러난다"},
+              {"id": "D", "text": "설명이 길수록 자료는 쓸모가 없어진다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 82, "end": 164}]},
+          "question": {
+            "prompt": "이 부분은 상승 곡선 예시를 들어 자료와 글의 문장을 어떻게 이어야 한다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "값이 늘었다는 말에서 멈추지 말고 그 변화가 주제와 어떤 관련이 있는지 이어 주어야 한다"},
+              {"id": "B", "text": "상승 곡선이라는 모양만 말하면 충분하다"},
+              {"id": "C", "text": "그래프 설명은 모두 지우고 숫자만 남겨야 한다"},
+              {"id": "D", "text": "주제와 연결하지 않을수록 자료가 객관적이 된다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 164, "end": 202}]},
+          "question": {
+            "prompt": "이 문장은 자료와 글의 문장이 어떻게 될 때 효과가 난다고 정리하나요?",
+            "choices": [
+              {"id": "A", "text": "서로 연결될 때"},
+              {"id": "B", "text": "서로 떨어질 때"},
+              {"id": "C", "text": "자료만 남길 때"},
+              {"id": "D", "text": "문장만 남길 때"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {"ranges": [{"paragraphId": "p4", "start": 0, "end": 202}]},
+          "question": {
+            "prompt": "이 문단 전체에서 효과적인 자료 사용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "자료를 제시한 뒤 그 의미를 주제와 이어 해석해 주는 일"},
+              {"id": "B", "text": "자료를 놓고 설명은 생략하는 일"},
+              {"id": "C", "text": "그래프 모양만 다시 말하는 일"},
+              {"id": "D", "text": "수치만 늘어놓고 주제와는 끊어 두는 일"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 51}]},
+          "question": {
+            "prompt": "이 문장은 자료 사용하기를 비교해 읽는 일을 무엇으로 묶어 주나요?",
+            "choices": [
+              {"id": "A", "text": "자료 자체보다 자료와 글의 관계를 읽는 일"},
+              {"id": "B", "text": "자료 개수만 세는 일"},
+              {"id": "C", "text": "출처를 숨기는 일"},
+              {"id": "D", "text": "자료 길이를 줄이는 일"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 51, "end": 101}]},
+          "question": {
+            "prompt": "앞의 정리와 이어 볼 때, 이 부분은 자료 쓰는 방식이 무엇에 따라 달라진다고 하나요?",
+            "choices": [
+              {"id": "A", "text": "설명을 돕는지, 주장을 증명하는지, 생각을 넓히는지에 따라 달라진다"},
+              {"id": "B", "text": "자료의 색과 길이에 따라 달라진다"},
+              {"id": "C", "text": "문단 수만 많으면 모두 같아진다"},
+              {"id": "D", "text": "글의 목적과 상관없이 언제나 같다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 101, "end": 181}]},
+          "question": {
+            "prompt": "마지막 문장은 자료를 잘 활용한 글을 어떻게 판단하라고 하나요?",
+            "choices": [
+              {"id": "A", "text": "적절한 자리와 양으로 쓰고 그 의미를 자기 말로 풀어 주었는지 살피라고 한다"},
+              {"id": "B", "text": "자료 수만 많으면 잘 활용한 글이라 하라고 한다"},
+              {"id": "C", "text": "출처를 드러내지 않을수록 좋다고 한다"},
+              {"id": "D", "text": "자료 의미는 빼고 문장만 매끄러우면 된다고 한다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {"ranges": [{"paragraphId": "p5", "start": 0, "end": 181}]},
+          "question": {
+            "prompt": "이 문단 전체에서 자료 사용하기 비교 읽기의 결론으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              {"id": "A", "text": "자료와 글의 관계를 읽어야 자료를 적절하게 활용한 글인지 판단할 수 있다"},
+              {"id": "B", "text": "자료는 많이 넣을수록 좋으니 관계는 따질 필요가 없다"},
+              {"id": "C", "text": "자료 종류가 달라도 쓰임은 모두 같다고 보아야 한다"},
+              {"id": "D", "text": "자료 의미는 빼고 양과 길이만 보면 된다"}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {"id": "c1", "text": "자료는 옮겨 적는 게 아냐"},
+        {"id": "c2", "text": "목적에 맞게 써야 한다"},
+        {"id": "c3", "text": "글 종류마다 쓰임이 달라"},
+        {"id": "c4", "text": "중심을 흐리면 안 된다"},
+        {"id": "c5", "text": "성격과 출처를 밝혀야"},
+        {"id": "c6", "text": "자료는 해석과 이어져야"},
+        {"id": "c7", "text": "값과 문장을 연결해 준다"},
+        {"id": "c8", "text": "자료와 글의 관계를 본다"}
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "자료 사용은 남의 말을 그대로 옮기는 일이 아니라 글의 목적을 분명하게 돕는 도구라는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p1", "start": 0, "end": 181}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "설명글, 주장글, 감상문처럼 글의 종류가 다르면 자료가 예시가 되거나 증거가 되거나 생각을 넓히는 참고가 되는 등 쓰임이 달라진다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p2", "start": 0, "end": 200}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "표나 그래프나 인용 자료를 사용할 때는 무엇을 보여 주는지와 누가 어떤 맥락에서 만든 말인지 드러내야 독자가 자료를 바르게 이해할 수 있다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p3", "start": 0, "end": 180}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "자료는 제시하는 데서 끝나지 않고 글쓴이의 뜻과 주제에 맞게 해석되어야 하며, 그래야 자료와 글의 문장이 연결되어 효과를 낸다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p4", "start": 0, "end": 202}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "자료 사용하기를 읽을 때는 자료 자체보다 자료와 글의 관계를 살피며, 자리와 양과 해석이 적절한지 따져 보아야 한다는 점이 드러나는 부분은 어디인가요?",
+          "answerRanges": [{"paragraphId": "p5", "start": 0, "end": 181}],
+          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }
