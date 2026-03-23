@@ -4,6 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import { apiGet, TOKEN_KEY } from "../utils/api";
 import HarvestCraftModal from "../components/HarvestCraftModal";
 import StudyPlanReminderModal from "../components/StudyPlanReminderModal";
+import SearchBar from "../components/SearchBar";
 import { calcSeasonScore, FORMULA_TEXT } from "../utils/seasonScore";
 import "../styles/start.css";
 
@@ -531,46 +532,67 @@ function StartPage() {
                   </select>
                   <button
                     type="button"
-                    className="start-sub-btn"
+                    className="start-sub-btn start-sub-btn--sm"
                     onClick={() => navigate("/admin")}
                     style={{ border: "1px solid rgba(240,108,36,0.4)", background: "rgba(240,108,36,0.15)", color: "#f06c24" }}
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>admin_panel_settings</span>
-                    관리자 페이지
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>admin_panel_settings</span>
+                    관리자
                   </button>
-                  <button type="button" className="start-sub-btn" onClick={logout}>
-                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>logout</span>
+                  <button
+                    type="button"
+                    className="start-sub-btn start-sub-btn--sm"
+                    onClick={() => navigate("/subscription")}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>
+                      {hasSub ? "manage_accounts" : "upgrade"}
+                    </span>
+                    {hasSub ? "구독" : "구독"}
+                  </button>
+                  <button type="button" className="start-sub-btn start-sub-btn--sm" onClick={logout}>
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>logout</span>
                     로그아웃
                   </button>
                 </div>
               ) : (
-                <div className="start-flex-row" style={{ marginTop: 6, gap: 8 }}>
+                <div className="start-flex-row" style={{ marginTop: 6, gap: 6 }}>
                   <button
                     type="button"
-                    className="start-sub-btn"
+                    className="start-sub-btn start-sub-btn--sm"
                     onClick={() => navigate("/profile")}
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>settings</span>
-                    내 정보 수정
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>settings</span>
+                    내 정보
                   </button>
-                  <button type="button" className="start-sub-btn" onClick={logout}>
-                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>logout</span>
+                  <button
+                    type="button"
+                    className="start-sub-btn start-sub-btn--sm"
+                    onClick={() => navigate("/subscription")}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>
+                      {hasSub ? "manage_accounts" : "upgrade"}
+                    </span>
+                    {hasSub ? "구독" : "구독"}
+                  </button>
+                  <button type="button" className="start-sub-btn start-sub-btn--sm" onClick={logout}>
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>logout</span>
                     로그아웃
                   </button>
                 </div>
               )}
             </div>
           </div>
-          <button
-            type="button"
-            className="start-sub-btn"
-            onClick={() => navigate("/subscription")}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
-              {hasSub ? "manage_accounts" : "upgrade"}
-            </span>
-            {hasSub ? "구독 관리" : "업그레이드"}
-          </button>
+          <SearchBar
+            isPremium={hasSub}
+            onSearch={(q, filters) => {
+              let url = `/search?q=${encodeURIComponent(q)}`;
+              if (filters.contentType) url += `&contentType=${encodeURIComponent(filters.contentType)}`;
+              if (filters.levelId) url += `&levelId=${encodeURIComponent(filters.levelId)}`;
+              if (filters.area) url += `&area=${encodeURIComponent(filters.area)}`;
+              navigate(url);
+            }}
+            onSubscribe={() => navigate("/subscription")}
+          />
         </header>
 
         {/* [1] 무료 학습 */}

@@ -67,6 +67,7 @@ const DiagnosticV2Page = lazy(() => import("./pages/DiagnosticV2Page"));
 const DiagnosticTestPage = lazy(() => import("./pages/DiagnosticTestPage"));
 const DiagnosticReportPage = lazy(() => import("./pages/DiagnosticReportPage"));
 const UnifiedReportPage = lazy(() => import("./pages/UnifiedReportPage"));
+const SearchResultsPage = lazy(() => import("./pages/SearchResultsPage"));
 
 // 관리자 페이지
 const AdminPage = lazy(() => import("./pages/AdminPage"));
@@ -231,6 +232,7 @@ function App() {
           <Route path="/duel/room/:roomId" element={P(<DuelWaitingRoomPage />)} />
           <Route path="/duel/match/:matchId" element={P(<DuelMatchPage />)} />
           <Route path="/duel/result/:matchId" element={P(<DuelResultPage />)} />
+          <Route path="/search" element={P(<SearchResultsPage />)} />
           <Route path="/report" element={P(<UnifiedReportPage />)} />
           <Route path="/assignments" element={P(<AssignmentsPage />)} />
           <Route path="/diagnostic/print" element={P(<DiagnosticPrintPage />)} />
