@@ -13,44 +13,51 @@
 
 | 작품 | source_type | source 우선순위 | 사용 규칙 | status |
 |---|---|---|---|---|
-| 진달래꽃 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 서시 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 별 헤는 밤 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 향수 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 돌담에 속삭이는 햇발 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 나그네 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 광야 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 님의 침묵 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 풀 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 해 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 빼앗긴 들에도 봄은 오는가 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 여우난골족 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 국화 옆에서 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 승무 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 풀꽃 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 꽃 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 농무 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 수선화에게 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 흔들리며 피는 꽃 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 연탄 한 장 | poem-original | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 도산십이곡 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 오우가 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 관동별곡 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 규원가 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 소나기 | prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 사랑손님과 어머니 | prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 운수 좋은 날 | prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 봄봄 | prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 달밤 | prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 화수분 | prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 수난이대 | prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 요람기 | prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 관촌수필 | prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 나무 | essay-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 무소유 | essay-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 인연 | essay-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 아이들에게 | essay-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 방망이 깎던 노인 | prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
+| 간 | poem-original | Google Drive `문학 > 문학MD > 간_윤동주` | 1회 | source_selected |
+| 길 | poem-original | Google Drive `문학 > 문학MD > 길_정희성` | 1회 | source_selected |
+| 금붕어 | poem-original | Google Drive `문학 > 문학MD > 금붕어_김기림` | 1회 | source_selected |
+| 가지가 담을 넘을 때 | poem-original | Google Drive `문학 > 문학MD > 가지가 담을 넘을 때_정끝별` | 1회 | source_selected |
+| 긍지의 날 | poem-original | Google Drive `문학 > 문학MD > 긍지의 날_김수영` | 1회 | source_selected |
+| 고향으로 간다 | poem-original | Google Drive `문학 > 문학MD > 고향으로 간다_김용호` | 1회 | source_selected |
+| 고향의 천정 | poem-original | Google Drive `문학 > 문학MD > 고향의 천정_이성선` | 1회 | source_selected |
+| 감나무 그늘 아래 | poem-original | Google Drive `문학 > 문학MD > 감나무 그늘 아래_고재종` | 1회 | source_selected |
+| 감나무 | poem-original | Google Drive `문학 > 문학MD > 감나무_함민복` | 1회 | source_selected |
+| 갈까 보다 | classical-poetry-original | Google Drive `문학 > 문학MD > 갈까 보다~_작자미상` | 1회 | source_selected |
+| 갑극만영 | classical-poetry-original | Google Drive `문학 > 문학MD > 갑극만영_윤양래` | 1회 | source_selected |
+| 갑민가 | classical-poetry-original | Google Drive `문학 > 문학MD > 갑민가_작자미상` | 1회 | source_selected |
+| 강호구가 | classical-poetry-original | Google Drive `문학 > 문학MD > 강호구가_나위소` | 1회 | source_selected |
+| 강호사시사 | classical-poetry-original | Google Drive `문학 > 문학MD > 강호사시사_맹사성` | 1회 | source_selected |
+| 고산별곡 | classical-poetry-original | Google Drive `문학 > 문학MD > 고산별곡_장복겸` | 1회 | source_selected |
+| 공명을 헤아리니 | classical-poetry-original | Google Drive `문학 > 문학MD > 공명을 헤아리니_작자미상` | 1회 | source_selected |
+| 귀산음 | classical-poetry-original | Google Drive `문학 > 문학MD > 귀산음_신교` | 1회 | source_selected |
+| 귀전록 | classical-prose-excerpt | Google Drive `문학 > 문학MD > 귀전록_이현보` | 1회 | source_selected |
+| 고공가 | classical-poetry-original | Google Drive `문학 > 문학MD > 고공가_허전` | 1회 | source_selected |
+| 고공답주인가 | classical-poetry-original | Google Drive `문학 > 문학MD > 고공답주인가_이원익` | 1회 | source_selected |
+| 강호연군가 | classical-poetry-original | Google Drive `문학 > 문학MD > 강호연군가_장경세` | 1회 | source_selected |
+| 개암정가 | classical-poetry-original | Google Drive `문학 > 문학MD > 개암정가_조성신` | 1회 | source_selected |
+| 강원도 설화지를 | classical-poetry-original | Google Drive `문학 > 문학MD > 강원도 설화지를_사설시조_작자미상` | 1회 | source_selected |
+| 경사 | poem-original | Google Drive `문학 > 문학MD > 경사_박목월` | 1회 | source_selected |
+| 고요를 시청하다 | poem-original | Google Drive `문학 > 문학MD > 고요를 시청하다_고재종` | 1회 | source_selected |
+| 고운 심장 | poem-original | Google Drive `문학 > 문학MD > 고운 심장_신석정` | 1회 | source_selected |
+| 그 골목 잃어버리고 | poem-original | Google Drive `문학 > 문학MD > 그 골목 잃어버리고_나희덕` | 1회 | source_selected |
+| 그게 아닌데 | poem-original | Google Drive `문학 > 문학MD > 그게 아닌데_이미경` | 1회 | source_selected |
+| 그리움 | poem-original | Google Drive `문학 > 문학MD > 그리움_이시영` | 1회 | source_selected |
+| 그리운 곳으로 돌아보라 | poem-original | Google Drive `문학 > 문학MD > 그리운 곳으로 돌아보라_정일근` | 1회 | source_selected |
+| 그리운 외손녀 | classical-poetry-original | Google Drive `문학 > 문학MD > 그리운 외손녀_김창흡` | 1회 | source_selected |
+| 겨울 뜸부기 | prose-excerpt | Google Drive `문학 > 문학MD > 겨울 뜸부기_오정희` | 1회 | source_selected |
+| 그늘 | prose-excerpt | Google Drive `문학 > 문학MD > 그늘_황순원` | 1회 | source_selected |
+| 고향 | prose-excerpt | Google Drive `문학 > 문학MD > 고향_이태준` | 2회 | source_selected |
+| 골목 안 | prose-excerpt | Google Drive `문학 > 문학MD > 골목 안_박태원` | 1회 | source_selected |
+| 관촌수필 | prose-excerpt | Google Drive `문학 > 문학MD > 관촌수필_이문구` | 2회 | source_selected |
+| 귀향 연습 | prose-excerpt | Google Drive `문학 > 문학MD > 귀향 연습_이청준` | 2회 | source_selected |
+| 거꾸로 보기 | essay-excerpt | Google Drive `문학 > 문학MD > 거꾸로 보기_법정` | 1회 | source_selected |
+| 길을 찾아서 4 - 명암리 길 | essay-excerpt | Google Drive `문학 > 문학MD > 길을 찾아서 4_명암리 길_천양희` | 1회 | source_selected |
+| 김원전 | classical-prose-excerpt | Google Drive `문학 > 문학MD > 김원전_작자미상` | 2회 | source_selected |
+| 금루사 | classical-prose-excerpt | Google Drive `문학 > 문학MD > 금루사_민우룡` | 2회 | source_selected |
+| 금방울전 | classical-prose-excerpt | Google Drive `문학 > 문학MD > 금방울전_작자미상` | 2회 | source_selected |
+| 광한루기 | classical-prose-excerpt | Google Drive `문학 > 문학MD > 광한루기_수산` | 2회 | source_selected |
+| 기황전설 | classical-prose-excerpt | Google Drive `문학 > 문학MD > 기황전설_정온` | 2회 | source_selected |
+| 기취서행 | classical-prose-excerpt | Google Drive `문학 > 문학MD > 기취서행_김낙행` | 1회 | source_selected |
 
 ## 비문학 concrete concept 목록
 
