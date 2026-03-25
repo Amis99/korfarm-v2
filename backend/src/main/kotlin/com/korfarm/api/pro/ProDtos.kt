@@ -99,6 +99,7 @@ data class ProTestStatusResponse(
 
 data class ProTestSessionView(
     val sessionId: String,
+    val testId: String,
     val version: Int,
     val status: String,
     val mode: String,
@@ -106,6 +107,7 @@ data class ProTestSessionView(
     val totalPoints: Int? = null,
     val printedAt: LocalDateTime?,
     val omrDeadline: LocalDateTime?,
+    val remainingMinutes: Long,
     val createdAt: LocalDateTime,
     val competencyScores: Map<String, CompetencyScore>? = null
 )

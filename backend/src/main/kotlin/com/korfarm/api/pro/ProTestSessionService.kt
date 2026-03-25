@@ -291,8 +291,12 @@ class ProTestSessionService(
 
             val paper = testPaperRepo.findById(session.testId).orElse(null)
             val parsedCompetency = parseCompetencyScores(session.competencyScores)
+            val remainingMin = if (session.omrDeadline != null && session.omrDeadline!!.isAfter(now))
+                Duration.between(now, session.omrDeadline).toMinutes().coerceAtLeast(0)
+            else 0L
             val view = ProTestSessionView(
                 sessionId = session.id,
+                testId = session.testId,
                 version = version,
                 status = effectiveStatus,
                 mode = session.mode,
@@ -300,6 +304,7 @@ class ProTestSessionService(
                 totalPoints = paper?.totalPoints,
                 printedAt = session.printedAt,
                 omrDeadline = session.omrDeadline,
+                remainingMinutes = remainingMin,
                 createdAt = session.createdAt,
                 competencyScores = parsedCompetency
             )
