@@ -1,4 +1,4 @@
-# 비트겐슈타인 1 365일 배치표
+﻿# 비트겐슈타인 1 365일 배치표
 
 ## 요약
 
@@ -67,317 +67,317 @@
 | 49 | 문법 | 훈민정음 원리 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 50 | 비문학 | ??? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 51 | 문학 | 길을 찾아서 4 - 명암리 길 | docs/wittgenstein1_source_inventory.md > 길을 찾아서 4 - 명암리 길 |
-| 52 | 비문학 | 기출 비문학 - 인문 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 52 | 비문학 | 서사 관점 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 53 | 화법 | 건의와 협상의 전략 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 54 | 작문 | 비교·대조 글쓰기 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 55 | 비문학 | 기출 비문학 - 철학 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 55 | 비문학 | 언어와 세계 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 56 | 문법 | 표준 발음 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 57 | 비문학 | 기출 비문학 - 사회 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 57 | 비문학 | 위험 사회 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 58 | 문학 | 김원전 | docs/wittgenstein1_source_inventory.md > 김원전 |
-| 59 | 비문학 | 기출 비문학 - 경제 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 59 | 비문학 | 외부성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 60 | 화법 | 토론 반박의 타당성 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 61 | 작문 | 반박문 쓰기 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 62 | 비문학 | 기출 비문학 - 법 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 62 | 비문학 | 권리와 의무 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 63 | 문법 | 의미 관계 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 64 | 비문학 | 기출 비문학 - 과학 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 64 | 비문학 | 유전 정보 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 65 | 문학 | 김진옥전 | docs/wittgenstein1_source_inventory.md > 김진옥전 |
-| 66 | 비문학 | 기출 비문학 - 기술 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 66 | 비문학 | 데이터 압축 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 67 | 화법 | 공감적 듣기와 재구성 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 68 | 작문 | 보고서 구성 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 69 | 비문학 | 기출 비문학 - 예술 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 69 | 비문학 | 재현과 추상 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 70 | 문법 | 담화와 지시 표현 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 71 | 비문학 | 기출 비문학 - 언어 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 71 | 비문학 | 음운 변동 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 72 | 문학 | 꽃피는 시절 | docs/wittgenstein1_source_inventory.md > 꽃피는 시절 |
-| 73 | 비문학 | 기출 비문학 - 심리 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 73 | 비문학 | 휴리스틱 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 74 | 화법 | 발표 구성의 효과 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 75 | 작문 | 논설문 전개 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 76 | 비문학 | 기출 비문학 - 환경 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 76 | 비문학 | 기후 피드백 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 77 | 문법 | 호응과 중의성 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 78 | 비문학 | 기출 비문학 - 인문 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 78 | 비문학 | 미적 거리 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 79 | 문학 | 나무처럼 젊은이들도 | docs/wittgenstein1_source_inventory.md > 나무처럼 젊은이들도 |
-| 80 | 비문학 | 기출 비문학 - 철학 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 80 | 비문학 | 동일성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 81 | 화법 | 말하기 태도 판단 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 82 | 작문 | 소개문 조정 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 83 | 비문학 | 기출 비문학 - 사회 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 83 | 비문학 | 제도와 행위 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 84 | 문법 | 어문 규범 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 85 | 비문학 | 기출 비문학 - 경제 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 85 | 비문학 | 경기 순환 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 86 | 문학 | 낙성비룡 | docs/wittgenstein1_source_inventory.md > 낙성비룡 |
-| 87 | 비문학 | 기출 비문학 - 법 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 87 | 비문학 | 입증 책임 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 88 | 화법 | 상황 맥락 추론 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 89 | 작문 | 제목 설계 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 90 | 비문학 | 기출 비문학 - 과학 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 90 | 비문학 | 엔트로피 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 91 | 문법 | 문법 개념 적용 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 92 | 비문학 | 기출 비문학 - 기술 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 92 | 비문학 | 알고리즘 복잡도 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 93 | 문학 | 낙엽송 | docs/wittgenstein1_source_inventory.md > 낙엽송 |
-| 94 | 비문학 | 기출 비문학 - 예술 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 94 | 비문학 | 매체 특성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 95 | 화법 | 발표자의 의도 파악 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 96 | 작문 | 개요의 적절성 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 97 | 비문학 | 기출 비문학 - 언어 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 97 | 비문학 | 담화 표지 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 98 | 문법 | 음운 변동 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 99 | 비문학 | 기출 비문학 - 심리 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 99 | 비문학 | 인지 부하 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 100 | 문학 | 낙은별곡 | docs/wittgenstein1_source_inventory.md > 낙은별곡 |
-| 101 | 비문학 | 기출 비문학 - 환경 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 101 | 비문학 | 지속 가능성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 102 | 화법 | 청자의 반응 추론 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 103 | 작문 | 자료 통합 구성 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 104 | 비문학 | 기출 비문학 - 인문 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 104 | 비문학 | 텍스트의 맥락성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 105 | 문법 | 형태소와 품사 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 106 | 비문학 | 기출 비문학 - 철학 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 106 | 비문학 | 심신 이원론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 107 | 문학 | 낙천동운 | docs/wittgenstein1_source_inventory.md > 낙천동운 |
-| 108 | 비문학 | 기출 비문학 - 사회 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 108 | 비문학 | 사회화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 109 | 화법 | 질문의 기능 분석 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 110 | 작문 | 주장과 근거 배열 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 111 | 비문학 | 기출 비문학 - 경제 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 111 | 비문학 | 비교우위 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 112 | 문법 | 문장 성분 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 113 | 비문학 | 기출 비문학 - 법 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 113 | 비문학 | 책임 능력 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 114 | 문학 | 낙타 | docs/wittgenstein1_source_inventory.md > 낙타 |
-| 115 | 비문학 | 기출 비문학 - 과학 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 115 | 비문학 | 세포 호흡 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 116 | 화법 | 토의 규칙과 역할 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 117 | 작문 | 정보 통합 글쓰기 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 118 | 비문학 | 기출 비문학 - 기술 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 118 | 비문학 | 운영체제 스케줄링 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 119 | 문법 | 피동과 사동 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 120 | 비문학 | 기출 비문학 - 예술 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 120 | 비문학 | 서사 영화 편집 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 121 | 문학 | 낙토의 아이들 | docs/wittgenstein1_source_inventory.md > 낙토의 아이들 |
-| 122 | 비문학 | 기출 비문학 - 언어 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 122 | 비문학 | 중의성 해소 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 123 | 화법 | 설득 전략 분석 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 124 | 작문 | 고쳐쓰기 전략 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 125 | 비문학 | 기출 비문학 - 심리 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 125 | 비문학 | 작업 기억 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 126 | 문법 | 높임과 시간 표현 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 127 | 비문학 | 기출 비문학 - 환경 관점 차이 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 127 | 비문학 | 생물 다양성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 128 | 문학 | 날개 또는 수갑(1) | docs/wittgenstein1_source_inventory.md > 날개 또는 수갑 |
-| 129 | 비문학 | 기출 비문학 - 인문 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 129 | 비문학 | 저자와 화자의 거리 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 130 | 화법 | 발표 자료 해석 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 131 | 작문 | 문단 재배열 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 132 | 비문학 | 기출 비문학 - 철학 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 132 | 비문학 | 자유 의지 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 133 | 문법 | 중세국어 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 134 | 비문학 | 기출 비문학 - 사회 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 134 | 비문학 | 역할 갈등 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 135 | 문학 | 날개 또는 수갑(2) | docs/wittgenstein1_source_inventory.md > 날개 또는 수갑 |
-| 136 | 비문학 | 기출 비문학 - 경제 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 136 | 비문학 | 한계 효용 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 137 | 화법 | 인터뷰의 핵심 정보 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 138 | 작문 | 개념 정의 방식 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 139 | 비문학 | 기출 비문학 - 법 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 139 | 비문학 | 불법 행위 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 140 | 문법 | 훈민정음 원리 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 141 | 비문학 | 기출 비문학 - 과학 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 141 | 비문학 | 광합성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 142 | 문학 | 난쟁이가 쏘아 올린 작은 공 | docs/wittgenstein1_source_inventory.md > 난쟁이가 쏘아 올린 작은 공 |
-| 143 | 비문학 | 기출 비문학 - 기술 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 143 | 비문학 | 패킷 교환 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 144 | 화법 | 건의와 협상의 전략 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 145 | 작문 | 비교·대조 글쓰기 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 146 | 비문학 | 기출 비문학 - 예술 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 146 | 비문학 | 아이러니와 패러디 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 147 | 문법 | 표준 발음 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 148 | 비문학 | 기출 비문학 - 언어 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 148 | 비문학 | 지시 표현 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 149 | 문학 | 남신의주 유동 박시봉방 | docs/wittgenstein1_source_inventory.md > 남신의주 유동 박시봉방 |
-| 150 | 비문학 | 기출 비문학 - 심리 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 150 | 비문학 | 강화 학습 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 151 | 화법 | 토론 반박의 타당성 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 152 | 작문 | 반박문 쓰기 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 153 | 비문학 | 기출 비문학 - 환경 보기 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 153 | 비문학 | 물 발자국 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 154 | 문법 | 의미 관계 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 155 | 비문학 | 기출 비문학 - 인문 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 155 | 비문학 | 상징과 알레고리 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 156 | 문학 | 낯익은 세상 | docs/wittgenstein1_source_inventory.md > 낯익은 세상 |
-| 157 | 비문학 | 기출 비문학 - 철학 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 157 | 비문학 | 실재론과 반실재론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 158 | 화법 | 공감적 듣기와 재구성 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 159 | 작문 | 보고서 구성 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 160 | 비문학 | 기출 비문학 - 사회 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 160 | 비문학 | 관료제 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 161 | 문법 | 담화와 지시 표현 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 162 | 비문학 | 기출 비문학 - 경제 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 162 | 비문학 | 탄력성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 163 | 문학 | 너에게 묻는다 | docs/wittgenstein1_source_inventory.md > 너에게 묻는다 |
-| 164 | 비문학 | 기출 비문학 - 법 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 164 | 비문학 | 계약 자유 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 165 | 화법 | 발표 구성의 효과 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 166 | 작문 | 논설문 전개 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 167 | 비문학 | 기출 비문학 - 과학 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 167 | 비문학 | 신경 전달 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 168 | 문법 | 호응과 중의성 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 169 | 비문학 | 기출 비문학 - 기술 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 169 | 비문학 | 오류 정정 부호 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 170 | 문학 | 논 이야기 | docs/wittgenstein1_source_inventory.md > 논 이야기 |
-| 171 | 비문학 | 기출 비문학 - 예술 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 171 | 비문학 | 미니멀리즘 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 172 | 화법 | 말하기 태도 판단 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 173 | 작문 | 소개문 조정 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 174 | 비문학 | 기출 비문학 - 언어 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 174 | 비문학 | 상보적 분포 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 175 | 문법 | 어문 규범 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 176 | 비문학 | 기출 비문학 - 심리 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 176 | 비문학 | 동기 이론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 177 | 문학 | 농무 | docs/wittgenstein1_source_inventory.md > 농무 |
-| 178 | 비문학 | 기출 비문학 - 환경 추론 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 178 | 비문학 | 대기 역전층 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 179 | 화법 | 상황 맥락 추론 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 180 | 작문 | 제목 설계 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 181 | 비문학 | 기출 비문학 - 인문 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 181 | 비문학 | 타자의 재현 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 182 | 문법 | 문법 개념 적용 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 183 | 비문학 | 기출 비문학 - 철학 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 183 | 비문학 | 공리주의 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 184 | 문학 | 누항사 | docs/wittgenstein1_source_inventory.md > 누항사 |
-| 185 | 비문학 | 기출 비문학 - 사회 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 185 | 비문학 | 사회 이동 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 186 | 화법 | 발표자의 의도 파악 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 187 | 작문 | 개요의 적절성 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 188 | 비문학 | 기출 비문학 - 경제 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 188 | 비문학 | 조세 전가 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 189 | 문법 | 음운 변동 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 190 | 비문학 | 기출 비문학 - 법 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 190 | 비문학 | 신뢰 보호 원칙 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 191 | 문학 | 눈 | docs/wittgenstein1_source_inventory.md > 눈 |
-| 192 | 비문학 | 기출 비문학 - 과학 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 192 | 비문학 | 면역 기억 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 193 | 화법 | 청자의 반응 추론 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 194 | 작문 | 자료 통합 구성 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 195 | 비문학 | 기출 비문학 - 기술 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 195 | 비문학 | 머신러닝 일반화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 196 | 문법 | 형태소와 품사 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 197 | 비문학 | 기출 비문학 - 예술 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 197 | 비문학 | 시점 쇼트 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 198 | 문학 | 눈길 | docs/wittgenstein1_source_inventory.md > 눈길 |
-| 199 | 비문학 | 기출 비문학 - 언어 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 199 | 비문학 | 정보 구조 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 200 | 화법 | 질문의 기능 분석 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 201 | 작문 | 주장과 근거 배열 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 202 | 비문학 | 기출 비문학 - 심리 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 202 | 비문학 | 프레이밍 효과 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 203 | 문법 | 문장 성분 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 204 | 비문학 | 기출 비문학 - 환경 반론 검토 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 204 | 비문학 | 산성비 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 205 | 문학 | 능소화 | docs/wittgenstein1_source_inventory.md > 능소화 |
-| 206 | 비문학 | 기출 비문학 - 인문 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 206 | 비문학 | 해석 공동체 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 207 | 화법 | 토의 규칙과 역할 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 208 | 작문 | 정보 통합 글쓰기 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 209 | 비문학 | 기출 비문학 - 철학 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 209 | 비문학 | 의무론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 210 | 문법 | 피동과 사동 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 211 | 비문학 | 기출 비문학 - 사회 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 211 | 비문학 | 규범과 일탈 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 212 | 문학 | 님의 침묵 | docs/wittgenstein1_source_inventory.md > 님의 침묵 |
-| 213 | 비문학 | 기출 비문학 - 경제 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 213 | 비문학 | 인플레이션 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 214 | 화법 | 설득 전략 분석 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 215 | 작문 | 고쳐쓰기 전략 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 216 | 비문학 | 기출 비문학 - 법 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 216 | 비문학 | 소급 입법 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 217 | 문법 | 높임과 시간 표현 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 218 | 비문학 | 기출 비문학 - 과학 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 218 | 비문학 | 전자 배치 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 219 | 문학 | 독은 아름답다 | docs/wittgenstein1_source_inventory.md > 독은 아름답다 |
-| 220 | 비문학 | 기출 비문학 - 기술 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 220 | 비문학 | 공개키 기반구조 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 221 | 화법 | 발표 자료 해석 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 222 | 작문 | 문단 재배열 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 223 | 비문학 | 기출 비문학 - 예술 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 223 | 비문학 | 색채 상징 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 224 | 문법 | 중세국어 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 225 | 비문학 | 기출 비문학 - 언어 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 225 | 비문학 | 문장 유형 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 226 | 문학 | 둑방길 | docs/wittgenstein1_source_inventory.md > 둑방길 |
-| 227 | 비문학 | 기출 비문학 - 심리 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 227 | 비문학 | 확증 편향 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 228 | 화법 | 인터뷰의 핵심 정보 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 229 | 작문 | 개념 정의 방식 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 230 | 비문학 | 기출 비문학 - 환경 구조 분석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 230 | 비문학 | 열섬 현상 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 231 | 문법 | 훈민정음 원리 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 232 | 비문학 | 기출 비문학 - 인문 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 232 | 비문학 | 역사주의 비평 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 233 | 문학 | 등신불 | docs/wittgenstein1_source_inventory.md > 등신불 |
-| 234 | 비문학 | 기출 비문학 - 철학 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 234 | 비문학 | 존재와 무 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 235 | 화법 | 건의와 협상의 전략 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 236 | 작문 | 비교·대조 글쓰기 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 237 | 비문학 | 기출 비문학 - 사회 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 237 | 비문학 | 집합 행동 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 238 | 문법 | 표준 발음 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 239 | 비문학 | 기출 비문학 - 경제 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 239 | 비문학 | 환율 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 240 | 문학 | 메밀꽃 필 무렵 | docs/wittgenstein1_source_inventory.md > 메밀꽃 필 무렵 |
-| 241 | 비문학 | 기출 비문학 - 법 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 241 | 비문학 | 위법성 조각 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 242 | 화법 | 토론 반박의 타당성 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 243 | 작문 | 반박문 쓰기 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 244 | 비문학 | 기출 비문학 - 과학 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 244 | 비문학 | 산염기 평형 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 245 | 문법 | 의미 관계 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 246 | 비문학 | 기출 비문학 - 기술 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 246 | 비문학 | 캐시 메모리 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 247 | 문학 | 미스터 방 | docs/wittgenstein1_source_inventory.md > 미스터 방 |
-| 248 | 비문학 | 기출 비문학 - 예술 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 248 | 비문학 | 설치 미술 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 249 | 화법 | 공감적 듣기와 재구성 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 250 | 작문 | 보고서 구성 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 251 | 비문학 | 기출 비문학 - 언어 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 251 | 비문학 | 화행 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 252 | 문법 | 담화와 지시 표현 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 253 | 비문학 | 기출 비문학 - 심리 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 253 | 비문학 | 사회적 촉진 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 254 | 문학 | 바람이 불어 | docs/wittgenstein1_source_inventory.md > 바람이 불어 |
-| 255 | 비문학 | 기출 비문학 - 환경 종합 판단 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 255 | 비문학 | 사막화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 256 | 화법 | 발표 구성의 효과 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 257 | 작문 | 논설문 전개 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 258 | 비문학 | 기출 비문학 - 인문 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 258 | 비문학 | 언어의 임의성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 259 | 문법 | 호응과 중의성 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 260 | 비문학 | 기출 비문학 - 철학 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 260 | 비문학 | 개인 동일성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 261 | 문학 | 봄봄 | docs/wittgenstein1_source_inventory.md > 봄봄 |
-| 262 | 비문학 | 기출 비문학 - 사회 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 262 | 비문학 | 네트워크 사회 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 263 | 화법 | 말하기 태도 판단 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 264 | 작문 | 소개문 조정 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 265 | 비문학 | 기출 비문학 - 경제 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 265 | 비문학 | 독점과 과점 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 266 | 문법 | 어문 규범 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 267 | 비문학 | 기출 비문학 - 법 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 267 | 비문학 | 비례 원칙 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 268 | 문학 | 사미인곡 | docs/wittgenstein1_source_inventory.md > 사미인곡 |
-| 269 | 비문학 | 기출 비문학 - 과학 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 269 | 비문학 | 파동 간섭 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 270 | 화법 | 상황 맥락 추론 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 271 | 작문 | 제목 설계 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 272 | 비문학 | 기출 비문학 - 기술 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 272 | 비문학 | 분산 처리 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 273 | 문법 | 문법 개념 적용 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 274 | 비문학 | 기출 비문학 - 예술 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 274 | 비문학 | 상호텍스트성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 275 | 문학 | 성북동 비둘기 | docs/wittgenstein1_source_inventory.md > 성북동 비둘기 |
-| 276 | 비문학 | 기출 비문학 - 언어 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 276 | 비문학 | 코퍼스 빈도 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 277 | 화법 | 발표자의 의도 파악 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 278 | 작문 | 개요의 적절성 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 279 | 비문학 | 기출 비문학 - 심리 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 279 | 비문학 | 자기 효능감 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 280 | 문법 | 음운 변동 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 281 | 비문학 | 기출 비문학 - 환경 수특 연계 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 281 | 비문학 | 해양 산성화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 282 | 문학 | 소나기 | docs/wittgenstein1_source_inventory.md > 소나기 |
-| 283 | 비문학 | 기출 비문학 - 인문 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 283 | 비문학 | 장르 관습 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 284 | 화법 | 청자의 반응 추론 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 285 | 작문 | 자료 통합 구성 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 286 | 비문학 | 기출 비문학 - 철학 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 286 | 비문학 | 귀납의 문제 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 287 | 문법 | 형태소와 품사 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 288 | 비문학 | 기출 비문학 - 사회 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 288 | 비문학 | 감시 사회 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 289 | 문학 | 수난이대 | docs/wittgenstein1_source_inventory.md > 수난이대 |
-| 290 | 비문학 | 기출 비문학 - 경제 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 290 | 비문학 | 공공재 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 291 | 화법 | 질문의 기능 분석 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 292 | 작문 | 주장과 근거 배열 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 293 | 비문학 | 기출 비문학 - 법 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 293 | 비문학 | 적법 절차 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 294 | 문법 | 문장 성분 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 295 | 비문학 | 기출 비문학 - 과학 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 295 | 비문학 | 열평형 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 296 | 문학 | 시집가는 날 | docs/wittgenstein1_source_inventory.md > 시집가는 날 |
-| 297 | 비문학 | 기출 비문학 - 기술 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 297 | 비문학 | 센서 융합 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 298 | 화법 | 토의 규칙과 역할 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 299 | 작문 | 정보 통합 글쓰기 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 300 | 비문학 | 기출 비문학 - 예술 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 300 | 비문학 | 리듬과 반복 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 301 | 문법 | 피동과 사동 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 302 | 비문학 | 기출 비문학 - 언어 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 302 | 비문학 | 차용어 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 303 | 문학 | 운수 좋은 날 | docs/wittgenstein1_source_inventory.md > 운수 좋은 날 |
-| 304 | 비문학 | 기출 비문학 - 심리 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 304 | 비문학 | 메타인지 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 305 | 화법 | 설득 전략 분석 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 306 | 작문 | 고쳐쓰기 전략 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 307 | 비문학 | 기출 비문학 - 환경 핵심 논지 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 307 | 비문학 | 순환 경제 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 308 | 문법 | 높임과 시간 표현 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 309 | 비문학 | 기출 비문학 - 인문 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 309 | 비문학 | 독자 반응 이론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 310 | 문학 | 월선헌 십육경가 | docs/wittgenstein1_source_inventory.md > 월선헌 십육경가 |
-| 311 | 비문학 | 기출 비문학 - 철학 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 311 | 비문학 | 목적론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 312 | 화법 | 발표 자료 해석 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 313 | 작문 | 문단 재배열 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 314 | 비문학 | 기출 비문학 - 사회 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 314 | 비문학 | 공공성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 315 | 문법 | 중세국어 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 316 | 비문학 | 기출 비문학 - 경제 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 316 | 비문학 | 정보 비대칭 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 317 | 문학 | 유리창 | docs/wittgenstein1_source_inventory.md > 유리창 |
-| 318 | 비문학 | 기출 비문학 - 법 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 318 | 비문학 | 위임 입법 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 319 | 화법 | 인터뷰의 핵심 정보 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 320 | 작문 | 개념 정의 방식 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 321 | 비문학 | 기출 비문학 - 과학 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 321 | 비문학 | 상전이 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 322 | 문법 | 훈민정음 원리 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 323 | 비문학 | 기출 비문학 - 기술 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 323 | 비문학 | 신경망 학습 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 324 | 문학 | 자전거 도둑 | docs/wittgenstein1_source_inventory.md > 자전거 도둑 |
-| 325 | 비문학 | 기출 비문학 - 예술 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 325 | 비문학 | 리얼리즘 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 326 | 화법 | 건의와 협상의 전략 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 327 | 작문 | 비교·대조 글쓰기 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 328 | 비문학 | 기출 비문학 - 언어 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 328 | 비문학 | 문법화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 329 | 문법 | 표준 발음 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 330 | 비문학 | 기출 비문학 - 심리 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 330 | 비문학 | 집단 극화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 331 | 문학 | 적벽가 | docs/wittgenstein1_source_inventory.md > 적벽가 |
-| 332 | 비문학 | 기출 비문학 - 환경 개념 비교 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 332 | 비문학 | 생태 발자국 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 333 | 화법 | 토론 반박의 타당성 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 334 | 작문 | 반박문 쓰기 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 335 | 비문학 | 기출 비문학 - 인문 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 335 | 비문학 | 매체와 재현 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 336 | 문법 | 의미 관계 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 337 | 비문학 | 기출 비문학 - 철학 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 337 | 비문학 | 도구적 이성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 338 | 문학 | 절정 | docs/wittgenstein1_source_inventory.md > 절정 |
-| 339 | 비문학 | 기출 비문학 - 사회 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 339 | 비문학 | 사회 통합 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 340 | 화법 | 공감적 듣기와 재구성 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 341 | 작문 | 보고서 구성 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 342 | 비문학 | 기출 비문학 - 경제 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 342 | 비문학 | 게임 이론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 343 | 문법 | 담화와 지시 표현 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 344 | 비문학 | 기출 비문학 - 법 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 344 | 비문학 | 법익 보호 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 345 | 문학 | 정과정 | docs/wittgenstein1_source_inventory.md > 정과정 |
-| 346 | 비문학 | 기출 비문학 - 과학 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 346 | 비문학 | 평형 이동 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 347 | 화법 | 발표 구성의 효과 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 348 | 작문 | 논설문 전개 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 349 | 비문학 | 기출 비문학 - 기술 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 349 | 비문학 | 분산 원장 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 350 | 문법 | 호응과 중의성 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 351 | 비문학 | 기출 비문학 - 예술 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 351 | 비문학 | 아방가르드 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 352 | 문학 | 진달래꽃 | docs/wittgenstein1_source_inventory.md > 진달래꽃 |
-| 353 | 비문학 | 기출 비문학 - 언어 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 353 | 비문학 | 의미 자질 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 354 | 화법 | 말하기 태도 판단 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 355 | 작문 | 소개문 조정 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 356 | 비문학 | 기출 비문학 - 심리 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 356 | 비문학 | 학습된 무기력 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 357 | 문법 | 어문 규범 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 358 | 비문학 | 기출 비문학 - 환경 자료 해석 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 358 | 비문학 | 탄소 중립 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 359 | 문학 | 하단에서 | docs/wittgenstein1_source_inventory.md > 하단에서 |
-| 360 | 비문학 | 기출 비문학 - 인문 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 360 | 비문학 | 문화 자본 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 361 | 화법 | 상황 맥락 추론 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 362 | 작문 | 제목 설계 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 363 | 비문학 | 기출 비문학 - 철학 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 363 | 비문학 | 타자 인식 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 364 | 문법 | 문법 개념 적용 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 365 | 비문학 | 기출 비문학 - 사회 원리 적용 | 기출 비문학 지문/수특 연계 지문을 참고해 수동 작성 |
+| 365 | 비문학 | 사회 계약 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |

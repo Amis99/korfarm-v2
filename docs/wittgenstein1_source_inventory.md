@@ -11,17 +11,17 @@
 
 | source_type | source 우선순위 | 사용 규칙 | status |
 |---|---|---|---|
-| exam-nonfiction-humanities | 인문 기출/수특: 해석학적 순환, 기호와 의미, 서사 관점, 미적 거리 | 논지 전개와 개념 관계를 유지한 변형 | source_selected |
-| exam-nonfiction-philosophy | 철학 기출/수특: 회의주의, 지식의 정당화, 언어와 세계, 동일성 | 논증 구조와 반론 지점을 유지한 변형 | source_selected |
-| exam-nonfiction-society | 사회 기출/수특: 공론장, 사회 자본, 위험 사회, 제도와 행위 | 개념 정의와 사례 적용의 흐름 유지 | source_selected |
-| exam-nonfiction-economy | 경제 기출/수특: 기회비용, 시장 실패, 외부성, 경기 순환 | 그래프·조건·보기 적용 구조 유지 | source_selected |
-| exam-nonfiction-law | 법 기출/수특: 죄형 법정주의, 과잉금지, 권리와 의무, 입증 책임 | 조문 취지와 사례 판단 구조 유지 | source_selected |
-| exam-nonfiction-science | 과학 기출/수특: 항상성, 진화와 적응, 유전 정보, 엔트로피 | 핵심 용어와 인과 관계를 유지한 변형 | source_selected |
-| exam-nonfiction-technology | 기술 기출/수특: 반도체, 암호화, 데이터 압축, 알고리즘 복잡도 | 원리 설명과 단계 관계 유지 | source_selected |
-| exam-nonfiction-art | 예술 기출/수특: 원근법, 몽타주, 재현과 추상, 매체 특성 | 개념 비교와 감상 틀 유지 | source_selected |
-| exam-nonfiction-language | 언어 기출/수특: 음운 변동, 통사 구조, 의미 변화, 담화 표지 | 용어 정의와 예문 적용 구조 유지 | source_selected |
-| exam-nonfiction-psychology | 심리 기출/수특: 기억 오류, 귀인, 휴리스틱, 인지 부하 | 실험 해석과 개념 비교 구조 유지 | source_selected |
-| exam-nonfiction-environment | 환경 기출/수특: 탄소 순환, 생태계 평형, 기후 피드백, 지속 가능성 | 과정 설명과 변인 관계 유지 | source_selected |
+| exam-nonfiction-humanities | 인문 기출/수특: 해석학적 순환, 기호와 의미, 서사 관점, 미적 거리, 텍스트의 맥락성, 저자와 화자의 거리, 상징과 알레고리, 타자의 재현, 해석 공동체, 역사주의 비평, 언어의 임의성, 장르 관습, 독자 반응 이론, 매체와 재현, 문화 자본 | 논지 전개와 개념 관계를 유지한 변형 | source_selected |
+| exam-nonfiction-philosophy | 철학 기출/수특: 회의주의, 지식의 정당화, 언어와 세계, 동일성, 심신 이원론, 자유 의지, 실재론과 반실재론, 공리주의, 의무론, 존재와 무, 개인 동일성, 귀납의 문제, 목적론, 도구적 이성, 타자 인식 | 논증 구조와 반론 지점을 유지한 변형 | source_selected |
+| exam-nonfiction-society | 사회 기출/수특: 공론장, 사회 자본, 위험 사회, 제도와 행위, 사회화, 역할 갈등, 관료제, 사회 이동, 규범과 일탈, 집합 행동, 네트워크 사회, 감시 사회, 공공성, 사회 통합, 사회 계약 | 개념 정의와 사례 적용의 흐름 유지 | source_selected |
+| exam-nonfiction-economy | 경제 기출/수특: 기회비용, 시장 실패, 외부성, 경기 순환, 비교우위, 한계 효용, 탄력성, 조세 전가, 인플레이션, 환율, 독점과 과점, 공공재, 정보 비대칭, 게임 이론 | 그래프·조건·보기 적용 구조 유지 | source_selected |
+| exam-nonfiction-law | 법 기출/수특: 죄형 법정주의, 과잉금지, 권리와 의무, 입증 책임, 책임 능력, 불법 행위, 계약 자유, 신뢰 보호 원칙, 소급 입법, 위법성 조각, 비례 원칙, 적법 절차, 위임 입법, 법익 보호 | 조문 취지와 사례 판단 구조 유지 | source_selected |
+| exam-nonfiction-science | 과학 기출/수특: 항상성, 진화와 적응, 유전 정보, 엔트로피, 세포 호흡, 광합성, 신경 전달, 면역 기억, 전자 배치, 산염기 평형, 파동 간섭, 열평형, 상전이, 평형 이동 | 핵심 용어와 인과 관계를 유지한 변형 | source_selected |
+| exam-nonfiction-technology | 기술 기출/수특: 반도체, 암호화, 데이터 압축, 알고리즘 복잡도, 운영체제 스케줄링, 패킷 교환, 오류 정정 부호, 머신러닝 일반화, 공개키 기반구조, 캐시 메모리, 분산 처리, 센서 융합, 신경망 학습, 분산 원장 | 원리 설명과 단계 관계 유지 | source_selected |
+| exam-nonfiction-art | 예술 기출/수특: 원근법, 몽타주, 재현과 추상, 매체 특성, 서사 영화 편집, 아이러니와 패러디, 미니멀리즘, 시점 쇼트, 색채 상징, 설치 미술, 상호텍스트성, 리듬과 반복, 리얼리즘, 아방가르드 | 개념 비교와 감상 틀 유지 | source_selected |
+| exam-nonfiction-language | 언어 기출/수특: 음운 변동, 통사 구조, 의미 변화, 담화 표지, 중의성 해소, 지시 표현, 상보적 분포, 정보 구조, 문장 유형, 화행, 코퍼스 빈도, 차용어, 문법화, 의미 자질 | 용어 정의와 예문 적용 구조 유지 | source_selected |
+| exam-nonfiction-psychology | 심리 기출/수특: 기억 오류, 귀인, 휴리스틱, 인지 부하, 작업 기억, 강화 학습, 동기 이론, 프레이밍 효과, 확증 편향, 사회적 촉진, 자기 효능감, 메타인지, 집단 극화, 학습된 무기력 | 실험 해석과 개념 비교 구조 유지 | source_selected |
+| exam-nonfiction-environment | 환경 기출/수특: 탄소 순환, 생태계 평형, 기후 피드백, 지속 가능성, 생물 다양성, 물 발자국, 대기 역전층, 산성비, 열섬 현상, 사막화, 해양 산성화, 순환 경제, 생태 발자국, 탄소 중립 | 과정 설명과 변인 관계 유지 | source_selected |
 
 ## 문학 source 목록
 
