@@ -10,41 +10,41 @@
 
 | 작품 | source_type | source 우선순위 | 사용 규칙 | status |
 |---|---|---|---|---|
-| 사미인곡 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 청산별곡 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 정읍사 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 제망매가 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 가시리 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 정과정 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 고산구곡가 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 어부사시사 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 단심가 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 하여가 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 1회 | source_selected |
-| 황진이 시조 | classical-poetry-original | Google Drive `문학 작품 워크북` → `고등 22개정 과정 (교과서)` → 웹 검색 | 2회 | source_selected |
-| 단군 신화 | myth-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 주몽 신화 | myth-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 견우직녀 | folktale-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 선녀와 나무꾼 | folktale-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 춘향전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 3회 | source_selected |
-| 심청전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 3회 | source_selected |
-| 흥부전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 3회 | source_selected |
-| 홍길동전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 3회 | source_selected |
-| 구운몽 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 사씨남정기 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 토끼전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 3회 | source_selected |
-| 장끼전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 허생전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 3회 | source_selected |
-| 양반전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 바리데기 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 콩쥐팥쥐전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 온달전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 임경업전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 박씨전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 운영전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 2회 | source_selected |
-| 기황전설 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 김원전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 김진옥전 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
-| 낙성비룡 | classical-prose-excerpt | Google Drive `문학 작품 워크북` → `교과서 작품` → 웹 검색 | 1회 | source_selected |
+| 사미인곡 | classical-poetry-original | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 1회 | source_selected |
+| 청산별곡 | classical-poetry-original | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 1회 | source_selected |
+| 정읍사 | classical-poetry-original | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 1회 | source_selected |
+| 제망매가 | classical-poetry-original | Google Drive > 교과서 작품/중등 > 제망매가 | 1회 | source_selected |
+| 가시리 | classical-poetry-original | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 1회 | source_selected |
+| 정과정 | classical-poetry-original | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 1회 | source_selected |
+| 고산구곡가 | classical-poetry-original | Google Drive > 문학MD > 고산구곡가 | 1회 | source_selected |
+| 어부사시사 | classical-poetry-original | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 1회 | source_selected |
+| 단심가 | classical-poetry-original | 웹 원문 > 한국민족문화대백과 / 위키문헌 | 1회 | source_selected |
+| 하여가 | classical-poetry-original | 웹 원문 > 한국민족문화대백과 / 위키문헌 | 1회 | source_selected |
+| 황진이 시조 | classical-poetry-original | 웹 원문 > 한국민족문화대백과 / 위키문헌 | 2회 | source_selected |
+| 단군 신화 | myth-excerpt | 웹 원문 > 한국민족문화대백과 / 우리역사넷 | 1회 | source_selected |
+| 주몽 신화 | myth-excerpt | 웹 원문 > 한국민족문화대백과 / 우리역사넷 | 1회 | source_selected |
+| 견우직녀 | folktale-excerpt | 웹 원문 > 한국민족문화대백과 / 위키문헌 | 1회 | source_selected |
+| 선녀와 나무꾼 | folktale-excerpt | 웹 원문 > 한국민족문화대백과 / 위키문헌 | 1회 | source_selected |
+| 춘향전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 3회 | source_selected |
+| 심청전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 3회 | source_selected |
+| 흥부전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 3회 | source_selected |
+| 홍길동전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 3회 | source_selected |
+| 구운몽 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |
+| 사씨남정기 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |
+| 토끼전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 3회 | source_selected |
+| 장끼전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |
+| 허생전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 3회 | source_selected |
+| 양반전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |
+| 바리데기 | classical-prose-excerpt | 웹 원문 > 한국민족문화대백과 / 한국구비문학대계 | 2회 | source_selected |
+| 콩쥐팥쥐전 | classical-prose-excerpt | 웹 원문 > 한국민족문화대백과 / 위키문헌 | 2회 | source_selected |
+| 온달전 | classical-prose-excerpt | 웹 원문 > 한국민족문화대백과 / 우리역사넷 | 2회 | source_selected |
+| 임경업전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |
+| 박씨전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |
+| 운영전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |
+| 기황전설 | classical-prose-excerpt | Google Drive > 문학MD > 기황전설 | 1회 | source_selected |
+| 김원전 | classical-prose-excerpt | Google Drive > 문학MD > 김원전 | 1회 | source_selected |
+| 김진옥전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 1회 | source_selected |
+| 낙성비룡 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 1회 | source_selected |
 
 ## 비문학 concrete concept 목록
 
