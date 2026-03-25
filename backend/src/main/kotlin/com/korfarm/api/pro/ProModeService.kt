@@ -48,7 +48,7 @@ class ProModeService(
         val user = userRepository.findById(userId).orElseThrow {
             ApiException("NOT_FOUND", "사용자를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
         }
-        val levelId = user.levelId ?: return emptyList()
+        val levelId = user.levelId ?: "saussure1"
 
         val chapters = chapterRepo.findByLevelIdAndStatusOrderByGlobalChapterNumberAsc(levelId, "active")
         if (chapters.isEmpty()) return emptyList()
