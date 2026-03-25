@@ -23,6 +23,34 @@
 - RUSSELL은 기출 변형을 강제하지 않는다. 비문학·화법·작문·문법은 레벨별 축에 맞게 직접 구성하고, 문학은 작품 원문을 그대로 발췌한다.
 - WITTGENSTEIN은 기출 및 수특 지문 변형 축을 사용하며, 비문학과 문학 day 모두 기출 지문을 포함해 작업한다.
 
+### 1-2. 남은 레벨 작업 순서
+
+- **남은 레벨(`russell2`, `russell3`, `wittgenstein1`, `wittgenstein2`, `wittgenstein3`)은 반드시 3단계 순서로 작업한다.**
+- **1단계: 지문 목록 확정**
+  - 각 레벨의 source inventory 문서를 먼저 완성한다.
+  - 문학은 작품명, source, 원문 발췌 가능 여부, 분할 횟수를 먼저 확정한다.
+  - 비문학은 `핵심 개념`, `자료 해석` 같은 메타 꼬리표가 아니라 실제 설명할 **구체 개념명**을 먼저 확정한다.
+- **2단계: 날짜별 지문 배치**
+  - 1단계에서 확정한 지문 목록을 7일 순환 배치표에 넣는다.
+  - 이 단계에서는 day별 `title`, `source`, `source_type`, `status=scheduled`까지 맞춘다.
+  - 배치가 끝나기 전에는 학습(`intensive/recall/confirm`)을 만들지 않는다.
+- **3단계: 학습 생성**
+  - 지문 배치가 끝난 파일부터 하나씩 `정독 + 복기 + 확인`을 수동으로 생성한다.
+  - 정독 질문은 현재 하이라이트와 앞내용 연결을 우선하고, 문학은 표현법·적용 개념·함축 의미·상징 의미·심상·서술 방식·호응 관계를 필요한 부분마다 반드시 묻는다.
+
+### 1-3. 남은 레벨 기준 문서
+
+- `docs/russell2_source_inventory.md`
+- `docs/russell3_source_inventory.md`
+- `docs/wittgenstein1_source_inventory.md`
+- `docs/wittgenstein2_source_inventory.md`
+- `docs/wittgenstein3_source_inventory.md`
+- `docs/russell2_schedule_365.md`
+- `docs/russell3_schedule_365.md`
+- `docs/wittgenstein1_schedule_365.md`
+- `docs/wittgenstein2_schedule_365.md`
+- `docs/wittgenstein3_schedule_365.md`
+
 ---
 
 ## 2. 현재 완료 상태 (커밋 기준)
