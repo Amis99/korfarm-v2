@@ -31,7 +31,7 @@
 | 홍길동전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 3회 | source_selected |
 | 구운몽 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |
 | 사씨남정기 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |
-| 토끼전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 3회 | source_selected |
+| 수궁가 | classical-prose-excerpt | 로컬 원문 > 진단 테스트 v2/data/russell/R1_LIT_P5/passage.md (다) | 2회 | source_selected |
 | 장끼전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |
 | 허생전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 3회 | source_selected |
 | 양반전 | classical-prose-excerpt | 웹 원문 > 한국고전종합DB / 한국민족문화대백과 | 2회 | source_selected |

@@ -185,14 +185,14 @@
 | 167 | 비문학 | 회로 해석 | `docs/russell3_source_inventory.md > 전기공학` |
 | 168 | 문법 | 문장 부호 (비교) | 러셀 3 문법 설명 지문 수동 작성 |
 | 169 | 비문학 | 치료 지표 | `docs/russell3_source_inventory.md > 의약학` |
-| 170 | 문학 | 토끼전(1) | `docs/russell3_source_inventory.md` > 토끼전 |
+| 170 | 문학 | 수궁가(1) | 로컬 원문 > `진단 테스트 v2/data/russell/R1_LIT_P5/passage.md` (다) |
 | 171 | 비문학 | 동적 계획법 | `docs/russell3_source_inventory.md > 데이터알고리즘` |
 | 172 | 화법 | 안내와 요청 (비교) | 러셀 3 화법 상황 지문 수동 작성 |
 | 173 | 작문 | 제목 붙이기 (비교) | 러셀 3 작문 과정 지문 수동 작성 |
 | 174 | 비문학 | 학습 데이터 편향 | `docs/russell3_source_inventory.md > 인공지능` |
 | 175 | 문법 | 맞춤법과 표준어 (비교) | 러셀 3 문법 설명 지문 수동 작성 |
 | 176 | 비문학 | 사회계약론 | `docs/russell3_source_inventory.md > 서양철학` |
-| 177 | 문학 | 토끼전(2) | `docs/russell3_source_inventory.md` > 토끼전 |
+| 177 | 문학 | 수궁가(2) | 로컬 원문 > `진단 테스트 v2/data/russell/R1_LIT_P5/passage.md` (다) |
 | 178 | 비문학 | 격물치지 | `docs/russell3_source_inventory.md > 동양철학` |
 | 179 | 화법 | 설득 전략 (비교) | 러셀 3 화법 상황 지문 수동 작성 |
 | 180 | 작문 | 요약문 쓰기 (비교) | 러셀 3 작문 과정 지문 수동 작성 |
