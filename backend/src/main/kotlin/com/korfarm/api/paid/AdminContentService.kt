@@ -301,6 +301,20 @@ class AdminContentService(
     }
 
     @Transactional(readOnly = true)
+    fun listManuscripts(): List<ManuscriptSummary> {
+        return contentRepository.findByContentTypeAndStatus("PRO_MANUSCRIPT", "active")
+            .sortedWith(compareBy({ it.levelId }, { it.dayIndex }))
+            .map { c ->
+                ManuscriptSummary(
+                    contentId = c.id,
+                    levelId = c.levelId,
+                    dayIndex = c.dayIndex,
+                    title = c.title
+                )
+            }
+    }
+
+    @Transactional(readOnly = true)
     fun listContents(): List<AdminContentSummary> {
         return contentRepository.findAll().sortedBy { it.createdAt }.map { content ->
             AdminContentSummary(

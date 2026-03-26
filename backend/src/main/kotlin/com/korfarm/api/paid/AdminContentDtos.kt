@@ -115,3 +115,10 @@ data class AdminUserDto(
     val editCount: Int,
     val lastEditAt: LocalDateTime?
 )
+
+data class ManuscriptSummary(
+    val contentId: String,
+    val levelId: String?,
+    val dayIndex: Int?,
+    val title: String
+)

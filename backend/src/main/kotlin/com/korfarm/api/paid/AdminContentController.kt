@@ -47,6 +47,14 @@ class AdminContentController(
         return ApiResponse(success = true, data = data)
     }
 
+    @GetMapping("/manuscripts")
+    fun listManuscripts(): ApiResponse<List<ManuscriptSummary>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        val data = adminContentService.listManuscripts()
+        return ApiResponse(success = true, data = data)
+    }
+
     @GetMapping("/content")
     fun listContent(): ApiResponse<List<AdminContentSummary>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
