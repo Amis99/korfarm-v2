@@ -63,9 +63,9 @@
 | 45 | 비문학 | 뜻과 지시체 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 46 | 화법 | 인터뷰의 핵심 정보 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 47 | 작문 | 개념 정의 방식 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 48 | 비문학 | ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
+| 48 | 비문학 | 메타인지 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 49 | 문법 | 훈민정음 원리 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 50 | 비문학 | ??? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
+| 50 | 비문학 | CFC와 오존층 파괴 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 51 | 문학 | 길을 찾아서 4 - 명암리 길 | docs/wittgenstein1_source_inventory.md > 길을 찾아서 4 - 명암리 길 |
 | 52 | 비문학 | 서사 관점 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 53 | 화법 | 건의와 협상의 전략 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
