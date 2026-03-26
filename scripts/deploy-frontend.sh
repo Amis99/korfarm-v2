@@ -18,8 +18,10 @@ aws s3 sync dist/assets/ "s3://${BUCKET}/assets/" \
   --delete
 
 # 나머지 파일 (index.html 등)은 짧은 캐시
+# test-pdfs/는 별도 관리 — 삭제 방지
 aws s3 sync dist/ "s3://${BUCKET}/" \
   --exclude "assets/*" \
+  --exclude "test-pdfs/*" \
   --cache-control "public, max-age=60" \
   --delete
 
