@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import AdminLayout from "../components/AdminLayout";
-import { apiGet, apiPut } from "../utils/adminApi";
+import { apiGet, apiPut, apiPost } from "../utils/adminApi";
 import {
   LEVEL_ORDER, LEVEL_NAMES, LEVEL_GROUPS,
   DOWNLOADABLE_SCHEMAS, EXAM_SCHEMA, COMMENTARY_SCHEMA,
@@ -13,6 +13,16 @@ const MODES = [
   { key: "exam", label: "시험지" },
   { key: "commentary", label: "해설서" },
 ];
+
+// ─── snake_case → camelCase 정규화 ───
+function normalizeItem(raw) {
+  return {
+    contentId: raw.content_id ?? raw.contentId,
+    levelId: raw.level_id ?? raw.levelId,
+    dayIndex: raw.day_index ?? raw.dayIndex,
+    title: raw.title,
+  };
+}
 
 // ─── 유틸 ───
 function downloadJson(data, filename) {
@@ -215,15 +225,21 @@ function AdminManuscriptPage() {
   const [bulkDlOpen, setBulkDlOpen] = useState(false);
   const bulkRef = useRef(null);
 
+  const fileInputRef = useRef(null);
+
   // 원고 목록 로드
-  useEffect(() => {
-    if (mode !== "textbook") return;
+  const loadManuscripts = useCallback(() => {
     setLoading(true);
     apiGet("/v1/admin/manuscripts")
-      .then(data => setManuscripts(data || []))
+      .then(data => setManuscripts((data || []).map(normalizeItem)))
       .catch(() => setToast({ msg: "원고 목록 로드 실패", type: "error" }))
       .finally(() => setLoading(false));
-  }, [mode]);
+  }, []);
+
+  useEffect(() => {
+    if (mode !== "textbook") return;
+    loadManuscripts();
+  }, [mode, loadManuscripts]);
 
   // 항목 선택 → 상세 로드
   const handleSelect = useCallback(async (item) => {
@@ -233,7 +249,7 @@ function AdminManuscriptPage() {
     try {
       setLoading(true);
       const preview = await apiGet(`/v1/admin/content/${item.contentId}/preview`);
-      const json = preview.content || {};
+      const json = preview.content || preview.content_json || {};
       const manuscript = json.manuscript || json;
       setEditorData(manuscript);
       setRawText(JSON.stringify(manuscript, null, 2));
@@ -243,6 +259,73 @@ function AdminManuscriptPage() {
       setLoading(false);
     }
   }, []);
+
+  // JSON 파일 업로드
+  const handleUpload = useCallback(async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+    e.target.value = "";
+
+    const items = [];
+    for (const file of files) {
+      try {
+        const text = await file.text();
+        const json = JSON.parse(text);
+        // 파일명에서 레벨/챕터 추출: "소쉬르1 (챕터3).json" → saussure1, 3
+        const nameMatch = file.name.match(/(.+?)\s*[\(（].*?(\d+)[\)）]/);
+        let levelId = null;
+        let dayIndex = null;
+        if (nameMatch) {
+          const korName = nameMatch[1].trim();
+          dayIndex = parseInt(nameMatch[2]);
+          const entry = Object.entries(LEVEL_NAMES).find(([, v]) => v === korName);
+          if (entry) levelId = entry[0];
+        }
+        // 또는 JSON 내 메타에서 추출
+        const meta = json.메타 || {};
+        if (!levelId && meta.과정) {
+          const entry = Object.entries(LEVEL_NAMES).find(([, v]) => v === meta.과정);
+          if (entry) levelId = entry[0];
+        }
+        if (!dayIndex && meta.챕터) dayIndex = Number(meta.챕터);
+
+        if (!levelId || !dayIndex) {
+          setToast({ msg: `${file.name}: 레벨/챕터 정보를 추출할 수 없습니다`, type: "error" });
+          continue;
+        }
+        const levelName = LEVEL_NAMES[levelId] || levelId;
+        items.push({
+          contentType: "PRO_MANUSCRIPT",
+          levelId,
+          area: "MANUSCRIPT",
+          subArea: "RAW",
+          dayIndex,
+          moduleKey: "manuscript",
+          schemaVersion: "1.0",
+          content: {
+            title: `${levelName} ${dayIndex}장`,
+            contentType: "PRO_MANUSCRIPT",
+            targetLevel: levelId,
+            chapterNumber: dayIndex,
+            manuscript: json
+          }
+        });
+      } catch (err) {
+        setToast({ msg: `${file.name}: JSON 파싱 실패`, type: "error" });
+      }
+    }
+
+    if (items.length === 0) return;
+    setToast({ msg: `${items.length}건 업로드 중...`, type: "success" });
+    try {
+      const result = await apiPost("/v1/admin/content/batch-import", { items });
+      const imported = result.imported ?? result.imported_count ?? items.length;
+      setToast({ msg: `${imported}건 업로드 완료`, type: "success" });
+      loadManuscripts();
+    } catch {
+      setToast({ msg: "업로드 실패", type: "error" });
+    }
+  }, [loadManuscripts]);
 
   // 저장
   const handleSave = useCallback(async () => {
@@ -255,10 +338,10 @@ function AdminManuscriptPage() {
     setSaving(true);
     try {
       await apiPut(`/v1/admin/content/${selectedItem.contentId}`, {
-        contentType: "PRO_MANUSCRIPT",
-        schemaVersion: "1.0",
-        levelId: selectedItem.levelId,
-        dayIndex: selectedItem.dayIndex,
+        content_type: "PRO_MANUSCRIPT",
+        schema_version: "1.0",
+        level_id: selectedItem.levelId,
+        day_index: selectedItem.dayIndex,
         content: {
           title: selectedItem.title,
           contentType: "PRO_MANUSCRIPT",
@@ -390,6 +473,11 @@ function AdminManuscriptPage() {
           <SchemaDropdown />
 
           {mode === "textbook" && (
+            <>
+            <input ref={fileInputRef} type="file" accept=".json" multiple style={{ display: "none" }} onChange={handleUpload} />
+            <button className="ms-btn ms-btn-primary" onClick={() => fileInputRef.current?.click()}>
+              <span className="material-symbols-outlined">upload_file</span>JSON 업로드
+            </button>
             <div className="ms-dropdown" ref={bulkRef}>
               <button className="ms-btn ms-btn-secondary" onClick={() => setBulkDlOpen(v => !v)}>
                 <span className="material-symbols-outlined">folder_zip</span>레벨 일괄 다운로드
@@ -404,6 +492,7 @@ function AdminManuscriptPage() {
                 </div>
               )}
             </div>
+            </>
           )}
 
           {mode === "exam" && (
