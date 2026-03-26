@@ -112,8 +112,8 @@
 | 94 | 비문학 | 매체 특성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 95 | 화법 | 발표자의 의도 파악 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 96 | 작문 | 개요의 적절성 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 97 | 비문학 | 담화 표지 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
-| 98 | 문법 | 음운 변동 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 97 | 비문학 | 담화 공동체 | 참고용 기출 지문 > 지문으로이해하기_08_담화_공동체_독자.json |
+| 98 | 문법 | 자음군 단순화와 ㅎ 탈락 (적용) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
 | 99 | 비문학 | 인지 부하 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 100 | 문학 | 낙은별곡 | docs/wittgenstein1_source_inventory.md > 낙은별곡 |
 | 101 | 비문학 | 지속 가능성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
