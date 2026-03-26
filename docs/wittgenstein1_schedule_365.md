@@ -32,10 +32,10 @@
 | 14 | 문법 | 형태소와 품사 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 15 | 비문학 | ??? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 16 | 문학 | 간 | docs/wittgenstein1_source_inventory.md > 간 |
-| 17 | 비문학 | ??? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
+| 17 | 비문학 | 큐비즘 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 18 | 화법 | 질문의 기능 분석 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 19 | 작문 | 주장과 근거 배열 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 20 | 비문학 | ?? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
+| 20 | 비문학 | 언어의 지시적 불투명성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 21 | 문법 | 문장 성분 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 22 | 비문학 | ?? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 23 | 문학 | 갈까 보다 | docs/wittgenstein1_source_inventory.md > 갈까 보다 |
