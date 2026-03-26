@@ -106,7 +106,7 @@
 | 88 | 화법 | 상황 맥락 추론 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 89 | 작문 | 제목 설계 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 90 | 비문학 | 엔트로피 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
-| 91 | 문법 | 문법 개념 적용 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 91 | 문법 | 구개음화 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 92 | 비문학 | 알고리즘 복잡도 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 93 | 문학 | 낙엽송 | docs/wittgenstein1_source_inventory.md > 낙엽송 |
 | 94 | 비문학 | 매체 특성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
