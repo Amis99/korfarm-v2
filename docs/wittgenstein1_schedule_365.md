@@ -42,9 +42,9 @@
 | 24 | 비문학 | 오존층 파괴와 CFC | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 25 | 화법 | 토의 규칙과 역할 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 26 | 작문 | 정보 통합 글쓰기 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 27 | 비문학 | ??? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
+| 27 | 비문학 | 헤르더의 개체성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 28 | 문법 | 피동과 사동 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 29 | 비문학 | ??? ??? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
+| 29 | 비문학 | 의미 내재주의와 외재주의 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 30 | 문학 | 그리움 | docs/wittgenstein1_source_inventory.md > 그리움 |
 | 31 | 비문학 | ?? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 32 | 화법 | 설득 전략 분석 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
