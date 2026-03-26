@@ -46,10 +46,10 @@
 | 28 | 문법 | 피동과 사동 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 29 | 비문학 | 의미 내재주의와 외재주의 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 30 | 문학 | 그리움 | docs/wittgenstein1_source_inventory.md > 그리움 |
-| 31 | 비문학 | ?? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
+| 31 | 비문학 | 공공 저널리즘 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 32 | 화법 | 설득 전략 분석 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 33 | 작문 | 고쳐쓰기 전략 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 34 | 비문학 | ?? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
+| 34 | 비문학 | 정보 비대칭과 역선택 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 35 | 문법 | 높임과 시간 표현 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 36 | 비문학 | ???? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 37 | 문학 | 기황전설 | docs/wittgenstein1_source_inventory.md > 기황전설 |
