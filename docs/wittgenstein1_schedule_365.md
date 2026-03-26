@@ -37,9 +37,9 @@
 | 19 | 작문 | 주장과 근거 배열 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 20 | 비문학 | 언어의 지시적 불투명성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 21 | 문법 | 문장 성분 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 22 | 비문학 | ?? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
+| 22 | 비문학 | 집단 무의식과 개별화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 23 | 문학 | 갈까 보다 | docs/wittgenstein1_source_inventory.md > 갈까 보다 |
-| 24 | 비문학 | ?? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
+| 24 | 비문학 | 오존층 파괴와 CFC | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 25 | 화법 | 토의 규칙과 역할 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 26 | 작문 | 정보 통합 글쓰기 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 27 | 비문학 | ??? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
