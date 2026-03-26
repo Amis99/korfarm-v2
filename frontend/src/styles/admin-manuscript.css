@@ -70,6 +70,18 @@
 .ms-arr-add { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 4px; border: 1px dashed #3a4a3e; background: none; color: #6a7a6e; cursor: pointer; font-size: 12px; margin-top: 4px; }
 .ms-arr-add:hover { border-color: #ff7f2a; color: #ff7f2a; }
 
+/* 필드 라벨 행 (삭제 버튼 포함) */
+.ms-field-label-row { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
+.ms-field-label-row .ms-field-label { margin-bottom: 0; }
+.ms-field-remove { background: none; border: none; color: #5a6a5e; cursor: pointer; padding: 1px; opacity: 0.4; transition: .15s; line-height: 1; }
+.ms-field-remove:hover { color: #ff5c5c; opacity: 1; }
+
+/* 필드 추가 인라인 폼 */
+.ms-add-field { display: flex; align-items: center; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.ms-add-field input { flex: 1; min-width: 120px; padding: 5px 8px; border-radius: 4px; border: 1px solid #3a4a3e; background: #0f1810; color: #f3f6f1; font-size: 12px; }
+.ms-add-field input:focus { border-color: #ff7f2a; outline: none; }
+.ms-add-field select { padding: 5px 6px; border-radius: 4px; border: 1px solid #3a4a3e; background: #0f1810; color: #c5d0c8; font-size: 12px; }
+
 /* 객체 편집 (재귀) */
 .ms-obj-fields { padding-left: 12px; border-left: 2px solid #2a3a2e; }
 
