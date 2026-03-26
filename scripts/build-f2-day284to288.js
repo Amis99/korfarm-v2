@@ -1,0 +1,194 @@
+const fs = require('fs');
+const path = require('path');
+
+// === 유틸리티 함수 ===
+
+function findSentences(text) {
+  const sentences = [];
+  let start = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === '.' && (i === text.length - 1 || text[i+1] === ' ' || text[i+1] === '\n')) {
+      sentences.push({ start, end: i + 1, text: text.substring(start, i + 1) });
+      let next = i + 1;
+      while (next < text.length && (text[next] === ' ' || text[next] === '\n')) next++;
+      start = next;
+    }
+  }
+  if (start < text.length) sentences.push({ start, end: text.length, text: text.substring(start) });
+  return sentences;
+}
+
+function findRange(paragraphs, pid, searchText) {
+  const para = paragraphs.find(p => p.id === pid);
+  if (!para) throw new Error(`문단 ${pid} 없음`);
+  const start = para.text.indexOf(searchText);
+  if (start === -1) throw new Error(`"${searchText.substring(0, 30)}..." ${pid}에서 찾을 수 없음`);
+  return { paragraphId: pid, start, end: start + searchText.length };
+}
+
+function charLen(paragraphs) { return paragraphs.reduce((sum, p) => sum + p.text.length, 0); }
+
+function buildTimeline(paragraphs) {
+  let stepNum = 0; const timeline = [];
+  paragraphs.forEach((para) => {
+    const sents = findSentences(para.text);
+    sents.forEach((sent) => { stepNum++; timeline.push({ stepId: `s${stepNum}`, highlight: { ranges: [{ paragraphId: para.id, start: sent.start, end: sent.end }] } }); });
+    stepNum++; timeline.push({ stepId: `s${stepNum}`, highlight: { ranges: [{ paragraphId: para.id, start: 0, end: para.text.length }] } });
+  });
+  return timeline;
+}
+
+function buildRecallCards(paragraphs) {
+  const fullText = paragraphs.map(p => p.text).join('\n');
+  const totalLen = fullText.length; const chunkSize = Math.ceil(totalLen / 8); const cards = [];
+  for (let i = 0; i < 8; i++) { const s = i * chunkSize; const e = Math.min(s + chunkSize, totalLen); cards.push({ id: `c${i+1}`, text: fullText.substring(s, e) }); }
+  return cards;
+}
+
+function makeConfirmQ(id, prompt, ranges) {
+  return { id, prompt, answerRanges: ranges, scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true, answerMatchMode: "ANY" };
+}
+
+function assembleFull(dayIndex, subArea, subAreaKo, paragraphs, confirmQuestions) {
+  const timeline = buildTimeline(paragraphs); const cards = buildRecallCards(paragraphs);
+  const nn = String(dayIndex).padStart(3, '0');
+  return { contentId: `dr-f2-${nn}`, contentType: "DAILY_READING", version: 1, status: "PUBLISHED",
+    title: `일일 독해(프레게 2) Day ${dayIndex} ${subAreaKo}`, description: "일일 독해 - 정독·복기·확인",
+    targetLevel: "FREGE_2", schoolGradeRange: { min: 6, max: 6 }, area: "READING", subArea,
+    competencies: ["READING"], tags: ["daily"], access: { mode: "FREE" },
+    seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 }, timeLimitSec: 480, assets: {},
+    payload: { passage: { format: "TEXT", paragraphs }, intensive: { timeline },
+      recall: { cards, correctOrder: cards.map(c => c.id), seedPenalty: 1 }, confirm: { questions: confirmQuestions } }
+  };
+}
+
+function wrapBatchItem(dayIndex, subArea, content) {
+  return { content_type: "DAILY_READING", level_id: "FREGE_2", area: "READING", sub_area: subArea, day_index: dayIndex, module_key: "reading_training", schema_version: "1.0", content };
+}
+
+// === Day 284 (짝수 → 문학) ===
+function buildDay284() {
+  const paragraphs = [
+    { id: "p1", text: "소년은 매일 아침 강가에 나가 돌을 주웠다. 납작하고 매끈한 돌을 골라 주머니에 넣고 학교로 갔다. 쉬는 시간이면 책상 서랍에서 돌을 꺼내 손바닥 위에 올려놓고 가만히 들여다보았다. 같은 반 아이들은 그런 소년을 이상하게 여겼지만, 소년은 개의치 않았다. 돌 하나하나에 강물의 온도와 아침 햇살의 색깔이 담겨 있다고 소년은 믿었다. 그것은 소년만의 비밀이자 위안이었다." },
+    { id: "p2", text: "소년의 아버지는 먼 도시에서 일하고 있었다. 한 달에 한 번 집에 오시던 아버지가 석 달째 오지 않았다. 어머니는 아버지 이야기를 꺼내면 입술을 꾹 다물었고, 소년은 더 이상 묻지 않는 법을 배웠다. 대신 강가에서 돌을 주울 때 아버지를 떠올렸다. 아버지는 어린 소년을 데리고 이 강에서 물수제비를 뜨곤 했다. 돌이 수면을 세 번, 네 번 튀어 오를 때마다 아버지는 환하게 웃었고, 소년은 그 웃음소리가 강물 소리보다 좋았다." },
+    { id: "p3", text: "어느 날 소년은 유난히 예쁜 돌 하나를 발견했다. 연두색 빛이 도는 반투명한 돌이었는데, 강물에 비추면 속에서 빛이 일렁이는 것 같았다. 소년은 이 돌을 아버지께 드리기로 마음먹었다. 편지를 쓸 수 없으니 돌에 마음을 담아 보내면 아버지가 알아주실 것이라 생각했다. 소년은 돌을 작은 상자에 넣고 어머니 몰래 우체국에 갔다. 아버지의 주소를 또박또박 적은 소년의 손은 떨리고 있었지만, 상자를 건네는 순간 마음이 한결 가벼워졌다." },
+    { id: "p4", text: "일주일 후 아버지에게서 전화가 왔다. 수화기 너머로 아버지의 목소리가 갈라져 있었다. 돌을 받았다는 말 끝에 긴 침묵이 흘렀고, 이윽고 아버지는 다음 주에 집에 가겠다고 했다. 소년은 전화를 끊고 강가로 달려갔다. 물수제비를 뜰 돌을 미리 골라 놓아야 했다. 석양이 강물 위로 붉게 번지는 가운데 소년은 납작한 돌 열 개를 주머니에 넣고 집으로 돌아왔다. 발걸음이 어느 때보다 가벼웠다." }
+  ];
+  console.log(`Day 284 글자 수: ${charLen(paragraphs)}`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "소년이 매일 강가에서 돌을 줍는 이유는 무엇인가요?", [findRange(paragraphs, "p1", "돌 하나하나에 강물의 온도와 아침 햇살의 색깔이 담겨 있다고 소년은 믿었다")]),
+    makeConfirmQ("q2", "소년의 아버지가 집에 오지 않은 기간은 얼마나 되나요?", [findRange(paragraphs, "p2", "한 달에 한 번 집에 오시던 아버지가 석 달째 오지 않았다")]),
+    makeConfirmQ("q3", "소년이 강가에서 아버지와 함께 한 활동은 무엇인가요?", [findRange(paragraphs, "p2", "아버지는 어린 소년을 데리고 이 강에서 물수제비를 뜨곤 했다")]),
+    makeConfirmQ("q4", "소년이 발견한 특별한 돌의 특징은 무엇인가요?", [findRange(paragraphs, "p3", "연두색 빛이 도는 반투명한 돌이었는데, 강물에 비추면 속에서 빛이 일렁이는 것 같았다")]),
+    makeConfirmQ("q5", "소년이 돌을 아버지에게 보내기로 결심한 이유는 무엇인가요?", [findRange(paragraphs, "p3", "편지를 쓸 수 없으니 돌에 마음을 담아 보내면 아버지가 알아주실 것이라 생각했다")]),
+    makeConfirmQ("q6", "아버지의 전화를 받은 후 소년이 강가로 달려간 목적은 무엇인가요?", [findRange(paragraphs, "p4", "물수제비를 뜰 돌을 미리 골라 놓아야 했다")])
+  ];
+  return { content: assembleFull(284, "LITERATURE", "문학", paragraphs, confirmQuestions), subArea: "LITERATURE" };
+}
+
+// === Day 285 (홀수 → 비문학) ===
+function buildDay285() {
+  const paragraphs = [
+    { id: "p1", text: "지구의 대기는 태양으로부터 들어오는 에너지와 지표면에서 방출되는 에너지 사이의 균형에 의해 적정 온도를 유지한다. 태양 복사 에너지의 약 30퍼센트는 구름과 지표면에 의해 우주 공간으로 반사되고, 나머지 70퍼센트가 지구 시스템에 흡수된다. 지표면에 흡수된 에너지는 적외선 형태로 다시 방출되는데, 이때 대기 중의 이산화 탄소, 메테인, 수증기 등 온실가스가 이 적외선을 흡수하여 대기의 온도를 높인다. 이러한 현상을 온실 효과라 하며, 온실 효과가 없다면 지구의 평균 기온은 현재의 약 15도가 아닌 영하 18도 정도로 떨어져 대부분의 생물이 살기 어려운 환경이 될 것이다." },
+    { id: "p2", text: "문제는 산업 혁명 이후 화석 연료의 대량 사용으로 대기 중 온실가스 농도가 급격히 증가했다는 점이다. 산업화 이전 대기 중 이산화 탄소 농도는 약 280피피엠이었으나, 2024년 현재 약 425피피엠을 넘어섰다. 이는 지난 80만 년 동안 가장 높은 수치이다. 온실가스 농도의 증가는 지구의 평균 기온 상승으로 이어졌으며, 산업화 이전 대비 이미 약 1.2도 상승한 상태이다. 과학자들은 기온 상승이 1.5도를 넘으면 해수면 상승, 극단적 기상 현상, 생태계 파괴 등 돌이킬 수 없는 변화가 가속화될 것이라고 경고한다." },
+    { id: "p3", text: "기후 변화에 대응하기 위해 국제 사회는 2015년 파리 협정을 체결하여 지구 평균 기온 상승을 1.5도 이내로 제한하는 목표를 설정했다. 이를 달성하려면 2050년까지 전 세계 탄소 배출량을 순제로, 즉 배출량과 흡수량이 같아지는 상태에 도달해야 한다. 각국은 태양광, 풍력 등 재생 에너지의 비중을 확대하고, 전기차 보급을 늘리며, 산림 복원 사업을 추진하고 있다. 그러나 개발도상국의 에너지 수요 증가와 선진국의 소비 패턴 변화 사이에서 국제적 합의를 이끌어내는 것은 여전히 큰 과제로 남아 있다." }
+  ];
+  console.log(`Day 285 글자 수: ${charLen(paragraphs)}`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "태양 복사 에너지 중 지구 시스템에 흡수되는 비율은 얼마인가요?", [findRange(paragraphs, "p1", "나머지 70퍼센트가 지구 시스템에 흡수된다")]),
+    makeConfirmQ("q2", "온실 효과가 없다면 지구의 평균 기온은 어떻게 되나요?", [findRange(paragraphs, "p1", "온실 효과가 없다면 지구의 평균 기온은 현재의 약 15도가 아닌 영하 18도 정도로 떨어져")]),
+    makeConfirmQ("q3", "2024년 현재 대기 중 이산화 탄소 농도는 약 얼마인가요?", [findRange(paragraphs, "p2", "2024년 현재 약 425피피엠을 넘어섰다")]),
+    makeConfirmQ("q4", "산업화 이전 대비 지구의 평균 기온은 얼마나 상승했나요?", [findRange(paragraphs, "p2", "산업화 이전 대비 이미 약 1.2도 상승한 상태이다")]),
+    makeConfirmQ("q5", "파리 협정에서 설정한 기온 상승 제한 목표는 무엇인가요?", [findRange(paragraphs, "p3", "지구 평균 기온 상승을 1.5도 이내로 제한하는 목표를 설정했다")]),
+    makeConfirmQ("q6", "2050년까지 달성해야 하는 탄소 배출 관련 목표는 무엇인가요?", [findRange(paragraphs, "p3", "2050년까지 전 세계 탄소 배출량을 순제로, 즉 배출량과 흡수량이 같아지는 상태에 도달해야 한다")]),
+    makeConfirmQ("q7", "기후 변화 대응에서 여전히 큰 과제로 남아 있는 것은 무엇인가요?", [findRange(paragraphs, "p3", "개발도상국의 에너지 수요 증가와 선진국의 소비 패턴 변화 사이에서 국제적 합의를 이끌어내는 것은 여전히 큰 과제로 남아 있다")])
+  ];
+  return { content: assembleFull(285, "NONFICTION", "비문학", paragraphs, confirmQuestions), subArea: "NONFICTION" };
+}
+
+// === Day 286 (짝수 → 문학) ===
+function buildDay286() {
+  const paragraphs = [
+    { id: "p1", text: "우체부 아저씨는 마을에서 가장 일찍 일어나는 사람이었다. 새벽 다섯 시면 어김없이 자전거에 올라 산길을 넘었고, 비가 오든 눈이 오든 배달을 거른 적이 없었다. 마을 사람들은 아저씨의 자전거 벨 소리를 아침 시계처럼 여겼다. 편지가 뜸해진 시대였지만, 아저씨의 가방에는 항상 무언가가 들어 있었다. 관공서 고지서, 은행 서류, 가끔은 멀리 떠난 자녀가 보낸 명절 카드까지. 아저씨는 마을과 바깥세상을 이어 주는 유일한 끈이었다." },
+    { id: "p2", text: "마을에서 가장 외딴 곳에 사는 박 할머니는 아저씨가 오는 날을 손꼽아 기다렸다. 도시로 간 아들에게서 편지가 올 때면 할머니는 안경을 쓰고 마루에 앉아 한 글자씩 짚어가며 읽었다. 아들의 편지가 없는 날에도 아저씨는 할머니 집에 들러 차 한 잔을 나눴다. 배달할 것이 없어도 안부를 전하는 것이 자신의 일이라고 아저씨는 말했다. 할머니는 그런 아저씨에게 텃밭에서 딴 채소를 한 봉지씩 싸 주었고, 아저씨는 사양 않고 받았다." },
+    { id: "p3", text: "그해 겨울은 유난히 추웠다. 폭설이 내려 산길이 막혔고, 사흘째 우편 배달이 중단되었다. 넷째 날 아침, 아저씨는 자전거를 두고 걸어서 산을 넘었다. 눈에 빠지고 미끄러지면서도 가방을 놓지 않았다. 마을에 도착한 아저씨의 신발은 젖어 있었고 손은 붉게 얼어 있었지만, 가방에서 편지를 꺼내 건네는 얼굴에는 웃음이 가득했다. 박 할머니에게 건네진 편지에는 아들이 설날에 귀향하겠다는 소식이 적혀 있었다. 할머니의 눈에 눈물이 고였다." },
+    { id: "p4", text: "이듬해 봄, 아저씨는 정년퇴직을 했다. 마을 사람들은 마을회관에 모여 작은 송별회를 열었다. 아저씨는 삼십 년간 이 길을 달렸다며 담담하게 인사했지만, 박 할머니가 수놓은 손수건을 건네자 눈시울이 붉어졌다. 아저씨가 떠난 뒤 새 우체부가 왔지만, 마을 사람들은 오랫동안 아저씨의 벨 소리를 기억했다. 그것은 단순한 벨 소리가 아니라 누군가가 자신을 잊지 않고 찾아온다는 안도감의 소리였기 때문이다." }
+  ];
+  console.log(`Day 286 글자 수: ${charLen(paragraphs)}`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "우체부 아저씨가 마을에서 어떤 역할을 했다고 표현되고 있나요?", [findRange(paragraphs, "p1", "아저씨는 마을과 바깥세상을 이어 주는 유일한 끈이었다")]),
+    makeConfirmQ("q2", "배달할 것이 없는 날에도 아저씨가 할머니 집에 들른 이유는 무엇인가요?", [findRange(paragraphs, "p2", "배달할 것이 없어도 안부를 전하는 것이 자신의 일이라고 아저씨는 말했다")]),
+    makeConfirmQ("q3", "폭설로 배달이 중단된 기간은 얼마나 되었나요?", [findRange(paragraphs, "p3", "사흘째 우편 배달이 중단되었다")]),
+    makeConfirmQ("q4", "넷째 날 아저씨가 배달을 위해 택한 방법은 무엇인가요?", [findRange(paragraphs, "p3", "아저씨는 자전거를 두고 걸어서 산을 넘었다")]),
+    makeConfirmQ("q5", "박 할머니에게 온 편지에는 어떤 소식이 담겨 있었나요?", [findRange(paragraphs, "p3", "아들이 설날에 귀향하겠다는 소식이 적혀 있었다")]),
+    makeConfirmQ("q6", "마을 사람들이 아저씨의 벨 소리를 오래 기억한 이유는 무엇인가요?", [findRange(paragraphs, "p4", "그것은 단순한 벨 소리가 아니라 누군가가 자신을 잊지 않고 찾아온다는 안도감의 소리였기 때문이다")])
+  ];
+  return { content: assembleFull(286, "LITERATURE", "문학", paragraphs, confirmQuestions), subArea: "LITERATURE" };
+}
+
+// === Day 287 (홀수 → 비문학) ===
+function buildDay287() {
+  const paragraphs = [
+    { id: "p1", text: "인간의 수면은 크게 비렘 수면과 렘 수면으로 나뉜다. 비렘 수면은 다시 1단계에서 3단계까지로 구분되며, 3단계에 해당하는 서파 수면이 가장 깊은 잠에 해당한다. 렘 수면은 안구가 빠르게 움직이는 것이 특징으로, 대부분의 꿈이 이 단계에서 나타난다. 일반적인 성인은 밤 동안 비렘 수면과 렘 수면을 약 90분 주기로 네다섯 차례 반복하며, 수면 초반에는 서파 수면의 비중이 높고 후반으로 갈수록 렘 수면의 비중이 커진다." },
+    { id: "p2", text: "수면이 건강에 미치는 영향은 매우 크다. 서파 수면 동안에는 성장 호르몬이 분비되어 세포 복구와 근육 성장이 이루어지며, 면역 체계가 강화된다. 렘 수면은 학습과 기억 통합에 핵심적인 역할을 하는데, 낮 동안 습득한 정보가 렘 수면 중에 장기 기억으로 전환된다. 수면 부족이 만성화되면 집중력 저하, 판단력 감소, 감정 조절 능력의 약화 등이 나타나며, 장기적으로는 비만, 당뇨, 심혈관 질환의 발생 위험이 높아진다. 하루 7시간 미만의 수면을 취하는 사람은 7~9시간 자는 사람에 비해 감기에 걸릴 확률이 약 세 배 높다는 연구 결과도 있다." },
+    { id: "p3", text: "현대인의 수면 질을 떨어뜨리는 대표적인 요인은 전자 기기의 과도한 사용이다. 스마트폰이나 태블릿 화면에서 나오는 청색광은 수면 호르몬인 멜라토닌의 분비를 억제하여 잠드는 시간을 지연시킨다. 전문가들은 취침 최소 한 시간 전에는 전자 기기 사용을 중단하고, 침실의 조명을 어둡게 유지하며, 매일 같은 시간에 잠들고 일어나는 규칙적인 수면 습관을 갖출 것을 권장한다. 카페인은 섭취 후 효과가 사라지기까지 약 여섯 시간이 걸리므로, 오후 늦은 시간 이후에는 커피나 에너지 음료 등 카페인 음료를 삼가는 것이 좋다. 이러한 수면 위생 습관을 꾸준히 실천하면 수면의 질이 크게 향상될 수 있다." }
+  ];
+  console.log(`Day 287 글자 수: ${charLen(paragraphs)}`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "가장 깊은 잠에 해당하는 수면 단계는 무엇인가요?", [findRange(paragraphs, "p1", "3단계에 해당하는 서파 수면이 가장 깊은 잠에 해당한다")]),
+    makeConfirmQ("q2", "비렘 수면과 렘 수면의 반복 주기는 얼마인가요?", [findRange(paragraphs, "p1", "비렘 수면과 렘 수면을 약 90분 주기로 네다섯 차례 반복하며")]),
+    makeConfirmQ("q3", "서파 수면 동안 일어나는 신체적 변화는 무엇인가요?", [findRange(paragraphs, "p2", "성장 호르몬이 분비되어 세포 복구와 근육 성장이 이루어지며, 면역 체계가 강화된다")]),
+    makeConfirmQ("q4", "렘 수면이 학습과 관련하여 하는 역할은 무엇인가요?", [findRange(paragraphs, "p2", "낮 동안 습득한 정보가 렘 수면 중에 장기 기억으로 전환된다")]),
+    makeConfirmQ("q5", "수면 부족 시 감기 걸릴 확률은 어떻게 변하나요?", [findRange(paragraphs, "p2", "하루 7시간 미만의 수면을 취하는 사람은 7~9시간 자는 사람에 비해 감기에 걸릴 확률이 약 세 배 높다")]),
+    makeConfirmQ("q6", "청색광이 수면에 미치는 영향은 무엇인가요?", [findRange(paragraphs, "p3", "청색광은 수면 호르몬인 멜라토닌의 분비를 억제하여 잠드는 시간을 지연시킨다")]),
+    makeConfirmQ("q7", "카페인 섭취 후 효과가 사라지기까지 얼마나 걸리나요?", [findRange(paragraphs, "p3", "카페인은 섭취 후 효과가 사라지기까지 약 여섯 시간이 걸리므로")])
+  ];
+  return { content: assembleFull(287, "NONFICTION", "비문학", paragraphs, confirmQuestions), subArea: "NONFICTION" };
+}
+
+// === Day 288 (짝수 → 문학) ===
+function buildDay288() {
+  const paragraphs = [
+    { id: "p1", text: "가을이 깊어지자 교실 창문으로 은행나무의 노란 잎사귀가 보였다. 은지는 수업 중에도 자꾸 창밖을 바라보았다. 곧 전학을 가야 한다는 사실이 마음을 무겁게 눌렀다. 아버지의 직장 때문에 이번이 네 번째 전학이었다. 처음 이 학교에 왔을 때 아무도 말을 걸어 주지 않았던 기억이 아직도 선명했다. 그런 은지에게 먼저 다가온 것은 같은 반의 수아였다. 수아는 쉬는 시간마다 은지의 옆자리로 와서 말을 걸었고, 점심시간에는 함께 급식을 먹자며 손을 잡아끌었다." },
+    { id: "p2", text: "수아와 함께한 일 년은 은지에게 가장 행복한 시간이었다. 방과 후에 학교 뒷산에 올라 노을을 보았고, 비 오는 날에는 한 우산 아래 몸을 붙이며 집까지 걸었다. 수아는 은지의 비밀 노트에 낙서를 하며 웃었고, 은지는 수아가 수학을 어려워할 때면 옆에서 차근차근 풀어 주었다. 두 사람 사이에는 말하지 않아도 통하는 것이 있었다. 서로가 서로에게 가장 편안한 사람이라는 확신이었다." },
+    { id: "p3", text: "전학 소식을 알리는 것이 가장 두려웠다. 은지는 일주일을 미루다가 하교길에 겨우 입을 열었다. 수아는 아무 말 없이 걸었다. 한참을 침묵하다가 수아가 말했다. 그럼 편지 쓸래, 나 편지 받는 거 좋아해. 은지는 그 말에 울음이 터질 뻔했지만 꾹 참고 고개를 끄덕였다. 그날 밤 은지는 첫 번째 편지를 썼다. 아직 떠나지도 않았는데 벌써 보고 싶다는 문장으로 시작하는 편지였다. 봉투에 스티커를 붙이며 은지는 작게 웃었다." },
+    { id: "p4", text: "전학 간 첫날, 새 교실은 낯설고 조용했다. 쉬는 시간에 은지는 가방에서 수아의 답장을 꺼내 읽었다. 우리 우정은 거리로 끊어지는 게 아니야, 라고 적혀 있었다. 은지는 편지를 접어 가슴 주머니에 넣었다. 그리고 옆자리에 앉은 아이에게 먼저 말을 걸었다. 안녕, 나는 은지야. 예전 같으면 할 수 없었을 일이었지만, 수아가 보여 준 용기가 은지 안에서 자라고 있었다. 교실 창밖으로 이번에는 단풍나무의 붉은 잎이 바람에 흔들리고 있었다." }
+  ];
+  console.log(`Day 288 글자 수: ${charLen(paragraphs)}`);
+  const confirmQuestions = [
+    makeConfirmQ("q1", "은지에게 이번 전학은 몇 번째 전학인가요?", [findRange(paragraphs, "p1", "아버지의 직장 때문에 이번이 네 번째 전학이었다")]),
+    makeConfirmQ("q2", "수아가 은지에게 처음 다가온 방식은 어떠했나요?", [findRange(paragraphs, "p1", "수아는 쉬는 시간마다 은지의 옆자리로 와서 말을 걸었고, 점심시간에는 함께 급식을 먹자며 손을 잡아끌었다")]),
+    makeConfirmQ("q3", "두 사람 사이에 말하지 않아도 통했던 확신은 무엇이었나요?", [findRange(paragraphs, "p2", "서로가 서로에게 가장 편안한 사람이라는 확신이었다")]),
+    makeConfirmQ("q4", "수아가 전학 소식을 듣고 제안한 것은 무엇인가요?", [findRange(paragraphs, "p3", "그럼 편지 쓸래, 나 편지 받는 거 좋아해")]),
+    makeConfirmQ("q5", "은지가 쓴 첫 번째 편지의 시작 문장은 어떤 내용이었나요?", [findRange(paragraphs, "p3", "아직 떠나지도 않았는데 벌써 보고 싶다는 문장으로 시작하는 편지였다")]),
+    makeConfirmQ("q6", "수아의 답장에 적힌 핵심 메시지는 무엇인가요?", [findRange(paragraphs, "p4", "우리 우정은 거리로 끊어지는 게 아니야")]),
+    makeConfirmQ("q7", "전학 간 첫날 은지가 예전과 다르게 행동한 것은 무엇인가요?", [findRange(paragraphs, "p4", "옆자리에 앉은 아이에게 먼저 말을 걸었다")])
+  ];
+  return { content: assembleFull(288, "LITERATURE", "문학", paragraphs, confirmQuestions), subArea: "LITERATURE" };
+}
+
+// === 실행부 ===
+const results = [
+  { dayIndex: 284, ...buildDay284() }, { dayIndex: 285, ...buildDay285() },
+  { dayIndex: 286, ...buildDay286() }, { dayIndex: 287, ...buildDay287() },
+  { dayIndex: 288, ...buildDay288() }
+];
+
+const staticDir = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'frege2');
+const batchItems = [];
+results.forEach(({ dayIndex, content, subArea }) => {
+  const filePath = path.join(staticDir, `${String(dayIndex).padStart(3, '0')}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(content, null, 2), 'utf8');
+  console.log(`  ✅ ${filePath}`);
+  batchItems.push(wrapBatchItem(dayIndex, subArea, content));
+});
+
+fs.writeFileSync(path.join(__dirname, '..', 'generated', 'new', 'batch-f2-284-288.json'), JSON.stringify(batchItems, null, 2), 'utf8');
+console.log('\n=== 검증 ===');
+results.forEach(({ dayIndex, content }) => {
+  const p = content.payload;
+  const len = p.passage.paragraphs.reduce((s, pg) => s + pg.text.length, 0);
+  const rc = p.recall.cards.length; const cq = p.confirm.questions.length;
+  const ok = len >= 850 && len <= 950 && rc === 8 && cq >= 5;
+  console.log(`Day ${dayIndex}: ${len}자 | recall=${rc} | confirm=${cq} | ${ok ? 'OK' : 'WARN'}`);
+});

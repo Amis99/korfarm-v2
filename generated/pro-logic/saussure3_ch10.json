@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 10장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "곤충이나 개구리 같은 동물들은 어른이 되면서 모습이 완전히 바뀝니다. 이것을 탈바꿈이라고 합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "탈바꿈이 일어나려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 동물이 탈바꿈을 해야 한다."
+              },
+              {
+                "id": "B",
+                "text": "생물의 몸속에 성장 단계에 따라 모습을 바꾸는 프로그램이 있어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "외부에서 누군가가 모습을 바꿔줘야 한다."
+              },
+              {
+                "id": "D",
+                "text": "동물이 스스로 원하면 언제든 바뀐다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "알에서 나온 애벌레는 번데기가 되었다가 날개 달린 나비가 됩니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "애벌레가 번데기 단계를 거치면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "날개가 달린 나비로 탈바꿈하여 하늘을 날 수 있게 된다."
+              },
+              {
+                "id": "B",
+                "text": "영원히 애벌레로 남는다."
+              },
+              {
+                "id": "C",
+                "text": "번데기 속에서 사라진다."
+              },
+              {
+                "id": "D",
+                "text": "물고기가 된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "성장이란 사람이나 동식물이 자라서 크기가 커지거나 성숙해지는 것입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'모든 생물은 성장한다. 올챙이는 생물이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "올챙이는 성장하지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "성장과 올챙이는 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "올챙이는 생물이 아니다."
+              },
+              {
+                "id": "D",
+                "text": "올챙이는 성장한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "동물들이 자라면서 모습이 변하는 것은 험한 자연 속에서 살아남기 위한 지혜로운 변화입니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'나비가 되려면 반드시 번데기 단계를 거쳐야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "번데기와 나비는 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "번데기 없이도 나비가 된다."
+              },
+              {
+                "id": "C",
+                "text": "번데기 단계 없이는 나비가 될 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "애벌레가 바로 나비가 된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "관찰이란 사물을 주의 깊게 자세히 살펴보는 것입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'성장 과정을 기록하려면 관찰이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "매일 애벌레의 변화를 관찰하고 관찰 일지에 기록했다."
+              },
+              {
+                "id": "B",
+                "text": "관찰하지 않고 상상만으로 기록을 썼다."
+              },
+              {
+                "id": "C",
+                "text": "관찰 없이도 성장 과정을 완벽히 기록했다."
+              },
+              {
+                "id": "D",
+                "text": "다른 사람의 기록을 베꼈다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "인내란 괴로움이나 어려움을 참고 견디는 것입니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'인내하면 성장할 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인내하면 퇴보한다."
+              },
+              {
+                "id": "B",
+                "text": "인내 없이도 성장할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "인내와 성장은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "인내했는데 성장하지 못하는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "물속에 살던 올챙이는 꼬리가 없어지고 다리가 나와 개구리가 됩니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'탈바꿈을 거치면 새로운 능력을 얻게 된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "탈바꿈 후 오히려 물에서 살 수 없게 되었다."
+              },
+              {
+                "id": "B",
+                "text": "올챙이가 변하지 않고 물속에서만 살았다."
+              },
+              {
+                "id": "C",
+                "text": "올챙이가 개구리가 되어 물과 땅 모두에서 살 수 있게 되었다."
+              },
+              {
+                "id": "D",
+                "text": "탈바꿈 없이 새로운 능력이 생겼다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "변화란 모양이나 성질이 바뀌어 달라지는 것입니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'탈바꿈하는 동물은 모습이 변한다. 나비는 탈바꿈한다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나비는 모습이 안 변한다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "나비는 모습이 변한다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "탈바꿈과 변화는 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "나비는 탈바꿈하지 않는다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "곤충의 탈바꿈은 험한 자연 속에서 살아남기 위한 전략입니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'탈바꿈'과 '생존율'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "탈바꿈과 생존율은 전혀 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "탈바꿈은 생존에 유리하지만, 다른 환경 요인도 함께 영향을 미친다."
+              },
+              {
+                "id": "C",
+                "text": "탈바꿈하면 반드시 생존한다."
+              },
+              {
+                "id": "D",
+                "text": "생존하면 반드시 탈바꿈을 한 것이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "과정이란 일이 되어 가는 경로나 순서입니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'번데기 기간이 길수록 나비 날개가 더 크다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "번데기 기간이 다른 여러 나비의 날개 크기를 비교 측정한다."
+              },
+              {
+                "id": "B",
+                "text": "나비의 색깔만 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "애벌레의 먹이량만 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "나비의 이름을 외운다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

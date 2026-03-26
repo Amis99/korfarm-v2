@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 14장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "기계는 스스로 생각하지 못하고, 우리가 코딩을 통해 입력한 프로그램대로 움직입니다. 알고리즘이란 문제를 해결하는 일정한 순서와 방법입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'기계에게 일을 시키려면 알고리즘이 필요하다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기계는 스스로 판단할 수 없어 정해진 순서대로만 작동한다"
+              },
+              {
+                "id": "B",
+                "text": "기계는 사람처럼 생각할 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "알고리즘 없이도 기계가 알아서 일한다"
+              },
+              {
+                "id": "D",
+                "text": "코딩은 필요 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "인공지능 로봇 마리는 민준이가 '딸기 사와'라고 했지만, 마트에서 '딸기맛 우유'를 사왔습니다. 명령이 모호했기 때문입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "마리가 잘못된 물건을 산 이유에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "로봇은 모호한 명령을 사람처럼 문맥으로 이해하지 못하고 글자 그대로 해석한다"
+              },
+              {
+                "id": "B",
+                "text": "로봇은 모든 명령을 완벽히 이해한다"
+              },
+              {
+                "id": "C",
+                "text": "딸기맛 우유는 딸기와 같다"
+              },
+              {
+                "id": "D",
+                "text": "마리가 일부러 다른 것을 샀다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "알고리즘은 순서가 중요합니다. 순서가 바뀌면 결과가 달라집니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "요리 레시피에서 '재료를 넣고 볶기'를 '볶고 나서 재료 넣기'로 바꾸면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "요리가 제대로 완성된다"
+              },
+              {
+                "id": "B",
+                "text": "순서가 바뀌어 원래 의도한 요리와 다른 결과가 나온다"
+              },
+              {
+                "id": "C",
+                "text": "순서는 결과에 영향을 주지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "요리가 더 맛있어진다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "마리에게 '과일 코너로 가서 빨간색이고 작은 과일을 골라서 계산하고 와'라고 구체적으로 명령하자 딸기를 제대로 사왔습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "기계에게 명령을 구체적이고 정확하게 하면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기계가 혼란스러워진다"
+              },
+              {
+                "id": "B",
+                "text": "구체적 명령은 불필요하다"
+              },
+              {
+                "id": "C",
+                "text": "기계가 명령을 무시한다"
+              },
+              {
+                "id": "D",
+                "text": "원하는 결과를 정확하게 얻을 수 있다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "알고리즘은 순서가 정해져 있어야 합니다. '1단계: 과일 코너로 간다, 2단계: 딸기를 고른다, 3단계: 계산한다'처럼요.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 알고리즘은 정해진 순서대로 실행해야 한다. 소전제: 마리에게 준 심부름 지시는 알고리즘이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "알고리즘과 순서는 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "심부름 순서는 상관없다"
+              },
+              {
+                "id": "C",
+                "text": "마리가 알아서 순서를 정한다"
+              },
+              {
+                "id": "D",
+                "text": "마리의 심부름 지시는 정해진 순서대로 실행되어야 한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "모호한 명령을 내리면 기계는 잘못된 결과를 낼 수 있습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 모호한 명령은 잘못된 결과를 낸다. 소전제: '딸기 사와'는 모호한 명령이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기계가 딸기를 정확히 산다"
+              },
+              {
+                "id": "B",
+                "text": "모호한 명령도 정확한 결과를 낸다"
+              },
+              {
+                "id": "C",
+                "text": "잘못된 결과가 나올 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "명령의 정확성은 중요하지 않다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "기계에게 정확한 결과를 얻으려면 명확한 명령이 필요합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'정확한 결과를 위해 명확한 명령이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "명확한 명령 없이는 정확한 결과를 얻을 수 없다"
+              },
+              {
+                "id": "B",
+                "text": "명확한 명령을 내리면 반드시 정확한 결과가 나온다"
+              },
+              {
+                "id": "C",
+                "text": "명령과 결과는 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "모호한 명령으로도 정확한 결과를 얻을 수 있다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "코딩을 하려면 문제를 작은 단계로 나누는 능력이 필요합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'코딩을 위해 문제 분해 능력이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문제를 분해하면 반드시 코딩을 잘한다"
+              },
+              {
+                "id": "B",
+                "text": "문제 분해 없이도 코딩이 가능하다"
+              },
+              {
+                "id": "C",
+                "text": "코딩과 문제 분해는 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "문제를 분해하지 못하면 코딩을 할 수 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "알고리즘을 만들 때는 각 단계를 구체적으로 적어야 합니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'정확한 알고리즘을 위해 구체적 단계가 필요하다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'마트에서 과일을 사라'는 막연한 명령"
+              },
+              {
+                "id": "B",
+                "text": "'1. 과일 코너로 간다 2. 빨간색 작은 과일을 고른다 3. 계산한다'는 구체적 명령"
+              },
+              {
+                "id": "C",
+                "text": "'알아서 해'라는 명령"
+              },
+              {
+                "id": "D",
+                "text": "아무 명령도 내리지 않는 것"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "로봇 마리는 프로그램에 따라 움직이므로, 명령에 빠진 단계가 있으면 실행할 수 없습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'로봇이 작동하려면 완전한 명령이 필요하다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "로봇에게 '출발 → 이동 → 도착'의 완전한 순서를 입력하기"
+              },
+              {
+                "id": "B",
+                "text": "로봇에게 각 단계의 조건을 명확히 알려주기"
+              },
+              {
+                "id": "C",
+                "text": "로봇에게 '적당히 해'라고만 말하기"
+              },
+              {
+                "id": "D",
+                "text": "로봇에게 오류 발생 시 대처 방법도 알려주기"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "구체적이고 순서대로 된 명령을 입력하면 로봇이 정확하게 수행합니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'구체적 명령을 입력하면(P) 정확히 수행한다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구체적 명령을 입력하면서 정확히 수행하지 못하는 경우는 없다"
+              },
+              {
+                "id": "B",
+                "text": "정확히 수행하지 못했다면 구체적 명령이 아니었다"
+              },
+              {
+                "id": "C",
+                "text": "정확히 수행하면 구체적 명령이었다"
+              },
+              {
+                "id": "D",
+                "text": "명령과 수행은 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "명령의 순서가 잘못되면 잘못된 결과가 나옵니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'순서가 잘못되면(P) 결과가 잘못된다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과가 잘못되면 순서가 잘못된 것이다"
+              },
+              {
+                "id": "B",
+                "text": "순서가 올바르면 결과도 올바르다"
+              },
+              {
+                "id": "C",
+                "text": "결과가 올바르다면 순서가 잘못되지 않은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "순서와 결과는 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "민준이가 마리에게 '과일 코너 → 빨간색 작은 과일 고르기 → 계산하기' 순서로 명령하자 딸기를 정확히 사왔습니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'구체적 알고리즘을 적용하면 원하는 결과를 얻는다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "단계별 명령을 입력하자 로봇이 딸기를 정확히 사온 경우"
+              },
+              {
+                "id": "B",
+                "text": "막연한 명령을 내렸더니 잘못된 물건을 사온 경우"
+              },
+              {
+                "id": "C",
+                "text": "명령 없이 로봇이 알아서 행동한 경우"
+              },
+              {
+                "id": "D",
+                "text": "알고리즘 없이도 정확한 결과를 얻은 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "컴퓨터 프로그램은 코딩 언어로 작성된 명령어의 집합입니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'코딩으로 명령을 입력하면 프로그램이 작동한다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "코딩을 했지만 프로그램이 작동하지 않았다"
+              },
+              {
+                "id": "B",
+                "text": "코딩 없이 컴퓨터가 알아서 프로그램을 만들었다"
+              },
+              {
+                "id": "C",
+                "text": "프로그램이 없어도 컴퓨터가 작동했다"
+              },
+              {
+                "id": "D",
+                "text": "학생이 코딩으로 '안녕하세요'를 출력하는 프로그램을 만들어 실행했다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'모호한 명령을 내리면(P) 잘못된 결과가 나온다(Q)'가 참이고, 잘못된 결과가 나오지 않았습니다(~Q).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모호한 명령과 결과는 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "모호한 명령을 내린 것이다"
+              },
+              {
+                "id": "C",
+                "text": "잘못된 결과가 나올 것이다"
+              },
+              {
+                "id": "D",
+                "text": "모호한 명령을 내리지 않은 것이다 (대우)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'알고리즘 순서를 따르면(P) 문제가 해결된다(Q)'가 참이고, 알고리즘 순서를 따랐습니다(P).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문제가 해결되었으므로 순서를 따른 것이다 (후건 긍정)"
+              },
+              {
+                "id": "B",
+                "text": "문제가 해결된다 (전건 긍정)"
+              },
+              {
+                "id": "C",
+                "text": "순서를 따르지 않았으므로 문제가 해결되지 않는다 (전건 부정)"
+              },
+              {
+                "id": "D",
+                "text": "A와 B 모두 타당하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "코딩 교육을 받은 학생일수록 논리적 사고력이 높다는 조사 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'코딩 교육'과 '논리적 사고력'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "코딩을 배우면 논리적 사고력이 반드시 높아진다"
+              },
+              {
+                "id": "B",
+                "text": "논리적 사고력이 높아서 코딩을 잘하는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "둘 사이에 상관관계가 있으나, 수학 능력이나 독서량 등 다른 요인도 영향을 미친다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 아무 관계가 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "마리에게 구체적 명령을 내린 후 정확한 결과를 얻었습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'구체적 명령'과 '정확한 결과'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구체적 명령만 내리면 항상 정확한 결과가 나온다"
+              },
+              {
+                "id": "B",
+                "text": "구체적 명령이 도움이 되었지만, 로봇의 성능이나 환경 등 다른 요인도 작용했을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "정확한 결과가 나와서 명령이 구체적이었던 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'알고리즘 교육을 받으면 문제 해결 능력이 향상된다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "알고리즘의 정의만 가르친다"
+              },
+              {
+                "id": "B",
+                "text": "알고리즘 교육을 받은 학생과 받지 않은 학생의 문제 해결 능력을 비교한다"
+              },
+              {
+                "id": "C",
+                "text": "한 학생에게만 교육한다"
+              },
+              {
+                "id": "D",
+                "text": "문제 해결과 관계없는 과목을 가르친다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'인공지능은 사람처럼 스스로 생각할 수 있다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인공지능이 복잡한 문제를 풀었다"
+              },
+              {
+                "id": "B",
+                "text": "인공지능이 체스에서 사람을 이겼다"
+              },
+              {
+                "id": "C",
+                "text": "인공지능이 프로그램에 없는 상황에서 판단하지 못하고 오류를 냈다"
+              },
+              {
+                "id": "D",
+                "text": "인공지능이 음성 명령을 잘 인식했다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

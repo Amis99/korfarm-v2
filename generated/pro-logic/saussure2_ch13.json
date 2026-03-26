@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 13장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "넙치는 멸치의 꿈을 듣고 말했습니다. '하늘 위로 붕 떠오른 것은 용이 되어 승천한다는 뜻입니다.'",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "넙치가 이렇게 해몽하려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "바다에 용이 살고 있어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "멸치는 실제로 날 수 있어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "넙치가 용을 직접 본 적이 있어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "하늘로 떠오르는 꿈은 좋은 뜻이라는 믿음이 있어야 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "화가 난 멸치는 넙치의 뺨을 '짝' 때렸습니다. 그래서 넙치의 눈이 한쪽으로 쏠리게 되었습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "멸치가 넙치를 때린 결과 어떤 일이 생겼나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "넙치가 하늘로 날아갔다."
+              },
+              {
+                "id": "B",
+                "text": "멸치가 용이 되었다."
+              },
+              {
+                "id": "C",
+                "text": "넙치의 눈이 한쪽으로 쏠렸다."
+              },
+              {
+                "id": "D",
+                "text": "꼴뚜기가 사라졌다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "옛이야기는 착한 사람은 복을 받고 나쁜 사람은 벌을 받는다는 것을 알려 줍니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'나쁜 사람은 벌을 받는다. 놀부는 나쁜 사람이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "놀부는 복을 받는다."
+              },
+              {
+                "id": "B",
+                "text": "놀부는 벌을 받는다."
+              },
+              {
+                "id": "C",
+                "text": "놀부는 착한 사람이다."
+              },
+              {
+                "id": "D",
+                "text": "놀부는 왕이 된다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "토끼는 거북이에게 속아 용궁에 갔습니다. 하지만 꾀를 내어 무사히 육지로 돌아옵니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'용궁에서 살아 돌아오려면 꾀가 꼭 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "꾀가 없었다면 토끼는 돌아올 수 없었다."
+              },
+              {
+                "id": "B",
+                "text": "꾀가 있으면 반드시 거북이를 이긴다."
+              },
+              {
+                "id": "C",
+                "text": "용궁에 가지 않아도 꾀가 필요하다."
+              },
+              {
+                "id": "D",
+                "text": "꾀가 없어도 무사히 돌아올 수 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "문장과 문장을 자연스럽게 이어 주는 말이 필요해요. 이런 역할을 하는 말을 접속어라고 해요.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'글을 자연스럽게 쓰려면 접속어가 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "접속어 없이 문장을 나열했더니 어색했다."
+              },
+              {
+                "id": "B",
+                "text": "접속어를 쓰지 않아도 글이 자연스러웠다."
+              },
+              {
+                "id": "C",
+                "text": "그림만 그려도 글이 완성되었다."
+              },
+              {
+                "id": "D",
+                "text": "접속어 대신 숫자를 넣었더니 좋았다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "앞이 원인이 되어 뒤에 결과가 올 때는 '그래서'를 씁니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'앞 문장이 원인이면 그래서를 쓴다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'그래서'를 쓰면 반대 내용이 온다."
+              },
+              {
+                "id": "B",
+                "text": "원인과 결과 사이에 '그래서'가 없는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "원인이 없어도 '그래서'를 쓸 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "'그래서'는 조건을 나타낸다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "반대되는 내용을 말할 때는 '그러나'나 '하지만'을 씁니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'앞뒤 내용이 반대이면 하지만을 쓴다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비가 왔다. 그래서 우산을 썼다."
+              },
+              {
+                "id": "B",
+                "text": "비가 왔다. 하지만 우산을 안 가져왔다."
+              },
+              {
+                "id": "C",
+                "text": "비가 왔다. 그리고 눈도 왔다."
+              },
+              {
+                "id": "D",
+                "text": "비가 왔다. 왜냐하면 구름이 있어서다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "심청이는 눈이 보이지 않는 아버지를 위해 인당수에 몸을 던질 만큼 효심이 깊었습니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'효심이 깊은 사람은 부모님을 위해 희생한다. 심청이는 효심이 깊다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "심청이는 부모님을 위해 희생한다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "심청이는 효심이 없다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "심청이는 아버지를 싫어한다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "효심과 희생은 관계없다. (맞는 추론)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "꼴뚜기는 멸치의 꿈을 흉몽이라고 했고, 넙치는 좋은 꿈이라고 했습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'같은 꿈을 두고 해몽이 다르다.' 이것으로 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "꿈의 뜻은 누가 봐도 똑같다."
+              },
+              {
+                "id": "B",
+                "text": "꿈은 반드시 이루어진다."
+              },
+              {
+                "id": "C",
+                "text": "넙치와 꼴뚜기는 같은 해몽을 했다."
+              },
+              {
+                "id": "D",
+                "text": "해몽은 해석하는 사람에 따라 달라질 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "옛이야기는 우리가 세상을 살아갈 때 가져야 할 올바른 마음과 지혜를 재미있게 들려주는 소중한 보물입니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'옛이야기에는 교훈이 담겨 있다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "옛이야기의 글자 수를 센다."
+              },
+              {
+                "id": "B",
+                "text": "옛이야기의 삽화를 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "여러 옛이야기를 읽고 공통된 교훈이 있는지 찾아본다."
+              },
+              {
+                "id": "D",
+                "text": "옛이야기의 주인공 이름을 외운다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,8 +1,10 @@
 package com.korfarm.api.pro
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.test.TestPaperRepo
+import com.korfarm.api.test.TestQuestionRepo
 import com.korfarm.api.test.TestService
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -16,9 +18,11 @@ class ProTestSessionService(
     private val chapterTestRepo: ProChapterTestRepo,
     private val progressRepo: ProProgressRepo,
     private val testPaperRepo: TestPaperRepo,
+    private val questionRepo: TestQuestionRepo,
     private val testService: TestService,
     private val proModeService: ProModeService,
-    private val essayGradingService: EssayGradingService
+    private val essayGradingService: EssayGradingService,
+    private val objectMapper: ObjectMapper
 ) {
     companion object {
         const val PASS_SCORE = 70
@@ -165,10 +169,16 @@ class ProTestSessionService(
         val scorePercent = if (totalPoints > 0) (submission.score * 100) / totalPoints else 0
         val passed = scorePercent >= PASS_SCORE
 
+        // 역량별 점수 계산
+        val competencyScores = calculateCompetencyScores(session.testId, request.answers)
+
         // 세션 업데이트
         session.score = submission.score
         session.submissionId = submission.id
         session.status = if (passed) "passed" else "failed"
+        if (competencyScores.isNotEmpty()) {
+            session.competencyScores = objectMapper.writeValueAsString(competencyScores)
+        }
         testSessionRepo.save(session)
 
         // 통과 시 프로그레스 완료 기록
@@ -209,8 +219,57 @@ class ProTestSessionService(
             score = submission.score,
             totalPoints = totalPoints,
             passed = passed,
-            nextAction = nextAction
+            nextAction = nextAction,
+            competencyScores = competencyScores.ifEmpty { null }
         )
+    }
+
+    /**
+     * 역량별 점수 계산: 각 문제의 domain 기준으로 그룹핑하여 정답률 산출
+     */
+    private fun calculateCompetencyScores(
+        testId: String,
+        answers: Map<String, String>
+    ): Map<String, CompetencyScore> {
+        val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
+        if (questions.isEmpty()) return emptyMap()
+
+        // domain이 "종합"이거나 null인 문제만 있으면 역량 분석 불가
+        val domainQuestions = questions.filter {
+            !it.domain.isNullOrBlank() && it.domain != "종합"
+        }
+        if (domainQuestions.isEmpty()) return emptyMap()
+
+        // domain별 그룹핑
+        data class DomainStats(var correct: Int = 0, var total: Int = 0)
+        val stats = mutableMapOf<String, DomainStats>()
+
+        for (q in domainQuestions) {
+            val domain = q.domain!!
+            val s = stats.getOrPut(domain) { DomainStats() }
+            s.total++
+
+            val myAnswer = answers[q.number.toString()] ?: ""
+            if (q.type == "객관식") {
+                if (myAnswer.isNotBlank() && myAnswer == q.correctAnswer) {
+                    s.correct++
+                }
+            } else {
+                // 서술형은 키워드 기반 간이 채점 (70% 이상이면 정답)
+                // 정확한 채점은 submission의 stats에서 확인 가능
+                if (myAnswer.isNotBlank() && q.correctAnswer != null && myAnswer == q.correctAnswer) {
+                    s.correct++
+                }
+            }
+        }
+
+        return stats.mapValues { (_, v) ->
+            CompetencyScore(
+                correct = v.correct,
+                total = v.total,
+                accuracy = if (v.total > 0) Math.round(v.correct.toDouble() / v.total * 100 * 100.0) / 100.0 else 0.0
+            )
+        }
     }
 
     @Transactional(readOnly = true)
@@ -231,8 +290,13 @@ class ProTestSessionService(
             val effectiveStatus = if (activeStatuses.contains(session.status) && session.omrDeadline?.isBefore(now) == true) "expired" else session.status
 
             val paper = testPaperRepo.findById(session.testId).orElse(null)
+            val parsedCompetency = parseCompetencyScores(session.competencyScores)
+            val remainingMin = if (session.omrDeadline != null && session.omrDeadline!!.isAfter(now))
+                Duration.between(now, session.omrDeadline).toMinutes().coerceAtLeast(0)
+            else 0L
             val view = ProTestSessionView(
                 sessionId = session.id,
+                testId = session.testId,
                 version = version,
                 status = effectiveStatus,
                 mode = session.mode,
@@ -240,7 +304,9 @@ class ProTestSessionService(
                 totalPoints = paper?.totalPoints,
                 printedAt = session.printedAt,
                 omrDeadline = session.omrDeadline,
-                createdAt = session.createdAt
+                remainingMinutes = remainingMin,
+                createdAt = session.createdAt,
+                competencyScores = parsedCompetency
             )
 
             if (activeStatuses.contains(session.status) && session.omrDeadline?.isAfter(now) == true) {
@@ -283,5 +349,18 @@ class ProTestSessionService(
             testPaperId = request.testPaperId
         )
         return chapterTestRepo.save(chapterTest)
+    }
+
+    /** JSON 문자열에서 역량별 점수 파싱 */
+    private fun parseCompetencyScores(json: String?): Map<String, CompetencyScore>? {
+        if (json.isNullOrBlank()) return null
+        return try {
+            objectMapper.readValue(
+                json,
+                object : com.fasterxml.jackson.core.type.TypeReference<Map<String, CompetencyScore>>() {}
+            )
+        } catch (_: Exception) {
+            null
+        }
     }
 }

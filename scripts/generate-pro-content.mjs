@@ -15,15 +15,15 @@ if (!existsSync(OUTPUT_DIR)) mkdirSync(OUTPUT_DIR, { recursive: true });
 
 // ─── 레벨 설정 ───
 const LEVELS = [
-  { folder: '소쉬르1', levelId: 'SAUSSURE_1', prefix: '소쉬르1', bookNum: 1, type: 'saussure' },
-  { folder: '소쉬르2', levelId: 'SAUSSURE_2', prefix: '소쉬르2', bookNum: 2, type: 'saussure' },
-  { folder: '소쉬르3', levelId: 'SAUSSURE_3', prefix: '소쉬르3', bookNum: 3, type: 'saussure' },
-  { folder: '프레게1', levelId: 'FREGE_1', prefix: '프레게1', bookNum: 1, type: 'frege' },
-  { folder: '프레게2', levelId: 'FREGE_2', prefix: '프레게2', bookNum: 2, type: 'frege' },
-  { folder: '프레게3', levelId: 'FREGE_3', prefix: '프레게3', bookNum: 3, type: 'frege' },
-  { folder: '러셀1', levelId: 'RUSSELL_1', prefix: '러셀1', bookNum: 1, type: 'russell' },
-  { folder: '러셀2', levelId: 'RUSSELL_2', prefix: '러셀2', bookNum: 2, type: 'russell' },
-  { folder: '러셀3', levelId: 'RUSSELL_3', prefix: '러셀3', bookNum: 3, type: 'russell' },
+  { folder: '소쉬르1', levelId: 'saussure1', prefix: '소쉬르1', bookNum: 1, type: 'saussure' },
+  { folder: '소쉬르2', levelId: 'saussure2', prefix: '소쉬르2', bookNum: 2, type: 'saussure' },
+  { folder: '소쉬르3', levelId: 'saussure3', prefix: '소쉬르3', bookNum: 3, type: 'saussure' },
+  { folder: '프레게1', levelId: 'frege1', prefix: '프레게1', bookNum: 1, type: 'frege' },
+  { folder: '프레게2', levelId: 'frege2', prefix: '프레게2', bookNum: 2, type: 'frege' },
+  { folder: '프레게3', levelId: 'frege3', prefix: '프레게3', bookNum: 3, type: 'frege' },
+  { folder: '러셀1', levelId: 'russell1', prefix: '러셀1', bookNum: 1, type: 'russell' },
+  { folder: '러셀2', levelId: 'russell2', prefix: '러셀2', bookNum: 2, type: 'russell' },
+  { folder: '러셀3', levelId: 'russell3', prefix: '러셀3', bookNum: 3, type: 'russell' },
 ];
 
 let idCounter = 0;
@@ -44,7 +44,12 @@ function readManuscript(level, chapterNum) {
       let raw = readFileSync(fp, 'utf-8');
       // BOM 제거
       if (raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1);
-      return JSON.parse(raw);
+      try {
+        return JSON.parse(raw);
+      } catch (e) {
+        console.warn(`  JSON 파싱 에러: ${fp} — ${e.message}`);
+        return null;
+      }
     }
   }
   console.warn(`  원고 없음: ${level.folder}/챕터${chapterNum}`);
@@ -93,35 +98,63 @@ function toParagraphs(text) {
   }));
 }
 
+// ─── 수동 작성 파일 로드 경로 ───
+const PRO_READING_DIR = join(ROOT, 'generated', 'pro-reading');
+const PRO_VOCAB_DIR = join(ROOT, 'generated', 'pro-vocab');
+const PRO_BACKGROUND_DIR = join(ROOT, 'generated', 'pro-background');
+const PRO_LOGIC_DIR = join(ROOT, 'generated', 'pro-logic');
+const PRO_TESTS_DIR = join(ROOT, 'generated', 'pro-tests');
+
+// subArea 한글→영어 매핑
+const SUB_AREA_MAP = { '개념': 'CONCEPT', '문학': 'LITERATURE', '비문학': 'NONFICTION', '문법': 'GRAMMAR' };
+
 // ─── 1. 독해 콘텐츠 생성 (reading_training) ───
+// generated/pro-reading/ 에 수동 작성된 파일이 있으면 우선 사용, 없으면 자동 생성 fallback
 function generateReading(ms, level, chapterNum) {
+  // 수동 작성 파일 확인
+  const manualFile = join(PRO_READING_DIR, `${level.levelId}_ch${String(chapterNum).padStart(2, '0')}.json`);
+  if (existsSync(manualFile)) {
+    try {
+      const items = JSON.parse(readFileSync(manualFile, 'utf-8'));
+      return items.map(item => ({
+        id: `pro_read_${level.levelId.toLowerCase()}_ch${chapterNum}_${item.subArea}`,
+        contentType: 'PRO_READING',
+        levelId: level.levelId,
+        area: 'READING',
+        subArea: item.subArea,
+        moduleKey: 'reading_training',
+        title: item.title,
+        content: item
+      }));
+    } catch (e) {
+      console.warn(`  수동 파일 로드 실패 (fallback): ${manualFile} — ${e.message}`);
+    }
+  }
+
+  // fallback: 자동 생성
   const contents = [];
   const sections = [];
 
-  // 개념 지문
   const concept = ms['개념'];
   if (concept) {
-    const passage = getVal(concept, '개념_배경지식_지문', '개념_훈련_제목');
+    const passage = getVal(concept, '개념_배경지식_지문', '개념_지문', '개념_훈련_제목');
     if (passage && String(passage).length > 50) {
       sections.push({ label: '개념', passage: String(passage) });
     }
   }
 
-  // 비문학 지문
   const nonfic = ms['비문학'];
   if (nonfic) {
     const passage = getVal(nonfic, '비문학_지문');
     if (passage) sections.push({ label: '비문학', passage: String(passage) });
   }
 
-  // 문학 지문
   const lit = ms['문학'];
   if (lit) {
     const passage = getVal(lit, '문학_작품_지문');
     if (passage) sections.push({ label: '문학', passage: String(passage) });
   }
 
-  // 문법 지문 (프레게/러셀)
   const gram = ms['문법'];
   if (gram) {
     const passage = getVal(gram, '문법_지문');
@@ -134,7 +167,6 @@ function generateReading(ms, level, chapterNum) {
     const paragraphs = toParagraphs(sec.passage);
     if (paragraphs.length === 0) continue;
 
-    // 타임라인: 각 문단에 대해 간단한 이해 확인 문제 생성
     const timeline = paragraphs.slice(0, 5).map((p, i) => {
       const words = p.text.split(/\s+/);
       const keyPhrase = words.slice(0, Math.min(5, words.length)).join(' ');
@@ -154,20 +186,20 @@ function generateReading(ms, level, chapterNum) {
       };
     });
 
-    // 리콜 카드
     const recallCards = paragraphs.slice(0, 3).map((p, i) => ({
       id: `rc-${i + 1}`,
       front: p.text.slice(0, 60) + '...',
       back: p.text.slice(0, 120)
     }));
 
-    const contentId = `pro_read_${level.levelId.toLowerCase()}_ch${chapterNum}_${sec.label}`;
+    const subArea = SUB_AREA_MAP[sec.label] || sec.label.toUpperCase();
+    const contentId = `pro_read_${level.levelId.toLowerCase()}_ch${chapterNum}_${subArea}`;
     contents.push({
       id: contentId,
       contentType: 'PRO_READING',
       levelId: level.levelId,
       area: 'READING',
-      subArea: sec.label.toUpperCase(),
+      subArea,
       moduleKey: 'reading_training',
       title: `${level.prefix} ${chapterNum}장 ${sec.label} 독해`,
       content: {
@@ -175,7 +207,7 @@ function generateReading(ms, level, chapterNum) {
         title: `${level.prefix} ${chapterNum}장 ${sec.label} 독해`,
         targetLevel: level.levelId,
         area: 'READING',
-        subArea: sec.label.toUpperCase(),
+        subArea,
         timeLimitSec: 300,
         seedReward: { seedType: 'seed_rice', count: 3, multiplier: 1 },
         payload: {
@@ -192,7 +224,30 @@ function generateReading(ms, level, chapterNum) {
 }
 
 // ─── 2. 어휘 콘텐츠 생성 (worksheet_quiz, PRO_VOCAB) ───
+// generated/pro-vocab/ 에 수동 작성된 파일이 있으면 우선 사용, 없으면 자동 생성 fallback
 function generateVocab(ms, level, chapterNum) {
+  // 수동 작성 파일 확인
+  const manualFile = join(PRO_VOCAB_DIR, `${level.levelId}_ch${String(chapterNum).padStart(2, '0')}.json`);
+  if (existsSync(manualFile)) {
+    try {
+      const vocabData = JSON.parse(readFileSync(manualFile, 'utf-8'));
+      const contentId = `pro_vocab_${level.levelId.toLowerCase()}_ch${chapterNum}`;
+      return [{
+        id: contentId,
+        contentType: 'PRO_VOCAB',
+        levelId: level.levelId,
+        area: 'VOCAB',
+        subArea: 'PRO',
+        moduleKey: 'worksheet_quiz',
+        title: vocabData.title,
+        content: vocabData
+      }];
+    } catch (e) {
+      console.warn(`  어휘 수동 파일 로드 실패 (fallback): ${manualFile} — ${e.message}`);
+    }
+  }
+
+  // fallback: 기존 자동 생성
   const concept = ms['개념'];
   if (!concept) return [];
 
@@ -285,8 +340,31 @@ function generateVocab(ms, level, chapterNum) {
   }];
 }
 
-// ─── 3. 배경지식 콘텐츠 생성 (worksheet_quiz, PRO_BACKGROUND) ───
+// ─── 3. 배경지식 콘텐츠 생성 (background_knowledge, PRO_BACKGROUND) ───
 function generateBackground(ms, level, chapterNum) {
+  // 수동 작성 파일 우선 로드
+  const manualFile = join(PRO_BACKGROUND_DIR,
+    `${level.levelId}_ch${String(chapterNum).padStart(2, '0')}.json`);
+  if (existsSync(manualFile)) {
+    try {
+      const bgData = JSON.parse(readFileSync(manualFile, 'utf-8'));
+      const contentId = `pro_bg_${level.levelId.toLowerCase()}_ch${chapterNum}`;
+      return [{
+        id: contentId,
+        contentType: 'PRO_BACKGROUND',
+        levelId: level.levelId,
+        area: 'BACKGROUND',
+        subArea: 'PRO',
+        moduleKey: 'background_knowledge',
+        title: bgData.title,
+        content: bgData
+      }];
+    } catch (e) {
+      console.warn(`  배경지식 수동 파일 로드 실패 (fallback): ${manualFile}`);
+    }
+  }
+
+  // fallback: 기존 자동 생성
   const concept = ms['개념'];
   if (!concept) return [];
 
@@ -351,7 +429,7 @@ function generateBackground(ms, level, chapterNum) {
     levelId: level.levelId,
     area: 'BACKGROUND',
     subArea: 'PRO',
-    moduleKey: 'worksheet_quiz',
+    moduleKey: 'background_knowledge',
     title: `${level.prefix} ${chapterNum}장 배경지식`,
     content: {
       contentType: 'PRO_BACKGROUND',
@@ -366,216 +444,254 @@ function generateBackground(ms, level, chapterNum) {
   }];
 }
 
-// ─── 4. 논리사고력 콘텐츠 생성 (worksheet_quiz, PRO_LOGIC) ───
+// ─── 4. 논리사고력 콘텐츠 생성 (logic_reasoning, PRO_LOGIC) ───
+// 수동 작성 파일만 사용 (자동 생성 완전 제거)
 function generateLogic(ms, level, chapterNum) {
-  const questions = [];
-  let qIdx = 0;
-
-  // 문장 독해 문제에서 논리 문제 추출
-  const sources = [
-    ms['비문학'],
-    ms['문법'],
-    ms['문학'],
-  ].filter(Boolean);
-
-  for (const section of sources) {
-    // 문장 독해 문제
-    const sentences = getVal(section, '문장_독해_훈련_문장', '비문학_문장_독해_문장', '문학_문장_독해_문장', '문법_문장_독해_문제') || [];
-    const sentenceProblems = getVal(section, '문장_독해_훈련_문제', '비문학_문장_독해_문제', '문학_문장_독해_문제') || [];
-    const sentenceChoices = getVal(section, '비문학_문장_독해_선택지') || {};
-    const sentenceAnswers = getVal(section, '문장_독해_훈련_정답', '비문학_문장_독해_정답', '문학_문장_독해_정답') || {};
-
-    for (const prob of sentenceProblems) {
-      qIdx++;
-      const num = String(prob['번호'] || prob.번호 || qIdx);
-      const stem = prob['문제'] || prob.문제 || '';
-      const answer = sentenceAnswers[num] || '';
-      if (!stem) continue;
-
-      const choiceArr = sentenceChoices[num];
-      if (choiceArr && Array.isArray(choiceArr)) {
-        const choices = toChoices(choiceArr);
-        const answerId = circledToNum(answer);
-        questions.push({
-          id: `lg-${qIdx}`,
-          type: 'MULTI_CHOICE',
-          stem: stem,
-          choices,
-          answerId,
-          scoring: { correctDeltaSec: 15, wrongDeltaSec: -15 }
-        });
-      } else if (answer) {
-        // 단답형 → MULTI_CHOICE로 변환 (정답 + 오답 보기)
-        questions.push({
-          id: `lg-${qIdx}`,
-          type: 'MULTI_CHOICE',
-          stem: stem,
-          choices: [
-            { id: 'A', text: String(answer) },
-            { id: 'B', text: '해당 없음' },
-          ],
-          answerId: 'A',
-          scoring: { correctDeltaSec: 15, wrongDeltaSec: -15 }
-        });
-      }
+  const manualFile = join(PRO_LOGIC_DIR,
+    `${level.levelId}_ch${String(chapterNum).padStart(2, '0')}.json`);
+  if (existsSync(manualFile)) {
+    try {
+      const logicData = JSON.parse(readFileSync(manualFile, 'utf-8'));
+      const contentId = `pro_logic_${level.levelId.toLowerCase()}_ch${chapterNum}`;
+      return [{
+        id: contentId,
+        contentType: 'PRO_LOGIC',
+        levelId: level.levelId,
+        area: 'LOGIC',
+        subArea: 'PRO',
+        moduleKey: 'logic_reasoning',
+        title: logicData.title,
+        content: logicData
+      }];
+    } catch (e) {
+      console.warn(`  논리사고력 수동 파일 로드 실패: ${manualFile}`);
     }
   }
-
-  if (questions.length === 0) return [];
-
-  const contentId = `pro_logic_${level.levelId.toLowerCase()}_ch${chapterNum}`;
-  return [{
-    id: contentId,
-    contentType: 'PRO_LOGIC',
-    levelId: level.levelId,
-    area: 'LOGIC',
-    subArea: 'PRO',
-    moduleKey: 'worksheet_quiz',
-    title: `${level.prefix} ${chapterNum}장 논리사고력`,
-    content: {
-      contentType: 'PRO_LOGIC',
-      title: `${level.prefix} ${chapterNum}장 논리사고력`,
-      targetLevel: level.levelId,
-      area: 'LOGIC',
-      subArea: 'PRO',
-      timeLimitSec: 300,
-      seedReward: { seedType: 'seed_grape', count: 3, multiplier: 1 },
-      payload: { questions }
-    }
-  }];
-}
-
-// problems 값이 배열이 아닌 객체({1:[...], 2:[...]})일 때 배열로 변환
-function ensureArray(val) {
-  if (val == null) return [];
-  if (Array.isArray(val)) return val;
-  if (typeof val === 'object') {
-    // {1: [...items], 2: [...items]} → flatten
-    const entries = Object.values(val);
-    const flat = [];
-    for (const e of entries) {
-      if (Array.isArray(e)) flat.push(...e);
-      else flat.push(e);
-    }
-    return flat;
-  }
+  // 수동 파일 없으면 빈 배열 반환
   return [];
 }
 
-// ─── 5. 모범답안 콘텐츠 생성 (answer_key, PRO_ANSWER) ───
+// ─── 정답과 해설 생성 헬퍼 ───
+
+// 레벨 타입별 섹션 처리 순서 (교재 스타일)
+function getSectionOrder(levelType) {
+  switch (levelType) {
+    case 'saussure': return ['개념', '문학', '비문학', '문법', '주간_실력_확인'];
+    case 'frege': return ['어휘', '개념', '문학', '비문학', '문법', '주간_실력_확인'];
+    case 'russell': return ['문법', '개념', '문학', '비문학'];
+    default: return ['개념', '문학', '비문학', '문법', '주간_실력_확인'];
+  }
+}
+
+// 중첩 활동 객체를 플랫하게 풀기 (프레게 활동 구조 지원)
+// 키가 "활동N"으로 끝나는 객체만 중첩 컨테이너로 인식 (소쉬르의 플랫 키와 구분)
+function flattenSection(secData) {
+  const flat = {};
+  for (const [key, value] of Object.entries(secData)) {
+    if (value && typeof value === 'object' && !Array.isArray(value) && /활동\d+$/.test(key)) {
+      for (const [subKey, subValue] of Object.entries(value)) {
+        flat[subKey] = subValue;
+      }
+    } else {
+      flat[key] = value;
+    }
+  }
+  return flat;
+}
+
+// 그룹 제목 생성: 섹션 접두사 제거 후 읽기 좋게 변환
+function deriveGroupTitle(basePath, secName) {
+  let title = basePath;
+  if (secName === '주간_실력_확인') {
+    if (title.startsWith('주간_실력_확인_')) title = title.slice('주간_실력_확인_'.length);
+    else if (title.startsWith('실력_확인_')) title = title.slice('실력_확인_'.length);
+  } else if (title.startsWith(secName + '_')) {
+    title = title.slice(secName.length + 1);
+  }
+  title = title.replace(/_/g, ' ').trim();
+  return title || basePath.replace(/_/g, ' ');
+}
+
+// 정답 키의 표시 타입 결정
+function determineDisplayType(ansKey, ansValue) {
+  if (ansKey.includes('_객관식_')) return 'choice';
+  if (ansKey.includes('_OX_')) return 'ox';
+  if (ansKey.includes('_서술형_') || ansKey.includes('_글쓰기_')) return 'essay';
+  if (ansKey.endsWith('_모범_답안')) return 'essay';
+  if (typeof ansValue === 'string') return 'fill';
+  if (typeof ansValue === 'object' && !Array.isArray(ansValue)) {
+    const vals = Object.values(ansValue);
+    if (vals.length > 0 && typeof vals[0] === 'object' && vals[0] !== null && !Array.isArray(vals[0])) {
+      return 'nested';
+    }
+  }
+  return 'short';
+}
+
+// 문제 텍스트 추출 (배열/객체 모두 지원)
+function getQuestionText(questions, key) {
+  if (!questions) return '';
+  if (Array.isArray(questions)) {
+    const q = questions.find(q => String(q['번호'] || q.번호) === key);
+    return q ? String(q['문제'] || q.문제 || '') : '';
+  }
+  if (typeof questions === 'object') {
+    const q = questions[key];
+    if (typeof q === 'string') return q;
+    if (q && typeof q === 'object' && !Array.isArray(q)) return String(q['문제'] || q.문제 || '');
+  }
+  return '';
+}
+
+// 해설 텍스트 추출 (객체/배열/문자열 모두 지원)
+function getExplanationText(explanations, key) {
+  if (!explanations) return '';
+  if (typeof explanations === 'string') return explanations;
+  if (Array.isArray(explanations)) {
+    const idx = parseInt(key) - 1;
+    if (idx < 0 || idx >= explanations.length) return '';
+    const val = explanations[idx];
+    return Array.isArray(val) ? val.join(' ') : String(val);
+  }
+  if (typeof explanations === 'object') {
+    const val = explanations[key];
+    if (!val) return '';
+    if (typeof val === 'string') return val;
+    if (Array.isArray(val)) return val.join(' ');
+    return String(val);
+  }
+  return '';
+}
+
+// 선택지 추출
+function getChoicesForKey(choices, key) {
+  if (!choices || typeof choices !== 'object') return null;
+  const arr = choices[key];
+  if (Array.isArray(arr)) return arr.map(c => String(c));
+  return null;
+}
+
+// 정답 값 → items 배열 변환
+function buildAnswerItems(ansValue, questions, choices, explanations) {
+  // 문자열 정답 → 단일 항목 (빈칸 채우기)
+  if (typeof ansValue === 'string') {
+    return [{ num: '', answer: ansValue }];
+  }
+  if (typeof ansValue !== 'object' || Array.isArray(ansValue)) {
+    return [{ num: '', answer: String(ansValue) }];
+  }
+
+  const items = [];
+  const sortedKeys = Object.keys(ansValue).sort((a, b) => {
+    const na = parseInt(a), nb = parseInt(b);
+    if (!isNaN(na) && !isNaN(nb)) return na - nb;
+    return a.localeCompare(b);
+  });
+
+  for (const key of sortedKeys) {
+    const ans = ansValue[key];
+
+    // 중첩 객체 정답 (문학_해설_정답: {"1": {"1": "답", "2": "답"}})
+    if (ans && typeof ans === 'object' && !Array.isArray(ans)) {
+      let nestedQuestions = null;
+      if (questions && typeof questions === 'object' && !Array.isArray(questions)) {
+        nestedQuestions = questions[key];
+      }
+      const subKeys = Object.keys(ans).sort((a, b) => {
+        const na = parseInt(a), nb = parseInt(b);
+        if (!isNaN(na) && !isNaN(nb)) return na - nb;
+        return a.localeCompare(b);
+      });
+      for (const subKey of subKeys) {
+        const item = { num: `${key}-${subKey}`, answer: String(ans[subKey]) };
+        if (Array.isArray(nestedQuestions)) {
+          const q = nestedQuestions.find(q => String(q['번호'] || q.번호) === subKey);
+          if (q) item.question = String(q['문제'] || q.문제 || '');
+        }
+        items.push(item);
+      }
+      continue;
+    }
+
+    // 배열 정답 (문장_독해_정답: {"1": ["④", "④", "③"]})
+    if (Array.isArray(ans)) {
+      const item = { num: key, answer: ans.map(a => String(a)).join(', ') };
+      const q = getQuestionText(questions, key);
+      if (q) item.question = q;
+      items.push(item);
+      continue;
+    }
+
+    // 일반 정답 (문자열/숫자)
+    const item = { num: key, answer: String(ans) };
+    const question = getQuestionText(questions, key);
+    if (question) item.question = question;
+    const explanation = getExplanationText(explanations, key);
+    if (explanation) item.explanation = explanation;
+    const itemChoices = getChoicesForKey(choices, key);
+    if (itemChoices) item.choices = itemChoices;
+    items.push(item);
+  }
+
+  return items;
+}
+
+// ─── 5. 정답과 해설 콘텐츠 생성 (answer_key, PRO_ANSWER) ───
 function generateAnswerKey(ms, level, chapterNum) {
+  const sectionOrder = getSectionOrder(level.type);
   const sections = [];
 
-  // 각 섹션에서 정답/해설 추출
-  const sectionNames = ['개념', '문법', '문학', '비문학'];
+  for (const secName of sectionOrder) {
+    const secData = ms[secName];
+    if (!secData || typeof secData !== 'object') continue;
+    if (Object.keys(secData).length === 0) continue;
 
-  for (const secName of sectionNames) {
-    const sec = ms[secName];
-    if (!sec) continue;
+    // 중첩 활동 객체 플랫하게 풀기 (프레게)
+    const flat = flattenSection(secData);
 
-    const items = [];
-    let itemNum = 0;
-
-    // 모든 키를 순회하면서 정답/해설 찾기
-    const allKeys = getAllKeysFlat(sec);
-
-    // 객관식 문제+정답+해설
-    for (const keySet of findQuestionSets(allKeys, '객관식')) {
-      const problems = ensureArray(resolveVal(sec, keySet.problems));
-      const answers = resolveVal(sec, keySet.answers) || {};
-      const explanations = resolveVal(sec, keySet.explanations) || {};
-      const choices = resolveVal(sec, keySet.choices) || {};
-
-      for (const prob of problems) {
-        itemNum++;
-        const num = String(prob['번호'] || prob.번호 || itemNum);
-        items.push({
-          number: itemNum,
-          type: '객관식',
-          question: prob['문제'] || prob.문제 || '',
-          answer: answers[num] || '',
-          explanation: explanations[num] || '',
-          choices: choices[num] || []
-        });
+    // 정답/모범답안 키 수집 (원본 순서 유지)
+    const answerKeys = [];
+    for (const k of Object.keys(flat)) {
+      if (k.endsWith('_정답') || k.endsWith('_모범_답안')) {
+        answerKeys.push(k);
       }
     }
 
-    // 서술형 문제+모범답안
-    for (const keySet of findQuestionSets(allKeys, '서술형')) {
-      const problems = ensureArray(resolveVal(sec, keySet.problems));
-      const answers = resolveVal(sec, keySet.answers) || {};
+    const groups = [];
 
-      for (const prob of problems) {
-        itemNum++;
-        const num = String(prob['번호'] || prob.번호 || itemNum);
-        items.push({
-          number: itemNum,
-          type: '서술형',
-          question: prob['문제'] || prob.문제 || '',
-          answer: '',
-          modelAnswer: answers[num] || '',
-        });
+    for (const ansKey of answerKeys) {
+      const ansValue = flat[ansKey];
+      if (ansValue === undefined || ansValue === null) continue;
+      if (typeof ansValue === 'object' && !Array.isArray(ansValue) && Object.keys(ansValue).length === 0) continue;
+      if (typeof ansValue === 'string' && ansValue.trim() === '') continue;
+
+      // 기본 경로 (관련 키 찾기용)
+      let basePath;
+      if (ansKey.endsWith('_모범_답안')) {
+        basePath = ansKey.slice(0, -'_모범_답안'.length);
+      } else {
+        basePath = ansKey.slice(0, -'_정답'.length);
+      }
+
+      // 관련 키 탐색
+      const questions = flat[basePath + '_문제'] ?? null;
+      const choices = flat[basePath + '_선택지'] ?? null;
+      const explanations = flat[basePath + '_해설'] ?? null;
+
+      // 그룹 제목 및 타입
+      const groupTitle = deriveGroupTitle(basePath, secName);
+      const displayType = determineDisplayType(ansKey, ansValue);
+
+      // 항목 생성
+      const items = buildAnswerItems(ansValue, questions, choices, explanations);
+
+      if (items.length > 0) {
+        groups.push({ title: groupTitle, type: displayType, items });
       }
     }
 
-    // 단답형 문제+정답
-    for (const keySet of findQuestionSets(allKeys, '단답형')) {
-      const problems = ensureArray(resolveVal(sec, keySet.problems));
-      const answers = resolveVal(sec, keySet.answers) || {};
-
-      for (const prob of problems) {
-        itemNum++;
-        const num = String(prob['번호'] || prob.번호 || itemNum);
-        items.push({
-          number: itemNum,
-          type: '단답형',
-          question: prob['문제'] || prob.문제 || '',
-          answer: answers[num] || '',
-        });
-      }
-    }
-
-    // OX 문제+정답+해설
-    for (const keySet of findQuestionSets(allKeys, 'OX')) {
-      const problems = ensureArray(resolveVal(sec, keySet.problems));
-      const answers = resolveVal(sec, keySet.answers) || {};
-      const explanations = resolveVal(sec, keySet.explanations) || {};
-
-      for (const prob of problems) {
-        itemNum++;
-        const num = String(prob['번호'] || prob.번호 || itemNum);
-        items.push({
-          number: itemNum,
-          type: 'OX',
-          question: prob['문제'] || prob.문제 || '',
-          answer: answers[num] || '',
-          explanation: explanations[num] || '',
-        });
-      }
-    }
-
-    // 글쓰기 문제+모범답안
-    for (const keySet of findQuestionSets(allKeys, '글쓰기')) {
-      const problems = resolveVal(sec, keySet.problems);
-      const answers = resolveVal(sec, keySet.answers);
-      if (problems) {
-        itemNum++;
-        const probText = typeof problems === 'string' ? problems :
-          Array.isArray(problems) ? problems.map(p => p['문제'] || p.문제 || '').join('\n') :
-          typeof problems === 'object' ? Object.values(problems).map(v => v['문제'] || v.문제 || String(v)).join('\n') : '';
-        const answerText = typeof answers === 'string' ? answers :
-          typeof answers === 'object' ? Object.values(answers).join('\n') : '';
-        items.push({
-          number: itemNum,
-          type: '글쓰기',
-          question: probText,
-          modelAnswer: answerText,
-        });
-      }
-    }
-
-    if (items.length > 0) {
-      sections.push({ label: secName, items });
+    if (groups.length > 0) {
+      sections.push({ title: secName, groups });
     }
   }
 
@@ -589,10 +705,10 @@ function generateAnswerKey(ms, level, chapterNum) {
     area: 'ANSWER',
     subArea: 'PRO',
     moduleKey: 'answer_key',
-    title: `${level.prefix} ${chapterNum}장 모범답안`,
+    title: `${level.prefix} ${chapterNum}장 정답과 해설`,
     content: {
       contentType: 'PRO_ANSWER',
-      title: `${level.prefix} ${chapterNum}장 모범답안`,
+      title: `${level.prefix} ${chapterNum}장 정답과 해설`,
       targetLevel: level.levelId,
       area: 'ANSWER',
       subArea: 'PRO',
@@ -604,7 +720,28 @@ function generateAnswerKey(ms, level, chapterNum) {
 }
 
 // ─── 6. 테스트 문제 생성 ───
+// generated/pro-tests/ 에 수동 작성된 파일이 있으면 우선 사용, 없으면 원고 기반 자동 생성 fallback
 function generateTest(ms, level, chapterNum) {
+  // 수동 작성 파일 확인
+  const manualFile = join(PRO_TESTS_DIR,
+    `${level.levelId}_ch${String(chapterNum).padStart(2, '0')}.json`);
+  if (existsSync(manualFile)) {
+    try {
+      let raw = readFileSync(manualFile, 'utf-8');
+      if (raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1);
+      const testData = JSON.parse(raw);
+      // 수동 파일은 { questions: [...] } 형태 또는 배열 형태 지원
+      const questions = Array.isArray(testData) ? testData : (testData.questions || []);
+      if (questions.length > 0) {
+        console.log(`    ✓ 수동 테스트 로드: ${manualFile} (${questions.length}문항)`);
+        return { questions };
+      }
+    } catch (e) {
+      console.warn(`  수동 테스트 파일 로드 실패 (fallback): ${manualFile} — ${e.message}`);
+    }
+  }
+
+  // fallback: 원고 기반 자동 생성
   const questions = [];
   let qNum = 0;
 
@@ -692,48 +829,6 @@ function extractKeywords(text) {
   return unique.slice(0, 5).map((kw, i) => ({ keyword: kw, weight: 5 - i }));
 }
 
-// ─── 헬퍼: 섹션 내 모든 키를 플랫하게 수집 ───
-function getAllKeysFlat(obj) {
-  if (!obj) return [];
-  const keys = [];
-  for (const [k, v] of Object.entries(obj)) {
-    keys.push(k);
-    if (v && typeof v === 'object' && !Array.isArray(v) && k.includes('활동')) {
-      for (const subK of Object.keys(v)) {
-        keys.push(subK);
-      }
-    }
-  }
-  return keys;
-}
-
-// 섹션에서 값 해석 (플랫/네스트 모두)
-function resolveVal(section, key) {
-  if (!section || !key) return undefined;
-  if (section[key] !== undefined) return section[key];
-  for (const v of Object.values(section)) {
-    if (v && typeof v === 'object' && !Array.isArray(v) && v[key] !== undefined) {
-      return v[key];
-    }
-  }
-  return undefined;
-}
-
-// 문제 세트 찾기 (문제/정답/해설 키 그룹)
-function findQuestionSets(keys, type) {
-  const sets = [];
-  const problemKeys = keys.filter(k => k.includes(`${type}_문제`));
-  for (const pk of problemKeys) {
-    const base = pk.replace(`${type}_문제`, '');
-    sets.push({
-      problems: pk,
-      answers: keys.find(k => k === `${base}${type}_정답`) || keys.find(k => k === `${base}${type}_모범_답안`),
-      explanations: keys.find(k => k === `${base}${type}_해설`),
-      choices: keys.find(k => k === `${base}${type}_선택지`),
-    });
-  }
-  return sets;
-}
 
 // ─── 메인 실행 ───
 console.log('=== 프로모드 전체 콘텐츠 생성 시작 ===\n');

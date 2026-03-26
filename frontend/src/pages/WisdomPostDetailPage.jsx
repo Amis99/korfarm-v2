@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiDelete, API_BASE, TOKEN_KEY } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
+import ManuscriptReview from "../components/ManuscriptReview";
 import "../styles/wisdom.css";
 
 const GRID_CONFIG = {
@@ -19,12 +20,34 @@ const GRID_CONFIG = {
   wittgenstein3: { cols: 20, rows: 25 },
 };
 
+// 어노테이션 파싱 유틸
+const parseAnnotations = (correction) => {
+  if (!correction) return [];
+  try {
+    const parsed = JSON.parse(correction);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
+
+const isLegacyCorrection = (correction) => {
+  if (!correction) return false;
+  try {
+    JSON.parse(correction);
+    return false;
+  } catch {
+    return true;
+  }
+};
+
 function WisdomPostDetailPage() {
   const { postId } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
+  const [error, setError] = useState("");
 
   // Like state
   const [likeCount, setLikeCount] = useState(0);
@@ -44,7 +67,14 @@ function WisdomPostDetailPage() {
         setIsLiked(data.isLikedByMe || false);
         setComments(data.comments || []);
       })
-      .catch(() => setPost(null))
+      .catch((e) => {
+        if (e.status === 403) {
+          setError("같은 주제에 글을 작성해야 다른 사람의 글을 볼 수 있습니다.");
+        } else {
+          setError(e.message || "글을 불러올 수 없습니다.");
+        }
+        setPost(null);
+      })
       .finally(() => setLoading(false));
   }, [postId]);
 
@@ -52,7 +82,7 @@ function WisdomPostDetailPage() {
     if (!confirm("정말 삭제하시겠습니까?")) return;
     setDeleting(true);
     try {
-      const token = localStorage.getItem(TOKEN_KEY);
+      const token = sessionStorage.getItem(TOKEN_KEY);
       await fetch(`${API_BASE}/v1/wisdom/posts/${postId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
@@ -130,7 +160,7 @@ function WisdomPostDetailPage() {
     return (
       <div className="wisdom">
         <div className="wis-detail">
-          <div className="wis-empty">글을 찾을 수 없습니다.</div>
+          <div className="wis-empty">{error || "글을 찾을 수 없습니다."}</div>
           <Link to="/writing" className="wis-btn" style={{ margin: "20px auto", display: "inline-flex" }}>
             목록으로
           </Link>
@@ -138,6 +168,14 @@ function WisdomPostDetailPage() {
       </div>
     );
   }
+
+  // 피드백 어노테이션 파싱
+  const feedbackAnnotations = post.feedback
+    ? parseAnnotations(post.feedback.correction)
+    : [];
+  const hasLegacyCorrection = post.feedback
+    ? isLegacyCorrection(post.feedback.correction)
+    : false;
 
   return (
     <div className="wisdom">
@@ -161,15 +199,31 @@ function WisdomPostDetailPage() {
           </div>
         </div>
 
-        {post.submissionType === "manuscript" && post.content && (
-          <div className="wis-detail-content">
-            <ManuscriptGrid
-              value={post.content}
-              readOnly
-              cols={GRID_CONFIG[post.levelId]?.cols || 20}
-              rows={GRID_CONFIG[post.levelId]?.rows || 25}
-            />
-          </div>
+        {post.submissionType === "manuscript" && (
+          post.content ? (
+            <div className="wis-detail-content">
+              {feedbackAnnotations.length > 0 ? (
+                <ManuscriptReview
+                  value={post.content}
+                  cols={GRID_CONFIG[post.levelId]?.cols || 20}
+                  rows={GRID_CONFIG[post.levelId]?.rows || 25}
+                  annotations={feedbackAnnotations}
+                  readOnly
+                />
+              ) : (
+                <ManuscriptGrid
+                  value={post.content}
+                  readOnly
+                  cols={GRID_CONFIG[post.levelId]?.cols || 20}
+                  rows={GRID_CONFIG[post.levelId]?.rows || 25}
+                />
+              )}
+            </div>
+          ) : (
+            <div className="wis-detail-content">
+              <div className="wis-empty">내용이 없습니다.</div>
+            </div>
+          )
         )}
 
         {post.attachments && post.attachments.length > 0 && (
@@ -220,12 +274,22 @@ function WisdomPostDetailPage() {
               <span className="material-symbols-outlined">rate_review</span>
               선생님 피드백
             </h3>
-            <div className="wis-feedback-comment">{post.feedback.comment}</div>
-            {post.feedback.correction && (
+            {/* 일반 코멘트 (있을 때만) */}
+            {post.feedback.comment && (
+              <div className="wis-feedback-comment">{post.feedback.comment}</div>
+            )}
+            {/* 레거시 교정 텍스트 (어노테이션이 아닌 경우만) */}
+            {hasLegacyCorrection && (
               <>
                 <div className="wis-feedback-correction-label">교정 내용</div>
                 <div className="wis-feedback-correction">{post.feedback.correction}</div>
               </>
+            )}
+            {/* 어노테이션이 있는 경우 안내 */}
+            {feedbackAnnotations.length > 0 && (
+              <p style={{ fontSize: 13, color: "#7b6a62", margin: "8px 0 0" }}>
+                위 원고지에서 빨간 밑줄 또는 번호를 클릭하면 첨삭 내용을 확인할 수 있습니다.
+              </p>
             )}
             <div className="wis-feedback-meta">
               {post.feedback.reviewerName && <span>첨삭자: {post.feedback.reviewerName}</span>}

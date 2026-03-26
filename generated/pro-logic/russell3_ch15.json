@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀3 15장 논리사고력",
+  "targetLevel": "russell3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "표준 발음법은 표준어의 실제 발음을 규정한다. 겹받침 'ㄺ'은 자음 앞에서 [ㄱ]으로, 'ㄼ'은 [ㄹ]로 발음된다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'읽다'를 [익따]로 발음한다는 결론이 나오려면 반드시 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "겹받침은 항상 앞 자음만 발음한다."
+              },
+              {
+                "id": "B",
+                "text": "받침은 항상 탈락한다."
+              },
+              {
+                "id": "C",
+                "text": "겹받침은 두 자음을 모두 발음한다."
+              },
+              {
+                "id": "D",
+                "text": "겹받침 'ㄺ'은 자음 앞에서 뒤 자음 [ㄱ]만 발음하는 규칙이 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "짐멜은 실내를 개인의 자유가 보호되는 공간으로 보았고, 베냐민은 부르주아의 현실 도피 공간으로 비판했다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "같은 실내 공간을 다르게 해석할 수 있다는 주장이 성립하려면 반드시 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공간의 의미는 객관적으로 고정되어 있다."
+              },
+              {
+                "id": "B",
+                "text": "짐멜과 베냐민은 같은 결론에 도달했다."
+              },
+              {
+                "id": "C",
+                "text": "관점에 따라 같은 공간도 상반된 의미 해석이 가능하다."
+              },
+              {
+                "id": "D",
+                "text": "실내 공간은 존재하지 않는다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "신경림의 '농무'에서 농민들은 텅 빈 운동장에서 술을 마시고 비틀거린다. 신작로 가에 세워 놓은 트럭이 이주의 상징이다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "농민들이 도시로 이주할 경우 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "농촌 공동체가 강화된다."
+              },
+              {
+                "id": "B",
+                "text": "농촌 인구가 증가한다."
+              },
+              {
+                "id": "C",
+                "text": "농업 기술이 발전한다."
+              },
+              {
+                "id": "D",
+                "text": "고향을 떠나 산업 노동자로 살며 농촌 공동체가 해체된다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "짐멜의 관점에서 사적 실내 공간이 사라지면 개인이 외부 압력으로부터 벗어날 영역이 없어진다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "사적 공간이 사라질 경우 짐멜의 관점에서 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "개인의 자유가 증가한다."
+              },
+              {
+                "id": "B",
+                "text": "개인의 자유와 개성이 보호받지 못한다."
+              },
+              {
+                "id": "C",
+                "text": "공적 효율성이 높아진다."
+              },
+              {
+                "id": "D",
+                "text": "경제 성장이 촉진된다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "연음 법칙에 따르면 받침 뒤에 모음이 오면 받침이 뒤 음절 초성으로 옮겨 발음된다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 받침 뒤에 모음이 오면 연음된다. [소전제] '밥을'에서 ㅂ 뒤에 모음 ㅡ이 온다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "[바블]로 발음된다."
+              },
+              {
+                "id": "B",
+                "text": "[바블]로 연음된다."
+              },
+              {
+                "id": "C",
+                "text": "[바을]로 발음된다."
+              },
+              {
+                "id": "D",
+                "text": "[밥을] 그대로 발음된다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "베냐민에 따르면 과도한 실내 장식은 현실 도피의 표현이다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 베냐민에게 과도한 장식은 현실 도피이다. [소전제] 19세기 부르주아 가정의 장식이 과도했다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "장식은 현실 도피의 표현이다."
+              },
+              {
+                "id": "B",
+                "text": "장식은 예술적 성취이다."
+              },
+              {
+                "id": "C",
+                "text": "장식은 경제적 합리성이다."
+              },
+              {
+                "id": "D",
+                "text": "장식은 공적 영역이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "경음화가 일어나려면 파열음 받침 뒤에 평음이 와야 한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'경음화가 일어났다'의 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모음 뒤에 자음이 온다."
+              },
+              {
+                "id": "B",
+                "text": "파열음 받침 뒤에 평음이 오는 환경이 갖추어져야 한다."
+              },
+              {
+                "id": "C",
+                "text": "비음 뒤에 유음이 온다."
+              },
+              {
+                "id": "D",
+                "text": "단어 의미가 변해야 한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "농무에서 농민의 한이 드러나려면 농촌 현실의 어려움이 구체적으로 묘사되어야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'농민의 한이 효과적으로 드러난다'의 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "농촌이 풍요로워야 한다."
+              },
+              {
+                "id": "B",
+                "text": "도시의 풍요로움이 대비되어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "답답한 현실과 절망적 정서가 구체적으로 형상화되어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "농민이 지식인이어야 한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "겹받침 발음에서 'ㄺ'은 [ㄱ]으로, 'ㄼ'은 [ㄹ]로 발음한다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "다음 중 올바른 겹받침 발음은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'읽다'를 [익따]로, '넓다'를 [널따]로 발음"
+              },
+              {
+                "id": "B",
+                "text": "'넓다'를 [넙따]로 발음"
+              },
+              {
+                "id": "C",
+                "text": "'읽다'를 [일따]로 발음"
+              },
+              {
+                "id": "D",
+                "text": "'읽다'를 [일기다]로 발음"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "짐멜의 '자유로운 사적 공간' 필요조건은 외부 감시로부터 독립되어 있는 것이다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "이 필요조건을 충족하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "CCTV가 설치된 사무실"
+              },
+              {
+                "id": "B",
+                "text": "감시 없이 취미를 즐기는 서재"
+              },
+              {
+                "id": "C",
+                "text": "사람들이 자유롭게 출입하는 카페"
+              },
+              {
+                "id": "D",
+                "text": "상사 감시 아래의 작업장"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "'받침 뒤에 모음이 온다(P)'는 '연음이 일어난다(Q)'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "P→Q일 때, 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "B와 C 모두 타당하다."
+              },
+              {
+                "id": "B",
+                "text": "받침 뒤에 모음이 없으면 연음이 안 일어난다. (~P→~Q, 부당)"
+              },
+              {
+                "id": "C",
+                "text": "연음이 일어나면 받침 뒤에 모음이 온다. (Q→P, 부당)"
+              },
+              {
+                "id": "D",
+                "text": "연음이 안 일어나면 받침 뒤에 모음이 오지 않았다. (~Q→~P, 대우, 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "베냐민 관점에서 '과도한 장식(P)'은 '현실 도피(Q)'의 충분조건이다. ~P이면서 Q인 경우는?",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "~P이면서 Q인 경우에 해당하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "장식 없이 가상현실로 현실 도피"
+              },
+              {
+                "id": "B",
+                "text": "과도한 장식으로 현실 도피"
+              },
+              {
+                "id": "C",
+                "text": "소박한 장식으로 현실에 참여"
+              },
+              {
+                "id": "D",
+                "text": "과도한 장식이지만 현실 참여"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "'텅 빈 운동장에서 술을 마시며 비틀거리는 농민'은 '농촌 소외 표현'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "이 충분조건을 만족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "풍요로운 수확 축하 장면"
+              },
+              {
+                "id": "B",
+                "text": "도시 취업 성공 장면"
+              },
+              {
+                "id": "C",
+                "text": "공연 후 텅 빈 운동장에서 답답함을 토로하는 장면"
+              },
+              {
+                "id": "D",
+                "text": "농촌에 새 도로 건설 장면"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "'표준 발음법 규칙을 따르는 것'은 '올바른 발음'의 충분조건이다. 부적절한 예시는?",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "다음 중 규칙을 따르지 않는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'넓다'를 [넓다]로 규칙 없이 발음"
+              },
+              {
+                "id": "B",
+                "text": "'꽃이'를 규칙대로 발음"
+              },
+              {
+                "id": "C",
+                "text": "'국물'을 [궁물]로 발음"
+              },
+              {
+                "id": "D",
+                "text": "'읽다'를 [익따]로 발음"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "파열음 받침 뒤 평음이면 경음화된다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "논리적으로 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경음화가 일어났으므로 파열음 받침 뒤 평음이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "'학교'에서 ㄱ 뒤에 ㄱ → [학꾜] (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "A와 B 모두 타당하다."
+              },
+              {
+                "id": "D",
+                "text": "B만 타당하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'사적 공간이면(P) 자유가 보호된다(Q)'. P→Q가 참일 때 타당한 추론은?",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "P→Q에서 타당한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자유가 보호되므로 사적 공간이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "사적 공간 아니므로 자유 보호 안 됨. (전건 부정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "자유 보호 안 되므로 사적 공간 아니다. (후건 부정 — 대우, 타당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 B 모두 타당하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "농무에서 '텅 빈 운동장'과 '허탈감'이 동시에 나타난다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "둘 사이의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "운동장이 허탈감을 직접 유발"
+              },
+              {
+                "id": "B",
+                "text": "허탈감이 운동장을 비게 함"
+              },
+              {
+                "id": "C",
+                "text": "무관"
+              },
+              {
+                "id": "D",
+                "text": "텅 빈 운동장은 공연 후 공허함을 시각적으로 형상화하며, 농촌 현실이 공통 원인"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "19~20세기 도시화와 사적/공적 공간 분리가 동시에 진행되었다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "둘의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공간 분리가 도시화를 유발"
+              },
+              {
+                "id": "B",
+                "text": "무관"
+              },
+              {
+                "id": "C",
+                "text": "산업화라는 공통 배경이 노동/생활 공간 분리를 촉진"
+              },
+              {
+                "id": "D",
+                "text": "도시화가 진행되면 분리가 사라짐"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "겹받침 'ㄺ'은 [ㄱ]으로 뒤 자음을 발음하는 예외가 있다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 모든 겹받침은 앞 자음만 발음된다. 반증 근거는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'ㅄ'은 [ㅂ]으로 앞 자음 발음"
+              },
+              {
+                "id": "B",
+                "text": "'ㄼ'은 [ㄹ]로 앞 자음 발음"
+              },
+              {
+                "id": "C",
+                "text": "'ㄻ'은 [ㄹ]로 앞 자음 발음"
+              },
+              {
+                "id": "D",
+                "text": "'ㄺ'은 뒤 자음 [ㄱ]으로 발음되므로 예외가 존재한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "짐멜과 베냐민은 실내 공간을 상반되게 해석했다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 두 관점은 완전히 모순되어 양립 불가능하다. 검증 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 관점이 각각 실내 공간의 다른 측면(자유 보호 vs 현실 도피)을 조명하는지 분석하여 양립 가능성 판단"
+              },
+              {
+                "id": "B",
+                "text": "짐멜의 출생 연도만 확인"
+              },
+              {
+                "id": "C",
+                "text": "베냐민 저서 제목 나열"
+              },
+              {
+                "id": "D",
+                "text": "두 학자 국적 비교"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

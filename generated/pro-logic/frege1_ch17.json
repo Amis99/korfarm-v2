@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 17장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "관용 표현은 둘 이상의 낱말이 합쳐져 원래의 뜻과는 전혀 다른 새로운 뜻을 나타냅니다. '발이 넓다'는 실제 발 크기가 아니라 아는 사람이 많다는 뜻입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'관용 표현은 원래 뜻과 다른 뜻을 가진다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 말은 글자 그대로의 뜻만 가진다"
+              },
+              {
+                "id": "B",
+                "text": "언어에는 글자 그대로의 뜻 외에 사회적으로 약속된 비유적 의미가 존재한다"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현은 외국어에만 있다"
+              },
+              {
+                "id": "D",
+                "text": "발이 넓은 사람은 실제로 발이 크다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "재훈이는 '발이 넓은' 친구입니다. 조끼를 잃어버린 친구를 위해 여러 선배에게 연락하여 빌려왔습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "재훈이가 조끼를 빌려올 수 있었던 데 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "발이 넓다는 것은 운동을 잘한다는 뜻이다"
+              },
+              {
+                "id": "B",
+                "text": "재훈이는 조끼를 여러 개 가지고 있다"
+              },
+              {
+                "id": "C",
+                "text": "선배들은 재훈이를 모른다"
+              },
+              {
+                "id": "D",
+                "text": "재훈이는 아는 사람이 많아서 도움을 요청할 수 있는 인맥이 넓다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "관용 표현을 모르는 외국인이 '눈이 높다'라는 말을 들으면 실제 눈의 위치가 높다고 오해할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "관용 표현을 모르는 사람이 '입이 무겁다'라는 말을 들으면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상대방의 입이 실제로 무거운 것으로 오해한다"
+              },
+              {
+                "id": "B",
+                "text": "비밀을 잘 지키는 사람이라고 정확히 이해한다"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현을 자연스럽게 사용한다"
+              },
+              {
+                "id": "D",
+                "text": "오해 없이 대화가 잘 진행된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "관용 표현을 많이 알면 글의 표현이 풍부해지고, 다른 사람의 말도 더 잘 이해할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "관용 표현을 꾸준히 배우면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "언어 표현이 단조로워진다"
+              },
+              {
+                "id": "B",
+                "text": "다양하고 재미있게 의사소통할 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현이 혼란을 준다"
+              },
+              {
+                "id": "D",
+                "text": "글쓰기가 어려워진다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "'입이 무겁다'는 비밀을 잘 지킨다는 뜻입니다. 민수는 입이 무거운 사람입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 입이 무거운 사람은 비밀을 잘 지킨다. 소전제: 민수는 입이 무거운 사람이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수는 비밀을 잘 지킨다"
+              },
+              {
+                "id": "B",
+                "text": "민수는 말이 많다"
+              },
+              {
+                "id": "C",
+                "text": "민수의 입이 실제로 무겁다"
+              },
+              {
+                "id": "D",
+                "text": "비밀과 입은 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "'눈이 높다'는 기준이 까다롭다는 뜻입니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 눈이 높은 사람은 쉽게 만족하지 않는다. 소전제: 수진이는 눈이 높은 사람이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수진이의 눈이 실제로 높이 있다"
+              },
+              {
+                "id": "B",
+                "text": "눈이 높은 것과 만족은 관계없다"
+              },
+              {
+                "id": "C",
+                "text": "수진이는 모든 것을 좋아한다"
+              },
+              {
+                "id": "D",
+                "text": "수진이는 어떤 것이든 쉽게 만족하지 않는다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "관용 표현을 올바르게 사용하려면 그 표현의 비유적 의미를 알아야 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'관용 표현 사용을 위해 비유적 의미 이해가 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비유적 의미를 알면 반드시 관용 표현을 잘 사용한다"
+              },
+              {
+                "id": "B",
+                "text": "글자 그대로의 뜻만 알면 충분하다"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현과 비유적 의미는 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "비유적 의미를 모르면 관용 표현을 올바르게 사용할 수 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "효과적인 의사소통을 위해서는 상대방이 사용하는 관용 표현을 이해해야 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'원활한 소통을 위해 관용 표현 이해가 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관용 표현을 이해하면 소통이 반드시 원활하다"
+              },
+              {
+                "id": "B",
+                "text": "소통과 관용 표현은 관계없다"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현을 이해하지 못하면 소통이 원활하지 않을 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "관용 표현 없이도 소통에 문제가 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "'발이 넓다', '눈이 높다', '입이 무겁다' 등은 신체 부위를 사용한 관용 표현입니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'관용 표현 이해를 위해 비유적 뜻을 아는 것이 필요하다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'발이 넓다'를 '아는 사람이 많다'로 이해하기"
+              },
+              {
+                "id": "B",
+                "text": "'발이 넓다'를 '발 크기가 크다'로만 이해하기"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현을 무시하기"
+              },
+              {
+                "id": "D",
+                "text": "모든 표현을 글자 그대로만 해석하기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "재훈이는 붙임성이 좋아서 어디를 가든 금방 친해지는 친구입니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'발이 넓다'는 관용 표현의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "재훈이가 여러 학년의 선배를 알고 있어 도움을 쉽게 구했다"
+              },
+              {
+                "id": "B",
+                "text": "재훈이가 동네 가게 주인들과도 친하게 지냈다"
+              },
+              {
+                "id": "C",
+                "text": "재훈이가 다른 학교 학생들과도 연락하고 지냈다"
+              },
+              {
+                "id": "D",
+                "text": "재훈이의 신발 사이즈가 크다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "관용 표현을 적절히 사용하면 글이 더 생생하고 재미있어집니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'관용 표현을 사용하면(P) 글이 생생해진다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글이 생생해지지 않았다면 관용 표현을 사용하지 않은 것이다"
+              },
+              {
+                "id": "B",
+                "text": "글이 생생하면 관용 표현을 사용한 것이다"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현을 사용하면서 글이 생생해지지 않는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "관용 표현과 생생함은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "관용 표현의 뜻을 모르고 사용하면 엉뚱한 의미가 전달됩니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'뜻을 모르고 사용하면(P) 엉뚱한 의미가 전달된다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "엉뚱한 의미가 전달되면 뜻을 모르고 사용한 것이다"
+              },
+              {
+                "id": "B",
+                "text": "뜻을 알면 엉뚱한 의미가 전달되지 않는다"
+              },
+              {
+                "id": "C",
+                "text": "엉뚱한 의미가 전달되지 않았다면 뜻을 알고 사용한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "뜻과 의미는 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "'내 친구는 친구가 아주 많다' 대신 '내 친구는 발이 넓다'라고 하면 더 재미있고 생생합니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'관용 표현을 사용하면 표현이 풍부해진다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관용 표현 없이 평범하게 서술했다"
+              },
+              {
+                "id": "B",
+                "text": "'친구가 많다' 대신 '발이 넓다'라고 표현하여 글이 더 생동감 있어졌다"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현을 잘못 사용하여 혼란이 생겼다"
+              },
+              {
+                "id": "D",
+                "text": "관용 표현을 사용하지 않는 것이 더 좋았다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "재훈이 덕분에 경기에 나갈 수 있게 된 친구가 '재훈이는 정말 손이 크다'(인심이 넓다)고 감탄했습니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'관용 표현으로 감사를 전하면 감정이 더 생생하게 전달된다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'재훈이는 인심이 넓다' 대신 '손이 크다'라고 표현하여 감사와 감탄이 더 잘 드러났다"
+              },
+              {
+                "id": "B",
+                "text": "'재훈이가 도와줬다'라고만 적었다"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현을 사용하지 않고 사실만 나열했다"
+              },
+              {
+                "id": "D",
+                "text": "감사 표현을 하지 않았다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'관용 표현을 이해하면(P) 글의 의미를 정확히 파악할 수 있다(Q)'가 참이고, 글의 의미를 정확히 파악하지 못했습니다(~Q).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관용 표현을 몰라도 의미를 파악할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "관용 표현을 이해한 것이다"
+              },
+              {
+                "id": "C",
+                "text": "의미 파악과 관용 표현은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "관용 표현을 이해하지 못한 것이다 (대우)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'입이 무거우면(P) 비밀을 잘 지킨다(Q)'가 참이고, 민수는 입이 무겁습니다(P).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비밀을 잘 지키므로 민수는 입이 무겁다 (후건 긍정)"
+              },
+              {
+                "id": "B",
+                "text": "민수는 비밀을 잘 지킨다 (전건 긍정)"
+              },
+              {
+                "id": "C",
+                "text": "입이 무겁지 않으므로 비밀을 못 지킨다 (전건 부정)"
+              },
+              {
+                "id": "D",
+                "text": "비밀과 입은 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "독서를 많이 하는 학생일수록 관용 표현을 많이 알고 있다는 조사가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'독서량'과 '관용 표현 지식'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독서를 많이 하면 관용 표현을 반드시 잘 안다"
+              },
+              {
+                "id": "B",
+                "text": "관용 표현을 알아서 독서를 많이 하는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "둘 사이에 상관관계가 있으나, 대화 경험이나 교육 등 다른 요인도 영향을 미친다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 아무 관계가 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "관용 표현 수업 후 학생들의 글쓰기 표현력이 향상되었습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'관용 표현 수업'과 '표현력 향상'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수업이 도움이 되었지만, 글쓰기 연습이나 독서 등 다른 활동도 영향을 미쳤을 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "표현력이 높아서 수업을 받은 것이다"
+              },
+              {
+                "id": "C",
+                "text": "수업만 받으면 표현력이 반드시 높아진다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'관용 표현을 배우면 의사소통 능력이 향상된다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 학생의 변화만 관찰한다"
+              },
+              {
+                "id": "B",
+                "text": "관용 표현의 종류만 나열한다"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현 교육을 받은 학생과 받지 않은 학생의 소통 능력을 비교한다"
+              },
+              {
+                "id": "D",
+                "text": "소통 능력 측정 없이 교육만 한다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'관용 표현을 사용하면 항상 의미가 정확하게 전달된다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관용 표현을 적절히 사용하여 감정이 잘 전달되었다"
+              },
+              {
+                "id": "B",
+                "text": "외국인 친구가 '발이 넓다'를 글자 그대로 해석하여 의미가 전달되지 않았다"
+              },
+              {
+                "id": "C",
+                "text": "관용 표현을 사용하여 대화가 재미있었다"
+              },
+              {
+                "id": "D",
+                "text": "관용 표현을 잘 아는 사람끼리 대화가 잘 통했다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

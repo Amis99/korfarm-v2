@@ -39,7 +39,15 @@ class WisdomService(
         val posts = if (topicKey != null) {
             postRepository.findByLevelIdAndTopicKeyAndStatusOrderByCreatedAtDesc(levelId, topicKey, "active")
         } else {
-            postRepository.findByLevelIdAndStatusOrderByCreatedAtDesc(levelId, "active")
+            val allPosts = postRepository.findByLevelIdAndStatusOrderByCreatedAtDesc(levelId, "active")
+            // 전체 주제 조회 시, 사용자가 실제로 볼 수 있는 글만 필터링
+            // (본인 글 + 본인이 글을 쓴 주제의 다른 글)
+            if (currentUserId != null) {
+                val myTopicKeys = allPosts.filter { it.userId == currentUserId }.map { it.topicKey }.toSet()
+                allPosts.filter { it.userId == currentUserId || it.topicKey in myTopicKeys }
+            } else {
+                allPosts
+            }
         }
         val postIds = posts.map { it.id }
         val feedbackMap = if (postIds.isNotEmpty()) {

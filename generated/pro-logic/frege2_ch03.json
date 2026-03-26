@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게2 3장 논리사고력",
+  "targetLevel": "frege2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "면역 체계는 세균이나 바이러스 같은 병원체가 몸에 침입했을 때 이를 인식하고 물리치는 우리 몸의 방어 시스템입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'면역 체계가 병원체를 물리친다'가 성립하려면 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "병원체는 면역 체계를 피할 방법이 전혀 없다"
+              },
+              {
+                "id": "B",
+                "text": "면역 체계는 모든 종류의 병을 완벽히 막을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "면역 체계는 자기 몸의 세포와 외부 침입자를 구별할 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "면역 체계는 음식으로만 강화할 수 있다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "이문구의 소설 '암소'에서 노인은 오래도록 함께한 암소를 팔아야 하는 상황에 놓이지만, 차마 보내지 못합니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "노인이 암소를 차마 팔지 못한 행동에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "암소는 경제적 가치가 전혀 없다"
+              },
+              {
+                "id": "B",
+                "text": "노인에게 암소는 단순한 가축이 아니라 정서적 유대를 가진 존재이다"
+              },
+              {
+                "id": "C",
+                "text": "노인은 동물을 좋아하지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "암소를 팔면 더 좋은 소를 살 수 있다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "백혈구는 병원체를 발견하면 삼켜서 파괴합니다. 백혈구의 수가 크게 줄어들면 어떤 결과가 예상되는가?",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "백혈구 수가 크게 줄어들면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "병원체에 대한 방어력이 약해져 감염에 취약해진다"
+              },
+              {
+                "id": "B",
+                "text": "몸이 더 건강해진다"
+              },
+              {
+                "id": "C",
+                "text": "병원체가 자동으로 사라진다"
+              },
+              {
+                "id": "D",
+                "text": "면역 체계가 더 강화된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "유의어는 뜻이 비슷한 단어 쌍이고, 반의어는 뜻이 반대인 단어 쌍입니다. '크다'와 '작다'는 반의어입니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "유의어와 반의어를 정확히 구별하지 못하면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글의 의미를 정반대로 오해할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "글쓰기 능력이 향상된다"
+              },
+              {
+                "id": "C",
+                "text": "모든 단어의 뜻을 완벽히 알게 된다"
+              },
+              {
+                "id": "D",
+                "text": "어휘력과 관계없이 독해에 문제가 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "항체는 특정 병원체에만 결합하여 무력화시키는 단백질입니다. 홍역 항체는 홍역 바이러스에만 결합합니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 항체는 특정 병원체에만 결합한다. 소전제: 홍역 항체가 만들어졌다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "홍역 항체는 홍역 바이러스에만 결합한다"
+              },
+              {
+                "id": "B",
+                "text": "홍역 항체는 모든 바이러스에 결합할 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "홍역 항체는 독감 바이러스도 막을 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "항체와 병원체는 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "'암소'에서 노인과 암소는 오랜 세월 함께 일하며 가족처럼 지냈습니다. 가족처럼 여기는 존재와의 이별은 깊은 슬픔을 줍니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 가족처럼 여기는 존재와의 이별은 깊은 슬픔을 준다. 소전제: 노인은 암소를 가족처럼 여겼다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "암소는 노인에게 경제적 가치만 있다"
+              },
+              {
+                "id": "B",
+                "text": "노인은 암소와 쉽게 이별한다"
+              },
+              {
+                "id": "C",
+                "text": "노인은 암소와의 이별에 깊은 슬픔을 느낀다"
+              },
+              {
+                "id": "D",
+                "text": "이별과 슬픔은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "예방접종은 몸에 약화된 병원체를 넣어 면역 기억 세포를 만드는 것입니다. 면역 기억 세포가 있어야 같은 병원체가 다시 침입했을 때 빠르게 대응할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'빠른 면역 반응을 위해 면역 기억 세포가 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "면역 기억 세포가 있으면 반드시 빠르게 대응할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "면역 기억 세포가 없으면 같은 병원체에 빠르게 대응할 수 없다"
+              },
+              {
+                "id": "C",
+                "text": "빠른 대응이 가능하면 면역 기억 세포는 필요 없다"
+              },
+              {
+                "id": "D",
+                "text": "면역 기억 세포와 대응 속도는 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "문학 작품에서 인물의 심리를 이해하려면 인물이 처한 상황과 행동의 이유를 파악해야 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'인물 심리 이해를 위해 상황과 행동 이유 파악이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상황과 이유를 파악하면 심리를 반드시 이해할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "상황과 심리는 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "심리를 이해하면 상황 파악은 불필요하다"
+              },
+              {
+                "id": "D",
+                "text": "상황과 이유를 파악하지 않으면 심리를 이해하기 어렵다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "유의어는 뜻이 비슷한 단어 쌍입니다. '기쁘다'와 '즐겁다', '슬프다'와 '서럽다'가 유의어의 예입니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'유의어로 인정되려면 두 단어의 뜻이 비슷해야 한다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'크다'와 '작다'"
+              },
+              {
+                "id": "B",
+                "text": "'빠르다'와 '신속하다'"
+              },
+              {
+                "id": "C",
+                "text": "'높다'와 '낮다'"
+              },
+              {
+                "id": "D",
+                "text": "'덥다'와 '춥다'"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "면역 체계가 병원체를 기억하면 같은 병에 다시 걸리기 어렵습니다. 이것이 예방접종의 원리입니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'면역 기억의 원리를 보여주는 사례'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "홍역 예방접종 후 홍역에 걸리지 않은 사례"
+              },
+              {
+                "id": "B",
+                "text": "감기에 걸릴 때마다 증상이 심해지는 사례"
+              },
+              {
+                "id": "C",
+                "text": "매년 독감 증상이 달라져 매년 새 접종이 필요한 사례"
+              },
+              {
+                "id": "D",
+                "text": "수두에 한번 걸린 뒤 다시 걸리지 않는 사례"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "세균이 몸속에 들어오면 백혈구가 이를 감지하고 공격을 시작합니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'세균이 침입하면(P) 백혈구가 공격한다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "백혈구가 공격하면 세균이 침입한 것이다"
+              },
+              {
+                "id": "B",
+                "text": "백혈구가 공격하지 않았다면 세균이 침입하지 않은 것이다"
+              },
+              {
+                "id": "C",
+                "text": "세균이 침입하지 않으면 백혈구가 공격한다"
+              },
+              {
+                "id": "D",
+                "text": "세균 침입과 백혈구는 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "소설에서 노인이 암소에게 정을 준다면 이별할 때 슬픔을 느끼게 됩니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'정을 주면(P) 이별할 때 슬프다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정과 슬픔은 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "정을 주지 않으면 슬프지 않다"
+              },
+              {
+                "id": "C",
+                "text": "슬프면 정을 준 것이다"
+              },
+              {
+                "id": "D",
+                "text": "이별할 때 슬프지 않다면 정을 주지 않은 것이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "반의어는 뜻이 서로 반대인 단어 쌍입니다. '밝다'와 '어둡다', '높다'와 '낮다'가 반의어입니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'두 단어의 뜻이 정반대이면 반의어이다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'크다'와 '거대하다'"
+              },
+              {
+                "id": "B",
+                "text": "'슬프다'와 '서럽다'"
+              },
+              {
+                "id": "C",
+                "text": "'빠르다'와 '신속하다'"
+              },
+              {
+                "id": "D",
+                "text": "'덥다'와 '춥다'"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "예방접종으로 약화된 병원체를 몸에 넣으면 면역 기억 세포가 생성됩니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'약화된 병원체가 투입되면 면역 기억이 형성된다'의 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "손을 깨끗이 씻어서 병원체 접촉을 줄인 경우"
+              },
+              {
+                "id": "B",
+                "text": "독감 백신으로 독감 항체가 만들어진 경우"
+              },
+              {
+                "id": "C",
+                "text": "홍역 예방접종으로 홍역 면역이 생긴 경우"
+              },
+              {
+                "id": "D",
+                "text": "수두 백신으로 수두 면역이 형성된 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'예방접종을 했으면(P) 해당 질병에 면역이 생긴다(Q)'가 참이고, 이 아이는 예방접종을 했습니다(P).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "예방접종을 하지 않았으므로 면역이 없다 (전건 부정, 부당)"
+              },
+              {
+                "id": "B",
+                "text": "면역이 생겼으므로 예방접종을 한 것이다 (후건 긍정, 부당)"
+              },
+              {
+                "id": "C",
+                "text": "이 아이는 해당 질병에 면역이 생겼다 (전건 긍정, 타당)"
+              },
+              {
+                "id": "D",
+                "text": "예방접종과 면역은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'노인이 암소에게 깊은 정이 있으면(P) 암소를 팔지 못한다(Q)'가 참이고, 노인이 암소를 팔았습니다(~Q).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "노인은 암소에게 깊은 정이 없다 (대우, 타당)"
+              },
+              {
+                "id": "B",
+                "text": "노인은 암소에게 깊은 정이 있다"
+              },
+              {
+                "id": "C",
+                "text": "암소를 팔지 못하면 정이 있는 것이다 (후건 긍정, 부당)"
+              },
+              {
+                "id": "D",
+                "text": "정과 암소 판매는 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "손씻기를 자주 하는 학생일수록 감기에 걸리는 횟수가 적다는 학교 건강 조사 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'손씻기 빈도'와 '감기 걸리는 횟수'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "손을 자주 씻으면 감기에 절대 걸리지 않는다"
+              },
+              {
+                "id": "B",
+                "text": "둘은 아무 관계가 없다"
+              },
+              {
+                "id": "C",
+                "text": "감기에 안 걸려서 손을 자주 씻는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘 사이에 상관관계가 있으나, 면역력이나 수면 습관 등 다른 요인도 영향을 미친다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "소설 '암소'에서 노인의 나이가 많아질수록 암소에 대한 애착이 깊어지는 경향이 있습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'노인의 나이'와 '암소에 대한 애착'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나이가 많으면 반드시 동물에 대한 애착이 깊어진다"
+              },
+              {
+                "id": "B",
+                "text": "애착이 깊어서 나이를 더 먹은 것이다"
+              },
+              {
+                "id": "C",
+                "text": "둘은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "함께한 시간이 길어지며 애착이 깊어진 것이지만, 개인 성격이나 환경 등 다른 요인도 작용했을 수 있다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'예방접종을 하면 해당 질병의 감염률이 낮아진다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 사람의 건강 상태만 관찰한다"
+              },
+              {
+                "id": "B",
+                "text": "예방접종의 종류만 나열한다"
+              },
+              {
+                "id": "C",
+                "text": "예방접종을 한 집단과 하지 않은 집단의 감염률을 비교한다"
+              },
+              {
+                "id": "D",
+                "text": "질병의 증상만 분류한다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'인간과 동물 사이에는 깊은 정서적 유대가 형성될 수 없다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동물을 기르지 않는 사람이 동물에 무관심한 경우"
+              },
+              {
+                "id": "B",
+                "text": "동물을 경제적 가치로만 보는 경우"
+              },
+              {
+                "id": "C",
+                "text": "소설 '암소'에서 노인이 함께한 암소를 차마 팔지 못하고 깊은 슬픔을 느낀 사례"
+              },
+              {
+                "id": "D",
+                "text": "동물원에서 동물을 관람만 한 경우"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

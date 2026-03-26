@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀1 16장 논리사고력",
+  "targetLevel": "russell1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "메를로퐁티는 몸이 세상을 느끼고 이해할 수 있다고 주장했다. 자전거를 처음 배울 때는 어렵지만, 한 번 익히면 오래 타지 않아도 다시 쉽게 탈 수 있다. 이는 몸이 자전거 타는 법을 기억하기 때문이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'몸이 기억한다'는 주장이 성립하려면 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기억은 오직 뇌에서만 이루어진다."
+              },
+              {
+                "id": "B",
+                "text": "반복된 경험이 몸에 저장되어 의식적 사고 없이도 행동을 재현할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "자전거 타기는 매번 처음부터 다시 배워야 한다."
+              },
+              {
+                "id": "D",
+                "text": "마음과 몸은 완전히 분리되어 있다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "독립어는 문장의 다른 성분과 직접 관계없이 혼자 쓰이는 성분이다. 독립어를 빼고 말해도 문장의 뜻이 어색해지지 않는다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'독립어를 빼도 문장이 어색하지 않다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 문장에는 반드시 독립어가 있어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "독립어가 없으면 문장이 성립하지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "독립어는 문장의 핵심 의미를 구성하는 필수 성분이 아니다."
+              },
+              {
+                "id": "D",
+                "text": "독립어는 서술어와 짝을 이룬다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "메를로퐁티는 몸에 현실적인 모습과 습관이 된 모습이 있다고 했다. 자전거를 처음 탈 때는 긴장되지만, 여러 번 연습하면 무의식적으로 탈 수 있게 된다. 이것이 '몸틀'이다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "피아노를 매일 연습하는 사람에게 '몸틀' 개념을 적용하면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반복 연습을 통해 손가락이 자동으로 건반 위를 움직이게 된다."
+              },
+              {
+                "id": "B",
+                "text": "매번 악보를 처음 보는 것처럼 어렵게 느낀다."
+              },
+              {
+                "id": "C",
+                "text": "연습할수록 실력이 떨어진다."
+              },
+              {
+                "id": "D",
+                "text": "머리로만 기억하고 손가락은 관여하지 않는다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "운율은 시를 읽을 때 느껴지는 말의 리듬이다. 「서경별곡」에서 '대동강 건너편 / 배 타고 가시는 님' 같은 반복과 리듬이 운율을 형성한다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "시에서 같은 구절을 반복하면 예상되는 효과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시가 지루해지고 의미가 약해진다."
+              },
+              {
+                "id": "B",
+                "text": "시의 내용이 완전히 달라진다."
+              },
+              {
+                "id": "C",
+                "text": "규칙적인 리듬이 형성되어 음악적 효과와 감정 강화가 일어난다."
+              },
+              {
+                "id": "D",
+                "text": "독자가 시를 읽지 못하게 된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "메를로퐁티는 전통 철학이 마음과 몸을 완전히 분리했다고 비판했다. 그는 몸도 세상을 느끼고 이해할 수 있다고 보았다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 마음과 몸의 분리를 부정하는 철학은 기존 이원론에 대한 도전이다. 소전제: 메를로퐁티의 철학은 마음과 몸의 분리를 부정한다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "메를로퐁티의 철학은 이원론을 지지한다."
+              },
+              {
+                "id": "B",
+                "text": "메를로퐁티의 철학은 기존 이원론에 대한 도전이다."
+              },
+              {
+                "id": "C",
+                "text": "이원론은 도전받은 적이 없다."
+              },
+              {
+                "id": "D",
+                "text": "마음과 몸은 완전히 분리된다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "독립어에는 느낌을 나타내는 말, 부르는 말, 대답하는 말이 있다. '네'는 대답할 때 쓰는 독립어이다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 대답할 때 쓰는 말은 독립어이다. 소전제: '아니요'는 대답할 때 쓰는 말이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'아니요'는 부사어이다."
+              },
+              {
+                "id": "B",
+                "text": "'아니요'는 서술어이다."
+              },
+              {
+                "id": "C",
+                "text": "'아니요'는 관형어이다."
+              },
+              {
+                "id": "D",
+                "text": "'아니요'는 독립어이다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "메를로퐁티에 따르면 몸이 관심을 가져야 대상이 의미 있는 존재가 된다. 관심이 없으면 그냥 물건일 뿐이다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'대상이 의미를 갖으려면 몸의 관심이 필요하다'에서 필요조건 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "몸이 관심을 가지면 반드시 대상이 의미를 갖는다."
+              },
+              {
+                "id": "B",
+                "text": "몸의 관심이 없으면 대상은 의미를 가질 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "대상에 의미가 없으면 관심이 있는 것이다."
+              },
+              {
+                "id": "D",
+                "text": "관심과 의미는 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "독립어는 보통 문장의 맨 앞에 와서 쉼표나 느낌표로 다른 부분과 구분된다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'독립어가 자연스럽게 쓰이려면 쉼표나 느낌표로 구분되어야 한다'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구분 부호가 있으면 반드시 독립어이다."
+              },
+              {
+                "id": "B",
+                "text": "구분 부호와 독립어는 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "독립어가 아니면 구분 부호가 필요하다."
+              },
+              {
+                "id": "D",
+                "text": "구분 부호 없이는 독립어가 자연스럽게 쓰이기 어렵다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "'몸틀'은 반복된 경험이 몸에 쌓여 비슷한 상황에서 자동으로 반응할 수 있게 해주는 능력이다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'몸틀'의 필요조건은 '반복된 경험이 몸에 축적되어야 한다'이다. 몸틀의 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "처음 보는 악기를 즉석에서 연주하는 것"
+              },
+              {
+                "id": "B",
+                "text": "수년간 연습한 수영 동작이 자동으로 나오는 것"
+              },
+              {
+                "id": "C",
+                "text": "교과서를 읽고 이론을 암기하는 것"
+              },
+              {
+                "id": "D",
+                "text": "처음 가본 곳에서 길을 잃는 것"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "독립어의 세 가지 기능은 느낌 표현(아, 어머나), 부름(민수야, 영희야), 대답(네, 아니요)이다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'독립어'의 필요조건은 '다른 성분과 관계없이 홀로 쓰여야 한다'이다. 독립어가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'어머나, 깜짝이야!'에서 '어머나'"
+              },
+              {
+                "id": "B",
+                "text": "'민수야, 이리 와'에서 '민수야'"
+              },
+              {
+                "id": "C",
+                "text": "'네, 알겠습니다'에서 '네'"
+              },
+              {
+                "id": "D",
+                "text": "'아주 높이 난다'에서 '아주'"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "메를로퐁티에 따르면 두 손을 맞잡고 있을 때 어느 손이 만지는 쪽이고 어느 손이 만져지는 쪽인지 구별하기 어렵다. 이것이 몸의 '애매한 특성'이다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'두 손을 맞잡으면(P) 만지는 것과 만져지는 것의 구분이 어려워진다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 손을 맞잡으면서 구분이 명확한 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "구분이 어려우면 반드시 두 손을 맞잡은 것이다."
+              },
+              {
+                "id": "C",
+                "text": "구분이 명확하면 손을 맞잡은 것이다."
+              },
+              {
+                "id": "D",
+                "text": "손 맞잡기와 구분은 무관하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "운율을 형성하는 방법에는 같은 음절 수의 반복, 동일 구절의 반복, 유사한 문장 구조의 반복 등이 있다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'같은 구절을 반복하면(P) 운율이 형성된다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "운율이 형성되면 반드시 같은 구절이 반복된 것이다."
+              },
+              {
+                "id": "B",
+                "text": "운율이 없으면 구절이 반복된 것이다."
+              },
+              {
+                "id": "C",
+                "text": "같은 구절을 반복하면서 운율이 없는 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "반복과 운율은 무관하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "메를로퐁티는 몸을 단순히 느끼기만 하는 존재가 아니라 느껴질 수도 있는 존재로 보았다. 이것이 전통 철학과의 가장 큰 차이이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'몸이 느끼면서 동시에 느껴지는 존재이다'의 충분조건 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "머리로 수학 문제를 푸는 경우"
+              },
+              {
+                "id": "B",
+                "text": "눈으로 사물을 바라보기만 하는 경우"
+              },
+              {
+                "id": "C",
+                "text": "한 손으로 다른 손을 만질 때, 만지는 감각과 만져지는 감각이 동시에 존재하는 경우"
+              },
+              {
+                "id": "D",
+                "text": "책을 읽으며 내용을 이해하는 경우"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "「서경별곡」은 고려 가요로, 이별의 슬픔을 노래한다. 같은 구절의 반복과 후렴이 음악적 효과를 만든다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'후렴구를 사용하면 음악적 효과가 강화된다'의 충분조건 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "산문 소설에서 후렴 없이 사건이 서술되는 것"
+              },
+              {
+                "id": "B",
+                "text": "민요에서 '얼씨구 좋다'가 매 절마다 반복되는 것"
+              },
+              {
+                "id": "C",
+                "text": "「서경별곡」에서 같은 후렴이 반복되어 리듬감이 생기는 것"
+              },
+              {
+                "id": "D",
+                "text": "동요에서 '반짝반짝 작은 별'이 반복되어 노래가 기억에 남는 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "메를로퐁티에 따르면 반복 경험이 몸에 축적되면 몸틀이 형성된다. 몸틀이 형성되면 자동 반응이 가능하다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'반복 경험이 축적되면(P) 몸틀이 형성된다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반복 경험이 축적되었으므로 몸틀이 형성된다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "B",
+                "text": "몸틀이 형성되었으므로 반복 경험이 축적된 것이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "반복 경험이 없으므로 몸틀이 없다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "독립어를 빼도 문장이 어색하지 않다. 즉, 독립어가 있으면 빼도 문장이 성립한다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'독립어가 있으면(P) 빼도 문장이 성립한다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문장이 성립하므로 독립어가 있었다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "A와 C 모두 타당하다."
+              },
+              {
+                "id": "C",
+                "text": "독립어가 없으므로 문장이 성립하지 않는다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "문장이 성립하지 않으면 독립어가 없었던 것이다. (대우 — 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "메를로퐁티에 따르면 자전거를 여러 번 연습할수록 몸에 기억이 쌓인다. 연습 횟수가 늘수록 자동 반응 능력이 높아지는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'연습 횟수'와 '자동 반응 능력'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "연습 횟수가 늘면 자동 반응이 반드시 완벽해진다."
+              },
+              {
+                "id": "B",
+                "text": "연습 횟수와 자동 반응 사이에 양의 상관관계가 있으나, 개인의 신체 조건이나 연습 방법 등 다른 요인도 영향을 미친다."
+              },
+              {
+                "id": "C",
+                "text": "자동 반응이 좋으면 반드시 연습을 많이 한 것이다."
+              },
+              {
+                "id": "D",
+                "text": "연습과 자동 반응은 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "운율의 반복이 강할수록 시의 음악적 효과가 커진다. 고려 가요나 민요에서 후렴이 많을수록 노래하기 쉬워진다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'반복의 빈도'와 '음악적 효과'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반복이 많으면 항상 좋은 시가 된다."
+              },
+              {
+                "id": "B",
+                "text": "음악적 효과가 크면 반드시 반복이 많은 것이다."
+              },
+              {
+                "id": "C",
+                "text": "반복 빈도와 음악적 효과 사이에 양의 상관관계가 있으나, 내용의 적절성과 리듬의 다양성도 중요하다."
+              },
+              {
+                "id": "D",
+                "text": "반복과 음악적 효과는 무관하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "메를로퐁티는 몸의 '애매한 특성'을 강조했다. 느끼는 주체와 느껴지는 대상이 쉽게 나뉘지 않는다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '몸의 감각 경험에서 주체와 대상의 구분은 항상 가능하다.' 이 가설을 반증하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 손을 맞잡을 때 만지는 쪽과 만져지는 쪽을 구별하기 어려운 경우"
+              },
+              {
+                "id": "B",
+                "text": "눈으로 사물을 보는 경우 주체와 대상이 명확히 구분되는 경우"
+              },
+              {
+                "id": "C",
+                "text": "귀로 소리를 듣는 경우 주체와 대상이 구분되는 경우"
+              },
+              {
+                "id": "D",
+                "text": "코로 냄새를 맡는 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "독립어는 느낌, 부름, 대답을 나타내며 문장의 다른 성분과 관계없이 홀로 쓰인다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '독립어가 포함된 문장이 대화에서 더 자연스럽게 느껴진다.' 이 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독립어가 있는 문장의 문법 정확성을 검증한다."
+              },
+              {
+                "id": "B",
+                "text": "독립어의 종류를 분류한다."
+              },
+              {
+                "id": "C",
+                "text": "대화문의 길이를 측정한다."
+              },
+              {
+                "id": "D",
+                "text": "독립어가 있는 대화문과 없는 대화문을 비교하여 자연스러움을 평가한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 14장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "한국을 대표하는 음식인 김치는 어떻게 만들어질까요? 김치를 담그는 과정은 순서가 매우 중요합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "김치 담그기에서 순서가 중요하다면 어떤 사실이 숨어 있을까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 순서로 해도 같은 맛이다."
+              },
+              {
+                "id": "B",
+                "text": "순서를 바꾸면 맛이 달라진다."
+              },
+              {
+                "id": "C",
+                "text": "김치는 순서가 없다."
+              },
+              {
+                "id": "D",
+                "text": "재료가 필요 없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "밭에서 뽑은 배추를 소금물에 절입니다. 소금에 절이면 배추가 부드러워집니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "배추를 소금물에 절이면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "배추가 딱딱해진다."
+              },
+              {
+                "id": "B",
+                "text": "배추가 사라진다."
+              },
+              {
+                "id": "C",
+                "text": "배추가 부드러워진다."
+              },
+              {
+                "id": "D",
+                "text": "배추가 커진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "먼저 까만 김을 활짝 펼쳐요. 하얀 쌀밥을 고슬고슬 김 위에 얇게 펴 발라요.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'순서대로 해야 맛있는 음식이 된다. 김밥을 순서대로 만들었다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "맛없는 김밥이 되었다."
+              },
+              {
+                "id": "B",
+                "text": "김밥이 아니다."
+              },
+              {
+                "id": "C",
+                "text": "순서는 상관없다."
+              },
+              {
+                "id": "D",
+                "text": "맛있는 김밥이 되었다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "마지막으로 돌돌 말아요. 쓱쓱 싹싹 칼로 썰면 동글동글 예쁜 김밥 완성!",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'김밥이 완성되려면 돌돌 말아야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "말지 않으면 김밥이 완성되지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "안 말아도 김밥이 된다."
+              },
+              {
+                "id": "C",
+                "text": "썰지 않아도 김밥이다."
+              },
+              {
+                "id": "D",
+                "text": "밥 없이도 김밥이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "고춧가루, 마늘, 파, 젓갈 등 여러 가지 재료를 잘 섞어 양념을 만듭니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'양념을 만들려면 재료가 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "재료 없이 양념을 만들었다."
+              },
+              {
+                "id": "B",
+                "text": "고춧가루와 마늘을 섞어 양념을 만들었다."
+              },
+              {
+                "id": "C",
+                "text": "양념 없이 김치를 담갔다."
+              },
+              {
+                "id": "D",
+                "text": "물만 넣어 양념이 되었다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "절인 배추는 물로 깨끗이 씻어 물기를 뺍니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'물로 씻으면 소금기가 빠진다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "안 씻어도 소금기가 빠진다."
+              },
+              {
+                "id": "B",
+                "text": "소금기가 빠지면 반드시 씻은 것이다."
+              },
+              {
+                "id": "C",
+                "text": "씻었는데 소금기가 안 빠지는 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "씻으면 소금기가 더 늘어난다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "알록달록 친구들: 초록색 시금치, 주황색 당근, 노란 단무지와 햄을 나란히 눕혀요.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'여러 재료를 넣으면 알록달록해진다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 가지 재료만 넣었는데 알록달록했다."
+              },
+              {
+                "id": "B",
+                "text": "재료를 넣으니 색이 없어졌다."
+              },
+              {
+                "id": "C",
+                "text": "재료를 안 넣어도 알록달록했다."
+              },
+              {
+                "id": "D",
+                "text": "시금치, 당근, 단무지를 넣으니 알록달록했다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "양말을 신기 전에 신발을 신을 수는 없습니다. 순서가 중요합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'순서가 바뀌면 결과가 달라진다. 양말보다 신발을 먼저 신었다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과가 달라진다(제대로 못 신는다). (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "정상적으로 신을 수 있다. (틀린 추론)"
+              },
+              {
+                "id": "C",
+                "text": "순서는 상관없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "신발과 양말은 같다. (맞는 추론)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "김치를 담그는 순서: 배추 절이기 → 씻기 → 양념 만들기 → 버무리기 → 숙성",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'김치를 오래 숙성하면 맛이 좋았다.' 숙성 기간과 맛의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오래 숙성하면 반드시 맛있다."
+              },
+              {
+                "id": "B",
+                "text": "숙성 기간과 맛이 함께 좋아졌지만, 다른 요인도 있을 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "맛이 좋으면 오래 숙성한 것이다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "김치를 담그는 과정은 순서가 매우 중요합니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'순서를 지키면 더 맛있는 김치가 된다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "김치의 색깔만 관찰한다."
+              },
+              {
+                "id": "B",
+                "text": "한 종류 김치만 맛본다."
+              },
+              {
+                "id": "C",
+                "text": "순서를 지킨 김치와 안 지킨 김치의 맛을 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "김치의 무게를 잰다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

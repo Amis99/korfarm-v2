@@ -4,8 +4,9 @@
  */
 function RichText({ children }) {
   if (!children || typeof children !== 'string') return children ?? null;
+  const text = children.replace(/\\n/g, '\n');
   const pattern = /(<u>[\s\S]*?<\/u>|<b>[\s\S]*?<\/b>|\*\*[\s\S]*?\*\*)/g;
-  const parts = children.split(pattern);
+  const parts = text.split(pattern);
   return parts.map((part, i) => {
     if (part.startsWith('<u>') && part.endsWith('</u>')) {
       return <u key={i}>{part.slice(3, -4)}</u>;

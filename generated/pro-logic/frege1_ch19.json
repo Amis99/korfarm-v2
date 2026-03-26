@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 19장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "기사문은 글쓴이의 감정이나 주관적인 주장을 넣지 않고, 확인된 사실을 명확하게 전달하는 것을 목적으로 합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'기사문은 주관적 주장을 넣지 않아야 한다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기자는 자신의 감정을 자유롭게 표현해야 한다"
+              },
+              {
+                "id": "B",
+                "text": "기자의 주관이 섞이면 독자가 사건을 공정하게 판단할 수 없다"
+              },
+              {
+                "id": "C",
+                "text": "독자는 기사의 주관적 표현을 더 선호한다"
+              },
+              {
+                "id": "D",
+                "text": "주관적 주장이 포함되어도 사실 전달에 문제가 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "기사문의 첫 문단인 전문은 육하원칙의 핵심 내용을 요약한 부분입니다. 독자는 전문만 읽어도 사건의 대략적인 내용을 파악할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'전문만 읽어도 사건을 파악할 수 있다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전문에는 기자의 개인적 감정이 가장 많이 담겨 있다"
+              },
+              {
+                "id": "B",
+                "text": "독자는 본문까지 반드시 다 읽어야 사건을 이해할 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "전문에 육하원칙의 핵심 요소가 빠짐없이 요약되어 있다"
+              },
+              {
+                "id": "D",
+                "text": "전문은 기사에서 가장 중요하지 않은 부분이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "육하원칙 중 하나라도 빠지면 독자는 사건을 명확하게 이해하기 어렵고 기사의 신뢰도가 떨어지게 됩니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "기사문에서 '왜'(사건의 이유)가 빠지면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독자가 사건이 일어난 원인을 알 수 없어 기사를 온전히 이해하지 못한다"
+              },
+              {
+                "id": "B",
+                "text": "기사의 신뢰도가 더 높아진다"
+              },
+              {
+                "id": "C",
+                "text": "독자가 기사를 더 재미있게 읽는다"
+              },
+              {
+                "id": "D",
+                "text": "기사 내용이 더 간결해져 좋다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "OO초등학교 4학년 3반에서 '칭찬 릴레이 발표회'가 열렸습니다. 학생들은 친구의 장점을 포스트잇에 적어 게시판에 붙이고, 선정된 학생이 특기를 발표했습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "칭찬 릴레이 활동을 반복적으로 진행하면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "발표를 싫어하는 학생이 더 늘어난다"
+              },
+              {
+                "id": "B",
+                "text": "학생들이 서로의 단점만 지적하게 된다"
+              },
+              {
+                "id": "C",
+                "text": "학급 내 친구 사이의 긍정적 상호작용이 늘어난다"
+              },
+              {
+                "id": "D",
+                "text": "학급 분위기와 관계없이 변화가 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "기사문은 객관적인 사실만을 전달해야 합니다. '이 발표회는 정말 재미있었다'는 기자의 개인적 감상입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 기사문에는 기자의 개인적 감상을 넣으면 안 된다. 소전제: '정말 재미있었다'는 기자의 개인적 감상이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기자의 감상은 기사문에 필수적이다"
+              },
+              {
+                "id": "B",
+                "text": "'정말 재미있었다'는 객관적 사실이다"
+              },
+              {
+                "id": "C",
+                "text": "'정말 재미있었다'는 기사문에 넣으면 안 된다"
+              },
+              {
+                "id": "D",
+                "text": "기사문과 개인 감상은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "표제는 기사 내용을 압축해 보여 주고 독자의 시선을 끕니다. '시청 앞 광장에서 어린이 그림 대회 열려'는 기사의 핵심을 담은 표제입니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 좋은 표제는 기사의 핵심 내용을 압축해 담아야 한다. 소전제: '그림을 잘 그리는 방법과 순서'는 기사의 핵심이 아니라 부가 정보이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부가 정보도 표제에 넣어야 한다"
+              },
+              {
+                "id": "B",
+                "text": "기사에 부가 정보는 포함되면 안 된다"
+              },
+              {
+                "id": "C",
+                "text": "표제는 기사의 핵심과 관계없어도 된다"
+              },
+              {
+                "id": "D",
+                "text": "'그림을 잘 그리는 방법과 순서'는 표제로 적합하지 않다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "기사문이 독자에게 정확한 정보를 제공하려면 육하원칙을 반드시 갖추어야 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'기사문의 정확한 정보 전달을 위해 육하원칙이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "육하원칙이 빠지면 정확한 정보 전달이 어렵다"
+              },
+              {
+                "id": "B",
+                "text": "육하원칙을 갖추면 반드시 정확한 정보가 전달된다"
+              },
+              {
+                "id": "C",
+                "text": "정확한 정보를 전달하면 육하원칙이 자동으로 갖춰진다"
+              },
+              {
+                "id": "D",
+                "text": "육하원칙과 정보 전달은 무관하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "기사의 신뢰도를 높이려면 사건이 실제로 일어났다는 것을 증명하는 구체적인 날짜, 시간, 장소를 밝혀야 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'신뢰도를 높이려면 구체적인 시간과 장소가 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시간과 장소가 구체적이면 신뢰도가 반드시 높다"
+              },
+              {
+                "id": "B",
+                "text": "신뢰도가 높으면 시간과 장소는 필요 없다"
+              },
+              {
+                "id": "C",
+                "text": "시간과 장소는 기사에 불필요한 요소이다"
+              },
+              {
+                "id": "D",
+                "text": "구체적인 시간과 장소가 없으면 기사의 신뢰도를 높일 수 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "칭찬 릴레이 발표회 기사에는 '지난 5월 15일 수요일, OO초등학교 4학년 3반 교실'이라는 구체적 정보가 있었습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'육하원칙을 갖추려면 누가, 언제, 어디서 등의 요소가 필요하다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기사에 기자의 감정을 풍부하게 서술했다"
+              },
+              {
+                "id": "B",
+                "text": "기사에 '5월 15일, 4학년 3반 교실'이라는 시간과 장소를 명시했다"
+              },
+              {
+                "id": "C",
+                "text": "기사의 제목에 '재미있는 하루'라고만 적었다"
+              },
+              {
+                "id": "D",
+                "text": "육하원칙 없이 사건을 요약했다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "박민지 학생은 카드 마술을 시연하고, 김철수 학생은 리코더와 오르간을 연주했으며, 이영희 학생은 태권도 품새를 선보였습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'기사문에서 사건의 구체적 내용(무엇을, 어떻게)을 전달하는 것이 필요하다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "발표가 정말 감동적이어서 기자도 눈물을 흘렸다고 서술했다"
+              },
+              {
+                "id": "B",
+                "text": "김철수 학생이 리코더와 직접 작곡한 곡을 연주했다고 서술했다"
+              },
+              {
+                "id": "C",
+                "text": "이영희 학생이 태권도 품새 동작을 선보였다고 서술했다"
+              },
+              {
+                "id": "D",
+                "text": "박민지 학생이 카드 마술 세 가지를 시연했다고 서술했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "기사에 기자의 주관적 의견이 들어가면 독자가 사건을 공정하게 판단하기 어려워집니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'주관적 의견이 들어가면(P) 공정한 판단이 어려워진다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주관적 의견이 없으면 공정한 판단이 반드시 가능하다"
+              },
+              {
+                "id": "B",
+                "text": "공정한 판단이 어려우면 주관적 의견이 들어간 것이다"
+              },
+              {
+                "id": "C",
+                "text": "공정한 판단이 어렵지 않았다면 주관적 의견이 들어가지 않은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "주관적 의견과 공정한 판단은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "육하원칙이 모두 갖춰지면 독자는 사건의 내용을 빠짐없이 정확하게 알 수 있습니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'육하원칙이 모두 갖춰지면(P) 사건을 정확하게 알 수 있다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "육하원칙이 빠지면 사건을 알 수 없다"
+              },
+              {
+                "id": "B",
+                "text": "사건을 알 수 있으면 육하원칙이 갖춰진 것이다"
+              },
+              {
+                "id": "C",
+                "text": "육하원칙과 사건 이해는 무관하다"
+              },
+              {
+                "id": "D",
+                "text": "사건을 정확하게 알 수 없다면 육하원칙이 모두 갖춰지지 않은 것이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "'어제 오후 3시, 우리 학교에서 화재 경보가 울렸다'는 육하원칙을 갖춘 객관적 사실입니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'육하원칙을 갖추고 객관적 사실만 서술하면 기사문에 적합하다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나는 이 사건을 보니 너무 화가 났다"
+              },
+              {
+                "id": "B",
+                "text": "우리 팀 승리는 심판의 실수 때문일 것이다"
+              },
+              {
+                "id": "C",
+                "text": "경고를 받은 선수는 반드시 반성해야 한다"
+              },
+              {
+                "id": "D",
+                "text": "지난 5월 15일, OO초 4학년 3반에서 칭찬 릴레이 발표회가 열렸다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "김OO 담임 교사는 '학급 내 긍정적인 상호작용을 늘리기 위해 이번 시간을 마련했다'고 행사 취지를 설명했습니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'인터뷰 인용은 기사의 객관성을 높이는 충분한 방법이다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기자가 '이 행사는 정말 훌륭했다'고 자신의 감상을 적었다"
+              },
+              {
+                "id": "B",
+                "text": "기자가 행사의 결과를 추측하여 적었다"
+              },
+              {
+                "id": "C",
+                "text": "기사에 아무런 인용 없이 요약만 했다"
+              },
+              {
+                "id": "D",
+                "text": "담임 교사의 말을 직접 인용하여 행사 취지를 밝혔다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'기사문에 주관적 감정이 포함되면(P) 독자는 사건을 오해할 수 있다(Q)'가 참이고, 이 기사에는 주관적 감정이 포함되어 있습니다(P).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사건 오해가 없으므로 주관적 감정이 없다 (후건 부정)"
+              },
+              {
+                "id": "B",
+                "text": "이 기사의 독자는 사건을 오해할 수 있다 (전건 긍정, 타당)"
+              },
+              {
+                "id": "C",
+                "text": "주관적 감정이 없으므로 사건 오해가 없다 (전건 부정, 부당)"
+              },
+              {
+                "id": "D",
+                "text": "주관적 감정과 사건 오해는 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'전문에 핵심이 요약되면(P) 독자가 사건을 빠르게 파악한다(Q)'가 참이고, 독자가 사건을 빠르게 파악하지 못했습니다(~Q).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전문에 핵심이 요약되었을 것이다"
+              },
+              {
+                "id": "B",
+                "text": "전문에 핵심이 요약되지 않았을 것이다 (대우, 타당)"
+              },
+              {
+                "id": "C",
+                "text": "전문과 사건 파악은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "사건을 파악했으므로 전문에 핵심이 있다 (후건 긍정, 부당)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "기사문 작성 연습을 많이 한 학생일수록 육하원칙을 빠짐없이 적용하는 비율이 높다는 조사 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'기사문 작성 연습 횟수'와 '육하원칙 적용 비율'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "둘 사이에 상관관계가 있으나, 교사의 피드백이나 독서량 등 다른 요인도 영향을 미친다"
+              },
+              {
+                "id": "B",
+                "text": "육하원칙 적용이 잘 되어서 연습을 많이 하는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "연습만 하면 육하원칙을 반드시 완벽하게 적용할 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 아무 관계가 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "칭찬 릴레이 발표회 이후 4학년 3반의 교우 관계 만족도가 높아졌다는 설문 결과가 나왔습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'칭찬 릴레이 발표회'와 '교우 관계 만족도 상승'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "발표회만으로 만족도가 반드시 높아진다"
+              },
+              {
+                "id": "B",
+                "text": "발표회가 영향을 미쳤지만, 담임 교사의 지도나 학급 분위기 등 다른 요인도 작용했을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "만족도가 높아서 발표회를 연 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'기사문에서 육하원칙을 모두 갖추면 독자의 이해도가 높아진다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "육하원칙이 모두 갖춰진 기사와 일부 빠진 기사를 독자에게 읽히고 이해도를 비교한다"
+              },
+              {
+                "id": "B",
+                "text": "기사의 글자 수만 세어본다"
+              },
+              {
+                "id": "C",
+                "text": "기자의 주관적 감상이 있는 기사를 분석한다"
+              },
+              {
+                "id": "D",
+                "text": "하나의 기사만 반복해서 읽히고 이해도를 측정한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'기사문에 기자의 감정을 넣으면 독자가 기사를 더 신뢰한다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기자가 감정을 풍부하게 넣은 기사가 독자에게 호평을 받았다"
+              },
+              {
+                "id": "B",
+                "text": "기자가 감정 없이 쓴 기사의 클릭 수가 낮았다"
+              },
+              {
+                "id": "C",
+                "text": "기자가 '정말 감동적이었다'고 적은 기사에 대해 독자들이 편향적이라며 신뢰하지 않았다"
+              },
+              {
+                "id": "D",
+                "text": "기자의 감정이 담긴 기사가 인기가 많았다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

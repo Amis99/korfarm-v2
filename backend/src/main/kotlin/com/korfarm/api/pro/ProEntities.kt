@@ -180,6 +180,9 @@ class ProTestSessionEntity(
     @Column(name = "submission_id")
     var submissionId: String? = null,
 
+    @Column(name = "competency_scores", columnDefinition = "JSON")
+    var competencyScores: String? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 

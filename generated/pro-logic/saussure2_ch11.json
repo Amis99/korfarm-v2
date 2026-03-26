@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 11장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "식물은 햇빛만 있으면 스스로 먹이를 만들 수 있어요. 그리고 동물에게 맑은 공기와 시원한 그늘도 만들어 줍니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "식물이 스스로 먹이를 만들 수 있으려면 어떤 사실이 꼭 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "식물에게 햇빛을 에너지로 바꾸는 능력이 있어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "식물이 다리로 걸어 다녀야 한다."
+              },
+              {
+                "id": "C",
+                "text": "동물이 식물에게 먹이를 나눠 줘야 한다."
+              },
+              {
+                "id": "D",
+                "text": "식물이 물속에서만 살아야 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "동물은 다리나 날개, 지느러미를 이용해서 먹이를 찾거나 위험을 피해 스스로 움직입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "동물이 스스로 움직일 수 있기 때문에 어떤 일이 가능할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동물은 한곳에만 뿌리를 내리고 산다."
+              },
+              {
+                "id": "B",
+                "text": "동물은 위험한 곳에서 도망칠 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "동물은 햇빛으로 양분을 만든다."
+              },
+              {
+                "id": "D",
+                "text": "동물은 꽃을 피운다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "생물은 시간이 지나면서 키가 크고 몸이 자라요. 그리고 밥이나 물, 햇빛 같은 에너지를 먹어야 살 수 있어요.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'모든 생물은 에너지가 필요하다. 참나무는 생물이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "참나무는 에너지가 필요 없다."
+              },
+              {
+                "id": "B",
+                "text": "참나무는 동물이다."
+              },
+              {
+                "id": "C",
+                "text": "참나무는 무생물이다."
+              },
+              {
+                "id": "D",
+                "text": "참나무는 에너지가 필요하다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "식물은 뿌리를 땅속 깊이 내리고 한곳에 자리 잡아 평생을 살아갑니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'식물이 물을 빨아들이려면 뿌리가 꼭 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "뿌리가 없어도 식물은 물을 빨아들일 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "뿌리가 있으면 동물도 물을 빨아들인다."
+              },
+              {
+                "id": "C",
+                "text": "뿌리가 없으면 식물은 물을 빨아들일 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "물이 없으면 뿌리가 자란다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "동물과 식물은 모두 숨을 쉬며, 아기를 낳거나 씨앗을 퍼뜨려 자손을 남긴답니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'번식을 하려면 살아 있는 생물이어야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "돌멩이가 작은 돌멩이를 만들어 낸다."
+              },
+              {
+                "id": "B",
+                "text": "살아 있는 나비가 알을 낳아 대를 이어간다."
+              },
+              {
+                "id": "C",
+                "text": "로봇이 새끼 로봇을 낳는다."
+              },
+              {
+                "id": "D",
+                "text": "자동차가 새 자동차를 만든다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "사자는 튼튼한 다리로 어디든 달려갈 수 있고, 독수리는 날개로 하늘 높이 날 수 있습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'튼튼한 다리가 있으면 어디든 달려갈 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "튼튼한 다리가 있는데 달려가지 못하는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "달리지 못하면 다리가 튼튼한 것이다."
+              },
+              {
+                "id": "C",
+                "text": "다리가 없어도 달려갈 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "날개가 있으면 다리가 튼튼해진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "동물은 다른 동물이나 식물을 먹어야 살 수 있습니다. 하지만 식물은 햇빛과 물, 공기를 이용해서 스스로 영양분을 만들어 냅니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'식물에게 햇빛이 비추면 스스로 양분을 만든다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "강아지가 햇빛을 받아 양분을 만들었다."
+              },
+              {
+                "id": "B",
+                "text": "해바라기에 햇빛이 비추자 잎에서 양분이 만들어졌다."
+              },
+              {
+                "id": "C",
+                "text": "햇빛이 없는 밤에도 나무가 양분을 만들었다."
+              },
+              {
+                "id": "D",
+                "text": "돌멩이에 햇빛이 비추자 자라기 시작했다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "동물과 식물은 모두 소중한 생명이지만, 살아가는 모습은 서로 아주 다릅니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'식물은 한곳에 고정되어 산다. 장미는 식물이다.' 이 추론의 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "장미는 돌아다닌다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "장미는 동물이다. (틀린 추론)"
+              },
+              {
+                "id": "C",
+                "text": "장미는 사냥을 한다. (틀린 추론)"
+              },
+              {
+                "id": "D",
+                "text": "장미는 한곳에 고정되어 산다. (맞는 추론)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "사슴과 호랑이처럼 서로 먹고 먹히는 관계를 먹이사슬이라고 합니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'호랑이가 많은 숲에는 사슴이 적다.' 이 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호랑이와 사슴은 전혀 관계가 없다."
+              },
+              {
+                "id": "B",
+                "text": "사슴이 적으면 반드시 호랑이가 많아진다."
+              },
+              {
+                "id": "C",
+                "text": "호랑이 수와 사슴 수는 먹이사슬로 관련 있지만 다른 원인도 있을 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "사슴이 호랑이를 잡아먹기 때문이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "동물들은 움직이지 못하지만 많은 일을 하는 식물도 대단하다는 것을 깨달았답니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'식물이 없으면 동물도 살 수 없다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "식물이 없는 환경에서 동물이 먹이와 공기를 얻을 수 있는지 관찰한다."
+              },
+              {
+                "id": "B",
+                "text": "동물의 달리기 속도를 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "식물의 꽃 색깔을 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "동물의 몸무게를 잰다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 3장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "대화에서 가장 중요한 것은 내 말을 잘하는 것이 아니라 상대방의 말을 잘 들어주는 것입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "이 주장이 성립하려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상대방이 말하는 동안 딴짓을 해야 한다."
+              },
+              {
+                "id": "B",
+                "text": "대화에서는 내 말만 하면 된다."
+              },
+              {
+                "id": "C",
+                "text": "듣는 것은 대화에 전혀 도움이 되지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "상대방의 말을 들어야 진정한 소통이 이루어진다는 믿음이 있어야 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "공감하며 대화하려면 상대방의 눈을 바라보고 고개를 끄덕이며 반응을 보여주어야 합니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "친구가 고민을 말할 때 고개를 끄덕이며 들어주면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "친구가 자신의 마음을 알아준다고 느껴 더 편하게 이야기한다."
+              },
+              {
+                "id": "B",
+                "text": "친구가 마음을 닫는다."
+              },
+              {
+                "id": "C",
+                "text": "대화가 즉시 끝난다."
+              },
+              {
+                "id": "D",
+                "text": "친구가 화를 낸다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "경청이란 귀를 기울여 남의 말을 주의 깊게 듣는 것입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'좋은 대화에는 경청이 필요하다. 경청은 상대방의 말을 주의 깊게 듣는 것이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경청은 좋은 대화에 방해가 된다."
+              },
+              {
+                "id": "B",
+                "text": "좋은 대화에는 듣기가 필요 없다."
+              },
+              {
+                "id": "C",
+                "text": "좋은 대화를 위해서는 상대방의 말을 주의 깊게 들어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "대화와 경청은 별개의 것이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "오해란 그릇되게 해석하거나 뜻을 잘못 아는 것입니다. 오해를 풀려면 진심을 담아 대화해야 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'오해를 풀려면 진심 어린 대화가 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "진심 어린 대화 없이도 오해가 풀린다."
+              },
+              {
+                "id": "B",
+                "text": "진심 어린 대화가 없으면 오해를 풀기 어렵다."
+              },
+              {
+                "id": "C",
+                "text": "오해와 대화는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "오해가 생기면 대화를 피해야 한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "친구가 넘어져서 아파할 때 '정말 많이 아프겠다. 괜찮니?'라고 말해주는 것이 공감입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'공감하려면 상대방의 감정을 이해하려는 마음이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "친구가 울 때 '왜 울어, 약하네'라고 말했다."
+              },
+              {
+                "id": "B",
+                "text": "친구의 감정을 무시하고 내 이야기만 했다."
+              },
+              {
+                "id": "C",
+                "text": "친구가 슬퍼할 때 '많이 속상하겠다'라고 마음을 헤아려 주었다."
+              },
+              {
+                "id": "D",
+                "text": "친구에게 아무 말도 하지 않고 자리를 떠났다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "내 마음을 알아주는 사람에게 우리는 진심을 털어놓게 됩니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'공감해 주면 상대방이 마음을 열게 된다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공감했는데 마음을 열지 않는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "공감하지 않아도 마음을 연다."
+              },
+              {
+                "id": "C",
+                "text": "마음을 열면 공감한 것이다."
+              },
+              {
+                "id": "D",
+                "text": "공감과 마음 열기는 관계없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "반응이란 어떤 자극에 대하여 일어나는 동작이나 태도입니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'적절한 반응을 보여주면 대화가 잘 이어진다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "친구가 말하는 동안 핸드폰만 보았다."
+              },
+              {
+                "id": "B",
+                "text": "친구 말에 '그랬구나, 힘들었겠다'고 맞장구치니 대화가 자연스럽게 이어졌다."
+              },
+              {
+                "id": "C",
+                "text": "반응 없이 가만히 있었는데 대화가 잘 이어졌다."
+              },
+              {
+                "id": "D",
+                "text": "친구의 말을 끊고 내 이야기만 했다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "좋은 대화는 화려한 말솜씨가 아니라 상대방의 마음을 헤아리는 따뜻한 귀에서 시작됩니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'경청하는 사람은 좋은 대화 상대이다. 지수는 항상 친구 말을 경청한다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지수는 말을 잘한다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "지수는 좋은 대화 상대이다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "경청과 좋은 대화는 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "지수는 대화를 못한다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "귀는 두 개이고 입은 하나입니다. 옛 어른들은 말하기보다 듣기를 두 배 더 많이 하라는 뜻이라고 했습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'경청을 잘하는 사람'과 '친구 관계가 좋은 것'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경청을 잘하면 친구 관계에 도움이 되지만 그것만으로 충분한 것은 아니다."
+              },
+              {
+                "id": "B",
+                "text": "경청과 친구 관계는 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "경청하면 반드시 모든 친구와 사이가 완벽해진다."
+              },
+              {
+                "id": "D",
+                "text": "친구 관계가 좋으면 반드시 경청을 잘한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "그걸 왜 못 보고 넘어지니?라고 면박을 주면 친구는 마음을 닫아버릴 것입니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'공감하며 대화하면 오해가 줄어든다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사용한 단어 수를 센다."
+              },
+              {
+                "id": "B",
+                "text": "대화 시간만 측정한다."
+              },
+              {
+                "id": "C",
+                "text": "목소리 크기를 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "공감하며 대화한 모둠과 그렇지 않은 모둠의 오해 발생 횟수를 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

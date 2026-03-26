@@ -139,7 +139,10 @@ class TestService(
                 number = q.number,
                 type = q.type,
                 domain = q.domain,
-                points = q.points
+                points = q.points,
+                passage = q.passage,
+                content = q.stem ?: q.passage,
+                choices = parseChoices(q.choicesJson)?.map { it.text }
             )
         }
     }
@@ -417,6 +420,7 @@ class TestService(
                 domain = q.domain,
                 subDomain = q.subDomain,
                 passage = q.passage,
+                stem = q.stem,
                 points = q.points,
                 correctAnswer = q.correctAnswer,
                 choices = parseChoices(q.choicesJson),
@@ -443,8 +447,10 @@ class TestService(
                 domain = inp.domain,
                 subDomain = inp.subDomain,
                 passage = inp.passage,
+                stem = inp.stem,
                 points = inp.points,
                 correctAnswer = inp.correctAnswer,
+                choicesJson = inp.choices?.let { objectMapper.writeValueAsString(it) },
                 choiceExplanationsJson = inp.choiceExplanations?.let { objectMapper.writeValueAsString(it) },
                 intent = inp.intent,
                 essayKeywordsJson = inp.essayKeywords?.let { objectMapper.writeValueAsString(it) },

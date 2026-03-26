@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 16장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "포도는 알록달록하고 반짝이는 알갱이를 맛있는 젤리나 사탕이라고 생각했어요. 하지만 그것은 미세 플라스틱이라는 가짜 먹이였어요.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "포도가 미세 플라스틱을 먹이로 착각하려면 어떤 사실이 있어야 할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "거북이 할머니가 알려줘야 한다."
+              },
+              {
+                "id": "B",
+                "text": "포도가 눈이 없어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "바다에 먹이가 하나도 없어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "미세 플라스틱이 진짜 먹이와 비슷하게 생겨야 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "사람들이 쓴 플라스틱 컵이나 빨대가 바다로 흘러들어와서 파도에 부딪히고 깨지면 아주 작아집니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "사람들이 플라스틱을 아무 데나 버리면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "플라스틱이 바다로 흘러가 물고기가 먹을 수 있는 위험한 조각이 된다."
+              },
+              {
+                "id": "B",
+                "text": "바다가 더 깨끗해진다."
+              },
+              {
+                "id": "C",
+                "text": "물고기들이 더 건강해진다."
+              },
+              {
+                "id": "D",
+                "text": "바다의 물이 줄어든다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "지구가 점점 뜨거워지는 것을 지구 온난화라고 해요. 공장 매연이나 자동차 배기가스가 지구 온난화의 원인이에요.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'매연은 지구 온난화의 원인이다. 자동차는 매연을 내뿜는다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자동차는 지구 온난화와 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "자동차는 지구를 시원하게 한다."
+              },
+              {
+                "id": "C",
+                "text": "자동차는 지구 온난화에 영향을 준다."
+              },
+              {
+                "id": "D",
+                "text": "매연은 깨끗한 공기이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "쓰레기를 종류별로 나누어 정해진 곳에 버리는 일을 분리배출이라고 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'재활용을 하려면 분리배출이 꼭 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "분리배출을 하지 않으면 재활용이 안 된다."
+              },
+              {
+                "id": "B",
+                "text": "분리배출 없이도 재활용할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "재활용과 분리배출은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "분리배출하면 쓰레기가 늘어난다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "가까운 거리는 걸어 다니고 쓰레기를 줄여서 지구의 열을 식히는 노력이 필요해요.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'환경을 보호하려면 일회용품을 줄여야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "개인 컵을 가져가서 일회용 컵 사용을 줄였다."
+              },
+              {
+                "id": "B",
+                "text": "일회용 접시를 매일 100개씩 썼다."
+              },
+              {
+                "id": "C",
+                "text": "쓰레기를 강에 버렸다."
+              },
+              {
+                "id": "D",
+                "text": "플라스틱 빨대를 잔뜩 모았다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "미세 플라스틱을 먹으면 배가 아파서 밥도 못 먹고 시름시름 앓게 된다고 거북이 할머니가 말했어요.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'미세 플라스틱을 먹으면 배가 아프다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "배가 아프지 않으면 플라스틱을 많이 먹어도 된다."
+              },
+              {
+                "id": "B",
+                "text": "배가 아프면 반드시 플라스틱을 먹은 것이다."
+              },
+              {
+                "id": "C",
+                "text": "미세 플라스틱은 맛있는 먹이이다."
+              },
+              {
+                "id": "D",
+                "text": "미세 플라스틱을 먹었는데 건강해지는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "다 쓴 물건을 손질하여 다시 쓰는 것을 재활용이라고 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'분리배출을 잘하면 재활용이 된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "쓰레기를 모두 섞어서 한꺼번에 버렸다."
+              },
+              {
+                "id": "B",
+                "text": "유리병을 따로 모아 새 유리병으로 다시 만들었다."
+              },
+              {
+                "id": "C",
+                "text": "재활용 마크가 있는 물건을 음식물 쓰레기통에 넣었다."
+              },
+              {
+                "id": "D",
+                "text": "분리배출을 안 했는데 재활용이 되었다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "일회용품을 많이 쓰면 쓰레기가 늘어납니다. 쓰레기가 늘어나면 환경이 오염됩니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'일회용품을 많이 쓰면 쓰레기가 늘어난다. 쓰레기가 늘면 환경이 오염된다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일회용품을 많이 쓰면 환경이 좋아진다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "일회용품을 많이 쓰면 환경이 오염된다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "환경이 오염되면 일회용품이 줄어든다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "일회용품과 환경은 관계없다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "공장 매연이나 자동차 배기가스 등이 지구를 감싸서 열이 밖으로 나가지 못해 지구가 뜨거워지고 있어요.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'자동차가 많은 도시일수록 공기가 나쁘다.' 이 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자동차와 공기 질은 전혀 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "자동차 수와 공기 질은 배기가스로 관련 있지만 다른 원인도 있을 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "공기가 나빠지면 자동차가 늘어난다."
+              },
+              {
+                "id": "D",
+                "text": "자동차가 많으면 공기가 반드시 좋아진다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "포도는 물방울 편지를 보냈어요. '플라스틱을 아무 데나 버리지 말아 줘. 분리수거를 잘 해 줘!'",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'분리수거를 잘하면 바다 쓰레기가 줄어든다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "바다 물고기의 색깔을 조사한다."
+              },
+              {
+                "id": "B",
+                "text": "바다의 깊이를 잰다."
+              },
+              {
+                "id": "C",
+                "text": "분리수거를 잘한 마을과 안 한 마을의 바다 쓰레기 양을 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "물고기의 종류를 세어 본다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

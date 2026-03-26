@@ -14,7 +14,7 @@ function StudentLinkConfirmPage() {
     event.preventDefault();
     setError("");
     setMessage("");
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = sessionStorage.getItem(TOKEN_KEY);
     if (!token) {
       setError("로그인이 필요합니다.");
       return;

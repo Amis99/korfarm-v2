@@ -1,5 +1,10 @@
 /* ── 관리자 학습 계획표 ── */
 
+.asp-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .asp-header {
   display: flex;
   justify-content: space-between;
@@ -10,7 +15,7 @@
 }
 .asp-header h1 {
   font-size: 1.4rem;
-  color: #e8ddd4;
+  color: var(--admin-text, #f3f6f1);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -45,7 +50,7 @@
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .asp-table th {
-  color: #8a7468;
+  color: var(--admin-muted, #a6b6a9);
   font-weight: 600;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -88,7 +93,7 @@
 }
 .aspd-sidebar h3 {
   font-size: 0.85rem;
-  color: #8a7468;
+  color: var(--admin-muted, #a6b6a9);
   margin-bottom: 12px;
 }
 .aspd-student-list {
@@ -142,7 +147,7 @@
   padding: 10px 18px;
   background: none;
   border: none;
-  color: #8a7468;
+  color: var(--admin-muted, #a6b6a9);
   font-size: 0.85rem;
   cursor: pointer;
   border-bottom: 2px solid transparent;
@@ -203,7 +208,7 @@
 .asp-form-group label {
   display: block;
   font-size: 0.8rem;
-  color: #8a7468;
+  color: var(--admin-muted, #a6b6a9);
   margin-bottom: 6px;
   font-weight: 600;
 }
@@ -229,6 +234,7 @@
 .asp-date-row {
   display: flex;
   gap: 12px;
+  flex-wrap: wrap;
 }
 .asp-date-row > div { flex: 1; }
 
@@ -280,6 +286,7 @@
   justify-content: space-between;
   gap: 12px;
   margin-top: 24px;
+  flex-wrap: wrap;
 }
 .asp-btn-prev,
 .asp-btn-next,
@@ -348,7 +355,7 @@
 }
 .aspd-settings-section h3 {
   font-size: 0.9rem;
-  color: #8a7468;
+  color: var(--admin-muted, #a6b6a9);
   margin-bottom: 12px;
 }
 .aspd-edit-list {
@@ -378,7 +385,7 @@
 .asp-empty {
   text-align: center;
   padding: 60px 20px;
-  color: #8a7468;
+  color: var(--admin-muted, #a6b6a9);
 }
 .asp-empty .material-symbols-outlined {
   font-size: 48px;
@@ -399,7 +406,7 @@
 .asp-loading {
   text-align: center;
   padding: 40px;
-  color: #8a7468;
+  color: var(--admin-muted, #a6b6a9);
 }
 
 /* ── 수강반 필터 ── */
@@ -487,7 +494,7 @@
   border-radius: 6px;
   border: 1px dashed rgba(255,255,255,0.15);
   background: rgba(255,255,255,0.03);
-  color: #8a7468;
+  color: var(--admin-muted, #a6b6a9);
   font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.15s;
@@ -557,7 +564,7 @@
   gap: 4px;
   background: none;
   border: none;
-  color: #8a7468;
+  color: var(--admin-muted, #a6b6a9);
   font-size: 0.8rem;
   cursor: pointer;
   padding: 6px 4px;
@@ -627,4 +634,77 @@
   height: 16px;
   cursor: pointer;
   accent-color: #ff7f2a;
+}
+
+/* ── 테이블 스크롤 래퍼 ── */
+.asp-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 768px) {
+  .asp-wrap {
+    max-width: none;
+  }
+
+  .asp-header h1 {
+    font-size: 1.1rem;
+  }
+
+  .asp-create-btn {
+    padding: 8px 14px;
+    font-size: 0.82rem;
+  }
+
+  .asp-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .asp-filter-bar .asp-select {
+    width: 100%;
+  }
+
+  .asp-search-form {
+    min-width: 0;
+  }
+
+  .asp-table {
+    font-size: 0.78rem;
+  }
+  .asp-table th,
+  .asp-table td {
+    padding: 8px 6px;
+  }
+
+  .aspd-layout {
+    gap: 12px;
+  }
+
+  .aspd-sidebar {
+    padding: 12px;
+  }
+
+  .aspd-tabs {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .aspd-tab {
+    padding: 8px 12px;
+    font-size: 0.78rem;
+  }
+
+  .asp-modal {
+    padding: 20px 16px;
+    max-width: 95vw;
+  }
+
+  .asp-date-row > div {
+    flex: 1 1 100%;
+  }
+
+  .asp-add-row {
+    flex-wrap: wrap;
+  }
 }

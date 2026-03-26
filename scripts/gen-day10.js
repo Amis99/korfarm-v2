@@ -1,0 +1,378 @@
+// Day 10 - 문학 (LITERATURE) 생성 스크립트
+const fs = require('fs');
+const path = require('path');
+
+// === 지문 (1100자 ±50) ===
+// 주제: 소녀가 시골 외갓집에서 피아노를 다시 치기 시작하는 이야기
+const paragraphs = [
+  {
+    id: "p1",
+    text: "서연이는 초등학교 사 학년 때 피아노 학원을 그만두었다. 매일 같은 곡을 수십 번이나 반복해서 연습하는 것이 몹시 지겨웠고, 매년 콩쿠르에 나가서 반드시 좋은 성적을 받아야 한다는 부담감이 점점 커졌기 때문이다. 학원을 그만둔 뒤로 서연이는 집에 있는 피아노의 뚜껑조차 열어 보지 않았다. 피아노를 볼 때마다 답답했던 연습실의 공기와 선생님의 엄격한 표정이 고스란히 떠올라서, 건반에 손을 얹는 것 자체가 싫었던 것이다. 그렇게 이 년이라는 시간이 흐른 어느 여름, 서연이네 가족은 시골에 사시는 외할머니 댁에 놀러 가게 되었다. 외할머니 댁 거실 한쪽 구석에는 오래되어 색이 바랜 낡은 피아노 한 대가 조용히 놓여 있었다."
+  },
+  {
+    id: "p2",
+    text: "외할머니는 서연이가 아주 어릴 때 피아노를 무척이나 좋아했던 이야기를 다정하게 들려주셨다. \"네가 다섯 살 때 이 피아노 앞에 앉아서 아무 곡이나 신나게 치던 모습이 참 예뻤단다. 그때는 틀려도 환하게 웃으면서 계속 쳤었지.\" 서연이는 그런 기억이 아득히 희미하게 남아 있었다. 실력이 아니라 소리 자체가 좋아서 건반을 두드리던 그 시절이 문득 그리워졌다. 어느 날 오후, 외할머니가 낮잠을 주무시는 동안 서연이는 조용히 피아노 뚜껑을 열고 건반 앞에 앉았다. 오래된 건반은 약간 무거웠지만, 손가락이 닿는 순간 놀랍도록 맑은 소리가 울려 퍼졌다. 서연이는 악보도 없이 기억나는 멜로디를 천천히 연주하기 시작했다."
+  },
+  {
+    id: "p3",
+    text: "서투른 연주였지만, 소리 하나하나가 마음속 깊은 곳을 두드리는 듯한 따뜻한 느낌이 들었다. 중간에 음을 틀려도 아무도 지적하는 사람이 없었고, 콩쿠르 점수를 걱정할 필요도 전혀 없었다. 서연이는 그저 손끝에서 흘러나오는 소리에 온전히 귀를 기울이며 조용히 미소를 지었다. 낮잠에서 깨어난 외할머니는 거실에서 흘러나오는 피아노 소리를 듣고 환하게 웃으셨다. \"그래, 음악은 원래 그런 거란다. 잘 치는 것보다 즐기는 것이 먼저야.\" 외할머니의 말씀을 듣는 순간, 서연이는 자신이 피아노를 왜 그만두었는지 비로소 온전히 이해할 수 있었다. 성적과 경쟁이라는 무거운 짐에 치여 잊고 있었던 음악의 순수한 즐거움을 시골 외갓집의 낡은 피아노가 다시 일깨워 준 것이다."
+  }
+];
+
+const totalChars = paragraphs.reduce((sum, p) => sum + p.text.length, 0);
+console.log(`총 글자 수: ${totalChars}`);
+
+function findRange(pid, text) {
+  const p = paragraphs.find(x => x.id === pid);
+  const s = p.text.indexOf(text);
+  if (s === -1) throw new Error(`"${text}" → ${pid} 미발견`);
+  return { paragraphId: pid, start: s, end: s + text.length };
+}
+function sr(pid, st, en) {
+  const p = paragraphs.find(x => x.id === pid);
+  const s = p.text.indexOf(st);
+  if (s === -1) throw new Error(`시작:"${st}" → ${pid} 미발견`);
+  const e = p.text.indexOf(en, s);
+  if (e === -1) throw new Error(`끝:"${en}" → ${pid} 미발견`);
+  return { paragraphId: pid, start: s, end: e + en.length };
+}
+function fr(pid) { const p = paragraphs.find(x => x.id === pid); return { paragraphId: pid, start: 0, end: p.text.length }; }
+
+// === 문장 범위 ===
+const p1s1 = sr("p1", "서연이는 초등학교", "그만두었다.");
+const p1s2 = sr("p1", "매일 같은 곡을", "때문이다.");
+const p1s3 = sr("p1", "학원을 그만둔", "않았다.");
+const p1s4 = sr("p1", "피아노를 볼 때마다", "것이다.");
+const p1s5 = sr("p1", "그렇게 이 년이라는", "되었다.");
+const p1s6 = sr("p1", "외할머니 댁 거실", "있었다.");
+
+const p2s1 = sr("p2", "외할머니는 서연이가", "주셨다.");
+const p2s2 = sr("p2", "\"네가 다섯 살 때", "쳤었지.\"");
+const p2s3 = sr("p2", "서연이는 그런", "있었다.");
+const p2s4 = sr("p2", "실력이 아니라", "그리워졌다.");
+const p2s5 = sr("p2", "어느 날 오후,", "앉았다.");
+const p2s6 = sr("p2", "오래된 건반은", "퍼졌다.");
+const p2s7 = sr("p2", "서연이는 악보도", "시작했다.");
+
+const p3s1 = sr("p3", "서투른 연주였지만,", "들었다.");
+const p3s2 = sr("p3", "중간에 음을", "없었다.");
+const p3s3 = sr("p3", "서연이는 그저", "지었다.");
+const p3s4 = sr("p3", "낮잠에서 깨어난", "웃으셨다.");
+const p3s5 = sr("p3", "\"그래, 음악은", "먼저야.\"");
+const p3s6 = sr("p3", "외할머니의 말씀을", "있었다.");
+const p3s7 = sr("p3", "성적과 경쟁이라는", "것이다.");
+
+// === timeline ===
+const timeline = [
+  { stepId: "s1", highlight: { ranges: [p1s1] }, question: {
+    prompt: "서연이가 피아노 학원을 그만둔 시기로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "초등학교 사 학년 때 그만두었다." },
+      { id: "B", text: "중학교 일 학년 때 그만두었다." },
+      { id: "C", text: "초등학교 일 학년 때 그만두었다." },
+      { id: "D", text: "유치원 때 그만두었다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s2", highlight: { ranges: [p1s2] }, question: {
+    prompt: "서연이가 피아노를 그만둔 까닭으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "같은 곡 반복이 지겹고 콩쿠르 성적 부담이 커졌기 때문이다." },
+      { id: "B", text: "피아노 학원이 집에서 너무 멀었기 때문이다." },
+      { id: "C", text: "피아노 선생님이 다른 도시로 이사 가셨기 때문이다." },
+      { id: "D", text: "친구들이 피아노를 놀린다고 해서 속상했기 때문이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s3", highlight: { ranges: [p1s3] }, question: {
+    prompt: "학원을 그만둔 뒤 서연이의 행동으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "집에 있는 피아노 뚜껑조차 열어 보지 않았다." },
+      { id: "B", text: "혼자서 매일 연습하며 실력을 키웠다." },
+      { id: "C", text: "다른 악기를 배우기 시작했다." },
+      { id: "D", text: "피아노를 동생에게 물려주었다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s4", highlight: { ranges: [p1s4] }, question: {
+    prompt: "서연이가 피아노를 볼 때마다 떠오른 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "답답했던 연습실의 공기와 선생님의 엄격한 표정이다." },
+      { id: "B", text: "친구들과 함께 연주하던 즐거운 장면이다." },
+      { id: "C", text: "콩쿠르에서 상을 받았던 기쁜 순간이다." },
+      { id: "D", text: "가족들이 피아노 소리를 듣고 박수치던 장면이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s5", highlight: { ranges: [p1s5] }, question: {
+    prompt: "이 년 뒤 서연이네 가족이 간 곳으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "시골 외할머니 댁에 놀러 가게 되었다." },
+      { id: "B", text: "바닷가 펜션으로 여행을 떠났다." },
+      { id: "C", text: "도시에 있는 음악 캠프에 참가했다." },
+      { id: "D", text: "새로 이사한 집으로 이사를 갔다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s6", highlight: { ranges: [p1s6] }, question: {
+    prompt: "외할머니 댁 거실에 있었던 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "색이 바랜 낡은 피아노 한 대가 놓여 있었다." },
+      { id: "B", text: "새로 산 전자 피아노가 놓여 있었다." },
+      { id: "C", text: "오래된 기타 한 대가 걸려 있었다." },
+      { id: "D", text: "커다란 텔레비전 한 대가 놓여 있었다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p1 중심
+  { stepId: "s7", highlight: { ranges: [fr("p1")] }, question: {
+    prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "콩쿠르 부담으로 피아노를 그만둔 서연이가 외할머니 댁에서 낡은 피아노를 만났다." },
+      { id: "B", text: "서연이는 피아노를 좋아해서 매일 즐겁게 연습했다." },
+      { id: "C", text: "서연이네 가족은 매년 여름 외할머니 댁을 방문했다." },
+      { id: "D", text: "외할머니는 서연이에게 새 피아노를 선물하셨다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p2
+  { stepId: "s8", highlight: { ranges: [p2s1] }, question: {
+    prompt: "외할머니가 들려주신 이야기의 내용으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "서연이가 어릴 때 피아노를 무척 좋아했던 이야기이다." },
+      { id: "B", text: "외할머니가 젊은 시절 피아니스트였던 이야기이다." },
+      { id: "C", text: "서연이의 어머니가 노래를 잘 불렀던 이야기이다." },
+      { id: "D", text: "이웃집 아이가 피아노를 배우기 시작한 이야기이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s9", highlight: { ranges: [p2s2] }, question: {
+    prompt: "외할머니가 기억하는 다섯 살 서연이의 모습으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "피아노 앞에 앉아 틀려도 웃으면서 신나게 치던 모습이다." },
+      { id: "B", text: "피아노 앞에서 울면서 치기 싫다고 한 모습이다." },
+      { id: "C", text: "피아노 대신 그림을 그리고 있던 모습이다." },
+      { id: "D", text: "피아노를 조용히 바라보며 만지지 않던 모습이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s10", highlight: { ranges: [p2s3] }, question: {
+    prompt: "서연이에게 그런 기억이 어떻게 남아 있었는지 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "희미하게 남아 있었다." },
+      { id: "B", text: "전혀 기억나지 않았다." },
+      { id: "C", text: "아주 선명하게 기억하고 있었다." },
+      { id: "D", text: "꿈에서만 기억나는 느낌이었다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s11", highlight: { ranges: [p2s4] }, question: {
+    prompt: "서연이가 그리워한 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "실력이 아니라 소리 자체가 좋아서 건반을 두드리던 그때이다." },
+      { id: "B", text: "콩쿠르에서 상을 받던 그때이다." },
+      { id: "C", text: "선생님에게 칭찬을 받던 그때이다." },
+      { id: "D", text: "친구들과 함께 학원에 다니던 그때이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s12", highlight: { ranges: [p2s5] }, question: {
+    prompt: "서연이가 피아노 앞에 앉은 때는 언제인가요?",
+    choices: [
+      { id: "A", text: "외할머니가 낮잠을 주무시는 어느 날 오후이다." },
+      { id: "B", text: "외할머니와 함께 아침 식사를 한 뒤이다." },
+      { id: "C", text: "가족 모두가 거실에 모여 있을 때이다." },
+      { id: "D", text: "밤늦게 모두가 잠든 뒤이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s13", highlight: { ranges: [p2s6] }, question: {
+    prompt: "오래된 건반에 손가락이 닿았을 때 일어난 일로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "맑은 소리가 울려 퍼졌다." },
+      { id: "B", text: "건반이 고장 나서 소리가 나지 않았다." },
+      { id: "C", text: "둔탁하고 불쾌한 소리가 났다." },
+      { id: "D", text: "피아노 뚜껑이 저절로 닫혔다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s14", highlight: { ranges: [p2s7] }, question: {
+    prompt: "서연이가 연주를 시작한 방식으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "악보 없이 기억나는 멜로디를 천천히 연주하기 시작했다." },
+      { id: "B", text: "악보를 펼치고 정해진 곡을 완벽하게 연주했다." },
+      { id: "C", text: "외할머니에게 어떤 곡을 칠지 물어본 뒤 연주했다." },
+      { id: "D", text: "연습용 교재를 가져와서 기초부터 다시 시작했다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p2 중심
+  { stepId: "s15", highlight: { ranges: [fr("p2")] }, question: {
+    prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "외할머니의 이야기로 어린 시절을 떠올린 서연이가 다시 피아노 앞에 앉아 연주를 시작했다." },
+      { id: "B", text: "서연이는 외할머니의 피아노가 고장 나서 칠 수 없었다." },
+      { id: "C", text: "외할머니는 서연이에게 새 악보를 선물해 주셨다." },
+      { id: "D", text: "서연이는 피아노 대신 노래를 부르기로 결심했다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p3
+  { stepId: "s16", highlight: { ranges: [p3s1] }, question: {
+    prompt: "서투른 연주에서 서연이가 느낀 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "소리 하나하나가 마음속 깊은 곳을 두드리는 듯한 느낌이었다." },
+      { id: "B", text: "서투른 연주가 부끄러워서 바로 그만두었다." },
+      { id: "C", text: "소리가 너무 시끄러워서 귀가 아팠다." },
+      { id: "D", text: "연주가 완벽해서 자신감이 넘쳤다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s17", highlight: { ranges: [p3s2] }, question: {
+    prompt: "학원과 달랐던 점으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "음을 틀려도 지적하는 사람이 없고 점수를 걱정할 필요도 없었다." },
+      { id: "B", text: "외할머니가 옆에서 음을 고쳐 주셨다." },
+      { id: "C", text: "콩쿠르에 나가기 위해 연습을 해야 했다." },
+      { id: "D", text: "동생이 옆에서 계속 방해했다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s18", highlight: { ranges: [p3s3] }, question: {
+    prompt: "서연이가 연주하며 보인 표정으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "손끝에서 흘러나오는 소리에 귀 기울이며 조용히 미소를 지었다." },
+      { id: "B", text: "틀린 음이 속상해서 눈물을 흘렸다." },
+      { id: "C", text: "지루해서 하품을 하며 연주했다." },
+      { id: "D", text: "긴장해서 얼굴이 굳어 있었다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s19", highlight: { ranges: [p3s4] }, question: {
+    prompt: "외할머니가 피아노 소리를 듣고 보인 반응으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "피아노 소리를 듣고 환하게 웃으셨다." },
+      { id: "B", text: "시끄럽다고 피아노를 치지 말라 하셨다." },
+      { id: "C", text: "피아노 소리를 듣지 못하고 계속 주무셨다." },
+      { id: "D", text: "놀라서 무엇을 치는 것인지 물어보셨다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s20", highlight: { ranges: [p3s5] }, question: {
+    prompt: "외할머니가 음악에 대해 말씀하신 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "잘 치는 것보다 즐기는 것이 먼저라고 하셨다." },
+      { id: "B", text: "실력이 좋아야 음악을 할 수 있다고 하셨다." },
+      { id: "C", text: "매일 다섯 시간씩 연습해야 한다고 하셨다." },
+      { id: "D", text: "콩쿠르에서 상을 받는 것이 가장 중요하다고 하셨다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s21", highlight: { ranges: [p3s6] }, question: {
+    prompt: "외할머니의 말씀을 듣고 서연이가 이해한 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "자신이 피아노를 왜 그만두었는지 비로소 이해할 수 있었다." },
+      { id: "B", text: "피아노를 다시 배우기 위해 학원에 등록하기로 했다." },
+      { id: "C", text: "음악보다 공부가 더 중요하다는 것을 깨달았다." },
+      { id: "D", text: "외할머니의 피아노를 가져가기로 결심했다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s22", highlight: { ranges: [p3s7] }, question: {
+    prompt: "서연이가 잊고 있었던 것을 다시 일깨워 준 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "시골 외갓집의 낡은 피아노가 음악의 즐거움을 일깨워 주었다." },
+      { id: "B", text: "피아노 학원 선생님의 전화가 음악의 중요성을 알려 주었다." },
+      { id: "C", text: "친구의 피아노 연주 영상이 동기를 주었다." },
+      { id: "D", text: "새로 산 악보가 연습 의욕을 되살려 주었다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p3 중심
+  { stepId: "s23", highlight: { ranges: [fr("p3")] }, question: {
+    prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "서연이는 자유롭게 연주하며 음악의 진짜 즐거움을 다시 찾게 되었다." },
+      { id: "B", text: "서연이는 외할머니 앞에서 완벽한 연주를 선보였다." },
+      { id: "C", text: "외할머니는 서연이에게 피아노 학원에 다시 다니라고 하셨다." },
+      { id: "D", text: "서연이는 피아노를 완전히 포기하기로 결심했다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }}
+];
+
+// === recall (8카드) ===
+const recall = {
+  cards: [
+    { id: "c1", text: "서연이는 반복 연습과 콩쿠르 부담감 때문에 초등학교 사 학년 때 피아노를 그만두었다." },
+    { id: "c2", text: "이 년이 지난 여름, 시골 외할머니 댁에 가서 거실의 낡은 피아노를 보았다." },
+    { id: "c3", text: "외할머니는 다섯 살 때 서연이가 틀려도 웃으며 신나게 쳤던 모습을 이야기해 주셨다." },
+    { id: "c4", text: "실력이 아니라 소리 자체를 좋아했던 그 시절이 그리워져 다시 피아노 앞에 앉았다." },
+    { id: "c5", text: "악보 없이 기억나는 멜로디를 연주하니 마음 깊은 곳이 울리는 느낌이 들었다." },
+    { id: "c6", text: "지적하는 사람도 점수 걱정도 없이 순수하게 소리를 즐기며 미소 지었다." },
+    { id: "c7", text: "외할머니는 잘 치는 것보다 즐기는 것이 먼저라고 말씀하셨다." },
+    { id: "c8", text: "성적과 경쟁에 잊고 있던 음악의 즐거움을 낡은 피아노가 다시 일깨워 주었다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+// === confirm (7문항) ===
+const confirmQuestions = [
+  {
+    id: "q1", prompt: "서연이가 피아노를 그만둔 원인이 된 대회의 이름은 무엇인가요?",
+    answerText: "콩쿠르", answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", "콩쿠르")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q2", prompt: "외할머니 댁 거실에 놓여 있던 악기는 무엇인가요?",
+    answerText: "피아노", answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", "낡은 피아노")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q3", prompt: "외할머니가 기억하는 서연이가 피아노를 신나게 치던 나이는 몇 살인가요?",
+    answerText: "다섯 살", answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "다섯 살")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q4", prompt: "서연이가 연주할 때 사용하지 않은 것은 무엇인가요?",
+    answerText: "악보", answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "악보")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q5", prompt: "외할머니가 음악에서 잘 치는 것보다 먼저라고 한 것은 무엇인가요?",
+    answerText: "즐기는 것", answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "즐기는 것")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q6", prompt: "서연이가 성적과 함께 잊고 있었다고 한 것은 무엇인가요?",
+    answerText: "경쟁", answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "경쟁")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q7", prompt: "오래된 건반에 손가락이 닿았을 때 울려 퍼진 소리의 특징은 무엇인가요?",
+    answerText: "맑은", answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "맑은 소리")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  }
+];
+
+// === JSON ===
+const content = {
+  contentId: "dr-r1-010", contentType: "DAILY_READING", version: 1, status: "PUBLISHED",
+  title: "일일 독해(러셀 1) Day 10 문학", description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_1", schoolGradeRange: { min: 7, max: 8 },
+  area: "READING", subArea: "LITERATURE", competencies: ["READING"], tags: ["daily"],
+  access: { mode: "FREE" }, seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 300, assets: {},
+  payload: { passage: { format: "TEXT", paragraphs }, intensive: { timeline }, recall, confirm: { questions: confirmQuestions } }
+};
+
+// === 검증 ===
+console.log(`\n=== 최종 검증 ===`);
+console.log(`글자 수: ${totalChars}, steps: ${timeline.length}, recall: ${recall.cards.length}, confirm: ${confirmQuestions.length}`);
+let errors = 0;
+timeline.forEach(s => s.highlight.ranges.forEach(r => {
+  const p = paragraphs.find(x => x.id === r.paragraphId);
+  if (r.start < 0 || r.end > p.text.length || r.start >= r.end) { console.error(`ERROR ${s.stepId}`); errors++; }
+}));
+confirmQuestions.forEach((q, i) => q.answerRanges.forEach(r => {
+  const p = paragraphs.find(x => x.id === r.paragraphId);
+  if (r.start < 0 || r.end > p.text.length || r.start >= r.end) { console.error(`ERROR q${i+1}`); errors++; }
+  console.log(`  q${i+1}: "${q.answerText}" → [${r.start},${r.end}] = "${p.text.substring(r.start, r.end)}"`);
+}));
+if (errors) { process.exit(1); }
+
+// === 저장 ===
+const sp = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'russell1', '010.json');
+fs.writeFileSync(sp, JSON.stringify(content, null, 2), 'utf-8');
+console.log(`\nstatic: ${sp}`);
+const bp = path.join(__dirname, '..', 'generated', 'daily-batch-reading-russell1.json');
+const batch = JSON.parse(fs.readFileSync(bp, 'utf-8'));
+batch.items[9] = { content_type: "DAILY_READING", level_id: "RUSSELL_1", area: "READING", sub_area: "LITERATURE", day_index: 10, module_key: "reading_training", schema_version: "1.0", content };
+fs.writeFileSync(bp, JSON.stringify(batch, null, 2), 'utf-8');
+console.log(`batch: items[9]`);
+console.log("\nDay 10 완료!");

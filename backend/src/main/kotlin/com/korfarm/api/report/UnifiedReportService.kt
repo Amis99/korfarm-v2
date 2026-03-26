@@ -1,8 +1,11 @@
 package com.korfarm.api.report
 
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.learning.FarmLearningLogRepository
 import com.korfarm.api.learning.LearningAttemptRepository
+import com.korfarm.api.pro.CompetencyScore
 import com.korfarm.api.pro.ProProgressRepo
 import com.korfarm.api.pro.ProTestSessionRepo
 import com.korfarm.api.test.TestPaperRepo
@@ -32,7 +35,8 @@ class UnifiedReportService(
     private val studyPlanRepo: StudyPlanRepository,
     private val studyPlanScopeRepo: StudyPlanScopeRepository,
     private val studyPlanAssetRepo: StudyPlanAssetRepository,
-    private val studyPlanTargetRepo: StudyPlanTargetRepository
+    private val studyPlanTargetRepo: StudyPlanTargetRepository,
+    private val objectMapper: ObjectMapper
 ) {
     private val dtFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
@@ -240,12 +244,16 @@ class UnifiedReportService(
 
         val avgTestScore = if (testScores.isNotEmpty()) round2(testScores.average()) else 0.0
 
+        // 역량별 누적 분석: 각 세션의 competency_scores JSON을 합산
+        val competencyBreakdown = buildCompetencyBreakdown(testSessions.mapNotNull { it.competencyScores })
+
         return ProModeSection(
             completedItems = completedItems.size,
             testCount = testSessions.size,
             averageTestScore = avgTestScore,
             normalizedScore = avgTestScore,
-            items = proItems
+            items = proItems,
+            competencyBreakdown = competencyBreakdown
         )
     }
 
@@ -415,6 +423,39 @@ class UnifiedReportService(
                 proMode = proAvg,
                 studyPlan = spAvg,
                 overall = overall
+            )
+        }
+    }
+
+    /** 여러 테스트 세션의 역량별 점수 JSON을 합산하여 전체 breakdown 생성 */
+    private fun buildCompetencyBreakdown(jsonList: List<String>): Map<String, CompetencyBreakdown>? {
+        if (jsonList.isEmpty()) return null
+
+        data class Acc(var correct: Int = 0, var total: Int = 0)
+        val accMap = mutableMapOf<String, Acc>()
+
+        for (json in jsonList) {
+            try {
+                val scores: Map<String, CompetencyScore> = objectMapper.readValue(
+                    json, object : TypeReference<Map<String, CompetencyScore>>() {}
+                )
+                for ((domain, score) in scores) {
+                    val acc = accMap.getOrPut(domain) { Acc() }
+                    acc.correct += score.correct
+                    acc.total += score.total
+                }
+            } catch (_: Exception) {
+                // 파싱 실패 시 무시
+            }
+        }
+
+        if (accMap.isEmpty()) return null
+
+        return accMap.mapValues { (_, v) ->
+            CompetencyBreakdown(
+                correct = v.correct,
+                total = v.total,
+                accuracy = if (v.total > 0) round2(v.correct.toDouble() / v.total * 100) else 0.0
             )
         }
     }

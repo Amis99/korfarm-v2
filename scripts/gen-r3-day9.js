@@ -1,0 +1,367 @@
+// 러셀3 Day 9 비문학 - 일일독해 콘텐츠 생성
+const fs = require('fs');
+const path = require('path');
+
+// ── 지문 (4문단, 목표 1300자 ±50) ──
+const paragraphs = [
+  {
+    id: "p1",
+    text: "우리가 일상적으로 사용하는 화폐는 그 자체로는 종이나 금속에 불과하지만, 사람들이 교환 수단으로서의 가치를 공유하기 때문에 경제적 기능을 수행한다. 이처럼 화폐의 가치는 물리적 속성이 아니라 사회적 합의에 기반한다. 역사적으로 화폐는 물물교환의 불편함을 해결하기 위해 등장하였다. 물물교환이 성립하려면 교환 당사자 간에 서로가 원하는 재화가 일치해야 하는데, 이를 '욕구의 이중 일치'라고 한다. 화폐는 이 조건을 충족하지 않아도 거래를 가능하게 해 주므로 경제활동의 효율을 크게 높였다. 그 결과 화폐는 교환 매개, 가치 저장, 가치 척도라는 세 가지 기본 기능을 수행하며 경제 체계의 근간이 되었다."
+  },
+  {
+    id: "p2",
+    text: "화폐가 안정적으로 기능하려면 그 가치가 일정하게 유지되어야 한다. 그러나 경제 내에서 화폐의 양이 지나치게 늘어나면 화폐 한 단위의 구매력이 떨어지는 인플레이션이 발생한다. 인플레이션은 물가가 지속적으로 상승하는 현상으로, 같은 금액으로 살 수 있는 재화와 서비스의 양이 줄어든다. 반대로 화폐의 양이 부족하면 경제활동이 위축되는 디플레이션이 나타날 수 있다. 디플레이션 상황에서는 물가가 하락하여 소비자의 구매력은 높아지는 듯하지만, 기업의 수익이 감소하고 투자가 위축되어 경기 침체로 이어질 위험이 있다. 이런 이유로 중앙은행은 통화량을 적절히 조절하여 물가를 안정시키는 역할을 맡고 있다."
+  },
+  {
+    id: "p3",
+    text: "중앙은행이 통화량을 조절하는 대표적인 수단은 기준금리 정책이다. 기준금리란 중앙은행이 시중 은행에 돈을 빌려줄 때 적용하는 금리로, 시장의 모든 금리에 영향을 미친다. 기준금리를 올리면 대출 이자가 높아져 가계와 기업의 차입이 줄어들고, 시중 유통 화폐가 감소하여 물가 상승 압력이 완화된다. 반대로 기준금리를 내리면 대출이 늘어나고 소비와 투자가 활발해져 경기 부양 효과가 나타난다. 그러나 금리를 지나치게 낮추면 과도한 유동성이 자산 가격 거품을 유발하거나 인플레이션을 심화시킬 수 있다. 따라서 중앙은행은 경기와 물가를 종합적으로 고려하여 기준금리를 결정해야 하는 균형 과제를 안고 있다."
+  },
+  {
+    id: "p4",
+    text: "최근에는 디지털 기술의 발전에 따라 화폐의 형태도 변화하고 있다. 신용카드와 전자 결제가 보편화되면서 실물 화폐의 사용 비중이 줄어들었고, 중앙은행이 직접 발행하는 디지털 화폐인 CBDC에 대한 논의도 활발하다. CBDC는 기존 현금처럼 중앙은행이 가치를 보증하면서도 디지털 형태로 유통되므로 거래의 편의성과 투명성을 높일 수 있다. 다만 개인 거래 정보가 중앙에 집중될 경우 사생활 침해 우려가 있고, 기존 금융 시스템과의 호환 문제도 해결해야 한다. 이처럼 화폐는 물물교환 시대의 조개껍데기에서 동전과 지폐를 거쳐 디지털 형태로 진화해 왔으며, 그 본질인 사회적 신뢰는 여전히 화폐가 작동하는 핵심 원리로 남아 있다."
+  }
+];
+
+// 글자 수 확인
+const totalLen = paragraphs.reduce((s, p) => s + p.text.length, 0);
+console.log(`지문 총 글자 수: ${totalLen}`);
+
+// ── 정독 (intensive) ──
+function r(pid, s, e) { return { paragraphId: pid, start: s, end: e }; }
+const scoring_i = { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true };
+
+const intensive = { timeline: [
+  // p1 문장별
+  { stepId: "s1", highlight: { ranges: [r("p1", 0, 82)] },
+    question: { prompt: "첫 문장에서 화폐가 경제적 기능을 수행할 수 있는 이유로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "사람들이 교환 수단으로서의 가치를 공유하기 때문이다." },
+        { id: "B", text: "화폐가 물리적으로 튼튼한 소재로 만들어졌기 때문이다." },
+        { id: "C", text: "정부가 법률로 화폐 사용을 의무화하였기 때문이다." },
+        { id: "D", text: "화폐 자체가 귀금속이어서 본질적 가치를 지니기 때문이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s2", highlight: { ranges: [r("p1", 83, 121)] },
+    question: { prompt: "둘째 문장이 말하는 화폐 가치의 기반으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "화폐의 가치는 물리적 속성이 아니라 사회적 합의에 기반한다." },
+        { id: "B", text: "화폐의 가치는 생산 원가에 의해서만 결정된다." },
+        { id: "C", text: "화폐의 가치는 국제 시장의 수요와 공급에 따라 자동으로 정해진다." },
+        { id: "D", text: "화폐의 가치는 발행 연도에 비례하여 높아진다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s3", highlight: { ranges: [r("p1", 122, 167)] },
+    question: { prompt: "셋째 문장에 따르면 화폐가 등장한 배경으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "물물교환의 불편함을 해결하기 위해 등장하였다." },
+        { id: "B", text: "귀족 계층의 재산을 보호하기 위해 발명되었다." },
+        { id: "C", text: "국가 간 무역에서 관세를 계산하기 위해 만들어졌다." },
+        { id: "D", text: "전쟁 비용을 조달하기 위한 목적으로 처음 사용되었다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s4", highlight: { ranges: [r("p1", 168, 238)] },
+    question: { prompt: "넷째 문장이 설명하는 '욕구의 이중 일치'란 무엇인가?",
+      choices: [
+        { id: "A", text: "교환 당사자 간에 서로가 원하는 재화가 일치해야 하는 조건이다." },
+        { id: "B", text: "구매자와 판매자의 가격 제안이 동시에 같아야 하는 조건이다." },
+        { id: "C", text: "두 사람이 같은 장소에서 동시에 만나야 하는 시간적 제약이다." },
+        { id: "D", text: "거래 당사자가 같은 양의 재화를 보유해야 하는 균형 조건이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s5", highlight: { ranges: [r("p1", 239, 299)] },
+    question: { prompt: "다섯째 문장이 말하는 화폐의 효과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "욕구의 이중 일치 조건 없이도 거래를 가능하게 하여 효율을 높였다." },
+        { id: "B", text: "물물교환을 완전히 금지하여 경제 구조를 단순화하였다." },
+        { id: "C", text: "거래 수수료를 없앰으로써 경제활동 비용을 제거하였다." },
+        { id: "D", text: "모든 재화의 가격을 동일하게 만들어 공정한 교환을 보장하였다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s6", highlight: { ranges: [r("p1", 300, 367)] },
+    question: { prompt: "여섯째 문장이 언급하는 화폐의 세 가지 기본 기능으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "교환 매개, 가치 저장, 가치 척도이다." },
+        { id: "B", text: "생산 촉진, 분배 조정, 소비 억제이다." },
+        { id: "C", text: "투자 유도, 저축 보호, 세금 징수이다." },
+        { id: "D", text: "물가 안정, 환율 조절, 무역 중개이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  // p1 문단 종합
+  { stepId: "s7", highlight: { ranges: [r("p1", 0, 367)] },
+    question: { prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "화폐는 사회적 합의에 기반하며, 물물교환의 한계를 극복하여 경제의 근간이 되었다." },
+        { id: "B", text: "화폐는 금속으로 만들어야만 가치가 유지되는 특수한 경제 도구이다." },
+        { id: "C", text: "물물교환은 화폐보다 효율적이지만 편의성 때문에 대체되었을 뿐이다." },
+        { id: "D", text: "화폐의 기능은 교환 매개 하나에 국한되며 나머지 기능은 부차적이다." }
+      ], answerId: "A", scoring: scoring_i } },
+
+  // p2 문장별
+  { stepId: "s8", highlight: { ranges: [r("p2", 0, 40)] },
+    question: { prompt: "첫 문장이 말하는 화폐의 안정적 기능 조건으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "화폐의 가치가 일정하게 유지되어야 한다." },
+        { id: "B", text: "화폐의 디자인이 자주 변경되지 않아야 한다." },
+        { id: "C", text: "화폐의 발행량이 매년 일정한 비율로 증가해야 한다." },
+        { id: "D", text: "화폐의 소재가 내구성 있는 금속이어야 한다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s9", highlight: { ranges: [r("p2", 41, 105)] },
+    question: { prompt: "둘째 문장이 설명하는 인플레이션의 원인으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "경제 내에서 화폐의 양이 지나치게 늘어나면 구매력이 떨어진다." },
+        { id: "B", text: "기업의 생산성이 급격히 향상되면 물가가 오른다." },
+        { id: "C", text: "소비자의 저축이 늘어나면 시장에 돈이 부족해진다." },
+        { id: "D", text: "수출이 증가하면 국내 물가가 하락하는 현상이 일어난다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s10", highlight: { ranges: [r("p2", 106, 166)] },
+    question: { prompt: "셋째 문장이 말하는 인플레이션의 결과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "같은 금액으로 살 수 있는 재화와 서비스의 양이 줄어든다." },
+        { id: "B", text: "같은 금액으로 더 많은 재화를 살 수 있게 된다." },
+        { id: "C", text: "물가가 하락하여 경제가 빠르게 성장한다." },
+        { id: "D", text: "임금이 자동으로 올라 소비자의 생활이 나아진다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s11", highlight: { ranges: [r("p2", 167, 215)] },
+    question: { prompt: "넷째 문장이 설명하는 디플레이션이 발생하는 조건으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "화폐의 양이 부족하면 경제활동이 위축되는 디플레이션이 나타난다." },
+        { id: "B", text: "화폐의 양이 넘쳐나면 기업 투자가 감소하는 디플레이션이 생긴다." },
+        { id: "C", text: "수입 물가가 급등하면 국내에서 디플레이션이 발생한다." },
+        { id: "D", text: "정부 지출이 늘어나면 디플레이션이 심화된다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s12", highlight: { ranges: [r("p2", 216, 309)] },
+    question: { prompt: "다섯째 문장이 경고하는 디플레이션의 위험으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "물가 하락으로 기업 수익이 감소하고 투자가 위축되어 경기 침체로 이어진다." },
+        { id: "B", text: "물가 하락으로 소비가 급증하여 과열 경기가 지속된다." },
+        { id: "C", text: "물가가 안정되어 경제가 장기적으로 호황을 누린다." },
+        { id: "D", text: "기업 수익이 증가하여 고용이 늘어나고 경기가 회복된다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s13", highlight: { ranges: [r("p2", 310, 363)] },
+    question: { prompt: "여섯째 문장이 말하는 중앙은행의 역할로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "통화량을 적절히 조절하여 물가를 안정시키는 역할을 맡는다." },
+        { id: "B", text: "모든 상품의 가격을 직접 결정하여 물가를 통제한다." },
+        { id: "C", text: "기업에 보조금을 지급하여 생산량을 늘리는 역할을 한다." },
+        { id: "D", text: "개인의 저축액을 관리하여 소비를 촉진하는 역할을 한다." }
+      ], answerId: "A", scoring: scoring_i } },
+  // p2 문단 종합
+  { stepId: "s14", highlight: { ranges: [r("p2", 0, 363)] },
+    question: { prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "화폐량의 과다 또는 부족은 인플레이션과 디플레이션을 초래하며, 중앙은행이 이를 조절한다." },
+        { id: "B", text: "인플레이션은 항상 긍정적이고 디플레이션만 경제에 해롭다." },
+        { id: "C", text: "중앙은행은 화폐를 발행할 뿐 물가 안정 기능은 없다." },
+        { id: "D", text: "디플레이션은 소비자에게 유리하므로 중앙은행이 적극 유도해야 한다." }
+      ], answerId: "A", scoring: scoring_i } },
+
+  // p3 문장별
+  { stepId: "s15", highlight: { ranges: [r("p3", 0, 39)] },
+    question: { prompt: "첫 문장이 소개하는 통화량 조절 수단으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "기준금리 정책이다." },
+        { id: "B", text: "화폐 디자인 변경 정책이다." },
+        { id: "C", text: "수출입 규제 정책이다." },
+        { id: "D", text: "세율 인상 정책이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s16", highlight: { ranges: [r("p3", 40, 101)] },
+    question: { prompt: "둘째 문장이 정의하는 기준금리의 의미로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "중앙은행이 시중 은행에 돈을 빌려줄 때 적용하는 금리이다." },
+        { id: "B", text: "개인이 저축할 때 은행에서 받는 이자율을 말한다." },
+        { id: "C", text: "기업이 채권을 발행할 때 정하는 수익률을 뜻한다." },
+        { id: "D", text: "해외 투자자가 국내 자산에 투자할 때 적용하는 환율이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s17", highlight: { ranges: [r("p3", 102, 184)] },
+    question: { prompt: "셋째 문장이 설명하는 기준금리 인상의 효과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "대출 이자가 높아져 차입이 줄고 유통 화폐가 감소하여 물가 상승 압력이 완화된다." },
+        { id: "B", text: "대출 이자가 낮아져 소비가 증가하고 물가가 더욱 오른다." },
+        { id: "C", text: "기업의 투자가 늘어나 생산이 확대되고 경기가 과열된다." },
+        { id: "D", text: "시중 은행의 이익이 줄어들어 금융 시스템이 불안해진다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s18", highlight: { ranges: [r("p3", 185, 249)] },
+    question: { prompt: "넷째 문장이 설명하는 기준금리 인하의 효과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "대출이 늘어나고 소비와 투자가 활발해져 경기 부양 효과가 나타난다." },
+        { id: "B", text: "대출이 줄어들고 저축이 늘어나 경기가 위축된다." },
+        { id: "C", text: "물가가 급락하여 디플레이션이 심화된다." },
+        { id: "D", text: "수출이 감소하여 무역 적자가 확대된다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s19", highlight: { ranges: [r("p3", 250, 321)] },
+    question: { prompt: "다섯째 문장이 경고하는 금리 과도 인하의 위험으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "과도한 유동성이 자산 가격 거품이나 인플레이션 심화를 유발할 수 있다." },
+        { id: "B", text: "유동성 부족으로 금융 시장이 마비될 수 있다." },
+        { id: "C", text: "저축 금리가 높아져 소비가 감소할 수 있다." },
+        { id: "D", text: "해외 자본이 유출되어 환율이 폭락할 수 있다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s20", highlight: { ranges: [r("p3", 322, 385)] },
+    question: { prompt: "여섯째 문장이 강조하는 중앙은행의 과제로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "경기와 물가를 종합적으로 고려하여 기준금리를 결정해야 한다." },
+        { id: "B", text: "기준금리를 한 번 정하면 변경하지 않는 것이 바람직하다." },
+        { id: "C", text: "물가보다 실업률만을 기준으로 금리를 결정해야 한다." },
+        { id: "D", text: "기준금리 결정은 국회의 승인을 받아야 유효하다." }
+      ], answerId: "A", scoring: scoring_i } },
+  // p3 문단 종합
+  { stepId: "s21", highlight: { ranges: [r("p3", 0, 385)] },
+    question: { prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "중앙은행은 기준금리 조절을 통해 통화량과 물가를 관리하지만 균형이 어렵다." },
+        { id: "B", text: "기준금리를 올리면 항상 경기가 좋아지고 물가가 안정된다." },
+        { id: "C", text: "기준금리 정책은 효과가 미미하여 다른 수단으로 대체되고 있다." },
+        { id: "D", text: "금리 인하는 언제나 경제에 긍정적 효과만 가져온다." }
+      ], answerId: "A", scoring: scoring_i } },
+
+  // p4 문장별
+  { stepId: "s22", highlight: { ranges: [r("p4", 0, 41)] },
+    question: { prompt: "첫 문장이 말하는 최근 변화의 배경으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "디지털 기술의 발전에 따라 화폐의 형태가 변화하고 있다." },
+        { id: "B", text: "금속 채굴 기술의 발전으로 동전 생산이 급증하고 있다." },
+        { id: "C", text: "종이 가격이 하락하여 지폐 발행 비용이 줄어들고 있다." },
+        { id: "D", text: "국제 무역의 감소로 화폐 수요가 줄어들고 있다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s23", highlight: { ranges: [r("p4", 42, 129)] },
+    question: { prompt: "둘째 문장이 소개하는 디지털 화폐 논의의 핵심 개념으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "중앙은행이 직접 발행하는 디지털 화폐인 CBDC이다." },
+        { id: "B", text: "민간 기업이 자체 발행하는 가상화폐인 비트코인이다." },
+        { id: "C", text: "은행 간 자금 이체에만 사용하는 전용 결제 시스템이다." },
+        { id: "D", text: "외환 시장에서만 거래되는 국제 디지털 통화이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s24", highlight: { ranges: [r("p4", 130, 210)] },
+    question: { prompt: "셋째 문장이 설명하는 CBDC의 장점으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "중앙은행이 가치를 보증하면서 거래의 편의성과 투명성을 높일 수 있다." },
+        { id: "B", text: "개인 정보가 완전히 익명으로 보호되는 것이 최대 장점이다." },
+        { id: "C", text: "기존 현금보다 생산 비용이 높지만 보안성이 뛰어나다." },
+        { id: "D", text: "국가 간 환율 변동을 완전히 제거할 수 있다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s25", highlight: { ranges: [r("p4", 211, 295)] },
+    question: { prompt: "넷째 문장이 지적하는 CBDC의 우려 사항으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "개인 거래 정보의 중앙 집중에 따른 사생활 침해와 기존 금융 시스템과의 호환 문제이다." },
+        { id: "B", text: "디지털 화폐의 위조 가능성이 높아 보안이 취약하다는 점이다." },
+        { id: "C", text: "전기 소모량이 지나치게 커서 환경 문제가 심각하다는 점이다." },
+        { id: "D", text: "디지털 화폐는 노인층이 사용하기 어려워 접근성이 낮다는 점이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s26", highlight: { ranges: [r("p4", 296, 404)] },
+    question: { prompt: "마지막 문장이 강조하는 화폐의 본질로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "형태는 변해도 사회적 신뢰가 화폐 작동의 핵심 원리로 남아 있다." },
+        { id: "B", text: "화폐는 디지털 형태가 되면서 신뢰 없이도 작동하게 되었다." },
+        { id: "C", text: "화폐의 본질은 물리적 형태에 있으며 디지털 화폐는 진정한 화폐가 아니다." },
+        { id: "D", text: "조개껍데기부터 디지털까지 모든 화폐의 가치는 동일하다." }
+      ], answerId: "A", scoring: scoring_i } },
+  // p4 문단 종합
+  { stepId: "s27", highlight: { ranges: [r("p4", 0, 404)] },
+    question: { prompt: "넷째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "디지털 기술에 따라 화폐 형태가 변하고 있지만 사회적 신뢰라는 본질은 변하지 않는다." },
+        { id: "B", text: "CBDC는 완벽한 화폐 시스템으로 기존 현금을 즉시 대체해야 한다." },
+        { id: "C", text: "실물 화폐가 사라지면 경제 시스템이 붕괴될 위험이 크다." },
+        { id: "D", text: "디지털 화폐의 도입은 사생활 침해만 유발하므로 반대해야 한다." }
+      ], answerId: "A", scoring: scoring_i } },
+]};
+
+// ── 복기 (recall) - 정확히 8카드 ──
+const recall = {
+  cards: [
+    { id: "c1", text: "화폐는 사회적 합의에 기반하며 물물교환의 불편함을 해결하기 위해 등장하였다." },
+    { id: "c2", text: "물물교환의 성립 조건인 '욕구의 이중 일치'를 화폐가 대체하여 경제 효율을 높였다." },
+    { id: "c3", text: "화폐량이 과다하면 인플레이션, 부족하면 디플레이션이 발생한다." },
+    { id: "c4", text: "중앙은행은 통화량을 조절하여 물가를 안정시키는 역할을 맡고 있다." },
+    { id: "c5", text: "기준금리 인상은 차입을 줄이고, 인하는 소비와 투자를 촉진한다." },
+    { id: "c6", text: "금리를 지나치게 낮추면 자산 가격 거품이나 인플레이션 심화가 우려된다." },
+    { id: "c7", text: "CBDC는 중앙은행이 발행하는 디지털 화폐로 편의성과 투명성을 높일 수 있다." },
+    { id: "c8", text: "화폐 형태는 변해도 사회적 신뢰라는 본질은 여전히 핵심 원리이다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+// ── 확인 (confirm) - 7문항 ──
+const scoring_c = { correctDeltaSec: 30, wrongDeltaSec: -45 };
+const confirm = { questions: [
+  { id: "q1", prompt: "물물교환이 성립하려면 교환 당사자 간에 필요한 조건을 무엇이라 하는가?",
+    answerText: "욕구의 이중 일치",
+    answerMatchMode: "ALL",
+    answerRanges: [r("p1", 207, 216)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q2", prompt: "화폐가 수행하는 세 가지 기본 기능은 무엇인가?",
+    answerText: "교환 매개, 가치 저장, 가치 척도",
+    answerMatchMode: "ALL",
+    answerRanges: [r("p1", 318, 336)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q3", prompt: "화폐 양이 지나치게 늘어나 구매력이 떨어지는 현상을 무엇이라 하는가?",
+    answerText: "인플레이션",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p2", 83, 89), r("p3", 308, 314)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q4", prompt: "화폐 양이 부족하여 경제활동이 위축되는 현상을 무엇이라 하는가?",
+    answerText: "디플레이션",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p2", 199, 205)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q5", prompt: "중앙은행이 시중 은행에 돈을 빌려줄 때 적용하는 금리를 무엇이라 하는가?",
+    answerText: "기준금리",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p3", 30, 34), r("p3", 40, 44)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q6", prompt: "중앙은행이 직접 발행하는 디지털 화폐의 약칭은 무엇인가?",
+    answerText: "CBDC",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p4", 111, 115), r("p4", 130, 134)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q7", prompt: "화폐의 형태가 변해도 변하지 않는 화폐의 본질적 원리는 무엇인가?",
+    answerText: "사회적 신뢰",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p4", 379, 385)],
+    scoring: scoring_c, revealOnWrong: true },
+]};
+
+// ── content 객체 조립 ──
+const content = {
+  contentId: "dr-r3-009",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 3) Day 9 비문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_3",
+  schoolGradeRange: { min: 9, max: 10 },
+  area: "READING",
+  subArea: "NONFICTION",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 480,
+  assets: {},
+  payload: {
+    passage: { format: "TEXT", paragraphs },
+    intensive,
+    recall,
+    confirm
+  }
+};
+
+// 배치 아이템
+const batchItem = {
+  content_type: "DAILY_READING",
+  level_id: "RUSSELL_3",
+  area: "READING",
+  sub_area: "NONFICTION",
+  day_index: 9,
+  module_key: "reading_training",
+  schema_version: "1.0",
+  content
+};
+
+// static 파일 저장
+const staticDir = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'russell3');
+fs.writeFileSync(path.join(staticDir, '009.json'), JSON.stringify(content, null, 2), 'utf8');
+console.log('static 009.json 저장 완료');
+
+// 배치 파일 업데이트
+const batchPath = path.join(__dirname, '..', 'generated', 'daily-batch-reading-russell3.json');
+const batch = JSON.parse(fs.readFileSync(batchPath, 'utf8'));
+batch.items[8] = batchItem;
+fs.writeFileSync(batchPath, JSON.stringify(batch, null, 2), 'utf8');
+console.log('배치 파일 day_index 9 업데이트 완료');

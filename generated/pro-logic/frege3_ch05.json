@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게3 5장 논리사고력",
+  "targetLevel": "frege3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "동사는 주어의 행동이나 움직임을 나타내는 말이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "\"읽는다\"가 동사라는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"읽는다\"는 상태를 나타낸다"
+              },
+              {
+                "id": "B",
+                "text": "\"읽는다\"는 주어의 행동(책을 읽는 움직임)을 나타내는 말이다"
+              },
+              {
+                "id": "C",
+                "text": "\"읽는다\"는 명사를 꾸며주는 말이다"
+              },
+              {
+                "id": "D",
+                "text": "\"읽는다\"는 수량을 나타내는 말이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "흥부전에서 흥부는 제비의 다리를 치료해주고 제비가 박씨를 물어다 준다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "제비가 흥부에게 박씨를 준다는 이야기의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "제비는 인간의 행동을 기억하지 못한다"
+              },
+              {
+                "id": "B",
+                "text": "박씨에는 아무것도 없다"
+              },
+              {
+                "id": "C",
+                "text": "제비는 모든 사람에게 박씨를 준다"
+              },
+              {
+                "id": "D",
+                "text": "착한 행동에는 보답이 따른다는 인과응보의 원리가 작용한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "형용사는 주어의 성질이나 상태를 나타낸다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "형용사 없이 \"꽃이 있다\"라고만 쓰면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "꽃의 아름다움이 더 잘 드러난다"
+              },
+              {
+                "id": "B",
+                "text": "문장이 더 아름다워진다"
+              },
+              {
+                "id": "C",
+                "text": "꽃의 종류를 알 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "꽃이 어떤 상태인지 알 수 없어 표현이 밋밋해진다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "흥부전에서 놀부가 일부러 제비 다리를 부러뜨린 후 고쳐주었다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "놀부의 박씨에서 나온 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "도깨비들이 나와 놀부의 재산을 빼앗아 갔다"
+              },
+              {
+                "id": "B",
+                "text": "제비가 다시 찾아왔다"
+              },
+              {
+                "id": "C",
+                "text": "아무것도 나오지 않았다"
+              },
+              {
+                "id": "D",
+                "text": "금은보화가 나왔다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "동사와 형용사는 기본형이 \"-다\"로 끝나며 활용한다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 기본형이 \"-다\"로 끝나고 활용하는 말은 동사 또는 형용사이다. [소전제] \"예쁘다\"는 \"-다\"로 끝나고 \"예쁜\", \"예뻐서\"로 활용한다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"예쁘다\"는 동사 또는 형용사이다"
+              },
+              {
+                "id": "B",
+                "text": "\"예쁘다\"는 조사이다"
+              },
+              {
+                "id": "C",
+                "text": "\"예쁘다\"는 명사이다"
+              },
+              {
+                "id": "D",
+                "text": "\"예쁘다\"는 감탄사이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "흥부전은 착한 사람이 복을 받고 악한 사람이 벌을 받는 구조이다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 착한 사람이 복을 받고 악한 사람이 벌을 받는 이야기는 권선징악이다. [소전제] 흥부전에서 흥부는 보물을, 놀부는 벌을 받는다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흥부전은 권선징악의 이야기이다"
+              },
+              {
+                "id": "B",
+                "text": "흥부전은 비극이다"
+              },
+              {
+                "id": "C",
+                "text": "흥부전에는 교훈이 없다"
+              },
+              {
+                "id": "D",
+                "text": "흥부전은 역사 기록이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "동사가 서술어로 쓰이려면 활용된 형태여야 한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "\"동사가 서술어로 쓰이려면 활용이 필요하다\"를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "활용하면 반드시 서술어이다"
+              },
+              {
+                "id": "B",
+                "text": "서술어가 아니면 활용된 것이다"
+              },
+              {
+                "id": "C",
+                "text": "활용 없이 동사가 서술어로 쓰이는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "활용과 서술어는 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "흥부가 부자가 되려면 박에서 보물이 나와야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "위 조건을 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보물이 나오면 반드시 부자가 된다"
+              },
+              {
+                "id": "B",
+                "text": "흥부가 부자가 되었다면 박에서 보물이 나온 것이다"
+              },
+              {
+                "id": "C",
+                "text": "보물 없이도 부자가 될 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "박과 부자는 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "형용사는 \"어떠하다?\"에 답이 되는 말이다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "형용사의 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"달린다\" — 움직임을 나타냄"
+              },
+              {
+                "id": "B",
+                "text": "\"덥다\" — 날씨의 상태를 나타냄"
+              },
+              {
+                "id": "C",
+                "text": "\"먹다\" — 행동을 나타냄"
+              },
+              {
+                "id": "D",
+                "text": "\"하늘\" — 사물의 이름"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "흥부전에서 흥부의 가난한 모습이 묘사된다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "흥부의 극심한 가난을 가장 잘 보여주는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "놀부가 재산을 잃는 장면"
+              },
+              {
+                "id": "B",
+                "text": "제비가 박씨를 물어다 주는 장면"
+              },
+              {
+                "id": "C",
+                "text": "구멍 뚫린 헌 도포에 짚끈 신발을 신고 양반 행세를 하는 흥부의 모습"
+              },
+              {
+                "id": "D",
+                "text": "흥부가 부자가 된 후의 장면"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "동사 \"먹다\"를 활용하면 \"먹는다\", \"먹었다\" 등이 된다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "\"동사를 활용하면 다양한 형태가 만들어진다\"를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동사를 활용하면서 다양한 형태가 만들어지지 않는 경우는 없다"
+              },
+              {
+                "id": "B",
+                "text": "활용 없이도 다양한 형태가 항상 만들어진다"
+              },
+              {
+                "id": "C",
+                "text": "다양한 형태가 있으면 반드시 동사의 활용이다"
+              },
+              {
+                "id": "D",
+                "text": "활용과 형태 변화는 무관하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "흥부전에서 착한 행동을 하면 보답을 받는다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "\"제비를 정성껏 치료하면 보답을 받는다\"를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보답을 받았으면 반드시 제비를 치료한 것이다"
+              },
+              {
+                "id": "B",
+                "text": "치료와 보답은 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "제비를 정성껏 치료하면서 보답을 받지 못하는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "치료하지 않아도 항상 보답을 받는다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "동사는 \"어찌한다?\", 형용사는 \"어떠하다?\"에 답이 된다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "\"슬프다\"가 형용사인 이유를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"슬프다\"는 수량을 나타내므로 형용사이다"
+              },
+              {
+                "id": "B",
+                "text": "\"슬프다\"는 행동을 나타내므로 형용사이다"
+              },
+              {
+                "id": "C",
+                "text": "\"슬프다\"는 명사를 꾸며주므로 형용사이다"
+              },
+              {
+                "id": "D",
+                "text": "\"슬프다\"는 감정의 상태를 나타내어 \"어떠하다?\"에 답이 되므로 형용사이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "흥부전에서 대화체를 통해 인물의 성격이 드러난다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "흥부의 낙천적이고 유머러스한 성격이 가장 잘 드러나는 장면은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아이들이 배고파한 장면"
+              },
+              {
+                "id": "B",
+                "text": "닭장도 장이라며 모자는 굴뚝 속에서 꺼내라는 흥부의 대사"
+              },
+              {
+                "id": "C",
+                "text": "제비 다리를 치료하는 장면"
+              },
+              {
+                "id": "D",
+                "text": "놀부가 벌을 받는 장면"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "\"하늘\"은 활용하지 않는 단어이다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "\"하늘\"이 동사나 형용사가 아니라는 주장이 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부당하다 — \"하늘\"도 활용할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "부당하다 — \"하늘\"은 형용사이다"
+              },
+              {
+                "id": "C",
+                "text": "타당하다 — \"하늘\"은 활용하지 않는 명사이므로 동사나 형용사가 아니다"
+              },
+              {
+                "id": "D",
+                "text": "타당하다 — \"하늘\"은 감탄사이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "흥부전에서 놀부도 박씨를 받았다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "\"놀부도 흥부처럼 보물을 얻을 것이다\"라는 추론이 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부당하다 — 놀부는 일부러 다리를 부러뜨린 악한 행동을 했으므로 인과응보에 따라 벌을 받는다"
+              },
+              {
+                "id": "B",
+                "text": "부당하다 — 놀부는 농사를 짓지 않았다"
+              },
+              {
+                "id": "C",
+                "text": "타당하다 — 제비는 모두에게 보물을 준다"
+              },
+              {
+                "id": "D",
+                "text": "타당하다 — 박씨를 심으면 누구나 보물을 얻는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "동사와 형용사를 정확히 구별하면 문장 의미를 더 정확하게 파악할 수 있다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "\"동사·형용사 구별 능력\"과 \"문장 이해력\"의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구별하면 이해력이 반드시 떨어진다"
+              },
+              {
+                "id": "B",
+                "text": "구별 능력만이 이해력을 결정한다"
+              },
+              {
+                "id": "C",
+                "text": "둘 사이에 상관관계가 있으나 어휘력 등 다른 요인도 영향을 준다"
+              },
+              {
+                "id": "D",
+                "text": "구별 능력과 이해력은 관련이 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "흥부전에서 인물의 선악 정도와 보상의 크기 사이에 관계가 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "\"선악 정도\"와 \"보상/벌의 크기\"의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "선악과 보상은 전혀 관련이 없다"
+              },
+              {
+                "id": "B",
+                "text": "착한 행동을 하면 벌을 받는다"
+              },
+              {
+                "id": "C",
+                "text": "악한 행동을 하면 더 큰 보상을 받는다"
+              },
+              {
+                "id": "D",
+                "text": "선한 행동이 많을수록 큰 보상을, 악한 행동이 많을수록 큰 벌을 받는 상관관계가 있다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "\"달리다\"가 동사인지 형용사인지 판별해야 한다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "\"달리다\"가 동사라는 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "작품의 출판 연도를 확인한다"
+              },
+              {
+                "id": "B",
+                "text": "\"달리다\"가 움직임을 나타내는지 상태를 나타내는지 확인한다"
+              },
+              {
+                "id": "C",
+                "text": "\"달리다\"의 글자 수를 센다"
+              },
+              {
+                "id": "D",
+                "text": "반대말을 찾는다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "흥부전에서 \"착한 사람이 결국 성공한다\"는 주제 의식이 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "위 가설을 반증하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흥부가 부자가 된 사례"
+              },
+              {
+                "id": "B",
+                "text": "흥부가 재산을 나눠준 사례"
+              },
+              {
+                "id": "C",
+                "text": "놀부가 벌을 받은 사례"
+              },
+              {
+                "id": "D",
+                "text": "착한 행동을 했지만 보상을 받지 못하는 다른 이야기가 존재하는 사례"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

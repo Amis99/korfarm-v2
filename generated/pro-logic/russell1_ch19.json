@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀1 19장 논리사고력",
+  "targetLevel": "russell1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "휴대폰 화면에 편광판을 사용하면 햇빛 반사를 줄여 야외에서도 선명하게 볼 수 있다. 편광판은 한 방향으로만 흔들리는 빛만 통과시키고 나머지는 차단한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "편광판이 햇빛 반사를 줄일 수 있다는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반사된 빛의 흔들림 방향을 편광판으로 차단할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "햇빛은 한 방향으로만 흔들린다."
+              },
+              {
+                "id": "C",
+                "text": "편광판은 모든 빛을 통과시킨다."
+              },
+              {
+                "id": "D",
+                "text": "화면에서 나오는 빛은 차단되지 않는다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "피동 표현은 주어가 다른 힘에 의해 동작을 당하는 것을 표현한다. '토끼가 사냥꾼에게 잡혔다'에서 토끼는 행동을 '당하는' 입장이다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "피동 표현이 필요하다는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주어가 행동을 당하는 상황은 존재하지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "모든 문장은 주어가 직접 행동하는 형태여야 한다."
+              },
+              {
+                "id": "C",
+                "text": "피동문은 능동문보다 항상 긴 문장이다."
+              },
+              {
+                "id": "D",
+                "text": "같은 사건도 행동을 한 쪽과 당한 쪽 중 어느 쪽을 강조하느냐에 따라 표현이 달라져야 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "명암비는 가장 밝은 흰색과 가장 어두운 검은색의 차이이다. 명암비가 클수록 화면이 선명해 보인다. 야외에서는 햇빛 때문에 명암비를 높이기 어렵다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "햇빛이 화면에 반사되어 검은색이 회색처럼 보이면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "명암비가 높아져 화면이 더 선명해진다."
+              },
+              {
+                "id": "B",
+                "text": "색깔이 더 생생해진다."
+              },
+              {
+                "id": "C",
+                "text": "화면의 밝기가 자동으로 높아진다."
+              },
+              {
+                "id": "D",
+                "text": "명암비가 낮아져 화면이 뿌옇게 보인다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "'사냥꾼이 토끼를 잡았다'를 피동문으로 바꾸면 '토끼가 사냥꾼에게 잡혔다'가 된다. 피동문은 행동을 당한 대상을 강조한다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "뉴스에서 '범인이 경찰에게 체포되었다'라고 피동문으로 보도하면 예상되는 효과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경찰의 활약이 강조된다."
+              },
+              {
+                "id": "B",
+                "text": "경찰과 범인 모두 동등하게 부각된다."
+              },
+              {
+                "id": "C",
+                "text": "범인이 체포당한 사실이 강조된다."
+              },
+              {
+                "id": "D",
+                "text": "범인의 능력이 강조된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "편광판은 한 방향으로 흔들리는 빛만 통과시킨다. 세로 방향 편광판은 가로 방향 빛을 차단한다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 세로 편광판은 가로 방향 빛을 차단한다. 소전제: 반사된 햇빛이 특수 필름을 거쳐 가로 방향으로 바뀌었다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반사된 빛이 세로 편광판을 통과한다."
+              },
+              {
+                "id": "B",
+                "text": "반사된 빛이 세로 편광판에서 차단된다."
+              },
+              {
+                "id": "C",
+                "text": "모든 빛이 편광판을 통과한다."
+              },
+              {
+                "id": "D",
+                "text": "편광판이 작동하지 않는다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "피동 표현은 '-이-, -히-, -리-, -기-'를 붙이거나, '-어지다'를 붙여 만든다. '안다'에 '-기-'를 붙이면 '안기다'가 된다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 용언에 '-히-'를 붙이면 피동 표현이 된다. 소전제: '읽다'에 '-히-'를 붙이면 '읽히다'가 된다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'읽히다'는 능동 표현이다."
+              },
+              {
+                "id": "B",
+                "text": "'읽히다'는 사동 표현이다."
+              },
+              {
+                "id": "C",
+                "text": "'읽히다'는 피동 표현이다."
+              },
+              {
+                "id": "D",
+                "text": "'읽히다'는 높임 표현이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "야외에서 화면을 선명하게 보려면 명암비를 높여야 한다. 검은색을 더 어둡게 만드는 것이 효과적이다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'야외에서 화면이 선명하려면 명암비가 높아야 한다'에서 필요조건 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "명암비가 높으면 반드시 야외에서 선명하다."
+              },
+              {
+                "id": "B",
+                "text": "명암비와 선명도는 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "화면이 선명하지 않으면 명암비가 높은 것이다."
+              },
+              {
+                "id": "D",
+                "text": "명암비가 낮으면 야외에서 화면이 선명하지 않다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "능동문을 피동문으로 바꾸려면 주어와 목적어의 위치를 바꾸고 서술어를 피동형으로 변환해야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'피동문을 만들려면 서술어의 피동 변환이 필요하다'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서술어를 피동으로 바꾸면 반드시 올바른 피동문이 된다."
+              },
+              {
+                "id": "B",
+                "text": "피동문이 아니면 서술어가 피동형이다."
+              },
+              {
+                "id": "C",
+                "text": "서술어를 피동으로 바꾸지 않으면 피동문을 만들 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "서술어 변환과 피동문은 무관하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "편광판을 사용하면 햇빛 반사를 줄일 수 있지만, 화면에서 나오는 빛도 일부 막혀 화면이 약간 어두워진다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'편광판 사용의 부작용'에 해당하는 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "편광판이 화면 빛의 일부를 차단하여 화면이 약간 어두워지는 것"
+              },
+              {
+                "id": "B",
+                "text": "편광판이 햇빛 반사를 완전히 차단하는 것"
+              },
+              {
+                "id": "C",
+                "text": "편광판이 화면 밝기를 높여주는 것"
+              },
+              {
+                "id": "D",
+                "text": "편광판이 모든 빛을 완전히 통과시키는 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "피동 표현은 '-이-, -히-, -리-, -기-' 또는 '-어지다'를 붙여 만든다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'피동 표현'의 필요조건은 '주어가 행동을 당하는 상황이어야 한다'이다. 피동 표현이 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'사냥꾼이 토끼를 잡았다' (사냥꾼이 직접 행동)"
+              },
+              {
+                "id": "B",
+                "text": "'새 건물이 지어졌다' (건물이 당함)"
+              },
+              {
+                "id": "C",
+                "text": "'토끼가 사냥꾼에게 잡혔다' (토끼가 당함)"
+              },
+              {
+                "id": "D",
+                "text": "'내 동생이 모기에게 물렸다' (동생이 당함)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "편광판과 특수 필름을 거친 반사 빛은 원래와 다른 방향으로 흔들리게 된다. 이 빛은 편광판에서 막혀 밖으로 나오지 못한다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'반사 빛의 방향이 편광판과 직교하면(P) 빛이 차단된다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "빛이 차단되면 반드시 방향이 직교한 것이다."
+              },
+              {
+                "id": "B",
+                "text": "방향이 직교하면서 빛이 통과하는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "빛이 통과하면 방향이 직교한 것이다."
+              },
+              {
+                "id": "D",
+                "text": "방향과 차단은 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "가사는 3·4조 또는 4·4조의 4음보 연속체로 이루어진 시가 형식이다. 시조보다 길이에 제한이 없어 자유롭게 내용을 전개할 수 있다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'4음보 연속체이면(P) 가사의 형식을 갖춘 것이다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가사이면 반드시 4음보 연속체이다."
+              },
+              {
+                "id": "B",
+                "text": "4음보 연속체이면서 가사가 아닌 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "가사가 아니면 4음보가 아니다."
+              },
+              {
+                "id": "D",
+                "text": "4음보와 가사는 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "명암비를 높이기 위해 검은색을 더 어둡게 만드는 방법을 사용한다. 흰색을 무작정 밝게 하면 화면 수명이 짧아지기 때문이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'검은색을 어둡게 만들면 명암비가 높아진다'의 충분조건 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화면 해상도를 낮추는 경우"
+              },
+              {
+                "id": "B",
+                "text": "화면 전체를 최대 밝기로 설정하는 경우"
+              },
+              {
+                "id": "C",
+                "text": "화면 크기를 줄이는 경우"
+              },
+              {
+                "id": "D",
+                "text": "OLED 화면에서 검은색 픽셀을 완전히 꺼서 진짜 검은색을 만드는 경우"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "피동문은 행동을 당한 대상을 강조한다. '모기가 동생을 물었다'를 '동생이 모기에게 물렸다'로 바꾸면 동생에게 관심이 쏠린다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'피동문으로 바꾸면 행동을 당한 대상이 강조된다'의 충분조건 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'경찰이 범인을 체포했다'를 '범인이 체포되었다'로 바꿔 범인에 초점을 맞춘 경우"
+              },
+              {
+                "id": "B",
+                "text": "'바람이 나뭇잎을 흔들었다'를 '나뭇잎이 바람에 흔들렸다'로 바꿔 나뭇잎에 초점을 맞춘 경우"
+              },
+              {
+                "id": "C",
+                "text": "'엄마가 아기를 안았다'를 '아기가 엄마에게 안겼다'로 바꿔 아기에 초점을 맞춘 경우"
+              },
+              {
+                "id": "D",
+                "text": "'학생이 책을 읽었다'를 그대로 유지한 능동문 경우"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "편광판을 사용하면 햇빛 반사가 줄어든다. 반사가 줄면 명암비가 높아져 화면이 선명해진다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'편광판을 사용하면(P) 화면이 선명해진다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화면이 선명하므로 편광판을 사용한 것이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "편광판을 사용하지 않았으므로 선명하지 않다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "화면이 선명하지 않으면 편광판을 사용하지 않은 것이다. (대우 — 타당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "능동문에서 주어가 행동을 하면, 피동문에서는 그 행동의 대상이 주어가 된다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'능동문의 목적어가 피동문의 주어이면(P) 문장 전환이 올바르다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "B와 C 모두 타당하다."
+              },
+              {
+                "id": "B",
+                "text": "'토끼를'이 '토끼가'로 바뀌어 주어가 되었으므로 전환이 올바르다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "전환이 올바르지 않으므로 목적어가 바뀌지 않았다. (대우 — 타당)"
+              },
+              {
+                "id": "D",
+                "text": "전환이 올바르므로 목적어가 주어로 바뀐 것이다. (후건 긍정 — 부당)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "화면 기술이 발전할수록 야외 가시성이 향상되는 경향이 있다. 편광판, OLED 기술 등이 발전하면서 야외에서도 선명한 화면을 볼 수 있게 되었다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'화면 기술 발전'과 '야외 가시성'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기술이 발전하면 야외 가시성이 항상 완벽해진다."
+              },
+              {
+                "id": "B",
+                "text": "기술 발전과 야외 가시성 사이에 양의 상관관계가 있으나, 햇빛의 강도나 화면 각도 등 환경 요인도 영향을 미친다."
+              },
+              {
+                "id": "C",
+                "text": "야외 가시성이 좋으면 반드시 최신 기술이다."
+              },
+              {
+                "id": "D",
+                "text": "기술과 가시성은 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "피동 표현의 사용 빈도는 글의 종류에 따라 달라진다. 과학 논문이나 뉴스 보도에서 피동 표현이 더 자주 사용되는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'글의 종류'와 '피동 표현 빈도'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "객관성을 중시하는 글에서 피동 표현이 더 자주 사용되는 상관관계가 있으나, 글의 주제와 작가의 문체도 영향을 미친다."
+              },
+              {
+                "id": "B",
+                "text": "과학 논문이면 반드시 피동 표현만 사용한다."
+              },
+              {
+                "id": "C",
+                "text": "피동 표현이 많으면 반드시 과학 논문이다."
+              },
+              {
+                "id": "D",
+                "text": "글의 종류와 피동 표현은 무관하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "편광판을 사용하면 화면의 반사를 줄이지만, 화면에서 나오는 빛도 일부 차단된다. 이 단점을 보완하는 기술이 개발되고 있다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '새로운 반사 방지 기술은 편광판보다 화면 밝기 손실이 적다.' 이 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "편광판의 원리를 조사한다."
+              },
+              {
+                "id": "B",
+                "text": "편광판 방식과 새 기술 방식의 화면 밝기를 같은 조건에서 비교 측정한다."
+              },
+              {
+                "id": "C",
+                "text": "새 기술의 특허 수를 센다."
+              },
+              {
+                "id": "D",
+                "text": "화면 크기별 밝기를 비교한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "피동 표현은 행동을 당한 대상을 강조하고, 능동 표현은 행동을 한 주체를 강조한다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '피동문을 사용하면 독자가 행동의 대상에 더 집중한다.' 이 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "능동문만 사용한 글의 길이를 측정한다."
+              },
+              {
+                "id": "B",
+                "text": "피동문의 문법 구조를 분석한다."
+              },
+              {
+                "id": "C",
+                "text": "같은 사건을 능동문과 피동문으로 각각 제시한 후 독자의 관심 초점을 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "피동 접미사의 종류를 정리한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

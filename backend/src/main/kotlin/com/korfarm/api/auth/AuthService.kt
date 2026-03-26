@@ -114,7 +114,7 @@ class AuthService(
             region = request.region,
             school = request.school,
             gradeLabel = request.gradeLabel,
-            levelId = request.levelId,
+            levelId = request.levelId ?: "saussure1",
             studentPhone = request.studentPhone,
             parentPhone = request.parentPhone,
             diagnosticOptIn = request.diagnosticOptIn,

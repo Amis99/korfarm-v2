@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게2 12장 논리사고력",
+  "targetLevel": "frege2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "생태계에서 생산자는 햇빛을 이용해 스스로 양분을 만드는 식물이고, 소비자는 다른 생물을 먹어서 사는 동물이다. 분해자는 죽은 생물을 흙으로 되돌린다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'생태계가 유지되려면 생산자, 소비자, 분해자가 모두 필요하다'는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "분해자는 생태계에서 큰 역할을 하지 않는다"
+              },
+              {
+                "id": "B",
+                "text": "소비자만 있으면 생태계는 유지된다"
+              },
+              {
+                "id": "C",
+                "text": "생태계의 에너지와 물질은 생산자→소비자→분해자를 거쳐 순환한다"
+              },
+              {
+                "id": "D",
+                "text": "모든 동물은 식물을 직접 먹는다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "문장에서 꾸며 주는 말과 서술어는 짝이 맞아야 자연스럽다. 예를 들어 '결코'는 '~하지 않다'와 짝을 이루고, '만약'은 '~하면'과 짝을 이룬다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'결코 거짓말을 할 것이다'가 어색한 문장이라는 판단의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 문장은 길이가 짧아야 한다"
+              },
+              {
+                "id": "B",
+                "text": "'결코'라는 부사어는 반드시 부정 표현과 호응해야 한다"
+              },
+              {
+                "id": "C",
+                "text": "거짓말은 항상 나쁜 것이다"
+              },
+              {
+                "id": "D",
+                "text": "문장의 주어는 반드시 사람이어야 한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "먹이 사슬에서 풀을 먹는 메뚜기를 개구리가 먹고, 개구리를 뱀이 먹고, 뱀을 매가 먹는다. 이런 관계가 사슬처럼 연결되어 있다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "만약 개구리의 수가 갑자기 크게 줄어든다면, 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "메뚜기의 수가 늘어나고 뱀의 먹이가 줄어든다"
+              },
+              {
+                "id": "B",
+                "text": "풀이 줄어들고 매의 수가 늘어난다"
+              },
+              {
+                "id": "C",
+                "text": "뱀의 수가 크게 늘어난다"
+              },
+              {
+                "id": "D",
+                "text": "먹이 사슬에는 아무런 영향이 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "외래종이 들어오면 토종 생태계를 교란시킬 수 있다. 외래종은 천적이 없어 빠르게 번식하며 토종 생물의 서식지와 먹이를 빼앗는다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "천적이 없는 외래 물고기가 국내 하천에 방류되었을 때 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "토종 물고기와 사이좋게 공존할 것이다"
+              },
+              {
+                "id": "B",
+                "text": "외래 물고기가 빠르게 번식하여 토종 물고기의 서식지를 침범할 것이다"
+              },
+              {
+                "id": "C",
+                "text": "외래 물고기가 스스로 사라질 것이다"
+              },
+              {
+                "id": "D",
+                "text": "하천의 수질이 자동으로 개선될 것이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "생태계에서 먹이 그물이 복잡할수록 평형을 잘 유지한다. 갯벌 생태계는 다양한 생물 종이 복잡한 먹이 그물을 이루고 있다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 먹이 그물이 복잡할수록 생태계 평형을 잘 유지한다. [소전제] 갯벌 생태계는 먹이 그물이 복잡하다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "갯벌 생태계는 쉽게 파괴된다"
+              },
+              {
+                "id": "B",
+                "text": "갯벌 생태계는 평형을 잘 유지한다"
+              },
+              {
+                "id": "C",
+                "text": "먹이 그물이 단순한 생태계가 더 안정적이다"
+              },
+              {
+                "id": "D",
+                "text": "갯벌에는 생물이 거의 살지 않는다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "'비록'이라는 부사어는 '~지만'이나 '~일지라도'와 짝을 이루어야 자연스러운 문장이 된다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] '비록'은 양보의 연결어미(~지만, ~일지라도)와 호응해야 한다. [소전제] '비록 몸은 힘들어서 마음만은 즐겁다'에서 '힘들어서'는 양보 표현이 아니다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 문장은 호응이 맞는 자연스러운 문장이다"
+              },
+              {
+                "id": "B",
+                "text": "'비록'을 빼면 된다"
+              },
+              {
+                "id": "C",
+                "text": "이 문장은 호응이 맞지 않아 어색하므로 '힘들지만'으로 고쳐야 한다"
+              },
+              {
+                "id": "D",
+                "text": "'마음만은 즐겁다'를 삭제해야 한다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "생태계가 평형을 유지하려면 생산자, 소비자, 분해자 간의 균형이 필요하다. 어느 한쪽이 지나치게 늘거나 줄면 생태계가 무너진다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'생태계 평형이 유지되려면 생물 간 균형이 필요하다'를 올바르게 변환한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "생물 간 균형이 있으면 반드시 생태계 평형이 유지된다"
+              },
+              {
+                "id": "B",
+                "text": "생태계 평형과 생물 간 균형은 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "생물 간 균형이 없어도 생태계는 유지된다"
+              },
+              {
+                "id": "D",
+                "text": "생태계 평형이 유지되고 있다면 생물 간 균형이 있을 것이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "자연스러운 문장을 쓰려면 부사어와 서술어의 호응이 맞아야 한다. '아마'는 추측 표현인 '~것이다'와 짝을 이룬다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'자연스러운 문장이려면 호응이 맞아야 한다'를 필요조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호응이 맞으면 반드시 자연스러운 문장이다"
+              },
+              {
+                "id": "B",
+                "text": "호응이 맞지 않으면서 자연스러운 문장인 경우는 없다"
+              },
+              {
+                "id": "C",
+                "text": "자연스러운 문장이 아니면 호응이 맞지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "호응과 자연스러움은 관계가 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "먹이 사슬이란 생물들 사이에서 먹고 먹히는 관계가 사슬처럼 연결된 것이다. 풀→메뚜기→개구리→뱀→매의 순서로 이어진다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'먹이 사슬이 존재하려면 최소 두 단계 이상의 먹고 먹히는 관계가 필요하다'의 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "풀만 자라는 초원"
+              },
+              {
+                "id": "B",
+                "text": "물만 흐르는 하천"
+              },
+              {
+                "id": "C",
+                "text": "바위만 있는 사막"
+              },
+              {
+                "id": "D",
+                "text": "풀을 먹는 토끼와 토끼를 잡아먹는 여우가 있는 숲"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "'왜냐하면'은 '~기 때문이다'와 짝을 이루고, '전혀'는 '~지 않다'와 짝을 이루는 호응 관계이다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "부사어와 서술어의 호응이 올바른 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전혀 그 사실을 알고 있었다"
+              },
+              {
+                "id": "B",
+                "text": "왜냐하면 배가 고팠기 때문이었다"
+              },
+              {
+                "id": "C",
+                "text": "만약 비가 온다면 소풍을 가지 못할 것이다"
+              },
+              {
+                "id": "D",
+                "text": "아마 그 소문은 사실이 아닐 것이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "멸종 위기 동물의 서식지가 파괴되면 그 동물의 개체 수가 급격히 줄어든다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'서식지가 파괴되면 개체 수가 줄어든다'에서 충분조건 관계를 올바르게 표현한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "개체 수가 줄어들었으면 반드시 서식지가 파괴된 것이다"
+              },
+              {
+                "id": "B",
+                "text": "개체 수가 줄어들지 않았으면 서식지는 파괴되지 않았다"
+              },
+              {
+                "id": "C",
+                "text": "서식지가 파괴되면서 개체 수가 줄어들지 않는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "서식지가 파괴되지 않으면 개체 수가 반드시 늘어난다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "숲속의 버섯은 죽은 나무를 분해하여 영양분을 흙으로 되돌린다. 이런 역할을 하는 생물을 분해자라고 한다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'어떤 생물이 분해자이면 죽은 생물을 분해하는 역할을 한다'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "죽은 생물을 분해하면 반드시 분해자이다"
+              },
+              {
+                "id": "B",
+                "text": "죽은 생물을 분해하지 않으면 분해자가 아니다"
+              },
+              {
+                "id": "C",
+                "text": "분해자가 아니면 죽은 생물을 분해할 수 없다"
+              },
+              {
+                "id": "D",
+                "text": "분해자이면서 죽은 생물을 분해하지 않는 경우는 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "생태계의 평형이란 어느 한쪽으로 치우치지 않고 고른 상태를 말한다. 먹이 그물이 복잡할수록 평형이 잘 유지된다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'먹이 그물이 복잡하면 생태계 평형이 잘 유지된다'의 충분조건 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "먹이 그물이 복잡한 숲에서 생태계가 붕괴되었다"
+              },
+              {
+                "id": "B",
+                "text": "단 하나의 먹이 사슬만 있는 초원에서 생태계가 안정되었다"
+              },
+              {
+                "id": "C",
+                "text": "다양한 종의 생물이 서로 얽힌 열대 우림이 오랫동안 안정적으로 유지되었다"
+              },
+              {
+                "id": "D",
+                "text": "생물 종이 하나도 없는 환경이 평형을 이루었다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "'마치'는 '~처럼' 또는 '~같다'와 짝을 이루는 부사어이다. 호응이 맞아야 자연스러운 비유 표현이 된다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'마치'와 올바르게 호응하는 문장의 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그의 노래 실력은 마치 꾀꼬리 운다"
+              },
+              {
+                "id": "B",
+                "text": "그녀는 마치 천사처럼 착하다"
+              },
+              {
+                "id": "C",
+                "text": "날씨가 마치 봄인 듯 따뜻하다"
+              },
+              {
+                "id": "D",
+                "text": "그의 노래 실력은 마치 꾀꼬리가 우는 것 같다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "생산자인 식물이 햇빛을 이용해 양분을 만들면, 소비자인 동물이 그 식물을 먹고 에너지를 얻는다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'식물이 양분을 만들면(P) 동물이 에너지를 얻을 수 있다(Q)'가 참일 때, 논리적으로 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동물이 에너지를 얻었으므로 식물이 양분을 만들었다 (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "동물이 에너지를 얻지 못했다면 식물이 양분을 만들지 못한 것이다 (후건 부정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "식물이 양분을 만들지 못했으므로 동물은 에너지를 얻을 수 없다 (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 타당하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "외래종이 유입되면 토종 생태계가 교란된다. 최근 황소개구리가 국내 하천에서 급격히 번식하고 있다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'외래종이 유입되면 생태계가 교란된다'가 참일 때, 다음 중 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "황소개구리는 외래종이므로 생태계를 교란시킬 것이다 (전건 긍정 — 타당)"
+              },
+              {
+                "id": "B",
+                "text": "생태계가 교란되었으므로 반드시 외래종이 유입된 것이다 (후건 긍정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "외래종이 유입되지 않았으므로 생태계는 교란되지 않는다 (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "B와 C 모두 타당하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "숲이 울창한 지역일수록 다양한 동물 종이 발견된다는 조사 결과가 있다. 숲이 파괴된 곳에서는 동물 종 수가 줄어드는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'숲의 울창함'과 '동물 종 다양성' 사이의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "숲이 울창하면 반드시 동물 종이 많다는 인과관계가 증명되었다"
+              },
+              {
+                "id": "B",
+                "text": "동물 종이 많아서 숲이 울창해진 것이다"
+              },
+              {
+                "id": "C",
+                "text": "둘 사이에 양의 상관관계가 있으나, 기후나 수질 등 다른 요인도 동물 종 다양성에 영향을 준다"
+              },
+              {
+                "id": "D",
+                "text": "숲의 울창함과 동물 종 수는 아무 관계가 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "문장의 호응을 잘 지킨 글일수록 독자의 이해도가 높다는 연구 결과가 있다. 호응이 어긋난 문장은 의미 파악에 시간이 더 걸린다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'문장 호응 정확도'와 '독자 이해도' 사이의 관계에 대해 적절한 설명은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호응 정확도와 이해도 사이에 상관관계가 있으나, 어휘 수준이나 배경 지식 등 다른 요인도 이해도에 영향을 준다"
+              },
+              {
+                "id": "B",
+                "text": "이해도가 높으면 호응이 반드시 맞는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "호응만 맞으면 글의 내용과 관계없이 이해도가 완벽해진다"
+              },
+              {
+                "id": "D",
+                "text": "호응이 맞지 않아도 이해도에는 전혀 영향이 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "멸종 위기 동물의 개체 수를 늘리기 위해 서식지를 복원하는 사업이 진행되고 있다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'서식지를 복원하면 멸종 위기 동물의 개체 수가 늘어난다'는 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서식지 복원 비용만 계산한다"
+              },
+              {
+                "id": "B",
+                "text": "서식지와 관계없이 동물원의 동물 수만 조사한다"
+              },
+              {
+                "id": "C",
+                "text": "멸종된 동물의 화석을 연구한다"
+              },
+              {
+                "id": "D",
+                "text": "서식지가 복원된 지역과 복원되지 않은 지역의 개체 수 변화를 비교한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "부사어와 서술어의 호응 규칙을 가르치면 학생들의 작문 실력이 향상된다는 주장이 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "위 가설을 반증하는 사례로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호응 규칙을 배운 학생이 작문 시험에서 높은 점수를 받았다"
+              },
+              {
+                "id": "B",
+                "text": "호응 규칙을 배운 학생이 맞춤법도 잘 지켰다"
+              },
+              {
+                "id": "C",
+                "text": "호응 규칙을 모르는 학생이 작문에서 낮은 점수를 받았다"
+              },
+              {
+                "id": "D",
+                "text": "호응 규칙을 배우지 않은 학생이 호응 규칙을 배운 학생보다 작문 실력이 더 뛰어났다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

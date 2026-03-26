@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 12장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "나무 도령은 물에 빠진 개미 떼를 보고 나무 위로 올려 주었습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "나무 도령이 개미를 구해줄 수 있으려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "개미는 날 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "개미는 물에서 헤엄칠 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "나무는 가라앉는다."
+              },
+              {
+                "id": "D",
+                "text": "나무가 물에 뜰 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "햇볕이 따뜻하고 맑은 날씨는 우리에게 도움을 줍니다. 농부 아저씨들은 곡식과 과일을 잘 기를 수 있습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "날씨가 맑으면 농부에게 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "곡식이 잘 자란다."
+              },
+              {
+                "id": "B",
+                "text": "곡식이 죽는다."
+              },
+              {
+                "id": "C",
+                "text": "홍수가 난다."
+              },
+              {
+                "id": "D",
+                "text": "눈이 내린다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "서로 뜻이 정반대인 짝꿍 단어들을 '반대말'이라고 합니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'반대말은 뜻이 정반대인 말이다. 맑다와 흐리다는 반대말이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "맑다와 흐리다는 같은 뜻이다."
+              },
+              {
+                "id": "B",
+                "text": "맑다와 흐리다는 뜻이 정반대이다."
+              },
+              {
+                "id": "C",
+                "text": "반대말은 같은 뜻의 말이다."
+              },
+              {
+                "id": "D",
+                "text": "맑다는 반대말이 없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "날씨가 심술을 부리면 피해를 입기도 합니다. 비가 너무 많이 오면 홍수가 납니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'홍수가 나려면 비가 많이 와야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가뭄이면 홍수가 난다."
+              },
+              {
+                "id": "B",
+                "text": "비가 오면 반드시 홍수가 난다."
+              },
+              {
+                "id": "C",
+                "text": "비가 안 오면 홍수가 나지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "홍수가 나면 비가 멈춘다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "큰 홍수가 나서 하늘에 구멍이라도 난 듯 비가 쏟아져 온 세상이 물바다가 되었습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'물바다가 되려면 비가 아주 많이 와야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비가 조금 왔는데 물바다가 되었다."
+              },
+              {
+                "id": "B",
+                "text": "눈이 와서 물바다가 되었다."
+              },
+              {
+                "id": "C",
+                "text": "해가 나서 물바다가 되었다."
+              },
+              {
+                "id": "D",
+                "text": "비가 쏟아져 마을이 물에 잠겼다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "빨래도 뽀송뽀송하게 잘 마르고 기분도 상쾌해집니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'날씨가 맑으면 빨래가 잘 마른다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "맑은 날인데 빨래가 안 마르는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "빨래가 마르면 반드시 맑은 날이다."
+              },
+              {
+                "id": "C",
+                "text": "비가 와도 빨래가 마른다."
+              },
+              {
+                "id": "D",
+                "text": "맑은 날이면 빨래가 젖는다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "나무 도령은 물에 빠진 동물들을 차례차례 구해 주었습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'남을 도우면 나중에 도움을 받을 수 있다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "남을 안 도왔는데 도움을 받았다."
+              },
+              {
+                "id": "B",
+                "text": "나무 도령이 개미를 구해주자, 나중에 개미가 도와줬다."
+              },
+              {
+                "id": "C",
+                "text": "도와줬더니 벌을 받았다."
+              },
+              {
+                "id": "D",
+                "text": "남을 도왔는데 아무 일도 안 생겼다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "물이 너무 많은 '홍수'와 물이 너무 적은 '가뭄'은 반대말입니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'홍수와 가뭄은 반대이다. 지금 홍수가 났다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지금 가뭄이다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "홍수와 가뭄이 동시에 일어났다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "지금은 가뭄이 아니다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "홍수는 가뭄의 원인이다. (맞는 추론)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "비가 너무 많이 오면 홍수가 나고, 비가 오랫동안 오지 않으면 가뭄이 찾아옵니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'올해 비가 많이 왔고 곡식이 적게 자랐다.' 비와 곡식의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비가 많으면 반드시 곡식이 적게 자란다."
+              },
+              {
+                "id": "B",
+                "text": "곡식이 적게 자르면 비가 온다."
+              },
+              {
+                "id": "C",
+                "text": "전혀 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "비가 많아 홍수로 밭이 잠긴 것이 원인일 수 있지만 다른 이유도 있을 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "날씨는 우리 생활에 아주 큰 영향을 줍니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'맑은 날에 사람들이 더 행복하다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "맑은 날과 흐린 날의 사람들 기분을 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "비 오는 날만 기분을 조사한다."
+              },
+              {
+                "id": "C",
+                "text": "집 안에서만 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "사람들의 키를 잰다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

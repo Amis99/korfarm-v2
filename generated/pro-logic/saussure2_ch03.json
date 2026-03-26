@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 3장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "매일 건강하게 지내려면 올바른 습관을 가지는 것이 매우 중요합니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "건강하려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "습관은 건강과 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "아무렇게나 해도 건강하다."
+              },
+              {
+                "id": "C",
+                "text": "올바른 습관이 건강을 유지시켜 준다."
+              },
+              {
+                "id": "D",
+                "text": "건강은 저절로 유지된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "민수는 시계가 밤 10시를 넘어가는데도 로봇을 가지고 놀았습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "늦게까지 놀면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다음 날 일찍 잘 일어난다."
+              },
+              {
+                "id": "B",
+                "text": "더 잘 자게 된다."
+              },
+              {
+                "id": "C",
+                "text": "건강해진다."
+              },
+              {
+                "id": "D",
+                "text": "다음 날 아침에 피곤해서 일어나기 힘들다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "아침밥을 거르지 않고 꼭 먹어야 합니다. 아침밥은 몸에 에너지를 줍니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'아침밥은 에너지를 준다. 민수가 아침밥을 먹었다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수는 에너지를 얻었다."
+              },
+              {
+                "id": "B",
+                "text": "민수는 에너지가 없다."
+              },
+              {
+                "id": "C",
+                "text": "아침밥은 쓸모없다."
+              },
+              {
+                "id": "D",
+                "text": "민수는 아침을 안 먹었다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "잠을 푹 자고 일어나면 기분이 좋아져서 상쾌하게 하루를 시작할 수 있어요.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'상쾌한 아침을 보내려면 잠을 푹 자야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "잠을 안 자도 상쾌하다."
+              },
+              {
+                "id": "B",
+                "text": "잠을 못 자면 상쾌한 아침이 되기 어렵다."
+              },
+              {
+                "id": "C",
+                "text": "적게 자면 더 상쾌하다."
+              },
+              {
+                "id": "D",
+                "text": "잠과 아침은 관계없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "기지개는 잠들었던 우리 몸을 깨워 줍니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'몸을 깨우려면 기지개가 도움이 된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기지개를 안 켜도 완전히 깼다."
+              },
+              {
+                "id": "B",
+                "text": "기지개를 켜면 더 졸려진다."
+              },
+              {
+                "id": "C",
+                "text": "기지개를 켜니 몸이 개운해졌다."
+              },
+              {
+                "id": "D",
+                "text": "기지개는 필요 없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "미리 계획을 세우면 허둥지둥하지 않고 중요한 일을 놓치지 않아요.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'계획을 세우면 중요한 일을 놓치지 않는다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "계획을 세우면 더 놓친다."
+              },
+              {
+                "id": "B",
+                "text": "놓치지 않으면 계획을 세운 것이다."
+              },
+              {
+                "id": "C",
+                "text": "계획 없이도 놓치지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "계획을 세웠는데 놓치는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "엄마가 '이제 잘 시간이야'라고 했는데 민수는 10분만 더 놀다 자겠다고 했습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'잘 시간에 안 자면 다음 날 피곤하다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "늦게까지 놀다 자서 아침에 눈이 안 떠졌다."
+              },
+              {
+                "id": "B",
+                "text": "늦게 잤는데 다음 날 개운했다."
+              },
+              {
+                "id": "C",
+                "text": "일찍 자서 피곤했다."
+              },
+              {
+                "id": "D",
+                "text": "자지 않아도 피곤하지 않았다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "규칙적인 생활: 제때 밥 먹기, 일찍 자고 일찍 일어나기.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'규칙적으로 생활하면 건강하다. 민수는 불규칙하게 생활한다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수는 건강하다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "민수는 건강하기 어려울 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "불규칙해도 건강하다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "규칙과 건강은 관계없다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "일찍 자는 아이가 학교에서 집중을 더 잘했다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'일찍 자는 것과 집중력의 관계는?'",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일찍 자면 반드시 집중을 잘한다."
+              },
+              {
+                "id": "B",
+                "text": "집중을 잘하면 일찍 잔다."
+              },
+              {
+                "id": "C",
+                "text": "충분한 수면이 관련 있지만 다른 원인도 있을 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "아침밥을 거르지 않고 꼭 먹어야 합니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'아침밥을 먹으면 학교에서 집중을 더 잘한다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아이들의 키를 잰다."
+              },
+              {
+                "id": "B",
+                "text": "아침만 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "점심만 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "아침 먹은 아이와 안 먹은 아이의 수업 집중도를 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

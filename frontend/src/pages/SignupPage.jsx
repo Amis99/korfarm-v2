@@ -264,7 +264,7 @@ function SignupPage() {
       const pendingApproval = payload?.data?.user?.pending_approval || payload?.data?.user?.pendingApproval;
 
       if (token) {
-        localStorage.setItem(TOKEN_KEY, token);
+        sessionStorage.setItem(TOKEN_KEY, token);
       }
 
       // 승인이 필요한 경우 (국어농장 외 기관) 메시지 표시 후 pending 페이지로 이동

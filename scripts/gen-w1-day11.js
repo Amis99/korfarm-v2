@@ -1,0 +1,560 @@
+const fs = require('fs');
+const path = require('path');
+
+// Day 11: NONFICTION (비문학)
+// 고1~2 수준 비문학 지문: 인지 편향과 의사 결정
+
+const p1 = `사람은 매일 수많은 판단과 결정을 내리며 살아간다. 아침에 무엇을 먹을지, 어떤 옷을 입을지 같은 일상적 결정부터 진로나 직업 선택 같은 중대한 결정까지 그 범위는 매우 넓다. 이때 대부분의 사람은 자신이 합리적으로 사고하고 있다고 믿지만, 실제로는 다양한 인지 편향에 의해 판단이 왜곡되는 경우가 적지 않다. 인지 편향이란 정보를 처리하는 과정에서 체계적으로 발생하는 사고의 오류를 말하며, 교육 수준이나 지적 능력과 관계없이 누구에게나 나타날 수 있다. 이러한 편향은 인간의 뇌가 제한된 시간과 에너지 안에서 빠르게 결론을 내리기 위해 사용하는 일종의 정신적 지름길, 즉 휴리스틱에서 비롯된다.`;
+
+const p2 = `대표적인 인지 편향 중 하나는 확증 편향이다. 확증 편향이란 자신이 이미 믿고 있는 것을 확인해 주는 정보만 선택적으로 받아들이고, 그에 반하는 정보는 무시하거나 의도적으로 축소하는 경향을 말한다. 예를 들어, 특정 건강 식품이 효과가 있다고 믿는 사람은 그 효과를 뒷받침하는 후기만 주목하고, 효과가 없다는 연구 결과는 외면하기 쉽다. 이처럼 확증 편향은 객관적 판단을 방해하여 잘못된 신념을 더욱 강화하는 결과를 낳는다. 특히 소셜 미디어 환경에서는 알고리즘이 사용자의 관심사에 맞는 정보를 우선적으로 보여 주기 때문에 확증 편향이 한층 심화될 수 있어 주의가 필요하다.`;
+
+const p3 = `또 다른 중요한 편향으로 가용성 휴리스틱이 있다. 이는 어떤 사건이나 정보가 머릿속에 쉽게 떠오를수록 그것이 더 빈번하거나 중요하다고 판단하는 경향이다. 예컨대, 비행기 사고에 관한 뉴스를 자주 접한 사람은 실제 통계와 달리 비행기가 자동차보다 더 위험한 교통수단이라고 생각할 수 있다. 이는 극적이고 감정적으로 강렬한 사건일수록 기억에 더 깊이 각인되기 때문이다. 가용성 휴리스틱은 위험을 과대평가하거나 과소평가하게 만들어 합리적인 의사 결정을 어렵게 하는데, 이 편향은 일상적 선택에서도 흔히 작동한다. 따라서 판단을 내리기 전에 자신의 기억에만 의존하지 않고 검증된 객관적 통계 자료를 확인하는 습관이 필요하다.`;
+
+const p4 = `인지 편향을 완전히 없애는 것은 불가능하지만, 그 존재를 인식하고 의식적으로 대응하는 것은 가능하다. 먼저, 중요한 판단을 내리기 전에 자신의 생각에 반대되는 근거를 일부러 찾아보는 연습이 도움이 된다. 이를 통해 확증 편향의 영향을 상당 부분 줄이고 보다 균형 잡힌 넓은 시각을 확보할 수 있다. 또한, 직감에만 의존하지 말고 신뢰할 수 있는 데이터나 공식 통계에 기반하여 판단하는 습관을 기르는 것도 중요하다. 아울러 다양한 관점을 가진 사람들과 토론하면 자신도 모르게 빠져 있던 편향에서 벗어날 기회를 얻을 수 있다. 결국 인지 편향에 대한 이해는 더 나은 의사 결정의 첫걸음이며, 비판적 사고 능력을 갖춘 현대인에게 필수적인 소양이라 할 수 있다.`;
+
+const passage = {
+  format: "TEXT",
+  paragraphs: [
+    { id: "p1", text: p1 },
+    { id: "p2", text: p2 },
+    { id: "p3", text: p3 },
+    { id: "p4", text: p4 }
+  ]
+};
+
+const totalLen = p1.length + p2.length + p3.length + p4.length;
+console.log(`총 글자 수: ${totalLen} (목표: 1400 ±50)`);
+console.log(`p1: ${p1.length}, p2: ${p2.length}, p3: ${p3.length}, p4: ${p4.length}`);
+
+const timeline = [
+  // p1
+  {
+    stepId: "s1",
+    highlight: { ranges: [{ paragraphId: "p1", start: 0, end: 23 }] },
+    question: {
+      prompt: "첫 문장이 전달하는 내용으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "사람은 매일 수많은 판단과 결정을 내리며 살아간다." },
+        { id: "B", text: "사람은 판단과 결정을 거의 하지 않고 살아간다." },
+        { id: "C", text: "판단과 결정은 특별한 사람만 하는 일이다." },
+        { id: "D", text: "사람은 결정을 기계에 맡기고 살아간다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s2",
+    highlight: { ranges: [{ paragraphId: "p1", start: 24, end: 83 }] },
+    question: {
+      prompt: "둘째 문장에서 예시로 든 결정의 범위로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "아침 식사나 옷 선택 같은 일상적 결정부터 진로 선택 같은 중대한 결정까지 범위가 넓다." },
+        { id: "B", text: "오직 진로와 직업 선택만이 결정에 해당한다." },
+        { id: "C", text: "일상적 결정만 있고 중대한 결정은 존재하지 않는다." },
+        { id: "D", text: "결정의 범위는 매우 좁아 분류할 필요가 없다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s3",
+    highlight: { ranges: [{ paragraphId: "p1", start: 84, end: 142 }] },
+    question: {
+      prompt: "셋째 문장에서 지적하는 문제로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "합리적으로 사고한다고 믿지만 실제로는 인지 편향에 의해 판단이 왜곡될 수 있다." },
+        { id: "B", text: "사람은 항상 완벽하게 합리적인 사고를 한다." },
+        { id: "C", text: "판단이 왜곡되는 경우는 전혀 없다." },
+        { id: "D", text: "인지 편향은 판단에 영향을 미치지 않는다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s4",
+    highlight: { ranges: [{ paragraphId: "p1", start: 143, end: 184 }] },
+    question: {
+      prompt: "넷째 문장에서 인지 편향의 정의로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "정보를 처리하는 과정에서 체계적으로 발생하는 사고의 오류를 말한다." },
+        { id: "B", text: "특별히 뛰어난 사고력을 가리키는 말이다." },
+        { id: "C", text: "논리적 사고 능력이 높아지는 현상이다." },
+        { id: "D", text: "감정을 완전히 배제한 냉철한 판단을 말한다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s5",
+    highlight: { ranges: [{ paragraphId: "p1", start: 185, end: p1.length }] },
+    question: {
+      prompt: "마지막 문장에서 인지 편향이 비롯되는 원인으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "뇌가 빠르게 결론을 내리기 위해 사용하는 정신적 지름길인 휴리스틱에서 비롯된다." },
+        { id: "B", text: "충분한 시간을 두고 천천히 판단하기 때문에 생긴다." },
+        { id: "C", text: "외부의 강제적인 압력에 의해 발생한다." },
+        { id: "D", text: "교육을 받지 않은 사람에게만 나타나는 현상이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s6",
+    highlight: { ranges: [{ paragraphId: "p1", start: 0, end: p1.length }] },
+    question: {
+      prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "사람은 합리적으로 사고한다고 믿지만, 뇌의 휴리스틱에서 비롯된 인지 편향으로 판단이 왜곡될 수 있다." },
+        { id: "B", text: "사람의 판단은 항상 정확하며 오류가 발생하지 않는다." },
+        { id: "C", text: "인지 편향은 특수한 상황에서만 나타나는 드문 현상이다." },
+        { id: "D", text: "일상적 결정은 중요하지 않으므로 신경 쓸 필요가 없다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p2
+  {
+    stepId: "s7",
+    highlight: { ranges: [{ paragraphId: "p2", start: 0, end: 22 }] },
+    question: {
+      prompt: "첫 문장에서 소개하는 인지 편향의 이름으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "확증 편향이다." },
+        { id: "B", text: "가용성 휴리스틱이다." },
+        { id: "C", text: "매몰 비용 오류이다." },
+        { id: "D", text: "후광 효과이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s8",
+    highlight: { ranges: [{ paragraphId: "p2", start: 23, end: 87 }] },
+    question: {
+      prompt: "둘째 문장에서 확증 편향의 정의로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "자신이 믿는 것을 확인해 주는 정보만 수용하고 반하는 정보는 무시하는 경향이다." },
+        { id: "B", text: "모든 정보를 균형 있게 검토하여 판단하는 경향이다." },
+        { id: "C", text: "자신의 믿음에 반하는 정보를 적극적으로 찾는 경향이다." },
+        { id: "D", text: "정보를 전혀 수용하지 않는 경향이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s9",
+    highlight: { ranges: [{ paragraphId: "p2", start: 88, end: 166 }] },
+    question: {
+      prompt: "셋째 문장에서 확증 편향의 구체적 예시로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "건강 식품이 효과 있다고 믿는 사람이 긍정적 후기만 주목하고 부정적 연구는 외면하는 것이다." },
+        { id: "B", text: "건강 식품의 효과를 과학적으로 검증하여 결론을 내리는 것이다." },
+        { id: "C", text: "모든 건강 식품을 의심하여 아무것도 먹지 않는 것이다." },
+        { id: "D", text: "건강 식품에 대한 정보를 전혀 찾아보지 않는 것이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s10",
+    highlight: { ranges: [{ paragraphId: "p2", start: 167, end: 213 }] },
+    question: {
+      prompt: "넷째 문장에서 확증 편향이 초래하는 결과로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "객관적 판단을 방해하여 잘못된 신념을 더욱 강화하는 결과를 낳는다." },
+        { id: "B", text: "올바른 판단을 도와 신념을 수정하게 한다." },
+        { id: "C", text: "판단 능력과는 아무 관계가 없다." },
+        { id: "D", text: "모든 신념을 약화시켜 사라지게 만든다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s11",
+    highlight: { ranges: [{ paragraphId: "p2", start: 214, end: p2.length }] },
+    question: {
+      prompt: "마지막 문장에서 소셜 미디어가 확증 편향에 미치는 영향으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "알고리즘이 관심사에 맞는 정보를 우선 보여 주어 확증 편향이 심화될 수 있다." },
+        { id: "B", text: "소셜 미디어는 다양한 정보를 균등하게 제공하여 편향을 줄인다." },
+        { id: "C", text: "소셜 미디어는 인지 편향과 무관하다." },
+        { id: "D", text: "알고리즘이 반대 의견만 보여 주어 편향이 사라진다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s12",
+    highlight: { ranges: [{ paragraphId: "p2", start: 0, end: p2.length }] },
+    question: {
+      prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "확증 편향은 자기 신념에 부합하는 정보만 수용하는 경향으로, 소셜 미디어 환경에서 더욱 심화된다." },
+        { id: "B", text: "확증 편향은 최근에 발견된 현상으로 아직 연구가 부족하다." },
+        { id: "C", text: "소셜 미디어는 확증 편향을 완전히 해결할 수 있는 도구이다." },
+        { id: "D", text: "확증 편향은 건강 식품에만 적용되는 제한적 개념이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p3
+  {
+    stepId: "s13",
+    highlight: { ranges: [{ paragraphId: "p3", start: 0, end: 25 }] },
+    question: {
+      prompt: "첫 문장에서 소개하는 또 다른 편향의 이름으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "가용성 휴리스틱이다." },
+        { id: "B", text: "확증 편향이다." },
+        { id: "C", text: "앵커링 효과이다." },
+        { id: "D", text: "밴드왜건 효과이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s14",
+    highlight: { ranges: [{ paragraphId: "p3", start: 26, end: 78 }] },
+    question: {
+      prompt: "둘째 문장에서 가용성 휴리스틱의 정의로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "사건이 머릿속에 쉽게 떠오를수록 더 빈번하거나 중요하다고 판단하는 경향이다." },
+        { id: "B", text: "모든 사건의 빈도를 정확한 통계로 판단하는 능력이다." },
+        { id: "C", text: "머릿속에 떠오르지 않는 사건을 더 중요하게 여기는 경향이다." },
+        { id: "D", text: "판단을 내리지 않고 결정을 미루는 경향이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s15",
+    highlight: { ranges: [{ paragraphId: "p3", start: 79, end: 149 }] },
+    question: {
+      prompt: "셋째 문장에서 가용성 휴리스틱의 예시로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "비행기 사고 뉴스를 자주 접하면 비행기가 자동차보다 더 위험하다고 생각하는 것이다." },
+        { id: "B", text: "통계를 근거로 자동차가 비행기보다 위험하다고 판단하는 것이다." },
+        { id: "C", text: "비행기 사고 뉴스를 접하고 자동차도 위험하다고 판단하는 것이다." },
+        { id: "D", text: "비행기와 자동차 모두 안전하다고 판단하는 것이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s16",
+    highlight: { ranges: [{ paragraphId: "p3", start: 150, end: 194 }] },
+    question: {
+      prompt: "넷째 문장에서 극적인 사건이 기억에 미치는 영향으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "극적이고 감정적으로 강렬한 사건일수록 기억에 더 깊이 각인된다." },
+        { id: "B", text: "극적인 사건일수록 기억에서 빨리 사라진다." },
+        { id: "C", text: "감정적 강도는 기억과 무관하다." },
+        { id: "D", text: "일상적인 사건이 극적인 사건보다 더 깊이 각인된다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s17",
+    highlight: { ranges: [{ paragraphId: "p3", start: 195, end: 246 }] },
+    question: {
+      prompt: "다섯째 문장에서 가용성 휴리스틱이 초래하는 문제로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "위험을 과대평가하거나 과소평가하게 만들어 합리적 의사 결정을 어렵게 만든다." },
+        { id: "B", text: "항상 위험을 정확하게 평가하도록 도와준다." },
+        { id: "C", text: "의사 결정 속도만 느리게 만들 뿐 정확도에는 영향이 없다." },
+        { id: "D", text: "모든 위험을 동일하게 평가하게 만든다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s18",
+    highlight: { ranges: [{ paragraphId: "p3", start: 247, end: p3.length }] },
+    question: {
+      prompt: "마지막 문장에서 제안하는 대처 방법으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "기억에만 의존하지 않고 객관적인 통계 자료를 확인하는 습관이 필요하다." },
+        { id: "B", text: "직감에만 의존하여 빠르게 결정하는 것이 최선이다." },
+        { id: "C", text: "판단을 내리지 않고 항상 미루는 것이 좋다." },
+        { id: "D", text: "통계 자료보다 개인적 경험이 더 신뢰할 만하다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s19",
+    highlight: { ranges: [{ paragraphId: "p3", start: 0, end: p3.length }] },
+    question: {
+      prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "가용성 휴리스틱은 쉽게 떠오르는 정보를 과대평가하게 만드는 편향으로, 객관적 자료 확인이 필요하다." },
+        { id: "B", text: "가용성 휴리스틱은 항상 올바른 판단으로 이끌어 주는 능력이다." },
+        { id: "C", text: "비행기 사고는 자동차 사고보다 실제로 더 빈번하게 발생한다." },
+        { id: "D", text: "극적인 사건은 기억에 남지 않으므로 판단에 영향을 미치지 않는다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p4
+  {
+    stepId: "s20",
+    highlight: { ranges: [{ paragraphId: "p4", start: 0, end: 46 }] },
+    question: {
+      prompt: "첫 문장이 전달하는 핵심으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "인지 편향을 완전히 없앨 수는 없지만 그 존재를 인식하고 대응하는 것은 가능하다." },
+        { id: "B", text: "인지 편향은 노력하면 완전히 제거할 수 있다." },
+        { id: "C", text: "인지 편향은 인식하더라도 대응할 방법이 없다." },
+        { id: "D", text: "인지 편향은 존재하지 않으므로 걱정할 필요가 없다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s21",
+    highlight: { ranges: [{ paragraphId: "p4", start: 47, end: 101 }] },
+    question: {
+      prompt: "둘째 문장에서 제안하는 연습으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "자신의 생각에 반대되는 근거를 일부러 찾아보는 연습이다." },
+        { id: "B", text: "자신의 생각을 확인해 주는 근거만 모으는 연습이다." },
+        { id: "C", text: "판단을 내리기 전에 아무런 조사도 하지 않는 것이다." },
+        { id: "D", text: "다른 사람의 의견을 무조건 따르는 연습이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s22",
+    highlight: { ranges: [{ paragraphId: "p4", start: 102, end: 145 }] },
+    question: {
+      prompt: "셋째 문장에서 반대 근거를 찾아보는 것의 효과로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "확증 편향의 영향을 줄이고 보다 균형 잡힌 시각을 확보할 수 있다." },
+        { id: "B", text: "자신의 신념을 더욱 강화할 수 있다." },
+        { id: "C", text: "판단을 더 어렵게 만들어 혼란을 초래한다." },
+        { id: "D", text: "모든 정보에 대한 신뢰를 잃게 만든다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s23",
+    highlight: { ranges: [{ paragraphId: "p4", start: 146, end: 195 }] },
+    question: {
+      prompt: "넷째 문장에서 추가로 제안하는 습관으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "직감에만 의존하지 말고 데이터나 통계에 기반하여 판단하는 습관이다." },
+        { id: "B", text: "항상 직감에 따라 즉각적으로 결정하는 습관이다." },
+        { id: "C", text: "통계를 무시하고 경험에만 의존하는 습관이다." },
+        { id: "D", text: "판단 자체를 포기하는 습관이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s24",
+    highlight: { ranges: [{ paragraphId: "p4", start: 196, end: 248 }] },
+    question: {
+      prompt: "다섯째 문장에서 다양한 관점의 사람들과 토론하면 얻을 수 있는 것으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "자신도 모르게 빠져 있던 편향에서 벗어날 기회를 얻을 수 있다." },
+        { id: "B", text: "자신의 편향이 더 강화되어 확신을 갖게 된다." },
+        { id: "C", text: "토론은 편향과 무관하므로 아무런 효과가 없다." },
+        { id: "D", text: "상대방의 편향만 드러나고 자신의 편향은 드러나지 않는다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s25",
+    highlight: { ranges: [{ paragraphId: "p4", start: 249, end: p4.length }] },
+    question: {
+      prompt: "마지막 문장이 전달하는 결론으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "인지 편향에 대한 이해는 더 나은 의사 결정의 첫걸음이며 현대인에게 필수적인 소양이다." },
+        { id: "B", text: "인지 편향은 전문가만 이해하면 되는 개념이다." },
+        { id: "C", text: "인지 편향을 이해해도 의사 결정에 변화가 없다." },
+        { id: "D", text: "비판적 사고 능력은 현대인에게 불필요하다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s26",
+    highlight: { ranges: [{ paragraphId: "p4", start: 0, end: p4.length }] },
+    question: {
+      prompt: "넷째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "인지 편향은 완전히 제거할 수 없지만, 반대 근거 탐색과 데이터 기반 판단, 토론 등으로 대응할 수 있다." },
+        { id: "B", text: "인지 편향은 교육을 통해 완전히 제거할 수 있다." },
+        { id: "C", text: "인지 편향에 대응하는 방법은 아직 발견되지 않았다." },
+        { id: "D", text: "직감에 따른 판단이 데이터 기반 판단보다 항상 우월하다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  }
+];
+
+const recall = {
+  cards: [
+    { id: "c1", text: "사람은 합리적으로 사고한다고 믿지만, 인지 편향이라는 체계적 사고 오류에 의해 판단이 왜곡될 수 있다." },
+    { id: "c2", text: "인지 편향은 뇌가 빠르게 결론을 내리기 위해 사용하는 정신적 지름길인 휴리스틱에서 비롯된다." },
+    { id: "c3", text: "확증 편향은 자기 신념에 부합하는 정보만 수용하고 반하는 정보는 무시하는 경향이다." },
+    { id: "c4", text: "소셜 미디어의 알고리즘은 확증 편향을 심화시킬 수 있다." },
+    { id: "c5", text: "가용성 휴리스틱은 쉽게 떠오르는 사건을 더 빈번하거나 중요하다고 판단하게 만든다." },
+    { id: "c6", text: "극적이고 감정적으로 강렬한 사건일수록 기억에 깊이 각인되어 판단을 왜곡한다." },
+    { id: "c7", text: "반대 근거를 찾아보고, 데이터에 기반하여 판단하며, 다양한 관점의 사람들과 토론하면 편향에 대응할 수 있다." },
+    { id: "c8", text: "인지 편향에 대한 이해는 더 나은 의사 결정의 첫걸음이며 현대인에게 필수적인 소양이다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+const confirm = {
+  questions: [
+    {
+      id: "q1",
+      prompt: "정보를 처리하는 과정에서 체계적으로 발생하는 사고의 오류를 무엇이라 하나요?",
+      answerText: "인지 편향",
+      answerMatchMode: "ANY",
+      answerRanges: [{ paragraphId: "p1", start: 130, end: 135 }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true
+    },
+    {
+      id: "q2",
+      prompt: "뇌가 빠르게 결론을 내리기 위해 사용하는 정신적 지름길을 무엇이라 하나요?",
+      answerText: "휴리스틱",
+      answerMatchMode: "ANY",
+      answerRanges: [{ paragraphId: "p1", start: 255, end: 260 }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true
+    },
+    {
+      id: "q3",
+      prompt: "자신이 믿고 있는 것을 확인해 주는 정보만 선택적으로 수용하는 편향을 무엇이라 하나요?",
+      answerText: "확증 편향",
+      answerMatchMode: "ANY",
+      answerRanges: [{ paragraphId: "p2", start: 17, end: 22 }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true
+    },
+    {
+      id: "q4",
+      prompt: "소셜 미디어에서 확증 편향을 심화시키는 것은 무엇인가요?",
+      answerText: "알고리즘",
+      answerMatchMode: "ANY",
+      answerRanges: [{ paragraphId: "p2", start: 229, end: 234 }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true
+    },
+    {
+      id: "q5",
+      prompt: "어떤 사건이 머릿속에 쉽게 떠오를수록 더 빈번하다고 판단하는 경향을 무엇이라 하나요?",
+      answerText: "가용성 휴리스틱",
+      answerMatchMode: "ANY",
+      answerRanges: [{ paragraphId: "p3", start: 16, end: 24 }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true
+    },
+    {
+      id: "q6",
+      prompt: "가용성 휴리스틱은 위험을 어떻게 만들어 의사 결정을 어렵게 하나요?",
+      answerText: "과대평가하거나 과소평가",
+      answerMatchMode: "ANY",
+      answerRanges: [{ paragraphId: "p3", start: 204, end: 217 }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true
+    },
+    {
+      id: "q7",
+      prompt: "확증 편향에 대응하기 위해 자신의 생각에 반대되는 무엇을 찾아보아야 하나요?",
+      answerText: "근거",
+      answerMatchMode: "ANY",
+      answerRanges: [{ paragraphId: "p4", start: 79, end: 81 }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true
+    },
+    {
+      id: "q8",
+      prompt: "인지 편향에 대한 이해는 무엇의 첫걸음이라고 하나요?",
+      answerText: "더 나은 의사 결정",
+      answerMatchMode: "ANY",
+      answerRanges: [{ paragraphId: "p4", start: 261, end: 271 }],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true
+    }
+  ]
+};
+
+const content = {
+  contentId: "dr-w1-011",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(비트겐슈타인 1) Day 11 비문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "WITTGENSTEIN_1",
+  schoolGradeRange: { min: 9, max: 10 },
+  area: "READING",
+  subArea: "NONFICTION",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 600,
+  assets: {},
+  payload: {
+    passage,
+    intensive: { timeline },
+    recall,
+    confirm
+  }
+};
+
+const staticPath = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'wittgenstein1', '011.json');
+fs.writeFileSync(staticPath, JSON.stringify(content, null, 2), 'utf8');
+console.log(`static 파일 작성 완료: ${staticPath}`);
+
+const batchItem = {
+  content_type: "DAILY_READING",
+  level_id: "WITTGENSTEIN_1",
+  area: "READING",
+  sub_area: "NONFICTION",
+  day_index: 11,
+  module_key: "reading_training",
+  schema_version: "1.0",
+  content
+};
+
+const batchPath = path.join(__dirname, '..', 'generated', 'new', 'batch-w1-day11.json');
+fs.writeFileSync(batchPath, JSON.stringify(batchItem, null, 2), 'utf8');
+console.log(`배치 파일 작성 완료: ${batchPath}`);

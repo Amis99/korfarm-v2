@@ -1,12 +1,46 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, apiPost, API_BASE } from "../utils/api";
+import { apiGet, apiPost, API_BASE, TOKEN_KEY } from "../utils/api";
 import AnswerInputPanel from "../components/AnswerInputPanel";
 import OnlineTestRenderer from "../components/OnlineTestRenderer";
 import "../styles/pro-mode.css";
 import "../styles/test-storage.css";
 import "../styles/test-online.css";
+
+/** 역량별 점수 분석 컴포넌트 */
+function CompetencyAnalysis({ scores }) {
+  const entries = Object.entries(scores).sort((a, b) => a[1].accuracy - b[1].accuracy);
+  const weakTop3 = entries.slice(0, 3);
+
+  return (
+    <div className="pro-competency-analysis">
+      <h4 className="pro-competency-title">역량 분석</h4>
+      <div className="pro-competency-bars">
+        {entries.map(([domain, data]) => {
+          const isWeak = weakTop3.some(([d]) => d === domain);
+          return (
+            <div key={domain} className={`pro-competency-row ${isWeak ? "weak" : ""}`}>
+              <div className="pro-competency-label">
+                {domain}
+                {isWeak && <span className="pro-competency-weak-badge">보강 필요</span>}
+              </div>
+              <div className="pro-competency-bar-wrap">
+                <div
+                  className="pro-competency-bar-fill"
+                  style={{ width: `${Math.min(100, data.accuracy)}%` }}
+                />
+              </div>
+              <div className="pro-competency-pct">
+                {data.correct}/{data.total} ({Math.round(data.accuracy)}%)
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 function ProTestPage() {
   const { chapterId } = useParams();
@@ -69,7 +103,7 @@ function ProTestPage() {
           mode: active.mode || "print",
           omrDeadline: active.omrDeadline,
         });
-        startTimer(new Date(active.omrDeadline));
+        startTimer(active.remainingMinutes ?? 0);
 
         if (active.mode === "online" || active.status === "online_solving") {
           // 온라인 모드 활성 세션 → 문항 로드 후 online_solving
@@ -91,10 +125,11 @@ function ProTestPage() {
     }
   };
 
-  // 타이머 시작
-  const startTimer = (deadline) => {
+  // 타이머 시작 — 남은 분(remainingMinutes) 기반 (서버 시간대 무관)
+  const startTimer = (minutes) => {
     if (timerRef.current) clearInterval(timerRef.current);
-    const deadlineMs = deadline.getTime();
+    if (!minutes || minutes <= 0) return;
+    const deadlineMs = Date.now() + minutes * 60 * 1000;
     const update = () => {
       const diff = Math.max(0, Math.floor((deadlineMs - Date.now()) / 1000));
       setRemainingSec(diff);
@@ -122,11 +157,15 @@ function ProTestPage() {
 
       // PDF 새 탭으로 열기
       if (res.pdfFileId) {
-        const token = localStorage.getItem("korfarm_token");
-        window.open(`${API_BASE}/v1/files/${res.pdfFileId}?token=${token}`, "_blank");
+        if (res.pdfFileId.startsWith("http")) {
+          window.open(res.pdfFileId, "_blank");
+        } else {
+          const token = sessionStorage.getItem(TOKEN_KEY);
+          window.open(`${API_BASE}/v1/files/${res.pdfFileId}/download?token=${token}`, "_blank");
+        }
       }
 
-      startTimer(new Date(res.omrDeadline));
+      startTimer(res.remainingMinutes ?? 60);
       setPhase("printed");
     } catch (err) {
       setError(err.message || "인쇄 세션 생성에 실패했습니다.");
@@ -139,7 +178,7 @@ function ProTestPage() {
     try {
       const res = await apiPost("/v1/pro/test/start", { chapterId, mode: "online" });
       setSession(res);
-      startTimer(new Date(res.omrDeadline));
+      startTimer(res.remainingMinutes ?? 60);
 
       // 문항 로드
       const qs = await apiGet(`/v1/test-storage/${res.testId}/questions`);
@@ -390,6 +429,12 @@ function ProTestPage() {
                       ? "다른 버전으로 재응시할 수 있습니다."
                       : ""}
               </p>
+
+              {/* 역량 분석 섹션 */}
+              {result.competencyScores && Object.keys(result.competencyScores).length > 0 && (
+                <CompetencyAnalysis scores={result.competencyScores} />
+              )}
+
               <div className="pro-result-actions">
                 {result.passed ? (
                   <button

@@ -116,7 +116,7 @@ function WisdomBoardPage() {
           ))}
         </select>
         {isLoggedIn && !isViewingChild && (
-          <Link to={`/writing/${levelId}/new`} className="wis-btn">
+          <Link to={`/writing/${levelId}/new${topicKey ? `?topicKey=${topicKey}` : ""}`} className="wis-btn">
             <span className="material-symbols-outlined">edit</span>
             글쓰기
           </Link>

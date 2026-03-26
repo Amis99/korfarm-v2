@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 1장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "매는 높은 하늘을 날아다니지만, 땅 위에 있는 아주 작은 토끼도 금방 찾아낼 수 있습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "이 말이 맞으려면 어떤 사실이 꼭 있어야 할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "매는 눈이 아주 좋다."
+              },
+              {
+                "id": "B",
+                "text": "매는 날개가 크다."
+              },
+              {
+                "id": "C",
+                "text": "매는 소리를 잘 듣는다."
+              },
+              {
+                "id": "D",
+                "text": "매는 빠르게 달린다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "개는 냄새를 아주 잘 맡아서 잃어버린 물건을 찾거나, 눈에 보이지 않는 범인을 냄새로 찾아내기도 합니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "개의 이런 능력 때문에 어떤 일이 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "개가 하늘을 날 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "개가 경찰을 도와 범인을 잡을 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "개가 글자를 읽을 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "개가 요리를 잘할 수 있다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "우리 몸에는 세상을 보고, 냄새 맡고, 들을 수 있게 해 주는 고마운 눈, 코, 귀가 있어요.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'모든 사람에게는 눈이 있다. 민수는 사람이다.' 그러면 어떤 결론이 나올까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수는 귀가 없다."
+              },
+              {
+                "id": "B",
+                "text": "민수는 코가 없다."
+              },
+              {
+                "id": "C",
+                "text": "민수에게는 눈이 있다."
+              },
+              {
+                "id": "D",
+                "text": "민수는 동물이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "토끼는 길쭉한 귀를 가지고 있어요. 토끼의 귀가 긴 이유는 바로 아주 작은 소리도 놓치지 않고 잘 듣기 위해서예요.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'작은 소리를 잘 들으려면 긴 귀가 필요하다'를 다르게 말하면 어떤 것일까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "긴 귀가 있으면 눈이 좋아진다."
+              },
+              {
+                "id": "B",
+                "text": "긴 귀가 있으면 냄새를 잘 맡는다."
+              },
+              {
+                "id": "C",
+                "text": "작은 소리를 못 들으면 귀가 길어진다."
+              },
+              {
+                "id": "D",
+                "text": "긴 귀가 없으면 작은 소리를 잘 들을 수 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "눈은 반짝반짝 세상을 봐요. 코는 킁킁킁 냄새를 맡아요. 귀는 쫑긋쫑긋 소리를 들어요.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'세상을 보려면 눈이 꼭 필요하다'의 알맞은 예시는 무엇일까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "눈을 감으면 아무것도 볼 수 없다."
+              },
+              {
+                "id": "B",
+                "text": "코가 없으면 냄새를 맡을 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "귀를 막으면 소리가 안 들린다."
+              },
+              {
+                "id": "D",
+                "text": "손이 없으면 만질 수 없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "코(후각)의 경고: 상한 음식 냄새를 맡게 해서, 배가 아프지 않게 먹지 말라고 알려 줘요.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'상한 음식 냄새를 맡으면 먹지 않게 된다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "냄새를 맡지 못하면 음식을 먹게 된다."
+              },
+              {
+                "id": "B",
+                "text": "상한 냄새를 맡았는데도 먹는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "맛있는 냄새를 맡으면 배가 아프다."
+              },
+              {
+                "id": "D",
+                "text": "코가 있으면 눈이 좋아진다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "피부(촉각)의 경고: 뜨거운 주전자에 손이 닿으면 깜짝 놀라 손을 떼게 해서, 화상을 입지 않게 도와줘요.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'뜨거운 것에 닿으면 손을 뗀다'에 맞는 예시는 무엇일까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "차가운 얼음을 만져도 손을 뗀다."
+              },
+              {
+                "id": "B",
+                "text": "부드러운 이불을 만져서 손을 뗐다."
+              },
+              {
+                "id": "C",
+                "text": "뜨거운 국을 만져서 손을 재빨리 뗐다."
+              },
+              {
+                "id": "D",
+                "text": "시원한 물에 손을 넣고 놀았다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "동물 친구들 중에는 사람보다 훨씬 더 뛰어난 '슈퍼 감각'을 가진 친구들이 있답니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'슈퍼 감각을 가진 동물은 사람보다 더 잘 느낀다. 매는 슈퍼 감각을 가졌다.' 이 추론은 맞을까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 동물은 슈퍼 감각이 있다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "사람은 슈퍼 감각이 있다. (틀린 추론)"
+              },
+              {
+                "id": "C",
+                "text": "매는 감각이 없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "매는 사람보다 더 잘 느낀다. (맞는 추론)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "매는 사람보다 무려 여덟 배나 더 멀리, 더 자세히 볼 수 있기 때문이에요.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'매는 눈이 좋고, 높이 나는 새이다.' 이때 '눈이 좋은 것'과 '높이 나는 것'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "둘 다 매의 특징이지만, 하나가 다른 하나를 만든 것은 아닐 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "높이 날면 반드시 눈이 좋아진다."
+              },
+              {
+                "id": "C",
+                "text": "눈이 좋으면 반드시 높이 난다."
+              },
+              {
+                "id": "D",
+                "text": "둘은 전혀 관계가 없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "토끼는 귀를 이리저리 움직여서 사방에서 들려오는 소리를 모을 수 있답니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'토끼가 귀를 움직이는 것은 소리를 잘 듣기 위해서이다'라는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "토끼가 달리는 모습을 관찰한다."
+              },
+              {
+                "id": "B",
+                "text": "토끼가 소리가 나는 쪽으로 귀를 돌리는지 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "토끼의 먹이를 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "토끼의 눈 크기를 잰다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

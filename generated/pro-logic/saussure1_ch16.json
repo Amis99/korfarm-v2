@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 16장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "옹기는 고운 흙(황토)으로 빚어 뜨거운 불에 구워 만듭니다. 옹기에는 아주 작은 구멍들이 수없이 많습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "옹기가 음식을 신선하게 보관하려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "옹기는 나무로 만든다."
+              },
+              {
+                "id": "B",
+                "text": "옹기는 구멍이 없다."
+              },
+              {
+                "id": "C",
+                "text": "옹기는 차갑다."
+              },
+              {
+                "id": "D",
+                "text": "작은 구멍이 공기는 통하게 하되 물은 막아준다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "삼 년 고개에서 넘어지면 3년밖에 못 산다는 전설이 있었습니다. 할아버지가 그만 넘어지고 말았습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "할아버지가 넘어졌다면 어떤 일이 생겼을까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "할아버지는 겁이 나서 걱정했다."
+              },
+              {
+                "id": "B",
+                "text": "할아버지는 기뻐했다."
+              },
+              {
+                "id": "C",
+                "text": "할아버지는 아무 걱정이 없었다."
+              },
+              {
+                "id": "D",
+                "text": "할아버지는 웃었다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "문장은 '누가/무엇이' + '어찌하다'로 이루어져 있습니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'모든 문장에는 주어가 있다. 이것은 문장이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이것에는 주어가 없다."
+              },
+              {
+                "id": "B",
+                "text": "이것에는 주어가 있다."
+              },
+              {
+                "id": "C",
+                "text": "주어가 없어도 문장이다."
+              },
+              {
+                "id": "D",
+                "text": "이것은 문장이 아니다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "고개에서 한 번 넘어지면 3년밖에 못 산다는 전설 때문에 할아버지는 두려워했습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'무서움을 없애려면 전설이 거짓임을 알아야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무서우면 전설이 참이다."
+              },
+              {
+                "id": "B",
+                "text": "전설을 믿어도 무섭지 않다."
+              },
+              {
+                "id": "C",
+                "text": "전설이 거짓인지 모르면 무서움을 없앨 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "전설은 항상 참이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "냉장고가 없던 옛날, 우리 조상들은 옹기에 음식을 보관했습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'음식을 보관하려면 보관 도구가 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "도구 없이 음식을 오래 보관했다."
+              },
+              {
+                "id": "B",
+                "text": "밖에 놓아도 상하지 않았다."
+              },
+              {
+                "id": "C",
+                "text": "보관 안 해도 음식이 신선했다."
+              },
+              {
+                "id": "D",
+                "text": "옹기에 넣어 음식이 상하지 않았다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "꾀 많은 아이가 \"고개에서 또 넘어지면 3년이 더해져 6년을 살 수 있다\"고 말했습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'발상을 바꾸면 걱정이 사라진다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "발상을 바꿨는데 걱정이 안 사라지는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "걱정이 사라지면 발상을 바꾼 것이다."
+              },
+              {
+                "id": "C",
+                "text": "바꾸지 않아도 걱정이 사라진다."
+              },
+              {
+                "id": "D",
+                "text": "바꾸면 더 걱정된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "옹기의 작은 구멍은 물방울은 막지만 공기는 통하게 해줍니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'공기가 통하면 음식이 신선하게 유지된다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공기가 안 통하는 용기에 음식이 더 신선했다."
+              },
+              {
+                "id": "B",
+                "text": "옹기의 구멍으로 공기가 통해 김치가 맛있게 익었다."
+              },
+              {
+                "id": "C",
+                "text": "공기를 막았더니 더 맛있었다."
+              },
+              {
+                "id": "D",
+                "text": "구멍이 없는데 공기가 통했다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "할아버지는 삼 년 고개에서 넘어져 겁이 났다. 아이의 꾀로 일부러 여러 번 더 넘어졌다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'한 번 넘어지면 3년을 산다. 세 번 넘어졌다. 그러면 9년을 산다.' 이 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 번만 적용된다."
+              },
+              {
+                "id": "B",
+                "text": "절대 틀린 추론이다."
+              },
+              {
+                "id": "C",
+                "text": "전설의 규칙대로면 맞는 추론이다."
+              },
+              {
+                "id": "D",
+                "text": "넘어지면 수명이 줄어든다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "옹기로 만든 김치는 맛이 좋다고 알려져 있습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'옹기에 보관한 김치가 더 맛있었다.' 옹기와 맛의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "옹기가 맛의 원인이다."
+              },
+              {
+                "id": "B",
+                "text": "맛있으면 반드시 옹기이다."
+              },
+              {
+                "id": "C",
+                "text": "전혀 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "옹기의 통기성이 관련 있을 수 있지만 다른 요인도 있을 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "옹기는 황토로 빚어 불에 구워 만들며, 작은 구멍들이 있습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'옹기의 구멍이 음식 보관에 도움을 준다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구멍이 있는 옹기와 없는 용기에 같은 음식을 넣어 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "옹기의 색깔만 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "옹기의 무게만 잰다."
+              },
+              {
+                "id": "D",
+                "text": "한 가지 음식만 넣어본다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

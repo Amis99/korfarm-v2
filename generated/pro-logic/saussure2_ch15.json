@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 15장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "지호는 가격표도 보지 않고 스티커와 장난감을 집어 들었습니다. 이틀 뒤 주머니에 100원짜리 동전 하나만 남아 있었습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "지호의 돈이 금방 사라진 이유로 꼭 필요한 사실은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지호가 돈을 잃어버렸다."
+              },
+              {
+                "id": "B",
+                "text": "지호가 계획 없이 물건을 충동적으로 샀다."
+              },
+              {
+                "id": "C",
+                "text": "엄마가 돈을 가져갔다."
+              },
+              {
+                "id": "D",
+                "text": "문구점 물건이 모두 공짜였다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "그날부터 지호는 돈을 쓴 내용을 꼼꼼하게 기입했습니다. 일주일 뒤, 지호는 자신이 꼭 필요하지 않은 장난감과 간식에 돈을 낭비하고 있었다는 것을 알게 되었습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "용돈 기입장을 쓴 결과 지호에게 어떤 변화가 생겼나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "돈을 더 많이 쓰게 되었다."
+              },
+              {
+                "id": "B",
+                "text": "어디에 돈을 낭비했는지 알게 되어 계획적으로 쓰게 되었다."
+              },
+              {
+                "id": "C",
+                "text": "용돈이 저절로 늘어났다."
+              },
+              {
+                "id": "D",
+                "text": "기입장을 쓰기 싫어서 포기했다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "수입은 내 주머니로 들어온 돈을 말합니다. 지출은 내 주머니에서 나간 돈을 뜻합니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'지출은 나간 돈이다. 간식을 사서 돈이 나갔다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "간식 사기는 수입이다."
+              },
+              {
+                "id": "B",
+                "text": "간식 사기는 저축이다."
+              },
+              {
+                "id": "C",
+                "text": "간식 사기는 지출이다."
+              },
+              {
+                "id": "D",
+                "text": "간식은 공짜이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "물건을 아껴 써야 환경을 보호할 수 있어요. 또 자꾸 새로 사면 돈이 낭비됩니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'돈을 절약하려면 물건을 아껴 써야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물건을 아끼지 않아도 돈을 절약할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "절약과 아껴 쓰기는 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "돈이 많으면 물건을 버려도 된다."
+              },
+              {
+                "id": "D",
+                "text": "물건을 함부로 쓰면 돈을 절약할 수 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "용돈 기입장은 내가 돈을 어디에 썼는지 빠짐없이 기록하는 공책입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'돈을 아껴 쓰려면 용돈 기입장이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기입장 없이 돈을 마구 썼더니 남은 돈이 없었다."
+              },
+              {
+                "id": "B",
+                "text": "기입장을 안 써도 돈이 잘 모였다."
+              },
+              {
+                "id": "C",
+                "text": "기입장 대신 노래를 불렀더니 절약이 되었다."
+              },
+              {
+                "id": "D",
+                "text": "기입장을 쓰면 돈이 저절로 늘어난다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "사고 싶은 것이 있어도 꾹 참고 저축을 합니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'충동구매를 참으면 저축할 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "참았는데 저축이 안 되는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "참지 않아도 저축할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "저축하면 충동구매를 더 하게 된다."
+              },
+              {
+                "id": "D",
+                "text": "저축은 돈을 쓰는 것이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "이제 지호는 문구점에 가도 충동적으로 물건을 사지 않습니다. 돈을 모아서 꼭 필요한 축구공을 사기로 계획을 세웠답니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'계획을 세우면 꼭 필요한 물건을 살 수 있다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "계획 없이 돈을 마구 써도 축구공을 샀다."
+              },
+              {
+                "id": "B",
+                "text": "계획을 세웠는데 돈이 더 빨리 사라졌다."
+              },
+              {
+                "id": "C",
+                "text": "지호가 돈을 모아 축구공을 사겠다는 계획대로 저축했다."
+              },
+              {
+                "id": "D",
+                "text": "계획 없이 장난감만 사서 축구공은 못 샀다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "돈을 내고 물건을 사거나 쓰는 일을 소비라고 합니다. 돈을 아껴서 모아 두는 일을 저축이라고 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'저축은 돈을 모으는 것이다. 지호는 매주 500원씩 모은다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지호는 소비를 한다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "지호는 돈이 없다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "지호는 돈을 낭비한다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "지호는 저축을 한다. (맞는 추론)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "용돈 기입장을 쓰면 돈을 아껴 쓰는 습관을 기를 수 있습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'용돈 기입장 쓰기'와 '절약 습관'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기입장을 쓰면 절약 습관이 생길 수 있지만 다른 노력도 필요할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "기입장과 절약은 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "기입장을 쓰면 돈을 더 많이 쓰게 된다."
+              },
+              {
+                "id": "D",
+                "text": "절약하면 기입장을 안 써도 된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "우리가 쓰는 물건은 자연에서 얻은 재료로 만들기 때문에 아껴 써야 환경을 보호할 수 있어요.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'물건을 아끼면 쓰레기가 줄어든다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물건의 색깔을 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "물건을 아껴 쓴 기간과 함부로 쓴 기간의 쓰레기 양을 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "물건의 가격만 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "물건 이름을 외운다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

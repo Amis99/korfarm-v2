@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르1 11장 논리사고력",
+  "targetLevel": "saussure1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "하늘에서 내리는 눈을 돋보기로 들여다보면 아주 신기한 모양을 하고 있습니다. 눈 결정체는 대부분 '육각형' 모양입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "눈 결정체가 육각형이 되려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "눈은 사각형으로 내린다."
+              },
+              {
+                "id": "B",
+                "text": "물방울은 동그랗게만 얼 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "물방울이 얼 때 규칙적으로 달라붙는다."
+              },
+              {
+                "id": "D",
+                "text": "눈은 녹지 않는다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "지수는 두꺼운 털외투를 입고 털장갑을 꼈습니다. 밖으로 나가니 찬 바람이 '쌩쌩' 불어왔습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "두꺼운 옷을 입고 나갔다면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "더 추워진다."
+              },
+              {
+                "id": "B",
+                "text": "더위를 느낀다."
+              },
+              {
+                "id": "C",
+                "text": "비가 온다."
+              },
+              {
+                "id": "D",
+                "text": "추위를 덜 느낀다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "겨울바람이 불면 손끝이 시리다고 느끼고, 집 안에 들어오면 아늑하다고 느낍니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'촉각으로 온도를 느낀다. 시린 느낌은 촉각이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시린 느낌은 온도를 느낀 것이다."
+              },
+              {
+                "id": "B",
+                "text": "시린 느낌은 소리이다."
+              },
+              {
+                "id": "C",
+                "text": "촉각은 온도와 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "시린 느낌은 시각이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "눈은 구름 속의 물방울이 아주 추운 날씨에 얼어서 만들어집니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'눈이 만들어지려면 추운 날씨가 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "더운 날에도 눈이 온다."
+              },
+              {
+                "id": "B",
+                "text": "추운 날씨가 아니면 눈이 만들어지지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "비가 오면 눈이 된다."
+              },
+              {
+                "id": "D",
+                "text": "눈이 오면 덥다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "밤새 하얀 함박눈이 펑펑 내려 온 세상이 하얗게 변해 있었습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'세상이 하얘지려면 눈이 많이 와야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "눈이 안 왔는데 세상이 하얘졌다."
+              },
+              {
+                "id": "B",
+                "text": "비가 와서 하얘졌다."
+              },
+              {
+                "id": "C",
+                "text": "밤새 눈이 내려 온 세상이 하얗게 덮였다."
+              },
+              {
+                "id": "D",
+                "text": "해가 나서 하얘졌다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "지수는 추위도 잊은 채 눈을 굴려 눈사람을 만들었습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'눈이 오면 눈사람을 만들 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "눈이 안 와도 눈사람을 만든다."
+              },
+              {
+                "id": "B",
+                "text": "눈사람이 있으면 반드시 눈이 왔다."
+              },
+              {
+                "id": "C",
+                "text": "비가 와도 눈사람을 만들 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "눈이 왔는데 눈사람을 못 만드는 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "갓 구운 고구마는 '뜨겁고', 털모자는 '포근'하지요.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'촉각을 사용하면 물건의 온도를 알 수 있다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "손으로 만져보니 고구마가 뜨거웠다."
+              },
+              {
+                "id": "B",
+                "text": "눈으로 보고 뜨거운지 알았다."
+              },
+              {
+                "id": "C",
+                "text": "코로 냄새를 맡아 차가운지 알았다."
+              },
+              {
+                "id": "D",
+                "text": "귀로 들어 온도를 알았다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "눈 결정체는 대부분 육각형 모양을 하고 있습니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'눈 결정체는 육각형이다. 이것은 육각형이 아니다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이것은 눈 결정체이다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "이것은 눈 결정체가 아닐 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "모든 육각형은 눈이다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "눈 결정체는 사각형이다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "겨울이 되면 눈이 내리고 기온이 떨어집니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'눈이 많이 오는 날 사람들이 겨울 옷을 더 많이 입었다.' 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "눈이 와서 겨울 옷을 입는다."
+              },
+              {
+                "id": "B",
+                "text": "겨울 옷을 입으면 눈이 온다."
+              },
+              {
+                "id": "C",
+                "text": "추운 날씨 때문에 눈도 오고 옷도 두껍게 입는 것이지, 눈이 옷 입기의 원인은 아닐 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "전혀 관계없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "놀랍게도 눈 결정체의 모양은 모두 다르다고 합니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'기온에 따라 눈 결정체 모양이 달라진다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 기온에서만 눈을 모은다."
+              },
+              {
+                "id": "B",
+                "text": "비 결정체를 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "눈의 무게를 잰다."
+              },
+              {
+                "id": "D",
+                "text": "다른 기온에서 내린 눈 결정체의 모양을 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

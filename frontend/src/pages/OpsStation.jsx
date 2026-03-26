@@ -208,11 +208,7 @@ const SAMPLE_DUEL_SNAPSHOT = {
   levelId: "frege1",
 };
 
-const SAMPLE_FLAG_UPDATE = {
-  enabled: true,
-  rolloutPercent: 100,
-  description: "Enable for all users.",
-};
+
 
 const SAMPLE_PRODUCT = {
   name: "Workbook Set",
@@ -1180,33 +1176,6 @@ const ACTION_GROUPS = [
     ],
   },
   {
-    id: "admin-flags",
-    title: "관리자 - 플래그",
-    description: "기능 플래그 관리",
-    actions: [
-      {
-        id: "adminFlagsList",
-        title: "플래그 목록",
-        description: "전체 플래그",
-        method: "GET",
-        path: "/v1/admin/flags",
-        scope: "admin",
-        auth: true,
-      },
-      {
-        id: "adminFlagsUpdate",
-        title: "플래그 수정",
-        description: "플래그 토글",
-        method: "PATCH",
-        path: "/v1/admin/flags/:flagKey",
-        scope: "admin",
-        auth: true,
-        params: { flagKey: "feature.paid.pro_mode" },
-        body: SAMPLE_FLAG_UPDATE,
-      },
-    ],
-  },
-  {
     id: "admin-commerce",
     title: "관리자 - 쇼핑/결제",
     description: "상품, 주문, 결제 관리",
@@ -1464,7 +1433,7 @@ function ActionCard({ action, request }) {
 }
 function OpsStation() {
   const [apiBase, setApiBase] = useState(DEFAULT_API_BASE);
-  const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY) || "");
+  const [token, setToken] = useState(() => sessionStorage.getItem(TOKEN_KEY) || "");
   const [tokenInput, setTokenInput] = useState(token);
   const [profile, setProfile] = useState(null);
   const [subscription, setSubscription] = useState(null);
@@ -1589,9 +1558,9 @@ function OpsStation() {
   const applyToken = (value) => {
     setToken(value);
     if (value) {
-      localStorage.setItem(TOKEN_KEY, value);
+      sessionStorage.setItem(TOKEN_KEY, value);
     } else {
-      localStorage.removeItem(TOKEN_KEY);
+      sessionStorage.removeItem(TOKEN_KEY);
     }
   };
 

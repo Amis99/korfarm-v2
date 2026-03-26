@@ -113,7 +113,7 @@ function AdminPage() {
             <Link className="admin-action" to="/admin/orgs">기관 관리</Link>
             <Link className="admin-action" to="/admin/students">학생 관리</Link>
             <Link className="admin-action" to="/admin/content">콘텐츠 관리</Link>
-            <Link className="admin-action" to="/admin/flags">운영 플래그</Link>
+
             <Link className="admin-action" to="/admin/orgs?tab=payments">결제 관리</Link>
           </div>
         </div>

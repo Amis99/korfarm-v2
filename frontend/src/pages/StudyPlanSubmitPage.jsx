@@ -23,7 +23,7 @@ export default function StudyPlanSubmitPage() {
   }, [cellId]);
 
   const fileUrl = (fileId) => {
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = sessionStorage.getItem(TOKEN_KEY);
     return `${API_BASE}/v1/files/${fileId}/download?token=${token}`;
   };
 

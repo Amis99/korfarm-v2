@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 9장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "글을 깊이 있게 이해하려면 인물이 누구이고 어떤 성격을 가졌는지 파악하는 것이 가장 중요합니다. 이기적이고 탐욕스러운 인물은 다른 사람을 속이는 행동을 할 가능성이 높습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'인물의 성격을 알면 행동을 예측할 수 있다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인물의 행동은 성격과 무관하게 결정된다"
+              },
+              {
+                "id": "B",
+                "text": "모든 인물은 같은 성격을 가진다"
+              },
+              {
+                "id": "C",
+                "text": "성격은 행동의 원인이 되며, 성격에 따라 행동 패턴이 달라진다"
+              },
+              {
+                "id": "D",
+                "text": "인물의 성격은 변하지 않는다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "흥부와 놀부 이야기에서 놀부는 아버지의 재산을 모두 차지하고 흥부를 내쫓았습니다. 놀부는 욕심이 많고 이기적인 성격입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'놀부가 재산을 독차지한 것은 그의 성격 때문이다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "재산 분배 방법은 성격과 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "욕심 많은 성격은 남의 것을 빼앗는 행동으로 이어진다"
+              },
+              {
+                "id": "C",
+                "text": "놀부는 원래 착한 사람이었다"
+              },
+              {
+                "id": "D",
+                "text": "흥부가 재산을 받기를 거부했다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "흥부는 가난하게 살았지만 마음씨가 착했습니다. 다친 제비를 정성껏 치료해 주었고, 제비가 물어다 준 박씨에서 금은보화가 쏟아졌습니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "흥부의 착한 행동이 가져온 결과로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흥부는 더 가난해졌다"
+              },
+              {
+                "id": "B",
+                "text": "흥부의 성격이 나빠졌다"
+              },
+              {
+                "id": "C",
+                "text": "놀부가 흥부를 도와주었다"
+              },
+              {
+                "id": "D",
+                "text": "제비가 흥부에게 은혜를 갚아 부자가 되었다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "놀부는 흥부가 부자가 된 것을 보고 일부러 제비 다리를 부러뜨리고 치료해 주었습니다. 놀부의 박에서는 도깨비가 나와 재산을 빼앗았습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "놀부의 행동이 가져온 결과에서 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "도깨비는 착한 사람에게만 나타난다"
+              },
+              {
+                "id": "B",
+                "text": "제비 다리를 부러뜨리면 부자가 된다"
+              },
+              {
+                "id": "C",
+                "text": "놀부는 착한 사람이 되었다"
+              },
+              {
+                "id": "D",
+                "text": "거짓된 선행은 좋은 결과를 가져오지 못한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "이야기 속에서 선행을 하면 보상을 받고, 악행을 하면 징벌을 받는 구조는 '권선징악'이라고 합니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 선행을 하면 보상을 받는다. 소전제: 흥부는 다친 제비를 치료하는 선행을 했다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흥부는 보상을 받는다"
+              },
+              {
+                "id": "B",
+                "text": "흥부는 벌을 받는다"
+              },
+              {
+                "id": "C",
+                "text": "흥부는 아무 결과도 얻지 못한다"
+              },
+              {
+                "id": "D",
+                "text": "선행과 보상은 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "인물의 성격은 말, 행동, 생각을 통해 파악할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 탐욕스러운 인물은 남의 것을 빼앗으려 한다. 소전제: 놀부는 탐욕스러운 인물이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "놀부는 남의 것을 빼앗으려 할 것이다"
+              },
+              {
+                "id": "B",
+                "text": "놀부는 남에게 나눠주려 할 것이다"
+              },
+              {
+                "id": "C",
+                "text": "놀부는 착한 행동을 할 것이다"
+              },
+              {
+                "id": "D",
+                "text": "탐욕과 행동은 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "이야기를 깊이 이해하려면 인물의 성격을 파악해야 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'이야기를 깊이 이해하려면 인물 성격 파악이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인물 성격을 파악하면 이야기를 반드시 깊이 이해한다"
+              },
+              {
+                "id": "B",
+                "text": "이야기를 깊이 이해하지 못했다면 인물 성격을 파악하지 못했을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "이야기 이해와 인물 성격은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "인물 성격을 파악하지 못하면 이야기를 깊이 이해할 수 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "인물의 겉모습(표면적 성격)뿐 아니라 마음속 깊은 곳(내면적 성격)도 알아야 합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'인물을 정확히 파악하려면 내면적 성격까지 이해해야 한다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내면적 성격을 이해하면 인물을 반드시 정확히 파악한다"
+              },
+              {
+                "id": "B",
+                "text": "내면적 성격을 이해하지 못하면 인물을 정확히 파악할 수 없다"
+              },
+              {
+                "id": "C",
+                "text": "표면적 성격만으로 충분하다"
+              },
+              {
+                "id": "D",
+                "text": "내면적 성격은 파악할 필요가 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "인물의 성격을 파악하는 방법에는 인물의 말, 행동, 다른 인물의 반응을 살피는 것이 있습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'인물 성격 파악을 위해 행동 분석이 필요하다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "작가의 이름만 확인하기"
+              },
+              {
+                "id": "B",
+                "text": "이야기의 배경만 분석하기"
+              },
+              {
+                "id": "C",
+                "text": "놀부가 재산을 독차지하는 행동에서 탐욕스러운 성격을 파악하기"
+              },
+              {
+                "id": "D",
+                "text": "글의 글자 수만 세기"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "흥부는 가족들을 데리고 가난하게 살았지만 누구를 원망하지 않고 항상 웃음을 잃지 않았습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'인물 성격을 알기 위해 반응을 살펴야 한다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흥부가 어려운 상황에서도 웃음을 잃지 않는 모습에서 긍정적 성격을 파악하기"
+              },
+              {
+                "id": "B",
+                "text": "흥부의 집이 어디에 있는지만 확인하기"
+              },
+              {
+                "id": "C",
+                "text": "흥부가 다친 제비를 치료하는 행동에서 착한 성격을 파악하기"
+              },
+              {
+                "id": "D",
+                "text": "놀부가 흥부를 대하는 태도에서 놀부의 성격을 파악하기"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "착한 마음으로 다른 생명을 도우면 좋은 결과가 돌아옵니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'선행을 하면(P) 보상이 돌아온다(Q)'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보상이 돌아오지 않았다면 선행을 하지 않은 것이다"
+              },
+              {
+                "id": "B",
+                "text": "선행을 하면서 보상이 돌아오지 않는 경우는 없다"
+              },
+              {
+                "id": "C",
+                "text": "보상이 돌아오면 선행을 한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "선행과 보상은 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "탐욕으로 남을 속이면 결국 자기에게 불행이 돌아옵니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'탐욕으로 속이면(P) 불행이 온다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "불행이 왔다면 탐욕으로 속인 것이다"
+              },
+              {
+                "id": "B",
+                "text": "탐욕으로 속이지 않으면 불행이 오지 않는다"
+              },
+              {
+                "id": "C",
+                "text": "불행이 오지 않았다면 탐욕으로 속이지 않은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "탐욕과 불행은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "흥부가 진심으로 제비를 치료하자 제비가 은혜를 갚았습니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'진심 어린 선행을 하면 보상이 돌아온다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흥부가 진심으로 제비를 치료하자 금은보화가 든 박씨를 받았다"
+              },
+              {
+                "id": "B",
+                "text": "놀부가 일부러 제비 다리를 부러뜨리고 치료한 척 했더니 벌을 받았다"
+              },
+              {
+                "id": "C",
+                "text": "아무것도 하지 않았는데 보상이 돌아왔다"
+              },
+              {
+                "id": "D",
+                "text": "선행을 했지만 아무 일도 일어나지 않았다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "놀부는 흥부를 시기하여 거짓 선행을 했지만 결국 재산을 잃었습니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'거짓 선행은 나쁜 결과를 가져온다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "거짓 선행을 해도 벌을 받지 않았다"
+              },
+              {
+                "id": "B",
+                "text": "흥부가 진심으로 제비를 도왔더니 복을 받았다"
+              },
+              {
+                "id": "C",
+                "text": "선행 없이도 부자가 된 사람이 있었다"
+              },
+              {
+                "id": "D",
+                "text": "놀부가 돈을 바라고 제비 다리를 부러뜨렸다가 도깨비에게 재산을 빼앗겼다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'탐욕스러운 인물은 남을 속인다(P→Q)'가 참이고, 놀부가 탐욕스럽습니다(P).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "남을 속이므로 탐욕스럽다"
+              },
+              {
+                "id": "B",
+                "text": "남을 속이지 않았으므로 놀부는 탐욕스럽지 않다"
+              },
+              {
+                "id": "C",
+                "text": "탐욕스럽지 않으므로 남을 속이지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "놀부는 남을 속일 것이다 (전건 긍정)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'착한 행동을 하면(P) 은혜를 받는다(Q)'가 참이고, 흥부는 은혜를 받지 못했습니다(~Q).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흥부는 착한 행동을 한 것이다 (전건 부정)"
+              },
+              {
+                "id": "B",
+                "text": "흥부는 착한 행동을 하지 않았을 것이다 (대우)"
+              },
+              {
+                "id": "C",
+                "text": "은혜를 받았으므로 착한 행동을 한 것이다 (후건 긍정)"
+              },
+              {
+                "id": "D",
+                "text": "착한 행동과 은혜는 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "옛이야기에서 착한 주인공은 행복한 결말을 맞이하고, 나쁜 인물은 벌을 받는 경우가 많습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'인물의 성격'과 '이야기 결말'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "옛이야기에서 성격과 결말 사이에 상관관계가 있으나, 이는 교훈을 전달하기 위한 구조이며 현실과 다를 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "착한 인물은 현실에서도 반드시 행복해진다"
+              },
+              {
+                "id": "C",
+                "text": "성격과 결말은 아무 관계가 없다"
+              },
+              {
+                "id": "D",
+                "text": "나쁜 인물이 항상 좋은 결말을 맞는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "흥부는 착해서 복을 받았고, 놀부는 탐욕스러워서 벌을 받았습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'착한 성격'과 '좋은 결과'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 이야기에서 성격과 결과가 연결되지만, 실제로는 노력이나 환경 등 다른 요인도 영향을 미친다"
+              },
+              {
+                "id": "B",
+                "text": "착하면 반드시 부자가 된다"
+              },
+              {
+                "id": "C",
+                "text": "성격이 나빠야 성공한다"
+              },
+              {
+                "id": "D",
+                "text": "성격과 결과는 전혀 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'인물의 행동을 분석하면 성격을 정확히 파악할 수 있다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인물의 외모만 관찰한다"
+              },
+              {
+                "id": "B",
+                "text": "한 이야기의 배경만 분석한다"
+              },
+              {
+                "id": "C",
+                "text": "여러 이야기에서 인물의 행동과 성격의 일치 여부를 비교한다"
+              },
+              {
+                "id": "D",
+                "text": "작가의 전기만 읽는다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'옛이야기에서는 항상 착한 사람이 보상을 받는다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흥부가 착한 행동으로 복을 받았다"
+              },
+              {
+                "id": "B",
+                "text": "놀부가 벌을 받았다"
+              },
+              {
+                "id": "C",
+                "text": "착한 주인공이 고난을 겪다가 끝내 보상을 받지 못하는 옛이야기가 있다"
+              },
+              {
+                "id": "D",
+                "text": "권선징악 구조의 이야기가 많다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

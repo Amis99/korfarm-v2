@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게3 17장 논리사고력",
+  "targetLevel": "frege3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "법이 진짜 힘을 가지려면 두 가지 조건이 필요하다. 법의 내용이 정의로워야 하고, 법을 어겼을 때 제재가 있어야 한다. 사람들은 법이 공정하다고 느껴야 따를 마음을 갖는다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'법이 공정해야 사람들이 따른다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "제재가 있으면 법의 내용은 중요하지 않다."
+              },
+              {
+                "id": "B",
+                "text": "모든 법은 자동으로 공정하다."
+              },
+              {
+                "id": "C",
+                "text": "사람들은 공정하지 않은 규칙을 자발적으로 따르지 않는 경향이 있다."
+              },
+              {
+                "id": "D",
+                "text": "사람들은 어떤 법이든 항상 따른다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "문장의 호응이란 특정 말이 다른 특정 말과 자연스럽게 어울리는 관계이다. '결코'는 '~않다'와 짝을 이루고, '아마'는 추측 표현과 짝을 이룬다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'결코'가 부정 서술어와 짝을 이루어야 한다는 규칙에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한국어에는 특정 부사어가 특정 서술어 유형과만 결합하는 문법 규칙이 존재한다."
+              },
+              {
+                "id": "B",
+                "text": "모든 부사어는 어떤 서술어와도 자유롭게 결합할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "'결코'는 긍정문에서만 사용된다."
+              },
+              {
+                "id": "D",
+                "text": "호응 관계는 영어에만 있는 규칙이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "법은 만들어지기 전에 일어난 일에 대해서는 절대 사용될 수 없다. 어제까지 괜찮았는데 오늘부터 금지된다는 규칙이 생겨도, 어제 행동은 처벌할 수 없다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "새로운 교통법이 4월 1일부터 시행된다면, 3월 31일에 그 법을 어긴 사람에 대해 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "새 법에 따라 처벌받는다."
+              },
+              {
+                "id": "B",
+                "text": "소급하여 벌금을 내야 한다."
+              },
+              {
+                "id": "C",
+                "text": "법 시행 전이므로 처벌 대상이 아니다."
+              },
+              {
+                "id": "D",
+                "text": "법원이 재량으로 처벌 여부를 결정한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "'나는 결코 포기한다'는 호응이 맞지 않아 어색하다. '결코'는 부정 서술어와만 짝을 이루므로 '나는 결코 포기하지 않는다'가 올바르다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "학생이 '나는 별로 이 음식을 좋아한다'라고 썼다면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문법적으로 올바른 문장이다."
+              },
+              {
+                "id": "B",
+                "text": "의미 전달에 문제가 없다."
+              },
+              {
+                "id": "C",
+                "text": "서술어를 바꿀 필요가 없다."
+              },
+              {
+                "id": "D",
+                "text": "'별로'와 '좋아한다'의 호응이 맞지 않아 문장이 어색해진다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "우리나라 사람은 외국에 있어도 우리나라 법을 따라야 한다. 외국인이라도 우리나라 땅에 있으면 우리 법을 지켜야 한다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 우리나라 땅에 있는 사람은 우리 법을 지켜야 한다. 소전제: 외국인 A가 한국에 여행을 왔다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "A는 한국 법을 지켜야 한다."
+              },
+              {
+                "id": "B",
+                "text": "A는 외교관이므로 면제된다."
+              },
+              {
+                "id": "C",
+                "text": "A는 어떤 법도 지키지 않아도 된다."
+              },
+              {
+                "id": "D",
+                "text": "A는 자기 나라 법만 따르면 된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "주어와 서술어의 호응이 맞지 않으면 문장이 어색하다. '고양이와 새가 하늘을 난다'에서 '고양이'는 '난다'와 짝이 맞지 않는다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 주어와 서술어의 호응이 맞지 않으면 문장이 어색하다. 소전제: '나는 동생보다 키가 더 무겁다'에서 '키'와 '무겁다'의 호응이 맞지 않는다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 문장은 어색하다."
+              },
+              {
+                "id": "B",
+                "text": "호응 관계는 이 문장에 적용되지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "'키'를 '몸무게'로 바꿀 필요가 없다."
+              },
+              {
+                "id": "D",
+                "text": "이 문장은 자연스럽다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "법이 힘을 가지려면 정의로운 내용과 지키게 만드는 강제력이 모두 필요하다. 어느 하나라도 없으면 법은 진정한 힘을 발휘하지 못한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'법이 힘을 가지려면 정의와 강제력이 필요하다'에서 필요조건 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정의와 강제력이 있으면 반드시 법이 힘을 가진다."
+              },
+              {
+                "id": "B",
+                "text": "정의와 강제력은 법의 힘과 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "법이 힘을 가지지 못하면 정의와 강제력이 있다."
+              },
+              {
+                "id": "D",
+                "text": "정의나 강제력 중 하나라도 없으면 법이 힘을 가지지 못한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "문장이 자연스러우려면 주어와 서술어의 호응이 맞아야 한다. 호응이 틀리면 마치 짝짝이 신발을 신은 것처럼 어색해진다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'문장이 자연스러우려면 호응이 맞아야 한다'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호응이 맞지 않으면 문장이 자연스러울 수 없다."
+              },
+              {
+                "id": "B",
+                "text": "호응과 문장의 자연스러움은 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "문장이 어색하면 호응은 맞는 것이다."
+              },
+              {
+                "id": "D",
+                "text": "호응이 맞으면 반드시 문장이 자연스럽다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "법의 힘은 보통 정해진 날짜에 생긴다. 정해진 날짜가 없으면 공포일로부터 20일이 지나면 효력이 발생한다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'법의 효력 발생'의 필요조건은 '시행일이 도래해야 한다'이다. 이에 해당하지 않는 경우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "법이 2026년 1월 1일부터 시행되며 그 날이 되어 효력이 생긴 경우"
+              },
+              {
+                "id": "B",
+                "text": "법이 공포도 되지 않았는데 관습적으로 지켜지는 경우"
+              },
+              {
+                "id": "C",
+                "text": "법이 공포되었지만 시행일 전이라 아직 효력이 없는 경우"
+              },
+              {
+                "id": "D",
+                "text": "시행일이 정해지지 않아 공포 후 20일이 지나 효력이 생긴 경우"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "호응 관계에서 '결코', '전혀', '별로' 같은 말은 '~않다', '~없다' 같은 부정 서술어와만 짝을 이룬다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'결코'의 호응 필요조건은 '부정 서술어가 따라야 한다'이다. 올바른 호응 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나는 결코 거짓말을 한다."
+              },
+              {
+                "id": "B",
+                "text": "그녀는 결코 행복하다."
+              },
+              {
+                "id": "C",
+                "text": "우리는 결코 성공한다."
+              },
+              {
+                "id": "D",
+                "text": "그는 결코 포기하지 않는다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "외국의 외교관처럼 특별한 임무를 띤 사람은 우리 법의 영향을 받지 않을 수 있다. 이것은 법 적용의 예외이다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'외교관 면제 자격이 있으면(P) 주재국 법의 적용을 받지 않는다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "법의 적용을 받지 않으면 반드시 외교관이다."
+              },
+              {
+                "id": "B",
+                "text": "외교관 면제 자격이 있으면서 법의 적용을 받는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "법의 적용을 받으면 외교관이 아니다."
+              },
+              {
+                "id": "D",
+                "text": "외교관이 아니면 반드시 법의 적용을 받는다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "'아마'는 추측 표현과 짝을 이룬다. '아마 내일은 좋을 것이다'처럼 '~(으)ㄹ 것이다'와 함께 쓰인다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'아마'를 사용하면(P) 추측 표현이 따라야 한다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "추측 표현이 있으면 반드시 '아마'가 있다."
+              },
+              {
+                "id": "B",
+                "text": "'아마'를 사용하면서 추측 표현이 없는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "추측 표현이 없으면 '아마'를 사용한 것이다."
+              },
+              {
+                "id": "D",
+                "text": "'아마'와 추측 표현은 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "법을 어겨도 제재가 없으면 아무도 법을 지키려 하지 않는다. 그래서 법을 어긴 사람에게 벌을 주는 강제력이 필요하다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'법 위반에 대한 제재가 있으면 사람들이 법을 지키게 된다'의 충분조건 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "과속 단속 카메라를 설치했더니 속도 위반이 줄어든 경우"
+              },
+              {
+                "id": "B",
+                "text": "법이 있지만 단속이 없어 위반이 계속되는 경우"
+              },
+              {
+                "id": "C",
+                "text": "법 자체가 존재하지 않는 경우"
+              },
+              {
+                "id": "D",
+                "text": "제재 없이 홍보만 했더니 위반이 줄지 않은 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "호응 관계에서 '만약'은 추측이나 조건을 나타내는 서술어와 짝을 이룬다. '만약 비가 오면 우산을 가져가겠다'처럼 쓰인다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'만약'의 올바른 호응 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "만약 시간이 있으면 영화를 보겠다."
+              },
+              {
+                "id": "B",
+                "text": "만약 내일 눈이 오면 학교가 쉴 것이다."
+              },
+              {
+                "id": "C",
+                "text": "만약 그가 거짓말을 했다."
+              },
+              {
+                "id": "D",
+                "text": "만약 네가 온다면 같이 놀자."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "법은 만들어지기 전의 일에 적용될 수 없다. 이것이 법의 소급 금지 원칙이다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'법 시행 전에 일어난 행위이면(P) 새 법으로 처벌할 수 없다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "처벌할 수 없으므로 법 시행 전의 행위이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "법 시행 전의 행위이므로 처벌할 수 없다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "법 시행 후의 행위이므로 처벌할 수 없다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "호응이 맞지 않으면 문장이 어색하다. '고양이와 새가 하늘을 난다'에서 '고양이'와 '난다'의 짝이 맞지 않아 어색하다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'호응이 맞지 않으면(P) 문장이 어색하다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호응이 맞으므로 문장이 어색하지 않다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "문장이 어색하므로 호응이 맞지 않는 것이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "문장이 어색하지 않다면 호응이 맞는 것이다. (대우 — 타당)"
+              },
+              {
+                "id": "D",
+                "text": "B와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "법의 내용이 정의로울수록 사람들의 자발적 준수율이 높아진다. 제재의 강도가 높을수록 위반율이 낮아진다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'법의 정의로움'과 '자발적 준수율'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정의로운 법이면 모든 사람이 반드시 지킨다."
+              },
+              {
+                "id": "B",
+                "text": "법의 정의로움과 준수율 사이에 양의 상관관계가 있으나, 법에 대한 인식, 집행력 등 다른 요인도 작용한다."
+              },
+              {
+                "id": "C",
+                "text": "준수율이 높으면 법이 정의로운 것이다."
+              },
+              {
+                "id": "D",
+                "text": "정의로움과 준수율은 반비례한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "호응 관계를 잘 지키면 문장이 자연스러워지고, 호응을 무시하면 문장이 어색해진다. 글쓰기 연습량이 많을수록 호응 오류가 줄어드는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'글쓰기 연습량'과 '호응 오류 빈도'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "연습을 많이 하면 오류가 반드시 0이 된다."
+              },
+              {
+                "id": "B",
+                "text": "오류가 적으면 반드시 연습을 많이 한 것이다."
+              },
+              {
+                "id": "C",
+                "text": "연습량이 많을수록 오류가 줄어드는 음의 상관관계가 있으나, 문법 지식, 개인 차이 등 다른 변수도 작용한다."
+              },
+              {
+                "id": "D",
+                "text": "연습량과 오류는 관계가 없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "법의 힘은 사람과 장소에 따라 정해진다. 우리나라 사람은 외국에서도 우리 법을 따라야 하고, 외국인도 우리 땅에서는 우리 법을 지켜야 한다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '법의 적용 범위가 넓을수록 사회 질서가 잘 유지된다.' 이 가설을 반증하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "법 적용 범위가 넓은 나라에서 질서가 잘 유지되는 경우"
+              },
+              {
+                "id": "B",
+                "text": "법이 없는 사회에서 혼란이 발생한 경우"
+              },
+              {
+                "id": "C",
+                "text": "법 적용 범위가 좁은 나라에서 질서가 무너진 경우"
+              },
+              {
+                "id": "D",
+                "text": "법 적용 범위가 넓은데도 집행력 부족으로 질서가 무너진 경우"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "호응 관계를 잘 이해하고 확인하면 뜻이 분명하고 자연스러운 문장을 만들 수 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '호응 관계 교육을 받으면 학생의 글쓰기 실력이 향상된다.' 이 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학생들의 읽기 속도를 측정한다."
+              },
+              {
+                "id": "B",
+                "text": "호응 관계의 종류를 정리한다."
+              },
+              {
+                "id": "C",
+                "text": "한국어 문법 교과서의 페이지 수를 센다."
+              },
+              {
+                "id": "D",
+                "text": "호응 교육을 받은 학생과 받지 않은 학생의 글쓰기 오류를 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

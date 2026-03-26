@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 12장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "과학 실험은 궁금한 것을 직접 해 보아 확인하는 방법입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "실험이 의미 있으려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 목적 없이 해도 된다."
+              },
+              {
+                "id": "B",
+                "text": "실험 전에 무엇을 확인하고 싶은지 가설이 있어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "결과를 기록하지 않아도 된다."
+              },
+              {
+                "id": "D",
+                "text": "실험 없이도 모든 것을 알 수 있다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "실험에서 조건을 바꿔가며 비교하면 원인과 결과를 정확히 알 수 있습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "식물에 물을 주는 양만 다르게 하고 나머지 조건을 같게 하면 어떤 결과를 확인할 수 있을까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무것도 알 수 없다."
+              },
+              {
+                "id": "B",
+                "text": "햇빛의 영향을 알 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "흙의 종류 영향을 알 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "물의 양이 식물 성장에 미치는 영향을 알 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "가설이란 아직 증명되지 않았지만 참이라고 가정하는 생각입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'가설은 실험으로 확인해야 한다. 물을 많이 주면 식물이 잘 자란다는 가설이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실험 없이도 참이다."
+              },
+              {
+                "id": "B",
+                "text": "이 가설은 이미 증명되었다."
+              },
+              {
+                "id": "C",
+                "text": "이 가설은 실험으로 확인해야 한다."
+              },
+              {
+                "id": "D",
+                "text": "가설과 실험은 관계없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "실험 결과를 정확히 알려면 한 가지 조건만 바꾸고 나머지는 같게 유지해야 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'정확한 실험 결과를 얻으려면 통제 변인이 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "통제 변인은 불필요하다."
+              },
+              {
+                "id": "B",
+                "text": "모든 조건을 다 바꿔도 된다."
+              },
+              {
+                "id": "C",
+                "text": "통제 변인이 없으면 실험 결과를 신뢰할 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "한 조건만 같으면 된다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "관찰이란 사물이나 현상을 주의 깊게 자세히 살펴보는 것입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'실험하려면 관찰력이 필요하다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "관찰하지 않고 결과를 상상해서 적었다."
+              },
+              {
+                "id": "B",
+                "text": "식물의 변화를 매일 자세히 관찰하여 기록했더니 정확한 결론을 얻었다."
+              },
+              {
+                "id": "C",
+                "text": "관찰 없이도 정확한 실험이 되었다."
+              },
+              {
+                "id": "D",
+                "text": "한 번만 보고 결론을 내렸다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "실험을 반복하면 결과의 신뢰도가 높아집니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'실험을 반복하면 신뢰도가 올라간다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반복 실험을 했는데 신뢰도가 안 올라가는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "한 번만 해도 충분히 신뢰할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "반복과 신뢰도는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "반복하면 신뢰도가 떨어진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "결과란 어떤 원인으로 인해 생겨난 일의 결말입니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'정확한 관찰을 하면 좋은 실험 결과를 얻는다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "매일 식물 높이를 밀리미터 단위로 측정하여 정확한 성장 그래프를 그렸다."
+              },
+              {
+                "id": "B",
+                "text": "대충 눈으로만 보고 기록했더니 정확한 결과를 얻었다."
+              },
+              {
+                "id": "C",
+                "text": "관찰 없이 결과를 지어냈다."
+              },
+              {
+                "id": "D",
+                "text": "다른 사람의 데이터를 베꼈다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "과학적 방법은 가설 세우기, 실험하기, 결과 분석의 단계를 거칩니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'실험으로 가설이 틀렸다고 나오면 가설을 수정한다. 물을 안 줘도 식물이 잘 자랐다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가설이 맞다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "'물이 식물 성장에 꼭 필요하다'는 가설을 수정해야 한다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "실험 결과를 무시한다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "실험을 안 해도 된다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "온도가 높은 곳에서 식물이 빨리 자랐고, 낮은 곳에서는 천천히 자랐습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'온도'와 '식물 성장 속도'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "성장이 빠르면 온도가 반드시 높은 것이다."
+              },
+              {
+                "id": "B",
+                "text": "온도와 성장 속도는 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "온도가 높으면 성장이 반드시 멈춘다."
+              },
+              {
+                "id": "D",
+                "text": "온도가 높으면 성장이 빨라질 수 있지만, 물이나 햇빛 등 다른 요인도 영향을 준다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "과학 실험에서는 여러 조건 중 하나만 바꿔보며 원인을 찾습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'빛이 식물 성장에 영향을 준다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 식물을 밝은 곳과 어두운 곳에 두고 성장 차이를 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "식물의 색깔만 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "화분의 크기를 바꿔본다."
+              },
+              {
+                "id": "D",
+                "text": "물의 온도만 측정한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

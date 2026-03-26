@@ -78,7 +78,7 @@ function DiagnosticPrintPage() {
     setSelectedTest(test);
     try {
       const pdfFileId = await apiGet(`/v1/test-storage/${test.testId}/pdf`);
-      const token = localStorage.getItem(TOKEN_KEY);
+      const token = sessionStorage.getItem(TOKEN_KEY);
       const resp = await fetch(`${API_BASE}/v1/files/${pdfFileId}/download`, {
         headers: { Authorization: `Bearer ${token}` },
       });

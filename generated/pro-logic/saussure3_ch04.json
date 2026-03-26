@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 4장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "역지사지란 처지를 바꾸어 상대방의 입장에서 생각하는 것입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "역지사지를 실천하려면 어떤 전제가 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내 생각이 항상 옳아야 한다."
+              },
+              {
+                "id": "B",
+                "text": "상대방에게도 나와 다른 사정과 감정이 있다는 것을 인정해야 한다."
+              },
+              {
+                "id": "C",
+                "text": "상대방의 입장을 알 필요가 없어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "서로 절대 의견이 같아야 한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "내 눈에는 숫자 6으로 보이지만, 맞은편 친구의 관점에서는 9로 보일 수도 있습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "같은 숫자를 두고 서로 다르게 주장할 때, 역지사지를 실천하면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서로의 관점 차이를 이해하고 다투지 않게 된다."
+              },
+              {
+                "id": "B",
+                "text": "더 크게 싸운다."
+              },
+              {
+                "id": "C",
+                "text": "숫자가 사라진다."
+              },
+              {
+                "id": "D",
+                "text": "한쪽만 옳다고 결론짓는다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "존중이란 남의 생각이나 의견을 귀하게 여기는 것입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'역지사지를 실천하면 존중하게 된다. 민수는 역지사지를 실천한다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수는 남을 무시한다."
+              },
+              {
+                "id": "B",
+                "text": "존중과 역지사지는 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "민수는 역지사지를 실천하지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "민수는 상대방을 존중하게 된다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "친구와 다투었을 때는 서로의 입장을 바꿔서 생각해 봐야 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'갈등을 해결하려면 상대방의 입장을 이해해야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상대방의 입장을 이해하지 않으면 갈등 해결이 어렵다."
+              },
+              {
+                "id": "B",
+                "text": "이해하지 않아도 갈등이 해결된다."
+              },
+              {
+                "id": "C",
+                "text": "갈등과 이해는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "내 입장만 주장하면 갈등이 풀린다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "배려란 도와주거나 보살펴 주려는 마음입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'배려하려면 상대방의 사정을 먼저 알아야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사정을 몰라도 배려가 완벽하게 이루어졌다."
+              },
+              {
+                "id": "B",
+                "text": "친구 사정을 모른 채 자기 할 일만 했다."
+              },
+              {
+                "id": "C",
+                "text": "친구가 다리를 다쳐 걷기 힘든 것을 알고 짐을 들어주었다."
+              },
+              {
+                "id": "D",
+                "text": "친구에게 오히려 짐을 더 주었다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "사람마다 세상을 바라보는 관점은 모두 다릅니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'역지사지를 실천하면 배려의 마음이 자란다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "역지사지 없이도 배려심이 자란다."
+              },
+              {
+                "id": "B",
+                "text": "역지사지를 실천했는데 배려심이 안 자라는 경우는 없다."
+              },
+              {
+                "id": "C",
+                "text": "배려심이 자라면 역지사지를 한 것이다."
+              },
+              {
+                "id": "D",
+                "text": "역지사지와 배려는 관계없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "내가 만약 부모님이라면 밥을 안 먹는 자녀를 볼 때 얼마나 걱정이 될지 상상해 봅시다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'부모님 입장에서 생각하면 잔소리의 이유를 이해하게 된다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부모님이 되어보니 잔소리가 더 싫어졌다."
+              },
+              {
+                "id": "B",
+                "text": "부모님 입장을 무시했더니 잔소리 이유를 알게 되었다."
+              },
+              {
+                "id": "C",
+                "text": "역할 바꾸기를 했는데 아무 감정도 느끼지 못했다."
+              },
+              {
+                "id": "D",
+                "text": "아빠 역할을 해보니 잔소리가 사랑에서 나온 것임을 깨달았다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "친구 입장에서는 아끼는 장난감을 누가 함부로 만져서 속상했을 수도 있습니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'입장이 다르면 같은 상황을 다르게 느낀다. 나와 친구는 입장이 다르다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나와 친구는 항상 같이 느낀다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "같은 상황에서도 나와 친구는 다르게 느낄 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "입장이 달라도 느낌은 같다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "친구의 감정은 존재하지 않는다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "역지사지의 마음을 가지면 나와 다른 친구의 생각을 이해하고 존중하게 됩니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'역지사지 연습 횟수'와 '친구 간 다툼 횟수'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "역지사지를 하면 다툼이 반드시 사라진다."
+              },
+              {
+                "id": "B",
+                "text": "역지사지와 다툼은 전혀 관계없다."
+              },
+              {
+                "id": "C",
+                "text": "역지사지를 연습하면 다툼이 줄 수 있지만 다른 원인도 있을 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "다툼이 줄면 반드시 역지사지를 한 것이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "오늘 하루 친구의 신발을 신은 것처럼 친구의 마음이 되어 생각해 봅시다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'역지사지를 실천하면 갈등이 줄어든다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "역지사지 활동을 한 반과 안 한 반의 갈등 해결률을 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "학생들의 신발 크기를 측정한다."
+              },
+              {
+                "id": "C",
+                "text": "교실의 온도를 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "친구의 생일만 조사한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

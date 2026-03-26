@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게1 16장 논리사고력",
+  "targetLevel": "frege1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "시는 불필요한 설명이나 꾸밈을 생략하고 단 몇 줄로 강한 느낌을 전달합니다. 시인은 짧은 언어 속에 삶의 깊은 의미를 담아냅니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'시는 짧은 언어로 깊은 의미를 전달한다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 글은 짧아야 한다"
+              },
+              {
+                "id": "B",
+                "text": "시는 길수록 좋다"
+              },
+              {
+                "id": "C",
+                "text": "짧은 표현이 긴 설명보다 더 강한 인상을 줄 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "시에는 의미가 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "'반딧불' 시에서 '그믐밤 반딧불은 부서진 달조각'이라고 표현합니다. 반딧불을 하늘에서 떨어진 달조각에 비유한 것입니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'반딧불을 달조각에 비유했다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반딧불은 빛나지 않는다"
+              },
+              {
+                "id": "B",
+                "text": "반딧불은 실제로 달의 조각이다"
+              },
+              {
+                "id": "C",
+                "text": "달은 부서질 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "반딧불과 달조각은 둘 다 어둠 속에서 빛난다는 공통점이 있다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "함축적 의미란 시인이 짧은 시어 속에 겉으로 드러나지 않는 깊은 뜻을 담아놓는 것입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "시에서 '별'이라는 단어가 단순히 밤하늘의 별이 아니라 '희망'을 뜻한다면, 독자에게 어떤 효과가 있을까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독자가 여러 겹의 의미를 발견하며 깊이 생각하게 된다"
+              },
+              {
+                "id": "B",
+                "text": "시가 더 단순해진다"
+              },
+              {
+                "id": "C",
+                "text": "독자가 혼란스러워 시를 읽지 않게 된다"
+              },
+              {
+                "id": "D",
+                "text": "시의 의미가 사라진다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "'가자 가자 가자 숲으로 가자'처럼 같은 말을 반복하면 운율이 생기고 리듬감이 느껴집니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "시에서 반복을 사용하면 예상되는 효과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시가 지루해진다"
+              },
+              {
+                "id": "B",
+                "text": "시의 의미가 줄어든다"
+              },
+              {
+                "id": "C",
+                "text": "노래처럼 리듬감이 생기고, 시인의 마음이 더 강조된다"
+              },
+              {
+                "id": "D",
+                "text": "독자가 시를 빨리 읽게 된다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "비유는 대상을 다른 것에 빗대어 표현하는 방법입니다. '반딧불은 부서진 달조각'은 비유 표현입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 비유는 대상을 다른 것에 빗대어 표현한다. 소전제: '반딧불은 부서진 달조각'은 반딧불을 달조각에 빗대었다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비유와 빗댐은 다르다"
+              },
+              {
+                "id": "B",
+                "text": "이 표현은 사실이다"
+              },
+              {
+                "id": "C",
+                "text": "이 표현은 비유이다"
+              },
+              {
+                "id": "D",
+                "text": "반딧불은 달조각이 아니므로 틀린 표현이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "운율이 있는 시는 읽을 때 음악처럼 리듬감이 느껴집니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 같은 구절의 반복은 운율을 만든다. 소전제: '가자 가자 가자'는 같은 구절의 반복이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'가자 가자 가자'는 운율을 만든다"
+              },
+              {
+                "id": "B",
+                "text": "'가자 가자 가자'에는 운율이 없다"
+              },
+              {
+                "id": "C",
+                "text": "반복과 운율은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "운율은 반복 없이만 생긴다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "시의 깊은 의미를 이해하려면 함축적 표현을 해석하는 능력이 필요합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'시 이해를 위해 함축 해석이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "함축을 해석하면 시를 반드시 이해한다"
+              },
+              {
+                "id": "B",
+                "text": "함축을 해석하지 못하면 시를 깊이 이해할 수 없다"
+              },
+              {
+                "id": "C",
+                "text": "함축과 시 이해는 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "시의 의미는 표면적인 것만으로 충분하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "시의 아름다움을 느끼려면 운율을 감상하는 능력이 필요합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'시의 아름다움을 위해 운율 감상이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "운율을 감상하면 시가 반드시 아름답다"
+              },
+              {
+                "id": "B",
+                "text": "운율 없이도 시는 아름답다"
+              },
+              {
+                "id": "C",
+                "text": "운율과 아름다움은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "운율을 감상하지 못하면 시의 아름다움을 느낄 수 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "시에서 '별'이 '희망'을 뜻하거나, '바다'가 '자유'를 뜻하는 것처럼, 시어에는 숨겨진 의미가 있습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'함축적 의미 파악을 위해 시어 분석이 필요하다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시의 글자 수만 세기"
+              },
+              {
+                "id": "B",
+                "text": "'반딧불=달조각'이라는 비유에서 '어둠 속 빛'이라는 숨겨진 의미를 찾기"
+              },
+              {
+                "id": "C",
+                "text": "시인의 이름만 외우기"
+              },
+              {
+                "id": "D",
+                "text": "시를 읽지 않고 제목만 보기"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "시의 운율을 감상하려면 소리 내어 읽어보는 것이 좋습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'운율 감상을 위해 소리 내어 읽기가 필요하다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시를 소리 내어 낭독하며 리듬감을 느끼기"
+              },
+              {
+                "id": "B",
+                "text": "시를 눈으로만 빠르게 훑어보기"
+              },
+              {
+                "id": "C",
+                "text": "반복되는 구절을 노래하듯 읽어보기"
+              },
+              {
+                "id": "D",
+                "text": "시를 친구와 함께 번갈아 읽어보기"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "비유를 사용하면 대상을 더 생생하고 인상 깊게 표현할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'비유를 사용하면(P) 표현이 생생해진다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "표현이 생생해지지 않았다면 비유를 사용하지 않은 것이다"
+              },
+              {
+                "id": "B",
+                "text": "비유를 사용하면서 표현이 생생해지지 않는 경우는 없다"
+              },
+              {
+                "id": "C",
+                "text": "표현이 생생하면 비유를 사용한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "비유와 생생함은 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "시에서 생략을 과도하게 하면 독자가 의미를 파악하기 어려워집니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'과도한 생략을 하면(P) 의미 파악이 어려워진다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "생략과 의미는 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "과도한 생략을 하지 않으면 의미 파악이 쉽다"
+              },
+              {
+                "id": "C",
+                "text": "의미 파악이 어려우면 생략을 한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "의미 파악이 어렵지 않다면 과도한 생략을 하지 않은 것이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "'그믐밤 반딧불은 부서진 달조각'이라는 비유로 어둠 속 반딧불의 아름다움이 선명하게 그려집니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'비유를 사용하면 이미지가 선명해진다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비유 없이 설명만 했다"
+              },
+              {
+                "id": "B",
+                "text": "'반딧불이 빛난다'라고만 사실적으로 적었다"
+              },
+              {
+                "id": "C",
+                "text": "반딧불을 '달조각'에 비유하여 어둠 속 작은 빛의 아름다움을 표현했다"
+              },
+              {
+                "id": "D",
+                "text": "반딧불에 대한 과학적 정보를 나열했다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "'가자 가자 가자 숲으로 가자'의 반복이 신나는 분위기와 설렘을 만들어냅니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'반복을 사용하면 분위기가 강화된다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'가자'를 세 번 반복하여 숲으로 가고 싶은 설렘과 기대감이 커졌다"
+              },
+              {
+                "id": "B",
+                "text": "한 번만 '가자'라고 써서 평범하게 느껴졌다"
+              },
+              {
+                "id": "C",
+                "text": "반복을 사용하지 않아 리듬감이 없었다"
+              },
+              {
+                "id": "D",
+                "text": "서로 다른 단어를 나열하여 혼란스러웠다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'함축적 표현을 사용하면(P) 시에 깊은 의미가 담긴다(Q)'가 참이고, 이 시에 함축적 표현이 사용되었습니다(P).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "깊은 의미와 함축은 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "깊은 의미가 있으므로 함축적 표현을 사용했다 (후건 긍정)"
+              },
+              {
+                "id": "C",
+                "text": "함축적 표현을 사용하지 않았으므로 의미가 없다 (전건 부정)"
+              },
+              {
+                "id": "D",
+                "text": "이 시에 깊은 의미가 담겨 있다 (전건 긍정)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'운율이 있으면(P) 시가 음악적으로 느껴진다(Q)'가 참이고, 시가 음악적으로 느껴지지 않습니다(~Q).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "운율이 없는 것이다 (대우)"
+              },
+              {
+                "id": "B",
+                "text": "운율이 있는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "운율과 음악적 느낌은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "운율이 없어도 음악적이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "시를 자주 읽는 학생일수록 비유적 표현을 잘 이해한다는 조사가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'시 읽기 빈도'와 '비유 이해력'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시를 읽으면 비유를 반드시 잘 이해한다"
+              },
+              {
+                "id": "B",
+                "text": "둘 사이에 상관관계가 있으나, 언어 능력이나 독서 습관 등 다른 요인도 영향을 미친다"
+              },
+              {
+                "id": "C",
+                "text": "비유를 잘 이해해서 시를 읽는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 아무 관계가 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "'반딧불' 시를 낭독한 후 학생들이 자연의 아름다움에 대한 감수성이 높아졌습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'시 낭독'과 '감수성 향상'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "낭독만 하면 감수성이 반드시 높아진다"
+              },
+              {
+                "id": "B",
+                "text": "감수성이 높아서 낭독을 한 것이다"
+              },
+              {
+                "id": "C",
+                "text": "낭독이 감수성에 기여했지만, 토론이나 자연 체험 등 다른 활동도 영향을 미쳤을 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'시를 소리 내어 읽으면 운율을 더 잘 느낀다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "운율과 관계없는 질문만 한다"
+              },
+              {
+                "id": "B",
+                "text": "모든 학생에게 눈으로만 읽게 한다"
+              },
+              {
+                "id": "C",
+                "text": "시의 내용만 분석한다"
+              },
+              {
+                "id": "D",
+                "text": "소리 내어 읽은 그룹과 눈으로만 읽은 그룹의 운율 인식도를 비교한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'비유 표현은 항상 시를 더 아름답게 만든다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "억지스러운 비유를 사용하여 오히려 시의 의미가 혼란스러워졌다"
+              },
+              {
+                "id": "B",
+                "text": "적절한 비유로 시가 더 아름다워졌다"
+              },
+              {
+                "id": "C",
+                "text": "비유 없이 쓴 시보다 비유가 있는 시가 더 좋았다"
+              },
+              {
+                "id": "D",
+                "text": "비유가 시의 핵심 기법이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

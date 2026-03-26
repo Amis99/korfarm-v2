@@ -348,6 +348,68 @@
   }
 }
 
+@media (max-width: 768px) {
+  .admin-detail-wrap {
+    padding: 20px 12px 40px;
+  }
+
+  .admin-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .admin-detail-header h1 {
+    font-size: 22px;
+  }
+
+  .admin-detail-card {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .admin-detail-toolbar {
+    gap: 8px;
+  }
+
+  .admin-detail-search {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .admin-detail-filters {
+    width: 100%;
+  }
+
+  .admin-detail-actions {
+    width: 100%;
+  }
+
+  .admin-detail-btn {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .admin-modal {
+    padding: 20px 16px;
+  }
+
+  .admin-modal-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .admin-tabs {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .admin-tab {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
 /* Modal overlay */
 .admin-modal-overlay {
   position: fixed;
@@ -366,7 +428,7 @@
   border-radius: 12px;
   padding: 28px;
   width: 100%;
-  max-width: 480px;
+  max-width: min(90vw, 480px);
   max-height: 80vh;
   overflow-y: auto;
   color: var(--admin-ink, #f3f6f1);
@@ -812,7 +874,7 @@
 }
 
 .admin-batch-table thead tr {
-  border-bottom: 1px solid var(--admin-border, #e2e8f0);
+  border-bottom: 1px solid var(--admin-border, rgba(255,255,255,0.10));
 }
 
 .admin-batch-table th {
@@ -831,7 +893,7 @@
 }
 
 .admin-batch-table tbody tr {
-  border-bottom: 1px solid var(--admin-border, #f1f5f9);
+  border-bottom: 1px solid var(--admin-border, rgba(255,255,255,0.06));
 }
 
 .admin-batch-table td {
@@ -864,7 +926,7 @@
 }
 
 .admin-batch-result-table thead tr {
-  border-bottom: 2px solid var(--admin-border, #e2e8f0);
+  border-bottom: 2px solid var(--admin-border, rgba(255,255,255,0.10));
 }
 
 .admin-batch-result-table th {
@@ -873,7 +935,7 @@
 }
 
 .admin-batch-result-table tbody tr {
-  border-bottom: 1px solid var(--admin-border, #f1f5f9);
+  border-bottom: 1px solid var(--admin-border, rgba(255,255,255,0.06));
 }
 
 .admin-batch-result-table td {
@@ -882,7 +944,7 @@
 
 .admin-batch-result-table td.error-text {
   font-size: 11px;
-  color: #b91c1c;
+  color: #f87171;
 }
 
 .admin-batch-status-pill {
@@ -893,13 +955,13 @@
 }
 
 .admin-batch-status-pill.success {
-  background: #dcfce7;
-  color: #166534;
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
 }
 
 .admin-batch-status-pill.fail {
-  background: #fde2e2;
-  color: #b91c1c;
+  background: rgba(239,68,68,0.15);
+  color: #f87171;
 }
 
 .admin-batch-preview-btn {

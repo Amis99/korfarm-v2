@@ -1,0 +1,453 @@
+// Day 4: 문학 (LITERATURE) - 현대 수필 '할머니의 텃밭'
+// 중1~중2 수준, 3문단, 1100자 ±50
+
+const fs = require('fs');
+const path = require('path');
+
+const p1 = '할머니 댁 마당에는 작은 텃밭이 있었다. 상추, 고추, 토마토 같은 채소가 계절마다 빼곡히 자랐고, 그 사이로 봉숭아와 채송화가 곱게 피어 있었다. 어린 시절 나는 방학만 되면 할머니 댁으로 달려가 그 텃밭에서 하루를 보냈다. 할머니는 이른 아침부터 밀짚모자를 쓰고 호미를 들고 밭으로 나가셨다. 풀을 뽑고, 물을 주고, 벌레를 잡으시는 할머니의 손놀림은 한결같이 느리고 정성스러웠다. 나는 할머니 곁에 쪼그려 앉아 흙 속에서 지렁이를 찾거나, 잘 익은 방울토마토를 따 먹으며 놀았다. 해질 무렵이면 할머니가 마루에 수박을 잘라 놓으시고, 우리는 나란히 앉아 별이 뜨는 하늘을 바라보았다. 그때는 몰랐다. 그 소박한 시간이 내 삶에서 가장 평화로운 순간이었다는 것을.';
+const p2 = '중학교에 올라가면서 나는 점점 할머니 댁을 찾지 않게 되었다. 시험 공부를 해야 한다는 핑계, 친구들과 놀아야 한다는 핑계가 겹겹이 쌓였다. 할머니는 전화를 걸어 오실 때마다 텃밭 이야기를 하셨다. 올해 토마토가 유난히 크게 열렸다는 말, 상추가 너무 많이 자라서 이웃에 나누어 주었다는 말. 나는 그 이야기를 건성으로 들으며 빨리 전화를 끊고 싶어 했다. 할머니의 목소리에 담긴 외로움을 알아채지 못한 채. 그러다 어느 날 어머니에게서 할머니가 편찮으시다는 소식을 들었다. 서둘러 찾아간 할머니 댁의 텃밭은 예전과 달랐다. 풀이 무성하게 자라 채소를 덮었고, 탐스럽던 토마토 넝쿨은 시들어 땅에 늘어져 있었다. 할머니는 병실 침대에 누운 채 나를 보시며 희미하게 웃으셨다.';
+const p3 = '할머니가 돌아가신 뒤, 나는 한동안 텃밭을 바라만 보았다. 황폐해진 땅을 보며 죄책감이 밀려왔다. 할머니가 왜 그토록 텃밭을 가꾸셨는지 그제야 어렴풋이 알 것 같았다. 씨앗을 심고, 싹이 트는 것을 지켜보고, 열매를 거두는 일련의 과정은 할머니에게 단순한 농사가 아니었다. 그것은 매일을 정성껏 살아가는 할머니만의 방식이었고, 사랑하는 가족에게 건네는 말 없는 선물이었다. 나는 호미를 집어 들었다. 무성한 풀을 뽑고, 굳어진 흙을 파헤치고, 새 씨앗을 심었다. 흙을 만지는 손끝에서 할머니의 온기가 느껴지는 듯했다. 봄이 되면 이 텃밭에 다시 상추와 토마토가 자라날 것이다. 그때 나는 할머니처럼 이웃에게 채소를 나누어 줄 것이다. 텃밭을 가꾸는 일, 그것은 할머니가 내게 남겨 주신 가장 소중한 유산이다.';
+
+const totalLen = p1.length + p2.length + p3.length;
+console.log('총 길이:', totalLen);
+
+// 문장 분리 함수
+function splitSentences(text) {
+  const result = [];
+  let start = 0;
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === '.' && (i + 1 >= text.length || text[i+1] === ' ')) {
+      result.push([start, i + 1]);
+      start = i + 2;
+    }
+  }
+  if (start < text.length) result.push([start, text.length]);
+  return result;
+}
+
+const p1s = splitSentences(p1);
+const p2s = splitSentences(p2);
+const p3s = splitSentences(p3);
+
+const scoring = { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true };
+
+// 정독 질문 수동 작성
+const questions = [
+  // p1 문장들 (9문장, 8~9 합침 => 8질문 + 1중심 = 9)
+  { prompt: "글쓴이가 어린 시절 기억하는 할머니 댁의 특징으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "마당에 작은 텃밭이 있었다고 기억한다." },
+      { id: "B", text: "마당에 커다란 연못이 있었다고 기억한다." },
+      { id: "C", text: "마당에 놀이터가 있었다고 기억한다." },
+      { id: "D", text: "마당에 자동차를 세우는 공간이 있었다고 기억한다." }
+    ], answerId: "A" },
+  { prompt: "텃밭에서 자라고 있던 것들로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "채소와 함께 봉숭아, 채송화 같은 꽃도 피어 있었다." },
+      { id: "B", text: "채소만 빼곡히 자라고 있었고 꽃은 전혀 없었다." },
+      { id: "C", text: "꽃만 피어 있었고 채소는 기르지 않았다." },
+      { id: "D", text: "과일나무가 줄지어 심어져 있었다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 할머니 댁을 찾던 시기로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "방학이 되면 달려가서 텃밭에서 하루를 보냈다." },
+      { id: "B", text: "매일 학교가 끝나면 찾아가 숙제를 했다." },
+      { id: "C", text: "주말마다 부모님과 함께 방문했다." },
+      { id: "D", text: "명절에만 온 가족이 모여서 갔다." }
+    ], answerId: "A" },
+  { prompt: "할머니의 아침 일과로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "이른 아침부터 밀짚모자를 쓰고 밭으로 나가셨다." },
+      { id: "B", text: "아침에 시장에 가서 채소를 사 오셨다." },
+      { id: "C", text: "아침마다 동네를 산책하며 이웃을 만나셨다." },
+      { id: "D", text: "아침에 일찍 일어나 텔레비전을 보셨다." }
+    ], answerId: "A" },
+  { prompt: "할머니의 텃밭 가꾸기에 대한 설명으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "느리지만 한결같이 정성을 다하는 손놀림이었다." },
+      { id: "B", text: "빠르고 능숙하게 일을 마치시는 편이었다." },
+      { id: "C", text: "가끔씩만 밭에 나가서 대충 일을 하셨다." },
+      { id: "D", text: "이웃의 도움을 받아 함께 농사를 지으셨다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 텃밭에서 한 일로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "흙에서 지렁이를 찾고 방울토마토를 따 먹으며 놀았다." },
+      { id: "B", text: "할머니를 도와 풀을 뽑고 물을 주었다." },
+      { id: "C", text: "혼자서 밭에 새 씨앗을 심으며 시간을 보냈다." },
+      { id: "D", text: "텃밭 옆에서 친구들과 축구를 하며 놀았다." }
+    ], answerId: "A" },
+  { prompt: "저녁 무렵 할머니와 글쓴이가 함께 한 일로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "마루에서 수박을 먹으며 별이 뜨는 하늘을 바라보았다." },
+      { id: "B", text: "마루에서 저녁 식사를 준비하며 이야기를 나누었다." },
+      { id: "C", text: "마당에서 불꽃놀이를 하며 여름밤을 즐겼다." },
+      { id: "D", text: "방에 들어가 일찍 잠자리에 들었다." }
+    ], answerId: "A" },
+  // p1 문장 8~9 합침
+  { prompt: "글쓴이가 뒤늦게 깨달은 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "그 소박한 시간이 삶에서 가장 평화로운 순간이었다는 것이다." },
+      { id: "B", text: "할머니의 텃밭이 동네에서 가장 넓었다는 것이다." },
+      { id: "C", text: "방울토마토가 시장에서 파는 것보다 맛있었다는 것이다." },
+      { id: "D", text: "할머니가 밭일을 힘들어하셨다는 것이다." }
+    ], answerId: "A" },
+  // p1 중심내용
+  { prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "어린 시절 할머니 텃밭에서 보낸 평화롭고 소박한 시간에 대한 추억이다." },
+      { id: "B", text: "할머니가 텃밭에서 채소를 기르는 구체적인 농사 방법이다." },
+      { id: "C", text: "글쓴이가 시골 생활을 좋아하게 된 까닭이다." },
+      { id: "D", text: "봉숭아와 채송화가 피어나는 계절의 아름다운 풍경이다." }
+    ], answerId: "A" },
+
+  // p2 문장들 (10문장 + 1중심 = 11)
+  { prompt: "중학교에 올라간 뒤 글쓴이에게 나타난 변화로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "점점 할머니 댁을 찾지 않게 되었다." },
+      { id: "B", text: "방학마다 더 자주 할머니 댁을 찾게 되었다." },
+      { id: "C", text: "할머니를 집으로 모셔 와서 함께 살았다." },
+      { id: "D", text: "할머니와 매일 전화 통화를 하게 되었다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 할머니 댁을 찾지 못한 이유로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "시험 공부와 친구들과의 만남을 핑계로 삼았다." },
+      { id: "B", text: "할머니 댁이 너무 멀어서 교통편이 없었다." },
+      { id: "C", text: "부모님이 할머니 댁 방문을 허락하지 않았다." },
+      { id: "D", text: "글쓴이가 심한 병에 걸려 외출이 어려웠다." }
+    ], answerId: "A" },
+  { prompt: "할머니가 전화를 걸어 올 때마다 하신 이야기로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "텃밭에서 자라는 채소 이야기를 하셨다." },
+      { id: "B", text: "건강이 안 좋다는 이야기를 하셨다." },
+      { id: "C", text: "빨리 공부를 마치고 놀러 오라고 하셨다." },
+      { id: "D", text: "이웃에 사는 친구 이야기를 전해 주셨다." }
+    ], answerId: "A" },
+  { prompt: "할머니가 전한 텃밭 소식으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "토마토가 크게 열리고 상추가 많이 자라 이웃에 나누어 주었다는 것이다." },
+      { id: "B", text: "올해는 비가 많이 와서 채소가 잘 자라지 않았다는 것이다." },
+      { id: "C", text: "텃밭을 없애고 꽃밭으로 바꾸었다는 것이다." },
+      { id: "D", text: "이웃이 와서 텃밭을 함께 가꾸기 시작했다는 것이다." }
+    ], answerId: "A" },
+  { prompt: "할머니의 전화에 대한 글쓴이의 태도로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "건성으로 듣고 빨리 전화를 끊고 싶어 했다." },
+      { id: "B", text: "할머니의 이야기에 귀를 기울이며 맞장구를 쳤다." },
+      { id: "C", text: "할머니께 텃밭 가꾸는 방법을 물어보았다." },
+      { id: "D", text: "전화를 받지 않고 문자로만 답장을 보냈다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 당시 알아채지 못한 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "할머니의 목소리에 담겨 있던 외로움이다." },
+      { id: "B", text: "할머니가 텃밭을 더 넓히고 싶어 하셨다는 것이다." },
+      { id: "C", text: "할머니가 다른 가족에게도 전화를 하셨다는 것이다." },
+      { id: "D", text: "할머니가 이웃과 다투셨다는 것이다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 갑자기 들은 소식으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "어머니에게서 할머니가 편찮으시다는 소식을 들었다." },
+      { id: "B", text: "할머니가 다른 도시로 이사를 가셨다는 소식을 들었다." },
+      { id: "C", text: "할머니 댁 텃밭에 새 꽃이 피었다는 소식을 들었다." },
+      { id: "D", text: "할머니가 상을 받으셨다는 기쁜 소식을 들었다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 서둘러 찾아간 텃밭의 모습으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "예전과 달리 변해 있었다." },
+      { id: "B", text: "예전보다 더 아름답게 꾸며져 있었다." },
+      { id: "C", text: "이웃이 대신 가꾸어 주어 잘 정돈되어 있었다." },
+      { id: "D", text: "새로운 채소가 가득 심어져 있었다." }
+    ], answerId: "A" },
+  { prompt: "텃밭이 변한 구체적인 모습으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "풀이 채소를 덮고 토마토 넝쿨이 시들어 늘어져 있었다." },
+      { id: "B", text: "채소는 잘 자랐지만 꽃만 시들어 있었다." },
+      { id: "C", text: "텃밭이 콘크리트로 덮여 사라져 있었다." },
+      { id: "D", text: "비가 많이 와서 물에 잠겨 있었다." }
+    ], answerId: "A" },
+  { prompt: "병실에서 할머니가 보인 반응으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "글쓴이를 보시고 희미하게 웃으셨다." },
+      { id: "B", text: "글쓴이를 보시고 크게 울으셨다." },
+      { id: "C", text: "글쓴이를 알아보지 못하고 눈을 감으셨다." },
+      { id: "D", text: "텃밭 이야기를 다시 시작하셨다." }
+    ], answerId: "A" },
+  // p2 중심내용
+  { prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "성장하며 할머니를 소홀히 한 글쓴이가 할머니의 병환 소식에 달려가 황폐해진 텃밭을 마주한다." },
+      { id: "B", text: "글쓴이가 중학생이 되어 시험 공부에 열중하는 모습이다." },
+      { id: "C", text: "할머니가 이웃에게 채소를 나누어 주며 즐거운 나날을 보내신다." },
+      { id: "D", text: "글쓴이가 어머니와 함께 할머니 댁을 자주 방문하게 된다." }
+    ], answerId: "A" },
+
+  // p3 문장들 (11문장 + 1중심 = 12)
+  { prompt: "할머니가 돌아가신 뒤 글쓴이가 한 행동으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "한동안 텃밭을 바라만 보고 있었다." },
+      { id: "B", text: "곧바로 텃밭을 정리하고 새 씨앗을 심었다." },
+      { id: "C", text: "할머니 댁을 팔고 다른 곳으로 이사했다." },
+      { id: "D", text: "이웃에게 텃밭을 대신 가꾸어 달라고 부탁했다." }
+    ], answerId: "A" },
+  { prompt: "황폐해진 텃밭을 보며 글쓴이가 느낀 감정으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "죄책감이 밀려왔다." },
+      { id: "B", text: "안도감이 느껴졌다." },
+      { id: "C", text: "분노가 치밀어 올랐다." },
+      { id: "D", text: "아무런 감정도 느끼지 못했다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 뒤늦게 이해하게 된 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "할머니가 왜 그토록 텃밭을 가꾸셨는지 어렴풋이 알게 되었다." },
+      { id: "B", text: "할머니가 텃밭을 가꾸신 이유가 돈을 벌기 위해서였음을 알았다." },
+      { id: "C", text: "할머니가 텃밭 가꾸기를 싫어하셨다는 사실을 알게 되었다." },
+      { id: "D", text: "할머니가 이웃의 부탁으로 어쩔 수 없이 농사를 지으셨음을 알았다." }
+    ], answerId: "A" },
+  { prompt: "텃밭 가꾸기가 할머니에게 어떤 의미였는지 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "단순한 농사가 아니라 그 이상의 의미가 있는 일이었다." },
+      { id: "B", text: "건강을 위한 운동의 일종이었다." },
+      { id: "C", text: "이웃과 경쟁하기 위한 취미 활동이었다." },
+      { id: "D", text: "손주에게 농사 기술을 가르치기 위한 수업이었다." }
+    ], answerId: "A" },
+  { prompt: "할머니의 텃밭 가꾸기가 지닌 깊은 뜻으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "정성껏 살아가는 삶의 방식이자 가족에게 건네는 말 없는 선물이었다." },
+      { id: "B", text: "돈을 아끼기 위해 직접 채소를 길러 먹는 절약의 방식이었다." },
+      { id: "C", text: "외로움을 달래기 위해 혼자 시간을 보내는 방법이었다." },
+      { id: "D", text: "동네 사람들에게 인정을 받기 위한 활동이었다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 호미를 집어 든 행동이 의미하는 바로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "할머니의 뜻을 이어 텃밭을 다시 가꾸기로 결심한 것이다." },
+      { id: "B", text: "텃밭의 흙을 파서 다른 용도로 사용하려는 것이다." },
+      { id: "C", text: "호미를 기념품으로 보관하려는 것이다." },
+      { id: "D", text: "텃밭을 완전히 정리하고 없애려는 것이다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 텃밭에서 구체적으로 한 일로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "풀을 뽑고 흙을 파헤쳐 새 씨앗을 심었다." },
+      { id: "B", text: "텃밭에 울타리를 세우고 간판을 달았다." },
+      { id: "C", text: "이웃을 불러 함께 텃밭을 정리했다." },
+      { id: "D", text: "풀만 뽑고 씨앗은 심지 않았다." }
+    ], answerId: "A" },
+  { prompt: "흙을 만지며 글쓴이가 느낀 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "할머니의 온기가 느껴지는 듯했다." },
+      { id: "B", text: "흙이 차갑고 낯설게 느껴졌다." },
+      { id: "C", text: "밭일이 너무 힘들어서 포기하고 싶었다." },
+      { id: "D", text: "지렁이가 무서워서 손을 거두었다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 봄에 기대하는 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "텃밭에 다시 상추와 토마토가 자라나는 것이다." },
+      { id: "B", text: "할머니가 다시 돌아오시는 것이다." },
+      { id: "C", text: "텃밭을 팔아서 새 집을 짓는 것이다." },
+      { id: "D", text: "친구들이 텃밭에 놀러 오는 것이다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 할머니처럼 하겠다고 다짐한 일로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "이웃에게 채소를 나누어 주는 것이다." },
+      { id: "B", text: "밀짚모자를 쓰고 농사를 짓는 것이다." },
+      { id: "C", text: "매일 전화를 걸어 안부를 묻는 것이다." },
+      { id: "D", text: "마루에서 수박을 잘라 별을 바라보는 것이다." }
+    ], answerId: "A" },
+  { prompt: "글쓴이가 텃밭을 가꾸는 일을 무엇이라고 표현했는지 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "할머니가 남겨 주신 가장 소중한 유산이라고 했다." },
+      { id: "B", text: "자신의 새로운 취미라고 했다." },
+      { id: "C", text: "힘들지만 해야 하는 의무라고 했다." },
+      { id: "D", text: "돈을 벌 수 있는 좋은 기회라고 했다." }
+    ], answerId: "A" },
+  // p3 중심내용
+  { prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "할머니를 잃은 뒤 텃밭의 참된 의미를 깨닫고 직접 가꾸기로 결심하는 것이다." },
+      { id: "B", text: "할머니가 생전에 텃밭을 가꾸시던 구체적인 방법을 설명하는 것이다." },
+      { id: "C", text: "글쓴이가 이웃들과 함께 대규모 농장을 운영하기로 한 것이다." },
+      { id: "D", text: "텃밭에서 자라는 상추와 토마토의 재배 과정을 소개하는 것이다." }
+    ], answerId: "A" },
+];
+
+// 타임라인 빌드
+const timelineFinal = [];
+let stepNum = 1;
+
+function buildTimeline(pId, sentences, text, startQIdx) {
+  let qIdx = startQIdx;
+  for (let i = 0; i < sentences.length; i++) {
+    const [s, e] = sentences[i];
+    // p1의 8~9번 문장(index 7, 8) 합침
+    if (pId === 'p1' && i === 7) {
+      const endOfNext = sentences[i + 1][1];
+      timelineFinal.push({
+        stepId: `s${stepNum++}`,
+        highlight: { ranges: [{ paragraphId: pId, start: s, end: endOfNext }] },
+        question: { ...questions[qIdx++], scoring }
+      });
+      i++;
+      continue;
+    }
+    timelineFinal.push({
+      stepId: `s${stepNum++}`,
+      highlight: { ranges: [{ paragraphId: pId, start: s, end: e }] },
+      question: { ...questions[qIdx++], scoring }
+    });
+  }
+  // 중심내용
+  timelineFinal.push({
+    stepId: `s${stepNum++}`,
+    highlight: { ranges: [{ paragraphId: pId, start: 0, end: text.length }] },
+    question: { ...questions[qIdx++], scoring }
+  });
+  return qIdx;
+}
+
+let qIdx = 0;
+qIdx = buildTimeline('p1', p1s, p1, qIdx);
+qIdx = buildTimeline('p2', p2s, p2, qIdx);
+qIdx = buildTimeline('p3', p3s, p3, qIdx);
+
+console.log('타임라인 스텝:', timelineFinal.length);
+console.log('사용된 질문:', qIdx);
+
+// recall 8카드
+const recall = {
+  cards: [
+    { id: "c1", text: "할머니 댁 마당 텃밭에서 채소와 꽃이 함께 자라고 있었다." },
+    { id: "c2", text: "어린 시절 방학이면 할머니 곁에서 텃밭 놀이를 하며 평화로운 시간을 보냈다." },
+    { id: "c3", text: "중학교에 올라간 뒤 핑계를 대며 할머니 댁을 점점 찾지 않게 되었다." },
+    { id: "c4", text: "할머니는 전화를 걸어 텃밭 이야기를 하셨지만 글쓴이는 건성으로 들었다." },
+    { id: "c5", text: "할머니 병환 소식에 찾아가니 텃밭이 황폐해져 있었다." },
+    { id: "c6", text: "할머니가 돌아가신 뒤 텃밭을 보며 죄책감과 깨달음이 찾아왔다." },
+    { id: "c7", text: "텃밭 가꾸기는 할머니의 삶의 방식이자 가족에게 건네는 선물이었다." },
+    { id: "c8", text: "글쓴이는 호미를 들고 텃밭을 다시 가꾸며 할머니의 유산을 이어 간다." }
+  ],
+  correctOrder: ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
+  seedPenalty: 1
+};
+
+// confirm 7문항
+function findRange(pId, text, keyword) {
+  const idx = text.indexOf(keyword);
+  if (idx === -1) throw new Error(`keyword not found: "${keyword}" in ${pId}`);
+  return { paragraphId: pId, start: idx, end: idx + keyword.length };
+}
+
+const confirmQuestions = [
+  {
+    id: "q1",
+    prompt: "글쓴이가 할머니 곁에서 따 먹으며 놀았다고 한 채소는 무엇인가요?",
+    answerText: "방울토마토",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", p1, "방울토마토")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q2",
+    prompt: "할머니가 이른 아침 밭으로 나가실 때 쓰신 모자의 종류는 무엇인가요?",
+    answerText: "밀짚모자",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", p1, "밀짚모자")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q3",
+    prompt: "글쓴이가 할머니 전화를 대하는 태도를 나타낸 말은 무엇인가요?",
+    answerText: "건성으로",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", p2, "건성으로")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q4",
+    prompt: "글쓴이가 할머니의 전화 속에서 알아채지 못했다고 한 감정은 무엇인가요?",
+    answerText: "외로움",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", p2, "외로움")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q5",
+    prompt: "황폐해진 텃밭을 보며 글쓴이에게 밀려온 감정은 무엇인가요?",
+    answerText: "죄책감",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", p3, "죄책감")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q6",
+    prompt: "글쓴이가 텃밭을 다시 가꾸기 위해 집어 든 도구는 무엇인가요?",
+    answerText: "호미",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", p3, "호미")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q7",
+    prompt: "글쓴이가 텃밭 가꾸기를 할머니가 남겨 주신 무엇이라고 표현했나요?",
+    answerText: "유산",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", p3, "유산")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  }
+];
+
+const content = {
+  contentId: "dr-r1-004",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 1) Day 4 문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_1",
+  schoolGradeRange: { min: 7, max: 8 },
+  area: "READING",
+  subArea: "LITERATURE",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 300,
+  assets: {},
+  payload: {
+    passage: {
+      format: "TEXT",
+      paragraphs: [
+        { id: "p1", text: p1 },
+        { id: "p2", text: p2 },
+        { id: "p3", text: p3 }
+      ]
+    },
+    intensive: { timeline: timelineFinal },
+    recall,
+    confirm: { questions: confirmQuestions }
+  }
+};
+
+// 검증
+console.log('\n=== 검증 ===');
+console.log('지문 길이:', totalLen, totalLen >= 1050 && totalLen <= 1150 ? 'OK' : 'FAIL');
+console.log('recall 카드:', recall.cards.length, recall.cards.length === 8 ? 'OK' : 'FAIL');
+console.log('confirm 문항:', confirmQuestions.length, confirmQuestions.length >= 5 ? 'OK' : 'FAIL');
+console.log('intensive 스텝:', timelineFinal.length);
+
+// answerRanges 검증
+confirmQuestions.forEach(q => {
+  q.answerRanges.forEach(r => {
+    const text = r.paragraphId === 'p1' ? p1 : r.paragraphId === 'p2' ? p2 : p3;
+    const found = text.substring(r.start, r.end);
+    console.log(`  ${q.id}: "${found}" vs "${q.answerText}" ${found === q.answerText ? 'OK' : 'MISMATCH'}`);
+  });
+});
+
+// JSON 출력
+const outPath = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'russell1', '004.json');
+fs.writeFileSync(outPath, JSON.stringify(content, null, 2), 'utf8');
+console.log('\n파일 저장:', outPath);

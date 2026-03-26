@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 4장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "도서관은 수많은 책이 모여 있는 지식의 보물 창고와 같습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "도서관이 보물 창고 같으려면 어떤 사실이 필요할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보물 창고에 책이 없다."
+              },
+              {
+                "id": "B",
+                "text": "책은 쓸모없다."
+              },
+              {
+                "id": "C",
+                "text": "도서관에 책이 없다."
+              },
+              {
+                "id": "D",
+                "text": "책에 소중한 지식이 담겨 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "민지와 수호는 동네 보물 지도를 따라가다 도서관에서 보물을 찾았습니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "지도를 따라가면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "목적지에 도착할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "길을 잃는다."
+              },
+              {
+                "id": "C",
+                "text": "지도가 사라진다."
+              },
+              {
+                "id": "D",
+                "text": "다시 출발점으로 돌아간다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "도서관에서는 조용히 해야 합니다. 다른 사람의 독서를 방해하지 않아야 합니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'공공장소에서는 예절을 지켜야 한다. 도서관은 공공장소이다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "도서관에서 예절을 안 지켜도 된다."
+              },
+              {
+                "id": "B",
+                "text": "도서관에서 예절을 지켜야 한다."
+              },
+              {
+                "id": "C",
+                "text": "공공장소에서 시끄럽게 해도 된다."
+              },
+              {
+                "id": "D",
+                "text": "도서관은 공공장소가 아니다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "긴 이야기를 짧게 줄여서 말하는 것을 간추린다고 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'내용을 간추리려면 중요한 것과 아닌 것을 구별해야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전부 쓰면 간추린 것이다."
+              },
+              {
+                "id": "B",
+                "text": "아무거나 빼도 간추려진다."
+              },
+              {
+                "id": "C",
+                "text": "구별하지 않으면 간추리기 어렵다."
+              },
+              {
+                "id": "D",
+                "text": "구별과 간추리기는 관계없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "도서관에서 책을 읽을 때는 발소리를 죽여 살금살금 걸어야 합니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'다른 사람을 배려하려면 조용히 해야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시끄럽게 해도 배려가 됐다."
+              },
+              {
+                "id": "B",
+                "text": "조용히 하면 배려가 안 된다."
+              },
+              {
+                "id": "C",
+                "text": "큰 소리로 떠들었는데 아무도 신경 안 썼다."
+              },
+              {
+                "id": "D",
+                "text": "도서관에서 살금살금 걸어 다른 사람을 방해하지 않았다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "내용을 간추리면 긴 글도 쉽게 기억할 수 있고, 다른 사람에게 전할 수 있어요.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'간추리면 기억하기 쉽다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "간추렸는데 기억이 안 되는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "기억이 좋으면 간추린 것이다."
+              },
+              {
+                "id": "C",
+                "text": "간추리지 않아도 기억하기 쉽다."
+              },
+              {
+                "id": "D",
+                "text": "간추리면 더 복잡해진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "민지와 수호가 지도를 따라 행복 빵집, 공원을 거쳐 도서관에 도착했어요.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'순서대로 따라가면 목적지에 도착한다'의 알맞은 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "순서를 무시했는데 도착했다."
+              },
+              {
+                "id": "B",
+                "text": "지도 순서대로 가니 도서관에 도착했다."
+              },
+              {
+                "id": "C",
+                "text": "순서대로 가면 길을 잃는다."
+              },
+              {
+                "id": "D",
+                "text": "순서 없이도 도착한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "도서관 약속: 조용히 하기, 책 소중히 다루기, 제자리에 꽂기.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'약속을 안 지키면 다른 사람에게 피해를 준다. 민수가 떠들었다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다른 사람에게 피해를 주지 않았다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "약속과 피해는 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "다른 사람에게 피해를 줄 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "모두가 떠들었다. (맞는 추론)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "도서관을 자주 가는 아이가 읽기 능력이 좋았다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'도서관 방문과 읽기 능력의 관계는?'",
+            "choices": [
+              {
+                "id": "A",
+                "text": "도서관이 읽기 능력의 원인이다."
+              },
+              {
+                "id": "B",
+                "text": "읽기 능력이 좋으면 도서관에 간다."
+              },
+              {
+                "id": "C",
+                "text": "전혀 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "도서관에서 책을 많이 읽어 관련 있지만 다른 이유도 있을 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "도서관은 누구나 자유롭게 이용하는 공공 장소입니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'도서관에서 규칙을 지키면 더 좋은 환경이 된다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "규칙을 잘 지키는 도서관과 안 지키는 도서관의 만족도를 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "한 도서관만 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "규칙 없는 도서관만 조사한다."
+              },
+              {
+                "id": "D",
+                "text": "도서관 크기를 비교한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

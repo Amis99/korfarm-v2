@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
+import VideoModal from "../components/VideoModal";
 import "../styles/pro-mode.css";
+import "../styles/video-modal.css";
 
 const TYPE_LABELS = {
   reading: "독해 모드",
@@ -26,8 +28,12 @@ function ProChapterPage() {
   const { chapterId } = useParams();
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [videoUrl, setVideoUrl] = useState(null);
+  const chapterVideoUrl = location.state?.videoUrl;
+  const chapterTitle = location.state?.title;
 
   useEffect(() => {
     if (!isLoggedIn || !chapterId) return;
@@ -75,7 +81,21 @@ function ProChapterPage() {
             <p>학습 아이템이 없습니다.</p>
           </div>
         ) : (
-          <div className="pro-items">
+          <>
+            {chapterTitle && (
+              <div className="pro-chapter-header">
+                <h2 className="pro-chapter-title">{chapterTitle}</h2>
+                <button
+                  className="video-play-btn"
+                  title={chapterVideoUrl ? "영상 보기" : "영상 없음"}
+                  onClick={() => { if (chapterVideoUrl) setVideoUrl(chapterVideoUrl); }}
+                  disabled={!chapterVideoUrl}
+                >
+                  <span className="material-symbols-outlined">play_circle</span>
+                </button>
+              </div>
+            )}
+            <div className="pro-items">
             {items.map((item) => {
               const statusClass = item.isLocked ? "locked" : item.isCompleted ? "completed" : "";
               return (
@@ -109,9 +129,14 @@ function ProChapterPage() {
                 </div>
               );
             })}
-          </div>
+            </div>
+          </>
         )}
       </div>
+
+      {videoUrl && (
+        <VideoModal url={videoUrl} onClose={() => setVideoUrl(null)} />
+      )}
     </div>
   );
 }

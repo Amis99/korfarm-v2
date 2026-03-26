@@ -34,7 +34,7 @@ function WisdomWritePage() {
   const fileInputRef = useRef(null);
 
   const [topics, setTopics] = useState([]);
-  const [topicKey, setTopicKey] = useState("");
+  const [topicKey, setTopicKey] = useState(searchParams.get("topicKey") || "");
   const [tab, setTab] = useState("manuscript");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState([]);
@@ -67,7 +67,7 @@ function WisdomWritePage() {
   };
 
   const presignAndUpload = async (file) => {
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = sessionStorage.getItem(TOKEN_KEY);
     const presignRes = await fetch(`${API_BASE}/v1/files/presign`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },

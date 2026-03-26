@@ -1,0 +1,358 @@
+// Day 11 - 비문학 (NONFICTION) 생성 스크립트
+const fs = require('fs');
+const path = require('path');
+
+// === 지문 (1100자 ±50) ===
+// 주제: 재활용 분리배출의 원리와 중요성
+const paragraphs = [
+  {
+    id: "p1",
+    text: "우리가 일상생활에서 버리는 쓰레기 중 상당 부분은 올바르게 분리배출하면 새로운 자원으로 되살릴 수 있다. 분리배출이란 종이, 플라스틱, 유리, 금속 등 재활용 가능한 물질을 일반 쓰레기와 따로 구분하여 버리는 것을 말한다. 이렇게 분리된 재활용품은 수거 업체가 모아서 재활용 처리 시설로 보내고, 거기서 세척과 분류를 거쳐 원료로 다시 가공된다. 예를 들어 페트병은 잘게 부수어 녹인 뒤 새로운 섬유나 용기로 만들어지고, 종이는 물에 풀어 다시 종이 원료인 펄프로 되돌린다. 이처럼 분리배출은 한번 사용한 물건을 쓸모없는 폐기물이 아니라 가치 있는 자원으로 바꾸어 주는 첫 번째 단계이다."
+  },
+  {
+    id: "p2",
+    text: "분리배출이 제대로 이루어지지 않으면 여러 가지 문제가 발생한다. 먼저, 재활용할 수 있는 물질이 일반 쓰레기와 섞여 매립지에 묻히거나 소각장에서 태워지게 된다. 이 경우 유용한 자원이 그대로 사라질 뿐 아니라, 소각 과정에서 유해한 기체가 발생하여 대기를 오염시킬 수 있다. 또한 매립지에 쌓이는 쓰레기의 양이 늘어나면 땅과 지하수가 오염되어 생태계에도 나쁜 영향을 미친다. 반면에 분리배출을 잘 실천하면 매립지로 가는 쓰레기의 양을 크게 줄일 수 있고, 새로운 원료를 채취하기 위해 자연을 파괴하는 일도 줄어든다. 결국 올바른 분리배출은 환경 보호와 자원 절약을 동시에 실현하는 가장 손쉬운 방법이라 할 수 있다."
+  },
+  {
+    id: "p3",
+    text: "그렇다면 효과적인 분리배출을 위해 우리가 지켜야 할 수칙에는 어떤 것이 있을까. 첫째, 페트병이나 유리병처럼 내용물이 담겨 있던 용기는 안에 남은 내용물을 깨끗이 비우고 물로 한 번 헹궈서 버려야 한다. 오염된 상태로 버리면 다른 재활용품까지 함께 오염되어 전부 재활용이 불가능해지기 때문이다. 둘째, 페트병의 라벨이나 뚜껑처럼 재질이 다른 부분은 떼어내어 분리해야 한다. 셋째, 종이류를 모을 때는 비닐 코팅이 된 종이나 기름에 젖은 종이는 따로 일반 쓰레기로 버려야 한다. 이러한 작은 수칙을 꾸준히 실천하는 것이 환경을 지키는 데 큰 힘이 된다. 개인 한 사람의 분리배출 실천은 작아 보이지만, 온 국민이 함께 참여하면 그 효과는 상상 이상으로 크다."
+  }
+];
+
+const totalChars = paragraphs.reduce((sum, p) => sum + p.text.length, 0);
+console.log(`총 글자 수: ${totalChars}`);
+
+function findRange(pid, text) {
+  const p = paragraphs.find(x => x.id === pid);
+  const s = p.text.indexOf(text);
+  if (s === -1) throw new Error(`"${text}" → ${pid} 미발견`);
+  return { paragraphId: pid, start: s, end: s + text.length };
+}
+function sr(pid, st, en) {
+  const p = paragraphs.find(x => x.id === pid);
+  const s = p.text.indexOf(st);
+  if (s === -1) throw new Error(`시작:"${st}" → ${pid} 미발견`);
+  const e = p.text.indexOf(en, s);
+  if (e === -1) throw new Error(`끝:"${en}" → ${pid} 미발견 (시작:${s})`);
+  return { paragraphId: pid, start: s, end: e + en.length };
+}
+function fr(pid) { const p = paragraphs.find(x => x.id === pid); return { paragraphId: pid, start: 0, end: p.text.length }; }
+
+// === 문장 범위 ===
+const p1s1 = sr("p1", "우리가 일상생활에서", "있다.");
+const p1s2 = sr("p1", "분리배출이란", "말한다.");
+const p1s3 = sr("p1", "이렇게 분리된", "가공된다.");
+const p1s4 = sr("p1", "예를 들어 페트병은", "되돌린다.");
+const p1s5 = sr("p1", "이처럼 분리배출은", "단계이다.");
+
+const p2s1 = sr("p2", "분리배출이 제대로", "발생한다.");
+const p2s2 = sr("p2", "먼저, 재활용할", "된다.");
+const p2s3 = sr("p2", "이 경우 유용한", "있다.");
+const p2s4 = sr("p2", "또한 매립지에", "미친다.");
+const p2s5 = sr("p2", "반면에 분리배출을", "줄어든다.");
+const p2s6 = sr("p2", "결국 올바른", "있다.");
+
+const p3s1 = sr("p3", "그렇다면 효과적인", "있을까.");
+const p3s2 = sr("p3", "첫째, 페트병이나", "한다.");
+const p3s3 = sr("p3", "오염된 상태로", "때문이다.");
+const p3s4 = sr("p3", "둘째, 페트병의", "한다.");
+const p3s5 = sr("p3", "셋째, 종이류를", "한다.");
+const p3s6 = sr("p3", "이러한 작은", "된다.");
+const p3s7 = sr("p3", "개인 한 사람의", "크다.");
+
+// === timeline ===
+const timeline = [
+  { stepId: "s1", highlight: { ranges: [p1s1] }, question: {
+    prompt: "쓰레기를 올바르게 분리배출하면 가능한 일로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "새로운 자원으로 되살릴 수 있다." },
+      { id: "B", text: "쓰레기가 저절로 사라진다." },
+      { id: "C", text: "모든 쓰레기를 땅에 묻을 수 있다." },
+      { id: "D", text: "쓰레기의 양이 자동으로 줄어든다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s2", highlight: { ranges: [p1s2] }, question: {
+    prompt: "분리배출의 뜻으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "재활용 가능한 물질을 일반 쓰레기와 따로 구분하여 버리는 것이다." },
+      { id: "B", text: "모든 쓰레기를 한곳에 모아서 한꺼번에 버리는 것이다." },
+      { id: "C", text: "재활용품을 직접 집에서 새 물건으로 만드는 것이다." },
+      { id: "D", text: "쓰레기를 작게 잘라서 크기별로 나누는 것이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s3", highlight: { ranges: [p1s3] }, question: {
+    prompt: "분리된 재활용품이 처리되는 과정으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "수거 업체가 모아 처리 시설에서 세척, 분류 후 원료로 가공된다." },
+      { id: "B", text: "분리된 재활용품은 바로 매립지에 묻힌다." },
+      { id: "C", text: "수거 업체 없이 시민이 직접 공장에 가져다준다." },
+      { id: "D", text: "재활용품은 처리 없이 그대로 새 제품으로 사용된다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s4", highlight: { ranges: [p1s4] }, question: {
+    prompt: "페트병이 재활용되는 방식으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "잘게 부수어 녹인 뒤 새 섬유나 용기로 만든다." },
+      { id: "B", text: "페트병은 재활용이 불가능하여 모두 소각한다." },
+      { id: "C", text: "페트병을 물에 풀어 종이로 만든다." },
+      { id: "D", text: "페트병을 그대로 다시 음료를 담아 판매한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s5", highlight: { ranges: [p1s5] }, question: {
+    prompt: "분리배출의 역할로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "사용한 물건을 가치 있는 자원으로 바꾸는 첫 번째 단계이다." },
+      { id: "B", text: "쓰레기를 빨리 없애는 마지막 단계이다." },
+      { id: "C", text: "쓰레기를 아무 곳에나 버려도 되게 하는 제도이다." },
+      { id: "D", text: "새 물건을 싸게 구매하는 방법이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p1 중심
+  { stepId: "s6", highlight: { ranges: [fr("p1")] }, question: {
+    prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "분리배출은 쓰레기를 새 자원으로 되살리는 재활용의 첫 단계이다." },
+      { id: "B", text: "분리배출은 쓰레기를 땅에 묻기 위한 준비 과정이다." },
+      { id: "C", text: "페트병은 재활용이 불가능한 대표적인 쓰레기이다." },
+      { id: "D", text: "종이만 재활용이 가능하고 나머지는 소각해야 한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p2
+  { stepId: "s7", highlight: { ranges: [p2s1] }, question: {
+    prompt: "분리배출이 제대로 이루어지지 않으면 생기는 결과로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "여러 가지 문제가 발생한다." },
+      { id: "B", text: "쓰레기가 자동으로 재활용된다." },
+      { id: "C", text: "매립지의 공간이 넉넉해진다." },
+      { id: "D", text: "환경이 저절로 깨끗해진다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s8", highlight: { ranges: [p2s2] }, question: {
+    prompt: "재활용품이 일반 쓰레기와 섞이면 어떻게 되는지 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "매립지에 묻히거나 소각장에서 태워진다." },
+      { id: "B", text: "자동으로 분류되어 재활용된다." },
+      { id: "C", text: "일반 쓰레기와 함께 비료로 만들어진다." },
+      { id: "D", text: "수거 업체가 다시 분리해 준다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s9", highlight: { ranges: [p2s3] }, question: {
+    prompt: "소각 과정에서 발생하는 문제로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "유해한 기체가 발생하여 대기를 오염시킬 수 있다." },
+      { id: "B", text: "소각하면 쓰레기가 완전히 없어져 문제가 없다." },
+      { id: "C", text: "소각 과정에서 새로운 자원이 만들어진다." },
+      { id: "D", text: "소각 열로 전기를 충분히 생산할 수 있다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s10", highlight: { ranges: [p2s4] }, question: {
+    prompt: "매립지 쓰레기가 늘어나면 생기는 문제로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "땅과 지하수가 오염되어 생태계에 나쁜 영향을 미친다." },
+      { id: "B", text: "매립지가 넓어져서 사람들이 살 곳이 더 많아진다." },
+      { id: "C", text: "쓰레기가 자연적으로 분해되어 비료가 된다." },
+      { id: "D", text: "매립지 주변 식물이 더 잘 자라게 된다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s11", highlight: { ranges: [p2s5] }, question: {
+    prompt: "분리배출을 잘 실천하면 얻을 수 있는 효과로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "매립지 쓰레기를 줄이고 자연 파괴도 줄일 수 있다." },
+      { id: "B", text: "새 원료를 더 많이 채취할 수 있다." },
+      { id: "C", text: "매립지를 더 많이 만들 수 있다." },
+      { id: "D", text: "소각장을 더 크게 지을 수 있다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s12", highlight: { ranges: [p2s6] }, question: {
+    prompt: "올바른 분리배출이 실현하는 두 가지로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "환경 보호와 자원 절약을 동시에 실현한다." },
+      { id: "B", text: "경제 성장과 인구 증가를 동시에 이룬다." },
+      { id: "C", text: "교통 편의와 에너지 절약을 동시에 이룬다." },
+      { id: "D", text: "건강 증진과 학업 향상을 동시에 이룬다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p2 중심
+  { stepId: "s13", highlight: { ranges: [fr("p2")] }, question: {
+    prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "분리배출이 안 되면 환경이 오염되고, 잘 실천하면 환경 보호와 자원 절약이 된다." },
+      { id: "B", text: "매립지에 쓰레기를 묻는 것이 가장 좋은 처리 방법이다." },
+      { id: "C", text: "소각은 환경에 전혀 해롭지 않은 쓰레기 처리 방식이다." },
+      { id: "D", text: "분리배출은 환경에 아무런 영향을 미치지 않는다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p3
+  { stepId: "s14", highlight: { ranges: [p3s1] }, question: {
+    prompt: "이 문장이 알려 주는 것으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "효과적인 분리배출을 위한 수칙을 소개하려는 것이다." },
+      { id: "B", text: "분리배출이 필요 없다는 것을 주장하려는 것이다." },
+      { id: "C", text: "재활용 공장의 내부 구조를 설명하려는 것이다." },
+      { id: "D", text: "쓰레기를 줄이는 것보다 재활용이 중요하지 않다는 것이다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s15", highlight: { ranges: [p3s2] }, question: {
+    prompt: "첫 번째 수칙으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "용기의 내용물을 비우고 물로 헹궈서 버려야 한다." },
+      { id: "B", text: "용기를 그대로 쓰레기통에 넣으면 된다." },
+      { id: "C", text: "내용물이 남아 있어야 재활용이 잘 된다." },
+      { id: "D", text: "용기는 모두 일반 쓰레기로 버려야 한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s16", highlight: { ranges: [p3s3] }, question: {
+    prompt: "오염된 상태로 버리면 생기는 문제로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "다른 재활용품까지 오염되어 전부 재활용이 불가능해진다." },
+      { id: "B", text: "오염된 재활용품만 따로 세척하면 문제가 없다." },
+      { id: "C", text: "오염 정도와 상관없이 모두 재활용할 수 있다." },
+      { id: "D", text: "오염된 것만 소각하고 나머지는 재활용된다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s17", highlight: { ranges: [p3s4] }, question: {
+    prompt: "두 번째 수칙으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "라벨이나 뚜껑처럼 재질이 다른 부분은 떼어서 분리한다." },
+      { id: "B", text: "라벨과 뚜껑은 붙인 채로 버려야 한다." },
+      { id: "C", text: "뚜껑만 분리하고 라벨은 그대로 두어도 된다." },
+      { id: "D", text: "재질이 같은 물건끼리 색깔별로 분류한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s18", highlight: { ranges: [p3s5] }, question: {
+    prompt: "세 번째 수칙으로 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "비닐 코팅이나 기름에 젖은 종이는 일반 쓰레기로 버려야 한다." },
+      { id: "B", text: "모든 종이는 재활용이 가능하므로 분류할 필요가 없다." },
+      { id: "C", text: "기름에 젖은 종이는 세척하면 재활용할 수 있다." },
+      { id: "D", text: "비닐 코팅 종이는 플라스틱으로 분류해야 한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s19", highlight: { ranges: [p3s6] }, question: {
+    prompt: "작은 수칙을 꾸준히 실천하면 어떤 결과를 얻을 수 있는지 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "환경을 지키는 데 큰 힘이 된다." },
+      { id: "B", text: "분리배출을 하지 않아도 되게 된다." },
+      { id: "C", text: "쓰레기가 저절로 사라지게 된다." },
+      { id: "D", text: "수칙을 바꿀 필요가 없어진다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  { stepId: "s20", highlight: { ranges: [p3s7] }, question: {
+    prompt: "온 국민이 참여하면 분리배출 효과가 어떠한지 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "그 효과는 상상 이상으로 크다." },
+      { id: "B", text: "효과가 거의 없어서 의미가 없다." },
+      { id: "C", text: "한 사람이 하나 안 하나 차이가 없다." },
+      { id: "D", text: "국민이 참여해도 기업만 이익을 본다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }},
+  // p3 중심
+  { stepId: "s21", highlight: { ranges: [fr("p3")] }, question: {
+    prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "올바른 분리배출 수칙을 꾸준히 실천하면 환경 보호에 큰 힘이 된다." },
+      { id: "B", text: "분리배출 수칙은 너무 복잡해서 실천하기 어렵다." },
+      { id: "C", text: "종이만 분리배출하면 충분하고 나머지는 신경 쓸 필요 없다." },
+      { id: "D", text: "개인의 분리배출은 효과가 없으니 기업만 책임져야 한다." }
+    ], answerId: "A", scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }}
+];
+
+// === recall (8카드) ===
+const recall = {
+  cards: [
+    { id: "c1", text: "분리배출이란 재활용 가능한 물질을 일반 쓰레기와 구분하여 버리는 것이다." },
+    { id: "c2", text: "분리된 재활용품은 세척과 분류를 거쳐 원료로 다시 가공된다." },
+    { id: "c3", text: "분리배출이 안 되면 재활용품이 매립·소각되고 대기와 토양이 오염된다." },
+    { id: "c4", text: "잘 실천하면 매립지 쓰레기가 줄고 자연 파괴도 줄어든다." },
+    { id: "c5", text: "올바른 분리배출은 환경 보호와 자원 절약을 동시에 실현하는 방법이다." },
+    { id: "c6", text: "용기는 내용물을 비우고 헹궈야 하며 재질이 다른 부분은 떼어내야 한다." },
+    { id: "c7", text: "비닐 코팅이나 기름 젖은 종이는 재활용이 안 되므로 일반 쓰레기로 버린다." },
+    { id: "c8", text: "개인의 작은 실천이 모이면 환경 보호에 상상 이상으로 큰 효과를 낸다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+// === confirm (7문항) ===
+const confirmQuestions = [
+  {
+    id: "q1", prompt: "재활용 가능한 물질을 일반 쓰레기와 구분하여 버리는 것의 이름은 무엇인가요?",
+    answerText: "분리배출", answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", "분리배출이란")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q2", prompt: "종이를 물에 풀어 다시 만드는 종이 원료의 이름은 무엇인가요?",
+    answerText: "펄프", answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", "펄프")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q3", prompt: "소각 과정에서 발생하여 대기를 오염시키는 것은 무엇인가요?",
+    answerText: "유해한 기체", answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "유해한 기체")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q4", prompt: "올바른 분리배출이 동시에 실현하는 것 중 자원과 관련된 것은 무엇인가요?",
+    answerText: "자원 절약", answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "자원 절약")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q5", prompt: "페트병에서 떼어내야 하는 재질이 다른 부분의 하나는 무엇인가요?",
+    answerText: "라벨", answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "라벨")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q6", prompt: "용기를 버리기 전에 내용물을 비운 뒤 해야 하는 일은 무엇인가요?",
+    answerText: "헹궈서", answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "헹궈서")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  },
+  {
+    id: "q7", prompt: "쓰레기가 쌓여 오염되는 곳 중 땅속의 물은 무엇이라 하나요?",
+    answerText: "지하수", answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "지하수")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true
+  }
+];
+
+// === JSON ===
+const content = {
+  contentId: "dr-r1-011", contentType: "DAILY_READING", version: 1, status: "PUBLISHED",
+  title: "일일 독해(러셀 1) Day 11 비문학", description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_1", schoolGradeRange: { min: 7, max: 8 },
+  area: "READING", subArea: "NONFICTION", competencies: ["READING"], tags: ["daily"],
+  access: { mode: "FREE" }, seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 300, assets: {},
+  payload: { passage: { format: "TEXT", paragraphs }, intensive: { timeline }, recall, confirm: { questions: confirmQuestions } }
+};
+
+// === 검증 ===
+console.log(`\n=== 최종 검증 ===`);
+console.log(`글자 수: ${totalChars}, steps: ${timeline.length}, recall: ${recall.cards.length}, confirm: ${confirmQuestions.length}`);
+let errors = 0;
+timeline.forEach(s => s.highlight.ranges.forEach(r => {
+  const p = paragraphs.find(x => x.id === r.paragraphId);
+  if (r.start < 0 || r.end > p.text.length || r.start >= r.end) { console.error(`ERROR ${s.stepId}`); errors++; }
+}));
+confirmQuestions.forEach((q, i) => q.answerRanges.forEach(r => {
+  const p = paragraphs.find(x => x.id === r.paragraphId);
+  if (r.start < 0 || r.end > p.text.length || r.start >= r.end) { console.error(`ERROR q${i+1}`); errors++; }
+  console.log(`  q${i+1}: "${q.answerText}" → [${r.start},${r.end}] = "${p.text.substring(r.start, r.end)}"`);
+}));
+if (errors) { process.exit(1); }
+
+// === 저장 ===
+const sp = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'russell1', '011.json');
+fs.writeFileSync(sp, JSON.stringify(content, null, 2), 'utf-8');
+console.log(`\nstatic: ${sp}`);
+const bp = path.join(__dirname, '..', 'generated', 'daily-batch-reading-russell1.json');
+const batch = JSON.parse(fs.readFileSync(bp, 'utf-8'));
+batch.items[10] = { content_type: "DAILY_READING", level_id: "RUSSELL_1", area: "READING", sub_area: "NONFICTION", day_index: 11, module_key: "reading_training", schema_version: "1.0", content };
+fs.writeFileSync(bp, JSON.stringify(batch, null, 2), 'utf-8');
+console.log(`batch: items[10]`);
+console.log("\nDay 11 완료!");

@@ -1,0 +1,255 @@
+// Day 21 - 비문학 (NONFICTION)
+// 중2~3 수준, 1100자 ±50 목표
+
+const fs = require('fs');
+const path = require('path');
+
+// ── 지문 ──
+const p1 = `지구의 대기에는 이산화 탄소, 메테인, 수증기 같은 온실가스가 포함되어 있다. 이 가스들은 태양 에너지가 지표면에 도달하여 열로 바뀐 뒤 우주로 빠져나가려 할 때, 그 열의 일부를 흡수하여 대기 안에 가두는 역할을 한다. 이러한 현상을 온실 효과라고 부르는데, 이것은 원래 지구의 평균 기온을 생물이 살기에 알맞은 약 15도로 유지하는 데 꼭 필요한 자연 현상이다. 만약 온실 효과가 전혀 없다면 지구의 평균 기온은 영하 18도 이하로 떨어져 대부분의 생물이 살아남기 어려울 것이다. 그러나 산업 혁명 이후 인간이 석탄과 석유 같은 화석 연료를 대량으로 연소하면서 대기 중 이산화 탄소 농도가 급격히 높아졌고, 이에 따라 온실 효과가 지나치게 강해져 지구의 기온이 비정상적으로 상승하는 문제가 발생하고 있다.`;
+
+const p2 = `지구 온난화가 초래하는 가장 두드러진 영향 가운데 하나는 극지방 빙하의 감소이다. 북극과 남극의 거대한 빙하가 녹으면서 해수면이 서서히 상승하고 있으며, 이 추세가 계속되면 해안가에 위치한 도시와 섬나라들이 침수 위험에 처하게 된다. 또한 기온 상승은 이상 기후 현상을 더욱 빈번하게 만들고 있다. 한쪽 지역에서는 폭염과 가뭄이 반복되어 농작물이 큰 피해를 입는가 하면, 다른 지역에서는 집중 호우와 강력한 태풍이 잦아져 홍수와 산사태가 발생한다. 이러한 기후 변화는 식량 생산에도 심각한 타격을 주어, 세계적으로 식량 가격이 불안정해지고 빈곤 문제가 심화될 수 있다는 우려가 커지고 있다.`;
+
+const p3 = `이에 세계 각국은 지구 온난화를 늦추기 위한 다양한 대책을 마련하고 있다. 대표적으로 파리 기후 협약은 전 세계 국가들이 이산화 탄소 배출량을 단계적으로 줄이기로 약속한 국제 협정이다. 각국 정부는 태양광, 풍력 같은 재생 에너지의 비율을 높이기 위해 투자를 확대하고 있으며, 전기 자동차 보급을 촉진하는 정책도 적극적으로 추진하고 있다. 기업에서도 생산 과정에서 발생하는 탄소 배출을 줄이려는 기술 혁신에 힘쓰고 있다. 그러나 이러한 노력이 실질적인 성과를 거두려면 국가와 기업뿐 아니라 시민 한 사람 한 사람이 에너지 절약과 자원 재활용 같은 작은 실천을 일상 속에서 꾸준히 이어 나가는 것이 무엇보다 중요하다.`;
+
+const totalLen = p1.length + p2.length + p3.length;
+console.log(`지문 총 길이: ${totalLen}자 (p1=${p1.length}, p2=${p2.length}, p3=${p3.length})`);
+
+// ── ranges 계산 헬퍼 ──
+function r(text, sub) {
+  const start = text.indexOf(sub);
+  if (start === -1) throw new Error(`"${sub}" not found in text`);
+  return { start, end: start + sub.length };
+}
+
+// ── 정독(intensive) 타임라인 ──
+const p1Segs = [
+  { sub: `지구의 대기에는 이산화 탄소, 메테인, 수증기 같은 온실가스가 포함되어 있다.`, q: `지구 대기에 포함된 온실가스의 예로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "이산화 탄소, 메테인, 수증기이다." },
+    { id: "B", text: "산소, 질소, 헬륨이다." },
+    { id: "C", text: "수소, 네온, 아르곤이다." },
+    { id: "D", text: "오존, 산소, 질소이다." },
+  ], ans: "A" },
+  { sub: `이 가스들은 태양 에너지가 지표면에 도달하여 열로 바뀐 뒤 우주로 빠져나가려 할 때, 그 열의 일부를 흡수하여 대기 안에 가두는 역할을 한다.`, q: `온실가스가 하는 역할로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "지표면에서 우주로 빠져나가려는 열의 일부를 흡수하여 대기에 가둔다." },
+    { id: "B", text: "태양 에너지가 지표면에 도달하지 못하도록 반사한다." },
+    { id: "C", text: "지표면의 열을 모두 우주로 빠져나가게 한다." },
+    { id: "D", text: "대기 중의 산소 농도를 높여 생물이 숨쉬기 쉽게 한다." },
+  ], ans: "A" },
+  { sub: `이것은 원래 지구의 평균 기온을 생물이 살기에 알맞은 약 15도로 유지하는 데 꼭 필요한 자연 현상이다.`, q: `온실 효과가 지구에 필요한 이유로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "평균 기온을 생물이 살기에 알맞은 약 15도로 유지해 주기 때문이다." },
+    { id: "B", text: "대기 중의 산소량을 늘려 주기 때문이다." },
+    { id: "C", text: "바다의 소금 농도를 일정하게 유지해 주기 때문이다." },
+    { id: "D", text: "지구의 자전 속도를 조절해 주기 때문이다." },
+  ], ans: "A" },
+  { sub: `산업 혁명 이후 인간이 석탄과 석유 같은 화석 연료를 대량으로 연소하면서 대기 중 이산화 탄소 농도가 급격히 높아졌고, 이에 따라 온실 효과가 지나치게 강해져 지구의 기온이 비정상적으로 상승하는 문제가 발생하고 있다.`, q: `지구 온난화의 직접적 원인으로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "화석 연료를 대량으로 연소하여 이산화 탄소 농도가 급격히 높아졌기 때문이다." },
+    { id: "B", text: "태양의 에너지가 갑자기 강해졌기 때문이다." },
+    { id: "C", text: "지구의 자전 축이 기울어졌기 때문이다." },
+    { id: "D", text: "화산 폭발이 잦아져서 용암이 많이 흘렀기 때문이다." },
+  ], ans: "A" },
+];
+
+const p1Summary = { q: `첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?`, choices: [
+  { id: "A", text: "온실 효과는 본래 필수적인 자연 현상이지만 화석 연료 사용으로 과도해져 지구 온난화가 발생하고 있다." },
+  { id: "B", text: "온실가스는 지구에 해로운 가스이므로 완전히 없애야 한다." },
+  { id: "C", text: "지구의 평균 기온은 항상 일정하게 유지되어 왔다." },
+  { id: "D", text: "화석 연료는 온실 효과와 아무런 관계가 없다." },
+], ans: "A" };
+
+const p2Segs = [
+  { sub: `지구 온난화가 초래하는 가장 두드러진 영향 가운데 하나는 극지방 빙하의 감소이다.`, q: `지구 온난화의 대표적 영향으로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "극지방 빙하가 줄어들고 있다는 것이다." },
+    { id: "B", text: "극지방의 빙하가 더 두꺼워지고 있다는 것이다." },
+    { id: "C", text: "바다의 수온이 낮아지고 있다는 것이다." },
+    { id: "D", text: "사막 지역에 비가 많이 내리고 있다는 것이다." },
+  ], ans: "A" },
+  { sub: `북극과 남극의 거대한 빙하가 녹으면서 해수면이 서서히 상승하고 있으며, 이 추세가 계속되면 해안가에 위치한 도시와 섬나라들이 침수 위험에 처하게 된다.`, q: `빙하가 녹아서 발생하는 위험으로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "해수면이 상승하여 해안 도시와 섬나라가 침수될 위험이 있다." },
+    { id: "B", text: "바다의 소금 농도가 높아져 물고기가 늘어난다." },
+    { id: "C", text: "강의 수위가 낮아져 물 부족이 해결된다." },
+    { id: "D", text: "북극곰의 서식지가 넓어진다." },
+  ], ans: "A" },
+  { sub: `한쪽 지역에서는 폭염과 가뭄이 반복되어 농작물이 큰 피해를 입는가 하면, 다른 지역에서는 집중 호우와 강력한 태풍이 잦아져 홍수와 산사태가 발생한다.`, q: `이상 기후로 나타나는 피해의 예로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "폭염과 가뭄으로 농작물 피해, 집중 호우와 태풍으로 홍수·산사태가 발생한다." },
+    { id: "B", text: "세계 모든 곳에서 기온이 균일하게 올라간다." },
+    { id: "C", text: "날씨가 좋아져 농사에 유리해진다." },
+    { id: "D", text: "태풍이 완전히 사라져 바다가 잔잔해진다." },
+  ], ans: "A" },
+  { sub: `이러한 기후 변화는 식량 생산에도 심각한 타격을 주어, 세계적으로 식량 가격이 불안정해지고 빈곤 문제가 심화될 수 있다는 우려가 커지고 있다.`, q: `기후 변화가 식량에 미치는 영향으로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "식량 생산에 타격을 주어 가격 불안정과 빈곤 심화가 우려된다." },
+    { id: "B", text: "식량이 풍부해져 가격이 크게 떨어진다." },
+    { id: "C", text: "모든 나라에서 식량 자급이 가능해진다." },
+    { id: "D", text: "기후 변화는 식량과 무관하다." },
+  ], ans: "A" },
+];
+
+const p2Summary = { q: `둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?`, choices: [
+  { id: "A", text: "지구 온난화는 빙하 감소, 이상 기후, 식량 위기 등 다양한 문제를 일으키고 있다." },
+  { id: "B", text: "지구 온난화는 극지방에만 영향을 주는 현상이다." },
+  { id: "C", text: "이상 기후는 지구 온난화와 관련이 없다." },
+  { id: "D", text: "빙하가 녹아도 해수면에는 변화가 없다." },
+], ans: "A" };
+
+const p3Segs = [
+  { sub: `대표적으로 파리 기후 협약은 전 세계 국가들이 이산화 탄소 배출량을 단계적으로 줄이기로 약속한 국제 협정이다.`, q: `파리 기후 협약의 내용으로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "전 세계 국가들이 이산화 탄소 배출량을 단계적으로 줄이기로 약속한 것이다." },
+    { id: "B", text: "선진국만 온실가스를 줄이기로 약속한 것이다." },
+    { id: "C", text: "화석 연료 사용을 당장 전면 금지하기로 한 것이다." },
+    { id: "D", text: "온실가스 배출량을 늘려도 된다고 합의한 것이다." },
+  ], ans: "A" },
+  { sub: `각국 정부는 태양광, 풍력 같은 재생 에너지의 비율을 높이기 위해 투자를 확대하고 있으며, 전기 자동차 보급을 촉진하는 정책도 적극적으로 추진하고 있다.`, q: `각국 정부가 추진하는 대책의 예로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "재생 에너지 투자 확대와 전기 자동차 보급 촉진이다." },
+    { id: "B", text: "화석 연료 사용 보조금을 늘리는 것이다." },
+    { id: "C", text: "원자력 발전소를 모두 폐쇄하는 것이다." },
+    { id: "D", text: "공장 가동 시간을 두 배로 늘리는 것이다." },
+  ], ans: "A" },
+  { sub: `기업에서도 생산 과정에서 발생하는 탄소 배출을 줄이려는 기술 혁신에 힘쓰고 있다.`, q: `기업 차원의 노력으로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "생산 과정에서 탄소 배출을 줄이기 위한 기술 혁신에 힘쓰고 있다." },
+    { id: "B", text: "탄소 배출을 늘려 생산성을 높이고 있다." },
+    { id: "C", text: "환경 문제에 대한 관심을 줄이고 있다." },
+    { id: "D", text: "제품 가격을 올려 소비를 줄이려 하고 있다." },
+  ], ans: "A" },
+  { sub: `국가와 기업뿐 아니라 시민 한 사람 한 사람이 에너지 절약과 자원 재활용 같은 작은 실천을 일상 속에서 꾸준히 이어 나가는 것이 무엇보다 중요하다.`, q: `글쓴이가 가장 강조하는 실천 주체로 알맞은 것은 무엇인가요?`, choices: [
+    { id: "A", text: "시민 한 사람 한 사람의 일상 속 작은 실천이다." },
+    { id: "B", text: "국제기구만이 문제를 해결할 수 있다." },
+    { id: "C", text: "기업의 기술 혁신만으로 충분하다." },
+    { id: "D", text: "정부의 법률 제정만 있으면 된다." },
+  ], ans: "A" },
+];
+
+const p3Summary = { q: `셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?`, choices: [
+  { id: "A", text: "지구 온난화 대응을 위해 국제 협약, 정부·기업의 노력과 함께 시민의 일상적 실천이 중요하다." },
+  { id: "B", text: "파리 기후 협약 이후 온실가스 문제는 완전히 해결되었다." },
+  { id: "C", text: "재생 에너지는 비용이 비싸서 사용할 수 없다." },
+  { id: "D", text: "시민의 실천은 온난화에 아무런 영향을 미치지 않는다." },
+], ans: "A" };
+
+// 타임라인 빌더
+let stepIdx = 1;
+function buildTimeline(pId, pText, segs, summary) {
+  const steps = [];
+  for (const seg of segs) {
+    const range = r(pText, seg.sub);
+    steps.push({
+      stepId: `s${stepIdx}`,
+      highlight: { ranges: [{ paragraphId: pId, start: range.start, end: range.end }] },
+      question: {
+        prompt: seg.q,
+        choices: seg.choices,
+        answerId: seg.ans,
+        scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+      }
+    });
+    stepIdx++;
+  }
+  steps.push({
+    stepId: `s${stepIdx}`,
+    highlight: { ranges: [{ paragraphId: pId, start: 0, end: pText.length }] },
+    question: {
+      prompt: summary.q,
+      choices: summary.choices,
+      answerId: summary.ans,
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  });
+  stepIdx++;
+  return steps;
+}
+
+const timeline = [
+  ...buildTimeline("p1", p1, p1Segs, p1Summary),
+  ...buildTimeline("p2", p2, p2Segs, p2Summary),
+  ...buildTimeline("p3", p3, p3Segs, p3Summary),
+];
+
+// ── 복기(recall) 카드 8개 ──
+const recall = {
+  cards: [
+    { id: "c1", text: "온실가스는 지표면의 열을 흡수하여 대기에 가두는 역할을 한다." },
+    { id: "c2", text: "온실 효과는 지구 평균 기온을 약 15도로 유지하는 자연 현상이다." },
+    { id: "c3", text: "화석 연료 사용으로 이산화 탄소가 늘어 온실 효과가 과도해졌다." },
+    { id: "c4", text: "극지방 빙하가 녹아 해수면이 상승하고 있다." },
+    { id: "c5", text: "폭염, 가뭄, 집중 호우, 태풍 등 이상 기후가 빈번해지고 있다." },
+    { id: "c6", text: "파리 기후 협약으로 각국이 이산화 탄소 배출량 감축을 약속했다." },
+    { id: "c7", text: "재생 에너지 투자와 전기 자동차 보급이 추진되고 있다." },
+    { id: "c8", text: "시민 개개인의 에너지 절약과 자원 재활용 실천이 중요하다." },
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+// ── 확인(confirm) ──
+function cr(pId, pText, sub) {
+  const s = pText.indexOf(sub);
+  if (s === -1) throw new Error(`confirm: "${sub}" not found`);
+  return [{ paragraphId: pId, start: s, end: s + sub.length }];
+}
+
+const confirm = {
+  questions: [
+    { id: "q1", prompt: "온실 효과가 없을 경우 지구의 평균 기온은 얼마 이하로 떨어지나요?", answerText: "영하 18도", answerMatchMode: "ANY", answerRanges: cr("p1", p1, "영하 18도"), scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q2", prompt: "산업 혁명 이후 대량으로 연소된 연료의 종류는 무엇인가요?", answerText: "화석 연료", answerMatchMode: "ANY", answerRanges: cr("p1", p1, "화석 연료"), scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q3", prompt: "빙하가 녹아 서서히 높아지고 있는 것은 무엇인가요?", answerText: "해수면", answerMatchMode: "ANY", answerRanges: cr("p2", p2, "해수면이 서서히 상승"), scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q4", prompt: "전 세계 국가들이 이산화 탄소 감축을 약속한 국제 협정의 이름은 무엇인가요?", answerText: "파리 기후 협약", answerMatchMode: "ANY", answerRanges: cr("p3", p3, "파리 기후 협약"), scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q5", prompt: "글에서 재생 에너지의 예로 든 두 가지는 무엇인가요?", answerText: "태양광, 풍력", answerMatchMode: "ANY", answerRanges: cr("p3", p3, "태양광, 풍력"), scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q6", prompt: "온실 효과가 유지하는 지구의 알맞은 평균 기온은 약 몇 도인가요?", answerText: "약 15도", answerMatchMode: "ANY", answerRanges: cr("p1", p1, "약 15도"), scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+    { id: "q7", prompt: "글쓴이가 시민에게 권하는 일상 속 실천의 예로 든 것 두 가지는 무엇인가요?", answerText: "에너지 절약과 자원 재활용", answerMatchMode: "ANY", answerRanges: cr("p3", p3, "에너지 절약과 자원 재활용"), scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 }, revealOnWrong: true },
+  ]
+};
+
+// ── 최종 JSON (static) ──
+const staticJson = {
+  contentId: "dr-r1-021",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 1) Day 21 비문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_1",
+  schoolGradeRange: { min: 7, max: 8 },
+  area: "READING",
+  subArea: "NONFICTION",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 480,
+  assets: {},
+  payload: {
+    passage: {
+      format: "TEXT",
+      paragraphs: [
+        { id: "p1", text: p1 },
+        { id: "p2", text: p2 },
+        { id: "p3", text: p3 },
+      ]
+    },
+    intensive: { timeline },
+    recall,
+    confirm
+  }
+};
+
+// ── 배치 JSON ──
+const batchItem = {
+  content_type: "DAILY_READING",
+  level_id: "RUSSELL_1",
+  area: "READING",
+  sub_area: "NONFICTION",
+  day_index: 21,
+  module_key: "reading_training",
+  schema_version: "1.0",
+  content: staticJson
+};
+
+// ── 파일 쓰기 ──
+const staticPath = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'russell1', '021.json');
+fs.writeFileSync(staticPath, JSON.stringify(staticJson, null, 2), 'utf8');
+console.log(`Static 파일 저장: ${staticPath}`);
+
+const batchPath = path.join(__dirname, '..', 'generated', 'new', 'day21-batch.json');
+fs.mkdirSync(path.dirname(batchPath), { recursive: true });
+fs.writeFileSync(batchPath, JSON.stringify(batchItem, null, 2), 'utf8');
+console.log(`배치 아이템 저장: ${batchPath}`);
+
+console.log('Day 21 완료!');

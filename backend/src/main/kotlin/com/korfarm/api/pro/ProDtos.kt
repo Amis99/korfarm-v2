@@ -80,7 +80,14 @@ data class ProTestSubmitResponse(
     val score: Int,
     val totalPoints: Int,
     val passed: Boolean,
-    val nextAction: String
+    val nextAction: String,
+    val competencyScores: Map<String, CompetencyScore>? = null
+)
+
+data class CompetencyScore(
+    val correct: Int,
+    val total: Int,
+    val accuracy: Double
 )
 
 data class ProTestStatusResponse(
@@ -92,6 +99,7 @@ data class ProTestStatusResponse(
 
 data class ProTestSessionView(
     val sessionId: String,
+    val testId: String,
     val version: Int,
     val status: String,
     val mode: String,
@@ -99,7 +107,9 @@ data class ProTestSessionView(
     val totalPoints: Int? = null,
     val printedAt: LocalDateTime?,
     val omrDeadline: LocalDateTime?,
-    val createdAt: LocalDateTime
+    val remainingMinutes: Long,
+    val createdAt: LocalDateTime,
+    val competencyScores: Map<String, CompetencyScore>? = null
 )
 
 // ─── 관리자용 요청 ───

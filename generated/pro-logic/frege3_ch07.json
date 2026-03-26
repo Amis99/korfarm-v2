@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게3 7장 논리사고력",
+  "targetLevel": "frege3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "시에서 운율은 같은 것을 반복할 때 생기는 리듬감이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "\"접동 접동 아우래비 접동\"에서 운율이 형성된다는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "운율은 내용이 슬플 때만 생긴다"
+              },
+              {
+                "id": "B",
+                "text": "반복은 운율과 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "\"접동\"이라는 단어가 반복되면 리듬감이 생긴다"
+              },
+              {
+                "id": "D",
+                "text": "한 번만 쓰여도 운율이 생긴다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "7·5조는 앞부분 7글자, 뒷부분 5글자를 반복하여 운율을 만드는 방법이다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "\"산 넘어 남촌에는 / 누가 살길래\"에서 운율이 생긴다는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글자 수와 운율은 관련이 없다"
+              },
+              {
+                "id": "B",
+                "text": "글자 수가 불규칙해야 운율이 생긴다"
+              },
+              {
+                "id": "C",
+                "text": "글자 수를 규칙적으로 맞추면 리듬감이 만들어진다"
+              },
+              {
+                "id": "D",
+                "text": "운율은 내용에만 달려 있다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "후렴구는 각 연의 끝에 반복되어 강한 운율을 만든다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "청산별곡에서 \"얄리얄리 얄라셩 얄라리 얄라\"가 매 연마다 반복되면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "운율이 사라진다"
+              },
+              {
+                "id": "B",
+                "text": "강한 리듬감이 만들어지고 노래의 통일감이 형성된다"
+              },
+              {
+                "id": "C",
+                "text": "내용이 더 슬퍼진다"
+              },
+              {
+                "id": "D",
+                "text": "독자가 혼란스러워진다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "문장 구조를 반복하면 운율이 형성된다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "\"당신이 찾으시면 ~ 잊었노라\", \"당신이 나무라면 ~ 잊었노라\"처럼 구조가 반복되면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문장이 단조로워진다"
+              },
+              {
+                "id": "B",
+                "text": "비슷한 구조의 반복으로 리듬감이 만들어진다"
+              },
+              {
+                "id": "C",
+                "text": "내용이 불분명해진다"
+              },
+              {
+                "id": "D",
+                "text": "문법이 틀리게 된다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "같은 단어를 반복하면 운율이 생긴다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 같은 단어를 반복하면 운율이 생긴다. [소전제] \"접동 접동 아우래비 접동\"은 \"접동\"을 반복한다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 표현은 7·5조이다"
+              },
+              {
+                "id": "B",
+                "text": "이 표현에는 운율이 없다"
+              },
+              {
+                "id": "C",
+                "text": "이 표현은 후렴구이다"
+              },
+              {
+                "id": "D",
+                "text": "이 표현에는 단어 반복에 의한 운율이 있다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "시조는 네 번씩 끊어 읽는 방법(4음보)으로 운율을 만든다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 네 번 끊어 읽는 시는 4음보 율격이다. [소전제] \"까마귀 / 검다 하여 / 백로야 / 웃지 마라\"는 네 번 끊어 읽는다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 시조는 3음보이다"
+              },
+              {
+                "id": "B",
+                "text": "이 시조는 4음보 율격이다"
+              },
+              {
+                "id": "C",
+                "text": "이 시조에는 운율이 없다"
+              },
+              {
+                "id": "D",
+                "text": "이 시조는 자유시이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "운율이 형성되려면 어떤 형태의 반복이 있어야 한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "\"운율이 형성되려면 반복이 필요하다\"를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반복이 있으면 반드시 운율이 형성된다"
+              },
+              {
+                "id": "B",
+                "text": "반복 없이도 운율은 형성된다"
+              },
+              {
+                "id": "C",
+                "text": "운율이 형성되었다면 어떤 형태의 반복이 있는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "운율과 반복은 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "청산별곡의 3음보 율격이 성립하려면 세 번씩 끊어 읽는 단위가 반복되어야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "위 조건을 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "3음보 율격이 성립했다면 세 번씩 끊어 읽는 단위가 반복된 것이다"
+              },
+              {
+                "id": "B",
+                "text": "3음보와 끊어 읽기는 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "세 번 끊어 읽지 않아도 3음보가 성립한다"
+              },
+              {
+                "id": "D",
+                "text": "세 번 끊어 읽으면 반드시 3음보이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "운율을 만드는 방법에는 단어 반복, 문장 구조 반복, 후렴구 반복, 글자 수 반복 등이 있다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "단어 반복으로 운율을 만든 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"접동 접동 아우래비 접동\" — 단어 \"접동\" 반복"
+              },
+              {
+                "id": "B",
+                "text": "\"당신이 찾으시면 ~ 잊었노라\" — 문장 구조 반복"
+              },
+              {
+                "id": "C",
+                "text": "\"산 넘어 남촌에는 / 누가 살길래\" — 글자 수 반복"
+              },
+              {
+                "id": "D",
+                "text": "\"얄리얄리 얄라셩\" — 후렴구 반복"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "고려가요의 독특한 리듬은 3·3·2조의 3음보 율격이다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "3음보 율격의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"까마귀 / 검다 하여 / 백로야 / 웃지 마라\" — 4음보"
+              },
+              {
+                "id": "B",
+                "text": "\"날 좀 보소 / 날 좀 보소\" — 단어 반복"
+              },
+              {
+                "id": "C",
+                "text": "\"산 넘어 남촌에는 / 누가 살길래\" — 7·5조"
+              },
+              {
+                "id": "D",
+                "text": "원문의 \"살어리 / 살어리 / 랏다\"처럼 세 번 끊어 읽는 것 — 3음보"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "후렴구를 반복하면 노래의 통일감이 생긴다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "위 조건을 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "통일감이 있으면 반드시 후렴구가 반복된 것이다"
+              },
+              {
+                "id": "B",
+                "text": "후렴구 없이도 항상 통일감이 있다"
+              },
+              {
+                "id": "C",
+                "text": "후렴구를 반복하면서 통일감이 생기지 않는 경우는 없다"
+              },
+              {
+                "id": "D",
+                "text": "후렴구와 통일감은 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "청산별곡에서 같은 말을 반복하면 화자의 간절한 마음이 강하게 표현된다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "위 조건을 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "간절한 마음이 표현되면 반드시 같은 말이 반복된 것이다"
+              },
+              {
+                "id": "B",
+                "text": "같은 말을 반복하면서 간절한 마음이 표현되지 않는 경우는 없다"
+              },
+              {
+                "id": "C",
+                "text": "반복 없이도 간절한 마음은 항상 표현된다"
+              },
+              {
+                "id": "D",
+                "text": "반복과 간절함은 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "글자 수를 맞추면 운율이 생긴다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "7·5조로 운율을 만든 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"산넘어 남촌에는(7) / 누가 살길래(5)\" — 글자 수 반복"
+              },
+              {
+                "id": "B",
+                "text": "\"접동 접동 아우래비 접동\" — 단어 반복"
+              },
+              {
+                "id": "C",
+                "text": "\"얄리얄리 얄라셩\" — 후렴구 반복"
+              },
+              {
+                "id": "D",
+                "text": "\"살고 싶어라, 살고 싶어라\" — 구절 반복"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "김소월의 초혼에서 \"산산이 부서진 이름이여!\"에는 시어와 문장 구조의 반복이 나타난다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "초혼에서 사용된 운율 형성 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "7·5조의 글자 수 반복"
+              },
+              {
+                "id": "B",
+                "text": "후렴구 반복"
+              },
+              {
+                "id": "C",
+                "text": "4음보 끊어 읽기"
+              },
+              {
+                "id": "D",
+                "text": "\"이름이여\"라는 시어와 \"~ㄴ 이름이여!\"라는 문장 구조의 반복"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "청산별곡의 후렴구는 밝고 경쾌한 느낌을 준다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "\"후렴구가 밝으므로 청산별곡의 전체 내용도 밝다\"는 주장이 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하다 — 후렴구가 밝으면 내용도 밝다"
+              },
+              {
+                "id": "B",
+                "text": "부당하다 — 노래 내용은 슬프고 애절한데 후렴구만 밝아서 오히려 대조를 이룬다"
+              },
+              {
+                "id": "C",
+                "text": "타당하다 — 밝은 후렴구는 슬픔을 없앤다"
+              },
+              {
+                "id": "D",
+                "text": "부당하다 — 후렴구는 내용과 전혀 관련이 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "박두진의 \"해야 솟아라, 해야 솟아라\"에서 운율이 나타난다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "\"해야 솟아라\"에서 글자 수를 똑같이 맞추어 운율을 만들었다는 주장이 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하다 — 모든 행의 글자 수가 같다"
+              },
+              {
+                "id": "B",
+                "text": "부당하다 — 이 시에는 운율이 없다"
+              },
+              {
+                "id": "C",
+                "text": "부당하다 — \"해\"라는 단어와 \"해야 솟아라\"라는 구절의 반복으로 운율을 만들었으며, 글자 수가 똑같이 반복된 것은 아니다"
+              },
+              {
+                "id": "D",
+                "text": "타당하다 — 3음보 율격이 사용되었다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "시에서 반복 요소의 수가 많을수록 운율감이 강해지는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "\"반복 요소의 수\"와 \"운율감의 강도\" 사이의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반복이 많으면 운율감이 반드시 약해진다"
+              },
+              {
+                "id": "B",
+                "text": "반복 요소의 수만이 운율감을 결정한다"
+              },
+              {
+                "id": "C",
+                "text": "반복 요소와 운율감은 전혀 관련이 없다"
+              },
+              {
+                "id": "D",
+                "text": "둘 사이에 상관관계가 있으나 반복의 배치나 내용 등 다른 요인도 영향을 준다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "청산별곡에서 1연과 6연은 장소만 바꾸고 비슷한 내용이 반복된다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "\"구조적 반복의 빈도\"와 \"화자의 소망 강조 정도\" 사이의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "구조적 반복이 많으면 소망이 강조되는 상관관계가 있지만 표현 방식 등도 영향을 준다"
+              },
+              {
+                "id": "B",
+                "text": "구조적 반복과 소망 강조는 전혀 관련이 없다"
+              },
+              {
+                "id": "C",
+                "text": "반복이 많으면 소망이 약해진다"
+              },
+              {
+                "id": "D",
+                "text": "반복만이 소망 강조를 결정한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "어떤 시 구절에서 운율이 형성되었는지 확인해야 한다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "\"산에는 꽃 피네, 꽃이 피네\"에서 운율이 형성되었다는 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "\"꽃\"과 \"꽃이 피네\"라는 단어·구절의 반복이 있는지 확인한다"
+              },
+              {
+                "id": "B",
+                "text": "시의 출판 연도를 확인한다"
+              },
+              {
+                "id": "C",
+                "text": "시인의 다른 작품을 조사한다"
+              },
+              {
+                "id": "D",
+                "text": "시의 글자 수만 센다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "\"푸른 하늘에 흰 구름이 떠 있다\"에서는 운율이 형성되지 않았다는 주장이 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "위 주장을 반증하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 문장에 단어, 문장 구조, 후렴구, 글자 수 등의 반복이 없다는 것을 확인"
+              },
+              {
+                "id": "B",
+                "text": "청산별곡에서 후렴구가 반복된 사례"
+              },
+              {
+                "id": "C",
+                "text": "김소월의 접동새에서 단어가 반복된 사례"
+              },
+              {
+                "id": "D",
+                "text": "이 문장에서 색깔 대비(\"푸른\"과 \"흰\")가 운율과 유사한 리듬감을 만들어낸다는 분석이 존재하는 경우"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

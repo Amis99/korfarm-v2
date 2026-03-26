@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀1 18장 논리사고력",
+  "targetLevel": "russell1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "오로라는 태양풍의 전기를 띤 알갱이가 지구 공기층 속의 기체와 부딪히면서 빛을 내는 현상이다. 주로 북극과 남극 근처에서 볼 수 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "오로라가 극지방에서 주로 관찰된다는 사실에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자기장은 극지방에서 가장 강하다."
+              },
+              {
+                "id": "B",
+                "text": "극지방은 지구 자기장이 약하여 태양풍의 알갱이가 침투하기 쉬운 곳이다."
+              },
+              {
+                "id": "C",
+                "text": "태양풍은 적도 근처에서만 분다."
+              },
+              {
+                "id": "D",
+                "text": "극지방에는 공기가 없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "높임 표현은 상대방을 공경하기 위해 사용한다. 듣는 사람이 웃어른일 때, 주어가 웃어른일 때, 대상이 웃어른일 때 높임 표현을 쓴다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "높임 표현이 필요하다는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사회적으로 나이나 지위에 따른 예의를 지키는 것이 중요한 문화가 존재한다."
+              },
+              {
+                "id": "B",
+                "text": "모든 사람은 동등하므로 높임 표현이 불필요하다."
+              },
+              {
+                "id": "C",
+                "text": "높임 표현은 외국어에서 가져온 것이다."
+              },
+              {
+                "id": "D",
+                "text": "웃어른에게도 반말을 쓰는 것이 자연스럽다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "오로라의 색깔은 태양풍 알갱이가 어떤 기체와 부딪히는지, 얼마나 높은 곳에서 부딪히는지에 따라 달라진다. 산소와 부딪히면 초록빛, 질소와 부딪히면 파란색이나 보라색이 된다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "태양풍이 매우 높은 고도에서 산소와 부딪히면 예상되는 오로라의 색은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "초록색"
+              },
+              {
+                "id": "B",
+                "text": "붉은색"
+              },
+              {
+                "id": "C",
+                "text": "보라색"
+              },
+              {
+                "id": "D",
+                "text": "파란색"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "'밥'을 '진지'로, '자다'를 '주무시다'로, '있다'를 '계시다'로 바꿔 말하는 것이 높임 표현의 특별한 방법이다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "할머니에게 '밥 먹었어?'라고 말하면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "높임 표현을 쓰지 않아 예의에 어긋나는 표현이 된다."
+              },
+              {
+                "id": "B",
+                "text": "문법적으로 완벽한 문장이다."
+              },
+              {
+                "id": "C",
+                "text": "할머니가 더 친근하게 느낀다."
+              },
+              {
+                "id": "D",
+                "text": "자연스럽고 예의 바른 표현이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "태양풍은 태양에서 날아오는 전기를 띤 알갱이의 흐름이다. 지구 자기장은 이 알갱이로부터 지구를 보호한다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 자기장이 약한 곳에서는 태양풍 알갱이가 침투할 수 있다. 소전제: 극지방은 자기장이 약한 곳이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "극지방에서는 태양풍 알갱이가 침투할 수 없다."
+              },
+              {
+                "id": "B",
+                "text": "태양풍은 극지방을 피해 간다."
+              },
+              {
+                "id": "C",
+                "text": "극지방에서는 태양풍 알갱이가 침투할 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "자기장이 강한 곳에서 오로라가 생긴다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "높임 표현에서 '-(으)시-'를 서술어에 넣으면 주어를 높일 수 있다. '선생님께서 오신다'에서 '-(으)시-'가 주어 높임이다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 서술어에 '-(으)시-'를 넣으면 주어를 높이는 표현이다. 소전제: '할아버지께서 주무신다'에서 '-(으)시-'가 사용되었다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "목적어를 높이는 표현이다."
+              },
+              {
+                "id": "B",
+                "text": "주어인 '할아버지'를 높이는 표현이다."
+              },
+              {
+                "id": "C",
+                "text": "듣는 사람을 높이는 표현이다."
+              },
+              {
+                "id": "D",
+                "text": "높임 표현이 아니다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "오로라가 생기려면 태양풍의 알갱이가 지구 공기층에 도달해야 한다. 태양풍이 없으면 오로라도 없다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'오로라가 생기려면 태양풍이 필요하다'에서 필요조건 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태양풍이 있으면 반드시 오로라가 생긴다."
+              },
+              {
+                "id": "B",
+                "text": "태양풍과 오로라는 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "태양풍이 없으면 오로라가 생기지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "오로라가 없으면 태양풍이 있는 것이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "주어를 높이려면 서술어에 '-(으)시-'를 넣거나 주어에 '-께서'를 사용해야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'주어를 높이려면 높임 표지가 필요하다'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "높임 표지가 있으면 반드시 주어가 높아진다."
+              },
+              {
+                "id": "B",
+                "text": "높임 표지와 주어 높임은 무관하다."
+              },
+              {
+                "id": "C",
+                "text": "주어가 높아지지 않으면 높임 표지가 있다."
+              },
+              {
+                "id": "D",
+                "text": "높임 표지가 없으면 주어를 높일 수 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "오로라의 색은 기체 종류와 고도에 따라 결정된다. 산소는 초록/빨강, 질소는 파랑/보라색 오로라를 만든다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'오로라 발생'의 필요조건은 '태양풍 알갱이가 대기 기체와 충돌해야 한다'이다. 오로라가 발생하지 않는 경우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태양풍 알갱이가 산소와 충돌한 경우"
+              },
+              {
+                "id": "B",
+                "text": "태양 활동이 약해 태양풍이 지구에 도달하지 못한 경우"
+              },
+              {
+                "id": "C",
+                "text": "태양풍 알갱이가 질소와 충돌한 경우"
+              },
+              {
+                "id": "D",
+                "text": "극지방에서 태양풍이 대기에 진입한 경우"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "높임 표현에는 듣는 사람 높임, 주어 높임, 대상 높임의 세 가지가 있다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'대상 높임'의 필요조건은 '목적어나 부사어의 대상이 웃어른이어야 한다'이다. 대상 높임의 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'나는 학교에 갔다'에서 '-았-' 사용"
+              },
+              {
+                "id": "B",
+                "text": "'할아버지, 이제 출발해요'에서 '-요' 사용"
+              },
+              {
+                "id": "C",
+                "text": "'선생님께서 오신다'에서 '-께서'와 '-(으)시-' 사용"
+              },
+              {
+                "id": "D",
+                "text": "'어머니께 선물을 드렸다'에서 '-께'와 '드리다' 사용"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "태양 활동이 활발해지면 태양풍이 강해진다. 태양풍이 강해지면 오로라가 더 밝고 넓게 나타난다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'태양 활동이 활발하면(P) 오로라가 더 밝게 나타난다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오로라가 밝으면 반드시 태양 활동이 활발하다."
+              },
+              {
+                "id": "B",
+                "text": "오로라가 어두우면 태양이 활발하다."
+              },
+              {
+                "id": "C",
+                "text": "태양 활동이 활발하면서 오로라가 어두운 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "태양 활동과 오로라는 무관하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "'밥'을 '진지'로, '자다'를 '주무시다'로 바꾸는 것처럼, 높임의 뜻이 담긴 특별한 낱말을 사용하면 높임 표현이 된다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'높임 낱말을 사용하면(P) 높임 표현이 된다(Q)'에서 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "높임 표현이면 반드시 높임 낱말이 있다."
+              },
+              {
+                "id": "B",
+                "text": "높임이 안 되면 높임 낱말을 쓴 것이다."
+              },
+              {
+                "id": "C",
+                "text": "높임 낱말을 사용하면서 높임이 되지 않는 경우는 없다."
+              },
+              {
+                "id": "D",
+                "text": "높임 낱말과 높임은 무관하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "자기장은 지구를 둘러싸 태양풍으로부터 보호한다. 자기장이 없으면 태양풍이 직접 대기에 부딪혀 생물에게 해로울 수 있다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'자기장이 보호막 역할을 하면 생물이 안전하다'의 충분조건 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태양풍이 불지 않는 경우"
+              },
+              {
+                "id": "B",
+                "text": "화성처럼 자기장이 거의 없어 대기가 벗겨진 경우"
+              },
+              {
+                "id": "C",
+                "text": "지구 자기장이 태양풍의 위험한 알갱이를 차단하여 지표면 생물이 안전한 경우"
+              },
+              {
+                "id": "D",
+                "text": "지구에서 가장 먼 행성의 상태"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "시에서 형식과 내용으로 시의 종류를 나눈다. 정형시는 정해진 형식이 있고, 자유시는 형식 제한이 없다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'정해진 형식을 따르면 정형시이다'의 충분조건 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "행과 연의 구분 없이 자유롭게 쓴 현대시"
+              },
+              {
+                "id": "B",
+                "text": "3·4조, 4·4조의 음수율을 지킨 시"
+              },
+              {
+                "id": "C",
+                "text": "초장-중장-종장 구조를 갖춘 시조"
+              },
+              {
+                "id": "D",
+                "text": "음보와 자수를 엄격하게 맞춘 시"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "태양풍 알갱이가 대기에 진입하면 오로라가 발생한다. 태양풍이 강할수록 오로라가 밝다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'태양풍이 대기에 진입하면(P) 오로라가 발생한다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오로라가 발생했으므로 태양풍이 진입한 것이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "A와 C 모두 타당하다."
+              },
+              {
+                "id": "C",
+                "text": "태양풍이 진입하지 않았으므로 오로라가 없다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "오로라가 발생하지 않았으므로 태양풍이 진입하지 않은 것이다. (대우 — 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "듣는 사람이 웃어른이면 문장의 끝맺음을 높여야 한다. '할아버지, 이제 출발해요'에서 '-요'가 높임이다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'듣는 사람이 웃어른이면(P) 끝맺음을 높여야 한다(Q)'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "끝맺음을 높였으므로 듣는 사람이 웃어른이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "듣는 사람이 할아버지이므로 끝맺음을 높여야 한다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "듣는 사람이 친구이므로 끝맺음을 높이지 않아도 된다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "태양 활동의 주기(약 11년)와 오로라의 빈도 사이에 관련성이 있다. 태양 활동이 활발한 시기에 오로라가 더 자주 관찰된다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'태양 활동 주기'와 '오로라 빈도'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태양 활동이 활발하면 오로라가 반드시 매일 나타난다."
+              },
+              {
+                "id": "B",
+                "text": "오로라가 자주 나타나면 반드시 태양 활동이 활발한 것이다."
+              },
+              {
+                "id": "C",
+                "text": "태양 활동과 오로라는 무관하다."
+              },
+              {
+                "id": "D",
+                "text": "태양 활동 주기와 오로라 빈도 사이에 양의 상관관계가 있으나, 지구 자기장 상태 등 다른 변수도 영향을 준다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "높임 표현의 사용 빈도는 한국 사회의 위계 문화와 관련이 있다. 나이와 지위에 민감한 사회일수록 높임 표현이 세분화되는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'사회적 위계 의식'과 '높임 표현 세분화'의 관계에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "위계 의식과 높임 표현 세분화 사이에 양의 상관관계가 있으나, 문화적 전통과 언어 체계의 특성도 함께 작용한다."
+              },
+              {
+                "id": "B",
+                "text": "높임 표현이 세분화되면 반드시 위계 의식이 강한 것이다."
+              },
+              {
+                "id": "C",
+                "text": "위계 의식이 강하면 높임 표현이 항상 7단계이다."
+              },
+              {
+                "id": "D",
+                "text": "둘은 무관하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "오로라를 통해 태양의 활동 상태를 알 수 있고, 지구 자기장의 변화도 관찰할 수 있다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '오로라의 밝기를 측정하면 태양 활동의 강도를 추정할 수 있다.' 이 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오로라의 밝기와 동시에 측정된 태양풍의 세기를 비교 분석한다."
+              },
+              {
+                "id": "B",
+                "text": "오로라의 색깔만 관찰한다."
+              },
+              {
+                "id": "C",
+                "text": "지구 자기장의 세기만 측정한다."
+              },
+              {
+                "id": "D",
+                "text": "오로라가 보이지 않는 지역을 조사한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "높임 표현을 바르게 사용하는 것은 상대방을 공경하는 마음을 보여주는 중요한 언어 예절이다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '높임 표현을 올바르게 사용하는 사람이 상대방에게 더 좋은 인상을 준다.' 이 가설을 검증하는 방법은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "외국어의 존칭 체계를 조사한다."
+              },
+              {
+                "id": "B",
+                "text": "높임 표현의 종류를 목록으로 정리한다."
+              },
+              {
+                "id": "C",
+                "text": "높임 표현이 사용된 문장의 수를 센다."
+              },
+              {
+                "id": "D",
+                "text": "높임 표현을 올바르게 사용하는 사람과 그렇지 않은 사람에 대한 상대방의 인상 평가를 비교한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -6,7 +6,7 @@ const buildUrl = (path) => {
 };
 
 const getToken = () => {
-  const token = localStorage.getItem(TOKEN_KEY);
+  const token = sessionStorage.getItem(TOKEN_KEY);
   if (!token) throw new Error("관리자 토큰이 필요합니다.");
   return token;
 };

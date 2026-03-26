@@ -327,18 +327,17 @@ function FarmListPage() {
                         </span>
                       </td>
                       <td className="farm-td-video">
-                        {item.videoUrl ? (
-                          <button
-                            className="video-play-btn"
-                            title="영상 보기"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setVideoUrl(item.videoUrl);
-                            }}
-                          >
-                            <span className="material-symbols-outlined">play_circle</span>
-                          </button>
-                        ) : null}
+                        <button
+                          className="video-play-btn"
+                          title={item.videoUrl ? "영상 보기" : "영상 없음"}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (item.videoUrl) setVideoUrl(item.videoUrl);
+                          }}
+                          disabled={!item.videoUrl}
+                        >
+                          <span className="material-symbols-outlined">play_circle</span>
+                        </button>
                       </td>
                     </tr>
                   );

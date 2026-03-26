@@ -95,6 +95,7 @@ export default function AdminStudyPlansPage() {
 
   return (
     <AdminLayout>
+      <div className="asp-wrap">
       <div className="asp-header">
         <h1>
           <span className="material-symbols-outlined">event_note</span>
@@ -156,6 +157,7 @@ export default function AdminStudyPlansPage() {
           <p>등록된 학습 계획표가 없습니다.</p>
         </div>
       ) : (
+        <div className="asp-table-scroll">
         <table className="asp-table">
           <thead>
             <tr>
@@ -198,6 +200,7 @@ export default function AdminStudyPlansPage() {
             ))}
           </tbody>
         </table>
+        </div>
       )}
 
       {showCreate && (
@@ -206,6 +209,7 @@ export default function AdminStudyPlansPage() {
           onCreated={() => { setShowCreate(false); load(); }}
         />
       )}
+      </div>
     </AdminLayout>
   );
 }

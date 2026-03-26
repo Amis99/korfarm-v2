@@ -1,0 +1,468 @@
+// Day 7 - NONFICTION (비문학) - 러셀3
+// 주제: 인쇄술의 발명과 지식 혁명
+
+const paragraphs = [
+  {
+    id: "p1",
+    text: "오늘날 우리는 원하는 정보를 손쉽게 책이나 인터넷으로 접할 수 있지만, 인쇄술이 발명되기 전까지 지식의 전달은 극히 제한적이었다. 중세 유럽에서는 수도사들이 양피지 위에 붓으로 한 글자씩 베껴 쓰는 필사 방식으로 책을 만들었기 때문에 한 권의 책을 완성하는 데 수개월에서 수년이 걸리기도 했다. 이렇게 만들어진 책은 수량이 극히 적어 왕실이나 교회 같은 소수의 권력 집단만이 소유할 수 있었다. 일반 대중은 글을 읽고 쓸 기회 자체가 차단되어 있었으므로 지식은 곧 권력이었고, 정보의 독점이 사회 구조를 유지하는 수단으로 기능하였다."
+  },
+  {
+    id: "p2",
+    text: "이러한 상황에 혁명적 변화를 가져온 것이 바로 요하네스 구텐베르크의 금속 활자 인쇄술이다. 1440년대에 개발된 이 기술은 개별 글자를 금속으로 주조하여 조합한 뒤 잉크를 묻혀 종이에 찍어 내는 방식이었다. 한번 만든 활자는 분해하여 다른 문장에 재사용할 수 있었으므로 필사에 비해 생산 속도와 효율이 비약적으로 향상되었다. 구텐베르크는 이 기술로 성경을 인쇄하였는데, 이른바 구텐베르크 성경은 인쇄물의 역사에서 가장 상징적인 결과물로 평가받는다. 금속 활자 인쇄술의 등장으로 책의 대량 생산이 가능해지면서 서적의 가격이 크게 떨어졌고, 이전에는 꿈도 꿀 수 없었던 일반 대중도 책에 접근할 수 있게 되었다."
+  },
+  {
+    id: "p3",
+    text: "인쇄술의 보급은 단순히 책의 수량을 늘린 것에 그치지 않고 사회 전체를 변화시켰다. 지식이 널리 퍼지면서 사람들은 기존의 권위에 의문을 제기하기 시작했고, 이는 종교 개혁과 과학 혁명 같은 거대한 사회적 변화를 이끌어 냈다. 마르틴 루터의 종교 개혁이 빠르게 확산될 수 있었던 배경에도 인쇄술이 핵심적 역할을 했는데, 루터가 작성한 문서가 인쇄되어 짧은 시간 안에 유럽 전역으로 퍼져 나갔기 때문이다. 과학 분야에서도 코페르니쿠스나 갈릴레이 같은 학자들의 연구 성과가 인쇄물을 통해 널리 공유되면서 새로운 지식이 축적되고 검증되는 속도가 크게 빨라졌다."
+  },
+  {
+    id: "p4",
+    text: "한편 한국의 금속 활자 인쇄술은 구텐베르크보다 약 이백 년 앞선 고려 시대에 이미 존재하고 있었다. 현존하는 세계 최고의 금속 활자 인쇄물인 직지심체요절은 1377년에 청주 흥덕사에서 간행된 것으로, 구텐베르크 성경보다 약 칠십여 년 앞선다. 다만 한국의 금속 활자는 한자의 특성상 필요한 활자 수가 방대하여 유럽처럼 대량 생산 체제로 발전하지는 못했다. 그럼에도 불구하고 한국의 금속 활자 인쇄술은 인류의 지식 전달 역사에서 중요한 이정표로 인정받고 있으며, 기술 혁신이 반드시 한 지역에서만 시작되는 것은 아님을 보여 주는 의미 있는 사례이다."
+  }
+];
+
+const totalLength = paragraphs.reduce((sum, p) => sum + p.text.length, 0);
+console.log(`총 글자수: ${totalLength}`);
+if (totalLength < 1250 || totalLength > 1350) {
+  console.warn(`경고: 목표 범위(1250~1350)를 벗어남!`);
+}
+
+function findRange(paragraphId, searchText) {
+  const para = paragraphs.find(p => p.id === paragraphId);
+  if (!para) throw new Error(`문단 ${paragraphId}을 찾을 수 없음`);
+  const start = para.text.indexOf(searchText);
+  if (start === -1) throw new Error(`"${searchText}"을(를) ${paragraphId}에서 찾을 수 없음`);
+  return { paragraphId, start, end: start + searchText.length };
+}
+
+function splitSentences(text) {
+  const sentences = [];
+  const regex = /[.?!](?:\s|$)/g;
+  let start = 0;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    const end = match.index + 1;
+    const sent = text.substring(start, end).trim();
+    if (sent) {
+      const actualStart = text.indexOf(sent, start);
+      sentences.push({ start: actualStart, end: actualStart + sent.length, text: sent });
+    }
+    start = match.index + match[0].length;
+  }
+  if (start < text.length) {
+    const remaining = text.substring(start).trim();
+    if (remaining) {
+      const actualStart = text.indexOf(remaining, start);
+      sentences.push({ start: actualStart, end: actualStart + remaining.length, text: remaining });
+    }
+  }
+  return sentences;
+}
+
+const paragraphSentences = {};
+for (const para of paragraphs) {
+  const sentences = splitSentences(para.text);
+  paragraphSentences[para.id] = sentences;
+  console.log(`${para.id}: ${sentences.length}문장, 길이: ${para.text.length}자`);
+}
+
+const timeline = [];
+let stepCount = 0;
+
+const questionData = {
+  p1: [
+    {
+      prompt: "첫 문장이 말하는 인쇄술 발명 이전의 상황으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "지식의 전달이 극히 제한적이었다." },
+        { id: "B", text: "누구나 자유롭게 책을 읽을 수 있었다." },
+        { id: "C", text: "인터넷으로 정보를 공유하고 있었다." },
+        { id: "D", text: "대중 매체가 이미 발달해 있었다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "둘째 문장에서 중세 유럽의 책 제작 방식으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "수도사들이 양피지에 한 글자씩 베껴 쓰는 필사 방식이었다." },
+        { id: "B", text: "목판에 글자를 새겨 대량으로 찍어 내는 방식이었다." },
+        { id: "C", text: "점토판에 글자를 눌러 구워 내는 방식이었다." },
+        { id: "D", text: "나뭇잎에 즙으로 글자를 쓰는 방식이었다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "셋째 문장에서 필사본 서적을 소유할 수 있었던 집단으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "왕실이나 교회 같은 소수의 권력 집단이었다." },
+        { id: "B", text: "일반 대중 누구나 소유할 수 있었다." },
+        { id: "C", text: "상인 계층만이 독점적으로 소유했다." },
+        { id: "D", text: "학생과 교사만이 소유할 수 있었다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "넷째 문장이 말하는 지식과 권력의 관계로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "지식은 곧 권력이었고 정보의 독점이 사회 구조를 유지하는 수단이었다." },
+        { id: "B", text: "지식은 누구에게나 공평하게 분배되어 있었다." },
+        { id: "C", text: "권력자들은 지식보다 군사력만을 중시했다." },
+        { id: "D", text: "대중이 지식을 독점하고 권력층은 소외되어 있었다." }
+      ],
+      answerId: "A"
+    },
+    // 중심내용
+    {
+      prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "인쇄술 이전에는 필사 방식의 한계로 지식이 소수에게 독점되어 있었다." },
+        { id: "B", text: "중세 유럽에서는 모든 사람이 글을 읽고 쓸 수 있었다." },
+        { id: "C", text: "양피지는 값이 싸서 누구나 쉽게 구할 수 있었다." },
+        { id: "D", text: "필사 방식은 인쇄술보다 더 빠르고 효율적이었다." }
+      ],
+      answerId: "A"
+    }
+  ],
+  p2: [
+    {
+      prompt: "첫 문장이 소개하는 혁명적 기술로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "요하네스 구텐베르크의 금속 활자 인쇄술이다." },
+        { id: "B", text: "토머스 에디슨의 전구 발명이다." },
+        { id: "C", text: "알렉산더 벨의 전화기 발명이다." },
+        { id: "D", text: "제임스 와트의 증기 기관 발명이다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "둘째 문장에서 금속 활자 인쇄의 원리로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "글자를 금속으로 주조하여 조합한 뒤 잉크를 묻혀 찍는 방식이다." },
+        { id: "B", text: "나무 판에 글자를 새겨 한 장씩 찍어 내는 방식이다." },
+        { id: "C", text: "돌에 그림을 새긴 뒤 물과 기름의 반발을 이용하는 방식이다." },
+        { id: "D", text: "비단 위에 붓으로 글자를 직접 써서 복제하는 방식이다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "셋째 문장에서 활자의 장점으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "활자를 분해하여 다른 문장에 재사용할 수 있어 효율이 높았다." },
+        { id: "B", text: "한번 사용한 활자는 폐기해야 해서 비용이 많이 들었다." },
+        { id: "C", text: "활자는 한 종류의 책에만 사용할 수 있었다." },
+        { id: "D", text: "필사보다 느렸지만 글씨가 더 아름다웠다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "넷째 문장에서 구텐베르크가 인쇄한 대표작으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "성경을 인쇄하였으며 인쇄물 역사의 상징적 결과물이다." },
+        { id: "B", text: "백과사전을 인쇄하여 학교에 보급하였다." },
+        { id: "C", text: "소설을 인쇄하여 일반 대중에게 판매하였다." },
+        { id: "D", text: "법률 문서를 인쇄하여 법원에 납품하였다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "다섯째 문장이 말하는 인쇄술의 사회적 효과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "서적 가격이 떨어져 일반 대중도 책에 접근할 수 있게 되었다." },
+        { id: "B", text: "서적 가격이 올라 오히려 대중의 접근이 줄었다." },
+        { id: "C", text: "책의 질이 떨어져 사람들이 읽기를 꺼리게 되었다." },
+        { id: "D", text: "인쇄술은 귀족만을 위한 기술로 제한되었다." }
+      ],
+      answerId: "A"
+    },
+    // 중심내용
+    {
+      prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "구텐베르크의 금속 활자 인쇄술이 책의 대량 생산과 대중화를 이끌었다." },
+        { id: "B", text: "구텐베르크는 인쇄술 외에 다양한 발명을 한 과학자였다." },
+        { id: "C", text: "금속 활자 인쇄술은 필사보다 느리고 비효율적이었다." },
+        { id: "D", text: "구텐베르크 성경은 예술 작품으로만 가치가 있다." }
+      ],
+      answerId: "A"
+    }
+  ],
+  p3: [
+    {
+      prompt: "첫 문장이 강조하는 인쇄술의 영향으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "단순히 책의 수량을 늘린 것에 그치지 않았다." },
+        { id: "B", text: "오직 책의 수량만 늘어나는 결과를 낳았다." },
+        { id: "C", text: "인쇄술이 보급되었지만 사회에는 영향이 없었다." },
+        { id: "D", text: "인쇄술의 보급으로 필사가 더 활발해졌다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "둘째 문장에서 인쇄술이 촉진한 사회적 변화로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "종교 개혁과 과학 혁명 같은 거대한 사회적 변화를 이끌었다." },
+        { id: "B", text: "왕실의 권력이 더욱 강화되는 결과를 낳았다." },
+        { id: "C", text: "교회의 권위가 더욱 공고해지는 데 기여했다." },
+        { id: "D", text: "대중이 책을 읽는 것을 오히려 금지하게 되었다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "셋째 문장에서 루터의 종교 개혁 확산에 기여한 요인으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "루터의 문서가 인쇄되어 짧은 시간에 유럽 전역으로 퍼졌다." },
+        { id: "B", text: "루터가 직접 유럽 각지를 돌아다니며 연설했다." },
+        { id: "C", text: "교회가 루터의 주장을 공식적으로 인정해 주었다." },
+        { id: "D", text: "왕실이 루터의 문서를 필사하여 배포하였다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "넷째 문장에서 과학 분야의 변화로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "연구 성과가 인쇄물로 공유되어 지식의 축적과 검증이 빨라졌다." },
+        { id: "B", text: "과학자들이 인쇄물을 불신하여 구전으로만 지식을 전달했다." },
+        { id: "C", text: "인쇄술 때문에 과학 연구가 오히려 위축되었다." },
+        { id: "D", text: "과학 서적은 인쇄되지 않고 필사본으로만 유통되었다." }
+      ],
+      answerId: "A"
+    },
+    // 중심내용
+    {
+      prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "인쇄술의 보급이 종교 개혁과 과학 혁명 등 사회 전반의 변화를 이끌었다." },
+        { id: "B", text: "인쇄술은 오직 종교 분야에서만 활용되었다." },
+        { id: "C", text: "루터의 종교 개혁은 인쇄술과 무관하게 진행되었다." },
+        { id: "D", text: "과학 혁명은 인쇄술 이전에 이미 완성되어 있었다." }
+      ],
+      answerId: "A"
+    }
+  ],
+  p4: [
+    {
+      prompt: "첫 문장이 소개하는 사실로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "한국의 금속 활자 인쇄술이 구텐베르크보다 약 이백 년 앞서 있었다." },
+        { id: "B", text: "한국의 인쇄술은 구텐베르크 이후에 전파된 것이다." },
+        { id: "C", text: "한국에서는 금속 활자가 아닌 나무 활자만 사용하였다." },
+        { id: "D", text: "고려 시대에는 인쇄 기술이 존재하지 않았다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "둘째 문장에서 직지심체요절에 대한 설명으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "1377년에 청주 흥덕사에서 간행된 세계 최고의 금속 활자본이다." },
+        { id: "B", text: "구텐베르크 성경과 같은 해에 간행된 인쇄물이다." },
+        { id: "C", text: "일본에서 인쇄되어 고려에 전해진 서적이다." },
+        { id: "D", text: "조선 시대 세종대왕이 직접 인쇄를 명한 서적이다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "셋째 문장에서 한국 금속 활자의 한계로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "한자 특성상 필요한 활자 수가 방대하여 대량 생산에 어려움이 있었다." },
+        { id: "B", text: "금속의 품질이 나빠서 글자가 제대로 찍히지 않았다." },
+        { id: "C", text: "인쇄 기술 자체가 유럽에 비해 원시적이었다." },
+        { id: "D", text: "활자를 만들 수 있는 장인이 전혀 없었다." }
+      ],
+      answerId: "A"
+    },
+    {
+      prompt: "넷째 문장이 강조하는 한국 금속 활자의 의의로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "인류의 지식 전달 역사에서 중요한 이정표로 인정받고 있다." },
+        { id: "B", text: "유럽의 인쇄술에 직접적인 영향을 미친 기술이다." },
+        { id: "C", text: "오늘날의 디지털 인쇄 기술의 직접적 원천이다." },
+        { id: "D", text: "한자 문화권에서만 의미가 있는 지역적 기술이다." }
+      ],
+      answerId: "A"
+    },
+    // 중심내용
+    {
+      prompt: "넷째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "한국의 금속 활자 인쇄술이 구텐베르크보다 앞서 있었으며 그 역사적 의의가 크다." },
+        { id: "B", text: "한국의 인쇄술은 실패한 기술로 역사적 가치가 없다." },
+        { id: "C", text: "구텐베르크가 한국의 기술을 배워 금속 활자를 만들었다." },
+        { id: "D", text: "직지심체요절은 위조된 문서라는 주장이 지배적이다." }
+      ],
+      answerId: "A"
+    }
+  ]
+};
+
+for (const para of paragraphs) {
+  const sentences = paragraphSentences[para.id];
+  const questions = questionData[para.id];
+
+  for (let i = 0; i < sentences.length; i++) {
+    stepCount++;
+    timeline.push({
+      stepId: `s${stepCount}`,
+      highlight: {
+        ranges: [{ paragraphId: para.id, start: sentences[i].start, end: sentences[i].end }]
+      },
+      question: {
+        ...questions[i],
+        scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+      }
+    });
+  }
+
+  stepCount++;
+  const paraEnd = sentences[sentences.length - 1].end;
+  timeline.push({
+    stepId: `s${stepCount}`,
+    highlight: {
+      ranges: [{ paragraphId: para.id, start: 0, end: paraEnd }]
+    },
+    question: {
+      ...questions[questions.length - 1],
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  });
+}
+
+const recallCards = [
+  { id: "c1", text: "인쇄술 이전에는 필사 방식으로 책을 만들어 소수 권력 집단만 소유했다." },
+  { id: "c2", text: "지식의 독점은 사회 구조를 유지하는 수단으로 기능하였다." },
+  { id: "c3", text: "구텐베르크는 1440년대에 금속 활자 인쇄술을 개발하여 성경을 인쇄했다." },
+  { id: "c4", text: "인쇄술로 서적 가격이 떨어져 일반 대중도 책에 접근할 수 있게 되었다." },
+  { id: "c5", text: "인쇄술 보급은 종교 개혁과 과학 혁명 등 사회 전반의 변화를 이끌었다." },
+  { id: "c6", text: "루터의 문서가 인쇄되어 유럽 전역으로 빠르게 퍼져 종교 개혁이 확산되었다." },
+  { id: "c7", text: "한국의 직지심체요절은 1377년에 간행된 세계 최고의 금속 활자 인쇄물이다." },
+  { id: "c8", text: "한국 금속 활자는 한자의 방대한 글자 수 때문에 대량 생산에 한계가 있었다." }
+];
+
+const confirmQuestions = [
+  {
+    id: "q1",
+    prompt: "인쇄술 발명 이전 중세 유럽에서 책을 만드는 방식은 무엇이었는가?",
+    answerText: "필사 방식",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", "필사 방식으로 책을 만들었기 때문에")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q2",
+    prompt: "금속 활자 인쇄술을 개발한 사람은 누구인가?",
+    answerText: "요하네스 구텐베르크",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "요하네스 구텐베르크의 금속 활자 인쇄술")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q3",
+    prompt: "구텐베르크가 인쇄술로 만든 가장 상징적인 결과물은 무엇인가?",
+    answerText: "구텐베르크 성경",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "구텐베르크 성경은 인쇄물의 역사에서 가장 상징적인 결과물")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q4",
+    prompt: "인쇄술의 보급이 이끌어 낸 두 가지 거대한 사회적 변화는 무엇인가?",
+    answerText: "종교 개혁과 과학 혁명",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "종교 개혁과 과학 혁명 같은 거대한 사회적 변화를 이끌어 냈다")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q5",
+    prompt: "현존하는 세계 최고의 금속 활자 인쇄물의 이름은 무엇인가?",
+    answerText: "직지심체요절",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p4", "직지심체요절은 1377년에 청주 흥덕사에서 간행된 것")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q6",
+    prompt: "한국의 금속 활자가 대량 생산 체제로 발전하지 못한 이유는 무엇인가?",
+    answerText: "한자의 특성상 필요한 활자 수가 방대했기 때문",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p4", "한자의 특성상 필요한 활자 수가 방대하여 유럽처럼 대량 생산 체제로 발전하지는 못했다")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q7",
+    prompt: "인쇄술의 등장으로 서적 가격이 떨어진 결과 누가 책에 접근하게 되었는가?",
+    answerText: "일반 대중",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "일반 대중도 책에 접근할 수 있게 되었다")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  }
+];
+
+const content = {
+  contentId: "dr-r3-007",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 3) Day 7 비문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_3",
+  schoolGradeRange: { min: 9, max: 10 },
+  area: "READING",
+  subArea: "NONFICTION",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 300,
+  assets: {},
+  payload: {
+    passage: { format: "TEXT", paragraphs },
+    intensive: { timeline },
+    recall: {
+      cards: recallCards,
+      correctOrder: recallCards.map(c => c.id),
+      seedPenalty: 1
+    },
+    confirm: { questions: confirmQuestions }
+  }
+};
+
+// 검증
+console.log(`\n=== 검증 ===`);
+console.log(`intensive steps: ${timeline.length}`);
+console.log(`recall cards: ${recallCards.length}`);
+console.log(`confirm questions: ${confirmQuestions.length}`);
+
+let errors = 0;
+for (const step of timeline) {
+  for (const range of step.highlight.ranges) {
+    const para = paragraphs.find(p => p.id === range.paragraphId);
+    if (range.start < 0 || range.end > para.text.length || range.start >= range.end) {
+      console.error(`오류: ${step.stepId} - 범위 초과 (${range.start}-${range.end}, 문단 길이: ${para.text.length})`);
+      errors++;
+    }
+  }
+}
+
+for (const q of confirmQuestions) {
+  for (const range of q.answerRanges) {
+    const para = paragraphs.find(p => p.id === range.paragraphId);
+    if (range.start < 0 || range.end > para.text.length) {
+      console.error(`오류: ${q.id} - answerRange 범위 초과`);
+      errors++;
+    }
+    console.log(`  ${q.id}: "${para.text.substring(range.start, range.end)}"`);
+  }
+}
+
+if (errors === 0) console.log(`\n모든 검증 통과!`);
+else { console.error(`\n${errors}개 오류 발견!`); process.exit(1); }
+
+const fs = require('fs');
+const outputPath = process.argv[2] || 'day7-output.json';
+fs.writeFileSync(outputPath, JSON.stringify(content, null, 2), 'utf8');
+console.log(`\n파일 저장: ${outputPath}`);

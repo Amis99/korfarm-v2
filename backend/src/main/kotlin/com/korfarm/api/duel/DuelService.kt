@@ -238,7 +238,7 @@ class DuelService(
     }
 
     @Transactional
-    fun toggleReady(userId: String, roomId: String): Boolean {
+    fun toggleReady(userId: String, roomId: String, stakeSeedType: String? = null): Boolean {
         val player = duelRoomPlayerRepository.findByRoomIdAndUserId(roomId, userId)
             ?: throw ApiException("NOT_FOUND", "방에 참가하지 않았습니다", HttpStatus.NOT_FOUND)
         if (player.status != "joined") {
@@ -249,9 +249,16 @@ class DuelService(
             ApiException("NOT_FOUND", "방을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
         if (room.createdBy == userId) {
+            if (stakeSeedType != null) {
+                player.stakeSeedType = stakeSeedType
+                duelRoomPlayerRepository.save(player)
+            }
             return true
         }
         player.isReady = !player.isReady
+        if (stakeSeedType != null) {
+            player.stakeSeedType = stakeSeedType
+        }
         duelRoomPlayerRepository.save(player)
         return player.isReady
     }
@@ -308,7 +315,11 @@ class DuelService(
         players.forEach { rp ->
             // AI 플레이어는 에스크로 차감 건너뛰기
             if (!aiPlayerService.isAiPlayer(rp.userId)) {
-                deductSeedsFromAny(rp.userId, room.stakeAmount, match.id)
+                if (rp.stakeSeedType != null && rp.stakeSeedType in SEED_TYPES) {
+                    deductSeedsFromType(rp.userId, rp.stakeSeedType!!, room.stakeAmount, match.id)
+                } else {
+                    deductSeedsFromAny(rp.userId, room.stakeAmount, match.id)
+                }
             }
 
             val mp = DuelMatchPlayerEntity(
@@ -684,6 +695,25 @@ class DuelService(
         if (remaining > 0) {
             throw ApiException("INSUFFICIENT_SEEDS", "씨앗 차감 실패", HttpStatus.BAD_REQUEST)
         }
+    }
+
+    // 지정된 씨앗 종류에서만 차감 + 에스크로 기록
+    private fun deductSeedsFromType(userId: String, seedType: String, amount: Int, matchId: String) {
+        val seedEntity = userSeedRepository.findForUpdate(userId, seedType)
+        if (seedEntity == null || seedEntity.count < amount) {
+            throw ApiException("INSUFFICIENT_SEEDS", "선택한 씨앗이 부족합니다", HttpStatus.BAD_REQUEST)
+        }
+        economyService.adjustSeed(userId, seedType, -amount, "duel_stake", "duel_match", matchId)
+        duelEscrowRepository.save(
+            DuelEscrowEntity(
+                id = IdGenerator.newId("esc"),
+                matchId = matchId,
+                userId = userId,
+                seedType = seedType,
+                amount = amount,
+                status = "locked"
+            )
+        )
     }
 
     private fun validateServerId(serverId: String) {

@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀3 9장 논리사고력",
+  "targetLevel": "russell3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "음운은 말의 뜻을 구별하는 가장 작은 소리 단위이다. '물'과 '불'은 첫소리 [ㅁ]과 [ㅂ] 하나 차이로 뜻이 달라지므로, [ㅁ]과 [ㅂ]은 각각 하나의 음운이다. 이처럼 하나의 소리 차이로 뜻이 달라지는 한 쌍의 단어를 최소대립쌍이라 한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "[ㅁ]과 [ㅂ]이 서로 다른 음운이라는 결론이 나오려면 반드시 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 소리를 바꿨을 때 단어의 뜻이 변해야 한다."
+              },
+              {
+                "id": "B",
+                "text": "두 소리의 발음 위치가 같아야 한다."
+              },
+              {
+                "id": "C",
+                "text": "두 소리가 항상 같은 환경에서 나타나야 한다."
+              },
+              {
+                "id": "D",
+                "text": "두 소리의 글자 모양이 달라야 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "양전자 단층 촬영(PET)은 방사성 동위원소가 붙은 포도당 유사 물질을 몸에 주입한 뒤, 세포가 이 물질을 흡수하는 양을 측정하여 세포 활동량을 영상으로 보여준다. 암세포는 정상 세포보다 포도당을 많이 소비한다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "PET으로 암을 발견할 수 있다는 주장이 성립하려면 반드시 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 세포는 동일한 양의 포도당을 소비한다."
+              },
+              {
+                "id": "B",
+                "text": "암세포가 정상 세포보다 더 많은 포도당을 소비하므로, 방사성 표지 물질이 암세포에 더 많이 축적된다."
+              },
+              {
+                "id": "C",
+                "text": "방사성 동위원소는 인체에 영구적으로 남는다."
+              },
+              {
+                "id": "D",
+                "text": "PET 영상은 뼈의 형태만 보여준다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "염상섭의 '만세전'에서 '나'는 동경 유학생으로, 귀국하는 과정에서 일본 경찰의 검문과 차별, 식민지 조선의 비참한 현실을 목격한다. '나'는 조선을 '묘지 같다'고 표현하며 무력감에 빠진다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "'나'가 조선을 '묘지'에 비유한 결과로 추론할 수 있는 인식은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "식민지 조선이 생동감 넘치는 활기찬 사회라는 인식"
+              },
+              {
+                "id": "B",
+                "text": "조선이 독립할 수 있다는 낙관적 인식"
+              },
+              {
+                "id": "C",
+                "text": "조선의 자연환경이 아름답다는 인식"
+              },
+              {
+                "id": "D",
+                "text": "조선이 일제에 의해 억압당해 활력을 잃은 죽은 사회라는 인식"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "PET 검사에서 암세포는 포도당을 많이 흡수하므로 영상에서 밝게 나타난다. 정상 세포는 상대적으로 어둡게 나타난다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "PET 영상에서 특정 부위가 주변보다 현저히 밝게 나타날 경우 추론할 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "해당 부위의 세포 활동이 매우 낮다."
+              },
+              {
+                "id": "B",
+                "text": "해당 부위에 뼈가 있다."
+              },
+              {
+                "id": "C",
+                "text": "해당 부위의 세포가 포도당을 많이 소비하고 있으며, 암 등의 질환 가능성이 있다."
+              },
+              {
+                "id": "D",
+                "text": "해당 부위에 혈관이 없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "자음은 조음 위치에 따라 입술소리(ㅂ,ㅃ,ㅍ,ㅁ), 잇몸소리(ㄷ,ㄸ,ㅌ,ㄴ,ㄹ,ㅅ,ㅆ), 센입천장소리(ㅈ,ㅉ,ㅊ), 여린입천장소리(ㄱ,ㄲ,ㅋ,ㅇ), 목청소리(ㅎ)로 분류된다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "다음 추론의 결론은? [대전제] 입술소리는 두 입술이 만나 나는 소리이다. [소전제] 'ㅁ'은 입술소리에 속한다.",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'ㅁ'은 잇몸에서 나는 소리이다."
+              },
+              {
+                "id": "B",
+                "text": "'ㅁ'은 목청에서 나는 소리이다."
+              },
+              {
+                "id": "C",
+                "text": "'ㅁ'은 두 입술이 만나서 나는 소리이다."
+              },
+              {
+                "id": "D",
+                "text": "'ㅁ'은 센입천장에서 나는 소리이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "PET에서 양전자가 방출되면 주변의 전자와 만나 소멸하며 두 개의 감마선을 정반대 방향으로 방출한다. 이 감마선을 검출기가 포착하여 영상을 만든다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "다음 추론의 결론은? [대전제] 양전자-전자 소멸 시 감마선이 방출된다. [소전제] PET 검사에서 양전자-전자 소멸이 일어났다.",
+            "choices": [
+              {
+                "id": "A",
+                "text": "감마선이 방출되지 않았다."
+              },
+              {
+                "id": "B",
+                "text": "감마선이 방출되었다."
+              },
+              {
+                "id": "C",
+                "text": "X선이 방출되었다."
+              },
+              {
+                "id": "D",
+                "text": "양전자만 남았다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "두 소리가 서로 다른 음운이 되려면, 그 두 소리를 바꿨을 때 단어의 뜻이 달라져야 한다. 즉 최소대립쌍이 존재해야 한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'[ㄱ]과 [ㄴ]이 서로 다른 음운이다'가 참이면, 반드시 참이어야 하는 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "[ㄱ]과 [ㄴ]의 발음 위치가 같아야 한다."
+              },
+              {
+                "id": "B",
+                "text": "[ㄱ]과 [ㄴ]을 교환하면 뜻이 달라지는 최소대립쌍이 존재해야 한다."
+              },
+              {
+                "id": "C",
+                "text": "[ㄱ]과 [ㄴ]이 같은 품사에서만 나타나야 한다."
+              },
+              {
+                "id": "D",
+                "text": "[ㄱ]과 [ㄴ]이 항상 함께 나타나야 한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "만세전에서 '나'의 각성이 의미 있으려면, 식민지 현실에 대한 구체적 인식이 선행되어야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'나의 각성이 진정한 것이다'가 참이면, 반드시 참이어야 하는 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'나'가 일본에 계속 머물러야 한다."
+              },
+              {
+                "id": "B",
+                "text": "'나'가 식민지 현실의 구체적 모순을 직접 경험하고 인식해야 한다."
+              },
+              {
+                "id": "C",
+                "text": "'나'가 아내의 병을 치료해야 한다."
+              },
+              {
+                "id": "D",
+                "text": "'나'가 독립운동에 참여해야 한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "최소대립쌍이 성립하려면 '하나의 소리만 다르고 나머지는 동일해야 한다'는 필요조건이 있다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "다음 중 최소대립쌍의 필요조건을 충족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'학교'와 '대학교' (형태소 수 다름)"
+              },
+              {
+                "id": "B",
+                "text": "'사과'와 '바나나' (전혀 다른 단어)"
+              },
+              {
+                "id": "C",
+                "text": "'불'과 '물' (첫소리만 다름)"
+              },
+              {
+                "id": "D",
+                "text": "'먹다'와 '잡다' (여러 소리 다름)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "PET 검사가 유용하려면 '표지 물질이 목표 조직에 선택적으로 축적되어야 한다'는 필요조건이 있다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "다음 중 이 필요조건을 충족하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "감마선 검출기가 고장 난 경우"
+              },
+              {
+                "id": "B",
+                "text": "표지 물질이 몸 전체에 균일하게 퍼져 특정 부위를 구분할 수 없는 경우"
+              },
+              {
+                "id": "C",
+                "text": "표지 물질이 주입되지 않은 경우"
+              },
+              {
+                "id": "D",
+                "text": "방사성 포도당 유사 물질이 포도당을 많이 소비하는 암세포에 집중적으로 축적되는 경우"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "'최소대립쌍이 존재한다(P)'는 '두 소리가 서로 다른 음운이다(Q)'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "P→Q일 때, 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다른 음운이면 반드시 최소대립쌍이 있다. (Q→P, 부당)"
+              },
+              {
+                "id": "B",
+                "text": "최소대립쌍이 없으면 같은 음운이다. (~P→~Q, 부당)"
+              },
+              {
+                "id": "C",
+                "text": "두 소리가 같은 음운이면 최소대립쌍이 존재하지 않는다. (~Q→~P, 대우, 타당)"
+              },
+              {
+                "id": "D",
+                "text": "B와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "'PET 영상에서 특정 부위가 밝게 나타난다(P)'는 '해당 부위의 세포 활동이 활발하다(Q)'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "P→Q일 때, '~P이면서 Q인 경우'에 해당하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "PET 영상에서 밝게 나타나고 세포 활동이 활발한 경우"
+              },
+              {
+                "id": "B",
+                "text": "PET 영상에서 밝게 나타나지만 세포 활동이 활발하지 않은 경우"
+              },
+              {
+                "id": "C",
+                "text": "PET 영상에서 밝지 않지만, 다른 검사(MRI 등)로 세포 활동이 활발함을 확인한 경우"
+              },
+              {
+                "id": "D",
+                "text": "PET 영상에서 밝지 않고 세포 활동도 활발하지 않은 경우"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "만세전에서 '식민지 현실의 모순을 직접 경험하는 것'은 '지식인의 각성을 유발하는 것'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "다음 중 이 충분조건을 만족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'나'가 일본에서 편안하게 유학 생활을 하는 장면"
+              },
+              {
+                "id": "B",
+                "text": "'나'가 동경의 하숙집에서 독서하는 장면"
+              },
+              {
+                "id": "C",
+                "text": "'나'가 아내의 병에 무관심한 장면"
+              },
+              {
+                "id": "D",
+                "text": "'나'가 귀국 과정에서 일본 경찰의 차별과 검문을 직접 겪고 조선의 현실을 '묘지 같다'고 자각하는 장면"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "'자음이 조음 위치와 조음 방법에 의해 분류된다'는 '체계적 음운 분류가 가능하다'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "다음 중 이 충분조건을 만족하는 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자음을 글자 획수에 따라 분류하는 것"
+              },
+              {
+                "id": "B",
+                "text": "'ㅅ'을 잇몸소리(조음 위치)이자 마찰음(조음 방법)으로 분류하는 것"
+              },
+              {
+                "id": "C",
+                "text": "'ㄱ'을 여린입천장소리(조음 위치)이자 파열음(조음 방법)으로 분류하는 것"
+              },
+              {
+                "id": "D",
+                "text": "'ㅁ'을 입술소리(조음 위치)이자 비음(조음 방법)으로 분류하는 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "입술소리이면 두 입술이 만나서 나는 소리이다. 잇몸소리이면 혀끝이 윗잇몸에 닿아 나는 소리이다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "다음 추론 중 논리적으로 타당한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "입술소리이면 두 입술이 만난다. 'ㅂ'은 입술소리이다. 따라서 'ㅂ'은 두 입술이 만나서 난다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "B",
+                "text": "잇몸소리이면 혀끝이 윗잇몸에 닿는다. 'ㅎ'은 혀끝이 윗잇몸에 닿는다. 따라서 'ㅎ'은 잇몸소리이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "A와 B 모두 타당하다."
+              },
+              {
+                "id": "D",
+                "text": "B만 타당하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'암세포가 포도당을 많이 소비하면(P) PET에서 밝게 나타난다(Q)'가 참이라 하자.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "P→Q가 참일 때, 논리적으로 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "PET에서 밝게 나타나므로 암세포이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "PET에서 밝게 나타나지 않으므로 암세포가 포도당을 많이 소비하지 않는다. (후건 부정 — 대우, 타당)"
+              },
+              {
+                "id": "C",
+                "text": "암세포가 아니므로 PET에서 밝게 나타나지 않는다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 B 모두 타당하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "만세전에서 '나'의 무기력한 태도와 식민지 조선의 암울한 현실이 동시에 나타난다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'나의 무기력함'과 '식민지 현실'의 관계에 대한 설명으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 현상은 상관관계가 있으며, 식민지 현실이라는 구조적 억압이 지식인의 무기력함을 조장하는 배경으로 작용한다."
+              },
+              {
+                "id": "B",
+                "text": "식민지 현실이 무기력함의 직접적 원인이다."
+              },
+              {
+                "id": "C",
+                "text": "무기력함이 식민지 현실을 만들었다."
+              },
+              {
+                "id": "D",
+                "text": "두 현상은 완전히 무관하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "PET 검사 건수가 증가하면서 조기 암 발견율도 함께 증가하는 추세가 관찰된다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'PET 검사 건수 증가'와 '조기 암 발견율 증가' 사이의 관계에 대한 설명으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "PET 검사가 암을 유발한다."
+              },
+              {
+                "id": "B",
+                "text": "조기 암 발견이 PET 검사를 증가시킨다."
+              },
+              {
+                "id": "C",
+                "text": "두 현상은 무관하다."
+              },
+              {
+                "id": "D",
+                "text": "PET 검사의 확대가 이전에 발견되지 못했던 초기 암을 감지하게 한 것으로, 검사 접근성이라는 공통 요인이 두 현상을 연결한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "국어의 모음은 21개이다. 단모음(10개)과 이중모음(11개)으로 나뉜다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 국어의 모든 모음은 입술 모양과 혀의 위치에 따라 체계적으로 분류할 수 있다. 이 가설을 검증하기 위한 방법으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모음의 역사적 변화만 조사한다."
+              },
+              {
+                "id": "B",
+                "text": "모음의 글자 모양만 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "모음이 사용된 단어의 수를 센다."
+              },
+              {
+                "id": "D",
+                "text": "21개 모음 각각을 혀의 전후/높낮이, 입술의 원순/평순에 따라 분류하여 빈칸 없이 체계를 완성할 수 있는지 확인한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "만세전의 '나'는 귀국 과정에서 조선의 현실을 목격하고 결말에서 각성하는 모습을 보인다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 만세전의 '나'는 소설 내내 무기력한 상태에서 벗어나지 못한다. 이 가설을 검증하기 위한 방법으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "소설의 결말 부분에서 '나'의 태도가 변화했는지 확인하고, 각성의 장면이 있다면 가설이 반증된 것으로 판단한다."
+              },
+              {
+                "id": "B",
+                "text": "소설의 출판 연도만 확인한다."
+              },
+              {
+                "id": "C",
+                "text": "염상섭의 다른 작품 제목을 나열한다."
+              },
+              {
+                "id": "D",
+                "text": "소설 속 기차 노선을 조사한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

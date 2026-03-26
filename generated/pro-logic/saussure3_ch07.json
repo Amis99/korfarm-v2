@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르3 7장 논리사고력",
+  "targetLevel": "saussure3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "아이디와 비밀번호는 사이버 세상의 집 열쇠와 같습니다. 이것을 남에게 알려주면 계정 도용이 발생할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "비밀번호를 남에게 알려주면 위험한 이유로 꼭 필요한 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비밀번호를 아는 사람이 내 계정에 접속할 수 있어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "비밀번호를 알아도 아무 일도 일어나지 않아야 한다."
+              },
+              {
+                "id": "C",
+                "text": "인터넷에는 계정이 없어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "비밀번호가 없어도 로그인할 수 있어야 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "개인 정보란 살아 있는 개인을 알아볼 수 있는 정보입니다. 이름, 전화번호, 주소 등이 해당됩니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "개인 정보가 유출되면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모르는 사람이 내 정보를 악용하여 피해를 줄 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "정보가 유출되면 더 안전해진다."
+              },
+              {
+                "id": "C",
+                "text": "아무 일도 생기지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "정보가 저절로 돌아온다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "도용이란 남의 물건이나 이름을 허락 없이 몰래 쓰는 것입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'도용은 허락 없이 남의 것을 쓰는 것이다. 남의 계정으로 몰래 로그인했다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "허락을 받은 것이다."
+              },
+              {
+                "id": "B",
+                "text": "이것은 정당한 행동이다."
+              },
+              {
+                "id": "C",
+                "text": "도용과 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "이것은 도용에 해당한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "내 정보를 지키는 것은 나 자신을 지키는 것과 같습니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'개인 정보를 보호하려면 비밀번호 관리가 필요하다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비밀번호 관리를 하지 않으면 개인 정보 보호가 어렵다."
+              },
+              {
+                "id": "B",
+                "text": "비밀번호 없이도 정보를 보호할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "비밀번호와 보호는 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "쉬운 비밀번호가 더 안전하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "신중하다는 것은 매우 조심스럽다는 뜻입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'개인 정보를 안전하게 지키려면 신중하게 행동해야 한다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "친구에게 비밀번호를 알려주었다."
+              },
+              {
+                "id": "B",
+                "text": "모든 사이트에 같은 비밀번호를 사용했다."
+              },
+              {
+                "id": "C",
+                "text": "모르는 사이트에 이름과 전화번호를 함부로 입력하지 않았다."
+              },
+              {
+                "id": "D",
+                "text": "개인 정보를 게시판에 공개했다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "비밀번호를 1234처럼 쉽게 만들면 다른 사람이 쉽게 알아낼 수 있습니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'쉬운 비밀번호를 쓰면 도용당할 위험이 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어려운 비밀번호를 쓰면 더 위험하다."
+              },
+              {
+                "id": "B",
+                "text": "쉬운 비밀번호가 더 안전하다."
+              },
+              {
+                "id": "C",
+                "text": "비밀번호 난이도와 안전은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "쉬운 비밀번호를 썼는데 안전한 경우는 없다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "보호란 위험하지 않도록 잘 보살피고 지키는 것입니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'어려운 비밀번호를 설정하면 계정이 안전해진다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1111로 비밀번호를 설정했는데 안전했다."
+              },
+              {
+                "id": "B",
+                "text": "영문, 숫자, 특수문자를 섞어 비밀번호를 만드니 해킹 시도가 실패했다."
+              },
+              {
+                "id": "C",
+                "text": "비밀번호를 아예 설정하지 않았는데 안전했다."
+              },
+              {
+                "id": "D",
+                "text": "어려운 비밀번호를 쓰니 오히려 해킹당했다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "집 비밀번호를 모르는 사람에게 알려주면 도둑이 들어올 수 있습니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'비밀번호를 공유하면 위험하다. 민수는 친구에게 비밀번호를 알려주었다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민수의 계정은 더 안전해졌다. (맞는 추론)"
+              },
+              {
+                "id": "B",
+                "text": "민수의 계정은 위험해질 수 있다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "비밀번호 공유와 위험은 관계없다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "민수는 비밀번호를 알려주지 않았다. (맞는 추론)"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "인터넷에서 개인 정보를 함부로 공개하면 유출 위험이 높아집니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'온라인 활동량'과 '개인 정보 유출 위험'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "온라인 활동량과 유출 위험은 전혀 관계없다."
+              },
+              {
+                "id": "B",
+                "text": "온라인 활동이 많으면 유출 위험이 높아질 수 있지만, 보안 수준 등 다른 요인도 영향을 준다."
+              },
+              {
+                "id": "C",
+                "text": "온라인 활동을 많이 하면 반드시 유출된다."
+              },
+              {
+                "id": "D",
+                "text": "유출되면 반드시 활동이 많은 것이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "개인 정보가 유출되면 나쁜 사람이 악용할 수 있어 매우 위험합니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'비밀번호를 주기적으로 바꾸면 해킹 피해가 줄어든다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인터넷 사용 시간을 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "비밀번호의 길이만 조사한다."
+              },
+              {
+                "id": "C",
+                "text": "비밀번호를 자주 바꾼 그룹과 안 바꾼 그룹의 해킹 피해 건수를 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "컴퓨터 크기를 측정한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

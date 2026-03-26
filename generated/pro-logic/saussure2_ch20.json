@@ -1,0 +1,377 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "소쉬르2 20장 논리사고력",
+  "targetLevel": "saussure2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "친구와 마주 보고 서면 서로의 위치가 달라서 숫자가 거꾸로 보입니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "같은 숫자가 거꾸로 보이려면 어떤 사실이 있어야 할까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보는 사람의 위치에 따라 보이는 모습이 달라져야 한다."
+              },
+              {
+                "id": "B",
+                "text": "숫자가 움직여야 한다."
+              },
+              {
+                "id": "C",
+                "text": "두 사람이 같은 쪽에서 봐야 한다."
+              },
+              {
+                "id": "D",
+                "text": "숫자가 없어야 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "결과 추론하기",
+        "text": "친구와 생각이 같지 않을 때 '너는 틀렸어!'라고 말하면 친구가 기분이 나빠집니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "대신 '너와 나는 생각이 다르구나'라고 말하면 어떤 결과가 생길까요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "친구의 기분을 지키면서 대화를 이어갈 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "친구가 더 화를 낸다."
+              },
+              {
+                "id": "C",
+                "text": "친구가 내 생각에 무조건 동의한다."
+              },
+              {
+                "id": "D",
+                "text": "대화가 끊긴다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "삼단논법 추론하기",
+        "text": "'다르다'는 서로 같지 않다는 뜻이고, '틀리다'는 정답이 아니거나 사실과 맞지 않다는 뜻입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "'서로 같지 않은 것은 다른 것이다. 짜장면과 짬뽕의 맛은 서로 같지 않다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "짜장면과 짬뽕의 맛은 틀리다."
+              },
+              {
+                "id": "B",
+                "text": "짜장면과 짬뽕은 같은 음식이다."
+              },
+              {
+                "id": "C",
+                "text": "짜장면과 짬뽕의 맛은 다르다."
+              },
+              {
+                "id": "D",
+                "text": "맛은 비교할 수 없다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "필요조건 변환",
+        "text": "나와 다른 친구의 생각을 인정하고 존중해야 합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'좋은 대화를 하려면 상대방의 생각을 존중해야 한다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "존중하지 않아도 좋은 대화가 된다."
+              },
+              {
+                "id": "B",
+                "text": "존중 없이는 좋은 대화가 될 수 없다."
+              },
+              {
+                "id": "C",
+                "text": "좋은 대화와 존중은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "내 생각만 말하면 좋은 대화가 된다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "필요조건 예시 찾기",
+        "text": "관점이란 사물을 관찰하거나 생각하는 태도나 방향입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'관점이 다르면 같은 것도 다르게 보인다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 사람이 같은 것을 항상 같게 본다."
+              },
+              {
+                "id": "B",
+                "text": "같은 그림을 앞에서 보면 토끼, 뒤집으면 오리로 보인다."
+              },
+              {
+                "id": "C",
+                "text": "관점이 달라도 보이는 것은 항상 같다."
+              },
+              {
+                "id": "D",
+                "text": "눈을 감으면 잘 보인다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "충분조건 변환",
+        "text": "내 생각이 틀릴 수도 있다는 사실을 솔직하게 인정하는 것이 중요합니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'자신의 실수를 인정하면 더 성장할 수 있다'를 다르게 말하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실수를 인정했는데 성장하지 못하는 경우는 없다."
+              },
+              {
+                "id": "B",
+                "text": "실수를 인정하면 퇴보한다."
+              },
+              {
+                "id": "C",
+                "text": "성장과 인정은 관계없다."
+              },
+              {
+                "id": "D",
+                "text": "실수를 숨기면 더 성장한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "충분조건 예시 찾기",
+        "text": "친구의 입장이 되어 생각해 보면 친구가 왜 그런 말을 했는지 이해할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'상대방의 입장에서 생각하면 이해할 수 있다'에 맞는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "친구의 상황을 알면서도 이해하지 않았다."
+              },
+              {
+                "id": "B",
+                "text": "친구의 말을 무시하고 내 생각만 말했다."
+              },
+              {
+                "id": "C",
+                "text": "상대방의 입장을 전혀 생각하지 않았다."
+              },
+              {
+                "id": "D",
+                "text": "친구가 아파서 약속을 취소했는데, 내가 아팠다면 나도 그랬을 거라고 이해했다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "타당성 판단",
+        "text": "버스에 우산을 두고 내려서 우산을 잃어버렸습니다. '잃다'는 가졌던 물건이 없어지는 것입니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'잃다는 물건이 없어지는 것이다. 우산이 없어졌다.' 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우산을 잊었다. (틀린 추론)"
+              },
+              {
+                "id": "B",
+                "text": "우산을 찾았다. (맞는 추론)"
+              },
+              {
+                "id": "C",
+                "text": "우산을 잃었다. (맞는 추론)"
+              },
+              {
+                "id": "D",
+                "text": "우산을 샀다. (맞는 추론)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "상관관계",
+        "text": "나와 친구의 생각이 서로 같지 않은 것은 틀린 것이 아니라 차이가 있는 것입니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'생각의 차이'와 '옳고 그름'의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "생각이 다르면 반드시 누군가가 틀린 것이다."
+              },
+              {
+                "id": "B",
+                "text": "내 생각만 항상 옳다."
+              },
+              {
+                "id": "C",
+                "text": "생각의 차이와 옳고 그름은 항상 같다."
+              },
+              {
+                "id": "D",
+                "text": "생각의 차이는 단순히 서로 다른 것이지, 누가 옳고 그른 문제가 아닐 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "가설 검증",
+        "text": "사물을 관찰하거나 생각하는 태도나 방향을 관점이라고 합니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "'보는 위치에 따라 사물의 모습이 다르게 보인다'는 가설을 확인하려면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물건의 무게를 잰다."
+              },
+              {
+                "id": "B",
+                "text": "같은 물건을 앞, 옆, 위에서 보고 보이는 모습을 비교한다."
+              },
+              {
+                "id": "C",
+                "text": "물건의 색깔만 바꿔 본다."
+              },
+              {
+                "id": "D",
+                "text": "물건의 이름을 외운다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

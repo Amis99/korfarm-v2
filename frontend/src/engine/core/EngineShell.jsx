@@ -122,6 +122,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const [seed, setSeed] = useState(content?.seedReward?.count ?? 3);
   const [seedExhausted, setSeedExhausted] = useState(false);
   const [startedAt, setStartedAt] = useState(null);
+  const [timeSpeed, setTimeSpeed] = useState(1);
   const intervalRef = useRef(null);
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(0);
@@ -218,6 +219,14 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     return "";
   }, [content]);
 
+  // 화면용 레벨 클래스 (모바일 글자 크기 조정)
+  const screenLevelClass = useMemo(() => {
+    const level = content?.targetLevel || "";
+    if (level.startsWith("SAUSSURE") || level.startsWith("SOUSSURE")) return "screen-level-saussure";
+    if (level.startsWith("FREGE")) return "screen-level-frege";
+    return "";
+  }, [content]);
+
   // 인쇄 전용: 페이지 그룹별 문제 추출
   const printPageGroups = useMemo(() => {
     const payload = content?.payload;
@@ -262,6 +271,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       }
       return sum + 1;
     }, 0);
+    const passagesTotal = (payload.passages || []).reduce(
+      (sum, p) => sum + (p.questions?.length || 0), 0
+    );
     const guess = {
       worksheet_quiz: worksheetTotal,
       reading_training: readingTrainingTotal,
@@ -275,6 +287,8 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
           if (q.type === "SENTENCE_BUILDING") return qs + (q.sentenceParts?.length ?? 0);
           return qs + 1;
         }, 0), 0),
+      logic_reasoning: passagesTotal > 0 ? passagesTotal : worksheetTotal,
+      background_knowledge: passagesTotal > 0 ? passagesTotal : worksheetTotal,
     };
     return guess[moduleKey] || 0;
   }, [content, moduleKey]);
@@ -444,9 +458,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
         }
         return prev - 1;
       });
-    }, 1000);
+    }, 1000 / timeSpeed);
     return () => clearInterval(intervalRef.current);
-  }, [status]);
+  }, [status, timeSpeed]);
 
   useEffect(() => {
     if (!timePulse) return undefined;
@@ -500,8 +514,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       seedExhausted,
       resetRound,
       setPageProgress,
+      setTimeSpeed,
     }),
-    [status, timeLeft, timeLimit, seed, seedExhausted]
+    [status, timeLeft, timeLimit, seed, seedExhausted, timeSpeed]
   );
 
   if (!Module) {
@@ -548,9 +563,6 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
             <div className="engine-header-wrap" style={{ "--header-height": `${headerHeight}px` }}>
               <header ref={headerRef} className="engine-header engine-scale">
                 <div className="engine-header-row">
-                  <Link className="engine-logo" to="/">
-                    <img src={resolveAssetUrl("korfarm-logo.png")} alt="국어농장" />
-                  </Link>
                   <div className="engine-header-item engine-title">
                     <strong>{content?.title || "학습"}</strong>
                   </div>
@@ -594,7 +606,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                   moduleKey === "phoneme_change"
                     ? "stack"
                     : ""
-                }`}
+                } ${screenLevelClass}`}
               >
                 <Module content={content} />
               </main>

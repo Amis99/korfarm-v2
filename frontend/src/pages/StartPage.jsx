@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, TOKEN_KEY } from "../utils/api";
+import { apiGet, TOKEN_KEY, normalizeInventoryKeys } from "../utils/api";
 import HarvestCraftModal from "../components/HarvestCraftModal";
 import StudyPlanReminderModal from "../components/StudyPlanReminderModal";
+import SearchBar from "../components/SearchBar";
 import { calcSeasonScore, FORMULA_TEXT } from "../utils/seasonScore";
 import "../styles/start.css";
 
@@ -57,6 +58,7 @@ function StartPage() {
   const [duelRanking, setDuelRanking] = useState([]);
   const [seedLog, setSeedLog] = useState([]);
   const [subActive, setSubActive] = useState(false);
+  const [subLoading, setSubLoading] = useState(true);
   const [adminLevelOverride, setAdminLevelOverride] = useState("");
 
   // 부모용 상태
@@ -105,7 +107,7 @@ function StartPage() {
       .then(setChildProfile)
       .catch(() => setChildProfile(null));
     apiGet(`/v1/parents/children/${studentId}/inventory`)
-      .then(setChildInventory)
+      .then((d) => setChildInventory(normalizeInventoryKeys(d)))
       .catch(() => setChildInventory(null));
   }, [isParent, selectedChild]);
 
@@ -113,13 +115,16 @@ function StartPage() {
     if (!isLoggedIn) return;
     // 부모가 아닌 경우에만 자신의 인벤토리/구독 조회
     if (!isParent) {
-      apiGet("/v1/inventory").then(setInventory).catch((e) => console.error(e));
+      apiGet("/v1/inventory").then((d) => setInventory(normalizeInventoryKeys(d))).catch((e) => console.error(e));
       apiGet("/v1/subscription")
         .then((sub) => {
           const st = sub?.status;
           if (st === "active" || st === "canceled") setSubActive(true);
         })
-        .catch((e) => console.error(e));
+        .catch((e) => console.error(e))
+        .finally(() => setSubLoading(false));
+    } else {
+      setSubLoading(false);
     }
     apiGet("/v1/seasons/current")
       .then((season) => {
@@ -189,7 +194,7 @@ function StartPage() {
       .catch((e) => console.error(e));
   }, [adminLevelOverride, isAdmin, profile]);
 
-  const hasSub = isPremium || subActive;
+  const hasSub = isPremium || subActive || subLoading;
   const displayName = profile?.name || user?.name || "농부";
   const baseLevelId = profile?.level_id || profile?.levelId;
   const levelId = (isAdmin && adminLevelOverride) ? adminLevelOverride : baseLevelId;
@@ -527,46 +532,67 @@ function StartPage() {
                   </select>
                   <button
                     type="button"
-                    className="start-sub-btn"
+                    className="start-sub-btn start-sub-btn--sm"
                     onClick={() => navigate("/admin")}
                     style={{ border: "1px solid rgba(240,108,36,0.4)", background: "rgba(240,108,36,0.15)", color: "#f06c24" }}
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>admin_panel_settings</span>
-                    관리자 페이지
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>admin_panel_settings</span>
+                    관리자
                   </button>
-                  <button type="button" className="start-sub-btn" onClick={logout}>
-                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>logout</span>
+                  <button
+                    type="button"
+                    className="start-sub-btn start-sub-btn--sm"
+                    onClick={() => navigate("/subscription")}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>
+                      {hasSub ? "manage_accounts" : "upgrade"}
+                    </span>
+                    {hasSub ? "구독" : "구독"}
+                  </button>
+                  <button type="button" className="start-sub-btn start-sub-btn--sm" onClick={logout}>
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>logout</span>
                     로그아웃
                   </button>
                 </div>
               ) : (
-                <div className="start-flex-row" style={{ marginTop: 6, gap: 8 }}>
+                <div className="start-flex-row" style={{ marginTop: 6, gap: 6 }}>
                   <button
                     type="button"
-                    className="start-sub-btn"
+                    className="start-sub-btn start-sub-btn--sm"
                     onClick={() => navigate("/profile")}
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>settings</span>
-                    내 정보 수정
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>settings</span>
+                    내 정보
                   </button>
-                  <button type="button" className="start-sub-btn" onClick={logout}>
-                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>logout</span>
+                  <button
+                    type="button"
+                    className="start-sub-btn start-sub-btn--sm"
+                    onClick={() => navigate("/subscription")}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>
+                      {hasSub ? "manage_accounts" : "upgrade"}
+                    </span>
+                    {hasSub ? "구독" : "구독"}
+                  </button>
+                  <button type="button" className="start-sub-btn start-sub-btn--sm" onClick={logout}>
+                    <span className="material-symbols-outlined" style={{ fontSize: 14 }}>logout</span>
                     로그아웃
                   </button>
                 </div>
               )}
             </div>
           </div>
-          <button
-            type="button"
-            className="start-sub-btn"
-            onClick={() => navigate("/subscription")}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
-              {hasSub ? "manage_accounts" : "upgrade"}
-            </span>
-            {hasSub ? "구독 관리" : "업그레이드"}
-          </button>
+          <SearchBar
+            isPremium={hasSub}
+            onSearch={(q, filters) => {
+              let url = `/search?q=${encodeURIComponent(q)}`;
+              if (filters.contentType) url += `&contentType=${encodeURIComponent(filters.contentType)}`;
+              if (filters.levelId) url += `&levelId=${encodeURIComponent(filters.levelId)}`;
+              if (filters.area) url += `&area=${encodeURIComponent(filters.area)}`;
+              navigate(url);
+            }}
+            onSubscribe={() => navigate("/subscription")}
+          />
         </header>
 
         {/* [1] 무료 학습 */}
@@ -814,7 +840,7 @@ function StartPage() {
         open={showCraftModal}
         onClose={() => setShowCraftModal(false)}
         onCrafted={(data) => {
-          if (data?.inventory) setInventory(data.inventory);
+          if (data?.inventory) setInventory(normalizeInventoryKeys(data.inventory));
         }}
       />
 

@@ -1,0 +1,435 @@
+// Day 7: 사회 — 도서관의 역할과 정보 탐색 (NONFICTION)
+// 초6~중1 수준, 1000자 ±50
+
+const fs = require('fs');
+
+// ── 지문 작성 (3문단) ──
+const p1Sentences = [
+  "도서관은 단순히 책을 빌려 주는 곳이 아니라 지식과 정보를 모아 누구에게나 열어 두는 공공 공간이다.",
+  "오래전에는 소수의 학자나 귀족만 책을 읽을 수 있었지만, 근대 이후 공공 도서관이 생기면서 누구든 자유롭게 책을 접할 수 있게 되었다.",
+  "오늘날 도서관에는 종이책뿐 아니라 전자책, 영상 자료, 학술 논문 데이터베이스처럼 다양한 형태의 자료가 갖추어져 있다.",
+  "이용자는 직접 방문하지 않아도 인터넷을 통해 원하는 자료를 검색하고 열람할 수 있으므로, 도서관의 벽은 사실상 사라진 셈이다.",
+  "이처럼 도서관은 시대에 맞추어 모습을 바꾸면서도 정보를 공평하게 나누겠다는 본래의 목적을 꾸준히 지켜 오고 있다."
+];
+
+const p2Sentences = [
+  "도서관을 잘 활용하려면 정보를 찾는 방법을 알아 두는 것이 중요하다.",
+  "먼저 자신이 알고 싶은 주제를 분명하게 정한 뒤, 도서관 검색 시스템에 핵심 낱말을 입력하면 관련 자료 목록이 나타난다.",
+  "목록에는 책 제목, 지은이, 출판 연도, 청구 기호 같은 정보가 담겨 있어 원하는 책의 위치를 쉽게 찾을 수 있다.",
+  "검색 결과가 너무 많으면 출판 연도나 분야를 좁혀서 다시 검색하는 것이 효율적이다.",
+  "반대로 결과가 적으면 비슷한 뜻의 다른 낱말로 바꾸어 검색해 보면 숨어 있던 자료를 발견할 수 있다.",
+  "이러한 탐색 과정을 반복하다 보면 자연스럽게 정보를 걸러내는 능력이 길러진다."
+];
+
+const p3Sentences = [
+  "도서관에서 찾은 정보는 무조건 믿기보다 비판적으로 살피는 태도가 필요하다.",
+  "같은 주제를 다루더라도 책마다 관점이 다를 수 있으므로, 여러 자료를 비교하며 읽는 것이 바람직하다.",
+  "또한 출판 연도가 오래된 자료는 최신 연구 결과와 다를 수 있으니 발행 시기도 함께 확인해야 한다.",
+  "인터넷에서 찾은 정보라면 출처가 신뢰할 만한 기관인지, 작성자가 전문가인지도 따져 보아야 한다.",
+  "이렇게 여러 자료를 견주어 보고 따져 보는 습관은 올바른 판단력을 기르는 밑거름이 된다.",
+  "결국 도서관은 단순한 지식의 창고일 뿐 아니라 스스로 생각하는 힘을 키우는 소중한 훈련장이기도 한 것이다."
+];
+
+const p1Text = p1Sentences.join("");
+const p2Text = p2Sentences.join("");
+const p3Text = p3Sentences.join("");
+
+console.log("=== 지문 길이 ===");
+console.log("p1:", p1Text.length, "p2:", p2Text.length, "p3:", p3Text.length);
+console.log("전체:", p1Text.length + p2Text.length + p3Text.length);
+
+function computeBounds(sentences) {
+  const b = []; let pos = 0;
+  for (const s of sentences) { b.push({ start: pos, end: pos + s.length }); pos += s.length; }
+  return b;
+}
+
+const p1B = computeBounds(p1Sentences);
+const p2B = computeBounds(p2Sentences);
+const p3B = computeBounds(p3Sentences);
+
+console.log("\n=== p1 경계 ===");
+p1B.forEach(b => console.log(`[${b.start},${b.end}] "${p1Text.substring(b.start,b.end)}"`));
+console.log("\n=== p2 경계 ===");
+p2B.forEach(b => console.log(`[${b.start},${b.end}] "${p2Text.substring(b.start,b.end)}"`));
+console.log("\n=== p3 경계 ===");
+p3B.forEach(b => console.log(`[${b.start},${b.end}] "${p3Text.substring(b.start,b.end)}"`));
+
+// ── 정독 ──
+const timeline = [];
+let sn = 1;
+
+const p1Q = [
+  {
+    prompt: "첫 문장은 도서관을 어떤 공간이라고 설명하나요?",
+    choices: [
+      { id: "A", text: "지식과 정보를 모아 누구에게나 열어 두는 공공 공간이다" },
+      { id: "B", text: "학생들만 이용할 수 있는 학교 전용 건물이라고 한다" },
+      { id: "C", text: "오직 종이책만 보관하는 창고 같은 곳이라고 한다" },
+      { id: "D", text: "돈을 내야만 들어갈 수 있는 개인 서재라고 한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "둘째 문장은 공공 도서관이 생긴 뒤 달라진 점을 어떻게 말하나요?",
+    choices: [
+      { id: "A", text: "누구든 자유롭게 책을 접할 수 있게 되었다고 한다" },
+      { id: "B", text: "소수의 귀족만 책을 읽을 수 있게 되었다고 한다" },
+      { id: "C", text: "책 대신 영상만 볼 수 있게 되었다고 말하고 있다" },
+      { id: "D", text: "도서관 출입이 더 어려워졌다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "셋째 문장에서 오늘날 도서관에 갖추어진 자료는 어떠한가요?",
+    choices: [
+      { id: "A", text: "종이책, 전자책, 영상 자료, 학술 논문 등 다양한 형태이다" },
+      { id: "B", text: "오직 종이책만 있고 다른 자료는 없다고 말하고 있다" },
+      { id: "C", text: "영상 자료만 있고 책은 전혀 없다고 말하고 있다" },
+      { id: "D", text: "학술 논문만 있고 일반 도서는 없다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "넷째 문장에서 도서관의 벽이 사라졌다는 말의 뜻은 무엇인가요?",
+    choices: [
+      { id: "A", text: "인터넷으로 방문 없이도 자료를 검색하고 열람할 수 있다는 뜻이다" },
+      { id: "B", text: "도서관 건물이 허물어져 더 이상 존재하지 않는다는 뜻이다" },
+      { id: "C", text: "도서관 벽을 유리로 바꾸어 밖에서 안이 보인다는 뜻이다" },
+      { id: "D", text: "도서관에 담장이 없어 아무나 걸어 들어온다는 뜻이다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "다섯째 문장에서 도서관이 꾸준히 지켜 온 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "정보를 공평하게 나누겠다는 본래의 목적을 지켜 왔다" },
+      { id: "B", text: "건물의 외관을 바꾸지 않겠다는 약속을 지켜 왔다 한다" },
+      { id: "C", text: "종이책만 보관하겠다는 규칙을 지켜 왔다고 말한다" },
+      { id: "D", text: "이용 시간을 줄이겠다는 방침을 지켜 왔다고 한다" }
+    ],
+    answerId: "A"
+  }
+];
+
+p1B.forEach((b,i) => {
+  timeline.push({
+    stepId: `s${sn}`,
+    highlight: { ranges: [{ paragraphId: "p1", start: b.start, end: b.end }] },
+    question: { ...p1Q[i], scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true } }
+  });
+  sn++;
+});
+
+timeline.push({
+  stepId: `s${sn}`,
+  highlight: { ranges: [{ paragraphId: "p1", start: 0, end: p1Text.length }] },
+  question: {
+    prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "도서관은 시대에 따라 모습을 바꾸며 정보를 공평하게 나누어 왔다" },
+      { id: "B", text: "도서관은 과거보다 축소되어 이용자가 줄어들었다고 말한다" },
+      { id: "C", text: "도서관은 종이책만 다루며 전자 자료는 취급하지 않는다 한다" },
+      { id: "D", text: "도서관은 귀족만을 위한 공간으로 유지되어 왔다고 한다" }
+    ],
+    answerId: "A",
+    scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }
+});
+sn++;
+
+const p2Q = [
+  {
+    prompt: "첫 문장은 도서관을 잘 활용하려면 무엇이 중요하다고 하나요?",
+    choices: [
+      { id: "A", text: "정보를 찾는 방법을 알아 두는 것이 중요하다고 한다" },
+      { id: "B", text: "책을 가장 많이 빌리는 것이 중요하다고 말한다" },
+      { id: "C", text: "도서관에 매일 방문하는 것이 중요하다고 말한다" },
+      { id: "D", text: "책을 빨리 읽는 속도가 중요하다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "둘째 문장에서 검색 시스템에 입력하는 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "알고 싶은 주제의 핵심 낱말을 입력한다고 한다" },
+      { id: "B", text: "책의 쪽수와 무게를 입력한다고 말하고 있다" },
+      { id: "C", text: "자신의 이름과 나이를 입력한다고 말하고 있다" },
+      { id: "D", text: "도서관 건물의 주소를 입력한다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "셋째 문장에서 목록에 담겨 있는 정보에 포함되지 않는 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "책의 무게는 목록에 포함되지 않는다" },
+      { id: "B", text: "책 제목은 목록에 포함되어 있다고 한다" },
+      { id: "C", text: "지은이 이름은 목록에 포함되어 있다 한다" },
+      { id: "D", text: "청구 기호는 목록에 포함되어 있다고 한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "넷째 문장에서 검색 결과가 너무 많을 때 좋은 방법은 무엇인가요?",
+    choices: [
+      { id: "A", text: "출판 연도나 분야를 좁혀서 다시 검색하는 것이 효율적이다" },
+      { id: "B", text: "결과를 모두 출력하여 하나씩 읽어 보면 된다고 한다" },
+      { id: "C", text: "검색을 포기하고 사서에게만 맡기면 된다고 말한다" },
+      { id: "D", text: "아무 책이나 골라 빌리면 충분하다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "다섯째 문장에서 검색 결과가 적을 때 좋은 방법은 무엇인가요?",
+    choices: [
+      { id: "A", text: "비슷한 뜻의 다른 낱말로 바꾸어 검색해 본다고 한다" },
+      { id: "B", text: "더 이상 찾을 수 없으니 포기하라고 말하고 있다" },
+      { id: "C", text: "같은 낱말을 여러 번 반복 입력하라고 말하고 있다" },
+      { id: "D", text: "인터넷 대신 직접 서가를 뒤져야 한다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "여섯째 문장에서 탐색 과정을 반복하면 길러지는 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "정보를 걸러내는 능력이 자연스럽게 길러진다고 한다" },
+      { id: "B", text: "글씨를 빨리 쓰는 능력이 길러진다고 말하고 있다" },
+      { id: "C", text: "책을 빨리 읽는 속도가 늘어난다고 말하고 있다" },
+      { id: "D", text: "도서관 건물 구조를 외우는 능력이 길러진다 한다" }
+    ],
+    answerId: "A"
+  }
+];
+
+p2B.forEach((b,i) => {
+  timeline.push({
+    stepId: `s${sn}`,
+    highlight: { ranges: [{ paragraphId: "p2", start: b.start, end: b.end }] },
+    question: { ...p2Q[i], scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true } }
+  });
+  sn++;
+});
+
+timeline.push({
+  stepId: `s${sn}`,
+  highlight: { ranges: [{ paragraphId: "p2", start: 0, end: p2Text.length }] },
+  question: {
+    prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "검색 방법을 익히고 반복하면 정보를 걸러내는 능력이 길러진다" },
+      { id: "B", text: "도서관 검색은 어려우므로 사서에게 모두 맡겨야 한다고 한다" },
+      { id: "C", text: "검색 결과는 항상 정확하므로 확인할 필요가 없다고 한다" },
+      { id: "D", text: "핵심 낱말 없이도 원하는 자료를 바로 찾을 수 있다 한다" }
+    ],
+    answerId: "A",
+    scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }
+});
+sn++;
+
+const p3Q = [
+  {
+    prompt: "첫 문장은 도서관 정보를 대할 때 어떤 태도가 필요하다고 하나요?",
+    choices: [
+      { id: "A", text: "무조건 믿기보다 비판적으로 살피는 태도가 필요하다" },
+      { id: "B", text: "책에 적힌 내용은 모두 참이므로 그대로 받아들이면 된다" },
+      { id: "C", text: "정보를 읽지 말고 제목만 확인하면 충분하다고 한다" },
+      { id: "D", text: "오래된 책일수록 더 정확하므로 새 책은 안 봐도 된다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "둘째 문장에서 같은 주제라도 책마다 다를 수 있는 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "책마다 관점이 다를 수 있으므로 여러 자료를 비교한다" },
+      { id: "B", text: "책마다 글자 크기가 다르므로 가장 큰 것을 고른다 한다" },
+      { id: "C", text: "책마다 쪽수가 같으므로 아무거나 골라도 된다고 한다" },
+      { id: "D", text: "책마다 표지 색이 다르므로 색으로 골라야 한다고 한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "셋째 문장에서 출판 연도가 오래된 자료의 문제점은 무엇인가요?",
+    choices: [
+      { id: "A", text: "최신 연구 결과와 다를 수 있으니 발행 시기를 확인한다" },
+      { id: "B", text: "오래된 자료일수록 정확하므로 문제가 없다고 말한다" },
+      { id: "C", text: "오래된 자료는 글자가 작아 읽기 어렵다는 것이 문제이다" },
+      { id: "D", text: "오래된 자료는 종이가 낡아 빌릴 수 없다는 것이 문제이다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "넷째 문장에서 인터넷 정보를 판단할 때 살펴야 할 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "출처가 신뢰할 만한 기관인지, 작성자가 전문가인지 따진다" },
+      { id: "B", text: "글의 글자 수가 많은지 적은지만 확인하면 된다고 한다" },
+      { id: "C", text: "사진이 많은 글이 항상 정확하다고 말하고 있다" },
+      { id: "D", text: "댓글이 많은 글이 가장 믿을 만하다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "다섯째 문장에서 여러 자료를 견주어 보는 습관은 무엇의 밑거름이 되나요?",
+    choices: [
+      { id: "A", text: "올바른 판단력을 기르는 밑거름이 된다고 한다" },
+      { id: "B", text: "글씨를 잘 쓰는 능력의 밑거름이 된다고 말한다" },
+      { id: "C", text: "운동 실력을 높이는 밑거름이 된다고 말하고 있다" },
+      { id: "D", text: "외국어를 배우는 밑거름이 된다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "마지막 문장은 도서관을 무엇이라고 정리하나요?",
+    choices: [
+      { id: "A", text: "단순한 지식의 창고가 아니라 스스로 생각하는 힘을 키우는 훈련장이다" },
+      { id: "B", text: "오락을 즐기는 놀이터이자 휴식을 취하는 쉼터이다 한다" },
+      { id: "C", text: "시험 준비만을 위한 학원 같은 공간이라고 정리한다" },
+      { id: "D", text: "오래된 자료를 보관만 하는 박물관이라고 정리하고 있다" }
+    ],
+    answerId: "A"
+  }
+];
+
+p3B.forEach((b,i) => {
+  timeline.push({
+    stepId: `s${sn}`,
+    highlight: { ranges: [{ paragraphId: "p3", start: b.start, end: b.end }] },
+    question: { ...p3Q[i], scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true } }
+  });
+  sn++;
+});
+
+timeline.push({
+  stepId: `s${sn}`,
+  highlight: { ranges: [{ paragraphId: "p3", start: 0, end: p3Text.length }] },
+  question: {
+    prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "정보를 비판적으로 비교하며 읽으면 올바른 판단력이 길러진다" },
+      { id: "B", text: "도서관 정보는 항상 정확하므로 비판 없이 받아들이면 된다" },
+      { id: "C", text: "인터넷 정보만 믿고 도서관은 이용할 필요가 없다고 한다" },
+      { id: "D", text: "책의 관점은 모두 같으므로 한 권만 읽으면 충분하다 한다" }
+    ],
+    answerId: "A",
+    scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }
+});
+
+// ── 복기 8카드 ──
+const recall = {
+  cards: [
+    { id: "c1", text: "도서관은 지식과 정보를 누구에게나 공평하게 열어 두는 공공 공간이다." },
+    { id: "c2", text: "종이책, 전자책, 영상 등 다양한 자료가 있고 인터넷으로도 열람할 수 있다." },
+    { id: "c3", text: "검색할 때는 주제를 정하고 핵심 낱말을 입력하여 자료 목록을 찾는다." },
+    { id: "c4", text: "결과가 많으면 좁히고, 적으면 비슷한 낱말로 바꾸어 검색한다." },
+    { id: "c5", text: "탐색을 반복하면 정보를 걸러내는 능력이 자연스럽게 길러진다." },
+    { id: "c6", text: "같은 주제라도 책마다 관점이 다르므로 여러 자료를 비교하며 읽어야 한다." },
+    { id: "c7", text: "출판 연도와 출처를 확인하고 인터넷 정보도 작성자를 따져 보아야 한다." },
+    { id: "c8", text: "도서관은 단순한 지식의 창고가 아니라 스스로 생각하는 힘을 키우는 훈련장이다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+// ── 확인학습 ──
+function findRange(text, pid, answer) {
+  const idx = text.indexOf(answer);
+  if (idx === -1) { console.error(`ERROR: "${answer}" not found in ${pid}!`); return null; }
+  return { paragraphId: pid, start: idx, end: idx + answer.length };
+}
+
+const cQs = [
+  { id: "q1", prompt: "도서관이 지식과 정보를 모아 열어 두는 공간의 성격을 무엇이라 하나요?", answerText: "공공 공간", pid: "p1", t: p1Text },
+  { id: "q2", prompt: "오늘날 도서관에서 종이책 외에 제공하는 전자 형태의 책은 무엇인가요?", answerText: "전자책", pid: "p1", t: p1Text },
+  { id: "q3", prompt: "도서관 검색 시스템에 입력하는 것은 무엇인가요?", answerText: "핵심 낱말", pid: "p2", t: p2Text },
+  { id: "q4", prompt: "목록에서 책의 위치를 알려 주는 번호를 무엇이라 하나요?", answerText: "청구 기호", pid: "p2", t: p2Text },
+  { id: "q5", prompt: "탐색을 반복하면 자연스럽게 길러지는 능력은 무엇인가요?", answerText: "정보를 걸러내는 능력", pid: "p2", t: p2Text },
+  { id: "q6", prompt: "출판 연도가 오래된 자료와 다를 수 있는 것은 무엇인가요?", answerText: "최신 연구 결과", pid: "p3", t: p3Text },
+  { id: "q7", prompt: "여러 자료를 견주어 보는 습관이 기르는 것은 무엇인가요?", answerText: "판단력", pid: "p3", t: p3Text }
+];
+
+const confirm = {
+  questions: cQs.map(q => {
+    const range = findRange(q.t, q.pid, q.answerText);
+    return {
+      id: q.id, prompt: q.prompt, answerText: q.answerText, answerMatchMode: "ANY",
+      answerRanges: range ? [range] : [],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true
+    };
+  })
+};
+
+// ── JSON 조립 ──
+const content = {
+  contentId: "dr-f3-007",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(프레게 3) Day 7 비문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "FREGE_3",
+  schoolGradeRange: { min: 6, max: 7 },
+  area: "READING",
+  subArea: "NONFICTION",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 300,
+  assets: {},
+  payload: {
+    passage: {
+      format: "TEXT",
+      paragraphs: [
+        { id: "p1", text: p1Text },
+        { id: "p2", text: p2Text },
+        { id: "p3", text: p3Text }
+      ]
+    },
+    intensive: { timeline },
+    recall,
+    confirm
+  }
+};
+
+// ── 검증 ──
+console.log("\n=== 검증 ===");
+const total = p1Text.length + p2Text.length + p3Text.length;
+console.log(`지문 길이: ${total} (950~1050: ${total >= 950 && total <= 1050 ? 'OK' : 'FAIL'})`);
+console.log(`recall: ${recall.cards.length} (${recall.cards.length===8?'OK':'FAIL'})`);
+console.log(`confirm: ${confirm.questions.length} (${confirm.questions.length>=5&&confirm.questions.length<=10?'OK':'FAIL'})`);
+console.log(`steps: ${timeline.length}`);
+
+let hlOk = true;
+for (const s of timeline) {
+  for (const r of s.highlight.ranges) {
+    const t = r.paragraphId==="p1"?p1Text:r.paragraphId==="p2"?p2Text:p3Text;
+    if (r.start<0||r.end>t.length||r.start>=r.end) { console.error(`HL FAIL: ${s.stepId}`); hlOk=false; }
+  }
+}
+console.log(`highlight: ${hlOk?'OK':'FAIL'}`);
+
+let arOk = true;
+for (const q of confirm.questions) {
+  for (const r of q.answerRanges) {
+    const t = r.paragraphId==="p1"?p1Text:r.paragraphId==="p2"?p2Text:p3Text;
+    if (t.substring(r.start,r.end) !== q.answerText) { console.error(`AR FAIL: ${q.id} "${t.substring(r.start,r.end)}" vs "${q.answerText}"`); arOk=false; }
+  }
+}
+console.log(`answerRanges: ${arOk?'OK':'FAIL'}`);
+
+// ── 파일 저장 ──
+const sp = 'C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/frontend/public/daily-reading/frege3/007.json';
+fs.writeFileSync(sp, JSON.stringify(content, null, 2), 'utf8');
+console.log(`\n파일 저장: ${sp}`);
+
+const bp = 'C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/generated/daily-batch-reading-frege3.json';
+const bd = JSON.parse(fs.readFileSync(bp, 'utf8'));
+bd.items[6] = {
+  content_type: "DAILY_READING", level_id: "FREGE_3", area: "READING", sub_area: "NONFICTION",
+  day_index: 7, module_key: "reading_training", schema_version: "1.0", content: content
+};
+fs.writeFileSync(bp, JSON.stringify(bd, null, 2), 'utf8');
+console.log(`배치 업데이트: ${bp}`);
+console.log("\n=== Day 7 완료 ===");

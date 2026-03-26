@@ -51,6 +51,7 @@ data class TestQuestionView(
     val domain: String?,
     val subDomain: String?,
     val passage: String?,
+    val stem: String?,
     val points: Int,
     val correctAnswer: String?,
     val choices: List<ChoiceItem>?,
@@ -71,7 +72,10 @@ data class TestQuestionStub(
     val number: Int,
     val type: String,
     val domain: String?,
-    val points: Int
+    val points: Int,
+    val passage: String? = null,
+    val content: String? = null,
+    val choices: List<String>? = null
 )
 
 // ── Student: OMR submit request ──
@@ -171,8 +175,10 @@ data class QuestionInput(
     val domain: String? = null,
     val subDomain: String? = null,
     val passage: String? = null,
+    val stem: String? = null,
     val points: Int = 0,
     val correctAnswer: String? = null,
+    val choices: List<ChoiceItem>? = null,
     val choiceExplanations: Map<String, String>? = null,
     val intent: String? = null,
     val essayKeywords: List<EssayKeyword>? = null,

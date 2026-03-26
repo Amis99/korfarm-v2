@@ -16,6 +16,17 @@ function convertKeys(obj, fn) {
 export const camelize = (obj) => convertKeys(obj, snakeToCamel);
 export const snakeize = (obj) => convertKeys(obj, camelToSnake);
 
+// camelize가 변환한 인벤토리 맵 키를 snake_case로 복원
+export function normalizeInventoryKeys(inv) {
+  if (!inv) return inv;
+  const toSnake = (k) => k.replace(/[A-Z]/g, (c) => `_${c.toLowerCase()}`);
+  const fixMap = (m) => {
+    if (!m || typeof m !== "object" || Array.isArray(m)) return m;
+    return Object.fromEntries(Object.entries(m).map(([k, v]) => [toSnake(k), v]));
+  };
+  return { ...inv, seeds: fixMap(inv.seeds), crops: fixMap(inv.crops) };
+}
+
 // HTTP 상태 코드를 포함하는 커스텀 에러 클래스
 export class ApiError extends Error {
   constructor(message, status) {
@@ -34,7 +45,7 @@ const buildUrl = (path) => {
 };
 
 const authHeaders = () => {
-  const token = localStorage.getItem(TOKEN_KEY);
+  const token = sessionStorage.getItem(TOKEN_KEY);
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
@@ -43,7 +54,7 @@ const handle401 = (path) => {
   // 로그인/회원가입 관련 요청에서는 리다이렉트하지 않음
   const authPaths = ["/v1/auth/login", "/v1/auth/signup", "/v1/auth/request-password-reset"];
   if (authPaths.some((p) => path.includes(p))) return;
-  localStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(TOKEN_KEY);
   window.location.href = import.meta.env.BASE_URL + "login";
 };
 

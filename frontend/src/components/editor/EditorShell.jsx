@@ -17,12 +17,16 @@ import PhonemeChangeForm from "./form/PhonemeChangeForm";
 import WordFormationForm from "./form/WordFormationForm";
 import SentenceStructureForm from "./form/SentenceStructureForm";
 import ContentPdfForm from "./form/ContentPdfForm";
+import BackgroundPreview from "./preview/BackgroundPreview";
+import BackgroundForm from "./form/BackgroundForm";
 import "../../styles/content-editor.css";
 
 const TYPE_LABEL = {
   PRO_READING: "독해 훈련",
-  PRO_BACKGROUND: "배경지식 퀴즈",
-  PRO_VOCAB: "어휘 학습",
+  PRO_BACKGROUND: "배경지식",
+  BACKGROUND_KNOWLEDGE: "배경지식",
+  BACKGROUND_KNOWLEDGE_QUIZ: "배경지식",
+  PRO_VOCAB: "어휘",
   PRO_LOGIC: "추론",
   PRO_ANSWER: "모범답안",
   PRO_TEST: "테스트",
@@ -52,6 +56,7 @@ function resolveEditorType(ct) {
   if (up === "GRAMMAR_WORD_FORMATION" || up.includes("WORD_FORMATION")) return "wordformation";
   if (up === "GRAMMAR_SENTENCE_STRUCTURE" || up.includes("SENTENCE_STRUCTURE")) return "sentence";
   if (up === "CONTENT_PDF" || up === "CONTENT_PDF_QUIZ" || up.includes("CONTENT_PDF")) return "contentpdf";
+  if (up === "PRO_BACKGROUND" || up === "BACKGROUND_KNOWLEDGE" || up === "BACKGROUND_KNOWLEDGE_QUIZ" || up === "PRO_LOGIC" || up.includes("BACKGROUND")) return "background";
   return "worksheet";
 }
 
@@ -325,6 +330,9 @@ export default function EditorShell({ contentId, staticInfo }) {
             {editorType === "contentpdf" && (
               <ContentPdfPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
             )}
+            {editorType === "background" && (
+              <BackgroundPreview content={content} onClickPath={handlePreviewClick} focusPath={focusPath} />
+            )}
           </div>
           <div className="ce-form-pane">
             {editorType === "reading" && (
@@ -350,6 +358,9 @@ export default function EditorShell({ contentId, staticInfo }) {
             )}
             {editorType === "contentpdf" && (
               <ContentPdfForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
+            )}
+            {editorType === "background" && (
+              <BackgroundForm editor={editor} focusPath={focusPath} setFocusPath={setFocusPath} />
             )}
           </div>
         </div>

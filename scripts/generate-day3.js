@@ -1,0 +1,573 @@
+// Day 3 비문학 JSON 생성
+const fs = require('fs');
+
+const content = {
+  "contentId": "dr-w1-003",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "일일 독해(비트겐슈타인 1) Day 3 비문학",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "WITTGENSTEIN_1",
+  "schoolGradeRange": { "min": 9, "max": 10 },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "우리는 일상에서 무엇이 옳고 무엇이 그른지를 판단해야 하는 상황에 자주 놓인다. 이때 도덕적 판단의 기준을 어디에 두느냐에 따라 윤리학의 입장이 나뉘는데, 대표적인 것이 공리주의와 의무론이다. 공리주의는 어떤 행위가 가져오는 결과에 주목하여, 최대 다수의 최대 행복을 실현하는 행위를 도덕적으로 옳다고 본다. 반면 의무론은 행위의 결과가 아니라 행위 자체의 성격에 주목하여, 보편적인 도덕 법칙에 부합하는 행위를 옳다고 판단한다. 이처럼 두 이론은 같은 상황에서 서로 다른 결론을 내릴 수 있기 때문에, 오랫동안 철학적 논쟁의 중심에 서 왔다."
+        },
+        {
+          "id": "p2",
+          "text": "공리주의를 체계적으로 정립한 대표적인 사상가는 벤담과 밀이다. 벤담은 쾌락과 고통이라는 두 가지 감정이 인간 행위의 근본 원리라고 보았다. 그는 쾌락의 강도, 지속 시간, 확실성 등을 수치로 계산할 수 있다고 주장하며, 행위의 도덕성을 쾌락의 총량으로 평가하는 양적 공리주의를 제시하였다. 이에 비해 밀은 쾌락에도 질적 차이가 있다고 보았다. 밀은 육체적 쾌락보다 지적이고 정신적인 쾌락이 더 높은 가치를 지닌다고 주장하면서, 단순히 양만으로 쾌락을 비교하는 것은 인간의 존엄성을 간과하는 것이라고 비판하였다. 밀의 이러한 관점은 질적 공리주의라 불리며, 인간다운 삶의 가치를 강조했다는 점에서 큰 의미가 있다."
+        },
+        {
+          "id": "p3",
+          "text": "의무론의 대표적인 사상가인 칸트는 행위의 결과와 무관하게, 오직 도덕 법칙을 따르려는 선의지에서 비롯된 행위만이 진정한 도덕적 가치를 지닌다고 주장하였다. 칸트는 이를 정언 명령이라는 개념으로 설명하였는데, 정언 명령이란 어떠한 조건이나 목적 없이 그 자체로 따라야 하는 무조건적인 도덕 명령을 뜻한다. 예를 들어, 거짓말을 하지 말라는 명령은 거짓말이 나쁜 결과를 가져오기 때문이 아니라, 거짓말 자체가 보편적 법칙이 될 수 없기 때문에 지켜야 한다는 것이다. 또한 칸트는 인간을 언제나 수단이 아닌 목적으로 대우해야 한다고 역설하면서, 인간의 존엄성을 도덕의 가장 핵심적인 원리로 삼았다."
+        },
+        {
+          "id": "p4",
+          "text": "공리주의와 의무론은 각각 장점과 한계를 지닌다. 공리주의는 도덕적 판단에 구체적이고 실용적인 기준을 제공한다는 장점이 있으나, 소수의 권리를 다수의 행복을 위해 희생시킬 수 있다는 비판을 받는다. 예컨대, 한 사람의 희생으로 다섯 사람을 구할 수 있는 상황에서 공리주의는 그 희생을 정당화할 수 있지만, 이는 개인의 권리를 심각하게 침해하는 것이라는 반론이 제기된다. 반면 의무론은 개인의 권리와 존엄성을 확고하게 보호한다는 강점이 있으나, 현실의 복잡한 상황에서 구체적인 행동 지침을 제시하기 어렵다는 한계가 있다. 이처럼 두 이론은 서로의 약점을 보완하는 관계에 있으므로, 도덕적 문제를 해결하기 위해서는 어느 한쪽에 치우치지 않고 양쪽의 관점을 균형 있게 고려하는 태도가 필요하다."
+        }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        // === p1: 5문장 + 중심내용 ===
+        // s1: p1 문장1 [0,44]
+        {
+          "stepId": "s1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 44 }] },
+          "question": {
+            "prompt": "첫 문장이 설명하는 내용으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "일상에서 도덕적 판단이 필요한 상황에 자주 놓인다는 것을 설명한다." },
+              { "id": "B", "text": "도덕적 판단은 항상 쉽게 내릴 수 있다는 것을 설명한다." },
+              { "id": "C", "text": "옳고 그름의 기준은 이미 확정되어 있다는 것을 설명한다." },
+              { "id": "D", "text": "판단이 필요한 상황은 일상에서 거의 발생하지 않는다고 설명한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s2: p1 문장2 [45,107]
+        {
+          "stepId": "s2",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 45, "end": 107 }] },
+          "question": {
+            "prompt": "둘째 문장에서 소개하는 대표적인 윤리학 이론으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "공리주의와 의무론이 대표적인 윤리학 입장이다." },
+              { "id": "B", "text": "실존주의와 구조주의가 대표적인 윤리학 입장이다." },
+              { "id": "C", "text": "윤리학의 입장은 하나로 통일되어 있다." },
+              { "id": "D", "text": "도덕적 판단의 기준은 법률에 의해서만 정해진다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s3: p1 문장3 [108,172]
+        {
+          "stepId": "s3",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 108, "end": 172 }] },
+          "question": {
+            "prompt": "셋째 문장에서 공리주의가 주목하는 것으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "행위가 가져오는 결과에 주목하여 가장 많은 사람의 행복을 추구한다." },
+              { "id": "B", "text": "행위 자체의 도덕적 성격에 주목하여 의무를 강조한다." },
+              { "id": "C", "text": "행위의 동기에 주목하여 의도가 선한지를 판단한다." },
+              { "id": "D", "text": "행위의 전통에 주목하여 관습을 따르는 것을 중시한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s4: p1 문장4 [173,240]
+        {
+          "stepId": "s4",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 173, "end": 240 }] },
+          "question": {
+            "prompt": "넷째 문장에서 의무론이 중시하는 것으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "행위의 결과가 아니라 보편적 도덕 법칙에 부합하는지를 중시한다." },
+              { "id": "B", "text": "행위의 결과가 좋으면 어떤 행위든 정당화될 수 있다고 본다." },
+              { "id": "C", "text": "행위의 성격보다 행위자의 사회적 지위를 중요시한다." },
+              { "id": "D", "text": "보편적 법칙은 존재하지 않으며 상황에 따라 판단해야 한다고 본다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s5: p1 문장5 [241,304]
+        {
+          "stepId": "s5",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 241, "end": 304 }] },
+          "question": {
+            "prompt": "마지막 문장이 말하는 두 이론의 관계로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "같은 상황에서 다른 결론을 내릴 수 있어 오랫동안 논쟁의 대상이 되었다." },
+              { "id": "B", "text": "두 이론은 항상 같은 결론에 도달하므로 논쟁이 불필요하다." },
+              { "id": "C", "text": "두 이론 중 하나가 이미 우월한 것으로 판명되었다." },
+              { "id": "D", "text": "철학적 논쟁은 최근에야 비로소 시작되었다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s6: p1 중심내용 [0,304]
+        {
+          "stepId": "s6",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 304 }] },
+          "question": {
+            "prompt": "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "도덕적 판단의 기준에 따라 공리주의와 의무론이 나뉘며, 두 이론은 오랜 철학적 논쟁의 대상이다." },
+              { "id": "B", "text": "공리주의가 의무론보다 우월한 도덕 이론이라는 것이 밝혀졌다." },
+              { "id": "C", "text": "도덕적 판단은 개인의 취향에 따라 자유롭게 내리면 된다." },
+              { "id": "D", "text": "윤리학에서는 오직 하나의 올바른 입장만이 존재한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // === p2: 6문장 + 중심내용 ===
+        // s7: p2 문장1 [0,34]
+        {
+          "stepId": "s7",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 34 }] },
+          "question": {
+            "prompt": "첫 문장이 소개하는 공리주의의 대표 사상가로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "벤담과 밀이 공리주의를 체계적으로 정립한 사상가이다." },
+              { "id": "B", "text": "칸트와 헤겔이 공리주의를 정립한 사상가이다." },
+              { "id": "C", "text": "소크라테스와 플라톤이 공리주의를 정립하였다." },
+              { "id": "D", "text": "공리주의는 특정 사상가 없이 자연스럽게 형성되었다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s8: p2 문장2 [35,77]
+        {
+          "stepId": "s8",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 35, "end": 77 }] },
+          "question": {
+            "prompt": "둘째 문장에서 벤담이 인간 행위의 근본 원리로 본 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "쾌락과 고통이라는 두 가지 감정을 근본 원리로 보았다." },
+              { "id": "B", "text": "이성과 논리가 인간 행위의 근본 원리라고 보았다." },
+              { "id": "C", "text": "의무감과 책임감이 행위의 근본 원리라고 보았다." },
+              { "id": "D", "text": "자유의지와 선택이 행위의 근본 원리라고 보았다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s9: p2 문장3 [78,161]
+        {
+          "stepId": "s9",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 78, "end": 161 }] },
+          "question": {
+            "prompt": "셋째 문장에서 벤담이 제시한 것으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "쾌락의 총량으로 도덕성을 평가하는 양적 공리주의를 제시하였다." },
+              { "id": "B", "text": "쾌락의 질적 차이를 기준으로 도덕성을 평가하는 이론을 제시하였다." },
+              { "id": "C", "text": "쾌락은 계산할 수 없으므로 도덕적 판단이 불가능하다고 주장하였다." },
+              { "id": "D", "text": "고통의 총량을 기준으로 행위의 부도덕성을 평가하는 이론을 제시하였다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s10: p2 문장4 [162,191]
+        {
+          "stepId": "s10",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 162, "end": 191 }] },
+          "question": {
+            "prompt": "넷째 문장에서 밀이 벤담과 다르게 본 점으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "쾌락에도 질적 차이가 있다고 보았다." },
+              { "id": "B", "text": "쾌락은 모두 동일한 가치를 지닌다고 보았다." },
+              { "id": "C", "text": "고통만이 도덕적 판단의 기준이 된다고 보았다." },
+              { "id": "D", "text": "쾌락을 수치로 계산하는 것이 가장 중요하다고 보았다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s11: p2 문장5 [192,285]
+        {
+          "stepId": "s11",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 192, "end": 285 }] },
+          "question": {
+            "prompt": "다섯째 문장에서 밀이 비판한 것으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "양만으로 쾌락을 비교하면 인간의 존엄성을 간과하게 된다고 비판하였다." },
+              { "id": "B", "text": "질적 차이를 강조하면 도덕적 판단이 불가능해진다고 비판하였다." },
+              { "id": "C", "text": "정신적 쾌락은 가치가 낮으므로 무시해야 한다고 주장하였다." },
+              { "id": "D", "text": "육체적 쾌락이 정신적 쾌락보다 높은 가치를 지닌다고 비판하였다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s12: p2 문장6 [286,342]
+        {
+          "stepId": "s12",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 286, "end": 342 }] },
+          "question": {
+            "prompt": "마지막 문장에서 밀의 관점의 의미로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "질적 공리주의로서 인간다운 삶의 가치를 강조했다는 의미가 있다." },
+              { "id": "B", "text": "양적 공리주의의 한계를 완전히 극복했다는 의미가 있다." },
+              { "id": "C", "text": "의무론의 관점을 수용했다는 점에서 의미가 있다." },
+              { "id": "D", "text": "쾌락의 양적 계산을 더욱 정밀하게 발전시켰다는 의미가 있다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s13: p2 중심내용 [0,342]
+        {
+          "stepId": "s13",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 342 }] },
+          "question": {
+            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "벤담은 쾌락의 양으로, 밀은 쾌락의 질로 도덕성을 평가하여 공리주의를 발전시켰다." },
+              { "id": "B", "text": "벤담과 밀은 동일한 기준으로 공리주의를 설명하였다." },
+              { "id": "C", "text": "공리주의는 쾌락을 부정하고 고통만을 중시하는 이론이다." },
+              { "id": "D", "text": "밀은 벤담의 이론을 전면적으로 부정하고 새로운 이론을 만들었다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // === p3: 4문장 + 중심내용 ===
+        // s14: p3 문장1 [0,86]
+        {
+          "stepId": "s14",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 86 }] },
+          "question": {
+            "prompt": "첫 문장에서 칸트가 도덕적 가치가 있다고 본 행위로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "도덕 법칙을 따르려는 선의지에서 비롯된 행위만이 가치가 있다고 보았다." },
+              { "id": "B", "text": "좋은 결과를 가져오는 행위라면 어떤 것이든 가치가 있다고 보았다." },
+              { "id": "C", "text": "사회적으로 인정받는 행위만이 도덕적 가치가 있다고 보았다." },
+              { "id": "D", "text": "쾌락을 극대화하는 행위가 도덕적 가치를 지닌다고 보았다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s15: p3 문장2 [87,169]
+        {
+          "stepId": "s15",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 87, "end": 169 }] },
+          "question": {
+            "prompt": "둘째 문장에서 정언 명령의 뜻으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "어떠한 조건이나 목적 없이 그 자체로 따라야 하는 무조건적 도덕 명령이다." },
+              { "id": "B", "text": "특정 조건이 충족될 때에만 따라야 하는 조건부 명령이다." },
+              { "id": "C", "text": "좋은 결과를 가져올 때에만 지켜야 하는 실용적 지침이다." },
+              { "id": "D", "text": "사회의 합의에 따라 변할 수 있는 상대적 규범이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s16: p3 문장3 [170,258]
+        {
+          "stepId": "s16",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 170, "end": 258 }] },
+          "question": {
+            "prompt": "셋째 문장에서 거짓말을 하지 말아야 하는 이유로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "거짓말 자체가 보편적 법칙이 될 수 없기 때문에 지켜야 한다." },
+              { "id": "B", "text": "거짓말이 항상 나쁜 결과를 가져오기 때문에 지켜야 한다." },
+              { "id": "C", "text": "거짓말은 법률로 금지되어 있기 때문에 지켜야 한다." },
+              { "id": "D", "text": "거짓말은 사회적 비난을 받기 때문에 지켜야 한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s17: p3 문장4 [259,331]
+        {
+          "stepId": "s17",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 259, "end": 331 }] },
+          "question": {
+            "prompt": "넷째 문장에서 칸트가 역설한 것으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "인간을 언제나 수단이 아닌 목적으로 대우해야 한다고 역설하였다." },
+              { "id": "B", "text": "인간을 목적 달성을 위한 수단으로 활용해야 한다고 역설하였다." },
+              { "id": "C", "text": "인간의 존엄성보다 사회 전체의 행복이 더 중요하다고 역설하였다." },
+              { "id": "D", "text": "도덕의 원리는 시대에 따라 변할 수 있다고 역설하였다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s18: p3 중심내용 [0,331]
+        {
+          "stepId": "s18",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 331 }] },
+          "question": {
+            "prompt": "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "칸트는 선의지와 정언 명령을 통해 인간의 존엄성을 도덕의 핵심 원리로 제시하였다." },
+              { "id": "B", "text": "칸트는 행위의 결과를 가장 중요한 도덕적 기준으로 삼았다." },
+              { "id": "C", "text": "칸트의 의무론은 공리주의와 동일한 결론에 도달한다." },
+              { "id": "D", "text": "칸트는 거짓말만을 도덕적으로 금지한 사상가이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // === p4: 5문장 + 중심내용 ===
+        // s19: p4 문장1 [0,26]
+        {
+          "stepId": "s19",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 26 }] },
+          "question": {
+            "prompt": "첫 문장이 전달하는 내용으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "공리주의와 의무론은 각각 장점과 한계를 모두 지니고 있다." },
+              { "id": "B", "text": "공리주의만 장점이 있고 의무론은 한계만 있다." },
+              { "id": "C", "text": "두 이론 모두 한계만 있어 새로운 이론이 필요하다." },
+              { "id": "D", "text": "두 이론은 완벽하여 어떤 한계도 없다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s20: p4 문장2 [27,109]
+        {
+          "stepId": "s20",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 27, "end": 109 }] },
+          "question": {
+            "prompt": "둘째 문장에서 공리주의가 받는 비판으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "소수의 권리를 다수의 행복을 위해 희생시킬 수 있다는 비판을 받는다." },
+              { "id": "B", "text": "도덕적 판단에 기준을 제공하지 못한다는 비판을 받는다." },
+              { "id": "C", "text": "개인의 권리를 지나치게 강조한다는 비판을 받는다." },
+              { "id": "D", "text": "현실 적용이 불가능하다는 비판을 받는다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s21: p4 문장3 [110,205]
+        {
+          "stepId": "s21",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 110, "end": 205 }] },
+          "question": {
+            "prompt": "셋째 문장에서 제시하는 구체적 사례의 쟁점으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "한 사람의 희생으로 다섯 사람을 구하는 것이 개인의 권리를 침해한다는 반론이 있다." },
+              { "id": "B", "text": "다섯 사람을 희생시켜 한 사람을 구하는 것이 정당하다는 주장이 있다." },
+              { "id": "C", "text": "공리주의는 어떤 상황에서도 희생을 정당화하지 않는다." },
+              { "id": "D", "text": "개인의 권리 침해에 대한 반론은 존재하지 않는다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s22: p4 문장4 [206,289]
+        {
+          "stepId": "s22",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 206, "end": 289 }] },
+          "question": {
+            "prompt": "넷째 문장에서 의무론의 한계로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "현실의 복잡한 상황에서 구체적인 행동 지침을 제시하기 어렵다." },
+              { "id": "B", "text": "개인의 권리를 보호하지 못한다는 한계가 있다." },
+              { "id": "C", "text": "존엄성의 개념을 제대로 설명하지 못한다." },
+              { "id": "D", "text": "소수의 권리를 다수를 위해 희생시킬 수 있다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s23: p4 문장5 [290,384]
+        {
+          "stepId": "s23",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 290, "end": 384 }] },
+          "question": {
+            "prompt": "마지막 문장이 말하는 핵심 주장으로 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "도덕적 문제 해결을 위해 양쪽 관점을 균형 있게 고려하는 태도가 필요하다." },
+              { "id": "B", "text": "공리주의가 의무론보다 현실에 적합한 이론이므로 공리주의를 따라야 한다." },
+              { "id": "C", "text": "의무론이 공리주의보다 우월하므로 의무론만 따르면 된다." },
+              { "id": "D", "text": "두 이론 모두 한계가 있으므로 도덕적 판단 자체를 포기해야 한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        // s24: p4 중심내용 [0,384]
+        {
+          "stepId": "s24",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 384 }] },
+          "question": {
+            "prompt": "넷째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "공리주의와 의무론은 서로의 약점을 보완하므로, 균형 잡힌 시각으로 도덕적 문제에 접근해야 한다." },
+              { "id": "B", "text": "공리주의는 완벽한 이론이므로 의무론은 불필요하다." },
+              { "id": "C", "text": "의무론만으로 모든 도덕적 문제를 해결할 수 있다." },
+              { "id": "D", "text": "두 이론 모두 폐기하고 새로운 윤리 이론을 만들어야 한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        { "id": "c1", "text": "도덕적 판단의 기준에 따라 윤리학은 공리주의와 의무론으로 나뉘며, 두 이론은 같은 상황에서 다른 결론을 내릴 수 있다." },
+        { "id": "c2", "text": "벤담은 쾌락의 양으로 도덕성을 평가하는 양적 공리주의를 제시하였다." },
+        { "id": "c3", "text": "밀은 쾌락에 질적 차이가 있다고 보며, 정신적 쾌락이 더 높은 가치를 지닌다고 주장하였다." },
+        { "id": "c4", "text": "칸트는 도덕 법칙을 따르려는 선의지에서 비롯된 행위만이 도덕적 가치를 지닌다고 보았다." },
+        { "id": "c5", "text": "정언 명령이란 조건이나 목적 없이 그 자체로 따라야 하는 무조건적인 도덕 명령이다." },
+        { "id": "c6", "text": "칸트는 인간을 수단이 아닌 목적으로 대우해야 한다고 역설하며 인간의 존엄성을 강조하였다." },
+        { "id": "c7", "text": "공리주의는 실용적 기준을 제공하지만 소수의 권리 희생 우려가 있고, 의무론은 존엄성을 보호하지만 구체적 지침이 부족하다." },
+        { "id": "c8", "text": "두 이론은 서로의 약점을 보완하므로, 도덕적 문제 해결에는 양쪽 관점을 균형 있게 고려해야 한다." }
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "도덕적 판단의 기준에 따라 나뉘는 대표적인 두 윤리학 입장은 무엇인가요?",
+          "answerText": "공리주의와 의무론",
+          "answerMatchMode": "ANY",
+          "answerRanges": [{ "paragraphId": "p1", "start": 95, "end": 104 }],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "공리주의에서 도덕적으로 옳다고 보는 행위가 실현하는 것은 무엇인가요?",
+          "answerText": "최대 다수의 최대 행복",
+          "answerMatchMode": "ANY",
+          "answerRanges": [{ "paragraphId": "p1", "start": 136, "end": 148 }],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "공리주의를 체계적으로 정립한 대표적인 두 사상가는 누구인가요?",
+          "answerText": "벤담과 밀",
+          "answerMatchMode": "ANY",
+          "answerRanges": [{ "paragraphId": "p2", "start": 26, "end": 31 }],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "벤담이 쾌락의 총량으로 도덕성을 평가하며 제시한 이론을 무엇이라 하나요?",
+          "answerText": "양적 공리주의",
+          "answerMatchMode": "ANY",
+          "answerRanges": [{ "paragraphId": "p2", "start": 146, "end": 153 }],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q5",
+          "prompt": "칸트가 도덕적 가치의 원천으로 본, 도덕 법칙을 따르려는 의지를 무엇이라 하나요?",
+          "answerText": "선의지",
+          "answerMatchMode": "ANY",
+          "answerRanges": [{ "paragraphId": "p3", "start": 48, "end": 51 }],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q6",
+          "prompt": "조건이나 목적 없이 그 자체로 따라야 하는 무조건적 도덕 명령을 무엇이라 하나요?",
+          "answerText": "정언 명령",
+          "answerMatchMode": "ANY",
+          "answerRanges": [{ "paragraphId": "p3", "start": 94, "end": 99 }],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q7",
+          "prompt": "칸트는 인간을 언제나 무엇이 아닌 무엇으로 대우해야 한다고 역설하였나요?",
+          "answerText": "수단이 아닌 목적",
+          "answerMatchMode": "ANY",
+          "answerRanges": [{ "paragraphId": "p3", "start": 274, "end": 283 }],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q8",
+          "prompt": "공리주의가 비판받는 이유 중 하나로, 다수의 행복을 위해 희생될 수 있는 것은 무엇인가요?",
+          "answerText": "소수의 권리",
+          "answerMatchMode": "ANY",
+          "answerRanges": [{ "paragraphId": "p4", "start": 71, "end": 77 }],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+};
+
+// 검증
+const paras = content.payload.passage.paragraphs;
+const totalLen = paras.reduce((sum, p) => sum + p.text.length, 0);
+const recallCount = content.payload.recall.cards.length;
+const confirmCount = content.payload.confirm.questions.length;
+const intensiveCount = content.payload.intensive.timeline.length;
+
+console.log(`지문 총 길이: ${totalLen}자`);
+console.log(`정독 단계 수: ${intensiveCount}`);
+console.log(`복기 카드 수: ${recallCount}`);
+console.log(`확인 문항 수: ${confirmCount}`);
+
+// ranges 유효성 검증
+let errors = 0;
+for (const step of content.payload.intensive.timeline) {
+  for (const r of step.highlight.ranges) {
+    const para = paras.find(p => p.id === r.paragraphId);
+    if (!para) { console.error(`ERROR: ${step.stepId} - 문단 ${r.paragraphId} 없음`); errors++; continue; }
+    if (r.start < 0 || r.end > para.text.length) {
+      console.error(`ERROR: ${step.stepId} - range [${r.start}, ${r.end}] 범위 초과 (문단 길이: ${para.text.length})`);
+      errors++;
+    }
+  }
+}
+for (const q of content.payload.confirm.questions) {
+  for (const r of q.answerRanges) {
+    const para = paras.find(p => p.id === r.paragraphId);
+    if (!para) { console.error(`ERROR: ${q.id} - 문단 ${r.paragraphId} 없음`); errors++; continue; }
+    if (r.start < 0 || r.end > para.text.length) {
+      console.error(`ERROR: ${q.id} - range [${r.start}, ${r.end}] 범위 초과 (문단 길이: ${para.text.length})`);
+      errors++;
+    }
+    const actual = para.text.substring(r.start, r.end);
+    console.log(`  ${q.id}: "${actual}" (expected: "${q.answerText}")`);
+  }
+}
+
+if (errors === 0) {
+  console.log('\n모든 검증 통과!');
+  // 파일 저장
+  const outPath = 'frontend/public/daily-reading/wittgenstein1/003.json';
+  fs.writeFileSync(outPath, JSON.stringify(content, null, 2), 'utf8');
+  console.log(`저장 완료: ${outPath}`);
+} else {
+  console.error(`\n${errors}개 오류 발견!`);
+}

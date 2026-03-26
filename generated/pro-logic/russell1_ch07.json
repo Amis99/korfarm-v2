@@ -1,0 +1,433 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀1 7장 논리사고력",
+  "targetLevel": "russell1",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {"seedType": "seed_grape", "count": 3, "multiplier": 1},
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "나라의 경제가 어려워지면 가게에 손님이 줄고, 물건을 만드는 회사도 힘들어진다. 이를 막기 위해 나라에서는 시중에 돌아다니는 돈의 양을 조절한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'돈의 양을 조절하면 경제 위기를 극복할 수 있다'는 주장의 숨겨진 전제는?",
+            "choices": [
+              {"id": "A", "text": "경제 활동은 시중에 유통되는 돈의 양에 영향을 받는다."},
+              {"id": "B", "text": "돈은 무한히 찍어낼 수 있다."},
+              {"id": "C", "text": "경제 위기의 원인은 항상 돈의 부족이다."},
+              {"id": "D", "text": "국가는 시장에 개입해서는 안 된다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "소설에서 갈등은 이야기에 긴장감을 불어넣고 재미를 만드는 핵심 요소이다. 갈등이란 인물들이 무언가와 부딪치고 문제를 겪는 과정이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'갈등이 이야기의 재미를 만든다'는 주장의 숨겨진 전제는?",
+            "choices": [
+              {"id": "A", "text": "독자는 순탄한 이야기보다 문제와 갈등이 있는 이야기에 더 흥미를 느낀다."},
+              {"id": "B", "text": "모든 소설에는 반드시 갈등이 있다."},
+              {"id": "C", "text": "갈등이 많을수록 좋은 소설이다."},
+              {"id": "D", "text": "갈등은 반드시 해결되어야 한다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "중앙은행이 기준 금리를 낮추면 시중 은행의 이자율도 낮아진다. 그러면 사람들이 저축보다 소비나 투자를 더 많이 하게 된다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "기준 금리를 낮추었을 때 예상되는 경제적 결과는?",
+            "choices": [
+              {"id": "A", "text": "시중에 돈이 줄어들고 경제가 위축된다."},
+              {"id": "B", "text": "시중에 돈이 늘어나고 경제 활동이 활발해진다."},
+              {"id": "C", "text": "물가가 떨어지고 디플레이션이 발생한다."},
+              {"id": "D", "text": "사람들이 저축을 더 많이 한다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "단어를 뜻을 가진 가장 작은 단위로 쪼갤 수 있다. '꽃신'은 '꽃'과 '신'으로 나눌 수 있지만, '꽃'을 다시 'ㄲ, ㅗ, ㅊ'으로 나누면 뜻이 사라진다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "'뜻을 가진 가장 작은 단위'를 형태소라 한다면, '꽃'을 더 쪼갰을 때 예상되는 결과는?",
+            "choices": [
+              {"id": "A", "text": "더 작은 형태소가 나온다."},
+              {"id": "B", "text": "뜻이 사라지므로 형태소가 아닌 음소가 된다."},
+              {"id": "C", "text": "새로운 단어가 만들어진다."},
+              {"id": "D", "text": "더 큰 의미를 가지게 된다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "장끼전에서 장끼는 화려한 차림의 수꿩이다. 까투리는 장끼의 아내인 암꿩이다. 장끼가 먹이 앞에서 위험을 무시하고 달려드는 것이 갈등의 원인이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 위험을 무시하고 욕심을 부리면 화를 당한다. [소전제] 장끼는 먹이 앞에서 위험을 무시하고 욕심을 부렸다. 결론은?",
+            "choices": [
+              {"id": "A", "text": "장끼는 화를 당한다."},
+              {"id": "B", "text": "장끼는 안전하다."},
+              {"id": "C", "text": "까투리가 화를 당한다."},
+              {"id": "D", "text": "결론을 내릴 수 없다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "통화정책에서 기준 금리를 올리면 저축이 늘고 소비가 줄어든다. 한국은행이 기준 금리를 인상했다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 기준 금리 인상 시 저축이 늘고 소비가 줄어든다. [소전제] 한국은행이 금리를 인상했다. 결론은?",
+            "choices": [
+              {"id": "A", "text": "저축이 줄고 소비가 늘어난다."},
+              {"id": "B", "text": "저축이 늘고 소비가 줄어든다."},
+              {"id": "C", "text": "경제에 변화가 없다."},
+              {"id": "D", "text": "물가가 오른다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "형태소는 뜻을 가진 가장 작은 언어 단위이다. 형태소가 되려면 반드시 의미를 가져야 한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'형태소이다(Q)'의 필요조건이 '의미를 가진다(P)'일 때, 올바른 변환은?",
+            "choices": [
+              {"id": "A", "text": "의미를 가지지 않으면서 형태소인 경우는 없다."},
+              {"id": "B", "text": "의미를 가지면 반드시 형태소이다."},
+              {"id": "C", "text": "형태소가 아니면 의미가 없다."},
+              {"id": "D", "text": "의미와 형태소는 무관하다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "소설에서 외적 갈등은 인물과 외부 요인(다른 인물, 사회, 자연 등) 사이의 갈등이다. 외적 갈등이 나타나려면 인물 외부의 대립 요소가 있어야 한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'외적 갈등이 있다(Q)'의 필요조건이 '인물 외부의 대립 요소가 있다(P)'일 때, ~P이면 ~Q인가?",
+            "choices": [
+              {"id": "A", "text": "그렇다. 외부 대립 요소가 없으면 외적 갈등이 있을 수 없다."},
+              {"id": "B", "text": "아니다. 외부 대립 요소 없이도 외적 갈등이 가능하다."},
+              {"id": "C", "text": "대우는 필요조건에 적용할 수 없다."},
+              {"id": "D", "text": "판단할 수 없다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "중앙은행의 통화정책이 효과를 내려면 시중 은행이 중앙은행의 금리 변동에 맞춰 대출 금리를 조정해야 한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'통화정책이 효과를 낸다'의 필요조건 '시중 은행이 금리를 조정한다'를 충족하지 않는 예시는?",
+            "choices": [
+              {"id": "A", "text": "중앙은행이 금리를 낮추고, 시중 은행도 대출 금리를 낮춘 경우"},
+              {"id": "B", "text": "중앙은행이 금리를 올렸으나, 시중 은행이 대출 금리를 그대로 유지한 경우"},
+              {"id": "C", "text": "중앙은행과 시중 은행이 동시에 금리를 인상한 경우"},
+              {"id": "D", "text": "시중 은행이 중앙은행의 결정에 즉시 반응한 경우"}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "형태소는 자립 형태소와 의존 형태소로 나뉜다. 자립 형태소가 되려면 혼자서 쓰일 수 있어야 한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'자립 형태소이다'의 필요조건은 '혼자서 쓸 수 있다'이다. 이를 충족하는 예시는?",
+            "choices": [
+              {"id": "A", "text": "'꽃'은 혼자서 쓸 수 있다."},
+              {"id": "B", "text": "'-었-'은 혼자서 쓸 수 없다."},
+              {"id": "C", "text": "'-는'은 다른 말에 붙어야 한다."},
+              {"id": "D", "text": "'풋-'은 혼자서 쓸 수 없다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "장끼전에서 까투리는 장끼에게 먹이가 덫일 수 있다고 경고한다. 경고를 무시하면 위험에 빠질 수 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'경고를 무시한다(P)'가 '위험에 빠진다(Q)'의 충분조건이라면, 올바른 변환은?",
+            "choices": [
+              {"id": "A", "text": "경고를 무시하면서 안전한 경우는 없다."},
+              {"id": "B", "text": "안전하면 경고를 무시한 것이 아니다."},
+              {"id": "C", "text": "위험에 빠지면 반드시 경고를 무시한 것이다."},
+              {"id": "D", "text": "A와 B 모두 올바르다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "금리 인하는 시중에 유통되는 돈의 양을 늘리는 확장적 통화정책이다. 확장적 통화정책은 경기 침체기에 주로 사용된다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'금리를 인하한다(P)'는 '확장적 통화정책이다(Q)'의 충분조건이다. 대우를 올바르게 구성하면?",
+            "choices": [
+              {"id": "A", "text": "확장적 통화정책이 아니면 금리를 인하하지 않았다. (~Q → ~P)"},
+              {"id": "B", "text": "금리를 인하하지 않으면 확장적 통화정책이 아니다. (~P → ~Q)"},
+              {"id": "C", "text": "확장적 통화정책이면 금리를 인하한다. (Q → P)"},
+              {"id": "D", "text": "금리 인상은 축소적 통화정책이다."}
+            ],
+            "answerId": "A",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "의존 형태소는 혼자 쓰일 수 없고 반드시 다른 형태소와 결합해야 한다. '-었-', '-는', '-이' 등이 의존 형태소이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'혼자 쓸 수 없다'는 '의존 형태소이다'의 충분조건이다. 이를 만족하는 예시는?",
+            "choices": [
+              {"id": "A", "text": "'하늘'은 혼자 쓸 수 있다."},
+              {"id": "B", "text": "'-었-'은 반드시 다른 말에 붙어야 한다."},
+              {"id": "C", "text": "'산'은 단독으로 사용 가능하다."},
+              {"id": "D", "text": "'나무'는 혼자 의미를 가진다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "인물과 사회 간의 갈등은 개인이 사회의 규범, 제도, 편견 등과 충돌하는 것이다. 사회적 부조리에 맞서 싸우는 인물이 대표적 예시이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'개인이 사회적 규범과 충돌한다'는 '인물과 사회 간 갈등이다'의 충분조건이다. 적절한 예시는?",
+            "choices": [
+              {"id": "A", "text": "학생이 시험 공부를 열심히 하는 경우"},
+              {"id": "B", "text": "신분제 사회에서 천민이 양반의 특권에 맞서는 경우"},
+              {"id": "C", "text": "친구 사이에서 오해가 생기는 경우"},
+              {"id": "D", "text": "주인공이 자신의 진로를 고민하는 경우"}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "금리를 낮추면(P) 시중에 돈이 늘어난다(Q). 이번 분기에 시중에 돈이 늘어났다(Q).",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "P → Q가 참이고 Q가 참일 때, 'P(금리를 낮추었다)'를 결론으로 도출하는 것은?",
+            "choices": [
+              {"id": "A", "text": "타당하다. Q이면 P이다."},
+              {"id": "B", "text": "부당하다. 후건 긍정의 오류이다. 돈이 늘어난 다른 원인이 있을 수 있다."},
+              {"id": "C", "text": "타당하다. 대우에 해당한다."},
+              {"id": "D", "text": "판단할 수 없다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "까투리가 경고했는데(P) 장끼가 무시했다(~Q: 경고를 따르지 않음). 경고를 따르면(Q) 안전하다(R).",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'경고를 따르면(Q) 안전하다(R)'가 참일 때, '장끼는 경고를 따르지 않았다(~Q). 따라서 안전하지 않다(~R)'는 추론은?",
+            "choices": [
+              {"id": "A", "text": "타당하다. 전건 부정에 의해 ~R이 도출된다."},
+              {"id": "B", "text": "부당하다. 전건 부정의 오류이다. 경고를 안 따라도 우연히 안전할 수 있다."},
+              {"id": "C", "text": "타당하다. 대우에 해당한다."},
+              {"id": "D", "text": "이 경우 대우를 적용하면 ~R → ~Q이므로 타당하다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "경제 성장률이 높은 나라일수록 금리도 높은 경향이 있다. 동시에 경제 성장률이 높은 나라일수록 소비도 활발하다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'금리'와 '소비'의 관계에 대한 올바른 분석은?",
+            "choices": [
+              {"id": "A", "text": "높은 금리가 소비를 촉진한다."},
+              {"id": "B", "text": "활발한 소비가 금리를 올린다."},
+              {"id": "C", "text": "경제 성장률이라는 공통 변수가 금리와 소비 모두에 영향을 줄 수 있다."},
+              {"id": "D", "text": "금리와 소비는 아무 관계가 없다."}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "장끼전에서 장끼의 화려한 외모와 충동적 성격이 함께 묘사된다. 외모가 화려한 인물일수록 자만하는 경향이 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'화려한 외모'와 '자만'의 관계에 대한 적절한 분석은?",
+            "choices": [
+              {"id": "A", "text": "화려한 외모가 자만의 직접적 원인이다."},
+              {"id": "B", "text": "자만이 화려한 외모를 만든다."},
+              {"id": "C", "text": "작가가 인물의 성격을 강조하기 위해 외모와 성격을 의도적으로 대응시킨 문학적 기법이다."},
+              {"id": "D", "text": "외모와 성격은 완전히 독립적이다."}
+            ],
+            "answerId": "C",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "기준 금리를 낮추면 경기가 회복된다는 것이 통화정책의 기본 가정이다. 그러나 금리를 아무리 낮춰도 경기가 회복되지 않는 경우가 있다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '금리 인하는 항상 경기 회복을 가져온다.' 이 가설을 반증하는 사례는?",
+            "choices": [
+              {"id": "A", "text": "금리를 낮춘 후 경기가 회복된 사례"},
+              {"id": "B", "text": "금리를 0%까지 낮추었으나 경기 침체가 지속된 사례 (유동성 함정)"},
+              {"id": "C", "text": "금리를 올린 후 경기가 과열된 사례"},
+              {"id": "D", "text": "금리와 무관하게 경기가 변동한 사례"}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "실질 형태소는 구체적 대상이나 동작, 상태를 나타내는 형태소이고, 형식 형태소는 문법적 기능을 나타내는 형태소이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] '모든 자립 형태소는 실질 형태소이다.' 이 가설을 검증하기 위한 방법은?",
+            "choices": [
+              {"id": "A", "text": "자립 형태소이면서 실질 형태소인 예('꽃', '나무')를 수집한다."},
+              {"id": "B", "text": "자립 형태소이면서 형식 형태소인 예(조사 '은/는')가 있는지 확인한다."},
+              {"id": "C", "text": "의존 형태소만 분석한다."},
+              {"id": "D", "text": "단일어의 수를 세어본다."}
+            ],
+            "answerId": "B",
+            "scoring": {"correctDeltaSec": 15, "wrongDeltaSec": -15}
+          }
+        ]
+      }
+    ]
+  }
+}

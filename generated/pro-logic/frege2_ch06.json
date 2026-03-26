@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게2 6장 논리사고력",
+  "targetLevel": "frege2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "같은 급식실 사건을 행복일보와 비판신문이 전혀 다른 관점으로 보도했습니다. 행복일보는 '급식 개선 노력'을 강조하고, 비판신문은 '급식 위생 문제'를 강조했습니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "같은 사건인데 기사가 달라진 데 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 기사는 동일한 관점으로 보도된다"
+              },
+              {
+                "id": "B",
+                "text": "두 신문 중 하나는 반드시 거짓말을 하고 있다"
+              },
+              {
+                "id": "C",
+                "text": "기자의 관점과 보도 방향에 따라 같은 사건도 다르게 전달될 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "사건 자체가 두 가지 다른 사건이었다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "언론은 사회의 다양한 사건과 정보를 국민에게 전달하여 민주주의가 올바르게 작동하도록 돕는 역할을 합니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'언론이 민주주의에 필수적이다'에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "국민이 올바른 정보를 알아야 합리적 판단과 참여가 가능하다"
+              },
+              {
+                "id": "B",
+                "text": "국민은 정보 없이도 올바른 판단을 할 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "언론은 정보 전달과 무관하다"
+              },
+              {
+                "id": "D",
+                "text": "민주주의는 정보와 관계없이 작동한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "관형어는 '어떤'에 해당하여 체언을 꾸며주고, 부사어는 '어떻게'에 해당하여 용언을 꾸며줍니다. 독립어는 다른 문장 성분에 의존하지 않고 독립적으로 쓰입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "'새 책을 샀다'에서 관형어 '새'가 빠지면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문장의 핵심 의미가 완전히 달라진다"
+              },
+              {
+                "id": "B",
+                "text": "어떤 책인지 구체적 정보가 사라져 의미가 불분명해진다"
+              },
+              {
+                "id": "C",
+                "text": "문법적으로 틀린 문장이 된다"
+              },
+              {
+                "id": "D",
+                "text": "관형어 없이도 문장의 의미가 더 명확해진다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "만약 한 나라에 하나의 언론사만 존재한다면, 그 언론사의 관점으로만 세상을 보게 됩니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "언론이 하나만 존재하면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 사건이 객관적으로 보도된다"
+              },
+              {
+                "id": "B",
+                "text": "정보의 신뢰도가 자동으로 높아진다"
+              },
+              {
+                "id": "C",
+                "text": "국민이 더 효율적으로 정보를 얻는다"
+              },
+              {
+                "id": "D",
+                "text": "다양한 관점을 비교할 수 없어 편향된 정보만 접하게 된다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "행복일보는 급식실 사건에서 '학교 측이 개선 노력을 하고 있다'고 긍정적으로 보도했습니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 긍정적 측면만 강조하는 보도는 편향적일 수 있다. 소전제: 행복일보는 급식 사건의 긍정적 측면만 강조했다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "행복일보의 보도는 완전히 객관적이다"
+              },
+              {
+                "id": "B",
+                "text": "긍정적 보도는 항상 정확하다"
+              },
+              {
+                "id": "C",
+                "text": "행복일보의 보도는 편향적일 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "편향과 보도 방향은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "독립어는 문장의 다른 성분과 문법적 관계를 맺지 않습니다. '아, 정말 좋다!'에서 '아'는 독립어입니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 독립어는 다른 문장 성분에 의존하지 않는다. 소전제: '네'는 대답을 나타내는 감탄사이다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'네'는 독립어로 쓰인다"
+              },
+              {
+                "id": "B",
+                "text": "'네'는 서술어를 꾸며준다"
+              },
+              {
+                "id": "C",
+                "text": "'네'는 주어에 의존한다"
+              },
+              {
+                "id": "D",
+                "text": "감탄사는 독립어가 아니다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "객관적인 뉴스 판단을 하려면 같은 사건에 대해 여러 언론사의 보도를 비교해야 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'객관적 판단을 위해 다양한 보도 비교가 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다양한 보도를 비교하면 반드시 객관적 판단이 가능하다"
+              },
+              {
+                "id": "B",
+                "text": "다양한 보도를 비교하지 않으면 객관적 판단이 어렵다"
+              },
+              {
+                "id": "C",
+                "text": "객관적 판단이 가능하면 비교는 불필요하다"
+              },
+              {
+                "id": "D",
+                "text": "보도 비교와 판단은 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "언론의 자유가 보장되어야 다양한 관점의 보도가 가능합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'다양한 보도를 위해 언론의 자유가 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "언론의 자유가 없으면 다양한 보도가 어렵다"
+              },
+              {
+                "id": "B",
+                "text": "다양한 보도가 있으면 언론의 자유는 필요 없다"
+              },
+              {
+                "id": "C",
+                "text": "언론의 자유가 있으면 다양한 보도가 반드시 이루어진다"
+              },
+              {
+                "id": "D",
+                "text": "언론의 자유와 보도 다양성은 무관하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "부사어는 용언(동사, 형용사)을 꾸며주는 문장 성분입니다. '매우 빠르게 달렸다'에서 '매우'와 '빠르게'는 부사어입니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'부사어로 인정되려면 용언을 꾸며야 한다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'새 책'에서 '새'"
+              },
+              {
+                "id": "B",
+                "text": "'아주 예쁘다'에서 '아주'"
+              },
+              {
+                "id": "C",
+                "text": "'민지가 달렸다'에서 '민지가'"
+              },
+              {
+                "id": "D",
+                "text": "'사과를 먹었다'에서 '사과를'"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "비판신문은 급식 위생 문제만 집중 보도하여 부정적 측면을 강조했습니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'편향된 보도를 판별하려면 빠진 정보가 있는지 확인해야 한다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기사의 글자 수만 비교하여 긴 기사가 더 정확하다고 판단했다"
+              },
+              {
+                "id": "B",
+                "text": "행복일보가 위생 문제를 축소한 점을 확인했다"
+              },
+              {
+                "id": "C",
+                "text": "두 기사의 차이점을 비교하여 누락된 정보를 찾았다"
+              },
+              {
+                "id": "D",
+                "text": "비판신문이 학교의 개선 노력을 전혀 언급하지 않은 점을 확인했다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "보도에서 한쪽 관점만 강조하면 독자는 편향된 인식을 가질 수 있습니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'한쪽 관점만 강조하면(P) 편향된 인식이 생긴다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "편향 인식이 있으면 한쪽 관점이 강조된 것이다"
+              },
+              {
+                "id": "B",
+                "text": "한쪽 관점만 강조하지 않으면 편향 인식이 없다"
+              },
+              {
+                "id": "C",
+                "text": "편향된 인식이 없다면 한쪽 관점만 강조하지 않은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "관점과 인식은 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "언론이 사실 확인 없이 보도하면 가짜 뉴스가 퍼질 수 있습니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'사실 확인 없이 보도하면(P) 가짜 뉴스가 퍼진다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가짜 뉴스가 퍼지지 않았다면 사실 확인을 거친 것이다"
+              },
+              {
+                "id": "B",
+                "text": "사실 확인을 거치면 가짜 뉴스가 퍼지지 않는다"
+              },
+              {
+                "id": "C",
+                "text": "가짜 뉴스가 퍼지면 사실 확인을 안 한 것이다"
+              },
+              {
+                "id": "D",
+                "text": "사실 확인과 가짜 뉴스는 무관하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "같은 급식 사건에 대해 행복일보와 비판신문의 보도를 비교하면 각 기사의 편향을 파악할 수 있습니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'여러 기사를 비교하면 편향을 파악할 수 있다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 기사만 읽고 사건을 판단했다"
+              },
+              {
+                "id": "B",
+                "text": "기자의 사진만 확인했다"
+              },
+              {
+                "id": "C",
+                "text": "기사 제목만 보고 내용을 짐작했다"
+              },
+              {
+                "id": "D",
+                "text": "행복일보와 비판신문의 기사를 비교하여 빠진 정보와 강조된 정보를 확인했다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "관형어는 체언(명사 등)을 꾸며줍니다. '온갖 어려움'에서 '온갖'은 관형어입니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'체언을 꾸며주면 관형어이다'의 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'새 가방'에서 '새'"
+              },
+              {
+                "id": "B",
+                "text": "'헌 옷'에서 '헌'"
+              },
+              {
+                "id": "C",
+                "text": "'빨리 달렸다'에서 '빨리'"
+              },
+              {
+                "id": "D",
+                "text": "'온갖 노력'에서 '온갖'"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'편향된 보도를 접하면(P) 왜곡된 판단을 할 수 있다(Q)'가 참이고, 이 독자는 편향된 보도를 접했습니다(P).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "편향 보도를 접하지 않았으므로 판단이 정확하다 (전건 부정, 부당)"
+              },
+              {
+                "id": "B",
+                "text": "왜곡된 판단을 했으므로 편향 보도를 접한 것이다 (후건 긍정, 부당)"
+              },
+              {
+                "id": "C",
+                "text": "이 독자는 왜곡된 판단을 할 수 있다 (전건 긍정, 타당)"
+              },
+              {
+                "id": "D",
+                "text": "편향 보도와 판단은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'다양한 언론사의 보도를 비교하면(P) 사건을 객관적으로 파악할 수 있다(Q)'가 참이고, 사건을 객관적으로 파악하지 못했습니다(~Q).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비교와 파악은 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "다양한 보도를 비교했을 것이다"
+              },
+              {
+                "id": "C",
+                "text": "객관적으로 파악했으므로 비교한 것이다 (후건 긍정, 부당)"
+              },
+              {
+                "id": "D",
+                "text": "다양한 보도를 비교하지 않은 것이다 (대우, 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "뉴스를 다양한 매체로 접하는 시민일수록 정치적 판단력이 높다는 조사 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'다양한 매체 접촉'과 '정치적 판단력'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다양한 매체를 접하면 판단력이 반드시 높아진다"
+              },
+              {
+                "id": "B",
+                "text": "둘은 아무 관계가 없다"
+              },
+              {
+                "id": "C",
+                "text": "판단력이 높아서 다양한 매체를 접하는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘 사이에 상관관계가 있으나, 교육 수준이나 비판적 사고력 등 다른 요인도 영향을 미친다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "행복일보와 비판신문의 기사를 모두 읽은 학생이 한쪽만 읽은 학생보다 사건을 더 정확히 이해했습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'읽은 기사 수'와 '사건 이해 정확도'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기사를 많이 읽으면 반드시 정확히 이해한다"
+              },
+              {
+                "id": "B",
+                "text": "다양한 관점의 기사를 비교하면 이해가 깊어지지만, 읽는 사람의 비판적 사고력도 영향을 미친다"
+              },
+              {
+                "id": "C",
+                "text": "정확히 이해해서 많이 읽은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 관계없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'같은 사건에 대해 여러 기사를 비교하면 편향을 줄일 수 있다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "신문 구독자 수만 비교한다"
+              },
+              {
+                "id": "B",
+                "text": "기사의 글자 수만 비교한다"
+              },
+              {
+                "id": "C",
+                "text": "기자의 학력만 조사한다"
+              },
+              {
+                "id": "D",
+                "text": "한 기사만 읽은 학생과 여러 기사를 비교한 학생의 편향 정도를 비교 측정한다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'언론은 항상 객관적 사실만 보도한다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "언론이 사실만 정확히 보도한 사례"
+              },
+              {
+                "id": "B",
+                "text": "같은 급식 사건에 대해 행복일보와 비판신문이 서로 다른 관점으로 편향되게 보도한 사례"
+              },
+              {
+                "id": "C",
+                "text": "모든 신문이 같은 내용을 보도한 사례"
+              },
+              {
+                "id": "D",
+                "text": "기자가 현장 취재를 통해 사실을 확인한 사례"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

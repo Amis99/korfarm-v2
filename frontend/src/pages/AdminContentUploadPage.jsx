@@ -75,10 +75,10 @@ const MODULE_GROUPS = [
   {
     label: "프로 모드",
     items: [
-      { value: "pro:reading:reading_training", label: "독해 훈련" },
-      { value: "pro:vocab:worksheet_quiz", label: "어휘 학습" },
-      { value: "pro:background:worksheet_quiz", label: "배경지식 퀴즈" },
-      { value: "pro:logic:worksheet_quiz", label: "프로 논리사고력" },
+      { value: "pro:reading:reading_training", label: "프로 독해" },
+      { value: "pro:vocab:worksheet_quiz", label: "프로 어휘" },
+      { value: "pro:background:worksheet_quiz", label: "프로 배경지식" },
+      { value: "pro:logic:logic_reasoning", label: "프로 논리사고력" },
       { value: "pro:answer:worksheet_quiz", label: "프로 모범답안/정답해설" },
     ],
   },

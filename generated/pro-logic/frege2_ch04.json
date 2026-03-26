@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게2 4장 논리사고력",
+  "targetLevel": "frege2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "토끼전에서 토끼는 용왕의 병을 고칠 토끼의 간이 필요하다는 자라의 말에 속아 용궁으로 갑니다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "토끼가 자라의 말에 속은 데 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자라는 토끼에게 진실만 말했다"
+              },
+              {
+                "id": "B",
+                "text": "토끼는 자라의 말이 거짓인 줄 알고 있었다"
+              },
+              {
+                "id": "C",
+                "text": "토끼는 용궁에 가는 것을 두려워했다"
+              },
+              {
+                "id": "D",
+                "text": "자라가 전하는 용궁 이야기가 사실이라고 토끼가 믿었다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "사실은 객관적으로 증명할 수 있는 내용이고, 의견은 개인의 주관적 판단입니다. 정보를 올바르게 이해하려면 이 둘을 구별해야 합니다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'사실과 의견을 구별해야 한다'는 주장에 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "의견을 사실로 착각하면 잘못된 판단을 내릴 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "모든 의견은 사실과 동일하다"
+              },
+              {
+                "id": "C",
+                "text": "사실과 의견은 구별할 필요가 없다"
+              },
+              {
+                "id": "D",
+                "text": "주관적 판단도 항상 객관적으로 증명 가능하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "토끼전에서 토끼는 용궁에 도착한 뒤 자신의 간을 빼앗기게 될 위기에 놓입니다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "토끼가 용궁에서 위기를 모면하지 못하면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "용왕이 병을 고치지 못해도 토끼는 안전하다"
+              },
+              {
+                "id": "B",
+                "text": "토끼는 간을 잃고 목숨을 잃게 된다"
+              },
+              {
+                "id": "C",
+                "text": "자라가 토끼를 보호해 준다"
+              },
+              {
+                "id": "D",
+                "text": "토끼가 용궁에서 영원히 살게 된다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "문장에서 주어는 '누가/무엇이'에 해당하고, 서술어는 '어찌하다/어떠하다'에 해당합니다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "문장에서 주어가 빠지면 어떤 결과가 예상되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문장이 더 간결하고 명확해진다"
+              },
+              {
+                "id": "B",
+                "text": "누가 행동하는지 알 수 없어 문장의 의미가 불분명해진다"
+              },
+              {
+                "id": "C",
+                "text": "서술어만으로도 완전한 의미를 전달할 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "주어와 서술어는 문장에서 독립적이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "토끼전에서 토끼는 '간을 육지에 두고 왔다'는 거짓말로 위기를 넘깁니다. 속임수를 써서 위기를 모면한 것입니다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 위기 상황에서 지혜로운 대처를 한 인물은 기지가 있다. 소전제: 토끼는 거짓말로 위기를 넘겼다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "토끼는 기지가 있는 인물이다"
+              },
+              {
+                "id": "B",
+                "text": "토끼는 어리석은 인물이다"
+              },
+              {
+                "id": "C",
+                "text": "토끼의 거짓말은 효과가 없었다"
+              },
+              {
+                "id": "D",
+                "text": "기지와 위기 대처는 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "사실은 증명 가능한 객관적 내용입니다. '지구는 태양 주위를 공전한다'는 과학적으로 증명된 내용입니다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "대전제: 과학적으로 증명된 내용은 사실이다. 소전제: '지구의 공전'은 과학적으로 증명되었다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'지구의 공전'은 의견이다"
+              },
+              {
+                "id": "B",
+                "text": "증명되지 않은 것도 사실이다"
+              },
+              {
+                "id": "C",
+                "text": "과학적 증명과 사실은 관계없다"
+              },
+              {
+                "id": "D",
+                "text": "'지구의 공전'은 사실이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "토끼전의 교훈을 이해하려면 인물들의 속임수와 그에 대한 대응을 분석해야 합니다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'교훈 이해를 위해 인물 분석이 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인물을 분석하면 교훈을 반드시 이해할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "인물을 분석하지 않으면 교훈을 이해하기 어렵다"
+              },
+              {
+                "id": "C",
+                "text": "교훈을 이해하면 인물 분석이 불필요하다"
+              },
+              {
+                "id": "D",
+                "text": "인물 분석과 교훈은 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "논리적인 주장을 하려면 주장을 뒷받침하는 타당한 근거가 필요합니다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'논리적 주장을 위해 타당한 근거가 필요하다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "근거가 있으면 주장이 반드시 논리적이다"
+              },
+              {
+                "id": "B",
+                "text": "근거와 논리는 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "논리적이면 근거는 필요 없다"
+              },
+              {
+                "id": "D",
+                "text": "근거가 없으면 논리적 주장이 되기 어렵다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "'~라고 생각한다', '~해야 한다' 등의 표현이 있으면 의견일 가능성이 높습니다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'의견임을 판별하려면 주관적 표현이 있는지 확인해야 한다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "학생들은 매일 운동을 해야 한다"
+              },
+              {
+                "id": "B",
+                "text": "서울의 인구는 약 1000만 명이다"
+              },
+              {
+                "id": "C",
+                "text": "한국의 수도는 서울이다"
+              },
+              {
+                "id": "D",
+                "text": "물은 100도에서 끓는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "토끼전에서 자라가 토끼를 속이는 장면은 풍자 소설의 핵심 요소입니다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'풍자 소설을 이해하려면 속임수의 의도를 파악해야 한다'의 예시가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자라가 용왕의 명으로 토끼를 속여 데려온 장면 분석"
+              },
+              {
+                "id": "B",
+                "text": "토끼전의 출판 연도와 인쇄 방식 분석"
+              },
+              {
+                "id": "C",
+                "text": "용왕이 신하들에게 토끼의 간을 구하라고 명령한 배경 분석"
+              },
+              {
+                "id": "D",
+                "text": "토끼가 기지를 발휘해 자라를 역으로 속인 장면 분석"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "토끼가 자라의 거짓말을 믿으면 용궁으로 따라가게 됩니다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'거짓말을 믿으면(P) 용궁으로 가게 된다(Q)'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "거짓말과 용궁은 관계없다"
+              },
+              {
+                "id": "B",
+                "text": "거짓말을 믿지 않으면 용궁에 갈 수 없다"
+              },
+              {
+                "id": "C",
+                "text": "용궁에 가면 거짓말을 믿은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "용궁에 가지 않았다면 거짓말을 믿지 않은 것이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "주장에 객관적 근거가 뒷받침되면 설득력이 높아집니다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'객관적 근거가 뒷받침되면(P) 설득력이 높아진다(Q)'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "설득력이 있으면 근거가 있는 것이다"
+              },
+              {
+                "id": "B",
+                "text": "근거가 없으면 설득력이 없다"
+              },
+              {
+                "id": "C",
+                "text": "설득력이 높아지지 않았다면 객관적 근거가 뒷받침되지 않은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "근거와 설득력은 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "토끼전에서 토끼의 '간을 두고 왔다'는 거짓말은 위기를 모면하는 충분한 수단이었습니다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'기지를 발휘하면 위기를 모면할 수 있다'의 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "토끼가 아무 대응 없이 간을 빼앗겼다"
+              },
+              {
+                "id": "B",
+                "text": "토끼가 '간을 육지에 두고 왔다'고 속여 용궁을 탈출했다"
+              },
+              {
+                "id": "C",
+                "text": "자라가 토끼를 보호해 주었다"
+              },
+              {
+                "id": "D",
+                "text": "용왕이 토끼를 풀어주기로 결정했다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "'오늘 비가 왔다'는 증명 가능한 사실이고, '비 오는 날이 좋다'는 개인의 의견입니다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'증명 가능한 내용이면 사실이다'의 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서울의 면적은 약 605 제곱킬로미터이다"
+              },
+              {
+                "id": "B",
+                "text": "한강은 서울을 가로지르는 강이다"
+              },
+              {
+                "id": "C",
+                "text": "서울은 대한민국에서 가장 아름다운 도시이다"
+              },
+              {
+                "id": "D",
+                "text": "2024년 여름 올림픽은 파리에서 열렸다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "'의견에는 주관적 표현이 포함되면(P) 사실이 아닐 수 있다(Q)'가 참이고, 이 문장에는 주관적 표현이 포함되어 있습니다(P).",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주관적 표현이 없으면 반드시 사실이다 (전건 부정, 부당)"
+              },
+              {
+                "id": "B",
+                "text": "사실이 아닐 수 있으므로 주관적 표현이 포함된 것이다 (후건 긍정, 부당)"
+              },
+              {
+                "id": "C",
+                "text": "이 문장은 사실이 아닐 수 있다 (전건 긍정, 타당)"
+              },
+              {
+                "id": "D",
+                "text": "주관적 표현과 사실 여부는 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'토끼가 기지를 발휘하면(P) 위기를 넘길 수 있다(Q)'가 참이고, 토끼가 위기를 넘기지 못했습니다(~Q).",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "토끼는 기지를 발휘하지 못한 것이다 (대우, 타당)"
+              },
+              {
+                "id": "B",
+                "text": "토끼는 기지를 발휘했을 것이다"
+              },
+              {
+                "id": "C",
+                "text": "위기를 넘겼으므로 기지를 발휘한 것이다 (후건 긍정, 부당)"
+              },
+              {
+                "id": "D",
+                "text": "기지와 위기는 관계없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "독서량이 많은 학생일수록 사실과 의견을 잘 구별한다는 조사 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'독서량'과 '사실-의견 구별 능력'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "독서를 많이 하면 사실과 의견을 반드시 구별할 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "둘은 아무 관계가 없다"
+              },
+              {
+                "id": "C",
+                "text": "구별 능력이 좋아서 독서를 많이 하는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "둘 사이에 상관관계가 있으나, 교육이나 비판적 사고 훈련 등 다른 요인도 영향을 미친다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "토끼전과 같은 풍자 소설을 많이 읽은 학생일수록 비판적 사고력이 높다는 연구 결과가 있습니다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'풍자 소설 독서량'과 '비판적 사고력'의 관계를 올바르게 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "풍자 소설을 읽으면 비판적 사고력이 반드시 높아진다"
+              },
+              {
+                "id": "B",
+                "text": "비판적 사고력이 높아서 풍자 소설을 읽는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "풍자 소설이 비판적 사고를 자극하지만, 토론 경험이나 논리 훈련 등 다른 요인도 함께 영향을 미친다"
+              },
+              {
+                "id": "D",
+                "text": "둘은 관계없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "'사실과 의견을 구별하는 교육을 받으면 정보 판단력이 향상된다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "교육을 받은 학생과 받지 않은 학생에게 같은 정보를 제시하고 판단 정확도를 비교한다"
+              },
+              {
+                "id": "B",
+                "text": "학생들의 나이만 조사한다"
+              },
+              {
+                "id": "C",
+                "text": "의견이 포함된 문장의 수만 세어본다"
+              },
+              {
+                "id": "D",
+                "text": "한 학생의 성적 변화만 관찰한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "'풍자 소설에서 약자(토끼)는 항상 강자(용왕)에게 진다'는 가설이 있습니다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "이 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "토끼가 용왕에게 간을 빼앗기고 죽었다"
+              },
+              {
+                "id": "B",
+                "text": "용왕이 신하들에게 토끼를 잡아오라고 명령했다"
+              },
+              {
+                "id": "C",
+                "text": "토끼가 기지를 발휘하여 용궁을 탈출하고 자라를 역으로 속였다"
+              },
+              {
+                "id": "D",
+                "text": "자라가 토끼보다 강한 힘을 가졌다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,452 @@
+// Day 5: 과학 — 물의 상태 변화와 자연 현상 (NONFICTION)
+// 초6~중1 수준, 1000자 ±50
+
+const fs = require('fs');
+
+// ── 지문 작성 (3문단) ──
+const p1Sentences = [
+  "물은 온도에 따라 고체, 액체, 기체 세 가지 상태로 변한다.",
+  "영하의 날씨에서 물은 얼음이 되고, 상온에서는 흐르는 액체로 존재하며, 섭씨 100도에 이르면 끓어서 수증기가 된다.",
+  "이처럼 물질의 상태가 바뀌는 현상을 상태 변화라고 부르는데, 이 과정에서 물 자체가 다른 물질로 바뀌는 것은 아니다.",
+  "다시 말해 얼음도, 물도, 수증기도 모두 같은 물 분자로 이루어져 있으며 다만 분자의 배열과 움직임이 달라질 뿐이다.",
+  "고체 상태의 얼음에서는 분자들이 규칙적으로 배열되어 움직임이 거의 없고, 액체 상태에서는 분자들이 비교적 자유롭게 흘러 담는 그릇에 따라 모양이 바뀐다.",
+  "기체 상태의 수증기에서는 분자들이 사방으로 빠르게 퍼져 나가기 때문에 눈에 보이지 않을 만큼 넓은 공간으로 흩어진다."
+];
+
+const p2Sentences = [
+  "이러한 물의 상태 변화는 자연 속에서 매우 중요한 역할을 한다.",
+  "바다와 호수의 물이 햇빛을 받아 증발하면 수증기가 되어 하늘로 올라간다.",
+  "높은 곳에서 온도가 낮아지면 수증기가 작은 물방울로 변하면서 구름이 만들어진다.",
+  "구름 속의 물방울이 점점 커지면 무거워져서 비나 눈이 되어 땅으로 내려온다.",
+  "땅에 내린 비는 강과 시내를 따라 흘러 결국 다시 바다로 돌아가게 된다.",
+  "이렇게 물이 바다에서 하늘로, 하늘에서 다시 땅으로 돌아오는 끊임없는 흐름을 물의 순환이라 한다."
+];
+
+const p3Sentences = [
+  "물의 순환 덕분에 지구의 물은 끊임없이 돌고 돌며 생물에게 필요한 수분을 공급한다.",
+  "만약 물의 상태 변화가 일어나지 않는다면 바다의 물은 그대로 머물러 육지에는 비가 내리지 못할 것이다.",
+  "그렇게 되면 강과 호수가 마르고 식물도 자라기 어려워져 결국 생태계 전체가 위험에 빠질 것이다.",
+  "또한 물이 얼 때 부피가 약간 늘어나는 성질은 겨울철 바위 틈에 스며든 물이 얼면서 바위를 갈라뜨려 토양을 만드는 데에도 기여한다.",
+  "이처럼 물의 상태 변화는 단순한 과학 지식이 아니라 지구 환경 전체를 움직이는 핵심 원리이며, 우리가 매일 마시는 물 한 잔도 이 거대한 순환의 일부라는 사실을 기억할 필요가 있다."
+];
+
+const p1Text = p1Sentences.join("");
+const p2Text = p2Sentences.join("");
+const p3Text = p3Sentences.join("");
+
+console.log("=== 지문 길이 확인 ===");
+console.log("p1 길이:", p1Text.length);
+console.log("p2 길이:", p2Text.length);
+console.log("p3 길이:", p3Text.length);
+console.log("전체 길이:", p1Text.length + p2Text.length + p3Text.length);
+
+// ── 문장 경계 계산 ──
+function computeSentenceBoundaries(sentences) {
+  const boundaries = [];
+  let pos = 0;
+  for (const s of sentences) {
+    boundaries.push({ start: pos, end: pos + s.length });
+    pos += s.length;
+  }
+  return boundaries;
+}
+
+const p1Bounds = computeSentenceBoundaries(p1Sentences);
+const p2Bounds = computeSentenceBoundaries(p2Sentences);
+const p3Bounds = computeSentenceBoundaries(p3Sentences);
+
+console.log("\n=== p1 문장 경계 ===");
+p1Bounds.forEach((b, i) => console.log(`[${b.start}, ${b.end}] "${p1Text.substring(b.start, b.end)}"`));
+console.log("\n=== p2 문장 경계 ===");
+p2Bounds.forEach((b, i) => console.log(`[${b.start}, ${b.end}] "${p2Text.substring(b.start, b.end)}"`));
+console.log("\n=== p3 문장 경계 ===");
+p3Bounds.forEach((b, i) => console.log(`[${b.start}, ${b.end}] "${p3Text.substring(b.start, b.end)}"`));
+
+// ── 정독 timeline ──
+const timeline = [];
+let stepNum = 1;
+
+const p1Questions = [
+  {
+    prompt: "첫 문장은 물이 온도에 따라 어떻게 변한다고 하나요?",
+    choices: [
+      { id: "A", text: "고체, 액체, 기체 세 가지 상태로 변한다고 말한다" },
+      { id: "B", text: "색깔이 세 가지로 달라진다고 말하고 있다" },
+      { id: "C", text: "맛이 짠맛, 단맛, 신맛으로 변한다고 말한다" },
+      { id: "D", text: "무게가 가벼워졌다 무거워졌다 반복한다고 한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "둘째 문장에서 물이 끓어서 되는 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "섭씨 100도에서 끓어서 수증기가 된다고 한다" },
+      { id: "B", text: "섭씨 100도에서 끓어서 얼음이 된다고 한다" },
+      { id: "C", text: "섭씨 100도에서 끓어서 기름이 된다고 한다" },
+      { id: "D", text: "섭씨 100도에서 끓어서 소금이 된다고 한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "셋째 문장은 상태 변화에서 변하지 않는 것이 무엇이라고 하나요?",
+    choices: [
+      { id: "A", text: "물 자체가 다른 물질로 바뀌는 것은 아니라고 말한다" },
+      { id: "B", text: "물의 색과 맛이 완전히 달라진다고 말하고 있다" },
+      { id: "C", text: "물의 무게가 상태마다 크게 달라진다고 말한다" },
+      { id: "D", text: "물이 다른 물질로 바뀐 뒤에는 돌아오지 못한다고 한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "넷째 문장에서 얼음, 물, 수증기의 공통점은 무엇인가요?",
+    choices: [
+      { id: "A", text: "모두 같은 물 분자로 이루어져 있고 배열과 움직임만 다르다" },
+      { id: "B", text: "모두 서로 다른 분자로 이루어져 있고 이름만 같을 뿐이다" },
+      { id: "C", text: "모두 같은 색을 띠며 눈으로는 구별할 수 없다고 한다" },
+      { id: "D", text: "모두 같은 온도에서만 존재하며 변하지 않는다고 한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "다섯째 문장에서 고체 상태 얼음의 분자 특징은 무엇인가요?",
+    choices: [
+      { id: "A", text: "분자들이 규칙적으로 배열되어 움직임이 거의 없다" },
+      { id: "B", text: "분자들이 사방으로 빠르게 퍼져 나가고 있다고 한다" },
+      { id: "C", text: "분자들이 자유롭게 흘러 모양이 계속 변한다고 한다" },
+      { id: "D", text: "분자들이 완전히 사라져 눈에 보이지 않는다고 한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "여섯째 문장에서 기체 상태 수증기의 분자는 어떻게 움직이나요?",
+    choices: [
+      { id: "A", text: "분자들이 사방으로 빠르게 퍼져 나간다고 말한다" },
+      { id: "B", text: "분자들이 한 줄로 천천히 이동한다고 말하고 있다" },
+      { id: "C", text: "분자들이 서로 단단히 붙어 움직이지 않는다 한다" },
+      { id: "D", text: "분자들이 아래로만 내려가며 모인다고 말하고 있다" }
+    ],
+    answerId: "A"
+  }
+];
+
+p1Bounds.forEach((b, i) => {
+  timeline.push({
+    stepId: `s${stepNum}`,
+    highlight: { ranges: [{ paragraphId: "p1", start: b.start, end: b.end }] },
+    question: { ...p1Questions[i], scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true } }
+  });
+  stepNum++;
+});
+
+timeline.push({
+  stepId: `s${stepNum}`,
+  highlight: { ranges: [{ paragraphId: "p1", start: 0, end: p1Text.length }] },
+  question: {
+    prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "물은 온도에 따라 세 가지 상태로 변하지만 물질 자체는 같다" },
+      { id: "B", text: "물은 온도와 관계없이 항상 같은 상태를 유지한다고 말한다" },
+      { id: "C", text: "물이 끓으면 완전히 사라져 다시 돌아오지 못한다고 말한다" },
+      { id: "D", text: "물의 분자는 고체일 때만 존재하고 기체에서는 없어진다 한다" }
+    ],
+    answerId: "A",
+    scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }
+});
+stepNum++;
+
+const p2Questions = [
+  {
+    prompt: "첫 문장은 물의 상태 변화가 자연에서 어떤 역할을 한다고 하나요?",
+    choices: [
+      { id: "A", text: "자연 속에서 매우 중요한 역할을 한다고 말한다" },
+      { id: "B", text: "자연에는 아무런 영향을 주지 않는다고 말한다" },
+      { id: "C", text: "자연에서 해로운 결과만 가져온다고 말하고 있다" },
+      { id: "D", text: "자연보다 실험실에서만 의미가 있다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "둘째 문장에서 바다 물이 햇빛을 받으면 어떻게 되나요?",
+    choices: [
+      { id: "A", text: "증발하여 수증기가 되어 하늘로 올라간다고 한다" },
+      { id: "B", text: "얼어서 얼음이 되어 바다 밑으로 가라앉는다 한다" },
+      { id: "C", text: "색이 변하여 빨갛게 물들어 빛을 낸다고 한다" },
+      { id: "D", text: "소금기가 사라져 바로 마실 수 있게 된다고 한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "셋째 문장에서 구름이 만들어지는 과정은 어떠한가요?",
+    choices: [
+      { id: "A", text: "높은 곳에서 온도가 낮아지면 수증기가 물방울로 변한다" },
+      { id: "B", text: "높은 곳에서 온도가 올라가면 얼음이 녹아 구름이 된다" },
+      { id: "C", text: "낮은 곳에서 바람이 불면 모래가 뭉쳐 구름이 된다" },
+      { id: "D", text: "바다 밑에서 거품이 올라와 하늘에서 굳어 구름이 된다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "넷째 문장에서 비나 눈이 내리는 까닭은 무엇인가요?",
+    choices: [
+      { id: "A", text: "구름 속 물방울이 점점 커져 무거워지기 때문이다" },
+      { id: "B", text: "구름이 바람에 밀려 지면과 부딪히기 때문이라 한다" },
+      { id: "C", text: "구름의 색이 진해지면 자연히 떨어지기 때문이라 한다" },
+      { id: "D", text: "구름 속 공기가 뜨거워져 물방울이 폭발하기 때문이다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "다섯째 문장에서 땅에 내린 비는 어디로 돌아간다고 하나요?",
+    choices: [
+      { id: "A", text: "강과 시내를 따라 흘러 결국 다시 바다로 돌아간다" },
+      { id: "B", text: "땅속으로 스며들어 다시는 올라오지 않는다고 한다" },
+      { id: "C", text: "곧바로 하늘로 올라가 구름이 된다고 말하고 있다" },
+      { id: "D", text: "산꼭대기에 쌓여 녹지 않는 만년설이 된다고 한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "여섯째 문장이 설명하는 물의 흐름을 무엇이라 부르나요?",
+    choices: [
+      { id: "A", text: "바다에서 하늘, 하늘에서 땅으로 돌아오는 물의 순환이다" },
+      { id: "B", text: "물이 한 방향으로만 흘러가는 물의 직선 운동이라 한다" },
+      { id: "C", text: "물이 땅속에만 머무는 지하 저장이라고 말하고 있다" },
+      { id: "D", text: "물이 우주로 빠져나가는 물의 소멸이라고 말하고 있다" }
+    ],
+    answerId: "A"
+  }
+];
+
+p2Bounds.forEach((b, i) => {
+  timeline.push({
+    stepId: `s${stepNum}`,
+    highlight: { ranges: [{ paragraphId: "p2", start: b.start, end: b.end }] },
+    question: { ...p2Questions[i], scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true } }
+  });
+  stepNum++;
+});
+
+timeline.push({
+  stepId: `s${stepNum}`,
+  highlight: { ranges: [{ paragraphId: "p2", start: 0, end: p2Text.length }] },
+  question: {
+    prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "물이 증발과 응결을 거쳐 순환하며 비와 눈을 만든다" },
+      { id: "B", text: "물은 바다에서만 존재하며 하늘로 올라가지 않는다 한다" },
+      { id: "C", text: "구름은 물과 관계없이 공기 중의 먼지로만 이루어진다 한다" },
+      { id: "D", text: "비와 눈은 물의 순환과 상관없이 저절로 만들어진다 한다" }
+    ],
+    answerId: "A",
+    scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }
+});
+stepNum++;
+
+const p3Questions = [
+  {
+    prompt: "첫 문장에서 물의 순환이 생물에게 해 주는 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "끊임없이 돌며 생물에게 필요한 수분을 공급한다고 한다" },
+      { id: "B", text: "한 번 돌고 멈추어 생물에게 햇빛을 차단한다고 한다" },
+      { id: "C", text: "생물이 필요한 소금을 만들어 공급한다고 말하고 있다" },
+      { id: "D", text: "생물의 체온을 높여 주는 열을 공급한다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "둘째 문장에서 상태 변화가 없다면 육지에 어떤 일이 생긴다고 하나요?",
+    choices: [
+      { id: "A", text: "바다의 물이 그대로 머물러 육지에 비가 내리지 못한다" },
+      { id: "B", text: "바다의 물이 넘쳐 육지가 모두 물에 잠기게 된다 한다" },
+      { id: "C", text: "육지의 강이 더 커져서 바다보다 넓어진다고 말한다" },
+      { id: "D", text: "육지에 눈만 내리고 비는 바다에만 내린다고 말한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "셋째 문장에서 비가 내리지 못하면 어떤 결과가 생긴다고 하나요?",
+    choices: [
+      { id: "A", text: "강과 호수가 마르고 식물도 자라기 어려워져 생태계가 위험해진다" },
+      { id: "B", text: "강과 호수가 더 넓어지고 식물이 빠르게 자란다고 한다" },
+      { id: "C", text: "바다가 얼어붙고 물고기만 육지로 이동한다고 말한다" },
+      { id: "D", text: "땅이 더 단단해져 건물을 짓기 좋아진다고 말하고 있다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "넷째 문장에서 물이 얼 때 부피가 늘어나는 성질은 무엇에 기여하나요?",
+    choices: [
+      { id: "A", text: "바위 틈의 물이 얼며 바위를 갈라뜨려 토양을 만드는 데 기여한다" },
+      { id: "B", text: "바위가 더 단단해져서 산이 높아지는 데 기여한다고 한다" },
+      { id: "C", text: "바위 안의 금속이 녹아 나오는 데 기여한다고 말한다" },
+      { id: "D", text: "겨울에 강물이 줄어드는 현상에만 기여한다고 말한다" }
+    ],
+    answerId: "A"
+  },
+  {
+    prompt: "마지막 문장은 물의 상태 변화를 어떻게 정리하나요?",
+    choices: [
+      { id: "A", text: "지구 환경을 움직이는 핵심 원리이며 물 한 잔도 순환의 일부라 한다" },
+      { id: "B", text: "실험실에서만 확인할 수 있는 특수한 현상이라 정리한다" },
+      { id: "C", text: "일상생활에 아무런 영향을 주지 않는 지식이라 정리한다" },
+      { id: "D", text: "오직 겨울에만 일어나는 계절 현상이라고 정리하고 있다" }
+    ],
+    answerId: "A"
+  }
+];
+
+p3Bounds.forEach((b, i) => {
+  timeline.push({
+    stepId: `s${stepNum}`,
+    highlight: { ranges: [{ paragraphId: "p3", start: b.start, end: b.end }] },
+    question: { ...p3Questions[i], scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true } }
+  });
+  stepNum++;
+});
+
+timeline.push({
+  stepId: `s${stepNum}`,
+  highlight: { ranges: [{ paragraphId: "p3", start: 0, end: p3Text.length }] },
+  question: {
+    prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+    choices: [
+      { id: "A", text: "물의 순환은 수분 공급과 토양 형성 등 지구 환경에 핵심적이다" },
+      { id: "B", text: "물의 순환은 사람이 만든 기계 없이는 일어나지 않는다 한다" },
+      { id: "C", text: "물이 얼면 부피가 줄어들어 바위가 더 단단해진다고 한다" },
+      { id: "D", text: "물의 상태 변화는 바다에서만 일어나고 육지와는 무관하다 한다" }
+    ],
+    answerId: "A",
+    scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+  }
+});
+
+// ── 복기 8카드 ──
+const recall = {
+  cards: [
+    { id: "c1", text: "물은 온도에 따라 고체, 액체, 기체로 변하며 이를 상태 변화라 한다." },
+    { id: "c2", text: "상태가 바뀌어도 물 분자 자체는 같고, 분자의 배열과 움직임만 달라진다." },
+    { id: "c3", text: "바다의 물이 증발하여 수증기가 되고 높은 곳에서 구름이 만들어진다." },
+    { id: "c4", text: "구름 속 물방울이 커지면 비나 눈이 되어 땅으로 내려오는 순환이 일어난다." },
+    { id: "c5", text: "물의 순환 덕분에 지구의 생물은 끊임없이 수분을 공급받을 수 있다." },
+    { id: "c6", text: "상태 변화가 없다면 육지에 비가 내리지 못해 강과 호수가 마를 것이다." },
+    { id: "c7", text: "물이 얼 때 부피가 늘어나는 성질은 바위를 갈라뜨려 토양을 만드는 데 기여한다." },
+    { id: "c8", text: "물의 상태 변화는 지구 환경 전체를 움직이는 핵심 원리이다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+// ── 확인학습 ──
+function findRange(text, paragraphId, answer) {
+  const idx = text.indexOf(answer);
+  if (idx === -1) { console.error(`ERROR: "${answer}" not found in ${paragraphId}!`); return null; }
+  return { paragraphId, start: idx, end: idx + answer.length };
+}
+
+const confirmQs = [
+  { id: "q1", prompt: "물질의 상태가 바뀌는 현상을 무엇이라고 부르나요?", answerText: "상태 변화", pid: "p1", t: p1Text },
+  { id: "q2", prompt: "고체 상태의 물을 무엇이라고 하나요?", answerText: "얼음", pid: "p1", t: p1Text },
+  { id: "q3", prompt: "물이 섭씨 100도에서 끓어서 되는 것은 무엇인가요?", answerText: "수증기", pid: "p1", t: p1Text },
+  { id: "q4", prompt: "수증기가 높은 곳에서 온도가 낮아지면 변하는 것은 무엇인가요?", answerText: "물방울", pid: "p2", t: p2Text },
+  { id: "q5", prompt: "물이 바다에서 하늘, 하늘에서 땅으로 돌아오는 흐름을 무엇이라 하나요?", answerText: "물의 순환", pid: "p2", t: p2Text },
+  { id: "q6", prompt: "물이 얼 때 부피가 늘어나 바위를 갈라뜨려 만드는 것은 무엇인가요?", answerText: "토양", pid: "p3", t: p3Text },
+  { id: "q7", prompt: "물의 상태 변화가 없다면 육지에 내리지 못하는 것은 무엇인가요?", answerText: "비", pid: "p3", t: p3Text }
+];
+
+const confirm = {
+  questions: confirmQs.map(q => {
+    const range = findRange(q.t, q.pid, q.answerText);
+    return {
+      id: q.id, prompt: q.prompt, answerText: q.answerText, answerMatchMode: "ANY",
+      answerRanges: range ? [range] : [],
+      scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+      revealOnWrong: true
+    };
+  })
+};
+
+// ── JSON 조립 ──
+const content = {
+  contentId: "dr-f3-005",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(프레게 3) Day 5 비문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "FREGE_3",
+  schoolGradeRange: { min: 6, max: 7 },
+  area: "READING",
+  subArea: "NONFICTION",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 300,
+  assets: {},
+  payload: {
+    passage: {
+      format: "TEXT",
+      paragraphs: [
+        { id: "p1", text: p1Text },
+        { id: "p2", text: p2Text },
+        { id: "p3", text: p3Text }
+      ]
+    },
+    intensive: { timeline },
+    recall,
+    confirm
+  }
+};
+
+// ── 검증 ──
+console.log("\n=== 검증 ===");
+const totalLen = p1Text.length + p2Text.length + p3Text.length;
+console.log(`지문 길이: ${totalLen} (950~1050: ${totalLen >= 950 && totalLen <= 1050 ? 'OK' : 'FAIL'})`);
+console.log(`recall cards: ${recall.cards.length} (${recall.cards.length === 8 ? 'OK' : 'FAIL'})`);
+console.log(`confirm questions: ${confirm.questions.length} (${confirm.questions.length >= 5 && confirm.questions.length <= 10 ? 'OK' : 'FAIL'})`);
+console.log(`intensive steps: ${timeline.length}`);
+
+let hlOk = true;
+for (const step of timeline) {
+  for (const r of step.highlight.ranges) {
+    const pText = r.paragraphId === "p1" ? p1Text : r.paragraphId === "p2" ? p2Text : p3Text;
+    if (r.start < 0 || r.end > pText.length || r.start >= r.end) {
+      console.error(`FAIL: ${step.stepId} [${r.start},${r.end}] out of bounds`);
+      hlOk = false;
+    }
+  }
+}
+console.log(`highlight ranges: ${hlOk ? 'OK' : 'FAIL'}`);
+
+let arOk = true;
+for (const q of confirm.questions) {
+  for (const r of q.answerRanges) {
+    const pText = r.paragraphId === "p1" ? p1Text : r.paragraphId === "p2" ? p2Text : p3Text;
+    const ex = pText.substring(r.start, r.end);
+    if (ex !== q.answerText) { console.error(`FAIL: ${q.id} expected "${q.answerText}" got "${ex}"`); arOk = false; }
+  }
+}
+console.log(`answerRanges: ${arOk ? 'OK' : 'FAIL'}`);
+
+// ── 파일 저장 ──
+const staticPath = 'C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/frontend/public/daily-reading/frege3/005.json';
+fs.writeFileSync(staticPath, JSON.stringify(content, null, 2), 'utf8');
+console.log(`\n파일 저장: ${staticPath}`);
+
+const batchPath = 'C:/Users/RENEWCOM PC/Documents/국어농장v2홈페이지/generated/daily-batch-reading-frege3.json';
+const batchData = JSON.parse(fs.readFileSync(batchPath, 'utf8'));
+batchData.items[4] = {
+  content_type: "DAILY_READING",
+  level_id: "FREGE_3",
+  area: "READING",
+  sub_area: "NONFICTION",
+  day_index: 5,
+  module_key: "reading_training",
+  schema_version: "1.0",
+  content: content
+};
+fs.writeFileSync(batchPath, JSON.stringify(batchData, null, 2), 'utf8');
+console.log(`배치 업데이트: ${batchPath}`);
+console.log("\n=== Day 5 완료 ===");

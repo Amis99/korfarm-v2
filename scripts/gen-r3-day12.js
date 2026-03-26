@@ -1,0 +1,310 @@
+// 러셀3 Day 12 문학 - 일일독해 콘텐츠 생성
+const fs = require('fs');
+const path = require('path');
+
+// ── 지문 (4문단, 목표 1300자 ±50) ──
+const paragraphs = [
+  {
+    id: "p1",
+    text: "이육사의 시 「절정」은 일제 강점기라는 극한 상황에서 쓰인 저항시로, 자연의 혹한 이미지를 통해 시대적 고통과 의지를 형상화한 작품이다. 시의 첫 연에서 화자는 \"매운 계절의 채찍에 갈겨\"라는 표현으로 혹독한 시련을 묘사하는데, 여기서 '매운 계절'은 단순한 겨울이 아니라 식민 통치라는 역사적 현실을 상징한다. '채찍에 갈겨'라는 촉각적 이미지는 폭력적인 억압의 고통을 직접적으로 전달하며, 독자로 하여금 화자가 처한 상황의 절박함을 체감하게 한다. 이처럼 첫 연은 극도의 고통 속에서도 굴하지 않으려는 존재의 출발점을 제시하면서, 시 전체를 관통할 긴장감의 토대를 마련한다."
+  },
+  {
+    id: "p2",
+    text: "시의 중반부에서 화자는 \"한 줄기 빛도 없이 별조차 삼켜 버린\" 상황에 놓여 있다고 진술한다. '빛'은 전통적으로 희망과 구원을 상징하는 시적 소재인데, 이마저 소멸한 세계를 제시함으로써 절망의 깊이를 극대화한다. 그러나 화자는 이 완전한 어둠 속에서도 주저앉지 않는다. 오히려 \"차마 눈 감을 수 없는\" 자세를 취함으로써, 고통을 회피하지 않고 정면으로 응시하겠다는 의지를 드러낸다. 눈을 감는다는 것은 현실로부터의 도피를 의미하므로, 눈을 감지 않겠다는 선언은 곧 현실 직시의 결단이다. 이러한 역설적 태도는 외부 상황이 아무리 가혹해도 내면의 결기를 잃지 않겠다는 정신적 저항의 표현이라 할 수 있다."
+  },
+  {
+    id: "p3",
+    text: "시의 마지막 연에서 화자는 \"겨울은 강철로 된 무지개\"라는 독특한 비유를 사용한다. '강철'은 단단함과 인내를 뜻하고, '무지개'는 고난 뒤에 찾아올 희망을 뜻한다. 일반적으로 무지개는 부드러운 빛깔의 이미지와 연결되지만, 이를 '강철'이라는 차갑고 단단한 소재와 결합시킨 점이 독창적이다. 이 두 이미지의 결합은 고통과 희망이 분리되지 않는다는 인식을 담고 있다. 즉, 현재의 시련 자체가 미래의 광명을 잉태하고 있다는 역설적 세계관을 압축적으로 보여 주는 것이다. 이 비유는 시 전체의 주제의식을 응축하며, 극한의 겨울을 견뎌야만 비로소 도달할 수 있는 새로운 세계에 대한 확신을 표명한다."
+  },
+  {
+    id: "p4",
+    text: "「절정」은 저항시의 정수로 평가받는데, 그 이유는 단순히 현실을 고발하는 데 그치지 않고 고통 속에서 발견하는 의미와 가치를 시적으로 승화시켰기 때문이다. 시인은 구체적인 정치 구호 대신 자연의 이미지를 빌려 보편적인 인간 의지를 형상화하였으므로, 이 시는 특정 시대를 넘어 고난에 맞서는 모든 인간에게 울림을 준다. 또한 짧은 시행 안에 감각적 이미지, 상징, 역설을 밀도 높게 배치하여 시적 긴장감을 극대화한 점도 문학적 성취로 꼽힌다. 이처럼 「절정」은 역사적 맥락과 문학적 기법이 긴밀하게 결합된 한국 현대시의 대표작이다."
+  }
+];
+
+const totalLen = paragraphs.reduce((s, p) => s + p.text.length, 0);
+console.log(`지문 총 글자 수: ${totalLen}`);
+
+function r(pid, s, e) { return { paragraphId: pid, start: s, end: e }; }
+const scoring_i = { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true };
+
+const intensive = { timeline: [
+  // p1
+  { stepId: "s1", highlight: { ranges: [r("p1", 0, 76)] },
+    question: { prompt: "첫 문장이 소개하는 「절정」의 성격으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "일제 강점기의 고통과 의지를 자연의 혹한 이미지로 형상화한 저항시이다." },
+        { id: "B", text: "아름다운 자연 풍경을 노래한 순수 서정시이다." },
+        { id: "C", text: "도시 생활의 피로를 토로한 모더니즘 시이다." },
+        { id: "D", text: "사랑하는 사람을 그리워하는 연애시이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s2", highlight: { ranges: [r("p1", 77, 177)] },
+    question: { prompt: "'매운 계절'이 상징하는 것으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "단순한 겨울이 아닌 식민 통치라는 역사적 현실이다." },
+        { id: "B", text: "여름 장마로 인한 농촌의 어려움이다." },
+        { id: "C", text: "경제적 불황이 가져온 생활고이다." },
+        { id: "D", text: "자연재해로 인한 물리적 피해이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s3", highlight: { ranges: [r("p1", 178, 264)] },
+    question: { prompt: "'채찍에 갈겨'라는 표현이 사용하는 감각과 그 효과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "촉각적 이미지로 폭력적 억압의 고통을 직접 전달한다." },
+        { id: "B", text: "시각적 이미지로 아름다운 겨울 풍경을 묘사한다." },
+        { id: "C", text: "청각적 이미지로 바람 소리의 거셈을 표현한다." },
+        { id: "D", text: "후각적 이미지로 겨울 공기의 매서움을 나타낸다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s4", highlight: { ranges: [r("p1", 265, 342)] },
+    question: { prompt: "마지막 문장이 말하는 첫 연의 역할로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "고통 속 존재의 출발점을 제시하면서 시 전체의 긴장감 토대를 마련한다." },
+        { id: "B", text: "시련에 굴복하여 도피하려는 화자의 좌절을 보여 준다." },
+        { id: "C", text: "식민 통치의 구체적인 역사적 사건을 기록한다." },
+        { id: "D", text: "겨울 추위를 이겨내는 실용적 방법을 제안한다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s5", highlight: { ranges: [r("p1", 0, 342)] },
+    question: { prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "「절정」의 첫 연은 혹한 이미지를 통해 식민 통치의 고통과 저항 의지의 출발점을 보여 준다." },
+        { id: "B", text: "이육사는 자연을 사랑한 시인으로 겨울 풍경을 아름답게 묘사하였다." },
+        { id: "C", text: "첫 연은 화자가 추위에 굴복하여 실내로 돌아가는 장면을 그린다." },
+        { id: "D", text: "시의 배경은 일제 강점기가 아니라 한국 전쟁 시기이다." }
+      ], answerId: "A", scoring: scoring_i } },
+
+  // p2
+  { stepId: "s6", highlight: { ranges: [r("p2", 0, 59)] },
+    question: { prompt: "시의 중반부에서 화자가 처한 상황으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "빛도 없고 별조차 삼켜진 완전한 어둠의 상황이다." },
+        { id: "B", text: "밝은 햇살 아래 따뜻한 봄 들판의 상황이다." },
+        { id: "C", text: "별이 반짝이는 맑은 밤하늘의 상황이다." },
+        { id: "D", text: "폭풍이 지나간 뒤 무지개가 뜬 상황이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s7", highlight: { ranges: [r("p2", 60, 126)] },
+    question: { prompt: "'빛'이 상징하는 것과 그것이 소멸한 효과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "빛은 희망과 구원을 상징하며, 그 소멸은 절망의 깊이를 극대화한다." },
+        { id: "B", text: "빛은 물리적 광원을 뜻하며, 소멸은 정전 상황을 나타낸다." },
+        { id: "C", text: "빛은 지식을 상징하며, 소멸은 교육의 부재를 뜻한다." },
+        { id: "D", text: "빛은 권력을 상징하며, 소멸은 정권 교체를 의미한다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s8", highlight: { ranges: [r("p2", 127, 211)] },
+    question: { prompt: "화자가 어둠 속에서 취하는 자세와 그 의미로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "'차마 눈 감을 수 없는' 자세로 고통을 정면 응시하겠다는 의지이다." },
+        { id: "B", text: "눈을 감고 고통을 잊으려는 도피적 태도이다." },
+        { id: "C", text: "밤이 무서워 잠들지 못하는 불면증을 표현한 것이다." },
+        { id: "D", text: "별을 관찰하기 위해 밤새 깨어 있는 천문학적 관심이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s9", highlight: { ranges: [r("p2", 212, 268)] },
+    question: { prompt: "눈을 감는 것이 의미하는 바와 눈을 감지 않겠다는 선언의 뜻으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "눈을 감는 것은 현실 도피이고, 감지 않겠다는 것은 현실 직시의 결단이다." },
+        { id: "B", text: "눈을 감는 것은 수면이고, 감지 않겠다는 것은 각성 상태 유지이다." },
+        { id: "C", text: "눈을 감는 것은 명상이고, 감지 않겠다는 것은 명상 거부이다." },
+        { id: "D", text: "눈을 감는 것은 동의이고, 감지 않겠다는 것은 반대 의사 표시이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s10", highlight: { ranges: [r("p2", 269, 334)] },
+    question: { prompt: "이러한 역설적 태도가 표현하는 것으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "가혹한 상황에서도 내면의 결기를 잃지 않겠다는 정신적 저항이다." },
+        { id: "B", text: "상황이 좋아질 때까지 조용히 기다리겠다는 인내이다." },
+        { id: "C", text: "어둠에 적응하여 새로운 삶의 방식을 찾겠다는 타협이다." },
+        { id: "D", text: "외부 세계와 단절하여 내면에만 집중하겠다는 은둔이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s11", highlight: { ranges: [r("p2", 0, 334)] },
+    question: { prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "완전한 어둠 속에서도 눈을 감지 않는 화자의 역설적 태도가 정신적 저항을 보여 준다." },
+        { id: "B", text: "화자는 희망을 완전히 잃고 절망에 빠져 있다." },
+        { id: "C", text: "빛의 소멸은 자연 현상이며 시적 상징과는 무관하다." },
+        { id: "D", text: "화자는 어둠을 피해 밝은 곳으로 이동하려 한다." }
+      ], answerId: "A", scoring: scoring_i } },
+
+  // p3
+  { stepId: "s12", highlight: { ranges: [r("p3", 0, 53)] },
+    question: { prompt: "마지막 연에서 사용된 비유 표현으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "'겨울은 강철로 된 무지개'이다." },
+        { id: "B", text: "'봄은 유리로 된 꽃잎'이다." },
+        { id: "C", text: "'가을은 황금으로 된 낙엽'이다." },
+        { id: "D", text: "'여름은 불꽃으로 된 태양'이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s13", highlight: { ranges: [r("p3", 54, 118)] },
+    question: { prompt: "'강철'과 '무지개'가 각각 의미하는 바로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "강철은 단단함과 인내, 무지개는 고난 뒤의 희망을 뜻한다." },
+        { id: "B", text: "강철은 무기, 무지개는 자연의 아름다움을 뜻한다." },
+        { id: "C", text: "강철은 공장, 무지개는 비 온 뒤의 날씨를 뜻한다." },
+        { id: "D", text: "강철은 차가움, 무지개는 따뜻한 색감을 뜻한다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s14", highlight: { ranges: [r("p3", 119, 181)] },
+    question: { prompt: "'강철'과 '무지개'의 결합이 독창적인 이유로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "부드러운 빛깔의 무지개를 차갑고 단단한 강철 소재와 결합시켰기 때문이다." },
+        { id: "B", text: "강철과 무지개가 동일한 색감을 지니고 있기 때문이다." },
+        { id: "C", text: "무지개가 강철처럼 오래 지속되는 현상이기 때문이다." },
+        { id: "D", text: "강철이 무지개와 같은 곡선 형태를 지니기 때문이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s15", highlight: { ranges: [r("p3", 182, 252)] },
+    question: { prompt: "두 이미지의 결합이 담고 있는 인식으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "현재의 시련 자체가 미래의 광명을 잉태하고 있다는 역설적 세계관이다." },
+        { id: "B", text: "고통과 희망은 서로 관련이 없는 별개의 경험이다." },
+        { id: "C", text: "겨울이 지나면 반드시 무지개가 뜬다는 기상학적 사실이다." },
+        { id: "D", text: "강철 무지개는 실제 존재하는 자연 현상을 묘사한 것이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s16", highlight: { ranges: [r("p3", 253, 329)] },
+    question: { prompt: "이 비유가 시 전체에서 하는 역할로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "주제의식을 응축하며 극한을 견뎌야 도달할 새 세계에 대한 확신을 표명한다." },
+        { id: "B", text: "시의 분위기를 가볍게 전환하여 독자에게 위안을 준다." },
+        { id: "C", text: "겨울의 아름다움을 찬양하며 자연에 대한 경외심을 표현한다." },
+        { id: "D", text: "시의 앞부분과 모순되어 구조적 혼란을 일으킨다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s17", highlight: { ranges: [r("p3", 0, 329)] },
+    question: { prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "'강철로 된 무지개' 비유가 고통과 희망의 공존이라는 역설적 세계관을 압축한다." },
+        { id: "B", text: "마지막 연에서 화자는 희망을 포기하고 현실에 순응한다." },
+        { id: "C", text: "무지개는 과학적 현상으로 시적 상징과는 관련이 없다." },
+        { id: "D", text: "강철 이미지는 산업화 시대의 공장을 묘사한 것이다." }
+      ], answerId: "A", scoring: scoring_i } },
+
+  // p4
+  { stepId: "s18", highlight: { ranges: [r("p4", 0, 79)] },
+    question: { prompt: "「절정」이 저항시의 정수로 평가받는 이유로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "현실 고발에 그치지 않고 고통 속 의미와 가치를 시적으로 승화시켰기 때문이다." },
+        { id: "B", text: "구체적인 정치 구호를 직접 사용하여 강한 메시지를 전달하기 때문이다." },
+        { id: "C", text: "가장 긴 분량의 시로 상세한 역사 기록을 담고 있기 때문이다." },
+        { id: "D", text: "일제에 대한 직접적인 비판을 담아 검열을 피하지 못했기 때문이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s19", highlight: { ranges: [r("p4", 80, 176)] },
+    question: { prompt: "자연 이미지를 사용한 효과로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "보편적 인간 의지를 형상화하여 특정 시대를 넘어 모든 인간에게 울림을 준다." },
+        { id: "B", text: "자연의 아름다움을 찬양하여 독자에게 위안을 주려는 것이다." },
+        { id: "C", text: "검열을 피하기 위한 유일한 목적으로 사용한 것이다." },
+        { id: "D", text: "시의 의미를 모호하게 만들어 해석의 여지를 없앤다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s20", highlight: { ranges: [r("p4", 177, 246)] },
+    question: { prompt: "문학적 성취로 꼽히는 기법적 특징으로 알맞은 것은?",
+      choices: [
+        { id: "A", text: "짧은 시행 안에 감각적 이미지, 상징, 역설을 밀도 높게 배치한 것이다." },
+        { id: "B", text: "긴 산문체 서술로 사건을 상세하게 전달한 것이다." },
+        { id: "C", text: "반복적인 후렴구를 사용하여 노래처럼 부를 수 있게 한 것이다." },
+        { id: "D", text: "구어체를 활용하여 일상적 대화를 재현한 것이다." }
+      ], answerId: "A", scoring: scoring_i } },
+  { stepId: "s21", highlight: { ranges: [r("p4", 0, 303)] },
+    question: { prompt: "넷째 문단의 중심 내용으로 가장 알맞은 것은?",
+      choices: [
+        { id: "A", text: "「절정」은 고통의 시적 승화, 보편적 울림, 밀도 높은 기법으로 저항시의 정수이다." },
+        { id: "B", text: "「절정」은 정치 구호를 사용하여 직접적 저항을 표현한 시이다." },
+        { id: "C", text: "이육사는 시적 기법보다 역사적 사실 전달에만 주력한 시인이다." },
+        { id: "D", text: "한국 현대시에서 자연 이미지를 사용한 시는 「절정」이 유일하다." }
+      ], answerId: "A", scoring: scoring_i } },
+]};
+
+// ── 복기 (recall) - 정확히 8카드 ──
+const recall = {
+  cards: [
+    { id: "c1", text: "「절정」은 일제 강점기의 고통과 의지를 혹한 이미지로 형상화한 저항시이다." },
+    { id: "c2", text: "'매운 계절'은 식민 통치를, '채찍에 갈겨'는 촉각적으로 억압의 고통을 전달한다." },
+    { id: "c3", text: "빛과 별이 소멸한 완전한 어둠으로 절망의 깊이를 극대화한다." },
+    { id: "c4", text: "'차마 눈 감을 수 없는' 자세는 현실 직시와 정신적 저항의 표현이다." },
+    { id: "c5", text: "'강철로 된 무지개'는 단단함과 희망을 결합한 독창적 비유이다." },
+    { id: "c6", text: "현재의 시련이 미래의 광명을 잉태한다는 역설적 세계관이 시의 주제이다." },
+    { id: "c7", text: "자연 이미지를 빌려 보편적 인간 의지를 형상화하여 시대를 넘는 울림을 준다." },
+    { id: "c8", text: "감각적 이미지, 상징, 역설의 밀도 높은 배치가 문학적 성취로 평가된다." }
+  ],
+  correctOrder: ["c1","c2","c3","c4","c5","c6","c7","c8"],
+  seedPenalty: 1
+};
+
+// ── 확인 (confirm) - 7문항 ──
+const scoring_c = { correctDeltaSec: 30, wrongDeltaSec: -45 };
+const confirm = { questions: [
+  { id: "q1", prompt: "「절정」에서 '매운 계절'이 상징하는 역사적 현실은 무엇인가?",
+    answerText: "식민 통치",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p1", 143, 148)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q2", prompt: "'채찍에 갈겨'라는 표현이 활용한 감각적 이미지의 종류는 무엇인가?",
+    answerText: "촉각적 이미지",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p1", 178, 185)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q3", prompt: "시에서 '빛'이 전통적으로 상징하는 것은 무엇인가?",
+    answerText: "희망과 구원",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p2", 64, 75)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q4", prompt: "눈을 감지 않겠다는 화자의 선언이 의미하는 것은 무엇인가?",
+    answerText: "현실 직시의 결단",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p2", 253, 262)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q5", prompt: "시의 마지막 연에서 '강철'이 의미하는 것은 무엇인가?",
+    answerText: "단단함과 인내",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p3", 58, 67)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q6", prompt: "시인이 정치 구호 대신 자연의 이미지를 사용하여 형상화한 것은 무엇인가?",
+    answerText: "보편적 인간 의지",
+    answerMatchMode: "ANY",
+    answerRanges: [r("p4", 118, 126)],
+    scoring: scoring_c, revealOnWrong: true },
+  { id: "q7", prompt: "「절정」이 짧은 시행 안에 밀도 높게 배치한 세 가지 기법은 무엇인가?",
+    answerText: "감각적 이미지, 상징, 역설",
+    answerMatchMode: "ALL",
+    answerRanges: [r("p4", 195, 212)],
+    scoring: scoring_c, revealOnWrong: true },
+]};
+
+// ── content 객체 조립 ──
+const content = {
+  contentId: "dr-r3-012",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 3) Day 12 문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_3",
+  schoolGradeRange: { min: 9, max: 10 },
+  area: "READING",
+  subArea: "LITERATURE",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 480,
+  assets: {},
+  payload: {
+    passage: { format: "TEXT", paragraphs },
+    intensive,
+    recall,
+    confirm
+  }
+};
+
+const batchItem = {
+  content_type: "DAILY_READING",
+  level_id: "RUSSELL_3",
+  area: "READING",
+  sub_area: "LITERATURE",
+  day_index: 12,
+  module_key: "reading_training",
+  schema_version: "1.0",
+  content
+};
+
+const staticDir = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'russell3');
+fs.writeFileSync(path.join(staticDir, '012.json'), JSON.stringify(content, null, 2), 'utf8');
+console.log('static 012.json 저장 완료');
+
+const batchPath = path.join(__dirname, '..', 'generated', 'daily-batch-reading-russell3.json');
+const batch = JSON.parse(fs.readFileSync(batchPath, 'utf8'));
+batch.items[11] = batchItem;
+fs.writeFileSync(batchPath, JSON.stringify(batch, null, 2), 'utf8');
+console.log('배치 파일 day_index 12 업데이트 완료');

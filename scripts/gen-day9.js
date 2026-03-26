@@ -1,0 +1,496 @@
+// Day 9 - 비문학 (NONFICTION) 생성 스크립트
+const fs = require('fs');
+const path = require('path');
+
+// === 지문 정의 (1100자 ±50 목표) ===
+// 주제: 수면과 기억력의 관계 (과학/건강 비문학)
+const paragraphs = [
+  {
+    id: "p1",
+    text: "우리가 잠을 자는 동안에도 뇌는 결코 쉬지 않고 매우 중요한 일을 수행하고 있다. 낮 동안 학교에서 수업을 듣거나 책을 읽으며 경험하고 배운 여러 가지 정보를 체계적으로 정리하여 오랫동안 기억할 수 있도록 저장하는 것이다. 과학자들은 이러한 과정을 '기억 공고화'라고 부른다. 기억 공고화란 뇌가 일시적으로 저장해 둔 정보를 더 안정적이고 오래 남는 형태로 바꾸어 주는 과정을 말한다. 만약 밤에 충분히 잠을 자지 못하면 이 과정이 제대로 이루어지지 않아서, 아무리 열심히 공부하더라도 다음 날 기억에 남는 내용이 크게 줄어들 수 있다. 이처럼 잠을 자는 시간은 단순히 몸을 쉬게 하는 것에 그치지 않고, 배운 것을 머릿속에 확실하게 새기는 데 꼭 필요한 시간이다."
+  },
+  {
+    id: "p2",
+    text: "수면에는 여러 단계가 있는데, 그중에서도 '깊은 잠' 단계와 '렘수면' 단계가 기억력을 높이는 데 특히 중요한 역할을 한다. 깊은 잠 단계에서는 뇌가 낮에 입력된 새로운 정보를 반복적으로 되살려 보면서 장기 기억 저장소로 옮기는 작업을 수행한다. 이는 마치 책상 위에 어지럽게 쌓인 서류를 하나하나 분류하여 서랍에 차곡차곡 정리하는 것과 비슷하다고 할 수 있다. 한편, 렘수면 단계에서는 뇌가 서로 관련이 없어 보이는 여러 기억들을 연결하고 통합하는 일을 한다. 이 과정 덕분에 우리는 잠에서 깨어난 뒤에 어려운 문제의 실마리를 갑자기 떠올리거나, 이전에는 보이지 않던 새로운 아이디어를 떠올리기도 한다."
+  },
+  {
+    id: "p3",
+    text: "이러한 과학적 사실을 바탕으로 수면 전문가들은 학생들에게 시험 전날 밤새워 공부하는 것보다 충분히 잠을 자는 것이 훨씬 더 효과적이라고 조언한다. 밤늦게까지 공부하면 당장은 많은 양을 익힌 것 같지만, 수면이 부족하면 뇌가 그 내용을 제대로 정리하고 저장하지 못하기 때문이다. 실제로 어떤 연구에서는 충분히 잠을 잔 학생이 밤을 새운 학생보다 시험 성적이 약 20퍼센트 더 높게 나타났다는 결과가 보고되기도 했다. 따라서 효율적인 학습을 위해서는 공부 시간뿐만 아니라 수면 시간도 함께 계획하는 것이 현명하다. 규칙적인 수면 습관과 균형 잡힌 학습 계획이 조화롭게 결합되었을 때, 우리의 뇌는 가장 효과적으로 새로운 지식을 자기 것으로 만들어 갈 수 있다."
+  }
+];
+
+const totalChars = paragraphs.reduce((sum, p) => sum + p.text.length, 0);
+console.log(`총 글자 수: ${totalChars}`);
+
+// === 유틸리티 ===
+function findRange(paragraphId, searchText) {
+  const para = paragraphs.find(p => p.id === paragraphId);
+  if (!para) throw new Error(`문단 ${paragraphId} 없음`);
+  const start = para.text.indexOf(searchText);
+  if (start === -1) throw new Error(`"${searchText}" → ${paragraphId}에서 미발견`);
+  return { paragraphId, start, end: start + searchText.length };
+}
+
+function sentenceRange(paragraphId, startText, endText) {
+  const para = paragraphs.find(p => p.id === paragraphId);
+  if (!para) throw new Error(`문단 ${paragraphId} 없음`);
+  const start = para.text.indexOf(startText);
+  if (start === -1) throw new Error(`시작:"${startText}" → ${paragraphId}에서 미발견`);
+  const endIdx = para.text.indexOf(endText, start);
+  if (endIdx === -1) throw new Error(`끝:"${endText}" → ${paragraphId}에서 미발견`);
+  return { paragraphId, start, end: endIdx + endText.length };
+}
+
+function fullRange(paragraphId) {
+  const para = paragraphs.find(p => p.id === paragraphId);
+  return { paragraphId, start: 0, end: para.text.length };
+}
+
+// === 문장 범위 ===
+const p1s1 = sentenceRange("p1", "우리가 잠을 자는", "있다.");
+const p1s2 = sentenceRange("p1", "낮 동안 학교에서", "것이다.");
+const p1s3 = sentenceRange("p1", "과학자들은 이러한", "부른다.");
+const p1s4 = sentenceRange("p1", "기억 공고화란", "말한다.");
+const p1s5 = sentenceRange("p1", "만약 밤에", "수 있다.");
+const p1s6 = sentenceRange("p1", "이처럼 잠을", "시간이다.");
+
+const p2s1 = sentenceRange("p2", "수면에는 여러", "한다.");
+const p2s2 = sentenceRange("p2", "깊은 잠 단계에서는", "수행한다.");
+const p2s3 = sentenceRange("p2", "이는 마치", "수 있다.");
+const p2s4 = sentenceRange("p2", "한편, 렘수면", "한다.");
+const p2s5 = sentenceRange("p2", "이 과정 덕분에", "한다.");
+
+const p3s1 = sentenceRange("p3", "이러한 과학적", "조언한다.");
+const p3s2 = sentenceRange("p3", "밤늦게까지 공부하면", "때문이다.");
+const p3s3 = sentenceRange("p3", "실제로 어떤", "했다.");
+const p3s4 = sentenceRange("p3", "따라서 효율적인", "현명하다.");
+const p3s5 = sentenceRange("p3", "규칙적인 수면", "수 있다.");
+
+// === intensive timeline ===
+const timeline = [
+  {
+    stepId: "s1", highlight: { ranges: [p1s1] },
+    question: {
+      prompt: "잠을 자는 동안 뇌가 하는 것으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "쉬지 않고 중요한 일을 한다." },
+        { id: "B", text: "완전히 멈추어 아무 활동도 하지 않는다." },
+        { id: "C", text: "새로운 정보를 받아들여 처음으로 배운다." },
+        { id: "D", text: "낮 동안의 기억을 모두 지워 버린다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s2", highlight: { ranges: [p1s2] },
+    question: {
+      prompt: "뇌가 잠자는 동안 정보를 어떻게 처리하는지 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "낮에 배운 정보를 정리하여 오래 기억할 수 있게 저장한다." },
+        { id: "B", text: "낮에 배운 정보를 삭제하여 새 정보를 위한 공간을 마련한다." },
+        { id: "C", text: "낮에 배운 정보를 다른 사람에게 전달하는 준비를 한다." },
+        { id: "D", text: "낮에 배운 정보를 그대로 두어 변화 없이 유지한다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s3", highlight: { ranges: [p1s3] },
+    question: {
+      prompt: "이 과정의 이름으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "기억 공고화라고 부른다." },
+        { id: "B", text: "기억 소거라고 부른다." },
+        { id: "C", text: "기억 분산이라고 부른다." },
+        { id: "D", text: "기억 전환이라고 부른다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s4", highlight: { ranges: [p1s4] },
+    question: {
+      prompt: "기억 공고화의 뜻으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "일시적으로 저장된 정보를 안정적이고 오래 남는 형태로 바꾸는 과정이다." },
+        { id: "B", text: "뇌 속의 모든 기억을 한꺼번에 지우는 과정이다." },
+        { id: "C", text: "새로운 정보를 처음 받아들이는 과정이다." },
+        { id: "D", text: "오래된 기억을 최신 정보로 교체하는 과정이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s5", highlight: { ranges: [p1s5] },
+    question: {
+      prompt: "잠을 충분히 자지 못하면 생기는 문제로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "기억 공고화가 제대로 이루어지지 않아 기억이 크게 줄어든다." },
+        { id: "B", text: "새로운 정보를 더 빠르게 익히게 된다." },
+        { id: "C", text: "다음 날 더 집중력이 높아진다." },
+        { id: "D", text: "뇌가 더 활발하게 작동하여 성적이 오른다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s6", highlight: { ranges: [p1s6] },
+    question: {
+      prompt: "잠자는 시간의 역할로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "몸을 쉬게 할 뿐 아니라 배운 것을 머릿속에 새기는 시간이다." },
+        { id: "B", text: "오직 몸의 피로만 풀어 주는 시간이다." },
+        { id: "C", text: "뇌의 기능을 일시적으로 정지시키는 시간이다." },
+        { id: "D", text: "새로운 것을 배울 수 있는 유일한 시간이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p1 중심내용
+  {
+    stepId: "s7", highlight: { ranges: [fullRange("p1")] },
+    question: {
+      prompt: "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "수면 중 뇌는 기억 공고화를 통해 낮에 배운 내용을 오래 기억할 수 있도록 정리한다." },
+        { id: "B", text: "잠을 자면 뇌가 완전히 정지하므로 기억에 도움이 되지 않는다." },
+        { id: "C", text: "공부를 많이 하면 잠을 자지 않아도 기억이 잘 된다." },
+        { id: "D", text: "잠을 자는 시간은 몸의 피로만 풀어 주는 역할을 한다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p2
+  {
+    stepId: "s8", highlight: { ranges: [p2s1] },
+    question: {
+      prompt: "기억에 특히 중요한 수면 단계로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "깊은 잠 단계와 렘수면 단계가 중요하다." },
+        { id: "B", text: "얕은 잠 단계만 중요하다." },
+        { id: "C", text: "잠들기 직전의 단계만 중요하다." },
+        { id: "D", text: "깨어나기 직전의 단계만 중요하다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s9", highlight: { ranges: [p2s2] },
+    question: {
+      prompt: "깊은 잠 단계에서 뇌가 하는 일로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "새 정보를 반복적으로 되살려 장기 기억 저장소로 옮긴다." },
+        { id: "B", text: "모든 기억을 삭제하여 뇌를 비운다." },
+        { id: "C", text: "꿈을 통해 미래를 예측하는 작업을 한다." },
+        { id: "D", text: "낮에 먹은 음식의 영양분을 분석한다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s10", highlight: { ranges: [p2s3] },
+    question: {
+      prompt: "깊은 잠 단계의 기억 정리를 비유한 것으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "책상 위 서류를 분류하여 서랍에 차곡차곡 정리하는 것이다." },
+        { id: "B", text: "서류를 모두 쓰레기통에 버리는 것이다." },
+        { id: "C", text: "서랍에서 서류를 꺼내어 책상 위에 쌓는 것이다." },
+        { id: "D", text: "서류를 복사하여 여러 장으로 만드는 것이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s11", highlight: { ranges: [p2s4] },
+    question: {
+      prompt: "렘수면 단계에서 뇌가 하는 일로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "서로 관련 없어 보이는 기억들을 연결하고 통합한다." },
+        { id: "B", text: "낮에 배운 내용을 장기 기억으로 옮긴다." },
+        { id: "C", text: "뇌의 활동을 완전히 멈추고 깊이 쉰다." },
+        { id: "D", text: "오래된 기억만 골라서 삭제한다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s12", highlight: { ranges: [p2s5] },
+    question: {
+      prompt: "렘수면의 기억 통합 덕분에 일어나는 일로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "어려운 문제의 실마리를 갑자기 떠올리거나 새 아이디어를 생각해 낸다." },
+        { id: "B", text: "잠에서 깨어났을 때 모든 기억을 잊어버린다." },
+        { id: "C", text: "잠자는 동안 새로운 외국어를 배울 수 있게 된다." },
+        { id: "D", text: "잠에서 깨면 전날 배운 내용이 정확히 반으로 줄어든다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p2 중심내용
+  {
+    stepId: "s13", highlight: { ranges: [fullRange("p2")] },
+    question: {
+      prompt: "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "깊은 잠은 정보를 장기 기억으로 옮기고 렘수면은 기억을 연결하여 새로운 통찰을 만든다." },
+        { id: "B", text: "수면의 모든 단계가 기억과는 전혀 관련이 없다." },
+        { id: "C", text: "렘수면 단계에서만 기억이 정리되고 다른 단계는 필요 없다." },
+        { id: "D", text: "깊은 잠은 꿈을 꾸는 단계이고 렘수면은 깊이 쉬는 단계이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p3
+  {
+    stepId: "s14", highlight: { ranges: [p3s1] },
+    question: {
+      prompt: "전문가들이 학생들에게 조언한 내용으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "시험 전날 밤새 공부하는 것보다 충분히 잠을 자는 것이 더 효과적이다." },
+        { id: "B", text: "시험 전날에는 잠을 줄이고 최대한 많이 공부해야 한다." },
+        { id: "C", text: "시험 당일에만 일찍 자면 성적이 올라간다." },
+        { id: "D", text: "수면 시간은 학습 효과와 아무 관련이 없다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s15", highlight: { ranges: [p3s2] },
+    question: {
+      prompt: "밤늦게 공부하는 것의 문제점으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "수면이 부족하면 뇌가 배운 내용을 제대로 정리하지 못한다." },
+        { id: "B", text: "밤에는 집중력이 높아서 공부 효율이 올라간다." },
+        { id: "C", text: "밤늦게 공부하면 다음 날 기분이 좋아진다." },
+        { id: "D", text: "수면 부족은 기억력과 전혀 관계가 없다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s16", highlight: { ranges: [p3s3] },
+    question: {
+      prompt: "연구 결과에서 충분히 잠을 잔 학생의 시험 성적이 어떠했는지 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "밤을 새운 학생보다 약 20퍼센트 더 높게 나타났다." },
+        { id: "B", text: "밤을 새운 학생과 성적이 똑같았다." },
+        { id: "C", text: "밤을 새운 학생보다 오히려 성적이 낮았다." },
+        { id: "D", text: "성적 차이가 1퍼센트 이내로 거의 없었다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s17", highlight: { ranges: [p3s4] },
+    question: {
+      prompt: "효율적인 학습을 위해 함께 계획해야 하는 것으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "공부 시간뿐만 아니라 수면 시간도 함께 계획해야 한다." },
+        { id: "B", text: "오직 공부 시간만 늘리면 된다." },
+        { id: "C", text: "수면 시간만 충분하면 공부하지 않아도 된다." },
+        { id: "D", text: "시험 직전에만 잠을 많이 자면 된다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  {
+    stepId: "s18", highlight: { ranges: [p3s5] },
+    question: {
+      prompt: "뇌가 가장 효과적으로 지식을 자기 것으로 만들 수 있는 조건으로 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "규칙적인 수면 습관과 균형 잡힌 학습 계획이 결합되었을 때이다." },
+        { id: "B", text: "잠을 전혀 자지 않고 공부만 할 때이다." },
+        { id: "C", text: "하루 종일 잠만 자고 공부를 하지 않을 때이다." },
+        { id: "D", text: "시험 전날 밤에만 집중적으로 공부할 때이다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  },
+  // p3 중심내용
+  {
+    stepId: "s19", highlight: { ranges: [fullRange("p3")] },
+    question: {
+      prompt: "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+      choices: [
+        { id: "A", text: "효율적 학습을 위해 밤샘 공부보다 충분한 수면과 균형 잡힌 계획이 중요하다." },
+        { id: "B", text: "밤새 공부하는 것이 시험 성적을 높이는 가장 좋은 방법이다." },
+        { id: "C", text: "수면 시간은 성적과 전혀 관련이 없으므로 공부만 하면 된다." },
+        { id: "D", text: "모든 학생은 하루에 열두 시간 이상 자야 성적이 오른다." }
+      ],
+      answerId: "A",
+      scoring: { correctDeltaSec: 20, wrongDeltaSec: -40, eliminateWrongChoice: true }
+    }
+  }
+];
+
+// === recall (8카드) ===
+const recall = {
+  cards: [
+    { id: "c1", text: "잠자는 동안 뇌는 쉬지 않고 낮에 배운 정보를 정리하여 저장하는 일을 한다." },
+    { id: "c2", text: "이 과정을 기억 공고화라 하며, 일시적 정보를 안정적으로 바꾸어 준다." },
+    { id: "c3", text: "수면이 부족하면 기억 공고화가 제대로 되지 않아 기억이 줄어든다." },
+    { id: "c4", text: "깊은 잠 단계에서는 새 정보를 장기 기억으로 옮기는 작업을 수행한다." },
+    { id: "c5", text: "렘수면 단계에서는 서로 다른 기억을 연결하고 통합하는 일을 한다." },
+    { id: "c6", text: "전문가들은 시험 전날 밤새 공부하기보다 충분히 자는 것이 효과적이라 조언한다." },
+    { id: "c7", text: "연구에서 충분히 잠을 잔 학생이 밤새운 학생보다 성적이 약 20퍼센트 높았다." },
+    { id: "c8", text: "규칙적인 수면과 균형 잡힌 학습 계획이 합쳐질 때 가장 효과적으로 학습할 수 있다." }
+  ],
+  correctOrder: ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
+  seedPenalty: 1
+};
+
+// === confirm (7문항) ===
+const confirmQuestions = [
+  {
+    id: "q1",
+    prompt: "뇌가 일시적 정보를 안정적이고 오래 남는 형태로 바꾸는 과정의 이름은 무엇인가요?",
+    answerText: "기억 공고화",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p1", "기억 공고화")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q2",
+    prompt: "깊은 잠 단계에서 새 정보를 옮기는 곳은 어디인가요?",
+    answerText: "장기 기억 저장소",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "장기 기억 저장소")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q3",
+    prompt: "렘수면 단계에서 뇌가 기억들을 연결하고 하는 일은 무엇인가요?",
+    answerText: "통합",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "통합")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q4",
+    prompt: "충분히 잠을 잔 학생이 밤새운 학생보다 시험 성적이 약 몇 퍼센트 높았나요?",
+    answerText: "20퍼센트",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "20퍼센트")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q5",
+    prompt: "깊은 잠의 기억 정리를 비유할 때 서류를 정리하는 가구는 무엇인가요?",
+    answerText: "서랍",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p2", "서랍")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q6",
+    prompt: "효율적인 학습을 위해 수면 시간과 함께 계획해야 하는 것은 무엇인가요?",
+    answerText: "공부 시간",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "공부 시간")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  },
+  {
+    id: "q7",
+    prompt: "규칙적인 수면 습관과 함께 필요한 학습 계획의 특징은 무엇인가요?",
+    answerText: "균형 잡힌",
+    answerMatchMode: "ANY",
+    answerRanges: [findRange("p3", "균형 잡힌")],
+    scoring: { correctDeltaSec: 30, wrongDeltaSec: -45 },
+    revealOnWrong: true
+  }
+];
+
+// === JSON 조립 ===
+const content = {
+  contentId: "dr-r1-009",
+  contentType: "DAILY_READING",
+  version: 1,
+  status: "PUBLISHED",
+  title: "일일 독해(러셀 1) Day 9 비문학",
+  description: "일일 독해 - 정독·복기·확인",
+  targetLevel: "RUSSELL_1",
+  schoolGradeRange: { min: 7, max: 8 },
+  area: "READING",
+  subArea: "NONFICTION",
+  competencies: ["READING"],
+  tags: ["daily"],
+  access: { mode: "FREE" },
+  seedReward: { seedType: "WHEAT", count: 3, multiplier: 1 },
+  timeLimitSec: 300,
+  assets: {},
+  payload: {
+    passage: { format: "TEXT", paragraphs },
+    intensive: { timeline },
+    recall,
+    confirm: { questions: confirmQuestions }
+  }
+};
+
+// === 검증 ===
+console.log("\n=== 최종 검증 ===");
+console.log(`총 글자 수: ${totalChars}`);
+console.log(`intensive steps: ${timeline.length}`);
+console.log(`recall cards: ${recall.cards.length}`);
+console.log(`confirm questions: ${confirmQuestions.length}`);
+
+let errors = 0;
+timeline.forEach((step) => {
+  step.highlight.ranges.forEach(r => {
+    const para = paragraphs.find(p => p.id === r.paragraphId);
+    if (r.start < 0 || r.end > para.text.length || r.start >= r.end) {
+      console.error(`ERROR step ${step.stepId}: [${r.start}, ${r.end}] 오류`);
+      errors++;
+    }
+  });
+});
+confirmQuestions.forEach((q, i) => {
+  q.answerRanges.forEach(r => {
+    const para = paragraphs.find(p => p.id === r.paragraphId);
+    if (r.start < 0 || r.end > para.text.length || r.start >= r.end) {
+      console.error(`ERROR confirm q${i+1}: [${r.start}, ${r.end}] 오류`);
+      errors++;
+    }
+    console.log(`  q${i+1}: "${q.answerText}" → [${r.start}, ${r.end}] = "${para.text.substring(r.start, r.end)}"`);
+  });
+});
+if (errors > 0) { console.error(`${errors}개 오류. 중단.`); process.exit(1); }
+
+// === 파일 저장 ===
+const staticPath = path.join(__dirname, '..', 'frontend', 'public', 'daily-reading', 'russell1', '009.json');
+fs.writeFileSync(staticPath, JSON.stringify(content, null, 2), 'utf-8');
+console.log(`\nstatic 저장: ${staticPath}`);
+
+const batchPath = path.join(__dirname, '..', 'generated', 'daily-batch-reading-russell1.json');
+const batch = JSON.parse(fs.readFileSync(batchPath, 'utf-8'));
+batch.items[8] = {
+  content_type: "DAILY_READING", level_id: "RUSSELL_1", area: "READING",
+  sub_area: "NONFICTION", day_index: 9, module_key: "reading_training",
+  schema_version: "1.0", content
+};
+fs.writeFileSync(batchPath, JSON.stringify(batch, null, 2), 'utf-8');
+console.log(`배치 업데이트: items[8]`);
+console.log("\nDay 9 완료!");

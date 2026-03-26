@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "프레게2 19장 논리사고력",
+  "targetLevel": "frege2",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "세금은 국가를 운영하기 위해 국민이 법에 따라 내는 돈이다. 세금으로 학교, 도로, 병원 같은 공공시설을 만들고 유지한다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'국민이 세금을 내야 한다'는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "국가는 세금 없이도 운영된다"
+              },
+              {
+                "id": "B",
+                "text": "세금을 내지 않아도 공공시설을 이용할 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "공공 서비스는 개인이 혼자 만들 수 없으므로 공동 부담이 필요하다"
+              },
+              {
+                "id": "D",
+                "text": "모든 국민은 같은 액수의 세금을 낸다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "다의어는 하나의 낱말이 서로 관련된 여러 뜻을 가진 말이다. 동음이의어는 소리만 같고 뜻은 전혀 다른 말이다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'다의어와 동음이의어를 구별해야 한다'는 주장의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "소리가 같은 단어의 뜻 관련성 여부에 따라 단어의 성격이 달라진다"
+              },
+              {
+                "id": "B",
+                "text": "모든 단어는 하나의 뜻만 가진다"
+              },
+              {
+                "id": "C",
+                "text": "동음이의어는 존재하지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "다의어는 사전에 실리지 않는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "윤동주의 '새로운 길'에서 화자는 매일 같은 길을 가지만 그 길은 언제나 새로운 길이라고 노래한다. 민들레가 피고 까치가 날고 바람이 부는 자연의 변화가 있다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "화자가 반복되는 일상을 '새로운 길'이라고 표현한 데서 추론할 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "매일 다른 길로 출퇴근한다는 뜻이다"
+              },
+              {
+                "id": "B",
+                "text": "같은 길이라도 매일 다른 경험과 변화가 있어 새롭다는 의미이다"
+              },
+              {
+                "id": "C",
+                "text": "길을 잃어서 매번 새로운 길을 찾는다"
+              },
+              {
+                "id": "D",
+                "text": "길이 공사 중이라 매일 우회한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "세금을 많이 버는 사람이 더 많이 내는 것을 '누진세'라고 한다. 세금의 원칙 중 하나는 공평하게 걷는 것이다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "만약 소득에 관계없이 모든 사람이 같은 액수의 세금을 낸다면 예상되는 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세금 징수가 불필요해진다"
+              },
+              {
+                "id": "B",
+                "text": "모든 사람에게 공평해진다"
+              },
+              {
+                "id": "C",
+                "text": "고소득자가 더 큰 혜택을 받는다"
+              },
+              {
+                "id": "D",
+                "text": "저소득층에게 상대적으로 더 큰 부담이 되어 불공평해진다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "'눈'이라는 단어는 '하늘에서 내리는 하얀 것'과 '사람의 얼굴에 있는 신체 부위'라는 두 가지 뜻이 있다. 이 두 뜻은 서로 아무런 관련이 없다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 소리는 같지만 뜻이 전혀 다르고 관련이 없으면 동음이의어이다. [소전제] '눈(하늘)'과 '눈(신체)'은 소리는 같지만 뜻에 관련이 없다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'눈'은 다의어이다"
+              },
+              {
+                "id": "B",
+                "text": "'눈'은 반의어이다"
+              },
+              {
+                "id": "C",
+                "text": "'눈'은 동음이의어이다"
+              },
+              {
+                "id": "D",
+                "text": "'눈'은 유의어이다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "수미상관이란 시의 처음과 끝을 같거나 비슷하게 배치하는 것이다. 윤동주의 '새로운 길'에서 1연과 5연이 동일하다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "[대전제] 처음과 끝이 같으면 수미상관이다. [소전제] '새로운 길'의 1연과 5연이 같다. 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수미상관은 소설에만 쓰인다"
+              },
+              {
+                "id": "B",
+                "text": "이 시에는 수미상관이 사용되지 않았다"
+              },
+              {
+                "id": "C",
+                "text": "1연과 5연이 다르다"
+              },
+              {
+                "id": "D",
+                "text": "이 시에는 수미상관이 사용되었다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "납세의 의무를 성실히 지키면 민주 시민의 역할을 다하는 것이다. 세금은 국가 재정의 근본이다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'민주 시민이려면 납세의 의무를 다해야 한다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "납세를 하면 반드시 민주 시민이다"
+              },
+              {
+                "id": "B",
+                "text": "납세와 시민 자격은 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "민주 시민이 아니면 납세하지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "납세를 하지 않으면서 민주 시민인 경우는 없다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "'다리'라는 단어의 여러 뜻(신체, 책상, 안경)이 모두 '받치거나 지탱하는 것'이라는 공통점을 가지면 다의어이다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'다의어이려면 여러 뜻 사이에 공통된 의미가 있어야 한다'를 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다의어라면 뜻 사이에 공통된 의미가 있을 것이다"
+              },
+              {
+                "id": "B",
+                "text": "공통 의미가 있으면 반드시 다의어이다"
+              },
+              {
+                "id": "C",
+                "text": "공통 의미가 없어도 다의어일 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "다의어와 공통 의미는 무관하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "세금의 용도에는 학교 건설, 도로 포장, 복지 서비스 등이 있다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "'세금이 공공 목적에 사용된다'의 적절한 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세금으로 무료 학교 급식을 제공한다"
+              },
+              {
+                "id": "B",
+                "text": "세금을 공무원의 사적 여행에 사용한다"
+              },
+              {
+                "id": "C",
+                "text": "세금을 특정 개인에게만 돌려준다"
+              },
+              {
+                "id": "D",
+                "text": "세금을 걷지 않는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "동음이의어의 예시로 '차(마시는 차)'와 '차(교통수단 차)'가 있다. 다의어의 예시로 '머리(신체)'와 '머리(지능)'가 있다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "다음 중 동음이의어인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'머리를 빗다'와 '머리가 좋다'의 '머리'"
+              },
+              {
+                "id": "B",
+                "text": "'손이 많이 간다'와 '손을 잡다'의 '손'"
+              },
+              {
+                "id": "C",
+                "text": "'배(과일)'와 '배(교통수단)'와 '배(신체)'"
+              },
+              {
+                "id": "D",
+                "text": "'발이 넓다'와 '발이 아프다'의 '발'"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "세금을 공평하게 걷고 올바르게 사용하면 국민의 신뢰를 얻을 수 있다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'세금을 공평하게 걷고 올바르게 사용하면 국민 신뢰를 얻는다'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세금을 공평하게 걷고 올바르게 사용하면서 국민 신뢰를 얻지 못하는 경우는 없다"
+              },
+              {
+                "id": "B",
+                "text": "국민 신뢰를 얻었으면 반드시 세금을 공평하게 사용한 것이다"
+              },
+              {
+                "id": "C",
+                "text": "국민 신뢰가 없으면 세금을 걷지 않은 것이다"
+              },
+              {
+                "id": "D",
+                "text": "신뢰와 세금은 무관하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "윤동주는 매일 반복되는 일상에서도 희망을 잃지 않겠다는 다짐을 노래했다. 희망을 가지면 일상이 새롭게 느껴진다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "'희망을 가지면 일상이 새롭게 느껴진다'를 충분조건으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일상이 새롭게 느껴지면 반드시 희망을 가진 것이다"
+              },
+              {
+                "id": "B",
+                "text": "희망을 가지면서 일상이 지루하게 느껴지는 경우는 없다"
+              },
+              {
+                "id": "C",
+                "text": "희망이 없어도 일상은 새롭다"
+              },
+              {
+                "id": "D",
+                "text": "희망과 일상은 무관하다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "국가 재정은 세금으로 충당된다. 복지란 삶의 질을 높여 행복하게 사는 상태나 제도이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'세금이 복지에 사용되면 국민의 삶의 질이 높아진다'의 충분조건 예시로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세금 없이 복지를 제공했다"
+              },
+              {
+                "id": "B",
+                "text": "세금을 걷었지만 아무 곳에도 사용하지 않았다"
+              },
+              {
+                "id": "C",
+                "text": "세금으로 무상 의료를 제공하여 국민 건강이 좋아졌다"
+              },
+              {
+                "id": "D",
+                "text": "세금으로 군비만 증강했다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "'새로운 길'에서 '길'은 화자의 인생이나 삶의 여정을 비유한다. '내, 숲, 고개, 마을'은 삶에서 만나는 다양한 어려움과 환경을 의미한다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "'시에서 자연물이 삶을 비유하면 상징적 의미가 풍부해진다'의 예시로 부적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'길'을 인생의 여정으로 비유한 것"
+              },
+              {
+                "id": "B",
+                "text": "'고개'를 삶의 어려움으로 비유한 것"
+              },
+              {
+                "id": "C",
+                "text": "'민들레'를 일상의 작은 기쁨으로 비유한 것"
+              },
+              {
+                "id": "D",
+                "text": "'길'을 단순히 아스팔트 도로로 묘사한 것"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "세금을 제대로 걷지 않으면 공공시설을 유지할 수 없다. 학교와 도로는 공공시설이다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'세금을 걷지 않으면 공공시설을 유지할 수 없다'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "A가 부당하다"
+              },
+              {
+                "id": "B",
+                "text": "세금을 걷고 있으므로 공공시설이 유지된다 (전건 부정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "공공시설이 유지되지 않으므로 세금을 걷지 않은 것이다 (후건 긍정 — 부당)"
+              },
+              {
+                "id": "D",
+                "text": "공공시설이 유지되고 있다면 세금이 걷히고 있을 것이다 (후건 부정의 대우 — 타당)"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'달'이라는 단어에서 '하늘의 달'과 '이번 달'은 뜻 사이에 관련이 있다(시간의 주기와 달의 주기). 따라서 다의어일 수 있다.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "'뜻 사이에 관련이 있으면 다의어이다'가 참일 때, 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "B와 C 모두 타당하다"
+              },
+              {
+                "id": "B",
+                "text": "'달(하늘)'과 '달(기간)'의 뜻이 관련 있으므로 다의어이다 (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "뜻이 관련 없으면 다의어가 아니다 (대우 — 타당)"
+              },
+              {
+                "id": "D",
+                "text": "다의어이면 뜻 사이에 관련이 있다 (역은 반드시 참이 아님)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "세금을 많이 걷는 나라일수록 복지 수준이 높은 경향이 있다. 북유럽 국가들이 대표적이다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'세금 징수 수준'과 '복지 수준' 사이의 관계 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세금을 많이 걷으면 반드시 복지가 좋아진다"
+              },
+              {
+                "id": "B",
+                "text": "둘 사이에 양의 상관관계가 있으나, 정부의 효율성이나 정책 방향 등 다른 요인도 복지에 영향을 준다"
+              },
+              {
+                "id": "C",
+                "text": "복지가 좋으면 세금을 많이 걷는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "세금과 복지는 반비례한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "수미상관을 사용한 시일수록 구조적 안정감이 높다는 분석이 있다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'수미상관 사용'과 '구조적 안정감' 사이의 관계 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수미상관이 안정감의 유일한 요인이다"
+              },
+              {
+                "id": "B",
+                "text": "안정감이 높으면 반드시 수미상관을 썼다"
+              },
+              {
+                "id": "C",
+                "text": "둘 사이에 상관관계가 있으나, 운율이나 이미지 반복 등 다른 기법도 안정감에 기여한다"
+              },
+              {
+                "id": "D",
+                "text": "수미상관과 안정감은 무관하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "세금을 더 투명하게 사용하면 국민의 납세 의식이 높아진다는 주장이 있다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "위 가설을 검증하는 방법으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세금 총액만 비교한다"
+              },
+              {
+                "id": "B",
+                "text": "세금 사용이 투명한 지역과 그렇지 않은 지역의 납세율을 비교한다"
+              },
+              {
+                "id": "C",
+                "text": "납세자의 나이만 조사한다"
+              },
+              {
+                "id": "D",
+                "text": "세금 종류만 분류한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "다의어를 동음이의어로 잘못 분류하면 단어의 의미 관계를 놓칠 수 있다는 주장이 있다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "위 가설을 반증하는 사례로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다의어를 동음이의어로 분류했더니 뜻 사이의 공통점을 발견하지 못했다"
+              },
+              {
+                "id": "B",
+                "text": "다의어를 동음이의어로 잘못 분류했는데도 의미 이해에 전혀 지장이 없었다"
+              },
+              {
+                "id": "C",
+                "text": "동음이의어를 다의어로 분류했더니 없는 관계를 억지로 만들게 되었다"
+              },
+              {
+                "id": "D",
+                "text": "다의어와 동음이의어를 올바르게 분류하여 의미를 잘 이해했다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

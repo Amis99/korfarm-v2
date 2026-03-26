@@ -1,0 +1,737 @@
+{
+  "contentType": "PRO_LOGIC",
+  "title": "러셀3 8장 논리사고력",
+  "targetLevel": "russell3",
+  "area": "LOGIC",
+  "subArea": "PRO",
+  "timeLimitSec": 300,
+  "seedReward": {
+    "seedType": "seed_grape",
+    "count": 3,
+    "multiplier": 1
+  },
+  "payload": {
+    "passages": [
+      {
+        "id": "p1",
+        "title": "숨겨진 전제 찾기",
+        "text": "부사절은 '-게', '-도록' 등의 부사형 전성 어미를 통해 만들어지며, 문장 속에서 서술어를 꾸며주는 부사어 역할을 한다. 서술절은 절 전체가 서술어 역할을 하는 독특한 구조이다.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "'토끼가 귀가 길다'에서 '귀가 길다'가 서술절이라는 결론이 나오려면 반드시 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서술절의 주어는 항상 생략된다."
+              },
+              {
+                "id": "B",
+                "text": "서술절에는 전성 어미가 반드시 붙어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "서술절은 관형어 역할을 한다."
+              },
+              {
+                "id": "D",
+                "text": "서술절은 주어를 포함한 절 전체가 주절의 서술어 역할을 해야 한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p2",
+        "title": "숨겨진 전제 찾기",
+        "text": "내진 설계에서 면진구조는 건물과 지반 사이에 고무 받침 등을 설치하여 지진의 흔들림이 건물에 직접 전달되지 않도록 한다.",
+        "questions": [
+          {
+            "id": "q2",
+            "type": "MULTI_CHOICE",
+            "logicType": "hidden_premise",
+            "stem": "면진구조가 건물을 보호한다는 주장이 성립하려면 반드시 전제되어야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내진구조와 면진구조는 같은 원리이다."
+              },
+              {
+                "id": "B",
+                "text": "모든 건물은 자연적으로 지진에 강하다."
+              },
+              {
+                "id": "C",
+                "text": "고무 받침은 지진파를 증폭시킨다."
+              },
+              {
+                "id": "D",
+                "text": "지진파의 에너지가 건물에 직접 전달되는 것이 건물 파괴의 주요 원인이다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p3",
+        "title": "결과 추론하기",
+        "text": "허난설헌의 '규원가'에서 화자는 남편의 사랑을 받지 못하고 젊음을 잃어가는 자신을 한탄한다. '원앙새 수놓은 이불도 차디차고 이 밤은 언제나 샐까'라며 외로운 밤을 견딘다.",
+        "questions": [
+          {
+            "id": "q3",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "화자가 '꿈에서라도 님을 만나고 싶다'고 소망하는 결과로 추론할 수 있는 심리 상태는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "현실에서 님과의 만남이 불가능하여 꿈이라는 비현실적 공간에서라도 위안을 얻으려는 절박한 그리움이다."
+              },
+              {
+                "id": "B",
+                "text": "님에 대한 원망이 극에 달한 상태이다."
+              },
+              {
+                "id": "C",
+                "text": "새로운 삶을 시작하겠다는 결심이다."
+              },
+              {
+                "id": "D",
+                "text": "님과의 관계를 완전히 정리한 상태이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p4",
+        "title": "결과 추론하기",
+        "text": "내진구조는 건물 자체를 강하게 만드는 방식이고, 면진구조는 건물과 지반 사이를 분리하는 방식이며, 제진구조는 진동 흡수 장치를 설치하는 방식이다.",
+        "questions": [
+          {
+            "id": "q4",
+            "type": "MULTI_CHOICE",
+            "logicType": "consequence",
+            "stem": "초고층 빌딩에 제진구조를 적용할 경우 예상되는 효과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "진동 흡수 장치가 지진파의 에너지를 흡수하여 건물의 흔들림을 줄인다."
+              },
+              {
+                "id": "B",
+                "text": "건물이 지반에서 분리되어 떠 있게 된다."
+              },
+              {
+                "id": "C",
+                "text": "건물의 무게가 가벼워진다."
+              },
+              {
+                "id": "D",
+                "text": "지진파가 건물을 통과하지 못하게 반사된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p5",
+        "title": "삼단논법 추론하기",
+        "text": "인용절에는 직접 인용과 간접 인용이 있다. 직접 인용은 상대방의 말을 그대로 옮기며 '-라고'를 쓰고, 간접 인용은 화자의 말로 바꾸어 '-다고/-냐고/-자고/-라고'를 쓴다.",
+        "questions": [
+          {
+            "id": "q5",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "다음 추론의 결론은? [대전제] 간접 인용은 화자의 말로 바꾸어 '-다고'를 사용한다. [소전제] '영희는 내일 비가 온다고 말했다'는 '-다고'가 사용되었다.",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 문장은 직접 인용이다."
+              },
+              {
+                "id": "B",
+                "text": "이 문장은 간접 인용절을 안은문장이다."
+              },
+              {
+                "id": "C",
+                "text": "이 문장은 부사절을 안은문장이다."
+              },
+              {
+                "id": "D",
+                "text": "이 문장은 홑문장이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p6",
+        "title": "삼단논법 추론하기",
+        "text": "P파는 압축과 팽창을 반복하며 전달되는 종파이고, S파는 진행 방향과 수직으로 흔들리는 횡파이다. S파가 P파보다 피해가 크다.",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "MULTI_CHOICE",
+            "logicType": "syllogism",
+            "stem": "다음 추론의 결론은? [대전제] S파는 P파보다 건물에 더 큰 피해를 준다. [소전제] 이번 지진에서 S파가 도달했다.",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P파만 도달한 경우보다 피해가 적다."
+              },
+              {
+                "id": "B",
+                "text": "S파는 종파이다."
+              },
+              {
+                "id": "C",
+                "text": "S파는 건물에 영향을 미치지 않는다."
+              },
+              {
+                "id": "D",
+                "text": "P파만 도달한 경우보다 건물 피해가 클 수 있다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p7",
+        "title": "필요조건 변환",
+        "text": "부사절이 성립하려면 부사형 전성 어미(-게, -도록 등)가 사용되어야 한다.",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'어떤 절이 부사절이다'가 참이면, 반드시 참이어야 하는 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "절이 주어 역할을 한다."
+              },
+              {
+                "id": "B",
+                "text": "명사형 전성 어미가 사용된다."
+              },
+              {
+                "id": "C",
+                "text": "부사형 전성 어미가 사용되어 절이 서술어를 꾸미는 역할을 한다."
+              },
+              {
+                "id": "D",
+                "text": "절이 독립적으로 쓰인다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p8",
+        "title": "필요조건 변환",
+        "text": "규원가에서 화자의 탄식이 진정한 감동을 주려면, 화자가 겪는 상황(님의 부재, 늙어감)에 대한 구체적 묘사가 있어야 한다.",
+        "questions": [
+          {
+            "id": "q8",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_transform",
+            "stem": "'규원가가 감동적인 여성 탄식 문학이다'가 참이면, 반드시 참이어야 하는 필요조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화자의 고독과 그리움이 구체적 정서와 상황으로 형상화되어야 한다."
+              },
+              {
+                "id": "B",
+                "text": "화자가 남성이어야 한다."
+              },
+              {
+                "id": "C",
+                "text": "화자가 직접 님을 만나는 장면이 있어야 한다."
+              },
+              {
+                "id": "D",
+                "text": "화자가 기쁨을 표현해야 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p9",
+        "title": "필요조건 예시 찾기",
+        "text": "'서술절'의 필요조건은 '절 전체가 주절의 서술어 역할을 한다'는 것이다. 서술절은 별도의 전성 어미 없이 절이 그 자체로 서술어가 된다.",
+        "questions": [
+          {
+            "id": "q9",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "다음 중 서술절의 필요조건을 충족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'나는 그가 떠났음을 안다' (명사절)"
+              },
+              {
+                "id": "B",
+                "text": "'비가 오도록 기다렸다' (부사절)"
+              },
+              {
+                "id": "C",
+                "text": "'토끼가 귀가 길다' (절 전체 '귀가 길다'가 서술어 역할)"
+              },
+              {
+                "id": "D",
+                "text": "'내가 읽은 책' (관형절)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "title": "필요조건 예시 찾기",
+        "text": "내진 설계가 효과적이려면 '지진파의 에너지를 건물이 감당할 수 있는 수준으로 줄이거나 분산해야 한다'는 것이 필요조건이다.",
+        "questions": [
+          {
+            "id": "q10",
+            "type": "MULTI_CHOICE",
+            "logicType": "necessary_example",
+            "stem": "다음 중 이 필요조건을 충족하는 사례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "건물 외벽에 페인트를 새로 칠한 경우"
+              },
+              {
+                "id": "B",
+                "text": "면진구조로 건물과 지반 사이에 고무 받침을 설치하여 지진파 전달을 차단한 경우"
+              },
+              {
+                "id": "C",
+                "text": "건물 옥상에 정원을 조성한 경우"
+              },
+              {
+                "id": "D",
+                "text": "건물 내부 인테리어를 교체한 경우"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "title": "충분조건 변환",
+        "text": "'직접 인용절이 사용되었다(P)'는 '안은문장이다(Q)'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q11",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "P→Q일 때, 올바른 변환은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "안은문장이 아니면 직접 인용절이 사용되지 않았다. (~Q→~P, 대우, 타당)"
+              },
+              {
+                "id": "B",
+                "text": "직접 인용절이 없으면 안은문장이 아니다. (~P→~Q, 부당)"
+              },
+              {
+                "id": "C",
+                "text": "안은문장이면 반드시 직접 인용절이 있다. (Q→P, 부당)"
+              },
+              {
+                "id": "D",
+                "text": "B와 C 모두 타당하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "title": "충분조건 변환",
+        "text": "'건물에 면진구조가 적용되었다(P)'는 '지진 시 건물 흔들림이 감소한다(Q)'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_transform",
+            "stem": "P→Q일 때, '~P이면서 Q인 경우'에 해당하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "면진구조 없이 제진구조를 적용하여 흔들림이 감소한 경우"
+              },
+              {
+                "id": "B",
+                "text": "면진구조를 적용하여 흔들림이 감소한 경우"
+              },
+              {
+                "id": "C",
+                "text": "아무런 내진 설계 없이 흔들림이 그대로인 경우"
+              },
+              {
+                "id": "D",
+                "text": "면진구조를 적용했지만 흔들림이 감소하지 않은 경우"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "title": "충분조건 예시 찾기",
+        "text": "규원가에서 '원앙 이불이 차갑다'는 표현은 님의 부재를 감각적으로 보여주는 충분한 표현이다. '님의 부재를 사물의 감각으로 드러내는 것'은 '정서적 공감을 유발하는 표현'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "다음 중 이 충분조건을 만족하는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'님은 떠났다'라고 사실만 서술하는 표현"
+              },
+              {
+                "id": "B",
+                "text": "'이불이 차갑다'라며 님이 없는 자리의 허전함을 감각으로 드러내는 표현"
+              },
+              {
+                "id": "C",
+                "text": "'오늘 날씨가 좋다'라고 일상을 묘사하는 표현"
+              },
+              {
+                "id": "D",
+                "text": "'학교에 간다'라고 행동을 서술하는 표현"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "title": "충분조건 예시 찾기",
+        "text": "'P파가 먼저 도달하고 S파가 뒤이어 도달하는 것'은 '지진 관측소에서 진원까지의 거리를 계산할 수 있는 것'의 충분조건이다.",
+        "questions": [
+          {
+            "id": "q14",
+            "type": "MULTI_CHOICE",
+            "logicType": "sufficient_example",
+            "stem": "다음 중 이 충분조건을 만족하지 않는 예시는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P파와 S파의 도달 시간차를 측정하여 진원 거리를 계산한 경우"
+              },
+              {
+                "id": "B",
+                "text": "여러 관측소에서 P파와 S파의 시간차를 비교하여 진앙을 특정한 경우"
+              },
+              {
+                "id": "C",
+                "text": "세 개 이상의 관측소 데이터를 종합하여 진원을 삼각 측량한 경우"
+              },
+              {
+                "id": "D",
+                "text": "지진이 발생하지 않아 P파와 S파 모두 감지되지 않은 경우"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "title": "타당성 판단",
+        "text": "부사절이면 부사형 전성 어미가 사용된다. 서술절이면 별도의 전성 어미가 없다.",
+        "questions": [
+          {
+            "id": "q15",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "다음 추론 중 논리적으로 타당한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서술절이면 전성 어미가 없다. 이 절에는 전성 어미가 없다. 따라서 서술절이다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "부사절이면 부사형 전성 어미가 있다. '비가 오도록'은 부사절이다. 따라서 부사형 전성 어미가 있다. (전건 긍정 — 타당)"
+              },
+              {
+                "id": "C",
+                "text": "A와 B 모두 타당하다."
+              },
+              {
+                "id": "D",
+                "text": "B만 타당하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "title": "타당성 판단",
+        "text": "'내진구조를 적용하면(P) 건물 자체의 강도가 높아진다(Q)'가 참이라 하자.",
+        "questions": [
+          {
+            "id": "q16",
+            "type": "MULTI_CHOICE",
+            "logicType": "validity",
+            "stem": "P→Q가 참일 때, 논리적으로 타당한 추론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "건물 강도가 높아졌으므로 내진구조가 적용되었다. (후건 긍정 — 부당)"
+              },
+              {
+                "id": "B",
+                "text": "내진구조가 적용되지 않았으므로 건물 강도가 높지 않다. (전건 부정 — 부당)"
+              },
+              {
+                "id": "C",
+                "text": "건물 강도가 높아지지 않았으므로 내진구조가 적용되지 않았다. (후건 부정 — 대우, 타당)"
+              },
+              {
+                "id": "D",
+                "text": "A와 B 모두 타당하다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "title": "상관관계",
+        "text": "규원가에서 '봄날 꽃이 피는 계절'과 '화자의 서러움이 깊어지는 것'이 동시에 나타난다.",
+        "questions": [
+          {
+            "id": "q17",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'봄의 화려함'과 '화자의 슬픔' 사이의 관계에 대한 설명으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "봄이 직접 슬픔을 유발한다."
+              },
+              {
+                "id": "B",
+                "text": "봄의 생명력과 화자의 시들어가는 젊음이 대비되어 슬픔을 더욱 심화시키는 구조적 상관관계이다."
+              },
+              {
+                "id": "C",
+                "text": "슬픔이 봄을 불러온다."
+              },
+              {
+                "id": "D",
+                "text": "두 현상은 전혀 무관하다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "title": "상관관계",
+        "text": "지진 다발 지역에서 내진 설계 의무화가 시행된 이후 건물 피해가 감소하는 경향이 관찰된다.",
+        "questions": [
+          {
+            "id": "q18",
+            "type": "MULTI_CHOICE",
+            "logicType": "correlation",
+            "stem": "'내진 설계 의무화'와 '건물 피해 감소' 사이의 관계에 대한 설명으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내진 설계가 건물 피해 감소의 직접적 원인이다."
+              },
+              {
+                "id": "B",
+                "text": "건물 피해 감소가 내진 설계 의무화를 유발했다."
+              },
+              {
+                "id": "C",
+                "text": "내진 설계 의무화가 건물 내진 성능 향상이라는 매개를 통해 피해 감소에 기여했을 가능성이 높으나, 지진 강도 변화 등 다른 요인도 고려해야 한다."
+              },
+              {
+                "id": "D",
+                "text": "두 현상은 우연의 일치이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p19",
+        "title": "가설 검증",
+        "text": "서술절은 다른 안긴문장과 달리 전성 어미가 붙지 않는다. 이는 서술절이 주절의 서술어 자체가 되는 독특한 구조 때문이다.",
+        "questions": [
+          {
+            "id": "q19",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 모든 안긴문장에는 전성 어미가 붙는다. 이 가설을 반증하는 근거로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부사절에는 '-게'가 붙는다."
+              },
+              {
+                "id": "B",
+                "text": "명사절에는 '-음'이 붙는다."
+              },
+              {
+                "id": "C",
+                "text": "관형절에는 '-(으)ㄴ'이 붙는다."
+              },
+              {
+                "id": "D",
+                "text": "서술절은 전성 어미 없이 절 자체가 서술어 역할을 하므로, 전성 어미가 붙지 않는 안긴문장이 존재한다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      },
+      {
+        "id": "p20",
+        "title": "가설 검증",
+        "text": "내진구조, 면진구조, 제진구조는 각각 다른 원리로 지진에 대비한다. 실제 건축에서는 이 세 가지를 복합적으로 적용하기도 한다.",
+        "questions": [
+          {
+            "id": "q20",
+            "type": "MULTI_CHOICE",
+            "logicType": "hypothesis",
+            "stem": "[가설] 면진구조만 적용하면 모든 규모의 지진에서 건물을 완벽히 보호할 수 있다. 이 가설을 검증하기 위한 방법으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "건물의 층수만 비교한다."
+              },
+              {
+                "id": "B",
+                "text": "면진구조의 고무 받침 색깔을 조사한다."
+              },
+              {
+                "id": "C",
+                "text": "면진구조만 적용된 건물과 복합 설계(면진+제진)가 적용된 건물의 대형 지진 시 피해 정도를 비교한다."
+              },
+              {
+                "id": "D",
+                "text": "건물의 준공 연도만 확인한다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 15,
+              "wrongDeltaSec": -15
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
