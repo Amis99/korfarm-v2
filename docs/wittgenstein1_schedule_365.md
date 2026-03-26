@@ -51,9 +51,9 @@
 | 33 | 작문 | 고쳐쓰기 전략 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 34 | 비문학 | 정보 비대칭과 역선택 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 35 | 문법 | 높임과 시간 표현 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 36 | 비문학 | ???? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
+| 36 | 비문학 | 미성년자의 계약 취소권 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 37 | 문학 | 기황전설 | docs/wittgenstein1_source_inventory.md > 기황전설 |
-| 38 | 비문학 | ??? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
+| 38 | 비문학 | 열펌프의 성적 계수 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 39 | 화법 | 발표 자료 해석 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 40 | 작문 | 문단 재배열 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 41 | 비문학 | ??? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
