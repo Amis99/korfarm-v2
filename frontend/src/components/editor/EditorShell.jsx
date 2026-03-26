@@ -21,8 +21,8 @@ import "../../styles/content-editor.css";
 
 const TYPE_LABEL = {
   PRO_READING: "독해 훈련",
-  PRO_BACKGROUND: "배경지식",
-  PRO_VOCAB: "어휘",
+  PRO_BACKGROUND: "배경지식 퀴즈",
+  PRO_VOCAB: "어휘 학습",
   PRO_LOGIC: "추론",
   PRO_ANSWER: "모범답안",
   PRO_TEST: "테스트",
@@ -32,9 +32,13 @@ const TYPE_LABEL = {
   GRAMMAR_SENTENCE_STRUCTURE: "문장 짜임",
   CONTENT_PDF: "내용 숙지",
   CONTENT_PDF_QUIZ: "내용 숙지",
-  READING_NONFICTION: "비문학 독해",
-  READING_LITERATURE: "문학 독해",
-  DAILY_READING: "일일 독해",
+  READING_NONFICTION: "독해 훈련",
+  READING_LITERATURE: "독해 훈련 (문학)",
+  READING_TRAINING: "독해 훈련",
+  DAILY_READING: "독해 훈련",
+  VOCAB_BASIC: "어휘 학습",
+  VOCAB_DICTIONARY: "어휘 학습 (사전)",
+  BACKGROUND_KNOWLEDGE_QUIZ: "배경지식 퀴즈",
 };
 
 /* contentType → 에디터 유형 매핑 */

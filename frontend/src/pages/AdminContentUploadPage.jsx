@@ -51,21 +51,21 @@ const MODULE_GROUPS = [
   {
     label: "일일 독해",
     items: [
-      { value: "dailyReading:training:reading_training", label: "정독 훈련 (정독→복기→확인 통합)" },
+      { value: "dailyReading:training:reading_training", label: "독해 훈련 (정독→복기→확인)" },
     ],
   },
   {
     label: "농장 모드",
     items: [
-      { value: "farm:vocab:worksheet_quiz", label: "어휘 농장 - 기본" },
-      { value: "farm:vocab_dict:worksheet_quiz", label: "어휘 농장 - 사전 학습" },
-      { value: "farm:reading:reading_training", label: "독해 농장" },
+      { value: "farm:vocab:worksheet_quiz", label: "어휘 학습" },
+      { value: "farm:vocab_dict:worksheet_quiz", label: "어휘 학습 (사전)" },
+      { value: "farm:reading:reading_training", label: "독해 훈련" },
       { value: "farm:content:reading_training", label: "내용 숙지 농장" },
       { value: "farm:grammar_wf:word_formation", label: "문법 - 단어 형성" },
       { value: "farm:grammar_ss:sentence_structure", label: "문법 - 문장 짜임" },
       { value: "farm:grammar_pc:phoneme_change", label: "문법 - 음운 변동" },
       { value: "farm:grammar_pos:worksheet_quiz", label: "문법 - 품사" },
-      { value: "farm:background:worksheet_quiz", label: "배경지식 농장" },
+      { value: "farm:background:worksheet_quiz", label: "배경지식 퀴즈" },
       { value: "farm:concept:worksheet_quiz", label: "국어 개념 농장" },
       { value: "farm:logic:worksheet_quiz", label: "논리사고력 농장" },
       { value: "farm:writing:worksheet_quiz", label: "서술형 농장" },
@@ -75,9 +75,9 @@ const MODULE_GROUPS = [
   {
     label: "프로 모드",
     items: [
-      { value: "pro:reading:reading_training", label: "프로 독해" },
-      { value: "pro:vocab:worksheet_quiz", label: "프로 어휘" },
-      { value: "pro:background:worksheet_quiz", label: "프로 배경지식" },
+      { value: "pro:reading:reading_training", label: "독해 훈련" },
+      { value: "pro:vocab:worksheet_quiz", label: "어휘 학습" },
+      { value: "pro:background:worksheet_quiz", label: "배경지식 퀴즈" },
       { value: "pro:logic:worksheet_quiz", label: "프로 논리사고력" },
       { value: "pro:answer:worksheet_quiz", label: "프로 모범답안/정답해설" },
     ],
@@ -86,9 +86,22 @@ const MODULE_GROUPS = [
 
 const extractModuleKey = (v) => v.split(":").pop();
 
+/* 통합 양식 매핑: 독해/어휘/배경지식은 통합 템플릿으로 연결 */
+const TEMPLATE_ID_MAP = {
+  dailyReading_training: "reading_training",
+  farm_reading: "reading_training",
+  pro_reading: "reading_training",
+  farm_vocab: "vocab_training",
+  farm_vocab_dict: "vocab_training",
+  pro_vocab: "vocab_training",
+  farm_background: "background_quiz",
+  pro_background: "background_quiz",
+};
+
 const extractTemplateId = (v) => {
   const parts = v.split(":");
-  return `${parts[0]}_${parts[1]}`;
+  const raw = `${parts[0]}_${parts[1]}`;
+  return TEMPLATE_ID_MAP[raw] || raw;
 };
 
 /* 내용 숙지 농장 모듈 값 */
