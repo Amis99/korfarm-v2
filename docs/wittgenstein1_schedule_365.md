@@ -56,11 +56,11 @@
 | 38 | 비문학 | 열펌프의 성적 계수 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 39 | 화법 | 발표 자료 해석 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 40 | 작문 | 문단 재배열 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 41 | 비문학 | ??? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
+| 41 | 비문학 | 동형암호 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 42 | 문법 | 중세국어 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 43 | 비문학 | ??? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
+| 43 | 비문학 | 상호 매체성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 44 | 문학 | 길 | docs/wittgenstein1_source_inventory.md > 길 |
-| 45 | 비문학 | ?? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
+| 45 | 비문학 | 뜻과 지시체 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 46 | 화법 | 인터뷰의 핵심 정보 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 47 | 작문 | 개념 정의 방식 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 48 | 비문학 | ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
