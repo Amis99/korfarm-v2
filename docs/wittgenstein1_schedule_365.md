@@ -196,11 +196,11 @@
 | 178 | 비문학 | 염소 라디칼과 오존 분해 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > 27수특 독서_CFC의 오존층 파괴.md |
 | 179 | 화법 | 오존층 보호 캠페인 발표 조정 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 180 | 작문 | 환경 주간 기사 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 181 | 비문학 | 타자의 재현 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
-| 182 | 문법 | 문법 개념 적용 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 183 | 비문학 | 공리주의 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
-| 184 | 문학 | 누항사 | docs/wittgenstein1_source_inventory.md > 누항사 |
-| 185 | 비문학 | 사회 이동 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
+| 181 | 비문학 | 미메시스와 이야기 정체성 | 참고용 기출 지문 > 철학_리쾨르의 자기 해석학.md.json |
+| 182 | 문법 | 구개음화의 적용 조건과 형태소 경계 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 183 | 비문학 | 공리주의와 질적 쾌락 | 참고용 기출 지문 > 인문_(가)밀의공리주의,(나)효용 이론.md.json (가) |
+| 184 | 문학 | 낙은별곡 | 참고용 기출 지문 > 낙은별곡_남도진.md (가) |
+| 185 | 비문학 | 상징 자본과 계층 재생산 | 참고용 기출 지문 > 주제통합_02_세계화에_대한_부르디외와_기든스의_견해.json (가) |
 | 186 | 화법 | 발표자의 의도 파악 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 187 | 작문 | 개요의 적절성 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 188 | 비문학 | 조세 전가 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
