@@ -186,11 +186,11 @@
 | 168 | 문법 | 조사·어미의 이형태와 음운 환경 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 169 | 비문학 | 지각부호화와 오디오 신호 압축 | 참고용 기출 지문 > 기술_오디오 신호 압축.md.json |
 | 170 | 문학 | 론도 | 참고용 기출 지문 > 론도_성석제.md |
-| 171 | 비문학 | 미니멀리즘 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
-| 172 | 화법 | 말하기 태도 판단 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 173 | 작문 | 소개문 조정 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 174 | 비문학 | 상보적 분포 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
-| 175 | 문법 | 어문 규범 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 171 | 비문학 | 위상 변위와 미니멀리즘의 청각 경험 | 참고용 기출 지문 > 인문예술_02_미니멀리즘_음악.json |
+| 172 | 화법 | 행사 설명회 발표 태도 점검 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 173 | 작문 | 진로 체험 행사 소개문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 174 | 비문학 | 상보적 분포와 음소 분석 | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
+| 175 | 문법 | 음소 배열 제약과 음절 끝소리 제약 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 176 | 비문학 | 동기 이론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 177 | 문학 | 농무 | docs/wittgenstein1_source_inventory.md > 농무 |
 | 178 | 비문학 | 대기 역전층 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
