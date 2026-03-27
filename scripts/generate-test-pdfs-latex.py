@@ -376,9 +376,13 @@ def make_question_block(num, q, is_twocol, skip_passage=False):
     lines.append(r"\vspace{4mm}")
     lines.append(r"\needspace{5\baselineskip}")
 
-    # 지문 (항상 breakable — 단/페이지 바꿈 허용)
+    # 지문 — 한 단/페이지에 못 들어갈 만큼 길면 breakable, 아니면 통째로 보호
     if passage and not skip_passage:
-        lines.append(r"\begin{tcolorbox}[passage, breakable]")
+        # 2단: ~35줄, 1단: ~45줄이 한 단/페이지 한계
+        line_limit = 30 if is_twocol else 40
+        passage_lines = count_lines(passage_raw)
+        breakopt = ", breakable" if passage_lines > line_limit else ""
+        lines.append(rf"\begin{{tcolorbox}}[passage{breakopt}]")
         lines.append(passage)
         lines.append(r"\end{tcolorbox}")
         lines.append(r"\vspace{3mm}")
