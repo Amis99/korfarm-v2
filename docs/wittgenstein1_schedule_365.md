@@ -16,21 +16,21 @@
 
 | Day | 분류 | 배치 제목 | 소스 메모 |
 |---:|---|---|---|
-| 1 | 비문학 | ???? ?? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
+| 1 | 비문학 | 해석학적 순환 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 2 | 문학 | 213호 주택 | docs/wittgenstein1_source_inventory.md > 213호 주택 |
-| 3 | 비문학 | ???? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
-| 4 | 화법 | 발표자의 의도 파악 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 5 | 작문 | 개요의 적절성 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 6 | 비문학 | ??? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
-| 7 | 문법 | 음운 변동 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 8 | 비문학 | ???? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
+| 3 | 비문학 | 회의주의 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
+| 4 | 화법 | 다회용 컵 반납대 시범 운영 발표 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 5 | 작문 | 아침 자습 전 간식 제공 건의문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 6 | 비문학 | 공론장 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
+| 7 | 문법 | 비음화와 유음화의 발음 환경 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 8 | 비문학 | 기회비용 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 9 | 문학 | 문 | docs/wittgenstein1_source_inventory.md > 문 |
-| 10 | 비문학 | ?? ???? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
-| 11 | 화법 | 청자의 반응 추론 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 12 | 작문 | 자료 통합 구성 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 13 | 비문학 | ??? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
-| 14 | 문법 | 형태소와 품사 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 15 | 비문학 | ??? | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
+| 10 | 비문학 | 죄형 법정주의 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
+| 11 | 화법 | 축제 준비 기록 방식 협의 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 12 | 작문 | 아침 독서 시간 확대 제안 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 13 | 비문학 | 항상성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
+| 14 | 문법 | 자립 형태소와 의존 형태소의 판별 기준 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 15 | 비문학 | 반도체 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 16 | 문학 | 간 | docs/wittgenstein1_source_inventory.md > 간 |
 | 17 | 비문학 | 큐비즘 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 18 | 화법 | 질문의 기능 분석 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
