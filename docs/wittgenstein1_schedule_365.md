@@ -33,10 +33,10 @@
 | 15 | 비문학 | 반도체 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 16 | 문학 | 간 | docs/wittgenstein1_source_inventory.md > 간 |
 | 17 | 비문학 | 큐비즘 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
-| 18 | 화법 | 질문의 기능 분석 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 19 | 작문 | 주장과 근거 배열 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 18 | 화법 | 다회용 컵 시범 운영 인터뷰 질문 조정 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 19 | 작문 | 열람실 운영 시간 확대 의견문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 20 | 비문학 | 언어의 지시적 불투명성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
-| 21 | 문법 | 문장 성분 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 21 | 문법 | 보어와 목적어의 판별 기준 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 22 | 비문학 | 집단 무의식과 개별화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 23 | 문학 | 갈까 보다 | docs/wittgenstein1_source_inventory.md > 갈까 보다 |
 | 24 | 비문학 | 오존층 파괴와 CFC | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
