@@ -377,7 +377,7 @@ function ProTestPage() {
                 {session?.pdfFileId && (
                   <div className="test-online-pdf" onContextMenu={e => e.preventDefault()}>
                     <iframe
-                      src={`${API_BASE}/v1/files/${session.pdfFileId}/download#toolbar=0&navpanes=0`}
+                      src={`${session.pdfFileId.startsWith("http") ? session.pdfFileId : `${API_BASE}/v1/files/${session.pdfFileId}/download`}#toolbar=0&navpanes=0`}
                       title="시험지"
                     />
                   </div>

@@ -9,6 +9,7 @@ import com.korfarm.api.paid.ContentEntity
 import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.paid.ContentVersionEntity
 import com.korfarm.api.paid.ContentVersionRepository
+import com.korfarm.api.test.TestPaperRepo
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -26,7 +27,8 @@ class ProModeService(
     private val contentVersionRepository: ContentVersionRepository,
     private val userRepository: UserRepository,
     private val economyService: EconomyService,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
+    private val testPaperRepo: TestPaperRepo
 ) {
     // 학습 아이템 유형 중 기본 4개 (잠금 해제 조건)
     private val baseTypes = setOf("reading", "vocab", "background", "logic")
@@ -329,8 +331,15 @@ class ProModeService(
         }
 
         val tests = chapterTestRepo.findByChapterIdAndStatusOrderByVersionAsc(chapterId, "active")
+        val paperIds = tests.map { it.testPaperId }
+        val paperMap = if (paperIds.isNotEmpty()) testPaperRepo.findAllById(paperIds).associateBy { it.id } else emptyMap()
         val testVersions = tests.map { t ->
-            TestVersionInfo(version = t.version, testPaperId = t.testPaperId, status = t.status)
+            TestVersionInfo(
+                version = t.version,
+                testPaperId = t.testPaperId,
+                status = t.status,
+                pdfFileId = paperMap[t.testPaperId]?.pdfFileId
+            )
         }
 
         return ChapterContentStatusResponse(

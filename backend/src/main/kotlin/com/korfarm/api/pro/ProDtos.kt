@@ -180,7 +180,8 @@ data class LinkedContentInfo(
 data class TestVersionInfo(
     val version: Int,
     val testPaperId: String,
-    val status: String
+    val status: String,
+    val pdfFileId: String? = null
 )
 
 data class AdminAnswerContentResponse(

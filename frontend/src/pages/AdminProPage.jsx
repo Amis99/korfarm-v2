@@ -916,10 +916,10 @@ function AdminProPage() {
     const selectedTest = tests.find((t) => (t.testPaperId || t.test_paper_id) === selectedTestPaperId);
     const pdfFileId = selectedTest?.pdfFileId || selectedTest?.pdf_file_id;
     if (!pdfFileId) return <p className="ap-muted">이 시험지에 연결된 PDF가 없습니다.</p>;
-    const base = API_BASE.replace(/\/$/, "");
+    const pdfSrc = pdfFileId.startsWith("http") ? pdfFileId : `${API_BASE.replace(/\/$/, "")}/v1/files/${pdfFileId}/download`;
     return (
       <div className="ap-pdf-preview">
-        <iframe src={`${base}/v1/files/${pdfFileId}/download`} title="PDF 미리보기" />
+        <iframe src={pdfSrc} title="PDF 미리보기" />
       </div>
     );
   }
