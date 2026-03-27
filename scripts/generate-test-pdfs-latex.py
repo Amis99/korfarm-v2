@@ -210,7 +210,7 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 ]
 
 % ─── 레이아웃 ───
-\usepackage[a4paper, margin=1.5cm, top=2.8cm, bottom=2cm]{{geometry}}
+\usepackage[a4paper, margin=1.5cm, top=2.8cm, bottom=2cm, heightrounded]{{geometry}}
 \usepackage{{graphicx}}
 \usepackage{{fancyhdr}}
 \usepackage{{xcolor}}
@@ -244,6 +244,7 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
     colback=passageBg, colframe=passageBorder,
     boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
     fontupper=\fontsize{{{base_pt}pt}}{{{passage_skip}pt}}\selectfont,
+    breakable,
   }},
   bogi/.style={{
     colback=bogiBg, colframe=bogiBorder,
@@ -284,6 +285,7 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 \fancyfoot[C]{{\small\textcolor{{gray}}{{— \thepage\ —}}}}
 
 % ─── 기타 설정 ───
+\raggedbottom
 \setlength{{\headheight}}{{20pt}}
 \addtolength{{\topmargin}}{{-6pt}}
 \setlength{{\parindent}}{{0pt}}
@@ -376,13 +378,9 @@ def make_question_block(num, q, is_twocol, skip_passage=False):
     lines.append(r"\vspace{4mm}")
     lines.append(r"\needspace{5\baselineskip}")
 
-    # 지문 — 한 단/페이지에 못 들어갈 만큼 길면 breakable, 아니면 통째로 보호
+    # 지문 (passage 스타일에 breakable 내장 — 넘치면 자동 분할)
     if passage and not skip_passage:
-        # 2단: ~35줄, 1단: ~45줄이 한 단/페이지 한계
-        line_limit = 30 if is_twocol else 40
-        passage_lines = count_lines(passage_raw)
-        breakopt = ", breakable" if passage_lines > line_limit else ""
-        lines.append(rf"\begin{{tcolorbox}}[passage{breakopt}]")
+        lines.append(r"\begin{tcolorbox}[passage]")
         lines.append(passage)
         lines.append(r"\end{tcolorbox}")
         lines.append(r"\vspace{3mm}")
