@@ -70,6 +70,7 @@
 | 속사미인곡 | exam-literature | 참고용 기출 지문 > 속사미인곡_이진유.md (가) | (가)/(나)/(다) 병치 source면 한 부분만 사용 | source_selected |
 | 고향 | exam-literature | 참고용 기출 지문 > 고향_이태준.md | exact excerpt only | source_selected |
 | 박꽃이 피어난 집 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 갈래 복합 md > 27수특_박꽃이 피어난 집(이학규).md (가) | exact excerpt only | source_selected |
+| 허균의 문집에 부치는 서문 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 갈래 복합 md > 27수특_허균의 문집에 부치는 서문(이항복).md (가) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
 | 운수 좋은 날 | exam-literature | 기출 문학 지문 → 작품 원문/교과서 수록본 대조 | 1회 | source_selected |
 | 월선헌 십육경가 | exam-literature | 기출 문학 지문 → 한국고전종합DB/고전시가 원문 대조 | 1회 | source_selected |
 | 유리창 | exam-literature | 기출 문학 지문 → 시 원문(위키문헌/수록본) 대조 | 1회 | source_selected |
