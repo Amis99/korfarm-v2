@@ -60,7 +60,7 @@
 | 노정기 | exam-literature | 참고용 기출 지문 > 노정기_이육사.md (가) | (가)/(나)/(다) 병치 source면 한 부분만 사용 | source_selected |
 | 오련가 | exam-literature | 참고용 기출 지문 > 오련가_이복길.md (나) | (가)/(나)/(다) 병치 source면 한 부분만 사용 | source_selected |
 | 둑방길 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 1회 | source_selected |
-| 등신불 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 1회 | source_selected |
+| 불신 시대 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 현대 소설 md > 27수특_불신 시대(박경리).md | exact excerpt only | source_selected |
 | 메밀꽃 필 무렵 | exam-literature | 기출 문학 지문 → 작품 원문/교과서 수록본 대조 | 1회 | source_selected |
 | 미스터 방 | exam-literature | 기출 문학 지문 → 작품 원문/교과서 수록본 대조 | 1회 | source_selected |
 | 바람이 불어 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 1회 | source_selected |
