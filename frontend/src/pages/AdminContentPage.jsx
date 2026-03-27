@@ -115,9 +115,13 @@ const mapContentList = (items) =>
 
 /* 템플릿 그룹 분류 */
 const TEMPLATE_GROUPS = [
-  { label: "일일 학습", prefix: "daily" },
-  { label: "농장 모드", prefix: "farm" },
-  { label: "프로 모드", prefix: "pro" },
+  { label: "일일 학습", ids: ["dailyQuiz_quiz", "reading_training"] },
+  { label: "농장 모드", ids: [
+    "vocab_training", "background_quiz", "farm_content",
+    "farm_grammar_wf", "farm_grammar_ss", "farm_grammar_pc", "farm_grammar_pos",
+    "farm_concept", "farm_logic", "farm_writing", "farm_choice"
+  ]},
+  { label: "프로 모드", ids: ["pro_reading", "pro_vocab", "pro_background", "pro_logic", "pro_answer"] },
 ];
 
 function AdminContentPage() {
@@ -246,7 +250,7 @@ function AdminContentPage() {
               {showTemplatePanel && (
                 <div className="admin-template-dropdown">
                   {TEMPLATE_GROUPS.map((group) => {
-                    const items = LEARNING_TEMPLATES.filter((t) => t.id.startsWith(group.prefix));
+                    const items = LEARNING_TEMPLATES.filter((t) => group.ids.includes(t.id));
                     if (items.length === 0) return null;
                     return (
                       <div key={group.prefix} className="admin-template-group">
