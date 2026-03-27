@@ -49,8 +49,8 @@
 | 날개 또는 수갑 | exam-literature | 기출 문학 지문 → 작품 수록본/원문 대조 | 서로 다른 대목 2회까지 | source_selected |
 | 난쟁이가 쏘아 올린 작은 공 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 1회 | source_selected |
 | 남신의주 유동 박시봉방 | exam-literature | 기출 문학 지문 → 시 원문(위키문헌/수록본) 대조 | 1회 | source_selected |
-| 낯익은 세상 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 1회 | source_selected |
-| 너에게 묻는다 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 1회 | source_selected |
+| 하진양문록 | exam-literature | 참고용 기출 지문 > 하진양문록_작자미상.md → 기출 문학 지문 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
+| 혼자 가는 먼 집 | exam-literature | 참고용 기출 지문 > 혼자 가는 먼 집_허수영.md (나) → 기출 문학 지문 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 논 이야기 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 1회 | source_selected |
 | 농무 | exam-literature | 기출 문학 지문 → 시 원문(위키문헌/수록본) 대조 | 1회 | source_selected |
 | 누항사 | exam-literature | 기출 문학 지문 → 한국고전종합DB/고전시가 원문 대조 | 1회 | source_selected |
