@@ -76,16 +76,16 @@
 | 58 | 문학 | 김원전 | 참고용 기출 지문 > 김원전_작자미상.md |
 | 59 | 비문학 | IS-LM 모형과 IS-MP 모형의 금리 결정 | 참고용 기출 지문 > 사회문화_04_거시_경제_이론의_변천_및_IS-LM과_IS-MP_모형_비교_분석.json |
 | 60 | 화법 | 축제 외부인 출입 범위 토론 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 61 | 작문 | 반박문 쓰기 (유형) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 62 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
-| 63 | 문법 | 의미 관계 (유형) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 64 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
-| 65 | 문학 | 김진옥전 | docs/wittgenstein2_source_inventory.md > 김진옥전 |
-| 66 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
-| 67 | 화법 | 공감적 듣기와 재구성 (유형) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 68 | 작문 | 보고서 구성 (유형) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 69 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
-| 70 | 문법 | 담화와 지시 표현 (유형) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 61 | 작문 | 축제 외부인 전면 출입 금지 반박문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 62 | 비문학 | 특허 침해 판단과 구성 요소 완비의 원칙 | 참고용 기출 지문 > 사회_(가)특허권 인정,(나)특허권 침해.md.json (나) |
+| 63 | 문법 | 의존 명사 '바'와 '수'의 결합 조건 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 64 | 비문학 | 열펌프의 냉매 순환과 성적 계수 | 참고용 기출 지문 > 과학_열펌프.md.json |
+| 65 | 문학 | 김진옥전 | 참고용 기출 지문 > 김진옥전_작자미상.md |
+| 66 | 비문학 | 지각부호화와 차폐 문턱값에 따른 오디오 신호 압축 | 참고용 기출 지문 > 기술_오디오 신호 압축.md.json |
+| 67 | 화법 | 학교 팟캐스트 소개 발표 점검 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 68 | 작문 | 다회용 컵 대여 시범 운영 보고서 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 69 | 비문학 | 큐비즘의 다중 시점과 분석적·종합적 전개 | 참고용 기출 지문 > 예술_큐비즘.md.json |
+| 70 | 문법 | 지시 표현 '이·그·저'의 담화 거리와 선행문맥 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 71 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-language |
 | 72 | 문학 | 꽃피는 시절 | docs/wittgenstein2_source_inventory.md > 꽃피는 시절 |
 | 73 | 비문학 | ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-psychology |
