@@ -191,11 +191,11 @@
 | 173 | 작문 | 지역 서점 탐방 동아리 소개문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 174 | 비문학 | 담화 공동체 독자와 상호 텍스트성 | 참고용 기출 지문 > 지문으로이해하기_08_담화_공동체_독자.json |
 | 175 | 문법 | 보조사 '만'과 '밖에'의 한정 의미와 부정 결합 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 176 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-psychology |
-| 177 | 문학 | 농무 | docs/wittgenstein2_source_inventory.md > 농무 |
-| 178 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-environment |
-| 179 | 화법 | 상황 맥락 추론 (적용) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 180 | 작문 | 제목 설계 (적용) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 176 | 비문학 | 현실요법의 기본 욕구와 선택 행동 | 참고용 기출 지문 > 인문_현실요법과 욕구.md.json |
+| 177 | 문학 | 농부사 | 참고용 기출 지문 > 농부사_김기홍.md (가) |
+| 178 | 비문학 | CFC의 광분해와 오존층 파괴 메커니즘 | 참고용 기출 지문 > 과학기술_11_CFC의_오존층_파괴.json |
+| 179 | 화법 | 환경 캠페인 발표 역할 조정 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 180 | 작문 | 마을 기록 사진전 소개문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 181 | 비문학 | ???? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-humanities |
 | 182 | 문법 | 문법 개념 적용 (적용) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 183 | 비문학 | ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-philosophy |
