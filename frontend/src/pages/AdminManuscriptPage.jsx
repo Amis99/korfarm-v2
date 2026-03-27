@@ -246,6 +246,63 @@ function SectionEditor({ sectionKey, data, onChange, onRemove }) {
   );
 }
 
+// ─── 수정 이력 모달 ───
+function EditHistoryModal({ contentId, onClose }) {
+  const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    if (!contentId) return;
+    setLoading(true);
+    apiGet(`/v1/admin/content/${contentId}/edit-history`)
+      .then(data => setLogs(data || []))
+      .catch(() => setLogs([]))
+      .finally(() => setLoading(false));
+  }, [contentId]);
+
+  const fmtDate = (d) => {
+    if (!d) return "-";
+    const dt = new Date(d);
+    if (isNaN(dt)) return d;
+    return dt.toLocaleString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+  };
+
+  return (
+    <div className="ms-modal-backdrop" onClick={onClose}>
+      <div className="ms-modal" onClick={e => e.stopPropagation()}>
+        <div className="ms-modal-header">
+          <span className="ms-modal-title">수정 이력</span>
+          <button className="ms-field-remove" onClick={onClose}>
+            <span className="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div className="ms-modal-body">
+          {loading ? (
+            <div className="ms-loading">불러오는 중...</div>
+          ) : logs.length === 0 ? (
+            <div style={{ color: "#6a7a6e", textAlign: "center", padding: 20 }}>이력이 없습니다</div>
+          ) : (
+            <table className="ms-log-table">
+              <thead>
+                <tr><th>일시</th><th>작업</th><th>작업자</th><th>요약</th></tr>
+              </thead>
+              <tbody>
+                {logs.map((log, i) => (
+                  <tr key={log.id || i}>
+                    <td>{fmtDate(log.created_at ?? log.createdAt)}</td>
+                    <td><span className={`ms-log-action ${(log.action || "").toLowerCase()}`}>{log.action}</span></td>
+                    <td>{log.editor_name ?? log.editorName ?? log.editor_id ?? log.editorId ?? "-"}</td>
+                    <td>{log.summary || "-"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── 최상위 섹션 추가 ───
 function AddSectionForm({ onAdd }) {
   const [show, setShow] = useState(false);
@@ -336,6 +393,7 @@ function AdminManuscriptPage() {
   const [toast, setToast] = useState(null);
   const [schemaOpen, setSchemaOpen] = useState(false);
   const [bulkDlOpen, setBulkDlOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
   const bulkRef = useRef(null);
 
   const fileInputRef = useRef(null);
@@ -539,6 +597,11 @@ function AdminManuscriptPage() {
         <div className="ms-editor-header">
           <span className="ms-editor-title">{title}</span>
           <div className="ms-editor-actions">
+            {selectedItem?.contentId && (
+              <button className="ms-btn ms-btn-ghost" onClick={() => setHistoryOpen(true)}>
+                <span className="material-symbols-outlined">history</span>이력
+              </button>
+            )}
             <button className="ms-btn ms-btn-ghost" onClick={toggleRaw}>
               <span className="material-symbols-outlined">{rawMode ? "view_agenda" : "code"}</span>
               {rawMode ? "구조화" : "Raw JSON"}
@@ -644,6 +707,9 @@ function AdminManuscriptPage() {
       </div>
 
       {toast && <Toast msg={toast.msg} type={toast.type} onDone={() => setToast(null)} />}
+      {historyOpen && selectedItem?.contentId && (
+        <EditHistoryModal contentId={selectedItem.contentId} onClose={() => setHistoryOpen(false)} />
+      )}
     </AdminLayout>
   );
 }
