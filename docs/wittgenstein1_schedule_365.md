@@ -116,11 +116,11 @@
 | 98 | 문법 | 자음군 단순화와 ㅎ 탈락 (적용) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
 | 99 | 비문학 | 인지 부하 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 100 | 문학 | 낙은별곡 | docs/wittgenstein1_source_inventory.md > 낙은별곡 |
-| 101 | 비문학 | 지속 가능성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
+| 101 | 비문학 | 오존층 회복과 몬트리올 의정서 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 md > 27수특 독서_CFC의 오존층 파괴.md |
 | 102 | 화법 | 청자의 반응 추론 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 103 | 작문 | 자료 통합 구성 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 104 | 비문학 | 텍스트의 맥락성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
-| 105 | 문법 | 형태소와 품사 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 104 | 비문학 | 의미론적 내용과 사용상의 내용 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 사용설명서 ocr > 27수특 독서 사용설명서(1-1).md (가) |
+| 105 | 문법 | 사잇소리 현상과 ㄴ 첨가 (적용) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
 | 106 | 비문학 | 심신 이원론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 107 | 문학 | 낙천동운 | docs/wittgenstein1_source_inventory.md > 낙천동운 |
 | 108 | 비문학 | 사회화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
