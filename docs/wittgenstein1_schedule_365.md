@@ -146,10 +146,10 @@
 | 128 | 문학 | 날개 또는 수갑(1) | docs/wittgenstein1_source_inventory.md > 날개 또는 수갑 |
 | 129 | 비문학 | 담화 공동체와 상호 텍스트성 | 참고용 기출 지문 > 지문으로이해하기_08_담화_공동체_독자.json |
 | 130 | 화법 | 자전거 거치대 확대 발표 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 131 | 작문 | 문단 재배열 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 132 | 비문학 | 자유 의지 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
-| 133 | 문법 | 중세국어 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 134 | 비문학 | 역할 갈등 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
+| 131 | 작문 | 급식실 잔반 줄이기 안내문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 132 | 비문학 | 의미 내재주의와 외재주의 | 참고용 기출 지문 > 철학_내재주의와 외재주의.md.json |
+| 133 | 문법 | 중세국어의 객체 높임 선어말 어미 '-ᄌᆞᆸ-' (적용) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
+| 134 | 비문학 | 교류 욕구와 정체성 검증 | 참고용 기출 지문 > 사회문화_10_교류_욕구_이론.json |
 | 135 | 문학 | 날개 또는 수갑(2) | docs/wittgenstein1_source_inventory.md > 날개 또는 수갑 |
 | 136 | 비문학 | 한계 효용 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 137 | 화법 | 인터뷰의 핵심 정보 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
