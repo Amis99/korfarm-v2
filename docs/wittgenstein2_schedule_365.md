@@ -91,11 +91,11 @@
 | 73 | 비문학 | 자아의 방어기제와 불안 조절 | 참고용 기출 지문 > 인문_(가)정신분석이론,(나)분석심리학.md.json (가) |
 | 74 | 화법 | 학교 축제 환경 부스 발표 순서 점검 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 75 | 작문 | 야간 자율학습 선택제 확대 의견문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 76 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-environment |
-| 77 | 문법 | 호응과 중의성 (유형) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 78 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-humanities |
-| 79 | 문학 | 나무처럼 젊은이들도 | docs/wittgenstein2_source_inventory.md > 나무처럼 젊은이들도 |
-| 80 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-philosophy |
+| 76 | 비문학 | CFC의 광분해와 오존층 파괴 메커니즘 | 참고용 기출 지문 > 과학기술_11_CFC의_오존층_파괴.json |
+| 77 | 문법 | 음소 배열 제약과 어두 자음군 회피 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 78 | 비문학 | 사적 공간과 공적 공간의 경계와 파사주 | 참고용 기출 지문 > 인문_사적공간과 공적공간의 구분.md.json |
+| 79 | 문학 | 나무처럼 젊은이들도 | 참고용 기출 지문 > 나무처럼 젊은이들도_김광규.md (가) |
+| 80 | 비문학 | 인포그와 인포스피어의 상호 연결 | 참고용 기출 지문 > 인문_플로리디의 정보 철학.md.json |
 | 81 | 화법 | 말하기 태도 판단 (유형) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 82 | 작문 | 소개문 조정 (유형) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 83 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-society |
