@@ -42,7 +42,7 @@
 | 낙성비룡 | exam-literature | 기출 문학 지문 → 고전소설 원문(한국고전종합DB/교재 수록본) 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 낙엽송 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 낙은별곡 | exam-literature | 기출 문학 지문 → 고전시가 원문(한국고전종합DB/교재 수록본) 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
-| 낙천동운 | exam-literature | 기출 문학 지문 → 고전시가 원문(한국고전종합DB/교재 수록본) 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
+| 낙천등운 | exam-literature | 참고용 기출 지문 > 낙천동운_작자미상.md → 기출 문학 지문 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 낙타 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 낙토의 아이들 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 날개 또는 수갑 | exam-literature | 기출 문학 지문 → 작품 수록본/원문 대조 | 서로 다른 대목 2회까지 | source_selected |

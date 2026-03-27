@@ -121,9 +121,9 @@
 | 103 | 작문 | 자료 통합 구성 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 104 | 비문학 | 의미론적 내용과 사용상의 내용 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 사용설명서 ocr > 27수특 독서 사용설명서(1-1).md (가) |
 | 105 | 문법 | 사잇소리 현상과 ㄴ 첨가 (적용) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
-| 106 | 비문학 | 심신 이원론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
-| 107 | 문학 | 낙천동운 | docs/wittgenstein1_source_inventory.md > 낙천동운 |
-| 108 | 비문학 | 사회화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
+| 106 | 비문학 | 기능주의와 확장 인지 | 참고용 기출 지문 > 인문_(가)심리철학,(나)체험으로서의 지각.md.json (가) |
+| 107 | 문학 | 낙천등운 | 참고용 기출 지문 > 낙천동운_작자미상.md |
+| 108 | 비문학 | 시민 참여와 참여 민주주의 | 참고용 기출 지문 > 사회문화_09_시민_참여에_대한_견해.json |
 | 109 | 화법 | 질문의 기능 분석 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 110 | 작문 | 주장과 근거 배열 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 111 | 비문학 | 비교우위 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
