@@ -221,11 +221,11 @@
 | 203 | 문법 | 의존 명사 '바'와 관형사형 어미의 결합 조건 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 204 | 비문학 | 오존층 파괴와 염소 라디칼의 촉매 작용 | 참고용 기출 지문 > 과학기술_11_CFC의_오존층_파괴.json |
 | 205 | 문학 | 소년 | docs/wittgenstein1_source_inventory.md > 소년 |
-| 206 | 비문학 | 해석 공동체 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
-| 207 | 화법 | 토의 규칙과 역할 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 208 | 작문 | 정보 통합 글쓰기 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 209 | 비문학 | 의무론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
-| 210 | 문법 | 피동과 사동 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 206 | 비문학 | 이야기 정체성과 자기 해석 | 참고용 기출 지문 > 철학_리쾨르의 자기 해석학.md.json |
+| 207 | 화법 | 축제 분리수거 부스 운영 토의 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 208 | 작문 | 학교 진로 행사 안내문 통합 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 209 | 비문학 | 질적 쾌락과 공리주의 | 참고용 기출 지문 > 인문_(가)밀의공리주의,(나)효용 이론.md.json (가) |
+| 210 | 문법 | 사동 접미사와 어휘적 사동의 구별 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 211 | 비문학 | 규범과 일탈 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 212 | 문학 | 님의 침묵 | docs/wittgenstein1_source_inventory.md > 님의 침묵 |
 | 213 | 비문학 | 인플레이션 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
