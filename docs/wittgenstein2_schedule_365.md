@@ -186,11 +186,11 @@
 | 168 | 문법 | 보조사 '까지'와 '조차'의 첨가 의미와 최소성 강조 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 169 | 비문학 | 지각부호화의 차폐 문턱값과 비트 할당 | 참고용 기출 지문 > 기술_오디오 신호 압축.md.json |
 | 170 | 문학 | 론도 | 참고용 기출 지문 > 론도_성석제.md |
-| 171 | 비문학 | ????? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
-| 172 | 화법 | 말하기 태도 판단 (적용) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 173 | 작문 | 소개문 조정 (적용) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 174 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-language |
-| 175 | 문법 | 어문 규범 (적용) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 171 | 비문학 | 미니멀리즘 음악의 반복과 위상 변위 | 참고용 기출 지문 > 인문예술_02_미니멀리즘_음악.json |
+| 172 | 화법 | 축제 무대 진행 순서 조정 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 173 | 작문 | 지역 서점 탐방 동아리 소개문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 174 | 비문학 | 담화 공동체 독자와 상호 텍스트성 | 참고용 기출 지문 > 지문으로이해하기_08_담화_공동체_독자.json |
+| 175 | 문법 | 보조사 '만'과 '밖에'의 한정 의미와 부정 결합 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 176 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-psychology |
 | 177 | 문학 | 농무 | docs/wittgenstein2_source_inventory.md > 농무 |
 | 178 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-environment |
