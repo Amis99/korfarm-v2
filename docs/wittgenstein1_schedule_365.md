@@ -191,11 +191,11 @@
 | 173 | 작문 | 진로 체험 행사 소개문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 174 | 비문학 | 상보적 분포와 음소 분석 | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
 | 175 | 문법 | 음소 배열 제약과 음절 끝소리 제약 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 176 | 비문학 | 동기 이론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
-| 177 | 문학 | 농무 | docs/wittgenstein1_source_inventory.md > 농무 |
-| 178 | 비문학 | 대기 역전층 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
-| 179 | 화법 | 상황 맥락 추론 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 180 | 작문 | 제목 설계 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 176 | 비문학 | 개별화와 그림자의 통합 | 참고용 기출 지문 > 인문_(가)정신분석이론,(나)분석심리학.md.json (나) |
+| 177 | 문학 | 사과밭을 지나며 | docs/wittgenstein1_source_inventory.md > 사과밭을 지나며 |
+| 178 | 비문학 | 염소 라디칼과 오존 분해 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > 27수특 독서_CFC의 오존층 파괴.md |
+| 179 | 화법 | 오존층 보호 캠페인 발표 조정 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 180 | 작문 | 환경 주간 기사 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 181 | 비문학 | 타자의 재현 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 182 | 문법 | 문법 개념 적용 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 183 | 비문학 | 공리주의 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
