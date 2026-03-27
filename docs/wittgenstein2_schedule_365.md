@@ -196,11 +196,11 @@
 | 178 | 비문학 | CFC의 광분해와 오존층 파괴 메커니즘 | 참고용 기출 지문 > 과학기술_11_CFC의_오존층_파괴.json |
 | 179 | 화법 | 환경 캠페인 발표 역할 조정 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 180 | 작문 | 마을 기록 사진전 소개문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 181 | 비문학 | ???? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-humanities |
-| 182 | 문법 | 문법 개념 적용 (적용) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 183 | 비문학 | ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-philosophy |
-| 184 | 문학 | 누항사 | docs/wittgenstein2_source_inventory.md > 누항사 |
-| 185 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-society |
+| 181 | 비문학 | 미메시스의 삼중 구조와 이야기 정체성 | 참고용 기출 지문 > 철학_리쾨르의 자기 해석학.md.json |
+| 182 | 문법 | 명사절 어미 '-(으)ㅁ'과 '-기'의 통사 기능과 의미 차이 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 183 | 비문학 | 롤스의 절차적 정의와 매킨타이어의 공동체 비판 | 참고용 기출 지문 > 롤스와_매킨타이어의_정의관.json |
+| 184 | 문학 | 거꾸로 보기 | 참고용 기출 지문 > 거꾸로 보기_법정.md exact excerpt |
+| 185 | 비문학 | 공공 저널리즘의 공론장 형성과 방법론적 객관성 | 참고용 기출 지문 > 사회_공공 저널리즘.md.json |
 | 186 | 화법 | 발표자의 의도 파악 (심화) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 187 | 작문 | 개요의 적절성 (심화) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 188 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-economy |
