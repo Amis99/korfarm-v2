@@ -116,11 +116,11 @@
 | 98 | 문법 | 음절 끝소리 규칙 뒤 비음화와 유음화의 적용 순서 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 99 | 비문학 | 현실요법의 기본 욕구와 선택 행동 | 참고용 기출 지문 > 인문_현실요법과 욕구.md.json |
 | 100 | 문학 | 낙은별곡 | 참고용 기출 지문 > 낙은별곡_남도진.md (가) |
-| 101 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-environment |
-| 102 | 화법 | 청자의 반응 추론 (적용) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 103 | 작문 | 자료 통합 구성 (적용) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 104 | 비문학 | ???? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-humanities |
-| 105 | 문법 | 형태소와 품사 (적용) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 101 | 비문학 | CFC의 광분해와 오존층 파괴 메커니즘 | 참고용 기출 지문 > 과학기술_11_CFC의_오존층_파괴.json |
+| 102 | 화법 | 환경 포럼 발표 청중 반응 점검 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 103 | 작문 | 학교 숲 가꾸기 봉사 모집 안내문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 104 | 비문학 | 로크의 본유 관념 비판과 백지설 | 참고용 기출 지문 > 인문_(가) 본유 관념과 로크 _ (나) 본유 관념과 라이프니츠.md.json (가) |
+| 105 | 문법 | 합성어 내부의 사이시옷 표기와 된소리되기 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 106 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-philosophy |
 | 107 | 문학 | 낙천동운 | docs/wittgenstein2_source_inventory.md > 낙천동운 |
 | 108 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-society |
