@@ -82,17 +82,17 @@
 | 64 | 비문학 | 유전 정보 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 65 | 문학 | 김진옥전 | docs/wittgenstein1_source_inventory.md > 김진옥전 |
 | 66 | 비문학 | 데이터 압축 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
-| 67 | 화법 | 공감적 듣기와 재구성 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 68 | 작문 | 보고서 구성 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 67 | 화법 | 발표 준비 고민 상담 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 68 | 작문 | 학교 주변 미세먼지 조사 보고서 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 69 | 비문학 | 재현과 추상 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
-| 70 | 문법 | 담화와 지시 표현 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 70 | 문법 | 지시어 '이·그·저'의 현장지시와 문맥지시 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 71 | 비문학 | 음운 변동 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 72 | 문학 | 꽃피는 시절 | docs/wittgenstein1_source_inventory.md > 꽃피는 시절 |
 | 73 | 비문학 | 휴리스틱 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
-| 74 | 화법 | 발표 구성의 효과 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 75 | 작문 | 논설문 전개 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 74 | 화법 | 일회용품 줄이기 환경 캠페인 발표 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 75 | 작문 | 쉬는 시간 휴대전화 사용 조정 논설문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 76 | 비문학 | 기후 피드백 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
-| 77 | 문법 | 호응과 중의성 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 77 | 문법 | 관형절 수식 범위와 중의성 해소 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 78 | 비문학 | 미적 거리 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 79 | 문학 | 나무처럼 젊은이들도 | docs/wittgenstein1_source_inventory.md > 나무처럼 젊은이들도 |
 | 80 | 비문학 | 동일성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
