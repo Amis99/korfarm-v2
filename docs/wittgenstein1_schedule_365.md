@@ -366,16 +366,16 @@
 | 348 | 작문 | 야간 도서관 운영 찬성 논설문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 349 | 비문학 | 샤딩의 데이터 지역성과 장애 허용성 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > 2027 수능특강 독서 md > 27수특 독서_샤딩.md |
 | 350 | 문법 | 관형절 수식 범위와 중의성 해소 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 351 | 비문학 | 아방가르드 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
-| 352 | 문학 | 진달래꽃 | docs/wittgenstein1_source_inventory.md > 진달래꽃 |
-| 353 | 비문학 | 의미 자질 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
-| 354 | 화법 | 말하기 태도 판단 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 355 | 작문 | 소개문 조정 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 356 | 비문학 | 학습된 무기력 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
-| 357 | 문법 | 어문 규범 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 358 | 비문학 | 탄소 중립 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
-| 359 | 문학 | 하단에서 | docs/wittgenstein1_source_inventory.md > 하단에서 |
-| 360 | 비문학 | 문화 자본 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
+| 351 | 비문학 | 아방가르드의 예술 자율성과 제도화의 역설 | 참고용 기출 지문 > 예술_(가)아방가르드,(나)비디오 아트.md.json (가) |
+| 352 | 문학 | 정릉 살면서 | docs/wittgenstein1_source_inventory.md > 정릉 살면서 |
+| 353 | 비문학 | 기표·기의 관계와 의미 자질의 분절 | 참고용 기출 지문 > 인문_(가) 카의 역사관 _ (나) 언어로의 전환과 역사학.md.json (나) |
+| 354 | 화법 | 발표 연습 뒤 태도 피드백 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 355 | 작문 | 동아리 소개문 조정 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 356 | 비문학 | 무의식의 구조와 방어기제 | 참고용 기출 지문 > 인문_(가)정신분석이론,(나)분석심리학.md.json (가) |
+| 357 | 문법 | 음소 배열 제약과 음절 끝소리 규칙의 관계 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 358 | 비문학 | CFC와 오존층 파괴의 촉매 반응 | 참고용 기출 지문 > 과학기술_11_CFC의_오존층_파괴.json |
+| 359 | 문학 | 하단에서 | 참고용 기출 지문 > 하단에서_박목월.md (가) |
+| 360 | 비문학 | 문화 자본과 상징 자본의 재생산 | 참고용 기출 지문 > 주제통합_02_세계화에_대한_부르디외와_기든스의_견해.json (가) |
 | 361 | 화법 | 상황 맥락 추론 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 362 | 작문 | 제목 설계 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 363 | 비문학 | 타자 인식 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |

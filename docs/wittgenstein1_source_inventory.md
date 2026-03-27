@@ -79,8 +79,8 @@
 | 그 방을 생각하며 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 현대 시 md > 27수특_그 방을 생각하며(김수영).md (가) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
 | 달밤 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 현대 시 md > 27수특_그 방을 생각하며(김수영).md (나) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
 | 정처관군동 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 고전 시가 md > 27수특_정처관군동(최명길).md (나) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
-| 진달래꽃 | exam-literature | 기출 문학 지문 → 시 원문(위키문헌/수록본) 대조 | 1회 | source_selected |
-| 하단에서 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 1회 | source_selected |
+| 정릉 살면서 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 현대 시 md > 27수특_정릉 살면서(박재삼).md (나) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
+| 하단에서 | exam-literature | 참고용 기출 지문 > 하단에서_박목월.md (가) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
 
 ## 화법·작문·문법 source 목록
 
