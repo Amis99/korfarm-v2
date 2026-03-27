@@ -88,20 +88,20 @@ def html_to_latex(s):
 
 def parse_markers(stem):
     """stem에서 <보기>, <조건> 마커를 분리.
-    줄 시작 또는 빈줄 뒤에 오는 독립적인 <보기>/<조건> 태그만 인식.
-    문장 중간의 '조건' 텍스트는 건드리지 않음."""
+    태그가 줄에 단독으로 있을 때만 인식 (뒤에 바로 텍스트가 오면 무시).
+    예: "<보기>\n내용" → 인식, "<보기>의 민수가" → 무시."""
     if not stem:
         return "", "", ""
     main_text = stem
     bogi = ""
     condition = ""
-    # <조건> — 줄 시작에 위치한 태그만 매칭
-    m = re.split(r"(?:^|\n)\s*<조건>\s*\n?", main_text)
+    # <조건> — 태그가 줄에 단독으로 위치할 때만 (뒤에 줄바꿈 또는 문자열 끝)
+    m = re.split(r"(?:^|\n)[ \t]*<조건>[ \t]*(?:\n|$)", main_text)
     if len(m) > 1:
         main_text = m[0]
         condition = m[1].strip()
-    # <보기> — 줄 시작에 위치한 태그만 매칭
-    m = re.split(r"(?:^|\n)\s*<보기>\s*\n?", main_text)
+    # <보기> — 태그가 줄에 단독으로 위치할 때만
+    m = re.split(r"(?:^|\n)[ \t]*<보기>[ \t]*(?:\n|$)", main_text)
     if len(m) > 1:
         main_text = m[0]
         bogi = m[1].strip()
@@ -112,7 +112,9 @@ def process_text(raw):
     """HTML → LaTeX 변환 후 이스케이프"""
     if not raw:
         return ""
-    text = html_to_latex(raw)
+    # 리터럴 \n 문자열 → 실제 줄바꿈 (DB에 이스케이프된 채 저장된 경우)
+    text = raw.replace("\\n", "\n")
+    text = html_to_latex(text)
     protected = []
     def protect(m):
         idx = len(protected)
@@ -129,6 +131,7 @@ def nl_to_latex(s):
     """줄바꿈 → LaTeX 줄바꿈"""
     if not s:
         return s
+    s = s.strip()
     s = re.sub(r"\n\n+", r"\n\\vspace{4pt}\n", s)
     s = s.replace("\n", " \\\\{}\n")
     return s
@@ -216,7 +219,6 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 \usepackage{{xcolor}}
 \usepackage{{tikz}}
 \usepackage[most]{{tcolorbox}}
-{"\\usepackage{multicol}" if is_twocol else ""}
 \usepackage{{enumitem}}
 \usepackage{{setspace}}
 \usepackage{{needspace}}
@@ -380,6 +382,8 @@ def make_question_block(num, q, is_twocol, skip_passage=False):
 
     # 지문 (passage 스타일에 breakable 내장 — 넘치면 자동 분할)
     if passage and not skip_passage:
+        lines.append(r"{\small\textbf{※ 다음 글을 읽고 물음에 답하시오.}}")
+        lines.append(r"\vspace{2mm}")
         lines.append(r"\begin{tcolorbox}[passage]")
         lines.append(passage)
         lines.append(r"\end{tcolorbox}")
@@ -444,10 +448,14 @@ def generate_tex(paper, questions):
     is_twocol = lid in TWO_COLUMN_LEVELS
 
     tex = make_preamble(lid, ll, cn, total_qs, total_pts)
-    tex += make_header_block(ll, cn)
 
     if is_twocol:
-        tex += "\\begin{multicols}{2}\n"
+        # 네이티브 \twocolumn 사용 — multicol과 달리 표준 출력 루틴을 써서
+        # tcolorbox breakable이 칼럼 분할을 정상 처리함
+        header = make_header_block(ll, cn)
+        tex += f"\\twocolumn[{header}]\n"
+    else:
+        tex += make_header_block(ll, cn)
 
     last_passage = None
     for q in questions:
@@ -457,9 +465,6 @@ def generate_tex(paper, questions):
         tex += "\n\n"
         if cur_passage:
             last_passage = cur_passage
-
-    if is_twocol:
-        tex += "\\end{multicols}\n"
 
     tex += "\\end{document}\n"
     return tex
