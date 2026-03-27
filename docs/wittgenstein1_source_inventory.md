@@ -63,7 +63,7 @@
 | 불신 시대 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 현대 소설 md > 27수특_불신 시대(박경리).md | exact excerpt only | source_selected |
 | 너무 큰 나무 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 실전 학습 md > 27 수특_너무 큰 나무(최일남).md | exact excerpt only | source_selected |
 | 미망 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 현대 소설 md > 27수특_미망(김원일).md | exact excerpt only | source_selected |
-| 바람이 불어 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 1회 | source_selected |
+| 별똥 떨어진 데 | exam-literature | 참고용 기출 지문 > 별똥 떨어진 데_윤동주.md (나) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
 | 봄봄 | exam-literature | 기출 문학 지문 → 작품 원문/교과서 수록본 대조 | 1회 | source_selected |
 | 사미인곡 | exam-literature | 기출 문학 지문 → 한국고전종합DB/고전시가 원문 대조 | 1회 | source_selected |
 | 성북동 비둘기 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 1회 | source_selected |

@@ -266,11 +266,11 @@
 | 248 | 비문학 | 분석적 큐비즘과 종합적 큐비즘 | 참고용 기출 지문 > 예술_큐비즘.md.json |
 | 249 | 화법 | 동아리 역할 갈등 상담 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 250 | 작문 | 축제 만족도 조사 보고서 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 251 | 비문학 | 화행 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
-| 252 | 문법 | 담화와 지시 표현 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 253 | 비문학 | 사회적 촉진 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
-| 254 | 문학 | 바람이 불어 | docs/wittgenstein1_source_inventory.md > 바람이 불어 |
-| 255 | 비문학 | 사막화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
+| 251 | 비문학 | 담화 공동체 독자와 상호 텍스트성 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > 2027 수능특강 독서 md > 27수특 독서_담화 공동체 독자.md |
+| 252 | 문법 | 지시 표현 '이·그·저'의 화용 거리와 문맥 해석 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 253 | 비문학 | 프로이트의 방어 기제와 승화 | 참고용 기출 지문 > 인문_(가)정신분석이론,(나)분석심리학.md.json (가) |
+| 254 | 문학 | 별똥 떨어진 데 | docs/wittgenstein1_source_inventory.md > 별똥 떨어진 데 |
+| 255 | 비문학 | CFC와 오존층 파괴 | 참고용 기출 지문 > 과학기술_11_CFC의_오존층_파괴.json |
 | 256 | 화법 | 발표 구성의 효과 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 257 | 작문 | 논설문 전개 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 258 | 비문학 | 언어의 임의성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
