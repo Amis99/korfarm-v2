@@ -126,11 +126,11 @@
 | 108 | 비문학 | 시민 참여와 참여 민주주의 | 참고용 기출 지문 > 사회문화_09_시민_참여에_대한_견해.json |
 | 109 | 화법 | 질문의 기능 분석 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 110 | 작문 | 주장과 근거 배열 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 111 | 비문학 | 비교우위 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
-| 112 | 문법 | 문장 성분 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 113 | 비문학 | 책임 능력 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
-| 114 | 문학 | 낙타 | docs/wittgenstein1_source_inventory.md > 낙타 |
-| 115 | 비문학 | 세포 호흡 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
+| 111 | 비문학 | 독점시장과 한계수입 | 참고용 기출 지문 > 경제_(가)완전경쟁시장,(나)공정거래법.md.json (가) |
+| 112 | 문법 | 객체 높임 조사 '-께'와 특수 어휘 (적용) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
+| 113 | 비문학 | 미성년자의 계약 취소권 | 참고용 기출 지문 > 사회_미성년자의 계약취소권.md.json |
+| 114 | 문학 | 낙타 | 참고용 기출 지문 > 낙타_신경림.md (나) |
+| 115 | 비문학 | 에너지 대사와 항상성 | 참고용 기출 지문 > 과학기술_09_인체_내_에너지_대사와_항상성.json |
 | 116 | 화법 | 토의 규칙과 역할 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 117 | 작문 | 정보 통합 글쓰기 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 118 | 비문학 | 운영체제 스케줄링 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
