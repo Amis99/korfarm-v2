@@ -321,10 +321,10 @@
 | 303 | 문학 | 허균의 문집에 부치는 서문 | docs/wittgenstein1_source_inventory.md > 허균의 문집에 부치는 서문 |
 | 304 | 비문학 | 확장 인지와 파생적 상태 | 참고용 기출 지문 > 인문_(가)심리철학,(나)체험으로서의 지각.md.json (가) |
 | 305 | 화법 | 도서관 휴대 전화 보관함 설치 제안 발표 대본 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 306 | 작문 | 고쳐쓰기 전략 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 307 | 비문학 | 순환 경제 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
-| 308 | 문법 | 높임과 시간 표현 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 309 | 비문학 | 독자 반응 이론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
+| 306 | 작문 | 교내 토론회 안내문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 307 | 비문학 | CFC와 오존층 파괴 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > 2027 수능특강 독서 md > 27수특 독서_CFC의 오존층 파괴.md |
+| 308 | 문법 | 선어말 어미 '-겠-'과 '-더-'의 의미 차이 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 309 | 비문학 | 뜻과 지시체의 구분 | 참고용 기출 지문 > 인문예술_06_통일성_명제_관련_문제에_대한_프레게와_러셀의_이론.json |
 | 310 | 문학 | 월선헌 십육경가 | docs/wittgenstein1_source_inventory.md > 월선헌 십육경가 |
 | 311 | 비문학 | 목적론 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 312 | 화법 | 발표 자료 해석 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
