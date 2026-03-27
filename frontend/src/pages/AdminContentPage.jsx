@@ -115,9 +115,9 @@ const mapContentList = (items) =>
 
 /* 템플릿 그룹 분류 */
 const TEMPLATE_GROUPS = [
-  { label: "일일 학습", ids: ["dailyQuiz_quiz", "reading_training"] },
+  { label: "일일 학습", ids: ["dailyQuiz_quiz", "daily_reading"] },
   { label: "농장 모드", ids: [
-    "vocab_training", "background_quiz", "farm_content",
+    "farm_reading", "vocab_training", "farm_background", "farm_content",
     "farm_grammar_wf", "farm_grammar_ss", "farm_grammar_pc", "farm_grammar_pos",
     "farm_concept", "farm_logic", "farm_writing", "farm_choice"
   ]},
