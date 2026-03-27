@@ -256,11 +256,11 @@
 | 238 | 문법 | 겹받침의 표준 발음과 연음 조건 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 239 | 비문학 | 정보 비대칭과 역선택 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > 2027 수능특강 독서 md > 27수특 독서_정보 비대칭과 역선택.md |
 | 240 | 문학 | 너무 큰 나무 | docs/wittgenstein1_source_inventory.md > 너무 큰 나무 |
-| 241 | 비문학 | 위법성 조각 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
+| 241 | 비문학 | 유추 해석과 죄형 법정주의 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 242 | 화법 | 토론 반박의 타당성 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 243 | 작문 | 반박문 쓰기 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 244 | 비문학 | 산염기 평형 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
-| 245 | 문법 | 의미 관계 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 244 | 비문학 | 하디-바인베르크 평형과 유전자 빈도 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
+| 245 | 문법 | 다의어와 동음이의어의 판별 기준 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 246 | 비문학 | 캐시 메모리 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 247 | 문학 | 미스터 방 | docs/wittgenstein1_source_inventory.md > 미스터 방 |
 | 248 | 비문학 | 설치 미술 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
