@@ -231,11 +231,11 @@
 | 213 | 비문학 | 인플레이션과 감가상각의 실질 가치 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > 2027 수능특강 독서 md > 27수특 독서_법인세.md |
 | 214 | 화법 | 학교 축제 일회용품 줄이기 발표와 질의응답 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 215 | 작문 | 교내 플라스틱 분리배출 안내문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 216 | 비문학 | 소급 입법 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
-| 217 | 문법 | 높임과 시간 표현 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 218 | 비문학 | 전자 배치 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
-| 219 | 문학 | 독은 아름답다 | docs/wittgenstein1_source_inventory.md > 독은 아름답다 |
-| 220 | 비문학 | 공개키 기반구조 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
+| 216 | 비문학 | 법의 시간적 효력과 소급효 금지 | 참고용 기출 지문 > 사회_법의 효력.md.json |
+| 217 | 문법 | 선어말 어미 '-시-'와 '-었-'의 결합 순서와 제약 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 218 | 비문학 | 리튬 이온 전지의 충방전과 층상 구조 | 참고용 기출 지문 > 과학 기술_리튬 이온 이차 전지.md.json |
+| 219 | 문학 | 오련가 | docs/wittgenstein1_source_inventory.md > 오련가 |
+| 220 | 비문학 | 동형암호의 부트스트래핑과 연산 지속성 | 참고용 기출 지문 > 기술_동형암호.md.json |
 | 221 | 화법 | 발표 자료 해석 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 222 | 작문 | 문단 재배열 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 223 | 비문학 | 색채 상징 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
