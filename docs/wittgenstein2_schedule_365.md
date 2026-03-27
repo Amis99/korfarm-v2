@@ -126,11 +126,11 @@
 | 108 | 비문학 | 행정 대집행의 요건과 절차 | 참고용 기출 지문 > 사회문화_03_행정_대집행.json |
 | 109 | 화법 | 지역 서점 초청 강연 질문 순서 조정 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 110 | 작문 | 교내 휴게 공간 확대 제안문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 111 | 비문학 | ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-economy |
-| 112 | 문법 | 문장 성분 (적용) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 113 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
-| 114 | 문학 | 낙타 | docs/wittgenstein2_source_inventory.md > 낙타 |
-| 115 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
+| 111 | 비문학 | 독점시장의 한계수입과 이윤 극대화 | 참고용 기출 지문 > 경제_(가)완전경쟁시장,(나)공정거래법.md.json (가) |
+| 112 | 문법 | 조사 '에게·한테·께'의 높임 차이와 결합 제약 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 113 | 비문학 | 행정 행위의 부관과 부담의 법적 성격 | 참고용 기출 지문 > 법_행정 행위.md.json |
+| 114 | 문학 | 낙타 | 참고용 기출 지문 > 낙타_신경림.md (나) |
+| 115 | 비문학 | 렙틴과 그렐린에 의한 에너지 항상성 조절 | 참고용 기출 지문 > 과학기술_09_인체_내_에너지_대사와_항상성.json |
 | 116 | 화법 | 토의 규칙과 역할 (적용) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 117 | 작문 | 정보 통합 글쓰기 (적용) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 118 | 비문학 | ???? ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
