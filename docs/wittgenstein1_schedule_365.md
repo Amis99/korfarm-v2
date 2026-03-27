@@ -331,11 +331,11 @@
 | 313 | 작문 | 지역 축제 소개 글 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 314 | 비문학 | 공공성과 특별 공공 행정 조직 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > output > json > 사회문화_08_특별_공공_행정_조직의_기능과_분류.json |
 | 315 | 문법 | 연결 어미 '-게'와 '-도록'의 의미 차이 (종합) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
-| 316 | 비문학 | 정보 비대칭 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
-| 317 | 문학 | 유리창 | docs/wittgenstein1_source_inventory.md > 유리창 |
-| 318 | 비문학 | 위임 입법 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
-| 319 | 화법 | 인터뷰의 핵심 정보 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 320 | 작문 | 개념 정의 방식 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 316 | 비문학 | 정보 비대칭과 역선택 | 참고용 기출 지문 > 사회문화_02_정보_비대칭과_역선택.json |
+| 317 | 문학 | 소년 | docs/wittgenstein1_source_inventory.md > 소년 |
+| 318 | 비문학 | 조세 법률주의와 포괄주의 해석 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > output > json > 주제통합_05_조세_법률주의_상속세와_증여세.json |
+| 319 | 화법 | 도서관 아침 개방 인터뷰 대본 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 320 | 작문 | 디지털 시민성 소개 글 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 321 | 비문학 | 상전이 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 322 | 문법 | 훈민정음 원리 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 323 | 비문학 | 신경망 학습 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
