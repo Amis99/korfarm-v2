@@ -86,11 +86,11 @@
 | 68 | 작문 | 다회용 컵 대여 시범 운영 보고서 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 69 | 비문학 | 큐비즘의 다중 시점과 분석적·종합적 전개 | 참고용 기출 지문 > 예술_큐비즘.md.json |
 | 70 | 문법 | 지시 표현 '이·그·저'의 담화 거리와 선행문맥 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 71 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-language |
-| 72 | 문학 | 꽃피는 시절 | docs/wittgenstein2_source_inventory.md > 꽃피는 시절 |
-| 73 | 비문학 | ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-psychology |
-| 74 | 화법 | 발표 구성의 효과 (유형) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 75 | 작문 | 논설문 전개 (유형) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 71 | 비문학 | 담화 공동체의 해석 규범과 독자의 역할 | 참고용 기출 지문 > 지문으로이해하기_08_담화_공동체_독자.json |
+| 72 | 문학 | 꽃피는 시절 | 참고용 기출 지문 > 꽃피는 시절_이성복.md (가) |
+| 73 | 비문학 | 자아의 방어기제와 불안 조절 | 참고용 기출 지문 > 인문_(가)정신분석이론,(나)분석심리학.md.json (가) |
+| 74 | 화법 | 학교 축제 환경 부스 발표 순서 점검 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 75 | 작문 | 야간 자율학습 선택제 확대 의견문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 76 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-environment |
 | 77 | 문법 | 호응과 중의성 (유형) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 78 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-humanities |
