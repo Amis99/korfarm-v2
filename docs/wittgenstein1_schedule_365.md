@@ -301,16 +301,16 @@
 | 283 | 비문학 | 장르 관습과 독자의 기대 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > output > json > 지문으로이해하기_08_담화_공동체_독자.json |
 | 284 | 화법 | 발표 직후 청중 반응 점검 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 285 | 작문 | 조사 결과 기사 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 286 | 비문학 | 귀납의 문제 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
-| 287 | 문법 | 형태소와 품사 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 288 | 비문학 | 감시 사회 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
-| 289 | 문학 | 수난이대 | docs/wittgenstein1_source_inventory.md > 수난이대 |
-| 290 | 비문학 | 공공재 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
-| 291 | 화법 | 질문의 기능 분석 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 292 | 작문 | 주장과 근거 배열 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 293 | 비문학 | 적법 절차 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
-| 294 | 문법 | 문장 성분 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 295 | 비문학 | 열평형 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
+| 286 | 비문학 | 인격 동일성과 기억의 연속성 | 참고용 기출 지문 > 인문_인격의 동일성.md.json |
+| 287 | 문법 | 파생 접사 '-이/-히/-리/-기'의 피동·사동 판정 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 288 | 비문학 | 규율 권력과 파놉티콘적 감시 | 참고용 기출 지문 > 인문_(가)푸코의 권력,(나)신유물론자.md.json (가) |
+| 289 | 문학 | 고향 | docs/wittgenstein1_source_inventory.md > 고향 |
+| 290 | 비문학 | 역선택과 신호 발송 | 참고용 기출 지문 > 사회문화_02_정보_비대칭과_역선택.json |
+| 291 | 화법 | 전시 해설 발표 질의응답 대본 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 292 | 작문 | 교내 휴대 전화 보관함 운영 건의문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 293 | 비문학 | 행정 대집행의 요건과 절차 | 참고용 기출 지문 > 사회문화_03_행정_대집행.json |
+| 294 | 문법 | 보조사 '은/는'과 주격 조사 '이/가'의 화제·초점 기능 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 295 | 비문학 | 열펌프의 성능 계수와 열 이동 | 참고용 기출 지문 > 과학_열펌프.md.json |
 | 296 | 문학 | 시집가는 날 | docs/wittgenstein1_source_inventory.md > 시집가는 날 |
 | 297 | 비문학 | 센서 융합 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 298 | 화법 | 토의 규칙과 역할 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
