@@ -46,11 +46,11 @@
 | 28 | 문법 | 사동 표현 '-이/-히/-리/-기-'와 '-게 하다'의 의미 차이 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 29 | 비문학 | 기원 본질주의와 개체 동일성 | 참고용 기출 지문 > 인문예술_11_기원_본질주의.json |
 | 30 | 문학 | 그리움 | 참고용 기출 지문 > 그리움_이시영.md (가) |
-| 31 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-society |
-| 32 | 화법 | 설득 전략 분석 (유형) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 33 | 작문 | 고쳐쓰기 전략 (유형) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 34 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-economy |
-| 35 | 문법 | 높임과 시간 표현 (유형) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 31 | 비문학 | 민주정과 공화정의 파벌 통제 방식 | 참고용 기출 지문 > 사회문화_12_민주정과_공화정.json |
+| 32 | 화법 | 축제 분리수거 참여 독려 발표 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 33 | 작문 | 학교 축제 안전수칙 안내문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 34 | 비문학 | 복잡계 경제학의 경로 의존성과 창발 | 참고용 기출 지문 > 복잡계_경제학.json |
+| 35 | 문법 | 선어말 어미 '-더-'와 '-었-'의 의미 차이 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 36 | 비문학 | ???? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
 | 37 | 문학 | 기황전설 | docs/wittgenstein2_source_inventory.md > 기황전설 |
 | 38 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
