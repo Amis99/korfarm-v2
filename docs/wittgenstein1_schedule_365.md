@@ -211,11 +211,11 @@
 | 193 | 화법 | 축제 홍보 발표 반응 조정 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 194 | 작문 | 학교 독서 주간 소개 기사 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 195 | 비문학 | 임베딩 평가와 일반화 가능성 | 참고용 기출 지문 > 과학기술_07_임베딩과_유사도_표현.json |
-| 196 | 문법 | 형태소와 품사 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 197 | 비문학 | 시점 쇼트 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
-| 198 | 문학 | 눈길 | docs/wittgenstein1_source_inventory.md > 눈길 |
-| 199 | 비문학 | 정보 구조 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
-| 200 | 화법 | 질문의 기능 분석 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 196 | 문법 | 보조 용언의 본용언화와 띄어쓰기 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 197 | 비문학 | 패널 재구성과 정서적 긴장 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
+| 198 | 문학 | 눈이 오면 | docs/wittgenstein1_source_inventory.md > 눈이 오면 |
+| 199 | 비문학 | 동일 지시 표현의 정보 차이 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
+| 200 | 화법 | mRNA 백신 발표 질의응답 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 201 | 작문 | 주장과 근거 배열 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 202 | 비문학 | 프레이밍 효과 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 203 | 문법 | 문장 성분 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
