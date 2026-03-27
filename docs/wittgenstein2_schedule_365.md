@@ -21,11 +21,11 @@
 | 3 | 비문학 | 의미 내재주의와 외재주의 | 참고용 기출 지문 > 철학_내재주의와 외재주의.md.json |
 | 4 | 화법 | 발표 자료 역할 조정 대화 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 5 | 작문 | 교내 인문 독서 행사 소개문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 6 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-society |
-| 7 | 문법 | 음운 변동 (유형) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 8 | 비문학 | ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-economy |
-| 9 | 문학 | 문 | docs/wittgenstein2_source_inventory.md > 문 |
-| 10 | 비문학 | ?? ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
+| 6 | 비문학 | 시민 참여의 교육적 기능 | 참고용 기출 지문 > 사회문화_09_시민_참여에_대한_견해.json |
+| 7 | 문법 | 음절 끝소리 규칙과 자음군 단순화 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 8 | 비문학 | 완전경쟁시장의 가격수용자와 한계수입 | 참고용 기출 지문 > 경제_(가)완전경쟁시장,(나)공정거래법.md.json (가) |
+| 9 | 문학 | 문 | 참고용 기출 지문 > 문_김종길.md (가) |
+| 10 | 비문학 | 행정 대집행의 요건과 절차 | 참고용 기출 지문 > 사회문화_03_행정_대집행.json |
 | 11 | 화법 | 청자의 반응 추론 (유형) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 12 | 작문 | 자료 통합 구성 (유형) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 13 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
