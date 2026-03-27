@@ -87,17 +87,21 @@ def html_to_latex(s):
 
 
 def parse_markers(stem):
-    """stem에서 <보기>, <조건> 마커를 분리"""
+    """stem에서 <보기>, <조건> 마커를 분리.
+    줄 시작 또는 빈줄 뒤에 오는 독립적인 <보기>/<조건> 태그만 인식.
+    문장 중간의 '조건' 텍스트는 건드리지 않음."""
     if not stem:
         return "", "", ""
     main_text = stem
     bogi = ""
     condition = ""
-    m = re.split(r"<조건>", main_text, flags=re.IGNORECASE)
+    # <조건> — 줄 시작에 위치한 태그만 매칭
+    m = re.split(r"(?:^|\n)\s*<조건>\s*\n?", main_text)
     if len(m) > 1:
         main_text = m[0]
         condition = m[1].strip()
-    m = re.split(r"<보기>", main_text, flags=re.IGNORECASE)
+    # <보기> — 줄 시작에 위치한 태그만 매칭
+    m = re.split(r"(?:^|\n)\s*<보기>\s*\n?", main_text)
     if len(m) > 1:
         main_text = m[0]
         bogi = m[1].strip()
@@ -302,7 +306,7 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 \newcommand{{\answerlines}}[1]{{%
   \par\vspace{{4pt}}%
   \foreach \i in {{1,...,#1}} {{%
-    {{\color{{answerLine}}\hrule height 0.4pt}}\vspace{{20pt}}%
+    {{\color{{answerLine}}\hrule height 0.4pt}}\vspace{{35pt}}%
   }}%
   \vspace{{2pt}}%
 }}
@@ -321,11 +325,9 @@ def make_header_block(level_label, ch_num):
 \vspace{{3mm}}
 {{\color{{korfarmBrown}}\hrule height 1.2pt}}
 \vspace{{5mm}}
-\begin{{center}}
-학교\enspace\rule{{3.5cm}}{{0.4pt}}\hspace{{12mm}}%
-학년\enspace\rule{{2.5cm}}{{0.4pt}}\hspace{{12mm}}%
-이름\enspace\rule{{3.5cm}}{{0.4pt}}
-\end{{center}}
+\hfill\rule{{3.5cm}}{{0.4pt}}\,학교\hspace{{10mm}}%
+\rule{{2cm}}{{0.4pt}}\,학년\hspace{{10mm}}%
+이름\,\rule{{3.5cm}}{{0.4pt}}
 \vspace{{5mm}}
 {{\color{{korfarmBrown}}\hrule height 0.6pt}}
 \vspace{{6mm}}
@@ -365,36 +367,32 @@ def make_question_block(num, q, is_twocol, skip_passage=False):
     bogi = nl_to_latex(bogi)
     condition = nl_to_latex(condition)
 
-    # 긴 지문 여부
-    passage_long = count_lines(passage_raw) > 55
-
     # 서술형/단답형 답안 줄 수
     answer_line_count = estimate_answer_lines(q)
 
     lines = []
 
-    # 문제 블록 래핑
-    if is_twocol:
-        if not passage_long:
-            lines.append(r"\begin{minipage}{\columnwidth}")
-    else:
-        if not passage_long:
-            lines.append(r"\begin{samepage}")
-
     # 세로 간격
     lines.append(r"\vspace{4mm}")
     lines.append(r"\needspace{5\baselineskip}")
 
-    # 지문
+    # 지문 (항상 breakable — 단/페이지 바꿈 허용)
     if passage and not skip_passage:
-        breakopt = ", breakable" if passage_long else ""
-        lines.append(rf"\begin{{tcolorbox}}[passage{breakopt}]")
+        lines.append(r"\begin{tcolorbox}[passage, breakable]")
         lines.append(passage)
         lines.append(r"\end{tcolorbox}")
         lines.append(r"\vspace{3mm}")
 
-    # 문제 번호 + 발문 + 배점
+    # ── 발문+보기+조건+선택지+답안밑줄 블록 (바꿈 방지) ──
+    if is_twocol:
+        lines.append(r"\begin{minipage}{\columnwidth}")
+    else:
+        lines.append(r"\begin{samepage}")
+
+    # 문제 번호 + 발문 + 배점 (둘째 줄부터 들여쓰기)
+    lines.append(r"{\hangindent=2em\hangafter=1")
     lines.append(rf"\qnum{{{num}}}\enspace {main_text} \pts{{{pts}}}")
+    lines.append(r"\par}")
     lines.append("")
 
     # 보기
@@ -411,10 +409,10 @@ def make_question_block(num, q, is_twocol, skip_passage=False):
         lines.append(condition)
         lines.append(r"\end{tcolorbox}")
 
-    # 선택지
+    # 선택지 (줄간격 넓게, 들여쓰기)
     if choices:
         lines.append(r"\vspace{3mm}")
-        lines.append(r"\begin{itemize}[leftmargin=1.5em, labelsep=0pt, label={}, itemsep=2pt, parsep=0pt]")
+        lines.append(r"\begin{itemize}[leftmargin=2.5em, labelsep=0.3em, label={}, itemsep=4pt, parsep=1pt, topsep=0pt]")
         for c in choices:
             lines.append(rf"  \item {c}")
         lines.append(r"\end{itemize}")
@@ -424,14 +422,12 @@ def make_question_block(num, q, is_twocol, skip_passage=False):
         lines.append(r"\vspace{3mm}")
         lines.append(rf"\answerlines{{{answer_line_count}}}")
 
-    # 블록 닫기
+    # 발문~선택지 블록 닫기
     if is_twocol:
-        if not passage_long:
-            lines.append(r"\end{minipage}")
-            lines.append(r"\vspace{4mm}")
+        lines.append(r"\end{minipage}")
+        lines.append(r"\vspace{4mm}")
     else:
-        if not passage_long:
-            lines.append(r"\end{samepage}")
+        lines.append(r"\end{samepage}")
 
     return "\n".join(lines)
 
