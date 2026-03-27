@@ -24,6 +24,25 @@ function normalizeItem(raw) {
   };
 }
 
+// ─── 섹션 순서 정렬: 스키마 키 순서 기준, 메타 항상 최상단 ───
+function sortBySchema(data, levelId) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) return data;
+  const schema = getSchemaForLevel(levelId);
+  const schemaKeys = Object.keys(schema);
+  const dataKeys = Object.keys(data);
+  // 스키마 순서대로 먼저, 그 다음 스키마에 없는 키, 메타는 무조건 최상단
+  const sorted = {};
+  const orderedKeys = [
+    ...schemaKeys.filter(k => dataKeys.includes(k)),
+    ...dataKeys.filter(k => !schemaKeys.includes(k))
+  ];
+  // 메타를 맨 앞으로
+  const metaIdx = orderedKeys.indexOf("메타");
+  if (metaIdx > 0) { orderedKeys.splice(metaIdx, 1); orderedKeys.unshift("메타"); }
+  for (const k of orderedKeys) sorted[k] = data[k];
+  return sorted;
+}
+
 // ─── 유틸 ───
 function downloadJson(data, filename) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
@@ -344,7 +363,8 @@ function AdminManuscriptPage() {
       setLoading(true);
       const preview = await apiGet(`/v1/admin/content/${item.contentId}/preview`);
       const json = preview.content || preview.content_json || {};
-      const manuscript = json.manuscript || json;
+      const raw = json.manuscript || json;
+      const manuscript = sortBySchema(raw, item.levelId);
       setEditorData(manuscript);
       setRawText(JSON.stringify(manuscript, null, 2));
     } catch {
