@@ -51,11 +51,11 @@
 | 33 | 작문 | 학교 축제 안전수칙 안내문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 34 | 비문학 | 복잡계 경제학의 경로 의존성과 창발 | 참고용 기출 지문 > 복잡계_경제학.json |
 | 35 | 문법 | 선어말 어미 '-더-'와 '-었-'의 의미 차이 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 36 | 비문학 | ???? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
-| 37 | 문학 | 기황전설 | docs/wittgenstein2_source_inventory.md > 기황전설 |
-| 38 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
-| 39 | 화법 | 발표 자료 해석 (유형) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 40 | 작문 | 문단 재배열 (유형) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 36 | 비문학 | 신뢰보호원칙의 공적 견해 표명과 보호 요건 | 참고용 기출 지문 > 법_신뢰보호원칙.md.json |
+| 37 | 문학 | 기황전설 | 참고용 기출 지문 > 기황전설_정온.md (나) |
+| 38 | 비문학 | 세포자멸사의 유도와 실행 카스파제 | 참고용 기출 지문 > 과학_세포자멸사.md.json |
+| 39 | 화법 | 학생회 예산 발표 자료 검토 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 40 | 작문 | 동아리 발표회 운영 안내문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 41 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
 | 42 | 문법 | 중세국어 (유형) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 43 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
