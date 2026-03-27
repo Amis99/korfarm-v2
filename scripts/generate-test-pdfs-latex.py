@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""프로 모드 챕터 테스트 시험지 PDF 생성 — XeLaTeX 버전
+"""프로 모드 챕터 테스트 시험지 PDF 생성 — XeLaTeX 버전 v2
 
 SSH 터널 → DB 쿼리 → .tex 생성 → xelatex 컴파일 → S3 업로드 → DB 업데이트
 """
@@ -27,6 +27,7 @@ DB_NAME = "korfarm"
 AWS_CLI = r"C:\Program Files\Amazon\AWSCLIV2\aws.exe"
 S3_BUCKET = "korfarm-frontend"
 CF_DIST = "E29A5UX2VDFB4I"
+CF_DOMAIN = "dbtbky39ni3nn.cloudfront.net"
 
 LEVEL_LABELS = {
     "saussure1": "소쉬르 1권", "saussure2": "소쉬르 2권", "saussure3": "소쉬르 3권",
@@ -37,8 +38,19 @@ LEVEL_LABELS = {
 # 2단 레이아웃 레벨
 TWO_COLUMN_LEVELS = {"frege1", "frege2", "frege3", "russell1", "russell2", "russell3"}
 
-CIRCLE_NUMS = ["❶", "❷", "❸", "❹", "❺", "❻", "❼", "❽", "❾", "❿",
-               "⓫", "⓬", "⓭", "⓮", "⓯", "⓰", "⓱", "⓲", "⓳", "⓴"]
+# 레벨별 폰트 크기 설정: (문서클래스pt, 본문pt, 행간pt, 지문행간pt)
+LEVEL_FONT_CONFIG = {
+    "saussure1": (12, 14, 19, 22),
+    "saussure2": (12, 13, 17.5, 21),
+    "saussure3": (12, 13, 17.5, 21),
+    "frege1":    (12, 12, 16, 19),
+    "frege2":    (12, 12, 16, 19),
+    "frege3":    (11, 11, 15, 18),
+    "russell1":  (10, 10, 14, 16.5),
+    "russell2":  (10, 10, 14, 16.5),
+    "russell3":  (10, 10, 14, 16.5),
+}
+
 CHOICE_SYMS = ["①", "②", "③", "④", "⑤"]
 
 
@@ -48,7 +60,6 @@ def escape_latex(s):
     """LaTeX 특수문자 이스케이프"""
     if not s:
         return ""
-    # 백슬래시를 먼저 처리 (다른 치환에서 생기는 \ 와 혼동 방지)
     s = s.replace("\\", "\x00BACKSLASH\x00")
     s = s.replace("&", "\\&")
     s = s.replace("%", "\\%")
@@ -67,15 +78,10 @@ def html_to_latex(s):
     """HTML 태그 → LaTeX 변환"""
     if not s:
         return ""
-    # <u>...</u> → \uline{...}
     s = re.sub(r"<u>(.*?)</u>", r"\\uline{\1}", s, flags=re.DOTALL)
-    # <b>...</b> → \textbf{...}
     s = re.sub(r"<b>(.*?)</b>", r"\\textbf{\1}", s, flags=re.DOTALL)
-    # <i>...</i> → \textit{...}
     s = re.sub(r"<i>(.*?)</i>", r"\\textit{\1}", s, flags=re.DOTALL)
-    # <br> / <br/> → 줄바꿈
     s = re.sub(r"<br\s*/?>", "\n", s)
-    # 나머지 HTML 태그 제거
     s = re.sub(r"<[^>]+>", "", s)
     return s
 
@@ -84,23 +90,17 @@ def parse_markers(stem):
     """stem에서 <보기>, <조건> 마커를 분리"""
     if not stem:
         return "", "", ""
-
     main_text = stem
     bogi = ""
     condition = ""
-
-    # <조건> 추출
     m = re.split(r"<조건>", main_text, flags=re.IGNORECASE)
     if len(m) > 1:
         main_text = m[0]
         condition = m[1].strip()
-
-    # <보기> 추출
     m = re.split(r"<보기>", main_text, flags=re.IGNORECASE)
     if len(m) > 1:
         main_text = m[0]
         bogi = m[1].strip()
-
     return main_text.strip(), bogi.strip(), condition.strip()
 
 
@@ -108,22 +108,26 @@ def process_text(raw):
     """HTML → LaTeX 변환 후 이스케이프"""
     if not raw:
         return ""
-    # 먼저 HTML 변환 (LaTeX 명령 생성)
     text = html_to_latex(raw)
-    # LaTeX 명령 보호 (uline, textbf 등)
-    # 특수문자 없는 토큰으로 대체 (escape_latex와 충돌 방지)
     protected = []
     def protect(m):
         idx = len(protected)
         protected.append(m.group(0))
         return f"XPROTECT{idx}XEND"
     text = re.sub(r"\\(?:uline|textbf|textit)\{[^}]*\}", protect, text)
-    # 이스케이프
     text = escape_latex(text)
-    # 복원
     for i, val in enumerate(protected):
         text = text.replace(f"XPROTECT{i}XEND", val)
     return text
+
+
+def nl_to_latex(s):
+    """줄바꿈 → LaTeX 줄바꿈"""
+    if not s:
+        return s
+    s = re.sub(r"\n\n+", r"\n\\vspace{4pt}\n", s)
+    s = s.replace("\n", " \\\\{}\n")
+    return s
 
 
 def count_lines(text):
@@ -133,9 +137,37 @@ def count_lines(text):
     lines = text.split("\n")
     total = 0
     for line in lines:
-        # 한 줄 약 45자 기준 (2단), 80자 (1단)
         total += max(1, len(line) // 60 + 1)
     return total
+
+
+def estimate_answer_lines(q):
+    """서술형/단답형의 답안 분량 추정 → 밑줄 줄 수"""
+    qtype = (q.get("type") or "").strip()
+    model = q.get("model_answer") or q.get("correct_answer") or ""
+
+    if qtype == "객관식":
+        return 0
+
+    if not model:
+        # 배점 기반 추정: 8점 이상 → 3줄, 5점 → 2줄, 나머지 1줄
+        pts = q.get("points", 0)
+        if pts >= 8:
+            return 3
+        elif pts >= 5:
+            return 2
+        return 1
+
+    # 모범답안 길이 기반
+    length = len(model)
+    if length <= 20:
+        return 1
+    elif length <= 60:
+        return 2
+    elif length <= 120:
+        return 3
+    else:
+        return 4
 
 
 # ═══════════ LaTeX 생성 ═══════════
@@ -144,34 +176,30 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
     """LaTeX 프리앰블 생성"""
     is_twocol = level_id in TWO_COLUMN_LEVELS
     logo = LOGO_PATH.replace("\\", "/")
-    fontsize = "10pt" if is_twocol else "11pt"
+    doc_pt, base_pt, base_skip, passage_skip = LEVEL_FONT_CONFIG.get(
+        level_id, (11, 11, 15, 18)
+    )
 
-    return rf"""\documentclass[{fontsize},a4paper]{{article}}
+    return rf"""\documentclass[{doc_pt}pt,a4paper]{{article}}
 
 % ─── 인코딩 / 폰트 ───
 \usepackage{{fontspec}}
 \usepackage{{xeCJK}}
 \setCJKmainfont{{Noto Sans KR}}[
-  Path=C:/Windows/Fonts/,
-  Extension=.ttf,
-  UprightFont=NotoSansKR-VF,
-  BoldFont=NotoSansKR-VF,
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
   UprightFeatures={{RawFeature={{axis={{wght=400}}}}}},
   BoldFeatures={{RawFeature={{axis={{wght=700}}}}}},
 ]
 \setCJKsansfont{{Noto Sans KR}}[
-  Path=C:/Windows/Fonts/,
-  Extension=.ttf,
-  UprightFont=NotoSansKR-VF,
-  BoldFont=NotoSansKR-VF,
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
   UprightFeatures={{RawFeature={{axis={{wght=400}}}}}},
   BoldFeatures={{RawFeature={{axis={{wght=700}}}}}},
 ]
 \setmainfont{{Noto Sans KR}}[
-  Path=C:/Windows/Fonts/,
-  Extension=.ttf,
-  UprightFont=NotoSansKR-VF,
-  BoldFont=NotoSansKR-VF,
+  Path=C:/Windows/Fonts/, Extension=.ttf,
+  UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
   UprightFeatures={{RawFeature={{axis={{wght=400}}}}}},
   BoldFeatures={{RawFeature={{axis={{wght=700}}}}}},
 ]
@@ -190,6 +218,9 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 \usepackage{{etoolbox}}
 \usepackage[normalem]{{ulem}}
 
+% ─── 본문 폰트 크기 설정 ───
+\fontsize{{{base_pt}pt}}{{{base_skip}pt}}\selectfont
+
 % ─── 색상 정의 ───
 \definecolor{{korfarmBrown}}{{HTML}}{{8B6914}}
 \definecolor{{passageBg}}{{HTML}}{{F5F5F0}}
@@ -200,30 +231,31 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 \definecolor{{condBorder}}{{HTML}}{{E8C890}}
 \definecolor{{numCircle}}{{HTML}}{{2C3E50}}
 \definecolor{{ptsBadge}}{{HTML}}{{6B7280}}
+\definecolor{{answerLine}}{{HTML}}{{B0B0B0}}
 
 % ─── tcolorbox 스타일 ───
 \tcbset{{
   passage/.style={{
     colback=passageBg, colframe=passageBorder,
-    boxrule=0.5pt, arc=3pt, left=6pt, right=6pt, top=5pt, bottom=5pt,
-    fontupper=\small,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{{{base_pt}pt}}{{{passage_skip}pt}}\selectfont,
   }},
   bogi/.style={{
     colback=bogiBg, colframe=bogiBorder,
-    boxrule=0.5pt, arc=3pt, left=6pt, right=6pt, top=5pt, bottom=5pt,
-    fontupper=\small,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{{{base_pt}pt}}{{{base_skip}pt}}\selectfont,
     title={{\textbf{{〈보기〉}}}},
-    fonttitle=\small\bfseries,
+    fonttitle=\bfseries,
     coltitle=black,
     attach boxed title to top left={{yshift=-2mm, xshift=4mm}},
     boxed title style={{colback=bogiBg, colframe=bogiBorder, boxrule=0.3pt, arc=2pt}},
   }},
   cond/.style={{
     colback=condBg, colframe=condBorder,
-    boxrule=0.5pt, arc=3pt, left=6pt, right=6pt, top=5pt, bottom=5pt,
-    fontupper=\small,
+    boxrule=0.5pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\fontsize{{{base_pt}pt}}{{{base_skip}pt}}\selectfont,
     title={{\textbf{{〈조건〉}}}},
-    fonttitle=\small\bfseries,
+    fonttitle=\bfseries,
     coltitle=black,
     attach boxed title to top left={{yshift=-2mm, xshift=4mm}},
     boxed title style={{colback=condBg, colframe=condBorder, boxrule=0.3pt, arc=2pt}},
@@ -235,10 +267,10 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 \fancyhf{{}}
 \renewcommand{{\headrulewidth}}{{0pt}}
 \fancyhead[L]{{%
-  \raisebox{{-4pt}}{{\includegraphics[height=20pt]{{{logo}}}}}%
+  \raisebox{{-4pt}}{{\includegraphics[height=18pt]{{{logo}}}}}%
   \hspace{{6pt}}%
   \textbf{{{level_label}}}%
-  \hspace{{8pt}}%
+  \hspace{{6pt}}%
   \textcolor{{gray}}{{{ch_num}장 챕터 테스트}}%
 }}
 \fancyhead[R]{{%
@@ -247,9 +279,10 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 \fancyfoot[C]{{\small\textcolor{{gray}}{{— \thepage\ —}}}}
 
 % ─── 기타 설정 ───
-\setlength{{\headheight}}{{14pt}}
+\setlength{{\headheight}}{{20pt}}
+\addtolength{{\topmargin}}{{-6pt}}
 \setlength{{\parindent}}{{0pt}}
-\setlength{{\parskip}}{{2pt}}
+\setlength{{\parskip}}{{3pt}}
 {"\\setlength{\\columnsep}{12pt}" if is_twocol else ""}
 
 % ─── 문제번호 매크로 ───
@@ -261,7 +294,16 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 }}
 
 \newcommand{{\pts}}[1]{{%
-  \hfill\textcolor{{ptsBadge}}{{\small[#1점]}}%
+  \hfill\textcolor{{ptsBadge}}{{[#1점]}}%
+}}
+
+% ─── 답안 밑줄 매크로 ───
+\newcommand{{\answerlines}}[1]{{%
+  \par\vspace{{4pt}}%
+  \foreach \i in {{1,...,#1}} {{%
+    {{\color{{answerLine}}\hrule height 0.4pt}}\vspace{{20pt}}%
+  }}%
+  \vspace{{2pt}}%
 }}
 
 \begin{{document}}
@@ -269,33 +311,28 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 
 
 def make_header_block(level_label, ch_num):
-    """첫 페이지 헤더 블록 (학교/학년/이름)"""
+    """첫 페이지 헤더 블록 (학교/학년/이름 한 줄)"""
     return rf"""
 % ─── 첫 페이지 헤더 ───
 \begin{{center}}
 {{\Large\bfseries {level_label}\quad {ch_num}장 챕터 테스트}}
 \end{{center}}
-\vspace{{2mm}}
-{{\color{{korfarmBrown}}\hrule height 1.2pt}}
 \vspace{{3mm}}
-\begin{{minipage}}{{0.5\textwidth}}
-\end{{minipage}}%
-\hfill
-\begin{{minipage}}{{0.45\textwidth}}
-\raggedleft
-\small
-학교\enspace\rule{{4cm}}{{0.4pt}}\par\vspace{{4pt}}
-학년\enspace\rule{{4cm}}{{0.4pt}}\par\vspace{{4pt}}
-이름\enspace\rule{{4cm}}{{0.4pt}}
-\end{{minipage}}
-\vspace{{4mm}}
-{{\color{{korfarmBrown}}\hrule height 0.6pt}}
+{{\color{{korfarmBrown}}\hrule height 1.2pt}}
 \vspace{{5mm}}
+\begin{{center}}
+학교\enspace\rule{{3.5cm}}{{0.4pt}}\hspace{{12mm}}%
+학년\enspace\rule{{2.5cm}}{{0.4pt}}\hspace{{12mm}}%
+이름\enspace\rule{{3.5cm}}{{0.4pt}}
+\end{{center}}
+\vspace{{5mm}}
+{{\color{{korfarmBrown}}\hrule height 0.6pt}}
+\vspace{{6mm}}
 """
 
 
 def make_question_block(num, q, is_twocol, skip_passage=False):
-    """한 문제의 LaTeX 코드 생성. skip_passage=True면 지문 렌더링 생략 (중복 방지)"""
+    """한 문제의 LaTeX 코드 생성"""
     passage_raw = q.get("passage") or ""
     stem_raw = q.get("stem") or ""
     pts = q.get("points", 0)
@@ -307,7 +344,7 @@ def make_question_block(num, q, is_twocol, skip_passage=False):
         except:
             choices_raw = []
 
-    # 마커 파싱 (stem에서 보기/조건 분리)
+    # 마커 파싱
     main_text, bogi, condition = parse_markers(stem_raw)
 
     # 텍스트 처리
@@ -322,27 +359,20 @@ def make_question_block(num, q, is_twocol, skip_passage=False):
         txt = c.get("text", "") if isinstance(c, dict) else str(c)
         choices.append(f"{sym} {process_text(txt)}")
 
-    # 줄바꿈 처리: \n → LaTeX 줄바꿈
-    def nl_to_latex(s):
-        if not s:
-            return s
-        # 연속 줄바꿈 → \vspace + \\
-        s = re.sub(r"\n\n+", r"\n\\vspace{3pt}\n", s)
-        # 단일 줄바꿈 → \\{} ({}로 [...]가 옵션 인자로 파싱되는 것 방지)
-        s = s.replace("\n", " \\\\{}\n")
-        return s
-
     passage = nl_to_latex(passage)
     main_text = nl_to_latex(main_text)
     bogi = nl_to_latex(bogi)
     condition = nl_to_latex(condition)
 
-    # 긴 지문 여부 (breakable 필요)
+    # 긴 지문 여부
     passage_long = count_lines(passage_raw) > 55
+
+    # 서술형/단답형 답안 줄 수
+    answer_line_count = estimate_answer_lines(q)
 
     lines = []
 
-    # 문제 블록 래핑 (단/페이지 바꿈 방지)
+    # 문제 블록 래핑
     if is_twocol:
         if not passage_long:
             lines.append(r"\begin{minipage}{\columnwidth}")
@@ -351,18 +381,16 @@ def make_question_block(num, q, is_twocol, skip_passage=False):
             lines.append(r"\begin{samepage}")
 
     # 세로 간격
-    lines.append(r"\vspace{3mm}")
-
-    # needspace로 최소 공간 확보
+    lines.append(r"\vspace{4mm}")
     lines.append(r"\needspace{5\baselineskip}")
 
-    # 지문 (passage) — skip_passage이면 중복 지문 생략
+    # 지문
     if passage and not skip_passage:
         breakopt = ", breakable" if passage_long else ""
         lines.append(rf"\begin{{tcolorbox}}[passage{breakopt}]")
         lines.append(passage)
         lines.append(r"\end{tcolorbox}")
-        lines.append(r"\vspace{2mm}")
+        lines.append(r"\vspace{3mm}")
 
     # 문제 번호 + 발문 + 배점
     lines.append(rf"\qnum{{{num}}}\enspace {main_text} \pts{{{pts}}}")
@@ -370,31 +398,36 @@ def make_question_block(num, q, is_twocol, skip_passage=False):
 
     # 보기
     if bogi:
-        lines.append(r"\vspace{2mm}")
+        lines.append(r"\vspace{3mm}")
         lines.append(r"\begin{tcolorbox}[bogi]")
         lines.append(bogi)
         lines.append(r"\end{tcolorbox}")
 
     # 조건
     if condition:
-        lines.append(r"\vspace{2mm}")
+        lines.append(r"\vspace{3mm}")
         lines.append(r"\begin{tcolorbox}[cond]")
         lines.append(condition)
         lines.append(r"\end{tcolorbox}")
 
     # 선택지
     if choices:
-        lines.append(r"\vspace{2mm}")
-        lines.append(r"\begin{itemize}[leftmargin=1.5em, labelsep=0pt, label={}, itemsep=1pt, parsep=0pt]")
+        lines.append(r"\vspace{3mm}")
+        lines.append(r"\begin{itemize}[leftmargin=1.5em, labelsep=0pt, label={}, itemsep=2pt, parsep=0pt]")
         for c in choices:
             lines.append(rf"  \item {c}")
         lines.append(r"\end{itemize}")
+
+    # 서술형/단답형 답안 밑줄
+    if answer_line_count > 0:
+        lines.append(r"\vspace{3mm}")
+        lines.append(rf"\answerlines{{{answer_line_count}}}")
 
     # 블록 닫기
     if is_twocol:
         if not passage_long:
             lines.append(r"\end{minipage}")
-            lines.append(r"\vspace{3mm}")
+            lines.append(r"\vspace{4mm}")
     else:
         if not passage_long:
             lines.append(r"\end{samepage}")
@@ -444,7 +477,7 @@ def compile_tex(tex_content, output_name, max_retries=2):
         except RuntimeError as e:
             last_err = e
             import time
-            time.sleep(0.5)  # Windows 파일시스템 안정화 대기
+            time.sleep(0.5)
     raise last_err
 
 
@@ -455,7 +488,6 @@ def _compile_once(tex_content, output_name):
         with open(tex_path, "w", encoding="utf-8") as f:
             f.write(tex_content)
 
-        # xelatex 2회 실행 (페이지 참조 안정화)
         for pass_num in range(2):
             result = subprocess.run(
                 [XELATEX, "-interaction=nonstopmode", "-halt-on-error", "test.tex"],
@@ -466,18 +498,15 @@ def _compile_once(tex_content, output_name):
                 timeout=120,
             )
             if result.returncode != 0 and pass_num == 1:
-                # 로그에서 에러 추출
                 log_path = os.path.join(tmpdir, "test.log")
                 log_text = ""
                 if os.path.exists(log_path):
                     with open(log_path, "r", encoding="utf-8", errors="replace") as f:
                         log_text = f.read()
-                # 에러 줄 추출
                 err_lines = [l for l in log_text.split("\n") if l.startswith("!")]
                 err_msg = "\n".join(err_lines[:5]) if err_lines else result.stdout[-500:]
                 raise RuntimeError(f"xelatex 컴파일 오류:\n{err_msg}")
 
-        # PDF 복사
         pdf_src = os.path.join(tmpdir, "test.pdf")
         if not os.path.exists(pdf_src):
             raise RuntimeError("PDF 생성 실패 — 출력 파일 없음")
@@ -505,7 +534,6 @@ def upload_to_s3():
         return False
     print("  S3 업로드 완료")
 
-    # CloudFront 무효화
     print("  CloudFront 무효화 중...")
     cmd = [
         AWS_CLI, "cloudfront", "create-invalidation",
@@ -531,7 +559,7 @@ def update_db(papers, tunnel_port):
         lid = p["level_id"]
         cn = p["chapter_number"]
         fname = f"{lid}_ch{cn:02d}.pdf"
-        pdf_url = f"https://dbtbky39ni3nn.cloudfront.net/test-pdfs/{fname}"
+        pdf_url = f"https://{CF_DOMAIN}/test-pdfs/{fname}"
         cur.execute(
             "UPDATE test_papers SET pdf_file_id = %s, updated_at = NOW() WHERE id = %s",
             (pdf_url, p["test_paper_id"])
@@ -601,12 +629,13 @@ def main():
             print("대상 시험지가 없습니다.")
             return
 
-        # 문제 전체
+        # 문제 전체 (model_answer 포함)
         paper_ids = [p["test_paper_id"] for p in papers]
         placeholders = ",".join(["%s"] * len(paper_ids))
         cur.execute(f"""
             SELECT tq.test_id, tq.number, tq.type, tq.points, tq.domain,
-                   tq.passage, tq.stem, tq.correct_answer, tq.choices_json AS choices
+                   tq.passage, tq.stem, tq.correct_answer, tq.model_answer,
+                   tq.choices_json AS choices
             FROM test_questions tq
             WHERE tq.test_id IN ({placeholders})
             ORDER BY tq.test_id, tq.number
@@ -668,7 +697,7 @@ def main():
 
     print(f"\n출력 디렉토리: {OUTPUT_DIR}")
     if ok > 0 and not args.no_upload:
-        print("PDF URL: https://dbtbky39ni3nn.cloudfront.net/test-pdfs/<level>_ch<nn>.pdf")
+        print(f"PDF URL: https://{CF_DOMAIN}/test-pdfs/<level>_ch<nn>.pdf")
 
 
 if __name__ == "__main__":
