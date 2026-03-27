@@ -56,11 +56,11 @@
 | 38 | 비문학 | 세포자멸사의 유도와 실행 카스파제 | 참고용 기출 지문 > 과학_세포자멸사.md.json |
 | 39 | 화법 | 학생회 예산 발표 자료 검토 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 40 | 작문 | 동아리 발표회 운영 안내문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 41 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
-| 42 | 문법 | 중세국어 (유형) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 43 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
-| 44 | 문학 | 길 | docs/wittgenstein2_source_inventory.md > 길 |
-| 45 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-language |
+| 41 | 비문학 | 동형암호의 부트스트래핑과 연산 효율 | 참고용 기출 지문 > 기술_동형암호.md.json |
+| 42 | 문법 | 중세국어의 객체 높임 선어말 어미 '-ᄌᆞᆸ-'과 특수 어휘 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 43 | 비문학 | 상호 매체성과 예술 형식의 경계 | 참고용 기출 지문 > 주제통합_06_예술_형식과_매체.json (나) |
+| 44 | 문학 | 길 | 참고용 기출 지문 > 길_정희성.md (나) |
+| 45 | 비문학 | 프레게의 뜻·지시체와 러셀의 기술 이론 | 참고용 기출 지문 > 인문예술_06_통일성_명제_관련_문제에_대한_프레게와_러셀의_이론.json |
 | 46 | 화법 | 인터뷰의 핵심 정보 (유형) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 47 | 작문 | 개념 정의 방식 (유형) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 48 | 비문학 | ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-psychology |
