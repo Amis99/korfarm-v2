@@ -296,11 +296,11 @@
 | 278 | 작문 | 축제 운영 후기 기사 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 279 | 비문학 | 공포 소구의 위협과 효능감 | 참고용 기출 지문 > 사회_공포 소구.md.json |
 | 280 | 문법 | 선어말 어미 '-겠-'과 '-더-'의 의미 기능 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 281 | 비문학 | 해양 산성화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
-| 282 | 문학 | 소나기 | docs/wittgenstein1_source_inventory.md > 소나기 |
-| 283 | 비문학 | 장르 관습 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
-| 284 | 화법 | 청자의 반응 추론 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 285 | 작문 | 자료 통합 구성 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 281 | 비문학 | 수치예보 모델의 분해능과 경계 조건 | 참고용 기출 지문 > 과학기술_대기 모델.md.json |
+| 282 | 문학 | 속사미인곡 | docs/wittgenstein1_source_inventory.md > 속사미인곡 |
+| 283 | 비문학 | 장르 관습과 독자의 기대 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > output > json > 지문으로이해하기_08_담화_공동체_독자.json |
+| 284 | 화법 | 발표 직후 청중 반응 점검 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 285 | 작문 | 조사 결과 기사 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 286 | 비문학 | 귀납의 문제 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 287 | 문법 | 형태소와 품사 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 288 | 비문학 | 감시 사회 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |

@@ -67,7 +67,7 @@
 | 봄봄 | exam-literature | 기출 문학 지문 → 작품 원문/교과서 수록본 대조 | 1회 | source_selected |
 | 사미인곡 | exam-literature | 기출 문학 지문 → 한국고전종합DB/고전시가 원문 대조 | 1회 | source_selected |
 | 포스터 속의 비둘기 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 현대 시 md > 27수특_포스터 속의 비둘기(신동집).md (가) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
-| 소나기 | exam-literature | 기출 문학 지문 → 작품 원문/교과서 수록본 대조 | 1회 | source_selected |
+| 속사미인곡 | exam-literature | 참고용 기출 지문 > 속사미인곡_이진유.md (가) | (가)/(나)/(다) 병치 source면 한 부분만 사용 | source_selected |
 | 수난이대 | exam-literature | 기출 문학 지문 → 작품 원문/교과서 수록본 대조 | 1회 | source_selected |
 | 시집가는 날 | exam-literature | 기출 문학 지문 → 희곡/수필 수록본 대조 | 1회 | source_selected |
 | 운수 좋은 날 | exam-literature | 기출 문학 지문 → 작품 원문/교과서 수록본 대조 | 1회 | source_selected |
