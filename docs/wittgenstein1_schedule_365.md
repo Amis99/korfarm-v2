@@ -346,11 +346,11 @@
 | 328 | 비문학 | 언어로의 전환과 역사 텍스트의 재개념화 | 참고용 기출 지문 > 인문_(가) 카의 역사관 _ (나) 언어로의 전환과 역사학.md.json (나) |
 | 329 | 문법 | 피동사로 파생되지 않는 동사와 통사적 피동의 제약 (종합) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
 | 330 | 비문학 | 현실요법의 기본 욕구와 선택 조절 | 참고용 기출 지문 > 인문_현실요법과 욕구.md.json |
-| 331 | 문학 | 적벽가 | docs/wittgenstein1_source_inventory.md > 적벽가 |
-| 332 | 비문학 | 생태 발자국 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
-| 333 | 화법 | 토론 반박의 타당성 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 334 | 작문 | 반박문 쓰기 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 335 | 비문학 | 매체와 재현 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
+| 331 | 문학 | 그 방을 생각하며 | docs/wittgenstein1_source_inventory.md > 그 방을 생각하며 |
+| 332 | 비문학 | 수치예보 모델의 공간분해능과 시간분해능 | 참고용 기출 지문 > 과학기술_대기 모델.md.json |
+| 333 | 화법 | 휴대 전화 보관함 의무화 토론 대본 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 334 | 작문 | 휴대 전화 보관함 의무화 반박문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 335 | 비문학 | 암묵적 독자와 담화 공동체 독자 | 참고용 기출 지문 > 지문으로이해하기_08_담화_공동체_독자.json |
 | 336 | 문법 | 의미 관계 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 337 | 비문학 | 도구적 이성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 338 | 문학 | 절정 | docs/wittgenstein1_source_inventory.md > 절정 |
