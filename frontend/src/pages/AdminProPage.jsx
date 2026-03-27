@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiPut } from "../utils/adminApi";
 import { API_BASE } from "../utils/api";
@@ -57,8 +57,8 @@ function AdminProPage() {
   const [loadError, setLoadError] = useState(null);
   const [statusCache, setStatusCache] = useState({});
 
-  /* 확장 패널 */
-  const [expandedId, setExpandedId] = useState(null);
+  /* 상세 뷰 */
+  const [selectedChapter, setSelectedChapter] = useState(null);
   const [activeTab, setActiveTab] = useState("content");
 
   /* 영상 URL */
@@ -133,13 +133,9 @@ function AdminProPage() {
     return { contentCount: total, answer: answerOk, test: latestVer };
   };
 
-  /* ═══ 챕터 행 토글 ═══ */
-  const toggleChapter = async (ch) => {
-    if (expandedId === ch.id) {
-      setExpandedId(null);
-      return;
-    }
-    setExpandedId(ch.id);
+  /* ═══ 챕터 상세 진입 ═══ */
+  const openDetail = async (ch) => {
+    setSelectedChapter(ch);
     setActiveTab("content");
     setEditVideoUrl(ch.videoUrl || ch.video_url || "");
     setAnswerMode("preview");
@@ -175,6 +171,11 @@ function AdminProPage() {
     setTestPaperId("");
   };
 
+  const backToList = () => {
+    setSelectedChapter(null);
+    load();
+  };
+
   /* ═══ 정답해설 로드 ═══ */
   const loadAnswerData = async (ch) => {
     setAnswerLoading(true);
@@ -202,17 +203,15 @@ function AdminProPage() {
 
   /* ═══ 영상 URL 저장 ═══ */
   const handleSaveVideo = async () => {
-    const ch = chapters.find((c) => c.id === expandedId);
-    if (!ch) return;
+    if (!selectedChapter) return;
     setVideoSaving(true);
     try {
-      await apiPut(`/v1/admin/pro/chapters/${ch.id}`, {
-        title: ch.title,
-        status: ch.status,
+      await apiPut(`/v1/admin/pro/chapters/${selectedChapter.id}`, {
+        title: selectedChapter.title,
+        status: selectedChapter.status,
         videoUrl: editVideoUrl || null,
       });
       alert("영상 URL 저장 완료");
-      load();
     } catch (err) {
       alert(err.message || "저장 실패");
     }
@@ -230,7 +229,7 @@ function AdminProPage() {
       const moduleKey = resolveModuleKey(ct, preview.moduleKey || preview.module_key);
       localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
       localStorage.setItem("korfarm_preview_module", moduleKey);
-      navigate("/admin/content/preview");
+      navigate("/admin/content/preview?from=/admin/pro");
     } catch (err) {
       alert(err.message || "미리보기 실패");
     }
@@ -242,15 +241,15 @@ function AdminProPage() {
     try { JSON.parse(answerJson); } catch { alert("JSON 형식이 올바르지 않습니다."); return; }
     setAnswerSaving(true);
     try {
-      const result = await apiPut(`/v1/admin/pro/chapters/${expandedId}/answer-content`, {
+      const result = await apiPut(`/v1/admin/pro/chapters/${selectedChapter.id}/answer-content`, {
         title: answerTitle,
         payload: JSON.parse(answerJson),
       });
       setAnswerContentId(result.contentId || result.content_id);
       alert("정답해설 저장 완료");
-      const st = await apiGet(`/v1/admin/pro/chapters/${expandedId}/content-status`);
+      const st = await apiGet(`/v1/admin/pro/chapters/${selectedChapter.id}/content-status`);
       setContentStatus(st);
-      setStatusCache((prev) => ({ ...prev, [expandedId]: st }));
+      setStatusCache((prev) => ({ ...prev, [selectedChapter.id]: st }));
     } catch (err) {
       alert(err.message || "저장 실패");
     }
@@ -276,10 +275,23 @@ function AdminProPage() {
 
   /* ═══ 정답해설 미리보기 렌더 ═══ */
   const renderAnswerPreview = () => {
+    if (!answerJson || answerJson === ANSWER_TEMPLATE) {
+      return <p className="ap-muted">저장된 정답해설이 없습니다. JSON 편집 탭에서 작성하세요.</p>;
+    }
     let data;
     try { data = JSON.parse(answerJson); } catch { return <p className="ap-error">JSON 파싱 실패</p>; }
+    if (!data) return <p className="ap-muted">데이터가 비어있습니다.</p>;
+
     const sections = data?.sections || [];
-    if (sections.length === 0) return <p className="ap-muted">섹션이 없습니다.</p>;
+    if (sections.length === 0) {
+      return (
+        <div>
+          <p className="ap-muted">sections 구조가 아닙니다. 원본 JSON:</p>
+          <pre className="ap-raw-json">{answerJson}</pre>
+        </div>
+      );
+    }
+
     return sections.map((section, si) => (
       <div key={si} className="ap-preview-section">
         <h4 className="ap-preview-section-title">{section.title}</h4>
@@ -348,7 +360,7 @@ function AdminProPage() {
     setTestQuestionsSaving(false);
   };
 
-  const startEditQuestion = (idx) => { setEditingQIdx(idx); setEditQ({ ...testQuestions[idx] }); };
+  const startEditQuestion = (idx) => { setEditingQIdx(idx); setEditQ(JSON.parse(JSON.stringify(testQuestions[idx]))); };
   const cancelEditQuestion = () => { setEditingQIdx(null); setEditQ(null); };
 
   const applyEditQuestion = () => {
@@ -372,20 +384,16 @@ function AdminProPage() {
 
   const addQuestion = () => {
     const nextNum = testQuestions.length + 1;
-    setTestQuestions([...testQuestions, {
+    const newQ = {
       number: nextNum, type: "객관식", domain: "", points: 3, stem: "", passage: null,
       correctAnswer: "",
       choices: [{ id: "1", text: "" }, { id: "2", text: "" }, { id: "3", text: "" }, { id: "4", text: "" }],
       choiceExplanations: {},
-    }]);
+    };
+    setTestQuestions([...testQuestions, newQ]);
     setTestQuestionsModified(true);
     setEditingQIdx(testQuestions.length);
-    setEditQ({
-      number: nextNum, type: "객관식", domain: "", points: 3, stem: "", passage: null,
-      correctAnswer: "",
-      choices: [{ id: "1", text: "" }, { id: "2", text: "" }, { id: "3", text: "" }, { id: "4", text: "" }],
-      choiceExplanations: {},
-    });
+    setEditQ(JSON.parse(JSON.stringify(newQ)));
   };
 
   const handleTestJsonDownload = () => {
@@ -420,13 +428,13 @@ function AdminProPage() {
   const handleRegisterTest = async () => {
     if (!testPaperId) { alert("시험지를 선택하세요."); return; }
     try {
-      await apiPost(`/v1/admin/pro/chapters/${expandedId}/tests`, {
+      await apiPost(`/v1/admin/pro/chapters/${selectedChapter.id}/tests`, {
         version: Number(testVersion), testPaperId,
       });
       alert(`버전 ${testVersion} 테스트 등록 완료`);
-      const st = await apiGet(`/v1/admin/pro/chapters/${expandedId}/content-status`);
+      const st = await apiGet(`/v1/admin/pro/chapters/${selectedChapter.id}/content-status`);
       setContentStatus(st);
-      setStatusCache((prev) => ({ ...prev, [expandedId]: st }));
+      setStatusCache((prev) => ({ ...prev, [selectedChapter.id]: st }));
       setTestVersion((v) => Number(v) + 1);
       setTestPaperId("");
     } catch (err) {
@@ -451,17 +459,69 @@ function AdminProPage() {
 
   const tests = contentStatus?.testVersions || contentStatus?.test_versions || [];
 
-  /* ═══════════════════════ 렌더링 ═══════════════════════ */
+  /* ═══════════════════════════════════════════════════════
+     ══════════════ 상세 뷰 ══════════════
+     ═══════════════════════════════════════════════════════ */
+  if (selectedChapter) {
+    return (
+      <AdminLayout>
+        <div className="ts-page ts-admin ap-page">
+          {/* 상세 헤더 */}
+          <header className="ap-detail-header">
+            <button className="ap-back-btn" onClick={backToList}>
+              <span className="material-symbols-outlined">arrow_back</span>
+              목록으로
+            </button>
+            <div className="ap-detail-title-area">
+              <h1>{selectedChapter.title}</h1>
+              <span className="ap-detail-level">{selectedChapter.levelId || selectedChapter.level_id}</span>
+            </div>
+          </header>
+
+          {/* 영상 URL */}
+          <div className="ap-card ap-video-card">
+            <label>영상 URL</label>
+            <div className="ap-video-input-row">
+              <input
+                value={editVideoUrl}
+                onChange={(e) => setEditVideoUrl(e.target.value)}
+                placeholder="https://www.youtube.com/watch?v=..."
+              />
+              <button className="ts-btn ts-btn-primary ts-btn-sm" onClick={handleSaveVideo} disabled={videoSaving}>
+                {videoSaving ? "..." : "저장"}
+              </button>
+            </div>
+          </div>
+
+          {/* 3탭 */}
+          <div className="ap-tabs">
+            <button className={`ap-tab ${activeTab === "content" ? "active" : ""}`} onClick={() => setActiveTab("content")}>콘텐츠</button>
+            <button className={`ap-tab ${activeTab === "answer" ? "active" : ""}`} onClick={() => setActiveTab("answer")}>정답과 해설</button>
+            <button className={`ap-tab ${activeTab === "test" ? "active" : ""}`} onClick={() => setActiveTab("test")}>테스트 관리</button>
+          </div>
+
+          <div className="ap-card ap-tab-body">
+            {activeTab === "content" && renderContentTab()}
+            {activeTab === "answer" && renderAnswerTab()}
+            {activeTab === "test" && renderTestTab()}
+          </div>
+        </div>
+      </AdminLayout>
+    );
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     ══════════════ 목록 뷰 ══════════════
+     ═══════════════════════════════════════════════════════ */
   return (
     <AdminLayout>
       <div className="ts-page ts-admin ap-page">
-        {/* 헤더 */}
-        <header className="ts-header">
+        <header className="ap-list-header">
           <h1>프로 모드 관리</h1>
           <select
-            className="ts-level-select ap-level-dropdown"
+            className="ap-level-dropdown"
             value={levelFilter}
-            onChange={(e) => { setLevelFilter(e.target.value); setExpandedId(null); }}
+            onChange={(e) => setLevelFilter(e.target.value)}
           >
             {COURSE_LEVELS.map((lv) => (
               <option key={lv.id} value={lv.id}>{lv.name}</option>
@@ -469,7 +529,6 @@ function AdminProPage() {
           </select>
         </header>
 
-        {/* 본문 */}
         {loading ? (
           <div className="ts-center"><p>불러오는 중...</p></div>
         ) : loadError ? (
@@ -480,13 +539,13 @@ function AdminProPage() {
         ) : chapters.length === 0 ? (
           <div className="ts-center"><p>등록된 챕터가 없습니다.</p></div>
         ) : (
-          <div className="admin-table-scroll">
+          <div className="ap-card">
             <table className="ts-table ap-chapter-table">
               <thead>
                 <tr>
                   <th className="ap-col-num">#</th>
                   <th className="ap-col-chapter">챕터명</th>
-                  <th className="ap-col-content">콘텐츠수</th>
+                  <th className="ap-col-content">콘텐츠</th>
                   <th className="ap-col-answer">해설</th>
                   <th className="ap-col-test">시험</th>
                   <th className="ap-col-action"></th>
@@ -495,85 +554,35 @@ function AdminProPage() {
               <tbody>
                 {chapters.map((ch) => {
                   const comp = getCompleteness(ch);
-                  const isExpanded = expandedId === ch.id;
                   return (
-                    <Fragment key={ch.id}>
-                      {/* 챕터 행 */}
-                      <tr
-                        className={`ts-clickable-row ${isExpanded ? "ap-row-expanded" : ""}`}
-                        onClick={() => toggleChapter(ch)}
-                      >
-                        <td className="ap-col-num">{ch.chapterNumber ?? ch.chapter_number}</td>
-                        <td className="ap-col-chapter">
-                          <span className="ap-chapter-name">{ch.title}</span>
-                        </td>
-                        <td className="ap-col-content">
-                          {comp.contentCount !== null ? (
-                            <span className={comp.contentCount >= 4 ? "ap-count-ok" : "ap-count-miss"}>
-                              {comp.contentCount}/5
-                            </span>
-                          ) : <span className="ap-muted">...</span>}
-                        </td>
-                        <td className="ap-col-answer">
-                          {comp.answer !== null
-                            ? (comp.answer
-                              ? <span className="ap-check ok">✓</span>
-                              : <span className="ap-check miss">✗</span>)
+                    <tr key={ch.id} className="ts-clickable-row" onClick={() => openDetail(ch)}>
+                      <td className="ap-col-num">{ch.chapterNumber ?? ch.chapter_number}</td>
+                      <td className="ap-col-chapter">
+                        <span className="ap-chapter-name">{ch.title}</span>
+                      </td>
+                      <td className="ap-col-content">
+                        {comp.contentCount !== null
+                          ? <span className={`ap-badge ${comp.contentCount >= 4 ? "ap-badge-ok" : "ap-badge-warn"}`}>{comp.contentCount}</span>
+                          : <span className="ap-muted">...</span>}
+                      </td>
+                      <td className="ap-col-answer">
+                        {comp.answer !== null
+                          ? (comp.answer
+                            ? <span className="ap-badge ap-badge-ok">✓</span>
+                            : <span className="ap-badge ap-badge-miss">✗</span>)
+                          : <span className="ap-muted">...</span>}
+                      </td>
+                      <td className="ap-col-test">
+                        {comp.test
+                          ? <span className="ap-badge ap-badge-info">{comp.test}</span>
+                          : comp.answer !== null
+                            ? <span className="ap-badge ap-badge-miss">-</span>
                             : <span className="ap-muted">...</span>}
-                        </td>
-                        <td className="ap-col-test">
-                          {comp.test
-                            ? <span className="ap-test-count">{comp.test}</span>
-                            : comp.answer !== null
-                              ? <span className="ap-check miss">-</span>
-                              : <span className="ap-muted">...</span>}
-                        </td>
-                        <td className="ap-col-action">
-                          <span className={`material-symbols-outlined ap-chevron ${isExpanded ? "ap-chevron-open" : ""}`}>
-                            expand_more
-                          </span>
-                        </td>
-                      </tr>
-
-                      {/* 확장 패널 */}
-                      {isExpanded && (
-                        <tr className="ap-expand-row">
-                          <td colSpan={6}>
-                            <div className="ap-expand-panel">
-                              {/* 영상 URL */}
-                              <div className="ap-video-row">
-                                <label>영상 URL</label>
-                                <input
-                                  value={editVideoUrl}
-                                  onChange={(e) => setEditVideoUrl(e.target.value)}
-                                  placeholder="https://www.youtube.com/watch?v=..."
-                                />
-                                <button
-                                  className="ts-btn ts-btn-primary ts-btn-sm"
-                                  onClick={handleSaveVideo}
-                                  disabled={videoSaving}
-                                >
-                                  {videoSaving ? "..." : "저장"}
-                                </button>
-                              </div>
-
-                              {/* 3탭 */}
-                              <div className="ap-tabs">
-                                <button className={`ap-tab ${activeTab === "content" ? "active" : ""}`} onClick={() => setActiveTab("content")}>콘텐츠</button>
-                                <button className={`ap-tab ${activeTab === "answer" ? "active" : ""}`} onClick={() => setActiveTab("answer")}>정답과 해설</button>
-                                <button className={`ap-tab ${activeTab === "test" ? "active" : ""}`} onClick={() => setActiveTab("test")}>테스트 관리</button>
-                              </div>
-
-                              <div className="ap-tab-body">
-                                {activeTab === "content" && <ContentTab />}
-                                {activeTab === "answer" && <AnswerTab />}
-                                {activeTab === "test" && <TestTab />}
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      )}
-                    </Fragment>
+                      </td>
+                      <td className="ap-col-action">
+                        <span className="material-symbols-outlined ap-row-arrow">chevron_right</span>
+                      </td>
+                    </tr>
                   );
                 })}
               </tbody>
@@ -585,84 +594,64 @@ function AdminProPage() {
   );
 
   /* ══════════════ 탭 1: 콘텐츠 ══════════════ */
-  function ContentTab() {
+  function renderContentTab() {
     if (contentLoading) return <p className="ap-muted">불러오는 중...</p>;
     if (!contentStatus) return <p className="ap-muted">콘텐츠 현황을 불러올 수 없습니다.</p>;
     const items = getContentItems();
     if (items.length === 0) return <p className="ap-muted">연결된 콘텐츠가 없습니다.</p>;
 
     return (
-      <div className="admin-table-scroll">
-        <table className="ts-table ap-content-table">
-          <thead>
-            <tr>
-              <th>제목</th>
-              <th>유형</th>
-              <th>최종수정일</th>
-              <th>액션</th>
+      <table className="ts-table ap-content-table">
+        <thead>
+          <tr>
+            <th>제목</th>
+            <th>유형</th>
+            <th>최종수정일</th>
+            <th>액션</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((c) => (
+            <tr key={c.id}>
+              <td className="ap-ct-title">{c.title || "(제목 없음)"}</td>
+              <td><span className={`ap-ct-type ap-ct-type-${c.typeKey}`}>{c.type}</span></td>
+              <td className="ap-ct-date">{c.updatedAt ? new Date(c.updatedAt).toLocaleDateString("ko") : "-"}</td>
+              <td className="ap-ct-actions">
+                <button className="ap-icon-btn" title="미리보기" disabled={previewLoadingId === c.id}
+                  onClick={() => handleContentPreview(c.id)}>
+                  {previewLoadingId === c.id ? "..." : <span className="material-symbols-outlined">visibility</span>}
+                </button>
+                <button className="ap-icon-btn" title="수정"
+                  onClick={() => navigate(`/admin/content/edit?id=${c.id}&from=/admin/pro`)}>
+                  <span className="material-symbols-outlined">edit</span>
+                </button>
+                <button className="ap-icon-btn ap-icon-btn-muted" title="정보"
+                  onClick={() => setInfoPopoverId(infoPopoverId === c.id ? null : c.id)}>
+                  <span className="material-symbols-outlined">info</span>
+                </button>
+                {infoPopoverId === c.id && (
+                  <div className="ap-info-popover">
+                    <div><strong>ID:</strong> <code>{c.id}</code></div>
+                    <div><strong>타입:</strong> {c.contentType}</div>
+                  </div>
+                )}
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {items.map((c) => (
-              <tr key={c.id}>
-                <td className="ap-ct-title">{c.title || "(제목 없음)"}</td>
-                <td>
-                  <span className={`ap-ct-type ap-ct-type-${c.typeKey}`}>{c.type}</span>
-                </td>
-                <td className="ap-ct-date">
-                  {c.updatedAt ? new Date(c.updatedAt).toLocaleDateString("ko") : "-"}
-                </td>
-                <td className="ap-ct-actions">
-                  <button
-                    className="ap-q-btn edit"
-                    title="미리보기"
-                    disabled={previewLoadingId === c.id}
-                    onClick={(e) => { e.stopPropagation(); handleContentPreview(c.id); }}
-                  >
-                    {previewLoadingId === c.id
-                      ? "..."
-                      : <span className="material-symbols-outlined">visibility</span>}
-                  </button>
-                  <button
-                    className="ap-q-btn edit"
-                    title="수정"
-                    onClick={(e) => { e.stopPropagation(); navigate(`/admin/content/edit?id=${c.id}`); }}
-                  >
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
-                  <button
-                    className="ap-q-btn"
-                    title="정보"
-                    style={{ color: "var(--admin-muted, #a6b6a9)" }}
-                    onClick={(e) => { e.stopPropagation(); setInfoPopoverId(infoPopoverId === c.id ? null : c.id); }}
-                  >
-                    <span className="material-symbols-outlined">info</span>
-                  </button>
-                  {infoPopoverId === c.id && (
-                    <div className="ap-info-popover">
-                      <div><strong>ID:</strong> <code>{c.id}</code></div>
-                      <div><strong>타입:</strong> {c.contentType}</div>
-                    </div>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     );
   }
 
   /* ══════════════ 탭 2: 정답과 해설 ══════════════ */
-  function AnswerTab() {
+  function renderAnswerTab() {
     if (answerLoading) return <p className="ap-muted">불러오는 중...</p>;
     return (
       <div className="ap-answer-section">
-        {/* 모드 토글 */}
         <div className="ap-answer-mode-bar">
-          <button className={`ts-btn ts-btn-sm ${answerMode === "preview" ? "ts-btn-primary" : "ts-btn-outline"}`} onClick={() => setAnswerMode("preview")}>미리보기</button>
-          <button className={`ts-btn ts-btn-sm ${answerMode === "edit" ? "ts-btn-primary" : "ts-btn-outline"}`} onClick={() => setAnswerMode("edit")}>JSON 편집</button>
-          <button className={`ts-btn ts-btn-sm ${answerMode === "upload" ? "ts-btn-primary" : "ts-btn-outline"}`} onClick={() => setAnswerMode("upload")}>파일 업로드</button>
+          <button className={`ap-mode-btn ${answerMode === "preview" ? "active" : ""}`} onClick={() => setAnswerMode("preview")}>미리보기</button>
+          <button className={`ap-mode-btn ${answerMode === "edit" ? "active" : ""}`} onClick={() => setAnswerMode("edit")}>JSON 편집</button>
+          <button className={`ap-mode-btn ${answerMode === "upload" ? "active" : ""}`} onClick={() => setAnswerMode("upload")}>파일 업로드</button>
           {answerContentId && <span className="ap-answer-id">ID: {answerContentId.slice(0, 16)}...</span>}
         </div>
 
@@ -675,18 +664,12 @@ function AdminProPage() {
 
         {answerMode === "edit" && (
           <div className="ap-answer-edit">
-            <label className="ap-answer-title-label">
+            <label className="ap-field-label">
               제목
               <input value={answerTitle} onChange={(e) => setAnswerTitle(e.target.value)} />
             </label>
-            <textarea
-              className="ap-json-editor"
-              value={answerJson}
-              onChange={(e) => setAnswerJson(e.target.value)}
-              rows={18}
-              spellCheck={false}
-            />
-            <div className="ap-answer-actions">
+            <textarea className="ap-json-editor" value={answerJson} onChange={(e) => setAnswerJson(e.target.value)} rows={20} spellCheck={false} />
+            <div className="ap-actions-right">
               <button className="ts-btn ts-btn-primary" onClick={handleSaveAnswer} disabled={answerSaving}>
                 {answerSaving ? "저장 중..." : "저장"}
               </button>
@@ -709,10 +692,9 @@ function AdminProPage() {
   }
 
   /* ══════════════ 탭 3: 테스트 관리 ══════════════ */
-  function TestTab() {
+  function renderTestTab() {
     return (
       <div className="ap-test-section">
-        {/* 상단: 시험지 선택 + 서브탭 + JSON I/O */}
         <div className="ap-test-header">
           <div className="ap-test-version-select">
             <label>
@@ -727,12 +709,10 @@ function AdminProPage() {
               </select>
             </label>
           </div>
-
           <div className="ap-test-sub-tabs">
-            <button className={`ap-tab-sm ${testSubTab === "editor" ? "active" : ""}`} onClick={() => setTestSubTab("editor")}>비주얼 에디터</button>
-            <button className={`ap-tab-sm ${testSubTab === "pdf" ? "active" : ""}`} onClick={() => setTestSubTab("pdf")}>PDF 미리보기</button>
+            <button className={`ap-mode-btn ${testSubTab === "editor" ? "active" : ""}`} onClick={() => setTestSubTab("editor")}>비주얼 에디터</button>
+            <button className={`ap-mode-btn ${testSubTab === "pdf" ? "active" : ""}`} onClick={() => setTestSubTab("pdf")}>PDF 미리보기</button>
           </div>
-
           <div className="ap-test-io-btns">
             <button className="ts-btn ts-btn-outline ts-btn-sm" onClick={handleTestJsonDownload} disabled={testQuestions.length === 0}>
               <span className="material-symbols-outlined">download</span> JSON
@@ -745,22 +725,15 @@ function AdminProPage() {
           </div>
         </div>
 
-        {/* 비주얼 에디터 서브탭 */}
-        {testSubTab === "editor" && <TestEditorSub />}
-
-        {/* PDF 미리보기 서브탭 */}
-        {testSubTab === "pdf" && <TestPdfSub />}
+        {testSubTab === "editor" && renderTestEditor()}
+        {testSubTab === "pdf" && renderTestPdf()}
 
         {/* 버전 등록 */}
         <div className="ap-test-register">
           <h4>새 버전 등록</h4>
           <div className="ap-test-register-row">
-            <label>
-              버전
-              <input type="number" min={1} value={testVersion} onChange={(e) => setTestVersion(e.target.value)} />
-            </label>
-            <label>
-              시험지
+            <label>버전 <input type="number" min={1} value={testVersion} onChange={(e) => setTestVersion(e.target.value)} /></label>
+            <label>시험지
               <select value={testPaperId} onChange={(e) => setTestPaperId(e.target.value)}>
                 <option value="">-- 시험지 선택 --</option>
                 {testPapers.map((tp) => (
@@ -777,31 +750,22 @@ function AdminProPage() {
     );
   }
 
-  /* ── 비주얼 에디터 서브탭 ── */
-  function TestEditorSub() {
+  /* ── 비주얼 에디터 ── */
+  function renderTestEditor() {
     if (!selectedTestPaperId) return <p className="ap-muted">시험지를 선택하세요.</p>;
     if (testQuestionsLoading) return <p className="ap-muted">문항을 불러오는 중...</p>;
 
-    /* JSON 직접 편집 모드 */
     if (testJsonMode) {
       return (
         <div className="ap-test-json-edit">
-          <textarea
-            className="ap-json-editor"
-            value={testJsonText}
-            onChange={(e) => setTestJsonText(e.target.value)}
-            rows={24}
-            spellCheck={false}
-          />
-          <div className="ap-test-json-actions">
+          <textarea className="ap-json-editor" value={testJsonText} onChange={(e) => setTestJsonText(e.target.value)} rows={24} spellCheck={false} />
+          <div className="ap-actions-right">
             <button className="ts-btn ts-btn-primary" onClick={() => {
               try {
                 const parsed = JSON.parse(testJsonText);
                 const qs = Array.isArray(parsed) ? parsed : parsed.questions;
                 if (!Array.isArray(qs)) { alert("questions 배열을 찾을 수 없습니다."); return; }
-                setTestQuestions(qs);
-                setTestQuestionsModified(true);
-                setTestJsonMode(false);
+                setTestQuestions(qs); setTestQuestionsModified(true); setTestJsonMode(false);
               } catch { alert("JSON 파싱 실패"); }
             }}>JSON 적용</button>
             <button className="ts-btn ts-btn-outline" onClick={() => setTestJsonMode(false)}>취소</button>
@@ -813,67 +777,42 @@ function AdminProPage() {
     return (
       <>
         {testQuestions.length > 0 ? (
-          <div className="admin-table-scroll">
-            <table className="ts-table ap-q-table">
-              <thead>
-                <tr>
-                  <th>#</th><th>유형</th><th>역량</th><th>배점</th><th>정답</th><th>문제 미리보기</th><th></th>
+          <table className="ts-table ap-q-table">
+            <thead>
+              <tr><th>#</th><th>유형</th><th>역량</th><th>배점</th><th>정답</th><th>문제 미리보기</th><th></th></tr>
+            </thead>
+            <tbody>
+              {testQuestions.map((q, idx) => (
+                <tr key={idx} className={editingQIdx === idx ? "ap-q-editing" : ""}>
+                  <td>{q.number}</td>
+                  <td><span className={`ap-q-type-badge ${q.type === "서술형" ? "essay" : "mc"}`}>{q.type}</span></td>
+                  <td className="ap-q-domain">{q.domain || "-"}</td>
+                  <td>{q.points}</td>
+                  <td className="ap-mono">{q.correctAnswer || q.correct_answer || (q.modelAnswer || q.model_answer ? "서술" : "-")}</td>
+                  <td className="ap-q-stem-preview">{(q.stem || q.passage || "").slice(0, 40)}{(q.stem || q.passage || "").length > 40 ? "..." : ""}</td>
+                  <td className="ap-q-actions">
+                    <button className="ap-icon-btn" title="편집" onClick={() => startEditQuestion(idx)}><span className="material-symbols-outlined">edit</span></button>
+                    <button className="ap-icon-btn ap-icon-btn-danger" title="삭제" onClick={() => deleteQuestion(idx)}><span className="material-symbols-outlined">delete</span></button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {testQuestions.map((q, idx) => (
-                  <tr key={idx} className={editingQIdx === idx ? "ap-q-editing" : ""}>
-                    <td>{q.number}</td>
-                    <td><span className={`ap-q-type-badge ${q.type === "서술형" ? "essay" : "mc"}`}>{q.type}</span></td>
-                    <td className="ap-q-domain">{q.domain || "-"}</td>
-                    <td>{q.points}</td>
-                    <td className="ap-mono">{q.correctAnswer || q.correct_answer || (q.modelAnswer || q.model_answer ? "서술" : "-")}</td>
-                    <td className="ap-q-stem-preview">
-                      {(q.stem || q.passage || "").slice(0, 40)}
-                      {(q.stem || q.passage || "").length > 40 ? "..." : ""}
-                    </td>
-                    <td className="ap-q-actions">
-                      <button className="ap-q-btn edit" title="편집" onClick={() => startEditQuestion(idx)}>
-                        <span className="material-symbols-outlined">edit</span>
-                      </button>
-                      <button className="ap-q-btn delete" title="삭제" onClick={() => deleteQuestion(idx)}>
-                        <span className="material-symbols-outlined">delete</span>
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <p className="ap-muted">문항이 없습니다.</p>
-        )}
+              ))}
+            </tbody>
+          </table>
+        ) : <p className="ap-muted">문항이 없습니다.</p>}
 
         {/* 문항 편집 패널 */}
-        {editingQIdx !== null && editQ && <QuestionEditPanel />}
+        {editingQIdx !== null && editQ && renderQuestionEditPanel()}
 
-        {/* 하단 액션 */}
         <div className="ap-test-bottom-actions">
           <div className="ap-test-bottom-left">
-            <button className="ts-btn ts-btn-outline ts-btn-sm" onClick={addQuestion}>
-              <span className="material-symbols-outlined">add</span> 문항 추가
-            </button>
-            <button className="ts-btn ts-btn-outline ts-btn-sm" onClick={() => {
-              setTestJsonText(JSON.stringify(testQuestions, null, 2));
-              setTestJsonMode(true);
-              setEditingQIdx(null);
-              setEditQ(null);
-            }}>
+            <button className="ts-btn ts-btn-outline ts-btn-sm" onClick={addQuestion}><span className="material-symbols-outlined">add</span> 문항 추가</button>
+            <button className="ts-btn ts-btn-outline ts-btn-sm" onClick={() => { setTestJsonText(JSON.stringify(testQuestions, null, 2)); setTestJsonMode(true); setEditingQIdx(null); setEditQ(null); }}>
               <span className="material-symbols-outlined">code</span> JSON 편집
             </button>
           </div>
           <div className="ap-test-bottom-right">
             <span className="ap-q-count">{testQuestions.length}문항 / {testQuestions.reduce((s, q) => s + (q.points || 0), 0)}점</span>
-            <button
-              className="ts-btn ts-btn-primary ts-btn-sm"
-              onClick={handleSaveTestQuestions}
-              disabled={testQuestionsSaving || !testQuestionsModified}
-            >
+            <button className="ts-btn ts-btn-primary ts-btn-sm" onClick={handleSaveTestQuestions} disabled={testQuestionsSaving || !testQuestionsModified}>
               {testQuestionsSaving ? "저장 중..." : "문항 저장"}
             </button>
           </div>
@@ -882,104 +821,85 @@ function AdminProPage() {
     );
   }
 
-  /* ── 문항 편집 패널 ── */
-  function QuestionEditPanel() {
+  /* ── 문항 편집 패널 (지문/문제/선택지/정답/해설 분리) ── */
+  function renderQuestionEditPanel() {
     return (
       <div className="ap-q-edit-panel">
         <h4>문항 {editQ.number} 편집</h4>
+
+        {/* 기본 정보 */}
+        <div className="ap-q-section-label">기본 정보</div>
         <div className="ap-q-edit-grid">
-          <label>
-            유형
+          <label>유형
             <select value={editQ.type} onChange={(e) => setEditQ({ ...editQ, type: e.target.value })}>
               <option value="객관식">객관식</option>
               <option value="서술형">서술형</option>
             </select>
           </label>
-          <label>
-            역량 (domain)
+          <label>역량
             <input value={editQ.domain || ""} onChange={(e) => setEditQ({ ...editQ, domain: e.target.value })} />
           </label>
-          <label>
-            배점
+          <label>배점
             <input type="number" min={1} value={editQ.points} onChange={(e) => setEditQ({ ...editQ, points: Number(e.target.value) })} />
           </label>
-          {editQ.type === "객관식" && (
-            <label>
-              정답
-              <input
-                value={editQ.correctAnswer || editQ.correct_answer || ""}
-                onChange={(e) => setEditQ({ ...editQ, correctAnswer: e.target.value })}
-                placeholder="예: 2"
-              />
-            </label>
-          )}
         </div>
 
-        <label className="ap-q-edit-full">
-          문제 본문 (stem)
-          <textarea value={editQ.stem || ""} onChange={(e) => setEditQ({ ...editQ, stem: e.target.value })} rows={3} />
-        </label>
-        <label className="ap-q-edit-full">
-          지문 (passage)
-          <textarea value={editQ.passage || ""} onChange={(e) => setEditQ({ ...editQ, passage: e.target.value || null })} rows={4} placeholder="독해 지문이 있는 경우 입력" />
-        </label>
+        {/* 지문 */}
+        <div className="ap-q-section-label">지문</div>
+        <textarea className="ap-q-textarea" value={editQ.passage || ""} onChange={(e) => setEditQ({ ...editQ, passage: e.target.value || null })} rows={4} placeholder="독해 지문이 있는 경우 입력" />
+
+        {/* 문제 */}
+        <div className="ap-q-section-label">문제</div>
+        <textarea className="ap-q-textarea" value={editQ.stem || ""} onChange={(e) => setEditQ({ ...editQ, stem: e.target.value })} rows={3} placeholder="문제 본문" />
 
         {editQ.type === "객관식" && (
-          <div className="ap-q-choices-edit">
-            <h5>선택지 / 해설</h5>
-            {(editQ.choices || []).map((ch, ci) => (
-              <div key={ci} className="ap-q-choice-row">
-                <span className="ap-q-choice-num">{ch.id || ci + 1}</span>
-                <input
-                  className="ap-q-choice-text"
-                  value={ch.text}
-                  onChange={(e) => {
-                    const next = [...(editQ.choices || [])];
-                    next[ci] = { ...next[ci], text: e.target.value };
+          <>
+            {/* 선택지 */}
+            <div className="ap-q-section-label">선택지</div>
+            <div className="ap-q-choices-grid">
+              {(editQ.choices || []).map((ch, ci) => (
+                <div key={ci} className="ap-q-choice-row">
+                  <span className="ap-q-choice-num">{ch.id || ci + 1}</span>
+                  <input value={ch.text} onChange={(e) => {
+                    const next = [...(editQ.choices || [])]; next[ci] = { ...next[ci], text: e.target.value };
                     setEditQ({ ...editQ, choices: next });
-                  }}
-                  placeholder="선택지 텍스트"
-                />
-                <input
-                  className="ap-q-choice-expl"
-                  value={(editQ.choiceExplanations || editQ.choice_explanations || {})[ch.id || String(ci + 1)] || ""}
-                  onChange={(e) => {
+                  }} placeholder="선택지 텍스트" />
+                </div>
+              ))}
+              <button className="ap-add-link" onClick={() => {
+                const nextId = String((editQ.choices || []).length + 1);
+                setEditQ({ ...editQ, choices: [...(editQ.choices || []), { id: nextId, text: "" }] });
+              }}>+ 선택지 추가</button>
+            </div>
+
+            {/* 정답 */}
+            <div className="ap-q-section-label">정답</div>
+            <input className="ap-q-answer-input" value={editQ.correctAnswer || editQ.correct_answer || ""} onChange={(e) => setEditQ({ ...editQ, correctAnswer: e.target.value })} placeholder="예: 2" />
+
+            {/* 해설 */}
+            <div className="ap-q-section-label">선택지별 해설</div>
+            <div className="ap-q-choices-grid">
+              {(editQ.choices || []).map((ch, ci) => (
+                <div key={ci} className="ap-q-choice-row">
+                  <span className="ap-q-choice-num">{ch.id || ci + 1}</span>
+                  <input value={(editQ.choiceExplanations || editQ.choice_explanations || {})[ch.id || String(ci + 1)] || ""} onChange={(e) => {
                     const key = ch.id || String(ci + 1);
                     const expl = { ...(editQ.choiceExplanations || editQ.choice_explanations || {}), [key]: e.target.value };
                     setEditQ({ ...editQ, choiceExplanations: expl });
-                  }}
-                  placeholder="해설"
-                />
-              </div>
-            ))}
-            <button className="ts-btn ts-btn-outline ap-q-add-choice" onClick={() => {
-              const nextId = String((editQ.choices || []).length + 1);
-              setEditQ({ ...editQ, choices: [...(editQ.choices || []), { id: nextId, text: "" }] });
-            }}>
-              + 선택지 추가
-            </button>
-          </div>
+                  }} placeholder="해설" />
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
         {editQ.type === "서술형" && (
-          <div className="ap-q-essay-edit">
-            <label className="ap-q-edit-full">
-              모범답안
-              <textarea
-                value={editQ.modelAnswer || editQ.model_answer || ""}
-                onChange={(e) => setEditQ({ ...editQ, modelAnswer: e.target.value })}
-                rows={3}
-              />
-            </label>
-            <label className="ap-q-edit-full">
-              채점 기준 (rubric)
-              <textarea
-                value={editQ.essayRubric || editQ.essay_rubric || ""}
-                onChange={(e) => setEditQ({ ...editQ, essayRubric: e.target.value })}
-                rows={2}
-              />
-            </label>
-          </div>
+          <>
+            <div className="ap-q-section-label">모범답안</div>
+            <textarea className="ap-q-textarea" value={editQ.modelAnswer || editQ.model_answer || ""} onChange={(e) => setEditQ({ ...editQ, modelAnswer: e.target.value })} rows={3} />
+            <div className="ap-q-section-label">채점 기준</div>
+            <textarea className="ap-q-textarea" value={editQ.essayRubric || editQ.essay_rubric || ""} onChange={(e) => setEditQ({ ...editQ, essayRubric: e.target.value })} rows={2} />
+          </>
         )}
 
         <div className="ap-q-edit-actions">
@@ -990,12 +910,10 @@ function AdminProPage() {
     );
   }
 
-  /* ── PDF 미리보기 서브탭 ── */
-  function TestPdfSub() {
+  /* ── PDF 미리보기 ── */
+  function renderTestPdf() {
     if (!selectedTestPaperId) return <p className="ap-muted">시험지를 선택하세요.</p>;
-    const selectedTest = tests.find(
-      (t) => (t.testPaperId || t.test_paper_id) === selectedTestPaperId,
-    );
+    const selectedTest = tests.find((t) => (t.testPaperId || t.test_paper_id) === selectedTestPaperId);
     const pdfFileId = selectedTest?.pdfFileId || selectedTest?.pdf_file_id;
     if (!pdfFileId) return <p className="ap-muted">이 시험지에 연결된 PDF가 없습니다.</p>;
     const base = API_BASE.replace(/\/$/, "");

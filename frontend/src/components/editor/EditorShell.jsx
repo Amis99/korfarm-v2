@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useContentEditor } from "../../hooks/useContentEditor";
 import ReadingPreview from "./preview/ReadingPreview";
 import WorksheetPreview from "./preview/WorksheetPreview";
@@ -62,6 +62,8 @@ function resolveEditorType(ct) {
 
 export default function EditorShell({ contentId, staticInfo }) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const backPath = searchParams.get("from") || "/admin/content";
   const editor = useContentEditor(contentId, staticInfo);
   const { meta, content, loading, error, saving, dirty, metaDirty, saveMsg, canUndo, isStatic } = editor;
   const [metaOpen, setMetaOpen] = useState(false);
@@ -107,8 +109,8 @@ export default function EditorShell({ contentId, staticInfo }) {
   /* 목록으로 돌아가기 */
   const handleBack = useCallback(() => {
     if (dirty && !window.confirm("변경사항이 저장되지 않았습니다. 목록으로 이동하시겠습니까?")) return;
-    navigate("/admin/content");
-  }, [dirty, navigate]);
+    navigate(backPath);
+  }, [dirty, navigate, backPath]);
 
   /* 미리보기↔폼 연동: focusPath */
   const [focusPath, setFocusPath] = useState(null);

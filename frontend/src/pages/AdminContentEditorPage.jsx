@@ -25,7 +25,7 @@ export default function AdminContentEditorPage() {
             <p>콘텐츠 ID가 지정되지 않았습니다.</p>
             <button
               className="admin-detail-btn"
-              onClick={() => navigate("/admin/content")}
+              onClick={() => navigate(params.get("from") || "/admin/content")}
               style={{ marginTop: 12 }}
             >
               목록으로 돌아가기
