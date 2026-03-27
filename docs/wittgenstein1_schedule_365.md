@@ -68,17 +68,17 @@
 | 50 | 비문학 | CFC와 오존층 파괴 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 51 | 문학 | 길을 찾아서 4 - 명암리 길 | docs/wittgenstein1_source_inventory.md > 길을 찾아서 4 - 명암리 길 |
 | 52 | 비문학 | 서사 관점 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
-| 53 | 화법 | 건의와 협상의 전략 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 54 | 작문 | 비교·대조 글쓰기 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 53 | 화법 | 시험 기간 도서관 연장 운영 협의 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 54 | 작문 | 전자책과 종이책 비교 글 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 55 | 비문학 | 언어와 세계 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
-| 56 | 문법 | 표준 발음 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 56 | 문법 | 받침 대표음과 연음의 적용 순서 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 57 | 비문학 | 위험 사회 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
 | 58 | 문학 | 김원전 | docs/wittgenstein1_source_inventory.md > 김원전 |
 | 59 | 비문학 | 외부성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
-| 60 | 화법 | 토론 반박의 타당성 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 61 | 작문 | 반박문 쓰기 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 60 | 화법 | 축제 운영 시간 연장 토론 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 61 | 작문 | 휴대전화 일괄 수거 반박문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 62 | 비문학 | 권리와 의무 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
-| 63 | 문법 | 의미 관계 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 63 | 문법 | 유의어의 치환 가능성과 문맥 제약 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 64 | 비문학 | 유전 정보 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 65 | 문학 | 김진옥전 | docs/wittgenstein1_source_inventory.md > 김진옥전 |
 | 66 | 비문학 | 데이터 압축 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
