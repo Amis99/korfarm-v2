@@ -38,6 +38,7 @@
 | 김원전 | exam-literature | Google Drive > 문학MD > 김원전_작자미상 → 기출 문학 지문 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 김진옥전 | exam-literature | 기출 문학 지문 → 한국고전종합DB/고전소설 원문 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 꽃피는 시절 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
+| 달나라의 장난 | exam-literature | 참고용 기출 지문 > 달나라의 장난_김수영.md (가) → 기출 문학 지문 대조 | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
 | 나무처럼 젊은이들도 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 낙성비룡 | exam-literature | 기출 문학 지문 → 고전소설 원문(한국고전종합DB/교재 수록본) 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 낙엽송 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |

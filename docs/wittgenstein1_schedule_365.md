@@ -156,11 +156,11 @@
 | 138 | 작문 | 학교 미디어 동아리 소개문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 139 | 비문학 | 공동불법행위와 연대 배상 | 참고용 기출 지문 > 사회_(가)과실상계,(나)공동불법행위.md.json (나) |
 | 140 | 문법 | 구개음화의 형태소 경계와 예외 (적용) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
-| 141 | 비문학 | 광합성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
-| 142 | 문학 | 난쟁이가 쏘아 올린 작은 공 | docs/wittgenstein1_source_inventory.md > 난쟁이가 쏘아 올린 작은 공 |
-| 143 | 비문학 | 패킷 교환 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
-| 144 | 화법 | 건의와 협상의 전략 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 145 | 작문 | 비교·대조 글쓰기 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 141 | 비문학 | 광합성과 C3·C4 식물의 적응 | 참고용 기출 지문 > 과학_식물 광합성.md.json |
+| 142 | 문학 | 달나라의 장난 | 참고용 기출 지문 > 달나라의 장난_김수영.md (가) |
+| 143 | 비문학 | 오디오 신호 압축과 지각부호화 | 참고용 기출 지문 > 기술_오디오 신호 압축.md.json |
+| 144 | 화법 | 학생회 축제 부스 전기 사용 협상 대본 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 145 | 작문 | 전자책과 종이책 비교 글 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 146 | 비문학 | 아이러니와 패러디 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 147 | 문법 | 표준 발음 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 148 | 비문학 | 지시 표현 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
