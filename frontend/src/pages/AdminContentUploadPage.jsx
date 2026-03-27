@@ -65,9 +65,9 @@ const MODULE_GROUPS = [
       { value: "farm:grammar_ss:sentence_structure", label: "문법 - 문장 짜임" },
       { value: "farm:grammar_pc:phoneme_change", label: "문법 - 음운 변동" },
       { value: "farm:grammar_pos:worksheet_quiz", label: "문법 - 품사" },
-      { value: "farm:background:worksheet_quiz", label: "배경지식 퀴즈" },
+      { value: "farm:background:worksheet_quiz", label: "배경지식 학습" },
       { value: "farm:concept:worksheet_quiz", label: "국어 개념 농장" },
-      { value: "farm:logic:worksheet_quiz", label: "논리사고력 농장" },
+      { value: "farm:logic:logic_reasoning", label: "논리사고력 학습" },
       { value: "farm:writing:worksheet_quiz", label: "서술형 농장" },
       { value: "farm:choice:choice_judgement", label: "선택지 판별 농장" },
     ],
@@ -96,6 +96,7 @@ const TEMPLATE_ID_MAP = {
   pro_vocab: "vocab_training",
   farm_background: "background_quiz",
   pro_background: "background_quiz",
+  farm_logic: "pro_logic",
 };
 
 const extractTemplateId = (v) => {

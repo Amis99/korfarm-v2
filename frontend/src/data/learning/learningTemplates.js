@@ -24,7 +24,7 @@ export const LEARNING_TEMPLATES = [
   { id: "farm_grammar_pc", title: "음운 변동 분석", moduleKey: "phoneme_change", content: farmGrammarPc },
   { id: "farm_grammar_pos", title: "품사 학습", moduleKey: "worksheet_quiz", content: farmGrammarPos },
   { id: "farm_concept", title: "국어 개념 퀴즈", moduleKey: "worksheet_quiz", content: farmConcept },
-  { id: "farm_logic", title: "논리사고력 문제", moduleKey: "worksheet_quiz", content: farmLogic },
+  { id: "farm_logic", title: "논리사고력 문제", moduleKey: "logic_reasoning", content: farmLogic },
   { id: "farm_writing", title: "서술형 연습", moduleKey: "worksheet_quiz", content: farmWriting },
   { id: "farm_choice", title: "선택지 판별 연습", moduleKey: "choice_judgement", content: farmChoice },
   { id: "pro_reading", title: "프로 독해 모드", moduleKey: "reading_training", content: readingTraining },
