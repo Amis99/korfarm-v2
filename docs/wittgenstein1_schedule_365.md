@@ -96,17 +96,17 @@
 | 78 | 비문학 | 미적 거리 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 79 | 문학 | 나무처럼 젊은이들도 | docs/wittgenstein1_source_inventory.md > 나무처럼 젊은이들도 |
 | 80 | 비문학 | 동일성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
-| 81 | 화법 | 말하기 태도 판단 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 82 | 작문 | 소개문 조정 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 81 | 화법 | 일회용 컵 줄이기 발표 준비 상담 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 82 | 작문 | 역사 탐방 동아리 소개문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 83 | 비문학 | 민주정과 공화정 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
-| 84 | 문법 | 중세국어의 객체 높임 표현 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 84 | 문법 | 중세국어 객체 높임 선어말 어미 '-ᄌᆞᆸ-'의 기능 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 85 | 비문학 | 경기 침체와 유동성 함정 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
 | 86 | 문학 | 낙성비룡 | docs/wittgenstein1_source_inventory.md > 낙성비룡 |
 | 87 | 비문학 | 입증 책임 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
-| 88 | 화법 | 상황 맥락 추론 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 89 | 작문 | 제목 설계 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 88 | 화법 | 지역 서점 인터뷰 순서 조정 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 89 | 작문 | 점심시간 낭독 방송 기사 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 90 | 비문학 | 엔트로피 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
-| 91 | 문법 | 구개음화 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 91 | 문법 | 구개음화의 성립 조건과 형태소 경계 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 92 | 비문학 | 알고리즘 복잡도 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
 | 93 | 문학 | 낙엽송 | docs/wittgenstein1_source_inventory.md > 낙엽송 |
 | 94 | 비문학 | 매체 특성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
