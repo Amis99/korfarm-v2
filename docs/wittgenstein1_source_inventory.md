@@ -56,7 +56,7 @@
 | 누항사 | exam-literature | 기출 문학 지문 → 한국고전종합DB/고전시가 원문 대조 | 1회 | source_selected |
 | 눈 오는 날에 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 현대 시 md > 27수특_눈 오는 날에(조지훈).md (가) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
 | 눈이 오면 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 현대 소설 md > 27수특_눈이 오면(임철우).md | exact excerpt만 사용 | source_selected |
-| 능소화 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 1회 | source_selected |
+| 소년 | exam-literature | 참고용 기출 지문 > 소년_윤동주.md (가) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
 | 님의 침묵 | exam-literature | 기출 문학 지문 → 시 원문(위키문헌/수록본) 대조 | 1회 | source_selected |
 | 독은 아름답다 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 1회 | source_selected |
 | 둑방길 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 1회 | source_selected |

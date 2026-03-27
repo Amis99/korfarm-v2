@@ -216,11 +216,11 @@
 | 198 | 문학 | 눈이 오면 | docs/wittgenstein1_source_inventory.md > 눈이 오면 |
 | 199 | 비문학 | 동일 지시 표현의 정보 차이 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 200 | 화법 | mRNA 백신 발표 질의응답 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 201 | 작문 | 주장과 근거 배열 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 202 | 비문학 | 프레이밍 효과 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
-| 203 | 문법 | 문장 성분 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 204 | 비문학 | 산성비 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
-| 205 | 문학 | 능소화 | docs/wittgenstein1_source_inventory.md > 능소화 |
+| 201 | 작문 | 전자 기기 보관함 운영 건의문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 202 | 비문학 | 방어 기제와 승화 | 참고용 기출 지문 > 인문_(가)정신분석이론,(나)분석심리학.md.json (가) |
+| 203 | 문법 | 의존 명사 '바'와 관형사형 어미의 결합 조건 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 204 | 비문학 | 오존층 파괴와 염소 라디칼의 촉매 작용 | 참고용 기출 지문 > 과학기술_11_CFC의_오존층_파괴.json |
+| 205 | 문학 | 소년 | docs/wittgenstein1_source_inventory.md > 소년 |
 | 206 | 비문학 | 해석 공동체 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
 | 207 | 화법 | 토의 규칙과 역할 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 208 | 작문 | 정보 통합 글쓰기 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
