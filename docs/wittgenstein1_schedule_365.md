@@ -261,11 +261,11 @@
 | 243 | 작문 | 반박문 쓰기 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 244 | 비문학 | 하디-바인베르크 평형과 유전자 빈도 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 245 | 문법 | 다의어와 동음이의어의 판별 기준 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 246 | 비문학 | 캐시 메모리 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
-| 247 | 문학 | 미스터 방 | docs/wittgenstein1_source_inventory.md > 미스터 방 |
-| 248 | 비문학 | 설치 미술 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
-| 249 | 화법 | 공감적 듣기와 재구성 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 250 | 작문 | 보고서 구성 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 246 | 비문학 | 페이지 교체 알고리즘과 페이지 부재 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > 2027 수능특강 독서 md > 27수특 독서_가상 메모리.md |
+| 247 | 문학 | 미망 | docs/wittgenstein1_source_inventory.md > 미망 |
+| 248 | 비문학 | 분석적 큐비즘과 종합적 큐비즘 | 참고용 기출 지문 > 예술_큐비즘.md.json |
+| 249 | 화법 | 동아리 역할 갈등 상담 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 250 | 작문 | 축제 만족도 조사 보고서 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 251 | 비문학 | 화행 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 252 | 문법 | 담화와 지시 표현 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 253 | 비문학 | 사회적 촉진 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
