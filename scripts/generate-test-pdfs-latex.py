@@ -185,6 +185,7 @@ def make_preamble(level_id, level_label, ch_num, total_qs, total_pts):
 % ─── 인코딩 / 폰트 ───
 \usepackage{{fontspec}}
 \usepackage{{xeCJK}}
+\xeCJKsetup{{CJKspace=true}}
 \setCJKmainfont{{Noto Sans KR}}[
   Path=C:/Windows/Fonts/, Extension=.ttf,
   UprightFont=NotoSansKR-VF, BoldFont=NotoSansKR-VF,
