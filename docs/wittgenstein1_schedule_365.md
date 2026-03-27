@@ -40,31 +40,31 @@
 | 22 | 비문학 | 집단 무의식과 개별화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
 | 23 | 문학 | 갈까 보다 | docs/wittgenstein1_source_inventory.md > 갈까 보다 |
 | 24 | 비문학 | 오존층 파괴와 CFC | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
-| 25 | 화법 | 토의 규칙과 역할 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 26 | 작문 | 정보 통합 글쓰기 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 25 | 화법 | 학급 독서 행사 운영 역할 조정 토의 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 26 | 작문 | 일회용 컵 분리배출 개선 건의문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 27 | 비문학 | 헤르더의 개체성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
-| 28 | 문법 | 피동과 사동 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 28 | 문법 | '-이/-히/-리/-기' 파생 피동과 사동의 판별 기준 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 29 | 비문학 | 의미 내재주의와 외재주의 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-philosophy |
 | 30 | 문학 | 그리움 | docs/wittgenstein1_source_inventory.md > 그리움 |
 | 31 | 비문학 | 공공 저널리즘 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
-| 32 | 화법 | 설득 전략 분석 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 33 | 작문 | 고쳐쓰기 전략 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 32 | 화법 | 학생회 홍보 영상 운영 방향 토의 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 33 | 작문 | 도서관 활성화 방안 소개 글 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 34 | 비문학 | 정보 비대칭과 역선택 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
-| 35 | 문법 | 높임과 시간 표현 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 35 | 문법 | 상대 높임 등급과 종결 어미 선택 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 36 | 비문학 | 미성년자의 계약 취소권 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 37 | 문학 | 기황전설 | docs/wittgenstein1_source_inventory.md > 기황전설 |
 | 38 | 비문학 | 열펌프의 성적 계수 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
-| 39 | 화법 | 발표 자료 해석 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 40 | 작문 | 문단 재배열 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 39 | 화법 | 도서관 좌석 운영 개선 발표 검토 회의 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 40 | 작문 | 분실물 안내문 재구성 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 41 | 비문학 | 동형암호 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
-| 42 | 문법 | 중세국어 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 42 | 문법 | 중세국어 아래아와 모음 조화의 흔적 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 43 | 비문학 | 상호 매체성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 44 | 문학 | 길 | docs/wittgenstein1_source_inventory.md > 길 |
 | 45 | 비문학 | 뜻과 지시체 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
-| 46 | 화법 | 인터뷰의 핵심 정보 (기초) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 47 | 작문 | 개념 정의 방식 (기초) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 46 | 화법 | 독서 동아리 운영 인터뷰 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 47 | 작문 | 생태 발자국 소개 글 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 48 | 비문학 | 메타인지 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
-| 49 | 문법 | 훈민정음 원리 (기초) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 49 | 문법 | 가획과 병서에 드러난 훈민정음 자음 체계 | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 50 | 비문학 | CFC와 오존층 파괴 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 51 | 문학 | 길을 찾아서 4 - 명암리 길 | docs/wittgenstein1_source_inventory.md > 길을 찾아서 4 - 명암리 길 |
 | 52 | 비문학 | 서사 관점 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-humanities |
