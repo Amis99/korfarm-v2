@@ -336,11 +336,11 @@
 | 318 | 비문학 | 조세 법률주의와 포괄주의 해석 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > output > json > 주제통합_05_조세_법률주의_상속세와_증여세.json |
 | 319 | 화법 | 도서관 아침 개방 인터뷰 대본 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 320 | 작문 | 디지털 시민성 소개 글 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 321 | 비문학 | 상전이 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
-| 322 | 문법 | 훈민정음 원리 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 323 | 비문학 | 신경망 학습 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
-| 324 | 문학 | 자전거 도둑 | docs/wittgenstein1_source_inventory.md > 자전거 도둑 |
-| 325 | 비문학 | 리얼리즘 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
+| 321 | 비문학 | 고체 촉매의 활성과 지지체 | 참고용 기출 지문 > 과학 기술_고체촉매.md.json |
+| 322 | 문법 | 훈민정음의 가획·병서와 합용병서 원리 (종합) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
+| 323 | 비문학 | GPU와 NPU의 연산 구조 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > 2027 수능특강 독서 사용설명서 ocr > 27수특 독서 사용설명서(2과학기술-08 연산 환경 변화와 GPU.md |
+| 324 | 문학 | 오월 소식 | docs/wittgenstein1_source_inventory.md > 오월 소식 |
+| 325 | 비문학 | 바쟁의 현실 재현과 관객의 해석 | 참고용 기출 지문 > 예술_(가)바쟁의 리얼리즘 영화,(나)정신분석학적 영화.md.json (가) |
 | 326 | 화법 | 건의와 협상의 전략 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
 | 327 | 작문 | 비교·대조 글쓰기 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 328 | 비문학 | 문법화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
