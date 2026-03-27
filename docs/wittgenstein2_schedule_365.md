@@ -16,11 +16,11 @@
 
 | Day | ?? | ?? ?? | ?? ?? |
 |---:|---|---|---|
-| 1 | 비문학 | ???? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-humanities |
-| 2 | 문학 | 213호 주택 | docs/wittgenstein2_source_inventory.md > 213호 주택 |
-| 3 | 비문학 | ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-philosophy |
-| 4 | 화법 | 발표자의 의도 파악 (유형) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 5 | 작문 | 개요의 적절성 (유형) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 1 | 비문학 | 로크의 본유 관념 비판 | 참고용 기출 지문 > 인문_(가) 본유 관념과 로크 _ (나) 본유 관념과 라이프니츠.md.json (가) |
+| 2 | 문학 | 213호 주택 | 참고용 기출 지문 > 213호 주택_김광식.md |
+| 3 | 비문학 | 의미 내재주의와 외재주의 | 참고용 기출 지문 > 철학_내재주의와 외재주의.md.json |
+| 4 | 화법 | 발표 자료 역할 조정 대화 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 5 | 작문 | 교내 인문 독서 행사 소개문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 6 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-society |
 | 7 | 문법 | 음운 변동 (유형) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 8 | 비문학 | ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-economy |
