@@ -137,10 +137,10 @@
 | 119 | 문법 | 피동 접미사와 통사적 피동의 구별 (적용) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
 | 120 | 비문학 | 리얼리즘 영화와 롱테이크 | 참고용 기출 지문 > 예술_(가)바쟁의 리얼리즘 영화,(나)정신분석학적 영화.md.json (가) |
 | 121 | 문학 | 낙토의 아이들 | docs/wittgenstein1_source_inventory.md > 낙토의 아이들 |
-| 122 | 비문학 | 중의성 해소 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
-| 123 | 화법 | 설득 전략 분석 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 124 | 작문 | 고쳐쓰기 전략 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 125 | 비문학 | 작업 기억 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-psychology |
+| 122 | 비문학 | 언어의 지시적 불투명성과 담론 | 참고용 기출 지문 > 인문_(가) 카의 역사관 _ (나) 언어로의 전환과 역사학.md.json (나) |
+| 123 | 화법 | 다회용 컵 사용 확대 발표 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 124 | 작문 | 도서관 열람실 운영 건의문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 125 | 비문학 | 방어기제와 승화 | 참고용 기출 지문 > 인문_(가)정신분석이론,(나)분석심리학.md.json (가) |
 | 126 | 문법 | 높임과 시간 표현 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 127 | 비문학 | 생물 다양성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-environment |
 | 128 | 문학 | 날개 또는 수갑(1) | docs/wittgenstein1_source_inventory.md > 날개 또는 수갑 |
