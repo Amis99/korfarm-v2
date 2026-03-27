@@ -54,7 +54,7 @@
 | 론도 | exam-literature | 참고용 기출 지문 > 론도_성석제.md → 기출 문학 지문 대조 | 기출 발췌 우선, 원문 대조 필수 | source_selected |
 | 사과밭을 지나며 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 실전 학습 md > 27 수특_사과밭을 지나며(나희덕).md (나) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
 | 누항사 | exam-literature | 기출 문학 지문 → 한국고전종합DB/고전시가 원문 대조 | 1회 | source_selected |
-| 눈 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 1회 | source_selected |
+| 눈 오는 날에 | exam-literature | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 문학 > 2027 수능특강 문학 md > 현대 시 md > 27수특_눈 오는 날에(조지훈).md (가) | (가)/(나) 병치 source면 한 부분만 사용 | source_selected |
 | 눈길 | exam-literature | 기출 문학 지문 → 작품 수록본/교과서 수록본 대조 | 1회 | source_selected |
 | 능소화 | exam-literature | 기출 문학 지문 → 시 원문(교과서 수록본/웹 원문) 대조 | 1회 | source_selected |
 | 님의 침묵 | exam-literature | 기출 문학 지문 → 시 원문(위키문헌/수록본) 대조 | 1회 | source_selected |

@@ -206,11 +206,11 @@
 | 188 | 비문학 | 조세 전가와 가격 탄력성 | 참고용 기출 지문 > 사회_조세 부담.md.json |
 | 189 | 문법 | 조사 '와/과', '으로/로'의 이형태 조건과 예외 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 190 | 비문학 | 신뢰보호원칙의 성립 요건 | 참고용 기출 지문 > 법_신뢰보호원칙.md.json |
-| 191 | 문학 | 눈 | docs/wittgenstein1_source_inventory.md > 눈 |
-| 192 | 비문학 | 면역 기억 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
-| 193 | 화법 | 청자의 반응 추론 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 194 | 작문 | 자료 통합 구성 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 195 | 비문학 | 머신러닝 일반화 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
+| 191 | 문학 | 눈 오는 날에 | docs/wittgenstein1_source_inventory.md > 눈 오는 날에 |
+| 192 | 비문학 | mRNA 백신과 면역 기억 | 참고용 기출 지문 > 생물학_mRNA 백신.md.json |
+| 193 | 화법 | 축제 홍보 발표 반응 조정 대화 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 194 | 작문 | 학교 독서 주간 소개 기사 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 195 | 비문학 | 임베딩 평가와 일반화 가능성 | 참고용 기출 지문 > 과학기술_07_임베딩과_유사도_표현.json |
 | 196 | 문법 | 형태소와 품사 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 197 | 비문학 | 시점 쇼트 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
 | 198 | 문학 | 눈길 | docs/wittgenstein1_source_inventory.md > 눈길 |
