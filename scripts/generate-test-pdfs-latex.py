@@ -531,7 +531,7 @@ def update_db(papers, tunnel_port):
         lid = p["level_id"]
         cn = p["chapter_number"]
         fname = f"{lid}_ch{cn:02d}.pdf"
-        pdf_url = f"https://d2mfxkisn2qj9i.cloudfront.net/test-pdfs/{fname}"
+        pdf_url = f"https://dbtbky39ni3nn.cloudfront.net/test-pdfs/{fname}"
         cur.execute(
             "UPDATE test_papers SET pdf_file_id = %s, updated_at = NOW() WHERE id = %s",
             (pdf_url, p["test_paper_id"])
@@ -668,7 +668,7 @@ def main():
 
     print(f"\n출력 디렉토리: {OUTPUT_DIR}")
     if ok > 0 and not args.no_upload:
-        print("PDF URL: https://d2mfxkisn2qj9i.cloudfront.net/test-pdfs/<level>_ch<nn>.pdf")
+        print("PDF URL: https://dbtbky39ni3nn.cloudfront.net/test-pdfs/<level>_ch<nn>.pdf")
 
 
 if __name__ == "__main__":
