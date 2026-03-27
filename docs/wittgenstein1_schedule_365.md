@@ -311,11 +311,11 @@
 | 293 | 비문학 | 행정 대집행의 요건과 절차 | 참고용 기출 지문 > 사회문화_03_행정_대집행.json |
 | 294 | 문법 | 보조사 '은/는'과 주격 조사 '이/가'의 화제·초점 기능 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 295 | 비문학 | 열펌프의 성능 계수와 열 이동 | 참고용 기출 지문 > 과학_열펌프.md.json |
-| 296 | 문학 | 시집가는 날 | docs/wittgenstein1_source_inventory.md > 시집가는 날 |
-| 297 | 비문학 | 센서 융합 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
-| 298 | 화법 | 토의 규칙과 역할 (종합) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 299 | 작문 | 정보 통합 글쓰기 (종합) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 300 | 비문학 | 리듬과 반복 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-art |
+| 296 | 문학 | 박꽃이 피어난 집 | docs/wittgenstein1_source_inventory.md > 박꽃이 피어난 집 |
+| 297 | 비문학 | 전기화학식 가스 센서의 전류 검지 원리 | 참고용 기출 지문 > 과학_전기화학식 가스 센서.md.json |
+| 298 | 화법 | 축제 부스 배치 조정 토의 대본 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 299 | 작문 | 기후 동아리 홍보 글 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 300 | 비문학 | 미니멀리즘 음악의 반복과 점진적 변화 | 참고용 기출 지문 > 인문예술_02_미니멀리즘_음악.json |
 | 301 | 문법 | 피동과 사동 (종합) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 302 | 비문학 | 차용어 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-language |
 | 303 | 문학 | 운수 좋은 날 | docs/wittgenstein1_source_inventory.md > 운수 좋은 날 |
