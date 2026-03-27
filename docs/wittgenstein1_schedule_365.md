@@ -226,11 +226,11 @@
 | 208 | 작문 | 학교 진로 행사 안내문 통합 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 209 | 비문학 | 질적 쾌락과 공리주의 | 참고용 기출 지문 > 인문_(가)밀의공리주의,(나)효용 이론.md.json (가) |
 | 210 | 문법 | 사동 접미사와 어휘적 사동의 구별 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
-| 211 | 비문학 | 규범과 일탈 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-society |
-| 212 | 문학 | 님의 침묵 | docs/wittgenstein1_source_inventory.md > 님의 침묵 |
-| 213 | 비문학 | 인플레이션 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
-| 214 | 화법 | 설득 전략 분석 (비교) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 215 | 작문 | 고쳐쓰기 전략 (비교) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 211 | 비문학 | 거래적 리더십과 변혁적 리더십 | 참고용 기출 지문 > 사회문화_01_리더십_이론.json |
+| 212 | 문학 | 노정기 | docs/wittgenstein1_source_inventory.md > 노정기 |
+| 213 | 비문학 | 인플레이션과 감가상각의 실질 가치 | 참고용 기출 지문 > 26년 수능특강 > 2027 수능특강 독서 > 2027 수능특강 독서 md > 27수특 독서_법인세.md |
+| 214 | 화법 | 학교 축제 일회용품 줄이기 발표와 질의응답 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 215 | 작문 | 교내 플라스틱 분리배출 안내문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
 | 216 | 비문학 | 소급 입법 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
 | 217 | 문법 | 높임과 시간 표현 (비교) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
 | 218 | 비문학 | 전자 배치 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
