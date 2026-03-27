@@ -151,11 +151,11 @@
 | 133 | 문법 | 중세국어의 객체 높임 선어말 어미 '-ᄌᆞᆸ-' (적용) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
 | 134 | 비문학 | 교류 욕구와 정체성 검증 | 참고용 기출 지문 > 사회문화_10_교류_욕구_이론.json |
 | 135 | 문학 | 날개 또는 수갑(2) | docs/wittgenstein1_source_inventory.md > 날개 또는 수갑 |
-| 136 | 비문학 | 한계 효용 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-economy |
-| 137 | 화법 | 인터뷰의 핵심 정보 (적용) | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
-| 138 | 작문 | 개념 정의 방식 (적용) | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
-| 139 | 비문학 | 불법 행위 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-law |
-| 140 | 문법 | 훈민정음 원리 (적용) | 비트겐슈타인 1 문법 유형 지문 수동 작성 |
+| 136 | 비문학 | 한계 효용 체감과 한계 효용 균등 | 참고용 기출 지문 > 인문_(가)밀의공리주의,(나)효용 이론.md.json (나) |
+| 137 | 화법 | 학생회 복지 예산 인터뷰 대본 | 비트겐슈타인 1 화법 유형 지문 수동 작성 |
+| 138 | 작문 | 학교 미디어 동아리 소개문 초고 | 비트겐슈타인 1 작문 유형 지문 수동 작성 |
+| 139 | 비문학 | 공동불법행위와 연대 배상 | 참고용 기출 지문 > 사회_(가)과실상계,(나)공동불법행위.md.json (나) |
+| 140 | 문법 | 구개음화의 형태소 경계와 예외 (적용) | 참고용 기출 지문 > 참고용 문법 자료 > 문법_개념_학습_음운_문법요소.html |
 | 141 | 비문학 | 광합성 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-science |
 | 142 | 문학 | 난쟁이가 쏘아 올린 작은 공 | docs/wittgenstein1_source_inventory.md > 난쟁이가 쏘아 올린 작은 공 |
 | 143 | 비문학 | 패킷 교환 | docs/wittgenstein1_source_inventory.md > exam-nonfiction-technology |
