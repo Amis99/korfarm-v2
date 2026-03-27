@@ -31,11 +31,11 @@
 | 13 | 비문학 | 고체촉매의 활성 성분과 지지체 | 참고용 기출 지문 > 과학 기술_고체촉매.md.json |
 | 14 | 문법 | 합성어와 파생어의 경계와 어근·접사 판별 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 15 | 비문학 | 리튬 이온 이차 전지의 양극 활물질 | 참고용 기출 지문 > 과학 기술_리튬 이온 이차 전지.md.json |
-| 16 | 문학 | 간 | docs/wittgenstein2_source_inventory.md > 간 |
-| 17 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
-| 18 | 화법 | 질문의 기능 분석 (유형) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 19 | 작문 | 주장과 근거 배열 (유형) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 20 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-language |
+| 16 | 문학 | 간 | 참고용 기출 지문 > 간_윤동주.md (가) |
+| 17 | 비문학 | 큐비즘의 다중 시점과 종합적 큐비즘 | 참고용 기출 지문 > 예술_큐비즘.md.json |
+| 18 | 화법 | 진로 발표회 질의응답 준비 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 19 | 작문 | 휴대전화 보관함 설치 건의문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 20 | 비문학 | 담화 공동체 독자와 상호 텍스트성 | 참고용 기출 지문 > 지문으로이해하기_08_담화_공동체_독자.json |
 | 21 | 문법 | 문장 성분 (유형) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 22 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-psychology |
 | 23 | 문학 | 갈까 보다 | docs/wittgenstein2_source_inventory.md > 갈까 보다 |
