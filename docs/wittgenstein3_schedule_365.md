@@ -181,11 +181,11 @@
 | 163 | 문학 | 소설가 구보 씨의 일일 | docs/wittgenstein3_source_inventory.md > 소설가 구보 씨의 일일 |
 | 164 | 비문학 | 법적 의제의 기능과 근대 법체계에서의 한계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
 | 165 | 화법 | 지역 연계 봉사 활동 발표 순서와 질의응답 대비 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 166 | 작문 | 논설문 전개 (실전) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 167 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
-| 168 | 문법 | 호응과 중의성 (실전) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 169 | 비문학 | ???? ???? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
-| 170 | 문학 | 논 이야기 | docs/wittgenstein3_source_inventory.md > 논 이야기 |
+| 166 | 작문 | 야간 자율학습실 좌석 예약제 개선을 요청하는 건의문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 167 | 비문학 | 이동식 크레인의 양중 능력과 전도 방지 원리 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
+| 168 | 문법 | 관형절 수식 범위에 따른 중의성과 해소 방법 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 169 | 비문학 | 양자점 디스플레이의 좁은 방출 파장과 코어-셸 구조 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
+| 170 | 문학 | 누룩 | docs/wittgenstein3_source_inventory.md > 누룩 |
 | 171 | 비문학 | ???? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
 | 172 | 화법 | 말하기 태도 판단 (실전) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 173 | 작문 | 소개문 조정 (실전) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
