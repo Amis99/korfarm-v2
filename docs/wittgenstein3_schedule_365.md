@@ -206,11 +206,11 @@
 | 188 | 비문학 | 복잡계 경제학의 경로 의존성과 창발적 시장 질서 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
 | 189 | 문법 | 사이시옷 표기 뒤 된소리되기와 ㄴ 첨가의 적용 조건 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 190 | 비문학 | 택일적 인과 관계와 조건설·합법칙적 조건설의 판단 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
-| 191 | 문학 | 눈 | docs/wittgenstein3_source_inventory.md > 눈 |
-| 192 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
-| 193 | 화법 | 청자의 반응 추론 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 194 | 작문 | 자료 통합 구성 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 195 | 비문학 | ?? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
+| 191 | 문학 | 눈 오는 날에 | docs/wittgenstein3_source_inventory.md > 눈 오는 날에 |
+| 192 | 비문학 | 전류 밀도와 표피 효과가 도선 발열과 설계에 미치는 영향 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
+| 193 | 화법 | 축제 체험 부스 신청 안내 발표 전 질의응답 순서 조정 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 194 | 작문 | 교내 다회용 컵 대여제 운영 결과 개선 보고서 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 195 | 비문학 | 부분적 리프로그래밍과 야마나카 인자의 역노화 설계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
 | 196 | 문법 | 형태소와 품사 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 197 | 비문학 | ????? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
 | 198 | 문학 | 눈길 | docs/wittgenstein3_source_inventory.md > 눈길 |
