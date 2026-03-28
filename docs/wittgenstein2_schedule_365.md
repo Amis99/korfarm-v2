@@ -256,11 +256,11 @@
 | 238 | 문법 | ㄷ 불규칙 활용과 어간 보존형의 의미 구별 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 239 | 비문학 | 조세의 법적 귀착과 경제적 귀착 | 참고용 기출 지문 > 사회_조세 부담.md.json |
 | 240 | 문학 | 불신 시대 | docs/wittgenstein2_source_inventory.md > 불신 시대 |
-| 241 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
-| 242 | 화법 | 토론 반박의 타당성 (심화) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 243 | 작문 | 반박문 쓰기 (심화) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 244 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
-| 245 | 문법 | 의미 관계 (심화) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 241 | 비문학 | 하트의 개방적 구조와 풀러의 목적론적 법해석 | 참고용 기출 지문 > 사회_하트와 풀러의 법해석.md.json |
+| 242 | 화법 | 학생회 공개토론 반론 순서와 질의 범위를 조정하는 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 243 | 작문 | 축제 외부인 출입 전면 금지 방침에 대한 반박문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 244 | 비문학 | 비분산형 적외선 분석기의 흡광 원리와 농도 측정 | 참고용 기출 지문 > 과학_비분산형 적외선 분석기.md.json |
+| 245 | 문법 | 본용언 '주다'와 보조 용언 '주다'의 기능 구별 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 246 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
 | 247 | 문학 | 미스터 방 | docs/wittgenstein2_source_inventory.md > 미스터 방 |
 | 248 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
