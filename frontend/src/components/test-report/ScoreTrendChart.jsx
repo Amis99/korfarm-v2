@@ -7,16 +7,18 @@ import {
   LineElement,
   Tooltip,
   Legend,
+  Filler,
 } from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler);
 
 /**
- * 시험별 점수 추이 라인 차트 (점수 좌축 + 정답률 우축)
- * @param {{ history: Array<{ testTitle: string, score: number, totalPoints: number, accuracy: number }> }} props
+ * 시험별 점수 추이 라인 차트
+ * - 최고/최저 영역 밴드 + 평균 점선 + 내 점수 실선
+ * @param {{ history: Array<{ testTitle: string, score: number, totalPoints: number, avgScore?: number, maxScore?: number, minScore?: number }> }} props
  */
 export default function ScoreTrendChart({ history }) {
-  if (!history || history.length < 2) return null;
+  if (!history || history.length < 1) return null;
 
   // 시간순 (오래된 것부터)
   const sorted = [...history].reverse();
@@ -28,38 +30,62 @@ export default function ScoreTrendChart({ history }) {
     labels,
     datasets: [
       {
-        label: "점수",
-        data: sorted.map(h => h.score),
-        borderColor: "#f07f1a",
-        backgroundColor: "rgba(240,127,26,0.12)",
+        label: "최고점",
+        data: sorted.map(h => h.maxScore ?? h.score),
+        borderColor: "rgba(34,197,94,0.4)",
+        backgroundColor: "rgba(34,197,94,0.1)",
+        borderWidth: 1,
+        borderDash: [4, 4],
+        pointRadius: 0,
         tension: 0.3,
-        pointRadius: 5,
-        pointBackgroundColor: "#f07f1a",
-        pointBorderColor: "#fff",
-        pointBorderWidth: 2,
-        borderWidth: 2.5,
-        fill: true,
-        yAxisID: "y",
+        fill: "+1",
+        order: 4,
       },
       {
-        label: "정답률(%)",
-        data: sorted.map(h => h.accuracy),
-        borderColor: "#3b82f6",
-        backgroundColor: "rgba(59,130,246,0.08)",
+        label: "최저점",
+        data: sorted.map(h => h.minScore ?? h.score),
+        borderColor: "rgba(239,68,68,0.4)",
+        backgroundColor: "transparent",
+        borderWidth: 1,
+        borderDash: [4, 4],
+        pointRadius: 0,
         tension: 0.3,
-        pointRadius: 4,
-        pointBackgroundColor: "#3b82f6",
+        fill: false,
+        order: 3,
+      },
+      {
+        label: "평균",
+        data: sorted.map(h => h.avgScore ?? h.score),
+        borderColor: "#f59e0b",
+        backgroundColor: "transparent",
+        borderWidth: 1.5,
+        borderDash: [6, 3],
+        pointRadius: 2,
+        pointBackgroundColor: "#f59e0b",
+        pointBorderColor: "#fff",
+        pointBorderWidth: 1,
+        tension: 0.3,
+        fill: false,
+        order: 2,
+      },
+      {
+        label: "내 점수",
+        data: sorted.map(h => h.score),
+        borderColor: "#2563eb",
+        backgroundColor: "rgba(37,99,235,0.08)",
+        borderWidth: 2.5,
+        pointRadius: 5,
+        pointBackgroundColor: "#2563eb",
         pointBorderColor: "#fff",
         pointBorderWidth: 2,
-        borderWidth: 2,
-        borderDash: [6, 3],
+        tension: 0.3,
         fill: false,
-        yAxisID: "y1",
+        order: 1,
       },
     ],
   };
 
-  // 5개 이상이면 가로 스크롤: 고정 너비를 계산하고 maintainAspectRatio를 끔
+  // 5개 이상이면 가로 스크롤
   const scrollable = sorted.length >= 5;
   const chartWidth = scrollable ? Math.max(sorted.length * 120, 600) : undefined;
 
@@ -77,18 +103,9 @@ export default function ScoreTrendChart({ history }) {
         position: "left",
         beginAtZero: true,
         max: maxTotal,
-        title: { display: true, text: "점수", color: "#f07f1a", font: { size: 12, weight: "600" } },
-        ticks: { color: "#f07f1a", font: { size: 10 } },
+        title: { display: true, text: "점수", color: "#374151", font: { size: 12, weight: "600" } },
+        ticks: { color: "#6b7280", font: { size: 10 } },
         grid: { color: "rgba(0,0,0,0.04)" },
-      },
-      y1: {
-        type: "linear",
-        position: "right",
-        beginAtZero: true,
-        max: 100,
-        title: { display: true, text: "정답률(%)", color: "#3b82f6", font: { size: 12, weight: "600" } },
-        ticks: { color: "#3b82f6", stepSize: 20, font: { size: 10 } },
-        grid: { drawOnChartArea: false },
       },
     },
     plugins: {
@@ -99,18 +116,31 @@ export default function ScoreTrendChart({ history }) {
           usePointStyle: true,
           pointStyle: "circle",
           padding: 16,
+          filter: (item) => item.text !== "최고점" && item.text !== "최저점",
         },
       },
       tooltip: {
         callbacks: {
-          afterLabel: (ctx) => {
-            if (ctx.datasetIndex === 0) {
-              const h = sorted[ctx.dataIndex];
+          label: (ctx) => {
+            const val = ctx.parsed.y;
+            if (val == null) return null;
+            if (ctx.dataset.label === "평균") return `평균: ${val}점`;
+            if (ctx.dataset.label === "내 점수") return `내 점수: ${val}점`;
+            if (ctx.dataset.label === "최고점") return `최고: ${val}점`;
+            if (ctx.dataset.label === "최저점") return `최저: ${val}점`;
+            return `${ctx.dataset.label}: ${val}`;
+          },
+          afterBody: (items) => {
+            if (items.length > 0) {
+              const h = sorted[items[0].dataIndex];
               return `(만점 ${h.totalPoints})`;
             }
             return "";
           },
         },
+      },
+      filler: {
+        propagate: false,
       },
     },
   };

@@ -361,9 +361,12 @@ class TestService(
         val subs = submissionRepo.findByUserId(userId)
         if (subs.isEmpty()) return emptyList()
         val paperMap = testPaperRepo.findAllById(subs.map { it.testId }).associateBy { it.id }
+        // 각 시험의 전체 제출 통계 조회
+        val allSubsByTest = submissionRepo.findByTestIdIn(subs.map { it.testId }).groupBy { it.testId }
         return subs.sortedByDescending { it.createdAt }.mapNotNull { s ->
             val p = paperMap[s.testId] ?: return@mapNotNull null
             val accuracy = if (p.totalQuestions > 0) (s.correctCount.toDouble() / p.totalQuestions) * 100.0 else 0.0
+            val testScores = allSubsByTest[s.testId]?.map { it.score } ?: emptyList()
             TestHistoryItem(
                 testId = p.id,
                 testTitle = p.title,
@@ -373,7 +376,10 @@ class TestService(
                 correctCount = s.correctCount,
                 totalQuestions = p.totalQuestions,
                 accuracy = Math.round(accuracy * 10.0) / 10.0,
-                submittedAt = s.createdAt
+                submittedAt = s.createdAt,
+                avgScore = if (testScores.isNotEmpty()) Math.round(testScores.average() * 10.0) / 10.0 else null,
+                maxScore = testScores.maxOrNull(),
+                minScore = testScores.minOrNull(),
             )
         }
     }

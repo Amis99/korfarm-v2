@@ -207,7 +207,10 @@ data class TestHistoryItem(
     val correctCount: Int,
     val totalQuestions: Int,
     val accuracy: Double,
-    val submittedAt: LocalDateTime
+    val submittedAt: LocalDateTime,
+    val avgScore: Double? = null,
+    val maxScore: Int? = null,
+    val minScore: Int? = null,
 )
 
 // ── Admin: Student list for answer entry ──

@@ -29,4 +29,6 @@ interface TestSubmissionRepo : JpaRepository<TestSubmissionEntity, String> {
         "AND s.testId IN (SELECT t.id FROM TestPaperEntity t WHERE t.orgId = :orgId)"
     )
     fun countByCreatedAtAfterAndOrgId(since: java.time.LocalDateTime, orgId: String): Long
+
+    fun findByTestIdIn(testIds: List<String>): List<TestSubmissionEntity>
 }
