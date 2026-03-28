@@ -231,11 +231,11 @@
 | 213 | 비문학 | 항상소득과 생애주기 가설의 소비 평준화 논리 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
 | 214 | 화법 | 3학년 아침 자습실 조기 개방을 두고 학생회와 행정실이 협의하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 215 | 작문 | 야간 자율학습 종료 후 통학 안전 점검을 요청하는 건의문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 216 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
-| 217 | 문법 | 높임과 시간 표현 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 218 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
-| 219 | 문학 | 독은 아름답다 | docs/wittgenstein3_source_inventory.md > 독은 아름답다 |
-| 220 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
+| 216 | 비문학 | 법 해석에서 유추와 일반 명제의 매개 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 217 | 문법 | 선어말 어미 '-더-'와 '-었-'의 시간성과 화자 인식 차이 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 218 | 비문학 | 뉴턴의 질점 개념과 패러데이의 장 개념이 실재를 설명하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
+| 219 | 문학 | 눈 오는 날에 | docs/wittgenstein3_source_inventory.md > 눈 오는 날에 |
+| 220 | 비문학 | GPU의 스레드 블록 분배와 메모리 계층 최적화 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
 | 221 | 화법 | 발표 자료 해석 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 222 | 작문 | 문단 재배열 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 223 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
