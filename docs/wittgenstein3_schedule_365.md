@@ -186,11 +186,11 @@
 | 168 | 문법 | 관형절 수식 범위에 따른 중의성과 해소 방법 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 169 | 비문학 | 양자점 디스플레이의 좁은 방출 파장과 코어-셸 구조 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
 | 170 | 문학 | 누룩 | docs/wittgenstein3_source_inventory.md > 누룩 |
-| 171 | 비문학 | ???? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 172 | 화법 | 말하기 태도 판단 (실전) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 173 | 작문 | 소개문 조정 (실전) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 174 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
-| 175 | 문법 | 어문 규범 (실전) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 171 | 비문학 | 상호 매체성에서 예술 형식과 기술적 매체의 구분 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
+| 172 | 화법 | 교내 진로 박람회 사회 멘트와 질문 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 173 | 작문 | 철학 읽기 모임 신규 부원 모집 소개 글 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 174 | 비문학 | 담화 공동체 독자와 상호 텍스트성의 관계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 175 | 문법 | 사이시옷 표기와 합성어 내부 된소리되기의 조건 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 176 | 비문학 | ?? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 177 | 문학 | 농무 | docs/wittgenstein3_source_inventory.md > 농무 |
 | 178 | 비문학 | ?? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
