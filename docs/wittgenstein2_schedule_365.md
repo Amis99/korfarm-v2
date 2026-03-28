@@ -361,11 +361,11 @@
 | 343 | 문법 | 지시어 '그'의 선행문맥 회수와 '이'의 후행 예고 기능 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 344 | 비문학 | 정정보도청구권과 반론보도청구권의 성립 요건과 차이 | 참고용 기출 지문 > 법_(가)언론 매체 접근&이용권,(나)언론중재법.md.json (나) |
 | 345 | 문학 | 원가 | docs/wittgenstein2_source_inventory.md > 원가 |
-| 346 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
-| 347 | 화법 | 발표 구성의 효과 (종합) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 348 | 작문 | 논설문 전개 (종합) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 349 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
-| 350 | 문법 | 호응과 중의성 (종합) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 346 | 비문학 | 랭킨의 조합 소용돌이와 사이클론 분리기의 작동 원리 | 참고용 기출 지문 > 과학_소용돌이.md.json |
+| 347 | 화법 | 교내 다회용 컵 보증금제 시범 운영 결과를 설명하고 확대 시행을 제안하는 발표 대본 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 348 | 작문 | 교내 도서관 좌석 예약제 개선 의견문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 349 | 비문학 | 초임계 유체의 임계 조건과 GAS·RESS 결정화 공정 | 참고용 기출 지문 > 기술_초임계 유체.md.json |
+| 350 | 문법 | 관형절의 수식 범위와 소유격 '의' 구조가 만드는 중의성 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 351 | 비문학 | ????? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
 | 352 | 문학 | 진달래꽃 | docs/wittgenstein2_source_inventory.md > 진달래꽃 |
 | 353 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-language |
