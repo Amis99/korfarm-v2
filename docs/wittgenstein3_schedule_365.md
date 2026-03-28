@@ -161,11 +161,11 @@
 | 143 | 비문학 | GPU의 스레드 병렬성과 메모리 계층 | 참고용 기출 지문 > 26년 수능특강/2027 수능특강 독서/2027 수능특강 독서 md/27수특 독서_연산 환경 변화와 GPU.md |
 | 144 | 화법 | 학생회와 행정실의 야간 자율학습 교실 추가 개방 협상 회의 | 비트겐슈타인 3 화법 지문 수동 작성 |
 | 145 | 작문 | 도서관 좌석 예약제와 자유 이용제를 비교한 기사 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
-| 146 | 비문학 | ????? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 147 | 문법 | 표준 발음 (실전) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 148 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
-| 149 | 문학 | 남신의주 유동 박시봉방 | docs/wittgenstein3_source_inventory.md > 남신의주 유동 박시봉방 |
-| 150 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
+| 146 | 비문학 | 미니멀리즘 음악의 위상 변위와 차이 생성 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
+| 147 | 문법 | ㅎ 탈락과 거센소리되기의 적용 조건 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 148 | 비문학 | 담화 공동체의 공유 규약과 상호 텍스트적 해석 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 149 | 문학 | 그 방을 생각하며 | docs/wittgenstein3_source_inventory.md > 그 방을 생각하며 |
+| 150 | 비문학 | 역할 정체성 검증과 사회 구조에 대한 개인적 몰입 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 151 | 화법 | 토론 반박의 타당성 (실전) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 152 | 작문 | 반박문 쓰기 (실전) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 153 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
