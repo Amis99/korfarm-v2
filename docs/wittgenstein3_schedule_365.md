@@ -196,11 +196,11 @@
 | 178 | 비문학 | 슈트 정단 분열 조직의 WUS-CLV3 조절과 기관 형성 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
 | 179 | 화법 | 동아리 발표회 질의응답 순서와 안내 멘트 조정 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 180 | 작문 | 학교 축제 체험 부스 예약제 도입 제안문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 181 | 비문학 | ?? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
-| 182 | 문법 | 문법 개념 적용 (실전) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 183 | 비문학 | ??? ? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 184 | 문학 | 누항사 | docs/wittgenstein3_source_inventory.md > 누항사 |
-| 185 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 181 | 비문학 | 한계 상황의 좌절과 초월자 암호의 해독 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
+| 182 | 문법 | 명사절 어미 '-(으)ㅁ'과 '-기'의 통사 기능과 서술어 호응 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 183 | 비문학 | 마리탱의 자연법 인식과 메스너의 제도적 구현 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 184 | 문학 | 그 나무 | docs/wittgenstein3_source_inventory.md > 그 나무 |
+| 185 | 비문학 | 혼인 무효와 혼인 취소의 청구 요건과 법적 효과 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 186 | 화법 | 발표자의 의도 파악 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 187 | 작문 | 개요의 적절성 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 188 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
