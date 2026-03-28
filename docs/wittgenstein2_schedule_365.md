@@ -311,11 +311,11 @@
 | 293 | 비문학 | 상계의 요건과 자동채권·수동채권의 구별 | 참고용 기출 지문 > 사회_상계와 채권.md.json |
 | 294 | 문법 | 필수적 부사어와 수의적 부사어의 구별 기준 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 295 | 비문학 | 압수용체 반사와 RAAS의 혈압 조절 메커니즘 | 참고용 기출 지문 > 과학_혈압 조절.md.json |
-| 296 | 문학 | 시집가는 날 | docs/wittgenstein2_source_inventory.md > 시집가는 날 |
-| 297 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
-| 298 | 화법 | 토의 규칙과 역할 (종합) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 299 | 작문 | 정보 통합 글쓰기 (종합) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 300 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
+| 296 | 문학 | 월선헌십육경가 | docs/wittgenstein2_source_inventory.md > 월선헌십육경가 |
+| 297 | 비문학 | OLED의 명실 명암비와 편광판·위상지연필름에 의한 야외 시인성 개선 | 참고용 기출 지문 > 기술_OLED와 야외시인성.md.json |
+| 298 | 화법 | 야간 자율학습실 선택 운영안 설명회를 앞두고 학생회와 도서부가 발표 순서와 질의응답 역할을 조정하는 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 299 | 작문 | 축제 다회용 컵 대여제 도입 효과를 정리한 교지 기사 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 300 | 비문학 | 아리스토텔레스의 복합 플롯과 카타르시스 | 참고용 기출 지문 > 인문예술_05_아리스토텔레스의_비극론.json |
 | 301 | 문법 | 피동과 사동 (종합) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 302 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-language |
 | 303 | 문학 | 운수 좋은 날 | docs/wittgenstein2_source_inventory.md > 운수 좋은 날 |
