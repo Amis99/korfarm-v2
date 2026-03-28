@@ -171,11 +171,11 @@
 | 153 | 비문학 | 수생 동물의 아가미 구조와 역류 교환의 효율 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
 | 154 | 문법 | 연결 어미 '-느라고'와 '-아서/어서'의 의미 제약과 결합 조건 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 155 | 비문학 | 상징 자본과 아비투스가 재생산하는 세계화의 위계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
-| 156 | 문학 | 낯익은 세상 | docs/wittgenstein3_source_inventory.md > 낯익은 세상 |
-| 157 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 158 | 화법 | 공감적 듣기와 재구성 (실전) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 159 | 작문 | 보고서 구성 (실전) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 160 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 156 | 문학 | 대설주의보 | docs/wittgenstein3_source_inventory.md > 대설주의보 |
+| 157 | 비문학 | 절차적 정의와 공동체적 덕의 긴장: 롤스와 매킨타이어 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 158 | 화법 | 모둠 발표 갈등을 상담하는 담임과 학생의 대화 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 159 | 작문 | 교내 분리배출 실태 조사 보고서 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 160 | 비문학 | 특별 공공 행정 조직의 법인격과 재정 구조 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 161 | 문법 | 담화와 지시 표현 (실전) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 162 | 비문학 | ????? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
 | 163 | 문학 | 너에게 묻는다 | docs/wittgenstein3_source_inventory.md > 너에게 묻는다 |
