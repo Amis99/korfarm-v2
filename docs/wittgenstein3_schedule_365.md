@@ -191,11 +191,11 @@
 | 173 | 작문 | 철학 읽기 모임 신규 부원 모집 소개 글 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 174 | 비문학 | 담화 공동체 독자와 상호 텍스트성의 관계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
 | 175 | 문법 | 사이시옷 표기와 합성어 내부 된소리되기의 조건 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 176 | 비문학 | ?? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
-| 177 | 문학 | 농무 | docs/wittgenstein3_source_inventory.md > 농무 |
-| 178 | 비문학 | ?? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 179 | 화법 | 상황 맥락 추론 (실전) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 180 | 작문 | 제목 설계 (실전) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 176 | 비문학 | 정체성 검증 실패와 구심적·원심적 귀인의 전환 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
+| 177 | 문학 | 그 방을 생각하며 | docs/wittgenstein3_source_inventory.md > 그 방을 생각하며 |
+| 178 | 비문학 | 슈트 정단 분열 조직의 WUS-CLV3 조절과 기관 형성 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 179 | 화법 | 동아리 발표회 질의응답 순서와 안내 멘트 조정 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 180 | 작문 | 학교 축제 체험 부스 예약제 도입 제안문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 181 | 비문학 | ?? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
 | 182 | 문법 | 문법 개념 적용 (실전) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 183 | 비문학 | ??? ? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
