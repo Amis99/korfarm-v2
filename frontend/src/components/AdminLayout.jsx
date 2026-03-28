@@ -22,7 +22,6 @@ const NAV_ITEMS = [
   { to: "/admin/inquiry", icon: "contact_support", label: "문의 관리" },
   { to: "/admin/edit-history", icon: "history", label: "수정 이력", roles: ["HQ_ADMIN"] },
   { to: "/admin/reports", icon: "flag", label: "보고" },
-  { to: "/admin/flags", icon: "tune", label: "운영 플래그", roles: ["HQ_ADMIN"] },
   { to: "/", icon: "home", label: "랜딩" },
   { to: "/start", icon: "play_arrow", label: "스타트" },
 ];

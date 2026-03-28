@@ -1,16 +1,7 @@
-export const LEVELS = [
-  "FREGE_1", "FREGE_2", "FREGE_3",
-  "SAUSSURE_1", "SAUSSURE_2", "SAUSSURE_3",
-  "RUSSELL_1", "RUSSELL_2", "RUSSELL_3",
-  "WITTGENSTEIN_1", "WITTGENSTEIN_2", "WITTGENSTEIN_3",
-];
+import { LEVEL_LABEL_MAP, DAILY_LEVELS } from "../../constants/contentTypes";
 
-export const LEVEL_LABELS = {
-  FREGE_1: "프레게 1", FREGE_2: "프레게 2", FREGE_3: "프레게 3",
-  SAUSSURE_1: "소쉬르 1", SAUSSURE_2: "소쉬르 2", SAUSSURE_3: "소쉬르 3",
-  RUSSELL_1: "러셀 1", RUSSELL_2: "러셀 2", RUSSELL_3: "러셀 3",
-  WITTGENSTEIN_1: "비트겐슈타인 1", WITTGENSTEIN_2: "비트겐슈타인 2", WITTGENSTEIN_3: "비트겐슈타인 3",
-};
+export const LEVELS = DAILY_LEVELS;
+export const LEVEL_LABELS = LEVEL_LABEL_MAP;
 
 /** profile.level_id (예: "russell1") → UPPER_SNAKE (예: "RUSSELL_1") 변환 */
 export function profileLevelToUpper(levelId) {

@@ -85,7 +85,6 @@ const AdminShopPage = lazy(() => import("./pages/AdminShopPage"));
 const AdminDuelPage = lazy(() => import("./pages/AdminDuelPage"));
 const AdminParentLinksPage = lazy(() => import("./pages/AdminParentLinksPage"));
 const AdminReportsPage = lazy(() => import("./pages/AdminReportsPage"));
-// const AdminFlagsPage = lazy(() => import("./pages/AdminFlagsPage"));
 const AdminWisdomPage = lazy(() => import("./pages/AdminWisdomPage"));
 const AdminWisdomDetailPage = lazy(() => import("./pages/AdminWisdomDetailPage"));
 const AdminTestPage = lazy(() => import("./pages/AdminTestPage"));
@@ -270,7 +269,6 @@ function App() {
           <Route path="/admin/parents" element={A(<AdminParentLinksPage />)} />
           <Route path="/admin/inquiry" element={A(<AdminInquiryPage />)} />
           <Route path="/admin/reports" element={A(<AdminReportsPage />)} />
-          {/* 플래그 메뉴 제거 */}
           <Route path="/admin/wisdom" element={A(<AdminWisdomPage />)} />
           <Route path="/admin/wisdom/:postId" element={A(<AdminWisdomDetailPage />)} />
           <Route path="/admin/tests" element={A(<AdminTestPage />)} />
