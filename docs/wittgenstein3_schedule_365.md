@@ -16,11 +16,11 @@
 
 | Day | ?? | ?? ?? | ?? ?? |
 |---:|---|---|---|
-| 1 | 비문학 | ???? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
-| 2 | 문학 | 213호 주택 | docs/wittgenstein3_source_inventory.md > 213호 주택 |
-| 3 | 비문학 | ??? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 4 | 화법 | 발표자의 의도 파악 (유형) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 5 | 작문 | 개요의 적절성 (유형) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 1 | 비문학 | 시민 불복종의 정당화 조건과 민주 사회의 딜레마 | 참고용 기출 지문 > 26년 수능특강/2027 수능특강 독서/2027 수능특강 독서 md/27수특 독서_시민 불복종과 소크라테스.md (가) |
+| 2 | 문학 | 하나씩의 별 | 참고용 기출 지문 > 26년 수능특강/2027 수능특강 문학/2027 수능특강 문학 md/교과서 개념 학습 md/27수특_하나씩의 별(이용악).md |
+| 3 | 비문학 | 사변적 실재론의 상관주의 비판과 실재 개념 | 참고용 기출 지문 > 26년 수능특강/2027 수능특강 독서/2027 수능특강 독서 md/27수특 독서_사변적 실재론, 사변적 실재론에 대한 비판.md (가) |
+| 4 | 화법 | 학생회 정책 발표 질의응답 순서 조정 회의 | 비트겐슈타인 3 화법 지문 수동 작성 |
+| 5 | 작문 | 교내 휴대전화 보관함 설치 제안문 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
 | 6 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 7 | 문법 | 음운 변동 (유형) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 8 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
