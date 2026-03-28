@@ -336,11 +336,11 @@
 | 318 | 비문학 | 행정 행위의 부관 중 조건·기한·부담의 구별과 부담만의 취소 가능성 | 참고용 기출 지문 > 법_행정 행위.md.json |
 | 319 | 화법 | 체육관 냉방 운영 시간 조정 학생회 간담회 질의응답 대본 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 320 | 작문 | 학교 도서관 조용한 대화 구역 도입 제안문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 321 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
-| 322 | 문법 | 훈민정음 원리 (종합) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 323 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
-| 324 | 문학 | 자전거 도둑 | docs/wittgenstein2_source_inventory.md > 자전거 도둑 |
-| 325 | 비문학 | ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
+| 321 | 비문학 | 자기 유변 유체 감쇠기의 점성 제어와 건물 진동 감쇠 | 참고용 기출 지문 > 과학_자기 유변 유체를 활용한 제진 시스템.md.json |
+| 322 | 문법 | 훈민정음 자음자의 상형성과 가획에 따른 계열 구분 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 323 | 비문학 | GPU의 스레드 블록 분배와 메모리 계층이 병렬 처리 효율에 미치는 영향 | 참고용 기출 지문 > 과학기술_08_연산_환경_변화와_GPU.json |
+| 324 | 문학 | 하단에서 | docs/wittgenstein2_source_inventory.md > 하단에서 |
+| 325 | 비문학 | 미적 수반론과 해소 불가능한 불일치 | 참고용 기출 지문 > 예술_(가)미적판단,(나)미적수반.md.json (나) |
 | 326 | 화법 | 건의와 협상의 전략 (종합) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 327 | 작문 | 비교·대조 글쓰기 (종합) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 328 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-language |
