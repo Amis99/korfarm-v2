@@ -241,11 +241,35 @@ class TestService(
         val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
         val answers = parseAnswers(sub.answersJson)
 
+        // 제출 시 저장된 채점 결과 파싱 (서술형 점수 포함)
+        val gradedStats = parseGradedStats(sub.statsJson)
+
         val domainMap = mutableMapOf<String, MutableList<Pair<Int, Int>>>() // domain -> list of (earned, max)
         val details = questions.map { q ->
             val myAnswer = answers[q.number.toString()] ?: ""
-            val isCorrect = if (q.type == "객관식") myAnswer == q.correctAnswer else false
-            val earned = if (isCorrect) q.points else 0
+            val gradedStat = gradedStats[q.number]
+            val isCorrect: Boolean
+            val earned: Int
+            if (q.type == "객관식") {
+                isCorrect = myAnswer.isNotBlank() && myAnswer == q.correctAnswer
+                earned = if (isCorrect) q.points else 0
+            } else {
+                // 서술형: 제출 시 저장된 채점 결과 사용, 없으면 키워드 재채점
+                if (gradedStat != null) {
+                    earned = gradedStat.earned
+                    isCorrect = gradedStat.correct
+                } else {
+                    val keywords = parseEssayKeywords(q.essayKeywordsJson)
+                    if (keywords != null && keywords.isNotEmpty() && myAnswer.isNotBlank()) {
+                        val keywordResult = gradeByKeywords(myAnswer, keywords, q.points)
+                        earned = keywordResult.score
+                        isCorrect = earned >= q.points * 0.7
+                    } else {
+                        isCorrect = false
+                        earned = 0
+                    }
+                }
+            }
             val domain = q.domain ?: "기타"
             domainMap.getOrPut(domain) { mutableListOf() }.add(earned to q.points)
             val explanations = parseExplanations(q.choiceExplanationsJson)
@@ -255,11 +279,11 @@ class TestService(
                 domain = q.domain,
                 passage = q.passage,
                 myAnswer = myAnswer,
-                correctAnswer = q.correctAnswer ?: "",
+                correctAnswer = q.correctAnswer ?: q.modelAnswer ?: "",
                 isCorrect = isCorrect,
                 points = q.points,
                 earnedPoints = earned,
-                choiceExplanation = if (!isCorrect && myAnswer.isNotBlank()) explanations?.get(myAnswer) else null,
+                choiceExplanation = if (!isCorrect && myAnswer.isNotBlank() && q.type == "객관식") explanations?.get(myAnswer) else null,
                 intent = q.intent
             )
         }
@@ -299,9 +323,15 @@ class TestService(
         val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
         val answers = parseAnswers(sub.answersJson)
 
+        val gradedStats = parseGradedStats(sub.statsJson)
         val wrongItems = questions.mapNotNull { q ->
             val myAnswer = answers[q.number.toString()] ?: ""
-            val isCorrect = if (q.type == "객관식") myAnswer == q.correctAnswer else false
+            val gradedStat = gradedStats[q.number]
+            val isCorrect = if (q.type == "객관식") {
+                myAnswer.isNotBlank() && myAnswer == q.correctAnswer
+            } else {
+                gradedStat?.correct ?: false
+            }
             if (isCorrect) return@mapNotNull null
             val explanations = parseExplanations(q.choiceExplanationsJson)
             val feedback = buildFeedback(q, myAnswer, explanations)
@@ -600,6 +630,23 @@ class TestService(
     private fun findPaper(testId: String): TestPaperEntity {
         return testPaperRepo.findById(testId).orElseThrow {
             ApiException("NOT_FOUND", "시험을 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+        }
+    }
+
+    data class GradedStat(val earned: Int, val correct: Boolean)
+
+    private fun parseGradedStats(json: String?): Map<Int, GradedStat> {
+        if (json.isNullOrBlank()) return emptyMap()
+        return try {
+            val list: List<Map<String, Any>> = objectMapper.readValue(json, object : TypeReference<List<Map<String, Any>>>() {})
+            list.associate { item ->
+                val qNum = (item["q"] as? Number)?.toInt() ?: 0
+                val earned = (item["earned"] as? Number)?.toInt() ?: 0
+                val correct = item["correct"] as? Boolean ?: false
+                qNum to GradedStat(earned, correct)
+            }
+        } catch (e: Exception) {
+            emptyMap()
         }
     }
 
