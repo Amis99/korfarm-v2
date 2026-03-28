@@ -226,11 +226,11 @@
 | 208 | 작문 | 교내 다회용 컵 대여 운영 결과 보고서 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 209 | 비문학 | 흄의 기적 논증과 증언의 신뢰도 | 참고용 기출 지문 > 26년 수능특강/2027 수능특강 독서/output/json/인문예술_10_기적적_사건에_대한_흄의_견해.json |
 | 210 | 문법 | 파생 사동 '-이/-히/-리/-기-'와 통사 사동 '-게 하다'의 의미 차이 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 211 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-society |
-| 212 | 문학 | 님의 침묵 | docs/wittgenstein2_source_inventory.md > 님의 침묵 |
-| 213 | 비문학 | ????? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-economy |
-| 214 | 화법 | 설득 전략 분석 (심화) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 215 | 작문 | 고쳐쓰기 전략 (심화) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 211 | 비문학 | 법적 의제의 제도적 기능과 법체계상의 한계 | 참고용 기출 지문 > 사회문화_13_법적_의제.json |
+| 212 | 문학 | 방서한 | docs/wittgenstein2_source_inventory.md > 방서한 |
+| 213 | 비문학 | 최적 다수결의 의사 결정 비용과 외부 비용 | 참고용 기출 지문 > 사회_공공 선택 이론.md.json |
+| 214 | 화법 | 학교 축제 야간 운영 연장 찬반 공개토론 준비 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 215 | 작문 | 교내 휴대전화 자율 보관제 반박문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 216 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
 | 217 | 문법 | 높임과 시간 표현 (심화) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 218 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
