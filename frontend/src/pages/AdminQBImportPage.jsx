@@ -268,7 +268,7 @@ function AdminQBImportPage() {
               <span className="material-symbols-outlined">description</span>
               템플릿 다운로드
             </button>
-            <button className="qb-btn" onClick={() => navigate("/admin/question-bank")}>
+            <button className="qb-btn" onClick={() => navigate("/admin/learning-db?tab=question-bank")}>
               <span className="material-symbols-outlined">arrow_back</span>
               목록으로
             </button>
@@ -364,7 +364,7 @@ function AdminQBImportPage() {
                   </div>
                 ))}
                 <div style={{ marginTop: 12 }}>
-                  <button className="qb-btn primary" onClick={() => navigate("/admin/question-bank")}>
+                  <button className="qb-btn primary" onClick={() => navigate("/admin/learning-db?tab=question-bank")}>
                     목록으로 이동
                   </button>
                 </div>

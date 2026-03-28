@@ -1,0 +1,163 @@
+/* ── 학습자료 DB 통합 페이지 ── */
+
+/* 페이지 셸 */
+.ldb-page { display: flex; flex-direction: column; height: calc(100vh - 56px); overflow: hidden; }
+
+/* 탭 바 */
+.ldb-tabs { display: flex; gap: 2px; padding: 12px 16px 0; border-bottom: 1px solid #2a3a2e; flex-shrink: 0; }
+.ldb-tab { display: inline-flex; align-items: center; gap: 6px; padding: 8px 20px; border-radius: 8px 8px 0 0; background: #1a2a1e; color: #8a9a8e; cursor: pointer; border: none; font-size: 14px; font-weight: 600; transition: .15s; }
+.ldb-tab .material-symbols-outlined { font-size: 18px; }
+.ldb-tab.active { background: #243428; color: #f3f6f1; border-bottom: 2px solid #ff7f2a; }
+.ldb-tab:hover:not(.active) { background: #1e2e22; color: #c5d0c8; }
+
+/* 툴바 */
+.ldb-toolbar { display: flex; gap: 8px; align-items: center; padding: 10px 16px; border-bottom: 1px solid #2a3a2e; flex-shrink: 0; flex-wrap: wrap; }
+.ldb-toolbar-title { font-weight: 700; font-size: 15px; margin-right: auto; }
+
+/* 필터바 (문제은행) */
+.ldb-filters { display: flex; gap: 10px; padding: 10px 16px; border-bottom: 1px solid #2a3a2e; flex-shrink: 0; flex-wrap: wrap; align-items: center; }
+.ldb-search { flex: 1; min-width: 200px; padding: 8px 12px; background: #111815; border: 1px solid #2a3a2e; border-radius: 8px; color: #e8dfd6; font-size: 0.85rem; }
+.ldb-search::placeholder { color: #6a7a6e; }
+.ldb-select { padding: 8px 12px; background: #111815; border: 1px solid #2a3a2e; border-radius: 8px; color: #c8bfb6; font-size: 0.85rem; min-width: 120px; }
+
+/* 버튼 */
+.ldb-btn { padding: 6px 14px; border-radius: 6px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: .15s; display: inline-flex; align-items: center; gap: 4px; }
+.ldb-btn .material-symbols-outlined { font-size: 16px; }
+.ldb-btn-primary { background: #ff7f2a; color: #fff; }
+.ldb-btn-primary:hover { background: #e06e1f; }
+.ldb-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.ldb-btn-secondary { background: #2a3a2e; color: #c5d0c8; }
+.ldb-btn-secondary:hover { background: #344840; }
+.ldb-btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+.ldb-btn-ghost { background: transparent; color: #8a9a8e; }
+.ldb-btn-ghost:hover { background: #1e2e22; color: #c5d0c8; }
+
+/* 2패널 본문 */
+.ldb-body { display: flex; flex: 1; overflow: hidden; }
+
+/* ── VS Code 폴더 트리 ── */
+.ldb-tree { width: 260px; min-width: 220px; border-right: 1px solid #2a3a2e; overflow-y: auto; flex-shrink: 0; display: flex; flex-direction: column; background: #111815; }
+.ldb-tree-header { display: flex; align-items: center; padding: 10px 12px; border-bottom: 1px solid #1e2e22; }
+.ldb-tree-title { font-size: 11px; color: #6a7a6e; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; flex: 1; }
+.ldb-tree-actions { display: flex; gap: 4px; }
+.ldb-tree-body { flex: 1; overflow-y: auto; padding: 4px 0; }
+
+.ldb-tree-node { display: flex; align-items: center; gap: 4px; padding: 3px 8px; cursor: pointer; color: #c5d0c8; font-size: 13px; user-select: none; position: relative; min-height: 26px; }
+.ldb-tree-node:hover { background: #1a2a1e; }
+.ldb-tree-node.active { background: #243428; color: #f3f6f1; }
+
+.ldb-tree-guide { position: absolute; top: 0; bottom: 0; width: 1px; background: #2a3a2e; }
+
+.ldb-tree-chevron { font-size: 16px !important; color: #6a7a6e; transition: transform .15s; flex-shrink: 0; }
+.ldb-tree-chevron.open { transform: rotate(90deg); }
+.ldb-tree-chevron-spacer { width: 16px; flex-shrink: 0; }
+
+.ldb-tree-icon { font-size: 16px !important; flex-shrink: 0; }
+.ldb-tree-node.folder .ldb-tree-icon { color: #ff7f2a; }
+.ldb-tree-node.file .ldb-tree-icon { color: #6a9a7e; }
+
+.ldb-tree-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ldb-tree-badge { font-size: 11px; color: #6a7a6e; background: #1a2a1e; padding: 1px 6px; border-radius: 10px; flex-shrink: 0; }
+
+/* ── 편집 영역 ── */
+.ldb-editor { flex: 1; overflow-y: auto; padding: 16px 20px 80px; }
+.ldb-editor-empty { display: flex; align-items: center; justify-content: center; height: 100%; color: #6a7a6e; font-size: 14px; }
+.ldb-editor-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.ldb-editor-title { font-size: 18px; font-weight: 700; }
+.ldb-editor-actions { display: flex; gap: 6px; margin-left: auto; flex-wrap: wrap; }
+
+/* ── 아코디언 섹션 ── */
+.ldb-section { margin-bottom: 8px; border: 1px solid #2a3a2e; border-radius: 8px; overflow: hidden; }
+.ldb-section-header { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #1a2a1e; cursor: pointer; user-select: none; }
+.ldb-section-header:hover { background: #1e2e22; }
+.ldb-section-header .material-symbols-outlined { font-size: 18px; color: #ff7f2a; transition: .2s; }
+.ldb-section-header .material-symbols-outlined.rotated { transform: rotate(90deg); }
+.ldb-section-header span:last-child { font-weight: 600; font-size: 14px; }
+.ldb-section-body { padding: 12px 14px; background: #141e18; }
+.ldb-section-body.collapsed { display: none; }
+
+/* ── 키-값 편집 행 ── */
+.ldb-field { margin-bottom: 10px; }
+.ldb-field-label { display: block; font-size: 12px; color: #8a9a8e; margin-bottom: 4px; font-weight: 600; }
+.ldb-field input, .ldb-field textarea, .ldb-field select {
+  width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #2a3a2e;
+  background: #0f1810; color: #f3f6f1; font-size: 13px; font-family: inherit; resize: vertical;
+}
+.ldb-field input:focus, .ldb-field textarea:focus { border-color: #ff7f2a; outline: none; }
+.ldb-field textarea { min-height: 60px; }
+.ldb-field-long textarea { min-height: 120px; }
+
+/* 배열 항목 카드 */
+.ldb-arr-item { border: 1px solid #2a3a2e; border-radius: 6px; padding: 8px 10px; margin-bottom: 6px; background: #0f1810; position: relative; }
+.ldb-arr-item-header { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+.ldb-arr-item-num { font-size: 12px; font-weight: 700; color: #ff7f2a; }
+.ldb-arr-item-actions { margin-left: auto; display: flex; gap: 2px; }
+.ldb-arr-item-actions button { background: none; border: none; color: #6a7a6e; cursor: pointer; padding: 2px; }
+.ldb-arr-item-actions button:hover { color: #ff5c5c; }
+.ldb-arr-add { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 4px; border: 1px dashed #3a4a3e; background: none; color: #6a7a6e; cursor: pointer; font-size: 12px; margin-top: 4px; }
+.ldb-arr-add:hover { border-color: #ff7f2a; color: #ff7f2a; }
+
+/* 필드 라벨 행 (삭제 버튼) */
+.ldb-field-label-row { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
+.ldb-field-label-row .ldb-field-label { margin-bottom: 0; }
+.ldb-field-remove { background: none; border: none; color: #5a6a5e; cursor: pointer; padding: 1px; opacity: 0.4; transition: .15s; line-height: 1; }
+.ldb-field-remove:hover { color: #ff5c5c; opacity: 1; }
+
+/* 필드 추가 인라인 폼 */
+.ldb-add-field { display: flex; align-items: center; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.ldb-add-field input { flex: 1; min-width: 120px; padding: 5px 8px; border-radius: 4px; border: 1px solid #3a4a3e; background: #0f1810; color: #f3f6f1; font-size: 12px; }
+.ldb-add-field input:focus { border-color: #ff7f2a; outline: none; }
+.ldb-add-field select { padding: 5px 6px; border-radius: 4px; border: 1px solid #3a4a3e; background: #0f1810; color: #c5d0c8; font-size: 12px; }
+
+/* 객체 재귀 편집 */
+.ldb-obj-fields { padding-left: 12px; border-left: 2px solid #2a3a2e; }
+
+/* Raw JSON */
+.ldb-raw textarea { width: 100%; min-height: 400px; font-family: 'Consolas', 'Monaco', monospace; font-size: 12px; line-height: 1.5; }
+.ldb-raw-error { color: #ff5c5c; font-size: 12px; margin-top: 4px; }
+
+/* 드롭다운 */
+.ldb-dropdown { position: relative; display: inline-block; }
+.ldb-dropdown-menu { position: absolute; top: 100%; right: 0; margin-top: 4px; background: #1a2a1e; border: 1px solid #2a3a2e; border-radius: 8px; min-width: 220px; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+.ldb-dropdown-item { display: block; width: 100%; padding: 8px 14px; border: none; background: none; color: #c5d0c8; font-size: 13px; text-align: left; cursor: pointer; }
+.ldb-dropdown-item:hover { background: #243428; }
+.ldb-dropdown-item:first-child { border-radius: 8px 8px 0 0; }
+.ldb-dropdown-item:last-child { border-radius: 0 0 8px 8px; }
+.ldb-dropdown-divider { height: 1px; background: #2a3a2e; margin: 2px 0; }
+
+/* 토스트 */
+.ldb-toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; z-index: 9999; animation: ldbToastIn .3s; }
+.ldb-toast.success { background: #2a6a3a; color: #fff; }
+.ldb-toast.error { background: #8a2a2a; color: #fff; }
+@keyframes ldbToastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* 로딩 */
+.ldb-loading { display: flex; align-items: center; justify-content: center; padding: 40px; color: #8a9a8e; gap: 8px; }
+
+/* 모달 */
+.ldb-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 1000; display: flex; align-items: center; justify-content: center; }
+.ldb-modal { background: #1a2a1e; border: 1px solid #2a3a2e; border-radius: 12px; width: 90%; max-width: 640px; max-height: 80vh; display: flex; flex-direction: column; box-shadow: 0 8px 32px rgba(0,0,0,.5); }
+.ldb-modal-header { display: flex; align-items: center; padding: 14px 18px; border-bottom: 1px solid #2a3a2e; }
+.ldb-modal-title { font-size: 16px; font-weight: 700; flex: 1; }
+.ldb-modal-body { overflow-y: auto; padding: 14px 18px; flex: 1; }
+
+/* 이력 테이블 */
+.ldb-log-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ldb-log-table th { text-align: left; padding: 6px 8px; color: #8a9a8e; font-weight: 600; border-bottom: 1px solid #2a3a2e; font-size: 12px; white-space: nowrap; }
+.ldb-log-table td { padding: 8px 8px; border-bottom: 1px solid #1e2e22; color: #c5d0c8; }
+.ldb-log-table tr:hover td { background: #1e2e22; }
+.ldb-log-action { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+.ldb-log-action.create { background: #1a4a2a; color: #6fd68a; }
+.ldb-log-action.update { background: #3a3a1a; color: #d6c86f; }
+.ldb-log-action.batch_create { background: #1a3a4a; color: #6fc8d6; }
+
+/* ── 반응형 ── */
+@media (max-width: 768px) {
+  .ldb-tree { width: 200px; min-width: 180px; }
+  .ldb-editor { padding: 12px; }
+  .ldb-tabs { overflow-x: auto; }
+}
+@media (max-width: 540px) {
+  .ldb-body { flex-direction: column; }
+  .ldb-tree { width: 100%; max-height: 200px; border-right: none; border-bottom: 1px solid #2a3a2e; }
+}

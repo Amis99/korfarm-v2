@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { ProtectedRoute, AdminRoute } from "./components/ProtectedRoute";
 import { useAuth } from "./hooks/useAuth";
 
@@ -108,12 +108,11 @@ const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
 const AdminInquiryPage = lazy(() => import("./pages/AdminInquiryPage"));
 const InquiryPage = lazy(() => import("./pages/InquiryPage"));
 const AdminMembershipApprovalPage = lazy(() => import("./pages/AdminMembershipApprovalPage"));
-const AdminQuestionBankPage = lazy(() => import("./pages/AdminQuestionBankPage"));
 const AdminQBImportPage = lazy(() => import("./pages/AdminQBImportPage"));
 const AdminQBRecordDetailPage = lazy(() => import("./pages/AdminQBRecordDetailPage"));
 const AdminQBCodesPage = lazy(() => import("./pages/AdminQBCodesPage"));
 const AdminEditHistoryPage = lazy(() => import("./pages/AdminEditHistoryPage"));
-const AdminManuscriptPage = lazy(() => import("./pages/AdminManuscriptPage"));
+const AdminLearningDBPage = lazy(() => import("./pages/AdminLearningDBPage"));
 
 /* 로그인 상태에서 공개 페이지 접근 시 /start로 리다이렉트 */
 function PublicOnlyRoute({ children }) {
@@ -128,6 +127,12 @@ function TestsHistoryRedirect() {
   const params = new URLSearchParams(search);
   params.set("tab", "history");
   return <Navigate to={`/tests?${params.toString()}`} replace />;
+}
+
+/* /admin/question-bank/records/:id → /admin/learning-db/qb-records/:id 리다이렉트 */
+function QBRecordRedirect() {
+  const { id } = useParams();
+  return <Navigate to={`/admin/learning-db/qb-records/${id}`} replace />;
 }
 
 function GlobalLogo() {
@@ -270,12 +275,18 @@ function App() {
           <Route path="/admin/wisdom/:postId" element={A(<AdminWisdomDetailPage />)} />
           <Route path="/admin/tests" element={A(<AdminTestPage />)} />
           <Route path="/admin/tests/:testId" element={A(<AdminTestDetailPage />)} />
-          <Route path="/admin/question-bank" element={A(<AdminQuestionBankPage />)} />
-          <Route path="/admin/question-bank/import" element={A(<AdminQBImportPage />)} />
-          <Route path="/admin/question-bank/records/:id" element={A(<AdminQBRecordDetailPage />)} />
-          <Route path="/admin/question-bank/codes" element={A(<AdminQBCodesPage />)} />
+          {/* 학습자료 DB 통합 */}
+          <Route path="/admin/learning-db" element={A(<AdminLearningDBPage />)} />
+          <Route path="/admin/learning-db/qb-import" element={A(<AdminQBImportPage />)} />
+          <Route path="/admin/learning-db/qb-records/:id" element={A(<AdminQBRecordDetailPage />)} />
+          <Route path="/admin/learning-db/qb-codes" element={A(<AdminQBCodesPage />)} />
+          {/* 하위 호환 리다이렉트 */}
+          <Route path="/admin/question-bank" element={<Navigate to="/admin/learning-db?tab=question-bank" replace />} />
+          <Route path="/admin/question-bank/import" element={<Navigate to="/admin/learning-db/qb-import" replace />} />
+          <Route path="/admin/question-bank/records/:id" element={<QBRecordRedirect />} />
+          <Route path="/admin/question-bank/codes" element={<Navigate to="/admin/learning-db/qb-codes" replace />} />
+          <Route path="/admin/manuscripts" element={<Navigate to="/admin/learning-db?tab=manuscripts" replace />} />
           <Route path="/admin/pro" element={A(<AdminProPage />)} />
-          <Route path="/admin/manuscripts" element={A(<AdminManuscriptPage />)} />
           <Route path="/admin/edit-history" element={A(<AdminEditHistoryPage />)} />
           <Route path="/admin/study-plans" element={A(<AdminStudyPlansPage />)} />
           <Route path="/admin/study-plans/:planId" element={A(<AdminStudyPlanDetailPage />)} />

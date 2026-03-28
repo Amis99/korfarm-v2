@@ -103,7 +103,7 @@ function AdminQBRecordDetailPage() {
     if (!window.confirm("이 레코드를 보관(archived) 처리하시겠습니까?")) return;
     try {
       await apiDelete(`/v1/admin/question-bank/records/${id}`);
-      navigate("/admin/question-bank");
+      navigate("/admin/learning-db?tab=question-bank");
     } catch (e) {
       alert("삭제 실패: " + e.message);
     }
@@ -154,7 +154,7 @@ function AdminQBRecordDetailPage() {
         <div className="qb-header">
           <h1>{record.record_code}</h1>
           <div className="qb-header-actions">
-            <button className="qb-btn" onClick={() => navigate("/admin/question-bank")}>
+            <button className="qb-btn" onClick={() => navigate("/admin/learning-db?tab=question-bank")}>
               <span className="material-symbols-outlined">arrow_back</span>
               목록
             </button>

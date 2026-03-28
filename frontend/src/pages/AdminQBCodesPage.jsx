@@ -99,7 +99,7 @@ function AdminQBCodesPage() {
         <div className="qb-header">
           <h1>코드표 관리</h1>
           <div className="qb-header-actions">
-            <button className="qb-btn" onClick={() => navigate("/admin/question-bank")}>
+            <button className="qb-btn" onClick={() => navigate("/admin/learning-db?tab=question-bank")}>
               <span className="material-symbols-outlined">arrow_back</span>
               문제은행
             </button>
