@@ -251,11 +251,11 @@
 | 233 | 문학 | 고향 | docs/wittgenstein2_source_inventory.md > 고향 |
 | 234 | 비문학 | 니체의 힘에의 의지와 아곤의 경쟁 | 참고용 기출 지문 > 철학_니체의 전통 형이상학 반대.md.json |
 | 235 | 화법 | 축제 다회용 컵 보증금제 운영안을 두고 학생회와 매점이 조정하는 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 236 | 작문 | 비교·대조 글쓰기 (심화) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 237 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-society |
-| 238 | 문법 | 표준 발음 (심화) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 239 | 비문학 | ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-economy |
-| 240 | 문학 | 메밀꽃 필 무렵 | docs/wittgenstein2_source_inventory.md > 메밀꽃 필 무렵 |
+| 236 | 작문 | 학교 도서관 야간 개방안과 빈 교실 자습실 운영안을 비교한 기사 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 237 | 비문학 | 착오 송금의 반환 절차와 부당이득 판단 | 참고용 기출 지문 > 사회문화_05_착오_송금.json |
+| 238 | 문법 | ㄷ 불규칙 활용과 어간 보존형의 의미 구별 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 239 | 비문학 | 조세의 법적 귀착과 경제적 귀착 | 참고용 기출 지문 > 사회_조세 부담.md.json |
+| 240 | 문학 | 불신 시대 | docs/wittgenstein2_source_inventory.md > 불신 시대 |
 | 241 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
 | 242 | 화법 | 토론 반박의 타당성 (심화) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 243 | 작문 | 반박문 쓰기 (심화) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
