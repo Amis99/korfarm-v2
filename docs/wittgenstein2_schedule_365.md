@@ -241,11 +241,11 @@
 | 223 | 비문학 | 큐비즘의 다중 시점과 분석적·종합적 전개 | 참고용 기출 지문 > 예술_큐비즘.md.json |
 | 224 | 문법 | 중세국어 객체 높임 표현과 특수 어휘의 결합 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 225 | 비문학 | 담화 공동체 독자와 상호 텍스트성 | 참고용 기출 지문 > 지문으로이해하기_08_담화_공동체_독자.json |
-| 226 | 문학 | 둑방길 | docs/wittgenstein2_source_inventory.md > 둑방길 |
-| 227 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-psychology |
-| 228 | 화법 | 인터뷰의 핵심 정보 (심화) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 229 | 작문 | 개념 정의 방식 (심화) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 230 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-environment |
+| 226 | 문학 | 메아리 | docs/wittgenstein2_source_inventory.md > 메아리 |
+| 227 | 비문학 | 도덕적 자아 모델의 세 가지 구성 요소 | 참고용 기출 지문 > 인문_도덕적 자아 모델.md.json |
+| 228 | 화법 | 학교 신문 독서 공간 기획 기사 작성을 위한 학생·사서 인터뷰 정리 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 229 | 작문 | 교지 인문 칼럼에 실을 '허구는 거짓말과 어떻게 다른가' 설명문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 230 | 비문학 | CFC의 오존층 파괴와 남극 오존 구멍의 발견 | 참고용 기출 지문 > 26년 수능특강/2027 수능특강 독서/2027 수능특강 독서 md/27수특 독서_CFC의 오존층 파괴.md |
 | 231 | 문법 | 훈민정음 원리 (심화) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 232 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-humanities |
 | 233 | 문학 | 등신불 | docs/wittgenstein2_source_inventory.md > 등신불 |
