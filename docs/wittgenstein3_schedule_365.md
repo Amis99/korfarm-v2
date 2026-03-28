@@ -236,11 +236,11 @@
 | 218 | 비문학 | 뉴턴의 질점 개념과 패러데이의 장 개념이 실재를 설명하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
 | 219 | 문학 | 눈 오는 날에 | docs/wittgenstein3_source_inventory.md > 눈 오는 날에 |
 | 220 | 비문학 | GPU의 스레드 블록 분배와 메모리 계층 최적화 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
-| 221 | 화법 | 발표 자료 해석 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 222 | 작문 | 문단 재배열 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 223 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 224 | 문법 | 중세국어 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 225 | 비문학 | ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 221 | 화법 | 급식실 혼잡도 설문 결과를 발표 자료에 반영하는 학생회 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 222 | 작문 | 교내 진로 박람회 운영 결과를 정리한 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 223 | 비문학 | 미니멀리즘 음악의 위상 변위와 차이를 생성하는 반복 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
+| 224 | 문법 | 중세국어 객체 높임 선어말 어미 '-ᄉᆞᆸ-'과 특수 어휘의 호응 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 225 | 비문학 | 담화 공동체 독자와 반복·전제의 의미 생산 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
 | 226 | 문학 | 둑방길 | docs/wittgenstein3_source_inventory.md > 둑방길 |
 | 227 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 228 | 화법 | 인터뷰의 핵심 정보 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
