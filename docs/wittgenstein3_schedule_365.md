@@ -211,11 +211,11 @@
 | 193 | 화법 | 축제 체험 부스 신청 안내 발표 전 질의응답 순서 조정 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 194 | 작문 | 교내 다회용 컵 대여제 운영 결과 개선 보고서 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 195 | 비문학 | 부분적 리프로그래밍과 야마나카 인자의 역노화 설계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
-| 196 | 문법 | 형태소와 품사 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 197 | 비문학 | ????? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 198 | 문학 | 눈길 | docs/wittgenstein3_source_inventory.md > 눈길 |
-| 199 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
-| 200 | 화법 | 질문의 기능 분석 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 196 | 문법 | 명사형 어미 '-(으)ㅁ'과 '-기'의 통사 기능과 의미 차이 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 197 | 비문학 | 벤데이 도트와 패널 재구성이 팝아트의 긴장을 만드는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
+| 198 | 문학 | 눈 오는 날에 | docs/wittgenstein3_source_inventory.md > 눈 오는 날에 |
+| 199 | 비문학 | 하이퍼텍스트 환경의 다문서 읽기와 인지적 부담 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 200 | 화법 | 학생회 공개 간담회 질의응답 순서 조정 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 201 | 작문 | 주장과 근거 배열 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 202 | 비문학 | ???? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 203 | 문법 | 문장 성분 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
