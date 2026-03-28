@@ -37,6 +37,7 @@
 | 유등제 | exam-literature | 26년 수능특강/2027 수능특강 문학/2027 수능특강 문학 md/현대 시 md/27수특_유등제(이수익).md | (나)만 exact excerpt 사용 | source_selected |
 | 와사등 | exam-literature | 26년 수능특강/2027 수능특강 문학/2027 수능특강 문학 md/현대 시 md/27수특_와사등(김광균).md | (나) exact excerpt 사용 | source_selected |
 | 박꽃이 피어난 집 | exam-literature | 26년 수능특강/2027 수능특강 문학/2027 수능특강 문학 md/갈래 복합 md/27수특_박꽃이 피어난 집(이학규).md | (가) exact excerpt 사용 | source_selected |
+| 포스터 속의 비둘기 | exam-literature | 26년 수능특강/2027 수능특강 문학/2027 수능특강 문학 md/현대 시 md/27수특_포스터 속의 비둘기(신동집).md | (가) exact excerpt 사용 | source_selected |
 | 길 | exam-literature | 26년 수능특강/2027 수능특강 문학/2027 수능특강 문학 md/교과서 개념 학습 md/27수특_길(김소월).md | exact excerpt 사용 | source_selected |
 | 길을 찾아서 4 - 명암리 길 | exam-literature | ?? ?? ?? ? ??/?? ?? ?? ? ?? ?? ?? | ?? ?? ??, ?? ?? ?? | source_selected |
 | 김원전 | exam-literature | ?? ?? ?? ? ??/?? ?? ?? ? ?? ?? ?? | ?? ?? ??, ?? ?? ?? | source_selected |
