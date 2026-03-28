@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { apiGet, apiPut, apiPost } from "../../utils/adminApi";
 import {
   LEVEL_ORDER, LEVEL_NAMES, LEVEL_GROUPS,
-  getSchemaForLevel
 } from "../../constants/manuscriptSchemas";
 import VSCodeTree from "./VSCodeTree";
 import JsonVisualEditor from "./JsonVisualEditor";
@@ -16,22 +15,6 @@ function normalizeItem(raw) {
     dayIndex: raw.day_index ?? raw.dayIndex,
     title: raw.title,
   };
-}
-
-function sortBySchema(data, levelId) {
-  if (!data || typeof data !== "object" || Array.isArray(data)) return data;
-  const schema = getSchemaForLevel(levelId);
-  const schemaKeys = Object.keys(schema);
-  const dataKeys = Object.keys(data);
-  const sorted = {};
-  const orderedKeys = [
-    ...schemaKeys.filter(k => dataKeys.includes(k)),
-    ...dataKeys.filter(k => !schemaKeys.includes(k))
-  ];
-  const metaIdx = orderedKeys.indexOf("메타");
-  if (metaIdx > 0) { orderedKeys.splice(metaIdx, 1); orderedKeys.unshift("메타"); }
-  for (const k of orderedKeys) sorted[k] = data[k];
-  return sorted;
 }
 
 function LDBManuscriptTab({ setToast }) {
@@ -94,7 +77,7 @@ function LDBManuscriptTab({ setToast }) {
       const preview = await apiGet(`/v1/admin/content/${item.contentId}/preview`);
       const json = preview.content || preview.content_json || {};
       const raw = json.manuscript || json;
-      const manuscript = sortBySchema(raw, item.levelId);
+      const manuscript = raw;
       setEditorData(manuscript);
       setRawText(JSON.stringify(manuscript, null, 2));
     } catch {
