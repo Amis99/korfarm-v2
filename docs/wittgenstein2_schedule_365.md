@@ -326,11 +326,11 @@
 | 308 | 문법 | 주체 높임 선어말 어미 '-시-'와 과거 시제 '-었-'의 결합 순서와 시점 해석 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 309 | 비문학 | 미메시스의 삼중 구조와 이야기 정체성의 형성 | 참고용 기출 지문 > 철학_리쾨르의 자기 해석학.md.json |
 | 310 | 문학 | 월선헌십육경가 | docs/wittgenstein2_source_inventory.md > 월선헌십육경가 |
-| 311 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-philosophy |
-| 312 | 화법 | 발표 자료 해석 (종합) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 313 | 작문 | 문단 재배열 (종합) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 314 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-society |
-| 315 | 문법 | 중세국어 (종합) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 311 | 비문학 | 러셀의 기술 이론과 부정 존재문 해석 | 참고용 기출 지문 > 인문예술_06_통일성_명제_관련_문제에_대한_프레게와_러셀의_이론.json |
+| 312 | 화법 | 학교 급식 잔반 조사 결과 발표 자료의 그래프 해석과 순서 조정 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 313 | 작문 | 교내 철학 강연회 운영 결과를 정리한 교지 기사 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 314 | 비문학 | 참여 민주주의에서 시민 참여의 교육 기능과 지방자치의 의미 | 참고용 기출 지문 > 사회문화_09_시민_참여에_대한_견해.json |
+| 315 | 문법 | 중세국어 양성·음성 모음 조화와 연결 어미 '-아/-어'의 선택 조건 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 316 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-economy |
 | 317 | 문학 | 유리창 | docs/wittgenstein2_source_inventory.md > 유리창 |
 | 318 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
