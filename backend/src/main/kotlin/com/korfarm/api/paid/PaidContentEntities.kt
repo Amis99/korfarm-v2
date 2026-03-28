@@ -75,7 +75,7 @@ class ContentVersionEntity(
     @Column(name = "schema_version", nullable = false)
     var schemaVersion: String,
 
-    @Column(name = "content_json", columnDefinition = "json", nullable = false)
+    @Column(name = "content_json", columnDefinition = "longtext", nullable = false)
     var contentJson: String,
 
     @Column(name = "uploaded_by", nullable = false)
