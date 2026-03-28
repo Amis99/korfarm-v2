@@ -2,6 +2,7 @@ package com.korfarm.api.learning
 
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.economy.EconomyService
+import com.korfarm.api.paid.ContentRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter
 class FarmLearningService(
     private val farmLearningLogRepository: FarmLearningLogRepository,
     private val contentPageProgressRepository: ContentPageProgressRepository,
+    private val contentRepository: ContentRepository,
     private val economyService: EconomyService
 ) {
     companion object {
@@ -87,11 +89,17 @@ class FarmLearningService(
     fun getHistory(userId: String): FarmHistoryResponse {
         val logs = farmLearningLogRepository.findTop50ByUserIdOrderByCreatedAtDesc(userId)
         val fmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+        // contentId → title 매핑
+        val contentIds = logs.map { it.contentId }.distinct()
+        val titleMap = if (contentIds.isNotEmpty()) {
+            contentRepository.findAllById(contentIds).associate { it.id to it.title }
+        } else emptyMap()
         val entries = logs.map { log ->
             FarmHistoryEntry(
                 logId = log.id,
                 contentId = log.contentId,
                 contentType = log.contentType,
+                contentTitle = titleMap[log.contentId],
                 status = log.status,
                 score = log.score,
                 accuracy = log.accuracy,

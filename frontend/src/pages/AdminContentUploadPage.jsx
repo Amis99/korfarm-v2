@@ -3,22 +3,11 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet, apiPost, apiPut } from "../utils/adminApi";
 import { API_BASE } from "../utils/api";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
-import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import { TYPE_LABEL, getLevelLabel, DAILY_LEVELS, levelToFolder } from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
 const STATIC_CONTENTS = [
-  ...LEARNING_CATALOG.map((item) => ({
-    id: item.contentId,
-    title: item.title,
-    type: item.contentType,
-    levelId: item.targetLevel,
-    chapterId: "",
-    status: "active",
-    source: "static",
-    jsonPath: item.jsonPath,
-  })),
   ...DAILY_LEVELS.map((level) => ({
     id: `dq-${level.toLowerCase()}`,
     title: `일일 퀴즈 - ${getLevelLabel(level)}`,
@@ -58,8 +47,9 @@ const MODULE_GROUPS = [
     label: "농장 모드",
     items: [
       { value: "farm:vocab:worksheet_quiz", label: "어휘 학습" },
-      { value: "farm:vocab_dict:worksheet_quiz", label: "어휘 학습 (사전)" },
       { value: "farm:reading:reading_training", label: "독해 훈련" },
+      { value: "farm:story:reading_training", label: "이야기 농장" },
+      { value: "farm:classic:reading_training", label: "고전 농장" },
       { value: "farm:content:reading_training", label: "내용 숙지 농장" },
       { value: "farm:grammar_wf:word_formation", label: "문법 - 단어 형성" },
       { value: "farm:grammar_ss:sentence_structure", label: "문법 - 문장 짜임" },
@@ -90,9 +80,10 @@ const extractModuleKey = (v) => v.split(":").pop();
 const TEMPLATE_ID_MAP = {
   dailyReading_training: "reading_training",
   farm_reading: "reading_training",
+  farm_story: "reading_training",
+  farm_classic: "reading_training",
   pro_reading: "reading_training",
   farm_vocab: "vocab_training",
-  farm_vocab_dict: "vocab_training",
   pro_vocab: "vocab_training",
   farm_background: "background_quiz",
   pro_background: "background_quiz",
@@ -166,7 +157,7 @@ function AdminContentUploadPage() {
       setJsonError("");
       try {
         if (editSource === "static") {
-          /* STATIC_CONTENTS에서 찾아서 fetch */
+          /* 일일학습 정적 콘텐츠 — STATIC_CONTENTS에서 찾아서 fetch */
           const found = STATIC_CONTENTS.find((c) => c.id === editId);
           if (!found) throw new Error("해당 static 콘텐츠를 찾을 수 없습니다.");
           setEditMeta(found);

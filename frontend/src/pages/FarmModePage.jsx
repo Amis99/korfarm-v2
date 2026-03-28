@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  FARM_LIST,
-  getLearningItemsByFarm,
+  getFarmsForServer,
   SERVERS,
   SERVER_LABELS,
   profileLevelToServer,
-  levelBelongsToServer,
 } from "../data/learning/learningCatalog";
 import { apiGet } from "../utils/api";
 import "../styles/farm-mode.css";
@@ -41,19 +39,17 @@ function FarmModePage() {
       .catch(() => {});
   }, []);
 
-  // 서버 필터된 카운트 계산
+  // 서버 필터된 농장 목록
+  const visibleFarms = getFarmsForServer(selectedServer);
+
+  // DB 카운트
   const getCount = (farmId) => {
-    const staticItems = getLearningItemsByFarm(farmId);
     const dbFarmItems = dbItemsByFarm[farmId] || [];
-    const staticIds = new Set(staticItems.map((i) => i.contentId));
-    const allItems = [
-      ...staticItems,
-      ...dbFarmItems.filter((i) => !staticIds.has(i.contentId)),
-    ];
-    if (!selectedServer) return allItems.length;
-    return allItems.filter((item) => {
+    if (!selectedServer) return dbFarmItems.length;
+    return dbFarmItems.filter((item) => {
       const level = item.targetLevel || item.levelId;
-      return levelBelongsToServer(level, selectedServer);
+      if (!level) return true;
+      return level.startsWith(selectedServer);
     }).length;
   };
 
@@ -95,9 +91,8 @@ function FarmModePage() {
 
       {/* 3x3 그리드 */}
       <div className="farm-grid">
-        {FARM_LIST.map((farm) => {
+        {visibleFarms.map((farm) => {
           const count = getCount(farm.id);
-          if (selectedServer && count === 0) return null;
           const serverParam = selectedServer ? `?server=${selectedServer}` : "";
           return (
             <Link

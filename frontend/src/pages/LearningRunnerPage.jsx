@@ -1,18 +1,8 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import EngineShell from "../engine/core/EngineShell";
-import { getLearningById, FARM_LIST } from "../data/learning/learningCatalog";
+import { FARM_MAP } from "../data/learning/learningCatalog";
 import { apiGet, apiPost } from "../utils/api";
-
-function findFarmForContentType(contentType) {
-  if (!contentType) return null;
-  return FARM_LIST.find((farm) => farm.contentTypes.includes(contentType)) || null;
-}
-
-/* DB 콘텐츠 ID 여부 판단: content_ 접두사 */
-function isDbContentId(id) {
-  return id && id.startsWith("content_");
-}
 
 /* contentType → moduleKey 매핑 (DB에 moduleKey가 없는 경우 fallback) */
 const CONTENT_TYPE_TO_MODULE = {
@@ -33,10 +23,8 @@ function LearningRunnerPage() {
   const { learningId } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const staticLearning = getLearningById(learningId);
-  // DB 콘텐츠인 경우 API에서 메타 로드
   const [dbMeta, setDbMeta] = useState(null);
-  const learning = staticLearning || dbMeta;
+  const learning = dbMeta;
   const [farmLogId, setFarmLogId] = useState(null);
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -53,14 +41,15 @@ function LearningRunnerPage() {
   const exitPath = useMemo(() => {
     if (proChapter) return `/pro-mode/chapter/${proChapter}`;
     if (assignmentId) return "/assignments";
-    const farm = findFarmForContentType(learning?.contentType);
-    return farm ? `/farm-mode/${farm.id}` : "/farm-mode";
+    // DB 응답의 area 필드로 농장 직접 결정
+    const area = learning?.area;
+    if (area && FARM_MAP[area]) return `/farm-mode/${area}`;
+    return "/farm-mode";
   }, [learning, assignmentId, proChapter]);
 
-  // DB 콘텐츠일 경우 API에서 콘텐츠 로드
+  // 항상 DB API로 콘텐츠 로드
   useEffect(() => {
-    if (staticLearning) return; // 정적 카탈로그에 있으면 스킵
-    if (!isDbContentId(learningId)) {
+    if (!learningId) {
       setLoading(false);
       return;
     }
@@ -68,13 +57,13 @@ function LearningRunnerPage() {
     setError(null);
     apiGet(`/v1/learning/content/${learningId}`)
       .then((data) => {
-        // DB 콘텐츠에서 메타 + content 모두 추출
         setDbMeta({
           id: learningId,
           contentId: data.contentId || learningId,
           contentType: data.contentType || data.content_type,
           moduleKey: data.module_key || data.moduleKey || data.content?.moduleKey || resolveModuleKey(data.content_type || data.contentType) || "worksheet_quiz",
           title: data.title,
+          area: data.area,
           jsonPath: null,
         });
         setContent(data.content);
@@ -84,27 +73,7 @@ function LearningRunnerPage() {
         setError(err.message);
         setLoading(false);
       });
-  }, [learningId, staticLearning]);
-
-  // 정적 콘텐츠: JSON fetch
-  useEffect(() => {
-    if (!staticLearning?.jsonPath) return;
-    setLoading(true);
-    setError(null);
-    fetch(import.meta.env.BASE_URL + staticLearning.jsonPath.replace(/^\//, ""))
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        setContent(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [staticLearning]);
+  }, [learningId]);
 
   // 학습 시작 로그
   useEffect(() => {
@@ -167,7 +136,7 @@ function LearningRunnerPage() {
     navigate(exitPath);
   }, [assignmentId, assignmentSubmitted, exitPath, navigate, learning, learningId, proItemId]);
 
-  if (!learning) {
+  if (!learning && !loading) {
     return (
       <div className="lr-loading">
         <h1>학습을 찾을 수 없습니다.</h1>

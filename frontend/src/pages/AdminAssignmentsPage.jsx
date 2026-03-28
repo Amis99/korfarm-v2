@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, useCallback } from "react";
 import { apiPost, apiGet } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { useAuth } from "../hooks/useAuth";
-import { LEARNING_CATALOG, LEARNING_CATEGORIES } from "../data/learning/learningCatalog";
+import { FARM_MAP, FARM_LIST } from "../data/learning/learningCatalog";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
 
@@ -95,6 +95,8 @@ function AdminAssignmentsPage() {
   const [actionError, setActionError] = useState("");
   const [actionLoading, setActionLoading] = useState(false);
   const [contentCategoryFilter, setContentCategoryFilter] = useState("all");
+  const [catalogItems, setCatalogItems] = useState([]);
+  const [catalogLoading, setCatalogLoading] = useState(false);
 
   /* === 대상 지정 데이터 === */
   const [orgs, setOrgs] = useState([]);
@@ -136,7 +138,7 @@ function AdminAssignmentsPage() {
     setSubmissions(feedbackList);
   }, [feedbackList]);
 
-  /* 기관/반 목록 로드 (모달 열릴 때) */
+  /* 기관/반 목록 + DB 카탈로그 로드 (모달 열릴 때) */
   useEffect(() => {
     if (!showCreateModal) return;
     apiGet("/v1/admin/orgs/available")
@@ -145,6 +147,26 @@ function AdminAssignmentsPage() {
     apiGet("/v1/admin/classes")
       .then((data) => setClasses(Array.isArray(data) ? data : []))
       .catch(() => setClasses([]));
+    // DB 카탈로그 로드
+    setCatalogLoading(true);
+    apiGet("/v1/learning/catalog")
+      .then((data) => {
+        if (data?.farms) {
+          const items = data.farms.flatMap((f) =>
+            (f.items || []).map((item) => ({
+              id: item.contentId,
+              contentId: item.contentId,
+              title: item.title,
+              contentType: item.contentType,
+              area: item.area || f.area,
+              category: FARM_MAP[item.area || f.area]?.name || item.area || f.area,
+            }))
+          );
+          setCatalogItems(items);
+        }
+      })
+      .catch(() => setCatalogItems([]))
+      .finally(() => setCatalogLoading(false));
   }, [showCreateModal]);
 
   /* 반 선택 시 학생 목록 로드 */
@@ -166,11 +188,17 @@ function AdminAssignmentsPage() {
     }
   }, [orgs, isHqAdmin, formData.selectedOrgId]);
 
-  /* === 콘텐츠 필터링 === */
+  /* === 콘텐츠 필터링 (DB 카탈로그 기반) === */
+  const catalogCategories = useMemo(() => {
+    const set = new Set();
+    catalogItems.forEach((item) => { if (item.category) set.add(item.category); });
+    return [...set];
+  }, [catalogItems]);
+
   const filteredContent = useMemo(() => {
-    if (contentCategoryFilter === "all") return LEARNING_CATALOG;
-    return LEARNING_CATALOG.filter((item) => item.category === contentCategoryFilter);
-  }, [contentCategoryFilter]);
+    if (contentCategoryFilter === "all") return catalogItems;
+    return catalogItems.filter((item) => item.category === contentCategoryFilter);
+  }, [catalogItems, contentCategoryFilter]);
 
   /* === 과제 필터 === */
   const filteredAssignments = useMemo(() => {
@@ -601,7 +629,7 @@ function AdminAssignmentsPage() {
                   >
                     전체
                   </button>
-                  {Object.keys(LEARNING_CATEGORIES).map((cat) => (
+                  {catalogCategories.map((cat) => (
                     <button
                       key={cat}
                       className={`admin-filter ${contentCategoryFilter === cat ? "active" : ""}`}
@@ -613,10 +641,11 @@ function AdminAssignmentsPage() {
                     </button>
                   ))}
                 </div>
+                {catalogLoading && <p style={{ fontSize: 12, color: "#8a9e8d" }}>콘텐츠 로딩 중...</p>}
                 <div style={{ maxHeight: 200, overflowY: "auto", border: "1px solid #3a4a3e", borderRadius: 8, padding: 8 }}>
                   {filteredContent.map((item) => (
                     <label
-                      key={item.id}
+                      key={item.contentId}
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -629,8 +658,8 @@ function AdminAssignmentsPage() {
                     >
                       <input
                         type="checkbox"
-                        checked={formData.selectedContentIds.includes(item.id)}
-                        onChange={() => toggleContent(item.id)}
+                        checked={formData.selectedContentIds.includes(item.contentId)}
+                        onChange={() => toggleContent(item.contentId)}
                       />
                       <span style={{ color: "#a6b6a9", fontSize: 11, minWidth: 70 }}>{item.category}</span>
                       <span>{item.title}</span>

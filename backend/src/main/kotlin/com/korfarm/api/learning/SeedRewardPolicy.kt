@@ -23,6 +23,8 @@ object SeedRewardPolicy {
         "vocab" to "seed_wheat",      // 어휘 농장 → 밀
         "grammar" to "seed_wheat",    // 문법 농장 → 밀
         "reading" to "seed_rice",     // 독해 농장 → 쌀
+        "story" to "seed_rice",       // 이야기 농장 → 쌀
+        "classic" to "seed_rice",     // 고전 농장 → 쌀
         "content" to "seed_rice",     // 내용숙지 농장 → 쌀
         "background" to "seed_corn",  // 배경지식 농장 → 옥수수
         "concept" to "seed_corn",     // 국어개념 농장 → 옥수수
@@ -52,7 +54,12 @@ object SeedRewardPolicy {
         "CHOICE_JUDGEMENT" to "choice",
         "WRITING_DESCRIPTIVE" to "writing",
         "DAILY_QUIZ" to "vocab",        // 일일퀴즈 → 밀 씨앗
-        "DAILY_READING" to "reading"    // 일일독해 → 쌀 씨앗
+        "DAILY_READING" to "reading",  // 일일독해 → 쌀 씨앗
+        "PRO_VOCAB" to "vocab",        // 프로 어휘 → 밀 씨앗
+        "PRO_READING" to "reading",    // 프로 독해 → 쌀 씨앗
+        "PRO_BACKGROUND" to "background", // 프로 배경지식 → 옥수수 씨앗
+        "PRO_LOGIC" to "logic",        // 프로 논리 → 포도 씨앗
+        "PRO_ANSWER" to "reading"      // 프로 정답해설 → 쌀 씨앗
     )
 
     fun seedCountFor(userLevelId: String?, contentLevelId: String?): Int {

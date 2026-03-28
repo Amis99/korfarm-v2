@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiGet } from "../utils/api";
-import { getLearningById } from "../data/learning/learningCatalog";
 import "../styles/start.css";
 
 const TYPE_ICON = {
@@ -82,11 +81,8 @@ function AssignmentsPage() {
     // farm/pro: payload에서 contentIds 가져와서 첫 번째 콘텐츠로 이동
     if (assignment.payload?.contentIds?.length > 0) {
       const firstContentId = assignment.payload.contentIds[0];
-      const learning = getLearningById(firstContentId);
-      if (learning) {
-        navigate(`/learning/${learning.id}?assignmentId=${id}`);
-        return;
-      }
+      navigate(`/learning/${firstContentId}?assignmentId=${id}`);
+      return;
     }
 
     // detail API 호출로 payload 가져오기
@@ -94,11 +90,8 @@ function AssignmentsPage() {
       .then((detail) => {
         const contentIds = detail?.payload?.contentIds;
         if (contentIds?.length > 0) {
-          const learning = getLearningById(contentIds[0]);
-          if (learning) {
-            navigate(`/learning/${learning.id}?assignmentId=${id}`);
-            return;
-          }
+          navigate(`/learning/${contentIds[0]}?assignmentId=${id}`);
+          return;
         }
         // fallback: 농장 모드로 이동
         navigate(type === "pro" ? "/pro-mode" : "/farm-mode");

@@ -23,13 +23,21 @@ class ContentCatalogService(
     }
 
     @Transactional(readOnly = true)
-    fun getCatalogByArea(area: String, levelId: String?): List<CatalogItem> {
+    fun getCatalogByArea(area: String, levelId: String?, search: String? = null, subArea: String? = null): List<CatalogItem> {
         val items = if (levelId != null) {
             contentRepository.findByAreaAndLevelIdAndStatus(area, levelId, "active")
         } else {
             contentRepository.findByAreaAndStatus(area, "active")
         }
-        return items.map { toCatalogItem(it) }
+        var filtered = items
+        if (!search.isNullOrBlank()) {
+            val term = search.trim().lowercase()
+            filtered = filtered.filter { it.title.lowercase().contains(term) }
+        }
+        if (!subArea.isNullOrBlank()) {
+            filtered = filtered.filter { it.subArea == subArea }
+        }
+        return filtered.map { toCatalogItem(it) }
     }
 
     @Transactional(readOnly = true)

@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
-import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import "../styles/start.css";
-
-const catalogMap = Object.fromEntries(
-  LEARNING_CATALOG.map((c) => [c.contentId, c])
-);
 
 const SEED_TYPE_LABEL = {
   seed_wheat: "밀", seed_rice: "쌀", seed_corn: "옥수수",
@@ -137,8 +132,8 @@ function HarvestLedgerPage() {
           <tbody>
             {logs.map((log) => {
               const id = log.log_id ?? log.logId;
-              const catalog = catalogMap[log.content_id ?? log.contentId];
               const contentType = log.content_type ?? log.contentType;
+              const contentTitle = log.content_title ?? log.contentTitle;
               const startedAt = log.started_at ?? log.startedAt;
               const completedAt = log.completed_at ?? log.completedAt;
               const earnedSeed = log.earned_seed ?? log.earnedSeed ?? 0;
@@ -149,9 +144,9 @@ function HarvestLedgerPage() {
                     hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
                   })
                 : "-";
-              const title = catalog?.title ?? contentType;
-              const level = catalog?.targetLevel?.replace("_", " ") ?? "-";
-              const area = catalog?.category ?? "-";
+              const title = contentTitle ?? contentType;
+              const level = "-";
+              const area = "-";
               const duration = formatDuration(startedAt, completedAt);
               const progress = log.status === "COMPLETED" ? "100%" : "진행중";
               const accuracy = log.accuracy != null ? `${log.accuracy}%` : "-";

@@ -34,12 +34,14 @@ class ContentCatalogController(
     fun getCatalogByArea(
         @PathVariable area: String,
         @RequestParam(required = false) levelId: String?,
-        @RequestParam(required = false) contentType: String?
+        @RequestParam(required = false) contentType: String?,
+        @RequestParam(required = false) search: String?,
+        @RequestParam(required = false) subArea: String?
     ): ApiResponse<List<CatalogItem>> {
         val data = if (contentType != null) {
             catalogService.getCatalogByContentType(contentType, levelId)
         } else {
-            catalogService.getCatalogByArea(area, levelId)
+            catalogService.getCatalogByArea(area, levelId, search, subArea)
         }
         return ApiResponse(success = true, data = data)
     }

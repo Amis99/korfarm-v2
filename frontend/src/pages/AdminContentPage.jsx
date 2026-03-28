@@ -2,7 +2,7 @@ import { useMemo, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiGet } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
-import { LEARNING_CATALOG } from "../data/learning/learningCatalog";
+import { FARM_MAP } from "../data/learning/learningCatalog";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
 import { Link } from "react-router-dom";
 import {
@@ -48,7 +48,7 @@ const CONTENT_TYPE_TO_MODULE = {
 const resolveModuleKey = (contentType, fallback) =>
   fallback || CONTENT_TYPE_TO_MODULE[contentType] || "worksheet_quiz";
 
-/* static JSON 콘텐츠 목록 — 일일 학습을 상단에 배치 */
+/* static JSON 콘텐츠 목록 — 일일 학습만 유지 */
 const STATIC_CONTENTS = [
   ...DAILY_LEVELS.map((level) => ({
     id: `dr-${level.toLowerCase()}`,
@@ -71,17 +71,6 @@ const STATIC_CONTENTS = [
     source: "static",
     jsonPath: `/daily-quiz/${levelToFolder(level)}/001.json`,
     moduleKey: "worksheet_quiz",
-  })),
-  ...LEARNING_CATALOG.map((item) => ({
-    id: item.contentId,
-    title: item.title,
-    type: item.contentType,
-    levelId: item.targetLevel,
-    chapterId: "",
-    status: "active",
-    source: "static",
-    jsonPath: item.jsonPath,
-    moduleKey: item.moduleKey,
   })),
 ];
 
@@ -110,6 +99,7 @@ const mapContentList = (items) =>
     type: content.contentType || content.content_type || content.type || "",
     levelId: content.levelId || content.level_id || "",
     chapterId: content.chapterId || content.chapter_id || "",
+    area: content.area || "",
     status: normalizeContentStatus(content.status),
   }));
 
@@ -329,6 +319,7 @@ function AdminContentPage() {
                 <th>제목</th>
                 <th className="admin-th-type">유형</th>
                 <th className="admin-th-level">레벨</th>
+                <th className="admin-th-type">농장</th>
                 <th className="admin-th-status">상태</th>
                 <th className="admin-th-actions">관리</th>
               </tr>
@@ -336,7 +327,7 @@ function AdminContentPage() {
             <tbody>
               {pagedContents.length === 0 && !loading ? (
                 <tr>
-                  <td colSpan={5} className="admin-content-status-cell">
+                  <td colSpan={6} className="admin-content-status-cell">
                     {allContents.length === 0 ? "등록된 콘텐츠가 없습니다." : "검색 결과가 없습니다."}
                   </td>
                 </tr>
@@ -368,6 +359,11 @@ function AdminContentPage() {
                       <span className="level-pill admin-tooltip-wrap">
                         {getLevelShort(content.levelId)}
                         {levelFull && <span className="admin-tooltip">{levelFull}</span>}
+                      </span>
+                    </td>
+                    <td>
+                      <span className="type-pill" style={{ fontSize: 11 }}>
+                        {FARM_MAP[content.area]?.name || content.area || "-"}
                       </span>
                     </td>
                     <td>

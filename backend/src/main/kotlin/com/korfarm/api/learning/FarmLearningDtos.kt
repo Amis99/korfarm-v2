@@ -51,6 +51,7 @@ data class FarmHistoryEntry(
     val logId: String,
     val contentId: String,
     val contentType: String,
+    val contentTitle: String? = null,
     val status: String,
     val score: Int?,
     val accuracy: Int?,

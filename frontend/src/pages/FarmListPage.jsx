@@ -1,8 +1,7 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { Link, useParams, useNavigate, useSearchParams } from "react-router-dom";
 import {
   getFarmById,
-  getLearningItemsByFarm,
   SUB_AREA_LABELS,
   LEVEL_LABELS,
   SERVERS,
@@ -41,7 +40,10 @@ function FarmListPage() {
   const urlServer = searchParams.get("server") || "";
   const [serverFilter, setServerFilter] = useState(urlServer);
   const [profileLevelApplied, setProfileLevelApplied] = useState(Boolean(urlServer));
-  const [areaFilter, setAreaFilter] = useState("");
+  const [subAreaFilter, setSubAreaFilter] = useState("");
+  const [contentTypeFilter, setContentTypeFilter] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [searchDebounced, setSearchDebounced] = useState("");
   const [sort, setSort] = useState("title");
   const [page, setPage] = useState(1);
   const [progress, setProgress] = useState(null);
@@ -64,54 +66,55 @@ function FarmListPage() {
       .catch(() => setProfileLevelApplied(true));
   }, [profileLevelApplied]);
 
-  const staticItems = useMemo(() => getLearningItemsByFarm(farmId), [farmId]);
-  const [dbItems, setDbItems] = useState([]);
+  // 검색 디바운스
+  useEffect(() => {
+    const timer = setTimeout(() => setSearchDebounced(searchText), 300);
+    return () => clearTimeout(timer);
+  }, [searchText]);
 
   // DB 카탈로그에서 해당 농장 콘텐츠 조회
+  const [dbItems, setDbItems] = useState([]);
+  const [dbLoading, setDbLoading] = useState(false);
+
   useEffect(() => {
     if (!farm) return;
-    // area 파라미터를 농장 contentTypes의 첫번째로 사용
-    const contentTypes = farm.contentTypes || [];
-    if (!contentTypes.length) return;
-    // 각 contentType별로 DB 콘텐츠 조회
-    Promise.all(
-      contentTypes.map((ct) =>
-        apiGet(`/v1/learning/catalog/${farmId}?contentType=${ct}`).catch(() => [])
-      )
-    )
-      .then((results) => {
-        const flat = results.flat();
-        // 정적 카탈로그에 이미 있는 contentId는 제외
-        const staticIds = new Set(staticItems.map((i) => i.contentId));
-        const newItems = flat
-          .filter((item) => !staticIds.has(item.contentId))
-          .map((item) => ({
-            id: item.contentId,
-            contentId: item.contentId,
-            category: item.area || "",
-            title: item.title,
-            contentType: item.contentType,
-            targetLevel: item.levelId,
-            subArea: item.subArea,
-            moduleKey: item.moduleKey || "worksheet_quiz",
-            videoUrl: item.videoUrl || null,
-          }));
-        setDbItems(newItems);
+    setDbLoading(true);
+    const params = new URLSearchParams();
+    if (serverFilter) {
+      // levelId 필터: 서버별 레벨 범위 (예: RUSSELL → RUSSELL_1, RUSSELL_2, RUSSELL_3)
+    }
+    if (searchDebounced) params.set("search", searchDebounced);
+    if (subAreaFilter) params.set("subArea", subAreaFilter);
+    if (contentTypeFilter) params.set("contentType", contentTypeFilter);
+    const qs = params.toString();
+    const url = `/v1/learning/catalog/${farmId}${qs ? `?${qs}` : ""}`;
+    apiGet(url)
+      .then((data) => {
+        const items = (Array.isArray(data) ? data : []).map((item) => ({
+          id: item.contentId,
+          contentId: item.contentId,
+          title: item.title,
+          contentType: item.contentType,
+          targetLevel: item.levelId,
+          subArea: item.subArea,
+          moduleKey: item.moduleKey || "worksheet_quiz",
+          videoUrl: item.videoUrl || null,
+        }));
+        setDbItems(items);
       })
-      .catch(() => setDbItems([]));
-  }, [farmId, farm, staticItems]);
-
-  const allItems = useMemo(() => [...staticItems, ...dbItems], [staticItems, dbItems]);
+      .catch(() => setDbItems([]))
+      .finally(() => setDbLoading(false));
+  }, [farmId, farm, searchDebounced, subAreaFilter, contentTypeFilter]);
 
   // 학습 진행 통계 조회
   useEffect(() => {
-    if (!allItems.length) return;
-    const contentIds = allItems.map((item) => item.contentId).filter(Boolean);
+    if (!dbItems.length) return;
+    const contentIds = dbItems.map((item) => item.contentId).filter(Boolean);
     if (!contentIds.length) return;
     apiPost("/v1/learning/farm/progress", { content_ids: contentIds })
       .then((data) => setProgress(data))
       .catch((e) => console.error(e));
-  }, [allItems]);
+  }, [dbItems]);
 
   // progressModal이 열릴 때 page-progress API 호출
   useEffect(() => {
@@ -135,23 +138,24 @@ function FarmListPage() {
       });
   }, [progressModal]);
 
-  // 세부영역 목록 수집
+  // 세부영역 + 콘텐츠유형 목록 수집
   const subAreas = useMemo(() => {
     const set = new Set();
-    allItems.forEach((item) => {
-      if (item.subArea) set.add(item.subArea);
-    });
+    dbItems.forEach((item) => { if (item.subArea) set.add(item.subArea); });
     return [...set];
-  }, [allItems]);
+  }, [dbItems]);
+
+  const contentTypes = useMemo(() => {
+    const set = new Set();
+    dbItems.forEach((item) => { if (item.contentType) set.add(item.contentType); });
+    return [...set];
+  }, [dbItems]);
 
   // 필터 + 정렬
   const filtered = useMemo(() => {
-    let list = [...allItems];
+    let list = [...dbItems];
     if (serverFilter) {
       list = list.filter((item) => levelBelongsToServer(item.targetLevel, serverFilter));
-    }
-    if (areaFilter) {
-      list = list.filter((item) => item.subArea === areaFilter);
     }
     list.sort((a, b) => {
       if (sort === "title") return a.title.localeCompare(b.title, "ko");
@@ -164,7 +168,7 @@ function FarmListPage() {
       return 0;
     });
     return list;
-  }, [allItems, serverFilter, areaFilter, sort]);
+  }, [dbItems, serverFilter, sort]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const currentPage = Math.min(page, totalPages);
@@ -172,7 +176,8 @@ function FarmListPage() {
 
   // 필터 변경 시 1페이지로
   const handleServerChange = (v) => { setServerFilter(v); setPage(1); };
-  const handleAreaChange = (v) => { setAreaFilter(v); setPage(1); };
+  const handleSubAreaChange = (v) => { setSubAreaFilter(v); setPage(1); };
+  const handleContentTypeChange = (v) => { setContentTypeFilter(v); setPage(1); };
 
   if (!farm) {
     return (
@@ -217,55 +222,85 @@ function FarmListPage() {
           <h2>{farm.name}</h2>
           <p>
             {farm.description} · 총{" "}
-            <span className="farm-banner-count">{allItems.length}개</span> 학습
+            <span className="farm-banner-count">{filtered.length}개</span> 학습
           </p>
         </div>
       </div>
 
-      {/* 필터바 */}
-      <div className="farm-filters">
-        <select
-          className="farm-filter-select"
-          value={serverFilter}
-          onChange={(e) => handleServerChange(e.target.value)}
-        >
-          <option value="">전체 서버</option>
-          {SERVERS.map((sv) => (
-            <option key={sv} value={sv}>
-              {SERVER_LABELS[sv]}
-            </option>
-          ))}
-        </select>
-
-        {subAreas.length > 1 && (
+      {/* 검색바 */}
+      <div className="farm-filters" style={{ flexDirection: "column", gap: 8 }}>
+        <div style={{ display: "flex", gap: 8, width: "100%", alignItems: "center" }}>
+          <span className="material-symbols-outlined" style={{ color: "#8a9e8d" }}>search</span>
+          <input
+            type="text"
+            className="farm-filter-select"
+            style={{ flex: 1, minWidth: 0 }}
+            placeholder="제목 검색..."
+            value={searchText}
+            onChange={(e) => { setSearchText(e.target.value); setPage(1); }}
+          />
+        </div>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           <select
             className="farm-filter-select"
-            value={areaFilter}
-            onChange={(e) => handleAreaChange(e.target.value)}
+            value={serverFilter}
+            onChange={(e) => handleServerChange(e.target.value)}
           >
-            <option value="">전체 영역</option>
-            {subAreas.map((sa) => (
-              <option key={sa} value={sa}>
-                {SUB_AREA_LABELS[sa] || sa}
+            <option value="">전체 서버</option>
+            {SERVERS.map((sv) => (
+              <option key={sv} value={sv}>
+                {SERVER_LABELS[sv]}
               </option>
             ))}
           </select>
-        )}
 
-        <select
-          className="farm-filter-select"
-          value={sort}
-          onChange={(e) => setSort(e.target.value)}
-        >
-          <option value="title">제목순</option>
-          <option value="level">레벨순</option>
-          <option value="type">유형순</option>
-        </select>
+          {subAreas.length > 1 && (
+            <select
+              className="farm-filter-select"
+              value={subAreaFilter}
+              onChange={(e) => handleSubAreaChange(e.target.value)}
+            >
+              <option value="">전체 영역</option>
+              {subAreas.map((sa) => (
+                <option key={sa} value={sa}>
+                  {SUB_AREA_LABELS[sa] || sa}
+                </option>
+              ))}
+            </select>
+          )}
+
+          {contentTypes.length > 1 && (
+            <select
+              className="farm-filter-select"
+              value={contentTypeFilter}
+              onChange={(e) => handleContentTypeChange(e.target.value)}
+            >
+              <option value="">전체 유형</option>
+              {contentTypes.map((ct) => (
+                <option key={ct} value={ct}>{ct}</option>
+              ))}
+            </select>
+          )}
+
+          <select
+            className="farm-filter-select"
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
+          >
+            <option value="title">제목순</option>
+            <option value="level">레벨순</option>
+            <option value="type">유형순</option>
+          </select>
+        </div>
       </div>
 
       {/* 테이블 */}
       <div className="farm-body">
-        {paged.length === 0 ? (
+        {dbLoading ? (
+          <div className="farm-empty">
+            <p>불러오는 중...</p>
+          </div>
+        ) : paged.length === 0 ? (
           <div className="farm-empty">
             <div className="farm-empty-icon">📭</div>
             <p>조건에 맞는 학습이 없습니다.</p>
@@ -301,7 +336,7 @@ function FarmListPage() {
                         if (farmId === "content") {
                           setProgressModal(item);
                         } else {
-                          navigate(`/learning/${item.id}`);
+                          navigate(`/learning/${item.contentId}`);
                         }
                       }}
                     >
@@ -414,7 +449,7 @@ function FarmListPage() {
                     className="start-btn-secondary"
                     onClick={() => {
                       setProgressModal(null);
-                      navigate(`/learning/${progressModal.id}?startPage=1`);
+                      navigate(`/learning/${progressModal.contentId}?startPage=1`);
                     }}
                   >
                     처음부터
@@ -424,7 +459,7 @@ function FarmListPage() {
                     className="start-btn-primary"
                     onClick={() => {
                       setProgressModal(null);
-                      navigate(`/learning/${progressModal.id}?startPage=${(pageProgress.lastCompletedPage || 0) + 1}`);
+                      navigate(`/learning/${progressModal.contentId}?startPage=${(pageProgress.lastCompletedPage || 0) + 1}`);
                     }}
                   >
                     이어서 학습
@@ -443,7 +478,7 @@ function FarmListPage() {
                   className="start-btn-primary"
                   onClick={() => {
                     setProgressModal(null);
-                    navigate(`/learning/${progressModal.id}`);
+                    navigate(`/learning/${progressModal.contentId}`);
                   }}
                 >
                   학습 시작
