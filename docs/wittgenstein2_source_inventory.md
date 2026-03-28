@@ -79,7 +79,7 @@
 | 적벽가 | exam-literature | 26년 수능특강/2027 수능특강 문학/2027 수능특강 문학 md/고전 산문 md/27수특_적벽가(작자 미상).md exact excerpt | 참고용 기출 지문/26년 수능특강, 고전 산문 | source_selected |
 | 노정기 | exam-literature | 노정기_이육사.md (가) exact excerpt | 참고용 기출 지문, 현대 시 | source_selected |
 | 원가 | exam-literature | 26년 수능특강/2027 수능특강 문학/2027 수능특강 문학 md/고전 시가 md/27수특_원가(신충).md (가) exact excerpt | 참고용 기출 지문/26년 수능특강, 고전 시가 | source_selected |
-| 진달래꽃 | exam-literature | ?? ?? ?? ? ?? ?? ?? ? ?? ?? ?? | ?? ?? ??, ?? ?? ?? | source_selected |
+| 하나씩의 별 | exam-literature | 26년 수능특강/2027 수능특강 문학/2027 수능특강 문학 md/교과서 개념 학습 md/27수특_하나씩의 별(이용악).md exact excerpt | 참고용 기출 지문/26년 수능특강, 현대 시 | source_selected |
 | 하단에서 | exam-literature | 하단에서_박목월.md (가) exact excerpt | 참고용 기출 지문, 현대 시 | source_selected |
 
 ## ???????? source ??
