@@ -226,11 +226,11 @@
 | 208 | 작문 | 교내 휴대전화 자율 보관제 운영 결과를 정리한 개선 제안서 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 209 | 비문학 | 기와 리의 관계를 보는 장재·정이·주희의 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
 | 210 | 문법 | 보조사 '은/는'과 주격 조사 '이/가'의 화제 표지와 초점 형성 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 211 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
-| 212 | 문학 | 님의 침묵 | docs/wittgenstein3_source_inventory.md > 님의 침묵 |
-| 213 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
-| 214 | 화법 | 설득 전략 분석 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 215 | 작문 | 고쳐쓰기 전략 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 211 | 비문학 | 특별 공공 행정 조직의 법인격과 재정 구조 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 212 | 문학 | 낙원은 가시덤불에서 | docs/wittgenstein3_source_inventory.md > 낙원은 가시덤불에서 |
+| 213 | 비문학 | 항상소득과 생애주기 가설의 소비 평준화 논리 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
+| 214 | 화법 | 3학년 아침 자습실 조기 개방을 두고 학생회와 행정실이 협의하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 215 | 작문 | 야간 자율학습 종료 후 통학 안전 점검을 요청하는 건의문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 216 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
 | 217 | 문법 | 높임과 시간 표현 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 218 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
