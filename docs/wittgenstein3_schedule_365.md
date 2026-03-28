@@ -256,11 +256,11 @@
 | 238 | 문법 | 겹받침의 표준 발음과 연음·자음군 단순화의 적용 순서 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 239 | 비문학 | 동시 다중 라운드 경매의 정보 공개와 입찰 활동 규칙 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
 | 240 | 문학 | 달밤 | docs/wittgenstein3_source_inventory.md > 달밤 |
-| 241 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
-| 242 | 화법 | 토론 반박의 타당성 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 243 | 작문 | 반박문 쓰기 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 244 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
-| 245 | 문법 | 의미 관계 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 241 | 비문학 | 법적 의제의 규범적 유용성과 체계적 한계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 242 | 화법 | 휴대전화 자율 보관제 찬반 토론을 앞두고 반론 문장을 점검하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 243 | 작문 | 야간 자율학습 의무 참여 방침에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 244 | 비문학 | 잔류 지자기와 포타슘-아르곤 연대 측정으로 확정된 지자기 역전 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
+| 245 | 문법 | 유의어의 교체 가능성과 문맥 제약의 판별 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 246 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
 | 247 | 문학 | 미스터 방 | docs/wittgenstein3_source_inventory.md > 미스터 방 |
 | 248 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
