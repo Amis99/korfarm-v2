@@ -166,11 +166,11 @@
 | 148 | 비문학 | 담화 공동체의 공유 규약과 상호 텍스트적 해석 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
 | 149 | 문학 | 그 방을 생각하며 | docs/wittgenstein3_source_inventory.md > 그 방을 생각하며 |
 | 150 | 비문학 | 역할 정체성 검증과 사회 구조에 대한 개인적 몰입 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
-| 151 | 화법 | 토론 반박의 타당성 (실전) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 152 | 작문 | 반박문 쓰기 (실전) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 153 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 154 | 문법 | 의미 관계 (실전) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 155 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
+| 151 | 화법 | 휴대전화 자율 보관제 찬반 토론의 반박 논점을 조정하는 준비 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 152 | 작문 | 점심시간 외출 전면 금지 방침에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 153 | 비문학 | 수생 동물의 아가미 구조와 역류 교환의 효율 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 154 | 문법 | 연결 어미 '-느라고'와 '-아서/어서'의 의미 제약과 결합 조건 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 155 | 비문학 | 상징 자본과 아비투스가 재생산하는 세계화의 위계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
 | 156 | 문학 | 낯익은 세상 | docs/wittgenstein3_source_inventory.md > 낯익은 세상 |
 | 157 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
 | 158 | 화법 | 공감적 듣기와 재구성 (실전) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
