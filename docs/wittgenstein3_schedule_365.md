@@ -261,11 +261,11 @@
 | 243 | 작문 | 야간 자율학습 의무 참여 방침에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 244 | 비문학 | 잔류 지자기와 포타슘-아르곤 연대 측정으로 확정된 지자기 역전 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
 | 245 | 문법 | 유의어의 교체 가능성과 문맥 제약의 판별 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 246 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
-| 247 | 문학 | 미스터 방 | docs/wittgenstein3_source_inventory.md > 미스터 방 |
-| 248 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 249 | 화법 | 공감적 듣기와 재구성 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 250 | 작문 | 보고서 구성 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 246 | 비문학 | 초전도체와 초유체의 임계 전이와 거시적 양자 현상 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
+| 247 | 문학 | 치숙 | docs/wittgenstein3_source_inventory.md > 치숙 |
+| 248 | 비문학 | 건축물의 동선과 경계가 공간 경험을 조직하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
+| 249 | 화법 | 발표를 앞둔 친구의 불안을 듣고 역할을 조정하는 상담 대화 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 250 | 작문 | 학교 매점 일회용품 사용 실태 조사 보고서 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 251 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
 | 252 | 문법 | 담화와 지시 표현 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 253 | 비문학 | ??? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
