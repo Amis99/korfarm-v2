@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { apiGet as adminApiGet } from "../utils/adminApi";
 import DomainRadarChart from "../components/test-report/DomainRadarChart";
-import DomainDoughnutChart from "../components/test-report/DomainDoughnutChart";
+import ScoreTrendChart from "../components/test-report/ScoreTrendChart";
 import { getDomainColor } from "../components/test-report/domainColors";
 import "../styles/test-storage.css";
 
@@ -17,6 +17,7 @@ function TestReportPage() {
   const navigate = useNavigate();
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [testHistory, setTestHistory] = useState([]);
 
   const isParent = user?.roles?.includes("PARENT");
 
@@ -38,6 +39,14 @@ function TestReportPage() {
       .catch(() => navigate(studentId ? `/admin/tests/${testId}` : `/tests/${testId}`))
       .finally(() => setLoading(false));
   }, [isLoggedIn, testId, studentId, navigate, isParent]);
+
+  // 시험 이력 로드 (추이 차트용)
+  useEffect(() => {
+    if (!isLoggedIn || studentId) return;
+    apiGet("/v1/test-storage/history")
+      .then((data) => setTestHistory(Array.isArray(data) ? data : []))
+      .catch(() => {});
+  }, [isLoggedIn, studentId]);
 
   // 객관식/서술형 분리 집계
   const typeStats = useMemo(() => {
@@ -101,13 +110,13 @@ function TestReportPage() {
         </div>
       </div>
 
-      {/* 레이더 + 도넛 차트 */}
-      {domains.length >= 2 && (
-        <div className="ts-charts-row">
+      {/* 레이더 + 추이 차트 */}
+      <div className="ts-charts-row">
+        {domains.length >= 2 && (
           <DomainRadarChart domainScores={report.domainScores} />
-          <DomainDoughnutChart domainScores={report.domainScores} />
-        </div>
-      )}
+        )}
+        <ScoreTrendChart history={testHistory} />
+      </div>
 
       {/* 영역별 점수 테이블 + 인라인 막대 */}
       {domains.length > 0 && (
