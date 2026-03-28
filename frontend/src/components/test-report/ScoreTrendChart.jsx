@@ -59,9 +59,13 @@ export default function ScoreTrendChart({ history }) {
     ],
   };
 
+  // 5개 이상이면 가로 스크롤: 고정 너비를 계산하고 maintainAspectRatio를 끔
+  const scrollable = sorted.length >= 5;
+  const chartWidth = scrollable ? Math.max(sorted.length * 120, 600) : undefined;
+
   const options = {
-    responsive: true,
-    maintainAspectRatio: true,
+    responsive: !scrollable,
+    maintainAspectRatio: !scrollable,
     interaction: { mode: "index", intersect: false },
     scales: {
       x: {
@@ -114,7 +118,15 @@ export default function ScoreTrendChart({ history }) {
   return (
     <div className="ts-chart-wrap">
       <h3 className="ts-chart-title">점수 추이</h3>
-      <Line data={data} options={options} />
+      {scrollable ? (
+        <div style={{ overflowX: "auto", overflowY: "hidden", WebkitOverflowScrolling: "touch" }}>
+          <div style={{ width: chartWidth, height: 280 }}>
+            <Line data={data} options={options} width={chartWidth} height={280} />
+          </div>
+        </div>
+      ) : (
+        <Line data={data} options={options} />
+      )}
     </div>
   );
 }
