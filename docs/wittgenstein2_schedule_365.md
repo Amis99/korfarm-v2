@@ -231,11 +231,11 @@
 | 213 | 비문학 | 최적 다수결의 의사 결정 비용과 외부 비용 | 참고용 기출 지문 > 사회_공공 선택 이론.md.json |
 | 214 | 화법 | 학교 축제 야간 운영 연장 찬반 공개토론 준비 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 215 | 작문 | 교내 휴대전화 자율 보관제 반박문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 216 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
-| 217 | 문법 | 높임과 시간 표현 (심화) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 218 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
-| 219 | 문학 | 독은 아름답다 | docs/wittgenstein2_source_inventory.md > 독은 아름답다 |
-| 220 | 비문학 | ??? ???? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
+| 216 | 비문학 | 표현대리의 성립 요건과 상대방 보호 | 참고용 기출 지문 > 사회_표현대리.md.json |
+| 217 | 문법 | 선어말 어미 '-시-'와 '-더-'의 결합 순서와 화자 인식 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
+| 218 | 비문학 | 하디-바인베르크 평형과 유전자 빈도 추정 | 참고용 기출 지문 > 과학기술_04_하디-바인베르크_평형_법칙의_개념과_응용_분야.json |
+| 219 | 문학 | 독가촌 풍경 | docs/wittgenstein2_source_inventory.md > 독가촌 풍경 |
+| 220 | 비문학 | 동형암호의 동형성과 부트스트래핑 | 참고용 기출 지문 > 기술_동형암호.md.json |
 | 221 | 화법 | 발표 자료 해석 (심화) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
 | 222 | 작문 | 문단 재배열 (심화) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 223 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
