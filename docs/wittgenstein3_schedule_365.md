@@ -216,11 +216,11 @@
 | 198 | 문학 | 눈 오는 날에 | docs/wittgenstein3_source_inventory.md > 눈 오는 날에 |
 | 199 | 비문학 | 하이퍼텍스트 환경의 다문서 읽기와 인지적 부담 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
 | 200 | 화법 | 학생회 공개 간담회 질의응답 순서 조정 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 201 | 작문 | 주장과 근거 배열 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 202 | 비문학 | ???? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
-| 203 | 문법 | 문장 성분 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 204 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 205 | 문학 | 능소화 | docs/wittgenstein3_source_inventory.md > 능소화 |
+| 201 | 작문 | 야간 자율학습실 휴대전화 일괄 수거 방침에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 202 | 비문학 | 정체성 검증 욕구와 구심적·원심적 귀인의 작동 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
+| 203 | 문법 | 필수적 부사어와 수의적 부사어의 판별 기준 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 204 | 비문학 | 아가미의 역류 교환과 두 가지 환수 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 205 | 문학 | 연륜 | docs/wittgenstein3_source_inventory.md > 연륜 |
 | 206 | 비문학 | ???? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
 | 207 | 화법 | 토의 규칙과 역할 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 208 | 작문 | 정보 통합 글쓰기 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
