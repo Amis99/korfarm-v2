@@ -261,11 +261,11 @@
 | 243 | 작문 | 축제 외부인 출입 전면 금지 방침에 대한 반박문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 244 | 비문학 | 비분산형 적외선 분석기의 흡광 원리와 농도 측정 | 참고용 기출 지문 > 과학_비분산형 적외선 분석기.md.json |
 | 245 | 문법 | 본용언 '주다'와 보조 용언 '주다'의 기능 구별 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 246 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
-| 247 | 문학 | 미스터 방 | docs/wittgenstein2_source_inventory.md > 미스터 방 |
-| 248 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-art |
-| 249 | 화법 | 공감적 듣기와 재구성 (심화) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 250 | 작문 | 보고서 구성 (심화) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 246 | 비문학 | GPU의 스레드 블록과 메모리 계층에 따른 병렬 처리 효율 | 참고용 기출 지문 > 과학기술_08_연산_환경_변화와_GPU.json |
+| 247 | 문학 | 매일 죽는 사람 | docs/wittgenstein2_source_inventory.md > 매일 죽는 사람 |
+| 248 | 비문학 | 예술 표현의 내적 활동설과 감정 전달설, 작품 표현성 이론 | 참고용 기출 지문 > 26년 수능특강/2027 수능특강 독서/2027 수능특강 독서 md/27수특 독서_예술과 표현의 관계.md |
+| 249 | 화법 | 진로 발표를 마친 뒤 자신감을 잃은 친구와 보완 방향을 정리하는 상담 대화 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 250 | 작문 | 아침 독서 프로그램 만족도 조사 보고서 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 251 | 비문학 | ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-language |
 | 252 | 문법 | 담화와 지시 표현 (심화) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 253 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-psychology |
