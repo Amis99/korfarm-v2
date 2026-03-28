@@ -176,11 +176,11 @@
 | 158 | 화법 | 모둠 발표 갈등을 상담하는 담임과 학생의 대화 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 159 | 작문 | 교내 분리배출 실태 조사 보고서 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 160 | 비문학 | 특별 공공 행정 조직의 법인격과 재정 구조 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
-| 161 | 문법 | 담화와 지시 표현 (실전) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 162 | 비문학 | ????? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
-| 163 | 문학 | 너에게 묻는다 | docs/wittgenstein3_source_inventory.md > 너에게 묻는다 |
-| 164 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
-| 165 | 화법 | 발표 구성의 효과 (실전) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 161 | 문법 | 보조사 '은/는'의 화제 설정과 대조 범위 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 162 | 비문학 | 동시 다중 라운드 경매의 정보 공개와 가격 발견 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
+| 163 | 문학 | 소설가 구보 씨의 일일 | docs/wittgenstein3_source_inventory.md > 소설가 구보 씨의 일일 |
+| 164 | 비문학 | 법적 의제의 기능과 근대 법체계에서의 한계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 165 | 화법 | 지역 연계 봉사 활동 발표 순서와 질의응답 대비 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 166 | 작문 | 논설문 전개 (실전) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 167 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
 | 168 | 문법 | 호응과 중의성 (실전) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
