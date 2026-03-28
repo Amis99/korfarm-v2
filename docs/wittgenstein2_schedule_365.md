@@ -331,11 +331,11 @@
 | 313 | 작문 | 교내 철학 강연회 운영 결과를 정리한 교지 기사 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 314 | 비문학 | 참여 민주주의에서 시민 참여의 교육 기능과 지방자치의 의미 | 참고용 기출 지문 > 사회문화_09_시민_참여에_대한_견해.json |
 | 315 | 문법 | 중세국어 양성·음성 모음 조화와 연결 어미 '-아/-어'의 선택 조건 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
-| 316 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-economy |
-| 317 | 문학 | 유리창 | docs/wittgenstein2_source_inventory.md > 유리창 |
-| 318 | 비문학 | ?? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-law |
-| 319 | 화법 | 인터뷰의 핵심 정보 (종합) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 320 | 작문 | 개념 정의 방식 (종합) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 316 | 비문학 | 최적 다수결제에서 의사 결정 비용과 외부 비용의 균형 | 참고용 기출 지문 > 사회_공공 선택 이론.md.json |
+| 317 | 문학 | 해바라기 씨 | docs/wittgenstein2_source_inventory.md > 해바라기 씨 |
+| 318 | 비문학 | 행정 행위의 부관 중 조건·기한·부담의 구별과 부담만의 취소 가능성 | 참고용 기출 지문 > 법_행정 행위.md.json |
+| 319 | 화법 | 체육관 냉방 운영 시간 조정 학생회 간담회 질의응답 대본 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 320 | 작문 | 학교 도서관 조용한 대화 구역 도입 제안문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
 | 321 | 비문학 | ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-science |
 | 322 | 문법 | 훈민정음 원리 (종합) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 323 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-technology |
