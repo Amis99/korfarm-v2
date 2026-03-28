@@ -251,11 +251,11 @@
 | 233 | 문학 | 세상에서 제일 무거운 틀니 | docs/wittgenstein3_source_inventory.md > 세상에서 제일 무거운 틀니 |
 | 234 | 비문학 | 의미의 장과 매개 구조로 본 사변적 실재론 비판 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
 | 235 | 화법 | 야간 자율학습 이후 자습실 개방 시간 연장을 두고 학생회와 교무부가 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 236 | 작문 | 비교·대조 글쓰기 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 237 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
-| 238 | 문법 | 표준 발음 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 239 | 비문학 | ???? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
-| 240 | 문학 | 메밀꽃 필 무렵 | docs/wittgenstein3_source_inventory.md > 메밀꽃 필 무렵 |
+| 236 | 작문 | 종이 안내문과 학교 앱 공지 방식을 비교한 학생회 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 237 | 비문학 | 토지 거래 허가제와 공시지가가 토지 시장을 조정하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 238 | 문법 | 겹받침의 표준 발음과 연음·자음군 단순화의 적용 순서 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 239 | 비문학 | 동시 다중 라운드 경매의 정보 공개와 입찰 활동 규칙 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
+| 240 | 문학 | 달밤 | docs/wittgenstein3_source_inventory.md > 달밤 |
 | 241 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
 | 242 | 화법 | 토론 반박의 타당성 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 243 | 작문 | 반박문 쓰기 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
