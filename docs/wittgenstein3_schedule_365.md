@@ -221,11 +221,11 @@
 | 203 | 문법 | 필수적 부사어와 수의적 부사어의 판별 기준 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 204 | 비문학 | 아가미의 역류 교환과 두 가지 환수 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
 | 205 | 문학 | 연륜 | docs/wittgenstein3_source_inventory.md > 연륜 |
-| 206 | 비문학 | ???? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
-| 207 | 화법 | 토의 규칙과 역할 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 208 | 작문 | 정보 통합 글쓰기 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 209 | 비문학 | ?? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 210 | 문법 | 피동과 사동 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 206 | 비문학 | 형식 논리학의 무모순성과 후설의 선험적 논리학 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
+| 207 | 화법 | 진로 발표회 질의응답 운영안을 조정하는 학생회 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 208 | 작문 | 교내 휴대전화 자율 보관제 운영 결과를 정리한 개선 제안서 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 209 | 비문학 | 기와 리의 관계를 보는 장재·정이·주희의 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 210 | 문법 | 보조사 '은/는'과 주격 조사 '이/가'의 화제 표지와 초점 형성 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 211 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 212 | 문학 | 님의 침묵 | docs/wittgenstein3_source_inventory.md > 님의 침묵 |
 | 213 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
