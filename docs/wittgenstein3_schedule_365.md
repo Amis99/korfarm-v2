@@ -201,11 +201,11 @@
 | 183 | 비문학 | 마리탱의 자연법 인식과 메스너의 제도적 구현 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
 | 184 | 문학 | 그 나무 | docs/wittgenstein3_source_inventory.md > 그 나무 |
 | 185 | 비문학 | 혼인 무효와 혼인 취소의 청구 요건과 법적 효과 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
-| 186 | 화법 | 발표자의 의도 파악 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 187 | 작문 | 개요의 적절성 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 188 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
-| 189 | 문법 | 음운 변동 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 190 | 비문학 | ?? ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 186 | 화법 | 학생회 공청회에서 휴대전화 보관함 도입 발표 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 187 | 작문 | 야간 자율학습실 좌석 예약제 도입 제안문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 188 | 비문학 | 복잡계 경제학의 경로 의존성과 창발적 시장 질서 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
+| 189 | 문법 | 사이시옷 표기 뒤 된소리되기와 ㄴ 첨가의 적용 조건 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 190 | 비문학 | 택일적 인과 관계와 조건설·합법칙적 조건설의 판단 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
 | 191 | 문학 | 눈 | docs/wittgenstein3_source_inventory.md > 눈 |
 | 192 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
 | 193 | 화법 | 청자의 반응 추론 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
