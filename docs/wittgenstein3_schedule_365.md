@@ -246,11 +246,11 @@
 | 228 | 화법 | 교지 특집 기사 작성을 위한 졸업생 인터뷰 사전 조율 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 229 | 작문 | 학교 축제의 '친환경 운영' 기준을 설명하는 제안문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 230 | 비문학 | 염소 라디칼의 촉매 순환과 남극 오존 구멍의 지연 회복 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 231 | 문법 | 훈민정음 원리 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 232 | 비문학 | ??? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
-| 233 | 문학 | 등신불 | docs/wittgenstein3_source_inventory.md > 등신불 |
-| 234 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 235 | 화법 | 건의와 협상의 전략 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 231 | 문법 | 가획과 병서에 드러난 훈민정음 자음 체계 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 232 | 비문학 | 청빈 논쟁에서 단순한 사실상의 사용과 소유권을 분리하는 논리 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
+| 233 | 문학 | 세상에서 제일 무거운 틀니 | docs/wittgenstein3_source_inventory.md > 세상에서 제일 무거운 틀니 |
+| 234 | 비문학 | 의미의 장과 매개 구조로 본 사변적 실재론 비판 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 235 | 화법 | 야간 자율학습 이후 자습실 개방 시간 연장을 두고 학생회와 교무부가 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 236 | 작문 | 비교·대조 글쓰기 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 237 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 238 | 문법 | 표준 발음 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
