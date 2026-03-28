@@ -347,10 +347,10 @@
 | 329 | 문법 | 겹받침의 표준 발음에서 남는 자음과 예외 처리 | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 330 | 비문학 | 지각의 얽힘과 몸의 체험으로서의 인식 | 참고용 기출 지문 > 인문_(가)심리철학,(나)체험으로서의 지각.md.json (나) |
 | 331 | 문학 | 적벽가 | docs/wittgenstein2_source_inventory.md > 적벽가 |
-| 332 | 비문학 | ?? ??? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-environment |
-| 333 | 화법 | 토론 반박의 타당성 (종합) | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
-| 334 | 작문 | 반박문 쓰기 (종합) | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
-| 335 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-humanities |
+| 332 | 비문학 | 다단 증발법과 역삼투법의 작동 원리, 에너지 비용, 수질 조건의 차이 | 참고용 기출 지문 > 기술_해수 담수화 기술.md.json |
+| 333 | 화법 | 휴대전화 일괄 수거 정책 반박 논점 조정 회의 | 비트겐슈타인 2 화법 유형 지문 수동 작성 |
+| 334 | 작문 | 야간 자율학습 중 외부 음식 전면 반입 금지 방침에 대한 반박문 초고 | 비트겐슈타인 2 작문 유형 지문 수동 작성 |
+| 335 | 비문학 | 선이해를 발판으로 한 해석의 순환과 세계 이해 | 참고용 기출 지문 > 인문_(가)데카르트의 선입견,(나)하이데거의 선입견.md.json (나) |
 | 336 | 문법 | 의미 관계 (종합) | 비트겐슈타인 2 문법 유형 지문 수동 작성 |
 | 337 | 비문학 | ??? ?? | docs/wittgenstein2_source_inventory.md > exam-nonfiction-philosophy |
 | 338 | 문학 | 절정 | docs/wittgenstein2_source_inventory.md > 절정 |
