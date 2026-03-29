@@ -347,10 +347,10 @@
 | 329 | 문법 | 겹받침 'ㅄ·ㄽ·ㄾ'의 표준 발음과 연음 시 자음 선택 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 330 | 비문학 | 상황 호의성과 구성원 성숙도에 따른 리더 행동의 조정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 331 | 문학 | 적벽가 | docs/wittgenstein3_source_inventory.md > 적벽가 |
-| 332 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 333 | 화법 | 토론 반박의 타당성 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 334 | 작문 | 반박문 쓰기 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 335 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
+| 332 | 비문학 | CFC의 오존층 파괴에서 염소 라디칼과 극지 성층권 구름의 역할 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 333 | 화법 | 학생회가 축제 외부인 출입 제한안에 대한 반박 발표 전 질의응답 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 334 | 작문 | 학교 도서관 야간 개방 축소안에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 335 | 비문학 | 예술과 표현의 관계에서 표현주의와 형식주의가 작품 가치를 보는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
 | 336 | 문법 | 의미 관계 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 337 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
 | 338 | 문학 | 절정 | docs/wittgenstein3_source_inventory.md > 절정 |
