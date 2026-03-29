@@ -252,16 +252,29 @@ class AdminContentService(
         content.status = "active"
         contentRepository.save(content)
 
-        val version = ContentVersionEntity(
-            id = IdGenerator.newId("cv"),
-            contentId = contentId,
-            schemaVersion = request.schemaVersion,
-            contentJson = objectMapper.writeValueAsString(request.content),
-            uploadedBy = userId,
-            approvedBy = userId,
-            approvedAt = LocalDateTime.now()
-        )
-        contentVersionRepository.save(version)
+        // 기존 버전이 있으면 UPDATE, 없으면 INSERT
+        val existingVersion = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(contentId)
+        val version = if (existingVersion != null) {
+            existingVersion.contentJson = objectMapper.writeValueAsString(request.content)
+            existingVersion.uploadedBy = userId
+            existingVersion.approvedBy = userId
+            existingVersion.approvedAt = LocalDateTime.now()
+            existingVersion.schemaVersion = request.schemaVersion
+            contentVersionRepository.save(existingVersion)
+            existingVersion
+        } else {
+            val newVersion = ContentVersionEntity(
+                id = IdGenerator.newId("cv"),
+                contentId = contentId,
+                schemaVersion = request.schemaVersion,
+                contentJson = objectMapper.writeValueAsString(request.content),
+                uploadedBy = userId,
+                approvedBy = userId,
+                approvedAt = LocalDateTime.now()
+            )
+            contentVersionRepository.save(newVersion)
+            newVersion
+        }
 
         contentEditLogRepository.save(ContentEditLogEntity(
             id = IdGenerator.newId("cel"),

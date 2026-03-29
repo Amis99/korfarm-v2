@@ -154,13 +154,13 @@ function LDBManuscriptTab({ setToast }) {
     setSaving(true);
     try {
       await apiPut(`/v1/admin/content/${selectedItem.contentId}`, {
-        contentType: "PRO_MANUSCRIPT",
-        schemaVersion: "1.0",
-        levelId: selectedItem.levelId,
-        dayIndex: selectedItem.dayIndex,
+        content_type: "PRO_MANUSCRIPT",
+        schema_version: "1.0",
+        level_id: selectedItem.levelId,
+        day_index: selectedItem.dayIndex,
         content: {
           title: selectedItem.title,
-          contentType: "PRO_MANUSCRIPT",
+          content_type: "PRO_MANUSCRIPT",
           manuscript: dataToSave
         }
       });
