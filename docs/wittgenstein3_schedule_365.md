@@ -281,11 +281,11 @@
 | 263 | 화법 | 동아리 발표회 사회 순서를 두고 진행자와 발표자가 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 264 | 작문 | 지역 연계 독서 행사 소개 글 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 265 | 비문학 | 독서 공간에서 본원적 공간·전용된 공간·인식적 공간의 구분 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
-| 266 | 문법 | 어문 규범 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 267 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
-| 268 | 문학 | 사미인곡 | docs/wittgenstein3_source_inventory.md > 사미인곡 |
-| 269 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
-| 270 | 화법 | 상황 맥락 추론 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 266 | 문법 | 보조 용언 '-어 보다'의 띄어쓰기와 본용언 '보다'의 구별 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 267 | 비문학 | 조세 법률주의에서 열거주의와 포괄주의의 긴장 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 268 | 문학 | 속사미인곡 | docs/wittgenstein3_source_inventory.md > 속사미인곡 |
+| 269 | 비문학 | 전류 밀도의 단면적 의존성과 도체 설계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
+| 270 | 화법 | 과학 전시 체험 부스 동선을 두고 진행자와 안전 담당 학생이 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 271 | 작문 | 제목 설계 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 272 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
 | 273 | 문법 | 문법 개념 적용 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
