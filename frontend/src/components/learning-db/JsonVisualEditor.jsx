@@ -143,9 +143,8 @@ function JsonEditor({ data, onChange, depth = 0, manuscriptMode = false }) {
     );
   }
   if (typeof data === "object") {
-    // 교재 원고 모드: 서술형 해설 키 자동 추가 + 키 정렬
-    let workData = manuscriptMode ? ensureEssayExplanation(data) : data;
-    if (workData !== data) onChange(workData);
+    // 교재 원고 모드: 키 정렬 + 서술형 해설 키 표시용 추가
+    const workData = manuscriptMode ? ensureEssayExplanation(data) : data;
 
     const rawKeys = Object.keys(workData);
     const sortedKeys = manuscriptMode ? sortManuscriptKeys(rawKeys) : rawKeys;
@@ -153,7 +152,7 @@ function JsonEditor({ data, onChange, depth = 0, manuscriptMode = false }) {
     const removeKey = (key) => {
       const next = { ...workData };
       delete next[key];
-      onChange(next);
+      onChange(next); // workData 기반 — 추가된 해설 키도 포함
     };
 
     // 문제 유형 그룹 구분선 렌더링용

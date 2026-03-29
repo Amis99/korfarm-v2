@@ -86,7 +86,8 @@
   flex: 1;
   overflow-y: auto;
   padding: 20px;
-  background: #0f1410;
+  background: #fff;
+  color: #222;
 }
 
 /* 미리보기 공통 */
@@ -122,7 +123,7 @@
   display: block;
   font-size: 12px;
   font-weight: 600;
-  color: #a6b6a9;
+  color: #1565c0;
   margin-bottom: 4px;
 }
 .ce-form-input,
@@ -130,10 +131,10 @@
 .ce-form-select {
   width: 100%;
   padding: 8px 10px;
-  background: #1a2420;
-  border: 1px solid #2a3a2e;
+  background: #fff;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  color: #f3f6f1;
+  color: #222;
   font-size: 13px;
   font-family: inherit;
   outline: none;
@@ -143,7 +144,8 @@
 .ce-form-input:focus,
 .ce-form-textarea:focus,
 .ce-form-select:focus {
-  border-color: #ff7f2a;
+  border-color: #E8740C;
+  box-shadow: 0 0 0 2px rgba(232,116,12,.15);
 }
 .ce-form-textarea {
   resize: vertical;
@@ -161,7 +163,7 @@
 
 /* 접이식 섹션 */
 .ce-collapsible {
-  border: 1px solid #2a3a2e;
+  border: 1px solid #d0d0d0;
   border-radius: 8px;
   margin-bottom: 12px;
   overflow: hidden;
@@ -171,31 +173,33 @@
   align-items: center;
   gap: 8px;
   padding: 10px 14px;
-  background: #1a2420;
+  background: #f5f0ea;
   cursor: pointer;
   user-select: none;
   font-size: 13px;
   font-weight: 600;
+  color: #333;
 }
 .ce-collapsible-header:hover {
-  background: #1e2a24;
+  background: #efe8df;
 }
 .ce-collapsible-arrow {
   font-size: 11px;
   transition: transform 0.2s;
-  color: #6a7a6e;
+  color: #888;
 }
 .ce-collapsible-arrow.open {
   transform: rotate(90deg);
 }
 .ce-collapsible-count {
   font-size: 11px;
-  color: #6a7a6e;
+  color: #888;
   margin-left: auto;
 }
 .ce-collapsible-body {
   padding: 12px 14px;
-  border-top: 1px solid #2a3a2e;
+  border-top: 1px solid #d0d0d0;
+  background: #fff;
 }
 
 /* 선택지 편집 */
@@ -244,7 +248,7 @@
 }
 .ce-scoring-row label {
   font-size: 12px;
-  color: #a6b6a9;
+  color: #555;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -252,10 +256,10 @@
 .ce-scoring-input {
   width: 70px;
   padding: 4px 6px;
-  background: #1a2420;
-  border: 1px solid #2a3a2e;
+  background: #fff;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  color: #f3f6f1;
+  color: #222;
   font-size: 12px;
   text-align: center;
 }
@@ -263,7 +267,7 @@
 /* 드래그 목록 */
 .ce-drag-handle {
   cursor: grab;
-  color: #6a7a6e;
+  color: #aaa;
   font-size: 16px;
   padding: 0 4px;
   flex-shrink: 0;
@@ -275,7 +279,7 @@
   align-items: flex-start;
   gap: 6px;
   padding: 8px 0;
-  border-bottom: 1px solid #1a2420;
+  border-bottom: 1px solid #e8e0d8;
 }
 .ce-drag-item:last-child { border-bottom: none; }
 
@@ -371,9 +375,9 @@
   gap: 4px;
   padding: 6px 12px;
   background: none;
-  border: 1px dashed #3a4a3e;
+  border: 1px dashed #bbb;
   border-radius: 6px;
-  color: #6a7a6e;
+  color: #888;
   cursor: pointer;
   font-size: 12px;
   margin-top: 8px;
@@ -381,8 +385,8 @@
   justify-content: center;
 }
 .ce-add-btn:hover {
-  border-color: #ff7f2a;
-  color: #ff7f2a;
+  border-color: #E8740C;
+  color: #E8740C;
 }
 
 /* 로딩/에러 상태 */
