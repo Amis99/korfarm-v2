@@ -286,11 +286,11 @@
 | 268 | 문학 | 속사미인곡 | docs/wittgenstein3_source_inventory.md > 속사미인곡 |
 | 269 | 비문학 | 전류 밀도의 단면적 의존성과 도체 설계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
 | 270 | 화법 | 과학 전시 체험 부스 동선을 두고 진행자와 안전 담당 학생이 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 271 | 작문 | 제목 설계 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 272 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
-| 273 | 문법 | 문법 개념 적용 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 274 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 275 | 문학 | 성북동 비둘기 | docs/wittgenstein3_source_inventory.md > 성북동 비둘기 |
+| 271 | 작문 | 지역 연계 독서 행사 홍보 제목과 도입을 함께 다듬는 소개 글 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 272 | 비문학 | 가상 메모리의 지역성과 스래싱 발생 조건 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
+| 273 | 문법 | 관형사형 어미 '-던'과 '-었던'의 회상성과 완료성 차이 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 274 | 비문학 | 예술 형식과 매체의 상호 작용과 매체 특수성의 한계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
+| 275 | 문학 | 하나씩의 별 | docs/wittgenstein3_source_inventory.md > 하나씩의 별 |
 | 276 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
 | 277 | 화법 | 발표자의 의도 파악 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 278 | 작문 | 개요의 적절성 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
