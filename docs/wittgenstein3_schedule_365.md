@@ -301,11 +301,11 @@
 | 283 | 비문학 | 로이 리히텐슈타인의 전유와 재맥락화가 원본성의 개념을 흔드는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
 | 284 | 화법 | 축제 만족도 설문 결과 발표 전 질문 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 285 | 작문 | 학교 독서 행사 결과와 설문 자료를 통합한 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 286 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 287 | 문법 | 형태소와 품사 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 288 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
-| 289 | 문학 | 수난이대 | docs/wittgenstein3_source_inventory.md > 수난이대 |
-| 290 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
+| 286 | 비문학 | 물리적 실재 개념과 이론적 존재자의 관찰 가능성 문제 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 287 | 문법 | 조사와 어미의 이형태를 형태소로 분석하는 기준 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 288 | 비문학 | 토지 거래 허가제의 사전 규제와 계약 효력의 유동성 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 289 | 문학 | 그 나무 | docs/wittgenstein3_source_inventory.md > 그 나무 |
+| 290 | 비문학 | 유동성 제약이 항상소득가설의 소비 평활화를 제한하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
 | 291 | 화법 | 질문의 기능 분석 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 292 | 작문 | 주장과 근거 배열 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 293 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
