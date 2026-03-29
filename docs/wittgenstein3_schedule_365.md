@@ -321,11 +321,11 @@
 | 303 | 문학 | 세상에서 제일 무거운 틀니 | docs/wittgenstein3_source_inventory.md > 세상에서 제일 무거운 틀니 |
 | 304 | 비문학 | 교류 욕구 이론에서 인정 욕구와 정체성 검증의 상호 작용 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 305 | 화법 | 학생회 후원 요청 발표를 앞두고 설득 근거와 사례 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 306 | 작문 | 고쳐쓰기 전략 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 307 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 308 | 문법 | 높임과 시간 표현 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 309 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
-| 310 | 문학 | 월선헌 십육경가 | docs/wittgenstein3_source_inventory.md > 월선헌 십육경가 |
+| 306 | 작문 | 학교 축제 만족도 설문 결과를 바탕으로 운영 개선안을 정리한 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 307 | 비문학 | 지자기 역전의 대칭 줄무늬와 포타슘-아르곤 연대 측정의 상호 보완 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 308 | 문법 | 선어말 어미 '-더-'와 '-겠-'의 담화 기능과 결합 제약 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 309 | 비문학 | 민주정과 공화정이 자유와 파벌을 다루는 방식의 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 310 | 문학 | 월선헌십육경가 | docs/wittgenstein3_source_inventory.md > 월선헌십육경가 |
 | 311 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
 | 312 | 화법 | 발표 자료 해석 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 313 | 작문 | 문단 재배열 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
