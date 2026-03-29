@@ -336,11 +336,11 @@
 | 318 | 비문학 | 유추 적용에서 법적 안정성과 구체적 타당성의 충돌 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
 | 319 | 화법 | 지역 서점 운영자 인터뷰를 앞두고 질문 순서와 핵심 답변 정리 방식을 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 320 | 작문 | 교내 열린 학습 공간을 '공유 공간'으로 정의하려는 안내문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 321 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
-| 322 | 문법 | 훈민정음 원리 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 323 | 비문학 | ???? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
-| 324 | 문학 | 자전거 도둑 | docs/wittgenstein3_source_inventory.md > 자전거 도둑 |
-| 325 | 비문학 | ???? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
+| 321 | 비문학 | 페니실린의 선택 독성과 세포벽 합성 억제 원리 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
+| 322 | 문법 | 훈민정음 모음자의 천·지·인 원리와 결합 방향 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 323 | 비문학 | 이동식 크레인의 아웃트리거와 전도 모멘트 제어 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
+| 324 | 문학 | 민들레꽃 | docs/wittgenstein3_source_inventory.md > 민들레꽃 |
+| 325 | 비문학 | 로이 리히텐슈타인의 벤데이 도트와 패널 재구성이 만드는 거리감 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
 | 326 | 화법 | 건의와 협상의 전략 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 327 | 작문 | 비교·대조 글쓰기 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 328 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
