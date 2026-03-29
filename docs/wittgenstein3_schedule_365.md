@@ -166,11 +166,11 @@
 | 148 | 비문학 | 담화 공동체의 공유 규약과 상호 텍스트적 해석 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
 | 149 | 문학 | 그 방을 생각하며 | docs/wittgenstein3_source_inventory.md > 그 방을 생각하며 |
 | 150 | 비문학 | 역할 정체성 검증과 사회 구조에 대한 개인적 몰입 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
-| 151 | 화법 | 휴대전화 자율 보관제 찬반 토론의 반박 논점을 조정하는 준비 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 152 | 작문 | 점심시간 외출 전면 금지 방침에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 153 | 비문학 | 수생 동물의 아가미 구조와 역류 교환의 효율 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 154 | 문법 | 연결 어미 '-느라고'와 '-아서/어서'의 의미 제약과 결합 조건 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 155 | 비문학 | 상징 자본과 아비투스가 재생산하는 세계화의 위계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
+| 151 | 화법 | 휴대전화 자율 보관제 확대 찬성 토론의 반박 순서를 조정하는 회의 | 비트겐슈타인 3 화법 지문 수동 작성 |
+| 152 | 작문 | 점심시간 외출 전면 금지 방침에 대한 반박문 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
+| 153 | 비문학 | 지자기 역전의 증거와 포타슘-아르곤 연대 측정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 154 | 문법 | 연결 어미 '-느라고'와 '-아서/어서'의 의미 차이와 제약 | 비트겐슈타인 3 문법 지문 수동 작성 |
+| 155 | 비문학 | 상징 자본과 아비투스가 계층 재생산을 자연스럽게 만드는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 156 | 문학 | 대설주의보 | docs/wittgenstein3_source_inventory.md > 대설주의보 |
 | 157 | 비문학 | 절차적 정의와 공동체적 덕의 긴장: 롤스와 매킨타이어 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
 | 158 | 화법 | 모둠 발표 갈등을 상담하는 담임과 학생의 대화 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
@@ -321,63 +321,63 @@
 | 303 | 문학 | 세상에서 제일 무거운 틀니 | docs/wittgenstein3_source_inventory.md > 세상에서 제일 무거운 틀니 |
 | 304 | 비문학 | 교류 욕구 이론에서 인정 욕구와 정체성 검증의 상호 작용 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 305 | 화법 | 학생회 후원 요청 발표를 앞두고 설득 근거와 사례 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 306 | 작문 | 학교 축제 만족도 설문 결과를 바탕으로 운영 개선안을 정리한 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 307 | 비문학 | 지자기 역전의 대칭 줄무늬와 포타슘-아르곤 연대 측정의 상호 보완 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 308 | 문법 | 선어말 어미 '-더-'와 '-겠-'의 담화 기능과 결합 제약 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 309 | 비문학 | 민주정과 공화정이 자유와 파벌을 다루는 방식의 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 306 | 작문 | 학교 축제 만족도 조사 결과를 정리한 기사 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
+| 307 | 비문학 | 지자기 역전의 암석 기록과 해저 줄무늬의 형성 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 308 | 문법 | 선어말 어미 '-더-'와 '-겠-'의 회상·추측 기능 구별 | 비트겐슈타인 3 문법 지문 수동 작성 |
+| 309 | 비문학 | 공화정에서 파벌 억제와 대의제의 역할 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 310 | 문학 | 월선헌십육경가 | docs/wittgenstein3_source_inventory.md > 월선헌십육경가 |
-| 311 | 비문학 | 마음 업로딩에서 심리적 연속성과 동일성의 기준 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 312 | 화법 | 축제 결산 발표 자료에서 만족도 그래프와 사례 제시 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 313 | 작문 | 교내 플리마켓 운영 결과를 정리하며 문단 순서를 다시 잡는 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 314 | 비문학 | 정정보도청구권과 반론보도청구권의 법적 기능과 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
-| 315 | 문법 | 중세국어 처격 조사 '애/에'와 '예'의 분포와 의미 차이 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 316 | 비문학 | 법인세에서 감가상각 공제와 투자세액 공제가 투자 시점에 미치는 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
+| 311 | 비문학 | 마음 업로딩과 인격 동일성의 판별 기준 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 312 | 화법 | 학교 축제 결산 발표 자료 순서 조정 회의 | 비트겐슈타인 3 화법 지문 수동 작성 |
+| 313 | 작문 | 교내 플리마켓 운영 결과를 정리한 기사 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
+| 314 | 비문학 | 정정보도청구권과 반론보도청구권의 성립 요건 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 315 | 문법 | 중세국어 처격 조사 '애/에'와 '예'의 분포와 의미 차이 | 비트겐슈타인 3 문법 지문 수동 작성 |
+| 316 | 비문학 | 감가상각 공제와 투자세액 공제가 투자 시점에 미치는 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
 | 317 | 문학 | 민들레꽃 | docs/wittgenstein3_source_inventory.md > 민들레꽃 |
-| 318 | 비문학 | 유추 적용에서 법적 안정성과 구체적 타당성의 충돌 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
-| 319 | 화법 | 지역 서점 운영자 인터뷰를 앞두고 질문 순서와 핵심 답변 정리 방식을 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 320 | 작문 | 교내 열린 학습 공간을 '공유 공간'으로 정의하려는 안내문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 321 | 비문학 | 페니실린의 선택 독성과 세포벽 합성 억제 원리 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
-| 322 | 문법 | 훈민정음 모음자의 천·지·인 원리와 결합 방향 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 323 | 비문학 | 이동식 크레인의 아웃트리거와 전도 모멘트 제어 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
+| 318 | 비문학 | 법 해석에서 유추 적용과 문언 해석의 한계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 319 | 화법 | 지역 서점 인터뷰 질문 순서와 기사 방향을 조정하는 회의 | 비트겐슈타인 3 화법 지문 수동 작성 |
+| 320 | 작문 | 교내 열린 학습 공간을 '공유 공간'으로 정의하려는 안내문 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
+| 321 | 비문학 | 페니실린의 세포벽 합성 억제와 선택 독성 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
+| 322 | 문법 | 훈민정음 모음자의 천·지·인 기본자와 결합 원리 | 비트겐슈타인 3 문법 지문 수동 작성 |
+| 323 | 비문학 | 이동식 크레인의 정격 하중과 전도 안정성 판단 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
 | 324 | 문학 | 민들레꽃 | docs/wittgenstein3_source_inventory.md > 민들레꽃 |
 | 325 | 비문학 | 로이 리히텐슈타인의 벤데이 도트와 패널 재구성이 만드는 거리감 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 326 | 화법 | 학생회가 건의문 발표 전 반론 대응 순서와 발언 분량을 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 327 | 작문 | 교내 휴대전화 자율 보관제와 일괄 수거 방식을 비교한 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 328 | 비문학 | 통일성 명제와 거짓 명제의 사고 가능성에 대한 프레게와 러셀의 해법 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
-| 329 | 문법 | 겹받침 'ㅄ·ㄽ·ㄾ'의 표준 발음과 연음 시 자음 선택 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 326 | 화법 | 휴대전화 보관함 추가 설치 건의 발표 반론 대응 회의 | 비트겐슈타인 3 화법 지문 수동 작성 |
+| 327 | 작문 | 수업 중 휴대전화 자율 보관제와 일괄 수거 방식을 비교한 기사 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
+| 328 | 비문학 | 통일성 명제와 기술 이론이 부정 존재문을 분석하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 329 | 문법 | 겹받침 'ㅄ·ㄽ·ㄾ'의 음절 끝소리와 연음 조건 | 비트겐슈타인 3 문법 지문 수동 작성 |
 | 330 | 비문학 | 상황 호의성과 구성원 성숙도에 따른 리더 행동의 조정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 331 | 문학 | 적벽가 | docs/wittgenstein3_source_inventory.md > 적벽가 |
-| 332 | 비문학 | CFC의 오존층 파괴에서 염소 라디칼과 극지 성층권 구름의 역할 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 333 | 화법 | 학생회가 축제 외부인 출입 제한안에 대한 반박 발표 전 질의응답 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 334 | 작문 | 학교 도서관 야간 개방 축소안에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 335 | 비문학 | 예술과 표현의 관계에서 표현주의와 형식주의가 작품 가치를 보는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 336 | 문법 | 다의어와 동형어의 구별 기준과 사전 등재 방식 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 337 | 비문학 | 자연법의 역사와 현대적 재구성에서 보편 규범의 정당화 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 332 | 비문학 | CFC의 오존층 파괴와 성층권 염소 라디칼 반응 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 333 | 화법 | 축제 외부인 출입 전면 금지안 반박 발표 질의응답 회의 | 비트겐슈타인 3 화법 지문 수동 작성 |
+| 334 | 작문 | 도서관 야간 개방 축소 재검토를 요청하는 의견문 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
+| 335 | 비문학 | 예술과 표현의 관계에서 표현주의와 형식주의가 작품 가치를 보는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
+| 336 | 문법 | 다의어와 동형어의 판별 기준 | 비트겐슈타인 3 문법 지문 수동 작성 |
+| 337 | 비문학 | 자연법의 보편성과 실정법 정당화의 기준 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
 | 338 | 문학 | 유등제 | docs/wittgenstein3_source_inventory.md > 유등제 |
-| 339 | 비문학 | 시민 참여가 정치 효능감과 공공성 학습을 강화하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
-| 340 | 화법 | 발표 부담을 느끼는 친구의 입장을 들으며 역할을 조정하는 상담 대화 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 341 | 작문 | 지역 연계 독서 행사 운영 결과를 정리한 보고서 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 342 | 비문학 | 상속세와 증여세에서 열거주의와 완전포괄주의가 충돌하는 지점 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
-| 343 | 문법 | 직접 인용과 간접 인용에서 지시어와 시제의 전환 방식 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 344 | 비문학 | 법적 의제가 권리 보호와 거래 안전을 위해 작동하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 339 | 비문학 | 참여 민주주의에서 정치 효능감이 형성되는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 340 | 화법 | 발표 부담을 느끼는 친구의 입장을 들으며 역할을 조정하는 상담 대화 | 비트겐슈타인 3 화법 지문 수동 작성 |
+| 341 | 작문 | 지역 연계 독서 행사 운영 결과를 정리한 기사 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
+| 342 | 비문학 | 상속세·증여세에서 포괄 과세와 조세 법률주의의 긴장 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
+| 343 | 문법 | 직접 인용을 간접 인용으로 바꿀 때 지시어·시제·높임의 조정 | 비트겐슈타인 3 문법 지문 수동 작성 |
+| 344 | 비문학 | 법적 의제의 기능과 사실 간주의 한계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
 | 345 | 문학 | 원가 | docs/wittgenstein3_source_inventory.md > 원가 |
-| 346 | 비문학 | 초전도체의 마이스너 효과와 임계 전이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
-| 347 | 화법 | 학교 축제 폐막식 발표 순서와 멘트 길이를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 348 | 작문 | 지역 연계 독서 행사 예산 삭감에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 349 | 비문학 | 허구 이야기에서 믿는 체하기 놀이와 불완전 명제의 관계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
-| 350 | 문법 | 높임 선어말 어미 '-시-'와 주어 호응의 제약 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 351 | 비문학 | 미니멀리즘 음악에서 반복 단위와 위상 변위가 시간 지각을 바꾸는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
+| 346 | 비문학 | 초전도체의 임계 온도와 마이스너 효과의 의미 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
+| 347 | 화법 | 학교 축제 폐막식 순서와 멘트 길이를 조정하는 회의 | 비트겐슈타인 3 화법 지문 수동 작성 |
+| 348 | 작문 | 지역 연계 독서 행사 예산 삭감 재검토를 요청하는 의견문 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
+| 349 | 비문학 | 허구 수용에서 믿는 체하기 놀이와 독자의 규칙 따르기 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 350 | 문법 | 높임 선어말 어미 '-시-'와 주어 호응의 제약 | 비트겐슈타인 3 문법 지문 수동 작성 |
+| 351 | 비문학 | 미니멀리즘 음악의 반복 구조와 미세 변화의 지각 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
 | 352 | 문학 | 차심 | docs/wittgenstein3_source_inventory.md > 차심 |
-| 353 | 비문학 | 위장된 이름과 한정 기술구 분석이 동일성 명제의 정보를 드러내는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
-| 354 | 화법 | 지역 연계 독서 행사 진행 순서와 역할 분담을 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 355 | 작문 | 지역 서점 연계 북토크 소개문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 356 | 비문학 | 교류 욕구 이론에서 정체성 검증 실패와 원심적 귀인이 강화되는 과정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
-| 357 | 문법 | 두음 법칙에서 한자어 첫머리 ㄴ·ㄹ의 교체와 합성어 내부 비적용 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 358 | 비문학 | 수생 동물의 외새·내새에서 역류 교환이 산소 흡수 효율을 높이는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 353 | 비문학 | 러셀의 기술 이론과 동일성 명제의 정보 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 354 | 화법 | 지역 연계 독서 행사 리허설 진행 순서를 조정하는 회의 | 비트겐슈타인 3 화법 지문 수동 작성 |
+| 355 | 작문 | 지역 서점 연계 북토크 소개문 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
+| 356 | 비문학 | 교류 욕구 이론에서 정체성 인정 실패와 상호작용의 불안정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
+| 357 | 문법 | 두음 법칙에서 어두 ㄴ·ㄹ 교체와 합성어 내부의 예외 | 비트겐슈타인 3 문법 지문 수동 작성 |
+| 358 | 비문학 | 아가미의 역류 교환과 수중 산소 흡수 효율 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
 | 359 | 문학 | 원시 | docs/wittgenstein3_source_inventory.md > 원시 |
-| 360 | 비문학 | 형식 논리학과 후설의 선험적 논리학에서 논리 법칙의 성립 근거 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
-| 361 | ?? | ?? ?? ?? ??? ?? ?? ??? ???? ??? ???? ?? | ?????? 3 ?? ?? ?? ?? ?? |
-| 362 | ?? | ?? ?? ??? ?? ?? ??? ??? ??? ?? | ?????? 3 ?? ?? ?? ?? ?? |
-| 363 | ??? | ????? ?? ???? ??? ??? ??? ??? ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 364 | ?? | ??? '?'? '?'? ?? ??? ?? ??? ?? | ?????? 3 ?? ?? ?? ?? ?? |
-| 365 | ??? | ?? ?????? ?? ??? ??? ??? ?? ???? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 360 | 비문학 | 형식 논리학과 후설의 선험적 논리학에서 논리 법칙의 성립 근거 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 361 | 화법 | 지역 서점 연계 북토크 안내 멘트와 질의응답 순서 조정 회의 | 비트겐슈타인 3 화법 지문 수동 작성 |
+| 362 | 작문 | 철학 강연회 소개 글 초고 | 비트겐슈타인 3 작문 지문 수동 작성 |
+| 363 | 비문학 | 야스퍼스의 한계 상황과 실존의 자각 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 364 | 문법 | 보조사 '만'과 '뿐'의 한정 의미와 결합 차이 | 비트겐슈타인 3 문법 지문 수동 작성 |
+| 365 | 비문학 | 참여 민주주의에서 시민 참여의 교육적 기능과 정치 공동체의 형성 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
