@@ -326,11 +326,11 @@
 | 308 | 문법 | 선어말 어미 '-더-'와 '-겠-'의 담화 기능과 결합 제약 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 309 | 비문학 | 민주정과 공화정이 자유와 파벌을 다루는 방식의 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 310 | 문학 | 월선헌십육경가 | docs/wittgenstein3_source_inventory.md > 월선헌십육경가 |
-| 311 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 312 | 화법 | 발표 자료 해석 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 313 | 작문 | 문단 재배열 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 314 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
-| 315 | 문법 | 중세국어 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 311 | 비문학 | 마음 업로딩에서 심리적 연속성과 동일성의 기준 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 312 | 화법 | 축제 결산 발표 자료에서 만족도 그래프와 사례 제시 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 313 | 작문 | 교내 플리마켓 운영 결과를 정리하며 문단 순서를 다시 잡는 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 314 | 비문학 | 정정보도청구권과 반론보도청구권의 법적 기능과 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 315 | 문법 | 중세국어 처격 조사 '애/에'와 '예'의 분포와 의미 차이 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 316 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
 | 317 | 문학 | 유리창 | docs/wittgenstein3_source_inventory.md > 유리창 |
 | 318 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
