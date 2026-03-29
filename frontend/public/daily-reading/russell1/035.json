@@ -3,7 +3,7 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 1) Day 35 문법 - 주어와 서술어의 호응 (기초)",
+  "title": "주어와 서술어의 호응",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
@@ -766,7 +766,7 @@
             ]
           },
           "question": {
-            "prompt": "이 문장은 호응 점검을 단순한 규칙 암기보다 무엇으로 보게 하나요?",
+            "prompt": "호응 점검을 단순한 규칙 암기보다 무엇으로 보게 하나요?",
             "choices": [
               {
                 "id": "A",
@@ -805,7 +805,7 @@
             ]
           },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "prompt": "마지막 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -836,61 +836,81 @@
     },
     "recall": {
       "cards": [
-        {
-          "id": "c1",
-          "text": "주어와 서술어는 맞물려야 한다"
-        },
-        {
-          "id": "c2",
-          "text": "주어는 대상, 서술어는 상태·동작이다"
-        },
-        {
-          "id": "c3",
-          "text": "호응이 어긋나면 뜻이 흐려진다"
-        },
-        {
-          "id": "c4",
-          "text": "긴 문장일수록 주어를 놓치기 쉽다"
-        },
-        {
-          "id": "c5",
-          "text": "누가 무엇을 하는지 흔들린다"
-        },
-        {
-          "id": "c6",
-          "text": "어색한 예문은 고쳐야 한다"
-        },
-        {
-          "id": "c7",
-          "text": "읽기와 쓰기에 모두 도움 된다"
-        },
-        {
-          "id": "c8",
-          "text": "뜻 분명한 문장을 만드는 훈련이다"
-        }
+        { "id": "c1", "text": "주어와 서술어는 서로 맞아야 뜻이 선명해진다" },
+        { "id": "c2", "text": "주어는 중심 대상, 서술어는 동작이나 상태를 말한다" },
+        { "id": "c3", "text": "호응이 어긋나면 문장이 어색해진다" },
+        { "id": "c4", "text": "길어질수록 중심을 놓치기 쉽다" },
+        { "id": "c5", "text": "예문을 고쳐 중심을 바로 세운다" },
+        { "id": "c6", "text": "호응 점검은 읽기와 쓰기의 기본이다" }
       ],
-      "correctOrder": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5",
-        "c6",
-        "c7",
-        "c8"
-      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "주어와 서술어는 각각 무엇을 설명한다고 했나요?",
+          "prompt": "문장의 중심 대상은 무엇이라 하나요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
+              "start": 5,
+              "end": 7
+            },
+            {
+              "paragraphId": "p1",
               "start": 36,
-              "end": 88
+              "end": 38
+            },
+            {
+              "paragraphId": "p1",
+              "start": 93,
+              "end": 95
+            },
+            {
+              "paragraphId": "p1",
+              "start": 158,
+              "end": 160
+            },
+            {
+              "paragraphId": "p1",
+              "start": 170,
+              "end": 172
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 38
+            },
+            {
+              "paragraphId": "p2",
+              "start": 110,
+              "end": 112
+            },
+            {
+              "paragraphId": "p3",
+              "start": 42,
+              "end": 44
+            },
+            {
+              "paragraphId": "p3",
+              "start": 101,
+              "end": 103
+            },
+            {
+              "paragraphId": "p3",
+              "start": 125,
+              "end": 127
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 2
             }
           ],
           "scoring": {
@@ -902,12 +922,62 @@
         },
         {
           "id": "q2",
-          "prompt": "주어와 서술어가 어긋나면 어떤 문제가 생긴다고 했나요?",
+          "prompt": "동작이나 상태를 설명하는 부분은 무엇이라 하나요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 89,
-              "end": 147
+              "start": 9,
+              "end": 12
+            },
+            {
+              "paragraphId": "p1",
+              "start": 63,
+              "end": 66
+            },
+            {
+              "paragraphId": "p1",
+              "start": 97,
+              "end": 100
+            },
+            {
+              "paragraphId": "p1",
+              "start": 174,
+              "end": 177
+            },
+            {
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 7
+            },
+            {
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 49
+            },
+            {
+              "paragraphId": "p2",
+              "start": 135,
+              "end": 138
+            },
+            {
+              "paragraphId": "p3",
+              "start": 46,
+              "end": 49
+            },
+            {
+              "paragraphId": "p3",
+              "start": 105,
+              "end": 108
+            },
+            {
+              "paragraphId": "p3",
+              "start": 134,
+              "end": 137
+            },
+            {
+              "paragraphId": "p4",
+              "start": 4,
+              "end": 7
             }
           ],
           "scoring": {
@@ -919,12 +989,32 @@
         },
         {
           "id": "q3",
-          "prompt": "길게 이어 쓸 때 생기기 쉬운 호응 문제는 무엇이었나요?",
+          "prompt": "맞아떨어지지 않을 때 생기는 상태를 무엇이라 하나요?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 88,
-              "end": 151
+              "start": 9,
+              "end": 11
+            },
+            {
+              "paragraphId": "p3",
+              "start": 169,
+              "end": 171
+            },
+            {
+              "paragraphId": "p4",
+              "start": 9,
+              "end": 11
+            },
+            {
+              "paragraphId": "p4",
+              "start": 148,
+              "end": 150
+            },
+            {
+              "paragraphId": "p4",
+              "start": 193,
+              "end": 195
             }
           ],
           "scoring": {
@@ -936,12 +1026,27 @@
         },
         {
           "id": "q4",
-          "prompt": "어색한 문장은 어떻게 고쳐야 한다고 했나요?",
+          "prompt": "문장의 가운데가 되는 부분은 무엇이라 하나요?",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 46
+            },
+            {
               "paragraphId": "p3",
-              "start": 121,
-              "end": 165
+              "start": 151,
+              "end": 153
+            },
+            {
+              "paragraphId": "p3",
+              "start": 211,
+              "end": 213
+            },
+            {
+              "paragraphId": "p4",
+              "start": 56,
+              "end": 58
             }
           ],
           "scoring": {
@@ -953,12 +1058,12 @@
         },
         {
           "id": "q5",
-          "prompt": "설명문이나 주장하는 글에서 호응이 특히 중요한 까닭은 무엇이었나요?",
+          "prompt": "문법을 공부할 때 살펴야 할 기본 틀은 무엇이라 하나요?",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 111,
-              "end": 178
+              "start": 211,
+              "end": 213
             }
           ],
           "scoring": {
