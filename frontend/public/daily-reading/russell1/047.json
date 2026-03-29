@@ -3,7 +3,7 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 1) Day 47 작문 - 주장문 조직 (기초)",
+  "title": "주장문 조직",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
@@ -842,51 +842,45 @@
         },
         {
           "id": "c2",
-          "text": "흐름까지 짜야 함"
+          "text": "글의 흐름까지 먼저 세운다"
         },
         {
           "id": "c3",
-          "text": "중심 의견이 먼저 섬"
+          "text": "중심 의견이 먼저 선다"
         },
         {
           "id": "c4",
-          "text": "근거는 주장과 직접 연결"
+          "text": "근거는 주장과 직접 이어진다"
         },
         {
           "id": "c5",
-          "text": "비슷한 근거끼리 묶음"
+          "text": "근거는 관계에 따라 배열한다"
         },
         {
           "id": "c6",
-          "text": "반대 의견도 다룰 수 있음"
-        },
-        {
-          "id": "c7",
-          "text": "결론이 주장을 다시 세움"
-        },
-        {
-          "id": "c8",
-          "text": "이유와 순서가 핵심"
+          "text": "결론에서 주장을 다시 정리한다"
         }
       ],
-      "correctOrder": [],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "주장문이 단순한 생각 적기가 아니라 설득을 위한 짜임 있는 글이라고 설명한 부분은 어디였나요?",
+          "prompt": "주장문은 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 25
-            },
-            {
-              "paragraphId": "p1",
-              "start": 163,
-              "end": 189
+              "end": 2
             }
           ],
           "scoring": {
@@ -898,17 +892,12 @@
         },
         {
           "id": "q2",
-          "prompt": "중심 주장과 그에 직접 이어지는 근거가 필요하다고 설명한 부분은 어디였나요?",
+          "prompt": "설득은 무슨 뜻인가요?",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 0,
-              "end": 30
-            },
-            {
-              "paragraphId": "p2",
-              "start": 92,
-              "end": 126
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 49
             }
           ],
           "scoring": {
@@ -920,17 +909,12 @@
         },
         {
           "id": "q3",
-          "prompt": "근거를 묶고, 필요하면 반대 의견에 대한 답까지 덧붙일 수 있다고 설명한 부분은 어디였나요?",
+          "prompt": "의견은 무슨 뜻인가요?",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 0,
+              "paragraphId": "p2",
+              "start": 19,
               "end": 21
-            },
-            {
-              "paragraphId": "p3",
-              "start": 120,
-              "end": 137
             }
           ],
           "scoring": {
@@ -938,16 +922,16 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "결론이 흐리면 앞의 근거들이 흩어져 보일 수 있다고 지적한 부분은 어디였나요?",
+          "prompt": "근거는 무슨 뜻인가요?",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 44,
-              "end": 82
+              "paragraphId": "p2",
+              "start": 110,
+              "end": 112
             }
           ],
           "scoring": {
@@ -959,12 +943,12 @@
         },
         {
           "id": "q5",
-          "prompt": "어떤 의견을 어떤 이유와 순서에 따라 펼칠지 세우는 일이 핵심이라고 정리한 부분은 어디였나요?",
+          "prompt": "결론은 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 127,
-              "end": 171
+              "start": 8,
+              "end": 10
             }
           ],
           "scoring": {
