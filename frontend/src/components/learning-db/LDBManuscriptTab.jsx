@@ -265,6 +265,7 @@ function LDBManuscriptTab({ setToast }) {
               onRawTextChange={setRawText}
               rawError={rawError}
               title={editorTitle}
+              manuscriptMode={true}
               actions={editorData && (
                 <>
                   {selectedItem?.contentId && (
