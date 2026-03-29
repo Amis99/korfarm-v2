@@ -3,7 +3,7 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 1) Day 113 비문학 - 논리학 - 상관관계와 인과관계",
+  "title": "상관관계와 인과관계",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
@@ -254,7 +254,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 283
+                "end": 308
               }
             ]
           },
@@ -488,7 +488,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 246
+                "end": 265
               }
             ]
           },
@@ -722,7 +722,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                "end": 258
+                "end": 264
               }
             ]
           },
@@ -955,35 +955,27 @@
       "cards": [
         {
           "id": "c1",
-          "text": "함께 나타남과 원인 관계는 다르다"
+          "text": "상관관계는 함께 나타나는 모습이다"
         },
         {
           "id": "c2",
-          "text": "숨은 변수부터 점검해야 한다"
+          "text": "인과관계는 실제로 작용하는 관계다"
         },
         {
           "id": "c3",
-          "text": "공통 조건이 착각을 만든다"
+          "text": "숨은 변수를 함께 살펴야 한다"
         },
         {
           "id": "c4",
-          "text": "충분조건은 유일 원인이 아니다"
+          "text": "필요조건과 충분조건은 다르다"
         },
         {
           "id": "c5",
-          "text": "필요조건만으론 충분치 않다"
+          "text": "유교도 관계 속에서 결과를 본다"
         },
         {
           "id": "c6",
-          "text": "성급한 단정은 오류를 낳는다"
-        },
-        {
-          "id": "c7",
-          "text": "중간 단계와 대안 설명을 본다"
-        },
-        {
-          "id": "c8",
-          "text": "논증 평가는 연결 강도 점검이다"
+          "text": "근거를 따지는 습관이 중요하다"
         }
       ],
       "correctOrder": [
@@ -992,9 +984,7 @@
         "c3",
         "c4",
         "c5",
-        "c6",
-        "c7",
-        "c8"
+        "c6"
       ],
       "seedPenalty": 1
     },
@@ -1002,93 +992,71 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "두 현상이 함께 늘어나도 실제 작용 관계가 확인되지 않으면 원인이라고 할 수 없다고 설명한 부분은 어디였나요?",
+          "prompt": "\"상관관계\"는 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 44,
-              "end": 118
-            }
+            { "paragraphId": "p1", "start": 0, "end": 4 },
+            { "paragraphId": "p2", "start": 4, "end": 8 },
+            { "paragraphId": "p2", "start": 46, "end": 50 },
+            { "paragraphId": "p2", "start": 223, "end": 227 },
+            { "paragraphId": "p4", "start": 3, "end": 7 },
+            { "paragraphId": "p4", "start": 184, "end": 188 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q2",
-          "prompt": "공통 조건이나 숨은 변수를 함께 살펴야 상관관계를 인과관계로 착각하지 않는다고 설명한 부분들은 어디였나요?",
+          "prompt": "\"인과관계\"는 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 174,
-              "end": 224
-            },
-            {
-              "paragraphId": "p2",
-              "start": 193,
-              "end": 245
-            }
+            { "paragraphId": "p1", "start": 6, "end": 10 },
+            { "paragraphId": "p2", "start": 10, "end": 14 },
+            { "paragraphId": "p2", "start": 72, "end": 76 },
+            { "paragraphId": "p3", "start": 19, "end": 23 },
+            { "paragraphId": "p4", "start": 9, "end": 13 },
+            { "paragraphId": "p4", "start": 190, "end": 194 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ALL"
         },
         {
           "id": "q3",
-          "prompt": "충분조건과 필요조건을 구분하지 않으면 하나의 조건을 지나치게 크게 보거나 줄여 보는 오류가 생긴다고 설명한 부분은 어디였나요?",
+          "prompt": "\"조건\"은 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 183,
-              "end": 257
-            }
+            { "paragraphId": "p1", "start": 222, "end": 224 },
+            { "paragraphId": "p2", "start": 246, "end": 248 },
+            { "paragraphId": "p3", "start": 2, "end": 4 },
+            { "paragraphId": "p3", "start": 8, "end": 10 },
+            { "paragraphId": "p3", "start": 53, "end": 55 },
+            { "paragraphId": "p3", "start": 107, "end": 109 },
+            { "paragraphId": "p3", "start": 121, "end": 123 },
+            { "paragraphId": "p3", "start": 216, "end": 218 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q4",
-          "prompt": "연결 고리를 따질 때 중간 단계와 다른 설명 가능성까지 함께 보아야 한다고 설명한 부분은 어디였나요?",
+          "prompt": "\"변수\"는 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 54,
-              "end": 125
-            }
+            { "paragraphId": "p2", "start": 32, "end": 34 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q5",
-          "prompt": "상관관계와 인과관계를 가르는 태도가 결국 근거 있는 판단을 만드는 논리 습관이라고 정리한 부분은 어디였나요?",
+          "prompt": "\"근거\"는 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 183,
-              "end": 252
-            }
+            { "paragraphId": "p4", "start": 58, "end": 60 },
+            { "paragraphId": "p4", "start": 218, "end": 220 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         }
       ]
     }
