@@ -3,7 +3,7 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 1) Day 145 작문 - 서론·본론·결론 (적용)",
+  "title": "서론·본론·결론",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
@@ -356,69 +356,79 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "세 부분은 읽을 자리를 마련한다" },
-        { "id": "c2", "text": "서론은 주제와 방향을 알린다" },
-        { "id": "c3", "text": "본론은 이유와 근거를 놓는다" },
-        { "id": "c4", "text": "결론은 앞내용을 묶어 남긴다" },
-        { "id": "c5", "text": "서론은 문제만 간단히 꺼낸다" },
-        { "id": "c6", "text": "본론 근거는 순서 있게 배열한다" },
-        { "id": "c7", "text": "결론은 실천을 또렷이 적는다" },
-        { "id": "c8", "text": "구조가 분명해야 글이 선명하다" }
+        { "id": "c1", "text": "서론은 주제를 알리는 자리다" },
+        { "id": "c2", "text": "본론은 생각을 뒷받침한다" },
+        { "id": "c3", "text": "결론은 앞 내용을 묶어 남긴다" },
+        { "id": "c4", "text": "서론은 문제를 짧게 꺼낸다" },
+        { "id": "c5", "text": "본론은 근거를 차례로 놓는다" },
+        { "id": "c6", "text": "결론은 실천을 분명히 적는다" }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "서론, 본론, 결론은 형식을 억지로 맞추는 틀이 아니라 읽는 흐름과 생각의 자리를 마련하는 구조라고 설명한 부분은 어디인가요?",
+          "prompt": "\"서론\"은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 0, "end": 235 }
+            { "paragraphId": "p1", "start": 95, "end": 96 },
+            { "paragraphId": "p2", "start": 40, "end": 41 },
+            { "paragraphId": "p2", "start": 159, "end": 160 },
+            { "paragraphId": "p4", "start": 177, "end": 178 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q2",
-          "prompt": "서론에서는 문제 상황을 꺼내되 주장까지 길게 끌지 말고, 읽는 사람이 글의 방향을 잡게 해야 한다고 설명한 부분은 어디인가요?",
+          "prompt": "\"본론\"은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 40, "end": 205 }
+            { "paragraphId": "p1", "start": 115, "end": 116 },
+            { "paragraphId": "p3", "start": 0, "end": 1 },
+            { "paragraphId": "p3", "start": 189, "end": 190 },
+            { "paragraphId": "p4", "start": 96, "end": 97 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q3",
-          "prompt": "본론에서는 서로 다른 근거를 묶어 제시하고, 문제의 크기와 해결 가능성이 이어지도록 배열해야 한다고 설명한 부분은 어디인가요?",
+          "prompt": "\"결론\"은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 0, "end": 189 }
+            { "paragraphId": "p1", "start": 132, "end": 133 },
+            { "paragraphId": "p4", "start": 0, "end": 1 },
+            { "paragraphId": "p4", "start": 177, "end": 178 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q4",
-          "prompt": "결론에서는 본론의 근거를 반복하는 데 머물지 않고, 구체적인 실천으로 이어지게 정리해야 한다고 설명한 부분은 어디인가요?",
+          "prompt": "\"주장\"은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 0, "end": 177 }
+            { "paragraphId": "p2", "start": 109, "end": 110 },
+            { "paragraphId": "p3", "start": 7, "end": 8 },
+            { "paragraphId": "p4", "start": 178, "end": 179 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q5",
-          "prompt": "서론, 본론, 결론은 생각을 읽기 좋게 조직하는 기본 구조이며, 짜임이 분명할수록 독자와 글쓴이 모두에게 도움이 된다고 설명한 부분은 어디인가요?",
+          "prompt": "\"근거\"는 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 177, "end": 315 }
+            { "paragraphId": "p3", "start": 30, "end": 31 },
+            { "paragraphId": "p3", "start": 56, "end": 57 },
+            { "paragraphId": "p3", "start": 70, "end": 71 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         }
       ]
     }
