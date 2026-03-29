@@ -316,11 +316,11 @@
 | 298 | 화법 | 학생회 정책 발표를 앞두고 반대 질문 대응 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 299 | 작문 | 학교 축제 운영 결과와 설문 자료를 통합한 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 300 | 비문학 | 예술 형식과 표현 매체가 감정 전달 방식에 미치는 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 301 | 문법 | 피동과 사동 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 302 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
-| 303 | 문학 | 운수 좋은 날 | docs/wittgenstein3_source_inventory.md > 운수 좋은 날 |
-| 304 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
-| 305 | 화법 | 설득 전략 분석 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 301 | 문법 | 파생 피동사와 파생 사동사의 형태 대응과 어휘적 제약 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 302 | 비문학 | 통일성 명제와 기술 이론이 부정 존재문을 분석하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 303 | 문학 | 세상에서 제일 무거운 틀니 | docs/wittgenstein3_source_inventory.md > 세상에서 제일 무거운 틀니 |
+| 304 | 비문학 | 교류 욕구 이론에서 인정 욕구와 정체성 검증의 상호 작용 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
+| 305 | 화법 | 학생회 후원 요청 발표를 앞두고 설득 근거와 사례 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 306 | 작문 | 고쳐쓰기 전략 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 307 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
 | 308 | 문법 | 높임과 시간 표현 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
