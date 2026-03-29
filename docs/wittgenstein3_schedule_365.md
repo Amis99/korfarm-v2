@@ -351,11 +351,11 @@
 | 333 | 화법 | 학생회가 축제 외부인 출입 제한안에 대한 반박 발표 전 질의응답 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 334 | 작문 | 학교 도서관 야간 개방 축소안에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 335 | 비문학 | 예술과 표현의 관계에서 표현주의와 형식주의가 작품 가치를 보는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 336 | 문법 | 의미 관계 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 337 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 338 | 문학 | 절정 | docs/wittgenstein3_source_inventory.md > 절정 |
-| 339 | 비문학 | ???? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
-| 340 | 화법 | 공감적 듣기와 재구성 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 336 | 문법 | 다의어와 동형어의 구별 기준과 사전 등재 방식 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 337 | 비문학 | 자연법의 역사와 현대적 재구성에서 보편 규범의 정당화 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 338 | 문학 | 유등제 | docs/wittgenstein3_source_inventory.md > 유등제 |
+| 339 | 비문학 | 시민 참여가 정치 효능감과 공공성 학습을 강화하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
+| 340 | 화법 | 발표 부담을 느끼는 친구의 입장을 들으며 역할을 조정하는 상담 대화 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 341 | 작문 | 보고서 구성 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 342 | 비문학 | ???? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
 | 343 | 문법 | 담화와 지시 표현 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
