@@ -395,7 +395,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글의 목적이 내용과 표현을 함께 정한다는 점은 이 글의 어느 부분에서 드러나는가?",
+          "prompt": "첫 문단은 글의 목적이 무엇을 함께 정한다고 하나요?",
           "answerRanges": [
             { "paragraphId": "p1", "start": 0, "end": 266 }
           ],
@@ -405,7 +405,7 @@
         },
         {
           "id": "q2",
-          "prompt": "목적이 분명하지 않을 때 글의 방향이 쉽게 흔들린다는 점은 이 글의 어느 부분에서 드러나는가?",
+          "prompt": "둘째 문단은 목적이 분명하지 않을 때 무엇이 흔들린다고 하나요?",
           "answerRanges": [
             { "paragraphId": "p2", "start": 0, "end": 247 }
           ],
@@ -415,7 +415,7 @@
         },
         {
           "id": "q3",
-          "prompt": "같은 주제라도 목적에 따라 더 구체적으로 비교할 수 있다는 점은 이 글의 어느 부분에서 드러나는가?",
+          "prompt": "셋째 문단은 같은 주제도 무엇에 따라 다르게 볼 수 있다고 하나요?",
           "answerRanges": [
             { "paragraphId": "p3", "start": 0, "end": 253 }
           ],
@@ -425,7 +425,7 @@
         },
         {
           "id": "q4",
-          "prompt": "작문에서 목적이 전체 방향과 표현을 정한다는 점은 이 글의 어느 부분에서 드러나는가?",
+          "prompt": "넷째 문단은 목적이 작문에서 무엇을 정한다고 하나요?",
           "answerRanges": [
             { "paragraphId": "p4", "start": 0, "end": 313 }
           ],
@@ -435,13 +435,16 @@
         },
         {
           "id": "q5",
-          "prompt": "글을 쓰기 전에 무엇에 대해 쓸지와 왜 쓰는지를 먼저 생각해야 한다는 말은 이 글의 어느 부분에서 확인되는가?",
+          "prompt": "이 글 전체가 강조하는 작문의 출발점은 무엇인가요?",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 233, "end": 313 }
+            { "paragraphId": "p1", "start": 0, "end": 266 },
+            { "paragraphId": "p2", "start": 0, "end": 247 },
+            { "paragraphId": "p3", "start": 0, "end": 253 },
+            { "paragraphId": "p4", "start": 0, "end": 313 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         }
       ]
     }
