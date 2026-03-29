@@ -296,11 +296,11 @@
 | 278 | 작문 | 학교 독서 토론회 운영 방안을 소개하는 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 279 | 비문학 | 피들러의 상황 호의성과 리더 유형의 적합성 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 280 | 문법 | 르 불규칙 활용에서 어간 말음 탈락과 ㄹ 첨가의 조건 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 281 | 비문학 | ? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 282 | 문학 | 소나기 | docs/wittgenstein3_source_inventory.md > 소나기 |
-| 283 | 비문학 | ??? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
-| 284 | 화법 | 청자의 반응 추론 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 285 | 작문 | 자료 통합 구성 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 281 | 비문학 | 남극 오존 구멍의 계절적 형성과 극성 성층권 구름의 역할 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 282 | 문학 | 낙원은 가시덤불에서 | docs/wittgenstein3_source_inventory.md > 낙원은 가시덤불에서 |
+| 283 | 비문학 | 로이 리히텐슈타인의 전유와 재맥락화가 원본성의 개념을 흔드는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
+| 284 | 화법 | 축제 만족도 설문 결과 발표 전 질문 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 285 | 작문 | 학교 독서 행사 결과와 설문 자료를 통합한 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 286 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
 | 287 | 문법 | 형태소와 품사 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 288 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
