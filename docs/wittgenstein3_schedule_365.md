@@ -276,11 +276,11 @@
 | 258 | 비문학 | 조선 사대부가 주희의 행적을 수양의 준거로 읽은 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
 | 259 | 문법 | ㄷ 불규칙 활용과 어간 보존형의 의미 구별 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 260 | 비문학 | 허구 이야기의 불완전 명제와 믿는 체하기 놀이의 관계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
-| 261 | 문학 | 봄봄 | docs/wittgenstein3_source_inventory.md > 봄봄 |
-| 262 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
-| 263 | 화법 | 말하기 태도 판단 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 264 | 작문 | 소개문 조정 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 265 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
+| 261 | 문학 | 해벽 | docs/wittgenstein3_source_inventory.md > 해벽 |
+| 262 | 비문학 | 행정 대집행의 대체적 작위 의무와 계고 절차 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 263 | 화법 | 동아리 발표회 사회 순서를 두고 진행자와 발표자가 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 264 | 작문 | 지역 연계 독서 행사 소개 글 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 265 | 비문학 | 독서 공간에서 본원적 공간·전용된 공간·인식적 공간의 구분 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
 | 266 | 문법 | 어문 규범 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 267 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
 | 268 | 문학 | 사미인곡 | docs/wittgenstein3_source_inventory.md > 사미인곡 |
