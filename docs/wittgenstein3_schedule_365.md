@@ -366,11 +366,11 @@
 | 348 | 작문 | 지역 연계 독서 행사 예산 삭감에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 349 | 비문학 | 허구 이야기에서 믿는 체하기 놀이와 불완전 명제의 관계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
 | 350 | 문법 | 높임 선어말 어미 '-시-'와 주어 호응의 제약 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 351 | 비문학 | ?? ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 352 | 문학 | 진달래꽃 | docs/wittgenstein3_source_inventory.md > 진달래꽃 |
-| 353 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
-| 354 | 화법 | 말하기 태도 판단 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 355 | 작문 | 소개문 조정 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 351 | 비문학 | 미니멀리즘 음악에서 반복 단위와 위상 변위가 시간 지각을 바꾸는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
+| 352 | 문학 | 차심 | docs/wittgenstein3_source_inventory.md > 차심 |
+| 353 | 비문학 | 위장된 이름과 한정 기술구 분석이 동일성 명제의 정보를 드러내는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 354 | 화법 | 지역 연계 독서 행사 진행 순서와 역할 분담을 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 355 | 작문 | 지역 서점 연계 북토크 소개문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 356 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 357 | 문법 | 어문 규범 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 358 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
