@@ -341,11 +341,11 @@
 | 323 | 비문학 | 이동식 크레인의 아웃트리거와 전도 모멘트 제어 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
 | 324 | 문학 | 민들레꽃 | docs/wittgenstein3_source_inventory.md > 민들레꽃 |
 | 325 | 비문학 | 로이 리히텐슈타인의 벤데이 도트와 패널 재구성이 만드는 거리감 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
-| 326 | 화법 | 건의와 협상의 전략 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 327 | 작문 | 비교·대조 글쓰기 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 328 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
-| 329 | 문법 | 표준 발음 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 330 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
+| 326 | 화법 | 학생회가 건의문 발표 전 반론 대응 순서와 발언 분량을 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 327 | 작문 | 교내 휴대전화 자율 보관제와 일괄 수거 방식을 비교한 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 328 | 비문학 | 통일성 명제와 거짓 명제의 사고 가능성에 대한 프레게와 러셀의 해법 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 329 | 문법 | 겹받침 'ㅄ·ㄽ·ㄾ'의 표준 발음과 연음 시 자음 선택 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 330 | 비문학 | 상황 호의성과 구성원 성숙도에 따른 리더 행동의 조정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 331 | 문학 | 적벽가 | docs/wittgenstein3_source_inventory.md > 적벽가 |
 | 332 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
 | 333 | 화법 | 토론 반박의 타당성 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
