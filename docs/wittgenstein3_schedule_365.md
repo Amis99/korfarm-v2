@@ -361,11 +361,11 @@
 | 343 | 문법 | 직접 인용과 간접 인용에서 지시어와 시제의 전환 방식 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 344 | 비문학 | 법적 의제가 권리 보호와 거래 안전을 위해 작동하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
 | 345 | 문학 | 원가 | docs/wittgenstein3_source_inventory.md > 원가 |
-| 346 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
-| 347 | 화법 | 발표 구성의 효과 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 348 | 작문 | 논설문 전개 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 349 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
-| 350 | 문법 | 호응과 중의성 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 346 | 비문학 | 초전도체의 마이스너 효과와 임계 전이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
+| 347 | 화법 | 학교 축제 폐막식 발표 순서와 멘트 길이를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 348 | 작문 | 지역 연계 독서 행사 예산 삭감에 대한 반박문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 349 | 비문학 | 허구 이야기에서 믿는 체하기 놀이와 불완전 명제의 관계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
+| 350 | 문법 | 높임 선어말 어미 '-시-'와 주어 호응의 제약 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 351 | 비문학 | ?? ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
 | 352 | 문학 | 진달래꽃 | docs/wittgenstein3_source_inventory.md > 진달래꽃 |
 | 353 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
