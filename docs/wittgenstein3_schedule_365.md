@@ -331,11 +331,11 @@
 | 313 | 작문 | 교내 플리마켓 운영 결과를 정리하며 문단 순서를 다시 잡는 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 314 | 비문학 | 정정보도청구권과 반론보도청구권의 법적 기능과 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 315 | 문법 | 중세국어 처격 조사 '애/에'와 '예'의 분포와 의미 차이 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 316 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
-| 317 | 문학 | 유리창 | docs/wittgenstein3_source_inventory.md > 유리창 |
-| 318 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
-| 319 | 화법 | 인터뷰의 핵심 정보 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 320 | 작문 | 개념 정의 방식 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 316 | 비문학 | 법인세에서 감가상각 공제와 투자세액 공제가 투자 시점에 미치는 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
+| 317 | 문학 | 민들레꽃 | docs/wittgenstein3_source_inventory.md > 민들레꽃 |
+| 318 | 비문학 | 유추 적용에서 법적 안정성과 구체적 타당성의 충돌 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 319 | 화법 | 지역 서점 운영자 인터뷰를 앞두고 질문 순서와 핵심 답변 정리 방식을 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 320 | 작문 | 교내 열린 학습 공간을 '공유 공간'으로 정의하려는 안내문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 321 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
 | 322 | 문법 | 훈민정음 원리 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 323 | 비문학 | ???? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
