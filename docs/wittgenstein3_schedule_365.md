@@ -266,11 +266,11 @@
 | 248 | 비문학 | 건축물의 동선과 경계가 공간 경험을 조직하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
 | 249 | 화법 | 발표를 앞둔 친구의 불안을 듣고 역할을 조정하는 상담 대화 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 250 | 작문 | 학교 매점 일회용품 사용 실태 조사 보고서 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 251 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
-| 252 | 문법 | 담화와 지시 표현 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 253 | 비문학 | ??? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
-| 254 | 문학 | 바람이 불어 | docs/wittgenstein3_source_inventory.md > 바람이 불어 |
-| 255 | 비문학 | ?? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 251 | 비문학 | 프레게의 통일성 명제와 러셀의 기술 이론이 문장 의미를 설명하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 252 | 문법 | 지시어 '이·그·저'의 화용적 거리와 선행어 회수 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 253 | 비문학 | 상황 호의성과 구성원 성숙도에 따라 달라지는 리더 행동 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
+| 254 | 문학 | 관부 연락선 | docs/wittgenstein3_source_inventory.md > 관부 연락선 |
+| 255 | 비문학 | 지자기 역전의 대칭 줄무늬와 해저 확장 속도 추정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
 | 256 | 화법 | 발표 구성의 효과 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 257 | 작문 | 논설문 전개 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 258 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
