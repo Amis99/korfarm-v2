@@ -371,11 +371,11 @@
 | 353 | 비문학 | 위장된 이름과 한정 기술구 분석이 동일성 명제의 정보를 드러내는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
 | 354 | 화법 | 지역 연계 독서 행사 진행 순서와 역할 분담을 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 355 | 작문 | 지역 서점 연계 북토크 소개문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 356 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
-| 357 | 문법 | 어문 규범 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 358 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 359 | 문학 | 하단에서 | docs/wittgenstein3_source_inventory.md > 하단에서 |
-| 360 | 비문학 | ??? ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
+| 356 | 비문학 | 교류 욕구 이론에서 정체성 검증 실패와 원심적 귀인이 강화되는 과정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
+| 357 | 문법 | 두음 법칙에서 한자어 첫머리 ㄴ·ㄹ의 교체와 합성어 내부 비적용 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 358 | 비문학 | 수생 동물의 외새·내새에서 역류 교환이 산소 흡수 효율을 높이는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
+| 359 | 문학 | 원시 | docs/wittgenstein3_source_inventory.md > 원시 |
+| 360 | 비문학 | 형식 논리학과 후설의 선험적 논리학에서 논리 법칙의 성립 근거 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
 | 361 | 화법 | 상황 맥락 추론 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 362 | 작문 | 제목 설계 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
 | 363 | 비문학 | ???? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
