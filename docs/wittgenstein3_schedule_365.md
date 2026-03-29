@@ -356,11 +356,11 @@
 | 338 | 문학 | 유등제 | docs/wittgenstein3_source_inventory.md > 유등제 |
 | 339 | 비문학 | 시민 참여가 정치 효능감과 공공성 학습을 강화하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 340 | 화법 | 발표 부담을 느끼는 친구의 입장을 들으며 역할을 조정하는 상담 대화 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 341 | 작문 | 보고서 구성 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 342 | 비문학 | ???? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
-| 343 | 문법 | 담화와 지시 표현 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 344 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
-| 345 | 문학 | 정과정 | docs/wittgenstein3_source_inventory.md > 정과정 |
+| 341 | 작문 | 지역 연계 독서 행사 운영 결과를 정리한 보고서 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 342 | 비문학 | 상속세와 증여세에서 열거주의와 완전포괄주의가 충돌하는 지점 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
+| 343 | 문법 | 직접 인용과 간접 인용에서 지시어와 시제의 전환 방식 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 344 | 비문학 | 법적 의제가 권리 보호와 거래 안전을 위해 작동하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 345 | 문학 | 원가 | docs/wittgenstein3_source_inventory.md > 원가 |
 | 346 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
 | 347 | 화법 | 발표 구성의 효과 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
 | 348 | 작문 | 논설문 전개 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
