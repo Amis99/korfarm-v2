@@ -311,11 +311,11 @@
 | 293 | 비문학 | 혼인 신고와 사실혼의 법적 차이 및 보호 범위 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
 | 294 | 문법 | 서술어의 자릿수에 따른 필수 성분과 수의 성분의 구별 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 295 | 비문학 | 하디-바인베르크 평형에서 대립유전자 빈도와 보인자 비율 추정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
-| 296 | 문학 | 시집가는 날 | docs/wittgenstein3_source_inventory.md > 시집가는 날 |
-| 297 | 비문학 | ?????? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
-| 298 | 화법 | 토의 규칙과 역할 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 299 | 작문 | 정보 통합 글쓰기 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 300 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
+| 296 | 문학 | 관부 연락선 | docs/wittgenstein3_source_inventory.md > 관부 연락선 |
+| 297 | 비문학 | 양자점 디스플레이의 양자 구속 효과와 색 순도 제어 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
+| 298 | 화법 | 학생회 정책 발표를 앞두고 반대 질문 대응 순서를 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 299 | 작문 | 학교 축제 운영 결과와 설문 자료를 통합한 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 300 | 비문학 | 예술 형식과 표현 매체가 감정 전달 방식에 미치는 차이 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
 | 301 | 문법 | 피동과 사동 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 302 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
 | 303 | 문학 | 운수 좋은 날 | docs/wittgenstein3_source_inventory.md > 운수 좋은 날 |
