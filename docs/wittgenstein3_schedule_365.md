@@ -306,11 +306,11 @@
 | 288 | 비문학 | 토지 거래 허가제의 사전 규제와 계약 효력의 유동성 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 289 | 문학 | 그 나무 | docs/wittgenstein3_source_inventory.md > 그 나무 |
 | 290 | 비문학 | 유동성 제약이 항상소득가설의 소비 평활화를 제한하는 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-economy |
-| 291 | 화법 | 질문의 기능 분석 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 292 | 작문 | 주장과 근거 배열 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 293 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
-| 294 | 문법 | 문장 성분 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 295 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
+| 291 | 화법 | 학교 축제 만족도 조사 결과 발표를 앞두고 질문 순서와 답변 역할을 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 292 | 작문 | 휴대전화 자율 보관제 도입에 반대하는 의견문 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 293 | 비문학 | 혼인 신고와 사실혼의 법적 차이 및 보호 범위 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-law |
+| 294 | 문법 | 서술어의 자릿수에 따른 필수 성분과 수의 성분의 구별 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 295 | 비문학 | 하디-바인베르크 평형에서 대립유전자 빈도와 보인자 비율 추정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-science |
 | 296 | 문학 | 시집가는 날 | docs/wittgenstein3_source_inventory.md > 시집가는 날 |
 | 297 | 비문학 | ?????? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-technology |
 | 298 | 화법 | 토의 규칙과 역할 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
