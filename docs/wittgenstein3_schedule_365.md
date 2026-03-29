@@ -291,11 +291,11 @@
 | 273 | 문법 | 관형사형 어미 '-던'과 '-었던'의 회상성과 완료성 차이 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 274 | 비문학 | 예술 형식과 매체의 상호 작용과 매체 특수성의 한계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-art |
 | 275 | 문학 | 하나씩의 별 | docs/wittgenstein3_source_inventory.md > 하나씩의 별 |
-| 276 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
-| 277 | 화법 | 발표자의 의도 파악 (종합) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 278 | 작문 | 개요의 적절성 (종합) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 279 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
-| 280 | 문법 | 음운 변동 (종합) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 276 | 비문학 | 하이퍼텍스트 읽기에서 링크 탐색과 정보 선별의 기준 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-language |
+| 277 | 화법 | 봉사 활동 결과 발표에서 사례 제시 순서를 두고 발표자와 사회자가 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 278 | 작문 | 학교 독서 토론회 운영 방안을 소개하는 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 279 | 비문학 | 피들러의 상황 호의성과 리더 유형의 적합성 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
+| 280 | 문법 | 르 불규칙 활용에서 어간 말음 탈락과 ㄹ 첨가의 조건 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
 | 281 | 비문학 | ? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
 | 282 | 문학 | 소나기 | docs/wittgenstein3_source_inventory.md > 소나기 |
 | 283 | 비문학 | ??? ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
