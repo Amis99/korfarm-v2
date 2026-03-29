@@ -3,7 +3,7 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 1) Day 66 비문학 - 데이터알고리즘 - 이진 탐색",
+  "title": "이진 탐색",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
@@ -1076,151 +1076,113 @@
       "cards": [
         {
           "id": "c1",
-          "text": "정렬된 자료에서 값을 찾음"
+          "text": "정렬된 데이터에서 값을 찾는다"
         },
         {
           "id": "c2",
-          "text": "가운데 값을 먼저 견줌"
+          "text": "가운데를 기준으로 범위를 절반씩 줄인다"
         },
         {
           "id": "c3",
-          "text": "크기 비교로 절반을 덜어 냄"
+          "text": "73을 찾는 예로 과정을 보여 준다"
         },
         {
           "id": "c4",
-          "text": "남은 범위에서 다시 견줌"
+          "text": "불필요한 범위를 한꺼번에 덜어 낸다"
         },
         {
           "id": "c5",
-          "text": "불필요한 범위를 한꺼번에 뺌"
+          "text": "정렬되지 않으면 바로 쓸 수 없다"
         },
         {
           "id": "c6",
-          "text": "자료가 많을수록 차이가 큼"
-        },
-        {
-          "id": "c7",
-          "text": "정렬이 없으면 근거가 약함"
-        },
-        {
-          "id": "c8",
-          "text": "탐색 방법 선택이 중요하다"
+          "text": "이진 탐색은 효율적인 탐색의 대표 개념이다"
         }
       ],
-      "correctOrder": [],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "이진 탐색을 정렬된 자료에서 가운데를 기준으로 범위를 줄여 가며 찾는 방법으로 설명한 부분은 어디였나요?",
+          "prompt": "'이진 탐색'은 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 7,
-              "end": 18
-            },
-            {
-              "paragraphId": "p1",
-              "start": 56,
-              "end": 85
-            }
+            { "paragraphId": "p1", "start": 0, "end": 4 },
+            { "paragraphId": "p1", "start": 161, "end": 165 },
+            { "paragraphId": "p2", "start": 73, "end": 77 },
+            { "paragraphId": "p3", "start": 0, "end": 4 },
+            { "paragraphId": "p3", "start": 78, "end": 82 },
+            { "paragraphId": "p3", "start": 176, "end": 180 },
+            { "paragraphId": "p4", "start": 4, "end": 8 },
+            { "paragraphId": "p4", "start": 160, "end": 164 },
+            { "paragraphId": "p5", "start": 3, "end": 7 },
+            { "paragraphId": "p5", "start": 134, "end": 138 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "73을 찾는 예에서 50과 먼저 견주고 한쪽 절반을 덜어 내는 과정이 드러나는 부분은 어디였나요?",
+          "prompt": "'정렬'은 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 83,
-              "end": 99
-            },
-            {
-              "paragraphId": "p2",
-              "start": 114,
-              "end": 138
-            }
+            { "paragraphId": "p1", "start": 7, "end": 8 },
+            { "paragraphId": "p1", "start": 177, "end": 178 },
+            { "paragraphId": "p4", "start": 65, "end": 66 },
+            { "paragraphId": "p4", "start": 167, "end": 168 },
+            { "paragraphId": "p5", "start": 10, "end": 11 },
+            { "paragraphId": "p5", "start": 73, "end": 74 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "순차 탐색과 달리 어느 쪽 절반을 버릴지 곧바로 정할 수 있다고 설명한 대목은 어디였나요?",
+          "prompt": "'가운데'는 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 60,
-              "end": 76
-            },
-            {
-              "paragraphId": "p3",
-              "start": 100,
-              "end": 125
-            }
+            { "paragraphId": "p1", "start": 56, "end": 58 },
+            { "paragraphId": "p2", "start": 83, "end": 85 },
+            { "paragraphId": "p2", "start": 151, "end": 153 },
+            { "paragraphId": "p3", "start": 85, "end": 87 },
+            { "paragraphId": "p5", "start": 20, "end": 22 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "값이 뒤섞여 있으면 가운데와의 비교만으로는 방향을 정할 수 없다고 설명한 부분은 어디였나요?",
+          "prompt": "'범위'는 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 65,
-              "end": 73
-            },
-            {
-              "paragraphId": "p4",
-              "start": 135,
-              "end": 154
-            }
+            { "paragraphId": "p1", "start": 66, "end": 67 },
+            { "paragraphId": "p2", "start": 147, "end": 148 },
+            { "paragraphId": "p2", "start": 188, "end": 189 },
+            { "paragraphId": "p3", "start": 19, "end": 20 },
+            { "paragraphId": "p5", "start": 32, "end": 33 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "정렬과 탐색 속도의 관계, 그리고 알고리즘 선택의 중요성을 함께 묶어 정리한 부분은 어디였나요?",
+          "prompt": "'효율'은 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p5",
-              "start": 71,
-              "end": 89
-            },
-            {
-              "paragraphId": "p5",
-              "start": 95,
-              "end": 118
-            }
+            { "paragraphId": "p3", "start": 183, "end": 184 },
+            { "paragraphId": "p5", "start": 151, "end": 152 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         }
       ]
     }
