@@ -271,11 +271,11 @@
 | 253 | 비문학 | 상황 호의성과 구성원 성숙도에 따라 달라지는 리더 행동 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-psychology |
 | 254 | 문학 | 관부 연락선 | docs/wittgenstein3_source_inventory.md > 관부 연락선 |
 | 255 | 비문학 | 지자기 역전의 대칭 줄무늬와 해저 확장 속도 추정 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-environment |
-| 256 | 화법 | 발표 구성의 효과 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
-| 257 | 작문 | 논설문 전개 (심화) | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
-| 258 | 비문학 | ??? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
-| 259 | 문법 | 호응과 중의성 (심화) | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
-| 260 | 비문학 | ??? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
+| 256 | 화법 | 축제 체험 부스 운영 인력 배치를 두고 학생회와 동아리가 조정하는 회의 | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
+| 257 | 작문 | 학교 축제 우천 대비 운영 방안을 비교한 기사 초고 | 비트겐슈타인 3 작문 유형 지문 수동 작성 |
+| 258 | 비문학 | 조선 사대부가 주희의 행적을 수양의 준거로 읽은 방식 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-humanities |
+| 259 | 문법 | ㄷ 불규칙 활용과 어간 보존형의 의미 구별 | 비트겐슈타인 3 문법 유형 지문 수동 작성 |
+| 260 | 비문학 | 허구 이야기의 불완전 명제와 믿는 체하기 놀이의 관계 | docs/wittgenstein3_source_inventory.md > exam-nonfiction-philosophy |
 | 261 | 문학 | 봄봄 | docs/wittgenstein3_source_inventory.md > 봄봄 |
 | 262 | 비문학 | ?? ?? | docs/wittgenstein3_source_inventory.md > exam-nonfiction-society |
 | 263 | 화법 | 말하기 태도 판단 (심화) | 비트겐슈타인 3 화법 유형 지문 수동 작성 |
