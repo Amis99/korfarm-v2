@@ -3,7 +3,7 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 2) Day 101 비문학 - 해시와 충돌 처리",
+  "title": "해시와 충돌 처리",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_2",
   "schoolGradeRange": {
@@ -59,15 +59,54 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        { "stepId": "s1", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 31 }] }, "question": { "prompt": "해시는 무엇을 빠르게 찾기 위해 쓰나요?", "choices": [{ "id": "A", "text": "많은 데이터" }, { "id": "B", "text": "적은 데이터" }, { "id": "C", "text": "색" }, { "id": "D", "text": "소리" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s2", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 31, "end": 91 }] }, "question": { "prompt": "계산 규칙에 넣어 바꾸는 것은 무엇인가요?", "choices": [{ "id": "A", "text": "비교적 짧은 결과값" }, { "id": "B", "text": "전부 같은 값" }, { "id": "C", "text": "무작위 숫자" }, { "id": "D", "text": "빈칸" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s3", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 91, "end": 154 }] }, "question": { "prompt": "이렇게 하면 어떤 정보를 빠르게 찾을 수 있나요?", "choices": [{ "id": "A", "text": "원하는 정보" }, { "id": "B", "text": "모든 정보" }, { "id": "C", "text": "이름의 색" }, { "id": "D", "text": "소리의 세기" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s4", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 154 }] }, "question": { "prompt": "1문단 전체는 무엇을 말하나요?", "choices": [{ "id": "A", "text": "해시가 빠른 검색에 쓰이는 이유" }, { "id": "B", "text": "충돌 처리 방식" }, { "id": "C", "text": "저장 위치의 원리" }, { "id": "D", "text": "기계의 성능" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s5", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 17 }] }, "question": { "prompt": "해시의 핵심은 무엇인가요?", "choices": [{ "id": "A", "text": "해시 함수" }, { "id": "B", "text": "저장 공간" }, { "id": "C", "text": "충돌" }, { "id": "D", "text": "검색 속도" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s6", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 17, "end": 57 }] }, "question": { "prompt": "해시 함수는 무엇을 받아 무엇을 만드나요?", "choices": [{ "id": "A", "text": "입력값을 받아 숫자나 문자열" }, { "id": "B", "text": "전류를 받아 전압" }, { "id": "C", "text": "물질을 받아 열" }, { "id": "D", "text": "소리를 받아 빛" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s7", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 57, "end": 96 }] }, "question": { "prompt": "같은 입력은 어떤 결과를 내야 하나요?", "choices": [{ "id": "A", "text": "항상 같은 결과" }, { "id": "B", "text": "항상 다른 결과" }, { "id": "C", "text": "아무 결과 없음" }, { "id": "D", "text": "느린 결과" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s8", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 96, "end": 145 }] }, "question": { "prompt": "전체 성능에 큰 영향을 주는 것은 무엇인가요?", "choices": [{ "id": "A", "text": "얼마나 고르게 값을 나누느냐" }, { "id": "B", "text": "글자 수" }, { "id": "C", "text": "색의 수" }, { "id": "D", "text": "온도의 차이" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s9", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 145 }] }, "question": { "prompt": "2문단 전체는 무엇을 말하나요?", "choices": [{ "id": "A", "text": "해시 함수의 성질과 성능" }, { "id": "B", "text": "충돌의 처리" }, { "id": "C", "text": "저장 공간의 한계" }, { "id": "D", "text": "검색 결과의 형태" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s10", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 33 }] }, "question": { "prompt": "서로 다른 입력값이 같은 해시값을 가질 때를 무엇이라고 하나요?", "choices": [{ "id": "A", "text": "충돌" }, { "id": "B", "text": "분산" }, { "id": "C", "text": "정렬" }, { "id": "D", "text": "배열" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s11", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 33, "end": 46 }] }, "question": { "prompt": "이를 무엇이라고 하나요?", "choices": [{ "id": "A", "text": "충돌" }, { "id": "B", "text": "분리" }, { "id": "C", "text": "결합" }, { "id": "D", "text": "압축" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s12", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 46, "end": 101 }] }, "question": { "prompt": "충돌은 왜 완전히 피하기 어려운가요?", "choices": [{ "id": "A", "text": "저장 공간은 한정되어 있고 입력값은 매우 많기 때문" }, { "id": "B", "text": "입력값이 적기 때문" }, { "id": "C", "text": "규칙이 없기 때문" }, { "id": "D", "text": "속도가 느리기 때문" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s13", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 101, "end": 145 }] }, "question": { "prompt": "해시를 쓸 때 함께 설계해야 하는 것은 무엇인가요?", "choices": [{ "id": "A", "text": "충돌 처리 방법" }, { "id": "B", "text": "글자 크기" }, { "id": "C", "text": "색의 조합" }, { "id": "D", "text": "온도 조절" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s14", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 145 }] }, "question": { "prompt": "3문단 전체는 무엇을 말하나요?", "choices": [{ "id": "A", "text": "충돌이 생기는 이유와 대비" }, { "id": "B", "text": "해시 함수의 정의" }, { "id": "C", "text": "검색 속도" }, { "id": "D", "text": "저장 위치" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s15", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 40 }] }, "question": { "prompt": "충돌 처리의 한 방법은 무엇인가요?", "choices": [{ "id": "A", "text": "같은 위치에 여러 데이터를 연결해 둠" }, { "id": "B", "text": "값을 버림" }, { "id": "C", "text": "모두 삭제함" }, { "id": "D", "text": "임의로 섞음" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s16", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 40, "end": 97 }] }, "question": { "prompt": "한 칸에 하나만 두지 않는 방식은 무엇인가요?", "choices": [{ "id": "A", "text": "연결 구조를 이용한 보관" }, { "id": "B", "text": "무작위 삭제" }, { "id": "C", "text": "순서 무시" }, { "id": "D", "text": "전부 새로 계산" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s17", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 97, "end": 151 }] }, "question": { "prompt": "찾을 때 먼저 무엇으로 위치를 찾나요?", "choices": [{ "id": "A", "text": "해시값" }, { "id": "B", "text": "크기" }, { "id": "C", "text": "색" }, { "id": "D", "text": "무게" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s18", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 151 }] }, "question": { "prompt": "4문단 전체는 무엇을 말하나요?", "choices": [{ "id": "A", "text": "충돌을 연결 구조로 처리하는 방법" }, { "id": "B", "text": "해시 함수의 속도" }, { "id": "C", "text": "입력값의 개수" }, { "id": "D", "text": "저장 위치의 모양" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s19", "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 41 }] }, "question": { "prompt": "또 다른 방법은 무엇인가요?", "choices": [{ "id": "A", "text": "빈자리를 찾아 넣는 것" }, { "id": "B", "text": "연결 구조를 쓰는 것" }, { "id": "C", "text": "값을 버리는 것" }, { "id": "D", "text": "검색을 멈추는 것" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s20", "highlight": { "ranges": [{ "paragraphId": "p5", "start": 41, "end": 76 }] }, "question": { "prompt": "다음 후보 자리를 어떻게 정하나요?", "choices": [{ "id": "A", "text": "어디를 삼을지에 따라 성능이 달라짐" }, { "id": "B", "text": "항상 같다" }, { "id": "C", "text": "전혀 중요하지 않다" }, { "id": "D", "text": "아예 정하지 않는다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s21", "highlight": { "ranges": [{ "paragraphId": "p5", "start": 76, "end": 151 }] }, "question": { "prompt": "빈칸이 부족해지면 무엇이 일어나나요?", "choices": [{ "id": "A", "text": "여러 칸을 차례로 살펴야 하므로 효율이 떨어질 수 있음" }, { "id": "B", "text": "검색 속도가 항상 빨라짐" }, { "id": "C", "text": "충돌이 사라짐" }, { "id": "D", "text": "저장 공간이 늘어남" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s22", "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 151 }] }, "question": { "prompt": "5문단 전체는 무엇을 말하나요?", "choices": [{ "id": "A", "text": "빈자리를 찾아 넣는 충돌 처리와 그 성능" }, { "id": "B", "text": "해시 함수의 정의" }, { "id": "C", "text": "연결 구조만" }, { "id": "D", "text": "입력값의 수" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s23", "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 52 }] }, "question": { "prompt": "해시는 어떤 검색을 가능하게 하나요?", "choices": [{ "id": "A", "text": "빠른 검색" }, { "id": "B", "text": "느린 검색" }, { "id": "C", "text": "무작위 검색" }, { "id": "D", "text": "멈춘 검색" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s24", "highlight": { "ranges": [{ "paragraphId": "p6", "start": 52, "end": 142 }] }, "question": { "prompt": "무엇을 함께 살펴야 해시 구조의 장점을 오래 유지할 수 있나요?", "choices": [{ "id": "A", "text": "값이 잘 퍼뜨려지는지, 저장 방식이 효율적인지, 너무 많이 차지 않았는지" }, { "id": "B", "text": "색이 예쁜지" }, { "id": "C", "text": "그림이 많은지" }, { "id": "D", "text": "무게가 큰지" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        { "stepId": "s25", "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 142 }] }, "question": { "prompt": "6문단 전체는 무엇을 말하나요?", "choices": [{ "id": "A", "text": "해시의 장점을 유지하려면 충돌 처리까지 함께 봐야 함" }, { "id": "B", "text": "충돌은 절대 없다" }, { "id": "C", "text": "저장 방식은 중요하지 않다" }, { "id": "D", "text": "검색은 항상 느리다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        { "id": "c1", "text": "해시는 많은 데이터를 빠르게 찾기 위한 방법이다" },
+        { "id": "c2", "text": "해시 함수는 입력값을 규칙에 따라 바꾼다" },
+        { "id": "c3", "text": "서로 다른 입력값이 같은 해시값을 가질 수 있다" },
+        { "id": "c4", "text": "충돌 처리의 한 방법은 같은 위치에 여러 데이터를 연결하는 것이다" },
+        { "id": "c5", "text": "또 다른 방법은 빈자리를 찾아 넣는 것이다" },
+        { "id": "c6", "text": "해시의 장점을 오래 유지하려면 충돌 처리까지 함께 봐야 한다" }
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        { "id": "q1", "prompt": "해시는 무엇을 빠르게 찾기 위해 쓰나요?", "answerRanges": [{ "paragraphId": "p1", "start": 0, "end": 2 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q2", "prompt": "해시 함수는 무엇을 받아 무엇을 만드나요?", "answerRanges": [{ "paragraphId": "p2", "start": 8, "end": 13 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q3", "prompt": "서로 다른 입력값이 같은 해시값을 가질 때를 무엇이라고 하나요?", "answerRanges": [{ "paragraphId": "p3", "start": 36, "end": 38 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q4", "prompt": "충돌 처리의 한 방법은 무엇인가요?", "answerRanges": [{ "paragraphId": "p4", "start": 56, "end": 61 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
+        { "id": "q5", "prompt": "빈칸이 부족해지면 어떤 일이 생길 수 있나요?", "answerRanges": [{ "paragraphId": "p5", "start": 110, "end": 151 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" }
+      ]
     }
   }
 }
