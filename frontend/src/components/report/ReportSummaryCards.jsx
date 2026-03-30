@@ -4,8 +4,8 @@ export default function ReportSummaryCards({ summary }) {
     { label: "총 활동", value: summary.totalActivities, sub: "회" },
     { label: "평균 점수", value: summary.averageScore?.toFixed(1), sub: "점" },
     { label: "학습 일수", value: summary.totalStudyDays, sub: "일" },
-    { label: "최강 영역", value: summary.bestSection || "-", sub: "" },
-    { label: "최약 영역", value: summary.weakestSection || "-", sub: "" },
+    { label: "최강 역량", value: summary.bestCompetency || summary.bestSection || "-", sub: "" },
+    { label: "최약 역량", value: summary.weakestCompetency || summary.weakestSection || "-", sub: "" },
   ];
   return (
     <div className="ur-summary-row">

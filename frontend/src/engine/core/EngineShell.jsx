@@ -418,12 +418,17 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       // ignore storage errors
     }
     if (farmLogIdRef.current) {
+      const answers = latestRecords
+        .filter(r => r.id && r.correct !== undefined)
+        .map(r => ({ questionId: r.id, questionKind: r.questionKind || null, correct: !!r.correct }));
+
       apiPost("/v1/learning/farm/complete", {
         log_id: farmLogIdRef.current,
         score: accuracy,
         earned_seed: earnedSeed,
         seed_type: chosenSeed?.type || content?.seedReward?.seedType,
         accuracy,
+        answers: answers.length > 0 ? answers : undefined,
       }).then((res) => {
         // 서버가 씨앗을 제한한 경우 실제 지급량으로 summary 갱신
         if (res && typeof res.earnedSeed === "number" && res.earnedSeed !== earnedSeed) {

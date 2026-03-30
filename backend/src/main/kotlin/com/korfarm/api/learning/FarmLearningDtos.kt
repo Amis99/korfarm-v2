@@ -14,7 +14,14 @@ data class FarmCompleteRequest(
     val score: Int,
     val earnedSeed: Int,
     val seedType: String?,
-    val accuracy: Int
+    val accuracy: Int,
+    val answers: List<AnswerDetailRequest>? = null
+)
+
+data class AnswerDetailRequest(
+    val questionId: String,
+    val questionKind: String? = null,
+    val correct: Boolean
 )
 
 data class FarmCompleteResponse(

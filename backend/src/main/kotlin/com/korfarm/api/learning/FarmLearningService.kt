@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter
 class FarmLearningService(
     private val farmLearningLogRepository: FarmLearningLogRepository,
     private val contentPageProgressRepository: ContentPageProgressRepository,
+    private val quizAnswerDetailRepository: QuizAnswerDetailRepository,
     private val contentRepository: ContentRepository,
     private val economyService: EconomyService
 ) {
@@ -80,6 +81,23 @@ class FarmLearningService(
                 "farm_learning_log",
                 log.id
             )
+        }
+
+        // 문항별 정답/오답 저장
+        if (!request.answers.isNullOrEmpty()) {
+            quizAnswerDetailRepository.deleteByLogId(log.id)
+            val details = request.answers.map { ans ->
+                QuizAnswerDetailEntity(
+                    id = IdGenerator.newId("qad"),
+                    logId = log.id,
+                    userId = userId,
+                    questionId = ans.questionId,
+                    questionKind = ans.questionKind,
+                    correct = ans.correct,
+                    answeredAt = now
+                )
+            }
+            quizAnswerDetailRepository.saveAll(details)
         }
 
         return FarmCompleteResponse(success = true, earnedSeed = actualEarned, dailySeedRemaining = dailySeedRemaining)

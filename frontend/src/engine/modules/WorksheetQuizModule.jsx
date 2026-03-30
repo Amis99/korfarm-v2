@@ -305,7 +305,7 @@ function WorksheetQuizModule({ content }) {
     const scoring = getScoring(normalizedQuestion);
     const isCorrect = choiceId === normalizedQuestion.answerId;
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({ id: normalizedQuestion.id, correct: isCorrect });
+    recordAnswer({ id: normalizedQuestion.id, correct: isCorrect, questionKind: normalizedQuestion.questionKind });
     setLastResult(isCorrect ? "correct" : "wrong");
     queueResultReset();
     setStatusMap((prev) => ({
@@ -327,7 +327,7 @@ function WorksheetQuizModule({ content }) {
     const correctChoice = blank.choices?.find((choice) => choice.id === blank.answerId);
     const correctText = correctChoice?.text || "";
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({ id: `${normalizedQuestion.id}-${blank.id}`, correct: isCorrect });
+    recordAnswer({ id: `${normalizedQuestion.id}-${blank.id}`, correct: isCorrect, questionKind: normalizedQuestion.questionKind });
     setBlankAnswers((prev) => ({ ...prev, [blank.id]: correctText }));
     setBlankResultMap((prev) => ({
       ...prev,

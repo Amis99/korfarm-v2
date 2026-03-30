@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.learning.FarmLearningLogRepository
 import com.korfarm.api.learning.LearningAttemptRepository
+import com.korfarm.api.learning.QuizAnswerDetailRepository
 import com.korfarm.api.pro.CompetencyScore
 import com.korfarm.api.pro.ProProgressRepo
 import com.korfarm.api.pro.ProTestSessionRepo
@@ -36,6 +37,7 @@ class UnifiedReportService(
     private val studyPlanScopeRepo: StudyPlanScopeRepository,
     private val studyPlanAssetRepo: StudyPlanAssetRepository,
     private val studyPlanTargetRepo: StudyPlanTargetRepository,
+    private val quizAnswerDetailRepo: QuizAnswerDetailRepository,
     private val objectMapper: ObjectMapper
 ) {
     private val dtFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
@@ -65,7 +67,6 @@ class UnifiedReportService(
             studyPlan = studyPlan
         )
 
-        val summary = buildSummary(sections)
         val trend = buildTrend(studentId, startDate, endDate)
         val radarData = RadarData(
             labels = listOf("시험 OMR", "농장 모드", "일일 퀴즈", "일일 독해", "프로 모드", "학습 계획표"),
@@ -79,6 +80,20 @@ class UnifiedReportService(
             )
         )
 
+        // 역량별·영역별 분석
+        val competencyStats = buildCompetencyStats(studentId, start, end, farmMode)
+        val areaStats = buildAreaStats(farmMode, competencyStats)
+        val recommendations = buildRecommendations(competencyStats)
+
+        val competencyRadarData = if (competencyStats.isNotEmpty()) {
+            RadarData(
+                labels = competencyStats.map { it.competencyLabel },
+                scores = competencyStats.map { it.accuracy }
+            )
+        } else null
+
+        val summary = buildSummary(sections, competencyStats)
+
         return UnifiedReportResponse(
             studentId = studentId,
             studentName = user.name ?: "",
@@ -86,7 +101,11 @@ class UnifiedReportService(
             summary = summary,
             sections = sections,
             trend = trend,
-            radarData = radarData
+            radarData = radarData,
+            areaStats = areaStats,
+            competencyStats = competencyStats,
+            competencyRadarData = competencyRadarData,
+            recommendations = recommendations
         )
     }
 
@@ -258,7 +277,7 @@ class UnifiedReportService(
     }
 
     // 요약 생성
-    private fun buildSummary(sections: ReportSections): ReportSummary {
+    private fun buildSummary(sections: ReportSections, competencyStats: List<CompetencyStats> = emptyList()): ReportSummary {
         val sectionData = mutableListOf(
             "시험 OMR" to sections.examOmr.let { it.count to it.normalizedScore },
             "농장 모드" to sections.farmMode.let { it.count to it.normalizedScore },
@@ -287,12 +306,18 @@ class UnifiedReportService(
         sections.dailyReading.items.forEach { it.submittedAt?.let { d -> parseDate(d)?.let { dates.add(it) } } }
         sections.proMode.items.forEach { it.createdAt?.let { d -> parseDate(d)?.let { dates.add(it) } } }
 
+        val activeCompetencies = competencyStats.filter { it.total > 0 }
+        val bestComp = activeCompetencies.maxByOrNull { it.accuracy }?.competencyLabel
+        val weakComp = activeCompetencies.minByOrNull { it.accuracy }?.competencyLabel
+
         return ReportSummary(
             totalActivities = totalActivities,
             averageScore = avgScore,
             bestSection = best,
             weakestSection = weakest,
-            totalStudyDays = dates.size
+            totalStudyDays = dates.size,
+            bestCompetency = bestComp,
+            weakestCompetency = weakComp
         )
     }
 
@@ -456,6 +481,129 @@ class UnifiedReportService(
                 correct = v.correct,
                 total = v.total,
                 accuracy = if (v.total > 0) round2(v.correct.toDouble() / v.total * 100) else 0.0
+            )
+        }
+    }
+
+    /** 역량별 통계 빌드: quiz_answer_details + 농장 모드 contentType 병합 */
+    private fun buildCompetencyStats(
+        userId: String,
+        start: LocalDateTime,
+        end: LocalDateTime,
+        farmMode: FarmModeSection
+    ): List<CompetencyStats> {
+        data class Acc(var correct: Int = 0, var total: Int = 0, val sources: MutableSet<String> = mutableSetOf())
+
+        val accMap = mutableMapOf<String, Acc>()
+
+        // 1) quiz_answer_details에서 questionKind별 집계
+        val kindAggs = quizAnswerDetailRepo.aggregateByQuestionKind(userId, start, end)
+        for (agg in kindAggs) {
+            val info = CompetencyMapping.fromQuestionKind(agg.questionKind) ?: continue
+            val acc = accMap.getOrPut(info.competencyLabel) { Acc() }
+            acc.correct += agg.correctCount.toInt()
+            acc.total += agg.totalCount.toInt()
+            acc.sources.add("일일 퀴즈")
+        }
+
+        // 2) 농장 모드 contentType 기반 역량 매핑
+        for (item in farmMode.items) {
+            val info = CompetencyMapping.fromContentType(item.contentType) ?: continue
+            val acc = accMap.getOrPut(info.competencyLabel) { Acc() }
+            // accuracy를 100점 기준 1문항으로 환산
+            val itemAccuracy = item.accuracy ?: item.score ?: continue
+            acc.correct += itemAccuracy
+            acc.total += 100
+            acc.sources.add("농장 모드")
+        }
+
+        if (accMap.isEmpty()) return emptyList()
+
+        return accMap.map { (label, acc) ->
+            val accuracy = if (acc.total > 0) round2(acc.correct.toDouble() / acc.total * 100) else 0.0
+            val (grade, advice) = CompetencyMapping.gradeFor(accuracy)
+            CompetencyStats(
+                competencyKey = label,
+                competencyLabel = label,
+                score = accuracy,
+                correct = acc.correct,
+                total = acc.total,
+                accuracy = accuracy,
+                sources = acc.sources.toList(),
+                grade = grade,
+                advice = advice
+            )
+        }.sortedByDescending { it.accuracy }
+    }
+
+    /** 영역별 통계 빌드 */
+    @Suppress("UNUSED_PARAMETER")
+    private fun buildAreaStats(
+        farmMode: FarmModeSection,
+        competencyStats: List<CompetencyStats>
+    ): List<AreaStats> {
+        data class AreaAcc(var scoreSum: Double = 0.0, var count: Int = 0, val sources: MutableSet<String> = mutableSetOf())
+
+        val accMap = mutableMapOf<String, AreaAcc>()
+
+        // 농장 모드 contentType → 영역 매핑
+        for (item in farmMode.items) {
+            val info = CompetencyMapping.fromContentType(item.contentType) ?: continue
+            val acc = accMap.getOrPut(info.areaLabel) { AreaAcc() }
+            acc.scoreSum += (item.accuracy ?: item.score ?: 0).toDouble()
+            acc.count++
+            acc.sources.add(item.contentType)
+        }
+
+        if (accMap.isEmpty()) return emptyList()
+
+        return accMap.map { (label, acc) ->
+            AreaStats(
+                areaKey = label,
+                areaLabel = label,
+                activityCount = acc.count,
+                averageScore = if (acc.count > 0) round2(acc.scoreSum / acc.count) else 0.0,
+                sources = acc.sources.toList()
+            )
+        }.sortedByDescending { it.averageScore }
+    }
+
+    /** 약점 역량 기반 추천 학습 생성 */
+    private fun buildRecommendations(competencyStats: List<CompetencyStats>): List<LearningRecommendation> {
+        val weak = competencyStats.filter { it.accuracy < 70 && it.total > 0 }
+        if (weak.isEmpty()) return emptyList()
+
+        return weak.map { stat ->
+            val items = when (stat.competencyLabel) {
+                "어휘력" -> listOf(
+                    RecommendedItem("farm", "어휘 기초", "기본 어휘 학습으로 어휘력을 강화하세요.", "/farm/vocab"),
+                    RecommendedItem("daily", "일일 퀴즈", "매일 퀴즈로 어휘를 복습하세요.", "/daily-quiz")
+                )
+                "독해력", "구조 독해력" -> listOf(
+                    RecommendedItem("farm", "독해 연습", "비문학·문학 독해 연습을 해보세요.", "/farm/reading"),
+                    RecommendedItem("daily", "일일 독해", "매일 독해 지문으로 실력을 키우세요.", "/daily-reading")
+                )
+                "어법·문법" -> listOf(
+                    RecommendedItem("farm", "문법 학습", "문법 기초부터 차근차근 학습하세요.", "/farm/grammar"),
+                    RecommendedItem("farm", "문장 구성", "문장 만들기 연습을 해보세요.", "/farm/grammar")
+                )
+                "배경지식" -> listOf(
+                    RecommendedItem("farm", "배경지식", "다양한 배경지식을 쌓아보세요.", "/farm/background")
+                )
+                "논리 사고력" -> listOf(
+                    RecommendedItem("farm", "논리 추론", "논리 추론 문제를 풀어보세요.", "/farm/logic"),
+                    RecommendedItem("farm", "선택지 판별", "선택지 판별 연습을 해보세요.", "/farm/choice")
+                )
+                "문제 해결력" -> listOf(
+                    RecommendedItem("farm", "논리 추론", "문제 해결력을 키우는 연습을 해보세요.", "/farm/logic"),
+                    RecommendedItem("farm", "서술형 쓰기", "서술형 문제로 사고력을 키우세요.", "/farm/writing")
+                )
+                else -> emptyList()
+            }
+            LearningRecommendation(
+                reason = "${stat.competencyLabel} 점수가 ${stat.accuracy.toInt()}점으로 보강이 필요합니다.",
+                targetLabel = stat.competencyLabel,
+                items = items
             )
         }
     }

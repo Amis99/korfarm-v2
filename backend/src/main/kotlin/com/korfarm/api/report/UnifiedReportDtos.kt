@@ -10,7 +10,11 @@ data class UnifiedReportResponse(
     val summary: ReportSummary,
     val sections: ReportSections,
     val trend: List<TrendPoint>,
-    val radarData: RadarData
+    val radarData: RadarData,
+    val areaStats: List<AreaStats> = emptyList(),
+    val competencyStats: List<CompetencyStats> = emptyList(),
+    val competencyRadarData: RadarData? = null,
+    val recommendations: List<LearningRecommendation> = emptyList()
 )
 
 data class ReportPeriod(
@@ -23,7 +27,9 @@ data class ReportSummary(
     val averageScore: Double,
     val bestSection: String?,
     val weakestSection: String?,
-    val totalStudyDays: Int
+    val totalStudyDays: Int,
+    val bestCompetency: String? = null,
+    val weakestCompetency: String? = null
 )
 
 data class ReportSections(
@@ -153,4 +159,40 @@ data class TrendPoint(
 data class RadarData(
     val labels: List<String>,
     val scores: List<Double>
+)
+
+// 영역별 통계
+data class AreaStats(
+    val areaKey: String,
+    val areaLabel: String,
+    val activityCount: Int,
+    val averageScore: Double,
+    val sources: List<String>
+)
+
+// 역량별 통계
+data class CompetencyStats(
+    val competencyKey: String,
+    val competencyLabel: String,
+    val score: Double,
+    val correct: Int,
+    val total: Int,
+    val accuracy: Double,
+    val sources: List<String>,
+    val grade: String,
+    val advice: String
+)
+
+// 추천 학습
+data class LearningRecommendation(
+    val reason: String,
+    val targetLabel: String,
+    val items: List<RecommendedItem>
+)
+
+data class RecommendedItem(
+    val type: String,
+    val label: String,
+    val description: String,
+    val path: String
 )

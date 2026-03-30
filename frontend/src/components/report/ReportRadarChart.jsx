@@ -11,15 +11,19 @@ import {
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
-export default function ReportRadarChart({ radarData }) {
-  if (!radarData) return null;
+export default function ReportRadarChart({ radarData, competencyRadarData }) {
+  if (!radarData && !competencyRadarData) return null;
+
+  const activeData = competencyRadarData || radarData;
+  const chartLabel = competencyRadarData ? "역량별 성취도" : "영역별 성취도";
+  const titleLabel = competencyRadarData ? "역량별 성취도" : "영역별 성취도";
 
   const data = {
-    labels: radarData.labels,
+    labels: activeData.labels,
     datasets: [
       {
-        label: "성취도",
-        data: radarData.scores,
+        label: chartLabel,
+        data: activeData.scores,
         backgroundColor: "rgba(240, 108, 36, 0.2)",
         borderColor: "rgba(240, 108, 36, 0.8)",
         borderWidth: 2,
@@ -54,7 +58,7 @@ export default function ReportRadarChart({ radarData }) {
 
   return (
     <div className="ur-radar-wrap">
-      <h3>영역별 성취도</h3>
+      <h3>{titleLabel}</h3>
       <Radar data={data} options={options} />
     </div>
   );

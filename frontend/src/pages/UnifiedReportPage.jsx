@@ -7,6 +7,9 @@ import ReportSummaryCards from "../components/report/ReportSummaryCards";
 import ReportRadarChart from "../components/report/ReportRadarChart";
 import ReportTrendChart from "../components/report/ReportTrendChart";
 import ReportSectionDetail from "../components/report/ReportSectionDetail";
+import ReportCompetencySection from "../components/report/ReportCompetencySection";
+import ReportAreaSection from "../components/report/ReportAreaSection";
+import ReportRecommendations from "../components/report/ReportRecommendations";
 import "../styles/unified-report.css";
 
 function getDefaultDates() {
@@ -58,15 +61,21 @@ export default function UnifiedReportPage() {
 
   return (
     <div className="ur-page">
+      {/* 헤더 */}
       <div className="ur-header">
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button className="ur-btn ur-btn-secondary" onClick={() => navigate(-1)}>
             <span className="material-symbols-outlined" style={{ fontSize: 18 }}>arrow_back</span>
             뒤로
           </button>
-          <h1>통합 성적표</h1>
+          <h1>통합 학습 성적표</h1>
         </div>
         <div className="ur-header-actions">
+          {report && (
+            <span className="ur-student-info">
+              {report.studentName} · Lv.{report.studentId?.slice(-2) || ""}
+            </span>
+          )}
           <button className="ur-btn" onClick={() => window.print()}>
             <span className="material-symbols-outlined" style={{ fontSize: 16 }}>print</span>
             인쇄
@@ -91,12 +100,34 @@ export default function UnifiedReportPage() {
 
       {!loading && report && (
         <>
+          {/* 1. 종합 요약 */}
           <ReportSummaryCards summary={report.summary} />
+
+          {/* 2. 역량 분석: 레이더 + 역량 테이블 */}
           <div className="ur-charts-row">
-            <ReportRadarChart radarData={report.radarData} />
+            <ReportRadarChart
+              radarData={report.radarData}
+              competencyRadarData={report.competencyRadarData}
+            />
             <ReportTrendChart trend={report.trend} />
           </div>
+
+          {report.competencyStats?.length > 0 && (
+            <ReportCompetencySection competencyStats={report.competencyStats} />
+          )}
+
+          {/* 3. 영역 분석 */}
+          {report.areaStats?.length > 0 && (
+            <ReportAreaSection areaStats={report.areaStats} />
+          )}
+
+          {/* 4. 활동별 상세 */}
           <ReportSectionDetail sections={report.sections} />
+
+          {/* 5. 추천 학습 */}
+          {report.recommendations?.length > 0 && (
+            <ReportRecommendations recommendations={report.recommendations} />
+          )}
         </>
       )}
     </div>
