@@ -6,6 +6,7 @@ import com.korfarm.api.common.ApiException
 import com.korfarm.api.learning.FarmLearningLogRepository
 import com.korfarm.api.learning.LearningAttemptRepository
 import com.korfarm.api.learning.QuizAnswerDetailRepository
+import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.pro.CompetencyScore
 import com.korfarm.api.pro.ProProgressRepo
 import com.korfarm.api.pro.ProTestSessionRepo
@@ -38,6 +39,7 @@ class UnifiedReportService(
     private val studyPlanAssetRepo: StudyPlanAssetRepository,
     private val studyPlanTargetRepo: StudyPlanTargetRepository,
     private val quizAnswerDetailRepo: QuizAnswerDetailRepository,
+    private val contentRepository: ContentRepository,
     private val objectMapper: ObjectMapper
 ) {
     private val dtFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
@@ -82,8 +84,8 @@ class UnifiedReportService(
 
         // 역량별·영역별 분석
         val competencyStats = buildCompetencyStats(studentId, start, end, farmMode)
-        val areaStats = buildAreaStats(farmMode, competencyStats)
-        val recommendations = buildRecommendations(competencyStats)
+        val areaStats = buildAreaStats(farmMode)
+        val recommendations = buildRecommendations(competencyStats, areaStats)
 
         val competencyRadarData = if (competencyStats.isNotEmpty()) {
             RadarData(
@@ -167,10 +169,18 @@ class UnifiedReportService(
             return FarmModeSection(0, 0.0, 0.0, 0.0, 0, emptyList())
         }
 
+        // 제목 조회
+        val contentIds = logs.map { it.contentId }.distinct()
+        val titleMap = if (contentIds.isNotEmpty()) {
+            contentRepository.findAllById(contentIds).associate { it.id to it.title }
+        } else emptyMap()
+
         val items = logs.map { log ->
             FarmModeItem(
                 contentId = log.contentId,
                 contentType = log.contentType,
+                contentTypeLabel = CompetencyMapping.contentTypeLabel(log.contentType),
+                contentTitle = titleMap[log.contentId],
                 score = log.score,
                 accuracy = log.accuracy,
                 earnedSeed = log.earnedSeed,
@@ -229,11 +239,20 @@ class UnifiedReportService(
 
         val proItems = mutableListOf<ProModeItem>()
 
+        // 제목 조회
+        val allItemIds = completedItems.map { it.itemId }.distinct()
+        val itemTitleMap = if (allItemIds.isNotEmpty()) {
+            contentRepository.findAllById(allItemIds).associate { it.id to (it.title to CompetencyMapping.contentTypeLabel(it.contentType)) }
+        } else emptyMap()
+
         completedItems.forEach { p ->
+            val info = itemTitleMap[p.itemId]
             proItems.add(
                 ProModeItem(
                     chapterId = p.chapterId,
                     itemId = p.itemId,
+                    contentTitle = info?.first,
+                    learningType = info?.second,
                     score = p.score,
                     status = if (p.completed) "completed" else "in_progress",
                     createdAt = p.completedAt?.format(dtFmt) ?: p.createdAt.format(dtFmt)
@@ -246,6 +265,8 @@ class UnifiedReportService(
                 ProModeItem(
                     chapterId = ts.chapterId,
                     itemId = null,
+                    contentTitle = null,
+                    learningType = "테스트",
                     score = ts.score,
                     status = ts.status,
                     createdAt = ts.createdAt.format(dtFmt)
@@ -521,7 +542,7 @@ class UnifiedReportService(
 
         return accMap.map { (label, acc) ->
             val accuracy = if (acc.total > 0) round2(acc.correct.toDouble() / acc.total * 100) else 0.0
-            val (grade, advice) = CompetencyMapping.gradeFor(accuracy)
+            val grade = CompetencyMapping.gradeFor(accuracy)
             CompetencyStats(
                 competencyKey = label,
                 competencyLabel = label,
@@ -530,82 +551,103 @@ class UnifiedReportService(
                 total = acc.total,
                 accuracy = accuracy,
                 sources = acc.sources.toList(),
-                grade = grade,
-                advice = advice
+                grade = grade
             )
         }.sortedByDescending { it.accuracy }
     }
 
-    /** 영역별 통계 빌드 */
-    @Suppress("UNUSED_PARAMETER")
-    private fun buildAreaStats(
-        farmMode: FarmModeSection,
-        competencyStats: List<CompetencyStats>
-    ): List<AreaStats> {
-        data class AreaAcc(var scoreSum: Double = 0.0, var count: Int = 0, val sources: MutableSet<String> = mutableSetOf())
+    /** 영역별 통계 빌드: contentType → 비문학/문학/문법/기타 + subArea 세부분류 */
+    private fun buildAreaStats(farmMode: FarmModeSection): List<AreaStats> {
+        data class SubAcc(var scoreSum: Double = 0.0, var count: Int = 0)
+        data class AreaAcc(var scoreSum: Double = 0.0, var count: Int = 0, val subMap: MutableMap<String, SubAcc> = mutableMapOf())
 
         val accMap = mutableMapOf<String, AreaAcc>()
 
-        // 농장 모드 contentType → 영역 매핑
+        // contentId → subArea 조회
+        val contentIds = farmMode.items.map { it.contentId }.distinct()
+        val subAreaMap = if (contentIds.isNotEmpty()) {
+            contentRepository.findAllById(contentIds).associate { it.id to (it.subArea ?: "") }
+        } else emptyMap()
+
         for (item in farmMode.items) {
-            val info = CompetencyMapping.fromContentType(item.contentType) ?: continue
-            val acc = accMap.getOrPut(info.areaLabel) { AreaAcc() }
-            acc.scoreSum += (item.accuracy ?: item.score ?: 0).toDouble()
+            val domainArea = CompetencyMapping.domainAreaFor(item.contentType)
+            val subArea = subAreaMap[item.contentId]?.takeIf { it.isNotEmpty() }
+                ?: CompetencyMapping.contentTypeLabel(item.contentType)
+            val score = (item.accuracy ?: item.score ?: 0).toDouble()
+
+            val acc = accMap.getOrPut(domainArea) { AreaAcc() }
+            acc.scoreSum += score
             acc.count++
-            acc.sources.add(item.contentType)
+            val sub = acc.subMap.getOrPut(subArea) { SubAcc() }
+            sub.scoreSum += score
+            sub.count++
         }
 
         if (accMap.isEmpty()) return emptyList()
 
-        return accMap.map { (label, acc) ->
+        // 고정 영역 순서
+        val areaOrder = listOf("비문학", "문학", "문법", "기타")
+        return areaOrder.mapNotNull { area ->
+            val acc = accMap[area] ?: return@mapNotNull null
+            val subAreas = acc.subMap.map { (label, sub) ->
+                SubAreaStats(
+                    subAreaLabel = label,
+                    activityCount = sub.count,
+                    averageScore = if (sub.count > 0) round2(sub.scoreSum / sub.count) else 0.0
+                )
+            }.sortedByDescending { it.averageScore }
+
             AreaStats(
-                areaKey = label,
-                areaLabel = label,
+                areaKey = area,
+                areaLabel = area,
                 activityCount = acc.count,
                 averageScore = if (acc.count > 0) round2(acc.scoreSum / acc.count) else 0.0,
-                sources = acc.sources.toList()
-            )
-        }.sortedByDescending { it.averageScore }
-    }
-
-    /** 약점 역량 기반 추천 학습 생성 */
-    private fun buildRecommendations(competencyStats: List<CompetencyStats>): List<LearningRecommendation> {
-        val weak = competencyStats.filter { it.accuracy < 70 && it.total > 0 }
-        if (weak.isEmpty()) return emptyList()
-
-        return weak.map { stat ->
-            val items = when (stat.competencyLabel) {
-                "어휘력" -> listOf(
-                    RecommendedItem("farm", "어휘 기초", "기본 어휘 학습으로 어휘력을 강화하세요.", "/farm/vocab"),
-                    RecommendedItem("daily", "일일 퀴즈", "매일 퀴즈로 어휘를 복습하세요.", "/daily-quiz")
-                )
-                "독해력", "구조 독해력" -> listOf(
-                    RecommendedItem("farm", "독해 연습", "비문학·문학 독해 연습을 해보세요.", "/farm/reading"),
-                    RecommendedItem("daily", "일일 독해", "매일 독해 지문으로 실력을 키우세요.", "/daily-reading")
-                )
-                "어법·문법" -> listOf(
-                    RecommendedItem("farm", "문법 학습", "문법 기초부터 차근차근 학습하세요.", "/farm/grammar"),
-                    RecommendedItem("farm", "문장 구성", "문장 만들기 연습을 해보세요.", "/farm/grammar")
-                )
-                "배경지식" -> listOf(
-                    RecommendedItem("farm", "배경지식", "다양한 배경지식을 쌓아보세요.", "/farm/background")
-                )
-                "논리 사고력" -> listOf(
-                    RecommendedItem("farm", "논리 추론", "논리 추론 문제를 풀어보세요.", "/farm/logic"),
-                    RecommendedItem("farm", "선택지 판별", "선택지 판별 연습을 해보세요.", "/farm/choice")
-                )
-                "문제 해결력" -> listOf(
-                    RecommendedItem("farm", "논리 추론", "문제 해결력을 키우는 연습을 해보세요.", "/farm/logic"),
-                    RecommendedItem("farm", "서술형 쓰기", "서술형 문제로 사고력을 키우세요.", "/farm/writing")
-                )
-                else -> emptyList()
-            }
-            LearningRecommendation(
-                reason = "${stat.competencyLabel} 점수가 ${stat.accuracy.toInt()}점으로 보강이 필요합니다.",
-                targetLabel = stat.competencyLabel,
-                items = items
+                subAreas = subAreas
             )
         }
+    }
+
+    /** 약점 역량·영역 기반 추천 학습: DB에서 실제 콘텐츠 5개 선택 */
+    private fun buildRecommendations(
+        competencyStats: List<CompetencyStats>,
+        areaStats: List<AreaStats>
+    ): List<LearningRecommendation> {
+        val weakCompetencies = competencyStats.filter { it.accuracy < 70 && it.total > 0 }
+        if (weakCompetencies.isEmpty()) return emptyList()
+
+        // 약점 역량의 관련 contentType 수집
+        val targetTypes = weakCompetencies.flatMap {
+            CompetencyMapping.recommendedContentTypes(it.competencyLabel)
+        }.distinct()
+
+        if (targetTypes.isEmpty()) return emptyList()
+
+        // DB에서 해당 타입의 published 콘텐츠 조회
+        val candidates = targetTypes.flatMap { type ->
+            contentRepository.findByContentTypeAndStatus(type, "published")
+        }.distinctBy { it.id }.take(5)
+
+        if (candidates.isEmpty()) return emptyList()
+
+        val reason = weakCompetencies.joinToString(", ") { "${it.competencyLabel}(${it.accuracy.toInt()}%)" } +
+            " 역량 보강을 위한 추천 학습입니다."
+
+        val items = candidates.map { c ->
+            RecommendedItem(
+                contentId = c.id,
+                contentType = c.contentType,
+                label = c.title,
+                path = "/engine?contentId=${c.id}&contentType=${c.contentType}"
+            )
+        }
+
+        return listOf(
+            LearningRecommendation(
+                reason = reason,
+                targetLabel = weakCompetencies.first().competencyLabel,
+                items = items
+            )
+        )
     }
 
     private fun round2(value: Double): Double =

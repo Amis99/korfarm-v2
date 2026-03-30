@@ -8,10 +8,9 @@ export default function ReportCompetencySection({ competencyStats }) {
         <thead>
           <tr>
             <th>역량</th>
-            <th>점수</th>
+            <th>정답률</th>
             <th>등급</th>
             <th>정답</th>
-            <th>조언</th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +30,6 @@ export default function ReportCompetencySection({ competencyStats }) {
                 <span className={`ur-grade-badge ur-grade-${cs.grade}`}>{cs.grade}</span>
               </td>
               <td style={{ fontSize: 12, color: "#666" }}>{cs.correct}/{cs.total}</td>
-              <td style={{ fontSize: 12, color: "#666" }}>{cs.advice}</td>
             </tr>
           ))}
         </tbody>

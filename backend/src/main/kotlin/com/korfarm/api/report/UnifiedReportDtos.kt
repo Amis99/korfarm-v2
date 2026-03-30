@@ -76,6 +76,8 @@ data class FarmModeSection(
 data class FarmModeItem(
     val contentId: String,
     val contentType: String,
+    val contentTypeLabel: String? = null,
+    val contentTitle: String? = null,
     val score: Int?,
     val accuracy: Int?,
     val earnedSeed: Int,
@@ -109,6 +111,8 @@ data class ProModeSection(
 data class ProModeItem(
     val chapterId: String,
     val itemId: String?,
+    val contentTitle: String? = null,
+    val learningType: String? = null,
     val score: Int?,
     val status: String,
     val createdAt: String?
@@ -161,13 +165,19 @@ data class RadarData(
     val scores: List<Double>
 )
 
-// 영역별 통계
+// 영역별 통계 (비문학/문학/문법/기타)
 data class AreaStats(
     val areaKey: String,
     val areaLabel: String,
     val activityCount: Int,
     val averageScore: Double,
-    val sources: List<String>
+    val subAreas: List<SubAreaStats> = emptyList()
+)
+
+data class SubAreaStats(
+    val subAreaLabel: String,
+    val activityCount: Int,
+    val averageScore: Double
 )
 
 // 역량별 통계
@@ -179,8 +189,7 @@ data class CompetencyStats(
     val total: Int,
     val accuracy: Double,
     val sources: List<String>,
-    val grade: String,
-    val advice: String
+    val grade: String
 )
 
 // 추천 학습
@@ -191,8 +200,8 @@ data class LearningRecommendation(
 )
 
 data class RecommendedItem(
-    val type: String,
+    val contentId: String,
+    val contentType: String,
     val label: String,
-    val description: String,
     val path: String
 )

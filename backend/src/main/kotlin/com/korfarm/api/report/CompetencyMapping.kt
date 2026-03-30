@@ -1,6 +1,6 @@
 package com.korfarm.api.report
 
-/** questionKind → 역량 라벨 + 영역 매핑 */
+/** questionKind → 역량 라벨, contentType → 영역(비문학/문학/문법/기타) 매핑 */
 object CompetencyMapping {
 
     data class CompetencyInfo(
@@ -56,15 +56,66 @@ object CompetencyMapping {
 
     fun fromContentType(contentType: String): CompetencyInfo? = contentTypeMap[contentType]
 
-    fun allCompetencyLabels(): List<String> = listOf(
-        "어휘력", "독해력", "구조 독해력", "어법·문법", "배경지식", "논리 사고력", "문제 해결력"
-    )
+    fun gradeFor(score: Double): String = when {
+        score >= 80 -> "A"
+        score >= 70 -> "B"
+        score >= 60 -> "C"
+        score >= 50 -> "D"
+        else -> "F"
+    }
 
-    fun gradeFor(score: Double): Pair<String, String> = when {
-        score >= 80 -> "A" to "우수합니다. 고급 문제에 도전하세요."
-        score >= 70 -> "B" to "양호합니다. 꾸준히 유지하세요."
-        score >= 60 -> "C" to "보통입니다. 집중 학습을 권장합니다."
-        score >= 50 -> "D" to "보강이 필요합니다."
-        else -> "F" to "기초부터 다시 학습하세요."
+    /** contentType → 영역(도메인) 분류: 비문학/문학/문법/기타 */
+    fun domainAreaFor(contentType: String): String = when (contentType) {
+        "READING_NONFICTION", "BACKGROUND_KNOWLEDGE", "BACKGROUND_KNOWLEDGE_QUIZ",
+        "CONTENT_PDF", "CONTENT_PDF_QUIZ", "PRO_BACKGROUND", "PRO_READING",
+        "DAILY_READING" -> "비문학"
+
+        "READING_LITERATURE" -> "문학"
+
+        "GRAMMAR_BASIC", "GRAMMAR_ADVANCED", "GRAMMAR_PRACTICE", "GRAMMAR_REVIEW",
+        "LANGUAGE_CONCEPT", "LANGUAGE_CONCEPT_QUIZ" -> "문법"
+
+        else -> "기타"
+    }
+
+    /** contentType → 한국어 라벨 */
+    fun contentTypeLabel(contentType: String): String = when (contentType) {
+        "VOCAB_BASIC" -> "기본 어휘"
+        "VOCAB_DICTIONARY" -> "사전 어휘"
+        "GRAMMAR_BASIC" -> "문법 기초"
+        "GRAMMAR_ADVANCED" -> "문법 심화"
+        "GRAMMAR_PRACTICE" -> "문법 연습"
+        "GRAMMAR_REVIEW" -> "문법 복습"
+        "READING_NONFICTION" -> "비문학 독해"
+        "READING_LITERATURE" -> "문학 독해"
+        "BACKGROUND_KNOWLEDGE" -> "배경지식"
+        "BACKGROUND_KNOWLEDGE_QUIZ" -> "배경지식 퀴즈"
+        "LANGUAGE_CONCEPT" -> "언어 개념"
+        "LANGUAGE_CONCEPT_QUIZ" -> "언어 개념 퀴즈"
+        "LOGIC_REASONING" -> "논리 추론"
+        "LOGIC_REASONING_QUIZ" -> "논리 추론 퀴즈"
+        "CHOICE_JUDGEMENT" -> "선택지 판별"
+        "WRITING_DESCRIPTIVE" -> "서술형 쓰기"
+        "CONTENT_PDF" -> "PDF 학습"
+        "CONTENT_PDF_QUIZ" -> "PDF 퀴즈"
+        "DAILY_QUIZ" -> "일일 퀴즈"
+        "DAILY_READING" -> "일일 독해"
+        "PRO_VOCAB" -> "프로 어휘"
+        "PRO_READING" -> "프로 독해"
+        "PRO_BACKGROUND" -> "프로 배경지식"
+        "PRO_LOGIC" -> "프로 논리"
+        "PRO_ANSWER" -> "프로 서답형"
+        else -> contentType
+    }
+
+    /** 역량별 추천 contentType 목록 */
+    fun recommendedContentTypes(competencyLabel: String): List<String> = when (competencyLabel) {
+        "어휘력" -> listOf("VOCAB_BASIC", "VOCAB_DICTIONARY")
+        "독해력", "구조 독해력" -> listOf("READING_NONFICTION", "READING_LITERATURE")
+        "어법·문법" -> listOf("GRAMMAR_BASIC", "GRAMMAR_PRACTICE")
+        "배경지식" -> listOf("BACKGROUND_KNOWLEDGE", "BACKGROUND_KNOWLEDGE_QUIZ")
+        "논리 사고력" -> listOf("LOGIC_REASONING", "CHOICE_JUDGEMENT")
+        "문제 해결력" -> listOf("LOGIC_REASONING", "WRITING_DESCRIPTIVE")
+        else -> emptyList()
     }
 }

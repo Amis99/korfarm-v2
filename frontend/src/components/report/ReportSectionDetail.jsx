@@ -8,22 +8,20 @@ const SECTIONS = [
     renderItems: (items) => (
       <table>
         <thead>
-          <tr><th>시험명</th><th>점수</th><th>만점</th><th>정답률</th><th>제출일</th></tr>
+          <tr><th>시험명</th><th>정답률</th><th>제출일</th></tr>
         </thead>
         <tbody>
           {items.map((it, i) => (
             <tr key={i}>
               <td>{it.testTitle || "-"}</td>
-              <td style={{ fontWeight: 700 }}>{it.score}</td>
-              <td>{it.totalPoints}</td>
-              <td>{it.accuracy != null ? `${it.accuracy}%` : "-"}</td>
+              <td style={{ fontWeight: 700 }}>{it.accuracy != null ? `${it.accuracy}%` : "-"}</td>
               <td style={{ fontSize: 12 }}>{fmtDate(it.submittedAt)}</td>
             </tr>
           ))}
         </tbody>
       </table>
     ),
-    getSummary: (s) => `${s.count}회, 평균 ${s.averageScore?.toFixed(1)}점`,
+    getSummary: (s) => `${s.count}회, 평균 ${s.averageAccuracy?.toFixed(1)}%`,
   },
   {
     key: "farmMode",
@@ -32,22 +30,21 @@ const SECTIONS = [
     renderItems: (items) => (
       <table>
         <thead>
-          <tr><th>콘텐츠 유형</th><th>점수</th><th>정답률</th><th>씨앗</th><th>완료일</th></tr>
+          <tr><th>제목</th><th>유형</th><th>정답률</th><th>완료</th></tr>
         </thead>
         <tbody>
           {items.map((it, i) => (
             <tr key={i}>
-              <td>{it.contentType || "-"}</td>
-              <td style={{ fontWeight: 700 }}>{it.score ?? "-"}</td>
-              <td>{it.accuracy != null ? `${it.accuracy}%` : "-"}</td>
-              <td>{it.earnedSeed > 0 ? `+${it.earnedSeed}` : "-"}</td>
-              <td style={{ fontSize: 12 }}>{fmtDate(it.completedAt)}</td>
+              <td>{it.contentTitle || "-"}</td>
+              <td style={{ fontSize: 12 }}>{it.contentTypeLabel || "-"}</td>
+              <td style={{ fontWeight: 700 }}>{it.accuracy != null ? `${it.accuracy}%` : "-"}</td>
+              <td style={{ fontSize: 12 }}>{it.completedAt ? "완료" : "-"}</td>
             </tr>
           ))}
         </tbody>
       </table>
     ),
-    getSummary: (s) => `${s.count}회, 평균 ${s.averageAccuracy?.toFixed(1)}점`,
+    getSummary: (s) => `${s.count}회, 평균 ${s.averageAccuracy?.toFixed(1)}%`,
   },
   {
     key: "dailyQuiz",
@@ -56,20 +53,20 @@ const SECTIONS = [
     renderItems: (items) => (
       <table>
         <thead>
-          <tr><th>#</th><th>점수</th><th>제출일</th></tr>
+          <tr><th>#</th><th>정답률</th><th>제출일</th></tr>
         </thead>
         <tbody>
           {items.map((it, i) => (
             <tr key={i}>
               <td>{i + 1}</td>
-              <td style={{ fontWeight: 700 }}>{it.score ?? "-"}</td>
+              <td style={{ fontWeight: 700 }}>{it.score != null ? `${it.score}%` : "-"}</td>
               <td style={{ fontSize: 12 }}>{fmtDate(it.submittedAt)}</td>
             </tr>
           ))}
         </tbody>
       </table>
     ),
-    getSummary: (s) => `${s.count}회, 평균 ${s.averageScore?.toFixed(1)}점`,
+    getSummary: (s) => `${s.count}회, 평균 ${s.averageScore?.toFixed(1)}%`,
   },
   {
     key: "dailyReading",
@@ -78,20 +75,20 @@ const SECTIONS = [
     renderItems: (items) => (
       <table>
         <thead>
-          <tr><th>#</th><th>점수</th><th>제출일</th></tr>
+          <tr><th>#</th><th>정답률</th><th>제출일</th></tr>
         </thead>
         <tbody>
           {items.map((it, i) => (
             <tr key={i}>
               <td>{i + 1}</td>
-              <td style={{ fontWeight: 700 }}>{it.score ?? "-"}</td>
+              <td style={{ fontWeight: 700 }}>{it.score != null ? `${it.score}%` : "-"}</td>
               <td style={{ fontSize: 12 }}>{fmtDate(it.submittedAt)}</td>
             </tr>
           ))}
         </tbody>
       </table>
     ),
-    getSummary: (s) => `${s.count}회, 평균 ${s.averageScore?.toFixed(1)}점`,
+    getSummary: (s) => `${s.count}회, 평균 ${s.averageScore?.toFixed(1)}%`,
   },
   {
     key: "proMode",
@@ -101,13 +98,14 @@ const SECTIONS = [
       <>
         <table>
           <thead>
-            <tr><th>챕터</th><th>점수</th><th>상태</th><th>일시</th></tr>
+            <tr><th>챕터</th><th>종류</th><th>제목</th><th>상태</th><th>일시</th></tr>
           </thead>
           <tbody>
             {items.map((it, i) => (
               <tr key={i}>
                 <td style={{ fontSize: 12 }}>{it.chapterId}</td>
-                <td style={{ fontWeight: 700 }}>{it.score ?? "-"}</td>
+                <td style={{ fontSize: 12 }}>{it.learningType || "-"}</td>
+                <td>{it.contentTitle || "-"}</td>
                 <td>{statusLabel(it.status)}</td>
                 <td style={{ fontSize: 12 }}>{fmtDate(it.createdAt)}</td>
               </tr>
@@ -141,7 +139,7 @@ const SECTIONS = [
         )}
       </>
     ),
-    getSummary: (s) => `학습 ${s.completedItems}건, 테스트 ${s.testCount}회, 평균 ${s.averageTestScore?.toFixed(1)}점`,
+    getSummary: (s) => `학습 ${s.completedItems}건, 테스트 ${s.testCount}회`,
   },
   {
     key: "studyPlan",
@@ -150,7 +148,7 @@ const SECTIONS = [
     renderItems: (items) => (
       <table>
         <thead>
-          <tr><th>계획표</th><th>범위</th><th>에셋</th><th>상태</th><th>점수</th><th>검토일</th></tr>
+          <tr><th>계획표</th><th>범위</th><th>에셋</th><th>상태</th><th>검토일</th></tr>
         </thead>
         <tbody>
           {items.map((it, i) => (
@@ -159,7 +157,6 @@ const SECTIONS = [
               <td>{it.scopeLabel || "-"}</td>
               <td>{it.assetLabel || "-"}</td>
               <td>{statusLabel(it.status)}</td>
-              <td style={{ fontWeight: 700 }}>{it.score ?? "-"}</td>
               <td style={{ fontSize: 12 }}>{fmtDate(it.reviewedAt)}</td>
             </tr>
           ))}
@@ -179,6 +176,7 @@ function statusLabel(st) {
   if (st === "passed") return "합격";
   if (st === "failed") return "불합격";
   if (st === "completed") return "완료";
+  if (st === "in_progress") return "진행중";
   return st || "-";
 }
 
