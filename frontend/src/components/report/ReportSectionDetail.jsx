@@ -211,7 +211,7 @@ export default function ReportSectionDetail({ sections }) {
             {isOpen && (
               <div className="ur-section-body">
                 {items.length === 0 ? (
-                  <p style={{ color: "#a6b6a9", fontSize: 13 }}>데이터가 없습니다.</p>
+                  <p style={{ color: "#888", fontSize: 13 }}>데이터가 없습니다.</p>
                 ) : (
                   <div style={{ overflowX: "auto" }}>{sec.renderItems(items, data)}</div>
                 )}

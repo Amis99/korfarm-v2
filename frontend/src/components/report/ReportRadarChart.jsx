@@ -38,13 +38,13 @@ export default function ReportRadarChart({ radarData }) {
         max: 100,
         ticks: {
           stepSize: 20,
-          color: "#a6b6a9",
+          color: "#888",
           backdropColor: "transparent",
           font: { size: 10 },
         },
-        grid: { color: "rgba(163, 182, 169, 0.15)" },
-        angleLines: { color: "rgba(163, 182, 169, 0.15)" },
-        pointLabels: { color: "#f3f6f1", font: { size: 12, weight: "bold" } },
+        grid: { color: "rgba(0, 0, 0, 0.1)" },
+        angleLines: { color: "rgba(0, 0, 0, 0.1)" },
+        pointLabels: { color: "#333", font: { size: 12, weight: "bold" } },
       },
     },
     plugins: {

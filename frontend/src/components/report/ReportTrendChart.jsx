@@ -32,7 +32,7 @@ export default function ReportTrendChart({ trend }) {
     return (
       <div className="ur-trend-wrap">
         <h3>학습 추이</h3>
-        <p style={{ color: "#a6b6a9", fontSize: 13, textAlign: "center" }}>데이터가 없습니다.</p>
+        <p style={{ color: "#888", fontSize: 13, textAlign: "center" }}>데이터가 없습니다.</p>
       </div>
     );
   }
@@ -58,19 +58,19 @@ export default function ReportTrendChart({ trend }) {
     interaction: { mode: "index", intersect: false },
     scales: {
       x: {
-        ticks: { color: "#a6b6a9", font: { size: 10 } },
-        grid: { color: "rgba(163, 182, 169, 0.1)" },
+        ticks: { color: "#888", font: { size: 10 } },
+        grid: { color: "rgba(0, 0, 0, 0.08)" },
       },
       y: {
         beginAtZero: true,
         max: 100,
-        ticks: { color: "#a6b6a9", stepSize: 20, font: { size: 10 } },
-        grid: { color: "rgba(163, 182, 169, 0.1)" },
+        ticks: { color: "#888", stepSize: 20, font: { size: 10 } },
+        grid: { color: "rgba(0, 0, 0, 0.08)" },
       },
     },
     plugins: {
       legend: {
-        labels: { color: "#f3f6f1", font: { size: 11 }, usePointStyle: true, pointStyle: "circle" },
+        labels: { color: "#333", font: { size: 11 }, usePointStyle: true, pointStyle: "circle" },
       },
     },
   };
