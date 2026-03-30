@@ -10,4 +10,4 @@ CREATE TABLE quiz_answer_details (
     INDEX idx_qad_log (log_id),
     INDEX idx_qad_user_date (user_id, answered_at),
     CONSTRAINT fk_qad_log FOREIGN KEY (log_id) REFERENCES farm_learning_logs(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
