@@ -100,6 +100,33 @@ object CompetencyMapping {
         else -> emptyList()
     }
 
+    /** 영역 분류: subArea 값 → 대분류 역산 */
+    val AREA_CLASSIFICATION = mapOf(
+        "비문학" to listOf(
+            "서양철학", "동양철학", "역사", "논리학", "법학", "경제학",
+            "물리학", "화학", "생명과학", "지구과학", "기계공학", "전기공학",
+            "의약학", "IT", "기타"
+        ),
+        "문학" to listOf(
+            "현대시", "현대소설", "고전시가", "고전소설", "수필", "극"
+        ),
+        "문법" to listOf(
+            "품사", "형태소", "단어의 형성", "문장의 짜임", "음운", "문법 요소",
+            "어문 규정", "국어의 역사", "기타"
+        ),
+        "기타" to listOf(
+            "화법", "작문", "매체", "생활문", "건의문", "기타"
+        )
+    )
+
+    /** subArea 값 → 대분류 영역 역산 */
+    fun areaForSubArea(subArea: String): String? {
+        for ((area, subs) in AREA_CLASSIFICATION) {
+            if (subArea in subs) return area
+        }
+        return null
+    }
+
     /** 순수 농장 모드 contentType (일일학습/프로모드 제외) */
     val FARM_ONLY_TYPES = setOf(
         "VOCAB_BASIC", "VOCAB_DICTIONARY",

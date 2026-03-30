@@ -1,17 +1,12 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 
 /**
  * 영역 분석 (4분류: 비문학/문학/문법/기타)
- * - 각 영역의 학습수, 평균 정답률
- * - 세부영역 행 (영역 행 클릭으로 토글)
- * - 강점/약점 영역 표시
+ * - 세부영역 항상 표시, 접기/펼치기 없음
  */
 export default function ReportAreaSection({ areaStats }) {
   if (!areaStats || areaStats.length === 0) return null;
 
-  const [expandedArea, setExpandedArea] = useState(null);
-
-  // 강점/약점 계산
   const { strength, weakness } = useMemo(() => {
     if (!areaStats || areaStats.length === 0) return { strength: null, weakness: null };
 
@@ -61,19 +56,11 @@ export default function ReportAreaSection({ areaStats }) {
             <th>영역</th>
             <th>학습 수</th>
             <th>평균 정답률</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
           {areaStats.map((area) => (
-            <AreaRow
-              key={area.areaKey}
-              area={area}
-              expanded={expandedArea === area.areaKey}
-              onToggle={() =>
-                setExpandedArea(expandedArea === area.areaKey ? null : area.areaKey)
-              }
-            />
+            <AreaRow key={area.areaKey} area={area} />
           ))}
         </tbody>
       </table>
@@ -81,36 +68,18 @@ export default function ReportAreaSection({ areaStats }) {
   );
 }
 
-function AreaRow({ area, expanded, onToggle }) {
+function AreaRow({ area }) {
   const hasSubs = area.subAreas?.length > 0;
 
   return (
     <>
-      <tr
-        style={{ cursor: hasSubs ? "pointer" : "default" }}
-        onClick={() => hasSubs && onToggle()}
-      >
+      <tr>
         <td style={{ fontWeight: 600 }}>{area.areaLabel}</td>
         <td>{area.activityCount}회</td>
         <td style={{ fontWeight: 700 }}>{area.averageScore?.toFixed(1)}%</td>
-        <td style={{ width: 30 }}>
-          {hasSubs && (
-            <span
-              className="material-symbols-outlined"
-              style={{
-                fontSize: 16,
-                color: "#999",
-                transition: "transform 0.2s",
-                transform: expanded ? "rotate(180deg)" : "",
-              }}
-            >
-              expand_more
-            </span>
-          )}
-        </td>
       </tr>
-      {expanded &&
-        area.subAreas?.map((sub) => (
+      {hasSubs &&
+        area.subAreas.map((sub) => (
           <tr key={`${area.areaKey}-${sub.subAreaLabel}`} className="ur-sub-area-row">
             <td style={{ paddingLeft: 28, fontSize: 12, color: "#555" }}>
               {sub.subAreaLabel}
@@ -119,7 +88,6 @@ function AreaRow({ area, expanded, onToggle }) {
             <td style={{ fontSize: 12, color: "#555" }}>
               {sub.averageScore?.toFixed(1)}%
             </td>
-            <td></td>
           </tr>
         ))}
     </>

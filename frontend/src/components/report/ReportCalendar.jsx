@@ -1,14 +1,13 @@
 import { useState, useMemo } from "react";
 
 /**
- * 월간 캘린더 히트맵 컴포넌트
+ * 월간 캘린더 히트맵 컴포넌트 (컴팩트 + 모달)
  * props:
- *   calendar: Array<{ date: string, totalCount: number, activities: [{typeLabel, count}] }>
+ *   calendar: Array<{ date: string, totalCount: number, activities: [{typeLabel, count}], averageAccuracy: number? }>
  *   startDate: string (yyyy-MM-dd)
  *   endDate: string (yyyy-MM-dd)
  */
 export default function ReportCalendar({ calendar, startDate, endDate }) {
-  // 날짜별 데이터 맵 구성
   const calendarMap = useMemo(() => {
     const map = {};
     if (calendar) {
@@ -19,17 +18,15 @@ export default function ReportCalendar({ calendar, startDate, endDate }) {
     return map;
   }, [calendar]);
 
-  // 현재 표시 월 (startDate 기준 초기화)
   const initialDate = startDate ? new Date(startDate) : new Date();
   const [viewYear, setViewYear] = useState(initialDate.getFullYear());
-  const [viewMonth, setViewMonth] = useState(initialDate.getMonth()); // 0-based
+  const [viewMonth, setViewMonth] = useState(initialDate.getMonth());
 
-  // 선택된 날짜
-  const [selectedDate, setSelectedDate] = useState(null);
+  // 모달용 상태
+  const [modalDate, setModalDate] = useState(null);
 
   const today = new Date().toISOString().slice(0, 10);
 
-  // 이전/다음 월
   const goPrev = () => {
     if (viewMonth === 0) {
       setViewYear(viewYear - 1);
@@ -37,7 +34,6 @@ export default function ReportCalendar({ calendar, startDate, endDate }) {
     } else {
       setViewMonth(viewMonth - 1);
     }
-    setSelectedDate(null);
   };
 
   const goNext = () => {
@@ -47,18 +43,15 @@ export default function ReportCalendar({ calendar, startDate, endDate }) {
     } else {
       setViewMonth(viewMonth + 1);
     }
-    setSelectedDate(null);
   };
 
-  // 6주 그리드 계산
   const weeks = useMemo(() => {
     const firstDay = new Date(viewYear, viewMonth, 1);
-    const startDow = firstDay.getDay(); // 0=일
+    const startDow = firstDay.getDay();
     const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
 
     const cells = [];
 
-    // 이전 달 채우기
     const prevMonthDays = new Date(viewYear, viewMonth, 0).getDate();
     for (let i = startDow - 1; i >= 0; i--) {
       const d = prevMonthDays - i;
@@ -71,7 +64,6 @@ export default function ReportCalendar({ calendar, startDate, endDate }) {
       });
     }
 
-    // 현재 달
     for (let d = 1; d <= daysInMonth; d++) {
       cells.push({
         day: d,
@@ -80,7 +72,6 @@ export default function ReportCalendar({ calendar, startDate, endDate }) {
       });
     }
 
-    // 다음 달 채우기 (6주 = 42칸)
     const remaining = 42 - cells.length;
     for (let d = 1; d <= remaining; d++) {
       const m = viewMonth === 11 ? 0 : viewMonth + 1;
@@ -95,7 +86,6 @@ export default function ReportCalendar({ calendar, startDate, endDate }) {
     return cells;
   }, [viewYear, viewMonth]);
 
-  // 활동량에 따른 배경색
   const getBgColor = (count) => {
     if (!count || count === 0) return "transparent";
     if (count <= 2) return "rgba(240,108,36,0.15)";
@@ -106,8 +96,7 @@ export default function ReportCalendar({ calendar, startDate, endDate }) {
   const monthLabel = `${viewYear}년 ${viewMonth + 1}월`;
   const dayHeaders = ["일", "월", "화", "수", "목", "금", "토"];
 
-  // 선택된 날짜의 활동 정보
-  const selectedEntry = selectedDate ? calendarMap[selectedDate] : null;
+  const modalEntry = modalDate ? calendarMap[modalDate] : null;
 
   return (
     <div className="ur-calendar-wrap">
@@ -126,16 +115,15 @@ export default function ReportCalendar({ calendar, startDate, endDate }) {
         {weeks.map((cell, idx) => {
           const entry = calendarMap[cell.dateStr];
           const count = entry?.totalCount || 0;
+          const accuracy = entry?.averageAccuracy;
           const hasActivity = count > 0;
           const isToday = cell.dateStr === today;
-          const isSelected = cell.dateStr === selectedDate;
 
           const classes = [
-            "ur-cal-day",
+            "ur-cal-day ur-cal-day--compact",
             cell.outside ? "outside" : "",
             hasActivity ? "has-activity" : "",
             isToday ? "today" : "",
-            isSelected ? "selected" : "",
           ]
             .filter(Boolean)
             .join(" ");
@@ -147,29 +135,45 @@ export default function ReportCalendar({ calendar, startDate, endDate }) {
               style={{ background: cell.outside ? "transparent" : getBgColor(count) }}
               onClick={() => {
                 if (hasActivity && !cell.outside) {
-                  setSelectedDate(isSelected ? null : cell.dateStr);
+                  setModalDate(cell.dateStr);
                 }
               }}
             >
-              <span>{cell.day}</span>
+              <span className="ur-cal-day-num">{cell.day}</span>
               {hasActivity && !cell.outside && (
-                <span className="ur-cal-day-count">{count}</span>
+                <span className="ur-cal-day-info">
+                  {count}건
+                  {accuracy != null && <br />}
+                  {accuracy != null && `${Math.round(accuracy)}%`}
+                </span>
               )}
             </div>
           );
         })}
       </div>
 
-      {/* 선택된 날짜의 활동 상세 */}
-      {selectedEntry && (
-        <div className="ur-cal-detail">
-          <strong>{selectedDate} 활동 ({selectedEntry.totalCount}건)</strong>
-          {selectedEntry.activities?.map((act, i) => (
-            <div key={i} className="ur-cal-detail-item">
-              <span>{act.typeLabel}</span>
-              <span>{act.count}건</span>
+      {/* 모달 */}
+      {modalEntry && (
+        <div className="ur-cal-modal-overlay" onClick={() => setModalDate(null)}>
+          <div className="ur-cal-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="ur-cal-modal-header">
+              <strong>{modalDate} 활동 ({modalEntry.totalCount}건)</strong>
+              <button onClick={() => setModalDate(null)}>&times;</button>
             </div>
-          ))}
+            {modalEntry.averageAccuracy != null && (
+              <div className="ur-cal-modal-accuracy">
+                평균 정답률: {Math.round(modalEntry.averageAccuracy)}%
+              </div>
+            )}
+            <div className="ur-cal-modal-body">
+              {modalEntry.activities?.map((act, i) => (
+                <div key={i} className="ur-cal-detail-item">
+                  <span>{act.typeLabel}</span>
+                  <span>{act.count}건</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>

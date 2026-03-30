@@ -112,7 +112,18 @@ data class ProModeSection(
     val testCount: Int,
     val averageTestScore: Double,
     val normalizedScore: Double,
-    val items: List<ProModeItem>
+    val items: List<ProModeItem>,
+    val chapters: List<ReportProChapter> = emptyList()
+)
+
+data class ReportProChapter(
+    val chapterId: String,
+    val chapterNumber: Int,
+    val title: String,
+    val progressPercent: Int,
+    val isTestPassed: Boolean,
+    val testAccuracy: Double?,
+    val status: String
 )
 
 data class ProModeItem(
@@ -141,7 +152,8 @@ data class StudyPlanSection(
     val rejectedCells: Int,
     val completionRate: Double,
     val normalizedScore: Double,
-    val items: List<StudyPlanItem>
+    val items: List<StudyPlanItem>,
+    val planIds: List<String> = emptyList()
 )
 
 data class StudyPlanItem(
@@ -217,7 +229,8 @@ data class RecommendedItem(
 data class CalendarDay(
     val date: String,
     val totalCount: Int,
-    val activities: List<CalendarActivity>
+    val activities: List<CalendarActivity>,
+    val averageAccuracy: Double? = null
 )
 
 data class CalendarActivity(

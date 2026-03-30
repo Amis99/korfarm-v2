@@ -8,6 +8,8 @@ import com.korfarm.api.learning.LearningAttemptRepository
 import com.korfarm.api.learning.QuizAnswerDetailRepository
 import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.pro.CompetencyScore
+import com.korfarm.api.pro.ProChapterItemRepo
+import com.korfarm.api.pro.ProChapterRepo
 import com.korfarm.api.pro.ProProgressRepo
 import com.korfarm.api.pro.ProTestSessionRepo
 import com.korfarm.api.test.TestPaperRepo
@@ -31,6 +33,8 @@ class UnifiedReportService(
     private val learningAttemptRepo: LearningAttemptRepository,
     private val proProgressRepo: ProProgressRepo,
     private val proTestSessionRepo: ProTestSessionRepo,
+    private val proChapterRepo: ProChapterRepo,
+    private val proChapterItemRepo: ProChapterItemRepo,
     private val userRepository: UserRepository,
     private val parentLinkService: ParentLinkService,
     private val studyPlanCellRepo: StudyPlanCellRepository,
@@ -252,20 +256,13 @@ class UnifiedReportService(
 
         val proItems = mutableListOf<ProModeItem>()
 
-        // 제목 조회
-        val allItemIds = completedItems.map { it.itemId }.distinct()
-        val itemTitleMap = if (allItemIds.isNotEmpty()) {
-            contentRepository.findAllById(allItemIds).associate { it.id to (it.title to CompetencyMapping.contentTypeLabel(it.contentType)) }
-        } else emptyMap()
-
         completedItems.forEach { p ->
-            val info = itemTitleMap[p.itemId]
             proItems.add(
                 ProModeItem(
                     chapterId = p.chapterId,
                     itemId = p.itemId,
-                    contentTitle = info?.first,
-                    learningType = info?.second,
+                    contentTitle = null,
+                    learningType = null,
                     score = p.score,
                     status = if (p.completed) "completed" else "in_progress",
                     createdAt = p.completedAt?.format(dtFmt) ?: p.createdAt.format(dtFmt)
@@ -297,13 +294,73 @@ class UnifiedReportService(
 
         val avgTestScore = if (testScores.isNotEmpty()) round2(testScores.average()) else 0.0
 
+        // 챕터 리스트 생성: 기간 내 활동이 있는 챕터
+        val activeChapterIds = (completedItems.map { it.chapterId } + testSessions.map { it.chapterId }).distinct()
+        val chapters = if (activeChapterIds.isNotEmpty()) {
+            buildProChapterList(userId, activeChapterIds)
+        } else emptyList()
+
         return ProModeSection(
             completedItems = completedItems.size,
             testCount = testSessions.size,
             averageTestScore = avgTestScore,
             normalizedScore = avgTestScore,
-            items = proItems
+            items = proItems,
+            chapters = chapters
         )
+    }
+
+    /** 프로 모드 챕터 리스트 생성 */
+    private fun buildProChapterList(userId: String, chapterIds: List<String>): List<ReportProChapter> {
+        val chapterEntities = proChapterRepo.findAllById(chapterIds)
+        if (chapterEntities.isEmpty()) return emptyList()
+
+        val progressList = proProgressRepo.findByUserIdAndChapterIdIn(userId, chapterIds)
+        val progressByChapter = progressList.groupBy { it.chapterId }
+
+        return chapterEntities
+            .sortedBy { it.globalChapterNumber }
+            .map { ch ->
+                // 전체 아이템 수
+                val allItems = proChapterItemRepo.findByChapterIdOrderByItemOrderAsc(ch.id)
+                val totalItems = allItems.size
+
+                // 완료 아이템 수
+                val chapterProgress = progressByChapter[ch.id] ?: emptyList()
+                val completedCount = chapterProgress.count { it.completed }
+                val progressPercent = if (totalItems > 0) (completedCount * 100 / totalItems) else 0
+
+                // 테스트 통과 여부
+                val passedSessions = proTestSessionRepo.findByUserIdAndChapterIdAndStatusIn(
+                    userId, ch.id, listOf("passed")
+                )
+                val isTestPassed = passedSessions.isNotEmpty()
+
+                // 테스트 정답률: 가장 최근 통과 세션 기준
+                val testAccuracy = if (passedSessions.isNotEmpty()) {
+                    val session = passedSessions.maxByOrNull { it.createdAt }!!
+                    val paper = testPaperRepo.findById(session.testId).orElse(null)
+                    if (session.score != null && paper != null && paper.totalPoints > 0) {
+                        round2(session.score!!.toDouble() / paper.totalPoints * 100)
+                    } else null
+                } else null
+
+                val status = when {
+                    isTestPassed -> "passed"
+                    completedCount > 0 -> "in_progress"
+                    else -> "not_started"
+                }
+
+                ReportProChapter(
+                    chapterId = ch.id,
+                    chapterNumber = ch.globalChapterNumber,
+                    title = ch.title,
+                    progressPercent = progressPercent,
+                    isTestPassed = isTestPassed,
+                    testAccuracy = testAccuracy,
+                    status = status
+                )
+            }
     }
 
     // 요약 생성
@@ -406,7 +463,8 @@ class UnifiedReportService(
             rejectedCells = rejectedCells,
             completionRate = completionRate,
             normalizedScore = normalizedScore,
-            items = items
+            items = items,
+            planIds = activePlanIds.toList()
         )
     }
 
@@ -585,9 +643,13 @@ class UnifiedReportService(
         } else emptyMap()
 
         for (item in farmMode.items) {
-            val domainArea = CompetencyMapping.domainAreaFor(item.contentType)
-            val subArea = subAreaMap[item.contentId]?.takeIf { it.isNotEmpty() }
-                ?: CompetencyMapping.contentTypeLabel(item.contentType)
+            val rawSubArea = subAreaMap[item.contentId]?.takeIf { it.isNotEmpty() }
+            val domainArea = if (rawSubArea != null) {
+                CompetencyMapping.areaForSubArea(rawSubArea) ?: CompetencyMapping.domainAreaFor(item.contentType)
+            } else {
+                CompetencyMapping.domainAreaFor(item.contentType)
+            }
+            val subArea = rawSubArea ?: CompetencyMapping.contentTypeLabel(item.contentType)
             val score = (item.accuracy ?: item.score ?: 0).toDouble()
 
             val acc = accMap.getOrPut(domainArea) { AreaAcc() }
@@ -665,14 +727,22 @@ class UnifiedReportService(
         )
     }
 
-    /** 캘린더 데이터: 모든 활동 소스에서 날짜별 집계 */
+    /** 캘린더 데이터: 모든 활동 소스에서 날짜별 집계 + 평균 정답률 */
     private fun buildCalendarData(userId: String, start: LocalDateTime, end: LocalDateTime): List<CalendarDay> {
         val dayMap = mutableMapOf<LocalDate, MutableMap<String, Int>>()
+        val dayScoreMap = mutableMapOf<LocalDate, MutableList<Double>>()
 
         // 테스트
         testSubmissionRepo.findByUserIdAndCreatedAtBetween(userId, start, end).forEach {
-            dayMap.getOrPut(it.createdAt.toLocalDate()) { mutableMapOf() }
+            val date = it.createdAt.toLocalDate()
+            dayMap.getOrPut(date) { mutableMapOf() }
                 .merge("테스트", 1) { a, b -> a + b }
+            val paper = testPaperRepo.findById(it.testId).orElse(null)
+            val totalQ = paper?.totalQuestions ?: 0
+            if (totalQ > 0) {
+                dayScoreMap.getOrPut(date) { mutableListOf() }
+                    .add(it.correctCount.toDouble() / totalQ * 100)
+            }
         }
 
         // 농장 학습
@@ -686,6 +756,9 @@ class UnifiedReportService(
             it.completedAt?.toLocalDate()?.let { date ->
                 dayMap.getOrPut(date) { mutableMapOf() }
                     .merge(label, 1) { a, b -> a + b }
+                it.accuracy?.let { acc ->
+                    dayScoreMap.getOrPut(date) { mutableListOf() }.add(acc.toDouble())
+                }
             }
         }
 
@@ -695,6 +768,9 @@ class UnifiedReportService(
                 it.submittedAt?.toLocalDate()?.let { date ->
                     dayMap.getOrPut(date) { mutableMapOf() }
                         .merge(label, 1) { a, b -> a + b }
+                    it.score?.let { sc ->
+                        dayScoreMap.getOrPut(date) { mutableListOf() }.add(sc.toDouble())
+                    }
                 }
             }
         }
@@ -704,14 +780,20 @@ class UnifiedReportService(
             it.completedAt?.toLocalDate()?.let { date ->
                 dayMap.getOrPut(date) { mutableMapOf() }
                     .merge("프로 모드", 1) { a, b -> a + b }
+                it.score?.let { sc ->
+                    dayScoreMap.getOrPut(date) { mutableListOf() }.add(sc.toDouble())
+                }
             }
         }
 
         return dayMap.entries.sortedBy { it.key }.map { (date, activities) ->
+            val scores = dayScoreMap[date]
+            val avgAccuracy = if (scores != null && scores.isNotEmpty()) round2(scores.average()) else null
             CalendarDay(
                 date = date.toString(),
                 totalCount = activities.values.sum(),
-                activities = activities.map { (label, count) -> CalendarActivity(label, count) }
+                activities = activities.map { (label, count) -> CalendarActivity(label, count) },
+                averageAccuracy = avgAccuracy
             )
         }
     }
