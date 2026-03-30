@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Radar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -11,19 +12,19 @@ import {
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
-export default function ReportRadarChart({ radarData, competencyRadarData }) {
-  if (!radarData && !competencyRadarData) return null;
-
-  const activeData = competencyRadarData || radarData;
-  const chartLabel = competencyRadarData ? "역량별 성취도" : "영역별 성취도";
-  const titleLabel = competencyRadarData ? "역량별 성취도" : "영역별 성취도";
+/**
+ * 10대 역량 레이더 차트 전용
+ * props: competencyRadarData ({ labels: string[], scores: number[] })
+ */
+export default function ReportRadarChart({ competencyRadarData }) {
+  if (!competencyRadarData) return null;
 
   const data = {
-    labels: activeData.labels,
+    labels: competencyRadarData.labels,
     datasets: [
       {
-        label: chartLabel,
-        data: activeData.scores,
+        label: "역량별 성취도",
+        data: competencyRadarData.scores,
         backgroundColor: "rgba(240, 108, 36, 0.2)",
         borderColor: "rgba(240, 108, 36, 0.8)",
         borderWidth: 2,
@@ -56,10 +57,47 @@ export default function ReportRadarChart({ radarData, competencyRadarData }) {
     },
   };
 
+  // 강점/약점 계산
+  const { strength, weakness } = useMemo(() => {
+    const labels = competencyRadarData.labels || [];
+    const scores = competencyRadarData.scores || [];
+    if (labels.length === 0) return { strength: null, weakness: null };
+
+    let maxIdx = 0;
+    let minIdx = -1;
+    let minScore = Infinity;
+
+    for (let i = 0; i < scores.length; i++) {
+      if (scores[i] > scores[maxIdx]) maxIdx = i;
+      // 약점: 0이 아닌 것 중 가장 낮은 점수
+      if (scores[i] > 0 && scores[i] < minScore) {
+        minScore = scores[i];
+        minIdx = i;
+      }
+    }
+
+    return {
+      strength: labels[maxIdx] ? { label: labels[maxIdx], score: scores[maxIdx] } : null,
+      weakness: minIdx >= 0 ? { label: labels[minIdx], score: scores[minIdx] } : null,
+    };
+  }, [competencyRadarData]);
+
   return (
     <div className="ur-radar-wrap">
-      <h3>{titleLabel}</h3>
+      <h3>역량별 성취도</h3>
       <Radar data={data} options={options} />
+      <div className="ur-strength-weak">
+        {strength && (
+          <span className="ur-strength">
+            강점: {strength.label} ({strength.score}%)
+          </span>
+        )}
+        {weakness && (
+          <span className="ur-weakness">
+            약점: {weakness.label} ({weakness.score}%)
+          </span>
+        )}
+      </div>
     </div>
   );
 }

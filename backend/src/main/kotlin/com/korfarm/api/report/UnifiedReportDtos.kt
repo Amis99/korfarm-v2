@@ -14,7 +14,8 @@ data class UnifiedReportResponse(
     val areaStats: List<AreaStats> = emptyList(),
     val competencyStats: List<CompetencyStats> = emptyList(),
     val competencyRadarData: RadarData? = null,
-    val recommendations: List<LearningRecommendation> = emptyList()
+    val recommendations: List<LearningRecommendation> = emptyList(),
+    val calendar: List<CalendarDay> = emptyList()
 )
 
 data class ReportPeriod(
@@ -60,7 +61,8 @@ data class ExamOmrItem(
     val correctCount: Int,
     val totalQuestions: Int,
     val accuracy: Double,
-    val submittedAt: String?
+    val submittedAt: String?,
+    val submissionId: String? = null
 )
 
 // 농장 모드 영역
@@ -70,7 +72,8 @@ data class FarmModeSection(
     val averageAccuracy: Double,
     val normalizedScore: Double,
     val totalEarnedSeed: Int,
-    val items: List<FarmModeItem>
+    val items: List<FarmModeItem>,
+    val modeSummary: List<FarmModeSummary> = emptyList()
 )
 
 data class FarmModeItem(
@@ -82,6 +85,11 @@ data class FarmModeItem(
     val accuracy: Int?,
     val earnedSeed: Int,
     val completedAt: String?
+)
+
+data class FarmModeSummary(
+    val modeLabel: String,
+    val count: Int
 )
 
 // 일일 퀴즈 / 일일 독해 공용
@@ -104,8 +112,7 @@ data class ProModeSection(
     val testCount: Int,
     val averageTestScore: Double,
     val normalizedScore: Double,
-    val items: List<ProModeItem>,
-    val competencyBreakdown: Map<String, CompetencyBreakdown>? = null
+    val items: List<ProModeItem>
 )
 
 data class ProModeItem(
@@ -118,7 +125,7 @@ data class ProModeItem(
     val createdAt: String?
 )
 
-// 역량별 누적 분석 (프로 모드 테스트 전체 합산)
+// 역량별 누적 분석 (프로 모드 테스트 전체 합산) — 하위호환용 유지
 data class CompetencyBreakdown(
     val correct: Int,
     val total: Int,
@@ -204,4 +211,16 @@ data class RecommendedItem(
     val contentType: String,
     val label: String,
     val path: String
+)
+
+// 캘린더 데이터
+data class CalendarDay(
+    val date: String,
+    val totalCount: Int,
+    val activities: List<CalendarActivity>
+)
+
+data class CalendarActivity(
+    val typeLabel: String,
+    val count: Int
 )

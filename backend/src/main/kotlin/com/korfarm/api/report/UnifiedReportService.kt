@@ -96,6 +96,9 @@ class UnifiedReportService(
 
         val summary = buildSummary(sections, competencyStats)
 
+        // 캘린더 데이터
+        val calendar = buildCalendarData(studentId, start, end)
+
         return UnifiedReportResponse(
             studentId = studentId,
             studentName = user.name ?: "",
@@ -107,7 +110,8 @@ class UnifiedReportService(
             areaStats = areaStats,
             competencyStats = competencyStats,
             competencyRadarData = competencyRadarData,
-            recommendations = recommendations
+            recommendations = recommendations,
+            calendar = calendar
         )
     }
 
@@ -143,7 +147,8 @@ class UnifiedReportService(
                 correctCount = sub.correctCount,
                 totalQuestions = totalQuestions,
                 accuracy = round2(accuracy),
-                submittedAt = sub.createdAt.format(dtFmt)
+                submittedAt = sub.createdAt.format(dtFmt),
+                submissionId = sub.id
             )
         }
 
@@ -162,9 +167,11 @@ class UnifiedReportService(
         )
     }
 
-    // 농장 모드 영역
+    // 농장 모드 영역 (순수 농장 콘텐츠만 — DAILY_QUIZ, DAILY_READING, PRO_* 제외)
     private fun buildFarmModeSection(userId: String, start: LocalDateTime, end: LocalDateTime): FarmModeSection {
-        val logs = farmLearningLogRepo.findByUserIdAndStatusAndCompletedAtBetween(userId, "COMPLETED", start, end)
+        val allLogs = farmLearningLogRepo.findByUserIdAndStatusAndCompletedAtBetween(userId, "COMPLETED", start, end)
+        // 순수 농장 모드만 필터링
+        val logs = allLogs.filter { it.contentType in CompetencyMapping.FARM_ONLY_TYPES }
         if (logs.isEmpty()) {
             return FarmModeSection(0, 0.0, 0.0, 0.0, 0, emptyList())
         }
@@ -194,13 +201,19 @@ class UnifiedReportService(
             round2(items.mapNotNull { it.score?.toDouble() }.average())
         } else avgAccuracy
 
+        // 모드별 수행 횟수 요약
+        val modeSummary = items.groupBy { it.contentTypeLabel ?: it.contentType }
+            .map { (label, group) -> FarmModeSummary(modeLabel = label, count = group.size) }
+            .sortedByDescending { it.count }
+
         return FarmModeSection(
             count = items.size,
             averageScore = avgScore,
             averageAccuracy = avgAccuracy,
             normalizedScore = avgAccuracy,
             totalEarnedSeed = items.sumOf { it.earnedSeed },
-            items = items
+            items = items,
+            modeSummary = modeSummary
         )
     }
 
@@ -284,16 +297,12 @@ class UnifiedReportService(
 
         val avgTestScore = if (testScores.isNotEmpty()) round2(testScores.average()) else 0.0
 
-        // 역량별 누적 분석: 각 세션의 competency_scores JSON을 합산
-        val competencyBreakdown = buildCompetencyBreakdown(testSessions.mapNotNull { it.competencyScores })
-
         return ProModeSection(
             completedItems = completedItems.size,
             testCount = testSessions.size,
             averageTestScore = avgTestScore,
             normalizedScore = avgTestScore,
-            items = proItems,
-            competencyBreakdown = competencyBreakdown
+            items = proItems
         )
     }
 
@@ -473,9 +482,9 @@ class UnifiedReportService(
         }
     }
 
-    /** 여러 테스트 세션의 역량별 점수 JSON을 합산하여 전체 breakdown 생성 */
-    private fun buildCompetencyBreakdown(jsonList: List<String>): Map<String, CompetencyBreakdown>? {
-        if (jsonList.isEmpty()) return null
+    /** 여러 테스트 세션의 역량별 점수 JSON을 합산하여 역량→(correct, total) 반환 */
+    private fun parseProTestCompetencyScores(jsonList: List<String>): Map<String, Pair<Int, Int>> {
+        if (jsonList.isEmpty()) return emptyMap()
 
         data class Acc(var correct: Int = 0, var total: Int = 0)
         val accMap = mutableMapOf<String, Acc>()
@@ -495,18 +504,10 @@ class UnifiedReportService(
             }
         }
 
-        if (accMap.isEmpty()) return null
-
-        return accMap.mapValues { (_, v) ->
-            CompetencyBreakdown(
-                correct = v.correct,
-                total = v.total,
-                accuracy = if (v.total > 0) round2(v.correct.toDouble() / v.total * 100) else 0.0
-            )
-        }
+        return accMap.mapValues { (_, v) -> v.correct to v.total }
     }
 
-    /** 역량별 통계 빌드: quiz_answer_details + 농장 모드 contentType 병합 */
+    /** 역량별 통계 빌드: 프로 테스트 세션 + quiz_answer_details + 농장 모드 contentType 병합 → 10대 역량 전체 출력 */
     private fun buildCompetencyStats(
         userId: String,
         start: LocalDateTime,
@@ -517,20 +518,34 @@ class UnifiedReportService(
 
         val accMap = mutableMapOf<String, Acc>()
 
-        // 1) quiz_answer_details에서 questionKind별 집계
+        // 1) 프로 테스트 세션의 competency_scores JSON 파싱 → 10대 역량 매핑
+        val testSessions = proTestSessionRepo.findByUserIdAndStatusInAndCreatedAtBetween(
+            userId, listOf("passed", "failed"), start, end
+        )
+        val proScores = parseProTestCompetencyScores(testSessions.mapNotNull { it.competencyScores })
+        for ((domain, pair) in proScores) {
+            // domain은 프로 테스트의 역량 키 — 10대 역량 라벨과 직접 매칭 시도
+            val competencyLabel = CompetencyMapping.TEN_COMPETENCIES.find { it == domain } ?: domain
+            val acc = accMap.getOrPut(competencyLabel) { Acc() }
+            acc.correct += pair.first
+            acc.total += pair.second
+            acc.sources.add("프로 테스트")
+        }
+
+        // 2) quiz_answer_details에서 questionKind별 집계 → 10대 역량 매핑
         val kindAggs = quizAnswerDetailRepo.aggregateByQuestionKind(userId, start, end)
         for (agg in kindAggs) {
-            val info = CompetencyMapping.fromQuestionKind(agg.questionKind) ?: continue
-            val acc = accMap.getOrPut(info.competencyLabel) { Acc() }
+            val competencyLabel = CompetencyMapping.competencyForQuestionKind(agg.questionKind) ?: continue
+            val acc = accMap.getOrPut(competencyLabel) { Acc() }
             acc.correct += agg.correctCount.toInt()
             acc.total += agg.totalCount.toInt()
             acc.sources.add("일일 퀴즈")
         }
 
-        // 2) 농장 모드 contentType 기반 역량 매핑
+        // 3) 농장 모드 contentType → 10대 역량 매핑
         for (item in farmMode.items) {
-            val info = CompetencyMapping.fromContentType(item.contentType) ?: continue
-            val acc = accMap.getOrPut(info.competencyLabel) { Acc() }
+            val competencyLabel = CompetencyMapping.competencyForContentType(item.contentType) ?: continue
+            val acc = accMap.getOrPut(competencyLabel) { Acc() }
             // accuracy를 100점 기준 1문항으로 환산
             val itemAccuracy = item.accuracy ?: item.score ?: continue
             acc.correct += itemAccuracy
@@ -538,22 +553,22 @@ class UnifiedReportService(
             acc.sources.add("농장 모드")
         }
 
-        if (accMap.isEmpty()) return emptyList()
-
-        return accMap.map { (label, acc) ->
-            val accuracy = if (acc.total > 0) round2(acc.correct.toDouble() / acc.total * 100) else 0.0
+        // 10대 역량 전체에 대해 결과 생성 (데이터 없는 역량도 0으로 포함)
+        return CompetencyMapping.TEN_COMPETENCIES.map { label ->
+            val acc = accMap[label]
+            val accuracy = if (acc != null && acc.total > 0) round2(acc.correct.toDouble() / acc.total * 100) else 0.0
             val grade = CompetencyMapping.gradeFor(accuracy)
             CompetencyStats(
                 competencyKey = label,
                 competencyLabel = label,
                 score = accuracy,
-                correct = acc.correct,
-                total = acc.total,
+                correct = acc?.correct ?: 0,
+                total = acc?.total ?: 0,
                 accuracy = accuracy,
-                sources = acc.sources.toList(),
+                sources = acc?.sources?.toList() ?: emptyList(),
                 grade = grade
             )
-        }.sortedByDescending { it.accuracy }
+        }
     }
 
     /** 영역별 통계 빌드: contentType → 비문학/문학/문법/기타 + subArea 세부분류 */
@@ -648,6 +663,57 @@ class UnifiedReportService(
                 items = items
             )
         )
+    }
+
+    /** 캘린더 데이터: 모든 활동 소스에서 날짜별 집계 */
+    private fun buildCalendarData(userId: String, start: LocalDateTime, end: LocalDateTime): List<CalendarDay> {
+        val dayMap = mutableMapOf<LocalDate, MutableMap<String, Int>>()
+
+        // 테스트
+        testSubmissionRepo.findByUserIdAndCreatedAtBetween(userId, start, end).forEach {
+            dayMap.getOrPut(it.createdAt.toLocalDate()) { mutableMapOf() }
+                .merge("테스트", 1) { a, b -> a + b }
+        }
+
+        // 농장 학습
+        farmLearningLogRepo.findByUserIdAndStatusAndCompletedAtBetween(userId, "COMPLETED", start, end).forEach {
+            val label = when {
+                it.contentType == "DAILY_QUIZ" -> "일일 퀴즈"
+                it.contentType == "DAILY_READING" -> "일일 독해"
+                it.contentType.startsWith("PRO_") -> "프로 모드"
+                else -> "농장 모드"
+            }
+            it.completedAt?.toLocalDate()?.let { date ->
+                dayMap.getOrPut(date) { mutableMapOf() }
+                    .merge(label, 1) { a, b -> a + b }
+            }
+        }
+
+        // 일일 퀴즈/독해 (learningAttemptRepo)
+        listOf("daily_quiz" to "일일 퀴즈", "daily_reading" to "일일 독해").forEach { (type, label) ->
+            learningAttemptRepo.findByUserIdAndActivityTypeAndSubmittedAtBetween(userId, type, start, end).forEach {
+                it.submittedAt?.toLocalDate()?.let { date ->
+                    dayMap.getOrPut(date) { mutableMapOf() }
+                        .merge(label, 1) { a, b -> a + b }
+                }
+            }
+        }
+
+        // 프로 모드
+        proProgressRepo.findByUserIdAndCompletedTrueAndCompletedAtBetween(userId, start, end).forEach {
+            it.completedAt?.toLocalDate()?.let { date ->
+                dayMap.getOrPut(date) { mutableMapOf() }
+                    .merge("프로 모드", 1) { a, b -> a + b }
+            }
+        }
+
+        return dayMap.entries.sortedBy { it.key }.map { (date, activities) ->
+            CalendarDay(
+                date = date.toString(),
+                totalCount = activities.values.sum(),
+                activities = activities.map { (label, count) -> CalendarActivity(label, count) }
+            )
+        }
     }
 
     private fun round2(value: Double): Double =

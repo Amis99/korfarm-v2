@@ -1,3 +1,7 @@
+/**
+ * 10대 역량 테이블
+ * 컬럼: 역량 | 정답률(바) | 등급 | 정답(correct/total)
+ */
 export default function ReportCompetencySection({ competencyStats }) {
   if (!competencyStats || competencyStats.length === 0) return null;
 

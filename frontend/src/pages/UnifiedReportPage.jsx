@@ -3,12 +3,11 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { apiGet as adminApiGet } from "../utils/adminApi";
-import ReportSummaryCards from "../components/report/ReportSummaryCards";
+import ReportCalendar from "../components/report/ReportCalendar";
 import ReportRadarChart from "../components/report/ReportRadarChart";
-import ReportTrendChart from "../components/report/ReportTrendChart";
-import ReportSectionDetail from "../components/report/ReportSectionDetail";
 import ReportCompetencySection from "../components/report/ReportCompetencySection";
 import ReportAreaSection from "../components/report/ReportAreaSection";
+import ReportSectionDetail from "../components/report/ReportSectionDetail";
 import ReportRecommendations from "../components/report/ReportRecommendations";
 import "../styles/unified-report.css";
 
@@ -69,13 +68,13 @@ export default function UnifiedReportPage() {
             뒤로
           </button>
           <h1>통합 학습 성적표</h1>
-        </div>
-        <div className="ur-header-actions">
           {report && (
-            <span className="ur-student-info">
-              {report.studentName} · Lv.{report.studentId?.slice(-2) || ""}
+            <span className="ur-student-info" style={{ marginLeft: 8 }}>
+              {report.studentName}
             </span>
           )}
+        </div>
+        <div className="ur-header-actions">
           <button className="ur-btn" onClick={() => window.print()}>
             <span className="material-symbols-outlined" style={{ fontSize: 16 }}>print</span>
             인쇄
@@ -83,6 +82,7 @@ export default function UnifiedReportPage() {
         </div>
       </div>
 
+      {/* 기간 선택 */}
       <div className="ur-date-bar">
         <label>기간</label>
         <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
@@ -100,16 +100,16 @@ export default function UnifiedReportPage() {
 
       {!loading && report && (
         <>
-          {/* 1. 종합 요약 */}
-          <ReportSummaryCards summary={report.summary} />
+          {/* 1. 학습 캘린더 */}
+          <ReportCalendar
+            calendar={report.calendar}
+            startDate={startDate}
+            endDate={endDate}
+          />
 
-          {/* 2. 역량 분석: 레이더 + 역량 테이블 */}
-          <div className="ur-charts-row">
-            <ReportRadarChart
-              radarData={report.radarData}
-              competencyRadarData={report.competencyRadarData}
-            />
-            <ReportTrendChart trend={report.trend} />
+          {/* 2. 역량 분석: 레이더 + 테이블 */}
+          <div className="ur-charts-row ur-charts-row--single">
+            <ReportRadarChart competencyRadarData={report.competencyRadarData} />
           </div>
 
           {report.competencyStats?.length > 0 && (
@@ -121,10 +121,10 @@ export default function UnifiedReportPage() {
             <ReportAreaSection areaStats={report.areaStats} />
           )}
 
-          {/* 4. 활동별 상세 */}
+          {/* 4~8. 활동별 상세 (테스트, 농장 모드, 일일 퀴즈, 일일 독해, 프로 모드, 학습 계획표) */}
           <ReportSectionDetail sections={report.sections} />
 
-          {/* 5. 추천 학습 */}
+          {/* 9. 추천 학습 */}
           {report.recommendations?.length > 0 && (
             <ReportRecommendations recommendations={report.recommendations} />
           )}

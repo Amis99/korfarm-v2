@@ -1,80 +1,51 @@
 package com.korfarm.api.report
 
-/** questionKind → 역량 라벨, contentType → 영역(비문학/문학/문법/기타) 매핑 */
 object CompetencyMapping {
 
-    data class CompetencyInfo(
-        val competencyLabel: String,
-        val areaKey: String,
-        val areaLabel: String
+    /** 10대 핵심 역량 */
+    val TEN_COMPETENCIES = listOf(
+        "어휘력", "문장 독해력", "구조 독해력", "논리 사고력", "어법·문법 능력",
+        "국어 개념 적용 능력", "국어 관련 배경지식", "비문학 배경지식",
+        "문제 분석 및 전략 수립 능력", "선택지 분석 및 전략 수립 능력"
     )
 
-    // questionKind → 역량 정보
-    private val questionKindMap = mapOf(
-        "WORD_TO_MEANING" to CompetencyInfo("어휘력", "vocab", "어휘"),
-        "READING_COMPREHENSION" to CompetencyInfo("독해력", "reading", "독해"),
-        "STRUCTURE_READING" to CompetencyInfo("구조 독해력", "reading", "독해"),
-        "GRAMMAR" to CompetencyInfo("어법·문법", "grammar", "문법"),
-        "SENTENCE_BUILDING" to CompetencyInfo("어법·문법", "grammar", "문법"),
-        "BACKGROUND_KNOWLEDGE" to CompetencyInfo("배경지식", "background", "배경지식"),
-        "INFERENCE" to CompetencyInfo("논리 사고력", "thinking", "사고력"),
-        "CRITICAL_THINKING" to CompetencyInfo("논리 사고력", "thinking", "사고력"),
-        "PROBLEM_SOLVING" to CompetencyInfo("문제 해결력", "thinking", "사고력"),
-        "CREATIVE_THINKING" to CompetencyInfo("문제 해결력", "thinking", "사고력")
-    )
-
-    // 농장 모드 contentType → 역량 정보
-    private val contentTypeMap = mapOf(
-        "VOCAB_BASIC" to CompetencyInfo("어휘력", "vocab", "어휘"),
-        "VOCAB_DICTIONARY" to CompetencyInfo("어휘력", "vocab", "어휘"),
-        "PRO_VOCAB" to CompetencyInfo("어휘력", "vocab", "어휘"),
-        "GRAMMAR_BASIC" to CompetencyInfo("어법·문법", "grammar", "문법"),
-        "GRAMMAR_ADVANCED" to CompetencyInfo("어법·문법", "grammar", "문법"),
-        "GRAMMAR_PRACTICE" to CompetencyInfo("어법·문법", "grammar", "문법"),
-        "GRAMMAR_REVIEW" to CompetencyInfo("어법·문법", "grammar", "문법"),
-        "READING_NONFICTION" to CompetencyInfo("독해력", "reading", "독해"),
-        "READING_LITERATURE" to CompetencyInfo("독해력", "reading", "독해"),
-        "PRO_READING" to CompetencyInfo("독해력", "reading", "독해"),
-        "DAILY_READING" to CompetencyInfo("독해력", "reading", "독해"),
-        "DAILY_QUIZ" to CompetencyInfo("어휘력", "vocab", "어휘"),
-        "BACKGROUND_KNOWLEDGE" to CompetencyInfo("배경지식", "background", "배경지식"),
-        "BACKGROUND_KNOWLEDGE_QUIZ" to CompetencyInfo("배경지식", "background", "배경지식"),
-        "PRO_BACKGROUND" to CompetencyInfo("배경지식", "background", "배경지식"),
-        "LANGUAGE_CONCEPT" to CompetencyInfo("어법·문법", "grammar", "문법"),
-        "LANGUAGE_CONCEPT_QUIZ" to CompetencyInfo("어법·문법", "grammar", "문법"),
-        "LOGIC_REASONING" to CompetencyInfo("논리 사고력", "thinking", "사고력"),
-        "LOGIC_REASONING_QUIZ" to CompetencyInfo("논리 사고력", "thinking", "사고력"),
-        "PRO_LOGIC" to CompetencyInfo("논리 사고력", "thinking", "사고력"),
-        "CHOICE_JUDGEMENT" to CompetencyInfo("논리 사고력", "thinking", "사고력"),
-        "WRITING_DESCRIPTIVE" to CompetencyInfo("문제 해결력", "thinking", "사고력"),
-        "CONTENT_PDF" to CompetencyInfo("독해력", "reading", "독해"),
-        "CONTENT_PDF_QUIZ" to CompetencyInfo("독해력", "reading", "독해"),
-        "PRO_ANSWER" to CompetencyInfo("독해력", "reading", "독해")
-    )
-
-    fun fromQuestionKind(kind: String): CompetencyInfo? = questionKindMap[kind]
-
-    fun fromContentType(contentType: String): CompetencyInfo? = contentTypeMap[contentType]
-
-    fun gradeFor(score: Double): String = when {
-        score >= 80 -> "A"
-        score >= 70 -> "B"
-        score >= 60 -> "C"
-        score >= 50 -> "D"
-        else -> "F"
+    /** questionKind → 10대 역량 매핑 */
+    fun competencyForQuestionKind(kind: String): String? = when (kind) {
+        "WORD_TO_MEANING" -> "어휘력"
+        "READING_COMPREHENSION" -> "문장 독해력"
+        "STRUCTURE_READING" -> "구조 독해력"
+        "GRAMMAR" -> "어법·문법 능력"
+        "SENTENCE_BUILDING" -> "국어 개념 적용 능력"
+        "BACKGROUND_KNOWLEDGE" -> "비문학 배경지식"
+        "INFERENCE" -> "논리 사고력"
+        "CRITICAL_THINKING" -> "문제 분석 및 전략 수립 능력"
+        "PROBLEM_SOLVING" -> "선택지 분석 및 전략 수립 능력"
+        "CREATIVE_THINKING" -> "논리 사고력"
+        else -> null
     }
 
-    /** contentType → 영역(도메인) 분류: 비문학/문학/문법/기타 */
+    /** contentType → 10대 역량 매핑 */
+    fun competencyForContentType(contentType: String): String? = when (contentType) {
+        "VOCAB_BASIC", "VOCAB_DICTIONARY", "PRO_VOCAB", "DAILY_QUIZ" -> "어휘력"
+        "GRAMMAR_BASIC", "GRAMMAR_ADVANCED", "GRAMMAR_PRACTICE", "GRAMMAR_REVIEW" -> "어법·문법 능력"
+        "READING_NONFICTION", "READING_LITERATURE", "PRO_READING", "DAILY_READING", "PRO_ANSWER" -> "문장 독해력"
+        "LANGUAGE_CONCEPT", "LANGUAGE_CONCEPT_QUIZ" -> "국어 개념 적용 능력"
+        "BACKGROUND_KNOWLEDGE", "BACKGROUND_KNOWLEDGE_QUIZ", "PRO_BACKGROUND" -> "비문학 배경지식"
+        "LOGIC_REASONING", "LOGIC_REASONING_QUIZ", "PRO_LOGIC" -> "논리 사고력"
+        "CHOICE_JUDGEMENT" -> "선택지 분석 및 전략 수립 능력"
+        "WRITING_DESCRIPTIVE" -> "문제 분석 및 전략 수립 능력"
+        "CONTENT_PDF", "CONTENT_PDF_QUIZ" -> "구조 독해력"
+        else -> null
+    }
+
+    /** contentType → 영역(도메인) 분류 */
     fun domainAreaFor(contentType: String): String = when (contentType) {
         "READING_NONFICTION", "BACKGROUND_KNOWLEDGE", "BACKGROUND_KNOWLEDGE_QUIZ",
         "CONTENT_PDF", "CONTENT_PDF_QUIZ", "PRO_BACKGROUND", "PRO_READING",
         "DAILY_READING" -> "비문학"
-
         "READING_LITERATURE" -> "문학"
-
         "GRAMMAR_BASIC", "GRAMMAR_ADVANCED", "GRAMMAR_PRACTICE", "GRAMMAR_REVIEW",
         "LANGUAGE_CONCEPT", "LANGUAGE_CONCEPT_QUIZ" -> "문법"
-
         else -> "기타"
     }
 
@@ -108,14 +79,36 @@ object CompetencyMapping {
         else -> contentType
     }
 
+    fun gradeFor(score: Double): String = when {
+        score >= 80 -> "A"
+        score >= 70 -> "B"
+        score >= 60 -> "C"
+        score >= 50 -> "D"
+        else -> "F"
+    }
+
     /** 역량별 추천 contentType 목록 */
     fun recommendedContentTypes(competencyLabel: String): List<String> = when (competencyLabel) {
         "어휘력" -> listOf("VOCAB_BASIC", "VOCAB_DICTIONARY")
-        "독해력", "구조 독해력" -> listOf("READING_NONFICTION", "READING_LITERATURE")
-        "어법·문법" -> listOf("GRAMMAR_BASIC", "GRAMMAR_PRACTICE")
-        "배경지식" -> listOf("BACKGROUND_KNOWLEDGE", "BACKGROUND_KNOWLEDGE_QUIZ")
+        "문장 독해력", "구조 독해력" -> listOf("READING_NONFICTION", "READING_LITERATURE")
+        "어법·문법 능력" -> listOf("GRAMMAR_BASIC", "GRAMMAR_PRACTICE")
+        "국어 개념 적용 능력" -> listOf("LANGUAGE_CONCEPT", "LANGUAGE_CONCEPT_QUIZ")
+        "국어 관련 배경지식", "비문학 배경지식" -> listOf("BACKGROUND_KNOWLEDGE", "BACKGROUND_KNOWLEDGE_QUIZ")
         "논리 사고력" -> listOf("LOGIC_REASONING", "CHOICE_JUDGEMENT")
-        "문제 해결력" -> listOf("LOGIC_REASONING", "WRITING_DESCRIPTIVE")
+        "문제 분석 및 전략 수립 능력" -> listOf("LOGIC_REASONING", "WRITING_DESCRIPTIVE")
+        "선택지 분석 및 전략 수립 능력" -> listOf("CHOICE_JUDGEMENT", "LOGIC_REASONING_QUIZ")
         else -> emptyList()
     }
+
+    /** 순수 농장 모드 contentType (일일학습/프로모드 제외) */
+    val FARM_ONLY_TYPES = setOf(
+        "VOCAB_BASIC", "VOCAB_DICTIONARY",
+        "GRAMMAR_BASIC", "GRAMMAR_ADVANCED", "GRAMMAR_PRACTICE", "GRAMMAR_REVIEW",
+        "READING_NONFICTION", "READING_LITERATURE",
+        "BACKGROUND_KNOWLEDGE", "BACKGROUND_KNOWLEDGE_QUIZ",
+        "LANGUAGE_CONCEPT", "LANGUAGE_CONCEPT_QUIZ",
+        "LOGIC_REASONING", "LOGIC_REASONING_QUIZ",
+        "CHOICE_JUDGEMENT", "WRITING_DESCRIPTIVE",
+        "CONTENT_PDF", "CONTENT_PDF_QUIZ"
+    )
 }
