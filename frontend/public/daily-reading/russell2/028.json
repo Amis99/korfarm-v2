@@ -3,29 +3,16 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 2) Day 28 문법 - 보어와 목적어의 구별 기준",
+  "title": "문장 성분의 종류와 구별 기준",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_2",
-  "schoolGradeRange": {
-    "min": 8,
-    "max": 9
-  },
+  "schoolGradeRange": { "min": 8, "max": 9 },
   "area": "READING",
   "subArea": "GRAMMAR",
-  "competencies": [
-    "READING"
-  ],
-  "tags": [
-    "daily"
-  ],
-  "access": {
-    "mode": "FREE"
-  },
-  "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
-    "multiplier": 1
-  },
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
   "timeLimitSec": 480,
   "assets": {},
   "payload": {
@@ -59,15 +46,435 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 53 }] },
+          "question": {
+            "prompt": "문장은 무엇이 서로 다르다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "각 부분이 맡는 역할이 다르다." },
+              { "id": "B", "text": "모든 부분이 같다." },
+              { "id": "C", "text": "뜻은 없고 소리만 있다." },
+              { "id": "D", "text": "문장 성분은 없다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 54, "end": 90 }] },
+          "question": {
+            "prompt": "문장 성분이란 무엇을 말하나요?",
+            "choices": [
+              { "id": "A", "text": "문장 안에서 역할에 따라 나눈 단위이다." },
+              { "id": "B", "text": "문장 밖에 있는 단위이다." },
+              { "id": "C", "text": "뜻과는 무관한 장식이다." },
+              { "id": "D", "text": "항상 같은 구실만 한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 91, "end": 137 }] },
+          "question": {
+            "prompt": "우리말에서는 문장 성분을 어떻게 크게 나누어 이해하나요?",
+            "choices": [
+              { "id": "A", "text": "주성분, 부속 성분, 독립 성분이다." },
+              { "id": "B", "text": "명사, 동사, 형용사이다." },
+              { "id": "C", "text": "주어, 목적어, 보어만이다." },
+              { "id": "D", "text": "뜻과 소리로만 나눈다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 137 }] },
+          "question": {
+            "prompt": "첫 문단은 문장 성분을 어떻게 소개하나요?",
+            "choices": [
+              { "id": "A", "text": "문장 안의 역할과 큰 분류를 소개한다." },
+              { "id": "B", "text": "주성분만 소개한다." },
+              { "id": "C", "text": "부속 성분만 소개한다." },
+              { "id": "D", "text": "품사는 중요하지 않다고 말한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 53 }] },
+          "question": {
+            "prompt": "주성분은 어떤 줄기를 이루나요?",
+            "choices": [
+              { "id": "A", "text": "문장의 기본 줄기이다." },
+              { "id": "B", "text": "문장 밖의 장식이다." },
+              { "id": "C", "text": "말하는 이의 태도이다." },
+              { "id": "D", "text": "문장 성분이 아니다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 54, "end": 102 }] },
+          "question": {
+            "prompt": "학생이는 무엇으로, 책을은 무엇으로 예를 드나요?",
+            "choices": [
+              { "id": "A", "text": "학생이는 주어, 책을은 목적어이다." },
+              { "id": "B", "text": "학생이는 목적어, 책을은 주어이다." },
+              { "id": "C", "text": "둘 다 서술어이다." },
+              { "id": "D", "text": "둘 다 독립 성분이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 103, "end": 133 }] },
+          "question": {
+            "prompt": "이런 성분들이 있어야 무엇을 세울 수 있나요?",
+            "choices": [
+              { "id": "A", "text": "문장이 중심 뜻을 세울 수 있다." },
+              { "id": "B", "text": "문장이 멈춘다." },
+              { "id": "C", "text": "문장이 사라진다." },
+              { "id": "D", "text": "주어가 없어야 한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 133 }] },
+          "question": {
+            "prompt": "둘째 문단은 주성분을 어떻게 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "기본 줄기와 예시를 들어 설명한다." },
+              { "id": "B", "text": "꾸미는 성분이라고 설명한다." },
+              { "id": "C", "text": "말하는 태도라고 설명한다." },
+              { "id": "D", "text": "문장 밖 단위라고 설명한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 34 }] },
+          "question": {
+            "prompt": "부속 성분은 주성분을 어떻게 하나요?",
+            "choices": [
+              { "id": "A", "text": "꾸며 뜻을 더 자세하게 만든다." },
+              { "id": "B", "text": "없애 버린다." },
+              { "id": "C", "text": "항상 주어가 된다." },
+              { "id": "D", "text": "문장을 끝낸다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 35, "end": 73 }] },
+          "question": {
+            "prompt": "관형어와 부사어는 각각 무엇을 꾸미나요?",
+            "choices": [
+              { "id": "A", "text": "관형어는 체언을, 부사어는 용언이나 다른 성분을 꾸민다." },
+              { "id": "B", "text": "둘 다 주어만 꾸민다." },
+              { "id": "C", "text": "둘 다 독립 성분만 꾸민다." },
+              { "id": "D", "text": "둘 다 꾸미지 않는다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 74, "end": 109 }] },
+          "question": {
+            "prompt": "새와 천천히는 각각 무엇으로 제시되나요?",
+            "choices": [
+              { "id": "A", "text": "새는 관형어, 천천히는 부사어이다." },
+              { "id": "B", "text": "새는 부사어, 천천히는 관형어이다." },
+              { "id": "C", "text": "둘 다 주성분이다." },
+              { "id": "D", "text": "둘 다 독립 성분이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 109 }] },
+          "question": {
+            "prompt": "셋째 문단은 부속 성분을 어떻게 이해하게 하나요?",
+            "choices": [
+              { "id": "A", "text": "주성분을 꾸며 뜻을 자세하게 하는 성분으로 이해하게 한다." },
+              { "id": "B", "text": "문장의 중심을 세우는 성분으로 이해하게 한다." },
+              { "id": "C", "text": "말하는 태도만 나타내는 성분으로 이해하게 한다." },
+              { "id": "D", "text": "문장 밖에서만 쓰는 것으로 이해하게 한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 57 }] },
+          "question": {
+            "prompt": "독립 성분은 어떤 관계를 맺지 않나요?",
+            "choices": [
+              { "id": "A", "text": "다른 문장 성분과 직접적인 관계를 맺지 않는다." },
+              { "id": "B", "text": "주어와만 관계를 맺는다." },
+              { "id": "C", "text": "서술어와만 관계를 맺는다." },
+              { "id": "D", "text": "항상 꾸미는 역할만 한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 58, "end": 88 }] },
+          "question": {
+            "prompt": "영희야는 무엇으로 볼 수 있나요?",
+            "choices": [
+              { "id": "A", "text": "독립어이다." },
+              { "id": "B", "text": "목적어이다." },
+              { "id": "C", "text": "관형어이다." },
+              { "id": "D", "text": "서술어이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 89, "end": 147 }] },
+          "question": {
+            "prompt": "독립 성분은 문장에서 어떤 구실을 하나요?",
+            "choices": [
+              { "id": "A", "text": "상황과 관계를 드러내는 데 중요한 구실을 한다." },
+              { "id": "B", "text": "항상 중심 내용을 이룬다." },
+              { "id": "C", "text": "주성분과 같은 역할만 한다." },
+              { "id": "D", "text": "문장 구조와는 무관하다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 147 }] },
+          "question": {
+            "prompt": "넷째 문단은 독립 성분을 어떻게 설명하나요?",
+            "choices": [
+              { "id": "A", "text": "말하는 상황을 드러내는 성분으로 설명한다." },
+              { "id": "B", "text": "주성분의 중심 역할로 설명한다." },
+              { "id": "C", "text": "부속 성분의 꾸밈말로 설명한다." },
+              { "id": "D", "text": "문장 밖 단위라고 설명한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 55 }] },
+          "question": {
+            "prompt": "문장 성분을 구별할 때 무엇을 보면 도움이 되나요?",
+            "choices": [
+              { "id": "A", "text": "문장에서 어떤 질문에 답하는지 본다." },
+              { "id": "B", "text": "낱말 뜻만 본다." },
+              { "id": "C", "text": "문장 길이만 본다." },
+              { "id": "D", "text": "쉼표만 본다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 56, "end": 136 }] },
+          "question": {
+            "prompt": "중심 관계를 묻는 질문은 어떤 성분일 가능성이 크나요?",
+            "choices": [
+              { "id": "A", "text": "주성분일 가능성이 크다." },
+              { "id": "B", "text": "부속 성분일 가능성이 크다." },
+              { "id": "C", "text": "독립 성분일 가능성이 크다." },
+              { "id": "D", "text": "품사가 없을 가능성이 크다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 137, "end": 172 }] },
+          "question": {
+            "prompt": "정확하게 가르기 위해 무엇을 함께 보아야 하나요?",
+            "choices": [
+              { "id": "A", "text": "조사와 어미와 문맥을 함께 본다." },
+              { "id": "B", "text": "낱말 수만 본다." },
+              { "id": "C", "text": "문장 끝만 본다." },
+              { "id": "D", "text": "뜻만 먼저 외운다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 172 }] },
+          "question": {
+            "prompt": "다섯째 문단은 문장 성분을 어떤 기준으로 구별하라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "질문에 대한 답과 조사·어미·문맥을 함께 보라고 한다." },
+              { "id": "B", "text": "뜻만 보라고 한다." },
+              { "id": "C", "text": "소리만 보라고 한다." },
+              { "id": "D", "text": "아무 기준도 필요 없다고 한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 56 }] },
+          "question": {
+            "prompt": "문장 성분을 이해하는 일은 무엇으로 읽는 일인가요?",
+            "choices": [
+              { "id": "A", "text": "역할이 짜인 구조로 읽는 일이다." },
+              { "id": "B", "text": "낱말을 외우는 일이다." },
+              { "id": "C", "text": "소리만 맞히는 일이다." },
+              { "id": "D", "text": "문장을 무시하는 일이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 57, "end": 132 }] },
+          "question": {
+            "prompt": "어떤 성분들이 문장의 짜임을 분명하게 하나요?",
+            "choices": [
+              { "id": "A", "text": "중심을 세우고 꾸미고 태도를 보태는 성분들이다." },
+              { "id": "B", "text": "뜻만 같은 성분들이다." },
+              { "id": "C", "text": "조사만 붙는 성분들이다." },
+              { "id": "D", "text": "문장 밖에 있는 성분들이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 133, "end": 167 }] },
+          "question": {
+            "prompt": "문장 성분은 무엇과 함께 기본 축을 이루나요?",
+            "choices": [
+              { "id": "A", "text": "품사 구별과 함께 기본 축을 이룬다." },
+              { "id": "B", "text": "문장 부호와 함께 기본 축을 이룬다." },
+              { "id": "C", "text": "철자와 함께 기본 축을 이룬다." },
+              { "id": "D", "text": "소리와 함께 기본 축을 이룬다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 167 }] },
+          "question": {
+            "prompt": "마지막 문단은 문장 성분을 어떻게 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "문법 읽기의 기본 축으로 정리한다." },
+              { "id": "B", "text": "외워 둘 낱말 목록으로 정리한다." },
+              { "id": "C", "text": "뜻을 지우는 장치로 정리한다." },
+              { "id": "D", "text": "품사와는 무관하다고 정리한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        { "id": "c1", "text": "문장 성분은 역할에 따라 나눈 단위이다" },
+        { "id": "c2", "text": "주성분은 문장의 기본 줄기이다" },
+        { "id": "c3", "text": "부속 성분은 주성분을 꾸민다" },
+        { "id": "c4", "text": "독립 성분은 말하는 이의 태도를 드러낸다" },
+        { "id": "c5", "text": "질문에 대한 답을 보면 성분을 가를 수 있다" },
+        { "id": "c6", "text": "문장 성분은 문법 읽기의 기본 축이다" }
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "문장 성분의 큰 분류를 제시하고 주성분·부속 성분·독립 성분을 소개하는 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 0, "end": 137 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "주성분이 문장의 기본 줄기이며 학생이와 책을의 예를 통해 중심 뜻을 세운다고 설명한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 0, "end": 133 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "부속 성분이 주성분을 꾸미고 관형어와 부사어의 예를 제시하는 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 0, "end": 109 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "독립 성분이 다른 성분과 직접 관계를 맺지 않고 말하는 이의 태도나 부름을 나타낸다고 설명하는 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 0, "end": 147 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "문장에서 어떤 질문에 답하는지와 조사·어미·문맥을 함께 보아 문장 성분을 가르고 구조로 읽는 힘으로 이어진다고 설명한 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p5", "start": 0, "end": 172 },
+            { "paragraphId": "p6", "start": 0, "end": 167 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        }
+      ]
     }
   }
 }
