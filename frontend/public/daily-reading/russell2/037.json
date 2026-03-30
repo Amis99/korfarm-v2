@@ -3,71 +3,490 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 2) Day 37 문학 - 긍지의 날",
+  "title": "긍지의 날",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_2",
-  "schoolGradeRange": {
-    "min": 8,
-    "max": 9
-  },
+  "schoolGradeRange": { "min": 8, "max": 9 },
   "area": "READING",
   "subArea": "LITERATURE",
-  "competencies": [
-    "READING"
-  ],
-  "tags": [
-    "daily"
-  ],
-  "access": {
-    "mode": "FREE"
-  },
-  "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
-    "multiplier": 1
-  },
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
   "timeLimitSec": 480,
   "assets": {},
   "payload": {
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        {
-          "id": "p1",
-          "text": "너무나 잘 아는\n순환의 원리를 위하여\n나는 피로하였고\n또 나는\n영원히 피로할 것이기에"
-        },
-        {
-          "id": "p2",
-          "text": "구태여 옛날을 돌아보지 않아도\n설움과 아름다움을 대신하여 있는 나의 긍지\n오늘은 필경 긍지의 날인가 보다"
-        },
-        {
-          "id": "p3",
-          "text": "내가 살기 위하여\n몇개의 번개같은 환상이 필요하다 하더라도\n꿈은 교훈\n청춘 물 구름\n피로들이 몇배의 아름다움을 가하여 있을 때도"
-        },
-        {
-          "id": "p4",
-          "text": "나의 원천과 더불어\n나의 최종점은 긍지\n파도처럼 요동하여\n소리가 없고\n비처럼 퍼부어\n젖지 않는 것"
-        },
-        {
-          "id": "p5",
-          "text": "그리하여\n피로도 내가 만드는 것\n긍지도 내가 만드는 것\n그러할 때면은 나의 몸은 항상\n한치를 더 자라는 꽃이 아니더냐"
-        },
-        {
-          "id": "p6",
-          "text": "오늘은 필경 여러가지를 합한 긍지의 날인가 보다\n암만 불러도 싫지 않은 긍지의 날인가 보다\n모든 설움이 합쳐지고 모든것이 설움으로 돌아가는 긍지의 날인가 보다\n이것이 나의 날\n내가 자라는 날인가 보다\n- 김수영, 「긍지의 날」 -"
-        }
+        { "id": "p1", "text": "너무나 잘 아는\n순환의 원리를 위하여\n나는 피로하였고\n또 나는\n영원히 피로할 것이기에" },
+        { "id": "p2", "text": "구태여 옛날을 돌아보지 않아도\n설움과 아름다움을 대신하여 있는 나의 긍지\n오늘은 필경 긍지의 날인가 보다" },
+        { "id": "p3", "text": "내가 살기 위하여\n몇개의 번개같은 환상이 필요하다 하더라도\n꿈은 교훈\n청춘 물 구름\n피로들이 몇배의 아름다움을 가하여 있을 때도" },
+        { "id": "p4", "text": "나의 원천과 더불어\n나의 최종점은 긍지\n파도처럼 요동하여\n소리가 없고\n비처럼 퍼부어\n젖지 않는 것" },
+        { "id": "p5", "text": "그리하여\n피로도 내가 만드는 것\n긍지도 내가 만드는 것\n그러할 때면은 나의 몸은 항상\n한치를 더 자라는 꽃이 아니더냐" },
+        { "id": "p6", "text": "오늘은 필경 여러가지를 합한 긍지의 날인가 보다\n암만 불러도 싫지 않은 긍지의 날인가 보다\n모든 설움이 합쳐지고 모든것이 설움으로 돌아가는 긍지의 날인가 보다\n이것이 나의 날\n내가 자라는 날인가 보다\n- 김수영, 「긍지의 날」 -" }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 8 }] },
+          "question": {
+            "prompt": "화자는 무엇을 잘 아나요?",
+            "choices": [
+              { "id": "A", "text": "순환의 원리를 잘 안다." },
+              { "id": "B", "text": "긍지를 모른다." },
+              { "id": "C", "text": "기쁨만 안다." },
+              { "id": "D", "text": "아무 것도 모른다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 9, "end": 20 }] },
+          "question": {
+            "prompt": "화자는 무엇을 위하여 피로하였나요?",
+            "choices": [
+              { "id": "A", "text": "순환의 원리를 위하여 피로하였다." },
+              { "id": "B", "text": "휴식을 위하여 피로하였다." },
+              { "id": "C", "text": "돈을 위하여 피로하였다." },
+              { "id": "D", "text": "명예를 위하여 피로하였다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 21, "end": 29 }] },
+          "question": {
+            "prompt": "화자는 무엇을 하였다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "피로하였다." },
+              { "id": "B", "text": "웃었다." },
+              { "id": "C", "text": "멈췄다." },
+              { "id": "D", "text": "떠났다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 47 }] },
+          "question": {
+            "prompt": "화자는 어떤 상태를 드러내나요?",
+            "choices": [
+              { "id": "A", "text": "피로 속에서도 순환을 아는 상태다." },
+              { "id": "B", "text": "기쁨만 가득한 상태다." },
+              { "id": "C", "text": "아무 피로도 없는 상태다." },
+              { "id": "D", "text": "긍지가 사라진 상태다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 16 }] },
+          "question": {
+            "prompt": "화자는 옛날을 돌아보지 않아도 된다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "구태여 돌아보지 않아도 된다." },
+              { "id": "B", "text": "반드시 돌아봐야 한다." },
+              { "id": "C", "text": "잊어서는 안 된다." },
+              { "id": "D", "text": "기억할 수 없다고 한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 17, "end": 40 }] },
+          "question": {
+            "prompt": "화자는 어떤 긍지를 말하나요?",
+            "choices": [
+              { "id": "A", "text": "설움과 아름다움을 대신하는 긍지이다." },
+              { "id": "B", "text": "부와 명예를 대신하는 긍지이다." },
+              { "id": "C", "text": "아무것도 대신하지 않는 긍지이다." },
+              { "id": "D", "text": "슬픔만 남기는 긍지이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 41, "end": 58 }] },
+          "question": {
+            "prompt": "오늘은 어떤 날인가요?",
+            "choices": [
+              { "id": "A", "text": "긍지의 날이다." },
+              { "id": "B", "text": "불만의 날이다." },
+              { "id": "C", "text": "휴식의 날이다." },
+              { "id": "D", "text": "잊음의 날이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 58 }] },
+          "question": {
+            "prompt": "둘째 문단은 무엇을 말하나요?",
+            "choices": [
+              { "id": "A", "text": "오늘이 긍지의 날임을 말한다." },
+              { "id": "B", "text": "옛날만 중요하다고 말한다." },
+              { "id": "C", "text": "설움만 남는다고 말한다." },
+              { "id": "D", "text": "긍지를 부정한다고 말한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 9 }] },
+          "question": {
+            "prompt": "화자는 무엇을 위하여 산다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "살기 위하여 산다." },
+              { "id": "B", "text": "쉬기 위하여 산다." },
+              { "id": "C", "text": "잊기 위하여 산다." },
+              { "id": "D", "text": "멈추기 위하여 산다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 10, "end": 32 }] },
+          "question": {
+            "prompt": "화자에게 무엇이 필요하다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "번개같은 환상이 필요하다." },
+              { "id": "B", "text": "아무 환상도 필요 없다." },
+              { "id": "C", "text": "타인의 칭찬이 필요하다." },
+              { "id": "D", "text": "옛날만 필요하다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 33, "end": 71 }] },
+          "question": {
+            "prompt": "셋째 문단의 말들은 어떤 이미지를 보여 주나요?",
+            "choices": [
+              { "id": "A", "text": "꿈과 청춘과 구름 같은 이미지를 보여 준다." },
+              { "id": "B", "text": "기계와 숫자의 이미지를 보여 준다." },
+              { "id": "C", "text": "어둠만 보여 준다." },
+              { "id": "D", "text": "정지된 상태만 보여 준다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 71 }] },
+          "question": {
+            "prompt": "셋째 문단은 화자의 삶을 어떻게 비추나요?",
+            "choices": [
+              { "id": "A", "text": "환상과 꿈이 필요한 삶으로 비춘다." },
+              { "id": "B", "text": "아무 환상도 필요 없는 삶으로 비춘다." },
+              { "id": "C", "text": "긍지가 없는 삶으로 비춘다." },
+              { "id": "D", "text": "고요하기만 한 삶으로 비춘다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 10 }] },
+          "question": {
+            "prompt": "화자는 무엇과 더불어 말하나요?",
+            "choices": [
+              { "id": "A", "text": "나의 원천과 더불어 말한다." },
+              { "id": "B", "text": "나의 적과 더불어 말한다." },
+              { "id": "C", "text": "남의 뜻과 더불어 말한다." },
+              { "id": "D", "text": "아무것과도 더불어 말하지 않는다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 11, "end": 21 }] },
+          "question": {
+            "prompt": "화자의 최종점은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "긍지이다." },
+              { "id": "B", "text": "피로이다." },
+              { "id": "C", "text": "설움이다." },
+              { "id": "D", "text": "침묵이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 22, "end": 54 }] },
+          "question": {
+            "prompt": "긍지는 어떤 모습으로 이어지나요?",
+            "choices": [
+              { "id": "A", "text": "파도처럼 요동하고 소리 없이 비처럼 퍼부어 젖지 않는 모습이다." },
+              { "id": "B", "text": "아무 변화도 없는 모습이다." },
+              { "id": "C", "text": "멈춰 있는 모습이다." },
+              { "id": "D", "text": "사라지는 모습이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 54 }] },
+          "question": {
+            "prompt": "넷째 문단은 긍지를 어떻게 그리나요?",
+            "choices": [
+              { "id": "A", "text": "원천과 최종점이 되는 긍지를 그린다." },
+              { "id": "B", "text": "사라지는 감정으로 그린다." },
+              { "id": "C", "text": "남의 것을 빌린 것으로 그린다." },
+              { "id": "D", "text": "피로만 남는 것으로 그린다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 4 }] },
+          "question": {
+            "prompt": "화자는 어떤 말로 이어 가나요?",
+            "choices": [
+              { "id": "A", "text": "그리하여라고 이어 간다." },
+              { "id": "B", "text": "그런데라고 이어 간다." },
+              { "id": "C", "text": "하지만이라고 이어 간다." },
+              { "id": "D", "text": "그러므로만 반복한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 5, "end": 30 }] },
+          "question": {
+            "prompt": "피로와 긍도는 누구의 것인가요?",
+            "choices": [
+              { "id": "A", "text": "내가 만드는 것이다." },
+              { "id": "B", "text": "남이 주는 것이다." },
+              { "id": "C", "text": "우연히 생기는 것이다." },
+              { "id": "D", "text": "사라지는 것이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 31, "end": 65 }] },
+          "question": {
+            "prompt": "나의 몸은 무엇처럼 자라나요?",
+            "choices": [
+              { "id": "A", "text": "한치를 더 자라는 꽃이다." },
+              { "id": "B", "text": "시들어 가는 잎이다." },
+              { "id": "C", "text": "멈춰 있는 돌이다." },
+              { "id": "D", "text": "사라지는 그림자이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 65 }] },
+          "question": {
+            "prompt": "다섯째 문단은 화자의 몸과 긍지를 어떻게 보나요?",
+            "choices": [
+              { "id": "A", "text": "둘 다 내가 만들며 자라나는 것으로 본다." },
+              { "id": "B", "text": "둘 다 남이 주는 것으로 본다." },
+              { "id": "C", "text": "둘 다 변하지 않는 것으로 본다." },
+              { "id": "D", "text": "둘 다 아무 의미가 없다고 본다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 26 }] },
+          "question": {
+            "prompt": "오늘은 어떤 날인가요?",
+            "choices": [
+              { "id": "A", "text": "여러가지를 합한 긍지의 날이다." },
+              { "id": "B", "text": "잊어야 할 날이다." },
+              { "id": "C", "text": "멈춰야 할 날이다." },
+              { "id": "D", "text": "아무 의미 없는 날이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 27, "end": 50 }] },
+          "question": {
+            "prompt": "암만 불러도 어떻다고 하나요?",
+            "choices": [
+              { "id": "A", "text": "싫지 않은 긍지의 날이다." },
+              { "id": "B", "text": "부끄러운 날이다." },
+              { "id": "C", "text": "외면해야 할 날이다." },
+              { "id": "D", "text": "끝난 날이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 51, "end": 88 }] },
+          "question": {
+            "prompt": "모든 설움은 어떻게 돌아가나요?",
+            "choices": [
+              { "id": "A", "text": "긍지의 날에 돌아간다." },
+              { "id": "B", "text": "사라진다." },
+              { "id": "C", "text": "더 커진다." },
+              { "id": "D", "text": "멈춘다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 89, "end": 111 }] },
+          "question": {
+            "prompt": "이것은 누구의 날인가요?",
+            "choices": [
+              { "id": "A", "text": "나의 날이다." },
+              { "id": "B", "text": "남의 날이다." },
+              { "id": "C", "text": "아무의 날도 아니다." },
+              { "id": "D", "text": "잊힌 날이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s25",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 112, "end": 128 }] },
+          "question": {
+            "prompt": "화자는 오늘 무엇이 되는 날이라고 하나요?",
+            "choices": [
+              { "id": "A", "text": "내가 자라는 날이다." },
+              { "id": "B", "text": "내가 멈추는 날이다." },
+              { "id": "C", "text": "내가 사라지는 날이다." },
+              { "id": "D", "text": "내가 잊는 날이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s26",
+          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 128 }] },
+          "question": {
+            "prompt": "여섯째 문단은 오늘을 어떻게 정리하나요?",
+            "choices": [
+              { "id": "A", "text": "긍지와 성장의 날로 정리한다." },
+              { "id": "B", "text": "피로만 남는 날로 정리한다." },
+              { "id": "C", "text": "설움만 남는 날로 정리한다." },
+              { "id": "D", "text": "아무 변화 없는 날로 정리한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        { "id": "c1", "text": "순환의 원리를 위하여 피로하다" },
+        { "id": "c2", "text": "오늘은 긍지의 날이다" },
+        { "id": "c3", "text": "환상이 필요하다" },
+        { "id": "c4", "text": "긍지는 내가 만드는 것이다" },
+        { "id": "c5", "text": "몸은 한치를 더 자라는 꽃이다" },
+        { "id": "c6", "text": "오늘은 나의 날이다" }
+      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "피로와 순환의 원리를 말하며 화자의 상태를 드러내는 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 0, "end": 47 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "설움과 아름다움을 대신하는 긍지와 오늘이 긍지의 날임을 말하는 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 0, "end": 58 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "살기 위해 환상이 필요하고 꿈과 청춘과 구름 같은 이미지를 내세우는 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 0, "end": 71 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "원천과 최종점이 긍지이며 파도와 비의 이미지로 긍지를 설명하는 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 0, "end": 54 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "피로와 긍지를 내가 만들며 오늘이 나의 날이자 내가 자라는 날이라고 말하는 부분은 어디인가요?",
+          "answerRanges": [
+            { "paragraphId": "p5", "start": 0, "end": 65 },
+            { "paragraphId": "p6", "start": 0, "end": 128 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        }
+      ]
     }
   }
 }
