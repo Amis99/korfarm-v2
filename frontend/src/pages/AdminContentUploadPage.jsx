@@ -345,8 +345,14 @@ function AdminContentUploadPage() {
       for (let i = 0; i < batchFiles.length; i++) {
         const text = await batchFiles[i].file.text();
         const parsed = JSON.parse(text);
+        const ct = parsed.contentType || parsed.content_type;
+        if (!ct) {
+          setBatchError(`${batchFiles[i].name}: contentType 누락`);
+          setBatchLoading(false);
+          return;
+        }
         items.push({
-          contentType: parsed.contentType,
+          contentType: ct,
           levelId: parsed.levelId || undefined,
           area: parsed.area || undefined,
           subArea: parsed.subArea || undefined,
