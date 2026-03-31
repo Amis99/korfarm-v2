@@ -74,8 +74,8 @@ object CompetencyMapping {
         "PRO_VOCAB" -> "프로 어휘"
         "PRO_READING" -> "프로 독해"
         "PRO_BACKGROUND" -> "프로 배경지식"
-        "PRO_LOGIC" -> "프로 논리"
-        "PRO_ANSWER" -> "프로 서답형"
+        "PRO_LOGIC" -> "프로 논리사고력"
+        "PRO_ANSWER" -> "프로 모범답안/정답해설"
         else -> contentType
     }
 

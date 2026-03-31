@@ -32,68 +32,49 @@ const STATIC_CONTENTS = [
 
 const MODULE_GROUPS = [
   {
-    label: "일일 퀴즈",
+    label: "일일 학습",
     items: [
-      { value: "dailyQuiz:quiz:worksheet_quiz", label: "공통 퀴즈형" },
-    ],
-  },
-  {
-    label: "일일 독해",
-    items: [
-      { value: "dailyReading:training:reading_training", label: "독해 훈련 (정독→복기→확인)" },
+      { value: "dailyQuiz:quiz:worksheet_quiz", label: "일일 퀴즈", contentType: "DAILY_QUIZ" },
+      { value: "dailyReading:training:reading_training", label: "일일 독해", contentType: "DAILY_READING" },
     ],
   },
   {
     label: "농장 모드",
     items: [
-      { value: "farm:vocab:worksheet_quiz", label: "어휘 학습" },
-      { value: "farm:reading:reading_training", label: "독해 훈련" },
-      { value: "farm:story:reading_training", label: "이야기 농장" },
-      { value: "farm:classic:reading_training", label: "고전 농장" },
-      { value: "farm:content:reading_training", label: "내용 숙지 농장" },
-      { value: "farm:grammar_wf:word_formation", label: "문법 - 단어 형성" },
-      { value: "farm:grammar_ss:sentence_structure", label: "문법 - 문장 짜임" },
-      { value: "farm:grammar_pc:phoneme_change", label: "문법 - 음운 변동" },
-      { value: "farm:grammar_pos:worksheet_quiz", label: "문법 - 품사" },
-      { value: "farm:background:worksheet_quiz", label: "배경지식 학습" },
-      { value: "farm:concept:worksheet_quiz", label: "국어 개념 농장" },
-      { value: "farm:logic:logic_reasoning", label: "논리사고력 학습" },
-      { value: "farm:writing:worksheet_quiz", label: "서술형 농장" },
-      { value: "farm:choice:choice_judgement", label: "선택지 판별 농장" },
+      { value: "farm:vocab:worksheet_quiz", label: "어휘 학습", contentType: "VOCAB_BASIC" },
+      { value: "farm:reading:reading_training", label: "독해 훈련", contentType: "READING_NONFICTION" },
+      { value: "farm:story:reading_training", label: "이야기 농장", contentType: "READING_LITERATURE" },
+      { value: "farm:classic:reading_training", label: "고전 농장", contentType: "READING_LITERATURE" },
+      { value: "farm:content:reading_training", label: "내용 숙지 농장", contentType: "CONTENT_PDF_QUIZ" },
+      { value: "farm:grammar_wf:word_formation", label: "문법 - 단어 형성", contentType: "GRAMMAR_WORD_FORMATION" },
+      { value: "farm:grammar_ss:sentence_structure", label: "문법 - 문장 짜임", contentType: "GRAMMAR_SENTENCE_STRUCTURE" },
+      { value: "farm:grammar_pc:phoneme_change", label: "문법 - 음운 변동", contentType: "GRAMMAR_PHONEME_CHANGE" },
+      { value: "farm:grammar_pos:worksheet_quiz", label: "문법 - 품사", contentType: "GRAMMAR_POS" },
+      { value: "farm:background:worksheet_quiz", label: "배경지식 학습", contentType: "BACKGROUND_KNOWLEDGE_QUIZ" },
+      { value: "farm:concept:worksheet_quiz", label: "국어 개념 농장", contentType: "LANGUAGE_CONCEPT_QUIZ" },
+      { value: "farm:logic:logic_reasoning", label: "논리사고력 학습", contentType: "LOGIC_REASONING_QUIZ" },
+      { value: "farm:writing:worksheet_quiz", label: "서술형 농장", contentType: "WRITING_DESCRIPTIVE" },
+      { value: "farm:choice:choice_judgement", label: "선택지 판별 농장", contentType: "CHOICE_JUDGEMENT" },
     ],
   },
   {
     label: "프로 모드",
     items: [
-      { value: "pro:reading:reading_training", label: "프로 독해" },
-      { value: "pro:vocab:worksheet_quiz", label: "프로 어휘" },
-      { value: "pro:background:worksheet_quiz", label: "프로 배경지식" },
-      { value: "pro:logic:logic_reasoning", label: "프로 논리사고력" },
-      { value: "pro:answer:worksheet_quiz", label: "프로 모범답안/정답해설" },
+      { value: "pro:reading:reading_training", label: "프로 독해", contentType: "PRO_READING" },
+      { value: "pro:vocab:worksheet_quiz", label: "프로 어휘", contentType: "PRO_VOCAB" },
+      { value: "pro:background:worksheet_quiz", label: "프로 배경지식", contentType: "PRO_BACKGROUND" },
+      { value: "pro:logic:logic_reasoning", label: "프로 논리사고력", contentType: "PRO_LOGIC" },
+      { value: "pro:answer:worksheet_quiz", label: "프로 모범답안/정답해설", contentType: "PRO_ANSWER" },
     ],
   },
 ];
 
 const extractModuleKey = (v) => v.split(":").pop();
 
-/* 통합 양식 매핑: 독해/어휘/배경지식은 통합 템플릿으로 연결 */
-const TEMPLATE_ID_MAP = {
-  dailyReading_training: "reading_training",
-  farm_reading: "reading_training",
-  farm_story: "reading_training",
-  farm_classic: "reading_training",
-  pro_reading: "reading_training",
-  farm_vocab: "vocab_training",
-  pro_vocab: "vocab_training",
-  farm_background: "background_quiz",
-  pro_background: "background_quiz",
-  farm_logic: "pro_logic",
-};
-
+/* 드롭다운 value → 템플릿 ID: "group:subtype:moduleKey" → "group_subtype" */
 const extractTemplateId = (v) => {
   const parts = v.split(":");
-  const raw = `${parts[0]}_${parts[1]}`;
-  return TEMPLATE_ID_MAP[raw] || raw;
+  return `${parts[0]}_${parts[1]}`;
 };
 
 /* 내용 숙지 농장 모듈 값 */
@@ -253,10 +234,11 @@ function AdminContentUploadPage() {
     navigator.clipboard.writeText(jsonText).catch((e) => console.error(e));
   };
 
-  /* 표준 양식 다운로드 */
+  /* 표준 양식 다운로드 — contentType을 템플릿 정의 기준으로 오버라이드 */
   const handleDownloadTemplate = () => {
     if (!currentTemplate) return;
-    const json = JSON.stringify(currentTemplate.content, null, 2);
+    const data = { ...currentTemplate.content, contentType: currentTemplate.contentType };
+    const json = JSON.stringify(data, null, 2);
     const blob = new Blob([json], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
