@@ -21,7 +21,7 @@ import proAnswer from "./templates/pro_answer.json";
  */
 export const LEARNING_TEMPLATES = [
   // 일일 퀴즈
-  { id: "dailyQuiz_quiz", contentType: "DAILY_QUIZ", title: "일일 퀴즈", moduleKey: "worksheet_quiz", content: dailyQuizQuiz },
+  { id: "dailyQuiz_quiz", contentType: "DAILY_QUIZ", title: "일일 퀴즈", moduleKey: "daily_quiz", content: dailyQuizQuiz },
   // 일일 독해
   { id: "dailyReading_training", contentType: "DAILY_READING", title: "일일 독해", moduleKey: "reading_training", content: readingTraining },
   // 농장 모드

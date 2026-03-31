@@ -8,6 +8,7 @@ import ContentPdfModule from "./ContentPdfModule";
 import AnswerKeyModule from "./AnswerKeyModule";
 import BackgroundModule from "./BackgroundModule";
 import LogicModule from "./LogicModule";
+import DailyQuizModule from "./DailyQuizModule";
 
 export const MODULES = {
   worksheet_quiz: WorksheetQuizModule,
@@ -20,4 +21,5 @@ export const MODULES = {
   answer_key: AnswerKeyModule,
   background_knowledge: BackgroundModule,
   logic_reasoning: LogicModule,
+  daily_quiz: DailyQuizModule,
 };

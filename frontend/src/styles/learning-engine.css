@@ -2080,3 +2080,182 @@ mark.highlight {
     color: #ccc;
   }
 }
+
+/* ─── 일일 퀴즈 모듈 (DailyQuizModule) ─── */
+
+.daily-quiz-module {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+  padding: 12px 0;
+}
+
+/* 진행 바 */
+.dq-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dq-progress-bar {
+  height: 6px;
+  background: rgba(75, 61, 54, 0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.dq-progress-fill {
+  height: 100%;
+  background: var(--engine-orange);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.dq-progress-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(75, 61, 54, 0.7);
+}
+
+.dq-competency-tag {
+  background: rgba(255, 143, 43, 0.12);
+  color: #d85a16;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* 문제 번호 탭 */
+.dq-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.dq-tab {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(75, 61, 54, 0.06);
+  color: rgba(75, 61, 54, 0.5);
+}
+
+.dq-tab.active {
+  background: var(--engine-orange);
+  color: #fff;
+}
+
+.dq-tab.correct {
+  background: rgba(109, 164, 117, 0.2);
+  color: var(--engine-green);
+}
+
+.dq-tab.wrong {
+  background: rgba(216, 90, 22, 0.15);
+  color: #d85a16;
+}
+
+/* 문제 영역 */
+.dq-question-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+.dq-stem {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #4b3d36;
+  white-space: pre-wrap;
+}
+
+.dq-passage {
+  background: rgba(75, 61, 54, 0.04);
+  border: 1.5px solid rgba(75, 61, 54, 0.15);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.dq-explanation {
+  background: rgba(109, 164, 117, 0.08);
+  border: 1.5px solid rgba(109, 164, 117, 0.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #3d6b44;
+}
+
+/* TEXT_SELECT 전용 */
+.dq-text-select {
+  position: relative;
+}
+
+.dq-text-select-passage {
+  flex: 1;
+  background: transparent;
+  border: 2px solid rgba(75, 61, 54, 0.35);
+  border-radius: 12px;
+  padding: 16px;
+  overflow-y: auto;
+  line-height: 2;
+  font-size: 16px;
+}
+
+.dq-select-progress {
+  margin-left: 8px;
+  font-size: 13px;
+  color: var(--engine-orange);
+  font-weight: 700;
+}
+
+/* CHOICE_OX 전용 */
+.dq-choice-ox-body {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
+
+.dq-choice-ox-passage {
+  overflow-y: auto;
+  border: 1.5px solid rgba(75, 61, 54, 0.15);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.dq-prop-banner {
+  background: rgba(255, 143, 43, 0.06);
+  border: 1.5px solid rgba(255, 143, 43, 0.2);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.dq-prop-ox {
+  font-weight: 700;
+  color: var(--engine-orange);
+  margin-left: 6px;
+}
+
+.choice-item.done {
+  opacity: 0.5;
+  pointer-events: none;
+}

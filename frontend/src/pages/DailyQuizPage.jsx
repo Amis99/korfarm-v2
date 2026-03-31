@@ -28,10 +28,12 @@ function DailyQuizPage() {
     );
   }
 
+  const resolvedModuleKey = content?.payload?.moduleKey || "daily_quiz";
+
   return (
     <EngineShell
       content={content}
-      moduleKey="worksheet_quiz"
+      moduleKey={resolvedModuleKey}
       onExit={() => navigate("/start")}
       farmLogId={farmLogId}
     />
