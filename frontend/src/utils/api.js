@@ -122,6 +122,17 @@ export const apiPatch = async (path, body) => {
   return safeJson(response, "PATCH", path);
 };
 
+export const apiUploadFile = async (fileId, file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  const response = await fetch(buildUrl(`/v1/files/${fileId}/upload`), {
+    method: "POST",
+    headers: authHeaders(),
+    body: formData,
+  });
+  return safeJson(response, "POST", `/v1/files/${fileId}/upload`);
+};
+
 export const apiPut = async (path, body) => {
   const response = await fetch(buildUrl(path), {
     method: "PUT",

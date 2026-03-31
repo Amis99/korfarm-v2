@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { apiGet, apiPost, API_BASE, TOKEN_KEY } from "../utils/api";
+import { apiGet, apiPost, apiUploadFile, API_BASE, TOKEN_KEY } from "../utils/api";
 import "../styles/study-plan.css";
 
 export default function StudyPlanSubmitPage() {
@@ -44,7 +44,7 @@ export default function StudyPlanSubmitPage() {
     setSubmitting(true);
     setError(null);
     try {
-      // 1. 파일 업로드 (presign)
+      // 1. 파일 업로드 (presign → multipart upload)
       const fileIds = [];
       for (const file of pendingFiles) {
         const presign = await apiPost("/v1/files/presign", {
@@ -54,16 +54,10 @@ export default function StudyPlanSubmitPage() {
           size: file.size,
         });
         const fileId = presign?.fileId || presign?.data?.fileId;
-        const uploadUrl = presign?.uploadUrl || presign?.data?.uploadUrl;
-
-        if (uploadUrl && !uploadUrl.startsWith("local://")) {
-          await fetch(uploadUrl, {
-            method: "PUT",
-            headers: { "Content-Type": file.type || "image/jpeg" },
-            body: file,
-          });
+        if (fileId) {
+          await apiUploadFile(fileId, file);
+          fileIds.push(fileId);
         }
-        if (fileId) fileIds.push(fileId);
       }
 
       // 2. 셀 제출
@@ -75,6 +69,8 @@ export default function StudyPlanSubmitPage() {
       setSubmitting(false);
     }
   };
+
+  const isImage = (file) => file.type && file.type.startsWith("image/");
 
   return (
     <div className="sp-submit-page">
@@ -106,12 +102,12 @@ export default function StudyPlanSubmitPage() {
       >
         <span className="material-symbols-outlined">add_a_photo</span>
         <p>사진 촬영 또는 파일 선택</p>
-        <p style={{ fontSize: "0.75rem" }}>여러 장 첨부 가능</p>
+        <p style={{ fontSize: "0.75rem" }}>이미지/PDF 여러 장 첨부 가능</p>
       </div>
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/*"
+        accept="image/*,.pdf"
         capture="environment"
         multiple
         style={{ display: "none" }}
@@ -123,7 +119,17 @@ export default function StudyPlanSubmitPage() {
         <div className="sp-file-preview">
           {pendingFiles.map((f, i) => (
             <div key={i} style={{ position: "relative" }}>
-              <img className="sp-file-thumb" src={URL.createObjectURL(f)} alt={f.name} />
+              {isImage(f) ? (
+                <img className="sp-file-thumb" src={URL.createObjectURL(f)} alt={f.name} />
+              ) : (
+                <div className="sp-file-thumb" style={{
+                  display: "flex", flexDirection: "column", alignItems: "center",
+                  justifyContent: "center", background: "#f5f0eb", fontSize: "0.7rem", color: "#8a7468",
+                }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: 32 }}>picture_as_pdf</span>
+                  <span style={{ marginTop: 4, maxWidth: "100%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{f.name}</span>
+                </div>
+              )}
               <button
                 type="button"
                 onClick={() => removePending(i)}

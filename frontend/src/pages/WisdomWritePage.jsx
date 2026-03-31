@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useParams, useNavigate, useSearchParams } from "react-router-dom";
-import { apiPost, API_BASE, TOKEN_KEY } from "../utils/api";
+import { apiPost, apiUploadFile, API_BASE, TOKEN_KEY } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
 import "../styles/wisdom.css";
 
@@ -67,17 +67,15 @@ function WisdomWritePage() {
   };
 
   const presignAndUpload = async (file) => {
-    const token = sessionStorage.getItem(TOKEN_KEY);
-    const presignRes = await fetch(`${API_BASE}/v1/files/presign`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ purpose: "wisdom", filename: file.name, mime: file.type, size: file.size }),
+    const presign = await apiPost("/v1/files/presign", {
+      purpose: "wisdom",
+      filename: file.name,
+      mime: file.type,
+      size: file.size,
     });
-    const presignData = await presignRes.json();
-    const { fileId, uploadUrl } = presignData?.data ?? presignData;
-
-    if (uploadUrl && !uploadUrl.startsWith("local://")) {
-      await fetch(uploadUrl, { method: "PUT", headers: { "Content-Type": file.type }, body: file });
+    const fileId = presign?.fileId || presign?.data?.fileId;
+    if (fileId) {
+      await apiUploadFile(fileId, file);
     }
     return fileId;
   };

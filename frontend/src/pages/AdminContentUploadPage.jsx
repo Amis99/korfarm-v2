@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet, apiPost, apiPut } from "../utils/adminApi";
-import { API_BASE } from "../utils/api";
+import { API_BASE, apiUploadFile } from "../utils/api";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
 import { TYPE_LABEL, getLevelLabel, DAILY_LEVELS, levelToFolder } from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
@@ -198,11 +198,10 @@ function AdminContentUploadPage() {
         mime: "application/pdf",
         size: file.size,
       });
-      const { fileId, uploadUrl } = presign?.data ?? presign;
-      /* presign URL로 실제 파일 업로드 */
-      if (uploadUrl && !uploadUrl.startsWith("local://")) {
-        await fetch(uploadUrl, { method: "PUT", headers: { "Content-Type": "application/pdf" }, body: file });
-      }
+      // adminApi는 camelize 안 하므로 snake_case 키 사용
+      const fileId = presign?.file_id || presign?.fileId;
+      /* 실제 파일 업로드 (multipart) */
+      await apiUploadFile(fileId, file);
       /* JSON 내 pdfUrl 자동 갱신 */
       const newPdfUrl = `${API_BASE}/v1/files/${fileId}/download`;
       try {
