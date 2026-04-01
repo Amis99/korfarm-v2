@@ -24,3 +24,48 @@
 
 ## Git
 - git 작업 시: 의도하지 않은 파일의 커밋을 방지하기 위해 `git add .` 대신 항상 특정 파일 경로로 `git add`를 사용할 것. 사용자가 특정 파일 제외를 요청하면 선택적 스테이징을 사용할 것.
+
+## gstack 워크플로우
+
+### 사용 가능한 스킬
+- `/review` — 코드 리뷰 (커밋 전 자동 체크)
+- `/qa` — 브라우저 QA 테스트
+- `/ship` — PR 생성 + 테스트 + 버전 관리
+- `/plan-eng-review` — 아키텍처 리뷰
+- `/browse` — 웹 브라우저 자동화
+- `/canary` — 배포 후 모니터링
+- `/investigate` — 버그 조사
+- `/cso` — 보안 감시
+
+### 라우팅 규칙
+- 버그/에러 조사 → `/investigate`
+- 배포 요청 → 기존 scripts/deploy-*.sh 사용 (gstack /land-and-deploy 아님)
+- 코드 리뷰 요청 → `/review`
+- QA/테스트 요청 → `/qa`
+- 기능 계획 → `/plan-eng-review`
+- 웹 브라우징 → gstack `/browse` 사용
+
+### 프로젝트 특화 설정
+- 프론트엔드 빌드: `cd frontend && npm run build`
+- 백엔드 빌드: `cd backend && ./gradlew build`
+- 프론트엔드 배포: `CF_DISTRIBUTION_ID=E29A5UX2VDFB4I bash scripts/deploy-frontend.sh`
+- 백엔드 배포: `bash scripts/deploy-backend.sh`
+- 라이브 URL: CloudFront 배포 후 확인
+
+## Skill routing
+
+When the user's request matches an available skill, ALWAYS invoke it using the Skill
+tool as your FIRST action. Do NOT answer directly, do NOT use other tools first.
+The skill has specialized workflows that produce better results than ad-hoc answers.
+
+Key routing rules:
+- Product ideas, "is this worth building", brainstorming → invoke office-hours
+- Bugs, errors, "why is this broken", 500 errors → invoke investigate
+- Ship, deploy, push, create PR → invoke ship
+- QA, test the site, find bugs → invoke qa
+- Code review, check my diff → invoke review
+- Update docs after shipping → invoke document-release
+- Weekly retro → invoke retro
+- Design system, brand → invoke design-consultation
+- Visual audit, design polish → invoke design-review
+- Architecture review → invoke plan-eng-review
