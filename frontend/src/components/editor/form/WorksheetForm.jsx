@@ -67,18 +67,42 @@ export default function WorksheetForm({ editor, focusPath }) {
             />
           </div>
 
-          {/* 하이라이트 (선택) */}
-          {q.highlight && (
-            <div className="ce-form-section">
-              <label className="ce-form-label">하이라이트 텍스트</label>
+          {/* 하이라이트 (선택) — 지문 내 강조 단어 */}
+          <div className="ce-form-section">
+            <label className="ce-form-label">하이라이트 텍스트</label>
+            <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
               <input
                 className="ce-form-input"
-                value={q.highlight || ""}
-                onChange={(e) => updateField(`${path}.highlight`, e.target.value)}
+                style={{ flex: 1 }}
+                value={q.highlight?.text || ""}
+                onChange={(e) => {
+                  const val = e.target.value.trim();
+                  updateField(`${path}.highlight`, val ? { text: val } : null);
+                }}
+                placeholder="지문에서 강조할 단어 (비우면 하이라이트 없음)"
                 data-field-path={`${path}.highlight`}
               />
+              {q.passage && (
+                <button
+                  type="button"
+                  className="ce-btn ce-btn-secondary"
+                  style={{ fontSize: 11, whiteSpace: "nowrap" }}
+                  onClick={() => {
+                    const sel = window.getSelection();
+                    if (sel && !sel.isCollapsed) {
+                      const text = sel.toString().trim();
+                      if (text && q.passage.includes(text)) {
+                        updateField(`${path}.highlight`, { text });
+                        sel.removeAllRanges();
+                      }
+                    }
+                  }}
+                >
+                  드래그 적용
+                </button>
+              )}
             </div>
-          )}
+          </div>
 
           {/* 선택지 + 정답 */}
           <div className="ce-form-section">
