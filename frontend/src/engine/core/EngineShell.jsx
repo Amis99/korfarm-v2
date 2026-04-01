@@ -37,6 +37,7 @@ const CONTENT_TYPE_FARM_MAPPING = {
   GRAMMAR_SENTENCE_STRUCTURE: "grammar",
   GRAMMAR_PHONEME_CHANGE: "grammar",
   GRAMMAR_POS: "grammar",
+  MORPHEME_ANALYSIS: "grammar",
   READING_NONFICTION: "reading",
   READING_LITERATURE: "reading",
   CONTENT_PDF: "content",

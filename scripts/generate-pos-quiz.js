@@ -228,7 +228,6 @@ function createQuizJson(questions, idx, prefix, level) {
         prompt: "품사를 고르세요.",
         choices: q.choices,
         answerId: q.answerId,
-        requireCorrect: true,
         scoring: { correctDeltaSec: 20, wrongDeltaSec: -20 },
       })),
     },

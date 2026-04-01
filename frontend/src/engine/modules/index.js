@@ -9,6 +9,7 @@ import AnswerKeyModule from "./AnswerKeyModule";
 import BackgroundModule from "./BackgroundModule";
 import LogicModule from "./LogicModule";
 import DailyQuizModule from "./DailyQuizModule";
+import MorphemeAnalysisModule from "./MorphemeAnalysisModule";
 
 export const MODULES = {
   worksheet_quiz: WorksheetQuizModule,
@@ -22,4 +23,5 @@ export const MODULES = {
   background_knowledge: BackgroundModule,
   logic_reasoning: LogicModule,
   daily_quiz: DailyQuizModule,
+  morpheme_analysis: MorphemeAnalysisModule,
 };

@@ -28,6 +28,7 @@ const CONTENT_TYPE_TO_MODULE = {
   GRAMMAR_WORD_FORMATION: "word_formation",
   GRAMMAR_SENTENCE_STRUCTURE: "sentence_structure",
   GRAMMAR_POS: "worksheet_quiz",
+  MORPHEME_ANALYSIS: "morpheme_analysis",
   BACKGROUND_KNOWLEDGE: "worksheet_quiz",
   BACKGROUND_KNOWLEDGE_QUIZ: "worksheet_quiz",
   LANGUAGE_CONCEPT: "worksheet_quiz",
