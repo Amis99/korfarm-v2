@@ -342,32 +342,58 @@ function SentenceStructureModule({ content }) {
 
   const modal = getModal();
 
+  // ─── 렌더링 헬퍼: 테이블 방식으로 어절/레이블 줄 맞춤 ───
+  const renderSentenceTable = (bxs, labels, slashSet, isInteractive) => {
+    const cols = bxs.length;
+    return (
+      <table className="ss-table">
+        <tbody>
+          {/* 어절 행 */}
+          <tr>
+            {bxs.map((box, i) => {
+              const isActive = isInteractive && activeBoxId === box.id;
+              const isLabeled = isInteractive && !!roleLabels[box.id];
+              const isSelected = isInteractive && selectedRange.includes(box.id);
+              const isWrong = isInteractive && wrongBoxId === box.id;
+              return [
+                <td key={box.id} className="ss-td">
+                  <div
+                    className={`ss-box ${isActive ? "active" : ""} ${isLabeled ? "labeled" : ""} ${isSelected ? "selected" : ""} ${isWrong ? "wrong-shake" : ""} ${!isInteractive ? "done" : ""}`}
+                    onClick={isInteractive ? () => handleBoxClick(box.id) : undefined}
+                  >
+                    {box.text}
+                  </div>
+                </td>,
+                slashSet.has(box.id) ? <td key={`sl-${box.id}`} className="ss-td-slash">/</td> : null,
+              ];
+            })}
+          </tr>
+          {/* 레이블 행 */}
+          <tr>
+            {bxs.map((box, i) => [
+              <td key={`l-${box.id}`} className="ss-td">
+                <div className="ss-label-cell">{labels[box.id] || "\u00A0"}</div>
+              </td>,
+              slashSet.has(box.id) ? <td key={`lsl-${box.id}`} className="ss-td-slash"></td> : null,
+            ])}
+          </tr>
+        </tbody>
+      </table>
+    );
+  };
+
   // ─── 렌더링: 완료된 문장 ───
   const renderDone = (result, idx) => (
     <div key={`done-${idx}`} className="ss-sentence-block completed">
-      <div className="ss-grid">
-        <div className="ss-box-row">
-          {result.boxes.map(box => (
-            <div key={box.id} className="ss-box-wrapper">
-              <div className="ss-box done">{box.text}</div>
-              {result.slashes.includes(box.id) && <span className="ss-slash">/</span>}
-            </div>
-          ))}
+      {renderSentenceTable(result.boxes, result.roleLabels, new Set(result.slashes), false)}
+      {result.mergedRows.map((row, ri) => (
+        <div key={`mr-${ri}`} className="ss-merged-row">
+          <span className="ss-bracket">(</span>
+          <span className="ss-merged-label">{row.label}</span>
+          {row.clauseType && <span className="ss-clause-badge">{row.clauseType}</span>}
+          <span className="ss-bracket">)</span>
         </div>
-        <div className="ss-box-row">
-          {result.boxes.map(box => (
-            <div key={`l-${box.id}`} className="ss-box label-box">{result.roleLabels[box.id] || ""}</div>
-          ))}
-        </div>
-        {result.mergedRows.map((row, ri) => (
-          <div key={`mr-${ri}`} className="ss-merged-row">
-            <span className="ss-bracket">(</span>
-            <span className="ss-merged-label">{row.label}</span>
-            {row.clauseType && <span className="ss-clause-badge">{row.clauseType}</span>}
-            <span className="ss-bracket">)</span>
-          </div>
-        ))}
-      </div>
+      ))}
     </div>
   );
 
@@ -376,43 +402,15 @@ function SentenceStructureModule({ content }) {
     if (!sent) return null;
     return (
       <div className="ss-sentence-block current">
-        <div className="ss-grid">
-          <div className="ss-box-row">
-            {boxes.map(box => {
-              const isActive = activeBoxId === box.id;
-              const isLabeled = !!roleLabels[box.id];
-              const isSelected = selectedRange.includes(box.id);
-              const isWrong = wrongBoxId === box.id;
-              return (
-                <div key={box.id} className="ss-box-wrapper">
-                  <div
-                    className={`ss-box ${isActive ? "active" : ""} ${isLabeled ? "labeled" : ""} ${isSelected ? "selected" : ""} ${isWrong ? "wrong-shake" : ""}`}
-                    onClick={() => handleBoxClick(box.id)}
-                  >
-                    {box.text}
-                  </div>
-                  {slashes.includes(box.id) && <span className="ss-slash">/</span>}
-                </div>
-              );
-            })}
+        {renderSentenceTable(boxes, roleLabels, new Set(slashes), true)}
+        {mergedRows.map((row, ri) => (
+          <div key={`mr-${ri}`} className="ss-merged-row">
+            <span className="ss-bracket">(</span>
+            <span className="ss-merged-label">{row.label}</span>
+            {row.clauseType && <span className="ss-clause-badge">{row.clauseType}</span>}
+            <span className="ss-bracket">)</span>
           </div>
-          {/* 레이블 행 (박스 정렬) */}
-          <div className="ss-box-row">
-            {boxes.map(box => (
-              <div key={`l-${box.id}`} className="ss-box label-box">
-                {roleLabels[box.id] || ""}
-              </div>
-            ))}
-          </div>
-          {mergedRows.map((row, ri) => (
-            <div key={`mr-${ri}`} className="ss-merged-row">
-              <span className="ss-bracket">(</span>
-              <span className="ss-merged-label">{row.label}</span>
-              {row.clauseType && <span className="ss-clause-badge">{row.clauseType}</span>}
-              <span className="ss-bracket">)</span>
-            </div>
-          ))}
-        </div>
+        ))}
       </div>
     );
   };
