@@ -1,5 +1,5 @@
 import { useMemo, useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { FARM_MAP } from "../data/learning/learningCatalog";
@@ -120,14 +120,25 @@ function AdminContentPage() {
     CONTENTS,
     mapContentList
   );
-  const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [typeFilter, setTypeFilter] = useState("all");
+  /* 필터/페이지를 URL 쿼리 파라미터에 보존 */
+  const [params, setParams] = useSearchParams();
+  const search = params.get("q") || "";
+  const statusFilter = params.get("status") || "all";
+  const typeFilter = params.get("type") || "all";
+  const currentPage = Number(params.get("page")) || 1;
+  const updateParams = (updates) => {
+    setParams((prev) => {
+      const next = new URLSearchParams(prev);
+      Object.entries(updates).forEach(([k, v]) => {
+        if (!v || v === "all" || (k === "page" && v <= 1)) next.delete(k);
+        else next.set(k, v);
+      });
+      return next;
+    }, { replace: true });
+  };
   /* 서버 콘텐츠 미리보기 상태 */
   const [previewLoadingId, setPreviewLoadingId] = useState(null);
   const [serverPreviewError, setServerPreviewError] = useState("");
-  /* 페이지네이션 */
-  const [currentPage, setCurrentPage] = useState(1);
   /* 표준 양식 드롭다운 */
   const [showTemplatePanel, setShowTemplatePanel] = useState(false);
   const templatePanelRef = useRef(null);
@@ -186,9 +197,9 @@ function AdminContentPage() {
   const pagedContents = filteredContents.slice((safePage - 1) * PER_PAGE, safePage * PER_PAGE);
 
   /* 필터 변경 시 1페이지 리셋 */
-  const handleStatusFilter = (f) => { setStatusFilter(f); setCurrentPage(1); };
-  const handleTypeFilter = (e) => { setTypeFilter(e.target.value); setCurrentPage(1); };
-  const handleSearchChange = (e) => { setSearch(e.target.value); setCurrentPage(1); };
+  const handleStatusFilter = (f) => updateParams({ status: f, page: "" });
+  const handleTypeFilter = (e) => updateParams({ type: e.target.value, page: "" });
+  const handleSearchChange = (e) => updateParams({ q: e.target.value, page: "" });
 
   /* 콘텐츠 미리보기 (DB → API, static → 정적 파일) */
   const handleServerPreview = async (content) => {
@@ -408,8 +419,8 @@ function AdminContentPage() {
           {/* 페이지네이션 (윈도우 방식) */}
           {totalPages > 1 ? (
             <div className="admin-pagination">
-              <button disabled={safePage <= 1} onClick={() => setCurrentPage(1)} title="처음">&laquo;</button>
-              <button disabled={safePage <= 1} onClick={() => setCurrentPage((p) => p - 1)} title="이전">&lsaquo;</button>
+              <button disabled={safePage <= 1} onClick={() => updateParams({ page: "" })} title="처음">&laquo;</button>
+              <button disabled={safePage <= 1} onClick={() => updateParams({ page: safePage - 1 })} title="이전">&lsaquo;</button>
               {(() => {
                 const winStart = Math.max(1, safePage - 4);
                 const winEnd = Math.min(totalPages, winStart + 9);
@@ -418,14 +429,14 @@ function AdminContentPage() {
                   <button
                     key={p}
                     className={p === safePage ? "active" : ""}
-                    onClick={() => setCurrentPage(p)}
+                    onClick={() => updateParams({ page: p })}
                   >
                     {p}
                   </button>
                 ));
               })()}
-              <button disabled={safePage >= totalPages} onClick={() => setCurrentPage((p) => p + 1)} title="다음">&rsaquo;</button>
-              <button disabled={safePage >= totalPages} onClick={() => setCurrentPage(totalPages)} title="마지막">&raquo;</button>
+              <button disabled={safePage >= totalPages} onClick={() => updateParams({ page: safePage + 1 })} title="다음">&rsaquo;</button>
+              <button disabled={safePage >= totalPages} onClick={() => updateParams({ page: totalPages })} title="마지막">&raquo;</button>
             </div>
           ) : null}
         </div>
