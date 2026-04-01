@@ -33,7 +33,6 @@ const FARM_SEED_MAPPING = {
 // contentType → farmId 매핑
 const CONTENT_TYPE_FARM_MAPPING = {
   VOCAB_BASIC: "vocab",
-  VOCAB_DICTIONARY: "vocab",
   GRAMMAR_WORD_FORMATION: "grammar",
   GRAMMAR_SENTENCE_STRUCTURE: "grammar",
   GRAMMAR_PHONEME_CHANGE: "grammar",

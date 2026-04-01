@@ -64,7 +64,6 @@ export const SUB_AREA_LABELS = {
 /* ── 농장 모드 정적 콘텐츠 카탈로그 (관리자 콘텐츠 목록에서 사용) ── */
 export const LEARNING_CATALOG = [
   { id: "vocab-basic-word", title: "어휘 기본 학습 01", contentType: "VOCAB_BASIC", targetLevel: "RUSSELL_1", contentId: "b0e8b260-d386-4ad4-a2e6-b062ff545f4f", moduleKey: "worksheet_quiz", jsonPath: "/farm/vocab/vocab_basic_word_to_meaning.json" },
-  { id: "vocab-dictionary-fill", title: "사전 학습 01", contentType: "VOCAB_DICTIONARY", targetLevel: "RUSSELL_1", contentId: "6f7c8f58-3d6e-4f42-9b56-8ce4c8b1a91d", moduleKey: "worksheet_quiz", jsonPath: "/farm/vocab/vocab_dictionary_fill.json" },
   { id: "reading-training", title: "비문학 독해 훈련", contentType: "READING_NONFICTION", targetLevel: "FREGE_1", contentId: "sample-reading-nonfiction-training", moduleKey: "reading_training", jsonPath: "/farm/reading/reading_nonfiction_training.json" },
   { id: "reading-literature-training", title: "문학 독해 훈련", contentType: "READING_LITERATURE", targetLevel: "FREGE_1", contentId: "sample-reading-literature-training", moduleKey: "reading_training", jsonPath: "/farm/reading/reading_literature_training.json" },
   { id: "content-pdf-quiz", title: "내용 숙지 학습 01", contentType: "CONTENT_PDF_QUIZ", targetLevel: "RUSSELL_1", contentId: "70eeb8fa-9163-4075-bbb3-2f1625a96f46", moduleKey: "content_pdf", jsonPath: "/farm/content/content_pdf_quiz.json" },
@@ -75,7 +74,6 @@ export const LEARNING_CATALOG = [
     const nn = String(i + 1).padStart(2, "0");
     return { id: `grammar-phoneme-change-${nn}`, title: `음운 변동 분석 ${nn}`, contentType: "GRAMMAR_PHONEME_CHANGE", targetLevel: "RUSSELL_1", contentId: `phoneme-change-${nn}`, moduleKey: "phoneme_change", jsonPath: `/farm/grammar/grammar_phoneme_change_${nn}.json` };
   }),
-  { id: "grammar-pos-quiz", title: "품사 연습 01", contentType: "GRAMMAR_POS", targetLevel: "RUSSELL_1", contentId: "3473ee97-34ce-47e4-8a52-8fc889971e57", moduleKey: "worksheet_quiz", jsonPath: "/farm/grammar/grammar_pos_quiz.json" },
   { id: "background-knowledge", title: "배경지식 퀴즈 01", contentType: "BACKGROUND_KNOWLEDGE_QUIZ", targetLevel: "RUSSELL_1", contentId: "cc43b636-28fe-4751-9f5c-85c5baeefa78", moduleKey: "worksheet_quiz", jsonPath: "/farm/background/background_knowledge_quiz.json" },
   { id: "language-concept", title: "국어 개념 퀴즈 01", contentType: "LANGUAGE_CONCEPT_QUIZ", targetLevel: "RUSSELL_1", contentId: "4f10135c-b92c-4dce-95ae-f92c0be78819", moduleKey: "worksheet_quiz", jsonPath: "/farm/concept/language_concept_quiz.json" },
   { id: "logic-reasoning", title: "논리사고력 01", contentType: "LOGIC_REASONING_QUIZ", targetLevel: "RUSSELL_1", contentId: "28a3fdc1-6a3e-4725-ab49-4050548e9760", moduleKey: "worksheet_quiz", jsonPath: "/farm/logic/logic_reasoning_quiz.json" },

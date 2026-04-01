@@ -41,7 +41,6 @@ const TYPE_LABEL = {
   READING_TRAINING: "독해 훈련",
   DAILY_READING: "독해 훈련",
   VOCAB_BASIC: "어휘 학습",
-  VOCAB_DICTIONARY: "어휘 학습 (사전)",
   BACKGROUND_KNOWLEDGE_QUIZ: "배경지식 퀴즈",
 };
 

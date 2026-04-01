@@ -19,7 +19,6 @@ const PER_PAGE = 20;
 /* contentType → EngineShell moduleKey 변환 */
 const CONTENT_TYPE_TO_MODULE = {
   VOCAB_BASIC: "worksheet_quiz",
-  VOCAB_DICTIONARY: "worksheet_quiz",
   READING_NONFICTION: "reading_training",
   READING_LITERATURE: "reading_training",
   CONTENT_PDF: "content_pdf",
