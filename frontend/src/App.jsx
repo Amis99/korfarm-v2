@@ -7,6 +7,7 @@ import { useAuth } from "./hooks/useAuth";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import StartPage from "./pages/StartPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 // 나머지 페이지 (lazy import - 코드 분할)
 const SignupPage = lazy(() => import("./pages/SignupPage"));
@@ -188,6 +189,7 @@ function App() {
           <Route path="/diagnostic-info" element={<DiagnosticInfoPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/features" element={<Navigate to="/about" replace />} />
+          <Route path="/register" element={<Navigate to="/signup" replace />} />
           <Route path="/pricing" element={<PricingDetailPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
@@ -291,7 +293,7 @@ function App() {
           <Route path="/admin/duel/questions" element={<Navigate to="/admin/duel?tab=questions" replace />} />
           <Route path="/ops" element={A(<OpsStation />)} />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

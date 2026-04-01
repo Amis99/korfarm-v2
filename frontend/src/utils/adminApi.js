@@ -1,5 +1,14 @@
 import { API_BASE, TOKEN_KEY } from "./api";
 
+// 최상위 키만 snake_case로 변환 (content 등 내부 payload는 그대로 유지)
+const camelToSnake = (s) => s.replace(/[A-Z]/g, (c) => `_${c.toLowerCase()}`);
+const snakeizeTop = (obj) => {
+  if (!obj || typeof obj !== "object" || Array.isArray(obj)) return obj;
+  return Object.fromEntries(
+    Object.entries(obj).map(([k, v]) => [camelToSnake(k), v])
+  );
+};
+
 const buildUrl = (path) => {
   const base = API_BASE.replace(/\/$/, "");
   return path.startsWith("http") ? path : `${base}${path}`;
@@ -48,7 +57,7 @@ export const apiPost = async (path, body) => {
       Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
-    body: body ? JSON.stringify(body) : "{}",
+    body: body ? JSON.stringify(snakeizeTop(body)) : "{}",
   });
   return safeJson(response, "POST", path);
 };
@@ -60,7 +69,7 @@ export const apiPut = async (path, body) => {
       Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
-    body: body ? JSON.stringify(body) : "{}",
+    body: body ? JSON.stringify(snakeizeTop(body)) : "{}",
   });
   return safeJson(response, "PUT", path);
 };
@@ -72,7 +81,7 @@ export const apiPatch = async (path, body) => {
       Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
-    body: body ? JSON.stringify(body) : "{}",
+    body: body ? JSON.stringify(snakeizeTop(body)) : "{}",
   });
   return safeJson(response, "PATCH", path);
 };
