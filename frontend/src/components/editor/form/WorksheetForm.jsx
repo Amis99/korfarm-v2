@@ -77,7 +77,7 @@ export default function WorksheetForm({ editor, focusPath }) {
                 value={q.highlight?.text || ""}
                 onChange={(e) => {
                   const val = e.target.value.trim();
-                  updateField(`${path}.highlight`, val ? { text: val } : null);
+                  updateField(`${path}.highlight`, val ? { text: val } : undefined);
                 }}
                 placeholder="지문에서 강조할 단어 (비우면 하이라이트 없음)"
                 data-field-path={`${path}.highlight`}
