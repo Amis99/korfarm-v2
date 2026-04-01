@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 
@@ -163,7 +163,7 @@ function MorphemeAnalysisModule({ content }) {
     "파생 접두사", "파생 접미사", "어근",
   ];
 
-  const makeNameChoices = () => {
+  const nameChoices = useMemo(() => {
     const morph = morphemes[morphIdx];
     if (!morph) return [];
     const correct = isAdvanced ? morph.nameDetail : morph.name;
@@ -171,7 +171,7 @@ function MorphemeAnalysisModule({ content }) {
     const distractors = shuffleArray(pool.filter((n) => n !== correct)).slice(0, 3);
     const all = shuffleArray([correct, ...distractors]);
     return all.map((t) => ({ id: t, text: t }));
-  };
+  }, [sentIdx, morphIdx, phase]);
 
   const TYPE_CHOICES = [
     { id: "실질 자립", text: "실질 자립" },
@@ -228,7 +228,7 @@ function MorphemeAnalysisModule({ content }) {
         return {
           title: `문장 ${sentIdx + 1} — 3단계`,
           prompt: `'${morphemes[morphIdx]?.form}'의 형태소 이름은?`,
-          choices: makeNameChoices(),
+          choices: nameChoices,
           onSelect: handleName,
           shuffleKey: `${sent.id}-name-${morphIdx}`,
         };

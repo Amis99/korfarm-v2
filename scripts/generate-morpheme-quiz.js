@@ -19,7 +19,8 @@ const BASIC_SENTENCES = [
       { form: "학교", name: "명사", nameDetail: "보통 명사", type: "실질 자립" },
       { form: "에", name: "조사", nameDetail: "부사격 조사", type: "형식 의존" },
       { form: "가-", name: "어간", nameDetail: "동사 어간", type: "실질 의존" },
-      { form: "-ㄴ다", name: "어미", nameDetail: "종결 어미", type: "형식 의존" },
+      { form: "-ㄴ-", name: "어미", nameDetail: "선어말 어미", type: "형식 의존" },
+      { form: "-다", name: "어미", nameDetail: "종결 어미", type: "형식 의존" },
     ],
   },
   {
@@ -63,7 +64,8 @@ const BASIC_SENTENCES = [
       { form: "밥", name: "명사", nameDetail: "보통 명사", type: "실질 자립" },
       { form: "을", name: "조사", nameDetail: "목적격 조사", type: "형식 의존" },
       { form: "먹-", name: "어간", nameDetail: "동사 어간", type: "실질 의존" },
-      { form: "-는다", name: "어미", nameDetail: "종결 어미", type: "형식 의존" },
+      { form: "-는-", name: "어미", nameDetail: "선어말 어미", type: "형식 의존" },
+      { form: "-다", name: "어미", nameDetail: "종결 어미", type: "형식 의존" },
     ],
   },
   {
@@ -110,7 +112,8 @@ const BASIC_SENTENCES = [
       { form: "세-", name: "어간", nameDetail: "형용사 어간", type: "실질 의존" },
       { form: "-게", name: "어미", nameDetail: "연결 어미", type: "형식 의존" },
       { form: "불-", name: "어간", nameDetail: "동사 어간", type: "실질 의존" },
-      { form: "-ㄴ다", name: "어미", nameDetail: "종결 어미", type: "형식 의존" },
+      { form: "-ㄴ-", name: "어미", nameDetail: "선어말 어미", type: "형식 의존" },
+      { form: "-다", name: "어미", nameDetail: "종결 어미", type: "형식 의존" },
     ],
   },
   {
@@ -286,7 +289,8 @@ const ADVANCED_SENTENCES = [
       { form: "을", name: "조사", nameDetail: "목적격 조사", type: "형식 의존" },
       { form: "알-", name: "어간", nameDetail: "동사 어간", type: "실질 의존" },
       { form: "-시-", name: "어미", nameDetail: "선어말 어미", type: "형식 의존" },
-      { form: "-ㄴ다", name: "어미", nameDetail: "종결 어미", type: "형식 의존" },
+      { form: "-ㄴ-", name: "어미", nameDetail: "선어말 어미", type: "형식 의존" },
+      { form: "-다", name: "어미", nameDetail: "종결 어미", type: "형식 의존" },
     ],
   },
   {
@@ -313,7 +317,8 @@ const ADVANCED_SENTENCES = [
       { form: "-면", name: "어미", nameDetail: "연결 어미", type: "형식 의존" },
       { form: "잘", name: "부사", nameDetail: "성분 부사", type: "실질 자립" },
       { form: "되-", name: "어간", nameDetail: "동사 어간", type: "실질 의존" },
-      { form: "-ㄴ다", name: "어미", nameDetail: "종결 어미", type: "형식 의존" },
+      { form: "-ㄴ-", name: "어미", nameDetail: "선어말 어미", type: "형식 의존" },
+      { form: "-다", name: "어미", nameDetail: "종결 어미", type: "형식 의존" },
     ],
   },
   {
