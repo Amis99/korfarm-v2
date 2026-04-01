@@ -16,9 +16,7 @@ const getScoring = (question) => {
 };
 
 // contentType별 기본 requireCorrect (JSON에 없을 때 적용)
-const DEFAULT_REQUIRE_CORRECT = {
-  GRAMMAR_POS: true,
-};
+const DEFAULT_REQUIRE_CORRECT = {};
 
 const renderTemplate = (template, blanks, filled, activeIndex) => {
   const parts = template.split("____");
@@ -467,7 +465,7 @@ function WorksheetQuizModule({ content }) {
                                 }}
                                 className={`worksheet-item ${isActive ? "active" : ""} ${
                                   status ? `done ${status}` : ""
-                                } ${isDictionary ? "dict" : ""}`}
+                                } ${isDictionary ? "dict" : ""} ${question.passage ? "has-passage" : ""}`}
                               >
                                 <span className="worksheet-item-number">
                                   {idx + 1}.
@@ -531,7 +529,7 @@ function WorksheetQuizModule({ content }) {
                                 }}
                                 className={`worksheet-item ${isActive ? "active" : ""} ${
                                   status ? `done ${status}` : ""
-                                } ${isDictionary ? "dict" : ""}`}
+                                } ${isDictionary ? "dict" : ""} ${question.passage ? "has-passage" : ""}`}
                               >
                                 <span className="worksheet-item-number">
                                   {idx + 1}.

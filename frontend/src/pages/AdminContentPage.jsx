@@ -235,7 +235,14 @@ function AdminContentPage() {
         const preview = await apiGet(`/v1/admin/content/${content.id}/preview`);
         const ct = preview.contentType || preview.content_type || "";
         const rawContent = preview.content || {};
-        previewData = { contentType: ct, payload: rawContent };
+        previewData = {
+          contentType: ct,
+          targetLevel: preview.levelId || preview.level_id || "",
+          area: preview.area || rawContent.area || "",
+          subArea: preview.subArea || preview.sub_area || rawContent.subArea || "",
+          title: preview.title || rawContent.title || "",
+          payload: rawContent,
+        };
         moduleKey = resolveModuleKey(ct, preview.moduleKey || preview.module_key);
       }
       localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
