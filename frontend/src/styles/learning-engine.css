@@ -1481,6 +1481,123 @@ mark.highlight {
   margin-top: 12px;
 }
 
+/* === 문장의 짜임 v2 === */
+.ss-instruction {
+  font-size: 13px;
+  color: #6b5b53;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  background: rgba(75, 61, 54, 0.05);
+  border-radius: 10px;
+}
+.ss-instruction-sub {
+  font-size: 11px;
+  color: #8a7a70;
+  display: block;
+  margin-top: 2px;
+}
+.ss-progress {
+  font-size: 13px;
+  font-weight: 600;
+  color: #5a4b44;
+  margin-bottom: 16px;
+}
+.ss-sentence-block {
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.ss-sentence-block.completed {
+  opacity: 0.7;
+  background: rgba(78, 138, 96, 0.05);
+}
+.ss-box-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+.ss-box-wrapper {
+  display: flex;
+  align-items: center;
+}
+.ss-box {
+  padding: 8px 14px;
+  border: 1.5px solid rgba(75, 61, 54, 0.3);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s;
+  background: #fff;
+}
+.ss-box.active {
+  background: var(--highlight-gradient, linear-gradient(135deg, rgba(255,200,100,0.4), rgba(255,160,60,0.3)));
+  border-color: #ff8f2b;
+  box-shadow: 0 0 10px rgba(255,160,60,0.2);
+}
+.ss-box.dragged {
+  background: rgba(77, 139, 204, 0.15);
+  border-color: #4d8bcc;
+}
+.ss-box.labeled {
+  border-color: rgba(78, 138, 96, 0.4);
+}
+.ss-box.done {
+  cursor: default;
+  background: rgba(75, 61, 54, 0.04);
+}
+.ss-slash {
+  font-size: 20px;
+  font-weight: 700;
+  color: #e07a5f;
+  margin: 0 2px;
+}
+.ss-label-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+.ss-label {
+  padding: 2px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #4e8a60;
+  text-align: center;
+  min-width: 40px;
+}
+.ss-merged-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  background: rgba(77, 139, 204, 0.06);
+  border-radius: 6px;
+  font-size: 12px;
+}
+.ss-bracket {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4d8bcc;
+}
+.ss-merged-label {
+  font-weight: 700;
+  color: #4d8bcc;
+}
+.ss-clause-badge {
+  padding: 2px 8px;
+  background: rgba(224, 122, 95, 0.12);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #e07a5f;
+}
+
 .token-chip.role-1 {
   border: 1px solid rgba(255, 143, 43, 0.5);
 }
