@@ -235,7 +235,7 @@ function AdminContentPage() {
         const preview = await apiGet(`/v1/admin/content/${content.id}/preview`);
         const ct = preview.contentType || preview.content_type || "";
         const rawContent = preview.content || {};
-        previewData = { ...rawContent, contentType: ct };
+        previewData = { contentType: ct, payload: rawContent };
         moduleKey = resolveModuleKey(ct, preview.moduleKey || preview.module_key);
       }
       localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
