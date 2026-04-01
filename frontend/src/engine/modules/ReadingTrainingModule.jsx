@@ -885,6 +885,7 @@ function ReadingTrainingModule({ content }) {
             })}
           </div>
           <div className="reading-confirm-question">
+            <div className="confirm-instruction">다음 질문의 답을 지문에서 찾아 클릭하세요.</div>
             <div className="confirm-header">
               <h3>{confirmQuestion?.prompt}</h3>
               <span>
