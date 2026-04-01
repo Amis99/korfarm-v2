@@ -1562,13 +1562,39 @@ mark.highlight {
   gap: 4px;
   margin-top: 4px;
 }
-.ss-label {
-  padding: 2px 14px;
+.ss-box.label-box {
+  padding: 4px 14px;
   font-size: 11px;
   font-weight: 700;
   color: #4e8a60;
   text-align: center;
-  min-width: 40px;
+  min-height: 24px;
+  background: rgba(78, 138, 96, 0.06);
+  border: 1px dashed rgba(78, 138, 96, 0.2);
+}
+.ss-box.selected {
+  background: rgba(77, 139, 204, 0.2);
+  border-color: #4d8bcc;
+}
+.ss-box.wrong-shake {
+  animation: phoneme-shake 0.5s ease;
+  border-color: #e04040;
+  background: rgba(224, 64, 64, 0.08);
+}
+.ss-hint {
+  padding: 8px 14px;
+  background: rgba(224, 122, 95, 0.12);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #c05040;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.ss-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 .ss-merged-row {
   display: flex;
