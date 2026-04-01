@@ -144,16 +144,19 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
 
   const getLearningTypeLabel = (contentType) => {
     if (!contentType) return "학습";
+    if (contentType.startsWith("PRO_")) return "프로 모드";
     if (contentType.startsWith("VOCAB")) return "어휘 학습";
-    if (contentType.startsWith("READING")) return "독해 연습";
+    if (contentType.startsWith("READING") || contentType.startsWith("DAILY_READING")) return "독해 연습";
     if (contentType.startsWith("CONTENT_PDF")) return "내용 숙지 학습";
+    if (contentType === "MORPHEME_ANALYSIS" || contentType === "GRAMMAR_WORD_FORMATION") return "형태소와 단어의 형성";
     if (contentType.startsWith("GRAMMAR")) return "문법 연습";
     if (contentType.startsWith("BACKGROUND")) return "배경지식 퀴즈";
     if (contentType.startsWith("LANGUAGE_CONCEPT")) return "국어 개념 및 이론 퀴즈";
     if (contentType.startsWith("LOGIC")) return "논리사고력";
     if (contentType.startsWith("WRITING")) return "서술형 연습";
     if (contentType.startsWith("CHOICE")) return "선택지 판별 연습";
-    return contentType;
+    if (contentType.startsWith("DAILY_QUIZ")) return "일일 퀴즈";
+    return "학습";
   };
 
   const getLevelLabel = (level) => {
@@ -203,6 +206,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       BASIC: "기본",
       POS: "품사",
       WORD_FORMATION: "단어의 형성",
+      MORPHEME: "형태소 분석",
       SENTENCE_STRUCTURE: "문장의 짜임",
       PHONEME_CHANGE: "음운/음운 변동",
       REASONING: "논리사고력",
@@ -574,7 +578,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                   <div className="engine-header-divider" />
                   <div className="engine-header-item">
                     <strong>
-                      {getLearningTypeLabel(content?.contentType)} · {getLevelLabel(content?.targetLevel)}
+                      {getLevelLabel(content?.targetLevel)}
                     </strong>
                   </div>
                   <div className="engine-header-divider" />

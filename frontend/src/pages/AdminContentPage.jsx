@@ -193,10 +193,12 @@ function AdminContentPage() {
     return allContents.filter((content) => {
       if (statusFilter !== "all" && content.status !== statusFilter) return false;
       if (typeFilter !== "all") {
-        const merged = typeFilter === "CONTENT_PDF"
-          ? (content.type !== "CONTENT_PDF" && content.type !== "CONTENT_PDF_QUIZ")
-          : content.type !== typeFilter;
-        if (merged) return false;
+        const MERGED_TYPES = {
+          CONTENT_PDF: ["CONTENT_PDF", "CONTENT_PDF_QUIZ"],
+          GRAMMAR_WORD_FORMATION: ["GRAMMAR_WORD_FORMATION", "MORPHEME_ANALYSIS"],
+        };
+        const allowed = MERGED_TYPES[typeFilter] || [typeFilter];
+        if (!allowed.includes(content.type)) return false;
       }
       if (!term) return true;
       return [content.title, content.type, content.status, content.levelId, content.chapterId]
@@ -350,7 +352,7 @@ function AdminContentPage() {
               >
                 <option value="all">유형: 전체</option>
                 {Object.entries(TYPE_LABEL)
-                  .filter(([key]) => key === key.toUpperCase() && key !== "CONTENT_PDF_QUIZ")
+                  .filter(([key]) => key === key.toUpperCase() && key !== "CONTENT_PDF_QUIZ" && key !== "MORPHEME_ANALYSIS")
                   .map(([key, label]) => (
                     <option key={key} value={key}>{label}</option>
                   ))}
