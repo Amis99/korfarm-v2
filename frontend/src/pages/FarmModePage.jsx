@@ -32,7 +32,10 @@ function FarmModePage() {
       .then((data) => {
         if (data?.farms) {
           const itemsMap = {};
-          data.farms.forEach((f) => { itemsMap[f.area] = f.items || []; });
+          data.farms.forEach((f) => {
+            const key = (f.area || "").toLowerCase();
+            itemsMap[key] = f.items || [];
+          });
           setDbItemsByFarm(itemsMap);
         }
       })
