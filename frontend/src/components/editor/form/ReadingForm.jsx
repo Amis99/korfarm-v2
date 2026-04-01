@@ -83,11 +83,22 @@ export default function ReadingForm({ editor, focusPath }) {
       id: `cq${Date.now()}`,
       prompt: "",
       answerText: "",
+      answerRanges: [],
     });
   };
 
   const handleRemoveConfirmQ = (idx) => {
     removeItem("confirm.questions", idx);
+  };
+
+  const handleAddConfirmRange = (qIdx, range) => {
+    const ranges = confirmQuestions[qIdx]?.answerRanges || [];
+    const { _text, ...cleanRange } = range;
+    addItem(`confirm.questions[${qIdx}].answerRanges`, ranges.length, cleanRange);
+  };
+
+  const handleRemoveConfirmRange = (qIdx, rangeIdx) => {
+    removeItem(`confirm.questions[${qIdx}].answerRanges`, rangeIdx);
   };
 
   return (
@@ -299,23 +310,17 @@ export default function ReadingForm({ editor, focusPath }) {
                       data-field-path={`${qPath}.answerText`}
                     />
                   </div>
-                  {/* answerRanges (고급) */}
-                  {q.answerRanges && (
-                    <div className="ce-form-section">
-                      <label className="ce-form-label">정답 범위 (answerRanges)</label>
-                      <textarea
-                        className="ce-form-textarea"
-                        value={JSON.stringify(q.answerRanges, null, 2)}
-                        onChange={(e) => {
-                          try {
-                            updateField(`${qPath}.answerRanges`, JSON.parse(e.target.value));
-                          } catch { /* ignore parse error */ }
-                        }}
-                        rows={3}
-                        style={{ fontFamily: "monospace", fontSize: 11 }}
-                      />
-                    </div>
-                  )}
+                  {/* 정답 범위 — 드래그로 추가/삭제 */}
+                  <div className="ce-form-section">
+                    <label className="ce-form-label">정답 범위 (지문에서 드래그)</label>
+                    <HighlightPicker
+                      ranges={q.answerRanges || []}
+                      paragraphs={paragraphs}
+                      onAdd={(range) => handleAddConfirmRange(i, range)}
+                      onRemove={(rangeIdx) => handleRemoveConfirmRange(i, rangeIdx)}
+                      selectContainerId="ce-passage-container"
+                    />
+                  </div>
                   <div className="ce-form-row">
                     <div>
                       <label className="ce-form-label">매칭 모드</label>
