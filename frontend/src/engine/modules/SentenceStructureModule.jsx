@@ -242,11 +242,37 @@ function SentenceStructureModule({ content }) {
     }
   };
 
-  // ─── Phase 3: 절 분류 ───
+  // ─── Phase 3: 절 분류 (선택지 생성) ───
+  const clauseTypeChoices = useMemo(() => {
+    if (!currentClause) return [];
+    const isLinked = currentClause.clauseType === "대등" || currentClause.clauseType === "종속";
+    const correct = isLinked ? "이어진 문장"
+      : `${ROLE_SHORT[currentClause.parentRole] || currentClause.parentRole}${currentClause.parentLayer}`;
+
+    // 오답 풀: 레이어 포함 문장성분 + 이어진 문장
+    const pool = ["이어진 문장"];
+    const roles = ["주어","서술어","목적어","보어","부사어","관형어"];
+    for (const r of roles) {
+      for (let l = 1; l <= maxLayer; l++) pool.push(`${ROLE_SHORT[r]}${l}`);
+    }
+    const distractors = pool.filter(p => p !== correct);
+    for (let i = distractors.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
+    }
+    const all = [correct, ...distractors.slice(0, 4)];
+    for (let i = all.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [all[i], all[j]] = [all[j], all[i]];
+    }
+    return all.map(t => ({ id: t, text: t }));
+  }, [currentClause, maxLayer, phase, clauseStep]);
+
   const handleClauseType = (choiceId) => {
     if (!currentClause) return;
     const isLinked = currentClause.clauseType === "대등" || currentClause.clauseType === "종속";
-    const correctAnswer = isLinked ? "이어진 문장" : currentClause.parentRole;
+    const correctAnswer = isLinked ? "이어진 문장"
+      : `${ROLE_SHORT[currentClause.parentRole] || currentClause.parentRole}${currentClause.parentLayer}`;
     const isCorrect = choiceId === correctAnswer;
     adjustTime(isCorrect ? 20 : -20);
     recordAnswer({ id: `${sent.id}-ctype-${clauseStep}`, correct: isCorrect });
@@ -324,7 +350,7 @@ function SentenceStructureModule({ content }) {
     if (phase === "CLAUSE_TYPE") {
       return {
         title: "절 분류", prompt: "선택한 범위는 어떤 역할인가요?",
-        choices: CLAUSE_TYPE_CHOICES, onSelect: handleClauseType,
+        choices: clauseTypeChoices, onSelect: handleClauseType,
         key: `${sent.id}-ctype-${clauseStep}`,
       };
     }
@@ -425,8 +451,8 @@ function SentenceStructureModule({ content }) {
       ) : (
         <>
           <div className="ss-instruction">
-            서술어를 시작으로 칸을 클릭하여 이름을 붙인 후 겹문장인 경우 호응하는 성분끼리 드래그하세요
-            <div className="ss-instruction-sub">(절 선택: 시작 칸 클릭 → 끝 칸 클릭. 한 칸이면 같은 칸 두 번 클릭)</div>
+            서술어를 시작으로 칸을 클릭하여 이름을 붙인 후 겹문장인 경우 절의 시작 칸과 마지막 칸을 클릭하세요
+            <div className="ss-instruction-sub">(한 칸이 하나의 절이면 같은 칸을 두 번 클릭하세요)</div>
           </div>
           <div className="ss-progress">
             문장 {sentIdx + 1} / {sentences.length}
