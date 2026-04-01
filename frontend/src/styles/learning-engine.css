@@ -2382,49 +2382,58 @@ mark.highlight {
   border-color: #4e8a60;
 }
 
-/* 단어의 형성: 동그라미(실질) / 네모(접사) 마크 */
+/* 단어의 형성: 동그라미(실질) / 네모(접사) 마크 — 색연필 스타일 */
 .wf-morpheme-display {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
   justify-content: center;
   padding: 16px;
 }
 
-.morpheme-chip.wf-circle {
-  border-radius: 50%;
-  width: 64px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid #4e8a60;
-  background: rgba(78, 138, 96, 0.08);
-  font-size: 14px;
-}
-
+.morpheme-chip.wf-circle,
 .morpheme-chip.wf-square {
-  border-radius: 4px;
-  width: 64px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid #e07a5f;
-  background: rgba(224, 122, 95, 0.08);
-  font-size: 14px;
+  position: relative;
 }
 
-.morpheme-chip.wf-circle.active,
-.morpheme-chip.wf-square.active {
-  box-shadow: 0 0 12px rgba(255, 160, 60, 0.4);
+.morpheme-chip.wf-circle::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2.5px solid #4e8a60;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.morpheme-chip.wf-square::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 3px;
+  border: 2.5px solid #e07a5f;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.morpheme-chip.wf-circle.active::after {
   border-color: #ff8f2b;
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(255, 160, 60, 0.3);
 }
 
-.morpheme-chip.wf-circle.done {
-  background: rgba(78, 138, 96, 0.2);
+.morpheme-chip.wf-square.active::after {
+  border-color: #ff8f2b;
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(255, 160, 60, 0.3);
 }
 
-.morpheme-chip.wf-square.done {
-  background: rgba(224, 122, 95, 0.2);
+.morpheme-chip.wf-circle.done::after {
+  border-color: #4e8a60;
+  opacity: 0.5;
+}
+
+.morpheme-chip.wf-square.done::after {
+  border-color: #e07a5f;
+  opacity: 0.5;
 }
