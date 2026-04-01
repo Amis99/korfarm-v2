@@ -222,7 +222,8 @@ const ADVANCED_SENTENCES = [
   {
     text: "새로운 사실이 밝혀졌다.",
     morphemes: [
-      { form: "새롭-", name: "어간", nameDetail: "형용사 어간", type: "실질 의존" },
+      { form: "새-", name: "어근", nameDetail: "관형사 어근", type: "실질 자립" },
+      { form: "-롭-", name: "접사", nameDetail: "파생 접미사", type: "형식 의존" },
       { form: "-ㄴ", name: "어미", nameDetail: "전성 어미", type: "형식 의존" },
       { form: "사실", name: "명사", nameDetail: "보통 명사", type: "실질 자립" },
       { form: "이", name: "조사", nameDetail: "주격 조사", type: "형식 의존" },
@@ -324,7 +325,9 @@ const ADVANCED_SENTENCES = [
   {
     text: "어린이날에는 풍선을 날려 보내었다.",
     morphemes: [
-      { form: "어린이", name: "명사", nameDetail: "보통 명사", type: "실질 자립" },
+      { form: "어리-", name: "어간", nameDetail: "형용사 어간", type: "실질 의존" },
+      { form: "-ㄴ", name: "어미", nameDetail: "전성 어미", type: "형식 의존" },
+      { form: "이", name: "명사", nameDetail: "의존 명사", type: "실질 자립" },
       { form: "날", name: "명사", nameDetail: "보통 명사", type: "실질 자립" },
       { form: "에", name: "조사", nameDetail: "부사격 조사", type: "형식 의존" },
       { form: "는", name: "조사", nameDetail: "보조사", type: "형식 의존" },
