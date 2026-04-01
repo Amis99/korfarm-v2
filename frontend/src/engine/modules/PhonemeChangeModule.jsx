@@ -38,7 +38,7 @@ function PhonemeChangeModule({ content }) {
     return set;
   }, [word]);
 
-  // 셀 클릭 핸들러 (CLICK phase에서만 동작)
+  // 셀 클릭 핸들러 (CLICK phase에서만 동작, 모든 셀 클릭 가능)
   const handleCellClick = (cellNo) => {
     if (phase !== "CLICK" || !step) return;
     clearFeedback();
@@ -50,6 +50,12 @@ function PhonemeChangeModule({ content }) {
       recordAnswer({ id: `wrong_click_${step.stepId}_${cellNo}`, correct: false });
       showFeedback("wrong");
     }
+  };
+
+  // 콤마/구분자 셀이 아닌 모든 도착점 셀은 클릭 가능
+  const isCellClickable = (cell) => {
+    const srcCell = word?.cells.find((c) => c.cellNo === cell.cellNo);
+    return srcCell?.text !== ",";
   };
 
   // 셀 업데이트 헬퍼 (단일/다중 모두 처리)
@@ -218,18 +224,19 @@ function PhonemeChangeModule({ content }) {
               const isEmpty = isCommaSlot && cell.text === "";
               const isTarget = allTargetCellNos.has(cell.cellNo);
               const isDeleted = cell.text === "∅";
+              const canClick = isCellClickable(cell);
               return (
                 <div
                   key={`d-${cell.cellNo}`}
                   className={[
                     "phoneme-cell",
-                    isTarget ? "clickable" : "",
+                    canClick ? "clickable" : "",
                     isEmpty ? "empty-slot" : "",
                     isDeleted ? "deleted" : "",
                   ]
                     .filter(Boolean)
                     .join(" ")}
-                  onClick={isTarget ? () => handleCellClick(cell.cellNo) : undefined}
+                  onClick={canClick ? () => handleCellClick(cell.cellNo) : undefined}
                 >
                   {cell.text}
                 </div>
