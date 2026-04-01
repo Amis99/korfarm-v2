@@ -2,7 +2,7 @@ import { useMemo, useState, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { apiGet } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
-import { FARM_MAP } from "../data/learning/learningCatalog";
+import { FARM_MAP, LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
 import { Link } from "react-router-dom";
 import {
@@ -48,7 +48,7 @@ const CONTENT_TYPE_TO_MODULE = {
 const resolveModuleKey = (contentType, fallback) =>
   fallback || CONTENT_TYPE_TO_MODULE[contentType] || "worksheet_quiz";
 
-/* static JSON 콘텐츠 목록 — 일일 학습만 유지 */
+/* static JSON 콘텐츠 목록 — 일일 학습 + 농장 모드 정적 콘텐츠 */
 const STATIC_CONTENTS = [
   ...DAILY_LEVELS.map((level) => ({
     id: `dr-${level.toLowerCase()}`,
@@ -71,6 +71,17 @@ const STATIC_CONTENTS = [
     source: "static",
     jsonPath: `/daily-quiz/${levelToFolder(level)}/001.json`,
     moduleKey: "worksheet_quiz",
+  })),
+  ...LEARNING_CATALOG.map((item) => ({
+    id: item.contentId,
+    title: item.title,
+    type: item.contentType,
+    levelId: item.targetLevel,
+    chapterId: "",
+    status: "active",
+    source: "static",
+    jsonPath: item.jsonPath,
+    moduleKey: item.moduleKey,
   })),
 ];
 
@@ -143,6 +154,9 @@ function AdminContentPage() {
   const [showTemplatePanel, setShowTemplatePanel] = useState(false);
   const templatePanelRef = useRef(null);
   const navigate = useNavigate();
+
+  /* 현재 필터 상태를 from 파라미터로 인코딩 */
+  const fromParam = encodeURIComponent(`/admin/content${params.toString() ? `?${params.toString()}` : ""}`);
 
   /* 표준 양식 패널 외부 클릭 닫힘 */
   useEffect(() => {
@@ -226,7 +240,7 @@ function AdminContentPage() {
       }
       localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
       localStorage.setItem("korfarm_preview_module", moduleKey);
-      navigate("/admin/content/preview");
+      navigate(`/admin/content/preview?from=${fromParam}`);
     } catch (err) {
       setServerPreviewError(err.message || "미리보기 데이터를 불러오지 못했습니다.");
     } finally {
@@ -352,7 +366,7 @@ function AdminContentPage() {
                   <tr key={content.id}>
                     <td>
                       <Link
-                        to={`/admin/content/edit?id=${content.id}${content.source === "static" ? `&source=static&jsonPath=${encodeURIComponent(content.jsonPath)}&type=${encodeURIComponent(content.type)}&title=${encodeURIComponent(content.title)}` : ""}`}
+                        to={`/admin/content/edit?id=${content.id}${content.source === "static" ? `&source=static&jsonPath=${encodeURIComponent(content.jsonPath)}&type=${encodeURIComponent(content.type)}&title=${encodeURIComponent(content.title)}` : ""}&from=${fromParam}`}
                         className="admin-content-title-link"
                         title={content.title}
                       >
