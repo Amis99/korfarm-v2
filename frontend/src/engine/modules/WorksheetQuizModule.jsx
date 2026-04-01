@@ -84,9 +84,13 @@ const replaceWordInExample = (example, word) => {
   return example.split(word).join("____");
 };
 
-const renderPassageBox = (passage) => {
+const renderPassageBox = (passage, highlight) => {
   if (!passage) return null;
-  return <span className="worksheet-passage-box"><RichText>{passage}</RichText></span>;
+  return (
+    <span className="worksheet-passage-box">
+      {highlight ? renderHighlightedText(passage, highlight) : <RichText>{passage}</RichText>}
+    </span>
+  );
 };
 
 function WorksheetQuizModule({ content }) {
@@ -208,7 +212,7 @@ function WorksheetQuizModule({ content }) {
           ? (question.sentenceParts || []).map(() => "____").join(" ")
           : (question.template || "");
         let contentText = question.stem || question.prompt || "";
-        const passageNode = !isDictionary ? renderPassageBox(question.passage) : null;
+        const passageNode = !isDictionary ? renderPassageBox(question.passage, question.highlight) : null;
         if (isDictionary) {
           contentText = renderDictionaryCard(question, {
             isActive: false,
@@ -435,7 +439,7 @@ function WorksheetQuizModule({ content }) {
                               ? blankList.map((blank) => blankAnswers[blank.id])
                               : [];
                             const activeBlankIndex = isActive ? blankIndex : -1;
-                            const passageNode = !isDictionary ? renderPassageBox(question.passage) : null;
+                            const passageNode = !isDictionary ? renderPassageBox(question.passage, question.highlight) : null;
                             let content = null;
                             if (isDictionary) {
                               content = renderDictionaryCard(question, {
@@ -504,7 +508,7 @@ function WorksheetQuizModule({ content }) {
                               ? blankList.map((blank) => blankAnswers[blank.id])
                               : [];
                             const activeBlankIndex = isActive ? blankIndex : -1;
-                            const passageNode = !isDictionary ? renderPassageBox(question.passage) : null;
+                            const passageNode = !isDictionary ? renderPassageBox(question.passage, question.highlight) : null;
                             let content = null;
                             if (isDictionary) {
                               content = renderDictionaryCard(question, {
