@@ -212,7 +212,7 @@ function WorksheetQuizModule({ content }) {
           ? (question.sentenceParts || []).map(() => "____").join(" ")
           : (question.template || "");
         let contentText = question.stem || question.prompt || "";
-        const passageNode = !isDictionary ? renderPassageBox(question.passage, question.highlight) : null;
+        const passageNode = !isDictionary ? renderPassageBox(question.passage) : null;
         if (isDictionary) {
           contentText = renderDictionaryCard(question, {
             isActive: false,
@@ -228,8 +228,8 @@ function WorksheetQuizModule({ content }) {
           <li key={`measure-${question.id}`} className="worksheet-item">
             <span className="worksheet-item-number">{idx + 1}.</span>
             <span className="worksheet-item-text">
-              {passageNode}
               {contentText}
+              {passageNode}
             </span>
           </li>
         );
@@ -370,9 +370,7 @@ function WorksheetQuizModule({ content }) {
     if (!container) return;
     const containerRect = container.getBoundingClientRect();
     const scale = containerRect.width / container.offsetWidth || 1;
-    const highlightNode =
-      node.querySelector(".worksheet-highlight") || node.querySelector(".worksheet-blank.active");
-    const rect = (highlightNode || node).getBoundingClientRect();
+    const rect = node.getBoundingClientRect();
     setAnchorRect({
       left: (rect.left - containerRect.left) / scale,
       right: (rect.right - containerRect.left) / scale,
@@ -439,7 +437,7 @@ function WorksheetQuizModule({ content }) {
                               ? blankList.map((blank) => blankAnswers[blank.id])
                               : [];
                             const activeBlankIndex = isActive ? blankIndex : -1;
-                            const passageNode = !isDictionary ? renderPassageBox(question.passage, question.highlight) : null;
+                            const passageNode = !isDictionary ? renderPassageBox(question.passage, isActive ? question.highlight : null) : null;
                             let content = null;
                             if (isDictionary) {
                               content = renderDictionaryCard(question, {
@@ -458,12 +456,7 @@ function WorksheetQuizModule({ content }) {
                                   )
                                 : renderTemplatePlain(template, blankList);
                             } else {
-                              content = isActive
-                                ? renderHighlightedText(
-                                    question.stem || question.prompt || "",
-                                    question.highlight
-                                  )
-                                : <RichText>{question.stem || question.prompt || ""}</RichText>;
+                              content = <RichText>{question.stem || question.prompt || ""}</RichText>;
                             }
 
                             return (
@@ -485,8 +478,8 @@ function WorksheetQuizModule({ content }) {
                                   ) : null}
                                 </span>
                                 <span className="worksheet-item-text">
-                                  {passageNode}
                                   {content}
+                                  {passageNode}
                                 </span>
                               </li>
                             );
@@ -508,7 +501,7 @@ function WorksheetQuizModule({ content }) {
                               ? blankList.map((blank) => blankAnswers[blank.id])
                               : [];
                             const activeBlankIndex = isActive ? blankIndex : -1;
-                            const passageNode = !isDictionary ? renderPassageBox(question.passage, question.highlight) : null;
+                            const passageNode = !isDictionary ? renderPassageBox(question.passage, isActive ? question.highlight : null) : null;
                             let content = null;
                             if (isDictionary) {
                               content = renderDictionaryCard(question, {
@@ -527,12 +520,7 @@ function WorksheetQuizModule({ content }) {
                                   )
                                 : renderTemplatePlain(template, blankList);
                             } else {
-                              content = isActive
-                                ? renderHighlightedText(
-                                    question.stem || question.prompt || "",
-                                    question.highlight
-                                  )
-                                : <RichText>{question.stem || question.prompt || ""}</RichText>;
+                              content = <RichText>{question.stem || question.prompt || ""}</RichText>;
                             }
 
                             return (
@@ -554,8 +542,8 @@ function WorksheetQuizModule({ content }) {
                                   ) : null}
                                 </span>
                                 <span className="worksheet-item-text">
-                                  {passageNode}
                                   {content}
+                                  {passageNode}
                                 </span>
                               </li>
                             );
