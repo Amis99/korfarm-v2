@@ -17,8 +17,10 @@ function PhonemeChangeModule({ content }) {
     )
   );
   const [lastResult, setLastResult] = useState(null);
+  const [wrongCellNo, setWrongCellNo] = useState(null);
   const resultTimerRef = useRef(null);
   const advanceTimerRef = useRef(null);
+  const wrongTimerRef = useRef(null);
   const moduleRef = useRef(null);
 
   const word = words[wordIndex];
@@ -45,18 +47,18 @@ function PhonemeChangeModule({ content }) {
     if (cellNo === step.targetCellNo) {
       setPhase("PHONEME_MODAL");
     } else {
-      // 잘못된 셀 클릭 → 오답
+      // 잘못된 셀 클릭 → 오답 + 흔들림 애니메이션
       adjustTime(-40);
       recordAnswer({ id: `wrong_click_${step.stepId}_${cellNo}`, correct: false });
       showFeedback("wrong");
+      setWrongCellNo(cellNo);
+      if (wrongTimerRef.current) clearTimeout(wrongTimerRef.current);
+      wrongTimerRef.current = setTimeout(() => setWrongCellNo(null), 600);
     }
   };
 
-  // 콤마/구분자 셀이 아닌 모든 도착점 셀은 클릭 가능
-  const isCellClickable = (cell) => {
-    const srcCell = word?.cells.find((c) => c.cellNo === cell.cellNo);
-    return srcCell?.text !== ",";
-  };
+  // 모든 도착점 셀 클릭 가능 (ㄴ첨가, 축약 등 쉼표/빈칸도 타겟 가능)
+  const isCellClickable = () => true;
 
   // 셀 업데이트 헬퍼 (단일/다중 모두 처리)
   const applyCellUpdates = (updates) => {
@@ -151,6 +153,7 @@ function PhonemeChangeModule({ content }) {
     () => () => {
       if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
       if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
+      if (wrongTimerRef.current) clearTimeout(wrongTimerRef.current);
     },
     []
   );
@@ -233,6 +236,7 @@ function PhonemeChangeModule({ content }) {
                     canClick ? "clickable" : "",
                     isEmpty ? "empty-slot" : "",
                     isDeleted ? "deleted" : "",
+                    wrongCellNo === cell.cellNo ? "wrong-shake" : "",
                   ]
                     .filter(Boolean)
                     .join(" ")}
