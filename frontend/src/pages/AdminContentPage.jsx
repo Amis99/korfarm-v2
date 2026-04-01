@@ -1,6 +1,6 @@
 import { useMemo, useState, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { apiGet } from "../utils/adminApi";
+import { apiGet, apiDelete } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { FARM_MAP, LEARNING_CATALOG } from "../data/learning/learningCatalog";
 import { LEARNING_TEMPLATES } from "../data/learning/learningTemplates";
@@ -248,6 +248,21 @@ function AdminContentPage() {
     }
   };
 
+  /* 콘텐츠 삭제 */
+  const handleDeleteContent = async (content) => {
+    if (content.source === "static") {
+      alert("정적 콘텐츠는 삭제할 수 없습니다.");
+      return;
+    }
+    if (!window.confirm(`"${content.title}" 콘텐츠를 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.`)) return;
+    try {
+      await apiDelete(`/v1/admin/content/${content.id}`);
+      window.location.reload();
+    } catch (err) {
+      alert(`삭제 실패: ${err.message}`);
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="admin-detail-wrap">
@@ -423,6 +438,17 @@ function AdminContentPage() {
                           {"{ }"}
                           <span className="admin-tooltip">JSON 편집</span>
                         </button>
+                        {content.source !== "static" && (
+                          <button
+                            className="admin-icon-btn admin-tooltip-wrap"
+                            type="button"
+                            style={{ color: "#e04040" }}
+                            onClick={() => handleDeleteContent(content)}
+                          >
+                            🗑
+                            <span className="admin-tooltip">삭제</span>
+                          </button>
+                        )}
                       </span>
                     </td>
                   </tr>

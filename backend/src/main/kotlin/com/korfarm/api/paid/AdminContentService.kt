@@ -288,6 +288,16 @@ class AdminContentService(
         return AdminContentImportResult(contentId = contentId, versionId = version.id)
     }
 
+    @Transactional
+    fun deleteContent(contentId: String) {
+        val content = contentRepository.findById(contentId).orElseThrow {
+            ApiException("NOT_FOUND", "content not found", HttpStatus.NOT_FOUND)
+        }
+        contentVersionRepository.deleteAllByContentId(contentId)
+        contentEditLogRepository.deleteAllByContentId(contentId)
+        contentRepository.delete(content)
+    }
+
     @Transactional(readOnly = true)
     fun previewContent(contentId: String): ContentPreview {
         val content = contentRepository.findById(contentId).orElseThrow {

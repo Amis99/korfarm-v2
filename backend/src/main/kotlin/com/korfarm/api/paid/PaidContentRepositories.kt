@@ -34,6 +34,7 @@ interface ContentRepository : JpaRepository<ContentEntity, String> {
 
 interface ContentVersionRepository : JpaRepository<ContentVersionEntity, String> {
     fun findTopByContentIdOrderByCreatedAtDesc(contentId: String): ContentVersionEntity?
+    fun deleteAllByContentId(contentId: String)
 }
 
 interface TestPaperRepository : JpaRepository<TestPaperEntity, String> {
@@ -57,4 +58,5 @@ interface TestResultRepository : JpaRepository<TestResultEntity, String> {
 interface ContentEditLogRepository : JpaRepository<ContentEditLogEntity, String> {
     fun findByContentIdOrderByCreatedAtDesc(contentId: String): List<ContentEditLogEntity>
     fun findByEditorIdOrderByCreatedAtDesc(editorId: String): List<ContentEditLogEntity>
+    fun deleteAllByContentId(contentId: String)
 }

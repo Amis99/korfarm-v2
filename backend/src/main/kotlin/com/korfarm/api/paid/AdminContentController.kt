@@ -12,6 +12,7 @@ import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.system.FeatureFlagService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -74,6 +75,14 @@ class AdminContentController(
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         val data = adminContentService.updateContent(contentId, request, userId)
         return ApiResponse(success = true, data = data)
+    }
+
+    @DeleteMapping("/content/{contentId}")
+    fun deleteContent(@PathVariable contentId: String): ApiResponse<Map<String, Boolean>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        featureFlagService.requireEnabled("feature.admin.console")
+        adminContentService.deleteContent(contentId)
+        return ApiResponse(success = true, data = mapOf("deleted" to true))
     }
 
     @GetMapping("/content/{contentId}/preview")
