@@ -2381,3 +2381,50 @@ mark.highlight {
   color: #fff;
   border-color: #4e8a60;
 }
+
+/* 단어의 형성: 동그라미(실질) / 네모(접사) 마크 */
+.wf-morpheme-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  padding: 16px;
+}
+
+.morpheme-chip.wf-circle {
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #4e8a60;
+  background: rgba(78, 138, 96, 0.08);
+  font-size: 14px;
+}
+
+.morpheme-chip.wf-square {
+  border-radius: 4px;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #e07a5f;
+  background: rgba(224, 122, 95, 0.08);
+  font-size: 14px;
+}
+
+.morpheme-chip.wf-circle.active,
+.morpheme-chip.wf-square.active {
+  box-shadow: 0 0 12px rgba(255, 160, 60, 0.4);
+  border-color: #ff8f2b;
+}
+
+.morpheme-chip.wf-circle.done {
+  background: rgba(78, 138, 96, 0.2);
+}
+
+.morpheme-chip.wf-square.done {
+  background: rgba(224, 122, 95, 0.2);
+}
