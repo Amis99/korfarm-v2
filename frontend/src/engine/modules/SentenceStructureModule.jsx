@@ -368,15 +368,46 @@ function SentenceStructureModule({ content }) {
 
   const modal = getModal();
 
-  // ─── 렌더링 헬퍼: 테이블 방식으로 어절/레이블 줄 맞춤 ───
-  const renderSentenceTable = (bxs, labels, slashSet, isInteractive) => {
-    const cols = bxs.length;
+  // ─── 렌더링 헬퍼: 테이블 (어절 + 레이블 + 절 분석 행) ───
+  const renderSentenceTable = (bxs, labels, slashSet, mRows, isInteractive) => {
+    // 슬래시가 있는 박스 뒤에 슬래시 td가 추가되므로, 각 박스의 컬럼 인덱스를 계산
+    const colMap = {}; // boxId → colIndex
+    let col = 0;
+    for (const box of bxs) {
+      colMap[box.id] = col;
+      col++;
+      if (slashSet.has(box.id)) col++; // 슬래시 칸
+    }
+    const totalCols = col;
+
+    // mergedRow를 테이블 행으로 렌더링
+    const renderMergedRow = (row, ri) => {
+      const startCol = colMap[row.range[0]] ?? 0;
+      const endCol = colMap[row.range[row.range.length - 1]] ?? 0;
+      const span = endCol - startCol + 1;
+      const cells = [];
+      if (startCol > 0) cells.push(<td key={`pre-${ri}`} colSpan={startCol} className="ss-td"></td>);
+      cells.push(
+        <td key={`mr-${ri}`} colSpan={span} className="ss-td">
+          <div className="ss-merged-cell">
+            <span className="ss-bracket">(</span>
+            <span className="ss-merged-label">{row.label}</span>
+            {row.clauseType && <span className="ss-clause-badge">{row.clauseType}</span>}
+            <span className="ss-bracket">)</span>
+          </div>
+        </td>
+      );
+      const afterCol = endCol + 1;
+      if (afterCol < totalCols) cells.push(<td key={`post-${ri}`} colSpan={totalCols - afterCol} className="ss-td"></td>);
+      return <tr key={`mrow-${ri}`}>{cells}</tr>;
+    };
+
     return (
       <table className="ss-table">
         <tbody>
           {/* 어절 행 */}
           <tr>
-            {bxs.map((box, i) => {
+            {bxs.map((box) => {
               const isActive = isInteractive && activeBoxId === box.id;
               const isLabeled = isInteractive && !!roleLabels[box.id];
               const isSelected = isInteractive && selectedRange.includes(box.id);
@@ -396,13 +427,15 @@ function SentenceStructureModule({ content }) {
           </tr>
           {/* 레이블 행 */}
           <tr>
-            {bxs.map((box, i) => [
+            {bxs.map((box) => [
               <td key={`l-${box.id}`} className="ss-td">
                 <div className="ss-label-cell">{labels[box.id] || "\u00A0"}</div>
               </td>,
               slashSet.has(box.id) ? <td key={`lsl-${box.id}`} className="ss-td-slash"></td> : null,
             ])}
           </tr>
+          {/* 절 분석 행들 (3열, 4열, ...) */}
+          {mRows.map((row, ri) => renderMergedRow(row, ri))}
         </tbody>
       </table>
     );
@@ -411,15 +444,7 @@ function SentenceStructureModule({ content }) {
   // ─── 렌더링: 완료된 문장 ───
   const renderDone = (result, idx) => (
     <div key={`done-${idx}`} className="ss-sentence-block completed">
-      {renderSentenceTable(result.boxes, result.roleLabels, new Set(result.slashes), false)}
-      {result.mergedRows.map((row, ri) => (
-        <div key={`mr-${ri}`} className="ss-merged-row">
-          <span className="ss-bracket">(</span>
-          <span className="ss-merged-label">{row.label}</span>
-          {row.clauseType && <span className="ss-clause-badge">{row.clauseType}</span>}
-          <span className="ss-bracket">)</span>
-        </div>
-      ))}
+      {renderSentenceTable(result.boxes, result.roleLabels, new Set(result.slashes), result.mergedRows, false)}
     </div>
   );
 
@@ -428,15 +453,7 @@ function SentenceStructureModule({ content }) {
     if (!sent) return null;
     return (
       <div className="ss-sentence-block current">
-        {renderSentenceTable(boxes, roleLabels, new Set(slashes), true)}
-        {mergedRows.map((row, ri) => (
-          <div key={`mr-${ri}`} className="ss-merged-row">
-            <span className="ss-bracket">(</span>
-            <span className="ss-merged-label">{row.label}</span>
-            {row.clauseType && <span className="ss-clause-badge">{row.clauseType}</span>}
-            <span className="ss-bracket">)</span>
-          </div>
-        ))}
+        {renderSentenceTable(boxes, roleLabels, new Set(slashes), mergedRows, true)}
       </div>
     );
   };
