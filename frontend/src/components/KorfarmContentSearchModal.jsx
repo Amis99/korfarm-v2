@@ -1,131 +1,195 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { apiGet } from "../utils/api";
+import { TYPE_LABEL } from "../constants/contentTypes";
 import "../styles/study-plan.css";
 
-export default function KorfarmContentSearchModal({ onSelect, onClose }) {
-  const [areas, setAreas] = useState([]);
-  const [selectedArea, setSelectedArea] = useState("");
-  const [subAreas, setSubAreas] = useState([]);
-  const [selectedSubArea, setSelectedSubArea] = useState("");
-  const [items, setItems] = useState([]);
-  const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
+const TABS = [
+  { key: "farm", label: "농장별 모드" },
+  { key: "daily", label: "일일 학습" },
+  { key: "pro", label: "프로 모드" },
+];
 
-  // 영역 목록 로드
+const LEVEL_LIST = [
+  "SAUSSURE_1","SAUSSURE_2","SAUSSURE_3",
+  "FREGE_1","FREGE_2","FREGE_3",
+  "RUSSELL_1","RUSSELL_2","RUSSELL_3",
+  "WITTGENSTEIN_1","WITTGENSTEIN_2","WITTGENSTEIN_3",
+];
+
+const LEVEL_LABELS = {
+  SAUSSURE_1:"소쉬르1",SAUSSURE_2:"소쉬르2",SAUSSURE_3:"소쉬르3",
+  FREGE_1:"프레게1",FREGE_2:"프레게2",FREGE_3:"프레게3",
+  RUSSELL_1:"러셀1",RUSSELL_2:"러셀2",RUSSELL_3:"러셀3",
+  WITTGENSTEIN_1:"비트겐슈타인1",WITTGENSTEIN_2:"비트겐슈타인2",WITTGENSTEIN_3:"비트겐슈타인3",
+};
+
+export default function KorfarmContentSearchModal({ onSelect, onClose }) {
+  const [tab, setTab] = useState("farm");
+
+  // ── 농장별 모드 ──
+  const [farmAreas, setFarmAreas] = useState([]);
+  const [selectedArea, setSelectedArea] = useState("");
+  const [farmItems, setFarmItems] = useState([]);
+  const [farmSearch, setFarmSearch] = useState("");
+  const [farmLoading, setFarmLoading] = useState(false);
+
+  // ── 일일 학습 ──
+  const [dailyLevel, setDailyLevel] = useState("");
+
+  // ── 프로 모드 ──
+  const [proLevel, setProLevel] = useState("");
+  const [proItems, setProItems] = useState([]);
+  const [proLoading, setProLoading] = useState(false);
+
+  // 농장 영역 목록
   useEffect(() => {
     apiGet("/v1/learning/catalog")
       .then((data) => {
-        const list = Array.isArray(data) ? data : data?.areas || [];
-        setAreas(list);
+        const farms = data?.farms || [];
+        setFarmAreas(farms.map(f => ({ area: f.area, count: f.totalCount || f.items?.length || 0 })));
       })
-      .catch(() => setAreas([]));
+      .catch(() => setFarmAreas([]));
   }, []);
 
-  // 하위 영역 로드
+  // 농장별 콘텐츠
   useEffect(() => {
-    if (!selectedArea) { setSubAreas([]); setItems([]); return; }
+    if (tab !== "farm" || !selectedArea) { setFarmItems([]); return; }
+    setFarmLoading(true);
     apiGet(`/v1/learning/catalog/${encodeURIComponent(selectedArea)}`)
-      .then((data) => {
-        const list = Array.isArray(data) ? data : data?.subAreas || data?.items || [];
-        setSubAreas(list);
-      })
-      .catch(() => setSubAreas([]));
-  }, [selectedArea]);
+      .then((data) => setFarmItems(Array.isArray(data) ? data : []))
+      .catch(() => setFarmItems([]))
+      .finally(() => setFarmLoading(false));
+  }, [tab, selectedArea]);
 
-  // 콘텐츠 로드
+  // 프로 모드 챕터
   useEffect(() => {
-    if (!selectedArea) return;
-    setLoading(true);
-    const path = selectedSubArea
-      ? `/v1/learning/catalog/${encodeURIComponent(selectedArea)}/${encodeURIComponent(selectedSubArea)}`
-      : `/v1/learning/catalog/${encodeURIComponent(selectedArea)}`;
-    apiGet(path)
-      .then((data) => {
-        const list = Array.isArray(data) ? data : data?.items || data?.subAreas || [];
-        setItems(list);
-      })
-      .catch(() => setItems([]))
-      .finally(() => setLoading(false));
-  }, [selectedArea, selectedSubArea]);
+    if (tab !== "pro" || !proLevel) { setProItems([]); return; }
+    setProLoading(true);
+    apiGet(`/v1/learning/catalog/pro?levelId=${encodeURIComponent(proLevel)}`)
+      .then((data) => setProItems(Array.isArray(data) ? data : []))
+      .catch(() => setProItems([]))
+      .finally(() => setProLoading(false));
+  }, [tab, proLevel]);
 
-  const filtered = search.trim()
-    ? items.filter((it) => (it.title || it.name || it.label || "").includes(search))
-    : items;
+  const AREA_LABELS = {
+    GRAMMAR:"문법",VOCAB:"어휘",READING:"독해",BACKGROUND:"배경지식",
+    LOGIC:"논리사고력",WRITING:"서술형",CONCEPT:"국어개념",
+    CONTENT:"내용숙지",FUSION:"융합",GENERAL:"일반",
+  };
+
+  const farmFiltered = farmSearch.trim()
+    ? farmItems.filter(it => (it.title || "").includes(farmSearch))
+    : farmItems;
 
   const handleSelect = (item) => {
     onSelect({
       contentId: item.contentId || item.id,
       title: item.title || item.name || item.label || "",
+      contentType: item.contentType || "",
     });
     onClose();
   };
 
+  // 일일 학습 항목 생성
+  const dailyItems = useMemo(() => {
+    if (!dailyLevel) return [];
+    return [
+      { id: `daily-quiz-${dailyLevel}`, title: `일일 퀴즈 (${LEVEL_LABELS[dailyLevel]})`, contentType: "DAILY_QUIZ", contentId: `daily-quiz-${dailyLevel.toLowerCase()}` },
+      { id: `daily-reading-${dailyLevel}`, title: `일일 독해 (${LEVEL_LABELS[dailyLevel]})`, contentType: "DAILY_READING", contentId: `daily-reading-${dailyLevel.toLowerCase()}` },
+    ];
+  }, [dailyLevel]);
+
   return (
     <div className="sp-reminder-overlay" onClick={onClose}>
-      <div
-        className="sp-content-search-modal"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="sp-content-search-modal" onClick={(e) => e.stopPropagation()}>
         <div className="sp-csm-header">
-          <h3>국어농장 콘텐츠 검색</h3>
+          <h3>국어농장 콘텐츠 선택</h3>
           <button className="sp-csm-close" onClick={onClose}>
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
 
-        <div className="sp-csm-filters">
-          <select
-            value={selectedArea}
-            onChange={(e) => { setSelectedArea(e.target.value); setSelectedSubArea(""); }}
-          >
-            <option value="">영역 선택</option>
-            {areas.map((a, i) => (
-              <option key={i} value={a.area || a.name || a}>
-                {a.area || a.name || a}
-              </option>
-            ))}
-          </select>
-          {subAreas.length > 0 && subAreas[0]?.subArea && (
-            <select
-              value={selectedSubArea}
-              onChange={(e) => setSelectedSubArea(e.target.value)}
-            >
-              <option value="">하위 영역 전체</option>
-              {subAreas.filter((s) => s.subArea).map((s, i) => (
-                <option key={i} value={s.subArea}>{s.subArea}</option>
-              ))}
-            </select>
-          )}
-          <input
-            type="text"
-            placeholder="제목 검색..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+        {/* 탭 */}
+        <div className="sp-csm-tabs">
+          {TABS.map(t => (
+            <button key={t.key} className={`sp-csm-tab ${tab === t.key ? "active" : ""}`} onClick={() => setTab(t.key)}>
+              {t.label}
+            </button>
+          ))}
         </div>
 
-        <div className="sp-csm-list">
-          {loading ? (
-            <p className="sp-csm-empty">불러오는 중...</p>
-          ) : filtered.length === 0 ? (
-            <p className="sp-csm-empty">검색 결과가 없습니다.</p>
-          ) : (
-            filtered.map((item, i) => (
-              <div
-                key={item.contentId || item.id || i}
-                className="sp-csm-item"
-                onClick={() => handleSelect(item)}
-              >
-                <span className="sp-csm-item-title">
-                  {item.title || item.name || item.label}
-                </span>
-                {item.area && (
-                  <span className="sp-csm-item-area">{item.area}</span>
-                )}
-              </div>
-            ))
-          )}
-        </div>
+        {/* ── 농장별 모드 ── */}
+        {tab === "farm" && (
+          <>
+            <div className="sp-csm-filters">
+              <select value={selectedArea} onChange={(e) => setSelectedArea(e.target.value)}>
+                <option value="">농장 선택</option>
+                {farmAreas.map((a, i) => (
+                  <option key={i} value={a.area}>{AREA_LABELS[a.area] || a.area} ({a.count}개)</option>
+                ))}
+              </select>
+              <input type="text" placeholder="제목 검색..." value={farmSearch} onChange={(e) => setFarmSearch(e.target.value)} />
+            </div>
+            <div className="sp-csm-list">
+              {farmLoading ? <p className="sp-csm-empty">불러오는 중...</p>
+                : farmFiltered.length === 0 ? <p className="sp-csm-empty">농장을 선택하세요</p>
+                : farmFiltered.map((item, i) => (
+                  <div key={item.contentId || i} className="sp-csm-item" onClick={() => handleSelect(item)}>
+                    <span className="sp-csm-item-title">{item.title}</span>
+                    <span className="sp-csm-item-area">{TYPE_LABEL[item.contentType] || item.contentType}</span>
+                  </div>
+                ))}
+            </div>
+          </>
+        )}
+
+        {/* ── 일일 학습 ── */}
+        {tab === "daily" && (
+          <>
+            <div className="sp-csm-filters">
+              <select value={dailyLevel} onChange={(e) => setDailyLevel(e.target.value)}>
+                <option value="">레벨 선택</option>
+                {LEVEL_LIST.map(lv => (
+                  <option key={lv} value={lv}>{LEVEL_LABELS[lv]}</option>
+                ))}
+              </select>
+            </div>
+            <div className="sp-csm-list">
+              {!dailyLevel ? <p className="sp-csm-empty">레벨을 선택하세요</p>
+                : dailyItems.map((item) => (
+                  <div key={item.id} className="sp-csm-item" onClick={() => handleSelect(item)}>
+                    <span className="sp-csm-item-title">{item.title}</span>
+                    <span className="sp-csm-item-area">{item.contentType === "DAILY_QUIZ" ? "일일 퀴즈" : "일일 독해"}</span>
+                  </div>
+                ))}
+            </div>
+          </>
+        )}
+
+        {/* ── 프로 모드 ── */}
+        {tab === "pro" && (
+          <>
+            <div className="sp-csm-filters">
+              <select value={proLevel} onChange={(e) => setProLevel(e.target.value)}>
+                <option value="">레벨 선택</option>
+                {LEVEL_LIST.map(lv => (
+                  <option key={lv} value={lv}>{LEVEL_LABELS[lv]}</option>
+                ))}
+              </select>
+            </div>
+            <div className="sp-csm-list">
+              {proLoading ? <p className="sp-csm-empty">불러오는 중...</p>
+                : !proLevel ? <p className="sp-csm-empty">레벨을 선택하세요</p>
+                : proItems.length === 0 ? <p className="sp-csm-empty">해당 레벨에 프로 모드 콘텐츠가 없습니다</p>
+                : proItems.map((item, i) => (
+                  <div key={item.contentId || i} className="sp-csm-item" onClick={() => handleSelect(item)}>
+                    <span className="sp-csm-item-title">{item.title}</span>
+                    <span className="sp-csm-item-area">{TYPE_LABEL[item.contentType] || "프로 모드"}</span>
+                  </div>
+                ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
