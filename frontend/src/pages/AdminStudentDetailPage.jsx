@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/adminApi";
 import AdminLayout from "../components/AdminLayout";
 import { calcSeasonScore, FORMULA_TEXT } from "../utils/seasonScore";
+import { TYPE_LABEL } from "../constants/contentTypes";
 import "../styles/admin-detail.css";
 
 const ReportSummaryCards = lazy(() => import("../components/report/ReportSummaryCards"));
@@ -30,13 +31,18 @@ const TABS = [
   { key: "report", label: "통합 성적표" },
 ];
 
+const MODULE_KEY_LABELS = {
+  worksheet_quiz: "공통 퀴즈", reading_training: "독해 훈련",
+  choice_judgement: "선택지 판별", phoneme_change: "음운 변동",
+  word_formation: "단어의 형성", sentence_structure: "문장의 짜임",
+  content_pdf: "내용 숙지", answer_key: "정답·해설",
+  background_knowledge: "배경지식", logic_reasoning: "논리사고력",
+  daily_quiz: "일일 퀴즈", morpheme_analysis: "형태소 분석",
+  daily_reading: "일일 독해", pro_mode: "프로 모드", farm_mode: "농장별 모드",
+};
 const contentTypeLabel = (t) => {
   if (!t) return "-";
-  if (t === "daily_quiz") return "일일 퀴즈";
-  if (t === "daily_reading") return "일일 독해";
-  if (t === "pro_mode") return "프로 모드";
-  if (t === "farm_mode") return "농장별 모드";
-  return t;
+  return TYPE_LABEL[t] || MODULE_KEY_LABELS[t] || t;
 };
 
 function AdminStudentDetailPage() {

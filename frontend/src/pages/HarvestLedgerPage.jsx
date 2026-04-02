@@ -2,7 +2,18 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
+import { TYPE_LABEL } from "../constants/contentTypes";
 import "../styles/start.css";
+
+const MODULE_LABELS = {
+  worksheet_quiz: "공통 퀴즈", reading_training: "독해 훈련",
+  choice_judgement: "선택지 판별", phoneme_change: "음운 변동",
+  word_formation: "단어의 형성", sentence_structure: "문장의 짜임",
+  content_pdf: "내용 숙지", answer_key: "정답·해설",
+  background_knowledge: "배경지식", logic_reasoning: "논리사고력",
+  daily_quiz: "일일 퀴즈", morpheme_analysis: "형태소 분석",
+  daily_reading: "일일 독해", DAILY_QUIZ: "일일 퀴즈", DAILY_READING: "일일 독해",
+};
 
 const SEED_TYPE_LABEL = {
   seed_wheat: "밀", seed_rice: "쌀", seed_corn: "옥수수",
@@ -144,7 +155,7 @@ function HarvestLedgerPage() {
                     hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
                   })
                 : "-";
-              const title = contentTitle ?? contentType;
+              const title = contentTitle || TYPE_LABEL[contentType] || MODULE_LABELS[contentType] || contentType;
               const level = "-";
               const area = "-";
               const duration = formatDuration(startedAt, completedAt);

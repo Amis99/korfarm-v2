@@ -532,7 +532,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     return (
       <div className="engine-shell">
         <div className="engine-error">
-          학습 모듈을 찾을 수 없습니다. ({moduleKey})
+          학습 모듈을 찾을 수 없습니다.
         </div>
       </div>
     );

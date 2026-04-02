@@ -1,5 +1,21 @@
 import { Link } from "react-router-dom";
+import { TYPE_LABEL } from "../../constants/contentTypes";
 import ReportStudyPlanMatrix from "./ReportStudyPlanMatrix";
+
+const toKorean = (label) => {
+  if (!label) return "-";
+  // 이미 한글이면 그대로
+  if (/[가-힣]/.test(label)) return label;
+  const MODULE_LABELS = {
+    worksheet_quiz: "공통 퀴즈", reading_training: "독해 훈련",
+    choice_judgement: "선택지 판별", phoneme_change: "음운 변동",
+    word_formation: "단어의 형성", sentence_structure: "문장의 짜임",
+    content_pdf: "내용 숙지", answer_key: "정답·해설",
+    background_knowledge: "배경지식", logic_reasoning: "논리사고력",
+    daily_quiz: "일일 퀴즈", morpheme_analysis: "형태소 분석",
+  };
+  return TYPE_LABEL[label] || MODULE_LABELS[label] || label;
+};
 
 /**
  * 활동별 상세 섹션 — 접기/펼치기 없이 모든 섹션 항상 표시
@@ -77,7 +93,7 @@ const SECTIONS = [
             {items.map((it, i) => (
               <tr key={i}>
                 <td>{it.contentTitle || "-"}</td>
-                <td style={{ fontSize: 12 }}>{it.contentTypeLabel || "-"}</td>
+                <td style={{ fontSize: 12 }}>{toKorean(it.contentTypeLabel || it.contentType) || "-"}</td>
                 <td style={{ fontWeight: 700 }}>
                   {it.accuracy != null ? `${it.accuracy}%` : "-"}
                 </td>
