@@ -540,7 +540,6 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
 
   const sheetBackground = content?.assets?.sheetBackground || "learning-paper.jpg";
   const shellStyle = {
-    "--header-height": `${headerHeight}px`,
     "--sheet-bg": "url('" + resolveAssetUrl(sheetBackground) + "')",
     "--question-modal-bg": "url('" + resolveAssetUrl("질문 모달.png") + "')",
     "--mark-correct-bg": "url('" + resolveAssetUrl("정답 동그라미.png") + "')",
@@ -567,43 +566,43 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   return (
     <EngineContext.Provider value={contextValue}>
       <div className="engine-shell" style={shellStyle}>
+        <div className="engine-header-wrap">
+          <header ref={headerRef} className="engine-header engine-scale">
+            <div className="engine-header-row">
+              <div className="engine-header-item engine-title">
+                <strong>{content?.title || "학습"}</strong>
+              </div>
+              <div className="engine-header-divider" />
+              <div className="engine-header-item">
+                <strong>
+                  {getLevelLabel(content?.targetLevel)}
+                </strong>
+              </div>
+              <div className="engine-header-divider" />
+              <div className="engine-header-item">
+                <strong>
+                  {getAreaLabel(content?.area, content?.subArea)} · {getSubAreaLabel(content?.subArea)}
+                </strong>
+              </div>
+            </div>
+            <div className="engine-header-row secondary">
+              <div className="engine-header-item">
+                <div className="seed-row" aria-label={`현재 씨앗 ${seed}개`}>
+                  {Array.from({ length: seed }, (_, idx) => (
+                    <span key={`seed-${idx}`} className="seed-icon" style={seedIconStyle} />
+                  ))}
+                </div>
+              </div>
+              <div className="engine-header-divider" />
+              <div className="engine-header-item engine-timebar">
+                <TimeBar timeLeft={timeLeft} timeLimit={timeLimit} className={timePulse} />
+              </div>
+            </div>
+          </header>
+        </div>
+
         <div className="engine-viewport">
           <div className="engine-stage">
-            <div className="engine-header-wrap" style={{ "--header-height": `${headerHeight}px` }}>
-              <header ref={headerRef} className="engine-header engine-scale">
-                <div className="engine-header-row">
-                  <div className="engine-header-item engine-title">
-                    <strong>{content?.title || "학습"}</strong>
-                  </div>
-                  <div className="engine-header-divider" />
-                  <div className="engine-header-item">
-                    <strong>
-                      {getLevelLabel(content?.targetLevel)}
-                    </strong>
-                  </div>
-                  <div className="engine-header-divider" />
-                  <div className="engine-header-item">
-                    <strong>
-                      {getAreaLabel(content?.area, content?.subArea)} · {getSubAreaLabel(content?.subArea)}
-                    </strong>
-                  </div>
-                </div>
-                <div className="engine-header-row secondary">
-                  <div className="engine-header-item">
-                    <div className="seed-row" aria-label={`현재 씨앗 ${seed}개`}>
-                      {Array.from({ length: seed }, (_, idx) => (
-                        <span key={`seed-${idx}`} className="seed-icon" style={seedIconStyle} />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="engine-header-divider" />
-                  <div className="engine-header-item engine-timebar">
-                    <TimeBar timeLeft={timeLeft} timeLimit={timeLimit} className={timePulse} />
-                  </div>
-                </div>
-              </header>
-            </div>
-
             <div className="engine-stage-inner engine-scale">
               <main
                 className={`engine-body ${

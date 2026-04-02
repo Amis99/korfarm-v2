@@ -333,6 +333,7 @@ function QuestionModal({
       >
         <div className="question-modal-header" onPointerDown={handleDragStart}>
           <h3>{title}</h3>
+          <span className="question-modal-drag-hint">클릭 후 이동 가능합니다</span>
           {onClose ? (
             <button
               type="button"
