@@ -521,6 +521,55 @@ class StudyPlanService(
         )
     }
 
+    @Transactional(readOnly = true)
+    fun getUpcomingItems(userId: String): List<UpcomingItemResponse> {
+        val planIds = resolveMyPlanIds(userId)
+        if (planIds.isEmpty()) return emptyList()
+        val activePlans = planRepo.findAllById(planIds).filter { it.status == "active" }
+        val activePlanIds = activePlans.map { it.id }.toSet()
+        val planMap = activePlans.associateBy { it.id }
+
+        val today = LocalDate.now()
+        val weekLater = today.plusDays(7)
+
+        // 임박 스케줄
+        val schedules = scheduleRepo.findByPlanIdInAndScheduledDateBetween(activePlanIds, today, weekLater)
+        val result = mutableListOf<UpcomingItemResponse>()
+        for (s in schedules) {
+            val asset = s.assetId?.let { assetRepo.findById(it).orElse(null) }
+            result.add(
+                UpcomingItemResponse(
+                    assetType = asset?.assetType ?: "activity",
+                    label = s.label ?: asset?.label ?: "활동",
+                    scheduledDate = s.scheduledDate.toString(),
+                    dueDate = null,
+                    planTitle = planMap[s.planId]?.title ?: ""
+                )
+            )
+        }
+
+        // 미수행 셀 중 기한 임박 (pending 상태)
+        val cells = cellRepo.findByPlanIdInAndUserId(activePlanIds, userId)
+            .filter { it.status == "pending" }
+            .take(5)
+        for (c in cells) {
+            val asset = assetRepo.findById(c.assetId).orElse(null)
+            if (asset != null && result.size < 3) {
+                result.add(
+                    UpcomingItemResponse(
+                        assetType = asset.assetType,
+                        label = asset.label,
+                        scheduledDate = null,
+                        dueDate = null,
+                        planTitle = planMap[c.planId]?.title
+                    )
+                )
+            }
+        }
+
+        return result.take(3)
+    }
+
     // ── 학생: 셀 제출 (학습활동만) ──
 
     @Transactional

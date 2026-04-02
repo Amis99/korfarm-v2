@@ -107,7 +107,7 @@ export default function StudyPlanPage() {
       <div className="sp-header">
         <h1>
           <span className="material-symbols-outlined">event_note</span>
-          시험 공부
+          학습 계획표
         </h1>
         {plans.length > 1 && (
           <div className="sp-plan-select">

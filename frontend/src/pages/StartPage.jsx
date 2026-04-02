@@ -695,8 +695,8 @@ function StartPage() {
             </div>
             <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/study-plan" : "/subscription")}>
               <span className="material-symbols-outlined">event_note</span>
-              <h3>시험 공부</h3>
-              <p>학습 계획표 실행</p>
+              <h3>학습 계획표</h3>
+              <p>담당 선생님이 있는 경우 시험 공부 스케줄을 관리합니다.</p>
               {!hasSub && <span className="start-lock-badge">구독 필요</span>}
             </div>
           </div>

@@ -230,6 +230,14 @@ data class StudentDashboardSummary(
     val upcomingSchedules: Int
 )
 
+data class UpcomingItemResponse(
+    val assetType: String,
+    val label: String,
+    val scheduledDate: String?,
+    val dueDate: String?,
+    val planTitle: String?
+)
+
 // ── 캘린더 이벤트 응답 ──
 
 data class CalendarEventResponse(

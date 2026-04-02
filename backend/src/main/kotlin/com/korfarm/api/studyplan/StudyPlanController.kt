@@ -27,6 +27,11 @@ class StudyPlanController(
         return ApiResponse(success = true, data = service.getDashboardSummary(currentUser()))
     }
 
+    @GetMapping("/upcoming")
+    fun upcoming(): ApiResponse<List<UpcomingItemResponse>> {
+        return ApiResponse(success = true, data = service.getUpcomingItems(currentUser()))
+    }
+
     @GetMapping("/{planId}/matrix")
     fun matrix(@PathVariable planId: String): ApiResponse<MatrixResponse> {
         val userId = currentUser()
