@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { apiGet } from "../../utils/api";
 import CellStatusBadge from "../CellStatusBadge";
 
 /**
@@ -22,12 +23,10 @@ export default function ReportStudyPlanMatrix({ planIds }) {
       try {
         const results = await Promise.all(
           planIds.map(async (planId) => {
-            const res = await fetch(`/api/v1/study-plans/${planId}/matrix`, {
-              credentials: "include",
-            });
-            if (!res.ok) return null;
-            const data = await res.json();
-            return { planId, ...data };
+            try {
+              const data = await apiGet(`/v1/study-plans/${planId}/matrix`);
+              return { planId, ...data };
+            } catch { return null; }
           })
         );
         if (!cancelled) {
