@@ -4,6 +4,7 @@ import { TYPE_LABEL } from "../constants/contentTypes";
 import "../styles/study-plan.css";
 
 const TABS = [
+  { key: "all", label: "종합 검색" },
   { key: "farm", label: "농장별 모드" },
   { key: "daily", label: "일일 학습" },
   { key: "pro", label: "프로 모드" },
@@ -24,7 +25,12 @@ const LEVEL_LABELS = {
 };
 
 export default function KorfarmContentSearchModal({ onSelect, onClose }) {
-  const [tab, setTab] = useState("farm");
+  const [tab, setTab] = useState("all");
+
+  // ── 종합 검색 ──
+  const [allSearch, setAllSearch] = useState("");
+  const [allItems, setAllItems] = useState([]);
+  const [allLoading, setAllLoading] = useState(false);
 
   // ── 농장별 모드 ──
   const [farmAreas, setFarmAreas] = useState([]);
@@ -50,6 +56,28 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
       })
       .catch(() => setFarmAreas([]));
   }, []);
+
+  // 종합 검색
+  useEffect(() => {
+    if (tab !== "all" || allSearch.trim().length < 2) { setAllItems([]); return; }
+    const timer = setTimeout(() => {
+      setAllLoading(true);
+      apiGet(`/v1/learning/catalog/search?q=${encodeURIComponent(allSearch.trim())}`)
+        .then((data) => setAllItems(Array.isArray(data) ? data : []))
+        .catch(() => {
+          // search API가 없으면 전체 카탈로그에서 필터
+          apiGet("/v1/admin/content")
+            .then((data) => {
+              const list = Array.isArray(data) ? data : [];
+              const term = allSearch.trim().toLowerCase();
+              setAllItems(list.filter(it => (it.title || "").toLowerCase().includes(term)).slice(0, 50));
+            })
+            .catch(() => setAllItems([]));
+        })
+        .finally(() => setAllLoading(false));
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [tab, allSearch]);
 
   // 농장별 콘텐츠
   useEffect(() => {
@@ -117,6 +145,30 @@ export default function KorfarmContentSearchModal({ onSelect, onClose }) {
             </button>
           ))}
         </div>
+
+        {/* ── 종합 검색 ── */}
+        {tab === "all" && (
+          <>
+            <div className="sp-csm-filters">
+              <input type="text" placeholder="제목으로 검색 (2글자 이상)..." value={allSearch} onChange={(e) => setAllSearch(e.target.value)} autoFocus style={{ flex: 1 }} />
+            </div>
+            <div className="sp-csm-list">
+              {allLoading ? <p className="sp-csm-empty">검색 중...</p>
+                : allSearch.trim().length < 2 ? <p className="sp-csm-empty">검색어를 2글자 이상 입력하세요</p>
+                : allItems.length === 0 ? <p className="sp-csm-empty">검색 결과가 없습니다</p>
+                : allItems.map((item, i) => (
+                  <div key={item.contentId || item.content_id || i} className="sp-csm-item" onClick={() => handleSelect({
+                    contentId: item.contentId || item.content_id || item.id,
+                    title: item.title || "",
+                    contentType: item.contentType || item.content_type || "",
+                  })}>
+                    <span className="sp-csm-item-title">{item.title}</span>
+                    <span className="sp-csm-item-area">{TYPE_LABEL[item.contentType || item.content_type] || item.contentType || item.content_type || ""}</span>
+                  </div>
+                ))}
+            </div>
+          </>
+        )}
 
         {/* ── 농장별 모드 ── */}
         {tab === "farm" && (
