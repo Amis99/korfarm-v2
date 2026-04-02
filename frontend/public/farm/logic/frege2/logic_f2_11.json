@@ -1,0 +1,176 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 11",
+  "description": "논리 퍼즐과 배제법",
+  "targetLevel": "FREGE_2",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "퍼즐", "배제법"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passages": [
+      {
+        "title": "범인 찾기",
+        "text": "사건 현장에 A, B, C 세 명의 용의자가 있다. 단서: ① 범인은 오른손잡이이다. ② B는 왼손잡이이다. ③ 범인은 현장에 지문을 남겼다. ④ C의 지문은 현장에 없었다.",
+        "questions": [
+          {
+            "id": "lg-f2-11-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "범인은 누구인가?",
+            "choices": [
+              { "id": "A", "text": "A" },
+              { "id": "B", "text": "B" },
+              { "id": "C", "text": "C" },
+              { "id": "D", "text": "판단할 수 없다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-11-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론에서 사용된 방법은?",
+            "choices": [
+              { "id": "A", "text": "소거법(배제법) — 조건에 맞지 않는 용의자를 하나씩 제거" },
+              { "id": "B", "text": "귀납 추론" },
+              { "id": "C", "text": "유추" },
+              { "id": "D", "text": "통계적 추론" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "자리 배정",
+        "text": "A, B, C, D 네 명이 동서남북 네 방향에 앉는다. 조건: ① A는 북쪽에 앉지 않는다. ② B는 남쪽에 앉는다. ③ C는 A의 맞은편에 앉는다. ④ D는 동쪽에 앉지 않는다.",
+        "questions": [
+          {
+            "id": "lg-f2-11-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "A가 앉을 수 있는 자리는?",
+            "choices": [
+              { "id": "A", "text": "동쪽 또는 서쪽" },
+              { "id": "B", "text": "북쪽" },
+              { "id": "C", "text": "남쪽" },
+              { "id": "D", "text": "동쪽만" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-11-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "A가 동쪽이면 D는 어디에 앉는가?",
+            "choices": [
+              { "id": "A", "text": "서쪽 — C는 A 맞은편(서쪽)이어야 하므로 모순. A는 동쪽이 아니다." },
+              { "id": "B", "text": "북쪽" },
+              { "id": "C", "text": "남쪽" },
+              { "id": "D", "text": "동쪽" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "모자 색깔",
+        "text": "세 사람이 일렬로 서 있다. 뒤에서부터 각각 빨강, 파랑 모자 중 하나를 쓰고 있다. 뒤 사람은 앞 두 사람의 모자를 볼 수 있다. 가운데 사람은 앞 한 사람만 볼 수 있다. 뒤 사람이 \"나는 내 모자 색을 모르겠다\"고 했다.",
+        "questions": [
+          {
+            "id": "lg-f2-11-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "뒤 사람의 발언에서 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "앞 두 사람의 모자가 같은 색이 아니다 (같은 색이면 자신의 색을 알 수 있었을 것)." },
+              { "id": "B", "text": "세 사람 모두 같은 색이다." },
+              { "id": "C", "text": "아무것도 알 수 없다." },
+              { "id": "D", "text": "뒤 사람의 모자가 빨강이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-11-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 정보를 들은 가운데 사람이 앞 사람의 모자가 빨강인 것을 보고 자신의 모자 색을 알 수 있는가?",
+            "choices": [
+              { "id": "A", "text": "알 수 있다. 앞 두 사람이 다른 색이므로, 앞이 빨강이면 자신은 파랑이다." },
+              { "id": "B", "text": "알 수 없다." },
+              { "id": "C", "text": "자신도 빨강이다." },
+              { "id": "D", "text": "정보가 부족하다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "거짓말 탐지",
+        "text": "네 명 중 정확히 한 명이 거짓말을 한다. 갑: \"나는 먹지 않았다.\" 을: \"병이 먹었다.\" 병: \"나는 먹지 않았다.\" 정: \"갑이 먹었다.\"",
+        "questions": [
+          {
+            "id": "lg-f2-11-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "갑이 먹었다면 거짓말을 하는 사람은?",
+            "choices": [
+              { "id": "A", "text": "갑(자기가 먹었는데 안 먹었다고 함)과 을(병이 먹었다고 했는데 갑이 먹음) — 두 명이 거짓말이므로 조건에 안 맞다." },
+              { "id": "B", "text": "갑만" },
+              { "id": "C", "text": "을만" },
+              { "id": "D", "text": "정만" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-11-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "실제로 먹은 사람과 거짓말쟁이는?",
+            "choices": [
+              { "id": "A", "text": "병이 먹었고, 병이 거짓말쟁이이다. (을의 말이 참이면 병이 먹음, 병은 거짓말, 갑과 정은 참)" },
+              { "id": "B", "text": "을이 먹었다." },
+              { "id": "C", "text": "정이 먹었다." },
+              { "id": "D", "text": "알 수 없다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "숫자 추론",
+        "text": "1부터 5까지 숫자 카드가 하나씩 있다. A, B, C, D, E 다섯 명이 하나씩 가진다. 단서: A의 숫자는 B보다 크다. C의 숫자는 3이다. D의 숫자는 E보다 작다. B의 숫자는 1이다.",
+        "questions": [
+          {
+            "id": "lg-f2-11-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "A의 숫자로 가능한 것은?",
+            "choices": [
+              { "id": "A", "text": "2, 4, 5" },
+              { "id": "B", "text": "2, 3, 4, 5" },
+              { "id": "C", "text": "2, 4, 5 (3은 C가 가짐)" },
+              { "id": "D", "text": "4, 5" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-11-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "D가 E보다 작으므로, 남은 숫자 2, 4, 5에서 (D, E)로 가능한 조합은?",
+            "choices": [
+              { "id": "A", "text": "(2,4), (2,5), (4,5)" },
+              { "id": "B", "text": "(4,2), (5,2)" },
+              { "id": "C", "text": "(2,4)만" },
+              { "id": "D", "text": "A의 숫자에 따라 달라진다." }
+            ],
+            "answerId": "D",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

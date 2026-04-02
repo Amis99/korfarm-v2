@@ -1,0 +1,215 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 06",
+  "description": "논증의 구조와 타당성 판별",
+  "targetLevel": "RUSSELL_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "추론", "논증", "타당성"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "타당한 논증과 부당한 논증",
+        "text": "타당한 논증이란 전제가 모두 참이면 결론도 반드시 참이 되는 논증이다. 전제의 실제 참·거짓과는 별개로, 논증의 형식이 올바른지가 핵심이다.",
+        "questions": [
+          {
+            "id": "lg-r1-06-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 타당한 논증은?",
+            "choices": [
+              { "id": "A", "text": "모든 물고기는 헤엄친다. 참치는 물고기다. 따라서 참치는 헤엄친다." },
+              { "id": "B", "text": "대부분의 학생은 국어를 좋아한다. 민수는 학생이다. 따라서 민수는 국어를 좋아한다." },
+              { "id": "C", "text": "어떤 사람은 음악을 좋아한다. 지영은 사람이다. 따라서 지영은 음악을 좋아한다." },
+              { "id": "D", "text": "비가 오면 습하다. 오늘 습하다. 따라서 비가 왔다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-06-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "타당한 논증의 전제가 실제로 거짓이라면 결론은?",
+            "choices": [
+              { "id": "A", "text": "반드시 거짓이다" },
+              { "id": "B", "text": "반드시 참이다" },
+              { "id": "C", "text": "참일 수도 거짓일 수도 있다" },
+              { "id": "D", "text": "논증이 무효가 된다" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-06-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "'모든 나무는 동물이다. 모든 동물은 걸을 수 있다. 따라서 모든 나무는 걸을 수 있다.'에 대한 평가로 올바른 것은?",
+            "choices": [
+              { "id": "A", "text": "타당하지 않은 논증이다" },
+              { "id": "B", "text": "타당하지만 건전하지 않은 논증이다" },
+              { "id": "C", "text": "타당하고 건전한 논증이다" },
+              { "id": "D", "text": "결론이 참이므로 건전하다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "전건 부정의 오류",
+        "text": "어떤 학생이 이렇게 추론했다. '시험에 합격하면 파티에 간다. 시험에 합격하지 못했다. 따라서 파티에 가지 않는다.'",
+        "questions": [
+          {
+            "id": "lg-r1-06-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론은 타당한가?",
+            "choices": [
+              { "id": "A", "text": "타당하다" },
+              { "id": "B", "text": "타당하지 않다. 전건 부정의 오류이다" },
+              { "id": "C", "text": "타당하지 않다. 후건 긍정의 오류이다" },
+              { "id": "D", "text": "판단할 수 없다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-06-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론이 부당한 이유는?",
+            "choices": [
+              { "id": "A", "text": "시험에 합격하지 않아도 다른 이유로 파티에 갈 수 있다" },
+              { "id": "B", "text": "시험 결과가 아직 나오지 않았기 때문이다" },
+              { "id": "C", "text": "파티에 가는 것이 불가능하기 때문이다" },
+              { "id": "D", "text": "전제가 거짓이기 때문이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "논증 강화와 약화",
+        "text": "과학자가 주장한다. '이 약을 먹은 환자 100명 중 80명이 증상이 호전되었다. 따라서 이 약은 효과가 있다.'",
+        "questions": [
+          {
+            "id": "lg-r1-06-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증을 약화하는 정보는?",
+            "choices": [
+              { "id": "A", "text": "약을 먹지 않은 대조군도 75명이 자연 호전되었다" },
+              { "id": "B", "text": "약을 먹은 환자가 200명이었다면 더 확실했을 것이다" },
+              { "id": "C", "text": "다른 연구에서도 비슷한 결과가 나왔다" },
+              { "id": "D", "text": "환자들이 모두 성인이었다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-06-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증을 강화하는 정보는?",
+            "choices": [
+              { "id": "A", "text": "약을 먹지 않은 대조군은 20명만 호전되었다" },
+              { "id": "B", "text": "환자들이 젊었다" },
+              { "id": "C", "text": "약의 가격이 저렴하다" },
+              { "id": "D", "text": "과학자가 유명하다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-06-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증이 귀납 추론에 해당하는 이유는?",
+            "choices": [
+              { "id": "A", "text": "전제에서 결론이 필연적으로 따라 나오기 때문이다" },
+              { "id": "B", "text": "관찰된 사례에서 일반적 결론을 이끌어내기 때문이다" },
+              { "id": "C", "text": "수학적 증명을 사용하기 때문이다" },
+              { "id": "D", "text": "전문가의 의견에 근거하기 때문이다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "숨겨진 가정 찾기 심화",
+        "text": "학교 신문에 이런 기사가 실렸다. '최근 학교 앞 교통사고가 늘었다. 신호등을 설치하면 교통사고가 줄어들 것이다.'",
+        "questions": [
+          {
+            "id": "lg-r1-06-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 주장에 숨겨진 가정은?",
+            "choices": [
+              { "id": "A", "text": "교통사고의 원인이 신호등 부재이다" },
+              { "id": "B", "text": "학교 앞 도로가 넓다" },
+              { "id": "C", "text": "학생들이 교통 법규를 잘 모른다" },
+              { "id": "D", "text": "신호등 설치 비용이 저렴하다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-06-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "숨겨진 가정이 거짓이라면(예: 사고 원인이 과속이라면)?",
+            "choices": [
+              { "id": "A", "text": "신호등 설치로 사고가 줄어들 가능성이 낮아진다" },
+              { "id": "B", "text": "신호등 설치와 무관하게 사고는 반드시 줄어든다" },
+              { "id": "C", "text": "주장의 결론이 더 강화된다" },
+              { "id": "D", "text": "전제가 거짓이므로 논증이 성립하지 않는다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "귀납의 강도",
+        "text": "다음 두 추론을 비교하자. (가) 학교 급식 만족도 조사에서 500명 중 400명이 만족한다고 답했다. 따라서 학생 대부분이 급식에 만족한다. (나) 내 친구 3명에게 물어봤더니 모두 급식이 맛없다고 했다. 따라서 학생 대부분이 급식에 불만족한다.",
+        "questions": [
+          {
+            "id": "lg-r1-06-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "(가)와 (나) 중 귀납적 강도가 더 높은 것은?",
+            "choices": [
+              { "id": "A", "text": "(가)" },
+              { "id": "B", "text": "(나)" },
+              { "id": "C", "text": "둘 다 같다" },
+              { "id": "D", "text": "둘 다 연역이므로 비교 불가" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-06-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "(나)의 추론이 약한 가장 큰 이유는?",
+            "choices": [
+              { "id": "A", "text": "표본의 크기가 너무 작고 편향되어 있다" },
+              { "id": "B", "text": "급식이 실제로 맛있기 때문이다" },
+              { "id": "C", "text": "친구의 의견은 항상 틀리기 때문이다" },
+              { "id": "D", "text": "귀납 추론 자체가 항상 잘못이기 때문이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-06-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "(가)의 결론을 더 신뢰할 수 있게 만드는 조건은?",
+            "choices": [
+              { "id": "A", "text": "조사 대상이 전교생을 무작위로 대표할 때" },
+              { "id": "B", "text": "교사만을 대상으로 조사했을 때" },
+              { "id": "C", "text": "급식 메뉴가 바뀐 직후에 조사했을 때" },
+              { "id": "D", "text": "모두 같은 반 학생일 때" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

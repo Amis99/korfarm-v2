@@ -1,0 +1,336 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 11",
+  "description": "논리 퍼즐 고급",
+  "targetLevel": "FREGE_3",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "퍼즐",
+    "고급"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 300,
+  "payload": {
+    "passages": [
+      {
+        "title": "섬의 주민 응용",
+        "text": "섬에 기사(참)와 악당(거짓)이 산다. A: 'B는 기사입니다.' B: '우리 둘은 다른 부류입니다.'",
+        "questions": [
+          {
+            "id": "lg-f3-11-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "A가 기사라면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "B도 기사(A의 말 참). 그런데 B가 '다른 부류'라 했으므로 거짓→B는 악당이어야 함. 모순."
+              },
+              {
+                "id": "B",
+                "text": "B는 기사이고 모순 없다."
+              },
+              {
+                "id": "C",
+                "text": "A와 B 모두 악당이다."
+              },
+              {
+                "id": "D",
+                "text": "판단할 수 없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-f3-11-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "A와 B의 부류는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "A: 악당, B: 악당"
+              },
+              {
+                "id": "B",
+                "text": "A: 기사, B: 기사"
+              },
+              {
+                "id": "C",
+                "text": "A: 악당, B: 기사"
+              },
+              {
+                "id": "D",
+                "text": "A: 기사, B: 악당"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "논리 격자 고급",
+        "text": "4명(A,B,C,D)이 각각 다른 악기(피아노,바이올린,첼로,플루트)를 연주한다. ①A는 피아노나 첼로. ②B는 바이올린이 아니다. ③C는 플루트. ④D는 피아노가 아니다.",
+        "questions": [
+          {
+            "id": "lg-f3-11-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "B의 악기는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피아노"
+              },
+              {
+                "id": "B",
+                "text": "첼로"
+              },
+              {
+                "id": "C",
+                "text": "플루트"
+              },
+              {
+                "id": "D",
+                "text": "C가 플루트이고, B는 바이올린 아니므로, A가 피아노나 첼로. 소거하면 B는 피아노 또는 첼로인데, A에 따라 결정."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-f3-11-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "A가 피아노이면 나머지 배정은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "B:첼로, D:바이올린"
+              },
+              {
+                "id": "B",
+                "text": "B:바이올린, D:첼로"
+              },
+              {
+                "id": "C",
+                "text": "B:플루트, D:첼로"
+              },
+              {
+                "id": "D",
+                "text": "불가능하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "강 건너기",
+        "text": "농부, 여우, 닭, 곡식이 있다. 배에 농부+하나만 탈 수 있다. 농부 없이 여우와 닭, 또는 닭과 곡식이 같이 있으면 안 된다.",
+        "questions": [
+          {
+            "id": "lg-f3-11-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "첫 번째로 건너야 하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "여우"
+              },
+              {
+                "id": "B",
+                "text": "닭"
+              },
+              {
+                "id": "C",
+                "text": "곡식"
+              },
+              {
+                "id": "D",
+                "text": "아무거나 상관없다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-f3-11-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "닭을 먼저 건너는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "닭이 여우와도, 곡식과도 같이 있으면 안 되는 유일한 '문제 요소'이기 때문이다."
+              },
+              {
+                "id": "B",
+                "text": "닭이 가장 가볍다."
+              },
+              {
+                "id": "C",
+                "text": "여우가 위험하다."
+              },
+              {
+                "id": "D",
+                "text": "곡식이 무겁다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "저울 문제",
+        "text": "12개의 동전 중 1개가 가짜(무게 다름). 양팔 저울을 3번만 사용하여 가짜를 찾아야 한다.",
+        "questions": [
+          {
+            "id": "lg-f3-11-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "첫 번째 저울에서 4개 vs 4개를 올리는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "균형이면 나머지 4개에 가짜가 있고, 불균형이면 올린 8개 중에 있어 탐색 범위를 1/3로 줄인다."
+              },
+              {
+                "id": "B",
+                "text": "6개 vs 6개가 더 낫다."
+              },
+              {
+                "id": "C",
+                "text": "1개씩 비교해야 한다."
+              },
+              {
+                "id": "D",
+                "text": "무작위로 올린다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-f3-11-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "3번으로 12개 중 가짜를 찾을 수 있는 논리적 근거는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "매 저울에서 3가지 결과(왼쪽↓, 균형, 오른쪽↓)가 나오므로 3³=27가지 구분이 가능하고, 12<27이므로 가능하다."
+              },
+              {
+                "id": "B",
+                "text": "운이 좋으면 가능하다."
+              },
+              {
+                "id": "C",
+                "text": "4번이 필요하다."
+              },
+              {
+                "id": "D",
+                "text": "불가능하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "경우의 수",
+        "text": "5명 중 회장, 부회장을 뽑는다. A는 B와 같이 당선되지 않는다.",
+        "questions": [
+          {
+            "id": "lg-f3-11-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "조건 없이 가능한 경우의 수는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "20"
+              },
+              {
+                "id": "B",
+                "text": "25"
+              },
+              {
+                "id": "C",
+                "text": "10"
+              },
+              {
+                "id": "D",
+                "text": "15"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-f3-11-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "조건 적용 시 제외되는 경우의 수는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "4"
+              },
+              {
+                "id": "D",
+                "text": "0"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

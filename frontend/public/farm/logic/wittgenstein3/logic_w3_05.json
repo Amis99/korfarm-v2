@@ -1,0 +1,483 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 05",
+  "description": "진리함수 완전성과 최소 연결사",
+  "targetLevel": "WITTGENSTEIN_3",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론",
+    "킬러",
+    "진리함수"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "NAND로 모든 연결사 구성",
+        "text": "NAND(↑)는 P↑Q = ¬(P∧Q). NAND만으로 ¬, ∧, ∨, →를 모두 표현 가능.",
+        "questions": [
+          {
+            "id": "lg-w3-05-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "¬P를 NAND로 표현하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P↑P"
+              },
+              {
+                "id": "B",
+                "text": "P↑Q"
+              },
+              {
+                "id": "C",
+                "text": "(P↑P)↑Q"
+              },
+              {
+                "id": "D",
+                "text": "불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w3-05-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "P∧Q를 NAND로 표현하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "(P↑Q)↑(P↑Q)"
+              },
+              {
+                "id": "B",
+                "text": "P↑Q"
+              },
+              {
+                "id": "C",
+                "text": "P↑(Q↑Q)"
+              },
+              {
+                "id": "D",
+                "text": "(P↑P)↑(Q↑Q)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w3-05-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "P∨Q를 NAND로 표현하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "(P↑P)↑(Q↑Q)"
+              },
+              {
+                "id": "B",
+                "text": "P↑Q"
+              },
+              {
+                "id": "C",
+                "text": "(P↑Q)↑(P↑Q)"
+              },
+              {
+                "id": "D",
+                "text": "P↑(P↑Q)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "기능 완전성 판별",
+        "text": "{→, ⊥}가 기능 완전한지 판별. ⊥는 항상 거짓. ¬P = P→⊥.",
+        "questions": [
+          {
+            "id": "lg-w3-05-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "{→, ⊥}가 기능 완전한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "완전하다"
+              },
+              {
+                "id": "B",
+                "text": "완전하지 않다"
+              },
+              {
+                "id": "C",
+                "text": "→만으로 완전"
+              },
+              {
+                "id": "D",
+                "text": "⊥만으로 완전"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w3-05-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "P∧Q를 →와 ⊥로 표현하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "(P→(Q→⊥))→⊥"
+              },
+              {
+                "id": "B",
+                "text": "P→Q"
+              },
+              {
+                "id": "C",
+                "text": "(P→⊥)→Q"
+              },
+              {
+                "id": "D",
+                "text": "불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "최소 연결사 집합",
+        "text": "{¬,∧}, {¬,∨}, {¬,→}는 최소 완전. {¬,∧,∨}는 ∨가 잉여이므로 최소 아님.",
+        "questions": [
+          {
+            "id": "lg-w3-05-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "{¬,∧,∨}가 최소 완전이 아닌 이유?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P∨Q = ¬(¬P∧¬Q)이므로 ∨ 잉여"
+              },
+              {
+                "id": "B",
+                "text": "¬이 잉여"
+              },
+              {
+                "id": "C",
+                "text": "∧이 잉여"
+              },
+              {
+                "id": "D",
+                "text": "최소 완전이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w3-05-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "{↑}는 최소 완전인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "최소 완전. 원소 1개"
+              },
+              {
+                "id": "B",
+                "text": "최소 아님"
+              },
+              {
+                "id": "C",
+                "text": "완전하지 않다"
+              },
+              {
+                "id": "D",
+                "text": "판단 불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w3-05-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "{∧,∨}는 기능 완전한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아니다. 부정 불가"
+              },
+              {
+                "id": "B",
+                "text": "완전하다"
+              },
+              {
+                "id": "C",
+                "text": "→ 추가 필요"
+              },
+              {
+                "id": "D",
+                "text": "판단 불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "NOR의 기능 완전성",
+        "text": "NOR(↓): P↓Q = ¬(P∨Q). ¬P = P↓P. P∨Q = (P↓Q)↓(P↓Q). P∧Q = (P↓P)↓(Q↓Q).",
+        "questions": [
+          {
+            "id": "lg-w3-05-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "NAND와 NOR의 관계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "둘 다 단독 기능 완전, 드모르간에 의한 쌍대"
+              },
+              {
+                "id": "B",
+                "text": "같은 연산"
+              },
+              {
+                "id": "C",
+                "text": "NAND만 완전"
+              },
+              {
+                "id": "D",
+                "text": "NOR만 완전"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w3-05-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "NOR로 ¬P를 표현하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P↓P"
+              },
+              {
+                "id": "B",
+                "text": "P↓Q"
+              },
+              {
+                "id": "C",
+                "text": "불가"
+              },
+              {
+                "id": "D",
+                "text": "(P↓Q)↓P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "포스트의 정리",
+        "text": "기능 완전하려면 T-보존, F-보존, 자기쌍대, 단조, 아핀 다섯 클래스에 모두 속하지 않는 함수 포함 필요.",
+        "questions": [
+          {
+            "id": "lg-w3-05-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "∧가 T-보존적인 이유?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "T∧T=T"
+              },
+              {
+                "id": "B",
+                "text": "T-보존 아님"
+              },
+              {
+                "id": "C",
+                "text": "항상 거짓"
+              },
+              {
+                "id": "D",
+                "text": "무관"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w3-05-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "¬가 T-보존적이지 않은 이유?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬T=F"
+              },
+              {
+                "id": "B",
+                "text": "T-보존적"
+              },
+              {
+                "id": "C",
+                "text": "무관"
+              },
+              {
+                "id": "D",
+                "text": "항상 참 출력"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w3-05-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "NAND가 기능 완전한 이유를 포스트 정리로 설명하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다섯 클래스 어디에도 속하지 않으므로"
+              },
+              {
+                "id": "B",
+                "text": "T-보존이므로"
+              },
+              {
+                "id": "C",
+                "text": "단조이므로"
+              },
+              {
+                "id": "D",
+                "text": "아핀이므로"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "추가 논리 문제",
+        "text": "다음 문제를 풀어라.",
+        "questions": [
+          {
+            "id": "lg-w3-05-p6-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "P→Q와 논리적으로 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "Q → P"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w3-05-p6-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "후건 부정법의 올바른 형식은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P→Q, ¬Q ⊢ ¬P"
+              },
+              {
+                "id": "B",
+                "text": "P→Q, Q ⊢ P"
+              },
+              {
+                "id": "C",
+                "text": "P→Q, ¬P ⊢ ¬Q"
+              },
+              {
+                "id": "D",
+                "text": "P→Q, P ⊢ ¬Q"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

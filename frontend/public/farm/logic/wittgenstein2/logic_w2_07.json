@@ -1,0 +1,483 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 07",
+  "description": "귀납 강도 평가와 유비추론 심화",
+  "targetLevel": "WITTGENSTEIN_2",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론",
+    "귀납강도",
+    "유비추론"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "귀납 강도의 기준",
+        "text": "귀납 논증의 강도는 ① 표본의 크기, ② 표본의 대표성, ③ 결론의 범위에 의해 결정된다. 논증 A: '전국 5000명 무작위 조사에서 60%가 찬성했으므로 국민의 약 60%가 찬성할 것이다.' 논증 B: '서울 강남 주민 100명 조사에서 80%가 찬성했으므로 국민의 80%가 찬성할 것이다.'",
+        "questions": [
+          {
+            "id": "lg-w2-07-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "A가 B보다 귀납적으로 강한 이유를 모두 고르면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "표본 크기가 크고, 전국 무작위 추출로 대표성이 높으므로"
+              },
+              {
+                "id": "B",
+                "text": "찬성 비율이 낮으므로"
+              },
+              {
+                "id": "C",
+                "text": "결론이 더 약하므로"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-07-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "B의 약점을 모두 고르면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "표본이 특정 지역에 편중, 크기가 작음, 결론이 전국으로 과도하게 확장"
+              },
+              {
+                "id": "B",
+                "text": "표본이 너무 크다"
+              },
+              {
+                "id": "C",
+                "text": "결론이 너무 약하다"
+              },
+              {
+                "id": "D",
+                "text": "약점이 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-07-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "귀납 논증에서 '결론의 범위'가 강도에 영향을 미치는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결론의 범위가 넓을수록(예: '모든 국민') 근거가 더 많이 필요하고, 좁을수록('대부분') 적은 근거로도 지지 가능하므로"
+              },
+              {
+                "id": "B",
+                "text": "결론의 범위는 강도와 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "넓은 결론일수록 강하다"
+              },
+              {
+                "id": "D",
+                "text": "좁은 결론은 귀납이 아니다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "유비추론 평가 기준",
+        "text": "유비추론의 강도를 결정하는 요인: ① 유사점의 수, ② 유사점의 관련성, ③ 차이점의 심각성, ④ 결론의 강도. 논증: '지구와 화성은 태양 주위를 공전하고, 자전하며, 계절이 있고, 물의 흔적이 있다. 지구에는 생명체가 있다. 따라서 화성에도 생명체가 있다.'",
+        "questions": [
+          {
+            "id": "lg-w2-07-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 유비추론을 가장 강력하게 약화하는 정보는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화성의 대기가 매우 희박하고 방사선 차폐가 없으며 표면 온도가 극단적이다"
+              },
+              {
+                "id": "B",
+                "text": "금성도 태양 주위를 공전한다"
+              },
+              {
+                "id": "C",
+                "text": "지구의 바다가 넓다"
+              },
+              {
+                "id": "D",
+                "text": "화성에 산이 있다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-07-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "유비추론에서 '관련 있는 유사점'이란?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결론(생명체 존재)과 인과적으로 연결된 속성(예: 액체 상태의 물, 적절한 온도)"
+              },
+              {
+                "id": "B",
+                "text": "가능한 한 많은 유사점"
+              },
+              {
+                "id": "C",
+                "text": "외관상 비슷한 점"
+              },
+              {
+                "id": "D",
+                "text": "아무 유사점이나 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "통계적 삼단논법",
+        "text": "통계적 삼단논법: '이 집단의 X%가 속성 P를 가진다. a는 이 집단의 구성원이다. 따라서 a가 속성 P를 가질 확률은 약 X%이다.' 예: '한국 성인의 65%가 커피를 매일 마신다. 갑은 한국 성인이다. 따라서 갑이 커피를 매일 마실 확률은 약 65%이다.'",
+        "questions": [
+          {
+            "id": "lg-w2-07-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론을 약화하는 정보는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "갑이 카페인 알레르기가 있다는 정보(갑을 일반 집단과 다른 하위 집단으로 분류)"
+              },
+              {
+                "id": "B",
+                "text": "한국 성인의 70%가 차를 마신다"
+              },
+              {
+                "id": "C",
+                "text": "커피 가격이 올랐다"
+              },
+              {
+                "id": "D",
+                "text": "갑이 서울에 산다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-07-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "통계적 삼단논법의 약점은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "개인에 대한 추가 정보(기준율 조정 정보)가 있으면 확률이 크게 달라질 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "통계는 항상 정확하므로 약점이 없다"
+              },
+              {
+                "id": "C",
+                "text": "개인에게는 적용 불가하다"
+              },
+              {
+                "id": "D",
+                "text": "집단 통계는 무의미하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-07-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "기준율 조정이 필요한 상황은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대상이 일반 집단과 관련 있는 차이를 보이는 하위 집단에 속할 때"
+              },
+              {
+                "id": "B",
+                "text": "표본 크기가 클 때"
+              },
+              {
+                "id": "C",
+                "text": "결론이 확실할 때"
+              },
+              {
+                "id": "D",
+                "text": "전제가 참일 때"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "밀의 방법",
+        "text": "존 스튜어트 밀의 인과 추론 방법 중 '차이법'은 현상이 발생한 경우와 발생하지 않은 경우의 차이를 비교하여 원인을 추론한다. 실험: 동일한 조건의 두 밭에서 하나에만 비료 X를 주었더니 수확량이 30% 증가했다.",
+        "questions": [
+          {
+            "id": "lg-w2-07-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "차이법에 의한 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비료 X가 수확량 증가의 원인일 가능성이 높다"
+              },
+              {
+                "id": "B",
+                "text": "비료 X는 확실히 원인이다"
+              },
+              {
+                "id": "C",
+                "text": "비료 X와 수확량은 무관하다"
+              },
+              {
+                "id": "D",
+                "text": "다른 원인만 가능하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-07-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "차이법의 한계는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 경우의 조건이 완벽히 동일하다는 가정이 현실에서 충족되기 어렵다"
+              },
+              {
+                "id": "B",
+                "text": "차이법은 항상 정확하다"
+              },
+              {
+                "id": "C",
+                "text": "연역적 방법이므로 한계가 없다"
+              },
+              {
+                "id": "D",
+                "text": "표본이 2개면 충분하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "귀납 추론 종합",
+        "text": "다음 논증의 귀납적 강도를 평가하라. '10년간 100개국의 데이터를 분석한 결과, GDP 성장률과 교육 투자율 사이에 양의 상관관계가 있었다. 이 상관관계는 다른 변수를 통제한 후에도 유지되었다. 따라서 교육 투자가 경제 성장에 기여할 가능성이 높다.'",
+        "questions": [
+          {
+            "id": "lg-w2-07-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증의 강점은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대규모 데이터, 장기간, 다변량 통제를 통해 단순 상관 이상의 인과적 근거 제시"
+              },
+              {
+                "id": "B",
+                "text": "100개국이면 충분하다"
+              },
+              {
+                "id": "C",
+                "text": "결론이 확정적이다"
+              },
+              {
+                "id": "D",
+                "text": "약점이 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-07-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증을 약화하는 정보는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "역인과: 경제가 먼저 성장한 나라가 교육에 더 투자하는 것일 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "200개국 데이터가 필요하다"
+              },
+              {
+                "id": "C",
+                "text": "상관관계가 항상 인과이므로 약화 불가"
+              },
+              {
+                "id": "D",
+                "text": "10년은 충분하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "추가 논리 문제",
+        "text": "다음 각 문제를 풀어라.",
+        "questions": [
+          {
+            "id": "lg-w2-07-p6-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 형식적으로 타당한 논증은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 A는 B이다. C는 A이다. 따라서 C는 B이다."
+              },
+              {
+                "id": "B",
+                "text": "일부 A는 B이다. 일부 B는 C이다. 따라서 모든 A는 C이다."
+              },
+              {
+                "id": "C",
+                "text": "A이면 B이다. B이다. 따라서 A이다."
+              },
+              {
+                "id": "D",
+                "text": "A가 아니면 B이다. A이다. 따라서 B가 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-07-p6-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P이면 Q이다'와 논리적으로 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "Q → P"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-07-p6-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "후건 부정법의 올바른 형식은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P→Q, ¬Q ⊢ ¬P"
+              },
+              {
+                "id": "B",
+                "text": "P→Q, Q ⊢ P"
+              },
+              {
+                "id": "C",
+                "text": "P→Q, ¬P ⊢ ¬Q"
+              },
+              {
+                "id": "D",
+                "text": "P→Q, P ⊢ ¬Q"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

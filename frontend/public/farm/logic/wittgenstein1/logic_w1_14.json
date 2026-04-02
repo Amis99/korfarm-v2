@@ -1,0 +1,483 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 14",
+  "description": "조건문 심화와 복합 추론",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론",
+    "조건문심화",
+    "복합추론"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "복합 전건의 조건문",
+        "text": "'P ∧ Q → R'은 P와 Q가 동시에 참일 때만 R이 도출됨을 뜻한다. P만 참이거나 Q만 참일 때는 R에 대해 아무것도 말할 수 없다. 규칙: '영어와 수학 모두 80점 이상이면 장학생이 된다.'",
+        "questions": [
+          {
+            "id": "lg-w1-14-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "영어 90점, 수학 70점인 학생은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "장학생이 된다"
+              },
+              {
+                "id": "B",
+                "text": "장학생이 되지 않는다"
+              },
+              {
+                "id": "C",
+                "text": "이 규칙만으로는 장학생 여부를 알 수 없다"
+              },
+              {
+                "id": "D",
+                "text": "영어만 80점 이상이면 충분하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-14-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "장학생이 아닌 학생에 대해 확실히 말할 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "영어와 수학 중 적어도 하나가 80점 미만이다"
+              },
+              {
+                "id": "B",
+                "text": "영어와 수학 모두 80점 미만이다"
+              },
+              {
+                "id": "C",
+                "text": "영어가 80점 미만이다"
+              },
+              {
+                "id": "D",
+                "text": "수학이 80점 미만이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-14-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "대우 '¬R → ¬(P ∧ Q)'를 풀어쓰면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬R → (¬P ∨ ¬Q)"
+              },
+              {
+                "id": "B",
+                "text": "¬R → (¬P ∧ ¬Q)"
+              },
+              {
+                "id": "C",
+                "text": "¬R → (P ∨ Q)"
+              },
+              {
+                "id": "D",
+                "text": "(¬P ∨ ¬Q) → ¬R"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "복합 후건의 조건문",
+        "text": "'P → (Q ∧ R)'은 P가 참이면 Q와 R 모두 참이 됨을 뜻한다. 규칙: '우등생이면 표창장과 장학금을 모두 받는다.'",
+        "questions": [
+          {
+            "id": "lg-w1-14-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "표창장을 받지 못한 학생에 대해 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우등생이 아니다"
+              },
+              {
+                "id": "B",
+                "text": "장학금도 받지 못했다"
+              },
+              {
+                "id": "C",
+                "text": "우등생일 수도 있다"
+              },
+              {
+                "id": "D",
+                "text": "장학금은 받았을 수 있다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-14-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "장학금은 받았지만 표창장은 받지 못한 학생은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우등생이다"
+              },
+              {
+                "id": "B",
+                "text": "우등생이 아니다. Q ∧ R에서 R만 참이고 Q가 거짓이므로"
+              },
+              {
+                "id": "C",
+                "text": "판단 불가"
+              },
+              {
+                "id": "D",
+                "text": "규칙에 모순된다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "조건문의 연쇄와 분기",
+        "text": "다음 규칙들이 있다. ① P → Q. ② P → R. ③ Q → S. ④ R → S. 즉 P가 참이면 Q와 R이 각각 참이 되고, 두 경로 모두 S로 이어진다.",
+        "questions": [
+          {
+            "id": "lg-w1-14-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "P가 참일 때 반드시 참인 것을 모두 고르면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "Q, R, S"
+              },
+              {
+                "id": "B",
+                "text": "Q만"
+              },
+              {
+                "id": "C",
+                "text": "S만"
+              },
+              {
+                "id": "D",
+                "text": "Q, R만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-14-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "S가 거짓이면 P에 대해 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P가 반드시 거짓이다"
+              },
+              {
+                "id": "B",
+                "text": "P가 참일 수도 있다"
+              },
+              {
+                "id": "C",
+                "text": "Q만 거짓이고 P는 참일 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "추가 정보가 필요하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-14-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "S가 거짓이면 Q와 R에 대해 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "Q와 R 모두 거짓이다"
+              },
+              {
+                "id": "B",
+                "text": "Q만 거짓이다"
+              },
+              {
+                "id": "C",
+                "text": "둘 중 적어도 하나는 거짓이다"
+              },
+              {
+                "id": "D",
+                "text": "확실히 알 수 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "부분 정보와 추론 한계",
+        "text": "규칙: ① A → B. ② C → D. ③ B ∧ D → E. 현재 A가 참이고 E가 거짓이다.",
+        "questions": [
+          {
+            "id": "lg-w1-14-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 상황에서 반드시 참인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "B는 참이고 D는 거짓이다"
+              },
+              {
+                "id": "B",
+                "text": "B는 거짓이다"
+              },
+              {
+                "id": "C",
+                "text": "C는 참이다"
+              },
+              {
+                "id": "D",
+                "text": "D는 참이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-14-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "D가 거짓이면 C에 대해 알 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "C는 거짓이거나, C → D가 아닌 다른 이유로 D가 거짓일 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "C는 반드시 참이다"
+              },
+              {
+                "id": "C",
+                "text": "C는 반드시 거짓이다"
+              },
+              {
+                "id": "D",
+                "text": "후건 부정에 의해 C는 거짓이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "논리적 귀결 종합",
+        "text": "다음 전제가 주어져 있다. ① 모든 과학자는 호기심이 많다. ② 호기심이 많은 사람은 질문을 많이 한다. ③ 질문을 많이 하는 사람은 배움이 빠르다. ④ 배움이 빠른 사람은 성공한다. ⑤ 민수는 과학자이다. ⑥ 영희는 배움이 빠르지 않다.",
+        "questions": [
+          {
+            "id": "lg-w1-14-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "민수에 대해 확실히 말할 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "호기심이 많고, 질문을 많이 하고, 배움이 빠르고, 성공한다"
+              },
+              {
+                "id": "B",
+                "text": "호기심만 많다"
+              },
+              {
+                "id": "C",
+                "text": "성공하는지 알 수 없다"
+              },
+              {
+                "id": "D",
+                "text": "과학자이므로 다른 것은 알 수 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-14-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "영희에 대해 확실히 말할 수 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "과학자가 아니다"
+              },
+              {
+                "id": "B",
+                "text": "호기심이 많지 않다"
+              },
+              {
+                "id": "C",
+                "text": "질문을 많이 하지 않고, 호기심이 많지 않고, 과학자가 아니다"
+              },
+              {
+                "id": "D",
+                "text": "성공하지 못한다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-14-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "영희가 성공했다면 모순이 발생하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모순이다. 성공 → 배움이 빠름이므로 영희의 전제와 충돌"
+              },
+              {
+                "id": "B",
+                "text": "모순이 아니다. 전제 ④의 역이 성립하는 것은 아니므로"
+              },
+              {
+                "id": "C",
+                "text": "모순이다. 성공하면 과학자여야 하므로"
+              },
+              {
+                "id": "D",
+                "text": "성공의 정의에 따라 다르다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "추가 논리 문제",
+        "text": "다음 각 문제를 풀어라.",
+        "questions": [
+          {
+            "id": "lg-w1-14-p6-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 형식적으로 타당한 논증은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 A는 B이다. C는 A이다. 따라서 C는 B이다."
+              },
+              {
+                "id": "B",
+                "text": "일부 A는 B이다. 일부 B는 C이다. 따라서 모든 A는 C이다."
+              },
+              {
+                "id": "C",
+                "text": "A이면 B이다. B이다. 따라서 A이다."
+              },
+              {
+                "id": "D",
+                "text": "A가 아니면 B이다. A이다. 따라서 B가 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-14-p6-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P이면 Q이다'와 논리적으로 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "Q → P"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

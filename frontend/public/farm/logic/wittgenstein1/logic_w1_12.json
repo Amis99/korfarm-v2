@@ -1,0 +1,483 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 12",
+  "description": "수능형 조건 추론 종합 (2)",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론",
+    "수능형",
+    "종합"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "다중 조건 규칙",
+        "text": "어떤 회사의 채용 기준이다. ① 토익 900점 이상이거나 해외 거주 경험이 있으면 서류 통과한다. ② 서류 통과하고 코딩 테스트를 통과하면 면접 자격이 주어진다. ③ 면접 자격이 있고 추천서가 있으면 최종 합격한다.",
+        "questions": [
+          {
+            "id": "lg-w1-12-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "토익 950점이고 코딩 테스트 통과, 추천서가 있는 지원자의 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서류 통과만 한다"
+              },
+              {
+                "id": "B",
+                "text": "면접 자격만 얻는다"
+              },
+              {
+                "id": "C",
+                "text": "최종 합격한다"
+              },
+              {
+                "id": "D",
+                "text": "추가 정보가 필요하다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-12-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "최종 합격하지 못한 지원자에 대해 반드시 참인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "토익 900점 미만이다"
+              },
+              {
+                "id": "B",
+                "text": "서류 통과, 코딩 테스트, 추천서 중 적어도 하나가 충족되지 않았다"
+              },
+              {
+                "id": "C",
+                "text": "코딩 테스트를 통과하지 못했다"
+              },
+              {
+                "id": "D",
+                "text": "해외 거주 경험이 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "선택지 소거법",
+        "text": "어떤 범인을 찾는 추리이다. 용의자는 A, B, C, D 네 명이다. ① 범인은 왼손잡이이다. ② 범인은 현장에서 10km 이내에 살고 있다. ③ A는 오른손잡이, B는 15km 거리에 거주, C는 왼손잡이이고 5km에 거주, D는 왼손잡이이고 8km에 거주한다.",
+        "questions": [
+          {
+            "id": "lg-w1-12-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "범인이 될 수 있는 사람은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "A만"
+              },
+              {
+                "id": "B",
+                "text": "C만"
+              },
+              {
+                "id": "C",
+                "text": "C와 D"
+              },
+              {
+                "id": "D",
+                "text": "B와 C"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-12-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "A가 범인이 될 수 없는 이유를 논리적으로 표현하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "범인 → 왼손잡이, A는 오른손잡이(¬왼손잡이) → 후건 부정에 의해 ¬범인"
+              },
+              {
+                "id": "B",
+                "text": "A가 오른손잡이라 범인처럼 보이지 않으므로"
+              },
+              {
+                "id": "C",
+                "text": "전건 부정에 의해"
+              },
+              {
+                "id": "D",
+                "text": "귀납적 증거가 부족하므로"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-12-p2-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "C와 D 중 범인을 확정하려면 어떤 추가 조건이 필요한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 조건 외에 C와 D를 구별하는 새로운 조건"
+              },
+              {
+                "id": "B",
+                "text": "더 많은 왼손잡이 증거"
+              },
+              {
+                "id": "C",
+                "text": "거리 조건을 5km로 좁히면 C만 남는다"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 같은 조건이면 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "조건문 체인과 반례",
+        "text": "다음 주장을 검토하라. '좋은 대학에 가면 좋은 직장에 취직한다. 좋은 직장에 취직하면 행복하다. 따라서 좋은 대학에 가면 행복하다.'",
+        "questions": [
+          {
+            "id": "lg-w1-12-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증의 형식적 타당성은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하다. 가언삼단논법(P→Q, Q→R이면 P→R)의 형식이므로"
+              },
+              {
+                "id": "B",
+                "text": "타당하지 않다. 전제가 너무 적으므로"
+              },
+              {
+                "id": "C",
+                "text": "타당하지 않다. 결론이 지나치게 강하므로"
+              },
+              {
+                "id": "D",
+                "text": "판단 불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-12-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증이 건전하지 않을 수 있는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전제 '좋은 직장에 취직하면 행복하다'가 항상 참이 아닐 수 있으므로"
+              },
+              {
+                "id": "B",
+                "text": "논증의 형식이 잘못되었으므로"
+              },
+              {
+                "id": "C",
+                "text": "결론이 거짓이므로"
+              },
+              {
+                "id": "D",
+                "text": "가언삼단논법은 항상 건전하지 않으므로"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "논리적 동치 판별",
+        "text": "두 명제가 논리적으로 동치인지 판별하라. 명제 ㄱ: '비가 오지 않으면 소풍을 간다.' 명제 ㄴ: '소풍을 가지 않으면 비가 온다.'",
+        "questions": [
+          {
+            "id": "lg-w1-12-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "ㄱ과 ㄴ은 논리적으로 동치인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동치이다. ㄴ은 ㄱ의 대우이므로"
+              },
+              {
+                "id": "B",
+                "text": "동치가 아니다. ㄴ은 ㄱ의 역이므로"
+              },
+              {
+                "id": "C",
+                "text": "동치가 아니다. ㄴ은 ㄱ의 이(裏)이므로"
+              },
+              {
+                "id": "D",
+                "text": "판단 불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-12-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "ㄱ을 기호화하면 '¬P → Q'이다. ㄴ을 기호화하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬Q → P (ㄱ의 대우)"
+              },
+              {
+                "id": "B",
+                "text": "Q → ¬P"
+              },
+              {
+                "id": "C",
+                "text": "P → ¬Q"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → ¬P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-12-p4-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "ㄱ의 역 명제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "소풍을 가면 비가 오지 않는다 (Q → ¬P)"
+              },
+              {
+                "id": "B",
+                "text": "비가 오면 소풍을 가지 않는다 (P → ¬Q)"
+              },
+              {
+                "id": "C",
+                "text": "소풍을 가지 않으면 비가 오지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "비가 오지 않으면 소풍을 가지 않는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "진리표 완성",
+        "text": "P, Q 두 변수로 구성된 명제 '(P → Q) ∧ (Q → P)'의 진리표를 완성하라. 이 명제는 P ↔ Q와 동치이다.",
+        "questions": [
+          {
+            "id": "lg-w1-12-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "P = 참, Q = 거짓일 때 '(P → Q) ∧ (Q → P)'의 값은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "참"
+              },
+              {
+                "id": "B",
+                "text": "거짓"
+              },
+              {
+                "id": "C",
+                "text": "판단 불가"
+              },
+              {
+                "id": "D",
+                "text": "P의 값에 따라 다르다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-12-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 명제가 참이 되는 경우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P와 Q가 모두 참이거나 모두 거짓일 때"
+              },
+              {
+                "id": "B",
+                "text": "P가 참이고 Q가 거짓일 때"
+              },
+              {
+                "id": "C",
+                "text": "항상 참이다"
+              },
+              {
+                "id": "D",
+                "text": "P가 거짓이고 Q가 참일 때"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-12-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "P ↔ Q를 부정하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "(P ∧ ¬Q) ∨ (¬P ∧ Q), 즉 P와 Q의 진릿값이 다를 때 참"
+              },
+              {
+                "id": "B",
+                "text": "¬P ↔ ¬Q"
+              },
+              {
+                "id": "C",
+                "text": "P ↔ ¬Q"
+              },
+              {
+                "id": "D",
+                "text": "A와 C 모두 동치이다"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "추가 논리 문제",
+        "text": "다음 각 문제를 풀어라.",
+        "questions": [
+          {
+            "id": "lg-w1-12-p6-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 형식적으로 타당한 논증은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 A는 B이다. C는 A이다. 따라서 C는 B이다."
+              },
+              {
+                "id": "B",
+                "text": "일부 A는 B이다. 일부 B는 C이다. 따라서 모든 A는 C이다."
+              },
+              {
+                "id": "C",
+                "text": "A이면 B이다. B이다. 따라서 A이다."
+              },
+              {
+                "id": "D",
+                "text": "A가 아니면 B이다. A이다. 따라서 B가 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-12-p6-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P이면 Q이다'와 논리적으로 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "Q → P"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

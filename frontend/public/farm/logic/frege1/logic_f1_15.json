@@ -1,0 +1,176 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 15",
+  "description": "논리 퀴즈와 조건 조합",
+  "targetLevel": "FREGE_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "퀴즈", "조건조합"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passages": [
+      {
+        "title": "거짓말쟁이",
+        "text": "A와 B 중 한 명은 항상 진실만 말하고, 한 명은 항상 거짓만 말한다. A가 말했다: \"B는 거짓말쟁이입니다.\"",
+        "questions": [
+          {
+            "id": "lg-f1-15-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "A의 말이 참이라면 어떤 결론이 나오는가?",
+            "choices": [
+              { "id": "A", "text": "A는 진실을 말하고, B는 거짓말쟁이이다." },
+              { "id": "B", "text": "A와 B 모두 거짓말쟁이이다." },
+              { "id": "C", "text": "A가 거짓말쟁이이다." },
+              { "id": "D", "text": "B도 진실을 말한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-15-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "A의 말이 거짓이라면 어떤 결론이 나오는가?",
+            "choices": [
+              { "id": "A", "text": "B는 진실을 말하는 사람이고, A가 거짓말쟁이이다." },
+              { "id": "B", "text": "둘 다 진실을 말한다." },
+              { "id": "C", "text": "B도 거짓말쟁이이다." },
+              { "id": "D", "text": "판단할 수 없다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "색깔 모자",
+        "text": "세 명의 학생이 있다. 각각 빨강, 파랑, 노랑 모자 중 하나를 쓰고 있다. 민수는 빨강이 아니다. 지영이는 노랑이 아니다. 수호는 빨강도 노랑도 아니다.",
+        "questions": [
+          {
+            "id": "lg-f1-15-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "수호의 모자 색깔은?",
+            "choices": [
+              { "id": "A", "text": "빨강" },
+              { "id": "B", "text": "파랑" },
+              { "id": "C", "text": "노랑" },
+              { "id": "D", "text": "알 수 없다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-15-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "민수와 지영이의 모자 색깔 조합은?",
+            "choices": [
+              { "id": "A", "text": "민수: 노랑, 지영: 빨강" },
+              { "id": "B", "text": "민수: 빨강, 지영: 노랑" },
+              { "id": "C", "text": "민수: 파랑, 지영: 빨강" },
+              { "id": "D", "text": "민수: 노랑, 지영: 파랑" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "요일 퀴즈",
+        "text": "\"내일이 수요일이면 어제는 월요일이다.\" 이 문장이 참이라고 하자.",
+        "questions": [
+          {
+            "id": "lg-f1-15-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "오늘이 금요일이면 이 문장의 참/거짓은?",
+            "choices": [
+              { "id": "A", "text": "참이다. 내일이 수요일이 아니므로 조건문 자체가 참이다." },
+              { "id": "B", "text": "거짓이다." },
+              { "id": "C", "text": "판단할 수 없다." },
+              { "id": "D", "text": "내일이 토요일이므로 거짓이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-15-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "조건문 '만약 A이면 B이다'에서 A가 거짓이면 전체 문장은?",
+            "choices": [
+              { "id": "A", "text": "항상 거짓이다." },
+              { "id": "B", "text": "항상 참이다." },
+              { "id": "C", "text": "B에 따라 달라진다." },
+              { "id": "D", "text": "판단할 수 없다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "과일 좋아하기",
+        "text": "다음 세 가지가 모두 참이다: ① 사과를 좋아하는 사람은 배도 좋아한다. ② 배를 좋아하는 사람은 포도를 싫어한다. ③ 수진이는 포도를 좋아한다.",
+        "questions": [
+          {
+            "id": "lg-f1-15-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "수진이에 대해 확실히 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "수진이는 사과를 좋아하지 않는다." },
+              { "id": "B", "text": "수진이는 배를 좋아한다." },
+              { "id": "C", "text": "수진이는 사과와 배 모두 좋아한다." },
+              { "id": "D", "text": "수진이는 과일을 전부 좋아한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-15-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "수진이가 배를 좋아하는지 알 수 있는가?",
+            "choices": [
+              { "id": "A", "text": "알 수 있다. 배를 좋아하지 않는다." },
+              { "id": "B", "text": "알 수 없다. 포도를 좋아한다고 해서 배의 선호는 모른다." },
+              { "id": "C", "text": "알 수 있다. 배를 좋아한다." },
+              { "id": "D", "text": "포도를 좋아하면 배도 좋아한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "보물찾기",
+        "text": "보물은 A, B, C 상자 중 하나에 있다. 상자에 적힌 글: A상자 \"보물은 여기 없다\", B상자 \"보물은 A에 있다\", C상자 \"보물은 여기 없다\". 정확히 하나의 상자만 참을 말한다.",
+        "questions": [
+          {
+            "id": "lg-f1-15-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "보물이 A에 있다면 참을 말하는 상자는?",
+            "choices": [
+              { "id": "A", "text": "A만 거짓, B와 C가 참 → 두 개가 참이므로 조건에 맞지 않다." },
+              { "id": "B", "text": "B만 참 → A는 거짓, C는 참 → 두 개가 참이므로 조건에 맞지 않다." },
+              { "id": "C", "text": "조건에 맞지 않아 보물은 A에 없다." },
+              { "id": "D", "text": "세 개 모두 참이다." }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-15-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "보물은 어느 상자에 있는가?",
+            "choices": [
+              { "id": "A", "text": "A 상자" },
+              { "id": "B", "text": "B 상자" },
+              { "id": "C", "text": "C 상자" },
+              { "id": "D", "text": "알 수 없다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

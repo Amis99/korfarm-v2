@@ -1,0 +1,336 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 17",
+  "description": "형식 논리와 진리표",
+  "targetLevel": "FREGE_3",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "형식논리",
+    "진리표"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 300,
+  "payload": {
+    "passages": [
+      {
+        "title": "조건문 진리표",
+        "text": "'P→Q'(P이면 Q)의 진리표: P참Q참=참, P참Q거짓=거짓, P거짓Q참=참, P거짓Q거짓=참.",
+        "questions": [
+          {
+            "id": "lg-f3-17-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "P가 거짓일 때 P→Q가 항상 참인 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전제가 거짓이면 어떤 결론이든 조건문 자체는 위반되지 않기 때문이다."
+              },
+              {
+                "id": "B",
+                "text": "논리학의 약속일 뿐 이유가 없다."
+              },
+              {
+                "id": "C",
+                "text": "P가 거짓이면 Q도 거짓이다."
+              },
+              {
+                "id": "D",
+                "text": "잘못된 규칙이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-f3-17-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "P→Q가 거짓인 유일한 경우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P참, Q거짓 (약속을 했는데 지키지 않은 경우)"
+              },
+              {
+                "id": "B",
+                "text": "P거짓, Q참"
+              },
+              {
+                "id": "C",
+                "text": "P참, Q참"
+              },
+              {
+                "id": "D",
+                "text": "P거짓, Q거짓"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "논리 연산",
+        "text": "AND(∧): 둘 다 참일 때만 참. OR(∨): 하나라도 참이면 참. NOT(¬): 반전.",
+        "questions": [
+          {
+            "id": "lg-f3-17-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "¬(P∧Q)는 무엇과 같은가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P∨¬Q (드모르간 법칙)"
+              },
+              {
+                "id": "B",
+                "text": "¬P∧¬Q"
+              },
+              {
+                "id": "C",
+                "text": "P∨Q"
+              },
+              {
+                "id": "D",
+                "text": "P∧Q"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-f3-17-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "¬(P∨Q)는 무엇과 같은가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P∨¬Q"
+              },
+              {
+                "id": "B",
+                "text": "¬P∧¬Q (드모르간 법칙)"
+              },
+              {
+                "id": "C",
+                "text": "P∧Q"
+              },
+              {
+                "id": "D",
+                "text": "¬P"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "동치 관계",
+        "text": "P→Q는 ¬P∨Q와 논리적으로 동치이다.",
+        "questions": [
+          {
+            "id": "lg-f3-17-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'비가 오면 우산을 쓴다'를 다르게 표현하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비가 오지 않거나 우산을 쓴다."
+              },
+              {
+                "id": "B",
+                "text": "비가 오고 우산을 쓴다."
+              },
+              {
+                "id": "C",
+                "text": "우산을 쓰면 비가 온다."
+              },
+              {
+                "id": "D",
+                "text": "비가 오지 않으면 우산을 쓰지 않는다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-f3-17-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "대우 ¬Q→¬P를 ¬Q∨P로 표현하면 ¬P∨Q(원래)와 같은가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같지 않을 수 있다. 하지만 ¬Q→¬P = Q∨¬P = ¬P∨Q이므로 결국 같다."
+              },
+              {
+                "id": "B",
+                "text": "항상 다르다."
+              },
+              {
+                "id": "C",
+                "text": "비교할 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "대우는 동치가 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "항진명제",
+        "text": "P∨¬P는 항상 참이다(항진명제). P∧¬P는 항상 거짓이다(모순명제).",
+        "questions": [
+          {
+            "id": "lg-f3-17-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'오늘 비가 오거나 비가 오지 않는다'는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "항진명제 — 무조건 참"
+              },
+              {
+                "id": "B",
+                "text": "의미 있는 정보"
+              },
+              {
+                "id": "C",
+                "text": "거짓일 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "모순명제"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-f3-17-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "항진명제가 논증에서 근거로 쓸 수 없는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무런 정보도 담고 있지 않기 때문이다."
+              },
+              {
+                "id": "B",
+                "text": "거짓이기 때문이다."
+              },
+              {
+                "id": "C",
+                "text": "너무 복잡하기 때문이다."
+              },
+              {
+                "id": "D",
+                "text": "근거로 쓸 수 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "진리표 실전",
+        "text": "P: 비가 온다, Q: 우산을 쓴다. P→Q가 참일 때.",
+        "questions": [
+          {
+            "id": "lg-f3-17-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "비가 오지 않고 우산도 안 쓰면 P→Q는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "참이다."
+              },
+              {
+                "id": "B",
+                "text": "거짓이다."
+              },
+              {
+                "id": "C",
+                "text": "판단할 수 없다."
+              },
+              {
+                "id": "D",
+                "text": "무의미하다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-f3-17-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "비가 오지 않았는데 우산을 쓰면 P→Q는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "참이다."
+              },
+              {
+                "id": "B",
+                "text": "거짓이다."
+              },
+              {
+                "id": "C",
+                "text": "규칙 위반이다."
+              },
+              {
+                "id": "D",
+                "text": "모순이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 16",
+  "description": "추론의 타당성 판단과 전건부정",
+  "targetLevel": "FREGE_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "타당성", "전건부정"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passages": [
+      {
+        "title": "약속과 선물",
+        "text": "약속을 지키면 선물을 준다. 약속을 지키지 않았다.",
+        "questions": [
+          {
+            "id": "lg-f1-16-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'그러므로 선물을 받지 못한다'는 반드시 참인가?",
+            "choices": [
+              { "id": "A", "text": "반드시 참이다." },
+              { "id": "B", "text": "반드시 참은 아니다. 다른 이유로 선물을 줄 수도 있다." },
+              { "id": "C", "text": "거짓이다." },
+              { "id": "D", "text": "약속을 지키지 않으면 벌을 받는다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-16-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 잘못된 추론의 이름은?",
+            "choices": [
+              { "id": "A", "text": "전건긍정" },
+              { "id": "B", "text": "후건부정" },
+              { "id": "C", "text": "전건부정의 오류" },
+              { "id": "D", "text": "후건긍정의 오류" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "운동과 근육",
+        "text": "헬스장에서 운동하면 근육이 생긴다. 민호는 헬스장에 가지 않는다.",
+        "questions": [
+          {
+            "id": "lg-f1-16-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'민호에게는 근육이 없다'는 결론이 타당한가?",
+            "choices": [
+              { "id": "A", "text": "타당하다. 헬스장에 안 가면 근육이 없다." },
+              { "id": "B", "text": "타당하지 않다. 다른 운동으로도 근육이 생길 수 있다." },
+              { "id": "C", "text": "타당하다. 근육은 헬스장에서만 생긴다." },
+              { "id": "D", "text": "판단할 수 없다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-16-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "올바른 추론은 어떤 것인가?",
+            "choices": [
+              { "id": "A", "text": "근육이 없으면 헬스장에 가지 않았다." },
+              { "id": "B", "text": "헬스장에 가면 근육이 생긴다." },
+              { "id": "C", "text": "헬스장에 가지 않으면 근육이 없다." },
+              { "id": "D", "text": "A와 B 모두 올바르다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "공부와 합격",
+        "text": "열심히 공부하면 시험에 합격한다. 은서는 시험에 합격했다.",
+        "questions": [
+          {
+            "id": "lg-f1-16-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'은서는 열심히 공부했다'는 반드시 참인가?",
+            "choices": [
+              { "id": "A", "text": "반드시 참이다." },
+              { "id": "B", "text": "반드시 참은 아니다. 운이 좋았을 수도 있다." },
+              { "id": "C", "text": "거짓이다." },
+              { "id": "D", "text": "공부하지 않으면 합격할 수 없다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-16-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론은 어떤 유형의 오류를 범할 위험이 있는가?",
+            "choices": [
+              { "id": "A", "text": "전건부정의 오류" },
+              { "id": "B", "text": "후건긍정의 오류" },
+              { "id": "C", "text": "성급한 일반화" },
+              { "id": "D", "text": "순환 논증" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "조건문 정리",
+        "text": "'A이면 B이다'가 참일 때, 네 가지 추론 방식이 있다.",
+        "questions": [
+          {
+            "id": "lg-f1-16-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "반드시 올바른 추론 두 가지는?",
+            "choices": [
+              { "id": "A", "text": "A이면 B이다 (전건긍정), B가 아니면 A가 아니다 (후건부정)" },
+              { "id": "B", "text": "A가 아니면 B가 아니다 (전건부정), B이면 A이다 (후건긍정)" },
+              { "id": "C", "text": "네 가지 모두 올바르다." },
+              { "id": "D", "text": "네 가지 모두 틀리다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-16-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "반드시 올바르지 않은 추론 두 가지는?",
+            "choices": [
+              { "id": "A", "text": "전건긍정과 후건부정" },
+              { "id": "B", "text": "전건부정과 후건긍정" },
+              { "id": "C", "text": "전건긍정과 전건부정" },
+              { "id": "D", "text": "후건긍정과 후건부정" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "동물병원",
+        "text": "아픈 동물은 동물병원에 간다. 우리 강아지는 동물병원에 가지 않았다.",
+        "questions": [
+          {
+            "id": "lg-f1-16-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "우리 강아지에 대해 확실히 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "강아지는 아프지 않다." },
+              { "id": "B", "text": "강아지는 건강하다." },
+              { "id": "C", "text": "강아지는 아팠지만 병원에 안 갔다." },
+              { "id": "D", "text": "강아지는 다른 병원에 갔다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-16-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론에서 사용된 논리적 방법은?",
+            "choices": [
+              { "id": "A", "text": "전건긍정" },
+              { "id": "B", "text": "전건부정" },
+              { "id": "C", "text": "후건긍정" },
+              { "id": "D", "text": "후건부정" }
+            ],
+            "answerId": "D",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 13",
+  "description": "귀류법과 간접 증명",
+  "targetLevel": "FREGE_2",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "귀류법", "간접증명"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passages": [
+      {
+        "title": "귀류법이란",
+        "text": "귀류법은 어떤 주장이 참이라고 가정했을 때 모순이 나오면, 그 주장이 거짓임을 증명하는 방법이다.",
+        "questions": [
+          {
+            "id": "lg-f2-13-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "귀류법의 핵심 원리는?",
+            "choices": [
+              { "id": "A", "text": "가정에서 모순이 나오면 가정이 거짓이다." },
+              { "id": "B", "text": "직접 참임을 보인다." },
+              { "id": "C", "text": "여러 사례를 모은다." },
+              { "id": "D", "text": "전문가의 의견을 따른다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-13-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "귀류법과 연역 추론의 관계는?",
+            "choices": [
+              { "id": "A", "text": "귀류법은 연역 추론의 한 방법이다." },
+              { "id": "B", "text": "귀류법은 귀납 추론이다." },
+              { "id": "C", "text": "둘은 관련이 없다." },
+              { "id": "D", "text": "귀류법은 유추이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "루트2의 무리수",
+        "text": "√2가 유리수라고 가정하자. 그러면 √2 = a/b (기약분수)로 나타낼 수 있다. 양변을 제곱하면 2 = a²/b², 즉 a² = 2b². 이는 a가 짝수임을 의미하고, a = 2c로 놓으면 4c² = 2b², 즉 b² = 2c²이므로 b도 짝수이다. 그런데 a와 b가 모두 짝수이면 기약분수라는 가정에 모순된다.",
+        "questions": [
+          {
+            "id": "lg-f2-13-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 증명에서 모순이 발생하는 지점은?",
+            "choices": [
+              { "id": "A", "text": "a와 b가 모두 짝수가 되어 기약분수가 아니게 된다." },
+              { "id": "B", "text": "√2가 음수가 된다." },
+              { "id": "C", "text": "a²이 홀수가 된다." },
+              { "id": "D", "text": "b가 0이 된다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-13-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "모순이 나왔으므로 결론은?",
+            "choices": [
+              { "id": "A", "text": "√2는 유리수가 아니다(무리수이다)." },
+              { "id": "B", "text": "증명이 틀렸다." },
+              { "id": "C", "text": "기약분수는 존재하지 않는다." },
+              { "id": "D", "text": "√2는 존재하지 않는다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "일상에서의 귀류법",
+        "text": "\"만약 시험이 쉬웠다면 우리 반 평균이 높았을 것이다. 그런데 평균이 낮았다.\"",
+        "questions": [
+          {
+            "id": "lg-f2-13-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론의 결론은?",
+            "choices": [
+              { "id": "A", "text": "시험이 쉽지 않았다." },
+              { "id": "B", "text": "학생들이 공부를 안 했다." },
+              { "id": "C", "text": "평균이 높았다." },
+              { "id": "D", "text": "시험이 쉬웠다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-13-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론이 약해질 수 있는 경우는?",
+            "choices": [
+              { "id": "A", "text": "시험이 쉬워도 학생들이 공부를 안 해서 평균이 낮을 수 있다." },
+              { "id": "B", "text": "시험이 어려웠다." },
+              { "id": "C", "text": "평균이 더 낮아야 한다." },
+              { "id": "D", "text": "귀류법은 항상 맞다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "범인 추리",
+        "text": "\"만약 A가 범인이라면 A는 그 시간에 현장에 있었어야 한다. 그런데 A는 CCTV에 다른 장소에서 찍혔다.\"",
+        "questions": [
+          {
+            "id": "lg-f2-13-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론의 결론은?",
+            "choices": [
+              { "id": "A", "text": "A는 범인이 아니다." },
+              { "id": "B", "text": "CCTV가 잘못되었다." },
+              { "id": "C", "text": "A가 범인이다." },
+              { "id": "D", "text": "현장에 아무도 없었다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-13-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론의 논리 구조는?",
+            "choices": [
+              { "id": "A", "text": "A가 범인이라면→현장에 있음, 현장에 없었음 → A가 범인이 아님 (귀류법 = 대우)" },
+              { "id": "B", "text": "전건부정" },
+              { "id": "C", "text": "후건긍정" },
+              { "id": "D", "text": "귀납 추론" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "게임 전략",
+        "text": "체스에서 '만약 비숍을 이동하면 킹이 잡힌다'고 분석했다. 킹이 잡히면 안 된다.",
+        "questions": [
+          {
+            "id": "lg-f2-13-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 분석의 결론은?",
+            "choices": [
+              { "id": "A", "text": "비숍을 이동하면 안 된다." },
+              { "id": "B", "text": "비숍을 이동해야 한다." },
+              { "id": "C", "text": "킹을 이동한다." },
+              { "id": "D", "text": "판단할 수 없다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-13-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 사고 과정은 귀류법의 어떤 측면을 활용한 것인가?",
+            "choices": [
+              { "id": "A", "text": "어떤 행동을 가정했을 때 나쁜 결과(모순)가 나오면 그 행동을 하지 않는다." },
+              { "id": "B", "text": "좋은 결과만 선택한다." },
+              { "id": "C", "text": "모든 경우를 다 시도한다." },
+              { "id": "D", "text": "상대방의 수를 예측한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

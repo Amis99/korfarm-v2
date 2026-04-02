@@ -1,0 +1,483 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 02",
+  "description": "진리표와 복합 명제 분석",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론",
+    "진리표",
+    "복합명제"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "진리표 기초",
+        "text": "두 명제 P, Q에 대해 'P ∧ Q'는 둘 다 참일 때만 참이고, 'P ∨ Q'는 둘 다 거짓일 때만 거짓이다. P가 참이고 Q가 거짓인 상황을 생각해 보자.",
+        "questions": [
+          {
+            "id": "lg-w1-02-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "P가 참, Q가 거짓일 때 'P ∧ Q'와 'P ∨ Q'의 진릿값은 각각?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "참, 참"
+              },
+              {
+                "id": "B",
+                "text": "거짓, 참"
+              },
+              {
+                "id": "C",
+                "text": "참, 거짓"
+              },
+              {
+                "id": "D",
+                "text": "거짓, 거짓"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-02-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'¬P ∨ Q'의 진릿값을 구하면? (P 참, Q 거짓)",
+            "choices": [
+              {
+                "id": "A",
+                "text": "참"
+              },
+              {
+                "id": "B",
+                "text": "거짓"
+              },
+              {
+                "id": "C",
+                "text": "판단 불가"
+              },
+              {
+                "id": "D",
+                "text": "P의 부정이 참이므로 참"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-02-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "'¬P ∨ Q'는 어떤 논리식과 동치인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P → Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "¬(P ∨ Q)"
+              },
+              {
+                "id": "D",
+                "text": "Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "부정의 분배",
+        "text": "드모르간의 법칙에 따르면 '¬(P ∧ Q)'는 '¬P ∨ ¬Q'와 동치이고, '¬(P ∨ Q)'는 '¬P ∧ ¬Q'와 동치이다.",
+        "questions": [
+          {
+            "id": "lg-w1-02-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'비가 오고 바람이 부는 것은 아니다'를 기호화하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∧ ¬Q"
+              },
+              {
+                "id": "B",
+                "text": "¬(P ∧ Q)"
+              },
+              {
+                "id": "C",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "D",
+                "text": "P ∧ ¬Q"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-02-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'¬(P ∧ Q)'와 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비가 오지 않거나 바람이 불지 않는다"
+              },
+              {
+                "id": "B",
+                "text": "비가 오지 않고 바람이 불지 않는다"
+              },
+              {
+                "id": "C",
+                "text": "비가 오거나 바람이 분다"
+              },
+              {
+                "id": "D",
+                "text": "비가 오고 바람이 분다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "쌍조건문",
+        "text": "'P ↔ Q'는 'P이면 Q이고, Q이면 P이다'를 뜻한다. 즉 P와 Q의 진릿값이 같을 때 참이고, 다를 때 거짓이다. 어떤 규정에서 '회원이면 그리고 오직 회원일 때만 할인을 받는다'고 했다.",
+        "questions": [
+          {
+            "id": "lg-w1-02-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "비회원이 할인을 받았다면 이 규정에 대해 무엇을 알 수 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "규정이 위반되었다"
+              },
+              {
+                "id": "B",
+                "text": "규정이 지켜졌다"
+              },
+              {
+                "id": "C",
+                "text": "규정과 무관하다"
+              },
+              {
+                "id": "D",
+                "text": "판단 불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-02-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P ↔ Q'가 거짓이 되는 경우를 모두 고르면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P 참·Q 거짓, 또는 P 거짓·Q 참"
+              },
+              {
+                "id": "B",
+                "text": "P 참·Q 참일 때만"
+              },
+              {
+                "id": "C",
+                "text": "P 거짓·Q 거짓일 때만"
+              },
+              {
+                "id": "D",
+                "text": "P와 Q가 모두 같을 때"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-02-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "'P ↔ Q'는 다음 중 어느 것과 동치인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "(P → Q) ∧ (Q → P)"
+              },
+              {
+                "id": "B",
+                "text": "(P ∧ Q) ∨ (¬P ∧ ¬Q)"
+              },
+              {
+                "id": "C",
+                "text": "A와 B 모두 동치이다"
+              },
+              {
+                "id": "D",
+                "text": "A와 B 어느 것과도 동치가 아니다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "필요조건과 충분조건",
+        "text": "'P는 Q의 충분조건이다'는 'P → Q'를 뜻한다. 'P는 Q의 필요조건이다'는 'Q → P'를 뜻한다. 어떤 대학에서 '토익 800점 이상은 졸업의 필요조건이다'라고 공지했다.",
+        "questions": [
+          {
+            "id": "lg-w1-02-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 공지를 조건문으로 바르게 나타낸 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "토익 800점 이상이면 졸업한다"
+              },
+              {
+                "id": "B",
+                "text": "졸업하면 토익 800점 이상이다"
+              },
+              {
+                "id": "C",
+                "text": "토익 800점 미만이면 졸업한다"
+              },
+              {
+                "id": "D",
+                "text": "졸업하지 않으면 토익 800점 미만이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-02-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "토익 800점을 넘었지만 졸업하지 못한 학생이 있다면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공지가 위반된 것이다"
+              },
+              {
+                "id": "B",
+                "text": "공지와 모순되지 않는다. 필요조건일 뿐 충분조건이 아니므로"
+              },
+              {
+                "id": "C",
+                "text": "토익이 충분조건이므로 이런 경우는 불가능하다"
+              },
+              {
+                "id": "D",
+                "text": "필요조건의 대우에 의해 이 학생은 졸업해야 한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "귀납과 연역의 구분",
+        "text": "연역 논증은 전제가 참이면 결론이 반드시 참인 반면, 귀납 논증은 전제가 결론을 개연적으로 지지한다. 다음 논증을 살펴보자. '지금까지 관찰한 백조 1000마리가 모두 흰색이었다. 따라서 모든 백조는 흰색이다.'",
+        "questions": [
+          {
+            "id": "lg-w1-02-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "위 논증은 연역인가 귀납인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "연역. 관찰 결과로부터 필연적 결론을 이끌어냈으므로"
+              },
+              {
+                "id": "B",
+                "text": "귀납. 관찰 사례로부터 일반 법칙을 추론했으므로"
+              },
+              {
+                "id": "C",
+                "text": "연역도 귀납도 아닌 유비추론이다"
+              },
+              {
+                "id": "D",
+                "text": "판단 불가. 전제의 수가 충분한지 알 수 없으므로"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-02-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 귀납 논증의 약점으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전제의 수가 부족하다"
+              },
+              {
+                "id": "B",
+                "text": "관찰되지 않은 사례에 대해서는 결론이 보장되지 않는다"
+              },
+              {
+                "id": "C",
+                "text": "백조의 정의가 명확하지 않다"
+              },
+              {
+                "id": "D",
+                "text": "연역으로 바꾸면 문제가 해결된다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "추가 논리 문제",
+        "text": "다음 각 문제를 풀어라.",
+        "questions": [
+          {
+            "id": "lg-w1-02-p6-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 형식적으로 타당한 논증은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 A는 B이다. C는 A이다. 따라서 C는 B이다."
+              },
+              {
+                "id": "B",
+                "text": "일부 A는 B이다. 일부 B는 C이다. 따라서 모든 A는 C이다."
+              },
+              {
+                "id": "C",
+                "text": "A이면 B이다. B이다. 따라서 A이다."
+              },
+              {
+                "id": "D",
+                "text": "A가 아니면 B이다. A이다. 따라서 B가 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-02-p6-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P이면 Q이다'와 논리적으로 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "Q → P"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-02-p6-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "후건 부정법의 올바른 형식은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P→Q, ¬Q ⊢ ¬P"
+              },
+              {
+                "id": "B",
+                "text": "P→Q, Q ⊢ P"
+              },
+              {
+                "id": "C",
+                "text": "P→Q, ¬P ⊢ ¬Q"
+              },
+              {
+                "id": "D",
+                "text": "P→Q, P ⊢ ¬Q"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

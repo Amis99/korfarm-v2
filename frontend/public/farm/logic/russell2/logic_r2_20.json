@@ -1,0 +1,215 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 20",
+  "description": "논리 종합 평가",
+  "targetLevel": "RUSSELL_2",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "추론", "종합", "평가"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "형식 논리 종합",
+        "text": "전제: ① (A∨B)→C ② C→(D∧E) ③ ~E. 다음을 도출하라.",
+        "questions": [
+          {
+            "id": "lg-r2-20-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "③에서 시작하여 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "~E → ~(D∧E) → ~C → ~(A∨B) → ~A∧~B" },
+              { "id": "B", "text": "E만 거짓이다" },
+              { "id": "C", "text": "D는 참이다" },
+              { "id": "D", "text": "A는 참이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-20-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "~E에서 ~(D∧E)를 도출할 때 사용된 원리는?",
+            "choices": [
+              { "id": "A", "text": "D∧E가 참이려면 D와 E 모두 참이어야 하므로 ~E이면 ~(D∧E)" },
+              { "id": "B", "text": "드모르간 법칙" },
+              { "id": "C", "text": "전건 긍정" },
+              { "id": "D", "text": "선언 삼단논법" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-20-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "최종 결론 ~A∧~B가 의미하는 것은?",
+            "choices": [
+              { "id": "A", "text": "A도 거짓이고 B도 거짓이다" },
+              { "id": "B", "text": "A 또는 B가 거짓이다" },
+              { "id": "C", "text": "A와 B 모두 참이다" },
+              { "id": "D", "text": "A만 거짓이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "오류 판별 종합",
+        "text": "다음 발언들의 오류를 판별하라. (가) '이 정당을 지지하지 않으면 나라를 배신하는 것이다.' (나) '100명의 과학자가 동의하므로 이 이론은 확실히 참이다.' (다) '작년에 검은 고양이를 봤는데 그해 불운이 계속됐다.'",
+        "questions": [
+          {
+            "id": "lg-r2-20-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "(가)의 오류는?",
+            "choices": [
+              { "id": "A", "text": "원천 봉쇄 + 거짓 딜레마" },
+              { "id": "B", "text": "순환 논증" },
+              { "id": "C", "text": "성급한 일반화" },
+              { "id": "D", "text": "인신공격" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-20-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "(나)에 대한 비판적 분석은?",
+            "choices": [
+              { "id": "A", "text": "전문가 합의는 강한 증거이지만 '확실히 참'은 과도한 주장이다" },
+              { "id": "B", "text": "100명이면 충분하므로 참이다" },
+              { "id": "C", "text": "과학자는 항상 틀린다" },
+              { "id": "D", "text": "권위에의 호소이므로 항상 오류이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-20-p2-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "(다)의 오류는?",
+            "choices": [
+              { "id": "A", "text": "허위 인과(상관을 인과로 오인) + 확증 편향" },
+              { "id": "B", "text": "순환 논증" },
+              { "id": "C", "text": "흑백 논리" },
+              { "id": "D", "text": "논점 일탈" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "논증 평가 종합",
+        "text": "사설: '우리나라의 출산율이 세계 최저 수준이다. 이는 높은 주거비와 교육비 때문이다. 따라서 정부가 주거비와 교육비를 지원하면 출산율이 높아질 것이다.'",
+        "questions": [
+          {
+            "id": "lg-r2-20-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증에서 검증이 필요한 전제는?",
+            "choices": [
+              { "id": "A", "text": "출산율 저하의 주요 원인이 정말 주거비와 교육비인지" },
+              { "id": "B", "text": "출산율이 낮은지" },
+              { "id": "C", "text": "정부가 존재하는지" },
+              { "id": "D", "text": "검증할 필요가 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-20-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증의 숨겨진 전제는?",
+            "choices": [
+              { "id": "A", "text": "원인을 해결하면 결과가 개선된다(비용 지원으로 충분하다)" },
+              { "id": "B", "text": "출산이 좋은 것이다" },
+              { "id": "C", "text": "정부 예산이 충분하다" },
+              { "id": "D", "text": "숨겨진 전제가 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "추론 유형 종합",
+        "text": "(가) 모든 포유류는 폐호흡을 한다. 돌고래는 포유류이다. 따라서 돌고래는 폐호흡을 한다. (나) 지난 5년간 이 회사의 매출이 매년 10%씩 성장했다. 올해도 10% 성장할 것이다. (다) √2가 유리수라고 가정하면 모순이 생긴다. 따라서 √2는 무리수이다. (라) 심장이 멈추면 혈액이 순환하지 않는다. 이는 펌프가 고장나면 물이 순환하지 않는 것과 같다.",
+        "questions": [
+          {
+            "id": "lg-r2-20-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "(가)~(라)의 추론 유형은?",
+            "choices": [
+              { "id": "A", "text": "연역 — 귀납 — 귀류법 — 유비" },
+              { "id": "B", "text": "귀납 — 연역 — 유비 — 귀류법" },
+              { "id": "C", "text": "모두 연역" },
+              { "id": "D", "text": "모두 귀납" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-20-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "전제가 참이면 결론이 반드시 참인 것은?",
+            "choices": [
+              { "id": "A", "text": "(가)와 (다)" },
+              { "id": "B", "text": "(가)만" },
+              { "id": "C", "text": "(나)와 (라)" },
+              { "id": "D", "text": "모두" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "진리표 종합",
+        "text": "P=참, Q=거짓, R=참일 때 다음 복합 명제의 진리값을 구하라.",
+        "questions": [
+          {
+            "id": "lg-r2-20-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "(P→Q)∨(Q→R)의 진리값은?",
+            "choices": [
+              { "id": "A", "text": "참 (P→Q=거짓이지만 Q→R=참이므로 거짓∨참=참)" },
+              { "id": "B", "text": "거짓" },
+              { "id": "C", "text": "알 수 없다" },
+              { "id": "D", "text": "P에 따라 다르다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-20-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "~(P∧Q)→R의 진리값은?",
+            "choices": [
+              { "id": "A", "text": "참 (~(참∧거짓)=참, 참→참=참)" },
+              { "id": "B", "text": "거짓" },
+              { "id": "C", "text": "알 수 없다" },
+              { "id": "D", "text": "R에 따라 다르다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-20-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "(P↔Q)∨(Q↔R)의 진리값은?",
+            "choices": [
+              { "id": "A", "text": "거짓 (P↔Q: 참↔거짓=거짓, Q↔R: 거짓↔참=거짓, 거짓∨거짓=거짓)" },
+              { "id": "B", "text": "참" },
+              { "id": "C", "text": "알 수 없다" },
+              { "id": "D", "text": "항상 참이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

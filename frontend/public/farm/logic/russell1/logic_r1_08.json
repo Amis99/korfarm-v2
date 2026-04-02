@@ -1,0 +1,215 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 08",
+  "description": "귀납 추론의 유형과 한계",
+  "targetLevel": "RUSSELL_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "추론", "귀납", "일반화"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "귀납적 일반화",
+        "text": "한 연구팀이 서울의 중학생 1000명을 조사한 결과, 70%가 주 3회 이상 운동한다고 응답했다. 연구팀은 '한국 중학생의 70%가 주 3회 이상 운동한다'고 결론지었다.",
+        "questions": [
+          {
+            "id": "lg-r1-08-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 결론에 대한 비판으로 가장 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "1000명은 충분한 표본이므로 결론이 확실하다" },
+              { "id": "B", "text": "서울 중학생만 조사했으므로 전국으로 일반화하기 어렵다" },
+              { "id": "C", "text": "중학생은 운동을 좋아하므로 결론이 당연하다" },
+              { "id": "D", "text": "70%는 높은 비율이 아니므로 무의미하다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-08-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 조사의 신뢰도를 높이려면 어떻게 해야 하는가?",
+            "choices": [
+              { "id": "A", "text": "같은 학교 학생만 더 많이 조사한다" },
+              { "id": "B", "text": "전국 각 지역의 중학생을 무작위로 조사한다" },
+              { "id": "C", "text": "고등학생도 함께 조사한다" },
+              { "id": "D", "text": "운동 종류를 구체적으로 묻는다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "통계적 삼단논법",
+        "text": "통계에 따르면 A 지역 주민의 90%가 자전거를 소유하고 있다. 김 씨는 A 지역 주민이다.",
+        "questions": [
+          {
+            "id": "lg-r1-08-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "김 씨에 대해 추론할 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "김 씨는 반드시 자전거를 소유한다" },
+              { "id": "B", "text": "김 씨가 자전거를 소유할 확률이 높다" },
+              { "id": "C", "text": "김 씨는 자전거를 소유하지 않는다" },
+              { "id": "D", "text": "추론할 수 있는 것이 없다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-08-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론이 연역 추론과 다른 점은?",
+            "choices": [
+              { "id": "A", "text": "결론이 반드시 참은 아니다" },
+              { "id": "B", "text": "전제가 거짓이다" },
+              { "id": "C", "text": "결론이 전제보다 범위가 좁다" },
+              { "id": "D", "text": "전제가 한 개뿐이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-08-p2-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "김 씨가 자전거 알레르기가 있다는 추가 정보가 있다면?",
+            "choices": [
+              { "id": "A", "text": "여전히 자전거를 소유할 확률이 90%이다" },
+              { "id": "B", "text": "자전거를 소유하지 않을 확률이 높아진다" },
+              { "id": "C", "text": "통계가 무효가 된다" },
+              { "id": "D", "text": "A 지역 통계가 잘못된 것이다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "인과 추론의 함정",
+        "text": "한 뉴스에서 보도했다. '아이스크림 판매량이 증가하는 시기에 익사 사고도 증가한다. 따라서 아이스크림 소비가 익사 사고의 원인이다.'",
+        "questions": [
+          {
+            "id": "lg-r1-08-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론의 문제점은?",
+            "choices": [
+              { "id": "A", "text": "상관관계를 인과관계로 혼동하고 있다" },
+              { "id": "B", "text": "데이터가 부족하다" },
+              { "id": "C", "text": "아이스크림과 익사는 완전히 무관하다" },
+              { "id": "D", "text": "뉴스 보도이므로 신뢰할 수 있다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-08-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "두 현상이 동시에 증가하는 실제 원인으로 가장 그럴듯한 것은?",
+            "choices": [
+              { "id": "A", "text": "여름철 기온 상승이 두 현상 모두의 원인이다" },
+              { "id": "B", "text": "아이스크림이 사람을 물에 빠지게 한다" },
+              { "id": "C", "text": "익사 사고가 아이스크림 소비를 증가시킨다" },
+              { "id": "D", "text": "우연의 일치이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "유비 추론의 강도",
+        "text": "화학 시간에 선생님이 설명한다. '원자의 구조를 태양계에 비유할 수 있다. 태양 주위를 행성이 돌듯이, 원자핵 주위를 전자가 돈다.'",
+        "questions": [
+          {
+            "id": "lg-r1-08-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 비유(유비 추론)의 한계로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "원자와 태양계는 모든 면에서 동일하다" },
+              { "id": "B", "text": "비교 대상 간에 다른 점도 많아 모든 성질을 옮길 수 없다" },
+              { "id": "C", "text": "태양계가 원자보다 작다" },
+              { "id": "D", "text": "유비 추론은 항상 틀리다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-08-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "유비 추론이 강한 추론이 되려면?",
+            "choices": [
+              { "id": "A", "text": "비교 대상 간의 유사점이 많고 핵심적일수록 강하다" },
+              { "id": "B", "text": "비교 대상이 완전히 다를수록 강하다" },
+              { "id": "C", "text": "비유가 재미있을수록 강하다" },
+              { "id": "D", "text": "전문가가 사용할수록 강하다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-08-p4-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 유비 추론에 해당하는 것은?",
+            "choices": [
+              { "id": "A", "text": "모든 포유류는 젖을 먹인다. 고래는 포유류이다. 따라서 고래는 젖을 먹인다." },
+              { "id": "B", "text": "지구에 물이 있어 생명이 있다. 화성에도 물이 있으므로 생명이 있을 수 있다." },
+              { "id": "C", "text": "관찰한 까마귀 100마리가 모두 검었다. 따라서 모든 까마귀는 검다." },
+              { "id": "D", "text": "1+1=2이고 2+2=4이다. 따라서 3+3=6이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "확증 편향",
+        "text": "민준이는 '13일의 금요일은 불길하다'고 믿는다. 13일의 금요일에 나쁜 일이 생기면 '역시 그렇지'라고 하고, 좋은 일이 생기면 무시한다.",
+        "questions": [
+          {
+            "id": "lg-r1-08-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "민준이의 사고에 나타나는 문제는?",
+            "choices": [
+              { "id": "A", "text": "확증 편향: 자기 믿음에 맞는 증거만 선택적으로 수용한다" },
+              { "id": "B", "text": "논리적으로 완벽한 추론이다" },
+              { "id": "C", "text": "성급한 일반화의 오류이다" },
+              { "id": "D", "text": "인신공격의 오류이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-08-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "민준이의 믿음을 객관적으로 검증하는 방법은?",
+            "choices": [
+              { "id": "A", "text": "13일 금요일과 다른 날의 사건 발생률을 비교한다" },
+              { "id": "B", "text": "13일 금요일에 나쁜 일만 더 자세히 기록한다" },
+              { "id": "C", "text": "주변 사람에게 같은 믿음을 가지고 있는지 묻는다" },
+              { "id": "D", "text": "13일 금요일을 피해서 생활한다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-08-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "확증 편향을 줄이기 위해 가장 중요한 태도는?",
+            "choices": [
+              { "id": "A", "text": "자신의 믿음에 반하는 증거도 적극적으로 찾아본다" },
+              { "id": "B", "text": "다수의 의견을 항상 따른다" },
+              { "id": "C", "text": "감정에 따라 판단한다" },
+              { "id": "D", "text": "한 번 결정한 것은 바꾸지 않는다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

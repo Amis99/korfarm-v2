@@ -1,0 +1,483 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 10",
+  "description": "복합 명제 기호화와 동치 변환",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론",
+    "기호화",
+    "동치"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "일상 언어의 기호화",
+        "text": "P: '수영을 한다', Q: '달리기를 한다', R: '건강해진다'로 놓자. '수영을 하거나 달리기를 하면 건강해진다'는 '(P ∨ Q) → R'로 기호화된다.",
+        "questions": [
+          {
+            "id": "lg-w1-10-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'수영을 하지 않고 달리기도 하지 않으면 건강해지지 않는다'를 기호화하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "(¬P ∧ ¬Q) → ¬R"
+              },
+              {
+                "id": "B",
+                "text": "¬(P ∨ Q) → ¬R"
+              },
+              {
+                "id": "C",
+                "text": "A와 B 모두 같은 의미이다"
+              },
+              {
+                "id": "D",
+                "text": "¬P → (¬Q → ¬R)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-10-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 명제는 원래 명제 '(P ∨ Q) → R'의 무엇에 해당하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대우"
+              },
+              {
+                "id": "B",
+                "text": "역"
+              },
+              {
+                "id": "C",
+                "text": "이(裏)"
+              },
+              {
+                "id": "D",
+                "text": "원래 명제와 동치"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-10-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "'(P ∨ Q) → R'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬R → (¬P ∧ ¬Q)"
+              },
+              {
+                "id": "B",
+                "text": "¬R → (¬P ∨ ¬Q)"
+              },
+              {
+                "id": "C",
+                "text": "R → (P ∨ Q)"
+              },
+              {
+                "id": "D",
+                "text": "(¬P ∧ ¬Q) → ¬R"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "조건문의 동치 변환",
+        "text": "'P → Q'는 '¬P ∨ Q'와 동치이고, '¬(P → Q)'는 'P ∧ ¬Q'와 동치이다. 이를 활용하면 복잡한 조건문을 논리곱·논리합으로 변환할 수 있다.",
+        "questions": [
+          {
+            "id": "lg-w1-10-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'공부를 하면 시험에 합격한다'가 거짓일 때, 반드시 참인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공부를 했는데 시험에 불합격했다"
+              },
+              {
+                "id": "B",
+                "text": "공부를 하지 않았고 시험에 합격했다"
+              },
+              {
+                "id": "C",
+                "text": "공부를 하지 않아서 시험에 불합격했다"
+              },
+              {
+                "id": "D",
+                "text": "시험에 합격했지만 공부를 하지 않았다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-10-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'¬(P → Q)'를 드모르간 법칙 없이 직접 동치 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P ∧ ¬Q"
+              },
+              {
+                "id": "B",
+                "text": "¬P ∨ ¬Q"
+              },
+              {
+                "id": "C",
+                "text": "P ∨ ¬Q"
+              },
+              {
+                "id": "D",
+                "text": "¬P ∧ Q"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "이중 부정과 항진 명제",
+        "text": "이중 부정 제거: '¬¬P'는 'P'와 동치이다. 항진 명제(tautology)는 어떤 진릿값 조합에서도 항상 참인 명제이다. 예: 'P ∨ ¬P'는 항진 명제이다.",
+        "questions": [
+          {
+            "id": "lg-w1-10-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 항진 명제가 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P ∨ ¬P"
+              },
+              {
+                "id": "B",
+                "text": "P → P"
+              },
+              {
+                "id": "C",
+                "text": "(P → Q) ∨ (Q → P)"
+              },
+              {
+                "id": "D",
+                "text": "P ∧ ¬P"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-10-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P ∧ ¬P'는 어떤 명제인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모순 명제 (항상 거짓)"
+              },
+              {
+                "id": "B",
+                "text": "항진 명제 (항상 참)"
+              },
+              {
+                "id": "C",
+                "text": "우연 명제 (참·거짓 모두 가능)"
+              },
+              {
+                "id": "D",
+                "text": "판단 불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-10-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "'(P → Q) ∨ (Q → P)'가 항진 명제인 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P, Q의 모든 진릿값 조합에서 적어도 하나의 조건문이 참이 되므로"
+              },
+              {
+                "id": "B",
+                "text": "조건문은 항상 참이므로"
+              },
+              {
+                "id": "C",
+                "text": "논리합은 항상 참이므로"
+              },
+              {
+                "id": "D",
+                "text": "P와 Q가 같은 값이므로"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "논리적 함축과 동치",
+        "text": "P가 Q를 논리적으로 함축한다(P ⊨ Q)는 것은 P가 참인 모든 경우에 Q도 참이라는 뜻이다. P와 Q가 논리적으로 동치(P ≡ Q)이면 서로를 함축한다.",
+        "questions": [
+          {
+            "id": "lg-w1-10-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'P ∧ Q'는 'P'를 논리적으로 함축하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "함축한다. P ∧ Q가 참이면 P는 반드시 참이므로"
+              },
+              {
+                "id": "B",
+                "text": "함축하지 않는다. P만으로는 Q를 알 수 없으므로"
+              },
+              {
+                "id": "C",
+                "text": "함축한다. P가 참이면 P ∧ Q도 참이므로"
+              },
+              {
+                "id": "D",
+                "text": "판단 불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-10-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P'는 'P ∨ Q'를 논리적으로 함축하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "함축한다. P가 참이면 P ∨ Q도 반드시 참이므로"
+              },
+              {
+                "id": "B",
+                "text": "함축하지 않는다. Q의 값을 모르므로"
+              },
+              {
+                "id": "C",
+                "text": "Q가 참일 때만 함축한다"
+              },
+              {
+                "id": "D",
+                "text": "논리합은 함축 관계가 아니다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "복합 기호화 종합",
+        "text": "다음 문장을 기호화하라. A: '학생이다', B: '18세 이상이다', C: '투표할 수 있다'. 규칙: '학생이 아니면서 18세 이상인 사람만 투표할 수 있다.'",
+        "questions": [
+          {
+            "id": "lg-w1-10-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "위 규칙의 올바른 기호화는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "(¬A ∧ B) → C"
+              },
+              {
+                "id": "B",
+                "text": "C → (¬A ∧ B)"
+              },
+              {
+                "id": "C",
+                "text": "(¬A ∧ B) ↔ C"
+              },
+              {
+                "id": "D",
+                "text": "¬A → (B → C)"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-10-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'~만'이라는 표현이 쌍조건문(↔)으로 기호화되는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'~만'은 '~인 경우에 그리고 오직 그 경우에만'을 뜻하므로 필요충분조건이다"
+              },
+              {
+                "id": "B",
+                "text": "'~만'은 충분조건만 나타내므로"
+              },
+              {
+                "id": "C",
+                "text": "'~만'은 필요조건만 나타내므로"
+              },
+              {
+                "id": "D",
+                "text": "'~만'은 부정을 나타내므로"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-10-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "18세 이상 학생인 민수가 투표할 수 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "투표할 수 있다. B가 참이므로"
+              },
+              {
+                "id": "B",
+                "text": "투표할 수 없다. A가 참이므로 ¬A ∧ B가 거짓"
+              },
+              {
+                "id": "C",
+                "text": "판단 불가"
+              },
+              {
+                "id": "D",
+                "text": "투표할 수 있다. 18세 이상이면 충분하므로"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "추가 논리 문제",
+        "text": "다음 각 문제를 풀어라.",
+        "questions": [
+          {
+            "id": "lg-w1-10-p6-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 형식적으로 타당한 논증은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 A는 B이다. C는 A이다. 따라서 C는 B이다."
+              },
+              {
+                "id": "B",
+                "text": "일부 A는 B이다. 일부 B는 C이다. 따라서 모든 A는 C이다."
+              },
+              {
+                "id": "C",
+                "text": "A이면 B이다. B이다. 따라서 A이다."
+              },
+              {
+                "id": "D",
+                "text": "A가 아니면 B이다. A이다. 따라서 B가 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-10-p6-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P이면 Q이다'와 논리적으로 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "Q → P"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

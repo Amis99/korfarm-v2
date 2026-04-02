@@ -1,0 +1,228 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 16",
+  "description": "논리 퍼즐 심화와 추론 전략",
+  "targetLevel": "RUSSELL_2",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "추론", "퍼즐", "전략"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "기사와 악당 퍼즐",
+        "text": "섬에 기사(항상 참말)와 악당(항상 거짓말)이 산다. 두 사람 X, Y를 만났다. X가 말했다: 'Y는 기사이다.' Y가 말했다: '우리 둘은 같은 종류가 아니다.'",
+        "questions": [
+          {
+            "id": "lg-r2-16-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "X와 Y의 정체는?",
+            "choices": [
+              { "id": "A", "text": "X=악당, Y=악당" },
+              { "id": "B", "text": "X=기사, Y=기사" },
+              { "id": "C", "text": "X=기사, Y=악당" },
+              { "id": "D", "text": "X=악당, Y=기사" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-16-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "Y가 기사라면 '우리 둘은 같은 종류가 아니다'가 참이려면 X는?",
+            "choices": [
+              { "id": "A", "text": "악당이어야 한다" },
+              { "id": "B", "text": "기사이어야 한다" },
+              { "id": "C", "text": "알 수 없다" },
+              { "id": "D", "text": "둘 다 기사" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-16-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "그런데 X가 악당이면 'Y는 기사이다'는 거짓이므로 Y는 악당이다. 이것은 Y가 기사라는 가정과 모순되므로?",
+            "choices": [
+              { "id": "A", "text": "Y는 기사가 아니다(악당). 따라서 Y의 말은 거짓이므로 둘은 같은 종류이다. X도 악당이다." },
+              { "id": "B", "text": "Y는 기사이다" },
+              { "id": "C", "text": "판단할 수 없다" },
+              { "id": "D", "text": "X가 기사이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "모자 색깔 퍼즐",
+        "text": "A, B, C 세 명이 일렬로 앉아 있다(A→B→C 순서로 앞을 본다). 빨강 모자 2개, 파랑 모자 1개 중 각자에게 하나씩 씌운다. 각자 자기 앞에 있는 사람의 모자만 볼 수 있다. C가 먼저 '모르겠다'고 했고, B도 '모르겠다'고 했다. A가 자기 모자 색을 맞혔다.",
+        "questions": [
+          {
+            "id": "lg-r2-16-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "C가 '모르겠다'고 한 것에서 알 수 있는 정보는?",
+            "choices": [
+              { "id": "A", "text": "A와 B가 둘 다 파랑은 아니다(그랬으면 C는 빨강을 알았을 것)" },
+              { "id": "B", "text": "아무 정보도 없다" },
+              { "id": "C", "text": "C는 빨강이다" },
+              { "id": "D", "text": "A와 B가 둘 다 빨강이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-16-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "B가 C의 정보를 들었는데도 '모르겠다'고 했으면?",
+            "choices": [
+              { "id": "A", "text": "A가 파랑이 아니다. A가 파랑이면 B는 자기가 빨강임을 알았을 것이다." },
+              { "id": "B", "text": "아무 정보도 없다" },
+              { "id": "C", "text": "B는 파랑이다" },
+              { "id": "D", "text": "A는 파랑이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-16-p2-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "A의 모자 색은?",
+            "choices": [
+              { "id": "A", "text": "빨강" },
+              { "id": "B", "text": "파랑" },
+              { "id": "C", "text": "알 수 없다" },
+              { "id": "D", "text": "빨강 또는 파랑" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "섬과 다리 퍼즐",
+        "text": "강 양쪽에 A, B 두 사람이 있다. 다리를 건너려면 통행료를 내야 한다. 규칙: ① 소지금의 절반을 통행료로 낸다. ② 다리를 건넌 후 10만 원을 받는다. A는 다리를 두 번 건너면 원래 금액으로 돌아올 수 있을까?",
+        "questions": [
+          {
+            "id": "lg-r2-16-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "A가 처음 x만 원을 가지고 한 번 건너면?",
+            "choices": [
+              { "id": "A", "text": "x/2 + 10 만 원" },
+              { "id": "B", "text": "x - x/2 = x/2 만 원" },
+              { "id": "C", "text": "x + 10 만 원" },
+              { "id": "D", "text": "x/2 - 10 만 원" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-16-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "두 번째 건너면(y = x/2+10에서 출발)?",
+            "choices": [
+              { "id": "A", "text": "y/2 + 10 = (x/2+10)/2 + 10 = x/4 + 15" },
+              { "id": "B", "text": "x" },
+              { "id": "C", "text": "x/2" },
+              { "id": "D", "text": "x + 20" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-16-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "x/4 + 15 = x가 되려면 x는?",
+            "choices": [
+              { "id": "A", "text": "20만 원" },
+              { "id": "B", "text": "10만 원" },
+              { "id": "C", "text": "30만 원" },
+              { "id": "D", "text": "40만 원" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "진위 판별 심화",
+        "text": "4장의 카드가 있다. 앞면: A, K, 4, 7. 규칙: '모음이면 뒷면은 짝수이다.' 이 규칙을 검증하려면 어떤 카드를 뒤집어야 하는가?",
+        "questions": [
+          {
+            "id": "lg-r2-16-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "반드시 뒤집어야 하는 카드는?",
+            "choices": [
+              { "id": "A", "text": "A와 7" },
+              { "id": "B", "text": "A와 4" },
+              { "id": "C", "text": "A만" },
+              { "id": "D", "text": "K와 4" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-16-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "7을 뒤집어야 하는 이유는?",
+            "choices": [
+              { "id": "A", "text": "대우 확인: 홀수(짝수가 아님)의 뒷면이 모음이면 규칙 위반" },
+              { "id": "B", "text": "7이 홀수이기 때문" },
+              { "id": "C", "text": "모든 카드를 뒤집어야 하므로" },
+              { "id": "D", "text": "뒤집을 필요가 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "논리 추론 응용",
+        "text": "다음 전제로부터 결론을 도출하라. ① 수학을 좋아하면 논리적이다. ② 논리적이면 프로그래밍을 잘한다. ③ 프로그래밍을 잘하면 취업이 잘 된다. ④ 민수는 취업이 안 되었다.",
+        "questions": [
+          {
+            "id": "lg-r2-16-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "민수에 대해 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "프로그래밍을 잘하지 못하고, 논리적이지 않으며, 수학을 좋아하지 않는다" },
+              { "id": "B", "text": "수학을 좋아한다" },
+              { "id": "C", "text": "논리적이다" },
+              { "id": "D", "text": "알 수 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-16-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "사용된 추론 방법은?",
+            "choices": [
+              { "id": "A", "text": "대우의 연쇄 적용" },
+              { "id": "B", "text": "전건 긍정의 연쇄" },
+              { "id": "C", "text": "귀납 추론" },
+              { "id": "D", "text": "유비 추론" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-16-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증의 약점은?",
+            "choices": [
+              { "id": "A", "text": "각 전제가 반드시 참은 아니다(수학을 좋아하지 않아도 논리적일 수 있다)" },
+              { "id": "B", "text": "형식이 부당하다" },
+              { "id": "C", "text": "결론이 틀렸다" },
+              { "id": "D", "text": "약점이 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

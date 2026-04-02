@@ -1,0 +1,215 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 10",
+  "description": "조건 추론 퍼즐과 논리적 사고",
+  "targetLevel": "RUSSELL_2",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "추론", "퍼즐", "조건추론"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "복합 조건 퍼즐",
+        "text": "5명(A~E) 중 범인이 1명 있다. ① A가 범인이면 B는 공범이다. ② B가 공범이면 C는 목격자이다. ③ C는 목격자가 아니다. ④ D가 범인이면 E는 알리바이가 있다. ⑤ E는 알리바이가 없다.",
+        "questions": [
+          {
+            "id": "lg-r2-10-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "A는 범인인가?",
+            "choices": [
+              { "id": "A", "text": "범인이다" },
+              { "id": "B", "text": "범인이 아니다 (③→②대우→①대우)" },
+              { "id": "C", "text": "알 수 없다" },
+              { "id": "D", "text": "공범이다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-10-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "D는 범인인가?",
+            "choices": [
+              { "id": "A", "text": "범인이다" },
+              { "id": "B", "text": "범인이 아니다 (⑤→④대우)" },
+              { "id": "C", "text": "알 수 없다" },
+              { "id": "D", "text": "목격자이다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-10-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "범인이 될 수 있는 사람은?",
+            "choices": [
+              { "id": "A", "text": "B, C, E 중 한 명" },
+              { "id": "B", "text": "A만" },
+              { "id": "C", "text": "D만" },
+              { "id": "D", "text": "A 또는 D" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "스위치 퍼즐",
+        "text": "3개의 방(1, 2, 3)에 각각 전등이 하나씩 있다. 복도에 3개의 스위치(가, 나, 다)가 있으며 각 스위치가 어떤 방의 전등을 제어하는지 모른다. 스위치를 조작하고 방에 한 번만 들어가서 어떤 스위치가 어떤 방의 전등인지 알아내야 한다.",
+        "questions": [
+          {
+            "id": "lg-r2-10-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 전략 중 올바른 것은?",
+            "choices": [
+              { "id": "A", "text": "가를 10분 켜뒀다 끄고, 나를 켜둔 채 방에 들어간다. 켜진 전등=나, 꺼졌지만 뜨거운 전구=가, 나머지=다" },
+              { "id": "B", "text": "세 스위치를 모두 켜고 들어간다" },
+              { "id": "C", "text": "하나씩 켜보며 세 번 들어간다" },
+              { "id": "D", "text": "알아낼 수 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-10-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 퍼즐에서 핵심적인 논리적 사고는?",
+            "choices": [
+              { "id": "A", "text": "두 가지 이상의 정보(빛+열)를 활용하여 경우의 수를 줄인다" },
+              { "id": "B", "text": "운에 의존한다" },
+              { "id": "C", "text": "모든 조합을 시도한다" },
+              { "id": "D", "text": "추론이 불필요하다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "논리 격자 퍼즐",
+        "text": "3명(민수, 영희, 철수)이 각각 다른 과목(수학, 영어, 과학)을 가장 좋아한다. ① 민수는 영어를 좋아하지 않는다. ② 영희는 수학을 좋아하지 않는다. ③ 과학을 좋아하는 사람은 민수가 아니다.",
+        "questions": [
+          {
+            "id": "lg-r2-10-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "민수가 좋아하는 과목은?",
+            "choices": [
+              { "id": "A", "text": "수학" },
+              { "id": "B", "text": "영어" },
+              { "id": "C", "text": "과학" },
+              { "id": "D", "text": "알 수 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-10-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "영희가 좋아하는 과목은?",
+            "choices": [
+              { "id": "A", "text": "수학" },
+              { "id": "B", "text": "과학" },
+              { "id": "C", "text": "영어" },
+              { "id": "D", "text": "알 수 없다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-10-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "이 퍼즐을 풀 때 사용한 핵심 방법은?",
+            "choices": [
+              { "id": "A", "text": "소거법: 불가능한 조합을 제거하여 유일한 답을 찾는다" },
+              { "id": "B", "text": "귀납 추론" },
+              { "id": "C", "text": "유비 추론" },
+              { "id": "D", "text": "통계적 추론" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "다중 조건 배치",
+        "text": "4명(A, B, C, D)이 일렬로 선다. ① A는 B보다 앞에 선다. ② C는 맨 앞이나 맨 뒤에 선다. ③ D는 B 바로 옆에 선다.",
+        "questions": [
+          {
+            "id": "lg-r2-10-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "가능한 배치는?",
+            "choices": [
+              { "id": "A", "text": "C-A-D-B" },
+              { "id": "B", "text": "A-B-C-D" },
+              { "id": "C", "text": "B-A-D-C" },
+              { "id": "D", "text": "D-B-A-C" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-10-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "C가 맨 뒤일 때 가능한 배치를 모두 찾으면?",
+            "choices": [
+              { "id": "A", "text": "A-D-B-C와 A-B-D-C" },
+              { "id": "B", "text": "A-D-B-C만" },
+              { "id": "C", "text": "D-A-B-C만" },
+              { "id": "D", "text": "없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "선택적 삼단논법 응용",
+        "text": "학교 동아리 선택 규칙이다. ① 음악부 또는 미술부에 가입해야 한다(하나만 선택). ② 음악부에 가입하면 합창 대회에 참가한다. ③ 미술부에 가입하면 전시회에 참가한다. ④ 민지는 합창 대회에 참가하지 않는다.",
+        "questions": [
+          {
+            "id": "lg-r2-10-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "민지에 대해 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "미술부에 가입했고 전시회에 참가한다" },
+              { "id": "B", "text": "음악부에 가입했다" },
+              { "id": "C", "text": "합창 대회에 참가한다" },
+              { "id": "D", "text": "아무것도 알 수 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-10-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론에 사용된 규칙들은?",
+            "choices": [
+              { "id": "A", "text": "후건 부정(②대우) + 선언 삼단논법(①에서 음악부 배제) + 전건 긍정(③)" },
+              { "id": "B", "text": "전건 긍정만" },
+              { "id": "C", "text": "귀납 추론" },
+              { "id": "D", "text": "유비 추론" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-10-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "①의 '하나만 선택'이라는 조건이 없다면?",
+            "choices": [
+              { "id": "A", "text": "민지가 미술부에 가입했다는 결론은 여전히 유효하지만, 음악부도 가입했을 수 있다" },
+              { "id": "B", "text": "아무 영향이 없다" },
+              { "id": "C", "text": "결론이 완전히 바뀐다" },
+              { "id": "D", "text": "민지는 아무 부서에도 가입하지 않는다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

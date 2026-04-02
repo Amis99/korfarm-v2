@@ -1,0 +1,335 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 04",
+  "description": "논증 구조를 분석해요",
+  "targetLevel": "SAUSSURE_3",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 300,
+  "payload": {
+    "passages": [
+      {
+        "title": "삼단논법",
+        "text": "전제 1: 모든 사람은 죽는다. 전제 2: 소크라테스는 사람이다. 결론: 소크라테스는 죽는다.",
+        "questions": [
+          {
+            "id": "lg-s3-04-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "귀납"
+              },
+              {
+                "id": "B",
+                "text": "삼단논법(연역)"
+              },
+              {
+                "id": "C",
+                "text": "비유"
+              },
+              {
+                "id": "D",
+                "text": "반례"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-s3-04-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "전제 1이 거짓이면 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "여전히 참"
+              },
+              {
+                "id": "B",
+                "text": "확실하지 않게 된다"
+              },
+              {
+                "id": "C",
+                "text": "결론도 거짓"
+              },
+              {
+                "id": "D",
+                "text": "전제와 무관"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "숨은 전제",
+        "text": "'영수는 한국 사람이니까 김치를 좋아할 거야.'",
+        "questions": [
+          {
+            "id": "lg-s3-04-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한국 사람은 모두 김치를 좋아한다"
+              },
+              {
+                "id": "B",
+                "text": "영수가 잘생겼다"
+              },
+              {
+                "id": "C",
+                "text": "김치가 맛있다"
+              },
+              {
+                "id": "D",
+                "text": "한국이 좋다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-s3-04-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 숨겨진 전제는 맞나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "항상 맞다"
+              },
+              {
+                "id": "B",
+                "text": "김치를 싫어하는 한국 사람도 있으므로 틀릴 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "모른다"
+              },
+              {
+                "id": "D",
+                "text": "맞다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "논증 평가",
+        "text": "전제: 비가 오면 소풍이 취소된다. 오늘 소풍이 취소되었다. 결론: 비가 왔다.",
+        "questions": [
+          {
+            "id": "lg-s3-04-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증은 타당한가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하다"
+              },
+              {
+                "id": "B",
+                "text": "비 외에 다른 이유로 취소될 수 있어서 타당하지 않다"
+              },
+              {
+                "id": "C",
+                "text": "항상 타당"
+              },
+              {
+                "id": "D",
+                "text": "모른다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-s3-04-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 오류를 무엇이라 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과 긍정의 오류(후건 긍정)"
+              },
+              {
+                "id": "B",
+                "text": "전건 부정"
+              },
+              {
+                "id": "C",
+                "text": "대우"
+              },
+              {
+                "id": "D",
+                "text": "반례"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "전건 부정 오류",
+        "text": "전제: 공부하면 성적이 오른다. 공부를 안 했다. 결론: 성적이 안 오른다.",
+        "questions": [
+          {
+            "id": "lg-s3-04-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증은 타당한가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하다"
+              },
+              {
+                "id": "B",
+                "text": "다른 이유로 성적이 오를 수 있어서 타당하지 않다"
+              },
+              {
+                "id": "C",
+                "text": "항상 맞다"
+              },
+              {
+                "id": "D",
+                "text": "모른다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-s3-04-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이것은 어떤 오류?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과 긍정"
+              },
+              {
+                "id": "B",
+                "text": "전건 부정의 오류"
+              },
+              {
+                "id": "C",
+                "text": "대우"
+              },
+              {
+                "id": "D",
+                "text": "반례"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "타당한 논증",
+        "text": "전제: 비가 오면 땅이 젖는다. 땅이 안 젖었다. 결론: 비가 안 왔다.",
+        "questions": [
+          {
+            "id": "lg-s3-04-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증은 타당한가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하지 않다"
+              },
+              {
+                "id": "B",
+                "text": "타당하다(대우를 이용)"
+              },
+              {
+                "id": "C",
+                "text": "모른다"
+              },
+              {
+                "id": "D",
+                "text": "오류이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-s3-04-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론 방식은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전건 부정"
+              },
+              {
+                "id": "B",
+                "text": "후건 부정(대우 적용)"
+              },
+              {
+                "id": "C",
+                "text": "귀납"
+              },
+              {
+                "id": "D",
+                "text": "비유"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

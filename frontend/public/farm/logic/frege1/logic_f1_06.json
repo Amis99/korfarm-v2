@@ -1,0 +1,176 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 06",
+  "description": "조건문 추론 심화와 후건부정",
+  "targetLevel": "FREGE_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "조건문", "후건부정"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passages": [
+      {
+        "title": "도서 대출",
+        "text": "도서관 회원이면 책을 빌릴 수 있다. 지원이는 책을 빌릴 수 없다.",
+        "questions": [
+          {
+            "id": "lg-f1-06-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "지원이에 대해 확실히 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "지원이는 도서관 회원이 아니다." },
+              { "id": "B", "text": "지원이는 책을 좋아하지 않는다." },
+              { "id": "C", "text": "지원이는 도서관에 간 적이 없다." },
+              { "id": "D", "text": "지원이는 회원 가입을 할 것이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-06-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론에 사용된 논리적 방법은?",
+            "choices": [
+              { "id": "A", "text": "원인이 있으면 결과도 있다 (전건긍정)" },
+              { "id": "B", "text": "결과가 없으면 원인도 없다 (후건부정)" },
+              { "id": "C", "text": "결과가 있으면 원인도 있다 (후건긍정)" },
+              { "id": "D", "text": "원인이 없으면 결과도 없다 (전건부정)" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "놀이공원",
+        "text": "키가 130cm 이상이면 롤러코스터를 탈 수 있다. 수아는 롤러코스터를 탔다.",
+        "questions": [
+          {
+            "id": "lg-f1-06-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "수아에 대해 확실히 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "수아의 키는 정확히 130cm이다." },
+              { "id": "B", "text": "수아의 키는 130cm 이상이다." },
+              { "id": "C", "text": "수아는 용감하다." },
+              { "id": "D", "text": "수아의 키를 정확히 알 수 없다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-06-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "잠깐, 위 문제의 정답이 B인 이유를 다시 생각해보자. 이것이 올바른 추론인가?",
+            "choices": [
+              { "id": "A", "text": "올바르다. 탔으므로 키 조건을 충족했을 것이다." },
+              { "id": "B", "text": "올바르지 않다. 후건긍정의 오류이다." },
+              { "id": "C", "text": "올바르다. 전건긍정이다." },
+              { "id": "D", "text": "판단할 수 없다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "우산과 비",
+        "text": "비가 오면 사람들은 우산을 쓴다. 거리에서 우산을 쓴 사람들이 보인다.",
+        "questions": [
+          {
+            "id": "lg-f1-06-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'그러므로 비가 오고 있다'는 결론은 타당한가?",
+            "choices": [
+              { "id": "A", "text": "타당하다. 우산을 쓰면 비가 오는 것이다." },
+              { "id": "B", "text": "타당하지 않다. 햇볕을 가리려고 쓸 수도 있다." },
+              { "id": "C", "text": "타당하다. 우산은 비올 때만 쓴다." },
+              { "id": "D", "text": "판단할 수 없다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-06-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 잘못된 추론은 어떤 유형의 오류인가?",
+            "choices": [
+              { "id": "A", "text": "전건부정의 오류" },
+              { "id": "B", "text": "후건긍정의 오류" },
+              { "id": "C", "text": "성급한 일반화" },
+              { "id": "D", "text": "순환 논증" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "동아리 활동",
+        "text": "과학 동아리 학생은 모두 실험복을 입는다. 태민이는 실험복을 입고 있다.",
+        "questions": [
+          {
+            "id": "lg-f1-06-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "태민이가 과학 동아리인지 확실히 알 수 있는가?",
+            "choices": [
+              { "id": "A", "text": "확실히 알 수 있다. 실험복을 입었으니까." },
+              { "id": "B", "text": "확실히 알 수 없다. 다른 이유로 실험복을 입었을 수도 있다." },
+              { "id": "C", "text": "확실히 알 수 있다. 실험복은 과학 동아리만 입는다." },
+              { "id": "D", "text": "태민이에게 직접 물어봐야 한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-06-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "실험복을 입지 않은 학생에 대해 확실히 말할 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "그 학생은 과학 동아리가 아니다." },
+              { "id": "B", "text": "그 학생은 과학을 싫어한다." },
+              { "id": "C", "text": "그 학생은 실험복을 잃어버렸다." },
+              { "id": "D", "text": "알 수 없다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "계절과 옷",
+        "text": "여름이면 반팔을 입는다. 반팔을 입지 않았다.",
+        "questions": [
+          {
+            "id": "lg-f1-06-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "확실히 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "겨울이다." },
+              { "id": "B", "text": "여름이 아니다." },
+              { "id": "C", "text": "봄이다." },
+              { "id": "D", "text": "가을이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-06-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'여름이 아니면 반팔을 입지 않는다'는 반드시 참인가?",
+            "choices": [
+              { "id": "A", "text": "참이다. 원래 문장과 같은 의미이다." },
+              { "id": "B", "text": "반드시 참은 아니다. 봄에도 더우면 반팔을 입을 수 있다." },
+              { "id": "C", "text": "거짓이다. 겨울에도 반팔을 입는다." },
+              { "id": "D", "text": "판단할 수 없다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

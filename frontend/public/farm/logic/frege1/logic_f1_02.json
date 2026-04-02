@@ -1,0 +1,176 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 02",
+  "description": "연쇄 추론과 반례 찾기",
+  "targetLevel": "FREGE_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "추론", "연쇄추론"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passages": [
+      {
+        "title": "동물의 분류",
+        "text": "고래는 포유류이다. 포유류는 허파로 숨을 쉰다. 허파로 숨을 쉬는 동물은 물속에서 계속 있을 수 없다.",
+        "questions": [
+          {
+            "id": "lg-f1-02-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "위 글을 통해 고래에 대해 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "고래는 물속에서 계속 있을 수 없다." },
+              { "id": "B", "text": "고래는 물고기가 아니므로 바다에 살 수 없다." },
+              { "id": "C", "text": "고래는 아가미로도 숨을 쉴 수 있다." },
+              { "id": "D", "text": "고래는 육지에서 사는 것이 더 좋다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-02-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론은 몇 단계를 거쳐 결론에 도달하는가?",
+            "choices": [
+              { "id": "A", "text": "1단계" },
+              { "id": "B", "text": "2단계" },
+              { "id": "C", "text": "3단계" },
+              { "id": "D", "text": "4단계" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "방과 후 활동",
+        "text": "축구부 학생은 모두 수요일에 연습한다. 수요일에 연습하는 학생은 수요일에 학원에 갈 수 없다.",
+        "questions": [
+          {
+            "id": "lg-f1-02-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "위 글에서 확실히 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "축구부 학생은 학원에 다니지 않는다." },
+              { "id": "B", "text": "축구부 학생은 수요일에 학원에 갈 수 없다." },
+              { "id": "C", "text": "수요일에 학원에 가는 학생은 운동을 하지 않는다." },
+              { "id": "D", "text": "학원에 다니는 학생은 축구를 싫어한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-02-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "수요일에 학원에 간 학생에 대해 확실히 말할 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "그 학생은 운동을 전혀 하지 않는다." },
+              { "id": "B", "text": "그 학생은 축구부가 아니다." },
+              { "id": "C", "text": "그 학생은 다른 요일에 축구 연습을 한다." },
+              { "id": "D", "text": "그 학생은 축구를 싫어한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "새의 특징",
+        "text": "\"모든 새는 날 수 있다\"라고 준호가 말했다.",
+        "questions": [
+          {
+            "id": "lg-f1-02-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "준호의 말에 대한 반례로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "독수리는 매우 높이 날 수 있다." },
+              { "id": "B", "text": "펭귄은 새이지만 날 수 없다." },
+              { "id": "C", "text": "박쥐는 날 수 있지만 새가 아니다." },
+              { "id": "D", "text": "참새는 작지만 날 수 있다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-02-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "반례를 들어 보였을 때, 원래 주장은 어떻게 되는가?",
+            "choices": [
+              { "id": "A", "text": "여전히 참이다." },
+              { "id": "B", "text": "거짓으로 판명된다." },
+              { "id": "C", "text": "부분적으로만 참이 된다." },
+              { "id": "D", "text": "판단할 수 없게 된다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "아이스크림 가게",
+        "text": "초코맛을 좋아하는 사람은 바닐라맛도 좋아한다. 바닐라맛을 좋아하는 사람은 딸기맛은 싫어한다. 수진이는 초코맛을 좋아한다.",
+        "questions": [
+          {
+            "id": "lg-f1-02-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "수진이에 대해 확실히 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "수진이는 바닐라맛과 딸기맛을 모두 좋아한다." },
+              { "id": "B", "text": "수진이는 바닐라맛을 좋아하고 딸기맛은 싫어한다." },
+              { "id": "C", "text": "수진이는 초코맛만 좋아한다." },
+              { "id": "D", "text": "수진이는 모든 맛을 좋아한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-02-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "딸기맛을 좋아하는 사람에 대해 확실히 말할 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "바닐라맛도 좋아한다." },
+              { "id": "B", "text": "초코맛을 좋아하지 않는다." },
+              { "id": "C", "text": "바닐라맛을 좋아하지 않는다." },
+              { "id": "D", "text": "아이스크림을 많이 먹는다." }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "교통 규칙",
+        "text": "빨간 신호에 건너면 위험하다. 위험한 행동을 하면 벌칙을 받는다. 서준이는 벌칙을 받지 않았다.",
+        "questions": [
+          {
+            "id": "lg-f1-02-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "서준이에 대해 확실히 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "서준이는 길을 건너지 않았다." },
+              { "id": "B", "text": "서준이는 빨간 신호에 건너지 않았다." },
+              { "id": "C", "text": "서준이는 항상 초록 신호에 건넌다." },
+              { "id": "D", "text": "서준이는 교통 규칙을 모두 알고 있다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f1-02-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "위 추론에서 사용된 방법은?",
+            "choices": [
+              { "id": "A", "text": "결과가 참이므로 원인도 참이라고 본 것" },
+              { "id": "B", "text": "결과가 거짓이므로 원인도 거짓이라고 본 것" },
+              { "id": "C", "text": "원인이 참이므로 결과도 참이라고 본 것" },
+              { "id": "D", "text": "원인이 거짓이므로 결과도 거짓이라고 본 것" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

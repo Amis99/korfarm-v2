@@ -1,0 +1,483 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 03",
+  "description": "전건 긍정·후건 부정과 오류 추론",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론",
+    "전건긍정",
+    "후건부정"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "전건 긍정법",
+        "text": "전건 긍정법(Modus Ponens)은 'P → Q'와 'P'로부터 'Q'를 이끌어내는 타당한 추론이다. 예: '비가 오면 땅이 젖는다. 비가 온다. 따라서 땅이 젖는다.'",
+        "questions": [
+          {
+            "id": "lg-w1-03-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 전건 긍정법이 올바르게 적용된 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시험에 합격하면 상을 받는다. 상을 받았다. 따라서 시험에 합격했다."
+              },
+              {
+                "id": "B",
+                "text": "시험에 합격하면 상을 받는다. 시험에 합격했다. 따라서 상을 받는다."
+              },
+              {
+                "id": "C",
+                "text": "시험에 합격하면 상을 받는다. 상을 받지 못했다. 따라서 시험에 합격하지 못했다."
+              },
+              {
+                "id": "D",
+                "text": "시험에 합격하면 상을 받는다. 시험에 합격하지 못했다. 따라서 상을 받지 못한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-03-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "보기 A의 추론이 틀린 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전건이 아닌 후건을 긍정하여 전건을 결론 내렸기 때문"
+              },
+              {
+                "id": "B",
+                "text": "전제가 거짓이기 때문"
+              },
+              {
+                "id": "C",
+                "text": "결론이 전제에 이미 포함되어 있기 때문"
+              },
+              {
+                "id": "D",
+                "text": "삼단논법의 규칙을 위반했기 때문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "후건 부정법",
+        "text": "후건 부정법(Modus Tollens)은 'P → Q'와 '¬Q'로부터 '¬P'를 이끌어낸다. 이는 대우를 적용한 것과 같다. 예: '비가 오면 땅이 젖는다. 땅이 젖지 않았다. 따라서 비가 오지 않았다.'",
+        "questions": [
+          {
+            "id": "lg-w1-03-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 후건 부정법이 올바르게 적용된 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공부하면 성적이 오른다. 성적이 올랐다. 따라서 공부했다."
+              },
+              {
+                "id": "B",
+                "text": "공부하면 성적이 오른다. 공부하지 않았다. 따라서 성적이 오르지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "공부하면 성적이 오른다. 성적이 오르지 않았다. 따라서 공부하지 않았다."
+              },
+              {
+                "id": "D",
+                "text": "공부하면 성적이 오른다. 공부했다. 따라서 성적이 반드시 오른다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-03-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "보기 B는 어떤 오류를 범하고 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "후건 긍정의 오류"
+              },
+              {
+                "id": "B",
+                "text": "전건 부정의 오류"
+              },
+              {
+                "id": "C",
+                "text": "순환 논증"
+              },
+              {
+                "id": "D",
+                "text": "성급한 일반화"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-03-p2-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "전건 부정의 오류가 발생하는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P가 거짓이라도 Q는 다른 원인에 의해 참일 수 있기 때문"
+              },
+              {
+                "id": "B",
+                "text": "대우가 항상 성립하지 않기 때문"
+              },
+              {
+                "id": "C",
+                "text": "조건문 자체가 거짓이기 때문"
+              },
+              {
+                "id": "D",
+                "text": "귀납적 추론이므로 확실성이 없기 때문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "복합 조건문 추론",
+        "text": "다음 세 조건이 주어져 있다. ① 날씨가 맑으면 소풍을 간다(P → Q). ② 소풍을 가면 도시락을 싼다(Q → R). ③ 오늘 도시락을 싸지 않았다(¬R).",
+        "questions": [
+          {
+            "id": "lg-w1-03-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "위 전제들로부터 '오늘 날씨가 맑지 않다'는 결론을 이끌어내는 과정으로 옳은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "②에 후건 부정: ¬R → ¬Q. 그 다음 ①에 후건 부정: ¬Q → ¬P"
+              },
+              {
+                "id": "B",
+                "text": "①에 전건 긍정 후 ②에 전건 긍정"
+              },
+              {
+                "id": "C",
+                "text": "③에서 바로 ¬P를 도출"
+              },
+              {
+                "id": "D",
+                "text": "①과 ②를 결합하여 P → R을 만든 뒤 전건 부정"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-03-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "①과 ②를 결합하면 어떤 명제를 얻는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "R → P"
+              },
+              {
+                "id": "B",
+                "text": "P → R"
+              },
+              {
+                "id": "C",
+                "text": "¬P → ¬R"
+              },
+              {
+                "id": "D",
+                "text": "Q → P"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "선언삼단논법",
+        "text": "선언삼단논법은 'P ∨ Q'와 '¬P'로부터 'Q'를 도출한다. 어떤 시험에서 '정답은 A이거나 B이다'라는 힌트를 얻었고, A가 아님을 확인했다.",
+        "questions": [
+          {
+            "id": "lg-w1-03-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 상황에서 타당한 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정답은 반드시 B이다"
+              },
+              {
+                "id": "B",
+                "text": "정답은 A일 수도 B일 수도 있다"
+              },
+              {
+                "id": "C",
+                "text": "정답은 A도 B도 아닐 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "추가 정보 없이는 판단할 수 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-03-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P ∨ Q'에서 P와 Q 모두 참인 경우, ¬P를 추가하면 모순이 발생하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모순이다. P가 참인데 ¬P라고 했으므로"
+              },
+              {
+                "id": "B",
+                "text": "모순이 아니다. 논리합이므로 하나만 참이면 된다"
+              },
+              {
+                "id": "C",
+                "text": "모순이다. 논리합은 배타적이므로"
+              },
+              {
+                "id": "D",
+                "text": "판단 불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "가언삼단논법",
+        "text": "가언삼단논법은 'P → Q'와 'Q → R'로부터 'P → R'을 도출한다. 다음 전제가 주어져 있다. ① 경제가 성장하면 고용이 증가한다. ② 고용이 증가하면 소비가 늘어난다. ③ 소비가 늘어나면 물가가 상승한다.",
+        "questions": [
+          {
+            "id": "lg-w1-03-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "세 전제로부터 도출되는 가장 먼 연쇄 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경제가 성장하면 물가가 상승한다"
+              },
+              {
+                "id": "B",
+                "text": "물가가 상승하면 경제가 성장한다"
+              },
+              {
+                "id": "C",
+                "text": "고용이 증가하면 경제가 성장한다"
+              },
+              {
+                "id": "D",
+                "text": "소비가 줄면 경제가 침체한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-03-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'물가가 상승하지 않았다'는 사실이 추가되면 무엇을 결론 내릴 수 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경제가 성장하지 않았다"
+              },
+              {
+                "id": "B",
+                "text": "고용이 증가했을 수도 있다"
+              },
+              {
+                "id": "C",
+                "text": "소비는 늘었지만 물가만 오르지 않았다"
+              },
+              {
+                "id": "D",
+                "text": "전제들이 거짓이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-03-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "이 연쇄 추론에서 사용된 논증 방식은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전건 긍정의 반복 적용"
+              },
+              {
+                "id": "B",
+                "text": "가언삼단논법의 연쇄 적용 후 후건 부정"
+              },
+              {
+                "id": "C",
+                "text": "선언삼단논법"
+              },
+              {
+                "id": "D",
+                "text": "귀류법"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "추가 논리 문제",
+        "text": "다음 각 문제를 풀어라.",
+        "questions": [
+          {
+            "id": "lg-w1-03-p6-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 형식적으로 타당한 논증은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 A는 B이다. C는 A이다. 따라서 C는 B이다."
+              },
+              {
+                "id": "B",
+                "text": "일부 A는 B이다. 일부 B는 C이다. 따라서 모든 A는 C이다."
+              },
+              {
+                "id": "C",
+                "text": "A이면 B이다. B이다. 따라서 A이다."
+              },
+              {
+                "id": "D",
+                "text": "A가 아니면 B이다. A이다. 따라서 B가 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-03-p6-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P이면 Q이다'와 논리적으로 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "Q → P"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-03-p6-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "후건 부정법의 올바른 형식은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P→Q, ¬Q ⊢ ¬P"
+              },
+              {
+                "id": "B",
+                "text": "P→Q, Q ⊢ P"
+              },
+              {
+                "id": "C",
+                "text": "P→Q, ¬P ⊢ ¬Q"
+              },
+              {
+                "id": "D",
+                "text": "P→Q, P ⊢ ¬Q"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

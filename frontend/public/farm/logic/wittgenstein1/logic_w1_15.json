@@ -1,0 +1,483 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 15",
+  "description": "논증 구조 분석과 전제-결론 관계",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론",
+    "논증구조",
+    "전제결론"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "논증의 구성 요소",
+        "text": "논증은 하나 이상의 전제와 결론으로 이루어진다. 전제는 결론을 뒷받침하는 근거이며, 결론은 전제로부터 이끌어내려는 주장이다. '따라서', '그러므로', '결국' 같은 표현이 결론 지시어이고, '왜냐하면', '~이므로', '그 이유는' 같은 표현이 전제 지시어이다.",
+        "questions": [
+          {
+            "id": "lg-w1-15-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'모든 인간은 죽는다. 소크라테스는 인간이다. 그러므로 소크라테스는 죽는다.'에서 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 인간은 죽는다"
+              },
+              {
+                "id": "B",
+                "text": "소크라테스는 인간이다"
+              },
+              {
+                "id": "C",
+                "text": "소크라테스는 죽는다"
+              },
+              {
+                "id": "D",
+                "text": "전제와 결론의 구분이 없다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-15-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'이 영화는 좋다. 왜냐하면 평론가들이 극찬했기 때문이다.'에서 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이 영화는 좋다"
+              },
+              {
+                "id": "B",
+                "text": "평론가들이 극찬했다"
+              },
+              {
+                "id": "C",
+                "text": "둘 다 전제이다"
+              },
+              {
+                "id": "D",
+                "text": "둘 다 결론이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-15-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "논증이 아닌 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비가 올 것이다. 왜냐하면 하늘이 흐리기 때문이다."
+              },
+              {
+                "id": "B",
+                "text": "오늘 날씨가 좋다. 기분이 상쾌하다."
+              },
+              {
+                "id": "C",
+                "text": "이 제품이 좋으므로 구매를 추천한다."
+              },
+              {
+                "id": "D",
+                "text": "법을 어기면 처벌받는다. 따라서 법을 지켜야 한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "연역과 귀납의 구조 비교",
+        "text": "연역: 전제가 참이면 결론이 반드시 참. 귀납: 전제가 결론을 개연적으로 지지. 논증 A: '모든 새는 날개가 있다. 참새는 새이다. 따라서 참새는 날개가 있다.' 논증 B: '내가 본 참새 100마리 모두 날 수 있었다. 따라서 모든 참새는 날 수 있다.'",
+        "questions": [
+          {
+            "id": "lg-w1-15-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "A와 B의 유형은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "A: 연역, B: 귀납"
+              },
+              {
+                "id": "B",
+                "text": "A: 귀납, B: 연역"
+              },
+              {
+                "id": "C",
+                "text": "둘 다 연역"
+              },
+              {
+                "id": "D",
+                "text": "둘 다 귀납"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-15-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "논증 B에 '타조는 참새와 같은 새이지만 날지 못한다'는 정보가 추가되면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "B의 결론이 강화된다"
+              },
+              {
+                "id": "B",
+                "text": "B의 결론과 무관하다"
+              },
+              {
+                "id": "C",
+                "text": "B의 귀납적 강도에는 직접 영향이 없지만, 유사한 범주에서 반례 가능성을 시사한다"
+              },
+              {
+                "id": "D",
+                "text": "B가 연역으로 바뀐다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "전제의 수용 가능성",
+        "text": "논증이 설득력을 가지려면 전제가 수용 가능해야 한다. 수용 가능한 전제란 청중이 참이라고 받아들일 수 있는 전제이다. 논증: '유전자 조작 식품은 자연스럽지 않다. 자연스럽지 않은 것은 나쁘다. 따라서 유전자 조작 식품은 나쁘다.'",
+        "questions": [
+          {
+            "id": "lg-w1-15-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증에서 가장 의문시되는 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "유전자 조작 식품은 자연스럽지 않다"
+              },
+              {
+                "id": "B",
+                "text": "자연스럽지 않은 것은 나쁘다"
+              },
+              {
+                "id": "C",
+                "text": "결론이 의문시된다"
+              },
+              {
+                "id": "D",
+                "text": "두 전제 모두 의문의 여지가 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-15-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'자연스럽지 않은 것은 나쁘다'가 의문시되는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "의약품, 안경, 의복 등 자연스럽지 않지만 좋은 것이 많으므로"
+              },
+              {
+                "id": "B",
+                "text": "자연이라는 단어의 정의가 없으므로"
+              },
+              {
+                "id": "C",
+                "text": "유전자 조작 식품이 자연스러울 수 있으므로"
+              },
+              {
+                "id": "D",
+                "text": "결론이 거짓이므로"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-15-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증에 포함된 오류는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자연에의 호소 (자연주의 오류의 일종)"
+              },
+              {
+                "id": "B",
+                "text": "순환 논증"
+              },
+              {
+                "id": "C",
+                "text": "미끄러운 경사면"
+              },
+              {
+                "id": "D",
+                "text": "다수에의 호소"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "반례를 통한 논증 평가",
+        "text": "전칭 명제의 반례는 하나만 있어도 명제를 거짓으로 만든다. 주장: '모든 금속은 상온에서 고체이다.'",
+        "questions": [
+          {
+            "id": "lg-w1-15-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 주장의 반례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수은은 금속이지만 상온에서 액체이다"
+              },
+              {
+                "id": "B",
+                "text": "철은 금속이고 상온에서 고체이다"
+              },
+              {
+                "id": "C",
+                "text": "물은 상온에서 액체이다"
+              },
+              {
+                "id": "D",
+                "text": "다이아몬드는 상온에서 고체이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-15-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "반례 하나로 전칭 명제가 거짓이 되는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "'모든 X는 Y'가 참이려면 예외가 하나도 없어야 하므로"
+              },
+              {
+                "id": "B",
+                "text": "반례가 여러 개 있어야 거짓이 되므로 하나로는 부족하다"
+              },
+              {
+                "id": "C",
+                "text": "전칭 명제는 항상 거짓이므로"
+              },
+              {
+                "id": "D",
+                "text": "귀납적으로만 판단할 수 있으므로"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "논증 재구성",
+        "text": "다음 글에서 논증을 재구성하라. '환경 오염이 심각해지고 있다. 자동차 배기가스는 환경 오염의 주요 원인이다. 전기차는 배기가스를 배출하지 않는다. 그러므로 전기차 보급을 늘려야 한다.'",
+        "questions": [
+          {
+            "id": "lg-w1-15-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증의 전제-결론 구조로 올바른 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전제: 환경오염 심각, 배기가스가 주요 원인, 전기차는 배기가스 없음. 결론: 전기차 보급 확대"
+              },
+              {
+                "id": "B",
+                "text": "전제: 전기차 보급 확대. 결론: 환경오염 해결"
+              },
+              {
+                "id": "C",
+                "text": "전제가 없고 주장만 있다"
+              },
+              {
+                "id": "D",
+                "text": "모든 문장이 결론이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-15-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증의 숨겨진 전제는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "환경 오염의 주요 원인을 줄이는 대안을 보급해야 한다"
+              },
+              {
+                "id": "B",
+                "text": "전기차는 비싸다"
+              },
+              {
+                "id": "C",
+                "text": "모든 사람이 전기차를 살 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "숨겨진 전제는 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-15-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증을 약화하는 반론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전기차 배터리 생산과 폐기 과정에서도 상당한 환경 오염이 발생한다"
+              },
+              {
+                "id": "B",
+                "text": "전기차가 인기 있다"
+              },
+              {
+                "id": "C",
+                "text": "배기가스가 환경에 해롭다"
+              },
+              {
+                "id": "D",
+                "text": "환경 오염은 심각하다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "추가 논리 문제",
+        "text": "다음 각 문제를 풀어라.",
+        "questions": [
+          {
+            "id": "lg-w1-15-p6-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 형식적으로 타당한 논증은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 A는 B이다. C는 A이다. 따라서 C는 B이다."
+              },
+              {
+                "id": "B",
+                "text": "일부 A는 B이다. 일부 B는 C이다. 따라서 모든 A는 C이다."
+              },
+              {
+                "id": "C",
+                "text": "A이면 B이다. B이다. 따라서 A이다."
+              },
+              {
+                "id": "D",
+                "text": "A가 아니면 B이다. A이다. 따라서 B가 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-15-p6-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P이면 Q이다'와 논리적으로 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "Q → P"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

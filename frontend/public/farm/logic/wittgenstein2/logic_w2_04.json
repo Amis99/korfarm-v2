@@ -1,0 +1,483 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 04",
+  "description": "복합 조건문과 다중 전제 추론",
+  "targetLevel": "WITTGENSTEIN_2",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론",
+    "복합조건문",
+    "다중전제"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "복합 전건·후건 추론",
+        "text": "전제: ① (A ∧ B) → C. ② C → (D ∨ E). ③ ¬D. ④ E → F. ⑤ A와 B 모두 참.",
+        "questions": [
+          {
+            "id": "lg-w2-04-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "최종 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "F"
+              },
+              {
+                "id": "B",
+                "text": "D"
+              },
+              {
+                "id": "C",
+                "text": "¬F"
+              },
+              {
+                "id": "D",
+                "text": "C만 도출 가능"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-04-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "추론 과정에서 사용된 규칙을 순서대로 나열하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전건 긍정(①+⑤→C), 전건 긍정(②→D∨E), 선언삼단(③→E), 전건 긍정(④→F)"
+              },
+              {
+                "id": "B",
+                "text": "후건 부정만 반복 사용"
+              },
+              {
+                "id": "C",
+                "text": "귀류법 적용"
+              },
+              {
+                "id": "D",
+                "text": "가언삼단논법만 사용"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-04-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "¬F가 추가되면 어떤 결과가 발생하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전제 집합이 비일관적(모순)이 된다"
+              },
+              {
+                "id": "B",
+                "text": "A가 거짓이 된다"
+              },
+              {
+                "id": "C",
+                "text": "B만 거짓이 된다"
+              },
+              {
+                "id": "D",
+                "text": "아무 영향이 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "조건문 역·이·대우 심화",
+        "text": "복합 명제 '(P ∧ Q) → R'의 역·이·대우를 분석하라.",
+        "questions": [
+          {
+            "id": "lg-w2-04-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'(P ∧ Q) → R'의 대우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬R → ¬(P ∧ Q), 즉 ¬R → (¬P ∨ ¬Q)"
+              },
+              {
+                "id": "B",
+                "text": "¬R → (¬P ∧ ¬Q)"
+              },
+              {
+                "id": "C",
+                "text": "R → (P ∧ Q)"
+              },
+              {
+                "id": "D",
+                "text": "(¬P ∨ ¬Q) → ¬R"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-04-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "역 'R → (P ∧ Q)'가 원래 명제와 동치가 아닌 이유의 반례는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P 거짓, Q 참, R 참: 원래 명제 참이지만 역은 거짓"
+              },
+              {
+                "id": "B",
+                "text": "P 참, Q 참, R 참: 둘 다 참"
+              },
+              {
+                "id": "C",
+                "text": "반례가 존재하지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "P 참, Q 참, R 거짓"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "이중 조건문 체인",
+        "text": "다음 전제를 분석하라. ① A → (B → C). ② B. ③ C → D. ④ A.",
+        "questions": [
+          {
+            "id": "lg-w2-04-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "최종적으로 도출 가능한 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "D"
+              },
+              {
+                "id": "B",
+                "text": "C만"
+              },
+              {
+                "id": "C",
+                "text": "B → D"
+              },
+              {
+                "id": "D",
+                "text": "도출 불가"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-04-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "①과 ④에서 'B → C'를 얻은 후 ②와 결합하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "C (전건 긍정)"
+              },
+              {
+                "id": "B",
+                "text": "¬B"
+              },
+              {
+                "id": "C",
+                "text": "¬C"
+              },
+              {
+                "id": "D",
+                "text": "B ∧ C"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-04-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "①을 수출 법칙으로 변환하면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "(A ∧ B) → C"
+              },
+              {
+                "id": "B",
+                "text": "A → (C → B)"
+              },
+              {
+                "id": "C",
+                "text": "(A ∨ B) → C"
+              },
+              {
+                "id": "D",
+                "text": "C → (A → B)"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "분기 조건 추론",
+        "text": "규칙: ① P → (Q ∨ R). ② Q → S. ③ R → T. ④ ¬S. ⑤ P 참.",
+        "questions": [
+          {
+            "id": "lg-w2-04-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "도출 가능한 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "T"
+              },
+              {
+                "id": "B",
+                "text": "S"
+              },
+              {
+                "id": "C",
+                "text": "Q"
+              },
+              {
+                "id": "D",
+                "text": "¬T"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-04-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "Q가 거짓인 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "②의 대우: ¬S → ¬Q. ④에서 ¬S이므로 ¬Q"
+              },
+              {
+                "id": "B",
+                "text": "①에서 R만 참이므로"
+              },
+              {
+                "id": "C",
+                "text": "Q는 참일 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "전건 부정에 의해"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "모순을 이용한 추론",
+        "text": "전제: ① P → Q. ② P → ¬Q. ③ 이 두 전제가 동시에 참이라고 가정하라.",
+        "questions": [
+          {
+            "id": "lg-w2-04-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "P가 참이면 어떤 일이 발생하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "Q ∧ ¬Q가 도출되어 모순이 발생한다"
+              },
+              {
+                "id": "B",
+                "text": "Q만 참이 된다"
+              },
+              {
+                "id": "C",
+                "text": "¬Q만 참이 된다"
+              },
+              {
+                "id": "D",
+                "text": "아무 문제 없다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-04-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "따라서 두 전제가 동시에 참이면 P는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반드시 거짓이다 (귀류법에 의해)"
+              },
+              {
+                "id": "B",
+                "text": "참일 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "판단 불가"
+              },
+              {
+                "id": "D",
+                "text": "전제가 모순이므로 어떤 결론도 도출 가능"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-04-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "이 추론 방식을 무엇이라 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "귀류법(Reductio ad Absurdum): P를 가정하면 모순이 나오므로 ¬P"
+              },
+              {
+                "id": "B",
+                "text": "전건 긍정법"
+              },
+              {
+                "id": "C",
+                "text": "선언삼단논법"
+              },
+              {
+                "id": "D",
+                "text": "가언삼단논법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "추가 논리 문제",
+        "text": "다음 각 문제를 풀어라.",
+        "questions": [
+          {
+            "id": "lg-w2-04-p6-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 형식적으로 타당한 논증은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 A는 B이다. C는 A이다. 따라서 C는 B이다."
+              },
+              {
+                "id": "B",
+                "text": "일부 A는 B이다. 일부 B는 C이다. 따라서 모든 A는 C이다."
+              },
+              {
+                "id": "C",
+                "text": "A이면 B이다. B이다. 따라서 A이다."
+              },
+              {
+                "id": "D",
+                "text": "A가 아니면 B이다. A이다. 따라서 B가 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w2-04-p6-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P이면 Q이다'와 논리적으로 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "Q → P"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

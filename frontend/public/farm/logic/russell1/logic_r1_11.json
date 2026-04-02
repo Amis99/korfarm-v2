@@ -1,0 +1,215 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 11",
+  "description": "대우 활용과 귀류법 기초",
+  "targetLevel": "RUSSELL_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "추론", "대우", "귀류법"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "대우를 이용한 증명",
+        "text": "'정수 n의 제곱이 짝수이면 n은 짝수이다'를 증명하려 한다. 직접 증명이 어려울 때, 대우 'n이 홀수이면 n²도 홀수이다'를 증명하면 원래 명제도 참이 된다.",
+        "questions": [
+          {
+            "id": "lg-r1-11-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "대우를 이용한 증명이 가능한 이유는?",
+            "choices": [
+              { "id": "A", "text": "대우와 원래 명제는 항상 같은 진리값을 가지기 때문이다" },
+              { "id": "B", "text": "대우가 원래 명제보다 쉽기 때문이다" },
+              { "id": "C", "text": "수학에서만 적용되는 특별한 규칙이다" },
+              { "id": "D", "text": "대우가 참이면 역도 참이기 때문이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-11-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "n=3(홀수)일 때 n²=9이다. 이것이 보여주는 것은?",
+            "choices": [
+              { "id": "A", "text": "대우 명제의 한 사례를 확인한 것이다" },
+              { "id": "B", "text": "원래 명제가 거짓임을 보여준다" },
+              { "id": "C", "text": "아무것도 증명하지 못한다" },
+              { "id": "D", "text": "모든 홀수에 대해 증명한 것이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "귀류법 기초",
+        "text": "귀류법이란 증명하고 싶은 것의 부정을 가정한 뒤 모순을 이끌어내어, 원래 주장이 참임을 보이는 방법이다. 예를 들어 '√2는 유리수가 아니다'를 증명할 때, '√2가 유리수라고 가정'하면 모순이 생긴다.",
+        "questions": [
+          {
+            "id": "lg-r1-11-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "귀류법에서 모순이 발생했다면 무엇을 알 수 있는가?",
+            "choices": [
+              { "id": "A", "text": "처음 가정(부정)이 거짓이므로 원래 주장이 참이다" },
+              { "id": "B", "text": "원래 주장도 거짓이다" },
+              { "id": "C", "text": "증명이 실패했다" },
+              { "id": "D", "text": "추가 가정이 필요하다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-11-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "귀류법과 대우 증명의 공통점은?",
+            "choices": [
+              { "id": "A", "text": "둘 다 직접 증명하지 않고 간접적으로 증명한다" },
+              { "id": "B", "text": "둘 다 귀납 추론이다" },
+              { "id": "C", "text": "둘 다 사례를 열거한다" },
+              { "id": "D", "text": "공통점이 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-11-p2-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 귀류법의 구조와 가장 유사한 일상 추론은?",
+            "choices": [
+              { "id": "A", "text": "만약 이 가방이 내 것이 아니라면 여기 있을 리가 없다. 하지만 여기 있으므로 내 것이다." },
+              { "id": "B", "text": "가방이 여기 있으므로 누군가 두고 갔다" },
+              { "id": "C", "text": "이 가방은 비싸 보이니까 좋은 가방이다" },
+              { "id": "D", "text": "모든 가방에는 손잡이가 있다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "명제의 부정",
+        "text": "'모든 학생은 수학을 좋아한다'의 부정은 '수학을 좋아하지 않는 학생이 적어도 한 명 있다'이다. '어떤 새는 날 수 없다'의 부정은 '모든 새는 날 수 있다'이다.",
+        "questions": [
+          {
+            "id": "lg-r1-11-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'모든 금속은 전기를 통한다'의 부정은?",
+            "choices": [
+              { "id": "A", "text": "모든 금속은 전기를 통하지 않는다" },
+              { "id": "B", "text": "전기를 통하지 않는 금속이 적어도 하나 있다" },
+              { "id": "C", "text": "어떤 금속도 전기를 통하지 않는다" },
+              { "id": "D", "text": "금속이 아닌 것은 전기를 통한다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-11-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'어떤 식물은 꽃을 피운다'의 부정은?",
+            "choices": [
+              { "id": "A", "text": "어떤 식물은 꽃을 피우지 않는다" },
+              { "id": "B", "text": "모든 식물은 꽃을 피우지 않는다" },
+              { "id": "C", "text": "모든 식물은 꽃을 피운다" },
+              { "id": "D", "text": "꽃을 피우는 식물은 없다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-11-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "'모든'의 부정이 '어떤~않다'가 되는 이유는?",
+            "choices": [
+              { "id": "A", "text": "전체 주장을 부정하려면 반례 하나만 있으면 되기 때문이다" },
+              { "id": "B", "text": "전체를 부정해야 하기 때문이다" },
+              { "id": "C", "text": "수학에서만 적용되는 규칙이다" },
+              { "id": "D", "text": "어떤과 모든은 같은 뜻이기 때문이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "대우의 실생활 적용",
+        "text": "학교 규칙: '지각하면 벌점을 받는다.' 어제 수진이는 벌점을 받지 않았다.",
+        "questions": [
+          {
+            "id": "lg-r1-11-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "수진이에 대해 확실히 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "수진이는 지각하지 않았다" },
+              { "id": "B", "text": "수진이는 지각했을 수도 있다" },
+              { "id": "C", "text": "수진이는 결석했다" },
+              { "id": "D", "text": "수진이는 일찍 왔다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-11-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "벌점을 받은 학생에 대해 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "반드시 지각했다" },
+              { "id": "B", "text": "지각했을 수도 있고 다른 이유일 수도 있다" },
+              { "id": "C", "text": "지각하지 않았다" },
+              { "id": "D", "text": "규칙을 위반하지 않았다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "복합 명제의 부정",
+        "text": "'A이고 B이다'의 부정은 'A가 아니거나 B가 아니다'이다. 'A이거나 B이다'의 부정은 'A가 아니고 B가 아니다'이다. 이것을 드모르간 법칙이라 한다.",
+        "questions": [
+          {
+            "id": "lg-r1-11-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'비가 오고 바람이 분다'의 부정은?",
+            "choices": [
+              { "id": "A", "text": "비가 오지 않고 바람이 불지 않는다" },
+              { "id": "B", "text": "비가 오지 않거나 바람이 불지 않는다" },
+              { "id": "C", "text": "비가 오거나 바람이 분다" },
+              { "id": "D", "text": "비가 오지 않고 바람이 분다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-11-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'수학을 좋아하거나 과학을 좋아한다'의 부정은?",
+            "choices": [
+              { "id": "A", "text": "수학을 좋아하지 않거나 과학을 좋아하지 않는다" },
+              { "id": "B", "text": "수학을 좋아하지 않고 과학도 좋아하지 않는다" },
+              { "id": "C", "text": "수학과 과학 모두 좋아한다" },
+              { "id": "D", "text": "수학을 좋아하고 과학을 좋아하지 않는다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r1-11-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "드모르간 법칙에 따라, '~(A 그리고 B)'와 같은 것은?",
+            "choices": [
+              { "id": "A", "text": "~A 그리고 ~B" },
+              { "id": "B", "text": "~A 또는 ~B" },
+              { "id": "C", "text": "A 또는 B" },
+              { "id": "D", "text": "A 그리고 ~B" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

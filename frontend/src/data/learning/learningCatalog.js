@@ -163,7 +163,7 @@ export const FARM_MAP = {
     description: "추론과 논리적 사고 훈련",
     color: "#c75a5a",
     seedType: "seed_grape",
-    servers: ["FREGE", "RUSSELL", "WITTGENSTEIN"],
+    servers: ["SAUSSURE", "FREGE", "RUSSELL", "WITTGENSTEIN"],
   },
   writing: {
     id: "writing",

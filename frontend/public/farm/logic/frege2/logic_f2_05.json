@@ -1,0 +1,176 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 05",
+  "description": "복합 조건과 AND/OR 논리",
+  "targetLevel": "FREGE_2",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "복합조건", "AND", "OR"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 300,
+  "payload": {
+    "passages": [
+      {
+        "title": "도서관 출입",
+        "text": "도서관에 출입하려면 학생증이 있어야 하고, 대출 연체가 없어야 한다. 민재는 학생증이 있지만 연체 도서가 있다.",
+        "questions": [
+          {
+            "id": "lg-f2-05-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "민재가 도서관에 출입할 수 있는가?",
+            "choices": [
+              { "id": "A", "text": "가능하다. 학생증이 있으니까." },
+              { "id": "B", "text": "불가능하다. 두 조건을 모두 만족해야 하는데 연체가 있다." },
+              { "id": "C", "text": "연체만 해결하면 된다." },
+              { "id": "D", "text": "학생증만 있으면 된다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-05-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'A이고(AND) B'의 부정은?",
+            "choices": [
+              { "id": "A", "text": "A가 아니고 B가 아니다" },
+              { "id": "B", "text": "A가 아니거나(OR) B가 아니다" },
+              { "id": "C", "text": "A이고 B가 아니다" },
+              { "id": "D", "text": "A가 아니고 B이다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "장학금 기준",
+        "text": "장학금을 받으려면 성적 평균 90점 이상이거나(OR) 봉사활동 50시간 이상이면 된다.",
+        "questions": [
+          {
+            "id": "lg-f2-05-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "성적 85점, 봉사 60시간인 학생은 장학금을 받는가?",
+            "choices": [
+              { "id": "A", "text": "받지 못한다. 성적이 부족하다." },
+              { "id": "B", "text": "받는다. 봉사 조건을 충족하므로." },
+              { "id": "C", "text": "둘 다 충족해야 한다." },
+              { "id": "D", "text": "판단할 수 없다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-05-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "장학금을 받지 못한 학생에 대해 확실히 알 수 있는 것은?",
+            "choices": [
+              { "id": "A", "text": "성적이 90점 미만이고 봉사도 50시간 미만이다." },
+              { "id": "B", "text": "성적만 부족하다." },
+              { "id": "C", "text": "봉사만 부족하다." },
+              { "id": "D", "text": "둘 중 하나만 부족하다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "수학 여행 참가",
+        "text": "수학여행에 참가하려면 (동의서를 제출하고 참가비를 납부하는 것) 또는 (학교장 특별 허가)가 필요하다.",
+        "questions": [
+          {
+            "id": "lg-f2-05-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "동의서는 제출했지만 참가비를 내지 않은 학생은?",
+            "choices": [
+              { "id": "A", "text": "참가할 수 있다. 동의서를 냈으니까." },
+              { "id": "B", "text": "학교장 특별 허가가 없으면 참가할 수 없다." },
+              { "id": "C", "text": "참가비만 내면 된다." },
+              { "id": "D", "text": "참가할 수 있다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-05-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 조건의 논리 구조는?",
+            "choices": [
+              { "id": "A", "text": "(A AND B) OR C" },
+              { "id": "B", "text": "A OR B OR C" },
+              { "id": "C", "text": "A AND B AND C" },
+              { "id": "D", "text": "A OR (B AND C)" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "드모르간 법칙",
+        "text": "'비가 오거나 눈이 온다'의 부정을 생각해보자.",
+        "questions": [
+          {
+            "id": "lg-f2-05-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'비가 오거나(OR) 눈이 온다'의 부정은?",
+            "choices": [
+              { "id": "A", "text": "비가 오지 않거나 눈이 오지 않는다" },
+              { "id": "B", "text": "비가 오지 않고(AND) 눈도 오지 않는다" },
+              { "id": "C", "text": "비가 오고 눈이 온다" },
+              { "id": "D", "text": "비가 오지 않는다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-05-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'비가 오고(AND) 눈이 온다'의 부정은?",
+            "choices": [
+              { "id": "A", "text": "비가 오지 않거나(OR) 눈이 오지 않는다" },
+              { "id": "B", "text": "비가 오지 않고 눈도 오지 않는다" },
+              { "id": "C", "text": "비도 오고 눈도 온다" },
+              { "id": "D", "text": "비가 오지 않는다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "게임 조건",
+        "text": "보스를 물리치려면 (검이 있고 방패가 있는 경우) 또는 (마법 지팡이가 있는 경우)여야 한다. 현재 검과 마법 지팡이가 있다.",
+        "questions": [
+          {
+            "id": "lg-f2-05-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "보스를 물리칠 수 있는가?",
+            "choices": [
+              { "id": "A", "text": "가능하다. 마법 지팡이가 있으므로 두 번째 조건을 충족한다." },
+              { "id": "B", "text": "불가능하다. 방패가 없다." },
+              { "id": "C", "text": "불가능하다. 세 가지 모두 필요하다." },
+              { "id": "D", "text": "판단할 수 없다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-f2-05-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "보스를 물리치지 못했다면 확실한 것은?",
+            "choices": [
+              { "id": "A", "text": "검도 없고 마법 지팡이도 없다." },
+              { "id": "B", "text": "(검이 없거나 방패가 없음) 그리고 마법 지팡이도 없다." },
+              { "id": "C", "text": "방패만 없다." },
+              { "id": "D", "text": "세 가지 모두 없다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}

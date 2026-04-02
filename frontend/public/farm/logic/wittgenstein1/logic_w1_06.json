@@ -1,0 +1,483 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 06",
+  "description": "논증의 타당성과 건전성",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": [
+    "LOGIC"
+  ],
+  "tags": [
+    "논리",
+    "추론",
+    "타당성",
+    "건전성"
+  ],
+  "seedReward": {
+    "seedType": "GRAPE",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "타당성의 정의",
+        "text": "논증이 타당하다는 것은 전제가 모두 참이라고 가정했을 때 결론이 반드시 참이 된다는 뜻이다. 전제의 실제 참·거짓과는 무관하다. 예: '모든 물고기는 날 수 있다. 고래는 물고기이다. 따라서 고래는 날 수 있다.'",
+        "questions": [
+          {
+            "id": "lg-w1-06-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "위 논증은 타당한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하다. 전제를 참으로 가정하면 결론이 필연적으로 따르므로"
+              },
+              {
+                "id": "B",
+                "text": "타당하지 않다. 전제가 거짓이므로"
+              },
+              {
+                "id": "C",
+                "text": "타당하지 않다. 결론이 거짓이므로"
+              },
+              {
+                "id": "D",
+                "text": "판단 불가. 고래가 물고기인지 확인해야 하므로"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-06-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증이 건전하지 않은 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "형식이 틀렸기 때문"
+              },
+              {
+                "id": "B",
+                "text": "전제 '모든 물고기는 날 수 있다'가 실제로 거짓이기 때문"
+              },
+              {
+                "id": "C",
+                "text": "결론이 전제와 무관하기 때문"
+              },
+              {
+                "id": "D",
+                "text": "삼단논법이 아니기 때문"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-06-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "건전한 논증이 되려면 어떤 조건이 필요한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하면서 동시에 모든 전제가 실제로 참이어야 한다"
+              },
+              {
+                "id": "B",
+                "text": "결론이 참이기만 하면 된다"
+              },
+              {
+                "id": "C",
+                "text": "전제가 많을수록 좋다"
+              },
+              {
+                "id": "D",
+                "text": "형식적으로 올바르기만 하면 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "타당하지만 건전하지 않은 논증",
+        "text": "논증 ㄱ: 모든 고양이는 파충류이다. 모든 파충류는 알을 낳는다. 따라서 모든 고양이는 알을 낳는다. 논증 ㄴ: 모든 포유류는 척추동물이다. 모든 개는 포유류이다. 따라서 모든 개는 척추동물이다.",
+        "questions": [
+          {
+            "id": "lg-w1-06-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "ㄱ과 ㄴ의 타당성·건전성 판별로 옳은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "ㄱ: 타당하고 건전, ㄴ: 타당하고 건전"
+              },
+              {
+                "id": "B",
+                "text": "ㄱ: 타당하지만 건전하지 않음, ㄴ: 타당하고 건전"
+              },
+              {
+                "id": "C",
+                "text": "ㄱ: 타당하지 않음, ㄴ: 타당하고 건전"
+              },
+              {
+                "id": "D",
+                "text": "ㄱ: 타당하지만 건전하지 않음, ㄴ: 타당하지만 건전하지 않음"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-06-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "논증의 형식적 타당성을 판별할 때 중요한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "전제의 내용이 사실인지 확인하는 것"
+              },
+              {
+                "id": "B",
+                "text": "전제와 결론 사이의 논리적 구조가 올바른지 확인하는 것"
+              },
+              {
+                "id": "C",
+                "text": "결론이 상식적으로 맞는지 확인하는 것"
+              },
+              {
+                "id": "D",
+                "text": "전제의 개수가 충분한지 확인하는 것"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "부당한 논증",
+        "text": "논증: 일부 학생은 운동을 좋아한다. 일부 운동을 좋아하는 사람은 음악을 좋아한다. 따라서 모든 학생은 음악을 좋아한다.",
+        "questions": [
+          {
+            "id": "lg-w1-06-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증이 타당하지 않은 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "특칭 전제('일부')로부터 전칭 결론('모든')을 이끌어냈기 때문"
+              },
+              {
+                "id": "B",
+                "text": "전제가 거짓이기 때문"
+              },
+              {
+                "id": "C",
+                "text": "결론이 거짓이기 때문"
+              },
+              {
+                "id": "D",
+                "text": "매개항이 없기 때문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-06-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "타당하게 도출할 수 있는 결론은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결론을 도출할 수 없다. 특칭 전제 두 개로는 필연적 결론 불가"
+              },
+              {
+                "id": "B",
+                "text": "일부 학생은 음악을 좋아한다"
+              },
+              {
+                "id": "C",
+                "text": "모든 학생은 운동과 음악 모두를 좋아한다"
+              },
+              {
+                "id": "D",
+                "text": "음악을 좋아하는 사람은 모두 학생이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-06-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증의 형식을 바르게 나타낸 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일부 A는 B, 일부 B는 C → 모든 A는 C"
+              },
+              {
+                "id": "B",
+                "text": "모든 A는 B, 모든 B는 C → 모든 A는 C"
+              },
+              {
+                "id": "C",
+                "text": "모든 A는 B, 일부 B는 C → 일부 A는 C"
+              },
+              {
+                "id": "D",
+                "text": "일부 A는 B, 모든 B는 C → 일부 A는 C"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "귀류법",
+        "text": "귀류법은 결론의 부정을 가정한 뒤 모순을 이끌어내어 원래 결론이 참임을 보이는 증명법이다. 예: '√2가 유리수라고 가정하면 모순이 발생한다. 따라서 √2는 무리수이다.'",
+        "questions": [
+          {
+            "id": "lg-w1-06-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "귀류법에서 핵심적인 논리 원리는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "배중률: 명제는 참이거나 거짓이다"
+              },
+              {
+                "id": "B",
+                "text": "동일률: A는 A이다"
+              },
+              {
+                "id": "C",
+                "text": "충족이유율: 모든 것에는 이유가 있다"
+              },
+              {
+                "id": "D",
+                "text": "삼단논법의 원리"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-06-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "귀류법의 추론 구조를 바르게 나타낸 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P를 가정 → 모순 도출 → P 결론"
+              },
+              {
+                "id": "B",
+                "text": "P를 가정 → 참 도출 → P 결론"
+              },
+              {
+                "id": "C",
+                "text": "P를 가정 → 모순 도출 → ¬P 결론"
+              },
+              {
+                "id": "D",
+                "text": "¬P를 가정 → 참 도출 → ¬P 결론"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "연역 논증의 평가 종합",
+        "text": "다음 논증을 평가하라. 전제 1: 모든 민주주의 국가는 선거를 실시한다. 전제 2: 한국은 민주주의 국가이다. 결론: 한국은 선거를 실시한다.",
+        "questions": [
+          {
+            "id": "lg-w1-06-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증의 타당성과 건전성에 대한 평가로 옳은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "타당하지만 건전하지 않다"
+              },
+              {
+                "id": "B",
+                "text": "타당하지도 않고 건전하지도 않다"
+              },
+              {
+                "id": "C",
+                "text": "타당하고 건전하다"
+              },
+              {
+                "id": "D",
+                "text": "건전하지만 타당하지 않다"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-06-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "건전하지만 타당하지 않은 논증이 존재할 수 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "존재할 수 있다. 전제가 참이어도 논리 구조가 잘못될 수 있으므로"
+              },
+              {
+                "id": "B",
+                "text": "존재할 수 없다. 건전성은 타당성을 포함하므로"
+              },
+              {
+                "id": "C",
+                "text": "존재할 수 있다. 결론이 참이면 건전하므로"
+              },
+              {
+                "id": "D",
+                "text": "존재 여부를 판단할 수 없다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      },
+      {
+        "title": "추가 논리 문제",
+        "text": "다음 각 문제를 풀어라.",
+        "questions": [
+          {
+            "id": "lg-w1-06-p6-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 형식적으로 타당한 논증은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 A는 B이다. C는 A이다. 따라서 C는 B이다."
+              },
+              {
+                "id": "B",
+                "text": "일부 A는 B이다. 일부 B는 C이다. 따라서 모든 A는 C이다."
+              },
+              {
+                "id": "C",
+                "text": "A이면 B이다. B이다. 따라서 A이다."
+              },
+              {
+                "id": "D",
+                "text": "A가 아니면 B이다. A이다. 따라서 B가 아니다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-06-p6-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'P이면 Q이다'와 논리적으로 동치인 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "¬P ∨ Q"
+              },
+              {
+                "id": "B",
+                "text": "P ∧ Q"
+              },
+              {
+                "id": "C",
+                "text": "Q → P"
+              },
+              {
+                "id": "D",
+                "text": "¬Q → P"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          },
+          {
+            "id": "lg-w1-06-p6-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "후건 부정법의 올바른 형식은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "P→Q, ¬Q ⊢ ¬P"
+              },
+              {
+                "id": "B",
+                "text": "P→Q, Q ⊢ P"
+              },
+              {
+                "id": "C",
+                "text": "P→Q, ¬P ⊢ ¬Q"
+              },
+              {
+                "id": "D",
+                "text": "P→Q, P ⊢ ¬Q"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 30,
+              "wrongDeltaSec": -30
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "contentType": "LOGIC_REASONING_QUIZ",
+  "title": "논리 사고력 06",
+  "description": "논증의 타당성과 건전성 심화",
+  "targetLevel": "RUSSELL_2",
+  "area": "LOGIC",
+  "subArea": "REASONING",
+  "competencies": ["LOGIC"],
+  "tags": ["논리", "추론", "타당성", "건전성"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "타당성과 건전성의 구분",
+        "text": "타당한 논증은 전제가 참이면 결론이 반드시 참인 논증이다. 건전한 논증은 타당하면서 동시에 전제가 실제로 참인 논증이다. 부당한 논증이라도 결론이 우연히 참일 수 있고, 타당한 논증이라도 전제가 거짓이면 건전하지 않다.",
+        "questions": [
+          {
+            "id": "lg-r2-06-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'모든 고양이는 식물이다. 호랑이는 고양이이다. 따라서 호랑이는 식물이다.' 이 논증은?",
+            "choices": [
+              { "id": "A", "text": "타당하고 건전하다" },
+              { "id": "B", "text": "타당하지만 건전하지 않다" },
+              { "id": "C", "text": "부당하고 건전하지도 않다" },
+              { "id": "D", "text": "건전하지만 타당하지 않다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-06-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "부당한 논증에서 결론이 참일 수 있는가?",
+            "choices": [
+              { "id": "A", "text": "불가능하다" },
+              { "id": "B", "text": "가능하다. 형식이 부당해도 결론이 우연히 참일 수 있다" },
+              { "id": "C", "text": "전제가 참이면 가능하다" },
+              { "id": "D", "text": "부당한 논증은 의미가 없다" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-06-p1-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "건전한 논증의 결론은?",
+            "choices": [
+              { "id": "A", "text": "반드시 참이다" },
+              { "id": "B", "text": "참일 가능성이 높다" },
+              { "id": "C", "text": "거짓일 수도 있다" },
+              { "id": "D", "text": "전제에 따라 다르다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "형식적 오류와 비형식적 오류",
+        "text": "형식적 오류는 추론의 형식 자체가 잘못된 것이고(후건 긍정, 전건 부정 등), 비형식적 오류는 형식은 맞을 수 있지만 내용이나 맥락에서 문제가 있는 것이다(인신공격, 성급한 일반화 등).",
+        "questions": [
+          {
+            "id": "lg-r2-06-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 형식적 오류는?",
+            "choices": [
+              { "id": "A", "text": "P→Q, Q ∴ P" },
+              { "id": "B", "text": "이 사람은 범죄자이므로 말을 들을 필요 없다" },
+              { "id": "C", "text": "100명에게 물어봤더니 모두 찬성했다. 따라서 모든 사람이 찬성한다" },
+              { "id": "D", "text": "이것이 자연스러우므로 옳다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-06-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "형식적 오류의 특징은?",
+            "choices": [
+              { "id": "A", "text": "내용과 무관하게 추론 형식 자체로 오류를 판별할 수 있다" },
+              { "id": "B", "text": "내용을 알아야만 판별할 수 있다" },
+              { "id": "C", "text": "감정과 관련된 오류이다" },
+              { "id": "D", "text": "항상 비형식적 오류보다 심각하다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "매개 부주연의 오류",
+        "text": "다음 논증을 보자. '모든 개는 동물이다. 모든 고양이는 동물이다. 따라서 모든 개는 고양이이다.' 이것은 매개 부주연의 오류이다. 매개항('동물')이 어느 전제에서도 전체를 가리키지 않는다.",
+        "questions": [
+          {
+            "id": "lg-r2-06-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 오류가 발생하는 이유는?",
+            "choices": [
+              { "id": "A", "text": "개와 고양이가 모두 동물에 속하지만, 동물 전체가 개이거나 고양이인 것은 아니기 때문이다" },
+              { "id": "B", "text": "개와 고양이가 같은 종이기 때문이다" },
+              { "id": "C", "text": "동물이라는 개념이 모호하기 때문이다" },
+              { "id": "D", "text": "전제가 거짓이기 때문이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-06-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 같은 유형의 오류를 범한 것은?",
+            "choices": [
+              { "id": "A", "text": "모든 사과는 과일이다. 모든 배는 과일이다. 따라서 모든 사과는 배이다." },
+              { "id": "B", "text": "모든 정사각형은 직사각형이다. 이것은 정사각형이다. 따라서 이것은 직사각형이다." },
+              { "id": "C", "text": "어떤 학생은 운동선수이다. 어떤 운동선수는 부상을 입는다. 따라서 어떤 학생은 부상을 입는다." },
+              { "id": "D", "text": "모든 물고기는 수중 생물이다. 고래는 수중 생물이다. 따라서 고래는 물고기이다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-06-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "D도 같은 유형의 오류인가?",
+            "choices": [
+              { "id": "A", "text": "같은 유형이다: 매개항 '수중 생물'이 부주연이다" },
+              { "id": "B", "text": "다른 유형이다" },
+              { "id": "C", "text": "오류가 아니다" },
+              { "id": "D", "text": "형식적 오류가 아니라 비형식적 오류이다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "반사실적 조건문",
+        "text": "'만약 내가 새라면 하늘을 날 수 있을 텐데'와 같이 실제로 참이 아닌 조건을 가정하는 것을 반사실적 조건문이라 한다. 이러한 추론은 가능한 상황을 상상하여 결론을 도출한다.",
+        "questions": [
+          {
+            "id": "lg-r2-06-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "'만약 지구에 중력이 없다면 물체가 떨어지지 않을 것이다'의 진리값은?",
+            "choices": [
+              { "id": "A", "text": "전건이 거짓이므로 형식논리적으로는 참이다" },
+              { "id": "B", "text": "거짓이다" },
+              { "id": "C", "text": "판단할 수 없다" },
+              { "id": "D", "text": "무의미하다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-06-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "반사실적 조건문이 유용한 이유는?",
+            "choices": [
+              { "id": "A", "text": "인과 관계를 파악하고 대안적 시나리오를 분석할 수 있다" },
+              { "id": "B", "text": "항상 참이므로 유용하다" },
+              { "id": "C", "text": "현실과 무관하므로 쓸모없다" },
+              { "id": "D", "text": "수학에서만 사용된다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      },
+      {
+        "title": "논증 재구성",
+        "text": "다음 글에서 논증을 추출하라. '학교 급식의 질이 떨어지고 있다는 불만이 많다. 급식비를 인상하면 더 좋은 재료를 사용할 수 있다. 좋은 재료를 사용하면 급식의 질이 올라간다. 학생 건강을 위해 급식비 인상을 검토해야 한다.'",
+        "questions": [
+          {
+            "id": "lg-r2-06-p5-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증의 숨겨진 전제는?",
+            "choices": [
+              { "id": "A", "text": "학생 건강을 위해 급식의 질이 중요하다" },
+              { "id": "B", "text": "급식비가 이미 충분하다" },
+              { "id": "C", "text": "학생들이 급식을 좋아한다" },
+              { "id": "D", "text": "급식비 인상에 반대하는 학부모가 없다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-06-p5-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증을 약화하는 정보는?",
+            "choices": [
+              { "id": "A", "text": "급식비를 인상해도 재료비가 아닌 다른 곳에 쓰일 수 있다" },
+              { "id": "B", "text": "다른 학교도 급식비를 인상했다" },
+              { "id": "C", "text": "학생들이 건강하다" },
+              { "id": "D", "text": "급식이 맛있다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          },
+          {
+            "id": "lg-r2-06-p5-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "이 논증의 추론 구조는?",
+            "choices": [
+              { "id": "A", "text": "급식비 인상→좋은 재료→급식 질 향상→학생 건강 (연쇄 추론)" },
+              { "id": "B", "text": "귀납 추론" },
+              { "id": "C", "text": "유비 추론" },
+              { "id": "D", "text": "귀류법" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -30 }
+          }
+        ]
+      }
+    ]
+  }
+}
