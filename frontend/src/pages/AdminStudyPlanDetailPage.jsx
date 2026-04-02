@@ -10,9 +10,17 @@ import "../styles/admin-study-plan.css";
 
 const TABS = [
   { key: "matrix", label: "매트릭스", icon: "grid_on" },
+  { key: "submissions", label: "제출물", icon: "assignment_turned_in" },
   { key: "calendar", label: "캘린더", icon: "calendar_month" },
   { key: "settings", label: "설정", icon: "settings" },
 ];
+
+const STATUS_LABEL = {
+  submitted: "제출", partial: "일부 완료", completed: "완료",
+  scored: "채점됨", passed: "통과", retry: "재시험",
+  pending: "미수행", in_progress: "진행중", unassigned: "미배정",
+};
+const ASSET_TYPE_KO = { korfarm: "국어농장", activity: "학습활동", test: "테스트" };
 
 export default function AdminStudyPlanDetailPage() {
   const { planId } = useParams();
@@ -286,6 +294,9 @@ export default function AdminStudyPlanDetailPage() {
             )
           )}
 
+          {/* 제출물 탭 */}
+          {tab === "submissions" && <SubmissionsTab planId={planId} onCellClick={(cell) => setCellModal({ cell, userId: cell.userId })} />}
+
           {/* 캘린더 탭 */}
           {tab === "calendar" && (
             <StudyPlanCalendar
@@ -388,5 +399,72 @@ export default function AdminStudyPlanDetailPage() {
       )}
       </div>
     </AdminLayout>
+  );
+}
+
+// ── 제출물 모아보기 탭 컴포넌트 ──
+function SubmissionsTab({ planId, onCellClick }) {
+  const [submissions, setSubmissions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [statusFilter, setStatusFilter] = useState("all");
+
+  useEffect(() => {
+    setLoading(true);
+    apiGet(`/v1/admin/study-plans/${planId}/submissions`)
+      .then((data) => setSubmissions(Array.isArray(data) ? data : []))
+      .catch(() => setSubmissions([]))
+      .finally(() => setLoading(false));
+  }, [planId]);
+
+  const filtered = statusFilter === "all"
+    ? submissions
+    : submissions.filter((s) => s.status === statusFilter);
+
+  if (loading) return <div style={{ padding: 20, color: "#999" }}>로딩 중...</div>;
+
+  return (
+    <div className="aspd-submissions">
+      <div className="aspd-submissions-header">
+        <h3>제출물 ({filtered.length}건)</h3>
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="aspd-filter-select">
+          <option value="all">전체 상태</option>
+          <option value="submitted">제출</option>
+          <option value="partial">일부 완료</option>
+          <option value="completed">완료</option>
+          <option value="scored">채점됨</option>
+          <option value="passed">통과</option>
+        </select>
+      </div>
+      {filtered.length === 0 ? (
+        <div style={{ padding: 20, color: "#999", textAlign: "center" }}>제출물이 없습니다.</div>
+      ) : (
+        <table className="aspd-submissions-table">
+          <thead>
+            <tr>
+              <th>학생</th>
+              <th>범위</th>
+              <th>활동</th>
+              <th>유형</th>
+              <th>상태</th>
+              <th>제출수</th>
+              <th>점수</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((s) => (
+              <tr key={s.cellId} className="aspd-submissions-row" onClick={() => onCellClick(s)}>
+                <td>{s.userName}</td>
+                <td>{s.scopeLabel}</td>
+                <td>{s.assetLabel}</td>
+                <td><span className="aspd-type-badge">{ASSET_TYPE_KO[s.assetType] || s.assetType}</span></td>
+                <td><span className={`aspd-status-badge --${s.status}`}>{STATUS_LABEL[s.status] || s.status}</span></td>
+                <td>{s.submissionCount}</td>
+                <td>{s.score ?? "-"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
   );
 }

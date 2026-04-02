@@ -238,6 +238,20 @@ data class UpcomingItemResponse(
     val planTitle: String?
 )
 
+data class SubmissionResponse(
+    val cellId: String,
+    val userId: String,
+    val userName: String,
+    val scopeLabel: String,
+    val assetLabel: String,
+    val assetType: String,
+    val status: String,
+    val submissionCount: Int,
+    val score: Int?,
+    val adminNote: String?,
+    val updatedAt: String?
+)
+
 // ── 캘린더 이벤트 응답 ──
 
 data class CalendarEventResponse(

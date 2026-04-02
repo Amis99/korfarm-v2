@@ -26,6 +26,7 @@ export default function StudyPlanMatrix({
   const [showAssetPopover, setShowAssetPopover] = useState(false);
   const [newAssetType, setNewAssetType] = useState("activity");
   const [newAssetLabel, setNewAssetLabel] = useState("");
+  const [newAssetDue, setNewAssetDue] = useState("");
   const [showContentSearch, setShowContentSearch] = useState(false);
   const popoverRef = useRef(null);
 
@@ -49,26 +50,32 @@ export default function StudyPlanMatrix({
 
   const handleAssetAdd = () => {
     if (!newAssetLabel.trim() || !onAddAsset) return;
+    const configJson = newAssetDue ? JSON.stringify({ dueDate: newAssetDue }) : undefined;
     onAddAsset({
       assetType: newAssetType,
       label: newAssetLabel.trim(),
       assetKind: newAssetType === "test" ? "test" : "study",
+      configJson,
     });
     setNewAssetLabel("");
     setNewAssetType("activity");
+    setNewAssetDue("");
     setShowAssetPopover(false);
   };
 
   const handleContentSelected = (content) => {
     if (!onAddAsset) return;
+    const configJson = newAssetDue ? JSON.stringify({ dueDate: newAssetDue }) : undefined;
     onAddAsset({
       assetType: "korfarm",
       label: content.title,
       assetKind: "study",
       refId: content.contentId,
+      configJson,
     });
     setNewAssetLabel("");
     setNewAssetType("activity");
+    setNewAssetDue("");
     setShowAssetPopover(false);
     setShowContentSearch(false);
   };
@@ -138,6 +145,10 @@ export default function StudyPlanMatrix({
                           placeholder="콘텐츠 이름"
                           readOnly
                         />
+                        <div className="sp-popover-due">
+                          <label>기한</label>
+                          <input type="date" className="asp-input sp-popover-date" value={newAssetDue} onChange={(e) => setNewAssetDue(e.target.value)} />
+                        </div>
                         <button
                           className="asp-add-btn sp-popover-add"
                           onClick={() => setShowContentSearch(true)}
@@ -153,6 +164,10 @@ export default function StudyPlanMatrix({
                           onKeyDown={(e) => e.key === "Enter" && handleAssetAdd()}
                           autoFocus
                         />
+                        <div className="sp-popover-due">
+                          <label>기한</label>
+                          <input type="date" className="asp-input sp-popover-date" value={newAssetDue} onChange={(e) => setNewAssetDue(e.target.value)} />
+                        </div>
                         <button className="asp-add-btn sp-popover-add" onClick={handleAssetAdd}>추가</button>
                       </>
                     )}

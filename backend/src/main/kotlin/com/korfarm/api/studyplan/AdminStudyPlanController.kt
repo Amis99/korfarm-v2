@@ -170,6 +170,14 @@ class AdminStudyPlanController(
         return ApiResponse(success = true, data = mapOf("planId" to planId))
     }
 
+    // ── 제출물 모아보기 ──
+
+    @GetMapping("/{planId}/submissions")
+    fun submissions(@PathVariable planId: String): ApiResponse<List<SubmissionResponse>> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.getSubmissions(planId))
+    }
+
     // ── 학생 + 매트릭스 ──
 
     @GetMapping("/{planId}/students")

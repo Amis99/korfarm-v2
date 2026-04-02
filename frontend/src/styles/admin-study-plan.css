@@ -708,3 +708,53 @@
     flex-wrap: wrap;
   }
 }
+
+/* ── 제출물 탭 ── */
+.aspd-submissions { padding: 16px 0; }
+.aspd-submissions-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+}
+.aspd-submissions-header h3 { margin: 0; font-size: 16px; }
+.aspd-filter-select {
+  padding: 6px 10px; border-radius: 6px; border: 1px solid #ddd;
+  font-size: 13px; background: #fff;
+}
+.aspd-submissions-table {
+  width: 100%; border-collapse: collapse; font-size: 13px;
+}
+.aspd-submissions-table th {
+  padding: 8px; text-align: left; font-weight: 600; color: #666;
+  border-bottom: 2px solid #eee;
+}
+.aspd-submissions-table td {
+  padding: 8px; border-bottom: 1px solid #f0f0f0;
+}
+.aspd-submissions-row { cursor: pointer; }
+.aspd-submissions-row:hover { background: rgba(255,127,42,0.04); }
+.aspd-type-badge {
+  display: inline-block; padding: 2px 6px; border-radius: 4px;
+  font-size: 11px; font-weight: 600;
+  background: rgba(255,127,42,0.1); color: #e06820;
+}
+.aspd-status-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 4px;
+  font-size: 11px; font-weight: 600;
+}
+.aspd-status-badge.--submitted { background: #e8f0fe; color: #1a73e8; }
+.aspd-status-badge.--partial { background: #fef3e0; color: #e06820; }
+.aspd-status-badge.--completed { background: #e8f5e9; color: #2e7d32; }
+.aspd-status-badge.--scored { background: #f3e5f5; color: #7b1fa2; }
+.aspd-status-badge.--passed { background: #e8f5e9; color: #2e7d32; }
+.aspd-status-badge.--pending { background: #f5f5f5; color: #999; }
+
+/* 기한 입력 */
+.sp-popover-due {
+  display: flex; align-items: center; gap: 6px;
+  margin: 4px 0; font-size: 12px;
+}
+.sp-popover-due label { color: #666; white-space: nowrap; }
+.sp-popover-date {
+  padding: 4px 8px; font-size: 12px; border-radius: 4px;
+  border: 1px solid #ddd; flex: 1;
+}

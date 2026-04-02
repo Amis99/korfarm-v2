@@ -329,6 +329,34 @@ class StudyPlanService(
         }
     }
 
+    @Transactional(readOnly = true)
+    fun getSubmissions(planId: String): List<SubmissionResponse> {
+        val allCells = cellRepo.findByPlanId(planId)
+            .filter { it.submissionCount > 0 || it.status in listOf("submitted", "partial", "completed", "scored", "passed") }
+        if (allCells.isEmpty()) return emptyList()
+
+        val userIds = allCells.map { it.userId }.toSet()
+        val userMap = if (userIds.isNotEmpty()) userRepo.findAllById(userIds).associateBy { it.id } else emptyMap()
+        val scopeMap = scopeRepo.findByPlanIdOrderBySortOrder(planId).associateBy { it.id }
+        val assetMap = assetRepo.findByPlanIdOrderBySortOrder(planId).associateBy { it.id }
+
+        return allCells.sortedByDescending { it.updatedAt }.map { cell ->
+            SubmissionResponse(
+                cellId = cell.id,
+                userId = cell.userId,
+                userName = userMap[cell.userId]?.name ?: cell.userId,
+                scopeLabel = scopeMap[cell.scopeId]?.label ?: "",
+                assetLabel = assetMap[cell.assetId]?.label ?: "",
+                assetType = assetMap[cell.assetId]?.assetType ?: "",
+                status = cell.status,
+                submissionCount = cell.submissionCount,
+                score = cell.score,
+                adminNote = cell.adminNote,
+                updatedAt = cell.updatedAt?.toString()
+            )
+        }
+    }
+
     // ── 관리자: 매트릭스 조회 (자동 동기화 포함) ──
 
     @Transactional
