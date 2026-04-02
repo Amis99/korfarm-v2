@@ -83,7 +83,7 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
           <span className="material-symbols-outlined">
             {isTest ? "grading" : isKorfarm ? "eco" : "task_alt"}
           </span>
-          셀 상세
+          제출물 확인
         </h2>
 
         <div style={{ marginBottom: 12 }}>
@@ -150,11 +150,21 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
               <div className="asp-loading">파일 불러오는 중...</div>
             ) : files.length > 0 ? (
               <div className="asp-cell-files">
-                {files.map((f) => (
-                  <a key={f.id} href={fileUrl(f.fileId)} target="_blank" rel="noreferrer">
-                    <img className="asp-cell-file-thumb" src={fileUrl(f.fileId)} alt="제출물" />
-                  </a>
-                ))}
+                {files.map((f) => {
+                  const url = fileUrl(f.fileId);
+                  const isPdf = f.mime === "application/pdf" || f.fileId?.endsWith(".pdf");
+                  return (
+                    <div key={f.id} className="asp-cell-file-preview">
+                      {isPdf ? (
+                        <object data={url} type="application/pdf" className="asp-cell-pdf-preview">
+                          <a href={url} target="_blank" rel="noreferrer">PDF 보기</a>
+                        </object>
+                      ) : (
+                        <img className="asp-cell-img-preview" src={url} alt="제출물" onClick={() => window.open(url, "_blank")} />
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               !isKorfarm && (

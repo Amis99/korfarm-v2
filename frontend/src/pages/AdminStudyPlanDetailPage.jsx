@@ -273,10 +273,7 @@ export default function AdminStudyPlanDetailPage() {
           {/* 매트릭스 탭 */}
           {tab === "matrix" && (
             selectedUserId === null ? (
-              <div className="asp-empty" style={{ padding: "40px 20px" }}>
-                <span className="material-symbols-outlined">groups</span>
-                전체 현황 — 좌측에서 학생을 선택하면 개별 매트릭스를 확인할 수 있습니다.
-              </div>
+              <OverviewMatrix planId={planId} plan={plan} onStudentClick={(userId) => setSelectedUserId(userId)} />
             ) : matrix ? (
               <StudyPlanMatrix
                 scopes={matrix.scopes}
@@ -465,6 +462,76 @@ function SubmissionsTab({ planId, onCellClick }) {
           </tbody>
         </table>
       )}
+    </div>
+  );
+}
+
+// ── 전체 현황 매트릭스 (미확인 제출물 개수 표시) ──
+function OverviewMatrix({ planId, plan, onStudentClick }) {
+  const [submissions, setSubmissions] = useState([]);
+  const [scopes, setScopes] = useState([]);
+  const [assets, setAssets] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      apiGet(`/v1/admin/study-plans/${planId}/submissions`).catch(() => []),
+      apiGet(`/v1/admin/study-plans/${planId}`).catch(() => null),
+    ]).then(([subs, detail]) => {
+      setSubmissions(Array.isArray(subs) ? subs : []);
+      setScopes(detail?.scopes || []);
+      setAssets(detail?.assets || []);
+    }).finally(() => setLoading(false));
+  }, [planId]);
+
+  if (loading) return <div style={{ padding: 20, color: "#999" }}>로딩 중...</div>;
+  if (scopes.length === 0 || assets.length === 0) {
+    return <div style={{ padding: 20, color: "#999" }}>매트릭스가 비어있습니다. 설정에서 범위와 에셋을 추가하세요.</div>;
+  }
+
+  // 범위×에셋별 미확인 제출물 수 집계
+  const countMap = {};
+  const needsReview = submissions.filter(s => s.status === "submitted" || s.status === "scored");
+  for (const s of needsReview) {
+    const key = `${s.scopeLabel}__${s.assetLabel}`;
+    if (!countMap[key]) countMap[key] = { count: 0, users: [] };
+    countMap[key].count++;
+    if (!countMap[key].users.includes(s.userName)) countMap[key].users.push(s.userName);
+  }
+
+  return (
+    <div style={{ overflowX: "auto" }}>
+      <div style={{ fontSize: 13, color: "#666", marginBottom: 8 }}>
+        전체 현황 — 미확인 제출물이 있는 셀을 클릭하면 상세를 확인할 수 있습니다.
+      </div>
+      <table className="aspd-overview-table">
+        <thead>
+          <tr>
+            <th>범위</th>
+            {assets.map(a => <th key={a.assetId || a.id}>{a.label}<br /><span style={{ fontSize: 10, color: "#999" }}>{ASSET_TYPE_KO[a.assetType] || a.assetType}</span></th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {scopes.map(scope => (
+            <tr key={scope.scopeId || scope.id}>
+              <td style={{ fontWeight: 600 }}>{scope.label}</td>
+              {assets.map(asset => {
+                const key = `${scope.label}__${asset.label}`;
+                const info = countMap[key];
+                return (
+                  <td key={asset.assetId || asset.id} className="aspd-overview-cell" title={info ? `${info.users.join(", ")}` : ""}>
+                    {info ? (
+                      <span className="aspd-overview-badge">{info.count}건</span>
+                    ) : (
+                      <span style={{ color: "#ccc" }}>—</span>
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

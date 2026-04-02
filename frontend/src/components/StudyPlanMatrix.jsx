@@ -7,6 +7,7 @@ const ASSET_TYPE_LABELS = {
   korfarm: "국어농장",
   activity: "학습활동",
   test: "테스트",
+  writing: "글쓰기",
 };
 
 export default function StudyPlanMatrix({
