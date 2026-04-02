@@ -4,12 +4,14 @@ import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import SearchBar from "../components/SearchBar";
 import "../styles/start.css";
+import { TYPE_LABEL } from "../constants/contentTypes";
 
 const CONTENT_TYPE_LABELS = {
   daily_quiz: "일일퀴즈",
   daily_reading: "일일독해",
   pro_mode: "프로모드",
   farm_mode: "농장모드",
+  ...TYPE_LABEL,
 };
 
 const LEVEL_LABEL_MAP = {

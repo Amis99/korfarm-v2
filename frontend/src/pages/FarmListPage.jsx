@@ -11,6 +11,7 @@ import {
   levelBelongsToServer,
 } from "../data/learning/learningCatalog";
 import { apiGet, apiPost } from "../utils/api";
+import { TYPE_LABEL } from "../constants/contentTypes";
 import VideoModal from "../components/VideoModal";
 import "../styles/farm-mode.css";
 import "../styles/start.css";
@@ -277,7 +278,7 @@ function FarmListPage() {
             >
               <option value="">전체 유형</option>
               {contentTypes.map((ct) => (
-                <option key={ct} value={ct}>{ct}</option>
+                <option key={ct} value={ct}>{TYPE_LABEL[ct] || ct}</option>
               ))}
             </select>
           )}

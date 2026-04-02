@@ -52,6 +52,7 @@ export const SUB_AREA_LABELS = {
   SENTENCE_STRUCTURE: "문장 구조",
   PHONEME_CHANGE: "음운 변동",
   POS: "품사",
+  MORPHEME: "형태소",
   KNOWLEDGE: "배경지식",
   SCIENCE: "과학",
   CONCEPT: "개념·이론",
