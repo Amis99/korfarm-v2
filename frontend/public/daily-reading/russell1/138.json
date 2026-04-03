@@ -131,7 +131,7 @@
           "stepId": "s6",
           "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 290 } ] },
           "question": {
-            "prompt": "첫 문단 전체는 무엇을 기준으로 읽게 하나요?",
+          "prompt": "주장과 근거를 함께 읽는 기준은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "주장과 근거의 질서가 선명해야 설득된다는 기준" },
               { "id": "B", "text": "표현이 세면 근거가 약해도 된다는 기준" },
@@ -221,7 +221,7 @@
           "stepId": "s12",
           "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 286 } ] },
           "question": {
-            "prompt": "둘째 문단 전체는 시작을 어떻게 보여 주나요?",
+          "prompt": "주장문의 시작은 어떤 역할을 하나요?",
             "choices": [
               { "id": "A", "text": "문제 제시, 입장 명료화, 뒤 근거 이해의 길을 여는 흐름" },
               { "id": "B", "text": "문제 생략, 사례 나열, 결론 유보의 흐름" },
@@ -236,7 +236,7 @@
           "stepId": "s13",
           "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 18 } ] },
           "question": {
-            "prompt": "셋째 문단은 무엇을 시작하나요?",
+            "prompt": "근거 배열은 무엇으로 시작하나요?",
             "choices": [
               { "id": "A", "text": "근거를 배열하는 일을 시작하겠다고 한다" },
               { "id": "B", "text": "주장을 철회하겠다고 한다" },
@@ -326,7 +326,7 @@
           "stepId": "s19",
           "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 291 } ] },
           "question": {
-            "prompt": "셋째 문단 전체는 무엇의 문제로 보이나요?",
+          "prompt": "근거 배치에서 무엇을 가려야 하나요?",
             "choices": [
               { "id": "A", "text": "근거의 역할과 무게를 따져 순서를 세우는 판단의 문제" },
               { "id": "B", "text": "근거 수만 늘리면 해결되는 양의 문제" },
@@ -401,7 +401,7 @@
           "stepId": "s24",
           "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 267 } ] },
           "question": {
-            "prompt": "마지막 문단 전체는 마무리를 무엇으로 보이게 하나요?",
+          "prompt": "주장문 조직을 익히면 어떤 힘이 자라나요?",
             "choices": [
               { "id": "A", "text": "주장 재확인과 중요성, 앞뒤 호응을 묶는 설계" },
               { "id": "B", "text": "처음과 다른 결론을 덧붙이는 설계" },
@@ -416,12 +416,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "주장문은 설득하는 글이다" },
-        { "id": "c2", "text": "주장은 먼저 또렷이 세운다" },
-        { "id": "c3", "text": "근거가 약하면 설득이 약하다" },
-        { "id": "c4", "text": "근거는 역할과 무게를 가린다" },
-        { "id": "c5", "text": "반복 근거는 힘을 깎아 먹는다" },
-        { "id": "c6", "text": "처음과 끝이 호응해야 한다" }
+        { "id": "c1", "text": "주장문은 생각과 근거로 설득하는 글이다" },
+        { "id": "c2", "text": "입장은 먼저 분명히 정리해야 한다" },
+        { "id": "c3", "text": "핵심 근거를 앞세우고 보조 근거를 잇는다" },
+        { "id": "c4", "text": "근거의 무게와 기능을 가려 배치한다" },
+        { "id": "c5", "text": "마무리는 주장을 다시 한 번 묶어 준다" },
+        { "id": "c6", "text": "시작과 끝의 호응이 글의 방향을 지킨다" }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -430,9 +430,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주장문은 무엇을 하고 근거로 무엇을 하나요?",
+          "prompt": "옳고 믿을 만하다는 뜻을 가진 말은?",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 0, "end": 140 }
+            { "paragraphId": "p1", "start": 38, "end": 43 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -440,9 +440,10 @@
         },
         {
           "id": "q2",
-          "prompt": "입장을 한 문장으로 밝히고 초반에 무엇을 알려 주나요?",
+          "prompt": "사람을 납득시키는 힘을 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 0, "end": 181 }
+            { "paragraphId": "p1", "start": 176, "end": 179 },
+            { "paragraphId": "p3", "start": 228, "end": 231 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -450,9 +451,9 @@
         },
         {
           "id": "q3",
-          "prompt": "근거는 무엇과 어떤 역할을 하나요?",
+          "prompt": "상대 주장에 반대해 내는 말은?",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 18, "end": 133 }
+            { "paragraphId": "p3", "start": 109, "end": 111 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -460,9 +461,9 @@
         },
         {
           "id": "q4",
-          "prompt": "핵심 근거와 보조 근거를 어떻게 배열하나요?",
+          "prompt": "서로 잘 맞아 반응하는 상태를 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 133, "end": 291 }
+            { "paragraphId": "p4", "start": 147, "end": 149 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -470,9 +471,10 @@
         },
         {
           "id": "q5",
-          "prompt": "마무리에서는 주장을 어떻게 다시 묶나요?",
+          "prompt": "차례와 순서를 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 0, "end": 267 }
+            { "paragraphId": "p1", "start": 124, "end": 126 },
+            { "paragraphId": "p4", "start": 243, "end": 245 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
