@@ -3,7 +3,7 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "문장 부호",
+  "title": "문장 부호의 쓰임",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
@@ -104,7 +104,7 @@
           "stepId": "s5",
           "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 224 }] },
           "question": {
-            "prompt": "첫 문단의 핵심은 무엇인가요?",
+            "prompt": "문장 부호는 왜 문법 요소인가요?",
             "choices": [
               { "id": "A", "text": "문장 부호는 읽는 길과 뜻의 경계를 밝혀 주는 문법 요소이다" },
               { "id": "B", "text": "문장 부호는 글자 대신 내용을 적는 핵심 수단이다" },
@@ -194,7 +194,7 @@
           "stepId": "s11",
           "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 240 }] },
           "question": {
-            "prompt": "둘째 문단의 핵심은 무엇인가요?",
+            "prompt": "끝 부호를 고를 때 무엇을 먼저 보나요?",
             "choices": [
               { "id": "A", "text": "문장 끝 부호는 문장 성격과 글의 느낌을 고려해 알맞게 골라야 한다" },
               { "id": "B", "text": "마침표와 물음표와 느낌표는 언제든 서로 바꾸어 써도 된다" },
@@ -269,7 +269,7 @@
           "stepId": "s16",
           "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 263 }] },
           "question": {
-            "prompt": "셋째 문단의 핵심은 무엇인가요?",
+            "prompt": "쉼표를 쓸 때 중요한 기준은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "쉼표는 문장 안 관계를 또렷하게 하지만 꼭 필요한 자리에서만 써야 한다" },
               { "id": "B", "text": "쉼표는 나열에만 쓰이고 다른 역할은 거의 없다" },
@@ -404,7 +404,7 @@
           "stepId": "s25",
           "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 326 }] },
           "question": {
-            "prompt": "넷째 문단의 핵심은 무엇인가요?",
+            "prompt": "문장 부호를 바르게 쓰려면 무엇을 함께 봐야 하나요?",
             "choices": [
               { "id": "A", "text": "따옴표와 괄호 같은 부호도 뜻의 경계를 드러내며 구조와 목적을 보고 써야 한다" },
               { "id": "B", "text": "따옴표와 괄호는 문학에서만 쓰이고 다른 글에서는 쓸모가 없다" },
@@ -433,49 +433,43 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "문장 부호와 글자의 역할을 어떻게 나누나요?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 38, "end": 94 }],
+          "prompt": "\"문장 부호\"는 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p1", "start": 0, "end": 4 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q2",
-          "prompt": "문장 부호를 고를 때 무엇을 먼저 생각해야 하나요?",
-          "answerRanges": [
-            { "paragraphId": "p2", "start": 0, "end": 41 },
-            { "paragraphId": "p2", "start": 140, "end": 240 }
-          ],
+          "prompt": "\"마침표\"는 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 2 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ALL"
         },
         {
           "id": "q3",
-          "prompt": "쉼표가 관계를 또렷하게 하고, 많이 쓰면 불편해진다는 부분은 어디인가요?",
-          "answerRanges": [
-            { "paragraphId": "p3", "start": 100, "end": 198 },
-            { "paragraphId": "p3", "start": 198, "end": 263 }
-          ],
+          "prompt": "\"쉼표\"는 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 1 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ALL"
         },
         {
           "id": "q4",
-          "prompt": "따옴표와 괄호를 잘못 쓰면 어떻게 되나요?",
-          "answerRanges": [{ "paragraphId": "p4", "start": 22, "end": 128 }],
+          "prompt": "\"따옴표\"는 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p4", "start": 0, "end": 2 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q5",
-          "prompt": "부호를 바르게 쓰려면 무엇을 함께 봐야 하나요?",
-          "answerRanges": [{ "paragraphId": "p4", "start": 232, "end": 326 }],
+          "prompt": "\"괄호\"는 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p4", "start": 5, "end": 6 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         }
       ]
     }
