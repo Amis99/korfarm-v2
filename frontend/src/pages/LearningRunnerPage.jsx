@@ -66,7 +66,10 @@ function LearningRunnerPage() {
           area: data.area,
           jsonPath: null,
         });
-        setContent(data.content);
+        // payload 키가 없는 콘텐츠(문법 등)는 content 자체를 payload로 래핑
+        const raw = data.content || {};
+        const wrapped = raw.payload ? raw : { ...raw, payload: raw };
+        setContent(wrapped);
         setLoading(false);
       })
       .catch((err) => {
