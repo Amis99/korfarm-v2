@@ -3,7 +3,7 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 2) Day 206 비문학 - 이진 탐색",
+  "title": "이진 탐색",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_2",
   "schoolGradeRange": {
@@ -59,15 +59,109 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {"stepId":"s1","highlight":{"ranges":[{"paragraphId":"p1","start":0,"end":35}]},"question":{"prompt":"이진 탐색은 무엇을 찾는 방법인가?","choices":[{"id":"A","text":"정렬된 자료에서 원하는 값"},{"id":"B","text":"정렬되지 않은 문장"},{"id":"C","text":"가장 긴 단어"},{"id":"D","text":"바람의 방향"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s2","highlight":{"ranges":[{"paragraphId":"p1","start":36,"end":88}]},"question":{"prompt":"이 방법은 한 칸씩 살피는 대신 무엇을 하는가?","choices":[{"id":"A","text":"가운데 값을 기준으로 범위를 줄인다"},{"id":"B","text":"모든 칸을 같은 속도로 본다"},{"id":"C","text":"정렬을 없앤다"},{"id":"D","text":"값을 기억하지 않는다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s3","highlight":{"ranges":[{"paragraphId":"p1","start":89,"end":163}]},"question":{"prompt":"이 방법에 꼭 필요한 조건은 무엇인가?","choices":[{"id":"A","text":"자료가 이미 순서대로 정리되어 있어야 한다"},{"id":"B","text":"자료가 뒤섞여 있어야 한다"},{"id":"C","text":"값이 하나만 있어야 한다"},{"id":"D","text":"항상 처음부터 찾아야 한다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s4","highlight":{"ranges":[{"paragraphId":"p1","start":0,"end":163}]},"question":{"prompt":"이 문단의 중심 내용은 무엇인가?","choices":[{"id":"A","text":"이진 탐색은 정렬된 자료에서 범위를 절반씩 줄여 찾는 방법이다"},{"id":"B","text":"이진 탐색은 순서가 없어야 가능하다"},{"id":"C","text":"이진 탐색은 모든 자료에 똑같이 적용된다"},{"id":"D","text":"이진 탐색은 속도가 중요하지 않다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s5","highlight":{"ranges":[{"paragraphId":"p2","start":0,"end":36}]},"question":{"prompt":"예시에서 찾는 값은 무엇인가?","choices":[{"id":"A","text":"73"},{"id":"B","text":"50"},{"id":"C","text":"100"},{"id":"D","text":"1"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s6","highlight":{"ranges":[{"paragraphId":"p2","start":37,"end":89}]},"question":{"prompt":"먼저 50과 비교하면 어떤 결론이 나오는가?","choices":[{"id":"A","text":"73은 50보다 크므로 앞 절반은 볼 필요가 없다"},{"id":"B","text":"73은 50보다 작으므로 뒤 절반은 볼 필요가 없다"},{"id":"C","text":"73과 50은 같으므로 끝난다"},{"id":"D","text":"비교는 필요 없다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s7","highlight":{"ranges":[{"paragraphId":"p2","start":90,"end":138}]},"question":{"prompt":"그다음에는 무엇을 하는가?","choices":[{"id":"A","text":"남은 범위의 가운데 값과 비교한다"},{"id":"B","text":"처음 범위로 돌아간다"},{"id":"C","text":"정렬을 바꾼다"},{"id":"D","text":"값 찾기를 멈춘다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s8","highlight":{"ranges":[{"paragraphId":"p2","start":139,"end":195}]},"question":{"prompt":"범위가 절반씩 줄어들면 어떤 점이 중요한가?","choices":[{"id":"A","text":"확인해야 할 횟수가 크게 늘지 않는다"},{"id":"B","text":"항상 더 많은 비교가 필요하다"},{"id":"C","text":"정렬이 사라진다"},{"id":"D","text":"값이 바뀐다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s9","highlight":{"ranges":[{"paragraphId":"p2","start":0,"end":195}]},"question":{"prompt":"이 문단의 중심 내용은 무엇인가?","choices":[{"id":"A","text":"이진 탐색은 범위를 절반씩 줄여 적은 횟수로 찾는다"},{"id":"B","text":"이진 탐색은 처음부터 끝까지 다 본다"},{"id":"C","text":"이진 탐색은 정렬과 무관하다"},{"id":"D","text":"이진 탐색은 계산이 느리다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s10","highlight":{"ranges":[{"paragraphId":"p3","start":0,"end":32}]},"question":{"prompt":"이진 탐색이 가능한 이유는 무엇인가?","choices":[{"id":"A","text":"자료가 정렬되어 있기 때문이다"},{"id":"B","text":"자료가 뒤섞여 있기 때문이다"},{"id":"C","text":"값이 하나뿐이기 때문이다"},{"id":"D","text":"속도가 느리기 때문이다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s11","highlight":{"ranges":[{"paragraphId":"p3","start":33,"end":91}]},"question":{"prompt":"가운데 값보다 찾는 값이 작거나 크면 어떻게 되는가?","choices":[{"id":"A","text":"뒤쪽이나 앞쪽 구간 전체를 버릴 수 있다"},{"id":"B","text":"모든 구간을 다시 본다"},{"id":"C","text":"정렬을 하지 않아도 된다"},{"id":"D","text":"찾는 값을 바꾼다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s12","highlight":{"ranges":[{"paragraphId":"p3","start":92,"end":138}]},"question":{"prompt":"자료가 뒤섞여 있으면 왜 이진 탐색을 쓸 수 없는가?","choices":[{"id":"A","text":"판단할 근거가 없어지기 때문이다"},{"id":"B","text":"값이 더 많아지기 때문이다"},{"id":"C","text":"정렬이 더 쉬워지기 때문이다"},{"id":"D","text":"속도가 빨라지기 때문이다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s13","highlight":{"ranges":[{"paragraphId":"p3","start":139,"end":186}]},"question":{"prompt":"이진 탐색은 무엇의 중요성을 보여 주는 예인가?","choices":[{"id":"A","text":"정렬"},{"id":"B","text":"색깔"},{"id":"C","text":"계산기"},{"id":"D","text":"문장 부호"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s14","highlight":{"ranges":[{"paragraphId":"p3","start":0,"end":186}]},"question":{"prompt":"이 문단의 중심 내용은 무엇인가?","choices":[{"id":"A","text":"정렬되어 있어야 이진 탐색이 가능하고 정렬의 중요성을 보여 준다"},{"id":"B","text":"이진 탐색은 정렬과 무관하다"},{"id":"C","text":"이진 탐색은 뒤섞인 자료에 더 잘 맞는다"},{"id":"D","text":"이진 탐색은 버리는 구간이 없다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s15","highlight":{"ranges":[{"paragraphId":"p4","start":0,"end":27}]},"question":{"prompt":"이진 탐색의 강점은 무엇인가?","choices":[{"id":"A","text":"비교 횟수를 줄이는 데 있다"},{"id":"B","text":"모든 자료를 느리게 보는 데 있다"},{"id":"C","text":"정렬을 없애는 데 있다"},{"id":"D","text":"값을 바꾸는 데 있다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s16","highlight":{"ranges":[{"paragraphId":"p4","start":28,"end":107}]},"question":{"prompt":"순차 탐색과 이진 탐색의 차이는 무엇인가?","choices":[{"id":"A","text":"이진 탐색은 범위를 절반으로 줄여 증가 속도가 훨씬 느리다"},{"id":"B","text":"이진 탐색은 확인 횟수가 더 많다"},{"id":"C","text":"순차 탐색이 항상 더 빠르다"},{"id":"D","text":"둘 다 동일하다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s17","highlight":{"ranges":[{"paragraphId":"p4","start":108,"end":169}]},"question":{"prompt":"정렬된 목록에서 이진 탐색이 효율적인 이유는 무엇인가?","choices":[{"id":"A","text":"학생 명단이나 사전처럼 정렬된 목록이 많기 때문이다"},{"id":"B","text":"값이 항상 하나뿐이기 때문이다"},{"id":"C","text":"정렬이 필요 없기 때문이다"},{"id":"D","text":"비교 횟수가 늘기 때문이다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s18","highlight":{"ranges":[{"paragraphId":"p4","start":0,"end":169}]},"question":{"prompt":"이 문단의 중심 내용은 무엇인가?","choices":[{"id":"A","text":"이진 탐색은 비교 횟수를 줄여 정렬된 목록에서 효율적이다"},{"id":"B","text":"이진 탐색은 순차 탐색보다 항상 느리다"},{"id":"C","text":"정렬된 목록은 효율과 무관하다"},{"id":"D","text":"비교는 중요하지 않다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s19","highlight":{"ranges":[{"paragraphId":"p5","start":0,"end":22}]},"question":{"prompt":"이진 탐색에도 어떤 점이 있는가?","choices":[{"id":"A","text":"주의할 점이 있다"},{"id":"B","text":"전혀 주의할 점이 없다"},{"id":"C","text":"정렬이 필요 없다"},{"id":"D","text":"항상 한 번에 찾는다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s20","highlight":{"ranges":[{"paragraphId":"p5","start":23,"end":67}]},"question":{"prompt":"먼저 갖추어야 할 조건은 무엇인가?","choices":[{"id":"A","text":"자료가 반드시 정렬되어 있어야 한다"},{"id":"B","text":"자료가 뒤섞여 있어야 한다"},{"id":"C","text":"가운데가 없어야 한다"},{"id":"D","text":"값이 바뀌어야 한다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s21","highlight":{"ranges":[{"paragraphId":"p5","start":68,"end":121}]},"question":{"prompt":"찾는 값이 없을 때는 어떻게 해야 하는가?","choices":[{"id":"A","text":"범위가 완전히 사라질 때까지 비교를 계속한 뒤 판단한다"},{"id":"B","text":"중간에 바로 있다고 본다"},{"id":"C","text":"정렬을 바꾼다"},{"id":"D","text":"비교를 하지 않는다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s22","highlight":{"ranges":[{"paragraphId":"p5","start":122,"end":191}]},"question":{"prompt":"이진 탐색은 어떤 절차라고 할 수 있는가?","choices":[{"id":"A","text":"왼쪽과 오른쪽 범위를 엄밀하게 관리하는 절차"},{"id":"B","text":"무작위로 고르는 절차"},{"id":"C","text":"정렬을 없애는 절차"},{"id":"D","text":"값을 늘리는 절차"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s23","highlight":{"ranges":[{"paragraphId":"p5","start":0,"end":191}]},"question":{"prompt":"이 문단의 중심 내용은 무엇인가?","choices":[{"id":"A","text":"이진 탐색은 조건과 범위 관리를 엄밀히 해야 한다"},{"id":"B","text":"이진 탐색은 아무 조건이 없어도 된다"},{"id":"C","text":"이진 탐색은 한 번만 비교한다"},{"id":"D","text":"이진 탐색은 찾지 못해도 상관없다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s24","highlight":{"ranges":[{"paragraphId":"p6","start":0,"end":65}]},"question":{"prompt":"정리하면 이진 탐색은 무엇을 하는 방법인가?","choices":[{"id":"A","text":"정렬된 자료에서 범위를 절반씩 줄여 원하는 값을 찾는 방법"},{"id":"B","text":"정렬되지 않은 자료를 그대로 보는 방법"},{"id":"C","text":"모든 값을 처음부터 끝까지 보는 방법"},{"id":"D","text":"비교를 하지 않는 방법"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s25","highlight":{"ranges":[{"paragraphId":"p6","start":66,"end":113}]},"question":{"prompt":"핵심 요소 세 가지는 무엇인가?","choices":[{"id":"A","text":"정렬, 가운데 비교, 범위 축소"},{"id":"B","text":"색깔, 크기, 속도"},{"id":"C","text":"길이, 넓이, 높이"},{"id":"D","text":"기회비용, 매몰비용, 촉매"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s26","highlight":{"ranges":[{"paragraphId":"p6","start":114,"end":180}]},"question":{"prompt":"이 구조를 이해하면 무엇을 알 수 있는가?","choices":[{"id":"A","text":"왜 빠른지와 왜 정렬되지 않은 자료에는 적용할 수 없는지"},{"id":"B","text":"왜 항상 같은 속도인지"},{"id":"C","text":"왜 문장이 긴지"},{"id":"D","text":"왜 숫자가 적은지"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
+        {"stepId":"s27","highlight":{"ranges":[{"paragraphId":"p6","start":0,"end":180}]},"question":{"prompt":"이 문단의 중심 내용은 무엇인가?","choices":[{"id":"A","text":"이진 탐색의 빠름과 적용 조건을 이해할 수 있다"},{"id":"B","text":"이진 탐색은 무조건 모든 자료에 적용된다"},{"id":"C","text":"정렬은 필요 없다"},{"id":"D","text":"범위 축소는 중요하지 않다"}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}}
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        { "id": "c1", "text": "이진 탐색은 정렬된 자료에서 원하는 값을 찾는 방법이다." },
+        { "id": "c2", "text": "이진 탐색은 가운데 값을 기준으로 범위를 절반씩 줄인다." },
+        { "id": "c3", "text": "정렬된 자료라는 조건이 꼭 필요하다." },
+        { "id": "c4", "text": "자료가 뒤섞여 있으면 이진 탐색을 쓸 수 없다." },
+        { "id": "c5", "text": "이진 탐색은 비교 횟수를 줄이는 데 강점이 있다." },
+        { "id": "c6", "text": "정렬, 가운데 비교, 범위 축소가 핵심이다." }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "이진 탐색의 기본 뜻은 어디에 나타나는가?",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 0, "end": 163 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "예시에서 범위를 절반씩 줄이는 과정은 어디에 나타나는가?",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 0, "end": 195 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "정렬과 이진 탐색의 관계는 어디에 나타나는가?",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 0, "end": 186 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "비교 횟수와 효율성의 설명은 어디에 나타나는가?",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 0, "end": 169 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "주의점과 핵심 정리는 어디에 나타나는가?",
+          "answerRanges": [
+            { "paragraphId": "p5", "start": 0, "end": 191 },
+            { "paragraphId": "p6", "start": 0, "end": 180 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }
