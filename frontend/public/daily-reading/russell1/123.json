@@ -114,11 +114,11 @@
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 286 } ] },
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 285 } ] },
           "question": {
-            "prompt": "첫 문단의 핵심은?",
+            "prompt": "발표의 핵심은 무엇을 먼저 잡게 하나?",
             "choices": [
-              { "id": "A", "text": "중심을 먼저 잡아야 함" },
+              { "id": "A", "text": "핵심을 먼저 붙잡기" },
               { "id": "B", "text": "예시만 외워야 함" },
               { "id": "C", "text": "속도만 따라야 함" },
               { "id": "D", "text": "메모만 많이 해야 함" }
@@ -204,11 +204,11 @@
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 286 } ] },
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 285 } ] },
           "question": {
-            "prompt": "둘째 문단의 핵심은?",
+            "prompt": "핵심을 찾을 때 어떤 말이 도움이 되나?",
             "choices": [
-              { "id": "A", "text": "반복과 사례로 찾기" },
+              { "id": "A", "text": "반복과 연결을 살피기" },
               { "id": "B", "text": "속도만 중요" },
               { "id": "C", "text": "숫자만 중요" },
               { "id": "D", "text": "예시를 버리기" }
@@ -294,9 +294,9 @@
         },
         {
           "stepId": "s17",
-          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 262 } ] },
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 261 } ] },
           "question": {
-            "prompt": "셋째 문단의 핵심은?",
+            "prompt": "발표 목적은 핵심의 자리를 어떻게 바꾸나?",
             "choices": [
               { "id": "A", "text": "목적에 맞게 핵심을 정리함" },
               { "id": "B", "text": "메모만 많이 함" },
@@ -369,11 +369,11 @@
         },
         {
           "stepId": "s22",
-          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 251 } ] },
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 250 } ] },
           "question": {
-            "prompt": "마지막 문단의 핵심은?",
+            "prompt": "핵심 내용을 다시 묶으려면 무엇이 필요한가?",
             "choices": [
-              { "id": "A", "text": "듣는 동안 계속 조정하고 다시 묶기" },
+              { "id": "A", "text": "계속 조정하며 다시 묶기" },
               { "id": "B", "text": "처음 판단 고정" },
               { "id": "C", "text": "예시만 적기" },
               { "id": "D", "text": "표지만 찾기" }
@@ -387,12 +387,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "발표는 중심을 먼저 잡아야 한다" },
-        { "id": "c2", "text": "세부 정보만 보면 흐름이 흩어진다" },
-        { "id": "c3", "text": "반복과 표현이 핵심을 드러낸다" },
-        { "id": "c4", "text": "사례는 하나의 방향으로 모인다" },
-        { "id": "c5", "text": "발표 목적에 따라 중심이 달라진다" },
-        { "id": "c6", "text": "듣는 동안 계속 조정하며 다시 묶는다" }
+        { "id": "c1", "text": "발표는 핵심을 먼저 잡아야 한다" },
+        { "id": "c2", "text": "반복과 연결을 함께 살펴야 한다" },
+        { "id": "c3", "text": "목적에 따라 핵심의 자리가 달라진다" },
+        { "id": "c4", "text": "좋은 듣기는 계속 조정하며 묶는다" },
+        { "id": "c5", "text": "들은 내용을 큰 덩어리로 묶는다" },
+        { "id": "c6", "text": "핵심을 붙잡으면 긴 말도 이해된다" }
       ],
       "correctOrder": [ "c1", "c2", "c3", "c4", "c5", "c6" ],
       "seedPenalty": 1
@@ -401,9 +401,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "표현은 어떤 뜻인가요?",
+          "prompt": "'줄기'는 무엇을 뜻하는가?",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 150, "end": 151 }
+            { "paragraphId": "p1", "start": 272, "end": 273 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -411,9 +411,9 @@
         },
         {
           "id": "q2",
-          "prompt": "안내는 어떤 뜻인가요?",
+          "prompt": "'표지'는 무엇을 뜻하는가?",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 87, "end": 88 }
+            { "paragraphId": "p2", "start": 187, "end": 188 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -421,10 +421,9 @@
         },
         {
           "id": "q3",
-          "prompt": "설득은 어떤 뜻인가요?",
+          "prompt": "'조정'은 무엇을 뜻하는가?",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 49, "end": 50 },
-            { "paragraphId": "p3", "start": 121, "end": 122 }
+            { "paragraphId": "p4", "start": 44, "end": 45 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -432,7 +431,7 @@
         },
         {
           "id": "q4",
-          "prompt": "메모는 어떤 뜻인가요?",
+          "prompt": "'메모'는 무엇을 뜻하는가?",
           "answerRanges": [
             { "paragraphId": "p4", "start": 155, "end": 156 }
           ],
@@ -442,10 +441,9 @@
         },
         {
           "id": "q5",
-          "prompt": "구조는 어떤 뜻인가요?",
+          "prompt": "'덩어리'는 무엇을 뜻하는가?",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 238, "end": 239 },
-            { "paragraphId": "p4", "start": 232, "end": 233 }
+            { "paragraphId": "p4", "start": 179, "end": 181 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
