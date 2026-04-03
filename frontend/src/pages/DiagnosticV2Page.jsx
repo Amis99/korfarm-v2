@@ -114,25 +114,25 @@ function DiagnosticV2Page() {
         </div>
       )}
 
-      {/* 모드 선택 모달 */}
+      {/* 모드 선택 모달 — 온라인 전체 풀이 / 출력 후 OMR */}
       {selectedTier && !isParentMode && (
         <div className="diag-v2-modal-overlay" onClick={() => setSelectedTier(null)}>
           <div className="diag-v2-modal" onClick={e => e.stopPropagation()}>
             <h2>{TIER_INFO[selectedTier]?.label} 진단 시작</h2>
-            <button className="diag-v2-mode-btn" onClick={() => handleSelectMode("cat")} disabled={creating}>
-              <div className="mode-title">적응형 (CAT)</div>
-              <div className="mode-desc">15~25문항 · AI가 실력에 맞춰 문항 선택</div>
-            </button>
             <button className="diag-v2-mode-btn" onClick={() => handleSelectMode("full")} disabled={creating}>
-              <div className="mode-title">전체 풀이</div>
+              <div className="mode-title">온라인 전체 풀이</div>
               <div className="mode-desc">
                 {(() => {
                   const tierData = tiers.find(t => t.tier === selectedTier);
                   return tierData?.objectiveCount
-                    ? `${tierData.objectiveCount}문항 · 모든 역량을 빠짐없이 측정`
-                    : "전체 문항 · 모든 역량을 빠짐없이 측정";
+                    ? `${tierData.objectiveCount}문항 · 화면에서 바로 풀기`
+                    : "전체 문항 · 화면에서 바로 풀기";
                 })()}
               </div>
+            </button>
+            <button className="diag-v2-mode-btn" onClick={() => navigate("/diagnostic/print")} disabled={creating}>
+              <div className="mode-title">출력 후 OMR 입력</div>
+              <div className="mode-desc">시험지를 인쇄한 뒤 풀고, 답안을 입력합니다.</div>
             </button>
             <button className="diag-v2-modal-close" onClick={() => setSelectedTier(null)}>취소</button>
           </div>
