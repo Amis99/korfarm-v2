@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import { COMMENTARY_SCHEMA } from "../../constants/manuscriptSchemas";
+import { apiPost } from "../../utils/adminApi";
 import VSCodeTree from "./VSCodeTree";
 import JsonVisualEditor from "./JsonVisualEditor";
 import SchemaDropdown, { downloadJson } from "./SchemaDropdown";
@@ -109,6 +110,53 @@ function LDBCommentaryTab({ setToast }) {
     URL.revokeObjectURL(url);
   };
 
+  // ── 해설서 → 문제은행 등록 ──
+  const handleRegisterToQB = async () => {
+    if (selectedIdx === null || !editorData) return;
+    const doc = editorData;
+    const meta = doc.메타 || {};
+    const allQuestions = [
+      ...(doc.OX문제 || []).map((q) => ({ ...q, format: "MCQ", aType: "CHOICE" })),
+      ...(doc.단답형 || []).map((q) => ({ ...q, format: "SA", aType: "TEXT" })),
+      ...(doc.객관식 || []).map((q) => ({ ...q, format: "MCQ", aType: "CHOICE" })),
+      ...(doc.서술형 || []).map((q) => ({ ...q, format: "ESSAY", aType: "MODEL_ANSWER" })),
+    ];
+    if (allQuestions.length === 0) {
+      setToast({ msg: "등록할 문제가 없습니다.", type: "error" });
+      return;
+    }
+    const record = {
+      record_code: `COMM-${meta.해설서명 || "미지정"}-${Date.now()}`,
+      source_type: "SELF_STUDY",
+      title: meta.해설서명 || meta.대상_교재 || "해설서",
+      author: meta.작성자 || null,
+      passages: doc.본문 ? [{
+        passage_code: "PAS-MAIN",
+        ref_type: "FULL",
+        title: meta.해설서명 || "본문",
+        body_text: doc.본문,
+      }] : undefined,
+      questions: allQuestions.map((q, i) => ({
+        question_number: q.번호 || i + 1,
+        question_format: q.format,
+        answer_type: q.aType,
+        stem: q.문제 || "",
+        choices: q.선택지?.map((t, j) => ({ number: j + 1, text: t })),
+        correct_answer: String(q.답 || ""),
+        explanation: q.해설 || "",
+      })),
+    };
+    try {
+      const res = await apiPost("/v1/admin/question-bank/import", {
+        schema_version: "1.0",
+        records: [record],
+      });
+      setToast({ msg: `문제은행 등록 완료: ${res.imported}건`, type: "success" });
+    } catch (e) {
+      setToast({ msg: "문제은행 등록 실패: " + e.message, type: "error" });
+    }
+  };
+
   const toggleRaw = () => {
     if (rawMode) {
       try { const parsed = JSON.parse(rawText); setEditorData(parsed); setRawError(""); }
@@ -167,6 +215,9 @@ function LDBCommentaryTab({ setToast }) {
                   </button>
                   <button className="ldb-btn ldb-btn-secondary" onClick={handleDownload}>
                     <span className="material-symbols-outlined">download</span>다운로드
+                  </button>
+                  <button className="ldb-btn ldb-btn-primary" onClick={handleRegisterToQB}>
+                    <span className="material-symbols-outlined">database</span>문제은행 등록
                   </button>
                 </>
               }

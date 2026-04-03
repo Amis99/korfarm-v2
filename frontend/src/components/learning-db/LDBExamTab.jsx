@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import { EXAM_SCHEMA } from "../../constants/manuscriptSchemas";
+import { apiPost } from "../../utils/adminApi";
 import VSCodeTree from "./VSCodeTree";
 import JsonVisualEditor from "./JsonVisualEditor";
 import SchemaDropdown, { downloadJson } from "./SchemaDropdown";
@@ -110,6 +111,82 @@ function LDBExamTab({ setToast }) {
     URL.revokeObjectURL(url);
   };
 
+  // ── 시험지 → 문제은행 등록 ──
+  const handleRegisterToQB = async () => {
+    if (selectedIdx === null || !editorData) return;
+    const exam = editorData;
+    const meta = exam.메타 || {};
+    const sets = exam.지문_세트 || [];
+    const indep = exam.독립_문제 || [];
+
+    // 지문 세트별로 문제은행 레코드 생성 (작품명 기준 분리)
+    const records = [];
+    for (const pSet of sets) {
+      const workNames = pSet.작품명 || [];
+      const passageTitle = workNames.length > 0 ? workNames.join(", ") : (pSet.지문_제목 || pSet.지문_출처 || "미지정");
+      records.push({
+        record_code: `EXAM-${meta.시험명 || "미지정"}-P${pSet.지문_번호}-${Date.now()}`,
+        source_type: meta.시험명?.includes("수능") ? "PAST_EXAM" : meta.시험명?.includes("내신") ? "SCHOOL_EXAM" : "ETC",
+        area: pSet.영역 || null,
+        sub_area: pSet.세부영역 || null,
+        title: passageTitle,
+        author: pSet.작가 || null,
+        passages: [{
+          passage_code: `PAS-${pSet.지문_번호}`,
+          ref_type: "FULL",
+          title: passageTitle,
+          body_text: pSet.지문_내용 || "",
+        }],
+        questions: (pSet.문제 || []).map((q) => ({
+          question_number: q.문제_번호,
+          question_format: q.문제_유형 === "서술형" ? "ESSAY" : q.문제_유형 === "단답형" ? "SA" : "MCQ",
+          answer_type: q.문제_유형 === "객관식" ? "CHOICE" : "TEXT",
+          question_type: q.문제_유형코드 || null,
+          stem: q.문제_내용 || "",
+          choices: q.선택지?.map((t, i) => ({ number: i + 1, text: t })),
+          correct_answer: String(q.정답 || ""),
+          explanation: q.해설 || "",
+          passage_refs: [`PAS-${pSet.지문_번호}`],
+        })),
+        // 복수 작품명이면 각 작품에도 검색되도록 tags에 저장
+        tags: workNames.length > 1 ? workNames : undefined,
+      });
+    }
+
+    // 독립 문제도 하나의 레코드로
+    if (indep.length > 0) {
+      records.push({
+        record_code: `EXAM-${meta.시험명 || "미지정"}-INDEP-${Date.now()}`,
+        source_type: "PAST_EXAM",
+        title: meta.시험명 || "독립 문제",
+        questions: indep.map((q) => ({
+          question_number: q.문제_번호,
+          question_format: q.문제_유형 === "서술형" ? "ESSAY" : q.문제_유형 === "단답형" ? "SA" : "MCQ",
+          answer_type: q.문제_유형 === "객관식" ? "CHOICE" : "TEXT",
+          stem: q.문제_내용 || "",
+          choices: q.선택지?.map((t, i) => ({ number: i + 1, text: t })),
+          correct_answer: String(q.정답 || ""),
+          explanation: q.해설 || "",
+        })),
+      });
+    }
+
+    if (records.length === 0) {
+      setToast({ msg: "등록할 지문/문제가 없습니다.", type: "error" });
+      return;
+    }
+
+    try {
+      const res = await apiPost("/v1/admin/question-bank/import", {
+        schema_version: "1.0",
+        records,
+      });
+      setToast({ msg: `문제은행 등록 완료: ${res.imported}건 성공`, type: "success" });
+    } catch (e) {
+      setToast({ msg: "문제은행 등록 실패: " + e.message, type: "error" });
+    }
+  };
+
   const toggleRaw = () => {
     if (rawMode) {
       try { const parsed = JSON.parse(rawText); setEditorData(parsed); setRawError(""); }
@@ -168,6 +245,9 @@ function LDBExamTab({ setToast }) {
                   </button>
                   <button className="ldb-btn ldb-btn-secondary" onClick={handleDownload}>
                     <span className="material-symbols-outlined">download</span>다운로드
+                  </button>
+                  <button className="ldb-btn ldb-btn-primary" onClick={handleRegisterToQB}>
+                    <span className="material-symbols-outlined">database</span>문제은행 등록
                   </button>
                 </>
               }
