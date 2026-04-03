@@ -6,50 +6,52 @@
   "title": "엄마 걱정",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
-  "schoolGradeRange": {
-    "min": 7,
-    "max": 8
-  },
+  "schoolGradeRange": { "min": 7, "max": 8 },
   "area": "READING",
   "subArea": "LITERATURE",
-  "competencies": [
-    "READING"
-  ],
-  "tags": [
-    "daily"
-  ],
-  "access": {
-    "mode": "FREE"
-  },
-  "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
-    "multiplier": 1
-  },
+  "competencies": ["READING"],
+  "tags": ["daily"],
+  "access": { "mode": "FREE" },
+  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
   "timeLimitSec": 480,
   "assets": {},
   "payload": {
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        "열무 삼십 단을 이고\n시장에 간 우리 엄마\n안 오시네, 해는 시든 지 오래",
-        "나는 찬밥처럼 방에 담겨\n아무리 천천히 숙제를 해도",
-        "엄마 안 오시네, 배춧잎 같은 발소리 타박타박\n안 들리네, 어둡고 무서워",
-        "금간 창틈으로 고요히 빗소리\n빈방에 혼자 엎드려 훌쩍거리던",
-        "아주 먼 옛날\n지금도 내 눈시울을 뜨겁게 하는\n그 시절, 내 유년의 윗목"
+        {
+          "id": "p1",
+          "text": "열무 삼십 단을 이고\n시장에 간 우리 엄마\n안 오시네, 해는 시든 지 오래"
+        },
+        {
+          "id": "p2",
+          "text": "나는 찬밥처럼 방에 담겨\n아무리 천천히 숙제를 해도"
+        },
+        {
+          "id": "p3",
+          "text": "엄마 안 오시네, 배춧잎 같은 발소리 타박타박\n안 들리네, 어둡고 무서워"
+        },
+        {
+          "id": "p4",
+          "text": "금간 창틈으로 고요히 빗소리\n빈방에 혼자 엎드려 훌쩍거리던"
+        },
+        {
+          "id": "p5",
+          "text": "아주 먼 옛날\n지금도 내 눈시울을 뜨겁게 하는\n그 시절, 내 유년의 윗목"
+        }
       ]
     },
     "intensive": {
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 11 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 10 }] },
           "question": {
-            "prompt": "엄마는 무엇을 이고 시장에 갔나요?",
+            "prompt": "엄마는 무엇을 지고 나가나요?",
             "choices": [
-              { "id": "A", "text": "열무 삼십 단" },
-              { "id": "B", "text": "배추 한 단" },
-              { "id": "C", "text": "찬밥 한 그릇" },
+              { "id": "A", "text": "내다 팔 열무 꾸러미" },
+              { "id": "B", "text": "찬밥 한 그릇" },
+              { "id": "C", "text": "배춧잎 한 다발" },
               { "id": "D", "text": "우산 한 자루" }
             ],
             "answerId": "A",
@@ -58,14 +60,14 @@
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 12, "end": 23 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 12, "end": 22 }] },
           "question": {
-            "prompt": "엄마는 어디에 간 상태인가요?",
+            "prompt": "엄마는 어디로 향했나요?",
             "choices": [
-              { "id": "A", "text": "시장에 간 상태" },
-              { "id": "B", "text": "학교에 간 상태" },
-              { "id": "C", "text": "우체국에 간 상태" },
-              { "id": "D", "text": "집에 머문 상태" }
+              { "id": "A", "text": "장터가 있는 곳" },
+              { "id": "B", "text": "방에 있는 우리 엄마" },
+              { "id": "C", "text": "학교에 간 우리 엄마" },
+              { "id": "D", "text": "강가에 간 우리 엄마" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -73,14 +75,14 @@
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 24, "end": 41 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 24, "end": 40 }] },
           "question": {
-            "prompt": "엄마를 기다리는 시간은 어떤 상태인가요?",
+            "prompt": "무엇이 오래 시들었나요?",
             "choices": [
-              { "id": "A", "text": "해가 시들 만큼 오래됨" },
-              { "id": "B", "text": "해가 막 떠오른 순간" },
-              { "id": "C", "text": "밤이 막 시작된 순간" },
-              { "id": "D", "text": "새벽이 끝난 순간" }
+              { "id": "A", "text": "해" },
+              { "id": "B", "text": "바람" },
+              { "id": "C", "text": "비" },
+              { "id": "D", "text": "달" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -88,14 +90,14 @@
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 41 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 40 }] },
           "question": {
-            "prompt": "화자의 기다림과 걱정은 어떻게 드러나나요?",
+            "prompt": "화자의 기다림은 어떤 마음을 드러내나요?",
             "choices": [
-              { "id": "A", "text": "엄마를 못 만나 불안함" },
-              { "id": "B", "text": "소풍을 앞두고 즐거움" },
-              { "id": "C", "text": "공부가 잘돼서 여유로움" },
-              { "id": "D", "text": "잠이 많아져 늘어짐" }
+              { "id": "A", "text": "엄마를 기다리며 서운함" },
+              { "id": "B", "text": "잔뜩 신이 남" },
+              { "id": "C", "text": "아무 걱정이 없음" },
+              { "id": "D", "text": "화가 크게 남" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -103,14 +105,14 @@
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 13 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 12 }] },
           "question": {
-            "prompt": "화자는 방 안에서 어떤 모습으로 있나요?",
+            "prompt": "화자는 자신을 무엇에 비겨 말하나요?",
             "choices": [
-              { "id": "A", "text": "찬밥처럼 담겨 있음" },
-              { "id": "B", "text": "마당에서 뛰어놈" },
-              { "id": "C", "text": "장터를 구경함" },
-              { "id": "D", "text": "바깥에서 노래함" }
+              { "id": "A", "text": "식은 밥처럼 외롭게" },
+              { "id": "B", "text": "꽃처럼" },
+              { "id": "C", "text": "돌처럼" },
+              { "id": "D", "text": "구름처럼" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -118,14 +120,14 @@
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 14, "end": 28 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 14, "end": 27 }] },
           "question": {
-            "prompt": "숙제를 해도 시간이 어떻게 느껴지나요?",
+            "prompt": "화자는 시간을 보내려고 무엇을 하나요?",
             "choices": [
-              { "id": "A", "text": "아주 천천히 흘러감" },
-              { "id": "B", "text": "순식간에 끝남" },
-              { "id": "C", "text": "아예 멈춤" },
-              { "id": "D", "text": "갑자기 빨라짐" }
+              { "id": "A", "text": "숙제를 아주 느리게 한다" },
+              { "id": "B", "text": "엄마를 따라감" },
+              { "id": "C", "text": "밖에서 노래함" },
+              { "id": "D", "text": "창밖을 내다봄" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -133,14 +135,14 @@
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 28 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 27 }] },
           "question": {
-            "prompt": "방 안에 담긴 화자의 생활은 어떤 상태인가요?",
+            "prompt": "방 안에 남은 화자의 처지는 어떤 분위기인가요?",
             "choices": [
-              { "id": "A", "text": "답답하고 더딤" },
-              { "id": "B", "text": "활기차고 분주함" },
-              { "id": "C", "text": "시원하고 가벼움" },
-              { "id": "D", "text": "시끄럽고 들뜸" }
+              { "id": "A", "text": "방 안의 외로움" },
+              { "id": "B", "text": "장터의 소란" },
+              { "id": "C", "text": "운동장의 활기" },
+              { "id": "D", "text": "축제의 들뜸" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -148,14 +150,14 @@
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 25 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 24 }] },
           "question": {
-            "prompt": "엄마의 발소리는 어떻게 표현되나요?",
+            "prompt": "기다리던 발소리는 어떻게 떠오르나요?",
             "choices": [
-              { "id": "A", "text": "배춧잎 같은 발소리" },
-              { "id": "B", "text": "종소리 같은 발소리" },
-              { "id": "C", "text": "바람 같은 발소리" },
-              { "id": "D", "text": "전혀 들리지 않는 발소리" }
+              { "id": "A", "text": "배춧잎처럼 가벼운 발소리" },
+              { "id": "B", "text": "돌멩이 같은 발소리" },
+              { "id": "C", "text": "종달새 같은 발소리" },
+              { "id": "D", "text": "물방울 같은 발소리" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -163,14 +165,14 @@
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 26, "end": 40 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 26, "end": 39 }] },
           "question": {
-            "prompt": "엄마의 발소리가 들리지 않자 어떤 분위기가 드러나나요?",
+            "prompt": "어떤 기분이 드러나나요?",
             "choices": [
-              { "id": "A", "text": "어둡고 무서움" },
-              { "id": "B", "text": "밝고 신남" },
-              { "id": "C", "text": "시끄럽고 활기참" },
-              { "id": "D", "text": "따뜻하고 평온함" }
+              { "id": "A", "text": "어둡고 무섭다" },
+              { "id": "B", "text": "밝고 즐겁다" },
+              { "id": "C", "text": "시원하고 상쾌하다" },
+              { "id": "D", "text": "차분하고 안정된다" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -178,14 +180,14 @@
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 40 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 39 }] },
           "question": {
-            "prompt": "엄마의 발소리가 들리지 않는 상황은 무엇을 키우나요?",
+            "prompt": "발소리가 닿지 않는 순간 무엇이 커지나요?",
             "choices": [
-              { "id": "A", "text": "불안과 두려움" },
-              { "id": "B", "text": "기쁨과 여유" },
-              { "id": "C", "text": "호기심과 기대" },
-              { "id": "D", "text": "웃음과 장난" }
+              { "id": "A", "text": "엄마를 기다리는 불안" },
+              { "id": "B", "text": "소풍의 즐거움" },
+              { "id": "C", "text": "장터의 활기" },
+              { "id": "D", "text": "공부의 보람" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -193,14 +195,14 @@
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 15 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 14 }] },
           "question": {
-            "prompt": "빗소리는 어떤 느낌으로 들리나요?",
+            "prompt": "빗소리는 어디를 타고 스며드나요?",
             "choices": [
-              { "id": "A", "text": "고요히" },
-              { "id": "B", "text": "거세게" },
-              { "id": "C", "text": "경쾌하게" },
-              { "id": "D", "text": "시끄럽게" }
+              { "id": "A", "text": "금이 간 창틈" },
+              { "id": "B", "text": "넓은 마당" },
+              { "id": "C", "text": "밝은 교실" },
+              { "id": "D", "text": "시장 골목" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -208,14 +210,14 @@
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 16, "end": 32 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 16, "end": 31 }] },
           "question": {
-            "prompt": "화자는 어떤 모습으로 울고 있나요?",
+            "prompt": "화자는 어떤 자세로 슬픔을 견디나요?",
             "choices": [
-              { "id": "A", "text": "혼자 엎드려 훌쩍거림" },
-              { "id": "B", "text": "책을 펴고 조용히 읽음" },
-              { "id": "C", "text": "문밖을 보며 웃음" },
-              { "id": "D", "text": "마당에서 노래함" }
+              { "id": "A", "text": "빈방에 홀로 엎드림" },
+              { "id": "B", "text": "밖에서 웃음" },
+              { "id": "C", "text": "엄마와 대화함" },
+              { "id": "D", "text": "책을 읽으며 걷음" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -223,14 +225,14 @@
         },
         {
           "stepId": "s13",
-          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 32 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 31 }] },
           "question": {
-            "prompt": "비와 빈방 속의 화자는 어떤 외로움을 겪나요?",
+            "prompt": "빗소리 속 기억은 어떤 분위기인가요?",
             "choices": [
-              { "id": "A", "text": "혼자서 서럽게 움" },
-              { "id": "B", "text": "친구와 떠들며 놂" },
-              { "id": "C", "text": "가족과 함께 웃음" },
-              { "id": "D", "text": "바깥에서 신나게 뜀" }
+              { "id": "A", "text": "고요하고 쓸쓸함" },
+              { "id": "B", "text": "시끌벅적한 기쁨" },
+              { "id": "C", "text": "거친 분노" },
+              { "id": "D", "text": "활발한 기대" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -238,14 +240,14 @@
         },
         {
           "stepId": "s14",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 7 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 6 }] },
           "question": {
-            "prompt": "화자는 어느 때를 떠올리나요?",
+            "prompt": "떠오르는 기억은 언제의 일인가요?",
             "choices": [
-              { "id": "A", "text": "아주 먼 옛날" },
-              { "id": "B", "text": "며칠 전 오후" },
-              { "id": "C", "text": "내일 아침" },
-              { "id": "D", "text": "바로 지금" }
+              { "id": "A", "text": "아주 오래전 어린 때" },
+              { "id": "B", "text": "내일 아침" },
+              { "id": "C", "text": "방금 전" },
+              { "id": "D", "text": "한밤중" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -253,14 +255,14 @@
         },
         {
           "stepId": "s15",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 8, "end": 25 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 8, "end": 24 }] },
           "question": {
-            "prompt": "과거의 기억은 지금 어떤 영향을 주나요?",
+            "prompt": "지금도 눈시울을 뜨겁게 하는 것은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "눈시울을 뜨겁게 함" },
-              { "id": "B", "text": "배를 고프게 함" },
-              { "id": "C", "text": "발걸음을 빠르게 함" },
-              { "id": "D", "text": "목소리를 낮추게 함" }
+              { "id": "A", "text": "그때의 어린 기억" },
+              { "id": "B", "text": "새 운동화" },
+              { "id": "C", "text": "교과서" },
+              { "id": "D", "text": "비 오는 창문" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -268,14 +270,14 @@
         },
         {
           "stepId": "s16",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 26, "end": 40 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 26, "end": 39 }] },
           "question": {
-            "prompt": "그 시절은 화자에게 무엇으로 남아 있나요?",
+            "prompt": "기억 끝에 남은 자리는 어디인가요?",
             "choices": [
-              { "id": "A", "text": "유년의 윗목" },
-              { "id": "B", "text": "여행의 한복판" },
-              { "id": "C", "text": "교실의 맨 앞" },
-              { "id": "D", "text": "마을의 골목" }
+              { "id": "A", "text": "어린 날의 윗목" },
+              { "id": "B", "text": "학교 앞마당" },
+              { "id": "C", "text": "시장 한복판" },
+              { "id": "D", "text": "강가 언덕" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -283,14 +285,14 @@
         },
         {
           "stepId": "s17",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 40 }] },
+          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 39 }] },
           "question": {
-            "prompt": "오래된 기억은 화자에게 어떤 여운을 남기나요?",
+            "prompt": "끝부분은 무엇을 떠올리게 하나요?",
             "choices": [
-              { "id": "A", "text": "지금도 뜨거운 그리움" },
-              { "id": "B", "text": "금세 잊힌 장면" },
-              { "id": "C", "text": "아무 감정 없는 기록" },
-              { "id": "D", "text": "새로운 약속" }
+              { "id": "A", "text": "어린 시절의 그리움" },
+              { "id": "B", "text": "시험의 긴장" },
+              { "id": "C", "text": "놀이의 환호" },
+              { "id": "D", "text": "일상의 분주함" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -300,12 +302,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "엄마가 열무를 이고 시장에 간다" },
-        { "id": "c2", "text": "화자는 방에 담겨 숙제를 하며 기다린다" },
-        { "id": "c3", "text": "엄마의 발소리가 들리지 않아 불안이 커진다" },
-        { "id": "c4", "text": "빗소리와 빈방 속에서 화자는 혼자 운다" },
-        { "id": "c5", "text": "먼 옛날의 기억이 지금도 눈시울을 뜨겁게 한다" },
-        { "id": "c6", "text": "그 시절은 유년의 윗목으로 남아 있다" }
+        { "id": "c1", "text": "엄마는 열무를 이고 시장에 간다" },
+        { "id": "c2", "text": "화자는 방에서 엄마를 기다리며 외롭다" },
+        { "id": "c3", "text": "빗소리와 어둠이 방 안을 채운다" },
+        { "id": "c4", "text": "기다림 속에서 불안이 커진다" },
+        { "id": "c5", "text": "어린 시절의 기억이 떠오른다" },
+        { "id": "c6", "text": "시 전체에 그리움이 흐른다" }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -314,50 +316,40 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "찬밥처럼은 무슨 뜻인가요?",
-          "answerRanges": [
-            { "paragraphId": "p2", "start": 3, "end": 7 }
-          ],
+          "prompt": "\"찬밥\"은 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p2", "start": 3, "end": 4 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "타박타박은 무슨 뜻인가요?",
-          "answerRanges": [
-            { "paragraphId": "p3", "start": 21, "end": 25 }
-          ],
+          "prompt": "\"발소리\"는 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p3", "start": 17, "end": 19 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "고요히는 무슨 뜻인가요?",
-          "answerRanges": [
-            { "paragraphId": "p4", "start": 8, "end": 11 }
-          ],
+          "prompt": "\"창틈\"은 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p4", "start": 3, "end": 4 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "훌쩍거리던은 무슨 뜻인가요?",
-          "answerRanges": [
-            { "paragraphId": "p4", "start": 27, "end": 32 }
-          ],
+          "prompt": "\"유년\"은 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p5", "start": 34, "end": 35 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "윗목은 무슨 뜻인가요?",
-          "answerRanges": [
-            { "paragraphId": "p5", "start": 38, "end": 40 }
-          ],
+          "prompt": "\"윗목\"은 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p5", "start": 38, "end": 39 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
