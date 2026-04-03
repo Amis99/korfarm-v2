@@ -419,12 +419,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "문장 부호는 뜻 이해를 돕는 표시다" },
-        { "id": "c2", "text": "글자와 부호의 역할은 다르다" },
-        { "id": "c3", "text": "끝 부호는 문장 성격을 드러낸다" },
-        { "id": "c4", "text": "쉼표는 문장 관계를 또렷이 한다" },
-        { "id": "c5", "text": "따옴표와 괄호는 뜻 경계를 돕는다" },
-        { "id": "c6", "text": "부호는 구조와 뜻을 보고 고른다" }
+        { "id": "c1", "text": "문장 부호는 뜻을 정확히 파악하도록 돕는다" },
+        { "id": "c2", "text": "글자는 내용을 적고 부호는 읽는 법을 알려 준다" },
+        { "id": "c3", "text": "끝 부호는 문장의 성격을 드러낸다" },
+        { "id": "c4", "text": "쉼표는 문장 안의 관계를 분명하게 한다" },
+        { "id": "c5", "text": "따옴표와 괄호는 뜻의 경계를 돕는다" },
+        { "id": "c6", "text": "부호는 구조와 뜻을 함께 보고 고른다" }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -433,43 +433,43 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"문장 부호\"는 무슨 뜻인가요?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 0, "end": 4 }],
+          "prompt": "표시는 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p1", "start": 33, "end": 34 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "\"마침표\"는 무슨 뜻인가요?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 2 }],
+          "prompt": "성격은 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p2", "start": 22, "end": 23 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "\"쉼표\"는 무슨 뜻인가요?",
-          "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 1 }],
+          "prompt": "구분은 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p3", "start": 79, "end": 80 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "\"따옴표\"는 무슨 뜻인가요?",
-          "answerRanges": [{ "paragraphId": "p4", "start": 0, "end": 2 }],
+          "prompt": "보충 설명은 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p3", "start": 53, "end": 57 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "\"괄호\"는 무슨 뜻인가요?",
-          "answerRanges": [{ "paragraphId": "p4", "start": 5, "end": 6 }],
+          "prompt": "안내표지는 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p4", "start": 221, "end": 224 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         }
       ]
     }
