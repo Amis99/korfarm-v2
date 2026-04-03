@@ -116,21 +116,6 @@
           }
         },
         {
-          "stepId": "s6",
-          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 259 } ] },
-          "question": {
-            "prompt": "첫 문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              { "id": "A", "text": "같은 청소 문제를 두고도 배려와 효율이라는 서로 다른 말의 목적이 드러난다" },
-              { "id": "B", "text": "청소 문제는 발표보다 중요하지 않아 다루지 않아도 된다" },
-              { "id": "C", "text": "민아와 준서는 사실상 같은 제안을 하고 있다" },
-              { "id": "D", "text": "역할 조정은 갈등을 더 키우는 방법일 뿐이다" }
-            ],
-            "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
           "stepId": "s7",
           "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 42 } ] },
           "question": {
@@ -206,21 +191,6 @@
           }
         },
         {
-          "stepId": "s12",
-          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 278 } ] },
-          "question": {
-            "prompt": "둘째 문단의 중심 내용은 무엇인가요?",
-            "choices": [
-              { "id": "A", "text": "같은 주제의 말도 배려와 효율처럼 서로 다른 목적을 가질 수 있음을 설명한다" },
-              { "id": "B", "text": "말의 목적은 언제나 하나로 고정된다는 점을 설명한다" },
-              { "id": "C", "text": "청소 문제는 의도보다 말투로만 구별해야 한다고 설명한다" },
-              { "id": "D", "text": "소연이 두 사람의 말을 모두 부정한다고 설명한다" }
-            ],
-            "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
           "stepId": "s13",
           "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 38 } ] },
           "question": {
@@ -284,7 +254,7 @@
           "stepId": "s17",
           "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 295 } ] },
           "question": {
-            "prompt": "셋째 문단의 중심 내용은 무엇인가요?",
+            "prompt": "상대가 중요하게 여기는 점을 파악하면 조정안을 찾을 수 있음을 어떻게 정리하나요?",
             "choices": [
               { "id": "A", "text": "서로의 목적을 파악하면 충돌하던 대화도 조정안으로 이어질 수 있다" },
               { "id": "B", "text": "대화는 결국 한쪽이 양보해야만 끝난다" },
@@ -359,7 +329,7 @@
           "stepId": "s22",
           "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 230 } ] },
           "question": {
-            "prompt": "넷째 문단의 중심 내용은 무엇인가요?",
+            "prompt": "대화의 목적을 읽을 때 무엇을 함께 살펴야 하는지 어떻게 정리하나요?",
             "choices": [
               { "id": "A", "text": "대화는 겉주제보다 말의 목적과 기대 반응까지 함께 읽어야 제대로 비교할 수 있다" },
               { "id": "B", "text": "대화의 목적은 부탁과 설득처럼 종류만 알면 모두 같아진다" },
@@ -395,53 +365,53 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "민아는 친구들의 부담을 줄이려 하고 준서는 일을 제때 끝내려 한다고 대비해 설명한 부분은 어디인가요?",
+          "prompt": "\"목적\"은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 186, "end": 259 }
+            { "paragraphId": "p2", "start": 23, "end": 24 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q2",
-          "prompt": "같은 일을 해결하려 해도 배려와 효율처럼 우선하는 목적이 다를 수 있다고 풀이한 부분은 어디인가요?",
+          "prompt": "\"배려\"는 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 42, "end": 226 }
+            { "paragraphId": "p2", "start": 124, "end": 125 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q3",
-          "prompt": "상대가 중요하게 여기는 점을 파악하자 조정안을 찾을 수 있었다고 설명한 부분은 어디인가요?",
+          "prompt": "\"효율\"은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 149, "end": 295 }
+            { "paragraphId": "p2", "start": 141, "end": 142 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q4",
-          "prompt": "대화를 읽을 때는 그 말을 통해 무엇을 바꾸려 하는지와 어떤 반응을 기대하는지 함께 보아야 한다고 설명한 부분은 어디인가요?",
+          "prompt": "\"의도\"는 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 95, "end": 182 }
+            { "paragraphId": "p2", "start": 261, "end": 262 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q5",
-          "prompt": "같은 상황에서도 서로 다른 목적이 어떻게 드러나는지 분명하게 구별할 수 있다고 정리한 부분은 어디인가요?",
+          "prompt": "\"반응\"은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 182, "end": 230 }
+            { "paragraphId": "p4", "start": 160, "end": 161 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         }
       ]
     }
