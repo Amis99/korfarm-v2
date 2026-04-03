@@ -62,417 +62,1068 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 66 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 66
+              }
+            ]
+          },
           "question": {
             "prompt": "수요곡선은 무엇을 한눈에 보여 주나요?",
             "choices": [
-              { "id": "A", "text": "가격이 달라질 때 사람들이 얼마나 사고 싶어 하는지" },
-              { "id": "B", "text": "상품을 만드는 데 든 비용" },
-              { "id": "C", "text": "소비자의 이름과 나이" },
-              { "id": "D", "text": "시장에 남은 물건의 수" }
+              {
+                "id": "A",
+                "text": "가격 변화에 따른 수요량"
+              },
+              {
+                "id": "B",
+                "text": "생산 비용의 변화"
+              },
+              {
+                "id": "C",
+                "text": "소비자의 키와 몸무게"
+              },
+              {
+                "id": "D",
+                "text": "상품의 포장 방식"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 67, "end": 157 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 67,
+                "end": 157
+              }
+            ]
+          },
           "question": {
-            "prompt": "같은 상품의 가격이 낮아지면 수요량은 어떻게 변하나요?",
+            "prompt": "가격이 낮아지면 수요량은 어떻게 되나요?",
             "choices": [
-              { "id": "A", "text": "더 많이 사려는 경향이 나타난다" },
-              { "id": "B", "text": "더 적게 사려는 경향이 나타난다" },
-              { "id": "C", "text": "늘 같게 유지된다" },
-              { "id": "D", "text": "관계가 없어 진다" }
+              {
+                "id": "A",
+                "text": "대체로 더 많이 사려는 쪽으로 늘어난다"
+              },
+              {
+                "id": "B",
+                "text": "대체로 전혀 변하지 않는다"
+              },
+              {
+                "id": "C",
+                "text": "대체로 반드시 줄어든다"
+              },
+              {
+                "id": "D",
+                "text": "대체로 완전히 사라진다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 158, "end": 196 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 158,
+                "end": 196
+              }
+            ]
+          },
           "question": {
-            "prompt": "수요곡선은 어떤 관계를 그림으로 옮긴 것인가요?",
+            "prompt": "수요량과 가격 사이에는 어떤 관계가 생기나요?",
             "choices": [
-              { "id": "A", "text": "가격과 수요량의 반대 방향 관계" },
-              { "id": "B", "text": "가격과 품질의 같은 방향 관계" },
-              { "id": "C", "text": "생산량과 광고비의 관계" },
-              { "id": "D", "text": "소득과 저축의 관계" }
+              {
+                "id": "A",
+                "text": "대체로 반대 방향의 관계"
+              },
+              {
+                "id": "B",
+                "text": "언제나 같은 방향의 관계"
+              },
+              {
+                "id": "C",
+                "text": "아무 관계도 없는 상태"
+              },
+              {
+                "id": "D",
+                "text": "오직 생산량에만 달린 관계"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 196 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 196
+              }
+            ]
+          },
           "question": {
-            "prompt": "앞의 설명을 가장 잘 정리한 것은 무엇인가요?",
+            "prompt": "이 문단의 중심은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "수요곡선은 가격 변화에 따른 수요량 관계를 그림으로 보여 준다" },
-              { "id": "B", "text": "수요곡선은 생산 계획을 적어 두는 표이다" },
-              { "id": "C", "text": "수요곡선은 가격이 오를수록 수요량도 늘어난다고 설명한다" },
-              { "id": "D", "text": "수요곡선은 소비자 취향만 모아 둔 목록이다" }
+              {
+                "id": "A",
+                "text": "수요곡선은 가격과 수요량의 반대 관계를 그림으로 옮긴 것이다"
+              },
+              {
+                "id": "B",
+                "text": "수요곡선은 생산자의 이익만 보여 준다"
+              },
+              {
+                "id": "C",
+                "text": "수요곡선은 가격을 무시한다"
+              },
+              {
+                "id": "D",
+                "text": "수요곡선은 상품의 종류만 정리한다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 53 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 53
+              }
+            ]
+          },
           "question": {
-            "prompt": "수요곡선을 그리기 전에 먼저 무엇이 필요하나요?",
+            "prompt": "수요곡선을 그리기 위해 먼저 무엇이 필요한가요?",
             "choices": [
-              { "id": "A", "text": "여러 가격에 따른 수요량을 적은 수요표" },
-              { "id": "B", "text": "광고 문구를 모은 목록" },
-              { "id": "C", "text": "상품의 색깔을 정리한 자료" },
-              { "id": "D", "text": "생산자 이름을 적은 명단" }
+              {
+                "id": "A",
+                "text": "여러 가격에서 수요량을 정리한 수요표"
+              },
+              {
+                "id": "B",
+                "text": "상품을 진열한 사진"
+              },
+              {
+                "id": "C",
+                "text": "소비자의 얼굴 표정"
+              },
+              {
+                "id": "D",
+                "text": "판매자의 일기장"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 54, "end": 138 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 54,
+                "end": 138
+              }
+            ]
+          },
           "question": {
-            "prompt": "표로 정리한 값은 무엇으로 바꾸어 볼 수 있나요?",
+            "prompt": "수요표에 적힌 값은 그래프에서 무엇으로 바뀌나요?",
             "choices": [
-              { "id": "A", "text": "점" },
-              { "id": "B", "text": "막대" },
-              { "id": "C", "text": "원" },
-              { "id": "D", "text": "화살표" }
+              {
+                "id": "A",
+                "text": "점으로 찍힌다"
+              },
+              {
+                "id": "B",
+                "text": "바로 선물로 바뀐다"
+              },
+              {
+                "id": "C",
+                "text": "자동으로 가격표가 된다"
+              },
+              {
+                "id": "D",
+                "text": "아예 지워진다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 139, "end": 189 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 139,
+                "end": 189
+              }
+            ]
+          },
           "question": {
             "prompt": "점들을 이어 보면 어떤 선이 만들어지나요?",
             "choices": [
-              { "id": "A", "text": "가격이 내려갈수록 수요량이 늘어나는 선" },
-              { "id": "B", "text": "가격이 올라갈수록 수요량이 늘어나는 선" },
-              { "id": "C", "text": "가격과 수요량이 관계없는 선" },
-              { "id": "D", "text": "항상 수평인 선" }
+              {
+                "id": "A",
+                "text": "가격이 내려갈수록 수요량이 늘어나는 선"
+              },
+              {
+                "id": "B",
+                "text": "가격이 오를수록 수요량이 늘어나는 선"
+              },
+              {
+                "id": "C",
+                "text": "수요량과 무관한 수평선"
+              },
+              {
+                "id": "D",
+                "text": "무작위로 꺾이는 선"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 189 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 189
+              }
+            ]
+          },
           "question": {
-            "prompt": "두 번째 설명을 가장 잘 정리한 것은 무엇인가요?",
+            "prompt": "이 문단의 중심은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "수요표를 바탕으로 점을 찍고 이어서 수요곡선을 만든다" },
-              { "id": "B", "text": "수요곡선은 숫자만 적어 두는 표와 같다" },
-              { "id": "C", "text": "점들은 아무렇게나 이어도 상관없다" },
-              { "id": "D", "text": "수요량은 그래프와 무관하다" }
+              {
+                "id": "A",
+                "text": "수요표의 점들을 이어 수요곡선을 그린다"
+              },
+              {
+                "id": "B",
+                "text": "수요표는 장식용 표에 불과하다"
+              },
+              {
+                "id": "C",
+                "text": "점은 없어도 곡선이 완성된다"
+              },
+              {
+                "id": "D",
+                "text": "가격과 수요량은 따로 볼 필요가 없다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 34 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 34
+              }
+            ]
+          },
           "question": {
-            "prompt": "그래프에서 가로축과 세로축에는 각각 무엇을 놓나요?",
+            "prompt": "그래프에서 가로축에는 무엇을 놓나요?",
             "choices": [
-              { "id": "A", "text": "가로축에 수요량, 세로축에 가격" },
-              { "id": "B", "text": "가로축에 가격, 세로축에 수요량" },
-              { "id": "C", "text": "가로축에 생산비, 세로축에 수입" },
-              { "id": "D", "text": "가로축에 광고량, 세로축에 소비자 수" }
+              {
+                "id": "A",
+                "text": "수요량"
+              },
+              {
+                "id": "B",
+                "text": "가격"
+              },
+              {
+                "id": "C",
+                "text": "브랜드명"
+              },
+              {
+                "id": "D",
+                "text": "광고 문구"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 35, "end": 117 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 35,
+                "end": 117
+              }
+            ]
+          },
           "question": {
-            "prompt": "수요곡선이 오른쪽 아래로 기울어지는 까닭은 무엇인가요?",
+            "prompt": "세로축에는 무엇을 놓나요?",
             "choices": [
-              { "id": "A", "text": "가격이 낮을수록 더 많은 사람이 사고 더 많이 사기 때문이다" },
-              { "id": "B", "text": "가격이 높을수록 더 많은 사람이 사기 때문이다" },
-              { "id": "C", "text": "가격과 선택은 전혀 연결되지 않기 때문이다" },
-              { "id": "D", "text": "수요량이 늘수록 가격이 반드시 오르기 때문이다" }
+              {
+                "id": "A",
+                "text": "가격"
+              },
+              {
+                "id": "B",
+                "text": "수요량"
+              },
+              {
+                "id": "C",
+                "text": "유행의 정도"
+              },
+              {
+                "id": "D",
+                "text": "소비자의 수"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 118, "end": 171 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 118,
+                "end": 171
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 방향을 무엇이라고 부르나요?",
+            "prompt": "수요곡선이 오른쪽 아래로 기울어지는 까닭은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "수요의 법칙" },
-              { "id": "B", "text": "공급의 예외" },
-              { "id": "C", "text": "가격 고정 원리" },
-              { "id": "D", "text": "균형의 반대" }
+              {
+                "id": "A",
+                "text": "가격이 낮을수록 더 많은 소비자가 선택하기 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "가격이 낮을수록 모든 상품이 사라지기 때문이다"
+              },
+              {
+                "id": "C",
+                "text": "가격이 높을수록 더 많은 소비자가 선택하기 때문이다"
+              },
+              {
+                "id": "D",
+                "text": "가격과 수요량이 아무 관련이 없기 때문이다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 171 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 171
+              }
+            ]
+          },
           "question": {
-            "prompt": "세 번째 설명을 가장 잘 정리한 것은 무엇인가요?",
+            "prompt": "이 방향을 무엇이라고 부르나요?",
             "choices": [
-              { "id": "A", "text": "그래프의 축과 기울기는 수요의 법칙을 시각적으로 보여 준다" },
-              { "id": "B", "text": "그래프의 축은 시장에서 가장 중요하지 않다" },
-              { "id": "C", "text": "수요곡선은 오른쪽 위로 기울어져야만 한다" },
-              { "id": "D", "text": "수요의 법칙은 그래프와 관계가 없다" }
+              {
+                "id": "A",
+                "text": "수요의 법칙"
+              },
+              {
+                "id": "B",
+                "text": "공급의 법칙"
+              },
+              {
+                "id": "C",
+                "text": "이익의 법칙"
+              },
+              {
+                "id": "D",
+                "text": "소득의 법칙"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s13",
-          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 56 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 56
+              }
+            ]
+          },
           "question": {
-            "prompt": "가격만 변할 때 점이 움직이는 현상은 무엇이라고 하나요?",
+            "prompt": "이 문단의 중심은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "수요량의 변화" },
-              { "id": "B", "text": "수요의 소멸" },
-              { "id": "C", "text": "공급의 변화" },
-              { "id": "D", "text": "가격의 고정" }
+              {
+                "id": "A",
+                "text": "수요의 법칙이 수요곡선의 방향으로 드러난다"
+              },
+              {
+                "id": "B",
+                "text": "그래프의 축 이름을 외우는 것이 핵심이다"
+              },
+              {
+                "id": "C",
+                "text": "오른쪽 아래 방향은 우연에 불과하다"
+              },
+              {
+                "id": "D",
+                "text": "가격과 수요량의 관계는 그림으로 나타낼 수 없다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s14",
-          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 57, "end": 124 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 57,
+                "end": 124
+              }
+            ]
+          },
           "question": {
-            "prompt": "소득이나 유행이나 대체재 가격이 바뀌면 무엇이 달라질 수 있나요?",
+            "prompt": "가격만 변하고 다른 조건이 그대로일 때 점이 움직이는 현상은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "사람들의 선택 자체" },
-              { "id": "B", "text": "가격표만" },
-              { "id": "C", "text": "상품 이름만" },
-              { "id": "D", "text": "그래프의 축 방향만" }
+              {
+                "id": "A",
+                "text": "수요량의 변화"
+              },
+              {
+                "id": "B",
+                "text": "수요의 소멸"
+              },
+              {
+                "id": "C",
+                "text": "공급의 증가"
+              },
+              {
+                "id": "D",
+                "text": "시장 균형의 종료"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s15",
-          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 125, "end": 190 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 125,
+                "end": 190
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 경우에는 곡선 위에서 움직이나요, 아니면 곡선 전체가 이동하나요?",
+            "prompt": "소득이나 유행이나 대체재 가격이 바뀌면 무엇이 달라질 수 있나요?",
             "choices": [
-              { "id": "A", "text": "곡선 전체가 이동한다" },
-              { "id": "B", "text": "곡선 위의 점만 움직인다" },
-              { "id": "C", "text": "아무 변화도 없다" },
-              { "id": "D", "text": "항상 왼쪽으로만 간다" }
+              {
+                "id": "A",
+                "text": "사람들의 선택 자체"
+              },
+              {
+                "id": "B",
+                "text": "오직 상품의 색깔"
+              },
+              {
+                "id": "C",
+                "text": "가로축의 이름"
+              },
+              {
+                "id": "D",
+                "text": "그래프의 종이 크기"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s16",
-          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 190 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 190
+              }
+            ]
+          },
           "question": {
-            "prompt": "네 번째 설명을 가장 잘 정리한 것은 무엇인가요?",
+            "prompt": "이 경우에는 곡선 위에서 움직이나요, 아니면 곡선 전체가 이동하나요?",
             "choices": [
-              { "id": "A", "text": "가격만 바뀌면 점이 움직이고 다른 조건이 바뀌면 곡선 전체가 이동한다" },
-              { "id": "B", "text": "가격과 다른 조건은 모두 같은 방식으로 바뀐다" },
-              { "id": "C", "text": "곡선 위의 이동과 곡선 이동은 구별할 필요가 없다" },
-              { "id": "D", "text": "수요의 변화는 언제나 가격만으로 생긴다" }
+              {
+                "id": "A",
+                "text": "곡선 전체가 이동한다"
+              },
+              {
+                "id": "B",
+                "text": "아무 것도 움직이지 않는다"
+              },
+              {
+                "id": "C",
+                "text": "점만 하나 사라진다"
+              },
+              {
+                "id": "D",
+                "text": "세로축만 바뀐다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s17",
-          "highlight": { "ranges": [ { "paragraphId": "p5", "start": 0, "end": 91 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 91
+              }
+            ]
+          },
           "question": {
-            "prompt": "운동화 가격이 그대로일 때 특정 브랜드가 유행하면 수요곡선은 어느 방향으로 이동하나요?",
+            "prompt": "이 문단의 중심은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "오른쪽" },
-              { "id": "B", "text": "왼쪽" },
-              { "id": "C", "text": "위쪽" },
-              { "id": "D", "text": "아래쪽" }
+              {
+                "id": "A",
+                "text": "가격 변화와 다른 조건 변화를 구별해야 한다"
+              },
+              {
+                "id": "B",
+                "text": "모든 변화는 같은 방식으로 읽는다"
+              },
+              {
+                "id": "C",
+                "text": "곡선 이동은 중요하지 않다"
+              },
+              {
+                "id": "D",
+                "text": "수요량 변화와 수요 변화는 같은 뜻이다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s18",
-          "highlight": { "ranges": [ { "paragraphId": "p5", "start": 92, "end": 157 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 92,
+                "end": 157
+              }
+            ]
+          },
           "question": {
-            "prompt": "대체 상품이 더 싸지고 품질도 좋아지면 원래 상품의 수요곡선은 어느 방향으로 옮겨 가나요?",
+            "prompt": "운동화 가격이 그대로일 때 특정 브랜드가 유행하면 수요곡선은 어느 방향으로 이동하나요?",
             "choices": [
-              { "id": "A", "text": "왼쪽" },
-              { "id": "B", "text": "오른쪽" },
-              { "id": "C", "text": "위쪽" },
-              { "id": "D", "text": "아래쪽" }
+              {
+                "id": "A",
+                "text": "오른쪽으로 이동한다"
+              },
+              {
+                "id": "B",
+                "text": "왼쪽으로 이동한다"
+              },
+              {
+                "id": "C",
+                "text": "위아래로만 움직인다"
+              },
+              {
+                "id": "D",
+                "text": "전혀 움직이지 않는다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s19",
-          "highlight": { "ranges": [ { "paragraphId": "p5", "start": 158, "end": 213 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 158,
+                "end": 213
+              }
+            ]
+          },
           "question": {
-            "prompt": "경제 문제를 볼 때 무엇을 섞지 않고 구분해야 하나요?",
+            "prompt": "대체 상품이 더 싸지고 품질도 좋아지면 원래 상품의 수요곡선은 어느 방향으로 옮겨 가나요?",
             "choices": [
-              { "id": "A", "text": "가격 변화와 다른 조건의 변화" },
-              { "id": "B", "text": "수요량과 상품 이름" },
-              { "id": "C", "text": "축의 색과 글씨체" },
-              { "id": "D", "text": "점의 위치와 선의 굵기" }
+              {
+                "id": "A",
+                "text": "왼쪽으로 옮겨 간다"
+              },
+              {
+                "id": "B",
+                "text": "오른쪽으로 옮겨 간다"
+              },
+              {
+                "id": "C",
+                "text": "아래로만 내려간다"
+              },
+              {
+                "id": "D",
+                "text": "움직이지 않는다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s20",
-          "highlight": { "ranges": [ { "paragraphId": "p5", "start": 0, "end": 213 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 213
+              }
+            ]
+          },
           "question": {
-            "prompt": "다섯 번째 설명을 가장 잘 정리한 것은 무엇인가요?",
+            "prompt": "경제 문제를 볼 때 무엇을 섞지 않고 구분해야 하나요?",
             "choices": [
-              { "id": "A", "text": "가격 변화와 다른 조건의 변화를 구분해야 수요곡선의 이동을 정확히 읽을 수 있다" },
-              { "id": "B", "text": "유행은 수요곡선과 전혀 관계가 없다" },
-              { "id": "C", "text": "대체재가 생겨도 수요곡선은 움직이지 않는다" },
-              { "id": "D", "text": "경제 문제는 하나만 보고 판단해도 된다" }
+              {
+                "id": "A",
+                "text": "가격 변화와 다른 조건의 변화"
+              },
+              {
+                "id": "B",
+                "text": "소비자와 생산자의 이름"
+              },
+              {
+                "id": "C",
+                "text": "표와 그래프의 색깔"
+              },
+              {
+                "id": "D",
+                "text": "상품의 크기와 포장지"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s21",
-          "highlight": { "ranges": [ { "paragraphId": "p6", "start": 0, "end": 68 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 68
+              }
+            ]
+          },
           "question": {
-            "prompt": "수요곡선은 단순히 무엇을 외우는 내용이 아니라고 하나요?",
+            "prompt": "이 문단의 중심은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "선 하나" },
-              { "id": "B", "text": "숫자표" },
-              { "id": "C", "text": "광고 문구" },
-              { "id": "D", "text": "판매 전략" }
+              {
+                "id": "A",
+                "text": "유행과 대체재가 수요곡선을 이동시키며 구분해서 읽는 일이 중요하다"
+              },
+              {
+                "id": "B",
+                "text": "브랜드 유행은 가격과 아무 관련이 없다"
+              },
+              {
+                "id": "C",
+                "text": "대체재가 싸져도 수요는 늘지 않는다"
+              },
+              {
+                "id": "D",
+                "text": "경제 문제는 직감만으로 읽으면 된다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s22",
-          "highlight": { "ranges": [ { "paragraphId": "p6", "start": 69, "end": 164 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 69,
+                "end": 164
+              }
+            ]
+          },
           "question": {
-            "prompt": "수요표를 점으로 바꾸고 곡선을 살피면 무엇을 더 분명하게 읽을 수 있나요?",
+            "prompt": "수요곡선은 단순히 무엇을 외우는 내용이 아니라고 하나요?",
             "choices": [
-              { "id": "A", "text": "시장에서 일어나는 변화" },
-              { "id": "B", "text": "상품의 포장지" },
-              { "id": "C", "text": "소비자의 이름" },
-              { "id": "D", "text": "가격의 색깔" }
+              {
+                "id": "A",
+                "text": "선 하나"
+              },
+              {
+                "id": "B",
+                "text": "숫자 하나"
+              },
+              {
+                "id": "C",
+                "text": "상품 이름"
+              },
+              {
+                "id": "D",
+                "text": "가격표"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s23",
-          "highlight": { "ranges": [ { "paragraphId": "p6", "start": 165, "end": 208 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 165,
+                "end": 208
+              }
+            ]
+          },
           "question": {
-            "prompt": "수요곡선의 산출과 해석은 이후 무엇을 이해하는 밑바탕이 되나요?",
+            "prompt": "수요표를 점으로 바꾸고 곡선을 살피면 무엇을 더 분명하게 읽을 수 있나요?",
             "choices": [
-              { "id": "A", "text": "공급곡선과 시장 균형" },
-              { "id": "B", "text": "광고의 문법" },
-              { "id": "C", "text": "노래 가사의 뜻" },
-              { "id": "D", "text": "환율의 역사" }
+              {
+                "id": "A",
+                "text": "시장 변화"
+              },
+              {
+                "id": "B",
+                "text": "날씨 예보"
+              },
+              {
+                "id": "C",
+                "text": "교실 규칙"
+              },
+              {
+                "id": "D",
+                "text": "이름표 정리"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s24",
-          "highlight": { "ranges": [ { "paragraphId": "p6", "start": 0, "end": 208 } ] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 208
+              }
+            ]
+          },
           "question": {
-            "prompt": "여섯 번째 설명을 가장 잘 정리한 것은 무엇인가요?",
+            "prompt": "수요곡선의 산출과 해석은 이후 무엇을 이해하는 밑바탕이 되나요?",
             "choices": [
-              { "id": "A", "text": "수요곡선은 가격과 선택의 관계를 구조적으로 이해하게 해 주는 개념이다" },
-              { "id": "B", "text": "수요곡선은 외워 두기만 하면 되는 공식이다" },
-              { "id": "C", "text": "수요곡선은 시장과는 무관한 선이다" },
-              { "id": "D", "text": "수요곡선은 공급곡선보다 덜 중요하다" }
+              {
+                "id": "A",
+                "text": "공급곡선과 시장 균형"
+              },
+              {
+                "id": "B",
+                "text": "달력과 요일"
+              },
+              {
+                "id": "C",
+                "text": "상품의 포장 방식"
+              },
+              {
+                "id": "D",
+                "text": "소비자의 취미"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "수요곡선은 가격 변화에 따른 수요량의 흐름을 보여 준다" },
-        { "id": "c2", "text": "수요표를 점으로 찍어 수요곡선을 그린다" },
-        { "id": "c3", "text": "가격이 낮을수록 수요량이 늘어나는 방향이다" },
-        { "id": "c4", "text": "가격만 변하면 수요량의 변화이다" },
-        { "id": "c5", "text": "다른 조건이 변하면 수요곡선이 이동한다" },
-        { "id": "c6", "text": "수요곡선을 통해 시장 변화를 읽는다" }
+        {
+          "id": "c1",
+          "text": "수요곡선은 가격과 수요량의 관계를 한눈에 보여 준다"
+        },
+        {
+          "id": "c2",
+          "text": "수요표의 점들을 이어 수요곡선을 그린다"
+        },
+        {
+          "id": "c3",
+          "text": "수요의 법칙은 가격이 낮을수록 더 많이 선택한다는 뜻이다"
+        },
+        {
+          "id": "c4",
+          "text": "가격만 변하면 곡선 위에서 움직이고 다른 조건이 변하면 곡선이 이동한다"
+        },
+        {
+          "id": "c5",
+          "text": "유행과 대체재의 변화는 수요곡선을 오른쪽이나 왼쪽으로 옮긴다"
+        },
+        {
+          "id": "c6",
+          "text": "수요곡선은 공급곡선과 시장 균형을 이해하는 바탕이 된다"
+        }
       ],
-      "correctOrder": [ "c1", "c2", "c3", "c4", "c5", "c6" ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "수요곡선이 어떤 재화의 가격이 달라질 때 사람들이 얼마나 사고 싶어 하는지를 보여 주는 선이라고 설명한 부분은 어디인가요?",
-          "answerRanges": [ { "paragraphId": "p1", "start": 0, "end": 196 } ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "가격 변화와 수요량의 관계를 그림으로 옮긴 설명은 어디에 드러나나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 196
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "수요표를 점으로 찍고 이어서 수요곡선을 그린다고 설명한 부분은 어디인가요?",
-          "answerRanges": [ { "paragraphId": "p2", "start": 0, "end": 189 } ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "수요표를 점으로 찍고 이어 수요곡선을 그리는 과정은 어디에 드러나나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 189
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "그래프의 축과 수요의 법칙을 설명한 부분은 어디인가요?",
-          "answerRanges": [ { "paragraphId": "p3", "start": 0, "end": 171 } ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "수요의 법칙과 수요량의 변화, 수요의 변화가 함께 드러나는 대목은 어디에 드러나나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 171
+            },
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 190
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q4",
-          "prompt": "가격만 변할 때와 다른 조건이 변할 때를 구별해 설명한 부분은 어디인가요?",
-          "answerRanges": [ { "paragraphId": "p4", "start": 0, "end": 190 } ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "유행과 대체재의 변화가 수요곡선을 오른쪽이나 왼쪽으로 옮기는 내용은 어디에 드러나나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 213
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "수요곡선이 단순히 외우는 선이 아니라 가격과 선택의 관계를 이해하게 해 준다고 정리한 부분은 어디인가요?",
-          "answerRanges": [ { "paragraphId": "p6", "start": 0, "end": 208 } ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "수요곡선이 가격과 선택의 관계를 구조적으로 이해하게 해 준다는 생각은 어디에 드러나나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 208
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         }
