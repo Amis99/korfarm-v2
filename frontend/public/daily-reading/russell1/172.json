@@ -134,7 +134,7 @@
           "stepId": "s7",
           "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 224 }] },
           "question": {
-            "prompt": "첫 문단의 핵심은 무엇인가요?",
+            "prompt": "안내와 요청은 어떻게 시작되나요?",
             "choices": [
               { "id": "A", "text": "준호의 요청과 민서의 일정 확인이 맞물리며 대화의 조건이 마련된다" },
               { "id": "B", "text": "민서는 부탁을 듣자마자 아무 조건 없이 수락한다" },
@@ -239,7 +239,7 @@
           "stepId": "s14",
           "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 252 }] },
           "question": {
-            "prompt": "둘째 문단의 핵심은 무엇인가요?",
+            "prompt": "요청 이유를 덧붙이면 무엇이 분명해지나요?",
             "choices": [
               { "id": "A", "text": "요청은 이유와 조건을 함께 설명할 때 상대가 더 정확히 이해할 수 있다" },
               { "id": "B", "text": "요청은 간단할수록 좋으므로 이유를 덧붙이면 안 된다" },
@@ -374,7 +374,7 @@
           "stepId": "s23",
           "highlight": { "ranges": [{ "paragraphId": "p3", "start": 226, "end": 271 }] },
           "question": {
-            "prompt": "이 대화는 무엇을 보여 주나요?",
+            "prompt": "요청을 조정하는 말하기는 무엇을 보여 주나요?",
             "choices": [
               { "id": "A", "text": "상대 사정을 듣고 요청 내용을 알맞게 바꾸는 모습으로 정리한다" },
               { "id": "B", "text": "처음 요청을 그대로 밀어붙이는 모습으로 정리한다" },
@@ -389,7 +389,7 @@
           "stepId": "s24",
           "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 271 }] },
           "question": {
-            "prompt": "셋째 문단의 핵심은 무엇인가요?",
+            "prompt": "가능한 범위를 밝히면 무엇이 좋아지나요?",
             "choices": [
               { "id": "A", "text": "가능한 범위를 분명히 밝히고 요청을 조정하며 협의하는 대화가 이루어진다" },
               { "id": "B", "text": "민서는 끝까지 모호한 말만 하고 준호는 듣지 않는다" },
@@ -464,7 +464,7 @@
           "stepId": "s29",
           "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 274 }] },
           "question": {
-            "prompt": "넷째 문단의 핵심은 무엇인가요?",
+            "prompt": "글 안내에서는 무엇을 더 분명히 적어야 하나요?",
             "choices": [
               { "id": "A", "text": "안내와 요청은 매체에 맞게 정보를 분명히 제시할 때 더 정확하게 전달된다" },
               { "id": "B", "text": "글로 쓸 때는 시간과 장소를 일부러 빼는 것이 좋다" },
@@ -479,12 +479,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "민서는 일정을 먼저 확인한다" },
+        { "id": "c1", "text": "민서는 안내문을 읽고 마감을 확인한다" },
         { "id": "c2", "text": "준호는 한 시간 도움을 요청한다" },
-        { "id": "c3", "text": "준호는 요청 이유를 설명한다" },
-        { "id": "c4", "text": "민서는 가능한 시간을 밝힌다" },
-        { "id": "c5", "text": "준호는 요청을 조정해 다시 안내한다" },
-        { "id": "c6", "text": "글 안내는 시간과 조건을 더 분명히 적는다" }
+        { "id": "c3", "text": "준호는 요청 이유를 덧붙인다" },
+        { "id": "c4", "text": "민서는 가능한 시간을 구체적으로 밝힌다" },
+        { "id": "c5", "text": "준호는 요청 내용을 조정해 다시 안내한다" },
+        { "id": "c6", "text": "글 안내는 시간과 조건을 분명히 적는다" }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -493,40 +493,40 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "한 시간 도움을 요청한 부분은 어디인가요?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 82, "end": 155 }],
+          "prompt": "안내문은 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p1", "start": 21, "end": 24 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "일정을 확인하고 이유를 덧붙인 부분은 어디인가요?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 222 }],
+          "prompt": "이유는 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p2", "start": 81, "end": 83 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "가능한 시간을 밝히고 일을 조정한 부분은 어디인가요?",
-          "answerRanges": [{ "paragraphId": "p3", "start": 49, "end": 226 }],
+          "prompt": "범위는 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p3", "start": 35, "end": 37 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "채팅방에 더 분명히 적은 부분은 어디인가요?",
-          "answerRanges": [{ "paragraphId": "p4", "start": 29, "end": 192 }],
+          "prompt": "조정은 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p3", "start": 147, "end": 149 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "이유와 조건을 함께 제시해야 한다고 정리한 부분은 어디인가요?",
-          "answerRanges": [{ "paragraphId": "p4", "start": 192, "end": 274 }],
+          "prompt": "조건은 무슨 뜻인가요?",
+          "answerRanges": [{ "paragraphId": "p4", "start": 249, "end": 251 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
