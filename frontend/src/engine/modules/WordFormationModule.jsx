@@ -287,7 +287,7 @@ function WordFormationModule({ content }) {
       case "COUNTING":
         return {
           title: `${wordIdx + 1}번 단어 — 1단계`,
-          prompt: `'${word.word}'의 형태소 개수는? (어미 제외)`,
+          prompt: `'${word.word}'의 형태소 개수는?`,
           choices: (word.countChoices || []).map((n) => ({ id: String(n), text: `${n}개` })),
           onSelect: handleCount,
           key: `${word.id}-count`,
