@@ -215,7 +215,7 @@
               {
                 "paragraphId": "p1",
                 "start": 239,
-                "end": 288
+                "end": 287
               }
             ]
           },
@@ -254,12 +254,12 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-              "end": 288
+              "end": 287
               }
             ]
           },
           "question": {
-            "prompt": "첫 문단의 중심 생각은 무엇인가요?",
+          "prompt": "직접 원인과 배경 원인은 어떤 관점에서 사건을 보게 하나요?",
             "choices": [
               {
                 "id": "A",
@@ -449,7 +449,7 @@
               {
                 "paragraphId": "p2",
                 "start": 222,
-                "end": 296
+                "end": 295
               }
             ]
           },
@@ -488,12 +488,12 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-              "end": 296
+              "end": 295
               }
             ]
           },
           "question": {
-            "prompt": "둘째 문단의 중심 생각은 무엇인가요?",
+          "prompt": "직접 원인과 배경 원인을 함께 보면 무엇이 드러나나요?",
             "choices": [
               {
                 "id": "A",
@@ -683,12 +683,12 @@
               {
                 "paragraphId": "p3",
                 "start": 207,
-                "end": 262
+                "end": 261
               }
             ]
           },
           "question": {
-            "prompt": "셋째 문단은 결과를 어떻게 보라고 하나요?",
+          "prompt": "결과를 읽을 때 무엇을 나누어 보아야 하나요?",
             "choices": [
               {
                 "id": "A",
@@ -722,12 +722,12 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-              "end": 262
+              "end": 261
               }
             ]
           },
           "question": {
-            "prompt": "셋째 문단의 중심 생각은 무엇인가요?",
+          "prompt": "결과를 함께 읽으면 무엇을 구별할 수 있나요?",
             "choices": [
               {
                 "id": "A",
@@ -878,7 +878,7 @@
               {
                 "paragraphId": "p4",
                 "start": 210,
-                "end": 285
+                "end": 284
               }
             ]
           },
@@ -917,12 +917,12 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-              "end": 285
+              "end": 284
               }
             ]
           },
           "question": {
-            "prompt": "넷째 문단의 중심 생각은 무엇인가요?",
+          "prompt": "직접 원인과 배경 원인을 함께 이해하면 무엇이 더 분명해지나요?",
             "choices": [
               {
                 "id": "A",
@@ -992,12 +992,17 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "첫 문단은 무엇을 설명하나요?",
+          "prompt": "\"계기\"는 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 288
+              "start": 109,
+              "end": 111
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 65
             }
           ],
           "scoring": {
@@ -1005,16 +1010,26 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q2",
-          "prompt": "둘째 문단은 직접 원인과 배경 원인을 어떻게 구분하나요?",
+          "prompt": "\"조건\"은 무슨 뜻인가요?",
           "answerRanges": [
             {
+              "paragraphId": "p1",
+              "start": 119,
+              "end": 121
+            },
+            {
+              "paragraphId": "p1",
+              "start": 272,
+              "end": 274
+            },
+            {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 296
+              "start": 100,
+              "end": 102
             }
           ],
           "scoring": {
@@ -1022,16 +1037,41 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q3",
-          "prompt": "셋째 문단은 결과를 어떻게 읽으라고 하나요?",
+          "prompt": "\"결과\"는 무슨 뜻인가요?",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 262
+              "end": 2
+            },
+            {
+              "paragraphId": "p3",
+              "start": 36,
+              "end": 38
+            },
+            {
+              "paragraphId": "p3",
+              "start": 49,
+              "end": 51
+            },
+            {
+              "paragraphId": "p3",
+              "start": 142,
+              "end": 144
+            },
+            {
+              "paragraphId": "p4",
+              "start": 67,
+              "end": 69
+            },
+            {
+              "paragraphId": "p4",
+              "start": 92,
+              "end": 94
             }
           ],
           "scoring": {
@@ -1039,16 +1079,26 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q4",
-          "prompt": "넷째 문단은 무엇을 알게 해 주나요?",
+          "prompt": "\"변화\"는 무슨 뜻인가요?",
           "answerRanges": [
             {
+              "paragraphId": "p3",
+              "start": 122,
+              "end": 124
+            },
+            {
+              "paragraphId": "p3",
+              "start": 180,
+              "end": 182
+            },
+            {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 285
+              "start": 247,
+              "end": 249
             }
           ],
           "scoring": {
@@ -1056,24 +1106,29 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         },
         {
           "id": "q5",
-          "prompt": "직접 원인과 배경 원인을 나누어 보는 읽기는 무엇의 핵심 도구인가요?",
+          "prompt": "\"구조\"는 무슨 뜻인가요?",
           "answerRanges": [
-              {
-                "paragraphId": "p4",
-                "start": 210,
-                "end": 284
-              }
+            {
+              "paragraphId": "p3",
+              "start": 108,
+              "end": 110
+            },
+            {
+              "paragraphId": "p4",
+              "start": 251,
+              "end": 253
+            }
           ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
         }
       ]
     }
