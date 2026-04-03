@@ -46,10 +46,23 @@ class AdminQuestionBankController(
         @RequestParam(required = false) area: String?,
         @RequestParam(required = false) sub_area: String?,
         @RequestParam(required = false) source_type: String?,
-        @RequestParam(required = false) status: String?
+        @RequestParam(required = false) status: String?,
+        @RequestParam(required = false) title: String?,
+        @RequestParam(required = false) search: String?,
+        @RequestParam(required = false) review_status: String?
     ): ApiResponse<List<RecordSummaryView>> {
         requireAdmin()
-        val data = questionBankService.listRecords(area, sub_area, source_type, status)
+        val data = questionBankService.listRecords(area, sub_area, source_type, status, title, search, review_status)
+        return ApiResponse(success = true, data = data)
+    }
+
+    @GetMapping("/records/grouped-by-title")
+    fun groupedByTitle(
+        @RequestParam(required = false) area: String?,
+        @RequestParam(required = false) sub_area: String?
+    ): ApiResponse<List<Map<String, Any?>>> {
+        requireAdmin()
+        val data = questionBankService.getRecordsGroupedByTitle(area, sub_area)
         return ApiResponse(success = true, data = data)
     }
 

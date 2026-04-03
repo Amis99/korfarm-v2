@@ -106,11 +106,29 @@ class QuestionBankService(
 
     // ── 레코드 CRUD ──
 
-    fun listRecords(area: String?, subArea: String?, sourceType: String?, status: String?): List<RecordSummaryView> {
-        val records = if (area == null && subArea == null && sourceType == null && status == null) {
+    fun listRecords(
+        area: String?, subArea: String?, sourceType: String?, status: String?,
+        title: String? = null, search: String? = null, reviewStatus: String? = null
+    ): List<RecordSummaryView> {
+        var records = if (area == null && subArea == null && sourceType == null && status == null) {
             recordRepo.findAllActive()
         } else {
             recordRepo.findFiltered(area, subArea, sourceType, status)
+        }
+        // 추가 필터
+        if (!title.isNullOrBlank()) {
+            records = records.filter { it.title?.contains(title, ignoreCase = true) == true }
+        }
+        if (!search.isNullOrBlank()) {
+            val q = search.lowercase()
+            records = records.filter {
+                it.title?.lowercase()?.contains(q) == true ||
+                it.author?.lowercase()?.contains(q) == true ||
+                it.recordCode.lowercase().contains(q)
+            }
+        }
+        if (!reviewStatus.isNullOrBlank()) {
+            records = records.filter { it.reviewStatus == reviewStatus }
         }
         return records.map { r ->
             val qCount = questionRepo.countByRecordId(r.id)
@@ -134,6 +152,29 @@ class QuestionBankService(
                 updated_at = r.updatedAt
             )
         }
+    }
+
+    fun getRecordsGroupedByTitle(area: String?, subArea: String?): List<Map<String, Any?>> {
+        val records = if (area == null && subArea == null) {
+            recordRepo.findAllActive()
+        } else {
+            recordRepo.findFiltered(area, subArea, null, null)
+        }
+        return records
+            .filter { !it.title.isNullOrBlank() }
+            .groupBy { it.title!! }
+            .map { (title, recs) ->
+                val totalQuestions = recs.sumOf { questionRepo.countByRecordId(it.id) }
+                mapOf(
+                    "title" to title,
+                    "author" to recs.firstNotNullOfOrNull { it.author },
+                    "area" to recs.firstNotNullOfOrNull { it.area },
+                    "record_count" to recs.size,
+                    "question_count" to totalQuestions,
+                    "record_ids" to recs.map { it.id }
+                )
+            }
+            .sortedBy { it["title"] as? String }
     }
 
     fun getRecordDetail(id: String): RecordDetailView {
@@ -289,7 +330,39 @@ class QuestionBankService(
         var imported = 0
         var failed = 0
 
+        // 작품별 분리: passages의 title이 여러 개이면 각각 별도 record로 분리
+        val expandedRecords = mutableListOf<Pair<Int, QbImportRecord>>()
         req.records.forEachIndexed { idx, rec ->
+            val passages = rec.passages ?: emptyList()
+            val uniqueTitles = passages.mapNotNull { it.title?.trim() }.filter { it.isNotEmpty() }.distinct()
+            if (uniqueTitles.size > 1) {
+                // 작품별 분리
+                uniqueTitles.forEachIndexed { tIdx, pTitle ->
+                    val matchingPassages = passages.filter { it.title?.trim() == pTitle }
+                    val passageCodes = matchingPassages.map { it.passage_code }.toSet()
+                    val matchingQuestions = rec.questions?.filter { q ->
+                        q.passage_refs?.any { it in passageCodes } == true ||
+                        (q.passage_refs.isNullOrEmpty() && tIdx == 0) // 참조 없는 문제는 첫 작품에
+                    }
+                    val splitRec = rec.copy(
+                        record_code = "${rec.record_code ?: "REC-${System.currentTimeMillis()}-${idx}"}-${tIdx + 1}",
+                        title = pTitle,
+                        passages = matchingPassages,
+                        questions = matchingQuestions
+                    )
+                    expandedRecords.add(Pair(idx, splitRec))
+                }
+            } else {
+                // 분리 불필요: 작품 1개이거나 title 없음
+                if (uniqueTitles.size == 1 && rec.title.isNullOrBlank()) {
+                    expandedRecords.add(Pair(idx, rec.copy(title = uniqueTitles[0])))
+                } else {
+                    expandedRecords.add(Pair(idx, rec))
+                }
+            }
+        }
+
+        expandedRecords.forEach { (idx, rec) ->
             try {
                 val recordCode = rec.record_code ?: "REC-${System.currentTimeMillis()}-${idx}"
 

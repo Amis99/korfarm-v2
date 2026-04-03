@@ -33,19 +33,28 @@ function LDBQuestionBankTab() {
     }
   };
 
-  // VS Code 트리 노드 구성 (영역 → 세부영역)
+  // VS Code 트리 노드 구성 (영역 → 세부영역 + 작품별)
   const treeNodes = useMemo(() => {
-    const map = {};
+    const areaMap = {};
+    const titleMap = {};
     records.forEach((r) => {
       const area = r.area || "미분류";
-      if (!map[area]) map[area] = {};
+      if (!areaMap[area]) areaMap[area] = {};
       const sub = r.sub_area || "미분류";
-      if (!map[area][sub]) map[area][sub] = 0;
-      map[area][sub]++;
+      if (!areaMap[area][sub]) areaMap[area][sub] = 0;
+      areaMap[area][sub]++;
+      // 작품별 그룹
+      const title = r.title?.trim();
+      if (title) {
+        if (!titleMap[title]) titleMap[title] = { count: 0, area, author: r.author };
+        titleMap[title].count++;
+      }
     });
 
     const totalCount = records.length;
-    const rootChildren = Object.entries(map).map(([area, subs]) => {
+
+    // 영역 기반 트리
+    const areaChildren = Object.entries(areaMap).map(([area, subs]) => {
       const areaCount = Object.values(subs).reduce((s, c) => s + c, 0);
       return {
         id: `area-${area}`,
@@ -65,15 +74,38 @@ function LDBQuestionBankTab() {
       };
     });
 
-    return [{
-      id: "qb-all",
-      label: "전체",
-      type: "folder",
-      icon: "folder",
-      badge: totalCount,
-      _filter: null,
-      children: rootChildren,
-    }];
+    // 작품별 트리
+    const titleChildren = Object.entries(titleMap)
+      .sort(([a], [b]) => a.localeCompare(b, "ko"))
+      .map(([title, info]) => ({
+        id: `title-${title}`,
+        label: `${title}${info.author ? ` (${info.author})` : ""}`,
+        type: "file",
+        icon: "auto_stories",
+        badge: info.count,
+        _filter: { title },
+      }));
+
+    return [
+      {
+        id: "qb-all",
+        label: "전체",
+        type: "folder",
+        icon: "folder",
+        badge: totalCount,
+        _filter: null,
+        children: areaChildren,
+      },
+      ...(titleChildren.length > 0 ? [{
+        id: "qb-by-title",
+        label: "작품별",
+        type: "folder",
+        icon: "auto_stories",
+        badge: titleChildren.length,
+        _filter: null,
+        children: titleChildren,
+      }] : []),
+    ];
   }, [records]);
 
   const handleTreeSelect = (node) => {
@@ -90,7 +122,9 @@ function LDBQuestionBankTab() {
       if (statusFilter && r.status !== statusFilter) return false;
       if (reviewFilter && r.review_status !== reviewFilter) return false;
       if (selectedFolder) {
-        if (selectedFolder.sub) {
+        if (selectedFolder.title) {
+          if (r.title?.trim() !== selectedFolder.title) return false;
+        } else if (selectedFolder.sub) {
           if (r.area !== selectedFolder.area || r.sub_area !== selectedFolder.sub) return false;
         } else if (selectedFolder.area) {
           if (r.area !== selectedFolder.area) return false;
@@ -138,7 +172,7 @@ function LDBQuestionBankTab() {
 
   // 현재 선택된 트리 노드 ID
   const selectedTreeId = selectedFolder
-    ? (selectedFolder.sub ? `sub-${selectedFolder.area}-${selectedFolder.sub}` : `area-${selectedFolder.area}`)
+    ? (selectedFolder.title ? `title-${selectedFolder.title}` : selectedFolder.sub ? `sub-${selectedFolder.area}-${selectedFolder.sub}` : `area-${selectedFolder.area}`)
     : "qb-all";
 
   return (
