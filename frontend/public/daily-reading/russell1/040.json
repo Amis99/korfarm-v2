@@ -4,7 +4,7 @@
   "version": 1,
   "status": "PUBLISHED",
   "title": "설명문 조직",
-  "description": "일일 독해 - 정독·복습·확인",
+  "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
     "min": 7,
@@ -52,50 +52,915 @@
     },
     "intensive": {
       "timeline": [
-        { "stepId": "s1", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 40 }] }, "question": { "prompt": "설명문은 무엇을 이해하기 쉽게 풀어 주는 글인가?", "choices": [{ "id": "A", "text": "대상이나 현상, 방법" }, { "id": "B", "text": "감정만 표현하는 글" }, { "id": "C", "text": "이야기만 나열한 글" }, { "id": "D", "text": "제목만 적은 글" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s2", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 40, "end": 88 }] }, "question": { "prompt": "많이 아는 내용을 적는다고 해서 바로 좋은 글이 되지 않는 이유는?", "choices": [{ "id": "A", "text": "질서가 없으면 설명문이 되기 어렵다" }, { "id": "B", "text": "정보가 많으면 항상 충분하다" }, { "id": "C", "text": "문장이 짧으면 무조건 좋다" }, { "id": "D", "text": "처음 문장만 멋지면 된다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s3", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 88, "end": 162 }] }, "question": { "prompt": "읽는 사람이 내용을 따라가기 쉽게 하려면 무엇이 필요한가?", "choices": [{ "id": "A", "text": "먼저와 나중의 질서를 세우는 일" }, { "id": "B", "text": "같은 말을 여러 번 반복하는 일" }, { "id": "C", "text": "중간 설명을 모두 빼는 일" }, { "id": "D", "text": "부품 이름만 늘어놓는 일" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s4", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 162, "end": 215 }] }, "question": { "prompt": "설명문을 쓸 때 미리 생각해야 하는 것은?", "choices": [{ "id": "A", "text": "내용을 어떤 순서로 배열할지" }, { "id": "B", "text": "글씨를 얼마나 크게 쓸지" }, { "id": "C", "text": "마지막 문장을 먼저 쓸지" }, { "id": "D", "text": "예쁜 단어를 더 넣을지" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s5", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 215 }] }, "question": { "prompt": "앞 단락의 핵심은 무엇인가?", "choices": [{ "id": "A", "text": "설명문은 순서를 세워야 이해하기 쉽다" }, { "id": "B", "text": "설명문은 정보만 많으면 된다" }, { "id": "C", "text": "설명문은 짧기만 하면 된다" }, { "id": "D", "text": "설명문은 나열만 하면 된다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 39
+              }
+            ]
+          },
+          "question": {
+            "prompt": "설명문이 풀어 주는 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대상과 현상, 방법을 쉽게 풀어 주는 글"
+              },
+              {
+                "id": "B",
+                "text": "느낌을 길게 적는 글"
+              },
+              {
+                "id": "C",
+                "text": "생각난 대로 적는 글"
+              },
+              {
+                "id": "D",
+                "text": "사건을 꾸며 내는 글"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 39,
+                "end": 87
+              }
+            ]
+          },
+          "question": {
+            "prompt": "많이 적는다고 좋은 글이 되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정보를 많이 넣어도 좋은 글은 아님"
+              },
+              {
+                "id": "B",
+                "text": "내용이 많을수록 항상 더 좋음"
+              },
+              {
+                "id": "C",
+                "text": "길게 쓰면 중심이 사라져도 괜찮음"
+              },
+              {
+                "id": "D",
+                "text": "짧게 쓰면 무조건 설명문이 아님"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 87,
+                "end": 161
+              }
+            ]
+          },
+          "question": {
+            "prompt": "읽는 사람이 따라가기 쉬우려면 무엇이 필요한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "말할 순서를 미리 세우는 일"
+              },
+              {
+                "id": "B",
+                "text": "부족한 말을 더 늘이는 일"
+              },
+              {
+                "id": "C",
+                "text": "예시를 무작정 많이 붙이는 일"
+              },
+              {
+                "id": "D",
+                "text": "결론을 아예 빼는 일"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 161,
+                  "end": 214
+              }
+            ]
+          },
+          "question": {
+            "prompt": "설명문에서 중요하게 볼 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내용을 어떤 차례로 배치할지"
+              },
+              {
+                "id": "B",
+                "text": "문장을 가장 길게 쓰는 일"
+              },
+              {
+                "id": "C",
+                "text": "어려운 말만 모으는 일"
+              },
+              {
+                "id": "D",
+                "text": "형식을 화려하게 꾸미는 일"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                  "end": 214
+              }
+            ]
+          },
+          "question": {
+            "prompt": "설명문에서 먼저 챙겨야 할 기준은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "읽기 쉽게 배열하는 기준"
+              },
+              {
+                "id": "B",
+                "text": "멋진 표현을 먼저 찾는 일"
+              },
+              {
+                "id": "C",
+                "text": "중요하지 않은 말을 늘리는 일"
+              },
+              {
+                "id": "D",
+                "text": "정보를 한 번에 다 보여 주는 일"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
 
-        { "stepId": "s6", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 49 }] }, "question": { "prompt": "설명문의 처음에는 어떤 부분이 필요한가?", "choices": [{ "id": "A", "text": "대상을 소개하고 중심 화제를 드러내는 부분" }, { "id": "B", "text": "결론만 먼저 적는 부분" }, { "id": "C", "text": "세부를 가장 먼저 늘어놓는 부분" }, { "id": "D", "text": "예시를 전부 숨기는 부분" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s7", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 49, "end": 121 }] }, "question": { "prompt": "브레이크 원리를 설명하는 글에서는 먼저 무엇을 알려 주어야 하는가?", "choices": [{ "id": "A", "text": "브레이크가 자전거에서 하는 역할" }, { "id": "B", "text": "자전거 바퀴의 색깔" }, { "id": "C", "text": "부품 이름을 전부 외우는 법" }, { "id": "D", "text": "글쓴이의 취향" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s8", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 121, "end": 161 }] }, "question": { "prompt": "세부 설명을 한 방향으로 받아들이게 해 주는 것은?", "choices": [{ "id": "A", "text": "앞부분의 간단한 소개" }, { "id": "B", "text": "부품 이름의 나열" }, { "id": "C", "text": "마지막 문장의 반복" }, { "id": "D", "text": "괄호의 개수" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s9", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 161, "end": 211 }] }, "question": { "prompt": "처음부터 세세한 부품 이름만 나열하면 어떤가?", "choices": [{ "id": "A", "text": "중심이 쉽게 잡히지 않는다" }, { "id": "B", "text": "내용이 더 또렷해진다" }, { "id": "C", "text": "설명이 더 쉽다" }, { "id": "D", "text": "읽는 속도가 빨라진다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s10", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 211 }] }, "question": { "prompt": "앞 단락의 핵심은 무엇인가?", "choices": [{ "id": "A", "text": "처음에는 대상과 중심 화제를 드러내야 한다" }, { "id": "B", "text": "처음에는 부품을 많이 늘어놓아야 한다" }, { "id": "C", "text": "처음에는 결론부터 써야 한다" }, { "id": "D", "text": "처음에는 문장을 짧게만 써야 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 48
+              }
+            ]
+          },
+          "question": {
+            "prompt": "설명문은 무엇을 먼저 드러내야 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대상과 중심 화제를 드러내기"
+              },
+              {
+                "id": "B",
+                "text": "부품 이름을 모두 적기"
+              },
+              {
+                "id": "C",
+                "text": "결론을 먼저 길게 적기"
+              },
+              {
+                "id": "D",
+                "text": "세부를 먼저 빽빽하게 적기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 48,
+                "end": 120
+              }
+            ]
+          },
+          "question": {
+            "prompt": "자전거 브레이크 글은 무엇부터 알려야 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "브레이크의 역할"
+              },
+              {
+                "id": "B",
+                "text": "나사 크기의 차이"
+              },
+              {
+                "id": "C",
+                "text": "부품의 이름 전체"
+              },
+              {
+                "id": "D",
+                "text": "자전거 색깔의 유래"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 120,
+                "end": 160
+              }
+            ]
+          },
+          "question": {
+            "prompt": "그렇게 해야 읽는 사람은 어떻게 되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "뒤 설명을 한 방향으로 이해"
+              },
+              {
+                "id": "B",
+                "text": "중심을 완전히 잃음"
+              },
+              {
+                "id": "C",
+                "text": "세부만 따로 기억"
+              },
+              {
+                "id": "D",
+                "text": "읽는 속도만 빨라짐"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 160,
+                  "end": 210
+              }
+            ]
+          },
+          "question": {
+            "prompt": "세세한 이름만 나열하면 어떤가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "중심이 쉽게 잡히지 않음"
+              },
+              {
+                "id": "B",
+                "text": "정보가 더 또렷해짐"
+              },
+              {
+                "id": "C",
+                "text": "이해가 자동으로 빨라짐"
+              },
+              {
+                "id": "D",
+                "text": "설명문이 곧 완성됨"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                  "end": 210
+              }
+            ]
+          },
+          "question": {
+            "prompt": "설명문이 대상과 화제를 밝힐 때 해야 하는 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대상과 화제를 먼저 보이기"
+              },
+              {
+                "id": "B",
+                "text": "세부를 한꺼번에 늘이기"
+              },
+              {
+                "id": "C",
+                "text": "결론만 먼저 강하게 말하기"
+              },
+              {
+                "id": "D",
+                "text": "부품 이름부터 길게 나열하기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
 
-        { "stepId": "s11", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 36 }] }, "question": { "prompt": "가운데 부분에서는 무엇을 할 수 있는가?", "choices": [{ "id": "A", "text": "목적에 맞게 조직 방식을 고를 수 있다" }, { "id": "B", "text": "반드시 같은 순서만 써야 한다" }, { "id": "C", "text": "아무 기준 없이 써도 된다" }, { "id": "D", "text": "결론을 먼저 써야 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s12", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 36, "end": 113 }] }, "question": { "prompt": "작동 과정을 설명할 때는 어떤 방식이 자연스러운가?", "choices": [{ "id": "A", "text": "순서에 따라 쓰는 방식" }, { "id": "B", "text": "차이점만 뒤섞는 방식" }, { "id": "C", "text": "원인 없이 결과만 적는 방식" }, { "id": "D", "text": "처음과 끝을 바꾸는 방식" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s13", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 113, "end": 162 }] }, "question": { "prompt": "여러 종류를 비교할 때 어울리는 방식은?", "choices": [{ "id": "A", "text": "공통점과 차이점을 나누어 서술하는 방식" }, { "id": "B", "text": "한 가지만 반복하는 방식" }, { "id": "C", "text": "원인만 먼저 적는 방식" }, { "id": "D", "text": "맨 끝에만 설명하는 방식" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s14", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 162, "end": 218 }] }, "question": { "prompt": "정보가 많아도 읽는 사람이 길을 잃지 않으려면 무엇이 필요한가?", "choices": [{ "id": "A", "text": "하나의 기준을 세워 끝까지 유지하는 일" }, { "id": "B", "text": "기준을 자주 바꾸는 일" }, { "id": "C", "text": "항목을 모두 섞는 일" }, { "id": "D", "text": "세부를 전부 생략하는 일" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s15", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 218 }] }, "question": { "prompt": "앞 단락의 핵심은 무엇인가?", "choices": [{ "id": "A", "text": "목적에 맞는 기준을 세워 끝까지 유지해야 한다" }, { "id": "B", "text": "항목은 많을수록 좋다" }, { "id": "C", "text": "설명은 순서와 무관하다" }, { "id": "D", "text": "비교는 하지 않는 편이 낫다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 35
+              }
+            ]
+          },
+          "question": {
+            "prompt": "설명 목적에 맞게 무엇을 골라야 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "목적에 맞는 조직 방식"
+              },
+              {
+                "id": "B",
+                "text": "길고 화려한 표현"
+              },
+              {
+                "id": "C",
+                "text": "생각나는 대로 적기"
+              },
+              {
+                "id": "D",
+                "text": "결론을 먼저 없애기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 35,
+                "end": 112
+              }
+            ]
+          },
+          "question": {
+            "prompt": "작동 과정을 설명할 때 어울리는 방식은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "순서에 따라 쓰기"
+              },
+              {
+                "id": "B",
+                "text": "차이점만 따로 적기"
+              },
+              {
+                "id": "C",
+                "text": "결론부터 먼저 늘이기"
+              },
+              {
+                "id": "D",
+                "text": "정보를 뒤섞어 적기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 112,
+                "end": 161
+              }
+            ]
+          },
+          "question": {
+            "prompt": "여러 종류를 비교할 때 어울리는 방식은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공통점과 차이점 나누기"
+              },
+              {
+                "id": "B",
+                "text": "순서만 끝까지 밀기"
+              },
+              {
+                "id": "C",
+                "text": "하나만 길게 설명하기"
+              },
+              {
+                "id": "D",
+                "text": "정보를 한 번에 던지기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 161,
+                  "end": 217
+              }
+            ]
+          },
+          "question": {
+            "prompt": "중요한 것은 무엇을 유지하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하나의 기준을 끝까지 유지하기"
+              },
+              {
+                "id": "B",
+                "text": "부연 설명을 끝없이 늘리기"
+              },
+              {
+                "id": "C",
+                "text": "주제를 자꾸 바꾸기"
+              },
+              {
+                "id": "D",
+                "text": "정보를 일부러 흩뜨리기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                  "end": 217
+              }
+            ]
+          },
+          "question": {
+            "prompt": "설명 내용의 흐름을 지키는 핵심은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기준을 세워 흐름을 유지하기"
+              },
+              {
+                "id": "B",
+                "text": "문장을 길게 이어 붙이기"
+              },
+              {
+                "id": "C",
+                "text": "비교는 모두 빼기"
+              },
+              {
+                "id": "D",
+                "text": "원인과 결과를 섞어 두기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
 
-        { "stepId": "s16", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 52 }] }, "question": { "prompt": "마지막에는 무엇을 할 수 있는가?", "choices": [{ "id": "A", "text": "앞에서 설명한 내용을 간단히 정리하거나 중요성을 덧붙일 수 있다" }, { "id": "B", "text": "세부를 전부 숨길 수 있다" }, { "id": "C", "text": "주제를 바꿀 수 있다" }, { "id": "D", "text": "설명을 멈추지 않고 계속 늘릴 수 있다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s17", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 52, "end": 106 }] }, "question": { "prompt": "설명문의 끝이 정리 없이 멈추면 어떤가?", "choices": [{ "id": "A", "text": "무엇을 기억해야 하는지 분명히 잡기 어렵다" }, { "id": "B", "text": "기억할 점이 더 잘 보인다" }, { "id": "C", "text": "읽는 사람은 바로 이해한다" }, { "id": "D", "text": "중심이 더 강해진다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s18", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 106, "end": 169 }] }, "question": { "prompt": "설명문 조직은 무엇이 아닌가?", "choices": [{ "id": "A", "text": "보기 좋게 꾸미는 형식 문제" }, { "id": "B", "text": "이해를 돕기 위한 과정" }, { "id": "C", "text": "질서를 세우는 일" }, { "id": "D", "text": "정보를 나누는 일" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s19", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 169, "end": 232 }] }, "question": { "prompt": "조직이 큰 역할을 하는 이유는 무엇인가?", "choices": [{ "id": "A", "text": "설명하는 사람과 읽는 사람 사이의 거리를 줄여 주기 때문" }, { "id": "B", "text": "문장을 더 길게 만들기 때문" }, { "id": "C", "text": "주제를 바꾸기 때문" }, { "id": "D", "text": "정보를 더 흐리게 만들기 때문" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s20", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 232 }] }, "question": { "prompt": "앞 단락의 핵심은 무엇인가?", "choices": [{ "id": "A", "text": "설명문 조직은 이해를 돕는 기본 설계다" }, { "id": "B", "text": "설명문은 마지막 문장만 중요하다" }, { "id": "C", "text": "설명문은 정리할 필요가 없다" }, { "id": "D", "text": "설명문은 꾸미기만 하면 된다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } }
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 51
+              }
+            ]
+          },
+          "question": {
+            "prompt": "설명문은 어떤 식으로 내용을 정리할 수 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "간단히 정리하거나 중요성 덧붙이기"
+              },
+              {
+                "id": "B",
+                "text": "새 주제를 갑자기 꺼내기"
+              },
+              {
+                "id": "C",
+                "text": "세부를 한없이 늘이기"
+              },
+              {
+                "id": "D",
+                "text": "중심을 아예 지우기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 51,
+                "end": 105
+              }
+            ]
+          },
+          "question": {
+            "prompt": "정리 없이 멈추면 어떤가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기억할 점이 분명하지 않음"
+              },
+              {
+                "id": "B",
+                "text": "중심이 더 또렷해짐"
+              },
+              {
+                "id": "C",
+                "text": "읽는 사람이 더 쉬워짐"
+              },
+              {
+                "id": "D",
+                "text": "설명문이 더 길어짐"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 105,
+                "end": 168
+              }
+            ]
+          },
+          "question": {
+            "prompt": "설명문 조직은 무엇과 다른가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이해를 돕는 질서 세우기"
+              },
+              {
+                "id": "B",
+                "text": "겉모양만 꾸미는 일"
+              },
+              {
+                "id": "C",
+                "text": "이해와 상관없는 장식"
+              },
+              {
+                "id": "D",
+                "text": "정보를 무작정 모으는 일"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 168,
+                  "end": 231
+              }
+            ]
+          },
+          "question": {
+            "prompt": "조직이 하는 큰 역할은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이해의 거리를 줄이기"
+              },
+              {
+                "id": "B",
+                "text": "문장을 꾸미는 일"
+              },
+              {
+                "id": "C",
+                "text": "정보를 감추는 일"
+              },
+              {
+                "id": "D",
+                "text": "어려운 말을 늘이는 일"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                  "end": 231
+              }
+            ]
+          },
+          "question": {
+            "prompt": "설명문 조직의 목적은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "질서 있게 세워 이해를 돕기"
+              },
+              {
+                "id": "B",
+                "text": "형식을 화려하게 꾸미기"
+              },
+              {
+                "id": "C",
+                "text": "말의 양을 늘리기"
+              },
+              {
+                "id": "D",
+                "text": "기억할 점을 흐리기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "설명문은 대상과 현상을 쉽게 풀어 주는 글이다" },
-        { "id": "c2", "text": "설명문은 순서가 있어야 읽기 쉽다" },
-        { "id": "c3", "text": "처음에는 대상과 중심 화제를 드러낸다" },
-        { "id": "c4", "text": "가운데에서는 목적에 맞는 방식으로 배열한다" },
-        { "id": "c5", "text": "끝에서는 정리하거나 중요성을 덧붙인다" },
-        { "id": "c6", "text": "설명문 조직은 이해를 돕는 기본 설계다" }
+        {
+          "id": "c1",
+          "text": "설명문은 대상을 쉽게 풀어 주는 글이다."
+        },
+        {
+          "id": "c2",
+          "text": "내용이 많아도 좋은 글은 아니다."
+        },
+        {
+          "id": "c3",
+          "text": "읽는 사람이 따라가도록 순서를 세운다."
+        },
+        {
+          "id": "c4",
+          "text": "설명문은 대상과 중심 화제를 드러내야 한다."
+        },
+        {
+          "id": "c5",
+          "text": "목적에 맞는 조직 방식을 골라야 한다."
+        },
+        {
+          "id": "c6",
+          "text": "정리와 중요성 덧붙임이 필요하다."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
-        { "id": "q1", "prompt": "설명문은 무엇을 이해하기 쉽게 풀어 주는 글인가?", "answerRanges": [{ "paragraphId": "p1", "start": 0, "end": 40 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ALL" },
-        { "id": "q2", "prompt": "설명문의 처음에는 어떤 부분이 필요한가?", "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 49 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ALL" },
-        { "id": "q3", "prompt": "가운데 부분에서는 어떤 방식으로 조직할 수 있는가?", "answerRanges": [{ "paragraphId": "p3", "start": 36, "end": 113 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ALL" },
-        { "id": "q4", "prompt": "설명문 조직은 무엇이 아니라 어떤 과정인가?", "answerRanges": [{ "paragraphId": "p4", "start": 106, "end": 169 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ALL" },
-        { "id": "q5", "prompt": "조직이 큰 역할을 하는 이유는 무엇인가?", "answerRanges": [{ "paragraphId": "p4", "start": 169, "end": 232 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ALL" }
+        {
+          "id": "q1",
+          "prompt": "‘설명문’은 어떤 뜻인가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 3
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "‘조직’은 어떤 뜻인가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 176,
+              "end": 178
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "‘중심’은 어떤 뜻인가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "‘순서’는 어떤 뜻인가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 50,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "‘정리’는 어떤 뜻인가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 22,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
       ]
     }
   }
