@@ -2636,3 +2636,71 @@ mark.highlight {
   border-color: #e07a5f;
   opacity: 0.5;
 }
+
+/* 누적 완료 단어 목록 */
+.wf-completed-list {
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(255,255,255,0.6);
+  border-top: 1px solid rgba(109,164,117,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wf-completed-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #4b3d36;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.wf-completed-item.had-wrong {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.wf-completed-num {
+  font-weight: 700;
+  min-width: 24px;
+}
+.wf-completed-word {
+  font-weight: 600;
+  min-width: 80px;
+}
+.wf-completed-morphemes {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+.wf-completed-formation {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: rgba(109,164,117,0.15);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.morpheme-chip-sm {
+  font-size: 11px;
+  padding: 1px 6px;
+  position: relative;
+}
+.morpheme-chip-sm.wf-circle::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 2px solid #6da475;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.morpheme-chip-sm.wf-square::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 2px solid #e07a5f;
+  border-radius: 2px;
+  pointer-events: none;
+}
