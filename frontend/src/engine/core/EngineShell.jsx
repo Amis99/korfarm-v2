@@ -611,7 +611,9 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                   moduleKey === "choice_judgement" ||
                   moduleKey === "sentence_structure" ||
                   moduleKey === "word_formation" ||
-                  moduleKey === "phoneme_change"
+                  moduleKey === "phoneme_change" ||
+                  moduleKey === "background_knowledge" ||
+                  moduleKey === "logic_reasoning"
                     ? "stack"
                     : ""
                 } ${screenLevelClass}`}
