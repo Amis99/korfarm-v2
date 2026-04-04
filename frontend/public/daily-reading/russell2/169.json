@@ -125,7 +125,7 @@
             ]
           },
           "question": {
-            "prompt": "p1의 중심은?",
+            "prompt": "반감기의 뜻을 어떻게 설명하나요?",
             "choices": [
               { "id": "A", "text": "반감기는 약이 몸에 남는 시간을 뜻한다" },
               { "id": "B", "text": "약은 빨리 먹을수록 좋다" },
@@ -201,7 +201,7 @@
             ]
           },
           "question": {
-            "prompt": "p2의 중심은?",
+            "prompt": "반감기의 핵심 특징은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "반감기는 비율이 같아 곡선처럼 줄어든다" },
               { "id": "B", "text": "반감기는 양이 같아 직선으로 줄어든다" },
@@ -277,7 +277,7 @@
             ]
           },
           "question": {
-            "prompt": "p3의 중심은?",
+            "prompt": "반감기가 약 복용에 주는 영향은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "반감기에 따라 복용 간격을 정한다" },
               { "id": "B", "text": "반감기는 복용과 무관하다" },
@@ -353,7 +353,7 @@
             ]
           },
           "question": {
-            "prompt": "p4의 중심은?",
+            "prompt": "반감기는 약이 일정한 상태에 이르는 데 어떤 영향을 주나요?",
             "choices": [
               { "id": "A", "text": "반감기는 안정 상태 도달 속도에도 영향을 준다" },
               { "id": "B", "text": "반감기는 도달 속도와 무관하다" },
@@ -448,7 +448,7 @@
             ]
           },
           "question": {
-            "prompt": "p5의 중심은?",
+            "prompt": "반감기가 사람마다 다를 때 무엇을 조절하나요?",
             "choices": [
               { "id": "A", "text": "반감기는 사람마다 달라 복용을 조절해야 한다" },
               { "id": "B", "text": "반감기는 누구나 같다" },
@@ -524,7 +524,7 @@
             ]
           },
           "question": {
-            "prompt": "p6의 중심은?",
+            "prompt": "반감기를 알면 무엇을 함께 이해할 수 있나요?",
             "choices": [
               { "id": "A", "text": "반감기는 복용 시간과 양의 이유를 알려 준다" },
               { "id": "B", "text": "반감기는 약효와 무관하다" },
@@ -539,12 +539,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "반감기는 약이 절반으로 줄어드는 시간이다." },
-        { "id": "c2", "text": "약물 농도는 같은 비율로 줄어든다." },
+        { "id": "c1", "text": "반감기는 약의 양이나 농도가 절반으로 줄어드는 데 걸리는 시간이다." },
+        { "id": "c2", "text": "약물 농도는 일정한 비율로 줄어드는 곡선 형태를 보일 수 있다." },
         { "id": "c3", "text": "반감기에 따라 복용 간격을 정한다." },
-        { "id": "c4", "text": "반감기는 안정 상태 도달 속도에도 영향을 준다." },
-        { "id": "c5", "text": "반감기는 사람마다 달라 복용을 조절해야 한다." },
-        { "id": "c6", "text": "반감기는 약효와 복용 시간의 이유를 알려 준다." }
+        { "id": "c4", "text": "반감기는 일정한 상태에 이르는 속도에도 영향을 준다." },
+        { "id": "c5", "text": "반감기는 사람마다 달라 복용량이나 간격을 조절해야 할 수 있다." },
+        { "id": "c6", "text": "반감기는 약효의 지속 시간과 복용 간격을 이해하게 한다." }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -553,9 +553,10 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "절반으로 줄어드는 시간은?",
+          "prompt": "약의 양이나 농도가 절반으로 줄어드는 데 걸리는 시간은?",
+          "answerText": "반감기",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 3, "end": 6 }
+            { "paragraphId": "p1", "start": 3, "end": 5 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -563,9 +564,10 @@
         },
         {
           "id": "q2",
-          "prompt": "같이 유지되는 값은?",
+          "prompt": "전체에서 차지하는 정도의 관계는?",
+          "answerText": "비율",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 30, "end": 32 }
+            { "paragraphId": "p2", "start": 30, "end": 31 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -573,9 +575,10 @@
         },
         {
           "id": "q3",
-          "prompt": "점점 줄어드는 모양은?",
+          "prompt": "부드럽게 굽은 선은?",
+          "answerText": "곡선",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 155, "end": 157 }
+            { "paragraphId": "p2", "start": 155, "end": 156 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -583,9 +586,10 @@
         },
         {
           "id": "q4",
-          "prompt": "약을 분해하거나 배출하는 기관은?",
+          "prompt": "약을 분해하거나 배출하는 몸의 기관은?",
+          "answerText": "간과 콩팥",
           "answerRanges": [
-            { "paragraphId": "p5", "start": 20, "end": 25 }
+            { "paragraphId": "p5", "start": 20, "end": 24 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -593,9 +597,10 @@
         },
         {
           "id": "q5",
-          "prompt": "함께 이해하게 하는 것 가운데 하나는?",
+          "prompt": "약이 몸속에 지나치게 많이 쌓이는 것은?",
+          "answerText": "과도한 축적",
           "answerRanges": [
-            { "paragraphId": "p6", "start": 29, "end": 35 }
+            { "paragraphId": "p6", "start": 90, "end": 95 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
