@@ -109,7 +109,7 @@
           "stepId": "s4",
           "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 169 }] },
           "question": {
-            "prompt": "이 문단은 무엇을 설명하나?",
+            "prompt": "법 적용을 설명할 때 무엇을 먼저 밝히나?",
             "choices": [
               { "id": "A", "text": "법 적용의 절차" },
               { "id": "B", "text": "판결의 감정" },
@@ -124,7 +124,7 @@
           "stepId": "s5",
           "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 19 }] },
           "question": {
-            "prompt": "첫 단계는 무엇인가?",
+            "prompt": "대전제는 무엇인가?",
             "choices": [
               { "id": "A", "text": "대전제" },
               { "id": "B", "text": "소전제" },
@@ -169,7 +169,7 @@
           "stepId": "s8",
           "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 146 }] },
           "question": {
-            "prompt": "이 문단이 말하는 첫 단계의 특징은?",
+            "prompt": "대전제의 특징은 무엇인가?",
             "choices": [
               { "id": "A", "text": "여러 사건에 공통 적용" },
               { "id": "B", "text": "한 사건만 적용" },
@@ -184,7 +184,7 @@
           "stepId": "s9",
           "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 12 }] },
           "question": {
-            "prompt": "둘째 단계는 무엇인가?",
+            "prompt": "소전제란 무엇인가?",
             "choices": [
               { "id": "A", "text": "소전제" },
               { "id": "B", "text": "대전제" },
@@ -226,10 +226,25 @@
           }
         },
         {
+          "stepId": "s12a",
+          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 116, "end": 154 }] },
+          "question": {
+            "prompt": "소전제는 어떤 사실이어야 하나?",
+            "choices": [
+              { "id": "A", "text": "조사와 증거를 통해 인정된 사실" },
+              { "id": "B", "text": "아무 확인 없이 떠올린 생각" },
+              { "id": "C", "text": "법조항만 따로 모은 것" },
+              { "id": "D", "text": "결론을 먼저 정해 둔 말" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
           "stepId": "s12",
           "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 154 }] },
           "question": {
-            "prompt": "이 문단은 무엇을 다루나?",
+            "prompt": "소전제는 무엇을 다루나?",
             "choices": [
               { "id": "A", "text": "사건의 사실" },
               { "id": "B", "text": "일반 규범" },
@@ -244,7 +259,7 @@
           "stepId": "s13",
           "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 11 }] },
           "question": {
-            "prompt": "셋째 단계는 무엇인가?",
+            "prompt": "결론은 무엇인가?",
             "choices": [
               { "id": "A", "text": "결론" },
               { "id": "B", "text": "대전제" },
@@ -289,7 +304,7 @@
           "stepId": "s16",
           "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 129 }] },
           "question": {
-            "prompt": "이 문단의 구조 설명은 무엇인가?",
+            "prompt": "법 적용의 근거를 왜 분명히 보여 주나?",
             "choices": [
               { "id": "A", "text": "법조항과 사실의 연결" },
               { "id": "B", "text": "판결의 감정" },
@@ -349,7 +364,7 @@
           "stepId": "s20",
           "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 179 }] },
           "question": {
-            "prompt": "이 문단은 무엇을 강조하나?",
+            "prompt": "판결문에서 무엇을 강조하나?",
             "choices": [
               { "id": "A", "text": "판단 과정의 투명성" },
               { "id": "B", "text": "판결 속도" },
@@ -409,7 +424,7 @@
           "stepId": "s24",
           "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 161 }] },
           "question": {
-            "prompt": "이 구조는 무엇이라고 할 수 있나?",
+            "prompt": "법 삼단논법은 어떤 틀이라고 볼 수 있나?",
             "choices": [
               { "id": "A", "text": "법적 판단의 기본 틀" },
               { "id": "B", "text": "감정적 해석" },
@@ -439,7 +454,14 @@
         {
           "id": "q1",
           "prompt": "일반 규범을 제시하는 말은?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 14, "end": 16 }],
+          "answerText": "대전제",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 14, "end": 17 },
+            { "paragraphId": "p2", "start": 21, "end": 24 },
+            { "paragraphId": "p4", "start": 13, "end": 16 },
+            { "paragraphId": "p5", "start": 80, "end": 83 },
+            { "paragraphId": "p6", "start": 20, "end": 23 }
+          ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
@@ -447,7 +469,16 @@
         {
           "id": "q2",
           "prompt": "사건의 사실을 정리하는 말은?",
-          "answerRanges": [{ "paragraphId": "p3", "start": 7, "end": 9 }],
+          "answerText": "소전제",
+          "answerRanges": [
+            { "paragraphId": "p3", "start": 7, "end": 10 },
+            { "paragraphId": "p3", "start": 14, "end": 17 },
+            { "paragraphId": "p3", "start": 108, "end": 111 },
+            { "paragraphId": "p3", "start": 117, "end": 120 },
+            { "paragraphId": "p4", "start": 23, "end": 26 },
+            { "paragraphId": "p5", "start": 85, "end": 88 },
+            { "paragraphId": "p6", "start": 33, "end": 36 }
+          ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
@@ -455,7 +486,15 @@
         {
           "id": "q3",
           "prompt": "판단의 마지막 단계는?",
-          "answerRanges": [{ "paragraphId": "p4", "start": 7, "end": 8 }],
+          "answerText": "결론",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 25, "end": 27 },
+            { "paragraphId": "p1", "start": 126, "end": 128 },
+            { "paragraphId": "p4", "start": 7, "end": 9 },
+            { "paragraphId": "p4", "start": 110, "end": 112 },
+            { "paragraphId": "p5", "start": 44, "end": 46 },
+            { "paragraphId": "p6", "start": 51, "end": 53 }
+          ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
@@ -463,7 +502,8 @@
         {
           "id": "q4",
           "prompt": "판결과 이유를 적은 글은?",
-          "answerRanges": [{ "paragraphId": "p5", "start": 117, "end": 119 }],
+          "answerText": "판결문",
+          "answerRanges": [{ "paragraphId": "p5", "start": 117, "end": 120 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
@@ -471,7 +511,12 @@
         {
           "id": "q5",
           "prompt": "일반 기준을 뜻하는 말은?",
-          "answerRanges": [{ "paragraphId": "p6", "start": 16, "end": 17 }],
+          "answerText": "규범",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 33, "end": 35 },
+            { "paragraphId": "p6", "start": 16, "end": 18 },
+            { "paragraphId": "p6", "start": 90, "end": 92 }
+          ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
