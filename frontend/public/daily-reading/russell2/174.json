@@ -125,7 +125,7 @@
             ]
           },
           "question": {
-            "prompt": "p1의 중심은?",
+            "prompt": "추천 알고리즘은 무엇을 바탕으로 항목을 고르나요?",
             "choices": [
               { "id": "A", "text": "추천 알고리즘은 여러 자료를 바탕으로 맞는 항목을 고른다" },
               { "id": "B", "text": "추천은 무작위로 항목을 보여 주는 방식이다" },
@@ -220,7 +220,7 @@
             ]
           },
           "question": {
-            "prompt": "p2의 중심은?",
+            "prompt": "추천 방식에는 어떤 두 갈래가 있나요?",
             "choices": [
               { "id": "A", "text": "사람 행동을 참고하는 방식과 항목 특징을 분석하는 방식을 함께 쓴다" },
               { "id": "B", "text": "추천은 한 가지 방식만 써야 한다" },
@@ -315,7 +315,7 @@
             ]
           },
           "question": {
-            "prompt": "p3의 중심은?",
+            "prompt": "콜드 스타트는 왜 추천을 어렵게 하나요?",
             "choices": [
               { "id": "A", "text": "콜드 스타트는 정보가 부족해 추천을 시작하기 어려운 문제다" },
               { "id": "B", "text": "콜드 스타트는 추천이 너무 많아서 생기는 문제다" },
@@ -391,7 +391,7 @@
             ]
           },
           "question": {
-            "prompt": "p4의 중심은?",
+            "prompt": "콜드 스타트는 어떻게 해결하려고 하나요?",
             "choices": [
               { "id": "A", "text": "사용자와 항목의 콜드 스타트는 서로 다른 방법으로 해결한다" },
               { "id": "B", "text": "콜드 스타트는 어떤 방법으로도 해결되지 않는다" },
@@ -467,7 +467,7 @@
             ]
           },
           "question": {
-            "prompt": "p5의 중심은?",
+            "prompt": "콜드 스타트를 해결하지 못하면 어떤 문제가 생기나요?",
             "choices": [
               { "id": "A", "text": "콜드 스타트를 풀지 못하면 추천과 새 콘텐츠 노출이 함께 어려워진다" },
               { "id": "B", "text": "콜드 스타트가 해결되면 추천이 멈춘다" },
@@ -543,7 +543,7 @@
             ]
           },
           "question": {
-            "prompt": "p6의 중심은?",
+            "prompt": "추천 품질이 달라지는 핵심 이유는 무엇인가요?",
             "choices": [
               { "id": "A", "text": "추천 품질은 초기에 부족한 정보를 다루는 방식에 따라 달라진다" },
               { "id": "B", "text": "추천은 데이터가 많을수록 항상 같다" },
@@ -558,12 +558,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "추천 알고리즘은 사용자에게 맞는 항목을 골라 보여 주는 기술이다." },
-        { "id": "c2", "text": "추천 방식에는 사람 행동을 참고하는 방법과 항목 특징을 분석하는 방법이 있다." },
-        { "id": "c3", "text": "콜드 스타트는 정보가 부족해 추천을 시작하기 어려운 상황이다." },
-        { "id": "c4", "text": "사용자 콜드 스타트는 선호 정보 입력과 반응 수집으로 풀 수 있다." },
+        { "id": "c1", "text": "추천 알고리즘은 사용자에게 어울릴 만한 항목을 골라 보여 주는 기술이다." },
+        { "id": "c2", "text": "추천 방식에는 비슷한 취향의 사람들을 참고하는 방법과 항목 특징을 분석하는 방법이 있다." },
+        { "id": "c3", "text": "콜드 스타트는 정보가 거의 없어 추천을 시작하기 어려운 상황이다." },
+        { "id": "c4", "text": "사용자 콜드 스타트는 선호 정보 입력과 반응 수집으로 해결한다." },
         { "id": "c5", "text": "항목 콜드 스타트는 내용 특징을 바탕으로 비슷한 항목과 연결한다." },
-        { "id": "c6", "text": "추천 품질은 초기의 부족한 정보를 다루는 방식에 따라 달라진다." }
+        { "id": "c6", "text": "추천 품질은 처음의 부족한 정보를 다루는 방식에 따라 달라진다." }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -572,9 +572,10 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "추천 알고리즘은 무엇을 바탕으로 작동하나?",
+          "prompt": "사용자에게 맞는 항목을 골라 보여 주는 기술은?",
+          "answerText": "추천 알고리즘",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 120, "end": 158 }
+            { "paragraphId": "p1", "start": 0, "end": 6 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -582,9 +583,10 @@
         },
         {
           "id": "q2",
-          "prompt": "콜드 스타트는 어떤 상황인가?",
+          "prompt": "정보가 거의 없어 추천을 시작하기 어려운 상황은?",
+          "answerText": "콜드 스타트",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 24, "end": 76 }
+            { "paragraphId": "p3", "start": 15, "end": 20 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -592,9 +594,10 @@
         },
         {
           "id": "q3",
-          "prompt": "사용자 콜드 스타트는 어떻게 해결하려 하나?",
+          "prompt": "사용자가 무엇을 좋아하는지 알아보기 위한 정보는?",
+          "answerText": "선호 정보",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 23, "end": 77 }
+            { "paragraphId": "p4", "start": 28, "end": 32 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -602,9 +605,10 @@
         },
         {
           "id": "q4",
-          "prompt": "항목 콜드 스타트에서는 무엇이 효과적인가?",
+          "prompt": "특징이 닮아 서로 이어 볼 수 있는 항목은?",
+          "answerText": "비슷한 항목",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 97, "end": 127 }
+            { "paragraphId": "p4", "start": 112, "end": 117 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -612,9 +616,10 @@
         },
         {
           "id": "q5",
-          "prompt": "추천의 품질은 무엇에 의해서도 달라지나?",
+          "prompt": "추천 초기에 아직 모자란 정보는?",
+          "answerText": "처음의 부족한 정보",
           "answerRanges": [
-            { "paragraphId": "p6", "start": 122, "end": 142 }
+            { "paragraphId": "p6", "start": 122, "end": 131 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
