@@ -125,9 +125,9 @@
             ]
           },
           "question": {
-            "prompt": "첫 문단은 무엇을 말하나요?",
+            "prompt": "문장 호응의 핵심은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "문장 호응의 뜻과 핵심" },
+              { "id": "A", "text": "말들이 문법과 의미에 맞게 이어지는 것" },
               { "id": "B", "text": "부정 표현의 종류" },
               { "id": "C", "text": "높임 표현의 쓰임" },
               { "id": "D", "text": "연결어의 예시" }
@@ -201,9 +201,9 @@
             ]
           },
           "question": {
-            "prompt": "둘째 문단은 무엇을 보여 주나요?",
+            "prompt": "주어와 서술어가 안 맞으면 무엇이 흐려지나요?",
             "choices": [
-              { "id": "A", "text": "주어와 서술어가 안 맞는 경우" },
+              { "id": "A", "text": "누가 어떤 행동을 하는지" },
               { "id": "B", "text": "문장의 길이를 늘이는 법" },
               { "id": "C", "text": "문단을 나누는 법" },
               { "id": "D", "text": "어휘를 외우는 법" }
@@ -277,9 +277,9 @@
             ]
           },
           "question": {
-            "prompt": "셋째 문단은 무엇을 말하나요?",
+            "prompt": "부정 표현과 연결 표현은 왜 조심해야 하나요?",
             "choices": [
-              { "id": "A", "text": "부정 표현과 연결 표현의 호응" },
+              { "id": "A", "text": "뜻과 논리 관계가 뒤틀릴 수 있기 때문" },
               { "id": "B", "text": "주어 찾는 법" },
               { "id": "C", "text": "문단 길이 재는 법" },
               { "id": "D", "text": "시제 바꾸는 법" }
@@ -372,9 +372,9 @@
             ]
           },
           "question": {
-            "prompt": "넷째 문단은 무엇을 강조하나요?",
+            "prompt": "시제와 높임은 왜 끝까지 맞아야 하나요?",
             "choices": [
-              { "id": "A", "text": "시제와 높임의 일관성" },
+              { "id": "A", "text": "대상과 상황의 일관성이 흔들리지 않게 하려고" },
               { "id": "B", "text": "문단 길이의 규칙" },
               { "id": "C", "text": "쉼표의 위치" },
               { "id": "D", "text": "단어 수의 많고 적음" }
@@ -448,9 +448,9 @@
             ]
           },
           "question": {
-            "prompt": "다섯째 문단은 어떻게 점검하나요?",
+            "prompt": "문장 호응은 어떻게 점검하면 좋나요?",
             "choices": [
-              { "id": "A", "text": "중심 뼈대를 먼저 찾는다" },
+              { "id": "A", "text": "중심 뼈대를 찾고 표현을 하나씩 다시 붙여 본다" },
               { "id": "B", "text": "문장을 무조건 늘인다" },
               { "id": "C", "text": "단어를 모두 바꾼다" },
               { "id": "D", "text": "주어를 없앤다" }
@@ -524,9 +524,9 @@
             ]
           },
           "question": {
-            "prompt": "여섯째 문단은 무엇을 정리하나요?",
+            "prompt": "문장 호응을 바로잡는 일이 왜 중요한가요?",
             "choices": [
-              { "id": "A", "text": "성분과 관계를 바로잡는 일" },
+              { "id": "A", "text": "읽는 사람이 뜻을 한 번에 따라가게 하려면 관계를 맞춰야 하기 때문" },
               { "id": "B", "text": "문단 길이 줄이기" },
               { "id": "C", "text": "맞춤법 외우기" },
               { "id": "D", "text": "문장 제목 붙이기" }
@@ -553,9 +553,15 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "뜻이 뒤틀리기 쉬운 표현은?",
+          "prompt": "문장 성분이 자연스럽게 서로 이어지는 관계는?",
+          "answerText": "호응",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 0, "end": 5 }
+            { "paragraphId": "p1", "start": 3, "end": 4 },
+            { "paragraphId": "p2", "start": 0, "end": 1 },
+            { "paragraphId": "p3", "start": 17, "end": 18 },
+            { "paragraphId": "p4", "start": 11, "end": 12 },
+            { "paragraphId": "p5", "start": 3, "end": 4 },
+            { "paragraphId": "p6", "start": 8, "end": 9 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -563,11 +569,12 @@
         },
         {
           "id": "q2",
-          "prompt": "앞뒤 관계를 맞춰야 하는 것은?",
+          "prompt": "앞뒤 절의 관계를 이어 주는 말은?",
+          "answerText": "연결 표현",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 103, "end": 108 },
-            { "paragraphId": "p5", "start": 108, "end": 113 },
-            { "paragraphId": "p6", "start": 68, "end": 73 }
+            { "paragraphId": "p3", "start": 103, "end": 107 },
+            { "paragraphId": "p5", "start": 108, "end": 112 },
+            { "paragraphId": "p6", "start": 68, "end": 72 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -575,9 +582,11 @@
         },
         {
           "id": "q3",
-          "prompt": "시간 관계를 가리키는 말은?",
+          "prompt": "일이 언제 일어나는지를 나타내는 문법 요소는?",
+          "answerText": "시제",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 0, "end": 2 }
+            { "paragraphId": "p4", "start": 0, "end": 1 },
+            { "paragraphId": "p6", "start": 75, "end": 76 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -585,9 +594,10 @@
         },
         {
           "id": "q4",
-          "prompt": "문장의 태도를 나타내는 말은?",
+          "prompt": "상대나 대상을 높여 드러내는 말은?",
+          "answerText": "높임 표현",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 4, "end": 9 }
+            { "paragraphId": "p4", "start": 4, "end": 8 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -595,9 +605,10 @@
         },
         {
           "id": "q5",
-          "prompt": "문장의 뼈대를 뜻하는 말은?",
+          "prompt": "문장의 기본 짜임을 가리키는 말은?",
+          "answerText": "중심 뼈대",
           "answerRanges": [
-            { "paragraphId": "p5", "start": 26, "end": 31 }
+            { "paragraphId": "p5", "start": 26, "end": 30 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
