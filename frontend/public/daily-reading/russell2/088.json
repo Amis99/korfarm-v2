@@ -109,7 +109,7 @@
           "stepId": "s4",
           "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 160 } ] },
           "question": {
-            "prompt": "이 단락의 핵심은 무엇인가요?",
+          "prompt": "연설은 무엇을 제안하나요?",
             "choices": [
               { "id": "A", "text": "급식 잔반을 줄이자는 제안과 그 이유" },
               { "id": "B", "text": "급식 시간을 더 늘리자는 요청" },
@@ -169,7 +169,7 @@
           "stepId": "s8",
           "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 160 } ] },
           "question": {
-            "prompt": "둘째 단락의 핵심은 무엇인가요?",
+          "prompt": "급식은 어떻게 받는 것이 좋다고 하나요?",
             "choices": [
               { "id": "A", "text": "적당히 받고 필요하면 추가로 받자." },
               { "id": "B", "text": "잔반은 무조건 없애야 한다." },
@@ -229,7 +229,7 @@
           "stepId": "s12",
           "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 168 } ] },
           "question": {
-            "prompt": "셋째 단락의 핵심은 무엇인가요?",
+          "prompt": "잔반이 많아지면 어떤 문제가 생기나요?",
             "choices": [
               { "id": "A", "text": "잔반은 비용과 분위기에 영향을 준다." },
               { "id": "B", "text": "잔반은 아무 영향이 없다." },
@@ -289,7 +289,7 @@
           "stepId": "s16",
           "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 157 } ] },
           "question": {
-            "prompt": "넷째 단락의 핵심은 무엇인가요?",
+          "prompt": "한 주 목표는 어떻게 실천하자고 하나요?",
             "choices": [
               { "id": "A", "text": "한 주 목표를 세워 함께 실천하자." },
               { "id": "B", "text": "누가 더 잘하는지 겨루자." },
@@ -349,7 +349,7 @@
           "stepId": "s20",
           "highlight": { "ranges": [ { "paragraphId": "p5", "start": 0, "end": 166 } ] },
           "question": {
-            "prompt": "다섯째 단락의 핵심은 무엇인가요?",
+          "prompt": "잔반을 줄이기 위한 변화는 어떻게 시작되나요?",
             "choices": [
               { "id": "A", "text": "작은 행동 변화부터 시작하자." },
               { "id": "B", "text": "새 규칙을 더 만들자." },
@@ -409,7 +409,7 @@
           "stepId": "s24",
           "highlight": { "ranges": [ { "paragraphId": "p6", "start": 0, "end": 147 } ] },
           "question": {
-            "prompt": "마지막 단락의 핵심은 무엇인가요?",
+          "prompt": "급식 시간을 더 책임 있게 만들기 위해 무엇을 부탁하나요?",
             "choices": [
               { "id": "A", "text": "식판을 살펴보고 함께 참여하자." },
               { "id": "B", "text": "급식은 혼자만 생각하자." },
@@ -424,12 +424,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "급식 잔반 줄이기를 함께 제안" },
-        { "id": "c2", "text": "많이 받지 말고 필요하면 추가" },
-        { "id": "c3", "text": "잔반은 비용과 존중 문제를 드러냄" },
-        { "id": "c4", "text": "한 주 실천 목표와 체크표 사용" },
-        { "id": "c5", "text": "새 규칙보다 기존 행동의 작은 변화" },
-        { "id": "c6", "text": "식판을 살펴보고 함께 참여하기" }
+        { "id": "c1", "text": "급식 잔반을 줄이는 일을 함께 제안한다." },
+        { "id": "c2", "text": "처음부터 많이 받지 말고 필요하면 추가로 받는다." },
+        { "id": "c3", "text": "잔반이 많아지면 처리 비용이 늘고 다음 식단을 짤 때도 어려움이 생긴다." },
+        { "id": "c4", "text": "우리 반은 한 주 동안 실천 목표를 정해 보자고 한다." },
+        { "id": "c5", "text": "이 제안은 새로운 규칙을 더 만드는 것이 아니라 이미 할 수 있는 행동을 조금만 바꾸자는 뜻이다." },
+        { "id": "c6", "text": "오늘 점심부터 자신의 식판을 더 살펴보며 함께 참여하자고 부탁한다." }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -438,7 +438,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "제안은 무슨 뜻인가요?",
+          "prompt": "어떤 생각을 내놓아 권하는 일은?",
           "answerRanges": [ { "paragraphId": "p1", "start": 40, "end": 42 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -446,7 +446,7 @@
         },
         {
           "id": "q2",
-          "prompt": "무조건은 무슨 뜻인가요?",
+          "prompt": "아무 까닭이나 예외 없이 바로 그렇게 하는 것은?",
           "answerRanges": [ { "paragraphId": "p2", "start": 64, "end": 67 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -454,7 +454,7 @@
         },
         {
           "id": "q3",
-          "prompt": "처리 비용은 무슨 뜻인가요?",
+          "prompt": "어떤 일을 치르는 데 드는 돈은?",
           "answerRanges": [ { "paragraphId": "p3", "start": 32, "end": 37 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -462,7 +462,7 @@
         },
         {
           "id": "q4",
-          "prompt": "목표는 무슨 뜻인가요?",
+          "prompt": "이루려고 정해 둔 대상은?",
           "answerRanges": [ { "paragraphId": "p4", "start": 23, "end": 25 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -470,7 +470,7 @@
         },
         {
           "id": "q5",
-          "prompt": "변화는 무슨 뜻인가요?",
+          "prompt": "전과 달라짐은?",
           "answerRanges": [ { "paragraphId": "p6", "start": 57, "end": 59 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
