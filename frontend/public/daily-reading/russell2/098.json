@@ -109,7 +109,7 @@
           "stepId": "s4",
           "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 143 } ] },
           "question": {
-            "prompt": "첫 부분의 핵심은?",
+            "prompt": "품사 판별의 기준은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "품사 판별의 기준을 제시한다." },
               { "id": "B", "text": "단어의 뜻만 보라고 한다." },
@@ -169,7 +169,7 @@
           "stepId": "s8",
           "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 124 } ] },
           "question": {
-            "prompt": "둘째 부분의 핵심은?",
+            "prompt": "체언은 어떤 특징으로 판별하나요?",
             "choices": [
               { "id": "A", "text": "조사와 결합하면 체언이다." },
               { "id": "B", "text": "뜻이 비슷하면 체언이다." },
@@ -229,7 +229,7 @@
           "stepId": "s12",
           "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 139 } ] },
           "question": {
-            "prompt": "셋째 부분의 핵심은?",
+            "prompt": "용언은 어떤 특징으로 판별하나요?",
             "choices": [
               { "id": "A", "text": "어미와 서술 기능이 용언의 기준이다." },
               { "id": "B", "text": "조사가 있으면 모두 용언이다." },
@@ -289,7 +289,7 @@
           "stepId": "s16",
           "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 150 } ] },
           "question": {
-            "prompt": "넷째 부분의 핵심은?",
+            "prompt": "형태가 비슷한 단어는 어떻게 가려야 하나요?",
             "choices": [
               { "id": "A", "text": "겉모습보다 실제 쓰임을 봐야 한다." },
               { "id": "B", "text": "겉모습만 보면 충분하다." },
@@ -349,7 +349,7 @@
           "stepId": "s20",
           "highlight": { "ranges": [ { "paragraphId": "p5", "start": 0, "end": 163 } ] },
           "question": {
-            "prompt": "다섯째 부분의 핵심은?",
+            "prompt": "의미보다 더 중요한 기준은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "사전 뜻보다 문장 속 관계가 중요하다." },
               { "id": "B", "text": "사전 뜻이 가장 중요하다." },
@@ -409,7 +409,7 @@
           "stepId": "s24",
           "highlight": { "ranges": [ { "paragraphId": "p6", "start": 0, "end": 157 } ] },
           "question": {
-            "prompt": "마지막 부분의 핵심은?",
+            "prompt": "품사 판별은 어떤 원리로 정리되나요?",
             "choices": [
               { "id": "A", "text": "품사는 문장 속 움직임으로 판별한다." },
               { "id": "B", "text": "품사는 뜻만으로 판별한다." },
@@ -424,12 +424,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "뜻만 보면 품사를 다 알 수 없음" },
-        { "id": "c2", "text": "조사 결합과 활용 가능성이 기준" },
-        { "id": "c3", "text": "조사와 결합하면 체언" },
-        { "id": "c4", "text": "어미를 붙여 꼴이 바뀌면 용언" },
-        { "id": "c5", "text": "비슷해 보여도 실제 쓰임을 봐야 함" },
-        { "id": "c6", "text": "품사는 문법 행동으로 판별함" }
+        { "id": "c1", "text": "뜻만으로는 품사를 정확히 판별하기 어렵다." },
+        { "id": "c2", "text": "조사 결합 가능성과 활용 가능성이 핵심 기준이다." },
+        { "id": "c3", "text": "조사와 결합하면 체언으로 보는 경우가 많다." },
+        { "id": "c4", "text": "어미를 붙여 형태가 바뀌면 용언에 가깝다." },
+        { "id": "c5", "text": "비슷해 보여도 실제 결합 관계를 함께 살펴야 한다." },
+        { "id": "c6", "text": "품사는 실제 문장 속 문법 행동으로 판별한다." }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -438,9 +438,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "성분은 무슨 뜻인가요?",
+          "prompt": "문장에서 맡은 구실을 이르는 말은?",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 70, "end": 72 }
+            { "paragraphId": "p2", "start": 70, "end": 71 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -448,9 +448,9 @@
         },
         {
           "id": "q2",
-          "prompt": "자연은 무슨 뜻인가요?",
+          "prompt": "어미가 붙어 형태가 바뀌는 말은?",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 133, "end": 135 }
+            { "paragraphId": "p3", "start": 21, "end": 22 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -458,9 +458,9 @@
         },
         {
           "id": "q3",
-          "prompt": "어간은 무슨 뜻인가요?",
+          "prompt": "활용할 때 중심이 되는 부분은?",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 57, "end": 59 }
+            { "paragraphId": "p4", "start": 57, "end": 58 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -468,9 +468,9 @@
         },
         {
           "id": "q4",
-          "prompt": "수식은 무슨 뜻인가요?",
+          "prompt": "다른 말을 꾸며 주는 일은?",
           "answerRanges": [
-            { "paragraphId": "p5", "start": 60, "end": 62 }
+            { "paragraphId": "p5", "start": 60, "end": 61 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -478,9 +478,9 @@
         },
         {
           "id": "q5",
-          "prompt": "문법은 무슨 뜻인가요?",
+          "prompt": "말을 쓰는 규칙은?",
           "answerRanges": [
-            { "paragraphId": "p5", "start": 149, "end": 151 }
+            { "paragraphId": "p5", "start": 149, "end": 150 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
