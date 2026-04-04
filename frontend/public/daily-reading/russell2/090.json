@@ -125,7 +125,7 @@
           "type": "summary",
           "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 222 } ] },
           "question": {
-            "prompt": "첫 문단의 핵심은 무엇인가요?",
+            "prompt": "광합성과 세포 호흡은 어떤 관계인가요?",
             "choices": [
               { "id": "A", "text": "광합성은 양분을 만들고 세포 호흡은 양분을 분해합니다." },
               { "id": "B", "text": "광합성과 세포 호흡은 같은 과정입니다." },
@@ -201,7 +201,7 @@
           "type": "summary",
           "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 167 } ] },
           "question": {
-            "prompt": "둘째 문단의 핵심은 무엇인가요?",
+            "prompt": "광합성은 무엇을 만들고 무엇을 내보내나요?",
             "choices": [
               { "id": "A", "text": "광합성은 양분과 산소를 만드는 과정입니다." },
               { "id": "B", "text": "광합성은 물을 없애는 과정입니다." },
@@ -277,7 +277,7 @@
           "type": "summary",
           "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 161 } ] },
           "question": {
-            "prompt": "셋째 문단의 핵심은 무엇인가요?",
+            "prompt": "세포 호흡은 무엇을 얻고 무엇을 내보내나요?",
             "choices": [
               { "id": "A", "text": "세포 호흡은 양분을 분해해 에너지를 얻는 과정입니다." },
               { "id": "B", "text": "세포 호흡은 산소를 만드는 과정입니다." },
@@ -353,7 +353,7 @@
           "type": "summary",
           "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 167 } ] },
           "question": {
-            "prompt": "넷째 문단의 핵심은 무엇인가요?",
+            "prompt": "두 과정은 어떻게 이어지나요?",
             "choices": [
               { "id": "A", "text": "광합성과 세포 호흡은 재료와 산물이 연결된 순환입니다." },
               { "id": "B", "text": "둘은 서로 무관합니다." },
@@ -414,7 +414,7 @@
           "type": "summary",
           "highlight": { "ranges": [ { "paragraphId": "p5", "start": 0, "end": 202 } ] },
           "question": {
-            "prompt": "다섯째 문단의 핵심은 무엇인가요?",
+            "prompt": "식물과 동물의 오해는 무엇인가요?",
             "choices": [
               { "id": "A", "text": "광합성과 세포 호흡은 에너지의 생성과 사용을 보여 줍니다." },
               { "id": "B", "text": "식물은 세포 호흡을 하지 않습니다." },
@@ -475,7 +475,7 @@
           "type": "summary",
           "highlight": { "ranges": [ { "paragraphId": "p6", "start": 0, "end": 179 } ] },
           "question": {
-            "prompt": "여섯째 문단의 핵심은 무엇인가요?",
+            "prompt": "둘을 함께 생각해야 하는 까닭은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "광합성은 저장, 세포 호흡은 사용, 둘이 함께 순환을 이룹니다." },
               { "id": "B", "text": "둘은 서로 전혀 다른 세계입니다." },
@@ -490,12 +490,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "광합성과 세포 호흡의 기본 뜻" },
-        { "id": "c2", "text": "광합성의 재료와 산물" },
-        { "id": "c3", "text": "세포 호흡의 역할" },
-        { "id": "c4", "text": "두 과정의 연결과 순환" },
-        { "id": "c5", "text": "식물과 동물의 오해와 실제" },
-        { "id": "c6", "text": "에너지 저장과 사용의 흐름" }
+        { "id": "c1", "text": "광합성은 빛으로 양분을 만듭니다." },
+        { "id": "c2", "text": "광합성은 산소도 함께 만들어 냅니다." },
+        { "id": "c3", "text": "세포 호흡은 양분을 분해해 에너지를 얻습니다." },
+        { "id": "c4", "text": "두 과정은 재료와 산물로 이어집니다." },
+        { "id": "c5", "text": "식물도 세포 호흡을 하고 동물도 양분을 이용합니다." },
+        { "id": "c6", "text": "에너지는 저장과 사용을 오갑니다." }
       ],
       "correctOrder": [],
       "seedPenalty": 1
@@ -504,40 +504,40 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "광합성과 세포 호흡은 무엇을 설명하나요?",
-          "answerRanges": [ { "paragraphId": "p1", "start": 0, "end": 222 } ],
+          "prompt": "사실과 다르게 잘못 이해함",
+          "answerRanges": [ { "paragraphId": "p5", "start": 19, "end": 20 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "광합성은 어떤 재료와 산물을 다루나요?",
-          "answerRanges": [ { "paragraphId": "p2", "start": 0, "end": 167 } ],
+          "prompt": "생물과 환경이 함께 이루는 체계",
+          "answerRanges": [ { "paragraphId": "p6", "start": 99, "end": 101 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "세포 호흡은 무엇을 하고 무엇이 생기나요?",
-          "answerRanges": [ { "paragraphId": "p3", "start": 0, "end": 161 } ],
+          "prompt": "어떤 것을 이루는 재료나 성분",
+          "answerRanges": [ { "paragraphId": "p6", "start": 112, "end": 113 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "광합성과 세포 호흡은 어떻게 연결되나요?",
-          "answerRanges": [ { "paragraphId": "p4", "start": 0, "end": 167 } ],
+          "prompt": "서로 마주 서는 다른 방향이나 성질",
+          "answerRanges": [ { "paragraphId": "p1", "start": 191, "end": 192 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "왜 둘을 함께 생각해야 하나요?",
-          "answerRanges": [ { "paragraphId": "p6", "start": 0, "end": 179 } ],
+          "prompt": "어떤 과정 끝에 생긴 결과물",
+          "answerRanges": [ { "paragraphId": "p4", "start": 16, "end": 17 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"

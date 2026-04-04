@@ -409,7 +409,7 @@
           "stepId": "s24",
           "highlight": { "ranges": [ { "paragraphId": "p6", "start": 0, "end": 136 } ] },
           "question": {
-            "prompt": "마지막 단락이 강조하는 문장 다듬기의 핵심은 무엇인가?",
+            "prompt": "문장을 다듬을 때 무엇을 함께 살펴야 하는가?",
             "choices": [
               { "id": "A", "text": "주어 성격과 서술어 요구 조건을 함께 확인하는 일" },
               { "id": "B", "text": "단어를 길게 쓰는 일" },
@@ -424,12 +424,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "의미 자질" },
-        { "id": "c2", "text": "무생물 주어" },
-        { "id": "c3", "text": "복수 주체" },
-        { "id": "c4", "text": "문장 거리" },
-        { "id": "c5", "text": "호응 오류" },
-        { "id": "c6", "text": "형식과 의미" }
+        { "id": "c1", "text": "주어와 서술어는 뜻도 맞아야 한다." },
+        { "id": "c2", "text": "무생물 주어는 서술어와 어긋날 수 있다." },
+        { "id": "c3", "text": "복수 주체에 맞는 서술어를 따져야 한다." },
+        { "id": "c4", "text": "긴 문장은 호응이 더 쉽게 흐트러진다." },
+        { "id": "c5", "text": "뜻이 어긋나면 문장이 어색해진다." },
+        { "id": "c6", "text": "형식과 의미를 함께 봐야 한다." }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -438,7 +438,7 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "주어와 서술어가 서로 어울릴 때 함께 보아야 하는 요소는 무엇인가?",
+          "prompt": "대상을 이루는 의미상의 성질",
           "answerRanges": [ { "paragraphId": "p1", "start": 52, "end": 56 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -446,7 +446,7 @@
         },
         {
           "id": "q2",
-          "prompt": "사람을 요구하는 서술어에 어울리지 않는 주어의 예는 무엇인가?",
+          "prompt": "살아 있지 않은 것이 주어인 표현",
           "answerRanges": [ { "paragraphId": "p2", "start": 24, "end": 29 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -454,7 +454,7 @@
         },
         {
           "id": "q3",
-          "prompt": "복수 주체를 요구하는 서술어와 어울리는 주체의 종류는 무엇인가?",
+          "prompt": "여럿이 함께 행동하는 주체",
           "answerRanges": [ { "paragraphId": "p3", "start": 44, "end": 48 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -462,16 +462,16 @@
         },
         {
           "id": "q4",
-          "prompt": "긴 문장일수록 다시 확인해야 하는 것은 무엇인가?",
-          "answerRanges": [ { "paragraphId": "p4", "start": 100, "end": 106 } ],
+          "prompt": "문법에 어긋나거나 어색한 문장",
+          "answerRanges": [ { "paragraphId": "p5", "start": 10, "end": 11 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "주어와 서술어의 호응은 무엇이 함께 맞아야 완성된다고 했는가?",
-          "answerRanges": [ { "paragraphId": "p6", "start": 16, "end": 34 } ],
+          "prompt": "서로 잘 맞아 어울림",
+          "answerRanges": [ { "paragraphId": "p6", "start": 12, "end": 13 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
