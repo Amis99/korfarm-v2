@@ -6,39 +6,78 @@
   "title": "환경 보호 발표의 도입과 결론을 점검하는 대화",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_2",
-  "schoolGradeRange": { "min": 8, "max": 9 },
+  "schoolGradeRange": {
+    "min": 8,
+    "max": 9
+  },
   "area": "READING",
   "subArea": "SPEECH",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
+  "competencies": [
+    "READING"
+  ],
+  "tags": [
+    "daily"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
   "timeLimitSec": 480,
   "assets": {},
   "payload": {
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        { "id": "p1", "text": "지민: 내가 자료를 많이 넣긴 했는데 너희가 듣기에 발표가 끝난 뒤 꼭 남아야 할 내용이 바로 떠오르니?" },
-        { "id": "p2", "text": "유나: 정보는 많았는데 우리가 무엇을 가장 중요하게 기억해야 하는지는 조금 흐려졌어." },
-        { "id": "p3", "text": "지민: 그러면 미세 플라스틱의 정의보다 학교에서 줄일 수 있는 행동을 중심 내용으로 잡는 편이 낫겠네." },
-        { "id": "p4", "text": "민재: 응, 지금 발표는 자료 설명이 길어서 원인과 피해와 해결책이 따로 들리는데 중심 문장을 먼저 세우면 훨씬 또렷해질 것 같아." },
-        { "id": "p5", "text": "지민: 알겠어, 시작에서 오늘 발표의 핵심을 먼저 말하고 뒤에서는 그 말을 뒷받침하는 자료만 남겨 볼게." },
-        { "id": "p6", "text": "유나: 그렇게 하면 듣는 사람도 세부 정보보다 발표가 결국 무엇을 전하려는지 놓치지 않을 거야." }
+        {
+          "id": "p1",
+          "text": "지민: 내가 자료를 많이 넣긴 했는데 너희가 듣기에 발표가 끝난 뒤 꼭 남아야 할 내용이 바로 떠오르니?"
+        },
+        {
+          "id": "p2",
+          "text": "유나: 정보는 많았는데 우리가 무엇을 가장 중요하게 기억해야 하는지는 조금 흐려졌어."
+        },
+        {
+          "id": "p3",
+          "text": "지민: 그러면 미세 플라스틱의 정의보다 학교에서 줄일 수 있는 행동을 중심 내용으로 잡는 편이 낫겠네."
+        },
+        {
+          "id": "p4",
+          "text": "민재: 응, 지금 발표는 자료 설명이 길어서 원인과 피해와 해결책이 따로 들리는데 중심 문장을 먼저 세우면 훨씬 또렷해질 것 같아."
+        },
+        {
+          "id": "p5",
+          "text": "지민: 알겠어, 시작에서 오늘 발표의 핵심을 먼저 말하고 뒤에서는 그 말을 뒷받침하는 자료만 남겨 볼게."
+        },
+        {
+          "id": "p6",
+          "text": "유나: 그렇게 하면 듣는 사람도 세부 정보보다 발표가 결국 무엇을 전하려는지 놓치지 않을 거야."
+        }
       ]
     },
     "intensive": {
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 58 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 58
+              }
+            ]
+          },
           "question": {
-            "prompt": "지민은 발표를 들은 뒤 무엇이 떠오르길 바라나요?",
+            "prompt": "지민은 무엇이 바로 떠오르길 바라나요?",
             "choices": [
-              { "id": "A", "text": "꼭 남아야 할 내용이 떠오르길 바란다." },
-              { "id": "B", "text": "자료만 많이 떠오르길 바란다." },
-              { "id": "C", "text": "아무 내용도 안 떠오르길 바란다." },
-              { "id": "D", "text": "제목만 떠오르길 바란다." }
+              { "id": "A", "text": "발표 뒤 남아야 할 핵심 내용" },
+              { "id": "B", "text": "사진을 넣는 순서" },
+              { "id": "C", "text": "발표자의 말 빠르기" },
+              { "id": "D", "text": "자료의 색깔 배치" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -46,14 +85,22 @@
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 58 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 58
+              }
+            ]
+          },
           "question": {
-            "prompt": "발표 뒤 남아야 할 핵심 내용은 무엇인가요?",
+            "prompt": "발표의 핵심은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "발표 뒤 남아야 할 핵심 내용이다." },
-              { "id": "B", "text": "자료의 양이다." },
-              { "id": "C", "text": "발표자의 이름이다." },
-              { "id": "D", "text": "청중의 수이다." }
+              { "id": "A", "text": "발표가 끝난 뒤 남아야 할 내용" },
+              { "id": "B", "text": "자료를 많이 넣는 일" },
+              { "id": "C", "text": "목소리를 크게 내는 일" },
+              { "id": "D", "text": "그림을 먼저 그리는 일" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -61,14 +108,22 @@
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 47 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 47
+              }
+            ]
+          },
           "question": {
-            "prompt": "유나는 발표 내용 중 무엇이 흐려졌다고 하나요?",
+            "prompt": "유나는 무엇이 흐려졌다고 했나요?",
             "choices": [
-              { "id": "A", "text": "가장 중요하게 기억해야 할 점이다." },
-              { "id": "B", "text": "발표 시간이다." },
-              { "id": "C", "text": "자료의 개수이다." },
-              { "id": "D", "text": "발표자의 목소리이다." }
+              { "id": "A", "text": "가장 중요하게 기억해야 할 내용" },
+              { "id": "B", "text": "발표의 길이" },
+              { "id": "C", "text": "글씨의 크기" },
+              { "id": "D", "text": "사진의 색깔" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -76,14 +131,22 @@
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 47 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 47
+              }
+            ]
+          },
           "question": {
-            "prompt": "중요하게 기억해야 할 점이 흐려졌다는 뜻은 무엇인가요?",
+            "prompt": "발표에서 가장 중요한 기억은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "가장 중요하게 기억해야 할 점이다." },
-              { "id": "B", "text": "발표 시간이 너무 짧다는 점이다." },
-              { "id": "C", "text": "청중이 너무 적다는 점이다." },
-              { "id": "D", "text": "발표자가 바뀌었다는 점이다." }
+              { "id": "A", "text": "정보가 많아도 무엇을 가장 중요하게 기억할지 정하는 것" },
+              { "id": "B", "text": "말을 빠르게 하는 것" },
+              { "id": "C", "text": "사진을 많이 넣는 것" },
+              { "id": "D", "text": "발표 시간을 늘리는 것" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -91,14 +154,22 @@
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 57 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 57
+              }
+            ]
+          },
           "question": {
-            "prompt": "지민은 중심 내용으로 무엇을 잡자고 하나요?",
+            "prompt": "지민이 중심 내용으로 잡자고 한 것은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "학교에서 줄일 수 있는 행동이다." },
-              { "id": "B", "text": "미세 플라스틱의 정의이다." },
-              { "id": "C", "text": "발표자의 이름이다." },
-              { "id": "D", "text": "자료의 개수이다." }
+              { "id": "A", "text": "학교에서 줄일 수 있는 행동" },
+              { "id": "B", "text": "미세 플라스틱의 정의" },
+              { "id": "C", "text": "발표 시간 늘리기" },
+              { "id": "D", "text": "피해만 자세히 말하기" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -106,14 +177,22 @@
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 57 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 57
+              }
+            ]
+          },
           "question": {
-            "prompt": "중심 내용으로 무엇을 잡자고 하나요?",
+            "prompt": "문단의 중심 내용은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "정의보다 행동을 중심에 두자고 한다." },
-              { "id": "B", "text": "행동보다 정의를 중심에 두자고 한다." },
-              { "id": "C", "text": "자료를 전부 지우자고 한다." },
-              { "id": "D", "text": "핵심을 숨기자고 한다." }
+              { "id": "A", "text": "정의보다 행동을 중심에 두는 것이 더 낫다" },
+              { "id": "B", "text": "자료를 더 많이 모아야 한다" },
+              { "id": "C", "text": "질문을 줄여야 한다" },
+              { "id": "D", "text": "소리를 크게 내야 한다" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -121,14 +200,22 @@
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 73 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 73
+              }
+            ]
+          },
           "question": {
-            "prompt": "민재는 지금 발표가 왜 또렷하지 않다고 하나요?",
+            "prompt": "민재가 먼저 세우자고 한 것은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "자료 설명이 길어서 원인과 피해와 해결책이 따로 들리기 때문이다." },
-              { "id": "B", "text": "핵심이 너무 짧기 때문이다." },
-              { "id": "C", "text": "청중이 너무 많기 때문이다." },
-              { "id": "D", "text": "행동 내용이 없기 때문이다." }
+              { "id": "A", "text": "중심 문장" },
+              { "id": "B", "text": "설명 자료" },
+              { "id": "C", "text": "사진 장식" },
+              { "id": "D", "text": "발표 제목만" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -136,14 +223,22 @@
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 73 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 73
+              }
+            ]
+          },
           "question": {
-            "prompt": "중심 문장을 먼저 세우면 어떤 점이 좋아진다고 하나요?",
+            "prompt": "문단에서 강조한 것은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "발표가 훨씬 또렷해진다." },
-              { "id": "B", "text": "발표가 더 길어진다." },
-              { "id": "C", "text": "자료가 전부 사라진다." },
-              { "id": "D", "text": "주제가 바뀐다." }
+              { "id": "A", "text": "원인과 피해와 해결책이 따로 들리면 중심 문장을 먼저 세워야 한다" },
+              { "id": "B", "text": "자료를 더 많이 모아야 한다" },
+              { "id": "C", "text": "발표를 짧게만 해야 한다" },
+              { "id": "D", "text": "마지막을 생략해야 한다" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -151,14 +246,22 @@
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 58 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 58
+              }
+            ]
+          },
           "question": {
-            "prompt": "지민은 발표 시작에서 무엇을 하겠다고 하나요?",
+            "prompt": "지민이 시작에서 먼저 하려는 일은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "핵심을 먼저 말하겠다고 한다." },
-              { "id": "B", "text": "자료만 길게 늘어놓겠다고 한다." },
-              { "id": "C", "text": "결론을 숨기겠다고 한다." },
-              { "id": "D", "text": "아무 말도 하지 않겠다고 한다." }
+              { "id": "A", "text": "오늘 발표의 핵심을 먼저 말하는 것" },
+              { "id": "B", "text": "결론부터 숨기는 것" },
+              { "id": "C", "text": "자료를 뒤에만 모으는 것" },
+              { "id": "D", "text": "질문을 빼는 것" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -166,14 +269,22 @@
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 58 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 58
+              }
+            ]
+          },
           "question": {
-            "prompt": "시작에서 핵심을 먼저 말하고 뒤에는 무엇만 남기려 하나요?",
+            "prompt": "발표 구조에서 중요한 점은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "핵심을 먼저 말하고 자료를 뒤에 둔다." },
-              { "id": "B", "text": "자료를 먼저 말하고 핵심을 뒤에 둔다." },
-              { "id": "C", "text": "결론을 생략한다." },
-              { "id": "D", "text": "청중을 혼란스럽게 한다." }
+              { "id": "A", "text": "앞에서는 핵심을 말하고 뒤에서는 뒷받침 자료를 남기는 것" },
+              { "id": "B", "text": "앞에서 자료만 늘리는 것" },
+              { "id": "C", "text": "뒤에서 핵심을 빼는 것" },
+              { "id": "D", "text": "중간에 주제를 바꾸는 것" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -181,14 +292,22 @@
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 53 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 53
+              }
+            ]
+          },
           "question": {
-            "prompt": "유나는 듣는 사람이 무엇을 놓치지 않을 거라고 하나요?",
+            "prompt": "유나는 듣는 사람이 무엇을 놓치지 않을 것이라고 했나요?",
             "choices": [
-              { "id": "A", "text": "발표가 결국 무엇을 전하려는지이다." },
-              { "id": "B", "text": "자료의 숫자이다." },
-              { "id": "C", "text": "발표자의 목소리이다." },
-              { "id": "D", "text": "제목의 길이이다." }
+              { "id": "A", "text": "발표가 결국 무엇을 전하려는지" },
+              { "id": "B", "text": "자료의 개수" },
+              { "id": "C", "text": "그림의 색깔" },
+              { "id": "D", "text": "말의 빠르기" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -196,14 +315,22 @@
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 53 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 53
+              }
+            ]
+          },
           "question": {
-            "prompt": "듣는 사람은 발표에서 무엇을 놓치지 않게 되나요?",
+            "prompt": "마무리에서 가장 중요한 점은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "발표의 핵심 뜻이다." },
-              { "id": "B", "text": "발표 시간이다." },
-              { "id": "C", "text": "자료의 줄 수이다." },
-              { "id": "D", "text": "배경 음악이다." }
+              { "id": "A", "text": "듣는 사람이 발표의 뜻을 놓치지 않게 하는 것" },
+              { "id": "B", "text": "목소리를 줄이는 것" },
+              { "id": "C", "text": "내용을 더 어렵게 만드는 것" },
+              { "id": "D", "text": "장식을 늘리는 것" }
             ],
             "answerId": "A",
             "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
@@ -213,68 +340,132 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "발표 뒤 남아야 할 내용을 먼저 떠올린다" },
-        { "id": "c2", "text": "중요한 점이 흐려질 수 있다" },
-        { "id": "c3", "text": "행동을 중심 내용으로 잡자고 한다" },
-        { "id": "c4", "text": "중심 문장을 세우면 발표가 또렷해진다" },
-        { "id": "c5", "text": "시작에서 핵심을 먼저 말한다" },
-        { "id": "c6", "text": "듣는 사람이 발표의 뜻을 놓치지 않는다" }
+        {
+          "id": "c1",
+          "text": "발표가 끝난 뒤 남아야 할 핵심을 먼저 떠올려야 한다."
+        },
+        {
+          "id": "c2",
+          "text": "정보가 많아도 가장 중요한 기억을 세워야 한다."
+        },
+        {
+          "id": "c3",
+          "text": "중심 내용으로 학교에서 줄일 행동을 잡는 편이 낫다."
+        },
+        {
+          "id": "c4",
+          "text": "원인과 피해와 해결책이 따로 들리면 발표가 흐려진다."
+        },
+        {
+          "id": "c5",
+          "text": "시작에서 핵심을 먼저 말하고 뒤에서는 뒷받침 자료를 남긴다."
+        },
+        {
+          "id": "c6",
+          "text": "듣는 사람이 발표의 뜻을 놓치지 않게 해야 한다."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "발표가 끝난 뒤 남아야 할 내용을 먼저 떠올리게 하는 부분은 어디인가요?",
+          "prompt": "발표는 무슨 뜻인가요?",
+          "answerText": "여러 사람 앞에서 내용을 알리는 일",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 0, "end": 58 }
+            {
+              "paragraphId": "p1",
+              "start": 29,
+              "end": 31
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "중요하게 기억해야 할 점이 흐려졌다고 말하는 부분은 어디인가요?",
+          "prompt": "자료는 무슨 뜻인가요?",
+          "answerText": "근거로 쓰는 정보",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 0, "end": 47 }
+            {
+              "paragraphId": "p1",
+              "start": 7,
+              "end": 9
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "미세 플라스틱의 정의보다 학교에서 줄일 수 있는 행동을 중심 내용으로 잡자고 하는 부분은 어디인가요?",
+          "prompt": "정의는 무슨 뜻인가요?",
+          "answerText": "대상의 뜻을 분명히 밝히는 일",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 0, "end": 57 }
+            {
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 19
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q4",
-          "prompt": "중심 문장을 먼저 세우면 발표가 또렷해진다고 설명하는 부분은 어디인가요?",
+          "prompt": "중심은 무슨 뜻인가요?",
+          "answerText": "가장 중요한 부분",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 0, "end": 73 }
+            {
+              "paragraphId": "p3",
+              "start": 39,
+              "end": 41
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q5",
-          "prompt": "발표의 핵심을 먼저 말하고 뒤에서는 그 말을 뒷받침하는 자료만 남기며 듣는 사람이 발표의 뜻을 놓치지 않게 된다고 말하는 부분은 어디인가요?",
+          "prompt": "해결책은 무슨 뜻인가요?",
+          "answerText": "문제를 풀어 가는 방법",
+          "answerMatchMode": "ANY",
           "answerRanges": [
-            { "paragraphId": "p5", "start": 0, "end": 58 },
-            { "paragraphId": "p6", "start": 0, "end": 53 }
+            {
+              "paragraphId": "p4",
+              "start": 33,
+              "end": 36
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true
         }
       ]
     }

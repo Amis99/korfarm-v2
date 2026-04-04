@@ -4,7 +4,7 @@
   "version": 1,
   "status": "PUBLISHED",
   "title": "가을 축제 체험 부스를 안내하는 홍보문 초고",
-  "description": "일일 읽해 - 정독·복기·확인",
+  "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_2",
   "schoolGradeRange": {
     "min": 8,
@@ -111,7 +111,7 @@
             ]
           },
           "question": {
-            "prompt": "글쓴이는 어떤 마음으로 이 글을 쓰고 있나요?",
+            "prompt": "축제를 소개하며 바라는 마음은 어떤가요?",
             "choices": [
               {
                 "id": "A",
@@ -150,7 +150,7 @@
             ]
           },
           "question": {
-            "prompt": "첫째 부분의 중심 내용은 무엇인가요?",
+            "prompt": "축제 소개의 핵심은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -267,7 +267,7 @@
             ]
           },
           "question": {
-            "prompt": "둘째 부분의 중심 내용은 무엇인가요?",
+            "prompt": "오후 행사와 체험 부스가 함께 전하는 바는 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -384,7 +384,7 @@
             ]
           },
           "question": {
-            "prompt": "셋째 부분의 중심 내용은 무엇인가요?",
+            "prompt": "댄스부 공연과 작년 반응이 전하는 기대는 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -501,7 +501,7 @@
             ]
           },
           "question": {
-            "prompt": "넷째 부분의 중심 내용은 무엇인가요?",
+            "prompt": "축제 참여와 시간 확인이 함께 전하는 바는 무엇인가요?",
             "choices": [
               {
                 "id": "A",
@@ -618,7 +618,7 @@
             ]
           },
           "question": {
-            "prompt": "다섯째 부분의 중심 내용은 무엇인가요?",
+            "prompt": "친구들과 사진을 찍고 부스를 돌면 어떤 추억이 남나요?",
             "choices": [
               {
                 "id": "A",
@@ -735,7 +735,7 @@
             ]
           },
           "question": {
-            "prompt": "여섯째 부분의 중심 내용은 무엇인가요?",
+            "prompt": "마무리에서 글쓴이는 어떤 마음을 전하나요?",
             "choices": [
               {
                 "id": "A",
@@ -805,12 +805,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "글쓴이는 어떤 행사를 소개하려고 하나요?",
+          "prompt": "체험은 무슨 뜻인가요?",
+          "answerText": "직접 해 보는 것",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 0,
-              "end": 88
+              "paragraphId": "p2",
+              "start": 22,
+              "end": 24
             }
           ],
           "scoring": {
@@ -822,12 +823,13 @@
         },
         {
           "id": "q2",
-          "prompt": "축제의 볼거리와 먹을거리는 어떤 점에서 다양하다고 하나요?",
+          "prompt": "'운영되기'는 무슨 뜻인가요?",
+          "answerText": "일이 돌아가며 이루어지는 것",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 77
+              "start": 47,
+              "end": 51
             }
           ],
           "scoring": {
@@ -839,12 +841,13 @@
         },
         {
           "id": "q3",
-          "prompt": "댄스부 공연에 대해 글쓴이는 어떤 기대를 보이나요?",
+          "prompt": "기대는 무슨 뜻인가요?",
+          "answerText": "앞으로 잘되기를 바라며 기다리는 마음",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 0,
-              "end": 65
+              "start": 51,
+              "end": 53
             }
           ],
           "scoring": {
@@ -856,12 +859,13 @@
         },
         {
           "id": "q4",
-          "prompt": "축제에 와서 어떻게 참여해 달라고 하나요?",
+          "prompt": "추억은 무슨 뜻인가요?",
+          "answerText": "지난 일을 떠올리며 간직하는 기억",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 0,
-              "end": 72
+              "paragraphId": "p5",
+              "start": 45,
+              "end": 47
             }
           ],
           "scoring": {
@@ -873,17 +877,13 @@
         },
         {
           "id": "q5",
-          "prompt": "축제에서 무엇을 하며 어떤 마음을 남기려 하나요?",
+          "prompt": "알차게는 무슨 뜻인가요?",
+          "answerText": "내용이 충실하고 실속 있게",
           "answerRanges": [
             {
-              "paragraphId": "p5",
-              "start": 0,
-              "end": 67
-            },
-            {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 66
+              "start": 11,
+              "end": 14
             }
           ],
           "scoring": {
@@ -891,7 +891,7 @@
             "wrongDeltaSec": -45
           },
           "revealOnWrong": true,
-          "answerMatchMode": "ALL"
+          "answerMatchMode": "ANY"
         }
       ]
     }
