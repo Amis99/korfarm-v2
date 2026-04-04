@@ -139,7 +139,7 @@
           "stepId": "s6",
           "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 207 } ] },
           "question": {
-            "prompt": "이 문단의 핵심은?",
+            "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "그래프의 뜻과 탐색의 기본" },
               { "id": "B", "text": "지도 읽는 법" },
@@ -199,7 +199,7 @@
           "stepId": "s10",
           "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 209 } ] },
           "question": {
-            "prompt": "이 문단의 핵심은?",
+            "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "연결이 복잡해서 탐색이 필요" },
               { "id": "B", "text": "그림이 예뻐서 필요" },
@@ -364,7 +364,7 @@
           "stepId": "s21",
           "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 212 } ] },
           "question": {
-            "prompt": "이 문단의 핵심은?",
+            "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "한 갈래를 따라 깊게 간다" },
               { "id": "B", "text": "가까운 곳부터 넓게 본다" },
@@ -424,7 +424,7 @@
           "stepId": "s25",
           "highlight": { "ranges": [ { "paragraphId": "p5", "start": 0, "end": 163 } ] },
           "question": {
-            "prompt": "이 문단의 핵심은?",
+            "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "방문 표시가 탐색을 안정하게 한다" },
               { "id": "B", "text": "정점 수를 줄여야 한다" },
@@ -484,7 +484,7 @@
           "stepId": "s29",
           "highlight": { "ranges": [ { "paragraphId": "p6", "start": 178, "end": 224 } ] },
           "question": {
-            "prompt": "해법의 핵심은?",
+            "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "어떤 기준으로 순서를 세우는가" },
               { "id": "B", "text": "간선을 더 많이 그리는 것" },
@@ -499,7 +499,7 @@
           "stepId": "s30",
           "highlight": { "ranges": [ { "paragraphId": "p6", "start": 0, "end": 224 } ] },
           "question": {
-            "prompt": "이 문단의 중심은?",
+            "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "구조에 맞게 탐색 순서를 정한다" },
               { "id": "B", "text": "표를 크게 만든다" },
@@ -514,11 +514,11 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "그래프는 연결 관계를 나타내는 자료 구조다." },
-        { "id": "c2", "text": "정점과 간선은 그래프의 기본 요소다." },
-        { "id": "c3", "text": "그래프 탐색은 연결망을 따라 구조를 살피는 과정이다." },
-        { "id": "c4", "text": "너비 우선은 가까운 곳부터 넓게 본다." },
-        { "id": "c5", "text": "깊이 우선은 한 갈래를 끝까지 따라간다." },
+        { "id": "c1", "text": "그래프는 여러 대상과 그 사이의 연결 관계를 함께 나타내는 자료 구조이다." },
+        { "id": "c2", "text": "정점은 도시처럼 대상 하나를 나타내고, 간선은 그것들을 잇는 선이다." },
+        { "id": "c3", "text": "그래프 탐색은 연결망에서 정점을 찾거나 연결 구조를 차례로 살펴보는 과정이다." },
+        { "id": "c4", "text": "너비 우선 탐색은 가까운 정점부터 넓게 살펴보는 방법이다." },
+        { "id": "c5", "text": "깊이 우선 탐색은 한 갈래를 끝까지 따라가며 살피는 방법이다." },
         { "id": "c6", "text": "방문 표시와 순서 기준이 탐색의 핵심이다." }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
@@ -528,7 +528,8 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "도시를 점처럼 나타낸 말은?",
+          "prompt": "선이나 모서리가 만나는 꼭짓점은?",
+          "answerText": "정점",
           "answerRanges": [ { "paragraphId": "p1", "start": 84, "end": 86 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -536,7 +537,8 @@
         },
         {
           "id": "q2",
-          "prompt": "도시를 잇는 선은?",
+          "prompt": "두 정점을 잇는 선은?",
+          "answerText": "간선",
           "answerRanges": [ { "paragraphId": "p1", "start": 112, "end": 114 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -544,7 +546,8 @@
         },
         {
           "id": "q3",
-          "prompt": "효율이 떨어지는 상태는?",
+          "prompt": "힘이나 시간이 쓸데없이 많이 드는 상태는?",
+          "answerText": "비효율적",
           "answerRanges": [ { "paragraphId": "p2", "start": 200, "end": 204 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -552,16 +555,18 @@
         },
         {
           "id": "q4",
-          "prompt": "되돌아오는 길이 있는 상태는?",
-          "answerRanges": [ { "paragraphId": "p4", "start": 149, "end": 151 } ],
+          "prompt": "여러 방향으로 나뉘는 곳은?",
+          "answerText": "갈림길",
+            "answerRanges": [ { "paragraphId": "p4", "start": 47, "end": 50 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "다시 세지 않도록 하는 것은?",
-          "answerRanges": [ { "paragraphId": "p5", "start": 36, "end": 38 } ],
+          "prompt": "이미 간 곳을 표시해 두는 표지는?",
+          "answerText": "방문 표시",
+            "answerRanges": [ { "paragraphId": "p5", "start": 95, "end": 100 } ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
