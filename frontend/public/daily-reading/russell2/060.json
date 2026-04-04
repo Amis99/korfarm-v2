@@ -4,7 +4,7 @@
   "version": 1,
   "status": "PUBLISHED",
   "title": "축제 부스 역할을 나누는 대화",
-  "description": "러셀 독해 - 정독·복기·확인",
+  "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_2",
   "schoolGradeRange": {
     "min": 8,
@@ -109,7 +109,7 @@
           "stepId": "s4",
           "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 110 } ] },
           "question": {
-            "prompt": "앞부분의 핵심은 무엇인가요?",
+            "prompt": "역할 나누기의 출발점은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "축제 부스 역할을 나누기 전에 가능한 시간을 먼저 확인하자는 내용입니다." },
               { "id": "B", "text": "축제 부스를 하지 않자는 내용입니다." },
@@ -169,7 +169,7 @@
           "stepId": "s8",
           "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 108 } ] },
           "question": {
-            "prompt": "둘째 문단의 핵심은 무엇인가요?",
+            "prompt": "준비 담당을 정할 때 무엇이 중요하다고 보나요?",
             "choices": [
               { "id": "A", "text": "재료 준비와 사전 확인에 필요한 역할을 말하는 내용입니다." },
               { "id": "B", "text": "안내가 가장 쉬운 역할이라는 내용입니다." },
@@ -409,7 +409,7 @@
           "stepId": "s24",
           "highlight": { "ranges": [ { "paragraphId": "p6", "start": 0, "end": 149 } ] },
           "question": {
-            "prompt": "여섯째 부분의 핵심은 무엇인가요?",
+            "prompt": "마지막 조율의 핵심은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "역할 분담을 정리하고 빠진 점을 오늘 안에 말해 달라는 내용입니다." },
               { "id": "B", "text": "정리 시간에는 아무도 남지 말라는 내용입니다." },
@@ -424,12 +424,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "축제 부스 역할 나누기" },
-        { "id": "c2", "text": "재료 준비와 사전 확인" },
-        { "id": "c3", "text": "행사 당일 안내" },
-        { "id": "c4", "text": "기록 담당 필요" },
-        { "id": "c5", "text": "정리 시간 함께 마무리" },
-        { "id": "c6", "text": "빠진 점을 오늘 안에 말하기" }
+        { "id": "c1", "text": "민우는 축제 체험 부스 준비 역할을 나누자고 말한다." },
+        { "id": "c2", "text": "서진은 재료 준비를 맡을 수 있지만 도구 점검까지 하려면 시간이 오래 걸릴 수 있다고 본다." },
+        { "id": "c3", "text": "하람은 행사 당일 안내를 맡으며 줄 안내와 안전 수칙 설명이 꼭 필요하다고 말한다." },
+        { "id": "c4", "text": "민우는 기록 담당이 없으면 사진 정리와 보고서 작성이 급해질 수 있다고 걱정한다." },
+        { "id": "c5", "text": "지후는 기록을 맡고 준비 역할은 민우와 서진이 나누는 편이 낫다고 제안한다." },
+        { "id": "c6", "text": "마지막에 준비, 안내, 기록 역할을 정한 뒤 모두 함께 정리하기로 한다." }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -438,9 +438,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "회의에서 먼저 정하려는 것은 무엇인가요?",
+          "prompt": "논의할 거리를 모아 놓은 것을 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 0, "end": 110 }
+            { "paragraphId": "p1", "start": 10, "end": 11 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -448,9 +448,9 @@
         },
         {
           "id": "q2",
-          "prompt": "서진이 맡으려는 역할과 필요한 조건은 무엇인가요?",
+          "prompt": "직접 해 보게 하는 방식을 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 0, "end": 108 }
+            { "paragraphId": "p1", "start": 41, "end": 43 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -458,9 +458,9 @@
         },
         {
           "id": "q3",
-          "prompt": "하람이 말한 안내 역할의 핵심은 무엇인가요?",
+          "prompt": "여럿이 모여 하는 일을 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 0, "end": 117 }
+            { "paragraphId": "p3", "start": 21, "end": 22 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -468,9 +468,9 @@
         },
         {
           "id": "q4",
-          "prompt": "기록 담당이 필요한 이유는 무엇인가요?",
+          "prompt": "글이나 사진으로 남겨 두는 일을 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 0, "end": 149 }
+            { "paragraphId": "p4", "start": 66, "end": 67 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -478,9 +478,9 @@
         },
         {
           "id": "q5",
-          "prompt": "마지막에 전달한 부탁은 무엇인가요?",
+          "prompt": "흩어진 것을 한데 모아 바로잡는 일을 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p6", "start": 0, "end": 149 }
+            { "paragraphId": "p6", "start": 62, "end": 63 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,

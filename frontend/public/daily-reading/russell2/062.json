@@ -64,7 +64,7 @@
           "stepId": "s1",
           "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 50 }] },
           "question": {
-            "prompt": "무엇을 설명하나요?",
+            "prompt": "이 글은 무엇을 설명하나요?",
             "choices": [
               { "id": "A", "text": "전기 회로의 부품 연결" },
               { "id": "B", "text": "물의 흐름" },
@@ -109,7 +109,7 @@
           "stepId": "s4",
           "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 184 }] },
           "question": {
-            "prompt": "앞부분은 무엇을 소개하나요?",
+            "prompt": "두 연결 방식은 무엇이 다른가요?",
             "choices": [
               { "id": "A", "text": "직렬과 병렬의 뜻과 차이" },
               { "id": "B", "text": "전압만의 뜻" },
@@ -184,7 +184,7 @@
           "stepId": "s9",
           "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 157 }] },
           "question": {
-            "prompt": "둘째 부분의 핵심은 무엇인가요?",
+            "prompt": "직렬 연결에서는 어떤 흐름이 드러나나요?",
             "choices": [
               { "id": "A", "text": "직렬 연결의 흐름과 전압 분배" },
               { "id": "B", "text": "병렬 연결의 장점" },
@@ -259,7 +259,7 @@
           "stepId": "s14",
           "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 165 }] },
           "question": {
-            "prompt": "셋째 부분의 핵심은 무엇인가요?",
+            "prompt": "병렬 연결에서는 어떤 차이가 드러나나요?",
             "choices": [
               { "id": "A", "text": "병렬 연결의 흐름과 장점" },
               { "id": "B", "text": "직렬 연결의 전압 분배" },
@@ -334,7 +334,7 @@
           "stepId": "s19",
           "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 176 }] },
           "question": {
-            "prompt": "넷째 부분의 핵심은 무엇인가요?",
+            "prompt": "두 연결 방식은 어디에서 달라지나요?",
             "choices": [
               { "id": "A", "text": "저항 차이와 회로 선택" },
               { "id": "B", "text": "전등의 모양" },
@@ -394,7 +394,7 @@
           "stepId": "s23",
           "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 169 }] },
           "question": {
-            "prompt": "다섯째 부분의 핵심은 무엇인가요?",
+            "prompt": "예시에서는 각각 무엇이 유리해지나요?",
             "choices": [
               { "id": "A", "text": "직렬과 병렬의 쓰임과 선택" },
               { "id": "B", "text": "전구의 색깔" },
@@ -454,7 +454,7 @@
           "stepId": "s27",
           "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 176 }] },
           "question": {
-            "prompt": "마무리의 핵심은 무엇인가요?",
+            "prompt": "회로를 이해할 때 무엇을 함께 봐야 하나요?",
             "choices": [
               { "id": "A", "text": "연결 방식이 중요하다" },
               { "id": "B", "text": "전구 색이 중요하다" },
@@ -469,12 +469,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "직렬과 병렬은 전기 회로의 연결 방식이다" },
-        { "id": "c2", "text": "직렬은 하나의 길로 전류가 흐른다" },
-        { "id": "c3", "text": "병렬은 여러 길로 전류가 나뉘어 흐른다" },
-        { "id": "c4", "text": "직렬은 한곳이 끊기면 전체가 멈춘다" },
-        { "id": "c5", "text": "연결 방식에 따라 전압과 저항이 달라진다" },
-        { "id": "c6", "text": "회로를 이해할 때는 연결 방식을 함께 봐야 한다" }
+        { "id": "c1", "text": "직렬 연결과 병렬 연결은 부품을 잇는 두 가지 기본 회로 방식이다." },
+        { "id": "c2", "text": "직렬 연결에서는 전류가 한 줄로 흐르고 한 곳이 끊기면 전체가 멈춘다." },
+        { "id": "c3", "text": "병렬 연결에서는 여러 갈래가 같은 전압을 받고 다른 갈래는 계속 작동할 수 있다." },
+        { "id": "c4", "text": "두 방식은 저항과 전류의 분배에서도 서로 다른 결과를 만든다." },
+        { "id": "c5", "text": "직렬과 병렬은 건전지와 전등처럼 실제 회로에서 쓰임이 뚜렷하게 갈린다." },
+        { "id": "c6", "text": "회로를 이해할 때는 부품뿐 아니라 연결 방식까지 함께 보아야 한다." }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -483,9 +483,9 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "전류가 하나의 길로만 흐르게 하는 연결은 무엇인가요?",
+          "prompt": "한 줄로 차례대로 잇는 연결 방식을 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 0, "end": 4 }
+              { "paragraphId": "p1", "start": 0, "end": 1 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -493,9 +493,9 @@
         },
         {
           "id": "q2",
-          "prompt": "갈라진 여러 길에 나누어 이어 놓는 연결은 무엇인가요?",
+          "prompt": "여러 갈래로 나누어 잇는 연결 방식을 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 7, "end": 11 }
+              { "paragraphId": "p1", "start": 7, "end": 8 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -503,9 +503,9 @@
         },
         {
           "id": "q3",
-          "prompt": "전기가 흐르는 것은 무엇인가요?",
+          "prompt": "전하가 이동하는 흐름을 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 9, "end": 10 }
+              { "paragraphId": "p2", "start": 71, "end": 72 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -513,9 +513,9 @@
         },
         {
           "id": "q4",
-          "prompt": "전기를 미는 힘은 무엇인가요?",
+          "prompt": "전기를 밀어 보내는 힘의 크기를 뜻하는 말은?",
           "answerRanges": [
-            { "paragraphId": "p5", "start": 25, "end": 26 }
+            { "paragraphId": "p1", "start": 158, "end": 159 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -523,7 +523,7 @@
         },
         {
           "id": "q5",
-          "prompt": "회로를 흐르기 어렵게 하는 것은 무엇인가요?",
+          "prompt": "전류의 흐름을 방해하는 정도를 뜻하는 말은?",
           "answerRanges": [
             { "paragraphId": "p4", "start": 9, "end": 10 }
           ],
