@@ -109,7 +109,7 @@
           "stepId": "s4",
         "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 156 }] },
           "question": {
-            "prompt": "이 문단은 무엇을 말하나?",
+            "prompt": "이 문단의 중심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "면역 반응의 뜻과 특징" },
               { "id": "B", "text": "병의 이름" },
@@ -169,7 +169,7 @@
           "stepId": "s8",
         "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 153 }] },
           "question": {
-            "prompt": "이 문단은 무엇을 보여 주나?",
+            "prompt": "이 문단의 중심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "첫 침입 뒤의 준비" },
               { "id": "B", "text": "병원체의 모양" },
@@ -229,7 +229,7 @@
           "stepId": "s12",
         "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 146 }] },
           "question": {
-            "prompt": "이 문단의 핵심은 무엇인가?",
+            "prompt": "이 문단의 중심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "재침입에 빠르게 대응" },
               { "id": "B", "text": "첫 침입을 없앰" },
@@ -289,7 +289,7 @@
           "stepId": "s16",
         "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 166 }] },
           "question": {
-            "prompt": "이 문단은 무엇을 설명하나?",
+            "prompt": "이 문단의 중심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "기억세포와 예방 접종" },
               { "id": "B", "text": "병원체의 종류" },
@@ -349,7 +349,7 @@
           "stepId": "s20",
         "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 151 }] },
           "question": {
-            "prompt": "이 문단의 핵심은?",
+            "prompt": "이 문단의 중심 내용은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "면역 반응은 계속 같지 않다" },
               { "id": "B", "text": "병원체는 항상 같다" },
@@ -409,7 +409,7 @@
           "stepId": "s24",
         "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 175 }] },
           "question": {
-            "prompt": "이 문단의 결론은?",
+            "prompt": "이 문단의 결론은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "몸의 대응 방식을 더 분명히 알 수 있다" },
               { "id": "B", "text": "병원체는 사라진다" },
@@ -438,40 +438,45 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "몸의 방어 반응은?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 43, "end": 47 }],
+          "prompt": "몸이 침입에 맞서 보이는 대응은?",
+          "answerText": "방어 반응",
+          "answerRanges": [{ "paragraphId": "p1", "start": 43, "end": 48 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "몸의 침입 대응 과정은?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 63, "end": 67 }],
+          "prompt": "몸이 침입에 맞서 일어나는 과정은?",
+          "answerText": "면역 반응",
+          "answerRanges": [{ "paragraphId": "p1", "start": 63, "end": 68 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "특징을 기억하는 세포는?",
-          "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 3 }],
+          "prompt": "침입 특징을 오래 기억하는 세포는?",
+          "answerText": "기억세포",
+          "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 4 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "미리 맞아 면역을 돕는 것은?",
-          "answerRanges": [{ "paragraphId": "p4", "start": 80, "end": 84 }],
+          "prompt": "병에 대비해 미리 맞는 것은?",
+          "answerText": "예방 접종",
+          "answerRanges": [{ "paragraphId": "p4", "start": 80, "end": 85 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "병원체의 정보를 뜻하는 것은?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 91, "end": 92 }],
+          "prompt": "알아 두고 기억해 두는 내용은?",
+          "answerText": "정보",
+          "answerRanges": [{ "paragraphId": "p2", "start": 91, "end": 93 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
