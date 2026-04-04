@@ -64,7 +64,7 @@
           "stepId": "s1",
           "highlight": {"ranges":[{"paragraphId":"p1","start":0,"end":41}]},
           "question": {
-            "prompt": "화학에서는 무엇을 중요한 기준으로 삼나요?",
+            "prompt": "화학에서는 물질의 성질을 설명할 때 어떤 기준을 삼나요?",
             "choices": [
               {"id":"A","text":"산과 염기성"},
               {"id":"B","text":"무게와 색"},
@@ -109,7 +109,7 @@
           "stepId": "s4",
           "highlight": {"ranges":[{"paragraphId":"p1","start":0,"end":154}]},
           "question": {
-            "prompt": "이 문단의 중심 내용은 무엇인가요?",
+            "prompt": "산성과 염기성을 설명하는 핵심은 무엇인가요?",
             "choices": [
               {"id":"A","text":"산성과 염기성의 기본 성질을 설명한다"},
               {"id":"B","text":"지시약의 종류를 모두 나열한다"},
@@ -169,7 +169,7 @@
           "stepId": "s8",
           "highlight": {"ranges":[{"paragraphId":"p2","start":0,"end":148}]},
           "question": {
-            "prompt": "이 문단의 중심 내용은 무엇인가요?",
+            "prompt": "산성과 염기성의 차이는 어떻게 나타나나요?",
             "choices": [
               {"id":"A","text":"산성과 염기성은 이온의 양 차이와 관련된다"},
               {"id":"B","text":"산성은 항상 뜨겁다"},
@@ -229,7 +229,7 @@
           "stepId": "s12",
           "highlight": {"ranges":[{"paragraphId":"p3","start":0,"end":147}]},
           "question": {
-            "prompt": "이 문단의 중심 내용은 무엇인가요?",
+            "prompt": "산성과 염기성을 알아보는 방법은 무엇인가요?",
             "choices": [
               {"id":"A","text":"지시약으로 산성과 염기성을 확인하는 방법을 설명한다"},
               {"id":"B","text":"산과 염기의 이름을 외우게 한다"},
@@ -289,7 +289,7 @@
           "stepId": "s16",
           "highlight": {"ranges":[{"paragraphId":"p4","start":0,"end":162}]},
           "question": {
-            "prompt": "이 문단의 중심 내용은 무엇인가요?",
+            "prompt": "중화 반응은 어디에 활용되나요?",
             "choices": [
               {"id":"A","text":"산과 염기성이 만나면 중화 반응이 일어난다"},
               {"id":"B","text":"산과 염기성은 만나지 않는다"},
@@ -349,7 +349,7 @@
           "stepId": "s20",
           "highlight": {"ranges":[{"paragraphId":"p5","start":0,"end":138}]},
           "question": {
-            "prompt": "이 문단의 중심 내용은 무엇인가요?",
+            "prompt": "산성과 염기성의 강약은 어떻게 살펴야 하나요?",
             "choices": [
               {"id":"A","text":"산과 염기의 강약은 다를 수 있고 판단할 때 여러 요소를 함께 봐야 한다"},
               {"id":"B","text":"산과 염기는 모두 같다"},
@@ -409,7 +409,7 @@
           "stepId": "s24",
           "highlight": {"ranges":[{"paragraphId":"p6","start":0,"end":155}]},
           "question": {
-            "prompt": "이 문단의 중심 내용은 무엇인가요?",
+            "prompt": "산성과 염기성은 왜 중요한 개념인가요?",
             "choices": [
               {"id":"A","text":"산성과 염기성의 개념과 활용을 정리한다"},
               {"id":"B","text":"모든 화학 현상은 같다"},
@@ -424,12 +424,12 @@
     },
     "recall": {
       "cards": [
-        {"id":"c1","text":"산성과 염기성은 화학에서 중요한 기준이다."},
-        {"id":"c2","text":"산성은 수소 이온이 많고, 염기성은 수산화 이온이 많다."},
-        {"id":"c3","text":"리트머스 종이나 BTB 용액은 색 변화로 성질을 구별하게 한다."},
-        {"id":"c4","text":"산과 염기성이 만나면 중화 반응이 일어난다."},
-        {"id":"c5","text":"산성과 염기성은 강약이 다를 수 있다."},
-        {"id":"c6","text":"산성·염기성은 생활 속 화학 현상을 설명하는 기본 개념이다."}
+        {"id":"c1","text":"산과 염기성은 성질의 기준이다."},
+        {"id":"c2","text":"산성은 신맛, 염기성은 미끈거림이 있다."},
+        {"id":"c3","text":"두 성질은 이온 차이와 관련된다."},
+        {"id":"c4","text":"지시약은 색 변화로 성질을 알려 준다."},
+        {"id":"c5","text":"산과 염기는 만나면 중화 반응을 한다."},
+        {"id":"c6","text":"판단할 때는 강약과 농도도 본다."}
       ],
       "correctOrder": ["c1","c2","c3","c4","c5","c6"],
       "seedPenalty": 1
@@ -438,40 +438,45 @@
       "questions": [
         {
           "id":"q1",
-          "prompt":"이 글에서 산성과 염기성은 어떻게 설명되나요?",
-          "answerRanges":[{"paragraphId":"p1","start":0,"end":154}],
+            "prompt":"물질의 성질을 설명할 때 중요하게 삼는 말은?",
+          "answerText":"기준",
+          "answerRanges":[{"paragraphId":"p1","start":32,"end":34}],
           "scoring":{"correctDeltaSec":30,"wrongDeltaSec":-45},
           "revealOnWrong":true,
           "answerMatchMode":"ANY"
         },
         {
           "id":"q2",
-          "prompt":"산성과 염기성은 무엇과 관련이 있나요?",
-          "answerRanges":[{"paragraphId":"p2","start":0,"end":148}],
+            "prompt":"용액 속에서 많이 나타나는 작은 알갱이를 뜻하는 말은?",
+          "answerText":"이온",
+          "answerRanges":[{"paragraphId":"p2","start":20,"end":22}],
           "scoring":{"correctDeltaSec":30,"wrongDeltaSec":-45},
           "revealOnWrong":true,
           "answerMatchMode":"ANY"
         },
         {
           "id":"q3",
-          "prompt":"산성과 염기성을 확인할 때는 무엇을 활용하나요?",
-          "answerRanges":[{"paragraphId":"p3","start":0,"end":147}],
+            "prompt":"용액의 성질에 따라 색이 달라져 구별을 돕는 것은?",
+          "answerText":"지시약",
+          "answerRanges":[{"paragraphId":"p3","start":16,"end":19}],
           "scoring":{"correctDeltaSec":30,"wrongDeltaSec":-45},
           "revealOnWrong":true,
           "answerMatchMode":"ANY"
         },
         {
           "id":"q4",
-          "prompt":"중화 반응에서는 어떤 변화가 일어나나요?",
-          "answerRanges":[{"paragraphId":"p4","start":0,"end":162}],
+            "prompt":"산과 염기성이 서로 약해지며 생기는 반응은?",
+          "answerText":"중화",
+          "answerRanges":[{"paragraphId":"p4","start":12,"end":14}],
           "scoring":{"correctDeltaSec":30,"wrongDeltaSec":-45},
           "revealOnWrong":true,
           "answerMatchMode":"ANY"
         },
         {
           "id":"q5",
-          "prompt":"산과 염기성은 어떤 점에서 다를 수 있나요?",
-          "answerRanges":[{"paragraphId":"p5","start":0,"end":138}],
+            "prompt":"산성과 염기성의 세기 정도를 나타내는 말은?",
+          "answerText":"농도",
+          "answerRanges":[{"paragraphId":"p5","start":122,"end":124}],
           "scoring":{"correctDeltaSec":30,"wrongDeltaSec":-45},
           "revealOnWrong":true,
           "answerMatchMode":"ANY"
