@@ -144,7 +144,7 @@
             ]
           },
           "question": {
-            "prompt": "p1의 중심은?",
+            "prompt": "베어링은 어떤 역할을 하나?",
             "choices": [
               { "id": "A", "text": "베어링은 마찰을 줄여 기계를 돕는다" },
               { "id": "B", "text": "마찰은 늘릴수록 좋다" },
@@ -239,7 +239,7 @@
             ]
           },
           "question": {
-            "prompt": "p2의 중심은?",
+            "prompt": "미끄럼 베어링과 굴림 베어링은 어떻게 다른가?",
             "choices": [
               { "id": "A", "text": "베어링은 미끄럼과 굴림으로 나뉜다" },
               { "id": "B", "text": "베어링은 한 종류뿐이다" },
@@ -334,7 +334,7 @@
             ]
           },
           "question": {
-            "prompt": "p3의 중심은?",
+            "prompt": "윤활이 필요한 이유는 무엇인가?",
             "choices": [
               { "id": "A", "text": "윤활은 마찰과 손실을 줄인다" },
               { "id": "B", "text": "윤활은 없어도 된다" },
@@ -429,7 +429,7 @@
             ]
           },
           "question": {
-            "prompt": "p4의 중심은?",
+            "prompt": "윤활은 어떤 추가 역할을 하나?",
             "choices": [
               { "id": "A", "text": "윤활은 보호와 분산에도 중요하다" },
               { "id": "B", "text": "윤활은 미끄럽게만 한다" },
@@ -524,7 +524,7 @@
             ]
           },
           "question": {
-            "prompt": "p5의 중심은?",
+            "prompt": "기계를 설계할 때 무엇을 함께 정해야 하나?",
             "choices": [
               { "id": "A", "text": "조건에 맞춰 함께 결정해야 한다" },
               { "id": "B", "text": "베어링만 고르면 된다" },
@@ -581,7 +581,7 @@
             ]
           },
           "question": {
-            "prompt": "p6의 중심은?",
+            "prompt": "베어링과 윤활이 함께 전하는 핵심은 무엇인가?",
             "choices": [
               { "id": "A", "text": "둘이 함께 작동해야 오래 부드럽게 움직인다" },
               { "id": "B", "text": "베어링만 있으면 된다" },
@@ -596,12 +596,12 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "베어링은 마찰을 줄여 기계를 돕는다." },
-        { "id": "c2", "text": "베어링은 미끄럼과 굴림으로 나뉜다." },
-        { "id": "c3", "text": "윤활은 마찰과 손실을 줄인다." },
-        { "id": "c4", "text": "윤활은 보호와 분산에도 중요하다." },
-        { "id": "c5", "text": "베어링과 윤활은 함께 결정해야 한다." },
-        { "id": "c6", "text": "둘이 함께 작동해야 오래 부드럽게 움직인다." }
+        { "id": "c1", "text": "마찰을 줄여 기계가 안정적으로 움직이게 하는 장치가 베어링이다." },
+        { "id": "c2", "text": "베어링은 미끄럼 베어링과 굴림 베어링으로 나뉜다." },
+        { "id": "c3", "text": "윤활은 오일이나 그리스를 넣어 마찰을 줄인다." },
+        { "id": "c4", "text": "윤활은 마모와 열 발생을 줄이고 부식도 막는다." },
+        { "id": "c5", "text": "베어링과 윤활은 함께 고려해야 한다." },
+        { "id": "c6", "text": "둘이 함께 작동할 때 기계는 더 오래 더 부드럽게 움직인다." }
       ],
       "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
@@ -610,11 +610,10 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "미끄러지며 움직이는 것은?",
+          "prompt": "표면끼리 미끄러지며 움직이는 베어링은?",
+          "answerText": "표면끼리 미끄러지며 움직이는 베어링",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 8, "end": 14 },
-            { "paragraphId": "p2", "start": 35, "end": 41 },
-            { "paragraphId": "p2", "start": 127, "end": 133 }
+            { "paragraphId": "p2", "start": 8, "end": 15 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -622,11 +621,10 @@
         },
         {
           "id": "q2",
-          "prompt": "굴러가며 움직이는 것은?",
+          "prompt": "볼이나 롤러가 굴러가며 움직이는 베어링은?",
+          "answerText": "볼이나 롤러가 굴러가며 움직이는 베어링",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 17, "end": 22 },
-            { "paragraphId": "p2", "start": 61, "end": 66 },
-            { "paragraphId": "p2", "start": 88, "end": 93 }
+            { "paragraphId": "p2", "start": 17, "end": 23 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -634,9 +632,10 @@
         },
         {
           "id": "q3",
-          "prompt": "금속이 상하는 것은?",
+          "prompt": "금속이 녹슬거나 상하는 현상은?",
+          "answerText": "금속이 녹슬거나 썩는 현상",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 67, "end": 68 }
+            { "paragraphId": "p4", "start": 67, "end": 69 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -644,11 +643,10 @@
         },
         {
           "id": "q4",
-          "prompt": "무거운 짐을 버티는 것은?",
+          "prompt": "부품이 버텨야 하는 무게나 힘은?",
+          "answerText": "부품이 버텨야 하는 무게나 힘",
           "answerRanges": [
-            { "paragraphId": "p2", "start": 147, "end": 148 },
-            { "paragraphId": "p5", "start": 62, "end": 63 },
-            { "paragraphId": "p5", "start": 114, "end": 115 }
+            { "paragraphId": "p2", "start": 147, "end": 149 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -656,9 +654,10 @@
         },
         {
           "id": "q5",
-          "prompt": "윤활이 줄이는 것은?",
+          "prompt": "쓴 에너지 가운데 남지 않고 빠져나가는 부분은?",
+          "answerText": "쓴 에너지 가운데 남지 않고 빠져나가는 부분",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 154, "end": 159 }
+            { "paragraphId": "p3", "start": 154, "end": 160 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
