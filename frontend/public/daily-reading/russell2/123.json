@@ -109,7 +109,7 @@
           "stepId": "s4",
           "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 132 }] },
           "question": {
-            "prompt": "1문단 전체는 무엇을 말하나요?",
+            "prompt": "발표는 도서관 이용의 어떤 문제와 개선 방향을 말하나요?",
             "choices": [
               { "id": "A", "text": "도서관 이용 방식 개선을 제안하는 이유" },
               { "id": "B", "text": "좌석 수칙의 예시" },
@@ -169,7 +169,7 @@
           "stepId": "s8",
           "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 154 }] },
           "question": {
-            "prompt": "2문단 전체는 무엇을 말하나요?",
+            "prompt": "책을 찾기 어렵다는 문제에 대해 어떤 해결책을 제시하나요?",
             "choices": [
               { "id": "A", "text": "책 찾기를 돕는 안내판의 필요성" },
               { "id": "B", "text": "좌석 규칙의 문제" },
@@ -229,7 +229,7 @@
           "stepId": "s12",
           "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 142 }] },
           "question": {
-            "prompt": "3문단 전체는 무엇을 말하나요?",
+            "prompt": "좌석 이용 규칙의 갈등을 줄이기 위해 무엇을 권하나요?",
             "choices": [
               { "id": "A", "text": "좌석 이용 규칙을 분명하게 안내할 필요" },
               { "id": "B", "text": "책 분야 표시의 장점" },
@@ -289,7 +289,7 @@
           "stepId": "s16",
           "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 153 }] },
           "question": {
-            "prompt": "4문단 전체는 무엇을 말하나요?",
+            "prompt": "도서관 이용 개선을 위해 어떤 순서의 실행을 말하나요?",
             "choices": [
               { "id": "A", "text": "간단한 안내부터 먼저 실행하자는 제안" },
               { "id": "B", "text": "시설 공사를 먼저 하자는 주장" },
@@ -349,7 +349,7 @@
           "stepId": "s20",
           "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 169 }] },
           "question": {
-            "prompt": "5문단 전체는 무엇을 말하나요?",
+            "prompt": "개선이 실현되면 어떤 변화가 생기나요?",
             "choices": [
               { "id": "A", "text": "개선안을 실현했을 때 생길 긍정적 변화" },
               { "id": "B", "text": "불편이 더 심해진다는 점" },
@@ -409,7 +409,7 @@
           "stepId": "s24",
           "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 137 }] },
           "question": {
-            "prompt": "6문단 전체는 무엇을 말하나요?",
+            "prompt": "도서관 이용 개선의 핵심은 무엇인가요?",
             "choices": [
               { "id": "A", "text": "개선의 핵심과 정리" },
               { "id": "B", "text": "좌석 규칙의 문제" },
@@ -426,75 +426,48 @@
       "cards": [
         {
           "id": "c1",
-          "text": "발표자는 학교 도서관 이용 방식을 더 편리하게 바꾸자고 제안한다"
+          "text": "발표자는 도서관 이용 방식을 더 편리하게 바꾸자고 제안한다."
         },
         {
           "id": "c2",
-          "text": "학생들은 원하는 책의 위치를 바로 알기 어려워한다"
+          "text": "학생들은 원하는 책의 위치를 바로 알기 어려워한다."
         },
         {
           "id": "c3",
-          "text": "책 분야를 색깔이나 그림으로 표시한 안내판이 도움이 될 수 있다"
+          "text": "책 분야를 색깔이나 그림으로 표시한 안내판이 도움이 될 수 있다."
         },
         {
           "id": "c4",
-          "text": "시험 기간에는 좌석 이용 규칙을 몰라 갈등이 생길 수 있다"
+          "text": "시험 기간에는 좌석 이용 규칙을 몰라 갈등이 생길 수 있다."
         },
         {
           "id": "c5",
-          "text": "먼저 할 일은 책 안내판 개선과 좌석 이용 규칙 안내이다"
+          "text": "먼저 할 일은 책 안내판 개선과 좌석 이용 규칙 안내이다."
         },
         {
           "id": "c6",
-          "text": "개선의 핵심은 복잡한 제도보다 정보와 규칙을 잘 보이게 만드는 것이다"
+          "text": "개선의 핵심은 복잡한 제도보다 정보와 규칙을 잘 보이게 만드는 것이다."
         }
       ],
-      "correctOrder": [],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "발표자는 무엇을 더 편리하게 바꾸자고 하나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 13,
-              "end": 25
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q2",
-          "prompt": "학생들이 가장 자주 겪는 어려움은 무엇인가요?",
+          "prompt": "알려 줄 내용을 적어 세워 둔 판은?",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 23,
-              "end": 40
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q3",
-          "prompt": "도움이 될 것으로 제시한 것은 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 116,
+              "start": 134,
               "end": 137
             }
           ],
@@ -506,13 +479,47 @@
           "answerMatchMode": "ANY"
         },
         {
-          "id": "q4",
-          "prompt": "무엇을 먼저 실시하자고 하나요?",
+          "id": "q2",
+          "prompt": "지켜야 할 기본 규칙은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 117,
+              "end": 119
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "실제로 행하는 일은?",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 3,
-              "end": 24
+              "start": 29,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "흐트러진 것을 손보고 갖추는 일은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 2
             }
           ],
           "scoring": {
@@ -524,12 +531,12 @@
         },
         {
           "id": "q5",
-          "prompt": "도서관 이용 개선의 핵심은 무엇이라고 정리하나요?",
+          "prompt": "잘못되거나 부족한 점을 더 낫게 고치는 일은?",
           "answerRanges": [
             {
-              "paragraphId": "p6",
-              "start": 20,
-              "end": 67
+              "paragraphId": "p5",
+              "start": 9,
+              "end": 11
             }
           ],
           "scoring": {
