@@ -109,7 +109,7 @@
           "stepId": "s4",
           "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 163 }] },
           "question": {
-            "prompt": "첫 문단은 어떤 입장을 보이나요?",
+            "prompt": "글쓴이는 어떤 입장을 보이나요?",
             "choices": [
               { "id": "A", "text": "점심시간 사용을 조건부로 허용하자" },
               { "id": "B", "text": "휴대전화는 무조건 금지하자" },
@@ -169,7 +169,7 @@
           "stepId": "s8",
           "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 165 }] },
           "question": {
-            "prompt": "둘째 문단은 왜 단속 방식의 한계를 말하나요?",
+            "prompt": "어떤 점을 문제로 보나요?",
             "choices": [
               { "id": "A", "text": "점심시간까지 똑같이 막으면 필요한 연락이 불편해지기 때문이다" },
               { "id": "B", "text": "학생들이 모두 휴대전화를 싫어하기 때문이다" },
@@ -229,7 +229,7 @@
           "stepId": "s12",
           "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 197 }] },
           "question": {
-            "prompt": "셋째 문단은 어떤 조건을 제시하나요?",
+            "prompt": "어떤 조건을 제시하나요?",
             "choices": [
               { "id": "A", "text": "음량을 끄고 개인 자리에서 짧게 사용" },
               { "id": "B", "text": "아무 곳에서나 자유 사용" },
@@ -289,7 +289,7 @@
           "stepId": "s16",
           "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 153 }] },
           "question": {
-            "prompt": "넷째 문단은 무엇을 강조하나요?",
+            "prompt": "무엇을 강조하나요?",
             "choices": [
               { "id": "A", "text": "규칙을 함께 정하고 스스로 지키는 경험" },
               { "id": "B", "text": "모든 상황의 금지" },
@@ -349,7 +349,7 @@
           "stepId": "s20",
           "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 180 }] },
           "question": {
-            "prompt": "다섯째 문단은 무엇을 보완하자고 하나요?",
+            "prompt": "무엇을 보완하자고 하나요?",
             "choices": [
               { "id": "A", "text": "문제와 조건의 구체성" },
               { "id": "B", "text": "휴대전화 광고" },
@@ -409,7 +409,7 @@
           "stepId": "s24",
           "highlight": { "ranges": [{ "paragraphId": "p6", "start": 0, "end": 170 }] },
           "question": {
-            "prompt": "여섯째 문단은 글을 어떻게 정리하나요?",
+            "prompt": "글은 어떻게 정리하나요?",
             "choices": [
               { "id": "A", "text": "조건부 허용과 보완할 점을 함께 정리한다" },
               { "id": "B", "text": "무조건 금지만 정리한다" },
@@ -438,40 +438,45 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "무조건 금지할 필요가 없는 것은?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 28, "end": 34 }],
+          "prompt": "아무 제한이나 예외 없이 그대로 하는 상태는?",
+          "answerText": "무조건",
+          "answerRanges": [{ "paragraphId": "p1", "start": 28, "end": 30 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "일정한 범위를 뜻하는 말은?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 128, "end": 134 }],
+          "prompt": "미리 정해 둔 한계와 테두리는?",
+          "answerText": "범위",
+          "answerRanges": [{ "paragraphId": "p1", "start": 132, "end": 133 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "똑같이 적용한다는 말은?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 63, "end": 69 }],
+          "prompt": "서로 다르지 않게 같은 모양이나 방식으로 하는 상태는?",
+          "answerText": "똑같이",
+          "answerRanges": [{ "paragraphId": "p2", "start": 63, "end": 65 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "조건을 둔다는 뜻의 말은?",
-          "answerRanges": [{ "paragraphId": "p3", "start": 125, "end": 133 }],
+          "prompt": "어떤 일이 이루어지기 위해 먼저 갖추어야 할 것은?",
+          "answerText": "조건",
+          "answerRanges": [{ "paragraphId": "p3", "start": 125, "end": 126 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "기본 규칙을 뜻하는 말은?",
-          "answerRanges": [{ "paragraphId": "p4", "start": 13, "end": 18 }],
+          "prompt": "여럿이 함께 지키기로 한 가장 바탕이 되는 규칙은?",
+          "answerText": "기본 규칙",
+          "answerRanges": [{ "paragraphId": "p4", "start": 13, "end": 17 }],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"

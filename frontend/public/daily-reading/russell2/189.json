@@ -125,7 +125,7 @@
             ]
           },
           "question": {
-            "prompt": "p1의 중심은?",
+            "prompt": "품사를 구별하는 일의 핵심은 무엇인가?",
             "choices": [
               { "id": "A", "text": "품사는 역할과 형태를 바탕으로 나뉘며, 구별하면 문장 속 기능을 더 정확히 이해할 수 있다" },
               { "id": "B", "text": "품사는 뜻만 보면 충분히 구별된다" },
@@ -220,7 +220,7 @@
             ]
           },
           "question": {
-            "prompt": "p2의 중심은?",
+            "prompt": "품사를 뜻만으로 보면 어떤 어려움이 생기나?",
             "choices": [
               { "id": "A", "text": "품사는 뜻만 보지 말고 문장 속 위치와 실제 쓰임을 함께 봐야 한다" },
               { "id": "B", "text": "품사는 뜻만 보면 충분하다" },
@@ -315,7 +315,7 @@
             ]
           },
           "question": {
-            "prompt": "p3의 중심은?",
+            "prompt": "체언과 용언을 가르는 기준은 무엇인가?",
             "choices": [
               { "id": "A", "text": "체언과 용언의 특징을 함께 보면 품사 구별이 쉬워진다" },
               { "id": "B", "text": "체언과 용언은 서로 구별할 필요가 없다" },
@@ -410,7 +410,7 @@
             ]
           },
           "question": {
-            "prompt": "p4의 중심은?",
+            "prompt": "수식언과 관계언, 독립언은 어떻게 판단하나?",
             "choices": [
               { "id": "A", "text": "품사는 주변 단어와의 관계를 통해 판단해야 한다" },
               { "id": "B", "text": "품사는 뜻만으로 판단하면 된다" },
@@ -505,7 +505,7 @@
             ]
           },
           "question": {
-            "prompt": "p5의 중심은?",
+            "prompt": "품사 구별의 중요성은 무엇인가?",
             "choices": [
               { "id": "A", "text": "품사 구별은 문장 분석과 글쓰기의 정확성을 위해 기본이자 출발점이다" },
               { "id": "B", "text": "품사 구별은 중요하지 않다" },
@@ -581,7 +581,7 @@
             ]
           },
           "question": {
-            "prompt": "p6의 중심은?",
+            "prompt": "끝으로 품사 구별에서 무엇을 함께 살펴야 하나?",
             "choices": [
               { "id": "A", "text": "품사는 뜻, 형태, 기능, 위치를 함께 보고 실제 역할까지 확인해야 한다" },
               { "id": "B", "text": "품사는 뜻만 보면 된다" },
@@ -610,9 +610,10 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "품사는 무엇에 따라 나눈 갈래인가?",
+          "prompt": "단어를 문장에서 하는 역할에 따라 나눈 갈래를 가리키는 말은?",
+          "answerText": "품사",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 0, "end": 38 }
+            { "paragraphId": "p1", "start": 0, "end": 1 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -620,9 +621,10 @@
         },
         {
           "id": "q2",
-          "prompt": "체언의 특징은 무엇인가?",
+          "prompt": "조사와 결합하고 형태가 잘 바뀌지 않는 말의 갈래는?",
+          "answerText": "체언",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 4, "end": 23 }
+            { "paragraphId": "p3", "start": 0, "end": 1 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -630,9 +632,10 @@
         },
         {
           "id": "q3",
-          "prompt": "용언의 특징은 무엇인가?",
+          "prompt": "활용하며 시제나 높임 표현과 결합할 수 있는 말의 갈래는?",
+          "answerText": "용언",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 48, "end": 84 }
+            { "paragraphId": "p3", "start": 51, "end": 52 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -640,9 +643,10 @@
         },
         {
           "id": "q4",
-          "prompt": "품사를 구별할 때 무엇을 먼저 알아야 하나?",
+          "prompt": "문장 속에서 놓인 자리나 위치를 가리키는 말은?",
+          "answerText": "위치",
           "answerRanges": [
-            { "paragraphId": "p5", "start": 46, "end": 101 }
+            { "paragraphId": "p2", "start": 40, "end": 41 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
@@ -650,9 +654,10 @@
         },
         {
           "id": "q5",
-          "prompt": "정리하면 품사 구별은 무엇을 함께 살펴 판단하나?",
+          "prompt": "어떤 일의 맨 처음이 되는 자리를 가리키는 말은?",
+          "answerText": "출발점",
           "answerRanges": [
-            { "paragraphId": "p6", "start": 0, "end": 57 }
+            { "paragraphId": "p5", "start": 163, "end": 165 }
           ],
           "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
