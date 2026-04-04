@@ -1,95 +1,1228 @@
-{
-  "contentId": "dr-r1-279",
-  "contentType": "DAILY_READING",
-  "version": 1,
-  "status": "PUBLISHED",
-  "title": "훈련 데이터와 검증 데이터",
-  "description": "일일 독해 - 정독·복기·확인",
-  "targetLevel": "RUSSELL_1",
-  "schoolGradeRange": {
-    "min": 7,
-    "max": 8
-  },
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": [
-    "READING"
-  ],
-  "tags": [
-    "daily"
-  ],
-  "access": {
-    "mode": "FREE"
-  },
-  "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
-    "multiplier": 1
-  },
-  "timeLimitSec": 480,
-  "assets": {},
-  "payload": {
-    "passage": {
-      "format": "TEXT",
-      "paragraphs": [
-        "훈련 데이터와 검증 데이터는 인공지능이 제대로 학습하고 있는지를 확인할 때 쓰는 핵심 개념이다. 인공지능 모델은 많은 예시를 보며 입력과 출력의 관계를 익히는데, 이때 학습에 직접 사용하는 자료를 훈련 데이터라고 한다. 하지만 훈련 데이터만으로 성능을 판단하면, 모델이 그 자료를 단순히 외운 것인지 새로운 자료에도 잘 적용되는지 알기 어렵다. 그래서 훈련에 쓰지 않은 별도의 자료가 필요하고, 그 자료를 검증 데이터라고 부른다. 두 종류의 데이터는 인공지능의 학습과 평가를 분리하게 만든다.",
-        "훈련 데이터는 모델이 규칙을 배우는 재료이다. 고양이와 강아지를 구별하는 인공지능이라면, 많은 사진과 정답 표지가 훈련 데이터로 제공된다. 모델은 이 자료를 반복해서 보며 어떤 특징이 고양이와 강아지를 나누는 데 도움이 되는지 익힌다. 이 과정에서 데이터가 충분히 많고 고르게 마련되어야 다양한 경우를 배울 수 있다. 특정 각도나 특정 색의 사진만 많으면 모델은 좁은 경우에만 강해질 수 있다.",
-        "검증 데이터는 이미 훈련한 모델이 처음 보는 자료에서도 잘 작동하는지 확인하는 자료이다. 훈련 데이터에 대한 정답률이 아무리 높아도, 검증 데이터에서 성능이 크게 떨어지면 모델은 일반적인 규칙을 배운 것이 아니라 훈련 자료에 지나치게 맞추어진 것일 수 있다. 이런 현상을 과적합이라고 한다. 따라서 인공지능에서는 많이 맞히는 것 자체보다, 낯선 자료에도 안정적으로 작동하는지를 함께 보는 것이 중요하다.",
-        "훈련 데이터와 검증 데이터를 나누는 이유는 공정한 평가를 위해서이기도 하다. 시험을 치르기 전에 시험 문제를 미리 외워 두면 실력을 제대로 알기 어렵듯이, 모델이 평가에 쓰일 자료까지 미리 학습해 버리면 성능을 정확히 판단할 수 없다. 그래서 데이터 과학에서는 자료를 나누는 기준과 방법도 매우 중요하게 다룬다. 어떤 데이터를 훈련에 쓰고 어떤 데이터를 검증에 쓰는지가 모델의 신뢰성과 연결되기 때문이다.",
-        "결국 훈련 데이터와 검증 데이터는 인공지능이 배움과 평가를 어떻게 구분하는지를 보여 주는 개념이다. 훈련 데이터는 규칙을 익히게 하고, 검증 데이터는 그 규칙이 새로운 상황에서도 통하는지 점검하게 한다. 이 두 개념을 이해하면 인공지능의 성능을 숫자 하나로만 보지 않고, 그 숫자가 어떤 데이터 조건에서 나온 것인지까지 함께 살필 수 있다. 그래서 인공지능을 공부할 때는 모델만이 아니라 데이터를 나누고 검토하는 방식도 함께 이해해야 한다."
-      ]
-    },
-    "intensive": {
-      "timeline": [
-        { "stepId": "s1", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 52 }] }, "question": { "prompt": "문단을 여는 문장은 훈련 데이터와 검증 데이터를 어떤 핵심 개념으로 소개하나요?", "choices": [{ "id": "A", "text": "인공지능이 제대로 학습하는지 확인할 때 쓰는 핵심 개념으로 소개한다" }, { "id": "B", "text": "컴퓨터 부품 이름으로만 소개한다" }, { "id": "C", "text": "그림 분류와 무관한 개념으로 소개한다" }, { "id": "D", "text": "모델 없이도 쓰는 개념으로 소개한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s2", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 53, "end": 121 }] }, "question": { "prompt": "훈련 데이터를 어떻게 설명하나요?", "choices": [{ "id": "A", "text": "학습에 직접 사용하는 자료라고 설명한다" }, { "id": "B", "text": "평가에만 쓰는 자료라고 설명한다" }, { "id": "C", "text": "삭제해 두는 자료라고 설명한다" }, { "id": "D", "text": "모델과 상관없는 자료라고 설명한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s3", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 122, "end": 191 }] }, "question": { "prompt": "훈련 데이터만으로 성능을 판단하기 어려운 까닭은 무엇인가요?", "choices": [{ "id": "A", "text": "자료를 외운 것인지 새로운 자료에도 적용되는지 알기 어렵기 때문이라고 한다" }, { "id": "B", "text": "훈련 데이터가 항상 부족하기 때문이라고 한다" }, { "id": "C", "text": "정답이 없기 때문이라고 한다" }, { "id": "D", "text": "모델이 계산을 못 하기 때문이라고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s4", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 192, "end": 239 }] }, "question": { "prompt": "그래서 어떤 자료가 더 필요하다고 하나요?", "choices": [{ "id": "A", "text": "훈련에 쓰지 않은 별도의 자료가 더 필요하다고 한다" }, { "id": "B", "text": "같은 훈련 자료를 두 배로 늘려야 한다고 한다" }, { "id": "C", "text": "정답 없는 자료만 필요하다고 한다" }, { "id": "D", "text": "무작위 자료만 필요하다고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s5", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 240, "end": 274 }] }, "question": { "prompt": "마지막 문장은 두 종류의 데이터가 무엇을 분리하게 만든다고 정리하나요?", "choices": [{ "id": "A", "text": "학습과 평가를 분리하게 만든다고 정리한다" }, { "id": "B", "text": "사진과 글자를 분리하게 만든다고 정리한다" }, { "id": "C", "text": "입력과 출력을 없애게 만든다고 정리한다" }, { "id": "D", "text": "모델과 데이터를 분리하게 만든다고 정리한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s6", "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 275 }] }, "question": { "prompt": "첫 문단 전체는 훈련 데이터와 검증 데이터를 어떤 인공지능 읽기로 묶어 보여 주나요?", "choices": [{ "id": "A", "text": "학습과 평가를 나누어 모델을 제대로 읽는 인공지능 읽기" }, { "id": "B", "text": "자료를 한데 섞어 보는 인공지능 읽기" }, { "id": "C", "text": "정답만 외우는 인공지능 읽기" }, { "id": "D", "text": "모델을 보지 않는 인공지능 읽기" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s7", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 24 }] }, "question": { "prompt": "둘째 문단을 여는 문장은 훈련 데이터를 어떤 재료라고 하나요?", "choices": [{ "id": "A", "text": "모델이 규칙을 배우는 재료라고 한다" }, { "id": "B", "text": "평가만 하는 재료라고 한다" }, { "id": "C", "text": "모두 버리는 재료라고 한다" }, { "id": "D", "text": "정답을 감추는 재료라고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s8", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 25, "end": 76 }] }, "question": { "prompt": "고양이와 강아지 예시에서 무엇이 훈련 데이터가 된다고 하나요?", "choices": [{ "id": "A", "text": "많은 사진과 정답 표지가 훈련 데이터가 된다고 한다" }, { "id": "B", "text": "모델의 추측만 훈련 데이터가 된다고 한다" }, { "id": "C", "text": "틀린 답만 훈련 데이터가 된다고 한다" }, { "id": "D", "text": "색깔 정보만 훈련 데이터가 된다고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s9", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 77, "end": 130 }] }, "question": { "prompt": "모델이 훈련 데이터로 무엇을 익힌다고 설명하나요?", "choices": [{ "id": "A", "text": "두 대상을 가르는 데 도움이 되는 특징을 익힌다고 설명한다" }, { "id": "B", "text": "사진 이름만 익힌다고 설명한다" }, { "id": "C", "text": "정답 위치만 익힌다고 설명한다" }, { "id": "D", "text": "사진 순서만 익힌다고 설명한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s10", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 131, "end": 176 }] }, "question": { "prompt": "데이터가 충분히 많고 고르게 마련되어야 하는 까닭은 무엇인가요?", "choices": [{ "id": "A", "text": "다양한 경우를 배울 수 있어야 하기 때문이라고 한다" }, { "id": "B", "text": "사진 수를 줄이기 위해서라고 한다" }, { "id": "C", "text": "검증 데이터를 없애기 위해서라고 한다" }, { "id": "D", "text": "정답을 외우기 위해서라고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s11", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 177, "end": 219 }] }, "question": { "prompt": "특정한 사진만 많을 때 어떤 문제가 생긴다고 하나요?", "choices": [{ "id": "A", "text": "좁은 경우에만 강한 모델이 될 수 있다고 한다" }, { "id": "B", "text": "검증 데이터가 사라질 수 있다고 한다" }, { "id": "C", "text": "정답이 모두 바뀔 수 있다고 한다" }, { "id": "D", "text": "사진을 분류할 수 없게 된다고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s12", "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 220 }] }, "question": { "prompt": "둘째 문단 전체는 훈련 데이터를 어떤 학습 재료 읽기로 묶어 보여 주나요?", "choices": [{ "id": "A", "text": "다양한 특징을 배우게 하는 학습 재료 읽기로 묶어 보여 준다" }, { "id": "B", "text": "정답을 외우게 하는 암기 재료 읽기로 묶어 보여 준다" }, { "id": "C", "text": "평가만 하게 하는 재료 읽기로 묶어 보여 준다" }, { "id": "D", "text": "자료를 줄이게 하는 재료 읽기로 묶어 보여 준다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s13", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 48 }] }, "question": { "prompt": "셋째 문단을 여는 문장은 검증 데이터를 어떤 자료로 소개하나요?", "choices": [{ "id": "A", "text": "처음 보는 자료에서도 잘 작동하는지 확인하는 자료로 소개한다" }, { "id": "B", "text": "훈련 때만 쓰는 자료로 소개한다" }, { "id": "C", "text": "정답이 없는 자료로 소개한다" }, { "id": "D", "text": "모두 삭제하는 자료로 소개한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s14", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 49, "end": 143 }] }, "question": { "prompt": "훈련 데이터 정답률만 높아도 안심할 수 없는 까닭은 무엇인가요?", "choices": [{ "id": "A", "text": "검증 데이터에서 성능이 떨어지면 훈련 자료에 지나치게 맞춘 것일 수 있기 때문이라고 한다" }, { "id": "B", "text": "훈련 데이터가 항상 틀리기 때문이라고 한다" }, { "id": "C", "text": "검증 데이터가 더 쉬운 자료이기 때문이라고 한다" }, { "id": "D", "text": "모델이 사진을 못 보기 때문이라고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s15", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 144, "end": 161 }] }, "question": { "prompt": "이 현상을 무엇이라고 부르나요?", "choices": [{ "id": "A", "text": "과적합이라고 부른다" }, { "id": "B", "text": "정렬이라고 부른다" }, { "id": "C", "text": "분류라고 부른다" }, { "id": "D", "text": "암기라고 부른다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s16", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 162, "end": 224 }] }, "question": { "prompt": "이 마지막 문장은 인공지능에서 무엇을 함께 보는 것이 중요하다고 하나요?", "choices": [{ "id": "A", "text": "낯선 자료에도 안정적으로 작동하는지를 함께 보는 것이 중요하다고 한다" }, { "id": "B", "text": "훈련 자료만 많이 맞히는지만 보는 것이 중요하다고 한다" }, { "id": "C", "text": "사진 수만 많이 모으는 것이 중요하다고 한다" }, { "id": "D", "text": "정답률 숫자만 보는 것이 중요하다고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s17", "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 225 }] }, "question": { "prompt": "셋째 문단 전체는 검증 데이터를 어떤 평가 읽기로 묶어 보여 주나요?", "choices": [{ "id": "A", "text": "훈련 자료 암기가 아니라 일반화 성능을 읽는 평가 읽기로 묶어 보여 준다" }, { "id": "B", "text": "사진 개수만 세는 평가 읽기로 묶어 보여 준다" }, { "id": "C", "text": "정답률 하나만 보는 평가 읽기로 묶어 보여 준다" }, { "id": "D", "text": "훈련만 반복하는 평가 읽기로 묶어 보여 준다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s18", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 41 }] }, "question": { "prompt": "넷째 문단을 여는 문장은 왜 데이터를 나누는지 무엇으로 설명하나요?", "choices": [{ "id": "A", "text": "공정한 평가를 위해서라고 설명한다" }, { "id": "B", "text": "자료를 줄이기 위해서라고 설명한다" }, { "id": "C", "text": "훈련을 없애기 위해서라고 설명한다" }, { "id": "D", "text": "정답을 숨기기 위해서라고 설명한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s19", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 42, "end": 130 }] }, "question": { "prompt": "시험 문제 비유로 무엇을 설명하나요?", "choices": [{ "id": "A", "text": "평가 자료까지 미리 학습하면 실력을 정확히 판단하기 어렵다는 점을 설명한다" }, { "id": "B", "text": "시험 문제를 외우면 항상 실력이 늘어난다는 점을 설명한다" }, { "id": "C", "text": "훈련 데이터를 없애야 한다는 점을 설명한다" }, { "id": "D", "text": "검증 데이터는 필요 없다는 점을 설명한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s20", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 131, "end": 173 }] }, "question": { "prompt": "데이터 과학에서 무엇도 중요하게 다루나요?", "choices": [{ "id": "A", "text": "자료를 나누는 기준과 방법도 중요하게 다룬다고 한다" }, { "id": "B", "text": "사진 색깔만 중요하게 다룬다고 한다" }, { "id": "C", "text": "정답 수만 중요하게 다룬다고 한다" }, { "id": "D", "text": "문장 길이만 중요하게 다룬다고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s21", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 174, "end": 225 }] }, "question": { "prompt": "이 마지막 문장은 어떤 점이 모델의 신뢰성과 연결된다고 하나요?", "choices": [{ "id": "A", "text": "어떤 데이터를 훈련에 쓰고 어떤 데이터를 검증에 쓰는지가 연결된다고 한다" }, { "id": "B", "text": "사진 크기만 연결된다고 한다" }, { "id": "C", "text": "훈련 횟수만 연결된다고 한다" }, { "id": "D", "text": "정답 숫자만 연결된다고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s22", "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 226 }] }, "question": { "prompt": "넷째 문단 전체는 훈련 데이터와 검증 데이터 분리를 어떤 공정성 읽기로 묶어 보여 주나요?", "choices": [{ "id": "A", "text": "평가를 공정하게 만들어 모델 신뢰성을 가늠하게 하는 공정성 읽기" }, { "id": "B", "text": "정답을 외우게 하는 공정성 읽기" }, { "id": "C", "text": "사진만 많이 모으게 하는 공정성 읽기" }, { "id": "D", "text": "모델을 감추게 하는 공정성 읽기" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s23", "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 54 }] }, "question": { "prompt": "마지막 문단을 여는 문장은 두 데이터를 어떤 개념으로 다시 묶나요?", "choices": [{ "id": "A", "text": "배움과 평가를 구분하는 개념으로 다시 묶는다" }, { "id": "B", "text": "사진 정리 개념으로 다시 묶는다" }, { "id": "C", "text": "오답 수집 개념으로 다시 묶는다" }, { "id": "D", "text": "모델 삭제 개념으로 다시 묶는다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s24", "highlight": { "ranges": [{ "paragraphId": "p5", "start": 55, "end": 112 }] }, "question": { "prompt": "훈련 데이터와 검증 데이터를 어떤 역할 짝으로 정리하나요?", "choices": [{ "id": "A", "text": "훈련 데이터는 규칙을 익히게 하고 검증 데이터는 그 규칙이 통하는지 점검하게 하는 역할 짝" }, { "id": "B", "text": "둘 다 규칙만 익히게 하는 역할 짝" }, { "id": "C", "text": "둘 다 평가만 하게 하는 역할 짝" }, { "id": "D", "text": "둘 다 자료를 줄이게 하는 역할 짝" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s25", "highlight": { "ranges": [{ "paragraphId": "p5", "start": 113, "end": 189 }] }, "question": { "prompt": "두 개념을 이해하면 성능 숫자를 어떻게 읽게 되나요?", "choices": [{ "id": "A", "text": "숫자 하나만이 아니라 그 숫자가 어떤 데이터 조건에서 나왔는지까지 읽게 된다고 한다" }, { "id": "B", "text": "숫자 하나만 보면 충분하다고 읽게 된다고 한다" }, { "id": "C", "text": "데이터를 보지 않아도 된다고 읽게 된다고 한다" }, { "id": "D", "text": "정답률은 중요하지 않다고 읽게 된다고 한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s26", "highlight": { "ranges": [{ "paragraphId": "p5", "start": 190, "end": 245 }] }, "question": { "prompt": "마지막 문장은 인공지능 공부에서 무엇까지 함께 이해해야 한다고 마무리하나요?", "choices": [{ "id": "A", "text": "모델만이 아니라 데이터를 나누고 검토하는 방식까지 함께 이해해야 한다고 마무리한다" }, { "id": "B", "text": "모델만 알면 충분하다고 마무리한다" }, { "id": "C", "text": "자료는 중요하지 않다고 마무리한다" }, { "id": "D", "text": "정답률만 높으면 된다고 마무리한다" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } },
-        { "stepId": "s27", "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 246 }] }, "question": { "prompt": "마지막 문단 전체는 훈련 데이터와 검증 데이터를 어떤 인공지능 평가 읽기로 묶어 보여 주나요?", "choices": [{ "id": "A", "text": "학습과 평가 조건을 함께 읽어 모델 신뢰성을 따지는 인공지능 평가 읽기" }, { "id": "B", "text": "정답률만 외우는 인공지능 평가 읽기" }, { "id": "C", "text": "데이터를 섞어 보는 인공지능 평가 읽기" }, { "id": "D", "text": "모델을 보지 않는 인공지능 평가 읽기" }], "answerId": "A", "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true } } }
-      ]
-    },
-    "recall": {
-      "cards": [
-        { "id": "c1", "text": "학습과 평가는 나뉜다" },
-        { "id": "c2", "text": "훈련 데이터는 규칙 재료" },
-        { "id": "c3", "text": "고른 자료가 학습 폭을 넓힌다" },
-        { "id": "c4", "text": "검증 데이터는 낯선 시험" },
-        { "id": "c5", "text": "과적합은 훈련에만 맞춤" },
-        { "id": "c6", "text": "데이터 분리는 공정한 평가" }
-      ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
-      "seedPenalty": 1
-    },
-    "confirm": {
-      "questions": [
-        { "id": "q1", "prompt": "훈련 데이터와 검증 데이터는 학습에 직접 쓰는 자료와 따로 평가에 쓰는 자료를 나누어, 인공지능의 학습과 평가를 분리하게 만드는 핵심 개념이라는 내용은 어디에 드러나나요?", "answerRanges": [{ "paragraphId": "p1", "start": 0, "end": 275 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
-        { "id": "q2", "prompt": "훈련 데이터는 모델이 규칙을 배우는 재료이며, 충분히 많고 고르게 마련되어야 다양한 경우를 익히고 좁은 경우에만 강한 모델이 되는 일을 막을 수 있다는 설명은 어디에 드러나나요?", "answerRanges": [{ "paragraphId": "p2", "start": 0, "end": 220 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
-        { "id": "q3", "prompt": "검증 데이터는 처음 보는 자료에서의 성능을 확인하는 자료이며, 훈련 자료에만 지나치게 맞춰진 과적합을 가려 내기 위해 필요하다는 설명은 어디에 드러나나요?", "answerRanges": [{ "paragraphId": "p3", "start": 0, "end": 225 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
-        { "id": "q4", "prompt": "시험 문제를 미리 외우면 실력을 제대로 알기 어렵듯이, 평가에 쓰일 자료까지 학습해 버리면 모델 성능을 공정하게 판단할 수 없으므로 데이터 분리 방식이 중요하다는 내용은 어디에 드러나나요?", "answerRanges": [{ "paragraphId": "p4", "start": 0, "end": 226 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" },
-        { "id": "q5", "prompt": "훈련 데이터와 검증 데이터는 배움과 평가를 구분하게 하므로, 인공지능 성능을 읽을 때는 숫자뿐 아니라 그 숫자가 어떤 데이터 조건에서 나온 것인지까지 함께 살펴야 한다는 내용은 어디에 드러나나요?", "answerRanges": [{ "paragraphId": "p5", "start": 0, "end": 246 }], "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 }, "revealOnWrong": true, "answerMatchMode": "ANY" }
-      ]
-    }
-  }
+﻿{
+    "contentId":  "dr-r1-279",
+    "contentType":  "DAILY_READING",
+    "version":  1,
+    "status":  "PUBLISHED",
+    "title":  "훈련 데이터와 검증 데이터",
+    "description":  "일일 독해 - 정독·복기·확인",
+    "targetLevel":  "RUSSELL_1",
+    "schoolGradeRange":  {
+                             "min":  7,
+                             "max":  8
+                         },
+    "area":  "READING",
+    "subArea":  "NONFICTION",
+    "competencies":  [
+                         "READING"
+                     ],
+    "tags":  [
+                 "daily"
+             ],
+    "access":  {
+                   "mode":  "FREE"
+               },
+    "seedReward":  {
+                       "seedType":  "WHEAT",
+                       "count":  3,
+                       "multiplier":  1
+                   },
+    "timeLimitSec":  480,
+    "assets":  {
+
+               },
+    "payload":  {
+                    "passage":  {
+                                    "format":  "TEXT",
+                                    "paragraphs":  [
+                                                       "훈련 데이터와 검증 데이터는 인공지능이 제대로 학습하고 있는지를 확인할 때 쓰는 핵심 개념이다. 인공지능 모델은 많은 예시를 보며 입력과 출력의 관계를 익히는데, 이때 학습에 직접 사용하는 자료를 훈련 데이터라고 한다. 하지만 훈련 데이터만으로 성능을 판단하면, 모델이 그 자료를 단순히 외운 것인지 새로운 자료에도 잘 적용되는지 알기 어렵다. 그래서 훈련에 쓰지 않은 별도의 자료가 필요하고, 그 자료를 검증 데이터라고 부른다. 두 종류의 데이터는 인공지능의 학습과 평가를 분리하게 만든다.",
+                                                       "훈련 데이터는 모델이 규칙을 배우는 재료이다. 고양이와 강아지를 구별하는 인공지능이라면, 많은 사진과 정답 표지가 훈련 데이터로 제공된다. 모델은 이 자료를 반복해서 보며 어떤 특징이 고양이와 강아지를 나누는 데 도움이 되는지 익힌다. 이 과정에서 데이터가 충분히 많고 고르게 마련되어야 다양한 경우를 배울 수 있다. 특정 각도나 특정 색의 사진만 많으면 모델은 좁은 경우에만 강해질 수 있다.",
+                                                       "검증 데이터는 이미 훈련한 모델이 처음 보는 자료에서도 잘 작동하는지 확인하는 자료이다. 훈련 데이터에 대한 정답률이 아무리 높아도, 검증 데이터에서 성능이 크게 떨어지면 모델은 일반적인 규칙을 배운 것이 아니라 훈련 자료에 지나치게 맞추어진 것일 수 있다. 이런 현상을 과적합이라고 한다. 따라서 인공지능에서는 많이 맞히는 것 자체보다, 낯선 자료에도 안정적으로 작동하는지를 함께 보는 것이 중요하다.",
+                                                       "훈련 데이터와 검증 데이터를 나누는 이유는 공정한 평가를 위해서이기도 하다. 시험을 치르기 전에 시험 문제를 미리 외워 두면 실력을 제대로 알기 어렵듯이, 모델이 평가에 쓰일 자료까지 미리 학습해 버리면 성능을 정확히 판단할 수 없다. 그래서 데이터 과학에서는 자료를 나누는 기준과 방법도 매우 중요하게 다룬다. 어떤 데이터를 훈련에 쓰고 어떤 데이터를 검증에 쓰는지가 모델의 신뢰성과 연결되기 때문이다.",
+                                                       "결국 훈련 데이터와 검증 데이터는 인공지능이 배움과 평가를 어떻게 구분하는지를 보여 주는 개념이다. 훈련 데이터는 규칙을 익히게 하고, 검증 데이터는 그 규칙이 새로운 상황에서도 통하는지 점검하게 한다. 이 두 개념을 이해하면 인공지능의 성능을 숫자 하나로만 보지 않고, 그 숫자가 어떤 데이터 조건에서 나온 것인지까지 함께 살필 수 있다. 그래서 인공지능을 공부할 때는 모델만이 아니라 데이터를 나누고 검토하는 방식도 함께 이해해야 한다."
+                                                   ]
+                                },
+                    "intensive":  {
+                                      "timeline":  [
+                                                       {
+                                                           "stepId":  "s1",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p1",
+                                                                                                "start":  0,
+                                                                                                "end":  52
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "훈련 데이터와 검증 데이터는 무엇을 구분하나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "인공지능이 제대로 학습하는지 확인할 때 쓰는 핵심 개념으로 소개한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "컴퓨터 부품 이름으로만 소개한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "그림 분류와 무관한 개념으로 소개한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "모델 없이도 쓰는 개념으로 소개한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s2",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p1",
+                                                                                                "start":  53,
+                                                                                                "end":  121
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "많은 예시를 보며 무엇을 익히나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "학습에 직접 사용하는 자료라고 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "평가에만 쓰는 자료라고 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "삭제해 두는 자료라고 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "모델과 상관없는 자료라고 설명한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s3",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p1",
+                                                                                                "start":  122,
+                                                                                                "end":  191
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "훈련 데이터만으로는 무엇을 알기 어렵나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "자료를 외운 것인지 새로운 자료에도 적용되는지 알기 어렵기 때문이라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "훈련 데이터가 항상 부족하기 때문이라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "정답이 없기 때문이라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "모델이 계산을 못 하기 때문이라고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s4",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p1",
+                                                                                                "start":  192,
+                                                                                                "end":  239
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "그래서 어떤 자료가 더 필요하나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "훈련에 쓰지 않은 별도의 자료가 더 필요하다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "같은 훈련 자료를 두 배로 늘려야 한다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "정답 없는 자료만 필요하다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "무작위 자료만 필요하다고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s5",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p1",
+                                                                                                "start":  240,
+                                                                                                "end":  274
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "두 종류의 데이터는 무엇을 분리하나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "학습과 평가를 분리하게 만든다고 정리한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "사진과 글자를 분리하게 만든다고 정리한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "입력과 출력을 없애게 만든다고 정리한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "모델과 데이터를 분리하게 만든다고 정리한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s6",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p1",
+                                                                                                "start":  0,
+                                                                                                "end":  275
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "훈련 데이터와 검증 데이터는 어떤 역할을 나누나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "학습과 평가를 나누어 모델을 제대로 읽는 인공지능 읽기"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "자료를 한데 섞어 보는 인공지능 읽기"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "정답만 외우는 인공지능 읽기"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "모델을 보지 않는 인공지능 읽기"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s7",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p2",
+                                                                                                "start":  0,
+                                                                                                "end":  24
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "훈련 데이터는 모델이 무엇을 배우는 재료인가요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "모델이 규칙을 배우는 재료라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "평가만 하는 재료라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "모두 버리는 재료라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "정답을 감추는 재료라고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s8",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p2",
+                                                                                                "start":  25,
+                                                                                                "end":  76
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "고양이와 강아지 예시에서 훈련 데이터는 무엇인가요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "많은 사진과 정답 표지가 훈련 데이터가 된다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "모델의 추측만 훈련 데이터가 된다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "틀린 답만 훈련 데이터가 된다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "색깔 정보만 훈련 데이터가 된다고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s9",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p2",
+                                                                                                "start":  77,
+                                                                                                "end":  130
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "모델은 자료를 반복해서 보며 무엇을 익히나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "두 대상을 가르는 데 도움이 되는 특징을 익힌다고 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "사진 이름만 익힌다고 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "정답 위치만 익힌다고 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "사진 순서만 익힌다고 설명한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s10",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p2",
+                                                                                                "start":  131,
+                                                                                                "end":  176
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "데이터가 충분히 많고 고르게 마련되어야 하는 까닭은 무엇인가요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "다양한 경우를 배울 수 있어야 하기 때문이라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "사진 수를 줄이기 위해서라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "검증 데이터를 없애기 위해서라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "정답을 외우기 위해서라고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s11",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p2",
+                                                                                                "start":  177,
+                                                                                                "end":  219
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "특정 사진만 많으면 어떤 모델이 되기 쉬운가요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "좁은 경우에만 강한 모델이 될 수 있다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "검증 데이터가 사라질 수 있다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "정답이 모두 바뀔 수 있다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "사진을 분류할 수 없게 된다고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s12",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p2",
+                                                                                                "start":  0,
+                                                                                                "end":  220
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "훈련 데이터는 무엇을 넓게 배우게 해 주나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "다양한 특징을 배우게 하는 학습 재료 읽기로 묶어 보여 준다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "정답을 외우게 하는 암기 재료 읽기로 묶어 보여 준다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "평가만 하게 하는 재료 읽기로 묶어 보여 준다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "자료를 줄이게 하는 재료 읽기로 묶어 보여 준다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s13",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p3",
+                                                                                                "start":  0,
+                                                                                                "end":  48
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "검증 데이터는 무엇을 확인하는 자료인가요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "처음 보는 자료에서도 잘 작동하는지 확인하는 자료로 소개한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "훈련 때만 쓰는 자료로 소개한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "정답이 없는 자료로 소개한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "모두 삭제하는 자료로 소개한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s14",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p3",
+                                                                                                "start":  49,
+                                                                                                "end":  143
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "검증 데이터에서 성능이 떨어지면 무엇을 의심하나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "검증 데이터에서 성능이 떨어지면 훈련 자료에 지나치게 맞춘 것일 수 있기 때문이라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "훈련 데이터가 항상 틀리기 때문이라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "검증 데이터가 더 쉬운 자료이기 때문이라고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "모델이 사진을 못 보기 때문이라고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s15",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p3",
+                                                                                                "start":  144,
+                                                                                                "end":  161
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "이런 현상을 무엇이라고 하나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "과적합이라고 부른다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "정렬이라고 부른다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "분류라고 부른다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "암기라고 부른다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s16",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p3",
+                                                                                                "start":  162,
+                                                                                                "end":  224
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "인공지능에서는 무엇을 함께 보는 것이 중요한가요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "낯선 자료에도 안정적으로 작동하는지를 함께 보는 것이 중요하다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "훈련 자료만 많이 맞히는지만 보는 것이 중요하다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "사진 수만 많이 모으는 것이 중요하다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "정답률 숫자만 보는 것이 중요하다고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s17",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p3",
+                                                                                                "start":  0,
+                                                                                                "end":  225
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "검증 데이터는 어떤 문제를 가려내나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "훈련 자료 암기가 아니라 일반화 성능을 읽는 평가 읽기로 묶어 보여 준다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "사진 개수만 세는 평가 읽기로 묶어 보여 준다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "정답률 하나만 보는 평가 읽기로 묶어 보여 준다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "훈련만 반복하는 평가 읽기로 묶어 보여 준다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s18",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p4",
+                                                                                                "start":  0,
+                                                                                                "end":  41
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "훈련 데이터와 검증 데이터를 나누는 이유는 무엇인가요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "공정한 평가를 위해서라고 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "자료를 줄이기 위해서라고 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "훈련을 없애기 위해서라고 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "정답을 숨기기 위해서라고 설명한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s19",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p4",
+                                                                                                "start":  42,
+                                                                                                "end":  130
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "시험 문제 비유는 무엇을 말하나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "평가 자료까지 미리 학습하면 실력을 정확히 판단하기 어렵다는 점을 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "시험 문제를 외우면 항상 실력이 늘어난다는 점을 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "훈련 데이터를 없애야 한다는 점을 설명한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "검증 데이터는 필요 없다는 점을 설명한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s20",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p4",
+                                                                                                "start":  131,
+                                                                                                "end":  173
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "데이터 과학에서 무엇도 중요하게 다루나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "자료를 나누는 기준과 방법도 중요하게 다룬다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "사진 색깔만 중요하게 다룬다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "정답 수만 중요하게 다룬다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "문장 길이만 중요하게 다룬다고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s21",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p4",
+                                                                                                "start":  174,
+                                                                                                "end":  225
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "모델의 신뢰성과 연결되는 것은 무엇인가요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "어떤 데이터를 훈련에 쓰고 어떤 데이터를 검증에 쓰는지가 연결된다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "사진 크기만 연결된다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "훈련 횟수만 연결된다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "정답 숫자만 연결된다고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s22",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p4",
+                                                                                                "start":  0,
+                                                                                                "end":  226
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "데이터를 나누는 일은 무엇과 이어지나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "평가를 공정하게 만들어 모델 신뢰성을 가늠하게 하는 공정성 읽기"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "정답을 외우게 하는 공정성 읽기"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "사진만 많이 모으게 하는 공정성 읽기"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "모델을 감추게 하는 공정성 읽기"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s23",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p5",
+                                                                                                "start":  0,
+                                                                                                "end":  54
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "훈련 데이터와 검증 데이터는 무엇을 보여 주는 개념인가요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "배움과 평가를 구분하는 개념으로 다시 묶는다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "사진 정리 개념으로 다시 묶는다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "오답 수집 개념으로 다시 묶는다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "모델 삭제 개념으로 다시 묶는다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s24",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p5",
+                                                                                                "start":  55,
+                                                                                                "end":  112
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "훈련 데이터는 무엇을 하게 하고 검증 데이터는 무엇을 하나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "훈련 데이터는 규칙을 익히게 하고 검증 데이터는 그 규칙이 통하는지 점검하게 하는 역할 짝"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "둘 다 규칙만 익히게 하는 역할 짝"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "둘 다 평가만 하게 하는 역할 짝"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "둘 다 자료를 줄이게 하는 역할 짝"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s25",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p5",
+                                                                                                "start":  113,
+                                                                                                "end":  189
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "이 두 개념을 이해하면 성능을 어떻게 보게 되나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "숫자 하나만이 아니라 그 숫자가 어떤 데이터 조건에서 나왔는지까지 읽게 된다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "숫자 하나만 보면 충분하다고 읽게 된다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "데이터를 보지 않아도 된다고 읽게 된다고 한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "정답률은 중요하지 않다고 읽게 된다고 한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s26",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p5",
+                                                                                                "start":  190,
+                                                                                                "end":  245
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "인공지능을 공부할 때 무엇까지 함께 이해해야 하나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "모델만이 아니라 데이터를 나누고 검토하는 방식까지 함께 이해해야 한다고 마무리한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "모델만 알면 충분하다고 마무리한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "자료는 중요하지 않다고 마무리한다"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "정답률만 높으면 된다고 마무리한다"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       },
+                                                       {
+                                                           "stepId":  "s27",
+                                                           "highlight":  {
+                                                                             "ranges":  [
+                                                                                            {
+                                                                                                "paragraphId":  "p5",
+                                                                                                "start":  0,
+                                                                                                "end":  246
+                                                                                            }
+                                                                                        ]
+                                                                         },
+                                                           "question":  {
+                                                                            "prompt":  "인공지능 공부에서 무엇을 함께 살피나요?",
+                                                                            "choices":  [
+                                                                                            {
+                                                                                                "id":  "A",
+                                                                                                "text":  "학습과 평가 조건을 함께 읽어 모델 신뢰성을 따지는 인공지능 평가 읽기"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "B",
+                                                                                                "text":  "정답률만 외우는 인공지능 평가 읽기"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "C",
+                                                                                                "text":  "데이터를 섞어 보는 인공지능 평가 읽기"
+                                                                                            },
+                                                                                            {
+                                                                                                "id":  "D",
+                                                                                                "text":  "모델을 보지 않는 인공지능 평가 읽기"
+                                                                                            }
+                                                                                        ],
+                                                                            "answerId":  "A",
+                                                                            "scoring":  {
+                                                                                            "correctDeltaSec":  20,
+                                                                                            "wrongDeltaSec":  -40,
+                                                                                            "eliminateWrongChoice":  true
+                                                                                        }
+                                                                        }
+                                                       }
+                                                   ]
+                                  },
+                    "recall":  {
+                                   "cards":  [
+                                                 {
+                                                     "id":  "c1",
+                                                     "text":  "학습과 평가는 나뉜다"
+                                                 },
+                                                 {
+                                                     "id":  "c2",
+                                                     "text":  "훈련 데이터는 규칙을 배운다"
+                                                 },
+                                                 {
+                                                     "id":  "c3",
+                                                     "text":  "고르고 많은 자료가 필요하다"
+                                                 },
+                                                 {
+                                                     "id":  "c4",
+                                                     "text":  "검증 데이터는 처음 보는 자료를 본다"
+                                                 },
+                                                 {
+                                                     "id":  "c5",
+                                                     "text":  "과적합은 훈련 자료에만 맞춘다"
+                                                 },
+                                                 {
+                                                     "id":  "c6",
+                                                     "text":  "자료 분리가 공정한 평가를 돕는다"
+                                                 }
+                                             ],
+                                   "correctOrder":  [
+                                                        "c1",
+                                                        "c2",
+                                                        "c3",
+                                                        "c4",
+                                                        "c5",
+                                                        "c6"
+                                                    ],
+                                   "seedPenalty":  1
+                               },
+                    "confirm":  {
+                                    "questions":  [
+                                                      {
+                                                          "id":  "q1",
+                                                          "prompt":  "핵심은 무슨 뜻인가요?",
+                                                          "answerRanges":  [
+                                                                               {
+                                                                                   "paragraphId":  "p1",
+                                                                                   "start":  45,
+                                                                                   "end":  46
+                                                                               }
+                                                                           ],
+                                                          "scoring":  {
+                                                                          "correctDeltaSec":  30,
+                                                                          "wrongDeltaSec":  -45
+                                                                      },
+                                                          "revealOnWrong":  true,
+                                                          "answerMatchMode":  "ANY"
+                                                      },
+                                                      {
+                                                          "id":  "q2",
+                                                          "prompt":  "별도의는 무슨 뜻인가요?",
+                                                          "answerRanges":  [
+                                                                               {
+                                                                                   "paragraphId":  "p1",
+                                                                                   "start":  207,
+                                                                                   "end":  209
+                                                                               }
+                                                                           ],
+                                                          "scoring":  {
+                                                                          "correctDeltaSec":  30,
+                                                                          "wrongDeltaSec":  -45
+                                                                      },
+                                                          "revealOnWrong":  true,
+                                                          "answerMatchMode":  "ANY"
+                                                      },
+                                                      {
+                                                          "id":  "q3",
+                                                          "prompt":  "고르게는 무슨 뜻인가요?",
+                                                          "answerRanges":  [
+                                                                               {
+                                                                                   "paragraphId":  "p2",
+                                                                                   "start":  151,
+                                                                                   "end":  153
+                                                                               }
+                                                                           ],
+                                                          "scoring":  {
+                                                                          "correctDeltaSec":  30,
+                                                                          "wrongDeltaSec":  -45
+                                                                      },
+                                                          "revealOnWrong":  true,
+                                                          "answerMatchMode":  "ANY"
+                                                      },
+                                                      {
+                                                          "id":  "q4",
+                                                          "prompt":  "과적합은 무슨 뜻인가요?",
+                                                          "answerRanges":  [
+                                                                               {
+                                                                                   "paragraphId":  "p3",
+                                                                                   "start":  152,
+                                                                                   "end":  154
+                                                                               }
+                                                                           ],
+                                                          "scoring":  {
+                                                                          "correctDeltaSec":  30,
+                                                                          "wrongDeltaSec":  -45
+                                                                      },
+                                                          "revealOnWrong":  true,
+                                                          "answerMatchMode":  "ANY"
+                                                      },
+                                                      {
+                                                          "id":  "q5",
+                                                          "prompt":  "공정한은 무슨 뜻인가요?",
+                                                          "answerRanges":  [
+                                                                               {
+                                                                                   "paragraphId":  "p4",
+                                                                                   "start":  24,
+                                                                                   "end":  26
+                                                                               }
+                                                                           ],
+                                                          "scoring":  {
+                                                                          "correctDeltaSec":  30,
+                                                                          "wrongDeltaSec":  -45
+                                                                      },
+                                                          "revealOnWrong":  true,
+                                                          "answerMatchMode":  "ANY"
+                                                      }
+                                                  ]
+                                }
+                }
 }
