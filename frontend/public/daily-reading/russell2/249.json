@@ -1,4 +1,4 @@
-{
+﻿{
   "contentId": "dr-r2-249",
   "contentType": "DAILY_READING",
   "version": 1,
@@ -189,7 +189,7 @@
             ]
           },
           "question": {
-            "prompt": "이 문단의 중심 생각은 무엇인가?",
+            "prompt": "이 문단의 중심 내용은?",
             "choices": [
               {
                 "id": "A",
@@ -345,7 +345,7 @@
             ]
           },
           "question": {
-            "prompt": "이 문단의 중심 생각은 무엇인가?",
+            "prompt": "이 문단의 중심 내용은?",
             "choices": [
               {
                 "id": "A",
@@ -501,7 +501,7 @@
             ]
           },
           "question": {
-            "prompt": "이 문단의 중심 생각은 무엇인가?",
+            "prompt": "이 문단의 중심 내용은?",
             "choices": [
               {
                 "id": "A",
@@ -657,7 +657,7 @@
             ]
           },
           "question": {
-            "prompt": "이 문단의 중심 생각은 무엇인가?",
+            "prompt": "이 문단의 결론은?",
             "choices": [
               {
                 "id": "A",
@@ -813,7 +813,7 @@
             ]
           },
           "question": {
-            "prompt": "이 문단의 중심 생각은 무엇인가?",
+            "prompt": "이 문단의 결론은?",
             "choices": [
               {
                 "id": "A",
@@ -969,7 +969,7 @@
             ]
           },
           "question": {
-            "prompt": "이 문단의 중심 생각은 무엇인가?",
+            "prompt": "이 문단의 결론은?",
             "choices": [
               {
                 "id": "A",
@@ -1039,12 +1039,13 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "역할과 교대 시간을 먼저 정하자는 내용은 어디에 있는가?",
+          "prompt": "축제 안내에서 맡는 일을 무엇이라고 하나?",
+          "answerText": "역할",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 0,
-              "end": 146
+              "start": 24,
+              "end": 25
             }
           ],
           "scoring": {
@@ -1056,12 +1057,23 @@
         },
         {
           "id": "q2",
-          "prompt": "세 구역을 나누어 배치하자는 내용은 어디에 있는가?",
+          "prompt": "안내 구역을 나눠서 맡게 하는 데 필요한 말은 무엇인가?",
+          "answerText": "구역",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 0,
-              "end": 157
+              "start": 44,
+              "end": 45
+            },
+            {
+              "paragraphId": "p2",
+              "start": 71,
+              "end": 72
+            },
+            {
+              "paragraphId": "p6",
+              "start": 40,
+              "end": 41
             }
           ],
           "scoring": {
@@ -1073,14 +1085,20 @@
         },
         {
           "id": "q3",
-          "prompt": "각자 역할을 맡고 동선에 맞게 이동하자는 내용은 어디에 있는가?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 0,
-              "end": 160
-            }
-          ],
+            "prompt": "자리에서 다른 곳으로 옮기는 일을 뜻하는 말은 무엇인가?",
+            "answerText": "이동",
+            "answerRanges": [
+              {
+                "paragraphId": "p3",
+                "start": 124,
+                "end": 125
+              },
+              {
+                "paragraphId": "p5",
+                "start": 57,
+                "end": 58
+              }
+            ],
           "scoring": {
             "correctDeltaSec": 30,
             "wrongDeltaSec": -45
@@ -1090,12 +1108,18 @@
         },
         {
           "id": "q4",
-          "prompt": "교대 시간과 인원 조정을 말하는 부분은 어디에 있는가?",
+          "prompt": "시간을 나누어 서로 바꾸어 맡는 일을 무엇이라고 하나?",
+          "answerText": "교대",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 0,
-              "end": 141
+              "start": 15,
+              "end": 16
+            },
+            {
+              "paragraphId": "p6",
+              "start": 78,
+              "end": 79
             }
           ],
           "scoring": {
@@ -1107,17 +1131,18 @@
         },
         {
           "id": "q5",
-          "prompt": "안내 문구를 통일하고 최종 정리를 하는 부분은 어디에 있는가?",
+          "prompt": "알기 쉽게 적어 두는 말을 무엇이라고 하나?",
+          "answerText": "안내 문구",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 0,
-              "end": 155
+              "start": 4,
+              "end": 8
             },
             {
               "paragraphId": "p6",
-              "start": 0,
-              "end": 153
+              "start": 107,
+              "end": 111
             }
           ],
           "scoring": {
