@@ -1,0 +1,275 @@
+{
+  "contentType": "BACKGROUND_KNOWLEDGE",
+  "title": "인터넷과 네트워크",
+  "description": "인터넷의 작동 원리와 네트워크 구조를 학습합니다.",
+  "targetLevel": "RUSSELL_2",
+  "area": "BACKGROUND",
+  "subArea": "INFO_TECH",
+  "competencies": [
+    "BACKGROUND"
+  ],
+  "tags": [
+    "인터넷",
+    "네트워크",
+    "프로토콜",
+    "TCP/IP"
+  ],
+  "seedReward": {
+    "seedType": "CORN",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 360,
+  "payload": {
+    "passages": [
+      {
+        "title": "인터넷의 탄생과 구조",
+        "text": "인터넷은 전 세계의 컴퓨터를 연결하는 거대한 네트워크이다. 1969년 미국 국방부의 ARPANET에서 시작되어 1990년대 월드와이드웹의 등장으로 대중화되었다. 인터넷은 패킷 교환 방식으로 데이터를 전송한다. 메시지를 작은 단위인 패킷으로 나누어 보내고 수신측에서 재조립하는 방식이다. 이 방식은 하나의 회선이 끊어져도 다른 경로로 전달할 수 있어 신뢰성이 높다. 인터넷의 핵심 프로토콜은 TCP/IP이다. IP는 각 장치에 고유한 주소를 부여하고 TCP는 데이터가 정확하고 순서대로 전달되도록 보장한다.",
+        "questions": [
+          {
+            "id": "bg-r2-22-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "인터넷이 사용하는 데이터 전송 방식은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "회선 교환"
+              },
+              {
+                "id": "B",
+                "text": "패킷 교환"
+              },
+              {
+                "id": "C",
+                "text": "무선 전송"
+              },
+              {
+                "id": "D",
+                "text": "아날로그 전송"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -10
+            }
+          },
+          {
+            "id": "bg-r2-22-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "인터넷의 핵심 프로토콜은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "HTTP"
+              },
+              {
+                "id": "B",
+                "text": "FTP"
+              },
+              {
+                "id": "C",
+                "text": "TCP/IP"
+              },
+              {
+                "id": "D",
+                "text": "SMTP"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -10
+            }
+          }
+        ]
+      },
+      {
+        "title": "네트워크의 종류와 구성 요소",
+        "text": "네트워크는 범위에 따라 LAN, WAN, MAN 등으로 분류된다. LAN은 건물이나 캠퍼스 등 좁은 범위의 네트워크이고 WAN은 도시나 국가 간을 연결하는 광역 네트워크이다. 네트워크를 구성하는 핵심 장비로는 라우터, 스위치, 허브 등이 있다. 라우터는 서로 다른 네트워크를 연결하고 최적의 경로로 패킷을 전달하는 장치이다. 스위치는 동일 네트워크 내에서 패킷을 정확한 목적지로 전달한다. 최근에는 무선 네트워크의 사용이 급증하고 있으며 5G 이동통신은 초고속, 초저지연, 초연결을 실현하고 있다.",
+        "questions": [
+          {
+            "id": "bg-r2-22-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "LAN과 WAN의 차이는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "LAN은 유선, WAN은 무선이다"
+              },
+              {
+                "id": "B",
+                "text": "LAN은 좁은 범위, WAN은 광역 네트워크이다"
+              },
+              {
+                "id": "C",
+                "text": "LAN은 느리고 WAN은 빠르다"
+              },
+              {
+                "id": "D",
+                "text": "LAN은 서버, WAN은 클라이언트이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -10
+            }
+          },
+          {
+            "id": "bg-r2-22-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "라우터의 기능은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "같은 네트워크 내에서 패킷을 전달한다"
+              },
+              {
+                "id": "B",
+                "text": "서로 다른 네트워크를 연결하고 최적 경로로 패킷을 전달한다"
+              },
+              {
+                "id": "C",
+                "text": "데이터를 저장한다"
+              },
+              {
+                "id": "D",
+                "text": "무선 신호를 증폭한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -10
+            }
+          }
+        ]
+      },
+      {
+        "title": "DNS와 웹의 작동 원리",
+        "text": "웹 브라우저에 주소를 입력하면 DNS가 도메인 이름을 IP 주소로 변환한다. DNS는 인터넷의 전화번호부와 같은 역할을 한다. IP 주소를 얻으면 브라우저는 해당 서버에 HTTP 요청을 보내고 서버는 HTML 문서를 응답으로 보낸다. 브라우저는 이 HTML을 해석하여 화면에 웹 페이지를 표시한다. HTTPS는 HTTP에 암호화를 추가한 프로토콜로 데이터가 전송 중에 도청되거나 변조되는 것을 방지한다. 현대 웹은 단순한 문서 표시를 넘어 동영상 스트리밍, 실시간 통신, 클라우드 컴퓨팅 등 다양한 서비스를 제공하고 있다.",
+        "questions": [
+          {
+            "id": "bg-r2-22-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "DNS의 역할은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "데이터를 암호화한다"
+              },
+              {
+                "id": "B",
+                "text": "도메인 이름을 IP 주소로 변환한다"
+              },
+              {
+                "id": "C",
+                "text": "웹 페이지를 저장한다"
+              },
+              {
+                "id": "D",
+                "text": "이메일을 전송한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -10
+            }
+          },
+          {
+            "id": "bg-r2-22-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "HTTPS가 HTTP와 다른 점은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "속도가 더 빠르다"
+              },
+              {
+                "id": "B",
+                "text": "암호화가 추가되어 데이터 보안이 강화된다"
+              },
+              {
+                "id": "C",
+                "text": "동영상만 전송할 수 있다"
+              },
+              {
+                "id": "D",
+                "text": "무료 서비스만 제공한다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -10
+            }
+          }
+        ]
+      },
+      {
+        "title": "사물인터넷과 미래 네트워크",
+        "text": "사물인터넷(IoT)은 다양한 사물에 센서와 통신 기능을 내장하여 인터넷에 연결하는 기술이다. 스마트 가전, 자율주행 자동차, 스마트 시티 등이 응용 분야이다. 이를 지원하기 위해 IPv6가 도입되어 사실상 무한한 수의 IP 주소를 제공한다. 클라우드 컴퓨팅은 인터넷을 통해 서버, 저장소 등의 컴퓨팅 자원을 필요할 때 빌려 사용하는 서비스이다. 엣지 컴퓨팅은 데이터를 중앙 서버가 아닌 사용자 가까운 곳에서 처리하여 지연 시간을 줄이는 기술이다. 이러한 기술 발전은 네트워크의 범위와 역할을 지속적으로 확장하고 있다.",
+        "questions": [
+          {
+            "id": "bg-r2-22-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "사물인터넷(IoT)에 대한 설명으로 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사람만 사용하는 인터넷이다"
+              },
+              {
+                "id": "B",
+                "text": "다양한 사물에 센서와 통신 기능을 내장하여 인터넷에 연결하는 기술이다"
+              },
+              {
+                "id": "C",
+                "text": "인터넷 속도를 높이는 기술이다"
+              },
+              {
+                "id": "D",
+                "text": "보안을 강화하는 기술이다"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -10
+            }
+          },
+          {
+            "id": "bg-r2-22-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "클라우드 컴퓨팅이란?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "개인 컴퓨터의 성능을 높이는 것"
+              },
+              {
+                "id": "B",
+                "text": "인터넷을 통해 컴퓨팅 자원을 필요할 때 빌려 사용하는 서비스"
+              },
+              {
+                "id": "C",
+                "text": "날씨 정보를 제공하는 서비스"
+              },
+              {
+                "id": "D",
+                "text": "무선 인터넷 기술"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -10
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

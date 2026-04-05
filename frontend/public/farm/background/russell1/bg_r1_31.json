@@ -1,0 +1,144 @@
+{
+  "contentType": "BACKGROUND_KNOWLEDGE",
+  "title": "명제논리",
+  "description": "명제의 개념, 논리 연결사, 진리표, 추론의 타당성을 체계적으로 탐구합니다.",
+  "targetLevel": "RUSSELL_1",
+  "area": "BACKGROUND",
+  "subArea": "LOGIC",
+  "competencies": ["BACKGROUND"],
+  "tags": ["명제", "논리", "진리표", "추론"],
+  "seedReward": { "seedType": "CORN", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 360,
+  "payload": {
+    "passages": [
+      {
+        "title": "명제의 개념",
+        "text": "명제란 참 또는 거짓을 판별할 수 있는 문장이나 수식을 말한다. '서울은 대한민국의 수도이다'는 참인 명제이고, '3 + 2 = 6'은 거짓인 명제이다. 그러나 '이 영화는 재미있다'처럼 주관적인 판단이나, '문을 닫아라'처럼 명령, '오늘 날씨가 좋은가?'처럼 의문은 참·거짓을 객관적으로 판별할 수 없으므로 명제가 아니다. 명제의 참·거짓 값을 '진릿값'이라 하며, 참은 T(True) 또는 1로, 거짓은 F(False) 또는 0으로 표기한다. 명제는 보통 p, q, r과 같은 기호로 나타낸다. 명제논리의 핵심은 개별 명제의 내용이 아니라, 명제들 사이의 논리적 관계와 추론의 형식적 구조를 분석하는 것이다.",
+        "questions": [
+          {
+            "id": "bg-r1-31-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "명제에 해당하는 것은?",
+            "choices": [
+              { "id": "A", "text": "이 영화는 재미있다." },
+              { "id": "B", "text": "문을 닫아라." },
+              { "id": "C", "text": "지구는 태양 주위를 돈다." },
+              { "id": "D", "text": "내일 비가 올까?" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-r1-31-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "명제논리의 핵심 목적으로 가장 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "개별 명제의 내용을 상세히 분석하는 것" },
+              { "id": "B", "text": "명제들 사이의 논리적 관계와 추론의 형식적 구조를 분석하는 것" },
+              { "id": "C", "text": "모든 문장을 참으로 만드는 것" },
+              { "id": "D", "text": "주관적 판단의 옳고 그름을 결정하는 것" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "논리 연결사",
+        "text": "논리 연결사는 단순 명제를 결합하여 복합 명제를 만드는 기호이다. 부정(~p 또는 ¬p)은 명제의 진릿값을 뒤집는다. p가 참이면 ~p는 거짓이고, p가 거짓이면 ~p는 참이다. 논리곱(p ∧ q)은 '그리고'에 해당하며, p와 q가 모두 참일 때만 참이다. 논리합(p ∨ q)은 '또는'에 해당하며, p와 q 중 적어도 하나가 참이면 참이다. 조건문(p → q)은 '만약 p이면 q이다'를 나타내며, p가 참이고 q가 거짓인 경우에만 거짓이다. 쌍조건문(p ↔ q)은 'p이면 그리고 그때만 q이다'를 나타내며, p와 q의 진릿값이 같을 때 참이다. 이러한 논리 연결사를 이해하는 것은 정확한 추론과 논리적 사고의 기초이다.",
+        "questions": [
+          {
+            "id": "bg-r1-31-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "조건문 p → q가 거짓인 경우는?",
+            "choices": [
+              { "id": "A", "text": "p가 참이고 q가 참일 때" },
+              { "id": "B", "text": "p가 참이고 q가 거짓일 때" },
+              { "id": "C", "text": "p가 거짓이고 q가 참일 때" },
+              { "id": "D", "text": "p가 거짓이고 q가 거짓일 때" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-r1-31-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "논리곱(p ∧ q)이 참이 되려면?",
+            "choices": [
+              { "id": "A", "text": "p와 q 중 하나만 참이면 된다." },
+              { "id": "B", "text": "p와 q가 모두 참이어야 한다." },
+              { "id": "C", "text": "p와 q가 모두 거짓이어야 한다." },
+              { "id": "D", "text": "p만 참이면 된다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "추론의 타당성",
+        "text": "추론이란 하나 이상의 전제로부터 결론을 이끌어 내는 사고 과정이다. 논리학에서 추론의 타당성을 판단하는 기준은 전제가 모두 참일 때 결론이 반드시 참이 되는가 하는 것이다. 만약 전제가 모두 참인데 결론이 거짓이 될 수 있다면, 그 추론은 타당하지 않다. 대표적인 타당한 추론 형식으로 '전건 긍정(modus ponens)'이 있다. 이는 '만약 p이면 q이다. p이다. 따라서 q이다'라는 형식으로, p → q와 p가 전제이고 q가 결론이다. 반면 '후건 긍정의 오류'는 'p → q이고 q이다. 따라서 p이다'라는 형식으로, 타당하지 않은 추론이다. 예를 들어 '비가 오면 땅이 젖는다. 땅이 젖었다. 따라서 비가 왔다'는 추론은 오류인데, 스프링클러로 물을 뿌려도 땅이 젖을 수 있기 때문이다.",
+        "questions": [
+          {
+            "id": "bg-r1-31-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "전건 긍정(modus ponens)의 올바른 형식은?",
+            "choices": [
+              { "id": "A", "text": "p → q, q이다. 따라서 p이다." },
+              { "id": "B", "text": "p → q, p이다. 따라서 q이다." },
+              { "id": "C", "text": "p → q, ~q이다. 따라서 ~p이다." },
+              { "id": "D", "text": "p → q, ~p이다. 따라서 ~q이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-r1-31-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'비가 오면 땅이 젖는다. 땅이 젖었다. 따라서 비가 왔다'의 오류는?",
+            "choices": [
+              { "id": "A", "text": "전건 부정의 오류" },
+              { "id": "B", "text": "후건 긍정의 오류" },
+              { "id": "C", "text": "순환 논증의 오류" },
+              { "id": "D", "text": "성급한 일반화의 오류" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "논리적 동치와 역·이·대우",
+        "text": "조건문 p → q에서 역, 이, 대우의 관계는 논리학의 기본이다. 역은 q → p, 이는 ~p → ~q, 대우는 ~q → ~p이다. 이 중 원래 조건문과 논리적으로 동치(항상 같은 진릿값을 가짐)인 것은 대우뿐이다. 즉 p → q가 참이면 ~q → ~p도 반드시 참이고, 그 역도 성립한다. 예를 들어 '모든 물고기는 아가미로 호흡한다'가 참이면, 그 대우인 '아가미로 호흡하지 않으면 물고기가 아니다'도 참이다. 그러나 역인 '아가미로 호흡하면 물고기이다'는 반드시 참이라 할 수 없다(올챙이도 아가미로 호흡하지만 물고기는 아니다). 대우를 활용한 증명법은 직접 증명이 어려운 수학 정리를 간접적으로 증명하는 데 자주 사용된다.",
+        "questions": [
+          {
+            "id": "bg-r1-31-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "조건문 p → q와 논리적으로 동치인 것은?",
+            "choices": [
+              { "id": "A", "text": "역 (q → p)" },
+              { "id": "B", "text": "이 (~p → ~q)" },
+              { "id": "C", "text": "대우 (~q → ~p)" },
+              { "id": "D", "text": "역과 이 모두" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-r1-31-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'모든 물고기는 아가미로 호흡한다'의 대우로 올바른 것은?",
+            "choices": [
+              { "id": "A", "text": "아가미로 호흡하면 물고기이다." },
+              { "id": "B", "text": "물고기가 아니면 아가미로 호흡하지 않는다." },
+              { "id": "C", "text": "아가미로 호흡하지 않으면 물고기가 아니다." },
+              { "id": "D", "text": "물고기가 아니면 아가미로 호흡한다." }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      }
+    ]
+  }
+}
