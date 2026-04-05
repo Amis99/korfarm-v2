@@ -3,15 +3,15 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 1) Day 159 비문학",
+  "title": "초고를 고쳐 쓰는 방법",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
     "min": 7,
-    "max": 7
+    "max": 8
   },
   "area": "READING",
-  "subArea": "NONFICTION",
+  "subArea": "WRITING",
   "competencies": [
     "READING"
   ],
@@ -26,7 +26,7 @@
     "count": 3,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
+  "timeLimitSec": 480,
   "assets": {},
   "payload": {
     "passage": {
@@ -34,19 +34,19 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "인터넷의 발달로 데이터 저장 및 분석 과정이 인터넷상에서 이루어지고 있으며 그에 따라 개인정보와 같은 민감한 데이터는 암호화되어 인터넷 서버에 저장된다. 그런데 현재 널리 사용되는 공개키 암호화 방식으로 암호화된 데이터는 통계 처리를 위한 연산을 수행하기 위해서 원래 데이터로 복원하는 복호화 과정을 거친 후 연산을 수행하고 그 결과를 다시 암호화해야 한다. 하지만 이 과정에서 비밀키나 민감한 개인정보가 유출되는 일이 생길 수 있다. 그래서 암호화된 데이터를 복호화하지 않고 암호화된 상태로 안전하게 연산을 수행할 수 있는 동형암호가 등장하였다.\n동형암호는 동형성을 기반으로 하는데, 동형성이란 데이터를 암호화한 상태에서 특정 연산을 수행했을 때 나오는 결과가 암호화하지 않은 상태에서 같은 연산을 수행하고 암호화를 한 결과와 같은 것을 말한다. 이때 연산의 횟수에 제한 없이 특정한 한 종류의 연산에만 동형성을 갖는 암호를 부분 동형암호, 연산의 종류와 관계없이 특정 횟수까지만 동형성을 갖는 암호를 제한적 동형암호라고 하며, 횟수에 제한 없이 컴퓨터의 주된 연산인 덧셈, 곱셈에 동형성을 갖는 암호를 완전 동형암호라고 한다.\n완전 동형암호는 암호화에 사용하는 원리에 따라 격자 기반, CRT(Chinese Remainder Theorem) 기반 등으로 나뉜다. 그중 격자 기반 완전 동형암호는 수학계에서 답을 찾기 어렵다고 알려진 격자 문제를 응용하여 만들어졌다. 이 방식은 원문 데이터를 비트* 단위로 변환하고 각각의 비트를 개별적으로 암호화한다. 암호키 p와 임의의 정수를 곱한 수를 원문에 더하면 암호문이 만들어지는데, 이 과정에서 무작위로 오륫값을 추가하여 안전성을 높인다. 그래서 암호문의 연산을 반복할수록 오륫값이 커지게 되며, 특히 곱셈 연산을 수행할수록 오륫값이 급격하게 커지기 때문에 일정 횟수 이상 수행하면 원문 복호화가 불가능하다.\n따라서 연산을 지속적으로 수행하기 위해서는 오륫값이 한계치에 이른 암호문은 부트스트래핑 과정을 반드시 거쳐야 한다. 일정 횟수의 덧셈과 곱셈 연산을 수행하여 암호문에 오륫값이 누적되면, 다른 암호키로 해당 암호문과 암호키 p를 암호화한다. 그리고 복호화 회로를 통해 기존의 암호키 p에 의한 이전 암호문을 복호화하면 그동안의 연산 과정에서 누적된 오륫값이 제거된 새로운 암호문이 만들어진다. 이때 새로운 암호문이 만들어지면서 오륫값이 추가되지만 그 크기가 기존의 누적된 것보다 작아서 적절하게 부트스트래핑 과정을 수행한다면 지속적인 연산이 가능하다.\n이 방식은 원문을 비트 단위로 변환하여 각 비트별로 암호화하기 때문에 원문에 비해 암호문의 값이 10~100배가량 커져서 데이터의 저장 공간이 많이 필요하다. 그리고 개별 비트 단위로 암호문의 연산과 부트스트래핑 과정을 거쳐야 하기 때문에 연산 속도가 느리다.\n그래서 최근에는 효율성을 개선한 CRT 기반 완전 동형암호가 등장하였다. 이 방식은 하나의 원문을 특정한 정수인 암호키로 나눈 나머지 값을 암호문으로 이용하고, 이 나머지 값에서 원문을 복호화하는 방법이다. 이때 암호키의 개수는 임의로 설정할 수 있으며 각각의 원문마다 암호키의 개수만큼 암호문이 만들어진다. 암호키가 두 개일 때 정수로 된 원문 A와 B를 덧셈 연산한 결과가 동형성을 갖는 원리를 간단히 알아보자. 우선 서로소*인 임의의 정수 p와 q를 암호키로 정하고 정수로 된 원문 A와 B를 각각의 암호키로 나눈 나머지 값을 구하면 Ap, Aq와 Bp, Bq가 되는데 이 나머지 값이 원문 A와 B의 암호문이 된다. 그리고 <그림>처럼 각 원문을 동일한 암호키로 나눈 나머지 값인 Ap와 Bp, Aq와 Bq끼리 서로 덧셈 연산을 수행한다. 만약 연산 수행의 결괏값이 암호키와 같거나 암호키보다 크면 한 번 더 암호키로 나누어 나머지 값을 구한다. 그러면 연산 수행의 결괏값인 Ap+Bp, Aq+Bq가 원문 A와 B를 직접 덧셈 연산한 결괏값을 암호키 p와 q로 나눈 나머지 값인 (A+B)p, (A+B)q와 같다. 그리고 원문을 각 암호키로 나누었을 때의 나머지 값과 각 암호키를 알면 원문을 복호화할 수 있다."
+          "text": "서연이는 학교 신문에 실을 글 초고를 쓴 뒤 다시 읽어 보았다. 주제는 ‘교내 분리배출함 사용을 늘리는 방법’이었는데, 첫 문단에서는 문제를 말하고 둘째 문단에서는 분리배출의 필요성을 설명했다. 그런데 셋째 문단에 오자 갑자기 친구들과 나눈 대화가 길게 들어가 있었고, 마지막 문단에서는 실천 방법보다 ‘환경을 사랑하자’는 다짐만 반복되고 있었다. 서연이는 글을 다 썼다는 안도감보다, 읽는 사람이 무엇을 중심으로 이해해야 할지 흐릿하다는 생각이 먼저 들었다."
         },
         {
           "id": "p2",
-          "text": "<그림>\n(원문 연산: A + B \\= A+B)\n(암호 연산: Ap + Bp \\= (A+B)p / Aq + Bq \\= (A+B)q)\n(Ap, Bp는 p로 나눈 나머지, Aq, Bq는 q로 나눈 나머지)"
+          "text": "고쳐쓰기의 첫 단계는 글의 목적과 중심 생각이 문단마다 잘 드러나는지 살피는 일이다. 서연이는 자신의 글이 ‘문제 제기-이유 설명-실천 방안’으로 이어져야 한다고 판단했다. 그래서 친구들과의 대화 부분에서 핵심이 되는 문장만 남기고, 그 대화가 왜 분리배출함 사용 문제와 연결되는지 설명하는 문장을 덧붙이기로 했다. 또한 마지막 문단에서는 추상적인 다짐을 줄이고, 실제로 실천할 수 있는 방안을 두 가지로 나누어 제시하기로 했다."
         },
         {
           "id": "p3",
-          "text": "이 방식 또한 안전성을 위해서 암호키의 개수를 늘려 계산이 복잡하고 무작위로 오륫값을 추가하기 때문에 부트스트래핑 과정이 필요하다. 하지만 데이터를 정수 단위로 암호화하기 때문에 비트 단위로 암호화하는 격자 기반의 방식보다 더 많은 데이터를 저장할 수 있다. 또한 CRT 방식은 원문보다 작은 나머지 값으로 연산을 수행하기 때문에 격자 기반의 방식에 비해 연산 값이 상대적으로 작아 연산 속도가 빠르고, 격자 기반의 방식과 달리 병렬적으로 연산을 수행할 수 있다."
+          "text": "두 번째 단계는 문장 표현을 다듬는 일이다. 서연이의 초고에는 같은 뜻의 말이 반복되거나, 주어가 분명하지 않은 문장이 여러 번 나타났다. 예를 들어 ‘그래서 이것이 잘되지 않는다’라는 문장은 무엇이 잘되지 않는지 바로 알기 어려웠다. 서연이는 이를 ‘그래서 분리배출함 앞에서 무엇을 어떻게 버려야 하는지 헷갈리는 학생이 많다’로 바꾸었다. 이렇게 문장을 고치면 독자는 글쓴이의 생각을 더 정확하게 따라갈 수 있다."
         },
         {
           "id": "p4",
-          "text": "* 비트: 정보량의 최소 기본 단위. 1비트는 이진수 체계(0, 1)의 한 자리.\n* 서로소: 여러 개의 수 사이에 1 이외의 공약수가 없음을 이르는 말."
+          "text": "마지막으로 서연이는 제목과 첫 문장을 다시 보았다. 제목이 막연하면 글의 방향이 흐려지고, 첫 문장이 약하면 독자가 글의 필요성을 바로 느끼기 어렵다. 그래서 제목을 ‘교내 분리배출함, 왜 잘 쓰이지 않을까’로 바꾸고, 첫 문장도 문제 상황을 또렷하게 드러내도록 손질했다. 또 문단 순서가 자연스러운지, 맞춤법과 띄어쓰기에 어색한 부분은 없는지도 마지막까지 점검했다. 예시가 필요 없는 곳에서는 문장을 덜어 내고, 꼭 필요한 근거는 위치를 옮겨 더 잘 보이게 했다. 고쳐쓰기는 틀린 부분을 조금 손보는 일에 그치지 않는다. 글의 흐름, 문단의 역할, 문장의 분명함을 함께 점검하며 읽는 사람이 더 잘 이해하도록 다시 설계하는 과정이다."
         }
       ]
     },
@@ -54,2006 +54,429 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 5,
-                "end": 8
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 34 } ] },
           "question": {
-            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
+            "prompt": "서연이는 초고를 쓴 뒤 무엇을 했나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "서술어"
-              },
-              {
-                "id": "B",
-                "text": "목적어"
-              },
-              {
-                "id": "C",
-                "text": "부사어"
-              },
-              {
-                "id": "D",
-                "text": "주어"
-              }
+              { "id": "A", "text": "다시 읽어 보았다" },
+              { "id": "B", "text": "바로 제출했다" },
+              { "id": "C", "text": "친구에게 맡겼다" },
+              { "id": "D", "text": "제목만 고쳤다" }
             ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s2",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 85
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 36, "end": 107 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "초고의 앞부분은 어떤 흐름이었나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "또한 CRT 방식은 원문보다 작은 나머지 값으로 연산을 수행하기 때문에 격자 기반의 방식에 비해 연산 값이 상대적으로 작아 연산 속도가 빠르고, 격자 기반의"
-              },
-              {
-                "id": "B",
-                "text": "인터넷의 발달로 데이터 저장 및 분석 과정이 인터넷상에서 이루어지고 있으며 그에 따라 개인정보와 같은 민감한 데이터는 암호화되어 인터넷 서버에 저장된다."
-              },
-              {
-                "id": "C",
-                "text": "그런데 현재 널리 사용되는 공개키 암호화 방식으로 암호화된 데이터는 통계 처리를 위한 연산을 수행하기 위해서 원래 데이터로 복원하는 복호화 과정을 거친 후"
-              },
-              {
-                "id": "D",
-                "text": "이때 암호키의 개수는 임의로 설정할 수 있으며 각각의 원문마다 암호키의 개수만큼 암호문이 만들어진다."
-              }
+              { "id": "A", "text": "문제 제기와 필요성 설명" },
+              { "id": "B", "text": "감상과 결론" },
+              { "id": "C", "text": "사례와 반박" },
+              { "id": "D", "text": "대화와 경험담" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s3",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 86,
-                "end": 200
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 109, "end": 193 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "갑자기 길게 들어간 것은 무엇인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "암호키가 두 개일 때 정수로 된 원문 A와 B를 덧셈 연산한 결과가 동형성을 갖는 원리를 간단히 알아보자."
-              },
-              {
-                "id": "B",
-                "text": "그런데 현재 널리 사용되는 공개키 암호화 방식으로 암호화된 데이터는 통계 처리를 위한 연산을 수행하기 위해서 원래 데이터로 복원하는 복호화 과정을 거친 후"
-              },
-              {
-                "id": "C",
-                "text": "인터넷의 발달로 데이터 저장 및 분석 과정이 인터넷상에서 이루어지고 있으며 그에 따라 개인정보와 같은 민감한 데이터는 암호화되어 인터넷 서버에 저장된다."
-              },
-              {
-                "id": "D",
-                "text": "<그림> (원문 연산: A + B \\= A+B)"
-              }
+              { "id": "A", "text": "친구들과 나눈 대화" },
+              { "id": "B", "text": "실천 방법 두 가지" },
+              { "id": "C", "text": "환경을 사랑하자는 다짐" },
+              { "id": "D", "text": "맞춤법 점검" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s4",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 201,
-                "end": 204
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 195, "end": 256 } ] },
           "question": {
-            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "prompt": "서연이가 먼저 느낀 문제는 무엇인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "인과"
-              },
-              {
-                "id": "B",
-                "text": "대조"
-              },
-              {
-                "id": "C",
-                "text": "예시"
-              },
-              {
-                "id": "D",
-                "text": "첨가"
-              }
+              { "id": "A", "text": "읽는 사람이 중심을 잡기 어렵다는 점" },
+              { "id": "B", "text": "맞춤법이 모두 틀렸다는 점" },
+              { "id": "C", "text": "주제가 너무 어렵다는 점" },
+              { "id": "D", "text": "문단 수가 너무 많다는 점" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s5",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 201,
-                "end": 243
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p1", "start": 0, "end": 257 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+          "prompt": "초고의 어떤 문제를 먼저 느꼈나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "그래서 암호문의 연산을 반복할수록 오륫값이 커지게 되며, 특히 곱셈 연산을 수행할수록 오륫값이 급격하게 커지기 때문에 일정 횟수 이상 수행하면 원문 복호화가"
-              },
-              {
-                "id": "B",
-                "text": "암호키가 두 개일 때 정수로 된 원문 A와 B를 덧셈 연산한 결과가 동형성을 갖는 원리를 간단히 알아보자."
-              },
-              {
-                "id": "C",
-                "text": "그래서 최근에는 효율성을 개선한 CRT 기반 완전 동형암호가 등장하였다."
-              },
-              {
-                "id": "D",
-                "text": "하지만 이 과정에서 비밀키나 민감한 개인정보가 유출되는 일이 생길 수 있다."
-              }
+              { "id": "A", "text": "읽는 사람이 이해할 중심이 흐릿한 문제" },
+              { "id": "B", "text": "제목이 너무 짧은 문제" },
+              { "id": "C", "text": "맞춤법만 틀린 문제" },
+              { "id": "D", "text": "문장 수가 적은 문제" }
             ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s6",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 244,
-                "end": 247
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 46 } ] },
           "question": {
-            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "prompt": "고쳐쓰기의 첫 단계는 무엇을 살피는 일인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "대조"
-              },
-              {
-                "id": "B",
-                "text": "인과"
-              },
-              {
-                "id": "C",
-                "text": "예시"
-              },
-              {
-                "id": "D",
-                "text": "첨가"
-              }
+              { "id": "A", "text": "목적과 중심 생각이 문단마다 드러나는지" },
+              { "id": "B", "text": "맞춤법 오류만 있는지" },
+              { "id": "C", "text": "제목을 먼저 바꾸는지" },
+              { "id": "D", "text": "예시가 많은지" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s7",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 244,
-                "end": 306
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 48, "end": 95 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "서연이는 자신의 글을 어떤 흐름으로 이어야 한다고 봤나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "(Ap, Bp는 p로 나눈 나머지, Aq, Bq는 q로 나눈 나머지)"
-              },
-              {
-                "id": "B",
-                "text": "이 방식은 원문을 비트 단위로 변환하여 각 비트별로 암호화하기 때문에 원문에 비해 암호문의 값이 10~100배가량 커져서 데이터의 저장 공간이 많이 필요하다."
-              },
-              {
-                "id": "C",
-                "text": "그래서 암호화된 데이터를 복호화하지 않고 암호화된 상태로 안전하게 연산을 수행할 수 있는 동형암호가 등장하였다."
-              },
-              {
-                "id": "D",
-                "text": "이 방식은 원문 데이터를 비트* 단위로 변환하고 각각의 비트를 개별적으로 암호화한다."
-              }
+              { "id": "A", "text": "문제 제기-이유 설명-실천 방안" },
+              { "id": "B", "text": "감상-비교-결론" },
+              { "id": "C", "text": "대화-예시-반복" },
+              { "id": "D", "text": "서론-본문-독후감" }
             ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s8",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 307,
-                "end": 418
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 97, "end": 175 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "친구들과의 대화 부분은 어떻게 고치기로 했나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "그리고 원문을 각 암호키로 나누었을 때의 나머지 값과 각 암호키를 알면 원문을 복호화할 수 있다."
-              },
-              {
-                "id": "B",
-                "text": "동형암호는 동형성을 기반으로 하는데, 동형성이란 데이터를 암호화한 상태에서 특정 연산을 수행했을 때 나오는 결과가 암호화하지 않은 상태에서 같은 연산을 수행하고"
-              },
-              {
-                "id": "C",
-                "text": "우선 서로소*인 임의의 정수 p와 q를 암호키로 정하고 정수로 된 원문 A와 B를 각각의 암호키로 나눈 나머지 값을 구하면 Ap, Aq와 Bp, Bq가 되는데"
-              },
-              {
-                "id": "D",
-                "text": "<그림> (원문 연산: A + B \\= A+B)"
-              }
+              { "id": "A", "text": "핵심 문장만 남기고 설명을 덧붙이기" },
+              { "id": "B", "text": "대화 전체를 더 길게 늘리기" },
+              { "id": "C", "text": "아예 빼 버리기" },
+              { "id": "D", "text": "제목으로 옮기기" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s9",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 419,
-                "end": 576
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 177, "end": 239 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "마지막 문단은 어떻게 바꾸기로 했나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "이 방식은 원문을 비트 단위로 변환하여 각 비트별로 암호화하기 때문에 원문에 비해 암호문의 값이 10~100배가량 커져서 데이터의 저장 공간이 많이 필요하다."
-              },
-              {
-                "id": "B",
-                "text": "* 서로소: 여러 개의 수 사이에 1 이외의 공약수가 없음을 이르는 말."
-              },
-              {
-                "id": "C",
-                "text": "그래서 암호문의 연산을 반복할수록 오륫값이 커지게 되며, 특히 곱셈 연산을 수행할수록 오륫값이 급격하게 커지기 때문에 일정 횟수 이상 수행하면 원문 복호화가"
-              },
-              {
-                "id": "D",
-                "text": "이때 연산의 횟수에 제한 없이 특정한 한 종류의 연산에만 동형성을 갖는 암호를 부분 동형암호, 연산의 종류와 관계없이 특정 횟수까지만 동형성을 갖는 암호를"
-              }
+              { "id": "A", "text": "추상적 다짐을 줄이고 실천 방안을 두 가지로 제시하기" },
+              { "id": "B", "text": "감상문처럼 길게 늘어놓기" },
+              { "id": "C", "text": "대화만 반복하기" },
+              { "id": "D", "text": "문단 수를 더 늘리기" }
             ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s10",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 577,
-                "end": 652
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p2", "start": 0, "end": 240 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+          "prompt": "고쳐쓰기의 방향은 어떻게 잡았나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "하지만 데이터를 정수 단위로 암호화하기 때문에 비트 단위로 암호화하는 격자 기반의 방식보다 더 많은 데이터를 저장할 수 있다."
-              },
-              {
-                "id": "B",
-                "text": "이 방식은 하나의 원문을 특정한 정수인 암호키로 나눈 나머지 값을 암호문으로 이용하고, 이 나머지 값에서 원문을 복호화하는 방법이다."
-              },
-              {
-                "id": "C",
-                "text": "이 방식은 원문 데이터를 비트* 단위로 변환하고 각각의 비트를 개별적으로 암호화한다."
-              },
-              {
-                "id": "D",
-                "text": "완전 동형암호는 암호화에 사용하는 원리에 따라 격자 기반, CRT(Chinese Remainder Theorem) 기반 등으로 나뉜다."
-              }
+              { "id": "A", "text": "목적과 중심 생각을 문단마다 분명히 세우는 방향" },
+              { "id": "B", "text": "대화를 길게 늘리는 방향" },
+              { "id": "C", "text": "다짐을 반복하는 방향" },
+              { "id": "D", "text": "제목만 바꾸는 방향" }
             ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s11",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 653,
-                "end": 710
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 23 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "두 번째 단계는 무엇을 다듬는 일인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "1비트는 이진수 체계(0, 1)의 한 자리."
-              },
-              {
-                "id": "B",
-                "text": "그러면 연산 수행의 결괏값인 Ap+Bp, Aq+Bq가 원문 A와 B를 직접 덧셈 연산한 결괏값을 암호키 p와 q로 나눈 나머지 값인 (A+B)p, (A+B)q와"
-              },
-              {
-                "id": "C",
-                "text": "일정 횟수의 덧셈과 곱셈 연산을 수행하여 암호문에 오륫값이 누적되면, 다른 암호키로 해당 암호문과 암호키 p를 암호화한다."
-              },
-              {
-                "id": "D",
-                "text": "그중 격자 기반 완전 동형암호는 수학계에서 답을 찾기 어렵다고 알려진 격자 문제를 응용하여 만들어졌다."
-              }
+              { "id": "A", "text": "문장 표현" },
+              { "id": "B", "text": "문단 순서" },
+              { "id": "C", "text": "제목 길이" },
+              { "id": "D", "text": "글씨 크기" }
             ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 711,
-                "end": 758
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 25, "end": 76 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "초고에는 어떤 문제가 여러 번 나타났나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "이때 새로운 암호문이 만들어지면서 오륫값이 추가되지만 그 크기가 기존의 누적된 것보다 작아서 적절하게 부트스트래핑 과정을 수행한다면 지속적인 연산이 가능하다."
-              },
-              {
-                "id": "B",
-                "text": "이때 연산의 횟수에 제한 없이 특정한 한 종류의 연산에만 동형성을 갖는 암호를 부분 동형암호, 연산의 종류와 관계없이 특정 횟수까지만 동형성을 갖는 암호를"
-              },
-              {
-                "id": "C",
-                "text": "하지만 데이터를 정수 단위로 암호화하기 때문에 비트 단위로 암호화하는 격자 기반의 방식보다 더 많은 데이터를 저장할 수 있다."
-              },
-              {
-                "id": "D",
-                "text": "이 방식은 원문 데이터를 비트* 단위로 변환하고 각각의 비트를 개별적으로 암호화한다."
-              }
+              { "id": "A", "text": "같은 뜻 반복과 주어 불분명" },
+              { "id": "B", "text": "제목의 길이만 문제" },
+              { "id": "C", "text": "실천 방안이 너무 많음" },
+              { "id": "D", "text": "맞춤법만 완벽함" }
             ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s13",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 759,
-                "end": 832
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 78, "end": 130 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "예시 문장은 왜 바로 알기 어려웠나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "이때 암호키의 개수는 임의로 설정할 수 있으며 각각의 원문마다 암호키의 개수만큼 암호문이 만들어진다."
-              },
-              {
-                "id": "B",
-                "text": "이 방식은 원문 데이터를 비트* 단위로 변환하고 각각의 비트를 개별적으로 암호화한다."
-              },
-              {
-                "id": "C",
-                "text": "암호키 p와 임의의 정수를 곱한 수를 원문에 더하면 암호문이 만들어지는데, 이 과정에서 무작위로 오륫값을 추가하여 안전성을 높인다."
-              },
-              {
-                "id": "D",
-                "text": "이 방식은 원문을 비트 단위로 변환하여 각 비트별로 암호화하기 때문에 원문에 비해 암호문의 값이 10~100배가량 커져서 데이터의 저장 공간이 많이 필요하다."
-              }
+              { "id": "A", "text": "무엇이 잘되지 않는지 알기 어려워서" },
+              { "id": "B", "text": "문장이 너무 짧아서" },
+              { "id": "C", "text": "쉼표가 없어서" },
+              { "id": "D", "text": "제목과 같아서" }
             ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s14",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 833,
-                "end": 836
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 132, "end": 189 } ] },
           "question": {
-            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "prompt": "서연이는 그 문장을 어떻게 바꾸었나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "예시"
-              },
-              {
-                "id": "B",
-                "text": "첨가"
-              },
-              {
-                "id": "C",
-                "text": "대조"
-              },
-              {
-                "id": "D",
-                "text": "인과"
-              }
+              { "id": "A", "text": "분리배출함 앞에서 헷갈리는 학생이 많다고 고쳤다" },
+              { "id": "B", "text": "문장을 더 짧게 잘라 냈다" },
+              { "id": "C", "text": "의미를 없애 버렸다" },
+              { "id": "D", "text": "대화문으로 바꾸었다" }
             ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s15",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 833,
-                "end": 927
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 191, "end": 231 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "문장을 고치면 독자는 어떻게 되나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "그리고 원문을 각 암호키로 나누었을 때의 나머지 값과 각 암호키를 알면 원문을 복호화할 수 있다."
-              },
-              {
-                "id": "B",
-                "text": "그리고 개별 비트 단위로 암호문의 연산과 부트스트래핑 과정을 거쳐야 하기 때문에 연산 속도가 느리다."
-              },
-              {
-                "id": "C",
-                "text": "그래서 암호문의 연산을 반복할수록 오륫값이 커지게 되며, 특히 곱셈 연산을 수행할수록 오륫값이 급격하게 커지기 때문에 일정 횟수 이상 수행하면 원문 복호화가"
-              },
-              {
-                "id": "D",
-                "text": "인터넷의 발달로 데이터 저장 및 분석 과정이 인터넷상에서 이루어지고 있으며 그에 따라 개인정보와 같은 민감한 데이터는 암호화되어 인터넷 서버에 저장된다."
-              }
+              { "id": "A", "text": "글쓴이의 생각을 더 정확하게 따라간다" },
+              { "id": "B", "text": "항상 더 빨리 넘겨 읽는다" },
+              { "id": "C", "text": "예시를 더 많이 요구한다" },
+              { "id": "D", "text": "제목만 보고 이해한다" }
             ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s16",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 928,
-                "end": 931
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p3", "start": 0, "end": 232 } ] },
           "question": {
-            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+          "prompt": "문장 표현은 어떻게 다듬었나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "인과"
-              },
-              {
-                "id": "B",
-                "text": "예시"
-              },
-              {
-                "id": "C",
-                "text": "대조"
-              },
-              {
-                "id": "D",
-                "text": "첨가"
-              }
+              { "id": "A", "text": "반복과 모호함을 줄여 생각을 분명하게 만든다" },
+              { "id": "B", "text": "문장을 더 길게 늘여 쓴다" },
+              { "id": "C", "text": "주어를 더 흐리게 한다" },
+              { "id": "D", "text": "예시를 모두 없앤다" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s17",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 928,
-                "end": 992
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 27 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "마지막으로 무엇을 다시 보았나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "그중 격자 기반 완전 동형암호는 수학계에서 답을 찾기 어렵다고 알려진 격자 문제를 응용하여 만들어졌다."
-              },
-              {
-                "id": "B",
-                "text": "따라서 연산을 지속적으로 수행하기 위해서는 오륫값이 한계치에 이른 암호문은 부트스트래핑 과정을 반드시 거쳐야 한다."
-              },
-              {
-                "id": "C",
-                "text": "암호키가 두 개일 때 정수로 된 원문 A와 B를 덧셈 연산한 결과가 동형성을 갖는 원리를 간단히 알아보자."
-              },
-              {
-                "id": "D",
-                "text": "* 비트: 정보량의 최소 기본 단위."
-              }
+              { "id": "A", "text": "제목과 첫 문장" },
+              { "id": "B", "text": "문단 수와 글씨체" },
+              { "id": "C", "text": "띄어쓰기와 쉼표" },
+              { "id": "D", "text": "대화와 예시" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s18",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 993,
-                "end": 1061
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 29, "end": 83 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+          "prompt": "제목과 서두는 왜 중요하다고 했나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "일정 횟수의 덧셈과 곱셈 연산을 수행하여 암호문에 오륫값이 누적되면, 다른 암호키로 해당 암호문과 암호키 p를 암호화한다."
-              },
-              {
-                "id": "B",
-                "text": "따라서 연산을 지속적으로 수행하기 위해서는 오륫값이 한계치에 이른 암호문은 부트스트래핑 과정을 반드시 거쳐야 한다."
-              },
-              {
-                "id": "C",
-                "text": "하지만 데이터를 정수 단위로 암호화하기 때문에 비트 단위로 암호화하는 격자 기반의 방식보다 더 많은 데이터를 저장할 수 있다."
-              },
-              {
-                "id": "D",
-                "text": "이 방식은 하나의 원문을 특정한 정수인 암호키로 나눈 나머지 값을 암호문으로 이용하고, 이 나머지 값에서 원문을 복호화하는 방법이다."
-              }
+              { "id": "A", "text": "방향과 필요성을 바로 보여 주기 위해서" },
+              { "id": "B", "text": "마지막 문단을 대신하기 위해서" },
+              { "id": "C", "text": "대화를 더 길게 하기 위해서" },
+              { "id": "D", "text": "맞춤법을 줄이기 위해서" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s19",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1062,
-                "end": 1146
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 85, "end": 151 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+          "prompt": "제목과 서두는 어떻게 손질했나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "* 서로소: 여러 개의 수 사이에 1 이외의 공약수가 없음을 이르는 말."
-              },
-              {
-                "id": "B",
-                "text": "그리고 복호화 회로를 통해 기존의 암호키 p에 의한 이전 암호문을 복호화하면 그동안의 연산 과정에서 누적된 오륫값이 제거된 새로운 암호문이 만들어진다."
-              },
-              {
-                "id": "C",
-                "text": "암호키 p와 임의의 정수를 곱한 수를 원문에 더하면 암호문이 만들어지는데, 이 과정에서 무작위로 오륫값을 추가하여 안전성을 높인다."
-              },
-              {
-                "id": "D",
-                "text": "<그림> (원문 연산: A + B \\= A+B)"
-              }
+              { "id": "A", "text": "새 제목으로 바꾸고 첫 문장도 또렷하게 고쳤다" },
+              { "id": "B", "text": "제목만 그대로 두었다" },
+              { "id": "C", "text": "첫 문장만 길게 늘였다" },
+              { "id": "D", "text": "문단 순서를 모두 바꿨다" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s20",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1147,
-                "end": 1235
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 153, "end": 204 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "마지막까지 점검한 것은 무엇인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "<그림> (원문 연산: A + B \\= A+B)"
-              },
-              {
-                "id": "B",
-                "text": "이때 새로운 암호문이 만들어지면서 오륫값이 추가되지만 그 크기가 기존의 누적된 것보다 작아서 적절하게 부트스트래핑 과정을 수행한다면 지속적인 연산이 가능하다."
-              },
-              {
-                "id": "C",
-                "text": "하지만 데이터를 정수 단위로 암호화하기 때문에 비트 단위로 암호화하는 격자 기반의 방식보다 더 많은 데이터를 저장할 수 있다."
-              },
-              {
-                "id": "D",
-                "text": "그리고 개별 비트 단위로 암호문의 연산과 부트스트래핑 과정을 거쳐야 하기 때문에 연산 속도가 느리다."
-              }
+              { "id": "A", "text": "문단 순서와 맞춤법, 띄어쓰기" },
+              { "id": "B", "text": "제목 길이만" },
+              { "id": "C", "text": "대화문 수만" },
+              { "id": "D", "text": "실천 방안만" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s21",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1236,
-                "end": 1324
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 206, "end": 259 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "예시가 필요 없는 곳에서는 어떻게 했나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "이 방식은 원문 데이터를 비트* 단위로 변환하고 각각의 비트를 개별적으로 암호화한다."
-              },
-              {
-                "id": "B",
-                "text": "이 방식은 원문을 비트 단위로 변환하여 각 비트별로 암호화하기 때문에 원문에 비해 암호문의 값이 10~100배가량 커져서 데이터의 저장 공간이 많이 필요하다."
-              },
-              {
-                "id": "C",
-                "text": "<그림> (원문 연산: A + B \\= A+B)"
-              },
-              {
-                "id": "D",
-                "text": "따라서 연산을 지속적으로 수행하기 위해서는 오륫값이 한계치에 이른 암호문은 부트스트래핑 과정을 반드시 거쳐야 한다."
-              }
+              { "id": "A", "text": "문장을 덜어 내고 근거 위치를 옮겼다" },
+              { "id": "B", "text": "예시를 더 붙였다" },
+              { "id": "C", "text": "제목에 넣었다" },
+              { "id": "D", "text": "문단을 늘렸다" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s22",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1325,
-                "end": 1381
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 261, "end": 291 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+            "prompt": "고쳐쓰기는 어디에서 멈추지 않나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "하지만 데이터를 정수 단위로 암호화하기 때문에 비트 단위로 암호화하는 격자 기반의 방식보다 더 많은 데이터를 저장할 수 있다."
-              },
-              {
-                "id": "B",
-                "text": "그리고 개별 비트 단위로 암호문의 연산과 부트스트래핑 과정을 거쳐야 하기 때문에 연산 속도가 느리다."
-              },
-              {
-                "id": "C",
-                "text": "* 비트: 정보량의 최소 기본 단위."
-              },
-              {
-                "id": "D",
-                "text": "그중 격자 기반 완전 동형암호는 수학계에서 답을 찾기 어렵다고 알려진 격자 문제를 응용하여 만들어졌다."
-              }
+              { "id": "A", "text": "틀린 부분을 조금 손보는 일에" },
+              { "id": "B", "text": "제목을 정하는 일에" },
+              { "id": "C", "text": "문단을 나누는 일에" },
+              { "id": "D", "text": "맞춤법을 보는 일에" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s23",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1382,
-                "end": 1385
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 293, "end": 354 } ] },
           "question": {
-            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
+            "prompt": "고쳐쓰기는 무엇을 다시 설계하나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "예시"
-              },
-              {
-                "id": "B",
-                "text": "인과"
-              },
-              {
-                "id": "C",
-                "text": "대조"
-              },
-              {
-                "id": "D",
-                "text": "첨가"
-              }
+              { "id": "A", "text": "흐름과 역할, 문장의 분명함을 다시 설계하는 과정" },
+              { "id": "B", "text": "문장을 그냥 짧게 줄이는 과정" },
+              { "id": "C", "text": "제목만 바꾸는 과정" },
+              { "id": "D", "text": "예시를 모두 없애는 과정" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s24",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1382,
-                "end": 1422
-              }
-            ]
-          },
+          "highlight": { "ranges": [ { "paragraphId": "p4", "start": 0, "end": 355 } ] },
           "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
+          "prompt": "고쳐쓰기는 어떤 과정인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "(암호 연산: Ap + Bp \\= (A+B)p / Aq + Bq \\= (A+B)q)"
-              },
-              {
-                "id": "B",
-                "text": "그래서 최근에는 효율성을 개선한 CRT 기반 완전 동형암호가 등장하였다."
-              },
-              {
-                "id": "C",
-                "text": "* 비트: 정보량의 최소 기본 단위."
-              },
-              {
-                "id": "D",
-                "text": "그리고 복호화 회로를 통해 기존의 암호키 p에 의한 이전 암호문을 복호화하면 그동안의 연산 과정에서 누적된 오륫값이 제거된 새로운 암호문이 만들어진다."
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s25",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1423,
-                "end": 1497
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "그런데 현재 널리 사용되는 공개키 암호화 방식으로 암호화된 데이터는 통계 처리를 위한 연산을 수행하기 위해서 원래 데이터로 복원하는 복호화 과정을 거친 후"
-              },
-              {
-                "id": "B",
-                "text": "(Ap, Bp는 p로 나눈 나머지, Aq, Bq는 q로 나눈 나머지)"
-              },
-              {
-                "id": "C",
-                "text": "이 방식은 하나의 원문을 특정한 정수인 암호키로 나눈 나머지 값을 암호문으로 이용하고, 이 나머지 값에서 원문을 복호화하는 방법이다."
-              },
-              {
-                "id": "D",
-                "text": "암호키가 두 개일 때 정수로 된 원문 A와 B를 덧셈 연산한 결과가 동형성을 갖는 원리를 간단히 알아보자."
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s26",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1498,
-                "end": 1554
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "그리고 복호화 회로를 통해 기존의 암호키 p에 의한 이전 암호문을 복호화하면 그동안의 연산 과정에서 누적된 오륫값이 제거된 새로운 암호문이 만들어진다."
-              },
-              {
-                "id": "B",
-                "text": "이때 암호키의 개수는 임의로 설정할 수 있으며 각각의 원문마다 암호키의 개수만큼 암호문이 만들어진다."
-              },
-              {
-                "id": "C",
-                "text": "그리고 개별 비트 단위로 암호문의 연산과 부트스트래핑 과정을 거쳐야 하기 때문에 연산 속도가 느리다."
-              },
-              {
-                "id": "D",
-                "text": "암호키가 두 개일 때 정수로 된 원문 A와 B를 덧셈 연산한 결과가 동형성을 갖는 원리를 간단히 알아보자."
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s27",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1555,
-                "end": 1614
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "암호키가 두 개일 때 정수로 된 원문 A와 B를 덧셈 연산한 결과가 동형성을 갖는 원리를 간단히 알아보자."
-              },
-              {
-                "id": "B",
-                "text": "* 서로소: 여러 개의 수 사이에 1 이외의 공약수가 없음을 이르는 말."
-              },
-              {
-                "id": "C",
-                "text": "우선 서로소*인 임의의 정수 p와 q를 암호키로 정하고 정수로 된 원문 A와 B를 각각의 암호키로 나눈 나머지 값을 구하면 Ap, Aq와 Bp, Bq가 되는데"
-              },
-              {
-                "id": "D",
-                "text": "일정 횟수의 덧셈과 곱셈 연산을 수행하여 암호문에 오륫값이 누적되면, 다른 암호키로 해당 암호문과 암호키 p를 암호화한다."
-              }
+              { "id": "A", "text": "읽는 사람이 더 잘 이해하도록 다시 설계하는 과정" },
+              { "id": "B", "text": "틀린 것을 찾는 검사 과정" },
+              { "id": "C", "text": "제목만 바꾸는 과정" },
+              { "id": "D", "text": "대화를 더 길게 만드는 과정" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s28",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1615,
-                "end": 1730
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "이때 암호키의 개수는 임의로 설정할 수 있으며 각각의 원문마다 암호키의 개수만큼 암호문이 만들어진다."
-              },
-              {
-                "id": "B",
-                "text": "만약 연산 수행의 결괏값이 암호키와 같거나 암호키보다 크면 한 번 더 암호키로 나누어 나머지 값을 구한다."
-              },
-              {
-                "id": "C",
-                "text": "이 방식은 하나의 원문을 특정한 정수인 암호키로 나눈 나머지 값을 암호문으로 이용하고, 이 나머지 값에서 원문을 복호화하는 방법이다."
-              },
-              {
-                "id": "D",
-                "text": "우선 서로소*인 임의의 정수 p와 q를 암호키로 정하고 정수로 된 원문 A와 B를 각각의 암호키로 나눈 나머지 값을 구하면 Ap, Aq와 Bp, Bq가 되는데"
-              }
-            ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s29",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1731,
-                "end": 1799
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "그리고 <그림>처럼 각 원문을 동일한 암호키로 나눈 나머지 값인 Ap와 Bp, Aq와 Bq끼리 서로 덧셈 연산을 수행한다."
-              },
-              {
-                "id": "B",
-                "text": "동형암호는 동형성을 기반으로 하는데, 동형성이란 데이터를 암호화한 상태에서 특정 연산을 수행했을 때 나오는 결과가 암호화하지 않은 상태에서 같은 연산을 수행하고"
-              },
-              {
-                "id": "C",
-                "text": "그중 격자 기반 완전 동형암호는 수학계에서 답을 찾기 어렵다고 알려진 격자 문제를 응용하여 만들어졌다."
-              },
-              {
-                "id": "D",
-                "text": "암호키 p와 임의의 정수를 곱한 수를 원문에 더하면 암호문이 만들어지는데, 이 과정에서 무작위로 오륫값을 추가하여 안전성을 높인다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s30",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1800,
-                "end": 1859
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "암호키 p와 임의의 정수를 곱한 수를 원문에 더하면 암호문이 만들어지는데, 이 과정에서 무작위로 오륫값을 추가하여 안전성을 높인다."
-              },
-              {
-                "id": "B",
-                "text": "그리고 복호화 회로를 통해 기존의 암호키 p에 의한 이전 암호문을 복호화하면 그동안의 연산 과정에서 누적된 오륫값이 제거된 새로운 암호문이 만들어진다."
-              },
-              {
-                "id": "C",
-                "text": "이때 새로운 암호문이 만들어지면서 오륫값이 추가되지만 그 크기가 기존의 누적된 것보다 작아서 적절하게 부트스트래핑 과정을 수행한다면 지속적인 연산이 가능하다."
-              },
-              {
-                "id": "D",
-                "text": "만약 연산 수행의 결괏값이 암호키와 같거나 암호키보다 크면 한 번 더 암호키로 나누어 나머지 값을 구한다."
-              }
-            ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s31",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1860,
-                "end": 1953
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "만약 연산 수행의 결괏값이 암호키와 같거나 암호키보다 크면 한 번 더 암호키로 나누어 나머지 값을 구한다."
-              },
-              {
-                "id": "B",
-                "text": "(Ap, Bp는 p로 나눈 나머지, Aq, Bq는 q로 나눈 나머지)"
-              },
-              {
-                "id": "C",
-                "text": "그러면 연산 수행의 결괏값인 Ap+Bp, Aq+Bq가 원문 A와 B를 직접 덧셈 연산한 결괏값을 암호키 p와 q로 나눈 나머지 값인 (A+B)p, (A+B)q와"
-              },
-              {
-                "id": "D",
-                "text": "그리고 원문을 각 암호키로 나누었을 때의 나머지 값과 각 암호키를 알면 원문을 복호화할 수 있다."
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s32",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 1954,
-                "end": 2008
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "<그림> (원문 연산: A + B \\= A+B)"
-              },
-              {
-                "id": "B",
-                "text": "그리고 원문을 각 암호키로 나누었을 때의 나머지 값과 각 암호키를 알면 원문을 복호화할 수 있다."
-              },
-              {
-                "id": "C",
-                "text": "(암호 연산: Ap + Bp \\= (A+B)p / Aq + Bq \\= (A+B)q)"
-              },
-              {
-                "id": "D",
-                "text": "그래서 암호문의 연산을 반복할수록 오륫값이 커지게 되며, 특히 곱셈 연산을 수행할수록 오륫값이 급격하게 커지기 때문에 일정 횟수 이상 수행하면 원문 복호화가"
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s33",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 2008
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "인터넷의 발달로 데이터 저장 및 분석 과정이 인터넷상에서 이루어지고 있으며 그에 따라 개인정보와 같은 민감한 데이터는 암호화되어 인터넷 서버에 저장된다."
-              },
-              {
-                "id": "B",
-                "text": "완전 동형암호는 암호화에 사용하는 원리에 따라 격자 기반, CRT(Chinese Remainder Theorem) 기반 등으로 나뉜다."
-              },
-              {
-                "id": "C",
-                "text": "이때 암호키의 개수는 임의로 설정할 수 있으며 각각의 원문마다 암호키의 개수만큼 암호문이 만들어진다."
-              },
-              {
-                "id": "D",
-                "text": "* 비트: 정보량의 최소 기본 단위."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s34",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 26
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "<그림> (원문 연산: A + B \\= A+B)"
-              },
-              {
-                "id": "B",
-                "text": "하지만 이 과정에서 비밀키나 민감한 개인정보가 유출되는 일이 생길 수 있다."
-              },
-              {
-                "id": "C",
-                "text": "그리고 개별 비트 단위로 암호문의 연산과 부트스트래핑 과정을 거쳐야 하기 때문에 연산 속도가 느리다."
-              },
-              {
-                "id": "D",
-                "text": "일정 횟수의 덧셈과 곱셈 연산을 수행하여 암호문에 오륫값이 누적되면, 다른 암호키로 해당 암호문과 암호키 p를 암호화한다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s35",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 27,
-                "end": 73
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "(암호 연산: Ap + Bp \\= (A+B)p / Aq + Bq \\= (A+B)q)"
-              },
-              {
-                "id": "B",
-                "text": "1비트는 이진수 체계(0, 1)의 한 자리."
-              },
-              {
-                "id": "C",
-                "text": "<그림> (원문 연산: A + B \\= A+B)"
-              },
-              {
-                "id": "D",
-                "text": "이때 암호키의 개수는 임의로 설정할 수 있으며 각각의 원문마다 암호키의 개수만큼 암호문이 만들어진다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s36",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 74,
-                "end": 112
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "(Ap, Bp는 p로 나눈 나머지, Aq, Bq는 q로 나눈 나머지)"
-              },
-              {
-                "id": "B",
-                "text": "그리고 원문을 각 암호키로 나누었을 때의 나머지 값과 각 암호키를 알면 원문을 복호화할 수 있다."
-              },
-              {
-                "id": "C",
-                "text": "1비트는 이진수 체계(0, 1)의 한 자리."
-              },
-              {
-                "id": "D",
-                "text": "이 방식은 하나의 원문을 특정한 정수인 암호키로 나눈 나머지 값을 암호문으로 이용하고, 이 나머지 값에서 원문을 복호화하는 방법이다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s37",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 112
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "그리고 개별 비트 단위로 암호문의 연산과 부트스트래핑 과정을 거쳐야 하기 때문에 연산 속도가 느리다."
-              },
-              {
-                "id": "B",
-                "text": "암호키 p와 임의의 정수를 곱한 수를 원문에 더하면 암호문이 만들어지는데, 이 과정에서 무작위로 오륫값을 추가하여 안전성을 높인다."
-              },
-              {
-                "id": "C",
-                "text": "<그림> (원문 연산: A + B \\= A+B)"
-              },
-              {
-                "id": "D",
-                "text": "그러면 연산 수행의 결괏값인 Ap+Bp, Aq+Bq가 원문 A와 B를 직접 덧셈 연산한 결괏값을 암호키 p와 q로 나눈 나머지 값인 (A+B)p, (A+B)q와"
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s38",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 8,
-                "end": 12
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "주어"
-              },
-              {
-                "id": "B",
-                "text": "서술어"
-              },
-              {
-                "id": "C",
-                "text": "부사어"
-              },
-              {
-                "id": "D",
-                "text": "목적어"
-              }
-            ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s39",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 5,
-                "end": 7
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "첨가"
-              },
-              {
-                "id": "B",
-                "text": "인과"
-              },
-              {
-                "id": "C",
-                "text": "대조"
-              },
-              {
-                "id": "D",
-                "text": "예시"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s40",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 73
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "이 방식 또한 안전성을 위해서 암호키의 개수를 늘려 계산이 복잡하고 무작위로 오륫값을 추가하기 때문에 부트스트래핑 과정이 필요하다."
-              },
-              {
-                "id": "B",
-                "text": "이 방식은 하나의 원문을 특정한 정수인 암호키로 나눈 나머지 값을 암호문으로 이용하고, 이 나머지 값에서 원문을 복호화하는 방법이다."
-              },
-              {
-                "id": "C",
-                "text": "그리고 <그림>처럼 각 원문을 동일한 암호키로 나눈 나머지 값인 Ap와 Bp, Aq와 Bq끼리 서로 덧셈 연산을 수행한다."
-              },
-              {
-                "id": "D",
-                "text": "하지만 데이터를 정수 단위로 암호화하기 때문에 비트 단위로 암호화하는 격자 기반의 방식보다 더 많은 데이터를 저장할 수 있다."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s41",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 74,
-                "end": 77
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "인과"
-              },
-              {
-                "id": "B",
-                "text": "첨가"
-              },
-              {
-                "id": "C",
-                "text": "대조"
-              },
-              {
-                "id": "D",
-                "text": "예시"
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s42",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 74,
-                "end": 144
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "1비트는 이진수 체계(0, 1)의 한 자리."
-              },
-              {
-                "id": "B",
-                "text": "하지만 데이터를 정수 단위로 암호화하기 때문에 비트 단위로 암호화하는 격자 기반의 방식보다 더 많은 데이터를 저장할 수 있다."
-              },
-              {
-                "id": "C",
-                "text": "따라서 연산을 지속적으로 수행하기 위해서는 오륫값이 한계치에 이른 암호문은 부트스트래핑 과정을 반드시 거쳐야 한다."
-              },
-              {
-                "id": "D",
-                "text": "그래서 암호화된 데이터를 복호화하지 않고 암호화된 상태로 안전하게 연산을 수행할 수 있는 동형암호가 등장하였다."
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s43",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 145,
-                "end": 147
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 접속어가 나타내는 관계로 가장 적절한 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "첨가"
-              },
-              {
-                "id": "B",
-                "text": "예시"
-              },
-              {
-                "id": "C",
-                "text": "대조"
-              },
-              {
-                "id": "D",
-                "text": "인과"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s44",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 145,
-                "end": 259
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "그래서 암호문의 연산을 반복할수록 오륫값이 커지게 되며, 특히 곱셈 연산을 수행할수록 오륫값이 급격하게 커지기 때문에 일정 횟수 이상 수행하면 원문 복호화가"
-              },
-              {
-                "id": "B",
-                "text": "또한 CRT 방식은 원문보다 작은 나머지 값으로 연산을 수행하기 때문에 격자 기반의 방식에 비해 연산 값이 상대적으로 작아 연산 속도가 빠르고, 격자 기반의"
-              },
-              {
-                "id": "C",
-                "text": "이 방식은 하나의 원문을 특정한 정수인 암호키로 나눈 나머지 값을 암호문으로 이용하고, 이 나머지 값에서 원문을 복호화하는 방법이다."
-              },
-              {
-                "id": "D",
-                "text": "만약 연산 수행의 결괏값이 암호키와 같거나 암호키보다 크면 한 번 더 암호키로 나누어 나머지 값을 구한다."
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s45",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 259
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "그래서 암호문의 연산을 반복할수록 오륫값이 커지게 되며, 특히 곱셈 연산을 수행할수록 오륫값이 급격하게 커지기 때문에 일정 횟수 이상 수행하면 원문 복호화가"
-              },
-              {
-                "id": "B",
-                "text": "이 방식 또한 안전성을 위해서 암호키의 개수를 늘려 계산이 복잡하고 무작위로 오륫값을 추가하기 때문에 부트스트래핑 과정이 필요하다."
-              },
-              {
-                "id": "C",
-                "text": "암호키가 두 개일 때 정수로 된 원문 A와 B를 덧셈 연산한 결과가 동형성을 갖는 원리를 간단히 알아보자."
-              },
-              {
-                "id": "D",
-                "text": "그리고 개별 비트 단위로 암호문의 연산과 부트스트래핑 과정을 거쳐야 하기 때문에 연산 속도가 느리다."
-              }
-            ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s46",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 20
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "우선 서로소*인 임의의 정수 p와 q를 암호키로 정하고 정수로 된 원문 A와 B를 각각의 암호키로 나눈 나머지 값을 구하면 Ap, Aq와 Bp, Bq가 되는데"
-              },
-              {
-                "id": "B",
-                "text": "동형암호는 동형성을 기반으로 하는데, 동형성이란 데이터를 암호화한 상태에서 특정 연산을 수행했을 때 나오는 결과가 암호화하지 않은 상태에서 같은 연산을 수행하고"
-              },
-              {
-                "id": "C",
-                "text": "이 방식은 하나의 원문을 특정한 정수인 암호키로 나눈 나머지 값을 암호문으로 이용하고, 이 나머지 값에서 원문을 복호화하는 방법이다."
-              },
-              {
-                "id": "D",
-                "text": "* 비트: 정보량의 최소 기본 단위."
-              }
-            ],
-            "answerId": "D",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s47",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 22,
-                "end": 25
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 말의 문장 성분으로 가장 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "서술어"
-              },
-              {
-                "id": "B",
-                "text": "목적어"
-              },
-              {
-                "id": "C",
-                "text": "주어"
-              },
-              {
-                "id": "D",
-                "text": "부사어"
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s48",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 21,
-                "end": 45
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "1비트는 이진수 체계(0, 1)의 한 자리."
-              },
-              {
-                "id": "B",
-                "text": "그런데 현재 널리 사용되는 공개키 암호화 방식으로 암호화된 데이터는 통계 처리를 위한 연산을 수행하기 위해서 원래 데이터로 복원하는 복호화 과정을 거친 후"
-              },
-              {
-                "id": "C",
-                "text": "(암호 연산: Ap + Bp \\= (A+B)p / Aq + Bq \\= (A+B)q)"
-              },
-              {
-                "id": "D",
-                "text": "암호키가 두 개일 때 정수로 된 원문 A와 B를 덧셈 연산한 결과가 동형성을 갖는 원리를 간단히 알아보자."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s49",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 46,
-                "end": 86
-              }
-            ]
-          },
-          "question": {
-            "prompt": "하이라이트된 문장의 내용으로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "이때 암호키의 개수는 임의로 설정할 수 있으며 각각의 원문마다 암호키의 개수만큼 암호문이 만들어진다."
-              },
-              {
-                "id": "B",
-                "text": "(암호 연산: Ap + Bp \\= (A+B)p / Aq + Bq \\= (A+B)q)"
-              },
-              {
-                "id": "C",
-                "text": "* 서로소: 여러 개의 수 사이에 1 이외의 공약수가 없음을 이르는 말."
-              },
-              {
-                "id": "D",
-                "text": "(Ap, Bp는 p로 나눈 나머지, Aq, Bq는 q로 나눈 나머지)"
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s50",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p4",
-                "start": 0,
-                "end": 86
-              }
-            ]
-          },
-          "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "(Ap, Bp는 p로 나눈 나머지, Aq, Bq는 q로 나눈 나머지)"
-              },
-              {
-                "id": "B",
-                "text": "* 서로소: 여러 개의 수 사이에 1 이외의 공약수가 없음을 이르는 말."
-              },
-              {
-                "id": "C",
-                "text": "* 비트: 정보량의 최소 기본 단위."
-              },
-              {
-                "id": "D",
-                "text": "동형암호는 동형성을 기반으로 하는데, 동형성이란 데이터를 암호화한 상태에서 특정 연산을 수행했을 때 나오는 결과가 암호화하지 않은 상태에서 같은 연산을 수행하고"
-              }
-            ],
-            "answerId": "C",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        {
-          "id": "c1",
-          "text": "인터넷의 발달로 데이터 저장 및 분석 과정이 인터넷상에서 이루어지고 있으며 그에 따라 개인정보와 같은 민감한 데이터는 암호화되어 인터넷 서버에 저장된다. 그런데 현재 널리 사용되는 공개키 암호화 방식으로 암호화된 데이터는 통계 처리를 위한 연산을 수행하기 위해서 원래 데이터로 복원하는 복호화 과정을 거친 후 연산을 수행하고 그 결과를 다시 암호화해야 한다. 하지만 이 과정에서 비밀키나 민감한 개인정보가 유출되는 일이 생길 수 있다. 그래서 암호화된 데이터를 복호화하지 않고 암호화된 상태로 안전하게 연산을 수행할 수 있는 동형암호가 등장하였다.\n동형암호는 동형성을 기반으로 하는데, 동형성이란 데이터를 암호화한 상태에서 특정 연산을 수행했을 때 나오는 결과가 암호화하지 않은 상태에서 같은 연산을 수행하고 암호화를 한 결과와 같은 것을 말한다. 이때 연산의 횟수에 제한 없이 특정한 한 종류의 연산에만 동형성을 갖는 암호를 부분 동형암호, 연산의 종류와 관계없이 특정 횟수까지만"
-        },
-        {
-          "id": "c2",
-          "text": "동형성을 갖는 암호를 제한적 동형암호라고 하며, 횟수에 제한 없이 컴퓨터의 주된 연산인 덧셈, 곱셈에 동형성을 갖는 암호를 완전 동형암호라고 한다.\n완전 동형암호는 암호화에 사용하는 원리에 따라 격자 기반, CRT(Chinese Remainder Theorem) 기반 등으로 나뉜다. 그중 격자 기반 완전 동형암호는 수학계에서 답을 찾기 어렵다고 알려진 격자 문제를 응용하여 만들어졌다. 이 방식은 원문 데이터를 비트* 단위로 변환하고 각각의 비트를 개별적으로 암호화한다. 암호키 p와 임의의 정수를 곱한 수를 원문에 더하면 암호문이 만들어지는데, 이 과정에서 무작위로 오륫값을 추가하여 안전성을 높인다. 그래서 암호문의 연산을 반복할수록 오륫값이 커지게 되며, 특히 곱셈 연산을 수행할수록 오륫값이 급격하게 커지기 때문에 일정 횟수 이상 수행하면 원문 복호화가 불가능하다.\n따라서 연산을 지속적으로 수행하기 위해서는 오륫값이 한계치에 이른 암호문은 부트스트래핑 과정을 반드시 거"
-        },
-        {
-          "id": "c3",
-          "text": "쳐야 한다. 일정 횟수의 덧셈과 곱셈 연산을 수행하여 암호문에 오륫값이 누적되면, 다른 암호키로 해당 암호문과 암호키 p를 암호화한다. 그리고 복호화 회로를 통해 기존의 암호키 p에 의한 이전 암호문을 복호화하면 그동안의 연산 과정에서 누적된 오륫값이 제거된 새로운 암호문이 만들어진다. 이때 새로운 암호문이 만들어지면서 오륫값이 추가되지만 그 크기가 기존의 누적된 것보다 작아서 적절하게 부트스트래핑 과정을 수행한다면 지속적인 연산이 가능하다.\n이 방식은 원문을 비트 단위로 변환하여 각 비트별로 암호화하기 때문에 원문에 비해 암호문의 값이 10~100배가량 커져서 데이터의 저장 공간이 많이 필요하다. 그리고 개별 비트 단위로 암호문의 연산과 부트스트래핑 과정을 거쳐야 하기 때문에 연산 속도가 느리다.\n그래서 최근에는 효율성을 개선한 CRT 기반 완전 동형암호가 등장하였다. 이 방식은 하나의 원문을 특정한 정수인 암호키로 나눈 나머지 값을 암호문으로 이용하고, 이 나머지 값"
-        },
-        {
-          "id": "c4",
-          "text": "에서 원문을 복호화하는 방법이다. 이때 암호키의 개수는 임의로 설정할 수 있으며 각각의 원문마다 암호키의 개수만큼 암호문이 만들어진다. 암호키가 두 개일 때 정수로 된 원문 A와 B를 덧셈 연산한 결과가 동형성을 갖는 원리를 간단히 알아보자. 우선 서로소*인 임의의 정수 p와 q를 암호키로 정하고 정수로 된 원문 A와 B를 각각의 암호키로 나눈 나머지 값을 구하면 Ap, Aq와 Bp, Bq가 되는데 이 나머지 값이 원문 A와 B의 암호문이 된다. 그리고 <그림>처럼 각 원문을 동일한 암호키로 나눈 나머지 값인 Ap와 Bp, Aq와 Bq끼리 서로 덧셈 연산을 수행한다. 만약 연산 수행의 결괏값이 암호키와 같거나 암호키보다 크면 한 번 더 암호키로 나누어 나머지 값을 구한다. 그러면 연산 수행의 결괏값인 Ap+Bp, Aq+Bq가 원문 A와 B를 직접 덧셈 연산한 결괏값을 암호키 p와 q로 나눈 나머지 값인 (A+B)p, (A+B)q와 같다. 그리고 원문을 각 암호키로 나누었"
-        },
-        {
-          "id": "c5",
-          "text": "을 때의 나머지 값과 각 암호키를 알면 원문을 복호화할 수 있다. <그림>\n(원문 연산: A + B \\= A+B)\n(암호 연산: Ap + Bp \\= (A+B)p / Aq + Bq \\= (A+B)q)\n(Ap, Bp는 p로 나눈 나머지, Aq, Bq는 q로 나눈 나머지) 이 방식 또한 안전성을 위해서 암호키의 개수를 늘려 계산이 복잡하고 무작위로 오륫값을 추가하기 때문에 부트스트래핑 과정이 필요하다. 하지만 데이터를 정수 단위로 암호화하기 때문에 비트 단위로 암호화하는 격자 기반의 방식보다 더 많은 데이터를 저장할 수 있다. 또한 CRT 방식은 원문보다 작은 나머지 값으로 연산을 수행하기 때문에 격자 기반의 방식에 비해 연산 값이 상대적으로 작아 연산 속도가 빠르고, 격자 기반의 방식과 달리 병렬적으로 연산을 수행할 수 있다. * 비트: 정보량의 최소 기본 단위. 1비트는 이진수 체계(0, 1)의 한 자리.\n* 서로소: 여러 개의 수 사이에 1 이외의 공약수가 없음을 이르는"
-        }
+        { "id": "c1", "text": "고쳐쓰기는 글의 목적과 중심 생각을 분명히 하는 일이다" },
+        { "id": "c2", "text": "문제 제기 뒤에는 분리배출이 필요한 이유가 이어진다" },
+        { "id": "c3", "text": "대화는 연결 설명을 덧붙여야 중심에 맞아진다" },
+        { "id": "c4", "text": "문장 표현은 반복과 모호함을 줄여 다듬는다" },
+        { "id": "c5", "text": "제목과 도입 문장도 글의 방향을 좌우한다" },
+        { "id": "c6", "text": "고쳐쓰기는 흐름과 역할, 문장의 분명함을 다시 설계하는 과정이다" }
       ],
-      "correctOrder": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5"
-      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "지문에서 '인터넷상에서'를 찾아 클릭하세요.",
+          "prompt": "\"분리배출함\"은 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 25,
-              "end": 31
-            }
+            { "paragraphId": "p1", "start": 44, "end": 49 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q2",
+          "prompt": "\"실천\"은 무슨 뜻인가요?",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 161, "end": 163 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q3",
+          "prompt": "\"추상적\"은 무슨 뜻인가요?",
+          "answerRanges": [
+            { "paragraphId": "p2", "start": 190, "end": 193 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q4",
+          "prompt": "\"반복\"은 무슨 뜻인가요?",
+          "answerRanges": [
+            { "paragraphId": "p1", "start": 185, "end": 187 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
+        },
+        {
+          "id": "q5",
+          "prompt": "\"설계\"는 무슨 뜻인가요?",
+          "answerRanges": [
+            { "paragraphId": "p4", "start": 345, "end": 347 }
+          ],
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "revealOnWrong": true,
+          "answerMatchMode": "ALL"
         }
       ]
     }

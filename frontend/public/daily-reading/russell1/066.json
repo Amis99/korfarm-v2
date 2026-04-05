@@ -3,7 +3,7 @@
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(러셀 1) Day 66 문학",
+  "title": "이진 탐색",
   "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_1",
   "schoolGradeRange": {
@@ -11,7 +11,7 @@
     "max": 8
   },
   "area": "READING",
-  "subArea": "LITERATURE",
+  "subArea": "GRAMMAR",
   "competencies": [
     "READING"
   ],
@@ -34,15 +34,23 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "김소월은 한국 근대 시문학을 대표하는 서정 시인으로, 전통적인 민요 가락을 현대 시의 형식에 녹여 낸 것으로 유명하다. 그는 1902년 평안북도 구성에서 태어나 어린 시절부터 민요와 전래 이야기를 접하며 자연스럽게 한국어의 리듬과 정서를 체득하였다. 그의 대표작 「진달래꽃」은 1925년에 발표된 시로, 이별의 정한을 아름답고 절제된 어조로 노래하여 오늘날까지도 한국인에게 가장 사랑받는 시 가운데 하나로 꼽힌다. 이 시에서 화자는 사랑하는 사람이 떠나겠다고 하면 말없이 보내 주겠다고 말하며, 영변 약산에 핀 진달래꽃을 한 아름 따서 떠나는 길에 뿌려 주겠다고 약속한다. 표면적으로는 순종적이고 체념적인 태도처럼 보이지만, 그 이면에는 떠나는 사람의 마음을 돌리고 싶은 간절한 소망이 담겨 있다."
+          "text": "이진 탐색은 정렬되어 있는 데이터에서 원하는 값을 빠르게 찾는 데이터알고리즘 개념이다. 이름 그대로 가운데를 기준으로 범위를 절반씩 줄여 가며 찾는 방식이라서, 처음부터 끝까지 하나씩 확인하는 방법보다 훨씬 빠를 수 있다. 그래서 데이터가 이미 순서대로 정리되어 있을 때 특히 유용하다. 이진 탐색을 이해하려면 먼저 정렬이 되어 있어야 한다는 조건을 함께 기억해야 한다."
         },
         {
           "id": "p2",
-          "text": "「진달래꽃」에서 가장 주목할 만한 표현 기법은 역설적 어조이다. 화자는 나 보기가 역겨워 가실 때에는이라는 극단적 상황을 설정하면서도 죽어도 아니 눈물 흘리우리다라고 선언한다. 이는 사랑하는 사람 앞에서 슬픔을 감추고 의연한 모습을 보이겠다는 의지의 표현이지만, 동시에 그 감정을 억누르는 행위 자체가 얼마나 큰 고통인지를 역설적으로 드러내는 장치이기도 하다. 이러한 감정의 이중 구조는 독자에게 화자의 슬픔을 더욱 깊이 공감하게 만드는 효과를 지닌다. 또한 진달래꽃이라는 소재는 한국 산야에 흔히 피는 꽃으로서 한국적 정서를 대표하는 이미지로 기능하며, 이별의 슬픔을 아름다운 자연 이미지로 승화시키는 역할을 한다. 꽃을 뿌리는 행위는 축복과 전송의 의미를 동시에 지니고 있어, 떠나는 사람에 대한 원망이 아닌 사랑의 표현으로 읽히게 된다."
+          "text": "예를 들어 1부터 100까지 번호가 순서대로 적힌 목록에서 73을 찾는다고 해 보자. 처음부터 하나씩 세면 오래 걸릴 수 있지만, 이진 탐색은 먼저 가운데쯤 있는 50과 비교한다. 73이 50보다 크므로 앞부분은 볼 필요가 없고 뒤쪽 절반만 남는다. 그다음 남은 범위의 가운데 값과 다시 비교해 같은 과정을 반복한다. 이렇게 하면 찾을 범위가 계속 절반으로 줄어든다."
         },
         {
           "id": "p3",
-          "text": "김소월 시의 음악성도 빼놓을 수 없는 특징이다. 「진달래꽃」은 7·5조의 전통 민요 율격을 바탕으로 하여 읽을 때 자연스러운 리듬감이 느껴지도록 구성되어 있다. 이러한 율격은 한국어 고유의 음율적 특성과 잘 어울려 시를 낭송할 때 마치 노래를 부르는 듯한 느낌을 준다. 나아가 반복과 점층의 기법을 활용하여 화자의 감정이 점차 고조되는 과정을 효과적으로 전달한다. 결국 「진달래꽃」은 전통적 율격과 현대적 감수성이 조화를 이룬 작품으로서, 한국 서정시의 원형이라 할 만한 위치를 차지하고 있다."
+          "text": "이진 탐색이 빠른 까닭은 불필요한 범위를 한꺼번에 버리기 때문이다. 순차 탐색은 값이 어디에 있는지 몰라서 하나씩 차례로 확인해야 하지만, 이진 탐색은 가운데와의 크기 비교만으로 어느 쪽 절반을 버릴지 곧바로 결정할 수 있다. 따라서 자료의 수가 많아질수록 두 방법의 속도 차이는 더 커질 수 있다. 이 점 때문에 이진 탐색은 효율을 설명할 때 자주 쓰이는 대표 알고리즘이 된다."
+        },
+        {
+          "id": "p4",
+          "text": "하지만 이진 탐색은 아무 자료에나 바로 쓸 수 있는 것은 아니다. 데이터가 오름차순이나 내림차순처럼 일정한 기준으로 정렬되어 있어야 가운데 값과의 비교가 의미를 가지기 때문이다. 만약 값들이 뒤섞여 있다면 가운데 값이 작다고 해서 찾는 값이 반드시 뒤쪽에 있다고 말할 수 없다. 그래서 이진 탐색은 정렬과 함께 설명되는 경우가 많다."
+        },
+        {
+          "id": "p5",
+          "text": "결국 이진 탐색은 정렬된 데이터에서 가운데 값을 기준으로 범위를 절반씩 줄이며 원하는 값을 찾는 방법이다. 이 개념을 이해하면 왜 정렬이 탐색 속도와 연결되는지, 그리고 적절한 알고리즘을 고르는 일이 왜 중요한지 함께 알 수 있다. 그래서 이진 탐색은 데이터알고리즘에서 효율적인 탐색을 설명하는 대표적인 기본 개념으로 읽힌다. 데이터가 많아질수록 이런 절반 줄이기의 효과는 더 크게 드러난다."
         }
       ]
     },
@@ -52,893 +60,445 @@
           "stepId": "s1",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 66
-              }
+              { "paragraphId": "p1", "start": 0, "end": 48 }
             ]
           },
           "question": {
-            "prompt": "김소월 시의 특징으로 제시된 것은 무엇인가?",
+            "prompt": "이진 탐색은 어떤 개념인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "전통적인 민요 가락을 현대 시 형식에 녹여 낸 점"
-              },
-              {
-                "id": "B",
-                "text": "서양 모더니즘 기법을 한국 시에 처음 도입한 점"
-              },
-              {
-                "id": "C",
-                "text": "사회 비판적 내용을 직접적 어조로 전달한 점"
-              },
-              {
-                "id": "D",
-                "text": "실험적 형식을 통해 언어의 한계를 탐구한 점"
-              }
+              { "id": "A", "text": "정렬된 데이터에서 원하는 값을 빠르게 찾는 방법" },
+              { "id": "B", "text": "모든 값을 순서대로 다 보는 방법" },
+              { "id": "C", "text": "자료를 아무렇게나 섞는 방법" },
+              { "id": "D", "text": "값의 크기를 바꾸는 방법" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s2",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 67,
-                "end": 139
-              }
+              { "paragraphId": "p1", "start": 48, "end": 124 }
             ]
           },
           "question": {
-            "prompt": "김소월의 출생 및 성장 배경으로 적절한 것은?",
+            "prompt": "이진 탐색은 어떤 방식으로 범위를 줄이나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "1902년 평안북도 출생, 어린 시절 민요와 전래 이야기를 접함"
-              },
-              {
-                "id": "B",
-                "text": "1910년 서울 출생, 서양 문학을 전공하며 도시 문화를 체험함"
-              },
-              {
-                "id": "C",
-                "text": "1895년 전라남도 출생, 농경 사회의 노동요를 채집하며 성장함"
-              },
-              {
-                "id": "D",
-                "text": "1920년 함경북도 출생, 근대 학교 교육을 통해 시작에 입문함"
-              }
+              { "id": "A", "text": "가운데를 기준으로 절반씩 줄인다" },
+              { "id": "B", "text": "맨 앞에서부터 한 칸씩 늘린다" },
+              { "id": "C", "text": "값을 전부 동시에 확인한다" },
+              { "id": "D", "text": "범위를 바꾸지 않는다" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s3",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 140,
-                "end": 231
-              }
+              { "paragraphId": "p1", "start": 124, "end": 160 }
             ]
           },
           "question": {
-            "prompt": "「진달래꽃」이 발표된 시기는 언제인가?",
+            "prompt": "이진 탐색은 언제 특히 유용한가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "1945년 광복 이후에 처음 발표됨"
-              },
-              {
-                "id": "B",
-                "text": "1925년에 발표된 시임"
-              },
-              {
-                "id": "C",
-                "text": "1910년 한일 합병 직전에 쓰여짐"
-              },
-              {
-                "id": "D",
-                "text": "1935년 문예지에 처음 실림"
-              }
+              { "id": "A", "text": "데이터가 이미 순서대로 정리되어 있을 때" },
+              { "id": "B", "text": "순서가 뒤섞여 있을 때" },
+              { "id": "C", "text": "아무 자료도 없을 때" },
+              { "id": "D", "text": "값이 하나뿐일 때만" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s4",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 232,
-                "end": 320
-              }
+              { "paragraphId": "p1", "start": 160, "end": 207 }
             ]
           },
           "question": {
-            "prompt": "화자가 떠나는 사람에게 약속하는 행위는?",
+            "prompt": "이진 탐색을 이해하려면 무엇이 먼저 필요하다고 했나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "진달래꽃을 따서 떠나는 길에 뿌려 주겠다고 약속함"
-              },
-              {
-                "id": "B",
-                "text": "함께 영변 약산으로 떠나자고 설득하는 행위"
-              },
-              {
-                "id": "C",
-                "text": "편지를 써서 자신의 마음을 전하겠다는 다짐"
-              },
-              {
-                "id": "D",
-                "text": "떠나지 말아 달라고 직접적으로 만류하는 행동"
-              }
+              { "id": "A", "text": "정렬" },
+              { "id": "B", "text": "색깔" },
+              { "id": "C", "text": "그림" },
+              { "id": "D", "text": "소리" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s5",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 321,
-                "end": 390
-              }
+              { "paragraphId": "p1", "start": 0, "end": 207 }
             ]
           },
           "question": {
-            "prompt": "화자의 태도 이면에 담긴 진정한 감정은?",
+            "prompt": "이진 탐색을 이해할 때 함께 알아둘 점은 무엇인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "떠나는 사람에 대한 분노와 원망의 감정"
-              },
-              {
-                "id": "B",
-                "text": "떠나는 사람의 마음을 돌리고 싶은 간절한 소망"
-              },
-              {
-                "id": "C",
-                "text": "새로운 사람을 만나겠다는 결연한 의지"
-              },
-              {
-                "id": "D",
-                "text": "이별을 담담하게 수용하는 초연한 마음"
-              }
+              { "id": "A", "text": "이진 탐색은 정렬과 함께 이해해야 하는 빠른 탐색 방법이다" },
+              { "id": "B", "text": "이진 탐색은 정렬이 없어야 쓸 수 있다" },
+              { "id": "C", "text": "이진 탐색은 모든 자료에서 똑같이 작동한다" },
+              { "id": "D", "text": "이진 탐색은 느린 방법이다" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s6",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 390
-              }
+              { "paragraphId": "p2", "start": 0, "end": 47 }
             ]
           },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "prompt": "예시에서는 무엇을 찾고 있나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "김소월과 「진달래꽃」의 소개 및 시의 표면과 이면의 의미"
-              },
-              {
-                "id": "B",
-                "text": "한국 근대 문학의 전반적 흐름과 주요 사조에 대한 개괄"
-              },
-              {
-                "id": "C",
-                "text": "영변 약산의 지리적 특성과 진달래 군락에 관한 설명"
-              },
-              {
-                "id": "D",
-                "text": "김소월의 생애와 유년기 체험이 시에 미친 영향 분석"
-              }
+              { "id": "A", "text": "73" },
+              { "id": "B", "text": "50" },
+              { "id": "C", "text": "100" },
+              { "id": "D", "text": "1" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s7",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 35
-              }
+              { "paragraphId": "p2", "start": 47, "end": 100 }
             ]
           },
           "question": {
-            "prompt": "「진달래꽃」에서 가장 주목할 표현 기법은?",
+            "prompt": "이진 탐색은 먼저 무엇과 비교하나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "역설적 어조를 활용한 감정 표현 기법"
-              },
-              {
-                "id": "B",
-                "text": "의인법을 통해 자연물에 감정을 부여하는 기법"
-              },
-              {
-                "id": "C",
-                "text": "열거법으로 다양한 사물을 나열하는 기법"
-              },
-              {
-                "id": "D",
-                "text": "대구법을 활용하여 문장을 대칭시키는 기법"
-              }
+              { "id": "A", "text": "가운데쯤 있는 50" },
+              { "id": "B", "text": "맨 끝의 숫자" },
+              { "id": "C", "text": "처음 숫자만" },
+              { "id": "D", "text": "아무 숫자나" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s8",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 36,
-                "end": 98
-              }
+              { "paragraphId": "p2", "start": 100, "end": 139 }
             ]
           },
           "question": {
-            "prompt": "화자가 극단적 상황에서 선언하는 내용은?",
+            "prompt": "73이 50보다 크면 어떤 부분을 보지 않아도 되나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "상대를 따라가서 함께 살겠다는 결심의 표현"
-              },
-              {
-                "id": "B",
-                "text": "죽어도 아니 눈물 흘리우리다라는 의연한 선언"
-              },
-              {
-                "id": "C",
-                "text": "상대에게 복수하겠다는 강한 의지의 표출"
-              },
-              {
-                "id": "D",
-                "text": "다른 사람과 행복하게 살겠다는 담담한 고백"
-              }
+              { "id": "A", "text": "앞부분" },
+              { "id": "B", "text": "뒤쪽 절반" },
+              { "id": "C", "text": "가운데" },
+              { "id": "D", "text": "전체" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s9",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 99,
-                "end": 201
-              }
+              { "paragraphId": "p2", "start": 139, "end": 177 }
             ]
           },
           "question": {
-            "prompt": "감정을 억누르는 행위가 드러내는 것은?",
+            "prompt": "남은 범위에서는 무엇을 하나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "화자가 이별에 무관심하다는 냉담한 태도"
-              },
-              {
-                "id": "B",
-                "text": "감정을 억누르는 행위 자체가 큰 고통임을 역설적으로 보여 줌"
-              },
-              {
-                "id": "C",
-                "text": "화자가 감정 표현에 서투른 성격임을 암시함"
-              },
-              {
-                "id": "D",
-                "text": "당시 사회가 감정 표현을 금지했음을 반영함"
-              }
+              { "id": "A", "text": "가운데 값과 다시 비교한다" },
+              { "id": "B", "text": "처음부터 다시 다 본다" },
+              { "id": "C", "text": "비교를 멈춘다" },
+              { "id": "D", "text": "정렬을 없앤다" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s10",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 202,
-                "end": 253
-              }
+              { "paragraphId": "p2", "start": 0, "end": 205 }
             ]
           },
           "question": {
-            "prompt": "감정의 이중 구조가 독자에게 주는 효과는?",
+            "prompt": "예시가 보여 주는 찾기 방식은 무엇인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "화자의 슬픔을 더욱 깊이 공감하게 만드는 효과"
-              },
-              {
-                "id": "B",
-                "text": "독자에게 시의 내용을 객관적으로 분석하게 하는 효과"
-              },
-              {
-                "id": "C",
-                "text": "화자의 분노를 직접적으로 전달하여 충격을 주는 효과"
-              },
-              {
-                "id": "D",
-                "text": "독자가 이별의 원인을 추리하도록 유도하는 효과"
-              }
+              { "id": "A", "text": "이진 탐색은 범위를 절반씩 줄이며 찾는다" },
+              { "id": "B", "text": "이진 탐색은 순서대로 전부 확인한다" },
+              { "id": "C", "text": "이진 탐색은 비교가 필요 없다" },
+              { "id": "D", "text": "이진 탐색은 정렬과 무관하다" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s11",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 254,
-                "end": 345
-              }
+              { "paragraphId": "p3", "start": 0, "end": 37 }
             ]
           },
           "question": {
-            "prompt": "진달래꽃이라는 소재가 수행하는 역할은?",
+            "prompt": "이진 탐색이 빠른 까닭은 무엇인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "이별의 슬픔을 아름다운 자연 이미지로 승화시키는 역할"
-              },
-              {
-                "id": "B",
-                "text": "화자의 경제적 빈곤을 상징하는 사회적 장치"
-              },
-              {
-                "id": "C",
-                "text": "계절의 변화를 알려 주는 시간적 배경의 표지"
-              },
-              {
-                "id": "D",
-                "text": "떠나는 사람을 비유적으로 비판하는 풍자적 소재"
-              }
+              { "id": "A", "text": "불필요한 범위를 한꺼번에 버리기 때문이다" },
+              { "id": "B", "text": "값을 모두 한 번에 보기 때문이다" },
+              { "id": "C", "text": "정렬이 없어도 되기 때문이다" },
+              { "id": "D", "text": "항상 처음 값만 보기 때문이다" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s12",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 346,
-                "end": 415
-              }
+              { "paragraphId": "p3", "start": 37, "end": 126 }
             ]
           },
           "question": {
-            "prompt": "꽃을 뿌리는 행위가 지니는 의미는?",
+            "prompt": "순차 탐색과 이진 탐색의 차이는 무엇인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "축복과 전송의 의미를 동시에 지녀 사랑의 표현으로 읽힘"
-              },
-              {
-                "id": "B",
-                "text": "떠나는 사람에 대한 분노를 물리적으로 표출하는 행위"
-              },
-              {
-                "id": "C",
-                "text": "자연의 순환 법칙에 따른 계절 의식의 일부로 해석됨"
-              },
-              {
-                "id": "D",
-                "text": "이별의 슬픔을 잊기 위해 주의를 분산시키는 행위"
-              }
+              { "id": "A", "text": "순차 탐색은 하나씩 확인하고 이진 탐색은 절반을 버린다" },
+              { "id": "B", "text": "둘 다 같은 방식으로 찾는다" },
+              { "id": "C", "text": "이진 탐색만 순서대로 확인한다" },
+              { "id": "D", "text": "순차 탐색은 비교가 필요 없다" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s13",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 415
-              }
+              { "paragraphId": "p3", "start": 126, "end": 167 }
             ]
           },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "prompt": "자료의 수가 많아질수록 무엇이 더 커질 수 있나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "「진달래꽃」의 역설적 어조와 진달래꽃 소재의 상징적 의미"
-              },
-              {
-                "id": "B",
-                "text": "한국 전통 꽃 문화와 진달래의 생태적 특성에 관한 설명"
-              },
-              {
-                "id": "C",
-                "text": "김소월이 다른 시인들과 벌인 문학 논쟁의 전개 과정"
-              },
-              {
-                "id": "D",
-                "text": "이별 시의 역사적 변천과 대표 작품 목록에 대한 정리"
-              }
+              { "id": "A", "text": "두 방법의 속도 차이" },
+              { "id": "B", "text": "자료의 색깔 차이" },
+              { "id": "C", "text": "정렬의 필요 없음" },
+              { "id": "D", "text": "비교의 의미 없음" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s14",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 26
-              }
+              { "paragraphId": "p3", "start": 167, "end": 212 }
             ]
           },
           "question": {
-            "prompt": "김소월 시에서 빼놓을 수 없는 또 다른 특징은?",
+            "prompt": "이진 탐색이 효율 설명에 자주 쓰이는 까닭은 무엇인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "시의 음악성이 뛰어나다는 점"
-              },
-              {
-                "id": "B",
-                "text": "산문적 서술이 주를 이룬다는 점"
-              },
-              {
-                "id": "C",
-                "text": "외래어를 적극적으로 활용한다는 점"
-              },
-              {
-                "id": "D",
-                "text": "시각적 이미지보다 촉각을 중시한다는 점"
-              }
+              { "id": "A", "text": "효율" },
+              { "id": "B", "text": "장식" },
+              { "id": "C", "text": "무작위" },
+              { "id": "D", "text": "색깔" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s15",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 27,
-                "end": 89
-              }
+              { "paragraphId": "p3", "start": 0, "end": 212 }
             ]
           },
           "question": {
-            "prompt": "「진달래꽃」의 율격적 바탕은 무엇인가?",
+            "prompt": "이진 탐색이 빠른 이유는 무엇인가요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "서양 소네트의 14행 구조를 차용함"
-              },
-              {
-                "id": "B",
-                "text": "7·5조의 전통 민요 율격을 바탕으로 함"
-              },
-              {
-                "id": "C",
-                "text": "자유시 형식으로 율격 없이 구성됨"
-              },
-              {
-                "id": "D",
-                "text": "한문 고시의 5언 절구 형식을 따름"
-              }
+              { "id": "A", "text": "이진 탐색은 불필요한 범위를 버려 효율적이다" },
+              { "id": "B", "text": "이진 탐색은 순차 탐색보다 느리다" },
+              { "id": "C", "text": "이진 탐색은 비교하지 않는다" },
+              { "id": "D", "text": "이진 탐색은 자료가 적을수록 유리하다" }
             ],
-            "answerId": "B",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s16",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 90,
-                "end": 150
-              }
+              { "paragraphId": "p4", "start": 0, "end": 36 }
             ]
           },
           "question": {
-            "prompt": "전통 율격이 주는 낭송 효과로 적절한 것은?",
+            "prompt": "이진 탐색은 아무 자료에나 바로 쓸 수 있나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "마치 노래를 부르는 듯한 자연스러운 느낌을 줌"
-              },
-              {
-                "id": "B",
-                "text": "학술 논문을 읽는 것 같은 엄숙한 분위기를 조성함"
-              },
-              {
-                "id": "C",
-                "text": "빠른 속도로 읽어야 하는 긴박한 리듬감을 만들어 냄"
-              },
-              {
-                "id": "D",
-                "text": "외국어처럼 낯선 음율을 느끼게 하여 이국적 정서를 환기함"
-              }
+              { "id": "A", "text": "아니다" },
+              { "id": "B", "text": "항상 그렇다" },
+              { "id": "C", "text": "반드시 그렇다" },
+              { "id": "D", "text": "모른다" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s17",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 151,
-                "end": 203
-              }
+              { "paragraphId": "p4", "start": 36, "end": 99 }
             ]
           },
           "question": {
-            "prompt": "반복과 점층의 기법이 전달하는 것은?",
+            "prompt": "이진 탐색이 의미를 가지려면 데이터는 어떻게 되어 있어야 하나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "화자의 감정이 점차 고조되는 과정"
-              },
-              {
-                "id": "B",
-                "text": "사건의 시간 순서에 따른 서사적 전개"
-              },
-              {
-                "id": "C",
-                "text": "다양한 인물들의 복잡한 관계망의 형성"
-              },
-              {
-                "id": "D",
-                "text": "논리적 근거를 쌓아 주장을 뒷받침하는 과정"
-              }
+              { "id": "A", "text": "일정한 기준으로 정렬되어 있어야 한다" },
+              { "id": "B", "text": "무작위로 흩어져 있어야 한다" },
+              { "id": "C", "text": "모양이 같아야 한다" },
+              { "id": "D", "text": "숫자가 없어야 한다" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s18",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 204,
-                "end": 276
-              }
+              { "paragraphId": "p4", "start": 99, "end": 155 }
             ]
           },
           "question": {
-            "prompt": "「진달래꽃」이 차지하는 문학사적 위치는?",
+            "prompt": "값들이 뒤섞여 있으면 무엇을 말할 수 없나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "한국 서정시의 원형이라 할 만한 위치를 차지함"
-              },
-              {
-                "id": "B",
-                "text": "한국 사실주의 소설의 시초로 평가받고 있음"
-              },
-              {
-                "id": "C",
-                "text": "한국 희곡 문학의 발전에 결정적 영향을 미침"
-              },
-              {
-                "id": "D",
-                "text": "한국 비평 문학의 기초를 놓은 작품으로 여겨짐"
-              }
+              { "id": "A", "text": "가운데 값이 작다고 해서 찾는 값이 뒤쪽에 있다고 말할 수 없다" },
+              { "id": "B", "text": "정렬이 더 중요하다고 말할 수 없다" },
+              { "id": "C", "text": "비교가 필요 없다고 말할 수 없다" },
+              { "id": "D", "text": "찾는 값이 없다고 말할 수 있다" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         },
         {
           "stepId": "s19",
           "highlight": {
             "ranges": [
-              {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 276
-              }
+              { "paragraphId": "p4", "start": 155, "end": 186 }
             ]
           },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 적절한 것은?",
+            "prompt": "그래서 이진 탐색은 무엇과 함께 설명되나요?",
             "choices": [
-              {
-                "id": "A",
-                "text": "「진달래꽃」의 음악성과 전통 율격의 현대적 조화 및 문학사적 의의"
-              },
-              {
-                "id": "B",
-                "text": "한국 민요의 기원과 발전 과정에 대한 역사적 고찰"
-              },
-              {
-                "id": "C",
-                "text": "김소월과 동시대 시인들의 작품 비교를 통한 유파 분류"
-              },
-              {
-                "id": "D",
-                "text": "7·5조 율격의 언어학적 분석과 음운론적 특성 설명"
-              }
+              { "id": "A", "text": "정렬" },
+              { "id": "B", "text": "그림" },
+              { "id": "C", "text": "소리" },
+              { "id": "D", "text": "색깔" }
             ],
             "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              { "paragraphId": "p4", "start": 0, "end": 186 }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색을 쓸 수 있는 조건은 무엇인가요?",
+            "choices": [
+              { "id": "A", "text": "이진 탐색은 정렬된 자료에서만 의미 있게 쓰인다" },
+              { "id": "B", "text": "이진 탐색은 정렬과 상관없다" },
+              { "id": "C", "text": "이진 탐색은 뒤섞인 자료에서 더 좋다" },
+              { "id": "D", "text": "이진 탐색은 아무 자료에나 바로 쓴다" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        {
-          "id": "c1",
-          "text": "김소월은 한국 근대 시문학을 대표하는 서정 시인으로, 전통적인 민요 가락을 현대 시의 형식에 녹여 낸 것으로 유명하다. 그는 1902년 평안북도 구성에서 태어나 어린 시절부터 민요와 전래 이야기를 접하며 자연스럽게 한국어의 리듬과 정서를 체득"
-        },
-        {
-          "id": "c2",
-          "text": "하였다. 그의 대표작 「진달래꽃」은 1925년에 발표된 시로, 이별의 정한을 아름답고 절제된 어조로 노래하여 오늘날까지도 한국인에게 가장 사랑받는 시 가운데 하나로 꼽힌다. 이 시에서 화자는 사랑하는 사람이 떠나겠다고 하면 말없이 보내 주겠다"
-        },
-        {
-          "id": "c3",
-          "text": "고 말하며, 영변 약산에 핀 진달래꽃을 한 아름 따서 떠나는 길에 뿌려 주겠다고 약속한다. 표면적으로는 순종적이고 체념적인 태도처럼 보이지만, 그 이면에는 떠나는 사람의 마음을 돌리고 싶은 간절한 소망이 담겨 있다. 「진달래꽃」에서 가장 주목"
-        },
-        {
-          "id": "c4",
-          "text": "할 만한 표현 기법은 역설적 어조이다. 화자는 나 보기가 역겨워 가실 때에는이라는 극단적 상황을 설정하면서도 죽어도 아니 눈물 흘리우리다라고 선언한다. 이는 사랑하는 사람 앞에서 슬픔을 감추고 의연한 모습을 보이겠다는 의지의 표현이지만, 동시"
-        },
-        {
-          "id": "c5",
-          "text": "에 그 감정을 억누르는 행위 자체가 얼마나 큰 고통인지를 역설적으로 드러내는 장치이기도 하다. 이러한 감정의 이중 구조는 독자에게 화자의 슬픔을 더욱 깊이 공감하게 만드는 효과를 지닌다. 또한 진달래꽃이라는 소재는 한국 산야에 흔히 피는 꽃으"
-        },
-        {
-          "id": "c6",
-          "text": "로서 한국적 정서를 대표하는 이미지로 기능하며, 이별의 슬픔을 아름다운 자연 이미지로 승화시키는 역할을 한다. 꽃을 뿌리는 행위는 축복과 전송의 의미를 동시에 지니고 있어, 떠나는 사람에 대한 원망이 아닌 사랑의 표현으로 읽히게 된다. 김소월"
-        },
-        {
-          "id": "c7",
-          "text": " 시의 음악성도 빼놓을 수 없는 특징이다. 「진달래꽃」은 7·5조의 전통 민요 율격을 바탕으로 하여 읽을 때 자연스러운 리듬감이 느껴지도록 구성되어 있다. 이러한 율격은 한국어 고유의 음율적 특성과 잘 어울려 시를 낭송할 때 마치 노래를 부르"
-        },
-        {
-          "id": "c8",
-          "text": "는 듯한 느낌을 준다. 나아가 반복과 점층의 기법을 활용하여 화자의 감정이 점차 고조되는 과정을 효과적으로 전달한다. 결국 「진달래꽃」은 전통적 율격과 현대적 감수성이 조화를 이룬 작품으로서, 한국 서정시의 원형이라 할 만한 위치를 차지하고 있다."
-        }
+        { "id": "c1", "text": "이진 탐색은 정렬된 데이터에서 원하는 값을 빠르게 찾는 방법이다." },
+        { "id": "c2", "text": "이진 탐색은 가운데를 기준으로 범위를 절반씩 줄인다." },
+        { "id": "c3", "text": "예시에서는 73을 찾기 위해 가운데 값 50과 먼저 비교한다." },
+        { "id": "c4", "text": "이진 탐색은 불필요한 범위를 한꺼번에 버리기 때문에 빠르다." },
+        { "id": "c5", "text": "이진 탐색은 정렬된 데이터에서만 의미 있게 쓸 수 있다." },
+        { "id": "c6", "text": "데이터가 많을수록 절반 줄이기의 효과는 더 커진다." }
       ],
-      "correctOrder": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5",
-        "c6",
-        "c7",
-        "c8"
-      ],
+      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "「진달래꽃」이 발표된 연도는 언제인가요?",
+          "prompt": "정렬은 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 155,
-              "end": 160
-            }
+            { "paragraphId": "p1", "start": 7, "end": 9 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "화자가 떠나는 사람의 길에 뿌려 주겠다고 한 것은 무엇인가요?",
+          "prompt": "범위는 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p1",
-              "start": 286,
-              "end": 299
-            }
+            { "paragraphId": "p1", "start": 66, "end": 68 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "화자가 눈물을 참겠다고 표현한 구절은 무엇인가요?",
+          "prompt": "비교는 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 75,
-              "end": 90
-            }
+            { "paragraphId": "p2", "start": 95, "end": 97 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "진달래꽃 소재가 수행하는 문학적 역할은 무엇인가요?",
+          "prompt": "효율은 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 311,
-              "end": 340
-            }
+            { "paragraphId": "p3", "start": 183, "end": 185 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "「진달래꽃」의 율격적 바탕은 무엇인가요?",
+          "prompt": "기준은 무슨 뜻인가요?",
           "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 35,
-              "end": 49
-            }
+            { "paragraphId": "p4", "start": 60, "end": 62 }
           ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "이 시가 한국 문학사에서 차지하는 위치는 무엇인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 246,
-              "end": 256
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
+          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         }
