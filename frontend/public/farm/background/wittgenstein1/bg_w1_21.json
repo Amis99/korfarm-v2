@@ -1,0 +1,144 @@
+{
+  "contentType": "BACKGROUND_KNOWLEDGE",
+  "title": "에너지와 운동량",
+  "description": "역학적 에너지 보존과 운동량 보존 법칙을 수능 수준으로 학습합니다.",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "BACKGROUND",
+  "subArea": "PHYSICS",
+  "competencies": ["BACKGROUND"],
+  "tags": ["물리", "에너지보존", "운동량", "충돌", "일운동에너지정리"],
+  "seedReward": { "seedType": "CORN", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "일과 에너지",
+        "text": "물리학에서 일(work)은 힘이 물체에 작용하여 물체가 힘의 방향으로 이동했을 때 수행되는 물리량으로, W = F·s·cosθ로 정의된다. 여기서 F는 힘의 크기, s는 이동 거리, θ는 힘과 이동 방향 사이의 각도이다. θ = 0°이면 W = Fs (양의 일), θ = 90°이면 W = 0 (일 없음), θ = 180°이면 W = -Fs (음의 일)이다. 운동에너지(kinetic energy)는 K = (1/2)mv²으로 물체의 운동 상태에 ��른 에너지이다. 일-운동에너지 정리(work-energy theorem)에 의하면 물체에 한 알짜일은 운동에너지의 변화량과 같다. W_net = ΔK = (1/2)mv² - (1/2)mv₀². 위치에너지(potential energy)는 보존력(중력, 탄성력 등)에 의해 물체의 위치에 저장된 에너지이다. 중력 위치에너지 U = mgh, 탄성 위치에너지 U = (1/2)kx² (k: 용수철 상수, x: 변형량)이다.",
+        "questions": [
+          {
+            "id": "bg-w1-21-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "힘의 방향과 이동 방향이 수직(θ = 90°)일 때 힘이 한 일은?",
+            "choices": [
+              { "id": "A", "text": "Fs" },
+              { "id": "B", "text": "-Fs" },
+              { "id": "C", "text": "0" },
+              { "id": "D", "text": "Fs/2" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-21-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "일-운동에너지 정리의 내용으로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "알짜일은 위치에너지의 변화량과 같다." },
+              { "id": "B", "text": "알짜일은 운동에너지의 변화량과 같다." },
+              { "id": "C", "text": "중력이 한 일은 항상 0이다." },
+              { "id": "D", "text": "마찰력이 한 일은 항상 양이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "역학적 에너지 보존",
+        "text": "보존력(중력, 탄성력 등)만 작용하는 계에서는 역학적 에너지(운동에너지 + 위치에너지)가 일정하게 보존된다. 즉, E = K + U = (1/2)mv² + mgh = 일정이다. 예컨대 높이 h에서 자유 낙하하는 물체는 위치에너지가 감소하는 만큼 운동에너지가 증가하여, 지면에 도달했을 때 v = √(2gh)의 속력을 가진다. 이 결과는 등가속도 운동 공식으로도 도출할 수 있지만, 에너지 보존 법칙을 이용하면 경로에 무관하게 결과를 얻을 수 있다는 장점이 있다. 비보존력(마찰력, 공기 저항 등)이 작용하면 역학적 에너지는 보존되지 않으며, 비보존력이 한 일만큼 역학적 에너지가 변한다. W_비보존 = ΔE = (K₂ + U₂) - (K₁ + U₁). 마찰력이 한 일은 항상 음이므로 역학적 에너지를 감소시키며, 이때 손실된 에너지는 열에너지로 전환된다.",
+        "questions": [
+          {
+            "id": "bg-w1-21-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "역학적 에너지 보존 법칙이 성립하기 위한 조건은?",
+            "choices": [
+              { "id": "A", "text": "물체가 등속 운동을 해야 한다." },
+              { "id": "B", "text": "보존력만 작용해야 한다." },
+              { "id": "C", "text": "마찰력이 반드시 작용해야 한다." },
+              { "id": "D", "text": "물체의 질량이 변하지 않아야 한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-21-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "높이 h에서 자유 낙하한 물체의 지면 도달 속력은?",
+            "choices": [
+              { "id": "A", "text": "√(gh)" },
+              { "id": "B", "text": "√(2gh)" },
+              { "id": "C", "text": "2gh" },
+              { "id": "D", "text": "gh/2" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "운동량과 충격량",
+        "text": "운동량(momentum)은 물체의 질량과 속도의 곱으로, p = mv이며 벡터량이다. 충격량(impulse)은 힘과 시간의 곱 I = FΔt이며, 충격량-운동량 정리에 의하면 물체에 가해진 충격량은 운동량의 변화량과 같다. I = Δp = mv - mv₀. 이 정리는 뉴턴의 제2법칙 F = ma = m(Δv/Δt) = Δp/Δt의 적분 형태이다. 충격량의 개념은 자동차 에어백의 원리를 설명해 준다. 동일한 운동량 변화(충돌 정지)가 일어나더라도, 충돌 시간을 늘리면(에어백이 펴지면서) 물체에 작용하는 평균 힘이 줄어들어 부상을 경감시킬 수 있다. 외력의 합이 0인 계(고립계)에서는 운동량이 보존된다. 이를 운동량 보존 법칙이라 하며, 충돌이나 폭발 등의 문제에서 핵심적으로 활용된다.",
+        "questions": [
+          {
+            "id": "bg-w1-21-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "에어백이 부상을 줄이는 원리를 설명하는 물리적 개념은?",
+            "choices": [
+              { "id": "A", "text": "충돌 시간을 늘려 평균 힘을 줄이는 충격량-운동량 정리" },
+              { "id": "B", "text": "에너지 보존 법칙에 의한 운동에너지 흡수" },
+              { "id": "C", "text": "관성의 법칙에 의한 속도 유지" },
+              { "id": "D", "text": "만유인력에 의한 감속 효과" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-21-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "운동량 보존 법칙이 성립하는 조건은?",
+            "choices": [
+              { "id": "A", "text": "외부 힘이 일정할 때" },
+              { "id": "B", "text": "외력의 합이 0인 고립계일 때" },
+              { "id": "C", "text": "마찰력이 존재할 때" },
+              { "id": "D", "text": "물체의 속력이 일정할 때" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "충돌의 유형",
+        "text": "두 물체의 충돌은 운동에너지 보존 여부에 따라 탄성 충돌과 비탄성 충돌로 분류된다. 탄성 충돌(elastic collision)은 운동량과 운동에너지가 모두 보존되는 충돌이다. 이상적 당구공 충돌이나 분자 간 충돌이 이에 가깝다. 비탄성 충돌(inelastic collision)은 운동량은 보존되지만 운동에너지는 보존되지 않는 충돌이다. 손실된 운동에너지는 열, 소리, 변형 에너지 등으로 전환된다. 완전 비탄성 충돌(perfectly inelastic collision)은 두 물체가 충돌 후 합쳐져서 함께 운동하는 경우로, 운동에너지 손실이 최대인 충돌이다. 질량 m���, 속도 v₁인 물체가 정지한 질량 m₂와 완전 비탄성 충돌하면, 합쳐진 후의 속도는 v = m₁v₁/(m₁ + m₂)이다. 탄성 충돌에서는 반발 계수(coefficient of restitution) e = 1이고, 완전 비탄성 충돌에서 e = 0이며, 일반적인 비탄성 충돌에서 0 < e < 1이다.",
+        "questions": [
+          {
+            "id": "bg-w1-21-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "탄성 충돌의 특성으로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "운동량만 보존되고 운동에너지는 보존되지 않는다." },
+              { "id": "B", "text": "운동량과 운동에너지가 모두 보존된다." },
+              { "id": "C", "text": "충돌 후 두 물체가 합쳐져서 운동한다." },
+              { "id": "D", "text": "반발 계수가 0이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-21-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "완전 비탄성 충돌의 반발 계수는?",
+            "choices": [
+              { "id": "A", "text": "e = 1" },
+              { "id": "B", "text": "e = 0" },
+              { "id": "C", "text": "0 < e < 1" },
+              { "id": "D", "text": "e > 1" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      }
+    ]
+  }
+}

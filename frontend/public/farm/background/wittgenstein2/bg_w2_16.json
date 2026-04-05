@@ -1,0 +1,144 @@
+{
+  "contentType": "BACKGROUND_KNOWLEDGE",
+  "title": "수열과 급수",
+  "description": "등차·등비수열, 급수의 수렴과 발산, 급수의 응용을 수능 수준으로 학습합니다.",
+  "targetLevel": "WITTGENSTEIN_2",
+  "area": "BACKGROUND",
+  "subArea": "MATH",
+  "competencies": ["BACKGROUND"],
+  "tags": ["수열", "급수", "등차수열", "등비수열", "무한급수"],
+  "seedReward": { "seedType": "CORN", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "등차수열과 등비수열",
+        "text": "수열(sequence)이란 일정한 규칙에 따라 나열된 수의 열을 의미한다. 가장 기본적인 수열로 등차수열과 등비수열이 있다. 등차수열(arithmetic sequence)은 인접한 두 항의 차이가 일정한 수열로, 첫째 항을 a, 공차를 d라 하면 일반항은 aₙ = a + (n-1)d이다. 처음 n개 항의 합은 Sₙ = n(2a + (n-1)d)/2로 구한다. 등비수열(geometric sequence)은 인접한 두 항의 비가 일정한 수열로, 첫째 항을 a, 공비를 r(r ≠ 0)이라 하면 일반항은 aₙ = a·r^(n-1)이다. 처음 n개 항의 합은 r ≠ 1일 때 Sₙ = a(1 - rⁿ)/(1 - r)로 구한다. 등차수열과 등비수열은 다양한 현실 문제에 적용된다. 예컨대 단리(simple interest)로 불어나는 원리합계는 등차수열을 이루고, 복리(compound interest)로 불어나는 원리합계는 등비수열을 이룬다. 인구의 일정 비율 증가, 방사성 동위원소의 반감기에 따른 감소 등도 등비수열의 성질을 따른다.",
+        "questions": [
+          {
+            "id": "bg-w2-16-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "첫째 항이 3, 공차가 4인 등차수열의 제10항은?",
+            "choices": [
+              { "id": "A", "text": "39" },
+              { "id": "B", "text": "40" },
+              { "id": "C", "text": "43" },
+              { "id": "D", "text": "36" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-16-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "복리로 불어나는 원리합계가 등비수열을 이루는 이유는?",
+            "choices": [
+              { "id": "A", "text": "매 기간 일정한 금액이 더해지기 때문이다." },
+              { "id": "B", "text": "매 기간 이전 금액에 일정한 비율이 곱해지기 때문이다." },
+              { "id": "C", "text": "이자가 발생하지 않고 원금만 유지되기 때문이다." },
+              { "id": "D", "text": "매 기간 이자율이 변동하기 때문이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "수열의 합과 시그마 기호",
+        "text": "수열의 합을 간결하게 표현하기 위해 시그마(Σ) 기호를 사용한다. Σ(k=1, n) aₖ는 a₁ + a₂ + ... + aₙ을 의미한다. 시그마 기호를 활용하면 복잡한 합을 체계적으로 다룰 수 있다. 대표적인 공식으로 자연수의 합 Σ(k=1, n) k = n(n+1)/2, 자연수의 제곱의 합 Σ(k=1, n) k² = n(n+1)(2n+1)/6, 자연수의 세제곱의 합 Σ(k=1, n) k³ = {n(n+1)/2}² 등이 있다. 이러한 공식은 수학적 귀납법에 의해 증명할 수 있다. 수열의 합과 일반항 사이에는 중요한 관계가 있다. n ≥ 2일 때 aₙ = Sₙ - Sₙ₋₁이 성립한다. 이 관계를 이용하면 합 Sₙ이 주어졌을 때 일반항 aₙ을 구할 수 있다. 다만 n = 1일 때는 a₁ = S₁이므로 별도로 확인해야 한다. 수열의 합을 구하는 다양한 기법 중 '부분분수 분해'도 중요하다. 1/(k(k+1)) = 1/k - 1/(k+1)과 같이 분해하면, 합을 구할 때 인접한 항들이 서로 상쇄되어(telescoping) 간단히 계산할 수 있다.",
+        "questions": [
+          {
+            "id": "bg-w2-16-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "Sₙ = 2n² + 3n일 때, n ≥ 2에서 일반항 aₙ은?",
+            "choices": [
+              { "id": "A", "text": "4n + 1" },
+              { "id": "B", "text": "4n - 1" },
+              { "id": "C", "text": "2n + 3" },
+              { "id": "D", "text": "4n + 3" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-16-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "부분분수를 이용한 급수 합산에서 항들이 서로 상쇄되는 원리를 무엇이라 하는가?",
+            "choices": [
+              { "id": "A", "text": "귀납법(induction)" },
+              { "id": "B", "text": "점화식(recurrence)" },
+              { "id": "C", "text": "망원경 합(telescoping)" },
+              { "id": "D", "text": "수렴 판정(convergence test)" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "무한급수의 수렴과 발산",
+        "text": "무한급수란 무한히 많은 항의 합 a₁ + a₂ + a₃ + ... = Σ(k=1, ∞) aₖ를 의미한다. 무한급수의 수렴 여부는 부분합 수열 Sₙ = Σ(k=1, n) aₖ의 극한값 존재 여부로 판정한다. lim(n→∞) Sₙ = S가 유한한 값으로 수렴하면 무한급수의 합이 S라 하고, 그렇지 않으면 발산한다고 한다. 무한등비급수는 가장 중요한 무한급수의 하나로, 첫째 항이 a이고 공비가 r인 등비급수 Σ(k=0, ∞) arᵏ는 |r| < 1일 때 수렴하며 그 합은 a/(1-r)이다. |r| ≥ 1이면 발산한다. 무한급수가 수렴하기 위한 필요조건은 lim(n→∞) aₙ = 0이다. 즉 일반항이 0으로 수렴하지 않으면 급수는 반드시 발산한다. 그러나 이것은 필요조건일 뿐 충분조건은 아니다. 예를 들어 조화급수 Σ(k=1, ∞) 1/k는 일반항 1/k가 0으로 수렴하지만 급수 자체는 발산한다. 이는 항의 감소 속도가 충분히 빠르지 않기 때문이다.",
+        "questions": [
+          {
+            "id": "bg-w2-16-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "무한등비급수 Σ arᵏ가 수렴하기 위한 조건은?",
+            "choices": [
+              { "id": "A", "text": "|r| > 1" },
+              { "id": "B", "text": "|r| < 1" },
+              { "id": "C", "text": "r > 0" },
+              { "id": "D", "text": "r = 1" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-16-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "조화급수 Σ 1/k에 대한 설명으로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "일반항이 0으로 수렴하므로 급수도 수렴한다." },
+              { "id": "B", "text": "일반항이 0으로 수렴하지만 급수는 발산한다." },
+              { "id": "C", "text": "일반항이 0으로 수렴하지 않으므로 급수가 발산한다." },
+              { "id": "D", "text": "급수의 합이 정확히 1이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "수학적 귀납법",
+        "text": "수학적 귀납법(mathematical induction)은 자연수 n에 대한 명제를 증명하는 강력한 방법이다. 수학적 귀납법의 증명 절차는 두 단계로 구성된다. 첫째, 기저 단계(base case): n = 1(또는 가장 작은 자연수)일 때 명제가 참임을 보인다. 둘째, 귀납 단계(inductive step): n = k일 때 명제가 참이라고 가정(귀납 가설)하고, 이로부터 n = k+1일 때에도 명제가 참임을 보인다. 이 두 단계가 모두 성립하면, 도미노가 쓰러지듯이 모든 자연수 n에 대해 명제가 참임이 증명된다. 예컨대 1 + 2 + 3 + ... + n = n(n+1)/2임을 수학적 귀납법으로 증명할 수 있다. 기저 단계에서 n = 1일 때 좌변 = 1, 우변 = 1(1+1)/2 = 1로 성립한다. 귀납 단계에서 n = k일 때 성립한다고 가정하면, n = k+1일 때 좌변은 k(k+1)/2 + (k+1) = (k+1)(k+2)/2 = (k+1)((k+1)+1)/2이므로 성립한다. 수학적 귀납법은 등식의 증명뿐 아니라 부등식, 정수론, 조합론 등 다양한 분야에서 활용된다. 강한 귀납법(strong induction)은 n = 1부터 n = k까지의 모든 경우에 명제가 성립한다고 가정하는 변형으로, 일반 귀납법으로 증명이 어려운 명제에 유용하다.",
+        "questions": [
+          {
+            "id": "bg-w2-16-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "수학적 귀납법의 두 단계를 바르게 설명한 것은?",
+            "choices": [
+              { "id": "A", "text": "n = 1일 때 확인(기저)하고, n = k일 때 참이면 n = k+1일 때도 참임을 보인다(귀납)." },
+              { "id": "B", "text": "n = 1부터 n = 100까지 모두 직접 확인한다." },
+              { "id": "C", "text": "n = k일 때 참임을 먼저 증명하고, 그 후 n = 1일 때 확인한다." },
+              { "id": "D", "text": "n = k+1일 때 참이면 n = k일 때도 참임을 역으로 증명한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-16-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "수학적 귀납법에서 '귀납 가설'이란?",
+            "choices": [
+              { "id": "A", "text": "n = k+1일 때 명제가 참이라는 결론" },
+              { "id": "B", "text": "n = k일 때 명제가 참이라는 가정" },
+              { "id": "C", "text": "n = 1일 때 명제가 참이라는 확인" },
+              { "id": "D", "text": "모든 자연수에 대해 명제가 참이라는 최종 결론" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      }
+    ]
+  }
+}

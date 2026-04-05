@@ -1,0 +1,144 @@
+{
+  "contentType": "BACKGROUND_KNOWLEDGE",
+  "title": "다항함수와 방정식",
+  "description": "다항함수의 성질과 방정식·부등식의 풀이를 수능 수준으로 학습합니다.",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "BACKGROUND",
+  "subArea": "MATH",
+  "competencies": ["BACKGROUND"],
+  "tags": ["수학", "다항함수", "방정식", "인수정리", "근과계수"],
+  "seedReward": { "seedType": "CORN", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "다항식의 나눗셈과 나머지정리",
+        "text": "다항식 f(x)를 일차식 (x - a)로 나눌 때, 나머지정리(remainder theorem)에 의하면 나머지는 f(a)와 같다. 즉, f(x) = (x - a)Q(x) + f(a)가 성립하며, 여기서 Q(x)는 몫이다. 이 정리의 특수한 경우로 인수정리(factor theorem)가 있는데, f(a) = 0이면 (x - a)는 f(x)의 인수가 된다는 것이다. 인수정리는 고차 다항식의 인수분해에서 핵심적인 역할을 한다. 예컨대 f(x) = x³ - 6x² + 11x - 6에서 f(1) = 0임을 확인하면, (x - 1)이 인수이므로 f(x) = (x - 1)(x² - 5x + 6) = (x - 1)(x - 2)(x - 3)으로 인수분해된다. 한편 다항식 f(x)를 이차식 (x - a)(x - b)로 나눈 나머지는 일차식 이하이므로 Rx + S의 형태가 되며, f(a) = Ra + S, f(b) = Rb + S의 연립방정식으로 나머지를 구할 수 있다.",
+        "questions": [
+          {
+            "id": "bg-w1-16-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "인수정리에 따르면, (x - a)가 f(x)의 인수가 되기 위한 조건은?",
+            "choices": [
+              { "id": "A", "text": "f(a) = 1" },
+              { "id": "B", "text": "f(a) = 0" },
+              { "id": "C", "text": "f(0) = a" },
+              { "id": "D", "text": "f(a) = a" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-16-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "나머지정리에 의하면 f(x)를 (x - 3)으로 나눈 나머지는?",
+            "choices": [
+              { "id": "A", "text": "f(0)" },
+              { "id": "B", "text": "f(1)" },
+              { "id": "C", "text": "f(3)" },
+              { "id": "D", "text": "f(-3)" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "이차방정식의 근과 계수의 관계",
+        "text": "이차방정식 ax² + bx + c = 0의 두 근을 α, β라 하면, 근과 계수의 관계(비에타 공식)에 의해 α + β = -b/a, αβ = c/a가 성립한다. 이 관계는 두 근의 구체적인 값을 구하지 않고도 근에 관한 대칭식의 값을 계산할 수 있게 해 준다. 예컨대 α² + β² = (α + β)² - 2αβ로 변환하여 계산할 수 있다. 삼차방정식 ax³ + bx² + cx + d = 0의 세 근 α, β, γ에 대해서도 유사한 관계가 성립한다. α + β + γ = -b/a, αβ + βγ + γα = c/a, αβγ = -d/a이다. 판별식(discriminant) D = b² - 4ac은 이차방정식의 근의 성질을 결정하는데, D > 0이면 서로 다른 두 실근, D = 0이면 중근, D < 0이면 서로 다른 두 허근을 가진다. 판별식을 활용하면 방정식을 풀지 않고도 근의 존재 여부와 성질을 판별할 수 있다.",
+        "questions": [
+          {
+            "id": "bg-w1-16-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이차방정식 2x² - 6x + 4 = 0의 두 근의 곱은?",
+            "choices": [
+              { "id": "A", "text": "2" },
+              { "id": "B", "text": "3" },
+              { "id": "C", "text": "-2" },
+              { "id": "D", "text": "-3" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-16-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "판별식 D < 0일 때 이차방정식의 근에 대한 설명으로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "서로 다른 두 실근을 가진다." },
+              { "id": "B", "text": "중근을 가진다." },
+              { "id": "C", "text": "서로 다른 두 허근을 가진다." },
+              { "id": "D", "text": "근이 존재하지 않는다." }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "고차방정식과 다항함수의 그래프",
+        "text": "n차 다항함수 f(x) = aₙxⁿ + aₙ₋₁xⁿ⁻¹ + ⋯ + a₁x + a₀의 그래프는 최고차항의 계수 aₙ과 차수 n에 의해 그 개형이 결정된다. n이 홀수이면 그래프는 한쪽 끝에서 +∞, 다른 쪽 끝에서 -∞로 발산하며, n이 짝수이면 양쪽 끝이 같은 방향으로 발산한다. aₙ > 0이고 n이 짝수이면 양쪽 끝이 모두 +∞로 향한다. n차 다항방정식의 근의 개수는 중근을 셀 경우 복소수 범위에서 정확히 n개이다(대수학의 기본 정리). 실수근의 개수는 n보다 작거나 같으며, 그래프가 x축과 만나는 점의 x좌표가 실수근이 된다. 도함수 f'(x) = 0의 근으로부터 극대·극소를 판단할 수 있으며, 이를 통해 방정식 f(x) = k의 실근의 개수를 분석할 수 있다. 삼차함수 f(x)가 극대·극소를 모두 가지면 f(x) = k는 k의 값에 따라 1개, 2개, 또는 3개의 실근을 가진다.",
+        "questions": [
+          {
+            "id": "bg-w1-16-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "최고차항의 계수가 양수인 짝수 차 다항함수의 그래프 양 끝의 방향은?",
+            "choices": [
+              { "id": "A", "text": "왼쪽 끝은 +∞, 오른쪽 끝은 -∞" },
+              { "id": "B", "text": "양쪽 끝 모두 +∞" },
+              { "id": "C", "text": "양쪽 끝 모두 -∞" },
+              { "id": "D", "text": "왼쪽 끝은 -∞, 오른쪽 끝은 +∞" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-16-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "대수학의 기본 정리에 따르면 n차 다항방정식의 복소수 근의 개수(중근 포함)는?",
+            "choices": [
+              { "id": "A", "text": "최대 n개" },
+              { "id": "B", "text": "정확히 n개" },
+              { "id": "C", "text": "최소 n개" },
+              { "id": "D", "text": "n + 1개" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "부등식과 부등식의 영역",
+        "text": "이차부등식 ax² + bx + c > 0 (a > 0)의 해는 대응하는 이차방정식의 판별식 D에 따라 결정된다. D > 0이면 두 실근 α, β(α < β)에 대해 해는 x < α 또는 x > β이다. D = 0이면 중근 α를 제외한 모든 실수가 해이다. D < 0이면 모든 실수가 해이다. 이차부등식의 풀이는 이차함수의 그래프와 x축의 위치 관계를 이용하면 직관적으로 이해할 수 있다. 한편 연립부등식의 해는 각 부등식의 해집합의 교집합이다. 좌표평면에서 이차부등식이나 일차부등식이 나타내는 영역은 곡선(또는 직선)에 의해 나뉜 반평면 또는 반영역이 된다. 일차부등식 ax + by + c > 0의 영역은 직선 ax + by + c = 0의 한쪽 편에 해당하며, 어느 쪽인지는 원점 등의 대입으로 판별한다. 영역의 문제는 주어진 조건을 만족하는 점 (x, y)의 집합을 구하는 것으로, 선형 계획법 등에서 실용적으로 활용된다.",
+        "questions": [
+          {
+            "id": "bg-w1-16-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "이차부등식 ax² + bx + c > 0 (a > 0)에서 D < 0일 때의 해는?",
+            "choices": [
+              { "id": "A", "text": "해가 없다." },
+              { "id": "B", "text": "모든 실수" },
+              { "id": "C", "text": "x > 0인 실수" },
+              { "id": "D", "text": "x < 0인 실수" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-16-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "연립부등식의 해에 대한 설명으로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "각 부등식의 해집합의 합집합이다." },
+              { "id": "B", "text": "각 부등식의 해집합의 교집합이다." },
+              { "id": "C", "text": "가장 넓은 해집합을 가진 부등식의 해와 같다." },
+              { "id": "D", "text": "각 부등식의 해집합의 차집합이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      }
+    ]
+  }
+}

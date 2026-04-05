@@ -1,0 +1,157 @@
+{
+  "contentType": "BACKGROUND_KNOWLEDGE",
+  "title": "명제 논리의 구문론과 의미론",
+  "description": "명제 논리의 기본 기호와 결합 규칙, 진리표를 이용한 의미 분석을 다룹니다.",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "BACKGROUND",
+  "subArea": "LOGIC",
+  "competencies": ["BACKGROUND"],
+  "tags": ["명제논리", "구문론", "의미론", "진리표", "논리결합사"],
+  "seedReward": { "seedType": "CORN", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "명제와 논리적 결합사",
+        "text": "명제(proposition)란 참 또는 거짓의 진리값을 가지는 선언적 문장이다. '서울은 한국의 수도이다'는 참인 명제이고, '2+3=6'은 거짓인 명제이다. '문을 닫아라'와 같은 명령문이나 '오늘 날씨 어때?'와 같은 의문문은 진리값을 가지지 않으므로 명제가 아니다. 명제 논리에서는 단순 명제를 p, q, r 등의 명제 변항으로 표현하고, 논리적 결합사(logical connective)를 사용하여 복합 명제를 구성한다. 주요 결합사는 다섯 가지이다. 부정(¬p)은 'p가 아니다', 연언(p∧q)은 'p이고 q이다', 선언(p∨q)은 'p이거나 q이다', 조건(p→q)은 'p이면 q이다', 쌍조건(p↔q)은 'p이면 그리고 그 경우에만 q이다'를 뜻한다. 이러한 기호 체계를 통해 자연 언어의 논리적 구조를 명확하게 드러낼 수 있다.",
+        "questions": [
+          {
+            "id": "bg-w1-52-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 명제에 해당하는 것은?",
+            "choices": [
+              { "id": "A", "text": "서울에 가자!" },
+              { "id": "B", "text": "지구는 태양 주위를 공전한다." },
+              { "id": "C", "text": "내일 비가 올까?" },
+              { "id": "D", "text": "아, 아름답다!" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-52-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "'p이면 q이다'를 나타내는 논리적 결합사는?",
+            "choices": [
+              { "id": "A", "text": "p∧q" },
+              { "id": "B", "text": "p∨q" },
+              { "id": "C", "text": "p→q" },
+              { "id": "D", "text": "p↔q" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "진리표와 진리값 계산",
+        "text": "각 논리적 결합사의 의미는 진리표(truth table)를 통해 정밀하게 정의된다. 부정(¬p)은 p가 참이면 거짓, p가 거짓이면 참이다. 연언(p∧q)은 p와 q가 모두 참일 때에만 참이고, 나머지 경우는 거짓이다. 선언(p∨q)은 p와 q 중 하나 이상이 참이면 참이고, 모두 거짓일 때만 거짓이다. 이 선언은 '포함적 선언'으로, 둘 다 참인 경우도 참이다. 조건문(p→q)의 진리표는 직관과 다소 차이가 있다. p가 참이고 q가 거짓일 때에만 거짓이며, p가 거짓이면 q의 진리값에 관계없이 항상 참이다. 이를 '공허한 참(vacuous truth)'이라 한다. 쌍조건(p↔q)은 p와 q의 진리값이 같을 때 참이고 다를 때 거짓이다. 복합 명제의 진리값은 구성 요소의 진리값과 결합사의 정의에 따라 기계적으로 계산할 수 있다.",
+        "questions": [
+          {
+            "id": "bg-w1-52-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "조건문 p→q에서 p가 거짓이고 q가 거짓일 때 진리값은?",
+            "choices": [
+              { "id": "A", "text": "참" },
+              { "id": "B", "text": "거짓" },
+              { "id": "C", "text": "판단 불가" },
+              { "id": "D", "text": "참이면서 동시에 거짓" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-52-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "연언(p∧q)이 참이 되는 조건은?",
+            "choices": [
+              { "id": "A", "text": "p와 q 중 하나만 참이면 된다." },
+              { "id": "B", "text": "p와 q가 모두 참이어야 한다." },
+              { "id": "C", "text": "p와 q 모두 거짓이어야 한다." },
+              { "id": "D", "text": "p가 참이면 q의 진리값에 관계없이 참이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "항진식, 모순식, 논리적 동치",
+        "text": "명제 논리에서 어떤 복합 명제가 구성 명제의 진리값에 관계없이 항상 참이면 이를 항진식(tautology)이라 한다. 대표적 항진식으로 배중률(p∨¬p) — '비가 오거나 비가 오지 않는다' — 과 동일률(p→p)이 있다. 반대로 항상 거짓인 명제를 모순식(contradiction)이라 하며, p∧¬p — 'p이면서 동시에 p가 아니다' — 가 대표적이다. 항진식도 모순식도 아닌 명제를 우연식(contingency)이라 한다. 두 명제 A와 B가 모든 진리값 배정에서 동일한 진리값을 가지면 '논리적으로 동치(logically equivalent)'라 하며, A≡B로 표기한다. 드모르간의 법칙은 대표적인 논리적 동치로, ¬(p∧q)≡(¬p∨¬q)와 ¬(p∨q)≡(¬p∧¬q)를 말한다. 또한 조건문 p→q는 ¬p∨q와 논리적으로 동치이며, 이러한 동치 관계는 논리적 추론과 증명에서 핵심적으로 활용된다.",
+        "questions": [
+          {
+            "id": "bg-w1-52-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "다음 중 항진식에 해당하는 것은?",
+            "choices": [
+              { "id": "A", "text": "p∧¬p" },
+              { "id": "B", "text": "p∨¬p" },
+              { "id": "C", "text": "p→q" },
+              { "id": "D", "text": "p∧q" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-52-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "드모르간의 법칙에 따라 ¬(p∨q)와 논리적으로 동치인 것은?",
+            "choices": [
+              { "id": "A", "text": "¬p∨¬q" },
+              { "id": "B", "text": "¬p∧¬q" },
+              { "id": "C", "text": "p∧q" },
+              { "id": "D", "text": "p→¬q" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-52-p3-q3",
+            "type": "MULTI_CHOICE",
+            "stem": "조건문 p→q와 논리적으로 동치인 것은?",
+            "choices": [
+              { "id": "A", "text": "p∧q" },
+              { "id": "B", "text": "¬p∨q" },
+              { "id": "C", "text": "q→p" },
+              { "id": "D", "text": "¬q∨p" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "타당성과 건전성",
+        "text": "논증(argument)은 하나 이상의 전제(premise)로부터 결론(conclusion)을 이끌어내는 추론의 구조이다. 명제 논리에서 논증이 타당(valid)하다는 것은, 모든 전제가 참일 때 결론도 반드시 참이 되는 논리적 구조를 가진다는 의미이다. 타당성은 전제의 실제 참거짓과는 무관하게 논증의 형식적 구조에 관한 성질이다. 예를 들어 '모든 고양이는 파충류이다. 모든 파충류는 날 수 있다. 그러므로 모든 고양이는 날 수 있다'는 논증은 전제가 거짓이지만 논증 구조는 타당하다. 건전(sound)한 논증은 타당하면서 동시에 모든 전제가 실제로 참인 논증이다. 건전한 논증의 결론은 반드시 참이다. 타당하지만 건전하지 않은 논증은 가능하지만, 건전하면서 타당하지 않은 논증은 불가능하다. 논증의 타당성을 판별하는 방법으로 진리표 방법, 반례 방법, 형식적 증명 등이 있다.",
+        "questions": [
+          {
+            "id": "bg-w1-52-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "타당한 논증에 대한 설명으로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "모든 전제가 참이어야 타당하다." },
+              { "id": "B", "text": "전제가 모두 참일 때 결론도 반드시 참이 되는 구조를 가진다." },
+              { "id": "C", "text": "결론이 참이면 논증은 항상 타당하다." },
+              { "id": "D", "text": "전제와 결론이 모두 참이어야 타당하다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-52-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "건전한 논증에 대한 설명으로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "타당하지 않아도 전제가 참이면 건전하다." },
+              { "id": "B", "text": "타당하면서 모든 전제가 실제로 참인 논증이다." },
+              { "id": "C", "text": "결론이 참이면 자동으로 건전하다." },
+              { "id": "D", "text": "건전한 논증의 결론은 참일 수도 거짓일 수도 있다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      }
+    ]
+  }
+}

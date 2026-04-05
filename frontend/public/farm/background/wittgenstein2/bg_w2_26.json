@@ -1,0 +1,144 @@
+{
+  "contentType": "BACKGROUND_KNOWLEDGE",
+  "title": "산·염기 평형",
+  "description": "브뢴스테드-로리 산염기, pH, 완충 용액, 적정 곡선 등을 학습합니다.",
+  "targetLevel": "WITTGENSTEIN_2",
+  "area": "BACKGROUND",
+  "subArea": "CHEMISTRY",
+  "competencies": ["BACKGROUND"],
+  "tags": ["산염기", "pH", "완충용액", "적정", "이온화상수"],
+  "seedReward": { "seedType": "CORN", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "산·염기의 정의와 강산·약산",
+        "text": "브뢴스테드-로리(Brønsted-Lowry) 정의에 따르면 산(acid)은 양성자(H⁺)를 내놓는 물질이고, 염기(base)는 양성자를 받아들이는 물질이다. 산이 양성자를 내놓으면 짝염기(conjugate base)가 되고, 염기가 양성자를 받으면 짝산(conjugate acid)이 된다. 이를 짝산-짝염기 쌍이라 한다. 예를 들어 CH₃COOH ⇌ CH₃COO⁻ + H⁺에서 CH₃COOH와 CH₃COO⁻는 짝산-짝염기 쌍이다. 산의 세기는 물에서 이온화되는 정도에 따라 강산과 약산으로 나뉜다. 강산(HCl, H₂SO₄, HNO₃ 등)은 물에서 거의 100% 이온화되어 H⁺을 완전히 방출한다. 약산(CH₃COOH, H₂CO₃, H₃PO₄ 등)은 부분적으로만 이온화되어 평형 상태를 이룬다. 약산의 이온화 정도는 산 이온화 상수 Ka로 나타내며, Ka가 클수록 강한 산이다. 마찬가지로 강염기(NaOH, KOH)는 완전히 이온화되고, 약염기(NH₃)는 부분적으로만 이온화된다.",
+        "questions": [
+          {
+            "id": "bg-w2-26-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "브뢴스테드-로리 정의에서 산의 역할은?",
+            "choices": [
+              { "id": "A", "text": "전자를 받아들이는 물질" },
+              { "id": "B", "text": "양성자(H⁺)를 내놓는 물질" },
+              { "id": "C", "text": "전자를 내놓는 물질" },
+              { "id": "D", "text": "수산화 이온(OH⁻)을 내놓는 물질" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-26-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "약산에 대한 설명으로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "물에서 100% 이온화되어 H⁺을 완전히 방출한다." },
+              { "id": "B", "text": "부분적으로만 이온화되어 평형 상태를 이룬다." },
+              { "id": "C", "text": "Ka값이 무한대에 가깝다." },
+              { "id": "D", "text": "짝염기가 존재하지 않는다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "pH와 수소 이온 농도",
+        "text": "pH는 수용액의 산도(acidity)를 나타내는 척도로, pH = -log[H⁺]로 정의된다. 순수한 물에서 [H⁺] = [OH⁻] = 10⁻⁷ M이므로 pH = 7이며, 이를 중성이라 한다. pH < 7이면 산성, pH > 7이면 염기성이다. pH가 1 감소하면 [H⁺]가 10배 증가하고, pH가 1 증가하면 [H⁺]가 1/10로 감소한다. 물의 자동 이온화(autoionization)에 의해 [H⁺][OH⁻] = Kw = 10⁻¹⁴(25°C)가 항상 성립한다. 따라서 [H⁺]를 알면 [OH⁻]를 구할 수 있고, 그 반대도 가능하다. pOH = -log[OH⁻]로 정의하면 pH + pOH = 14이 성립한다. 강산의 pH 계산은 간단하다. 예컨대 0.01M HCl 용액은 [H⁺] = 0.01M이므로 pH = 2이다. 약산의 pH 계산은 이온화 평형을 고려해야 한다. 약산 HA의 농도가 C이고 Ka가 주어지면 Ka = x²/(C-x)에서 x = [H⁺]를 구한다. C >> x이면 근사적으로 x ≈ √(Ka·C)로 계산할 수 있다.",
+        "questions": [
+          {
+            "id": "bg-w2-26-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "pH가 3에서 1로 변할 때 [H⁺]의 변화는?",
+            "choices": [
+              { "id": "A", "text": "2배 증가" },
+              { "id": "B", "text": "100배 증가" },
+              { "id": "C", "text": "10배 증가" },
+              { "id": "D", "text": "1000배 증가" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-26-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "25°C에서 pH = 4인 용액의 pOH는?",
+            "choices": [
+              { "id": "A", "text": "4" },
+              { "id": "B", "text": "7" },
+              { "id": "C", "text": "10" },
+              { "id": "D", "text": "14" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "완충 용액",
+        "text": "완충 용액(buffer solution)은 소량의 산이나 염기를 첨가해도 pH가 거의 변하지 않는 용액이다. 완충 용액은 약산과 그 짝염기의 혼합물(예: CH₃COOH와 CH₃COONa) 또는 약염기와 그 짝산의 혼합물(예: NH₃와 NH₄Cl)로 구성된다. 완충 작용의 원리는 다음과 같다. 산이 첨가되면 용액 중의 짝염기(A⁻)가 H⁺과 반응하여 약산(HA)으로 변환되므로 pH 변화가 억제된다. 염기가 첨가되면 용액 중의 약산(HA)이 OH⁻과 반응하여 짝염기(A⁻)와 물로 변환된다. 핸더슨-하셀바흐(Henderson-Hasselbalch) 식에 의하면 pH = pKa + log([A⁻]/[HA])이다. 완충 용액의 pH는 pKa와 짝산-짝염기의 농도 비에 의해 결정된다. [A⁻] = [HA]이면 pH = pKa가 된다. 완충 용액은 생명 현상에서 매우 중요하다. 인간의 혈액은 pH 7.35~7.45로 유지되어야 하며, 탄산-탄산수소 이온 완충계(H₂CO₃/HCO₃⁻)가 핵심적 역할을 한다.",
+        "questions": [
+          {
+            "id": "bg-w2-26-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "완충 용액에 소량의 산(H⁺)을 첨가했을 때의 반응은?",
+            "choices": [
+              { "id": "A", "text": "짝염기(A⁻)가 H⁺과 반응하여 pH 변화를 억제한다." },
+              { "id": "B", "text": "약산(HA)이 추가 이온화되어 pH가 크게 하락한다." },
+              { "id": "C", "text": "물이 분해되어 OH⁻가 생성된다." },
+              { "id": "D", "text": "용액의 부피가 증가하여 pH가 변한다." }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-26-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "핸더슨-하셀바흐 식에서 [A⁻] = [HA]일 때 pH는?",
+            "choices": [
+              { "id": "A", "text": "7" },
+              { "id": "B", "text": "14" },
+              { "id": "C", "text": "pKa" },
+              { "id": "D", "text": "0" }
+            ],
+            "answerId": "C",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "산·염기 적정",
+        "text": "산·염기 적정(titration)은 농도를 모르는 산(또는 염기) 용액에 농도를 아는 염기(또는 산) 용액을 점차 첨가하여 중화 반응을 통해 미지 농도를 결정하는 실험 방법이다. 적정 곡선(titration curve)은 첨가된 적정 시약의 부피에 따른 pH 변화를 그래프로 나타낸 것이다. 강산-강염기 적정에서 당량점(equivalence point)의 pH는 7이다. 약산-강염기 적정에서는 당량점의 pH가 7보다 크다. 이는 당량점에서 약산의 짝염기만 남아 가수분해가 일어나 OH⁻가 생성되기 때문이다. 반대로 강산-약염기 적정에서는 당량점의 pH가 7보다 작다. 적정 곡선에서 반당량점(half-equivalence point)은 약산의 절반이 중화된 지점으로, 이 점에서 [HA] = [A⁻]이므로 pH = pKa가 된다. 이를 이용하면 Ka값을 실험적으로 결정할 수 있다. 지시약(indicator)은 특정 pH 범위에서 색이 변하는 물질로, 당량점 근처의 pH에서 색 변화를 보이는 지시약을 선택하여 적정의 종말점을 판별한다.",
+        "questions": [
+          {
+            "id": "bg-w2-26-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "약산-강염기 적정에서 당량점의 pH가 7보다 큰 이유는?",
+            "choices": [
+              { "id": "A", "text": "강염기가 과량 첨가되었기 때문이다." },
+              { "id": "B", "text": "당량점에서 짝염기의 가수분해로 OH⁻가 생성되기 때문이다." },
+              { "id": "C", "text": "약산이 완전히 이온화되지 않았기 때문이다." },
+              { "id": "D", "text": "지시약의 영향으로 pH가 높아지기 때문이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-26-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "반당량점에서 pH = pKa가 되는 이유는?",
+            "choices": [
+              { "id": "A", "text": "모든 산이 중화되어 염기만 남기 때문이다." },
+              { "id": "B", "text": "약산의 절반이 중화되어 [HA] = [A⁻]이기 때문이다." },
+              { "id": "C", "text": "물의 자동 이온화만 영향을 미치기 때문이다." },
+              { "id": "D", "text": "강염기가 과량으로 첨가되었기 때문이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "contentType": "BACKGROUND_KNOWLEDGE",
+  "title": "정밀의학과 유전체의학",
+  "description": "게놈 분석, 약물유전학, 맞춤형 치료, 유전자 편집 기술의 원리와 윤리를 학습합니다.",
+  "targetLevel": "WITTGENSTEIN_2",
+  "area": "BACKGROUND",
+  "subArea": "MEDICINE",
+  "competencies": ["BACKGROUND"],
+  "tags": ["정밀의학", "유전체", "CRISPR", "약물유전학", "맞춤치료"],
+  "seedReward": { "seedType": "CORN", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "인간 게놈 프로젝트와 유전체의학의 탄생",
+        "text": "인간 게놈 프로젝트(Human Genome Project, HGP)는 1990년에 시작되어 2003년에 완료된 국제 공동 연구로, 인간의 전체 유전체(약 30억 개의 염기쌍)를 해독한 획기적 성과이다. 이 프로젝트의 완료에는 약 13년과 27억 달러가 소요되었으나, 이후 차세대 염기서열 분석(Next-Generation Sequencing, NGS) 기술의 발전으로 현재는 하루 만에 약 1,000달러 이하의 비용으로 개인의 전체 유전체를 분석할 수 있게 되었다. 유전체의학(genomic medicine)은 이러한 유전 정보를 질병의 진단, 예방, 치료에 활용하는 의학 분야이다. 인간의 유전체에는 약 20,000~25,000개의 유전자가 있으며, 개인 간의 DNA 차이는 약 0.1%(약 300만 개의 변이)에 불과하다. 그러나 이 작은 차이가 질병 감수성, 약물 반응, 외모 등의 개인차를 결정한다. 단일염기다형성(SNP, Single Nucleotide Polymorphism)은 가장 흔한 유전 변이로, 질병 위험도와 약물 반응의 개인차를 설명하는 핵심 마커이다.",
+        "questions": [
+          {
+            "id": "bg-w2-34-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "차세대 염기서열 분석(NGS) 기술이 가져온 변화로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "유전체 분석에 13년 이상이 필요하게 되었다." },
+              { "id": "B", "text": "개인의 전체 유전체를 하루 만에 저비용으로 분석할 수 있게 되었다." },
+              { "id": "C", "text": "유전체 분석이 더 이상 불가능해졌다." },
+              { "id": "D", "text": "인간 유전자의 수가 100만 개 이상으로 밝혀졌다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-34-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "SNP(단일염기다형성)에 대한 설명으로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "모든 인간에게 동일한 DNA 서열이다." },
+              { "id": "B", "text": "가장 흔한 유전 변이로, 질병 위험도와 약물 반응의 개인차를 설명한다." },
+              { "id": "C", "text": "유전자의 기능을 완전히 파괴하는 대규모 돌연변이이다." },
+              { "id": "D", "text": "세포분열 과정에서만 발생하는 일시적 변이이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "약물유전학과 맞춤형 치료",
+        "text": "약물유전학(pharmacogenomics)은 유전적 차이가 약물에 대한 반응에 미치는 영향을 연구하는 분야이다. 같은 약을 같은 용량으로 투여해도 환자마다 효과가 다르고 부작용의 정도가 다른데, 이는 약물 대사에 관여하는 효소(특히 시토크롬 P450 계열)의 유전적 변이 때문이다. 예를 들어 CYP2D6 유전자의 변이에 따라 환자는 초고속 대사자(ultra-rapid metabolizer), 정상 대사자(extensive metabolizer), 중간 대사자(intermediate metabolizer), 저속 대사자(poor metabolizer)로 분류된다. 저속 대사자에게 일반 용량의 약물을 투여하면 체내 약물 농도가 과도하게 높아져 부작용 위험이 크고, 초고속 대사자에게는 약물이 빠르게 분해되어 효과가 부족할 수 있다. 정밀의학(precision medicine)은 이러한 유전 정보에 기반하여 개인에게 최적화된 치료를 제공하는 의료 패러다임이다. 암 치료에서 종양의 유전자 변이를 분석하여 표적 항암제를 선택하는 것이 대표적 사례이다. 예컨대 HER2 양성 유방암에는 트라스투주맙(허셉틴)이, EGFR 변이 폐암에는 게피티닙 등이 효과적이다.",
+        "questions": [
+          {
+            "id": "bg-w2-34-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "같은 약물에 대해 환자마다 반응이 다른 주요 원인은?",
+            "choices": [
+              { "id": "A", "text": "환자의 나이 차이만이 유일한 원인이다." },
+              { "id": "B", "text": "약물 대사 효소의 유전적 변이 때문이다." },
+              { "id": "C", "text": "모든 환자가 동일한 유전체를 가지기 때문이다." },
+              { "id": "D", "text": "약물의 제조 과정이 환자마다 다르기 때문이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-34-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "정밀의학의 핵심 개념으로 가장 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "모든 환자에게 동일한 표준 치료를 적용한다." },
+              { "id": "B", "text": "유전 정보에 기반하여 개인에게 최적화된 치료를 제공한다." },
+              { "id": "C", "text": "가장 비용이 낮은 치료를 우선 적용한다." },
+              { "id": "D", "text": "환자의 주관적 느낌에 따라 치료를 결정한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "유전자 편집 기술: CRISPR-Cas9",
+        "text": "CRISPR-Cas9는 2012년 제니퍼 다우드나와 에마뉘엘 샤르팡티에가 개발한 유전자 편집 기술로, 특정 DNA 서열을 정밀하게 잘라내고 수정할 수 있다. CRISPR(Clustered Regularly Interspaced Short Palindromic Repeats)는 원래 세균이 바이러스에 대항하는 면역 시스템에서 유래한 것이다. 이 기술은 가이드 RNA(gRNA)가 목표 DNA 서열을 인식하여 Cas9 효소를 유도하면, Cas9이 해당 부위를 절단한다. 절단된 DNA가 복구되는 과정에서 유전자를 삭제, 수정, 또는 삽입할 수 있다. CRISPR-Cas9는 이전의 유전자 편집 기술(ZFN, TALEN)에 비해 간편하고, 정확하며, 비용이 낮아 혁명적으로 평가된다. 의학적으로는 겸상적혈구빈혈, 베타탈라세미아 등 단일 유전자 질환의 치료에 이미 임상 적용이 시작되었다. 2023년 영국과 미국에서 CRISPR 기반 겸상적혈구 치료제 '카스게비(Casgevy)'가 최초로 승인되었다. 그러나 오프타깃 효과(의도하지 않은 부위의 편집)에 의한 안전성 문제가 완전히 해결되지 않아 지속적 연구가 필요하다.",
+        "questions": [
+          {
+            "id": "bg-w2-34-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "CRISPR-Cas9 기술에서 가이드 RNA의 역할은?",
+            "choices": [
+              { "id": "A", "text": "DNA를 직접 절단하는 효소 역할을 한다." },
+              { "id": "B", "text": "목표 DNA 서열을 인식하여 Cas9 효소를 유도한다." },
+              { "id": "C", "text": "절단된 DNA를 접합하는 역할을 한다." },
+              { "id": "D", "text": "세포 내에서 에너지를 공급하는 역할을 한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-34-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "CRISPR-Cas9의 안전성 문제로 지적되는 것은?",
+            "choices": [
+              { "id": "A", "text": "기술 구현이 너무 복잡하고 비용이 높다." },
+              { "id": "B", "text": "의도하지 않은 부위의 편집(오프타깃 효과) 가능성이 있다." },
+              { "id": "C", "text": "단일 유전자 질환에만 적용 가능하다." },
+              { "id": "D", "text": "세균에만 적용할 수 있고 인간 세포에는 적용 불가능하다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "유전체의학의 윤리적 쟁점",
+        "text": "유전체의학의 발전은 새로운 윤리적 쟁점을 제기하고 있다. 첫째, 유전 정보의 프라이버시 문제이다. 개인의 유전체 정보는 질병 위험도, 약물 반응뿐 아니라 가족의 유전 정보까지 포함하므로, 이 정보의 무분별한 공개나 악용은 심각한 사생활 침해가 될 수 있다. 보험사나 고용주가 유전 정보를 차별에 이용할 수 있다는 우려가 있어, 미국에서는 유전정보차별금지법(GINA)이 제정되었다. 둘째, 배아 유전자 편집(germline editing)의 윤리이다. 2018년 중국의 허젠쿠이가 CRISPR로 CCR5 유전자를 편집한 아기를 탄생시킨 사건은 국제적 비난을 받았다. 배아 편집은 후세대에 전달되므로 되돌릴 수 없는 변화를 초래하며, 안전성이 확보되지 않은 상태에서의 시행은 비윤리적이다. 셋째, '맞춤형 아기(designer baby)' 우려이다. 질병 치료를 넘어 지능, 외모 등 원하는 형질을 선택하는 우생학적 활용 가능성이 제기된다. 넷째, 유전체의학 혜택의 공정한 접근성 문제이다. 고비용의 유전자 치료가 경제적 불평등을 심화시킬 수 있다. 이러한 쟁점들에 대한 사회적 합의와 규제 체계의 정비가 시급하다.",
+        "questions": [
+          {
+            "id": "bg-w2-34-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "배아 유전자 편집(germline editing)이 특히 윤리적으로 문제가 되는 이유는?",
+            "choices": [
+              { "id": "A", "text": "기술적으로 불가능하기 때문이다." },
+              { "id": "B", "text": "변화가 후세대에 전달되어 되돌릴 수 없기 때문이다." },
+              { "id": "C", "text": "체세포에만 영향을 미치기 때문이다." },
+              { "id": "D", "text": "모든 국가에서 합법적이기 때문이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w2-34-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "유전정보차별금지법(GINA)의 목적은?",
+            "choices": [
+              { "id": "A", "text": "유전 정보의 연구 활용을 전면 금지한다." },
+              { "id": "B", "text": "보험이나 고용에서 유전 정보에 기반한 차별을 금지한다." },
+              { "id": "C", "text": "모든 유전자 편집 기술의 사용을 금지한다." },
+              { "id": "D", "text": "개인의 유전체 분석을 정부가 의무화한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      }
+    ]
+  }
+}

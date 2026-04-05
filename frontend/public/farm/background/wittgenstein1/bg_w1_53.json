@@ -1,0 +1,144 @@
+{
+  "contentType": "BACKGROUND_KNOWLEDGE",
+  "title": "명제 논리의 추론 규칙",
+  "description": "전건 긍정, 후건 부정, 가언 삼단논법 등 명제 논리의 핵심 추론 규칙과 오류를 분석합니다.",
+  "targetLevel": "WITTGENSTEIN_1",
+  "area": "BACKGROUND",
+  "subArea": "LOGIC",
+  "competencies": ["BACKGROUND"],
+  "tags": ["추론규칙", "전건긍정", "후건부정", "삼단논법", "형식적오류"],
+  "seedReward": { "seedType": "CORN", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 420,
+  "payload": {
+    "passages": [
+      {
+        "title": "전건 긍정법과 후건 부정법",
+        "text": "전건 긍정법(modus ponens)은 가장 기본적인 타당한 추론 규칙이다. 'p이면 q이��'와 'p이다'로부터 'q이다'를 도출한다. 형식적으로 표현하면 {p→q, p} ⊢ q이다. 예를 들어, '비가 오면 땅이 젖는다'와 '비가 온다'로부터 '땅이 젖는다'��� 결론짓는 것이다. 후건 부정법(modus tollens)은 'p이면 q이다'와 'q가 아니다'로부터 'p가 아니다'를 도출한다. 형식적으로 {p→q, ¬q} ⊢ ¬p이다. '비가 오면 땅이 젖는다'와 '땅이 젖지 않았다'로부터 '비가 오지 않았다'를 결론짓는 것이다. 후건 부정법은 과학에서 가설의 반증에 핵심적으로 활용된다. 만약 어떤 가설이 참이라면 특정 관찰 결과가 나타나야 하는데, 그 결과가 나타나지 않으면 가설이 거짓임을 추론할 수 있다. 이 두 규칙은 조건문을 포함하는 추론의 가장 기본적인 패턴을 이룬다.",
+        "questions": [
+          {
+            "id": "bg-w1-53-p1-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "후건 부정법(modus tollens)의 올바른 형식은?",
+            "choices": [
+              { "id": "A", "text": "p→q, p이므로 q" },
+              { "id": "B", "text": "p→q, ¬q이므로 ¬p" },
+              { "id": "C", "text": "p→q, q이므로 p" },
+              { "id": "D", "text": "p→q, ¬p이므로 ¬q" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-53-p1-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "후건 부정법이 과학에서 활용되는 방식으로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "가설이 맞으면 예측된 관찰이 나타나므로 가설을 증명한다." },
+              { "id": "B", "text": "예측된 관찰이 나타나지 않으면 가설이 거짓임을 반증한다." },
+              { "id": "C", "text": "관찰 결과가 나타나면 가설과 관계없이 결론을 도출한다." },
+              { "id": "D", "text": "���러 가설을 동시에 검증하여 가장 좋은 것을 선택한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "형식적 오류: 후건 긍���과 전건 부정",
+        "text": "타당하지 않은 추론 형식을 형식적 오류(formal fallacy)라 한다. 후건 긍정의 오류(affirming the consequent)는 'p이면 q이다'와 'q이다'로부터 'p이다'를 도출하는 것이다. '비가 오면 땅이 젖는다'와 '땅이 젖었다'로부터 '비가 왔다'를 결론짓는 것은 오류이다. 땅이 젖은 원인은 비 이외에도 스프링클러 등 여러 가지가 있을 수 있기 때문이다. 전건 부정의 오류(denying the antecedent)는 'p이면 q이다'와 'p가 아니다'로부터 'q가 아니다'를 도출하는 것이다. '비가 오면 땅이 젖는다'와 '비가 오지 않았다'로부터 '땅이 젖지 않았다'를 결론짓는 것도 오류이다. 비가 오지 않더라도 다른 원인으로 땅이 젖을 수 있기 때문이다. 이 두 오류는 일상적 추론에서 매우 빈번하게 나���나며, 논리적 사고의 핵심은 타당한 추론과 오류를 구별하는 능력에 있다.",
+        "questions": [
+          {
+            "id": "bg-w1-53-p2-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "��음 추론 중 후건 긍정의 오류에 해당하는 것은?",
+            "choices": [
+              { "id": "A", "text": "열심히 공부하면 시험에 합격한다. 열심히 공부했다. 따라서 시험에 합격한다." },
+              { "id": "B", "text": "열심히 공부하면 시험에 합격한다. 시험에 합격했다. 따라서 열심히 공부했다." },
+              { "id": "C", "text": "열심히 공부하면 시험에 합격한다. 시험에 불합격했다. 따라서 열심히 공부하지 않았다." },
+              { "id": "D", "text": "열심히 공부하면 시험에 합격한다. 열심히 공부하지 않았다. 따라서 시험에 불합격한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-53-p2-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "전건 부정의 오류가 오류인 이유로 가장 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "전건이 거짓이면 결론은 반드시 거짓이기 때문이다." },
+              { "id": "B", "text": "전건이 거짓이어도 후건은 다른 원인에 의해 참일 수 있기 때문이다." },
+              { "id": "C", "text": "조건문 자체가 거짓이 되기 때문이다." },
+              { "id": "D", "text": "전건과 후건이 논리적으로 독립적이기 때문이다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "가언 삼단논법과 선언 삼단논법",
+        "text": "가언 삼단논법(hypothetical syllogism)은 두 개의 조건문을 연결하는 추론 규칙이다. 'p이면 q이다'와 'q이면 r이다'로부터 'p이면 r이다'를 도출한다. 형식적으로 {p→q, q→r} ⊢ p→r이다. 이는 조건의 연쇄(chain)를 구성하는 핵심 규칙이다. 예를 들어 '비가 오면 땅이 젖고, 땅이 젖으면 미끄럽���'로부터 '비가 오면 미끄럽다'를 도출한다. 선언 삼단논법(disjunctive syllogism)은 선언문과 그 한 선언지의 부정으로부터 다른 선언지를 도출하는 규칙이다. 'p이거나 q이다'와 'p가 아니다'로부터 'q이다'를 도출한다. {p∨q, ¬p} ⊢ q이다. '범인은 A이거나 B이다'와 'A가 아니다'로부터 '범인은 B이다'를 도출하는 소거법의 논리적 형식�� 바로 이것이다. 이들 규칙은 복합적인 추론을 단계적으로 구성하는 데 활용된다.",
+        "questions": [
+          {
+            "id": "bg-w1-53-p3-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "가언 삼단논법의 올바른 형식은?",
+            "choices": [
+              { "id": "A", "text": "p→q, q→r이므로 p→r" },
+              { "id": "B", "text": "p→q, r→q이므로 p→r" },
+              { "id": "C", "text": "p∨q, ¬p이므로 q" },
+              { "id": "D", "text": "p→q, p이므로 q" }
+            ],
+            "answerId": "A",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-53-p3-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "선언 삼단논법의 올바른 형식은?",
+            "choices": [
+              { "id": "A", "text": "p∧q, ¬p이므로 q" },
+              { "id": "B", "text": "p∨q, ¬p이므로 q" },
+              { "id": "C", "text": "p→q, q이므로 p" },
+              { "id": "D", "text": "p∨q, p이므로 ¬q" }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      },
+      {
+        "title": "귀류법과 조건 증명",
+        "text": "귀류법(reductio ad absurdum)은 어떤 명제의 부정을 가정하여 모순을 도출함으로써 원래 명제가 참임을 증명하는 방법이다. p를 증명하고 싶다면, ¬p를 가정한다. 이 가정으로부터 논리적 추론을 전개하여 모순(q∧¬q 형태)에 도달하면, 가정 ¬p가 거짓임이 밝혀지므로 p가 참이라고 결론짓는다. 유클리드가 소수의 무한성을 증명한 것이 대표적 사례이다. 조건 증명(conditional proof)은 조건문 p→q를 증명하는 방법이다. p를 임시로 가정한 후, 이로부터 q를 도출할 수 있음을 보이면, p→q가 성립한다고 결론짓는다. 이 방법은 '만��� ~이면 ~이다' 형태의 명제를 증명할 때 매우 유용하다. 귀류법과 조건 증명은 직접적으로 결론을 도출하기 어려운 경우에 우회적으로 증명을 완성하는 강력한 도구이다.",
+        "questions": [
+          {
+            "id": "bg-w1-53-p4-q1",
+            "type": "MULTI_CHOICE",
+            "stem": "귀류법의 핵심 절차로 적절한 것은?",
+            "choices": [
+              { "id": "A", "text": "증명할 명제를 직��� 도출한다." },
+              { "id": "B", "text": "증명할 명제의 부정을 가정하고 모순을 도출한다." },
+              { "id": "C", "text": "여러 사례를 검토하여 일반화한다." },
+              { "id": "D", "text": "결론을 가정한 후 전제를 도출한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          },
+          {
+            "id": "bg-w1-53-p4-q2",
+            "type": "MULTI_CHOICE",
+            "stem": "조건 증명에서 p→q를 증명하는 방법은?",
+            "choices": [
+              { "id": "A", "text": "q를 가정하고 p를 도출한다." },
+              { "id": "B", "text": "p를 가정하고 q를 도출한다." },
+              { "id": "C", "text": "¬p를 가정하고 ¬q를 도출한다." },
+              { "id": "D", "text": "p와 q를 동시에 가정한다." }
+            ],
+            "answerId": "B",
+            "scoring": { "correctDeltaSec": 10, "wrongDeltaSec": -10 }
+          }
+        ]
+      }
+    ]
+  }
+}
