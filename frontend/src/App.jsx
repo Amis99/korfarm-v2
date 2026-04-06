@@ -247,10 +247,12 @@ function App() {
           <Route path="/search" element={P(<SearchResultsPage />)} />
           <Route path="/report" element={P(<UnifiedReportPage />)} />
           <Route path="/assignments" element={P(<AssignmentsPage />)} />
-          <Route path="/diagnostic/print" element={P(<DiagnosticPrintPage />)} />
           <Route path="/diagnostic/v2" element={P(<DiagnosticV2Page />)} />
           <Route path="/diagnostic/v2/test/:sessionId" element={P(<DiagnosticTestPage />)} />
+          <Route path="/diagnostic/v2/print/:tier" element={P(<DiagnosticPrintPage />)} />
           <Route path="/diagnostic/v2/report/:sessionId" element={P(<DiagnosticReportPage />)} />
+          {/* 구 진단 인쇄 경로 호환 */}
+          <Route path="/diagnostic/print" element={P(<DiagnosticV2Page />)} />
           <Route path="/study-plan" element={P(<StudyPlanPage />)} />
           <Route path="/study-plan/submit/:cellId" element={P(<StudyPlanSubmitPage />)} />
           <Route path="/parents/children/:studentId/study-plan" element={P(<ParentStudyPlanPage />)} />

@@ -31,18 +31,24 @@ function DiagnosticV2Page() {
       .finally(() => setLoading(false));
   }, [isParentMode, studentId]);
 
-  const handleSelectMode = async (mode) => {
+  const handleStartOnline = async () => {
     if (creating || isParentMode) return;
     setCreating(true);
     try {
-      const res = await apiPost("/v1/diagnostic/sessions", { tier: selectedTier, mode });
-      navigate(`/diagnostic/v2/test/${res.sessionId}`, { state: { firstBatch: res.firstBatch, mode } });
+      const res = await apiPost("/v1/diagnostic/sessions", { tier: selectedTier, mode: "online" });
+      navigate(`/diagnostic/v2/test/${res.sessionId}`, { state: { firstBatch: res.firstBatch } });
     } catch (err) {
       alert(err.message || "세션 생성에 실패했습니다.");
     } finally {
       setCreating(false);
       setSelectedTier(null);
     }
+  };
+
+  const handleStartPrint = () => {
+    if (isParentMode) return;
+    navigate(`/diagnostic/v2/print/${selectedTier}`);
+    setSelectedTier(null);
   };
 
   // 완료된 세션이 하나라도 있으면 재진단 차단
@@ -114,25 +120,23 @@ function DiagnosticV2Page() {
         </div>
       )}
 
-      {/* 모드 선택 모달 — 온라인 전체 풀이 / 출력 후 OMR */}
+      {/* 응시 형식 선택 모달 — 온라인 / 출력 후 OMR */}
       {selectedTier && !isParentMode && (
         <div className="diag-v2-modal-overlay" onClick={() => setSelectedTier(null)}>
           <div className="diag-v2-modal" onClick={e => e.stopPropagation()}>
             <h2>{TIER_INFO[selectedTier]?.label} 진단 시작</h2>
-            <button className="diag-v2-mode-btn" onClick={() => handleSelectMode("full")} disabled={creating}>
-              <div className="mode-title">온라인 전체 풀이</div>
-              <div className="mode-desc">
-                {(() => {
-                  const tierData = tiers.find(t => t.tier === selectedTier);
-                  return tierData?.objectiveCount
-                    ? `${tierData.objectiveCount}문항 · 화면에서 바로 풀기`
-                    : "전체 문항 · 화면에서 바로 풀기";
-                })()}
-              </div>
+            <p className="diag-v2-modal-notice">
+              객관식 48문항 · 60분 제한<br />
+              <strong>문제를 다 풀면 답안을 바로 제출하세요.</strong><br />
+              찍고 넘어간 문제는 풀이속도 측정 시 1문항당 3분이 가산됩니다.
+            </p>
+            <button className="diag-v2-mode-btn" onClick={handleStartOnline} disabled={creating}>
+              <div className="mode-title">온라인으로 풀기</div>
+              <div className="mode-desc">화면에서 48문항을 한 번에 풀고 즉시 채점</div>
             </button>
-            <button className="diag-v2-mode-btn" onClick={() => navigate("/diagnostic/print")} disabled={creating}>
+            <button className="diag-v2-mode-btn" onClick={handleStartPrint} disabled={creating}>
               <div className="mode-title">출력 후 OMR 입력</div>
-              <div className="mode-desc">시험지를 인쇄한 뒤 풀고, 답안을 입력합니다.</div>
+              <div className="mode-desc">시험지를 인쇄한 뒤 종이에 풀고, 답안만 입력</div>
             </button>
             <button className="diag-v2-modal-close" onClick={() => setSelectedTier(null)}>취소</button>
           </div>

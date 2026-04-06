@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { apiGet, apiPost } from "../utils/api";
 import PassageRenderer from "../components/diagnostic/PassageRenderer";
@@ -6,48 +6,32 @@ import ChoiceSelector from "../components/diagnostic/ChoiceSelector";
 import RichText from "../utils/RichText";
 import "../styles/diagnostic-v2.css";
 
+const TIME_LIMIT_SEC = 60 * 60; // 60분
+
 const initialState = {
-  session: null,
-  currentBatch: [],
-  batchAnswers: {},
+  questions: [],
+  answers: {},
   currentIndex: 0,
-  totalAnswered: 0,
   isSubmitting: false,
   error: "",
-  mode: "cat",
+  timeLeft: TIME_LIMIT_SEC,
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case "INIT":
-      return {
-        ...state,
-        session: action.session,
-        currentBatch: action.batch,
-        mode: action.mode || "cat",
-        batchAnswers: {},
-        currentIndex: 0,
-      };
+      return { ...initialState, questions: action.questions };
     case "SELECT_CHOICE":
       return {
         ...state,
-        batchAnswers: { ...state.batchAnswers, [action.questionId]: action.choice },
+        answers: { ...state.answers, [action.questionId]: action.choice },
       };
-    case "NEXT_Q":
-      return { ...state, currentIndex: Math.min(state.currentIndex + 1, state.currentBatch.length - 1) };
-    case "PREV_Q":
-      return { ...state, currentIndex: Math.max(state.currentIndex - 1, 0) };
+    case "GO_INDEX":
+      return { ...state, currentIndex: Math.max(0, Math.min(action.index, state.questions.length - 1)) };
+    case "TICK":
+      return { ...state, timeLeft: Math.max(0, state.timeLeft - 1) };
     case "SUBMITTING":
       return { ...state, isSubmitting: true, error: "" };
-    case "BATCH_RESULT":
-      return {
-        ...state,
-        isSubmitting: false,
-        currentBatch: action.nextBatch || [],
-        batchAnswers: {},
-        currentIndex: 0,
-        totalAnswered: state.totalAnswered + Object.keys(state.batchAnswers).length,
-      };
     case "ERROR":
       return { ...state, isSubmitting: false, error: action.message };
     default:
@@ -55,85 +39,99 @@ function reducer(state, action) {
   }
 }
 
+function formatTime(sec) {
+  const m = Math.floor(sec / 60).toString().padStart(2, "0");
+  const s = (sec % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+}
+
 function DiagnosticTestPage() {
   const { sessionId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [state, dispatch] = useReducer(reducer, initialState);
+  const submittingRef = useRef(false);
 
   useEffect(() => {
     const firstBatch = location.state?.firstBatch;
-    const mode = location.state?.mode || "cat";
     if (firstBatch && firstBatch.length > 0) {
-      // firstBatch가 있으면 불필요한 API 호출 없이 바로 초기화
-      dispatch({
-        type: "INIT",
-        session: { sessionId, status: "active", answeredCount: 0 },
-        batch: firstBatch,
-        mode,
-      });
+      dispatch({ type: "INIT", questions: firstBatch });
     } else {
-      // 세션 복원 (새로고침 등)
+      // 새로고침 등 → 세션 복원 불가, 목록으로
       apiGet(`/v1/diagnostic/sessions/${sessionId}`)
         .then(sess => {
           if (sess.status !== "active") {
             navigate(`/diagnostic/v2/report/${sessionId}`);
-            return;
+          } else {
+            // 진행 중이지만 questions가 없으므로 다시 시작 안내
+            navigate("/diagnostic/v2");
           }
-          dispatch({ type: "INIT", session: sess, batch: sess.currentBatch || [], mode: sess.mode });
         })
         .catch(() => navigate("/diagnostic/v2"));
     }
   }, [sessionId, navigate, location.state]);
 
-  const currentQ = state.currentBatch[state.currentIndex];
+  // 60분 카운트다운
+  useEffect(() => {
+    if (state.questions.length === 0) return;
+    const timer = setInterval(() => dispatch({ type: "TICK" }), 1000);
+    return () => clearInterval(timer);
+  }, [state.questions.length]);
 
-  // 같은 지문의 첫 문항인 경우만 지문 표시
-  const showPassage = currentQ && (
-    state.currentIndex === 0 ||
-    state.currentBatch[state.currentIndex - 1]?.passageId !== currentQ.passageId
-  );
+  // 시간 만료 시 자동 제출
+  useEffect(() => {
+    if (state.questions.length === 0) return;
+    if (state.timeLeft <= 0 && !submittingRef.current) {
+      submittingRef.current = true;
+      handleSubmit(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.timeLeft, state.questions.length]);
 
-  const handleSubmitBatch = async () => {
-    const unanswered = state.currentBatch.filter(q => !state.batchAnswers[q.questionId]);
-    if (unanswered.length > 0) {
-      const ok = window.confirm(`${unanswered.length}문항이 미응답입니다. 제출하시겠습니까?`);
+  const handleSubmit = async (isAuto = false) => {
+    if (state.isSubmitting) return;
+    const unanswered = state.questions.filter(q => !state.answers[q.questionId]);
+    if (!isAuto && unanswered.length > 0) {
+      const ok = window.confirm(
+        `${unanswered.length}문항이 미응답입니다.\n\n찍고 넘어간 문제는 풀이속도 측정 시 1문항당 3분이 가산됩니다. 그래도 제출하시겠습니까?`
+      );
       if (!ok) return;
     }
 
     dispatch({ type: "SUBMITTING" });
     try {
-      const responses = state.currentBatch
-        .filter(q => state.batchAnswers[q.questionId])
-        .map(q => ({ questionId: q.questionId, choice: state.batchAnswers[q.questionId] }));
+      const responses = state.questions
+        .filter(q => state.answers[q.questionId])
+        .map(q => ({ questionId: q.questionId, choice: state.answers[q.questionId] }));
 
-      const res = await apiPost(`/v1/diagnostic/sessions/${sessionId}/respond`, { responses });
-
-      if (res.shouldStop || !res.nextBatch || res.nextBatch.length === 0) {
-        // 세션 완료
-        await apiPost(`/v1/diagnostic/sessions/${sessionId}/complete`);
-        navigate(`/diagnostic/v2/report/${sessionId}`);
-      } else {
-        dispatch({ type: "BATCH_RESULT", nextBatch: res.nextBatch });
-      }
+      await apiPost(`/v1/diagnostic/sessions/${sessionId}/respond`, { responses });
+      await apiPost(`/v1/diagnostic/sessions/${sessionId}/complete`);
+      navigate(`/diagnostic/v2/report/${sessionId}`);
     } catch (err) {
+      submittingRef.current = false;
       dispatch({ type: "ERROR", message: err.message || "제출에 실패했습니다." });
     }
   };
 
-  if (!currentQ) {
+  if (state.questions.length === 0) {
     return <div className="diag-v2-loading">불러오는 중...</div>;
   }
 
-  const totalQ = state.totalAnswered + state.currentBatch.length;
-  const progressPct = totalQ > 0 ? ((state.totalAnswered + state.currentIndex + 1) / totalQ) * 100 : 0;
+  const currentQ = state.questions[state.currentIndex];
+  const showPassage = state.currentIndex === 0
+    || state.questions[state.currentIndex - 1]?.passageId !== currentQ.passageId;
+
+  const answeredCount = Object.keys(state.answers).length;
+  const total = state.questions.length;
+  const progressPct = (answeredCount / total) * 100;
+  const timeWarn = state.timeLeft <= 5 * 60; // 5분 이하 경고
 
   return (
     <div className="diag-test-page">
       <div className="diag-test-topbar">
-        <h2>역량 진단</h2>
-        <span style={{ fontSize: 13, color: "#8b7e74" }}>
-          {state.totalAnswered + state.currentIndex + 1}번째 문항
+        <h2>역량 진단 ({total}문항)</h2>
+        <span className={`diag-test-timer ${timeWarn ? "warn" : ""}`}>
+          남은 시간 {formatTime(state.timeLeft)}
         </span>
       </div>
 
@@ -142,14 +140,15 @@ function DiagnosticTestPage() {
       </div>
 
       <div className="diag-test-batch-info">
-        <span>{state.currentIndex + 1} / {state.currentBatch.length}</span>
+        <span>{state.currentIndex + 1} / {total}</span>
+        <span style={{ marginLeft: 12, color: "#8b7e74" }}>
+          응답 {answeredCount} · 미응답 {total - answeredCount}
+        </span>
       </div>
 
-      {state.mode === "cat" && state.totalAnswered === 0 && state.currentIndex === 0 && (
-        <div className="diag-test-cat-notice">
-          적응형(CAT) 모드: 답변에 따라 다음 문항이 달라집니다. 이전 배치로 돌아갈 수 없습니다.
-        </div>
-      )}
+      <div className="diag-test-cat-notice">
+        문제를 다 풀면 답안을 바로 제출하세요. 찍고 넘어간 문제는 풀이속도 측정 시 1문항당 3분이 가산됩니다.
+      </div>
 
       {showPassage && currentQ.passageText && (
         <PassageRenderer text={currentQ.passageText} />
@@ -160,7 +159,7 @@ function DiagnosticTestPage() {
         {currentQ.boxContent && <div className="diag-test-box"><RichText>{currentQ.boxContent}</RichText></div>}
         <ChoiceSelector
           choices={currentQ.choices}
-          selected={state.batchAnswers[currentQ.questionId]}
+          selected={state.answers[currentQ.questionId]}
           onSelect={(choiceId) => dispatch({ type: "SELECT_CHOICE", questionId: currentQ.questionId, choice: choiceId })}
         />
       </div>
@@ -170,29 +169,43 @@ function DiagnosticTestPage() {
       <div className="diag-test-nav">
         <button
           className="diag-test-nav-btn"
-          onClick={() => dispatch({ type: "PREV_Q" })}
+          onClick={() => dispatch({ type: "GO_INDEX", index: state.currentIndex - 1 })}
           disabled={state.currentIndex === 0}
         >
           이전
         </button>
 
-        {state.currentIndex < state.currentBatch.length - 1 ? (
+        {state.currentIndex < total - 1 ? (
           <button
             className="diag-test-nav-btn primary"
-            onClick={() => dispatch({ type: "NEXT_Q" })}
+            onClick={() => dispatch({ type: "GO_INDEX", index: state.currentIndex + 1 })}
           >
             다음
           </button>
         ) : (
           <button
             className="diag-test-nav-btn primary"
-            onClick={handleSubmitBatch}
+            onClick={() => handleSubmit(false)}
             disabled={state.isSubmitting}
           >
-            {state.isSubmitting ? "제출 중..." : state.mode === "cat" ? "배치 제출" : "제출"}
+            {state.isSubmitting ? "제출 중..." : "답안 제출"}
           </button>
         )}
       </div>
+
+      {/* 항상 노출되는 빠른 제출 버튼 (마지막 문항이 아니어도 제출 가능) */}
+      {state.currentIndex < total - 1 && (
+        <div style={{ textAlign: "center", marginTop: 12 }}>
+          <button
+            className="diag-test-nav-btn"
+            onClick={() => handleSubmit(false)}
+            disabled={state.isSubmitting}
+            style={{ background: "#fff7e8", borderColor: "#d4b980" }}
+          >
+            지금 답안 제출
+          </button>
+        </div>
+      )}
     </div>
   );
 }

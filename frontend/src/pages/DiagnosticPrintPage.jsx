@@ -1,291 +1,179 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { apiGet, apiPost, API_BASE, TOKEN_KEY } from "../utils/api";
 import AnswerInputPanel from "../components/AnswerInputPanel";
 import "../styles/diagnostic.css";
 import "../styles/test-online.css";
 
-const LEVEL_INFO = {
-  saussure: { label: "소쉬르", desc: "초등 저학년", icon: "eco" },
-  frege: { label: "프레게", desc: "초등 고학년", icon: "psychology" },
-  russell: { label: "러셀", desc: "중학생", icon: "menu_book" },
-  wittgenstein: { label: "비트겐슈타인", desc: "고등학생", icon: "school" },
+const TIER_INFO = {
+  sohssure: { label: "소쉬르", desc: "초등 1~3학년" },
+  frege: { label: "프레게", desc: "초등 4~6학년" },
+  russell: { label: "러셀", desc: "중학생" },
+  wittgenstein: { label: "비트겐슈타인", desc: "고등학생" },
 };
 
-const blockEvent = (event) => {
-  event.preventDefault();
-  event.stopPropagation();
-};
+// 진단 객관식 문항은 48개 고정
+const TOTAL_Q = 48;
+// AnswerInputPanel은 1~5 숫자 선택지를 사용 → 진단은 A~E 알파벳 사용
+const NUM_TO_LETTER = { "1": "A", "2": "B", "3": "C", "4": "D", "5": "E" };
 
 function DiagnosticPrintPage() {
-  const [phase, setPhase] = useState("select"); // select | print | online
-  const [tests, setTests] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedTest, setSelectedTest] = useState(null);
-  const [pdfUrl, setPdfUrl] = useState("");
-  const [printed, setPrinted] = useState(false);
-  const [isObscured, setIsObscured] = useState(false);
+  const { tier } = useParams();
   const navigate = useNavigate();
+  const tierInfo = TIER_INFO[tier];
 
-  // 온라인 응시
-  const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState({});
+  const [paperId, setPaperId] = useState(null);
+  const [pdfUrl, setPdfUrl] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [pdfError, setPdfError] = useState("");
+  const [answers, setAnswers] = useState({}); // {1: "1"|"2"|...|"5"}
   const [submitting, setSubmitting] = useState(false);
-  const [onlineError, setOnlineError] = useState("");
+  const [submitError, setSubmitError] = useState("");
 
-  // 진단 테스트 목록 로드
-  useEffect(() => {
-    apiGet("/v1/test-storage/diagnostic")
-      .then((data) => setTests(Array.isArray(data) ? data : []))
-      .catch(() => setTests([]))
-      .finally(() => setLoading(false));
-  }, []);
+  // 빈 객관식 문항 메타 (AnswerInputPanel용)
+  const questions = Array.from({ length: TOTAL_Q }, (_, i) => ({
+    number: i + 1,
+    type: "객관식",
+    points: 10,
+  }));
 
-  // print 단계: 보안 이벤트 차단
+  // 진단 시험지 정보 + PDF 로드
   useEffect(() => {
-    if (phase !== "print") return;
-    const keyEvents = ["keydown", "keypress", "keyup"];
-    const blockEvents = [
-      "contextmenu", "copy", "cut", "paste", "dragstart", "selectstart",
-    ];
-    keyEvents.forEach((e) => window.addEventListener(e, blockEvent, true));
-    blockEvents.forEach((e) => window.addEventListener(e, blockEvent, true));
+    if (!tierInfo) {
+      navigate("/diagnostic/v2");
+      return;
+    }
+    let revoked = false;
+    (async () => {
+      try {
+        const list = await apiGet("/v1/test-storage/diagnostic");
+        const paper = (Array.isArray(list) ? list : []).find(t => t.levelId === tier);
+        if (!paper) {
+          setPdfError("진단 시험지가 등록되지 않았습니다. 본사에 문의해 주세요.");
+          setLoading(false);
+          return;
+        }
+        setPaperId(paper.testId);
+        try {
+          const fileId = await apiGet(`/v1/test-storage/${paper.testId}/pdf`);
+          if (revoked) return;
+          const token = sessionStorage.getItem(TOKEN_KEY);
+          const resp = await fetch(`${API_BASE}/v1/files/${fileId}/download`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (!resp.ok) throw new Error("PDF 다운로드 실패");
+          const blob = await resp.blob();
+          if (revoked) return;
+          setPdfUrl(URL.createObjectURL(blob));
+        } catch {
+          setPdfError("진단 시험지 PDF가 아직 등록되지 않았습니다. 답안지만 출력 후 응시해 주세요.");
+        }
+      } catch {
+        setPdfError("진단 시험지 정보를 불러올 수 없습니다.");
+      } finally {
+        setLoading(false);
+      }
+    })();
+    return () => { revoked = true; };
+  }, [tier, tierInfo, navigate]);
+
+  useEffect(() => {
     return () => {
-      keyEvents.forEach((e) => window.removeEventListener(e, blockEvent, true));
-      blockEvents.forEach((e) => window.removeEventListener(e, blockEvent, true));
+      if (pdfUrl?.startsWith("blob:")) URL.revokeObjectURL(pdfUrl);
     };
-  }, [phase]);
+  }, [pdfUrl]);
 
-  // print 단계: 화면이탈 감지
-  useEffect(() => {
-    if (phase !== "print") return;
-    const updateVisibility = () => {
-      setIsObscured(document.hidden || !document.hasFocus());
-    };
-    updateVisibility();
-    window.addEventListener("blur", updateVisibility);
-    window.addEventListener("focus", updateVisibility);
-    document.addEventListener("visibilitychange", updateVisibility);
-    return () => {
-      window.removeEventListener("blur", updateVisibility);
-      window.removeEventListener("focus", updateVisibility);
-      document.removeEventListener("visibilitychange", updateVisibility);
-    };
-  }, [phase]);
-
-  const handleSelectTest = async (test) => {
-    if (test.hasSubmitted) return;
-    setSelectedTest(test);
-    try {
-      const pdfFileId = await apiGet(`/v1/test-storage/${test.testId}/pdf`);
-      const token = sessionStorage.getItem(TOKEN_KEY);
-      const resp = await fetch(`${API_BASE}/v1/files/${pdfFileId}/download`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!resp.ok) throw new Error("PDF 다운로드 실패");
-      const blob = await resp.blob();
-      setPdfUrl(URL.createObjectURL(blob));
-      setPhase("print");
-    } catch {
-      alert("시험지 PDF를 불러올 수 없습니다.");
-    }
-  };
-
-  const requestFullscreen = async () => {
-    const el = document.documentElement;
-    if (!document.fullscreenElement && el?.requestFullscreen) {
-      try { await el.requestFullscreen(); } catch { /* 무시 */ }
-    }
-  };
-
-  const handlePrint = async () => {
-    await requestFullscreen();
-    setPrinted(true);
-    window.print();
-  };
-
-  const handleGoOmr = () => {
-    navigate(`/tests/${selectedTest.testId}/omr?from=diagnostic`);
-  };
-
-  // 온라인 응시 시작
-  const handleOnlineTest = async () => {
-    if (!selectedTest) return;
-    try {
-      const qs = await apiGet(`/v1/test-storage/${selectedTest.testId}/questions`);
-      setQuestions(Array.isArray(qs) ? qs : []);
-      setAnswers({});
-      setOnlineError("");
-      setPhase("online");
-    } catch {
-      alert("문항 정보를 불러올 수 없습니다.");
-    }
-  };
-
-  const handleOnlineAnswer = (qNum, value) => {
+  const handleAnswer = (qNum, value) => {
     setAnswers(prev => {
-      if (value === null) {
+      const key = String(qNum);
+      if (value == null) {
         const next = { ...prev };
-        delete next[String(qNum)];
+        delete next[key];
         return next;
       }
-      return { ...prev, [String(qNum)]: String(value) };
+      return { ...prev, [key]: String(value) };
     });
   };
 
-  const handleOnlineSubmit = async () => {
-    setOnlineError("");
-    const unanswered = questions.filter(q => q.type === "객관식" && !answers[String(q.number)]);
+  const handleSubmit = async () => {
+    setSubmitError("");
+    const unanswered = questions.filter(q => !answers[String(q.number)]);
     if (unanswered.length > 0) {
-      const ok = window.confirm(`${unanswered.length}문항이 미응답입니다. 제출하시겠습니까?`);
+      const ok = window.confirm(
+        `${unanswered.length}문항이 미응답입니다. 그래도 제출하시겠습니까?`
+      );
       if (!ok) return;
     }
     setSubmitting(true);
     try {
-      await apiPost(`/v1/test-storage/${selectedTest.testId}/submit`, { answers });
-      navigate(`/tests/${selectedTest.testId}/report?from=diagnostic`);
+      // 1~5 숫자 → A~E 알파벳 변환
+      const converted = {};
+      for (const [k, v] of Object.entries(answers)) {
+        converted[k] = NUM_TO_LETTER[v] || v;
+      }
+      const res = await apiPost("/v1/diagnostic/sessions/from-omr", {
+        tier,
+        answers: converted,
+      });
+      navigate(`/diagnostic/v2/report/${res.sessionId}`);
     } catch (err) {
-      setOnlineError(err.message || "제출에 실패했습니다.");
+      setSubmitError(err.message || "제출에 실패했습니다.");
     } finally {
       setSubmitting(false);
     }
   };
 
-  // ── select 단계: 레벨 선택 ──
-  if (phase === "select") {
-    return (
-      <div className="diagnostic-page">
-        <main className="diagnostic-panel">
-          <div className="diag-select-header">
-            <h1>진단 테스트</h1>
-            <p>수준에 맞는 진단 테스트를 선택하세요.</p>
-          </div>
+  if (!tierInfo) return null;
+  if (loading) return <div className="diag-v2-loading">불러오는 중...</div>;
 
-          {loading ? (
-            <p style={{ textAlign: "center", color: "#6b5b53" }}>불러오는 중...</p>
-          ) : tests.length === 0 ? (
-            <p style={{ textAlign: "center", color: "#6b5b53" }}>
-              등록된 진단 테스트가 없습니다.
-            </p>
-          ) : (
-            <div className="diag-level-grid">
-              {Object.entries(LEVEL_INFO).map(([key, info]) => {
-                const test = tests.find((t) => t.levelId === key);
-                if (!test) return null;
-                const done = test.hasSubmitted;
-                return (
-                  <button
-                    key={key}
-                    className={`diag-level-card ${done ? "done" : ""}`}
-                    onClick={() =>
-                      done
-                        ? navigate(`/tests/${test.testId}/report?from=diagnostic`)
-                        : handleSelectTest(test)
-                    }
-                  >
-                    <span className="material-symbols-outlined diag-level-icon">
-                      {info.icon}
-                    </span>
-                    <div className="diag-level-label">{info.label}</div>
-                    <div className="diag-level-desc">{info.desc}</div>
-                    <div className="diag-level-meta">
-                      {test.totalQuestions}문항 · {test.totalPoints}점
-                    </div>
-                    {done && (
-                      <span className="diag-level-badge">
-                        응시 완료 ({test.score}점) · 성적표 보기
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-
-          <div className="diagnostic-actions" style={{ marginTop: 32, gap: 12, display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <button className="btn primary" type="button" onClick={() => navigate("/diagnostic/v2")}
-              style={{ width: "100%", maxWidth: 360 }}>
-              <span className="material-symbols-outlined" style={{ marginRight: 6, verticalAlign: "middle" }}>neurology</span>
-              온라인 역량 진단 (v2)
-            </button>
-            <button className="btn ghost" type="button" onClick={() => navigate("/start")}>
-              돌아가기
-            </button>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  // ── online 단계: PDF + 답안 패널 통합 ──
-  if (phase === "online") {
-    return (
-      <div className="diagnostic-page">
-        <main className="diagnostic-panel" style={{ maxWidth: "100%", padding: "16px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-            <h2 style={{ margin: 0 }}>{selectedTest?.title || "진단 테스트"}</h2>
-            <button className="btn ghost" onClick={() => setPhase("print")}>
-              돌아가기
-            </button>
-          </div>
-          {onlineError && <p className="ts-error">{onlineError}</p>}
-          <div className="test-online-split">
-            {pdfUrl && (
-              <div className="test-online-pdf" onContextMenu={e => e.preventDefault()}>
-                <iframe src={pdfUrl} title="시험지 PDF" />
-              </div>
-            )}
-            <AnswerInputPanel
-              questions={questions}
-              answers={answers}
-              onAnswer={handleOnlineAnswer}
-              onSubmit={handleOnlineSubmit}
-              submitting={submitting}
-            />
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  // ── print 단계: PDF 출력 + OMR 이동 ──
   return (
-    <div
-      className={`diagnostic-page minimal ${isObscured ? "obscured" : ""}`}
-      onClick={requestFullscreen}
-    >
-      <div className="watermark" aria-hidden="true" />
-      {isObscured && <div className="screen-shield" aria-hidden="true" />}
-      <main className="diagnostic-panel">
-        <div className="pdf-shell">
-          <iframe className="pdf-viewer" src={pdfUrl} title="시험지 PDF" />
+    <div className="diagnostic-page">
+      <main className="diagnostic-panel" style={{ maxWidth: "100%", padding: "16px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+          <h2 style={{ margin: 0 }}>
+            [{tierInfo.label}] 진단 시험지 OMR 입력
+          </h2>
+          <button className="btn ghost" onClick={() => navigate("/diagnostic/v2")}>
+            돌아가기
+          </button>
         </div>
 
-        <div className="diagnostic-actions">
-          <button className="btn primary" type="button" onClick={handlePrint}>
-            출력하기
-          </button>
-          <button
-            className="btn ghost"
-            type="button"
-            onClick={handleGoOmr}
-            disabled={!printed}
-          >
-            답안 입력하기
-          </button>
-          <button className="btn ghost" type="button" onClick={handleOnlineTest}>
-            온라인으로 풀기
-          </button>
-          <button
-            className="btn ghost"
-            type="button"
-            onClick={() => {
-              if (pdfUrl.startsWith("blob:")) URL.revokeObjectURL(pdfUrl);
-              setPhase("select"); setPrinted(false); setPdfUrl(""); setSelectedTest(null);
-            }}
-          >
-            다른 레벨 선택
-          </button>
+        <div className="diag-print-notice" style={{
+          background: "#fff7e8",
+          border: "1px solid #d4b980",
+          borderRadius: 8,
+          padding: "12px 16px",
+          marginBottom: 12,
+          fontSize: 14,
+          lineHeight: 1.6,
+        }}>
+          <strong>응시 안내</strong><br />
+          1) 시험지 PDF를 출력해서 60분 안에 풀어주세요.<br />
+          2) 다 푼 후 종이 답안을 아래 OMR 칸에 옮겨 적고 제출하세요.<br />
+          3) 객관식 48문항입니다. 찍고 넘어간 문제는 풀이속도 측정이 정확하지 않을 수 있습니다.
+        </div>
+
+        {pdfError && (
+          <p className="ts-error" style={{ marginBottom: 12 }}>{pdfError}</p>
+        )}
+        {submitError && (
+          <p className="ts-error" style={{ marginBottom: 12 }}>{submitError}</p>
+        )}
+
+        <div className="test-online-split">
+          {pdfUrl && (
+            <div className="test-online-pdf" onContextMenu={e => e.preventDefault()}>
+              <iframe src={pdfUrl} title={`[${tierInfo.label}] 진단 시험지`} />
+            </div>
+          )}
+          <AnswerInputPanel
+            questions={questions}
+            answers={answers}
+            onAnswer={handleAnswer}
+            onSubmit={handleSubmit}
+            submitting={submitting}
+            label="OMR 답안 입력"
+          />
         </div>
       </main>
     </div>

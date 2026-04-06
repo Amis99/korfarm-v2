@@ -72,13 +72,43 @@ function DiagnosticReportPage() {
       <div className="diag-report-header">
         <h1>역량 진단 리포트</h1>
         <span className="tier-label">
-          {report.tierLabel} · {report.mode === "cat" ? "적응형" : "전체 풀이"} · {report.answeredCount}문항
+          {report.tierLabel} · {report.mode === "offline" ? "인쇄 OMR" : "온라인 응시"} · {report.answeredCount}문항
           {report.completedAt && <span className="completed-at"> · {report.completedAt.replace("T", " ").substring(0, 16)}</span>}
         </span>
         {report.gradeContext && (
           <div className="diag-grade-context">{report.gradeContext}</div>
         )}
       </div>
+
+      {/* 풀이 시간 카드 (온라인 응시만 표기) */}
+      {report.mode !== "offline" && report.timeSpentSec != null && (
+        <div className="diag-report-section diag-time-section">
+          <h2>풀이 시간</h2>
+          <div className="diag-time-grid">
+            <div className="diag-time-card">
+              <div className="diag-time-label">마지막 마킹까지</div>
+              <div className="diag-time-value">
+                {Math.floor(report.timeSpentSec / 60)}분 {report.timeSpentSec % 60}초
+              </div>
+            </div>
+            <div className="diag-time-card highlight">
+              <div className="diag-time-label">풀이 속도 (보정)</div>
+              <div className="diag-time-value">
+                {Math.floor((report.effectiveSpeedSec || 0) / 60)}분 {(report.effectiveSpeedSec || 0) % 60}초
+              </div>
+              <div className="diag-time-note">
+                = {Math.floor(report.timeSpentSec / 60)}분 + 오답 {report.answeredCount - report.correctCount}개 × 3분
+              </div>
+            </div>
+            {report.avgTimePerQuestionSec != null && (
+              <div className="diag-time-card">
+                <div className="diag-time-label">1문항 평균</div>
+                <div className="diag-time-value">{report.avgTimePerQuestionSec.toFixed(1)}초</div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* 섹션 1: 종합 요약 카드 */}
       <ReportSummaryCards report={report} />

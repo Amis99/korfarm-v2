@@ -118,7 +118,16 @@ class DiagSessionEntity(
     var startedAt: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "completed_at")
-    var completedAt: LocalDateTime? = null
+    var completedAt: LocalDateTime? = null,
+
+    @Column(name = "last_response_at")
+    var lastResponseAt: LocalDateTime? = null,
+
+    @Column(name = "time_spent_sec")
+    var timeSpentSec: Int? = null,
+
+    @Column(name = "effective_speed_sec")
+    var effectiveSpeedSec: Int? = null
 )
 
 @Entity

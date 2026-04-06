@@ -57,6 +57,13 @@ class DiagnosticController(
         return ApiResponse(success = true, data = diagnosticService.getHistory(userId))
     }
 
+    /** 인쇄 OMR 답안 일괄 제출 → 진단 세션 생성 + 채점 + 리포트 */
+    @PostMapping("/sessions/from-omr")
+    fun submitFromOmr(@RequestBody request: FromOmrRequest): ApiResponse<FromOmrResponse> {
+        val userId = currentUserId()
+        return ApiResponse(success = true, data = diagnosticService.submitFromOmr(userId, request))
+    }
+
     private fun currentUserId(): String {
         return SecurityUtils.currentUserId()
             ?: throw ApiException("UNAUTHORIZED", "인증이 필요합니다", HttpStatus.UNAUTHORIZED)

@@ -626,6 +626,7 @@ class TestService(
     fun verifyStudentTestAccess(testId: String, userId: String) {
         val paper = findPaper(testId)
         if (paper.orgId == null) return // 본사 시험은 모든 학생 접근 가능
+        if (paper.series == "diagnostic") return // 진단 시험지는 모든 학생 접근 가능
         val userOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }
         if (!userOrgIds.contains(paper.orgId)) {
             throw ApiException("FORBIDDEN", "해당 시험에 접근 권한이 없습니다.", HttpStatus.FORBIDDEN)

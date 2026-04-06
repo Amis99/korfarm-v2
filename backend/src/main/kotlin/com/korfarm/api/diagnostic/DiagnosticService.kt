@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
 import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 
 @Service
 class DiagnosticService(
@@ -48,9 +49,11 @@ class DiagnosticService(
     @Transactional
     fun createSession(userId: String, request: CreateSessionRequest): SessionCreatedResponse {
         val tier = request.tier
-        val mode = request.mode
+        val mode = (request.mode ?: "online").lowercase()
         if (tier !in TEST_ORDER) throw ApiException("INVALID_TIER", "유효하지 않은 tier", HttpStatus.BAD_REQUEST)
-        if (mode !in listOf("full", "cat")) throw ApiException("INVALID_MODE", "유효하지 않은 mode", HttpStatus.BAD_REQUEST)
+        if (mode !in listOf("online", "offline")) {
+            throw ApiException("INVALID_MODE", "유효하지 않은 mode", HttpStatus.BAD_REQUEST)
+        }
 
         // 이미 완료한 tier는 재응시 차단
         val completedExists = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
@@ -81,29 +84,10 @@ class DiagnosticService(
         )
         sessionRepo.save(session)
 
-        // 첫 배치 선택
-        val pool = loadQuestionPool(tier)
-        val firstBatch = if (mode == "cat") {
-            val engine = CatEngine(pool, tier)
-
-            // 이전 완료 세션의 출제 문제 중복 방지
-            val prevSessions = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
-            val lastCompleted = prevSessions.firstOrNull { it.status == "completed" }
-            if (lastCompleted != null) {
-                val previousUsedIds = responseRepo.findBySessionIdOrderByResponseOrderAsc(lastCompleted.id)
-                    .map { it.questionId }.toSet()
-                if (pool.size - previousUsedIds.size >= 15) {
-                    engine.used.addAll(previousUsedIds)
-                }
-            }
-
-            val batch = engine.selectNextBatch(5)
-            // 세션에 사용된 문항 기록은 응답 시 처리
-            batch.map { toQuestionDto(it) }
-        } else {
-            // full 모드: 모든 문항 반환 (서술형 제외)
-            pool.filter { it.questionType != "서술형" }.map { toQuestionDto(it) }
-        }
+        // 단일 모드: 객관식 48문항 모두 일괄 반환 (서술형 제외)
+        // 정렬: 지문 level → 지문 id → order_in_passage 순
+        val pool = loadQuestionPool(tier).filter { it.questionType != "서술형" }
+        val firstBatch = pool.map { toQuestionDto(it) }
 
         return SessionCreatedResponse(sessionId = sessionId, firstBatch = firstBatch)
     }
@@ -134,7 +118,6 @@ class DiagnosticService(
         val scores: MutableMap<String, Double> = objectMapper.readValue(session.scoresJson ?: "{}")
         val touchCounts: MutableMap<String, Int> = objectMapper.readValue(session.touchCountsJson ?: "{}")
         val existingResponses = responseRepo.findBySessionIdOrderByResponseOrderAsc(sessionId)
-        val usedIds = existingResponses.map { it.questionId }.toMutableSet()
 
         // 오류기여 맵 초기화
         val errorContrib = ScoringEngine.initErrorContrib()
@@ -176,7 +159,6 @@ class DiagnosticService(
             ScoringEngine.clampScores(scores)
             answeredCount++
             if (isCorrect) correctCount++
-            usedIds.add(resp.questionId)
 
             // 응답 저장
             val responseEntity = DiagResponseEntity(
@@ -197,11 +179,11 @@ class DiagnosticService(
         session.answeredCount = answeredCount
         session.correctCount = correctCount
         session.errorAnalysisJson = objectMapper.writeValueAsString(errorContrib)
+        // 마지막 마킹 시각 갱신 (풀이속도 계산용)
+        session.lastResponseAt = LocalDateTime.now()
 
         val rawTci = ScoringEngine.calculateTci(scores)
-        val catFullQ = 25  // CAT 모드: 25문제면 신뢰도 100%
-        val fullQ = if (session.mode == "cat") catFullQ else FULL_CONFIDENCE_QUESTIONS
-        val confidence = ScoringEngine.calculateConfidence(answeredCount, fullQ = fullQ)
+        val confidence = ScoringEngine.calculateConfidence(answeredCount, fullQ = FULL_CONFIDENCE_QUESTIONS)
         val adjTci = ScoringEngine.applyConfidenceToTci(rawTci, confidence)
         session.rawTci = BigDecimal.valueOf(rawTci).setScale(2, java.math.RoundingMode.HALF_UP)
         session.adjustedTci = BigDecimal.valueOf(adjTci).setScale(2, java.math.RoundingMode.HALF_UP)
@@ -209,44 +191,8 @@ class DiagnosticService(
 
         sessionRepo.save(session)
 
-        // 다음 배치 / 종료 판단
-        if (session.mode == "cat") {
-            val pool = loadQuestionPool(session.tier)
-
-            // 이전 완료 세션의 출제 문제 중복 방지
-            val prevSessions = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, session.tier)
-            val lastCompleted = prevSessions.firstOrNull { it.status == "completed" && it.id != sessionId }
-            if (lastCompleted != null) {
-                val prevIds = responseRepo.findBySessionIdOrderByResponseOrderAsc(lastCompleted.id)
-                    .map { it.questionId }
-                if (pool.size - (usedIds.size + prevIds.size) >= 5) {
-                    usedIds.addAll(prevIds)
-                }
-            }
-
-            val engine = restoreCatEngine(pool, session.tier, scores, touchCounts, usedIds, answeredCount, correctCount, errorContrib)
-            val (stop, _) = engine.shouldStop()
-
-            val interim = InterimReport(
-                answeredCount = answeredCount,
-                correctCount = correctCount,
-                rawTci = Math.round(rawTci * 100.0) / 100.0,
-                adjustedTci = Math.round(adjTci * 100.0) / 100.0,
-                confidence = Math.round(confidence * 100.0) / 100.0,
-                scores = scores.mapValues { Math.round(it.value * 10.0) / 10.0 },
-                weakCompetencies = scores.entries.sortedBy { it.value }.take(3).map { it.key }
-            )
-
-            if (stop) {
-                return SubmitResponsesResponse(nextBatch = null, shouldStop = true, interim = interim)
-            }
-
-            val nextBatch = engine.selectNextBatch(5).map { toQuestionDto(it) }
-            return SubmitResponsesResponse(nextBatch = nextBatch, shouldStop = false, interim = interim)
-        } else {
-            // full 모드: 이미 모든 문항을 받았으므로 종료 가능
-            return SubmitResponsesResponse(nextBatch = null, shouldStop = true, interim = null)
-        }
+        // 단일 모드: 다음 배치 없음, 즉시 종료 가능
+        return SubmitResponsesResponse(nextBatch = null, shouldStop = true, interim = null)
     }
 
     // ── 세션 완료 ──
@@ -260,9 +206,7 @@ class DiagnosticService(
 
         val scores: MutableMap<String, Double> = objectMapper.readValue(session.scoresJson ?: "{}")
         val rawTci = ScoringEngine.calculateTci(scores)
-        val catFullQ = 25  // CAT 모드: 25문제면 신뢰도 100%
-        val fullQ = if (session.mode == "cat") catFullQ else FULL_CONFIDENCE_QUESTIONS
-        val confidence = ScoringEngine.calculateConfidence(session.answeredCount, fullQ = fullQ)
+        val confidence = ScoringEngine.calculateConfidence(session.answeredCount, fullQ = FULL_CONFIDENCE_QUESTIONS)
         val adjTci = ScoringEngine.applyConfidenceToTci(rawTci, confidence)
         val recommendation = ScoringEngine.calculateRecommendation(session.tier, rawTci, confidence)
 
@@ -271,10 +215,145 @@ class DiagnosticService(
         session.adjustedTci = BigDecimal.valueOf(adjTci).setScale(2, java.math.RoundingMode.HALF_UP)
         session.confidence = BigDecimal.valueOf(confidence).setScale(2, java.math.RoundingMode.HALF_UP)
         session.recommendedLevel = recommendation.label
-        session.completedAt = LocalDateTime.now()
+        val now = LocalDateTime.now()
+        session.completedAt = now
+
+        // ── 풀이 시간 계산 (offline OMR 세션은 lastResponseAt 미설정 → 0초 처리) ──
+        val endTs = session.lastResponseAt ?: now
+        val timeSpent = ChronoUnit.SECONDS.between(session.startedAt, endTs).toInt().coerceAtLeast(0)
+        val wrong = (session.answeredCount - session.correctCount).coerceAtLeast(0)
+        // 풀이속도 = 마지막마킹시간 + (오답수 × 3분)
+        val effectiveSpeed = timeSpent + wrong * 180
+        session.timeSpentSec = timeSpent
+        session.effectiveSpeedSec = effectiveSpeed
+
         sessionRepo.save(session)
 
         return buildReport(session, scores, recommendation)
+    }
+
+    // ── 인쇄 OMR 답안 일괄 제출 → 진단 세션 생성 + 채점 + 리포트 ──
+
+    @Transactional
+    fun submitFromOmr(userId: String, request: FromOmrRequest): FromOmrResponse {
+        val tier = request.tier
+        if (tier !in TEST_ORDER) throw ApiException("INVALID_TIER", "유효하지 않은 tier", HttpStatus.BAD_REQUEST)
+
+        // 이미 완료한 tier 차단
+        val completedExists = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
+            .any { it.status == "completed" }
+        if (completedExists) {
+            throw ApiException("ALREADY_COMPLETED", "이미 완료한 진단입니다. 결과를 확인하세요.", HttpStatus.CONFLICT)
+        }
+
+        // 활성 세션 폐기
+        sessionRepo.findByUserIdAndStatus(userId, "active")
+            .filter { it.tier == tier }
+            .forEach {
+                it.status = "abandoned"
+                sessionRepo.save(it)
+            }
+
+        // 풀 로드 (정렬: 지문 level → 지문 id → order_in_passage)
+        // 이 정렬은 V0048 마이그레이션에서 test_questions.number를 매기는 순서와 동일.
+        val pool = loadQuestionPool(tier).filter { it.questionType != "서술형" }
+        if (pool.size != 48) {
+            throw ApiException("INVALID_POOL", "진단 문항 수가 48이 아닙니다 (${pool.size})", HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+
+        val sessionId = IdGenerator.newId("dsess")
+        val scores = ScoringEngine.initScores()
+        val touchCounts = ScoringEngine.initTouchCounts()
+        val errorContrib = ScoringEngine.initErrorContrib()
+
+        val session = DiagSessionEntity(
+            id = sessionId,
+            userId = userId,
+            tier = tier,
+            mode = "offline",
+            status = "active",
+            scoresJson = objectMapper.writeValueAsString(scores),
+            touchCountsJson = objectMapper.writeValueAsString(touchCounts)
+        )
+        sessionRepo.save(session)
+
+        var answeredCount = 0
+        var correctCount = 0
+
+        // OMR answers는 1부터 시작하는 문항번호 → 선택지(A~E)
+        pool.forEachIndexed { idx, qd ->
+            val number = idx + 1
+            val rawAnswer = request.answers[number.toString()]?.trim()?.uppercase()
+            val choice = if (rawAnswer.isNullOrBlank()) null else rawAnswer
+
+            val question = questionRepo.findById(qd.questionId).orElse(null) ?: return@forEachIndexed
+            val choicesData: List<Map<String, Any>> = objectMapper.readValue(question.choicesJson)
+            val selectedChoice = choice?.let { c -> choicesData.find { (it["choice_id"] as? String) == c } }
+            val isCorrect = choice != null && choice == question.correctChoice
+
+            if (selectedChoice != null) {
+                @Suppress("UNCHECKED_CAST")
+                val vector = (selectedChoice["vector"] as? Map<String, Any>)
+                    ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap()
+                val multiplier = getLevelMultiplier(tier, getQuestionLevel(question))
+
+                if (isCorrect) {
+                    ScoringEngine.applyVector(scores, vector, CORRECT_WEIGHT, 1.0)
+                } else {
+                    ScoringEngine.applyVector(scores, vector, INCORRECT_WEIGHT, multiplier)
+                    val errorPath = selectedChoice["error_path"] as? String
+                    ScoringEngine.accumulateError(errorContrib, vector, errorPath, INCORRECT_WEIGHT, multiplier)
+                }
+
+                for (k in vector.keys) {
+                    val nk = normalizeKey(k)
+                    if (nk in touchCounts) touchCounts[nk] = touchCounts[nk]!! + 1
+                }
+            }
+
+            ScoringEngine.clampScores(scores)
+            answeredCount++
+            if (isCorrect) correctCount++
+
+            responseRepo.save(
+                DiagResponseEntity(
+                    id = IdGenerator.newId("dresp"),
+                    sessionId = sessionId,
+                    questionId = qd.questionId,
+                    selectedChoice = choice,
+                    isCorrect = isCorrect,
+                    responseOrder = answeredCount,
+                    batchNumber = 1
+                )
+            )
+        }
+
+        // 세션 종료
+        val rawTci = ScoringEngine.calculateTci(scores)
+        val confidence = ScoringEngine.calculateConfidence(answeredCount, fullQ = FULL_CONFIDENCE_QUESTIONS)
+        val adjTci = ScoringEngine.applyConfidenceToTci(rawTci, confidence)
+        val recommendation = ScoringEngine.calculateRecommendation(tier, rawTci, confidence)
+
+        session.scoresJson = objectMapper.writeValueAsString(scores)
+        session.touchCountsJson = objectMapper.writeValueAsString(touchCounts)
+        session.errorAnalysisJson = objectMapper.writeValueAsString(errorContrib)
+        session.answeredCount = answeredCount
+        session.correctCount = correctCount
+        session.rawTci = BigDecimal.valueOf(rawTci).setScale(2, java.math.RoundingMode.HALF_UP)
+        session.adjustedTci = BigDecimal.valueOf(adjTci).setScale(2, java.math.RoundingMode.HALF_UP)
+        session.confidence = BigDecimal.valueOf(confidence).setScale(2, java.math.RoundingMode.HALF_UP)
+        session.recommendedLevel = recommendation.label
+        session.status = "completed"
+        val now = LocalDateTime.now()
+        session.completedAt = now
+        // OMR 채점은 풀이 시간 측정 불가 → null 유지
+        session.lastResponseAt = null
+        session.timeSpentSec = null
+        session.effectiveSpeedSec = null
+        sessionRepo.save(session)
+
+        val report = buildReport(session, scores, recommendation)
+        return FromOmrResponse(sessionId = sessionId, report = report)
     }
 
     // ── 리포트 조회 ──
@@ -412,48 +491,38 @@ class DiagnosticService(
     private fun loadQuestionPool(tier: String): List<QuestionData> {
         val questions = questionRepo.findByTierOrderByIdAsc(tier)
         val passages = passageRepo.findByTierOrderByLevelAscIdAsc(tier).associateBy { it.id }
-        return questions.map { q ->
-            val passage = passages[q.passageId]
-            val choicesRaw: List<Map<String, Any>> = objectMapper.readValue(q.choicesJson)
-            QuestionData(
-                questionId = q.id,
-                passageId = q.passageId,
-                tier = q.tier,
-                questionType = q.questionType,
-                level = passage?.level,
-                correctChoice = q.correctChoice,
-                choices = choicesRaw.map { c ->
-                    @Suppress("UNCHECKED_CAST")
-                    ChoiceData(
-                        choiceId = c["choice_id"] as? String ?: "",
-                        text = c["text"] as? String ?: "",
-                        vector = (c["vector"] as? Map<String, Any>)
-                            ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap(),
-                        errorPath = c["error_path"] as? String
-                    )
-                }
+        // 정렬: 지문 level → 지문 id → order_in_passage
+        // V0048 마이그레이션의 test_questions.number 부여 순서와 동일해야 함
+        return questions
+            .sortedWith(
+                compareBy(
+                    { passages[it.passageId]?.level ?: Int.MAX_VALUE },
+                    { it.passageId },
+                    { it.orderInPassage }
+                )
             )
-        }
-    }
-
-    private fun restoreCatEngine(
-        pool: List<QuestionData>,
-        tier: String,
-        scores: MutableMap<String, Double>,
-        touchCounts: MutableMap<String, Int>,
-        usedIds: MutableSet<String>,
-        answeredCount: Int,
-        correctCount: Int,
-        errorContrib: MutableMap<String, MutableMap<String, Double>>
-    ): CatEngine {
-        val engine = CatEngine(pool, tier)
-        engine.scores.putAll(scores)
-        engine.touchCounts.putAll(touchCounts)
-        engine.used.addAll(usedIds)
-        engine.answeredCount = answeredCount
-        engine.correctCount = correctCount
-        engine.errorContrib.putAll(errorContrib)
-        return engine
+            .map { q ->
+                val passage = passages[q.passageId]
+                val choicesRaw: List<Map<String, Any>> = objectMapper.readValue(q.choicesJson)
+                QuestionData(
+                    questionId = q.id,
+                    passageId = q.passageId,
+                    tier = q.tier,
+                    questionType = q.questionType,
+                    level = passage?.level,
+                    correctChoice = q.correctChoice,
+                    choices = choicesRaw.map { c ->
+                        @Suppress("UNCHECKED_CAST")
+                        ChoiceData(
+                            choiceId = c["choice_id"] as? String ?: "",
+                            text = c["text"] as? String ?: "",
+                            vector = (c["vector"] as? Map<String, Any>)
+                                ?.mapValues { (it.value as Number).toDouble() } ?: emptyMap(),
+                            errorPath = c["error_path"] as? String
+                        )
+                    }
+                )
+            }
     }
 
     private fun getQuestionLevel(q: DiagQuestionEntity): Int? {
@@ -776,6 +845,11 @@ class DiagnosticService(
             statistics = tierStatistics,
             percentiles = percentileInfo,
             gradeContext = gradeContext,
+            timeSpentSec = session.timeSpentSec,
+            effectiveSpeedSec = session.effectiveSpeedSec,
+            avgTimePerQuestionSec = if ((session.timeSpentSec ?: 0) > 0 && session.answeredCount > 0)
+                Math.round(session.timeSpentSec!!.toDouble() / session.answeredCount * 10.0) / 10.0
+            else null,
         )
     }
 

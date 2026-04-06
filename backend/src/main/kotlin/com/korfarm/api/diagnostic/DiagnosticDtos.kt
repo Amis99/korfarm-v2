@@ -4,7 +4,7 @@ package com.korfarm.api.diagnostic
 
 data class CreateSessionRequest(
     val tier: String,
-    val mode: String // "full" | "cat"
+    val mode: String? = "online" // 'online' (기본) | 'offline' (인쇄 OMR)
 )
 
 data class SubmitResponsesRequest(
@@ -14,6 +14,18 @@ data class SubmitResponsesRequest(
 data class SingleResponse(
     val questionId: String,
     val choice: String // "A"~"E"
+)
+
+/** 인쇄 OMR 답안 일괄 제출 (test_papers의 number → 정답 매핑) */
+data class FromOmrRequest(
+    val tier: String,
+    /** key = test_questions.number(문항번호), value = "A"|"B"|"C"|"D"|"E"|null */
+    val answers: Map<String, String?>
+)
+
+data class FromOmrResponse(
+    val sessionId: String,
+    val report: DiagnosticReport
 )
 
 // ── 응답 DTO ──
@@ -104,6 +116,10 @@ data class DiagnosticReport(
     val statistics: TierStatistics? = null,
     val percentiles: PercentileInfo? = null,
     val gradeContext: String? = null,
+    // 풀이 시간 정보
+    val timeSpentSec: Int? = null,        // 시작~마지막 마킹 경과(초)
+    val effectiveSpeedSec: Int? = null,   // 보정 풀이속도 = timeSpentSec + (오답수 × 180)
+    val avgTimePerQuestionSec: Double? = null, // 1문항 평균 시간(초)
 )
 
 data class RecommendedLevel(

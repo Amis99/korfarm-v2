@@ -275,7 +275,7 @@ function SignupPage() {
         }, 2000);
       } else {
         // 국어농장인 경우 바로 진행
-        navigate(diagnosticOptIn && accountType === "student" ? "/diagnostic/print" : "/start");
+        navigate(diagnosticOptIn && accountType === "student" ? "/diagnostic/v2" : "/start");
       }
     } catch (err) {
       setError(err.message);
