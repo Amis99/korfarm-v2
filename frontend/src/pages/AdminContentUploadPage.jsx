@@ -45,7 +45,6 @@ const MODULE_GROUPS = [
       { value: "farm:reading:reading_training", label: "독해 훈련", contentType: "READING_NONFICTION" },
       { value: "farm:story:reading_training", label: "이야기 농장", contentType: "READING_LITERATURE" },
       { value: "farm:classic:reading_training", label: "고전 농장", contentType: "READING_LITERATURE" },
-      { value: "farm:content:reading_training", label: "내용 숙지 농장", contentType: "CONTENT_PDF_QUIZ" },
       { value: "farm:grammar_wf:word_formation", label: "문법 - 단어 형성", contentType: "GRAMMAR_WORD_FORMATION" },
       { value: "farm:grammar_ss:sentence_structure", label: "문법 - 문장 짜임", contentType: "GRAMMAR_SENTENCE_STRUCTURE" },
       { value: "farm:grammar_pc:phoneme_change", label: "문법 - 음운 변동", contentType: "GRAMMAR_PHONEME_CHANGE" },

@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { to: "/admin/students", icon: "group", label: "학생 관리" },
   { to: "/admin/parents", icon: "family_restroom", label: "학부모 관리" },
   { to: "/admin/content", icon: "menu_book", label: "콘텐츠" },
+  { to: "/admin/study-content", icon: "auto_stories", label: "내용 숙지" },
   { to: "/admin/assignments", icon: "task", label: "과제/피드백" },
   { to: "/admin/wisdom", icon: "auto_stories", label: "지식과 지혜", roles: ["HQ_ADMIN"] },
   { to: "/admin/tests", icon: "assignment", label: "테스트 관리" },

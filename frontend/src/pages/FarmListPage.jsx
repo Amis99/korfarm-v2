@@ -80,6 +80,31 @@ function FarmListPage() {
   useEffect(() => {
     if (!farm) return;
     setDbLoading(true);
+    // 내용 숙지 농장은 study_contents API 사용
+    if (farmId === "content") {
+      apiGet("/v1/learning/study/contents")
+        .then((data) => {
+          const items = (Array.isArray(data) ? data : []).map((item) => ({
+            id: item.id,
+            contentId: item.id,
+            title: item.title,
+            contentType: "STUDY_CONTENT",
+            targetLevel: item.levelId,
+            subArea: "STUDY_CONTENT",
+            moduleKey: "study_content",
+            videoUrl: null,
+            isStudyContent: true,
+            questionCount: item.questionCount,
+            seenRatio: item.seenRatio,
+            accuracy: item.accuracy,
+            totalSessions: item.totalSessions,
+          }));
+          setDbItems(items);
+        })
+        .catch(() => setDbItems([]))
+        .finally(() => setDbLoading(false));
+      return;
+    }
     const params = new URLSearchParams();
     if (serverFilter) {
       // levelId 필터: 서버별 레벨 범위 (예: RUSSELL → RUSSELL_1, RUSSELL_2, RUSSELL_3)
@@ -334,7 +359,9 @@ function FarmListPage() {
                       key={item.id}
                       className="farm-row"
                       onClick={() => {
-                        if (farmId === "content") {
+                        if (item.isStudyContent) {
+                          navigate(`/study-learning/${item.contentId}`);
+                        } else if (farmId === "content") {
                           setProgressModal(item);
                         } else {
                           navigate(`/learning/${item.contentId}`);

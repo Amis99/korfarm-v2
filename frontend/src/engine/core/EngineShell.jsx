@@ -40,8 +40,7 @@ const CONTENT_TYPE_FARM_MAPPING = {
   MORPHEME_ANALYSIS: "grammar",
   READING_NONFICTION: "reading",
   READING_LITERATURE: "reading",
-  CONTENT_PDF: "content",
-  CONTENT_PDF_QUIZ: "content",
+  STUDY_CONTENT: "content",
   BACKGROUND_KNOWLEDGE: "background",
   BACKGROUND_KNOWLEDGE_QUIZ: "background",
   LANGUAGE_CONCEPT: "concept",
@@ -147,7 +146,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     if (contentType.startsWith("PRO_")) return "프로 모드";
     if (contentType.startsWith("VOCAB")) return "어휘 학습";
     if (contentType.startsWith("READING") || contentType.startsWith("DAILY_READING")) return "독해 연습";
-    if (contentType.startsWith("CONTENT_PDF")) return "내용 숙지 학습";
+    if (contentType === "STUDY_CONTENT") return "내용 숙지 학습";
     if (contentType === "MORPHEME_ANALYSIS" || contentType === "GRAMMAR_WORD_FORMATION") return "형태소와 단어의 형성";
     if (contentType.startsWith("GRAMMAR")) return "문법 연습";
     if (contentType.startsWith("BACKGROUND")) return "배경지식 퀴즈";
@@ -235,15 +234,6 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const printPageGroups = useMemo(() => {
     const payload = content?.payload;
     if (!payload) return [];
-    // content_pdf: 페이지별 명확히 분리
-    if (payload.pages) {
-      return payload.pages
-        .filter((p) => p.questions?.length)
-        .map((p) => ({
-          label: `${p.pageNo}페이지 문제`,
-          questions: p.questions,
-        }));
-    }
     // worksheet_quiz, choice_judgement 등
     if (payload.questions) {
       const qs = payload.questions.filter(Boolean);
@@ -285,12 +275,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       phoneme_change: (payload.words || []).reduce((sum, w) => sum + (w.steps?.length || 0), 0),
       word_formation: payload.items?.length,
       sentence_structure: payload.sentences?.length,
-      content_pdf: (payload.pages || []).reduce((sum, page) =>
-        sum + (page.questions || []).reduce((qs, q) => {
-          if (q.type === "FILL_BLANKS") return qs + (q.blanks?.length ?? 0);
-          if (q.type === "SENTENCE_BUILDING") return qs + (q.sentenceParts?.length ?? 0);
-          return qs + 1;
-        }, 0), 0),
+      study_content: 20,
       logic_reasoning: passagesTotal > 0 ? passagesTotal : worksheetTotal,
       background_knowledge: passagesTotal > 0 ? passagesTotal : worksheetTotal,
     };
@@ -607,7 +592,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
               <main
                 className={`engine-body ${
                   (content?.payload?.pageStack && moduleKey === "worksheet_quiz") ||
-                  moduleKey === "content_pdf" ||
+                  moduleKey === "study_content" ||
                   moduleKey === "choice_judgement" ||
                   moduleKey === "sentence_structure" ||
                   moduleKey === "word_formation" ||

@@ -4,6 +4,8 @@ import EngineShell from "../engine/core/EngineShell";
 import { FARM_MAP } from "../data/learning/learningCatalog";
 import { apiGet, apiPost } from "../utils/api";
 
+// (resolvedStartPage / isContentPdf 분기는 V0046에서 제거됨)
+
 /* contentType → moduleKey 매핑 (DB에 moduleKey가 없는 경우 fallback) */
 const CONTENT_TYPE_TO_MODULE = {
   PRO_READING: "reading_training",
@@ -29,14 +31,11 @@ function LearningRunnerPage() {
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [resolvedStartPage, setResolvedStartPage] = useState(null);
   const [assignmentSubmitted, setAssignmentSubmitted] = useState(false);
 
-  const startPageParam = searchParams.get("startPage");
   const assignmentId = searchParams.get("assignmentId");
   const proChapter = searchParams.get("proChapter");
   const proItemId = searchParams.get("proItemId");
-  const isContentPdf = learning?.moduleKey === "content_pdf";
 
   const exitPath = useMemo(() => {
     if (proChapter) return `/pro-mode/chapter/${proChapter}`;
@@ -89,38 +88,6 @@ function LearningRunnerPage() {
       .catch((e) => console.error(e));
   }, [learningId, learning]);
 
-  // content_pdf인 경우 page-progress 조회하여 startPage 결정
-  useEffect(() => {
-    if (!isContentPdf || !learning) {
-      setResolvedStartPage(null);
-      return;
-    }
-    if (startPageParam) {
-      setResolvedStartPage(parseInt(startPageParam, 10) || 1);
-      return;
-    }
-    apiPost("/v1/learning/farm/page-progress", {
-      contentId: learning.contentId,
-    })
-      .then((res) => {
-        const lastPage = res?.data?.lastCompletedPage || res?.lastCompletedPage || 0;
-        setResolvedStartPage(lastPage + 1);
-      })
-      .catch(() => {
-        setResolvedStartPage(1);
-      });
-  }, [isContentPdf, learning, startPageParam]);
-
-  // content에 _startPage, _farmLogId 주입
-  const enrichedContent = useMemo(() => {
-    if (!content) return content;
-    if (!isContentPdf) return content;
-    return {
-      ...content,
-      _startPage: resolvedStartPage || 1,
-      _farmLogId: farmLogId,
-    };
-  }, [content, isContentPdf, resolvedStartPage, farmLogId]);
 
   // 학습 종료 시 과제 자동 제출 + 프로 모드 완료
   const handleExit = useCallback(() => {
@@ -148,7 +115,7 @@ function LearningRunnerPage() {
     );
   }
 
-  if (loading || (isContentPdf && resolvedStartPage === null)) {
+  if (loading) {
     return (
       <div className="lr-loading">
         <p>학습 데이터를 불러오는 중...</p>
@@ -168,7 +135,7 @@ function LearningRunnerPage() {
 
   return (
     <EngineShell
-      content={enrichedContent}
+      content={content}
       moduleKey={learning.moduleKey}
       onExit={handleExit}
       farmLogId={farmLogId}

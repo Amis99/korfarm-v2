@@ -35,6 +35,7 @@ const DailyQuizPage = lazy(() => import("./pages/DailyQuizPage"));
 const DailyReadingPage = lazy(() => import("./pages/DailyReadingPage"));
 const LearningHubPage = lazy(() => import("./pages/LearningHubPage"));
 const LearningRunnerPage = lazy(() => import("./pages/LearningRunnerPage"));
+const StudyLearningPage = lazy(() => import("./pages/StudyLearningPage"));
 
 const ProModePage = lazy(() => import("./pages/ProModePage"));
 const ProChapterPage = lazy(() => import("./pages/ProChapterPage"));
@@ -113,6 +114,8 @@ const AdminQBRecordDetailPage = lazy(() => import("./pages/AdminQBRecordDetailPa
 const AdminQBCodesPage = lazy(() => import("./pages/AdminQBCodesPage"));
 const AdminEditHistoryPage = lazy(() => import("./pages/AdminEditHistoryPage"));
 const AdminLearningDBPage = lazy(() => import("./pages/AdminLearningDBPage"));
+const AdminStudyContentPage = lazy(() => import("./pages/AdminStudyContentPage"));
+const AdminStudyContentEditorPage = lazy(() => import("./pages/AdminStudyContentEditorPage"));
 
 /* 로그인 상태에서 공개 페이지 접근 시 /start로 리다이렉트 */
 function PublicOnlyRoute({ children }) {
@@ -216,6 +219,7 @@ function App() {
           <Route path="/daily-reading" element={P(<DailyReadingPage />)} />
           <Route path="/learning" element={P(<LearningHubPage />)} />
           <Route path="/learning/:learningId" element={P(<LearningRunnerPage />)} />
+          <Route path="/study-learning/:contentId" element={P(<StudyLearningPage />)} />
           <Route path="/pro-mode" element={P(<ProModePage />)} />
           <Route path="/pro-mode/chapter/:chapterId" element={P(<ProChapterPage />)} />
           <Route path="/pro-mode/chapter/:chapterId/test" element={P(<ProTestPage />)} />
@@ -261,6 +265,8 @@ function App() {
           <Route path="/admin/content/upload" element={A(<AdminContentUploadPage />)} />
           <Route path="/admin/content/preview" element={A(<AdminContentPreviewPage />)} />
           <Route path="/admin/content/edit" element={A(<AdminContentEditorPage />)} />
+          <Route path="/admin/study-content" element={A(<AdminStudyContentPage />)} />
+          <Route path="/admin/study-content/editor/:contentId" element={A(<AdminStudyContentEditorPage />)} />
           <Route path="/admin/assignments" element={A(<AdminAssignmentsPage />)} />
           <Route path="/admin/shop" element={A(<AdminShopPage />)} />
           <Route path="/admin/shop/products" element={<Navigate to="/admin/shop?tab=products" replace />} />

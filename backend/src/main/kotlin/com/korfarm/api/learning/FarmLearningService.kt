@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatter
 @Service
 class FarmLearningService(
     private val farmLearningLogRepository: FarmLearningLogRepository,
-    private val contentPageProgressRepository: ContentPageProgressRepository,
     private val quizAnswerDetailRepository: QuizAnswerDetailRepository,
     private val contentRepository: ContentRepository,
     private val economyService: EconomyService
@@ -179,49 +178,4 @@ class FarmLearningService(
         return FarmProgressResponse(stats = stats, myStatus = myStatus)
     }
 
-    @Transactional
-    fun pageComplete(userId: String, request: PageCompleteRequest): PageCompleteResponse {
-        // 서버 측에서 contentType 기반으로 씨앗 종류 결정
-        val parentLog = farmLearningLogRepository.findById(request.logId).orElse(null)
-        val resolvedSeedType = parentLog?.contentType?.let { SeedRewardPolicy.seedTypeForContentType(it) }
-            ?: request.seedType
-            ?: "seed_wheat"
-
-        val entity = ContentPageProgressEntity(
-            id = IdGenerator.newId("cpp"),
-            userId = userId,
-            contentId = request.contentId,
-            logId = request.logId,
-            pageNo = request.pageNo,
-            score = request.score,
-            accuracy = request.accuracy,
-            earnedSeed = request.earnedSeed,
-            earnedSeedType = resolvedSeedType,
-            completedAt = LocalDateTime.now()
-        )
-        contentPageProgressRepository.save(entity)
-
-        if (request.earnedSeed > 0) {
-            economyService.addSeeds(
-                userId,
-                resolvedSeedType,
-                request.earnedSeed,
-                "farm_page_learning",
-                "content_page_progress",
-                entity.id
-            )
-        }
-
-        val allPages = contentPageProgressRepository.findByUserIdAndContentIdOrderByPageNoAsc(userId, request.contentId)
-        val totalEarned = allPages.sumOf { it.earnedSeed }
-        return PageCompleteResponse(success = true, totalEarnedSeed = totalEarned)
-    }
-
-    @Transactional(readOnly = true)
-    fun pageProgress(userId: String, request: PageProgressRequest): PageProgressResponse {
-        val pages = contentPageProgressRepository.findByUserIdAndContentIdOrderByPageNoAsc(userId, request.contentId)
-        val lastPage = pages.maxByOrNull { it.pageNo }?.pageNo ?: 0
-        val results = pages.map { PageResultDto(pageNo = it.pageNo, score = it.score, accuracy = it.accuracy, earnedSeed = it.earnedSeed) }
-        return PageProgressResponse(lastCompletedPage = lastPage, pageResults = results)
-    }
 }

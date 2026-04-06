@@ -34,14 +34,14 @@ object CompetencyMapping {
         "LOGIC_REASONING", "LOGIC_REASONING_QUIZ", "PRO_LOGIC" -> "논리 사고력"
         "CHOICE_JUDGEMENT" -> "선택지 분석 및 전략 수립 능력"
         "WRITING_DESCRIPTIVE" -> "문제 분석 및 전략 수립 능력"
-        "CONTENT_PDF", "CONTENT_PDF_QUIZ" -> "구조 독해력"
+        "STUDY_CONTENT" -> "구조 독해력"
         else -> null
     }
 
     /** contentType → 영역(도메인) 분류 */
     fun domainAreaFor(contentType: String): String = when (contentType) {
         "READING_NONFICTION", "BACKGROUND_KNOWLEDGE", "BACKGROUND_KNOWLEDGE_QUIZ",
-        "CONTENT_PDF", "CONTENT_PDF_QUIZ", "PRO_BACKGROUND", "PRO_READING",
+        "STUDY_CONTENT", "PRO_BACKGROUND", "PRO_READING",
         "DAILY_READING" -> "비문학"
         "READING_LITERATURE" -> "문학"
         "GRAMMAR_BASIC", "GRAMMAR_ADVANCED", "GRAMMAR_PRACTICE", "GRAMMAR_REVIEW",
@@ -67,8 +67,7 @@ object CompetencyMapping {
         "LOGIC_REASONING_QUIZ" -> "논리 추론 퀴즈"
         "CHOICE_JUDGEMENT" -> "선택지 판별"
         "WRITING_DESCRIPTIVE" -> "서술형 쓰기"
-        "CONTENT_PDF" -> "PDF 학습"
-        "CONTENT_PDF_QUIZ" -> "PDF 퀴즈"
+        "STUDY_CONTENT" -> "내용 숙지 학습"
         "DAILY_QUIZ" -> "일일 퀴즈"
         "DAILY_READING" -> "일일 독해"
         "PRO_VOCAB" -> "프로 어휘"
@@ -136,6 +135,6 @@ object CompetencyMapping {
         "LANGUAGE_CONCEPT", "LANGUAGE_CONCEPT_QUIZ",
         "LOGIC_REASONING", "LOGIC_REASONING_QUIZ",
         "CHOICE_JUDGEMENT", "WRITING_DESCRIPTIVE",
-        "CONTENT_PDF", "CONTENT_PDF_QUIZ"
+        "STUDY_CONTENT"
     )
 }

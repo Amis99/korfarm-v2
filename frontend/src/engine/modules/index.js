@@ -4,7 +4,7 @@ import ChoiceJudgementModule from "./ChoiceJudgementModule";
 import PhonemeChangeModule from "./PhonemeChangeModule";
 import WordFormationModule from "./WordFormationModule";
 import SentenceStructureModule from "./SentenceStructureModule";
-import ContentPdfModule from "./ContentPdfModule";
+import StudyContentModule from "./StudyContentModule";
 import AnswerKeyModule from "./AnswerKeyModule";
 import BackgroundModule from "./BackgroundModule";
 import LogicModule from "./LogicModule";
@@ -18,7 +18,7 @@ export const MODULES = {
   phoneme_change: PhonemeChangeModule,
   word_formation: WordFormationModule,
   sentence_structure: SentenceStructureModule,
-  content_pdf: ContentPdfModule,
+  study_content: StudyContentModule,
   answer_key: AnswerKeyModule,
   background_knowledge: BackgroundModule,
   logic_reasoning: LogicModule,
