@@ -1333,6 +1333,26 @@ mark.highlight {
   color: #d85a16;
 }
 
+/* 정답/오답 시각화 (빨간 크레용 동그라미·V체크) */
+.choice-mark.correct,
+.choice-mark.wrong {
+  width: 38px;
+  height: 32px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 0;
+  color: transparent;
+}
+
+.choice-mark.correct {
+  background-image: url("/%EC%A0%95%EB%8B%B5%20%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8.png");
+}
+
+.choice-mark.wrong {
+  background-image: url("/%EC%98%A4%EB%8B%B5%20%EA%BA%BE%EC%9D%80%EC%84%A0.png");
+}
+
 .choice-props {
   margin-top: 14px;
   display: grid;
@@ -1351,6 +1371,28 @@ mark.highlight {
 .choice-prop-mark {
   font-weight: 700;
   color: #ff8f2b;
+}
+
+/* 명제별 O/X 마커 (빨간 크레용 동그라미·V체크) */
+.choice-prop-mark.correct,
+.choice-prop-mark.wrong {
+  display: inline-block;
+  width: 30px;
+  height: 26px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 0;
+  color: transparent;
+  vertical-align: middle;
+}
+
+.choice-prop-mark.correct {
+  background-image: url("/%EC%A0%95%EB%8B%B5%20%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8.png");
+}
+
+.choice-prop-mark.wrong {
+  background-image: url("/%EC%98%A4%EB%8B%B5%20%EA%BA%BE%EC%9D%80%EC%84%A0.png");
 }
 
 .phoneme-header {

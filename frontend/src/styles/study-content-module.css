@@ -185,16 +185,24 @@
 .sc-history-item.wrong { border-left-color: #c0392b; }
 
 .sc-history-mark {
-  font-size: 28px;
-  font-weight: 700;
-  width: 36px;
-  text-align: center;
+  width: 44px;
+  height: 44px;
   flex-shrink: 0;
-  font-family: "Comic Sans MS", "Pretendard", sans-serif;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* 텍스트는 시각적으로 숨김 (스크린 리더는 읽을 수 있게) */
+  font-size: 0;
+  color: transparent;
 }
 
-.sc-history-item.correct .sc-history-mark { color: #4a8030; }
-.sc-history-item.wrong .sc-history-mark { color: #b0291a; }
+.sc-history-item.correct .sc-history-mark {
+  background-image: url("/%EC%A0%95%EB%8B%B5%20%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8.png");
+}
+
+.sc-history-item.wrong .sc-history-mark {
+  background-image: url("/%EC%98%A4%EB%8B%B5%20%EA%BA%BE%EC%9D%80%EC%84%A0.png");
+}
 
 .sc-history-body {
   flex: 1;

@@ -536,7 +536,14 @@ function DailyQuizModule({ content }) {
                 <span className="choice-label">{choice.choiceId}</span>
                 <span><RichText>{choice.text}</RichText></span>
                 {choiceMarks[choice.choiceId] ? (
-                  <span className="choice-mark">{choiceMarks[choice.choiceId]}</span>
+                  <span
+                    className={`choice-mark ${
+                      choiceMarks[choice.choiceId] === "X" ? "wrong" : "correct"
+                    }`}
+                    aria-label={choiceMarks[choice.choiceId] === "X" ? "오답" : "정답"}
+                  >
+                    {choiceMarks[choice.choiceId]}
+                  </span>
                 ) : null}
               </button>
             ))}
@@ -553,7 +560,14 @@ function DailyQuizModule({ content }) {
                   <div key={prop.propId} className="choice-prop">
                     <span><RichText>{prop.text}</RichText></span>
                     {propMarks[prop.propId] ? (
-                      <span className="choice-prop-mark">{propMarks[prop.propId]}</span>
+                      <span
+                        className={`choice-prop-mark ${
+                          propMarks[prop.propId] === "X" ? "wrong" : "correct"
+                        }`}
+                        aria-label={propMarks[prop.propId] === "X" ? "오답" : "정답"}
+                      >
+                        {propMarks[prop.propId]}
+                      </span>
                     ) : null}
                   </div>
                 ))}

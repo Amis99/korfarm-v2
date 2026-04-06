@@ -1006,14 +1006,26 @@
   flex-shrink: 0;
 }
 
+/* 정답/오답 시각화 (빨간 크레용 동그라미·V체크) */
+.qr-badge.correct,
+.qr-badge.wrong {
+  width: 30px;
+  height: 26px;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 0;
+  font-size: 0;
+  color: transparent;
+}
+
 .qr-badge.correct {
-  background: #e8f5e9;
-  color: #2e7d32;
+  background-image: url("/%EC%A0%95%EB%8B%B5%20%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8.png");
 }
 
 .qr-badge.wrong {
-  background: #ffebee;
-  color: #c62828;
+  background-image: url("/%EC%98%A4%EB%8B%B5%20%EA%BA%BE%EC%9D%80%EC%84%A0.png");
 }
 
 .qr-num {
