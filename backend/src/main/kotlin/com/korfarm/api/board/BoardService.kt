@@ -291,9 +291,14 @@ class BoardService(
     }
 
     private fun getBoard(boardId: String): BoardEntity {
-        return boardRepository.findById(boardId).orElseThrow {
-            ApiException("NOT_FOUND", "board not found", HttpStatus.NOT_FOUND)
-        }
+        // 1) ID 직접 매칭 (예: "board_community")
+        val byId = boardRepository.findById(boardId).orElse(null)
+        if (byId != null) return byId
+        // 2) board_type 으로 fallback (예: "community" → board_type='community')
+        //    프론트엔드가 짧은 슬러그를 보내는 경우를 위해 호환성 처리
+        val byType = boardRepository.findByBoardType(boardId).firstOrNull { it.status == "active" }
+        if (byType != null) return byType
+        throw ApiException("NOT_FOUND", "board not found", HttpStatus.NOT_FOUND)
     }
 
     private fun requireBoardEnabled(board: BoardEntity, userId: String?) {

@@ -116,6 +116,7 @@ const AdminEditHistoryPage = lazy(() => import("./pages/AdminEditHistoryPage"));
 const AdminLearningDBPage = lazy(() => import("./pages/AdminLearningDBPage"));
 const AdminStudyContentPage = lazy(() => import("./pages/AdminStudyContentPage"));
 const AdminStudyContentEditorPage = lazy(() => import("./pages/AdminStudyContentEditorPage"));
+const AdminBoardsPage = lazy(() => import("./pages/AdminBoardsPage"));
 
 /* 로그인 상태에서 공개 페이지 접근 시 /start로 리다이렉트 */
 function PublicOnlyRoute({ children }) {
@@ -267,6 +268,7 @@ function App() {
           <Route path="/admin/content/edit" element={A(<AdminContentEditorPage />)} />
           <Route path="/admin/study-content" element={A(<AdminStudyContentPage />)} />
           <Route path="/admin/study-content/editor/:contentId" element={A(<AdminStudyContentEditorPage />)} />
+          <Route path="/admin/boards" element={A(<AdminBoardsPage />)} />
           <Route path="/admin/assignments" element={A(<AdminAssignmentsPage />)} />
           <Route path="/admin/shop" element={A(<AdminShopPage />)} />
           <Route path="/admin/shop/products" element={<Navigate to="/admin/shop?tab=products" replace />} />
