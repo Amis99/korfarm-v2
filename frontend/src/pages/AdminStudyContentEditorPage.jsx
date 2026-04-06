@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Markdown from "react-markdown";
 import AdminLayout from "../components/AdminLayout";
 import { apiGet, apiPut, apiPost } from "../utils/adminApi";
+import { camelize } from "../utils/api";
 import {
   STUDY_CONTENT_TEMPLATE,
   STUDY_QUESTIONS_TEMPLATE,
@@ -44,7 +45,9 @@ function AdminStudyContentEditorPage() {
     setLoading(true);
     setError("");
     try {
-      const data = await apiGet(`/v1/admin/study/contents/${contentId}`);
+      const raw = await apiGet(`/v1/admin/study/contents/${contentId}`);
+      // adminApi는 응답을 변환하지 않으므로 명시적 camelize
+      const data = camelize(raw);
       setContent(data);
       setTitle(data.title || "");
       setDescription(data.description || "");

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
+import { camelize } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/admin-detail.css";
 
@@ -27,7 +28,8 @@ function AdminStudyContentPage() {
     setError("");
     try {
       const list = await apiGet("/v1/admin/study/contents");
-      setItems(list || []);
+      // adminApi는 응답을 변환하지 않으므로 명시적 camelize
+      setItems(camelize(list || []));
     } catch (e) {
       setError(e.message);
     } finally {

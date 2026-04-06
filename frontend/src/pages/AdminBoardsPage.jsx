@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
 import { apiGet, apiPost, apiPatch, apiDelete } from "../utils/adminApi";
+import { camelize } from "../utils/api";
 import "../styles/admin-detail.css";
 
 const BOARD_TYPE_LABELS = {
@@ -33,7 +34,8 @@ function AdminBoardsPage() {
     setError("");
     try {
       const list = await apiGet("/v1/admin/board-management");
-      setBoards(list || []);
+      // adminApi는 응답을 변환하지 않음 — Spring이 snake_case로 직렬화하므로 camelize 변환 필요
+      setBoards(camelize(list || []));
     } catch (e) {
       setError(e.message);
     } finally {
