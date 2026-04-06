@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import { apiGet, apiPost, apiPatch, apiDelete } from "../utils/adminApi";
 import { camelize } from "../utils/api";
@@ -115,13 +116,21 @@ function AdminBoardsPage() {
       <div className="admin-detail-wrap">
         <div className="admin-detail-header">
           <h1>게시판 관리</h1>
-          <button
-            type="button"
-            className="ldb-btn ldb-btn-primary"
-            onClick={() => setShowCreate(!showCreate)}
-          >
-            {showCreate ? "닫기" : "＋ 신규 게시판"}
-          </button>
+          <div style={{ display: "flex", gap: 8 }}>
+            <Link
+              to="/admin/boards/chat-archives"
+              className="ldb-btn ldb-btn-ghost"
+            >
+              💬 채팅 첨부 보관함
+            </Link>
+            <button
+              type="button"
+              className="ldb-btn ldb-btn-primary"
+              onClick={() => setShowCreate(!showCreate)}
+            >
+              {showCreate ? "닫기" : "＋ 신규 게시판"}
+            </button>
+          </div>
         </div>
 
         {showCreate && (

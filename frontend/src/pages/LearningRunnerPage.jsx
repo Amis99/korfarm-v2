@@ -6,15 +6,47 @@ import { apiGet, apiPost } from "../utils/api";
 
 // (resolvedStartPage / isContentPdf 분기는 V0046에서 제거됨)
 
-/* contentType → moduleKey 매핑 (DB에 moduleKey가 없는 경우 fallback) */
+/* contentType → moduleKey 매핑 (DB에 moduleKey가 없는 경우 fallback)
+ * AdminContentPage의 매핑과 동일하게 유지해야 함.
+ */
 const CONTENT_TYPE_TO_MODULE = {
-  PRO_READING: "reading_training",
+  // 어휘
+  VOCAB_BASIC: "worksheet_quiz",
   PRO_VOCAB: "worksheet_quiz",
-  PRO_BACKGROUND: "background_knowledge",
-  PRO_LOGIC: "logic_reasoning",
-  PRO_ANSWER: "answer_key",
+  // 독해
+  READING_NONFICTION: "reading_training",
+  READING_LITERATURE: "reading_training",
+  DAILY_READING: "reading_training",
+  PRO_READING: "reading_training",
+  // 내용 숙지
+  CONTENT_PDF: "study_content",
+  CONTENT_PDF_QUIZ: "study_content",
+  STUDY_CONTENT: "study_content",
+  // 선택지 판별
+  CHOICE_JUDGEMENT: "choice_judgement",
+  // 문법
+  GRAMMAR_PHONEME_CHANGE: "phoneme_change",
+  GRAMMAR_WORD_FORMATION: "word_formation",
+  GRAMMAR_SENTENCE_STRUCTURE: "sentence_structure",
+  GRAMMAR_POS: "morpheme_analysis",
+  MORPHEME_ANALYSIS: "morpheme_analysis",
+  // 배경지식
   BACKGROUND_KNOWLEDGE: "background_knowledge",
   BACKGROUND_KNOWLEDGE_QUIZ: "background_knowledge",
+  PRO_BACKGROUND: "background_knowledge",
+  // 국어 개념
+  LANGUAGE_CONCEPT: "worksheet_quiz",
+  LANGUAGE_CONCEPT_QUIZ: "worksheet_quiz",
+  // 논리 사고력
+  LOGIC_REASONING: "logic_reasoning",
+  LOGIC_REASONING_QUIZ: "worksheet_quiz",
+  PRO_LOGIC: "logic_reasoning",
+  // 일일 퀴즈
+  DAILY_QUIZ: "daily_quiz",
+  // 글쓰기/테스트/정답
+  WRITING_DESCRIPTIVE: "worksheet_quiz",
+  PRO_TEST: "worksheet_quiz",
+  PRO_ANSWER: "answer_key",
 };
 function resolveModuleKey(contentType) {
   if (!contentType) return null;

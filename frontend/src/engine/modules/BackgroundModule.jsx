@@ -257,6 +257,10 @@ function BackgroundModule({ content }) {
   return (
     <div className="bg-module">
       <p>배경지식 콘텐츠가 없습니다.</p>
+      <p style={{ fontSize: 12, color: "#888", marginTop: 8 }}>
+        디버그: payload에 passages 또는 questions 배열이 필요합니다.
+        (passages={passages.length}, questions={legacyQuestions.length})
+      </p>
     </div>
   );
 }

@@ -8,9 +8,10 @@ export const COMMUNITY_BOARDS = [
   },
   {
     id: "community",
-    name: "커뮤니티 게시판",
-    description: "학습 이야기와 소식 공유",
-    tag: "커뮤니티",
+    name: "커뮤니티 채팅",
+    description: "실시간 채팅으로 학습 이야기와 소식 공유",
+    tag: "채팅",
+    chatMode: true,
   },
   {
     id: "qna",

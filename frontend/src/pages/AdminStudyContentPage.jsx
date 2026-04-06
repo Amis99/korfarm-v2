@@ -1,9 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import { camelize } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
+import {
+  STUDY_CONTENT_TEMPLATE,
+  STUDY_QUESTIONS_TEMPLATE,
+  AI_CHECKLIST_PROMPT,
+  AI_QUESTION_PROMPT,
+  downloadJsonFile,
+  downloadTextFile,
+} from "../constants/studyContentSchemas";
 import "../styles/admin-detail.css";
 
 function AdminStudyContentPage() {
@@ -22,6 +30,10 @@ function AdminStudyContentPage() {
   const [newOwnerOrgId, setNewOwnerOrgId] = useState("");
   const [newMarkdown, setNewMarkdown] = useState("");
   const [creating, setCreating] = useState(false);
+
+  // JSON 업로드(신규 콘텐츠 빠른 생성)
+  const uploadInputRef = useRef(null);
+  const [uploadError, setUploadError] = useState("");
 
   const load = async () => {
     setLoading(true);
@@ -82,6 +94,38 @@ function AdminStudyContentPage() {
     }
   };
 
+  // JSON 파일을 업로드해 신규 콘텐츠 빠른 생성 → 에디터로 이동
+  const handleJsonUpload = async (e) => {
+    setUploadError("");
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      // STUDY_CONTENT_TEMPLATE 스키마 검증 (필수: title, markdown)
+      if (!data.title || !data.markdown) {
+        throw new Error("title과 markdown 필드는 필수입니다.");
+      }
+      const body = {
+        title: String(data.title),
+        description: data.description || "",
+        levelId: data.levelId || "RUSSELL_1",
+        visibility: isHq ? (data.visibility || "PUBLIC") : "ORG",
+        ownerOrgId: null,
+        markdown: String(data.markdown),
+        evalPoints: Array.isArray(data.evalPoints) ? data.evalPoints : [],
+        errorPatterns: Array.isArray(data.errorPatterns) ? data.errorPatterns : [],
+      };
+      const res = await apiPost("/v1/admin/study/contents", body);
+      window.location.href = `/admin/study-content/editor/${res.id}`;
+    } catch (err) {
+      setUploadError(`업로드 실패: ${err.message}`);
+    } finally {
+      // 같은 파일 다시 선택할 수 있게 input 초기화
+      if (uploadInputRef.current) uploadInputRef.current.value = "";
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="admin-detail-wrap">
@@ -94,6 +138,72 @@ function AdminStudyContentPage() {
           >
             {showCreate ? "닫기" : "＋ 신규 콘텐츠"}
           </button>
+        </div>
+
+        {/* 표준 양식 + AI 프롬프트 헬프 박스 */}
+        <div
+          className="admin-card"
+          style={{
+            padding: 16,
+            marginBottom: 20,
+            background: "#fdf6e8",
+            borderLeft: "4px solid #b08850",
+          }}
+        >
+          <div style={{ marginBottom: 10 }}>
+            <strong style={{ fontSize: 15 }}>📚 표준 양식 & AI 프롬프트</strong>
+            <p style={{ fontSize: 13, color: "#5a4030", margin: "6px 0 0" }}>
+              아래 프롬프트와 표준 양식을 다운받아 외부 ChatGPT/Claude에 사용하세요.
+              생성된 JSON을 업로드하면 신규 콘텐츠로 바로 등록됩니다.
+            </p>
+          </div>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <button
+              type="button"
+              className="ldb-btn ldb-btn-ghost"
+              onClick={() => downloadTextFile(AI_CHECKLIST_PROMPT, "checklist_prompt.txt")}
+            >
+              📋 체크리스트 생성 프롬프트
+            </button>
+            <button
+              type="button"
+              className="ldb-btn ldb-btn-ghost"
+              onClick={() => downloadTextFile(AI_QUESTION_PROMPT, "question_prompt.txt")}
+            >
+              📋 문제 생성 프롬프트
+            </button>
+            <button
+              type="button"
+              className="ldb-btn ldb-btn-ghost"
+              onClick={() => downloadJsonFile(STUDY_CONTENT_TEMPLATE, "study_content_template.json")}
+            >
+              📄 콘텐츠 템플릿 JSON
+            </button>
+            <button
+              type="button"
+              className="ldb-btn ldb-btn-ghost"
+              onClick={() => downloadJsonFile(STUDY_QUESTIONS_TEMPLATE, "study_questions_schema.json")}
+            >
+              📄 문제 스키마 JSON
+            </button>
+            <input
+              ref={uploadInputRef}
+              type="file"
+              accept=".json"
+              style={{ display: "none" }}
+              onChange={handleJsonUpload}
+            />
+            <button
+              type="button"
+              className="ldb-btn ldb-btn-primary"
+              onClick={() => uploadInputRef.current?.click()}
+            >
+              📤 콘텐츠 JSON 업로드 (신규 생성)
+            </button>
+          </div>
+          {uploadError && (
+            <p style={{ color: "#a00", marginTop: 8, fontSize: 13 }}>{uploadError}</p>
+          )}
         </div>
 
         {showCreate && (

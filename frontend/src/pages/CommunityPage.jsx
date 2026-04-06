@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet } from "../utils/api";
 import { COMMUNITY_BOARDS } from "../data/communityBoards";
+import CommunityChatPage from "./CommunityChatPage";
 import "../styles/community.css";
 
 const DEFAULT_BOARD_ID = "community";
@@ -96,6 +97,11 @@ function CommunityPage() {
 
   /* 자료실은 관리자만 글쓰기 가능 */
   const canWrite = board.writeRole === "admin" ? isAdmin : true;
+
+  // 채팅 모드 게시판은 채팅 페이지로 분기 (모든 hooks 호출 후)
+  if (board?.chatMode) {
+    return <CommunityChatPage />;
+  }
 
   return (
     <div className="comm">

@@ -22,7 +22,7 @@ class FileService(
         private val ALLOWED_MIME_TYPES = setOf(
             "image/jpeg", "image/png", "image/gif", "image/webp", "image/svg+xml",
             "application/pdf",
-            "audio/mpeg", "audio/wav", "audio/ogg",
+            "audio/mpeg", "audio/wav", "audio/ogg", "audio/webm",
             "video/mp4", "video/webm",
             "text/plain", "text/csv",
             "application/json",

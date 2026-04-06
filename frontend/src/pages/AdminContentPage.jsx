@@ -16,37 +16,59 @@ import "../styles/admin-detail.css";
 const CONTENTS = [];
 const PER_PAGE = 20;
 
-/* contentType → EngineShell moduleKey 변환 */
+/* contentType → EngineShell moduleKey 변환
+ * 사용 가능한 moduleKey: worksheet_quiz, reading_training, choice_judgement,
+ * phoneme_change, word_formation, sentence_structure, study_content, answer_key,
+ * background_knowledge, logic_reasoning, daily_quiz, morpheme_analysis (총 12개)
+ */
 const CONTENT_TYPE_TO_MODULE = {
+  // 어휘
   VOCAB_BASIC: "worksheet_quiz",
+  PRO_VOCAB: "worksheet_quiz",
+  // 독해
   READING_NONFICTION: "reading_training",
   READING_LITERATURE: "reading_training",
-  CONTENT_PDF: "content_pdf",
-  CONTENT_PDF_QUIZ: "content_pdf",
+  DAILY_READING: "reading_training",
+  PRO_READING: "reading_training",
+  // 내용 숙지 (CONTENT_PDF는 레거시 명, 신규는 study_content)
+  CONTENT_PDF: "study_content",
+  CONTENT_PDF_QUIZ: "study_content",
+  STUDY_CONTENT: "study_content",
+  // 선택지 판별
   CHOICE_JUDGEMENT: "choice_judgement",
+  // 문법
   GRAMMAR_PHONEME_CHANGE: "phoneme_change",
   GRAMMAR_WORD_FORMATION: "word_formation",
   GRAMMAR_SENTENCE_STRUCTURE: "sentence_structure",
-  GRAMMAR_POS: "worksheet_quiz",
+  GRAMMAR_POS: "morpheme_analysis",
   MORPHEME_ANALYSIS: "morpheme_analysis",
-  BACKGROUND_KNOWLEDGE: "worksheet_quiz",
-  BACKGROUND_KNOWLEDGE_QUIZ: "worksheet_quiz",
+  // 배경지식 (지문+문제 → BackgroundModule)
+  BACKGROUND_KNOWLEDGE: "background_knowledge",
+  BACKGROUND_KNOWLEDGE_QUIZ: "background_knowledge",
+  PRO_BACKGROUND: "background_knowledge",
+  // 국어 개념
   LANGUAGE_CONCEPT: "worksheet_quiz",
   LANGUAGE_CONCEPT_QUIZ: "worksheet_quiz",
-  LOGIC_REASONING: "worksheet_quiz",
+  // 논리 사고력
+  LOGIC_REASONING: "logic_reasoning",
   LOGIC_REASONING_QUIZ: "worksheet_quiz",
-  WRITING_DESCRIPTIVE: "worksheet_quiz",
-  DAILY_QUIZ: "worksheet_quiz",
-  DAILY_READING: "reading_training",
-  PRO_READING: "reading_training",
-  PRO_BACKGROUND: "worksheet_quiz",
-  PRO_VOCAB: "worksheet_quiz",
   PRO_LOGIC: "logic_reasoning",
-  PRO_ANSWER: "answer_key",
+  // 일일 퀴즈
+  DAILY_QUIZ: "daily_quiz",
+  // 글쓰기/테스트
+  WRITING_DESCRIPTIVE: "worksheet_quiz",
   PRO_TEST: "worksheet_quiz",
+  // 정답·해설
+  PRO_ANSWER: "answer_key",
 };
-const resolveModuleKey = (contentType, fallback) =>
-  fallback || CONTENT_TYPE_TO_MODULE[contentType] || "worksheet_quiz";
+const resolveModuleKey = (contentType, fallback) => {
+  if (fallback) return fallback;
+  const mapped = CONTENT_TYPE_TO_MODULE[contentType];
+  if (!mapped) {
+    console.warn(`[AdminContentPage] 알 수 없는 contentType="${contentType}" → worksheet_quiz fallback`);
+  }
+  return mapped || "worksheet_quiz";
+};
 
 /* static JSON 콘텐츠 목록 — 일일 학습 + 농장 모드 정적 콘텐츠 */
 const STATIC_CONTENTS = [
