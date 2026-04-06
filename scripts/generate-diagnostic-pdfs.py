@@ -206,7 +206,7 @@ def make_diag_preamble(tier, tier_label, total_qs, total_pts):
 
 
 def make_diag_header(tier_label, total_qs):
-    """첫 페이지 헤더 + 응시 안내 박스"""
+    """첫 페이지 헤더 + 응시 안내 (twocolumn[] 컨텍스트 호환 — tcolorbox 미사용)"""
     return rf"""
 % ─── 첫 페이지 헤더 ───
 \begin{{center}}
@@ -220,16 +220,18 @@ def make_diag_header(tier_label, total_qs):
 이름\,\rule{{3.5cm}}{{0.4pt}}
 \vspace{{4mm}}
 {{\color{{korfarmBrown}}\hrule height 0.6pt}}
-\vspace{{4mm}}
+\vspace{{3mm}}
 
-% ─── 응시 안내 박스 ───
-\begin{{tcolorbox}}[notice]
-\textbf{{응시 안내}}\\[2pt]
-$\bullet$\ 객관식 {total_qs}문항\,·\,60분 제한\\
-$\bullet$\ \textbf{{문제를 다 풀면 답안을 바로 제출하세요.}}\\
-$\bullet$\ 찍고 넘어간 문제는 풀이속도 측정 시 1문항당 3분이 가산됩니다.\\
-$\bullet$\ 종이로 푼 답안은 국어농장 사이트의 OMR 입력 화면에 옮겨 적어 제출해 주세요.
-\end{{tcolorbox}}
+% ─── 응시 안내 (단순 박스 — twocolumn 호환) ───
+\noindent\fcolorbox{{noticeBorder}}{{noticeBg}}{{%
+  \parbox{{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}}{{%
+    \textbf{{응시 안내}}\par\vspace{{2pt}}%
+    $\bullet$\ 객관식 {total_qs}문항\,·\,60분 제한\par%
+    $\bullet$\ \textbf{{문제를 다 풀면 답안을 바로 제출하세요.}}\par%
+    $\bullet$\ 찍고 넘어간 문제는 풀이속도 측정 시 1문항당 3분이 가산됩니다.\par%
+    $\bullet$\ 종이로 푼 답안은 국어농장 사이트의 OMR 입력 화면에 옮겨 적어 제출해 주세요.%
+  }}%
+}}
 \vspace{{4mm}}
 """
 
