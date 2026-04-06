@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import { FEEDBACK } from "../shared/feedbackTimings";
 import RichText from "../../utils/RichText";
 import "../../styles/background-module.css";
 
@@ -28,13 +29,14 @@ function BackgroundModule({ content }) {
   const [showingPassage, setShowingPassage] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [lastResult, setLastResult] = useState(null);
+  const [feedbackDuration, setFeedbackDuration] = useState(FEEDBACK.A_CORRECT_ADVANCE_MS);
   const resultTimerRef = useRef(null);
   const advanceTimerRef = useRef(null);
-  const feedbackDelay = 420;
 
   // --- 레거시 모드 (passages 없음 → WorksheetQuizModule 동일 동작) ---
   const [legacyIndex, setLegacyIndex] = useState(0);
   const [legacyResult, setLegacyResult] = useState(null);
+  const [legacyDuration, setLegacyDuration] = useState(FEEDBACK.A_CORRECT_ADVANCE_MS);
   const [legacyStatusMap, setLegacyStatusMap] = useState({});
   const legacyTimerRef = useRef(null);
   const legacyAdvanceRef = useRef(null);
@@ -81,26 +83,26 @@ function BackgroundModule({ content }) {
     recordAnswer({ id: currentQuestion.id, correct: isCorrect });
     setLastResult(isCorrect ? "correct" : "wrong");
 
-    if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
-    resultTimerRef.current = setTimeout(() => setLastResult(null), feedbackDelay);
+    // A 패턴: 정답 즉시 / 오답 3초
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    setFeedbackDuration(delay);
 
     if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
     advanceTimerRef.current = setTimeout(() => {
+      setLastResult(null);
       // 현재 지문 내 다음 문제가 있는지
       if (currentQuestionIndex < passageQuestions.length - 1) {
         setCurrentQuestionIndex((prev) => prev + 1);
-        setLastResult(null);
       } else if (currentPassageIndex < passages.length - 1) {
         // 다음 지문으로
         setCurrentPassageIndex((prev) => prev + 1);
         setShowingPassage(true);
         setCurrentQuestionIndex(0);
-        setLastResult(null);
       } else {
         // 전체 완료
         finish(true);
       }
-    }, feedbackDelay);
+    }, delay);
   };
 
   // === 레거시 모드 핸들러 (WorksheetQuizModule과 동일) ===
@@ -118,18 +120,19 @@ function BackgroundModule({ content }) {
       [q.id]: isCorrect ? "correct" : "wrong",
     }));
 
-    if (legacyTimerRef.current) clearTimeout(legacyTimerRef.current);
-    legacyTimerRef.current = setTimeout(() => setLegacyResult(null), feedbackDelay);
+    // A 패턴: 정답 즉시 / 오답 3초
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    setLegacyDuration(delay);
 
     if (legacyAdvanceRef.current) clearTimeout(legacyAdvanceRef.current);
     legacyAdvanceRef.current = setTimeout(() => {
+      setLegacyResult(null);
       if (legacyIndex >= legacyQuestions.length - 1) {
         finish(true);
       } else {
         setLegacyIndex((prev) => prev + 1);
-        setLegacyResult(null);
       }
-    }, feedbackDelay);
+    }, delay);
   };
 
   // === passages 모드: 지문 읽기 화면 ===
@@ -177,6 +180,8 @@ function BackgroundModule({ content }) {
           onSelect={handlePassageChoice}
           mark={lastResult}
           shuffleKey={currentQuestion.id}
+          correctChoiceId={currentQuestion.answerId}
+          feedbackDuration={feedbackDuration}
         />
       </div>
     );
@@ -241,6 +246,8 @@ function BackgroundModule({ content }) {
             onSelect={handleLegacyChoice}
             mark={legacyResult}
             shuffleKey={q.id}
+            correctChoiceId={q.answerId}
+            feedbackDuration={legacyDuration}
           />
         ) : null}
       </div>

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import { FEEDBACK } from "../shared/feedbackTimings";
 
 /**
  * 단어의 형성 학습 모듈 (기초+심화)
@@ -24,6 +25,8 @@ function WordFormationModule({ content }) {
   const [splitDone, setSplitDone] = useState(false);
   const [lastResult, setLastResult] = useState(null);
   const [wrongMap, setWrongMap] = useState({});
+  // B 패턴: 모달 key 별 사라진 선택지 ID 추적
+  const [disabledMap, setDisabledMap] = useState({});
   // 심화: 결합 순서
   const [mergeStep, setMergeStep] = useState(0);
   const [mergeItems, setMergeItems] = useState(null);
@@ -47,17 +50,26 @@ function WordFormationModule({ content }) {
     if (advanceTimer.current) clearTimeout(advanceTimer.current);
   }, []);
 
-  const showFeedback = (result) => {
+  const showFeedback = (result, duration = FEEDBACK.B_WRONG_RETRY_MS) => {
     setLastResult(result);
     if (resultTimer.current) clearTimeout(resultTimer.current);
-    resultTimer.current = setTimeout(() => setLastResult(null), 600);
+    resultTimer.current = setTimeout(() => setLastResult(null), duration);
   };
 
   const markWrong = () => {
     setWrongMap((prev) => ({ ...prev, [`${wordIdx}-${phase}`]: true }));
   };
 
-  const advanceTo = (nextPhase, nextMorphIdx = 0, delay = 500) => {
+  // B 패턴: 현재 모달의 key를 기반으로 고른 오답 선택지 사라지게 함
+  const recordWrongChoice = (modalKey, choiceId) => {
+    setDisabledMap((prev) => ({
+      ...prev,
+      [modalKey]: [...(prev[modalKey] || []), choiceId],
+    }));
+  };
+
+  // 정답 시 진행. 기본 3초 (B 패턴)
+  const advanceTo = (nextPhase, nextMorphIdx = 0, delay = FEEDBACK.B_CORRECT_FINAL_MS) => {
     advanceTimer.current = setTimeout(() => {
       setPhase(nextPhase);
       setMorphIdx(nextMorphIdx);
@@ -91,23 +103,30 @@ function WordFormationModule({ content }) {
       } else {
         finish(true);
       }
-    }, 500);
+    }, FEEDBACK.B_CORRECT_FINAL_MS);
+  };
+
+  // 모든 핸들러 공통: 오답 처리 (B 패턴)
+  const handleWrong = (choiceId, modalKey) => {
+    markWrong();
+    showFeedback("wrong", FEEDBACK.B_WRONG_RETRY_MS);
+    recordWrongChoice(modalKey, choiceId);
   };
 
   // ─── 1단계: 형태소 개수 ───
   const handleCount = (choiceId) => {
     const isCorrect = Number(choiceId) === word.countAnswer;
+    const modalKey = `${word.id}-count`;
     adjustTime(isCorrect ? 20 : -20);
-    recordAnswer({ id: `${word.id}-count`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
-    if (!isCorrect) { markWrong(); return; }
-    // 단일어(형태소 1개)면 SPLITTING 건너뜀
+    recordAnswer({ id: modalKey, correct: isCorrect });
+    if (!isCorrect) { handleWrong(choiceId, modalKey); return; }
+    showFeedback("correct", FEEDBACK.B_CORRECT_FINAL_MS);
     if (word.countAnswer === 1 || (!word.splitChoices?.length)) {
       advanceTimer.current = setTimeout(() => {
         setSplitDone(true);
         setLastResult(null);
         setTimeout(() => { setPhase("NAMING"); setMorphIdx(0); }, 300);
-      }, 500);
+      }, FEEDBACK.B_CORRECT_FINAL_MS);
     } else {
       advanceTo("SPLITTING");
     }
@@ -116,15 +135,16 @@ function WordFormationModule({ content }) {
   // ─── 2단계: 형태소 구분 ───
   const handleSplit = (choiceId) => {
     const isCorrect = choiceId === word.splitAnswer;
+    const modalKey = `${word.id}-split`;
     adjustTime(isCorrect ? 20 : -20);
-    recordAnswer({ id: `${word.id}-split`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
-    if (!isCorrect) { markWrong(); return; }
+    recordAnswer({ id: modalKey, correct: isCorrect });
+    if (!isCorrect) { handleWrong(choiceId, modalKey); return; }
+    showFeedback("correct", FEEDBACK.B_CORRECT_FINAL_MS);
     advanceTimer.current = setTimeout(() => {
       setSplitDone(true);
       setLastResult(null);
       setTimeout(() => { setPhase("NAMING"); setMorphIdx(0); }, 300);
-    }, 500);
+    }, FEEDBACK.B_CORRECT_FINAL_MS);
   };
 
   // ─── 3단계: 형태소 이름 ───
@@ -132,10 +152,11 @@ function WordFormationModule({ content }) {
     const morph = morphemes[morphIdx];
     const correct = isAdvanced ? morph.nameDetail : morph.name;
     const isCorrect = choiceId === correct;
+    const modalKey = `${word.id}-name-${morphIdx}`;
     adjustTime(isCorrect ? 10 : -10);
-    recordAnswer({ id: `${word.id}-name-${morphIdx}`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
-    if (!isCorrect) { markWrong(); return; }
+    recordAnswer({ id: modalKey, correct: isCorrect });
+    if (!isCorrect) { handleWrong(choiceId, modalKey); return; }
+    showFeedback("correct", FEEDBACK.B_CORRECT_FINAL_MS);
     advanceTo("TYPING", morphIdx);
   };
 
@@ -143,14 +164,14 @@ function WordFormationModule({ content }) {
   const handleType = (choiceId) => {
     const morph = morphemes[morphIdx];
     const isCorrect = choiceId === morph.type;
+    const modalKey = `${word.id}-type-${morphIdx}`;
     adjustTime(isCorrect ? 10 : -10);
-    recordAnswer({ id: `${word.id}-type-${morphIdx}`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
-    if (!isCorrect) { markWrong(); return; }
+    recordAnswer({ id: modalKey, correct: isCorrect });
+    if (!isCorrect) { handleWrong(choiceId, modalKey); return; }
+    showFeedback("correct", FEEDBACK.B_CORRECT_FINAL_MS);
     if (morphIdx < morphemes.length - 1) {
       advanceTo("NAMING", morphIdx + 1);
     } else {
-      // 4단계 완료 → 심화+3형태소 이상이면 MERGE, 아니면 FORMATION
       if (isAdvanced && nonEndingMorphemes.length >= 3 && word.mergeSteps?.length) {
         setMergeItems(nonEndingMorphemes.map((m) => ({ form: m.form, mark: m.mark })));
         setMergeStep(0);
@@ -167,36 +188,32 @@ function WordFormationModule({ content }) {
   const handleMergeSelect = (choiceId) => {
     if (!currentMerge) return;
     const isCorrect = choiceId === currentMerge.answer;
+    const modalKey = `${word.id}-merge-${mergeStep}`;
     adjustTime(isCorrect ? 15 : -15);
-    recordAnswer({ id: `${word.id}-merge-${mergeStep}`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
-    if (!isCorrect) { markWrong(); return; }
-    // merge 결과 반영: mergeItems에서 합쳐진 결과로 교체
+    recordAnswer({ id: modalKey, correct: isCorrect });
+    if (!isCorrect) { handleWrong(choiceId, modalKey); return; }
+    showFeedback("correct", FEEDBACK.B_CORRECT_FINAL_MS);
     setMergeItems((prev) => {
       if (!prev || prev.length < 3) return prev;
       const newItems = [...prev];
-      // 항상 index 0,1,2에서 answer에 따라 합침
       if (currentMerge.answer === "right") {
-        // index 1 + index 2 → merged
         newItems.splice(1, 2, { form: currentMerge.resultForm, mark: "circle" });
       } else {
-        // index 0 + index 1 → merged
         newItems.splice(0, 2, { form: currentMerge.resultForm, mark: "circle" });
       }
       return newItems;
     });
-    // → MERGE_FORMATION (합쳐진 것의 합성어/파생어)
     advanceTo("MERGE_FORMATION");
   };
 
   const handleMergeFormation = (choiceId) => {
     if (!currentMerge) return;
     const isCorrect = choiceId === currentMerge.resultFormation;
+    const modalKey = `${word.id}-merge-form-${mergeStep}`;
     adjustTime(isCorrect ? 10 : -10);
-    recordAnswer({ id: `${word.id}-merge-form-${mergeStep}`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
-    if (!isCorrect) { markWrong(); return; }
-    // 다음 merge 단계 또는 FORMATION
+    recordAnswer({ id: modalKey, correct: isCorrect });
+    if (!isCorrect) { handleWrong(choiceId, modalKey); return; }
+    showFeedback("correct", FEEDBACK.B_CORRECT_FINAL_MS);
     const nextStep = mergeStep + 1;
     if (nextStep < (word.mergeSteps?.length || 0)) {
       setMergeStep(nextStep);
@@ -209,10 +226,11 @@ function WordFormationModule({ content }) {
   // ─── 5단계: 단어 형성 유형 (최종) ───
   const handleFormation = (choiceId) => {
     const isCorrect = choiceId === word.formation;
+    const modalKey = `${word.id}-formation`;
     adjustTime(isCorrect ? 20 : -20);
-    recordAnswer({ id: `${word.id}-formation`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
-    if (!isCorrect) { markWrong(); return; }
+    recordAnswer({ id: modalKey, correct: isCorrect });
+    if (!isCorrect) { handleWrong(choiceId, modalKey); return; }
+    showFeedback("correct", FEEDBACK.B_CORRECT_FINAL_MS);
     if (isAdvanced && word.compoundInfo && word.formation === "합성어") {
       advanceTo("COMPOUND_SYNTACTIC");
     } else {
@@ -223,20 +241,22 @@ function WordFormationModule({ content }) {
   // ─── 심화: 통사적/비통사적 ───
   const handleSyntactic = (choiceId) => {
     const isCorrect = choiceId === word.compoundInfo?.syntactic;
+    const modalKey = `${word.id}-syntactic`;
     adjustTime(isCorrect ? 10 : -10);
-    recordAnswer({ id: `${word.id}-syntactic`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
-    if (!isCorrect) { markWrong(); return; }
+    recordAnswer({ id: modalKey, correct: isCorrect });
+    if (!isCorrect) { handleWrong(choiceId, modalKey); return; }
+    showFeedback("correct", FEEDBACK.B_CORRECT_FINAL_MS);
     advanceTo("COMPOUND_RELATION");
   };
 
   // ─── 심화: 대등/종속/융합 ───
   const handleRelation = (choiceId) => {
     const isCorrect = choiceId === word.compoundInfo?.relation;
+    const modalKey = `${word.id}-relation`;
     adjustTime(isCorrect ? 10 : -10);
-    recordAnswer({ id: `${word.id}-relation`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
-    if (!isCorrect) { markWrong(); return; }
+    recordAnswer({ id: modalKey, correct: isCorrect });
+    if (!isCorrect) { handleWrong(choiceId, modalKey); return; }
+    showFeedback("correct", FEEDBACK.B_CORRECT_FINAL_MS);
     advanceToNextWord();
   };
 
@@ -291,6 +311,7 @@ function WordFormationModule({ content }) {
           choices: (word.countChoices || []).map((n) => ({ id: String(n), text: `${n}개` })),
           onSelect: handleCount,
           key: `${word.id}-count`,
+          correctId: String(word.countAnswer),
         };
       case "SPLITTING":
         return {
@@ -299,6 +320,7 @@ function WordFormationModule({ content }) {
           choices: word.splitChoices || [],
           onSelect: handleSplit,
           key: `${word.id}-split`,
+          correctId: word.splitAnswer,
         };
       case "NAMING":
         return {
@@ -307,6 +329,7 @@ function WordFormationModule({ content }) {
           choices: nameChoices,
           onSelect: handleName,
           key: `${word.id}-name-${morphIdx}`,
+          correctId: isAdvanced ? morphemes[morphIdx]?.nameDetail : morphemes[morphIdx]?.name,
         };
       case "TYPING":
         return {
@@ -315,6 +338,7 @@ function WordFormationModule({ content }) {
           choices: TYPE_CHOICES,
           onSelect: handleType,
           key: `${word.id}-type-${morphIdx}`,
+          correctId: morphemes[morphIdx]?.type,
         };
       case "MERGE_SELECT": {
         if (!mergeItems || mergeItems.length < 3 || !currentMerge) return null;
@@ -330,6 +354,7 @@ function WordFormationModule({ content }) {
           ],
           onSelect: handleMergeSelect,
           key: `${word.id}-merge-${mergeStep}`,
+          correctId: currentMerge.answer,
         };
       }
       case "MERGE_FORMATION":
@@ -342,6 +367,7 @@ function WordFormationModule({ content }) {
           ],
           onSelect: handleMergeFormation,
           key: `${word.id}-merge-form-${mergeStep}`,
+          correctId: currentMerge?.resultFormation,
         };
       case "FORMATION":
         return {
@@ -350,6 +376,7 @@ function WordFormationModule({ content }) {
           choices: FORMATION_CHOICES,
           onSelect: handleFormation,
           key: `${word.id}-formation`,
+          correctId: word.formation,
         };
       case "COMPOUND_SYNTACTIC":
         return {
@@ -361,6 +388,7 @@ function WordFormationModule({ content }) {
           ],
           onSelect: handleSyntactic,
           key: `${word.id}-syntactic`,
+          correctId: word.compoundInfo?.syntactic,
         };
       case "COMPOUND_RELATION":
         return {
@@ -373,6 +401,7 @@ function WordFormationModule({ content }) {
           ],
           onSelect: handleRelation,
           key: `${word.id}-relation`,
+          correctId: word.compoundInfo?.relation,
         };
       default:
         return null;
@@ -499,6 +528,11 @@ function WordFormationModule({ content }) {
               onSelect={modal.onSelect}
               mark={lastResult}
               shuffleKey={modal.key}
+              correctChoiceId={modal.correctId}
+              disabledChoiceIds={disabledMap[modal.key] || null}
+              feedbackDuration={
+                lastResult === "correct" ? FEEDBACK.B_CORRECT_FINAL_MS : FEEDBACK.B_WRONG_RETRY_MS
+              }
             />
           )}
         </>

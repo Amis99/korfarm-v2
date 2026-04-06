@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import { FEEDBACK } from "../shared/feedbackTimings";
 
 const ROLE_SHORT = { "주어":"주","서술어":"서","목적어":"목","보어":"보","부사어":"부","관형어":"관","독립어":"독" };
 
@@ -37,6 +38,7 @@ function SentenceStructureModule({ content }) {
   const [mergedRows, setMergedRows] = useState([]);
   const [slashes, setSlashes] = useState([]);
   const [lastResult, setLastResult] = useState(null);
+  const [feedbackDuration, setFeedbackDuration] = useState(FEEDBACK.A_CORRECT_ADVANCE_MS);
   const [wrongBoxId, setWrongBoxId] = useState(null);
   const [hintMsg, setHintMsg] = useState("");
   const [completedSentences, setCompletedSentences] = useState([]);
@@ -73,10 +75,11 @@ function SentenceStructureModule({ content }) {
     [resultTimer, advanceTimer, hintTimer].forEach(r => { if (r.current) clearTimeout(r.current); });
   }, []);
 
-  const showFeedback = (result) => {
+  const showFeedback = (result, duration = FEEDBACK.A_CORRECT_ADVANCE_MS) => {
     setLastResult(result);
+    setFeedbackDuration(duration);
     if (resultTimer.current) clearTimeout(resultTimer.current);
-    resultTimer.current = setTimeout(() => setLastResult(null), 1000);
+    resultTimer.current = setTimeout(() => setLastResult(null), duration);
   };
 
   const showHint = (msg) => {
@@ -163,7 +166,8 @@ function SentenceStructureModule({ content }) {
     const isCorrect = choiceId === correct;
     adjustTime(isCorrect ? 20 : -20);
     recordAnswer({ id: `${sent.id}-role-${box.id}`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    showFeedback(isCorrect ? "correct" : "wrong", delay);
 
     // 레이블 기록 (정답이든 오답이든 정답을 기록)
     setRoleLabels(prev => ({ ...prev, [box.id]: correct }));
@@ -186,7 +190,7 @@ function SentenceStructureModule({ content }) {
           finishSentence();
         }
       }
-    }, isCorrect ? 500 : 1200);
+    }, delay);
   };
 
   // ─── Phase 2: 절 선택 (클릭 + 드래그) ───
@@ -276,7 +280,8 @@ function SentenceStructureModule({ content }) {
     const isCorrect = choiceId === correctAnswer;
     adjustTime(isCorrect ? 20 : -20);
     recordAnswer({ id: `${sent.id}-ctype-${clauseStep}`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    showFeedback(isCorrect ? "correct" : "wrong", delay);
 
     if (isLinked) {
       const lastBox = currentClause.range[currentClause.range.length - 1];
@@ -285,7 +290,7 @@ function SentenceStructureModule({ content }) {
       const label = `${ROLE_SHORT[currentClause.parentRole] || currentClause.parentRole}${currentClause.parentLayer}`;
       setMergedRows(prev => [...prev, { range: currentClause.range, label, clauseType: "" }]);
     }
-    setTimeout(() => { setPhase("CLAUSE_SUBTYPE"); setLastResult(null); }, isCorrect ? 500 : 1200);
+    setTimeout(() => { setPhase("CLAUSE_SUBTYPE"); setLastResult(null); }, delay);
   };
 
   // ─── Phase 4: 절 유형 ───
@@ -294,7 +299,8 @@ function SentenceStructureModule({ content }) {
     const isCorrect = choiceId === currentClause.clauseType;
     adjustTime(isCorrect ? 10 : -10);
     recordAnswer({ id: `${sent.id}-csub-${clauseStep}`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    showFeedback(isCorrect ? "correct" : "wrong", delay);
 
     setMergedRows(prev => {
       const copy = [...prev];
@@ -313,7 +319,7 @@ function SentenceStructureModule({ content }) {
         finishSentence();
       }
       setLastResult(null);
-    }, isCorrect ? 500 : 1200);
+    }, delay);
   };
 
   const finishSentence = () => {
@@ -341,17 +347,23 @@ function SentenceStructureModule({ content }) {
     if (!sent) return null;
     if (phase === "ROLE_MODAL" && activeBoxId) {
       const box = boxes.find(b => b.id === activeBoxId);
+      const correctRole = box ? `${ROLE_SHORT[box.role] || box.role}${box.layer}` : null;
       return {
         title: "문장성분", prompt: `'${box?.text}'의 문장성분은?`,
         choices: roleModalChoices, onSelect: handleRoleAnswer,
         key: `${sent.id}-role-${activeBoxId}`,
+        correctId: correctRole,
       };
     }
     if (phase === "CLAUSE_TYPE") {
+      const isLinked = currentClause?.clauseType === "대등" || currentClause?.clauseType === "종속";
+      const correctAnswer = isLinked ? "이어진 문장"
+        : currentClause ? `${ROLE_SHORT[currentClause.parentRole] || currentClause.parentRole}${currentClause.parentLayer}` : null;
       return {
         title: "절 분류", prompt: "선택한 범위는 어떤 역할인가요?",
         choices: clauseTypeChoices, onSelect: handleClauseType,
         key: `${sent.id}-ctype-${clauseStep}`,
+        correctId: correctAnswer,
       };
     }
     if (phase === "CLAUSE_SUBTYPE") {
@@ -361,6 +373,7 @@ function SentenceStructureModule({ content }) {
         prompt: isLinked ? "어떤 이어진 문장인가요?" : "어떤 안긴 문장인가요?",
         choices: isLinked ? LINKED_TYPE_CHOICES : EMBEDDED_TYPE_CHOICES,
         onSelect: handleClauseSubtype, key: `${sent.id}-csub-${clauseStep}`,
+        correctId: currentClause?.clauseType,
       };
     }
     return null;
@@ -487,6 +500,8 @@ function SentenceStructureModule({ content }) {
               title={modal.title} prompt={modal.prompt}
               choices={modal.choices} onSelect={modal.onSelect}
               mark={lastResult} shuffleKey={modal.key}
+              correctChoiceId={modal.correctId}
+              feedbackDuration={feedbackDuration}
             />
           )}
         </>

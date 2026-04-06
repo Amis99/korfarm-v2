@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import { FEEDBACK } from "../shared/feedbackTimings";
 import TokenPassage from "../shared/TokenPassage";
 import RichText from "../../utils/RichText";
 
@@ -102,6 +103,7 @@ function DailyQuizModule({ content }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [statusMap, setStatusMap] = useState({});
   const [lastResult, setLastResult] = useState(null);
+  const [feedbackDuration, setFeedbackDuration] = useState(FEEDBACK.A_CORRECT_ADVANCE_MS);
 
   // FILL_BLANKS 상태
   const [blankIndex, setBlankIndex] = useState(0);
@@ -123,7 +125,6 @@ function DailyQuizModule({ content }) {
   const advanceTimerRef = useRef(null);
   const resultTimerRef = useRef(null);
   const confirmLockRef = useRef(false);
-  const feedbackDelay = 420;
 
   const currentQuestion = questions[currentIndex];
   const questionType = currentQuestion?.type;
@@ -193,17 +194,17 @@ function DailyQuizModule({ content }) {
     resetQuestionState();
   };
 
-  const queueResultReset = () => {
-    if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
-    resultTimerRef.current = setTimeout(() => setLastResult(null), feedbackDelay);
-  };
-
-  const queueNext = (nextAction) => {
+  // 다음 진행 예약 (lastResult 자동 초기화 포함)
+  const scheduleAdvance = (delay, nextAction) => {
     if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
-    advanceTimerRef.current = setTimeout(nextAction, feedbackDelay);
+    if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
+    advanceTimerRef.current = setTimeout(() => {
+      setLastResult(null);
+      nextAction();
+    }, delay);
   };
 
-  // ── MULTI_CHOICE 핸들러 ──
+  // ── MULTI_CHOICE 핸들러 (A 패턴) ──
   const handleMultiChoice = (selectedId) => {
     if (!currentQuestion) return;
     const scoring = getScoring(currentQuestion);
@@ -211,12 +212,13 @@ function DailyQuizModule({ content }) {
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
     recordAnswer({ id: currentQuestion.id, correct: isCorrect, questionKind: currentQuestion.questionKind });
     setLastResult(isCorrect ? "correct" : "wrong");
-    queueResultReset();
     setStatusMap((prev) => ({ ...prev, [currentQuestion.id]: isCorrect ? "correct" : "wrong" }));
-    queueNext(handleNext);
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    setFeedbackDuration(delay);
+    scheduleAdvance(delay, handleNext);
   };
 
-  // ── FILL_BLANKS 핸들러 ──
+  // ── FILL_BLANKS 핸들러 (A 패턴) ──
   const handleBlankChoice = (selectedId) => {
     if (!currentQuestion) return;
     const blank = blanks[blankIndex];
@@ -228,14 +230,15 @@ function DailyQuizModule({ content }) {
     setBlankAnswers((prev) => ({ ...prev, [blank.id]: correctChoice?.text || "" }));
     setBlankResultMap((prev) => ({ ...prev, [blank.id]: isCorrect }));
     setLastResult(isCorrect ? "correct" : "wrong");
-    queueResultReset();
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    setFeedbackDuration(delay);
     if (blankIndex >= blanks.length - 1) {
       const resultMap = { ...blankResultMap, [blank.id]: isCorrect };
       const allCorrect = blanks.every((item) => resultMap[item.id]);
       setStatusMap((prev) => ({ ...prev, [currentQuestion.id]: allCorrect ? "correct" : "wrong" }));
-      queueNext(handleNext);
+      scheduleAdvance(delay, handleNext);
     } else {
-      queueNext(() => setBlankIndex((prev) => prev + 1));
+      scheduleAdvance(delay, () => setBlankIndex((prev) => prev + 1));
     }
   };
 
@@ -273,12 +276,12 @@ function DailyQuizModule({ content }) {
         setTextSelectResult("correct");
         setRevealRanges(textSelectAnswerRanges);
         if (nextKeys.length >= textSelectAnswerRanges.length) {
-          // 모든 범위 찾음
+          // 모든 범위 찾음 (정답 → 즉시 다음)
           setStatusMap((prev) => ({ ...prev, [currentQuestion.id]: "correct" }));
           advanceTimerRef.current = setTimeout(() => {
             confirmLockRef.current = false;
             handleNext();
-          }, 1000);
+          }, FEEDBACK.A_CORRECT_ADVANCE_MS);
         } else {
           // 아직 남음 — 잠금 풀고 계속
           confirmLockRef.current = false;
@@ -289,22 +292,23 @@ function DailyQuizModule({ content }) {
         }
         return;
       }
-      // ANY 모드 또는 단일 정답
+      // ANY 모드 또는 단일 정답 (정답 → 즉시 다음)
       setTextSelectResult("correct");
       setRevealRanges(textSelectAnswerRanges);
       setStatusMap((prev) => ({ ...prev, [currentQuestion.id]: "correct" }));
       advanceTimerRef.current = setTimeout(() => {
         confirmLockRef.current = false;
         handleNext();
-      }, 1000);
+      }, FEEDBACK.A_CORRECT_ADVANCE_MS);
     } else {
+      // 오답 → 정답 위치 표시 후 3초 후 다음
       setTextSelectResult("wrong");
       setRevealRanges(textSelectAnswerRanges);
       setStatusMap((prev) => ({ ...prev, [currentQuestion.id]: "wrong" }));
       advanceTimerRef.current = setTimeout(() => {
         confirmLockRef.current = false;
         handleNext();
-      }, 1200);
+      }, FEEDBACK.A_WRONG_ADVANCE_MS);
     }
   };
 
@@ -348,11 +352,11 @@ function DailyQuizModule({ content }) {
     // 모든 선택지 처리 완료?
     if (nextCompleted.size >= oxChoices.length) {
       setStatusMap((prev) => ({ ...prev, [currentQuestion.id]: "correct" }));
-      queueNext(handleNext);
+      scheduleAdvance(FEEDBACK.B_CORRECT_FINAL_MS, handleNext);
     } else if (isCorrectChoice) {
       // 정답 선택지를 찾았으면 완료
       setStatusMap((prev) => ({ ...prev, [currentQuestion.id]: "correct" }));
-      queueNext(handleNext);
+      scheduleAdvance(FEEDBACK.B_CORRECT_FINAL_MS, handleNext);
     } else {
       // 아직 정답 선택지 미발견 — 다음 선택지로
       setChoiceId(null);
@@ -414,6 +418,8 @@ function DailyQuizModule({ content }) {
         onSelect={handleMultiChoice}
         mark={lastResult}
         shuffleKey={currentQuestion.id}
+        correctChoiceId={currentQuestion.answerId}
+        feedbackDuration={feedbackDuration}
       />
     </div>
   );
@@ -432,6 +438,8 @@ function DailyQuizModule({ content }) {
         onSelect={handleBlankChoice}
         mark={lastResult}
         shuffleKey={`${currentQuestion.id}-${blankIndex}`}
+        correctChoiceId={blanks[blankIndex]?.answerId}
+        feedbackDuration={feedbackDuration}
       />
     </div>
   );

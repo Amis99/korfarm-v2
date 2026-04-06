@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import { useEngine } from "../core/EngineContext";
 import { apiPost } from "../../utils/api";
+import { FEEDBACK } from "../shared/feedbackTimings";
 import "../../styles/study-content-module.css";
 
 // 정답 +20초, 오답 -40초
@@ -98,7 +99,8 @@ function StudyContentModule({ content }) {
           shuffled: shuffledChoices,
         },
       ]);
-      // 0.9초 후 다음 문제
+      // A 패턴 통일: 정답 즉시 / 오답 3초 후 다음 문제
+      const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
       setTimeout(() => {
         setAnswerLocked(false);
         if (currentIdx >= questions.length - 1) {
@@ -106,7 +108,7 @@ function StudyContentModule({ content }) {
         } else {
           setCurrentIdx((i) => i + 1);
         }
-      }, 900);
+      }, delay);
     } catch (e) {
       setErrorMsg(e.message || "답안 제출 실패");
       setAnswerLocked(false);

@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import { FEEDBACK } from "../shared/feedbackTimings";
 import RichText from "../../utils/RichText";
 import useHighlightAnchor from "../shared/useHighlightAnchor";
 
@@ -404,18 +405,23 @@ function ReadingTrainingModule({ content }) {
       clearTimeout(modalMarkRef.current);
     }
     setModalMark(isCorrect ? "correct" : "wrong");
-    modalMarkRef.current = setTimeout(() => {
-      setModalMark(null);
-    }, 1000);
+
     if (!isCorrect) {
-      if (scoring.eliminateWrongChoice) {
-        setRemovedChoices((prev) => ({
-          ...prev,
-          [step.stepId]: [...(prev[step.stepId] || []), choiceId],
-        }));
-      }
+      // B 패턴: 고른 선택지를 사라지게 하고 재시도 (B_WRONG_RETRY_MS 후 mark 해제)
+      setRemovedChoices((prev) => ({
+        ...prev,
+        [step.stepId]: [...(prev[step.stepId] || []), choiceId],
+      }));
+      modalMarkRef.current = setTimeout(() => {
+        setModalMark(null);
+      }, FEEDBACK.B_WRONG_RETRY_MS);
       return;
     }
+
+    // B 패턴: 정답 → 3초 후 다음
+    modalMarkRef.current = setTimeout(() => {
+      setModalMark(null);
+    }, FEEDBACK.B_CORRECT_FINAL_MS);
     if (intensiveAdvanceRef.current) {
       clearTimeout(intensiveAdvanceRef.current);
     }
@@ -426,7 +432,7 @@ function ReadingTrainingModule({ content }) {
         return;
       }
       advanceStage("INTENSIVE");
-    }, 1000);
+    }, FEEDBACK.B_CORRECT_FINAL_MS);
   };
 
   const handleDragStart = (id, from, slotIndex = null) => (event) => {
@@ -717,6 +723,8 @@ function ReadingTrainingModule({ content }) {
               anchorRect={anchorRect}
               mark={modalMark}
               shuffleKey={step.stepId || stepIndex}
+              correctChoiceId={stepQuestion.answerId}
+              feedbackDuration={modalMark === "correct" ? FEEDBACK.B_CORRECT_FINAL_MS : FEEDBACK.B_WRONG_RETRY_MS}
             />
           ) : null}
         </>

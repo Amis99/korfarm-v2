@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import { FEEDBACK } from "../shared/feedbackTimings";
 import RichText from "../../utils/RichText";
 
 // 타이머 규칙 (전체 통일: 정답 +20초, 오답 -40초)
@@ -109,6 +110,10 @@ function WorksheetQuizModule({ content }) {
   const [blankAnswers, setBlankAnswers] = useState({});
   const [blankResultMap, setBlankResultMap] = useState({});
   const [lastResult, setLastResult] = useState(null);
+  // 피드백 표시 시간 (정답=짧게, 오답=3초)
+  const [feedbackDuration, setFeedbackDuration] = useState(FEEDBACK.A_CORRECT_ADVANCE_MS);
+  // B 패턴(requireCorrect)에서 사라질 선택지 ID 추적 — 문제 ID 별로 관리
+  const [disabledMap, setDisabledMap] = useState({});
   const [statusMap, setStatusMap] = useState({});
   const [itemHeights, setItemHeights] = useState([]);
   const [anchorRect, setAnchorRect] = useState(null);
@@ -116,7 +121,6 @@ function WorksheetQuizModule({ content }) {
   const itemRefs = useRef({});
   const advanceTimerRef = useRef(null);
   const resultTimerRef = useRef(null);
-  const feedbackDelay = 420;
 
   const columnHeight = 1123 - 48;
   const itemGap = 14;
@@ -284,22 +288,22 @@ function WorksheetQuizModule({ content }) {
     setLastResult(null);
   };
 
-  const queueResultReset = () => {
-    if (resultTimerRef.current) {
-      clearTimeout(resultTimerRef.current);
-    }
-    resultTimerRef.current = setTimeout(() => {
+  // 다음 진행 예약. delay 만큼 기다린 후 nextAction 실행 + lastResult 초기화
+  const scheduleAdvance = (delay, nextAction) => {
+    if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
+    if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
+    advanceTimerRef.current = setTimeout(() => {
       setLastResult(null);
-    }, feedbackDelay);
+      nextAction();
+    }, delay);
   };
 
-  const queueNext = (nextAction) => {
-    if (advanceTimerRef.current) {
-      clearTimeout(advanceTimerRef.current);
-    }
-    advanceTimerRef.current = setTimeout(() => {
-      nextAction();
-    }, feedbackDelay);
+  // B 패턴(재시도)에서 짧은 피드백만 보여주고 lastResult 해제
+  const scheduleRetryReset = () => {
+    if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
+    resultTimerRef.current = setTimeout(() => {
+      setLastResult(null);
+    }, FEEDBACK.B_WRONG_RETRY_MS);
   };
 
   const handleChoice = (choiceId) => {
@@ -309,16 +313,41 @@ function WorksheetQuizModule({ content }) {
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
     recordAnswer({ id: normalizedQuestion.id, correct: isCorrect, questionKind: normalizedQuestion.questionKind });
     setLastResult(isCorrect ? "correct" : "wrong");
-    queueResultReset();
     setStatusMap((prev) => ({
       ...prev,
       [normalizedQuestion.id]: isCorrect ? "correct" : "wrong",
     }));
     const requireCorrect = normalizedQuestion.requireCorrect ?? DEFAULT_REQUIRE_CORRECT[contentType] ?? false;
-    if (!isCorrect && requireCorrect) {
+
+    if (requireCorrect) {
+      // B 패턴
+      if (!isCorrect) {
+        // 오답 → 고른 선택지를 disabled로 추가, 같은 문제 재시도
+        setFeedbackDuration(FEEDBACK.B_WRONG_RETRY_MS);
+        setDisabledMap((prev) => ({
+          ...prev,
+          [normalizedQuestion.id]: [...(prev[normalizedQuestion.id] || []), choiceId],
+        }));
+        scheduleRetryReset();
+        return;
+      }
+      // 정답 → 3초 후 다음
+      setFeedbackDuration(FEEDBACK.B_CORRECT_FINAL_MS);
+      scheduleAdvance(FEEDBACK.B_CORRECT_FINAL_MS, () => {
+        setDisabledMap((prev) => {
+          const next = { ...prev };
+          delete next[normalizedQuestion.id];
+          return next;
+        });
+        handleNext();
+      });
       return;
     }
-    queueNext(handleNext);
+
+    // A 패턴: 정답 즉시 / 오답 3초
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    setFeedbackDuration(delay);
+    scheduleAdvance(delay, handleNext);
   };
 
   const handleBlankChoice = (choiceId) => {
@@ -336,7 +365,11 @@ function WorksheetQuizModule({ content }) {
       [blank.id]: isCorrect,
     }));
     setLastResult(isCorrect ? "correct" : "wrong");
-    queueResultReset();
+
+    // FILL_BLANKS는 A 패턴: 정답이든 오답이든 다음 빈칸/문제로 진행
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    setFeedbackDuration(delay);
+
     if (blankIndex >= blanks.length - 1) {
       const resultMap = {
         ...blankResultMap,
@@ -347,9 +380,9 @@ function WorksheetQuizModule({ content }) {
         ...prev,
         [normalizedQuestion.id]: allCorrect ? "correct" : "wrong",
       }));
-      queueNext(handleNext);
+      scheduleAdvance(delay, handleNext);
     } else {
-      queueNext(() => setBlankIndex((prev) => prev + 1));
+      scheduleAdvance(delay, () => setBlankIndex((prev) => prev + 1));
     }
   };
 
@@ -584,6 +617,9 @@ function WorksheetQuizModule({ content }) {
               anchorRect={anchorRect}
               mark={lastResult}
               shuffleKey={normalizedQuestion.id}
+              correctChoiceId={normalizedQuestion.answerId}
+              disabledChoiceIds={disabledMap[normalizedQuestion.id] || null}
+              feedbackDuration={feedbackDuration}
             />
           ) : null}
 
@@ -596,6 +632,8 @@ function WorksheetQuizModule({ content }) {
               anchorRect={anchorRect}
               mark={lastResult}
               shuffleKey={`${normalizedQuestion?.id || "blank"}-${blankIndex}`}
+              correctChoiceId={blanks[blankIndex]?.answerId}
+              feedbackDuration={feedbackDuration}
             />
           ) : null}
         </>

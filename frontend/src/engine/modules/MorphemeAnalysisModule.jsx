@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import { FEEDBACK } from "../shared/feedbackTimings";
 
 /**
  * 형태소 분석 학습 모듈
@@ -17,6 +18,7 @@ function MorphemeAnalysisModule({ content }) {
   const [phase, setPhase] = useState("COUNTING"); // COUNTING | SPLITTING | NAMING | TYPING
   const [morphIdx, setMorphIdx] = useState(0);
   const [lastResult, setLastResult] = useState(null);
+  const [feedbackDuration, setFeedbackDuration] = useState(FEEDBACK.A_CORRECT_ADVANCE_MS);
   const [statusMap, setStatusMap] = useState({}); // sentIdx → "correct"|"wrong"
   const [splitDone, setSplitDone] = useState(false); // 2단계 정답 후 분해 표시
   const resultTimer = useRef(null);
@@ -34,10 +36,11 @@ function MorphemeAnalysisModule({ content }) {
     if (advanceTimer.current) clearTimeout(advanceTimer.current);
   }, []);
 
-  const showFeedback = (result) => {
+  const showFeedback = (result, duration) => {
     setLastResult(result);
+    setFeedbackDuration(duration);
     if (resultTimer.current) clearTimeout(resultTimer.current);
-    resultTimer.current = setTimeout(() => setLastResult(null), 600);
+    resultTimer.current = setTimeout(() => setLastResult(null), duration);
   };
 
   const markSentence = (result) => {
@@ -48,15 +51,16 @@ function MorphemeAnalysisModule({ content }) {
     });
   };
 
-  const advanceTo = (nextPhase, nextMorphIdx = 0) => {
+  // A 패턴: 정답 즉시 / 오답 3초
+  const advanceTo = (nextPhase, nextMorphIdx = 0, delay = FEEDBACK.A_CORRECT_ADVANCE_MS) => {
     advanceTimer.current = setTimeout(() => {
       setPhase(nextPhase);
       setMorphIdx(nextMorphIdx);
       setLastResult(null);
-    }, 500);
+    }, delay);
   };
 
-  const advanceToNextSentence = () => {
+  const advanceToNextSentence = (delay = FEEDBACK.A_CORRECT_ADVANCE_MS) => {
     advanceTimer.current = setTimeout(() => {
       if (sentIdx < sentences.length - 1) {
         setSentIdx((p) => p + 1);
@@ -67,7 +71,7 @@ function MorphemeAnalysisModule({ content }) {
       } else {
         finish(true);
       }
-    }, 500);
+    }, delay);
   };
 
   // ─── 1단계: 형태소 개수 ───
@@ -76,11 +80,11 @@ function MorphemeAnalysisModule({ content }) {
     const isCorrect = Number(choiceId) === sent.countAnswer;
     adjustTime(isCorrect ? 20 : -20);
     recordAnswer({ id: `${sent.id}-count`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
     if (!isCorrect) markSentence("wrong");
     else markSentence("correct");
-    // 정답이든 오답이든 다음 단계로
-    advanceTo("SPLITTING");
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    showFeedback(isCorrect ? "correct" : "wrong", delay);
+    advanceTo("SPLITTING", 0, delay);
   };
 
   // ─── 2단계: 형태소 구분 ───
@@ -89,9 +93,9 @@ function MorphemeAnalysisModule({ content }) {
     const isCorrect = choiceId === sent.splitAnswer;
     adjustTime(isCorrect ? 20 : -20);
     recordAnswer({ id: `${sent.id}-split`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
     if (!isCorrect) markSentence("wrong");
-    // 정답이든 오답이든 → 분해 표시 후 3단계
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    showFeedback(isCorrect ? "correct" : "wrong", delay);
     advanceTimer.current = setTimeout(() => {
       setSplitDone(true);
       setLastResult(null);
@@ -99,7 +103,7 @@ function MorphemeAnalysisModule({ content }) {
         setPhase("NAMING");
         setMorphIdx(0);
       }, 400);
-    }, 500);
+    }, delay);
   };
 
   // ─── 3단계: 형태소 이름 ───
@@ -110,10 +114,10 @@ function MorphemeAnalysisModule({ content }) {
     const isCorrect = choiceId === correctName;
     adjustTime(isCorrect ? 10 : -10);
     recordAnswer({ id: `${sent.id}-name-${morphIdx}`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
     if (!isCorrect) markSentence("wrong");
-    // 4단계로
-    advanceTo("TYPING", morphIdx);
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    showFeedback(isCorrect ? "correct" : "wrong", delay);
+    advanceTo("TYPING", morphIdx, delay);
   };
 
   // ─── 4단계: 형태소 종류 ───
@@ -123,13 +127,13 @@ function MorphemeAnalysisModule({ content }) {
     const isCorrect = choiceId === morph.type;
     adjustTime(isCorrect ? 10 : -10);
     recordAnswer({ id: `${sent.id}-type-${morphIdx}`, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
     if (!isCorrect) markSentence("wrong");
-    // 다음 형태소 → 3단계, 또는 문장 완료
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
+    showFeedback(isCorrect ? "correct" : "wrong", delay);
     if (morphIdx < morphemes.length - 1) {
-      advanceTo("NAMING", morphIdx + 1);
+      advanceTo("NAMING", morphIdx + 1, delay);
     } else {
-      advanceToNextSentence();
+      advanceToNextSentence(delay);
     }
   };
 
@@ -215,6 +219,7 @@ function MorphemeAnalysisModule({ content }) {
           choices: makeCountChoices(),
           onSelect: handleCount,
           shuffleKey: `${sent.id}-count`,
+          correctId: String(sent.countAnswer),
         };
       case "SPLITTING":
         return {
@@ -223,6 +228,7 @@ function MorphemeAnalysisModule({ content }) {
           choices: makeSplitChoices(),
           onSelect: handleSplit,
           shuffleKey: `${sent.id}-split`,
+          correctId: sent.splitAnswer,
         };
       case "NAMING":
         return {
@@ -231,6 +237,7 @@ function MorphemeAnalysisModule({ content }) {
           choices: nameChoices,
           onSelect: handleName,
           shuffleKey: `${sent.id}-name-${morphIdx}`,
+          correctId: isAdvanced ? morphemes[morphIdx]?.nameDetail : morphemes[morphIdx]?.name,
         };
       case "TYPING":
         return {
@@ -239,6 +246,7 @@ function MorphemeAnalysisModule({ content }) {
           choices: TYPE_CHOICES,
           onSelect: handleType,
           shuffleKey: `${sent.id}-type-${morphIdx}`,
+          correctId: morphemes[morphIdx]?.type,
         };
       default:
         return null;
@@ -295,6 +303,8 @@ function MorphemeAnalysisModule({ content }) {
               onSelect={modal.onSelect}
               mark={lastResult}
               shuffleKey={modal.shuffleKey}
+              correctChoiceId={modal.correctId}
+              feedbackDuration={feedbackDuration}
             />
           )}
         </>

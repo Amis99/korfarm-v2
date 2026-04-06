@@ -26,6 +26,13 @@ function QuestionModal({
   mark,
   anchorRect,
   shuffleKey,
+  /** 정답 선택지 ID — mark="wrong"일 때 정답 선택지를 강조 표시 */
+  correctChoiceId = null,
+  /** 비활성 선택지 ID 배열 — 화면에서 사라짐 (B 패턴 재시도용) */
+  disabledChoiceIds = null,
+  /** 피드백 표시 시간 (ms). 정답/오답에 따라 외부에서 다르게 전달.
+   *  기본 1000ms. A 패턴 오답·B 패턴 정답은 3000ms 권장. */
+  feedbackDuration = 1000,
 }) {
   const engine = useEngine();
   const status = engine?.status;
@@ -179,19 +186,26 @@ function QuestionModal({
     markTimerRef.current = setTimeout(() => {
       setVisibleMark(null);
       markTimerRef.current = null;
-    }, 1000);
+    }, feedbackDuration);
     return () => {
       if (markTimerRef.current) {
         clearTimeout(markTimerRef.current);
         markTimerRef.current = null;
       }
     };
-  }, [mark]);
+  }, [mark, feedbackDuration]);
 
   useEffect(() => {
     if (!mark || !pendingChoiceId) return;
-    setFlashChoiceId(pendingChoiceId);
-    setFlashStatus(mark);
+    // 오답이고 정답 선택지가 명시된 경우: 정답 선택지를 초록색으로 강조
+    // 그 외(정답이거나 correctChoiceId 미지정): 사용자가 고른 선택지를 강조
+    const targetId =
+      mark === "wrong" && correctChoiceId ? correctChoiceId : pendingChoiceId;
+    setFlashChoiceId(targetId);
+    // 오답이지만 정답 선택지를 보여줄 때는 색상은 항상 "correct"(초록)
+    const targetStatus =
+      mark === "wrong" && correctChoiceId ? "correct" : mark;
+    setFlashStatus(targetStatus);
     setPendingChoiceId(null);
     if (flashTimerRef.current) {
       clearTimeout(flashTimerRef.current);
@@ -200,8 +214,8 @@ function QuestionModal({
       setFlashChoiceId(null);
       setFlashStatus(null);
       flashTimerRef.current = null;
-    }, 480);
-  }, [mark, pendingChoiceId]);
+    }, feedbackDuration);
+  }, [mark, pendingChoiceId, correctChoiceId, feedbackDuration]);
 
   useEffect(() => {
     if (!isDragging) return undefined;
@@ -312,11 +326,15 @@ function QuestionModal({
     if (lockTimerRef.current) {
       clearTimeout(lockTimerRef.current);
     }
+    // 잠금은 피드백 표시 시간보다 약간 짧게 — 다음 문제 진입 전에 자동 해제
+    const lockMs = Math.max(400, feedbackDuration - 100);
     lockTimerRef.current = setTimeout(() => {
       lockRef.current = false;
       setInteractionLocked(false);
       lockTimerRef.current = null;
-    }, 1000);
+      // 동일 contentKey에서 재시도(B 패턴)를 허용하려면 마지막 클릭 기록 초기화
+      lastChoiceRef.current = null;
+    }, lockMs);
     setPendingChoiceId(choiceId);
     onSelect(choiceId);
   };
@@ -353,23 +371,25 @@ function QuestionModal({
           <p className="question-modal-prompt"><RichText>{displayPrompt}</RichText></p>
           <div className="question-modal-choices">
             {visibleMark ? <div className={`question-modal-mark ${visibleMark}`} /> : null}
-            {displayChoices.map((choice) => {
-              const flashClass =
-                flashChoiceId === choice.id && flashStatus
-                  ? `flash-${flashStatus}`
-                  : "";
-              return (
-                <button
-                  type="button"
-                  key={choice.id}
-                  className={`question-choice ${flashClass}`}
-                  onClick={() => handleChoiceClick(choice.id)}
-                  disabled={interactionLocked || Boolean(flashChoiceId) || isSwitching}
-                >
-                  <span><RichText>{choice.text}</RichText></span>
-                </button>
-              );
-            })}
+            {displayChoices
+              .filter((choice) => !disabledChoiceIds || !disabledChoiceIds.includes(choice.id))
+              .map((choice) => {
+                const flashClass =
+                  flashChoiceId === choice.id && flashStatus
+                    ? `flash-${flashStatus}`
+                    : "";
+                return (
+                  <button
+                    type="button"
+                    key={choice.id}
+                    className={`question-choice ${flashClass}`}
+                    onClick={() => handleChoiceClick(choice.id)}
+                    disabled={interactionLocked || Boolean(flashChoiceId) || isSwitching}
+                  >
+                    <span><RichText>{choice.text}</RichText></span>
+                  </button>
+                );
+              })}
           </div>
           {displayFooter ? <div className="question-modal-footer">{displayFooter}</div> : null}
         </div>

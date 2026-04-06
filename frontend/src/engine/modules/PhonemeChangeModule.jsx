@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
+import { FEEDBACK } from "../shared/feedbackTimings";
 
 function PhonemeChangeModule({ content }) {
   const { adjustTime, recordAnswer, finish, start, status } = useEngine();
@@ -18,6 +19,9 @@ function PhonemeChangeModule({ content }) {
   );
   const [lastResult, setLastResult] = useState(null);
   const [wrongCellNo, setWrongCellNo] = useState(null);
+  // B 패턴: 모달별 사라진 선택지 추적 (stepId 단위)
+  const [phonemeDisabled, setPhonemeDisabled] = useState({});
+  const [ruleDisabled, setRuleDisabled] = useState({});
   const resultTimerRef = useRef(null);
   const advanceTimerRef = useRef(null);
   const wrongTimerRef = useRef(null);
@@ -73,33 +77,42 @@ function PhonemeChangeModule({ content }) {
     );
   };
 
-  // 음운 선택 핸들러 (PHONEME_MODAL)
+  // 음운 선택 핸들러 (PHONEME_MODAL) - B 패턴
   const handlePhonemeAnswer = (choiceId) => {
     if (!step || step.questionType !== "PHONEME_RESULT") return;
     const isCorrect = choiceId === step.answerId;
     adjustTime(isCorrect ? (step.onCorrect?.deltaSec ?? 20) : (step.onWrong?.deltaSec ?? -40));
     recordAnswer({ id: step.stepId, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
+    showFeedback(isCorrect ? "correct" : "wrong", isCorrect ? FEEDBACK.B_CORRECT_FINAL_MS : FEEDBACK.B_WRONG_RETRY_MS);
 
-    if (isCorrect) {
-      // 다중 셀 업데이트 (축약: applyCellTexts)
-      if (step.onCorrect?.applyCellTexts) {
-        applyCellUpdates(step.onCorrect.applyCellTexts);
-      }
-      // 단일 셀 업데이트 (기존: applyCellText)
-      else if (step.onCorrect?.applyCellText) {
-        applyCellUpdates([step.onCorrect.applyCellText]);
-      }
-      // 딜레이 후 다음 step (RULE_EXPLANATION)으로 전환
-      advanceTimerRef.current = setTimeout(() => {
-        setStepIndex((prev) => prev + 1);
-        setPhase("RULE_MODAL");
-      }, 600);
+    if (!isCorrect) {
+      // 고른 선택지를 사라지게 (재시도 가능)
+      setPhonemeDisabled((prev) => ({
+        ...prev,
+        [step.stepId]: [...(prev[step.stepId] || []), choiceId],
+      }));
+      return;
     }
-    // 오답: retry (phase 유지)
+
+    // 다중 셀 업데이트 (축약: applyCellTexts)
+    if (step.onCorrect?.applyCellTexts) {
+      applyCellUpdates(step.onCorrect.applyCellTexts);
+    } else if (step.onCorrect?.applyCellText) {
+      applyCellUpdates([step.onCorrect.applyCellText]);
+    }
+    // 정답 → 3초 후 다음 step (RULE_EXPLANATION)으로 전환
+    advanceTimerRef.current = setTimeout(() => {
+      setPhonemeDisabled((prev) => {
+        const next = { ...prev };
+        delete next[step.stepId];
+        return next;
+      });
+      setStepIndex((prev) => prev + 1);
+      setPhase("RULE_MODAL");
+    }, FEEDBACK.B_CORRECT_FINAL_MS);
   };
 
-  // 규칙 선택 핸들러 (RULE_MODAL)
+  // 규칙 선택 핸들러 (RULE_MODAL) - B 패턴
   const handleRuleAnswer = (choiceId) => {
     if (!step || step.questionType !== "RULE_EXPLANATION") return;
     // 현재 stepIndex는 이미 RULE step을 가리킴
@@ -111,30 +124,42 @@ function PhonemeChangeModule({ content }) {
       : (ruleStep.onWrong?.deltaSec ?? -40);
     adjustTime(delta);
     recordAnswer({ id: ruleStep.stepId, correct: isCorrect });
-    showFeedback(isCorrect ? "correct" : "wrong");
+    showFeedback(isCorrect ? "correct" : "wrong", isCorrect ? FEEDBACK.B_CORRECT_FINAL_MS : FEEDBACK.B_WRONG_RETRY_MS);
 
-    if (isCorrect) {
-      advanceTimerRef.current = setTimeout(() => {
-        const nextIdx = stepIndex + 1;
-        if (nextIdx < steps.length) {
-          setStepIndex(nextIdx);
-          setPhase("CLICK");
-        } else if (wordIndex < words.length - 1) {
-          setWordIndex((prev) => prev + 1);
-          setStepIndex(0);
-          setPhase("CLICK");
-        } else {
-          finish(true);
-        }
-      }, 600);
+    if (!isCorrect) {
+      // 고른 선택지를 사라지게 (재시도 가능)
+      setRuleDisabled((prev) => ({
+        ...prev,
+        [ruleStep.stepId]: [...(prev[ruleStep.stepId] || []), choiceId],
+      }));
+      return;
     }
-    // 오답: retry (phase 유지)
+
+    // 정답 → 3초 후 다음
+    advanceTimerRef.current = setTimeout(() => {
+      setRuleDisabled((prev) => {
+        const next = { ...prev };
+        delete next[ruleStep.stepId];
+        return next;
+      });
+      const nextIdx = stepIndex + 1;
+      if (nextIdx < steps.length) {
+        setStepIndex(nextIdx);
+        setPhase("CLICK");
+      } else if (wordIndex < words.length - 1) {
+        setWordIndex((prev) => prev + 1);
+        setStepIndex(0);
+        setPhase("CLICK");
+      } else {
+        finish(true);
+      }
+    }, FEEDBACK.B_CORRECT_FINAL_MS);
   };
 
-  const showFeedback = (result) => {
+  const showFeedback = (result, duration = FEEDBACK.B_WRONG_RETRY_MS) => {
     setLastResult(result);
     if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
-    resultTimerRef.current = setTimeout(() => setLastResult(null), 800);
+    resultTimerRef.current = setTimeout(() => setLastResult(null), duration);
   };
 
   const clearFeedback = () => {
@@ -264,6 +289,15 @@ function PhonemeChangeModule({ content }) {
               onSelect={modalHandler}
               mark={phase !== "CLICK" ? lastResult : null}
               shuffleKey={modalStep.stepId}
+              correctChoiceId={modalStep.answerId}
+              disabledChoiceIds={
+                phase === "PHONEME_MODAL"
+                  ? phonemeDisabled[modalStep.stepId] || null
+                  : ruleDisabled[modalStep.stepId] || null
+              }
+              feedbackDuration={
+                lastResult === "correct" ? FEEDBACK.B_CORRECT_FINAL_MS : FEEDBACK.B_WRONG_RETRY_MS
+              }
             />
           ) : null}
         </>
