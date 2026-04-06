@@ -5,6 +5,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.diagnostic.scoring.*
+import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -55,11 +56,23 @@ class DiagnosticService(
             throw ApiException("INVALID_MODE", "유효하지 않은 mode", HttpStatus.BAD_REQUEST)
         }
 
-        // 이미 완료한 tier는 재응시 차단
-        val completedExists = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
-            .any { it.status == "completed" }
-        if (completedExists) {
-            throw ApiException("ALREADY_COMPLETED", "이미 완료한 진단입니다. 결과를 확인하세요.", HttpStatus.CONFLICT)
+        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+
+        // 이미 완료한 tier는 재응시 차단 (관리자 우회)
+        if (!isAdmin) {
+            val completedExists = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
+                .any { it.status == "completed" }
+            if (completedExists) {
+                throw ApiException("ALREADY_COMPLETED", "이미 완료한 진단입니다. 결과를 확인하세요.", HttpStatus.CONFLICT)
+            }
+        } else {
+            // 관리자: 이전 완료 세션을 모두 abandoned로 마킹해 새 세션을 깨끗이 시작
+            sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
+                .filter { it.status == "completed" }
+                .forEach {
+                    it.status = "abandoned"
+                    sessionRepo.save(it)
+                }
         }
 
         // 기존 활성 세션이 있으면 자동 폐기
@@ -182,12 +195,11 @@ class DiagnosticService(
         // 마지막 마킹 시각 갱신 (풀이속도 계산용)
         session.lastResponseAt = LocalDateTime.now()
 
-        val rawTci = ScoringEngine.calculateTci(scores)
-        val confidence = ScoringEngine.calculateConfidence(answeredCount, fullQ = FULL_CONFIDENCE_QUESTIONS)
-        val adjTci = ScoringEngine.applyConfidenceToTci(rawTci, confidence)
+        // 정답률 기반 TCI (correct / 48 × 100)
+        val rawTci = if (answeredCount > 0) correctCount.toDouble() / 48.0 * 100.0 else 0.0
         session.rawTci = BigDecimal.valueOf(rawTci).setScale(2, java.math.RoundingMode.HALF_UP)
-        session.adjustedTci = BigDecimal.valueOf(adjTci).setScale(2, java.math.RoundingMode.HALF_UP)
-        session.confidence = BigDecimal.valueOf(confidence).setScale(2, java.math.RoundingMode.HALF_UP)
+        session.adjustedTci = BigDecimal.valueOf(rawTci).setScale(2, java.math.RoundingMode.HALF_UP)
+        session.confidence = BigDecimal.valueOf(1.0).setScale(2, java.math.RoundingMode.HALF_UP)
 
         sessionRepo.save(session)
 
@@ -205,9 +217,12 @@ class DiagnosticService(
         }
 
         val scores: MutableMap<String, Double> = objectMapper.readValue(session.scoresJson ?: "{}")
-        val rawTci = ScoringEngine.calculateTci(scores)
-        val confidence = ScoringEngine.calculateConfidence(session.answeredCount, fullQ = FULL_CONFIDENCE_QUESTIONS)
-        val adjTci = ScoringEngine.applyConfidenceToTci(rawTci, confidence)
+        // 정답률 기반 TCI: 미응답을 오답으로 간주 (correct / 48 × 100)
+        val rawTci = if (session.answeredCount > 0)
+            session.correctCount.toDouble() / 48.0 * 100.0
+        else 0.0
+        val adjTci = rawTci  // 신뢰도 보정 없이 그대로
+        val confidence = 1.0  // 더 이상 사용하지 않음 (호환용)
         val recommendation = ScoringEngine.calculateRecommendation(session.tier, rawTci, confidence)
 
         session.status = "completed"
@@ -239,11 +254,22 @@ class DiagnosticService(
         val tier = request.tier
         if (tier !in TEST_ORDER) throw ApiException("INVALID_TIER", "유효하지 않은 tier", HttpStatus.BAD_REQUEST)
 
-        // 이미 완료한 tier 차단
-        val completedExists = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
-            .any { it.status == "completed" }
-        if (completedExists) {
-            throw ApiException("ALREADY_COMPLETED", "이미 완료한 진단입니다. 결과를 확인하세요.", HttpStatus.CONFLICT)
+        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+
+        // 이미 완료한 tier 차단 (관리자 우회)
+        if (!isAdmin) {
+            val completedExists = sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
+                .any { it.status == "completed" }
+            if (completedExists) {
+                throw ApiException("ALREADY_COMPLETED", "이미 완료한 진단입니다. 결과를 확인하세요.", HttpStatus.CONFLICT)
+            }
+        } else {
+            sessionRepo.findByUserIdAndTierOrderByStartedAtDesc(userId, tier)
+                .filter { it.status == "completed" }
+                .forEach {
+                    it.status = "abandoned"
+                    sessionRepo.save(it)
+                }
         }
 
         // 활성 세션 폐기
@@ -328,10 +354,10 @@ class DiagnosticService(
             )
         }
 
-        // 세션 종료
-        val rawTci = ScoringEngine.calculateTci(scores)
-        val confidence = ScoringEngine.calculateConfidence(answeredCount, fullQ = FULL_CONFIDENCE_QUESTIONS)
-        val adjTci = ScoringEngine.applyConfidenceToTci(rawTci, confidence)
+        // 세션 종료 — 정답률 기반 TCI (correct / 48 × 100)
+        val rawTci = if (answeredCount > 0) correctCount.toDouble() / 48.0 * 100.0 else 0.0
+        val adjTci = rawTci
+        val confidence = 1.0
         val recommendation = ScoringEngine.calculateRecommendation(tier, rawTci, confidence)
 
         session.scoresJson = objectMapper.writeValueAsString(scores)
@@ -546,28 +572,11 @@ class DiagnosticService(
     }
 
     private fun buildReport(session: DiagSessionEntity, scores: Map<String, Double>, recommendation: RecommendedLevel): DiagnosticReport {
-        val sorted = scores.entries.sortedBy { it.value }
-        val weak = sorted.take(3).map { it.key }
-        val strong = sorted.takeLast(3).reversed().map { it.key }
-
         val errorContrib: Map<String, Map<String, Double>> = try {
             if (!session.errorAnalysisJson.isNullOrBlank())
                 objectMapper.readValue(session.errorAnalysisJson!!)
             else emptyMap()
         } catch (_: Exception) { emptyMap() }
-
-        // 하위 3개 취약 역량 (기존 호환)
-        val bottleneck = weak.map { comp ->
-            val paths = errorContrib[comp] ?: emptyMap()
-            val topPaths = paths.entries.sortedByDescending { it.value }.take(3).map {
-                ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0)
-            }
-            BottleneckItem(
-                competency = comp,
-                score = Math.round((scores[comp] ?: 50.0) * 10.0) / 10.0,
-                topErrorPaths = topPaths
-            )
-        }
 
         // ── v2 확장 데이터 빌드 ──
         val accuracyRate = if (session.answeredCount > 0)
@@ -599,16 +608,7 @@ class DiagnosticService(
             }
         }
 
-        // ── 전체 10개 역량 오류경로 분석 ──
-        val fullErrorAnalysis = scores.entries.sortedBy { it.value }.map { (comp, s) ->
-            val paths = errorContrib[comp] ?: emptyMap()
-            val topPaths = paths.entries.sortedByDescending { it.value }.take(3).map {
-                ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0)
-            }
-            BottleneckItem(comp, Math.round(s * 10.0) / 10.0, topPaths)
-        }
-
-        // ── 역량별 관련 문항 정답률 계산 ──
+        // ── 역량별 관련 문항 정답률 계산 (먼저 수행) ──
         val competencyAccuracy = mutableMapOf<String, Pair<Int, Int>>() // total, correct
         for (resp in allResponses) {
             val choices = getChoices(resp.questionId)
@@ -623,34 +623,86 @@ class DiagnosticService(
             }
         }
 
-        // ── CompetencyDetail 빌드 ──
-        val rankedScores = scores.entries.sortedByDescending { it.value }
-        val competencyDetails = rankedScores.mapIndexed { idx, (name, score) ->
+        // 측정된 역량의 정답률 맵
+        val measuredScoreMap: Map<String, Double> = COMPETENCIES
+            .mapNotNull { name ->
+                val (tot, cor) = competencyAccuracy[name] ?: return@mapNotNull null
+                if (tot > 0) name to (cor.toDouble() / tot * 100.0) else null
+            }
+            .toMap()
+
+        val sortedMeasured = measuredScoreMap.entries.sortedBy { it.value }
+        val weak = sortedMeasured.take(3).map { it.key }
+        val strong = sortedMeasured.takeLast(3).reversed().map { it.key }
+
+        // 하위 3개 취약 역량 (정답률 기준)
+        val bottleneck = weak.map { comp ->
+            val paths = errorContrib[comp] ?: emptyMap()
+            val topPaths = paths.entries.sortedByDescending { it.value }.take(3).map {
+                ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0)
+            }
+            BottleneckItem(
+                competency = comp,
+                score = Math.round((measuredScoreMap[comp] ?: 0.0) * 10.0) / 10.0,
+                topErrorPaths = topPaths
+            )
+        }
+
+        // ── 전체 측정 역량 오류경로 분석 (정답률 기준) ──
+        val fullErrorAnalysis = sortedMeasured.map { (comp, s) ->
+            val paths = errorContrib[comp] ?: emptyMap()
+            val topPaths = paths.entries.sortedByDescending { it.value }.take(3).map {
+                ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0)
+            }
+            BottleneckItem(comp, Math.round(s * 10.0) / 10.0, topPaths)
+        }
+
+        // ── CompetencyDetail 빌드 (정답률 기반, 미측정 역량 처리) ──
+        // 측정된 역량만 점수 부여, 측정된 역량들 사이에서 순위 매김
+        val measuredCompetencies = COMPETENCIES
+            .mapNotNull { name ->
+                val (tot, cor) = competencyAccuracy.getOrDefault(name, 0 to 0)
+                if (tot > 0) name to (cor.toDouble() / tot * 100.0) else null
+            }
+            .sortedByDescending { it.second }
+        val rankMap = measuredCompetencies.withIndex().associate { (i, e) -> e.first to (i + 1) }
+
+        val competencyDetails = COMPETENCIES.map { name ->
             val tc = touchCounts[name] ?: 0
             val (tot, cor) = competencyAccuracy.getOrDefault(name, 0 to 0)
-            val relAcc = if (tot > 0) Math.round(cor.toDouble() / tot * 1000.0) / 10.0 else 0.0
+            val measured = tot > 0
+            val accScore = if (measured) Math.round(cor.toDouble() / tot * 1000.0) / 10.0 else null
             val paths = errorContrib[name] ?: emptyMap()
             val topPaths = paths.entries.sortedByDescending { it.value }.take(3).map {
                 ErrorPathEntry(it.key, Math.round(it.value * 100.0) / 100.0)
             }
-            val grade = when { score >= 65 -> "상"; score >= 40 -> "중"; else -> "하" }
+            val grade = when {
+                !measured -> "미측정"
+                accScore!! >= 70 -> "상"
+                accScore >= 40 -> "중"
+                else -> "하"
+            }
+            val narr = if (measured) {
+                generateNarrative(name, accScore!!, tc)
+            } else {
+                "'$name' 역량은 이번 응시에서 측정되지 않았습니다. (측정 횟수 0회)"
+            }
             CompetencyDetail(
                 name = name,
-                score = Math.round(score * 10.0) / 10.0,
+                score = accScore,
+                measured = measured,
                 grade = grade,
-                rank = idx + 1,
+                rank = rankMap[name] ?: 0,
                 description = COMPETENCY_DESCRIPTIONS[name] ?: "",
-                narrative = generateNarrative(name, score, tc),
+                narrative = narr,
                 touchCount = tc,
-                relatedAccuracy = relAcc,
+                relatedAccuracy = accScore ?: 0.0,
                 topErrorPaths = topPaths,
             )
-        }
+        }.sortedWith(compareByDescending<CompetencyDetail> { it.measured }.thenBy { it.rank })
 
         // ── 내러티브 맵 ──
-        val narratives = scores.mapValues { (name, score) ->
-            generateNarrative(name, score, touchCounts[name] ?: 0)
-        }
+        val narratives = competencyDetails.associate { it.name to it.narrative }
 
         // ── 문항 유형별 분석 ──
         val typeGroups = allResponses.groupBy { questionsMap[it.questionId]?.questionType ?: "기타" }
@@ -715,9 +767,15 @@ class DiagnosticService(
             )
         }
 
+        // ── 풀이 속도 (보정시간/푼문항, 분/문항) ──
+        val speedMinPerQ: Double? = if ((session.effectiveSpeedSec ?: 0) > 0 && session.answeredCount > 0) {
+            Math.round(session.effectiveSpeedSec!!.toDouble() / 60.0 / session.answeredCount * 100.0) / 100.0
+        } else null
+
         // ── 동일 tier 통계 + 백분위 ──
         var tierStatistics: TierStatistics?
         var percentileInfo: PercentileInfo?
+        var speedPercentile: Double? = null
         try {
             val allSessions = sessionRepo.findByTierAndStatus(session.tier, "completed")
             if (allSessions.size >= 2) {
@@ -779,6 +837,20 @@ class DiagnosticService(
                 }
 
                 percentileInfo = PercentileInfo(tciPercentile, accPercentile, competencyPercentiles)
+
+                // 풀이 속도 백분위: 빠를수록 좋음 (낮은 분/문항 = 0%, 느릴수록 100%)
+                if (speedMinPerQ != null) {
+                    val speedValues = allSessions.mapNotNull { s ->
+                        if ((s.effectiveSpeedSec ?: 0) > 0 && s.answeredCount > 0)
+                            s.effectiveSpeedSec!!.toDouble() / 60.0 / s.answeredCount
+                        else null
+                    }
+                    if (speedValues.size >= 2) {
+                        // 속도가 더 빠른(작은) 사람의 수
+                        val fasterCount = speedValues.count { it < speedMinPerQ }
+                        speedPercentile = Math.round(fasterCount.toDouble() / speedValues.size * 1000.0) / 10.0
+                    }
+                }
             } else {
                 tierStatistics = null
                 percentileInfo = null
@@ -827,7 +899,8 @@ class DiagnosticService(
             adjustedTci = session.adjustedTci?.toDouble() ?: 50.0,
             confidence = session.confidence?.toDouble() ?: 0.0,
             recommendedLevel = recommendation,
-            competencyScores = scores.mapValues { Math.round(it.value * 10.0) / 10.0 },
+            // 측정된 역량의 정답률만 (미측정 역량은 맵에서 제외)
+            competencyScores = measuredScoreMap.mapValues { Math.round(it.value * 10.0) / 10.0 },
             weakCompetencies = weak,
             strongCompetencies = strong,
             bottleneckAnalysis = bottleneck,
@@ -847,9 +920,9 @@ class DiagnosticService(
             gradeContext = gradeContext,
             timeSpentSec = session.timeSpentSec,
             effectiveSpeedSec = session.effectiveSpeedSec,
-            avgTimePerQuestionSec = if ((session.timeSpentSec ?: 0) > 0 && session.answeredCount > 0)
-                Math.round(session.timeSpentSec!!.toDouble() / session.answeredCount * 10.0) / 10.0
-            else null,
+            speedMinPerQuestion = speedMinPerQ,
+            speedPercentile = speedPercentile,
+            totalQuestions = 48,
         )
     }
 

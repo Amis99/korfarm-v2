@@ -75,14 +75,19 @@ def escape_latex(s):
 
 
 def html_to_latex(s):
-    """HTML 태그 → LaTeX 변환"""
+    """HTML 태그 → LaTeX 변환
+
+    알려진 HTML 인라인 태그(<u>/<b>/<i>/<br>)는 LaTeX로 치환.
+    그 외 남은 <X> 패턴은 작품명 등 본문 내용이므로 〈X〉로 변환 (strip 금지).
+    """
     if not s:
         return ""
     s = re.sub(r"<u>(.*?)</u>", r"\\uline{\1}", s, flags=re.DOTALL)
     s = re.sub(r"<b>(.*?)</b>", r"\\textbf{\1}", s, flags=re.DOTALL)
     s = re.sub(r"<i>(.*?)</i>", r"\\textit{\1}", s, flags=re.DOTALL)
     s = re.sub(r"<br\s*/?>", "\n", s)
-    s = re.sub(r"<[^>]+>", "", s)
+    # 남은 <X> 태그(주로 작품명 마커)는 〈X〉로 보존
+    s = re.sub(r"<([^>]+)>", r"〈\1〉", s)
     return s
 
 

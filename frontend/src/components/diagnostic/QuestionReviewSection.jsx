@@ -23,7 +23,7 @@ function QuestionReviewSection({ reviews }) {
               <span className="qr-stem-preview">
                 {r.stem.length > 50 ? r.stem.substring(0, 50) + "…" : r.stem}
               </span>
-              <span className="qr-arrow">{openIdx === i ? "▲" : "▼"}</span>
+              <span className="qr-arrow">{openIdx === i ? "▲ 접기" : "▼ 펼치기"}</span>
             </div>
             {openIdx === i && (
               <div className="qr-body">

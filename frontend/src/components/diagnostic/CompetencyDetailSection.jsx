@@ -10,7 +10,8 @@ function CompetencyDetailSection({ details, statistics }) {
   const getGradeClass = (grade) => {
     if (grade === "상") return "high";
     if (grade === "중") return "mid";
-    return "low";
+    if (grade === "하") return "low";
+    return "unmeasured";
   };
 
   return (
@@ -19,25 +20,37 @@ function CompetencyDetailSection({ details, statistics }) {
       <div className="competency-detail-list">
         {details.map((d, i) => {
           const avgScore = statistics?.competencyStats?.[d.name]?.average;
+          const measured = d.measured !== false && d.score != null;
           return (
-            <div key={d.name} className={`competency-detail-item ${openIdx === i ? "open" : ""}`}>
+            <div
+              key={d.name}
+              className={`competency-detail-item ${openIdx === i ? "open" : ""} ${!measured ? "unmeasured" : ""}`}
+            >
               <div className="competency-detail-header" onClick={() => toggle(i)}>
-                <div className="cd-rank">#{d.rank}</div>
+                <div className="cd-rank">{measured ? `#${d.rank}` : "—"}</div>
                 <div className="cd-name">{d.name}</div>
                 <div className="cd-score-bar-wrap">
                   <div className="cd-score-bar">
-                    <div className={`cd-score-bar-fill ${getGradeClass(d.grade)}`} style={{ width: `${d.score}%` }} />
-                    {avgScore != null && (
+                    {measured && (
+                      <div className={`cd-score-bar-fill ${getGradeClass(d.grade)}`} style={{ width: `${d.score}%` }} />
+                    )}
+                    {measured && avgScore != null && (
                       <div className="cd-avg-marker" style={{ left: `${avgScore}%` }} title={`평균: ${avgScore.toFixed(1)}`} />
                     )}
                   </div>
                 </div>
-                <div className="cd-score">{d.score.toFixed(1)}</div>
-                <span className={`grade-badge ${getGradeClass(d.grade)}`}>{d.grade}</span>
-                {d.percentile != null && (
+                <div className="cd-score">
+                  {measured ? d.score.toFixed(1) : "—"}
+                </div>
+                <span className={`grade-badge ${getGradeClass(d.grade)}`}>
+                  {measured ? d.grade : "측정 안됨"}
+                </span>
+                {measured && d.percentile != null && (
                   <span className="cd-percentile">상위 {d.percentile.toFixed(0)}%</span>
                 )}
-                <span className="cd-arrow">{openIdx === i ? "▲" : "▼"}</span>
+                <span className="cd-arrow">
+                  {openIdx === i ? "▲ 접기" : "▼ 펼치기"}
+                </span>
               </div>
               {openIdx === i && (
                 <div className="competency-detail-body">
@@ -45,9 +58,9 @@ function CompetencyDetailSection({ details, statistics }) {
                   <p className="cd-narrative">{d.narrative}</p>
                   <div className="cd-meta">
                     <span>측정 횟수: {d.touchCount}회</span>
-                    <span>관련 문항 정답률: {d.relatedAccuracy.toFixed(1)}%</span>
+                    {measured && <span>관련 문항 정답률: {d.relatedAccuracy.toFixed(1)}%</span>}
                   </div>
-                  {d.topErrorPaths.length > 0 && (
+                  {d.topErrorPaths && d.topErrorPaths.length > 0 && (
                     <div className="cd-error-paths">
                       <div className="cd-error-title">주요 오류 경로:</div>
                       <ErrorPathChart paths={d.topErrorPaths} />

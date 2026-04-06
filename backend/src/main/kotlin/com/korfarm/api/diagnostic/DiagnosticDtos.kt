@@ -119,7 +119,9 @@ data class DiagnosticReport(
     // 풀이 시간 정보
     val timeSpentSec: Int? = null,        // 시작~마지막 마킹 경과(초)
     val effectiveSpeedSec: Int? = null,   // 보정 풀이속도 = timeSpentSec + (오답수 × 180)
-    val avgTimePerQuestionSec: Double? = null, // 1문항 평균 시간(초)
+    val speedMinPerQuestion: Double? = null, // 풀이속도 (분/문항) = effectiveSpeedSec/60/answeredCount
+    val speedPercentile: Double? = null,  // 같은 tier 내 풀이속도 백분위 (낮을수록 빠름, 1등 0% 꼴등 100%)
+    val totalQuestions: Int = 48,         // 전체 문항 수 (진단은 항상 48)
 )
 
 data class RecommendedLevel(
@@ -143,13 +145,14 @@ data class ErrorPathEntry(
 
 data class CompetencyDetail(
     val name: String,
-    val score: Double,
-    val grade: String,           // "상", "중", "하"
-    val rank: Int,               // 10개 역량 중 순위 (1=최고)
+    val score: Double?,          // 측정된 정답률 (0~100), 미측정 시 null
+    val measured: Boolean,       // 한 번이라도 측정됐는지
+    val grade: String,           // "상", "중", "하", "미측정"
+    val rank: Int,               // 측정된 역량 중 순위 (1=최고), 미측정시 0
     val description: String,     // 역량 설명
     val narrative: String,       // 진단 내러티브
     val touchCount: Int,         // 측정 횟수
-    val relatedAccuracy: Double, // 관련 문항 정답률 (%)
+    val relatedAccuracy: Double, // 관련 문항 정답률 (%) — score와 동일
     val topErrorPaths: List<ErrorPathEntry>,
     val percentile: Double? = null,  // 동일 tier 내 백분위
 )

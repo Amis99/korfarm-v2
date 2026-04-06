@@ -5,7 +5,7 @@ generate-test-pdfs-latex.py와 동일한 패턴.
 SSH 터널 → DB 쿼리 (test_papers.series='diagnostic') → .tex 생성 → xelatex 컴파일 → S3 업로드 → DB 업데이트
 """
 
-import os, sys, subprocess, shutil, argparse, tempfile
+import os, re, sys, subprocess, shutil, argparse, tempfile
 from collections import defaultdict
 
 from sshtunnel import SSHTunnelForwarder
@@ -24,6 +24,34 @@ nl_to_latex = _pdf_mod.nl_to_latex
 make_question_block = _pdf_mod.make_question_block
 compile_tex = _pdf_mod.compile_tex
 CHOICE_SYMS = _pdf_mod.CHOICE_SYMS
+
+
+# ═══════════ 진단 전용 본문 전처리 ═══════════
+
+def preprocess_diag_passage(raw_text):
+    """diag_passages.text_md를 PDF용으로 정리.
+
+    1) [지문]\n 접두 마커 제거
+    2) 출처 라인 (예: "- 강소천, <닭>", "- 주요섭, <사랑손님과 어머니> 부분")을
+       XHFILLX 마커로 표시 → 후처리에서 \\hfill 로 치환되어 우측 정렬됨
+    """
+    if not raw_text:
+        return raw_text
+    text = raw_text.replace("\\n", "\n")
+    # [지문] 마커 제거 (선두만)
+    text = re.sub(r"^\s*\[지문\]\s*\n*", "", text)
+    # 출처 라인 우측 정렬 마킹 (작가 + <작품명> or 〈작품명〉 패턴)
+    text = re.sub(
+        r"(?m)^[ \t]*-[ \t]*([^\n]*?(?:<[^>\n]+>|〈[^〉\n]+〉)[^\n]*?)[ \t]*$",
+        r"XHFILLX- \1",
+        text,
+    )
+    return text
+
+
+def postprocess_diag_tex(tex):
+    """LaTeX 후처리 — XHFILLX 마커를 우측 정렬 명령으로 치환"""
+    return tex.replace("XHFILLX", "\\hfill ")
 
 # ─── 설정 ───
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -258,6 +286,8 @@ def generate_diag_tex(tier, tier_label, total_qs, total_pts, questions):
             last_passage = cur_passage
 
     tex += "\\end{document}\n"
+    # XHFILLX 마커 → \hfill 후처리
+    tex = postprocess_diag_tex(tex)
     return tex
 
 
@@ -375,6 +405,11 @@ def main():
         """, paper_ids)
         all_qs = cur.fetchall()
         print(f"문제 {len(all_qs)}개 로드")
+
+        # 진단 본문 전처리: [지문] 마커 제거 + 출처 라인 우측 정렬 마킹
+        for q in all_qs:
+            if q.get("passage"):
+                q["passage"] = preprocess_diag_passage(q["passage"])
 
         by_paper = defaultdict(list)
         for q in all_qs:

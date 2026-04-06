@@ -20,6 +20,7 @@ function DiagnosticV2Page() {
   const [loading, setLoading] = useState(true);
   const [selectedTier, setSelectedTier] = useState(null);
   const [creating, setCreating] = useState(false);
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     const url = isParentMode
@@ -29,7 +30,12 @@ function DiagnosticV2Page() {
       .then(setTiers)
       .catch(() => {})
       .finally(() => setLoading(false));
+    if (!isParentMode) {
+      apiGet("/v1/auth/me").then(setProfile).catch(() => {});
+    }
   }, [isParentMode, studentId]);
+
+  const isAdmin = (profile?.roles || []).some(r => r === "HQ_ADMIN" || r === "ORG_ADMIN");
 
   const handleStartOnline = async () => {
     if (creating || isParentMode) return;
@@ -51,10 +57,15 @@ function DiagnosticV2Page() {
     setSelectedTier(null);
   };
 
-  // 완료된 세션이 하나라도 있으면 재진단 차단
-  const hasAnyCompleted = tiers.some(t => t.hasCompleted);
+  // 완료된 세션이 하나라도 있으면 재진단 차단 (관리자는 항상 재응시 가능)
+  const hasAnyCompleted = !isAdmin && tiers.some(t => t.hasCompleted);
 
   const handleCardClick = (key, tier) => {
+    // 관리자: 카드 클릭 시 항상 응시 모달
+    if (isAdmin) {
+      setSelectedTier(key);
+      return;
+    }
     if (tier?.hasCompleted && tier.lastSessionId) {
       // 완료된 tier → 리포트로 이동
       const reportUrl = isParentMode
@@ -117,6 +128,11 @@ function DiagnosticV2Page() {
       {!isParentMode && hasAnyCompleted && (
         <div className="diag-v2-blocked-notice">
           진단 테스트는 가입 시 1회만 응시 가능합니다. 결과 카드를 눌러 리포트를 확인하세요.
+        </div>
+      )}
+      {!isParentMode && isAdmin && (
+        <div className="diag-v2-blocked-notice" style={{ background: "#eaf6e0", borderColor: "#80b85a", color: "#3a6018" }}>
+          관리자 모드: 진단을 몇 번이고 다시 응시할 수 있습니다.
         </div>
       )}
 

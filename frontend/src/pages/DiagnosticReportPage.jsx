@@ -80,30 +80,41 @@ function DiagnosticReportPage() {
         )}
       </div>
 
-      {/* 풀이 시간 카드 (온라인 응시만 표기) */}
-      {report.mode !== "offline" && report.timeSpentSec != null && (
+      {/* 풀이 속도 카드 (온라인 응시만 표기) */}
+      {report.mode !== "offline" && report.speedMinPerQuestion != null && (
         <div className="diag-report-section diag-time-section">
-          <h2>풀이 시간</h2>
+          <h2>풀이 속도</h2>
           <div className="diag-time-grid">
-            <div className="diag-time-card">
-              <div className="diag-time-label">마지막 마킹까지</div>
-              <div className="diag-time-value">
-                {Math.floor(report.timeSpentSec / 60)}분 {report.timeSpentSec % 60}초
-              </div>
-            </div>
             <div className="diag-time-card highlight">
               <div className="diag-time-label">풀이 속도 (보정)</div>
               <div className="diag-time-value">
-                {Math.floor((report.effectiveSpeedSec || 0) / 60)}분 {(report.effectiveSpeedSec || 0) % 60}초
+                {report.speedMinPerQuestion.toFixed(2)} <span className="diag-time-unit">분/문항</span>
               </div>
               <div className="diag-time-note">
-                = {Math.floor(report.timeSpentSec / 60)}분 + 오답 {report.answeredCount - report.correctCount}개 × 3분
+                보정 시간({Math.floor((report.effectiveSpeedSec || 0) / 60)}분 {(report.effectiveSpeedSec || 0) % 60}초)
+                {" ÷ 푼 문항 "}{report.answeredCount}개<br />
+                <span style={{ opacity: 0.7 }}>* 보정 시간 = 마지막 마킹까지 + (오답 수 × 3분)</span>
               </div>
             </div>
-            {report.avgTimePerQuestionSec != null && (
+            {report.speedPercentile != null ? (
               <div className="diag-time-card">
-                <div className="diag-time-label">1문항 평균</div>
-                <div className="diag-time-value">{report.avgTimePerQuestionSec.toFixed(1)}초</div>
+                <div className="diag-time-label">속도 백분위</div>
+                <div className="diag-time-value">
+                  상위 {report.speedPercentile.toFixed(1)}<span className="diag-time-unit">%</span>
+                </div>
+                <div className="diag-time-note">
+                  같은 단계 응시자 중 (1등 0% · 꼴등 100%)
+                </div>
+              </div>
+            ) : (
+              <div className="diag-time-card">
+                <div className="diag-time-label">속도 백분위</div>
+                <div className="diag-time-value" style={{ fontSize: 16, opacity: 0.6 }}>
+                  데이터 부족
+                </div>
+                <div className="diag-time-note">
+                  비교를 위해서는 같은 단계 응시자가 2명 이상 필요합니다.
+                </div>
               </div>
             )}
           </div>
@@ -113,11 +124,9 @@ function DiagnosticReportPage() {
       {/* 섹션 1: 종합 요약 카드 */}
       <ReportSummaryCards report={report} />
 
-      {/* 섹션 2: TCI 게이지 (강화) */}
+      {/* 섹션 2: 점수 게이지 */}
       <TciGaugeChart
         tci={report.adjustedTci}
-        rawTci={report.rawTci}
-        confidence={report.confidence}
         recommendation={report.recommendedLevel?.label}
         statistics={report.statistics}
         accuracyRate={report.accuracyRate}

@@ -55,16 +55,21 @@ function DiagnosticPrintPage() {
         }
         setPaperId(paper.testId);
         try {
-          const fileId = await apiGet(`/v1/test-storage/${paper.testId}/pdf`);
+          const ref = await apiGet(`/v1/test-storage/${paper.testId}/pdf`);
           if (revoked) return;
-          const token = sessionStorage.getItem(TOKEN_KEY);
-          const resp = await fetch(`${API_BASE}/v1/files/${fileId}/download`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          if (!resp.ok) throw new Error("PDF 다운로드 실패");
-          const blob = await resp.blob();
-          if (revoked) return;
-          setPdfUrl(URL.createObjectURL(blob));
+          // ref가 http(s) URL이면 직접 사용, 그 외는 file id로 간주
+          if (typeof ref === "string" && /^https?:\/\//.test(ref)) {
+            setPdfUrl(ref);
+          } else {
+            const token = sessionStorage.getItem(TOKEN_KEY);
+            const resp = await fetch(`${API_BASE}/v1/files/${ref}/download`, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            if (!resp.ok) throw new Error("PDF 다운로드 실패");
+            const blob = await resp.blob();
+            if (revoked) return;
+            setPdfUrl(URL.createObjectURL(blob));
+          }
         } catch {
           setPdfError("진단 시험지 PDF가 아직 등록되지 않았습니다. 답안지만 출력 후 응시해 주세요.");
         }

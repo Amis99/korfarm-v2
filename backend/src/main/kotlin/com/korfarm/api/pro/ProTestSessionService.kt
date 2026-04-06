@@ -45,15 +45,19 @@ class ProTestSessionService(
 
     @Transactional
     fun startTest(userId: String, chapterId: String, mode: String): ProTestStartResponse {
-        // 1. 기본 학습 완료 확인
-        if (!proModeService.checkAllBaseCompleted(userId, chapterId)) {
+        val isAdmin = com.korfarm.api.security.SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+
+        // 1. 기본 학습 완료 확인 (관리자 우회)
+        if (!isAdmin && !proModeService.checkAllBaseCompleted(userId, chapterId)) {
             throw ApiException("LOCKED", "기본 학습 4개를 모두 완료해야 테스트를 볼 수 있습니다.", HttpStatus.FORBIDDEN)
         }
 
-        // 2. 이미 통과한 챕터 확인
-        val passedSessions = testSessionRepo.findByUserIdAndChapterIdAndStatusIn(userId, chapterId, listOf("passed"))
-        if (passedSessions.isNotEmpty()) {
-            throw ApiException("ALREADY_PASSED", "이미 통과한 챕터입니다.", HttpStatus.CONFLICT)
+        // 2. 이미 통과한 챕터 확인 (관리자 우회)
+        if (!isAdmin) {
+            val passedSessions = testSessionRepo.findByUserIdAndChapterIdAndStatusIn(userId, chapterId, listOf("passed"))
+            if (passedSessions.isNotEmpty()) {
+                throw ApiException("ALREADY_PASSED", "이미 통과한 챕터입니다.", HttpStatus.CONFLICT)
+            }
         }
 
         // 3. 활성 세션 확인 → 만료 처리 또는 기존 세션 반환

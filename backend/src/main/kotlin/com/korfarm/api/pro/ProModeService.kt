@@ -69,6 +69,9 @@ class ProModeService(
             testSessionRepo.findByUserIdAndChapterIdAndStatusIn(userId, cid, listOf("passed"))
         }.groupBy { it.chapterId }
 
+        // 관리자는 모든 챕터 무제한 접근
+        val isAdmin = com.korfarm.api.security.SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+
         return chapters.mapIndexed { index, chapter ->
             val items = allItems[chapter.id] ?: emptyList()
             val progress = progressByChapter[chapter.id] ?: emptyList()
@@ -78,8 +81,10 @@ class ProModeService(
             val percent = if (totalItems > 0) (completedCount * 100) / totalItems else 0
             val isTestPassed = testSessions.containsKey(chapter.id)
 
-            // 접근 가능 여부: 첫 챕터이거나 이전 챕터 테스트 통과
-            val isAccessible = if (index == 0) {
+            // 접근 가능 여부: 관리자는 항상, 그 외에는 첫 챕터이거나 이전 챕터 테스트 통과
+            val isAccessible = if (isAdmin) {
+                true
+            } else if (index == 0) {
                 true
             } else {
                 val prevChapter = chapters[index - 1]
@@ -112,13 +117,17 @@ class ProModeService(
             .associateBy { it.itemId }
 
         val allBaseCompleted = checkAllBaseCompleted(items, completedMap)
+        // 관리자는 모든 콘텐츠 무제한 접근
+        val isAdmin = com.korfarm.api.security.SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
 
         // 동일 type 아이템이 여러 개인 경우 자동 라벨 생성
         val typeCountMap = items.groupBy { it.type }.mapValues { it.value.size }
 
         return items.map { item ->
             val progress = completedMap[item.id]
-            val isLocked = if (advancedTypes.contains(item.type)) !allBaseCompleted else false
+            val isLocked = if (isAdmin) false
+                else if (advancedTypes.contains(item.type)) !allBaseCompleted
+                else false
 
             // 라벨: DB에 직접 설정된 값 우선, 없으면 동일 type 다중 시 자동 생성
             val label = item.label ?: run {
