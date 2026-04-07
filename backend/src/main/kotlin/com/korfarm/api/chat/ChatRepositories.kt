@@ -47,3 +47,15 @@ interface ChatAttachmentArchiveRepository : JpaRepository<ChatAttachmentArchiveE
 interface ChatEmoticonRepository : JpaRepository<ChatEmoticonEntity, String> {
     fun findByStatusOrderBySortOrderAscCreatedAtAsc(status: String): List<ChatEmoticonEntity>
 }
+
+@Repository
+interface ChatMessageLikeRepository : JpaRepository<ChatMessageLikeEntity, String> {
+    fun findByMessageIdOrderByCreatedAtAsc(messageId: String): List<ChatMessageLikeEntity>
+    fun findByMessageIdAndUserId(messageId: String, userId: String): ChatMessageLikeEntity?
+
+    @Query("SELECT l.messageId AS messageId, COUNT(l) AS cnt FROM ChatMessageLikeEntity l WHERE l.messageId IN :ids GROUP BY l.messageId")
+    fun countByMessageIds(@Param("ids") ids: Collection<String>): List<Array<Any>>
+
+    @Query("SELECT l.messageId FROM ChatMessageLikeEntity l WHERE l.messageId IN :ids AND l.userId = :userId")
+    fun findLikedMessageIdsByUser(@Param("ids") ids: Collection<String>, @Param("userId") userId: String): List<String>
+}

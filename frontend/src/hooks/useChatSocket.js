@@ -59,6 +59,9 @@ export function useChatSocket(roomId, handlers = {}) {
         case "message.deleted":
           handlersRef.current.onDeleted?.(payload);
           break;
+        case "message.like":
+          handlersRef.current.onLike?.(payload);
+          break;
         case "error":
           handlersRef.current.onError?.(payload);
           break;

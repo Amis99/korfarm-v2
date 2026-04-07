@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap
 @Component
 class ChatWebSocketHandler(
     private val chatService: ChatService,
+    private val messageRepo: ChatMessageRepository,
     private val objectMapper: ObjectMapper
 ) : TextWebSocketHandler() {
     private val log = LoggerFactory.getLogger(ChatWebSocketHandler::class.java)
@@ -93,6 +94,12 @@ class ChatWebSocketHandler(
         val roomId = session.attributes["roomId"]?.toString() ?: "community"
         chatService.deleteMessage(messageId, userId, isAdmin)
         broadcastToRoom(roomId, "message.deleted", mapOf("messageId" to messageId))
+    }
+
+    // ── 외부 호출용: 좋아요 변경 브로드캐스트 ──
+    fun broadcastLike(result: LikeToggleResponse) {
+        val msg = messageRepo.findById(result.messageId).orElse(null) ?: return
+        broadcastToRoom(msg.roomId, "message.like", result)
     }
 
     // ── 헬퍼 ──

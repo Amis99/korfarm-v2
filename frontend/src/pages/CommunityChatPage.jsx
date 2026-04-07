@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { apiGet, apiDelete } from "../utils/api";
+import { apiGet, apiPost, apiDelete } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
 import { useChatSocket } from "../hooks/useChatSocket";
 import MessageBubble from "../components/chat/MessageBubble";
 import MessageInput from "../components/chat/MessageInput";
+import LikeListModal from "../components/chat/LikeListModal";
 import "../styles/community-chat.css";
 
 const ROOM_ID = "community";
@@ -19,6 +20,7 @@ function CommunityChatPage() {
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
   const [error, setError] = useState("");
+  const [likeModalMessageId, setLikeModalMessageId] = useState(null);
   const scrollRef = useRef(null);
   const initialScrollDoneRef = useRef(false);
 
@@ -59,6 +61,16 @@ function CommunityChatPage() {
         )
       );
     },
+    onLike: ({ messageId, likeCount, liked, byUserId }) => {
+      setMessages((prev) =>
+        prev.map((m) => {
+          if (m.id !== messageId) return m;
+          // 본인이 토글한 경우만 likedByMe 갱신, 다른 사람 토글은 카운트만 갱신
+          const newLikedByMe = byUserId === myUserId ? liked : m.likedByMe;
+          return { ...m, likeCount, likedByMe: newLikedByMe };
+        })
+      );
+    },
     onError: (err) => {
       setError(err?.message || "채팅 오류");
     },
@@ -88,6 +100,19 @@ function CommunityChatPage() {
 
   const handleSendNotice = (content) => {
     handleSend("notice", content, null);
+  };
+
+  const handleLikeToggle = async (messageId) => {
+    try {
+      await apiPost(`/v1/chat/messages/${messageId}/like`, {});
+      // WS 브로드캐스트가 onLike 핸들러를 통해 UI 갱신
+    } catch (e) {
+      setError(e.message || "좋아요 실패");
+    }
+  };
+
+  const handleShowLikes = (messageId) => {
+    setLikeModalMessageId(messageId);
   };
 
   const handleDelete = async (messageId) => {
@@ -147,6 +172,8 @@ function CommunityChatPage() {
                   isMine={msg.userId === myUserId}
                   isAdmin={isAdmin}
                   onDelete={handleDelete}
+                  onLikeToggle={handleLikeToggle}
+                  onShowLikes={handleShowLikes}
                 />
               ))
             )}
@@ -164,7 +191,15 @@ function CommunityChatPage() {
       <div className="chat-page-footer-note">
         ⓘ 첨부 파일은 7일 후 자동 보관 처리되며, 그 후엔 썸네일만 노출됩니다.
         본사 관리자는 한 달간 보관함에서 다운로드 가능합니다.
+        길게 누르거나 우클릭하면 좋아요를 누를 수 있습니다.
       </div>
+
+      {likeModalMessageId && (
+        <LikeListModal
+          messageId={likeModalMessageId}
+          onClose={() => setLikeModalMessageId(null)}
+        />
+      )}
     </div>
   );
 }

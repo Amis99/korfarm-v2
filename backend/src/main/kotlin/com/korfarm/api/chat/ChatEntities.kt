@@ -93,6 +93,25 @@ class ChatUserMuteEntity(
 }
 
 @Entity
+@Table(name = "chat_message_likes")
+class ChatMessageLikeEntity(
+    @Id
+    var id: String,
+
+    @Column(name = "message_id", nullable = false)
+    var messageId: String,
+
+    @Column(name = "user_id", nullable = false)
+    var userId: String,
+
+    @Column(name = "user_name", nullable = false)
+    var userName: String,
+
+    @Column(name = "created_at", nullable = false)
+    var createdAt: LocalDateTime = LocalDateTime.now()
+)
+
+@Entity
 @Table(name = "chat_emoticons")
 class ChatEmoticonEntity(
     @Id

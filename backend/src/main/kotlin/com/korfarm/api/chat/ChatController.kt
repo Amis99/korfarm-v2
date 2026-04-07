@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/v1/chat")
 class ChatController(
-    private val chatService: ChatService
+    private val chatService: ChatService,
+    private val chatWsHandler: ChatWebSocketHandler
 ) {
     private fun currentUserId(): String =
         SecurityUtils.currentUserId()
@@ -23,8 +24,8 @@ class ChatController(
         @RequestParam(required = false) before: String?,
         @RequestParam(required = false, defaultValue = "50") limit: Int
     ): ApiResponse<MessageHistoryResponse> {
-        currentUserId()  // 인증만 검증
-        return ApiResponse(success = true, data = chatService.getHistory(roomId, before, limit))
+        val userId = currentUserId()
+        return ApiResponse(success = true, data = chatService.getHistory(roomId, before, limit, userId))
     }
 
     @PostMapping("/rooms/{roomId}/messages")
@@ -49,5 +50,22 @@ class ChatController(
     fun listEmoticons(): ApiResponse<List<EmoticonView>> {
         currentUserId()  // 인증 검증
         return ApiResponse(success = true, data = chatService.listEmoticons())
+    }
+
+    /** 메시지 좋아요 토글 */
+    @PostMapping("/messages/{messageId}/like")
+    fun toggleLike(@PathVariable messageId: String): ApiResponse<LikeToggleResponse> {
+        val userId = currentUserId()
+        val result = chatService.toggleLike(messageId, userId)
+        // WebSocket 브로드캐스트로 모든 클라이언트에게 알림
+        chatWsHandler.broadcastLike(result)
+        return ApiResponse(success = true, data = result)
+    }
+
+    /** 메시지 좋아요 누른 사용자 목록 */
+    @GetMapping("/messages/{messageId}/likes")
+    fun getLikes(@PathVariable messageId: String): ApiResponse<List<LikeUserView>> {
+        currentUserId()
+        return ApiResponse(success = true, data = chatService.getLikes(messageId))
     }
 }

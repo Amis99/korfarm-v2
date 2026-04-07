@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { API_BASE, TOKEN_KEY } from "../../utils/api";
 import { useEmoticons, findEmoticonById } from "../../hooks/useEmoticons";
 import EmoticonImage from "./EmoticonImage";
@@ -169,7 +169,7 @@ function renderAttachment(msg) {
   return <ChatFileLink fileId={fileId} />;
 }
 
-function MessageBubble({ message, isMine, isAdmin, onDelete }) {
+function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onShowLikes }) {
   const colors = userColors(message.userId);
   const bubbleStyle = isMine
     ? { borderColor: colors.border, background: "#cdf5b9" }
@@ -179,6 +179,37 @@ function MessageBubble({ message, isMine, isAdmin, onDelete }) {
     message.messageType === "emoticon"
       ? findEmoticonById(emoticons, message.content)
       : null;
+
+  // 길게 누름 / 우클릭 → 좋아요 토글
+  const longPressTimer = useRef(null);
+  const longPressFired = useRef(false);
+
+  const triggerLike = () => {
+    if (!onLikeToggle) return;
+    if (message.status === "deleted") return;
+    onLikeToggle(message.id);
+  };
+
+  const handleTouchStart = () => {
+    longPressFired.current = false;
+    if (longPressTimer.current) clearTimeout(longPressTimer.current);
+    longPressTimer.current = setTimeout(() => {
+      longPressFired.current = true;
+      triggerLike();
+    }, 500);
+  };
+
+  const handleTouchEnd = () => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  };
+
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+    triggerLike();
+  };
 
   if (message.status === "deleted") {
     return (
@@ -237,7 +268,14 @@ function MessageBubble({ message, isMine, isAdmin, onDelete }) {
           {isMine && <div className="chat-msg-time">{formatTime(message.createdAt)}</div>}
           {message.messageType === "emoticon" ? (
             // 이모티콘은 말풍선 없이 큰 이미지로 표시
-            <div className="chat-emoticon-msg">
+            <div
+              className="chat-emoticon-msg"
+              onContextMenu={handleContextMenu}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onTouchMove={handleTouchEnd}
+              onTouchCancel={handleTouchEnd}
+            >
               {canDelete && (
                 <button
                   type="button"
@@ -257,11 +295,29 @@ function MessageBubble({ message, isMine, isAdmin, onDelete }) {
               ) : (
                 <div className="chat-emoticon-missing">[이모티콘]</div>
               )}
+              {message.likeCount > 0 && (
+                <button
+                  type="button"
+                  className={`chat-like-badge ${message.likedByMe ? "active" : ""}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onShowLikes?.(message.id);
+                  }}
+                  title="좋아요 누른 사람 보기"
+                >
+                  ❤ {message.likeCount}
+                </button>
+              )}
             </div>
           ) : (
             <div
               className={`chat-bubble ${message.isAdmin ? "admin" : ""}`}
               style={bubbleStyle}
+              onContextMenu={handleContextMenu}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onTouchMove={handleTouchEnd}
+              onTouchCancel={handleTouchEnd}
             >
               {canDelete && (
                 <button
@@ -279,6 +335,19 @@ function MessageBubble({ message, isMine, isAdmin, onDelete }) {
               )}
               {message.content && <div className="chat-text">{message.content}</div>}
               {renderAttachment(message)}
+              {message.likeCount > 0 && (
+                <button
+                  type="button"
+                  className={`chat-like-badge ${message.likedByMe ? "active" : ""}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onShowLikes?.(message.id);
+                  }}
+                  title="좋아요 누른 사람 보기"
+                >
+                  ❤ {message.likeCount}
+                </button>
+              )}
             </div>
           )}
           {!isMine && <div className="chat-msg-time">{formatTime(message.createdAt)}</div>}

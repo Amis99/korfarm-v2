@@ -16,6 +16,7 @@ class ChatService(
     private val muteRepo: ChatUserMuteRepository,
     private val archiveRepo: ChatAttachmentArchiveRepository,
     private val emoticonRepo: ChatEmoticonRepository,
+    private val likeRepo: ChatMessageLikeRepository,
     private val userRepo: UserRepository
 ) {
     private val isoFmt: DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
@@ -91,7 +92,7 @@ class ChatService(
     }
 
     @Transactional(readOnly = true)
-    fun getHistory(roomId: String, beforeId: String?, limit: Int): MessageHistoryResponse {
+    fun getHistory(roomId: String, beforeId: String?, limit: Int, currentUserId: String): MessageHistoryResponse {
         val pageSize = limit.coerceIn(1, 100)
         val before: LocalDateTime? = beforeId?.let {
             messageRepo.findById(it).orElse(null)?.createdAt
@@ -102,14 +103,84 @@ class ChatService(
         // 사용자 ID들을 모아 한 번에 fetch (N+1 방지)
         val userIds = limited.map { it.userId }.toSet()
         val userMap = userRepo.findAllById(userIds).associateBy { it.id }
+
+        // 좋아요 카운트 + 내가 좋아요 누른 메시지 ID 일괄 조회
+        val msgIds = limited.map { it.id }.toSet()
+        val likeCountMap: Map<String, Int> = if (msgIds.isNotEmpty()) {
+            likeRepo.countByMessageIds(msgIds).associate { row ->
+                (row[0] as String) to (row[1] as Number).toInt()
+            }
+        } else emptyMap()
+        val myLikedSet: Set<String> = if (msgIds.isNotEmpty()) {
+            likeRepo.findLikedMessageIdsByUser(msgIds, currentUserId).toSet()
+        } else emptySet()
+
         // 응답은 ASC (오래된→최신)
         return MessageHistoryResponse(
             messages = limited.reversed().map { msg ->
                 val avatar = userMap[msg.userId]?.profileImageUrl?.takeIf { it.isNotBlank() }
-                msg.toView(avatarOverride = avatar)
+                msg.toView(
+                    avatarOverride = avatar,
+                    likeCountOverride = likeCountMap[msg.id] ?: 0,
+                    likedByMeOverride = msg.id in myLikedSet
+                )
             },
             hasMore = hasMore
         )
+    }
+
+    // ── 좋아요 ──
+
+    @Transactional
+    fun toggleLike(messageId: String, userId: String): LikeToggleResponse {
+        val msg = messageRepo.findById(messageId).orElseThrow {
+            ApiException("NOT_FOUND", "메시지를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        if (msg.status == "deleted") {
+            throw ApiException("DELETED", "삭제된 메시지에는 좋아요를 누를 수 없습니다", HttpStatus.GONE)
+        }
+        val user = userRepo.findById(userId).orElseThrow {
+            ApiException("USER_NOT_FOUND", "사용자를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val displayName = user.name?.takeIf { it.isNotBlank() } ?: user.email
+
+        val existing = likeRepo.findByMessageIdAndUserId(messageId, userId)
+        val nowLiked: Boolean
+        if (existing != null) {
+            likeRepo.delete(existing)
+            nowLiked = false
+        } else {
+            likeRepo.save(
+                ChatMessageLikeEntity(
+                    id = IdGenerator.newId("clike"),
+                    messageId = messageId,
+                    userId = userId,
+                    userName = displayName
+                )
+            )
+            nowLiked = true
+        }
+        val count = likeRepo.findByMessageIdOrderByCreatedAtAsc(messageId).size
+        return LikeToggleResponse(
+            messageId = messageId,
+            likeCount = count,
+            liked = nowLiked,
+            byUserId = userId,
+            byUserName = displayName
+        )
+    }
+
+    @Transactional(readOnly = true)
+    fun getLikes(messageId: String): List<LikeUserView> {
+        return likeRepo.findByMessageIdOrderByCreatedAtAsc(messageId)
+            .sortedByDescending { it.createdAt }
+            .map {
+                LikeUserView(
+                    userId = it.userId,
+                    userName = it.userName,
+                    createdAt = it.createdAt.format(isoFmt)
+                )
+            }
     }
 
     @Transactional
@@ -224,7 +295,11 @@ class ChatService(
 
     // ── 변환 헬퍼 ──
 
-    private fun ChatMessageEntity.toView(avatarOverride: String? = null): ChatMessageView {
+    private fun ChatMessageEntity.toView(
+        avatarOverride: String? = null,
+        likeCountOverride: Int = 0,
+        likedByMeOverride: Boolean = false
+    ): ChatMessageView {
         // archived/purged 상태에서는 fileId 노출 X (다운로드 차단)
         val safeFileId = if (attachmentState == "live") fileId else null
         val thumbUrl = thumbnailPath?.let { "/v1/chat/thumbs/$id" }
@@ -242,7 +317,9 @@ class ChatService(
             attachmentState = attachmentState,
             isAdmin = isAdmin,
             status = status,
-            createdAt = createdAt.format(isoFmt)
+            createdAt = createdAt.format(isoFmt),
+            likeCount = likeCountOverride,
+            likedByMe = likedByMeOverride
         )
     }
 

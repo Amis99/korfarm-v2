@@ -20,7 +20,23 @@ data class ChatMessageView(
     val attachmentState: String,    // live|archived|purged
     val isAdmin: Boolean,
     val status: String,             // active|deleted
-    val createdAt: String           // ISO 8601
+    val createdAt: String,          // ISO 8601
+    val likeCount: Int = 0,         // 좋아요 수
+    val likedByMe: Boolean = false  // 현재 사용자가 좋아요 눌렀는지
+)
+
+data class LikeToggleResponse(
+    val messageId: String,
+    val likeCount: Int,
+    val liked: Boolean,             // 토글 후 상태 (눌려있으면 true)
+    val byUserId: String,           // 토글한 사용자
+    val byUserName: String
+)
+
+data class LikeUserView(
+    val userId: String,
+    val userName: String,
+    val createdAt: String
 )
 
 data class MessageHistoryResponse(
