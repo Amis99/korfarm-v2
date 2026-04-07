@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 
 /**
  * 브라우저 MediaRecorder를 사용해 음성 녹음 → blob 반환.
@@ -6,8 +6,12 @@ import { useRef, useState } from "react";
  * Props:
  *   onRecorded(blob, mime): 녹음 완료 시 호출. 부모가 업로드 처리.
  *   disabled: boolean
+ *   hideButton: 자체 마이크 버튼 숨김 (외부에서 ref.start()로 트리거)
+ *
+ * Imperative handle:
+ *   ref.start(): 녹음 시작
  */
-function VoiceRecorder({ onRecorded, disabled }) {
+const VoiceRecorder = forwardRef(({ onRecorded, disabled, hideButton = false }, ref) => {
   const [recording, setRecording] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const recorderRef = useRef(null);
@@ -80,6 +84,12 @@ function VoiceRecorder({ onRecorded, disabled }) {
     streamRef.current = null;
   };
 
+  useImperativeHandle(ref, () => ({
+    start: startRecording,
+    stop: stopRecording,
+    cancel: cancelRecording,
+  }));
+
   if (recording) {
     return (
       <div className="chat-voice-recording">
@@ -95,6 +105,8 @@ function VoiceRecorder({ onRecorded, disabled }) {
     );
   }
 
+  if (hideButton) return null;
+
   return (
     <button
       type="button"
@@ -107,6 +119,6 @@ function VoiceRecorder({ onRecorded, disabled }) {
       <span className="material-symbols-outlined">mic</span>
     </button>
   );
-}
+});
 
 export default VoiceRecorder;

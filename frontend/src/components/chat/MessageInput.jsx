@@ -18,8 +18,10 @@ function MessageInput({ onSend, onSendNotice, isAdmin, disabled }) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [attachMenuOpen, setAttachMenuOpen] = useState(false);
   const fileInputRef = useRef(null);
   const imageInputRef = useRef(null);
+  const voiceRecorderRef = useRef(null);
   const { emoticons } = useEmoticons();
 
   const handleTextSend = () => {
@@ -106,11 +108,23 @@ function MessageInput({ onSend, onSendNotice, isAdmin, disabled }) {
     setPickerOpen(false);
   };
 
+  // 통합 첨부 메뉴 — 이미지/파일/음성 선택
+  const handleAttachMenuPick = (kind) => {
+    setAttachMenuOpen(false);
+    if (kind === "image") {
+      imageInputRef.current?.click();
+    } else if (kind === "file") {
+      fileInputRef.current?.click();
+    } else if (kind === "voice") {
+      voiceRecorderRef.current?.start();
+    }
+  };
+
   return (
     <div className="chat-input-bar">
       {error && <div className="chat-input-error">{error}</div>}
       <div className="chat-input-row">
-        {/* 이미지 첨부 */}
+        {/* 숨겨진 파일 input들 */}
         <input
           ref={imageInputRef}
           type="file"
@@ -118,37 +132,68 @@ function MessageInput({ onSend, onSendNotice, isAdmin, disabled }) {
           style={{ display: "none" }}
           onChange={handleImageSelected}
         />
-        <button
-          type="button"
-          className="chat-icon-btn"
-          onClick={() => imageInputRef.current?.click()}
-          disabled={disabled || uploading}
-          aria-label="이미지 첨부"
-          title="이미지"
-        >
-          <span className="material-symbols-outlined">image</span>
-        </button>
-
-        {/* 파일 첨부 */}
         <input
           ref={fileInputRef}
           type="file"
           style={{ display: "none" }}
           onChange={handleFileSelected}
         />
-        <button
-          type="button"
-          className="chat-icon-btn"
-          onClick={() => fileInputRef.current?.click()}
-          disabled={disabled || uploading}
-          aria-label="파일 첨부"
-          title="파일"
-        >
-          <span className="material-symbols-outlined">attach_file</span>
-        </button>
 
-        {/* 음성 녹음 */}
-        <VoiceRecorder onRecorded={handleVoiceRecorded} disabled={disabled || uploading} />
+        {/* 통합 첨부 버튼 + 드롭업 메뉴 */}
+        <div className="chat-attach-wrapper">
+          <button
+            type="button"
+            className="chat-icon-btn chat-attach-trigger"
+            onClick={() => setAttachMenuOpen((v) => !v)}
+            disabled={disabled || uploading}
+            aria-label="첨부"
+            title="첨부 (이미지/파일/음성)"
+          >
+            <span className="material-symbols-outlined">add_circle</span>
+          </button>
+          {attachMenuOpen && (
+            <>
+              <div
+                className="chat-attach-backdrop"
+                onClick={() => setAttachMenuOpen(false)}
+              />
+              <div className="chat-attach-menu">
+                <button
+                  type="button"
+                  className="chat-attach-menu-item"
+                  onClick={() => handleAttachMenuPick("image")}
+                >
+                  <span className="material-symbols-outlined">image</span>
+                  <span>이미지</span>
+                </button>
+                <button
+                  type="button"
+                  className="chat-attach-menu-item"
+                  onClick={() => handleAttachMenuPick("file")}
+                >
+                  <span className="material-symbols-outlined">attach_file</span>
+                  <span>파일</span>
+                </button>
+                <button
+                  type="button"
+                  className="chat-attach-menu-item"
+                  onClick={() => handleAttachMenuPick("voice")}
+                >
+                  <span className="material-symbols-outlined">mic</span>
+                  <span>음성</span>
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* 음성 녹음 (자체 버튼은 숨김, ref로만 시작) */}
+        <VoiceRecorder
+          ref={voiceRecorderRef}
+          onRecorded={handleVoiceRecorded}
+          disabled={disabled || uploading}
+          hideButton
+        />
 
         {/* 관리자: 공지 발송 */}
         {isAdmin && (

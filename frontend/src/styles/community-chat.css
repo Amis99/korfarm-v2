@@ -777,6 +777,64 @@
   color: #888;
 }
 
+/* 통합 첨부 버튼 + 드롭업 메뉴 */
+.chat-attach-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.chat-attach-trigger .material-symbols-outlined {
+  font-size: 26px;
+  color: #b06e30;
+}
+
+.chat-attach-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: transparent;
+}
+
+.chat-attach-menu {
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  background: #fff;
+  border: 1.5px solid #c7a878;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+  z-index: 100;
+}
+
+.chat-attach-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
+  color: #5a4030;
+  text-align: left;
+  transition: background 0.12s;
+}
+
+.chat-attach-menu-item:hover {
+  background: #fbf3e3;
+}
+
+.chat-attach-menu-item .material-symbols-outlined {
+  font-size: 20px;
+  color: #b06e30;
+}
+
 /* 음성 녹음 진행 중 */
 .chat-voice-recording {
   display: flex;
