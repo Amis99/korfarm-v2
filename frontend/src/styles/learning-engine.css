@@ -2045,69 +2045,177 @@ mark.highlight {
   }
 }
 
-/* PC: 레벨별 글자 크기 (화면용) */
-.screen-level-saussure .worksheet-passage-box,
-.screen-level-saussure .reading-passage,
-.screen-level-saussure .reading-passage p,
-.screen-level-saussure .worksheet-text,
-.screen-level-saussure .worksheet-item-text { font-size: 20px; line-height: 1.8; }
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* 학습 모듈 통합 사이즈 — passage / stem / choices             */
+/* PC: 모든 모듈·모든 레벨 통일                                  */
+/* 모바일: 4단계 레벨별 차등 (소쉬르 38 → 비트겐슈타인 32)         */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
-.screen-level-saussure .question-modal-prompt,
-.screen-level-saussure .question-choice { font-size: 18px; }
+/* PC: passage 16 / 1.85 */
+.bg-passage-text,
+.logic-passage-text,
+.reading-passage,
+.reading-passage p,
+.worksheet-passage-box,
+.worksheet-text,
+.worksheet-item-text,
+.choice-passage,
+.dq-passage,
+.sc-markdown-body,
+.passage-markdown {
+  font-size: 16px;
+  line-height: 1.85;
+}
 
-.screen-level-frege .worksheet-passage-box,
-.screen-level-frege .reading-passage,
-.screen-level-frege .reading-passage p,
-.screen-level-frege .worksheet-text,
-.screen-level-frege .worksheet-item-text { font-size: 16px; line-height: 1.7; }
+/* PC: stem 16 / 1.6 */
+.question-modal-stem,
+.question-modal-prompt,
+.choice-header h3,
+.dq-stem,
+.sc-current-stem,
+.choice-stem,
+.ss-instruction {
+  font-size: 16px;
+  line-height: 1.6;
+}
 
-.screen-level-frege .question-modal-prompt,
-.screen-level-frege .question-choice { font-size: 15px; }
+/* PC: choices 15 / 1.5 */
+.question-modal-option,
+.question-choice,
+.choice-item,
+.choice-item span,
+.sc-choice-btn,
+.sc-ox-btn,
+.dq-choice {
+  font-size: 15px;
+  line-height: 1.5;
+}
 
-/* 모바일: 레벨별 글자 크기 조정 (화면용) */
+/* 모바일: 레벨별 통합 사이즈 (passage/stem/choices 동일) */
 @media (max-width: 768px) {
-  /* 소쉬르 (초등 저학년): 글자 크기 대폭 확대 */
-  .screen-level-saussure .worksheet-passage-box,
+  /* 소쉬르: 38px / 1.85 */
+  .screen-level-saussure .bg-passage-text,
+  .screen-level-saussure .logic-passage-text,
   .screen-level-saussure .reading-passage,
   .screen-level-saussure .reading-passage p,
+  .screen-level-saussure .worksheet-passage-box,
   .screen-level-saussure .worksheet-text,
-  .screen-level-saussure .worksheet-item-text { font-size: 42px; line-height: 1.8; }
-
+  .screen-level-saussure .worksheet-item-text,
+  .screen-level-saussure .choice-passage,
+  .screen-level-saussure .dq-passage,
+  .screen-level-saussure .sc-markdown-body,
+  .screen-level-saussure .passage-markdown,
   .screen-level-saussure .question-modal-stem,
-  .screen-level-saussure .question-modal-option { font-size: 40px; line-height: 1.7; }
+  .screen-level-saussure .question-modal-prompt,
+  .screen-level-saussure .choice-header h3,
+  .screen-level-saussure .dq-stem,
+  .screen-level-saussure .sc-current-stem,
+  .screen-level-saussure .choice-stem,
+  .screen-level-saussure .ss-instruction,
+  .screen-level-saussure .question-modal-option,
+  .screen-level-saussure .question-choice,
+  .screen-level-saussure .choice-item,
+  .screen-level-saussure .choice-item span,
+  .screen-level-saussure .sc-choice-btn,
+  .screen-level-saussure .sc-ox-btn,
+  .screen-level-saussure .dq-choice {
+    font-size: 38px;
+    line-height: 1.85;
+  }
 
-  .screen-level-saussure .worksheet-item-label { font-size: 38px; }
-
-  .screen-level-saussure .confirm-char { font-size: 40px; }
-
-  /* 프레게 (초등 고학년): 확대 */
-  .screen-level-frege .worksheet-passage-box,
+  /* 프레게: 36px / 1.80 */
+  .screen-level-frege .bg-passage-text,
+  .screen-level-frege .logic-passage-text,
   .screen-level-frege .reading-passage,
   .screen-level-frege .reading-passage p,
+  .screen-level-frege .worksheet-passage-box,
   .screen-level-frege .worksheet-text,
-  .screen-level-frege .worksheet-item-text { font-size: 34px; line-height: 1.7; }
-
+  .screen-level-frege .worksheet-item-text,
+  .screen-level-frege .choice-passage,
+  .screen-level-frege .dq-passage,
+  .screen-level-frege .sc-markdown-body,
+  .screen-level-frege .passage-markdown,
   .screen-level-frege .question-modal-stem,
-  .screen-level-frege .question-modal-option { font-size: 32px; line-height: 1.6; }
+  .screen-level-frege .question-modal-prompt,
+  .screen-level-frege .choice-header h3,
+  .screen-level-frege .dq-stem,
+  .screen-level-frege .sc-current-stem,
+  .screen-level-frege .choice-stem,
+  .screen-level-frege .ss-instruction,
+  .screen-level-frege .question-modal-option,
+  .screen-level-frege .question-choice,
+  .screen-level-frege .choice-item,
+  .screen-level-frege .choice-item span,
+  .screen-level-frege .sc-choice-btn,
+  .screen-level-frege .sc-ox-btn,
+  .screen-level-frege .dq-choice {
+    font-size: 36px;
+    line-height: 1.80;
+  }
 
-  .screen-level-frege .confirm-char { font-size: 32px; }
+  /* 러셀: 34px / 1.75 (기본값) */
+  .screen-level-russell .bg-passage-text,
+  .screen-level-russell .logic-passage-text,
+  .screen-level-russell .reading-passage,
+  .screen-level-russell .reading-passage p,
+  .screen-level-russell .worksheet-passage-box,
+  .screen-level-russell .worksheet-text,
+  .screen-level-russell .worksheet-item-text,
+  .screen-level-russell .choice-passage,
+  .screen-level-russell .dq-passage,
+  .screen-level-russell .sc-markdown-body,
+  .screen-level-russell .passage-markdown,
+  .screen-level-russell .question-modal-stem,
+  .screen-level-russell .question-modal-prompt,
+  .screen-level-russell .choice-header h3,
+  .screen-level-russell .dq-stem,
+  .screen-level-russell .sc-current-stem,
+  .screen-level-russell .choice-stem,
+  .screen-level-russell .ss-instruction,
+  .screen-level-russell .question-modal-option,
+  .screen-level-russell .question-choice,
+  .screen-level-russell .choice-item,
+  .screen-level-russell .choice-item span,
+  .screen-level-russell .sc-choice-btn,
+  .screen-level-russell .sc-ox-btn,
+  .screen-level-russell .dq-choice {
+    font-size: 34px;
+    line-height: 1.75;
+  }
 
-  /* 러셀/비트겐슈타인 (중고등): 기본 확대 */
-  .engine-body .worksheet-passage-box,
-  .engine-body .reading-passage,
-  .engine-body .reading-passage p,
-  .engine-body .worksheet-text,
-  .engine-body .worksheet-item-text { font-size: 24px; line-height: 1.6; }
+  /* 비트겐슈타인: 32px / 1.70 */
+  .screen-level-wittgenstein .bg-passage-text,
+  .screen-level-wittgenstein .logic-passage-text,
+  .screen-level-wittgenstein .reading-passage,
+  .screen-level-wittgenstein .reading-passage p,
+  .screen-level-wittgenstein .worksheet-passage-box,
+  .screen-level-wittgenstein .worksheet-text,
+  .screen-level-wittgenstein .worksheet-item-text,
+  .screen-level-wittgenstein .choice-passage,
+  .screen-level-wittgenstein .dq-passage,
+  .screen-level-wittgenstein .sc-markdown-body,
+  .screen-level-wittgenstein .passage-markdown,
+  .screen-level-wittgenstein .question-modal-stem,
+  .screen-level-wittgenstein .question-modal-prompt,
+  .screen-level-wittgenstein .choice-header h3,
+  .screen-level-wittgenstein .dq-stem,
+  .screen-level-wittgenstein .sc-current-stem,
+  .screen-level-wittgenstein .choice-stem,
+  .screen-level-wittgenstein .ss-instruction,
+  .screen-level-wittgenstein .question-modal-option,
+  .screen-level-wittgenstein .question-choice,
+  .screen-level-wittgenstein .choice-item,
+  .screen-level-wittgenstein .choice-item span,
+  .screen-level-wittgenstein .sc-choice-btn,
+  .screen-level-wittgenstein .sc-ox-btn,
+  .screen-level-wittgenstein .dq-choice {
+    font-size: 32px;
+    line-height: 1.70;
+  }
 
-  .engine-body .question-modal-stem,
-  .engine-body .question-modal-option { font-size: 22px; line-height: 1.5; }
-
-  .engine-body .confirm-char { font-size: 22px; }
-
-  /* 질문 모달 내부 글자 크기 확대 */
-  .question-modal-prompt { font-size: 22px; }
-  .question-choice { font-size: 22px; padding: 12px 16px; }
+  /* 보조 라벨류: 본문 사이즈보다 작게 유지 (선택지 숫자 등) */
   .choice-label { font-size: 19px; padding: 4px 10px; }
+  .question-choice { padding: 12px 16px; }
 }
 
 /* 인쇄 전용 영역 - 화면에서 숨김 */

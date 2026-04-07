@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 import { FEEDBACK } from "../shared/feedbackTimings";
-import RichText from "../../utils/RichText";
+import PassageMarkdown from "../../utils/PassageMarkdown";
 import "../../styles/logic-module.css";
 
 const DEFAULT_SCORING = { correctDeltaSec: 15, wrongDeltaSec: -15 };
@@ -136,7 +136,7 @@ function LogicModule({ content }) {
           <div className="logic-passage-title">
             {currentPassage.title || `지문 ${currentPassageIndex + 1}`}
           </div>
-          <div className="logic-passage-text"><RichText>{currentPassage.text}</RichText></div>
+          <PassageMarkdown className="logic-passage-text">{currentPassage.text}</PassageMarkdown>
         </div>
         <div className="logic-question-area">
           <QuestionModal

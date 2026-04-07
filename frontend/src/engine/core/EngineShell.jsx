@@ -223,11 +223,15 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   }, [content]);
 
   // 화면용 레벨 클래스 (모바일 글자 크기 조정)
+  // 4단계 모두 명시적 클래스 부여 — 통합 사이즈 규칙이 적용됨
   const screenLevelClass = useMemo(() => {
     const level = content?.targetLevel || "";
     if (level.startsWith("SAUSSURE") || level.startsWith("SOUSSURE")) return "screen-level-saussure";
     if (level.startsWith("FREGE")) return "screen-level-frege";
-    return "";
+    if (level.startsWith("RUSSELL")) return "screen-level-russell";
+    if (level.startsWith("WITTGENSTEIN")) return "screen-level-wittgenstein";
+    // 레벨 정보가 없으면 러셀 기준
+    return "screen-level-russell";
   }, [content]);
 
   // 인쇄 전용: 페이지 그룹별 문제 추출

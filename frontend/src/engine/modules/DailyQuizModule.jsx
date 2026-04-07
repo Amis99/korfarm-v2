@@ -4,6 +4,7 @@ import QuestionModal from "../shared/QuestionModal";
 import { FEEDBACK } from "../shared/feedbackTimings";
 import TokenPassage from "../shared/TokenPassage";
 import RichText from "../../utils/RichText";
+import PassageMarkdown from "../../utils/PassageMarkdown";
 
 // 타이머 규칙 (정답 +20초, 오답 -40초)
 const DEFAULT_SCORING = { correctDeltaSec: 20, wrongDeltaSec: -40 };
@@ -388,13 +389,16 @@ function DailyQuizModule({ content }) {
     const passage = currentQuestion.passage;
     if (!passage) return null;
     if (typeof passage === "string") {
-      return (
-        <div className="dq-passage">
-          {currentQuestion.highlight
-            ? renderHighlightedText(passage, currentQuestion.highlight)
-            : <RichText>{passage}</RichText>}
-        </div>
-      );
+      // highlight 모드는 토큰 단위 렌더링이 필요하므로 RichText 유지
+      if (currentQuestion.highlight) {
+        return (
+          <div className="dq-passage">
+            {renderHighlightedText(passage, currentQuestion.highlight)}
+          </div>
+        );
+      }
+      // 일반 지문은 마크다운 + 항목 자동 줄바꿈
+      return <PassageMarkdown className="dq-passage">{passage}</PassageMarkdown>;
     }
     return null;
   };

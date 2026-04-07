@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import Markdown from "react-markdown";
+import PassageMarkdown from "../../utils/PassageMarkdown";
 import { useEngine } from "../core/EngineContext";
 import { apiPost } from "../../utils/api";
 import { FEEDBACK } from "../shared/feedbackTimings";
@@ -146,9 +146,7 @@ function StudyContentModule({ content }) {
       <div className="sc-module">
         <div className="sc-reading-paper">
           <div className="sc-reading-title">{content?.title || "학습 내용"}</div>
-          <div className="sc-markdown-body">
-            <Markdown>{markdown}</Markdown>
-          </div>
+          <PassageMarkdown className="sc-markdown-body">{markdown}</PassageMarkdown>
           <div className="sc-reading-actions">
             {errorMsg && <div className="sc-error">{errorMsg}</div>}
             <button

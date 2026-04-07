@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 import { FEEDBACK } from "../shared/feedbackTimings";
-import RichText from "../../utils/RichText";
+import PassageMarkdown from "../../utils/PassageMarkdown";
 import "../../styles/background-module.css";
 
 // 타이머 규칙
@@ -148,7 +148,7 @@ function BackgroundModule({ content }) {
         </div>
         <div className="bg-passage-area">
           <div className="bg-passage-title">{currentPassage.title || `지문 ${currentPassageIndex + 1}`}</div>
-          <div className="bg-passage-text"><RichText>{currentPassage.text}</RichText></div>
+          <PassageMarkdown className="bg-passage-text">{currentPassage.text}</PassageMarkdown>
         </div>
         <div className="bg-actions">
           <button type="button" className="bg-btn bg-btn-primary" onClick={handleDoneReading}>
