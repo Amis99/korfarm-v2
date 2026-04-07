@@ -9,6 +9,53 @@ const formatTime = (iso) => {
   return `${h}:${m}`;
 };
 
+/** userId를 안정적인 hue(0~360)로 해시 */
+function hashHue(userId) {
+  if (!userId) return 200;
+  let h = 0;
+  for (let i = 0; i < userId.length; i++) {
+    h = (h * 31 + userId.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h) % 360;
+}
+
+/** userId 기반 사용자 고유 색상 (HSL) */
+function userColors(userId) {
+  const hue = hashHue(userId);
+  return {
+    border: `hsl(${hue}, 65%, 45%)`,
+    avatarBg: `hsl(${hue}, 60%, 75%)`,
+    avatarText: `hsl(${hue}, 70%, 25%)`,
+  };
+}
+
+function Avatar({ userId, userName, userAvatarUrl }) {
+  const colors = userColors(userId);
+  const initial = (userName || "?").trim().charAt(0).toUpperCase();
+  if (userAvatarUrl) {
+    return (
+      <img
+        src={userAvatarUrl}
+        alt={userName}
+        className="chat-avatar"
+        style={{ borderColor: colors.border }}
+      />
+    );
+  }
+  return (
+    <div
+      className="chat-avatar chat-avatar-fallback"
+      style={{
+        background: colors.avatarBg,
+        color: colors.avatarText,
+        borderColor: colors.border,
+      }}
+    >
+      {initial}
+    </div>
+  );
+}
+
 /** 인증 토큰을 헤더에 실어 첨부 파일을 blob URL로 변환하는 훅 */
 function useAuthorizedFile(fileId) {
   const [url, setUrl] = useState(null);
@@ -121,10 +168,18 @@ function renderAttachment(msg) {
 }
 
 function MessageBubble({ message, isMine, isAdmin, onDelete }) {
+  const colors = userColors(message.userId);
+  const bubbleStyle = isMine
+    ? { borderColor: colors.border, background: "#cdf5b9" }
+    : { borderColor: colors.border, background: "#ffffff" };
+
   if (message.status === "deleted") {
     return (
       <div className={`chat-msg ${isMine ? "mine" : "other"} deleted`}>
-        <div className="chat-bubble deleted-bubble">삭제된 메시지입니다</div>
+        {!isMine && <Avatar userId={message.userId} userName={message.userName} userAvatarUrl={message.userAvatarUrl} />}
+        <div className="chat-msg-body">
+          <div className="chat-bubble deleted-bubble">삭제된 메시지입니다</div>
+        </div>
       </div>
     );
   }
@@ -156,29 +211,48 @@ function MessageBubble({ message, isMine, isAdmin, onDelete }) {
   return (
     <div className={`chat-msg ${isMine ? "mine" : "other"}`}>
       {!isMine && (
-        <div className="chat-msg-name">
-          {message.userName}
-          {message.isAdmin ? " (관리자)" : ""}
-        </div>
+        <Avatar
+          userId={message.userId}
+          userName={message.userName}
+          userAvatarUrl={message.userAvatarUrl}
+        />
       )}
-      <div className="chat-bubble-row">
-        {isMine && <div className="chat-msg-time">{formatTime(message.createdAt)}</div>}
-        <div className={`chat-bubble ${message.isAdmin ? "admin" : ""}`}>
-          {message.content && <div className="chat-text">{message.content}</div>}
-          {renderAttachment(message)}
+      <div className="chat-msg-body">
+        {!isMine && (
+          <div className="chat-msg-name" style={{ color: colors.border }}>
+            {message.userName}
+            {message.isAdmin ? " (관리자)" : ""}
+          </div>
+        )}
+        <div className="chat-bubble-row">
+          {isMine && <div className="chat-msg-time">{formatTime(message.createdAt)}</div>}
+          <div
+            className={`chat-bubble ${message.isAdmin ? "admin" : ""}`}
+            style={bubbleStyle}
+          >
+            {message.content && <div className="chat-text">{message.content}</div>}
+            {renderAttachment(message)}
+          </div>
+          {!isMine && <div className="chat-msg-time">{formatTime(message.createdAt)}</div>}
         </div>
-        {!isMine && <div className="chat-msg-time">{formatTime(message.createdAt)}</div>}
+        {(isAdmin || isMine) && onDelete && (
+          <button
+            type="button"
+            className="chat-msg-delete"
+            onClick={() => {
+              if (window.confirm("이 메시지를 삭제하시겠습니까?")) onDelete(message.id);
+            }}
+          >
+            삭제
+          </button>
+        )}
       </div>
-      {(isAdmin || isMine) && onDelete && (
-        <button
-          type="button"
-          className="chat-msg-delete"
-          onClick={() => {
-            if (window.confirm("이 메시지를 삭제하시겠습니까?")) onDelete(message.id);
-          }}
-        >
-          삭제
-        </button>
+      {isMine && (
+        <Avatar
+          userId={message.userId}
+          userName={message.userName}
+          userAvatarUrl={message.userAvatarUrl}
+        />
       )}
     </div>
   );

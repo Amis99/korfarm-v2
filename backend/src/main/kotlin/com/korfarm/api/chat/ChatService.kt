@@ -57,16 +57,18 @@ class ChatService(
             ApiException("USER_NOT_FOUND", "사용자를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
         val displayName = user.name?.takeIf { it.isNotBlank() } ?: user.email
+        val avatarUrl = user.profileImageUrl?.takeIf { it.isNotBlank() }
 
         val entity = ChatMessageEntity(
             id = IdGenerator.newId("cmsg"),
             roomId = roomId,
             userId = userId,
             userName = displayName,
+            userAvatarUrl = avatarUrl,
             messageType = type,
             content = req.content,
             fileId = req.fileId,
-            attachmentState = if (req.fileId != null) "live" else "live",
+            attachmentState = "live",
             isAdmin = isAdmin,
             createdAt = LocalDateTime.now()
         )
@@ -163,6 +165,7 @@ class ChatService(
             roomId = roomId,
             userId = userId,
             userName = userName,
+            userAvatarUrl = userAvatarUrl,
             messageType = messageType,
             content = if (status == "deleted") null else content,
             fileId = if (status == "deleted") null else safeFileId,

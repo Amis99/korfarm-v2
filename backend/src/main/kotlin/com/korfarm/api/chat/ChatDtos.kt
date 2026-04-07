@@ -12,6 +12,7 @@ data class ChatMessageView(
     val roomId: String,
     val userId: String,
     val userName: String,
+    val userAvatarUrl: String?,     // 발화 시점 프로필 이미지 URL 스냅샷
     val messageType: String,
     val content: String?,
     val fileId: String?,            // live 상태에서만 set, archived/purged는 null

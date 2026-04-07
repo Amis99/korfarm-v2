@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { WS_BASE, TOKEN_KEY } from "../utils/api";
+import { WS_BASE, TOKEN_KEY, camelize } from "../utils/api";
 
 /**
  * 채팅 WebSocket 훅.
@@ -46,7 +46,9 @@ export function useChatSocket(roomId, handlers = {}) {
       } catch {
         return;
       }
-      const { type, payload } = msg || {};
+      const type = msg?.type;
+      // 백엔드 Jackson은 snake_case로 직렬화 → camelize로 변환
+      const payload = msg?.payload != null ? camelize(msg.payload) : null;
       switch (type) {
         case "room.joined":
           handlersRef.current.onJoined?.(payload);

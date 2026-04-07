@@ -1,10 +1,13 @@
-/* 커뮤니티 채팅 — 카카오톡 스타일 */
+/* 커뮤니티 채팅 — 카카오톡 스타일 + 한지 배경 */
 
 .chat-page {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #b2c7d9;
+  background-image: url("/커뮤니티 채팅 배경.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, sans-serif;
 }
 
@@ -71,7 +74,10 @@
   padding: 16px 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 14px;
+  /* 배경 이미지 위에 어두운 필터 */
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(1px);
 }
 
 .chat-load-more {
@@ -91,79 +97,118 @@
 
 .chat-empty {
   text-align: center;
-  color: #6a5040;
+  color: #fff;
   font-size: 14px;
   margin-top: 40px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .chat-loading {
   text-align: center;
-  color: #6a5040;
+  color: #fff;
   margin-top: 40px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* 메시지 말풍선 */
+/* 메시지 행: 아바타 + 말풍선 */
 .chat-msg {
   display: flex;
-  flex-direction: column;
-  max-width: 80%;
+  align-items: flex-start;
+  max-width: 90%;
+  gap: 8px;
   position: relative;
 }
 
 .chat-msg.mine {
   align-self: flex-end;
-  align-items: flex-end;
+  flex-direction: row;
 }
 
 .chat-msg.other {
   align-self: flex-start;
+  flex-direction: row;
+}
+
+.chat-msg-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: calc(100% - 50px);
+}
+
+.chat-msg.mine .chat-msg-body {
+  align-items: flex-end;
+}
+
+.chat-msg.other .chat-msg-body {
   align-items: flex-start;
+}
+
+/* 아바타 */
+.chat-avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2.5px solid #888;
+  object-fit: cover;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.chat-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: inherit;
 }
 
 .chat-msg.deleted .chat-bubble {
   font-style: italic;
   color: #999;
-  background: #f0f0f0;
+  background: #f0f0f0 !important;
+  border-color: #ccc !important;
 }
 
 .chat-msg-name {
   font-size: 12px;
-  color: #5a4030;
-  margin-bottom: 2px;
-  margin-left: 6px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  margin-left: 4px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .chat-bubble-row {
   display: flex;
   align-items: flex-end;
-  gap: 4px;
+  gap: 6px;
 }
 
+/* 각진 사각형 말풍선 + 사용자 색 테두리 + 그림자 */
 .chat-bubble {
   background: #fff;
-  border-radius: 12px;
-  padding: 8px 12px;
+  border: 2.5px solid #888;
+  border-radius: 4px;
+  padding: 10px 14px;
   font-size: 14px;
   line-height: 1.5;
   color: #222;
   word-break: break-word;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
   max-width: 100%;
 }
 
-.chat-msg.mine .chat-bubble {
-  background: #fef01b;
-  color: #222;
-}
-
 .chat-bubble.admin {
-  border: 1.5px solid #c7a878;
+  border-width: 3px;
 }
 
 .chat-msg-time {
   font-size: 11px;
-  color: #5a4030;
+  color: #fff;
   white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .chat-text {
@@ -171,14 +216,14 @@
 }
 
 .chat-msg-delete {
-  margin-top: 2px;
+  margin-top: 4px;
   font-size: 11px;
-  background: rgba(0, 0, 0, 0.05);
-  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #a83020;
   color: #a83020;
   cursor: pointer;
   border-radius: 4px;
-  padding: 2px 6px;
+  padding: 2px 8px;
 }
 
 /* 첨부 */

@@ -23,6 +23,9 @@ class ChatMessageEntity(
     @Column(name = "user_name", nullable = false)
     var userName: String,
 
+    @Column(name = "user_avatar_url", length = 1024)
+    var userAvatarUrl: String? = null,
+
     @Column(name = "message_type", nullable = false)
     var messageType: String,  // text|image|file|voice|notice
 
