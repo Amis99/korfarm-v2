@@ -418,10 +418,14 @@ function ReadingTrainingModule({ content }) {
       return;
     }
 
-    // B 패턴: 정답 → 3초 후 다음
+    // B 패턴 정답: 첫 시도면 즉시(0ms), 재시도 후라면 3초 유지
+    const hadWrongAttempts = (removedChoices[step.stepId]?.length || 0) > 0;
+    const finalDelay = hadWrongAttempts
+      ? FEEDBACK.B_CORRECT_RETRY_MS
+      : FEEDBACK.B_CORRECT_FIRST_MS;
     modalMarkRef.current = setTimeout(() => {
       setModalMark(null);
-    }, FEEDBACK.B_CORRECT_FINAL_MS);
+    }, finalDelay);
     if (intensiveAdvanceRef.current) {
       clearTimeout(intensiveAdvanceRef.current);
     }
@@ -432,7 +436,7 @@ function ReadingTrainingModule({ content }) {
         return;
       }
       advanceStage("INTENSIVE");
-    }, FEEDBACK.B_CORRECT_FINAL_MS);
+    }, finalDelay);
   };
 
   const handleDragStart = (id, from, slotIndex = null) => (event) => {
@@ -724,7 +728,14 @@ function ReadingTrainingModule({ content }) {
               mark={modalMark}
               shuffleKey={step.stepId || stepIndex}
               correctChoiceId={stepQuestion.answerId}
-              feedbackDuration={modalMark === "correct" ? FEEDBACK.B_CORRECT_FINAL_MS : FEEDBACK.B_WRONG_RETRY_MS}
+              feedbackDuration={(() => {
+                if (modalMark === "wrong") return FEEDBACK.B_WRONG_RETRY_MS;
+                if (modalMark === "correct") {
+                  const hadWrongAttempts = (removedChoices[step.stepId]?.length || 0) > 0;
+                  return hadWrongAttempts ? FEEDBACK.B_CORRECT_RETRY_MS : FEEDBACK.B_CORRECT_FIRST_MS;
+                }
+                return FEEDBACK.B_WRONG_RETRY_MS;
+              })()}
             />
           ) : null}
         </>

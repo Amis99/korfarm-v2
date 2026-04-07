@@ -92,6 +92,29 @@ const renderPassageBox = (passage, highlight) => {
   );
 };
 
+/** 문제의 정답 텍스트 추출 — MCQ/FILL_BLANKS/SENTENCE_BUILDING 지원 */
+const getCorrectAnswerText = (question) => {
+  if (!question) return "";
+  // FILL_BLANKS / SENTENCE_BUILDING — 빈칸별 정답 모음
+  if (question.type === "FILL_BLANKS" || question.type === "SENTENCE_BUILDING") {
+    const blanks = question.blanks || [];
+    if (question.type === "SENTENCE_BUILDING") {
+      // sentenceParts를 그대로 이어 출력
+      return (question.sentenceParts || []).join(" ");
+    }
+    return blanks
+      .map((b) => {
+        const c = b.choices?.find((ch) => ch.id === b.answerId);
+        return c?.text || "";
+      })
+      .filter(Boolean)
+      .join(" / ");
+  }
+  // MCQ
+  const correct = question.choices?.find((c) => c.id === question.answerId);
+  return correct?.text || "";
+};
+
 function WorksheetQuizModule({ content }) {
   const { status, start, adjustTime, recordAnswer, finish } = useEngine();
   const contentType = content?.contentType;
@@ -331,9 +354,13 @@ function WorksheetQuizModule({ content }) {
         scheduleRetryReset();
         return;
       }
-      // 정답 → 3초 후 다음
-      setFeedbackDuration(FEEDBACK.B_CORRECT_FINAL_MS);
-      scheduleAdvance(FEEDBACK.B_CORRECT_FINAL_MS, () => {
+      // 정답: 첫 시도면 즉시(0ms), 재시도 후라면 3초 유지
+      const hadWrongAttempts = (disabledMap[normalizedQuestion.id]?.length || 0) > 0;
+      const finalDelay = hadWrongAttempts
+        ? FEEDBACK.B_CORRECT_RETRY_MS
+        : FEEDBACK.B_CORRECT_FIRST_MS;
+      setFeedbackDuration(finalDelay);
+      scheduleAdvance(finalDelay, () => {
         setDisabledMap((prev) => {
           const next = { ...prev };
           delete next[normalizedQuestion.id];
@@ -490,6 +517,7 @@ function WorksheetQuizModule({ content }) {
                               content = <RichText>{question.stem || question.prompt || ""}</RichText>;
                             }
 
+                            const answerText = status ? getCorrectAnswerText(question) : "";
                             return (
                               <li
                                 key={question.id}
@@ -511,6 +539,9 @@ function WorksheetQuizModule({ content }) {
                                 <span className="worksheet-item-text">
                                   {content}
                                   {passageNode}
+                                  {answerText ? (
+                                    <span className="worksheet-item-answer">정답: {answerText}</span>
+                                  ) : null}
                                 </span>
                               </li>
                             );
@@ -554,6 +585,7 @@ function WorksheetQuizModule({ content }) {
                               content = <RichText>{question.stem || question.prompt || ""}</RichText>;
                             }
 
+                            const answerText = status ? getCorrectAnswerText(question) : "";
                             return (
                               <li
                                 key={question.id}
@@ -575,6 +607,9 @@ function WorksheetQuizModule({ content }) {
                                 <span className="worksheet-item-text">
                                   {content}
                                   {passageNode}
+                                  {answerText ? (
+                                    <span className="worksheet-item-answer">정답: {answerText}</span>
+                                  ) : null}
                                 </span>
                               </li>
                             );

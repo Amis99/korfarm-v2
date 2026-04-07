@@ -664,6 +664,23 @@
   padding: 0;
 }
 
+/* 풀이 완료된 문제의 정답 표시 — 빨간 작은 글씨 */
+.worksheet-item-answer {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #c0392b;
+  line-height: 1.4;
+}
+@media (max-width: 768px) {
+  /* 모바일에서도 보조 정보로 작게 유지 (통합 사이즈 규칙에서 제외) */
+  .screen-level-saussure .worksheet-item-answer { font-size: 22px; }
+  .screen-level-frege .worksheet-item-answer { font-size: 20px; }
+  .screen-level-russell .worksheet-item-answer { font-size: 19px; }
+  .screen-level-wittgenstein .worksheet-item-answer { font-size: 18px; }
+}
+
 .worksheet-pages {
   display: grid;
   gap: 18px;
