@@ -1,5 +1,8 @@
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 import "../styles/passage-markdown.css";
 
 /**
@@ -9,6 +12,7 @@ import "../styles/passage-markdown.css";
  *  - 마크다운 표 (remark-gfm)
  *  - **bold**, *italic*, `code`, blockquote, list
  *  - 인라인 HTML <u>, <b>, <br> (react-markdown 기본 동작)
+ *  - LaTeX 수식: $\frac{1}{2}$ (인라인), $$\sum_{i=1}^n i$$ (블록)
  *  - 평문 항목 나열 자동 줄바꿈:
  *      "1. ... 2. ... 3. ..." → 각 항목 줄바꿈
  *      "(1) ... (2) ..."        → 각 항목 줄바꿈
@@ -40,7 +44,12 @@ function PassageMarkdown({ children, className = "" }) {
   const text = autoBreakItems(unescaped);
   return (
     <div className={`passage-markdown ${className}`.trim()}>
-      <Markdown remarkPlugins={[remarkGfm]}>{text}</Markdown>
+      <Markdown
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[[rehypeKatex, { throwOnError: false, errorColor: "#c0392b" }]]}
+      >
+        {text}
+      </Markdown>
     </div>
   );
 }

@@ -161,3 +161,52 @@
     white-space: nowrap;
   }
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* KaTeX 수식 (RichText / PassageMarkdown 공통) */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* 인라인 수식: 텍스트 라인에 자연스럽게 들어가도록 */
+.rt-math {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 본문 대비 수식 폰트 살짝 크게 */
+.rt-math .katex,
+.passage-markdown .katex {
+  font-size: 1.05em;
+}
+
+/* 블록 수식 (RichText의 $$...$$ 케이스) */
+.rt-math-display {
+  display: block;
+  text-align: center;
+  margin: 0.6em 0;
+}
+
+/* PassageMarkdown 안의 블록 수식 (KaTeX 기본 katex-display 클래스) */
+.passage-markdown .katex-display {
+  margin: 0.8em 0;
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.passage-markdown .katex-display > .katex {
+  display: inline-block;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* 모바일에서 긴 수식 가로 스크롤 가능 */
+@media (max-width: 768px) {
+  .passage-markdown .katex-display {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .rt-math {
+    /* 모바일 라인 높이 안에서 깨지지 않도록 */
+    line-height: 1;
+  }
+}
