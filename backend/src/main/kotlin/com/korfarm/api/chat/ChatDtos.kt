@@ -53,3 +53,17 @@ data class ArchiveListItem(
     val expiresAt: String,
     val status: String          // available|purged
 )
+
+data class EmoticonView(
+    val id: String,
+    val name: String,
+    val fileId: String,
+    val sortOrder: Int,
+    val createdAt: String
+)
+
+data class CreateEmoticonRequest(
+    val name: String,
+    val fileId: String,
+    val sortOrder: Int? = null
+)

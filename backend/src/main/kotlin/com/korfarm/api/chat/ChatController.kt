@@ -43,4 +43,11 @@ class ChatController(
         chatService.deleteMessage(messageId, userId, isAdmin())
         return ApiResponse(success = true, data = mapOf("messageId" to messageId, "status" to "deleted"))
     }
+
+    /** 사용 가능한 이모티콘 목록 (모든 인증 사용자) */
+    @GetMapping("/emoticons")
+    fun listEmoticons(): ApiResponse<List<EmoticonView>> {
+        currentUserId()  // 인증 검증
+        return ApiResponse(success = true, data = chatService.listEmoticons())
+    }
 }

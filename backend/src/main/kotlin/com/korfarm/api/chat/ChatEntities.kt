@@ -93,6 +93,31 @@ class ChatUserMuteEntity(
 }
 
 @Entity
+@Table(name = "chat_emoticons")
+class ChatEmoticonEntity(
+    @Id
+    var id: String,
+
+    @Column(nullable = false)
+    var name: String,
+
+    @Column(name = "file_id", nullable = false)
+    var fileId: String,
+
+    @Column(name = "sort_order", nullable = false)
+    var sortOrder: Int = 0,
+
+    @Column(nullable = false)
+    var status: String = "active",  // active|deleted
+
+    @Column(name = "created_by", nullable = false)
+    var createdBy: String,
+
+    @Column(name = "created_at", nullable = false)
+    var createdAt: LocalDateTime = LocalDateTime.now()
+)
+
+@Entity
 @Table(name = "chat_attachment_archives")
 class ChatAttachmentArchiveEntity(
     @Id

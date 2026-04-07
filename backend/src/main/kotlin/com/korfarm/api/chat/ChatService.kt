@@ -15,6 +15,7 @@ class ChatService(
     private val messageRepo: ChatMessageRepository,
     private val muteRepo: ChatUserMuteRepository,
     private val archiveRepo: ChatAttachmentArchiveRepository,
+    private val emoticonRepo: ChatEmoticonRepository,
     private val userRepo: UserRepository
 ) {
     private val isoFmt: DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
@@ -24,7 +25,7 @@ class ChatService(
         val roomId = req.roomId
         if (roomId.isBlank()) throw ApiException("INVALID_ROOM", "roomId is required", HttpStatus.BAD_REQUEST)
         val type = req.messageType
-        if (type !in listOf("text", "image", "file", "voice", "notice")) {
+        if (type !in listOf("text", "image", "file", "voice", "notice", "emoticon")) {
             throw ApiException("INVALID_TYPE", "invalid messageType", HttpStatus.BAD_REQUEST)
         }
         if (type == "notice" && !isAdmin) {
@@ -49,6 +50,17 @@ class ChatService(
             "image", "file", "voice" -> {
                 if (req.fileId.isNullOrBlank()) {
                     throw ApiException("EMPTY_FILE", "첨부 파일이 필요합니다", HttpStatus.BAD_REQUEST)
+                }
+            }
+            "emoticon" -> {
+                if (req.content.isNullOrBlank()) {
+                    throw ApiException("EMPTY_EMOTICON", "이모티콘 ID가 필요합니다", HttpStatus.BAD_REQUEST)
+                }
+                // 존재하는 이모티콘인지 확인
+                val emoticon = emoticonRepo.findById(req.content).orElse(null)
+                    ?: throw ApiException("EMOTICON_NOT_FOUND", "이모티콘을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+                if (emoticon.status != "active") {
+                    throw ApiException("EMOTICON_INACTIVE", "사용할 수 없는 이모티콘입니다", HttpStatus.GONE)
                 }
             }
         }
@@ -161,6 +173,54 @@ class ChatService(
         }
         return a
     }
+
+    // ── 이모티콘 ──
+
+    @Transactional(readOnly = true)
+    fun listEmoticons(): List<EmoticonView> {
+        return emoticonRepo.findByStatusOrderBySortOrderAscCreatedAtAsc("active")
+            .map { it.toView() }
+    }
+
+    @Transactional
+    fun createEmoticon(adminId: String, req: CreateEmoticonRequest): EmoticonView {
+        if (req.name.isBlank()) {
+            throw ApiException("INVALID_NAME", "이모티콘 이름이 필요합니다", HttpStatus.BAD_REQUEST)
+        }
+        if (req.fileId.isBlank()) {
+            throw ApiException("INVALID_FILE", "이모티콘 이미지 파일이 필요합니다", HttpStatus.BAD_REQUEST)
+        }
+        // 다음 sort_order: 가장 큰 값 + 1
+        val maxOrder = emoticonRepo.findByStatusOrderBySortOrderAscCreatedAtAsc("active")
+            .maxOfOrNull { it.sortOrder } ?: -1
+        val entity = ChatEmoticonEntity(
+            id = IdGenerator.newId("cemo"),
+            name = req.name.trim(),
+            fileId = req.fileId,
+            sortOrder = req.sortOrder ?: (maxOrder + 1),
+            status = "active",
+            createdBy = adminId
+        )
+        emoticonRepo.save(entity)
+        return entity.toView()
+    }
+
+    @Transactional
+    fun deleteEmoticon(emoticonId: String) {
+        val entity = emoticonRepo.findById(emoticonId).orElseThrow {
+            ApiException("NOT_FOUND", "이모티콘을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        entity.status = "deleted"
+        emoticonRepo.save(entity)
+    }
+
+    private fun ChatEmoticonEntity.toView(): EmoticonView = EmoticonView(
+        id = id,
+        name = name,
+        fileId = fileId,
+        sortOrder = sortOrder,
+        createdAt = createdAt.format(isoFmt)
+    )
 
     // ── 변환 헬퍼 ──
 

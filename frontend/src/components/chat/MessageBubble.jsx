@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { API_BASE, TOKEN_KEY } from "../../utils/api";
+import { useEmoticons, findEmoticonById } from "../../hooks/useEmoticons";
+import EmoticonImage from "./EmoticonImage";
 
 const formatTime = (iso) => {
   if (!iso) return "";
@@ -172,6 +174,11 @@ function MessageBubble({ message, isMine, isAdmin, onDelete }) {
   const bubbleStyle = isMine
     ? { borderColor: colors.border, background: "#cdf5b9" }
     : { borderColor: colors.border, background: "#ffffff" };
+  const { emoticons } = useEmoticons();
+  const emoticon =
+    message.messageType === "emoticon"
+      ? findEmoticonById(emoticons, message.content)
+      : null;
 
   if (message.status === "deleted") {
     return (
@@ -208,6 +215,8 @@ function MessageBubble({ message, isMine, isAdmin, onDelete }) {
     );
   }
 
+  const canDelete = (isAdmin || isMine) && !!onDelete;
+
   return (
     <div className={`chat-msg ${isMine ? "mine" : "other"}`}>
       {!isMine && (
@@ -226,26 +235,54 @@ function MessageBubble({ message, isMine, isAdmin, onDelete }) {
         )}
         <div className="chat-bubble-row">
           {isMine && <div className="chat-msg-time">{formatTime(message.createdAt)}</div>}
-          <div
-            className={`chat-bubble ${message.isAdmin ? "admin" : ""}`}
-            style={bubbleStyle}
-          >
-            {message.content && <div className="chat-text">{message.content}</div>}
-            {renderAttachment(message)}
-          </div>
+          {message.messageType === "emoticon" ? (
+            // 이모티콘은 말풍선 없이 큰 이미지로 표시
+            <div className="chat-emoticon-msg">
+              {canDelete && (
+                <button
+                  type="button"
+                  className="chat-bubble-delete chat-emoticon-delete"
+                  title="메시지 삭제"
+                  aria-label="메시지 삭제"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (window.confirm("이 이모티콘을 삭제하시겠습니까?")) onDelete(message.id);
+                  }}
+                >
+                  ✕
+                </button>
+              )}
+              {emoticon ? (
+                <EmoticonImage fileId={emoticon.fileId} alt={emoticon.name} className="chat-emoticon-large" />
+              ) : (
+                <div className="chat-emoticon-missing">[이모티콘]</div>
+              )}
+            </div>
+          ) : (
+            <div
+              className={`chat-bubble ${message.isAdmin ? "admin" : ""}`}
+              style={bubbleStyle}
+            >
+              {canDelete && (
+                <button
+                  type="button"
+                  className="chat-bubble-delete"
+                  title="메시지 삭제"
+                  aria-label="메시지 삭제"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (window.confirm("이 메시지를 삭제하시겠습니까?")) onDelete(message.id);
+                  }}
+                >
+                  ✕
+                </button>
+              )}
+              {message.content && <div className="chat-text">{message.content}</div>}
+              {renderAttachment(message)}
+            </div>
+          )}
           {!isMine && <div className="chat-msg-time">{formatTime(message.createdAt)}</div>}
         </div>
-        {(isAdmin || isMine) && onDelete && (
-          <button
-            type="button"
-            className="chat-msg-delete"
-            onClick={() => {
-              if (window.confirm("이 메시지를 삭제하시겠습니까?")) onDelete(message.id);
-            }}
-          >
-            삭제
-          </button>
-        )}
       </div>
       {isMine && (
         <Avatar

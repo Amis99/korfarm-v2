@@ -70,4 +70,25 @@ class ChatAdminController(
         chatService.unmuteUser(roomId, userId)
         return ApiResponse(success = true, data = mapOf("userId" to userId, "status" to "unmuted"))
     }
+
+    // ── 이모티콘 관리 (관리자 전용) ──
+
+    @GetMapping("/emoticons")
+    fun listEmoticons(): ApiResponse<List<EmoticonView>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        return ApiResponse(success = true, data = chatService.listEmoticons())
+    }
+
+    @PostMapping("/emoticons")
+    fun createEmoticon(@RequestBody request: CreateEmoticonRequest): ApiResponse<EmoticonView> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        return ApiResponse(success = true, data = chatService.createEmoticon(adminId(), request))
+    }
+
+    @DeleteMapping("/emoticons/{emoticonId}")
+    fun deleteEmoticon(@PathVariable emoticonId: String): ApiResponse<Map<String, Any>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        chatService.deleteEmoticon(emoticonId)
+        return ApiResponse(success = true, data = mapOf("emoticonId" to emoticonId, "status" to "deleted"))
+    }
 }

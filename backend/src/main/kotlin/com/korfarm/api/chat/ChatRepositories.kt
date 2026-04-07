@@ -42,3 +42,8 @@ interface ChatAttachmentArchiveRepository : JpaRepository<ChatAttachmentArchiveE
     fun findByRoomIdAndPeriodStart(roomId: String, periodStart: java.time.LocalDate): ChatAttachmentArchiveEntity?
     fun findByExpiresAtBeforeAndStatus(expiresAtBefore: LocalDateTime, status: String): List<ChatAttachmentArchiveEntity>
 }
+
+@Repository
+interface ChatEmoticonRepository : JpaRepository<ChatEmoticonEntity, String> {
+    fun findByStatusOrderBySortOrderAscCreatedAtAsc(status: String): List<ChatEmoticonEntity>
+}

@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { apiPost, API_BASE, TOKEN_KEY } from "../../utils/api";
 import VoiceRecorder from "./VoiceRecorder";
+import { useEmoticons } from "../../hooks/useEmoticons";
+import EmoticonImage from "./EmoticonImage";
 
 /**
  * 채팅 입력 컴포넌트.
@@ -15,8 +17,10 @@ function MessageInput({ onSend, onSendNotice, isAdmin, disabled }) {
   const [text, setText] = useState("");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
+  const [pickerOpen, setPickerOpen] = useState(false);
   const fileInputRef = useRef(null);
   const imageInputRef = useRef(null);
+  const { emoticons } = useEmoticons();
 
   const handleTextSend = () => {
     const trimmed = text.trim();
@@ -97,6 +101,11 @@ function MessageInput({ onSend, onSendNotice, isAdmin, disabled }) {
     if (fileId) onSend("voice", null, fileId);
   };
 
+  const handleEmoticonSelect = (emoticonId) => {
+    onSend("emoticon", emoticonId, null);
+    setPickerOpen(false);
+  };
+
   return (
     <div className="chat-input-bar">
       {error && <div className="chat-input-error">{error}</div>}
@@ -159,7 +168,7 @@ function MessageInput({ onSend, onSendNotice, isAdmin, disabled }) {
         <textarea
           className="chat-text-input"
           rows={1}
-          placeholder={uploading ? "업로드 중..." : "메시지 입력 (Enter로 전송)"}
+          placeholder={uploading ? "업로드 중..." : "메시지 입력"}
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -174,7 +183,55 @@ function MessageInput({ onSend, onSendNotice, isAdmin, disabled }) {
         >
           전송
         </button>
+
+        {/* 이모티콘 버튼 — 가장 우측 원형 */}
+        <button
+          type="button"
+          className="chat-emoticon-btn"
+          onClick={() => setPickerOpen((v) => !v)}
+          disabled={disabled}
+          aria-label="이모티콘"
+          title="이모티콘"
+        >
+          <span className="material-symbols-outlined">mood</span>
+        </button>
       </div>
+
+      {pickerOpen && (
+        <div className="chat-emoticon-picker">
+          <div className="chat-emoticon-picker-header">
+            <span>이모티콘</span>
+            <button
+              type="button"
+              className="chat-emoticon-picker-close"
+              onClick={() => setPickerOpen(false)}
+            >
+              ✕
+            </button>
+          </div>
+          {emoticons.length === 0 ? (
+            <div className="chat-emoticon-picker-empty">
+              등록된 이모티콘이 없습니다.
+              <br />
+              관리자가 등록 후 사용 가능합니다.
+            </div>
+          ) : (
+            <div className="chat-emoticon-picker-grid">
+              {emoticons.map((emo) => (
+                <button
+                  key={emo.id}
+                  type="button"
+                  className="chat-emoticon-picker-item"
+                  title={emo.name}
+                  onClick={() => handleEmoticonSelect(emo.id)}
+                >
+                  <EmoticonImage fileId={emo.fileId} alt={emo.name} />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -110,47 +110,35 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* 메시지 행: 아바타 + 말풍선 */
+/* 메시지 행: 아바타 + 말풍선 — 양쪽 모두 가로 폭을 최대한 사용 */
 .chat-msg {
   display: flex;
   align-items: flex-start;
   gap: 8px;
   position: relative;
-}
-
-/* 본인 메시지: 전체 폭 사용 → 시간 좌측, 말풍선 우측 */
-.chat-msg.mine {
   align-self: stretch;
   width: 100%;
   max-width: 100%;
   flex-direction: row;
 }
 
-.chat-msg.other {
-  align-self: flex-start;
-  max-width: 90%;
-  flex-direction: row;
-}
-
 .chat-msg-body {
   display: flex;
   flex-direction: column;
+  flex: 1;
   min-width: 0;
 }
 
 .chat-msg.mine .chat-msg-body {
-  flex: 1;
-  min-width: 0;
   align-items: flex-end;
 }
 
 .chat-msg.other .chat-msg-body {
-  max-width: calc(100% - 50px);
   align-items: flex-start;
 }
 
-/* 본인 측 bubble-row: space-between으로 시간 좌측 끝, 말풍선 우측 끝 */
-.chat-msg.mine .chat-bubble-row {
+/* bubble-row: 양쪽 끝 정렬로 가로 공간 최대 활용 */
+.chat-bubble-row {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -158,12 +146,9 @@
   gap: 8px;
 }
 
-.chat-msg.mine .chat-bubble {
-  max-width: 85%;
-}
-
-.chat-msg.mine .chat-msg-delete {
-  align-self: flex-end;
+/* 말풍선은 시간/여백을 제외한 모든 공간 사용 가능 */
+.chat-bubble {
+  max-width: calc(100% - 50px);
 }
 
 /* 아바타 */
@@ -213,7 +198,7 @@
   background: #fff;
   border: 2.5px solid #888;
   border-radius: 4px;
-  padding: 10px 14px;
+  padding: 10px 24px 10px 14px; /* 우측 여백은 ✕ 버튼 자리 */
   font-size: 14px;
   line-height: 1.5;
   color: #222;
@@ -237,6 +222,36 @@
   white-space: pre-wrap;
 }
 
+/* 말풍선 안 작은 ✕ 삭제 버튼 (말풍선 우상단) */
+.chat-bubble {
+  position: relative;
+}
+.chat-bubble-delete {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.08);
+  border: none;
+  color: #555;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 0;
+  line-height: 1;
+  transition: background 0.12s, color 0.12s;
+}
+.chat-bubble-delete:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+/* 공지 메시지 삭제 버튼은 별도 배치 (기존 .chat-msg-delete 유지) */
 .chat-msg-delete {
   margin-top: 4px;
   font-size: 11px;
@@ -370,6 +385,7 @@
 
 /* 입력 영역 */
 .chat-input-bar {
+  position: relative;
   background: #fff;
   border-top: 1px solid #e8e0d0;
   padding: 8px 12px;
@@ -447,6 +463,167 @@
 .chat-send-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* 이모티콘 버튼 (가장 우측 원형) */
+.chat-emoticon-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 4px;
+  background: linear-gradient(180deg, #fff7e8 0%, #f3e3c0 100%);
+  border: 2px solid #c7a878;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #6e4520;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.chat-emoticon-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(199, 168, 120, 0.4);
+}
+.chat-emoticon-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.chat-emoticon-btn .material-symbols-outlined {
+  font-size: 22px;
+}
+
+/* 이모티콘 피커 팝업 */
+.chat-emoticon-picker {
+  position: absolute;
+  bottom: 60px;
+  right: 8px;
+  width: 280px;
+  max-height: 300px;
+  background: #fff;
+  border: 2px solid #c7a878;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.chat-emoticon-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #fbf3e3;
+  border-bottom: 1px solid #d6c2a8;
+  font-size: 13px;
+  font-weight: 700;
+  color: #5a4030;
+}
+
+.chat-emoticon-picker-close {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #6a5040;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.chat-emoticon-picker-close:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.chat-emoticon-picker-empty {
+  padding: 24px 16px;
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.chat-emoticon-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.chat-emoticon-picker-item {
+  background: #fffdf7;
+  border: 1px solid #e8d8c0;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  transition: transform 0.12s, border-color 0.12s;
+}
+
+.chat-emoticon-picker-item:hover {
+  transform: scale(1.08);
+  border-color: #b08850;
+}
+
+.chat-emoticon-picker-item .emoticon-image,
+.chat-emoticon-picker-item .emoticon-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 채팅 영역에서 사용된 이모티콘 (말풍선 없이 큰 이미지) */
+.chat-emoticon-msg {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.chat-emoticon-large {
+  max-width: 140px;
+  max-height: 140px;
+  object-fit: contain;
+}
+
+.chat-emoticon-missing {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+}
+
+.chat-emoticon-delete {
+  top: -4px;
+  right: -4px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.chat-emoticon-delete:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+.emoticon-placeholder {
+  background: #f0f0f0;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.emoticon-image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 /* 음성 녹음 진행 중 */
