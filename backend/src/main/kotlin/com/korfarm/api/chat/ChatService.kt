@@ -57,6 +57,8 @@ class ChatService(
             ApiException("USER_NOT_FOUND", "사용자를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
         val displayName = user.name?.takeIf { it.isNotBlank() } ?: user.email
+        // 아바타는 chat_messages에 저장하지 않음 — view 시점에 user 테이블에서 실시간 조회
+        // (base64 데이터 URL이 컬럼 크기를 초과하고, 프로필 변경 시 일관된 표시를 위해)
         val avatarUrl = user.profileImageUrl?.takeIf { it.isNotBlank() }
 
         val entity = ChatMessageEntity(
@@ -64,7 +66,7 @@ class ChatService(
             roomId = roomId,
             userId = userId,
             userName = displayName,
-            userAvatarUrl = avatarUrl,
+            userAvatarUrl = null,  // 컬럼 크기 제한으로 저장 안 함
             messageType = type,
             content = req.content,
             fileId = req.fileId,
@@ -73,7 +75,7 @@ class ChatService(
             createdAt = LocalDateTime.now()
         )
         messageRepo.save(entity)
-        return entity.toView()
+        return entity.toView(avatarOverride = avatarUrl)
     }
 
     @Transactional(readOnly = true)
@@ -85,9 +87,15 @@ class ChatService(
         val rows = messageRepo.findRecent(roomId, before, PageRequest.of(0, pageSize + 1))
         val hasMore = rows.size > pageSize
         val limited = rows.take(pageSize)
+        // 사용자 ID들을 모아 한 번에 fetch (N+1 방지)
+        val userIds = limited.map { it.userId }.toSet()
+        val userMap = userRepo.findAllById(userIds).associateBy { it.id }
         // 응답은 ASC (오래된→최신)
         return MessageHistoryResponse(
-            messages = limited.reversed().map { it.toView() },
+            messages = limited.reversed().map { msg ->
+                val avatar = userMap[msg.userId]?.profileImageUrl?.takeIf { it.isNotBlank() }
+                msg.toView(avatarOverride = avatar)
+            },
             hasMore = hasMore
         )
     }
@@ -156,7 +164,7 @@ class ChatService(
 
     // ── 변환 헬퍼 ──
 
-    private fun ChatMessageEntity.toView(): ChatMessageView {
+    private fun ChatMessageEntity.toView(avatarOverride: String? = null): ChatMessageView {
         // archived/purged 상태에서는 fileId 노출 X (다운로드 차단)
         val safeFileId = if (attachmentState == "live") fileId else null
         val thumbUrl = thumbnailPath?.let { "/v1/chat/thumbs/$id" }
@@ -165,7 +173,8 @@ class ChatService(
             roomId = roomId,
             userId = userId,
             userName = userName,
-            userAvatarUrl = userAvatarUrl,
+            // 우선 override(view-time 조회), 그 다음 entity 컬럼(레거시), 그 다음 null
+            userAvatarUrl = avatarOverride ?: userAvatarUrl,
             messageType = messageType,
             content = if (status == "deleted") null else content,
             fileId = if (status == "deleted") null else safeFileId,
