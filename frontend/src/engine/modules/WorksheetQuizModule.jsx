@@ -269,35 +269,19 @@ function WorksheetQuizModule({ content }) {
     setItemHeights(nodes.map((node) => node.getBoundingClientRect().height));
   }, [measureItems]);
 
-  const pages = useMemo(() => {
-    if (!questions.length) return [];
-    if (!usePageStack || itemHeights.length !== questions.length) {
-      return [{ left: questions.map((_, idx) => idx), right: [] }];
+  /* 누적형 단일 칼럼: currentIndex 까지만 렌더 (이전 푼 문제 + 현재 문제) */
+  const visibleIndexes = useMemo(() => {
+    const out = [];
+    for (let i = 0; i <= currentIndex && i < questions.length; i++) {
+      out.push(i);
     }
-    const totalHeight =
-      itemHeights.reduce((s, h) => s + h, 0) +
-      (questions.length - 1) * itemGap;
-    const halfHeight = totalHeight / 2;
-    let leftHeight = 0;
-    const left = [];
-    const right = [];
-    let splitReached = false;
-    for (let idx = 0; idx < questions.length; idx++) {
-      const extra = left.length > 0 ? itemGap : 0;
-      if (
-        !splitReached &&
-        (leftHeight + itemHeights[idx] + extra <= halfHeight ||
-        (right.length === 0 && idx === questions.length - 1))
-      ) {
-        left.push(idx);
-        leftHeight += itemHeights[idx] + extra;
-      } else {
-        splitReached = true;
-        right.push(idx);
-      }
-    }
-    return [{ left, right }];
-  }, [itemHeights, questions.length, itemGap]);
+    return out;
+  }, [currentIndex, questions.length]);
+  // pages 변수는 이전 코드 호환을 위해 단일 페이지 형태로 유지
+  const pages = useMemo(
+    () => [{ left: visibleIndexes, right: [] }],
+    [visibleIndexes]
+  );
 
   const handleNext = () => {
     if (currentIndex >= questions.length - 1) {

@@ -55,6 +55,33 @@
   white-space: pre-wrap;
 }
 
+/* 지문 접기 (누적 모드에서 위에 둠) */
+.bg-passage-collapse {
+  background: rgba(255, 252, 246, 0.9);
+  border: 1px solid rgba(75, 61, 54, 0.2);
+  border-radius: 8px;
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.bg-passage-collapse summary {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #6a5040;
+  font-size: 13px;
+  user-select: none;
+}
+
+.bg-passage-collapse summary:hover {
+  color: #b04510;
+}
+
+.bg-passage-collapse-body {
+  padding: 0 16px 16px;
+  border-top: 1px dashed rgba(75, 61, 54, 0.15);
+}
+
 /* 액션 버튼 영역 */
 .bg-actions {
   display: flex;

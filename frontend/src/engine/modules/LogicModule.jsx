@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
-import QuestionModal from "../shared/QuestionModal";
 import { FEEDBACK } from "../shared/feedbackTimings";
+import CumulativeQuestionCard from "../shared/CumulativeQuestionCard";
 import PassageMarkdown from "../../utils/PassageMarkdown";
 import "../../styles/logic-module.css";
 
@@ -26,26 +26,21 @@ function LogicModule({ content }) {
   // --- passages 모드 상태 ---
   const [currentPassageIndex, setCurrentPassageIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [lastResult, setLastResult] = useState(null);
-  const [feedbackDuration, setFeedbackDuration] = useState(FEEDBACK.A_CORRECT_ADVANCE_MS);
-  const resultTimerRef = useRef(null);
+  /** completedMap: { [questionId]: { selectedId, isCorrect } } */
+  const [completedMap, setCompletedMap] = useState({});
   const advanceTimerRef = useRef(null);
+  const scrollRef = useRef(null);
 
-  // --- 레거시 모드 (passages 없음 → WorksheetQuizModule 동일 동작) ---
+  // --- 레거시 모드 상태 ---
   const [legacyIndex, setLegacyIndex] = useState(0);
-  const [legacyResult, setLegacyResult] = useState(null);
-  const [legacyDuration, setLegacyDuration] = useState(FEEDBACK.A_CORRECT_ADVANCE_MS);
-  const [legacyStatusMap, setLegacyStatusMap] = useState({});
-  const legacyTimerRef = useRef(null);
+  const [legacyCompletedMap, setLegacyCompletedMap] = useState({});
   const legacyAdvanceRef = useRef(null);
+  const legacyScrollRef = useRef(null);
 
   const currentPassage = hasPassages ? passages[currentPassageIndex] : null;
   const passageQuestions = currentPassage?.questions || [];
-  const currentQuestion = hasPassages
-    ? passageQuestions[currentQuestionIndex]
-    : legacyQuestions[legacyIndex];
 
-  // 자동 시작 — passages 모드는 즉시 시작 (지문이 항상 보이므로 "다 읽었습니다" 불필요)
+  // 자동 시작
   useEffect(() => {
     if (status === "READY") start();
   }, [status, start]);
@@ -53,36 +48,47 @@ function LogicModule({ content }) {
   // 클린업
   useEffect(
     () => () => {
-      if (resultTimerRef.current) clearTimeout(resultTimerRef.current);
       if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
-      if (legacyTimerRef.current) clearTimeout(legacyTimerRef.current);
       if (legacyAdvanceRef.current) clearTimeout(legacyAdvanceRef.current);
     },
     []
   );
 
+  // 문제 변경 시 자동 스크롤
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [currentQuestionIndex, currentPassageIndex]);
+  useEffect(() => {
+    if (legacyScrollRef.current) {
+      legacyScrollRef.current.scrollTop = legacyScrollRef.current.scrollHeight;
+    }
+  }, [legacyIndex]);
+
   // === passages 모드 핸들러 ===
 
   const handlePassageChoice = (choiceId) => {
-    if (!currentQuestion) return;
-    const scoring = getScoring(currentQuestion);
-    const isCorrect = choiceId === currentQuestion.answerId;
+    const question = passageQuestions[currentQuestionIndex];
+    if (!question) return;
+    const scoring = getScoring(question);
+    const isCorrect = choiceId === question.answerId;
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({ id: currentQuestion.id, correct: isCorrect });
-    setLastResult(isCorrect ? "correct" : "wrong");
+    recordAnswer({ id: question.id, correct: isCorrect });
+    setCompletedMap((prev) => ({
+      ...prev,
+      [question.id]: { selectedId: choiceId, isCorrect },
+    }));
 
-    // A 패턴: 정답 즉시 / 오답 3초
     const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
-    setFeedbackDuration(delay);
-
     if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
     advanceTimerRef.current = setTimeout(() => {
-      setLastResult(null);
       if (currentQuestionIndex < passageQuestions.length - 1) {
         setCurrentQuestionIndex((prev) => prev + 1);
       } else if (currentPassageIndex < passages.length - 1) {
         setCurrentPassageIndex((prev) => prev + 1);
         setCurrentQuestionIndex(0);
+        setCompletedMap({});
       } else {
         finish(true);
       }
@@ -98,18 +104,14 @@ function LogicModule({ content }) {
     const isCorrect = choiceId === q.answerId;
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
     recordAnswer({ id: q.id, correct: isCorrect });
-    setLegacyResult(isCorrect ? "correct" : "wrong");
-    setLegacyStatusMap((prev) => ({
+    setLegacyCompletedMap((prev) => ({
       ...prev,
-      [q.id]: isCorrect ? "correct" : "wrong",
+      [q.id]: { selectedId: choiceId, isCorrect },
     }));
 
     const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
-    setLegacyDuration(delay);
-
     if (legacyAdvanceRef.current) clearTimeout(legacyAdvanceRef.current);
     legacyAdvanceRef.current = setTimeout(() => {
-      setLegacyResult(null);
       if (legacyIndex >= legacyQuestions.length - 1) {
         finish(true);
       } else {
@@ -118,17 +120,15 @@ function LogicModule({ content }) {
     }, delay);
   };
 
-  // === passages 모드: 지문 + 문제 동시 표시 ===
+  // === passages 모드: 지문 + 누적 문제 ===
 
-  if (hasPassages && currentPassage && currentQuestion) {
+  if (hasPassages && currentPassage && passageQuestions.length > 0) {
+    const visibleQuestions = passageQuestions.slice(0, currentQuestionIndex + 1);
     return (
       <div className="logic-module">
         <div className="logic-status-bar">
           <span className="logic-progress">
-            지문 {currentPassageIndex + 1} / {passages.length}
-            {passageQuestions.length > 1
-              ? ` · 문제 ${currentQuestionIndex + 1} / ${passageQuestions.length}`
-              : null}
+            지문 {currentPassageIndex + 1} / {passages.length} · 문제 {currentQuestionIndex + 1} / {passageQuestions.length}
           </span>
           <span className="logic-phase-label">논리 추론</span>
         </div>
@@ -138,83 +138,47 @@ function LogicModule({ content }) {
           </div>
           <PassageMarkdown className="logic-passage-text">{currentPassage.text}</PassageMarkdown>
         </div>
-        <div className="logic-question-area">
-          <QuestionModal
-            title="논리 추론 문제"
-            prompt={currentQuestion.stem || currentQuestion.prompt}
-            choices={currentQuestion.choices || []}
-            onSelect={handlePassageChoice}
-            mark={lastResult}
-            shuffleKey={currentQuestion.id}
-            correctChoiceId={currentQuestion.answerId}
-            feedbackDuration={feedbackDuration}
-          />
+        <div className="logic-question-area cum-stack" ref={scrollRef}>
+          {visibleQuestions.map((q, idx) => (
+            <CumulativeQuestionCard
+              key={q.id}
+              question={q}
+              idx={idx}
+              total={passageQuestions.length}
+              completion={completedMap[q.id]}
+              isActive={idx === currentQuestionIndex && !completedMap[q.id]}
+              onSelect={handlePassageChoice}
+            />
+          ))}
         </div>
       </div>
     );
   }
 
-  // === 레거시 모드 (questions만 있는 경우) ===
+  // === 레거시 모드 ===
 
   if (!hasPassages && legacyQuestions.length > 0) {
-    const q = legacyQuestions[legacyIndex];
+    const visibleQuestions = legacyQuestions.slice(0, legacyIndex + 1);
     return (
-      <div className="worksheet-module">
-        <div className="worksheet-sheet">
-          <div className="worksheet-stem">
-            <div className="worksheet-pages">
-              <div className="worksheet-page single">
-                <div className="worksheet-page-inner">
-                  <div className="worksheet-page-number">1 / 1</div>
-                  <div className="worksheet-columns">
-                    <ol className="worksheet-list">
-                      {legacyQuestions.map((question, idx) => {
-                        const qStatus = legacyStatusMap[question.id];
-                        const isActive = idx === legacyIndex;
-                        return (
-                          <li
-                            key={question.id}
-                            className={`worksheet-item ${isActive ? "active" : ""} ${
-                              qStatus ? `done ${qStatus}` : ""
-                            }`}
-                          >
-                            <span className="worksheet-item-number">
-                              {idx + 1}.
-                              {qStatus ? (
-                                <span className={`worksheet-number-mark ${qStatus}`}>
-                                  {qStatus === "correct" ? "\u25CB" : "\uFF0F"}
-                                </span>
-                              ) : null}
-                            </span>
-                            <span className="worksheet-item-text">
-                              {question.stem || question.prompt || ""}
-                            </span>
-                          </li>
-                        );
-                      })}
-                    </ol>
-                    <ol className="worksheet-list" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="worksheet-controls">
-            <span>{legacyIndex + 1} / {legacyQuestions.length}</span>
-          </div>
+      <div className="logic-module">
+        <div className="logic-status-bar">
+          <span className="logic-progress">
+            문제 {legacyIndex + 1} / {legacyQuestions.length}
+          </span>
         </div>
-        {q ? (
-          <QuestionModal
-            title="문제"
-            prompt={q.prompt || q.stem}
-            choices={q.choices || []}
-            onSelect={handleLegacyChoice}
-            mark={legacyResult}
-            shuffleKey={q.id}
-            correctChoiceId={q.answerId}
-            feedbackDuration={legacyDuration}
-          />
-        ) : null}
+        <div className="cum-stack" ref={legacyScrollRef}>
+          {visibleQuestions.map((q, idx) => (
+            <CumulativeQuestionCard
+              key={q.id}
+              question={q}
+              idx={idx}
+              total={legacyQuestions.length}
+              completion={legacyCompletedMap[q.id]}
+              isActive={idx === legacyIndex && !legacyCompletedMap[q.id]}
+              onSelect={handleLegacyChoice}
+            />
+          ))}
+        </div>
       </div>
     );
   }
