@@ -3,6 +3,43 @@ import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 import { FEEDBACK } from "../shared/feedbackTimings";
 
+/** 누적용 결과 카드: 완료된 단어 1개 표시 (시작 → 도착, 정/오답) */
+function CompletedWordCard({ word, destCells, idx, total, hadWrong }) {
+  return (
+    <div className={`cum-card completed ${hadWrong ? "wrong" : "correct"}`}>
+      <div className="cum-card-header">
+        <span className="cum-card-num">단어 {idx + 1} / {total}</span>
+        <span className={`cum-card-mark ${hadWrong ? "wrong" : "correct"}`}>
+          {hadWrong ? "× 오답" : "○ 정답"}
+        </span>
+      </div>
+      <div className="phoneme-completed-surface">{word.surface}</div>
+      <div className="phoneme-row phoneme-row-start">
+        <span className="phoneme-row-label">시작</span>
+        {word.cells.map((cell) => (
+          <div
+            key={`cs-${cell.cellNo}`}
+            className={`phoneme-cell${cell.text === "," ? " comma" : ""}`}
+          >
+            {cell.text}
+          </div>
+        ))}
+      </div>
+      <div className="phoneme-row phoneme-row-dest">
+        <span className="phoneme-row-label">도착</span>
+        {destCells.map((cell) => (
+          <div
+            key={`cd-${cell.cellNo}`}
+            className={`phoneme-cell ${cell.text === "∅" ? "deleted" : ""} ${cell.text === "" ? "empty-slot" : ""}`}
+          >
+            {cell.text}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function PhonemeChangeModule({ content }) {
   const { adjustTime, recordAnswer, finish, start, status } = useEngine();
   const payload = content?.payload || {};
@@ -22,10 +59,14 @@ function PhonemeChangeModule({ content }) {
   // B 패턴: 모달별 사라진 선택지 추적 (stepId 단위)
   const [phonemeDisabled, setPhonemeDisabled] = useState({});
   const [ruleDisabled, setRuleDisabled] = useState({});
+  // 누적: 완료된 단어 인덱스 + 오답 여부
+  const [completedWordIndices, setCompletedWordIndices] = useState([]);
+  const [wordHadWrongMap, setWordHadWrongMap] = useState({});
   const resultTimerRef = useRef(null);
   const advanceTimerRef = useRef(null);
   const wrongTimerRef = useRef(null);
   const moduleRef = useRef(null);
+  const stackRef = useRef(null);
 
   const word = words[wordIndex];
   const steps = word?.steps || [];
@@ -56,6 +97,7 @@ function PhonemeChangeModule({ content }) {
       recordAnswer({ id: `wrong_click_${step.stepId}_${cellNo}`, correct: false });
       showFeedback("wrong");
       setWrongCellNo(cellNo);
+      setWordHadWrongMap((prev) => ({ ...prev, [wordIndex]: true }));
       if (wrongTimerRef.current) clearTimeout(wrongTimerRef.current);
       wrongTimerRef.current = setTimeout(() => setWrongCellNo(null), 600);
     }
@@ -91,6 +133,7 @@ function PhonemeChangeModule({ content }) {
         ...prev,
         [step.stepId]: [...(prev[step.stepId] || []), choiceId],
       }));
+      setWordHadWrongMap((prev) => ({ ...prev, [wordIndex]: true }));
       return;
     }
 
@@ -132,6 +175,7 @@ function PhonemeChangeModule({ content }) {
         ...prev,
         [ruleStep.stepId]: [...(prev[ruleStep.stepId] || []), choiceId],
       }));
+      setWordHadWrongMap((prev) => ({ ...prev, [wordIndex]: true }));
       return;
     }
 
@@ -146,12 +190,16 @@ function PhonemeChangeModule({ content }) {
       if (nextIdx < steps.length) {
         setStepIndex(nextIdx);
         setPhase("CLICK");
-      } else if (wordIndex < words.length - 1) {
-        setWordIndex((prev) => prev + 1);
-        setStepIndex(0);
-        setPhase("CLICK");
       } else {
-        finish(true);
+        // 단어 완료 → 결과 카드로 누적
+        setCompletedWordIndices((prev) => [...prev, wordIndex]);
+        if (wordIndex < words.length - 1) {
+          setWordIndex((prev) => prev + 1);
+          setStepIndex(0);
+          setPhase("CLICK");
+        } else {
+          finish(true);
+        }
       }
     }, FEEDBACK.B_CORRECT_FINAL_MS);
   };
@@ -182,6 +230,13 @@ function PhonemeChangeModule({ content }) {
     },
     []
   );
+
+  // 단어 변경 시 자동 스크롤
+  useEffect(() => {
+    if (stackRef.current) {
+      stackRef.current.scrollTop = stackRef.current.scrollHeight;
+    }
+  }, [wordIndex, completedWordIndices.length]);
 
   // 모달용 현재 step 데이터
   const modalStep =
@@ -216,7 +271,21 @@ function PhonemeChangeModule({ content }) {
           </button>
         </div>
       ) : word ? (
-        <>
+        <div className="phoneme-stack-wrap" ref={stackRef}>
+          {/* 누적: 완료된 단어 카드들 */}
+          {completedWordIndices.map((doneIdx) => (
+            <CompletedWordCard
+              key={`done-${doneIdx}`}
+              word={words[doneIdx]}
+              destCells={destCells[doneIdx] || []}
+              idx={doneIdx}
+              total={words.length}
+              hadWrong={!!wordHadWrongMap[doneIdx]}
+            />
+          ))}
+
+          {/* 활성 단어 */}
+          <div className="phoneme-active-card">
           {/* 단어 진행 표시 */}
           <div className="phoneme-header">
             <span>
@@ -280,6 +349,7 @@ function PhonemeChangeModule({ content }) {
             </div>
           ) : null}
 
+          </div>
           {/* 모달 */}
           {modalStep && modalHandler ? (
             <QuestionModal
@@ -300,7 +370,7 @@ function PhonemeChangeModule({ content }) {
               }
             />
           ) : null}
-        </>
+        </div>
       ) : null}
     </div>
   );

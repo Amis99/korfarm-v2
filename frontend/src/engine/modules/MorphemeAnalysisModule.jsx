@@ -3,10 +3,44 @@ import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 import { FEEDBACK } from "../shared/feedbackTimings";
 
+/** 누적용 결과 카드: 완료된 문장 1개 표시 */
+function CompletedSentenceCard({ sentence, idx, total, hadWrong, isAdvanced }) {
+  const morphemes = sentence?.morphemes || [];
+  return (
+    <div className={`cum-card completed ${hadWrong ? "wrong" : "correct"}`}>
+      <div className="cum-card-header">
+        <span className="cum-card-num">문장 {idx + 1} / {total}</span>
+        <span className={`cum-card-mark ${hadWrong ? "wrong" : "correct"}`}>
+          {hadWrong ? "× 오답" : "○ 정답"}
+        </span>
+      </div>
+      <div className="morpheme-completed-sentence">{sentence?.text}</div>
+      <div className="morpheme-split-display">
+        {morphemes.map((m, i) => (
+          <span key={i} className="morpheme-chip done">
+            {m.form}
+          </span>
+        ))}
+      </div>
+      <div className="morpheme-completed-table">
+        {morphemes.map((m, i) => (
+          <div key={i} className="morpheme-completed-row">
+            <span className="morpheme-completed-form">{m.form}</span>
+            <span className="morpheme-completed-meta">
+              {(isAdvanced ? m.nameDetail : m.name) || "-"}
+            </span>
+            <span className="morpheme-completed-meta">{m.type || "-"}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /**
  * 형태소 분석 학습 모듈
  * 4단계: COUNTING → SPLITTING → NAMING → TYPING
- * 문장 5개를 순차 학습
+ * 문장 5개를 순차 학습 — 완료된 문장은 위에 누적 카드로 표시
  */
 function MorphemeAnalysisModule({ content }) {
   const { adjustTime, recordAnswer, finish, start, status } = useEngine();
@@ -21,11 +55,22 @@ function MorphemeAnalysisModule({ content }) {
   const [feedbackDuration, setFeedbackDuration] = useState(FEEDBACK.A_CORRECT_ADVANCE_MS);
   const [statusMap, setStatusMap] = useState({}); // sentIdx → "correct"|"wrong"
   const [splitDone, setSplitDone] = useState(false); // 2단계 정답 후 분해 표시
+  // 누적: 완료된 문장 인덱스 + 오답 여부
+  const [completedSentIndices, setCompletedSentIndices] = useState([]);
+  const [sentHadWrongMap, setSentHadWrongMap] = useState({});
   const resultTimer = useRef(null);
   const advanceTimer = useRef(null);
+  const stackRef = useRef(null);
 
   const sent = sentences[sentIdx];
   const morphemes = sent?.morphemes || [];
+
+  // 문장 변경 시 자동 스크롤
+  useEffect(() => {
+    if (stackRef.current) {
+      stackRef.current.scrollTop = stackRef.current.scrollHeight;
+    }
+  }, [sentIdx, completedSentIndices.length]);
 
   useEffect(() => {
     if (status === "READY") start();
@@ -49,6 +94,9 @@ function MorphemeAnalysisModule({ content }) {
       if (prev[key] === "wrong") return prev; // 이미 틀렸으면 유지
       return { ...prev, [key]: result };
     });
+    if (result === "wrong") {
+      setSentHadWrongMap((prev) => ({ ...prev, [sentIdx]: true }));
+    }
   };
 
   // A 패턴: 정답 즉시 / 오답 3초
@@ -62,6 +110,8 @@ function MorphemeAnalysisModule({ content }) {
 
   const advanceToNextSentence = (delay = FEEDBACK.A_CORRECT_ADVANCE_MS) => {
     advanceTimer.current = setTimeout(() => {
+      // 현재 문장 완료 → 누적 카드로
+      setCompletedSentIndices((prev) => [...prev, sentIdx]);
       if (sentIdx < sentences.length - 1) {
         setSentIdx((p) => p + 1);
         setPhase("COUNTING");
@@ -265,7 +315,21 @@ function MorphemeAnalysisModule({ content }) {
           </button>
         </div>
       ) : (
-        <>
+        <div className="morpheme-stack-wrap" ref={stackRef}>
+          {/* 누적: 완료된 문장 카드들 */}
+          {completedSentIndices.map((doneIdx) => (
+            <CompletedSentenceCard
+              key={`done-${doneIdx}`}
+              sentence={sentences[doneIdx]}
+              idx={doneIdx}
+              total={sentences.length}
+              hadWrong={!!sentHadWrongMap[doneIdx]}
+              isAdvanced={isAdvanced}
+            />
+          ))}
+
+          {/* 활성 문장 */}
+          <div className="morpheme-active-card">
           {/* 진행 표시 */}
           <div className="morpheme-header">
             <span>문장 {sentIdx + 1} / {sentences.length}</span>
@@ -293,6 +357,7 @@ function MorphemeAnalysisModule({ content }) {
               </span>
             ))}
           </div>
+          </div>
 
           {/* 모달 */}
           {modal && (
@@ -307,7 +372,7 @@ function MorphemeAnalysisModule({ content }) {
               feedbackDuration={feedbackDuration}
             />
           )}
-        </>
+        </div>
       )}
     </div>
   );

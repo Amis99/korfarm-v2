@@ -2489,6 +2489,82 @@ mark.highlight {
   }
 }
 
+/* ── PhonemeChange / MorphemeAnalysis 누적 스택 ── */
+
+.phoneme-stack-wrap,
+.morpheme-stack-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 8px 32px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 활성 카드 — 현재 진행 중인 단어/문장 */
+.phoneme-active-card,
+.morpheme-active-card {
+  background: rgba(255, 252, 246, 0.96);
+  border: 2px solid #f06c24;
+  border-radius: 12px;
+  padding: 18px 22px;
+  box-shadow: 0 4px 18px rgba(240, 108, 36, 0.18);
+}
+
+/* 완료된 단어 카드 (PhonemeChange) */
+.phoneme-completed-surface {
+  font-size: 22px;
+  font-weight: 700;
+  color: #4b3d36;
+  margin: 10px 0 12px;
+  text-align: center;
+}
+
+/* 완료된 문장 카드 (MorphemeAnalysis) */
+.morpheme-completed-sentence {
+  font-size: 18px;
+  font-weight: 600;
+  color: #4b3d36;
+  margin: 10px 0 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.morpheme-completed-table {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.morpheme-completed-row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.2fr;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.morpheme-completed-form {
+  font-weight: 700;
+  color: #2c2418;
+}
+
+.morpheme-completed-meta {
+  color: #5a4030;
+}
+
+@media (max-width: 768px) {
+  .phoneme-completed-surface { font-size: 28px; }
+  .morpheme-completed-sentence { font-size: 22px; }
+  .morpheme-completed-row { font-size: 18px; }
+}
+
 /* 인쇄 전용 영역 - 화면에서 숨김 */
 .print-only {
   display: none !important;
