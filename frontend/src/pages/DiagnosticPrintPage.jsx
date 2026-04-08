@@ -1,9 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiGet, apiPost, API_BASE, TOKEN_KEY } from "../utils/api";
 import AnswerInputPanel from "../components/AnswerInputPanel";
 import "../styles/diagnostic.css";
+import "../styles/test-storage.css";
 import "../styles/test-online.css";
+
+// 진단 시험 제한 시간: 60분 = 3600초
+const TIME_LIMIT_SEC = 60 * 60;
+const formatMmSs = (sec) => {
+  const m = Math.floor(Math.max(0, sec) / 60);
+  const s = Math.max(0, sec) % 60;
+  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+};
 
 const TIER_INFO = {
   sohssure: { label: "소쉬르", desc: "초등 1~3학년" },
@@ -29,6 +38,11 @@ function DiagnosticPrintPage() {
   const [answers, setAnswers] = useState({}); // {1: "1"|"2"|...|"5"}
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+
+  // 60분 카운트다운 타이머
+  const [remainSec, setRemainSec] = useState(TIME_LIMIT_SEC);
+  const [timerStarted, setTimerStarted] = useState(false);
+  const submittedRef = useRef(false);
 
   // 빈 객관식 문항 메타 (AnswerInputPanel용)
   const questions = Array.from({ length: TOTAL_Q }, (_, i) => ({
@@ -100,15 +114,19 @@ function DiagnosticPrintPage() {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (auto = false) => {
+    if (submittedRef.current) return;
     setSubmitError("");
-    const unanswered = questions.filter(q => !answers[String(q.number)]);
-    if (unanswered.length > 0) {
-      const ok = window.confirm(
-        `${unanswered.length}문항이 미응답입니다. 그래도 제출하시겠습니까?`
-      );
-      if (!ok) return;
+    if (!auto) {
+      const unanswered = questions.filter(q => !answers[String(q.number)]);
+      if (unanswered.length > 0) {
+        const ok = window.confirm(
+          `${unanswered.length}문항이 미응답입니다. 그래도 제출하시겠습니까?`
+        );
+        if (!ok) return;
+      }
     }
+    submittedRef.current = true;
     setSubmitting(true);
     try {
       // 1~5 숫자 → A~E 알파벳 변환
@@ -122,11 +140,24 @@ function DiagnosticPrintPage() {
       });
       navigate(`/diagnostic/v2/report/${res.sessionId}`);
     } catch (err) {
+      submittedRef.current = false;
       setSubmitError(err.message || "제출에 실패했습니다.");
     } finally {
       setSubmitting(false);
     }
   };
+
+  // 카운트다운 타이머: 시작 버튼 누르면 즉시 카운트, 0이 되면 자동 제출
+  useEffect(() => {
+    if (!timerStarted) return;
+    if (remainSec <= 0) {
+      handleSubmit(true);
+      return;
+    }
+    const id = setTimeout(() => setRemainSec(s => s - 1), 1000);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timerStarted, remainSec]);
 
   if (!tierInfo) return null;
   if (loading) return <div className="diag-v2-loading">불러오는 중...</div>;
@@ -134,13 +165,40 @@ function DiagnosticPrintPage() {
   return (
     <div className="diagnostic-page">
       <main className="diagnostic-panel" style={{ maxWidth: "100%", padding: "16px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, gap: 12, flexWrap: "wrap" }}>
           <h2 style={{ margin: 0 }}>
             [{tierInfo.label}] 진단 시험지 OMR 입력
           </h2>
-          <button className="btn ghost" onClick={() => navigate("/diagnostic/v2")}>
-            돌아가기
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {/* 60분 카운트다운 타이머 */}
+            <div
+              className={`diag-timer ${remainSec <= 300 ? "warn" : ""}`}
+              style={{
+                padding: "8px 16px",
+                borderRadius: 999,
+                fontWeight: 800,
+                fontSize: 18,
+                fontVariantNumeric: "tabular-nums",
+                background: remainSec <= 300 ? "#fdecea" : "#eef5ff",
+                color: remainSec <= 300 ? "#c0392b" : "#1f4e8a",
+                border: `2px solid ${remainSec <= 300 ? "#e74c3c" : "#5a8dd6"}`,
+              }}
+            >
+              ⏱ {formatMmSs(remainSec)}
+            </div>
+            {!timerStarted && (
+              <button
+                className="btn primary"
+                onClick={() => setTimerStarted(true)}
+                style={{ padding: "8px 16px", fontWeight: 700 }}
+              >
+                타이머 시작
+              </button>
+            )}
+            <button className="btn ghost" onClick={() => navigate("/diagnostic/v2")}>
+              돌아가기
+            </button>
+          </div>
         </div>
 
         <div className="diag-print-notice" style={{
@@ -153,9 +211,10 @@ function DiagnosticPrintPage() {
           lineHeight: 1.6,
         }}>
           <strong>응시 안내</strong><br />
-          1) 시험지 PDF를 출력해서 60분 안에 풀어주세요.<br />
-          2) 다 푼 후 종이 답안을 아래 OMR 칸에 옮겨 적고 제출하세요.<br />
-          3) 객관식 48문항입니다. 찍고 넘어간 문제는 풀이속도 측정이 정확하지 않을 수 있습니다.
+          1) 시험지 PDF를 출력 또는 화면으로 보고 <strong>60분 안에</strong> 풀어주세요.<br />
+          2) <strong>"타이머 시작"</strong>을 누르면 60분 카운트가 시작됩니다. 0이 되면 자동 제출됩니다.<br />
+          3) 다 푼 후 종이 답안을 아래 OMR 칸에 옮겨 적고 <strong>제출하기</strong>를 누르세요.<br />
+          4) 객관식 48문항입니다. 찍고 넘어간 문제는 풀이속도 측정이 정확하지 않을 수 있습니다.
         </div>
 
         {pdfError && (
@@ -175,9 +234,10 @@ function DiagnosticPrintPage() {
             questions={questions}
             answers={answers}
             onAnswer={handleAnswer}
-            onSubmit={handleSubmit}
+            onSubmit={() => handleSubmit(false)}
             submitting={submitting}
             label="OMR 답안 입력"
+            showPoints={false}
           />
         </div>
       </main>

@@ -1,0 +1,408 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{Malgun Gothic}
+\usepackage[margin=2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{lastpage}
+\usepackage{needspace}
+
+\definecolor{korfarm}{HTML}{F06C24}
+\definecolor{korfarmDark}{HTML}{2B221D}
+\definecolor{korfarmGreen}{HTML}{4E8A60}
+\definecolor{korfarmBlue}{HTML}{4D8BCC}
+\definecolor{lightbg}{HTML}{FFF4E9}
+\definecolor{rowbg}{HTML}{FBF3E3}
+
+\titleformat{\section}{\Large\bfseries\color{korfarm}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{korfarmDark}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{korfarmGreen}}{}{0em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray}국어농장 v2 직원 회의 발제}
+\fancyhead[R]{\small\color{gray}\thepage / \pageref{LastPage}}
+\fancyfoot[C]{\small\color{gray}국어농장 --- 2026년 4월 회의}
+
+\hypersetup{colorlinks=true,linkcolor=korfarm,urlcolor=korfarmBlue}
+
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.15em,topsep=0.3em}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=0.15em,topsep=0.3em}
+
+\newcommand{\summarybox}[1]{%
+  \vspace{0.2cm}
+  \noindent\colorbox{lightbg}{\parbox{\dimexpr\textwidth-2\fboxsep}{%
+    \textbf{\color{korfarm}요약} \quad #1%
+  }}
+  \vspace{0.2cm}
+}
+
+\begin{document}
+
+%% ═══════════════════════════════════════════
+%% 표지
+%% ═══════════════════════════════════════════
+\begin{titlepage}
+\centering
+\vspace*{2.5cm}
+{\Huge\bfseries\color{korfarm} 국어농장 v2 \par}
+\vspace{0.3cm}
+{\LARGE 직원 회의 발제\par}
+\vspace{1.5cm}
+{\huge\bfseries 프로젝트 진행 현황 · 남은 작업 · 콘텐츠 작업\par}
+\vspace{0.6cm}
+{\Large 일일 퀴즈 시스템 재설계 포함\par}
+\vspace{2.5cm}
+
+\begin{tabular}{rl}
+\textbf{회의 일자} & 2026년 4월 8일 \\
+\textbf{대상} & 국어농장 콘텐츠팀 / 개발팀 \\
+\textbf{발제자} & 프로젝트 매니저 \\
+\textbf{소요 시간} & 약 60분 \\
+\end{tabular}
+
+\vfill
+{\large 2026년 4월\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════
+\section{프로젝트 진행 현황}
+%% ═══════════════════════════════════════════
+
+\summarybox{12개 학습 모듈 가동 / 진단 v2 안정화 / 채팅·게시판 신규 / 일일 퀴즈 전면 재설계 완료. 남은 부분은 \textbf{콘텐츠 채우기}와 \textbf{운영 도구 마무리}.}
+
+\subsection{전체 진척도 한눈에}
+
+\begin{tabularx}{\textwidth}{lXc}
+\toprule
+\rowcolor{rowbg}\textbf{영역} & \textbf{상태} & \textbf{비고} \\
+\midrule
+학습 엔진 (12 모듈) & 12개 모듈 모두 가동 / 통합 사이즈·마크다운·KaTeX 수식 지원 & ★★★★★ \\
+진단 테스트 v2 & CAT 폐지 → 60분 단일 모드, 인쇄 OMR, 풀이속도 측정 & ★★★★★ \\
+일일 퀴즈 시스템 & 10대 역량 1:1 매칭 / 4가지 인터랙션 / DailyQuizModule 신규 & ★★★★☆ \\
+콘텐츠 관리 (admin) & 분류 드롭다운, batch-import, 표준양식 일치 & ★★★★☆ \\
+파일 업로드 & presign $\to$ multipart 업로드, 실제 파일 저장/서빙 & ★★★★☆ \\
+커뮤니티 채팅 & WebSocket + 좋아요/이모티콘/음성/첨부 + 관리자 보관함 & ★★★★☆ \\
+게시판 시스템 & 학습자료 업로드, 관리자 게시판 관리, 404 수정 & ★★★★☆ \\
+성적표 / 진단 리포트 & 4대 영역 36세부영역 분류, 점수 계산 재설계 & ★★★☆☆ \\
+콘텐츠 (12레벨 365일) & 일일독해 재생성 / 어휘 재작성 / 배경지식 / 일일 퀴즈 & ★★☆☆☆ \\
+\bottomrule
+\end{tabularx}
+
+\subsection{최근 한 달 주요 변화}
+
+\begin{itemize}
+  \item \textbf{학습 모듈 LaTeX 수식 렌더링 (KaTeX)}: \texttt{\$\textbackslash frac\{1\}\{2\}\$} 같은 표준 LaTeX를 12개 모듈 전체에서 그대로 렌더. 외부 AI 출제 결과를 \textbf{붙여넣기 그대로 사용} 가능.
+  \item \textbf{일일 퀴즈 전면 재설계}: 4가지 인터랙션 (객관식 / 빈칸 / 텍스트 클릭 / 선택지 OX) × 10대 역량 1:1 매칭. 무료 회원의 \textbf{학습 흐름 진입점} 역할 강화.
+  \item \textbf{파일 업로드/다운로드 시스템}: presign $\to$ multipart 업로드, 실제 파일 저장/서빙 완성. 게시판/채팅/관리자 모두 통합.
+  \item \textbf{커뮤니티 채팅 디자인 리워크}: 좋아요·이모티콘·음성 메시지·첨부 드롭업 메뉴, 본인 메시지 가로폭 확장.
+  \item \textbf{콘텐츠 표준양식 정비}: 분류 드롭다운과 contentType 키 1:1 대응, batch-import contentType 누락 방어.
+  \item \textbf{모듈 사이즈 통합}: 소쉬르 38 / 프레게 36 / 러셀 34 / 비트겐슈타인 32. PC와 모바일에서 동일 비율.
+\end{itemize}
+
+\newpage
+%% ═══════════════════════════════════════════
+\section{남은 작업 (개발/운영)}
+%% ═══════════════════════════════════════════
+
+\summarybox{개발 핵심 미해결: \textbf{성적표 마무리}, \textbf{일일 퀴즈 콘텐츠 등록 파이프라인}, \textbf{12개 모듈별 콘텐츠 누락분 식별}.}
+
+\subsection{개발 우선 과제}
+
+\begin{enumerate}
+  \item \textbf{성적표 자동 생성 파이프라인}
+    \begin{itemize}
+      \item 4대 영역 (비문학 / 문학 / 문법 / 기타) × 36 세부영역 분류 \textbf{확정}
+      \item 진단 점수 → 영역별 점수 계산 → PDF/웹 리포트 생성
+      \item 학생/학부모/관리자 페이지 각각의 노출 형식 통일
+    \end{itemize}
+  \item \textbf{일일 퀴즈 batch-import 검증}
+    \begin{itemize}
+      \item 12레벨 × 365일 = 4,380세트 = 43,800문항 등록 흐름 점검
+      \item TEXT\_SELECT의 \texttt{answerRanges} 인덱스 검증 자동화
+      \item CHOICE\_OX의 토큰 이어붙이기 결과 = 원본 지문 일치 검증
+    \end{itemize}
+  \item \textbf{관리자 콘텐츠 누락 점검 도구}
+    \begin{itemize}
+      \item 모듈 × 레벨 × 일차 매트릭스 가시화
+      \item 빠진 일차 자동 알림
+    \end{itemize}
+  \item \textbf{모바일 안정성}
+    \begin{itemize}
+      \item iPhone SE (375px) 기준 KaTeX 가로 스크롤 동작 확인
+      \item 채팅 가상 키보드 위로 input 떠오르는 동작 점검
+    \end{itemize}
+  \item \textbf{배포 자동화}
+    \begin{itemize}
+      \item \texttt{scripts/deploy-frontend.sh} / \texttt{deploy-backend.sh} 정상화
+      \item CloudFront 무효화 \texttt{"/*"} 패턴 고정
+    \end{itemize}
+\end{enumerate}
+
+\subsection{운영/관리 작업}
+
+\begin{itemize}
+  \item 본사 관리자 / 지점 관리자 권한 분리 점검
+  \item 채팅 첨부 7일 보관 → 한 달 본사 보관함 자동 정리 작업
+  \item 학습자 누적 데이터 → 진단 리포트 연결
+  \item 학부모 알림(주간 학습 요약) 발송 흐름
+\end{itemize}
+
+\newpage
+%% ═══════════════════════════════════════════
+\section{필요한 콘텐츠 작업}
+%% ═══════════════════════════════════════════
+
+\summarybox{콘텐츠가 \textbf{병목}. 12레벨 × 365일 × 10문항 일일 퀴즈만 \textbf{43,800문항}. 정독·복기·확인 / 어휘 / 배경지식까지 합치면 더 큼.}
+
+\subsection{모듈별 필요 콘텐츠 매트릭스}
+
+\begin{tabularx}{\textwidth}{lXc}
+\toprule
+\rowcolor{rowbg}\textbf{모듈} & \textbf{단위} & \textbf{12레벨 합계} \\
+\midrule
+일일 퀴즈 (DailyQuiz) & 10문항/일 × 365일 & 43,800 문항 \\
+일일 독해 (정독/복기/확인) & 1지문 + 8문항/일 × 365일 & $\sim$50,000 항목 \\
+배경지식 & 1지문 + 5문항/일 & $\sim$22,000 항목 \\
+어휘 (프로 모드) & 20어휘/일 & $\sim$87,000 어휘 \\
+문법 시험지 & 영역별 200문항 × 16영역 & 3,200 문항 \\
+문학 / 비문학 유형 학습 & 출제 유형별 패턴 정리 & 진행 중 \\
+\bottomrule
+\end{tabularx}
+
+\subsection{현재 진척}
+
+\begin{itemize}
+  \item \textbf{일일독해 재생성 (Phase A/B)}: 12레벨 × 365일 진행 중. 진행률은 \texttt{daily\_reading\_progress.md} 참고.
+  \item \textbf{프로모드 어휘 재작성}: 표준국어대사전 XML 기반, 180파일 × 20어휘 = 3,600문제 단위로 작업.
+  \item \textbf{문법 시험지 추출}: 16영역 × 200문제 목표. 현재 시험지 907 + 해설서 569 = 총 1,476문제. 22종 소스. EasyOCR 활용.
+  \item \textbf{배경지식 학습}: 380파일 선택지 길이/형식 점검 완료.
+  \item \textbf{일일 퀴즈}: 표준양식과 지침서 정비 완료. 본격 등록 시작 전 단계.
+\end{itemize}
+
+\subsection{콘텐츠팀 결정 필요 사항}
+
+\begin{enumerate}
+  \item 일일 퀴즈 \textbf{Q1 어휘 6하위유형 로테이션} 비중 확정 (소쉬르~프레게는 한자성어/고어 비중 감소)
+  \item 일일 퀴즈 \textbf{Q6 (TEXT\_SELECT) / Q10 (CHOICE\_OX)}용 지문 선정: 기출 폴더 우선 사용 vs 신규 창작
+  \item 일일 퀴즈 \textbf{Q5 (어법/문법)} 기출/교재 소스 사용 가이드라인
+  \item AI 출제 \textbf{검수 인력 배분} (1세트 10문항당 검수 시간 산정)
+  \item 외부 AI (ChatGPT/Claude) 호출 \textbf{프롬프트 표준화}
+\end{enumerate}
+
+\newpage
+%% ═══════════════════════════════════════════
+\section{일일 퀴즈 시스템 재설계 (집중 발제)}
+%% ═══════════════════════════════════════════
+
+\summarybox{일일 퀴즈는 \textbf{무료 회원 전용}이며 \textbf{누구나 매일 5분 안에} 끝낼 수 있어야 한다. 10대 역량을 1:1로 매칭해 \textbf{학습 흐름 진입점} 역할을 한다. 표준국어대사전을 적극 활용한다.}
+
+\subsection{기본 원칙}
+
+\begin{itemize}
+  \item 무료 회원 전용. 누적 데이터 분석·진단 리포트는 유료.
+  \item 하루 1세트 = \textbf{10문항 고정} (제한 시간 5분).
+  \item 정답의 \textbf{유일성} 보장. 정답 +20초 / 오답 $-$40초.
+  \item \textbf{중심 낱말 / 중심 문장 찾기 유형 금지}. 요약문 만들기는 허용.
+  \item 모든 지문·문항은 새로 \textbf{창작}. 기출 문장 그대로 복제 금지.
+  \item 괄호 속 부연 사용 금지.
+  \item \textbf{표준국어대사전 JSON} 적극 활용.
+\end{itemize}
+
+\subsection{10대 역량 1:1 슬롯 매핑}
+
+\begin{tabularx}{\textwidth}{clXl}
+\toprule
+\rowcolor{rowbg}\textbf{\#} & \textbf{역량} & \textbf{설명} & \textbf{인터랙션} \\
+\midrule
+1 & 어휘력 & 6하위유형 로테이션 (한자어/다의어/한자성어/순우리말/고어/문학어휘) & 객관식 또는 빈칸 \\
+2 & 문장 독해력 & 호응·지시·대용·치환·옛말투 & 객관식 \\
+3 & 구조 독해력 & 4$\sim$7문단 비문학, 전개 방식·문단 기능 & 객관식 \\
+4 & 논리 사고력 & 전건부정·대우·반례·논리오류 & 객관식 \\
+5 & 어법·문법 능력 & 기출/교재 소스 활용, 수능형 문법 & 객관식 \\
+6 & 국어 개념 적용 & 지문에서 \textbf{직접 클릭} (ALL/ANY) & 텍스트 클릭 \\
+7 & 국어 관련 배경지식 & 작가/갈래/사조/이론 & 객관식 \\
+8 & 비문학 배경지식 & 철학/법학/과학/AI 등 & 객관식 \\
+9 & 문제 분석·전략 수립 & 모범답안 중간 \textbf{빈칸 채우기} & 빈칸 (순차) \\
+10 & 선택지 분석·전략 수립 & 선택지 → 명제 → \textbf{근거 토큰 클릭} → OX & 선택지 OX \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Q1 어휘 — 6하위유형 로테이션 상세}
+
+매일 아래 6가지 중 하나를 선택. 365일에 걸쳐 골고루 분배.
+
+\begin{enumerate}
+  \item \textbf{2자 한자어}
+    \begin{itemize}
+      \item 뜻 찾기 / 단어 찾기 / 용례 빈칸 채우기
+      \item \textbf{오답 선택지 규칙}: 한 글자가 동일한 유사 한자어로 구성 (예: '역설' → 오답 '역할', '반설')
+    \end{itemize}
+  \item \textbf{다의어 동사}
+    \begin{itemize}
+      \item 지문에 밑줄 친 동사 → 같은 의미로 쓰인 문장 찾기
+      \item \textbf{표준국어대사전 의미번호} 기준으로 정답 확정
+      \item 4개 선택지는 각각 다른 의미번호의 용례
+    \end{itemize}
+  \item \textbf{한자성어} — 뜻 찾기 / 한자성어 찾기 / 용례 매칭 / 잘못 쓰인 문장 찾기 (프레게 이상)
+  \item \textbf{순우리말} — 일상에서 잘 쓰이지 않는 어휘, 뜻 찾기 또는 용례 매칭
+  \item \textbf{고어} — 용비어천가/고려가요/향가/시조/가사/고전소설·수필 원문에서 추출 (러셀 이상)
+  \item \textbf{문학 어휘} — 현대문학 작품에서 생소한 어휘 추출, 문맥 속 의미 파악
+\end{enumerate}
+
+\subsection{표준국어대사전 사용 규칙 (★ 핵심 결정사항)}
+
+\begin{enumerate}
+  \item 작업 시작 전 반드시 \textbf{사전 JSON 폴더 위치}를 확인할 것.
+  \item 타겟 단어의 뜻·예문·문형 정보를 사전에서 조사.
+  \item \textbf{소쉬르 / 프레게} (러셀 이전): 사전 뜻풀이를 \textbf{학년 수준에 맞게 어투 변환}.
+  \item \textbf{러셀부터}: 사전 \textbf{원본 뜻풀이 그대로} 사용.
+\end{enumerate}
+
+\subsection{Q2 $\sim$ Q5 객관식 구간}
+
+\begin{description}
+  \item[Q2 문장 독해력] 호응 / 지시 / 대용 / 개념 치환 / 설명-예시 / 관계 공식 / 옛말투. 옛말투는 러셀 이상.
+  \item[Q3 구조 독해력] 4$\sim$7문단 비문학 지문. 주제 / 제목 / 전개방식 / 문단 기능 / 언급 여부.
+  \item[Q4 논리 사고력] 전건후건 긍정/부정, 필요/충분조건, 대우명제, 귀납/연역, 반례, 논리적 오류.
+  \item[Q5 어법·문법 능력] 기출 폴더 \textbf{먼저 확인} → 없으면 \textbf{웹검색 검증} → 수능형으로 가공.
+\end{description}
+
+\subsection{Q6 국어 개념 적용 — 텍스트 직접 클릭 (★ 신규 인터랙션)}
+
+\textbf{인터랙션}: 학습자가 지문 텍스트에서 해당 부분을 \textbf{직접 클릭}.
+
+\textbf{판정 규칙}:
+\begin{itemize}
+  \item \textbf{ALL}: 정답 범위를 \textbf{모두} 찾아야 통과 (예: 직유법이 쓰인 부분 모두)
+  \item \textbf{ANY}: 여러 정답 중 \textbf{하나만} 찾아도 통과 (예: 예시 중 하나)
+\end{itemize}
+
+\textbf{문제 유형 예시}:
+\begin{itemize}
+  \item ``다음 시에서 직유법이 사용된 부분을 \textbf{모두} 클릭하시오.'' (ALL)
+  \item ``다음 글에서 예시에 해당하는 부분을 \textbf{하나} 클릭하시오.'' (ANY)
+  \item ``다음 문단에서 접속부사가 쓰인 곳을 \textbf{모두} 클릭하시오.'' (ALL)
+\end{itemize}
+
+\textbf{지문 선정}: 문학/비문학 지문은 기출 폴더를 먼저 확인. 소쉬르/프레게는 기존 작품을 초등학생용으로 변형. 러셀은 작업자 확인 필요.
+
+\subsection{Q7 $\sim$ Q8 배경지식 구간}
+
+\begin{description}
+  \item[Q7 국어 관련 배경지식] 작가-작품 매칭, 문학 갈래(시·소설·수필·극·고전), 사조(낭만/사실/모더니즘), 국어학 이론(러셀 이상).
+  \item[Q8 비문학 배경지식] 철학(인격동일성·인식론·윤리학) / 법학(법 해석·계약·기본권) / 경제(시장·수요공급·정책) / 과학(물리·화학·생물·지구) / 기술·AI(기계학습·확산모델·데이터 처리).
+\end{description}
+
+\subsection{Q9 문제 분석·전략 수립 — 빈칸 채우기 (★ 신규 인터랙션)}
+
+\textbf{인터랙션}: 모범답안 문장의 중간 빈칸을 \textbf{순차적으로} 4지선다에서 선택.
+
+\textbf{구성 원칙}:
+\begin{enumerate}
+  \item 지문과 문제를 제시.
+  \item 모범답안 문장(template)에서 핵심 어절을 빈칸(\texttt{\_\_\_\_})으로 처리.
+  \item 학습자는 빈칸을 \textbf{순서대로} 채움.
+  \item 각 빈칸에 정답 1개 + 오답 3개.
+  \item \textbf{첫/마지막 빈칸은 금지} (문맥 손실 방지).
+\end{enumerate}
+
+\subsection{Q10 선택지 분석·전략 수립 — 선택지 OX (★ 핵심 신규 인터랙션)}
+
+\textbf{인터랙션 순서}:
+\begin{enumerate}
+  \item 지문(토큰 단위)과 선택지 목록 표시.
+  \item 학습자가 선택지를 클릭 → 해당 선택지의 \textbf{명제(proposition)} 표시.
+  \item 명제마다 지문에서 \textbf{근거 토큰을 클릭}.
+  \item 올바른 토큰을 클릭하면 명제의 O/X 확인.
+  \item 모든 명제 처리 → 해당 선택지의 판정 완료.
+  \item \textbf{정답 선택지}(지문과 불일치하는 것)를 찾으면 문제 완료.
+\end{enumerate}
+
+\textbf{근거 토큰 매칭 규칙}:
+\begin{itemize}
+  \item \texttt{evidenceTokens}: 해당 명제의 근거 토큰 ID 배열
+  \item \texttt{matchMode}: \texttt{ALL} (여러 토큰 모두 찾아야 함) 또는 \texttt{ANY} (하나만 찾아도 됨)
+\end{itemize}
+
+\subsection{오답 선택지 생성 10대 기법 (Q10 핵심)}
+
+\begin{enumerate}
+  \item 주체/대상 호응 관계 바꾸기: A가 B에게 한 것을 B가 A에게 한 것으로
+  \item 다른 대상의 설명으로 바꾸기
+  \item 순서 바꾸기 (시간·논리적 선후 뒤바꿈)
+  \item 인과 바꾸기 (원인·결과 뒤바꿈)
+  \item 조건-결과 바꾸기
+  \item 결합해야 참인 내용을 분리 (A이고 B일 때만 C인데, A만으로 C라고 주장)
+  \item 분리해야 참인 내용을 결합
+  \item 방향 바꾸기 (증가↔감소, 상승↔하락)
+  \item 상관/비례 관계 바꾸기 (비례↔반비례)
+  \item 부적절한 비교 (비교 대상·기준 변경)
+\end{enumerate}
+
+\subsection{생성 파이프라인 (작업자/AI 분담)}
+
+\begin{tabularx}{\textwidth}{lXl}
+\toprule
+\rowcolor{rowbg}\textbf{단계} & \textbf{작업} & \textbf{담당} \\
+\midrule
+1. 주제 선정 & 7일 단위 로테이션 (과학/사회/인문/기술/예술/언어/혼합) & PM \\
+2. 지문 작성 & 레벨별 길이 기준 준수, 새로 창작 & AI + 검수 \\
+3. Q1 어휘 & 표준국어대사전 검색 → 6하위유형 중 선택 & 작업자 \\
+4. Q2$\sim$Q5 객관식 & 지문 기반 문항 + 4지선다 + 해설 & AI + 검수 \\
+5. Q6 텍스트 클릭 & answerRanges 인덱스 정확히 계산 & 작업자 \\
+6. Q7$\sim$Q8 배경지식 & 학년 수준 검증 & AI + 검수 \\
+7. Q9 빈칸 & 모범답안 → 핵심 어절 빈칸화 & 작업자 \\
+8. Q10 선택지 OX & 토큰 분리 + 명제 + 근거 토큰 & 작업자 (★ 시간 많이) \\
+9. 품질 검사 & 18개 체크리스트 자동/수동 점검 & 검수자 \\
+10. 등록 & batch-import API & 시스템 \\
+\bottomrule
+\end{tabularx}
+
+\newpage
+%% ═══════════════════════════════════════════
+\section{회의 토론 항목}
+%% ═══════════════════════════════════════════
+
+\subsection{즉시 결정 필요}
+
+\begin{enumerate}
+  \item 일일 퀴즈 \textbf{1차 등록 우선순위 레벨}: 러셀1부터 시작? 소쉬르1부터?
+  \item Q6 텍스트 클릭 \textbf{지문 출처} 정책: 기출 우선 vs 신규 창작
+  \item Q10 선택지 OX의 \textbf{토큰 분리 단위}: 어절 단위 vs 의미구 단위
+  \item AI 출제 → 검수 \textbf{순환 주기}: 일 단위 vs 주 단위
+  \item \textbf{표준국어대사전 JSON 폴더 위치} 공유 (모든 작업자가 동일 경로 참조)
+\end{enumerate}
+
+\subsection{향후 한 달 마일스톤 제안}
+
+\begin{itemize}
+  \item \textbf{4월 2주차}: 일일 퀴즈 러셀1 30일치 (300문항) 시범 등록 + 학생 베타 테스트
+  \item \textbf{4월 3주차}: 베타 피드백 반영 → 표준양식 v3 확정
+  \item \textbf{4월 4주차}: 12레벨 동시 작업 진입 (작업자 분담 확정)
+  \item \textbf{5월 1주차}: 성적표 4대 영역 36세부영역 자동 생성 완료
+\end{itemize}
+
+\subsection{장기 과제}
+
+\begin{itemize}
+  \item 일일 퀴즈 데이터 → 진단 리포트 \textbf{누적 연결}
+  \item 학부모 알림 (주간 학습 요약)
+  \item 학생 UX: 일일 퀴즈 → 일일 독해 → 어휘 학습으로 \textbf{흐름 유도}
+  \item 모바일 앱 패키징 검토
+\end{itemize}
+
+\vspace{1cm}
+\hrule
+\vspace{0.4cm}
+\noindent\textit{이 발제 문서는 회의 진행용입니다. 결정사항은 회의록에 별도 기록.}
+
+\end{document}

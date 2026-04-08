@@ -11,8 +11,9 @@ import "../styles/test-online.css";
  *  - readOnly: boolean
  *  - submitting: boolean
  *  - label: 상단 라벨 (기본: "답안 입력")
+ *  - showPoints: 점수 표시 여부 (기본: true — 진단 등 모든 문항 점수가 동일하면 false로 끄기)
  */
-function AnswerInputPanel({ questions = [], answers = {}, onAnswer, onSubmit, readOnly = false, submitting = false, label = "답안 입력" }) {
+function AnswerInputPanel({ questions = [], answers = {}, onAnswer, onSubmit, readOnly = false, submitting = false, label = "답안 입력", showPoints = true }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const answeredCount = Object.keys(answers).length;
 
@@ -40,9 +41,11 @@ function AnswerInputPanel({ questions = [], answers = {}, onAnswer, onSubmit, re
             {row.map(q => (
               <div key={q.number} className="ts-omr-cell">
                 <div className="ts-omr-qnum">
-                  <span className="ts-omr-num">{q.number}</span>
-                  <span className="ts-omr-type">{q.type === "서술형" ? "서" : ""}</span>
-                  <span className="ts-omr-pts">{q.points}점</span>
+                  <span className="ts-omr-num">{q.number}번</span>
+                  {q.type === "서술형" && <span className="ts-omr-type">서</span>}
+                  {showPoints && q.points != null && (
+                    <span className="ts-omr-pts">{q.points}점</span>
+                  )}
                 </div>
                 {q.type === "객관식" ? (
                   <div className="ts-omr-bubbles">

@@ -3,9 +3,7 @@ package com.korfarm.api.test
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
 import com.korfarm.api.security.SecurityUtils
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -61,7 +59,7 @@ class TestController(
     }
 
     @GetMapping("/{testId}/pdf")
-    fun pdf(@PathVariable testId: String): ResponseEntity<String> {
+    fun pdf(@PathVariable testId: String): ApiResponse<String> {
         val userId = currentUser()
         requireStudent()
         testService.verifyStudentTestAccess(testId, userId)
@@ -71,12 +69,8 @@ class TestController(
         if (paper.pdfFileId.isNullOrBlank()) {
             throw ApiException("NO_PDF", "시험지 PDF가 없습니다.", HttpStatus.NOT_FOUND)
         }
-        val headers = HttpHeaders()
-        headers.set("Content-Disposition", "inline")
-        headers.set("Cache-Control", "no-store")
-        return ResponseEntity.ok()
-            .headers(headers)
-            .body(paper.pdfFileId)
+        // pdfFileId가 http(s) URL이면 그대로, 아니면 file id로 반환 (프론트에서 분기 처리)
+        return ApiResponse(success = true, data = paper.pdfFileId!!)
     }
 
     @GetMapping("/{testId}/questions")
