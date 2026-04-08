@@ -227,9 +227,14 @@ export default function BackgroundForm({ editor, focusPath }) {
 
     return (
       <div>
-        <div style={{ marginBottom: 12, fontSize: 14, fontWeight: 600 }}>
-          지문 편집 ({passages.length}개)
+        <div className="ce-form-mode-header">
+          <span className="ce-form-mode-tag passages">지문 모드</span>
+          <strong>지문 편집</strong>
+          <span className="ce-form-mode-count">{passages.length}개 지문</span>
         </div>
+        <p className="ce-form-mode-desc">
+          학생이 지문을 먼저 읽고 → "다 읽었습니다" → 문제 풀이. 지문 1개당 문항 여러 개 가능.
+        </p>
         <DraggableList
           items={passages}
           onReorder={(from, to) => reorderItems("passages", from, to)}
@@ -295,10 +300,14 @@ export default function BackgroundForm({ editor, focusPath }) {
 
   return (
     <div>
-      <div style={{ marginBottom: 12, fontSize: 14, fontWeight: 600 }}>
-        <span style={{ color: "#ff8f2b", marginRight: 8 }}>레거시</span>
-        문항 편집 ({legacyQuestions.length}개)
+      <div className="ce-form-mode-header">
+        <span className="ce-form-mode-tag legacy">레거시 모드</span>
+        <strong>문항 편집</strong>
+        <span className="ce-form-mode-count">{legacyQuestions.length}개 문항</span>
       </div>
+      <p className="ce-form-mode-desc">
+        ⚠ 옛 형식: 지문 없이 문항만 나열. 신규 작업은 "지문 모드"를 권장합니다 (지문 추가 후 questions 배열을 비우면 자동 전환).
+      </p>
       <DraggableList
         items={legacyQuestions}
         onReorder={(from, to) => reorderItems("questions", from, to)}

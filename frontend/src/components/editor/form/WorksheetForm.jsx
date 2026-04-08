@@ -2,6 +2,7 @@ import CollapsibleSection from "../widgets/CollapsibleSection";
 import ChoiceEditor from "../widgets/ChoiceEditor";
 import ScoringEditor from "../widgets/ScoringEditor";
 import DraggableList from "../widgets/DraggableList";
+import HighlightPicker from "../widgets/HighlightPicker";
 
 /**
  * 퀴즈/워크시트 편집 폼 (오른쪽 패널)
@@ -90,42 +91,29 @@ export default function WorksheetForm({ editor, focusPath }) {
             )}
           </div>
 
-          {/* 하이라이트 (선택) — 지문 내 강조 단어 */}
-          <div className="ce-form-section">
-            <label className="ce-form-label">하이라이트 텍스트</label>
-            <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-              <input
-                className="ce-form-input"
-                style={{ flex: 1 }}
-                value={q.highlight?.text || ""}
-                onChange={(e) => {
-                  const val = e.target.value.trim();
-                  updateField(`${path}.highlight`, val ? { text: val } : undefined);
+          {/* 하이라이트 — 지문에서 드래그로 정확한 위치 선택 (string passage 전용) */}
+          {typeof q.passage === "string" && q.passage && (
+            <div className="ce-form-section">
+              <label className="ce-form-label">하이라이트 (지문에서 드래그)</label>
+              <HighlightPicker
+                ranges={Array.isArray(q.highlight?.ranges) ? q.highlight.ranges : []}
+                paragraphs={[{ id: `q${i}`, text: q.passage }]}
+                onAdd={(range) => {
+                  const existing = Array.isArray(q.highlight?.ranges) ? q.highlight.ranges : [];
+                  const { _text, ...cleanRange } = range;
+                  // paragraphId를 q{i}로 강제 (string passage는 단일 단락)
+                  cleanRange.paragraphId = `q${i}`;
+                  updateField(`${path}.highlight`, { ranges: [...existing, cleanRange] });
                 }}
-                placeholder="지문에서 강조할 단어 (비우면 하이라이트 없음)"
-                data-field-path={`${path}.highlight`}
+                onRemove={(rangeIdx) => {
+                  const existing = Array.isArray(q.highlight?.ranges) ? q.highlight.ranges : [];
+                  const next = existing.filter((_, idx) => idx !== rangeIdx);
+                  updateField(`${path}.highlight`, next.length ? { ranges: next } : undefined);
+                }}
+                selectContainerId="ce-passage-container"
               />
-              {typeof q.passage === "string" && q.passage && (
-                <button
-                  type="button"
-                  className="ce-btn ce-btn-secondary"
-                  style={{ fontSize: 11, whiteSpace: "nowrap" }}
-                  onClick={() => {
-                    const sel = window.getSelection();
-                    if (sel && !sel.isCollapsed) {
-                      const text = sel.toString().trim();
-                      if (text && q.passage.includes(text)) {
-                        updateField(`${path}.highlight`, { text });
-                        sel.removeAllRanges();
-                      }
-                    }
-                  }}
-                >
-                  드래그 적용
-                </button>
-              )}
             </div>
-          </div>
+          )}
 
           {/* 선택지 + 정답 */}
           <div className="ce-form-section">

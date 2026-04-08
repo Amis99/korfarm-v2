@@ -86,6 +86,23 @@ function AdminContentUploadPage() {
   const editSource = searchParams.get("source");
   const isEditMode = !!editId;
 
+  /* 편집 모드는 EditorShell로 통합됨 — 자동 redirect */
+  useEffect(() => {
+    if (editId) {
+      const params = new URLSearchParams({ id: editId, mode: "json" });
+      if (editSource === "static") {
+        params.set("source", "static");
+        const jsonPath = searchParams.get("jsonPath");
+        const type = searchParams.get("type");
+        const title = searchParams.get("title");
+        if (jsonPath) params.set("jsonPath", jsonPath);
+        if (type) params.set("type", type);
+        if (title) params.set("title", title);
+      }
+      navigate(`/admin/content/edit?${params.toString()}`, { replace: true });
+    }
+  }, [editId, editSource, navigate, searchParams]);
+
   /* 단건 / 배치 모드 토글 */
   const [uploadMode, setUploadMode] = useState("single"); // "single" | "batch"
 
@@ -359,18 +376,31 @@ function AdminContentUploadPage() {
     }
   };
 
-  /* 배치 결과에서 미리보기 (기존 handleServerPreview 패턴) */
+  /* 배치 결과에서 미리보기 — payload 이중 wrap 방지 */
   const [batchPreviewLoadingId, setBatchPreviewLoadingId] = useState(null);
   const handleBatchPreview = async (contentId) => {
     setBatchPreviewLoadingId(contentId);
     try {
       const preview = await apiGet(`/v1/admin/content/${contentId}/preview`);
+      const ct = preview.contentType || preview.content_type;
+      const rawContent = preview.content || {};
+      // rawContent는 inner JSON 전체 (contentId, title, payload: {...} 포함)
+      // EngineShell이 기대하는 형태: { contentType, targetLevel, payload, ... }
+      const innerPayload = rawContent.payload != null ? rawContent.payload : rawContent;
       const previewData = {
-        contentType: preview.contentType || preview.content_type,
-        payload: preview.content,
+        contentType: ct,
+        targetLevel: preview.levelId || preview.level_id || rawContent.targetLevel || "",
+        area: preview.area || rawContent.area || "",
+        subArea: preview.subArea || preview.sub_area || rawContent.subArea || "",
+        title: preview.title || rawContent.title || "",
+        timeLimitSec: rawContent.timeLimitSec ?? rawContent.time_limit_sec,
+        seedReward: rawContent.seedReward || rawContent.seed_reward,
+        assets: rawContent.assets,
+        payload: innerPayload,
       };
       localStorage.setItem("korfarm_preview_content", JSON.stringify(previewData));
-      const mk = preview.contentType || preview.content_type || "worksheet_quiz";
+      // moduleKey는 contentType이 아니라 실제 모듈 키여야 함
+      const mk = preview.moduleKey || preview.module_key || "worksheet_quiz";
       localStorage.setItem("korfarm_preview_module", mk);
       navigate("/admin/content/preview");
     } catch (err) {

@@ -252,29 +252,18 @@ class AdminContentService(
         content.status = "active"
         contentRepository.save(content)
 
-        // 기존 버전이 있으면 UPDATE, 없으면 INSERT
-        val existingVersion = contentVersionRepository.findTopByContentIdOrderByCreatedAtDesc(contentId)
-        val version = if (existingVersion != null) {
-            existingVersion.contentJson = objectMapper.writeValueAsString(request.content)
-            existingVersion.uploadedBy = userId
-            existingVersion.approvedBy = userId
-            existingVersion.approvedAt = LocalDateTime.now()
-            existingVersion.schemaVersion = request.schemaVersion
-            contentVersionRepository.save(existingVersion)
-            existingVersion
-        } else {
-            val newVersion = ContentVersionEntity(
-                id = IdGenerator.newId("cv"),
-                contentId = contentId,
-                schemaVersion = request.schemaVersion,
-                contentJson = objectMapper.writeValueAsString(request.content),
-                uploadedBy = userId,
-                approvedBy = userId,
-                approvedAt = LocalDateTime.now()
-            )
-            contentVersionRepository.save(newVersion)
-            newVersion
-        }
+        // 새 버전 INSERT (이력 보존). 기존 버전은 그대로 두고 항상 새 row 생성.
+        // findTopByContentIdOrderByCreatedAtDesc로 최신 버전을 조회하면 새로 만든 것이 반환됨.
+        val version = ContentVersionEntity(
+            id = IdGenerator.newId("cv"),
+            contentId = contentId,
+            schemaVersion = request.schemaVersion,
+            contentJson = objectMapper.writeValueAsString(request.content),
+            uploadedBy = userId,
+            approvedBy = userId,
+            approvedAt = LocalDateTime.now()
+        )
+        contentVersionRepository.save(version)
 
         contentEditLogRepository.save(ContentEditLogEntity(
             id = IdGenerator.newId("cel"),

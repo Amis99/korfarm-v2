@@ -66,40 +66,51 @@ export default function EditorShell({ contentId, staticInfo }) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const backPath = searchParams.get("from") || "/admin/content";
+  const initialMode = searchParams.get("mode"); // "json" 이면 JSON 모드로 시작
   const editor = useContentEditor(contentId, staticInfo);
   const { meta, content, loading, error, saving, dirty, metaDirty, saveMsg, canUndo, isStatic } = editor;
   const [metaOpen, setMetaOpen] = useState(false);
 
   /* JSON 모드 */
-  const [showJson, setShowJson] = useState(false);
+  const [showJson, setShowJson] = useState(initialMode === "json");
   const [jsonText, setJsonText] = useState("");
   const [jsonError, setJsonError] = useState("");
+  /* JSON 텍스트가 content와 일치하지 않을 때 true (적용 안 누른 상태) */
+  const [jsonDirty, setJsonDirty] = useState(false);
 
   /* JSON 모드 진입 시 현재 content를 텍스트로 변환 */
   const handleToggleJson = useCallback(() => {
     if (!showJson && content) {
       setJsonText(JSON.stringify(content, null, 2));
       setJsonError("");
+      setJsonDirty(false);
     }
     setShowJson((v) => !v);
   }, [showJson, content]);
 
-  /* DAILY_QUIZ 등 json-only 타입은 자동으로 JSON 모드 강제 */
+  /* DAILY_QUIZ 등 json-only 타입 OR ?mode=json 진입 시 자동으로 JSON 모드 강제 */
   const editorTypeEarly = resolveEditorType(meta?.contentType);
   const isJsonOnly = editorTypeEarly === "json-only";
+  const shouldStartJson = isJsonOnly || initialMode === "json";
   useEffect(() => {
-    if (isJsonOnly && content && !showJson) {
+    if (shouldStartJson && content && !showJson) {
       setJsonText(JSON.stringify(content, null, 2));
       setJsonError("");
+      setJsonDirty(false);
       setShowJson(true);
+    } else if (shouldStartJson && content && showJson && !jsonText) {
+      // mode=json으로 진입했지만 content가 늦게 로드되는 경우
+      setJsonText(JSON.stringify(content, null, 2));
+      setJsonDirty(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isJsonOnly, content]);
+  }, [shouldStartJson, content]);
 
   /* JSON 텍스트 변경 */
   const handleJsonChange = useCallback((e) => {
     const text = e.target.value;
     setJsonText(text);
+    setJsonDirty(true);
     try {
       JSON.parse(text);
       setJsonError("");
@@ -114,11 +125,36 @@ export default function EditorShell({ contentId, staticInfo }) {
       const parsed = JSON.parse(jsonText);
       editor.setContentDirect(parsed);
       setJsonError("");
-      setShowJson(false);
+      setJsonDirty(false);
+      // json-only 모드가 아니면 비주얼로 복귀
+      if (!isJsonOnly) setShowJson(false);
     } catch (err) {
       setJsonError("JSON 파싱 오류: " + err.message);
     }
-  }, [jsonText, editor]);
+  }, [jsonText, editor, isJsonOnly]);
+
+  /* 저장 가드: JSON 모드에서 적용 안 누른 경우 경고 */
+  const handleSaveGuarded = useCallback(async () => {
+    if (showJson && jsonDirty) {
+      const ok = window.confirm(
+        "JSON 텍스트를 수정했지만 'JSON 적용'을 누르지 않았습니다.\n\n[확인] = JSON을 먼저 적용한 뒤 저장\n[취소] = 적용 없이 종료 (수정 내용 무시됨)"
+      );
+      if (!ok) return;
+      // 적용 시도
+      try {
+        const parsed = JSON.parse(jsonText);
+        editor.setContentDirect(parsed);
+        setJsonDirty(false);
+        // setContentDirect는 상태 갱신이므로 다음 render 후 save
+        setTimeout(() => editor.save(), 50);
+        return;
+      } catch (err) {
+        setJsonError("JSON 파싱 오류: " + err.message);
+        return;
+      }
+    }
+    editor.save();
+  }, [showJson, jsonDirty, jsonText, editor]);
 
   /* 목록으로 돌아가기 */
   const handleBack = useCallback(() => {
@@ -207,8 +243,8 @@ export default function EditorShell({ contentId, staticInfo }) {
         </button>
         <button
           className="ce-btn ce-btn-primary"
-          disabled={!dirty || saving}
-          onClick={editor.save}
+          disabled={(!dirty && !jsonDirty) || saving}
+          onClick={handleSaveGuarded}
         >
           {saving ? "저장 중..." : "저장"}
         </button>
@@ -328,13 +364,18 @@ export default function EditorShell({ contentId, staticInfo }) {
             spellCheck={false}
           />
           {jsonError && <div className="ce-json-error">{jsonError}</div>}
+          {jsonDirty && !jsonError && (
+            <div className="ce-json-warn">
+              ⚠ JSON이 수정되었지만 아직 적용되지 않았습니다. <strong>"JSON 적용"</strong>을 누른 뒤 저장하세요.
+            </div>
+          )}
           <div className="ce-json-actions">
             <button
-              className="ce-btn ce-btn-primary"
-              disabled={!!jsonError}
+              className={`ce-btn ${jsonDirty ? "ce-btn-primary" : "ce-btn-secondary"}`}
+              disabled={!!jsonError || !jsonDirty}
               onClick={handleApplyJson}
             >
-              JSON 적용
+              {jsonDirty ? "JSON 적용 ✓" : "JSON 적용"}
             </button>
             {!isJsonOnly && (
               <button

@@ -9,6 +9,9 @@ const snakeizeTop = (obj) => {
   );
 };
 
+// 기본 타임아웃 (관리자 API — 큰 JSON 저장을 고려해 60초)
+const DEFAULT_TIMEOUT_MS = 60_000;
+
 const buildUrl = (path) => {
   const base = API_BASE.replace(/\/$/, "");
   return path.startsWith("http") ? path : `${base}${path}`;
@@ -18,6 +21,22 @@ const getToken = () => {
   const token = sessionStorage.getItem(TOKEN_KEY);
   if (!token) throw new Error("관리자 토큰이 필요합니다.");
   return token;
+};
+
+/** AbortController 기반 타임아웃 fetch */
+const fetchWithTimeout = async (url, options = {}, timeoutMs = DEFAULT_TIMEOUT_MS) => {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: ctrl.signal });
+  } catch (e) {
+    if (e.name === "AbortError") {
+      throw new Error(`요청 시간 초과 (${Math.round(timeoutMs / 1000)}초). 데이터가 너무 크거나 서버가 느립니다.`);
+    }
+    throw e;
+  } finally {
+    clearTimeout(timer);
+  }
 };
 
 /** 401(미인증) 또는 403(권한/만료) 시 토큰 정리 + 로그인 페이지로 이동 */
@@ -68,14 +87,14 @@ const safeJson = async (response, method, path) => {
 };
 
 export const apiGet = async (path) => {
-  const response = await fetch(buildUrl(path), {
+  const response = await fetchWithTimeout(buildUrl(path), {
     headers: { Authorization: `Bearer ${getToken()}` },
   });
   return safeJson(response, "GET", path);
 };
 
 export const apiPost = async (path, body) => {
-  const response = await fetch(buildUrl(path), {
+  const response = await fetchWithTimeout(buildUrl(path), {
     method: "POST",
     headers: {
       Authorization: `Bearer ${getToken()}`,
@@ -87,7 +106,7 @@ export const apiPost = async (path, body) => {
 };
 
 export const apiPut = async (path, body) => {
-  const response = await fetch(buildUrl(path), {
+  const response = await fetchWithTimeout(buildUrl(path), {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${getToken()}`,
@@ -99,7 +118,7 @@ export const apiPut = async (path, body) => {
 };
 
 export const apiPatch = async (path, body) => {
-  const response = await fetch(buildUrl(path), {
+  const response = await fetchWithTimeout(buildUrl(path), {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${getToken()}`,
@@ -111,7 +130,7 @@ export const apiPatch = async (path, body) => {
 };
 
 export const apiDelete = async (path) => {
-  const response = await fetch(buildUrl(path), {
+  const response = await fetchWithTimeout(buildUrl(path), {
     method: "DELETE",
     headers: { Authorization: `Bearer ${getToken()}` },
   });

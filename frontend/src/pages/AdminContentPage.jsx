@@ -721,9 +721,14 @@ function AdminContentPage() {
                           className="admin-icon-btn admin-tooltip-wrap"
                           type="button"
                           onClick={() => {
-                            const params = new URLSearchParams({ id: content.id });
-                            if (content.source === "static") params.set("source", "static");
-                            navigate(`/admin/content/upload?${params.toString()}`);
+                            const params = new URLSearchParams({ id: content.id, mode: "json", from: fromParam });
+                            if (content.source === "static") {
+                              params.set("source", "static");
+                              params.set("jsonPath", content.jsonPath);
+                              params.set("type", content.type);
+                              params.set("title", content.title);
+                            }
+                            navigate(`/admin/content/edit?${params.toString()}`);
                           }}
                         >
                           {"{ }"}
