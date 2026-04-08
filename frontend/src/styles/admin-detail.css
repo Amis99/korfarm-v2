@@ -1246,3 +1246,212 @@
   color: var(--admin-muted, #a6b6a9);
   font-family: monospace;
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* 콘텐츠 관리 — 요약 카드 / 농장 탭 / 컬럼   */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* 요약 카드 */
+.admin-content-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 1100px) {
+  .admin-content-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.admin-content-stat-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-content-stat-card.active {
+  border-color: rgba(74, 200, 120, 0.35);
+  background: rgba(74, 200, 120, 0.06);
+}
+.admin-content-stat-card.inactive {
+  border-color: rgba(200, 120, 74, 0.35);
+  background: rgba(200, 120, 74, 0.06);
+}
+.admin-content-stat-card.legacy {
+  border-color: rgba(220, 180, 60, 0.35);
+  background: rgba(220, 180, 60, 0.06);
+}
+
+.admin-content-stat-label {
+  font-size: 12px;
+  color: var(--admin-muted, #a6b6a9);
+  font-weight: 600;
+}
+.admin-content-stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--admin-text, #e8efe9);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 1차 농장 탭 */
+.admin-content-farm-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+}
+
+.admin-content-farm-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--admin-muted, #a6b6a9);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.admin-content-farm-tab:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--admin-text, #e8efe9);
+}
+
+.admin-content-farm-tab.active {
+  background: rgba(240, 108, 36, 0.18);
+  border-color: rgba(240, 108, 36, 0.5);
+  color: #ff9450;
+}
+
+.admin-content-farm-icon {
+  font-size: 14px;
+}
+
+.admin-content-farm-count {
+  display: inline-block;
+  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-content-farm-tab.active .admin-content-farm-count {
+  background: rgba(240, 108, 36, 0.3);
+  color: #ffb480;
+}
+
+/* 툴바 (검색 + 필터) — 줄바꿈 가능 */
+.admin-content-toolbar {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-filter-toggle {
+  background: transparent !important;
+  font-size: 12px;
+}
+
+/* 벌크 액션 바 */
+.admin-content-bulk-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  margin: 8px 0 12px;
+  background: rgba(74, 138, 200, 0.1);
+  border: 1px solid rgba(74, 138, 200, 0.3);
+  border-radius: 8px;
+}
+
+.admin-content-bulk-count {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6ab4e8;
+}
+
+.admin-detail-btn.danger {
+  background: rgba(220, 80, 80, 0.15);
+  color: #e87878;
+  border: 1px solid rgba(220, 80, 80, 0.4);
+}
+
+.admin-detail-btn.danger:hover {
+  background: rgba(220, 80, 80, 0.25);
+}
+
+/* 체크박스 컬럼 */
+.admin-th-checkbox {
+  width: 36px;
+  text-align: center;
+  padding: 6px 4px !important;
+}
+
+.admin-th-checkbox input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+/* 정렬 가능한 헤더 */
+.admin-th-sortable {
+  user-select: none;
+  white-space: nowrap;
+}
+
+.admin-th-sortable:hover {
+  color: #ff9450;
+}
+
+/* 소스 배지 */
+.admin-th-source {
+  width: 70px;
+  text-align: center;
+}
+
+.source-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.source-badge.source-db {
+  background: rgba(74, 200, 120, 0.15);
+  color: #6ad498;
+  border: 1px solid rgba(74, 200, 120, 0.35);
+}
+
+.source-badge.source-static {
+  background: rgba(160, 160, 160, 0.15);
+  color: #a8a8a8;
+  border: 1px solid rgba(160, 160, 160, 0.35);
+}
+
+/* 옛 lowercase 잔재 행 강조 */
+.admin-row-legacy {
+  background: rgba(220, 180, 60, 0.04);
+}
+
+.admin-row-legacy:hover {
+  background: rgba(220, 180, 60, 0.08);
+}

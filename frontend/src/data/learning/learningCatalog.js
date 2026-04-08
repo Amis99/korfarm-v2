@@ -62,23 +62,12 @@ export const SUB_AREA_LABELS = {
   CHOICE_JUDGEMENT: "판별",
 };
 
-/* ── 농장 모드 정적 콘텐츠 카탈로그 (관리자 콘텐츠 목록에서 사용) ── */
-export const LEARNING_CATALOG = [
-  { id: "vocab-basic-word", title: "어휘 기본 학습 01", contentType: "VOCAB_BASIC", targetLevel: "RUSSELL_1", contentId: "b0e8b260-d386-4ad4-a2e6-b062ff545f4f", moduleKey: "worksheet_quiz", jsonPath: "/farm/vocab/vocab_basic_word_to_meaning.json" },
-  { id: "reading-training", title: "비문학 독해 훈련", contentType: "READING_NONFICTION", targetLevel: "FREGE_1", contentId: "sample-reading-nonfiction-training", moduleKey: "reading_training", jsonPath: "/farm/reading/reading_nonfiction_training.json" },
-  { id: "reading-literature-training", title: "문학 독해 훈련", contentType: "READING_LITERATURE", targetLevel: "FREGE_1", contentId: "sample-reading-literature-training", moduleKey: "reading_training", jsonPath: "/farm/reading/reading_literature_training.json" },
-  { id: "grammar-sentence-structure", title: "문장의 짜임 분석 01", contentType: "GRAMMAR_SENTENCE_STRUCTURE", targetLevel: "RUSSELL_1", contentId: "2727d7ec-da5f-4099-ada7-7e98e6c8c104", moduleKey: "sentence_structure", jsonPath: "/farm/grammar/grammar_sentence_structure.json" },
-  { id: "grammar-phoneme-change", title: "음운 변동 분석 01", contentType: "GRAMMAR_PHONEME_CHANGE", targetLevel: "RUSSELL_1", contentId: "dfae52aa-2e61-4937-bb39-15dfd8d0df6d", moduleKey: "phoneme_change", jsonPath: "/farm/grammar/grammar_phoneme_change.json" },
-  ...Array.from({ length: 37 }, (_, i) => {
-    const nn = String(i + 1).padStart(2, "0");
-    return { id: `grammar-phoneme-change-${nn}`, title: `음운 변동 분석 ${nn}`, contentType: "GRAMMAR_PHONEME_CHANGE", targetLevel: "RUSSELL_1", contentId: `phoneme-change-${nn}`, moduleKey: "phoneme_change", jsonPath: `/farm/grammar/grammar_phoneme_change_${nn}.json` };
-  }),
-  { id: "background-knowledge", title: "배경지식 퀴즈 01", contentType: "BACKGROUND_KNOWLEDGE_QUIZ", targetLevel: "RUSSELL_1", contentId: "cc43b636-28fe-4751-9f5c-85c5baeefa78", moduleKey: "worksheet_quiz", jsonPath: "/farm/background/background_knowledge_quiz.json" },
-  { id: "language-concept", title: "국어 개념 퀴즈 01", contentType: "LANGUAGE_CONCEPT_QUIZ", targetLevel: "RUSSELL_1", contentId: "4f10135c-b92c-4dce-95ae-f92c0be78819", moduleKey: "worksheet_quiz", jsonPath: "/farm/concept/language_concept_quiz.json" },
-  { id: "logic-reasoning", title: "논리사고력 01", contentType: "LOGIC_REASONING_QUIZ", targetLevel: "RUSSELL_1", contentId: "28a3fdc1-6a3e-4725-ab49-4050548e9760", moduleKey: "worksheet_quiz", jsonPath: "/farm/logic/logic_reasoning_quiz.json" },
-  { id: "descriptive-practice", title: "서술형 연습 01", contentType: "WRITING_DESCRIPTIVE", targetLevel: "RUSSELL_1", contentId: "077ba09b-974c-4f28-b1bf-b236cad4cb8e", moduleKey: "worksheet_quiz", jsonPath: "/farm/writing/descriptive_practice.json" },
-  { id: "choice-judgement", title: "선택지 판별 연습 01", contentType: "CHOICE_JUDGEMENT", targetLevel: "RUSSELL_1", contentId: "a0054d75-7602-4b58-94e4-1417568d0ffe", moduleKey: "choice_judgement", jsonPath: "/farm/choice/choice_judgement.json" },
-];
+/* ── 농장 모드 정적 콘텐츠 카탈로그
+ *   초기 샘플 데이터로 만들어졌던 정적 카탈로그는 모두 폐기됨.
+ *   향후 농장 모드 콘텐츠는 DB로 등록하거나, 필요 시 이 배열에 다시 추가.
+ *   다른 모듈에서 import하는 코드 호환을 위해 export 자체는 유지.
+ * ─────────────────────────────────────────────────────── */
+export const LEARNING_CATALOG = [];
 
 /* ── 농장별 모드 데이터 ── */
 
