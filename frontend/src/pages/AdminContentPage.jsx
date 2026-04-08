@@ -151,11 +151,6 @@ const LEVEL_GROUPS = [
   { id: "wittgenstein", label: "비트겐슈타인 (고1~3)" },
 ];
 
-/* lowercase level_id 잔재인지 판별 */
-const isLegacyLowercaseLevel = (levelId) => {
-  if (!levelId) return false;
-  return /^[a-z]+\d$/.test(levelId);
-};
 
 /* 상태값 정규화: 활성/비활성 2단계 */
 const normalizeContentStatus = (status) => {
@@ -210,8 +205,6 @@ function AdminContentPage() {
   const typeFilter = params.get("type") || "all";
   const farmFilter = params.get("farm") || "all";
   const levelGroupFilter = params.get("levelGroup") || "all";
-  const sourceFilter = params.get("source") || "all";
-  const legacyOnly = params.get("legacy") === "1";
   const sortKey = params.get("sort") || "title";
   const sortDir = params.get("dir") || "asc";
   const currentPage = Number(params.get("page")) || 1;
@@ -287,10 +280,7 @@ function AdminContentPage() {
     const total = allContents.length;
     const active = allContents.filter((c) => c.status === "active").length;
     const inactive = total - active;
-    const dbCount = allContents.filter((c) => c.source === "db").length;
-    const staticCount = allContents.filter((c) => c.source === "static").length;
-    const legacyCount = allContents.filter((c) => isLegacyLowercaseLevel(c.levelId)).length;
-    return { total, active, inactive, dbCount, staticCount, legacyCount };
+    return { total, active, inactive };
   }, [allContents]);
 
   /* 농장 탭별 카운트 */
@@ -320,10 +310,6 @@ function AdminContentPage() {
       if (levelGroupFilter !== "all") {
         if (getLevelGroup(content.levelId) !== levelGroupFilter) return false;
       }
-      // 소스
-      if (sourceFilter !== "all" && content.source !== sourceFilter) return false;
-      // 옛 lowercase 잔재만 보기
-      if (legacyOnly && !isLegacyLowercaseLevel(content.levelId)) return false;
       // 세부 유형
       if (typeFilter !== "all") {
         const MERGED_TYPES = {
@@ -349,7 +335,7 @@ function AdminContentPage() {
     };
     result = [...result].sort(cmp);
     return result;
-  }, [allContents, search, statusFilter, typeFilter, farmFilter, levelGroupFilter, sourceFilter, legacyOnly, sortKey, sortDir]);
+  }, [allContents, search, statusFilter, typeFilter, farmFilter, levelGroupFilter, sortKey, sortDir]);
 
   /* 페이지네이션 계산 */
   const totalPages = Math.max(1, Math.ceil(filteredContents.length / PER_PAGE));
@@ -376,9 +362,7 @@ function AdminContentPage() {
     if (allChecked) {
       pagedContents.forEach((c) => next.delete(c.id));
     } else {
-      pagedContents.forEach((c) => {
-        if (c.source === "db") next.add(c.id);
-      });
+      pagedContents.forEach((c) => next.add(c.id));
     }
     setSelectedIds(next);
   };
@@ -478,10 +462,6 @@ function AdminContentPage() {
 
   /* 콘텐츠 삭제 */
   const handleDeleteContent = async (content) => {
-    if (content.source === "static") {
-      alert("정적 콘텐츠는 삭제할 수 없습니다.");
-      return;
-    }
     if (!window.confirm(`"${content.title}" 콘텐츠를 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.`)) return;
     try {
       await apiDelete(`/v1/admin/content/${content.id}`);
@@ -557,18 +537,6 @@ function AdminContentPage() {
             <div className="admin-content-stat-label">비활성</div>
             <div className="admin-content-stat-value">{stats.inactive.toLocaleString()}</div>
           </div>
-          <div className="admin-content-stat-card">
-            <div className="admin-content-stat-label">DB</div>
-            <div className="admin-content-stat-value">{stats.dbCount.toLocaleString()}</div>
-          </div>
-          <div className="admin-content-stat-card">
-            <div className="admin-content-stat-label">정적</div>
-            <div className="admin-content-stat-value">{stats.staticCount.toLocaleString()}</div>
-          </div>
-          <div className="admin-content-stat-card legacy">
-            <div className="admin-content-stat-label">옛 잔재</div>
-            <div className="admin-content-stat-value">{stats.legacyCount.toLocaleString()}</div>
-          </div>
         </div>
 
         {/* 1차 농장 탭 */}
@@ -635,23 +603,6 @@ function AdminContentPage() {
                     <option key={key} value={key}>{label}</option>
                   ))}
               </select>
-              <select
-                value={sourceFilter}
-                onChange={(e) => updateParams({ source: e.target.value, page: "" })}
-                className="admin-type-filter-select"
-              >
-                <option value="all">소스: 전체</option>
-                <option value="db">DB</option>
-                <option value="static">정적</option>
-              </select>
-              <label className="admin-filter admin-filter-toggle" style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
-                <input
-                  type="checkbox"
-                  checked={legacyOnly}
-                  onChange={(e) => updateParams({ legacy: e.target.checked ? "1" : "", page: "" })}
-                />
-                옛 잔재만
-              </label>
             </div>
           </div>
 
@@ -691,7 +642,6 @@ function AdminContentPage() {
                   레벨{sortIcon("levelId")}
                 </th>
                 <th className="admin-th-type">농장</th>
-                <th className="admin-th-source">소스</th>
                 <th className="admin-th-status admin-th-sortable" onClick={() => handleSort("status")} style={{ cursor: "pointer" }}>
                   상태{sortIcon("status")}
                 </th>
@@ -701,7 +651,7 @@ function AdminContentPage() {
             <tbody>
               {pagedContents.length === 0 && !loading ? (
                 <tr>
-                  <td colSpan={8} className="admin-content-status-cell">
+                  <td colSpan={7} className="admin-content-status-cell">
                     {allContents.length === 0 ? "등록된 콘텐츠가 없습니다." : "검색 결과가 없습니다."}
                   </td>
                 </tr>
@@ -711,15 +661,13 @@ function AdminContentPage() {
                 const day = extractDay(content.jsonPath);
                 const levelFull = LEVEL_LABEL_MAP[content.levelId] || content.levelId || "";
                 const typeFull = TYPE_LABEL[content.type] || content.type || "";
-                const isLegacy = isLegacyLowercaseLevel(content.levelId);
                 return (
-                  <tr key={content.id} className={isLegacy ? "admin-row-legacy" : ""}>
+                  <tr key={content.id}>
                     <td className="admin-th-checkbox">
                       <input
                         type="checkbox"
                         checked={selectedIds.has(content.id)}
                         onChange={() => toggleSelectOne(content.id)}
-                        disabled={content.source === "static"}
                       />
                     </td>
                     <td>
@@ -747,11 +695,6 @@ function AdminContentPage() {
                     <td>
                       <span className="type-pill" style={{ fontSize: 11 }}>
                         {FARM_MAP[content.area]?.name || content.area || "-"}
-                      </span>
-                    </td>
-                    <td>
-                      <span className={`source-badge source-${content.source || "db"}`}>
-                        {content.source === "static" ? "정적" : "DB"}
                       </span>
                     </td>
                     <td>
@@ -786,17 +729,15 @@ function AdminContentPage() {
                           {"{ }"}
                           <span className="admin-tooltip">JSON 편집</span>
                         </button>
-                        {content.source !== "static" && (
-                          <button
-                            className="admin-icon-btn admin-tooltip-wrap"
-                            type="button"
-                            style={{ color: "#e04040" }}
-                            onClick={() => handleDeleteContent(content)}
-                          >
-                            🗑
-                            <span className="admin-tooltip">삭제</span>
-                          </button>
-                        )}
+                        <button
+                          className="admin-icon-btn admin-tooltip-wrap"
+                          type="button"
+                          style={{ color: "#e04040" }}
+                          onClick={() => handleDeleteContent(content)}
+                        >
+                          🗑
+                          <span className="admin-tooltip">삭제</span>
+                        </button>
                       </span>
                     </td>
                   </tr>
