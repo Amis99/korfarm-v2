@@ -13,12 +13,14 @@ npm run build
 
 echo "=== S3 업로드 ==="
 # assets 폴더는 장기 캐시 (해시된 파일명)
+# --delete 사용 금지: 옛 청크를 즉시 지우면, 이전 index.html을 띄워둔 사용자가
+# 동적 import 시 ChunkLoadError(403)를 만남. 청크 파일명은 해시라 충돌 없음.
+# 누적 비용은 미미 (1배포당 수 MB).
 aws s3 sync dist/assets/ "s3://${BUCKET}/assets/" \
-  --cache-control "public, max-age=31536000, immutable" \
-  --delete
+  --cache-control "public, max-age=31536000, immutable"
 
 # 나머지 파일 (index.html 등)은 짧은 캐시
-# test-pdfs/는 별도 관리 — 삭제 방지
+# test-pdfs/와 assets/는 별도 관리 — 삭제 대상에서 제외
 aws s3 sync dist/ "s3://${BUCKET}/" \
   --exclude "assets/*" \
   --exclude "test-pdfs/*" \
