@@ -6,7 +6,14 @@ import { COMMUNITY_BOARDS } from "../data/communityBoards";
 import CommunityChatPage from "./CommunityChatPage";
 import "../styles/community.css";
 
-const DEFAULT_BOARD_ID = "community";
+// 게시판 카드 아이콘 매핑
+const BOARD_ICON = {
+  learning_request: "school",
+  community: "forum",
+  qna: "help",
+  materials: "folder_open",
+  inquiry: "support_agent",
+};
 
 const statusLabel = (status) => {
   switch (status) {
@@ -30,9 +37,12 @@ function CommunityPage() {
   const { user, isPremium, isLoggedIn } = useAuth();
   const isAdmin = user?.roles?.includes("ADMIN") || user?.roles?.includes("HQ_ADMIN") || user?.roles?.includes("ORG_ADMIN");
 
-  const boardId = params.get("board") || DEFAULT_BOARD_ID;
-  const board =
-    COMMUNITY_BOARDS.find((b) => b.id === boardId) || COMMUNITY_BOARDS[0];
+  // ?board= 파라미터가 없으면 게시판 카드 목록 화면 (boardId = null)
+  const rawBoardId = params.get("board");
+  const boardId = rawBoardId || null;
+  const board = boardId
+    ? COMMUNITY_BOARDS.find((b) => b.id === boardId) || COMMUNITY_BOARDS[0]
+    : null;
 
   const [posts, setPosts] = useState([]);
   const [postsLoading, setPostsLoading] = useState(false);
@@ -53,8 +63,13 @@ function CommunityPage() {
       .catch((e) => console.error(e));
   }, [isLoggedIn]);
 
-  // 게시글 API 로드
+  // 게시글 API 로드 (board가 선택된 경우만)
   useEffect(() => {
+    if (!boardId) {
+      setPosts([]);
+      setPostsLoading(false);
+      return;
+    }
     setPostsLoading(true);
     setPosts([]);
     setSelectedId(null);
@@ -96,11 +111,70 @@ function CommunityPage() {
     : null;
 
   /* 자료실은 관리자만 글쓰기 가능 */
-  const canWrite = board.writeRole === "admin" ? isAdmin : true;
+  const canWrite = board?.writeRole === "admin" ? isAdmin : true;
 
   // 채팅 모드 게시판은 채팅 페이지로 분기 (모든 hooks 호출 후)
   if (board?.chatMode) {
     return <CommunityChatPage />;
+  }
+
+  // ── board 미선택 → 게시판 카드 목록 화면 ──
+  if (!board) {
+    return (
+      <div className="comm">
+        <header className="comm-topbar">
+          <div className="comm-topbar-inner">
+            <Link to="/start" className="comm-home">
+              <span className="material-symbols-outlined">arrow_back</span>
+              홈으로
+            </Link>
+            <h1 className="comm-title">커뮤니티</h1>
+            <div className="comm-topbar-right" />
+          </div>
+        </header>
+
+        <div className="comm-board-grid-wrap">
+          <h2 className="comm-board-grid-title">게시판 목록</h2>
+          <p className="comm-board-grid-desc">
+            이용하실 게시판을 선택하세요. 채팅방으로 바로 이동하려면 <strong>커뮤니티 채팅</strong>을 누르세요.
+          </p>
+          <div className="comm-board-grid">
+            {COMMUNITY_BOARDS.map((b) => {
+              const locked = b.requiresPaid && !hasPremium;
+              return (
+                <Link
+                  key={b.id}
+                  to={`/community?board=${b.id}`}
+                  className={`comm-board-card ${locked ? "locked" : ""} ${b.chatMode ? "chat" : ""}`}
+                >
+                  <div className="comm-board-card-icon">
+                    <span className="material-symbols-outlined">
+                      {BOARD_ICON[b.id] || "forum"}
+                    </span>
+                  </div>
+                  <div className="comm-board-card-body">
+                    <h3>
+                      {b.name}
+                      {b.chatMode && <span className="comm-board-card-pill chat">실시간</span>}
+                      {b.writeRole === "admin" && (
+                        <span className="comm-board-card-pill admin">관리자만 글쓰기</span>
+                      )}
+                      {locked && (
+                        <span className="material-symbols-outlined comm-board-card-lock">lock</span>
+                      )}
+                    </h3>
+                    <p>{b.description}</p>
+                  </div>
+                  <div className="comm-board-card-arrow">
+                    <span className="material-symbols-outlined">arrow_forward</span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -127,6 +201,10 @@ function CommunityPage() {
       {/* 게시판 탭 */}
       <nav className="comm-tabs">
         <div className="comm-tabs-inner">
+          <Link to="/community" className="comm-tab comm-tab-back">
+            <span className="material-symbols-outlined" style={{ fontSize: 16, verticalAlign: "middle" }}>list</span>
+            전체 목록
+          </Link>
           {COMMUNITY_BOARDS.map((b) => (
             <Link
               key={b.id}
