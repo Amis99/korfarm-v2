@@ -169,6 +169,21 @@ function AdminContentPage() {
       return next;
     }, { replace: true });
   };
+
+  /* 검색 입력: 한글 IME 보존을 위해 로컬 state + composition 가드 + 디바운스 */
+  const [searchInput, setSearchInput] = useState(search);
+  const composingRef = useRef(false);
+  const searchDebounceRef = useRef(null);
+  // URL → 로컬 state 동기화 (뒤로가기 등 외부 변경 반영)
+  useEffect(() => {
+    if (!composingRef.current) {
+      setSearchInput(search);
+    }
+  }, [search]);
+  // 컴포넌트 unmount 시 디바운스 정리
+  useEffect(() => () => {
+    if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
+  }, []);
   /* 서버 콘텐츠 미리보기 상태 */
   const [previewLoadingId, setPreviewLoadingId] = useState(null);
   const [serverPreviewError, setServerPreviewError] = useState("");
@@ -237,7 +252,27 @@ function AdminContentPage() {
   /* 필터 변경 시 1페이지 리셋 */
   const handleStatusFilter = (f) => updateParams({ status: f, page: "" });
   const handleTypeFilter = (e) => updateParams({ type: e.target.value, page: "" });
-  const handleSearchChange = (e) => updateParams({ q: e.target.value, page: "" });
+  const commitSearch = (value) => {
+    if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
+    searchDebounceRef.current = setTimeout(() => {
+      updateParams({ q: value, page: "" });
+    }, 300);
+  };
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchInput(value);
+    // IME composition 중에는 URL 업데이트 보류 → composition 끝나면 commit
+    if (!composingRef.current) {
+      commitSearch(value);
+    }
+  };
+  const handleSearchCompositionStart = () => {
+    composingRef.current = true;
+  };
+  const handleSearchCompositionEnd = (e) => {
+    composingRef.current = false;
+    commitSearch(e.target.value);
+  };
 
   /* 콘텐츠 미리보기 (DB → API, static → 정적 파일) */
   const handleServerPreview = async (content) => {
@@ -352,8 +387,10 @@ function AdminContentPage() {
               <span className="material-symbols-outlined">search</span>
               <input
                 placeholder="콘텐츠 검색"
-                value={search}
+                value={searchInput}
                 onChange={handleSearchChange}
+                onCompositionStart={handleSearchCompositionStart}
+                onCompositionEnd={handleSearchCompositionEnd}
               />
             </div>
             <div className="admin-detail-filters">
