@@ -54,17 +54,40 @@ export default function WorksheetForm({ editor, focusPath }) {
             />
           </div>
 
-          {/* 지문 (선택) */}
+          {/* 지문 (선택) — 객체형 passage(예: DAILY_QUIZ {paragraphs})는 JSON 모드에서만 편집 */}
           <div className="ce-form-section">
             <label className="ce-form-label">지문 (선택)</label>
-            <textarea
-              className="ce-form-textarea"
-              value={q.passage || ""}
-              onChange={(e) => updateField(`${path}.passage`, e.target.value)}
-              data-field-path={`${path}.passage`}
-              rows={2}
-              placeholder="지문이 있으면 입력"
-            />
+            {q.passage != null && typeof q.passage === "object" ? (
+              <div
+                style={{
+                  padding: 8,
+                  background: "#1a2520",
+                  border: "1px dashed #4a5a4e",
+                  borderRadius: 4,
+                  color: "#a6b6a9",
+                  fontSize: 12,
+                  fontFamily: "monospace",
+                  whiteSpace: "pre-wrap",
+                  wordBreak: "break-all",
+                }}
+                data-field-path={`${path}.passage`}
+              >
+                ⓘ 객체형 지문 (paragraphs/tokens 등). 비주얼 폼에서는 편집할 수 없습니다.
+                상단 <code>{"{ }"}</code> 버튼으로 JSON 모드에서 수정하세요.
+                {"\n"}
+                {JSON.stringify(q.passage, null, 2).slice(0, 400)}
+                {JSON.stringify(q.passage).length > 400 ? "..." : ""}
+              </div>
+            ) : (
+              <textarea
+                className="ce-form-textarea"
+                value={typeof q.passage === "string" ? q.passage : ""}
+                onChange={(e) => updateField(`${path}.passage`, e.target.value)}
+                data-field-path={`${path}.passage`}
+                rows={2}
+                placeholder="지문이 있으면 입력"
+              />
+            )}
           </div>
 
           {/* 하이라이트 (선택) — 지문 내 강조 단어 */}
@@ -82,7 +105,7 @@ export default function WorksheetForm({ editor, focusPath }) {
                 placeholder="지문에서 강조할 단어 (비우면 하이라이트 없음)"
                 data-field-path={`${path}.highlight`}
               />
-              {q.passage && (
+              {typeof q.passage === "string" && q.passage && (
                 <button
                   type="button"
                   className="ce-btn ce-btn-secondary"

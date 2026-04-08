@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useContentEditor } from "../../hooks/useContentEditor";
 import ReadingPreview from "./preview/ReadingPreview";
@@ -56,6 +56,9 @@ function resolveEditorType(ct) {
   if (up === "GRAMMAR_SENTENCE_STRUCTURE" || up.includes("SENTENCE_STRUCTURE")) return "sentence";
   if (up === "CONTENT_PDF" || up === "CONTENT_PDF_QUIZ" || up.includes("CONTENT_PDF")) return "contentpdf";
   if (up === "PRO_BACKGROUND" || up === "BACKGROUND_KNOWLEDGE" || up === "BACKGROUND_KNOWLEDGE_QUIZ" || up === "PRO_LOGIC" || up.includes("BACKGROUND")) return "background";
+  // DAILY_QUIZ는 객체형 passage(paragraphs/tokens)와 propositions 등 복합 구조라
+  // 비주얼 폼이 처리할 수 없음 → JSON 전용 모드로 강제
+  if (up === "DAILY_QUIZ" || up.includes("DAILY_QUIZ")) return "json-only";
   return "worksheet";
 }
 
@@ -80,6 +83,18 @@ export default function EditorShell({ contentId, staticInfo }) {
     }
     setShowJson((v) => !v);
   }, [showJson, content]);
+
+  /* DAILY_QUIZ 등 json-only 타입은 자동으로 JSON 모드 강제 */
+  const editorTypeEarly = resolveEditorType(meta?.contentType);
+  const isJsonOnly = editorTypeEarly === "json-only";
+  useEffect(() => {
+    if (isJsonOnly && content && !showJson) {
+      setJsonText(JSON.stringify(content, null, 2));
+      setJsonError("");
+      setShowJson(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isJsonOnly, content]);
 
   /* JSON 텍스트 변경 */
   const handleJsonChange = useCallback((e) => {
@@ -136,8 +151,30 @@ export default function EditorShell({ contentId, staticInfo }) {
         <button className="ce-back-btn" onClick={handleBack} title="콘텐츠 목록으로">
           ← 목록
         </button>
-        <div className="ce-toolbar-title">
-          <strong>{meta?.title || contentId}</strong>
+        <div className="ce-toolbar-title" style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 0 }}>
+          <input
+            type="text"
+            value={meta?.title || ""}
+            onChange={(e) => editor.updateMeta("title", e.target.value)}
+            disabled={isStatic}
+            placeholder={contentId}
+            title="학습 제목 (수정 가능)"
+            style={{
+              flex: 1,
+              minWidth: 120,
+              maxWidth: 480,
+              padding: "6px 10px",
+              fontSize: 14,
+              fontWeight: 700,
+              background: "#0f1714",
+              color: "#e8efe9",
+              border: "1px solid #2a3a30",
+              borderRadius: 6,
+              outline: "none",
+            }}
+            onFocus={(e) => (e.target.style.borderColor = "#5fa97a")}
+            onBlur={(e) => (e.target.style.borderColor = "#2a3a30")}
+          />
           <span className="ce-toolbar-badge">{typeLabel}</span>
           {dirty && <span className="ce-toolbar-badge dirty">변경됨</span>}
         </div>
@@ -146,7 +183,8 @@ export default function EditorShell({ contentId, staticInfo }) {
         <button
           className={`ce-btn ${showJson ? "ce-btn-primary" : "ce-btn-secondary"}`}
           onClick={handleToggleJson}
-          title="JSON 직접 편집"
+          disabled={isJsonOnly}
+          title={isJsonOnly ? "DAILY_QUIZ는 JSON 전용 모드입니다" : "JSON 직접 편집"}
           style={{ fontFamily: "monospace", fontWeight: 700 }}
         >
           {"{ }"}
@@ -186,16 +224,6 @@ export default function EditorShell({ contentId, staticInfo }) {
           </button>
           {metaOpen && (
             <div className="ce-meta-grid">
-              <div className="ce-meta-field full-width">
-                <label>제목 (title)</label>
-                <input
-                  type="text"
-                  value={meta.title || ""}
-                  onChange={(e) => editor.updateMeta("title", e.target.value)}
-                  disabled={isStatic}
-                  placeholder="제목"
-                />
-              </div>
               <div className="ce-meta-field">
                 <label>콘텐츠 유형 (contentType)</label>
                 <div className="ce-meta-readonly">{meta.contentType || "-"}</div>
@@ -279,6 +307,20 @@ export default function EditorShell({ contentId, staticInfo }) {
       {showJson ? (
         /* JSON 직접 편집 모드 */
         <div className="ce-json-pane">
+          {isJsonOnly && (
+            <div style={{
+              padding: "8px 12px",
+              marginBottom: 8,
+              background: "#1e2a25",
+              border: "1px solid #4a6750",
+              borderRadius: 6,
+              color: "#a6cfb6",
+              fontSize: 12,
+            }}>
+              ⓘ <strong>{typeLabel}</strong>는 비주얼 편집을 지원하지 않으므로 JSON으로만 수정합니다.
+              JSON을 수정한 뒤 <strong>JSON 적용</strong>을 누르고, 상단의 <strong>저장</strong>을 눌러야 서버에 반영됩니다.
+            </div>
+          )}
           <textarea
             className="ce-json-textarea"
             value={jsonText}
@@ -294,12 +336,14 @@ export default function EditorShell({ contentId, staticInfo }) {
             >
               JSON 적용
             </button>
-            <button
-              className="ce-btn ce-btn-secondary"
-              onClick={() => setShowJson(false)}
-            >
-              비주얼 편집으로 돌아가기
-            </button>
+            {!isJsonOnly && (
+              <button
+                className="ce-btn ce-btn-secondary"
+                onClick={() => setShowJson(false)}
+              >
+                비주얼 편집으로 돌아가기
+              </button>
+            )}
           </div>
         </div>
       ) : (
