@@ -37,6 +37,7 @@ function BackgroundModule({ content }) {
   // --- 레거시 모드 상태 ---
   const [legacyIndex, setLegacyIndex] = useState(0);
   const [legacyCompletedMap, setLegacyCompletedMap] = useState({});
+  const [legacyLastResult, setLegacyLastResult] = useState(null);
   const legacyAdvanceRef = useRef(null);
   const legacyScrollRef = useRef(null);
 
@@ -122,10 +123,12 @@ function BackgroundModule({ content }) {
       ...prev,
       [q.id]: { selectedId: choiceId, isCorrect },
     }));
+    setLegacyLastResult(isCorrect ? "correct" : "wrong");
 
     const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
     if (legacyAdvanceRef.current) clearTimeout(legacyAdvanceRef.current);
     legacyAdvanceRef.current = setTimeout(() => {
+      setLegacyLastResult(null);
       if (legacyIndex >= legacyQuestions.length - 1) {
         finish(true);
       } else {
@@ -187,7 +190,7 @@ function BackgroundModule({ content }) {
               completion={completedMap[q.id]}
               isActive={idx === currentQuestionIndex && !completedMap[q.id]}
               onSelect={handlePassageChoice}
-              lastResult={lastResult}
+              lastResult={idx === currentQuestionIndex ? lastResult : null}
             />
           ))}
         </div>
@@ -216,6 +219,7 @@ function BackgroundModule({ content }) {
               completion={legacyCompletedMap[q.id]}
               isActive={idx === legacyIndex && !legacyCompletedMap[q.id]}
               onSelect={handleLegacyChoice}
+              lastResult={idx === legacyIndex ? legacyLastResult : null}
             />
           ))}
         </div>

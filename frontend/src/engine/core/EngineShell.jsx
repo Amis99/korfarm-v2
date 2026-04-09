@@ -611,53 +611,48 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                 <Module content={content} />
               </main>
 
-              {/* 인쇄 전용 영역 - 학습 페이지당 문제 모음 1장 */}
+              {/* 인쇄 전용 정답·해설 페이지 — 화면 시험지 인쇄 후 마지막에 별도 페이지로 출력 */}
               {printPageGroups.map((group, gi) => (
-                <div key={gi} className={`print-only print-page-group ${printLevelClass}`}>
+                <div key={`ans-${gi}`} className={`print-only print-answer-page ${printLevelClass}`}>
                   <h2 className="print-title">
-                    {content?.title || "학습"}
-                    {group.label ? ` — ${group.label}` : ""}
+                    {content?.title || "학습"} — 정답 및 해설
                   </h2>
-                  <div className="print-questions">
-                    {group.questions.map((q, idx) => (
-                      <div key={q.id || idx} className="print-question-box">
-                        <div className="print-question-header">
-                          <span className="print-question-num">{idx + 1}.</span>
-                          <span className="print-question-stem">
-                            {q.stem || q.prompt || ""}
-                          </span>
-                        </div>
-                        {q.type === "FILL_BLANKS" && q.template && (
-                          <div className="print-fill-template">
-                            {q.template.replace(/____/g, "(          )")}
-                          </div>
-                        )}
-                        {q.choices && (
-                          <div className="print-choices">
-                            {q.choices.map((c) => (
-                              <div key={c.id} className="print-choice">
-                                <span className="print-choice-id">{c.id}</span>
-                                <span>{c.text}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                        {q.type === "FILL_BLANKS" && q.blanks && q.blanks.map((blank, bi) => (
-                          <div key={blank.id || bi} className="print-blank-group">
-                            <span className="print-blank-label">빈칸 {bi + 1}</span>
-                            <div className="print-choices">
-                              {(blank.choices || []).map((c) => (
-                                <div key={c.id} className="print-choice">
-                                  <span className="print-choice-id">{c.id}</span>
-                                  <span>{c.text}</span>
-                                </div>
-                              ))}
+                  <ol className="print-answer-list">
+                    {group.questions.map((q, idx) => {
+                      // MULTI_CHOICE 정답 텍스트
+                      let answerText = "";
+                      if (q.choices && q.answerId) {
+                        const correct = q.choices.find((c) => (c.id || c.choiceId) === q.answerId);
+                        answerText = correct ? `${q.answerId}. ${correct.text}` : q.answerId;
+                      } else if (q.type === "FILL_BLANKS" && q.blanks) {
+                        answerText = q.blanks
+                          .map((b, bi) => {
+                            const c = b.choices?.find((c) => c.id === b.answerId);
+                            return `빈칸${bi + 1}: ${c?.text || b.answerId || "-"}`;
+                          })
+                          .join(" / ");
+                      } else if (q.type === "CHOICE_OX" || q.type === "CHOICE_ANALYSIS") {
+                        // 신 양식: choices의 expectedOX, 옛 양식: finalIsCorrectChoice
+                        const ox = (q.choices || [])
+                          .map((c) => `${c.choiceId || c.id}=${c.expectedOX || (c.finalIsCorrectChoice ? "X" : "O")}`)
+                          .join(", ");
+                        answerText = ox;
+                      }
+                      return (
+                        <li key={q.id || idx} className="print-answer-item">
+                          <div className="print-answer-num">문제 {idx + 1}</div>
+                          {answerText && (
+                            <div className="print-answer-correct">정답: {answerText}</div>
+                          )}
+                          {q.explanation && (
+                            <div className="print-answer-explanation">
+                              <strong>해설:</strong> {q.explanation}
                             </div>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ol>
                 </div>
               ))}
 

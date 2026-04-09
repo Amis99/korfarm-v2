@@ -17,6 +17,16 @@ class ContentEntity(
     @Column(name = "content_type", nullable = false)
     var contentType: String,
 
+    /**
+     * 다중 분류 카테고리 — JSON array string으로 저장 (예: ["DAILY_READING","READING","STORY"]).
+     * 한 콘텐츠가 여러 카테고리(일일 학습/농장별 학습/프로 모드/이야기·고전 농장 등)에
+     * 동시 노출되도록 하기 위함. content_type 컬럼은 학생용 API 호환을 위해
+     * array의 primary 카테고리(첫 항목)를 그대로 유지.
+     * categories가 null이면 fallback으로 contentType 단일 값을 사용한다.
+     */
+    @Column(name = "categories", columnDefinition = "longtext")
+    var categories: String? = null,
+
     @Column(name = "level_id")
     var levelId: String? = null,
 

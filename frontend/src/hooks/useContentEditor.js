@@ -60,6 +60,8 @@ export function useContentEditor(contentId, staticInfo) {
           title = apiRes.title || "";
           schemaVersion = apiRes.schemaVersion || apiRes.schema_version || "1.0";
         }
+        // contentType은 array (다중 분류). string으로 와도 wrap.
+        const ctArray = Array.isArray(ct) ? ct.filter(Boolean) : (ct ? [ct] : []);
         if (cancelled) return;
         /* 메타데이터 추출 (DB 응답 / static 파일 / staticInfo 순으로 폴백) */
         const metaSrc = apiRes || fileData || {};
@@ -70,7 +72,7 @@ export function useContentEditor(contentId, staticInfo) {
         const dayIndex = metaSrc.dayIndex ?? metaSrc.day_index ?? "";
         const moduleKey = metaSrc.moduleKey || metaSrc.module_key || staticInfo?.moduleKey || "";
         const videoUrl = metaSrc.videoUrl || metaSrc.video_url || "";
-        const metaObj = { contentType: ct, title, contentId, schemaVersion, levelId, chapterId, area, subArea, dayIndex, moduleKey, videoUrl };
+        const metaObj = { contentType: ctArray, title, contentId, schemaVersion, levelId, chapterId, area, subArea, dayIndex, moduleKey, videoUrl };
         setMeta(metaObj);
         setOriginalMeta(JSON.parse(JSON.stringify(metaObj)));
         setContent(payload);
@@ -165,8 +167,15 @@ export function useContentEditor(contentId, staticInfo) {
     try {
       /* content에 title 포함 (백엔드가 content["title"]에서 추출) */
       const payload = meta.title ? { ...content, title: meta.title } : content;
+      // contentType은 항상 array로 전송 (다중 분류)
+      const ctArray = Array.isArray(meta.contentType)
+        ? meta.contentType.filter(Boolean)
+        : (meta.contentType ? [meta.contentType] : []);
+      if (ctArray.length === 0) {
+        throw new Error("contentType이 비어있습니다 (최소 1개 카테고리 필요)");
+      }
       await apiPut(`/v1/admin/content/${contentId}`, {
-        contentType: meta.contentType,
+        contentType: ctArray,
         schemaVersion: meta.schemaVersion || "1.0",
         levelId: meta.levelId || null,
         chapterId: meta.chapterId || null,

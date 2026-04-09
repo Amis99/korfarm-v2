@@ -9,7 +9,8 @@ data class AdminContentImportResult(
 
 data class AdminContentSummary(
     val contentId: String,
-    val contentType: String,
+    /** 다중 분류 카테고리 array (예: ["DAILY_READING","READING"]) */
+    val contentType: List<String>,
     val levelId: String?,
     val chapterId: String?,
     val title: String,
@@ -19,7 +20,8 @@ data class AdminContentSummary(
 
 data class ContentPreview(
     val contentId: String,
-    val contentType: String,
+    /** 다중 분류 카테고리 array */
+    val contentType: List<String>,
     val moduleKey: String?,
     val levelId: String?,
     val chapterId: String?,
@@ -73,7 +75,8 @@ data class AdminContentBatchImportRequest(
 )
 
 data class BatchImportItem(
-    val contentType: String,
+    /** 다중 분류 카테고리 array */
+    val contentType: List<String>,
     val levelId: String? = null,
     val area: String? = null,
     val subArea: String? = null,

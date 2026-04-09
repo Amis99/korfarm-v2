@@ -28,12 +28,14 @@ function LogicModule({ content }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   /** completedMap: { [questionId]: { selectedId, isCorrect } } */
   const [completedMap, setCompletedMap] = useState({});
+  const [lastResult, setLastResult] = useState(null);
   const advanceTimerRef = useRef(null);
   const scrollRef = useRef(null);
 
   // --- 레거시 모드 상태 ---
   const [legacyIndex, setLegacyIndex] = useState(0);
   const [legacyCompletedMap, setLegacyCompletedMap] = useState({});
+  const [legacyLastResult, setLegacyLastResult] = useState(null);
   const legacyAdvanceRef = useRef(null);
   const legacyScrollRef = useRef(null);
 
@@ -79,10 +81,12 @@ function LogicModule({ content }) {
       ...prev,
       [question.id]: { selectedId: choiceId, isCorrect },
     }));
+    setLastResult(isCorrect ? "correct" : "wrong");
 
     const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
     if (advanceTimerRef.current) clearTimeout(advanceTimerRef.current);
     advanceTimerRef.current = setTimeout(() => {
+      setLastResult(null);
       if (currentQuestionIndex < passageQuestions.length - 1) {
         setCurrentQuestionIndex((prev) => prev + 1);
       } else if (currentPassageIndex < passages.length - 1) {
@@ -108,10 +112,12 @@ function LogicModule({ content }) {
       ...prev,
       [q.id]: { selectedId: choiceId, isCorrect },
     }));
+    setLegacyLastResult(isCorrect ? "correct" : "wrong");
 
     const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
     if (legacyAdvanceRef.current) clearTimeout(legacyAdvanceRef.current);
     legacyAdvanceRef.current = setTimeout(() => {
+      setLegacyLastResult(null);
       if (legacyIndex >= legacyQuestions.length - 1) {
         finish(true);
       } else {
@@ -148,6 +154,7 @@ function LogicModule({ content }) {
               completion={completedMap[q.id]}
               isActive={idx === currentQuestionIndex && !completedMap[q.id]}
               onSelect={handlePassageChoice}
+              lastResult={idx === currentQuestionIndex ? lastResult : null}
             />
           ))}
         </div>
@@ -176,6 +183,7 @@ function LogicModule({ content }) {
               completion={legacyCompletedMap[q.id]}
               isActive={idx === legacyIndex && !legacyCompletedMap[q.id]}
               onSelect={handleLegacyChoice}
+              lastResult={idx === legacyIndex ? legacyLastResult : null}
             />
           ))}
         </div>

@@ -1,7 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import { FEEDBACK } from "../shared/feedbackTimings";
+import CumulativeQuestionCard from "../shared/CumulativeQuestionCard";
 import ChoiceAnalysisCore from "../shared/ChoiceAnalysisCore";
+import QuestionModal from "../shared/QuestionModal";
 import RichText from "../../utils/RichText";
 import PassageMarkdown from "../../utils/PassageMarkdown";
 
@@ -55,142 +57,80 @@ const resolveAnswerRanges = (question, passage) => {
   return ranges;
 };
 
-// 하이라이트 텍스트
-const renderHighlightedText = (text, highlight) => {
-  if (!highlight || !highlight.text) return <RichText>{text}</RichText>;
-  const parts = text.split(highlight.text);
-  if (parts.length === 1) return <RichText>{text}</RichText>;
-  return parts.reduce((acc, part, idx) => {
-    acc.push(<RichText key={`t-${idx}`}>{part}</RichText>);
-    if (idx < parts.length - 1) {
-      acc.push(
-        <span key={`hl-${idx}`} className="worksheet-highlight">
-          <RichText>{highlight.text}</RichText>
-        </span>
-      );
-    }
-    return acc;
-  }, []);
-};
+/* ──────────── FILL_BLANKS 카드 (시험지 스타일) ──────────── */
 
-/* ──────────── 카드 컴포넌트 (각 type별) ──────────── */
-
-/** MULTI_CHOICE: 발문 + 지문(있으면) + 선택지 4지 (활성 시 클릭, 푼 후 정답 + 해설) */
-function MultiChoiceCard({ question, idx, total, completion, isActive, onSelect }) {
-  const choices = question.choices || [];
-  const passage = question.passage;
-  const stem = question.stem || question.prompt || "";
-  return (
-    <div className={`cum-card ${completion ? "completed" : ""} ${isActive ? "active" : ""} ${completion?.isCorrect ? "correct" : completion ? "wrong" : ""}`}>
-      <div className="cum-card-header">
-        <span className="cum-card-num">문제 {idx + 1} / {total}</span>
-        {question.competency && <span className="dq-competency-tag">{question.competency}</span>}
-        {completion && (
-          <span className={`cum-card-mark ${completion.isCorrect ? "correct" : "wrong"}`}>
-            {completion.isCorrect ? "○ 정답" : "× 오답"}
-          </span>
-        )}
-      </div>
-      {passage && typeof passage === "string" && passage.length > 0 && (
-        <div className="cum-card-passage">
-          {question.highlight ? renderHighlightedText(passage, question.highlight) : <PassageMarkdown>{passage}</PassageMarkdown>}
-        </div>
-      )}
-      <div className="cum-card-stem"><RichText>{stem}</RichText></div>
-      <div className="cum-card-choices">
-        {choices.map((c, ci) => {
-          const isCorrectChoice = c.id === question.answerId;
-          const isPicked = completion?.selectedId === c.id;
-          const showAsCorrect = completion && isCorrectChoice;
-          const showAsWrong = completion && isPicked && !isCorrectChoice;
-          return (
-            <button
-              key={c.id || ci}
-              type="button"
-              className={`cum-choice ${showAsCorrect ? "is-correct" : ""} ${showAsWrong ? "is-wrong" : ""}`}
-              onClick={() => isActive && onSelect(c.id)}
-              disabled={!isActive || !!completion}
-            >
-              <span className="cum-choice-num">{ci + 1}</span>
-              <span className="cum-choice-text"><RichText>{c.text}</RichText></span>
-              {showAsCorrect && <span className="cum-choice-tag">정답</span>}
-              {showAsWrong && <span className="cum-choice-tag wrong">선택</span>}
-            </button>
-          );
-        })}
-      </div>
-      {completion && question.explanation && (
-        <div className="cum-card-explanation">
-          <span className="cum-card-explanation-label">해설</span>
-          <RichText>{question.explanation}</RichText>
-        </div>
-      )}
-    </div>
-  );
-}
-
-/** FILL_BLANKS: 모범답안 template + 빈칸을 순차적으로 채움 */
-function FillBlanksCard({ question, idx, total, completion, isActive, onSelectBlank, blankIndex }) {
+/** FILL_BLANKS: 발문 + 지문 + template(빈칸) — 활성 시 모달에서 선택, 완료 후 첨삭 */
+function FillBlanksCard({ question, idx, total, completion, isActive, blankIndex, blankAnswers }) {
   const blanks = question.blanks || [];
   const template = question.template || "";
   const parts = template.split("____");
-  const filled = completion?.filled || (isActive ? blanks.map((b) => completion?.filled?.[b.id] || "") : []);
   const passage = question.passage;
+  const stem = question.stem || "";
   const allCorrect = completion?.isCorrect;
 
+  const renderBlank = (blank, partIdx) => {
+    if (completion) {
+      // 완료: 정답을 빨간 첨삭으로
+      const correctChoice = blank.choices?.find((c) => c.id === blank.answerId);
+      return (
+        <span className="worksheet-handwriting" style={{ display: "inline" }}>
+          {correctChoice?.text || "____"}
+        </span>
+      );
+    }
+    if (isActive && partIdx < blankIndex) {
+      // 이미 답한 빈칸 (이번 회차) — 정답을 채워서
+      const correctChoice = blank.choices?.find((c) => c.id === blank.answerId);
+      return (
+        <span className="worksheet-handwriting" style={{ display: "inline" }}>
+          {correctChoice?.text || "____"}
+        </span>
+      );
+    }
+    return (
+      <span className={`worksheet-blank ${isActive && partIdx === blankIndex ? "active" : ""}`}>
+        ____
+      </span>
+    );
+  };
+
   return (
-    <div className={`cum-card ${completion ? "completed" : ""} ${isActive ? "active" : ""} ${completion?.isCorrect ? "correct" : completion ? "wrong" : ""}`}>
+    <div
+      className={`cum-card ${completion ? "completed" : ""} ${isActive ? "active" : ""} ${
+        completion?.isCorrect ? "correct" : completion ? "wrong" : ""
+      }`}
+    >
       <div className="cum-card-header">
-        <span className="cum-card-num">문제 {idx + 1} / {total}</span>
-        {question.competency && <span className="dq-competency-tag">{question.competency}</span>}
+        <span className="cum-card-num">
+          문제 {idx + 1} / {total}
+        </span>
         {completion && (
-          <span className={`cum-card-mark ${allCorrect ? "correct" : "wrong"}`}>
-            {allCorrect ? "○ 정답" : "× 오답"}
+          <span
+            className={`cum-card-mark ${allCorrect ? "correct" : "wrong"}`}
+            aria-label={allCorrect ? "정답" : "오답"}
+          >
+            {allCorrect ? "정답" : "오답"}
           </span>
         )}
       </div>
+      <div className="cum-card-stem">
+        <RichText>{stem}</RichText>
+      </div>
       {passage && typeof passage === "string" && passage.length > 0 && (
-        <div className="cum-card-passage"><PassageMarkdown>{passage}</PassageMarkdown></div>
+        <div className="cum-card-passage">
+          <PassageMarkdown>{passage}</PassageMarkdown>
+        </div>
       )}
-      <div className="cum-card-stem"><RichText>{question.stem || ""}</RichText></div>
-      {/* template + 빈칸 */}
-      <div className="cum-card-template">
+      <div className="cum-card-prompt">
         {parts.map((part, partIdx) => (
           <span key={`part-${partIdx}`}>
             <RichText>{part}</RichText>
-            {partIdx < blanks.length && (
-              <span className={`worksheet-blank ${isActive && partIdx === blankIndex ? "active" : ""}`}>
-                {(completion?.filled?.[blanks[partIdx].id]) ||
-                  (isActive && partIdx < blankIndex
-                    ? (blanks[partIdx].choices?.find((c) => c.id === blanks[partIdx].answerId)?.text || "____")
-                    : "____")}
-              </span>
-            )}
+            {partIdx < blanks.length && renderBlank(blanks[partIdx], partIdx)}
           </span>
         ))}
       </div>
-      {/* 활성: 현재 빈칸에 대한 선택지 */}
-      {isActive && !completion && blanks[blankIndex] && (
-        <div className="cum-card-choices">
-          <div className="cum-card-blank-prompt">
-            {blankIndex + 1}번째 빈칸을 선택하세요.
-          </div>
-          {(blanks[blankIndex].choices || []).map((c, ci) => (
-            <button
-              key={c.id || ci}
-              type="button"
-              className="cum-choice"
-              onClick={() => onSelectBlank(c.id)}
-            >
-              <span className="cum-choice-num">{ci + 1}</span>
-              <span className="cum-choice-text"><RichText>{c.text}</RichText></span>
-            </button>
-          ))}
-        </div>
-      )}
       {completion && question.explanation && (
         <div className="cum-card-explanation">
-          <span className="cum-card-explanation-label">해설</span>
           <RichText>{question.explanation}</RichText>
         </div>
       )}
@@ -198,8 +138,19 @@ function FillBlanksCard({ question, idx, total, completion, isActive, onSelectBl
   );
 }
 
-/** TEXT_SELECT: 글자 단위 클릭 카드 */
-function TextSelectCard({ question, idx, total, completion, isActive, onClickChar, confirmedRangeKeys, revealRanges }) {
+/* ──────────── TEXT_SELECT 카드 (시험지 스타일) ──────────── */
+
+/** TEXT_SELECT: 글자 단위 클릭 카드 — 모달 X (인터랙션이 다름) */
+function TextSelectCard({
+  question,
+  idx,
+  total,
+  completion,
+  isActive,
+  onClickChar,
+  confirmedRangeKeys,
+  revealRanges,
+}) {
   const passage = question.passage || {};
   const paragraphs = passage.paragraphs || [];
   const answerRanges = useMemo(() => resolveAnswerRanges(question, passage), [question, passage]);
@@ -207,9 +158,7 @@ function TextSelectCard({ question, idx, total, completion, isActive, onClickCha
   const usesAllMatches = matchMode === "ALL" && answerRanges.length > 1;
   const confirmedKeySet = useMemo(() => new Set(confirmedRangeKeys || []), [confirmedRangeKeys]);
 
-  // 표시할 하이라이트 범위:
-  //   완료된 카드 → 항상 모든 정답 범위 표시
-  //   활성 카드 → confirmed + reveal
+  // 표시할 하이라이트 범위
   const activeRanges = completion
     ? answerRanges
     : [
@@ -218,13 +167,21 @@ function TextSelectCard({ question, idx, total, completion, isActive, onClickCha
       ];
 
   return (
-    <div className={`cum-card ${completion ? "completed" : ""} ${isActive ? "active" : ""} ${completion?.isCorrect ? "correct" : completion ? "wrong" : ""}`}>
+    <div
+      className={`cum-card ${completion ? "completed" : ""} ${isActive ? "active" : ""} ${
+        completion?.isCorrect ? "correct" : completion ? "wrong" : ""
+      }`}
+    >
       <div className="cum-card-header">
-        <span className="cum-card-num">문제 {idx + 1} / {total}</span>
-        {question.competency && <span className="dq-competency-tag">{question.competency}</span>}
+        <span className="cum-card-num">
+          문제 {idx + 1} / {total}
+        </span>
         {completion && (
-          <span className={`cum-card-mark ${completion.isCorrect ? "correct" : "wrong"}`}>
-            {completion.isCorrect ? "○ 정답" : "× 오답"}
+          <span
+            className={`cum-card-mark ${completion.isCorrect ? "correct" : "wrong"}`}
+            aria-label={completion.isCorrect ? "정답" : "오답"}
+          >
+            {completion.isCorrect ? "정답" : "오답"}
           </span>
         )}
       </div>
@@ -232,11 +189,12 @@ function TextSelectCard({ question, idx, total, completion, isActive, onClickCha
         <RichText>{question.stem || ""}</RichText>
         {usesAllMatches && isActive && !completion && (
           <span className="dq-select-progress">
-            {" "}({(confirmedRangeKeys || []).length} / {answerRanges.length})
+            {" "}
+            ({(confirmedRangeKeys || []).length} / {answerRanges.length})
           </span>
         )}
       </div>
-      <div className="dq-text-select-passage">
+      <div className="cum-card-passage dq-text-select-passage">
         {paragraphs.map((paragraph) => {
           const pRanges = activeRanges.filter((r) => r.paragraphId === paragraph.id);
           const mask = buildHighlightMask(paragraph.text.length, pRanges);
@@ -248,7 +206,9 @@ function TextSelectCard({ question, idx, total, completion, isActive, onClickCha
                   <span
                     key={`${paragraph.id}-${ci}`}
                     className={`confirm-char ${mask.has(ci) ? "worksheet-highlight" : ""}`}
-                    onClick={isSpace || !isActive || completion ? undefined : () => onClickChar(paragraph.id, ci)}
+                    onClick={
+                      isSpace || !isActive || completion ? undefined : () => onClickChar(paragraph.id, ci)
+                    }
                   >
                     {isSpace ? "\u00A0" : char}
                   </span>
@@ -260,7 +220,6 @@ function TextSelectCard({ question, idx, total, completion, isActive, onClickCha
       </div>
       {completion && question.explanation && (
         <div className="cum-card-explanation">
-          <span className="cum-card-explanation-label">해설</span>
           <RichText>{question.explanation}</RichText>
         </div>
       )}
@@ -279,8 +238,9 @@ function DailyQuizModule({ content }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   /** completedMap: { [questionId]: { selectedId/filled/..., isCorrect } } */
   const [completedMap, setCompletedMap] = useState({});
+  const [lastResult, setLastResult] = useState(null);
 
-  // FILL_BLANKS 진행 상태 (현재 활성 문제만)
+  // FILL_BLANKS 진행 상태
   const [blankIndex, setBlankIndex] = useState(0);
   const [blankAnswers, setBlankAnswers] = useState({});
   const [blankResultMap, setBlankResultMap] = useState({});
@@ -292,6 +252,9 @@ function DailyQuizModule({ content }) {
   const advanceTimerRef = useRef(null);
   const confirmLockRef = useRef(false);
   const scrollRef = useRef(null);
+
+  // 활성 카드 위치 추적 (모달 anchorRect 계산용)
+  const [activeCardRect, setActiveCardRect] = useState(null);
 
   const currentQuestion = questions[currentIndex];
   const questionType = currentQuestion?.type;
@@ -328,6 +291,34 @@ function DailyQuizModule({ content }) {
     }
   }, [currentIndex]);
 
+  // 활성 카드 위치 측정 — 모달 anchorRect용. 문제 전환마다 한 번씩.
+  useLayoutEffect(() => {
+    if (!scrollRef.current) {
+      setActiveCardRect(null);
+      return;
+    }
+    // cum-stack 안에서 활성 카드 찾기 (selector 또는 마지막 카드)
+    const activeEl =
+      scrollRef.current.querySelector(".cum-card.active") ||
+      scrollRef.current.querySelector(".cum-card:last-child");
+    if (!activeEl) {
+      setActiveCardRect(null);
+      return;
+    }
+    const engineBody = activeEl.closest(".engine-body");
+    if (!engineBody) return;
+    const containerRect = engineBody.getBoundingClientRect();
+    const scale = containerRect.width / engineBody.offsetWidth || 1;
+    const cardRect = activeEl.getBoundingClientRect();
+    setActiveCardRect({
+      left: (cardRect.left - containerRect.left) / (scale || 1),
+      right: (cardRect.right - containerRect.left) / (scale || 1),
+      top: (cardRect.top - containerRect.top) / (scale || 1),
+      height: cardRect.height / (scale || 1),
+    });
+    // currentIndex / blankIndex 변경 시 재측정
+  }, [currentIndex, blankIndex]);
+
   // 상태 초기화 (문제 전환 시)
   const resetQuestionState = () => {
     setBlankIndex(0);
@@ -335,6 +326,7 @@ function DailyQuizModule({ content }) {
     setBlankResultMap({});
     setConfirmedRangeKeys([]);
     setRevealRanges([]);
+    setLastResult(null);
     confirmLockRef.current = false;
   };
 
@@ -358,11 +350,16 @@ function DailyQuizModule({ content }) {
     const scoring = getScoring(currentQuestion);
     const isCorrect = selectedId === currentQuestion.answerId;
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({ id: currentQuestion.id, correct: isCorrect, questionKind: currentQuestion.questionKind });
+    recordAnswer({
+      id: currentQuestion.id,
+      correct: isCorrect,
+      questionKind: currentQuestion.questionKind,
+    });
     setCompletedMap((prev) => ({
       ...prev,
       [currentQuestion.id]: { selectedId, isCorrect },
     }));
+    setLastResult(isCorrect ? "correct" : "wrong");
     const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
     scheduleAdvance(delay, handleNext);
   };
@@ -375,12 +372,18 @@ function DailyQuizModule({ content }) {
     const isCorrect = selectedId === blank.answerId;
     const correctChoice = blank.choices?.find((c) => c.id === blank.answerId);
     adjustTime(isCorrect ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({ id: `${currentQuestion.id}-${blank.id}`, correct: isCorrect, questionKind: currentQuestion.questionKind });
+    recordAnswer({
+      id: `${currentQuestion.id}-${blank.id}`,
+      correct: isCorrect,
+      questionKind: currentQuestion.questionKind,
+    });
     const newFilled = { ...blankAnswers, [blank.id]: correctChoice?.text || "" };
     const newResults = { ...blankResultMap, [blank.id]: isCorrect };
     setBlankAnswers(newFilled);
     setBlankResultMap(newResults);
+    setLastResult(isCorrect ? "correct" : "wrong");
 
+    const delay = isCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
     if (blankIndex >= blanks.length - 1) {
       // 마지막 빈칸 → 카드 완료
       const allCorrect = blanks.every((item) => newResults[item.id]);
@@ -388,11 +391,13 @@ function DailyQuizModule({ content }) {
         ...prev,
         [currentQuestion.id]: { isCorrect: allCorrect, filled: newFilled, results: newResults },
       }));
-      const delay = allCorrect ? FEEDBACK.A_CORRECT_ADVANCE_MS : FEEDBACK.A_WRONG_ADVANCE_MS;
       scheduleAdvance(delay, handleNext);
     } else {
       // 다음 빈칸으로
-      setTimeout(() => setBlankIndex((prev) => prev + 1), FEEDBACK.A_CORRECT_ADVANCE_MS);
+      scheduleAdvance(delay, () => {
+        setBlankIndex((prev) => prev + 1);
+        setLastResult(null);
+      });
     }
   };
 
@@ -428,7 +433,6 @@ function DailyQuizModule({ content }) {
         setConfirmedRangeKeys(nextKeys);
         setRevealRanges(textSelectAnswerRanges);
         if (nextKeys.length >= textSelectAnswerRanges.length) {
-          // 모든 범위 찾음 → 완료
           setCompletedMap((prev) => ({
             ...prev,
             [currentQuestion.id]: { isCorrect: true },
@@ -438,13 +442,11 @@ function DailyQuizModule({ content }) {
             handleNext();
           }, FEEDBACK.A_CORRECT_ADVANCE_MS);
         } else {
-          // 아직 남음 — 계속
           confirmLockRef.current = false;
           setTimeout(() => setRevealRanges([]), 600);
         }
         return;
       }
-      // 단일 정답 또는 ANY 모드
       setRevealRanges(textSelectAnswerRanges);
       setCompletedMap((prev) => ({
         ...prev,
@@ -455,7 +457,6 @@ function DailyQuizModule({ content }) {
         handleNext();
       }, FEEDBACK.A_CORRECT_ADVANCE_MS);
     } else {
-      // 오답 → 정답 위치 표시 후 3초
       setRevealRanges(textSelectAnswerRanges);
       setCompletedMap((prev) => ({
         ...prev,
@@ -468,84 +469,25 @@ function DailyQuizModule({ content }) {
     }
   };
 
+  // ── CHOICE_ANALYSIS 완료 콜백 ──
+  const handleChoiceAnalysisComplete = () => {
+    if (!currentQuestion) return;
+    setCompletedMap((prev) => ({
+      ...prev,
+      [currentQuestion.id]: { isCorrect: true },
+    }));
+    setTimeout(() => handleNext(), 400);
+  };
+
   // ── 렌더링 ──
 
   if (!currentQuestion) return null;
 
-  const progressPercent = ((currentIndex + 1) / questions.length) * 100;
-
-  // CHOICE_OX / CHOICE_ANALYSIS — 신 모듈 ChoiceAnalysisCore에 위임
-  // 신 양식: passage.paragraphs[].sentences[] + choices[].evidenceSentenceIds + matchMode + expectedOX
-  // 옛 양식(propositions+tokens)은 ChoiceAnalysisCore가 자동 감지해 안내 메시지 표시
-  if (questionType === "CHOICE_OX" || questionType === "CHOICE_ANALYSIS") {
-    const handleQ10Complete = () => {
-      // 5개 선택지 모두 통과 → 다음 문제로
-      setCompletedMap((prev) => ({
-        ...prev,
-        [currentQuestion.id]: { isCorrect: true },
-      }));
-      setTimeout(() => handleNext(), 400);
-    };
-
-    return (
-      <div className="daily-quiz-module">
-        <div className="dq-progress">
-          <div className="dq-progress-bar">
-            <div className="dq-progress-fill" style={{ width: `${progressPercent}%` }} />
-          </div>
-          <div className="dq-progress-text">
-            <span>{currentIndex + 1} / {questions.length}</span>
-          </div>
-        </div>
-        <div className="dq-tabs">
-          {questions.map((q, idx) => {
-            const c = completedMap[q.id];
-            return (
-              <span
-                key={q.id}
-                className={`dq-tab ${idx === currentIndex ? "active" : ""} ${c ? (c.isCorrect ? "correct" : "wrong") : ""}`}
-              >
-                {idx + 1}
-              </span>
-            );
-          })}
-        </div>
-        <ChoiceAnalysisCore
-          question={currentQuestion}
-          onComplete={handleQ10Complete}
-          adjustTime={adjustTime}
-          recordAnswer={recordAnswer}
-        />
-      </div>
-    );
-  }
-
-  // 누적 모드: currentIndex까지의 문제 카드 스택
+  // 누적 모드: currentIndex까지의 문제 카드 스택 (10번 CHOICE_ANALYSIS도 같은 흐름 안에 inline)
   const visibleQuestions = questions.slice(0, currentIndex + 1);
 
   return (
     <div className="daily-quiz-module">
-      <div className="dq-progress">
-        <div className="dq-progress-bar">
-          <div className="dq-progress-fill" style={{ width: `${progressPercent}%` }} />
-        </div>
-        <div className="dq-progress-text">
-          <span>{currentIndex + 1} / {questions.length}</span>
-        </div>
-      </div>
-      <div className="dq-tabs">
-        {questions.map((q, idx) => {
-          const c = completedMap[q.id];
-          return (
-            <span
-              key={q.id}
-              className={`dq-tab ${idx === currentIndex ? "active" : ""} ${c ? (c.isCorrect ? "correct" : "wrong") : ""}`}
-            >
-              {idx + 1}
-            </span>
-          );
-        })}
-      </div>
       <div className="cum-stack" ref={scrollRef}>
         {visibleQuestions.map((q, idx) => {
           const completion = completedMap[q.id];
@@ -559,8 +501,8 @@ function DailyQuizModule({ content }) {
                 total={questions.length}
                 completion={completion}
                 isActive={isActive}
-                onSelectBlank={handleBlankChoice}
                 blankIndex={blankIndex}
+                blankAnswers={blankAnswers}
               />
             );
           }
@@ -579,9 +521,52 @@ function DailyQuizModule({ content }) {
               />
             );
           }
-          // MULTI_CHOICE (default)
+          if (q.type === "CHOICE_OX" || q.type === "CHOICE_ANALYSIS") {
+            // 10번 등 선택지 분석 — cum-card 안에 inline 렌더
+            return (
+              <div
+                key={q.id}
+                className={`cum-card ${completion ? "completed" : ""} ${isActive ? "active" : ""} ${
+                  completion?.isCorrect ? "correct" : completion ? "wrong" : ""
+                }`}
+              >
+                <div className="cum-card-header">
+                  <span className="cum-card-num">
+                    문제 {idx + 1} / {questions.length}
+                  </span>
+                  {completion && (
+                    <span
+                      className={`cum-card-mark ${completion.isCorrect ? "correct" : "wrong"}`}
+                      aria-label={completion.isCorrect ? "정답" : "오답"}
+                    >
+                      {completion.isCorrect ? "정답" : "오답"}
+                    </span>
+                  )}
+                </div>
+                {isActive ? (
+                  <ChoiceAnalysisCore
+                    question={q}
+                    onComplete={handleChoiceAnalysisComplete}
+                    adjustTime={adjustTime}
+                    recordAnswer={recordAnswer}
+                  />
+                ) : (
+                  // 완료된 카드 — stem만 표시 (전체 인터랙션은 풀이 끝나서 의미 없음)
+                  <div className="cum-card-stem">
+                    <RichText>{q.stem || ""}</RichText>
+                  </div>
+                )}
+                {completion && q.explanation && (
+                  <div className="cum-card-explanation">
+                    <RichText>{q.explanation}</RichText>
+                  </div>
+                )}
+              </div>
+            );
+          }
+          // MULTI_CHOICE (default) — CumulativeQuestionCard 사용 (자동 모달)
           return (
-            <MultiChoiceCard
+            <CumulativeQuestionCard
               key={q.id}
               question={q}
               idx={idx}
@@ -589,10 +574,28 @@ function DailyQuizModule({ content }) {
               completion={completion}
               isActive={isActive}
               onSelect={handleMultiChoice}
+              lastResult={isActive ? lastResult : null}
+              modalTitle="문제"
             />
           );
         })}
       </div>
+      {/* FILL_BLANKS 활성 시 빈칸 모달 — 활성 카드 옆/아래에 떠있는 포스트잇 */}
+      {questionType === "FILL_BLANKS" && currentQuestion && !completedMap[currentQuestion.id] && (
+        <QuestionModal
+          title="빈칸 채우기"
+          prompt={`${blankIndex + 1}번째 빈칸을 선택하세요.`}
+          choices={blanks[blankIndex]?.choices || []}
+          onSelect={handleBlankChoice}
+          mark={lastResult}
+          shuffleKey={`${currentQuestion.id}-${blankIndex}`}
+          correctChoiceId={blanks[blankIndex]?.answerId}
+          feedbackDuration={
+            lastResult === "wrong" ? FEEDBACK.A_WRONG_ADVANCE_MS : FEEDBACK.A_CORRECT_ADVANCE_MS
+          }
+          anchorRect={activeCardRect}
+        />
+      )}
     </div>
   );
 }

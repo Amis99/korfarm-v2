@@ -3,6 +3,7 @@ package com.korfarm.api.contracts
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 
@@ -212,7 +213,9 @@ data class AdminClassStudentsRequest(
 )
 
 data class AdminContentImportRequest(
-    @field:NotBlank val contentType: String,
+    /** 다중 분류 카테고리 array (예: ["DAILY_READING","READING"]).
+     *  최소 1개 이상의 카테고리. 첫 항목이 primary로 content_type 컬럼에도 저장됨. */
+    @field:NotEmpty val contentType: List<String>,
     val levelId: String? = null,
     val chapterId: String? = null,
     val area: String? = null,

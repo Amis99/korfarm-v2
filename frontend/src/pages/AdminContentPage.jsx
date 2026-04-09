@@ -9,6 +9,7 @@ import {
   TYPE_LABEL, TYPE_SHORT, getTypeShort,
   LEVEL_SHORT, getLevelShort,
   LEVEL_LABEL_MAP, getLevelLabel, DAILY_LEVELS,
+  TABS, TAB_OPTIONS, CATEGORY_TO_TABS, getCategoryTabs, isManageableContent,
 } from "../constants/contentTypes";
 import AdminLayout from "../components/AdminLayout";
 import "../styles/admin-detail.css";
@@ -16,57 +17,62 @@ import "../styles/admin-detail.css";
 const CONTENTS = [];
 const PER_PAGE = 20;
 
-/* contentType → EngineShell moduleKey 변환
- * 사용 가능한 moduleKey: worksheet_quiz, reading_training, choice_judgement,
+/* 카테고리 → EngineShell moduleKey 변환 (다중 분류 호환)
+ * 사용 가능한 moduleKey: worksheet_quiz, reading_training, choice_analysis,
  * phoneme_change, word_formation, sentence_structure, study_content, answer_key,
  * background_knowledge, logic_reasoning, daily_quiz, morpheme_analysis (총 12개)
+ *
+ * 새 카테고리 + 옛 카테고리 alias 모두 지원.
  */
 const CONTENT_TYPE_TO_MODULE = {
-  // 어휘
-  VOCAB_BASIC: "worksheet_quiz",
-  PRO_VOCAB: "worksheet_quiz",
-  // 독해
-  READING_NONFICTION: "reading_training",
-  READING_LITERATURE: "reading_training",
-  DAILY_READING: "reading_training",
-  PRO_READING: "reading_training",
-  // 내용 숙지 (CONTENT_PDF는 레거시 명, 신규는 study_content)
-  CONTENT_PDF: "study_content",
-  CONTENT_PDF_QUIZ: "study_content",
-  STUDY_CONTENT: "study_content",
-  // 선택지 분석 (옛 명: 선택지 판별)
-  CHOICE_ANALYSIS: "choice_analysis",
-  CHOICE_JUDGEMENT: "choice_analysis",
-  // 문법
-  GRAMMAR_PHONEME_CHANGE: "phoneme_change",
+  // 새 카테고리
+  VOCAB: "worksheet_quiz",
+  READING: "reading_training",
+  STORY: "reading_training",
+  CLASSIC: "reading_training",
   GRAMMAR_WORD_FORMATION: "word_formation",
   GRAMMAR_SENTENCE_STRUCTURE: "sentence_structure",
+  GRAMMAR_PHONEME_CHANGE: "phoneme_change",
   GRAMMAR_POS: "morpheme_analysis",
+  BACKGROUND: "background_knowledge",
+  CONCEPT: "worksheet_quiz",
+  LOGIC: "logic_reasoning",
+  CHOICE_ANALYSIS: "choice_analysis",
+  DAILY_QUIZ: "daily_quiz",
+  DAILY_READING: "reading_training",
+  PRO_READING: "reading_training",
+  PRO_VOCAB: "worksheet_quiz",
+  PRO_BACKGROUND: "background_knowledge",
+  PRO_LOGIC: "logic_reasoning",
+  STUDY_CONTENT: "study_content",
+  WRITING: "worksheet_quiz",
+  PRO_TEST: "worksheet_quiz",
+  PRO_ANSWER: "answer_key",
+
+  // 옛 카테고리 alias (호환성)
+  VOCAB_BASIC: "worksheet_quiz",
+  READING_NONFICTION: "reading_training",
+  READING_LITERATURE: "reading_training",
+  CONTENT_PDF: "study_content",
+  CONTENT_PDF_QUIZ: "study_content",
+  CHOICE_JUDGEMENT: "choice_analysis",
   MORPHEME_ANALYSIS: "morpheme_analysis",
-  // 배경지식 (지문+문제 → BackgroundModule)
   BACKGROUND_KNOWLEDGE: "background_knowledge",
   BACKGROUND_KNOWLEDGE_QUIZ: "background_knowledge",
-  PRO_BACKGROUND: "background_knowledge",
-  // 국어 개념
   LANGUAGE_CONCEPT: "worksheet_quiz",
   LANGUAGE_CONCEPT_QUIZ: "worksheet_quiz",
-  // 논리 사고력
   LOGIC_REASONING: "logic_reasoning",
   LOGIC_REASONING_QUIZ: "worksheet_quiz",
-  PRO_LOGIC: "logic_reasoning",
-  // 일일 퀴즈
-  DAILY_QUIZ: "daily_quiz",
-  // 글쓰기/테스트
   WRITING_DESCRIPTIVE: "worksheet_quiz",
-  PRO_TEST: "worksheet_quiz",
-  // 정답·해설
-  PRO_ANSWER: "answer_key",
+  PRO_MANUSCRIPT: "answer_key",
 };
 const resolveModuleKey = (contentType, fallback) => {
   if (fallback) return fallback;
-  const mapped = CONTENT_TYPE_TO_MODULE[contentType];
+  // contentType이 array면 첫 항목으로 매핑
+  const primaryType = Array.isArray(contentType) ? contentType[0] : contentType;
+  const mapped = CONTENT_TYPE_TO_MODULE[primaryType];
   if (!mapped) {
-    console.warn(`[AdminContentPage] 알 수 없는 contentType="${contentType}" → worksheet_quiz fallback`);
+    console.warn(`[AdminContentPage] 알 수 없는 contentType="${primaryType}" → worksheet_quiz fallback`);
   }
   return mapped || "worksheet_quiz";
 };
@@ -77,62 +83,7 @@ const resolveModuleKey = (contentType, fallback) => {
  */
 const STATIC_CONTENTS = [];
 
-/* contentType → 1차 농장 탭 매핑 */
-const FARM_TAB_BY_TYPE = {
-  // 어휘
-  VOCAB_BASIC: "vocab",
-  PRO_VOCAB: "vocab",
-  // 문법
-  GRAMMAR_PHONEME_CHANGE: "grammar",
-  GRAMMAR_WORD_FORMATION: "grammar",
-  GRAMMAR_SENTENCE_STRUCTURE: "grammar",
-  GRAMMAR_POS: "grammar",
-  MORPHEME_ANALYSIS: "grammar",
-  // 독해
-  READING_NONFICTION: "reading",
-  READING_LITERATURE: "reading",
-  PRO_READING: "reading",
-  // 배경지식
-  BACKGROUND_KNOWLEDGE: "background",
-  BACKGROUND_KNOWLEDGE_QUIZ: "background",
-  PRO_BACKGROUND: "background",
-  // 국어 개념
-  LANGUAGE_CONCEPT: "concept",
-  LANGUAGE_CONCEPT_QUIZ: "concept",
-  // 논리사고력
-  LOGIC_REASONING: "logic",
-  LOGIC_REASONING_QUIZ: "logic",
-  PRO_LOGIC: "logic",
-  // 선택지 분석
-  CHOICE_ANALYSIS: "choice",
-  CHOICE_JUDGEMENT: "choice",
-  // 글쓰기
-  WRITING_DESCRIPTIVE: "writing",
-  PRO_ANSWER: "writing",
-  PRO_MANUSCRIPT: "writing",
-  // 내용 숙지
-  STUDY_CONTENT: "study",
-  CONTENT_PDF: "study",
-  CONTENT_PDF_QUIZ: "study",
-  // 일일 학습 (별도 탭)
-  DAILY_QUIZ: "daily",
-  DAILY_READING: "daily",
-};
-
-/* 1차 농장 탭 정의 (좌→우 순서) */
-const FARM_TABS = [
-  { id: "all", label: "전체", icon: "📚" },
-  { id: "vocab", label: "어휘", icon: "🌾" },
-  { id: "grammar", label: "문법", icon: "🔤" },
-  { id: "reading", label: "독해", icon: "📖" },
-  { id: "background", label: "배경지식", icon: "🌍" },
-  { id: "concept", label: "국어 개념", icon: "💡" },
-  { id: "logic", label: "논리사고력", icon: "🧩" },
-  { id: "choice", label: "선택지 판별", icon: "✅" },
-  { id: "writing", label: "글쓰기", icon: "✍️" },
-  { id: "study", label: "내용 숙지", icon: "📋" },
-  { id: "daily", label: "일일 학습", icon: "📅" },
-];
+/* 탭 정의는 contentTypes.js의 TABS / TAB_OPTIONS / CATEGORY_TO_TABS 사용 (다중 분류) */
 
 /* level_id → 4대 레벨 그룹 (대소문자 모두 매칭) */
 const getLevelGroup = (levelId) => {
@@ -171,27 +122,38 @@ const extractDay = (jsonPath) => {
   return m ? `#${m[1]}` : "";
 };
 
-/* 목록 API 응답 → 테이블 데이터 변환 */
+/* 목록 API 응답 → 테이블 데이터 변환.
+   contentType은 이제 array (다중 분류). 단일 string으로 와도 array로 wrapping. */
+const normalizeContentTypeArray = (raw) => {
+  if (Array.isArray(raw)) return raw;
+  if (typeof raw === "string" && raw.length > 0) return [raw];
+  return [];
+};
 const mapContentList = (items) =>
-  items.map((content) => ({
-    id: content.contentId || content.content_id || content.id || content.title,
-    title: content.title,
-    type: content.contentType || content.content_type || content.type || "",
-    levelId: content.levelId || content.level_id || "",
-    chapterId: content.chapterId || content.chapter_id || "",
-    area: content.area || "",
-    status: normalizeContentStatus(content.status),
-  }));
+  items.map((content) => {
+    const ctRaw = content.contentType ?? content.content_type ?? content.type ?? null;
+    const types = normalizeContentTypeArray(ctRaw);
+    return {
+      id: content.contentId || content.content_id || content.id || content.title,
+      title: content.title,
+      types,                        // array
+      type: types[0] || "",        // primary (테이블 셀 라벨용)
+      levelId: content.levelId || content.level_id || "",
+      chapterId: content.chapterId || content.chapter_id || "",
+      area: content.area || "",
+      status: normalizeContentStatus(content.status),
+    };
+  });
 
-/* 템플릿 그룹 분류 */
+/* 템플릿 그룹 분류 (글쓰기/내용숙지/프로답안 제외 — 콘텐츠 학습이 아님) */
 const TEMPLATE_GROUPS = [
   { label: "일일 학습", ids: ["dailyQuiz_quiz", "daily_reading"] },
-  { label: "농장 모드", ids: [
-    "farm_reading", "vocab_training", "farm_background", "farm_content",
+  { label: "농장별 학습", ids: [
+    "farm_vocab", "farm_reading", "farm_story", "farm_classic",
     "farm_grammar_wf", "farm_grammar_ss", "farm_grammar_pc", "farm_grammar_pos",
-    "farm_concept", "farm_logic", "farm_writing", "farm_choice_analysis"
+    "farm_background", "farm_concept", "farm_logic", "farm_choice_analysis"
   ]},
-  { label: "프로 모드", ids: ["pro_reading", "pro_vocab", "pro_background", "pro_logic", "pro_answer"] },
+  { label: "프로 모드", ids: ["pro_reading", "pro_vocab", "pro_background", "pro_logic"] },
 ];
 
 function AdminContentPage() {
@@ -205,7 +167,7 @@ function AdminContentPage() {
   const search = params.get("q") || "";
   const statusFilter = params.get("status") || "all";
   const typeFilter = params.get("type") || "all";
-  const farmFilter = params.get("farm") || "all";
+  const tabFilter = params.get("tab") || "daily";  // 일일/농장/프로 (기본 일일)
   const levelGroupFilter = params.get("levelGroup") || "all";
   const sortKey = params.get("sort") || "title";
   const sortDir = params.get("dir") || "asc";
@@ -271,10 +233,10 @@ function AdminContentPage() {
     URL.revokeObjectURL(url);
   };
 
-  /* DB 콘텐츠 + static 콘텐츠 병합 */
+  /* DB 콘텐츠 + static 콘텐츠 병합 + 학습 콘텐츠가 아닌 것 자동 제외 */
   const allContents = useMemo(() => {
     const dbItems = contents.map((c) => ({ ...c, source: "db" }));
-    return [...STATIC_CONTENTS, ...dbItems];
+    return [...STATIC_CONTENTS, ...dbItems].filter((c) => isManageableContent(c.types));
   }, [contents]);
 
   /* 통계 (요약 카드용) */
@@ -285,16 +247,13 @@ function AdminContentPage() {
     return { total, active, inactive };
   }, [allContents]);
 
-  /* 농장 탭별 카운트 */
-  const farmCounts = useMemo(() => {
-    const counts = { all: allContents.length };
-    for (const tab of FARM_TABS) {
-      if (tab.id === "all") continue;
-      counts[tab.id] = 0;
-    }
+  /* 탭별 카운트 (한 콘텐츠가 여러 탭에 동시 카운트될 수 있음 — 다중 분류 특성) */
+  const tabCounts = useMemo(() => {
+    const counts = {};
+    for (const tab of TABS) counts[tab.id] = 0;
     for (const c of allContents) {
-      const farm = FARM_TAB_BY_TYPE[c.type];
-      if (farm) counts[farm] = (counts[farm] || 0) + 1;
+      const tabs = getCategoryTabs(c.types);
+      for (const t of tabs) counts[t] = (counts[t] || 0) + 1;
     }
     return counts;
   }, [allContents]);
@@ -303,26 +262,20 @@ function AdminContentPage() {
     const term = search.trim().toLowerCase();
     let result = allContents.filter((content) => {
       if (statusFilter !== "all" && content.status !== statusFilter) return false;
-      // 1차 농장 탭
-      if (farmFilter !== "all") {
-        const farm = FARM_TAB_BY_TYPE[content.type];
-        if (farm !== farmFilter) return false;
-      }
+      // 탭 필터 — 콘텐츠의 카테고리 array 중 하나라도 현재 탭에 매핑되면 통과
+      const tabs = getCategoryTabs(content.types);
+      if (!tabs.includes(tabFilter)) return false;
       // 레벨 그룹
       if (levelGroupFilter !== "all") {
         if (getLevelGroup(content.levelId) !== levelGroupFilter) return false;
       }
-      // 세부 유형
+      // 드롭다운 옵션 (탭 종속) — 콘텐츠의 카테고리 array 중 하나라도 옵션값과 일치
       if (typeFilter !== "all") {
-        const MERGED_TYPES = {
-          CONTENT_PDF: ["CONTENT_PDF", "CONTENT_PDF_QUIZ"],
-          GRAMMAR_WORD_FORMATION: ["GRAMMAR_WORD_FORMATION", "MORPHEME_ANALYSIS"],
-        };
-        const allowed = MERGED_TYPES[typeFilter] || [typeFilter];
-        if (!allowed.includes(content.type)) return false;
+        if (!content.types.includes(typeFilter)) return false;
       }
       if (!term) return true;
-      return [content.title, content.type, content.status, content.levelId, content.chapterId]
+      const typesStr = (content.types || []).join(" ");
+      return [content.title, typesStr, content.status, content.levelId, content.chapterId]
         .filter(Boolean)
         .some((v) => v.toLowerCase().includes(term));
     });
@@ -337,7 +290,7 @@ function AdminContentPage() {
     };
     result = [...result].sort(cmp);
     return result;
-  }, [allContents, search, statusFilter, typeFilter, farmFilter, levelGroupFilter, sortKey, sortDir]);
+  }, [allContents, search, statusFilter, typeFilter, tabFilter, levelGroupFilter, sortKey, sortDir]);
 
   /* 페이지네이션 계산 */
   const totalPages = Math.max(1, Math.ceil(filteredContents.length / PER_PAGE));
@@ -434,7 +387,9 @@ function AdminContentPage() {
         moduleKey = resolveModuleKey(fileData.contentType, content.moduleKey);
       } else {
         const preview = await apiGet(`/v1/admin/content/${content.id}/preview`);
-        const ct = preview.contentType || preview.content_type || "";
+        // contentType은 이제 array (다중 분류). string으로 와도 wrap.
+        const ctRaw = preview.contentType ?? preview.content_type ?? "";
+        const ct = Array.isArray(ctRaw) ? ctRaw : (ctRaw ? [ctRaw] : []);
         const rawContent = preview.content || {};
         // rawContent는 표준 양식 inner JSON (contentId, title, payload: {...} 등 포함)
         // 일일학습/독해는 rawContent.payload에 실제 학습 데이터, 그 외는 rawContent 자체가 payload
@@ -541,17 +496,17 @@ function AdminContentPage() {
           </div>
         </div>
 
-        {/* 1차 농장 탭 */}
+        {/* 탭: 일일 학습 / 농장별 학습 / 프로 모드 */}
         <div className="admin-content-farm-tabs">
-          {FARM_TABS.map((tab) => {
-            const active = farmFilter === tab.id;
-            const count = farmCounts[tab.id] ?? 0;
+          {TABS.map((tab) => {
+            const active = tabFilter === tab.id;
+            const count = tabCounts[tab.id] ?? 0;
             return (
               <button
                 key={tab.id}
                 type="button"
                 className={`admin-content-farm-tab ${active ? "active" : ""}`}
-                onClick={() => updateParams({ farm: tab.id, page: "" })}
+                onClick={() => updateParams({ tab: tab.id, type: "", page: "" })}
               >
                 <span className="admin-content-farm-icon">{tab.icon}</span>
                 <span className="admin-content-farm-label">{tab.label}</span>
@@ -599,11 +554,9 @@ function AdminContentPage() {
                 className="admin-type-filter-select"
               >
                 <option value="all">세부 유형: 전체</option>
-                {Object.entries(TYPE_LABEL)
-                  .filter(([key]) => key === key.toUpperCase() && key !== "CONTENT_PDF_QUIZ" && key !== "MORPHEME_ANALYSIS")
-                  .map(([key, label]) => (
-                    <option key={key} value={key}>{label}</option>
-                  ))}
+                {(TAB_OPTIONS[tabFilter] || []).map((opt) => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
               </select>
             </div>
           </div>
@@ -659,10 +612,11 @@ function AdminContentPage() {
                 </tr>
               ) : null}
               {pagedContents.map((content) => {
-                const ts = getTypeShort(content.type);
+                const types = content.types || [];
+                const ts = getTypeShort(types[0] || content.type);
                 const day = extractDay(content.jsonPath);
                 const levelFull = LEVEL_LABEL_MAP[content.levelId] || content.levelId || "";
-                const typeFull = TYPE_LABEL[content.type] || content.type || "";
+                const typeFull = types.map((t) => TYPE_LABEL[t] || t).join(" · ");
                 return (
                   <tr key={content.id}>
                     <td className="admin-th-checkbox">
@@ -684,7 +638,7 @@ function AdminContentPage() {
                     </td>
                     <td>
                       <span className="type-pill admin-tooltip-wrap" data-group={ts.group}>
-                        {ts.label}
+                        {ts.label}{types.length > 1 ? ` +${types.length - 1}` : ""}
                         {typeFull && <span className="admin-tooltip">{typeFull}</span>}
                       </span>
                     </td>

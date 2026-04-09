@@ -58,11 +58,19 @@ class ContentCatalogController(
             version.contentJson,
             object : TypeReference<Map<String, Any>>() {}
         )
+        // categories(JSON array string) → List<String> 파싱. fallback: contentType 단일 값
+        val categories: List<String> = try {
+            val raw = content.categories
+            if (raw.isNullOrBlank()) listOf(content.contentType)
+            else objectMapper.readValue(raw, object : TypeReference<List<String>>() {})
+        } catch (e: Exception) {
+            listOf(content.contentType)
+        }
         return ApiResponse(
             success = true,
             data = ContentPreview(
                 contentId = content.id,
-                contentType = content.contentType,
+                contentType = categories,
                 moduleKey = content.moduleKey,
                 levelId = content.levelId,
                 chapterId = content.chapterId,

@@ -44,21 +44,33 @@ const TYPE_LABEL = {
   BACKGROUND_KNOWLEDGE_QUIZ: "배경지식 퀴즈",
 };
 
-/* contentType → 에디터 유형 매핑 */
+/* contentType (string OR array) → 에디터 유형 매핑.
+   array면 각 카테고리 중 하나라도 match되는 첫 결과 반환. */
 function resolveEditorType(ct) {
   if (!ct) return "worksheet";
-  const up = ct.toUpperCase();
-  if (up === "PRO_READING" || up === "DAILY_READING" || up === "READING_NONFICTION" || up === "READING_LITERATURE" || up.includes("READING_TRAINING")) return "reading";
-  if (up === "PRO_ANSWER" || up.includes("ANSWER_KEY")) return "answer";
-  if (up === "CHOICE_JUDGEMENT" || up.includes("CHOICE_JUDGEMENT")) return "choice";
-  if (up === "GRAMMAR_PHONEME_CHANGE" || up.includes("PHONEME_CHANGE")) return "phoneme";
-  if (up === "GRAMMAR_WORD_FORMATION" || up.includes("WORD_FORMATION")) return "wordformation";
-  if (up === "GRAMMAR_SENTENCE_STRUCTURE" || up.includes("SENTENCE_STRUCTURE")) return "sentence";
-  if (up === "CONTENT_PDF" || up === "CONTENT_PDF_QUIZ" || up.includes("CONTENT_PDF")) return "contentpdf";
-  if (up === "PRO_BACKGROUND" || up === "BACKGROUND_KNOWLEDGE" || up === "BACKGROUND_KNOWLEDGE_QUIZ" || up === "PRO_LOGIC" || up.includes("BACKGROUND")) return "background";
-  // DAILY_QUIZ는 객체형 passage(paragraphs/tokens)와 propositions 등 복합 구조라
-  // 비주얼 폼이 처리할 수 없음 → JSON 전용 모드로 강제
-  if (up === "DAILY_QUIZ" || up.includes("DAILY_QUIZ")) return "json-only";
+  const arr = Array.isArray(ct) ? ct : [ct];
+  // 우선순위: json-only > reading > 기타. DAILY_QUIZ가 있으면 json-only
+  for (const v of arr) {
+    if (typeof v !== "string") continue;
+    const up = v.toUpperCase();
+    if (up === "DAILY_QUIZ" || up.includes("DAILY_QUIZ")) return "json-only";
+  }
+  for (const v of arr) {
+    if (typeof v !== "string") continue;
+    const up = v.toUpperCase();
+    if (up === "PRO_READING" || up === "DAILY_READING" || up === "READING" ||
+        up === "READING_NONFICTION" || up === "READING_LITERATURE" || up === "STORY" || up === "CLASSIC" ||
+        up.includes("READING_TRAINING")) return "reading";
+    if (up === "PRO_ANSWER" || up.includes("ANSWER_KEY")) return "answer";
+    if (up === "CHOICE_ANALYSIS" || up === "CHOICE_JUDGEMENT") return "choice";
+    if (up === "GRAMMAR_PHONEME_CHANGE" || up.includes("PHONEME_CHANGE")) return "phoneme";
+    if (up === "GRAMMAR_WORD_FORMATION" || up.includes("WORD_FORMATION")) return "wordformation";
+    if (up === "GRAMMAR_SENTENCE_STRUCTURE" || up.includes("SENTENCE_STRUCTURE")) return "sentence";
+    if (up === "STUDY_CONTENT" || up === "CONTENT_PDF" || up === "CONTENT_PDF_QUIZ" || up.includes("CONTENT_PDF")) return "contentpdf";
+    if (up === "PRO_BACKGROUND" || up === "BACKGROUND" || up === "BACKGROUND_KNOWLEDGE" ||
+        up === "BACKGROUND_KNOWLEDGE_QUIZ" || up === "PRO_LOGIC" || up === "LOGIC" ||
+        up.includes("BACKGROUND")) return "background";
+  }
   return "worksheet";
 }
 
@@ -178,7 +190,11 @@ export default function EditorShell({ contentId, staticInfo }) {
   if (error && !content) return <div className="ce-status error">{error}</div>;
 
   const editorType = resolveEditorType(meta?.contentType);
-  const typeLabel = TYPE_LABEL[meta?.contentType?.toUpperCase()] || meta?.contentType || "";
+  // contentType이 array면 라벨도 배열 처리 — " · "로 join
+  const ctArrayDisplay = Array.isArray(meta?.contentType)
+    ? meta.contentType
+    : (meta?.contentType ? [meta.contentType] : []);
+  const typeLabel = ctArrayDisplay.map((c) => TYPE_LABEL[c] || c).join(" · ") || "";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 60px)" }}>
@@ -261,8 +277,12 @@ export default function EditorShell({ contentId, staticInfo }) {
           {metaOpen && (
             <div className="ce-meta-grid">
               <div className="ce-meta-field">
-                <label>콘텐츠 유형 (contentType)</label>
-                <div className="ce-meta-readonly">{meta.contentType || "-"}</div>
+                <label>콘텐츠 유형 (contentType array)</label>
+                <div className="ce-meta-readonly">
+                  {Array.isArray(meta.contentType)
+                    ? (meta.contentType.length > 0 ? meta.contentType.join(", ") : "-")
+                    : (meta.contentType || "-")}
+                </div>
               </div>
               <div className="ce-meta-field">
                 <label>레벨 (levelId)</label>

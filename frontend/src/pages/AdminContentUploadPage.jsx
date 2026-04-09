@@ -30,43 +30,53 @@ const STATIC_CONTENTS = [
   })),
 ];
 
+/* MODULE_GROUPS — 카테고리별 표준양식 선택용.
+   contentType은 array (다중 분류). 사용자가 다른 카테고리를 추가하려면 JSON에서 직접 수정.
+   - 일일 독해 → ["DAILY_READING", "READING"] (자동으로 농장 독해에도 노출)
+   - 프로 모드 → ["PRO_READING", "READING"] (자동으로 농장 독해에도 노출)
+   - 글쓰기/내용숙지/프로답안 제외 (다른 메뉴에서 관리) */
 const MODULE_GROUPS = [
   {
     label: "일일 학습",
     items: [
-      { value: "dailyQuiz:quiz:worksheet_quiz", label: "일일 퀴즈", contentType: "DAILY_QUIZ" },
-      { value: "dailyReading:training:reading_training", label: "일일 독해", contentType: "DAILY_READING" },
+      { value: "dailyQuiz:quiz:daily_quiz", label: "일일 퀴즈", contentType: ["DAILY_QUIZ"] },
+      { value: "dailyReading:training:reading_training", label: "일일 독해", contentType: ["DAILY_READING", "READING"] },
     ],
   },
   {
-    label: "농장 모드",
+    label: "농장별 학습",
     items: [
-      { value: "farm:vocab:worksheet_quiz", label: "어휘 학습", contentType: "VOCAB_BASIC" },
-      { value: "farm:reading:reading_training", label: "독해 훈련", contentType: "READING_NONFICTION" },
-      { value: "farm:story:reading_training", label: "이야기 농장", contentType: "READING_LITERATURE" },
-      { value: "farm:classic:reading_training", label: "고전 농장", contentType: "READING_LITERATURE" },
-      { value: "farm:grammar_wf:word_formation", label: "문법 - 단어 형성", contentType: "GRAMMAR_WORD_FORMATION" },
-      { value: "farm:grammar_ss:sentence_structure", label: "문법 - 문장 짜임", contentType: "GRAMMAR_SENTENCE_STRUCTURE" },
-      { value: "farm:grammar_pc:phoneme_change", label: "문법 - 음운 변동", contentType: "GRAMMAR_PHONEME_CHANGE" },
-      { value: "farm:grammar_pos:worksheet_quiz", label: "문법 - 품사", contentType: "GRAMMAR_POS" },
-      { value: "farm:background:worksheet_quiz", label: "배경지식 학습", contentType: "BACKGROUND_KNOWLEDGE_QUIZ" },
-      { value: "farm:concept:worksheet_quiz", label: "국어 개념 농장", contentType: "LANGUAGE_CONCEPT_QUIZ" },
-      { value: "farm:logic:logic_reasoning", label: "논리사고력 학습", contentType: "LOGIC_REASONING_QUIZ" },
-      { value: "farm:writing:worksheet_quiz", label: "서술형 농장", contentType: "WRITING_DESCRIPTIVE" },
-      { value: "farm:choice:choice_analysis", label: "선택지 분석 농장", contentType: "CHOICE_ANALYSIS" },
+      { value: "farm:vocab:worksheet_quiz", label: "어휘", contentType: ["VOCAB"] },
+      { value: "farm:reading:reading_training", label: "독해", contentType: ["READING"] },
+      { value: "farm:story:reading_training", label: "이야기 농장", contentType: ["READING", "STORY"] },
+      { value: "farm:classic:reading_training", label: "고전 농장", contentType: ["READING", "CLASSIC"] },
+      { value: "farm:grammar_wf:word_formation", label: "문법 - 단어 형성", contentType: ["GRAMMAR_WORD_FORMATION"] },
+      { value: "farm:grammar_ss:sentence_structure", label: "문법 - 문장 짜임", contentType: ["GRAMMAR_SENTENCE_STRUCTURE"] },
+      { value: "farm:grammar_pc:phoneme_change", label: "문법 - 음운 변동", contentType: ["GRAMMAR_PHONEME_CHANGE"] },
+      { value: "farm:grammar_pos:worksheet_quiz", label: "문법 - 품사", contentType: ["GRAMMAR_POS"] },
+      { value: "farm:background:worksheet_quiz", label: "배경지식", contentType: ["BACKGROUND"] },
+      { value: "farm:concept:worksheet_quiz", label: "국어 개념", contentType: ["CONCEPT"] },
+      { value: "farm:logic:logic_reasoning", label: "논리사고력", contentType: ["LOGIC"] },
+      { value: "farm:choice:choice_analysis", label: "선택지 분석", contentType: ["CHOICE_ANALYSIS"] },
     ],
   },
   {
     label: "프로 모드",
     items: [
-      { value: "pro:reading:reading_training", label: "프로 독해", contentType: "PRO_READING" },
-      { value: "pro:vocab:worksheet_quiz", label: "프로 어휘", contentType: "PRO_VOCAB" },
-      { value: "pro:background:worksheet_quiz", label: "프로 배경지식", contentType: "PRO_BACKGROUND" },
-      { value: "pro:logic:logic_reasoning", label: "프로 논리사고력", contentType: "PRO_LOGIC" },
-      { value: "pro:answer:worksheet_quiz", label: "프로 모범답안/정답해설", contentType: "PRO_ANSWER" },
+      { value: "pro:reading:reading_training", label: "프로 독해", contentType: ["PRO_READING", "READING"] },
+      { value: "pro:vocab:worksheet_quiz", label: "프로 어휘", contentType: ["PRO_VOCAB", "VOCAB"] },
+      { value: "pro:background:worksheet_quiz", label: "프로 배경지식", contentType: ["PRO_BACKGROUND", "BACKGROUND"] },
+      { value: "pro:logic:logic_reasoning", label: "프로 논리사고력", contentType: ["PRO_LOGIC", "LOGIC"] },
     ],
   },
 ];
+
+/** contentType을 array로 정규화 (string이면 wrap, 이미 array면 그대로) */
+const normalizeContentTypeToArray = (raw) => {
+  if (Array.isArray(raw)) return raw.filter((v) => typeof v === "string" && v.length > 0);
+  if (typeof raw === "string" && raw.length > 0) return [raw];
+  return [];
+};
 
 const extractModuleKey = (v) => v.split(":").pop();
 
@@ -298,9 +308,14 @@ function AdminContentUploadPage() {
         setPreviewError("contentType과 payload가 포함된 JSON이어야 합니다.");
         return;
       }
+      const ctArray = normalizeContentTypeToArray(parsed.contentType);
+      if (ctArray.length === 0) {
+        setPreviewError("contentType이 비어있습니다 (string 또는 array).");
+        return;
+      }
       setImportLoading(true);
       await apiPost("/v1/admin/content/import", {
-        contentType: parsed.contentType,
+        contentType: ctArray,
         levelId: parsed.levelId || undefined,
         chapterId: parsed.chapterId || undefined,
         area: parsed.area || undefined,
@@ -342,14 +357,14 @@ function AdminContentUploadPage() {
       for (let i = 0; i < batchFiles.length; i++) {
         const text = await batchFiles[i].file.text();
         const parsed = JSON.parse(text);
-        const ct = parsed.contentType || parsed.content_type;
-        if (!ct) {
-          setBatchError(`${batchFiles[i].name}: contentType 누락`);
+        const ctArray = normalizeContentTypeToArray(parsed.contentType || parsed.content_type);
+        if (ctArray.length === 0) {
+          setBatchError(`${batchFiles[i].name}: contentType 누락 또는 비어있음 (string 또는 array)`);
           setBatchLoading(false);
           return;
         }
         items.push({
-          contentType: ct,
+          contentType: ctArray,
           levelId: parsed.levelId || undefined,
           area: parsed.area || undefined,
           subArea: parsed.subArea || undefined,
@@ -425,9 +440,14 @@ function AdminContentUploadPage() {
         setPreviewError("contentType과 payload가 포함된 JSON이어야 합니다.");
         return;
       }
+      const ctArray = normalizeContentTypeToArray(parsed.contentType);
+      if (ctArray.length === 0) {
+        setPreviewError("contentType이 비어있습니다 (string 또는 array).");
+        return;
+      }
       setUpdateLoading(true);
       await apiPut(`/v1/admin/content/${editId}`, {
-        contentType: parsed.contentType,
+        contentType: ctArray,
         levelId: parsed.levelId || undefined,
         chapterId: parsed.chapterId || undefined,
         area: parsed.area || undefined,

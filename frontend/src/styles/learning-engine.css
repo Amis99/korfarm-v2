@@ -610,20 +610,24 @@
 
 .worksheet-passage-box {
   display: block;
-  background: rgba(109, 164, 117, 0.08);
-  border: 1.5px solid rgba(75, 61, 54, 0.3);
-  border-radius: 8px;
-  padding: 10px 12px;
+  background: transparent;
+  border: 1.5px solid rgba(60, 45, 35, 0.65);
+  border-radius: 2px;
+  padding: 12px 14px;
   margin-bottom: 8px;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #4b3d36;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #2c2418;
   white-space: pre-wrap;
+  /* 지문 내부 스크롤 절대 금지 */
+  overflow: visible;
+  max-height: none;
+  height: auto;
 }
 
 .worksheet-item.active .worksheet-passage-box {
-  background: rgba(109, 164, 117, 0.12);
-  border-color: rgba(75, 61, 54, 0.4);
+  background: transparent;
+  border-color: rgba(60, 45, 35, 0.75);
 }
 
 .worksheet-item {
@@ -664,14 +668,15 @@
   padding: 0;
 }
 
-/* 풀이 완료된 문제의 정답 표시 — 빨간 작은 글씨 */
+/* 풀이 완료된 문제의 정답 표시 — Gaegu 빨간 첨삭 */
 .worksheet-item-answer {
   display: block;
   margin-top: 4px;
-  font-size: 11px;
-  font-weight: 600;
+  font-family: "Gaegu", "Noto Sans KR", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
   color: #c0392b;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 @media (max-width: 768px) {
   /* 모바일에서도 보조 정보로 작게 유지 (통합 사이즈 규칙에서 제외) */
@@ -2277,12 +2282,26 @@ mark.highlight {
   .question-choice { padding: 12px 16px; }
 
   /* ── 모달 내 글자: 레벨별 통합 사이즈 대신 22px로 통일 (모바일) ── */
-  /* 발문(stem/prompt)과 선지(option)는 모달 안에서 22px 고정 */
+  /* 발문(stem/prompt)과 선지(option/choice)는 모달 안에서 22px 고정.
+     레벨별 통합 사이즈(38/36/34/32)보다 specificity가 높아야 하므로 !important. */
   .question-modal-stem,
   .question-modal-prompt,
-  .question-modal-option {
+  .question-modal-option,
+  .question-modal .question-choice,
+  .question-modal .question-choice span,
+  .question-modal-choices .question-choice,
+  .question-modal-choices .question-choice span {
     font-size: 22px !important;
     line-height: 1.5 !important;
+  }
+  .question-modal .question-choice {
+    padding: 12px 16px !important;
+  }
+  /* 모바일 모달 — 고정 너비 (문제마다 크기 변하지 않도록) */
+  .question-modal {
+    width: min(92vw, 360px) !important;
+    max-width: min(92vw, 360px) !important;
+    min-width: min(92vw, 360px) !important;
   }
 }
 
@@ -2290,202 +2309,396 @@ mark.highlight {
 /* 누적형(C형) 문제 카드 — 모든 학습 모듈 공통    */
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* 누적형 시험지 스타일 (cum-* )                                  */
+/* — 종이 배경 위에 직접 텍스트와 박스가 올라가는 시험지 컨셉            */
+/* — 카드 컨테이너 / 그림자 / 둥근 모서리 X                        */
+/* — 정답·해설은 Gaegu 손글씨 + 빨간 첨삭                          */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
 .cum-stack {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px 8px 32px;
+  align-items: stretch;
+  gap: 28px;
+  padding: 12px 4px 40px;
   overflow-y: auto;
   flex: 1;
+  min-width: 0;
   min-height: 0;
+  /* 단단(single column) 강제 */
+  column-count: 1;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.cum-stack > .cum-card {
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .cum-card {
-  background: rgba(255, 252, 246, 0.94);
-  border: 2px solid rgba(75, 61, 54, 0.18);
-  border-radius: 12px;
-  padding: 18px 22px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  /* 카드 컨테이너 제거 — 종이 배경 위에 직접 노출 */
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0 4px;
+  box-shadow: none;
+  position: relative;
+  /* 카드가 부모(cum-stack) 폭을 100% 채우고 자식 박스가 그 폭 안에서 wrap 되도록 */
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
-.cum-card.active {
-  border-color: #f06c24;
-  box-shadow: 0 4px 18px rgba(240, 108, 36, 0.18);
+/* 활성 문제: 좌측에 빨간 ▶ 표시로 가볍게 알림 */
+.cum-card.active::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  background: #c0392b;
+  border-radius: 2px;
 }
 
-.cum-card.completed.correct {
-  border-color: #4e8a60;
-  background: rgba(230, 245, 234, 0.94);
-}
-
+.cum-card.completed.correct,
 .cum-card.completed.wrong {
-  border-color: #c75a5a;
-  background: rgba(250, 235, 232, 0.94);
+  background: transparent;
+  border: none;
 }
 
 .cum-card-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 13px;
-  color: #6a5040;
-  font-weight: 700;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #5a4b44;
+  font-weight: 800;
 }
 
 .cum-card-num {
-  background: rgba(240, 108, 36, 0.12);
-  color: #b04510;
-  padding: 3px 10px;
-  border-radius: 999px;
+  background: transparent;
+  color: #5a4b44;
+  padding: 0;
+  border-radius: 0;
+  font-size: 17px;
+  font-weight: 800;
 }
 
+/* 정/오답 마크 — 시험지 채점 PNG 이미지로 표시 (사이즈 2배) */
 .cum-card-mark {
-  font-size: 13px;
-  font-weight: 800;
-  padding: 3px 12px;
-  border-radius: 999px;
+  display: inline-block;
+  width: 76px;
+  height: 76px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent center / contain no-repeat;
+  text-indent: -9999px;
+  overflow: hidden;
+  vertical-align: middle;
 }
 
 .cum-card-mark.correct {
-  background: #4e8a60;
-  color: white;
+  background-image: url("/정답%20동그라미.png");
 }
 
 .cum-card-mark.wrong {
-  background: #c75a5a;
-  color: white;
+  background-image: url("/오답%20꺾은선.png");
 }
 
+/* ── 시험지 텍스트 통합 사이즈: PC 16px / 1.75, 모바일 통합 규칙 ──
+   stem, passage, prompt, boki, choice 모두 동일 폰트 사이즈로 통일 */
 .cum-card-stem {
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.75;
   color: #2c2418;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
   word-break: keep-all;
+  font-weight: 700;
+  overflow: visible;
 }
 
+/* 시험지 본문 박스 (passage) — 내부 투명 + 또렷한 테두리.
+   박스는 내용에 맞춰 세로로만 늘어남. 가로는 부모 폭 100%로 고정되고 텍스트는 wrap. */
+.cum-card-passage {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  background: transparent;
+  border: 1.5px solid rgba(60, 45, 35, 0.65);
+  border-radius: 2px;
+  padding: 14px 16px;
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #2c2418;
+  white-space: pre-wrap;
+  /* 한국어 어절 유지하되 박스 폭 초과 시 강제 줄바꿈 */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  /* 지문 내부 스크롤 절대 금지 — 박스가 내용에 맞춰 세로로 늘어남 */
+  overflow: visible;
+  max-height: none;
+  height: auto;
+}
+
+/* 보충 prompt 박스 */
+.cum-card-prompt {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  background: transparent;
+  border: 1.5px solid rgba(60, 45, 35, 0.65);
+  border-radius: 2px;
+  padding: 14px 16px;
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #2c2418;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  overflow: visible;
+  max-height: none;
+  height: auto;
+}
+
+/* <보기> 박스 */
+.cum-card-boki {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  background: transparent;
+  border: 1.8px solid rgba(60, 45, 35, 0.75);
+  border-radius: 2px;
+  padding: 20px 16px 14px;
+  margin: 16px 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #2c2418;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  overflow: visible;
+  max-height: none;
+  height: auto;
+}
+
+/* 시험지 박스 안의 마크다운/리치텍스트 — 부모 폰트 사이즈를 강제 상속 + 박스 폭 안에서 wrap */
+.cum-card-stem .passage-markdown,
+.cum-card-stem .passage-markdown p,
+.cum-card-passage .passage-markdown,
+.cum-card-passage .passage-markdown p,
+.cum-card-prompt .passage-markdown,
+.cum-card-prompt .passage-markdown p,
+.cum-card-boki .passage-markdown,
+.cum-card-boki .passage-markdown p {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  margin: 0 0 0.5em;
+  overflow: visible !important;
+  max-height: none !important;
+  /* 자식 너비 0으로 떨어져 부모 안에서 wrap 가능 */
+  min-width: 0;
+  max-width: 100%;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.cum-card-stem .passage-markdown p:last-child,
+.cum-card-passage .passage-markdown p:last-child,
+.cum-card-prompt .passage-markdown p:last-child,
+.cum-card-boki .passage-markdown p:last-child {
+  margin-bottom: 0;
+}
+
+.cum-card-boki::before {
+  content: "<보기>";
+  position: absolute;
+  top: -10px;
+  left: 14px;
+  background: var(--engine-bg, #fbf3e3);
+  padding: 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2c2418;
+}
+
+/* 풀이 완료 후 시험지에 누적되는 선택지 리스트 — 카드 X, 줄글 */
 .cum-card-choices {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
+  margin-top: 8px;
+  padding-left: 6px;
 }
 
 .cum-choice {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: white;
-  border: 1.5px solid rgba(75, 61, 54, 0.2);
-  border-radius: 8px;
-  font-size: 15px;
-  line-height: 1.5;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 4px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font-size: 16px;
+  line-height: 1.75;
   color: #2c2418;
   text-align: left;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  cursor: default;
+  position: relative;
 }
 
 .cum-choice:hover:not(:disabled) {
-  background: #fff7ee;
-  border-color: #f0a263;
-  transform: translateX(2px);
+  background: transparent;
+  border: none;
+  transform: none;
 }
 
 .cum-choice:disabled {
   cursor: default;
 }
 
+/* 정답 선택지 — 시험지 채점 PNG 이미지 (정답 동그라미) */
 .cum-choice.is-correct {
-  background: #d8f0dd;
-  border-color: #4e8a60;
-  font-weight: 700;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  color: #2c2418;
 }
 
+.cum-choice.is-correct::after {
+  content: "";
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin-left: 8px;
+  background: url("/정답%20동그라미.png") center / contain no-repeat;
+  vertical-align: middle;
+}
+
+/* 학생이 잘못 고른 선택지 — 시험지 채점 PNG 이미지 (오답 꺾은선) */
 .cum-choice.is-wrong {
-  background: #f8dad6;
-  border-color: #c75a5a;
+  background: transparent;
+  border: none;
+  color: #2c2418;
+}
+
+.cum-choice.is-wrong::after {
+  content: "";
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin-left: 8px;
+  background: url("/오답%20꺾은선.png") center / contain no-repeat;
+  vertical-align: middle;
 }
 
 .cum-choice-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: #efe7df;
-  color: #6a5040;
-  font-weight: 700;
-  font-size: 13px;
+  display: inline;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+  color: #2c2418;
+  font-weight: 600;
+  font-size: 16px;
   flex-shrink: 0;
+  padding: 0;
 }
 
-.cum-choice.is-correct .cum-choice-num {
-  background: #4e8a60;
-  color: white;
-}
-
+.cum-choice.is-correct .cum-choice-num,
 .cum-choice.is-wrong .cum-choice-num {
-  background: #c75a5a;
-  color: white;
+  background: transparent;
+  color: #3b302a;
 }
 
 .cum-choice-text {
   flex: 1;
 }
 
+/* 첨삭 태그 (정답/선택) — 카드 X, 단순 텍스트 X (이미 ::after로 처리) */
 .cum-choice-tag {
-  font-size: 11px;
-  font-weight: 800;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: #4e8a60;
-  color: white;
-  flex-shrink: 0;
+  display: none;
 }
 
-.cum-choice-tag.wrong {
-  background: #c75a5a;
-}
-
+/* 해설 — 빨간 첨삭 손글씨 */
 .cum-card-explanation {
-  margin-top: 14px;
-  padding: 12px 14px;
-  background: rgba(240, 108, 36, 0.06);
-  border-left: 3px solid #f06c24;
-  border-radius: 6px;
-  font-size: 14px;
-  line-height: 1.65;
-  color: #4a3a2a;
+  margin-top: 6px;
+  padding: 4px 6px 4px 18px;
+  background: transparent;
+  border-left: none;
+  border-radius: 0;
+  font-family: "Gaegu", "Noto Sans KR", sans-serif;
+  font-size: 19px;
+  line-height: 1.55;
+  color: #c0392b;
+  word-break: keep-all;
+  position: relative;
+}
+
+.cum-card-explanation::before {
+  content: "→";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  color: #c0392b;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .cum-card-explanation-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 800;
-  color: #b04510;
-  margin-bottom: 4px;
-  letter-spacing: 0.04em;
+  display: none;
 }
 
-/* 모바일: 누적 카드 사이즈 키움 */
+/* 빨간 첨삭 손글씨 공통 클래스 — 다른 곳에서도 재사용 */
+.worksheet-handwriting {
+  font-family: "Gaegu", "Noto Sans KR", sans-serif;
+  color: #c0392b;
+  font-size: 19px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+/* ── 모바일: cum-card 자손 글자 크기 강제 통일 ──
+   .cum-card 안의 모든 자손 텍스트가 22px / line-height 1.75로 통일.
+   stem/passage/prompt/보기/선택지/마크다운 자식까지 광범위 강제.
+   예외: 첨삭(.cum-card-explanation, .worksheet-handwriting)만 26px,
+        마크(.cum-card-mark)는 background-image 사이즈로 별도 지정 */
 @media (max-width: 768px) {
-  .cum-card-stem,
-  .cum-choice,
-  .cum-choice-text {
+  .cum-card,
+  .cum-card * {
     font-size: 22px !important;
-    line-height: 1.5 !important;
+    line-height: 1.75 !important;
   }
-  .cum-card-explanation {
-    font-size: 18px !important;
+  /* 첨삭 손글씨 — Gaegu 26px */
+  .cum-card .cum-card-explanation,
+  .cum-card .cum-card-explanation *,
+  .cum-card .worksheet-handwriting {
+    font-size: 26px !important;
+    line-height: 1.55 !important;
   }
-  .cum-choice-num {
-    width: 32px;
-    height: 32px;
-    font-size: 16px;
+  /* 마크 — 텍스트는 -9999px로 숨겨져 폰트 사이즈 무관, 박스 사이즈만 지정 */
+  .cum-card .cum-card-mark {
+    width: 96px !important;
+    height: 96px !important;
+  }
+  .cum-card .cum-choice.is-correct::after,
+  .cum-card .cum-choice.is-wrong::after {
+    width: 80px !important;
+    height: 80px !important;
   }
 }
 
@@ -2496,52 +2709,66 @@ mark.highlight {
 .ca-stack {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px 8px 32px;
+  gap: 28px;
+  padding: 12px 4px 40px;
   overflow-y: auto;
   flex: 1;
   min-height: 0;
 }
 
 .ca-stack-item {
-  background: rgba(255, 252, 246, 0.96);
-  border: 2px solid rgba(75, 61, 54, 0.18);
-  border-radius: 12px;
-  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0 4px;
+  position: relative;
 }
 
-.ca-stack-item.active {
-  border-color: #f06c24;
-  box-shadow: 0 4px 18px rgba(240, 108, 36, 0.18);
+.ca-stack-item.active::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  background: #c0392b;
+  border-radius: 2px;
 }
 
 .ca-stack-item.completed {
-  background: rgba(230, 245, 234, 0.94);
-  border-color: #4e8a60;
+  background: transparent;
+  border: none;
 }
 
 .ca-stack-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #6a5040;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 17px;
+  font-weight: 800;
+  color: #5a4b44;
 }
 
 .ca-stack-num {
-  background: rgba(240, 108, 36, 0.12);
-  color: #b04510;
-  padding: 3px 10px;
-  border-radius: 999px;
+  background: transparent;
+  color: #5a4b44;
+  padding: 0;
+  border-radius: 0;
+  font-size: 17px;
+  font-weight: 800;
 }
 
 .ca-stack-mark.correct {
-  background: #4e8a60;
-  color: #fff;
-  padding: 3px 12px;
-  border-radius: 999px;
+  display: inline-block;
+  width: 76px;
+  height: 76px;
+  padding: 0;
+  border-radius: 0;
+  background: url("/정답%20동그라미.png") center / contain no-repeat;
+  text-indent: -9999px;
+  overflow: hidden;
+  vertical-align: middle;
 }
 
 .ca-completed-summary {
@@ -2569,12 +2796,13 @@ mark.highlight {
 
 .ca-stem {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   color: #2c2418;
-  padding: 10px 14px;
-  background: rgba(240, 108, 36, 0.06);
-  border-left: 3px solid #f06c24;
-  border-radius: 6px;
+  padding: 0;
+  background: transparent;
+  border-left: none;
+  border-radius: 0;
+  margin-bottom: 8px;
 }
 
 .ca-progress-bar {
@@ -2609,10 +2837,10 @@ mark.highlight {
 
 .ca-passage-pane,
 .ca-choices-pane {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(75, 61, 54, 0.15);
-  border-radius: 8px;
-  padding: 12px 14px;
+  background: transparent;
+  border: 1.5px solid rgba(60, 45, 35, 0.65);
+  border-radius: 2px;
+  padding: 14px 16px;
 }
 
 .ca-passage-label {
@@ -2708,10 +2936,9 @@ mark.highlight {
 }
 
 .ca-choice.passed {
-  background: #d8f0dd;
-  border-color: #4e8a60;
+  background: rgba(255, 252, 246, 0.4);
+  border-color: rgba(75, 61, 54, 0.3);
   cursor: default;
-  opacity: 0.7;
 }
 
 .ca-choice-num {
@@ -2734,8 +2961,8 @@ mark.highlight {
 }
 
 .ca-choice.passed .ca-choice-num {
-  background: #4e8a60;
-  color: #fff;
+  background: transparent;
+  color: #5a4b44;
 }
 
 .ca-choice-text {
@@ -2748,8 +2975,13 @@ mark.highlight {
 }
 
 .ca-choice-mark.passed {
-  color: #4e8a60;
-  font-size: 18px;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: url("/정답%20동그라미.png") center / contain no-repeat;
+  text-indent: -9999px;
+  overflow: hidden;
+  vertical-align: middle;
 }
 
 .ca-choice-mark.active {
@@ -2978,14 +3210,27 @@ mark.highlight {
   min-height: 0;
 }
 
-/* 활성 카드 — 현재 진행 중인 단어/문장 */
+/* 활성 카드 — 현재 진행 중인 단어/문장 (시험지 컨셉: 카드 컨테이너 X) */
 .phoneme-active-card,
 .morpheme-active-card {
-  background: rgba(255, 252, 246, 0.96);
-  border: 2px solid #f06c24;
-  border-radius: 12px;
-  padding: 18px 22px;
-  box-shadow: 0 4px 18px rgba(240, 108, 36, 0.18);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0 4px;
+  box-shadow: none;
+  position: relative;
+}
+
+.phoneme-active-card::before,
+.morpheme-active-card::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  background: #c0392b;
+  border-radius: 2px;
 }
 
 /* 완료된 단어 카드 (PhonemeChange) */
@@ -3046,8 +3291,14 @@ mark.highlight {
   display: none !important;
 }
 
-/* 인쇄 스타일 */
+/* 인쇄 스타일 — 화면에 보이는 그대로 인쇄 + 마지막에 정답해설 페이지 */
 @media print {
+  /* A4 기본 페이지 */
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
   /* 인쇄 전용 영역 표시 */
   .print-only {
     display: block !important;
@@ -3062,6 +3313,35 @@ mark.highlight {
   .cpdf-exhausted-card,
   .engine-footer {
     display: none !important;
+  }
+
+  /* 화면 카드(.cum-card)에서 정답·해설·첨삭 마크는 인쇄 시 숨김 */
+  .cum-card-explanation,
+  .cum-card-mark,
+  .cum-choice.is-correct::after,
+  .cum-choice.is-wrong::after {
+    display: none !important;
+  }
+
+  /* 한 문제 카드 전체가 한 페이지 안에 들어가도록 break-inside avoid */
+  .cum-card,
+  .cum-card-passage,
+  .cum-card-prompt,
+  .cum-card-boki {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  .cum-card {
+    margin-bottom: 8mm;
+  }
+
+  /* cum-stack: 인쇄 시 단단/스크롤 해제 */
+  .cum-stack {
+    display: block !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 0 !important;
   }
 
   /* 헤더: 제목만 표시 */
@@ -3138,10 +3418,52 @@ mark.highlight {
     background-color: #fff !important;
   }
 
-  /* 인쇄 전용 문제 영역 - 각 그룹마다 새 페이지 */
-  .print-page-group {
+  /* 인쇄 전용 정답·해설 페이지 — 화면 시험지 다음에 새 페이지로 출력 */
+  .print-answer-page {
     page-break-before: always;
     break-before: page;
+    padding: 0;
+  }
+
+  .print-answer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8mm;
+  }
+
+  .print-answer-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4mm;
+  }
+
+  .print-answer-num {
+    font-weight: 800;
+    font-size: 13px;
+    color: #222;
+    margin-bottom: 2mm;
+  }
+
+  .print-answer-correct {
+    font-size: 12px;
+    color: #c0392b;
+    font-weight: 700;
+    margin-bottom: 2mm;
+  }
+
+  .print-answer-explanation {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* 옛 print-page-group은 더 이상 사용 안 함 */
+  .print-page-group {
+    display: none !important;
   }
 
   .print-title {
@@ -3676,4 +3998,155 @@ mark.highlight {
   border: 2px solid #e07a5f;
   border-radius: 2px;
   pointer-events: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* QuestionModal inline 모드 — 시험지 흐름 안에 자연스럽게 누적   */
+/* — fixed/portal 없음, 카드의 마지막 자식으로 block 렌더          */
+/* — 시험지 텍스트를 가리지 않고 활성 카드 바로 아래에 위치           */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.question-modal-inline {
+  display: block;
+  margin: 12px 0 4px;
+  position: static;
+  pointer-events: auto;
+}
+
+.question-modal-inline .question-modal {
+  position: static;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  transform: none !important;
+  min-height: 0;
+  /* 노란 메모지 컨셉은 유지하되, 박스가 카드 폭에 맞춰 펼쳐짐 */
+  background: #fff7c8;
+  border: 1.5px solid rgba(60, 45, 35, 0.55);
+  border-radius: 4px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.question-modal-inline .question-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  cursor: default;
+}
+
+.question-modal-inline .question-modal-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #5a4b44;
+}
+
+.question-modal-inline .question-modal-drag-hint,
+.question-modal-inline .question-close {
+  display: none;
+}
+
+.question-modal-inline .question-modal-body {
+  display: block;
+}
+
+.question-modal-inline .question-modal-prompt {
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #2c2418;
+  font-weight: 600;
+}
+
+.question-modal-inline .question-modal-choices {
+  display: grid;
+  gap: 8px;
+  position: relative;
+}
+
+.question-modal-inline .question-choice {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1.5px solid rgba(60, 45, 35, 0.45);
+  border-radius: 2px;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  color: #2c2418;
+  font-weight: 500;
+}
+
+.question-modal-inline .question-choice:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(60, 45, 35, 0.7);
+}
+
+.question-modal-inline .question-choice:disabled {
+  cursor: default;
+}
+
+.question-modal-inline .question-choice.flash-correct {
+  background: rgba(196, 242, 210, 0.95);
+  border-color: rgba(72, 156, 98, 0.9);
+}
+
+.question-modal-inline .question-choice.flash-wrong {
+  background: rgba(255, 210, 205, 0.95);
+  border-color: rgba(213, 78, 64, 0.9);
+}
+
+.question-modal-inline .question-modal-mark {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .question-modal-inline .question-modal {
+    padding: 16px 18px;
+  }
+  .question-modal-inline .question-modal-header h3 {
+    font-size: 18px;
+  }
+  .question-modal-inline .question-modal-prompt {
+    font-size: 22px;
+    line-height: 1.75;
+  }
+  .question-modal-inline .question-choice,
+  .question-modal-inline .question-choice span {
+    font-size: 22px !important;
+    line-height: 1.5 !important;
+    padding: 14px 18px;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* 모든 학습 모듈 공통 규칙: 지문 박스 내부 스크롤 절대 금지       */
+/* — 지문/보기/passage 류 박스는 내용에 맞춰 늘어나야 한다.        */
+/* — 박스 안에 스크롤이 생기면 시험지 컨셉이 무너진다.             */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.cum-card-passage,
+.cum-card-prompt,
+.cum-card-boki,
+.worksheet-passage-box,
+.ca-passage-pane,
+.ca-passage-body,
+.bg-passage-area,
+.bg-passage-text,
+.bg-passage-collapse-body,
+.logic-passage-area,
+.logic-passage-text,
+.reading-passage,
+.reading-recall-passage-content,
+.reading-confirm-passage,
+.choice-passage,
+.dq-passage,
+.dq-text-select-passage,
+.confirm-paragraph {
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
 }

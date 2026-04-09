@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useEngine } from "../core/EngineContext";
 import RichText from "../../utils/RichText";
 
@@ -33,6 +34,9 @@ function QuestionModal({
   /** 피드백 표시 시간 (ms). 정답/오답에 따라 외부에서 다르게 전달.
    *  기본 1000ms. A 패턴 오답·B 패턴 정답은 3000ms 권장. */
   feedbackDuration = 1000,
+  /** inline=true → fixed/portal/드래그 비활성, 일반 block flow 로 부모 안에 렌더.
+   *  시험지 컨셉에서 모달이 활성 카드 바로 아래에 누적되도록 하기 위함. */
+  inline = false,
 }) {
   const engine = useEngine();
   const status = engine?.status;
@@ -104,19 +108,22 @@ function QuestionModal({
     const aHeight = anchorRect.height ?? 0;
     const aBottom = aTop + aHeight;
 
-    // 50% 기준 상/하 배치: 하이라이트 중심이 컨테이너 상단 50%면 아래에, 하단 50%면 위에
-    const anchorMid = aTop + aHeight / 2;
-    const halfContainer = containerHeight / 2;
-    let nextX;
+    // 카드 아래 우선 → 공간 부족하면 카드 위. 카드와 항상 gap만큼만 떨어지도록.
+    // (카드 텍스트는 가리지 않으면서 멀리 떨어지지도 않게)
+    const spaceBelow = containerHeight - aBottom - pad;
+    const spaceAbove = aTop - pad;
     let nextY;
-    if (anchorMid <= halfContainer) {
-      // 상단 50% → 모달을 하이라이트 아래에
+    if (spaceBelow >= modalHeight + gap) {
+      // 카드 아래에 충분한 공간 → 카드 하단 + gap
       nextY = aBottom + gap;
-    } else {
-      // 하단 50% → 모달을 하이라이트 위에
+    } else if (spaceAbove >= modalHeight + gap) {
+      // 카드 위에 충분한 공간 → 카드 상단 - gap - 모달 높이
       nextY = aTop - gap - modalHeight;
+    } else {
+      // 둘 다 부족 → 더 큰 쪽 선택
+      nextY = spaceBelow >= spaceAbove ? aBottom + gap : aTop - gap - modalHeight;
     }
-    nextX = (aLeft + aRight) / 2 - modalWidth / 2;
+    const nextX = (aLeft + aRight) / 2 - modalWidth / 2;
     setPosition({
       x: clamp(nextX, pad, maxX),
       y: clamp(nextY, pad, maxY),
@@ -308,6 +315,30 @@ function QuestionModal({
     setIsDragging(true);
   };
 
+  // Portal target — 모달을 .engine-body 직속으로 렌더해 카드(positioned 조상) 좌표 영향에서 분리.
+  // 누적형 스택에서 카드마다 별도 모달 인스턴스가 마운트되므로, 카드의 절대 좌표가 아니라
+  // .engine-body 기준의 일관된 좌표계에서 transform이 계산되어야 드래그/터치 좌표가 정확함.
+  const portalTarget = useMemo(() => {
+    if (typeof document === "undefined") return null;
+    return document.querySelector(".engine-body") || document.body;
+  }, []);
+
+  // 모달 sizing — 첫 paint부터 viewport 기준으로 강제 (CSS specificity/cascade 지연 방지).
+  // 모바일: min(92vw, 360px), PC: 320px. inline style이 외부 CSS보다 우선이라 첫 페인트 보장.
+  const modalSizingStyle = useMemo(() => {
+    if (typeof window === "undefined") return { width: "320px" };
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      const w = Math.min(window.innerWidth * 0.92, 360);
+      return {
+        width: `${w}px`,
+        maxWidth: `${w}px`,
+        minWidth: `${w}px`,
+      };
+    }
+    return { width: "320px", maxWidth: "320px", minWidth: "320px" };
+  }, []);
+
   if (status === "FINISHED") {
     return null;
   }
@@ -339,7 +370,54 @@ function QuestionModal({
     onSelect(choiceId);
   };
 
-  return (
+  // inline 모드: 부모 안에 일반 block으로 렌더 (transform/position 없음)
+  if (inline) {
+    return (
+      <div className="question-modal-inline">
+        <div className="question-modal question-modal-inline-card">
+          <div className="question-modal-header">
+            <h3>{title}</h3>
+          </div>
+          <div
+            className={`question-modal-body ${isSwitching ? "switching" : ""} ${
+              animateIn ? "enter" : ""
+            }`}
+          >
+            <p className="question-modal-prompt">
+              <RichText>{displayPrompt}</RichText>
+            </p>
+            <div className="question-modal-choices">
+              {visibleMark ? <div className={`question-modal-mark ${visibleMark}`} /> : null}
+              {displayChoices
+                .filter((choice) => !disabledChoiceIds || !disabledChoiceIds.includes(choice.id))
+                .map((choice) => {
+                  const flashClass =
+                    flashChoiceId === choice.id && flashStatus
+                      ? `flash-${flashStatus}`
+                      : "";
+                  return (
+                    <button
+                      type="button"
+                      key={choice.id}
+                      className={`question-choice ${flashClass}`}
+                      onClick={() => handleChoiceClick(choice.id)}
+                      disabled={interactionLocked || Boolean(flashChoiceId) || isSwitching}
+                    >
+                      <span>
+                        <RichText>{choice.text}</RichText>
+                      </span>
+                    </button>
+                  );
+                })}
+            </div>
+            {displayFooter ? <div className="question-modal-footer">{displayFooter}</div> : null}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const modalContent = (
     <div className="question-modal-overlay">
       <div
         ref={modalRef}
@@ -347,6 +425,7 @@ function QuestionModal({
         style={{
           transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
           minHeight: anchorRect?.height ? `${anchorRect.height}px` : undefined,
+          ...modalSizingStyle,
         }}
       >
         <div className="question-modal-header" onPointerDown={handleDragStart}>
@@ -396,6 +475,9 @@ function QuestionModal({
       </div>
     </div>
   );
+
+  if (!portalTarget) return modalContent;
+  return createPortal(modalContent, portalTarget);
 }
 
 export default QuestionModal;

@@ -118,15 +118,42 @@ class AdminContentService(
         )
         log.info("프로 모드 아이템 자동 연결: contentId=$contentId → chapter=${chapter.id}, type=$itemType, order=$nextOrder")
     }
+    /** categories 헬퍼: List<String> ↔ JSON array string 변환.
+     *  ContentEntity.categories는 다중 분류 array를 JSON 문자열로 저장한다.
+     *  content_type 컬럼은 array의 첫 항목(primary)을 단일 값으로 저장 (학생 API 호환). */
+    private fun serializeCategories(categories: List<String>): String =
+        objectMapper.writeValueAsString(categories)
+
+    private fun parseCategories(content: ContentEntity): List<String> {
+        val raw = content.categories
+        if (raw.isNullOrBlank()) {
+            // categories 없으면 contentType 단일 값을 array로 wrapping (fallback)
+            return listOf(content.contentType)
+        }
+        return try {
+            objectMapper.readValue(raw, object : TypeReference<List<String>>() {})
+        } catch (e: Exception) {
+            log.warn("categories JSON 파싱 실패 contentId=${content.id}, raw=$raw")
+            listOf(content.contentType)
+        }
+    }
+
     @Transactional
     fun importContent(request: AdminContentImportRequest, userId: String): AdminContentImportResult {
-        val title = request.content["title"]?.toString() ?: "Imported ${request.contentType}"
+        if (request.contentType.isEmpty()) {
+            throw ApiException("INVALID_REQUEST", "contentType array는 비어있을 수 없습니다", HttpStatus.BAD_REQUEST)
+        }
+        val primaryType = request.contentType.first()
+        val categoriesJson = serializeCategories(request.contentType)
+        val title = request.content["title"]?.toString() ?: "Imported $primaryType"
         val existing = request.chapterId?.let {
-            contentRepository.findFirstByContentTypeAndChapterId(request.contentType, it)
+            contentRepository.findFirstByContentTypeAndChapterId(primaryType, it)
         }
         val content = if (existing != null) {
             existing.title = title
             existing.status = "active"
+            existing.contentType = primaryType
+            existing.categories = categoriesJson
             existing.levelId = request.levelId
             existing.chapterId = request.chapterId
             existing.area = request.area ?: existing.area
@@ -138,7 +165,8 @@ class AdminContentService(
         } else {
             ContentEntity(
                 id = IdGenerator.newId("content"),
-                contentType = request.contentType,
+                contentType = primaryType,
+                categories = categoriesJson,
                 levelId = request.levelId,
                 chapterId = request.chapterId,
                 area = request.area,
@@ -182,10 +210,16 @@ class AdminContentService(
 
         request.items.forEachIndexed { index, item ->
             try {
-                val title = item.content["title"]?.toString() ?: "Imported ${item.contentType}"
+                if (item.contentType.isEmpty()) {
+                    throw IllegalArgumentException("contentType array는 비어있을 수 없습니다")
+                }
+                val primaryType = item.contentType.first()
+                val categoriesJson = serializeCategories(item.contentType)
+                val title = item.content["title"]?.toString() ?: "Imported $primaryType"
                 val content = ContentEntity(
                     id = IdGenerator.newId("content"),
-                    contentType = item.contentType,
+                    contentType = primaryType,
+                    categories = categoriesJson,
                     levelId = item.levelId,
                     area = item.area,
                     subArea = item.subArea,
@@ -215,10 +249,10 @@ class AdminContentService(
                     versionId = version.id
                 ))
 
-                // PRO_* 콘텐츠 → 프로 모드 챕터 자동 생성/연결
-                if (item.contentType.startsWith("PRO_") && item.levelId != null && item.dayIndex != null) {
+                // PRO_* 콘텐츠 → 프로 모드 챕터 자동 생성/연결 (primary type 기준)
+                if (primaryType.startsWith("PRO_") && item.levelId != null && item.dayIndex != null) {
                     try {
-                        autoLinkProChapter(saved.id, item.contentType, item.levelId, item.dayIndex)
+                        autoLinkProChapter(saved.id, primaryType, item.levelId, item.dayIndex)
                     } catch (proErr: Exception) {
                         log.warn("프로 모드 자동 연결 실패: contentId=${saved.id}, error=${proErr.message}")
                     }
@@ -237,12 +271,16 @@ class AdminContentService(
 
     @Transactional
     fun updateContent(contentId: String, request: AdminContentImportRequest, userId: String): AdminContentImportResult {
+        if (request.contentType.isEmpty()) {
+            throw ApiException("INVALID_REQUEST", "contentType array는 비어있을 수 없습니다", HttpStatus.BAD_REQUEST)
+        }
         val content = contentRepository.findById(contentId).orElseThrow {
             ApiException("NOT_FOUND", "content not found", HttpStatus.NOT_FOUND)
         }
         val title = request.content["title"]?.toString() ?: content.title
         content.title = title
-        content.contentType = request.contentType
+        content.contentType = request.contentType.first()
+        content.categories = serializeCategories(request.contentType)
         content.levelId = request.levelId
         content.chapterId = request.chapterId
         content.area = request.area ?: content.area
@@ -311,7 +349,7 @@ class AdminContentService(
         )
         return ContentPreview(
             contentId = content.id,
-            contentType = content.contentType,
+            contentType = parseCategories(content),
             moduleKey = content.moduleKey,
             levelId = content.levelId,
             chapterId = content.chapterId,
@@ -342,7 +380,7 @@ class AdminContentService(
         return contentRepository.findAll().sortedBy { it.createdAt }.map { content ->
             AdminContentSummary(
                 contentId = content.id,
-                contentType = content.contentType,
+                contentType = parseCategories(content),
                 levelId = content.levelId,
                 chapterId = content.chapterId,
                 title = content.title,
