@@ -37,6 +37,9 @@ function QuestionModal({
   /** inline=true → fixed/portal/드래그 비활성, 일반 block flow 로 부모 안에 렌더.
    *  시험지 컨셉에서 모달이 활성 카드 바로 아래에 누적되도록 하기 위함. */
   inline = false,
+  /** preShuffled=true → 외부에서 이미 셔플된 choices를 받음. 모달 내부 shuffle 우회.
+   *  같은 셔플 순서를 카드 인쇄용에도 공유할 때 사용. */
+  preShuffled = false,
 }) {
   const engine = useEngine();
   const status = engine?.status;
@@ -69,16 +72,16 @@ function QuestionModal({
   const [animateIn, setAnimateIn] = useState(false);
   const [displayPrompt, setDisplayPrompt] = useState(prompt);
   const [displayChoices, setDisplayChoices] = useState(() =>
-    shuffleArray(choices)
+    preShuffled ? choices : shuffleArray(choices)
   );
   const [displayFooter, setDisplayFooter] = useState(footer);
 
   useEffect(() => {
     const modal = modalRef.current;
     if (!modal) return;
-    const container = modal.closest(".engine-body") || document.body;
-    const containerWidth = container.offsetWidth;
-    const containerHeight = container.offsetHeight;
+    // viewport 기준 좌표 (document.body에 fixed로 떠있음)
+    const containerWidth = window.innerWidth;
+    const containerHeight = window.innerHeight;
     const modalWidth = modal.offsetWidth;
     const modalHeight = modal.offsetHeight;
     const maxX = Math.max(8, containerWidth - modalWidth - 8);
@@ -93,9 +96,9 @@ function QuestionModal({
     if (!anchorRect) return;
     const modal = modalRef.current;
     if (!modal) return;
-    const container = modal.closest(".engine-body") || document.body;
-    const containerWidth = container.offsetWidth;
-    const containerHeight = container.offsetHeight;
+    // viewport 기준 좌표 (모달은 document.body에 fixed)
+    const containerWidth = window.innerWidth;
+    const containerHeight = window.innerHeight;
     const modalWidth = modal.offsetWidth;
     const modalHeight = modal.offsetHeight;
     const gap = 8;
@@ -109,18 +112,14 @@ function QuestionModal({
     const aBottom = aTop + aHeight;
 
     // 카드 아래 우선 → 공간 부족하면 카드 위. 카드와 항상 gap만큼만 떨어지도록.
-    // (카드 텍스트는 가리지 않으면서 멀리 떨어지지도 않게)
     const spaceBelow = containerHeight - aBottom - pad;
     const spaceAbove = aTop - pad;
     let nextY;
     if (spaceBelow >= modalHeight + gap) {
-      // 카드 아래에 충분한 공간 → 카드 하단 + gap
       nextY = aBottom + gap;
     } else if (spaceAbove >= modalHeight + gap) {
-      // 카드 위에 충분한 공간 → 카드 상단 - gap - 모달 높이
       nextY = aTop - gap - modalHeight;
     } else {
-      // 둘 다 부족 → 더 큰 쪽 선택
       nextY = spaceBelow >= spaceAbove ? aBottom + gap : aTop - gap - modalHeight;
     }
     const nextX = (aLeft + aRight) / 2 - modalWidth / 2;
@@ -139,7 +138,7 @@ function QuestionModal({
     switchTimerRef.current = setTimeout(() => {
       setContentKey(resolvedShuffleKey);
       setDisplayPrompt(prompt);
-      setDisplayChoices(shuffleArray(choices));
+      setDisplayChoices(preShuffled ? choices : shuffleArray(choices));
       setDisplayFooter(footer);
       setIsSwitching(false);
     }, 160);
@@ -228,29 +227,12 @@ function QuestionModal({
     if (!isDragging) return undefined;
     const handleMove = (event) => {
       if (!dragState.current) return;
-      const {
-        containerLeft,
-        containerTop,
-        offsetX,
-        offsetY,
-        containerWidth,
-        containerHeight,
-        modalWidth,
-        modalHeight,
-        scale,
-      } = dragState.current;
-      const maxX = Math.max(8, containerWidth - modalWidth - 8);
-      const maxY = Math.max(8, containerHeight - modalHeight - 8);
-      const nextX = clamp(
-        (event.clientX - containerLeft) / (scale || 1) - offsetX,
-        8,
-        maxX
-      );
-      const nextY = clamp(
-        (event.clientY - containerTop) / (scale || 1) - offsetY,
-        8,
-        maxY
-      );
+      const { offsetX, offsetY, modalWidth, modalHeight } = dragState.current;
+      // 모달이 fixed라 viewport(window) 기준 좌표 사용
+      const maxX = Math.max(8, window.innerWidth - modalWidth - 8);
+      const maxY = Math.max(8, window.innerHeight - modalHeight - 8);
+      const nextX = clamp(event.clientX - offsetX, 8, maxX);
+      const nextY = clamp(event.clientY - offsetY, 8, maxY);
       setPosition({ x: nextX, y: nextY });
     };
     const handleUp = () => {
@@ -291,52 +273,44 @@ function QuestionModal({
     const modal = modalRef.current;
     if (!modal) return;
     event.preventDefault();
-    const container = modal.closest(".engine-body") || document.body;
-    const containerRect = container.getBoundingClientRect();
-    const scale = containerRect.width / container.offsetWidth || 1;
+    // 모달이 fixed positioning이라 viewport 기준 단순 좌표 계산
     const modalRect = modal.getBoundingClientRect();
-    const containerWidth = container.offsetWidth;
-    const containerHeight = container.offsetHeight;
-    const modalWidth = modal.offsetWidth;
-    const modalHeight = modal.offsetHeight;
-    const offsetX = (event.clientX - modalRect.left) / (scale || 1);
-    const offsetY = (event.clientY - modalRect.top) / (scale || 1);
+    const offsetX = event.clientX - modalRect.left;
+    const offsetY = event.clientY - modalRect.top;
     dragState.current = {
-      containerLeft: containerRect.left,
-      containerTop: containerRect.top,
       offsetX,
       offsetY,
-      containerWidth,
-      containerHeight,
-      modalWidth,
-      modalHeight,
-      scale,
+      modalWidth: modal.offsetWidth,
+      modalHeight: modal.offsetHeight,
     };
     setIsDragging(true);
   };
 
-  // Portal target — 모달을 .engine-body 직속으로 렌더해 카드(positioned 조상) 좌표 영향에서 분리.
-  // 누적형 스택에서 카드마다 별도 모달 인스턴스가 마운트되므로, 카드의 절대 좌표가 아니라
-  // .engine-body 기준의 일관된 좌표계에서 transform이 계산되어야 드래그/터치 좌표가 정확함.
+  // Portal target — document.body로 강제 (.engine-body의 zoom/scale 및 .screen-level-* 통합 사이즈 규칙 영향에서 완전 차단).
+  // 모달은 viewport 기준 fixed position으로 그려짐. 좌표 계산도 viewport rect 사용.
   const portalTarget = useMemo(() => {
     if (typeof document === "undefined") return null;
-    return document.querySelector(".engine-body") || document.body;
+    return document.body;
   }, []);
 
-  // 모달 sizing — 첫 paint부터 viewport 기준으로 강제 (CSS specificity/cascade 지연 방지).
-  // 모바일: min(92vw, 360px), PC: 320px. inline style이 외부 CSS보다 우선이라 첫 페인트 보장.
+  // 모달 sizing — viewport 기준 inline style 강제. document.body 위에 fixed라 zoom 무관.
+  // 모바일: 224px (소쉬르 기준 280에서 20% 축소). 레벨 무관 통일.
+  // 폰트 사이즈 13px도 inline으로 강제 (CSS .screen-level-* 통합 규칙 cascade 차단)
   const modalSizingStyle = useMemo(() => {
     if (typeof window === "undefined") return { width: "320px" };
     const isMobile = window.innerWidth <= 768;
     if (isMobile) {
-      const w = Math.min(window.innerWidth * 0.92, 360);
+      const w = Math.min(window.innerWidth * 0.6, 224);
       return {
         width: `${w}px`,
         maxWidth: `${w}px`,
         minWidth: `${w}px`,
+        boxSizing: "border-box",
+        fontSize: "13px",
+        lineHeight: "1.4",
       };
     }
-    return { width: "320px", maxWidth: "320px", minWidth: "320px" };
+    return { width: "320px", maxWidth: "320px", minWidth: "320px", boxSizing: "border-box" };
   }, []);
 
   if (status === "FINISHED") {

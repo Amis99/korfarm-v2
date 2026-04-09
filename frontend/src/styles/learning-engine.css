@@ -345,17 +345,20 @@
 /* Seed type-specific colors are applied via inline styles in ResultSummary */
 
 .question-modal-overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
   pointer-events: none;
   background: transparent;
-  z-index: 20;
+  z-index: 9999;
 }
 
 .question-modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  pointer-events: auto;
+  z-index: 10000;
+  box-sizing: border-box;
   background-image: var(--question-modal-bg);
   background-size: cover;
   background-position: center;
@@ -364,6 +367,7 @@
   border-radius: 0;
   padding: 14px;
   width: 320px;
+  max-width: 320px;
   display: grid;
   gap: 12px;
   border: 2px solid rgba(75, 61, 54, 0.4);
@@ -1147,10 +1151,10 @@ mark.highlight {
 
 .reading-confirm-stage {
   position: relative;
-  display: grid;
-  grid-template-rows: 4fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-  height: min(70vh, 640px);
+  /* height 고정 제거 — 콘텐츠에 맞춰 자연스럽게 늘어나고 footer를 침범하지 않도록 */
 }
 
 .confirm-ox-mark {
@@ -1186,7 +1190,8 @@ mark.highlight {
   border-radius: 0;
   padding: 16px;
   border: 2px solid rgba(75, 61, 54, 0.35);
-  overflow-y: auto;
+  /* 지문 박스는 내용에 맞춰 늘어남 (스크롤 X — 시험지 컨셉) */
+  overflow: visible;
 }
 
 .confirm-paragraph {
@@ -1213,6 +1218,8 @@ mark.highlight {
   border-radius: 16px;
   padding: 12px 16px;
   border: 2px solid rgba(75, 61, 54, 0.35);
+  /* footer를 침범하지 않게 아래 여백 확보 */
+  margin-bottom: 16px;
 }
 
 .confirm-progress {
@@ -1860,6 +1867,32 @@ mark.highlight {
   z-index: 4;
 }
 
+.result-print {
+  position: absolute;
+  top: 10px;
+  right: 88px;
+  border: 2px solid #c0392b;
+  background: #fff;
+  color: #c0392b;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 4;
+}
+.result-print:hover {
+  background: #c0392b;
+  color: #fff;
+}
+@media (max-width: 768px) {
+  .result-print {
+    top: 10px;
+    right: 80px;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
 .result-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -2281,9 +2314,11 @@ mark.highlight {
   .choice-label { font-size: 19px; padding: 4px 10px; }
   .question-choice { padding: 12px 16px; }
 
-  /* ── 모달 내 글자: 레벨별 통합 사이즈 대신 22px로 통일 (모바일) ── */
-  /* 발문(stem/prompt)과 선지(option/choice)는 모달 안에서 22px 고정.
-     레벨별 통합 사이즈(38/36/34/32)보다 specificity가 높아야 하므로 !important. */
+  /* ── 모달 내 글자: 레벨 무관 컴팩트 통일 (소쉬르 기준 20% 축소) ──
+     모든 자식 폰트 13px !important. 통합 사이즈 규칙(38/36/34/32) cascade 완전 차단.
+     224px 폭 모달에 13px 폰트. */
+  .question-modal,
+  .question-modal *,
   .question-modal-stem,
   .question-modal-prompt,
   .question-modal-option,
@@ -2291,17 +2326,25 @@ mark.highlight {
   .question-modal .question-choice span,
   .question-modal-choices .question-choice,
   .question-modal-choices .question-choice span {
-    font-size: 22px !important;
-    line-height: 1.5 !important;
+    font-size: 13px !important;
+    line-height: 1.4 !important;
   }
   .question-modal .question-choice {
-    padding: 12px 16px !important;
+    padding: 8px 10px !important;
   }
-  /* 모바일 모달 — 고정 너비 (문제마다 크기 변하지 않도록) */
+  .question-modal-header h3 {
+    font-size: 12px !important;
+  }
+  .question-modal-drag-hint {
+    font-size: 9px !important;
+  }
+  /* 모바일 모달 — 224px 고정 (소쉬르 기준 20% 축소, 레벨 무관 통일) */
   .question-modal {
-    width: min(92vw, 360px) !important;
-    max-width: min(92vw, 360px) !important;
-    min-width: min(92vw, 360px) !important;
+    width: min(60vw, 224px) !important;
+    max-width: min(60vw, 224px) !important;
+    min-width: min(60vw, 224px) !important;
+    padding: 8px !important;
+    gap: 6px !important;
   }
 }
 
@@ -3291,7 +3334,12 @@ mark.highlight {
   display: none !important;
 }
 
-/* 인쇄 스타일 — 화면에 보이는 그대로 인쇄 + 마지막에 정답해설 페이지 */
+/* 활성(미풀이) 카드의 인쇄 전용 선택지 — 화면에서 숨김, 인쇄 시에만 표시 */
+.cum-card-choices.print-only-choices {
+  display: none !important;
+}
+
+/* 인쇄 스타일 — PrintLayout 컴포넌트만 출력 (화면 콘텐츠 모두 숨김) */
 @media print {
   /* A4 기본 페이지 */
   @page {
@@ -3304,44 +3352,378 @@ mark.highlight {
     display: block !important;
   }
 
-  /* 모달, 오버레이, 결과, 푸터 숨기기 */
+  /* 모달, 오버레이, 결과, 푸터, 헤더 숨기기 */
   .result-overlay,
   .result-card,
   .question-modal-overlay,
   .question-modal,
   .worksheet-pdf-overlay,
   .cpdf-exhausted-card,
-  .engine-footer {
+  .engine-footer,
+  .engine-header-wrap,
+  .engine-header {
     display: none !important;
   }
 
-  /* 화면 카드(.cum-card)에서 정답·해설·첨삭 마크는 인쇄 시 숨김 */
-  .cum-card-explanation,
-  .cum-card-mark,
-  .cum-choice.is-correct::after,
-  .cum-choice.is-wrong::after {
+  /* 화면 콘텐츠 — main(.engine-body) 통째로 숨김. PrintLayout만 인쇄 */
+  .engine-body {
     display: none !important;
   }
 
-  /* 한 문제 카드 전체가 한 페이지 안에 들어가도록 break-inside avoid */
-  .cum-card,
-  .cum-card-passage,
-  .cum-card-prompt,
-  .cum-card-boki {
+  /* engine-shell/viewport/stage 등 컨테이너 배경/스케일 해제 (PrintLayout이 이 안에 있어도 정상 표시되도록) */
+  .engine-shell,
+  .engine-viewport,
+  .engine-stage,
+  .engine-stage-inner,
+  .engine-scale {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    background: #fff !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    zoom: 1 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  /* PrintLayout 본체 */
+  .print-layout {
+    display: block !important;
+    width: 100%;
+    color: #000;
+    font-family: "Noto Sans KR", sans-serif;
+  }
+
+  /* 공통 헤더 */
+  .print-header {
+    margin-bottom: 8mm;
+    border-bottom: 1.5px solid #333;
+    padding-bottom: 4mm;
+  }
+  .print-header-row {
+    font-size: 11pt;
+    color: #555;
+    margin-bottom: 2mm;
+  }
+  .print-brand {
+    font-weight: 700;
+    color: #c0392b;
+  }
+  .print-level {
+    margin-left: 4mm;
+  }
+  .print-title {
+    font-size: 16pt;
+    font-weight: 800;
+    color: #000;
+    margin: 0 0 3mm;
+  }
+  .print-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6mm;
+    font-size: 10pt;
+    color: #333;
+  }
+
+  /* 섹션 (독해 §1/§2/§3 등) */
+  .print-section {
+    margin-bottom: 8mm;
+  }
+  .print-section.print-page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+  .print-section-title {
+    font-size: 13pt;
+    font-weight: 800;
+    color: #000;
+    margin: 0 0 3mm;
+    padding-bottom: 2mm;
+    border-bottom: 1px solid #999;
+  }
+  .print-section-desc {
+    font-size: 10pt;
+    color: #555;
+    margin: 0 0 4mm;
+    font-style: italic;
+  }
+
+  /* 시험지 문제 리스트 */
+  .print-worksheet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6mm;
+  }
+
+  /* 한 문제는 페이지 중간에 끊기지 않음 */
+  .print-question {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    padding-bottom: 4mm;
+    border-bottom: 1px solid #ddd;
+  }
+  .print-question:last-child {
+    border-bottom: none;
+  }
+
+  .print-q-header {
+    display: flex;
+    gap: 3mm;
+    margin-bottom: 2mm;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  .print-q-num {
+    font-weight: 800;
+    color: #000;
+    min-width: 8mm;
+  }
+  .print-q-stem {
+    font-weight: 700;
+    color: #000;
+    flex: 1;
+  }
+  .print-q-passage {
+    border: 1px solid #777;
+    padding: 3mm 4mm;
+    margin: 2mm 0;
+    font-size: 11pt;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: #111;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
-  .cum-card {
-    margin-bottom: 8mm;
+  .print-q-passage.print-passage-large {
+    font-size: 11pt;
+    line-height: 1.7;
+    margin-bottom: 4mm;
+  }
+  .print-q-prompt {
+    border-left: 3px solid #777;
+    padding: 2mm 4mm;
+    margin: 2mm 0;
+    font-size: 11pt;
+    color: #222;
+  }
+  .print-q-boki {
+    border: 1.5px solid #555;
+    padding: 3mm 4mm;
+    margin: 3mm 0;
+    font-size: 11pt;
+    color: #111;
+    background: transparent;
+  }
+  .print-q-template {
+    margin: 2mm 0 3mm;
+    font-size: 11pt;
+    line-height: 1.7;
+  }
+  .print-q-confirm-blank {
+    margin-top: 3mm;
+    font-size: 11pt;
+    color: #555;
+  }
+  .print-q-blank-block {
+    margin: 2mm 0;
+  }
+  .print-q-blank-label {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 1mm;
+    display: block;
   }
 
-  /* cum-stack: 인쇄 시 단단/스크롤 해제 */
-  .cum-stack {
-    display: block !important;
-    overflow: visible !important;
-    height: auto !important;
-    max-height: none !important;
-    padding: 0 !important;
+  /* 선택지 */
+  .print-q-choices {
+    list-style: none;
+    padding: 0;
+    margin: 2mm 0 0 6mm;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5mm;
+  }
+  .print-q-choice {
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    font-size: 11pt;
+    color: #000;
+    line-height: 1.5;
+    /* 정답 강조 없음 — 학생이 풀 수 있게 */
+    font-weight: normal;
+  }
+  .print-q-choice-mark {
+    font-size: 12pt;
+    color: #555;
+  }
+  .print-q-choice-num {
+    font-weight: 700;
+    min-width: 5mm;
+  }
+
+  /* ChoiceAnalysis 시험지 */
+  .print-ca-paragraph {
+    margin: 0 0 2mm;
+    font-size: 11pt;
+    line-height: 1.85;
+  }
+  .print-ca-sentnum {
+    font-size: 8pt;
+    color: #c0392b;
+    font-weight: 700;
+    margin-right: 1px;
+  }
+  .print-ca-choices {
+    list-style: none;
+    padding: 0;
+    margin: 3mm 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+  }
+  .print-ca-choice {
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    font-size: 11pt;
+    color: #000;
+    line-height: 1.5;
+  }
+  .print-ca-choice-text {
+    flex: 1;
+  }
+  .print-ca-ox {
+    font-size: 11pt;
+    color: #333;
+    white-space: nowrap;
+  }
+  .print-ca-evidence {
+    font-size: 9pt;
+    color: #555;
+    white-space: nowrap;
+  }
+
+  /* ReadingTraining §2 복기 */
+  .print-recall-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4mm;
+  }
+  .print-recall-card {
+    display: flex;
+    align-items: center;
+    gap: 4mm;
+    border: 1px solid #777;
+    padding: 4mm 5mm;
+    font-size: 11pt;
+    line-height: 1.6;
+    break-inside: avoid;
+  }
+  .print-recall-num-blank {
+    font-weight: 700;
+    color: #c0392b;
+    min-width: 14mm;
+  }
+  .print-recall-text {
+    flex: 1;
+    color: #000;
+  }
+
+  /* 문법 4종 — 단어/문장 + 빈칸 */
+  .print-grammar-item {
+    padding-bottom: 5mm;
+  }
+  .print-grammar-target {
+    font-size: 14pt !important;
+    font-weight: 800;
+    color: #000;
+  }
+  .print-grammar-blank {
+    margin: 2mm 0 0 6mm;
+    font-size: 11pt;
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+  }
+  .print-grammar-blank-label {
+    font-weight: 700;
+    color: #555;
+    min-width: 22mm;
+  }
+  .print-grammar-blank-line {
+    flex: 1;
+    color: #aaa;
+    font-family: monospace;
+  }
+
+  /* 정답·해설 페이지 — 항상 새 페이지 */
+  .print-answer-page {
+    page-break-before: always;
+    break-before: page;
+    margin-top: 0;
+  }
+  .print-answer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5mm;
+  }
+  .print-answer-item {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 3mm;
+  }
+  .print-answer-num {
+    font-weight: 800;
+    font-size: 11pt;
+    color: #000;
+    margin-bottom: 1mm;
+  }
+  .print-answer-correct {
+    font-size: 11pt;
+    color: #c0392b;
+    font-weight: 700;
+    margin-bottom: 1mm;
+  }
+  .print-answer-explanation {
+    font-size: 10pt;
+    color: #333;
+    line-height: 1.55;
+  }
+  .print-answer-section-title {
+    font-size: 12pt;
+    font-weight: 800;
+    color: #000;
+    margin: 5mm 0 2mm;
+    padding-bottom: 1mm;
+    border-bottom: 1px solid #999;
+  }
+  .print-answer-passage-group {
+    margin-bottom: 6mm;
+  }
+  .print-answer-passage-title {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #000;
+    margin: 4mm 0 2mm;
   }
 
   /* 헤더: 제목만 표시 */

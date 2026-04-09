@@ -23,7 +23,10 @@ function seedSvgUrl(seedType) {
   return `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 28'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${info.gradient[0]}'/><stop offset='1' stop-color='${info.gradient[1]}'/></linearGradient></defs><ellipse cx='20' cy='14' rx='18' ry='10' fill='url(%23g)' stroke='${info.stroke}' stroke-width='2'/></svg>")`;
 }
 
-function ResultSummary({ summary, onExit }) {
+function ResultSummary({ summary, onExit, moduleKey, onPrint }) {
+  // 학습용 모듈만 인쇄 (study_content/answer_key는 인쇄 비대상)
+  const showPrintBtn = moduleKey !== "study_content" && moduleKey !== "answer_key";
+  const handlePrintClick = onPrint || (() => window.print());
   const cardRef = useRef(null);
   const dragState = useRef(null);
   const [position, setPosition] = useState(null);
@@ -140,6 +143,15 @@ function ResultSummary({ summary, onExit }) {
         <div className="result-drag-handle" onPointerDown={handleDragStart}>
           <span className="result-drag-hint">⠿</span>
         </div>
+        {showPrintBtn && (
+          <button
+            type="button"
+            className="result-print"
+            onClick={handlePrintClick}
+          >
+            학습지 인쇄
+          </button>
+        )}
         <button type="button" className="result-close" onClick={onExit}>
           닫기
         </button>

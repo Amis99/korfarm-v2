@@ -291,13 +291,12 @@ function DailyQuizModule({ content }) {
     }
   }, [currentIndex]);
 
-  // 활성 카드 위치 측정 — 모달 anchorRect용. 문제 전환마다 한 번씩.
+  // 활성 카드 위치 측정 + 자동 스크롤 — 모달 anchorRect용 (viewport 기준).
   useLayoutEffect(() => {
     if (!scrollRef.current) {
       setActiveCardRect(null);
       return;
     }
-    // cum-stack 안에서 활성 카드 찾기 (selector 또는 마지막 카드)
     const activeEl =
       scrollRef.current.querySelector(".cum-card.active") ||
       scrollRef.current.querySelector(".cum-card:last-child");
@@ -305,18 +304,28 @@ function DailyQuizModule({ content }) {
       setActiveCardRect(null);
       return;
     }
-    const engineBody = activeEl.closest(".engine-body");
-    if (!engineBody) return;
-    const containerRect = engineBody.getBoundingClientRect();
-    const scale = containerRect.width / engineBody.offsetWidth || 1;
-    const cardRect = activeEl.getBoundingClientRect();
-    setActiveCardRect({
-      left: (cardRect.left - containerRect.left) / (scale || 1),
-      right: (cardRect.right - containerRect.left) / (scale || 1),
-      top: (cardRect.top - containerRect.top) / (scale || 1),
-      height: cardRect.height / (scale || 1),
-    });
-    // currentIndex / blankIndex 변경 시 재측정
+    // 새 활성 카드 상단을 화면 상단으로 자동 스크롤
+    try {
+      activeEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (e) {
+      activeEl.scrollIntoView();
+    }
+    const measure = () => {
+      const el =
+        scrollRef.current?.querySelector(".cum-card.active") ||
+        scrollRef.current?.querySelector(".cum-card:last-child");
+      if (!el) return;
+      const cardRect = el.getBoundingClientRect();
+      setActiveCardRect({
+        left: cardRect.left,
+        right: cardRect.right,
+        top: cardRect.top,
+        height: cardRect.height,
+      });
+    };
+    measure();
+    const t = setTimeout(measure, 350);  // smooth scroll 완료 후 재측정
+    return () => clearTimeout(t);
   }, [currentIndex, blankIndex]);
 
   // 상태 초기화 (문제 전환 시)

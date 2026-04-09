@@ -3,9 +3,32 @@ import { Link } from "react-router-dom";
 import EngineContext from "./EngineContext";
 import TimeBar from "./TimeBar";
 import ResultSummary from "./ResultSummary";
+import PrintLayout from "./PrintLayout";
 import { MODULES } from "../modules";
 import { apiPost } from "../../utils/api";
+import { useAuth } from "../../hooks/useAuth";
 import "../../styles/learning-engine.css";
+
+/** 인쇄/PDF 저장 시 파일명을 학생명_레벨명_학습명으로 설정.
+ *  document.title이 PDF 파일명 default가 됨. 인쇄 끝나면 원래 title 복원. */
+function printWithFilename(studentName, level, title) {
+  const sanitize = (s) => (s || "").toString().replace(/[\\/:*?"<>|]/g, "").trim();
+  const parts = [sanitize(studentName), sanitize(level), sanitize(title)].filter(Boolean);
+  const newTitle = parts.length > 0 ? parts.join("_") : "국어농장_학습지";
+  const original = document.title;
+  document.title = newTitle;
+  // 인쇄 다이얼로그 닫힌 후 원래 title 복원
+  const restore = () => {
+    document.title = original;
+    window.removeEventListener("afterprint", restore);
+  };
+  window.addEventListener("afterprint", restore);
+  // afterprint 이벤트 미지원 브라우저 fallback
+  setTimeout(() => {
+    if (document.title === newTitle) document.title = original;
+  }, 5000);
+  window.print();
+}
 
 const getTimeLimit = (content) => content?.timeLimitSec ?? 180;
 
@@ -102,7 +125,14 @@ function pickRandomSeed() {
 }
 
 function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish, startPage }) {
+  const { user } = useAuth();
+  const studentName = user?.name || user?.login_id || "학생";
   const timeLimit = getTimeLimit(content);
+
+  /** 인쇄 핸들러 — 파일명 학생명_레벨명_학습명 */
+  const handlePrint = () => {
+    printWithFilename(studentName, content?.targetLevel || "", content?.title || "");
+  };
   const assetBase = import.meta.env.BASE_URL || "/";
   const resolveAssetUrl = (path) => {
     if (!path) return "";
@@ -611,58 +641,18 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                 <Module content={content} />
               </main>
 
-              {/* 인쇄 전용 정답·해설 페이지 — 화면 시험지 인쇄 후 마지막에 별도 페이지로 출력 */}
-              {printPageGroups.map((group, gi) => (
-                <div key={`ans-${gi}`} className={`print-only print-answer-page ${printLevelClass}`}>
-                  <h2 className="print-title">
-                    {content?.title || "학습"} — 정답 및 해설
-                  </h2>
-                  <ol className="print-answer-list">
-                    {group.questions.map((q, idx) => {
-                      // MULTI_CHOICE 정답 텍스트
-                      let answerText = "";
-                      if (q.choices && q.answerId) {
-                        const correct = q.choices.find((c) => (c.id || c.choiceId) === q.answerId);
-                        answerText = correct ? `${q.answerId}. ${correct.text}` : q.answerId;
-                      } else if (q.type === "FILL_BLANKS" && q.blanks) {
-                        answerText = q.blanks
-                          .map((b, bi) => {
-                            const c = b.choices?.find((c) => c.id === b.answerId);
-                            return `빈칸${bi + 1}: ${c?.text || b.answerId || "-"}`;
-                          })
-                          .join(" / ");
-                      } else if (q.type === "CHOICE_OX" || q.type === "CHOICE_ANALYSIS") {
-                        // 신 양식: choices의 expectedOX, 옛 양식: finalIsCorrectChoice
-                        const ox = (q.choices || [])
-                          .map((c) => `${c.choiceId || c.id}=${c.expectedOX || (c.finalIsCorrectChoice ? "X" : "O")}`)
-                          .join(", ");
-                        answerText = ox;
-                      }
-                      return (
-                        <li key={q.id || idx} className="print-answer-item">
-                          <div className="print-answer-num">문제 {idx + 1}</div>
-                          {answerText && (
-                            <div className="print-answer-correct">정답: {answerText}</div>
-                          )}
-                          {q.explanation && (
-                            <div className="print-answer-explanation">
-                              <strong>해설:</strong> {q.explanation}
-                            </div>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ol>
-                </div>
-              ))}
+              {/* 인쇄 전용 통합 레이아웃 — 모듈 type별 시험지 + 정답해설 */}
+              <PrintLayout moduleKey={moduleKey} content={content} />
 
               <footer className="engine-footer">
                 <button type="button" className="engine-exit" onClick={onExit}>
                   학습 종료
                 </button>
-                <button type="button" className="engine-print" onClick={() => window.print()}>
-                  인쇄
-                </button>
+                {moduleKey !== "study_content" && moduleKey !== "answer_key" && (
+                  <button type="button" className="engine-print" onClick={handlePrint}>
+                    인쇄
+                  </button>
+                )}
                 <div className="engine-footer-item">
                   <span className="engine-footer-label">
                     {pageProgress
@@ -685,7 +675,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
             </div>
           </div>
         </div>
-            {summary ? <ResultSummary summary={summary} onExit={onExit} /> : null}
+            {summary ? <ResultSummary summary={summary} onExit={onExit} moduleKey={moduleKey} onPrint={handlePrint} /> : null}
       </div>
     </EngineContext.Provider>
   );

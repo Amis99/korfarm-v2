@@ -47,18 +47,28 @@ export default function CumulativeQuestionCard({
   useLayoutEffect(() => {
     if (!isActive || !cardRef.current) return;
     const card = cardRef.current;
-    const engineBody = card.closest(".engine-body");
-    if (!engineBody) return;
-    const containerRect = engineBody.getBoundingClientRect();
-    const scale = containerRect.width / engineBody.offsetWidth || 1;
-    const cardRect = card.getBoundingClientRect();
-    setCardAnchorRect({
-      left: (cardRect.left - containerRect.left) / (scale || 1),
-      right: (cardRect.right - containerRect.left) / (scale || 1),
-      top: (cardRect.top - containerRect.top) / (scale || 1),
-      height: cardRect.height / (scale || 1),
-    });
-    // 카드가 활성으로 바뀌는 시점에 한 번만 측정 (question.id 기준)
+    // 활성 카드 상단을 화면 상단으로 자동 스크롤 (이후 수동 스크롤 가능)
+    try {
+      card.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (e) {
+      // 일부 구형 브라우저 fallback
+      card.scrollIntoView();
+    }
+    // viewport 기준 좌표 — 모달이 document.body에 fixed로 떠 있으므로 동일 좌표계
+    // 스크롤 직후 측정해야 정확하므로 약간의 지연 후 측정
+    const measure = () => {
+      if (!cardRef.current) return;
+      const cardRect = cardRef.current.getBoundingClientRect();
+      setCardAnchorRect({
+        left: cardRect.left,
+        right: cardRect.right,
+        top: cardRect.top,
+        height: cardRect.height,
+      });
+    };
+    measure();
+    const t = setTimeout(measure, 350);  // smooth scroll 완료 후 재측정
+    return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, question?.id]);
 
@@ -68,6 +78,17 @@ export default function CumulativeQuestionCard({
   const stem = question.stem || "";
   const passage = question.passage;
   const prompt = question.prompt;
+
+  // 셔플된 선택지 — question.id 기준 useMemo로 한 번만 셔플하여 모달과 카드 인쇄 영역에 동일 순서 공유
+  const shuffledChoices = useMemo(() => {
+    const arr = [...choices];
+    for (let i = arr.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr.map((c) => ({ id: c.id || c.choiceId, text: c.text }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [question?.id]);
   // "보기" 류 키 자동 감지 (한국어 키, examples, example, additionalInfo)
   const bokiContent = useMemo(() => {
     if (!question) return null;
@@ -144,11 +165,11 @@ export default function CumulativeQuestionCard({
         </div>
       )}
 
-      {/* 풀이 후에만 시험지에 선택지 + 첨삭 + 해설 누적 */}
+      {/* 풀이 후 시험지에 선택지 + 첨삭 + 해설 누적 (셔플 순서 = 모달과 동일) */}
       {completion && (
         <div className="cum-card-choices">
-          {choices.map((c, ci) => {
-            const cid = c.id || c.choiceId;
+          {shuffledChoices.map((c, ci) => {
+            const cid = c.id;
             const isCorrectChoice = cid === answerId;
             const isPicked = completion?.selectedId === cid;
             const showAsCorrect = isCorrectChoice;
@@ -170,18 +191,34 @@ export default function CumulativeQuestionCard({
         </div>
       )}
 
+      {/* 활성(미풀이) 카드의 인쇄 전용 선택지 영역 — 화면엔 안 보이고 인쇄 시에만.
+          모달과 동일한 셔플 순서. 학생이 종이로 풀 수 있도록 정답 강조 없음. */}
+      {!completion && shuffledChoices.length > 0 && (
+        <div className="cum-card-choices print-only-choices">
+          {shuffledChoices.map((c, ci) => (
+            <div key={c.id || ci} className="cum-choice">
+              <span className="cum-choice-num">{ci + 1}</span>
+              <span className="cum-choice-text">
+                <RichText>{c.text}</RichText>
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
       {completion && question.explanation && (
         <div className="cum-card-explanation">
           <RichText>{question.explanation}</RichText>
         </div>
       )}
 
-      {/* 활성 시 떠있는 포스트잇 모달 — 첫 위치는 카드 옆/아래(50% 룰), 사용자 드래그 가능 */}
+      {/* 활성 시 떠있는 포스트잇 모달 — 셔플은 카드와 동일 (preShuffled), 첫 위치 카드 옆/아래 */}
       {isActive && !completion && showModal && choices.length > 0 && (
         <QuestionModal
           title={modalTitle}
           prompt={stem}
-          choices={choices.map((c) => ({ id: c.id || c.choiceId, text: c.text }))}
+          choices={shuffledChoices}
+          preShuffled
           onSelect={onSelect}
           mark={lastResult}
           shuffleKey={question.id}
