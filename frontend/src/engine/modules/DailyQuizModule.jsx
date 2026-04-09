@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import { FEEDBACK } from "../shared/feedbackTimings";
-import TokenPassage from "../shared/TokenPassage";
+import ChoiceAnalysisCore from "../shared/ChoiceAnalysisCore";
 import RichText from "../../utils/RichText";
 import PassageMarkdown from "../../utils/PassageMarkdown";
 
@@ -289,13 +289,6 @@ function DailyQuizModule({ content }) {
   const [confirmedRangeKeys, setConfirmedRangeKeys] = useState([]);
   const [revealRanges, setRevealRanges] = useState([]);
 
-  // CHOICE_OX 상태 (Q10) — 사용자 추후 작업, 손대지 말기
-  const [choiceId, setChoiceId] = useState(null);
-  const [propIndex, setPropIndex] = useState(0);
-  const [choiceMarks, setChoiceMarks] = useState({});
-  const [propMarks, setPropMarks] = useState({});
-  const [completedChoices, setCompletedChoices] = useState(new Set());
-
   const advanceTimerRef = useRef(null);
   const confirmLockRef = useRef(false);
   const scrollRef = useRef(null);
@@ -314,16 +307,6 @@ function DailyQuizModule({ content }) {
   );
   const matchMode = (currentQuestion?.answerMatchMode || "ALL").toUpperCase();
   const usesAllMatches = matchMode === "ALL" && textSelectAnswerRanges.length > 1;
-
-  // CHOICE_OX 파생
-  const oxChoices = currentQuestion?.choices || [];
-  const currentOxChoice = oxChoices.find((c) => c.choiceId === choiceId);
-  const currentProp = currentOxChoice?.propositions?.[propIndex];
-  const isNegativeStem = useMemo(
-    () => (currentQuestion?.stem || "").includes("않는"),
-    [currentQuestion]
-  );
-  const [lastResult, setLastResult] = useState(null);
 
   // 자동 시작
   useEffect(() => {
@@ -352,12 +335,6 @@ function DailyQuizModule({ content }) {
     setBlankResultMap({});
     setConfirmedRangeKeys([]);
     setRevealRanges([]);
-    setChoiceId(null);
-    setPropIndex(0);
-    setChoiceMarks({});
-    setPropMarks({});
-    setCompletedChoices(new Set());
-    setLastResult(null);
     confirmLockRef.current = false;
   };
 
@@ -491,61 +468,25 @@ function DailyQuizModule({ content }) {
     }
   };
 
-  // ── CHOICE_OX 핸들러 (사용자 추후 작업, 손대지 말기) ──
-  const handleOxChoiceSelect = (id) => {
-    if (completedChoices.has(id)) return;
-    setChoiceId(id);
-    setPropIndex(0);
-    setLastResult(null);
-  };
-
-  const handleOxTokenClick = (token) => {
-    if (!currentProp) return;
-    const scoring = getScoring(currentQuestion);
-    const correct = currentProp.evidenceTokens?.includes(token.tokenId);
-    adjustTime(correct ? scoring.correctDeltaSec : scoring.wrongDeltaSec);
-    recordAnswer({ id: currentProp.propId, correct });
-    setLastResult(correct ? "correct" : "wrong");
-    if (!correct) return;
-
-    setPropMarks((prev) => ({ ...prev, [currentProp.propId]: currentProp.oxAnswer }));
-    const nextPropIdx = propIndex + 1;
-    if (nextPropIdx < currentOxChoice.propositions.length) {
-      setPropIndex(nextPropIdx);
-      return;
-    }
-
-    const isCorrectChoice = currentOxChoice.finalIsCorrectChoice;
-    setChoiceMarks((prev) => ({
-      ...prev,
-      [currentOxChoice.choiceId]: isCorrectChoice ? "정답" : isNegativeStem ? "O" : "X",
-    }));
-    const nextCompleted = new Set(completedChoices);
-    nextCompleted.add(currentOxChoice.choiceId);
-    setCompletedChoices(nextCompleted);
-
-    if (nextCompleted.size >= oxChoices.length || isCorrectChoice) {
-      setCompletedMap((prev) => ({
-        ...prev,
-        [currentQuestion.id]: { isCorrect: true },
-      }));
-      scheduleAdvance(FEEDBACK.B_CORRECT_FINAL_MS, handleNext);
-    } else {
-      setChoiceId(null);
-      setPropIndex(0);
-    }
-  };
-
   // ── 렌더링 ──
 
   if (!currentQuestion) return null;
 
   const progressPercent = ((currentIndex + 1) / questions.length) * 100;
 
-  // CHOICE_OX는 단일 화면 (사용자 추후 작업) — 누적 변환에서 제외
-  if (questionType === "CHOICE_OX") {
-    const passage = currentQuestion.passage;
-    const highlightTokens = currentProp?.evidenceTokens || [];
+  // CHOICE_OX / CHOICE_ANALYSIS — 신 모듈 ChoiceAnalysisCore에 위임
+  // 신 양식: passage.paragraphs[].sentences[] + choices[].evidenceSentenceIds + matchMode + expectedOX
+  // 옛 양식(propositions+tokens)은 ChoiceAnalysisCore가 자동 감지해 안내 메시지 표시
+  if (questionType === "CHOICE_OX" || questionType === "CHOICE_ANALYSIS") {
+    const handleQ10Complete = () => {
+      // 5개 선택지 모두 통과 → 다음 문제로
+      setCompletedMap((prev) => ({
+        ...prev,
+        [currentQuestion.id]: { isCorrect: true },
+      }));
+      setTimeout(() => handleNext(), 400);
+    };
+
     return (
       <div className="daily-quiz-module">
         <div className="dq-progress">
@@ -556,68 +497,25 @@ function DailyQuizModule({ content }) {
             <span>{currentIndex + 1} / {questions.length}</span>
           </div>
         </div>
-        <div className="dq-question-area dq-choice-ox">
-          <div className="dq-stem"><RichText>{currentQuestion.stem || ""}</RichText></div>
-          {currentProp ? (
-            <div className="dq-prop-banner">
-              명제: <RichText>{currentProp.text}</RichText>
-              <span className="dq-prop-ox">({currentProp.oxAnswer})</span>
-              {lastResult && (
-                <span className={`worksheet-feedback ${lastResult}`}>
-                  {lastResult === "correct" ? " 정답!" : " 오답"}
-                </span>
-              )}
-            </div>
-          ) : (
-            <div className="dq-prop-banner">선택지를 클릭해 분석을 시작하세요.</div>
-          )}
-          <div className="dq-choice-ox-body">
-            <div className="choice-list">
-              {oxChoices.map((choice) => (
-                <button
-                  key={choice.choiceId}
-                  type="button"
-                  className={`choice-item ${choiceId === choice.choiceId ? "active" : ""} ${completedChoices.has(choice.choiceId) ? "done" : ""}`}
-                  onClick={() => handleOxChoiceSelect(choice.choiceId)}
-                  disabled={completedChoices.has(choice.choiceId)}
-                >
-                  <span className="choice-label">{choice.choiceId}</span>
-                  <span><RichText>{choice.text}</RichText></span>
-                  {choiceMarks[choice.choiceId] && (
-                    <span
-                      className={`choice-mark ${choiceMarks[choice.choiceId] === "X" ? "wrong" : "correct"}`}
-                    >
-                      {choiceMarks[choice.choiceId]}
-                    </span>
-                  )}
-                </button>
-              ))}
-            </div>
-            <div className="dq-choice-ox-passage">
-              <TokenPassage
-                passage={passage}
-                highlightTokens={highlightTokens}
-                onTokenClick={handleOxTokenClick}
-              />
-              {currentOxChoice && (
-                <div className="choice-props">
-                  {currentOxChoice.propositions.map((prop) => (
-                    <div key={prop.propId} className="choice-prop">
-                      <span><RichText>{prop.text}</RichText></span>
-                      {propMarks[prop.propId] && (
-                        <span
-                          className={`choice-prop-mark ${propMarks[prop.propId] === "X" ? "wrong" : "correct"}`}
-                        >
-                          {propMarks[prop.propId]}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+        <div className="dq-tabs">
+          {questions.map((q, idx) => {
+            const c = completedMap[q.id];
+            return (
+              <span
+                key={q.id}
+                className={`dq-tab ${idx === currentIndex ? "active" : ""} ${c ? (c.isCorrect ? "correct" : "wrong") : ""}`}
+              >
+                {idx + 1}
+              </span>
+            );
+          })}
         </div>
+        <ChoiceAnalysisCore
+          question={currentQuestion}
+          onComplete={handleQ10Complete}
+          adjustTime={adjustTime}
+          recordAnswer={recordAnswer}
+        />
       </div>
     );
   }

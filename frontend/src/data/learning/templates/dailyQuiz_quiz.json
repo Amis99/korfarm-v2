@@ -198,88 +198,61 @@
       },
       {
         "id": "dq-10",
-        "type": "CHOICE_OX",
+        "type": "CHOICE_ANALYSIS",
         "questionKind": "CHOICE_ANALYSIS",
         "competency": "선택지 분석 및 전략 수립 능력",
-        "stem": "다음 글의 내용과 일치하지 않는 것을 고르시오.",
+        "stem": "다음 글의 내용과 일치하지 않는 것을 고르시오. (5개 선택지의 진위를 모두 판별해야 정답)",
         "passage": {
           "paragraphs": [
-            { "id": "p1", "text": "대부분의 사막은 중위도와 저위도 사이에 분포하며, 연 강수량이 250mm 미만이다. 사막의 기온은 낮과 밤의 차이가 매우 크다. 이는 수증기가 적어 열의 차단 효과가 약하기 때문이다." }
-          ],
-          "tokens": [
-            { "tokenId": "t1", "paragraphId": "p1", "text": "대부분의 사막은" },
-            { "tokenId": "t2", "paragraphId": "p1", "text": "중위도와 저위도 사이에" },
-            { "tokenId": "t3", "paragraphId": "p1", "text": "분포하며," },
-            { "tokenId": "t4", "paragraphId": "p1", "text": "연 강수량이" },
-            { "tokenId": "t5", "paragraphId": "p1", "text": "250mm 미만이다." },
-            { "tokenId": "t6", "paragraphId": "p1", "text": "사막의 기온은" },
-            { "tokenId": "t7", "paragraphId": "p1", "text": "낮과 밤의 차이가" },
-            { "tokenId": "t8", "paragraphId": "p1", "text": "매우 크다." },
-            { "tokenId": "t9", "paragraphId": "p1", "text": "이는" },
-            { "tokenId": "t10", "paragraphId": "p1", "text": "수증기가 적어" },
-            { "tokenId": "t11", "paragraphId": "p1", "text": "열의 차단 효과가" },
-            { "tokenId": "t12", "paragraphId": "p1", "text": "약하기 때문이다." }
+            {
+              "id": "p1",
+              "sentences": [
+                { "id": "p1_s1", "text": "대부분의 사막은 중위도와 저위도 사이에 분포한다." },
+                { "id": "p1_s2", "text": "사막의 연 강수량은 250mm 미만이다." },
+                { "id": "p1_s3", "text": "사막의 기온은 낮과 밤의 차이가 매우 크다." },
+                { "id": "p1_s4", "text": "이는 수증기가 적어 열의 차단 효과가 약하기 때문이다." }
+              ]
+            }
           ]
         },
         "choices": [
           {
             "choiceId": "A",
             "text": "사막은 주로 중위도와 저위도 사이에 위치한다.",
-            "propositions": [
-              {
-                "propId": "A1",
-                "text": "사막의 분포 지역",
-                "evidenceTokens": ["t1", "t2"],
-                "oxAnswer": "O",
-                "matchMode": "ALL"
-              }
-            ],
-            "finalIsCorrectChoice": false
+            "evidenceSentenceIds": ["p1_s1"],
+            "matchMode": "ANY",
+            "expectedOX": "O"
           },
           {
             "choiceId": "B",
             "text": "사막의 연 강수량은 250mm를 넘지 않는다.",
-            "propositions": [
-              {
-                "propId": "B1",
-                "text": "사막의 강수량 기준",
-                "evidenceTokens": ["t4", "t5"],
-                "oxAnswer": "O",
-                "matchMode": "ALL"
-              }
-            ],
-            "finalIsCorrectChoice": false
+            "evidenceSentenceIds": ["p1_s2"],
+            "matchMode": "ANY",
+            "expectedOX": "O"
           },
           {
             "choiceId": "C",
             "text": "사막은 수증기가 많아 일교차가 크다.",
-            "propositions": [
-              {
-                "propId": "C1",
-                "text": "사막의 수증기량",
-                "evidenceTokens": ["t10"],
-                "oxAnswer": "X",
-                "matchMode": "ALL"
-              }
-            ],
-            "finalIsCorrectChoice": true
+            "evidenceSentenceIds": ["p1_s4"],
+            "matchMode": "ANY",
+            "expectedOX": "X"
           },
           {
             "choiceId": "D",
             "text": "사막의 낮과 밤 기온차는 크다.",
-            "propositions": [
-              {
-                "propId": "D1",
-                "text": "사막의 일교차",
-                "evidenceTokens": ["t7", "t8"],
-                "oxAnswer": "O",
-                "matchMode": "ALL"
-              }
-            ],
-            "finalIsCorrectChoice": false
+            "evidenceSentenceIds": ["p1_s3"],
+            "matchMode": "ANY",
+            "expectedOX": "O"
+          },
+          {
+            "choiceId": "E",
+            "text": "사막은 수증기가 적고 일교차가 크다.",
+            "evidenceSentenceIds": ["p1_s3", "p1_s4"],
+            "matchMode": "ALL",
+            "expectedOX": "O"
           }
         ],
-        "explanation": "지문에서 '수증기가 적어'라고 했으므로, '수증기가 많아'는 지문과 일치하지 않습니다.",
+        "explanation": "C는 지문이 '수증기가 적어'라 한 것과 정반대로 '수증기가 많아'라고 진술해 X. E는 두 문장(일교차+수증기 적음)을 모두 검토해야 O 판별이 가능하므로 ALL 모드.",
         "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
       }
     ]

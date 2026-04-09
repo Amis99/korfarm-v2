@@ -34,8 +34,9 @@ const CONTENT_TYPE_TO_MODULE = {
   CONTENT_PDF: "study_content",
   CONTENT_PDF_QUIZ: "study_content",
   STUDY_CONTENT: "study_content",
-  // 선택지 판별
-  CHOICE_JUDGEMENT: "choice_judgement",
+  // 선택지 분석 (옛 명: 선택지 판별)
+  CHOICE_ANALYSIS: "choice_analysis",
+  CHOICE_JUDGEMENT: "choice_analysis",
   // 문법
   GRAMMAR_PHONEME_CHANGE: "phoneme_change",
   GRAMMAR_WORD_FORMATION: "word_formation",
@@ -102,7 +103,8 @@ const FARM_TAB_BY_TYPE = {
   LOGIC_REASONING: "logic",
   LOGIC_REASONING_QUIZ: "logic",
   PRO_LOGIC: "logic",
-  // 선택지 판별
+  // 선택지 분석
+  CHOICE_ANALYSIS: "choice",
   CHOICE_JUDGEMENT: "choice",
   // 글쓰기
   WRITING_DESCRIPTIVE: "writing",

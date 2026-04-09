@@ -48,6 +48,7 @@ const CONTENT_TYPE_FARM_MAPPING = {
   LOGIC_REASONING: "logic",
   LOGIC_REASONING_QUIZ: "logic",
   CHOICE_JUDGEMENT: "choice",
+  CHOICE_ANALYSIS: "choice",
   WRITING_DESCRIPTIVE: "writing",
   PRO_READING: "reading",
   PRO_VOCAB: "vocab",

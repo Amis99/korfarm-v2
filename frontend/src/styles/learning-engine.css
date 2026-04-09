@@ -2489,6 +2489,482 @@ mark.highlight {
   }
 }
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ChoiceAnalysis 모듈 (선택지 분석)             */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.ca-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 8px 32px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.ca-stack-item {
+  background: rgba(255, 252, 246, 0.96);
+  border: 2px solid rgba(75, 61, 54, 0.18);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.ca-stack-item.active {
+  border-color: #f06c24;
+  box-shadow: 0 4px 18px rgba(240, 108, 36, 0.18);
+}
+
+.ca-stack-item.completed {
+  background: rgba(230, 245, 234, 0.94);
+  border-color: #4e8a60;
+}
+
+.ca-stack-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #6a5040;
+}
+
+.ca-stack-num {
+  background: rgba(240, 108, 36, 0.12);
+  color: #b04510;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.ca-stack-mark.correct {
+  background: #4e8a60;
+  color: #fff;
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+
+.ca-completed-summary {
+  padding: 8px 0;
+}
+
+.ca-completed-stem {
+  font-size: 14px;
+  color: #4b3d36;
+  margin-bottom: 6px;
+}
+
+.ca-completed-meta {
+  font-size: 12px;
+  color: #4e8a60;
+  font-weight: 600;
+}
+
+/* 모듈 본체 */
+.ca-module {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ca-stem {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c2418;
+  padding: 10px 14px;
+  background: rgba(240, 108, 36, 0.06);
+  border-left: 3px solid #f06c24;
+  border-radius: 6px;
+}
+
+.ca-progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #6a5040;
+  font-weight: 600;
+}
+
+.ca-all-progress {
+  background: rgba(240, 108, 36, 0.12);
+  color: #b04510;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+/* 좌우 2단 (지문 / 선택지) */
+.ca-split {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+
+@media (max-width: 768px) {
+  .ca-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ca-passage-pane,
+.ca-choices-pane {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(75, 61, 54, 0.15);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.ca-passage-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #6a5040;
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+
+.ca-passage-body {
+  font-size: 15px;
+  line-height: 1.85;
+  color: #2c2418;
+}
+
+.ca-paragraph {
+  margin: 0 0 0.8em;
+  word-break: keep-all;
+}
+
+.ca-sentence {
+  display: inline;
+  cursor: default;
+  padding: 1px 2px;
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+
+.ca-sentence.clickable {
+  cursor: pointer;
+}
+
+.ca-sentence.clickable:hover {
+  background: rgba(240, 108, 36, 0.18);
+}
+
+.ca-sentence.confirmed {
+  background: rgba(74, 200, 120, 0.25);
+  font-weight: 600;
+}
+
+.ca-sentence.shake {
+  background: rgba(220, 80, 80, 0.3);
+  animation: ca-shake 0.6s;
+}
+
+@keyframes ca-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.ca-sentence-check {
+  display: inline-block;
+  margin-left: 2px;
+  color: #4e8a60;
+  font-weight: 800;
+}
+
+/* 선택지 5개 */
+.ca-choices-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ca-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: white;
+  border: 1.5px solid rgba(75, 61, 54, 0.2);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #2c2418;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ca-choice:hover:not(:disabled) {
+  background: #fff7ee;
+  border-color: #f0a263;
+}
+
+.ca-choice.active {
+  background: #fff1e3;
+  border-color: #f06c24;
+  box-shadow: 0 2px 8px rgba(240, 108, 36, 0.2);
+}
+
+.ca-choice.passed {
+  background: #d8f0dd;
+  border-color: #4e8a60;
+  cursor: default;
+  opacity: 0.7;
+}
+
+.ca-choice-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #efe7df;
+  color: #6a5040;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.ca-choice.active .ca-choice-num {
+  background: #f06c24;
+  color: #fff;
+}
+
+.ca-choice.passed .ca-choice-num {
+  background: #4e8a60;
+  color: #fff;
+}
+
+.ca-choice-text {
+  flex: 1;
+}
+
+.ca-choice-mark {
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.ca-choice-mark.passed {
+  color: #4e8a60;
+  font-size: 18px;
+}
+
+.ca-choice-mark.active {
+  color: #f06c24;
+  font-size: 14px;
+}
+
+.ca-hint {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(240, 108, 36, 0.08);
+  border: 1px dashed #f0a263;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #b04510;
+  text-align: center;
+}
+
+/* OX 모달 */
+.ca-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.ca-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 28px;
+  max-width: 540px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.ca-modal-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #2c2418;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.ca-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ca-modal-section {
+  padding: 12px 14px;
+  background: #fbf3e3;
+  border-radius: 8px;
+}
+
+.ca-modal-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #b04510;
+  margin-bottom: 4px;
+  letter-spacing: 0.04em;
+}
+
+.ca-modal-text {
+  font-size: 15px;
+  color: #2c2418;
+  line-height: 1.5;
+}
+
+.ca-modal-text.choice {
+  font-weight: 600;
+}
+
+.ca-modal-arrow {
+  text-align: center;
+  font-size: 24px;
+  color: #c7a878;
+}
+
+.ca-modal-feedback {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.ca-modal-feedback.wrong {
+  background: rgba(220, 80, 80, 0.15);
+  color: #c75a5a;
+}
+
+.ca-modal-feedback.correct {
+  background: rgba(74, 200, 120, 0.18);
+  color: #4e8a60;
+}
+
+.ca-modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.ca-modal-ox-btn {
+  padding: 18px 0;
+  border: 3px solid;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 32px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ca-modal-ox-btn .ca-ox-sub {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.ca-modal-ox-btn.ca-ox-O {
+  border-color: #4e8a60;
+  color: #4e8a60;
+}
+
+.ca-modal-ox-btn.ca-ox-O:hover:not(:disabled) {
+  background: #4e8a60;
+  color: #fff;
+}
+
+.ca-modal-ox-btn.ca-ox-X {
+  border-color: #c75a5a;
+  color: #c75a5a;
+}
+
+.ca-modal-ox-btn.ca-ox-X:hover:not(:disabled) {
+  background: #c75a5a;
+  color: #fff;
+}
+
+.ca-modal-ox-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ca-modal-cancel {
+  display: block;
+  margin: 0 auto;
+  padding: 6px 16px;
+  background: transparent;
+  border: 1px solid #c7a878;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #6a5040;
+  cursor: pointer;
+}
+
+.ca-modal-cancel:hover:not(:disabled) {
+  background: #fbf3e3;
+}
+
+/* 옛 형식 안내 */
+.ca-legacy-warn {
+  padding: 30px;
+  background: rgba(220, 180, 60, 0.12);
+  border: 2px solid #d4b03c;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.ca-legacy-warn h3 {
+  color: #b04510;
+  margin-bottom: 10px;
+}
+
+.ca-legacy-warn code {
+  background: #2c2418;
+  color: #fbf3e3;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+/* 모바일 사이즈 키움 */
+@media (max-width: 768px) {
+  .ca-passage-body,
+  .ca-sentence,
+  .ca-choice,
+  .ca-choice-text,
+  .ca-stem,
+  .ca-modal-text {
+    font-size: 22px !important;
+    line-height: 1.65 !important;
+  }
+  .ca-choice-num {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+  .ca-modal {
+    max-width: 95%;
+  }
+  .ca-modal-ox-btn {
+    font-size: 40px;
+    padding: 24px 0;
+  }
+}
+
 /* ── PhonemeChange / MorphemeAnalysis 누적 스택 ── */
 
 .phoneme-stack-wrap,
