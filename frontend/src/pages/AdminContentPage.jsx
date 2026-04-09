@@ -189,7 +189,7 @@ const TEMPLATE_GROUPS = [
   { label: "농장 모드", ids: [
     "farm_reading", "vocab_training", "farm_background", "farm_content",
     "farm_grammar_wf", "farm_grammar_ss", "farm_grammar_pc", "farm_grammar_pos",
-    "farm_concept", "farm_logic", "farm_writing", "farm_choice"
+    "farm_concept", "farm_logic", "farm_writing", "farm_choice_analysis"
   ]},
   { label: "프로 모드", ids: ["pro_reading", "pro_vocab", "pro_background", "pro_logic", "pro_answer"] },
 ];

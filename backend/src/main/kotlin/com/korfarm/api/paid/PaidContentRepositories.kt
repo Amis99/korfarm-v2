@@ -35,6 +35,7 @@ interface ContentRepository : JpaRepository<ContentEntity, String> {
 interface ContentVersionRepository : JpaRepository<ContentVersionEntity, String> {
     fun findTopByContentIdOrderByCreatedAtDesc(contentId: String): ContentVersionEntity?
     fun deleteAllByContentId(contentId: String)
+    fun findByContentIdAndSchemaVersion(contentId: String, schemaVersion: String): ContentVersionEntity?
 }
 
 interface TestPaperRepository : JpaRepository<TestPaperEntity, String> {

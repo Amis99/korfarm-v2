@@ -21,6 +21,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Service
 class AdminContentService(
@@ -254,6 +255,16 @@ class AdminContentService(
 
         // 새 버전 INSERT (이력 보존). 기존 버전은 그대로 두고 항상 새 row 생성.
         // findTopByContentIdOrderByCreatedAtDesc로 최신 버전을 조회하면 새로 만든 것이 반환됨.
+        // 단, content_versions 테이블에는 (content_id, schema_version) unique 제약이 있으므로,
+        // 동일 schemaVersion 기존 행이 있으면 백업 suffix를 붙여 unique 충돌을 회피한다.
+        val existingSameSchema = contentVersionRepository.findByContentIdAndSchemaVersion(
+            contentId, request.schemaVersion
+        )
+        if (existingSameSchema != null) {
+            val ts = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"))
+            existingSameSchema.schemaVersion = "${existingSameSchema.schemaVersion}-bak-$ts"
+            contentVersionRepository.saveAndFlush(existingSameSchema)
+        }
         val version = ContentVersionEntity(
             id = IdGenerator.newId("cv"),
             contentId = contentId,

@@ -10,7 +10,7 @@ import farmGrammarPos from "./templates/farm_grammar_pos.json";
 import farmConcept from "./templates/farm_concept.json";
 import farmLogic from "./templates/farm_logic.json";
 import farmWriting from "./templates/farm_writing.json";
-import farmChoice from "./templates/farm_choice.json";
+import farmChoiceAnalysis from "./templates/farm_choice_analysis.json";
 import proAnswer from "./templates/pro_answer.json";
 
 /**
@@ -38,7 +38,7 @@ export const LEARNING_TEMPLATES = [
   { id: "farm_concept", contentType: "LANGUAGE_CONCEPT_QUIZ", title: "국어 개념 농장", moduleKey: "worksheet_quiz", content: farmConcept },
   { id: "farm_logic", contentType: "LOGIC_REASONING_QUIZ", title: "논리사고력 학습", moduleKey: "logic_reasoning", content: farmLogic },
   { id: "farm_writing", contentType: "WRITING_DESCRIPTIVE", title: "서술형 농장", moduleKey: "worksheet_quiz", content: farmWriting },
-  { id: "farm_choice", contentType: "CHOICE_JUDGEMENT", title: "선택지 판별 농장", moduleKey: "choice_judgement", content: farmChoice },
+  { id: "farm_choice_analysis", contentType: "CHOICE_ANALYSIS", title: "선택지 분석 농장", moduleKey: "choice_analysis", content: farmChoiceAnalysis },
   // 프로 모드
   { id: "pro_reading", contentType: "PRO_READING", title: "프로 독해", moduleKey: "reading_training", content: readingTraining },
   { id: "pro_vocab", contentType: "PRO_VOCAB", title: "프로 어휘", moduleKey: "worksheet_quiz", content: vocabTraining },

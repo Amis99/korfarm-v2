@@ -53,7 +53,7 @@ const MODULE_GROUPS = [
       { value: "farm:concept:worksheet_quiz", label: "국어 개념 농장", contentType: "LANGUAGE_CONCEPT_QUIZ" },
       { value: "farm:logic:logic_reasoning", label: "논리사고력 학습", contentType: "LOGIC_REASONING_QUIZ" },
       { value: "farm:writing:worksheet_quiz", label: "서술형 농장", contentType: "WRITING_DESCRIPTIVE" },
-      { value: "farm:choice:choice_judgement", label: "선택지 판별 농장", contentType: "CHOICE_JUDGEMENT" },
+      { value: "farm:choice:choice_analysis", label: "선택지 분석 농장", contentType: "CHOICE_ANALYSIS" },
     ],
   },
   {

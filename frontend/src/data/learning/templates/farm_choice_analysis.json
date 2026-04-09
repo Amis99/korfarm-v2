@@ -1,0 +1,134 @@
+{
+  "contentId": "TEMPLATE",
+  "contentType": "CHOICE_ANALYSIS",
+  "title": "선택지 분석 학습",
+  "description": "수능 객관식 5선택지의 진위를 지문 근거와 대조해 OX 직접 판별. 5개 모두 통과해야 정답.",
+  "targetLevel": "RUSSELL_1",
+  "area": "GENERAL",
+  "subArea": "CHOICE_JUDGEMENT",
+  "competencies": ["CHOICE_ANALYSIS"],
+  "tags": ["choice_analysis", "farm"],
+  "seedReward": { "seedType": "GRAPE", "count": 3, "multiplier": 1 },
+  "timeLimitSec": 600,
+  "moduleKey": "choice_analysis",
+  "payload": {
+    "questions": [
+      {
+        "id": "ca-1",
+        "type": "CHOICE_ANALYSIS",
+        "questionKind": "CHOICE_ANALYSIS",
+        "competency": "선택지 분석 및 전략 수립 능력",
+        "stem": "다음 글의 내용과 일치하지 않는 것을 고르시오. (5개 선택지의 진위를 모두 판별해야 정답)",
+        "passage": {
+          "paragraphs": [
+            {
+              "id": "p1",
+              "sentences": [
+                { "id": "p1_s1", "text": "대부분의 사막은 중위도와 저위도 사이에 분포한다." },
+                { "id": "p1_s2", "text": "사막의 연 강수량은 250mm 미만이다." },
+                { "id": "p1_s3", "text": "사막의 기온은 낮과 밤의 차이가 매우 크다." },
+                { "id": "p1_s4", "text": "이는 수증기가 적어 열의 차단 효과가 약하기 때문이다." }
+              ]
+            }
+          ]
+        },
+        "choices": [
+          {
+            "choiceId": "A",
+            "text": "사막은 주로 중위도와 저위도 사이에 위치한다.",
+            "evidenceSentenceIds": ["p1_s1"],
+            "matchMode": "ANY",
+            "expectedOX": "O"
+          },
+          {
+            "choiceId": "B",
+            "text": "사막의 연 강수량은 250mm를 넘지 않는다.",
+            "evidenceSentenceIds": ["p1_s2"],
+            "matchMode": "ANY",
+            "expectedOX": "O"
+          },
+          {
+            "choiceId": "C",
+            "text": "사막은 수증기가 많아 일교차가 크다.",
+            "evidenceSentenceIds": ["p1_s4"],
+            "matchMode": "ANY",
+            "expectedOX": "X"
+          },
+          {
+            "choiceId": "D",
+            "text": "사막의 낮과 밤 기온차는 크다.",
+            "evidenceSentenceIds": ["p1_s3"],
+            "matchMode": "ANY",
+            "expectedOX": "O"
+          },
+          {
+            "choiceId": "E",
+            "text": "사막은 수증기가 적고 일교차가 크다.",
+            "evidenceSentenceIds": ["p1_s3", "p1_s4"],
+            "matchMode": "ALL",
+            "expectedOX": "O"
+          }
+        ],
+        "explanation": "C는 지문이 '수증기가 적어'라 한 것과 반대로 진술해 X. E는 두 문장(일교차+수증기 적음)을 모두 검토해야 O 판별이 가능하므로 ALL 모드.",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+      },
+      {
+        "id": "ca-2",
+        "type": "CHOICE_ANALYSIS",
+        "questionKind": "CHOICE_ANALYSIS",
+        "competency": "선택지 분석 및 전략 수립 능력",
+        "stem": "윗글에 대한 이해로 적절하지 않은 것은?",
+        "passage": {
+          "paragraphs": [
+            {
+              "id": "p1",
+              "sentences": [
+                { "id": "p1_s1", "text": "(여기에 두 번째 지문의 첫 문장)" },
+                { "id": "p1_s2", "text": "(두 번째 문장)" }
+              ]
+            }
+          ]
+        },
+        "choices": [
+          {
+            "choiceId": "A",
+            "text": "(선택지 A)",
+            "evidenceSentenceIds": ["p1_s1"],
+            "matchMode": "ANY",
+            "expectedOX": "O"
+          },
+          {
+            "choiceId": "B",
+            "text": "(선택지 B)",
+            "evidenceSentenceIds": ["p1_s2"],
+            "matchMode": "ANY",
+            "expectedOX": "O"
+          },
+          {
+            "choiceId": "C",
+            "text": "(선택지 C)",
+            "evidenceSentenceIds": ["p1_s1"],
+            "matchMode": "ANY",
+            "expectedOX": "X"
+          },
+          {
+            "choiceId": "D",
+            "text": "(선택지 D)",
+            "evidenceSentenceIds": ["p1_s2"],
+            "matchMode": "ANY",
+            "expectedOX": "O"
+          },
+          {
+            "choiceId": "E",
+            "text": "(선택지 E)",
+            "evidenceSentenceIds": ["p1_s1", "p1_s2"],
+            "matchMode": "ALL",
+            "expectedOX": "O"
+          }
+        ],
+        "explanation": "(해설)",
+        "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40 }
+      }
+    ]
+  }
+}
