@@ -14,7 +14,9 @@ import com.korfarm.api.user.RefreshTokenRepository
 import com.korfarm.api.user.UserEntity
 import com.korfarm.api.user.UserRepository
 import com.korfarm.api.org.OrgMembershipRepository
+import com.korfarm.api.user.ParentStudentLinkEntity
 import com.korfarm.api.user.ParentStudentLinkRepository
+import com.korfarm.api.payment.SubscriptionRepository
 import org.springframework.http.HttpStatus
 import org.springframework.dao.DataAccessException
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -32,7 +34,8 @@ class AuthService(
     private val jwtProperties: JwtProperties,
     private val orgMembershipRepository: OrgMembershipRepository,
     private val orgRepository: OrgRepository,
-    private val parentStudentLinkRepository: ParentStudentLinkRepository
+    private val parentStudentLinkRepository: ParentStudentLinkRepository,
+    private val subscriptionRepository: SubscriptionRepository
 ) {
     private val logger = LoggerFactory.getLogger(AuthService::class.java)
 
@@ -148,7 +151,27 @@ class AuthService(
             )
         }
 
-        // 9. 토큰 발급 (pending 상태여도 로그인 가능)
+        // 9. 학부모 가입 시 학생 매칭 성공이면 자동 연결
+        if (linkedStudentId != null) {
+            val existingLink = parentStudentLinkRepository.findByParentUserIdAndStudentUserId(user.id, linkedStudentId)
+            if (existingLink == null || existingLink.status != "active") {
+                val now = LocalDateTime.now()
+                val link = existingLink ?: ParentStudentLinkEntity(
+                    id = IdGenerator.newId("pl"),
+                    parentUserId = user.id,
+                    studentUserId = linkedStudentId,
+                    status = "active"
+                )
+                link.status = "active"
+                link.requestedAt = link.requestedAt ?: now
+                link.approvedAt = now
+                link.approvedBy = "system"
+                parentStudentLinkRepository.save(link)
+                logger.info("학부모 가입 시 학생 자동 연결 완료: parentId={}, studentId={}", user.id, linkedStudentId)
+            }
+        }
+
+        // 10. 토큰 발급 (pending 상태여도 로그인 가능)
         return issueTokens(user, org.id, membershipStatus == "pending")
     }
 
@@ -321,6 +344,16 @@ class AuthService(
         try {
             if (parentStudentLinkRepository.existsByParentUserIdAndStatus(userId, "active")) {
                 roles.add("PARENT")
+                // 부모의 유료 상태는 연결된 자녀의 구독에서 파생
+                val childLinks = parentStudentLinkRepository.findByParentUserIdAndStatus(userId, "active")
+                val now = LocalDateTime.now()
+                val hasSubscribedChild = childLinks.any { link ->
+                    val sub = subscriptionRepository.findTopByUserIdOrderByEndAtDesc(link.studentUserId)
+                    sub != null && sub.endAt.isAfter(now) && (sub.status == "active" || sub.status == "canceled")
+                }
+                if (hasSubscribedChild) {
+                    roles.add("PAID")
+                }
             }
         } catch (ex: DataAccessException) {
             logger.warn("Failed to resolve parent role for userId={}", userId, ex)
