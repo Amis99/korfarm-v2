@@ -128,6 +128,7 @@ class AiChatService(
         val requestBody = objectMapper.writeValueAsString(mapOf(
             "model" to modelId,
             "max_tokens" to 512,
+            "temperature" to 0.9,
             "system" to listOf(
                 mapOf(
                     "type" to "text",
@@ -158,25 +159,34 @@ class AiChatService(
     }
 
     /**
-     * ai_chat_references에서 관련 프로그램 지식/조쌤 발언 검색.
+     * ai_chat_references에서 프로그램 지식(항상) + 카톡 발언(검색) 가져오기.
      */
     private fun searchReferences(triggerMessage: ChatMessageEntity): String {
-        val question = triggerMessage.content ?: return ""
-        val cleaned = question.replace(TRIGGER_PATTERN, "").trim()
-        if (cleaned.length < 2) return ""
-
         return try {
-            val results = referenceRepo.searchRelevant(cleaned, 8)
-            if (results.isEmpty()) return ""
+            val parts = mutableListOf<String>()
 
-            results.joinToString("\n") { ref ->
-                val label = when (ref.source) {
-                    "program_doc" -> "[프로그램]"
-                    "kakao_cho" -> "[조쌤]"
-                    else -> "[참고]"
-                }
-                "$label ${ref.content}"
+            // 1. 프로그램 문서는 항상 전부 포함 (15건, ~1500토큰)
+            val programDocs = referenceRepo.findBySource("program_doc")
+            if (programDocs.isNotEmpty()) {
+                val docText = programDocs.joinToString("\n") { "[프로그램] ${it.content}" }
+                parts.add(docText)
             }
+
+            // 2. 카톡 조창훈 발언은 FULLTEXT 검색 (NATURAL LANGUAGE MODE)
+            val question = triggerMessage.content ?: ""
+            val cleaned = question.replace(TRIGGER_PATTERN, "").trim()
+            if (cleaned.length >= 2) {
+                val kakaoResults = referenceRepo.searchKakao(cleaned, 8)
+                if (kakaoResults.isNotEmpty()) {
+                    val kakaoText = kakaoResults.joinToString("\n") { ref ->
+                        val label = if (ref.source == "kakao_humor") "[조쌤유머]" else "[조쌤]"
+                        "$label ${ref.content}"
+                    }
+                    parts.add(kakaoText)
+                }
+            }
+
+            parts.joinToString("\n\n")
         } catch (e: Exception) {
             log.warn("참고 자료 검색 실패", e)
             ""

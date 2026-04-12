@@ -18,22 +18,21 @@ class AiChatReferenceEntity(
 )
 
 interface AiChatReferenceRepository : JpaRepository<AiChatReferenceEntity, String> {
+    /** 프로그램 문서는 항상 전부 로드 */
+    fun findBySource(source: String): List<AiChatReferenceEntity>
+
+    /** 카톡 발언 FULLTEXT 검색 (NATURAL LANGUAGE MODE) */
     @Query(
         value = """
         SELECT * FROM ai_chat_references
-        WHERE MATCH(content) AGAINST(:keyword IN BOOLEAN MODE)
-        ORDER BY
-            CASE source
-                WHEN 'program_doc' THEN 0
-                WHEN 'kakao_cho' THEN 1
-                ELSE 2
-            END,
-            spoken_at DESC
+        WHERE source IN ('kakao_cho', 'kakao_humor')
+          AND MATCH(content) AGAINST(:keyword IN NATURAL LANGUAGE MODE)
+        ORDER BY spoken_at DESC
         LIMIT :lim
         """,
         nativeQuery = true
     )
-    fun searchRelevant(
+    fun searchKakao(
         @Param("keyword") keyword: String,
         @Param("lim") limit: Int
     ): List<AiChatReferenceEntity>
