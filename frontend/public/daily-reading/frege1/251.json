@@ -1,32 +1,34 @@
 {
-  "contentId": "dr-f1-251",
+  "contentId": "dr-frege1-251",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "여럿이 하나의 소리를 내는 합창",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 심해 탐사 장비",
+  "description": "심해를 탐험하는 다양한 장비를 알아봅니다.",
   "targetLevel": "FREGE_1",
   "schoolGradeRange": {
     "min": 4,
     "max": 4
   },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학",
+    "독해"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
+  "timeLimitSec": 900,
   "assets": {},
   "payload": {
     "passage": {
@@ -34,32 +36,591 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "한두 사람이 아니라 수십 명의 사람이 모여 한목소리로 노래 부르는 것을 합창이라고 합니다. 여러 사람이 내는 목소리의 높낮이와 음색이 조금씩 다르지만, 이것이 모여서 울려 퍼질 때 혼자 부를 때는 절대로 느낄 수 없는 깊고 웅장한 감동을 만들어 냅니다. 합창은 사람의 목소리라는 가장 아름다운 악기를 사용하는 종합 예술입니다."
+          "text": "심해는 햇빛이 닿지 않아 어둡고 수압이 높은 바다 깊은 곳이다. 사람이 직접 들어가 탐사하기 매우 어려워 특수한 장비가 필요하다."
         },
         {
           "id": "p2",
-          "text": "합창은 목소리의 높낮이에 따라 보통 네 개의 파트로 나누어집니다. 여성의 가장 높은 목소리인 소프라노, 여성의 낮은 목소리인 알토, 남성의 높은 목소리인 테너, 남성의 가장 낮은 목소리인 베이스입니다. 각 파트는 서로 다른 화음을 부르는데, 각자의 음이 빈틈없이 정확하게 섞일 때 아주 풍성하고 아름다운 하나의 음악이 탄생합니다."
+          "text": "유인 잠수정은 과학자가 직접 타고 바다 밑으로 내려가는 장비다. 두꺼운 외벽으로 설계되어 안전하게 심해 생물을 관찰할 수 있다."
         },
         {
           "id": "p3",
-          "text": "훌륭한 합창을 하려면 나 혼자 목소리를 크게 내어 돋보이려 해서는 안 됩니다. 내 옆 사람과 건너편 파트의 소리에 귀를 기울이며 내 목소리와 부드럽게 섞이는지 잘 들어야 합니다. 그래서 지휘자의 손끝에서 나오는 지시에 온전히 집중하고 박자와 세기를 하나의 심장처럼 맞추는 과정이 무엇보다 필수적인 규칙입니다."
+          "text": "무인 잠수정은 사람이 타지 않고 배 위에서 원격으로 조종하는 로봇이다. 카메라와 로봇팔이 있어 깊은 곳의 지형을 정밀하게 조사한다."
         },
         {
           "id": "p4",
-          "text": "초등학교 음악 시간에 친구들과 함께 부르는 돌림노래나 합창은 서로 양보하고 존중하는 태도를 배우게 합니다. 처음에는 불협화음이 나더라도 꾸준히 함께 연습하며 조율해 나가는 과정에서 우리는 서로의 마음을 잇게 됩니다. 나보다 전체의 조화를 생각하는 합창의 정신은 아름다운 공동체를 만드는 아주 중요한 비결입니다."
+          "text": "최근에는 스스로 판단하고 넓은 지역을 탐색하는 자율 무인 잠수정도 개발되었다. 과학 기술의 발전으로 심해의 비밀이 점차 밝혀지고 있다."
         }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 34
+              }
+            ]
+          },
+          "question": {
+            "prompt": "심해는 어떤 특징을 가진 바다인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어둡고 수압이 높은 곳"
+              },
+              {
+                "id": "B",
+                "text": "햇빛이 강한 얕은 곳"
+              },
+              {
+                "id": "C",
+                "text": "항상 따뜻한 곳"
+              },
+              {
+                "id": "D",
+                "text": "파도가 전혀 없는 곳"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 36,
+                "end": 71
+              }
+            ]
+          },
+          "question": {
+            "prompt": "심해를 탐사하기 위해 무엇이 필요한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "특수한 장비"
+              },
+              {
+                "id": "B",
+                "text": "일반 튜브"
+              },
+              {
+                "id": "C",
+                "text": "나무로 만든 배"
+              },
+              {
+                "id": "D",
+                "text": "간단한 수영복"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 71
+              }
+            ]
+          },
+          "question": {
+            "prompt": "첫 번째 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "장비가 필요한 심해의 특징"
+              },
+              {
+                "id": "B",
+                "text": "바다의 얕은 곳 탐험"
+              },
+              {
+                "id": "C",
+                "text": "심해에서 수영하기"
+              },
+              {
+                "id": "D",
+                "text": "햇빛이 바다에 미치는 영향"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 34
+              }
+            ]
+          },
+          "question": {
+            "prompt": "유인 잠수정은 누가 직접 타는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "과학자"
+              },
+              {
+                "id": "B",
+                "text": "로봇"
+              },
+              {
+                "id": "C",
+                "text": "인공지능"
+              },
+              {
+                "id": "D",
+                "text": "물고기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 36,
+                "end": 70
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇으로 설계되어 안전하게 관찰하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두꺼운 외벽"
+              },
+              {
+                "id": "B",
+                "text": "얇은 유리"
+              },
+              {
+                "id": "C",
+                "text": "투명한 비닐"
+              },
+              {
+                "id": "D",
+                "text": "가벼운 종이"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 70
+              }
+            ]
+          },
+          "question": {
+            "prompt": "두 번째 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사람이 타는 유인 잠수정"
+              },
+              {
+                "id": "B",
+                "text": "그물로 물고기 잡기"
+              },
+              {
+                "id": "C",
+                "text": "수영으로 심해 가기"
+              },
+              {
+                "id": "D",
+                "text": "원격 조종 로봇의 원리"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 38
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무인 잠수정은 어떻게 조종하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원격으로 조종"
+              },
+              {
+                "id": "B",
+                "text": "사람이 직접 타고 조종"
+              },
+              {
+                "id": "C",
+                "text": "바람의 힘으로 이동"
+              },
+              {
+                "id": "D",
+                "text": "파도에 맡겨 이동"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 40,
+                "end": 72
+              }
+            ]
+          },
+          "question": {
+            "prompt": "깊은 곳을 조사하기 위해 무엇이 있나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "카메라와 로봇팔"
+              },
+              {
+                "id": "B",
+                "text": "그물과 낚싯대"
+              },
+              {
+                "id": "C",
+                "text": "스피커와 마이크"
+              },
+              {
+                "id": "D",
+                "text": "망원경과 나침반"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 72
+              }
+            ]
+          },
+          "question": {
+            "prompt": "세 번째 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원격으로 조종하는 무인 잠수정"
+              },
+              {
+                "id": "B",
+                "text": "사람이 직접 타는 잠수정"
+              },
+              {
+                "id": "C",
+                "text": "잠수정의 외벽 두께"
+              },
+              {
+                "id": "D",
+                "text": "심해 생물의 종류"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 42
+              }
+            ]
+          },
+          "question": {
+            "prompt": "최근 개발된 잠수정의 특징은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "스스로 판단하고 탐색"
+              },
+              {
+                "id": "B",
+                "text": "사람이 늘 조종해야 함"
+              },
+              {
+                "id": "C",
+                "text": "육지에서만 움직임"
+              },
+              {
+                "id": "D",
+                "text": "잠수를 하지 못함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 44,
+                "end": 74
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇의 발전으로 심해 비밀이 밝혀지나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "과학 기술의 발전"
+              },
+              {
+                "id": "B",
+                "text": "문학의 발전"
+              },
+              {
+                "id": "C",
+                "text": "음악의 발전"
+              },
+              {
+                "id": "D",
+                "text": "미술의 발전"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 74
+              }
+            ]
+          },
+          "question": {
+            "prompt": "네 번째 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "심해 비밀을 밝히는 기술 발전"
+              },
+              {
+                "id": "B",
+                "text": "심해 탐사의 중단"
+              },
+              {
+                "id": "C",
+                "text": "잠수정의 위험성"
+              },
+              {
+                "id": "D",
+                "text": "과학 기술의 퇴보"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
+      "cards": [
+        {
+          "id": "c1",
+          "text": "심해는 어둡고 수압이 높아 특수 장비가 필요함."
+        },
+        {
+          "id": "c2",
+          "text": "유인 잠수정은 사람이 타고 내려가는 장비임."
+        },
+        {
+          "id": "c3",
+          "text": "두꺼운 외벽 덕분에 안전하게 심해를 관찰함."
+        },
+        {
+          "id": "c4",
+          "text": "무인 잠수정은 원격으로 조종하는 로봇임."
+        },
+        {
+          "id": "c5",
+          "text": "카메라와 로봇팔로 깊은 곳을 정밀히 조사함."
+        },
+        {
+          "id": "c6",
+          "text": "과학 기술 발전으로 심해의 비밀이 밝혀짐."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "햇빛이 닿지 않아 어둡고 수압이 높은 바다 깊은 곳?",
+          "answerText": "심해",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 2
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "사람이 직접 타고 바다 밑으로 내려가는 탐사 장비?",
+          "answerText": "유인 잠수정",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 6
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "사람이 타지 않고 배 위에서 원격으로 조종하는 로봇?",
+          "answerText": "무인 잠수정",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 6
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        }
+      ]
     }
   }
 }

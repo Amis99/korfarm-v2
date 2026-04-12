@@ -1,32 +1,34 @@
 {
-  "contentId": "dr-f1-253",
+  "contentId": "dr-frege1-253",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "매일 밤 모양이 바뀌는 달의 비밀",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 달의 위상 변화",
+  "description": "달의 모양이 날마다 다르게 보이는 이유를 알아봅니다.",
   "targetLevel": "FREGE_1",
   "schoolGradeRange": {
     "min": 4,
     "max": 4
   },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학",
+    "독해"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
+  "timeLimitSec": 900,
   "assets": {},
   "payload": {
     "passage": {
@@ -34,32 +36,591 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "밤하늘에 떠오르는 달은 매일 조금씩 그 모양이 바뀝니다. 마치 누군가 조금씩 갉아먹거나 살을 붙이는 것처럼 보이지만, 사실 달 자체의 모양이 변하는 것은 아닙니다. 달은 스스로 빛을 내지 못하고 태양 빛을 반사하여 빛나는데, 지구 주위를 빙글빙글 돌기 때문에 태양 빛을 받는 부분이 달라져 모양이 변하는 것입니다. 이것을 달의 위상 변화라고 부릅니다."
+          "text": "밤하늘의 달은 둥근 모습이었다가 반달이나 초승달 모양으로 날마다 그 모습이 달라진다. 이것을 달의 위상 변화라고 부른다."
         },
         {
           "id": "p2",
-          "text": "달이 지구를 기준으로 태양과 같은 쪽에 있을 때는 태양 빛을 받는 면이 지구 반대편이 되어 우리 눈에 보이지 않는데, 이때를 삭이라고 합니다. 삭이 지나고 며칠 뒤면 오른쪽이 얇게 눈썹처럼 빛나는 초승달이 됩니다. 초승달은 저녁 서쪽 하늘에서 잠시 보였다가 이내 져버립니다."
+          "text": "달은 스스로 빛을 내지 못하고 태양 빛을 반사해서 빛나게 보인다. 그래서 태양과 지구와 달의 위치에 따라 지구에서 보이는 달의 밝은 부분이 달라진다."
         },
         {
           "id": "p3",
-          "text": "시간이 더 지나면 오른쪽 절반이 빛나는 반달인 상현달이 되고, 지구를 기준으로 달이 태양의 완전한 반대편에 서게 되면 비로소 동그랗고 환한 보름달이 뜹니다. 보름달을 망이라고도 부르며 우리 조상들은 이때 소원을 빌며 강강술래를 하기도 했습니다. 보름달 이후부터는 오른쪽부터 서서히 어두워지기 시작합니다."
+          "text": "달이 지구와 태양 사이에 있을 때는 지구에서 달의 그림자만 보여 달이 보이지 않는 삭이 된다. 반대로 지구가 태양과 달 사이에 있으면 둥근 보름달인 망이 된다."
         },
         {
           "id": "p4",
-          "text": "보름달에서 왼쪽 절반만 빛나는 하현달이 되고, 다시 왼쪽이 얇게 남은 그믐달이 되었다가 완전히 보이지 않는 하늘로 돌아갑니다. 이렇게 달이 초승달에서 보름달을 거쳐 다시 그믐달이 되는 데는 약 삼십 일이 걸립니다. 달의 모양을 매일 관찰하면 우주가 아주 규칙적이고 신비롭게 움직이고 있다는 사실을 알 수 있습니다."
+          "text": "달이 지구를 한 바퀴 도는 데에는 약 한 달이 걸린다. 이 규칙적인 움직임 덕분에 우리는 매달 아름답게 변하는 달의 여러 모습을 감상할 수 있다."
         }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 46
+              }
+            ]
+          },
+          "question": {
+            "prompt": "밤하늘의 달은 날마다 어떻게 되는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그 모습이 달라진다"
+              },
+              {
+                "id": "B",
+                "text": "항상 똑같은 모양이다"
+              },
+              {
+                "id": "C",
+                "text": "점점 색이 빨개진다"
+              },
+              {
+                "id": "D",
+                "text": "별로 변해버린다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 48,
+                "end": 66
+              }
+            ]
+          },
+          "question": {
+            "prompt": "달의 모습이 달라지는 것을 무엇이라 하나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "달의 위상 변화"
+              },
+              {
+                "id": "B",
+                "text": "달의 크기 변화"
+              },
+              {
+                "id": "C",
+                "text": "달의 온도 변화"
+              },
+              {
+                "id": "D",
+                "text": "달의 색상 변화"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 66
+              }
+            ]
+          },
+          "question": {
+            "prompt": "첫 번째 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "달의 위상 변화"
+              },
+              {
+                "id": "B",
+                "text": "달의 둥근 모양"
+              },
+              {
+                "id": "C",
+                "text": "초승달의 크기"
+              },
+              {
+                "id": "D",
+                "text": "밤하늘의 별빛"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 35
+              }
+            ]
+          },
+          "question": {
+            "prompt": "달은 어떻게 빛나게 보이는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태양 빛을 반사해서"
+              },
+              {
+                "id": "B",
+                "text": "스스로 빛을 내서"
+              },
+              {
+                "id": "C",
+                "text": "지구의 빛을 모아서"
+              },
+              {
+                "id": "D",
+                "text": "별빛을 반사해서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 37,
+                "end": 82
+              }
+            ]
+          },
+          "question": {
+            "prompt": "달의 밝은 부분이 달라지는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "태양과 지구와 달의 위치"
+              },
+              {
+                "id": "B",
+                "text": "달의 기분 변화"
+              },
+              {
+                "id": "C",
+                "text": "지구의 자전 속도"
+              },
+              {
+                "id": "D",
+                "text": "구름의 움직임"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 82
+              }
+            ]
+          },
+          "question": {
+            "prompt": "두 번째 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "달의 모습이 달라지는 원리"
+              },
+              {
+                "id": "B",
+                "text": "달이 빛을 내는 방법"
+              },
+              {
+                "id": "C",
+                "text": "태양의 온도"
+              },
+              {
+                "id": "D",
+                "text": "지구의 자전"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 51
+              }
+            ]
+          },
+          "question": {
+            "prompt": "달이 지구와 태양 사이에 있을 때의 달은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보이지 않는 삭"
+              },
+              {
+                "id": "B",
+                "text": "둥근 보름달"
+              },
+              {
+                "id": "C",
+                "text": "반달"
+              },
+              {
+                "id": "D",
+                "text": "초승달"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 53,
+                "end": 88
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지구가 태양과 달 사이에 있을 때의 달은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "둥근 보름달인 망"
+              },
+              {
+                "id": "B",
+                "text": "그림자만 보이는 삭"
+              },
+              {
+                "id": "C",
+                "text": "반달"
+              },
+              {
+                "id": "D",
+                "text": "초승달"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 88
+              }
+            ]
+          },
+          "question": {
+            "prompt": "세 번째 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "위치에 따른 삭과 망"
+              },
+              {
+                "id": "B",
+                "text": "지구의 그림자"
+              },
+              {
+                "id": "C",
+                "text": "태양의 위치"
+              },
+              {
+                "id": "D",
+                "text": "별의 움직임"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 29
+              }
+            ]
+          },
+          "question": {
+            "prompt": "달이 지구를 한 바퀴 도는 데 걸리는 시간?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "약 한 달"
+              },
+              {
+                "id": "B",
+                "text": "약 일주일"
+              },
+              {
+                "id": "C",
+                "text": "약 일 년"
+              },
+              {
+                "id": "D",
+                "text": "하루"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 31,
+                "end": 80
+              }
+            ]
+          },
+          "question": {
+            "prompt": "우리가 달의 여러 모습을 감상하는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "규칙적인 움직임 덕분"
+              },
+              {
+                "id": "B",
+                "text": "불규칙한 날씨 덕분"
+              },
+              {
+                "id": "C",
+                "text": "태양의 변화 덕분"
+              },
+              {
+                "id": "D",
+                "text": "지구의 자전 덕분"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 80
+              }
+            ]
+          },
+          "question": {
+            "prompt": "네 번째 문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "달의 공전과 모습 변화"
+              },
+              {
+                "id": "B",
+                "text": "달의 자전 주기"
+              },
+              {
+                "id": "C",
+                "text": "지구의 나이"
+              },
+              {
+                "id": "D",
+                "text": "태양의 밝기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
+      "cards": [
+        {
+          "id": "c1",
+          "text": "달의 모양이 변하는 것을 달의 위상 변화라 함."
+        },
+        {
+          "id": "c2",
+          "text": "달은 태양 빛을 반사해서 빛나게 보임."
+        },
+        {
+          "id": "c3",
+          "text": "태양, 지구, 달의 위치에 따라 모습이 다름."
+        },
+        {
+          "id": "c4",
+          "text": "달이 안 보이는 때를 삭이라고 부름."
+        },
+        {
+          "id": "c5",
+          "text": "지구가 태양과 달 사이에 있으면 망이 됨."
+        },
+        {
+          "id": "c6",
+          "text": "달이 지구를 도는 데에는 약 한 달이 걸림."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "달의 모양이 날마다 변하는 현상?",
+          "answerText": "달의 위상 변화",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 52,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "지구에서 달이 보이지 않는 때?",
+          "answerText": "삭",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 46,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "지구에서 보이는 둥근 보름달?",
+          "answerText": "망",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 83,
+              "end": 84
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        }
+      ]
     }
   }
 }
