@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../utils/adminApi";
 import { API_BASE } from "../utils/api";
 import ManuscriptGrid from "../components/ManuscriptGrid";
@@ -24,6 +24,7 @@ const GRID_CONFIG = {
 
 function AdminWisdomDetailPage() {
   const { postId } = useParams();
+  const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [comment, setComment] = useState("");
@@ -325,6 +326,13 @@ function AdminWisdomDetailPage() {
                     title={!hasContent ? "글 내용이 없습니다. 파일 업로드 글은 먼저 OCR 변환이 필요합니다." : ""}
                   >
                     {aiLoading ? "AI 첨삭 중..." : "AI 첨삭"}
+                  </button>
+                  <button
+                    className="admin-action"
+                    style={{ background: "#555" }}
+                    onClick={() => navigate("/admin/wisdom")}
+                  >
+                    목록으로
                   </button>
                 </div>
               </div>
