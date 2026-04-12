@@ -310,19 +310,32 @@ function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onSho
               ) : (
                 <div className="chat-emoticon-missing">[이모티콘]</div>
               )}
-              {message.likeCount > 0 && (
+              <div className="chat-like-row">
                 <button
                   type="button"
-                  className={`chat-like-badge ${message.likedByMe ? "active" : ""}`}
+                  className={`chat-like-btn ${message.likedByMe ? "active" : ""}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    onShowLikes?.(message.id);
+                    triggerLike();
                   }}
-                  title="좋아요 누른 사람 보기"
+                  title="좋아요"
                 >
-                  ❤ {message.likeCount}
+                  {message.likedByMe ? "❤" : "♡"}
                 </button>
-              )}
+                {message.likeCount > 0 && (
+                  <button
+                    type="button"
+                    className={`chat-like-badge ${message.likedByMe ? "active" : ""}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onShowLikes?.(message.id);
+                    }}
+                    title="좋아요 누른 사람 보기"
+                  >
+                    ❤ {message.likeCount}
+                  </button>
+                )}
+              </div>
             </div>
           ) : (
             <div
@@ -354,19 +367,32 @@ function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onSho
                 </div>
               )}
               {renderAttachment(message)}
-              {message.likeCount > 0 && (
+              <div className="chat-like-row">
                 <button
                   type="button"
-                  className={`chat-like-badge ${message.likedByMe ? "active" : ""}`}
+                  className={`chat-like-btn ${message.likedByMe ? "active" : ""}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    onShowLikes?.(message.id);
+                    triggerLike();
                   }}
-                  title="좋아요 누른 사람 보기"
+                  title="좋아요"
                 >
-                  ❤ {message.likeCount}
+                  {message.likedByMe ? "❤" : "♡"}
                 </button>
-              )}
+                {message.likeCount > 0 && (
+                  <button
+                    type="button"
+                    className={`chat-like-badge ${message.likedByMe ? "active" : ""}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onShowLikes?.(message.id);
+                    }}
+                    title="좋아요 누른 사람 보기"
+                  >
+                    ❤ {message.likeCount}
+                  </button>
+                )}
+              </div>
             </div>
           )}
           {!isMine && <div className="chat-msg-time">{formatTime(message.createdAt)}</div>}

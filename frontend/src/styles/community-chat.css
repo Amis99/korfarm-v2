@@ -645,10 +645,37 @@
   -webkit-touch-callout: none;
 }
 
+.chat-like-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.chat-like-btn {
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.15s, transform 0.12s;
+  line-height: 1;
+}
+.chat-like-btn:hover,
+.chat-like-btn:active {
+  opacity: 1;
+  transform: scale(1.2);
+}
+.chat-like-btn.active {
+  opacity: 1;
+  color: #e0625a;
+}
+
 .chat-like-badge {
-  position: absolute;
-  bottom: -10px;
-  left: 8px;
+  position: static;
+  bottom: auto;
+  left: auto;
   display: inline-flex;
   align-items: center;
   gap: 3px;
@@ -673,15 +700,9 @@
   background: #ffeded;
 }
 
-/* 이모티콘 메시지에서는 우하단에 위치 */
+/* 이모티콘 메시지 */
 .chat-emoticon-msg {
   position: relative;
-}
-
-.chat-emoticon-msg .chat-like-badge {
-  bottom: -6px;
-  right: -6px;
-  left: auto;
 }
 
 /* 말풍선 행 사이 간격은 좋아요 뱃지가 아래로 살짝 비집고 나와도 겹치지 않도록 */
