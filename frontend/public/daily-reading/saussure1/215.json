@@ -1,19 +1,34 @@
 {
-  "contentId": "dr-s1-215",
+  "contentId": "dr-saussure1-215",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "리듬에 맞추어 몸 움직이기",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 복도에서 걷기",
+  "description": "학교 복도에서 친구들과 함께 지켜야 할 안전 규칙과 올바른 보행 예절을 배워요",
   "targetLevel": "SAUSSURE_1",
-  "schoolGradeRange": {"min": 1, "max": 1},
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": {"mode": "FREE"},
-  "seedReward": {"seedType": "WHEAT", "count": 3, "multiplier": 1},
-  "timeLimitSec": 300,
+  "schoolGradeRange": {
+    "min": 1,
+    "max": 1
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +36,11 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "리듬이란 소리가 규칙적으로 반복되는 것을 말한다.손뼉을 쿵짝쿵짝 치는 것도 리듬이고, 북을 둥둥 두드리는 것도 리듬이다.음악을 들으면 저절로 몸이 움직이는 까닭은 이 리듬 때문이다.리듬은 우리 몸에 신호를 보내어 움직이고 싶은 마음이 들게 한다."
+          "text": "학교 복도는 많은 친구가 함께 이용하는 공공장소이므로 안전 규칙을 잘 지켜야 합니다. 복도에서는 항상 오른쪽으로 천천히 걷는 습관을 가지는 것이 좋아요. 큰 소리로 떠들거나 장난을 치면 공부하는 다른 반 친구들에게 방해가 됩니다."
         },
         {
           "id": "p2",
-          "text": "빠른 리듬에는 팔과 다리를 빠르게 흔들고, 느린 리듬에는 천천히 몸을 흔든다.이렇게 리듬에 맞추어 몸을 움직이면 기분이 좋아지고 몸도 건강해진다.친구와 함께 음악에 맞추어 손뼉을 치거나 발을 구르면 더 즐거워진다.음악과 리듬은 우리 생활을 신나고 활기차게 만들어 준다."
+          "text": "복도 바닥에 떨어진 물건이 있으면 친구들이 넘어질 수 있으니 조심해야 해요. 계단을 오르내릴 때도 난간을 잡고 한 칸씩 차례대로 이동하며 안전하게 생활합시다. 우리 모두를 위한 복도 예절을 실천하며 즐겁고 행복한 학교생활을 만들어요."
         }
       ]
     },
@@ -33,220 +48,427 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 27}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 46
+              }
+            ]
+          },
           "question": {
-            "prompt": "리듬이란 무엇을 뜻하는 말입니까?",
+            "prompt": "복도는 어떤 곳인가요?",
             "choices": [
-              {"id": "A", "text": "소리가 규칙적으로 반복되는 것이다."},
-              {"id": "B", "text": "소리가 한 번만 크게 나는 것이다."},
-              {"id": "C", "text": "소리가 점점 작아지는 것이다."},
-              {"id": "D", "text": "소리가 갑자기 멈추는 것이다."}
+              {
+                "id": "A",
+                "text": "함께 쓰는 공공장소"
+              },
+              {
+                "id": "B",
+                "text": "나 혼자만 쓰는 방"
+              },
+              {
+                "id": "C",
+                "text": "잠만 자는 침실"
+              },
+              {
+                "id": "D",
+                "text": "요리하는 주방"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 27, "end": 67}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 48,
+                "end": 86
+              }
+            ]
+          },
           "question": {
-            "prompt": "리듬의 예로 나온 것이 아닌 것은 무엇입니까?",
+            "prompt": "어느 쪽으로 걷나요?",
             "choices": [
-              {"id": "A", "text": "피아노를 조용히 누르는 것이다."},
-              {"id": "B", "text": "손뼉을 쿵짝쿵짝 치는 것이다."},
-              {"id": "C", "text": "북을 둥둥 두드리는 것이다."},
-              {"id": "D", "text": "손뼉 치기와 북 두드리기 모두이다."}
+              {
+                "id": "A",
+                "text": "오른쪽으로 천천히"
+              },
+              {
+                "id": "B",
+                "text": "왼쪽으로 빠르게"
+              },
+              {
+                "id": "C",
+                "text": "가운데로 뛰어감"
+              },
+              {
+                "id": "D",
+                "text": "뒤로 돌아서 걷기"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 67, "end": 101}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 88,
+                "end": 129
+              }
+            ]
+          },
           "question": {
-            "prompt": "음악을 들으면 몸이 저절로 움직이는 까닭은 무엇입니까?",
+            "prompt": "장난을 치면 어떻게 되나?",
             "choices": [
-              {"id": "A", "text": "리듬 때문이다."},
-              {"id": "B", "text": "가사 때문이다."},
-              {"id": "C", "text": "악기 모양 때문이다."},
-              {"id": "D", "text": "노래 제목 때문이다."}
+              {
+                "id": "A",
+                "text": "다른 반 친구에 방해"
+              },
+              {
+                "id": "B",
+                "text": "키가 쑥쑥 자람"
+              },
+              {
+                "id": "C",
+                "text": "노래 실력이 늘어남"
+              },
+              {
+                "id": "D",
+                "text": "배가 아주 부름"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 101, "end": 137}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 129
+              }
+            ]
+          },
           "question": {
-            "prompt": "리듬이 우리 몸에 하는 일을 바꾸어 말하면 무엇입니까?",
+            "prompt": "1문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "몸에 신호를 보내 움직이고 싶게 한다."},
-              {"id": "B", "text": "몸을 아프게 해서 쉬고 싶게 한다."},
-              {"id": "C", "text": "몸을 무겁게 해서 잠이 오게 한다."},
-              {"id": "D", "text": "몸을 차갑게 해서 떨리게 한다."}
+              {
+                "id": "A",
+                "text": "복도 보행 규칙"
+              },
+              {
+                "id": "B",
+                "text": "교실의 창문 개수"
+              },
+              {
+                "id": "C",
+                "text": "칠판의 분필 색깔"
+              },
+              {
+                "id": "D",
+                "text": "운동장의 흙먼지"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 137}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 42
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "왜 조심해야 하나요?",
             "choices": [
-              {"id": "A", "text": "리듬은 소리의 반복이고 몸을 움직이게 만든다."},
-              {"id": "B", "text": "리듬은 눈으로 볼 수 있는 색깔이다."},
-              {"id": "C", "text": "리듬은 악기 없이는 만들 수 없다."},
-              {"id": "D", "text": "리듬은 어른만 느낄 수 있는 것이다."}
+              {
+                "id": "A",
+                "text": "친구들이 넘어져서"
+              },
+              {
+                "id": "B",
+                "text": "노래를 못 불러서"
+              },
+              {
+                "id": "C",
+                "text": "잠이 깨버려서"
+              },
+              {
+                "id": "D",
+                "text": "배가 아파서"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 43}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 44,
+                "end": 93
+              }
+            ]
+          },
           "question": {
-            "prompt": "빠른 리듬에 맞추어 하는 행동으로 알맞은 것은 무엇입니까?",
+            "prompt": "계단은 어떻게 가나?",
             "choices": [
-              {"id": "A", "text": "팔과 다리를 빠르게 흔든다."},
-              {"id": "B", "text": "팔과 다리를 천천히 흔든다."},
-              {"id": "C", "text": "가만히 앉아서 눈을 감는다."},
-              {"id": "D", "text": "팔과 다리를 움직이지 않는다."}
+              {
+                "id": "A",
+                "text": "난간 잡고 한 칸씩"
+              },
+              {
+                "id": "B",
+                "text": "두 칸씩 뛰어감"
+              },
+              {
+                "id": "C",
+                "text": "굴러서 내려감"
+              },
+              {
+                "id": "D",
+                "text": "눈 감고 올라감"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 43, "end": 81}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 95,
+                "end": 141
+              }
+            ]
+          },
           "question": {
-            "prompt": "리듬에 맞추어 몸을 움직이면 어떻게 됩니까?",
+            "prompt": "무엇을 실천하나요?",
             "choices": [
-              {"id": "A", "text": "기분이 좋아지고 몸도 건강해진다."},
-              {"id": "B", "text": "기분이 나빠지고 몸이 아파진다."},
-              {"id": "C", "text": "몸이 무거워지고 잠이 온다."},
-              {"id": "D", "text": "기분은 좋지만 몸은 피곤해진다."}
+              {
+                "id": "A",
+                "text": "복도 예절"
+              },
+              {
+                "id": "B",
+                "text": "줄넘기 대결"
+              },
+              {
+                "id": "C",
+                "text": "간식 빨리 먹기"
+              },
+              {
+                "id": "D",
+                "text": "낮잠 자기"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 81, "end": 119}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 141
+              }
+            ]
+          },
           "question": {
-            "prompt": "친구와 함께 음악에 맞추어 할 수 있는 것은 무엇입니까?",
+            "prompt": "2문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "손뼉을 치거나 발을 구르는 것이다."},
-              {"id": "B", "text": "책을 읽거나 글씨를 쓰는 것이다."},
-              {"id": "C", "text": "잠을 자거나 누워 있는 것이다."},
-              {"id": "D", "text": "밥을 먹거나 물을 마시는 것이다."}
+              {
+                "id": "A",
+                "text": "안전한 복도와 계단"
+              },
+              {
+                "id": "B",
+                "text": "난간의 페인트 색"
+              },
+              {
+                "id": "C",
+                "text": "바닥의 타일 무늬"
+              },
+              {
+                "id": "D",
+                "text": "계단의 칸 수"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
-          }
-        },
-        {
-          "stepId": "s9",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 119, "end": 150}]},
-          "question": {
-            "prompt": "음악과 리듬이 우리 생활에 주는 것은 무엇입니까?",
-            "choices": [
-              {"id": "A", "text": "신나고 활기차게 만들어 준다."},
-              {"id": "B", "text": "조용하고 지루하게 만들어 준다."},
-              {"id": "C", "text": "무섭고 떨리게 만들어 준다."},
-              {"id": "D", "text": "슬프고 힘들게 만들어 준다."}
-            ],
-            "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
-          }
-        },
-        {
-          "stepId": "s10",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 150}]},
-          "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
-            "choices": [
-              {"id": "A", "text": "리듬에 맞추어 몸을 움직이면 즐겁고 건강해진다."},
-              {"id": "B", "text": "리듬에 맞추면 몸이 아프고 힘들어진다."},
-              {"id": "C", "text": "리듬은 혼자서만 느낄 수 있는 것이다."},
-              {"id": "D", "text": "리듬은 느린 것만 몸에 좋다."}
-            ],
-            "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        {"id": "c1", "text": "리듬이란 소리가 규칙적으로 반복되는 것을 말한다."},
-        {"id": "c2", "text": "손뼉 치기와 북 두드리기도 리듬의 예에 해당한다."},
-        {"id": "c3", "text": "리듬에 맞추어 몸을 움직이면 기분이 좋고 건강해진다."},
-        {"id": "c4", "text": "음악과 리듬은 우리 생활을 신나고 활기차게 해 준다."}
+        {
+          "id": "c1",
+          "text": "복도는 공공장소임."
+        },
+        {
+          "id": "c2",
+          "text": "오른쪽으로 걸어요."
+        },
+        {
+          "id": "c3",
+          "text": "장난치지 않습니다."
+        },
+        {
+          "id": "c4",
+          "text": "계단은 한 칸씩 감."
+        },
+        {
+          "id": "c5",
+          "text": "복도 예절을 지켜요."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "리듬이란 소리가 어떻게 되는 것을 말합니까?",
-          "answerText": "규칙적으로 반복",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 9, "end": 17}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "교실 밖 길?",
+          "answerText": "복도",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 3,
+              "end": 4
+            },
+            {
+              "paragraphId": "p1",
+              "start": 48,
+              "end": 49
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 1
+            },
+            {
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "손뼉을 칠 때 나오는 리듬의 소리는 무엇입니까?",
-          "answerText": "쿵짝쿵짝",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 31, "end": 35}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "지켜야 할 약속?",
+          "answerText": "규칙",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 34
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "음악을 들으면 몸이 움직이는 까닭은 무엇 때문입니까?",
-          "answerText": "리듬",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 93, "end": 95}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "느린 리듬에는 몸을 어떻게 흔듭니까?",
-          "answerText": "천천히",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 32, "end": 35}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "리듬에 맞추어 몸을 움직이면 기분이 어떻게 됩니까?",
-          "answerText": "좋아지고",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 67, "end": 71}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q6",
-          "prompt": "음악과 리듬은 우리 생활을 어떻게 만들어 줍니까?",
-          "answerText": "신나고 활기차게",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 134, "end": 142}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "위험 없는 상태?",
+          "answerText": "안전",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 30,
+              "end": 31
+            },
+            {
+              "paragraphId": "p2",
+              "start": 77,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         }
       ]

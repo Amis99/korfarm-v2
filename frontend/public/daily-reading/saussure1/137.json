@@ -1,32 +1,34 @@
 {
-  "contentId": "dr-s1-137",
+  "contentId": "dr-saussure1-137",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "여러 가지 색깔",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[문학] 무지개 연필의 비밀 2부: 커지는 소동",
+  "description": "무지개 연필의 퀴즈를 풀 때마다 일어나는 신기한 소동을 경험해요",
   "targetLevel": "SAUSSURE_1",
   "schoolGradeRange": {
     "min": 1,
     "max": 1
   },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "추론적 이해"
   ],
   "tags": [
-    "daily"
+    "문학",
+    "독해"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -34,15 +36,11 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "우리 눈에 보이는 색깔은 매우 다양하다.그중에서 빨강, 노랑, 파랑을 기본 색이라고 부른다.이 세 가지 색은 다른 색을 섞어서 만들 수 없기 때문이다."
+          "text": "민수는 무지개 연필이 내는 첫 번째 퀴즈의 정답을 종이에 적었습니다. 정답인 '무지개'를 쓰자마자 연필에서 눈부신 빛이 뿜어져 나왔어요. 필통 속에 있던 지우개와 자가 깜짝 놀라 이리저리 굴러다녔습니다. 갑자기 책상 위가 알록달록한 무지개 색깔로 가득 채워졌어요. 민수는 가슴이 두근거렸지만 다음 퀴즈가 무엇인지 무척 궁금했습니다."
         },
         {
           "id": "p2",
-          "text": "기본 색 두 가지를 섞으면 새로운 색이 만들어진다.빨강과 노랑을 섞으면 주황이 되고 노랑과 파랑을 섞으면 초록이 된다.빨강과 파랑을 섞으면 보라색이 만들어진다."
-        },
-        {
-          "id": "p3",
-          "text": "비가 온 뒤에 하늘에 뜨는 무지개에는 일곱 가지 색이 있다.빨강, 주황, 노랑, 초록, 파랑, 남색, 보라의 순서로 나타난다.무지개를 보면 여러 색이 얼마나 아름다운지 느낄 수 있다."
+          "text": "두 번째 힌트는 \"밤하늘에 떠 있는 은색 쟁반 같은 것\"이라는 문장이었습니다. 민수는 창밖을 내다보며 오늘 밤에 뜰 보름달을 생각했어요. 연필을 꽉 쥐고 '달님'이라고 정답을 적자 책상이 위아래로 흔들렸습니다. 필통 속의 학용품들이 노래를 부르기 시작해서 방 안이 시끌벅적해졌어요. 민수는 비밀 지도를 찾기 위해 끝까지 퀴즈를 풀기로 마음먹었습니다."
         }
       ]
     },
@@ -55,35 +53,35 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 22
+                "end": 38
               }
             ]
           },
           "question": {
-            "prompt": "우리 눈에 보이는 색깔은 어떻습니까?",
+            "prompt": "민수는 무엇을 했나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "눈으로 볼 수 있는 색깔이 매우 많다."
+                "text": "퀴즈의 정답을 적음"
               },
               {
                 "id": "B",
-                "text": "눈으로 볼 수 있는 색깔이 하나뿐이다."
+                "text": "종이를 찢어 버림"
               },
               {
                 "id": "C",
-                "text": "눈으로 볼 수 있는 색깔은 두 가지이다."
+                "text": "연필을 깎아 줌"
               },
               {
                 "id": "D",
-                "text": "눈으로 볼 수 있는 색깔은 없는 편이다."
+                "text": "필통을 내다 버림"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -93,36 +91,36 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 22,
-                "end": 51
+                "start": 40,
+                "end": 75
               }
             ]
           },
           "question": {
-            "prompt": "색깔이 다양한 가운데 기본 색이라 부르는 것은 무엇입니까?",
+            "prompt": "연필에서 무엇이 나왔나?",
             "choices": [
               {
                 "id": "A",
-                "text": "빨강과 노랑과 파랑이 기본이 되는 색이다."
+                "text": "눈부신 빛"
               },
               {
                 "id": "B",
-                "text": "초록과 보라와 주황이 기본이 되는 색이다."
+                "text": "시꺼먼 연기"
               },
               {
                 "id": "C",
-                "text": "하양과 검정과 회색이 기본이 되는 색이다."
+                "text": "차가운 얼음"
               },
               {
                 "id": "D",
-                "text": "분홍과 하늘과 연두가 기본이 되는 색이다."
+                "text": "맛있는 사과"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -132,36 +130,36 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 51,
-                "end": 84
+                "start": 77,
+                "end": 110
               }
             ]
           },
           "question": {
-            "prompt": "기본 색이라 부르는 까닭은 무엇입니까?",
+            "prompt": "무엇이 굴러다녔나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "기본 색 셋은 섞어 만들 수 없는 색이다."
+                "text": "지우개와 자"
               },
               {
                 "id": "B",
-                "text": "기본 색 셋은 쉽게 만들 수 있는 색이다."
+                "text": "공책과 연필"
               },
               {
                 "id": "C",
-                "text": "기본 색 셋은 아무도 볼 수 없는 색이다."
+                "text": "신발과 양말"
               },
               {
                 "id": "D",
-                "text": "기본 색 셋은 자연에서 안 보이는 색이다."
+                "text": "가방과 모자"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -171,36 +169,36 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 0,
-                "end": 84
+                "start": 112,
+                "end": 143
               }
             ]
           },
           "question": {
-            "prompt": "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "책상이 어떻게 변했나?",
             "choices": [
               {
                 "id": "A",
-                "text": "빨강, 노랑, 파랑이 기본 색이며 섞어 만들 수 없다."
+                "text": "무지개 색깔로 채워짐"
               },
               {
                 "id": "B",
-                "text": "여러 가지 색을 섞으면 기본 색이 사라져 버린다."
+                "text": "검은색으로 변함"
               },
               {
                 "id": "C",
-                "text": "기본 색은 하나뿐이며 다른 색은 모두 같은 색이다."
+                "text": "바닥으로 꺼짐"
               },
               {
                 "id": "D",
-                "text": "모든 색은 흰색에서 나오며 기본 색은 존재하지 않는다."
+                "text": "공중에 둥둥 뜸"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -209,37 +207,37 @@
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p2",
-                "start": 0,
-                "end": 28
+                "paragraphId": "p1",
+                "start": 145,
+                "end": 178
               }
             ]
           },
           "question": {
-            "prompt": "앞에서 배운 기본 색 두 가지를 섞으면 어떻게 됩니까?",
+            "prompt": "민수의 마음은 어떤가?",
             "choices": [
               {
                 "id": "A",
-                "text": "기본 색 두 개를 합치면 새 색이 생겨난다."
+                "text": "무척 궁금했음"
               },
               {
                 "id": "B",
-                "text": "기본 색 두 개를 합치면 색이 사라져 간다."
+                "text": "무척 지루했음"
               },
               {
                 "id": "C",
-                "text": "기본 색 두 개를 합치면 하양이 되어 간다."
+                "text": "너무 화가 났음"
               },
               {
                 "id": "D",
-                "text": "기본 색 두 개를 합치면 검정이 되어 간다."
+                "text": "아무 생각 없음"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -248,37 +246,37 @@
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p2",
-                "start": 28,
-                "end": 66
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 178
               }
             ]
           },
           "question": {
-            "prompt": "빨강과 노랑, 노랑과 파랑을 각각 섞으면 무슨 색이 됩니까?",
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "빨강에 노랑을 더하면 주황, 노랑에 파랑을 더하면 초록이다."
+                "text": "첫 정답과 빛의 소동"
               },
               {
                 "id": "B",
-                "text": "빨강에 노랑을 더하면 초록, 노랑에 파랑을 더하면 보라이다."
+                "text": "지우개의 가격 인상"
               },
               {
                 "id": "C",
-                "text": "빨강에 노랑을 더하면 보라, 노랑에 파랑을 더하면 주황이다."
+                "text": "민수의 학교 가는 길"
               },
               {
                 "id": "D",
-                "text": "빨강에 노랑을 더하면 검정, 노랑에 파랑을 더하면 하양이다."
+                "text": "책상 다리의 개수"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -288,36 +286,36 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 66,
-                "end": 89
+                "start": 0,
+                "end": 44
               }
             ]
           },
           "question": {
-            "prompt": "빨강과 파랑을 섞으면 어떤 색이 만들어집니까?",
+            "prompt": "두 번째 힌트는?",
             "choices": [
               {
                 "id": "A",
-                "text": "빨강에 파랑을 합하면 보라색이 나온다."
+                "text": "은색 쟁반 같은 것"
               },
               {
                 "id": "B",
-                "text": "빨강에 파랑을 합하면 노란색이 나온다."
+                "text": "빨간 수박 같은 것"
               },
               {
                 "id": "C",
-                "text": "빨강에 파랑을 합하면 초록색이 나온다."
+                "text": "길쭉한 오이 같은 것"
               },
               {
                 "id": "D",
-                "text": "빨강에 파랑을 합하면 주황색이 나온다."
+                "text": "차가운 얼음 같은 것"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -327,36 +325,36 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 0,
-                "end": 89
+                "start": 46,
+                "end": 76
               }
             ]
           },
           "question": {
-            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "무엇을 생각했나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "기본 색 둘을 합쳐 주황, 초록, 보라를 만들 수 있다."
+                "text": "밤에 뜰 보름달"
               },
               {
                 "id": "B",
-                "text": "기본 색 둘을 합치면 색이 없어져 투명하게 변한다."
+                "text": "아침에 뜬 햇님"
               },
               {
                 "id": "C",
-                "text": "기본 색 셋을 합쳐야만 비로소 새 색이 만들어진다."
+                "text": "낮에 내린 빗줄기"
               },
               {
                 "id": "D",
-                "text": "기본 색은 합칠 수 없어서 새로운 색이 나올 수 없다."
+                "text": "창가의 비둘기"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -365,37 +363,37 @@
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
-                "start": 0,
-                "end": 33
+                "paragraphId": "p2",
+                "start": 78,
+                "end": 112
               }
             ]
           },
           "question": {
-            "prompt": "앞에서 배운 색들이 자연에서 보이는 곳은 어디입니까?",
+            "prompt": "정답을 적자 책상은?",
             "choices": [
               {
                 "id": "A",
-                "text": "비가 온 뒤에 하늘에 무지개가 뜨며 일곱 색이 있다."
+                "text": "위아래로 흔들림"
               },
               {
                 "id": "B",
-                "text": "비가 오기 전에 하늘에 무지개가 뜨며 세 색이 있다."
+                "text": "반으로 쪼개짐"
               },
               {
                 "id": "C",
-                "text": "눈이 온 뒤에 하늘에 무지개가 뜨며 두 색이 있다."
+                "text": "황금으로 변함"
               },
               {
                 "id": "D",
-                "text": "바람이 분 뒤에 하늘에 무지개가 떠 다섯 색이 있다."
+                "text": "사라져 버림"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -404,37 +402,37 @@
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
-                "start": 33,
-                "end": 70
+                "paragraphId": "p2",
+                "start": 114,
+                "end": 150
               }
             ]
           },
           "question": {
-            "prompt": "무지개의 색깔은 어떤 순서로 나타납니까?",
+            "prompt": "학용품들이 무엇을?",
             "choices": [
               {
                 "id": "A",
-                "text": "빨강에서 보라까지 일곱 색이 차례로 나타난다."
+                "text": "노래를 부르기 시작"
               },
               {
                 "id": "B",
-                "text": "보라에서 빨강까지 세 가지 색이 차례로 뜬다."
+                "text": "잠만 쿨쿨 자기 시작"
               },
               {
                 "id": "C",
-                "text": "파랑에서 노랑까지 다섯 색이 차례로 나온다."
+                "text": "서로 싸우기 시작"
               },
               {
                 "id": "D",
-                "text": "초록에서 주황까지 두 가지 색이 차례로 뜬다."
+                "text": "밖으로 뛰어나감"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -443,37 +441,37 @@
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
-                "start": 70,
-                "end": 102
+                "paragraphId": "p2",
+                "start": 152,
+                "end": 186
               }
             ]
           },
           "question": {
-            "prompt": "무지개를 보면 어떤 느낌을 받을 수 있습니까?",
+            "prompt": "민수의 다짐은?",
             "choices": [
               {
                 "id": "A",
-                "text": "무지개를 보면 색의 아름다움을 느낄 수 있다."
+                "text": "끝까지 퀴즈를 풂"
               },
               {
                 "id": "B",
-                "text": "무지개를 보면 색이 하나뿐임을 알 수 있다."
+                "text": "이제 그만 포기함"
               },
               {
                 "id": "C",
-                "text": "무지개를 보면 색이 모두 같음을 알 수 있다."
+                "text": "연필을 숨겨 버림"
               },
               {
                 "id": "D",
-                "text": "무지개를 보면 색이 사라짐을 느낄 수 있다."
+                "text": "친구에게 다 줌"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -482,37 +480,37 @@
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p3",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 102
+                "end": 186
               }
             ]
           },
           "question": {
-            "prompt": "셋째 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "무지개에는 일곱 색이 순서대로 나타나며 아름답다."
+                "text": "두 번째 퀴즈와 소동"
               },
               {
                 "id": "B",
-                "text": "무지개에는 색이 하나만 있으며 눈에 보이지 않는다."
+                "text": "밤하늘 별자리 관찰"
               },
               {
                 "id": "C",
-                "text": "무지개는 비가 오기 전에만 볼 수 있는 현상이다."
+                "text": "쟁반의 무늬 살피기"
               },
               {
                 "id": "D",
-                "text": "무지개에는 색이 없으며 하늘이 흐려야만 나타난다."
+                "text": "학용품의 이름 외우기"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         }
@@ -522,154 +520,115 @@
       "cards": [
         {
           "id": "c1",
-          "text": "빨강, 노랑, 파랑은 섞어 만들 수 없는 기본 색이다."
+          "text": "정답을 적었습니다."
         },
         {
           "id": "c2",
-          "text": "기본 색 두 가지를 섞으면 주황, 초록, 보라가 만들어진다."
+          "text": "빛이 뿜어져 나왔죠."
         },
         {
           "id": "c3",
-          "text": "비가 온 뒤 무지개에는 일곱 가지 색이 순서대로 나타난다."
+          "text": "책상이 흔들렸어요."
         },
         {
           "id": "c4",
-          "text": "무지개를 보면 여러 색이 얼마나 아름다운지 느낄 수 있다."
+          "text": "학용품이 노래해요."
+        },
+        {
+          "id": "c5",
+          "text": "퀴즈를 다 풀래요."
         }
       ],
       "correctOrder": [
         "c1",
         "c2",
         "c3",
-        "c4"
+        "c4",
+        "c5"
       ],
-      "seedPenalty": 1
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "기본 색이라고 부르는 세 가지 색은 무엇입니까?",
-          "answerText": "빨강, 노랑, 파랑",
-          "answerMatchMode": "ALL",
+          "prompt": "일곱 색깔 무엇 연필인가요?",
+          "answerText": "무지개",
+          "answerMatchMode": "EXACT",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 27,
-              "end": 37
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 46
+            },
+            {
+              "paragraphId": "p1",
+              "start": 130,
+              "end": 132
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "기본 색 세 가지를 다른 색으로 만들 수 없는 까닭은 무엇입니까?",
-          "answerText": "다른 색을 섞어서 만들 수 없기 때문이다",
-          "answerMatchMode": "ANY",
+          "prompt": "연필이 내는 무엇 정답인가요?",
+          "answerText": "퀴즈",
+          "answerMatchMode": "EXACT",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 61,
-              "end": 84
+              "start": 20,
+              "end": 21
+            },
+            {
+              "paragraphId": "p1",
+              "start": 166,
+              "end": 167
+            },
+            {
+              "paragraphId": "p2",
+              "start": 179,
+              "end": 180
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "빨강과 노랑을 섞으면 무슨 색이 됩니까?",
-          "answerText": "주황",
-          "answerMatchMode": "ANY",
+          "prompt": "무엇 속 학용품 소동인가요?",
+          "answerText": "필통",
+          "answerMatchMode": "EXACT",
           "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 77,
+              "end": 78
+            },
             {
               "paragraphId": "p2",
-              "start": 28,
-              "end": 46
+              "start": 118,
+              "end": 119
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "노랑과 파랑을 섞으면 무슨 색이 됩니까?",
-          "answerText": "초록",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 47,
-              "end": 66
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "빨강과 파랑을 섞으면 무슨 색이 만들어집니까?",
-          "answerText": "보라색",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 78,
-              "end": 89
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q6",
-          "prompt": "무지개에는 모두 몇 가지 색이 있습니까?",
-          "answerText": "일곱 가지",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 21,
-              "end": 33
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q7",
-          "prompt": "무지개의 색깔 순서에서 빨강 다음에 오는 색은 무엇입니까?",
-          "answerText": "주황",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 33,
-              "end": 70
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         }

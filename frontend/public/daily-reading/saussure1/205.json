@@ -1,19 +1,34 @@
 {
-  "contentId": "dr-s1-205",
+  "contentId": "dr-saussure1-205",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "섬이란 무엇일까",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 원인과 결과를 잇는 말",
+  "description": "일어난 일의 까닭과 결과를 명확하게 연결하는 이어주는 말의 사용법을 배워요",
   "targetLevel": "SAUSSURE_1",
-  "schoolGradeRange": {"min": 1, "max": 1},
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": {"mode": "FREE"},
-  "seedReward": {"seedType": "WHEAT", "count": 3, "multiplier": 1},
-  "timeLimitSec": 300,
+  "schoolGradeRange": {
+    "min": 1,
+    "max": 1
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +36,11 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "섬은 바다나 강, 호수 같은 물로 사방이 둘러싸인 땅을 말한다.우리나라에는 제주도와 울릉도처럼 이름이 잘 알려진 섬이 많다.섬에 가려면 배를 타거나 비행기를 타야 한다.육지와 다리로 이어진 섬도 있지만 대부분은 바닷길을 건너야 닿을 수 있다."
+          "text": "우리는 어떤 일의 원인과 결과를 설명할 때 이어주는 말을 사용합니다. '그래서', '따라서'와 같은 말들은 앞뒤 문장을 자연스럽게 연결해주어요. 예를 들어 \"비가 옵니다. 그래서 우산을 씁니다.\"라고 말할 수 있지요. 이러한 표현을 사용하면 상황을 아주 명확하게 전달할 수 있습니다."
         },
         {
           "id": "p2",
-          "text": "섬에는 푸른 바다와 깨끗한 모래밭이 있어 아름다운 풍경을 볼 수 있다.또 육지에서 보기 어려운 특별한 동물과 식물이 살기도 한다.섬에 사는 사람들은 바다에서 물고기를 잡거나 미역과 조개를 캐며 생활한다.이처럼 섬은 우리에게 아름다운 자연과 귀한 먹거리를 주는 소중한 곳이다."
+          "text": "원인과 결과를 나타내는 말은 자신의 생각을 조리 있게 말할 때 큰 도움이 됩니다. 문장 사이의 관계를 생각하며 알맞은 연결어를 고르는 연습을 해 보아요. 바른 연결어를 사용하는 습관은 듣는 사람이 내용을 더 쉽게 이해하게 합니다. 우리 함께 다양한 문장을 만들며 즐겁게 국어 공부를 해 봅시다."
         }
       ]
     },
@@ -33,220 +48,495 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 35}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 40
+              }
+            ]
+          },
           "question": {
-            "prompt": "섬이란 어떤 땅을 말합니까?",
+            "prompt": "언제 이어주는 말을 쓰나?",
             "choices": [
-              {"id": "A", "text": "물로 사방이 둘러싸인 땅을 말한다."},
-              {"id": "B", "text": "산으로 둘러싸인 높은 땅을 말한다."},
-              {"id": "C", "text": "나무가 빽빽한 숲속 땅을 말한다."},
-              {"id": "D", "text": "사람이 살지 않는 빈 땅을 말한다."}
+              {
+                "id": "A",
+                "text": "원인과 결과 설명할 때"
+              },
+              {
+                "id": "B",
+                "text": "맛있는 밥을 먹을 때"
+              },
+              {
+                "id": "C",
+                "text": "깜깜한 밤에 잠잘 때"
+              },
+              {
+                "id": "D",
+                "text": "빨리 달리기 시합할 때"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 35, "end": 69}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 42,
+                "end": 79
+              }
+            ]
+          },
           "question": {
-            "prompt": "우리나라에서 이름이 잘 알려진 섬으로 나온 것은 무엇입니까?",
+            "prompt": "이런 말들의 역할은?",
             "choices": [
-              {"id": "A", "text": "제주도와 울릉도"},
-              {"id": "B", "text": "백두산과 한라산"},
-              {"id": "C", "text": "독도와 남산"},
-              {"id": "D", "text": "서울과 부산"}
+              {
+                "id": "A",
+                "text": "앞뒤 문장 연결해줌"
+              },
+              {
+                "id": "B",
+                "text": "글자를 모두 지워줌"
+              },
+              {
+                "id": "C",
+                "text": "소리를 아주 크게 함"
+              },
+              {
+                "id": "D",
+                "text": "종이를 찢어버림"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 69, "end": 94}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 81,
+                "end": 122
+              }
+            ]
+          },
           "question": {
-            "prompt": "섬에 가려면 어떤 것을 타야 합니까?",
+            "prompt": "우산을 쓰는 이유는?",
             "choices": [
-              {"id": "A", "text": "배를 타거나 비행기를 타야 한다."},
-              {"id": "B", "text": "기차를 타거나 버스를 타야 한다."},
-              {"id": "C", "text": "자전거를 타거나 걸어가야 한다."},
-              {"id": "D", "text": "지하철을 타거나 택시를 타야 한다."}
+              {
+                "id": "A",
+                "text": "비가 오기 때문에"
+              },
+              {
+                "id": "B",
+                "text": "잠이 오기 때문에"
+              },
+              {
+                "id": "C",
+                "text": "바람이 불기 때문에"
+              },
+              {
+                "id": "D",
+                "text": "해가 뜨기 때문에"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 94, "end": 135}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 124,
+                "end": 162
+              }
+            ]
+          },
           "question": {
-            "prompt": "앞에서 배나 비행기를 탄다고 했는데, 대부분의 섬은 어떻게 가야 합니까?",
+            "prompt": "표현을 사용하면 어떤가?",
             "choices": [
-              {"id": "A", "text": "바닷길을 건너야 닿을 수 있다."},
-              {"id": "B", "text": "다리를 걸어서 건너면 된다."},
-              {"id": "C", "text": "높은 산을 넘어야 갈 수 있다."},
-              {"id": "D", "text": "긴 터널을 지나야 갈 수 있다."}
+              {
+                "id": "A",
+                "text": "상황 명확히 전달함"
+              },
+              {
+                "id": "B",
+                "text": "목소리가 안 나옴"
+              },
+              {
+                "id": "C",
+                "text": "얼굴이 빨개짐"
+              },
+              {
+                "id": "D",
+                "text": "키가 쑥쑥 자람"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 135}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 162
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "1문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "섬은 물로 둘러싸인 땅이며 배나 비행기를 타고 간다."},
-              {"id": "B", "text": "섬에는 맛있는 음식이 아주 많이 있다."},
-              {"id": "C", "text": "섬에 사는 사람들은 농사를 짓고 산다."},
-              {"id": "D", "text": "우리나라 모든 섬은 다리로 연결되어 있다."}
+              {
+                "id": "A",
+                "text": "이어주는 말의 쓰임"
+              },
+              {
+                "id": "B",
+                "text": "비 오는 날의 습도"
+              },
+              {
+                "id": "C",
+                "text": "우산의 공장 가격"
+              },
+              {
+                "id": "D",
+                "text": "문장의 마침표 개수"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 39}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 43
+              }
+            ]
+          },
           "question": {
-            "prompt": "섬에서 볼 수 있는 아름다운 것으로 알맞은 것은 무엇입니까?",
+            "prompt": "언제 큰 도움이 되나?",
             "choices": [
-              {"id": "A", "text": "푸른 바다와 깨끗한 모래밭의 풍경"},
-              {"id": "B", "text": "높은 빌딩과 넓은 도로의 풍경"},
-              {"id": "C", "text": "깊은 동굴과 어두운 숲의 풍경"},
-              {"id": "D", "text": "큰 공장과 긴 굴뚝의 풍경"}
+              {
+                "id": "A",
+                "text": "생각 조리 있게 말함"
+              },
+              {
+                "id": "B",
+                "text": "물건을 빨리 챙김"
+              },
+              {
+                "id": "C",
+                "text": "신발 끈을 단단히 맴"
+              },
+              {
+                "id": "D",
+                "text": "계단을 뛰어 내려감"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 39, "end": 72}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 45,
+                "end": 86
+              }
+            ]
+          },
           "question": {
-            "prompt": "앞에서 아름다운 풍경이 있다고 했는데, 섬에는 또 무엇이 삽니까?",
+            "prompt": "무엇을 해 보나요?",
             "choices": [
-              {"id": "A", "text": "육지에서 보기 어려운 특별한 동물과 식물"},
-              {"id": "B", "text": "도시에서 흔히 볼 수 있는 자동차"},
-              {"id": "C", "text": "학교에서 키우는 보통 화분"},
-              {"id": "D", "text": "놀이터에서 자주 보는 비둘기"}
+              {
+                "id": "A",
+                "text": "알맞은 연결어 고르기"
+              },
+              {
+                "id": "B",
+                "text": "맛있는 사탕 고르기"
+              },
+              {
+                "id": "C",
+                "text": "무거운 가방 메기"
+              },
+              {
+                "id": "D",
+                "text": "깜깜한 방에 숨기"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 72, "end": 113}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 88,
+                "end": 129
+              }
+            ]
+          },
           "question": {
-            "prompt": "섬에 사는 사람들이 바다에서 하는 일로 알맞은 것은 무엇입니까?",
+            "prompt": "바른 습관의 장점은?",
             "choices": [
-              {"id": "A", "text": "물고기를 잡거나 미역과 조개를 캔다."},
-              {"id": "B", "text": "논에서 벼를 심고 거둔다."},
-              {"id": "C", "text": "공장에서 기계를 만든다."},
-              {"id": "D", "text": "산에서 나무를 베어 판다."}
+              {
+                "id": "A",
+                "text": "내용 쉽게 이해하게 함"
+              },
+              {
+                "id": "B",
+                "text": "잠이 무척 잘 옴"
+              },
+              {
+                "id": "C",
+                "text": "힘이 아주 세짐"
+              },
+              {
+                "id": "D",
+                "text": "키가 더 커짐"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 113, "end": 153}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 131,
+                "end": 169
+              }
+            ]
+          },
           "question": {
-            "prompt": "마지막 문장을 바꾸어 말하면 알맞은 것은 무엇입니까?",
+            "prompt": "무엇을 해 봅시다 했나?",
             "choices": [
-              {"id": "A", "text": "섬은 아름다운 자연과 귀한 먹거리를 주는 소중한 곳이다."},
-              {"id": "B", "text": "섬은 사람이 살 수 없는 위험한 곳이다."},
-              {"id": "C", "text": "섬은 나무만 있고 동물은 없는 곳이다."},
-              {"id": "D", "text": "섬은 육지보다 훨씬 넓은 곳이다."}
+              {
+                "id": "A",
+                "text": "즐겁게 국어 공부"
+              },
+              {
+                "id": "B",
+                "text": "시끄러운 소음 측정"
+              },
+              {
+                "id": "C",
+                "text": "무서운 영화 관람"
+              },
+              {
+                "id": "D",
+                "text": "친구와 싸움질"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 153}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 169
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "2문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "섬에는 아름다운 자연과 특별한 동식물이 있고 바다로 생활한다."},
-              {"id": "B", "text": "섬에 가면 배를 타는 법을 배울 수 있다."},
-              {"id": "C", "text": "섬에는 학교와 병원이 하나도 없다."},
-              {"id": "D", "text": "섬에 사는 사람들은 육지에 자주 놀러 간다."}
+              {
+                "id": "A",
+                "text": "연결어 사용의 효과"
+              },
+              {
+                "id": "B",
+                "text": "국어 교과서의 두께"
+              },
+              {
+                "id": "C",
+                "text": "선생님의 신발 크기"
+              },
+              {
+                "id": "D",
+                "text": "교실 게시판의 무늬"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        {"id": "c1", "text": "섬은 바다나 강처럼 물로 사방이 둘러싸인 땅이다."},
-        {"id": "c2", "text": "우리나라에는 제주도와 울릉도 같은 섬이 많다."},
-        {"id": "c3", "text": "섬에는 특별한 동식물과 아름다운 바다가 있다."},
-        {"id": "c4", "text": "섬 사람들은 바다에서 물고기와 조개를 잡아 생활한다."}
+        {
+          "id": "c1",
+          "text": "원인과 결과를 말해요."
+        },
+        {
+          "id": "c2",
+          "text": "문장을 이어 줍니다."
+        },
+        {
+          "id": "c3",
+          "text": "상황을 명확히 함."
+        },
+        {
+          "id": "c4",
+          "text": "조리 있게 말해요."
+        },
+        {
+          "id": "c5",
+          "text": "내용을 쉽게 이해함."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "섬이란 어떤 땅을 말합니까?",
-          "answerText": "사방이 둘러싸인 땅",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 19, "end": 29}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "일이 일어난 까닭?",
+          "answerText": "원인",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 10,
+              "end": 11
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 1
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "우리나라에서 이름이 잘 알려진 섬 두 곳은 어디입니까?",
-          "answerText": "제주도와 울릉도",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 42, "end": 50}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "이어주는 말의 예?",
+          "answerText": "그래서",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 40,
+              "end": 42
+            },
+            {
+              "paragraphId": "p1",
+              "start": 96,
+              "end": 98
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "섬에 가려면 무엇을 타야 합니까?",
-          "answerText": "배를 타거나 비행기를 타야",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 76, "end": 90}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "섬에 사는 특별한 것으로 어떤 것이 나옵니까?",
-          "answerText": "특별한 동물과 식물",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 53, "end": 63}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "섬 사람들은 바다에서 무엇을 하며 생활합니까?",
-          "answerText": "물고기를 잡거나 미역과 조개를 캐며",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 88, "end": 107}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q6",
-          "prompt": "섬은 우리에게 무엇을 주는 소중한 곳입니까?",
-          "answerText": "아름다운 자연과 귀한 먹거리",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 125, "end": 140}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "바르게 말하는 무엇인가요?",
+          "answerText": "습관",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 99,
+              "end": 100
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         }
       ]

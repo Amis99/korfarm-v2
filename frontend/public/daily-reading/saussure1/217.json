@@ -1,19 +1,34 @@
 {
-  "contentId": "dr-s1-217",
+  "contentId": "dr-saussure1-217",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "따뜻한 색과 차가운 색",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[문학] 달빛 우산을 빌린 다람쥐 1부: 첫 번째 힌트",
+  "description": "밤 나들이를 가고 싶은 다람쥐 토토가 달빛 우산을 빌리기 위해 연못으로 향하는 이야기를 읽어요",
   "targetLevel": "SAUSSURE_1",
-  "schoolGradeRange": {"min": 1, "max": 1},
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": {"mode": "FREE"},
-  "seedReward": {"seedType": "WHEAT", "count": 3, "multiplier": 1},
-  "timeLimitSec": 300,
+  "schoolGradeRange": {
+    "min": 1,
+    "max": 1
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +36,11 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "색에는 따뜻한 느낌을 주는 색과 차가운 느낌을 주는 색이 있다.빨강, 주황, 노랑은 따뜻한 색이라고 한다.이 색들을 보면 활활 타는 불이나 환하게 비추는 해가 떠오른다.그래서 따뜻한 색으로 칠한 그림은 밝고 힘찬 느낌을 준다."
+          "text": "밤이 깊은 숲속에서 아기 다람쥐 토토는 잠이 오지 않았습니다. 창밖을 보니 하늘에서 은은한 달빛이 쏟아져 내리고 있었지요. 토토는 문득 달빛을 우산처럼 쓰고 밤 나들이를 가고 싶어졌습니다. 그때 창틀에 놓인 작은 쪽지에 \"달빛 우산을 빌리려면 연못가로 오렴\"이라는 글씨가 나타났어요."
         },
         {
           "id": "p2",
-          "text": "파랑, 남색, 보라는 차가운 색이라고 한다.이 색들을 보면 넓고 깊은 바다나 꽁꽁 언 얼음이 생각난다.차가운 색으로 칠한 그림은 시원하고 조용한 느낌을 준다.그림을 그릴 때 어떤 색을 쓰느냐에 따라 느낌이 달라지므로 색을 잘 골라 보자."
+          "text": "토토는 쪽지를 챙겨 들고 설레는 마음으로 연못을 향해 달려갔습니다. 밤 공기는 시원했고 풀벌레들이 연주하는 아름다운 노랫소리가 숲속에 울려 퍼졌어요. 연못에 도착하자 물 위에 비친 커다란 달이 환하게 웃으며 토토를 기다리고 있었습니다. 과연 토토는 이곳에서 진짜 달빛 우산을 만날 수 있을까요?"
         }
       ]
     },
@@ -33,220 +48,510 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 35}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 33
+              }
+            ]
+          },
           "question": {
-            "prompt": "색에는 어떤 느낌을 주는 색이 있습니까?",
+            "prompt": "다람쥐 토토는 어떤가?",
             "choices": [
-              {"id": "A", "text": "따뜻한 느낌과 차가운 느낌을 주는 색이 있다."},
-              {"id": "B", "text": "크고 작은 느낌을 주는 색이 있다."},
-              {"id": "C", "text": "빠르고 느린 느낌을 주는 색이 있다."},
-              {"id": "D", "text": "무겁고 가벼운 느낌을 주는 색이 있다."}
+              {
+                "id": "A",
+                "text": "잠이 오지 않았음"
+              },
+              {
+                "id": "B",
+                "text": "배가 너무 고팠음"
+              },
+              {
+                "id": "C",
+                "text": "운동을 하고 싶었음"
+              },
+              {
+                "id": "D",
+                "text": "학교에 가고 싶었음"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 35, "end": 59}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 35,
+                "end": 66
+              }
+            ]
+          },
           "question": {
-            "prompt": "따뜻한 색에 해당하는 것은 무엇입니까?",
+            "prompt": "하늘에서 무엇이?",
             "choices": [
-              {"id": "A", "text": "빨강, 주황, 노랑이다."},
-              {"id": "B", "text": "파랑, 남색, 보라이다."},
-              {"id": "C", "text": "검정, 회색, 하양이다."},
-              {"id": "D", "text": "초록, 연두, 갈색이다."}
+              {
+                "id": "A",
+                "text": "은은한 달빛"
+              },
+              {
+                "id": "B",
+                "text": "차가운 빗물"
+              },
+              {
+                "id": "C",
+                "text": "시꺼먼 연기"
+              },
+              {
+                "id": "D",
+                "text": "무거운 돌멩이"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 59, "end": 94}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 68,
+                "end": 103
+              }
+            ]
+          },
           "question": {
-            "prompt": "따뜻한 색을 보면 무엇이 떠오릅니까?",
+            "prompt": "토토가 하고 싶은 것?",
             "choices": [
-              {"id": "A", "text": "활활 타는 불이나 환하게 비추는 해가 떠오른다."},
-              {"id": "B", "text": "넓고 깊은 바다나 꽁꽁 언 얼음이 생각난다."},
-              {"id": "C", "text": "차갑고 새하얀 눈이 떠오른다."},
-              {"id": "D", "text": "높고 푸른 하늘이 떠오른다."}
+              {
+                "id": "A",
+                "text": "밤 나들이"
+              },
+              {
+                "id": "B",
+                "text": "낮잠 자기"
+              },
+              {
+                "id": "C",
+                "text": "줄넘기 대결"
+              },
+              {
+                "id": "D",
+                "text": "사탕 먹기"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 94, "end": 126}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 105,
+                "end": 154
+              }
+            ]
+          },
           "question": {
-            "prompt": "따뜻한 색으로 칠한 그림은 어떤 느낌을 줍니까?",
+            "prompt": "쪽지에 적힌 장소는?",
             "choices": [
-              {"id": "A", "text": "밝고 힘찬 느낌을 준다."},
-              {"id": "B", "text": "시원하고 조용한 느낌을 준다."},
-              {"id": "C", "text": "어둡고 무거운 느낌을 준다."},
-              {"id": "D", "text": "슬프고 외로운 느낌을 준다."}
+              {
+                "id": "A",
+                "text": "연못가"
+              },
+              {
+                "id": "B",
+                "text": "도서관"
+              },
+              {
+                "id": "C",
+                "text": "운동장"
+              },
+              {
+                "id": "D",
+                "text": "경찰서"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 126}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 154
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "1문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "빨강, 주황, 노랑은 따뜻한 색으로 밝고 힘찬 느낌을 준다."},
-              {"id": "B", "text": "파랑, 남색, 보라는 차가운 색으로 시원한 느낌을 준다."},
-              {"id": "C", "text": "그림을 그릴 때 색을 많이 쓰면 좋다."},
-              {"id": "D", "text": "색연필보다 물감이 그림에 더 좋다."}
+              {
+                "id": "A",
+                "text": "나들이 결심과 쪽지"
+              },
+              {
+                "id": "B",
+                "text": "다람쥐의 꼬리 길이"
+              },
+              {
+                "id": "C",
+                "text": "창틀의 나무 재질"
+              },
+              {
+                "id": "D",
+                "text": "은하수의 별 개수"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 24}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 38
+              }
+            ]
+          },
           "question": {
-            "prompt": "차가운 색에 해당하는 것은 무엇입니까?",
+            "prompt": "토토는 어디로 갔나요?",
             "choices": [
-              {"id": "A", "text": "파랑, 남색, 보라이다."},
-              {"id": "B", "text": "빨강, 주황, 노랑이다."},
-              {"id": "C", "text": "분홍, 살구, 연두이다."},
-              {"id": "D", "text": "검정, 하양, 회색이다."}
+              {
+                "id": "A",
+                "text": "연못을 향해"
+              },
+              {
+                "id": "B",
+                "text": "산꼭대기를 향해"
+              },
+              {
+                "id": "C",
+                "text": "시장을 향해"
+              },
+              {
+                "id": "D",
+                "text": "학교를 향해"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 24, "end": 57}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 40,
+                "end": 82
+              }
+            ]
+          },
           "question": {
-            "prompt": "앞에서 차가운 색이라고 했는데, 이 색들을 보면 무엇이 생각납니까?",
+            "prompt": "숲속에 울린 소리는?",
             "choices": [
-              {"id": "A", "text": "넓고 깊은 바다나 꽁꽁 언 얼음이 생각난다."},
-              {"id": "B", "text": "활활 타는 불이나 환한 해가 떠오른다."},
-              {"id": "C", "text": "달콤한 사탕이나 맛있는 과일이 떠오른다."},
-              {"id": "D", "text": "싱싱한 풀잎이나 꽃밭이 떠오른다."}
+              {
+                "id": "A",
+                "text": "풀벌레의 노랫소리"
+              },
+              {
+                "id": "B",
+                "text": "사자의 울음소리"
+              },
+              {
+                "id": "C",
+                "text": "자동차의 경적 소리"
+              },
+              {
+                "id": "D",
+                "text": "천둥 치는 소리"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 57, "end": 88}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 84,
+                "end": 127
+              }
+            ]
+          },
           "question": {
-            "prompt": "차가운 색으로 칠한 그림은 어떤 느낌을 줍니까?",
+            "prompt": "물 위에 무엇이 있나?",
             "choices": [
-              {"id": "A", "text": "시원하고 조용한 느낌을 준다."},
-              {"id": "B", "text": "밝고 힘찬 느낌을 준다."},
-              {"id": "C", "text": "무섭고 답답한 느낌을 준다."},
-              {"id": "D", "text": "뜨겁고 어지러운 느낌을 준다."}
+              {
+                "id": "A",
+                "text": "비친 커다란 달"
+              },
+              {
+                "id": "B",
+                "text": "떠 있는 고무 오리"
+              },
+              {
+                "id": "C",
+                "text": "가라앉은 돌덩이"
+              },
+              {
+                "id": "D",
+                "text": "얼어붙은 얼음"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 88, "end": 132}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 129,
+                "end": 166
+              }
+            ]
+          },
           "question": {
-            "prompt": "그림을 그릴 때 느낌이 달라지는 까닭은 무엇입니까?",
+            "prompt": "토토가 기대하는 것?",
             "choices": [
-              {"id": "A", "text": "어떤 색을 쓰느냐에 따라 달라지기 때문이다."},
-              {"id": "B", "text": "종이 크기에 따라 달라지기 때문이다."},
-              {"id": "C", "text": "그리는 시간에 따라 달라지기 때문이다."},
-              {"id": "D", "text": "붓 모양에 따라 달라지기 때문이다."}
+              {
+                "id": "A",
+                "text": "진짜 달빛 우산"
+              },
+              {
+                "id": "B",
+                "text": "맛있는 도토리"
+              },
+              {
+                "id": "C",
+                "text": "새로운 운동화"
+              },
+              {
+                "id": "D",
+                "text": "단단한 이빨"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 132}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 166
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "2문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "파랑, 남색, 보라는 차가운 색이고 색에 따라 느낌이 달라진다."},
-              {"id": "B", "text": "빨강, 주황, 노랑은 따뜻한 색으로 불을 떠올리게 한다."},
-              {"id": "C", "text": "그림을 그릴 때 색을 많이 섞으면 좋다."},
-              {"id": "D", "text": "바다에 가면 파란색만 보인다."}
+              {
+                "id": "A",
+                "text": "연못 도착과 기대감"
+              },
+              {
+                "id": "B",
+                "text": "밤 공기의 온도"
+              },
+              {
+                "id": "C",
+                "text": "풀벌레의 다리 개수"
+              },
+              {
+                "id": "D",
+                "text": "달의 표면 모양"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        {"id": "c1", "text": "색에는 따뜻한 느낌과 차가운 느낌을 주는 색이 있다."},
-        {"id": "c2", "text": "빨강, 주황, 노랑은 따뜻한 색으로 밝고 힘찬 느낌을 준다."},
-        {"id": "c3", "text": "파랑, 남색, 보라는 차가운 색으로 시원한 느낌을 준다."},
-        {"id": "c4", "text": "어떤 색을 쓰느냐에 따라 그림의 느낌이 달라진다."}
+        {
+          "id": "c1",
+          "text": "토토는 잠이 안 옴."
+        },
+        {
+          "id": "c2",
+          "text": "나들이를 가고 싶어."
+        },
+        {
+          "id": "c3",
+          "text": "작은 쪽지를 발견함."
+        },
+        {
+          "id": "c4",
+          "text": "연못으로 달려가요."
+        },
+        {
+          "id": "c5",
+          "text": "달이 기다리고 있음."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "따뜻한 색에는 어떤 색이 있습니까?",
-          "answerText": "빨강, 주황, 노랑",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 35, "end": 45}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "비를 막는 도구?",
+          "answerText": "우산",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 80,
+              "end": 81
+            },
+            {
+              "paragraphId": "p1",
+              "start": 127,
+              "end": 128
+            },
+            {
+              "paragraphId": "p2",
+              "start": 150,
+              "end": 151
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "따뜻한 색을 보면 떠오르는 것 두 가지는 무엇입니까?",
-          "answerText": "불이나 환하게 비추는 해",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 74, "end": 87}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "숲속의 작은 호수?",
+          "answerText": "연못",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 136,
+              "end": 137
+            },
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 24
+            },
+            {
+              "paragraphId": "p2",
+              "start": 84,
+              "end": 85
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "차가운 색에는 어떤 색이 있습니까?",
-          "answerText": "파랑, 남색, 보라",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 0, "end": 10}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "차가운 색을 보면 떠오르는 것 두 가지는 무엇입니까?",
-          "answerText": "바다나 꽁꽁 언 얼음",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 39, "end": 50}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "따뜻한 색으로 칠한 그림은 어떤 느낌입니까?",
-          "answerText": "밝고 힘찬",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 113, "end": 118}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q6",
-          "prompt": "차가운 색으로 칠한 그림은 어떤 느낌입니까?",
-          "answerText": "시원하고 조용한",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 72, "end": 80}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "짧은 글을 적은 종이?",
+          "answerText": "쪽지",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 119,
+              "end": 120
+            },
+            {
+              "paragraphId": "p2",
+              "start": 4,
+              "end": 5
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         }
       ]

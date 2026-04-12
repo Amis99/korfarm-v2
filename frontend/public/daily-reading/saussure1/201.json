@@ -1,19 +1,34 @@
 {
-  "contentId": "dr-s1-201",
+  "contentId": "dr-saussure1-201",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "더하기와 빼기",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 동네의 여러 직업",
+  "description": "우리 동네를 위해 일하시는 고마운 분들과 다양한 직업의 세계를 배워요",
   "targetLevel": "SAUSSURE_1",
-  "schoolGradeRange": {"min": 1, "max": 1},
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": {"mode": "FREE"},
-  "seedReward": {"seedType": "WHEAT", "count": 3, "multiplier": 1},
-  "timeLimitSec": 300,
+  "schoolGradeRange": {
+    "min": 1,
+    "max": 1
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +36,11 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "더하기는 두 수를 합쳐서 큰 수를 만드는 것이다.사과 두 개와 사과 세 개를 합치면 다섯 개가 된다.이것을 숫자로 쓰면 이 더하기 삼은 오라고 읽는다.더하기를 할 때는 플러스 기호를 쓴다.생활 속에서 물건을 세거나 점수를 합칠 때 더하기를 사용한다."
+          "text": "우리 동네에는 우리를 도와주는 고마운 분들이 아주 많이 계십니다. 경찰관 아저씨는 동네를 안전하게 지켜주시고 소방관 아저씨는 불을 꺼주셔요. 우체국 아저씨는 소중한 편지를 배달해주시고 미용사 누나는 머리를 예쁘게 깎아줍니다. 이분들 덕분에 우리는 매일매일 편리하고 행복하게 생활할 수 있어요."
         },
         {
           "id": "p2",
-          "text": "빼기는 큰 수에서 작은 수를 덜어 내는 것이다.연필 다섯 자루에서 두 자루를 빌려주면 세 자루가 남는다.이것을 숫자로 쓰면 오 빼기 이는 삼이라고 읽는다.빼기를 할 때는 마이너스 기호를 쓴다.더하기와 빼기를 잘하면 수학이 점점 재미있어진다."
+          "text": "동네를 깨끗하게 청소해주시는 환경미화원 아저씨와 맛있는 빵을 굽는 제빵사 아저씨도 계십니다. 아픈 사람을 치료해주시는 의사 선생님과 가르침을 주시는 학교 선생님도 고마운 분들이이에요. 우리는 동네의 여러 직업을 가진 분들에게 항상 감사하는 마음을 가져야 합니다. 여러분은 나중에 커서 어떤 멋진 꿈을 이루고 싶은지 생각해보아요."
         }
       ]
     },
@@ -33,250 +48,500 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 27}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 34
+              }
+            ]
+          },
           "question": {
-            "prompt": "더하기란 무엇을 하는 것입니까?",
+            "prompt": "동네에는 누가 계시나?",
             "choices": [
-              {"id": "A", "text": "두 수를 합쳐서 큰 수를 만드는 것이다."},
-              {"id": "B", "text": "큰 수에서 작은 수를 빼는 것이다."},
-              {"id": "C", "text": "수를 반으로 나누는 것이다."},
-              {"id": "D", "text": "수를 순서대로 세는 것이다."}
+              {
+                "id": "A",
+                "text": "도와주는 고마운 분들"
+              },
+              {
+                "id": "B",
+                "text": "무서운 유령들"
+              },
+              {
+                "id": "C",
+                "text": "잠만 자는 곰들"
+              },
+              {
+                "id": "D",
+                "text": "싸움만 하는 괴물들"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 27, "end": 56}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 36,
+                "end": 71
+              }
+            ]
+          },
           "question": {
-            "prompt": "사과 두 개와 세 개를 합치면 몇 개가 됩니까?",
+            "prompt": "소방관 아저씨는?",
             "choices": [
-              {"id": "A", "text": "다섯 개가 된다."},
-              {"id": "B", "text": "네 개가 된다."},
-              {"id": "C", "text": "여섯 개가 된다."},
-              {"id": "D", "text": "일곱 개가 된다."}
+              {
+                "id": "A",
+                "text": "불을 꺼주셔요"
+              },
+              {
+                "id": "B",
+                "text": "잠을 자요"
+              },
+              {
+                "id": "C",
+                "text": "춤을 춰요"
+              },
+              {
+                "id": "D",
+                "text": "밥을 먹어요"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 56, "end": 84}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 73,
+                "end": 116
+              }
+            ]
+          },
           "question": {
-            "prompt": "앞에서 배운 사과 합치기를 숫자로 어떻게 읽습니까?",
+            "prompt": "미용사 누나는?",
             "choices": [
-              {"id": "A", "text": "이 더하기 삼은 오라고 읽는다."},
-              {"id": "B", "text": "삼 더하기 이는 사라고 읽는다."},
-              {"id": "C", "text": "오 빼기 삼은 이라고 읽는다."},
-              {"id": "D", "text": "이 곱하기 삼은 육이라고 읽는다."}
+              {
+                "id": "A",
+                "text": "머리를 예쁘게 깎음"
+              },
+              {
+                "id": "B",
+                "text": "발을 깨끗이 씻음"
+              },
+              {
+                "id": "C",
+                "text": "손을 높이 듦"
+              },
+              {
+                "id": "D",
+                "text": "눈을 크게 뜸"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 84, "end": 105}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 118,
+                "end": 158
+              }
+            ]
+          },
           "question": {
-            "prompt": "더하기를 할 때 쓰는 기호의 이름은 무엇입니까?",
+            "prompt": "이분들 덕분에 우리는?",
             "choices": [
-              {"id": "A", "text": "플러스 기호를 쓴다."},
-              {"id": "B", "text": "마이너스 기호를 쓴다."},
-              {"id": "C", "text": "곱하기 기호를 쓴다."},
-              {"id": "D", "text": "나누기 기호를 쓴다."}
+              {
+                "id": "A",
+                "text": "편리하고 행복하게 삶"
+              },
+              {
+                "id": "B",
+                "text": "무섭고 슬프게 삶"
+              },
+              {
+                "id": "C",
+                "text": "지루하고 따분하게 삶"
+              },
+              {
+                "id": "D",
+                "text": "졸리고 피곤하게 삶"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 105, "end": 139}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 158
+              }
+            ]
+          },
           "question": {
-            "prompt": "생활 속에서 더하기를 언제 사용합니까?",
+            "prompt": "1문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "물건을 세거나 점수를 합칠 때 사용한다."},
-              {"id": "B", "text": "그림을 그리거나 노래를 부를 때 사용한다."},
-              {"id": "C", "text": "달리기를 하거나 수영을 할 때 사용한다."},
-              {"id": "D", "text": "책을 읽거나 일기를 쓸 때 사용한다."}
+              {
+                "id": "A",
+                "text": "도와주는 분들의 역할"
+              },
+              {
+                "id": "B",
+                "text": "경찰차의 사이렌 소리"
+              },
+              {
+                "id": "C",
+                "text": "우체국의 우표 가격"
+              },
+              {
+                "id": "D",
+                "text": "미용실의 거울 개수"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 139}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 46
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "제빵사 아저씨는?",
             "choices": [
-              {"id": "A", "text": "더하기는 두 수를 합치는 것이며 플러스 기호를 사용한다."},
-              {"id": "B", "text": "사과는 맛있는 과일이다."},
-              {"id": "C", "text": "숫자를 쓰려면 연필이 필요하다."},
-              {"id": "D", "text": "수학 시간에는 조용히 해야 한다."}
+              {
+                "id": "A",
+                "text": "맛있는 빵을 구움"
+              },
+              {
+                "id": "B",
+                "text": "바닥을 깨끗이 씀"
+              },
+              {
+                "id": "C",
+                "text": "노래를 크게 부름"
+              },
+              {
+                "id": "D",
+                "text": "신발을 수선함"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 26}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 48,
+                "end": 94
+              }
+            ]
+          },
           "question": {
-            "prompt": "빼기란 무엇을 하는 것입니까?",
+            "prompt": "의사 선생님은?",
             "choices": [
-              {"id": "A", "text": "큰 수에서 작은 수를 덜어 내는 것이다."},
-              {"id": "B", "text": "두 수를 합쳐서 큰 수를 만드는 것이다."},
-              {"id": "C", "text": "수를 두 배로 늘리는 것이다."},
-              {"id": "D", "text": "수를 순서대로 나열하는 것이다."}
+              {
+                "id": "A",
+                "text": "아픈 사람 치료함"
+              },
+              {
+                "id": "B",
+                "text": "맛있는 밥을 함"
+              },
+              {
+                "id": "C",
+                "text": "운동장을 매일 뜀"
+              },
+              {
+                "id": "D",
+                "text": "잠만 쿨쿨 잠"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 26, "end": 58}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 96,
+                "end": 137
+              }
+            ]
+          },
           "question": {
-            "prompt": "연필 다섯 자루에서 두 자루를 빌려주면 몇 자루가 남습니까?",
+            "prompt": "어떤 마음을 가질까요?",
             "choices": [
-              {"id": "A", "text": "세 자루가 남는다."},
-              {"id": "B", "text": "네 자루가 남는다."},
-              {"id": "C", "text": "두 자루가 남는다."},
-              {"id": "D", "text": "한 자루가 남는다."}
+              {
+                "id": "A",
+                "text": "항상 감사하는 마음"
+              },
+              {
+                "id": "B",
+                "text": "괴롭히고 싫은 마음"
+              },
+              {
+                "id": "C",
+                "text": "전부 다 뺏는 마음"
+              },
+              {
+                "id": "D",
+                "text": "아무 상관 없는 마음"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 58, "end": 86}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 139,
+                "end": 178
+              }
+            ]
+          },
           "question": {
-            "prompt": "앞의 연필 예를 숫자로 어떻게 읽습니까?",
+            "prompt": "무엇을 생각해보나요?",
             "choices": [
-              {"id": "A", "text": "오 빼기 이는 삼이라고 읽는다."},
-              {"id": "B", "text": "오 더하기 이는 칠이라고 읽는다."},
-              {"id": "C", "text": "삼 빼기 이는 일이라고 읽는다."},
-              {"id": "D", "text": "이 빼기 오는 삼이라고 읽는다."}
+              {
+                "id": "A",
+                "text": "어떤 멋진 꿈"
+              },
+              {
+                "id": "B",
+                "text": "어제의 저녁 반찬"
+              },
+              {
+                "id": "C",
+                "text": "친구의 신발 크기"
+              },
+              {
+                "id": "D",
+                "text": "운동장의 흙먼지"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 86, "end": 107}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 178
+              }
+            ]
+          },
           "question": {
-            "prompt": "빼기를 할 때 쓰는 기호의 이름은 무엇입니까?",
+            "prompt": "2문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "마이너스 기호를 쓴다."},
-              {"id": "B", "text": "플러스 기호를 쓴다."},
-              {"id": "C", "text": "곱하기 기호를 쓴다."},
-              {"id": "D", "text": "나누기 기호를 쓴다."}
+              {
+                "id": "A",
+                "text": "다양한 직업과 감사함"
+              },
+              {
+                "id": "B",
+                "text": "빵집의 오븐 온도"
+              },
+              {
+                "id": "C",
+                "text": "학교의 칠판 색깔"
+              },
+              {
+                "id": "D",
+                "text": "병원의 주삿바늘 수"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
-          }
-        },
-        {
-          "stepId": "s11",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 107, "end": 134}]},
-          "question": {
-            "prompt": "더하기와 빼기를 잘하면 어떻게 됩니까?",
-            "choices": [
-              {"id": "A", "text": "수학이 점점 재미있어진다."},
-              {"id": "B", "text": "체육을 잘하게 된다."},
-              {"id": "C", "text": "그림을 잘 그리게 된다."},
-              {"id": "D", "text": "노래를 잘 부르게 된다."}
-            ],
-            "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 134}]},
-          "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
-            "choices": [
-              {"id": "A", "text": "빼기는 큰 수에서 작은 수를 덜며 마이너스 기호를 사용한다."},
-              {"id": "B", "text": "연필을 빌려주면 친구가 좋아한다."},
-              {"id": "C", "text": "숫자는 항상 외워야 한다."},
-              {"id": "D", "text": "수학 시간에 장난을 치면 안 된다."}
-            ],
-            "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        {"id": "c1", "text": "더하기는 두 수를 합쳐서 큰 수를 만드는 것이다."},
-        {"id": "c2", "text": "더할 때는 플러스 기호를 쓰고 생활 속에서 많이 쓴다."},
-        {"id": "c3", "text": "빼기는 큰 수에서 작은 수를 덜어 내는 것이다."},
-        {"id": "c4", "text": "더하기와 빼기를 잘하면 수학이 재미있어진다."}
+        {
+          "id": "c1",
+          "text": "동네엔 고마운 분들."
+        },
+        {
+          "id": "c2",
+          "text": "우리를 지켜 주셔요."
+        },
+        {
+          "id": "c3",
+          "text": "편리하게 생활해요."
+        },
+        {
+          "id": "c4",
+          "text": "다양한 직업이 있죠."
+        },
+        {
+          "id": "c5",
+          "text": "멋진 꿈을 가져요."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "더하기를 할 때 쓰는 기호의 이름은 무엇입니까?",
-          "answerText": "플러스",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 94, "end": 97}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "우리가 사는 마을?",
+          "answerText": "동네",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 3,
+              "end": 4
+            },
+            {
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 47
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 1
+            },
+            {
+              "paragraphId": "p2",
+              "start": 107,
+              "end": 108
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "사과 두 개와 세 개를 합치면 몇 개가 됩니까?",
-          "answerText": "다섯 개",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 47, "end": 51}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "사회가 하는 일?",
+          "answerText": "직업",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 114,
+              "end": 115
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "빼기를 할 때 쓰는 기호의 이름은 무엇입니까?",
-          "answerText": "마이너스",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 95, "end": 99}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "연필 다섯 자루에서 두 자루를 빌려주면 몇 자루가 남습니까?",
-          "answerText": "세 자루",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 48, "end": 52}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "더하기와 빼기를 잘하면 무엇이 재미있어집니까?",
-          "answerText": "수학",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 120, "end": 122}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q6",
-          "prompt": "생활에서 더하기를 사용하는 경우는 언제입니까?",
-          "answerText": "물건을 세거나 점수를 합칠 때",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 112, "end": 128}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "고마워하는 마음?",
+          "answerText": "감사",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 129,
+              "end": 130
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         }
       ]

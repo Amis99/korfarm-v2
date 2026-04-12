@@ -1,32 +1,34 @@
 {
-  "contentId": "dr-s1-267",
+  "contentId": "dr-saussure1-267",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "도서관에서 지켜야 할 예절",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[문학] 도토리 주머니",
+  "description": "겨울을 대비해 도토리를 모으는 다람쥐 또또의 이야기와 도토리가 참나무가 되는 자연의 신비를 배워요.",
   "targetLevel": "SAUSSURE_1",
   "schoolGradeRange": {
     "min": 1,
     "max": 1
   },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "추론적 이해"
   ],
   "tags": [
-    "daily"
+    "문학",
+    "독해"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -34,11 +36,11 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "우리들이 재미있는 책을 마음껏 빌려 볼 수 있는 도서관에 가면 꼭 지켜야 할 예절이 있습니다.도서관에서는 다른 사람들이 편하게 책을 읽을 수 있게 사뿐사뿐 아주 조용히 걸어 다녀야 합니다.큰 소리로 떠들거나 휴대폰으로 시끄럽게 통화하는 것은 다른 사람들에게 큰 방해가 됩니다."
+          "text": "숲속 작은 다람쥐 또또는 다가올 추운 겨울을 대비하여 맛있는 도토리를 모으기 시작했습니다. 또또는 볼이 빵빵해지도록 도토리를 입안에 가득 담아 바위 밑이나 나무 구멍 등 자신만의 비밀 장소에 소중히 숨겨두었지요. 또또의 주머니는 없지만 통통한 볼이 마치 마법 같은 도토리 주머니처럼 보였습니다."
         },
         {
           "id": "p2",
-          "text": "모두 함께 보는 도서관 책은 찢어지거나 더러워지지 않게 언제나 아주 조심스럽게 넘겨서 읽어야 합니다.책을 재미있게 다 읽고 난 후에는 원래 있던 제자리에 바르게 잘 꽂아 두는 것이 올바른 약속입니다.우리 모두 질서를 지키면 조용한 도서관에서 마음 편히 기분 좋게 멋진 책을 읽을 수 있습니다."
+          "text": "눈이 펑펑 내리는 겨울이 오자 또또는 숨겨둔 도토리를 하나씩 꺼내 먹으며 따뜻한 집에서 쉬었습니다. 가끔 어디에 숨겼는지 잊어버린 도토리는 땅속에서 싹을 틔워 나중에 커다란 참나무로 자라나기도 해요. 숲을 가꾸는 멋진 일꾼인 또또는 오늘도 맛있는 도토리를 찾아 숲속을 신나게 뛰어다닙니다."
         }
       ]
     },
@@ -51,35 +53,35 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 52
+                "end": 51
               }
             ]
           },
           "question": {
-            "prompt": "우리가 책을 빌려 볼 수 있는 이곳은 어디인가요?",
+            "prompt": "또또는 무엇을 모으기 시작했나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "우 리 들 이 재 미 있 는 책 을 마 음 껏 빌 려 볼 수 있 는 도 서 관 에 가 면 꼭 지 켜 야 할 예 절 이 있 습 니 다"
+                "text": "맛있는 도토리"
               },
               {
                 "id": "B",
-                "text": "신 나 게 뛰 어 놀 수 있 는 동 네 놀 이 터 에 서 미 끄 럼 틀 을 타 며 친 구 들 과 함 께 즐 곱 게 놀 았 습 니 다"
+                "text": "커다란 돌멩이"
               },
               {
                 "id": "C",
-                "text": "조 용 한 산 속 오 두 막 에 서 작 은 다 람 쥐 들 과 안 녕 하 게 인 사 하 고 낮 잠 을 쿨 쿨 잤 습 니 다"
+                "text": "차가운 눈송이"
               },
               {
                 "id": "D",
-                "text": "우 리 집 바 다 에 매 일 놀 러 가 서 시 원 한 파 도 를 보 며 모 래 장 난 을 하 고 왔 습 니 다"
+                "text": "낡은 나뭇가지"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -89,36 +91,36 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 52,
-                "end": 105
+                "start": 53,
+                "end": 111
               }
             ]
           },
           "question": {
-            "prompt": "도서관에서는 어떻게 걸어 다녀야 할까요?",
+            "prompt": "도토리를 어디에 숨겨두었나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "도 서 관 에 서 는 다 른 사 람 들 이 편 하 게 책 을 읽 을 수 있 게 사 뿐 사 뿐 아 주 조 용 히 걸 어 다 녀 야 합 니 다"
+                "text": "바위 밑이나 나무 구멍"
               },
               {
                 "id": "B",
-                "text": "크 고 씩 씩 한 소 리 를 내 며 로 봇 처 럼 쿵 쿵 신 나 게 즐 겁 게 뛰 어 다 녀 야 만 마 음 이 편 안 합 니 다"
+                "text": "구름 위나 해님 옆"
               },
               {
                 "id": "C",
-                "text": "우 리 모 두 손 을 잡 고 빙 글 빙 글 춤 을 추 며 달 리 기 시 합 을 하 며 재 미 있 게 놀 수 있 습 니 다"
+                "text": "냇물 속이나 파도 위"
               },
               {
                 "id": "D",
-                "text": "노 래 를 크 게 부 르 면 서 다 른 친 구 들 이 책 을 못 보 도 록 소 리 치 며 인 사 해 주 기 로 합 습 니 다"
+                "text": "교실 안이나 책상 위"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -128,36 +130,36 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 105,
-                "end": 154
+                "start": 113,
+                "end": 168
               }
             ]
           },
           "question": {
-            "prompt": "다른 사람들에게 큰 방해가 되는 행동은 무엇인가요?",
+            "prompt": "또또의 볼은 무엇처럼 보였나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "큰 소 리 로 떠 들 거 나 휴 대 폰 으 로 시 끄 럽 게 통 화 하 는 것 은 다 른 사 람 들 에 게 큰 방 해 가 됩 니 다"
+                "text": "도토리 주머니"
               },
               {
                 "id": "B",
-                "text": "그 림 책 을 펴 고 자 그 만 한 목 소 리 로 예 쁜 그 림 을 번 갈 아 보 며 속 삭 이 며 즐 겁 게 놀 았 습 니 다"
+                "text": "커다란 수박"
               },
               {
                 "id": "C",
-                "text": "어 른 들 이 말 씀 하 시 는 것 을 귀 기 울 여 듣 고 고 개 를 끄 덕 이 며 멋 진 인 사 를 꾸 벅 건 넸 습 니 다"
+                "text": "하얀 반달"
               },
               {
                 "id": "D",
-                "text": "맛 있 는 간 식 을 몰 래 꺼 내 서 옆 에 앉 은 친 구 들 과 한 입 씩 나 눠 먹 으 며 사이 좋 게 지 냈 습 니 다"
+                "text": "부드러운 구름"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -168,35 +170,35 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 154
+                "end": 168
               }
             ]
           },
           "question": {
-            "prompt": "첫째 문단의 중심 내용은 무엇일까?",
+            "prompt": "1문단은 무엇에 대한 내용인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "도서관에서는 다른 사람들을 배려하여 조용히 걸어 다니고 큰 소리로 떠들지 않아야 한다는 내용입니다."
+                "text": "또또의 도토리 모으기"
               },
               {
                 "id": "B",
-                "text": "하루 종일 도서관에서 친구들과 신나게 휴대폰으로 게임을 하며 즐겁게 소리치고 놀았던 기억입니다."
+                "text": "나무의 나이 계산법"
               },
               {
                 "id": "C",
-                "text": "우리 동네에서 가장 큰 도서관에 찾아가 보고 싶은 책을 마음껏 공짜로 모두 빌려온 재미있는 이야기입니다."
+                "text": "바위의 단단한 정도"
               },
               {
                 "id": "D",
-                "text": "책을 집으로 가져가서 바닥에 누워 과자를 먹으면서 편안하게 만화책을 오랫동안 보았다는 설명입니다."
+                "text": "비밀 메시지의 암호"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -207,35 +209,35 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 56
+                "end": 51
               }
             ]
           },
           "question": {
-            "prompt": "모두 함께 보는 책은 어떻게 넘겨서 읽어야 할까요?",
+            "prompt": "겨울이 오자 또또는 무엇을 했나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "모 두 함 께 보 는 도 서 관 책 은 찢 어 지 거 나 더 러 워 지 지 않 게 언 제 나 아 주 조 심 스 럽 게 넘 겨 서 읽 어 야 합 니 다"
+                "text": "숨겨둔 도토리 꺼내 먹음"
               },
               {
                 "id": "B",
-                "text": "책 에 내 일 름 을 크 게 적 으 면 서 색 연 필 로 예 쁜 그 림 을 잔 뜩 그 려 두 며 장 난 을 치 도 록 합 니 다"
+                "text": "밖에서 눈싸움 하기"
               },
               {
                 "id": "C",
-                "text": "다 른 사 람 들 이 보 을 수 없 게 책 장 을 확 넘 기 면 서 급 하 고 서 둘 러 재 미 있 게 읽 으 세 요"
+                "text": "새로운 집을 지음"
               },
               {
                 "id": "D",
-                "text": "물 당 흘 려 서 젖 거 나 침 이 묻 어 도 아 무 런 상관 이 없 으 니 내 마 음 대 로 편 하 게 보 기 로 합 습 니 다"
+                "text": "멀리 여행을 떠남"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -245,36 +247,36 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 56,
-                "end": 111
+                "start": 53,
+                "end": 108
               }
             ]
           },
           "question": {
-            "prompt": "다 읽은 책은 어디에 두어야 할까요?",
+            "prompt": "잊어버린 도토리는 무엇이 되나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "책 을 재 미 있 게 다 읽 고 난 후 에 는 원 래 있 던 제 자 리 에 바 르 게 잘 꽂 아 두 는 것 이 올 바 른 약 속 입 니 다"
+                "text": "커다란 참나무"
               },
               {
                 "id": "B",
-                "text": "책 장 위 에 기 대 어 서 대 충 올 려 놓 거 나 빈 책 상 위 에 그 냥 툭 던 져 두 고 오 면 매 우 편 합 니 다"
+                "text": "작은 모래알"
               },
               {
                 "id": "C",
-                "text": "사 서 선 생 님 이 몰 래 정 리 하 시 도 록 의 자 아 래 책 을 스 윽 밀 어 넣 고 아 무 일 없 는 척 합 니 다"
+                "text": "차가운 얼음 조각"
               },
               {
                 "id": "D",
-                "text": "친 구 들 이 못 보 록 가 방 에 몰 래 넣 어 가 거 나 화 장 실 에 숨 겨 두 면 아주 약 삭 빠 른 빙 절 입 니 다"
+                "text": "동그란 돌멩이"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -284,36 +286,36 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 111,
-                "end": 163
+                "start": 110,
+                "end": 165
               }
             ]
           },
           "question": {
-            "prompt": "도서관에서 바른 예절을 지키면 어떤 점이 좋을까요?",
+            "prompt": "또또는 어떤 일꾼인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "우 리 모 두 질 서 를 지 키 면 조 용 한 도 서 관 에 서 마 음 편 히 기 분 좋 게 멋 진 책 을 읽 을 수 있 습 니 다"
+                "text": "숲을 가꾸는 멋진 일꾼"
               },
               {
                 "id": "B",
-                "text": "아 리 아 파 트 친 구 들 께 자 랑 을 할 수 있 어 서 매 주 마 다 학 생 들 이 상 장 을 많 이 주 시 게 될 거 십 니 다"
+                "text": "잠만 자는 게으른 일꾼"
               },
               {
                 "id": "C",
-                "text": "바 닥 에 엎 드 려 서 편 안 하 게 내 휴 대 폰 게 임 을 하 며 하루 종 일 시 간 을 보 낼 수 있 어 서 기 쁘 답 니 다"
+                "text": "나무를 베는 나쁜 일꾼"
               },
               {
                 "id": "D",
-                "text": "맛 있 는 맛 점 심 을 도 서 관 안 에 서 다 같 이 모 여 배 불 리 많 이 먹 을 특 별 한 기 회 가 생 겨 서 좋 습 니 다"
+                "text": "길을 잃은 슬픈 일꾼"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -324,35 +326,35 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 163
+                "end": 165
               }
             ]
           },
           "question": {
-            "prompt": "둘째 문단의 중심 내용은 무엇일까?",
+            "prompt": "2문단은 무엇에 대한 내용인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "책을 조심해서 넘기고 다 읽은 후 제자리에 꽂아두어 모두가 즐겁게 이용하자는 규칙입니다."
+                "text": "또또의 겨울나기와 역할"
               },
               {
                 "id": "B",
-                "text": "더러워진 책을 발견하면 바로 경찰서에 신고하고 사서 선생님께 새로운 책을 받아오는 예절입니다."
+                "text": "참나무 잎의 광합성"
               },
               {
                 "id": "C",
-                "text": "마음이 편해지도록 제일 높은 선반 위에 있는 재미있는 책들만 골라서 꺼내 보는 방법입니다."
+                "text": "땅속 흙의 수분 함량"
               },
               {
                 "id": "D",
-                "text": "친구들의 책을 내가 대신 모두 빌려주고 집에 가져와 같이 재미있게 장난을 친 추억입니다."
+                "text": "눈이 내리는 구름의 높이"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         }
@@ -362,118 +364,120 @@
       "cards": [
         {
           "id": "c1",
-          "text": "모두가 재미있는 책을 읽는 도서관에서는 예절을 지켜야 합니다."
+          "text": "겨울 대비 도토리를 모음."
         },
         {
           "id": "c2",
-          "text": "도서관에서는 다른 사람들을 위해 조용히 사뿐사뿐 걸어 다닙니다."
+          "text": "비밀 장소에 숨겨둬요."
         },
         {
           "id": "c3",
-          "text": "여럿이 보는 책은 언제나 구겨지지 않게 아주 조심스럽게 넘깁니다."
+          "text": "통통한 볼이 주머니 같음."
         },
         {
           "id": "c4",
-          "text": "다 읽은 책은 원래 있던 제자리에 바르게 잘 꽂아 두는 것이 좋습니다."
+          "text": "잊은 도토리는 나무가 됨."
+        },
+        {
+          "id": "c5",
+          "text": "숲을 가꾸는 멋진 다람쥐."
         }
       ],
       "correctOrder": [
         "c1",
         "c2",
         "c3",
-        "c4"
+        "c4",
+        "c5"
       ],
-      "seedPenalty": 1
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "우 리 들 이 재 미 있 는 책 을 마 음 껏 빌 려 볼 수 있 는 도 서 관 에 가 면 꼭 지 켜 야 할 예 절 이 있 습 니 다. (27~30)",
-          "answerText": "도서관",
-          "answerMatchMode": "ANY",
+          "prompt": "참나무의 둥근 열매?",
+          "answerText": "도토리",
+          "answerMatchMode": "EXACT",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 27,
-              "end": 30
+              "start": 34,
+              "end": 36
+            },
+            {
+              "paragraphId": "p1",
+              "start": 65,
+              "end": 67
+            },
+            {
+              "paragraphId": "p1",
+              "start": 148,
+              "end": 150
+            },
+            {
+              "paragraphId": "p2",
+              "start": 25,
+              "end": 27
+            },
+            {
+              "paragraphId": "p2",
+              "start": 73,
+              "end": 75
+            },
+            {
+              "paragraphId": "p2",
+              "start": 138,
+              "end": 140
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "도 서 관 에 서 는 다 른 사 람 들 이 편 하 게 책 을 읽 을 수 있 게 사 뿐 사 뿐 아 주 조 용 히 걸 어 다 녀 야 합 니 다. (82~86)",
-          "answerText": "사뿐사뿐",
-          "answerMatchMode": "ANY",
+          "prompt": "물건을 넣는 작은 자루?",
+          "answerText": "주머니",
+          "answerMatchMode": "EXACT",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 82,
-              "end": 86
+              "start": 123,
+              "end": 125
+            },
+            {
+              "paragraphId": "p1",
+              "start": 152,
+              "end": 154
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "큰 소 리 로 떠 들 거 나 휴 대 폰 으 로 시 끄 럽 게 통 화 하 는 것 은 다 른 사 람 들 에 게 큰 방 해 가 됩 니 다. (146~148)",
-          "answerText": "방해",
-          "answerMatchMode": "ANY",
+          "prompt": "꼬리가 긴 숲속 동물?",
+          "answerText": "다람쥐",
+          "answerMatchMode": "EXACT",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 146,
-              "end": 148
+              "start": 6,
+              "end": 8
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "책 을 재 미 있 게 다 읽 고 난 후 에 는 원 래 있 던 제 자 리 에 바 르 게 잘 꽂 아 두 는 것 이 올 바 른 약 속 입 니 다. (81~84)",
-          "answerText": "제자리",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 81,
-              "end": 84
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "우 리 모 두 질 서 를 지 키 면 조 용 한 도 서 관 에 서 마 음 편 히 기 분 좋 게 멋 진 책 을 읽 을 수 있 습 니 다. (117~119)",
-          "answerText": "질서",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 117,
-              "end": 119
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         }

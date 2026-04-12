@@ -1,32 +1,34 @@
 {
-  "contentId": "dr-s1-221",
+  "contentId": "dr-saussure1-221",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "짝수와 홀수",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 질문하는 문장",
+  "description": "궁금한 것을 물어볼 때 사용하는 질문하는 문장의 특징과 좋은 질문 습관을 배워요",
   "targetLevel": "SAUSSURE_1",
   "schoolGradeRange": {
     "min": 1,
     "max": 1
   },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "추론적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학",
+    "독해"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -34,11 +36,11 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "수를 둘씩 짝을 지어 보면 남는 것이 없는 수가 있어요.이런 수를 짝수라고 불러요.2, 4, 6, 8, 10처럼 둘씩 묶었을 때 하나도 남지 않으면 짝수예요.반대로 둘씩 묶었을 때 하나가 남는 수가 있어요.1, 3, 5, 7, 9처럼 남는 수를 홀수라고 해요."
+          "text": "우리는 궁금한 것을 물어볼 때 질문하는 문장을 사용합니다. 질문하는 문장 뒤에는 물음표라는 문장 부호를 꼭 붙여주어야 해요. \"이름이 무엇인가요?\"나 \"학교에 가나요?\"처럼 끝을 올려서 말합니다. 이렇게 질문을 하면 상대방의 생각이나 사실을 알 수 있습니다."
         },
         {
           "id": "p2",
-          "text": "짝수인지 홀수인지 빠르게 알려면 수의 끝자리를 살펴보면 돼요.끝자리가 0, 2, 4, 6, 8이면 짝수이고, 1, 3, 5, 7, 9이면 홀수예요.우리 생활에서도 짝수는 자주 쓰여요.양말은 두 짝이 한 벌이고, 젓가락도 두 개가 한 쌍이에요.이렇게 둘씩 짝을 맞추어 쓰는 물건이 많으니 짝수는 아주 친근한 수예요."
+          "text": "질문을 잘하는 습관은 새로운 지식을 배우는 데 아주 큰 도움이 됩니다. 친구에게 다정하게 질문을 던지면 서로 더 가까워지는 계기가 되기도 해요. 모르는 것이 생겼을 때는 부끄러워하지 말고 용기 있게 물어보도록 합시다. 바른 질문은 우리를 더 똑똑하고 지혜로운 어린이로 만들어 주어요."
         }
       ]
     },
@@ -56,30 +58,30 @@
             ]
           },
           "question": {
-            "prompt": "둘씩 짝을 지어 보면 남는 것이 없는 것은 무엇이니?",
+            "prompt": "언제 질문하는 문장을 쓰나?",
             "choices": [
               {
                 "id": "A",
-                "text": "어떤 수를 나누었을 때의 결과예요."
+                "text": "궁금한 것을 물어볼 때"
               },
               {
                 "id": "B",
-                "text": "숫자를 하나씩 세었을 때의 결과예요."
+                "text": "맛있는 밥을 먹을 때"
               },
               {
                 "id": "C",
-                "text": "수를 셋씩 묶었을 때의 결과예요."
+                "text": "깜깜한 밤에 잠잘 때"
               },
               {
                 "id": "D",
-                "text": "수를 넷씩 나누었을 때의 결과예요."
+                "text": "친구와 달리기 할 때"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -89,36 +91,36 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 31,
-                "end": 46
+                "start": 33,
+                "end": 66
               }
             ]
           },
           "question": {
-            "prompt": "남는 것이 없는 수를 부르는 이름은 무엇이니?",
+            "prompt": "뒤에 어떤 부호를 붙이나?",
             "choices": [
               {
                 "id": "A",
-                "text": "짝수라고 불러요."
+                "text": "물음표"
               },
               {
                 "id": "B",
-                "text": "홀수라고 불러요."
+                "text": "마침표"
               },
               {
                 "id": "C",
-                "text": "소수라고 불러요."
+                "text": "쉼표"
               },
               {
                 "id": "D",
-                "text": "자연수라고 불러요."
+                "text": "느낌표"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -128,36 +130,36 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 46,
-                "end": 88
+                "start": 68,
+                "end": 112
               }
             ]
           },
           "question": {
-            "prompt": "짝수의 보기로 알맞은 것은 무엇이니?",
+            "prompt": "말할 때 끝처리는?",
             "choices": [
               {
                 "id": "A",
-                "text": "2, 4, 6, 8, 10 같은 수예요."
+                "text": "끝을 올려서 말함"
               },
               {
                 "id": "B",
-                "text": "1, 3, 5, 7, 9 같은 수예요."
+                "text": "끝을 내려서 말함"
               },
               {
                 "id": "C",
-                "text": "11, 13, 15 같은 수예요."
+                "text": "말을 중간에 멈춤"
               },
               {
                 "id": "D",
-                "text": "21, 23, 25 같은 수예요."
+                "text": "소리를 아주 작게 함"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -167,36 +169,36 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 88,
-                "end": 115
+                "start": 114,
+                "end": 152
               }
             ]
           },
           "question": {
-            "prompt": "짝수와 반대로 둘씩 묶으면 어떤 일이 생기니?",
+            "prompt": "질문을 하면 좋은 점?",
             "choices": [
               {
                 "id": "A",
-                "text": "하나가 남는 수가 있어요."
+                "text": "상대방의 생각 알 수 있음"
               },
               {
                 "id": "B",
-                "text": "둘 다 사라지는 수예요."
+                "text": "배가 아주 부름"
               },
               {
                 "id": "C",
-                "text": "셋이 함께 남는 수예요."
+                "text": "키가 쑥쑥 자람"
               },
               {
                 "id": "D",
-                "text": "넷으로 나뉘는 수예요."
+                "text": "잠이 무척 잘 옴"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -206,36 +208,36 @@
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 115,
-                "end": 145
+                "start": 0,
+                "end": 152
               }
             ]
           },
           "question": {
-            "prompt": "하나가 남는 수를 부르는 이름은 무엇이니?",
+            "prompt": "1문단의 중심 내용은?",
             "choices": [
               {
                 "id": "A",
-                "text": "홀수라고 불러요."
+                "text": "질문하는 문장의 특징"
               },
               {
                 "id": "B",
-                "text": "짝수라고 불러요."
+                "text": "학교의 교문 색깔"
               },
               {
                 "id": "C",
-                "text": "합수라고 불러요."
+                "text": "물음표의 잉크 성분"
               },
               {
                 "id": "D",
-                "text": "배수라고 불러요."
+                "text": "연필의 심 굵기"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -244,37 +246,37 @@
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p1",
+                "paragraphId": "p2",
                 "start": 0,
-                "end": 145
+                "end": 43
               }
             ]
           },
           "question": {
-            "prompt": "첫째 문단의 중심 내용으로 가장 알맞은 것은?",
+            "prompt": "질문 습관의 장점은?",
             "choices": [
               {
                 "id": "A",
-                "text": "짝수와 홀수가 무엇인지 알려 주는 내용이에요."
+                "text": "새 지식 배우는 데 도움"
               },
               {
                 "id": "B",
-                "text": "수를 셋씩 나누는 방법을 알려 주는 내용이에요."
+                "text": "빨리 달리는 데 도움"
               },
               {
                 "id": "C",
-                "text": "큰 수와 작은 수를 비교하는 내용이에요."
+                "text": "잠을 깨는 데 도움"
               },
               {
                 "id": "D",
-                "text": "숫자를 빠르게 세는 방법을 설명한 내용이에요."
+                "text": "짐을 싸는 데 도움"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -284,36 +286,36 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 0,
-                "end": 34
+                "start": 45,
+                "end": 88
               }
             ]
           },
           "question": {
-            "prompt": "짝수인지 홀수인지 빠르게 알려면 어디를 살피니?",
+            "prompt": "친구에게 질문하면?",
             "choices": [
               {
                 "id": "A",
-                "text": "수의 끝자리를 보면 돼요."
+                "text": "더 가까워지는 계기"
               },
               {
                 "id": "B",
-                "text": "수의 앞자리를 보면 돼요."
+                "text": "더 멀어지는 계기"
               },
               {
                 "id": "C",
-                "text": "수의 가운데를 보면 돼요."
+                "text": "서로 싸우는 계기"
               },
               {
                 "id": "D",
-                "text": "수의 크기를 비교하면 돼요."
+                "text": "함께 자는 계기"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -323,36 +325,36 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 34,
-                "end": 82
+                "start": 90,
+                "end": 133
               }
             ]
           },
           "question": {
-            "prompt": "끝자리가 0, 2, 4, 6, 8인 수는 어떤 수이니?",
+            "prompt": "모르는 게 생겼을 때?",
             "choices": [
               {
                 "id": "A",
-                "text": "짝수예요."
+                "text": "용기 있게 물어보자"
               },
               {
                 "id": "B",
-                "text": "홀수예요."
+                "text": "구석에 가서 울자"
               },
               {
                 "id": "C",
-                "text": "소수예요."
+                "text": "모른 척 잠을 자자"
               },
               {
                 "id": "D",
-                "text": "음수예요."
+                "text": "친구를 괴롭히자"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -362,36 +364,36 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 82,
-                "end": 102
+                "start": 135,
+                "end": 178
               }
             ]
           },
           "question": {
-            "prompt": "앞에서 배운 짝수는 어디에서도 자주 쓰이니?",
+            "prompt": "바른 질문은 우리를?",
             "choices": [
               {
                 "id": "A",
-                "text": "우리 생활에서 자주 쓰여요."
+                "text": "더 똑똑하게 만듦"
               },
               {
                 "id": "B",
-                "text": "먼 우주에서만 쓰여요."
+                "text": "더 슬프게 만듦"
               },
               {
                 "id": "C",
-                "text": "바닷속에서만 쓰여요."
+                "text": "더 피곤하게 만듦"
               },
               {
                 "id": "D",
-                "text": "꿈속에서만 쓰여요."
+                "text": "더 시끄럽게 만듦"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
@@ -401,114 +403,36 @@
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 102,
-                "end": 135
-              }
-            ]
-          },
-          "question": {
-            "prompt": "둘씩 짝을 맞추어 쓰는 물건의 보기로 알맞은 것은?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "양말과 젓가락이에요."
-              },
-              {
-                "id": "B",
-                "text": "모자와 가방이에요."
-              },
-              {
-                "id": "C",
-                "text": "연필과 지우개예요."
-              },
-              {
-                "id": "D",
-                "text": "공책과 책상이에요."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s11",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 135,
-                "end": 175
-              }
-            ]
-          },
-          "question": {
-            "prompt": "마지막 문장에서 짝수를 어떤 수라고 했니?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "아주 친근한 수라고 했어요."
-              },
-              {
-                "id": "B",
-                "text": "아주 어려운 수라고 했어요."
-              },
-              {
-                "id": "C",
-                "text": "아주 무서운 수라고 했어요."
-              },
-              {
-                "id": "D",
-                "text": "아주 먼 수라고 했어요."
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
                 "start": 0,
-                "end": 175
+                "end": 178
               }
             ]
           },
           "question": {
-            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은?",
+            "prompt": "2문단의 중심 내용은?",
             "choices": [
               {
                 "id": "A",
-                "text": "짝수와 홀수를 구별하는 방법과 생활 속 쓰임을 알려 주는 내용이에요."
+                "text": "바른 질문의 중요성"
               },
               {
                 "id": "B",
-                "text": "홀수만 생활에서 쓰인다고 설명하는 내용이에요."
+                "text": "지식의 종류 열 가지"
               },
               {
                 "id": "C",
-                "text": "큰 수를 만드는 방법을 알려 주는 내용이에요."
+                "text": "친구의 가방 색깔"
               },
               {
                 "id": "D",
-                "text": "수를 셋씩 나누어 세는 방법을 알려 주는 내용이에요."
+                "text": "어린이의 평균 키"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         }
@@ -518,136 +442,125 @@
       "cards": [
         {
           "id": "c1",
-          "text": "둘씩 짝을 지어 남는 것이 없는 수를 짝수라고 해요."
+          "text": "질문하는 문장을 써요."
         },
         {
           "id": "c2",
-          "text": "둘씩 묶었을 때 하나가 남는 수를 홀수라고 불러요."
+          "text": "물음표를 붙여줍니다."
         },
         {
           "id": "c3",
-          "text": "끝자리가 0, 2, 4, 6, 8이면 짝수예요."
+          "text": "지식을 배우는 데 도움."
         },
         {
           "id": "c4",
-          "text": "양말과 젓가락처럼 둘씩 짝 맞추는 데 짝수가 쓰여요."
+          "text": "친구와 가까워져요."
+        },
+        {
+          "id": "c5",
+          "text": "용기 있게 물어보자."
         }
       ],
       "correctOrder": [
         "c1",
         "c2",
         "c3",
-        "c4"
+        "c4",
+        "c5"
       ],
-      "seedPenalty": 1
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "둘씩 묶어 남는 것이 없는 수를 무엇이라고 부르니?",
-          "answerText": "짝수",
-          "answerMatchMode": "ANY",
+          "prompt": "물어보는 말?",
+          "answerText": "질문",
+          "answerMatchMode": "EXACT",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 37,
-              "end": 39
+              "start": 17,
+              "end": 18
+            },
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 34
+            },
+            {
+              "paragraphId": "p1",
+              "start": 114,
+              "end": 115
+            },
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 1
+            },
+            {
+              "paragraphId": "p2",
+              "start": 50,
+              "end": 51
+            },
+            {
+              "paragraphId": "p2",
+              "start": 125,
+              "end": 126
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "둘씩 묶으면 하나가 남는 수를 무엇이라고 부르니?",
-          "answerText": "홀수",
-          "answerMatchMode": "ANY",
+          "prompt": "생각을 담은 글의 마디?",
+          "answerText": "문장",
+          "answerMatchMode": "EXACT",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 137,
-              "end": 139
+              "start": 22,
+              "end": 23
+            },
+            {
+              "paragraphId": "p1",
+              "start": 38,
+              "end": 39
+            },
+            {
+              "paragraphId": "p1",
+              "start": 51,
+              "end": 52
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "짝수와 홀수를 빠르게 알려면 수의 어디를 살펴보니?",
-          "answerText": "끝자리",
-          "answerMatchMode": "ANY",
+          "prompt": "늘 하는 버릇?",
+          "answerText": "습관",
+          "answerMatchMode": "EXACT",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 21,
-              "end": 24
+              "start": 8,
+              "end": 9
             }
           ],
           "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "두 짝이 한 벌인 물건으로 나온 것은 무엇이니?",
-          "answerText": "양말",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 102,
-              "end": 104
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "두 개가 한 쌍인 물건으로 나온 것은 무엇이니?",
-          "answerText": "젓가락",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 118,
-              "end": 121
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true
-        },
-        {
-          "id": "q6",
-          "prompt": "끝자리가 0, 2, 4, 6, 8인 수는 무엇이니?",
-          "answerText": "짝수",
-          "answerMatchMode": "ANY",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 55,
-              "end": 57
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
           },
           "revealOnWrong": true
         }

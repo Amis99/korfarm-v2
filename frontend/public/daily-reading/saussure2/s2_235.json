@@ -1,0 +1,793 @@
+{
+  "contentId": "dr-s2-235",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "코딩 기초 5부작 - 4부: 버그와 디버깅",
+  "description": "일일 독해 - 237일차 정독·복기·확인",
+  "targetLevel": "SAUSSURE_2",
+  "schoolGradeRange": {
+    "min": 2,
+    "max": 2
+  },
+  "area": "비문학",
+  "subArea": "IT",
+  "competencies": [
+    "READING"
+  ],
+  "tags": [
+    "daily",
+    "coding",
+    "series"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 300,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "코딩을 하다 보면 프로그램이 우리가 원하는 대로 움직이지 않을 때가 있어요. 화면이 갑자기 멈추거나 엉뚱한 결과가 나오는 것이지요. 이렇게 프로그램에 생긴 오류나 실수를 '버그'라고 부릅니다. 아주 오래전, 커다란 컴퓨터 기계 속에 진짜 벌레가 들어가서 고장이 난 적이 있었는데, 그때부터 오류를 벌레라는 뜻의 버그라고 부르기 시작했어요."
+        },
+        {
+          "id": "p2",
+          "text": "컴퓨터는 스스로 실수를 고칠 수 없기 때문에 우리가 직접 버그를 찾아내야 해요. 이렇게 프로그램 속에 숨어 있는 버그를 찾아서 올바르게 고치는 과정을 '디버깅'라고 합니다. 디버깅을 할 때는 돋보기를 든 탐정처럼 코드를 처음부터 끝까지 꼼꼼하게 살펴보아야 해요. 어디서 잘못되었는지 차근차근 순서대로 확인하는 것이 가장 중요하답니다."
+        },
+        {
+          "id": "p3",
+          "text": "처음 코딩을 배울 때는 버그가 생기면 당황하고 속상할 수 있어요. 하지만 아주 훌륭한 프로그래머들도 매일 수많은 버그를 만나고 고친답니다. 버그는 코딩을 실패했다는 뜻이 아니라, 더 완벽한 프로그램을 만들기 위해 꼭 거쳐야 하는 과정이에요. 포기하지 않고 끈기 있게 디버깅을 하다 보면 어느새 코딩 실력이 훌쩍 자라나 있을 거예요."
+        }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "코딩할 때 프로그램은 어떨 때가 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "원하는 대로 안 움직일 때"
+              },
+              {
+                "id": "B",
+                "text": "아무런 이유 없이 꺼질 때"
+              },
+              {
+                "id": "C",
+                "text": "스스로 새로운 걸 만들 때"
+              },
+              {
+                "id": "D",
+                "text": "사람보다 빠르게 달릴 때"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 43,
+                "end": 72
+              }
+            ]
+          },
+          "question": {
+            "prompt": "원하는 대로 안 움직이면 어떻게 되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "멈추거나 엉뚱한 결과가 나옴"
+              },
+              {
+                "id": "B",
+                "text": "아름다운 음악 소리가 들림"
+              },
+              {
+                "id": "C",
+                "text": "컴퓨터가 스스로 고장을 냄"
+              },
+              {
+                "id": "D",
+                "text": "전기가 끊어져 화면이 까매짐"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 74,
+                "end": 106
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이런 오류나 실수를 무엇이라 부르나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "버그"
+              },
+              {
+                "id": "B",
+                "text": "바이러스"
+              },
+              {
+                "id": "C",
+                "text": "마우스"
+              },
+              {
+                "id": "D",
+                "text": "비밀번호"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 108,
+                "end": 188
+              }
+            ]
+          },
+          "question": {
+            "prompt": "왜 오류를 버그라고 부르기 시작했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "진짜 벌레가 고장을 내서"
+              },
+              {
+                "id": "B",
+                "text": "컴퓨터 모양이 벌레 같아서"
+              },
+              {
+                "id": "C",
+                "text": "벌레를 좋아하는 사람이 지음"
+              },
+              {
+                "id": "D",
+                "text": "소리가 벌레 우는 소리 같음"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 188
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "버그의 뜻과 생겨난 이유"
+              },
+              {
+                "id": "B",
+                "text": "가장 큰 컴퓨터를 만드는 법"
+              },
+              {
+                "id": "C",
+                "text": "여러 가지 벌레들의 종류"
+              },
+              {
+                "id": "D",
+                "text": "코딩을 실수 없이 하는 비법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 43
+              }
+            ]
+          },
+          "question": {
+            "prompt": "버그는 누가 직접 찾아내야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우리가 직접 찾음"
+              },
+              {
+                "id": "B",
+                "text": "컴퓨터가 알아서 찾음"
+              },
+              {
+                "id": "C",
+                "text": "로봇이 대신 찾아줌"
+              },
+              {
+                "id": "D",
+                "text": "진짜 탐정이 와서 찾음"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 45,
+                "end": 96
+              }
+            ]
+          },
+          "question": {
+            "prompt": "숨은 버그를 찾아 바르게 고치는 과정은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "디버깅"
+              },
+              {
+                "id": "B",
+                "text": "알고리즘"
+              },
+              {
+                "id": "C",
+                "text": "타자 연습"
+              },
+              {
+                "id": "D",
+                "text": "게임하기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 98,
+                "end": 146
+              }
+            ]
+          },
+          "question": {
+            "prompt": "디버깅을 할 때는 어떻게 보아야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "돋보기를 든 탐정처럼"
+              },
+              {
+                "id": "B",
+                "text": "책을 빨리 읽는 학생처럼"
+              },
+              {
+                "id": "C",
+                "text": "그림을 대충 그리는 화가처럼"
+              },
+              {
+                "id": "D",
+                "text": "눈을 꼭 감은 사람처럼"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 148,
+                "end": 186
+              }
+            ]
+          },
+          "question": {
+            "prompt": "디버깅에서 가장 중요한 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "차근차근 순서대로 확인하기"
+              },
+              {
+                "id": "B",
+                "text": "순서를 건너뛰며 빨리 찾기"
+              },
+              {
+                "id": "C",
+                "text": "결과만 짧게 보고 포기하기"
+              },
+              {
+                "id": "D",
+                "text": "컴퓨터 전원을 바로 끄기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 186
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "디버깅의 뜻과 올바른 방법"
+              },
+              {
+                "id": "B",
+                "text": "멋진 탐정이 되는 과정"
+              },
+              {
+                "id": "C",
+                "text": "컴퓨터 스스로 고치는 법"
+              },
+              {
+                "id": "D",
+                "text": "가장 어려운 코딩 문제들"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 35
+              }
+            ]
+          },
+          "question": {
+            "prompt": "버그가 생기면 처음에 어떤 마음이 드나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "당황하고 속상할 수 있음"
+              },
+              {
+                "id": "B",
+                "text": "언제나 기쁘고 행복함"
+              },
+              {
+                "id": "C",
+                "text": "아무런 느낌도 나지 않음"
+              },
+              {
+                "id": "D",
+                "text": "지루하고 졸음이 쏟아짐"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 37,
+                "end": 76
+              }
+            ]
+          },
+          "question": {
+            "prompt": "훌륭한 프로그래머들은 버그를 어떻게 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "매일 수많은 버그를 만남"
+              },
+              {
+                "id": "B",
+                "text": "한 번도 버그를 만나지 않음"
+              },
+              {
+                "id": "C",
+                "text": "버그가 나오면 코딩을 그만둠"
+              },
+              {
+                "id": "D",
+                "text": "버그를 숨기고 모른 척함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 78,
+                "end": 133
+              }
+            ]
+          },
+          "question": {
+            "prompt": "버그는 코딩을 실패했다는 뜻인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "더 완벽하게 만드는 과정임"
+              },
+              {
+                "id": "B",
+                "text": "영원히 고칠 수 없는 실수임"
+              },
+              {
+                "id": "C",
+                "text": "다시 처음부터 해야 하는 벌임"
+              },
+              {
+                "id": "D",
+                "text": "컴퓨터가 고장 났다는 뜻임"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 135,
+                "end": 184
+              }
+            ]
+          },
+          "question": {
+            "prompt": "포기하지 않고 디버깅을 계속하면 어떻게 되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "코딩 실력이 훌쩍 자라남"
+              },
+              {
+                "id": "B",
+                "text": "버그가 점점 더 많아짐"
+              },
+              {
+                "id": "C",
+                "text": "아무런 변화도 일어나지 않음"
+              },
+              {
+                "id": "D",
+                "text": "프로그램이 모두 지워짐"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 184
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단의 주요 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "버그를 대하는 올바른 태도"
+              },
+              {
+                "id": "B",
+                "text": "버그 없이 완벽하게 짜는 법"
+              },
+              {
+                "id": "C",
+                "text": "속상한 마음을 달래는 노래"
+              },
+              {
+                "id": "D",
+                "text": "가장 유명한 프로그래머 이름"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "코딩 중 생기는 오류를 버그라고 해요"
+        },
+        {
+          "id": "c2",
+          "text": "옛날 진짜 벌레 때문에 생긴 이름이에요"
+        },
+        {
+          "id": "c3",
+          "text": "오류를 고치는 과정을 디버깅이라 해요"
+        },
+        {
+          "id": "c4",
+          "text": "탐정처럼 순서대로 꼼꼼히 확인해 보세요"
+        },
+        {
+          "id": "c5",
+          "text": "디버깅을 하면 코딩 실력이 자라나요"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "프로그램이 우리가 원하는 대로 움직이지 않을 때 생긴 오류나 실수를 부르는 말은 무엇인가요?",
+          "answerText": "버그",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 96,
+              "end": 97
+            },
+            {
+              "paragraphId": "p1",
+              "start": 174,
+              "end": 175
+            },
+            {
+              "paragraphId": "p2",
+              "start": 32,
+              "end": 33
+            },
+            {
+              "paragraphId": "p2",
+              "start": 63,
+              "end": 64
+            },
+            {
+              "paragraphId": "p3",
+              "start": 13,
+              "end": 14
+            },
+            {
+              "paragraphId": "p3",
+              "start": 63,
+              "end": 64
+            },
+            {
+              "paragraphId": "p3",
+              "start": 78,
+              "end": 79
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "프로그램 속에 숨어 있는 버그를 찾아서 올바르게 고치는 과정을 무엇이라고 하나요?",
+          "answerText": "디버깅",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 85,
+              "end": 87
+            },
+            {
+              "paragraphId": "p2",
+              "start": 98,
+              "end": 100
+            },
+            {
+              "paragraphId": "p3",
+              "start": 149,
+              "end": 151
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "오류가 생겼을 때 실수를 찾아내려면 누구처럼 코드를 꼼꼼하게 살펴보아야 하나요?",
+          "answerText": "탐정",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 115,
+              "end": 116
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "버그를 고치는 일은 코딩을 실패했다는 뜻이 아니라 어떤 프로그램을 만들기 위한 과정인가요?",
+          "answerText": "완벽한",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 102,
+              "end": 104
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  }
+}

@@ -1,19 +1,35 @@
 {
-  "contentId": "dr-s3-245",
+  "contentId": "dr-saussure3-245",
   "contentType": "DAILY_READING",
-  "version": 2,
+  "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(소쉬르 3) Day 245 비문학",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 동생 돌보기 - 스스로 정리하기",
+  "description": "안전한 동생 돌봄을 위한 주변 정리 습관",
   "targetLevel": "SAUSSURE_3",
-  "schoolGradeRange": { "min": 5, "max": 5 },
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
-  "timeLimitSec": 480,
+  "schoolGradeRange": {
+    "min": 3,
+    "max": 3
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +37,15 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "우리가 매일 마시는 물은 지구에서 끊임없이 순환하며 돌고 있다. 바다나 호수, 강에 있는 물이 태양의 뜨거운 열에 의해 증발하면 눈에 보이지 않는 수증기로 변하여 하늘 높이 올라간다. 하늘 높이 올라간 수증기는 차가운 상층 공기를 만나 아주 작은 물방울이나 얼음 알갱이로 변하는데 이것들이 수없이 모여서 구름이 만들어진다. 구름 속에서 물방울이 점점 크고 무거워지면 비나 눈의 형태로 다시 땅 위에 내려온다. 땅에 내린 빗물은 시냇물이 되어 흐르다가 여러 갈래의 시냇물이 합쳐져 강으로 흘러 들어간다. 강물은 결국 바다로 흘러가고 다시 증발하여 수증기가 되면서 같은 과정을 끝없이 되풀이한다."
+          "text": "동생과 즐겁게 놀고 난 뒤에는 주변을 스스로 정리해야 함. 동생이 물건을 삼키지 않도록 작은 장난감부터 치웁니다. 스스로 정돈하는 모습이 듬직한 형과 언니의 자세입니다."
         },
         {
           "id": "p2",
-          "text": "물의 순환은 지구에 사는 모든 생물에게 매우 중요한 역할을 한다. 비가 내리면 식물은 뿌리를 통해 물을 흡수하여 줄기와 잎을 키우고 동물은 강이나 호수에서 물을 마시며 생명을 이어 간다. 사람 역시 깨끗한 물이 없으면 단 며칠도 살아갈 수 없기 때문에 물의 순환은 모든 생명의 생존에 반드시 필요한 과정이다. 그런데 최근 공장 폐수와 생활 하수로 인한 환경 오염 때문에 깨끗한 물이 점점 줄어들어 걱정이 커지고 있다. 오염된 물이 순환 과정을 따라 다시 돌아오면 식물과 동물 그리고 사람 모두에게 해를 끼치게 된다. 따라서 깨끗한 물을 지키려면 쓰레기를 함부로 버리지 않고 물을 아껴 쓰는 생활 습관을 꾸준히 실천해야 한다."
+          "text": "사용한 도구들을 제자리에 두면 동생도 안전하게 쉴 수 있음. 바닥을 깨끗하게 치우는 정성이 건강한 환경을 만듭니다. 주변을 정돈하는 습관이 책임감을 길러주는 시간입니다."
+        },
+        {
+          "id": "p3",
+          "text": "우리는 동생을 돌보며 주변을 치우는 일을 잊지 않기로 함. 깨끗한 방에서 동생과 웃으며 노는 시간이 소중합니다. 스스로 정리하는 마음이 우리 집을 더 행복하게 합니다."
         }
       ]
     },
@@ -33,287 +53,599 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 35 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 31
+              }
+            ]
+          },
           "question": {
-            "prompt": "물은 지구에서 어떤 상태로 존재하고 있나요?",
+            "prompt": "놀고 난 뒤 무엇을 하나요?",
             "choices": [
-              "한 곳에 고여서 움직이지 않고 있다",
-              "끊임없이 순환하며 돌고 있다",
-              "점점 줄어들어 사라지고 있다",
-              "한 방향으로만 흐르고 있다"
+              {
+                "id": "A",
+                "text": "주변 정리"
+              },
+              {
+                "id": "B",
+                "text": "노래 연습"
+              },
+              {
+                "id": "C",
+                "text": "축구 시합"
+              },
+              {
+                "id": "D",
+                "text": "낮잠 자기"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 36, "end": 102 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 33,
+                "end": 62
+              }
+            ]
+          },
           "question": {
-            "prompt": "물이 증발하면 어떻게 변하나요?",
+            "prompt": "무엇부터 치우나요?",
             "choices": [
-              "얼음으로 변하여 땅에 쌓인다",
-              "눈에 보이지 않는 수증기가 되어 하늘로 올라간다",
-              "안개가 되어 땅 위에 머문다",
-              "이슬이 되어 풀잎에 맺힌다"
+              {
+                "id": "A",
+                "text": "작은 장난감"
+              },
+              {
+                "id": "B",
+                "text": "큰 책상"
+              },
+              {
+                "id": "C",
+                "text": "무거운 가방"
+              },
+              {
+                "id": "D",
+                "text": "높은 지붕"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 103, "end": 180 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 64,
+                "end": 93
+              }
+            ]
+          },
           "question": {
-            "prompt": "구름은 어떻게 만들어지나요?",
+            "prompt": "누구의 자세라고 했나요?",
             "choices": [
-              "바람이 먼지를 모아서 만들어진다",
-              "수증기가 차가운 공기를 만나 물방울로 변해 모여서 만들어진다",
-              "태양 빛이 하늘에서 반사되어 만들어진다",
-              "비가 내리고 난 후 남은 물이 모여 만들어진다"
+              {
+                "id": "A",
+                "text": "듬직한 형과 언니"
+              },
+              {
+                "id": "B",
+                "text": "게으른 도둑"
+              },
+              {
+                "id": "C",
+                "text": "무서운 괴물"
+              },
+              {
+                "id": "D",
+                "text": "잠자는 사람"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 181, "end": 228 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 31
+              },
+              {
+                "paragraphId": "p1",
+                "start": 33,
+                "end": 62
+              },
+              {
+                "paragraphId": "p1",
+                "start": 64,
+                "end": 93
+              }
+            ]
+          },
           "question": {
-            "prompt": "구름 속 물방울이 무거워지면 어떤 일이 일어나나요?",
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "구름이 더 높이 올라간다",
-              "비나 눈이 되어 다시 땅 위에 내려온다",
-              "수증기로 다시 변한다",
-              "바람에 날려 사라져 버린다"
+              {
+                "id": "A",
+                "text": "놀이 후 동생 안전과 정리"
+              },
+              {
+                "id": "B",
+                "text": "동생이 미운 이유"
+              },
+              {
+                "id": "C",
+                "text": "장난감이 부서진 사고"
+              },
+              {
+                "id": "D",
+                "text": "정리가 지루한 마음"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 229, "end": 280 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 32
+              }
+            ]
+          },
           "question": {
-            "prompt": "땅에 내린 빗물은 어떻게 되나요?",
+            "prompt": "어디에 두면 안전하게 쉬나요?",
             "choices": [
-              "바로 증발하여 하늘로 올라간다",
-              "시냇물이 되고 합쳐져 강으로 흘러 들어간다",
-              "땅속으로 스며들어 사라진다",
-              "호수에 고여서 움직이지 않는다"
+              {
+                "id": "A",
+                "text": "제자리에"
+              },
+              {
+                "id": "B",
+                "text": "지붕 위에"
+              },
+              {
+                "id": "C",
+                "text": "쓰레기통"
+              },
+              {
+                "id": "D",
+                "text": "친구 집"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 281, "end": 331 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 34,
+                "end": 63
+              }
+            ]
+          },
           "question": {
-            "prompt": "강물은 최종적으로 어디로 흘러가나요?",
+            "prompt": "무엇이 건강한 환경을 만드나요?",
             "choices": [
-              "산 위로 올라간다",
-              "바다로 흘러가고 다시 증발하여 같은 과정을 되풀이한다",
-              "호수에 모여 그대로 머문다",
-              "땅속으로 스며들어 지하수가 된다"
+              {
+                "id": "A",
+                "text": "치우는 정성"
+              },
+              {
+                "id": "B",
+                "text": "낙서하는 장난"
+              },
+              {
+                "id": "C",
+                "text": "소리 지르는 화"
+              },
+              {
+                "id": "D",
+                "text": "잠자는 나태"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 331 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 65,
+                "end": 93
+              }
+            ]
+          },
           "question": {
-            "prompt": "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "prompt": "어떤 습관이 책임감을 길러요?",
             "choices": [
-              "물이 증발, 구름, 비, 강을 거쳐 순환하는 과정 설명",
-              "바다에 사는 생물들의 생태를 소개하는 내용",
-              "비가 내리는 원인에 대한 과학적 분석",
-              "구름의 종류와 생김새를 비교하는 내용"
+              {
+                "id": "A",
+                "text": "정돈하는 습관"
+              },
+              {
+                "id": "B",
+                "text": "뺏는 습관"
+              },
+              {
+                "id": "C",
+                "text": "울고 떼쓰는 습관"
+              },
+              {
+                "id": "D",
+                "text": "거짓말하는 습관"
+              }
             ],
-            "answerIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 36 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 32
+              },
+              {
+                "paragraphId": "p2",
+                "start": 34,
+                "end": 63
+              },
+              {
+                "paragraphId": "p2",
+                "start": 65,
+                "end": 93
+              }
+            ]
+          },
           "question": {
-            "prompt": "물의 순환은 누구에게 중요한 역할을 하나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "오직 식물에게만 중요하다",
-              "지구에 사는 모든 생물에게 중요하다",
-              "사람에게만 중요하다",
-              "바다에 사는 물고기에게만 중요하다"
+              {
+                "id": "A",
+                "text": "정돈 습관과 책임감 형성"
+              },
+              {
+                "id": "B",
+                "text": "환경이 나쁜 불평"
+              },
+              {
+                "id": "C",
+                "text": "도구가 비싼 이유"
+              },
+              {
+                "id": "D",
+                "text": "책임감이 무거운 슬픔"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 37, "end": 104 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 31
+              }
+            ]
+          },
           "question": {
-            "prompt": "비가 내리면 식물과 동물은 각각 어떻게 물을 이용하나요?",
+            "prompt": "무엇을 잊지 않기로 했나요?",
             "choices": [
-              "식물은 잎으로, 동물은 피부로 물을 흡수한다",
-              "식물은 뿌리로 흡수하고 동물은 강이나 호수에서 마신다",
-              "식물과 동물 모두 빗물을 직접 마신다",
-              "식물은 물이 필요 없고 동물만 마신다"
+              {
+                "id": "A",
+                "text": "주변 치우기"
+              },
+              {
+                "id": "B",
+                "text": "노래 가사"
+              },
+              {
+                "id": "C",
+                "text": "비명 소리"
+              },
+              {
+                "id": "D",
+                "text": "낙서 자국"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 105, "end": 172 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 33,
+                "end": 61
+              }
+            ]
+          },
           "question": {
-            "prompt": "사람에게 물의 순환이 중요한 까닭은 무엇인가요?",
+            "prompt": "어떤 시간이 소중한가요?",
             "choices": [
-              "물이 있어야 전기를 만들 수 있기 때문이다",
-              "깨끗한 물 없이는 며칠도 살 수 없기 때문이다",
-              "물이 있어야 빨래를 할 수 있기 때문이다",
-              "물이 있어야 놀이를 할 수 있기 때문이다"
+              {
+                "id": "A",
+                "text": "웃으며 노는 시간"
+              },
+              {
+                "id": "B",
+                "text": "화내며 싸우는 시간"
+              },
+              {
+                "id": "C",
+                "text": "잠만 자는 시간"
+              },
+              {
+                "id": "D",
+                "text": "무시하는 시간"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 173, "end": 233 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 63,
+                "end": 92
+              }
+            ]
+          },
           "question": {
-            "prompt": "깨끗한 물이 줄어드는 원인은 무엇인가요?",
+            "prompt": "무엇이 집을 행복하게 하나요?",
             "choices": [
-              "태양 열이 너무 강해서 물이 모두 증발하기 때문이다",
-              "공장 폐수와 생활 하수로 인한 환경 오염 때문이다",
-              "사람들이 물을 너무 많이 마시기 때문이다",
-              "구름이 줄어들어 비가 적게 내리기 때문이다"
+              {
+                "id": "A",
+                "text": "스스로 정리하는 마음"
+              },
+              {
+                "id": "B",
+                "text": "많은 사탕"
+              },
+              {
+                "id": "C",
+                "text": "비싼 옷"
+              },
+              {
+                "id": "D",
+                "text": "큰 텔레비전"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 234, "end": 288 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 31
+              },
+              {
+                "paragraphId": "p3",
+                "start": 33,
+                "end": 61
+              },
+              {
+                "paragraphId": "p3",
+                "start": 63,
+                "end": 92
+              }
+            ]
+          },
           "question": {
-            "prompt": "오염된 물이 순환하면 어떤 문제가 생기나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "물이 더 빠르게 순환하게 된다",
-              "식물과 동물 그리고 사람 모두에게 해를 끼치게 된다",
-              "구름이 더 많이 만들어진다",
-              "바다의 물 양이 늘어나게 된다"
+              {
+                "id": "A",
+                "text": "정리 실천과 행복한 가정"
+              },
+              {
+                "id": "B",
+                "text": "방이 좁은 불평"
+              },
+              {
+                "id": "C",
+                "text": "정리가 힘든 후회"
+              },
+              {
+                "id": "D",
+                "text": "동생이 도망간 슬픔"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 289, "end": 349 }] },
-          "question": {
-            "prompt": "깨끗한 물을 지키려면 어떻게 해야 하나요?",
-            "choices": [
-              "물을 더 많이 사용해야 한다",
-              "쓰레기를 함부로 버리지 않고 물을 아껴 써야 한다",
-              "강물을 막아서 흐르지 못하게 해야 한다",
-              "바닷물을 모두 담수로 바꿔야 한다"
-            ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 349 }] },
-          "question": {
-            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
-            "choices": [
-              "물의 순환이 생물에게 중요하며 환경 보호가 필요하다는 것",
-              "바다에서 물고기를 잡는 방법을 소개하는 것",
-              "빗물을 모아서 농사에 이용하는 방법을 설명하는 것",
-              "공장에서 폐수를 처리하는 기술을 소개하는 것"
-            ],
-            "answerIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "물은 지구에서 끊임없이 순환한다" },
-        { "id": "c2", "text": "물이 증발해 수증기가 되어 올라간다" },
-        { "id": "c3", "text": "수증기가 모여 구름이 만들어진다" },
-        { "id": "c4", "text": "구름에서 비나 눈이 내려온다" },
-        { "id": "c5", "text": "빗물이 시냇물, 강, 바다로 흐른다" },
-        { "id": "c6", "text": "모든 생물에게 물의 순환이 중요하다" },
-        { "id": "c7", "text": "환경 오염으로 깨끗한 물이 줄고 있다" },
-        { "id": "c8", "text": "물을 아껴 쓰는 습관이 필요하다" }
+        {
+          "id": "c1",
+          "text": "동생과 놀고 주변을 정리함."
+        },
+        {
+          "id": "c2",
+          "text": "동생의 안전을 위해 치워요."
+        },
+        {
+          "id": "c3",
+          "text": "도구들을 제자리에 둡니다."
+        },
+        {
+          "id": "c4",
+          "text": "정돈은 책임감을 길러줌."
+        },
+        {
+          "id": "c5",
+          "text": "깨끗한 방에서 함께 놀아요."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "물이 태양 열에 의해 증발하면 무엇으로 변합니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 36, "end": 102 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "물건을 질서 있게 치움?",
+          "answerText": "정리해야",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 25,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "구름은 어떻게 만들어집니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 103, "end": 180 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "주변을 깨끗이 치움은?",
+          "answerText": "정돈하는",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 72
+            },
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 73
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "구름 속 물방울이 무거워지면 어떤 일이 일어납니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 181, "end": 228 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q4",
-          "prompt": "비가 내리면 식물은 어떻게 물을 이용합니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 37, "end": 104 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "깨끗한 물이 줄어드는 원인은 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 173, "end": 233 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "오염된 물이 순환하면 어떤 문제가 생깁니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 234, "end": 288 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q7",
-          "prompt": "깨끗한 물을 지키기 위해 어떤 습관이 필요합니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 289, "end": 349 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "맡은 일을 잘 해내는 마음?",
+          "answerText": "책임감을",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 78,
+              "end": 82
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

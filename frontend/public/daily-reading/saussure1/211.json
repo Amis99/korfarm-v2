@@ -1,19 +1,34 @@
 {
-  "contentId": "dr-s1-211",
+  "contentId": "dr-saussure1-211",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "도서관을 이용하는 방법",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 물에 뜨고 가라앉기",
+  "description": "물건의 무게와 모양에 따라 물에 뜨거나 가라앉는 신기한 과학 원리를 배워요",
   "targetLevel": "SAUSSURE_1",
-  "schoolGradeRange": {"min": 1, "max": 1},
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": {"mode": "FREE"},
-  "seedReward": {"seedType": "WHEAT", "count": 3, "multiplier": 1},
-  "timeLimitSec": 300,
+  "schoolGradeRange": {
+    "min": 1,
+    "max": 1
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +36,11 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "도서관은 여러 가지 책을 읽거나 빌릴 수 있는 곳이다.도서관에서는 다른 사람을 위해 조용히 해야 한다.도서관에서 읽고 싶은 책을 찾으려면 컴퓨터로 검색하거나 사서 선생님께 여쭤보면 된다.원하는 책을 찾으면 빌릴 수 있는데 빌린 책은 정해진 날짜 안에 꼭 돌려주어야 한다."
+          "text": "우리가 주변에서 흔히 볼 수 있는 물건들은 물에 넣었을 때 뜨거나 가라앉는 성질이 있습니다. 가벼운 나뭇잎이나 플라스틱 공은 물 위에 둥둥 잘 떠요. 하지만 무거운 돌멩이나 쇠로 만든 못은 물속으로 쏙 가라앉습니다. 물건의 무게와 모양에 따라 물에 뜨는 모습이 서로 다르게 나타나는 것이지요."
         },
         {
           "id": "p2",
-          "text": "도서관에서는 책을 읽을 자리가 마련되어 있어서 편하게 앉아 읽을 수 있다.책을 다 읽으면 제자리에 꽂아 놓아야 다른 사람도 쉽게 찾을 수 있다.도서관을 자주 가면 읽고 싶은 책을 많이 만날 수 있으니 가까운 도서관에 꼭 가 보자."
+          "text": "물보다 가벼운 성질을 가진 물건은 뜨고 물보다 무거운 성질을 가진 물건은 아래로 내려갑니다. 배는 아주 무겁고 크지만 안이 비어있고 넓게 만들어져서 물 위에 잘 뜰 수 있어요. 우리는 이런 신기한 원리를 이용하여 구명조끼나 뗏목을 만들어 생활에 사용합니다. 물놀이를 할 때 어떤 물건이 뜨는지 직접 관찰하며 과학의 재미를 느껴보아요."
         }
       ]
     },
@@ -33,205 +48,495 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 30}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 50
+              }
+            ]
+          },
           "question": {
-            "prompt": "도서관은 어떤 곳이라고 했습니까?",
+            "prompt": "물건들은 어떤 게 있나?",
             "choices": [
-              {"id": "A", "text": "여러 가지 책을 읽거나 빌릴 수 있는 곳이다."},
-              {"id": "B", "text": "여러 가지 장난감을 사거나 바꿀 수 있는 곳이다."},
-              {"id": "C", "text": "여러 가지 음식을 먹거나 만들 수 있는 곳이다."},
-              {"id": "D", "text": "여러 가지 노래를 듣거나 부를 수 있는 곳이다."}
+              {
+                "id": "A",
+                "text": "뜨거나 가라앉는 성질"
+              },
+              {
+                "id": "B",
+                "text": "말을 하는 능력"
+              },
+              {
+                "id": "C",
+                "text": "하늘을 나는 마법"
+              },
+              {
+                "id": "D",
+                "text": "노래 부르는 취미"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 30, "end": 57}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 52,
+                "end": 81
+              }
+            ]
+          },
           "question": {
-            "prompt": "도서관에서 조용히 해야 하는 까닭은 무엇입니까?",
+            "prompt": "물 위에 뜨는 물건은?",
             "choices": [
-              {"id": "A", "text": "다른 사람을 위해서이다."},
-              {"id": "B", "text": "책이 찢어질 수 있어서이다."},
-              {"id": "C", "text": "컴퓨터가 고장 날 수 있어서이다."},
-              {"id": "D", "text": "사서 선생님이 잠을 자서이다."}
+              {
+                "id": "A",
+                "text": "나뭇잎이나 플라스틱 공"
+              },
+              {
+                "id": "B",
+                "text": "커다란 바윗덩어리"
+              },
+              {
+                "id": "C",
+                "text": "단단한 쇠뭉치"
+              },
+              {
+                "id": "D",
+                "text": "무거운 금고"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 57, "end": 104}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 83,
+                "end": 118
+              }
+            ]
+          },
           "question": {
-            "prompt": "읽고 싶은 책을 찾는 방법 두 가지를 바르게 고르면 무엇입니까?",
+            "prompt": "쇠못은 어떻게 되나요?",
             "choices": [
-              {"id": "A", "text": "컴퓨터로 검색하거나 사서 선생님께 여쭤본다."},
-              {"id": "B", "text": "친구에게 물어보거나 집에서 가져온다."},
-              {"id": "C", "text": "직접 만들거나 서점에서 산다."},
-              {"id": "D", "text": "그림을 그리거나 선생님이 나누어 준다."}
+              {
+                "id": "A",
+                "text": "물속으로 가라앉음"
+              },
+              {
+                "id": "B",
+                "text": "하늘로 솟아오름"
+              },
+              {
+                "id": "C",
+                "text": "꽃으로 변함"
+              },
+              {
+                "id": "D",
+                "text": "사탕이 됨"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 104, "end": 151}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 120,
+                "end": 163
+              }
+            ]
+          },
           "question": {
-            "prompt": "빌린 책은 어떻게 해야 한다고 했습니까?",
+            "prompt": "무엇에 따라 다른가?",
             "choices": [
-              {"id": "A", "text": "정해진 날짜 안에 꼭 돌려주어야 한다."},
-              {"id": "B", "text": "마음대로 집에 두어도 된다."},
-              {"id": "C", "text": "다른 친구에게 다시 빌려주면 된다."},
-              {"id": "D", "text": "새 책을 사서 바꾸어 주면 된다."}
+              {
+                "id": "A",
+                "text": "물건의 무게와 모양"
+              },
+              {
+                "id": "B",
+                "text": "물건의 이름과 나이"
+              },
+              {
+                "id": "C",
+                "text": "물건의 고향과 주소"
+              },
+              {
+                "id": "D",
+                "text": "물건의 기분과 성격"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 151}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 163
+              }
+            ]
+          },
           "question": {
-            "prompt": "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "1문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "도서관에서 책을 찾고 빌리는 방법과 지켜야 할 규칙을 알려 주고 있다."},
-              {"id": "B", "text": "도서관에서 뛰어놀 수 있는 장소를 안내하고 있다."},
-              {"id": "C", "text": "도서관에서 음식을 먹는 방법을 설명하고 있다."},
-              {"id": "D", "text": "도서관에서 그림을 그리는 순서를 알려 주고 있다."}
+              {
+                "id": "A",
+                "text": "물건의 뜨고 가라앉음"
+              },
+              {
+                "id": "B",
+                "text": "나뭇잎의 초록 색깔"
+              },
+              {
+                "id": "C",
+                "text": "플라스틱의 제조 공장"
+              },
+              {
+                "id": "D",
+                "text": "돌멩이의 단단한 정도"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 41}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 46
+              }
+            ]
+          },
           "question": {
-            "prompt": "도서관에 마련되어 있어서 편하게 읽을 수 있는 것은 무엇입니까?",
+            "prompt": "어떤 물건이 뜨나요?",
             "choices": [
-              {"id": "A", "text": "책을 읽을 자리가 마련되어 있다."},
-              {"id": "B", "text": "간식을 먹을 자리가 마련되어 있다."},
-              {"id": "C", "text": "낮잠을 잘 자리가 마련되어 있다."},
-              {"id": "D", "text": "그림을 그릴 자리가 마련되어 있다."}
+              {
+                "id": "A",
+                "text": "물보다 가벼운 물건"
+              },
+              {
+                "id": "B",
+                "text": "물보다 뜨거운 물건"
+              },
+              {
+                "id": "C",
+                "text": "물보다 화난 물건"
+              },
+              {
+                "id": "D",
+                "text": "물보다 잠이 많은 물건"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 41, "end": 80}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 48,
+                "end": 91
+              }
+            ]
+          },
           "question": {
-            "prompt": "책을 다 읽으면 왜 제자리에 꽂아야 합니까?",
+            "prompt": "배가 뜰 수 있는 이유?",
             "choices": [
-              {"id": "A", "text": "다른 사람도 쉽게 찾을 수 있기 때문이다."},
-              {"id": "B", "text": "책이 저절로 사라지기 때문이다."},
-              {"id": "C", "text": "사서 선생님이 화를 내기 때문이다."},
-              {"id": "D", "text": "책꽂이가 비어 있으면 안 되기 때문이다."}
+              {
+                "id": "A",
+                "text": "안 비고 넓게 만듦"
+              },
+              {
+                "id": "B",
+                "text": "노래를 잘 불러서"
+              },
+              {
+                "id": "C",
+                "text": "색깔이 알록달록해서"
+              },
+              {
+                "id": "D",
+                "text": "엔진이 아주 작아서"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 80, "end": 128}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 93,
+                "end": 136
+              }
+            ]
+          },
           "question": {
-            "prompt": "도서관을 자주 가면 좋은 점을 바꾸어 말하면 무엇입니까?",
+            "prompt": "무엇을 만들어 쓰나?",
             "choices": [
-              {"id": "A", "text": "읽고 싶은 책을 많이 만날 수 있다."},
-              {"id": "B", "text": "간식을 많이 받을 수 있다."},
-              {"id": "C", "text": "친구가 저절로 많아진다."},
-              {"id": "D", "text": "시험 점수가 바로 올라간다."}
+              {
+                "id": "A",
+                "text": "구명조끼나 뗏목"
+              },
+              {
+                "id": "B",
+                "text": "연필이나 공책"
+              },
+              {
+                "id": "C",
+                "text": "우산이나 장화"
+              },
+              {
+                "id": "D",
+                "text": "양말이나 장갑"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 128}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 138,
+                "end": 183
+              }
+            ]
+          },
           "question": {
-            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "무엇을 느껴보나요?",
             "choices": [
-              {"id": "A", "text": "도서관에서 편하게 읽고 제자리에 꽂으면 좋으며 자주 가면 책을 많이 만난다."},
-              {"id": "B", "text": "도서관에서 뛰어놀면 좋고 책은 아무 데나 두면 된다."},
-              {"id": "C", "text": "도서관에 가면 친구와 놀 수 있어 재미있다."},
-              {"id": "D", "text": "도서관에서는 책을 빌리면 안 되고 읽기만 해야 한다."}
+              {
+                "id": "A",
+                "text": "과학의 재미"
+              },
+              {
+                "id": "B",
+                "text": "수학의 공포"
+              },
+              {
+                "id": "C",
+                "text": "영어의 지루함"
+              },
+              {
+                "id": "D",
+                "text": "졸음의 유혹"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 183
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부력의 원리와 이용"
+              },
+              {
+                "id": "B",
+                "text": "구명조끼의 끈 길이"
+              },
+              {
+                "id": "C",
+                "text": "뗏목의 나무 개수"
+              },
+              {
+                "id": "D",
+                "text": "배의 굴뚝 연기 양"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        {"id": "c1", "text": "도서관은 여러 가지 책을 읽거나 빌릴 수 있는 곳이다."},
-        {"id": "c2", "text": "도서관에서는 조용히 하고 검색이나 사서에게 물어 책을 찾는다."},
-        {"id": "c3", "text": "빌린 책은 정해진 날짜 안에 꼭 돌려주어야 한다."},
-        {"id": "c4", "text": "도서관을 자주 가면 읽고 싶은 책을 많이 만날 수 있다."}
+        {
+          "id": "c1",
+          "text": "물에 뜨고 가라앉음."
+        },
+        {
+          "id": "c2",
+          "text": "무게 따라 다르죠."
+        },
+        {
+          "id": "c3",
+          "text": "가벼우면 뜹니다."
+        },
+        {
+          "id": "c4",
+          "text": "배도 물에 떠요."
+        },
+        {
+          "id": "c5",
+          "text": "원리를 이용해요."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "도서관에서 책을 어떻게 할 수 있다고 했습니까?",
-          "answerText": "읽거나 빌릴 수 있는 곳",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 14, "end": 27}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "물체가 가진 특징?",
+          "answerText": "성질",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 42,
+              "end": 43
+            },
+            {
+              "paragraphId": "p2",
+              "start": 8,
+              "end": 9
+            },
+            {
+              "paragraphId": "p2",
+              "start": 30,
+              "end": 31
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "도서관에서 다른 사람을 위해 어떻게 해야 합니까?",
-          "answerText": "조용히 해야 한다",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 47, "end": 56}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "무거운 정도?",
+          "answerText": "무게",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 125,
+              "end": 126
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "읽고 싶은 책을 찾으려면 누구에게 여쭤보면 됩니까?",
-          "answerText": "사서 선생님께",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 88, "end": 95}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "빌린 책은 언제까지 돌려주어야 합니까?",
-          "answerText": "정해진 날짜 안에 꼭 돌려주어야 한다",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 130, "end": 150}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "책을 다 읽으면 어디에 꽂아 놓아야 합니까?",
-          "answerText": "제자리에 꽂아 놓아야",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 50, "end": 61}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q6",
-          "prompt": "도서관을 자주 가면 어떤 좋은 점이 있습니까?",
-          "answerText": "읽고 싶은 책을 많이 만날 수 있으니",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 91, "end": 111}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "기본적인 바탕?",
+          "answerText": "원리",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 110,
+              "end": 111
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         }
       ]

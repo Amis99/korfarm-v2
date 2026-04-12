@@ -1,0 +1,259 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Daily Reading Content Schema",
+  "description": "일일 독해 콘텐츠 검증을 위한 JSON 스키마 (길이 제한 규칙 포함)",
+  "type": "object",
+  "required": [
+    "contentId",
+    "contentType",
+    "version",
+    "status",
+    "title",
+    "description",
+    "targetLevel",
+    "schoolGradeRange",
+    "area",
+    "subArea",
+    "competencies",
+    "tags",
+    "access",
+    "seedReward",
+    "timeLimitSec",
+    "assets",
+    "payload"
+  ],
+  "properties": {
+    "contentId": {
+      "type": "string",
+      "pattern": "^dr-"
+    },
+    "contentType": {
+      "type": "string",
+      "const": "DAILY_READING"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["DRAFT", "PUBLISHED", "ARCHIVED"]
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "targetLevel": {
+      "type": "string"
+    },
+    "schoolGradeRange": {
+      "type": "object",
+      "required": ["min", "max"],
+      "properties": {
+        "min": { "type": "integer" },
+        "max": { "type": "integer" }
+      }
+    },
+    "area": {
+      "type": "string"
+    },
+    "subArea": {
+      "type": "string"
+    },
+    "competencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "access": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": { "type": "string" }
+      }
+    },
+    "seedReward": {
+      "type": "object",
+      "required": ["seedType", "count", "multiplier"],
+      "properties": {
+        "seedType": { "type": "string" },
+        "count": { "type": "integer" },
+        "multiplier": { "type": "number" }
+      }
+    },
+    "timeLimitSec": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "assets": {
+      "type": "object"
+    },
+    "payload": {
+      "type": "object",
+      "required": ["passage", "intensive", "recall", "confirm"],
+      "properties": {
+        "passage": {
+          "type": "object",
+          "required": ["format", "paragraphs"],
+          "properties": {
+            "format": { "type": "string" },
+            "paragraphs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "text"],
+                "properties": {
+                  "id": { "type": "string", "pattern": "^p[0-9]+" },
+                  "text": { "type": "string", "minLength": 1 }
+                }
+              }
+            }
+          }
+        },
+        "intensive": {
+          "type": "object",
+          "required": ["timeline"],
+          "properties": {
+            "timeline": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["stepId", "highlight", "question"],
+                "properties": {
+                  "stepId": { "type": "string" },
+                  "highlight": {
+                    "type": "object",
+                    "required": ["ranges"],
+                    "properties": {
+                      "ranges": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": ["paragraphId", "start", "end"],
+                          "properties": {
+                            "paragraphId": { "type": "string" },
+                            "start": { "type": "integer", "minimum": 0 },
+                            "end": { "type": "integer", "minimum": 1 }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "question": {
+                    "type": "object",
+                    "required": ["prompt", "choices", "answerId", "scoring"],
+                    "properties": {
+                      "prompt": {
+                        "type": "string",
+                        "maxLength": 30,
+                        "description": "질문은 20자 이내 권장, 최대 30자. 쓸데없는 수식어 금지"
+                      },
+                      "choices": {
+                        "type": "array",
+                        "minItems": 4,
+                        "maxItems": 4,
+                        "items": {
+                          "type": "object",
+                          "required": ["id", "text"],
+                          "properties": {
+                            "id": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                            "text": {
+                              "type": "string",
+                              "maxLength": 20,
+                              "description": "선택지 20자 이내. 단어, 구, 문장 모두 가능"
+                            }
+                          }
+                        }
+                      },
+                      "answerId": {
+                        "type": "string",
+                        "enum": ["A", "B", "C", "D"]
+                      },
+                      "scoring": {
+                        "type": "object",
+                        "required": ["correctDeltaSec", "wrongDeltaSec", "eliminateWrongChoice"],
+                        "properties": {
+                          "correctDeltaSec": { "type": "integer" },
+                          "wrongDeltaSec": { "type": "integer" },
+                          "eliminateWrongChoice": { "type": "boolean" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "recall": {
+          "type": "object",
+          "required": ["cards", "correctOrder", "seedPenalty"],
+          "properties": {
+            "cards": {
+              "type": "array",
+              "minItems": 6,
+              "maxItems": 7,
+              "items": {
+                "type": "object",
+                "required": ["id", "text"],
+                "properties": {
+                  "id": { "type": "string" },
+                  "text": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "description": "20자 이내 권장 짧고 완결된 문장 (최대 30자)"
+                  }
+                }
+              }
+            },
+            "correctOrder": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "seedPenalty": { "type": "integer" }
+          }
+        },
+        "confirm": {
+          "type": "object",
+          "required": ["questions"],
+          "properties": {
+            "questions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "prompt", "answerText", "answerMatchMode", "answerRanges", "scoring", "revealOnWrong"],
+                "properties": {
+                  "id": { "type": "string" },
+                  "prompt": { "type": "string" },
+                  "answerText": { "type": "string" },
+                  "answerMatchMode": { "type": "string" },
+                  "answerRanges": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["paragraphId", "start", "end"],
+                      "properties": {
+                        "paragraphId": { "type": "string" },
+                        "start": { "type": "integer" },
+                        "end": { "type": "integer" }
+                      }
+                    }
+                  },
+                  "scoring": {
+                    "type": "object"
+                  },
+                  "revealOnWrong": { "type": "boolean" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

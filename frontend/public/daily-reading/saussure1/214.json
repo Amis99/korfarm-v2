@@ -1,19 +1,34 @@
 {
-  "contentId": "dr-s1-214",
+  "contentId": "dr-saussure1-214",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "나무를 심어야 하는 까닭",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 원근이 보이는 그림",
+  "description": "멀고 가까운 거리감을 도화지 위에 생생하게 나타내는 원근법의 기초 원리를 배워요",
   "targetLevel": "SAUSSURE_1",
-  "schoolGradeRange": {"min": 1, "max": 1},
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": {"mode": "FREE"},
-  "seedReward": {"seedType": "WHEAT", "count": 3, "multiplier": 1},
-  "timeLimitSec": 300,
+  "schoolGradeRange": {
+    "min": 1,
+    "max": 1
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +36,11 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "나무는 우리에게 아주 고마운 것이에요.나무는 맑은 공기를 만들어 줘요.우리가 숨을 쉴 때 필요한 깨끗한 공기를 나무가 만들어 주는 거예요.또 더운 여름에 나무 그늘 아래에 서면 시원하게 쉴 수 있어요."
+          "text": "화가들은 도화지 위에 멀고 가까운 느낌을 나타내기 위해 여러 가지 방법을 사용합니다. 가까이 있는 물건은 크게 그리고 멀리 있는 물건은 작게 그려서 거리를 표현해요. 이것을 원근법이라고 부르는데 그림을 더 생생하게 만들어 줍니다."
         },
         {
           "id": "p2",
-          "text": "나무에는 새와 다람쥐 같은 동물이 살 수 있어요.나무가 동물의 집이 되어 주는 거예요.또 비가 많이 올 때 나무뿌리가 흙을 꽉 잡아 주어서 흙이 쓸려 가는 것을 막아 줘요.이처럼 나무는 사람에게도 동물에게도 꼭 필요해요.그래서 우리는 나무를 많이 심어야 해요.나무를 많이 심으면 지구가 더 건강해질 수 있어요."
+          "text": "색깔을 이용해서 거리감을 나타내는 신기한 방법도 있습니다. 가까운 곳은 진하고 선명한 색으로 칠하고 먼 곳은 흐릿하고 연한 색으로 나타내어요. 여러분도 원근을 생각하며 입체감이 느껴지는 멋진 그림을 완성해 봅시다."
         }
       ]
     },
@@ -33,235 +48,422 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 21}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 46
+              }
+            ]
+          },
           "question": {
-            "prompt": "나무는 우리에게 어떤 것이라고 했습니까?",
+            "prompt": "화가들은 무엇을 하나?",
             "choices": [
-              {"id": "A", "text": "아주 고마운 것이라고 했다."},
-              {"id": "B", "text": "아주 무서운 것이라고 했다."},
-              {"id": "C", "text": "아주 슬픈 것이라고 했다."},
-              {"id": "D", "text": "아주 재미있는 것이라고 했다."}
+              {
+                "id": "A",
+                "text": "멀고 가까운 느낌 표현"
+              },
+              {
+                "id": "B",
+                "text": "빨리 달리기 시합"
+              },
+              {
+                "id": "C",
+                "text": "시끄러운 노래 부르기"
+              },
+              {
+                "id": "D",
+                "text": "딱딱한 돌멩이 줍기"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 21, "end": 39}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 48,
+                "end": 88
+              }
+            ]
+          },
           "question": {
-            "prompt": "나무가 만들어 주는 것은 무엇입니까?",
+            "prompt": "멀리 있는 물건은?",
             "choices": [
-              {"id": "A", "text": "맑은 공기를 만들어 준다."},
-              {"id": "B", "text": "맑은 물을 만들어 준다."},
-              {"id": "C", "text": "맛있는 과일을 만들어 준다."},
-              {"id": "D", "text": "예쁜 꽃을 만들어 준다."}
+              {
+                "id": "A",
+                "text": "작게 그려서 표현"
+              },
+              {
+                "id": "B",
+                "text": "전부 다 지워버림"
+              },
+              {
+                "id": "C",
+                "text": "풍선처럼 불어넣음"
+              },
+              {
+                "id": "D",
+                "text": "까맣게 색칠함"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 39, "end": 77}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 90,
+                "end": 126
+              }
+            ]
+          },
           "question": {
-            "prompt": "앞 내용과 이어 볼 때 나무가 만드는 깨끗한 공기는 언제 필요합니까?",
+            "prompt": "원근법의 장점은?",
             "choices": [
-              {"id": "A", "text": "우리가 숨을 쉴 때 필요하다."},
-              {"id": "B", "text": "우리가 잠을 잘 때만 필요하다."},
-              {"id": "C", "text": "우리가 밥을 먹을 때만 필요하다."},
-              {"id": "D", "text": "우리가 노래를 할 때만 필요하다."}
+              {
+                "id": "A",
+                "text": "그림 더 생생하게 함"
+              },
+              {
+                "id": "B",
+                "text": "잠이 무척 잘 옴"
+              },
+              {
+                "id": "C",
+                "text": "배가 더 고파짐"
+              },
+              {
+                "id": "D",
+                "text": "키가 쑥쑥 자람"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 77, "end": 112}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 126
+              }
+            ]
+          },
           "question": {
-            "prompt": "더운 여름에 나무 그늘 아래에 서면 어떻습니까?",
+            "prompt": "1문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "시원하게 쉴 수 있다."},
-              {"id": "B", "text": "더 덥게 느껴진다."},
-              {"id": "C", "text": "비가 내리기 시작한다."},
-              {"id": "D", "text": "바람이 멈추게 된다."}
+              {
+                "id": "A",
+                "text": "크기로 나타내는 원근"
+              },
+              {
+                "id": "B",
+                "text": "도화지의 공장 위치"
+              },
+              {
+                "id": "C",
+                "text": "붓의 털 개수 세기"
+              },
+              {
+                "id": "D",
+                "text": "물감의 마르는 시간"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": {"ranges": [{"paragraphId": "p1", "start": 0, "end": 112}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 32
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
+            "prompt": "무엇으로 거리를 내나?",
             "choices": [
-              {"id": "A", "text": "나무는 맑은 공기와 시원한 그늘을 주는 고마운 것이라는 내용이다."},
-              {"id": "B", "text": "나무는 무겁고 크기만 해서 쓸모없다는 내용이다."},
-              {"id": "C", "text": "나무는 겨울에만 필요한 것이라는 내용이다."},
-              {"id": "D", "text": "나무는 사람이 먹을 수 있는 음식이라는 내용이다."}
+              {
+                "id": "A",
+                "text": "색깔을 이용해서"
+              },
+              {
+                "id": "B",
+                "text": "망치로 두드려서"
+              },
+              {
+                "id": "C",
+                "text": "바람을 불어넣어서"
+              },
+              {
+                "id": "D",
+                "text": "눈을 감고 그려서"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 27}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 34,
+                "end": 82
+              }
+            ]
+          },
           "question": {
-            "prompt": "나무에 살 수 있는 동물로 나온 것은 무엇입니까?",
+            "prompt": "가까운 곳의 색은?",
             "choices": [
-              {"id": "A", "text": "새와 다람쥐이다."},
-              {"id": "B", "text": "고양이와 강아지이다."},
-              {"id": "C", "text": "물고기와 거북이이다."},
-              {"id": "D", "text": "소와 말이다."}
+              {
+                "id": "A",
+                "text": "진하고 선명한 색"
+              },
+              {
+                "id": "B",
+                "text": "흐릿하고 연한 색"
+              },
+              {
+                "id": "C",
+                "text": "전부 다 하얀 색"
+              },
+              {
+                "id": "D",
+                "text": "아무 색도 없음"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 27, "end": 48}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 84,
+                "end": 133
+              }
+            ]
+          },
           "question": {
-            "prompt": "나무가 동물에게 되어 주는 것을 바꾸어 말하면 무엇입니까?",
+            "prompt": "무엇을 완성해 보나?",
             "choices": [
-              {"id": "A", "text": "동물이 사는 집이 되어 준다는 뜻이다."},
-              {"id": "B", "text": "동물이 먹는 밥이 되어 준다는 뜻이다."},
-              {"id": "C", "text": "동물이 입는 옷이 되어 준다는 뜻이다."},
-              {"id": "D", "text": "동물이 타는 차가 되어 준다는 뜻이다."}
+              {
+                "id": "A",
+                "text": "입체감 넘치는 그림"
+              },
+              {
+                "id": "B",
+                "text": "커다란 종이비행기"
+              },
+              {
+                "id": "C",
+                "text": "단단한 모래성"
+              },
+              {
+                "id": "D",
+                "text": "시끄러운 악기"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 48, "end": 96}]},
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 133
+              }
+            ]
+          },
           "question": {
-            "prompt": "비가 많이 올 때 나무뿌리가 하는 일은 무엇입니까?",
+            "prompt": "2문단의 중심 내용은?",
             "choices": [
-              {"id": "A", "text": "흙을 꽉 잡아 주어서 흙이 쓸려 가는 것을 막아 준다."},
-              {"id": "B", "text": "물을 꽉 잡아 주어서 물이 넘치는 것을 막아 준다."},
-              {"id": "C", "text": "바람을 꽉 잡아 주어서 바람이 부는 것을 막아 준다."},
-              {"id": "D", "text": "돌을 꽉 잡아 주어서 돌이 굴러가는 것을 막아 준다."}
+              {
+                "id": "A",
+                "text": "색깔로 나타내는 원근"
+              },
+              {
+                "id": "B",
+                "text": "물감의 섞는 순서"
+              },
+              {
+                "id": "C",
+                "text": "먼지의 농도 측정"
+              },
+              {
+                "id": "D",
+                "text": "친구의 웃음소리"
+              }
             ],
             "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
-          }
-        },
-        {
-          "stepId": "s9",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 96, "end": 145}]},
-          "question": {
-            "prompt": "나무가 꼭 필요한 까닭은 무엇이고, 우리가 해야 할 일은 무엇입니까?",
-            "choices": [
-              {"id": "A", "text": "사람과 동물 모두에게 필요하므로 나무를 많이 심어야 한다."},
-              {"id": "B", "text": "사람에게만 필요하므로 나무를 조금만 심어도 된다."},
-              {"id": "C", "text": "동물에게만 필요하므로 산에만 심으면 된다."},
-              {"id": "D", "text": "아무에게도 필요 없으므로 심지 않아도 된다."}
-            ],
-            "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
-          }
-        },
-        {
-          "stepId": "s10",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 145, "end": 173}]},
-          "question": {
-            "prompt": "나무를 많이 심으면 어떻게 됩니까?",
-            "choices": [
-              {"id": "A", "text": "지구가 더 건강해질 수 있다."},
-              {"id": "B", "text": "지구가 더 뜨거워질 수 있다."},
-              {"id": "C", "text": "지구가 더 작아질 수 있다."},
-              {"id": "D", "text": "지구가 더 어두워질 수 있다."}
-            ],
-            "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
-          }
-        },
-        {
-          "stepId": "s11",
-          "highlight": {"ranges": [{"paragraphId": "p2", "start": 0, "end": 173}]},
-          "question": {
-            "prompt": "이 문단의 중심 내용으로 가장 알맞은 것은 무엇입니까?",
-            "choices": [
-              {"id": "A", "text": "나무는 동물의 집이 되고 흙을 잡아 주므로 많이 심어야 한다는 내용이다."},
-              {"id": "B", "text": "나무는 동물에게 해롭기 때문에 심으면 안 된다는 내용이다."},
-              {"id": "C", "text": "나무는 비가 올 때만 필요하다는 내용이다."},
-              {"id": "D", "text": "나무는 사람에게만 도움이 된다는 내용이다."}
-            ],
-            "answerId": "A",
-            "scoring": {"correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true}
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        {"id": "c1", "text": "나무는 맑은 공기를 만들고 시원한 그늘을 줘요."},
-        {"id": "c2", "text": "새와 다람쥐 같은 동물이 나무에서 살 수 있어요."},
-        {"id": "c3", "text": "나무뿌리가 비 올 때 흙이 쓸려 가는 것을 막아 줘요."},
-        {"id": "c4", "text": "나무를 많이 심으면 지구가 더욱 건강해질 수 있어요."}
+        {
+          "id": "c1",
+          "text": "그림에 거리를 내요."
+        },
+        {
+          "id": "c2",
+          "text": "가까우면 크게 그려."
+        },
+        {
+          "id": "c3",
+          "text": "원근법이라 부릅니다."
+        },
+        {
+          "id": "c4",
+          "text": "색으로도 조절해요."
+        },
+        {
+          "id": "c5",
+          "text": "입체감을 살려 보아요."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "나무가 만들어 주는 것은 무엇입니까?",
-          "answerText": "맑은 공기",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 25, "end": 30}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "멀고 가까운 법?",
+          "answerText": "원근",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 97,
+              "end": 98
+            },
+            {
+              "paragraphId": "p2",
+              "start": 85,
+              "end": 86
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "더운 여름에 나무 그늘 아래에 서면 어떻습니까?",
-          "answerText": "시원하게 쉴 수 있어요",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p1", "start": 99, "end": 111}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "도화지에 그린 것?",
+          "answerText": "그림",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 109,
+              "end": 110
+            },
+            {
+              "paragraphId": "p2",
+              "start": 107,
+              "end": 108
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "나무에 살 수 있는 동물의 예로 나온 것은 무엇입니까?",
-          "answerText": "새와 다람쥐",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 5, "end": 11}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q4",
-          "prompt": "비가 올 때 나무뿌리가 막아 주는 것은 무엇입니까?",
-          "answerText": "흙이 쓸려 가는 것",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 78, "end": 88}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q5",
-          "prompt": "나무는 사람에게도 동물에게도 어떤 것입니까?",
-          "answerText": "꼭 필요해요",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 116, "end": 122}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
-          "revealOnWrong": true
-        },
-        {
-          "id": "q6",
-          "prompt": "나무를 많이 심으면 지구가 어떻게 됩니까?",
-          "answerText": "더 건강해질 수 있어요",
-          "answerMatchMode": "ANY",
-          "answerRanges": [{"paragraphId": "p2", "start": 160, "end": 172}],
-          "scoring": {"correctDeltaSec": 30, "wrongDeltaSec": -45},
+          "prompt": "해 나가는 길?",
+          "answerText": "방법",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 37,
+              "end": 38
+            },
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
           "revealOnWrong": true
         }
       ]
