@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap
 @Component
 class ChatWebSocketHandler(
     private val chatService: ChatService,
+    private val aiChatService: AiChatService,
     private val messageRepo: ChatMessageRepository,
     private val objectMapper: ObjectMapper
 ) : TextWebSocketHandler() {
@@ -83,6 +84,14 @@ class ChatWebSocketHandler(
         )
         val view = chatService.sendMessage(userId, isAdmin, req)
         broadcastToRoom(req.roomId, "message.new", view)
+
+        // 포도 AI 트리거 체크
+        val savedMsg = messageRepo.findById(view.id).orElse(null)
+        if (savedMsg != null && aiChatService.shouldRespond(savedMsg)) {
+            aiChatService.respondAsync(savedMsg) { roomId, type, payload ->
+                broadcastToRoom(roomId, type, payload)
+            }
+        }
     }
 
     private fun handleMessageDelete(session: WebSocketSession, body: Map<*, *>) {

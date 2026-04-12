@@ -31,7 +31,20 @@ function userColors(userId) {
   };
 }
 
+const PODO_USER_ID = "u_ai_podo";
+
 function Avatar({ userId, userName, userAvatarUrl }) {
+  // 포도 AI 전용 아바타
+  if (userId === PODO_USER_ID) {
+    return (
+      <img
+        src={`${import.meta.env.BASE_URL}podo-avatar.png`}
+        alt="포도"
+        className="chat-avatar"
+        style={{ borderColor: "#7b4d9e" }}
+      />
+    );
+  }
   const colors = userColors(userId);
   const initial = (userName || "?").trim().charAt(0).toUpperCase();
   if (userAvatarUrl) {
@@ -261,7 +274,7 @@ function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onSho
         {!isMine && (
           <div className="chat-msg-name" style={{ color: colors.border }}>
             {message.userName}
-            {message.isAdmin ? " (관리자)" : ""}
+            {message.userId === PODO_USER_ID ? " 🍇AI" : message.isAdmin ? " (관리자)" : ""}
           </div>
         )}
         <div className="chat-bubble-row">

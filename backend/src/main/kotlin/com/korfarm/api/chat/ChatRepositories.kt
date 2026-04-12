@@ -23,6 +23,27 @@ interface ChatMessageRepository : JpaRepository<ChatMessageEntity, String> {
         pageable: org.springframework.data.domain.Pageable
     ): List<ChatMessageEntity>
 
+    /** FULLTEXT 검색: 관련 과거 대화 (최신순, 최근 30건 제외) */
+    @Query(
+        value = """
+        SELECT * FROM chat_messages
+        WHERE room_id = :roomId
+          AND message_type = 'text'
+          AND status = 'active'
+          AND created_at < :before
+          AND MATCH(content) AGAINST(:keyword IN BOOLEAN MODE)
+        ORDER BY created_at DESC
+        LIMIT :lim
+        """,
+        nativeQuery = true
+    )
+    fun searchRelevant(
+        @Param("roomId") roomId: String,
+        @Param("keyword") keyword: String,
+        @Param("before") before: LocalDateTime,
+        @Param("lim") limit: Int
+    ): List<ChatMessageEntity>
+
     /** D+7 archive 대상: live 상태이면서 N일 이전 메시지 */
     fun findByAttachmentStateAndCreatedAtBefore(
         attachmentState: String,
