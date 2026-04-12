@@ -1,32 +1,35 @@
 {
-  "contentId": "dr-f1-178",
+  "contentId": "dr-frege1-178",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "겨울 나무",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[문학] 겨울 나무",
+  "description": "추운 겨울에 잎을 다 떨구고 앙상하게 서 있지만, 내년 봄을 기다리며 단단해지는 나무의 강인함을 그린 동시입니다.",
   "targetLevel": "FREGE_1",
   "schoolGradeRange": {
     "min": 4,
     "max": 4
   },
-  "area": "READING",
-  "subArea": "LITERATURE",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "문학",
+    "동시",
+    "자연"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
+  "timeLimitSec": 900,
   "assets": {},
   "payload": {
     "passage": {
@@ -34,32 +37,903 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "겨울 나무는 / 잎을 다 떨어뜨렸다 // 옷을 다 벗은 것 같아 / 추워 보이는데 // 그 나무는 / 오히려 꼿꼿이 서 있다"
+          "text": "차가운 북풍이 매섭게 몰아치고\n하얀 눈보라가 펑펑 쏟아지면\n겨울 나무는 알록달록 입었던\n단풍잎 옷을 훌훌 벗어 던져요"
         },
         {
           "id": "p2",
-          "text": "가지 사이로 / 하늘이 보인다 / 파란 하늘이 / 겨울 나무 틈새로 / 쏟아져 내린다 // 나무가 하늘을 담는 건지 / 하늘이 나무를 담는 건지"
+          "text": "벌거벗은 앙상한 나뭇가지들이\n추위에 오들오들 떨고 있지만\n나무는 절대 엉엉 울지 않고\n두 눈을 꼭 감고 가만히 참아내요"
         },
         {
           "id": "p3",
-          "text": "봄이 되면 / 저 가지마다 / 새 잎이 돋아날 텐데 // 지금은 그냥 / 기다리는 중이다 / 서두르지 않고 / 묵묵히"
+          "text": "땅속 깊숙이 뻗은 튼튼한 뿌리는\n새근새근 잠든 씨앗들을 품어주고\n거센 바람이 아무리 세차게 불어도\n흔들리지 않고 꼿꼿하게 버티어 서요"
         },
         {
           "id": "p4",
-          "text": "나도 힘들 때 / 저 나무처럼 / 잠시 멈춰도 괜찮겠다 / 다 쉬어도 괜찮겠다 // 봄은 / 기다리는 나무에게 / 반드시 온다"
+          "text": "추운 겨울을 용감하게 이겨내야만\n내년 봄에 예쁜 꽃을 피울 수 있으니까요\n겨울 나무는 겉으로는 꽁꽁 얼었지만\n마음속엔 뜨거운 봄을 준비하고 있답니다"
         }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 15
+              }
+            ]
+          },
+          "question": {
+            "prompt": "차가운 북풍이 몰아치고 하얀 무엇이 펑펑 쏟아지나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하얀 눈보라가 펑펑 쏟아지면"
+              },
+              {
+                "id": "B",
+                "text": "까만 흙먼지가 펑펑 쏟아지면"
+              },
+              {
+                "id": "C",
+                "text": "뜨거운 불덩이가 펑펑 쏟아지면"
+              },
+              {
+                "id": "D",
+                "text": "날카로운 칼날이 펑펑 쏟아지면"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 17,
+                "end": 31
+              }
+            ]
+          },
+          "question": {
+            "prompt": "겨울 나무는 알록달록 입었던 무엇을 훌훌 벗어 던지나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "단풍잎 옷을 훌훌 벗어 던져요"
+              },
+              {
+                "id": "B",
+                "text": "강철 갑옷을 훌훌 벗어 던져요"
+              },
+              {
+                "id": "C",
+                "text": "털모자를 훌훌 벗어 던져요"
+              },
+              {
+                "id": "D",
+                "text": "가죽 신발을 훌훌 벗어 던져요"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 33,
+                "end": 47
+              }
+            ]
+          },
+          "question": {
+            "prompt": "하얀 눈보라가 쏟아지자 겨울 나무는 어떤 옷을 훌훌 벗어 던졌나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "알록달록 입었던 단풍잎 옷"
+              },
+              {
+                "id": "B",
+                "text": "시커멓게 칠해진 비닐 옷"
+              },
+              {
+                "id": "C",
+                "text": "투명하고 얇은 유리 옷"
+              },
+              {
+                "id": "D",
+                "text": "더럽고 냄새나는 걸레 옷"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 49,
+                "end": 64
+              }
+            ]
+          },
+          "question": {
+            "prompt": "겨울 나무는 알록달록 입었던 단풍잎 옷을 어떻게 벗어 던지나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "훌훌 벗어 던져요"
+              },
+              {
+                "id": "B",
+                "text": "힘겹게 벗어 던져요"
+              },
+              {
+                "id": "C",
+                "text": "무겁게 벗어 던져요"
+              },
+              {
+                "id": "D",
+                "text": "조심조심 벗어 던져요"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 64
+              }
+            ]
+          },
+          "question": {
+            "prompt": "첫 번째 연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "추운 북풍과 눈보라가 몰아치는 겨울이 되자 나무가 알록달록한 단풍잎 옷을 훌훌 벗고 겨울을 맞이하는 모습"
+              },
+              {
+                "id": "B",
+                "text": "겨울바람이 너무 매섭게 불어서 나무가 뿌리째 뽑혀 날아가 버린 끔찍하고 무시무시한 재난 이야기"
+              },
+              {
+                "id": "C",
+                "text": "나뭇잎이 칼날로 변해서 바람에 날리며 사람들의 얼굴에 흉터를 남긴 기괴하고 소름 끼치는 사연"
+              },
+              {
+                "id": "D",
+                "text": "나무가 추위를 피하려고 스스로 불을 질러서 온 산이 활활 타오르는 잿더미로 변해버린 무서운 사고"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 14
+              }
+            ]
+          },
+          "question": {
+            "prompt": "벌거벗은 어떤 나뭇가지들이 추위에 오들오들 떨고 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "앙상한 나뭇가지들이"
+              },
+              {
+                "id": "B",
+                "text": "뚱뚱한 나뭇가지들이"
+              },
+              {
+                "id": "C",
+                "text": "근육질 나뭇가지들이"
+              },
+              {
+                "id": "D",
+                "text": "거대한 나뭇가지들이"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 16,
+                "end": 30
+              }
+            ]
+          },
+          "question": {
+            "prompt": "벌거벗은 앙상한 나뭇가지들이 추위에 어떻게 떨고 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오들오들 떨고 있지만"
+              },
+              {
+                "id": "B",
+                "text": "신나게 덜덜 떨고 있지만"
+              },
+              {
+                "id": "C",
+                "text": "무섭게 덜덜 떨고 있지만"
+              },
+              {
+                "id": "D",
+                "text": "차갑게 덜덜 떨고 있지만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 32,
+                "end": 46
+              }
+            ]
+          },
+          "question": {
+            "prompt": "나뭇가지들이 추위에 오들오들 떨고 있지만 나무는 절대 어떻게 하지 않나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "절대 엉엉 울지 않고"
+              },
+              {
+                "id": "B",
+                "text": "절대 밥을 먹지 않고"
+              },
+              {
+                "id": "C",
+                "text": "절대 눈을 뜨지 않고"
+              },
+              {
+                "id": "D",
+                "text": "절대 화를 내지 않고"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 48,
+                "end": 65
+              }
+            ]
+          },
+          "question": {
+            "prompt": "나무는 절대 울지 않고 어떻게 가만히 참아내나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 눈을 꼭 감고 가만히 참아내요"
+              },
+              {
+                "id": "B",
+                "text": "주먹을 불끈 쥐고 마구 때려요"
+              },
+              {
+                "id": "C",
+                "text": "소리를 빽 지르며 도망쳐요"
+              },
+              {
+                "id": "D",
+                "text": "발을 동동 구르며 욕을 해요"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 65
+              }
+            ]
+          },
+          "question": {
+            "prompt": "두 번째 연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "잎을 다 떨구어 앙상하게 벌거벗은 나뭇가지가 추위에 떨면서도 절대 울지 않고 묵묵히 추위를 참아내는 꿋꿋한 모습"
+              },
+              {
+                "id": "B",
+                "text": "나무가 너무 추워서 덜덜 떨다가 가지가 산산조각 부러져서 온 산에 나무 파편이 날아다닌 무서운 사고"
+              },
+              {
+                "id": "C",
+                "text": "나무가 추위를 못 참고 엉엉 소리 내어 울어서 온 마을이 시끄러워 잠을 못 잔 황당무계한 이야기"
+              },
+              {
+                "id": "D",
+                "text": "나뭇가지가 추위에 꽁꽁 얼어붙어 얼음 송곳이 되어 동물들을 찔러 죽인 기괴하고 끔찍한 공포 영화"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 16
+              }
+            ]
+          },
+          "question": {
+            "prompt": "땅속 깊숙이 뻗은 튼튼한 무엇이 새근새근 잠든 씨앗들을 품어주나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "튼튼한 뿌리는"
+              },
+              {
+                "id": "B",
+                "text": "약한 이파리는"
+              },
+              {
+                "id": "C",
+                "text": "썩은 꽃잎은"
+              },
+              {
+                "id": "D",
+                "text": "부러진 가지는"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 18,
+                "end": 34
+              }
+            ]
+          },
+          "question": {
+            "prompt": "튼튼한 뿌리는 새근새근 잠든 누구를 품어주나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "잠든 씨앗들을 품어주고"
+              },
+              {
+                "id": "B",
+                "text": "잠든 괴물들을 품어주고"
+              },
+              {
+                "id": "C",
+                "text": "잠든 악당들을 품어주고"
+              },
+              {
+                "id": "D",
+                "text": "잠든 사기꾼을 품어주고"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 36,
+                "end": 53
+              }
+            ]
+          },
+          "question": {
+            "prompt": "거센 바람이 아무리 세차게 불어도 흔들리지 않고 어떻게 서 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "꼿꼿하게 버티어 서요"
+              },
+              {
+                "id": "B",
+                "text": "구부정하게 서 있어요"
+              },
+              {
+                "id": "C",
+                "text": "비틀비틀 서 있어요"
+              },
+              {
+                "id": "D",
+                "text": "바닥에 누워 있어요"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 55,
+                "end": 73
+              }
+            ]
+          },
+          "question": {
+            "prompt": "거센 바람이 세차게 불어도 나무는 흔들리지 않고 어떻게 버티어 서나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "꼿꼿하게 버티어 서요"
+              },
+              {
+                "id": "B",
+                "text": "비실비실 쓰러져요"
+              },
+              {
+                "id": "C",
+                "text": "구불구불 비틀거려요"
+              },
+              {
+                "id": "D",
+                "text": "바싹바싹 말라 죽어요"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 73
+              }
+            ]
+          },
+          "question": {
+            "prompt": "세 번째 연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "거센 바람 속에서도 흔들리지 않고 꼿꼿이 버티며 땅속 깊은 튼튼한 뿌리로 잠든 씨앗들을 품어주는 나무의 강인함"
+              },
+              {
+                "id": "B",
+                "text": "바람이 너무 세게 불어서 나무뿌리가 쑥 뽑히고 땅이 쩍 갈라져 지진이 난 무섭고 끔찍한 사연"
+              },
+              {
+                "id": "C",
+                "text": "뿌리가 괴물 촉수로 변해서 땅속 동물들을 칭칭 감아 몽땅 다 잡아먹은 소름 끼치고 기괴한 이야기"
+              },
+              {
+                "id": "D",
+                "text": "씨앗들이 흙 속에서 썩어 문드러져 악취가 진동하고 나무가 병들어 죽어버린 황당하고 슬픈 재앙"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 16
+              }
+            ]
+          },
+          "question": {
+            "prompt": "추운 겨울을 용감하게 이겨내야만 내년 봄에 무엇을 피울 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "예쁜 꽃을 피울 수 있으니까요"
+              },
+              {
+                "id": "B",
+                "text": "시커먼 독버섯을 피울 수 있으니까요"
+              },
+              {
+                "id": "C",
+                "text": "무서운 가시밭을 피울 수 있으니까요"
+              },
+              {
+                "id": "D",
+                "text": "더러운 곰팡이를 피울 수 있으니까요"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 18,
+                "end": 39
+              }
+            ]
+          },
+          "question": {
+            "prompt": "겨울 나무는 겉으로는 꽁꽁 얼었지만 마음속엔 무엇을 준비하고 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "뜨거운 봄을 준비하고 있답니다"
+              },
+              {
+                "id": "B",
+                "text": "추운 빙하기를 준비하고 있답니다"
+              },
+              {
+                "id": "C",
+                "text": "무서운 전쟁을 준비하고 있답니다"
+              },
+              {
+                "id": "D",
+                "text": "지독한 가뭄을 준비하고 있답니다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 41,
+                "end": 59
+              }
+            ]
+          },
+          "question": {
+            "prompt": "나무가 내년 봄에 예쁜 꽃을 피우기 위해서는 어떤 겨울을 용감하게 이겨내야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "추운 겨울을 용감하게 이겨내야만"
+              },
+              {
+                "id": "B",
+                "text": "시끄러운 여름을 용감하게 이겨내야만"
+              },
+              {
+                "id": "C",
+                "text": "지루한 가을을 용감하게 이겨내야만"
+              },
+              {
+                "id": "D",
+                "text": "깜깜한 밤을 용감하게 이겨내야만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 61,
+                "end": 81
+              }
+            ]
+          },
+          "question": {
+            "prompt": "겨울 나무는 겉으로는 어떻게 얼었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "꽁꽁 얼었지만"
+              },
+              {
+                "id": "B",
+                "text": "살짝 얼었지만"
+              },
+              {
+                "id": "C",
+                "text": "안 얼었지만"
+              },
+              {
+                "id": "D",
+                "text": "녹았지만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 81
+              }
+            ]
+          },
+          "question": {
+            "prompt": "네 번째 연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "겉으로는 꽁꽁 언 채 추운 겨울을 참고 견디지만 마음속으로는 다가올 봄의 예쁜 꽃을 뜨겁게 준비하는 겨울 나무의 희망"
+              },
+              {
+                "id": "B",
+                "text": "겨울을 못 견디고 나무가 스스로 불을 질러 화산처럼 폭발해 온 숲이 잿더미가 된 무서운 사고 이야기"
+              },
+              {
+                "id": "C",
+                "text": "봄이 오자 꽃 대신 끔찍한 독충들이 나무에서 쏟아져 나와 사람들을 물어뜯은 기괴하고 소름 끼치는 괴담"
+              },
+              {
+                "id": "D",
+                "text": "나무가 봄이 오는 것을 싫어해서 태양을 가려버리고 세상을 영원한 얼음장으로 만든 황당무계한 사연"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
+      "cards": [
+        {
+          "id": "c1",
+          "text": "북풍과 눈보라가 치는 겨울이 오면 나무는 단풍잎 옷을 훌훌 벗음."
+        },
+        {
+          "id": "c2",
+          "text": "앙상한 가지가 추위에 오들오들 떨지만 울지 않고 꾹 참아냄."
+        },
+        {
+          "id": "c3",
+          "text": "튼튼한 뿌리로 씨앗을 품어주고 거센 바람에도 꼿꼿하게 버팀."
+        },
+        {
+          "id": "c4",
+          "text": "추위를 이겨내야만 내년 봄에 예쁘고 화려한 꽃을 피울 수 있음."
+        },
+        {
+          "id": "c5",
+          "text": "겨울 나무는 겉으로는 얼었지만 마음속엔 뜨거운 봄을 준비함."
+        },
+        {
+          "id": "c6",
+          "text": "시련을 이겨내고 새로운 생명을 잉태하는 나무의 강인함을 배움."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "살이 빠져 뼈만 남을 정도로 몹시 마르고 가냘프며 헐벗은 모양?",
+          "answerText": "앙상한",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 5,
+              "end": 7
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "굽거나 휘지 않고 꼿꼿하고 바르게 서 있는 모양?",
+          "answerText": "꼿꼿하게",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 63,
+              "end": 66
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "어려움이나 고난을 꿋꿋하게 견디고 이겨내어 앞으로 나아감?",
+          "answerText": "이겨내야만",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        }
+      ]
     }
   }
 }
