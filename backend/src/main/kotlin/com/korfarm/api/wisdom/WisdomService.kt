@@ -4,10 +4,15 @@ import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.contracts.CreateWisdomPostRequest
 import com.korfarm.api.files.FileRepository
+import com.korfarm.api.files.FileService
 import com.korfarm.api.user.UserRepository
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.slf4j.LoggerFactory
+import java.nio.file.Files
+import java.nio.file.Paths
 
 @Service
 class WisdomService(
@@ -17,8 +22,11 @@ class WisdomService(
     private val likeRepository: WisdomLikeRepository,
     private val commentRepository: WisdomCommentRepository,
     private val fileRepository: FileRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val aiWisdomClient: AiWisdomClient,
+    @Value("\${app.upload.dir:./uploads}") private val uploadDir: String
 ) {
+    private val log = LoggerFactory.getLogger(WisdomService::class.java)
     @Transactional(readOnly = true)
     fun listPosts(levelId: String, topicKey: String?, currentUserId: String?): WisdomPostListResponse {
         // Check if user has written a post in this level+topic (for view restriction)
@@ -441,4 +449,93 @@ class WisdomService(
         correction = correction,
         createdAt = createdAt
     )
+
+    // ─── AI 첨삭 ───────────────────────────────────────
+
+    fun generateAiFeedback(postId: String): AiFeedbackResult {
+        val post = postRepository.findById(postId).orElseThrow {
+            ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val text = post.content
+        if (text.isNullOrBlank()) {
+            throw ApiException("NO_CONTENT", "글 내용이 없습니다. 파일 업로드 글은 먼저 OCR 변환이 필요합니다.", HttpStatus.BAD_REQUEST)
+        }
+        return aiWisdomClient.generateFeedback(text, post.levelId, post.topicLabel)
+    }
+
+    fun ocrPost(postId: String): OcrResult {
+        val post = postRepository.findById(postId).orElseThrow {
+            ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        val attachments = attachmentRepository.findByPostId(post.id)
+        if (attachments.isEmpty()) {
+            throw ApiException("NO_ATTACHMENT", "첨부파일이 없습니다", HttpStatus.BAD_REQUEST)
+        }
+        val imageTypes = setOf("image/jpeg", "image/png", "image/gif", "image/webp", "application/pdf")
+        val imageAttachments = attachments.filter { it.mime in imageTypes }
+        if (imageAttachments.isEmpty()) {
+            throw ApiException("NO_IMAGE", "이미지 또는 PDF 첨부파일이 없습니다", HttpStatus.BAD_REQUEST)
+        }
+        val uploadPath = Paths.get(uploadDir)
+        val imageDataList = imageAttachments.mapNotNull { att ->
+            val filePath = uploadPath.resolve(att.fileId)
+            if (Files.exists(filePath)) {
+                Pair(Files.readAllBytes(filePath), att.mime)
+            } else {
+                log.warn("첨부파일 없음: fileId={}", att.fileId)
+                null
+            }
+        }
+        if (imageDataList.isEmpty()) {
+            throw ApiException("FILE_NOT_FOUND", "서버에 파일이 존재하지 않습니다", HttpStatus.NOT_FOUND)
+        }
+        return aiWisdomClient.ocrManuscript(imageDataList)
+    }
+
+    @Transactional
+    fun ocrAndSaveContent(postId: String): OcrResult {
+        val result = ocrPost(postId)
+        if (result.text.isNotBlank()) {
+            val post = postRepository.findById(postId).orElseThrow {
+                ApiException("NOT_FOUND", "글을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+            }
+            post.content = result.text
+            postRepository.save(post)
+        }
+        return result
+    }
+
+    @Transactional
+    fun batchAiFeedback(postIds: List<String>, reviewerId: String): List<AiBatchResultItem> {
+        // 같은 레벨끼리 묶어 처리 (캐시 적중률 최대화)
+        val posts = postRepository.findAllById(postIds).associateBy { it.id }
+        val sortedIds = postIds
+            .mapNotNull { id -> posts[id]?.let { id to it } }
+            .sortedBy { it.second.levelId }
+
+        return sortedIds.map { (postId, post) ->
+            try {
+                if (post.content.isNullOrBlank()) {
+                    return@map AiBatchResultItem(postId, "skipped", "글 내용 없음 (OCR 필요)")
+                }
+                val existingFeedback = feedbackRepository.findByPostId(postId)
+                if (existingFeedback != null) {
+                    return@map AiBatchResultItem(postId, "skipped", "이미 첨삭 완료")
+                }
+                val result = aiWisdomClient.generateFeedback(post.content!!, post.levelId, post.topicLabel)
+                val feedback = WisdomFeedbackEntity(
+                    id = IdGenerator.newId("wfb"),
+                    postId = postId,
+                    reviewerId = reviewerId,
+                    comment = result.comment,
+                    correction = result.correction
+                )
+                feedbackRepository.save(feedback)
+                AiBatchResultItem(postId, "ok")
+            } catch (e: Exception) {
+                log.error("일괄 첨삭 실패: postId={}", postId, e)
+                AiBatchResultItem(postId, "error", e.message)
+            }
+        }
+    }
 }

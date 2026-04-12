@@ -30,6 +30,9 @@ function AdminWisdomDetailPage() {
   const [annotations, setAnnotations] = useState([]);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
+  const [ocrLoading, setOcrLoading] = useState(false);
+  const [ocrText, setOcrText] = useState(null);
 
   useEffect(() => {
     apiGet(`/v1/admin/wisdom/posts/${postId}`)
@@ -37,13 +40,12 @@ function AdminWisdomDetailPage() {
         setPost(data);
         if (data.feedback) {
           setComment(data.feedback.comment || "");
-          // correction 파싱
           if (data.feedback.correction) {
             try {
               const parsed = JSON.parse(data.feedback.correction);
               if (Array.isArray(parsed)) setAnnotations(parsed);
             } catch {
-              // 레거시 텍스트 — 무시
+              // 레거시 텍스트
             }
           }
         }
@@ -57,7 +59,6 @@ function AdminWisdomDetailPage() {
       setMsg("코멘트 또는 첨삭 어노테이션을 입력해주세요.");
       return;
     }
-    // 빈 코멘트 어노테이션 확인
     const emptyAnn = annotations.find((a) => !a.comment.trim());
     if (emptyAnn) {
       setMsg(`${emptyAnn.id}번 첨삭 코멘트를 입력해주세요.`);
@@ -78,6 +79,49 @@ function AdminWisdomDetailPage() {
       setMsg(err.message || "저장에 실패했습니다.");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleAiFeedback = async () => {
+    if (post.feedback && !confirm("기존 첨삭이 있습니다. AI 첨삭으로 덮어쓰시겠습니까?")) return;
+    setAiLoading(true);
+    setMsg("");
+    try {
+      const res = await apiPost(`/v1/admin/wisdom/posts/${postId}/ai-feedback`);
+      if (res.comment) setComment(res.comment);
+      if (res.correction) {
+        try {
+          const parsed = JSON.parse(res.correction);
+          if (Array.isArray(parsed)) setAnnotations(parsed);
+        } catch {
+          // fallback
+        }
+      }
+      setMsg("AI 첨삭 완료. 검토 후 '피드백 저장'을 눌러주세요.");
+    } catch (err) {
+      setMsg(err.message || "AI 첨삭에 실패했습니다.");
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
+  const handleOcr = async () => {
+    if (post.content && !confirm("기존 텍스트가 있습니다. OCR 결과로 덮어쓰시겠습니까?")) return;
+    setOcrLoading(true);
+    setMsg("");
+    try {
+      const res = await apiPost(`/v1/admin/wisdom/posts/${postId}/ocr`);
+      if (res.text) {
+        setOcrText(res.text);
+        setPost((prev) => ({ ...prev, content: res.text, submission_type: "manuscript" }));
+        setMsg("OCR 변환 완료. 원고지에서 텍스트를 확인/수정한 후 AI 첨삭을 실행하세요.");
+      } else {
+        setMsg("OCR 결과가 비어 있습니다. 이미지를 확인해주세요.");
+      }
+    } catch (err) {
+      setMsg(err.message || "OCR 변환에 실패했습니다.");
+    } finally {
+      setOcrLoading(false);
     }
   };
 
@@ -125,6 +169,8 @@ function AdminWisdomDetailPage() {
   const comments = post.comments || [];
   const gridCols = GRID_CONFIG[post.level_id]?.cols || 20;
   const gridRows = GRID_CONFIG[post.level_id]?.rows || 25;
+  const isUpload = post.submission_type !== "manuscript";
+  const hasContent = post.content && post.content.trim().length > 0;
 
   return (
     <AdminLayout>
@@ -150,41 +196,8 @@ function AdminWisdomDetailPage() {
               </table>
             </div>
 
-            {post.submission_type === "manuscript" && post.content && (
-              <div className="admin-card" style={{ marginBottom: 24 }}>
-                <h2>원고지 첨삭</h2>
-                <p style={{ padding: "0 16px", fontSize: 13, color: "#7b6a62" }}>
-                  셀을 드래그하여 첨삭 영역을 선택하세요. 선택 후 아래 줄에 코멘트를 입력합니다.
-                </p>
-                <div style={{ padding: 16 }}>
-                  <ManuscriptReview
-                    value={post.content}
-                    cols={gridCols}
-                    rows={gridRows}
-                    annotations={annotations}
-                    onAnnotationsChange={setAnnotations}
-                    readOnly={false}
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* 원고지가 아닌 경우 기존 ManuscriptGrid 표시 */}
-            {post.submission_type !== "manuscript" && post.content && (
-              <div className="admin-card" style={{ marginBottom: 24 }}>
-                <h2>내용</h2>
-                <div style={{ padding: 16 }}>
-                  <ManuscriptGrid
-                    value={post.content}
-                    readOnly
-                    cols={gridCols}
-                    rows={gridRows}
-                  />
-                </div>
-              </div>
-            )}
-
-            {post.attachments && post.attachments.length > 0 && (
+            {/* 파일 업로드 타입: 첨부파일 표시 + OCR 버튼 */}
+            {isUpload && post.attachments && post.attachments.length > 0 && (
               <div className="admin-card" style={{ marginBottom: 24 }}>
                 <h2>첨부파일</h2>
                 <div style={{ padding: 16 }}>
@@ -202,6 +215,54 @@ function AdminWisdomDetailPage() {
                       {att.name}
                     </a>
                   ))}
+                  <div style={{ marginTop: 12 }}>
+                    <button
+                      className="admin-action"
+                      style={{ background: "#2980b9" }}
+                      onClick={handleOcr}
+                      disabled={ocrLoading}
+                    >
+                      {ocrLoading ? "OCR 변환 중..." : "OCR → 원고지 변환"}
+                    </button>
+                    <span style={{ fontSize: 12, color: "#888", marginLeft: 8 }}>
+                      이미지의 손글씨를 텍스트로 변환합니다
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* 원고지 첨삭 영역 (원래 원고지 타입이거나 OCR 변환 후) */}
+            {hasContent && (
+              <div className="admin-card" style={{ marginBottom: 24 }}>
+                <h2>원고지 첨삭{ocrText ? " (OCR 변환됨)" : ""}</h2>
+                <p style={{ padding: "0 16px", fontSize: 13, color: "#7b6a62" }}>
+                  셀을 드래그하여 첨삭 영역을 선택하세요. 선택 후 아래 줄에 코멘트를 입력합니다.
+                </p>
+                <div style={{ padding: 16 }}>
+                  <ManuscriptReview
+                    value={post.content}
+                    cols={gridCols}
+                    rows={gridRows}
+                    annotations={annotations}
+                    onAnnotationsChange={setAnnotations}
+                    readOnly={false}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* 원고지가 아니고 아직 OCR도 안 한 경우 기존 ManuscriptGrid 표시 */}
+            {!hasContent && !isUpload && post.content && (
+              <div className="admin-card" style={{ marginBottom: 24 }}>
+                <h2>내용</h2>
+                <div style={{ padding: 16 }}>
+                  <ManuscriptGrid
+                    value={post.content}
+                    readOnly
+                    cols={gridCols}
+                    rows={gridRows}
+                  />
                 </div>
               </div>
             )}
@@ -244,7 +305,7 @@ function AdminWisdomDetailPage() {
 
                 {msg && (
                   <p style={{
-                    color: msg.includes("실패") || msg.includes("입력") ? "#e74c3c" : "#6da475",
+                    color: msg.includes("실패") || msg.includes("입력") || msg.includes("오류") ? "#e74c3c" : "#6da475",
                     fontSize: 14,
                     marginBottom: 12,
                   }}>
@@ -258,10 +319,12 @@ function AdminWisdomDetailPage() {
                   </button>
                   <button
                     className="admin-action"
-                    style={{ background: "#8e44ad", opacity: 0.6, cursor: "not-allowed" }}
-                    disabled
+                    style={{ background: "#8e44ad" }}
+                    onClick={handleAiFeedback}
+                    disabled={aiLoading || !hasContent}
+                    title={!hasContent ? "글 내용이 없습니다. 파일 업로드 글은 먼저 OCR 변환이 필요합니다." : ""}
                   >
-                    AI첨삭...
+                    {aiLoading ? "AI 첨삭 중..." : "AI 첨삭"}
                   </button>
                 </div>
               </div>

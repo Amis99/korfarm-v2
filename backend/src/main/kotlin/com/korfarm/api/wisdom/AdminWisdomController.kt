@@ -56,4 +56,29 @@ class AdminWisdomController(
         wisdomService.deleteComment(commentId, userId, isAdmin = true)
         return ApiResponse(success = true, data = mapOf("status" to "deleted"))
     }
+
+    // ─── AI 첨삭 ───────────────────────────────────────
+
+    @PostMapping("/posts/{postId}/ai-feedback")
+    fun aiFeedback(@PathVariable postId: String): ApiResponse<AiFeedbackResult> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val result = wisdomService.generateAiFeedback(postId)
+        return ApiResponse(success = true, data = result)
+    }
+
+    @PostMapping("/posts/{postId}/ocr")
+    fun ocr(@PathVariable postId: String): ApiResponse<OcrResult> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val result = wisdomService.ocrAndSaveContent(postId)
+        return ApiResponse(success = true, data = result)
+    }
+
+    @PostMapping("/ai-feedback-batch")
+    fun aiFeedbackBatch(@RequestBody request: AiBatchRequest): ApiResponse<List<AiBatchResultItem>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val reviewerId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val results = wisdomService.batchAiFeedback(request.postIds, reviewerId)
+        return ApiResponse(success = true, data = results)
+    }
 }

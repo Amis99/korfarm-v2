@@ -90,3 +90,14 @@ data class AdminWisdomPostDetail(
     val status: String,
     val createdAt: LocalDateTime
 )
+
+// AI 첨삭 일괄 요청/응답
+data class AiBatchRequest(
+    val postIds: List<String> = emptyList()
+)
+
+data class AiBatchResultItem(
+    val postId: String,
+    val status: String,
+    val reason: String? = null
+)
