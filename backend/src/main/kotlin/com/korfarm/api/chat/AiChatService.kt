@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter
 @Service
 class AiChatService(
     private val messageRepo: ChatMessageRepository,
+    private val referenceRepo: AiChatReferenceRepository,
     private val aiPromptRepository: AiPromptRepository,
     private val objectMapper: ObjectMapper,
     @Value("\${claude.api.key:}") private val apiKey: String,
@@ -93,8 +94,9 @@ class AiChatService(
             triggerMessage.roomId, null, PageRequest.of(0, 30)
         ).reversed()
 
-        // 2. 과거 관련 대화 검색 (FULLTEXT, 최근 30건 이전 범위)
+        // 2. 과거 관련 대화 검색 (chat_messages FULLTEXT + ai_chat_references)
         val relevantPast = searchRelevantHistory(triggerMessage)
+        val referenceKnowledge = searchReferences(triggerMessage)
 
         // 3. 시스템 프롬프트
         val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
@@ -108,14 +110,19 @@ class AiChatService(
         }
 
         val userMessage = buildString {
+            if (referenceKnowledge.isNotBlank()) {
+                append("[참고 자료 - 국어농장 프로그램/조쌤 발언]\n")
+                append(referenceKnowledge)
+                append("\n\n")
+            }
             if (relevantPast.isNotBlank()) {
-                append("[참고: 과거 관련 대화]\n")
+                append("[참고: 과거 커뮤니티 대화]\n")
                 append(relevantPast)
                 append("\n\n")
             }
             append("[최근 대화]\n")
             append(chatHistory)
-            append("\n\n위 대화에서 \"포도\"가 호출되었습니다. 자연스럽게 응답하세요. 텍스트만 출력하세요.")
+            append("\n\n위 대화에서 \"포도\"가 호출되었습니다. 참고 자료를 우선 참고하여 자연스럽게 응답하세요. 텍스트만 출력하세요.")
         }
 
         val requestBody = objectMapper.writeValueAsString(mapOf(
@@ -148,6 +155,32 @@ class AiChatService(
         val responseMap = objectMapper.readValue(response.body(), Map::class.java)
         val content = (responseMap["content"] as? List<*>)?.firstOrNull() as? Map<*, *>
         return (content?.get("text") as? String)?.trim() ?: ""
+    }
+
+    /**
+     * ai_chat_references에서 관련 프로그램 지식/조쌤 발언 검색.
+     */
+    private fun searchReferences(triggerMessage: ChatMessageEntity): String {
+        val question = triggerMessage.content ?: return ""
+        val cleaned = question.replace(TRIGGER_PATTERN, "").trim()
+        if (cleaned.length < 2) return ""
+
+        return try {
+            val results = referenceRepo.searchRelevant(cleaned, 8)
+            if (results.isEmpty()) return ""
+
+            results.joinToString("\n") { ref ->
+                val label = when (ref.source) {
+                    "program_doc" -> "[프로그램]"
+                    "kakao_cho" -> "[조쌤]"
+                    else -> "[참고]"
+                }
+                "$label ${ref.content}"
+            }
+        } catch (e: Exception) {
+            log.warn("참고 자료 검색 실패", e)
+            ""
+        }
     }
 
     /**
