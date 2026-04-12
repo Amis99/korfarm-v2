@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { API_BASE, TOKEN_KEY } from "../../utils/api";
 import { useEmoticons, findEmoticonById } from "../../hooks/useEmoticons";
 import EmoticonImage from "./EmoticonImage";
@@ -346,7 +348,11 @@ function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onSho
                   ✕
                 </button>
               )}
-              {message.content && <div className="chat-text">{message.content}</div>}
+              {message.content && (
+                <div className="chat-text">
+                  <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
+                </div>
+              )}
               {renderAttachment(message)}
               {message.likeCount > 0 && (
                 <button
