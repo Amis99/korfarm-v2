@@ -1,32 +1,35 @@
 {
-  "contentId": "dr-f1-188",
+  "contentId": "dr-frege1-188",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "운동장",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[문학] 연필의 하루",
+  "description": "본문을 읽고 내용을 이해하는 능력을 기릅니다.",
   "targetLevel": "FREGE_1",
   "schoolGradeRange": {
     "min": 4,
     "max": 4
   },
-  "area": "READING",
-  "subArea": "LITERATURE",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "문학",
+    "시",
+    "동시"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
+  "timeLimitSec": 900,
   "assets": {},
   "payload": {
     "passage": {
@@ -34,32 +37,898 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "쉬는 시간 / 종이 울리면 / 교실 문이 우르르 열린다 // 아이들이 운동장으로 / 쏟아져 나온다 / 봄볕처럼"
+          "text": "사각사각 아침부터\n바쁘게 달리는 나\n하얀 공책 위에서\n글씨를 그려 내네."
         },
         {
           "id": "p2",
-          "text": "공이 날아가고 / 줄넘기 줄이 돌아가고 / 누군가는 넘어지고 / 누군가는 일어서고 // 운동장은 / 잠시도 쉬지 않는다"
+          "text": "뾰족했던 내 머리\n조금씩 뭉툭해져도\n너의 생각 적어 주니\n나는 참 기쁘단다."
         },
         {
           "id": "p3",
-          "text": "철봉에 매달린 아이 / 몇 초나 버틸 수 있나 / 세는 동안 / 잠깐은 영웅이 된다 // 모래 위에 발자국 / 이미 수천 개"
+          "text": "스르륵스르륵 지우개\n실수하면 도와주네\n우리 둘이 함께라면\n어려운 숙제도 끝."
         },
         {
           "id": "p4",
-          "text": "수업 시작 종이 울리면 / 아이들이 다시 / 교실로 쏙 들어간다 // 운동장은 또 / 조용히 혼자 남아 / 다음 종소리를 기다린다"
+          "text": "짧아진 내 모습\n보물처럼 아껴주렴\n내일도 모레도\n너와 함께 달릴게."
         }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 8
+              }
+            ]
+          },
+          "question": {
+            "prompt": "연필이 아침부터 바쁘게 달릴 때 어떤 소리가 나나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사각사각"
+              },
+              {
+                "id": "B",
+                "text": "쿵쾅쿵쾅"
+              },
+              {
+                "id": "C",
+                "text": "딸랑딸랑"
+              },
+              {
+                "id": "D",
+                "text": "삑삑삑"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 10,
+                "end": 18
+              }
+            ]
+          },
+          "question": {
+            "prompt": "연필은 언제부터 바쁘게 달리나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아침부터"
+              },
+              {
+                "id": "B",
+                "text": "점심부터"
+              },
+              {
+                "id": "C",
+                "text": "저녁부터"
+              },
+              {
+                "id": "D",
+                "text": "밤부터"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 20,
+                "end": 28
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇 위에서 바쁘게 달리나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하얀 공책 위에서"
+              },
+              {
+                "id": "B",
+                "text": "검은 칠판 위에서"
+              },
+              {
+                "id": "C",
+                "text": "빨간 도화지 위에서"
+              },
+              {
+                "id": "D",
+                "text": "파란 벽 위에서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 30,
+                "end": 39
+              }
+            ]
+          },
+          "question": {
+            "prompt": "연필은 공책 위에서 무엇을 그려 내나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글씨를 그려 내네"
+              },
+              {
+                "id": "B",
+                "text": "그림을 지워 내네"
+              },
+              {
+                "id": "C",
+                "text": "얼굴을 잘라 내네"
+              },
+              {
+                "id": "D",
+                "text": "구멍을 파 내네"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 39
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아침부터 하얀 공책 위에 사각사각 글씨를 쓰는 연필"
+              },
+              {
+                "id": "B",
+                "text": "연필이 도망가서 아무것도 쓰지 못한 아침"
+              },
+              {
+                "id": "C",
+                "text": "너무 시끄럽게 소리 나는 연필이 부러진 이야기"
+              },
+              {
+                "id": "D",
+                "text": "글씨 대신 얼굴에 낙서를 해서 혼난 연필"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 8
+              }
+            ]
+          },
+          "question": {
+            "prompt": "처음에 연필의 머리 모양은 어땠나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "뾰족했던 내 머리"
+              },
+              {
+                "id": "B",
+                "text": "둥글었던 내 머리"
+              },
+              {
+                "id": "C",
+                "text": "납작했던 내 머리"
+              },
+              {
+                "id": "D",
+                "text": "울퉁불퉁 내 머리"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 10,
+                "end": 18
+              }
+            ]
+          },
+          "question": {
+            "prompt": "조금씩 쓰다 보면 연필 머리는 어떻게 되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "뭉툭해져도"
+              },
+              {
+                "id": "B",
+                "text": "더 뾰족해져도"
+              },
+              {
+                "id": "C",
+                "text": "날카로워져도"
+              },
+              {
+                "id": "D",
+                "text": "길어져도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 20,
+                "end": 30
+              }
+            ]
+          },
+          "question": {
+            "prompt": "연필은 너의 무엇을 적어 줄 때 참 기쁜가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "너의 생각 적어 주니"
+              },
+              {
+                "id": "B",
+                "text": "남의 흉을 적어 주니"
+              },
+              {
+                "id": "C",
+                "text": "나쁜 말 적어 주니"
+              },
+              {
+                "id": "D",
+                "text": "어려운 수학 적어 주니"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 32,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "너의 생각을 적어 주는 연필의 기분은 어떤가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나는 참 기쁘단다"
+              },
+              {
+                "id": "B",
+                "text": "나는 참 슬프단다"
+              },
+              {
+                "id": "C",
+                "text": "나는 화가 난단다"
+              },
+              {
+                "id": "D",
+                "text": "나는 참 졸리단다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "머리가 뭉툭해져도 생각을 적어 주어 기쁜 연필의 마음"
+              },
+              {
+                "id": "B",
+                "text": "뾰족한 연필이 화가 나서 공책을 찢어버린 이야기"
+              },
+              {
+                "id": "C",
+                "text": "아무리 써도 뭉툭해지지 않는 요술 연필의 비밀"
+              },
+              {
+                "id": "D",
+                "text": "생각이 나지 않아 아무것도 못 적고 우는 연필"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 9
+              }
+            ]
+          },
+          "question": {
+            "prompt": "실수하면 어떤 친구가 도와주나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "스르륵스르륵 지우개"
+              },
+              {
+                "id": "B",
+                "text": "반짝반짝 형광펜"
+              },
+              {
+                "id": "C",
+                "text": "알록달록 크레파스"
+              },
+              {
+                "id": "D",
+                "text": "삐죽삐죽 볼펜"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 11,
+                "end": 19
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지우개는 연필이 언제 도와주나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실수하면 도와주네"
+              },
+              {
+                "id": "B",
+                "text": "잠을 잘 때 도와주네"
+              },
+              {
+                "id": "C",
+                "text": "노래할 때 도와주네"
+              },
+              {
+                "id": "D",
+                "text": "춤을 출 때 도와주네"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 21,
+                "end": 30
+              }
+            ]
+          },
+          "question": {
+            "prompt": "연필과 지우개가 어떻게 하면 숙제가 끝나나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우리 둘이 함께라면"
+              },
+              {
+                "id": "B",
+                "text": "우리 둘이 싸운다면"
+              },
+              {
+                "id": "C",
+                "text": "우리 둘이 도망간다면"
+              },
+              {
+                "id": "D",
+                "text": "혼자서만 남아있다면"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 32,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "함께라면 어떤 것도 끝낼 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어려운 숙제도 끝"
+              },
+              {
+                "id": "B",
+                "text": "맛있는 밥도 끝"
+              },
+              {
+                "id": "C",
+                "text": "즐거운 놀이도 끝"
+              },
+              {
+                "id": "D",
+                "text": "무서운 영화도 끝"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실수할 때 도와주는 짝꿍 지우개와 함께 숙제하기"
+              },
+              {
+                "id": "B",
+                "text": "지우개가 너무 무서워서 연필이 도망간 슬픈 사연"
+              },
+              {
+                "id": "C",
+                "text": "서로 너무 달라서 늘 다투기만 하는 지우개와 연필"
+              },
+              {
+                "id": "D",
+                "text": "숙제가 너무 많아서 지우개가 지워버린 장난"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 7
+              }
+            ]
+          },
+          "question": {
+            "prompt": "연필의 모습은 점점 어떻게 변했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "짧아진 내 모습"
+              },
+              {
+                "id": "B",
+                "text": "뚱뚱해진 내 모습"
+              },
+              {
+                "id": "C",
+                "text": "길어진 내 모습"
+              },
+              {
+                "id": "D",
+                "text": "파래진 내 모습"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 9,
+                "end": 17
+              }
+            ]
+          },
+          "question": {
+            "prompt": "짧아진 연필을 어떻게 아껴달라고 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "보물처럼 아껴주렴"
+              },
+              {
+                "id": "B",
+                "text": "쓰레기처럼 버려주렴"
+              },
+              {
+                "id": "C",
+                "text": "장난감처럼 던져주렴"
+              },
+              {
+                "id": "D",
+                "text": "음식처럼 먹어주렴"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 19,
+                "end": 25
+              }
+            ]
+          },
+          "question": {
+            "prompt": "연필은 언제까지나 함께 달릴 것이라고 했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내일도 모레도"
+              },
+              {
+                "id": "B",
+                "text": "오늘만 달리고 끝"
+              },
+              {
+                "id": "C",
+                "text": "어제까지만 함께"
+              },
+              {
+                "id": "D",
+                "text": "내일부터는 도망"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 27,
+                "end": 36
+              }
+            ]
+          },
+          "question": {
+            "prompt": "연필은 누구와 함께 달리겠다고 약속했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "너와 함께 달릴게"
+              },
+              {
+                "id": "B",
+                "text": "바람과 함께 달릴게"
+              },
+              {
+                "id": "C",
+                "text": "구름과 함께 달릴게"
+              },
+              {
+                "id": "D",
+                "text": "책상과 함께 달릴게"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 36
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "짧아진 자신을 보물처럼 아껴주면 계속 곁에 있겠다는 약속"
+              },
+              {
+                "id": "B",
+                "text": "연필이 너무 짧아서 버려진 쓸쓸한 이야기"
+              },
+              {
+                "id": "C",
+                "text": "연필이 새것으로 변신해서 모두를 놀라게 한 일"
+              },
+              {
+                "id": "D",
+                "text": "연필과 지우개가 싸우고 서로 영원히 헤어진 슬픔"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
+      "cards": [
+        {
+          "id": "c1",
+          "text": "연필은 아침부터 공책 위에서 바쁘게 글씨를 씀."
+        },
+        {
+          "id": "c2",
+          "text": "뾰족했던 머리가 뭉툭해져도 생각을 적어 주어 기쁨."
+        },
+        {
+          "id": "c3",
+          "text": "실수하면 지우개가 도와주어 어려운 숙제도 끝냄."
+        },
+        {
+          "id": "c4",
+          "text": "짧아진 모습을 아껴주면 계속 함께 달릴 것임."
+        },
+        {
+          "id": "c5",
+          "text": "연필과 지우개는 서로 도와주는 좋은 친구임."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "아침부터 바쁘게 달리며 글씨를 그리는 소리는 무엇인가요?",
+          "answerText": "사각사각",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 3
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "글씨를 쓰는 곳은 하얀 무엇 위인가요?",
+          "answerText": "공책",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 23,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "실수하면 도와주는 것은 누구인가요?",
+          "answerText": "지우개",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 7,
+              "end": 9
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        }
+      ]
     }
   }
 }
