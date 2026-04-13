@@ -30,7 +30,7 @@ class AiWisdomClient(
 ) {
     private val logger = LoggerFactory.getLogger(AiWisdomClient::class.java)
     private val httpClient = HttpClient.newHttpClient()
-    private val modelId = "claude-haiku-4-5-20251001"
+    private val modelId = "claude-sonnet-4-6-20250514"
 
     // ─── OCR ────────────────────────────────────────────
 

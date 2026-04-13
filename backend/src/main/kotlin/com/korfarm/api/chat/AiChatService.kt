@@ -26,7 +26,7 @@ class AiChatService(
 ) {
     private val log = LoggerFactory.getLogger(AiChatService::class.java)
     private val httpClient = HttpClient.newHttpClient()
-    private val modelId = "claude-haiku-4-5-20251001"
+    private val modelId = "claude-sonnet-4-6-20250514"
     private val isoFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
     companion object {
