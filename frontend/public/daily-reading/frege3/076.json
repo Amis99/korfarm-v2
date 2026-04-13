@@ -16,7 +16,13 @@
         {
           "type": "DETAIL",
           "highlight": {
-            "ranges": []
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 11
+              }
+            ]
           },
           "question": {
             "prompt": "어떻게 보아야 예쁘다고 했나요?",
@@ -56,13 +62,26 @@
                 "id": "D",
                 "text": "4"
               }
-            ]
-          }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s1"
         },
         {
           "type": "DETAIL",
           "highlight": {
-            "ranges": []
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 13,
+                "end": 25
+              }
+            ]
           },
           "question": {
             "prompt": "어떻게 보아야 사랑스럽다고 했나요?",
@@ -102,13 +121,26 @@
                 "id": "D",
                 "text": "4"
               }
-            ]
-          }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s2"
         },
         {
           "type": "DETAIL",
           "highlight": {
-            "ranges": []
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 27,
+                "end": 33
+              }
+            ]
           },
           "question": {
             "prompt": "화자는 결국 누구에게 말을 건네고 있나요?",
@@ -148,8 +180,15 @@
                 "id": "D",
                 "text": "4"
               }
-            ]
-          }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s3"
         },
         {
           "type": "SUMMARY",
@@ -194,8 +233,15 @@
                 "id": "D",
                 "text": "4"
               }
-            ]
-          }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s4"
         }
       ]
     },
@@ -269,7 +315,15 @@
               "id": "D",
               "text": "4"
             }
-          ]
+          ],
+          "id": "q1",
+          "answerMatchMode": "EXACT",
+          "revealOnWrong": true,
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
         },
         {
           "prompt": "풀꽃의 사랑스러움을 느끼기 위한 두 번째 방법은?",
@@ -315,7 +369,15 @@
               "id": "D",
               "text": "4"
             }
-          ]
+          ],
+          "id": "q2",
+          "answerMatchMode": "EXACT",
+          "revealOnWrong": true,
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
         },
         {
           "prompt": "이 시에서 '풀꽃'과 동일시되는 대상은 누구인가요?",
@@ -361,9 +423,21 @@
               "id": "D",
               "text": "4"
             }
-          ]
+          ],
+          "id": "q3",
+          "answerMatchMode": "EXACT",
+          "revealOnWrong": true,
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
         }
       ]
     }
+  },
+  "schoolGradeRange": {
+    "min": 6,
+    "max": 6
   }
 }

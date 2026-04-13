@@ -1,65 +1,2083 @@
 {
-  "contentId": "dr-f3-228",
-  "contentType": "DAILY_READING",
-  "version": 1,
-  "status": "PUBLISHED",
-  "title": "별 하나에 새긴 멀고 슬픈 그리움, 별 헤는 밤",
-  "description": "일일 독해 - 정독·복기·확인",
+  "contentId": "dr-frege3-228",
+  "title": "사과 한 알의 여행",
   "targetLevel": "FREGE_3",
-  "schoolGradeRange": {
-    "min": 6,
-    "max": 6
-  },
-  "area": "READING",
-  "subArea": "LITERATURE",
-  "competencies": [
-    "READING"
-  ],
-  "tags": [
-    "daily"
-  ],
-  "access": {
-    "mode": "FREE"
-  },
-  "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
-    "multiplier": 1
-  },
-  "timeLimitSec": 300,
-  "assets": {},
   "payload": {
     "passage": {
-      "format": "TEXT",
       "paragraphs": [
         {
           "id": "p1",
-          "text": "밤하늘 우주에는 빛나는 별빛이 많습니다. 나는 넓은 하늘을 보면서 별들을 조용히 셉니다."
+          "text": "따스한 봄날 하얀 꽃잎이 떨어져요.\n그 자리에 작은 초록 사과가 맺혔어요.\n사과는 햇살을 받으며 무럭무럭 자라요.\n바람이 불면 가지에 매달려 춤을 춰요.\n여름비가 내리면 깨끗하게 목욕을 해요."
         },
         {
           "id": "p2",
-          "text": "가슴 속에 별들을 다 못 세는 이유가 있습니다. 내일 밤이 있고 나의 청춘이 가득 남았기 때문입니다."
+          "text": "가을이 되자 사과는 빨갛게 익어갔어요.\n탐스러운 모습에 새들이 날아와요.\n농부 아저씨가 밝은 웃음으로 다가와요.\n사과는 조심스럽게 바구니에 담겼어요.\n이제 새로운 여행이 시작될 거예요."
         },
         {
           "id": "p3",
-          "text": "별 하나에 소중한 옛날 추억이 담겨 있습니다. 별 하나에 예쁜 마음 사랑이 가득 담겨 있습니다."
+          "text": "덜컹거리는 트럭을 타고 도시에 도착했어요.\n넓은 시장에 많은 과일이 모여 있었어요.\n사과는 사람들의 눈길을 기다렸어요.\n어느 꼬마가 사과를 가리키며 웃었어요.\n사과는 꼬마의 집으로 가게 되었어요."
         },
         {
           "id": "p4",
-          "text": "나는 어머니를 조용히 부르며 별들의 이름을 써봅니다. 봄이 내년에 오면 언덕 위에 풀이 길게 자랄 것입니다."
+          "text": "꼬마의 엄마가 사과를 깨끗이 씻어주었어요.\n사과는 예쁜 접시 위에 올려졌어요.\n가족들이 둘러앉아 사과를 바라보았어요.\n달콤한 향기가 온 집안에 퍼졌어요.\n사과는 모두를 행복하게 만들어 주었어요."
+        },
+        {
+          "id": "p5",
+          "text": "사과의 여행은 여기서 끝이 아니에요.\n사과 씨앗은 흙 속에 심어질 거예요.\n새싹이 돋고 다시 나무로 자라날 거예요.\n언젠가 또 다른 사과를 맺을 거예요.\n생명의 여행은 계속 이어질 거예요."
         }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 18
+              }
+            ]
+          },
+          "prompt": "봄날 무엇이 떨어지나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "하얀 꽃잎"
+            },
+            {
+              "id": "B",
+              "text": "노란 나뭇잎"
+            },
+            {
+              "id": "C",
+              "text": "초록 풀잎"
+            },
+            {
+              "id": "D",
+              "text": "빨간 꽃잎"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s1"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 20,
+                "end": 40
+              }
+            ]
+          },
+          "prompt": "그 자리에 무엇이 맺혔나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "초록 사과"
+            },
+            {
+              "id": "B",
+              "text": "빨간 사과"
+            },
+            {
+              "id": "C",
+              "text": "포도알"
+            },
+            {
+              "id": "D",
+              "text": "복숭아"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s2"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 42,
+                "end": 62
+              }
+            ]
+          },
+          "prompt": "무엇을 받으며 자라나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "햇살"
+            },
+            {
+              "id": "B",
+              "text": "바람"
+            },
+            {
+              "id": "C",
+              "text": "눈"
+            },
+            {
+              "id": "D",
+              "text": "번개"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s3"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 64,
+                "end": 84
+              }
+            ]
+          },
+          "prompt": "바람이 불면 어떻게 하나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "춤을 춰요"
+            },
+            {
+              "id": "B",
+              "text": "떨어져요"
+            },
+            {
+              "id": "C",
+              "text": "울어요"
+            },
+            {
+              "id": "D",
+              "text": "숨어요"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s4"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 86,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "여름비가 내리면 무엇을 하나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "목욕을 해요"
+            },
+            {
+              "id": "B",
+              "text": "노래를 해요"
+            },
+            {
+              "id": "C",
+              "text": "잠을 자요"
+            },
+            {
+              "id": "D",
+              "text": "밥을 먹어요"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s5"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "1문단의 중심 생각은?",
+          "options": [
+            {
+              "id": "A",
+              "text": "사과가 자라나는 모습"
+            },
+            {
+              "id": "B",
+              "text": "사과가 떨어지는 모습"
+            },
+            {
+              "id": "C",
+              "text": "사과꽃이 피는 모습"
+            },
+            {
+              "id": "D",
+              "text": "사과를 먹는 모습"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s6"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "가을이 되자 어떻게 되었나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "빨갛게 익어갔어요"
+            },
+            {
+              "id": "B",
+              "text": "파랗게 변했어요"
+            },
+            {
+              "id": "C",
+              "text": "노랗게 물들었어요"
+            },
+            {
+              "id": "D",
+              "text": "까맣게 시들었어요"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s7"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "누가 날아오나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "새들"
+            },
+            {
+              "id": "B",
+              "text": "나비들"
+            },
+            {
+              "id": "C",
+              "text": "벌들"
+            },
+            {
+              "id": "D",
+              "text": "잠자리들"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s8"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "누가 다가오나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "농부 아저씨"
+            },
+            {
+              "id": "B",
+              "text": "우체부 아저씨"
+            },
+            {
+              "id": "C",
+              "text": "경찰 아저씨"
+            },
+            {
+              "id": "D",
+              "text": "의사 선생님"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s9"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "사과는 어디에 담겼나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "바구니"
+            },
+            {
+              "id": "B",
+              "text": "가방"
+            },
+            {
+              "id": "C",
+              "text": "상자"
+            },
+            {
+              "id": "D",
+              "text": "주머니"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s10"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "무엇이 시작될 건가요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "새로운 여행"
+            },
+            {
+              "id": "B",
+              "text": "긴 낮잠"
+            },
+            {
+              "id": "C",
+              "text": "무서운 시험"
+            },
+            {
+              "id": "D",
+              "text": "숨바꼭질"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s11"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "2문단의 중심 생각은?",
+          "options": [
+            {
+              "id": "A",
+              "text": "수확되는 사과의 모습"
+            },
+            {
+              "id": "B",
+              "text": "사과꽃이 지는 모습"
+            },
+            {
+              "id": "C",
+              "text": "새들이 사과를 파먹음"
+            },
+            {
+              "id": "D",
+              "text": "농부가 사과를 버림"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s12"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "무엇을 타고 도시에 왔나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "트럭"
+            },
+            {
+              "id": "B",
+              "text": "기차"
+            },
+            {
+              "id": "C",
+              "text": "배"
+            },
+            {
+              "id": "D",
+              "text": "비행기"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s13"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "시장에 무엇이 모여 있었나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "많은 과일"
+            },
+            {
+              "id": "B",
+              "text": "많은 채소"
+            },
+            {
+              "id": "C",
+              "text": "많은 생선"
+            },
+            {
+              "id": "D",
+              "text": "많은 장난감"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s14"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "누구의 눈길을 기다렸나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "사람들"
+            },
+            {
+              "id": "B",
+              "text": "동물들"
+            },
+            {
+              "id": "C",
+              "text": "새들"
+            },
+            {
+              "id": "D",
+              "text": "벌레들"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s15"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "누가 사과를 가리켰나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "어느 꼬마"
+            },
+            {
+              "id": "B",
+              "text": "할머니"
+            },
+            {
+              "id": "C",
+              "text": "아저씨"
+            },
+            {
+              "id": "D",
+              "text": "경찰관"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s16"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "사과는 어디로 가게 되었나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "꼬마의 집"
+            },
+            {
+              "id": "B",
+              "text": "학교"
+            },
+            {
+              "id": "C",
+              "text": "병원"
+            },
+            {
+              "id": "D",
+              "text": "식당"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s17"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "3문단의 중심 생각은?",
+          "options": [
+            {
+              "id": "A",
+              "text": "시장을 거쳐 팔린 사과"
+            },
+            {
+              "id": "B",
+              "text": "트럭이 고장 난 이야기"
+            },
+            {
+              "id": "C",
+              "text": "시장에서 길을 잃음"
+            },
+            {
+              "id": "D",
+              "text": "과일들이 싸우는 이야기"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s18"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "누가 사과를 씻어주었나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "꼬마의 엄마"
+            },
+            {
+              "id": "B",
+              "text": "꼬마의 아빠"
+            },
+            {
+              "id": "C",
+              "text": "할아버지"
+            },
+            {
+              "id": "D",
+              "text": "선생님"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s19"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "어디 위에 올려졌나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "예쁜 접시"
+            },
+            {
+              "id": "B",
+              "text": "낡은 책상"
+            },
+            {
+              "id": "C",
+              "text": "차가운 바닥"
+            },
+            {
+              "id": "D",
+              "text": "뜨거운 냄비"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s20"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "누가 둘러앉아 바라보았나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "가족들"
+            },
+            {
+              "id": "B",
+              "text": "친구들"
+            },
+            {
+              "id": "C",
+              "text": "이웃들"
+            },
+            {
+              "id": "D",
+              "text": "손님들"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s21"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "집안에 무엇이 퍼졌나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "달콤한 향기"
+            },
+            {
+              "id": "B",
+              "text": "매운 냄새"
+            },
+            {
+              "id": "C",
+              "text": "시큼한 냄새"
+            },
+            {
+              "id": "D",
+              "text": "탄 냄새"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s22"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "사과는 모두를 어떻게 했나요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "행복하게 만들었다"
+            },
+            {
+              "id": "B",
+              "text": "슬프게 만들었다"
+            },
+            {
+              "id": "C",
+              "text": "화나게 만들었다"
+            },
+            {
+              "id": "D",
+              "text": "피곤하게 만들었다"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s23"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "4문단의 중심 생각은?",
+          "options": [
+            {
+              "id": "A",
+              "text": "가족들에게 기쁨을 주는 사과"
+            },
+            {
+              "id": "B",
+              "text": "사과가 썩어가는 모습"
+            },
+            {
+              "id": "C",
+              "text": "사과를 버리는 이야기"
+            },
+            {
+              "id": "D",
+              "text": "사과 요리를 실패함"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s24"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "사과의 여행은 여기서 끝인가요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "끝이 아니에요"
+            },
+            {
+              "id": "B",
+              "text": "네 끝이에요"
+            },
+            {
+              "id": "C",
+              "text": "벌써 끝났어요"
+            },
+            {
+              "id": "D",
+              "text": "모르겠어요"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s25"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "사과 씨앗은 어디에 심어질까요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "흙 속"
+            },
+            {
+              "id": "B",
+              "text": "물 속"
+            },
+            {
+              "id": "C",
+              "text": "바위 위"
+            },
+            {
+              "id": "D",
+              "text": "구름 위"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s26"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "다시 무엇으로 자라날까요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "나무"
+            },
+            {
+              "id": "B",
+              "text": "풀"
+            },
+            {
+              "id": "C",
+              "text": "꽃"
+            },
+            {
+              "id": "D",
+              "text": "잡초"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s27"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "언젠가 또 무엇을 맺을까요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "다른 사과"
+            },
+            {
+              "id": "B",
+              "text": "다른 포도"
+            },
+            {
+              "id": "C",
+              "text": "다른 배"
+            },
+            {
+              "id": "D",
+              "text": "다른 귤"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s28"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "무엇이 계속 이어질까요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "생명의 여행"
+            },
+            {
+              "id": "B",
+              "text": "죽음의 여행"
+            },
+            {
+              "id": "C",
+              "text": "슬픈 여행"
+            },
+            {
+              "id": "D",
+              "text": "무서운 여행"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s29"
+        },
+        {
+          "type": "MULTIPLE_CHOICE",
+          "paragraphId": "p5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 106
+              }
+            ]
+          },
+          "prompt": "5문단의 중심 생각은?",
+          "options": [
+            {
+              "id": "A",
+              "text": "씨앗으로 이어지는 생명"
+            },
+            {
+              "id": "B",
+              "text": "사과나무가 베어지는 모습"
+            },
+            {
+              "id": "C",
+              "text": "사과가 다시 열리지 않음"
+            },
+            {
+              "id": "D",
+              "text": "여행의 영원한 끝"
+            }
+          ],
+          "answer": "A",
+          "question": {
+            "prompt": "문제",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1"
+              },
+              {
+                "id": "B",
+                "text": "2"
+              },
+              {
+                "id": "C",
+                "text": "3"
+              },
+              {
+                "id": "D",
+                "text": "4"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          },
+          "stepId": "s30"
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
+      "cards": [
+        {
+          "id": "c1",
+          "text": "사건의 배경 이해하기"
+        },
+        {
+          "id": "c2",
+          "text": "주요 갈등 파악하기"
+        },
+        {
+          "id": "c3",
+          "text": "해결 방안 모색하기"
+        },
+        {
+          "id": "c4",
+          "text": "핵심 내용 요약하기"
+        },
+        {
+          "id": "c5",
+          "text": "글의 교훈 돌아보기"
+        }
+      ]
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "type": "MULTIPLE_CHOICE",
+          "prompt": "이 글의 핵심 주제는 무엇인가요?",
+          "options": [
+            {
+              "id": "A",
+              "text": "본문의 핵심 주제"
+            },
+            {
+              "id": "B",
+              "text": "관련 없는 이야기"
+            },
+            {
+              "id": "C",
+              "text": "지나치게 지엽적인 내용"
+            },
+            {
+              "id": "D",
+              "text": "완전히 반대되는 내용"
+            }
+          ],
+          "answer": "A",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "ranges": [
+                {
+                  "start": 0,
+                  "end": 19
+                }
+              ],
+              "start": 0,
+              "end": 10
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "정답"
+            },
+            {
+              "id": "B",
+              "text": "오답1"
+            },
+            {
+              "id": "C",
+              "text": "오답2"
+            },
+            {
+              "id": "D",
+              "text": "오답3"
+            }
+          ],
+          "answerMatchMode": "EXACT",
+          "revealOnWrong": true,
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "id": "q2",
+          "type": "MULTIPLE_CHOICE",
+          "prompt": "글쓴이의 주된 생각이나 감정은?",
+          "options": [
+            {
+              "id": "A",
+              "text": "글쓴이의 핵심 의도"
+            },
+            {
+              "id": "B",
+              "text": "글쓴이가 부정한 생각"
+            },
+            {
+              "id": "C",
+              "text": "무관심한 태도"
+            },
+            {
+              "id": "D",
+              "text": "전혀 다른 인물의 생각"
+            }
+          ],
+          "answer": "A",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "ranges": [
+                {
+                  "start": 0,
+                  "end": 19
+                }
+              ],
+              "start": 0,
+              "end": 10
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "정답"
+            },
+            {
+              "id": "B",
+              "text": "오답1"
+            },
+            {
+              "id": "C",
+              "text": "오답2"
+            },
+            {
+              "id": "D",
+              "text": "오답3"
+            }
+          ],
+          "answerMatchMode": "EXACT",
+          "revealOnWrong": true,
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "id": "q3",
+          "type": "MULTIPLE_CHOICE",
+          "prompt": "가장 중요한 해결책이나 행동은?",
+          "options": [
+            {
+              "id": "A",
+              "text": "본문에서 강조한 행동"
+            },
+            {
+              "id": "B",
+              "text": "본문에서 피하라고 한 행동"
+            },
+            {
+              "id": "C",
+              "text": "현실성 없는 행동"
+            },
+            {
+              "id": "D",
+              "text": "상관없는 행동"
+            }
+          ],
+          "answer": "A",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "ranges": [
+                {
+                  "start": 0,
+                  "end": 19
+                }
+              ],
+              "start": 0,
+              "end": 10
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "정답"
+            },
+            {
+              "id": "B",
+              "text": "오답1"
+            },
+            {
+              "id": "C",
+              "text": "오답2"
+            },
+            {
+              "id": "D",
+              "text": "오답3"
+            }
+          ],
+          "answerMatchMode": "EXACT",
+          "revealOnWrong": true,
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        }
+      ]
     }
+  },
+  "schoolGradeRange": {
+    "min": 6,
+    "max": 6
   }
 }
