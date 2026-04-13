@@ -1,65 +1,949 @@
 {
-  "contentId": "dr-f2-207",
+  "contentId": "dr-frege2-207",
+  "title": "[문학] 모래시계",
+  "targetLevel": "FREGE_2",
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "유리병 속에 갇힌 작은 모래알\n위에서 아래로 쉬지 않고 떨어지네\n사각사각 소리 내며 시간을 재고\n쌓인 모래만큼 하루가 지나가네"
+        },
+        {
+          "id": "p2",
+          "text": "투명한 배꼽을 통과하는 알갱이들\n앞다투어 좁은 길을 빠져나가네\n모두가 똑같은 속도로 흘러가며\n누구도 서두르거나 늦지 않네"
+        },
+        {
+          "id": "p3",
+          "text": "바닥에 쌓인 모래는 과거가 되고\n위에 남은 모래는 미래가 되네\n지금 떨어지는 순간이 바로 오늘\n소중한 시간은 멈추지 않고 흐르네"
+        },
+        {
+          "id": "p4",
+          "text": "병을 뒤집으면 다시 시작되는 시간\n과거는 미래가 되어 새롭게 쌓이네\n우리에게 주어진 똑같은 하루\n알차게 보내라고 속삭여 주네"
+        }
+      ],
+      "format": "TEXT"
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 16
+              }
+            ]
+          },
+          "question": {
+            "prompt": "작은 모래알은 어디에 갇혀 있습니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "유리병 속"
+              },
+              {
+                "id": "B",
+                "text": "어두운 동굴"
+              },
+              {
+                "id": "C",
+                "text": "깊은 바닷속"
+              },
+              {
+                "id": "D",
+                "text": "높은 산꼭대기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 17,
+                "end": 35
+              }
+            ]
+          },
+          "question": {
+            "prompt": "모래알은 어떻게 떨어집니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "위에서 아래로 쉬지 않고"
+              },
+              {
+                "id": "B",
+                "text": "아래에서 위로 거꾸로"
+              },
+              {
+                "id": "C",
+                "text": "가끔 멈추면서 천천히"
+              },
+              {
+                "id": "D",
+                "text": "옆으로 날아가면서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 36,
+                "end": 53
+              }
+            ]
+          },
+          "question": {
+            "prompt": "모래알은 무엇을 재고 있습니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시간"
+              },
+              {
+                "id": "B",
+                "text": "길이"
+              },
+              {
+                "id": "C",
+                "text": "무게"
+              },
+              {
+                "id": "D",
+                "text": "온도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 54,
+                "end": 69
+              }
+            ]
+          },
+          "question": {
+            "prompt": "모래가 쌓인 만큼 무엇이 지나갑니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하루가 지나감"
+              },
+              {
+                "id": "B",
+                "text": "비가 내림"
+              },
+              {
+                "id": "C",
+                "text": "바람이 붊"
+              },
+              {
+                "id": "D",
+                "text": "나무가 자람"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "1연의 중심 내용은 무엇입니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시간을 재며 떨어지는 모래"
+              },
+              {
+                "id": "B",
+                "text": "유리병을 만드는 과정"
+              },
+              {
+                "id": "C",
+                "text": "사막의 모래폭풍"
+              },
+              {
+                "id": "D",
+                "text": "하루의 날씨 변화"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 1,
+                "end": 17
+              }
+            ]
+          },
+          "question": {
+            "prompt": "알갱이들은 어디를 통과합니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "투명한 배꼽"
+              },
+              {
+                "id": "B",
+                "text": "두꺼운 벽"
+              },
+              {
+                "id": "C",
+                "text": "넓은 바다"
+              },
+              {
+                "id": "D",
+                "text": "좁은 골목길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 19,
+                "end": 34
+              }
+            ]
+          },
+          "question": {
+            "prompt": "알갱이들은 어떤 길을 빠져나갑니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "좁은 길"
+              },
+              {
+                "id": "B",
+                "text": "넓은 도로"
+              },
+              {
+                "id": "C",
+                "text": "구불구불한 길"
+              },
+              {
+                "id": "D",
+                "text": "막힌 길"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 36,
+                "end": 51
+              }
+            ]
+          },
+          "question": {
+            "prompt": "알갱이들은 어떤 속도로 흘러갑니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "똑같은 속도"
+              },
+              {
+                "id": "B",
+                "text": "서로 다른 속도"
+              },
+              {
+                "id": "C",
+                "text": "점점 빠른 속도"
+              },
+              {
+                "id": "D",
+                "text": "점점 느린 속도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 53,
+                "end": 66
+              }
+            ]
+          },
+          "question": {
+            "prompt": "알갱이들은 어떻게 이동합니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서두르거나 늦지 않게"
+              },
+              {
+                "id": "B",
+                "text": "먼저 가려고 싸우면서"
+              },
+              {
+                "id": "C",
+                "text": "서로 양보하면서"
+              },
+              {
+                "id": "D",
+                "text": "길을 잃고 헤매면서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "2연의 중심 내용은 무엇입니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일정한 속도로 흐르는 모래"
+              },
+              {
+                "id": "B",
+                "text": "알갱이들의 달리기 시합"
+              },
+              {
+                "id": "C",
+                "text": "배꼽을 통과하는 방법"
+              },
+              {
+                "id": "D",
+                "text": "길을 찾는 어려움"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 2,
+                "end": 19
+              }
+            ]
+          },
+          "question": {
+            "prompt": "바닥에 쌓인 모래는 무엇이 됩니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "과거"
+              },
+              {
+                "id": "B",
+                "text": "현재"
+              },
+              {
+                "id": "C",
+                "text": "미래"
+              },
+              {
+                "id": "D",
+                "text": "영원"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 21,
+                "end": 36
+              }
+            ]
+          },
+          "question": {
+            "prompt": "위에 남은 모래는 무엇이 됩니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "미래"
+              },
+              {
+                "id": "B",
+                "text": "과거"
+              },
+              {
+                "id": "C",
+                "text": "현재"
+              },
+              {
+                "id": "D",
+                "text": "추억"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 38,
+                "end": 54
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지금 떨어지는 순간은 무엇을 의미합니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오늘"
+              },
+              {
+                "id": "B",
+                "text": "어제"
+              },
+              {
+                "id": "C",
+                "text": "내일"
+              },
+              {
+                "id": "D",
+                "text": "모레"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "소중한 시간은 어떻게 흐릅니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "멈추지 않고"
+              },
+              {
+                "id": "B",
+                "text": "자주 멈추면서"
+              },
+              {
+                "id": "C",
+                "text": "가끔 뒤로 가면서"
+              },
+              {
+                "id": "D",
+                "text": "아주 천천히"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "3연의 중심 내용은 무엇입니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모래알이 상징하는 과거, 현재, 미래"
+              },
+              {
+                "id": "B",
+                "text": "과거를 잊는 방법"
+              },
+              {
+                "id": "C",
+                "text": "미래를 예측하는 기술"
+              },
+              {
+                "id": "D",
+                "text": "오늘을 즐겁게 보내는 법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 3,
+                "end": 21
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떻게 하면 시간이 다시 시작됩니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "병을 뒤집으면"
+              },
+              {
+                "id": "B",
+                "text": "병을 깨뜨리면"
+              },
+              {
+                "id": "C",
+                "text": "병을 굴리면"
+              },
+              {
+                "id": "D",
+                "text": "병을 숨기면"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 23,
+                "end": 40
+              }
+            ]
+          },
+          "question": {
+            "prompt": "병을 뒤집으면 과거는 무엇이 됩니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "미래"
+              },
+              {
+                "id": "B",
+                "text": "현재"
+              },
+              {
+                "id": "C",
+                "text": "추억"
+              },
+              {
+                "id": "D",
+                "text": "거짓말"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 41,
+                "end": 56
+              }
+            ]
+          },
+          "question": {
+            "prompt": "우리에게는 무엇이 주어집니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "똑같은 하루"
+              },
+              {
+                "id": "B",
+                "text": "서로 다른 하루"
+              },
+              {
+                "id": "C",
+                "text": "끝나지 않는 하루"
+              },
+              {
+                "id": "D",
+                "text": "매우 짧은 하루"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 58,
+                "end": 68
+              }
+            ]
+          },
+          "question": {
+            "prompt": "모래시계는 우리에게 무엇이라고 속삭입니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "알차게 보내라고"
+              },
+              {
+                "id": "B",
+                "text": "빨리 쉬라고"
+              },
+              {
+                "id": "C",
+                "text": "천천히 걸으라고"
+              },
+              {
+                "id": "D",
+                "text": "그만 포기하라고"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "4연의 중심 내용은 무엇입니까?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주어진 시간을 알차게 보내라는 교훈"
+              },
+              {
+                "id": "B",
+                "text": "병을 뒤집는 재미있는 놀이"
+              },
+              {
+                "id": "C",
+                "text": "똑같은 하루가 지루한 이유"
+              },
+              {
+                "id": "D",
+                "text": "시간 여행의 가능성"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "유리병 속"
+        },
+        {
+          "id": "c2",
+          "text": "사각사각 소리"
+        },
+        {
+          "id": "c3",
+          "text": "일정한 속도"
+        },
+        {
+          "id": "c4",
+          "text": "멈추지 않는 흐름"
+        },
+        {
+          "id": "c5",
+          "text": "알차게 보내기"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
+    },
+    "confirm": {
+      "questions": [
+        {
+          "prompt": "이 시에서 바닥에 쌓인 모래는 무엇을 상징합니까?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 2,
+              "end": 19
+            }
+          ],
+          "id": "q1",
+          "choices": [
+            {
+              "id": "A",
+              "text": "지나간 과거"
+            },
+            {
+              "id": "B",
+              "text": "다가올 미래"
+            },
+            {
+              "id": "C",
+              "text": "현재의 순간"
+            },
+            {
+              "id": "D",
+              "text": "잊고 싶은 기억"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "prompt": "모래알들이 흘러가는 모습은 어떠합니까?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 36,
+              "end": 51
+            }
+          ],
+          "id": "q2",
+          "choices": [
+            {
+              "id": "A",
+              "text": "모두가 똑같은 속도로"
+            },
+            {
+              "id": "B",
+              "text": "서로 다투어 먼저 가려고"
+            },
+            {
+              "id": "C",
+              "text": "점점 더 빠르게"
+            },
+            {
+              "id": "D",
+              "text": "중간에 멈춰 서서"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "prompt": "이 시가 독자에게 전하고 싶은 메시지는 무엇입니까?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 58,
+              "end": 69
+            }
+          ],
+          "id": "q3",
+          "choices": [
+            {
+              "id": "A",
+              "text": "하루를 알차게 보내라"
+            },
+            {
+              "id": "B",
+              "text": "모래시계를 자주 뒤집어라"
+            },
+            {
+              "id": "C",
+              "text": "과거에 얽매이지 마라"
+            },
+            {
+              "id": "D",
+              "text": "항상 서둘러 행동해라"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        }
+      ]
+    }
+  },
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "드넓은 바닷물이 짠맛을 내는 까닭",
-  "description": "일일 독해 - 정독·복기·확인",
-  "targetLevel": "FREGE_2",
   "schoolGradeRange": {
     "min": 5,
-    "max": 5
+    "max": 6
   },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 420,
-  "assets": {},
-  "payload": {
-    "passage": {
-      "format": "TEXT",
-      "paragraphs": [
-        {
-          "id": "p1",
-          "text": "여름철 시원한 바다에 풍덩 뛰어들었다가 파도에 쓸려 바닷물을 꿀꺽 삼켜본 적이 있을 것입니다. 그럴 때면 차가운 물맛이 무척이나 찌릿하게 짜서 혀끝이 얼얼해지고 눈살이 지그시 찌푸려집니다. 우리가 세수나 목욕을 할 때 욕실에서 틀어 쓰는 수돗물이나 강물의 맛은 결코 짜지 않고 다소 덤덤합니다. 유독 끝이 보이지 않는 이 엄청난 바다에만 셀 수 없이 무거운 소금이 녹아 있는 이유가 궁금해집니다. 도대체 누가 넓은 바다 한복판에 하얀 소금 포대를 산더미처럼 몰래 쏟아붓기라도 한 것일까요? 짭짤한 바닷물의 정체는 수십억 년의 긴 비바람이 빚어낸 거대한 지구의 마법입니다."
-        },
-        {
-          "id": "p2",
-          "text": "바닷물이 결정적으로 몹시 짠맛을 내는 가장 큰 원인은 바로 굽이쳐 흐르는 육지의 강물 때문입니다. 구름에서 태어난 비가 우렁차게 내리면 깊은 산속 바위나 험한 산비탈의 흙덩이를 마구 거칠게 때립니다. 이때 단단한 바위틈에 숨어 있던 염분이나 짠맛을 내는 여러 화학 성분들이 빗물에 서서히 녹아내립니다. 이 짭짤해진 투명한 물줄기는 조그만 시냇물과 커다란 강물이 되어 아래쪽으로 쉬지 않고 길게 여행을 떠납니다. 며칠을 달려 슬라이드를 내려온 강물은 마침내 지구에서 가장 낮은 웅덩이인 바다로 모조리 단숨에 쏟아집니다."
-        },
-        {
-          "id": "p3",
-          "text": "강물을 타고 바다로 무사히 들어온 미세한 짠맛의 눈에 보이지 않는 성분들은 그곳에 차곡차곡 깊게 모입니다. 그리고 바다를 향해 눈부시게 내리쬐는 매우 뜨거운 태양 열기가 또 다른 파트너로서 큰 몫을 거듭 해냅니다. 햇빛이 뜨겁게 부서지면 바다 수면의 가벼운 맹물만 둥실둥실 수증기가 되어 하늘의 구름으로 훌쩍 날아올라 버립니다. 반면 묵직하고 짭짤한 소금 성분은 가벼운 수증기와 결코 섞이지 못하고 바다 바닥에 무겁게 그대로 가라앉습니다. 무려 수십억 년 동안 무거운 소금만 차곡차곡 남고 수분은 줄기차게 도망쳐서 바다의 짠맛은 날이 갈수록 강해진 셈입니다."
-        },
-        {
-          "id": "p4",
-          "text": "또한 바다 밑바닥 깊숙한 곳에서 갑자기 뜨겁게 터져 오르는 무시무시한 해저 화산들도 염분에 단단히 힘을 보탭니다. 화산 폭발과 함께 솟구친 땅속 지각의 온갖 특이한 광물질이 바닷물에 마구 녹아들며 짠맛을 한 뼘 더 높입니다. 오늘날 우리가 여름 해변에서 맛보는 이 짭짤한 바다는 하루아침에 뚝딱 섞여 만들어진 가벼운 결과물이 절대 아닙니다. 오랜 세월 육지의 바위가 비람에 깎여 내려오고 반대로 태양이 물을 증발시키며 완성해 준 거대한 작품입니다. 이 짠맛 가득한 바다야말로 소금 없이는 결코 살 수 없는 훌륭한 해양 생물들의 다정하고 진짜배기 고향인 셈입니다."
-        }
-      ]
-    },
-    "intensive": {
-      "timeline": []
-    },
-    "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
-    },
-    "confirm": {
-      "questions": []
-    }
-  }
+  "timeLimitSec": 900,
+  "assets": {}
 }

@@ -1,65 +1,804 @@
 {
-  "contentId": "dr-f2-240",
+  "contentId": "dr-frege2-240",
+  "title": "[회의록] 지역 화폐 사용을 주제로 한 토의 기록",
+  "targetLevel": "FREGE_2",
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "김 의원: 오늘 회의는 지역 화폐의 사용률을 높이기 위한 방안을 논의하기 위해 마련되었습니다. 시민 단체에서 지역 화폐 가맹점 부족과 앱의 불편함에 대한 건의가 있었습니다. 이에 대한 해결책을 자유롭게 의견을 나누어 주시기 바랍니다."
+        },
+        {
+          "id": "p2",
+          "text": "이 과장: 가맹점 확대를 위해 가입 절차를 온라인으로 간소화하는 시스템을 개발 중입니다. 또한, 전통 시장뿐만 아니라 젊은 층이 선호하는 상점들도 가맹점으로 등록할 수 있도록 혜택을 제공할 예정입니다. 홍보 캠페인도 병행하여 상인들의 참여를 유도하겠습니다."
+        },
+        {
+          "id": "p3",
+          "text": "박 팀장: 앱의 불편함에 대해서는 기술팀과 협의하여 다음 달까지 업데이트를 진행하기로 했습니다. 결제 단계를 줄이고 오류 발생 시 즉각적으로 대응할 수 있는 고객 센터를 24시간 운영할 계획입니다. 사용자들의 의견을 수렴하여 지속적으로 개선해 나가겠습니다."
+        },
+        {
+          "id": "p4",
+          "text": "최 대표: 사용 독려를 위해 연말까지 충전 할인율을 기존 5%에서 10%로 인상하는 방안을 제안합니다. 또한, 공영 주차장이나 박물관 등 공공시설 이용 시 지역 화폐로 결제하면 입장료를 감면해 주는 혜택도 효과적일 것입니다. 시민들이 실질적인 혜택을 느끼게 해야 합니다."
+        }
+      ],
+      "format": "TEXT"
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 52
+              }
+            ]
+          },
+          "question": {
+            "prompt": "오늘 회의가 마련된 목적은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사용률을 높일 방안 논의"
+              },
+              {
+                "id": "B",
+                "text": "화폐 발행 중단 결정"
+              },
+              {
+                "id": "C",
+                "text": "새로운 화폐 이름 짓기"
+              },
+              {
+                "id": "D",
+                "text": "시장님 연설 듣기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 53,
+                "end": 96
+              }
+            ]
+          },
+          "question": {
+            "prompt": "시민 단체에서 건의한 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가맹점 부족과 앱 불편함"
+              },
+              {
+                "id": "B",
+                "text": "화폐 디자인의 문제"
+              },
+              {
+                "id": "C",
+                "text": "할인율의 지나친 인상"
+              },
+              {
+                "id": "D",
+                "text": "가맹점의 불친절함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 97,
+                "end": 129
+              }
+            ]
+          },
+          "question": {
+            "prompt": "자유롭게 나누어 주기를 바라는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "해결책에 대한 의견"
+              },
+              {
+                "id": "B",
+                "text": "불만의 목소리"
+              },
+              {
+                "id": "C",
+                "text": "다른 지역의 사례"
+              },
+              {
+                "id": "D",
+                "text": "개인적인 사담"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "1문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "회의의 목적과 문제 상황 공유"
+              },
+              {
+                "id": "B",
+                "text": "시민 단체의 설립 목적"
+              },
+              {
+                "id": "C",
+                "text": "가맹점의 위치 안내"
+              },
+              {
+                "id": "D",
+                "text": "앱의 다운로드 방법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 49
+              }
+            ]
+          },
+          "question": {
+            "prompt": "개발 중인 시스템은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가입 절차 온라인 간소화"
+              },
+              {
+                "id": "B",
+                "text": "복잡한 인증 시스템"
+              },
+              {
+                "id": "C",
+                "text": "오프라인 전용 결제"
+              },
+              {
+                "id": "D",
+                "text": "수동 서명 시스템"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 50,
+                "end": 112
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떤 상점들이 등록하도록 혜택을 주는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "젊은 층 선호 상점 등"
+              },
+              {
+                "id": "B",
+                "text": "대형 백화점만"
+              },
+              {
+                "id": "C",
+                "text": "전통 시장만"
+              },
+              {
+                "id": "D",
+                "text": "외국인 전용 상점"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 113,
+                "end": 142
+              }
+            ]
+          },
+          "question": {
+            "prompt": "참여를 유도하기 위해 병행하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "홍보 캠페인"
+              },
+              {
+                "id": "B",
+                "text": "벌금 부과"
+              },
+              {
+                "id": "C",
+                "text": "세무 조사"
+              },
+              {
+                "id": "D",
+                "text": "강제 철거"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "2문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가맹점 확대를 위한 시스템과 혜택"
+              },
+              {
+                "id": "B",
+                "text": "전통 시장의 어려움"
+              },
+              {
+                "id": "C",
+                "text": "홍보 캠페인의 실패"
+              },
+              {
+                "id": "D",
+                "text": "상인들의 반발 이유"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 53
+              }
+            ]
+          },
+          "question": {
+            "prompt": "업데이트는 언제까지 진행하기로 했나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다음 달까지"
+              },
+              {
+                "id": "B",
+                "text": "내년 초까지"
+              },
+              {
+                "id": "C",
+                "text": "내일 당장"
+              },
+              {
+                "id": "D",
+                "text": "무기한 연기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 54,
+                "end": 110
+              }
+            ]
+          },
+          "question": {
+            "prompt": "오류에 대응하기 위해 운영할 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "24시간 고객 센터"
+              },
+              {
+                "id": "B",
+                "text": "무인 응답기"
+              },
+              {
+                "id": "C",
+                "text": "오프라인 민원실"
+              },
+              {
+                "id": "D",
+                "text": "게시판 댓글"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 111,
+                "end": 142
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떻게 개선해 나가겠다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사용자들의 의견을 수렴하여"
+              },
+              {
+                "id": "B",
+                "text": "전문가의 직관만으로"
+              },
+              {
+                "id": "C",
+                "text": "다른 앱을 베껴서"
+              },
+              {
+                "id": "D",
+                "text": "임원진의 지시대로"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "3문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "앱 편의성 개선과 고객 센터 운영"
+              },
+              {
+                "id": "B",
+                "text": "기술팀의 인력 부족"
+              },
+              {
+                "id": "C",
+                "text": "결제 단계의 복잡성"
+              },
+              {
+                "id": "D",
+                "text": "오류 발생의 원인 분석"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 57
+              }
+            ]
+          },
+          "question": {
+            "prompt": "충전 할인율을 몇 퍼센트로 인상하나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "10%로"
+              },
+              {
+                "id": "B",
+                "text": "5%로"
+              },
+              {
+                "id": "C",
+                "text": "15%로"
+              },
+              {
+                "id": "D",
+                "text": "20%로"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 58,
+                "end": 125
+              }
+            ]
+          },
+          "question": {
+            "prompt": "혜택으로 입장료를 감면해 줄 장소는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공공시설"
+              },
+              {
+                "id": "B",
+                "text": "대형 식당"
+              },
+              {
+                "id": "C",
+                "text": "사립 학원"
+              },
+              {
+                "id": "D",
+                "text": "놀이공원"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 126,
+                "end": 150
+              }
+            ]
+          },
+          "question": {
+            "prompt": "시민들이 느끼게 해야 할 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "실질적인 혜택"
+              },
+              {
+                "id": "B",
+                "text": "막대한 손실"
+              },
+              {
+                "id": "C",
+                "text": "결제의 복잡함"
+              },
+              {
+                "id": "D",
+                "text": "불필요한 지출"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "4문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사용 독려를 위한 혜택 인상 제안"
+              },
+              {
+                "id": "B",
+                "text": "할인율 인상의 부작용"
+              },
+              {
+                "id": "C",
+                "text": "공공시설의 적자 문제"
+              },
+              {
+                "id": "D",
+                "text": "지역 화폐의 장점 설명"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "사용률 높일 방안"
+        },
+        {
+          "id": "c2",
+          "text": "가입 절차 간소화"
+        },
+        {
+          "id": "c3",
+          "text": "젊은 층 선호 상점"
+        },
+        {
+          "id": "c4",
+          "text": "앱 업데이트"
+        },
+        {
+          "id": "c5",
+          "text": "24시간 고객 센터"
+        },
+        {
+          "id": "c6",
+          "text": "할인율 인상"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 2
+    },
+    "confirm": {
+      "questions": [
+        {
+          "prompt": "가맹점 확대를 위해 이 과장이 개발 중이라고 한 것은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 7,
+              "end": 49
+            }
+          ],
+          "id": "q1",
+          "choices": [
+            {
+              "id": "A",
+              "text": "가입 절차 온라인 간소화 시스템"
+            },
+            {
+              "id": "B",
+              "text": "새로운 지역 화폐 발행"
+            },
+            {
+              "id": "C",
+              "text": "상인들을 위한 대출 상품"
+            },
+            {
+              "id": "D",
+              "text": "전용 결제 단말기 보급"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "prompt": "앱의 불편함을 해결하기 위해 박 팀장이 계획한 것은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 57,
+              "end": 112
+            }
+          ],
+          "id": "q2",
+          "choices": [
+            {
+              "id": "A",
+              "text": "24시간 고객 센터 운영"
+            },
+            {
+              "id": "B",
+              "text": "앱의 모든 기능 삭제"
+            },
+            {
+              "id": "C",
+              "text": "기존 앱의 운영 중단"
+            },
+            {
+              "id": "D",
+              "text": "다른 회사에 앱 외주 맡기기"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "prompt": "지역 화폐 사용 독려를 위해 최 대표가 제안한 방안은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 9,
+              "end": 60
+            }
+          ],
+          "id": "q3",
+          "choices": [
+            {
+              "id": "A",
+              "text": "충전 할인율을 10%로 인상"
+            },
+            {
+              "id": "B",
+              "text": "모든 공공시설을 무료로 개방"
+            },
+            {
+              "id": "C",
+              "text": "세금을 지역 화폐로 내기"
+            },
+            {
+              "id": "D",
+              "text": "연말까지 사용 기한 제한"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        }
+      ]
+    }
+  },
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "열사의 사막에서 선인장이 거뜬히 살아남는 까닭",
-  "description": "일일 독해 - 정독·복기·확인",
-  "targetLevel": "FREGE_2",
   "schoolGradeRange": {
     "min": 5,
-    "max": 5
+    "max": 6
   },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 420,
-  "assets": {},
-  "payload": {
-    "passage": {
-      "format": "TEXT",
-      "paragraphs": [
-        {
-          "id": "p1",
-          "text": "비 한 방울 내리지 않고 펄펄 끓는 태양이 쏟아지는 사막은 생명에게 가장 가혹한 죽음의 모래벌판입니다. 식물이 뿌리를 내리려 해도 엄청난 온도 탓에 수분이 공기 중으로 순식간에 말라버려 형체도 없이 타 죽기 십상입니다. 그런데 이 뜨거운 불지옥 같은 환경 속에서도 초록색 두꺼운 몸통을 꼿꼿하게 세운 식물이 있습니다. 바로 온몸에 날카로운 갑옷 가시를 빼곡하게 두르고 서식하는 끈질긴 생명력의 주인공 '선인장'입니다."
-        },
-        {
-          "id": "p2",
-          "text": "산속 나무들은 보통 잎 뒷면에 존재하는 좁은 구멍을 활짝 열어 호흡을 하고 수분을 밖으로 내뱉습니다. 하지만 타오르는 사막에서 평범한 잎사귀를 벌렸다간 단 하루 만에 세포 속의 피와 같은 귀한 수분을 완전히 빼앗기고 맙니다. 그래서 선인장은 수만 년 동안 넓은 잎들을 서서히 돌돌 말기 시작해, 결국 바늘처럼 무섭고 뾰족한 가시로 모조리 바꿔 버렸습니다. 잎의 표면적을 극도로 좁게 줄여서 인체의 땀구멍에서 물방울이 이탈하는 현상을 철저히 봉쇄하려는 생존의 진화입니다."
-        },
-        {
-          "id": "p3",
-          "text": "잎사귀를 뾰족하게 도려낸 대신, 선인장은 커다란 기둥 구실을 하는 뚱뚱한 몸통에 집중적으로 물을 꾹꾹 저장합니다. 사막에 모처럼 소나기가 내리면 선인장 내부에 든 스펀지 같은 조직이 급하게 빗물을 빨아먹으며 풍선처럼 빵빵하게 부풀어 오릅니다. 통통하게 충전된 이 빗물 탱크를 조금씩 마셔가며 사막의 지독한 가뭄을 멸종하지 않고 몇 달씩 견뎌냅니다. 게다가 선인장 껍질은 왁스라는 끈적한 코팅 물질로 팩처럼 덮여 있어 몸통의 땀이 밖으로 새어 나가는 빈틈을 이중으로 단단히 막아 버립니다."
-        },
-        {
-          "id": "p4",
-          "text": "가시는 사막의 더위에서 수분을 숨겨낼 뿐만 아니라 포식자를 물리치는 강인한 기사단 갑옷 역할도 수행합니다. 먹을 것이 부족한 황야에서 목이 마른 초식 동물들은 촉촉하고 즙이 가득한 선인장을 통째로 잘라 먹고 싶어 미치게 됩니다. 그러나 겉면을 에워싼 수만 개의 날카로운 바늘들이 섣불리 입을 대는 동물들의 코에 끔찍한 고통을 안겨 쫓아버립니다. 모래바람 속을 꼿꼿이 버티는 선인장의 외로움은 죽일 구석을 지워버리고 환경에 단단히 맞서 싸운 식물들만의 가장 독한 방어입니다."
-        }
-      ]
-    },
-    "intensive": {
-      "timeline": []
-    },
-    "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
-    },
-    "confirm": {
-      "questions": []
-    }
-  }
+  "timeLimitSec": 900,
+  "assets": {}
 }

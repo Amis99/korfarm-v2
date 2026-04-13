@@ -1,65 +1,960 @@
 {
-  "contentId": "dr-f2-221",
+  "contentId": "dr-frege2-221",
+  "title": "[비문학] 논증 요소 찾기",
+  "targetLevel": "FREGE_2",
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "우리가 자신의 생각을 남에게 설득할 때는 논증을 사용한다. 논증은 주장과 그 주장을 뒷받침하는 근거로 이루어진다. 타당한 논증이 되려면 주장이 명확하고 근거가 객관적이어야 한다. 주장만 있고 근거가 없으면 상대방을 설득하기 어렵다."
+        },
+        {
+          "id": "p2",
+          "text": "주장은 글쓴이가 내세우는 핵심적인 생각이나 의견이다. 주장은 보통 글의 처음이나 끝에 분명하게 제시된다. 좋은 주장은 하나의 중심 내용을 다루며 뜻이 모호하지 않아야 한다. 그래야 읽는 사람이 글쓴이의 의도를 정확히 파악할 수 있다."
+        },
+        {
+          "id": "p3",
+          "text": "근거는 주장이 옳음을 증명하기 위해 제시하는 자료나 이유다. 근거에는 객관적인 사실, 통계 자료, 전문가의 의견 등이 포함된다. 근거가 주장과 긴밀하게 연결되어야 논리적인 글이 된다. 믿을 수 없는 자료를 근거로 쓰면 주장의 설득력이 떨어진다."
+        },
+        {
+          "id": "p4",
+          "text": "논증의 요소를 정확히 파악하는 것은 비판적 읽기의 첫걸음이다. 글을 읽을 때는 무엇이 주장이고 무엇이 근거인지 구분해야 한다. 그리고 제시된 근거가 주장을 뒷받침하기에 적절한지 따져 보아야 한다. 이를 통해 우리는 정보의 타당성을 판단하는 힘을 기를 수 있다."
+        }
+      ],
+      "format": "TEXT"
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 32
+              }
+            ]
+          },
+          "question": {
+            "prompt": "생각을 설득할 때 무엇을 쓰나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "논증"
+              },
+              {
+                "id": "B",
+                "text": "은유"
+              },
+              {
+                "id": "C",
+                "text": "비유"
+              },
+              {
+                "id": "D",
+                "text": "과장"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 33,
+                "end": 63
+              }
+            ]
+          },
+          "question": {
+            "prompt": "논증을 이루는 두 요소는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주장과 근거"
+              },
+              {
+                "id": "B",
+                "text": "서론과 결론"
+              },
+              {
+                "id": "C",
+                "text": "원인과 결과"
+              },
+              {
+                "id": "D",
+                "text": "질문과 대답"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 64,
+                "end": 99
+              }
+            ]
+          },
+          "question": {
+            "prompt": "타당한 논증의 조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "명확한 주장과 객관적 근거"
+              },
+              {
+                "id": "B",
+                "text": "복잡한 주장과 주관적 근거"
+              },
+              {
+                "id": "C",
+                "text": "긴 문장과 어려운 단어"
+              },
+              {
+                "id": "D",
+                "text": "감정적인 주장과 추측"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 100,
+                "end": 128
+              }
+            ]
+          },
+          "question": {
+            "prompt": "근거 없는 주장의 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "설득하기 어렵다"
+              },
+              {
+                "id": "B",
+                "text": "설득하기 쉽다"
+              },
+              {
+                "id": "C",
+                "text": "주장이 돋보인다"
+              },
+              {
+                "id": "D",
+                "text": "감동을 준다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "논증의 개념과 구성 요소"
+              },
+              {
+                "id": "B",
+                "text": "글의 서론 쓰는 방법"
+              },
+              {
+                "id": "C",
+                "text": "감정을 표현하는 방법"
+              },
+              {
+                "id": "D",
+                "text": "대화의 중요성"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 1,
+                "end": 29
+              }
+            ]
+          },
+          "question": {
+            "prompt": "주장이란 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "핵심적인 생각이나 의견"
+              },
+              {
+                "id": "B",
+                "text": "객관적인 통계 자료"
+              },
+              {
+                "id": "C",
+                "text": "전문가의 인터뷰 내용"
+              },
+              {
+                "id": "D",
+                "text": "글의 배경 설명"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 31,
+                "end": 58
+              }
+            ]
+          },
+          "question": {
+            "prompt": "주장은 어디에 제시되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글의 처음이나 끝"
+              },
+              {
+                "id": "B",
+                "text": "글의 중간 부분"
+              },
+              {
+                "id": "C",
+                "text": "글의 제목에만"
+              },
+              {
+                "id": "D",
+                "text": "주석이나 부록"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 60,
+                "end": 96
+              }
+            ]
+          },
+          "question": {
+            "prompt": "좋은 주장의 특징은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하나의 내용과 명확한 뜻"
+              },
+              {
+                "id": "B",
+                "text": "여러 내용과 복잡한 뜻"
+              },
+              {
+                "id": "C",
+                "text": "자극적인 단어 사용"
+              },
+              {
+                "id": "D",
+                "text": "유행하는 신조어 포함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 98,
+                "end": 129
+              }
+            ]
+          },
+          "question": {
+            "prompt": "주장의 뜻이 명확해야 하는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "의도를 정확히 파악하려고"
+              },
+              {
+                "id": "B",
+                "text": "글을 길게 쓰려고"
+              },
+              {
+                "id": "C",
+                "text": "멋진 문장을 만들려고"
+              },
+              {
+                "id": "D",
+                "text": "재미를 주기 위해서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주장의 뜻과 좋은 주장의 특징"
+              },
+              {
+                "id": "B",
+                "text": "근거를 찾는 다양한 방법"
+              },
+              {
+                "id": "C",
+                "text": "논증을 피해야 하는 이유"
+              },
+              {
+                "id": "D",
+                "text": "글을 읽는 올바른 자세"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 2,
+                "end": 35
+              }
+            ]
+          },
+          "question": {
+            "prompt": "근거의 역할은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주장이 옳음을 증명함"
+              },
+              {
+                "id": "B",
+                "text": "글의 분량을 늘림"
+              },
+              {
+                "id": "C",
+                "text": "독자의 시선을 끎"
+              },
+              {
+                "id": "D",
+                "text": "결론을 요약함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 36,
+                "end": 73
+              }
+            ]
+          },
+          "question": {
+            "prompt": "근거에 포함되는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "통계 자료와 전문가 의견"
+              },
+              {
+                "id": "B",
+                "text": "개인적인 추측과 상상"
+              },
+              {
+                "id": "C",
+                "text": "확인되지 않은 소문"
+              },
+              {
+                "id": "D",
+                "text": "감정적인 호소"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 74,
+                "end": 104
+              }
+            ]
+          },
+          "question": {
+            "prompt": "논리적인 글이 되려면 근거가 어때야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주장과 긴밀하게 연결됨"
+              },
+              {
+                "id": "B",
+                "text": "주장과 무관함"
+              },
+              {
+                "id": "C",
+                "text": "주장보다 길어야 함"
+              },
+              {
+                "id": "D",
+                "text": "어려운 용어로 작성됨"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 103,
+                "end": 135
+              }
+            ]
+          },
+          "question": {
+            "prompt": "믿을 수 없는 자료를 쓰면?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "설득력이 떨어진다"
+              },
+              {
+                "id": "B",
+                "text": "설득력이 높아진다"
+              },
+              {
+                "id": "C",
+                "text": "글이 재미있어진다"
+              },
+              {
+                "id": "D",
+                "text": "전문적인 글이 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "근거의 역할과 올바른 사용법"
+              },
+              {
+                "id": "B",
+                "text": "논증의 종류와 특징"
+              },
+              {
+                "id": "C",
+                "text": "주장을 뒷받침하는 배경지식"
+              },
+              {
+                "id": "D",
+                "text": "객관적 사실의 한계"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 4,
+                "end": 37
+              }
+            ]
+          },
+          "question": {
+            "prompt": "비판적 읽기의 첫걸음은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "논증의 요소 파악"
+              },
+              {
+                "id": "B",
+                "text": "글을 빠르게 읽기"
+              },
+              {
+                "id": "C",
+                "text": "모르는 단어 찾기"
+              },
+              {
+                "id": "D",
+                "text": "글쓴이 마음 상상하기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 38,
+                "end": 73
+              }
+            ]
+          },
+          "question": {
+            "prompt": "글을 읽을 때 무엇을 구분해야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주장과 근거"
+              },
+              {
+                "id": "B",
+                "text": "서론과 본론"
+              },
+              {
+                "id": "C",
+                "text": "사실과 허구"
+              },
+              {
+                "id": "D",
+                "text": "원인과 결과"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 75,
+                "end": 112
+              }
+            ]
+          },
+          "question": {
+            "prompt": "근거에 대해 무엇을 따져 보아야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주장을 뒷받침하기에 적절한지"
+              },
+              {
+                "id": "B",
+                "text": "글자 수가 많은지"
+              },
+              {
+                "id": "C",
+                "text": "어디에서 가져온 자료인지"
+              },
+              {
+                "id": "D",
+                "text": "누가 쓴 글인지"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 113,
+                "end": 144
+              }
+            ]
+          },
+          "question": {
+            "prompt": "비판적 읽기로 기를 수 있는 힘은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정보의 타당성을 판단하는 힘"
+              },
+              {
+                "id": "B",
+                "text": "글을 빨리 쓰는 힘"
+              },
+              {
+                "id": "C",
+                "text": "새로운 단어를 만드는 힘"
+              },
+              {
+                "id": "D",
+                "text": "감정을 억제하는 힘"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비판적 읽기를 위한 논증 파악"
+              },
+              {
+                "id": "B",
+                "text": "글을 요약하는 방법"
+              },
+              {
+                "id": "C",
+                "text": "다양한 매체 읽기"
+              },
+              {
+                "id": "D",
+                "text": "주장을 반박하는 기술"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "논증"
+        },
+        {
+          "id": "c2",
+          "text": "주장"
+        },
+        {
+          "id": "c3",
+          "text": "근거"
+        },
+        {
+          "id": "c4",
+          "text": "설득력"
+        },
+        {
+          "id": "c5",
+          "text": "타당성"
+        },
+        {
+          "id": "c6",
+          "text": "비판적 읽기"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 2
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "상대방을 설득하기 어려운 경우는?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 100,
+              "end": 129
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "주장만 있고 근거가 없을 때"
+            },
+            {
+              "id": "B",
+              "text": "근거가 객관적일 때"
+            },
+            {
+              "id": "C",
+              "text": "주장이 명확할 때"
+            },
+            {
+              "id": "D",
+              "text": "논증이 타당할 때"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "id": "q2",
+          "prompt": "다음 중 근거로 적절한 것은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 36,
+              "end": 73
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "통계 자료"
+            },
+            {
+              "id": "B",
+              "text": "개인적 감정"
+            },
+            {
+              "id": "C",
+              "text": "근거 없는 소문"
+            },
+            {
+              "id": "D",
+              "text": "모호한 추측"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "id": "q3",
+          "prompt": "비판적 읽기의 첫걸음은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 4,
+              "end": 37
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "논증의 요소 파악하기"
+            },
+            {
+              "id": "B",
+              "text": "글의 분량 확인하기"
+            },
+            {
+              "id": "C",
+              "text": "제목만 읽고 넘어가기"
+            },
+            {
+              "id": "D",
+              "text": "맞춤법 검사하기"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        }
+      ]
+    }
+  },
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "할아버지의 낡은 괘종시계",
-  "description": "일일 독해 - 정독·복기·확인",
-  "targetLevel": "FREGE_2",
   "schoolGradeRange": {
     "min": 5,
-    "max": 5
+    "max": 6
   },
-  "area": "READING",
-  "subArea": "LITERATURE",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 420,
-  "assets": {},
-  "payload": {
-    "passage": {
-      "format": "TEXT",
-      "paragraphs": [
-        {
-          "id": "p1",
-          "text": "거실 한쪽 구석에는 사람 키보다 훌쩍 큰 낡은 괘종시계가 언제나 조용히 서 있습니다. 짙은 갈색 나무 몸통에 커다란 둥근 유리가 달린 아주 오래된 시계입니다. 이 시계는 할아버지가 젊은 시절 첫 월급을 받아 큰맘 먹고 사셨던 각별한 보물입니다. 요즘 스마트폰 시계처럼 소리 없이 부드럽게 숫자가 바뀌는 세련된 맛은 전혀 없습니다. 대신 배 속에 매달린 커다란 황동 추를 왼쪽 오른쪽으로 쉼 없이 흔들며 ‘똑딱똑딱’ 무거운 소리를 냅니다."
-        },
-        {
-          "id": "p2",
-          "text": "밤이 깊어 가족들 모두 잠방에 들면 이 괘종시계의 똑딱거리는 소리는 유난히 귀에 꽂힙니다. 어떤 날은 그 규칙적인 소리가 자장가처럼 마음을 차분하게 가라앉혀 줍니다. 하지만 기분이 우울하거나 잠이 오지 않는 날에는 둔탁한 시곗바늘 소리가 신경을 거슬리게 만들기도 합니다. 손자인 준호는 툭하면 멈춰 서서 태엽을 다시 감아줘야 하는 이 고물 시계가 몹시 불편했습니다. 거실을 좁게 만드는 이 커다란 나무토막을 얼른 내다 버리고 예쁜 디지털시계를 달았으면 좋겠다고 입버릇처럼 투덜댔습니다."
-        },
-        {
-          "id": "p3",
-          "text": "그러던 어느 늦은 가을, 할아버지께서 감기에 걸려 며칠 동안 심하게 앓아누우셨습니다. 할아버지가 시계를 돌보지 못하시자, 괘종시계 배 속의 둥근 추도 서서히 힘을 잃더니 이내 완전히 멈춰 섰습니다. 언제나 거실을 울리던 규칙적인 똑딱 소리가 사라지자 집안은 숨이 막힐 듯 무서운 정적에 휩싸였습니다. 준호는 텔레비전을 끄고 책상에 앉았지만 귀를 허전하게 만드는 조용한 공기 탓에 오히려 아무것도 손에 잡히지 않았습니다. 시끄럽다고 구박했던 고물 시계의 심장 소리가 가족들의 일상을 보이지 않게 감싸고 있었다는 사실을 비로소 깨달았습니다."
-        },
-        {
-          "id": "p4",
-          "text": "다행히 며칠 뒤 할아버지께서 자리를 털고 일어나 거실로 흔쾌히 걸어 나오셨습니다. 할아버지는 가장 먼저 멈춰 선 괘종시계의 유리문을 열고 꼼꼼하게 태엽을 다시 감아 주셨습니다. ‘똑딱똑딱’ 하는 경쾌하고 익숙한 소리가 다시 거실 전체에 따뜻하게 퍼져나갔습니다. 준호는 구석의 괘종시계를 향해 달려가 낡은 나무 기둥을 두 손으로 포근하게 쓰다듬었습니다. 오래된 물건에는 가족의 시간과 소중한 체온이 끈끈하게 스며 있다는 것을 푹신한 똑딱 소리를 통해 마음 깊이 배웠습니다."
-        }
-      ]
-    },
-    "intensive": {
-      "timeline": []
-    },
-    "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
-    },
-    "confirm": {
-      "questions": []
-    }
-  }
+  "timeLimitSec": 900,
+  "assets": {}
 }

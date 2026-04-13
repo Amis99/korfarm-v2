@@ -1,65 +1,960 @@
 {
-  "contentId": "dr-f2-229",
+  "contentId": "dr-frege2-229",
+  "title": "[칼럼] 지역 화폐 사용을 둘러싼 서로 다른 생각",
+  "targetLevel": "FREGE_2",
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "지역 화폐는 특정 지역 안에서만 쓸 수 있는 돈을 말한다. 이는 동네 상권을 살리고 지역 경제를 활성화하기 위해 만들어졌다. 소비자는 지역 화폐를 살 때 할인을 받거나 적립금을 얻을 수 있다. 덕분에 지역 상인들은 손님이 늘어나 매출이 오르는 효과를 기대할 수 있다."
+        },
+        {
+          "id": "p2",
+          "text": "하지만 지역 화폐의 효과에 대해 의문을 가지는 사람들도 있다. 이들은 지역 화폐 발행에 국가 예산이 너무 많이 쓰인다고 지적한다. 할인해 주는 금액만큼 세금으로 채워야 하므로 결국 국민의 부담이 커진다는 것이다. 또한 다른 지역의 소비가 줄어들어 전체적인 국가 경제에는 큰 도움이 되지 않는다고 주장한다."
+        },
+        {
+          "id": "p3",
+          "text": "반면 지역 화폐를 적극적으로 지지하는 사람들의 의견은 다르다. 이들은 지역 화폐가 대형 마트로 몰리는 돈을 동네 가게로 돌려준다고 말한다. 소상공인들이 살아나야 지역의 일자리가 늘어나고 골목 상권이 유지된다는 것이다. 지역 경제가 튼튼해지면 장기적으로 국가 경제도 발전할 수 있다고 강조한다."
+        },
+        {
+          "id": "p4",
+          "text": "지역 화폐 제도가 성공하려면 문제점을 보완하려는 노력이 필요하다. 예산이 낭비되지 않도록 지원 규모를 적절히 조절해야 한다. 그리고 지역 화폐를 쓸 수 있는 가맹점을 다양하게 늘려 시민들이 편리하게 이용하도록 도와야 한다. 각 지역의 상황에 맞는 현명한 운영이 필요한 때이다."
+        }
+      ],
+      "format": "TEXT"
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 32
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지역 화폐란 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "특정 지역 안에서만 쓰는 돈"
+              },
+              {
+                "id": "B",
+                "text": "전국 어디서나 쓰는 돈"
+              },
+              {
+                "id": "C",
+                "text": "외국에서 사용하는 돈"
+              },
+              {
+                "id": "D",
+                "text": "은행에만 저축하는 돈"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 33,
+                "end": 69
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지역 화폐는 왜 만들어졌나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역 경제를 활성화하려고"
+              },
+              {
+                "id": "B",
+                "text": "세금을 더 많이 거두려고"
+              },
+              {
+                "id": "C",
+                "text": "은행의 이익을 늘리려고"
+              },
+              {
+                "id": "D",
+                "text": "대형 마트를 도우려고"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 70,
+                "end": 107
+              }
+            ]
+          },
+          "question": {
+            "prompt": "소비자는 어떤 혜택을 받나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "할인이나 적립금"
+              },
+              {
+                "id": "B",
+                "text": "무료 교통카드"
+              },
+              {
+                "id": "C",
+                "text": "영화 관람권"
+              },
+              {
+                "id": "D",
+                "text": "새로운 신용카드"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 108,
+                "end": 148
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지역 상인들은 어떤 효과를 기대하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "매출이 오르는 효과"
+              },
+              {
+                "id": "B",
+                "text": "세금이 줄어드는 효과"
+              },
+              {
+                "id": "C",
+                "text": "근무 시간이 주는 효과"
+              },
+              {
+                "id": "D",
+                "text": "가게를 넓히는 효과"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역 화폐의 뜻과 만들어진 목적"
+              },
+              {
+                "id": "B",
+                "text": "세금을 납부하는 다양한 방법"
+              },
+              {
+                "id": "C",
+                "text": "할인 쿠폰을 모으는 기술"
+              },
+              {
+                "id": "D",
+                "text": "대형 마트의 매출 감소"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 1,
+                "end": 34
+              }
+            ]
+          },
+          "question": {
+            "prompt": "일부 사람들은 지역 화폐에 대해 무엇을 가지나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "효과에 대한 의문"
+              },
+              {
+                "id": "B",
+                "text": "무조건적인 찬성"
+              },
+              {
+                "id": "C",
+                "text": "새로운 이름 제안"
+              },
+              {
+                "id": "D",
+                "text": "할인율 인상 요구"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 36,
+                "end": 72
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이들은 지역 화폐 발행에 무엇이 쓰인다고 지적하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "국가 예산"
+              },
+              {
+                "id": "B",
+                "text": "개인의 재산"
+              },
+              {
+                "id": "C",
+                "text": "외국의 자본"
+              },
+              {
+                "id": "D",
+                "text": "기업의 투자금"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 74,
+                "end": 118
+              }
+            ]
+          },
+          "question": {
+            "prompt": "국가 예산이 쓰이면 누구의 부담이 커지나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "국민의 부담"
+              },
+              {
+                "id": "B",
+                "text": "은행의 부담"
+              },
+              {
+                "id": "C",
+                "text": "시장의 부담"
+              },
+              {
+                "id": "D",
+                "text": "공장의 부담"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 120,
+                "end": 169
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이들은 국가 경제에 대해 어떻게 주장하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "큰 도움이 되지 않음"
+              },
+              {
+                "id": "B",
+                "text": "큰 도움이 됨"
+              },
+              {
+                "id": "C",
+                "text": "수출이 증가함"
+              },
+              {
+                "id": "D",
+                "text": "물가가 하락함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역 화폐의 효과를 의심하는 의견"
+              },
+              {
+                "id": "B",
+                "text": "국가 예산을 절약하는 방법"
+              },
+              {
+                "id": "C",
+                "text": "다른 지역으로 여행 가는 이유"
+              },
+              {
+                "id": "D",
+                "text": "국민의 부담을 줄이는 세금"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 3,
+                "end": 36
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지역 화폐를 적극적으로 지지하는 사람들의 의견은 어떤가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반대하는 의견과 다름"
+              },
+              {
+                "id": "B",
+                "text": "의문을 가지는 것과 같음"
+              },
+              {
+                "id": "C",
+                "text": "아무런 의견이 없음"
+              },
+              {
+                "id": "D",
+                "text": "세금을 올리자고 함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 37,
+                "end": 79
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지역 화폐는 돈을 어디로 돌려주나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동네 가게"
+              },
+              {
+                "id": "B",
+                "text": "대형 마트"
+              },
+              {
+                "id": "C",
+                "text": "은행 금고"
+              },
+              {
+                "id": "D",
+                "text": "해외 은행"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 80,
+                "end": 123
+              }
+            ]
+          },
+          "question": {
+            "prompt": "소상공인이 살아나면 무엇이 늘어나나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역의 일자리"
+              },
+              {
+                "id": "B",
+                "text": "대형 마트의 수"
+              },
+              {
+                "id": "C",
+                "text": "수입 상품의 양"
+              },
+              {
+                "id": "D",
+                "text": "교통 체증"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 122,
+                "end": 162
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지역 경제가 튼튼해지면 장기적으로 무엇이 발전하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "국가 경제"
+              },
+              {
+                "id": "B",
+                "text": "외국 경제"
+              },
+              {
+                "id": "C",
+                "text": "과학 기술"
+              },
+              {
+                "id": "D",
+                "text": "문화 예술"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역 화폐를 긍정적으로 보는 의견"
+              },
+              {
+                "id": "B",
+                "text": "대형 마트의 새로운 할인 정책"
+              },
+              {
+                "id": "C",
+                "text": "골목 상권이 사라지는 원인"
+              },
+              {
+                "id": "D",
+                "text": "일자리를 구하는 다양한 방법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 3,
+                "end": 39
+              }
+            ]
+          },
+          "question": {
+            "prompt": "제도가 성공하려면 무엇이 필요한가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문제점을 보완하려는 노력"
+              },
+              {
+                "id": "B",
+                "text": "무조건 제도를 없애는 것"
+              },
+              {
+                "id": "C",
+                "text": "외국의 제도를 그대로 베끼는 것"
+              },
+              {
+                "id": "D",
+                "text": "할인율을 무제한으로 높이는 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 41,
+                "end": 72
+              }
+            ]
+          },
+          "question": {
+            "prompt": "예산 낭비를 막기 위해 어떻게 해야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지원 규모를 적절히 조절"
+              },
+              {
+                "id": "B",
+                "text": "세금을 두 배로 인상"
+              },
+              {
+                "id": "C",
+                "text": "가게의 문을 일찍 닫음"
+              },
+              {
+                "id": "D",
+                "text": "할인을 아예 없앰"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 74,
+                "end": 126
+              }
+            ]
+          },
+          "question": {
+            "prompt": "시민들이 편리하게 이용하려면 무엇을 늘려야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가맹점"
+              },
+              {
+                "id": "B",
+                "text": "은행"
+              },
+              {
+                "id": "C",
+                "text": "공원"
+              },
+              {
+                "id": "D",
+                "text": "경찰서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 128,
+                "end": 153
+              }
+            ]
+          },
+          "question": {
+            "prompt": "현재 어떤 운영이 필요한가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역 상황에 맞는 현명한 운영"
+              },
+              {
+                "id": "B",
+                "text": "모든 지역을 똑같이 운영"
+              },
+              {
+                "id": "C",
+                "text": "중앙에서만 결정하는 운영"
+              },
+              {
+                "id": "D",
+                "text": "운영을 일시적으로 멈춤"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역 화폐 제도의 성공을 위한 보완점"
+              },
+              {
+                "id": "B",
+                "text": "가맹점을 운영하는 상인의 마음"
+              },
+              {
+                "id": "C",
+                "text": "예산을 낭비한 다양한 사례"
+              },
+              {
+                "id": "D",
+                "text": "현명한 소비자의 쇼핑 비결"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "지역 화폐"
+        },
+        {
+          "id": "c2",
+          "text": "동네 상권"
+        },
+        {
+          "id": "c3",
+          "text": "할인 혜택"
+        },
+        {
+          "id": "c4",
+          "text": "국가 예산"
+        },
+        {
+          "id": "c5",
+          "text": "소상공인"
+        },
+        {
+          "id": "c6",
+          "text": "제도 보완"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 2
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "지역 화폐를 만든 가장 큰 이유는 무엇인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 33,
+              "end": 69
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "지역 경제를 활성화하기 위해"
+            },
+            {
+              "id": "B",
+              "text": "은행의 편리함을 돕기 위해"
+            },
+            {
+              "id": "C",
+              "text": "지폐 사용을 줄이기 위해"
+            },
+            {
+              "id": "D",
+              "text": "대기업의 이익을 늘리기 위해"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "id": "q2",
+          "prompt": "지역 화폐를 긍정적으로 생각하는 사람들의 의견은 무엇인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 37,
+              "end": 79
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "돈을 동네 가게로 돌려줌"
+            },
+            {
+              "id": "B",
+              "text": "세금 부담을 크게 늘림"
+            },
+            {
+              "id": "C",
+              "text": "국가 예산을 낭비하게 함"
+            },
+            {
+              "id": "D",
+              "text": "대형 마트의 이익을 늘림"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "id": "q3",
+          "prompt": "지역 화폐의 문제점을 보완하는 방법으로 알맞은 것은 무엇인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 41,
+              "end": 72
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "지원 규모를 적절히 조절함"
+            },
+            {
+              "id": "B",
+              "text": "제도를 완전히 폐지함"
+            },
+            {
+              "id": "C",
+              "text": "할인율을 무조건 높임"
+            },
+            {
+              "id": "D",
+              "text": "가맹점의 수를 줄임"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        }
+      ]
+    }
+  },
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "골목길 헌책방 할아버지와의 약속",
-  "description": "일일 독해 - 정독·복기·확인",
-  "targetLevel": "FREGE_2",
   "schoolGradeRange": {
     "min": 5,
-    "max": 5
+    "max": 6
   },
-  "area": "READING",
-  "subArea": "LITERATURE",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 420,
-  "assets": {},
-  "payload": {
-    "passage": {
-      "format": "TEXT",
-      "paragraphs": [
-        {
-          "id": "p1",
-          "text": "학교에서 집으로 돌아가는 비좁은 뒷골목에는 빛바랜 간판을 단 작은 헌책방이 있습니다. 나무 문을 밀고 들어가면 입구부터 천장까지 낡은 헌책들이 층층이 기둥처럼 쌓여 있습니다. 소희는 하굣길마다 방앗간을 드나드는 참새처럼 이 고요한 헌책방 구석에 쪼그려 앉기를 좋아했습니다. 카운터에는 콧등에 돋보기를 걸치신 주름 진 할아버지가 늘 평화롭게 앉아 계셨습니다. 소희가 인사를 건네면 할아버지는 빙그레 웃으시며 가장 재미난 그림동화책을 꺼내 주시곤 했습니다."
-        },
-        {
-          "id": "p2",
-          "text": "어느 가을날, 책 더미를 한참 뒤지던 소희는 양장본 표지가 고급스러운 희귀한 책 한 권을 구석에서 발견했습니다. 오랜 시간 꼭 읽고 싶었던 외국 탐정 소설책이라 당장 품에 쏙 끌어안았습니다. 하지만 청바지 주머니를 뒤져본 소희는 남은 용돈이 동전 두 개뿐이라는 사실에 몹시 아쉬워할 수밖에 없었습니다. 시무룩한 표정으로 책을 다시 제자리에 꽂으려는데 눈치 빠른 할아버지가 가볍게 소희의 손목을 막았습니다. \"이 책은 딱 오 일 동안 치워두고 팔지 않을 테니, 다시 책방에 편히 놀러 오렴.\""
-        },
-        {
-          "id": "p3",
-          "text": "할아버지의 든든한 약속을 받은 그날부터 소희는 심부름을 도맡아 하며 억척같이 백 원짜리를 모으기 시작했습니다. 달콤한 떡볶이의 유혹도 꾹 참고 돼지 저금통에 단단한 동전을 딸랑딸랑 집어넣었습니다. 약속했던 바로 오 일째 되는 늦은 오후, 소희는 무거운 저금통 배를 갈라 양손에 동전을 잔뜩 움켜쥐고 책방으로 달렸습니다. 문을 벅차올리며 열자 할아버지는 돋보기를 내리신 채 소희를 기다리고 있었다는 듯 크게 웃어 주셨습니다. 할아버지 뒤쪽 선반에는 약속했던 양장본 책이 고스란히 먼지가 닦인 채 놓여 있었습니다."
-        },
-        {
-          "id": "p4",
-          "text": "소희가 자랑스럽게 계산대에 쏟아놓은 동전을 보며 할아버지는 어느 때보다 칭찬의 박수를 보내주셨습니다. \"자신과의 약속을 참고 지켜낸 소희 덕분에 낡은 헌책이 가장 훌륭한 새 주인을 무사히 찾았구나.\" 낡고 쾨쾨한 종이 냄새가 진동하는 헌책방이었지만, 소희의 가슴에는 세상에서 가장 향기로운 추억의 장소로 굳게 새겨졌습니다. 책가방 속에 양장본을 소중히 찔러 넣고 걷는 골목길의 바람이 솜털처럼 가볍게 느껴졌습니다. 소희는 낡은 책갈피 속에 할아버지의 믿음과 스스로 일궈낸 끈기라는 두 마법이 평생 깃들었음을 깨달았습니다."
-        }
-      ]
-    },
-    "intensive": {
-      "timeline": []
-    },
-    "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
-    },
-    "confirm": {
-      "questions": []
-    }
-  }
+  "timeLimitSec": 900,
+  "assets": {}
 }

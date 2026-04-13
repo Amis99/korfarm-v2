@@ -1,65 +1,960 @@
 {
-  "contentId": "dr-f2-225",
+  "contentId": "dr-frege2-225",
+  "title": "[비문학] 오류 있는 주장 고치기",
+  "targetLevel": "FREGE_2",
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "주장을 내세울 때 논리에 맞지 않거나 잘못된 근거를 사용하면 오류가 발생한다. 오류가 있는 주장은 상대방을 설득할 수 없을 뿐만 아니라 글의 신뢰도를 떨어뜨린다. 따라서 글을 쓸 때는 자신의 주장에 논리적인 허점이 없는지 살펴보아야 한다. 오류를 발견하고 고치는 것은 좋은 글을 쓰는 중요한 과정이다."
+        },
+        {
+          "id": "p2",
+          "text": "대표적인 논리적 오류 중 하나는 흑백 논리의 오류다. 이는 어떤 문제에 대해 정답이 두 가지뿐이라고 생각하는 잘못된 태도다. 예를 들어 '나를 칭찬하지 않았으니 너는 나를 미워하는구나'라고 말하는 것이다. 세상에는 칭찬과 미움 사이에도 다양한 감정이 존재한다는 사실을 무시한 주장이다."
+        },
+        {
+          "id": "p3",
+          "text": "성급한 일반화의 오류도 흔히 발생한다. 이는 몇 가지 적은 사례만 보고 그것이 전체의 특징이라고 단정 짓는 실수다. 예를 들어 '어제 만난 고양이가 사나웠으니 모든 고양이는 사납다'라고 주장하는 것이다. 예외적인 경우를 무시하고 결론을 내리면 타당한 논증이 될 수 없다."
+        },
+        {
+          "id": "p4",
+          "text": "오류 있는 주장을 고치려면 다양한 관점에서 생각하는 연습이 필요하다. 극단적인 표현을 피하고 예외 상황이 없는지 점검해야 한다. 그리고 객관적이고 충분한 근거를 바탕으로 주장을 뒷받침해야 한다. 논리적인 글은 탄탄한 근거와 합리적인 생각에서 비롯된다."
+        }
+      ],
+      "format": "TEXT"
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 43
+              }
+            ]
+          },
+          "question": {
+            "prompt": "오류는 언제 발생하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "잘못된 근거를 사용할 때"
+              },
+              {
+                "id": "B",
+                "text": "올바른 근거를 사용할 때"
+              },
+              {
+                "id": "C",
+                "text": "짧은 문장을 쓸 때"
+              },
+              {
+                "id": "D",
+                "text": "긴 문장을 쓸 때"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 44,
+                "end": 90
+              }
+            ]
+          },
+          "question": {
+            "prompt": "오류가 있는 주장은 글에 어떤 영향을 미치나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "신뢰도를 떨어뜨린다"
+              },
+              {
+                "id": "B",
+                "text": "설득력을 높인다"
+              },
+              {
+                "id": "C",
+                "text": "글을 재미있게 만든다"
+              },
+              {
+                "id": "D",
+                "text": "글을 길게 만든다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 91,
+                "end": 133
+              }
+            ]
+          },
+          "question": {
+            "prompt": "글을 쓸 때 무엇을 살펴보아야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "논리적인 허점"
+              },
+              {
+                "id": "B",
+                "text": "글자의 모양"
+              },
+              {
+                "id": "C",
+                "text": "종이의 크기"
+              },
+              {
+                "id": "D",
+                "text": "그림의 색깔"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 134,
+                "end": 167
+              }
+            ]
+          },
+          "question": {
+            "prompt": "좋은 글을 쓰기 위한 중요한 과정은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오류를 발견하고 고침"
+              },
+              {
+                "id": "B",
+                "text": "오류를 그대로 둠"
+              },
+              {
+                "id": "C",
+                "text": "어려운 단어를 사용함"
+              },
+              {
+                "id": "D",
+                "text": "글을 짧게 요약함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주장의 오류가 미치는 영향"
+              },
+              {
+                "id": "B",
+                "text": "맞춤법 검사의 중요성"
+              },
+              {
+                "id": "C",
+                "text": "논증을 잘하는 방법"
+              },
+              {
+                "id": "D",
+                "text": "설득력 있는 말하기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 1,
+                "end": 29
+              }
+            ]
+          },
+          "question": {
+            "prompt": "대표적인 논리적 오류 중 하나는 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흑백 논리의 오류"
+              },
+              {
+                "id": "B",
+                "text": "빨간색 논리의 오류"
+              },
+              {
+                "id": "C",
+                "text": "무지개 논리의 오류"
+              },
+              {
+                "id": "D",
+                "text": "투명 논리의 오류"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 31,
+                "end": 69
+              }
+            ]
+          },
+          "question": {
+            "prompt": "흑백 논리는 정답이 몇 가지뿐이라고 생각하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "두 가지뿐"
+              },
+              {
+                "id": "B",
+                "text": "여러 가지"
+              },
+              {
+                "id": "C",
+                "text": "수백 가지"
+              },
+              {
+                "id": "D",
+                "text": "정답이 없음"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 71,
+                "end": 114
+              }
+            ]
+          },
+          "question": {
+            "prompt": "흑백 논리의 예시로 적절한 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "칭찬하지 않으니 미워함"
+              },
+              {
+                "id": "B",
+                "text": "모든 고양이는 사나움"
+              },
+              {
+                "id": "C",
+                "text": "그는 좋은 사람임"
+              },
+              {
+                "id": "D",
+                "text": "내일은 비가 올 것임"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 116,
+                "end": 158
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이러한 주장은 무엇을 무시한 것인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다양한 감정의 존재"
+              },
+              {
+                "id": "B",
+                "text": "시간의 흐름"
+              },
+              {
+                "id": "C",
+                "text": "공간의 제약"
+              },
+              {
+                "id": "D",
+                "text": "자연의 법칙"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "흑백 논리 오류의 개념"
+              },
+              {
+                "id": "B",
+                "text": "성급한 일반화의 뜻"
+              },
+              {
+                "id": "C",
+                "text": "감정을 표현하는 방법"
+              },
+              {
+                "id": "D",
+                "text": "정답을 찾는 기술"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 2,
+                "end": 23
+              }
+            ]
+          },
+          "question": {
+            "prompt": "흔히 발생하는 또 다른 오류는 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "성급한 일반화의 오류"
+              },
+              {
+                "id": "B",
+                "text": "흑백 논리의 오류"
+              },
+              {
+                "id": "C",
+                "text": "복잡한 계산의 오류"
+              },
+              {
+                "id": "D",
+                "text": "느린 일반화의 오류"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 25,
+                "end": 66
+              }
+            ]
+          },
+          "question": {
+            "prompt": "성급한 일반화란 어떤 실수인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "적은 사례로 단정 지음"
+              },
+              {
+                "id": "B",
+                "text": "많은 사례를 조사함"
+              },
+              {
+                "id": "C",
+                "text": "결론을 미루는 것"
+              },
+              {
+                "id": "D",
+                "text": "전체를 부정하는 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 68,
+                "end": 115
+              }
+            ]
+          },
+          "question": {
+            "prompt": "성급한 일반화의 예시로 적절한 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 고양이는 사나움"
+              },
+              {
+                "id": "B",
+                "text": "칭찬하지 않으니 미워함"
+              },
+              {
+                "id": "C",
+                "text": "어제 비가 많이 왔음"
+              },
+              {
+                "id": "D",
+                "text": "친구는 고양이를 좋아함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 114,
+                "end": 150
+              }
+            ]
+          },
+          "question": {
+            "prompt": "결론을 내릴 때 무엇을 무시하면 안 되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "예외적인 경우"
+              },
+              {
+                "id": "B",
+                "text": "일반적인 경우"
+              },
+              {
+                "id": "C",
+                "text": "평범한 사실"
+              },
+              {
+                "id": "D",
+                "text": "당연한 결과"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "성급한 일반화의 의미"
+              },
+              {
+                "id": "B",
+                "text": "동물을 키우는 방법"
+              },
+              {
+                "id": "C",
+                "text": "결론을 빨리 내리는 법"
+              },
+              {
+                "id": "D",
+                "text": "예외 상황의 위험성"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 3,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "주장의 오류를 고치려면 어떤 연습이 필요한가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다양한 관점에서 생각"
+              },
+              {
+                "id": "B",
+                "text": "한 가지 생각만 고집"
+              },
+              {
+                "id": "C",
+                "text": "무조건 반대하기"
+              },
+              {
+                "id": "D",
+                "text": "결론부터 말하기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 42,
+                "end": 74
+              }
+            ]
+          },
+          "question": {
+            "prompt": "주장을 점검할 때 피해야 할 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "극단적인 표현"
+              },
+              {
+                "id": "B",
+                "text": "부드러운 표현"
+              },
+              {
+                "id": "C",
+                "text": "솔직한 표현"
+              },
+              {
+                "id": "D",
+                "text": "짧은 표현"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 76,
+                "end": 111
+              }
+            ]
+          },
+          "question": {
+            "prompt": "주장을 뒷받침하기 위해 어떤 근거가 필요한가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "객관적이고 충분한 근거"
+              },
+              {
+                "id": "B",
+                "text": "주관적이고 부족한 근거"
+              },
+              {
+                "id": "C",
+                "text": "감정적인 추측과 느낌"
+              },
+              {
+                "id": "D",
+                "text": "누군가에게 들은 소문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 112,
+                "end": 139
+              }
+            ]
+          },
+          "question": {
+            "prompt": "논리적인 글은 어디에서 비롯되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "탄탄한 근거와 합리성"
+              },
+              {
+                "id": "B",
+                "text": "복잡한 단어와 길고 긴 문장"
+              },
+              {
+                "id": "C",
+                "text": "감동적인 이야기"
+              },
+              {
+                "id": "D",
+                "text": "극단적인 주장"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주장의 오류를 고치는 방법"
+              },
+              {
+                "id": "B",
+                "text": "논리적인 글의 종류"
+              },
+              {
+                "id": "C",
+                "text": "예외 상황을 만드는 법"
+              },
+              {
+                "id": "D",
+                "text": "다양한 관점의 역사"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "오류"
+        },
+        {
+          "id": "c2",
+          "text": "신뢰도"
+        },
+        {
+          "id": "c3",
+          "text": "흑백 논리"
+        },
+        {
+          "id": "c4",
+          "text": "성급한 일반화"
+        },
+        {
+          "id": "c5",
+          "text": "예외"
+        },
+        {
+          "id": "c6",
+          "text": "객관적 근거"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 2
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "주장에 오류가 있으면 어떤 문제가 발생하나요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 44,
+              "end": 90
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "글의 신뢰도가 떨어짐"
+            },
+            {
+              "id": "B",
+              "text": "글의 분량이 줄어듦"
+            },
+            {
+              "id": "C",
+              "text": "글이 더 재미있어짐"
+            },
+            {
+              "id": "D",
+              "text": "설득력이 높아짐"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "id": "q2",
+          "prompt": "흑백 논리의 오류가 발생하는 원인은 무엇인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 31,
+              "end": 69
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "정답이 두 가지만 있다고 생각"
+            },
+            {
+              "id": "B",
+              "text": "모든 사람이 동의한다고 착각"
+            },
+            {
+              "id": "C",
+              "text": "적은 사례로 전체를 판단함"
+            },
+            {
+              "id": "D",
+              "text": "자신의 의견만 무조건 옳다고 믿음"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "id": "q3",
+          "prompt": "오류를 고치기 위해 점검해야 할 사항은 무엇인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 42,
+              "end": 74
+            }
+          ],
+          "choices": [
+            {
+              "id": "A",
+              "text": "예외 상황이 없는지 점검"
+            },
+            {
+              "id": "B",
+              "text": "어려운 단어가 있는지 확인"
+            },
+            {
+              "id": "C",
+              "text": "글자 수를 세어봄"
+            },
+            {
+              "id": "D",
+              "text": "결론을 삭제함"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        }
+      ]
+    }
+  },
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "다툰 친구에게 용기 내어 건넨 사과 편지",
-  "description": "일일 독해 - 정독·복기·확인",
-  "targetLevel": "FREGE_2",
   "schoolGradeRange": {
     "min": 5,
-    "max": 5
+    "max": 6
   },
-  "area": "READING",
-  "subArea": "LITERATURE",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 420,
-  "assets": {},
-  "payload": {
-    "passage": {
-      "format": "TEXT",
-      "paragraphs": [
-        {
-          "id": "p1",
-          "text": "방과 후 교실, 민석이는 텅 빈 책상에 앉아 끄적거리던 연습장을 신경질적으로 쭉쭉 찢었습니다. 오전 체육 시간에 둘도 없는 짝꿍 재원이와 날카로운 말다툼을 벌이고 틀어졌기 때문입니다. 피구 경기를 하다가 우연히 발이 얽혀 넘어진 단순한 실수였는데, 욱하는 성질을 참지 못한 민석이가 홧김에 재원이의 어깨를 팍 밀쳐 버렸습니다. 화가 머리끝까지 난 재원이는 가방을 메자마자 민석이에게 눈길 한 번 주지 않고 교문 밖으로 쌩하고 나가버렸습니다. 시간이 지날수록 민석이의 가슴 속에는 후회와 답답함이 먹구름처럼 밀려왔습니다."
-        },
-        {
-          "id": "p2",
-          "text": "사실 민석이는 자기가 화를 낸 행동이 지나쳤다는 점을 누구보다 뼈저리게 잘 알고 있었습니다. 고의로 발을 건 것도 아니었는데 친구를 거칠게 밀어 넘어뜨린 것은 핑계 댈 수 없는 큰 잘못이었습니다. 하지만 재원이에게 다가가 먼저 \"미안해\" 하고 입을 떼기에는 알량한 자존심이 앞을 가로막았습니다. '재원이도 나한테 먼저 쏜살같이 험한 말을 뱉었잖아' 하고 변명해 보아도 뱃속의 찜찜한 바윗덩어리는 치워지지 않았습니다. 이대로 불편하게 며칠을 모른 척 지나기엔 재원이와의 추억이 너무 아까웠습니다."
-        },
-        {
-          "id": "p3",
-          "text": "한참을 엎드려 바닥만 노려보던 민석이는 결국 서랍에서 작은 노란 수첩과 볼펜을 꺼냈습니다. 그리고 흔들리는 볼펜 끝을 꽉 쥔 채 속마음을 조그만 종이 위에 한 자 한 자 꾹꾹 눌러 담기 시작했습니다. \"재원아, 아침에 화를 못 참고 널 아프게 밀어붙인 건 정말 내 못난 행동이었어. 핑계 대지 않고 진심으로 싹싹 빌게. 내일 분식집에서 떡볶이를 살 테니까 우리 다시 재밌게 놀자.\" 멋 부린 어려운 말은 없었지만 떨리는 진심이 솔직하게 묻어나는 네 줄짜리 짧은 글이었습니다. 편지를 완성하고 나니 숨구멍을 틀어막던 먼지가 훅 빠져나간 듯 몸이 날아갈 듯 가벼워졌습니다."
-        },
-        {
-          "id": "p4",
-          "text": "다음 날 아침 일찍 등교한 민석이는 재원이의 빈 서랍 깊숙한 곳에 접은 노란 편지를 살그머니 넣어치웠습니다. 잠시 후 굳은 표정으로 교실에 온 재원이는 서랍에서 편지를 꺼내 읽더니 곧장 휙 하고 몸을 돌려 민석이를 찾았습니다. 그리고 피식 입꼬리를 올리며 \"떡볶이 가장 매운맛으로 안 사주면 용서 없다.\" 하며 주먹을 민석이의 어깨에 가볍게 툭 부딪쳐 주었습니다. 친구에게 먼저 숙이고 사과하는 것은 비굴하게 자존심이 꺾이는 짓이 절대 아니었습니다. 꼬인 실타래를 내 손으로 평화롭게 풀어내는 세상에서 제일 당당하고 단단한 진짜 용기입니다."
-        }
-      ]
-    },
-    "intensive": {
-      "timeline": []
-    },
-    "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
-    },
-    "confirm": {
-      "questions": []
-    }
-  }
+  "timeLimitSec": 900,
+  "assets": {}
 }

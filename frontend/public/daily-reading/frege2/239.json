@@ -1,65 +1,798 @@
 {
-  "contentId": "dr-f2-239",
+  "contentId": "dr-frege2-239",
+  "title": "[건의문] 지역 화폐 사용 해결을 위한 제안",
+  "targetLevel": "FREGE_2",
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "시장님께 건의드립니다. 최근 우리 시에서 발행한 지역 화폐의 사용률이 저조하여 지역 경제 활성화라는 본래의 목적을 달성하지 못하고 있습니다. 시민들이 지역 화폐를 적극적으로 사용하지 않는 원인을 파악하고, 이를 해결하기 위한 방안을 마련해 주시기를 바랍니다."
+        },
+        {
+          "id": "p2",
+          "text": "가장 큰 문제는 지역 화폐를 사용할 수 있는 가맹점이 부족하다는 것입니다. 특히 젊은 층이 자주 이용하는 편의점이나 카페 등에서 사용이 제한되는 경우가 많아 불편을 겪고 있습니다. 가맹점 가입 절차를 간소화하고 홍보를 강화하여 가맹점을 대폭 확대해 주시기 바랍니다."
+        },
+        {
+          "id": "p3",
+          "text": "또한, 지역 화폐 앱의 사용 편의성을 개선해야 합니다. 현재 앱은 결제 과정이 복잡하고 오류가 자주 발생하여 사용자들이 불편을 호소하고 있습니다. 사용자 인터페이스를 직관적으로 개선하고 결제 시스템의 안정성을 높여 누구나 쉽게 이용할 수 있도록 조치해 주십시오."
+        },
+        {
+          "id": "p4",
+          "text": "지역 화폐 사용을 독려하기 위한 혜택도 늘려야 합니다. 충전 시 제공되는 할인율을 한시적으로 높이거나, 지역 내 문화 시설 이용 시 추가 할인을 제공하는 방안을 고려해 주십시오. 시민들이 지역 화폐 사용의 장점을 체감할 수 있다면 사용률은 자연스럽게 높아질 것입니다."
+        }
+      ],
+      "format": "TEXT"
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 12
+              }
+            ]
+          },
+          "question": {
+            "prompt": "누구에게 건의하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시장님"
+              },
+              {
+                "id": "B",
+                "text": "도지사님"
+              },
+              {
+                "id": "C",
+                "text": "구청장님"
+              },
+              {
+                "id": "D",
+                "text": "대통령님"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 13,
+                "end": 78
+              }
+            ]
+          },
+          "question": {
+            "prompt": "목적을 달성하지 못한 원인은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역 화폐의 사용률 저조"
+              },
+              {
+                "id": "B",
+                "text": "시민들의 이사 증가"
+              },
+              {
+                "id": "C",
+                "text": "물가의 급격한 상승"
+              },
+              {
+                "id": "D",
+                "text": "다른 화폐의 등장"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 79,
+                "end": 143
+              }
+            ]
+          },
+          "question": {
+            "prompt": "마련해 주기를 바라는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "해결하기 위한 방안"
+              },
+              {
+                "id": "B",
+                "text": "새로운 화폐 발행"
+              },
+              {
+                "id": "C",
+                "text": "시민들의 벌금 납부"
+              },
+              {
+                "id": "D",
+                "text": "앱의 삭제 조치"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "1문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역 화폐 사용률 저조 문제 제기"
+              },
+              {
+                "id": "B",
+                "text": "시장님의 업적 칭찬"
+              },
+              {
+                "id": "C",
+                "text": "지역 경제 활성화의 역사"
+              },
+              {
+                "id": "D",
+                "text": "새로운 화폐 디자인 제안"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "가장 큰 문제는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가맹점이 부족하다는 것"
+              },
+              {
+                "id": "B",
+                "text": "화폐 디자인이 낡은 것"
+              },
+              {
+                "id": "C",
+                "text": "앱이 해킹당했다는 것"
+              },
+              {
+                "id": "D",
+                "text": "할인 혜택이 아예 없는 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 42,
+                "end": 100
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사용이 제한되는 주된 곳은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "편의점이나 카페 등"
+              },
+              {
+                "id": "B",
+                "text": "대형 마트와 백화점"
+              },
+              {
+                "id": "C",
+                "text": "학교와 도서관"
+              },
+              {
+                "id": "D",
+                "text": "병원과 약국"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 101,
+                "end": 147
+              }
+            ]
+          },
+          "question": {
+            "prompt": "가맹점 확대를 위해 할 일은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가입 절차 간소화 등"
+              },
+              {
+                "id": "B",
+                "text": "가입비 인상 조치"
+              },
+              {
+                "id": "C",
+                "text": "세금 혜택 축소"
+              },
+              {
+                "id": "D",
+                "text": "상인 대상 처벌 강화"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "2문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가맹점 부족 문제와 확대 요청"
+              },
+              {
+                "id": "B",
+                "text": "편의점의 매출 감소"
+              },
+              {
+                "id": "C",
+                "text": "젊은 층의 소비 문화"
+              },
+              {
+                "id": "D",
+                "text": "가맹점 가입의 장점"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 30
+              }
+            ]
+          },
+          "question": {
+            "prompt": "개선해야 할 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "앱의 사용 편의성"
+              },
+              {
+                "id": "B",
+                "text": "앱의 아이콘 모양"
+              },
+              {
+                "id": "C",
+                "text": "앱의 배경 음악"
+              },
+              {
+                "id": "D",
+                "text": "오프라인 화폐 크기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 31,
+                "end": 81
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사용자가 불편을 호소하는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결제 과정 복잡과 오류"
+              },
+              {
+                "id": "B",
+                "text": "앱의 용량이 너무 커서"
+              },
+              {
+                "id": "C",
+                "text": "배터리 소모가 심해서"
+              },
+              {
+                "id": "D",
+                "text": "디자인이 예쁘지 않아서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 82,
+                "end": 145
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이용을 쉽게 하기 위해 높일 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결제 시스템의 안정성"
+              },
+              {
+                "id": "B",
+                "text": "할인 쿠폰의 발급량"
+              },
+              {
+                "id": "C",
+                "text": "고객 센터 직원의 수"
+              },
+              {
+                "id": "D",
+                "text": "앱의 업데이트 주기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "3문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역 화폐 앱의 사용 편의성 개선"
+              },
+              {
+                "id": "B",
+                "text": "모바일 결제의 역사"
+              },
+              {
+                "id": "C",
+                "text": "앱 개발자의 어려움"
+              },
+              {
+                "id": "D",
+                "text": "인터페이스 디자인 방법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 30
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사용을 독려하기 위해 늘릴 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "혜택"
+              },
+              {
+                "id": "B",
+                "text": "벌금"
+              },
+              {
+                "id": "C",
+                "text": "세금"
+              },
+              {
+                "id": "D",
+                "text": "안내문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 31,
+                "end": 99
+              }
+            ]
+          },
+          "question": {
+            "prompt": "고려해야 할 방안은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "할인율을 높이는 방안 등"
+              },
+              {
+                "id": "B",
+                "text": "사용 기한을 단축하는 방안"
+              },
+              {
+                "id": "C",
+                "text": "종이 화폐만 발행하는 방안"
+              },
+              {
+                "id": "D",
+                "text": "모든 혜택을 없애는 방안"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 100,
+                "end": 148
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사용률이 높아질 조건은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "장점을 체감할 수 있다면"
+              },
+              {
+                "id": "B",
+                "text": "벌금이 부과된다면"
+              },
+              {
+                "id": "C",
+                "text": "억지로 사용하게 한다면"
+              },
+              {
+                "id": "D",
+                "text": "결제가 어렵게 된다면"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "4문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역 화폐 사용 독려를 위한 혜택 확대"
+              },
+              {
+                "id": "B",
+                "text": "문화 시설의 종류"
+              },
+              {
+                "id": "C",
+                "text": "할인율의 계산 방법"
+              },
+              {
+                "id": "D",
+                "text": "장점 체감의 어려움"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "사용률 저조"
+        },
+        {
+          "id": "c2",
+          "text": "가맹점 부족"
+        },
+        {
+          "id": "c3",
+          "text": "절차 간소화"
+        },
+        {
+          "id": "c4",
+          "text": "앱 편의성 개선"
+        },
+        {
+          "id": "c5",
+          "text": "결제 시스템 안정"
+        },
+        {
+          "id": "c6",
+          "text": "할인 혜택 확대"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 2
+    },
+    "confirm": {
+      "questions": [
+        {
+          "prompt": "건의문에서 제기한 가장 큰 문제는 무엇인가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 1,
+              "end": 41
+            }
+          ],
+          "id": "q1",
+          "choices": [
+            {
+              "id": "A",
+              "text": "가맹점이 부족하다는 것"
+            },
+            {
+              "id": "B",
+              "text": "화폐 디자인이 낡았다는 것"
+            },
+            {
+              "id": "C",
+              "text": "앱이 해킹당했다는 것"
+            },
+            {
+              "id": "D",
+              "text": "세금이 부족하다는 것"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "prompt": "앱의 편의성 개선을 위해 요구한 조치는 무엇인가?",
+          "answerRanges": [],
+          "id": "q2",
+          "choices": [
+            {
+              "id": "A",
+              "text": "결제 시스템의 안정성 높이기"
+            },
+            {
+              "id": "B",
+              "text": "새로운 앱으로 교체하기"
+            },
+            {
+              "id": "C",
+              "text": "앱 사용료를 면제하기"
+            },
+            {
+              "id": "D",
+              "text": "오프라인 결제만 허용하기"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        },
+        {
+          "prompt": "지역 화폐 사용을 독려하기 위해 제안한 방안은?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 34,
+              "end": 102
+            }
+          ],
+          "id": "q3",
+          "choices": [
+            {
+              "id": "A",
+              "text": "충전 할인율을 높이기"
+            },
+            {
+              "id": "B",
+              "text": "화폐 발행을 중단하기"
+            },
+            {
+              "id": "C",
+              "text": "가맹점 수수료를 인상하기"
+            },
+            {
+              "id": "D",
+              "text": "종이 화폐만 사용하기"
+            }
+          ],
+          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          }
+        }
+      ]
+    }
+  },
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "두발자전거를 처음 혼자 배우던 날",
-  "description": "일일 독해 - 정독·복기·확인",
-  "targetLevel": "FREGE_2",
   "schoolGradeRange": {
     "min": 5,
-    "max": 5
+    "max": 6
   },
-  "area": "READING",
-  "subArea": "LITERATURE",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 420,
-  "assets": {},
-  "payload": {
-    "passage": {
-      "format": "TEXT",
-      "paragraphs": [
-        {
-          "id": "p1",
-          "text": "화창한 주말 오후, 동네 공원 넓은 광장 위에는 잔뜩 긴장한 은서의 숨소리만이 맴돌았습니다. 오늘은 뒷바퀴에 튼튼히 붙어 있던 두 개의 보조 바퀴를 떼고 진짜 두발자전거를 처음 도전하는 날이었습니다. 헬멧을 조여 매고 조심스레 안장에 엉덩이를 올렸지만, 다리를 땅에서 떼자마자 자전거가 크게 기우뚱거렸습니다. 페달을 밟아 힘을 내보려 했으나 가볍던 핸들은 무거운 괴물처럼 휙 꺾이며 번번이 바닥으로 쓰러졌습니다."
-        },
-        {
-          "id": "p2",
-          "text": "몇 번이나 아스팔트에 무릎을 쓸리고 멍이 선명하게 들었습니다. 손바닥에 땀이 밴 은서는 더 이상 페달을 돌릴 힘이 없어서 핸들을 놓고 털썩 주저앉았습니다. \"엄마, 자꾸 나만 옆으로 넘어지고 발목이 너무 아파. 그냥 나중에 배울래.\" 엉엉 우는 은서를 일으켜 세운 엄마는 짐받이 시트를 단단히 붙잡고 타일렀습니다. \"바닥을 보니까 핸들이 더 심하게 흔들리는 거야. 정면만 딱 바라보고 세게 굴러봐. 엄마가 끝까지 짐받이를 잡아 줄게.\""
-        },
-        {
-          "id": "p3",
-          "text": "엄마의 약속을 믿은 은서는 입술을 깨물고 핸들을 다시 꽉 움켜쥐었습니다. 시퍼런 멍으로 아픈 허벅지에 힘을 주고 하나둘 박자에 맞추어 앞만 노려본 채 페달을 짓눌렀습니다. 놀랍게도 자전거가 동그랗게 굴러 속도를 얻기 시작하자, 뱀처럼 흔들리던 핸들이 스스로 꼿꼿하게 자리를 훌륭히 잡아 나갔습니다. 뺨을 때리던 매서운 봄바람이 어느새 시원하고 짜릿한 비행의 마찰로 변하는 순간이었습니다."
-        },
-        {
-          "id": "p4",
-          "text": "\"그래, 멈추지 말고 계속 달리렴!\" 뒤편에서 아득하게 들려오는 벅찬 목소리에 은서가 균형을 잡고 고개를 살짝 돌렸습니다. 놀랍게도 엄마는 짐받이 손잡이를 진작에 손에서 놓은 채 저 멀리 화단에 서서 박수를 치고 있었습니다. 엄마의 손길 없이 은서 스스로 페달을 박차올려 혼자 하늘길을 쌩쌩 누비고 있던 사실을 그제야 눈치챘습니다. 두발자전거는 피해야 할 무서운 넘어짐의 고통이 아니었습니다. 무릎이 깨지는 시련 속에서도 내 힘을 곧게 믿고 돌진하면 공기 속으로 둥실 띄워 주는 두 개의 멋진 동그란 마법 날개였습니다."
-        }
-      ]
-    },
-    "intensive": {
-      "timeline": []
-    },
-    "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
-    },
-    "confirm": {
-      "questions": []
-    }
-  }
+  "timeLimitSec": 900,
+  "assets": {}
 }
