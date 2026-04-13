@@ -1,65 +1,917 @@
 {
-  "contentId": "dr-f2-054",
-  "contentType": "DAILY_READING",
+  "contentId": "dr-frege2-054",
+  "title": "[비문학] 국내총생산의 한계",
+  "targetLevel": "FREGE_2",
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "국내총생산은 한 나라의 경제 규모를 나타내는 대표적인 지표이다. 이는 일정 기간 동안 국내에서 생산된 재화와 서비스의 가치를 합산한 것이다. 국가 간의 경제력을 비교하거나 경제 성장률을 측정할 때 유용하게 쓰인다. 하지만 국내총생산이 국민의 삶의 질을 완벽하게 반영하는 것은 아니다."
+        },
+        {
+          "id": "p2",
+          "text": "국내총생산은 시장에서 거래되는 가치만 포함한다는 한계가 있다. 집에서 가족을 위해 하는 가사 노동이나 봉사 활동은 포함되지 않는다. 이처럼 시장을 통하지 않는 활동은 우리의 삶에 큰 기여를 함에도 제외된다. 따라서 국내총생산 수치만으로 한 국가의 실제 복지 수준을 알기는 어렵다."
+        },
+        {
+          "id": "p3",
+          "text": "국내총생산은 환경 오염이나 자원 고갈과 같은 부정적 외부 효과를 무시한다. 공장이 제품을 생산하여 대기 오염을 일으키면 국내총생산은 오히려 증가한다. 오염된 환경을 복구하기 위해 지출하는 비용 역시 경제 활동으로 계산되기 때문이다. 이는 경제 성장이 삶의 질 저하로 이어질 수 있음을 보여주는 단적인 예이다."
+        },
+        {
+          "id": "p4",
+          "text": "최근에는 국내총생산의 한계를 보완하기 위한 새로운 지표들이 개발되고 있다. 국민의 건강이나 교육 수준과 같은 비물질적인 요소를 평가에 반영하는 것이다. 깨끗한 환경과 여가 시간도 중요한 행복의 척도로 고려되고 있다. 우리는 경제적 성장뿐만 아니라 진정한 삶의 질을 함께 고민해야 한다."
+        }
+      ],
+      "format": "TEXT"
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 35
+              }
+            ]
+          },
+          "question": {
+            "prompt": "국내총생산은 무엇을 나타내는 지표인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "국가 면적"
+              },
+              {
+                "id": "B",
+                "text": "인구 성장"
+              },
+              {
+                "id": "C",
+                "text": "한 나라의 경제 규모"
+              },
+              {
+                "id": "D",
+                "text": "개인 소득"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 36,
+                "end": 78
+              }
+            ]
+          },
+          "question": {
+            "prompt": "국내총생산이 합산하는 가치는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수입된 재화"
+              },
+              {
+                "id": "B",
+                "text": "해외에서 생산된 서비스"
+              },
+              {
+                "id": "C",
+                "text": "국내에서 생산된 재화와 서비스"
+              },
+              {
+                "id": "D",
+                "text": "과거의 재화"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 79,
+                "end": 119
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 지표가 유용하게 쓰이는 경우는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수명 연장"
+              },
+              {
+                "id": "B",
+                "text": "국가 간의 경제력 비교"
+              },
+              {
+                "id": "C",
+                "text": "예술적 가치 평가"
+              },
+              {
+                "id": "D",
+                "text": "환경 오염 측정"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 120,
+                "end": 157
+              }
+            ]
+          },
+          "question": {
+            "prompt": "국내총생산이 완벽하게 반영하지 못하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "기업 이윤"
+              },
+              {
+                "id": "B",
+                "text": "수출액"
+              },
+              {
+                "id": "C",
+                "text": "국민의 삶의 질"
+              },
+              {
+                "id": "D",
+                "text": "세금"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "국내총생산의 의미와 용도"
+              },
+              {
+                "id": "B",
+                "text": "국가 간의 빈부 격차"
+              },
+              {
+                "id": "C",
+                "text": "경제 성장률의 한계"
+              },
+              {
+                "id": "D",
+                "text": "삶의 질의 중요성"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 1,
+                "end": 35
+              }
+            ]
+          },
+          "question": {
+            "prompt": "국내총생산의 한계는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모든 가치 포함"
+              },
+              {
+                "id": "B",
+                "text": "시장에서 거래되는 가치만 포함"
+              },
+              {
+                "id": "C",
+                "text": "해외 거래 포함"
+              },
+              {
+                "id": "D",
+                "text": "노동 시간 포함"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 36,
+                "end": 74
+              }
+            ]
+          },
+          "question": {
+            "prompt": "국내총생산에 포함되지 않는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "공장 생산"
+              },
+              {
+                "id": "B",
+                "text": "수출입"
+              },
+              {
+                "id": "C",
+                "text": "가사 노동이나 봉사 활동"
+              },
+              {
+                "id": "D",
+                "text": "금융 거래"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 75,
+                "end": 116
+              }
+            ]
+          },
+          "question": {
+            "prompt": "제외되는 활동의 특징은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가치가 없음"
+              },
+              {
+                "id": "B",
+                "text": "삶에 큰 기여를 함"
+              },
+              {
+                "id": "C",
+                "text": "불법적인 활동임"
+              },
+              {
+                "id": "D",
+                "text": "시간 낭비임"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 117,
+                "end": 155
+              }
+            ]
+          },
+          "question": {
+            "prompt": "수치만으로 알기 어려운 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경제 규모"
+              },
+              {
+                "id": "B",
+                "text": "생산량"
+              },
+              {
+                "id": "C",
+                "text": "실제 복지 수준"
+              },
+              {
+                "id": "D",
+                "text": "물가 상승률"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가사 노동의 경제적 가치"
+              },
+              {
+                "id": "B",
+                "text": "시장 외 거래 누락의 한계"
+              },
+              {
+                "id": "C",
+                "text": "자원봉사의 필요성"
+              },
+              {
+                "id": "D",
+                "text": "복지 국가의 조건"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 2,
+                "end": 43
+              }
+            ]
+          },
+          "question": {
+            "prompt": "국내총생산이 무시하는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물질적 이익"
+              },
+              {
+                "id": "B",
+                "text": "부정적 외부 효과"
+              },
+              {
+                "id": "C",
+                "text": "긍정적 외부 효과"
+              },
+              {
+                "id": "D",
+                "text": "정부 지출"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 44,
+                "end": 85
+              }
+            ]
+          },
+          "question": {
+            "prompt": "공장이 대기 오염을 일으킬 때의 결과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "국내총생산 오히려 증가"
+              },
+              {
+                "id": "B",
+                "text": "국내총생산 감소"
+              },
+              {
+                "id": "C",
+                "text": "수출 증가"
+              },
+              {
+                "id": "D",
+                "text": "복지 수준 상승"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 86,
+                "end": 131
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이때 지출하는 비용이 계산되는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자원 고갈이라서"
+              },
+              {
+                "id": "B",
+                "text": "경제 활동으로 계산되기 때문"
+              },
+              {
+                "id": "C",
+                "text": "환경이 파괴되어서"
+              },
+              {
+                "id": "D",
+                "text": "봉사 활동이라서"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 132,
+                "end": 171
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 예시가 보여주는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "삶의 질 향상"
+              },
+              {
+                "id": "B",
+                "text": "경제 성장과 삶의 질의 비례"
+              },
+              {
+                "id": "C",
+                "text": "경제 성장이 삶의 질 저하로 이어짐"
+              },
+              {
+                "id": "D",
+                "text": "환경 보호의 중요성"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "부정적 외부 효과 무시의 한계"
+              },
+              {
+                "id": "B",
+                "text": "공장 자동화의 영향"
+              },
+              {
+                "id": "C",
+                "text": "환경 복구 비용의 절감"
+              },
+              {
+                "id": "D",
+                "text": "대기 오염의 심각성"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 3,
+                "end": 44
+              }
+            ]
+          },
+          "question": {
+            "prompt": "최근에 개발되고 있는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "새로운 생산 방식"
+              },
+              {
+                "id": "B",
+                "text": "새로운 경제 지표"
+              },
+              {
+                "id": "C",
+                "text": "새로운 공장"
+              },
+              {
+                "id": "D",
+                "text": "새로운 거래 시장"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 45,
+                "end": 87
+              }
+            ]
+          },
+          "question": {
+            "prompt": "평가에 반영되는 비물질적 요소는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주식 가격"
+              },
+              {
+                "id": "B",
+                "text": "국민의 건강이나 교육 수준"
+              },
+              {
+                "id": "C",
+                "text": "부동산 가치"
+              },
+              {
+                "id": "D",
+                "text": "수출액"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 88,
+                "end": 123
+              }
+            ]
+          },
+          "question": {
+            "prompt": "행복의 척도로 고려되는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "근무 시간"
+              },
+              {
+                "id": "B",
+                "text": "깨끗한 환경과 여가 시간"
+              },
+              {
+                "id": "C",
+                "text": "소비량"
+              },
+              {
+                "id": "D",
+                "text": "생산성"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 124,
+                "end": 158
+              }
+            ]
+          },
+          "question": {
+            "prompt": "우리가 함께 고민해야 할 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "경제적 성장만"
+              },
+              {
+                "id": "B",
+                "text": "외국과의 경쟁만"
+              },
+              {
+                "id": "C",
+                "text": "경제적 성장과 진정한 삶의 질"
+              },
+              {
+                "id": "D",
+                "text": "생산의 극대화"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "여가 시간의 증가"
+              },
+              {
+                "id": "B",
+                "text": "교육 수준의 향상"
+              },
+              {
+                "id": "C",
+                "text": "새로운 지표 개발과 삶의 질 고려"
+              },
+              {
+                "id": "D",
+                "text": "경제 성장의 중요성"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "경제 규모 지표"
+        },
+        {
+          "id": "c2",
+          "text": "시장 거래만 포함"
+        },
+        {
+          "id": "c3",
+          "text": "가사 노동 제외"
+        },
+        {
+          "id": "c4",
+          "text": "부정적 효과 무시"
+        },
+        {
+          "id": "c5",
+          "text": "삶의 질 지표"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "국내총생산에 대한 설명으로 올바른 것은?",
+          "answerText": "시장에서 거래되지 않는 가치는 제외된다.",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 1,
+              "end": 35
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "경제 성장이 삶의 질 저하로 이어질 수 있는 예는?",
+          "answerText": "공해로 인한 국내총생산의 증가",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 85
+            },
+            {
+              "paragraphId": "p3",
+              "start": 86,
+              "end": 131
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "국내총생산의 한계를 보완하기 위해 고려하는 요소는?",
+          "answerText": "국민의 건강, 교육 수준, 여가 시간",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 45,
+              "end": 87
+            },
+            {
+              "paragraphId": "p4",
+              "start": 88,
+              "end": 123
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  },
   "version": 1,
   "status": "PUBLISHED",
-  "title": "건강을 지키는 가장 쉬운 방법, 수면",
-  "description": "일일 독해 - 정독·복기·확인",
-  "targetLevel": "FREGE_2",
-  "schoolGradeRange": {
-    "min": 5,
-    "max": 5
-  },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "description": "[비문학] 국내총생산의 한계",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학"
   ],
+  "schoolGradeRange": {
+    "min": 4,
+    "max": 4
+  },
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
-  "assets": {},
-  "payload": {
-    "passage": {
-      "format": "TEXT",
-      "paragraphs": [
-        {
-          "id": "p1",
-          "text": "늦은 밤까지 심야 텔레비전 예능 프로그램 시청이나 박진감 넘치는 컴퓨터 오락 게임에 푹 빠져버려 매정한 알람 소리가 울리는 다음 날 아침 무거운 눈꺼풀을 두 손으로 억지로 비비며 힘들고 짜증 나게 이불에서 간신히 일어난 졸린 경험이 아마 누구나 한 번쯤은 있을 것입니다. 요즘 초등학생들은 밤늦게 끝나는 빡빡한 방과 후 학교 일정이나 심야 시간 스마트폰 전자기기 과다 사용으로 인해, 밤에 제때 포근하고 쾌적하게 충분한 잠을 자지 못하는 경우가 걱정스러울 정도로 늘고 있습니다. 하지만 신체가 폭풍처럼 급격히 성장하고 중요한 두뇌가 완성되는 아동 청소년 시기에 밤에 푹 잠을 취하는 것은 매끼 식사만큼이나 내 몸을 지키는 가장 기본 필수 습관입니다."
-        },
-        {
-          "id": "p2",
-          "text": "밤에 불을 끄고 편안히 깊은 잠을 자는 심야 시간은, 단순히 우리 몸의 시동 전원을 기계 스위치처럼 끄고 침대에서 조용하게 아무 생각 없이 게으르게 쉬는 무방비하고 가치가 아예 없는 시간이 절대 아닙니다. 깨어 열심히 학교에서 활동하는 낮 동안 우리의 복잡한 몸과 뇌 부분은 쉴 새 없이 빠르게 움직이고 주변 자극에 팽팽하게 집중 긴장하며 몸속에 많은 피로 독소 물질 찌꺼기를 차곡차곡 쌓게 됩니다. 우리가 밤에 깊고 조용한 숙면 상태에 사르르 빠질 때 우리의 두뇌는 본격적인 청결 휴식을 취하며, 그날 하루 동안 눈으로 보고 새롭게 학교에서 배운 중요한 모든 지식을 장기 기억 머리 정돈 장치 공간에 가지런하게 저장하는 아주 중요한 뇌 청소 작업을 깊숙이 조용히 수행합니다."
-        },
-        {
-          "id": "p3",
-          "text": "또한 밤에 스마트폰을 끄고 일찍 이불을 덮으며 깊이 단잠을 자는 것은 내 뼈 키가 쑥쑥 위로 높이 크고 몸통 근육이 다부지게 튼튼해지는 신체 올바른 성장 호르몬 작용과 절대적으로 강력하게 직결되어 있습니다. 우리 몸의 단단한 뼈대와 질기고 강한 근육을 무럭무럭 자라게 하는 필수 성장 호르몬 물질액은, 주로 깜깜하고 고요한 늦은 밤 10시에서 동이 트는 새벽 2시 사이 우리가 가장 푹 깊숙하고 편안하게 진정한 꿀 수면을 취할 때 뇌하수체에서 가장 활발하고 왕성하게 마구 뿜어져 분비됩니다. 성장 물질 호르몬이 가장 듬뿍 넘치게 분비되어야 할 황금 같은 소중한 늦은 밤 시간에 제때 잠을 안 자고 불빛에 깨어 있다면 내 체격 성장과 외부 감기 병균을 막아내는 튼튼한 면역력 방패 체계 시스템마저 무너집니다."
-        },
-        {
-          "id": "p4",
-          "text": "신체의 튼튼한 골격 발달과 맑은 두뇌 건강을 안전하게 잘 지키기 위해서 우리 초등학교 아이들은 하룻밤 평균 8시간에서 10시간의 방해 없는 편안하고 충분한 수면 시간을 집에서 규칙적으로 확보하는 습관이 중요합니다. 숙면을 취하기 위해 우리는 잠들기 최소 1시간 전부터 두뇌를 심하게 흥분시키는 스마트폰 액정이나 텔레비전 모니터의 푸른 불빛 자극을 멀리하고 조명을 어둡게 낮추는 노력이 필요합니다. 제시간에 침대에 똑바로 누워 편안히 눈을 감는 수면 규칙은 다음 날 나의 상쾌하고 건강한 기분을 결정하는 아주 강력하고 현명한 건강 저축입니다."
-        }
-      ]
-    },
-    "intensive": {
-      "timeline": []
-    },
-    "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
-    },
-    "confirm": {
-      "questions": []
-    }
-  }
+  "timeLimitSec": 900,
+  "assets": {}
 }

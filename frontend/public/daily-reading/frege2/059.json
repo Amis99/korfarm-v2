@@ -1,65 +1,907 @@
 {
-  "contentId": "dr-f2-059",
-  "contentType": "DAILY_READING",
+  "contentId": "dr-frege2-059",
+  "title": "[건의문] 학급 회의 공개 방식 해결을 위한 제안",
+  "targetLevel": "FREGE_2",
+  "payload": {
+    "passage": {
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "안녕하십니까 선생님 반장 김민수입니다. 우리 반은 학급 회의 결과를 교실 뒤편 게시판에 종이로 붙여 알리고 있습니다. 하지만 이 방식은 시간이 지나면 종이가 찢어지거나 분실되는 문제가 있습니다. 또한 결석한 학생들은 회의 결과를 제때 확인하기 어렵다는 단점도 존재합니다."
+        },
+        {
+          "id": "p2",
+          "text": "이러한 문제를 해결하기 위해 회의 결과를 학급 온라인 게시판에 올릴 것을 건의합니다. 온라인 게시판을 활용하면 언제 어디서나 쉽게 결과를 확인할 수 있습니다. 결석한 친구들도 스마트폰을 통해 회의 내용을 바로 파악할 수 있어 유용합니다. 게다가 종이를 사용하지 않으므로 환경 보호에도 작은 도움이 될 것입니다."
+        },
+        {
+          "id": "p3",
+          "text": "물론 온라인 게시판 관리를 위해 추가적인 노력이 필요할 수 있습니다. 하지만 반장과 부반장이 번갈아 가며 요약본을 올린다면 큰 부담이 되지 않을 것입니다. 오히려 학급 친구들의 의견을 댓글로 빠르게 주고받을 수 있어 소통이 활발해집니다. 이는 우리 반의 문제를 함께 고민하고 해결하는 데 긍정적인 영향을 미칠 것입니다."
+        },
+        {
+          "id": "p4",
+          "text": "새로운 방식이 도입되면 처음에는 익숙하지 않아 불편할 수도 있습니다. 하지만 적응 기간을 거치면 훨씬 효율적이고 편리한 소통 창구가 될 것이라 확신합니다. 선생님께서 저의 건의를 긍정적으로 검토해 주시기를 부탁드립니다. 우리 반이 더 나은 방향으로 나아갈 수 있도록 항상 노력하겠습니다 감사합니다."
+        }
+      ],
+      "format": "TEXT"
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 21
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 글의 작성자는 누구인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "선생님"
+              },
+              {
+                "id": "B",
+                "text": "학부모"
+              },
+              {
+                "id": "C",
+                "text": "반장 김민수"
+              },
+              {
+                "id": "D",
+                "text": "부반장"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 22,
+                "end": 65
+              }
+            ]
+          },
+          "question": {
+            "prompt": "우리 반이 회의 결과를 알리는 기존 방식은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "방송으로"
+              },
+              {
+                "id": "B",
+                "text": "칠판에 적어서"
+              },
+              {
+                "id": "C",
+                "text": "교실 뒤편 게시판에 종이로"
+              },
+              {
+                "id": "D",
+                "text": "가정통신문으로"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 66,
+                "end": 108
+              }
+            ]
+          },
+          "question": {
+            "prompt": "기존 방식의 문제점은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글씨가 작음"
+              },
+              {
+                "id": "B",
+                "text": "종이가 찢어지거나 분실됨"
+              },
+              {
+                "id": "C",
+                "text": "게시판이 좁음"
+              },
+              {
+                "id": "D",
+                "text": "종이가 너무 무거움"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 109,
+                "end": 150
+              }
+            ]
+          },
+          "question": {
+            "prompt": "결석한 학생들의 어려움은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "숙제를 모름"
+              },
+              {
+                "id": "B",
+                "text": "회의 결과를 제때 확인하기 어려움"
+              },
+              {
+                "id": "C",
+                "text": "자리가 없어짐"
+              },
+              {
+                "id": "D",
+                "text": "친구들과 못 놂"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "1문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반장 선거 과정"
+              },
+              {
+                "id": "B",
+                "text": "기존 종이 게시 방식의 문제점"
+              },
+              {
+                "id": "C",
+                "text": "결석생의 증가"
+              },
+              {
+                "id": "D",
+                "text": "교실 환경 미화"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 1,
+                "end": 48
+              }
+            ]
+          },
+          "question": {
+            "prompt": "문제를 해결하기 위해 건의한 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "게시판을 없앰"
+              },
+              {
+                "id": "B",
+                "text": "학급 온라인 게시판에 올림"
+              },
+              {
+                "id": "C",
+                "text": "회의 횟수 줄임"
+              },
+              {
+                "id": "D",
+                "text": "부모님께 알림"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 49,
+                "end": 89
+              }
+            ]
+          },
+          "question": {
+            "prompt": "온라인 게시판의 장점은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "언제 어디서나 쉽게 확인 가능"
+              },
+              {
+                "id": "B",
+                "text": "글씨가 예뻐짐"
+              },
+              {
+                "id": "C",
+                "text": "게시판 청소 불필요"
+              },
+              {
+                "id": "D",
+                "text": "결과가 변하지 않음"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 90,
+                "end": 133
+              }
+            ]
+          },
+          "question": {
+            "prompt": "결석한 친구들에게 유용한 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "숙제를 줄여줌"
+              },
+              {
+                "id": "B",
+                "text": "스마트폰으로 내용 바로 파악"
+              },
+              {
+                "id": "C",
+                "text": "결석 처리가 안 됨"
+              },
+              {
+                "id": "D",
+                "text": "게임을 할 수 있음"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 134,
+                "end": 172
+              }
+            ]
+          },
+          "question": {
+            "prompt": "종이를 사용하지 않아서 얻는 효과는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시간 절약"
+              },
+              {
+                "id": "B",
+                "text": "환경 보호에 작은 도움"
+              },
+              {
+                "id": "C",
+                "text": "돈을 멂"
+              },
+              {
+                "id": "D",
+                "text": "공부를 잘함"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "2문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "환경 보호 단체"
+              },
+              {
+                "id": "B",
+                "text": "온라인 게시판의 단점"
+              },
+              {
+                "id": "C",
+                "text": "온라인 게시판 활용 건의와 장점"
+              },
+              {
+                "id": "D",
+                "text": "스마트폰 사용 규칙"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 2,
+                "end": 40
+              }
+            ]
+          },
+          "question": {
+            "prompt": "온라인 게시판 관리를 위해 우려되는 점은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비용 발생"
+              },
+              {
+                "id": "B",
+                "text": "추가적인 노력 필요"
+              },
+              {
+                "id": "C",
+                "text": "스마트폰 고장"
+              },
+              {
+                "id": "D",
+                "text": "시력 저하"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 41,
+                "end": 88
+              }
+            ]
+          },
+          "question": {
+            "prompt": "부담을 줄이기 위한 제안은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "선생님이 올림"
+              },
+              {
+                "id": "B",
+                "text": "반장과 부반장이 번갈아 올림"
+              },
+              {
+                "id": "C",
+                "text": "당번을 정함"
+              },
+              {
+                "id": "D",
+                "text": "희망자가 올림"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 89,
+                "end": 134
+              }
+            ]
+          },
+          "question": {
+            "prompt": "소통이 활발해지는 이유는?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "댓글로 빠르게 의견을 주고받아서"
+              },
+              {
+                "id": "B",
+                "text": "전화 통화를 많이 해서"
+              },
+              {
+                "id": "C",
+                "text": "매일 회의를 해서"
+              },
+              {
+                "id": "D",
+                "text": "채팅방을 새로 만들어서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 135,
+                "end": 177
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이러한 소통이 반에 미칠 영향은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "소음이 심해짐"
+              },
+              {
+                "id": "B",
+                "text": "문제 고민과 해결에 긍정적 영향"
+              },
+              {
+                "id": "C",
+                "text": "의견 충돌로 싸움 발생"
+              },
+              {
+                "id": "D",
+                "text": "공부 시간이 줄어듦"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "3문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반장의 임무"
+              },
+              {
+                "id": "B",
+                "text": "온라인 게시판 관리 방안과 소통 효과"
+              },
+              {
+                "id": "C",
+                "text": "댓글의 부작용"
+              },
+              {
+                "id": "D",
+                "text": "회의 안건 정하기"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 3,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "새로운 방식 도입 시 처음에 예상되는 일은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "모두가 환호함"
+              },
+              {
+                "id": "B",
+                "text": "익숙하지 않아 불편할 수 있음"
+              },
+              {
+                "id": "C",
+                "text": "결석생이 줄어듦"
+              },
+              {
+                "id": "D",
+                "text": "성적이 오름"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 42,
+                "end": 89
+              }
+            ]
+          },
+          "question": {
+            "prompt": "적응 기간을 거치면 어떻게 될 것이라 확신하나?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "다시 원래대로 돌아감"
+              },
+              {
+                "id": "B",
+                "text": "효율적이고 편리한 소통 창구가 됨"
+              },
+              {
+                "id": "C",
+                "text": "게시판을 안 보게 됨"
+              },
+              {
+                "id": "D",
+                "text": "회의를 안 하게 됨"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 90,
+                "end": 125
+              }
+            ]
+          },
+          "question": {
+            "prompt": "작성자가 선생님께 부탁드린 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "건의를 긍정적으로 검토해 주시기를"
+              },
+              {
+                "id": "B",
+                "text": "스마트폰을 사주시기를"
+              },
+              {
+                "id": "C",
+                "text": "새 게시판을 달아주시기를"
+              },
+              {
+                "id": "D",
+                "text": "회의 시간을 늘려주시기를"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 126,
+                "end": 165
+              }
+            ]
+          },
+          "question": {
+            "prompt": "마지막으로 다짐한 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "더 나은 방향으로 나아가도록 노력함"
+              },
+              {
+                "id": "B",
+                "text": "다음에도 반장이 됨"
+              },
+              {
+                "id": "C",
+                "text": "종이를 많이 아낌"
+              },
+              {
+                "id": "D",
+                "text": "게시판 관리를 혼자 다 함"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "4문단의 핵심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "적응의 어려움"
+              },
+              {
+                "id": "B",
+                "text": "선생님의 반대"
+              },
+              {
+                "id": "C",
+                "text": "건의에 대한 긍정적 검토 부탁과 다짐"
+              },
+              {
+                "id": "D",
+                "text": "새로운 소통 창구"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "종이 게시 문제점"
+        },
+        {
+          "id": "c2",
+          "text": "결석생 확인 어려움"
+        },
+        {
+          "id": "c3",
+          "text": "온라인 게시판 건의"
+        },
+        {
+          "id": "c4",
+          "text": "환경 보호 도움"
+        },
+        {
+          "id": "c5",
+          "text": "빠른 소통 창구"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "건의문에서 지적한 기존 종이 게시 방식의 문제점은?",
+          "answerText": "종이가 찢어지거나 분실될 수 있다.",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 66,
+              "end": 108
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "온라인 게시판의 장점으로 가장 적절한 것은?",
+          "answerText": "결석한 학생들도 스마트폰으로 바로 확인할 수 있다.",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 90,
+              "end": 133
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "온라인 게시판 관리에 대한 반장의 제안은?",
+          "answerText": "반장과 부반장이 번갈아 가며 요약본을 올리자고 했다.",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 41,
+              "end": 88
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        }
+      ]
+    }
+  },
   "version": 1,
   "status": "PUBLISHED",
-  "title": "내 입속의 든든한 파수꾼, 치아 건강",
-  "description": "일일 독해 - 정독·복기·확인",
-  "targetLevel": "FREGE_2",
-  "schoolGradeRange": {
-    "min": 5,
-    "max": 5
-  },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "description": "[건의문] 학급 회의 공개 방식 해결을 위한 제안",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학"
   ],
+  "schoolGradeRange": {
+    "min": 4,
+    "max": 4
+  },
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
-  "assets": {},
-  "payload": {
-    "passage": {
-      "format": "TEXT",
-      "paragraphs": [
-        {
-          "id": "p1",
-          "text": "우리가 학교 점심시간 급식 식탁에서 깍두기 김치나 사과처럼 아삭하고 맛있는 음식을 기분 좋게 씹어 먹을 때 가장 중요하고 핵심적인 역할을 묵묵히 수행하는 우리 몸의 신비한 하얀 뼈는 바로 단단한 입속의 '치아'입니다. 날카로운 앞니로 거친 음식의 모양을 자르고 뾰족한 송곳니로 질긴 고기를 가볍게 찢으며 가장 넓고 표면이 단단한 양쪽 어금니로 단단한 음식을 맷돌처럼 부수어, 우리 뱃속의 약한 위장이 부드럽게 금세 소화할 수 있도록 친절하게 분해를 도와주는 첫 번째 튼튼한 몸속 소화 관문 파수꾼이 바로 건강한 치아 집단입니다. 젖니 유치가 흔들려 빠지고 한 번 크고 튼튼한 하얀 영구치가 새로 잇몸을 뚫고 올라오면 노인이 될 때까지 평생 아주 소중하게 갈아 써야 합니다."
-        },
-        {
-          "id": "p2",
-          "text": "건강한 치아를 아프고 시리게 하는 끔찍한 충치란 우리가 당분 간식으로 먹은 끈적이고 달콤한 젤리와 음식의 부스러기 미세한 찌꺼기가 치아 표면 틈새에 양치질 없이 그대로 남아 있을 때, 입안의 작은 충치 세균 뮤탄스균 무리가 그것을 신나게 배불리 먹어 분해하면서 내뿜는 강하고 찌릿한 산성 분비 물질로 인해 단단한 치아 표면이 아주 무섭게 검게 부식되어 썩고 녹아내리는 치과 감염 질병입니다. 치아의 가장 바깥쪽인 보호막 법랑질 단단한 갑옷이 모래처럼 조금 부서지며 상하기 시작하는 초기에는 우리 몸의 뇌는 아픈 통증을 거의 전혀 신경통으로 느끼지 못합니다. 그러다 충치가 안쪽 신경 다발 핏줄까지 깊숙이 파고들어 닿게 되면 극심하게 쑤시고 욱신거리는 눈물 나는 치통 통증을 심하게 새벽 내내 느끼게 됩니다."
-        },
-        {
-          "id": "p3",
-          "text": "이처럼 끔찍하고 무서운 충치를 비용 없이 돈 안 들이고 완벽히 예방하는 가장 기본적이고 최고의 훌륭한 건강 예방 방법은 매일 꼼꼼하고 올바르게 아침 점심 저녁을 챙겨 하는 식후 칫솔질입니다. 맛있는 달콤 빵 간식 음식을 식탁에서 배불리 먹고 난 후 3분 안에 반드시 물 컵과 칫솔을 들고 부지런히 치약을 묻혀 위아래로 둥글게 가볍게 쓸어 굴리듯이 구석구석 칫솔모를 밀어 닦아야 합니다. 이것은 치아 표면과 붉은 잇몸 사이에 원래 몰래 깊숙이 숨어 충치를 일으키는 미세한 세균 찌꺼기까지 완전히 깨끗하게 쓸어 바깥으로 배출하기 위함입니다. 칫솔모가 아무리 얇아도 거친 틈은 잘 닿지 않는 좁은 치아 사이 깊은 틈새는 아주 얇은 실크 치실 도구를 매일 함께 사용하여 톱질하듯 깨끗이 음식물을 청소 관리하면 매우 훌륭합니다."
-        },
-        {
-          "id": "p4",
-          "text": "평소 끈적끈적한 곰돌이 포도 젤리나 텁텁하고 달콤 진득한 캐러멜 초콜릿, 톡톡 코끝을 시원하게 쏘는 검은색 콜라 탄산음료처럼 액상 하얀 설탕이 듬뿍 많이 직접 들어간 공장 제조 간식은 무서운 구강 충치 세균이 최고로 가장 번식하기 좋아하는 맛있는 최고의 영양 먹이 폭탄이므로 평소 즐거운 섭취를 되도록 무조건 부모님 지도 아래 꼭 참고 조금씩 줄여 피해 피해야 합니다. 당장 이가 흔들리거나 하나도 까맣게 아프지 않다고 하더라도 6개월에 한 번씩 규칙적으로 무조건 치과 동네 정기 검진 의자에 누워 의사 선생님께 작은 초기 충치 점을 거울과 사진으로 미리 빠르게 발견해 신속하게 아프기 전 구멍을 긁어내 치료하는 것이 나중의 큰 고통을 막는 현명한 습관입니다."
-        }
-      ]
-    },
-    "intensive": {
-      "timeline": []
-    },
-    "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
-    },
-    "confirm": {
-      "questions": []
-    }
-  }
+  "timeLimitSec": 900,
+  "assets": {}
 }
