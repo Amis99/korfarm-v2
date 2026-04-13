@@ -1,32 +1,35 @@
 {
-  "contentId": "dr-f3-188",
+  "contentId": "dr-frege3-188",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "깨달음으로 끝난 화려한 꿈, 구운몽",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[문학] 광야",
+  "description": "[문학] 광야",
   "targetLevel": "FREGE_3",
   "schoolGradeRange": {
     "min": 6,
     "max": 6
   },
-  "area": "READING",
-  "subArea": "LITERATURE",
+  "area": "국어",
+  "subArea": "문학",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "비판적 이해",
+    "추론적 이해"
   ],
   "tags": [
-    "daily"
+    "문학",
+    "시"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 3,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 300,
+  "timeLimitSec": 900,
   "assets": {},
   "payload": {
     "passage": {
@@ -34,32 +37,968 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "산속에 불교 공부를 아주 열심히 하던 착한 스님 성진이 매일 지냅니다. 성진은 여덟 명의 예쁜 선녀를 만나 불교 공부를 아예 갑자기 단숨에 포기합니다."
+          "text": "까마득한 날에\n하늘이 처음 열리고\n어데 닭 우는 소리 들렸으랴"
         },
         {
           "id": "p2",
-          "text": "스승은 화가 나서 성진을 인간 세상 아기 양소유로 멀리 쫓아내 다시 새롭게 태어나게 합니다. 양소유는 과거 시험에 무사히 합격하고 훌륭한 장군으로 전쟁에서 크게 승리합니다."
+          "text": "모든 산맥들이\n바다를 연모해 휘달릴 때도\n차마 이곳을 범하던 못하였으리라"
         },
         {
           "id": "p3",
-          "text": "여덟 명의 아름다운 부인들과 함께 엄청난 부와 권력 영광을 매일 가득 평생 누립니다. 그러나 나이가 들어 모든 화려한 영광이 밤 부질없는 헛된 꿈이라는 것을 점차 눈 감고 깨닫습니다."
+          "text": "끊임없는 광음을\n부지런한 계절이 피어선 지고\n큰 강물이 비로소 길을 열었다"
         },
         {
           "id": "p4",
-          "text": "성진은 긴 환상 꿈에서 깨어나서 스승에게 무릎을 크게 꿇고 눈물로 늦게 깨달음 용서를 빕니다. 인간 세상의 모든 큰 부귀영화가 결국 헛된 꿈 꽃이라는 소설입니다."
+          "text": "지금 눈 내리고\n매화 향기 홀로 아득하니\n내 여기 가난한 노래의 씨를 뿌려라"
+        },
+        {
+          "id": "p5",
+          "text": "다시 천고의 뒤에\n백마 타고 오는 초인이 있어\n이 광야에서 목놓아 부르게 하리라"
         }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 6
+              }
+            ]
+          },
+          "question": {
+            "prompt": "언제 일어난 일인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "가까운 날에"
+              },
+              {
+                "id": "B",
+                "text": "까마득한 날에"
+              },
+              {
+                "id": "C",
+                "text": "어제"
+              },
+              {
+                "id": "D",
+                "text": "내일"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 8,
+                "end": 17
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇이 처음 열렸는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "땅"
+              },
+              {
+                "id": "B",
+                "text": "바다"
+              },
+              {
+                "id": "C",
+                "text": "하늘"
+              },
+              {
+                "id": "D",
+                "text": "구름"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 19,
+                "end": 33
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 소리가 들렸으랴 묻는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "닭 우는 소리"
+              },
+              {
+                "id": "B",
+                "text": "개 짖는 소리"
+              },
+              {
+                "id": "C",
+                "text": "새 우는 소리"
+              },
+              {
+                "id": "D",
+                "text": "바람 소리"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "1연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아침이 밝아옴"
+              },
+              {
+                "id": "B",
+                "text": "동물들의 탄생"
+              },
+              {
+                "id": "C",
+                "text": "하늘의 변화"
+              },
+              {
+                "id": "D",
+                "text": "광야의 원시성"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 6
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇들이 휘달릴 때인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "강물들이"
+              },
+              {
+                "id": "B",
+                "text": "구름들이"
+              },
+              {
+                "id": "C",
+                "text": "산맥들이"
+              },
+              {
+                "id": "D",
+                "text": "나무들이"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 8,
+                "end": 21
+              }
+            ]
+          },
+          "question": {
+            "prompt": "산맥들은 무엇을 연모했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하늘"
+              },
+              {
+                "id": "B",
+                "text": "바다"
+              },
+              {
+                "id": "C",
+                "text": "땅"
+              },
+              {
+                "id": "D",
+                "text": "별"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 23,
+                "end": 39
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이곳을 어떻게 하지 못했으리라 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "범하지 못하였으리라"
+              },
+              {
+                "id": "B",
+                "text": "지나지 못하였으리라"
+              },
+              {
+                "id": "C",
+                "text": "보지 못하였으리라"
+              },
+              {
+                "id": "D",
+                "text": "닿지 못하였으리라"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "2연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "산맥의 형성 과정"
+              },
+              {
+                "id": "B",
+                "text": "바다와 산맥의 조화"
+              },
+              {
+                "id": "C",
+                "text": "광야의 신성함"
+              },
+              {
+                "id": "D",
+                "text": "지구의 웅장함"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 7
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇이 끊임없는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시간"
+              },
+              {
+                "id": "B",
+                "text": "계절"
+              },
+              {
+                "id": "C",
+                "text": "광음"
+              },
+              {
+                "id": "D",
+                "text": "강물"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 9,
+                "end": 23
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇이 피어선 지는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "게으른 구름"
+              },
+              {
+                "id": "B",
+                "text": "부지런한 계절"
+              },
+              {
+                "id": "C",
+                "text": "아름다운 꽃"
+              },
+              {
+                "id": "D",
+                "text": "새로운 생명"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 25,
+                "end": 40
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇이 길을 열었는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "깊은 바다가"
+              },
+              {
+                "id": "B",
+                "text": "높은 산맥이"
+              },
+              {
+                "id": "C",
+                "text": "작은 냇물이"
+              },
+              {
+                "id": "D",
+                "text": "큰 강물이"
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "3연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "광야의 역사적 개벽"
+              },
+              {
+                "id": "B",
+                "text": "계절의 아름다운 변화"
+              },
+              {
+                "id": "C",
+                "text": "강물의 도도한 흐름"
+              },
+              {
+                "id": "D",
+                "text": "자연의 순환 과정"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 7
+              }
+            ]
+          },
+          "question": {
+            "prompt": "지금 무엇이 내리는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "눈"
+              },
+              {
+                "id": "B",
+                "text": "비"
+              },
+              {
+                "id": "C",
+                "text": "우박"
+              },
+              {
+                "id": "D",
+                "text": "바람"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 9,
+                "end": 21
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇의 향기가 아득한가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "난초"
+              },
+              {
+                "id": "B",
+                "text": "매화"
+              },
+              {
+                "id": "C",
+                "text": "국화"
+              },
+              {
+                "id": "D",
+                "text": "솔잎"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 23,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "화자는 무엇을 뿌리려 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "희망의 씨"
+              },
+              {
+                "id": "B",
+                "text": "꽃의 씨"
+              },
+              {
+                "id": "C",
+                "text": "노래의 씨"
+              },
+              {
+                "id": "D",
+                "text": "나무의 씨"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "4연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "겨울 풍경의 아름다움"
+              },
+              {
+                "id": "B",
+                "text": "고난 극복의 의지"
+              },
+              {
+                "id": "C",
+                "text": "농사를 짓는 기쁨"
+              },
+              {
+                "id": "D",
+                "text": "매화꽃의 향기로움"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 8
+              }
+            ]
+          },
+          "question": {
+            "prompt": "언제 초인이 오는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "내일 아침에"
+              },
+              {
+                "id": "B",
+                "text": "천고의 뒤에"
+              },
+              {
+                "id": "C",
+                "text": "먼 훗날에"
+              },
+              {
+                "id": "D",
+                "text": "가을이 오면"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 10,
+                "end": 24
+              }
+            ]
+          },
+          "question": {
+            "prompt": "초인은 무엇을 타고 오는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "백마"
+              },
+              {
+                "id": "B",
+                "text": "흑마"
+              },
+              {
+                "id": "C",
+                "text": "구름"
+              },
+              {
+                "id": "D",
+                "text": "바람"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 26,
+                "end": 43
+              }
+            ]
+          },
+          "question": {
+            "prompt": "초인에게 무엇을 하게 하려는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "춤추게 하리라"
+              },
+              {
+                "id": "B",
+                "text": "싸우게 하리라"
+              },
+              {
+                "id": "C",
+                "text": "부르게 하리라"
+              },
+              {
+                "id": "D",
+                "text": "잠들게 하리라"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": []
+          },
+          "question": {
+            "prompt": "5연의 중심 내용은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "초인의 영웅적 면모"
+              },
+              {
+                "id": "B",
+                "text": "미래에 대한 염원"
+              },
+              {
+                "id": "C",
+                "text": "백마의 용맹함"
+              },
+              {
+                "id": "D",
+                "text": "광야의 평화로움"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
-      "seedPenalty": 1
+      "cards": [
+        {
+          "id": "c1",
+          "text": "하늘이 처음 열림"
+        },
+        {
+          "id": "c2",
+          "text": "산맥도 범하지 못함"
+        },
+        {
+          "id": "c3",
+          "text": "큰 강물이 길을 엶"
+        },
+        {
+          "id": "c4",
+          "text": "가난한 노래의 씨"
+        },
+        {
+          "id": "c5",
+          "text": "백마 타고 오는 초인"
+        },
+        {
+          "id": "c6",
+          "text": "광야에서 부르게 하리라"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "광야의 원시적인 상태를 강조하는 구절은?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "어데 닭 우는 소리 들렸으랴"
+            },
+            {
+              "id": "B",
+              "text": "모든 산맥들이"
+            },
+            {
+              "id": "C",
+              "text": "부지런한 계절이 피어선 지고"
+            },
+            {
+              "id": "D",
+              "text": "지금 눈 내리고"
+            }
+          ],
+          "answerId": "A",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 19,
+              "end": 33
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q2",
+          "prompt": "광야의 신성불가침한 성격을 드러내는 구절은?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "까마득한 날에"
+            },
+            {
+              "id": "B",
+              "text": "큰 강물이 비로소 길을 열었다"
+            },
+            {
+              "id": "C",
+              "text": "차마 이곳을 범하던 못하였으리라"
+            },
+            {
+              "id": "D",
+              "text": "내 여기 가난한 노래의 씨를"
+            }
+          ],
+          "answerId": "C",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 23,
+              "end": 39
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q3",
+          "prompt": "암담한 현실의 시련을 상징하는 시어는?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "큰 강물"
+            },
+            {
+              "id": "B",
+              "text": "눈"
+            },
+            {
+              "id": "C",
+              "text": "매화 향기"
+            },
+            {
+              "id": "D",
+              "text": "노래의 씨"
+            }
+          ],
+          "answerId": "B",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 7
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        },
+        {
+          "id": "q4",
+          "prompt": "새로운 미래를 실현할 존재를 뜻하는 시어는?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "산맥"
+            },
+            {
+              "id": "B",
+              "text": "큰 강물"
+            },
+            {
+              "id": "C",
+              "text": "매화"
+            },
+            {
+              "id": "D",
+              "text": "초인"
+            }
+          ],
+          "answerId": "D",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 10,
+              "end": 24
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
+        }
+      ]
     }
   }
 }
