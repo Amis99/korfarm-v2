@@ -2506,6 +2506,15 @@ mark.highlight {
 .screen-level-russell .exam-module  { font-size: 16px; }
 .screen-level-wittgenstein .exam-module { font-size: 16px; }
 
+/* 시험 모듈 내부: 학습 모듈의 하드코딩 폰트를 무시하고 부모(exam-module) 크기 상속 */
+.exam-module .passage-markdown,
+.exam-module .passage-markdown p,
+.exam-module .rich-text,
+.exam-module .rich-text p {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
 /* 시험 타이머 5분 이하 경고 */
 .exam-timer-warn { color: #c53030 !important; }
 
