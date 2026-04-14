@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, apiDelete, API_BASE, TOKEN_KEY } from "../utils/api";
+import { apiGet, apiPost, apiDelete, API_BASE, TOKEN_KEY } from "../utils/api";
 import { COMMUNITY_BOARDS } from "../data/communityBoards";
 import CommunityChatPage from "./CommunityChatPage";
 import "../styles/community.css";
@@ -107,18 +107,48 @@ function CommunityPage() {
   }, [page, filtered]);
 
   const [postDetail, setPostDetail] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [commentSubmitting, setCommentSubmitting] = useState(false);
 
-  // 게시글 선택 시 상세 조회 (content + attachments)
+  // 게시글 선택 시 상세 조회 + 댓글 로드
   useEffect(() => {
-    if (!selectedId) { setPostDetail(null); return; }
+    if (!selectedId) { setPostDetail(null); setComments([]); return; }
     apiGet(`/v1/posts/${selectedId}`)
       .then((d) => setPostDetail(d))
       .catch(() => setPostDetail(null));
+    apiGet(`/v1/posts/${selectedId}/comments`)
+      .then((d) => setComments(Array.isArray(d) ? d : []))
+      .catch(() => setComments([]));
   }, [selectedId]);
 
   const selectedPost = postDetail || (selectedId
     ? posts.find((p) => (p.postId || p.id) === selectedId)
     : null);
+
+  const handleCommentSubmit = async () => {
+    if (!newComment.trim() || !selectedId) return;
+    setCommentSubmitting(true);
+    try {
+      const c = await apiPost(`/v1/posts/${selectedId}/comments`, { content: newComment.trim() });
+      setComments((prev) => [...prev, c]);
+      setNewComment("");
+    } catch (e) {
+      alert(e.message || "댓글 등록 실패");
+    } finally {
+      setCommentSubmitting(false);
+    }
+  };
+
+  const handleCommentDelete = async (commentId) => {
+    if (!window.confirm("이 댓글을 삭제하시겠습니까?")) return;
+    try {
+      await apiDelete(`/v1/comments/${commentId}`);
+      setComments((prev) => prev.filter((c) => (c.comment_id || c.commentId) !== commentId));
+    } catch (e) {
+      alert(e.message || "삭제 실패");
+    }
+  };
 
   /* 자료실은 관리자만 글쓰기 가능 */
   const canWrite = board?.writeRole === "admin" ? isAdmin : true;
@@ -366,6 +396,54 @@ function CommunityPage() {
                   삭제
                 </button>
               )}
+            </div>
+
+            {/* 댓글 */}
+            <div className="comm-comments">
+              <h4>댓글 ({comments.length})</h4>
+              {comments.length === 0 ? (
+                <p className="comm-comments-empty">아직 댓글이 없습니다.</p>
+              ) : (
+                <ul className="comm-comments-list">
+                  {comments.filter((c) => (c.status || "active") !== "deleted").map((c) => {
+                    const cid = c.comment_id || c.commentId;
+                    const isPodo = (c.author_id || c.authorId) === "u_ai_podo";
+                    return (
+                      <li key={cid} className={`comm-comment ${isPodo ? "podo" : ""}`}>
+                        <div className="comm-comment-head">
+                          <span className="comm-comment-author">
+                            {isPodo && "🍇 "}
+                            {c.author_name || c.authorName || c.author_id || c.authorId}
+                            {isPodo && " AI"}
+                          </span>
+                          <span className="comm-comment-date">{formatDate(c.created_at || c.createdAt)}</span>
+                          {isAdmin && (
+                            <button type="button" className="comm-comment-del" onClick={() => handleCommentDelete(cid)}>삭제</button>
+                          )}
+                        </div>
+                        <div className="comm-comment-body" style={{ whiteSpace: "pre-wrap" }}>{c.content}</div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+              <div className="comm-comment-form">
+                <textarea
+                  className="comm-comment-input"
+                  placeholder="댓글을 입력하세요"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  rows={2}
+                />
+                <button
+                  type="button"
+                  className="comm-comment-submit"
+                  onClick={handleCommentSubmit}
+                  disabled={commentSubmitting || !newComment.trim()}
+                >
+                  {commentSubmitting ? "등록 중..." : "댓글 등록"}
+                </button>
+              </div>
             </div>
           </div>
         ) : (
