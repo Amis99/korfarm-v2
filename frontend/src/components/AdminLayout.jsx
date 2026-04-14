@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { to: "/admin/content", icon: "menu_book", label: "콘텐츠" },
   { to: "/admin/study-content", icon: "auto_stories", label: "내용 숙지" },
   { to: "/admin/boards", icon: "forum", label: "게시판 관리", roles: ["HQ_ADMIN"] },
+  { to: "/admin/boards/chat-archives", icon: "shield", label: "채팅 관리" },
   { to: "/admin/assignments", icon: "task", label: "과제/피드백" },
   { to: "/admin/wisdom", icon: "auto_stories", label: "지식과 지혜", roles: ["HQ_ADMIN"] },
   { to: "/admin/tests", icon: "assignment", label: "테스트 관리" },
