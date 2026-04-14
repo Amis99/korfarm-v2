@@ -23,6 +23,9 @@ class FileEntity(
     @Column(nullable = false)
     var url: String,
 
+    @Column(name = "original_name", length = 500)
+    var originalName: String? = null,
+
     @Column(nullable = false)
     var mime: String,
 

@@ -369,6 +369,7 @@ class BoardService(
         return PostAttachmentView(
             fileId = fileId,
             name = name,
+            originalName = fileRepository.findById(fileId).orElse(null)?.originalName,
             mime = mime,
             size = size
         )

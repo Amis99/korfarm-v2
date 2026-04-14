@@ -58,10 +58,11 @@ class FileController(
         val isAdmin = userId != null && SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val (entity, filePath) = fileService.getFileForDownload(userId, isAdmin, fileId)
         val resource = UrlResource(filePath.toUri())
+        val fileName = entity.originalName ?: entity.id
         val disposition = if (entity.mime.startsWith("image/") || entity.mime == "application/pdf") {
-            "inline"
+            "inline; filename=\"${fileName}\""
         } else {
-            "attachment; filename=\"${entity.id}\""
+            "attachment; filename=\"${fileName}\""
         }
         return ResponseEntity.ok()
             .contentType(MediaType.parseMediaType(entity.mime))

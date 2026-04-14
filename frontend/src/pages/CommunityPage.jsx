@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, API_BASE } from "../utils/api";
+import { apiGet, API_BASE, TOKEN_KEY } from "../utils/api";
 import { COMMUNITY_BOARDS } from "../data/communityBoards";
 import CommunityChatPage from "./CommunityChatPage";
 import "../styles/community.css";
@@ -307,18 +307,34 @@ function CommunityPage() {
               <div className="comm-detail-attachments" style={{ marginTop: 12 }}>
                 <strong>첨부파일</strong>
                 <ul style={{ margin: "6px 0", paddingLeft: 20 }}>
-                  {(selectedPost.attachments || []).map((att) => (
-                    <li key={att.file_id || att.fileId}>
-                      <a
-                        href={`${API_BASE}/v1/files/${att.file_id || att.fileId}/download`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: "#b06e30" }}
-                      >
-                        {att.name || att.file_id || att.fileId} ({Math.round((att.size || 0) / 1024)}KB)
-                      </a>
-                    </li>
-                  ))}
+                  {(selectedPost.attachments || []).map((att) => {
+                    const fid = att.file_id || att.fileId;
+                    const displayName = att.original_name || att.originalName || att.name || fid;
+                    return (
+                      <li key={fid}>
+                        <button
+                          type="button"
+                          style={{ background: "none", border: "none", color: "#b06e30", cursor: "pointer", textDecoration: "underline", padding: 0, fontSize: "inherit" }}
+                          onClick={async () => {
+                            const token = sessionStorage.getItem(TOKEN_KEY);
+                            const r = await fetch(`${API_BASE}/v1/files/${fid}/download`, {
+                              headers: { Authorization: `Bearer ${token}` },
+                            });
+                            if (!r.ok) { alert("다운로드 실패"); return; }
+                            const blob = await r.blob();
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement("a");
+                            a.href = url;
+                            a.download = displayName;
+                            a.click();
+                            URL.revokeObjectURL(url);
+                          }}
+                        >
+                          {displayName} ({Math.round((att.size || 0) / 1024)}KB)
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}

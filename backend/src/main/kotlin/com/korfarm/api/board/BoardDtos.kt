@@ -12,6 +12,7 @@ data class BoardView(
 data class PostAttachmentView(
     val fileId: String,
     val name: String,
+    val originalName: String? = null,
     val mime: String,
     val size: Long
 )

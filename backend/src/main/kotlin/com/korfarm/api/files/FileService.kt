@@ -80,6 +80,7 @@ class FileService(
         Files.copy(file.inputStream, dest, StandardCopyOption.REPLACE_EXISTING)
         entity.status = "uploaded"
         entity.size = file.size
+        entity.originalName = file.originalFilename
         fileRepository.save(entity)
     }
 
