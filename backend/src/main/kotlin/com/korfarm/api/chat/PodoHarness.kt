@@ -53,7 +53,7 @@ class PodoHarness(
     private val tools = listOf(
         mapOf(
             "name" to "search_knowledge",
-            "description" to "국어농장 프로그램 정보, 10대 역량, 학습 모드, 레벨 체계, 국어 문법 개념(음운/형태소/품사/문장 등) 등을 검색합니다. 학습 조언, 국어농장, 문법 관련 질문에 반드시 먼저 호출하세요.",
+            "description" to "국어농장 프로그램 정보, 10대 역량, 학습 모드, 레벨 체계, 국어 문법 개념, 수업 노트(고전소설/독해전략 등), 조쌤 과거 대화(Q&A 맥락 포함)를 검색합니다. 학습 조언, 국어농장, 문법, 독해 관련 질문에 반드시 먼저 호출하세요.",
             "input_schema" to mapOf(
                 "type" to "object",
                 "required" to listOf("query"),
@@ -269,12 +269,20 @@ $chatContext
             parts.add(grammarResults.joinToString("\n\n") { "[문법] ${it.content}" })
         }
 
-        // 카톡 발언 검색
+        // 수업 노트 검색
+        val lessonResults = try {
+            referenceRepo.searchLessonNote(query, 3)
+        } catch (e: Exception) { emptyList() }
+        if (lessonResults.isNotEmpty()) {
+            parts.add(lessonResults.joinToString("\n\n") { "[수업노트] ${it.content}" })
+        }
+
+        // 카톡 대화 검색 (Q&A 맥락 포함)
         val kakaoResults = try {
-            referenceRepo.searchKakao(query, 5)
+            referenceRepo.searchKakao(query, 8)
         } catch (e: Exception) { emptyList() }
         if (kakaoResults.isNotEmpty()) {
-            parts.add(kakaoResults.joinToString("\n") { "[참고발언] ${it.content}" })
+            parts.add(kakaoResults.joinToString("\n\n") { "[조쌤대화] ${it.content}" })
         }
 
         return if (parts.isEmpty()) "관련 정보를 찾지 못했습니다." else parts.joinToString("\n\n")

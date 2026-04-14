@@ -11,6 +11,7 @@ import java.time.LocalDateTime
 class AiChatReferenceEntity(
     @Id var id: String,
     @Column(nullable = false) var source: String = "kakao",
+    @Column(length = 100) var topic: String? = null,
     @Column(nullable = false) var speaker: String,
     @Column(columnDefinition = "TEXT", nullable = false) var content: String,
     @Column(name = "spoken_at") var spokenAt: LocalDateTime? = null,
@@ -21,13 +22,13 @@ interface AiChatReferenceRepository : JpaRepository<AiChatReferenceEntity, Strin
     /** 프로그램 문서는 항상 전부 로드 */
     fun findBySource(source: String): List<AiChatReferenceEntity>
 
-    /** 카톡 발언 FULLTEXT 검색 (NATURAL LANGUAGE MODE) */
+    /** 카톡 대화 FULLTEXT 검색 (관련도순) */
     @Query(
         value = """
         SELECT * FROM ai_chat_references
-        WHERE source IN ('kakao_cho', 'kakao_humor')
+        WHERE source LIKE 'kakao_%'
           AND MATCH(content) AGAINST(:keyword IN NATURAL LANGUAGE MODE)
-        ORDER BY spoken_at DESC
+        ORDER BY MATCH(content) AGAINST(:keyword IN NATURAL LANGUAGE MODE) DESC
         LIMIT :lim
         """,
         nativeQuery = true
@@ -48,6 +49,21 @@ interface AiChatReferenceRepository : JpaRepository<AiChatReferenceEntity, Strin
         nativeQuery = true
     )
     fun searchGrammar(
+        @Param("keyword") keyword: String,
+        @Param("lim") limit: Int
+    ): List<AiChatReferenceEntity>
+
+    /** 수업 노트 FULLTEXT 검색 */
+    @Query(
+        value = """
+        SELECT * FROM ai_chat_references
+        WHERE source = 'lesson_note'
+          AND MATCH(content) AGAINST(:keyword IN NATURAL LANGUAGE MODE)
+        LIMIT :lim
+        """,
+        nativeQuery = true
+    )
+    fun searchLessonNote(
         @Param("keyword") keyword: String,
         @Param("lim") limit: Int
     ): List<AiChatReferenceEntity>
