@@ -19,9 +19,7 @@ function PostWritePage() {
   const { isLoggedIn, user, isPremium } = useAuth();
   const isAdmin = user?.roles?.includes("ADMIN") || user?.roles?.includes("HQ_ADMIN") || user?.roles?.includes("ORG_ADMIN");
 
-  const [boardId, setBoardId] = useState(
-    params.get("board") || DEFAULT_BOARD_ID
-  );
+  const boardId = params.get("board") || DEFAULT_BOARD_ID;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -98,7 +96,7 @@ function PostWritePage() {
         content: content.trim(),
         attachmentIds,
       });
-      navigate(`/community/post/${data.postId || data.id}?board=${boardId}`);
+      navigate(`/community?board=${boardId}`);
     } catch (e) {
       setError(e.message || "게시글 등록에 실패했습니다.");
     } finally {
@@ -135,41 +133,9 @@ function PostWritePage() {
           <h1>게시글 작성</h1>
         </div>
         <form onSubmit={(e) => e.preventDefault()}>
-          <label className="post-label" htmlFor="board-select">
-            게시판 선택
-          </label>
-          <select
-            id="board-select"
-            value={boardId}
-            onChange={(event) => setBoardId(event.target.value)}
-          >
-            {COMMUNITY_BOARDS.map((item) => {
-              const adminOnly = item.writeRole === "admin" && !isAdmin;
-              const paidOnly = item.requiresPaid && !isPremium && !isAdmin;
-              const suffix = adminOnly ? " (관리자 전용)" : paidOnly ? " (유료 전용)" : "";
-              return (
-                <option key={item.id} value={item.id} disabled={adminOnly}>
-                  {item.name}{suffix}
-                </option>
-              );
-            })}
-          </select>
-
-          {board.requiresApproval && (
-            <p className="community-helper">
-              자료 게시판은 관리자 승인 후 공개됩니다.
-            </p>
-          )}
-          {board.writeRole === "admin" && !isAdmin && (
-            <p className="community-helper" style={{ color: "#e74c3c" }}>
-              관리자 전용 게시판입니다. 관리자 계정만 작성할 수 있습니다.
-            </p>
-          )}
-          {board.requiresPaid && !isPremium && !isAdmin && (
-            <p className="community-helper" style={{ color: "#e74c3c" }}>
-              유료 회원 전용 게시판입니다.
-            </p>
-          )}
+          <p className="community-helper" style={{ marginBottom: 12 }}>
+            <strong>{board.name}</strong>에 글을 작성합니다.
+          </p>
 
           <input
             type="text"

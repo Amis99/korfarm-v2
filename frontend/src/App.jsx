@@ -16,7 +16,6 @@ const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 const PendingApprovalPage = lazy(() => import("./pages/PendingApprovalPage"));
 
 const CommunityPage = lazy(() => import("./pages/CommunityPage"));
-const PostDetailPage = lazy(() => import("./pages/PostDetailPage"));
 const PostWritePage = lazy(() => import("./pages/PostWritePage"));
 
 const ShopPage = lazy(() => import("./pages/ShopPage"));
@@ -205,7 +204,6 @@ function App() {
           <Route path="/profile" element={P(<ProfilePage />)} />
           <Route path="/pending" element={P(<PendingApprovalPage />)} />
           <Route path="/community" element={P(<CommunityPage />)} />
-          <Route path="/community/post/:postId" element={P(<PostDetailPage />)} />
           <Route path="/community/new" element={P(<PostWritePage />)} />
           <Route path="/shop" element={P(<ShopPage />)} />
           <Route path="/shop/products/:productId" element={P(<ProductDetailPage />)} />

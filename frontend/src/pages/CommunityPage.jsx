@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, API_BASE, TOKEN_KEY } from "../utils/api";
+import { apiGet, apiDelete, API_BASE, TOKEN_KEY } from "../utils/api";
 import { COMMUNITY_BOARDS } from "../data/communityBoards";
 import CommunityChatPage from "./CommunityChatPage";
 import "../styles/community.css";
@@ -347,6 +347,25 @@ function CommunityPage() {
               >
                 목록으로
               </button>
+              {isAdmin && (
+                <button
+                  type="button"
+                  className="comm-btn-text"
+                  style={{ color: "#c0392b" }}
+                  onClick={async () => {
+                    if (!window.confirm("이 게시글을 삭제하시겠습니까?")) return;
+                    try {
+                      await apiDelete(`/v1/posts/${selectedPost.post_id || selectedPost.postId || selectedPost.id}`);
+                      setSelectedId(null);
+                      setPosts((prev) => prev.filter((p) => (p.postId || p.id) !== (selectedPost.post_id || selectedPost.postId || selectedPost.id)));
+                    } catch (e) {
+                      alert(e.message || "삭제 실패");
+                    }
+                  }}
+                >
+                  삭제
+                </button>
+              )}
             </div>
           </div>
         ) : (
