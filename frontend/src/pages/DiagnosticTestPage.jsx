@@ -5,6 +5,7 @@ import EngineShell from "../engine/core/EngineShell";
 import {
   adaptDiagnosticQuestions,
   buildEngineContent,
+  tierToTargetLevel,
 } from "../utils/testToEngineAdapter";
 import "../styles/diagnostic-v2.css";
 
@@ -20,12 +21,14 @@ function DiagnosticTestPage() {
     const firstBatch = location.state?.firstBatch;
     if (firstBatch && firstBatch.length > 0) {
       const engineQuestions = adaptDiagnosticQuestions(firstBatch);
+      const targetLevel = tierToTargetLevel(firstBatch[0]?.tier);
       setContent(
         buildEngineContent({
           title: `역량 진단 (${firstBatch.length}문항)`,
           questions: engineQuestions,
           timeLimitSec: 60 * 60,
           contentType: "DIAGNOSTIC",
+          targetLevel,
         }),
       );
     } else {

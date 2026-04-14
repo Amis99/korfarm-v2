@@ -60,12 +60,24 @@ export function adaptTestQuestions(questions) {
 /**
  * EngineShell에 전달할 content 래퍼 생성
  */
-export function buildEngineContent({ title, questions, timeLimitSec, contentType }) {
+export function buildEngineContent({ title, questions, timeLimitSec, contentType, targetLevel }) {
   return {
     title,
     timeLimitSec,
     contentType,
+    targetLevel: targetLevel || null,
     seedReward: { count: 1 },
     payload: { questions },
   };
+}
+
+/**
+ * 진단 tier 문자열 → EngineShell targetLevel 변환
+ */
+export function tierToTargetLevel(tier) {
+  const t = (tier || "").toLowerCase();
+  if (t.includes("saussure") || t.includes("소쉬르")) return "SAUSSURE_1";
+  if (t.includes("frege") || t.includes("프레게")) return "FREGE_1";
+  if (t.includes("wittgenstein") || t.includes("비트겐슈타인")) return "WITTGENSTEIN_1";
+  return "RUSSELL_1";
 }

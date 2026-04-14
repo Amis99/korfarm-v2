@@ -589,42 +589,67 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     };
   }, [shellStyle]);
 
+  const isExam = moduleKey === "exam";
+  const examFormatTime = (sec) => {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  };
+
   return (
     <EngineContext.Provider value={contextValue}>
       <div className="engine-shell" style={shellStyle}>
         <div className="engine-header-wrap">
-          <header ref={headerRef} className="engine-header engine-scale">
-            <div className="engine-header-row">
-              <div className="engine-header-item engine-title">
-                <strong>{content?.title || "학습"}</strong>
-              </div>
-              <div className="engine-header-divider" />
-              <div className="engine-header-item">
-                <strong>
-                  {getLevelLabel(content?.targetLevel)}
-                </strong>
-              </div>
-              <div className="engine-header-divider" />
-              <div className="engine-header-item">
-                <strong>
-                  {getAreaLabel(content?.area, content?.subArea)} · {getSubAreaLabel(content?.subArea)}
-                </strong>
-              </div>
-            </div>
-            <div className="engine-header-row secondary">
-              <div className="engine-header-item">
-                <div className="seed-row" aria-label={`현재 씨앗 ${seed}개`}>
-                  {Array.from({ length: seed }, (_, idx) => (
-                    <span key={`seed-${idx}`} className="seed-icon" style={seedIconStyle} />
-                  ))}
+          {isExam ? (
+            /* ── 시험 모드 헤더: 제목 + 타이머 ── */
+            <header ref={headerRef} className="engine-header engine-scale">
+              <div className="engine-header-row">
+                <div className="engine-header-item engine-title">
+                  <strong>{content?.title || "시험"}</strong>
+                </div>
+                <div className="engine-header-divider" />
+                <div className="engine-header-item">
+                  <strong className={timeLeft <= 300 ? "exam-timer-warn" : ""}>
+                    {examFormatTime(timeLeft)}
+                  </strong>
                 </div>
               </div>
-              <div className="engine-header-divider" />
-              <div className="engine-header-item engine-timebar">
-                <TimeBar timeLeft={timeLeft} timeLimit={timeLimit} className={timePulse} />
+            </header>
+          ) : (
+            /* ── 학습 모드 헤더 (기존) ── */
+            <header ref={headerRef} className="engine-header engine-scale">
+              <div className="engine-header-row">
+                <div className="engine-header-item engine-title">
+                  <strong>{content?.title || "학습"}</strong>
+                </div>
+                <div className="engine-header-divider" />
+                <div className="engine-header-item">
+                  <strong>
+                    {getLevelLabel(content?.targetLevel)}
+                  </strong>
+                </div>
+                <div className="engine-header-divider" />
+                <div className="engine-header-item">
+                  <strong>
+                    {getAreaLabel(content?.area, content?.subArea)} · {getSubAreaLabel(content?.subArea)}
+                  </strong>
+                </div>
               </div>
-            </div>
-          </header>
+              <div className="engine-header-row secondary">
+                <div className="engine-header-item">
+                  <div className="seed-row" aria-label={`현재 씨앗 ${seed}개`}>
+                    {Array.from({ length: seed }, (_, idx) => (
+                      <span key={`seed-${idx}`} className="seed-icon" style={seedIconStyle} />
+                    ))}
+                  </div>
+                </div>
+                <div className="engine-header-divider" />
+                <div className="engine-header-item engine-timebar">
+                  <TimeBar timeLeft={timeLeft} timeLimit={timeLimit} className={timePulse} />
+                </div>
+              </div>
+            </header>
+          )}
         </div>
 
         <div className="engine-viewport">
@@ -640,7 +665,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                   moduleKey === "phoneme_change" ||
                   moduleKey === "background_knowledge" ||
                   moduleKey === "logic_reasoning" ||
-                  moduleKey === "exam"
+                  isExam
                     ? "stack"
                     : ""
                 } ${screenLevelClass}`}
@@ -648,37 +673,47 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                 <Module content={content} />
               </main>
 
-              {/* 인쇄 전용 통합 레이아웃 — 모듈 type별 시험지 + 정답해설 */}
-              <PrintLayout moduleKey={moduleKey} content={content} />
+              {/* 인쇄 전용 — 시험 모드에선 미사용 */}
+              {!isExam && <PrintLayout moduleKey={moduleKey} content={content} />}
 
-              <footer className="engine-footer">
-                <button type="button" className="engine-exit" onClick={onExit}>
-                  학습 종료
-                </button>
-                {moduleKey !== "study_content" && moduleKey !== "answer_key" && (
-                  <button type="button" className="engine-print" onClick={handlePrint}>
-                    인쇄
+              {isExam ? (
+                /* ── 시험 모드 푸터: 시험 종료 버튼만 ── */
+                <footer className="engine-footer">
+                  <button type="button" className="engine-exit" onClick={onExit}>
+                    시험 종료
                   </button>
-                )}
-                <div className="engine-footer-item">
-                  <span className="engine-footer-label">
-                    {pageProgress
-                      ? `페이지 ${pageProgress.current}/${pageProgress.total} · 문제 진행 ${progressCurrent}/${progressTotal || "-"}`
-                      : `진행 ${progressCurrent} / ${progressTotal || "-"}`}
-                  </span>
-                  <div className="engine-progress-track">
-                    <div
-                      className="engine-progress-fill"
-                      style={{
-                        width:
-                          progressTotal > 0
-                            ? `${Math.min(100, (progressCurrent / progressTotal) * 100)}%`
-                            : "0%",
-                      }}
-                    />
+                </footer>
+              ) : (
+                /* ── 학습 모드 푸터 (기존) ── */
+                <footer className="engine-footer">
+                  <button type="button" className="engine-exit" onClick={onExit}>
+                    학습 종료
+                  </button>
+                  {moduleKey !== "study_content" && moduleKey !== "answer_key" && (
+                    <button type="button" className="engine-print" onClick={handlePrint}>
+                      인쇄
+                    </button>
+                  )}
+                  <div className="engine-footer-item">
+                    <span className="engine-footer-label">
+                      {pageProgress
+                        ? `페이지 ${pageProgress.current}/${pageProgress.total} · 문제 진행 ${progressCurrent}/${progressTotal || "-"}`
+                        : `진행 ${progressCurrent} / ${progressTotal || "-"}`}
+                    </span>
+                    <div className="engine-progress-track">
+                      <div
+                        className="engine-progress-fill"
+                        style={{
+                          width:
+                            progressTotal > 0
+                              ? `${Math.min(100, (progressCurrent / progressTotal) * 100)}%`
+                              : "0%",
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              </footer>
+                </footer>
+              )}
             </div>
           </div>
         </div>

@@ -2407,7 +2407,6 @@ mark.highlight {
   background: rgba(255,255,255,0.45);
   border-left: 3px solid #b8a88a;
   border-radius: 0 6px 6px 0;
-  font-size: 15px;
   line-height: 1.7;
   color: #3a3020;
 }
@@ -2422,12 +2421,10 @@ mark.highlight {
 .exam-q-num {
   flex-shrink: 0;
   font-weight: 800;
-  font-size: 16px;
   color: #5c4a3a;
   min-width: 28px;
 }
 .exam-q-stem {
-  font-size: 16px;
   line-height: 1.65;
   color: #3a3020;
 }
@@ -2439,7 +2436,6 @@ mark.highlight {
   background: rgba(255,255,255,0.4);
   border: 1px solid #d4c8a8;
   border-radius: 6px;
-  font-size: 15px;
   line-height: 1.65;
   color: #4a3e30;
 }
@@ -2474,9 +2470,8 @@ mark.highlight {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  font-size: 18px;
+  width: 1.4em;
+  height: 1.4em;
   font-weight: 600;
   color: #5c4a3a;
 }
@@ -2484,8 +2479,8 @@ mark.highlight {
 /* 빨간 동그라미 마크 (선택 시) */
 .exam-choice-mark {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 1.6em;
+  height: 1.6em;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -2495,7 +2490,6 @@ mark.highlight {
 
 /* 선택지 텍스트 */
 .exam-choice-text {
-  font-size: 16px;
   line-height: 1.55;
   color: #3a3020;
   padding-top: 1px;
@@ -2505,6 +2499,15 @@ mark.highlight {
 .exam-q.answered {
   border-left: 3px solid #b4530960;
 }
+
+/* ── 시험 모듈 레벨별 폰트 크기 (지문·문제·선택지 통일) ── */
+.screen-level-saussure .exam-module { font-size: 20px; }
+.screen-level-frege .exam-module    { font-size: 17px; }
+.screen-level-russell .exam-module  { font-size: 16px; }
+.screen-level-wittgenstein .exam-module { font-size: 16px; }
+
+/* 시험 타이머 5분 이하 경고 */
+.exam-timer-warn { color: #c53030 !important; }
 
 /* 제출 바 */
 .exam-submit-bar {
@@ -2536,13 +2539,13 @@ mark.highlight {
 }
 
 @media (max-width: 600px) {
-  .exam-passage { font-size: 14px; padding: 10px 12px; }
-  .exam-q-num { font-size: 15px; }
-  .exam-q-stem { font-size: 15px; }
-  .exam-choice-num { font-size: 16px; width: 26px; height: 26px; }
-  .exam-choice-text { font-size: 15px; }
+  .screen-level-saussure .exam-module { font-size: 18px; }
+  .screen-level-frege .exam-module    { font-size: 16px; }
+  .screen-level-russell .exam-module  { font-size: 15px; }
+  .screen-level-wittgenstein .exam-module { font-size: 15px; }
   .exam-choices { margin-left: 12px; }
-  .exam-box-content { margin-left: 20px; font-size: 14px; }
+  .exam-box-content { margin-left: 16px; }
+  .exam-passage { padding: 10px 12px; }
 }
 
 .cum-card {
