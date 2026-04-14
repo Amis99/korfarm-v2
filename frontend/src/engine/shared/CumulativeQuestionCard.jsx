@@ -121,7 +121,7 @@ export default function CumulativeQuestionCard({
       className={`cum-card ${variant === "wide" ? "cum-card-wide" : ""} ${
         completion ? "completed" : ""
       } ${isActive ? "active" : ""} ${
-        completion?.isCorrect ? "correct" : completion ? "wrong" : ""
+        completion?.isCorrect === true ? "correct" : completion?.isCorrect === false ? "wrong" : ""
       }`}
     >
       <div className="cum-card-header">
@@ -129,7 +129,7 @@ export default function CumulativeQuestionCard({
           문제 {idx + 1}
           {total ? ` / ${total}` : ""}
         </span>
-        {completion && (
+        {completion && typeof completion.isCorrect === "boolean" && (
           <span
             className={`cum-card-mark ${completion.isCorrect ? "correct" : "wrong"}`}
             aria-label={completion.isCorrect ? "정답" : "오답"}
@@ -173,7 +173,7 @@ export default function CumulativeQuestionCard({
             const isCorrectChoice = cid === answerId;
             const isPicked = completion?.selectedId === cid;
             const showAsCorrect = isCorrectChoice;
-            const showAsWrong = isPicked && !isCorrectChoice;
+            const showAsWrong = isPicked && !isCorrectChoice && answerId != null;
             return (
               <div
                 key={cid || ci}

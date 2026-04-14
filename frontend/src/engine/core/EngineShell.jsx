@@ -124,7 +124,7 @@ function pickRandomSeed() {
   return SEED_TYPES[0];
 }
 
-function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish, startPage }) {
+function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish, startPage, onFinish }) {
   const { user } = useAuth();
   const studentName = user?.name || user?.login_id || "학생";
   const timeLimit = getTimeLimit(content);
@@ -398,6 +398,12 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     const farmSeed = pickSeedForFarm(content?.contentType);
     const chosenSeed = earnedSeed > 0 ? (farmSeed || pickRandomSeed()) : null;
     const endedAt = new Date().toISOString();
+    // 커스텀 완료 콜백 (진단/챕터 테스트 등 외부 제출용)
+    if (onFinish) {
+      onFinish({ records: latestRecords, correct, wrong, total, accuracy, timeSpent });
+      return;
+    }
+
     setSummary({
       success: normalizedSuccess,
       correct,

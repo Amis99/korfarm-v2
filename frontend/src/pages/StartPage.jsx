@@ -668,6 +668,7 @@ function StartPage() {
               <h3>프로 모드</h3>
               <p>12레벨 심화 학습</p>
               {!hasSub && <span className="start-lock-badge">구독 필요</span>}
+              {isAdmin && <span className="start-card-admin-badge">테스트 재응시 가능</span>}
             </div>
             <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/farm-mode" : "/subscription")}>
               <span className="material-symbols-outlined">agriculture</span>
@@ -691,6 +692,7 @@ function StartPage() {
               <span className="material-symbols-outlined">neurology</span>
               <h3>역량 진단</h3>
               <p>10대 역량 정밀 측정</p>
+              {isAdmin && <span className="start-card-admin-badge">재응시 가능</span>}
             </div>
             <div className={`start-learn-card${!hasSub ? " --locked" : ""}`} onClick={() => navigate(hasSub ? "/study-plan" : "/subscription")}>
               <span className="material-symbols-outlined">event_note</span>

@@ -4,6 +4,8 @@ import { useAuth } from "../hooks/useAuth";
 import { apiGet, apiPost, API_BASE, TOKEN_KEY } from "../utils/api";
 import AnswerInputPanel from "../components/AnswerInputPanel";
 import OnlineTestRenderer from "../components/OnlineTestRenderer";
+import EngineShell from "../engine/core/EngineShell";
+import { adaptTestQuestions, buildEngineContent } from "../utils/testToEngineAdapter";
 import "../styles/pro-mode.css";
 import "../styles/test-storage.css";
 import "../styles/test-online.css";
@@ -64,6 +66,9 @@ function ProTestPage() {
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
 
+  // 온라인 엔진 모드용
+  const [engineContent, setEngineContent] = useState(null);
+
   // 결과
   const [result, setResult] = useState(null);
 
@@ -106,10 +111,20 @@ function ProTestPage() {
         startTimer(active.remainingMinutes ?? 0);
 
         if (active.mode === "online" || active.status === "online_solving") {
-          // 온라인 모드 활성 세션 → 문항 로드 후 online_solving
+          // 온라인 모드 활성 세션 → 문항 로드 → 엔진 형식 변환
           try {
             const qs = await apiGet(`/v1/test-storage/${active.testId}/questions`);
-            setQuestions(Array.isArray(qs) ? qs : []);
+            const rawQuestions = Array.isArray(qs) ? qs : [];
+            setQuestions(rawQuestions);
+            const engineQuestions = adaptTestQuestions(rawQuestions);
+            setEngineContent(
+              buildEngineContent({
+                title: "챕터 테스트",
+                questions: engineQuestions,
+                timeLimitSec: (active.remainingMinutes ?? 60) * 60,
+                contentType: "CHAPTER_TEST",
+              }),
+            );
           } catch {
             // 문항 로드 실패 시 ready로 복귀
           }
@@ -180,10 +195,21 @@ function ProTestPage() {
       setSession(res);
       startTimer(res.remainingMinutes ?? 60);
 
-      // 문항 로드
+      // 문항 로드 → 엔진 형식 변환
       const qs = await apiGet(`/v1/test-storage/${res.testId}/questions`);
-      setQuestions(Array.isArray(qs) ? qs : []);
+      const rawQuestions = Array.isArray(qs) ? qs : [];
+      setQuestions(rawQuestions);
       setAnswers({});
+
+      const engineQuestions = adaptTestQuestions(rawQuestions);
+      setEngineContent(
+        buildEngineContent({
+          title: "챕터 테스트",
+          questions: engineQuestions,
+          timeLimitSec: (res.remainingMinutes ?? 60) * 60,
+          contentType: "CHAPTER_TEST",
+        }),
+      );
       setPhase("online_solving");
     } catch (err) {
       setError(err.message || "온라인 테스트 시작에 실패했습니다.");
@@ -229,6 +255,32 @@ function ProTestPage() {
       const res = await apiPost("/v1/pro/test/submit", {
         sessionId: session.sessionId,
         answers,
+      });
+      setResult(res);
+      setPhase("result");
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    } catch (err) {
+      setError(err.message || "제출에 실패했습니다.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // 엔진 모드 완료 (온라인 풀기)
+  const handleEngineFinish = async ({ records }) => {
+    setError("");
+    const engineAnswers = {};
+    records.forEach((r) => {
+      if (r.id && r.selectedId) engineAnswers[r.id] = r.selectedId;
+    });
+    setSubmitting(true);
+    try {
+      const res = await apiPost("/v1/pro/test/submit", {
+        sessionId: session.sessionId,
+        answers: engineAnswers,
       });
       setResult(res);
       setPhase("result");
@@ -393,16 +445,13 @@ function ProTestPage() {
             </>
           )}
 
-          {/* ── online_solving 단계: 문제 화면 표시 (온라인 모드) ── */}
-          {phase === "online_solving" && (
-            <OnlineTestRenderer
-              questions={questions}
-              answers={answers}
-              onAnswer={handleAnswer}
-              onSubmit={handleSubmit}
-              submitting={submitting}
-              remainingSec={remainingSec}
-              formatTime={formatTime}
+          {/* ── online_solving 단계: 엔진 기반 누적 카드 (온라인 모드) ── */}
+          {phase === "online_solving" && engineContent && (
+            <EngineShell
+              content={engineContent}
+              moduleKey="exam"
+              onExit={() => { setPhase("ready"); setEngineContent(null); loadTestStatus(); }}
+              onFinish={handleEngineFinish}
             />
           )}
 

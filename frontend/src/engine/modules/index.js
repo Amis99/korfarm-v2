@@ -10,6 +10,7 @@ import BackgroundModule from "./BackgroundModule";
 import LogicModule from "./LogicModule";
 import DailyQuizModule from "./DailyQuizModule";
 import MorphemeAnalysisModule from "./MorphemeAnalysisModule";
+import ExamModule from "./ExamModule";
 
 export const MODULES = {
   worksheet_quiz: WorksheetQuizModule,
@@ -27,4 +28,5 @@ export const MODULES = {
   logic_reasoning: LogicModule,
   daily_quiz: DailyQuizModule,
   morpheme_analysis: MorphemeAnalysisModule,
+  exam: ExamModule,
 };
