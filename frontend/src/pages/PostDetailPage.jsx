@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, apiPost, API_BASE } from "../utils/api";
+import { apiGet, apiPost, API_BASE, TOKEN_KEY } from "../utils/api";
 import { COMMUNITY_BOARDS } from "../data/communityBoards";
 import "../styles/community.css";
 
@@ -134,19 +134,37 @@ function PostDetailPage() {
           <div className="post-attachments">
             <h3>첨부 자료</h3>
             <ul>
-              {attachments.map((file) => (
-                <li key={file.id || file.fileId}>
-                  <div>
-                    <strong>{file.name || file.fileName}</strong>
-                  </div>
-                  <a
-                    className="community-btn ghost"
-                    href={`${API_BASE}/v1/files/${file.id || file.fileId}/download`}
-                  >
-                    다운로드
-                  </a>
-                </li>
-              ))}
+              {attachments.map((file) => {
+                const fid = file.id || file.fileId || file.file_id;
+                const displayName = file.original_name || file.originalName || file.name || file.fileName || fid;
+                return (
+                  <li key={fid}>
+                    <div>
+                      <strong>{displayName}</strong>
+                    </div>
+                    <button
+                      type="button"
+                      className="community-btn ghost"
+                      onClick={async () => {
+                        const token = sessionStorage.getItem(TOKEN_KEY);
+                        const r = await fetch(`${API_BASE}/v1/files/${fid}/download`, {
+                          headers: { Authorization: `Bearer ${token}` },
+                        });
+                        if (!r.ok) { alert("다운로드 실패"); return; }
+                        const blob = await r.blob();
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = displayName;
+                        a.click();
+                        URL.revokeObjectURL(url);
+                      }}
+                    >
+                      다운로드
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         )}
