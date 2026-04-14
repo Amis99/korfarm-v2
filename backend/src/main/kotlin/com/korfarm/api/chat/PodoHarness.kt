@@ -39,7 +39,7 @@ class PodoHarness(
     private val httpClient = HttpClient.newBuilder()
         .connectTimeout(Duration.ofSeconds(10))
         .build()
-    private val modelId = "claude-sonnet-4-6-20250514"
+    private val modelId = "claude-sonnet-4-6"
     private val isoFmt = DateTimeFormatter.ISO_LOCAL_DATE_TIME
     private val maxResponseChars = 500
 

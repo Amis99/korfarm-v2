@@ -155,13 +155,12 @@ function StartPage() {
           .then((r) => (r.ok ? r.json() : null))
           .then((d) => {
             if (d?.title) { setReadingTitle(d.title); return; }
-            // fallback to 001.json when today's file doesn't exist
             fetch(`${base}daily-reading/${lid}/001.json`)
               .then((r2) => (r2.ok ? r2.json() : null))
               .then((d2) => { if (d2?.title) setReadingTitle(d2.title); })
-              .catch((e) => console.error(e));
+              .catch(() => {});
           })
-          .catch((e) => console.error(e));
+          .catch(() => {});
       }
     }).catch((e) => console.error(e));
     // 관리자인 경우 기본 레벨을 override 초기값으로 설정
@@ -189,9 +188,9 @@ function StartPage() {
         fetch(`${base}daily-reading/${adminLevelOverride}/001.json`)
           .then((r2) => (r2.ok ? r2.json() : null))
           .then((d2) => { if (d2?.title) setReadingTitle(d2.title); })
-          .catch((e) => console.error(e));
+          .catch(() => {});
       })
-      .catch((e) => console.error(e));
+      .catch(() => {});
   }, [adminLevelOverride, isAdmin, profile]);
 
   const hasSub = isPremium || subActive || subLoading;
