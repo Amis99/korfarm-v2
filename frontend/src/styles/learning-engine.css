@@ -2382,11 +2382,135 @@ mark.highlight {
   box-sizing: border-box;
 }
 
-/* 시험 모드 제출 바 */
+/* ── 시험 모드 (ExamModule) ── */
+
+.exam-module {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 8px 4px 40px;
+}
+
+/* 문항 카드 */
+.exam-q {
+  padding: 16px 6px 20px;
+  border-bottom: 1px dashed #d0c8b8;
+}
+.exam-q:last-of-type {
+  border-bottom: none;
+}
+
+/* 지문 */
+.exam-passage {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.45);
+  border-left: 3px solid #b8a88a;
+  border-radius: 0 6px 6px 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #3a3020;
+}
+
+/* 문제 헤더 (번호 + 발문) */
+.exam-q-header {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.exam-q-num {
+  flex-shrink: 0;
+  font-weight: 800;
+  font-size: 16px;
+  color: #5c4a3a;
+  min-width: 28px;
+}
+.exam-q-stem {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #3a3020;
+}
+
+/* 보기 (boxContent) */
+.exam-box-content {
+  margin: 8px 0 12px 28px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.4);
+  border: 1px solid #d4c8a8;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #4a3e30;
+}
+
+/* 선택지 리스트 */
+.exam-choices {
+  margin: 6px 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 선택지 아이템 */
+.exam-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.1s;
+}
+.exam-choice:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* 원문자 번호 */
+.exam-choice-num {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #5c4a3a;
+}
+
+/* 빨간 동그라미 마크 (선택 시) */
+.exam-choice-mark {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* 선택지 텍스트 */
+.exam-choice-text {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #3a3020;
+  padding-top: 2px;
+}
+
+/* 응답 완료 표시 (카드 왼쪽 테두리) */
+.exam-q.answered {
+  border-left: 3px solid #b4530960;
+}
+
+/* 제출 바 */
 .exam-submit-bar {
   text-align: center;
-  padding: 24px 16px;
-  margin-top: 8px;
+  padding: 28px 16px;
+  margin-top: 12px;
 }
 .exam-submit-info {
   font-size: 15px;
@@ -2409,6 +2533,14 @@ mark.highlight {
 .exam-submit-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .exam-passage { font-size: 14px; padding: 10px 12px; }
+  .exam-q-stem { font-size: 14px; }
+  .exam-choice-text { font-size: 14px; }
+  .exam-choices { margin-left: 12px; }
+  .exam-box-content { margin-left: 20px; font-size: 13px; }
 }
 
 .cum-card {
