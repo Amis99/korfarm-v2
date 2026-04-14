@@ -637,6 +637,131 @@
   gap: 8px;
 }
 
+/* ─── 글쓰기 페이지 ─── */
+.comm-write-page {
+  min-height: 100vh;
+  background: #f5f0e8;
+  padding: 24px 16px 80px;
+}
+.comm-write-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 24px;
+}
+.comm-write-top { margin-bottom: 20px; }
+.comm-write-back {
+  background: none;
+  border: none;
+  color: #b08850;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 8px;
+  display: block;
+}
+.comm-write-back:hover { text-decoration: underline; }
+.comm-write-top h2 { margin: 0 0 4px; font-size: 22px; color: #2c2418; }
+.comm-write-board-name { margin: 0; font-size: 13px; color: #7b6a62; }
+.comm-write-notice {
+  background: #fff7ef;
+  border: 1px solid #f0d4b0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #8a6530;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.comm-write-form { display: flex; flex-direction: column; gap: 12px; }
+.comm-write-title {
+  padding: 12px 16px;
+  border: 1.5px solid #d6c2a8;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+}
+.comm-write-title:focus { border-color: #b08850; }
+.comm-write-content {
+  padding: 12px 16px;
+  border: 1.5px solid #d6c2a8;
+  border-radius: 10px;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 180px;
+  outline: none;
+  line-height: 1.6;
+}
+.comm-write-content:focus { border-color: #b08850; }
+.comm-write-attach {
+  background: #faf6f0;
+  border: 1px solid #e0d4c0;
+  border-radius: 10px;
+  padding: 12px;
+}
+.comm-write-attach-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.comm-write-attach-label { font-size: 14px; font-weight: 600; color: #5a4030; }
+.comm-write-attach-btn {
+  padding: 5px 14px;
+  font-size: 13px;
+  border: 1px solid #c0a880;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  color: #5a4030;
+}
+.comm-write-attach-btn:hover { background: #f5f0e8; }
+.comm-write-attach-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.comm-write-attach-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.comm-write-attach-name { flex: 1; color: #2c2418; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.comm-write-attach-size { color: #888; }
+.comm-write-attach-status { color: #888; }
+.comm-write-attach-error { color: #e74c3c; }
+.comm-write-attach-ok { color: #4a8030; }
+.comm-write-attach-remove { background: none; border: none; color: #999; cursor: pointer; font-size: 16px; padding: 0 4px; }
+.comm-write-error { color: #e74c3c; font-size: 13px; margin: 0; }
+.comm-write-actions { display: flex; gap: 10px; margin-top: 8px; }
+.comm-write-cancel {
+  flex: 1;
+  padding: 12px;
+  border: 1.5px solid #d6c2a8;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  color: #7b6a62;
+  cursor: pointer;
+}
+.comm-write-cancel:hover { background: #f5f0e8; }
+.comm-write-submit {
+  flex: 2;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #b08850;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+}
+.comm-write-submit:hover { background: #9a7540; }
+.comm-write-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
 .community-helper {
   margin: 0;
   font-size: 12px;

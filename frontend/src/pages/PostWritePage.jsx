@@ -1,11 +1,9 @@
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { COMMUNITY_BOARDS } from "../data/communityBoards";
 import { apiPost, apiUploadFile } from "../utils/api";
 import "../styles/community.css";
-
-const DEFAULT_BOARD_ID = "community";
 
 const formatBytes = (size) => {
   if (size < 1024) return `${size} B`;
@@ -19,25 +17,23 @@ function PostWritePage() {
   const { isLoggedIn, user, isPremium } = useAuth();
   const isAdmin = user?.roles?.includes("ADMIN") || user?.roles?.includes("HQ_ADMIN") || user?.roles?.includes("ORG_ADMIN");
 
-  const boardId = params.get("board") || DEFAULT_BOARD_ID;
+  const boardId = params.get("board") || "qna";
+  const board = COMMUNITY_BOARDS.find((b) => b.id === boardId) || COMMUNITY_BOARDS[0];
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-  // 첨부 파일: [{ fileId, name, size, mime, uploading, error }]
   const [attachments, setAttachments] = useState([]);
   const fileInputRef = useRef(null);
 
-  const board =
-    COMMUNITY_BOARDS.find((item) => item.id === boardId) || COMMUNITY_BOARDS[0];
-
-  // 학습 자료 게시판이면 파일 업로드 활성화
-  const supportsAttachments = board.id === "materials";
+  // qna, materials 게시판은 첨부 가능
+  const supportsAttachments = board.id === "materials" || board.id === "qna";
+  const isQna = board.id === "qna";
 
   const handleFilePick = async (event) => {
     const files = Array.from(event.target.files || []);
     event.target.value = "";
-    if (files.length === 0) return;
     for (const file of files) {
       const tempId = `temp-${Date.now()}-${Math.random()}`;
       setAttachments((prev) => [
@@ -45,7 +41,6 @@ function PostWritePage() {
         { tempId, fileId: null, name: file.name, size: file.size, mime: file.type, uploading: true, error: null },
       ]);
       try {
-        // 1) presign으로 fileId 발급
         const presign = await apiPost("/v1/files/presign", {
           purpose: "board_attachment",
           filename: file.name,
@@ -53,7 +48,6 @@ function PostWritePage() {
           size: file.size,
         });
         const fileId = presign.fileId || presign.file_id;
-        // 2) 실제 파일 업로드
         await apiUploadFile(fileId, file);
         setAttachments((prev) =>
           prev.map((a) => (a.tempId === tempId ? { ...a, fileId, uploading: false } : a))
@@ -75,10 +69,6 @@ function PostWritePage() {
       setError("관리자만 작성할 수 있는 게시판입니다.");
       return;
     }
-    if (board.requiresPaid && !isPremium && !isAdmin) {
-      setError("유료 회원만 작성할 수 있는 게시판입니다.");
-      return;
-    }
     if (!title.trim()) { setError("제목을 입력하세요."); return; }
     if (!content.trim()) { setError("내용을 입력하세요."); return; }
     if (attachments.some((a) => a.uploading)) {
@@ -91,7 +81,7 @@ function PostWritePage() {
       const attachmentIds = attachments
         .filter((a) => a.fileId && !a.error)
         .map((a) => a.fileId);
-      const data = await apiPost(`/v1/boards/${boardId}/posts`, {
+      await apiPost(`/v1/boards/${boardId}/posts`, {
         title: title.trim(),
         content: content.trim(),
         attachmentIds,
@@ -106,91 +96,88 @@ function PostWritePage() {
 
   if (!isLoggedIn) {
     return (
-      <div className="community-page post-editor">
-        <div className="community-wrap">
-          <div className="post-header">
-            <Link to="/community">커뮤니티로 돌아가기</Link>
-            <h1>로그인이 필요합니다</h1>
-          </div>
-          <p style={{ textAlign: "center", padding: "40px 0" }}>
+      <div className="comm-write-page">
+        <div className="comm-write-card">
+          <p style={{ textAlign: "center", padding: "40px 0", color: "#888" }}>
             게시글을 작성하려면 로그인이 필요합니다.
           </p>
-          <div style={{ textAlign: "center" }}>
-            <Link to="/login" className="community-btn" style={{ display: "inline-block" }}>
-              로그인하기
-            </Link>
-          </div>
+          <button className="comm-write-submit" onClick={() => navigate("/login")}>
+            로그인하기
+          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="community-page post-editor">
-      <div className="community-wrap">
-        <div className="post-header">
-          <Link to={`/community?board=${board.id}`}>게시판으로 돌아가기</Link>
-          <h1>게시글 작성</h1>
+    <div className="comm-write-page">
+      <div className="comm-write-card">
+        <div className="comm-write-top">
+          <button
+            type="button"
+            className="comm-write-back"
+            onClick={() => navigate(`/community?board=${boardId}`)}
+          >
+            ← {board.name}으로 돌아가기
+          </button>
+          <h2>게시글 작성</h2>
+          <p className="comm-write-board-name">{board.name}</p>
         </div>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <p className="community-helper" style={{ marginBottom: 12 }}>
-            <strong>{board.name}</strong>에 글을 작성합니다.
-          </p>
 
+        {isQna && (
+          <div className="comm-write-notice">
+            문제 질문을 올릴 때에는 해당 문제와 지문을 잘 보이게 찍어서 함께 올려주세요.
+          </div>
+        )}
+
+        <div className="comm-write-form">
           <input
+            className="comm-write-title"
             type="text"
             placeholder="제목을 입력하세요"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <textarea
+            className="comm-write-content"
             placeholder="내용을 입력하세요"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            rows={8}
           />
 
           {supportsAttachments && (
-            <div style={{ marginTop: 12, padding: 12, background: "#f8f4ec", borderRadius: 6, border: "1px solid #d8c4a8" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                <strong style={{ fontSize: 14 }}>첨부 파일</strong>
+            <div className="comm-write-attach">
+              <div className="comm-write-attach-header">
+                <span className="comm-write-attach-label">
+                  {isQna ? "이미지 첨부" : "파일 첨부"}
+                </span>
                 <input
                   ref={fileInputRef}
                   type="file"
                   multiple
+                  accept={isQna ? "image/*" : undefined}
                   style={{ display: "none" }}
                   onChange={handleFilePick}
                 />
                 <button
                   type="button"
+                  className="comm-write-attach-btn"
                   onClick={() => fileInputRef.current?.click()}
-                  style={{ padding: "4px 12px", fontSize: 13, cursor: "pointer" }}
                 >
-                  파일 선택
+                  {isQna ? "이미지 선택" : "파일 선택"}
                 </button>
               </div>
               {attachments.length > 0 && (
-                <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 4 }}>
+                <ul className="comm-write-attach-list">
                   {attachments.map((a) => (
-                    <li
-                      key={a.tempId}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 8,
-                        padding: "4px 8px",
-                        background: "#fff",
-                        borderRadius: 4,
-                        fontSize: 13,
-                      }}
-                    >
-                      <span style={{ flex: 1 }}>{a.name}</span>
-                      <span style={{ color: "#888" }}>{formatBytes(a.size)}</span>
-                      {a.uploading && <span style={{ color: "#888" }}>업로드 중...</span>}
-                      {a.error && <span style={{ color: "#e74c3c" }}>실패: {a.error}</span>}
-                      {a.fileId && !a.uploading && <span style={{ color: "#4a8030" }}>✓</span>}
-                      <button type="button" onClick={() => removeAttachment(a.tempId)} style={{ cursor: "pointer" }}>
-                        ×
-                      </button>
+                    <li key={a.tempId} className="comm-write-attach-item">
+                      <span className="comm-write-attach-name">{a.name}</span>
+                      <span className="comm-write-attach-size">{formatBytes(a.size)}</span>
+                      {a.uploading && <span className="comm-write-attach-status">업로드 중...</span>}
+                      {a.error && <span className="comm-write-attach-error">실패</span>}
+                      {a.fileId && !a.uploading && <span className="comm-write-attach-ok">✓</span>}
+                      <button type="button" className="comm-write-attach-remove" onClick={() => removeAttachment(a.tempId)}>×</button>
                     </li>
                   ))}
                 </ul>
@@ -198,17 +185,26 @@ function PostWritePage() {
             </div>
           )}
 
-          {error && <p className="community-helper" style={{ color: "#e74c3c" }}>{error}</p>}
+          {error && <p className="comm-write-error">{error}</p>}
 
-          <button
-            className="community-btn"
-            type="button"
-            onClick={handleSubmit}
-            disabled={submitting}
-          >
-            {submitting ? "등록 중..." : "등록하기"}
-          </button>
-        </form>
+          <div className="comm-write-actions">
+            <button
+              type="button"
+              className="comm-write-cancel"
+              onClick={() => navigate(`/community?board=${boardId}`)}
+            >
+              취소
+            </button>
+            <button
+              type="button"
+              className="comm-write-submit"
+              onClick={handleSubmit}
+              disabled={submitting}
+            >
+              {submitting ? "등록 중..." : "등록하기"}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
