@@ -7,7 +7,10 @@ import EmoticonImage from "./EmoticonImage";
 
 const formatTime = (iso) => {
   if (!iso) return "";
-  const d = new Date(iso);
+  // 서버가 KST(+09:00) 타임존 없이 보내므로 명시적으로 붙여줌
+  const raw = iso.includes("+") || iso.includes("Z") ? iso : iso + "+09:00";
+  const d = new Date(raw);
+  if (isNaN(d.getTime())) return "";
   const h = String(d.getHours()).padStart(2, "0");
   const m = String(d.getMinutes()).padStart(2, "0");
   return `${h}:${m}`;
