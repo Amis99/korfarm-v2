@@ -37,7 +37,7 @@ class BoardService(
     fun listPosts(boardId: String, userId: String?, isAdmin: Boolean): List<PostSummary> {
         val board = getBoard(boardId)
         requireBoardEnabled(board, userId)
-        val posts = postRepository.findByBoardIdOrderByCreatedAtDesc(boardId)
+        val posts = postRepository.findByBoardIdOrderByCreatedAtDesc(board.id)
         val visible = posts.filter { post ->
             when {
                 isAdmin -> post.status != "deleted"
