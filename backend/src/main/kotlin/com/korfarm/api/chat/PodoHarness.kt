@@ -171,13 +171,76 @@ $chatContext
         }
     }
 
+    // ─── 게시판 댓글용 ─────────────────────────────────
+
+    fun generateForBoard(title: String, content: String): String {
+        if (apiKey.isBlank()) return ""
+
+        val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
+            ?.promptText ?: return ""
+
+        val systemBlocks = listOf(
+            mapOf(
+                "type" to "text",
+                "text" to systemPrompt,
+                "cache_control" to mapOf("type" to "ephemeral")
+            )
+        )
+
+        val userContent = """[학습 질문 게시판에 새 글이 올라왔습니다]
+제목: $title
+내용: $content
+
+위 게시글이 국어 학습과 관련된 질문인지 먼저 판단하세요.
+- 국어 학습 질문이 맞다면: 도구를 활용해 정확한 정보를 검색한 뒤 500자 이내로 친절하게 답변하세요.
+- 국어 학습과 무관한 글이라면: 빈 문자열("")만 출력하세요. 다른 말은 하지 마세요.
+
+국어 학습 관련 판단 기준: 문법, 어휘, 독해, 글쓰기, 시험/수능/내신, 국어농장 사용법, 학습 방법 등"""
+
+        val messages = mutableListOf<Map<String, Any>>(
+            mapOf("role" to "user", "content" to userContent)
+        )
+
+        var response = callClaude(systemBlocks, messages)
+        var iterations = 0
+        val maxIterations = 3
+
+        while (iterations < maxIterations) {
+            val contentBlocks = extractContentBlocks(response)
+            val toolUseBlocks = contentBlocks.filter { (it as? Map<*, *>)?.get("type") == "tool_use" }
+            if (toolUseBlocks.isEmpty()) break
+
+            messages.add(mapOf("role" to "assistant", "content" to contentBlocks))
+            val toolResults = toolUseBlocks.map { block ->
+                val toolBlock = block as Map<*, *>
+                val toolId = toolBlock["id"] as String
+                val toolName = toolBlock["name"] as String
+                val input = toolBlock["input"] as? Map<*, *> ?: emptyMap<Any, Any>()
+                val query = input["query"]?.toString() ?: ""
+                mapOf(
+                    "type" to "tool_result",
+                    "tool_use_id" to toolId,
+                    "content" to executeTool(toolName, query, null)
+                )
+            }
+            messages.add(mapOf("role" to "user", "content" to toolResults))
+            response = callClaude(systemBlocks, messages)
+            iterations++
+        }
+
+        val text = extractText(response).trim()
+        // 빈 문자열이면 비학습 질문으로 판단 → 댓글 안 달기
+        if (text.isBlank() || text == "\"\"" || text == "''") return ""
+        return if (text.length > maxResponseChars) text.substring(0, maxResponseChars - 3) + "..." else text
+    }
+
     // ─── 도구 실행 ──────────────────────────────────────
 
-    private fun executeTool(name: String, query: String, trigger: ChatMessageEntity): String {
+    private fun executeTool(name: String, query: String, trigger: ChatMessageEntity?): String {
         return try {
             when (name) {
                 "search_knowledge" -> executeSearchKnowledge(query)
-                "search_chat_history" -> executeSearchChatHistory(query, trigger)
+                "search_chat_history" -> if (trigger != null) executeSearchChatHistory(query, trigger) else "게시판 컨텍스트에서는 채팅 히스토리를 검색할 수 없습니다."
                 "web_search" -> executeWebSearch(query)
                 else -> "알 수 없는 도구입니다."
             }

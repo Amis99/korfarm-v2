@@ -187,7 +187,7 @@ function renderAttachment(msg) {
   return <ChatFileLink fileId={fileId} />;
 }
 
-function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onShowLikes }) {
+function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onShowLikes, onHideMessage, onBanUser }) {
   const colors = userColors(message.userId);
   const bubbleStyle = isMine
     ? { borderColor: colors.border, background: "#cdf5b9" }
@@ -198,9 +198,8 @@ function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onSho
       ? findEmoticonById(emoticons, message.content)
       : null;
 
-  // 길게 누름 / 우클릭 → 좋아요 토글
-  const longPressTimer = useRef(null);
-  const longPressFired = useRef(false);
+  // 관리자 컨텍스트 메뉴
+  const [ctxMenu, setCtxMenu] = useState(null);
 
   const triggerLike = () => {
     if (!onLikeToggle) return;
@@ -208,12 +207,27 @@ function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onSho
     onLikeToggle(message.id);
   };
 
-  const handleTouchStart = () => {
+  const openAdminMenu = (x, y) => {
+    setCtxMenu({ x, y });
+  };
+
+  const closeMenu = () => setCtxMenu(null);
+
+  // 길게 누름 / 우클릭
+  const longPressTimer = useRef(null);
+  const longPressFired = useRef(false);
+
+  const handleTouchStart = (e) => {
     longPressFired.current = false;
     if (longPressTimer.current) clearTimeout(longPressTimer.current);
+    const touch = e.touches?.[0];
     longPressTimer.current = setTimeout(() => {
       longPressFired.current = true;
-      triggerLike();
+      if (isAdmin) {
+        openAdminMenu(touch?.clientX || 100, touch?.clientY || 100);
+      } else {
+        triggerLike();
+      }
     }, 500);
   };
 
@@ -226,7 +240,11 @@ function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onSho
 
   const handleContextMenu = (e) => {
     e.preventDefault();
-    triggerLike();
+    if (isAdmin) {
+      openAdminMenu(e.clientX, e.clientY);
+    } else {
+      triggerLike();
+    }
   };
 
   if (message.status === "deleted") {
@@ -408,6 +426,44 @@ function MessageBubble({ message, isMine, isAdmin, onDelete, onLikeToggle, onSho
           userAvatarUrl={message.userAvatarUrl}
         />
       )}
+      {ctxMenu && (
+        <AdminContextMenu
+          x={ctxMenu.x}
+          y={ctxMenu.y}
+          onClose={closeMenu}
+          onLike={() => { triggerLike(); closeMenu(); }}
+          onHide={() => { onHideMessage?.(message.id); closeMenu(); }}
+          onBan={() => { onBanUser?.(message.userId, message.userName); closeMenu(); }}
+          isMine={isMine}
+        />
+      )}
+    </div>
+  );
+}
+
+function AdminContextMenu({ x, y, onClose, onLike, onHide, onBan, isMine }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) onClose();
+    };
+    document.addEventListener("pointerdown", handler);
+    return () => document.removeEventListener("pointerdown", handler);
+  }, [onClose]);
+
+  // 화면 밖으로 나가지 않게 위치 조정
+  const style = {
+    position: "fixed",
+    left: Math.min(x, window.innerWidth - 160),
+    top: Math.min(y, window.innerHeight - 140),
+    zIndex: 9999,
+  };
+
+  return (
+    <div ref={ref} className="chat-admin-ctx" style={style}>
+      <button type="button" onClick={onLike}>❤ 좋아요</button>
+      <button type="button" onClick={onHide}>🚫 메시지 가리기</button>
+      {!isMine && <button type="button" className="danger" onClick={onBan}>⛔ 접근 금지</button>}
     </div>
   );
 }

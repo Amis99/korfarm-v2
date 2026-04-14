@@ -20,7 +20,8 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class BoardController(
-    private val boardService: BoardService
+    private val boardService: BoardService,
+    private val podoBoardService: PodoBoardService
 ) {
     @GetMapping("/v1/boards")
     fun boards(): ApiResponse<List<BoardView>> {
@@ -44,6 +45,8 @@ class BoardController(
             ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
         val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val data = boardService.createPost(boardId, userId, isAdmin, request)
+        // 포도 AI 자동 댓글 (qna 게시판)
+        podoBoardService.tryAutoComment(data.postId, boardId)
         return ApiResponse(success = true, data = data)
     }
 

@@ -116,7 +116,6 @@ function CommunityChatPage() {
   };
 
   const handleDelete = async (messageId) => {
-    // WebSocket으로 시도, 실패 시 REST fallback
     const okWs = deleteMessage(messageId);
     if (!okWs) {
       try {
@@ -129,6 +128,26 @@ function CommunityChatPage() {
       } catch (e) {
         setError(e.message);
       }
+    }
+  };
+
+  const handleHideMessage = async (messageId) => {
+    if (!window.confirm("이 메시지를 가리시겠습니까?")) return;
+    handleDelete(messageId);
+  };
+
+  const handleBanUser = async (userId, userName) => {
+    const reason = window.prompt(`"${userName}" 사용자를 접근 금지합니다. 사유를 입력하세요:`, "커뮤니티 규칙 위반");
+    if (reason === null) return;
+    try {
+      await apiPost(`/v1/admin/chat/rooms/${ROOM_ID}/mutes`, {
+        user_id: userId,
+        duration_minutes: null,
+        reason: reason || "커뮤니티 규칙 위반",
+      });
+      alert(`${userName} 사용자가 접근 금지되었습니다.`);
+    } catch (e) {
+      setError(e.message || "접근 금지 실패");
     }
   };
 
@@ -174,6 +193,8 @@ function CommunityChatPage() {
                   onDelete={handleDelete}
                   onLikeToggle={handleLikeToggle}
                   onShowLikes={handleShowLikes}
+                  onHideMessage={isAdmin ? handleHideMessage : undefined}
+                  onBanUser={isAdmin ? handleBanUser : undefined}
                 />
               ))
             )}

@@ -25,6 +25,7 @@ interface PostReviewRepository : JpaRepository<PostReviewEntity, String> {
 
 interface CommentRepository : JpaRepository<CommentEntity, String> {
     fun findByPostIdOrderByCreatedAtAsc(postId: String): List<CommentEntity>
+    fun findByPostIdAndUserId(postId: String, userId: String): CommentEntity?
 }
 
 interface ReportRepository : JpaRepository<ReportEntity, String>
