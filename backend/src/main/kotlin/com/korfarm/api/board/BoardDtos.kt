@@ -23,6 +23,7 @@ data class PostSummary(
     val status: String,
     val createdAt: LocalDateTime,
     val authorId: String,
+    val authorName: String? = null,
     val isGuest: Boolean = false,
     val guestName: String? = null,
     val guestContact: String? = null
@@ -37,6 +38,7 @@ data class PostDetail(
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
     val authorId: String,
+    val authorName: String? = null,
     val attachments: List<PostAttachmentView>,
     val isGuest: Boolean = false,
     val guestName: String? = null,
@@ -47,6 +49,7 @@ data class CommentView(
     val commentId: String,
     val postId: String,
     val authorId: String,
+    val authorName: String? = null,
     val content: String,
     val status: String,
     val createdAt: LocalDateTime

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet } from "../utils/api";
+import { apiGet, API_BASE } from "../utils/api";
 import { COMMUNITY_BOARDS } from "../data/communityBoards";
 import CommunityChatPage from "./CommunityChatPage";
 import "../styles/community.css";
@@ -106,9 +106,19 @@ function CommunityPage() {
     return filtered.slice(s, s + postsPerPage);
   }, [page, filtered]);
 
-  const selectedPost = selectedId
+  const [postDetail, setPostDetail] = useState(null);
+
+  // 게시글 선택 시 상세 조회 (content + attachments)
+  useEffect(() => {
+    if (!selectedId) { setPostDetail(null); return; }
+    apiGet(`/v1/posts/${selectedId}`)
+      .then((d) => setPostDetail(d))
+      .catch(() => setPostDetail(null));
+  }, [selectedId]);
+
+  const selectedPost = postDetail || (selectedId
     ? posts.find((p) => (p.postId || p.id) === selectedId)
-    : null;
+    : null);
 
   /* 자료실은 관리자만 글쓰기 가능 */
   const canWrite = board?.writeRole === "admin" ? isAdmin : true;
@@ -283,14 +293,35 @@ function CommunityPage() {
             <div className="comm-detail-head">
               <h3>{selectedPost.title}</h3>
               <div className="comm-detail-meta">
-                <span>{selectedPost.authorId}</span>
-                <span>{formatDate(selectedPost.createdAt)}</span>
+                <span>{selectedPost.author_name || selectedPost.authorName || selectedPost.authorId}</span>
+                <span>{formatDate(selectedPost.createdAt || selectedPost.created_at)}</span>
                 {statusLabel(selectedPost.status) && (
                   <span className="comm-status">{statusLabel(selectedPost.status)}</span>
                 )}
               </div>
             </div>
-            <div className="comm-detail-body">{selectedPost.content || selectedPost.excerpt}</div>
+            <div className="comm-detail-body" style={{ whiteSpace: "pre-wrap" }}>
+              {selectedPost.content || selectedPost.excerpt || ""}
+            </div>
+            {(selectedPost.attachments || []).length > 0 && (
+              <div className="comm-detail-attachments" style={{ marginTop: 12 }}>
+                <strong>첨부파일</strong>
+                <ul style={{ margin: "6px 0", paddingLeft: 20 }}>
+                  {(selectedPost.attachments || []).map((att) => (
+                    <li key={att.file_id || att.fileId}>
+                      <a
+                        href={`${API_BASE}/v1/files/${att.file_id || att.fileId}/download`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#b06e30" }}
+                      >
+                        {att.name || att.file_id || att.fileId} ({Math.round((att.size || 0) / 1024)}KB)
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <div className="comm-detail-actions">
               <button
@@ -348,7 +379,7 @@ function CommunityPage() {
                           <span className="comm-status">{statusLabel(post.status)}</span>
                         )}
                       </td>
-                      <td className="comm-td-author">{post.authorId}</td>
+                      <td className="comm-td-author">{post.author_name || post.authorName || post.authorId}</td>
                       <td className="comm-td-date">{formatDate(post.createdAt)}</td>
                     </tr>
                   ))

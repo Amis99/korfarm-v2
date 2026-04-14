@@ -7,6 +7,7 @@ import com.korfarm.api.contracts.CreatePostRequest
 import com.korfarm.api.contracts.ReportRequest
 import com.korfarm.api.contracts.UpdatePostRequest
 import com.korfarm.api.files.FileRepository
+import com.korfarm.api.user.UserRepository
 import com.korfarm.api.system.FeatureFlagService
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -22,6 +23,7 @@ class BoardService(
     private val commentRepository: CommentRepository,
     private val reportRepository: ReportRepository,
     private val fileRepository: FileRepository,
+    private val userRepository: UserRepository,
     private val featureFlagService: FeatureFlagService
 ) {
     @Transactional(readOnly = true)
@@ -326,6 +328,10 @@ class BoardService(
         )
     }
 
+    private fun getUserName(userId: String): String? {
+        return userRepository.findById(userId).orElse(null)?.name
+    }
+
     private fun PostEntity.toSummary(): PostSummary {
         return PostSummary(
             postId = id,
@@ -334,6 +340,7 @@ class BoardService(
             status = status,
             createdAt = createdAt,
             authorId = userId,
+            authorName = if (isGuest) guestName else getUserName(userId),
             isGuest = isGuest,
             guestName = guestName,
             guestContact = guestContact
@@ -350,6 +357,7 @@ class BoardService(
             createdAt = createdAt,
             updatedAt = updatedAt,
             authorId = userId,
+            authorName = if (isGuest) guestName else getUserName(userId),
             attachments = attachments,
             isGuest = isGuest,
             guestName = guestName,
@@ -371,6 +379,7 @@ class BoardService(
             commentId = id,
             postId = postId,
             authorId = userId,
+            authorName = getUserName(userId),
             content = content,
             status = status,
             createdAt = createdAt
