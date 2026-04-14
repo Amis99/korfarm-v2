@@ -25,7 +25,6 @@ export const COMMUNITY_BOARDS = [
     name: "학습 자료 게시판",
     description: "학습 자료 공유와 다운로드",
     tag: "자료 공유",
-    requiresApproval: true,
     writeRole: "admin",
     requiresPaid: true,
   },

@@ -58,9 +58,9 @@ class BoardService(
         val board = getBoard(boardId)
         requireBoardEnabled(board, userId)
         if (board.boardType == "materials" && !isAdmin) {
-            throw ApiException("FORBIDDEN", "materials board requires admin", HttpStatus.FORBIDDEN)
+            throw ApiException("FORBIDDEN", "학습 자료 게시판은 관리자만 작성할 수 있습니다", HttpStatus.FORBIDDEN)
         }
-        val status = if (board.boardType == "materials") "pending" else "active"
+        val status = "active"
         val entity = PostEntity(
             id = IdGenerator.newId("post"),
             boardId = board.id,
