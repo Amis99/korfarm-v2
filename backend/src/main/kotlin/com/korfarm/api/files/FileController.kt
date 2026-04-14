@@ -53,10 +53,9 @@ class FileController(
 
     @GetMapping("/{fileId}/download")
     fun download(@PathVariable fileId: String): ResponseEntity<Resource> {
-        // 다운로드는 피처플래그 체크 없이 항상 허용 (이미 업로드된 파일 접근)
+        // 이모티콘 등 공개 파일은 비인증 허용
         val userId = SecurityUtils.currentUserId()
-            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
-        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val isAdmin = userId != null && SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val (entity, filePath) = fileService.getFileForDownload(userId, isAdmin, fileId)
         val resource = UrlResource(filePath.toUri())
         val disposition = if (entity.mime.startsWith("image/") || entity.mime == "application/pdf") {

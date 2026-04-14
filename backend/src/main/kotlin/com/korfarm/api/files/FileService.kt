@@ -83,11 +83,13 @@ class FileService(
         fileRepository.save(entity)
     }
 
-    fun getFileForDownload(userId: String, isAdmin: Boolean, fileId: String): Pair<FileEntity, Path> {
+    fun getFileForDownload(userId: String?, isAdmin: Boolean, fileId: String): Pair<FileEntity, Path> {
         val entity = fileRepository.findById(fileId).orElseThrow {
             ApiException("NOT_FOUND", "파일을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
-        if (!isAdmin && entity.ownerId != userId) {
+        // 이모티콘은 누구나 접근 가능
+        val isPublic = entity.purpose == "chat-emoticon"
+        if (!isPublic && !isAdmin && entity.ownerId != userId) {
             throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
         }
         val filePath = uploadPath().resolve(fileId)
