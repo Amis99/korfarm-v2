@@ -88,8 +88,12 @@ class FileService(
         val entity = fileRepository.findById(fileId).orElseThrow {
             ApiException("NOT_FOUND", "파일을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
         }
-        // 이모티콘은 누구나 접근 가능
-        val isPublic = entity.purpose == "chat-emoticon"
+        // 공개 파일: 이모티콘, 게시판 첨부파일
+        val isPublic = entity.purpose in listOf("chat-emoticon", "board_attachment", "board-attachment", "content", "study_plan")
+        // 로그인 사용자는 공개 파일 + 본인 파일 접근 가능, 비로그인은 공개 파일만
+        if (!isPublic && !isAdmin && userId == null) {
+            throw ApiException("UNAUTHORIZED", "로그인이 필요합니다", HttpStatus.UNAUTHORIZED)
+        }
         if (!isPublic && !isAdmin && entity.ownerId != userId) {
             throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
         }
