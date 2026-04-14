@@ -27,9 +27,10 @@ function PostWritePage() {
   const [attachments, setAttachments] = useState([]);
   const fileInputRef = useRef(null);
 
-  // qna, materials 게시판은 첨부 가능
-  const supportsAttachments = board.id === "materials" || board.id === "qna";
+  // qna, materials, learning_request 게시판은 첨부 가능
+  const supportsAttachments = board.id === "materials" || board.id === "qna" || board.id === "learning_request";
   const isQna = board.id === "qna";
+  const isImageOnly = board.id === "qna"; // qna만 이미지 전용, 나머지는 모든 파일
 
   const handleFilePick = async (event) => {
     const files = Array.from(event.target.files || []);
@@ -150,13 +151,13 @@ function PostWritePage() {
             <div className="comm-write-attach">
               <div className="comm-write-attach-header">
                 <span className="comm-write-attach-label">
-                  {isQna ? "이미지 첨부" : "파일 첨부"}
+                  {isImageOnly ? "이미지 첨부" : "파일 첨부"}
                 </span>
                 <input
                   ref={fileInputRef}
                   type="file"
                   multiple
-                  accept={isQna ? "image/*" : undefined}
+                  accept={isImageOnly ? "image/*" : "image/*,.pdf,.doc,.docx,.hwp,.zip"}
                   style={{ display: "none" }}
                   onChange={handleFilePick}
                 />
@@ -165,7 +166,7 @@ function PostWritePage() {
                   className="comm-write-attach-btn"
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  {isQna ? "이미지 선택" : "파일 선택"}
+                  {isImageOnly ? "이미지 선택" : "파일 선택"}
                 </button>
               </div>
               {attachments.length > 0 && (

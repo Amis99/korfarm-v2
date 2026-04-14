@@ -22,10 +22,27 @@ export default function StudyPlanSubmitPage() {
       .catch(() => setExistingFiles([]));
   }, [cellId]);
 
-  const fileUrl = (fileId) => {
-    const token = sessionStorage.getItem(TOKEN_KEY);
-    return `${API_BASE}/v1/files/${fileId}/download?token=${token}`;
-  };
+  const [blobUrls, setBlobUrls] = useState({});
+
+  useEffect(() => {
+    // 기존 파일을 fetch + token으로 blob URL 생성
+    for (const f of existingFiles) {
+      const fid = f.fileId || f.file_id;
+      if (!fid || blobUrls[fid]) continue;
+      const token = sessionStorage.getItem(TOKEN_KEY);
+      fetch(`${API_BASE}/v1/files/${fid}/download`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((r) => r.ok ? r.blob() : null)
+        .then((blob) => {
+          if (blob) {
+            const url = URL.createObjectURL(blob);
+            setBlobUrls((prev) => ({ ...prev, [fid]: url }));
+          }
+        })
+        .catch(() => {});
+    }
+  }, [existingFiles]);
 
   const handleFileSelect = (e) => {
     const files = Array.from(e.target.files || []);
@@ -86,9 +103,15 @@ export default function StudyPlanSubmitPage() {
             이전 제출 ({existingFiles.length}건)
           </div>
           <div className="sp-file-preview">
-            {existingFiles.map((f) => (
-              <img key={f.id} className="sp-file-thumb" src={fileUrl(f.fileId)} alt="이전 제출" />
-            ))}
+            {existingFiles.map((f) => {
+              const fid = f.fileId || f.file_id;
+              const url = blobUrls[fid];
+              return url ? (
+                <img key={f.id} className="sp-file-thumb" src={url} alt="이전 제출" />
+              ) : (
+                <div key={f.id} className="sp-file-thumb" style={{ background: "#eee", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, color: "#999" }}>로드 중...</div>
+              );
+            })}
           </div>
         </>
       )}
