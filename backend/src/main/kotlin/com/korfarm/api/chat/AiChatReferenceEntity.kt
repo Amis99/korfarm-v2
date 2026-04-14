@@ -36,4 +36,19 @@ interface AiChatReferenceRepository : JpaRepository<AiChatReferenceEntity, Strin
         @Param("keyword") keyword: String,
         @Param("lim") limit: Int
     ): List<AiChatReferenceEntity>
+
+    /** 문법 문서 FULLTEXT 검색 */
+    @Query(
+        value = """
+        SELECT * FROM ai_chat_references
+        WHERE source = 'grammar_doc'
+          AND MATCH(content) AGAINST(:keyword IN NATURAL LANGUAGE MODE)
+        LIMIT :lim
+        """,
+        nativeQuery = true
+    )
+    fun searchGrammar(
+        @Param("keyword") keyword: String,
+        @Param("lim") limit: Int
+    ): List<AiChatReferenceEntity>
 }
