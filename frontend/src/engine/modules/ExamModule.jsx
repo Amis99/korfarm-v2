@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useEngine } from "../core/EngineContext";
 import RichText from "../../utils/RichText";
 import PassageMarkdown from "../../utils/PassageMarkdown";
 
 /**
- * 시험용 모듈 — 시험지 스타일.
+ * 시험용 모듈 — 누적 카드 + 인라인 선택지.
  *
- * - 모든 문제가 처음부터 전부 표시 (스크롤)
- * - 모달 없음: 선택지를 직접 클릭/터치
- * - 원문자(①②③…) 번호 + 빨간 동그라미 마크
- * - 최종 제출 전까지 언제든 선택 변경 가능
- * - 문항별 풀이 시간 추적
+ * - 문제가 하나씩 나타남 (풀면 다음 문제 등장)
+ * - 모달 없음: 선택지를 카드에서 직접 클릭
+ * - 원문자(①②③…) + 빨간 동그라미 마크
+ * - 이전 문제로 스크롤해서 답 변경 가능 (제출 전까지)
+ * - 마지막 문제 풀면 제출 버튼 표시
  */
 
 const CIRCLE_NUMS = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"];
@@ -20,32 +20,49 @@ function ExamModule({ content }) {
   const payload = content?.payload || {};
   const questions = payload.questions || [];
 
-  // { [questionId]: selectedChoiceId }
+  const [currentIndex, setCurrentIndex] = useState(0);
+  // { [questionId]: choiceId }
   const [answers, setAnswers] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // 문항별 풀이 시간 추적
-  // { [questionId]: { totalMs, deselectTs } }
   const timeRef = useRef({});
-
-  const scrollRef = useRef(null);
   const answersRef = useRef(answers);
   answersRef.current = answers;
+
+  const scrollRef = useRef(null);
+  const advanceRef = useRef(null);
 
   // 자동 시작
   useEffect(() => {
     if (status === "READY") start();
   }, [status, start]);
 
-  // 선택지 토글
-  const toggleChoice = (questionId, choiceId) => {
+  // 타이머 정리
+  useEffect(() => () => {
+    if (advanceRef.current) clearTimeout(advanceRef.current);
+  }, []);
+
+  // 새 문제 등장 시 자동 스크롤
+  useLayoutEffect(() => {
+    if (!scrollRef.current) return;
+    const cards = scrollRef.current.querySelectorAll(".exam-q");
+    const last = cards[cards.length - 1];
+    if (last) {
+      try { last.scrollIntoView({ behavior: "smooth", block: "start" }); }
+      catch { last.scrollIntoView(); }
+    }
+  }, [currentIndex]);
+
+  // 선택지 클릭
+  const handleChoice = (questionId, choiceId, questionIdx) => {
     if (isSubmitting) return;
     const current = answers[questionId];
     const now = Date.now();
     const tData = timeRef.current[questionId] || { totalMs: 0, deselectTs: null };
 
     if (current === choiceId) {
-      // 선택 취소 — 취소 시점 기록
+      // 같은 선택지 다시 클릭 → 선택 취소
       tData.deselectTs = now;
       timeRef.current[questionId] = tData;
       setAnswers((prev) => {
@@ -53,15 +70,23 @@ function ExamModule({ content }) {
         delete next[questionId];
         return next;
       });
-    } else {
-      // 선택 (또는 재선택)
-      if (tData.deselectTs) {
-        // 취소 후 재선택: 경과 시간 추가
-        tData.totalMs += now - tData.deselectTs;
-        tData.deselectTs = null;
-      }
-      timeRef.current[questionId] = tData;
-      setAnswers((prev) => ({ ...prev, [questionId]: choiceId }));
+      return;
+    }
+
+    // 선택 (또는 다른 선택지로 변경)
+    if (tData.deselectTs) {
+      tData.totalMs += now - tData.deselectTs;
+      tData.deselectTs = null;
+    }
+    timeRef.current[questionId] = tData;
+    setAnswers((prev) => ({ ...prev, [questionId]: choiceId }));
+
+    // 현재 활성 문제에서 선택한 경우 → 다음 문제 등장
+    if (questionIdx === currentIndex && currentIndex < questions.length - 1) {
+      if (advanceRef.current) clearTimeout(advanceRef.current);
+      advanceRef.current = setTimeout(() => {
+        setCurrentIndex((prev) => Math.max(prev, questionIdx + 1));
+      }, 350);
     }
   };
 
@@ -69,16 +94,13 @@ function ExamModule({ content }) {
   const handleSubmit = () => {
     if (isSubmitting) return;
     const answeredCount = Object.keys(answers).length;
-    const totalCount = questions.length;
-    if (answeredCount < totalCount) {
+    if (answeredCount < questions.length) {
       const ok = window.confirm(
-        `${totalCount - answeredCount}문항이 미응답입니다. 제출하시겠습니까?`,
+        `${questions.length - answeredCount}문항이 미응답입니다. 제출하시겠습니까?`,
       );
       if (!ok) return;
     }
     setIsSubmitting(true);
-
-    // 최종 답안을 records로 기록
     const finalAnswers = answersRef.current;
     questions.forEach((q) => {
       if (finalAnswers[q.id]) {
@@ -95,18 +117,21 @@ function ExamModule({ content }) {
 
   if (questions.length === 0) return null;
 
+  const visibleQuestions = questions.slice(0, currentIndex + 1);
   const answeredCount = Object.keys(answers).length;
+  const allRevealed = currentIndex >= questions.length - 1;
 
   return (
     <div className="exam-module" ref={scrollRef}>
-      {questions.map((q, idx) => {
+      {visibleQuestions.map((q, idx) => {
         const selectedId = answers[q.id];
         const hasPassage = typeof q.passage === "string" && q.passage.trim().length > 0;
         const hasBoxContent = typeof q.boxContent === "string" && q.boxContent.trim().length > 0;
+        const isLatest = idx === currentIndex;
 
         return (
-          <div key={q.id} className={`exam-q ${selectedId ? "answered" : ""}`}>
-            {/* 지문 (해당 그룹 첫 문제에만 표시) */}
+          <div key={q.id} className={`exam-q ${selectedId ? "answered" : ""} ${isLatest ? "latest" : ""}`}>
+            {/* 지문 */}
             {hasPassage && (
               <div className="exam-passage">
                 <PassageMarkdown>{q.passage}</PassageMarkdown>
@@ -134,7 +159,7 @@ function ExamModule({ content }) {
                   <div
                     key={c.id}
                     className={`exam-choice ${isSelected ? "selected" : ""}`}
-                    onClick={() => toggleChoice(q.id, c.id)}
+                    onClick={() => handleChoice(q.id, c.id, idx)}
                   >
                     <span className="exam-choice-num">
                       {CIRCLE_NUMS[ci] || `(${ci + 1})`}
@@ -158,19 +183,21 @@ function ExamModule({ content }) {
         );
       })}
 
-      {/* 제출 바 (항상 표시) */}
-      <div className="exam-submit-bar">
-        <p className="exam-submit-info">
-          {questions.length}문항 중 {answeredCount}문항 응답 완료
-        </p>
-        <button
-          className="exam-submit-btn"
-          onClick={handleSubmit}
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "제출 중..." : "답안 제출"}
-        </button>
-      </div>
+      {/* 제출 바 — 마지막 문제가 나타난 후 표시 */}
+      {allRevealed && (
+        <div className="exam-submit-bar">
+          <p className="exam-submit-info">
+            {questions.length}문항 중 {answeredCount}문항 응답 완료
+          </p>
+          <button
+            className="exam-submit-btn"
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "제출 중..." : "답안 제출"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
