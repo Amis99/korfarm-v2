@@ -220,6 +220,9 @@ class ReportEntity(
     @Column(name = "target_id", nullable = false)
     var targetId: String,
 
+    @Column(name = "user_id")
+    var userId: String? = null,
+
     @Column(nullable = false)
     var reason: String,
 
@@ -247,3 +250,12 @@ class ReportEntity(
         updatedAt = LocalDateTime.now()
     }
 }
+
+@Entity
+@Table(name = "post_likes")
+class PostLikeEntity(
+    @Id var id: String,
+    @Column(name = "post_id", nullable = false) var postId: String,
+    @Column(name = "user_id", nullable = false) var userId: String,
+    @Column(name = "created_at", nullable = false) var createdAt: LocalDateTime = LocalDateTime.now()
+)

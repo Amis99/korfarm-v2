@@ -25,6 +25,9 @@ data class PostSummary(
     val createdAt: LocalDateTime,
     val authorId: String,
     val authorName: String? = null,
+    val likeCount: Int = 0,
+    val commentCount: Int = 0,
+    val reportCount: Int = 0,
     val isGuest: Boolean = false,
     val guestName: String? = null,
     val guestContact: String? = null

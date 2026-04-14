@@ -524,6 +524,31 @@
 }
 .comm-comment-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 
+/* 좋아요/신고 */
+.comm-detail-interact { display: flex; gap: 12px; margin-top: 16px; padding-top: 12px; border-top: 1px solid #e8dcc8; }
+.comm-like-btn, .comm-report-btn {
+  background: none; border: 1px solid #d6c2a8; border-radius: 8px;
+  padding: 6px 14px; font-size: 13px; cursor: pointer; color: #5a4030;
+}
+.comm-like-btn:hover { background: #fff0f0; border-color: #e0625a; color: #e0625a; }
+.comm-report-btn:hover { background: #fff5f0; border-color: #c0392b; color: #c0392b; }
+
+/* 리스트 카운트 */
+.comm-post-counts { margin-left: 6px; }
+.comm-cnt { font-size: 11px; margin-left: 4px; opacity: 0.7; }
+.comm-cnt.comment { color: #2980b9; }
+.comm-cnt.like { color: #e0625a; }
+.comm-cnt.report { color: #c0392b; }
+
+/* 마크다운 본문 */
+.comm-detail-body p { margin: 0 0 8px; }
+.comm-detail-body p:last-child { margin-bottom: 0; }
+.comm-detail-body ul, .comm-detail-body ol { margin: 4px 0; padding-left: 20px; }
+.comm-detail-body code { background: rgba(0,0,0,0.06); padding: 1px 4px; border-radius: 3px; font-size: 0.9em; }
+.comm-detail-body strong { font-weight: 700; }
+.comm-comment-body p { margin: 0 0 4px; }
+.comm-comment-body p:last-child { margin-bottom: 0; }
+
 .comm-btn-text {
   background: none;
   border: none;

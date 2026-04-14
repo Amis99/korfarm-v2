@@ -28,4 +28,13 @@ interface CommentRepository : JpaRepository<CommentEntity, String> {
     fun findByPostIdAndUserId(postId: String, userId: String): CommentEntity?
 }
 
-interface ReportRepository : JpaRepository<ReportEntity, String>
+interface PostLikeRepository : JpaRepository<PostLikeEntity, String> {
+    fun findByPostIdAndUserId(postId: String, userId: String): PostLikeEntity?
+    fun countByPostId(postId: String): Long
+    fun deleteByPostIdAndUserId(postId: String, userId: String)
+}
+
+interface ReportRepository : JpaRepository<ReportEntity, String> {
+    fun findByTargetTypeAndTargetIdAndUserId(targetType: String, targetId: String, userId: String): ReportEntity?
+    fun countByTargetTypeAndTargetId(targetType: String, targetId: String): Long
+}

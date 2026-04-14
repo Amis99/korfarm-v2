@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, apiPost, apiDelete, API_BASE, TOKEN_KEY } from "../utils/api";
 import { COMMUNITY_BOARDS } from "../data/communityBoards";
@@ -330,8 +332,8 @@ function CommunityPage() {
                 )}
               </div>
             </div>
-            <div className="comm-detail-body" style={{ whiteSpace: "pre-wrap" }}>
-              {selectedPost.content || selectedPost.excerpt || ""}
+            <div className="comm-detail-body">
+              <Markdown remarkPlugins={[remarkGfm]}>{selectedPost.content || selectedPost.excerpt || ""}</Markdown>
             </div>
             {(selectedPost.attachments || []).length > 0 && (
               <div className="comm-detail-attachments" style={{ marginTop: 12 }}>
@@ -368,6 +370,37 @@ function CommunityPage() {
                 </ul>
               </div>
             )}
+
+            <div className="comm-detail-interact">
+              <button
+                type="button"
+                className="comm-like-btn"
+                onClick={async () => {
+                  const pid = selectedPost.post_id || selectedPost.postId || selectedPost.id;
+                  try {
+                    const res = await apiPost(`/v1/posts/${pid}/like`, {});
+                    setPostDetail((prev) => prev ? { ...prev, _liked: res.liked, _likeCount: res.like_count ?? res.likeCount } : prev);
+                  } catch (e) { alert(e.message || "좋아요 실패"); }
+                }}
+              >
+                {postDetail?._liked ? "❤" : "♡"} 좋아요 {postDetail?._likeCount ?? selectedPost.like_count ?? selectedPost.likeCount ?? 0}
+              </button>
+              <button
+                type="button"
+                className="comm-report-btn"
+                onClick={async () => {
+                  const reason = window.prompt("신고 사유를 입력하세요:");
+                  if (!reason) return;
+                  const pid = selectedPost.post_id || selectedPost.postId || selectedPost.id;
+                  try {
+                    await apiPost("/v1/reports", { target_type: "post", target_id: pid, reason });
+                    alert("신고가 접수되었습니다.");
+                  } catch (e) { alert(e.message || "신고 실패"); }
+                }}
+              >
+                🚨 신고
+              </button>
+            </div>
 
             <div className="comm-detail-actions">
               <button
@@ -421,7 +454,7 @@ function CommunityPage() {
                             <button type="button" className="comm-comment-del" onClick={() => handleCommentDelete(cid)}>삭제</button>
                           )}
                         </div>
-                        <div className="comm-comment-body" style={{ whiteSpace: "pre-wrap" }}>{c.content}</div>
+                        <div className="comm-comment-body"><Markdown remarkPlugins={[remarkGfm]}>{c.content}</Markdown></div>
                       </li>
                     );
                   })}
@@ -485,6 +518,11 @@ function CommunityPage() {
                         {statusLabel(post.status) && (
                           <span className="comm-status">{statusLabel(post.status)}</span>
                         )}
+                        <span className="comm-post-counts">
+                          {(post.comment_count ?? post.commentCount ?? 0) > 0 && <span className="comm-cnt comment">💬{post.comment_count ?? post.commentCount}</span>}
+                          {(post.like_count ?? post.likeCount ?? 0) > 0 && <span className="comm-cnt like">❤{post.like_count ?? post.likeCount}</span>}
+                          {(post.report_count ?? post.reportCount ?? 0) > 0 && <span className="comm-cnt report">🚨</span>}
+                        </span>
                       </td>
                       <td className="comm-td-author">{post.author_name || post.authorName || post.authorId}</td>
                       <td className="comm-td-date">{formatDate(post.createdAt)}</td>

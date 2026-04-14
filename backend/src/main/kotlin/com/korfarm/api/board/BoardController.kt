@@ -107,6 +107,15 @@ class BoardController(
         return ApiResponse(success = true, data = mapOf("status" to "deleted"))
     }
 
+    @PostMapping("/v1/posts/{postId}/like")
+    fun toggleLike(@PathVariable postId: String): ApiResponse<Map<String, Any>> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val liked = boardService.togglePostLike(postId, userId)
+        val count = boardService.getPostLikeCount(postId)
+        return ApiResponse(success = true, data = mapOf("liked" to liked, "likeCount" to count))
+    }
+
     @PostMapping("/v1/reports")
     fun report(@Valid @RequestBody request: ReportRequest): ApiResponse<ReportResult> {
         val userId = SecurityUtils.currentUserId()

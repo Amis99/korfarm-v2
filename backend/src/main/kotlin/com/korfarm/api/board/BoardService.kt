@@ -24,6 +24,7 @@ class BoardService(
     private val reportRepository: ReportRepository,
     private val fileRepository: FileRepository,
     private val userRepository: UserRepository,
+    private val postLikeRepository: PostLikeRepository,
     private val featureFlagService: FeatureFlagService
 ) {
     @Transactional(readOnly = true)
@@ -199,6 +200,24 @@ class BoardService(
     }
 
     @Transactional
+    fun togglePostLike(postId: String, userId: String): Boolean {
+        val existing = postLikeRepository.findByPostIdAndUserId(postId, userId)
+        return if (existing != null) {
+            postLikeRepository.delete(existing)
+            false
+        } else {
+            postLikeRepository.save(PostLikeEntity(
+                id = IdGenerator.newId("plk"),
+                postId = postId,
+                userId = userId
+            ))
+            true
+        }
+    }
+
+    fun getPostLikeCount(postId: String): Int = postLikeRepository.countByPostId(postId).toInt()
+
+    @Transactional
     fun report(userId: String, request: ReportRequest): ReportResult {
         if (request.targetType != "post" && request.targetType != "comment") {
             throw ApiException("INVALID_TARGET", "invalid target", HttpStatus.BAD_REQUEST)
@@ -223,6 +242,7 @@ class BoardService(
             id = IdGenerator.newId("rpt"),
             targetType = request.targetType,
             targetId = request.targetId,
+            userId = userId,
             reason = request.reason,
             status = "open",
             processedBy = null
@@ -341,6 +361,9 @@ class BoardService(
             createdAt = createdAt,
             authorId = userId,
             authorName = if (isGuest) guestName else getUserName(userId),
+            likeCount = postLikeRepository.countByPostId(id).toInt(),
+            commentCount = commentRepository.findByPostIdOrderByCreatedAtAsc(id).count { it.status != "deleted" },
+            reportCount = reportRepository.countByTargetTypeAndTargetId("post", id).toInt(),
             isGuest = isGuest,
             guestName = guestName,
             guestContact = guestContact
