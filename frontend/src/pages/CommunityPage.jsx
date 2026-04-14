@@ -347,12 +347,6 @@ function CommunityPage() {
               >
                 목록으로
               </button>
-              <Link
-                className="comm-btn-text"
-                to={`/community/post/${selectedPost.postId || selectedPost.id}?board=${board.id}`}
-              >
-                전체 보기
-              </Link>
             </div>
           </div>
         ) : (
