@@ -234,6 +234,83 @@ $chatContext
         return if (text.length > maxResponseChars) text.substring(0, maxResponseChars - 3) + "..." else text
     }
 
+    // ─── 게시판 댓글 (이미지 포함) ───────────────────────
+
+    fun generateForBoardWithImages(title: String, content: String, images: List<Pair<ByteArray, String>>): String {
+        if (apiKey.isBlank()) return ""
+
+        val systemPrompt = aiPromptRepository.findByPromptKeyAndLevelGroup("community_chat", "_common")
+            ?.promptText ?: return ""
+
+        val systemBlocks = listOf(
+            mapOf(
+                "type" to "text",
+                "text" to systemPrompt,
+                "cache_control" to mapOf("type" to "ephemeral")
+            )
+        )
+
+        // 이미지 + 텍스트를 content 배열로 구성
+        val userContentBlocks = mutableListOf<Map<String, Any>>()
+        for ((bytes, mime) in images) {
+            userContentBlocks.add(mapOf(
+                "type" to "image",
+                "source" to mapOf(
+                    "type" to "base64",
+                    "media_type" to mime,
+                    "data" to java.util.Base64.getEncoder().encodeToString(bytes)
+                )
+            ))
+        }
+        userContentBlocks.add(mapOf(
+            "type" to "text",
+            "text" to """[학습 질문 게시판에 새 글이 올라왔습니다]
+제목: $title
+내용: $content
+
+위에 첨부된 이미지는 학생이 올린 문제/지문 사진입니다. 이미지 내용을 반드시 읽고 참고하여 답변하세요.
+
+위 게시글이 국어 학습과 관련된 질문인지 먼저 판단하세요.
+- 국어 학습 질문이 맞다면: 이미지의 문제/지문을 분석하고, 도구를 활용해 정확한 정보를 검색한 뒤 500자 이내로 친절하게 답변하세요.
+- 국어 학습과 무관한 글이라면: 빈 문자열("")만 출력하세요."""
+        ))
+
+        val messages = mutableListOf<Map<String, Any>>(
+            mapOf("role" to "user", "content" to userContentBlocks)
+        )
+
+        var response = callClaude(systemBlocks, messages)
+        var iterations = 0
+        val maxIterations = 3
+
+        while (iterations < maxIterations) {
+            val contentBlocks = extractContentBlocks(response)
+            val toolUseBlocks = contentBlocks.filter { (it as? Map<*, *>)?.get("type") == "tool_use" }
+            if (toolUseBlocks.isEmpty()) break
+
+            messages.add(mapOf("role" to "assistant", "content" to contentBlocks))
+            val toolResults = toolUseBlocks.map { block ->
+                val toolBlock = block as Map<*, *>
+                val toolId = toolBlock["id"] as String
+                val toolName = toolBlock["name"] as String
+                val input = toolBlock["input"] as? Map<*, *> ?: emptyMap<Any, Any>()
+                val query = input["query"]?.toString() ?: ""
+                mapOf(
+                    "type" to "tool_result",
+                    "tool_use_id" to toolId,
+                    "content" to executeTool(toolName, query, null)
+                )
+            }
+            messages.add(mapOf("role" to "user", "content" to toolResults))
+            response = callClaude(systemBlocks, messages)
+            iterations++
+        }
+
+        val text = extractText(response).trim()
+        if (text.isBlank() || text == "\"\"" || text == "''") return ""
+        return if (text.length > maxResponseChars) text.substring(0, maxResponseChars - 3) + "..." else text
+    }
+
     // ─── 도구 실행 ──────────────────────────────────────
 
     private fun executeTool(name: String, query: String, trigger: ChatMessageEntity?): String {

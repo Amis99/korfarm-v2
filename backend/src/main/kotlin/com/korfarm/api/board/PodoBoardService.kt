@@ -4,37 +4,50 @@ import com.korfarm.api.chat.PodoHarness
 import com.korfarm.api.chat.AiChatService
 import com.korfarm.api.common.IdGenerator
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.nio.file.Files
+import java.nio.file.Paths
 
-/**
- * 학습 질문 게시판(qna)에 글이 올라오면 포도 AI가 자동 댓글을 답니다.
- * PodoHarness를 재활용하여 도구 기반 다단계 파이프라인으로 응답 생성.
- */
 @Service
 class PodoBoardService(
     private val postRepository: PostRepository,
+    private val postAttachmentRepository: PostAttachmentRepository,
     private val commentRepository: CommentRepository,
-    private val podoHarness: PodoHarness
+    private val podoHarness: PodoHarness,
+    @Value("\${app.upload.dir:./uploads}") private val uploadDir: String
 ) {
     private val log = LoggerFactory.getLogger(PodoBoardService::class.java)
+    private val imageTypes = setOf("image/jpeg", "image/png", "image/gif", "image/webp")
 
     @Async
     @Transactional
     fun tryAutoComment(postId: String, boardId: String) {
-        // qna 게시판만 대상
         if (boardId != "qna") return
 
         try {
             val post = postRepository.findById(postId).orElse(null) ?: return
             if (post.status != "active") return
 
-            // 이미 포도 댓글이 있으면 중복 방지
             val existing = commentRepository.findByPostIdAndUserId(postId, AiChatService.PODO_USER_ID)
             if (existing != null) return
 
-            val response = podoHarness.generateForBoard(post.title, post.content)
+            // 첨부 이미지 수집
+            val attachments = postAttachmentRepository.findByPostId(postId)
+            val imageDataList = attachments
+                .filter { it.mime in imageTypes }
+                .mapNotNull { att ->
+                    val path = Paths.get(uploadDir).resolve(att.fileId)
+                    if (Files.exists(path)) Pair(Files.readAllBytes(path), att.mime) else null
+                }
+
+            val response = if (imageDataList.isNotEmpty()) {
+                podoHarness.generateForBoardWithImages(post.title, post.content, imageDataList)
+            } else {
+                podoHarness.generateForBoard(post.title, post.content)
+            }
             if (response.isBlank()) return
 
             val comment = CommentEntity(
