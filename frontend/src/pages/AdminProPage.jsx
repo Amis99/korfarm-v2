@@ -644,12 +644,58 @@ function AdminProPage() {
   }
 
   /* ══════════════ 탭 2: 정답과 해설 ══════════════ */
+
+  /* 비주얼 에디터 헬퍼 — answerJson ↔ 구조화 데이터 동기화 */
+  const getAnswerData = () => {
+    try { return JSON.parse(answerJson); } catch { return { sections: [] }; }
+  };
+  const setAnswerData = (data) => setAnswerJson(JSON.stringify(data, null, 2));
+
+  const updateSection = (si, patch) => {
+    const d = getAnswerData(); d.sections[si] = { ...d.sections[si], ...patch }; setAnswerData(d);
+  };
+  const addSection = () => {
+    const d = getAnswerData();
+    d.sections = [...(d.sections || []), { title: "새 섹션", groups: [{ groupTitle: "그룹", items: [] }] }];
+    setAnswerData(d);
+  };
+  const removeSection = (si) => {
+    if (!confirm("이 섹션을 삭제하시겠습니까?")) return;
+    const d = getAnswerData(); d.sections.splice(si, 1); setAnswerData(d);
+  };
+  const updateGroup = (si, gi, patch) => {
+    const d = getAnswerData(); d.sections[si].groups[gi] = { ...d.sections[si].groups[gi], ...patch }; setAnswerData(d);
+  };
+  const addGroup = (si) => {
+    const d = getAnswerData();
+    d.sections[si].groups = [...(d.sections[si].groups || []), { groupTitle: "새 그룹", items: [] }];
+    setAnswerData(d);
+  };
+  const removeGroup = (si, gi) => {
+    const d = getAnswerData(); d.sections[si].groups.splice(gi, 1); setAnswerData(d);
+  };
+  const updateItem = (si, gi, ii, patch) => {
+    const d = getAnswerData(); d.sections[si].groups[gi].items[ii] = { ...d.sections[si].groups[gi].items[ii], ...patch }; setAnswerData(d);
+  };
+  const addItem = (si, gi) => {
+    const d = getAnswerData();
+    const items = d.sections[si].groups[gi].items || [];
+    const nextNum = items.length > 0 ? String(Number(items[items.length - 1].number || 0) + 1) : "1";
+    items.push({ number: nextNum, type: "객관식", points: 3, answer: "", explanation: "" });
+    d.sections[si].groups[gi].items = items;
+    setAnswerData(d);
+  };
+  const removeItem = (si, gi, ii) => {
+    const d = getAnswerData(); d.sections[si].groups[gi].items.splice(ii, 1); setAnswerData(d);
+  };
+
   function renderAnswerTab() {
     if (answerLoading) return <p className="ap-muted">불러오는 중...</p>;
     return (
       <div className="ap-answer-section">
         <div className="ap-answer-mode-bar">
           <button className={`ap-mode-btn ${answerMode === "preview" ? "active" : ""}`} onClick={() => setAnswerMode("preview")}>미리보기</button>
+          <button className={`ap-mode-btn ${answerMode === "visual" ? "active" : ""}`} onClick={() => setAnswerMode("visual")}>비주얼 편집</button>
           <button className={`ap-mode-btn ${answerMode === "edit" ? "active" : ""}`} onClick={() => setAnswerMode("edit")}>JSON 편집</button>
           <button className={`ap-mode-btn ${answerMode === "upload" ? "active" : ""}`} onClick={() => setAnswerMode("upload")}>파일 업로드</button>
           {answerContentId && <span className="ap-answer-id">ID: {answerContentId.slice(0, 16)}...</span>}
@@ -661,6 +707,8 @@ function AdminProPage() {
             {renderAnswerPreview()}
           </div>
         )}
+
+        {answerMode === "visual" && renderAnswerVisualEditor()}
 
         {answerMode === "edit" && (
           <div className="ap-answer-edit">
@@ -684,9 +732,86 @@ function AdminProPage() {
               <p>JSON 파일을 선택하세요</p>
               <input type="file" accept=".json,application/json" onChange={handleAnswerFileUpload} />
             </div>
-            <p className="ap-muted">업로드 후 JSON 편집 탭에서 내용을 확인하고 저장하세요.</p>
+            <p className="ap-muted">업로드 후 비주얼 편집 또는 JSON 편집 탭에서 확인하고 저장하세요.</p>
           </div>
         )}
+      </div>
+    );
+  }
+
+  /* ── 정답해설 비주얼 에디터 ── */
+  function renderAnswerVisualEditor() {
+    const data = getAnswerData();
+    const sections = data?.sections || [];
+    return (
+      <div className="ap-answer-visual">
+        <label className="ap-field-label">
+          제목
+          <input value={answerTitle} onChange={(e) => setAnswerTitle(e.target.value)} />
+        </label>
+
+        {sections.map((section, si) => (
+          <div key={si} className="ap-ve-section">
+            <div className="ap-ve-section-header">
+              <input className="ap-ve-section-title" value={section.title || ""} placeholder="섹션 제목"
+                onChange={(e) => updateSection(si, { title: e.target.value })} />
+              <button className="ap-icon-btn ap-icon-btn-danger" title="섹션 삭제" onClick={() => removeSection(si)}>
+                <span className="material-symbols-outlined">delete</span>
+              </button>
+            </div>
+
+            {(section.groups || []).map((group, gi) => (
+              <div key={gi} className="ap-ve-group">
+                <div className="ap-ve-group-header">
+                  <input className="ap-ve-group-title" value={group.groupTitle || ""} placeholder="그룹 제목"
+                    onChange={(e) => updateGroup(si, gi, { groupTitle: e.target.value })} />
+                  <button className="ap-icon-btn ap-icon-btn-danger" title="그룹 삭제" onClick={() => removeGroup(si, gi)}>
+                    <span className="material-symbols-outlined">close</span>
+                  </button>
+                </div>
+
+                <table className="ts-table ap-ve-items-table">
+                  <thead>
+                    <tr><th style={{width:50}}>번호</th><th style={{width:70}}>유형</th><th style={{width:50}}>배점</th><th style={{width:60}}>정답</th><th>해설</th><th style={{width:40}}></th></tr>
+                  </thead>
+                  <tbody>
+                    {(group.items || []).map((item, ii) => (
+                      <tr key={ii}>
+                        <td><input className="ap-ve-input-sm" value={item.number || ""} onChange={(e) => updateItem(si, gi, ii, { number: e.target.value })} /></td>
+                        <td>
+                          <select className="ap-ve-input-sm" value={item.type || "객관식"} onChange={(e) => updateItem(si, gi, ii, { type: e.target.value })}>
+                            <option value="객관식">객관식</option><option value="서술형">서술형</option>
+                          </select>
+                        </td>
+                        <td><input className="ap-ve-input-sm" type="number" min={1} value={item.points || 0} onChange={(e) => updateItem(si, gi, ii, { points: Number(e.target.value) })} /></td>
+                        <td><input className="ap-ve-input-sm" value={item.answer || ""} onChange={(e) => updateItem(si, gi, ii, { answer: e.target.value })} placeholder={item.type === "서술형" ? "서술" : "번호"} /></td>
+                        <td><input className="ap-ve-input" value={item.explanation || ""} onChange={(e) => updateItem(si, gi, ii, { explanation: e.target.value })} placeholder="해설 내용" /></td>
+                        <td>
+                          <button className="ap-icon-btn ap-icon-btn-danger" onClick={() => removeItem(si, gi, ii)}>
+                            <span className="material-symbols-outlined" style={{fontSize:16}}>close</span>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+
+                <button className="ap-add-link" onClick={() => addItem(si, gi)}>+ 문항 추가</button>
+              </div>
+            ))}
+            <button className="ap-add-link" onClick={() => addGroup(si)}>+ 그룹 추가</button>
+          </div>
+        ))}
+
+        <button className="ts-btn ts-btn-outline ts-btn-sm" onClick={addSection} style={{ marginTop: 12 }}>
+          <span className="material-symbols-outlined">add</span> 섹션 추가
+        </button>
+
+        <div className="ap-actions-right" style={{ marginTop: 16 }}>
+          <button className="ts-btn ts-btn-primary" onClick={handleSaveAnswer} disabled={answerSaving}>
+            {answerSaving ? "저장 중..." : "저장"}
+          </button>
+        </div>
       </div>
     );
   }
