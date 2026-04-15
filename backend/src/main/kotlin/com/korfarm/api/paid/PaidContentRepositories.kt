@@ -14,6 +14,22 @@ interface ContentRepository : JpaRepository<ContentEntity, String> {
     fun findByAreaAndLevelIdAndStatus(area: String, levelId: String, status: String): List<ContentEntity>
     fun findByContentTypeAndLevelIdAndStatus(contentType: String, levelId: String, status: String): List<ContentEntity>
 
+    /** categories JSON 배열 또는 content_type 단일 값에서 다중 카테고리 검색 */
+    @Query(value = """
+        SELECT * FROM contents
+        WHERE status = :status
+          AND (content_type = :ct OR JSON_CONTAINS(categories, CONCAT('"', :ct, '"')))
+    """, nativeQuery = true)
+    fun findByCategoryAndStatus(ct: String, status: String): List<ContentEntity>
+
+    @Query(value = """
+        SELECT * FROM contents
+        WHERE status = :status
+          AND level_id = :levelId
+          AND (content_type = :ct OR JSON_CONTAINS(categories, CONCAT('"', :ct, '"')))
+    """, nativeQuery = true)
+    fun findByCategoryAndLevelIdAndStatus(ct: String, levelId: String, status: String): List<ContentEntity>
+
     @Query("""
         SELECT c FROM ContentEntity c
         WHERE c.status = 'active'

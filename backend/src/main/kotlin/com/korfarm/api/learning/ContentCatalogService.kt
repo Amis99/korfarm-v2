@@ -43,9 +43,9 @@ class ContentCatalogService(
     @Transactional(readOnly = true)
     fun getCatalogByContentType(contentType: String, levelId: String?): List<CatalogItem> {
         val items = if (levelId != null) {
-            contentRepository.findByContentTypeAndLevelIdAndStatus(contentType, levelId, "active")
+            contentRepository.findByCategoryAndLevelIdAndStatus(contentType, levelId, "active")
         } else {
-            contentRepository.findByContentTypeAndStatus(contentType, "active")
+            contentRepository.findByCategoryAndStatus(contentType, "active")
         }
         return items.map { toCatalogItem(it) }
     }
