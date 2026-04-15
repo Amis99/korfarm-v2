@@ -52,6 +52,7 @@ function MessageInput({ onSend, onSendNotice, isAdmin, disabled }) {
       // 1) presign
       const presign = await apiPost("/v1/files/presign", {
         purpose: "chat",
+        filename: file.name || "attachment",
         mime,
         size: file.size,
       });
