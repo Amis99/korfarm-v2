@@ -22,20 +22,9 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const REPORT_FILE = path.join(ROOT, "_검수보고서", "audit_report.json");
 
-const LEVEL_TARGETS = {
-  소쉬르1: { passageMin: 100, passageMax: 400 },
-  소쉬르2: { passageMin: 150, passageMax: 500 },
-  소쉬르3: { passageMin: 250, passageMax: 600 },
-  프레게1: { passageMin: 350, passageMax: 800 },
-  프레게2: { passageMin: 450, passageMax: 900 },
-  프레게3: { passageMin: 450, passageMax: 1000 },
-  러셀1:   { passageMin: 550, passageMax: 1100 },
-  러셀2:   { passageMin: 650, passageMax: 1200 },
-  러셀3:   { passageMin: 750, passageMax: 1300 },
-  비트겐슈타인1: { passageMin: 700, passageMax: 1100 },
-  비트겐슈타인2: { passageMin: 800, passageMax: 1200 },
-  비트겐슈타인3: { passageMin: 900, passageMax: 1300 },
-};
+// 지문 길이 점검(ld_01)은 검수 대상에서 제외 (사용자 결정 2026-04-17).
+// LEVEL_TARGETS은 빈 객체로 두고 길이 측정 코드는 비활성화.
+const LEVEL_TARGETS = {};
 const LIMIT_TOKENS = ["만", "뿐", "오직", "반드시", "항상", "전혀", "모두", "완전히"];
 
 function load(p) {
@@ -51,18 +40,10 @@ function record(level, file, ruleId, severity, msg, value) {
 
 /* ───────────── 일반 (소쉬르/프레게/러셀) 챕터 점검 ───────────── */
 function auditNormalChapter(level, file, data) {
-  const target = LEVEL_TARGETS[level] || {};
   const sections = data.sections || [];
 
-  // A. passage 길이
+  // A. passage 길이 점검은 ld_01 비활성화 — 지문은 그대로 유지
   for (const s of sections) {
-    if (s.type === "passage" && s.content?.text) {
-      const len = String(s.content.text).replace(/\s/g, "").length;
-      if (len < target.passageMin)
-        record(level, file, "ld_01", "high", `지문 짧음: ${len}자 (목표 ≥${target.passageMin})`, len);
-      else if (len > target.passageMax)
-        record(level, file, "ld_01", "medium", `지문 김: ${len}자 (목표 ≤${target.passageMax})`, len);
-    }
     if (s.type === "concept" && (!s.content?.examples || s.content.examples.length === 0)) {
       if (s.content?.text && String(s.content.text).length > 100)
         record(level, file, "ce_02", "medium", `concept에 examples 없음: ${s.title || s.subtype || ""}`, null);
@@ -156,14 +137,7 @@ function auditNormalChapter(level, file, data) {
 
 /* ───────────── 비트 reading_NN.json ───────────── */
 function auditWittReading(level, file, data) {
-  const target = LEVEL_TARGETS[level];
-  // passage 길이
-  const t = data.passage?.text;
-  if (t) {
-    const len = String(t).replace(/\s/g, "").length;
-    if (len < target.passageMin) record(level, file, "ld_01", "high", `지문 짧음 ${len}자`, len);
-    else if (len > target.passageMax) record(level, file, "ld_01", "medium", `지문 김 ${len}자`, len);
-  }
+  // passage 길이 점검은 ld_01 비활성화 — 지문은 그대로 유지
   // figures (없어도 OK)
   if (!data.passage?.figures) {
     record(level, file, "fc_01", "medium", `figures 필드 없음 (필요 여부 수동 판단)`, null);
