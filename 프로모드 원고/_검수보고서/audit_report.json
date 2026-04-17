@@ -1,20 +1,22 @@
 {
   "summary": {
-    "total": 1569,
+    "total": 1560,
     "bySeverity": {
-      "high": 1490,
-      "medium": 79
+      "high": 1488,
+      "medium": 71,
+      "critical": 1
     },
     "byRule": {
-      "cq_01": 1490,
-      "ai_01": 79
+      "cq_01": 1488,
+      "ai_01": 71,
+      "cq_04": 1
     },
     "byLevel": {
       "소쉬르1": 1,
       "소쉬르2": 4,
       "소쉬르3": 13,
       "프레게1": 1,
-      "프레게3": 116,
+      "프레게3": 107,
       "러셀1": 100,
       "러셀2": 96,
       "러셀3": 125,
@@ -22,7 +24,7 @@
       "비트겐슈타인2": 372,
       "비트겐슈타인3": 535
     },
-    "generatedAt": "2026-04-17T21:03:10.124Z"
+    "generatedAt": "2026-04-17T21:16:58.598Z"
   },
   "findings": [
     {
@@ -211,17 +213,6 @@
     },
     {
       "level": "프레게3",
-      "file": "프레게3 (챕터1).json",
-      "ruleId": "ai_01",
-      "severity": "medium",
-      "msg": "적절/부적절 비율: 적절 18 : 부적절 7 (학년 권장 부적절 30~70%)",
-      "value": {
-        "appCount": 18,
-        "inappCount": 7
-      }
-    },
-    {
-      "level": "프레게3",
       "file": "프레게3 (챕터10).json",
       "ruleId": "cq_01",
       "severity": "high",
@@ -260,6 +251,14 @@
       "file": "프레게3 (챕터11).json",
       "ruleId": "cq_01",
       "severity": "high",
+      "msg": "선택지 길이 편차 15자 (Q1, 문학/객관식)",
+      "value": 15
+    },
+    {
+      "level": "프레게3",
+      "file": "프레게3 (챕터11).json",
+      "ruleId": "cq_01",
+      "severity": "high",
       "msg": "선택지 길이 편차 13자 (Q2, 문학/객관식)",
       "value": 13
     },
@@ -290,13 +289,10 @@
     {
       "level": "프레게3",
       "file": "프레게3 (챕터11).json",
-      "ruleId": "ai_01",
-      "severity": "medium",
-      "msg": "적절/부적절 비율: 적절 19 : 부적절 5 (학년 권장 부적절 30~70%)",
-      "value": {
-        "appCount": 19,
-        "inappCount": 5
-      }
+      "ruleId": "cq_01",
+      "severity": "high",
+      "msg": "선택지 길이 편차 16자 (Q5, 비문학/객관식)",
+      "value": 16
     },
     {
       "level": "프레게3",
@@ -317,13 +313,16 @@
     {
       "level": "프레게3",
       "file": "프레게3 (챕터12).json",
-      "ruleId": "ai_01",
-      "severity": "medium",
-      "msg": "적절/부적절 비율: 적절 17 : 부적절 4 (학년 권장 부적절 30~70%)",
-      "value": {
-        "appCount": 17,
-        "inappCount": 4
-      }
+      "ruleId": "cq_04",
+      "severity": "critical",
+      "msg": "한정 표현이 한 선택지에만 집중 (Q3)",
+      "value": [
+        0,
+        0,
+        0,
+        2,
+        0
+      ]
     },
     {
       "level": "프레게3",
@@ -340,14 +339,6 @@
       "severity": "high",
       "msg": "선택지 길이 편차 27자 (Q7, 개념/객관식)",
       "value": 27
-    },
-    {
-      "level": "프레게3",
-      "file": "프레게3 (챕터13).json",
-      "ruleId": "cq_01",
-      "severity": "high",
-      "msg": "선택지 길이 편차 14자 (Q3, 문학/객관식)",
-      "value": 14
     },
     {
       "level": "프레게3",
@@ -372,25 +363,6 @@
       "severity": "high",
       "msg": "선택지 길이 편차 13자 (Q7, 문학/객관식)",
       "value": 13
-    },
-    {
-      "level": "프레게3",
-      "file": "프레게3 (챕터13).json",
-      "ruleId": "cq_01",
-      "severity": "high",
-      "msg": "선택지 길이 편차 14자 (Q8, 문학/객관식)",
-      "value": 14
-    },
-    {
-      "level": "프레게3",
-      "file": "프레게3 (챕터13).json",
-      "ruleId": "ai_01",
-      "severity": "medium",
-      "msg": "적절/부적절 비율: 적절 18 : 부적절 4 (학년 권장 부적절 30~70%)",
-      "value": {
-        "appCount": 18,
-        "inappCount": 4
-      }
     },
     {
       "level": "프레게3",
@@ -777,17 +749,6 @@
     },
     {
       "level": "프레게3",
-      "file": "프레게3 (챕터19).json",
-      "ruleId": "ai_01",
-      "severity": "medium",
-      "msg": "적절/부적절 비율: 적절 19 : 부적절 7 (학년 권장 부적절 30~70%)",
-      "value": {
-        "appCount": 19,
-        "inappCount": 7
-      }
-    },
-    {
-      "level": "프레게3",
       "file": "프레게3 (챕터2).json",
       "ruleId": "cq_01",
       "severity": "high",
@@ -796,49 +757,11 @@
     },
     {
       "level": "프레게3",
-      "file": "프레게3 (챕터2).json",
-      "ruleId": "ai_01",
-      "severity": "medium",
-      "msg": "적절/부적절 비율: 적절 17 : 부적절 5 (학년 권장 부적절 30~70%)",
-      "value": {
-        "appCount": 17,
-        "inappCount": 5
-      }
-    },
-    {
-      "level": "프레게3",
       "file": "프레게3 (챕터20).json",
       "ruleId": "cq_01",
       "severity": "high",
       "msg": "선택지 길이 편차 15자 (Q2, 문학/객관식)",
       "value": 15
-    },
-    {
-      "level": "프레게3",
-      "file": "프레게3 (챕터20).json",
-      "ruleId": "cq_01",
-      "severity": "high",
-      "msg": "선택지 길이 편차 14자 (Q8, 문학/객관식)",
-      "value": 14
-    },
-    {
-      "level": "프레게3",
-      "file": "프레게3 (챕터20).json",
-      "ruleId": "cq_01",
-      "severity": "high",
-      "msg": "선택지 길이 편차 13자 (Q6, 비문학/객관식)",
-      "value": 13
-    },
-    {
-      "level": "프레게3",
-      "file": "프레게3 (챕터20).json",
-      "ruleId": "ai_01",
-      "severity": "medium",
-      "msg": "적절/부적절 비율: 적절 20 : 부적절 5 (학년 권장 부적절 30~70%)",
-      "value": {
-        "appCount": 20,
-        "inappCount": 5
-      }
     },
     {
       "level": "프레게3",
@@ -954,17 +877,6 @@
       "severity": "high",
       "msg": "선택지 길이 편차 35자 (Q7, 문학/객관식)",
       "value": 35
-    },
-    {
-      "level": "프레게3",
-      "file": "프레게3 (챕터5).json",
-      "ruleId": "ai_01",
-      "severity": "medium",
-      "msg": "적절/부적절 비율: 적절 18 : 부적절 6 (학년 권장 부적절 30~70%)",
-      "value": {
-        "appCount": 18,
-        "inappCount": 6
-      }
     },
     {
       "level": "프레게3",
