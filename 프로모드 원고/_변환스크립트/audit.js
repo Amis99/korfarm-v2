@@ -101,16 +101,25 @@ function auditNormalChapter(level, file, data) {
         `챕터 내 선택지 고유도 ${(ratio*100).toFixed(0)}% (목표 ≥80%)`, ratio);
   }
 
-  // F. 적절/부적절 발문 비율
+  // F. 적절/부적절 발문 비율 (학년별 권장)
+  // 초1~초3 (소쉬르)·초4 (프1): 적절 70~80% (이해 위주)
+  // 초5~초6 (프2·프3): 적절 30~70% (전환기)
+  // 중·고 (러1~비3): 적절 10~50% (수능형, 부적절 위주)
   const stems = allChoiceQs.map(({item}) => item.stem || "");
   const inappCount = stems.filter(s => /않|아닌|없는/.test(s)).length;
   const appCount = stems.length - inappCount;
   if (stems.length >= 5) {
     const ratio = inappCount / stems.length;
-    if (ratio < 0.5 || ratio > 0.9)
+    let lo, hi;
+    if (["소쉬르1","소쉬르2","소쉬르3","프레게1"].includes(level)) { lo = 0.0; hi = 0.5; }
+    else if (["프레게2","프레게3"].includes(level)) { lo = 0.3; hi = 0.7; }
+    else { lo = 0.5; hi = 0.9; }
+    if (ratio < lo || ratio > hi) {
+      const targetMsg = `${(lo*100).toFixed(0)}~${(hi*100).toFixed(0)}%`;
       record(level, file, "ai_01", "medium",
-        `적절/부적절 비율: 적절 ${appCount} : 부적절 ${inappCount} (권장 적절 30%·부적절 70%)`,
+        `적절/부적절 비율: 적절 ${appCount} : 부적절 ${inappCount} (학년 권장 부적절 ${targetMsg})`,
         { appCount, inappCount });
+    }
   }
 
   // G. answer_explain refId 매칭률
