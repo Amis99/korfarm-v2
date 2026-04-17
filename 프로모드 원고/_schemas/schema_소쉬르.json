@@ -1,0 +1,232 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schema_소쉬르.json",
+  "title": "소쉬르 1/2/3 프로모드 원고 챕터 표준 스키마",
+  "description": "교재 출판용 LaTeX 빌더가 sections 배열을 순서대로 출력하기 위한 통일 양식. 한 챕터 = 한 파일.",
+
+  "type": "object",
+  "required": ["meta", "sections"],
+  "additionalProperties": false,
+
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["level", "chapter", "title", "language"],
+      "properties": {
+        "level":     { "type": "string", "enum": ["소쉬르1", "소쉬르2", "소쉬르3"] },
+        "chapter":   { "type": "integer", "minimum": 1, "maximum": 20 },
+        "title":     { "type": "string" },
+        "language":  { "type": "string", "const": "ko-KR" },
+        "createdAt": { "type": "string" },
+        "version":   { "type": "string" },
+        "originalFile": { "type": "string" }
+      }
+    },
+
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "description": "교재 수록 순서. 표준 챕터 흐름: 개념 → 문학 → 비문학 → (소3 한정) 문법 → 주간실력확인.",
+      "items": { "$ref": "#/definitions/section" }
+    }
+  },
+
+  "definitions": {
+    "section": {
+      "type": "object",
+      "required": ["type", "area", "content"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "concept",
+            "vocab_list",
+            "passage",
+            "passage_explain",
+            "activity",
+            "question",
+            "writing",
+            "summary_table",
+            "answer_explain",
+            "model_answer",
+            "section_group"
+          ]
+        },
+        "area": {
+          "type": "string",
+          "enum": ["개념", "어휘", "문학", "비문학", "문법", "실력확인", "기타"]
+        },
+        "subtype": { "type": "string" },
+        "title":   { "type": "string" },
+        "id":      { "type": "string", "description": "정답·해설 매핑용 식별자" },
+        "groupId": { "type": "string", "description": "동일 주제(작품/지문) 묶음 ID" },
+        "content": { "type": ["object", "array", "string"] },
+        "notes":   { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if":   { "properties": { "type": { "const": "concept" } } },
+          "then": { "properties": { "content": { "$ref": "#/definitions/concept_content" } } }
+        },
+        {
+          "if":   { "properties": { "type": { "const": "vocab_list" } } },
+          "then": { "properties": { "content": { "$ref": "#/definitions/vocab_list_content" } } }
+        },
+        {
+          "if":   { "properties": { "type": { "const": "passage" } } },
+          "then": { "properties": { "content": { "$ref": "#/definitions/passage_content" } } }
+        },
+        {
+          "if":   { "properties": { "type": { "const": "activity" } } },
+          "then": { "properties": { "content": { "$ref": "#/definitions/activity_content" } } }
+        },
+        {
+          "if":   { "properties": { "type": { "const": "question" } } },
+          "then": { "properties": { "content": { "$ref": "#/definitions/question_content" } } }
+        },
+        {
+          "if":   { "properties": { "type": { "const": "writing" } } },
+          "then": { "properties": { "content": { "$ref": "#/definitions/writing_content" } } }
+        },
+        {
+          "if":   { "properties": { "type": { "const": "answer_explain" } } },
+          "then": { "properties": { "content": { "$ref": "#/definitions/answer_explain_content" } } }
+        }
+      ]
+    },
+
+    "concept_content": {
+      "type": "object",
+      "properties": {
+        "text":     { "type": "string", "description": "설명 본문. 단락은 \\n\\n 구분." },
+        "examples": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["text"]
+    },
+
+    "vocab_list_content": {
+      "type": "object",
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["word", "meaning"],
+            "properties": {
+              "number":  { "type": ["integer", "string"] },
+              "word":    { "type": "string" },
+              "hanja":   { "type": "string" },
+              "pos":     { "type": "string", "description": "품사" },
+              "meaning": { "type": "string" },
+              "example": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "passage_content": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "text":   { "type": "string", "description": "지문 본문. 문단은 \\n\\n 구분." },
+        "title":  { "type": "string" },
+        "author": { "type": "string" },
+        "source": { "type": "string" },
+        "genre":  { "type": "string", "description": "동시/동화/수필/설명문 등" }
+      }
+    },
+
+    "activity_content": {
+      "type": "object",
+      "required": ["items"],
+      "description": "subtype 예: matching / true_false / fill_blank / paren_choice / arrange / classify / single_answer.",
+      "properties": {
+        "instruction": { "type": "string", "description": "활동 지시문" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": { "type": ["integer", "string"] },
+              "prompt": { "type": "string" },
+              "left":   { "type": "array" },
+              "right":  { "type": "array" },
+              "choices":{ "type": "array" },
+              "blanks": { "type": "array" },
+              "answer": {},
+              "explanation": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "question_content": {
+      "type": "object",
+      "required": ["items"],
+      "description": "subtype 예: multiple_choice / short_answer / true_false / essay.",
+      "properties": {
+        "instruction": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["number", "stem"],
+            "properties": {
+              "number":  { "type": ["integer", "string"] },
+              "stem":    { "type": "string" },
+              "passage_ref": { "type": "string", "description": "참조하는 passage의 id" },
+              "choices": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["id", "text"],
+                  "properties": {
+                    "id":   { "type": "string" },
+                    "text": { "type": "string" }
+                  }
+                }
+              },
+              "answer":      {},
+              "explanation": { "type": "string" },
+              "points":      { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+
+    "writing_content": {
+      "type": "object",
+      "required": ["prompt"],
+      "properties": {
+        "prompt":         { "type": "string" },
+        "answer_format":  { "type": "string", "description": "분량·형식 지시" },
+        "model_answer":   { "type": "string" },
+        "scoring_rubric": { "type": "array" }
+      }
+    },
+
+    "answer_explain_content": {
+      "type": "object",
+      "required": ["items"],
+      "description": "이전 question/activity의 정답·해설을 매핑. items[].refId가 question.items[].id 또는 number와 매칭.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["refId"],
+            "properties": {
+              "refId":       { "type": "string" },
+              "answer":      {},
+              "explanation": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

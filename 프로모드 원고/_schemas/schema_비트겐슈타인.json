@@ -1,0 +1,376 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schema_비트겐슈타인.json",
+  "title": "비트겐슈타인 1/2/3 프로모드 원고 표준 스키마 (분할 + index)",
+  "description": "한 챕터 = ch{NN}/ 폴더 안 13개 JSON 파일. 챕터 단위 통합은 ch{NN}/index.json의 sections 배열이 LaTeX 빌더에 출력 순서를 알려준다. 각 파일 종류별 sub-schema도 함께 정의.",
+
+  "oneOf": [
+    { "$ref": "#/definitions/index_schema" },
+    { "$ref": "#/definitions/reading_schema" },
+    { "$ref": "#/definitions/literature_schema" },
+    { "$ref": "#/definitions/grammar_schema" },
+    { "$ref": "#/definitions/pattern_schema" },
+    { "$ref": "#/definitions/test_schema" }
+  ],
+
+  "definitions": {
+
+    "index_schema": {
+      "title": "ch{NN}/index.json",
+      "type": "object",
+      "required": ["meta", "sections"],
+      "properties": {
+        "meta": {
+          "type": "object",
+          "required": ["level", "chapter", "title", "language"],
+          "properties": {
+            "level":     { "type": "string", "enum": ["비트겐슈타인1", "비트겐슈타인2", "비트겐슈타인3"] },
+            "chapter":   { "type": "integer", "minimum": 1, "maximum": 20 },
+            "title":     { "type": "string" },
+            "language":  { "type": "string", "const": "ko-KR" },
+            "createdAt": { "type": "string" },
+            "version":   { "type": "string" }
+          }
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "description": "표준 출력 순서: A. 비문학 5세트 → B. 문학 5세트 → C. 문법 → D. 패턴 → E. 챕터 테스트.",
+          "items": {
+            "type": "object",
+            "required": ["type", "file"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["reading", "literature", "grammar", "pattern_workbook", "chapter_test"]
+              },
+              "index": { "type": "integer", "description": "reading/literature 5세트 중 1~5" },
+              "file":  { "type": "string", "description": "같은 ch 폴더 내 상대 파일명" },
+              "title": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "reading_schema": {
+      "title": "reading_NN.json (비문학 1세트)",
+      "type": "object",
+      "required": ["chapterId", "type", "passage", "questions", "summaryTable"],
+      "properties": {
+        "chapterId": { "type": "string" },
+        "type":      { "type": "string", "const": "reading" },
+        "index":     { "type": "integer" },
+        "title":     { "type": "string" },
+        "genre":     { "type": "string" },
+        "difficulty":{ "type": "string" },
+
+        "passage": {
+          "type": "object",
+          "required": ["text"],
+          "properties": {
+            "text":       { "type": "string", "description": "문단은 \\n\\n 구분" },
+            "wordCount":  { "type": "integer" },
+            "paragraphs": { "type": ["integer", "array"] },
+            "figures": {
+              "type": "array",
+              "description": "다이어그램 프롬프트 (LaTeX TikZ 등에서 그림). 메모리 feedback_원고작성규칙.md 참조.",
+              "items": {
+                "type": "object",
+                "required": ["id", "prompt"],
+                "properties": {
+                  "id":       { "type": "string" },
+                  "prompt":   { "type": "string" },
+                  "position": { "type": "string", "description": "예: '지문 3문단 뒤'" }
+                }
+              }
+            }
+          }
+        },
+
+        "questions": {
+          "type": "object",
+          "properties": {
+            "multipleChoice": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/question_item_choice" }
+            },
+            "essay": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/question_item_essay" }
+            }
+          }
+        },
+
+        "summaryTable": { "$ref": "#/definitions/summary_table_chosung" },
+
+        "qualityCheck": { "type": "object", "description": "출제 자체 검수 메모" }
+      }
+    },
+
+    "literature_schema": {
+      "title": "literature_NN.json (문학 1세트)",
+      "type": "object",
+      "required": ["chapterId", "type", "commentary", "passage", "questions", "summaryTable"],
+      "properties": {
+        "chapterId": { "type": "string" },
+        "type":      { "type": "string", "const": "literature" },
+        "index":     { "type": "integer" },
+        "title":     { "type": "string" },
+        "author":    { "type": "string" },
+        "genre":     { "type": "string", "description": "현대시/소설/수필/고전시가/고전산문 등" },
+        "difficulty":{ "type": "string" },
+
+        "commentary": {
+          "type": "object",
+          "required": ["text"],
+          "description": "작품 해설. 본문 안에 ①②③… 초성 빈칸 마커, blanks 배열로 정답·힌트 매핑.",
+          "properties": {
+            "text": { "type": "string" },
+            "blanks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "hint", "answer"],
+                "properties": {
+                  "id":     { "type": "string" },
+                  "hint":   { "type": "string", "description": "초성. 예: 'ㅈㅇㅅ'" },
+                  "answer": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+
+        "passage": {
+          "type": "object",
+          "required": ["text"],
+          "properties": {
+            "text":   { "type": "string" },
+            "source": { "type": "string" }
+          }
+        },
+
+        "questions": {
+          "type": "object",
+          "properties": {
+            "multipleChoice": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/question_item_choice" }
+            },
+            "essay": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/question_item_essay" }
+            }
+          }
+        },
+
+        "summaryTable": { "$ref": "#/definitions/summary_table_chosung" }
+      }
+    },
+
+    "grammar_schema": {
+      "title": "grammar.json",
+      "type": "object",
+      "required": ["chapterId", "type", "questions"],
+      "properties": {
+        "chapterId": { "type": "string" },
+        "type":      { "type": "string", "const": "grammar" },
+        "domain":    { "type": "string", "description": "음운/형태/통사/어휘 등" },
+        "subDomain": { "type": "string" },
+        "difficulty":{ "type": "string" },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["number", "stem"],
+            "properties": {
+              "number":      { "type": "integer" },
+              "domain":      { "type": "string" },
+              "subDomain":   { "type": "string" },
+              "sourceRef":   { "type": "string" },
+              "passage":     {
+                "type": "object",
+                "properties": {
+                  "text": { "type": "string" },
+                  "type": { "type": "string", "enum": ["concept", "example", "data"] }
+                }
+              },
+              "stem":    { "type": "string" },
+              "choices": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["id", "text"],
+                  "properties": {
+                    "id":        { "type": "string" },
+                    "text":      { "type": "string" },
+                    "isCorrect": { "type": "boolean" }
+                  }
+                }
+              },
+              "answer":      {},
+              "explanation": { "type": "string" },
+              "concept":     { "type": "string" }
+            }
+          }
+        },
+        "qualityCheck": { "type": "object" }
+      }
+    },
+
+    "pattern_schema": {
+      "title": "pattern.json (선택지 패턴 워크북)",
+      "type": "object",
+      "required": ["chapterId", "type", "questions"],
+      "properties": {
+        "chapterId": { "type": "string" },
+        "type":      { "type": "string", "const": "pattern_workbook" },
+        "difficulty":{ "type": "string" },
+        "questionCount": { "type": "integer" },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["number", "patternCode", "stem"],
+            "properties": {
+              "number":             { "type": "integer" },
+              "sourceId":           { "type": "string" },
+              "patternCode":        { "type": "string", "description": "P1~P10 또는 L1~L8" },
+              "patternName":        { "type": "string" },
+              "patternDescription": { "type": "string" },
+              "passage": {
+                "type": "object",
+                "properties": {
+                  "text":       { "type": "string" },
+                  "fullSource": { "type": "string" }
+                }
+              },
+              "stem":      { "type": "string" },
+              "box":       { "type": ["string", "null"] },
+              "choiceSet": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["text", "isCorrect", "label"],
+                  "properties": {
+                    "text":      { "type": "string" },
+                    "isCorrect": { "type": "boolean" },
+                    "label":     { "type": "string", "enum": ["O", "X"] }
+                  }
+                }
+              },
+              "answer":      { "type": "string", "description": "예: '1번째 O, 2번째 X, 3번째 O'" },
+              "explanation": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "test_schema": {
+      "title": "test.json (챕터 테스트)",
+      "type": "object",
+      "required": ["chapterId", "type", "questions"],
+      "properties": {
+        "chapterId":      { "type": "string" },
+        "type":           { "type": "string", "const": "chapter_test" },
+        "title":          { "type": "string" },
+        "totalQuestions": { "type": "integer" },
+        "totalPoints":    { "type": "integer" },
+        "difficulty":     { "type": "string" },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["number", "section", "stem"],
+            "properties": {
+              "number":  { "type": "integer" },
+              "section": { "type": "string", "enum": ["비문학", "문학", "문법", "기타"] },
+              "Rcode":   { "type": "string" },
+              "Lcode":   { "type": "string" },
+              "points":  { "type": "integer" },
+              "passage": { "type": "string" },
+              "stem":    { "type": "string" },
+              "choices": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["id", "text"],
+                  "properties": {
+                    "id":   { "type": "string" },
+                    "text": { "type": "string" }
+                  }
+                }
+              },
+              "correctAnswer": {},
+              "explanation":   { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "question_item_choice": {
+      "type": "object",
+      "required": ["number", "stem", "choices"],
+      "properties": {
+        "number":  { "type": "integer" },
+        "Rcode":   { "type": "string" },
+        "Lcode":   { "type": "string" },
+        "stem":    { "type": "string" },
+        "box":     { "type": ["string", "null"] },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "text"],
+            "properties": {
+              "id":        { "type": "string" },
+              "text":      { "type": "string" },
+              "isCorrect": { "type": "boolean" }
+            }
+          }
+        },
+        "answer":      {},
+        "explanation": { "type": "string" },
+        "distractors": { "type": "array", "description": "오답별 함정 분류" }
+      }
+    },
+
+    "question_item_essay": {
+      "type": "object",
+      "required": ["number", "stem"],
+      "properties": {
+        "number":          { "type": "integer" },
+        "stem":            { "type": "string" },
+        "conditions":      { "type": "array", "items": { "type": "string" } },
+        "modelAnswer":     { "type": "string" },
+        "scoringCriteria": { "type": "array" },
+        "points":          { "type": "integer" }
+      }
+    },
+
+    "summary_table_chosung": {
+      "type": "object",
+      "required": ["title", "rows"],
+      "description": "초성 빈칸 정리표. rows[].item에 ①②③… 마커, rows[].answer가 정답.",
+      "properties": {
+        "title":       { "type": "string" },
+        "instruction": { "type": "string" },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": { "type": "string" },
+              "item":     { "type": "string", "description": "예: '핵심 격언: 너 ㅊ ㅇㄹ ①'" },
+              "answer":   { "type": "string", "description": "예: '① 자신을 알라'" },
+              "source":   { "type": "string", "description": "예: '1문단'" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

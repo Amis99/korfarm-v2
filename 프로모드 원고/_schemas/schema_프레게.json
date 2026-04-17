@@ -1,0 +1,200 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schema_프레게.json",
+  "title": "프레게 1/2 프로모드 원고 챕터 표준 스키마",
+  "description": "한 챕터 = 한 파일. 표준 흐름: 어휘(10개+다양한 활동) → 개념 → 문학(5활동) → 비문학(5활동) → 문법 → 주간실력확인.",
+
+  "type": "object",
+  "required": ["meta", "sections"],
+  "additionalProperties": false,
+
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["level", "chapter", "title", "language"],
+      "properties": {
+        "level":     { "type": "string", "enum": ["프레게1", "프레게2"] },
+        "chapter":   { "type": "integer", "minimum": 1, "maximum": 20 },
+        "title":     { "type": "string" },
+        "language":  { "type": "string", "const": "ko-KR" },
+        "createdAt": { "type": "string" },
+        "version":   { "type": "string" },
+        "originalFile": { "type": "string" }
+      }
+    },
+
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "description": "표준 챕터 흐름: vocab_list → vocab activities → concept(?) → 문학 5세트 → 비문학 5세트 → 문법 4유형 → 실력확인.",
+      "items": { "$ref": "#/definitions/section" }
+    }
+  },
+
+  "definitions": {
+    "section": {
+      "type": "object",
+      "required": ["type", "area", "content"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "concept", "vocab_list", "passage", "passage_explain",
+            "activity", "question", "writing",
+            "summary_table", "answer_explain", "model_answer",
+            "section_group", "writing_set"
+          ]
+        },
+        "area": {
+          "type": "string",
+          "enum": ["어휘", "개념", "문학", "비문학", "문법", "실력확인", "기타"]
+        },
+        "subtype": { "type": "string" },
+        "title":   { "type": "string" },
+        "id":      { "type": "string" },
+        "groupId": { "type": "string", "description": "한 작품·지문에 묶인 활동 5개를 묶는 ID" },
+        "content": { "type": ["object", "array", "string"] },
+        "notes":   { "type": "string" }
+      }
+    },
+
+    "vocab_list_content": {
+      "type": "object",
+      "required": ["items"],
+      "description": "프레게는 10개 고정 권장.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["number", "word", "meaning"],
+            "properties": {
+              "number":  { "type": "string", "description": "①②③… 권장" },
+              "word":    { "type": "string" },
+              "hanja":   { "type": "string" },
+              "pos":     { "type": "string" },
+              "meaning": { "type": "string" },
+              "example": { "type": "string" },
+              "dictEntry": { "type": "object", "description": "표준국어대사전 표제어 데이터" }
+            }
+          }
+        }
+      }
+    },
+
+    "concept_content": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "title":    { "type": "string" },
+        "text":     { "type": "string" },
+        "examples": { "type": "array" }
+      }
+    },
+
+    "passage_content": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "text":   { "type": ["string", "object"], "description": "string 또는 {연1, 연2, ...} 같은 구조도 허용" },
+        "title":  { "type": "string" },
+        "author": { "type": "string" },
+        "source": { "type": "string" },
+        "genre":  { "type": "string" }
+      }
+    },
+
+    "activity_content": {
+      "type": "object",
+      "required": ["instruction"],
+      "description": "subtype 예: matching / fill_blank_vocab / chosung_quiz / paren_choice / classify / arrange / multiple_choice / short_answer.",
+      "properties": {
+        "instruction": { "type": "string" },
+        "items":       { "type": "array" },
+        "examples":    { "type": "array" },
+        "answer_format": { "type": "string" }
+      }
+    },
+
+    "question_content": {
+      "type": "object",
+      "required": ["items"],
+      "description": "subtype 예: multiple_choice / short_answer / true_false / essay.",
+      "properties": {
+        "instruction": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["number", "stem"],
+            "properties": {
+              "number":  { "type": ["integer", "string"] },
+              "stem":    { "type": "string" },
+              "passage_ref": { "type": "string" },
+              "box":     { "type": "string", "description": "<보기> 본문" },
+              "choices": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["id", "text"],
+                  "properties": {
+                    "id":   { "type": "string" },
+                    "text": { "type": "string" }
+                  }
+                }
+              },
+              "answer":      {},
+              "explanation": { "type": "string" },
+              "points":      { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+
+    "writing_content": {
+      "type": "object",
+      "required": ["prompt"],
+      "properties": {
+        "prompt":         { "type": "string" },
+        "answer_format":  { "type": "string" },
+        "model_answer":   { "type": "string" },
+        "scoring_rubric": { "type": "array" }
+      }
+    },
+
+    "summary_table_content": {
+      "type": "object",
+      "required": ["rows"],
+      "properties": {
+        "title":       { "type": "string" },
+        "instruction": { "type": "string" },
+        "headers":     { "type": "array", "items": { "type": "string" } },
+        "rows": {
+          "type": "array",
+          "items": { "type": "object" }
+        }
+      }
+    },
+
+    "answer_explain_content": {
+      "type": "object",
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["refId"],
+            "properties": {
+              "refId":       { "type": "string" },
+              "answer":      {},
+              "explanation": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
