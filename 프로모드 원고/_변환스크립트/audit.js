@@ -163,7 +163,7 @@ function auditWittLiterature(level, file, data) {
   const com = data.commentary;
   if (com) {
     const text = com.text || "";
-    const markersInText = (text.match(/[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮]/g) || []);
+    const markersInText = (text.match(/[①-⑳]|[\u3251-\u325F]|[\u32B1-\u32BF]/g) || []);
     const blanks = com.blanks || [];
     if (markersInText.length !== blanks.length)
       record(level, file, "fc_04", "critical",
