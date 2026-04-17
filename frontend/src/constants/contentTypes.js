@@ -94,6 +94,35 @@ export const TAB_OPTIONS = {
   ],
 };
 
+/* ────────────────────────────────────────────────────────────
+   농장 ID(FARM_MAP의 id) → 어떤 categories를 매칭할지.
+   FarmListPage가 카탈로그 호출 시 ?contentType=A,B,C 콤마 구분으로 전달.
+   백엔드는 JSON_OVERLAPS로 categories 배열에서 OR 매칭.
+   옛 alias도 포함시켜 마이그레이션 전 데이터와 호환 유지.
+   ──────────────────────────────────────────────────────────── */
+export const FARM_TO_CATEGORIES = {
+  vocab: ["VOCAB", "VOCAB_BASIC"],
+  reading: ["READING", "READING_NONFICTION", "READING_LITERATURE"],
+  background: ["BACKGROUND", "BACKGROUND_KNOWLEDGE", "BACKGROUND_KNOWLEDGE_QUIZ"],
+  story: ["STORY"],
+  classic: ["CLASSIC"],
+  grammar: [
+    "GRAMMAR_WORD_FORMATION",
+    "GRAMMAR_SENTENCE_STRUCTURE",
+    "GRAMMAR_PHONEME_CHANGE",
+    "GRAMMAR_POS",
+    "MORPHEME_ANALYSIS",
+  ],
+  concept: ["CONCEPT", "LANGUAGE_CONCEPT", "LANGUAGE_CONCEPT_QUIZ"],
+  logic: ["LOGIC", "LOGIC_REASONING", "LOGIC_REASONING_QUIZ"],
+  writing: ["WRITING", "WRITING_DESCRIPTIVE"],
+  choice: ["CHOICE_ANALYSIS", "CHOICE_JUDGEMENT"],
+  // content 농장은 별도 /v1/learning/study/contents API 사용 — 카탈로그 매핑 불필요
+};
+
+/** 농장 ID → categories 배열 (없으면 빈 배열) */
+export const getCategoriesForFarm = (farmId) => FARM_TO_CATEGORIES[farmId] || [];
+
 /* 카테고리 → 어느 탭에 속하는지 (다중 가능). 콘텐츠 관리에 안 보이는 카테고리는 매핑 없음 */
 export const CATEGORY_TO_TABS = {
   // 일일 학습

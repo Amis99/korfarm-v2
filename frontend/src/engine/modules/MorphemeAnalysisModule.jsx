@@ -3,8 +3,8 @@ import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 import { FEEDBACK } from "../shared/feedbackTimings";
 
-/** 누적용 결과 카드: 완료된 문장 1개 표시 */
-function CompletedSentenceCard({ sentence, idx, total, hadWrong, isAdvanced }) {
+/** 누적용 결과 카드: 완료된 문장 1개 표시 (인쇄에서도 재사용) */
+export function CompletedSentenceCard({ sentence, idx, total, hadWrong, isAdvanced }) {
   const morphemes = sentence?.morphemes || [];
   return (
     <div className={`cum-card completed ${hadWrong ? "wrong" : "correct"}`}>

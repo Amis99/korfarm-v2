@@ -3,8 +3,24 @@ import { useEngine } from "../core/EngineContext";
 import QuestionModal from "../shared/QuestionModal";
 import { FEEDBACK } from "../shared/feedbackTimings";
 
-/** 누적용 결과 카드: 완료된 단어 1개 표시 (시작 → 도착, 정/오답) */
-function CompletedWordCard({ word, destCells, idx, total, hadWrong }) {
+/**
+ * 도착 셀의 정답 상태를 word.steps에서 계산.
+ * PHONEME_RESULT 단계의 correctChoiceText로 셀 채움. 인쇄 정답 표시에서 사용.
+ */
+export function buildCorrectDestCells(word) {
+  const dest = word.cells.map((c) => ({ ...c, text: c.text === "," ? "" : c.text }));
+  for (const step of word.steps || []) {
+    if (step.questionType !== "PHONEME_RESULT") continue;
+    const target = dest.find((c) => c.cellNo === step.targetCellNo);
+    if (!target) continue;
+    const correct = (step.choices || []).find((ch) => ch.id === step.correctChoiceId);
+    if (correct) target.text = correct.text;
+  }
+  return dest;
+}
+
+/** 누적용 결과 카드: 완료된 단어 1개 표시 (시작 → 도착, 정/오답). 인쇄에서도 재사용. */
+export function CompletedWordCard({ word, destCells, idx, total, hadWrong }) {
   return (
     <div className={`cum-card completed ${hadWrong ? "wrong" : "correct"}`}>
       <div className="cum-card-header">

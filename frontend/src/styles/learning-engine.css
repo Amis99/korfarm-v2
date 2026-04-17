@@ -4707,3 +4707,145 @@ mark.highlight {
   max-height: none !important;
   height: auto !important;
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* 인쇄: 문법 4종 정답 페이지                                  */
+/* — 학습 페이지의 정답 표시 형태(cum-card, ss-table)를         */
+/*   인쇄에서 그대로 사용하되 단순 외곽선/흑백으로 보정.         */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media print {
+  .print-grammar-answer-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6mm;
+  }
+  .print-grammar-answer-block,
+  .print-wf-row,
+  .print-ss-block {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4mm;
+  }
+  .print-grammar-step-list {
+    list-style: none;
+    padding: 0 0 0 6mm;
+    margin: 2mm 0 0;
+    font-size: 10pt;
+    color: #333;
+    line-height: 1.55;
+  }
+  .print-grammar-step-list li {
+    margin-bottom: 1mm;
+  }
+  .print-grammar-explain {
+    margin-top: 2mm;
+    font-size: 10pt;
+    color: #333;
+    line-height: 1.55;
+  }
+  .print-ss-num {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #000;
+    margin-bottom: 2mm;
+  }
+
+  /* 인쇄에서 cum-card 색/그림자 단순화 */
+  .print-layout .cum-card,
+  .print-layout .cum-card.completed,
+  .print-layout .cum-card.completed.correct,
+  .print-layout .cum-card.completed.wrong {
+    background: #fff !important;
+    box-shadow: none !important;
+    border: 1px solid #999 !important;
+    padding: 3mm 4mm !important;
+    margin: 0 !important;
+  }
+  .print-layout .cum-card-mark {
+    background-image: none !important;
+    color: #000 !important;
+    font-weight: 700;
+  }
+  .print-layout .cum-card-num {
+    color: #000 !important;
+  }
+  /* 음운 변동 셀 */
+  .print-layout .phoneme-cell,
+  .print-layout .phoneme-row-label {
+    border: 1px solid #777 !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .print-layout .phoneme-completed-surface {
+    color: #000 !important;
+  }
+  /* 형태소 칩 */
+  .print-layout .morpheme-chip,
+  .print-layout .morpheme-chip-sm {
+    background: #fff !important;
+    border: 1px solid #777 !important;
+    color: #000 !important;
+  }
+  .print-layout .morpheme-chip-sm.wf-circle {
+    border-radius: 50% !important;
+  }
+  .print-layout .morpheme-chip-sm.wf-square {
+    border-radius: 0 !important;
+  }
+  .print-layout .morpheme-completed-row,
+  .print-layout .morpheme-completed-table {
+    color: #000 !important;
+  }
+  /* 문장 짜임 표 */
+  .print-layout .ss-table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+  .print-layout .ss-table .ss-td {
+    border: 1px solid #777 !important;
+    padding: 1mm 2mm !important;
+    text-align: center !important;
+  }
+  .print-layout .ss-box,
+  .print-layout .ss-box.done {
+    background: #fff !important;
+    border: 1px solid #555 !important;
+    color: #000 !important;
+    cursor: default !important;
+    box-shadow: none !important;
+  }
+  .print-layout .ss-label-cell {
+    color: #000 !important;
+  }
+  .print-layout .ss-merged-cell {
+    color: #000 !important;
+  }
+  .print-layout .ss-clause-badge {
+    background: #fff !important;
+    border: 1px solid #555 !important;
+    color: #000 !important;
+  }
+
+  /* 단어 형성 완료 행 */
+  .print-layout .wf-completed-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4mm;
+  }
+  .print-layout .wf-completed-item {
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    padding: 3mm 4mm !important;
+    color: #000 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4mm !important;
+    flex-wrap: wrap !important;
+  }
+  .print-layout .wf-completed-num,
+  .print-layout .wf-completed-word,
+  .print-layout .wf-completed-formation {
+    color: #000 !important;
+  }
+}

@@ -30,6 +30,22 @@ interface ContentRepository : JpaRepository<ContentEntity, String> {
     """, nativeQuery = true)
     fun findByCategoryAndLevelIdAndStatus(ct: String, levelId: String, status: String): List<ContentEntity>
 
+    /** 다중 카테고리 OR 검색 — JSON_OVERLAPS로 categories 배열에 cts 중 하나라도 매칭. */
+    @Query(value = """
+        SELECT * FROM contents
+        WHERE status = :status
+          AND (content_type IN (:cts) OR JSON_OVERLAPS(categories, CAST(:ctsJson AS JSON)))
+    """, nativeQuery = true)
+    fun findByCategoriesInAndStatus(cts: List<String>, ctsJson: String, status: String): List<ContentEntity>
+
+    @Query(value = """
+        SELECT * FROM contents
+        WHERE status = :status
+          AND level_id = :levelId
+          AND (content_type IN (:cts) OR JSON_OVERLAPS(categories, CAST(:ctsJson AS JSON)))
+    """, nativeQuery = true)
+    fun findByCategoriesInAndLevelIdAndStatus(cts: List<String>, ctsJson: String, levelId: String, status: String): List<ContentEntity>
+
     @Query("""
         SELECT c FROM ContentEntity c
         WHERE c.status = 'active'

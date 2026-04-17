@@ -11,7 +11,7 @@ import {
   levelBelongsToServer,
 } from "../data/learning/learningCatalog";
 import { apiGet, apiPost } from "../utils/api";
-import { TYPE_LABEL } from "../constants/contentTypes";
+import { TYPE_LABEL, getCategoriesForFarm } from "../constants/contentTypes";
 import VideoModal from "../components/VideoModal";
 import "../styles/farm-mode.css";
 import "../styles/start.css";
@@ -111,7 +111,18 @@ function FarmListPage() {
     }
     if (searchDebounced) params.set("search", searchDebounced);
     if (subAreaFilter) params.set("subArea", subAreaFilter);
-    if (contentTypeFilter) params.set("contentType", contentTypeFilter);
+    // 다중 카테고리 매칭: 사용자가 유형 필터 선택 시 그 값만 사용,
+    // 미선택 시 농장 ID에 매핑된 categories 전체를 콤마로 묶어 전달.
+    // 백엔드는 JSON_OVERLAPS로 categories(JSON 배열)에서 OR 매칭하므로
+    // 한 콘텐츠가 여러 농장에 동시 노출됨 (예: categories=["READING","STORY"]).
+    if (contentTypeFilter) {
+      params.set("contentType", contentTypeFilter);
+    } else {
+      const farmCategories = getCategoriesForFarm(farmId);
+      if (farmCategories.length > 0) {
+        params.set("contentType", farmCategories.join(","));
+      }
+    }
     const qs = params.toString();
     const url = `/v1/learning/catalog/${farmId}${qs ? `?${qs}` : ""}`;
     apiGet(url)

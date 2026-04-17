@@ -1,12 +1,14 @@
 package com.korfarm.api.learning
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.korfarm.api.paid.ContentRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ContentCatalogService(
-    private val contentRepository: ContentRepository
+    private val contentRepository: ContentRepository,
+    private val objectMapper: ObjectMapper
 ) {
     @Transactional(readOnly = true)
     fun getCatalog(): CatalogResponse {
@@ -48,6 +50,24 @@ class ContentCatalogService(
             contentRepository.findByCategoryAndStatus(contentType, "active")
         }
         return items.map { toCatalogItem(it) }
+    }
+
+    /**
+     * 다중 카테고리 OR 검색.
+     * 콘텐츠의 content_type 또는 categories(JSON 배열)에 contentTypes 중 하나라도 매칭되면 노출.
+     * 예: 이야기 농장(STORY+READING)에서 categories=["READING","STORY"] 콘텐츠가 양쪽에 노출.
+     * 결과는 contentId 기준 중복 제거.
+     */
+    @Transactional(readOnly = true)
+    fun getCatalogByContentTypes(contentTypes: List<String>, levelId: String?): List<CatalogItem> {
+        if (contentTypes.isEmpty()) return emptyList()
+        val ctsJson = objectMapper.writeValueAsString(contentTypes)
+        val items = if (levelId != null) {
+            contentRepository.findByCategoriesInAndLevelIdAndStatus(contentTypes, ctsJson, levelId, "active")
+        } else {
+            contentRepository.findByCategoriesInAndStatus(contentTypes, ctsJson, "active")
+        }
+        return items.distinctBy { it.id }.map { toCatalogItem(it) }
     }
 
     private fun toCatalogItem(entity: com.korfarm.api.paid.ContentEntity) = CatalogItem(

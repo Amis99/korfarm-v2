@@ -39,7 +39,13 @@ class ContentCatalogController(
         @RequestParam(required = false) subArea: String?
     ): ApiResponse<List<CatalogItem>> {
         val data = if (contentType != null) {
-            catalogService.getCatalogByContentType(contentType, levelId)
+            // 콤마 구분 다중 카테고리 지원: ?contentType=A,B,C → JSON_OVERLAPS 매칭
+            val types = contentType.split(",").map { it.trim() }.filter { it.isNotBlank() }
+            if (types.size > 1) {
+                catalogService.getCatalogByContentTypes(types, levelId)
+            } else {
+                catalogService.getCatalogByContentType(types.first(), levelId)
+            }
         } else {
             catalogService.getCatalogByArea(area, levelId, search, subArea)
         }

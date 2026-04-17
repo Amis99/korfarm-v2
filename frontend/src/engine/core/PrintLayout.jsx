@@ -1,4 +1,8 @@
 import { useMemo } from "react";
+import { CompletedWordCard, buildCorrectDestCells } from "../modules/PhonemeChangeModule";
+import { CompletedSentenceCard } from "../modules/MorphemeAnalysisModule";
+
+const ROLE_SHORT = { "주어":"주","서술어":"서","목적어":"목","보어":"보","부사어":"부","관형어":"관","독립어":"독" };
 
 /**
  * PrintLayout — 학습 모듈별 인쇄 시험지 통합 컴포넌트.
@@ -621,99 +625,187 @@ function PrintAnswerKeyReading({ payload }) {
 function PrintAnswerKeyPhonemeChange({ payload }) {
   const words = payload.words || [];
   return (
-    <ol className="print-answer-list">
+    <div className="print-grammar-answer-stack">
       {words.map((w, idx) => {
+        const destCells = buildCorrectDestCells(w);
         const steps = w.steps || [];
-        const ruleNames = steps
-          .map((s) => s.rule || s.ruleName || s.questionType)
-          .filter(Boolean)
-          .join(" → ");
         return (
-          <li key={w.id || idx} className="print-answer-item">
-            <div className="print-answer-num">{idx + 1}. {w.surface || w.word}</div>
-            <div className="print-answer-correct">변동: {ruleNames || "-"}</div>
+          <div key={w.id || idx} className="print-grammar-answer-block">
+            <CompletedWordCard
+              word={w}
+              destCells={destCells}
+              idx={idx}
+              total={words.length}
+              hadWrong={false}
+            />
             {steps.length > 0 && (
-              <div className="print-answer-explanation">
-                {steps.map((s, si) => (
-                  <div key={si}>
-                    {si + 1}단계: {s.description || s.rule || ""}
-                    {s.targetCellNo != null && ` (셀 ${s.targetCellNo})`}
-                  </div>
-                ))}
-              </div>
+              <ol className="print-grammar-step-list">
+                {steps
+                  .filter((s) => s.questionType === "PHONEME_RESULT" || s.questionType === "RULE_EXPLANATION")
+                  .map((s, si) => {
+                    const correct = (s.choices || []).find((c) => c.id === s.correctChoiceId);
+                    return (
+                      <li key={si}>
+                        <strong>{si + 1}단계</strong>
+                        {s.questionType === "PHONEME_RESULT" ? " (음운)" : " (규칙)"}:
+                        {" "}{correct?.text || "-"}
+                        {s.targetCellNo != null && ` · 셀 ${s.targetCellNo}`}
+                      </li>
+                    );
+                  })}
+              </ol>
             )}
-          </li>
+          </div>
         );
       })}
-    </ol>
+    </div>
   );
 }
 
 function PrintAnswerKeyWordFormation({ payload }) {
   const items = payload.items || payload.words || [];
   return (
-    <ol className="print-answer-list">
-      {items.map((item, idx) => (
-        <li key={item.id || idx} className="print-answer-item">
-          <div className="print-answer-num">{idx + 1}. {item.word || item.surface}</div>
-          {item.morphemes && (
-            <div className="print-answer-correct">
-              형태소: {(item.morphemes || []).map((m) => `${m.text}(${m.type || ""})`).join(" + ")}
-            </div>
-          )}
-          {item.formationType && (
-            <div className="print-answer-correct">형성 방식: {item.formationType}</div>
-          )}
-          {item.explanation && (
-            <div className="print-answer-explanation"><strong>해설:</strong> {item.explanation}</div>
-          )}
-        </li>
-      ))}
-    </ol>
+    <div className="wf-completed-list print-grammar-answer-stack">
+      {items.map((item, idx) => {
+        const morphemes = item.morphemes || [];
+        const word = item.word || item.surface || "";
+        const formation = item.formation || item.formationType || "";
+        return (
+          <div key={item.id || idx} className="wf-completed-item print-wf-row">
+            <span className="wf-completed-num">{idx + 1}.</span>
+            <span className="wf-completed-word">{word}</span>
+            <span className="wf-completed-morphemes">
+              {morphemes.map((m, j) => {
+                const mark = m.mark === "circle" ? "wf-circle" : m.mark === "square" ? "wf-square" : "";
+                return (
+                  <span key={j} className={`morpheme-chip-sm ${mark}`}>
+                    {m.form || m.text}
+                  </span>
+                );
+              })}
+            </span>
+            {formation && <span className="wf-completed-formation">{formation}</span>}
+            {item.explanation && (
+              <div className="print-grammar-explain"><strong>해설:</strong> {item.explanation}</div>
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
 function PrintAnswerKeySentenceStructure({ payload }) {
   const sentences = payload.sentences || payload.items || [];
   return (
-    <ol className="print-answer-list">
+    <div className="print-grammar-answer-stack">
       {sentences.map((s, idx) => (
-        <li key={s.id || idx} className="print-answer-item">
-          <div className="print-answer-num">{idx + 1}. {s.text || s.sentence}</div>
-          {s.components && (
-            <div className="print-answer-correct">
-              성분: {(s.components || []).map((c) => `${c.text}(${c.role || ""})`).join(" / ")}
-            </div>
-          )}
-          {s.structure && (
-            <div className="print-answer-correct">짜임: {s.structure}</div>
-          )}
-          {s.explanation && (
-            <div className="print-answer-explanation"><strong>해설:</strong> {s.explanation}</div>
-          )}
-        </li>
+        <PrintSentenceStructureAnswer key={s.id || idx} sentence={s} idx={idx} />
       ))}
-    </ol>
+    </div>
   );
 }
 
-function PrintAnswerKeyMorphemeAnalysis({ payload }) {
+/**
+ * 학습 페이지의 정답 표 형태로 한 문장 표시.
+ * 어절 행 + 성분 라벨 행 + 절 분석 행(있으면).
+ */
+function PrintSentenceStructureAnswer({ sentence, idx }) {
+  const boxes = sentence.boxes || [];
+  // 정답 라벨: box.role + box.layer 조합 ("주어"+1 → "주1")
+  const roleLabels = {};
+  for (const b of boxes) {
+    if (b.role) roleLabels[b.id] = `${ROLE_SHORT[b.role] || b.role}${b.layer ?? ""}`;
+  }
+  // 절 분석: clauses에서 mergedRows 만들기 (학습 페이지의 mergedRow 형식)
+  const clauses = sentence.clauses || [];
+  const mergedRows = clauses.map((c) => {
+    const range = c.range || [];
+    let label = c.parentRole
+      ? `${ROLE_SHORT[c.parentRole] || c.parentRole}${c.parentLayer ?? ""}`
+      : "";
+    // 이어진 문장은 별도 라벨
+    if (c.clauseType === "대등" || c.clauseType === "종속") label = "이어진 문장";
+    return { range, label, clauseType: c.clauseType || "" };
+  });
+  const slashSet = new Set(sentence.slashes || []);
+  // 컬럼 인덱스 계산 (슬래시 칸 포함)
+  const colMap = {};
+  let col = 0;
+  for (const b of boxes) {
+    colMap[b.id] = col;
+    col++;
+    if (slashSet.has(b.id)) col++;
+  }
+  const totalCols = col;
+  return (
+    <div className="ss-sentence-block completed print-ss-block">
+      <div className="print-ss-num">문장 {idx + 1}. {sentence.text || ""}</div>
+      <table className="ss-table">
+        <tbody>
+          <tr>
+            {boxes.map((box) => [
+              <td key={box.id} className="ss-td">
+                <div className="ss-box done">{box.text}</div>
+              </td>,
+              slashSet.has(box.id) ? <td key={`sl-${box.id}`} className="ss-td-slash">/</td> : null,
+            ])}
+          </tr>
+          <tr>
+            {boxes.map((box) => [
+              <td key={`l-${box.id}`} className="ss-td">
+                <div className="ss-label-cell">{roleLabels[box.id] || "\u00A0"}</div>
+              </td>,
+              slashSet.has(box.id) ? <td key={`lsl-${box.id}`} className="ss-td-slash"></td> : null,
+            ])}
+          </tr>
+          {mergedRows.map((row, ri) => {
+            const startCol = colMap[row.range[0]] ?? 0;
+            const endCol = colMap[row.range[row.range.length - 1]] ?? 0;
+            const span = endCol - startCol + 1;
+            const cells = [];
+            if (startCol > 0) cells.push(<td key={`pre-${ri}`} colSpan={startCol} className="ss-td"></td>);
+            cells.push(
+              <td key={`mr-${ri}`} colSpan={span} className="ss-td">
+                <div className="ss-merged-cell">
+                  <span className="ss-bracket">(</span>
+                  <span className="ss-merged-label">{row.label}</span>
+                  {row.clauseType && <span className="ss-clause-badge">{row.clauseType}</span>}
+                  <span className="ss-bracket">)</span>
+                </div>
+              </td>
+            );
+            const afterCol = endCol + 1;
+            if (afterCol < totalCols) cells.push(<td key={`post-${ri}`} colSpan={totalCols - afterCol} className="ss-td"></td>);
+            return <tr key={`mrow-${ri}`}>{cells}</tr>;
+          })}
+        </tbody>
+      </table>
+      {sentence.explanation && (
+        <div className="print-grammar-explain"><strong>해설:</strong> {sentence.explanation}</div>
+      )}
+    </div>
+  );
+}
+
+function PrintAnswerKeyMorphemeAnalysis({ payload, isAdvanced }) {
   const sentences = payload.sentences || payload.items || [];
   return (
-    <ol className="print-answer-list">
+    <div className="print-grammar-answer-stack">
       {sentences.map((s, idx) => (
-        <li key={s.id || idx} className="print-answer-item">
-          <div className="print-answer-num">{idx + 1}. {s.text || s.sentence}</div>
-          {s.morphemes && (
-            <div className="print-answer-correct">
-              {(s.morphemes || []).map((m) => `${m.text}(${m.pos || m.type || ""})`).join(" + ")}
-            </div>
-          )}
+        <div key={s.id || idx} className="print-grammar-answer-block">
+          <CompletedSentenceCard
+            sentence={s}
+            idx={idx}
+            total={sentences.length}
+            hadWrong={false}
+            isAdvanced={isAdvanced}
+          />
           {s.explanation && (
-            <div className="print-answer-explanation"><strong>해설:</strong> {s.explanation}</div>
+            <div className="print-grammar-explain"><strong>해설:</strong> {s.explanation}</div>
           )}
-        </li>
+        </div>
       ))}
-    </ol>
+    </div>
   );
 }
