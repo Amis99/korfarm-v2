@@ -3,13 +3,13 @@
     "total": 1557,
     "bySeverity": {
       "high": 1489,
-      "critical": 1,
-      "medium": 67
+      "critical": 2,
+      "medium": 66
     },
     "byRule": {
       "cq_01": 1489,
-      "cq_04": 1,
-      "ai_01": 67
+      "cq_04": 2,
+      "ai_01": 66
     },
     "byLevel": {
       "소쉬르1": 1,
@@ -24,7 +24,7 @@
       "비트겐슈타인2": 372,
       "비트겐슈타인3": 535
     },
-    "generatedAt": "2026-04-17T21:27:50.412Z"
+    "generatedAt": "2026-04-17T21:32:22.010Z"
   },
   "findings": [
     {
@@ -773,13 +773,16 @@
     {
       "level": "프레게3",
       "file": "프레게3 (챕터3).json",
-      "ruleId": "ai_01",
-      "severity": "medium",
-      "msg": "적절/부적절 비율: 적절 24 : 부적절 2 (학년 권장 부적절 30~70%)",
-      "value": {
-        "appCount": 24,
-        "inappCount": 2
-      }
+      "ruleId": "cq_04",
+      "severity": "critical",
+      "msg": "한정 표현이 한 선택지에만 집중 (Q8)",
+      "value": [
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
     },
     {
       "level": "프레게3",
