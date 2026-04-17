@@ -168,10 +168,10 @@ function auditWittLiterature(level, file, data) {
     if (markersInText.length !== blanks.length)
       record(level, file, "fc_04", "critical",
         `commentary marker(${markersInText.length}) vs blanks(${blanks.length}) 불일치`, null);
-    // 초성 일치
+    // 초성 일치 (공백 보존 정책)
     for (const b of blanks) {
       const cho = chosung(b.answer || "");
-      if (b.hint && cho && cho !== b.hint.replace(/\s/g, ""))
+      if (b.hint && cho && cho !== b.hint)
         record(level, file, "st_03", "critical",
           `초성 불일치: ${b.id} answer="${b.answer}" hint="${b.hint}" expected="${cho}"`, null);
     }
@@ -198,7 +198,13 @@ function chosungChar(ch) {
   return CHO[Math.floor(c / 588)];
 }
 function chosung(s) {
-  return [...String(s)].filter(c => /[가-힣]/.test(c)).map(chosungChar).join("");
+  // fix_chosung.js와 동일 정책: 공백 보존, 한자·구두점 제거.
+  let out = [...String(s)].map(c => {
+    if (/[가-힣]/.test(c)) return chosungChar(c);
+    if (c === " ") return " ";
+    return "";
+  }).join("");
+  return out.replace(/\s+/g, " ").trim();
 }
 
 /* ───────────── 비트 grammar.json ───────────── */
