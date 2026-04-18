@@ -1,19 +1,35 @@
 {
-  "contentId": "dr-s3-272",
+  "contentId": "dr-saussure3-272",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(소쉬르 3) Day 272 문학",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 개구리 생태 - 조심조심 걷기",
+  "description": "작은 생명을 배려하는 조심스러운 발걸음과 관찰",
   "targetLevel": "SAUSSURE_3",
-  "schoolGradeRange": { "min": 5, "max": 5 },
-  "area": "READING",
-  "subArea": "LITERATURE",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
-  "timeLimitSec": 480,
+  "schoolGradeRange": {
+    "min": 3,
+    "max": 3
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +37,15 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "은서는 전학 온 지 일주일이 되었지만 교실에서 말을 건네는 친구가 하나도 없었다. 쉬는 시간이면 혼자 책상에 앉아 창밖을 바라보았고 점심시간에도 교실 한쪽 구석에서 조용히 밥을 먹었다. 그러던 어느 날 미술 시간에 담임 선생님이 두 사람씩 짝을 이루어 하나의 그림을 함께 그리라고 하셨다. 은서의 짝이 된 아이는 윤재라는 남자아이였는데 윤재는 인사도 하지 않고 도화지를 은서 앞으로 밀어 놓았다. 은서는 긴장한 마음을 눌러가며 도화지 한쪽에 조심스럽게 나무 한 그루를 그리기 시작했다. 윤재는 처음에 팔짱을 끼고 앉아 있었지만 은서가 그린 나무를 보더니 작은 목소리로 나무 잘 그린다 하고 중얼거렸다."
+          "text": "개구리가 사는 연못 주변을 산책할 때는 조심조심 걸어야 함. 풀숲에 숨어 있는 작은 개구리가 다치지 않게 주의합니다. 우리는 발소리를 낮추고 천천히 주변을 살피며 걸었습니다."
         },
         {
           "id": "p2",
-          "text": "은서는 그 한마디에 놀라서 고개를 들었다. 윤재는 도화지를 자기 쪽으로 조금 당기더니 나무 옆에 작은 강아지 한 마리를 그려 넣었다. 은서가 방긋 웃자 윤재도 따라 웃었다. 그날 이후 윤재는 매일 아침 은서에게 먼저 인사를 건넸고 쉬는 시간마다 은서의 책상 옆으로 와서 이런저런 이야기를 나누었다. 은서의 얼굴에 웃음이 늘어나자 다른 아이들도 하나둘 은서에게 다가와 말을 걸기 시작했다. 몇 달이 지나 반 친구들과 함께 웃고 떠드는 은서의 모습을 보며 담임 선생님은 흐뭇하게 미소를 지으셨다. 은서는 미술 시간에 그렸던 그 그림을 책상 서랍에 소중히 간직했는데 그림 속 나무 옆에는 언제나 작은 강아지 한 마리가 꼬리를 흔들고 있었다."
+          "text": "갑자기 뛰거나 큰 소리를 내면 개구리가 놀랄 수 있습니다. 생명의 평화를 깨뜨리지 않도록 조용히 관찰하는 태도가 중요함. 자연을 배려하는 마음이 생태계를 보호하는 시작입니다."
+        },
+        {
+          "id": "p3",
+          "text": "우리는 개구리 관찰 수칙을 지키기로 친구들과 약속함. 조심스러운 발걸음이 작은 생명에게 큰 위로가 됨을 배움. 생명을 아끼는 마음으로 자연의 소리에 귀를 기울입시다."
         }
       ]
     },
@@ -33,302 +53,594 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 44 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 32
+              }
+            ]
+          },
           "question": {
-            "prompt": "은서의 상황을 어떻게 설명하고 있나요?",
+            "prompt": "산책할 때 어떻게 걷나요?",
             "choices": [
-              "전학 온 지 일주일이 지났지만 친구가 아직 없었다",
-              "전학 온 첫날부터 많은 친구를 사귀었다",
-              "오랫동안 다닌 학교에서 인기가 많았다",
-              "새 학교에 가기 싫어서 결석을 했다"
+              {
+                "id": "A",
+                "text": "조심조심"
+              },
+              {
+                "id": "B",
+                "text": "쿵쾅쿵쾅"
+              },
+              {
+                "id": "C",
+                "text": "지그재그"
+              },
+              {
+                "id": "D",
+                "text": "거꾸로"
+              }
             ],
-            "answerIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 46, "end": 102 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 34,
+                "end": 64
+              }
+            ]
+          },
           "question": {
-            "prompt": "은서가 쉬는 시간과 점심시간에 한 일은 무엇인가요?",
+            "prompt": "누가 다치지 않게 주의하나요?",
             "choices": [
-              "친구들과 운동장에서 뛰어놀았다",
-              "혼자 창밖을 보거나 구석에서 조용히 밥을 먹었다",
-              "도서관에 가서 책을 빌려 왔다",
-              "선생님과 함께 교무실에서 이야기를 나누었다"
+              {
+                "id": "A",
+                "text": "개구리"
+              },
+              {
+                "id": "B",
+                "text": "로봇"
+              },
+              {
+                "id": "C",
+                "text": "외계인"
+              },
+              {
+                "id": "D",
+                "text": "인형"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 104, "end": 160 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 66,
+                "end": 96
+              }
+            ]
+          },
           "question": {
-            "prompt": "미술 시간에 선생님이 내신 과제는 무엇인가요?",
+            "prompt": "무엇을 낮추었나요?",
             "choices": [
-              "혼자서 풍경화를 그리는 것이었다",
-              "두 사람이 짝을 이루어 그림 하나를 함께 그리는 것이었다",
-              "찰흙으로 동물 모형을 만드는 것이었다",
-              "교실 벽에 붙일 포스터를 디자인하는 것이었다"
+              {
+                "id": "A",
+                "text": "발소리"
+              },
+              {
+                "id": "B",
+                "text": "키"
+              },
+              {
+                "id": "C",
+                "text": "이름"
+              },
+              {
+                "id": "D",
+                "text": "나이"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 162, "end": 220 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 32
+              },
+              {
+                "paragraphId": "p1",
+                "start": 34,
+                "end": 64
+              },
+              {
+                "paragraphId": "p1",
+                "start": 66,
+                "end": 96
+              }
+            ]
+          },
           "question": {
-            "prompt": "윤재가 처음에 은서에게 보인 태도는 어떠했나요?",
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "반갑게 인사하며 악수를 청했다",
-              "인사도 하지 않고 도화지를 밀어 놓았다",
-              "다른 짝으로 바꿔 달라고 선생님께 부탁했다",
-              "은서에게 좋아하는 색을 물어보았다"
+              {
+                "id": "A",
+                "text": "연못 산책과 조심스러운 보행"
+              },
+              {
+                "id": "B",
+                "text": "풀숲이 깊은 이유"
+              },
+              {
+                "id": "C",
+                "text": "개구리가 무서운 공포"
+              },
+              {
+                "id": "D",
+                "text": "발이 아픈 불평"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 222, "end": 270 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 31
+              }
+            ]
+          },
           "question": {
-            "prompt": "은서가 도화지에 처음 그린 것은 무엇인가요?",
+            "prompt": "무엇을 내면 개구리가 놀라나요?",
             "choices": [
-              "꽃밭을 정성스럽게 그렸다",
-              "긴장하면서도 나무 한 그루를 조심스럽게 그렸다",
-              "윤재의 얼굴을 그려 주었다",
-              "자기가 살던 동네의 풍경을 그렸다"
+              {
+                "id": "A",
+                "text": "큰 소리"
+              },
+              {
+                "id": "B",
+                "text": "작은 별"
+              },
+              {
+                "id": "C",
+                "text": "예쁜 꽃"
+              },
+              {
+                "id": "D",
+                "text": "시원한 물"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 272, "end": 335 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 33,
+                "end": 66
+              }
+            ]
+          },
           "question": {
-            "prompt": "윤재가 은서의 나무 그림을 보고 어떻게 반응했나요?",
+            "prompt": "어떤 태도가 중요한가요?",
             "choices": [
-              "마음에 들지 않는다며 지워 버렸다",
-              "관심 없다는 듯 계속 팔짱을 끼고 있었다",
-              "나무를 잘 그렸다고 작은 소리로 말했다",
-              "선생님에게 은서가 혼자 그렸다고 알렸다"
+              {
+                "id": "A",
+                "text": "조용히 관찰"
+              },
+              {
+                "id": "B",
+                "text": "난폭하게 뜀"
+              },
+              {
+                "id": "C",
+                "text": "무시하고 놂"
+              },
+              {
+                "id": "D",
+                "text": "화내며 밀음"
+              }
             ],
-            "answerIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 335 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 68,
+                "end": 96
+              }
+            ]
+          },
           "question": {
-            "prompt": "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "prompt": "무엇을 보호하는 시작인가요?",
             "choices": [
-              "전학생 은서가 미술 시간에 윤재와 짝이 되어 처음으로 소통하게 된 이야기",
-              "은서가 미술 대회에서 상을 받은 이야기",
-              "윤재가 새 학교에 적응하지 못해 힘들어하는 이야기",
-              "선생님이 은서를 위해 특별 수업을 마련한 이야기"
+              {
+                "id": "A",
+                "text": "생태계"
+              },
+              {
+                "id": "B",
+                "text": "선물 가게"
+              },
+              {
+                "id": "C",
+                "text": "노래 시합"
+              },
+              {
+                "id": "D",
+                "text": "달리기 대회"
+              }
             ],
-            "answerIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 22 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 31
+              },
+              {
+                "paragraphId": "p2",
+                "start": 33,
+                "end": 66
+              },
+              {
+                "paragraphId": "p2",
+                "start": 68,
+                "end": 96
+              }
+            ]
+          },
           "question": {
-            "prompt": "윤재의 한마디를 들은 은서의 반응은 어떠했나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "부끄러워서 얼굴을 숨겼다",
-              "그 말에 놀라서 고개를 들었다",
-              "화가 나서 소리를 질렀다",
-              "들리지 않는 척 무시했다"
+              {
+                "id": "A",
+                "text": "생명 보호와 관찰 태도"
+              },
+              {
+                "id": "B",
+                "text": "소리가 맛없는 이유"
+              },
+              {
+                "id": "C",
+                "text": "자연이 미운 사연"
+              },
+              {
+                "id": "D",
+                "text": "보호가 힘든 불평"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 24, "end": 73 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 28
+              }
+            ]
+          },
           "question": {
-            "prompt": "윤재가 은서의 나무 옆에 그린 것은 무엇인가요?",
+            "prompt": "누구와 약속했나요?",
             "choices": [
-              "커다란 집을 그려 넣었다",
-              "작은 강아지 한 마리를 그려 넣었다",
-              "예쁜 꽃을 여러 개 그렸다",
-              "하늘에 무지개를 그려 넣었다"
+              {
+                "id": "A",
+                "text": "친구들"
+              },
+              {
+                "id": "B",
+                "text": "로봇"
+              },
+              {
+                "id": "C",
+                "text": "외계인"
+              },
+              {
+                "id": "D",
+                "text": "요정"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 75, "end": 95 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 30,
+                "end": 60
+              }
+            ]
+          },
           "question": {
-            "prompt": "은서가 방긋 웃자 윤재는 어떻게 했나요?",
+            "prompt": "무엇이 위로가 됨을 배웠나요?",
             "choices": [
-              "아무 반응 없이 그림을 계속 그렸다",
-              "은서를 따라서 함께 웃었다",
-              "부끄러워서 고개를 돌렸다",
-              "선생님에게 그림을 보여 드렸다"
+              {
+                "id": "A",
+                "text": "조심스러운 발걸음"
+              },
+              {
+                "id": "B",
+                "text": "비명 지르는 행동"
+              },
+              {
+                "id": "C",
+                "text": "낙서 하는 장난"
+              },
+              {
+                "id": "D",
+                "text": "잠만 자는 나태"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 97, "end": 165 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 62,
+                "end": 91
+              }
+            ]
+          },
           "question": {
-            "prompt": "그날 이후 윤재가 은서에게 한 일은 무엇인가요?",
+            "prompt": "어디에 귀를 기울이나요?",
             "choices": [
-              "은서를 피해 다른 자리로 옮겼다",
-              "매일 아침 인사하고 쉬는 시간에 이야기를 나누었다",
-              "숙제를 대신 해 달라고 부탁했다",
-              "은서에게 그림을 가르쳐 달라고 했다"
+              {
+                "id": "A",
+                "text": "자연의 소리"
+              },
+              {
+                "id": "B",
+                "text": "기계 소음"
+              },
+              {
+                "id": "C",
+                "text": "친구 비밀"
+              },
+              {
+                "id": "D",
+                "text": "음식 냄새"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 167, "end": 215 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 28
+              },
+              {
+                "paragraphId": "p3",
+                "start": 30,
+                "end": 60
+              },
+              {
+                "paragraphId": "p3",
+                "start": 62,
+                "end": 91
+              }
+            ]
+          },
           "question": {
-            "prompt": "은서에게 웃음이 늘어나자 다른 아이들은 어떻게 변했나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "여전히 은서에게 관심을 보이지 않았다",
-              "하나둘 은서에게 다가와 말을 걸기 시작했다",
-              "윤재에게만 더 친하게 대했다",
-              "은서를 반장으로 뽑아 주었다"
+              {
+                "id": "A",
+                "text": "자연 사랑과 관찰 실천"
+              },
+              {
+                "id": "B",
+                "text": "소리가 지루한 이유"
+              },
+              {
+                "id": "C",
+                "text": "약속을 어긴 잘못"
+              },
+              {
+                "id": "D",
+                "text": "생명이 사라진 걱정"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 217, "end": 274 }] },
-          "question": {
-            "prompt": "몇 달 뒤 은서의 모습을 본 담임 선생님의 반응은 어떠했나요?",
-            "choices": [
-              "걱정스러운 표정을 지으셨다",
-              "흐뭇하게 미소를 지으셨다",
-              "은서에게 더 열심히 하라고 말씀하셨다",
-              "다른 반으로 은서를 옮기셨다"
-            ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 276, "end": 354 }] },
-          "question": {
-            "prompt": "은서가 그 그림을 간직한 까닭을 짐작할 수 있는 부분은 무엇인가요?",
-            "choices": [
-              "그림을 잘 그려서 상을 받았기 때문이다",
-              "그림에 윤재와의 첫 소통이 담겨 있어 소중했기 때문이다",
-              "선생님이 간직하라고 명령하셨기 때문이다",
-              "그림이 시험에 나올 예정이었기 때문이다"
-            ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s15",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 354 }] },
-          "question": {
-            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
-            "choices": [
-              "윤재의 작은 관심을 시작으로 은서가 학교에 적응하게 된 과정",
-              "은서가 그림 그리기 대회에서 우승한 이야기",
-              "담임 선생님이 은서를 위해 특별히 짝을 바꿔 준 이야기",
-              "은서가 다른 학교로 다시 전학 간 이야기"
-            ],
-            "answerIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "전학생 은서는 일주일 동안 친구가 없었다" },
-        { "id": "c2", "text": "미술 시간에 윤재와 짝이 되어 함께 그렸다" },
-        { "id": "c3", "text": "은서가 나무를 그리자 윤재가 칭찬했다" },
-        { "id": "c4", "text": "윤재가 나무 옆에 강아지를 그려 넣었다" },
-        { "id": "c5", "text": "그날부터 윤재가 매일 인사를 건넸다" },
-        { "id": "c6", "text": "다른 아이들도 은서에게 말을 걸기 시작했다" },
-        { "id": "c7", "text": "선생님이 은서의 변화를 흐뭇해하셨다" },
-        { "id": "c8", "text": "은서는 그림을 소중히 간직했다" }
+        {
+          "id": "c1",
+          "text": "연못가를 조심히 산책해요."
+        },
+        {
+          "id": "c2",
+          "text": "개구리가 놀라지 않게 놂."
+        },
+        {
+          "id": "c3",
+          "text": "발소리를 낮추어 걷습니다."
+        },
+        {
+          "id": "c4",
+          "text": "조용히 관찰하는 태도 가짐."
+        },
+        {
+          "id": "c5",
+          "text": "생명을 아끼는 마음을 배움."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "은서가 전학 온 뒤 쉬는 시간에 무엇을 했습니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 46, "end": 73 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "걱정 없이 평온한 상태는?",
+          "answerText": "평화를",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 37,
+              "end": 40
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "미술 시간에 선생님이 내신 과제는 무엇이었습니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 118, "end": 160 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "남을 도와주거나 살핌은?",
+          "answerText": "배려하는",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 72,
+              "end": 76
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "은서가 도화지에 처음 그린 것은 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 237, "end": 270 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q4",
-          "prompt": "윤재가 은서의 나무 옆에 그린 것은 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 38, "end": 73 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "그날 이후 윤재가 매일 아침 은서에게 한 일은 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 97, "end": 134 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "은서에게 웃음이 늘자 다른 아이들은 어떻게 했습니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 181, "end": 215 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q7",
-          "prompt": "은서가 그림을 소중히 간직한 곳은 어디입니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 291, "end": 318 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "생물의 생활 환경은?",
+          "answerText": "생태계를",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 81,
+              "end": 85
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

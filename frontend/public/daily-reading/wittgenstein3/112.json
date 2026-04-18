@@ -32,24 +32,646 @@
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        "부사어는 흔히 문장에서 꾸며 주는 말로 설명되지만, 모든 부사어를 같은 성격으로 볼 수는 없다. 어떤 부사어는 없어도 문장이 성립하지만, 어떤 부사어는 빠지면 서술어가 요구하는 의미 구조가 완성되지 않는다. 그래서 국어 문법에서는 부사어를 단순 수식 성분으로만 보지 않고, 필수적인지 아닌지를 함께 따져 보아야 한다.",
-        "필수적 부사어는 서술어가 의미를 온전히 실현하기 위해 꼭 요구하는 부사어이다. 예를 들어 '철수가 학교에 있다'에서 '학교에'를 빼면 '철수가 있다'라는 문장은 문법적으로 아주 틀렸다고 하기는 어렵지만, 원래 서술어 '있다'가 요구하는 존재의 자리 정보가 빠져 의미가 크게 비어 버린다. 이처럼 장소, 방향, 기준점처럼 서술어와 밀접하게 결합하는 부사어는 필수적 부사어로 처리된다.",
-        "반면 수의적 부사어는 문장을 더 자세하게 만들지만 없어도 기본적인 사건 구조는 유지된다. '철수가 어제 도서관에서 조용히 공부했다'에서 '어제', '도서관에서', '조용히'는 모두 부사어이지만, 이들 가운데 일부를 빼더라도 '철수가 공부했다'라는 핵심 서술은 남는다. 즉 수의적 부사어는 시간, 장소, 방식 등의 정보를 덧붙이되, 서술어가 성립하는 데 절대적으로 필요하지는 않다.",
-        "두 부사어를 구별할 때는 단순히 의미가 중요해 보이는지를 보는 것이 아니라, 해당 서술어가 어떤 자리를 요구하는지를 살펴야 한다. '놓다', '두다', '살다', '가다', '오다' 같은 말은 흔히 장소나 방향 성분을 필요로 한다. 그래서 '책을 책상 위에 놓다', '서울에 살다', '집으로 가다'에서 부사어는 선택적으로 덧붙는 말이 아니라 서술어의 자릿수를 채우는 요소에 가깝다.",
-        "하지만 같은 표현이라도 문맥에 따라 판정이 달라질 수 있다는 점이 중요하다. '철수가 집에 간다'에서 '집에'는 도착점을 나타내는 필수적 성분에 가깝지만, '철수가 집에 공부하러 간다'처럼 다른 성분이 추가되면 정보의 중심이 달라질 수 있다. 또한 '있다'도 존재를 나타낼 때는 장소 성분이 강하게 요구되지만, '시간이 있다'처럼 가능성이나 여유를 뜻할 때는 같은 기준을 그대로 적용할 수 없다.",
-        "결국 필수적 부사어와 수의적 부사어의 구별은 부사어의 겉모양이 아니라 서술어의 의미와 자릿수 구조를 기준으로 해야 한다. 부사어가 빠졌을 때 문장의 핵심 의미가 유지되는지, 또는 서술어가 요구하는 자리가 비어 의미가 불완전해지는지를 따져 보면 두 유형을 가를 수 있다. 따라서 부사어를 정확히 이해하려면 시간·장소·방식이라는 표면 의미보다, 서술어와의 구조적 관계를 먼저 살펴야 한다."
+        {
+          "id": "p1",
+          "text": "부사어는 흔히 문장에서 꾸며 주는 말로 설명되지만, 모든 부사어를 같은 성격으로 볼 수는 없다. 어떤 부사어는 없어도 문장이 성립하지만, 어떤 부사어는 빠지면 서술어가 요구하는 의미 구조가 완성되지 않는다. 그래서 국어 문법에서는 부사어를 단순 수식 성분으로만 보지 않고, 필수적인지 아닌지를 함께 따져 보아야 한다."
+        },
+        {
+          "id": "p2",
+          "text": "필수적 부사어는 서술어가 의미를 온전히 실현하기 위해 꼭 요구하는 부사어이다. 예를 들어 '철수가 학교에 있다'에서 '학교에'를 빼면 '철수가 있다'라는 문장은 문법적으로 아주 틀렸다고 하기는 어렵지만, 원래 서술어 '있다'가 요구하는 존재의 자리 정보가 빠져 의미가 크게 비어 버린다. 이처럼 장소, 방향, 기준점처럼 서술어와 밀접하게 결합하는 부사어는 필수적 부사어로 처리된다."
+        },
+        {
+          "id": "p3",
+          "text": "반면 수의적 부사어는 문장을 더 자세하게 만들지만 없어도 기본적인 사건 구조는 유지된다. '철수가 어제 도서관에서 조용히 공부했다'에서 '어제', '도서관에서', '조용히'는 모두 부사어이지만, 이들 가운데 일부를 빼더라도 '철수가 공부했다'라는 핵심 서술은 남는다. 즉 수의적 부사어는 시간, 장소, 방식 등의 정보를 덧붙이되, 서술어가 성립하는 데 절대적으로 필요하지는 않다."
+        },
+        {
+          "id": "p4",
+          "text": "두 부사어를 구별할 때는 단순히 의미가 중요해 보이는지를 보는 것이 아니라, 해당 서술어가 어떤 자리를 요구하는지를 살펴야 한다. '놓다', '두다', '살다', '가다', '오다' 같은 말은 흔히 장소나 방향 성분을 필요로 한다. 그래서 '책을 책상 위에 놓다', '서울에 살다', '집으로 가다'에서 부사어는 선택적으로 덧붙는 말이 아니라 서술어의 자릿수를 채우는 요소에 가깝다."
+        },
+        {
+          "id": "p5",
+          "text": "하지만 같은 표현이라도 문맥에 따라 판정이 달라질 수 있다는 점이 중요하다. '철수가 집에 간다'에서 '집에'는 도착점을 나타내는 필수적 성분에 가깝지만, '철수가 집에 공부하러 간다'처럼 다른 성분이 추가되면 정보의 중심이 달라질 수 있다. 또한 '있다'도 존재를 나타낼 때는 장소 성분이 강하게 요구되지만, '시간이 있다'처럼 가능성이나 여유를 뜻할 때는 같은 기준을 그대로 적용할 수 없다."
+        },
+        {
+          "id": "p6",
+          "text": "결국 필수적 부사어와 수의적 부사어의 구별은 부사어의 겉모양이 아니라 서술어의 의미와 자릿수 구조를 기준으로 해야 한다. 부사어가 빠졌을 때 문장의 핵심 의미가 유지되는지, 또는 서술어가 요구하는 자리가 비어 의미가 불완전해지는지를 따져 보면 두 유형을 가를 수 있다. 따라서 부사어를 정확히 이해하려면 시간·장소·방식이라는 표면 의미보다, 서술어와의 구조적 관계를 먼저 살펴야 한다."
+        }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 177
+              }
+            ]
+          },
+          "question": {
+            "prompt": "부사어를 단순한 수식 성분으로만 보면 안 되는 이유는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "없어도 되는 부사어만 있는 것이 아니라 필수적인 부사어도 있기 때문"
+              },
+              {
+                "id": "B",
+                "text": "부사어는 항상 주어가 되기 때문"
+              },
+              {
+                "id": "C",
+                "text": "부사어는 모두 서술어를 대신하기 때문"
+              },
+              {
+                "id": "D",
+                "text": "부사어는 문장 끝에만 올 수 있기 때문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 177
+              }
+            ]
+          },
+          "question": {
+            "prompt": "국어 문법에서는 부사어를 볼 때 무엇을 함께 따져 보라고 하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "필수적인지 아닌지"
+              },
+              {
+                "id": "B",
+                "text": "문장부호의 종류"
+              },
+              {
+                "id": "C",
+                "text": "띄어쓰기 규칙만"
+              },
+              {
+                "id": "D",
+                "text": "음절 수만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 213
+              }
+            ]
+          },
+          "question": {
+            "prompt": "필수적 부사어를 어떻게 정의하고 있는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서술어가 의미를 온전히 실현하기 위해 꼭 요구하는 부사어"
+              },
+              {
+                "id": "B",
+                "text": "문장을 꾸미기만 하는 부사어"
+              },
+              {
+                "id": "C",
+                "text": "항상 생략해야 하는 부사어"
+              },
+              {
+                "id": "D",
+                "text": "주어를 대신하는 부사어"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 213
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'철수가 학교에 있다'에서 '학교에'를 빼면 어떤 문제가 생긴다고 보았는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "의미가 크게 비어 버린다"
+              },
+              {
+                "id": "B",
+                "text": "주어가 반드시 사라진다"
+              },
+              {
+                "id": "C",
+                "text": "문장이 반드시 비문이 된다"
+              },
+              {
+                "id": "D",
+                "text": "동사가 명사로 바뀐다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 212
+              }
+            ]
+          },
+          "question": {
+            "prompt": "수의적 부사어의 특징으로 가장 알맞은 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "없어도 기본적인 사건 구조는 유지된다"
+              },
+              {
+                "id": "B",
+                "text": "반드시 서술어의 자리를 채운다"
+              },
+              {
+                "id": "C",
+                "text": "항상 주어와 같은 역할을 한다"
+              },
+              {
+                "id": "D",
+                "text": "없으면 문장이 성립하지 않는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 212
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 문단에서 수의적 부사어를 빼고도 남는 핵심 서술은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "철수가 공부했다"
+              },
+              {
+                "id": "B",
+                "text": "철수가 어제 있었다"
+              },
+              {
+                "id": "C",
+                "text": "도서관에서 조용히 있었다"
+              },
+              {
+                "id": "D",
+                "text": "학생이 잠이 깼다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 214
+              }
+            ]
+          },
+          "question": {
+            "prompt": "부사어의 구별에서 무엇을 살펴야 한다고 했는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서술어가 어떤 자리를 요구하는지"
+              },
+              {
+                "id": "B",
+                "text": "단어의 받침이 무엇인지"
+              },
+              {
+                "id": "C",
+                "text": "문장이 몇 글자인지"
+              },
+              {
+                "id": "D",
+                "text": "조사 '에'가 있는지 없는지"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 214
+              }
+            ]
+          },
+          "question": {
+            "prompt": "장소나 방향 성분을 필요로 하는 서술어 예로 제시된 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "놓다, 두다, 살다, 가다, 오다"
+              },
+              {
+                "id": "B",
+                "text": "먹다, 읽다, 쓰다, 보다, 듣다"
+              },
+              {
+                "id": "C",
+                "text": "크다, 작다, 높다, 낮다, 길다"
+              },
+              {
+                "id": "D",
+                "text": "웃다, 울다, 뛰다, 걷다, 놀다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 221
+              }
+            ]
+          },
+          "question": {
+            "prompt": "같은 '집에'라도 판정이 달라질 수 있다고 한 이유는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "문맥에 따라 판정이 달라질 수 있기 때문"
+              },
+              {
+                "id": "B",
+                "text": "조사가 잘못되기 때문"
+              },
+              {
+                "id": "C",
+                "text": "문장이 반드시 짧아지기 때문"
+              },
+              {
+                "id": "D",
+                "text": "주어가 항상 생략되기 때문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 221
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'시간이 있다'에 같은 기준을 그대로 적용할 수 없다고 한 이유는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "존재를 나타낼 때와 가능성이나 여유를 뜻할 때가 다르기 때문"
+              },
+              {
+                "id": "B",
+                "text": "항상 장소를 요구하기 때문"
+              },
+              {
+                "id": "C",
+                "text": "동사가 없어지기 때문"
+              },
+              {
+                "id": "D",
+                "text": "부사어가 전혀 없기 때문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 215
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 글이 제시하는 최종 구별 기준은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "서술어의 의미와 자릿수 구조"
+              },
+              {
+                "id": "B",
+                "text": "단어의 글자 수"
+              },
+              {
+                "id": "C",
+                "text": "조사의 유무만"
+              },
+              {
+                "id": "D",
+                "text": "문장 길이만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 215
+              }
+            ]
+          },
+          "question": {
+            "prompt": "부사어가 빠졌을 때 따져 보라고 한 내용은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "핵심 의미가 유지되는지와 서술어의 자리가 비는지"
+              },
+              {
+                "id": "B",
+                "text": "소리가 커지는지와 억양이 바뀌는지"
+              },
+              {
+                "id": "C",
+                "text": "문장이 반드시 길어지는지"
+              },
+              {
+                "id": "D",
+                "text": "맞춤법이 더 어려워지는지"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {
+          "id": "c1",
+          "text": "부사어는 모두 같은 수식 성분이 아니라 문장에서 꼭 필요한지 아닌지에 따라 나누어 보아야 한다."
+        },
+        {
+          "id": "c2",
+          "text": "필수적 부사어는 '있다'처럼 서술어가 의미를 완성하려면 장소나 기준점 같은 정보를 꼭 요구하는 경우에 나타난다."
+        },
+        {
+          "id": "c3",
+          "text": "반면 수의적 부사어는 시간과 장소, 방식 같은 정보를 덧붙이지만 빠져도 핵심 사건 구조는 유지된다."
+        },
+        {
+          "id": "c4",
+          "text": "이 둘을 가를 때는 부사어가 중요해 보이는지보다 서술어가 어떤 자리를 필요로 하는지를 살펴야 한다."
+        },
+        {
+          "id": "c5",
+          "text": "다만 같은 표현이라도 문맥과 서술어 의미가 달라지면 필수성과 수의성의 판정도 함께 달라질 수 있다."
+        },
+        {
+          "id": "c6",
+          "text": "결국 필수적 부사어와 수의적 부사어의 구별은 시간이나 장소라는 겉뜻보다 서술어의 자릿수 구조를 기준으로 해야 정확하다."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "1문단은 필수적 부사어와 수의적 부사어의 판별 기준라는 문법 주제를 어떤 배경에서 꺼내는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 177
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "2문단은 첫 판별 기준이나 기본 원리를 어떻게 설명하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 213
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "3문단은 해당 문법 현상의 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 212
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "4문단은 구별점이나 추가 조건을 어떻게 드러내는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 214
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "5문단은 해석상의 주의점이나 효과를 어떤 방향으로 설명하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 221
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "6문단은 필수적 부사어와 수의적 부사어의 판별 기준라는 문법 주제의 의미를 어떤 관점에서 정리하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 215
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }

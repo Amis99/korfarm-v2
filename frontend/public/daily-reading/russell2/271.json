@@ -4,7 +4,7 @@
   "version": 1,
   "status": "PUBLISHED",
   "title": "진로 특강 핵심 정리 요약문 초고",
-  "description": "러셀 독해 - 정독·복기·확인",
+  "description": "일일 독해 - 정독·복기·확인",
   "targetLevel": "RUSSELL_2",
   "schoolGradeRange": {
     "min": 8,
@@ -1001,195 +1001,143 @@
     "recall": {
       "cards": [
         {
-          "text": "이 요약문 초고는 진로 특강을 짧게 정리하려는 글이다."
+          "id": "c1",
+          "text": "이 요약문 초고는 진로 특강의 핵심을 짧게 정리해 친구들에게 전달하려는 목적에서 시작되었다."
         },
         {
-          "text": "강연자는 직업 선택을 한순간의 결심으로 보지 않는다."
+          "id": "c2",
+          "text": "강연자는 직업 선택을 한 번의 결심으로 보지 말고 여러 경험 속에서 자신이 잘 버티고 집중하는 환경을 살피라고 말했다."
         },
         {
-          "text": "여러 경험을 통해 내가 어떤 상황에서 집중하는지를 살헌다."
+          "id": "c3",
+          "text": "또 성적이나 인기만 따라가면 쉽게 흔들릴 수 있으니, 체험과 인터뷰를 통해 흥미의 이유를 구체적으로 기록해 보라고 권했다."
         },
         {
-          "text": "성적이나 인기만으로 진로를 결정하면 잘 맞지 않을 수 있다."
+          "id": "c4",
+          "text": "하지만 지금 초고는 예시가 핵심 내용과 섞여 있어 중심 생각과 보조 설명이 바로 구분되지 않는다."
         },
         {
-          "text": "요약문에서는 예시를 줄이고 핵심 생각을 더 남기야 한다."
+          "id": "c5",
+          "text": "마지막 부분에는 강연 내용과 글쓴이의 느낌이 함께 들어가 요약문이 아니라 감상문처럼 읽히는 문제가 남아 있다."
         },
         {
-          "text": "최종적으로는 중심 내용만 남기고 흐름을 짧게 보여 주어야 한다."
+          "id": "c6",
+          "text": "따라서 이 초고는 예시와 감상을 덜어 내고 강연의 중심 흐름만 짧고 분명하게 남기도록 다듬어야 한다."
         }
       ],
       "correctOrder": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
       ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
-          "prompt": "가장 중심이 되는 것은 무엇인가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "핵심"
-            },
-            {
-              "id": "B",
-              "text": "예시"
-            },
-            {
-              "id": "C",
-              "text": "감상"
-            },
-            {
-              "id": "D",
-              "text": "요약"
-            }
-          ],
-          "answerId": "A",
+          "id": "q1",
+          "prompt": "1??? ?? ??? ?????",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 120,
-              "end": 121
-            },
-            {
-              "paragraphId": "p4",
-              "start": 18,
-              "end": 19
-            },
-            {
-              "paragraphId": "p4",
-              "start": 146,
-              "end": 147
-            },
-            {
-              "paragraphId": "p6",
-              "start": 50,
-              "end": 51
-            }
-          ]
-        },
-        {
-          "prompt": "조심히 살피는 것은?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "관찰"
-            },
-            {
-              "id": "B",
-              "text": "경험"
-            },
-            {
-              "id": "C",
-              "text": "감상"
-            },
-            {
-              "id": "D",
-              "text": "구분"
+              "start": 0,
+              "end": 146
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "2???? ???? ??? ??? ?????",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 121,
-              "end": 122
-            }
-          ]
-        },
-        {
-          "prompt": "직접 해 보며 알아보는 것은?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "경험"
-            },
-            {
-              "id": "B",
-              "text": "예시"
-            },
-            {
-              "id": "C",
-              "text": "가집"
-            },
-            {
-              "id": "D",
-              "text": "대화"
+              "start": 0,
+              "end": 181
             }
           ],
-          "answerId": "A",
-          "answerRanges": [
-            {
-              "paragraphId": "p2",
-              "start": 77,
-              "end": 78
-            }
-          ]
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         },
         {
-          "prompt": "내가 잘 맞는 정도를 뜻하는 말은?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "적성"
-            },
-            {
-              "id": "B",
-              "text": "관찰"
-            },
-            {
-              "id": "C",
-              "text": "요약"
-            },
-            {
-              "id": "D",
-              "text": "현재"
-            }
-          ],
-          "answerId": "A",
-          "answerRanges": [
-            {
-              "paragraphId": "p6",
-              "start": 27,
-              "end": 28
-            }
-          ]
-        },
-        {
-          "prompt": "남기 전 기록해 두는 것은?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "기록"
-            },
-            {
-              "id": "B",
-              "text": "예시"
-            },
-            {
-              "id": "C",
-              "text": "선택"
-            },
-            {
-              "id": "D",
-              "text": "직업"
-            }
-          ],
-          "answerId": "A",
+          "id": "q3",
+          "prompt": "3??? ??? ???? ?????",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 119,
-              "end": 120
+              "start": 0,
+              "end": 158
             }
-          ]
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "4???? ???? ?? ?????",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 171
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "5??? ??? ?????",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 148
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "6??? ?? ??? ??? ????? ??????",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 155
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         }
       ]
     }

@@ -1001,180 +1001,143 @@
     "recall": {
       "cards": [
         {
-          "text": "산화와 환원은 전자가 이동하는 방식을 설명한다."
+          "id": "c1",
+          "text": "산화와 환원은 화학 반응에서 물질 사이에 전자가 어떻게 이동하는지를 설명하는 기본 개념이다."
         },
         {
-          "text": "산화는 전자를 잃는 과정이고 환원은 전자를 얻는 과정이다."
+          "id": "c2",
+          "text": "철이 녹스는 예처럼 한쪽이 전자를 잃어 산화되면 다른 쪽은 그 전자를 받아 환원되므로 두 과정은 함께 일어난다."
         },
         {
-          "text": "산화와 환원은 한 반응 안에서 함께 일어난다."
+          "id": "c3",
+          "text": "산화와 환원을 구별할 때는 전자 이동이 핵심이지만 산소 결합, 수소 이동, 산화수 변화 같은 기준도 같은 현상을 보여 준다."
         },
         {
-          "text": "실제 문제에서는 산소의 결합 여부나 산화수 변화도 판단 기준이 된다."
+          "id": "c4",
+          "text": "전지에서는 한쪽 전극의 산화와 다른 쪽 전극의 환원이 맞물리며 전자의 흐름과 전류를 만들어 낸다."
         },
         {
-          "text": "전지에서는 산화와 환원이 전류와 직접 연결된다."
+          "id": "c5",
+          "text": "금속의 부식, 표백제의 작용, 세포 호흡처럼 서로 다른 현상도 전자 이동이라는 틀에서 산화와 환원으로 설명할 수 있다."
         },
         {
-          "text": "산화와 환원은 여러 현상을 전자 이동이란 공통 원리로 목안해 이해하게 한다."
+          "id": "c6",
+          "text": "그래서 산화와 환원을 이해하면 겉모습이 다른 반응들도 하나의 공통 원리로 묶어 볼 수 있다."
         }
       ],
       "correctOrder": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
       ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
-          "prompt": "전자 이동을 판단하는 다른 기준 중 하나는?",
-          "choices": [
+          "id": "q1",
+          "prompt": "1??? ?? ??? ?????",
+          "answerRanges": [
             {
-              "id": "A",
-              "text": "산화수"
-            },
-            {
-              "id": "B",
-              "text": "전류"
-            },
-            {
-              "id": "C",
-              "text": "세포 호흡"
-            },
-            {
-              "id": "D",
-              "text": "부식"
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 147
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "2???? ???? ??? ??? ?????",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 122
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "3??? ??? ???? ?????",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 68,
-              "end": 70
-            }
-          ]
-        },
-        {
-          "prompt": "산소의 무엇 여부를 따질 수 있나?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "결합"
-            },
-            {
-              "id": "B",
-              "text": "속도"
-            },
-            {
-              "id": "C",
-              "text": "색"
-            },
-            {
-              "id": "D",
-              "text": "무게"
+              "start": 0,
+              "end": 140
             }
           ],
-          "answerId": "A",
-          "answerRanges": [
-            {
-              "paragraphId": "p3",
-              "start": 53,
-              "end": 54
-            }
-          ]
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         },
         {
-          "prompt": "전지에서 전자가 이동하면서 생기는 것은?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "전류"
-            },
-            {
-              "id": "B",
-              "text": "산화수"
-            },
-            {
-              "id": "C",
-              "text": "세포 호흡"
-            },
-            {
-              "id": "D",
-              "text": "공통 원리"
-            }
-          ],
-          "answerId": "A",
+          "id": "q4",
+          "prompt": "4???? ???? ?? ?????",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 111,
-              "end": 112
-            }
-          ]
-        },
-        {
-          "prompt": "산화와 환원으로 설명할 수 있는 현상 중 하나는?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "세포 호흡"
-            },
-            {
-              "id": "B",
-              "text": "산화수"
-            },
-            {
-              "id": "C",
-              "text": "전류"
-            },
-            {
-              "id": "D",
-              "text": "결합"
+              "start": 0,
+              "end": 148
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "5??? ??? ?????",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 21,
-              "end": 25
-            }
-          ]
-        },
-        {
-          "prompt": "전자 이동이란 무엇으로 목안해 볼 수 있나?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "원리"
-            },
-            {
-              "id": "B",
-              "text": "속도"
-            },
-            {
-              "id": "C",
-              "text": "결합"
-            },
-            {
-              "id": "D",
-              "text": "현상"
+              "start": 0,
+              "end": 162
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "6??? ?? ??? ??? ????? ??????",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 149,
-              "end": 150
+              "start": 0,
+              "end": 163
             }
-          ]
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         }
       ]
     }

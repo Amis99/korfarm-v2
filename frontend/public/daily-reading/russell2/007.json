@@ -533,185 +533,143 @@
     "recall": {
       "cards": [
         {
-          "text": "품사를 구별할 때는 낱말의 기능과 성격을 살핀다."
+          "id": "c1",
+          "text": "품사를 구별한다는 것은 낱말이 문장 속에서 어떤 기능과 성격을 맡는지 살피는 일이다."
         },
         {
-          "text": "명사·대명사·수사는 체언이고 조사와 결합해 자리를 잡는다."
+          "id": "c2",
+          "text": "명사와 대명사와 수사는 체언으로서 조사와 결합해 주어나 목적어 같은 자리를 잡는다는 공통점을 지닌다."
         },
         {
-          "text": "동사와 형용사는 활용을 하며 서술어가 될 수 있다."
+          "id": "c3",
+          "text": "동사와 형용사는 모두 활용하는 용언이지만, 동사는 움직임을, 형용사는 상태와 성질을 드러낸다는 점에서 갈린다."
         },
         {
-          "text": "관형사는 체언을 꾸미고 부사는 용언이나 문장 전체를 꾸민다."
+          "id": "c4",
+          "text": "관형사와 부사는 다른 말을 꾸며 주되, 관형사는 체언을 꾸미고 부사는 용언이나 문장 전체를 꾸민다."
         },
         {
-          "text": "조사는 관계를 드러내고 감탄사는 느낌을 바로 나타낸다."
+          "id": "c5",
+          "text": "조사는 앞말과의 관계를 드러내고 감탄사는 느낌을 직접 나타내기 때문에 독립적으로 쓰이기도 한다."
         },
         {
-          "text": "품사는 문장에서 어떻게 쓰였는지까지 함께 살펴야 한다."
+          "id": "c6",
+          "text": "따라서 품사를 바르게 판단하려면 낱말 뜻만이 아니라 문장에서의 쓰임과 활용 여부, 꾸미는 대상까지 함께 봐야 한다."
         }
       ],
       "correctOrder": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
       ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
-          "prompt": "품사를 구별할 때 살피는 핵심은 무엇인가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "맡은 기능과 성격"
-            },
-            {
-              "id": "B",
-              "text": "소리의 크기"
-            },
-            {
-              "id": "C",
-              "text": "글자 수"
-            },
-            {
-              "id": "D",
-              "text": "문장 길이"
-            }
-          ],
-          "answerId": "A",
+          "id": "q1",
+          "prompt": "?? ??? ?? ??? ??? ?? ??? ??? ??? ???? ??????",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 65,
-              "end": 82
-            }
-          ]
-        },
-        {
-          "prompt": "명사와 대명사와 수사는 어떤 품사인가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "체언"
-            },
-            {
-              "id": "B",
-              "text": "용언"
-            },
-            {
-              "id": "C",
-              "text": "부사"
-            },
-            {
-              "id": "D",
-              "text": "감탄사"
+              "start": 0,
+              "end": 84
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "?? ??? ?????????? ?? ?? ??? ??? ?? ???? ????",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 33,
-              "end": 34
-            }
-          ]
-        },
-        {
-          "prompt": "동사와 형용사의 공통점은 무엇인가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "활용을 하며 서술어가 될 수 있다"
-            },
-            {
-              "id": "B",
-              "text": "조사와 결합한다"
-            },
-            {
-              "id": "C",
-              "text": "체언을 꾸민다"
-            },
-            {
-              "id": "D",
-              "text": "느낌을 바로 나타낸다"
+              "start": 0,
+              "end": 75
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "?? ??? ??? ???? ???? ?? ??? ?? ??? ??????",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 15,
-              "end": 33
-            }
-          ]
-        },
-        {
-          "prompt": "조사와 감탄사는 각각 무엇을 드러내는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "관계와 느낌"
-            },
-            {
-              "id": "B",
-              "text": "주어와 목적어"
-            },
-            {
-              "id": "C",
-              "text": "활용과 서술어"
-            },
-            {
-              "id": "D",
-              "text": "체언과 용언"
+              "start": 0,
+              "end": 72
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "?? ??? ???? ??? ??? ??? ??? ?? ???? ?? ????",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 76
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "??? ??? ??? ???? ?? ??? ???? ??? ??? ??????",
           "answerRanges": [
             {
               "paragraphId": "p5",
               "start": 0,
-              "end": 18
-            },
-            {
-              "paragraphId": "p5",
-              "start": 21,
-              "end": 48
-            }
-          ]
-        },
-        {
-          "prompt": "품사를 바르게 가리려면 무엇을 함께 살펴야 하는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "문장에서 어떻게 쓰였는지"
-            },
-            {
-              "id": "B",
-              "text": "글자의 모양"
-            },
-            {
-              "id": "C",
-              "text": "문장의 길이"
-            },
-            {
-              "id": "D",
-              "text": "소리의 크기"
+              "end": 77
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "??? ??? ??? ??? ??? ?? ? ?? ???? ?? ??? ??? ??????",
           "answerRanges": [
             {
               "paragraphId": "p6",
-              "start": 29,
-              "end": 41
+              "start": 0,
+              "end": 72
             }
-          ]
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         }
       ]
     }

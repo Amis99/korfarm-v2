@@ -32,11 +32,26 @@
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        "나 보기가 역겨워\n가실 때에는\n말없이 고이 보내 드리우리다.",
-        "영변에 약산\n진달래꽃\n아름 따다 가실 길에 뿌리우리다.",
-        "가시는 걸음 걸음\n놓인 그 꽃을\n사뿐히 즈려 밟고 가시옵소서.",
-        "나 보기가 역겨워\n가실 때에는",
-        "죽어도 아니 눈물 흘리우리다."
+        {
+          "id": "p1",
+          "text": "나 보기가 역겨워\n가실 때에는\n말없이 고이 보내 드리우리다."
+        },
+        {
+          "id": "p2",
+          "text": "영변에 약산\n진달래꽃\n아름 따다 가실 길에 뿌리우리다."
+        },
+        {
+          "id": "p3",
+          "text": "가시는 걸음 걸음\n놓인 그 꽃을\n사뿐히 즈려 밟고 가시옵소서."
+        },
+        {
+          "id": "p4",
+          "text": "나 보기가 역겨워\n가실 때에는"
+        },
+        {
+          "id": "p5",
+          "text": "죽어도 아니 눈물 흘리우리다."
+        }
       ]
     },
     "intensive": {
@@ -430,6 +445,265 @@
               "eliminateWrongChoice": true
             }
           }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 33
+              }
+            ]
+          },
+          "question": {
+            "prompt": "첫 연의 화자 태도로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "임을 원망하기보다 조용히 보내려는 체하는 절제된 태도"
+              },
+              {
+                "id": "B",
+                "text": "임을 붙잡기 위해 격렬히 항의하는 태도"
+              },
+              {
+                "id": "C",
+                "text": "이별을 기뻐하며 환영하는 태도"
+              },
+              {
+                "id": "D",
+                "text": "임과의 재회를 이미 확신하는 태도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 30
+              }
+            ]
+          },
+          "question": {
+            "prompt": "둘째 연에서 진달래꽃을 뿌리겠다는 행동의 의미로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "떠나는 임의 길을 마지막까지 정성껏 배려하려는 마음"
+              },
+              {
+                "id": "B",
+                "text": "임의 발걸음을 막아 되돌리려는 의도"
+              },
+              {
+                "id": "C",
+                "text": "이별 뒤 새 출발을 축하하는 잔치 준비"
+              },
+              {
+                "id": "D",
+                "text": "임에게 복수하려는 숨은 계획"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 34
+              }
+            ]
+          },
+          "question": {
+            "prompt": "셋째 연에서 임이 꽃을 밟고 가라고 한 뜻으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이별의 슬픔 속에서도 임의 길을 자신이 마련한 정성으로 채우려는 뜻"
+              },
+              {
+                "id": "B",
+                "text": "임에게 죄책감을 주어 발길을 멈추게 하려는 뜻"
+              },
+              {
+                "id": "C",
+                "text": "꽃을 소중히 여기지 않으므로 아무렇게나 버리려는 뜻"
+              },
+              {
+                "id": "D",
+                "text": "임의 발걸음을 조롱하며 멀리 보내려는 뜻"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 16
+              },
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 16
+              }
+            ]
+          },
+          "question": {
+            "prompt": "마지막 두 연의 관계로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "첫 연의 말을 반복해 이별 상황을 다시 떠올린 뒤, 눈물 흘리지 않겠다는 다짐으로 감정을 눌러 마무리한다"
+              },
+              {
+                "id": "B",
+                "text": "새로운 인물을 등장시켜 갈등을 해결한다"
+              },
+              {
+                "id": "C",
+                "text": "이별의 원인을 구체적으로 설명하며 논리를 전개한다"
+              },
+              {
+                "id": "D",
+                "text": "임이 되돌아오는 장면으로 상황을 반전시킨다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 16
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'죽어도 아니 눈물 흘리우리다'가 드러내는 효과로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "슬픔을 감추려는 다짐이 오히려 이별의 아픔과 사랑의 깊이를 더 선명하게 드러낸다"
+              },
+              {
+                "id": "B",
+                "text": "이별이 전혀 슬프지 않음을 객관적으로 증명한다"
+              },
+              {
+                "id": "C",
+                "text": "임에 대한 미련이 완전히 사라졌음을 보여 준다"
+              },
+              {
+                "id": "D",
+                "text": "이별 뒤 곧 새로운 사랑을 찾겠다는 결심을 보여 준다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 33
+              },
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 30
+              },
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 34
+              },
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 16
+              },
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 16
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 작품 전체에 가장 두드러지는 정서로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이별의 슬픔을 절제된 말과 정성 어린 행동 속에 눌러 담은 애틋한 사랑"
+              },
+              {
+                "id": "B",
+                "text": "세속 명예를 잃은 데 대한 분노"
+              },
+              {
+                "id": "C",
+                "text": "자연 속 한가로움을 즐기는 평온"
+              },
+              {
+                "id": "D",
+                "text": "전쟁을 앞둔 비장한 결의"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
         }
       ]
     },
@@ -474,12 +748,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "\"역겨워\"는 무슨 뜻인가요?",
+          "prompt": "1??? ?? ??? ?????",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 6,
-              "end": 8
+              "start": 0,
+              "end": 33
             }
           ],
           "scoring": {
@@ -491,12 +765,12 @@
         },
         {
           "id": "q2",
-          "prompt": "\"고이\"는 무슨 뜻인가요?",
+          "prompt": "2???? ???? ??? ??? ?????",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 23,
-              "end": 24
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 30
             }
           ],
           "scoring": {
@@ -508,12 +782,12 @@
         },
         {
           "id": "q3",
-          "prompt": "\"진달래꽃\"은 무슨 뜻인가요?",
+          "prompt": "3??? ??? ???? ?????",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 8,
-              "end": 11
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 34
             }
           ],
           "scoring": {
@@ -525,12 +799,12 @@
         },
         {
           "id": "q4",
-          "prompt": "\"아름\"은 무슨 뜻인가요?",
+          "prompt": "4???? ???? ?? ?????",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 14,
-              "end": 15
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 16
             }
           ],
           "scoring": {
@@ -542,12 +816,12 @@
         },
         {
           "id": "q5",
-          "prompt": "\"사뿐히\"는 무슨 뜻인가요?",
+          "prompt": "5??? ??? ?????",
           "answerRanges": [
             {
-              "paragraphId": "p3",
-              "start": 20,
-              "end": 22
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 16
             }
           ],
           "scoring": {

@@ -32,24 +32,646 @@
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        "쬐그만 것이\n노랗게 노랗게\n전력을 다해 샛노랗게 피어 있다",
-        "아무 곳도 넘보지 않는다\n다만 혼자\n주어진 한계 그 안에서 아슬아슬\n한 치의 틈도 없이 끝까지",
-        "바위 새를 비집거나 잡초 속이거나\n씨 뿌려진 그 자리가 바로 내 자리\n터를 잡고",
-        "물을 길어 올리는 실뿌리\n어둠을 힘껏 밀어내는 떡잎\n그리고 그것들이 한데 어울려\n열심히 열심히 한 댓새",
-        "세상에 그밖에는 할 일이 없어서\n아주 노랗게 노랗게만 피는 꽃\n피어선 질 수밖에 없는 꽃",
-        "쬐그만 것이지만 그 크기는\n어떤 자로서도 잴 수 없다\n\n아 민들레!\n\n그래 봤자\n혼자 가는 자의 헛된 꿈\n하지만 헛되어도 좋은 꿈 아니냐\n한 댓새를 짐짓 영원인 양하고\n보라 저기 민들레는 피어 있다"
+        {
+          "id": "p1",
+          "text": "쬐그만 것이\n노랗게 노랗게\n전력을 다해 샛노랗게 피어 있다"
+        },
+        {
+          "id": "p2",
+          "text": "아무 곳도 넘보지 않는다\n다만 혼자\n주어진 한계 그 안에서 아슬아슬\n한 치의 틈도 없이 끝까지"
+        },
+        {
+          "id": "p3",
+          "text": "바위 새를 비집거나 잡초 속이거나\n씨 뿌려진 그 자리가 바로 내 자리\n터를 잡고"
+        },
+        {
+          "id": "p4",
+          "text": "물을 길어 올리는 실뿌리\n어둠을 힘껏 밀어내는 떡잎\n그리고 그것들이 한데 어울려\n열심히 열심히 한 댓새"
+        },
+        {
+          "id": "p5",
+          "text": "세상에 그밖에는 할 일이 없어서\n아주 노랗게 노랗게만 피는 꽃\n피어선 질 수밖에 없는 꽃"
+        },
+        {
+          "id": "p6",
+          "text": "쬐그만 것이지만 그 크기는\n어떤 자로서도 잴 수 없다\n\n아 민들레!\n\n그래 봤자\n혼자 가는 자의 헛된 꿈\n하지만 헛되어도 좋은 꿈 아니냐\n한 댓새를 짐짓 영원인 양하고\n보라 저기 민들레는 피어 있다"
+        }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 32
+              }
+            ]
+          },
+          "question": {
+            "prompt": "첫 연은 민들레의 어떤 모습을 가장 강하게 드러내나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "쬐그만 몸으로 끝까지 노랗게 피어 있는 모습"
+              },
+              {
+                "id": "B",
+                "text": "키가 크고 화려하게 군집을 이루는 모습"
+              },
+              {
+                "id": "C",
+                "text": "흰 꽃잎이 바람에 길게 흔들리는 모습"
+              },
+              {
+                "id": "D",
+                "text": "그늘진 곳에서 조용히 숨어 있는 모습"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 32
+              }
+            ]
+          },
+          "question": {
+            "prompt": " '전력을 다해'라는 표현이 보여 주는 태도는 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자기 몫을 다해 끝까지 피우는 태도"
+              },
+              {
+                "id": "B",
+                "text": "피다 말고 쉽게 물러서는 태도"
+              },
+              {
+                "id": "C",
+                "text": "남의 자리를 차지하려는 태도"
+              },
+              {
+                "id": "D",
+                "text": "아무 의미 없이 대충 버티는 태도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 52
+              }
+            ]
+          },
+          "question": {
+            "prompt": "민들레는 무엇을 넘보지 않는다고 했나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아무 곳도"
+              },
+              {
+                "id": "B",
+                "text": "바위 사이의 자리만"
+              },
+              {
+                "id": "C",
+                "text": "잡초 속의 자리만"
+              },
+              {
+                "id": "D",
+                "text": "씨 뿌려진 자리만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 52
+              }
+            ]
+          },
+          "question": {
+            "prompt": " '주어진 한계 그 안에서 아슬아슬 끝까지'는 무엇을 뜻하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주어진 조건 안에서 끝까지 버티며 피어나는 것"
+              },
+              {
+                "id": "B",
+                "text": "한계를 넘어 더 넓은 자리를 빼앗는 것"
+              },
+              {
+                "id": "C",
+                "text": "한 자리에 오래 머물지 못하고 떠도는 것"
+              },
+              {
+                "id": "D",
+                "text": "피는 순간부터 바로 지는 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 44
+              }
+            ]
+          },
+          "question": {
+            "prompt": "민들레의 자리는 어디라고 제시되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "바위 사이, 잡초 속, 씨 뿌려진 그 자리"
+              },
+              {
+                "id": "B",
+                "text": "사람이 가꾸는 화단 한가운데"
+              },
+              {
+                "id": "C",
+                "text": "높은 나무 위의 가지 끝"
+              },
+              {
+                "id": "D",
+                "text": "물가의 깊은 그늘"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 44
+              }
+            ]
+          },
+          "question": {
+            "prompt": " '바로 내 자리'라는 표현이 강조하는 뜻은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "주어진 곳에 뿌리내려 자기 몫을 차지하는 것"
+              },
+              {
+                "id": "B",
+                "text": "자리를 잃고 끊임없이 옮겨 다니는 것"
+              },
+              {
+                "id": "C",
+                "text": "남의 자리를 빌려 잠시 머무는 것"
+              },
+              {
+                "id": "D",
+                "text": "아무 자리가 없어 방황하는 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 57
+              }
+            ]
+          },
+          "question": {
+            "prompt": "실뿌리와 떡잎은 각각 어떤 일을 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "물을 길어 올리고 어둠을 밀어낸다"
+              },
+              {
+                "id": "B",
+                "text": "씨앗을 멀리 날리고 꽃향기를 퍼뜨린다"
+              },
+              {
+                "id": "C",
+                "text": "줄기를 자르고 잎을 떨어뜨린다"
+              },
+              {
+                "id": "D",
+                "text": "비를 모으고 벌을 부른다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 57
+              }
+            ]
+          },
+          "question": {
+            "prompt": " '한 댓새'라는 말이 드러내는 시간감은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "아주 짧은 동안 쉼 없이 힘쓰는 시간"
+              },
+              {
+                "id": "B",
+                "text": "오래도록 멈춰 서 있는 시간"
+              },
+              {
+                "id": "C",
+                "text": "계절이 바뀔 때까지 기다리는 시간"
+              },
+              {
+                "id": "D",
+                "text": "씨앗이 완전히 마르는 시간"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 49
+              }
+            ]
+          },
+          "question": {
+            "prompt": "다섯째 연에서 민들레가 노랗게 피는 이유로 제시된 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "세상에 그밖에는 할 일이 없기 때문"
+              },
+              {
+                "id": "B",
+                "text": "다른 꽃보다 키가 더 커지기 때문"
+              },
+              {
+                "id": "C",
+                "text": "씨앗을 멀리 퍼뜨리기 위해서"
+              },
+              {
+                "id": "D",
+                "text": "그늘에서 살아남기 위해서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 49
+              }
+            ]
+          },
+          "question": {
+            "prompt": " '피어선 질 수밖에 없는 꽃'은 민들레의 무엇을 드러내나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "피고 지는 운명을 피할 수 없다는 점"
+              },
+              {
+                "id": "B",
+                "text": "한 번 피면 절대 시들지 않는다는 점"
+              },
+              {
+                "id": "C",
+                "text": "꽃이 아니라 잎이 중심이라는 점"
+              },
+              {
+                "id": "D",
+                "text": "봄이 오기 전에 미리 지는 꽃이라는 점"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 110
+              }
+            ]
+          },
+          "question": {
+            "prompt": " '어떤 자로서도 잴 수 없다'는 말은 무엇을 강조하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "민들레의 가치를 수치로는 다 재지 못한다는 점"
+              },
+              {
+                "id": "B",
+                "text": "민들레의 줄기가 길어서 잴 수 없다는 점"
+              },
+              {
+                "id": "C",
+                "text": "민들레가 아주 무겁다는 점"
+              },
+              {
+                "id": "D",
+                "text": "민들레가 땅속에만 숨어 있다는 점"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 110
+              }
+            ]
+          },
+          "question": {
+            "prompt": "마지막 연에서 '헛되어도 좋은 꿈'이 가리키는 태도는 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "짧아도 끝까지 피어 보려는 태도"
+              },
+              {
+                "id": "B",
+                "text": "실패가 두려워 아무것도 하지 않는 태도"
+              },
+              {
+                "id": "C",
+                "text": "남보다 더 높이 올라가려는 욕심"
+              },
+              {
+                "id": "D",
+                "text": "한 번 넘어진 뒤 다시 피하지 않는 태도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {
+          "id": "c1",
+          "text": "작고 노란 민들레는 가진 힘을 모두 다해 제 자리에서 샛노랗게 피어나고 있다."
+        },
+        {
+          "id": "c2",
+          "text": "그 꽃은 다른 곳을 넘보지 않고 주어진 한계 안에서 끝까지 자신을 밀어 올린다."
+        },
+        {
+          "id": "c3",
+          "text": "바위틈이든 잡초 속이든 씨앗이 떨어진 바로 그 자리에서 민들레는 자신의 터를 잡는다."
+        },
+        {
+          "id": "c4",
+          "text": "실뿌리와 떡잎은 며칠 동안 어둠을 밀어내며 한데 힘을 모아 꽃을 준비한다."
+        },
+        {
+          "id": "c5",
+          "text": "민들레는 결국 질 운명을 지녔어도 오직 노랗게 피는 일에 온 힘을 쏟는다."
+        },
+        {
+          "id": "c6",
+          "text": "화자는 그 작디작은 꽃에서 홀로 가는 헛되어도 좋은 꿈과 짧은 시간을 영원처럼 견디는 생명을 본다."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 32
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "2연은 그 장면이나 정서를 어떻게 이어 가는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 52
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 44
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "5연은 앞선 흐름을 어떤 긴장이나 전환으로 끌고 가는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 110
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }

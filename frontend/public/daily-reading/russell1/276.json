@@ -1,1210 +1,1409 @@
-﻿{
-    "contentId":  "dr-r1-276",
-    "contentType":  "DAILY_READING",
-    "version":  1,
-    "status":  "PUBLISHED",
-    "title":  "이진 탐색",
-    "description":  "일일 독해 - 정독·복기·확인",
-    "targetLevel":  "RUSSELL_1",
-    "schoolGradeRange":  {
-                             "min":  7,
-                             "max":  8
-                         },
-    "area":  "READING",
-    "subArea":  "NONFICTION",
-    "competencies":  [
-                         "READING"
-                     ],
-    "tags":  [
-                 "daily"
-             ],
-    "access":  {
-                   "mode":  "FREE"
-               },
-    "seedReward":  {
-                       "seedType":  "WHEAT",
-                       "count":  3,
-                       "multiplier":  1
-                   },
-    "timeLimitSec":  480,
-    "assets":  {
-
-               },
-    "payload":  {
-                    "passage":  {
-                                    "format":  "TEXT",
-                                    "paragraphs":  [
-                                                       "이진 탐색은 정렬된 자료에서 원하는 값을 빠르게 찾는 데이터알고리즘 개념이다. 이름의 이진은 둘로 나눈다는 뜻을 담고 있다. 이진 탐색은 자료를 처음부터 하나씩 다 확인하지 않고, 가운데 값을 기준으로 찾는 범위를 절반씩 줄여 나간다. 그래서 자료가 많아질수록 처음부터 끝까지 차례로 살피는 방법보다 훨씬 효율적일 수 있다. 다만 아무 자료에서나 바로 쓸 수 있는 것은 아니고, 값들이 순서대로 정렬되어 있어야 한다.",
-                                                       "예를 들어 1부터 100까지 번호가 적힌 카드에서 73을 찾는다고 해 보자. 가운데에 가까운 50을 먼저 보고, 찾는 값이 50보다 크면 1부터 50까지는 전부 제외한다. 그다음 남은 51부터 100까지에서 다시 가운데 값을 보고, 같은 방식으로 범위를 줄인다. 이렇게 하면 한 번 확인할 때마다 찾을 필요가 없는 절반을 한꺼번에 지울 수 있다. 이것이 이진 탐색이 빠른 가장 큰 이유이다.",
-                                                       "이진 탐색이 성립하려면 자료가 정렬되어 있어야 한다. 카드가 뒤섞여 있다면 가운데 값을 보아도 왼쪽과 오른쪽 중 어느 쪽을 버려야 할지 알 수 없기 때문이다. 그래서 이진 탐색은 정렬과 함께 자주 설명된다. 먼저 자료를 순서대로 정리해 두면, 이후에는 원하는 값을 반복해서 더 빠르게 찾을 수 있다. 이처럼 알고리즘은 한 단계의 절차만 보는 것이 아니라, 앞단계 조건과 함께 이해해야 할 때가 많다.",
-                                                       "이진 탐색은 사전에서 단어를 찾는 경험과도 비슷하다. 사전을 처음부터 한 장씩 읽지 않고 가운데쯤 펼친 뒤 찾는 단어가 앞쪽인지 뒤쪽인지 판단하여 범위를 줄여 나간다. 전화번호부나 책의 색인도 비슷한 원리로 사용할 수 있다. 이처럼 이진 탐색은 컴퓨터 속 숫자 자료만이 아니라, 정렬된 정보를 빠르게 찾는 여러 상황과 연결된다. 알고리즘이 생활 속 사고 방식과 이어질 수 있음을 보여 주는 좋은 예이기도 하다.",
-                                                       "결국 이진 탐색은 자료의 순서를 활용해 탐색 범위를 빠르게 줄이는 알고리즘이다. 절반씩 줄여 간다는 원리를 이해하면 왜 이 방법이 효율적인지, 또 왜 정렬 조건이 꼭 필요한지 분명하게 볼 수 있다. 그래서 데이터알고리즘에서는 정답만 찾는 것이 아니라, 어떤 구조의 자료에서 어떤 탐색 방법이 알맞은지도 함께 생각하게 한다. 이진 탐색은 그 대표적인 예이다."
-                                                   ]
-                                },
-                    "intensive":  {
-                                      "timeline":  [
-                                                       {
-                                                           "stepId":  "s1",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  0,
-                                                                                                "end":  42
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이진 탐색은 어떤 자료에서 쓰이나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "정렬된 자료"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "뒤섞인 자료"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "그림 자료"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "소리 자료"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s2",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  44,
-                                                                                                "end":  68
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이름의 이진은 무엇을 뜻하나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "둘로 나눈다는 뜻"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "같이 더한다는 뜻"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "빠르게 움직인다는 뜻"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "거꾸로 찾는다는 뜻"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s3",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  70,
-                                                                                                "end":  130
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이진 탐색은 어떻게 자료를 찾나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "범위를 절반씩 줄인다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "처음부터 끝까지 본다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "한 번에 모두 확인한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "아무 순서로 본다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s4",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  132,
-                                                                                                "end":  180
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "자료가 많아질수록 이 방법은 어떤가요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "더 효율적일 수 있다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "더 느려진다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "쓸 수 없다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "항상 같다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s5",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  182,
-                                                                                                "end":  232
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이진 탐색을 쓰려면 자료가 어떻게 되어야 하나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "순서대로 정렬되어야 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "모두 같은 값이어야 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "아무렇게나 놓여야 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "숫자만 있어야 한다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s6",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  0,
-                                                                                                "end":  232
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "예시에서 먼저 찾는 값은 무엇인가요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "73"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "50"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "100"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "1"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s7",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  0,
-                                                                                                "end":  41
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "50보다 크면 어떤 범위가 제외되나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "1부터 50까지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "51부터 100까지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "1부터 100까지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "50만 남는다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s8",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  43,
-                                                                                                "end":  94
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "그다음에는 무엇을 하나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "남은 범위의 가운데를 다시 본다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "처음 숫자로 돌아간다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "종이를 접는다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "카드를 섞는다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s9",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  96,
-                                                                                                "end":  145
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이 방법은 한 번 볼 때마다 무엇을 하나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "절반을 지운다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "모두 다시 본다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "정답을 바꾼다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "순서를 뒤집는다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s10",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  147,
-                                                                                                "end":  192
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이진 탐색이 빠른 가장 큰 이유는 무엇인가요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "절반씩 지울 수 있기 때문이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "숫자가 적기 때문이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "종이가 크기 때문이다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "기억력이 좋아지기 때문이다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s11",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  194,
-                                                                                                "end":  217
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이진 탐색이 성립하려면 어떤 조건이 필요한가요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "자료가 정렬되어 있어야 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "자료가 섞여 있어야 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "값이 모두 같아야 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "종이에 써 있지 않아야 한다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s12",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  0,
-                                                                                                "end":  217
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "자료가 뒤섞여 있으면 무엇을 알기 어렵나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "어느 쪽을 버릴지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "숫자를 읽는 법"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "카드의 색깔"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "종이의 크기"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s13",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  0,
-                                                                                                "end":  28
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이진 탐색은 무엇과 함께 자주 설명되나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "정렬"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "삭제"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "복사"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "생략"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s14",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  30,
-                                                                                                "end":  87
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "자료를 순서대로 정리하면 무엇이 가능해지나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "더 빠르게 찾을 수 있다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "더 많이 섞을 수 있다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "모두 지워야 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "정답이 사라진다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s15",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  89,
-                                                                                                "end":  114
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "알고리즘은 무엇과 함께 이해해야 하나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "앞단계 조건"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "색깔 변화"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "글씨 모양"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "소리 크기"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s16",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  116,
-                                                                                                "end":  166
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이진 탐색은 무엇과 비슷하나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "사전에서 단어를 찾는 경험"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "그림을 그리는 경험"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "노래를 부르는 경험"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "운동을 하는 경험"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s17",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  168,
-                                                                                                "end":  222
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "사전에서는 처음부터 어떻게 찾지 않나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "한 장씩 다 읽지 않는다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "맨 끝부터만 읽는다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "모든 페이지를 외운다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "글자를 지운다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s18",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  0,
-                                                                                                "end":  222
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "사전에서는 무엇을 판단하며 범위를 줄이나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "앞쪽인지 뒤쪽인지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "크기와 색깔"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "무게와 속도"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "소리와 맛"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s19",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  0,
-                                                                                                "end":  28
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "전화번호부나 책의 색인은 어떤 원리로 보이나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "비슷한 원리"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "전혀 다른 원리"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "무작위 원리"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "반대로 뒤집는 원리"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s20",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  30,
-                                                                                                "end":  92
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이진 탐색은 어떤 상황과 연결되나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "정렬된 정보를 빠르게 찾는 여러 상황"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "아무 정보나 뒤섞는 상황"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "그림을 그리는 상황"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "소리를 키우는 상황"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s21",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  94,
-                                                                                                "end":  124
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이진 탐색은 무엇을 활용하나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "자료의 순서"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "자료의 색깔"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "자료의 냄새"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "자료의 무게"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s22",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  126,
-                                                                                                "end":  182
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "절반씩 줄여 간다는 원리를 이해하면 무엇이 보이나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "효율성과 정렬 조건"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "색의 변화"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "글자의 크기"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "소리의 높이"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s23",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  184,
-                                                                                                "end":  228
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "데이터알고리즘에서는 무엇까지 함께 생각하나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "자료의 구조와 탐색 방법"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "종이의 두께와 색"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "숫자의 모양과 글씨"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "소리의 크기와 방향"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s24",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  0,
-                                                                                                "end":  228
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "정답만 찾는 데서 더 나아가 무엇을 보나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "어떤 구조에 어떤 방법이 알맞은지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "정답만 빠르게 외우는지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "모두 같은 방법인지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "아무 방법이나 같은지"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s25",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "paragraphId":  "p5",
-                                                                                                "start":  0,
-                                                                                                "end":  43
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "prompt":  "이진 탐색은 어떤 예로 제시되나요?",
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "대표적인 예"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "특별한 실패 예"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "거의 쓰지 않는 예"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "우연한 예"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "scoring":  {
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40,
-                                                                                            "eliminateWrongChoice":  true
-                                                                                        }
-                                                                        }
-                                                       }
-                                                   ]
-                                  },
-                    "recall":  {
-                                   "cards":  [
-                                                 {
-                                                     "id":  "c1",
-                                                     "text":  "이진 탐색은 정렬된 자료에서 쓴다"
-                                                 },
-                                                 {
-                                                     "id":  "c2",
-                                                     "text":  "범위를 절반씩 줄여 나간다"
-                                                 },
-                                                 {
-                                                     "id":  "c3",
-                                                     "text":  "정렬이 필요한 이유를 설명한다"
-                                                 },
-                                                 {
-                                                     "id":  "c4",
-                                                     "text":  "사전 찾기와 비슷한 원리다"
-                                                 },
-                                                 {
-                                                     "id":  "c5",
-                                                     "text":  "생활 속 여러 상황과 연결된다"
-                                                 },
-                                                 {
-                                                     "id":  "c6",
-                                                     "text":  "구조와 조건까지 함께 살핀다"
-                                                 }
-                                             ],
-                                   "correctOrder":  [
-                                                        "c1",
-                                                        "c2",
-                                                        "c3",
-                                                        "c4",
-                                                        "c5",
-                                                        "c6"
-                                                    ],
-                                   "seedPenalty":  1
-                               },
-                    "confirm":  {
-                                    "questions":  [
-                                                      {
-                                                          "id":  "q1",
-   "prompt":  "정렬은 무슨 뜻인가요?",
-                                                          "answerRanges":  [
-                                                                               {
-                                                                                   "paragraphId":  "p1",
-                                                                                   "start":  7,
-                                                                                   "end":  8
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p1",
-                                                                                   "start":  221,
-                                                                                   "end":  222
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p3",
-                                                                                   "start":  17,
-                                                                                   "end":  18
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p3",
-                                                                                   "start":  100,
-                                                                                   "end":  101
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p4",
-                                                                                   "start":  156,
-                                                                                   "end":  157
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p5",
-                                                                                   "start":  84,
-                                                                                   "end":  85
-                                                                               }
-                                                                           ],
-                                                          "scoring":  {
-                                                                          "correctDeltaSec":  30,
-                                                                          "wrongDeltaSec":  -45
-                                                                      },
-                                                          "revealOnWrong":  true,
-   "answerMatchMode":  "ANY"
-                                                      },
-                                                      {
-                                                          "id":  "q2",
-   "prompt":  "절반은 무슨 뜻인가요?",
-                                                          "answerRanges":  [
-                                                                               {
-                                                                                   "paragraphId":  "p1",
-                                                                                   "start":  120,
-                                                                                   "end":  121
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p2",
-                                                                                   "start":  176,
-                                                                                   "end":  177
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p5",
-                                                                                   "start":  45,
-                                                                                   "end":  46
-                                                                               }
-                                                                           ],
-                                                          "scoring":  {
-                                                                          "correctDeltaSec":  30,
-                                                                          "wrongDeltaSec":  -45
-                                                                      },
-                                                          "revealOnWrong":  true,
-   "answerMatchMode":  "ANY"
-                                                      },
-                                                      {
-                                                          "id":  "q3",
-   "prompt":  "효율은 무슨 뜻인가요?",
-                                                          "answerRanges":  [
-                                                                               {
-                                                                                   "paragraphId":  "p1",
-                                                                                   "start":  171,
-                                                                                   "end":  172
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p5",
-                                                                                   "start":  73,
-                                                                                   "end":  74
-                                                                               }
-                                                                           ],
-                                                          "scoring":  {
-                                                                          "correctDeltaSec":  30,
-                                                                          "wrongDeltaSec":  -45
-                                                                      },
-                                                          "revealOnWrong":  true,
-   "answerMatchMode":  "ANY"
-                                                      },
-                                                      {
-                                                          "id":  "q4",
-   "prompt":  "범위는 무슨 뜻인가요?",
-                                                          "answerRanges":  [
-                                                                               {
-                                                                                   "paragraphId":  "p1",
-                                                                                   "start":  116,
-                                                                                   "end":  117
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p2",
-                                                                                   "start":  138,
-                                                                                   "end":  139
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p4",
-                                                                                   "start":  82,
-                                                                                   "end":  83
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p5",
-                                                                                   "start":  25,
-                                                                                   "end":  26
-                                                                               }
-                                                                           ],
-                                                          "scoring":  {
-                                                                          "correctDeltaSec":  30,
-                                                                          "wrongDeltaSec":  -45
-                                                                      },
-                                                          "revealOnWrong":  true,
-   "answerMatchMode":  "ANY"
-                                                      },
-                                                      {
-                                                          "id":  "q5",
-   "prompt":  "원리는 무슨 뜻인가요?",
-                                                          "answerRanges":  [
-                                                                               {
-                                                                                   "paragraphId":  "p4",
-                                                                                   "start":  112,
-                                                                                   "end":  113
-                                                                               },
-                                                                               {
-                                                                                   "paragraphId":  "p5",
-                                                                                   "start":  56,
-                                                                                   "end":  57
-                                                                               }
-                                                                           ],
-                                                          "scoring":  {
-                                                                          "correctDeltaSec":  30,
-                                                                          "wrongDeltaSec":  -45
-                                                                      },
-                                                          "revealOnWrong":  true,
-   "answerMatchMode":  "ANY"
-                                                      }
-                                                  ]
-                                }
-                }
+{
+  "contentId": "dr-r1-276",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "이진 탐색",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "RUSSELL_1",
+  "schoolGradeRange": {
+    "min": 7,
+    "max": 8
+  },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": [
+    "READING"
+  ],
+  "tags": [
+    "daily"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 480,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "이진 탐색은 정렬된 자료에서 원하는 값을 빠르게 찾는 데이터알고리즘 개념이다. 이름의 이진은 둘로 나눈다는 뜻을 담고 있다. 이진 탐색은 자료를 처음부터 하나씩 다 확인하지 않고, 가운데 값을 기준으로 찾는 범위를 절반씩 줄여 나간다. 그래서 자료가 많아질수록 처음부터 끝까지 차례로 살피는 방법보다 훨씬 효율적일 수 있다. 다만 아무 자료에서나 바로 쓸 수 있는 것은 아니고, 값들이 순서대로 정렬되어 있어야 한다."
+        },
+        {
+          "id": "p2",
+          "text": "예를 들어 1부터 100까지 번호가 적힌 카드에서 73을 찾는다고 해 보자. 가운데에 가까운 50을 먼저 보고, 찾는 값이 50보다 크면 1부터 50까지는 전부 제외한다. 그다음 남은 51부터 100까지에서 다시 가운데 값을 보고, 같은 방식으로 범위를 줄인다. 이렇게 하면 한 번 확인할 때마다 찾을 필요가 없는 절반을 한꺼번에 지울 수 있다. 이것이 이진 탐색이 빠른 가장 큰 이유이다."
+        },
+        {
+          "id": "p3",
+          "text": "이진 탐색이 성립하려면 자료가 정렬되어 있어야 한다. 카드가 뒤섞여 있다면 가운데 값을 보아도 왼쪽과 오른쪽 중 어느 쪽을 버려야 할지 알 수 없기 때문이다. 그래서 이진 탐색은 정렬과 함께 자주 설명된다. 먼저 자료를 순서대로 정리해 두면, 이후에는 원하는 값을 반복해서 더 빠르게 찾을 수 있다. 이처럼 알고리즘은 한 단계의 절차만 보는 것이 아니라, 앞단계 조건과 함께 이해해야 할 때가 많다."
+        },
+        {
+          "id": "p4",
+          "text": "이진 탐색은 사전에서 단어를 찾는 경험과도 비슷하다. 사전을 처음부터 한 장씩 읽지 않고 가운데쯤 펼친 뒤 찾는 단어가 앞쪽인지 뒤쪽인지 판단하여 범위를 줄여 나간다. 전화번호부나 책의 색인도 비슷한 원리로 사용할 수 있다. 이처럼 이진 탐색은 컴퓨터 속 숫자 자료만이 아니라, 정렬된 정보를 빠르게 찾는 여러 상황과 연결된다. 알고리즘이 생활 속 사고 방식과 이어질 수 있음을 보여 주는 좋은 예이기도 하다."
+        },
+        {
+          "id": "p5",
+          "text": "결국 이진 탐색은 자료의 순서를 활용해 탐색 범위를 빠르게 줄이는 알고리즘이다. 절반씩 줄여 간다는 원리를 이해하면 왜 이 방법이 효율적인지, 또 왜 정렬 조건이 꼭 필요한지 분명하게 볼 수 있다. 그래서 데이터알고리즘에서는 정답만 찾는 것이 아니라, 어떤 구조의 자료에서 어떤 탐색 방법이 알맞은지도 함께 생각하게 한다. 이진 탐색은 그 대표적인 예이다."
+        }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 42
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색은 어떤 자료에서 쓰이나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정렬된 자료"
+              },
+              {
+                "id": "B",
+                "text": "뒤섞인 자료"
+              },
+              {
+                "id": "C",
+                "text": "그림 자료"
+              },
+              {
+                "id": "D",
+                "text": "소리 자료"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 44,
+                "end": 68
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이름의 이진은 무엇을 뜻하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "둘로 나눈다는 뜻"
+              },
+              {
+                "id": "B",
+                "text": "같이 더한다는 뜻"
+              },
+              {
+                "id": "C",
+                "text": "빠르게 움직인다는 뜻"
+              },
+              {
+                "id": "D",
+                "text": "거꾸로 찾는다는 뜻"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 70,
+                "end": 130
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색은 어떻게 자료를 찾나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "범위를 절반씩 줄인다"
+              },
+              {
+                "id": "B",
+                "text": "처음부터 끝까지 본다"
+              },
+              {
+                "id": "C",
+                "text": "한 번에 모두 확인한다"
+              },
+              {
+                "id": "D",
+                "text": "아무 순서로 본다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 132,
+                "end": 180
+              }
+            ]
+          },
+          "question": {
+            "prompt": "자료가 많아질수록 이 방법은 어떤가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "더 효율적일 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "더 느려진다"
+              },
+              {
+                "id": "C",
+                "text": "쓸 수 없다"
+              },
+              {
+                "id": "D",
+                "text": "항상 같다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 182,
+                "end": 232
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색을 쓰려면 자료가 어떻게 되어야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "순서대로 정렬되어야 한다"
+              },
+              {
+                "id": "B",
+                "text": "모두 같은 값이어야 한다"
+              },
+              {
+                "id": "C",
+                "text": "아무렇게나 놓여야 한다"
+              },
+              {
+                "id": "D",
+                "text": "숫자만 있어야 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 232
+              }
+            ]
+          },
+          "question": {
+            "prompt": "예시에서 먼저 찾는 값은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "73"
+              },
+              {
+                "id": "B",
+                "text": "50"
+              },
+              {
+                "id": "C",
+                "text": "100"
+              },
+              {
+                "id": "D",
+                "text": "1"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "50보다 크면 어떤 범위가 제외되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "1부터 50까지"
+              },
+              {
+                "id": "B",
+                "text": "51부터 100까지"
+              },
+              {
+                "id": "C",
+                "text": "1부터 100까지"
+              },
+              {
+                "id": "D",
+                "text": "50만 남는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 43,
+                "end": 94
+              }
+            ]
+          },
+          "question": {
+            "prompt": "그다음에는 무엇을 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "남은 범위의 가운데를 다시 본다"
+              },
+              {
+                "id": "B",
+                "text": "처음 숫자로 돌아간다"
+              },
+              {
+                "id": "C",
+                "text": "종이를 접는다"
+              },
+              {
+                "id": "D",
+                "text": "카드를 섞는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 96,
+                "end": 145
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 방법은 한 번 볼 때마다 무엇을 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "절반을 지운다"
+              },
+              {
+                "id": "B",
+                "text": "모두 다시 본다"
+              },
+              {
+                "id": "C",
+                "text": "정답을 바꾼다"
+              },
+              {
+                "id": "D",
+                "text": "순서를 뒤집는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 147,
+                "end": 192
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색이 빠른 가장 큰 이유는 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "절반씩 지울 수 있기 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "숫자가 적기 때문이다"
+              },
+              {
+                "id": "C",
+                "text": "종이가 크기 때문이다"
+              },
+              {
+                "id": "D",
+                "text": "기억력이 좋아지기 때문이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 194,
+                "end": 217
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색이 성립하려면 어떤 조건이 필요한가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자료가 정렬되어 있어야 한다"
+              },
+              {
+                "id": "B",
+                "text": "자료가 섞여 있어야 한다"
+              },
+              {
+                "id": "C",
+                "text": "값이 모두 같아야 한다"
+              },
+              {
+                "id": "D",
+                "text": "종이에 써 있지 않아야 한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 217
+              }
+            ]
+          },
+          "question": {
+            "prompt": "자료가 뒤섞여 있으면 무엇을 알기 어렵나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어느 쪽을 버릴지"
+              },
+              {
+                "id": "B",
+                "text": "숫자를 읽는 법"
+              },
+              {
+                "id": "C",
+                "text": "카드의 색깔"
+              },
+              {
+                "id": "D",
+                "text": "종이의 크기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 28
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색은 무엇과 함께 자주 설명되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정렬"
+              },
+              {
+                "id": "B",
+                "text": "삭제"
+              },
+              {
+                "id": "C",
+                "text": "복사"
+              },
+              {
+                "id": "D",
+                "text": "생략"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 30,
+                "end": 87
+              }
+            ]
+          },
+          "question": {
+            "prompt": "자료를 순서대로 정리하면 무엇이 가능해지나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "더 빠르게 찾을 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "더 많이 섞을 수 있다"
+              },
+              {
+                "id": "C",
+                "text": "모두 지워야 한다"
+              },
+              {
+                "id": "D",
+                "text": "정답이 사라진다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 89,
+                "end": 114
+              }
+            ]
+          },
+          "question": {
+            "prompt": "알고리즘은 무엇과 함께 이해해야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "앞단계 조건"
+              },
+              {
+                "id": "B",
+                "text": "색깔 변화"
+              },
+              {
+                "id": "C",
+                "text": "글씨 모양"
+              },
+              {
+                "id": "D",
+                "text": "소리 크기"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 116,
+                "end": 166
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색은 무엇과 비슷하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사전에서 단어를 찾는 경험"
+              },
+              {
+                "id": "B",
+                "text": "그림을 그리는 경험"
+              },
+              {
+                "id": "C",
+                "text": "노래를 부르는 경험"
+              },
+              {
+                "id": "D",
+                "text": "운동을 하는 경험"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 168,
+                "end": 222
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사전에서는 처음부터 어떻게 찾지 않나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 장씩 다 읽지 않는다"
+              },
+              {
+                "id": "B",
+                "text": "맨 끝부터만 읽는다"
+              },
+              {
+                "id": "C",
+                "text": "모든 페이지를 외운다"
+              },
+              {
+                "id": "D",
+                "text": "글자를 지운다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 222
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사전에서는 무엇을 판단하며 범위를 줄이나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "앞쪽인지 뒤쪽인지"
+              },
+              {
+                "id": "B",
+                "text": "크기와 색깔"
+              },
+              {
+                "id": "C",
+                "text": "무게와 속도"
+              },
+              {
+                "id": "D",
+                "text": "소리와 맛"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 28
+              }
+            ]
+          },
+          "question": {
+            "prompt": "전화번호부나 책의 색인은 어떤 원리로 보이나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비슷한 원리"
+              },
+              {
+                "id": "B",
+                "text": "전혀 다른 원리"
+              },
+              {
+                "id": "C",
+                "text": "무작위 원리"
+              },
+              {
+                "id": "D",
+                "text": "반대로 뒤집는 원리"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 30,
+                "end": 92
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색은 어떤 상황과 연결되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정렬된 정보를 빠르게 찾는 여러 상황"
+              },
+              {
+                "id": "B",
+                "text": "아무 정보나 뒤섞는 상황"
+              },
+              {
+                "id": "C",
+                "text": "그림을 그리는 상황"
+              },
+              {
+                "id": "D",
+                "text": "소리를 키우는 상황"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 94,
+                "end": 124
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색은 무엇을 활용하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자료의 순서"
+              },
+              {
+                "id": "B",
+                "text": "자료의 색깔"
+              },
+              {
+                "id": "C",
+                "text": "자료의 냄새"
+              },
+              {
+                "id": "D",
+                "text": "자료의 무게"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 126,
+                "end": 182
+              }
+            ]
+          },
+          "question": {
+            "prompt": "절반씩 줄여 간다는 원리를 이해하면 무엇이 보이나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "효율성과 정렬 조건"
+              },
+              {
+                "id": "B",
+                "text": "색의 변화"
+              },
+              {
+                "id": "C",
+                "text": "글자의 크기"
+              },
+              {
+                "id": "D",
+                "text": "소리의 높이"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 184,
+                "end": 228
+              }
+            ]
+          },
+          "question": {
+            "prompt": "데이터알고리즘에서는 무엇까지 함께 생각하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "자료의 구조와 탐색 방법"
+              },
+              {
+                "id": "B",
+                "text": "종이의 두께와 색"
+              },
+              {
+                "id": "C",
+                "text": "숫자의 모양과 글씨"
+              },
+              {
+                "id": "D",
+                "text": "소리의 크기와 방향"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 228
+              }
+            ]
+          },
+          "question": {
+            "prompt": "정답만 찾는 데서 더 나아가 무엇을 보나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어떤 구조에 어떤 방법이 알맞은지"
+              },
+              {
+                "id": "B",
+                "text": "정답만 빠르게 외우는지"
+              },
+              {
+                "id": "C",
+                "text": "모두 같은 방법인지"
+              },
+              {
+                "id": "D",
+                "text": "아무 방법이나 같은지"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s25",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 43
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이진 탐색은 어떤 예로 제시되나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대표적인 예"
+              },
+              {
+                "id": "B",
+                "text": "특별한 실패 예"
+              },
+              {
+                "id": "C",
+                "text": "거의 쓰지 않는 예"
+              },
+              {
+                "id": "D",
+                "text": "우연한 예"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s26",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 233
+              },
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 218
+              },
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 223
+              },
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 229
+              },
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 199
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 글의 중심 내용을 가장 잘 정리한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이진 탐색은 정렬된 자료에서 가운데 값을 기준으로 범위를 절반씩 줄여 가며 빠르게 찾는 방법이다"
+              },
+              {
+                "id": "B",
+                "text": "이진 탐색은 정렬되지 않은 자료에서 처음부터 끝까지 모두 살피는 방법이다"
+              },
+              {
+                "id": "C",
+                "text": "이진 탐색은 값이 적을수록 오히려 더 오래 걸리는 비효율적 방법이다"
+              },
+              {
+                "id": "D",
+                "text": "이진 탐색은 가운데 값을 보지 않고 양 끝만 비교하는 방법이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s27",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 218
+              },
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 223
+              }
+            ]
+          },
+          "question": {
+            "prompt": "글쓴이가 정렬 조건을 강조한 이유로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "정렬되어 있어야 가운데 값을 보고 어느 절반을 버릴지 판단할 수 있기 때문"
+              },
+              {
+                "id": "B",
+                "text": "정렬은 이진 탐색의 속도와 관계없고 보기 좋게 만드는 역할만 하기 때문"
+              },
+              {
+                "id": "C",
+                "text": "정렬되지 않은 자료일수록 절반씩 줄이기가 더 쉬워지기 때문"
+              },
+              {
+                "id": "D",
+                "text": "이진 탐색은 실제로는 값을 찾지 못할 때만 정렬이 필요하기 때문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s28",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 229
+              }
+            ]
+          },
+          "question": {
+            "prompt": "사전과 색인 예시를 든 이유로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이진 탐색 원리가 컴퓨터 자료뿐 아니라 생활 속 정렬된 정보 찾기에도 적용됨을 보여 주기 위해서"
+              },
+              {
+                "id": "B",
+                "text": "사전과 색인은 모두 이진 탐색과 전혀 다른 방식임을 보여 주기 위해서"
+              },
+              {
+                "id": "C",
+                "text": "정렬이 필요 없는 탐색 방법을 설명하기 위해서"
+              },
+              {
+                "id": "D",
+                "text": "사전 읽기가 카드 찾기보다 언제나 느리다는 점을 증명하기 위해서"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s29",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 223
+              },
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 199
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 글이 알고리즘 이해에서 강조하는 태도로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과만 보지 말고, 어떤 자료 구조와 선행 조건에서 어떤 방법이 알맞은지 함께 생각하는 태도"
+              },
+              {
+                "id": "B",
+                "text": "알고리즘은 정답만 빨리 찾으면 되므로 조건은 따질 필요 없다는 태도"
+              },
+              {
+                "id": "C",
+                "text": "생활 예시보다는 컴퓨터 속 숫자 자료만 다루어야 한다는 태도"
+              },
+              {
+                "id": "D",
+                "text": "정렬과 탐색은 서로 무관한 절차라고 보는 태도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "이진 탐색은 정렬된 자료에서 쓴다"
+        },
+        {
+          "id": "c2",
+          "text": "범위를 절반씩 줄여 나간다"
+        },
+        {
+          "id": "c3",
+          "text": "정렬이 필요한 이유를 설명한다"
+        },
+        {
+          "id": "c4",
+          "text": "사전 찾기와 비슷한 원리다"
+        },
+        {
+          "id": "c5",
+          "text": "생활 속 여러 상황과 연결된다"
+        },
+        {
+          "id": "c6",
+          "text": "구조와 조건까지 함께 살핀다"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "정렬은 무슨 뜻인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 7,
+              "end": 8
+            },
+            {
+              "paragraphId": "p1",
+              "start": 221,
+              "end": 222
+            },
+            {
+              "paragraphId": "p3",
+              "start": 17,
+              "end": 18
+            },
+            {
+              "paragraphId": "p3",
+              "start": 100,
+              "end": 101
+            },
+            {
+              "paragraphId": "p4",
+              "start": 156,
+              "end": 157
+            },
+            {
+              "paragraphId": "p5",
+              "start": 84,
+              "end": 85
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "절반은 무슨 뜻인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 120,
+              "end": 121
+            },
+            {
+              "paragraphId": "p2",
+              "start": 176,
+              "end": 177
+            },
+            {
+              "paragraphId": "p5",
+              "start": 45,
+              "end": 46
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "효율은 무슨 뜻인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 171,
+              "end": 172
+            },
+            {
+              "paragraphId": "p5",
+              "start": 73,
+              "end": 74
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "범위는 무슨 뜻인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 116,
+              "end": 117
+            },
+            {
+              "paragraphId": "p2",
+              "start": 138,
+              "end": 139
+            },
+            {
+              "paragraphId": "p4",
+              "start": 82,
+              "end": 83
+            },
+            {
+              "paragraphId": "p5",
+              "start": 25,
+              "end": 26
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "원리는 무슨 뜻인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 112,
+              "end": 113
+            },
+            {
+              "paragraphId": "p5",
+              "start": 56,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
+    }
+  }
 }

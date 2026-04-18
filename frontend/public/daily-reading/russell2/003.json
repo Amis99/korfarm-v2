@@ -533,180 +533,143 @@
     "recall": {
       "cards": [
         {
-          "text": "인은 사람을 사람답게 대하게 만드는 어진 마음이다."
+          "id": "c1",
+          "text": "동양철학에서 인은 어진 마음을, 예는 그 마음이 행동과 관계의 질서로 드러나는 방식을 가리킨다."
         },
         {
-          "text": "예는 그 마음이 일상 속 행동과 관계의 질서로 드러나는 방식이다."
+          "id": "c2",
+          "text": "인만 있고 예가 없으면 상대를 아끼는 뜻이 있어도 말과 행동이 어긋나 마음이 제대로 전해지지 않을 수 있다."
         },
         {
-          "text": "인만 있고 예가 없으면 말투와 순서와 거리 조절이 어긋날 수 있다."
+          "id": "c3",
+          "text": "반대로 예만 있고 인이 없으면 공손한 겉모습만 남고 속은 빈 형식적인 행동이 되기 쉽다."
         },
         {
-          "text": "예만 있고 인이 없으면 형식만 남은 행동이 되기 쉽다."
+          "id": "c4",
+          "text": "그래서 유가 사상은 어진 마음을 먼저 세우되 그것을 인사와 말씨와 차례를 지키는 행동으로 다듬어야 한다고 본다."
         },
         {
-          "text": "예는 인을 길잡이처럼 도와 주는 바깥의 모양이다."
+          "id": "c5",
+          "text": "이때 예는 인을 억누르는 규칙이 아니라 상대를 해치지 않도록 인을 오래 이어 주는 바깥의 형식이 된다."
         },
         {
-          "text": "인과 예를 함께 보면 마음과 행동을 같이 살필 수 있다."
+          "id": "c6",
+          "text": "결국 인과 예를 함께 본다는 것은 마음의 바름과 그 마음이 드러나는 행동을 같이 살피는 태도에 가깝다."
         }
       ],
       "correctOrder": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
       ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
-          "prompt": "인은 무엇을 가리키는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "어진 마음"
-            },
-            {
-              "id": "B",
-              "text": "거리 조절"
-            },
-            {
-              "id": "C",
-              "text": "형식만 남은 행동"
-            },
-            {
-              "id": "D",
-              "text": "바깥의 모양"
-            }
-          ],
-          "answerId": "A",
+          "id": "q1",
+          "prompt": "?? ??? ?? ?? ??? ??? ?? ??? ??? ??????",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 27,
-              "end": 31
-            }
-          ]
-        },
-        {
-          "prompt": "예는 무엇으로 드러나는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "일상 속 행동과 관계의 질서"
-            },
-            {
-              "id": "B",
-              "text": "말투와 순서"
-            },
-            {
-              "id": "C",
-              "text": "형식만 남은 행동"
-            },
-            {
-              "id": "D",
-              "text": "차가운 규칙"
+              "start": 0,
+              "end": 80
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "?? ??? ?? ?? ?? ?? ? ??? ? ??? ???? ?? ? ??? ??????",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 49,
-              "end": 63
-            }
-          ]
-        },
-        {
-          "prompt": "예만 있고 인이 없으면 무엇이 되기 쉬운가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "형식만 남은 행동"
-            },
-            {
-              "id": "B",
-              "text": "어진 마음"
-            },
-            {
-              "id": "C",
-              "text": "길을 잡아 주는 모양"
-            },
-            {
-              "id": "D",
-              "text": "바른 관계"
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 69
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "?? ??? ?? ?? ?? ?? ? ?? ??? ??? ??????",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 41,
-              "end": 49
-            }
-          ]
-        },
-        {
-          "prompt": "유가 사상은 어진 마음을 무엇 속에서 다듬어져야 한다고 보는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "인사하는 태도와 어른을 대하는 말씨와 서로 차례를 지키는 행동"
-            },
-            {
-              "id": "B",
-              "text": "돈과 권력"
-            },
-            {
-              "id": "C",
-              "text": "속도와 경쟁"
-            },
-            {
-              "id": "D",
-              "text": "혼자만의 생각"
+              "start": 0,
+              "end": 58
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "?? ??? ?? ??? ?? ??? ?? ?? ? ?? ???? ??? ????",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 35,
-              "end": 68
-            }
-          ]
-        },
-        {
-          "prompt": "예는 인을 무엇으로 비유하는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "길을 잡아 주는 바깥의 모양"
-            },
-            {
-              "id": "B",
-              "text": "차가운 규칙"
-            },
-            {
-              "id": "C",
-              "text": "형식만 남은 행동"
-            },
-            {
-              "id": "D",
-              "text": "마음을 가두는 벽"
+              "start": 0,
+              "end": 90
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "??? ??? ?? ??? ??? ??? ?? ??? ?? ??? ???? ??????",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 52,
-              "end": 66
+              "start": 0,
+              "end": 78
             }
-          ]
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "??? ??? ?? ?? ?? ??? ??? ?? ?? ???? ??????",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 71
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         }
       ]
     }

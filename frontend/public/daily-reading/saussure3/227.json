@@ -1,19 +1,35 @@
 {
-  "contentId": "dr-s3-227",
+  "contentId": "dr-saussure3-227",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(소쉬르 3) Day 227 비문학",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[문학] 사자와 생쥐 다시 이야기해 보기",
+  "description": "작은 생쥐의 은혜 갚기와 용기 있는 선택",
   "targetLevel": "SAUSSURE_3",
-  "schoolGradeRange": { "min": 5, "max": 5 },
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
-  "timeLimitSec": 480,
+  "schoolGradeRange": {
+    "min": 3,
+    "max": 3
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +37,15 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "우리 몸속에는 약 이백육 개의 뼈가 있어서 몸의 형태를 유지하고 내장 기관을 보호하는 역할을 한다. 머리뼈는 뇌를 단단하게 감싸 보호하고, 갈비뼈는 심장과 허파를 둘러싸서 외부 충격으로부터 지켜 준다. 뼈는 딱딱하게 느껴지지만 실제로는 살아 있는 조직이어서 계속 자라고 변한다. 어린이의 뼈는 어른에 비해 물렁뼈 부분이 많아서 잘 구부러지고 부러져도 빨리 붙는 특징이 있다. 뼈와 뼈가 만나는 곳을 관절이라고 하는데, 관절이 있기 때문에 우리는 팔을 굽히거나 다리를 구부릴 수 있다. 만약 관절이 없다면 우리 몸은 마치 나무 막대처럼 뻣뻣하여 움직일 수 없을 것이다."
+          "text": "우리는 잠든 사자를 깨운 작은 생쥐 이야기를 읽었습니다. 사자는 생쥐가 하찮지만 너그럽게 살려주기로 함. 작은 생명도 소중히 여기는 마음이 참 훌륭합니다."
         },
         {
           "id": "p2",
-          "text": "근육은 뼈에 붙어 있으면서 뼈를 움직이게 하는 힘을 만들어 낸다. 우리가 팔을 구부리면 팔 앞쪽의 이두근이 줄어들면서 팔이 올라가고, 팔을 펴면 뒤쪽의 삼두근이 줄어들면서 팔이 내려간다. 이처럼 근육은 항상 짝을 이루어 서로 반대 방향으로 작용한다. 심장도 근육으로 이루어져 있어서 멈추지 않고 계속 피를 온몸으로 보내 준다. 운동을 꾸준히 하면 근육이 튼튼해지고 뼈도 더 단단해지는데, 이는 운동할 때 뼈에 적당한 자극이 가해져서 뼈를 이루는 성분이 더 많이 쌓이기 때문이다. 그래서 어릴 때부터 적절한 운동을 하고 칼슘이 풍부한 음식을 먹는 것이 건강한 뼈와 근육을 만드는 데 매우 중요하다."
+          "text": "생쥐는 사자가 그물에 걸리자 달려와 정성껏 도왔습니다. 그물을 갉아 사자를 구해준 용기가 빛이 났습니다. 은혜를 갚는 생쥐의 마음이 우리를 감동시켰습니다."
+        },
+        {
+          "id": "p3",
+          "text": "우리는 생쥐가 사자와 친구가 되는 결말을 만들었습니다. 서로 도우며 숲속을 산책하는 장면을 상상해 봄. 다시 이야기하며 우정과 믿음의 소중함을 배웠습니다."
         }
       ]
     },
@@ -33,273 +53,594 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 55 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 30
+              }
+            ]
+          },
           "question": {
-            "prompt": "우리 몸속에 뼈가 하는 역할은 무엇인지 생각해 보세요.",
+            "prompt": "누가 사자를 깨웠나요?",
             "choices": [
-              { "id": "a", "text": "몸의 형태를 유지하고 내장 기관을 보호한다", "correct": true },
-              { "id": "b", "text": "음식을 소화하고 영양분을 흡수한다", "correct": false },
-              { "id": "c", "text": "체온을 조절하고 땀을 배출한다", "correct": false },
-              { "id": "d", "text": "산소를 운반하고 혈액을 만들어 낸다", "correct": false }
+              {
+                "id": "A",
+                "text": "생쥐"
+              },
+              {
+                "id": "B",
+                "text": "토끼"
+              },
+              {
+                "id": "C",
+                "text": "치타"
+              },
+              {
+                "id": "D",
+                "text": "여우"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 56, "end": 112 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 32,
+                "end": 57
+              }
+            ]
+          },
           "question": {
-            "prompt": "머리뼈와 갈비뼈가 각각 보호하는 기관은 무엇인가요?",
+            "prompt": "사자는 생쥐를 어떻게 해주었나요?",
             "choices": [
-              { "id": "a", "text": "머리뼈는 심장, 갈비뼈는 위장을 보호한다", "correct": false },
-              { "id": "b", "text": "머리뼈는 뇌, 갈비뼈는 심장과 허파를 보호한다", "correct": true },
-              { "id": "c", "text": "머리뼈는 눈, 갈비뼈는 간을 보호한다", "correct": false },
-              { "id": "d", "text": "머리뼈는 허파, 갈비뼈는 뇌를 보호한다", "correct": false }
+              {
+                "id": "A",
+                "text": "살려주기로 함"
+              },
+              {
+                "id": "B",
+                "text": "잡아먹음"
+              },
+              {
+                "id": "C",
+                "text": "멀리 던짐"
+              },
+              {
+                "id": "D",
+                "text": "화내며 때림"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 113, "end": 155 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 59,
+                "end": 85
+              }
+            ]
+          },
           "question": {
-            "prompt": "뼈에 대한 설명 중 올바른 내용은 무엇인가요?",
+            "prompt": "어떤 마음이 훌륭하다고 했나요?",
             "choices": [
-              { "id": "a", "text": "한번 만들어지면 절대 변하지 않는 물질이다", "correct": false },
-              { "id": "b", "text": "살아 있는 조직이어서 계속 자라고 변한다", "correct": true },
-              { "id": "c", "text": "나이가 들수록 더 빨리 자란다", "correct": false },
-              { "id": "d", "text": "근육보다 부드럽고 유연한 조직이다", "correct": false }
+              {
+                "id": "A",
+                "text": "소중히 여기는 마음"
+              },
+              {
+                "id": "B",
+                "text": "질투하는 마음"
+              },
+              {
+                "id": "C",
+                "text": "화내는 마음"
+              },
+              {
+                "id": "D",
+                "text": "뺏으려는 마음"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 156, "end": 209 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 30
+              },
+              {
+                "paragraphId": "p1",
+                "start": 32,
+                "end": 57
+              },
+              {
+                "paragraphId": "p1",
+                "start": 59,
+                "end": 85
+              }
+            ]
+          },
           "question": {
-            "prompt": "어린이의 뼈가 어른의 뼈와 다른 점은 무엇인가요?",
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
-              { "id": "a", "text": "물렁뼈가 많아 잘 구부러지고 빨리 붙는다", "correct": true },
-              { "id": "b", "text": "어른보다 훨씬 딱딱하고 무겁다", "correct": false },
-              { "id": "c", "text": "뼈의 개수가 어른보다 적다", "correct": false },
-              { "id": "d", "text": "부러지면 다시는 붙지 않는다", "correct": false }
+              {
+                "id": "A",
+                "text": "사자의 자비와 생명 존중"
+              },
+              {
+                "id": "B",
+                "text": "사자가 배고픈 이유"
+              },
+              {
+                "id": "C",
+                "text": "생쥐가 무서운 공포"
+              },
+              {
+                "id": "D",
+                "text": "이야기가 짧은 아쉬움"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 210, "end": 270 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 29
+              }
+            ]
+          },
           "question": {
-            "prompt": "관절이 있어서 우리 몸이 할 수 있는 일은 무엇인가요?",
+            "prompt": "사자는 무엇에 걸렸나요?",
             "choices": [
-              { "id": "a", "text": "뼈가 더 튼튼하게 자랄 수 있다", "correct": false },
-              { "id": "b", "text": "팔을 굽히거나 다리를 구부릴 수 있다", "correct": true },
-              { "id": "c", "text": "피부가 늘어나고 줄어들 수 있다", "correct": false },
-              { "id": "d", "text": "키가 더 빨리 자랄 수 있다", "correct": false }
+              {
+                "id": "A",
+                "text": "그물"
+              },
+              {
+                "id": "B",
+                "text": "함정"
+              },
+              {
+                "id": "C",
+                "text": "나무줄기"
+              },
+              {
+                "id": "D",
+                "text": "시냇물"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 271, "end": 317 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 31,
+                "end": 57
+              }
+            ]
+          },
           "question": {
-            "prompt": "관절이 없다면 우리 몸은 어떻게 될까요?",
+            "prompt": "생쥐는 그물을 어떻게 했나요?",
             "choices": [
-              { "id": "a", "text": "나무 막대처럼 뻣뻣하여 움직일 수 없게 된다", "correct": true },
-              { "id": "b", "text": "고무줄처럼 너무 유연해서 서 있을 수 없다", "correct": false },
-              { "id": "c", "text": "뼈가 녹아 내려 걸을 수 없다", "correct": false },
-              { "id": "d", "text": "근육이 사라져 힘을 낼 수 없다", "correct": false }
+              {
+                "id": "A",
+                "text": "갉았습니다"
+              },
+              {
+                "id": "B",
+                "text": "가져감"
+              },
+              {
+                "id": "C",
+                "text": "숨김"
+              },
+              {
+                "id": "D",
+                "text": "버림"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 317 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 59,
+                "end": 85
+              }
+            ]
+          },
           "question": {
-            "prompt": "첫째 문단의 중심 내용을 가장 잘 나타낸 것은 무엇인가요?",
+            "prompt": "생쥐의 무엇이 우리를 감동시켰나요?",
             "choices": [
-              { "id": "a", "text": "뼈의 역할과 구조, 관절의 기능에 대한 설명", "correct": true },
-              { "id": "b", "text": "근육이 뼈를 움직이는 원리에 대한 설명", "correct": false },
-              { "id": "c", "text": "운동이 건강에 좋은 이유에 대한 설명", "correct": false },
-              { "id": "d", "text": "어린이와 어른의 키 차이에 대한 설명", "correct": false }
+              {
+                "id": "A",
+                "text": "은혜 갚는 마음"
+              },
+              {
+                "id": "B",
+                "text": "비명 소리"
+              },
+              {
+                "id": "C",
+                "text": "낙서 자국"
+              },
+              {
+                "id": "D",
+                "text": "쓰레기 양"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 36 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 29
+              },
+              {
+                "paragraphId": "p2",
+                "start": 31,
+                "end": 57
+              },
+              {
+                "paragraphId": "p2",
+                "start": 59,
+                "end": 85
+              }
+            ]
+          },
           "question": {
-            "prompt": "근육은 어디에 붙어 있으며 어떤 역할을 하나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
-              { "id": "a", "text": "피부에 붙어 체온을 조절한다", "correct": false },
-              { "id": "b", "text": "뼈에 붙어서 뼈를 움직이는 힘을 만든다", "correct": true },
-              { "id": "c", "text": "혈관에 붙어 혈액을 순환시킨다", "correct": false },
-              { "id": "d", "text": "내장에 붙어 소화를 돕는다", "correct": false }
+              {
+                "id": "A",
+                "text": "생쥐의 보은과 용기"
+              },
+              {
+                "id": "B",
+                "text": "그물이 찢어진 사고"
+              },
+              {
+                "id": "C",
+                "text": "사자가 화난 사연"
+              },
+              {
+                "id": "D",
+                "text": "감동이 없는 일상"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 37, "end": 104 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 29
+              }
+            ]
+          },
           "question": {
-            "prompt": "팔을 구부릴 때와 펼 때 각각 어떤 근육이 작용하나요?",
+            "prompt": "우리는 어떤 결말을 만들었나요?",
             "choices": [
-              { "id": "a", "text": "구부릴 때는 삼두근, 펼 때는 이두근이 줄어든다", "correct": false },
-              { "id": "b", "text": "구부릴 때는 이두근, 펼 때는 삼두근이 줄어든다", "correct": true },
-              { "id": "c", "text": "두 근육이 동시에 줄어들면서 팔이 움직인다", "correct": false },
-              { "id": "d", "text": "하나의 근육만으로 모든 방향을 움직인다", "correct": false }
+              {
+                "id": "A",
+                "text": "친구가 됨"
+              },
+              {
+                "id": "B",
+                "text": "원수가 됨"
+              },
+              {
+                "id": "C",
+                "text": "모른 척 함"
+              },
+              {
+                "id": "D",
+                "text": "멀리 도망감"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 105, "end": 139 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 31,
+                "end": 56
+              }
+            ]
+          },
           "question": {
-            "prompt": "근육이 작용하는 방식의 특징은 무엇인가요?",
+            "prompt": "어디를 산책하는 장면인가요?",
             "choices": [
-              { "id": "a", "text": "항상 짝을 이루어 반대 방향으로 작용한다", "correct": true },
-              { "id": "b", "text": "하나의 근육이 모든 방향을 담당한다", "correct": false },
-              { "id": "c", "text": "근육은 독립적으로 각각 따로 작용한다", "correct": false },
-              { "id": "d", "text": "세 개의 근육이 한 조가 되어 작용한다", "correct": false }
+              {
+                "id": "A",
+                "text": "숲속"
+              },
+              {
+                "id": "B",
+                "text": "도시"
+              },
+              {
+                "id": "C",
+                "text": "학교"
+              },
+              {
+                "id": "D",
+                "text": "방 안"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 140, "end": 182 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 58,
+                "end": 85
+              }
+            ]
+          },
           "question": {
-            "prompt": "심장이 쉬지 않고 하는 일은 무엇인가요?",
+            "prompt": "무엇의 소중함을 배웠나요?",
             "choices": [
-              { "id": "a", "text": "음식을 소화하여 영양분으로 바꾸는 일이다", "correct": false },
-              { "id": "b", "text": "멈추지 않고 계속 피를 온몸으로 보내는 일이다", "correct": true },
-              { "id": "c", "text": "공기를 들이마시고 내보내는 일이다", "correct": false },
-              { "id": "d", "text": "뼈를 자라게 하고 근육을 만드는 일이다", "correct": false }
+              {
+                "id": "A",
+                "text": "우정과 믿음"
+              },
+              {
+                "id": "B",
+                "text": "돈과 힘"
+              },
+              {
+                "id": "C",
+                "text": "잠과 나태"
+              },
+              {
+                "id": "D",
+                "text": "장난과 낙서"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 183, "end": 267 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 29
+              },
+              {
+                "paragraphId": "p3",
+                "start": 31,
+                "end": 56
+              },
+              {
+                "paragraphId": "p3",
+                "start": 58,
+                "end": 85
+              }
+            ]
+          },
           "question": {
-            "prompt": "운동을 하면 뼈가 단단해지는 이유는 무엇인가요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
-              { "id": "a", "text": "운동할 때 뼈에 자극이 가해져 성분이 더 쌓이기 때문이다", "correct": true },
-              { "id": "b", "text": "운동할 때 뼈가 늘어나서 부피가 커지기 때문이다", "correct": false },
-              { "id": "c", "text": "운동을 하면 뼈 안에 물이 차기 때문이다", "correct": false },
-              { "id": "d", "text": "운동할 때 뼈가 부러졌다 다시 붙기 때문이다", "correct": false }
+              {
+                "id": "A",
+                "text": "우정과 새로운 이야기의 즐거움"
+              },
+              {
+                "id": "B",
+                "text": "산책이 지루한 마음"
+              },
+              {
+                "id": "C",
+                "text": "장면이 기억 안 남"
+              },
+              {
+                "id": "D",
+                "text": "우정이 깨진 슬픔"
+              }
             ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 268, "end": 333 }] },
-          "question": {
-            "prompt": "건강한 뼈와 근육을 위해 어떻게 해야 한다고 했나요?",
-            "choices": [
-              { "id": "a", "text": "적절한 운동과 칼슘이 풍부한 음식이 중요하다", "correct": true },
-              { "id": "b", "text": "운동을 하지 말고 충분히 쉬어야 한다", "correct": false },
-              { "id": "c", "text": "달콤한 음식을 많이 먹어야 한다", "correct": false },
-              { "id": "d", "text": "햇빛을 피하고 실내에서만 생활해야 한다", "correct": false }
-            ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 333 }] },
-          "question": {
-            "prompt": "둘째 문단의 중심 내용을 가장 잘 나타낸 것은 무엇인가요?",
-            "choices": [
-              { "id": "a", "text": "뼈의 종류와 관절의 위치에 대한 설명", "correct": false },
-              { "id": "b", "text": "근육의 작용 원리와 운동의 중요성", "correct": true },
-              { "id": "c", "text": "심장 질환의 원인과 예방법", "correct": false },
-              { "id": "d", "text": "어린이 성장에 필요한 수면 시간", "correct": false }
-            ],
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "몸속 약 206개 뼈가 형태를 유지한다" },
-        { "id": "c2", "text": "머리뼈와 갈비뼈가 장기를 보호한다" },
-        { "id": "c3", "text": "뼈는 살아 있는 조직이라 계속 변한다" },
-        { "id": "c4", "text": "관절 덕분에 팔다리를 구부릴 수 있다" },
-        { "id": "c5", "text": "근육이 뼈에 붙어 움직이는 힘을 낸다" },
-        { "id": "c6", "text": "근육은 짝을 이루어 반대로 작용한다" },
-        { "id": "c7", "text": "심장 근육은 쉬지 않고 피를 보낸다" },
-        { "id": "c8", "text": "운동과 칼슘 섭취가 뼈 건강에 중요하다" }
+        {
+          "id": "c1",
+          "text": "사자가 생쥐를 너그럽게 살려줌."
+        },
+        {
+          "id": "c2",
+          "text": "작은 생명도 소중히 여깁시다."
+        },
+        {
+          "id": "c3",
+          "text": "생쥐가 그물에 걸린 사자 구함."
+        },
+        {
+          "id": "c4",
+          "text": "은혜를 갚는 용기 있는 생쥐."
+        },
+        {
+          "id": "c5",
+          "text": "사자와 생쥐는 좋은 친구가 됨."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "우리 몸속에는 약 몇 개의 뼈가 있습니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 8, "end": 21 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "마음이 넓고 관대함은?",
+          "answerText": "너그럽게",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 45,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "머리뼈는 어떤 기관을 보호합니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 56, "end": 78 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "고마움을 잊지 않고 갚음?",
+          "answerText": "은혜를",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 59,
+              "end": 62
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "어린이의 뼈가 가진 특징은 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 166, "end": 209 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q4",
-          "prompt": "뼈와 뼈가 만나는 곳을 무엇이라고 합니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 218, "end": 231 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "팔을 구부릴 때 줄어드는 근육은 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 51, "end": 72 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "심장은 근육으로 이루어져 어떤 일을 합니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 145, "end": 182 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q7",
-          "prompt": "건강한 뼈와 근육을 만들려면 무엇을 해야 합니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 277, "end": 321 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "두려움 없는 씩씩한 마음은?",
+          "answerText": "용기가",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 46,
+              "end": 49
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

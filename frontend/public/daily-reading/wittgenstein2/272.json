@@ -59,15 +59,619 @@
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 202
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 내용으로 가장 적절한 것은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "대규모 서비스는 한 대의 서버에 모든 데이터를 몰아넣으면 저장 용량도 부족해지고, 요청이 몰릴 때 처리 속도도 급격히 떨어진다."
+              },
+              {
+                "id": "B",
+                "text": "샤딩은 이런 문제를 해결하기 위해 데이터를 여러 샤드로 분할해 각각 다른 노드에 저장하는 방식이다."
+              },
+              {
+                "id": "C",
+                "text": "함께 조회되거나 함께 계산되는 데이터가 서로 다른 샤드에 흩어져 있으면, 처리 과정마다 여러 노드가 통신해야 하기 때문이다."
+              },
+              {
+                "id": "D",
+                "text": "샤딩의 또 다른 약점은 장애 허용성이 자동으로 확보되지 않는다는 점이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 202
+              }
+            ]
+          },
+          "question": {
+            "prompt": "다음 중 1문단에 해당하는 내용은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그래서 분산 시스템은 데이터를 여러 기계에 나누어 저장하는 방식을 택한다."
+              },
+              {
+                "id": "B",
+                "text": "사용자의 요청이 들어오면 라우터가 기준 키를 보고 적절한 샤드로 요청을 보낸다."
+              },
+              {
+                "id": "C",
+                "text": "하지만 샤딩은 아무 기준으로나 나누면 오히려 성능 병목을 만들 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "어떤 샤드가 담당하는 데이터가 한 노드에만 있으면 그 노드가 고장 날 때 해당 데이터는 곧바로 사용할 수 없게 된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 188
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 내용으로 가장 적절한 것은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "샤딩은 이런 문제를 해결하기 위해 데이터를 여러 샤드로 분할해 각각 다른 노드에 저장하는 방식이다."
+              },
+              {
+                "id": "B",
+                "text": "하지만 샤딩은 아무 기준으로나 나누면 오히려 성능 병목을 만들 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "어떤 샤드가 담당하는 데이터가 한 노드에만 있으면 그 노드가 고장 날 때 해당 데이터는 곧바로 사용할 수 없게 된다."
+              },
+              {
+                "id": "D",
+                "text": "그러나 복제를 붙이면 성능과 일관성에서 새로운 문제가 생긴다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 188
+              }
+            ]
+          },
+          "question": {
+            "prompt": "다음 중 2문단에 해당하는 내용은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "사용자의 요청이 들어오면 라우터가 기준 키를 보고 적절한 샤드로 요청을 보낸다."
+              },
+              {
+                "id": "B",
+                "text": "함께 조회되거나 함께 계산되는 데이터가 서로 다른 샤드에 흩어져 있으면, 처리 과정마다 여러 노드가 통신해야 하기 때문이다."
+              },
+              {
+                "id": "C",
+                "text": "샤딩의 또 다른 약점은 장애 허용성이 자동으로 확보되지 않는다는 점이다."
+              },
+              {
+                "id": "D",
+                "text": "데이터를 바꿀 때마다 사본에도 같은 변경을 전달해야 하므로 쓰기 비용이 증가하고, 전파가 늦어지면 노드마다 잠시 다른 값을 보여 줄 수 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 219
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 내용으로 가장 적절한 것은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하지만 샤딩은 아무 기준으로나 나누면 오히려 성능 병목을 만들 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "샤딩의 또 다른 약점은 장애 허용성이 자동으로 확보되지 않는다는 점이다."
+              },
+              {
+                "id": "C",
+                "text": "데이터를 바꿀 때마다 사본에도 같은 변경을 전달해야 하므로 쓰기 비용이 증가하고, 전파가 늦어지면 노드마다 잠시 다른 값을 보여 줄 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "결국 분산 저장 설계의 핵심은 데이터를 얼마나 잘게 쪼갤 것인가보다, 어떤 데이터가 함께 움직여야 하는지와 장애가 났을 때 어느 수준의 지연을 받아들일 것인가를 함께 판단하는 데 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 219
+              }
+            ]
+          },
+          "question": {
+            "prompt": "다음 중 3문단에 해당하는 내용은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "함께 조회되거나 함께 계산되는 데이터가 서로 다른 샤드에 흩어져 있으면, 처리 과정마다 여러 노드가 통신해야 하기 때문이다."
+              },
+              {
+                "id": "B",
+                "text": "어떤 샤드가 담당하는 데이터가 한 노드에만 있으면 그 노드가 고장 날 때 해당 데이터는 곧바로 사용할 수 없게 된다."
+              },
+              {
+                "id": "C",
+                "text": "그러나 복제를 붙이면 성능과 일관성에서 새로운 문제가 생긴다."
+              },
+              {
+                "id": "D",
+                "text": "샤딩의 데이터 지역성을 잘 설계하면 불필요한 노드 간 통신을 줄일 수 있고, 복제를 적절히 결합하면 장애에도 서비스를 유지할 수 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 204
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 내용으로 가장 적절한 것은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "샤딩의 또 다른 약점은 장애 허용성이 자동으로 확보되지 않는다는 점이다."
+              },
+              {
+                "id": "B",
+                "text": "그러나 복제를 붙이면 성능과 일관성에서 새로운 문제가 생긴다."
+              },
+              {
+                "id": "C",
+                "text": "샤딩의 데이터 지역성을 잘 설계하면 불필요한 노드 간 통신을 줄일 수 있고, 복제를 적절히 결합하면 장애에도 서비스를 유지할 수 있다."
+              },
+              {
+                "id": "D",
+                "text": "대규모 서비스는 한 대의 서버에 모든 데이터를 몰아넣으면 저장 용량도 부족해지고, 요청이 몰릴 때 처리 속도도 급격히 떨어진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 204
+              }
+            ]
+          },
+          "question": {
+            "prompt": "다음 중 4문단에 해당하는 내용은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어떤 샤드가 담당하는 데이터가 한 노드에만 있으면 그 노드가 고장 날 때 해당 데이터는 곧바로 사용할 수 없게 된다."
+              },
+              {
+                "id": "B",
+                "text": "데이터를 바꿀 때마다 사본에도 같은 변경을 전달해야 하므로 쓰기 비용이 증가하고, 전파가 늦어지면 노드마다 잠시 다른 값을 보여 줄 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "결국 분산 저장 설계의 핵심은 데이터를 얼마나 잘게 쪼갤 것인가보다, 어떤 데이터가 함께 움직여야 하는지와 장애가 났을 때 어느 수준의 지연을 받아들일 것인가를 함께 판단하는 데 있다."
+              },
+              {
+                "id": "D",
+                "text": "그래서 분산 시스템은 데이터를 여러 기계에 나누어 저장하는 방식을 택한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 196
+              }
+            ]
+          },
+          "question": {
+            "prompt": "5문단의 내용으로 가장 적절한 것은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그러나 복제를 붙이면 성능과 일관성에서 새로운 문제가 생긴다."
+              },
+              {
+                "id": "B",
+                "text": "결국 분산 저장 설계의 핵심은 데이터를 얼마나 잘게 쪼갤 것인가보다, 어떤 데이터가 함께 움직여야 하는지와 장애가 났을 때 어느 수준의 지연을 받아들일 것인가를 함께 판단하는 데 있다."
+              },
+              {
+                "id": "C",
+                "text": "그래서 분산 시스템은 데이터를 여러 기계에 나누어 저장하는 방식을 택한다."
+              },
+              {
+                "id": "D",
+                "text": "샤딩은 이런 문제를 해결하기 위해 데이터를 여러 샤드로 분할해 각각 다른 노드에 저장하는 방식이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 196
+              }
+            ]
+          },
+          "question": {
+            "prompt": "다음 중 5문단에 해당하는 내용은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "데이터를 바꿀 때마다 사본에도 같은 변경을 전달해야 하므로 쓰기 비용이 증가하고, 전파가 늦어지면 노드마다 잠시 다른 값을 보여 줄 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "샤딩의 데이터 지역성을 잘 설계하면 불필요한 노드 간 통신을 줄일 수 있고, 복제를 적절히 결합하면 장애에도 서비스를 유지할 수 있다."
+              },
+              {
+                "id": "C",
+                "text": "대규모 서비스는 한 대의 서버에 모든 데이터를 몰아넣으면 저장 용량도 부족해지고, 요청이 몰릴 때 처리 속도도 급격히 떨어진다."
+              },
+              {
+                "id": "D",
+                "text": "사용자의 요청이 들어오면 라우터가 기준 키를 보고 적절한 샤드로 요청을 보낸다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 235
+              }
+            ]
+          },
+          "question": {
+            "prompt": "6문단의 내용으로 가장 적절한 것은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결국 분산 저장 설계의 핵심은 데이터를 얼마나 잘게 쪼갤 것인가보다, 어떤 데이터가 함께 움직여야 하는지와 장애가 났을 때 어느 수준의 지연을 받아들일 것인가를 함께 판단하는 데 있다."
+              },
+              {
+                "id": "B",
+                "text": "대규모 서비스는 한 대의 서버에 모든 데이터를 몰아넣으면 저장 용량도 부족해지고, 요청이 몰릴 때 처리 속도도 급격히 떨어진다."
+              },
+              {
+                "id": "C",
+                "text": "사용자의 요청이 들어오면 라우터가 기준 키를 보고 적절한 샤드로 요청을 보낸다."
+              },
+              {
+                "id": "D",
+                "text": "하지만 샤딩은 아무 기준으로나 나누면 오히려 성능 병목을 만들 수 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 235
+              }
+            ]
+          },
+          "question": {
+            "prompt": "다음 중 6문단에 해당하는 내용은",
+            "choices": [
+              {
+                "id": "A",
+                "text": "샤딩의 데이터 지역성을 잘 설계하면 불필요한 노드 간 통신을 줄일 수 있고, 복제를 적절히 결합하면 장애에도 서비스를 유지할 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "그래서 분산 시스템은 데이터를 여러 기계에 나누어 저장하는 방식을 택한다."
+              },
+              {
+                "id": "C",
+                "text": "샤딩은 이런 문제를 해결하기 위해 데이터를 여러 샤드로 분할해 각각 다른 노드에 저장하는 방식이다."
+              },
+              {
+                "id": "D",
+                "text": "함께 조회되거나 함께 계산되는 데이터가 서로 다른 샤드에 흩어져 있으면, 처리 과정마다 여러 노드가 통신해야 하기 때문이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {
+          "id": "c1",
+          "text": "대규모 서비스는 데이터를 여러 기계에 나누어 저장하되, 요청이 어느 기계로 가야 하는지를 일관되게 결정해야 성능과 안정성을 함께 확보할 수 있다."
+        },
+        {
+          "id": "c2",
+          "text": "샤딩은 데이터를 여러 샤드로 나눠 다른 노드에 저장하고 라우터가 기준 키를 보고 적절한 샤드로 요청을 보내 저장 공간과 부하를 분산시키는 방식이다."
+        },
+        {
+          "id": "c3",
+          "text": "하지만 자주 함께 조회되는 데이터가 서로 다른 샤드에 흩어지면 노드 간 통신이 병목이 되므로, 데이터 지역성을 고려한 분할 기준이 중요하다."
+        },
+        {
+          "id": "c4",
+          "text": "또 특정 샤드가 한 노드에만 있으면 장애 때 바로 사용할 수 없게 되므로, 같은 내용을 다른 노드에도 두는 복제가 함께 필요해진다."
+        },
+        {
+          "id": "c5",
+          "text": "그러나 복제는 쓰기 비용을 늘리고 사본 간 값이 잠시 어긋날 수 있게 해, 샤딩과 결합할수록 성능과 장애 허용성, 일관성 사이의 절충이 요구된다."
+        },
+        {
+          "id": "c6",
+          "text": "결국 분산 저장 설계의 핵심은 데이터를 얼마나 잘게 나누는가보다 어떤 데이터가 함께 움직여야 하고 어떤 지연을 감수할 것인가를 함께 판단하는 데 있다."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "다음 중 1문단에 해당하는 내용은",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 202
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "다음 중 2문단에 해당하는 내용은",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 188
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "다음 중 3문단에 해당하는 내용은",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 219
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "다음 중 4문단에 해당하는 내용은",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 204
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "다음 중 5문단에 해당하는 내용은",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 196
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "다음 중 6문단에 해당하는 내용은",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 235
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }

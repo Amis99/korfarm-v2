@@ -610,7 +610,7 @@
             ]
           },
           "question": {
-            "prompt": "민호의 말은 '지금 정말 괜찮아?'라는 질문을 어떻게 받아들이고 있나요?",
+            "prompt": "민호는 \"지금 정말 괜찮아\"라는 질문을 어떻게 받아들이고 있나요?",
             "choices": [
               {
                 "id": "A",
@@ -961,23 +961,23 @@
             ]
           },
           "question": {
-            "prompt": "조언, 사실 확인, 마음 살핌을 구분하라는 말은 무엇을 먼저 파악하라는 뜻인가요?",
+            "prompt": "질문의 의도를 파악할 때 먼저 살펴야 할 것으로 알맞은 것은?",
             "choices": [
               {
                 "id": "A",
-                "text": "질문하는 사람의 의도"
+                "text": "조언인지 사실 확인인지 마음을 살피는 말인지 구분하는 것"
               },
               {
                 "id": "B",
-                "text": "말의 길이"
+                "text": "질문이 길었는지만 따지는 것"
               },
               {
                 "id": "C",
-                "text": "대화 장소"
+                "text": "질문한 사람의 목소리 크기만 보는 것"
               },
               {
                 "id": "D",
-                "text": "답하는 사람의 기분만"
+                "text": "대답을 빨리 끝낼 방법만 찾는 것"
               }
             ],
             "answerId": "A",
@@ -1039,23 +1039,23 @@
             ]
           },
           "question": {
-            "prompt": "교사의 짧은 응답은 수아의 정리를 어떻게 받아들이나요?",
+            "prompt": "교사의 \"그렇지\"는 수아의 어떤 이해를 받아준 말인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "맞게 이해했다고 받아들인다"
+                "text": "질문과 답변이 서로의 의도를 주고받는 과정이라는 이해"
               },
               {
                 "id": "B",
-                "text": "잘못 이해했다고 끊어 버린다"
+                "text": "자료 수만 많으면 된다는 이해"
               },
               {
                 "id": "C",
-                "text": "다른 예를 들기 전 잠시 멈춘다"
+                "text": "질문은 의도 없이 던지는 말이라는 이해"
               },
               {
                 "id": "D",
-                "text": "답을 보류한다"
+                "text": "토론에서는 반대 의견이 필요 없다는 이해"
               }
             ],
             "answerId": "A",
@@ -1143,6 +1143,45 @@
               "eliminateWrongChoice": true
             }
           }
+        },
+        {
+          "stepId": "s29",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 221
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 대화에서 수아가 새롭게 깨닫게 된 점은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "질문을 답하다 보니 자신이 빠뜨린 준비가 무엇인지 알게 된다"
+              },
+              {
+                "id": "B",
+                "text": "반대 의견 자료는 전혀 필요 없다고 판단한다"
+              },
+              {
+                "id": "C",
+                "text": "교사의 질문은 자신을 꾸짖는 말뿐이라고 여긴다"
+              },
+              {
+                "id": "D",
+                "text": "토론 준비는 자료 수만 많으면 끝난다고 생각한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
         }
       ]
     },
@@ -1187,12 +1226,12 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "'기준'은 어떤 뜻으로 쓰였나요?",
+          "prompt": "?? ??? ? ???? ?? ??? ??? ?? ?????",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 176,
-              "end": 178
+              "start": 0,
+              "end": 242
             }
           ],
           "scoring": {
@@ -1204,12 +1243,12 @@
         },
         {
           "id": "q2",
-          "prompt": "'근거'는 어떤 뜻으로 쓰였나요?",
+          "prompt": "?? ??? ?? ??? ???? ?? ?? ???? ?? ??? ??????",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 127,
-              "end": 129
+              "start": 0,
+              "end": 221
             }
           ],
           "scoring": {
@@ -1221,12 +1260,12 @@
         },
         {
           "id": "q3",
-          "prompt": "'상황'은 어떤 뜻으로 쓰였나요?",
+          "prompt": "?? ??? ????? ?? ??? ??? ???? ??? ?? ????",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 88,
-              "end": 90
+              "start": 0,
+              "end": 263
             }
           ],
           "scoring": {
@@ -1238,29 +1277,12 @@
         },
         {
           "id": "q4",
-          "prompt": "'목적'은 어떤 뜻으로 쓰였나요?",
+          "prompt": "?? ??? ?? ??? ??? ???? ?? ??? ??? ??? ????",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 225,
-              "end": 227
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "'태도'는 어떤 뜻으로 쓰였나요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 247,
-              "end": 249
+              "start": 0,
+              "end": 259
             }
           ],
           "scoring": {

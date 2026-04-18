@@ -1,19 +1,35 @@
 {
-  "contentId": "dr-s3-230",
+  "contentId": "dr-saussure3-230",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(소쉬르 3) Day 230 문학",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[생활문] 어린이날 행사 - 가족에게 쓰는 편지",
+  "description": "어린이날의 선물 같은 시간과 가족을 향한 감사",
   "targetLevel": "SAUSSURE_3",
-  "schoolGradeRange": { "min": 5, "max": 5 },
-  "area": "READING",
-  "subArea": "LITERATURE",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
-  "timeLimitSec": 480,
+  "schoolGradeRange": {
+    "min": 3,
+    "max": 3
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +37,15 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "은채는 가을이 찾아온 학교 화단에서 시든 해바라기 한 송이를 발견했다. 한여름에는 누구보다 크고 노란 꽃을 활짝 피워 학교의 자랑이었던 해바라기가 이제는 고개를 푹 숙이고 잎은 갈색으로 바래져 있었다. 은채는 왠지 모르게 마음이 쓸쓸해져서 해바라기 앞에 쪼그리고 앉아 한참을 바라보았다. 축 늘어진 줄기를 조심스럽게 손으로 만져 보니 속은 아직 단단한 부분이 조금 남아 있었다. 은채는 교실에서 물을 떠다가 뿌려 주고 주변에 자란 잡초도 하나하나 뽑아 주었다. 해바라기가 다시 살아나지는 않겠지만 그래도 마지막까지 정성껏 보살펴 주고 싶은 마음이었다. 그때 갑자기 바람이 불어 해바라기 머리 부분에서 까만 씨앗 몇 알이 후두둑 떨어졌다."
+          "text": "어린이날 행사에 다녀온 즐거운 기억을 편지에 담았습니다. 우리를 위해 애써주신 부모님께 감사의 인사를 함. 나는 행복한 하루를 보내며 마음이 벅찼습니다."
         },
         {
           "id": "p2",
-          "text": "은채는 땅바닥에 떨어진 씨앗들을 소중하게 하나씩 주워 교복 주머니에 넣었다. 집에 돌아온 은채는 베란다에 놓인 작은 화분에 흙을 담고 그중 씨앗 세 알을 정성스럽게 심었다. 매일 아침 학교에 가기 전 물을 주며 싹이 트기를 기다렸지만 일주일이 지나도록 아무런 변화가 보이지 않았다. 거의 포기하려던 열흘째 아침, 흙을 뚫고 연두색 싹 하나가 삐죽하게 고개를 내밀고 있었다. 은채는 기쁜 나머지 소리를 질렀고, 그날부터 해바라기 성장 일기를 쓰기 시작했다. 싹은 하루가 다르게 쑥쑥 자라서 한 달 뒤에는 은채의 무릎 높이를 훌쩍 넘어섰다. 은채는 시들어 버린 해바라기가 남긴 작은 씨앗 하나가 새로운 생명으로 이어진다는 사실에 가슴이 뭉클해졌다."
+          "text": "가족이 함께 비눗방울 놀이를 하며 질서를 지켰습니다. 서로를 보며 환하게 웃는 시간이 소중한 보물입니다. 편지를 통해 내 사랑을 전하고 싶어 적었습니다."
+        },
+        {
+          "id": "p3",
+          "text": "편지 마지막에는 효도하겠다는 다짐과 약속을 남김. 글을 쓰며 어제의 감동이 전해져 마음이 따뜻합니다. 가족과 함께하는 매일이 나에게는 선물입니다."
         }
       ]
     },
@@ -33,317 +53,594 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 39 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 30
+              }
+            ]
+          },
           "question": {
-            "prompt": "은채가 학교 화단에서 무엇을 발견했나요?",
+            "prompt": "어디에 다녀온 기억을 담았나요?",
             "choices": [
-              "방금 피어난 빨간 장미 한 송이",
-              "시든 해바라기 한 송이를 발견했다",
-              "아직 싹이 트지 않은 씨앗 여러 개",
-              "나비 한 마리가 꽃 위에 앉아 있었다"
+              {
+                "id": "A",
+                "text": "어린이날 행사"
+              },
+              {
+                "id": "B",
+                "text": "겨울 눈썰매장"
+              },
+              {
+                "id": "C",
+                "text": "학교 청소"
+              },
+              {
+                "id": "D",
+                "text": "도시 시장"
+              }
             ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 40, "end": 112 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 32,
+                "end": 58
+              }
+            ]
+          },
           "question": {
-            "prompt": "해바라기의 지금 모습은 어떠한가요?",
+            "prompt": "누구에게 인사를 했나요?",
             "choices": [
-              "활짝 핀 노란 꽃이 하늘을 향해 있었다",
-              "고개를 숙이고 잎이 갈색으로 바래져 있었다",
-              "키가 더 커져서 지붕보다 높이 올라가 있었다",
-              "꽃잎이 파란색으로 변해 신기하게 보였다"
+              {
+                "id": "A",
+                "text": "부모님"
+              },
+              {
+                "id": "B",
+                "text": "로봇"
+              },
+              {
+                "id": "C",
+                "text": "외계인"
+              },
+              {
+                "id": "D",
+                "text": "요정"
+              }
             ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 113, "end": 160 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 60,
+                "end": 84
+              }
+            ]
+          },
           "question": {
-            "prompt": "은채는 시든 해바라기를 보고 어떻게 했나요?",
+            "prompt": "마음이 어떠했나요?",
             "choices": [
-              "신나서 친구들을 불러 같이 구경했다",
-              "귀찮아서 빨리 교실로 돌아가 버렸다",
-              "쓸쓸한 마음에 해바라기 앞에 앉아 바라보았다",
-              "선생님께 해바라기를 뽑아 달라고 부탁했다"
+              {
+                "id": "A",
+                "text": "벅찼습니다"
+              },
+              {
+                "id": "B",
+                "text": "슬펐습니다"
+              },
+              {
+                "id": "C",
+                "text": "화가 났습니다"
+              },
+              {
+                "id": "D",
+                "text": "지루했습니다"
+              }
             ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 161, "end": 211 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 30
+              },
+              {
+                "paragraphId": "p1",
+                "start": 32,
+                "end": 58
+              },
+              {
+                "paragraphId": "p1",
+                "start": 60,
+                "end": 84
+              }
+            ]
+          },
           "question": {
-            "prompt": "은채가 줄기를 만져 본 결과는 어떠했나요?",
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "줄기가 완전히 부러져 바닥에 쓰러져 있었다",
-              "줄기 속에 아직 단단한 부분이 조금 남아 있었다",
-              "줄기에서 새로운 꽃봉오리가 나오고 있었다",
-              "줄기가 너무 뜨거워서 손으로 잡을 수 없었다"
+              {
+                "id": "A",
+                "text": "어린이날 추억과 부모님 감사"
+              },
+              {
+                "id": "B",
+                "text": "행사가 지루한 이유"
+              },
+              {
+                "id": "C",
+                "text": "인사가 하기 싫은 마음"
+              },
+              {
+                "id": "D",
+                "text": "하루가 짧은 아쉬움"
+              }
             ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 212, "end": 257 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 28
+              }
+            ]
+          },
           "question": {
-            "prompt": "은채가 해바라기를 위해 한 행동은 무엇인가요?",
+            "prompt": "무엇을 하며 질서를 지켰나요?",
             "choices": [
-              "해바라기를 뽑아서 화분에 옮겨 심었다",
-              "물을 뿌려 주고 주변 잡초도 뽑아 주었다",
-              "새 꽃씨를 사다가 해바라기 옆에 심었다",
-              "친구에게 해바라기를 선물로 주었다"
+              {
+                "id": "A",
+                "text": "비눗방울 놀이"
+              },
+              {
+                "id": "B",
+                "text": "숨바꼭질"
+              },
+              {
+                "id": "C",
+                "text": "낮잠 자기"
+              },
+              {
+                "id": "D",
+                "text": "밥 먹기"
+              }
             ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 258, "end": 308 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 30,
+                "end": 57
+              }
+            ]
+          },
           "question": {
-            "prompt": "은채가 해바라기를 보살피려는 이유는 무엇인가요?",
+            "prompt": "웃는 시간은 무엇인가요?",
             "choices": [
-              "다시 살아나서 큰 꽃을 피울 거라 기대해서",
-              "선생님이 화단 관리를 시켜서 어쩔 수 없이",
-              "다시 살아나지는 않지만 마지막까지 돌보고 싶어서",
-              "친구들에게 자신이 돌본다는 것을 보여 주려고"
+              {
+                "id": "A",
+                "text": "보물"
+              },
+              {
+                "id": "B",
+                "text": "짐"
+              },
+              {
+                "id": "C",
+                "text": "과거"
+              },
+              {
+                "id": "D",
+                "text": "지루함"
+              }
             ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 309, "end": 356 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 59,
+                "end": 84
+              }
+            ]
+          },
           "question": {
-            "prompt": "바람이 불자 해바라기에서 어떤 일이 일어났나요?",
+            "prompt": "무엇을 전하고 싶었나요?",
             "choices": [
-              "꽃잎이 다시 활짝 피어나기 시작했다",
-              "줄기가 부러져 땅바닥에 쓰러졌다",
-              "까만 씨앗 몇 알이 후두둑 떨어졌다",
-              "노란 꽃가루가 공중으로 날아올랐다"
+              {
+                "id": "A",
+                "text": "사랑"
+              },
+              {
+                "id": "B",
+                "text": "비명"
+              },
+              {
+                "id": "C",
+                "text": "낙서"
+              },
+              {
+                "id": "D",
+                "text": "쓰레기"
+              }
             ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 356 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 28
+              },
+              {
+                "paragraphId": "p2",
+                "start": 30,
+                "end": 57
+              },
+              {
+                "paragraphId": "p2",
+                "start": 59,
+                "end": 84
+              }
+            ]
+          },
           "question": {
-            "prompt": "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "은채가 시든 해바라기를 발견하고 보살피다 씨앗을 얻음",
-              "학교 화단에 다양한 꽃이 피어나는 아름다운 가을 풍경",
-              "은채가 친구들과 함께 화단 청소를 하는 이야기",
-              "해바라기가 여름에 크게 자라 학교의 자랑이 된 이야기"
+              {
+                "id": "A",
+                "text": "가족 놀이와 사랑 표현"
+              },
+              {
+                "id": "B",
+                "text": "비눗방울이 터진 사고"
+              },
+              {
+                "id": "C",
+                "text": "보물을 잃어버린 슬픔"
+              },
+              {
+                "id": "D",
+                "text": "편지가 안 써지는 고민"
+              }
             ],
-            "correctIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 42 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 26
+              }
+            ]
+          },
           "question": {
-            "prompt": "은채는 떨어진 씨앗을 어떻게 했나요?",
+            "prompt": "마지막에 무엇을 남겼나요?",
             "choices": [
-              "그냥 바닥에 두고 교실로 돌아갔다",
-              "소중하게 주워 교복 주머니에 넣었다",
-              "선생님에게 갖다 드리며 심어 달라 했다",
-              "친구에게 나눠 주며 함께 심자고 했다"
+              {
+                "id": "A",
+                "text": "다짐과 약속"
+              },
+              {
+                "id": "B",
+                "text": "비명"
+              },
+              {
+                "id": "C",
+                "text": "낙서"
+              },
+              {
+                "id": "D",
+                "text": "쓰레기"
+              }
             ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 43, "end": 96 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 28,
+                "end": 55
+              }
+            ]
+          },
           "question": {
-            "prompt": "은채가 집에서 한 일은 무엇인가요?",
+            "prompt": "마음이 어떠한가요?",
             "choices": [
-              "씨앗을 냉장고에 넣어 보관해 두었다",
-              "화분에 흙을 담고 씨앗 세 알을 심었다",
-              "씨앗을 학교 화단에 다시 가져다 놓았다",
-              "씨앗을 물에 담가 하루 동안 불려 두었다"
+              {
+                "id": "A",
+                "text": "따뜻함"
+              },
+              {
+                "id": "B",
+                "text": "차가움"
+              },
+              {
+                "id": "C",
+                "text": "화가 남"
+              },
+              {
+                "id": "D",
+                "text": "슬픔"
+              }
             ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 97, "end": 157 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 57,
+                "end": 80
+              }
+            ]
+          },
           "question": {
-            "prompt": "씨앗을 심은 뒤 일주일 동안 어떤 상황이었나요?",
+            "prompt": "가족과 함께하는 매일은 무엇인가요?",
             "choices": [
-              "싹이 빠르게 자라 화분 밖으로 나왔다",
-              "씨앗이 썩어 버려 다시 심어야 했다",
-              "물을 주며 기다렸지만 변화가 보이지 않았다",
-              "꽃이 피어 예쁜 색깔을 보여 주었다"
+              {
+                "id": "A",
+                "text": "선물"
+              },
+              {
+                "id": "B",
+                "text": "짐"
+              },
+              {
+                "id": "C",
+                "text": "과거"
+              },
+              {
+                "id": "D",
+                "text": "지루함"
+              }
             ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 158, "end": 208 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 26
+              },
+              {
+                "paragraphId": "p3",
+                "start": 28,
+                "end": 55
+              },
+              {
+                "paragraphId": "p3",
+                "start": 57,
+                "end": 80
+              }
+            ]
+          },
           "question": {
-            "prompt": "열흘째 아침에 어떤 변화가 있었나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "화분의 흙이 말라 갈라져 있었다",
-              "연두색 싹 하나가 흙을 뚫고 올라와 있었다",
-              "씨앗 세 알 모두 한꺼번에 싹이 텄다",
-              "화분에서 작은 꽃봉오리가 피어나 있었다"
+              {
+                "id": "A",
+                "text": "효도 다짐과 가족의 소중함"
+              },
+              {
+                "id": "B",
+                "text": "감동이 없는 일상"
+              },
+              {
+                "id": "C",
+                "text": "약속을 어긴 잘못"
+              },
+              {
+                "id": "D",
+                "text": "선물이 부족한 후회"
+              }
             ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 209, "end": 254 }] },
-          "question": {
-            "prompt": "싹이 튼 뒤 은채가 한 일은 무엇인가요?",
-            "choices": [
-              "싹이 튼 화분을 학교에 가져가 전시했다",
-              "기쁜 나머지 소리를 지르고 성장 일기를 쓰기 시작했다",
-              "싹을 뽑아서 더 큰 화분에 다시 옮겨 심었다",
-              "친구들을 집으로 불러 싹을 함께 관찰했다"
-            ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 255, "end": 300 }] },
-          "question": {
-            "prompt": "한 달 뒤 싹은 얼마나 자랐나요?",
-            "choices": [
-              "아직 싹 상태로 크기가 거의 변하지 않았다",
-              "은채의 키보다 훨씬 높게 자라 올라갔다",
-              "은채의 무릎 높이를 훌쩍 넘어설 만큼 자랐다",
-              "작은 화분에서 더 이상 자라지 못하고 멈추었다"
-            ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s15",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 301, "end": 360 }] },
-          "question": {
-            "prompt": "은채가 마지막에 느낀 감정은 무엇인가요?",
-            "choices": [
-              "해바라기를 키우는 것이 귀찮다고 느꼈다",
-              "씨앗이 새 생명으로 이어진다는 사실에 뭉클해졌다",
-              "다시는 꽃을 키우지 않겠다고 결심했다",
-              "해바라기보다 다른 꽃이 더 예쁘다고 생각했다"
-            ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s16",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 360 }] },
-          "question": {
-            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
-            "choices": [
-              "은채가 씨앗을 심어 새 생명이 자라남을 경험한 이야기",
-              "해바라기를 키우는 데 필요한 도구와 방법 설명",
-              "학교 화단에 다양한 꽃을 심는 봉사 활동 이야기",
-              "은채가 친구들과 함께 식물 관찰 일기를 쓴 이야기"
-            ],
-            "correctIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "은채가 학교 화단에서 시든 해바라기 발견" },
-        { "id": "c2", "text": "여름의 자랑이던 해바라기가 시들어 있음" },
-        { "id": "c3", "text": "물을 주고 잡초를 뽑으며 보살핌" },
-        { "id": "c4", "text": "바람에 까만 씨앗 몇 알이 떨어짐" },
-        { "id": "c5", "text": "씨앗을 주워 집 화분에 세 알을 심음" },
-        { "id": "c6", "text": "열흘째 연두색 싹 하나가 올라옴" },
-        { "id": "c7", "text": "한 달 뒤 무릎 높이를 훌쩍 넘김" },
-        { "id": "c8", "text": "씨앗이 새 생명으로 이어짐에 감동함" }
+        {
+          "id": "c1",
+          "text": "어린이날 행사의 기억을 기록함."
+        },
+        {
+          "id": "c2",
+          "text": "부모님께 감사 편지를 썼어요."
+        },
+        {
+          "id": "c3",
+          "text": "비눗방울 놀이를 하며 즐거웠음."
+        },
+        {
+          "id": "c4",
+          "text": "함께 웃는 시간은 소중한 보물."
+        },
+        {
+          "id": "c5",
+          "text": "부모님께 효도하기로 약속해요."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "은채가 발견한 해바라기는 어떤 상태였나요?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 40, "end": 112 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "부모님을 잘 섬기겠다는 마음?",
+          "answerText": "효도하겠다는",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 9,
+              "end": 15
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "은채가 해바라기를 보고 어떤 마음이 들었나요?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 113, "end": 160 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "보석 같은 귀한 물건은?",
+          "answerText": "보물입니다",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 52,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "바람이 불자 해바라기에서 무엇이 떨어졌나요?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 309, "end": 356 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q4",
-          "prompt": "은채는 씨앗을 집에서 어떻게 심었나요?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 43, "end": 96 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "싹이 트기까지 얼마나 걸렸나요?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 158, "end": 208 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "한 달 뒤 싹은 얼마나 자랐나요?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 255, "end": 300 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q7",
-          "prompt": "은채가 이 경험을 통해 느낀 것은 무엇인가요?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 301, "end": 360 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "지켜야 할 약속이나 마음?",
+          "answerText": "다짐과",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 16,
+              "end": 19
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

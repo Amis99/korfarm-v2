@@ -767,185 +767,143 @@
     "recall": {
       "cards": [
         {
-          "text": "공명을 헤아리며 영욕을 가볍게 보는 태도이다."
+          "id": "c1",
+          "text": "화자는 세속의 공명과 영욕을 덧없게 여기고 벼슬을 버린 채 시골집으로 돌아온다."
         },
         {
-          "text": "동문에 괘관하고 전려에 돌아온다."
+          "id": "c2",
+          "text": "돌아온 뒤에는 경전과 역사책을 읽다가 앞내에서 살진 고기를 낚으며 한가롭게 지낸다."
         },
         {
-          "text": "성경현전 헤쳐 놓고 읽기를 한다."
+          "id": "c3",
+          "text": "또 뒷산에서 약초를 캐고 숲과 들을 바라보며 마음 내키는 대로 소요한다."
         },
         {
-          "text": "뒷뫼에 엄긴 약도 캐다가 노닌다."
+          "id": "c4",
+          "text": "맑은 바람과 밝은 달이 찾아드는 자연 속에서 화자는 더없는 즐거움을 맛본다."
         },
         {
-          "text": "청풍이 시지하고 명월이 자래한다."
+          "id": "c5",
+          "text": "화자는 천지 사이에 이만한 즐거움이 또 무엇이 있겠느냐고 감탄한다."
         },
         {
-          "text": "작자 미상이다."
+          "id": "c6",
+          "text": "그리고 평생 이렇게 살다가 늙어 태평하게 생을 마치는 것이 가장 좋겠다고 여긴다."
         }
       ],
       "correctOrder": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
       ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
-          "prompt": "첫 구절에서 헤아리는 것은 무엇인가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "공명을"
-            },
-            {
-              "id": "B",
-              "text": "영욕을"
-            },
-            {
-              "id": "C",
-              "text": "전려를"
-            },
-            {
-              "id": "D",
-              "text": "천양을"
-            }
-          ],
-          "answerId": "A",
+          "id": "q1",
+          "prompt": "1??? ?? ??? ?????",
           "answerRanges": [
             {
               "paragraphId": "p1",
               "start": 0,
-              "end": 2
-            }
-          ]
-        },
-        {
-          "prompt": "무엇을 헤쳐 놓고 읽는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "성경현전"
-            },
-            {
-              "id": "B",
-              "text": "전려"
-            },
-            {
-              "id": "C",
-              "text": "청풍"
-            },
-            {
-              "id": "D",
-              "text": "영욕"
+              "end": 35
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "2???? ???? ??? ??? ?????",
           "answerRanges": [
             {
               "paragraphId": "p2",
               "start": 0,
-              "end": 3
-            }
-          ]
-        },
-        {
-          "prompt": "어디에 약을 캐는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "뒷뫼에"
-            },
-            {
-              "id": "B",
-              "text": "동문에"
-            },
-            {
-              "id": "C",
-              "text": "전려에"
-            },
-            {
-              "id": "D",
-              "text": "천양지간에"
+              "end": 34
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "3??? ??? ???? ?????",
           "answerRanges": [
             {
               "paragraphId": "p3",
               "start": 0,
-              "end": 2
-            }
-          ]
-        },
-        {
-          "prompt": "무엇과 무엇이 시지하고 자래하는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "청풍과 명월"
-            },
-            {
-              "id": "B",
-              "text": "성경과 현전"
-            },
-            {
-              "id": "C",
-              "text": "공명과 영욕"
-            },
-            {
-              "id": "D",
-              "text": "동문과 전려"
+              "end": 27
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "4???? ???? ?? ?????",
           "answerRanges": [
             {
               "paragraphId": "p4",
               "start": 0,
-              "end": 1
-            },
-            {
-              "paragraphId": "p4",
-              "start": 9,
-              "end": 10
-            }
-          ]
-        },
-        {
-          "prompt": "이 작품의 작자는 누구인가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "작자 미상"
-            },
-            {
-              "id": "B",
-              "text": "공명"
-            },
-            {
-              "id": "C",
-              "text": "성경현전"
-            },
-            {
-              "id": "D",
-              "text": "청풍"
+              "end": 39
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "5??? ??? ?????",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 47
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "6??? ?? ??? ??? ????? ??????",
           "answerRanges": [
             {
               "paragraphId": "p6",
               "start": 0,
-              "end": 4
+              "end": 5
             }
-          ]
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         }
       ]
     }

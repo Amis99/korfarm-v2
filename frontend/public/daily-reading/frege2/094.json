@@ -1,32 +1,37 @@
 {
-  "contentId": "dr-f2-094",
+  "contentId": "dr-frege2-094",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(프레게 2) Day 94 비문학",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 인터넷 패킷",
+  "description": "데이터 전송의 기본 단위인 인터넷 패킷의 구조와 원리, 그리고 패킷 교환 방식이 현대 통신망에서 갖는 효율성을 알아봅니다.",
   "targetLevel": "FREGE_2",
   "schoolGradeRange": {
     "min": 5,
     "max": 5
   },
-  "area": "READING",
-  "subArea": "NONFICTION",
+  "area": "국어",
+  "subArea": "독해",
   "competencies": [
-    "READING"
+    "사실적 이해",
+    "추론적 이해",
+    "비판적 이해"
   ],
   "tags": [
-    "daily"
+    "비문학",
+    "기술",
+    "IT",
+    "네트워크"
   ],
   "access": {
     "mode": "FREE"
   },
   "seedReward": {
-    "seedType": "WHEAT",
-    "count": 4,
+    "seedType": "GOLD",
+    "count": 10,
     "multiplier": 1
   },
-  "timeLimitSec": 420,
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -34,11 +39,19 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "하늘에 흰 선이 보이면 사람들은 비행기가 연기를 뿌렸다고 생각하기 쉽다.그러나 비행운은 주로 아주 차갑고 습한 높은 하늘에서 비행기 엔진의 뜨거운 수증기가 식으며 생기는 얼음 알갱이 줄이다.엔진에서 나온 수증기만 모이는 것이 아니라 공기 속 작은 입자 주위에도 얼음 결정이 붙어 흰 줄처럼 보인다.그래서 비행운은 땅에서 보는 입김처럼 차가운 공기에서 더 쉽게 나타난다.다만 비행기가 지나갔다고 해서 언제나 긴 흰 줄이 남는 것은 아니다.비행기가 나는 높이의 공기가 너무 따뜻하거나 너무 건조하면 비행운이 거의 생기지 않거나 금방 흐려진다.이때 땅에서는 습하게 느껴져도 높은 하늘의 온도와 습도는 전혀 다를 수 있다.그래서 아래 날씨만 보고 위 하늘의 비행운 모습을 바로 짐작하기는 어렵다."
+          "text": "인터넷 패킷은 네트워크를 통해 데이터를 전송할 때 효율성을 높이기 위해 커다란 데이터를 작게 나눈 기본 단위를 의미한다. 우리가 보내는 이메일, 이미지, 동영상 등은 그대로 전송되는 것이 아니라 수많은 패킷으로 쪼개져 각기 다른 경로를 통해 목적지로 향하게 된다. 이러한 방식은 네트워크 자원을 효율적으로 공유하고, 전송 오류가 발생했을 때 전체 데이터가 아닌 해당 패킷만 재전송하면 된다는 기술적 장점을 지닌다. 패킷은 현대 인터넷 통신의 핵심적인 전송 방식으로, 전 세계를 연결하는 데이터의 흐름을 지탱하는 세포와 같은 역할을 수행한다. 우리는 패킷 기술 덕분에 방대한 정보를 빠르고 안정적으로 주고받을 수 있다."
         },
         {
           "id": "p2",
-          "text": "오래 남는 비행운은 높은 하늘에 수분이 매우 많은 층을 지날 때 잘 생긴다.이런 곳에서는 막 만들어진 얼음 결정이 쉽게 사라지지 않고 더 많은 수분을 모아 오래 떠 있는다.그래서 어떤 비행운은 몇 분 만에 흩어지지만, 어떤 것은 넓게 퍼져 얇은 구름처럼 보이기도 한다.바람이 강하면 이 비행운은 길게 밀려가 처음 지나간 비행기와 멀리 떨어져 보일 수도 있다.그래서 땅에서 본 비행운만으로 어느 비행기가 만든 것인지 바로 짚기 어려울 때가 많다.중요한 것은 비행운이 오래가는 까닭이 땅 위 공기보다 비행기가 나는 높이의 차갑고 습한 상태와 더 관련 있다는 점이다.결국 같은 비행기라도 지나간 하늘 층의 온도와 습도가 다르면 비행운의 길이와 남는 시간도 달라진다.비행운을 볼 때에는 선의 모양만 보지 말고, 높은 하늘의 온도와 습도가 달라질 수 있다는 점을 함께 떠올려야 한다."
+          "text": "각 패킷은 크게 '헤더', '페이로드', '트레일러'의 세 부분으로 구성된다. 헤더에는 보내는 사람과 받는 사람의 IP 주소, 패킷의 순서 번호 등 데이터 전송에 필요한 제어 정보가 담겨 있어, 패킷이 올바른 길을 찾아가도록 안내하는 이정표 역할을 한다. 페이로드는 사용자가 실제로 전송하고자 하는 데이터의 몸체이며, 트레일러는 데이터 전송 과정에서 오류가 발생했는지 검출하는 정보를 포함한다. 이러한 구조적 정교함은 수억 개의 패킷이 뒤섞이는 혼란스러운 네트워크 환경 속에서도 데이터가 유실되지 않고 정확하게 조립될 수 있도록 보장한다. 패킷 구조는 데이터의 안전한 여행을 돕는 정밀한 설계도와 같다."
+        },
+        {
+          "id": "p3",
+          "text": "패킷 방식은 기존의 '회선 교환' 방식과 달리 '패킷 교환' 방식을 채택하여 전송 효율을 극대화한다. 회선 교환은 두 지점 사이에 전용 통로를 점유하는 방식으로 통신 중에는 다른 사용자가 이용할 수 없으나, 패킷 교환은 하나의 회선을 여러 사용자가 동시에 공유하며 비어 있는 시간을 최대한 활용한다. 또한 각 패킷은 네트워크의 정체 상황에 따라 최적의 경로를 실시간으로 탐색하여 이동하므로, 특정 구간에 장애가 발생하더라도 우회하여 목적지에 도달할 수 있는 유연성을 갖는다. 이러한 기술적 유연성은 인터넷이 거대한 규모로 확장될 수 있었던 결정적인 원동력이 되었다. 패킷 교환은 자원의 경제성을 실현하는 지혜로운 선택이다."
+        },
+        {
+          "id": "p4",
+          "text": "결론적으로 인터넷 패킷은 디지털 전환 시대를 지탱하는 보이지 않는 인프라의 근간이다. 수많은 패킷이 네트워크를 누비며 정보를 전달하는 과정은 현대 문명의 지식 공유와 소통을 가능하게 하는 가장 기초적인 원동력이다. 우리는 패킷 기술의 원리를 이해함으로써 우리가 매일 누리는 편리한 통신 환경 이면에 숨겨진 과학적 노력을 확인하게 된다. 앞으로 더욱 고도화될 통신 기술 환경에서도 패킷은 데이터의 무결성을 보장하며 더욱 빠르고 정확한 정보의 바다를 열어갈 전망이다. 데이터의 쪼개짐은 역설적으로 전 세계를 더욱 긴밀하게 하나로 묶어주는 강력한 연결 고리가 된다."
         }
       ]
     },
@@ -46,703 +59,985 @@
       "timeline": [
         {
           "stepId": "s1",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
                 "start": 0,
-                "end": 40
+                "end": 67
               }
             ]
           },
           "question": {
-            "prompt": "사람들이 처음 쉽게 떠올리는 것으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "비행기가 연기를 뿌렸다는 생각"
+                "text": "? ???? ?? ?? ????"
               },
               {
                 "id": "B",
-                "text": "비행기가 구름을 밀어냈다는 생각"
+                "text": "??? ??? ?? ????"
               },
               {
                 "id": "C",
-                "text": "비행기가 별빛을 가렸다는 생각"
+                "text": "???? ?? ??? ????"
               },
               {
                 "id": "D",
-                "text": "비행기가 비를 만들었다는 생각"
+                "text": "?? ???? ??? ????"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s2",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 40,
-                "end": 106
+                "start": 68,
+                "end": 147
               }
             ]
           },
           "question": {
-            "prompt": "글쓴이가 바로잡는 설명으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "차갑고 습한 하늘에서 얼음 줄이 생긴다"
+                "text": "???? ??? ???? ???"
               },
               {
                 "id": "B",
-                "text": "따뜻한 하늘에서 연기 기둥이 자란다"
+                "text": "???? ?? ? ???? ??"
               },
               {
                 "id": "C",
-                "text": "낮은 하늘에서 먼지띠만 길게 남는다"
+                "text": "???? ????? ? ???"
               },
               {
                 "id": "D",
-                "text": "맑은 하늘에서 빛줄기만 굳어 남는다"
+                "text": "??? ???? ???"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s3",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 106,
-                "end": 166
+                "start": 148,
+                "end": 231
               }
             ]
           },
           "question": {
-            "prompt": "수증기 말고 함께 필요한 것으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "무슨 일이 있었나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "작은 입자에 붙는 얼음 결정"
+                "text": "?? ?? ??? ?? ??? ??"
               },
               {
                 "id": "B",
-                "text": "커다란 먹구름을 미는 바람"
+                "text": "??? ?? ???? ?? ??"
               },
               {
                 "id": "C",
-                "text": "해 질 녘에 번지는 붉은 빛"
+                "text": "??? ?? ??? ???? ??"
               },
               {
                 "id": "D",
-                "text": "날개 끝에서 떨어지는 물방울"
+                "text": "??? ?? ???? ?? ????"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s4",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 166,
-                "end": 206
+                "start": 232,
+                "end": 302
               }
             ]
           },
           "question": {
-            "prompt": "비행운을 입김에 비유한 까닭으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "어떤 역할을 하나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "차가운 공기에서 더 잘 보이기 때문이다"
+                "text": "??? ??? ??? ???? ??? ??"
               },
               {
                 "id": "B",
-                "text": "따뜻할수록 더 오래 남기 때문이다"
+                "text": "??? ?? ??? ????"
               },
               {
                 "id": "C",
-                "text": "바람이 없을수록 소리가 나기 때문이다"
+                "text": "??? ?? ??? ????"
               },
               {
                 "id": "D",
-                "text": "습도가 낮을수록 더 굵어지기 때문이다"
+                "text": "??? ?? ??? ???"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s5",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 206,
-                "end": 244
+                "start": 303,
+                "end": 345
               }
             ]
           },
           "question": {
-            "prompt": "다섯째 문장이 강조하는 점으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "비행기가 지나도 흰 줄은 늘 남지 않는다"
+                "text": "?? ?? ??? ??? ??? ??? ????"
               },
               {
                 "id": "B",
-                "text": "비행운은 한 번 생기면 끝까지 남는다"
+                "text": "?? ??? ?? ??? ?? ???"
               },
               {
                 "id": "C",
-                "text": "긴 선은 비 오는 날에만 생겨 남는다"
+                "text": "??? ??????? ???"
               },
               {
                 "id": "D",
-                "text": "낮은 하늘일수록 줄이 더 굵게 남는다"
+                "text": "??? ?? ??? ??? ???"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s6",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p1",
-                "start": 244,
-                "end": 301
+                "start": 0,
+                "end": 345
               }
             ]
           },
           "question": {
-            "prompt": "비행운이 금방 흐려지는 조건으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "높은 하늘이 따뜻하거나 건조할 때"
+                "text": "??? ???? ?? ?? ??? ???"
               },
               {
                 "id": "B",
-                "text": "땅 위 바람이 잠깐 약해졌을 때"
+                "text": "??? ???? ???? ???"
               },
               {
                 "id": "C",
-                "text": "비행기 색이 밝게 칠해졌을 때"
+                "text": "??? ??? ??? ????"
               },
               {
                 "id": "D",
-                "text": "구름 사이 햇빛이 자주 비칠 때"
+                "text": "??? ?? ??? ?? ????"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s7",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p1",
-                "start": 301,
-                "end": 344
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 43
               }
             ]
           },
           "question": {
-            "prompt": "일곱째 문장이 앞내용과 이어서 보여 주는 점으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "땅 느낌과 높은 하늘 상태는 다를 수 있다"
+                "text": "??? ? ???? ????"
               },
               {
                 "id": "B",
-                "text": "땅이 건조하면 높은 하늘도 늘 마르다"
+                "text": "??? ??? ?? ???"
               },
               {
                 "id": "C",
-                "text": "높은 하늘이 차면 땅도 바로 식어진다"
+                "text": "??? ?? ?? ????"
               },
               {
                 "id": "D",
-                "text": "높은 하늘 습도는 땅에서 모두 잴 수 있다"
+                "text": "??? ??? ?? ???? ??"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s8",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p1",
-                "start": 344,
-                "end": 385
+                "paragraphId": "p2",
+                "start": 44,
+                "end": 142
               }
             ]
           },
           "question": {
-            "prompt": "마지막 문장이 이끌어 내는 결론으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "어떤 역할을 하나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "아래 날씨만으로 위 비행운을 단정하기 어렵다"
+                "text": "??? ?? ?? ??? ???"
               },
               {
                 "id": "B",
-                "text": "땅이 맑으면 비행운도 길게 남는다고 본다"
+                "text": "??? ?? ?? ??? ???"
               },
               {
                 "id": "C",
-                "text": "높은 하늘 상태는 땅과 모두 같다고 본다"
+                "text": "??? ??? ??? ???"
               },
               {
                 "id": "D",
-                "text": "비행기 종류만 알면 남는 시간을 다 안다"
+                "text": "??? ?? ??? ???"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s9",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
-                "paragraphId": "p1",
-                "start": 0,
-                "end": 385
+                "paragraphId": "p2",
+                "start": 143,
+                "end": 220
               }
             ]
           },
           "question": {
-            "prompt": "첫 번째 문단의 중심 내용으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "어떻게 쓰이나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "비행운은 높은 하늘의 차갑고 습한 조건을 본다"
+                "text": "????? ?? ??? ???"
               },
               {
                 "id": "B",
-                "text": "비행운은 비행기 색과 소리만으로도 갈린다"
+                "text": "????? ?? ?? ???"
               },
               {
                 "id": "C",
-                "text": "비행운은 땅 날씨 하나로 쉽게 단정할 수 있다"
+                "text": "????? ?? ????"
               },
               {
                 "id": "D",
-                "text": "비행운은 언제나 긴 흰 줄로 오래 남게 된다"
+                "text": "????? IP ?? ????"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s10",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 0,
-                "end": 42
+                "start": 221,
+                "end": 301
               }
             ]
           },
           "question": {
-            "prompt": "오래 남는 비행운이 잘 생기는 곳으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "수분이 매우 많은 높은 하늘 층"
+                "text": "????? ?? ?? ??? ???"
               },
               {
                 "id": "B",
-                "text": "먼지가 가라앉은 낮은 골짜기"
+                "text": "????? ?? ?? ??? ???"
               },
               {
                 "id": "C",
-                "text": "햇빛만 강한 한낮의 넓은 운동장"
+                "text": "????? ??? ?????"
               },
               {
                 "id": "D",
-                "text": "구름이 없는 메마른 지면 위"
+                "text": "????? ??? ?? ???"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s11",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
-                "start": 42,
-                "end": 96
+                "start": 302,
+                "end": 337
               }
             ]
           },
           "question": {
-            "prompt": "얼음 결정이 오래 남는 까닭으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "무엇을 알 수 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "주변 수분을 더 모아 쉽게 사라지지 않는다"
+                "text": "??? ??? ??? ??? ???"
               },
               {
                 "id": "B",
-                "text": "엔진 열이 남아 결정을 바로 녹이지 않는다"
+                "text": "??? ??? ??? ???? ??"
               },
               {
                 "id": "C",
-                "text": "땅의 습기가 곧장 위로 올라가 붙기 때문이다"
+                "text": "??? ??? ??? ?????"
               },
               {
                 "id": "D",
-                "text": "새 물방울이 꼬리에서 계속 떨어지기 때문이다"
+                "text": "?? ??? ????? ????"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         },
         {
           "stepId": "s12",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 96,
-                "end": 150
-              }
-            ]
-          },
-          "question": {
-            "prompt": "어떤 비행운이 얇은 구름처럼 보이는 까닭으로 가장 알맞은 것은 무엇일까요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "퍼지며 넓어져 모양이 흐려지기 때문이다"
-              },
-              {
-                "id": "B",
-                "text": "낮은 하늘로 내려와 색이 짙어지기 때문이다"
-              },
-              {
-                "id": "C",
-                "text": "비행기가 멈춰 서서 자리를 지키기 때문이다"
-              },
-              {
-                "id": "D",
-                "text": "구름이 비행운 속으로 모두 들어가기 때문이다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 150,
-                "end": 200
-              }
-            ]
-          },
-          "question": {
-            "prompt": "바람이 강할 때 보이는 모습으로 가장 알맞은 것은 무엇일까요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "처음 비행기와 멀리 떨어져 보일 수 있다"
-              },
-              {
-                "id": "B",
-                "text": "비행운이 제자리에서 둥글게만 남는다"
-              },
-              {
-                "id": "C",
-                "text": "비행운이 아래로 곧장 떨어져 사라진다"
-              },
-              {
-                "id": "D",
-                "text": "비행운이 짧아지며 더 또렷해지기만 한다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 200,
-                "end": 248
-              }
-            ]
-          },
-          "question": {
-            "prompt": "비행운만 보고 만든 비행기를 바로 짚기 어려운 이유로 가장 알맞은 것은 무엇일까요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "밀려가며 처음 자리와 달리 보일 수 있어서"
-              },
-              {
-                "id": "B",
-                "text": "여러 대가 같은 선을 늘 같이 남겨서"
-              },
-              {
-                "id": "C",
-                "text": "비행기마다 비행운 빛깔이 모두 달라서"
-              },
-              {
-                "id": "D",
-                "text": "밤에는 비행운이 완전히 안 보이기만 해서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s15",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 248,
-                "end": 314
-              }
-            ]
-          },
-          "question": {
-            "prompt": "글쓴이가 중요하다고 본 기준으로 가장 알맞은 것은 무엇일까요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "땅보다 높은 하늘의 차갑고 습한 상태"
-              },
-              {
-                "id": "B",
-                "text": "비행기 속도와 날개 길이의 차이"
-              },
-              {
-                "id": "C",
-                "text": "공항과 집 사이의 이동 거리 차이"
-              },
-              {
-                "id": "D",
-                "text": "땅 위 그림자와 햇빛 방향 차이"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s16",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 314,
-                "end": 369
-              }
-            ]
-          },
-          "question": {
-            "prompt": "같은 비행기라도 결과가 달라지는 까닭으로 가장 알맞은 것은 무엇일까요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "지나는 하늘 층의 온도와 습도가 달라서"
-              },
-              {
-                "id": "B",
-                "text": "비행기 안 손님 수가 매번 달라져서"
-              },
-              {
-                "id": "C",
-                "text": "엔진 소리가 날마다 조금씩 달라져서"
-              },
-              {
-                "id": "D",
-                "text": "비행 경로에 별빛이 비칠 때가 있어서"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s17",
-          "highlight": {
-            "ranges": [
-              {
-                "paragraphId": "p2",
-                "start": 369,
-                "end": 433
-              }
-            ]
-          },
-          "question": {
-            "prompt": "마지막 문장이 요구하는 읽기 태도로 가장 알맞은 것은 무엇일까요?",
-            "choices": [
-              {
-                "id": "A",
-                "text": "선 모양과 함께 높은 하늘 조건도 떠올린다"
-              },
-              {
-                "id": "B",
-                "text": "비행기 이름만 보고 남는 시간을 짐작한다"
-              },
-              {
-                "id": "C",
-                "text": "땅의 느낌만 믿고 위 상태를 바로 정한다"
-              },
-              {
-                "id": "D",
-                "text": "흰 선 길이만 재고 날씨 정보는 빼 둔다"
-              }
-            ],
-            "answerId": "A",
-            "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
-            }
-          }
-        },
-        {
-          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
           "highlight": {
             "ranges": [
               {
                 "paragraphId": "p2",
                 "start": 0,
-                "end": 433
+                "end": 337
               }
             ]
           },
           "question": {
-            "prompt": "두 번째 문단의 중심 내용으로 가장 알맞은 것은 무엇일까요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
               {
                 "id": "A",
-                "text": "비행운 지속 시간은 높은 하늘 상태를 함께 본다"
+                "text": "?? ??? ??? ??? ?? ???"
               },
               {
                 "id": "B",
-                "text": "비행운 길이는 비행기 종류 하나로만 정해진다"
+                "text": "?? ??? ???? ??? ???"
               },
               {
                 "id": "C",
-                "text": "비행운은 바람과 상관없이 늘 같은 자리에 남는다"
+                "text": "?? ??? ??? ???? ??"
               },
               {
                 "id": "D",
-                "text": "비행운은 오래 남을수록 같은 비행기가 만든다"
+                "text": "?? ??? ??? ??? ????"
               }
             ],
             "answerId": "A",
             "scoring": {
-              "correctDeltaSec": 20,
-              "wrongDeltaSec": -40,
-              "eliminateWrongChoice": true
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 56
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "?? ??? ?? ??? ???"
+              },
+              {
+                "id": "B",
+                "text": "?? ??? ?? ??? ??"
+              },
+              {
+                "id": "C",
+                "text": "?? ??? ?? ?? ????"
+              },
+              {
+                "id": "D",
+                "text": "?? ??? ?? ?? ????"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 57,
+                "end": 167
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떻게 쓰이나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "??? ??? ?? ???? ????"
+              },
+              {
+                "id": "B",
+                "text": "??? ? ??? ??? ??"
+              },
+              {
+                "id": "C",
+                "text": "??? ?? ?? ????"
+              },
+              {
+                "id": "D",
+                "text": "??? ??? ??? ????"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 168,
+                "end": 265
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "?? ??? ?? ?? ??? ???"
+              },
+              {
+                "id": "B",
+                "text": "?? ?? ?? ?? ??? ??"
+              },
+              {
+                "id": "C",
+                "text": "?? ?? ? ?? ???"
+              },
+              {
+                "id": "D",
+                "text": "???? ?? ??? ??? ???"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 266,
+                "end": 316
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무슨 일이 있었나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "??? ?? ??? ???? ??"
+              },
+              {
+                "id": "B",
+                "text": "??? ?? ?? ??? ????"
+              },
+              {
+                "id": "C",
+                "text": "??? ?? ????? ????"
+              },
+              {
+                "id": "D",
+                "text": "??? ?? ?? ?? ???"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 317,
+                "end": 348
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "? ???? ??? ??? ?????"
+              },
+              {
+                "id": "B",
+                "text": "? ??? ??? ???? ????"
+              },
+              {
+                "id": "C",
+                "text": "? ???? ????? ????"
+              },
+              {
+                "id": "D",
+                "text": "? ???? ?? ??? ??"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 348
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "?? ??? ??? ???? ???"
+              },
+              {
+                "id": "B",
+                "text": "?? ??? ?? ??? ????"
+              },
+              {
+                "id": "C",
+                "text": "?? ??? ?? ??? ?????"
+              },
+              {
+                "id": "D",
+                "text": "?? ??? ??? ???? ??"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 47
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "??? ??? ??? ??? ?? ????"
+              },
+              {
+                "id": "B",
+                "text": "??? ?? ??? ?? ???"
+              },
+              {
+                "id": "C",
+                "text": "??? ??? ?? ????"
+              },
+              {
+                "id": "D",
+                "text": "??? ?? ??? ???"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 48,
+                "end": 119
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "?? ??? ?? ??? ??? ???? ??"
+              },
+              {
+                "id": "B",
+                "text": "??? ???? ??? ? ????"
+              },
+              {
+                "id": "C",
+                "text": "??? ??? ??? ???"
+              },
+              {
+                "id": "D",
+                "text": "??? ??? ??? ? ??"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 120,
+                "end": 187
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "?? ??? ?? ?? ??? ?? ??"
+              },
+              {
+                "id": "B",
+                "text": "?? ??? ?? ???? ?? ??"
+              },
+              {
+                "id": "C",
+                "text": "?? ??? ??? ????"
+              },
+              {
+                "id": "D",
+                "text": "?? ??? ?? ??? ????"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 188,
+                "end": 259
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "??? ???? ???? ?? ? ???"
+              },
+              {
+                "id": "B",
+                "text": "??? ? ??? ??? ???"
+              },
+              {
+                "id": "C",
+                "text": "??? ??? ??? ?? ???"
+              },
+              {
+                "id": "D",
+                "text": "??? ?? ???? ?? ???"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "DETAIL",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 260,
+                "end": 313
+              }
+            ]
+          },
+          "question": {
+            "prompt": "무엇을 알 수 있나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "???? ??? ?? ?? ??? ???"
+              },
+              {
+                "id": "B",
+                "text": "???? ??? ??? ????"
+              },
+              {
+                "id": "C",
+                "text": "?? ???? ?? ?? ? ??"
+              },
+              {
+                "id": "D",
+                "text": "??? ??? ?? ??? ??"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "type": "MULTIPLE_CHOICE",
+          "condition": "SUMMARY",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 313
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "??? ??? ?? ??? ?? ????"
+              },
+              {
+                "id": "B",
+                "text": "??? ?? ??? ??? ???"
+              },
+              {
+                "id": "C",
+                "text": "??? ?? ??? ???? ??"
+              },
+              {
+                "id": "D",
+                "text": "??? ?? ??? ????"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
             }
           }
         }
@@ -752,35 +1047,23 @@
       "cards": [
         {
           "id": "c1",
-          "text": "사람들은 하늘의 흰 선을 보고 비행기가 연기를 뿌렸다고 쉽게 생각한다."
+          "text": "인터넷 패킷은 큰 데이터를 잘게 나누어 네트워크를 통해 효율적으로 보내기 위한 기본 단위이다."
         },
         {
           "id": "c2",
-          "text": "글은 비행운이 차갑고 습한 높은 하늘에서 생기는 얼음 알갱이 줄이라고 설명한다."
+          "text": "이 방식 덕분에 이메일이나 동영상 같은 정보는 각기 다른 경로를 따라 이동해도 목적지에서 다시 정확히 조립될 수 있다."
         },
         {
           "id": "c3",
-          "text": "수증기와 작은 입자 주위에 얼음 결정이 붙으면서 흰 줄처럼 보인다는 점을 짚는다."
+          "text": "패킷의 헤더와 페이로드, 트레일러는 전송 경로와 데이터 본문, 오류 검출 같은 중요한 정보를 각각 맡고 있다."
         },
         {
           "id": "c4",
-          "text": "높은 하늘이 너무 따뜻하거나 건조하면 비행운이 잘 안 생기거나 빨리 흐려진다."
+          "text": "패킷 교환 방식은 회선을 여러 사용자가 함께 쓰면서도 장애 구간을 우회할 수 있어 인터넷 확장의 핵심이 되었다."
         },
         {
           "id": "c5",
-          "text": "오래 남는 비행운은 높은 하늘의 수분이 많은 층에서 잘 생기고 오래 떠 있다."
-        },
-        {
-          "id": "c6",
-          "text": "어떤 비행운은 넓게 퍼져 얇은 구름처럼 보이고 바람에 밀려 멀리 옮겨 간다."
-        },
-        {
-          "id": "c7",
-          "text": "글은 비행운을 보며 어느 비행기가 만들었는지 바로 짚기 어려울 수 있다고 말한다."
-        },
-        {
-          "id": "c8",
-          "text": "결국 비행운을 볼 때에는 높은 하늘의 온도와 습도까지 함께 떠올려야 한다."
+          "text": "결국 패킷 기술은 오늘날 거대한 인터넷 통신 환경을 빠르고 안정적으로 지탱하는 보이지 않는 기반이다."
         }
       ],
       "correctOrder": [
@@ -788,10 +1071,7 @@
         "c2",
         "c3",
         "c4",
-        "c5",
-        "c6",
-        "c7",
-        "c8"
+        "c5"
       ],
       "seedPenalty": 1
     },
@@ -799,13 +1079,104 @@
       "questions": [
         {
           "id": "q1",
-          "prompt": "사람들이 비행운을 보고 먼저 떠올리기 쉬운 것은 무엇일까요?",
+          "prompt": "네트워크에서 큰 데이터를 잘게 나눈 기본 단위는 무엇인가요?",
+          "answerText": "패킷",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 23,
-              "end": 25
+              "start": 4,
+              "end": 6
+            },
+            {
+              "paragraphId": "p1",
+              "start": 113,
+              "end": 115
+            },
+            {
+              "paragraphId": "p1",
+              "start": 205,
+              "end": 207
+            },
+            {
+              "paragraphId": "p1",
+              "start": 232,
+              "end": 234
+            },
+            {
+              "paragraphId": "p1",
+              "start": 307,
+              "end": 309
+            },
+            {
+              "paragraphId": "p2",
+              "start": 2,
+              "end": 4
+            },
+            {
+              "paragraphId": "p2",
+              "start": 71,
+              "end": 73
+            },
+            {
+              "paragraphId": "p2",
+              "start": 109,
+              "end": 111
+            },
+            {
+              "paragraphId": "p2",
+              "start": 240,
+              "end": 242
+            },
+            {
+              "paragraphId": "p2",
+              "start": 302,
+              "end": 304
+            },
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 2
+            },
+            {
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 29
+            },
+            {
+              "paragraphId": "p3",
+              "start": 116,
+              "end": 118
+            },
+            {
+              "paragraphId": "p3",
+              "start": 173,
+              "end": 175
+            },
+            {
+              "paragraphId": "p3",
+              "start": 317,
+              "end": 319
+            },
+            {
+              "paragraphId": "p4",
+              "start": 10,
+              "end": 12
+            },
+            {
+              "paragraphId": "p4",
+              "start": 52,
+              "end": 54
+            },
+            {
+              "paragraphId": "p4",
+              "start": 124,
+              "end": 126
+            },
+            {
+              "paragraphId": "p4",
+              "start": 212,
+              "end": 214
             }
           ],
           "scoring": {
@@ -816,13 +1187,19 @@
         },
         {
           "id": "q2",
-          "prompt": "비행운이 흰 줄처럼 보이게 붙는 것은 무엇일까요?",
+          "prompt": "IP 주소와 순서 번호 등 제어 정보가 담기는 부분은 무엇인가요?",
+          "answerText": "헤더",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 146,
-              "end": 151
+              "paragraphId": "p2",
+              "start": 10,
+              "end": 12
+            },
+            {
+              "paragraphId": "p2",
+              "start": 44,
+              "end": 46
             }
           ],
           "scoring": {
@@ -833,18 +1210,19 @@
         },
         {
           "id": "q3",
-          "prompt": "비행운이 금방 흐려질 수 있는 두 조건은 무엇일까요? 해당 표현을 모두 고르세요.",
-          "answerMatchMode": "ALL",
+          "prompt": "사용자가 실제로 전송하려는 데이터 몸체는 무엇인가요?",
+          "answerText": "페이로드",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 260,
-              "end": 268
+              "paragraphId": "p2",
+              "start": 16,
+              "end": 20
             },
             {
-              "paragraphId": "p1",
-              "start": 269,
-              "end": 276
+              "paragraphId": "p2",
+              "start": 143,
+              "end": 147
             }
           ],
           "scoring": {
@@ -855,13 +1233,19 @@
         },
         {
           "id": "q4",
-          "prompt": "오래 남는 비행운이 잘 생기는 층은 어디일까요?",
+          "prompt": "오류 검출 정보를 포함하는 부분은 무엇인가요?",
+          "answerText": "트레일러",
           "answerMatchMode": "ANY",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 18,
-              "end": 29
+              "start": 24,
+              "end": 28
+            },
+            {
+              "paragraphId": "p2",
+              "start": 178,
+              "end": 182
             }
           ],
           "scoring": {
@@ -872,18 +1256,24 @@
         },
         {
           "id": "q5",
-          "prompt": "글쓴이가 끝부분에서 두 번 강조한 조건은 무엇일까요? 해당 표현을 모두 고르세요.",
-          "answerMatchMode": "ALL",
+          "prompt": "인터넷이 채택한 효율적인 전송 방식은 무엇인가요?",
+          "answerText": "패킷 교환",
+          "answerMatchMode": "ANY",
           "answerRanges": [
             {
-              "paragraphId": "p2",
-              "start": 336,
-              "end": 342
+              "paragraphId": "p3",
+              "start": 27,
+              "end": 32
             },
             {
-              "paragraphId": "p2",
-              "start": 401,
-              "end": 407
+              "paragraphId": "p3",
+              "start": 116,
+              "end": 121
+            },
+            {
+              "paragraphId": "p3",
+              "start": 317,
+              "end": 322
             }
           ],
           "scoring": {

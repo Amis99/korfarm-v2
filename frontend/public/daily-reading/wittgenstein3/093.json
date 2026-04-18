@@ -32,24 +32,646 @@
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        "포스터 속에 들어앉아\n비둘기는 자꾸만 곁눈질을 하고 있다.\n포스터 속에 오래 들어앉아 있으면\n비둘기의 습성도 웬만치는 변한다.",
-        "비둘기가 노닐던 한때의 지붕마루를\n나는 알고 있는데\n정말이지 알고 있는데\n지금은 비어 버린 집 통만\n비바람에 털럭이며 삭고 있을 뿐이다.",
-        "포스터 속에는\n비둘기가 날아 볼 하늘이 없다.\n마셔 볼 공기가 없다.",
-        "답답하면 주리도 틀어 보지만\n그저 열없는 일.\n그의 몸을 짓구겨\n누가 찢어 보아도\n피 한 방울 나지 않는다.",
-        "불 속에 던져 살라 보아도\n잿가루 하나 남지 않는다.",
-        "그는 찍어 낸 포스터\n수많은 복사 속에\n다친 데 하나 없이 들어앉아 있으니\n차라리 죽지 못해 그는 탈이다."
+        {
+          "id": "p1",
+          "text": "포스터 속에 들어앉아\n비둘기는 자꾸만 곁눈질을 하고 있다.\n포스터 속에 오래 들어앉아 있으면\n비둘기의 습성도 웬만치는 변한다."
+        },
+        {
+          "id": "p2",
+          "text": "비둘기가 노닐던 한때의 지붕마루를\n나는 알고 있는데\n정말이지 알고 있는데\n지금은 비어 버린 집 통만\n비바람에 털럭이며 삭고 있을 뿐이다."
+        },
+        {
+          "id": "p3",
+          "text": "포스터 속에는\n비둘기가 날아 볼 하늘이 없다.\n마셔 볼 공기가 없다."
+        },
+        {
+          "id": "p4",
+          "text": "답답하면 주리도 틀어 보지만\n그저 열없는 일.\n그의 몸을 짓구겨\n누가 찢어 보아도\n피 한 방울 나지 않는다."
+        },
+        {
+          "id": "p5",
+          "text": "불 속에 던져 살라 보아도\n잿가루 하나 남지 않는다."
+        },
+        {
+          "id": "p6",
+          "text": "그는 찍어 낸 포스터\n수많은 복사 속에\n다친 데 하나 없이 들어앉아 있으니\n차라리 죽지 못해 그는 탈이다."
+        }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 70
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1연의 내용으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "포스터 속에 갇힌 비둘기의 행동과 습성이 서서히 달라진다."
+              },
+              {
+                "id": "B",
+                "text": "비둘기가 포스터 밖으로 날아가 자유를 얻는다."
+              },
+              {
+                "id": "C",
+                "text": "비둘기는 아무 변화 없이 원래 습성을 그대로 유지한다."
+              },
+              {
+                "id": "D",
+                "text": "화자가 비둘기를 직접 길들여 새로운 종으로 만든다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 70
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'오래 들어앉아 있으면'에 담긴 뜻으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "짧은 체류를 뜻하며 변화와는 거리가 멀다."
+              },
+              {
+                "id": "B",
+                "text": "반복된 노출이 생명감 대신 인위적 습성을 만들 수 있음을 드러낸다."
+              },
+              {
+                "id": "C",
+                "text": "비둘기가 포스터 속에서 실제로 번식한다는 뜻이다."
+              },
+              {
+                "id": "D",
+                "text": "비둘기가 원래의 습성을 더 강하게 회복한다는 뜻이다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 76
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2연의 화자가 '알고 있는데'라고 반복한 이유로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지붕마루의 정확한 구조를 설명하려고"
+              },
+              {
+                "id": "B",
+                "text": "지금 보이는 풍경이 더 아름답다고 강조하려고"
+              },
+              {
+                "id": "C",
+                "text": "한때 비둘기가 노닐던 장소에 대한 기억이 선명함을 드러내려고"
+              },
+              {
+                "id": "D",
+                "text": "집 통이 다시 새것처럼 회복되었음을 말하려고"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 76
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2연 끝부분이 보여 주는 현재의 모습으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비어 버린 집 통만 비바람에 닳아 가는 폐허의 풍경"
+              },
+              {
+                "id": "B",
+                "text": "비둘기가 다시 둥지를 틀고 오가는 활기찬 풍경"
+              },
+              {
+                "id": "C",
+                "text": "화자가 기억을 잃어 아무것도 떠올리지 못하는 상태"
+              },
+              {
+                "id": "D",
+                "text": "비바람을 막아 주는 단단한 새 지붕의 모습"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 38
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3연의 핵심 의미로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "포스터 속 비둘기는 하늘과 공기를 누릴 수 없는 상태에 놓여 있다."
+              },
+              {
+                "id": "B",
+                "text": "비둘기는 넓은 하늘을 마음껏 날며 자유를 누린다."
+              },
+              {
+                "id": "C",
+                "text": "포스터 속 공간이 실제 자연보다 더 넓고 시원하다."
+              },
+              {
+                "id": "D",
+                "text": "비둘기의 날개는 있지만 화자가 그것을 감추고 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 38
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'마셔 볼 공기가 없다'가 드러내는 분위기로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "시원하고 열린 자연의 감각"
+              },
+              {
+                "id": "B",
+                "text": "답답하게 막힌 공간에 갇힌 숨막힘"
+              },
+              {
+                "id": "C",
+                "text": "비둘기가 날아오를 준비를 마친 긴장감"
+              },
+              {
+                "id": "D",
+                "text": "포스터 바깥의 상쾌한 아침 공기"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 60
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4연에서 '피 한 방울 나지 않는다'고 한 까닭으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비둘기가 이미 상처를 모두 치유했기 때문이다."
+              },
+              {
+                "id": "B",
+                "text": "비둘기가 돌처럼 차갑고 단단한 존재이기 때문이다."
+              },
+              {
+                "id": "C",
+                "text": "비둘기가 실제 생명체가 아니라 이미지에 불과하기 때문이다."
+              },
+              {
+                "id": "D",
+                "text": "화자가 의도적으로 피 흘리는 장면을 숨기기 때문이다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 60
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4연 전체가 강조하는 바를 가장 잘 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "포스터 속 존재는 아무리 해쳐도 실제 생명을 지니지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "비둘기가 실제로 큰 고통을 겪고 있다는 사실"
+              },
+              {
+                "id": "C",
+                "text": "화자가 비둘기를 구하기 위해 애쓰는 행동"
+              },
+              {
+                "id": "D",
+                "text": "비둘기 몸이 금세 회복되는 놀라운 능력"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 29
+              }
+            ]
+          },
+          "question": {
+            "prompt": "5연에서 '불 속에 던져 살라 보아도'라고 한 이유로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비둘기가 스스로 불을 피해 달아나기 위해서"
+              },
+              {
+                "id": "B",
+                "text": "이미 불에 타서 재가 되었다는 사실을 보여 주기 위해서"
+              },
+              {
+                "id": "C",
+                "text": "실체가 없는 존재라서 태워도 흔적이 남지 않음을 말하기 위해서"
+              },
+              {
+                "id": "D",
+                "text": "포스터를 보관하는 장소가 따뜻하다는 뜻을 전하기 위해서"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 29
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'잿가루 하나 남지 않는다'가 드러내는 뜻으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "완전히 사라질 수 없는 실재의 무게"
+              },
+              {
+                "id": "B",
+                "text": "타고 남은 흔적이 아주 많다는 뜻"
+              },
+              {
+                "id": "C",
+                "text": "이미지의 비물질성과 소멸 불가능성"
+              },
+              {
+                "id": "D",
+                "text": "불꽃이 매우 강해 재가 멀리 날린다는 뜻"
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 59
+              }
+            ]
+          },
+          "question": {
+            "prompt": "6연의 '수많은 복사 속에'가 강조하는 것은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "비둘기가 한 장의 원본으로만 존재한다는 점"
+              },
+              {
+                "id": "B",
+                "text": "복제된 이미지가 끝없이 퍼져 있다는 점"
+              },
+              {
+                "id": "C",
+                "text": "화자가 포스터를 한 장만 소유하고 있다는 점"
+              },
+              {
+                "id": "D",
+                "text": "비둘기가 날아가 복사본을 모두 없앤다는 점"
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 59
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 시 전체의 주제로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "복제된 이미지 속 존재가 생명성과 죽음 모두에서 멀어지는 모습"
+              },
+              {
+                "id": "B",
+                "text": "자연 속 비둘기가 자유를 회복하는 장면"
+              },
+              {
+                "id": "C",
+                "text": "화자가 비둘기에게 먹이를 주며 길들이는 과정"
+              },
+              {
+                "id": "D",
+                "text": "포스터 제작 기술의 정교함을 칭찬하는 내용"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {
+          "id": "c1",
+          "text": "포스터 속에 갇힌 비둘기는 오래 머문 탓에 습성마저 변한 채 곁눈질만 하고 있다."
+        },
+        {
+          "id": "c2",
+          "text": "화자는 비둘기가 자유롭게 놀던 지붕마루를 기억하지만 이제 그 자리에는 비어 버린 집만 남아 있다."
+        },
+        {
+          "id": "c3",
+          "text": "포스터 속 비둘기에게는 실제로 날아다닐 하늘도 숨 쉴 공기도 주어져 있지 않다."
+        },
+        {
+          "id": "c4",
+          "text": "답답함에 몸을 비틀고 누가 찢어 보아도 그는 살아 있는 존재처럼 피를 흘리지 못한다."
+        },
+        {
+          "id": "c5",
+          "text": "심지어 불에 태워도 그는 잿가루 하나 남기지 못할 만큼 허구적인 형상에 머문다."
+        },
+        {
+          "id": "c6",
+          "text": "결국 비둘기는 수많은 복사본 속에서 상처도 죽음도 없이 붙들린 채 차라리 죽지 못하는 처지로 남는다."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 70
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "2연은 그 장면이나 정서를 어떻게 이어 가는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 76
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 38
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 60
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "5연은 앞선 흐름을 어떤 긴장이나 전환으로 끌고 가는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 29
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 59
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }

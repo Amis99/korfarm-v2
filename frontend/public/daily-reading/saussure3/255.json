@@ -1,19 +1,35 @@
 {
-  "contentId": "dr-s3-255",
+  "contentId": "dr-saussure3-255",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(소쉬르 3) Day 255 비문학",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 추운 겨울 보온 - 안전하게 행동하기",
+  "description": "체온 유지와 안전한 보행을 위한 겨울 수칙",
   "targetLevel": "SAUSSURE_3",
-  "schoolGradeRange": { "min": 5, "max": 5 },
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
-  "timeLimitSec": 480,
+  "schoolGradeRange": {
+    "min": 3,
+    "max": 3
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +37,15 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "식물은 햇빛을 받아 스스로 양분을 만들어 내는 놀라운 능력을 지니고 있습니다. 이 과정을 광합성이라고 하며 식물이 살아가는 데 가장 기본이 되는 중요한 활동입니다. 광합성은 주로 식물의 잎에서 이루어지는데 잎 속에는 엽록체라는 아주 작은 초록색 알갱이가 가득 들어 있습니다. 엽록체가 햇빛을 흡수하면 뿌리에서 빨아올린 물과 공기 중의 이산화 탄소를 재료로 사용하여 포도당이라는 양분을 만들어 냅니다. 이때 산소가 함께 만들어져서 잎 표면의 작은 구멍인 기공을 통해 공기 중으로 내보내집니다. 이 산소는 사람을 비롯한 모든 동물이 숨 쉬는 데 꼭 필요한 소중한 기체입니다."
+          "text": "추운 겨울에는 몸을 따뜻하게 보호하는 안전 수칙이 중요함. 외출할 때 목도리와 장갑을 착용하여 체온을 유지합니다. 우리는 찬 바람에 감기 걸리지 않게 주의를 기울임."
         },
         {
           "id": "p2",
-          "text": "광합성으로 만들어진 포도당은 식물의 줄기와 열매, 뿌리 등 여러 부분에 골고루 저장됩니다. 우리가 매일 먹는 쌀이나 밀, 감자와 같은 식량은 모두 식물이 광합성을 통해 만든 양분이 변한 것입니다. 그래서 광합성은 식물뿐만 아니라 사람과 동물의 먹이 사슬 전체를 떠받치는 중요한 과정입니다. 또한 광합성은 공기 속에 있는 이산화 탄소를 흡수하고 산소를 내보내기 때문에 지구의 공기를 맑고 깨끗하게 유지하는 역할도 합니다. 만약 식물이 사라진다면 산소가 부족해지고 이산화 탄소가 크게 늘어 지구의 환경이 심각하게 달라질 것입니다. 이처럼 광합성은 지구 위 모든 생명체가 살아가는 데 없어서는 안 될 대단히 소중한 과정입니다."
+          "text": "눈길에서는 바닥이 미끄러우니 주머니에 손을 넣지 마요. 넘어지면 크게 다칠 수 있으니 천천히 조심해서 걷습니다. 타인의 안전도 배려하며 질서 있게 보행해야 합니다."
+        },
+        {
+          "id": "p3",
+          "text": "우리는 겨울철 건강 수칙을 친구들과 함께 실천함. 바른 행동이 추운 겨울을 더 따뜻하고 안전하게 만듭니다. 규칙을 지켜서 건강한 겨울 방학을 보내기로 합시다."
         }
       ]
     },
@@ -33,287 +53,594 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 43 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 31
+              }
+            ]
+          },
           "question": {
-            "prompt": "식물이 지닌 놀라운 능력은 무엇인가요?",
+            "prompt": "겨울에 무엇이 중요한가요?",
             "choices": [
-              "물속에서 숨을 쉴 수 있는 능력이다",
-              "햇빛을 받아 스스로 양분을 만드는 능력이다",
-              "빠르게 이동할 수 있는 능력이다",
-              "동물과 대화할 수 있는 능력이다"
+              {
+                "id": "A",
+                "text": "안전 수칙"
+              },
+              {
+                "id": "B",
+                "text": "노래 가사"
+              },
+              {
+                "id": "C",
+                "text": "게임 점수"
+              },
+              {
+                "id": "D",
+                "text": "가방 무게"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 43, "end": 91 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 33,
+                "end": 62
+              }
+            ]
+          },
           "question": {
-            "prompt": "식물이 양분을 만드는 과정을 무엇이라 부르나요?",
+            "prompt": "무엇을 유지하기 위해 착용하나요?",
             "choices": [
-              "호흡이라고 부른다",
-              "소화라고 부른다",
-              "광합성이라고 부른다",
-              "증발이라고 부른다"
+              {
+                "id": "A",
+                "text": "체온"
+              },
+              {
+                "id": "B",
+                "text": "키"
+              },
+              {
+                "id": "C",
+                "text": "이름"
+              },
+              {
+                "id": "D",
+                "text": "주소"
+              }
             ],
-            "answerIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 91, "end": 153 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 64,
+                "end": 91
+              }
+            ]
+          },
           "question": {
-            "prompt": "잎 속에 들어 있는 초록색 알갱이를 무엇이라 하나요?",
+            "prompt": "무엇에 걸리지 않게 주의하나요?",
             "choices": [
-              "세포벽이라고 한다",
-              "엽록체라고 한다",
-              "미토콘드리아라고 한다",
-              "기공이라고 한다"
+              {
+                "id": "A",
+                "text": "감기"
+              },
+              {
+                "id": "B",
+                "text": "풍선"
+              },
+              {
+                "id": "C",
+                "text": "바람개비"
+              },
+              {
+                "id": "D",
+                "text": "별"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 153, "end": 223 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 31
+              },
+              {
+                "paragraphId": "p1",
+                "start": 33,
+                "end": 62
+              },
+              {
+                "paragraphId": "p1",
+                "start": 64,
+                "end": 91
+              }
+            ]
+          },
           "question": {
-            "prompt": "광합성에서 양분을 만들 때 사용하는 재료는 무엇인가요?",
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "흙과 공기를 재료로 사용한다",
-              "물과 이산화 탄소를 재료로 사용한다",
-              "산소와 포도당을 재료로 사용한다",
-              "질소와 수소를 재료로 사용한다"
+              {
+                "id": "A",
+                "text": "겨울철 보온과 감기 예방"
+              },
+              {
+                "id": "B",
+                "text": "목도리가 비싼 이유"
+              },
+              {
+                "id": "C",
+                "text": "바람이 무서운 공포"
+              },
+              {
+                "id": "D",
+                "text": "겨울이 긴 불평"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 223, "end": 274 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 29
+              }
+            ]
+          },
           "question": {
-            "prompt": "광합성 과정에서 산소는 어떻게 밖으로 나가나요?",
+            "prompt": "어디에 손을 넣지 마요?",
             "choices": [
-              "줄기를 통해 밖으로 나간다",
-              "뿌리를 통해 땅속으로 나간다",
-              "잎 표면의 기공을 통해 공기 중으로 나간다",
-              "꽃잎을 통해 밖으로 날아간다"
+              {
+                "id": "A",
+                "text": "주머니"
+              },
+              {
+                "id": "B",
+                "text": "가방"
+              },
+              {
+                "id": "C",
+                "text": "필통"
+              },
+              {
+                "id": "D",
+                "text": "신발"
+              }
             ],
-            "answerIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 274, "end": 319 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 31,
+                "end": 61
+              }
+            ]
+          },
           "question": {
-            "prompt": "광합성으로 만들어진 산소가 중요한 까닭은 무엇인가요?",
+            "prompt": "어떻게 걸어야 하나요?",
             "choices": [
-              "식물의 뿌리를 튼튼하게 해 주기 때문이다",
-              "사람과 모든 동물이 숨 쉬는 데 꼭 필요하기 때문이다",
-              "구름을 만드는 데 사용되기 때문이다",
-              "바닷물의 온도를 낮추기 때문이다"
+              {
+                "id": "A",
+                "text": "천천히 조심해서"
+              },
+              {
+                "id": "B",
+                "text": "뛰어서 빨리"
+              },
+              {
+                "id": "C",
+                "text": "뒤로 거꾸로"
+              },
+              {
+                "id": "D",
+                "text": "눈 감고"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 319 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 63,
+                "end": 90
+              }
+            ]
+          },
           "question": {
-            "prompt": "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "prompt": "무엇을 배려해야 하나요?",
             "choices": [
-              "광합성의 원리와 과정에 대한 설명",
-              "식물의 뿌리가 물을 흡수하는 방법",
-              "동물이 산소를 사용하는 방법",
-              "기공의 구조와 크기"
+              {
+                "id": "A",
+                "text": "타인의 안전"
+              },
+              {
+                "id": "B",
+                "text": "나의 용돈"
+              },
+              {
+                "id": "C",
+                "text": "로봇의 이름"
+              },
+              {
+                "id": "D",
+                "text": "외계인의 춤"
+              }
             ],
-            "answerIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 50 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 29
+              },
+              {
+                "paragraphId": "p2",
+                "start": 31,
+                "end": 61
+              },
+              {
+                "paragraphId": "p2",
+                "start": 63,
+                "end": 90
+              }
+            ]
+          },
           "question": {
-            "prompt": "광합성으로 만들어진 포도당은 어디에 저장되나요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "잎에만 저장된다",
-              "줄기와 열매, 뿌리 등 여러 부분에 골고루 저장된다",
-              "공기 중에 흩어진다",
-              "흙속으로 스며든다"
+              {
+                "id": "A",
+                "text": "눈길 안전 수칙과 보행 질서"
+              },
+              {
+                "id": "B",
+                "text": "주머니가 구멍 난 사고"
+              },
+              {
+                "id": "C",
+                "text": "바닥이 차가운 불평"
+              },
+              {
+                "id": "D",
+                "text": "타인이 화난 사연"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 50, "end": 109 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 26
+              }
+            ]
+          },
           "question": {
-            "prompt": "우리가 먹는 쌀이나 밀, 감자는 원래 무엇에서 변한 것인가요?",
+            "prompt": "누구와 함께 실천하나요?",
             "choices": [
-              "동물의 고기에서 변한 것이다",
-              "바닷물에서 변한 것이다",
-              "식물이 광합성으로 만든 양분이 변한 것이다",
-              "흙속의 광물이 변한 것이다"
+              {
+                "id": "A",
+                "text": "친구들"
+              },
+              {
+                "id": "B",
+                "text": "로봇"
+              },
+              {
+                "id": "C",
+                "text": "외계인"
+              },
+              {
+                "id": "D",
+                "text": "요정"
+              }
             ],
-            "answerIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 109, "end": 161 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 28,
+                "end": 58
+              }
+            ]
+          },
           "question": {
-            "prompt": "광합성이 먹이 사슬에서 중요한 까닭은 무엇인가요?",
+            "prompt": "무엇이 겨울을 따뜻하게 하나요?",
             "choices": [
-              "동물이 직접 광합성을 할 수 있기 때문이다",
-              "식물뿐 아니라 사람과 동물의 먹이 사슬 전체를 떠받치기 때문이다",
-              "광합성으로 물이 만들어지기 때문이다",
-              "광합성이 날씨를 결정하기 때문이다"
+              {
+                "id": "A",
+                "text": "바른 행동"
+              },
+              {
+                "id": "B",
+                "text": "많은 난로"
+              },
+              {
+                "id": "C",
+                "text": "뜨거운 죽"
+              },
+              {
+                "id": "D",
+                "text": "비싼 옷"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 161, "end": 234 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 60,
+                "end": 87
+              }
+            ]
+          },
           "question": {
-            "prompt": "광합성이 지구의 공기에 미치는 영향은 무엇인가요?",
+            "prompt": "어떤 방학을 보내나요?",
             "choices": [
-              "이산화 탄소를 흡수하고 산소를 내보내 공기를 깨끗하게 한다",
-              "공기 중의 산소를 흡수하고 질소를 내보낸다",
-              "공기의 온도를 높여 준다",
-              "공기 중의 수증기를 제거한다"
+              {
+                "id": "A",
+                "text": "건강한 겨울 방학"
+              },
+              {
+                "id": "B",
+                "text": "지루한 여름 방학"
+              },
+              {
+                "id": "C",
+                "text": "무서운 가을 방학"
+              },
+              {
+                "id": "D",
+                "text": "시끄러운 봄 방학"
+              }
             ],
-            "answerIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 234, "end": 294 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 26
+              },
+              {
+                "paragraphId": "p3",
+                "start": 28,
+                "end": 58
+              },
+              {
+                "paragraphId": "p3",
+                "start": 60,
+                "end": 87
+              }
+            ]
+          },
           "question": {
-            "prompt": "만약 식물이 사라진다면 어떤 일이 벌어지나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "바다가 더 넓어질 것이다",
-              "산소가 부족해지고 이산화 탄소가 늘어 환경이 달라질 것이다",
-              "비가 더 많이 내릴 것이다",
-              "동물의 수가 늘어날 것이다"
+              {
+                "id": "A",
+                "text": "겨울철 건강 실천과 다짐"
+              },
+              {
+                "id": "B",
+                "text": "방학이 짧은 아쉬움"
+              },
+              {
+                "id": "C",
+                "text": "규칙이 지루한 이유"
+              },
+              {
+                "id": "D",
+                "text": "건강이 나빠진 걱정"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 294, "end": 347 }] },
-          "question": {
-            "prompt": "글쓴이가 광합성을 최종적으로 어떻게 평가하고 있나요?",
-            "choices": [
-              "식물에게만 중요한 과정이라고 했다",
-              "없어서는 안 될 대단히 소중한 과정이라고 했다",
-              "과학자들만 관심 있는 과정이라고 했다",
-              "특별한 가치가 없는 과정이라고 했다"
-            ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 347 }] },
-          "question": {
-            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
-            "choices": [
-              "광합성이 먹이 사슬과 지구 환경에 미치는 중요한 역할",
-              "식물의 종류와 생김새에 대한 설명",
-              "동물이 산소를 만드는 방법",
-              "이산화 탄소의 화학적 구조"
-            ],
-            "answerIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "식물은 햇빛으로 양분을 스스로 만든다" },
-        { "id": "c2", "text": "이 과정을 광합성이라 부른다" },
-        { "id": "c3", "text": "잎 속 엽록체가 햇빛을 흡수한다" },
-        { "id": "c4", "text": "물과 이산화 탄소로 포도당을 만든다" },
-        { "id": "c5", "text": "포도당은 줄기, 열매, 뿌리에 저장된다" },
-        { "id": "c6", "text": "광합성은 먹이 사슬 전체를 떠받친다" },
-        { "id": "c7", "text": "이산화 탄소 흡수하고 산소를 내보낸다" },
-        { "id": "c8", "text": "광합성은 모든 생명체에 꼭 필요하다" }
+        {
+          "id": "c1",
+          "text": "겨울철 보온 수칙을 지켜요."
+        },
+        {
+          "id": "c2",
+          "text": "목도리와 장갑으로 체온 유지."
+        },
+        {
+          "id": "c3",
+          "text": "눈길에는 조심해서 걷습니다."
+        },
+        {
+          "id": "c4",
+          "text": "주머니에 손을 넣지 마요."
+        },
+        {
+          "id": "c5",
+          "text": "규칙을 지켜 건강하게 지내자."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "식물이 양분을 만드는 과정을 무엇이라 부릅니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 44, "end": 56 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "몸의 온도를 뜻함은?",
+          "answerText": "체온을",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 53,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "잎 속에서 햇빛을 흡수하는 초록색 알갱이를 무엇이라 합니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 108, "end": 152 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "지켜야 할 행동 방식은?",
+          "answerText": "수칙이",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 24,
+              "end": 27
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "광합성에서 양분을 만드는 재료 두 가지는 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 168, "end": 203 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q4",
-          "prompt": "산소가 잎 밖으로 나가는 통로를 무엇이라 합니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 240, "end": 255 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "쌀, 밀, 감자 같은 식량은 원래 무엇이 변한 것입니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 74, "end": 108 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "광합성이 지구 공기에 미치는 역할은 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 162, "end": 233 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q7",
-          "prompt": "만약 식물이 사라진다면 어떤 일이 벌어집니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 235, "end": 293 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "남을 도와주거나 살핌은?",
+          "answerText": "배려하며",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 71,
+              "end": 75
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

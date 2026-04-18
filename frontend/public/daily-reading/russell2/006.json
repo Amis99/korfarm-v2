@@ -533,180 +533,143 @@
     "recall": {
       "cards": [
         {
-          "text": "사료 비판은 읽기 전에 남겨진 자리와 목적을 따지는 과정이다."
+          "id": "c1",
+          "text": "사료 비판은 옛 기록이나 유물이 무엇을 말하는지 읽기 전에 그것이 언제 누구에 의해 왜 남겨졌는지 먼저 따지는 과정이다."
         },
         {
-          "text": "기록은 전쟁에서 이긴 쪽, 백성의 노래, 나중 시대의 책에 따라 다르게 보일 수 있다."
+          "id": "c2",
+          "text": "같은 사건의 기록도 누가 어떤 처지에서 남겼는지에 따라 강조점과 빠진 내용이 달라질 수 있다."
         },
         {
-          "text": "역사가는 작성 시기, 작성자, 전해지는 경로를 함께 본다."
+          "id": "c3",
+          "text": "그래서 역사가는 자료의 내용뿐 아니라 작성 시기와 작성자와 전승 경로까지 살펴 그 신뢰 범위와 한계를 가늠한다."
         },
         {
-          "text": "왕의 교서는 나라를 안정되게 다스렸다는 점을 앞세우기 쉽다."
+          "id": "c4",
+          "text": "예를 들어 왕의 교서는 통치의 안정만 앞세우기 쉬우므로 실제 백성의 삶은 다른 자료와 함께 보아야 더 분명해진다."
         },
         {
-          "text": "한 가지 사료만으로 결론을 내리면 한쪽 목소리를 역사 전체로 착각할 수 있다."
+          "id": "c5",
+          "text": "또한 한 가지 사료만 믿으면 우연히 남은 한쪽 목소리를 역사 전체로 오해할 수 있어 서로 다른 자료를 맞대어 확인해야 한다."
         },
         {
-          "text": "사료 비판은 자료의 자리와 성격을 따져 사실에 더 가까이 가려는 태도다."
+          "id": "c6",
+          "text": "결국 사료 비판은 자료를 무조건 믿거나 버리는 일이 아니라 그 자리와 성격을 따져 역사적 사실에 가까이 가려는 태도다."
         }
       ],
       "correctOrder": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
       ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
-          "prompt": "사료 비판에서 먼저 따져 보는 것은 무엇인가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "언제 누구에 의해 어떤 목적 아래 남겨졌는지"
-            },
-            {
-              "id": "B",
-              "text": "어떤 글씨체로 적혔는지"
-            },
-            {
-              "id": "C",
-              "text": "몇 쪽에 실렸는지"
-            },
-            {
-              "id": "D",
-              "text": "어디에서 읽었는지"
-            }
-          ],
-          "answerId": "A",
+          "id": "q1",
+          "prompt": "?? ??? ?? ??? ??? ??? ?? ?? ?? ??? ??? ???? ??????",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 45,
-              "end": 69
-            }
-          ]
-        },
-        {
-          "prompt": "같은 사건 기록이라도 무엇이 달라질 수 있는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "강조점과 빠진 내용"
-            },
-            {
-              "id": "B",
-              "text": "연도와 글자 수"
-            },
-            {
-              "id": "C",
-              "text": "종이의 색"
-            },
-            {
-              "id": "D",
-              "text": "책의 두께"
+              "start": 0,
+              "end": 85
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "?? ??? ?? ?? ??? ??? ?? ???? ??? ??? ? ??? ????",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 70,
-              "end": 79
-            }
-          ]
-        },
-        {
-          "prompt": "역사가는 내용과 함께 무엇을 살피는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "작성 시기와 작성자와 전해지는 경로"
-            },
-            {
-              "id": "B",
-              "text": "글씨체와 종이 재질"
-            },
-            {
-              "id": "C",
-              "text": "문장의 길이"
-            },
-            {
-              "id": "D",
-              "text": "장식의 모양"
+              "start": 0,
+              "end": 91
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "?? ??? ????? ??? ?? ??? ??? ?? ???? ?? ??? ????? ?? ????",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 23,
-              "end": 41
-            }
-          ]
-        },
-        {
-          "prompt": "왕이 반포한 교서는 어떤 점을 앞세우기 쉬운가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "나라를 안정되게 다스렸다는 점"
-            },
-            {
-              "id": "B",
-              "text": "백성의 생활이 어려웠다는 점"
-            },
-            {
-              "id": "C",
-              "text": "다른 기록이 틀렸다는 점"
-            },
-            {
-              "id": "D",
-              "text": "왕이 기록을 남기지 않았다는 점"
+              "start": 0,
+              "end": 75
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "?? ??? ?? ?? ??? ?? ? ?????? ??? ??? ???? ???? ?????",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 17,
-              "end": 32
-            }
-          ]
-        },
-        {
-          "prompt": "한 가지 사료만으로 결론을 내리면 무엇을 착각할 수 있는가?",
-          "choices": [
-            {
-              "id": "A",
-              "text": "우연히 남은 한쪽 목소리를 역사 전체로"
-            },
-            {
-              "id": "B",
-              "text": "모든 기록이 같은 뜻이라는 것"
-            },
-            {
-              "id": "C",
-              "text": "작성 시기를 알 수 없다는 것"
-            },
-            {
-              "id": "D",
-              "text": "기록이 전부 거짓이라는 것"
+              "start": 0,
+              "end": 85
             }
           ],
-          "answerId": "A",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "??? ??? ?? ??? ??? ??? ?? ??? ?? ??? ??? ??????",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 21,
-              "end": 33
+              "start": 0,
+              "end": 95
             }
-          ]
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "??? ??? ?? ??? ?? ??? ??? ?? ??? ??????",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 91
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
         }
       ]
     }

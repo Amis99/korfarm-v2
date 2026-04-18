@@ -1025,19 +1025,26 @@
           "text": "학교가 더 깨끗해지고 이미지도 좋아지므로 자주 지나는 곳부터 설치하자고 마무리한다."
         }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "의견을 적어 부탁하는 글을 뜻하는 말은?",
+          "prompt": "?? ??? ???? ????? ??? ?? ?? ??? ?? ??? ??? ??????",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 44,
-              "end": 46
+              "start": 0,
+              "end": 164
             }
           ],
           "scoring": {
@@ -1049,12 +1056,12 @@
         },
         {
           "id": "q2",
-          "prompt": "바로 하지 못하고 머뭇거리는 모양을 뜻하는 말은?",
+          "prompt": "?? ??? ??? ????? ??? ?? ?? ???? ????? ??????",
           "answerRanges": [
             {
               "paragraphId": "p2",
-              "start": 57,
-              "end": 61
+              "start": 0,
+              "end": 165
             }
           ],
           "scoring": {
@@ -1066,12 +1073,12 @@
         },
         {
           "id": "q3",
-          "prompt": "함께 나서서 하는 비율을 뜻하는 말은?",
+          "prompt": "?? ??? ????? ??? ?? ?? ??? ?? ??? ??? ??? ????",
           "answerRanges": [
             {
               "paragraphId": "p3",
-              "start": 80,
-              "end": 82
+              "start": 0,
+              "end": 164
             }
           ],
           "scoring": {
@@ -1083,12 +1090,12 @@
         },
         {
           "id": "q4",
-          "prompt": "어떤 일을 하려고 마련한 돈을 뜻하는 말은?",
+          "prompt": "?? ??? ?? ??? ?? ??? ?? ??? ???? ??????",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 103,
-              "end": 104
+              "start": 0,
+              "end": 162
             }
           ],
           "scoring": {
@@ -1100,12 +1107,29 @@
         },
         {
           "id": "q5",
-          "prompt": "더 늘려서 세우는 일을 뜻하는 말은?",
+          "prompt": "??? ??? ? ??? ?? ???? ???? ?? ??? ? ??? ??????",
           "answerRanges": [
             {
               "paragraphId": "p5",
-              "start": 133,
-              "end": 134
+              "start": 0,
+              "end": 169
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "??? ??? ???? ?? ??? ?? ?? ??? ??? ?? ???? ???????",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 117
             }
           ],
           "scoring": {

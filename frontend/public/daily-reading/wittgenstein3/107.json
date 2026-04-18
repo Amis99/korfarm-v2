@@ -32,24 +32,983 @@
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        "오동나무꽃으로 불 밝힌 이곳 첫여름이 그립지 아니한가?\n어린 나그네 꿈이 시시로 파랑새가 되어 오려니.",
-        "나무 밑으로 가나 책상 턱에 이마를 고일 때나,\n네가 남기고 간 기억만이 소곤소곤거리는구나.",
-        "모처럼 만에 날아온 소식에 반가운 마음이 울렁거리어\n가여운 글자마다 먼 황해가 남실거리나니.",
-        "……나는 갈매기 같은 종선을 한창 치달리고 있다……",
-        "쾌활한 오월 넥타이가 내처 난데없는 순풍이 되어,\n하늘과 딱 닿은 푸른 물결 우에 솟은,\n외따른 섬 로맨틱을 찾아갈까나.",
-        "일본 말과 아라비아 글씨를 가르치러 간\n쬐그만 이 페스탈로치야, 꾀꼬리 같은 선생님이야,\n날마다 밤마다 섬 둘레가 근심스런 풍랑에 씹히는가 하노니,\n은은히 밀려오는 듯 머얼리 우는 오르간 소리……"
+        {
+          "id": "p1",
+          "text": "오동나무꽃으로 불 밝힌 이곳 첫여름이 그립지 아니한가?\n어린 나그네 꿈이 시시로 파랑새가 되어 오려니."
+        },
+        {
+          "id": "p2",
+          "text": "나무 밑으로 가나 책상 턱에 이마를 고일 때나,\n네가 남기고 간 기억만이 소곤소곤거리는구나."
+        },
+        {
+          "id": "p3",
+          "text": "모처럼 만에 날아온 소식에 반가운 마음이 울렁거리어\n가여운 글자마다 먼 황해가 남실거리나니."
+        },
+        {
+          "id": "p4",
+          "text": "……나는 갈매기 같은 종선을 한창 치달리고 있다……"
+        },
+        {
+          "id": "p5",
+          "text": "쾌활한 오월 넥타이가 내처 난데없는 순풍이 되어,\n하늘과 딱 닿은 푸른 물결 우에 솟은,\n외따른 섬 로맨틱을 찾아갈까나."
+        },
+        {
+          "id": "p6",
+          "text": "일본 말과 아라비아 글씨를 가르치러 간\n쬐그만 이 페스탈로치야, 꾀꼬리 같은 선생님이야,\n날마다 밤마다 섬 둘레가 근심스런 풍랑에 씹히는가 하노니,\n은은히 밀려오는 듯 머얼리 우는 오르간 소리……"
+        }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 30
+              }
+            ]
+          },
+          "question": {
+            "prompt": "첫 구절에서 드러나는 화자의 정서로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그리운 첫여름을 향한 애틋한 그리움"
+              },
+              {
+                "id": "B",
+                "text": "지루한 일상을 향한 권태"
+              },
+              {
+                "id": "C",
+                "text": "떠난 이를 향한 분노"
+              },
+              {
+                "id": "D",
+                "text": "모든 것을 포기한 체념"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 31,
+                "end": 57
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'파랑새가 되어 오려니'가 뜻하는 바로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그리운 곳으로 자꾸 날아가는 꿈과 상상을 말한다"
+              },
+              {
+                "id": "B",
+                "text": "실제 파랑새가 소식을 물어 온다는 뜻이다"
+              },
+              {
+                "id": "C",
+                "text": "나그네가 더는 돌아오지 못함을 뜻한다"
+              },
+              {
+                "id": "D",
+                "text": "첫여름의 풍경이 곧 사라진다는 뜻이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 57
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1연의 중심 내용으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그리운 첫여름과 그곳을 향한 상상이 함께 떠오른다"
+              },
+              {
+                "id": "B",
+                "text": "먼 곳에서 온 소식이 실망만 남긴다"
+              },
+              {
+                "id": "C",
+                "text": "배를 타고 실제로 여행을 시작한다"
+              },
+              {
+                "id": "D",
+                "text": "이별의 이유를 냉정하게 분석한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 26
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 구절은 기억이 언제 떠오른다는 뜻인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "나무 밑에 가거나 책상에 기대는 일상 속 어느 때든"
+              },
+              {
+                "id": "B",
+                "text": "배를 타고 바다로 나갈 때만"
+              },
+              {
+                "id": "C",
+                "text": "멀리서 소식이 온 뒤에만"
+              },
+              {
+                "id": "D",
+                "text": "잠들기 직전에만"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 27,
+                "end": 51
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'소곤소곤거리는구나'가 드러내는 바로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "남겨진 기억이 조용히 화자에게 계속 말을 거는 듯한 느낌"
+              },
+              {
+                "id": "B",
+                "text": "기억이 완전히 사라져 버린 상태"
+              },
+              {
+                "id": "C",
+                "text": "화자가 기억을 꾸짖는 냉정함"
+              },
+              {
+                "id": "D",
+                "text": "소식의 내용을 정확히 분석하는 태도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 51
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2연이 보여 주는 상황으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일상 속 사소한 순간마다 너의 흔적이 떠오르는 상태"
+              },
+              {
+                "id": "B",
+                "text": "드디어 그리운 이를 직접 만나 기뻐하는 상태"
+              },
+              {
+                "id": "C",
+                "text": "기억을 모두 잊고 현실에만 몰두하는 상태"
+              },
+              {
+                "id": "D",
+                "text": "소식의 진위를 의심하며 다투는 상태"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 28
+              }
+            ]
+          },
+          "question": {
+            "prompt": "소식이 날아왔을 때 화자의 반응으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반가운 마음이 크게 일렁거린다"
+              },
+              {
+                "id": "B",
+                "text": "화가 나서 곧장 편지를 접는다"
+              },
+              {
+                "id": "C",
+                "text": "아무 감흥 없이 지나친다"
+              },
+              {
+                "id": "D",
+                "text": "소식이 늦었다고 원망한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 29,
+                "end": 51
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'먼 황해가 남실거리나니'가 보여 주는 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "글자마다 실려 오는 먼 거리감과 바다의 출렁임"
+              },
+              {
+                "id": "B",
+                "text": "당장 만날 수 있는 가까운 거리"
+              },
+              {
+                "id": "C",
+                "text": "편지의 내용이 모두 지워진 상태"
+              },
+              {
+                "id": "D",
+                "text": "항구의 소란한 풍경만을 묘사한 것"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 51
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3연의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "반가운 소식의 글자마다 먼 바다와 그리움이 겹쳐 보인다"
+              },
+              {
+                "id": "B",
+                "text": "소식이 화자를 더욱 냉정하게 만든다"
+              },
+              {
+                "id": "C",
+                "text": "소식 대신 배를 마련하는 일이 중요해진다"
+              },
+              {
+                "id": "D",
+                "text": "기억보다 현실적인 계산이 앞선다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 28
+              }
+            ]
+          },
+          "question": {
+            "prompt": "독립된 한 줄로 제시된 이 대목의 효과로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "마음속 상상이 갑자기 움직이는 장면을 강하게 부각한다"
+              },
+              {
+                "id": "B",
+                "text": "현실 상황을 차분히 설명하는 역할만 한다"
+              },
+              {
+                "id": "C",
+                "text": "앞의 소식을 모두 부정하는 뜻을 드러낸다"
+              },
+              {
+                "id": "D",
+                "text": "항해를 중단하고 포기하겠다는 결심을 보여 준다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 28
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'갈매기 같은 종선'에 담긴 심상으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그리운 곳으로 재빨리 달려가고 싶은 마음의 비상감"
+              },
+              {
+                "id": "B",
+                "text": "움직이지 못한 채 갇힌 답답함"
+              },
+              {
+                "id": "C",
+                "text": "풍랑 속에 부서지는 절망"
+              },
+              {
+                "id": "D",
+                "text": "고향에 정착한 안도감"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 27
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'오월 넥타이'가 '순풍'이 되는 까닭으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "오월의 활기와 반가운 마음이 떠나고 싶은 상상에 힘을 보태기 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "넥타이가 실제로 배를 움직이는 도구이기 때문이다"
+              },
+              {
+                "id": "C",
+                "text": "오월이 끝나 가는 아쉬움을 드러내기 때문이다"
+              },
+              {
+                "id": "D",
+                "text": "차가운 겨울 바람을 막기 위한 장치이기 때문이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 28,
+                "end": 49
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 구절이 그리는 공간의 모습으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "하늘과 맞닿을 듯 펼쳐진 푸른 바다"
+              },
+              {
+                "id": "B",
+                "text": "사람들로 붐비는 도시 거리"
+              },
+              {
+                "id": "C",
+                "text": "불 꺼진 방 안의 적막"
+              },
+              {
+                "id": "D",
+                "text": "먼지가 이는 메마른 들판"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 50,
+                "end": 67
+              }
+            ]
+          },
+          "question": {
+            "prompt": "화자가 찾아가고 싶어 하는 곳으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "외따른 섬의 로맨틱한 공간"
+              },
+              {
+                "id": "B",
+                "text": "시장과 항구가 모인 번화한 도시"
+              },
+              {
+                "id": "C",
+                "text": "늘 머물던 고향집"
+              },
+              {
+                "id": "D",
+                "text": "산속의 깊은 숲"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 67
+              }
+            ]
+          },
+          "question": {
+            "prompt": "5연 전체의 흐름으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "순풍 같은 기운을 타고 그리운 섬으로 향하는 상상이 펼쳐진다"
+              },
+              {
+                "id": "B",
+                "text": "현실의 고단함을 원망하는 목소리만 반복된다"
+              },
+              {
+                "id": "C",
+                "text": "섬 생활의 위험을 비판하며 발길을 거둔다"
+              },
+              {
+                "id": "D",
+                "text": "도시로 돌아가려는 계획이 구체화된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 21
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 구절을 통해 알 수 있는 '너'의 모습으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "멀리 가서 언어와 글씨를 가르치는 사람"
+              },
+              {
+                "id": "B",
+                "text": "늘 곁에 머물며 함께 책을 읽는 사람"
+              },
+              {
+                "id": "C",
+                "text": "배를 모는 선장"
+              },
+              {
+                "id": "D",
+                "text": "화자와 다투고 떠난 사람"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 22,
+                "end": 49
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'쬐그만 이 페스탈로치야'라는 부름이 드러내는 태도로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "애정을 담아 다정하게 상대를 부르는 태도"
+              },
+              {
+                "id": "B",
+                "text": "상대를 냉정하게 비판하는 태도"
+              },
+              {
+                "id": "C",
+                "text": "남남처럼 거리를 두는 태도"
+              },
+              {
+                "id": "D",
+                "text": "능력을 깎아내리며 조롱하는 태도"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 50,
+                "end": 82
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 구절에서 화자가 가장 크게 드러내는 마음은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "풍랑 속 섬의 형편을 걱정하는 마음"
+              },
+              {
+                "id": "B",
+                "text": "상대의 소식이 늦은 데 대한 분노"
+              },
+              {
+                "id": "C",
+                "text": "섬으로 가기 싫어하는 거부감"
+              },
+              {
+                "id": "D",
+                "text": "여행을 끝낸 뒤의 안도감"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 83,
+                "end": 109
+              }
+            ]
+          },
+          "question": {
+            "prompt": "'오르간 소리'가 주는 느낌으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "멀리서 밀려오는 듯한 쓸쓸하고 은은한 여운"
+              },
+              {
+                "id": "B",
+                "text": "시장판의 소란스러운 활기"
+              },
+              {
+                "id": "C",
+                "text": "전투가 벌어지는 긴박함"
+              },
+              {
+                "id": "D",
+                "text": "웃음소리가 가득한 흥겨움"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 57
+              },
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 51
+              },
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 51
+              },
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 28
+              },
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 67
+              },
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 109
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 시 전체를 가장 잘 설명한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그리운 이의 소식이 기억과 상상, 걱정으로 번져 가는 과정을 그린 시"
+              },
+              {
+                "id": "B",
+                "text": "떠난 이를 잊고 현재의 즐거움만 노래한 시"
+              },
+              {
+                "id": "C",
+                "text": "항해 절차를 객관적으로 설명한 안내문"
+              },
+              {
+                "id": "D",
+                "text": "현실 비판만 건조하게 정리한 논설문"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {
+          "id": "c1",
+          "text": "화자는 첫여름의 공간에서 파랑새처럼 돌아올 이를 그리워한다."
+        },
+        {
+          "id": "c2",
+          "text": "그는 어디에 있든 남겨진 기억이 곁에서 조용히 말을 거는 듯 느낀다."
+        },
+        {
+          "id": "c3",
+          "text": "멀리서 날아온 소식은 반가움과 함께 황해의 물결 같은 흔들림을 마음에 일으킨다."
+        },
+        {
+          "id": "c4",
+          "text": "이어 화자는 갈매기 같은 배를 타고 바다를 가르는 상상 속 장면으로 들어선다."
+        },
+        {
+          "id": "c5",
+          "text": "그 순풍을 따라 그는 푸른 바다 위 외로운 섬을 향해 낭만적인 여정을 꿈꾼다."
+        },
+        {
+          "id": "c6",
+          "text": "마지막에는 먼 섬에서 지내는 이를 염려하며 멀리서 들려오는 듯한 슬픈 울림으로 그리움을 맺는다."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 57
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "2연은 그 장면이나 정서를 어떻게 이어 가는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 51
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 28
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "5연은 앞선 흐름을 어떤 긴장이나 전환으로 끌고 가는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 67
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 109
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }

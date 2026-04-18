@@ -32,24 +32,646 @@
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        "내 기억으론 내 외당숙이 조성구였지만 그가 조정구라니 조정구가 틀림없다 싶었다. 그가 설사 내 딸 연이가 현이라고 했다면 아마 내 딸은 현이였음에 틀림없을 것이다.",
-        "나는 그 앞에 그렇게 무력했고 그는 그렇게 전능했다. 그는 내가 완전히 허탈 상태에 빠진 것을 확인한 후 비로소 엄숙히 선언했다.",
-        "6·25 때 의용군으로 나간 오빠가 이북에서 밀봉교육을 받고 곧 남파되리라는 것이었다. 먼저 남파됐다 가 체포된 간첩에 의해 확인된 정확한 정보란다.",
-        "오빠는 오면 반드시 집에 들를 테고 그러면 어떻게 하겠느냐고 그는 물었다.",
-        "“어떡하긴요. 그야 당연히 신, 신고를 하거나 자수를 시켜야죠.”",
-        "나는 아주 밉고 서툴게 아양을 떨었다."
+        {
+          "id": "p1",
+          "text": "내 기억으론 내 외당숙이 조성구였지만 그가 조정구라니 조정구가 틀림없다 싶었다. 그가 설사 내 딸 연이가 현이라고 했다면 아마 내 딸은 현이였음에 틀림없을 것이다."
+        },
+        {
+          "id": "p2",
+          "text": "나는 그 앞에 그렇게 무력했고 그는 그렇게 전능했다. 그는 내가 완전히 허탈 상태에 빠진 것을 확인한 후 비로소 엄숙히 선언했다."
+        },
+        {
+          "id": "p3",
+          "text": "6·25 때 의용군으로 나간 오빠가 이북에서 밀봉교육을 받고 곧 남파되리라는 것이었다. 먼저 남파됐다 가 체포된 간첩에 의해 확인된 정확한 정보란다."
+        },
+        {
+          "id": "p4",
+          "text": "오빠는 오면 반드시 집에 들를 테고 그러면 어떻게 하겠느냐고 그는 물었다."
+        },
+        {
+          "id": "p5",
+          "text": "“어떡하긴요. 그야 당연히 신, 신고를 하거나 자수를 시켜야죠.”"
+        },
+        {
+          "id": "p6",
+          "text": "나는 아주 밉고 서툴게 아양을 떨었다."
+        }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 91
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화자는 외당숙의 말에 눌려 자기 기억마저 쉽게 고쳐 믿게 된다."
+              },
+              {
+                "id": "B",
+                "text": "상대는 화자의 기억을 바로잡은 뒤에도 별다른 본론은 꺼내지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "화자는 오빠의 소식을 전해 듣고도 사실 여부를 끝까지 의심한다."
+              },
+              {
+                "id": "D",
+                "text": "질문의 초점은 오빠를 맞아 숨겨 줄지 여부를 정하는 데 놓인다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 91
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "상대는 화자의 기억을 바로잡은 뒤에도 별다른 본론은 꺼내지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "화자는 외당숙의 말에 눌려 자기 기억마저 쉽게 고쳐 믿게 된다."
+              },
+              {
+                "id": "C",
+                "text": "화자는 오빠의 소식을 전해 듣고도 사실 여부를 끝까지 의심한다."
+              },
+              {
+                "id": "D",
+                "text": "질문의 초점은 오빠를 맞아 숨겨 줄지 여부를 정하는 데 놓인다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 72
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그는 오빠 소문이 근거 없다고 하며 화자를 안심시키려 한다."
+              },
+              {
+                "id": "B",
+                "text": "화자는 먼저 오빠가 오면 신고하겠다는 결심을 큰소리로 밝힌다."
+              },
+              {
+                "id": "C",
+                "text": "화자는 상대의 권위 앞에서 무력해지고, 그는 그 틈을 확인한 뒤 본론을 꺼낸다."
+              },
+              {
+                "id": "D",
+                "text": "두 사람은 오빠의 귀가 이후 생활비 문제를 두고 실랑이를 벌인다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 72
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그는 오빠 소문이 근거 없다고 하며 화자를 안심시키려 한다."
+              },
+              {
+                "id": "B",
+                "text": "화자는 먼저 오빠가 오면 신고하겠다는 결심을 큰소리로 밝힌다."
+              },
+              {
+                "id": "C",
+                "text": "두 사람은 오빠의 귀가 이후 생활비 문제를 두고 실랑이를 벌인다."
+              },
+              {
+                "id": "D",
+                "text": "화자는 상대의 권위 앞에서 무력해지고, 그는 그 틈을 확인한 뒤 본론을 꺼낸다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 83
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그는 오빠가 북에서 훈련을 받고 남파될 예정이라는 말을 확인된 정보처럼 단정해 전한다."
+              },
+              {
+                "id": "B",
+                "text": "그는 오빠가 이미 자수 의사를 밝혔으니 집안은 걱정할 필요 없다고 말한다."
+              },
+              {
+                "id": "C",
+                "text": "화자는 그 말이 외당숙의 추측일 뿐이라며 냉정하게 반박한다."
+              },
+              {
+                "id": "D",
+                "text": "이 대목의 핵심은 오빠가 오면 어디에 숨길지 계획을 세우는 데 있다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 83
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그는 오빠가 이미 자수 의사를 밝혔으니 집안은 걱정할 필요 없다고 말한다."
+              },
+              {
+                "id": "B",
+                "text": "그는 오빠가 북에서 훈련을 받고 남파될 예정이라는 말을 확인된 정보처럼 단정해 전한다."
+              },
+              {
+                "id": "C",
+                "text": "화자는 그 말이 외당숙의 추측일 뿐이라며 냉정하게 반박한다."
+              },
+              {
+                "id": "D",
+                "text": "이 대목의 핵심은 오빠가 오면 어디에 숨길지 계획을 세우는 데 있다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그는 오빠가 절대 집에 오지 못할 것이니 미리 겁먹을 필요 없다고 말한다."
+              },
+              {
+                "id": "B",
+                "text": "화자는 그 질문을 듣고 곧장 신고하겠다고 먼저 선언한다."
+              },
+              {
+                "id": "C",
+                "text": "그는 오빠가 실제로 집에 들를 경우 화자가 어떻게 할지 시험하듯 묻는다."
+              },
+              {
+                "id": "D",
+                "text": "질문의 목적은 화자의 마음을 달래고 가족 걱정을 덜어 주는 데 있다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 41
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단의 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "그는 오빠가 절대 집에 오지 못할 것이니 미리 겁먹을 필요 없다고 말한다."
+              },
+              {
+                "id": "B",
+                "text": "화자는 그 질문을 듣고 곧장 신고하겠다고 먼저 선언한다."
+              },
+              {
+                "id": "C",
+                "text": "질문의 목적은 화자의 마음을 달래고 가족 걱정을 덜어 주는 데 있다."
+              },
+              {
+                "id": "D",
+                "text": "그는 오빠가 실제로 집에 들를 경우 화자가 어떻게 할지 시험하듯 묻는다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 36
+              }
+            ]
+          },
+          "question": {
+            "prompt": "5문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화자는 원칙적으로는 오빠를 신고하거나 스스로 자수하게 해야 한다고 답한다."
+              },
+              {
+                "id": "B",
+                "text": "화자는 가족을 지키기 위해 오빠를 숨겨 주겠다고 선뜻 약속한다."
+              },
+              {
+                "id": "C",
+                "text": "화자는 답을 미루며 외당숙이 먼저 처리 방안을 정해 주길 바란다."
+              },
+              {
+                "id": "D",
+                "text": "화자는 국가보다 혈육을 택해야 한다며 장황하게 항변한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 36
+              }
+            ]
+          },
+          "question": {
+            "prompt": "5문단의 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화자는 가족을 지키기 위해 오빠를 숨겨 주겠다고 선뜻 약속한다."
+              },
+              {
+                "id": "B",
+                "text": "화자는 원칙적으로는 오빠를 신고하거나 스스로 자수하게 해야 한다고 답한다."
+              },
+              {
+                "id": "C",
+                "text": "화자는 답을 미루며 외당숙이 먼저 처리 방안을 정해 주길 바란다."
+              },
+              {
+                "id": "D",
+                "text": "화자는 국가보다 혈육을 택해야 한다며 장황하게 항변한다."
+              }
+            ],
+            "answerId": "B",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 21
+              }
+            ]
+          },
+          "question": {
+            "prompt": "6문단의 중심 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화자는 끝까지 단호한 태도를 유지하며 방금 한 말을 거두지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "외당숙은 화자의 대답에 감동해 곧바로 오빠를 도와주겠다고 한다."
+              },
+              {
+                "id": "C",
+                "text": "대답을 마친 화자는 밉고 서툰 아양으로 불편한 기류를 얼버무린다."
+              },
+              {
+                "id": "D",
+                "text": "화자는 오빠 소식이 거짓임을 확신하고 홀가분해진다."
+              }
+            ],
+            "answerId": "C",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 21
+              }
+            ]
+          },
+          "question": {
+            "prompt": "6문단의 내용으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화자는 끝까지 단호한 태도를 유지하며 방금 한 말을 거두지 않는다."
+              },
+              {
+                "id": "B",
+                "text": "외당숙은 화자의 대답에 감동해 곧바로 오빠를 도와주겠다고 한다."
+              },
+              {
+                "id": "C",
+                "text": "화자는 오빠 소식이 거짓임을 확신하고 홀가분해진다."
+              },
+              {
+                "id": "D",
+                "text": "대답을 마친 화자는 밉고 서툰 아양으로 불편한 기류를 얼버무린다."
+              }
+            ],
+            "answerId": "D",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {
+          "id": "c1",
+          "text": "화자는 외숙의 말이 자기 기억보다 더 확실한 진실처럼 느껴졌다."
+        },
+        {
+          "id": "c2",
+          "text": "그 말 앞에서 화자는 기가 눌렸고 외숙은 비밀을 단정하듯 엄숙하게 말했다."
+        },
+        {
+          "id": "c3",
+          "text": "외숙은 큰형이 북으로 끌려가 교육을 받은 뒤 남쪽으로 내려오는 간첩이라고 전했다."
+        },
+        {
+          "id": "c4",
+          "text": "그는 만약 큰형이 집으로 돌아오면 어떻게 하겠느냐고 화자에게 물었다."
+        },
+        {
+          "id": "c5",
+          "text": "화자는 신고해서 자수하게 만들겠다고 대답했다."
+        },
+        {
+          "id": "c6",
+          "text": "그러나 그 대답에는 두려움과 비위를 맞추려는 어색함이 함께 배어 있었다."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "1연은 어떤 장면이나 정서를 열어 보이는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 91
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "2연은 그 정서를 어떤 이미지나 흐름으로 이어 가는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "3연은 화자의 시선이나 마음을 어떤 방향으로 움직이는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 83
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "4연은 시적 상황을 어떤 이미지나 태도로 심화하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "5연은 앞선 흐름에 어떤 긴장이나 전환을 더하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 36
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "6연은 작품의 의미를 어떤 정서나 시선으로 맺는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 21
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }

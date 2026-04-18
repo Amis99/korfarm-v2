@@ -32,64 +32,1248 @@
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        "분류와 회귀는 인공지능이 입력값을 바탕으로 서로 다른 종류의 답을 내놓는 두 가지 대표 문제이다. 분류는 대상을 몇 개의 범주 가운데 하나로 나누는 일이고, 회귀는 연속적으로 달라지는 수치를 예측하는 일이다. 예를 들어 사진을 보고 고양이인지 개인지 가르는 일은 분류에 가깝다. 반면 내일 기온이나 집값처럼 수치로 이어지는 값을 짐작하는 일은 회귀에 가깝다.",
-        "분류 문제에서는 결과가 미리 정해진 범주 가운데 하나로 나온다. 메일이 스팸인지 아닌지, 병이 있는지 없는지, 손글씨가 어느 숫자인지를 고르는 경우가 여기에 들어간다. 인공지능은 여러 특징을 보고 각 범주가 가질 만한 모습의 공통점을 배운다. 그 뒤 새로운 입력이 들어오면 어느 범주와 더 가까운지 따져 답을 낸다. 즉 분류는 무엇에 속하는가를 판단하는 문제라고 할 수 있다.",
-        "회귀 문제에서는 결과가 범주가 아니라 연속적인 수치로 나타난다. 온도, 판매량, 이동 거리, 점수처럼 여러 값 사이에서 크기가 조금씩 달라지는 대상을 다룰 때 회귀가 쓰인다. 인공지능은 입력과 결과 수치가 어떤 관계를 이루는지 살펴 그 흐름을 배운다. 이렇게 배운 관계를 바탕으로 새로운 입력이 오면 그에 맞는 수치를 예측한다. 따라서 회귀는 어느 쪽인가보다 어느 정도인가를 추정하는 문제와 가깝다.",
-        "분류와 회귀는 겉으로 비슷해 보여도 문제를 바라보는 관점이 다르다. 같은 자료를 보더라도 결과를 이름표처럼 끊어 볼지, 수치처럼 이어진 값으로 볼지에 따라 문제의 성격이 달라진다. 예를 들어 시험 결과를 합격과 불합격으로 나누면 분류가 되고, 점수를 그대로 예측하면 회귀가 된다. 그래서 인공지능을 설계할 때는 먼저 결과가 어떤 모습으로 나와야 하는지부터 분명히 해야 한다. 문제의 형태를 잘못 잡으면 알맞은 학습 기준과 평가 방식도 함께 흔들리게 된다.",
-        "결국 분류와 회귀는 인공지능이 무엇을 맞히려는지에 따라 갈라지는 기본 개념이다. 분류는 대상을 범주에 넣고, 회귀는 수치를 예측한다. 이 차이를 이해하면 인공지능이 모든 문제를 똑같이 다루는 것이 아니라 결과의 모양에 맞추어 다른 방식으로 학습한다는 점이 보인다. 그래서 인공지능 글을 읽을 때는 입력 자료만이 아니라 결과가 범주인지 수치인지부터 함께 살펴야 한다."
+        {
+          "id": "p1",
+          "text": "분류와 회귀는 인공지능이 입력값을 바탕으로 서로 다른 종류의 답을 내놓는 두 가지 대표 문제이다. 분류는 대상을 몇 개의 범주 가운데 하나로 나누는 일이고, 회귀는 연속적으로 달라지는 수치를 예측하는 일이다. 예를 들어 사진을 보고 고양이인지 개인지 가르는 일은 분류에 가깝다. 반면 내일 기온이나 집값처럼 수치로 이어지는 값을 짐작하는 일은 회귀에 가깝다."
+        },
+        {
+          "id": "p2",
+          "text": "분류 문제에서는 결과가 미리 정해진 범주 가운데 하나로 나온다. 메일이 스팸인지 아닌지, 병이 있는지 없는지, 손글씨가 어느 숫자인지를 고르는 경우가 여기에 들어간다. 인공지능은 여러 특징을 보고 각 범주가 가질 만한 모습의 공통점을 배운다. 그 뒤 새로운 입력이 들어오면 어느 범주와 더 가까운지 따져 답을 낸다. 즉 분류는 무엇에 속하는가를 판단하는 문제라고 할 수 있다."
+        },
+        {
+          "id": "p3",
+          "text": "회귀 문제에서는 결과가 범주가 아니라 연속적인 수치로 나타난다. 온도, 판매량, 이동 거리, 점수처럼 여러 값 사이에서 크기가 조금씩 달라지는 대상을 다룰 때 회귀가 쓰인다. 인공지능은 입력과 결과 수치가 어떤 관계를 이루는지 살펴 그 흐름을 배운다. 이렇게 배운 관계를 바탕으로 새로운 입력이 오면 그에 맞는 수치를 예측한다. 따라서 회귀는 어느 쪽인가보다 어느 정도인가를 추정하는 문제와 가깝다."
+        },
+        {
+          "id": "p4",
+          "text": "분류와 회귀는 겉으로 비슷해 보여도 문제를 바라보는 관점이 다르다. 같은 자료를 보더라도 결과를 이름표처럼 끊어 볼지, 수치처럼 이어진 값으로 볼지에 따라 문제의 성격이 달라진다. 예를 들어 시험 결과를 합격과 불합격으로 나누면 분류가 되고, 점수를 그대로 예측하면 회귀가 된다. 그래서 인공지능을 설계할 때는 먼저 결과가 어떤 모습으로 나와야 하는지부터 분명히 해야 한다. 문제의 형태를 잘못 잡으면 알맞은 학습 기준과 평가 방식도 함께 흔들리게 된다."
+        },
+        {
+          "id": "p5",
+          "text": "결국 분류와 회귀는 인공지능이 무엇을 맞히려는지에 따라 갈라지는 기본 개념이다. 분류는 대상을 범주에 넣고, 회귀는 수치를 예측한다. 이 차이를 이해하면 인공지능이 모든 문제를 똑같이 다루는 것이 아니라 결과의 모양에 맞추어 다른 방식으로 학습한다는 점이 보인다. 그래서 인공지능 글을 읽을 때는 입력 자료만이 아니라 결과가 범주인지 수치인지부터 함께 살펴야 한다."
+        }
       ]
     },
     "intensive": {
       "timeline": [
-        {"stepId":"s1","highlight":{"ranges":[{"paragraphId":"p1","start":0,"end":55}]},"question":{"prompt":"분류와 회귀는 어떤 문제인가요?","choices":[{"id":"A","text":"입력값을 바탕으로 서로 다른 종류의 답을 내놓는 두 가지 대표 문제다."},{"id":"B","text":"문장 부호를 나누는 두 가지 문법 문제다."},{"id":"C","text":"같은 답만 반복하는 한 가지 문제다."},{"id":"D","text":"자료를 숨기는 암호 문제다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s2","highlight":{"ranges":[{"paragraphId":"p1","start":55,"end":117}]},"question":{"prompt":"분류와 회귀는 어떻게 갈리나요?","choices":[{"id":"A","text":"분류는 범주를 고르는 일, 회귀는 연속적인 수치를 예측하는 일로 정의한다."},{"id":"B","text":"분류는 수치 예측, 회귀는 범주 고르기로 정의한다."},{"id":"C","text":"둘 다 같은 범주를 고르는 일로 정의한다."},{"id":"D","text":"둘 다 정렬만 하는 일로 정의한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s3","highlight":{"ranges":[{"paragraphId":"p1","start":117,"end":156}]},"question":{"prompt":"고양이와 개를 가르는 예시는 어느 쪽에 가깝다고 하나요?","choices":[{"id":"A","text":"분류에 가깝다고 한다."},{"id":"B","text":"회귀에 가깝다고 한다."},{"id":"C","text":"문법에 가깝다고 한다."},{"id":"D","text":"작문에 가깝다고 한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s4","highlight":{"ranges":[{"paragraphId":"p1","start":156,"end":200}]},"question":{"prompt":"기온이나 집값을 짐작하는 일은 어느 쪽에 가깝나요?","choices":[{"id":"A","text":"수치로 이어지는 값을 다루므로 회귀에 가깝다."},{"id":"B","text":"범주를 고르므로 분류에 가깝다."},{"id":"C","text":"정렬에 가깝다."},{"id":"D","text":"토의에 가깝다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s5","highlight":{"ranges":[{"paragraphId":"p1","start":0,"end":200}]},"question":{"prompt":"핵심은 무엇인가요?","choices":[{"id":"A","text":"결과가 범주인지 수치인지에 따라 갈라진다."},{"id":"B","text":"입력 자료의 길이에 따라 갈라진다."},{"id":"C","text":"문장 부호의 수에 따라 갈라진다."},{"id":"D","text":"자료의 색깔에 따라 갈라진다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s6","highlight":{"ranges":[{"paragraphId":"p2","start":0,"end":36}]},"question":{"prompt":"분류의 결과는 어떻게 나오나요?","choices":[{"id":"A","text":"미리 정해진 범주 가운데 하나로 나온다."},{"id":"B","text":"언제나 연속적인 수치로 나온다."},{"id":"C","text":"항상 긴 문장으로 나온다."},{"id":"D","text":"무작위로 바뀐다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s7","highlight":{"ranges":[{"paragraphId":"p2","start":36,"end":94}]},"question":{"prompt":"어떤 사례들이 분류 문제에 들어가나요?","choices":[{"id":"A","text":"스팸 여부, 병의 유무, 손글씨 숫자처럼 범주를 고르는 사례들을 든다."},{"id":"B","text":"기온, 거리, 점수처럼 수치를 재는 사례들만 든다."},{"id":"C","text":"문장 부호와 인용 표현 사례만 든다."},{"id":"D","text":"발표와 인터뷰 사례만 든다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s8","highlight":{"ranges":[{"paragraphId":"p2","start":94,"end":136}]},"question":{"prompt":"인공지능은 분류 문제에서 무엇을 배우나요?","choices":[{"id":"A","text":"각 범주가 가질 만한 모습의 공통점을 배운다."},{"id":"B","text":"모든 수치의 평균만 배운다."},{"id":"C","text":"문장 길이만 배운다."},{"id":"D","text":"정답 하나를 외워 둔다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s9","highlight":{"ranges":[{"paragraphId":"p2","start":136,"end":177}]},"question":{"prompt":"새로운 입력이 들어오면 무엇을 따져 답을 낸다고 하나요?","choices":[{"id":"A","text":"어느 범주와 더 가까운지를 따져 답을 낸다고 한다."},{"id":"B","text":"입력의 길이만 따져 답을 낸다고 한다."},{"id":"C","text":"자료의 색만 따져 답을 낸다고 한다."},{"id":"D","text":"문장 수만 세어 답을 낸다고 한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s10","highlight":{"ranges":[{"paragraphId":"p2","start":177,"end":210}]},"question":{"prompt":"분류는 어떤 문제라고 정리하나요?","choices":[{"id":"A","text":"무엇에 속하는가를 판단하는 문제라고 정리한다."},{"id":"B","text":"얼마나 큰가를 재는 문제라고 정리한다."},{"id":"C","text":"문장을 길게 쓰는 문제라고 정리한다."},{"id":"D","text":"값의 순서를 섞는 문제라고 정리한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s11","highlight":{"ranges":[{"paragraphId":"p2","start":0,"end":210}]},"question":{"prompt":"분류 문제의 핵심은 무엇인가요?","choices":[{"id":"A","text":"범주의 공통점을 배우고 새 입력이 어느 범주에 속하는지 판단한다."},{"id":"B","text":"수치의 평균을 내고 끝낸다."},{"id":"C","text":"정답을 외우기만 한다."},{"id":"D","text":"자료를 정렬하고 끝낸다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s12","highlight":{"ranges":[{"paragraphId":"p3","start":0,"end":36}]},"question":{"prompt":"회귀의 결과는 어떻게 나오나요?","choices":[{"id":"A","text":"범주가 아니라 연속적인 수치로 나타난다."},{"id":"B","text":"언제나 둘 중 하나의 답으로 나타난다."},{"id":"C","text":"항상 말풍선으로 나타난다."},{"id":"D","text":"문법 규칙으로만 나타난다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s13","highlight":{"ranges":[{"paragraphId":"p3","start":36,"end":98}]},"question":{"prompt":"회귀의 예로 어떤 대상이 나오나요?","choices":[{"id":"A","text":"온도, 판매량, 이동 거리, 점수처럼 조금씩 달라지는 수치 대상을 든다."},{"id":"B","text":"고양이와 개처럼 범주만 나뉘는 대상을 든다."},{"id":"C","text":"문장 부호와 발표 자료를 든다."},{"id":"D","text":"정렬된 숫자표만 든다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s14","highlight":{"ranges":[{"paragraphId":"p3","start":98,"end":141}]},"question":{"prompt":"인공지능은 회귀에서 어떤 관계를 배운다고 하나요?","choices":[{"id":"A","text":"입력과 결과 수치가 이루는 관계의 흐름을 배운다고 한다."},{"id":"B","text":"범주의 이름만 외운다고 한다."},{"id":"C","text":"자료의 색깔만 구분한다고 한다."},{"id":"D","text":"정답을 하나만 고정한다고 한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s15","highlight":{"ranges":[{"paragraphId":"p3","start":141,"end":184}]},"question":{"prompt":"배운 관계를 바탕으로 무엇을 하나요?","choices":[{"id":"A","text":"새로운 입력이 오면 그에 맞는 수치를 예측한다고 한다."},{"id":"B","text":"범주 이름을 다시 정렬한다고 한다."},{"id":"C","text":"질문을 새로 만든다고 한다."},{"id":"D","text":"문장을 줄인다고 한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s16","highlight":{"ranges":[{"paragraphId":"p3","start":184,"end":223}]},"question":{"prompt":"회귀는 어떤 질문과 가깝나요?","choices":[{"id":"A","text":"어느 쪽인가보다 어느 정도인가를 묻는 질문과 가깝다고 정리한다."},{"id":"B","text":"같은가 다른가만 묻는 질문과 가깝다고 정리한다."},{"id":"C","text":"말투만 묻는 질문과 가깝다고 정리한다."},{"id":"D","text":"문장 길이만 묻는 질문과 가깝다고 정리한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s17","highlight":{"ranges":[{"paragraphId":"p3","start":0,"end":223}]},"question":{"prompt":"회귀 문제의 핵심은 무엇인가요?","choices":[{"id":"A","text":"수치 사이의 관계를 배워 새 값의 크기를 추정하는 예측 문제다."},{"id":"B","text":"범주 이름만 고르는 문제다."},{"id":"C","text":"정렬만 반복하는 문제다."},{"id":"D","text":"문장 구조만 바꾸는 문제다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s18","highlight":{"ranges":[{"paragraphId":"p4","start":0,"end":38}]},"question":{"prompt":"분류와 회귀의 차이는 어떻게 보이나요?","choices":[{"id":"A","text":"겉보기는 비슷해도 문제를 바라보는 관점이 다르다."},{"id":"B","text":"둘은 완전히 같은 문제다."},{"id":"C","text":"둘은 문법 문제다."},{"id":"D","text":"둘은 발표 방식이다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s19","highlight":{"ranges":[{"paragraphId":"p4","start":38,"end":101}]},"question":{"prompt":"같은 자료라도 결과를 어떻게 보느냐에 따라 무엇이 달라진다고 하나요?","choices":[{"id":"A","text":"이름표처럼 끊어 볼지 수치처럼 이어 볼지에 따라 문제의 성격이 달라진다고 한다."},{"id":"B","text":"자료의 색깔에 따라만 문제의 성격이 달라진다고 한다."},{"id":"C","text":"문장 길이에 따라만 문제의 성격이 달라진다고 한다."},{"id":"D","text":"질문의 수에 따라만 문제의 성격이 달라진다고 한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s20","highlight":{"ranges":[{"paragraphId":"p4","start":101,"end":157}]},"question":{"prompt":"시험 결과 예시는 분류와 회귀의 차이를 어떻게 보여 주나요?","choices":[{"id":"A","text":"합격과 불합격으로 나누면 분류가 되고 점수를 그대로 예측하면 회귀가 된다고 보여 준다."},{"id":"B","text":"둘 다 점수로만 예측하면 된다고 보여 준다."},{"id":"C","text":"둘 다 합격과 불합격으로만 나누면 된다고 보여 준다."},{"id":"D","text":"시험 결과는 인공지능과 무관하다고 보여 준다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s21","highlight":{"ranges":[{"paragraphId":"p4","start":157,"end":210}]},"question":{"prompt":"그래서 인공지능을 설계할 때 무엇부터 분명히 해야 한다고 하나요?","choices":[{"id":"A","text":"결과가 어떤 모습으로 나와야 하는지부터 분명히 해야 한다고 한다."},{"id":"B","text":"자료의 색부터 분명히 해야 한다고 한다."},{"id":"C","text":"문장의 길이부터 분명히 해야 한다고 한다."},{"id":"D","text":"답의 개수를 숨겨야 한다고 한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s22","highlight":{"ranges":[{"paragraphId":"p4","start":210,"end":254}]},"question":{"prompt":"문제 형태를 잘못 잡으면 무엇도 흔들리나요?","choices":[{"id":"A","text":"알맞은 학습 기준과 평가 방식도 함께 흔들린다고 한다."},{"id":"B","text":"문장의 수만 함께 줄어든다고 한다."},{"id":"C","text":"자료의 색만 함께 바뀐다고 한다."},{"id":"D","text":"정답이 모두 같아진다고 한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s23","highlight":{"ranges":[{"paragraphId":"p4","start":0,"end":254}]},"question":{"prompt":"인공지능을 설계할 때 무엇부터 정해야 하나요?","choices":[{"id":"A","text":"결과의 모양을 먼저 정해야 학습 기준도 바로 설 수 있다."},{"id":"B","text":"자료 개수만 세면 된다."},{"id":"C","text":"문장 부호를 고르면 된다."},{"id":"D","text":"항상 분류만 쓰면 된다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s24","highlight":{"ranges":[{"paragraphId":"p5","start":0,"end":45}]},"question":{"prompt":"분류와 회귀는 어떤 기본 개념인가요?","choices":[{"id":"A","text":"인공지능이 무엇을 맞히려는지에 따라 갈라지는 기본 개념이다."},{"id":"B","text":"문장 길이를 비교하는 기본 개념이다."},{"id":"C","text":"질문과 발표를 나누는 기본 개념이다."},{"id":"D","text":"정렬 규칙을 설명하는 기본 개념이다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s25","highlight":{"ranges":[{"paragraphId":"p5","start":45,"end":75}]},"question":{"prompt":"두 개념은 어떻게 나뉘나요?","choices":[{"id":"A","text":"분류는 범주에 넣고 회귀는 수치를 예측한다."},{"id":"B","text":"분류는 수치를 예측하고 회귀는 범주에 넣는다."},{"id":"C","text":"둘 다 범주만 고른다."},{"id":"D","text":"둘 다 수치만 다룬다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s26","highlight":{"ranges":[{"paragraphId":"p5","start":75,"end":148}]},"question":{"prompt":"이 차이를 이해하면 무엇이 보이나요?","choices":[{"id":"A","text":"인공지능이 모든 문제를 같은 방식으로 다루지 않는다는 점이 보인다."},{"id":"B","text":"인공지능이 언제나 분류만 한다는 점이 보인다."},{"id":"C","text":"인공지능이 문법 문제만 푼다는 점이 보인다."},{"id":"D","text":"인공지능이 자료를 보지 않는다는 점이 보인다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s27","highlight":{"ranges":[{"paragraphId":"p5","start":148,"end":204}]},"question":{"prompt":"인공지능 글을 읽을 때 무엇부터 함께 살피나요?","choices":[{"id":"A","text":"입력 자료뿐 아니라 결과가 범주인지 수치인지부터 함께 살핀다."},{"id":"B","text":"입력 자료만 보고 결과는 보지 않는다."},{"id":"C","text":"결과의 길이만 세어 본다."},{"id":"D","text":"문장 부호만 본다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}},
-        {"stepId":"s28","highlight":{"ranges":[{"paragraphId":"p5","start":0,"end":204}]},"question":{"prompt":"분류와 회귀 읽기의 핵심은 무엇인가요?","choices":[{"id":"A","text":"결과의 모양을 먼저 읽어야 인공지능의 학습 방식도 제대로 이해된다고 정리한다."},{"id":"B","text":"결과는 보지 않고 입력만 보면 된다고 정리한다."},{"id":"C","text":"분류와 회귀는 아무 차이 없다고 정리한다."},{"id":"D","text":"수치 예측만 알면 된다고 정리한다."}],"answerId":"A","scoring":{"correctDeltaSec":20,"wrongDeltaSec":-40,"eliminateWrongChoice":true}}}
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 55
+              }
+            ]
+          },
+          "question": {
+            "prompt": "분류와 회귀는 어떤 문제인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "입력값을 바탕으로 서로 다른 종류의 답을 내놓는 두 가지 대표 문제다."
+              },
+              {
+                "id": "B",
+                "text": "문장 부호를 나누는 두 가지 문법 문제다."
+              },
+              {
+                "id": "C",
+                "text": "같은 답만 반복하는 한 가지 문제다."
+              },
+              {
+                "id": "D",
+                "text": "자료를 숨기는 암호 문제다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 55,
+                "end": 117
+              }
+            ]
+          },
+          "question": {
+            "prompt": "분류와 회귀는 어떻게 갈리나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "분류는 범주를 고르는 일, 회귀는 연속적인 수치를 예측하는 일로 정의한다."
+              },
+              {
+                "id": "B",
+                "text": "분류는 수치 예측, 회귀는 범주 고르기로 정의한다."
+              },
+              {
+                "id": "C",
+                "text": "둘 다 같은 범주를 고르는 일로 정의한다."
+              },
+              {
+                "id": "D",
+                "text": "둘 다 정렬만 하는 일로 정의한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 117,
+                "end": 156
+              }
+            ]
+          },
+          "question": {
+            "prompt": "고양이와 개를 가르는 예시는 어느 쪽에 가깝다고 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "분류에 가깝다고 한다."
+              },
+              {
+                "id": "B",
+                "text": "회귀에 가깝다고 한다."
+              },
+              {
+                "id": "C",
+                "text": "문법에 가깝다고 한다."
+              },
+              {
+                "id": "D",
+                "text": "작문에 가깝다고 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 156,
+                "end": 200
+              }
+            ]
+          },
+          "question": {
+            "prompt": "기온이나 집값을 짐작하는 일은 어느 쪽에 가깝나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수치로 이어지는 값을 다루므로 회귀에 가깝다."
+              },
+              {
+                "id": "B",
+                "text": "범주를 고르므로 분류에 가깝다."
+              },
+              {
+                "id": "C",
+                "text": "정렬에 가깝다."
+              },
+              {
+                "id": "D",
+                "text": "토의에 가깝다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 200
+              }
+            ]
+          },
+          "question": {
+            "prompt": "핵심은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과가 범주인지 수치인지에 따라 갈라진다."
+              },
+              {
+                "id": "B",
+                "text": "입력 자료의 길이에 따라 갈라진다."
+              },
+              {
+                "id": "C",
+                "text": "문장 부호의 수에 따라 갈라진다."
+              },
+              {
+                "id": "D",
+                "text": "자료의 색깔에 따라 갈라진다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 36
+              }
+            ]
+          },
+          "question": {
+            "prompt": "분류의 결과는 어떻게 나오나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "미리 정해진 범주 가운데 하나로 나온다."
+              },
+              {
+                "id": "B",
+                "text": "언제나 연속적인 수치로 나온다."
+              },
+              {
+                "id": "C",
+                "text": "항상 긴 문장으로 나온다."
+              },
+              {
+                "id": "D",
+                "text": "무작위로 바뀐다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 36,
+                "end": 94
+              }
+            ]
+          },
+          "question": {
+            "prompt": "어떤 사례들이 분류 문제에 들어가나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "스팸 여부, 병의 유무, 손글씨 숫자처럼 범주를 고르는 사례들을 든다."
+              },
+              {
+                "id": "B",
+                "text": "기온, 거리, 점수처럼 수치를 재는 사례들만 든다."
+              },
+              {
+                "id": "C",
+                "text": "문장 부호와 인용 표현 사례만 든다."
+              },
+              {
+                "id": "D",
+                "text": "발표와 인터뷰 사례만 든다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 94,
+                "end": 136
+              }
+            ]
+          },
+          "question": {
+            "prompt": "인공지능은 분류 문제에서 무엇을 배우나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "각 범주가 가질 만한 모습의 공통점을 배운다."
+              },
+              {
+                "id": "B",
+                "text": "모든 수치의 평균만 배운다."
+              },
+              {
+                "id": "C",
+                "text": "문장 길이만 배운다."
+              },
+              {
+                "id": "D",
+                "text": "정답 하나를 외워 둔다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 136,
+                "end": 177
+              }
+            ]
+          },
+          "question": {
+            "prompt": "새로운 입력이 들어오면 무엇을 따져 답을 낸다고 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어느 범주와 더 가까운지를 따져 답을 낸다고 한다."
+              },
+              {
+                "id": "B",
+                "text": "입력의 길이만 따져 답을 낸다고 한다."
+              },
+              {
+                "id": "C",
+                "text": "자료의 색만 따져 답을 낸다고 한다."
+              },
+              {
+                "id": "D",
+                "text": "문장 수만 세어 답을 낸다고 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 177,
+                "end": 210
+              }
+            ]
+          },
+          "question": {
+            "prompt": "분류는 어떤 문제라고 정리하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "무엇에 속하는가를 판단하는 문제라고 정리한다."
+              },
+              {
+                "id": "B",
+                "text": "얼마나 큰가를 재는 문제라고 정리한다."
+              },
+              {
+                "id": "C",
+                "text": "문장을 길게 쓰는 문제라고 정리한다."
+              },
+              {
+                "id": "D",
+                "text": "값의 순서를 섞는 문제라고 정리한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 210
+              }
+            ]
+          },
+          "question": {
+            "prompt": "분류 문제의 핵심은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "범주의 공통점을 배우고 새 입력이 어느 범주에 속하는지 판단한다."
+              },
+              {
+                "id": "B",
+                "text": "수치의 평균을 내고 끝낸다."
+              },
+              {
+                "id": "C",
+                "text": "정답을 외우기만 한다."
+              },
+              {
+                "id": "D",
+                "text": "자료를 정렬하고 끝낸다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 36
+              }
+            ]
+          },
+          "question": {
+            "prompt": "회귀의 결과는 어떻게 나오나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "범주가 아니라 연속적인 수치로 나타난다."
+              },
+              {
+                "id": "B",
+                "text": "언제나 둘 중 하나의 답으로 나타난다."
+              },
+              {
+                "id": "C",
+                "text": "항상 말풍선으로 나타난다."
+              },
+              {
+                "id": "D",
+                "text": "문법 규칙으로만 나타난다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 36,
+                "end": 98
+              }
+            ]
+          },
+          "question": {
+            "prompt": "회귀의 예로 어떤 대상이 나오나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "온도, 판매량, 이동 거리, 점수처럼 조금씩 달라지는 수치 대상을 든다."
+              },
+              {
+                "id": "B",
+                "text": "고양이와 개처럼 범주만 나뉘는 대상을 든다."
+              },
+              {
+                "id": "C",
+                "text": "문장 부호와 발표 자료를 든다."
+              },
+              {
+                "id": "D",
+                "text": "정렬된 숫자표만 든다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 98,
+                "end": 141
+              }
+            ]
+          },
+          "question": {
+            "prompt": "인공지능은 회귀에서 어떤 관계를 배운다고 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "입력과 결과 수치가 이루는 관계의 흐름을 배운다고 한다."
+              },
+              {
+                "id": "B",
+                "text": "범주의 이름만 외운다고 한다."
+              },
+              {
+                "id": "C",
+                "text": "자료의 색깔만 구분한다고 한다."
+              },
+              {
+                "id": "D",
+                "text": "정답을 하나만 고정한다고 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 141,
+                "end": 184
+              }
+            ]
+          },
+          "question": {
+            "prompt": "배운 관계를 바탕으로 무엇을 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "새로운 입력이 오면 그에 맞는 수치를 예측한다고 한다."
+              },
+              {
+                "id": "B",
+                "text": "범주 이름을 다시 정렬한다고 한다."
+              },
+              {
+                "id": "C",
+                "text": "질문을 새로 만든다고 한다."
+              },
+              {
+                "id": "D",
+                "text": "문장을 줄인다고 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 184,
+                "end": 223
+              }
+            ]
+          },
+          "question": {
+            "prompt": "회귀는 어떤 질문과 가깝나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어느 쪽인가보다 어느 정도인가를 묻는 질문과 가깝다고 정리한다."
+              },
+              {
+                "id": "B",
+                "text": "같은가 다른가만 묻는 질문과 가깝다고 정리한다."
+              },
+              {
+                "id": "C",
+                "text": "말투만 묻는 질문과 가깝다고 정리한다."
+              },
+              {
+                "id": "D",
+                "text": "문장 길이만 묻는 질문과 가깝다고 정리한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 223
+              }
+            ]
+          },
+          "question": {
+            "prompt": "회귀 문제의 핵심은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "수치 사이의 관계를 배워 새 값의 크기를 추정하는 예측 문제다."
+              },
+              {
+                "id": "B",
+                "text": "범주 이름만 고르는 문제다."
+              },
+              {
+                "id": "C",
+                "text": "정렬만 반복하는 문제다."
+              },
+              {
+                "id": "D",
+                "text": "문장 구조만 바꾸는 문제다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 38
+              }
+            ]
+          },
+          "question": {
+            "prompt": "분류와 회귀의 차이는 어떻게 보이나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "겉보기는 비슷해도 문제를 바라보는 관점이 다르다."
+              },
+              {
+                "id": "B",
+                "text": "둘은 완전히 같은 문제다."
+              },
+              {
+                "id": "C",
+                "text": "둘은 문법 문제다."
+              },
+              {
+                "id": "D",
+                "text": "둘은 발표 방식이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 38,
+                "end": 101
+              }
+            ]
+          },
+          "question": {
+            "prompt": "같은 자료라도 결과를 어떻게 보느냐에 따라 무엇이 달라진다고 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "이름표처럼 끊어 볼지 수치처럼 이어 볼지에 따라 문제의 성격이 달라진다고 한다."
+              },
+              {
+                "id": "B",
+                "text": "자료의 색깔에 따라만 문제의 성격이 달라진다고 한다."
+              },
+              {
+                "id": "C",
+                "text": "문장 길이에 따라만 문제의 성격이 달라진다고 한다."
+              },
+              {
+                "id": "D",
+                "text": "질문의 수에 따라만 문제의 성격이 달라진다고 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 101,
+                "end": 157
+              }
+            ]
+          },
+          "question": {
+            "prompt": "시험 결과 예시는 분류와 회귀의 차이를 어떻게 보여 주나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "합격과 불합격으로 나누면 분류가 되고 점수를 그대로 예측하면 회귀가 된다고 보여 준다."
+              },
+              {
+                "id": "B",
+                "text": "둘 다 점수로만 예측하면 된다고 보여 준다."
+              },
+              {
+                "id": "C",
+                "text": "둘 다 합격과 불합격으로만 나누면 된다고 보여 준다."
+              },
+              {
+                "id": "D",
+                "text": "시험 결과는 인공지능과 무관하다고 보여 준다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 157,
+                "end": 210
+              }
+            ]
+          },
+          "question": {
+            "prompt": "그래서 인공지능을 설계할 때 무엇부터 분명히 해야 한다고 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과가 어떤 모습으로 나와야 하는지부터 분명히 해야 한다고 한다."
+              },
+              {
+                "id": "B",
+                "text": "자료의 색부터 분명히 해야 한다고 한다."
+              },
+              {
+                "id": "C",
+                "text": "문장의 길이부터 분명히 해야 한다고 한다."
+              },
+              {
+                "id": "D",
+                "text": "답의 개수를 숨겨야 한다고 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 210,
+                "end": 254
+              }
+            ]
+          },
+          "question": {
+            "prompt": "문제 형태를 잘못 잡으면 무엇도 흔들리나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "알맞은 학습 기준과 평가 방식도 함께 흔들린다고 한다."
+              },
+              {
+                "id": "B",
+                "text": "문장의 수만 함께 줄어든다고 한다."
+              },
+              {
+                "id": "C",
+                "text": "자료의 색만 함께 바뀐다고 한다."
+              },
+              {
+                "id": "D",
+                "text": "정답이 모두 같아진다고 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 254
+              }
+            ]
+          },
+          "question": {
+            "prompt": "인공지능을 설계할 때 무엇부터 정해야 하나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과의 모양을 먼저 정해야 학습 기준도 바로 설 수 있다."
+              },
+              {
+                "id": "B",
+                "text": "자료 개수만 세면 된다."
+              },
+              {
+                "id": "C",
+                "text": "문장 부호를 고르면 된다."
+              },
+              {
+                "id": "D",
+                "text": "항상 분류만 쓰면 된다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 45
+              }
+            ]
+          },
+          "question": {
+            "prompt": "분류와 회귀는 어떤 기본 개념인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인공지능이 무엇을 맞히려는지에 따라 갈라지는 기본 개념이다."
+              },
+              {
+                "id": "B",
+                "text": "문장 길이를 비교하는 기본 개념이다."
+              },
+              {
+                "id": "C",
+                "text": "질문과 발표를 나누는 기본 개념이다."
+              },
+              {
+                "id": "D",
+                "text": "정렬 규칙을 설명하는 기본 개념이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s25",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 45,
+                "end": 75
+              }
+            ]
+          },
+          "question": {
+            "prompt": "두 개념은 어떻게 나뉘나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "분류는 범주에 넣고 회귀는 수치를 예측한다."
+              },
+              {
+                "id": "B",
+                "text": "분류는 수치를 예측하고 회귀는 범주에 넣는다."
+              },
+              {
+                "id": "C",
+                "text": "둘 다 범주만 고른다."
+              },
+              {
+                "id": "D",
+                "text": "둘 다 수치만 다룬다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s26",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 75,
+                "end": 148
+              }
+            ]
+          },
+          "question": {
+            "prompt": "이 차이를 이해하면 무엇이 보이나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "인공지능이 모든 문제를 같은 방식으로 다루지 않는다는 점이 보인다."
+              },
+              {
+                "id": "B",
+                "text": "인공지능이 언제나 분류만 한다는 점이 보인다."
+              },
+              {
+                "id": "C",
+                "text": "인공지능이 문법 문제만 푼다는 점이 보인다."
+              },
+              {
+                "id": "D",
+                "text": "인공지능이 자료를 보지 않는다는 점이 보인다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s27",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 148,
+                "end": 204
+              }
+            ]
+          },
+          "question": {
+            "prompt": "인공지능 글을 읽을 때 무엇부터 함께 살피나요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "입력 자료뿐 아니라 결과가 범주인지 수치인지부터 함께 살핀다."
+              },
+              {
+                "id": "B",
+                "text": "입력 자료만 보고 결과는 보지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "결과의 길이만 세어 본다."
+              },
+              {
+                "id": "D",
+                "text": "문장 부호만 본다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s28",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 204
+              }
+            ]
+          },
+          "question": {
+            "prompt": "분류와 회귀 읽기의 핵심은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "결과의 모양을 먼저 읽어야 인공지능의 학습 방식도 제대로 이해된다고 정리한다."
+              },
+              {
+                "id": "B",
+                "text": "결과는 보지 않고 입력만 보면 된다고 정리한다."
+              },
+              {
+                "id": "C",
+                "text": "분류와 회귀는 아무 차이 없다고 정리한다."
+              },
+              {
+                "id": "D",
+                "text": "수치 예측만 알면 된다고 정리한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
       ]
     },
     "recall": {
-    "cards": [
-      {"id":"c1","text":"답의 형태가 둘로 갈린다"},
-      {"id":"c2","text":"분류는 범주를 고르는 일이다"},
-      {"id":"c3","text":"회귀는 수치를 예측하는 일이다"},
-      {"id":"c4","text":"분류는 공통점을 학습한다"},
-      {"id":"c5","text":"회귀는 수치 관계를 학습한다"},
-      {"id":"c6","text":"문제 형태를 먼저 판단해야 한다"}
-    ],
-      "correctOrder": ["c1","c2","c3","c4","c5","c6"],
+      "cards": [
+        {
+          "id": "c1",
+          "text": "답의 형태가 둘로 갈린다"
+        },
+        {
+          "id": "c2",
+          "text": "분류는 범주를 고르는 일이다"
+        },
+        {
+          "id": "c3",
+          "text": "회귀는 수치를 예측하는 일이다"
+        },
+        {
+          "id": "c4",
+          "text": "분류는 공통점을 학습한다"
+        },
+        {
+          "id": "c5",
+          "text": "회귀는 수치 관계를 학습한다"
+        },
+        {
+          "id": "c6",
+          "text": "문제 형태를 먼저 판단해야 한다"
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
-        {"id":"q1","prompt":"범주는 무슨 뜻인가요?","answerRanges":[{"paragraphId":"p1","start":68,"end":69}],"scoring":{"correctDeltaSec":30,"wrongDeltaSec":-45},"revealOnWrong":true,"answerMatchMode":"ANY"},
-        {"id":"q2","prompt":"스팸은 무슨 뜻인가요?","answerRanges":[{"paragraphId":"p2","start":40,"end":41}],"scoring":{"correctDeltaSec":30,"wrongDeltaSec":-45},"revealOnWrong":true,"answerMatchMode":"ANY"},
-        {"id":"q3","prompt":"판매량은 무슨 뜻인가요?","answerRanges":[{"paragraphId":"p3","start":40,"end":42}],"scoring":{"correctDeltaSec":30,"wrongDeltaSec":-45},"revealOnWrong":true,"answerMatchMode":"ANY"},
-        {"id":"q4","prompt":"평가 방식은 무슨 뜻인가요?","answerRanges":[{"paragraphId":"p4","start":236,"end":240}],"scoring":{"correctDeltaSec":30,"wrongDeltaSec":-45},"revealOnWrong":true,"answerMatchMode":"ANY"},
-        {"id":"q5","prompt":"기본 개념은 무슨 뜻인가요?","answerRanges":[{"paragraphId":"p5","start":36,"end":40}],"scoring":{"correctDeltaSec":30,"wrongDeltaSec":-45},"revealOnWrong":true,"answerMatchMode":"ANY"}
+        {
+          "id": "q1",
+          "prompt": "범주는 무슨 뜻인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 68,
+              "end": 69
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "스팸은 무슨 뜻인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 40,
+              "end": 41
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "판매량은 무슨 뜻인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 40,
+              "end": 42
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "평가 방식은 무슨 뜻인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 236,
+              "end": 240
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "기본 개념은 무슨 뜻인가요?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 36,
+              "end": 40
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
       ]
     }
   }

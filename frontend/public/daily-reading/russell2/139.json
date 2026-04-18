@@ -1,1408 +1,1401 @@
-﻿{
-    "contentId":  "dr-r2-139",
-    "contentType":  "DAILY_READING",
-    "version":  1,
-    "status":  "PUBLISHED",
-    "title":  "평가 지표와 혼동 행렬",
-    "description":  "일일 독해 - 정독·복기·확인",
-    "targetLevel":  "RUSSELL_2",
-    "schoolGradeRange":  {
-                             "min":  8,
-                             "max":  9
-                         },
-    "area":  "READING",
-    "subArea":  "NONFICTION",
-    "competencies":  [
-                         "READING"
-                     ],
-    "tags":  [
-                 "daily"
-             ],
-    "access":  {
-                   "mode":  "FREE"
-               },
-    "seedReward":  {
-                       "seedType":  "WHEAT",
-                       "count":  3,
-                       "multiplier":  1
-                   },
-    "timeLimitSec":  480,
-    "assets":  {
-
-               },
-    "payload":  {
-                    "passage":  {
-                                    "format":  "TEXT",
-                                    "paragraphs":  [
-                                                       {
-                                                           "id":  "p1",
-                                                           "text":  "분류 모델은 입력된 자료를 여러 범주 가운데 하나로 나누는 인공지능 모델이다. 하지만 모델이 답을 얼마나 잘 맞히는지는 단순히 맞은 개수만 세어서는 충분히 알기 어렵다. 어떤 경우에는 놓치면 안 되는 오답이 있고, 어떤 경우에는 잘못 맞혔다고 판정하는 일이 더 큰 문제일 수 있기 때문이다. 그래서 분류 모델은 다양한 평가 지표를 함께 살펴본다. 어떤 지표를 중요하게 볼지는 모델이 실제로 쓰일 상황에 따라 달라진다."
-                                                       },
-                                                       {
-                                                           "id":  "p2",
-                                                           "text":  "이때 기본이 되는 표가 혼동 행렬이다. 혼동 행렬은 실제 결과와 모델의 예측 결과를 나란히 놓고, 맞게 분류한 경우와 틀리게 분류한 경우를 네 칸으로 정리한 표이다. 실제로 맞는 대상을 맞다고 판정한 경우, 실제로 아닌 대상을 아니라고 판정한 경우, 그리고 두 종류의 오답을 따로 구분해 보여 준다. 이 표를 보면 모델이 어느 방향으로 더 자주 실수하는지도 한눈에 파악할 수 있다."
-                                                       },
-                                                       {
-                                                           "id":  "p3",
-                                                           "text":  "정확도는 전체 예측 가운데 맞게 분류한 비율을 뜻한다. 계산이 쉬워서 자주 쓰이지만, 자료가 한쪽으로 치우친 경우에는 한계가 있다. 예를 들어 대부분이 음성이고 양성이 아주 적은 검사 자료에서 모델이 거의 모두를 음성으로 예측해도 정확도는 높게 나올 수 있다. 이런 경우에는 정확도만으로 모델 성능을 판단하기 어렵다. 겉보기 수치가 좋아 보여도 중요한 대상을 놓치고 있을 수 있기 때문이다."
-                                                       },
-                                                       {
-                                                           "id":  "p4",
-                                                           "text":  "정밀도는 모델이 맞다고 예측한 것들 가운데 실제로 맞는 비율을 뜻하고, 재현율은 실제로 맞는 것들 가운데 모델이 얼마나 놓치지 않고 찾아냈는지를 뜻한다. 정밀도가 높으면 잘못된 양성 판정이 적고, 재현율이 높으면 실제 양성을 많이 찾아낸다. 어떤 상황에서는 정밀도가 더 중요하고, 어떤 상황에서는 재현율이 더 중요할 수 있다."
-                                                       },
-                                                       {
-                                                           "id":  "p5",
-                                                           "text":  "예를 들어 스팸 메일 분류에서는 정상 메일을 잘못 스팸으로 보내는 일이 문제일 수 있고, 질병 검사에서는 환자를 놓치는 일이 더 큰 문제가 될 수 있다. 그래서 같은 모델이라도 쓰이는 분야에 따라 중요하게 볼 지표가 달라진다. 필요에 따라 정밀도와 재현율을 함께 고려한 F1 점수를 사용하기도 한다. 결국 지표 선택은 단순 계산이 아니라 실제 위험 판단과 연결되는 문제이다."
-                                                       },
-                                                       {
-                                                           "id":  "p6",
-                                                           "text":  "결국 혼동 행렬은 모델이 어떤 종류의 오답을 내는지 보여 주는 출발점이고, 평가 지표는 그 정보를 숫자로 정리한 결과라고 할 수 있다. 분류 모델을 평가할 때는 한 가지 수치만 보는 대신, 어떤 오답이 더 위험한지 함께 따져야 한다. 그래야 모델이 실제 상황에서 얼마나 믿을 만한지 제대로 판단할 수 있다. 숫자가 높다는 사실만으로 곧바로 좋은 모델이라고 단정할 수 없는 이유가 바로 여기에 있다."
-                                                       }
-                                                   ]
-                                },
-                    "intensive":  {
-                                      "timeline":  [
-                                                       {
-                                                           "stepId":  "s1",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  42,
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "여러 범주로 나눈다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "예측을 지운다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "숫자를 더한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "규칙을 없앤다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "분류 모델은 무엇을 하나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s2",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  93,
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  44
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "맞은 개수"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "오답의 종류"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "표의 크기"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "자료의 길이"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "무엇만 세어서는 충분하지 않은가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s3",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  161,
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  95
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "놓치면 안 되는 오답"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "색이 같은 정답"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "짧은 문장"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "큰 숫자"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "어떤 경우를 함께 봐야 하나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s4",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  192,
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  163
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "평가 지표"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "그림 문자"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "속도 기록"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "날짜 표기"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "분류 모델은 무엇을 함께 보는가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s5",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  232,
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  194
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "실제 상황"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "표의 모양"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "문장의 길이"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "자료의 수"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "어떤 점에 따라 중요한 지표가 달라지나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s6",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  233,
-                                                                                                "paragraphId":  "p1",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "상황에 따라 지표를 함께 봐야 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "맞은 개수만 세면 된다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "오답은 중요하지 않다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "항상 같은 지표가 최고다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                             "prompt":  "왜 평가 지표를 함께 살펴야 하나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s7",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  20,
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "혼동 행렬"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "정확도 표"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "순위표"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "통계 차트"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "기본이 되는 표는 무엇인가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s8",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  91,
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  22
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "실제 결과와 예측 결과"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "정답과 오답만"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "점수와 등수"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "시간과 장소"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "혼동 행렬은 무엇을 나란히 놓는가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s9",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  166,
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  93
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "따로 구분해 보여 준다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "섞어서 지운다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "같이 합친다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "무시한다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "두 종류의 오답을 어떻게 하는가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s10",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  212,
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  168
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "어느 방향으로 더 자주 실수하는지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "정답만 몇 개인지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "문장이 얼마나 긴지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "색깔이 어떤지"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "혼동 행렬을 보면 무엇을 알 수 있나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s11",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  213,
-                                                                                                "paragraphId":  "p2",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "오답의 방향까지 보여 주는 표다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "맞은 개수만 세는 표다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "계산이 불필요한 표다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "실제 결과는 보지 않는다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                             "prompt":  "혼동 행렬이 보여 주는 것은 무엇인가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s12",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  29,
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "전체 예측 가운데 맞게 분류한 비율"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "오답만 모은 비율"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "양성만 센 비율"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "시간이 빠른 비율"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "정확도는 무엇의 비율인가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s13",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  72,
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  31
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "자료가 한쪽으로 치우칠 수 있어서"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "계산이 너무 어려워서"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "항상 0이어서"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "표가 작아서"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "정확도는 왜 한계가 있나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s14",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  144,
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  74
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "대부분 음성이고 양성이 적을 때"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "모두 양성일 때"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "정답이 없는 때"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "자료가 없을 때"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "어떤 경우 정확도가 높게 나올 수 있나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s15",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  176,
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  146
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "모델 성능 판단"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "색깔 구분"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "문장 길이 측정"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "점수 합산"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "이런 경우 정확도만으로 무엇을 못 하나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s16",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  217,
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  178
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "중요한 대상을 놓칠 수 있어서"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "표가 너무 작아서"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "정답이 너무 많아서"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "속도가 느려서"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "겉보기 수치가 좋아도 왜 안심할 수 없나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s17",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  218,
-                                                                                                "paragraphId":  "p3",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "정확도만으로는 성능 판단이 어렵다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "정확도는 항상 충분하다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "음성 자료는 중요하지 않다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "오답은 모두 같다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                             "prompt":  "정확도만으로 판단하기 어려운 이유는 무엇인가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s18",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  84,
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "맞다고 예측한 것의 정확함과 실제 맞는 것의 찾아냄"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "속도와 무게"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "길이와 넓이"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "점수와 등수"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "정밀도와 재현율은 각각 무엇을 뜻하나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s19",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  133,
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  86
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "잘못된 양성 판정"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "실제 양성"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "정답"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "시간"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "정밀도가 높으면 무엇이 적나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s20",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  181,
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  135
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "정밀도나 재현율"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "글자 수나 띄어쓰기"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "크기나 색"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "속도나 거리"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "어떤 경우에 더 중요할 수 있나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s21",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  182,
-                                                                                                "paragraphId":  "p4",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "정밀도와 재현율은 상황에 따라 중요도가 다르다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "둘은 항상 같다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "정밀도만 보면 된다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "재현율은 필요 없다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                             "prompt":  "정밀도와 재현율은 무엇을 다르게 보여 주나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s22",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  84,
-                                                                                                "paragraphId":  "p5",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "정상 메일을 스팸으로 보내는 일"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "스팸을 정상으로 보내는 일은 절대 없다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "메일이 너무 짧은 일"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "제목이 없는 일"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "스팸 메일 분류에서는 무엇이 문제일 수 있나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s23",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  125,
-                                                                                                "paragraphId":  "p5",
-                                                                                                "start":  86
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "중요하게 볼 지표"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "모델의 색"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "자료의 길이"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "글씨체"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "같은 모델이라도 무엇에 따라 달라지나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s24",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  166,
-                                                                                                "paragraphId":  "p5",
-                                                                                                "start":  127
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "정밀도와 재현율을 함께 고려한 F1 점수"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "정확도만"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "오답만"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "실패만"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "무엇을 함께 고려하기도 하나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s25",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  208,
-                                                                                                "paragraphId":  "p5",
-                                                                                                "start":  168
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "실제 위험 판단"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "글의 길이"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "음성의 크기"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "표의 색깔"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "지표 선택은 무엇과 연결되나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s26",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  209,
-                                                                                                "paragraphId":  "p5",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "지표 선택은 실제 위험 판단과 연결된다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "모든 분야는 같은 지표를 쓴다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "정확도만 보면 된다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "F1 점수는 필요 없다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                             "prompt":  "지표 선택이 실제 위험 판단과 연결되는 이유는 무엇인가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s27",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  74,
-                                                                                                "paragraphId":  "p6",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "어떤 종류의 오답을 내는지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "정답만 몇 개인지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "표의 크기"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "시간의 흐름"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "혼동 행렬은 무엇을 보여 주는 출발점인가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s28",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  129,
-                                                                                                "paragraphId":  "p6",
-                                                                                                "start":  76
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "어떤 오답이 더 위험한지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "글자 수"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "모양"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "색"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "평가할 때 무엇을 함께 따져야 하나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s29",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  170,
-                                                                                                "paragraphId":  "p6",
-                                                                                                "start":  131
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "실제 상황에서 얼마나 믿을 만한지"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "문장 길이"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "정답 수"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "오답 수"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "그래야 무엇을 판단할 수 있나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s30",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  221,
-                                                                                                "paragraphId":  "p6",
-                                                                                                "start":  172
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "좋은 모델이라고 단정할 수 없어서"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "표가 없어서"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "오답이 없어서"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "문장이 짧아서"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                            "prompt":  "왜 숫자만으로 단정할 수 없나?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       },
-                                                       {
-                                                           "stepId":  "s31",
-                                                           "highlight":  {
-                                                                             "ranges":  [
-                                                                                            {
-                                                                                                "end":  222,
-                                                                                                "paragraphId":  "p6",
-                                                                                                "start":  0
-                                                                                            }
-                                                                                        ]
-                                                                         },
-                                                           "question":  {
-                                                                            "choices":  [
-                                                                                            {
-                                                                                                "id":  "A",
-                                                                                                "text":  "한 수치만 보지 말고 위험한 오답까지 봐야 한다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "B",
-                                                                                                "text":  "숫자가 높으면 무조건 좋다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "C",
-                                                                                                "text":  "오답은 볼 필요가 없다"
-                                                                                            },
-                                                                                            {
-                                                                                                "id":  "D",
-                                                                                                "text":  "평가 지표는 쓸모없다"
-                                                                                            }
-                                                                                        ],
-                                                                            "answerId":  "A",
-                                                                             "prompt":  "혼동 행렬과 평가 지표를 함께 봐야 하는 이유는 무엇인가?",
-                                                                            "scoring":  {
-                                                                                            "eliminateWrongChoice":  true,
-                                                                                            "correctDeltaSec":  20,
-                                                                                            "wrongDeltaSec":  -40
-                                                                                        }
-                                                                        }
-                                                       }
-                                                   ]
-                                  },
-                    "recall":  {
-                                   "cards":  [
-                                                 {
-                                                     "id":  "c1",
-                                                     "text":  "분류 모델은 자료를 여러 범주 가운데 하나로 나눈다."
-                                                 },
-                                                 {
-                                                     "id":  "c2",
-                                                     "text":  "혼동 행렬은 실제 결과와 예측 결과를 네 칸으로 정리한다."
-                                                 },
-                                                 {
-                                                     "id":  "c3",
-                                                     "text":  "정확도는 자료가 한쪽으로 치우치면 한계가 있다."
-                                                 },
-                                                 {
-                                                     "id":  "c4",
-                                                     "text":  "정밀도와 재현율은 서로 다른 기준을 보여 준다."
-                                                 },
-                                                 {
-                                                     "id":  "c5",
-                                                     "text":  "지표 선택은 쓰이는 분야의 위험과 연결된다."
-                                                 },
-                                                 {
-                                                     "id":  "c6",
-                                                     "text":  "한 가지 수치만으로 좋은 모델이라고 단정할 수 없다."
-                                                 }
-                                             ],
-                                   "correctOrder":  [
-                                                        "c1",
-                                                        "c2",
-                                                        "c3",
-                                                        "c4",
-                                                        "c5",
-                                                        "c6"
-                                                    ],
-                                   "seedPenalty":  1
-                               },
-                    "confirm":  {
-                                    "questions":  [
-                                                      {
-                                                          "id":  "q1",
-                                                          "revealOnWrong":  true,
-                                                          "answerMatchMode":  "ANY",
-                                                          "prompt":  "실제 결과와 예측 결과를 함께 정리한 표는?",
-                                                          "scoring":  {
-                                                                          "correctDeltaSec":  30,
-                                                                          "wrongDeltaSec":  -45
-                                                                      },
-                                                           "answerRanges":  [
-                                                                                {
-                                                                                    "end":  17,
-                                                                                    "paragraphId":  "p2",
-                                                                                    "start":  13
-                                                                                }
-                                                                            ],
-                                                          "answerText":  "혼동 행렬"
-                                                      },
-                                                      {
-                                                          "id":  "q2",
-                                                          "revealOnWrong":  true,
-                                                          "answerMatchMode":  "ANY",
-                                                          "prompt":  "전체 예측 가운데 맞게 분류한 비율은?",
-                                                          "scoring":  {
-                                                                          "correctDeltaSec":  30,
-                                                                          "wrongDeltaSec":  -45
-                                                                      },
-                                                           "answerRanges":  [
-                                                                                {
-                                                                                    "end":  3,
-                                                                                    "paragraphId":  "p3",
-                                                                                    "start":  0
-                                                                                }
-                                                                            ],
-                                                          "answerText":  "정확도"
-                                                      },
-                                                      {
-                                                          "id":  "q3",
-                                                          "revealOnWrong":  true,
-                                                          "answerMatchMode":  "ANY",
-                                                          "prompt":  "맞다고 예측한 것들 가운데 실제로 맞는 비율은?",
-                                                          "scoring":  {
-                                                                          "correctDeltaSec":  30,
-                                                                          "wrongDeltaSec":  -45
-                                                                      },
-                                                           "answerRanges":  [
-                                                                                {
-                                                                                    "end":  3,
-                                                                                    "paragraphId":  "p4",
-                                                                                    "start":  0
-                                                                                }
-                                                                            ],
-                                                          "answerText":  "정밀도"
-                                                      },
-                                                      {
-                                                          "id":  "q4",
-                                                          "revealOnWrong":  true,
-                                                          "answerMatchMode":  "ANY",
-                                                          "prompt":  "실제로 맞는 것들 가운데 놓치지 않고 찾아낸 비율은?",
-                                                          "scoring":  {
-                                                                          "correctDeltaSec":  30,
-                                                                          "wrongDeltaSec":  -45
-                                                                      },
-                                                           "answerRanges":  [
-                                                                                {
-                                                                                    "end":  43,
-                                                                                    "paragraphId":  "p4",
-                                                                                    "start":  40
-                                                                                }
-                                                                            ],
-                                                          "answerText":  "재현율"
-                                                      },
-                                                      {
-                                                          "id":  "q5",
-                                                          "revealOnWrong":  true,
-                                                          "answerMatchMode":  "ANY",
-                                                          "prompt":  "정밀도와 재현율을 함께 고려한 점수는?",
-                                                          "scoring":  {
-                                                                          "correctDeltaSec":  30,
-                                                                          "wrongDeltaSec":  -45
-                                                                      },
-                                                           "answerRanges":  [
-                                                                                {
-                                                                                    "end":  156,
-                                                                                    "paragraphId":  "p5",
-                                                                                    "start":  151
-                                                                                }
-                                                                            ],
-                                                          "answerText":  "F1 점수"
-                                                      }
-                                                  ]
-                                }
-                }
+{
+  "contentId": "dr-r2-139",
+  "contentType": "DAILY_READING",
+  "version": 1,
+  "status": "PUBLISHED",
+  "title": "평가 지표와 혼동 행렬",
+  "description": "일일 독해 - 정독·복기·확인",
+  "targetLevel": "RUSSELL_2",
+  "schoolGradeRange": {
+    "min": 8,
+    "max": 9
+  },
+  "area": "READING",
+  "subArea": "NONFICTION",
+  "competencies": [
+    "READING"
+  ],
+  "tags": [
+    "daily"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "WHEAT",
+    "count": 3,
+    "multiplier": 1
+  },
+  "timeLimitSec": 480,
+  "assets": {},
+  "payload": {
+    "passage": {
+      "format": "TEXT",
+      "paragraphs": [
+        {
+          "id": "p1",
+          "text": "분류 모델은 입력된 자료를 여러 범주 가운데 하나로 나누는 인공지능 모델이다. 하지만 모델이 답을 얼마나 잘 맞히는지는 단순히 맞은 개수만 세어서는 충분히 알기 어렵다. 어떤 경우에는 놓치면 안 되는 오답이 있고, 어떤 경우에는 잘못 맞혔다고 판정하는 일이 더 큰 문제일 수 있기 때문이다. 그래서 분류 모델은 다양한 평가 지표를 함께 살펴본다. 어떤 지표를 중요하게 볼지는 모델이 실제로 쓰일 상황에 따라 달라진다."
+        },
+        {
+          "id": "p2",
+          "text": "이때 기본이 되는 표가 혼동 행렬이다. 혼동 행렬은 실제 결과와 모델의 예측 결과를 나란히 놓고, 맞게 분류한 경우와 틀리게 분류한 경우를 네 칸으로 정리한 표이다. 실제로 맞는 대상을 맞다고 판정한 경우, 실제로 아닌 대상을 아니라고 판정한 경우, 그리고 두 종류의 오답을 따로 구분해 보여 준다. 이 표를 보면 모델이 어느 방향으로 더 자주 실수하는지도 한눈에 파악할 수 있다."
+        },
+        {
+          "id": "p3",
+          "text": "정확도는 전체 예측 가운데 맞게 분류한 비율을 뜻한다. 계산이 쉬워서 자주 쓰이지만, 자료가 한쪽으로 치우친 경우에는 한계가 있다. 예를 들어 대부분이 음성이고 양성이 아주 적은 검사 자료에서 모델이 거의 모두를 음성으로 예측해도 정확도는 높게 나올 수 있다. 이런 경우에는 정확도만으로 모델 성능을 판단하기 어렵다. 겉보기 수치가 좋아 보여도 중요한 대상을 놓치고 있을 수 있기 때문이다."
+        },
+        {
+          "id": "p4",
+          "text": "정밀도는 모델이 맞다고 예측한 것들 가운데 실제로 맞는 비율을 뜻하고, 재현율은 실제로 맞는 것들 가운데 모델이 얼마나 놓치지 않고 찾아냈는지를 뜻한다. 정밀도가 높으면 잘못된 양성 판정이 적고, 재현율이 높으면 실제 양성을 많이 찾아낸다. 어떤 상황에서는 정밀도가 더 중요하고, 어떤 상황에서는 재현율이 더 중요할 수 있다."
+        },
+        {
+          "id": "p5",
+          "text": "예를 들어 스팸 메일 분류에서는 정상 메일을 잘못 스팸으로 보내는 일이 문제일 수 있고, 질병 검사에서는 환자를 놓치는 일이 더 큰 문제가 될 수 있다. 그래서 같은 모델이라도 쓰이는 분야에 따라 중요하게 볼 지표가 달라진다. 필요에 따라 정밀도와 재현율을 함께 고려한 F1 점수를 사용하기도 한다. 결국 지표 선택은 단순 계산이 아니라 실제 위험 판단과 연결되는 문제이다."
+        },
+        {
+          "id": "p6",
+          "text": "결국 혼동 행렬은 모델이 어떤 종류의 오답을 내는지 보여 주는 출발점이고, 평가 지표는 그 정보를 숫자로 정리한 결과라고 할 수 있다. 분류 모델을 평가할 때는 한 가지 수치만 보는 대신, 어떤 오답이 더 위험한지 함께 따져야 한다. 그래야 모델이 실제 상황에서 얼마나 믿을 만한지 제대로 판단할 수 있다. 숫자가 높다는 사실만으로 곧바로 좋은 모델이라고 단정할 수 없는 이유가 바로 여기에 있다."
+        }
+      ]
+    },
+    "intensive": {
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 42,
+                "paragraphId": "p1",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "여러 범주로 나눈다"
+              },
+              {
+                "id": "B",
+                "text": "예측을 지운다"
+              },
+              {
+                "id": "C",
+                "text": "숫자를 더한다"
+              },
+              {
+                "id": "D",
+                "text": "규칙을 없앤다"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "분류 모델은 무엇을 하나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 93,
+                "paragraphId": "p1",
+                "start": 44
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "맞은 개수"
+              },
+              {
+                "id": "B",
+                "text": "오답의 종류"
+              },
+              {
+                "id": "C",
+                "text": "표의 크기"
+              },
+              {
+                "id": "D",
+                "text": "자료의 길이"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "무엇만 세어서는 충분하지 않은가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 161,
+                "paragraphId": "p1",
+                "start": 95
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "놓치면 안 되는 오답"
+              },
+              {
+                "id": "B",
+                "text": "색이 같은 정답"
+              },
+              {
+                "id": "C",
+                "text": "짧은 문장"
+              },
+              {
+                "id": "D",
+                "text": "큰 숫자"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "어떤 경우를 함께 봐야 하나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 192,
+                "paragraphId": "p1",
+                "start": 163
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "평가 지표"
+              },
+              {
+                "id": "B",
+                "text": "그림 문자"
+              },
+              {
+                "id": "C",
+                "text": "속도 기록"
+              },
+              {
+                "id": "D",
+                "text": "날짜 표기"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "분류 모델은 무엇을 함께 보는가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 232,
+                "paragraphId": "p1",
+                "start": 194
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "실제 상황"
+              },
+              {
+                "id": "B",
+                "text": "표의 모양"
+              },
+              {
+                "id": "C",
+                "text": "문장의 길이"
+              },
+              {
+                "id": "D",
+                "text": "자료의 수"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "어떤 점에 따라 중요한 지표가 달라지나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 233,
+                "paragraphId": "p1",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "상황에 따라 지표를 함께 봐야 한다"
+              },
+              {
+                "id": "B",
+                "text": "맞은 개수만 세면 된다"
+              },
+              {
+                "id": "C",
+                "text": "오답은 중요하지 않다"
+              },
+              {
+                "id": "D",
+                "text": "항상 같은 지표가 최고다"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "왜 평가 지표를 함께 살펴야 하나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 20,
+                "paragraphId": "p2",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "혼동 행렬"
+              },
+              {
+                "id": "B",
+                "text": "정확도 표"
+              },
+              {
+                "id": "C",
+                "text": "순위표"
+              },
+              {
+                "id": "D",
+                "text": "통계 차트"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "기본이 되는 표는 무엇인가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 91,
+                "paragraphId": "p2",
+                "start": 22
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "실제 결과와 예측 결과"
+              },
+              {
+                "id": "B",
+                "text": "정답과 오답만"
+              },
+              {
+                "id": "C",
+                "text": "점수와 등수"
+              },
+              {
+                "id": "D",
+                "text": "시간과 장소"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "혼동 행렬은 무엇을 나란히 놓는가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 166,
+                "paragraphId": "p2",
+                "start": 93
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "따로 구분해 보여 준다"
+              },
+              {
+                "id": "B",
+                "text": "섞어서 지운다"
+              },
+              {
+                "id": "C",
+                "text": "같이 합친다"
+              },
+              {
+                "id": "D",
+                "text": "무시한다"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "두 종류의 오답을 어떻게 하는가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 212,
+                "paragraphId": "p2",
+                "start": 168
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "어느 방향으로 더 자주 실수하는지"
+              },
+              {
+                "id": "B",
+                "text": "정답만 몇 개인지"
+              },
+              {
+                "id": "C",
+                "text": "문장이 얼마나 긴지"
+              },
+              {
+                "id": "D",
+                "text": "색깔이 어떤지"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "혼동 행렬을 보면 무엇을 알 수 있나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 213,
+                "paragraphId": "p2",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "오답의 방향까지 보여 주는 표다"
+              },
+              {
+                "id": "B",
+                "text": "맞은 개수만 세는 표다"
+              },
+              {
+                "id": "C",
+                "text": "계산이 불필요한 표다"
+              },
+              {
+                "id": "D",
+                "text": "실제 결과는 보지 않는다"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "혼동 행렬이 보여 주는 것은 무엇인가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 29,
+                "paragraphId": "p3",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "전체 예측 가운데 맞게 분류한 비율"
+              },
+              {
+                "id": "B",
+                "text": "오답만 모은 비율"
+              },
+              {
+                "id": "C",
+                "text": "양성만 센 비율"
+              },
+              {
+                "id": "D",
+                "text": "시간이 빠른 비율"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "정확도는 무엇의 비율인가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s13",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 72,
+                "paragraphId": "p3",
+                "start": 31
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "자료가 한쪽으로 치우칠 수 있어서"
+              },
+              {
+                "id": "B",
+                "text": "계산이 너무 어려워서"
+              },
+              {
+                "id": "C",
+                "text": "항상 0이어서"
+              },
+              {
+                "id": "D",
+                "text": "표가 작아서"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "정확도는 왜 한계가 있나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s14",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 144,
+                "paragraphId": "p3",
+                "start": 74
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "대부분 음성이고 양성이 적을 때"
+              },
+              {
+                "id": "B",
+                "text": "모두 양성일 때"
+              },
+              {
+                "id": "C",
+                "text": "정답이 없는 때"
+              },
+              {
+                "id": "D",
+                "text": "자료가 없을 때"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "어떤 경우 정확도가 높게 나올 수 있나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s15",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 176,
+                "paragraphId": "p3",
+                "start": 146
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "모델 성능 판단"
+              },
+              {
+                "id": "B",
+                "text": "색깔 구분"
+              },
+              {
+                "id": "C",
+                "text": "문장 길이 측정"
+              },
+              {
+                "id": "D",
+                "text": "점수 합산"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "이런 경우 정확도만으로 무엇을 못 하나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s16",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 217,
+                "paragraphId": "p3",
+                "start": 178
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "중요한 대상을 놓칠 수 있어서"
+              },
+              {
+                "id": "B",
+                "text": "표가 너무 작아서"
+              },
+              {
+                "id": "C",
+                "text": "정답이 너무 많아서"
+              },
+              {
+                "id": "D",
+                "text": "속도가 느려서"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "겉보기 수치가 좋아도 왜 안심할 수 없나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s17",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 218,
+                "paragraphId": "p3",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "정확도만으로는 성능 판단이 어렵다"
+              },
+              {
+                "id": "B",
+                "text": "정확도는 항상 충분하다"
+              },
+              {
+                "id": "C",
+                "text": "음성 자료는 중요하지 않다"
+              },
+              {
+                "id": "D",
+                "text": "오답은 모두 같다"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "정확도만으로 판단하기 어려운 이유는 무엇인가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s18",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 84,
+                "paragraphId": "p4",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "맞다고 예측한 것의 정확함과 실제 맞는 것의 찾아냄"
+              },
+              {
+                "id": "B",
+                "text": "속도와 무게"
+              },
+              {
+                "id": "C",
+                "text": "길이와 넓이"
+              },
+              {
+                "id": "D",
+                "text": "점수와 등수"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "정밀도와 재현율은 각각 무엇을 뜻하나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s19",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 133,
+                "paragraphId": "p4",
+                "start": 86
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "잘못된 양성 판정"
+              },
+              {
+                "id": "B",
+                "text": "실제 양성"
+              },
+              {
+                "id": "C",
+                "text": "정답"
+              },
+              {
+                "id": "D",
+                "text": "시간"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "정밀도가 높으면 무엇이 적나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s20",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 181,
+                "paragraphId": "p4",
+                "start": 135
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "정밀도나 재현율"
+              },
+              {
+                "id": "B",
+                "text": "글자 수나 띄어쓰기"
+              },
+              {
+                "id": "C",
+                "text": "크기나 색"
+              },
+              {
+                "id": "D",
+                "text": "속도나 거리"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "어떤 경우에 더 중요할 수 있나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s21",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 182,
+                "paragraphId": "p4",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "정밀도와 재현율은 상황에 따라 중요도가 다르다"
+              },
+              {
+                "id": "B",
+                "text": "둘은 항상 같다"
+              },
+              {
+                "id": "C",
+                "text": "정밀도만 보면 된다"
+              },
+              {
+                "id": "D",
+                "text": "재현율은 필요 없다"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "정밀도와 재현율은 무엇을 다르게 보여 주나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s22",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 84,
+                "paragraphId": "p5",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "정상 메일을 스팸으로 보내는 일"
+              },
+              {
+                "id": "B",
+                "text": "스팸을 정상으로 보내는 일은 절대 없다"
+              },
+              {
+                "id": "C",
+                "text": "메일이 너무 짧은 일"
+              },
+              {
+                "id": "D",
+                "text": "제목이 없는 일"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "스팸 메일 분류에서는 무엇이 문제일 수 있나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s23",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 125,
+                "paragraphId": "p5",
+                "start": 86
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "중요하게 볼 지표"
+              },
+              {
+                "id": "B",
+                "text": "모델의 색"
+              },
+              {
+                "id": "C",
+                "text": "자료의 길이"
+              },
+              {
+                "id": "D",
+                "text": "글씨체"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "같은 모델이라도 무엇에 따라 달라지나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s24",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 166,
+                "paragraphId": "p5",
+                "start": 127
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "정밀도와 재현율을 함께 고려한 F1 점수"
+              },
+              {
+                "id": "B",
+                "text": "정확도만"
+              },
+              {
+                "id": "C",
+                "text": "오답만"
+              },
+              {
+                "id": "D",
+                "text": "실패만"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "무엇을 함께 고려하기도 하나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s25",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 208,
+                "paragraphId": "p5",
+                "start": 168
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "실제 위험 판단"
+              },
+              {
+                "id": "B",
+                "text": "글의 길이"
+              },
+              {
+                "id": "C",
+                "text": "음성의 크기"
+              },
+              {
+                "id": "D",
+                "text": "표의 색깔"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "지표 선택은 무엇과 연결되나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s26",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 209,
+                "paragraphId": "p5",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "지표 선택은 실제 위험 판단과 연결된다"
+              },
+              {
+                "id": "B",
+                "text": "모든 분야는 같은 지표를 쓴다"
+              },
+              {
+                "id": "C",
+                "text": "정확도만 보면 된다"
+              },
+              {
+                "id": "D",
+                "text": "F1 점수는 필요 없다"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "지표 선택이 실제 위험 판단과 연결되는 이유는 무엇인가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s27",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 74,
+                "paragraphId": "p6",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "어떤 종류의 오답을 내는지"
+              },
+              {
+                "id": "B",
+                "text": "정답만 몇 개인지"
+              },
+              {
+                "id": "C",
+                "text": "표의 크기"
+              },
+              {
+                "id": "D",
+                "text": "시간의 흐름"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "혼동 행렬은 무엇을 보여 주는 출발점인가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s28",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 129,
+                "paragraphId": "p6",
+                "start": 76
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "어떤 오답이 더 위험한지"
+              },
+              {
+                "id": "B",
+                "text": "글자 수"
+              },
+              {
+                "id": "C",
+                "text": "모양"
+              },
+              {
+                "id": "D",
+                "text": "색"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "평가할 때 무엇을 함께 따져야 하나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s29",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 170,
+                "paragraphId": "p6",
+                "start": 131
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "실제 상황에서 얼마나 믿을 만한지"
+              },
+              {
+                "id": "B",
+                "text": "문장 길이"
+              },
+              {
+                "id": "C",
+                "text": "정답 수"
+              },
+              {
+                "id": "D",
+                "text": "오답 수"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "그래야 무엇을 판단할 수 있나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s30",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 221,
+                "paragraphId": "p6",
+                "start": 172
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "좋은 모델이라고 단정할 수 없어서"
+              },
+              {
+                "id": "B",
+                "text": "표가 없어서"
+              },
+              {
+                "id": "C",
+                "text": "오답이 없어서"
+              },
+              {
+                "id": "D",
+                "text": "문장이 짧아서"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "왜 숫자만으로 단정할 수 없나?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        },
+        {
+          "stepId": "s31",
+          "highlight": {
+            "ranges": [
+              {
+                "end": 222,
+                "paragraphId": "p6",
+                "start": 0
+              }
+            ]
+          },
+          "question": {
+            "choices": [
+              {
+                "id": "A",
+                "text": "한 수치만 보지 말고 위험한 오답까지 봐야 한다"
+              },
+              {
+                "id": "B",
+                "text": "숫자가 높으면 무조건 좋다"
+              },
+              {
+                "id": "C",
+                "text": "오답은 볼 필요가 없다"
+              },
+              {
+                "id": "D",
+                "text": "평가 지표는 쓸모없다"
+              }
+            ],
+            "answerId": "A",
+            "prompt": "혼동 행렬과 평가 지표를 함께 봐야 하는 이유는 무엇인가?",
+            "scoring": {
+              "eliminateWrongChoice": true,
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40
+            }
+          }
+        }
+      ]
+    },
+    "recall": {
+      "cards": [
+        {
+          "id": "c1",
+          "text": "분류 모델은 자료를 여러 범주 가운데 하나로 나눈다."
+        },
+        {
+          "id": "c2",
+          "text": "혼동 행렬은 실제 결과와 예측 결과를 네 칸으로 정리한다."
+        },
+        {
+          "id": "c3",
+          "text": "정확도는 자료가 한쪽으로 치우치면 한계가 있다."
+        },
+        {
+          "id": "c4",
+          "text": "정밀도와 재현율은 서로 다른 기준을 보여 준다."
+        },
+        {
+          "id": "c5",
+          "text": "지표 선택은 쓰이는 분야의 위험과 연결된다."
+        },
+        {
+          "id": "c6",
+          "text": "한 가지 수치만으로 좋은 모델이라고 단정할 수 없다."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "seedPenalty": 1
+    },
+    "confirm": {
+      "questions": [
+        {
+          "id": "q1",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "실제 결과와 예측 결과를 함께 정리한 표는?",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "answerRanges": [
+            {
+              "end": 17,
+              "paragraphId": "p2",
+              "start": 13
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "전체 예측 가운데 맞게 분류한 비율은?",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "answerRanges": [
+            {
+              "end": 3,
+              "paragraphId": "p3",
+              "start": 0
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "맞다고 예측한 것들 가운데 실제로 맞는 비율은?",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "answerRanges": [
+            {
+              "end": 3,
+              "paragraphId": "p4",
+              "start": 0
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "실제로 맞는 것들 가운데 놓치지 않고 찾아낸 비율은?",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "answerRanges": [
+            {
+              "end": 43,
+              "paragraphId": "p4",
+              "start": 40
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY",
+          "prompt": "정밀도와 재현율을 함께 고려한 점수는?",
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "answerRanges": [
+            {
+              "end": 156,
+              "paragraphId": "p5",
+              "start": 151
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

@@ -1,19 +1,35 @@
 {
-  "contentId": "dr-s3-224",
+  "contentId": "dr-saussure3-224",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(소쉬르 3) Day 224 문학",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[비문학] 도서관 예절 - 차례차례 기다리기",
+  "description": "책과 이웃을 배려하는 도서관 이용 질서",
   "targetLevel": "SAUSSURE_3",
-  "schoolGradeRange": { "min": 5, "max": 5 },
-  "area": "READING",
-  "subArea": "LITERATURE",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
-  "timeLimitSec": 480,
+  "schoolGradeRange": {
+    "min": 3,
+    "max": 3
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +37,15 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "수진이는 시골 할머니에게 편지를 쓰려고 책상 앞에 앉았습니다. 그런데 막상 펜을 들자 무슨 말을 써야 할지 도무지 떠오르지 않았습니다. 한참을 고민하다가 수진이는 글 대신 그림을 그리기로 마음먹었습니다. 색연필 통과 도화지를 꺼내 가장 먼저 빨간 지붕의 자기 집을 그리고 그 옆에 초록 잎이 무성한 감나무를 정성스럽게 그렸습니다. 감나무 아래에는 작은 강아지 복실이가 꼬리를 신나게 흔들며 뛰어놀고 있는 모습을 그려 넣었습니다. 하늘에는 뭉게구름 두어 개를 동그랗게 그리고 그 사이로 환하게 웃는 해님도 그렸습니다. 마지막으로 그림 아래쪽에 할머니 보고 싶어요 꼭 놀러 오세요 하고 또박또박 정성껏 적었습니다."
+          "text": "도서관은 우리가 책을 빌려 읽는 고마운 장소입니다. 우리는 책을 고르거나 빌릴 때 차례차례 줄을 섰습니다. 조용히 순서를 기다리는 것이 도서관 이용의 기본입니다."
         },
         {
           "id": "p2",
-          "text": "일주일 뒤 할머니에게서 전화가 왔습니다. 할머니는 수진아 네가 보낸 그림 편지를 받았단다 하고 말씀하시며 환하게 웃으셨습니다. 복실이가 꼬리를 흔드는 모습이 정말 살아 있는 것 같아서 자꾸만 쳐다보게 된다며 칭찬해 주셨습니다. 수진이는 할머니가 그토록 기뻐하신다는 것을 알고 마음이 따뜻해졌습니다. 그날부터 수진이는 매주 한 장씩 그림 편지를 그려서 할머니에게 보내기로 마음속으로 다짐했습니다. 두 번째 편지에는 학교 운동장에서 친구들과 줄넘기를 하는 장면을 그렸고 세 번째 편지에는 가족이 함께 공원에서 소풍하는 모습을 그렸습니다. 할머니는 그림 편지를 받을 때마다 방 벽에 나란히 붙여 놓으시며 우리 수진이 덕분에 매일이 즐겁단다 하고 말씀하셨습니다."
+          "text": "읽고 싶은 책이 있어도 질서를 지키며 행동해야 합니다. 친구가 책을 다 읽을 때까지 양보하며 기다려 줍니다. 배려하는 마음이 도서관의 정숙한 분위기를 유지합니다."
+        },
+        {
+          "id": "p3",
+          "text": "우리는 도서관 이용 수칙을 꼼꼼하게 읽고 지켰습니다. 빌린 책을 소중히 다루고 제자리에 두는 습관이 필요함. 예절을 지키면 도서관이 더 즐거운 곳이 됩니다."
         }
       ]
     },
@@ -33,317 +53,594 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 33 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 27
+              }
+            ]
+          },
           "question": {
-            "prompt": "수진이는 무엇을 하려고 책상 앞에 앉았나요?",
+            "prompt": "도서관은 무엇을 하는 장소인가요?",
             "choices": [
-              "숙제를 하려고 앉았다",
-              "할머니에게 보낼 편지를 쓰려고 앉았다",
-              "일기를 쓰려고 앉았다",
-              "그림 숙제를 하려고 앉았다"
+              {
+                "id": "A",
+                "text": "책 빌려 읽기"
+              },
+              {
+                "id": "B",
+                "text": "축구 하기"
+              },
+              {
+                "id": "C",
+                "text": "노래 부르기"
+              },
+              {
+                "id": "D",
+                "text": "잠자기"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 35, "end": 74 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 29,
+                "end": 58
+              }
+            ]
+          },
           "question": {
-            "prompt": "수진이가 펜을 들고 겪은 어려움은 무엇인가요?",
+            "prompt": "우리는 어떻게 줄을 섰나요?",
             "choices": [
-              "펜에 잉크가 없어서 쓸 수 없었다",
-              "어떤 말을 적어야 할지 전혀 생각이 나지 않았다",
-              "글씨를 너무 못 써서 부끄러웠다",
-              "종이가 없어서 쓸 곳이 없었다"
+              {
+                "id": "A",
+                "text": "차례차례"
+              },
+              {
+                "id": "B",
+                "text": "난폭하게"
+              },
+              {
+                "id": "C",
+                "text": "뒤죽박죽"
+              },
+              {
+                "id": "D",
+                "text": "지그재그"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 76, "end": 112 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 60,
+                "end": 89
+              }
+            ]
+          },
           "question": {
-            "prompt": "수진이는 글 대신 어떤 방법을 선택했나요?",
+            "prompt": "이용의 무엇이라고 했나요?",
             "choices": [
-              "전화를 걸기로 했다",
-              "그림을 그려서 마음을 전하기로 했다",
-              "노래를 녹음해서 보내기로 했다",
-              "사진을 찍어서 보내기로 했다"
+              {
+                "id": "A",
+                "text": "기본"
+              },
+              {
+                "id": "B",
+                "text": "장난"
+              },
+              {
+                "id": "C",
+                "text": "낙서"
+              },
+              {
+                "id": "D",
+                "text": "노래"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 114, "end": 183 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 27
+              },
+              {
+                "paragraphId": "p1",
+                "start": 29,
+                "end": 58
+              },
+              {
+                "paragraphId": "p1",
+                "start": 60,
+                "end": 89
+              }
+            ]
+          },
           "question": {
-            "prompt": "수진이가 가장 먼저 그린 것은 무엇인가요?",
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "초록 잎이 무성한 감나무를 먼저 그렸다",
-              "강아지 복실이를 먼저 그렸다",
-              "빨간 지붕의 자기 집을 먼저 그렸다",
-              "하늘의 뭉게구름을 먼저 그렸다"
+              {
+                "id": "A",
+                "text": "도서관 입장과 대기 예절"
+              },
+              {
+                "id": "B",
+                "text": "책이 무거운 이유"
+              },
+              {
+                "id": "C",
+                "text": "도서관이 좁은 불평"
+              },
+              {
+                "id": "D",
+                "text": "이용료가 비싼 사연"
+              }
             ],
-            "answerIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 185, "end": 238 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 29
+              }
+            ]
+          },
           "question": {
-            "prompt": "감나무 아래에 그려 넣은 동물은 누구인가요?",
+            "prompt": "우리는 무엇을 지켜야 하나요?",
             "choices": [
-              "길고양이 한 마리를 그렸다",
-              "꼬리를 흔드는 강아지 복실이를 그렸다",
-              "나비 두 마리를 그렸다",
-              "다람쥐가 도토리를 먹는 모습을 그렸다"
+              {
+                "id": "A",
+                "text": "질서"
+              },
+              {
+                "id": "B",
+                "text": "비명"
+              },
+              {
+                "id": "C",
+                "text": "낙서"
+              },
+              {
+                "id": "D",
+                "text": "고집"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 240, "end": 287 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 31,
+                "end": 59
+              }
+            ]
+          },
           "question": {
-            "prompt": "하늘에 그린 것으로 맞는 것은 무엇인가요?",
+            "prompt": "친구를 위해 무엇을 하나요?",
             "choices": [
-              "별과 달을 그렸다",
-              "비행기와 새를 그렸다",
-              "뭉게구름과 웃는 해님을 그렸다",
-              "무지개와 빗방울을 그렸다"
+              {
+                "id": "A",
+                "text": "양보하며 기다림"
+              },
+              {
+                "id": "B",
+                "text": "책을 뺏음"
+              },
+              {
+                "id": "C",
+                "text": "소리 지름"
+              },
+              {
+                "id": "D",
+                "text": "방해함"
+              }
             ],
-            "answerIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 289, "end": 340 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 61,
+                "end": 89
+              }
+            ]
+          },
           "question": {
-            "prompt": "그림 아래에 적은 내용은 무엇인가요?",
+            "prompt": "어떤 마음이 분위기를 유지하나요?",
             "choices": [
-              "할머니 사랑해요 건강하세요 하고 적었다",
-              "할머니 보고 싶어요 꼭 놀러 오세요 하고 적었다",
-              "할머니 생신 축하해요 하고 적었다",
-              "할머니 선물 보내 주세요 하고 적었다"
+              {
+                "id": "A",
+                "text": "배려하는 마음"
+              },
+              {
+                "id": "B",
+                "text": "화내는 마음"
+              },
+              {
+                "id": "C",
+                "text": "욕심 부리는 마음"
+              },
+              {
+                "id": "D",
+                "text": "무관심한 마음"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 340 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 29
+              },
+              {
+                "paragraphId": "p2",
+                "start": 31,
+                "end": 59
+              },
+              {
+                "paragraphId": "p2",
+                "start": 61,
+                "end": 89
+              }
+            ]
+          },
           "question": {
-            "prompt": "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "수진이가 할머니에게 그림 편지를 정성껏 그리는 과정",
-              "수진이가 학교에서 미술 시간에 그림을 그리는 모습",
-              "할머니가 수진이에게 편지를 보낸 이야기",
-              "수진이가 강아지 복실이를 산책시키는 이야기"
+              {
+                "id": "A",
+                "text": "이용 질서와 분위기 유지"
+              },
+              {
+                "id": "B",
+                "text": "책이 맛없는 이유"
+              },
+              {
+                "id": "C",
+                "text": "분위기가 무서운 공포"
+              },
+              {
+                "id": "D",
+                "text": "기다림이 지루한 마음"
+              }
             ],
-            "answerIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 21 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 28
+              }
+            ]
+          },
           "question": {
-            "prompt": "일주일 뒤에 어떤 일이 있었나요?",
+            "prompt": "우리는 무엇을 읽고 지켰나요?",
             "choices": [
-              "할머니가 직접 집에 찾아오셨다",
-              "할머니에게서 전화가 걸려 왔다",
-              "우편으로 선물이 도착했다",
-              "수진이가 할머니에게 다시 전화를 걸었다"
+              {
+                "id": "A",
+                "text": "이용 수칙"
+              },
+              {
+                "id": "B",
+                "text": "만화책"
+              },
+              {
+                "id": "C",
+                "text": "비밀 지도"
+              },
+              {
+                "id": "D",
+                "text": "성적표"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 23, "end": 69 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 30,
+                "end": 59
+              }
+            ]
+          },
           "question": {
-            "prompt": "할머니는 그림 편지를 받고 어떤 반응을 보이셨나요?",
+            "prompt": "책을 어디에 두어야 하나요?",
             "choices": [
-              "글씨가 없어서 아쉬워하셨다",
-              "그림 편지를 받았다며 환하게 웃으셨다",
-              "다음에는 글을 쓰라고 하셨다",
-              "편지가 늦게 도착해 걱정하셨다"
+              {
+                "id": "A",
+                "text": "제자리에"
+              },
+              {
+                "id": "B",
+                "text": "지붕 위에"
+              },
+              {
+                "id": "C",
+                "text": "쓰레기통"
+              },
+              {
+                "id": "D",
+                "text": "친구 집"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 71, "end": 125 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 61,
+                "end": 86
+              }
+            ]
+          },
           "question": {
-            "prompt": "할머니가 특별히 칭찬한 부분은 무엇인가요?",
+            "prompt": "예절을 지키면 도서관이 어찌 되나요?",
             "choices": [
-              "집 그림이 아주 예쁘다고 칭찬하셨다",
-              "복실이가 꼬리 흔드는 모습이 살아 있는 것 같다고 하셨다",
-              "하늘의 구름이 사실적이라고 칭찬하셨다",
-              "글씨를 또박또박 잘 썼다고 칭찬하셨다"
+              {
+                "id": "A",
+                "text": "더 즐거운 곳"
+              },
+              {
+                "id": "B",
+                "text": "시끄러운 곳"
+              },
+              {
+                "id": "C",
+                "text": "무서운 곳"
+              },
+              {
+                "id": "D",
+                "text": "지루한 곳"
+              }
             ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 127, "end": 165 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 28
+              },
+              {
+                "paragraphId": "p3",
+                "start": 30,
+                "end": 59
+              },
+              {
+                "paragraphId": "p3",
+                "start": 61,
+                "end": 86
+              }
+            ]
+          },
           "question": {
-            "prompt": "할머니의 반응을 알고 수진이는 어떤 기분이 들었나요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "창피해서 얼굴이 빨개졌다",
-              "별로 감흥이 없었다",
-              "할머니가 기뻐하셔서 마음이 따뜻해졌다",
-              "다음에는 안 보내겠다고 생각했다"
+              {
+                "id": "A",
+                "text": "올바른 도서 사용과 태도"
+              },
+              {
+                "id": "B",
+                "text": "책을 잃어버린 슬픔"
+              },
+              {
+                "id": "C",
+                "text": "제자리를 모르는 고민"
+              },
+              {
+                "id": "D",
+                "text": "도서관이 사라진 공포"
+              }
             ],
-            "answerIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 167, "end": 219 }] },
-          "question": {
-            "prompt": "수진이가 그날부터 다짐한 것은 무엇인가요?",
-            "choices": [
-              "매달 한 장씩 보내기로 했다",
-              "매주 한 장씩 그림 편지를 그려 보내기로 했다",
-              "일 년에 한 번 편지를 쓰기로 했다",
-              "편지 대신 영상 통화를 하기로 했다"
-            ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 221, "end": 297 }] },
-          "question": {
-            "prompt": "두 번째와 세 번째 편지에 그린 내용은 각각 무엇인가요?",
-            "choices": [
-              "줄넘기 장면과 가족 소풍 모습을 그렸다",
-              "학교 수업 장면과 바다 여행 모습을 그렸다",
-              "생일 파티 장면과 놀이공원 모습을 그렸다",
-              "운동회 장면과 캠핑하는 모습을 그렸다"
-            ],
-            "answerIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s15",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 299, "end": 365 }] },
-          "question": {
-            "prompt": "할머니는 받은 그림 편지를 어떻게 하셨나요?",
-            "choices": [
-              "서랍에 넣어 보관하셨다",
-              "방 벽에 나란히 붙여 놓으셨다",
-              "액자에 넣어 거실에 걸어 놓으셨다",
-              "이웃에게 보여 주셨다"
-            ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s16",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 365 }] },
-          "question": {
-            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
-            "choices": [
-              "수진이가 그림 실력을 키워 대회에 나가는 이야기",
-              "할머니의 기쁜 반응에 힘입어 수진이가 그림 편지를 계속 보내는 이야기",
-              "할머니가 수진이를 만나러 도시로 오시는 이야기",
-              "수진이가 친구들에게도 그림 편지를 보내는 이야기"
-            ],
-            "answerIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "수진이가 할머니 편지를 쓰려 하나 막막했다" },
-        { "id": "c2", "text": "글 대신 그림 편지를 그리기로 결심했다" },
-        { "id": "c3", "text": "집과 감나무와 복실이를 정성껏 그렸다" },
-        { "id": "c4", "text": "그림 아래에 보고 싶다는 말을 적었다" },
-        { "id": "c5", "text": "할머니가 전화로 그림 편지를 칭찬하셨다" },
-        { "id": "c6", "text": "수진이는 매주 그림 편지를 보내기로 했다" },
-        { "id": "c7", "text": "줄넘기와 소풍 장면을 이어 그려 보냈다" },
-        { "id": "c8", "text": "할머니는 편지를 벽에 붙이며 기뻐하셨다" }
+        {
+          "id": "c1",
+          "text": "도서관에서 차례를 지켜요."
+        },
+        {
+          "id": "c2",
+          "text": "조용히 순서를 기다립니다."
+        },
+        {
+          "id": "c3",
+          "text": "친구에게 책을 양보하며 놂."
+        },
+        {
+          "id": "c4",
+          "text": "배려하는 마음이 중요합니다."
+        },
+        {
+          "id": "c5",
+          "text": "책을 소중히 다루고 정리해요."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "수진이가 편지를 쓰려 한 대상은 누구입니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 5, "end": 14 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "순서대로 행동하는 모양은?",
+          "answerText": "차례차례",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 46,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "수진이는 글 대신 어떤 방법으로 마음을 전했습니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 93, "end": 112 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "질서 있고 조용한 상태는?",
+          "answerText": "정숙한",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 75,
+              "end": 78
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "감나무 아래에 그려 넣은 동물은 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 196, "end": 210 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q4",
-          "prompt": "그림 아래쪽에 또박또박 적은 말은 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 303, "end": 326 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "할머니가 특별히 칭찬한 그림 속 장면은 무엇입니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 71, "end": 101 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "수진이는 어떤 주기로 그림 편지를 보내기로 했습니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 175, "end": 192 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q7",
-          "prompt": "할머니는 받은 그림 편지를 어디에 붙여 놓으셨습니까?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 319, "end": 340 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "물건이 있던 원래 자리는?",
+          "answerText": "제자리에",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 44,
+              "end": 48
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

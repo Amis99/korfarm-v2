@@ -696,23 +696,23 @@
             ]
           },
           "question": {
-            "prompt": "청년은 어떤 옷을 입고 있었나요?",
+            "prompt": "윤건에게 말을 건넨 청년의 차림으로 알맞은 것은?",
             "choices": [
               {
                 "id": "A",
-                "text": "남색 신사복이다."
+                "text": "남색 신사복을 새로 지어 입은 청년"
               },
               {
                 "id": "B",
-                "text": "학생복 저고리이다."
+                "text": "학생복 저고리를 벗어 둔 청년"
               },
               {
                 "id": "C",
-                "text": "셔츠 바람이다."
+                "text": "작업복 차림의 역무원"
               },
               {
                 "id": "D",
-                "text": "작업복이다."
+                "text": "해진 군복을 입은 동무"
               }
             ],
             "answerId": "A",
@@ -891,23 +891,23 @@
             ]
           },
           "question": {
-            "prompt": "윤건은 얼른 무엇이 나오지 않았나요?",
+            "prompt": "윤건이 얼른 대답하지 못한 까닭으로 알맞은 것은?",
             "choices": [
               {
                 "id": "A",
-                "text": "대답이다."
+                "text": "청년의 말이 윤건의 비위를 벌써 건드렸기 때문이다"
               },
               {
                 "id": "B",
-                "text": "웃음이다."
+                "text": "청년의 이름을 완전히 잊어버렸기 때문이다"
               },
               {
                 "id": "C",
-                "text": "생각이다."
+                "text": "도시락 값을 먼저 계산해야 했기 때문이다"
               },
               {
                 "id": "D",
-                "text": "기침이다."
+                "text": "식당차에서 곧 내려야 했기 때문이다"
               }
             ],
             "answerId": "A",
@@ -1047,23 +1047,23 @@
             ]
           },
           "question": {
-            "prompt": "윤건은 청년을 무엇이라고 생각했나요?",
+            "prompt": "\"길동무다\"라는 말에는 어떤 깨달음이 담겨 있나요?",
             "choices": [
               {
                 "id": "A",
-                "text": "길동무다."
+                "text": "같은 조선으로 가는 더 큰 운명의 동행이라는 깨달음"
               },
               {
                 "id": "B",
-                "text": "적이다."
+                "text": "기차표를 같이 샀다는 단순한 사실"
               },
               {
                 "id": "C",
-                "text": "모르는 사람이다."
+                "text": "학교가 같았다는 친분의 확인"
               },
               {
                 "id": "D",
-                "text": "고향 사람이다."
+                "text": "서로 고향이 같지 않다는 판단"
               }
             ],
             "answerId": "A",
@@ -1207,19 +1207,19 @@
             "choices": [
               {
                 "id": "A",
-                "text": "어데 작정되셨습니까? 라는 물음에 대해 희망처는 아니지만 힘들지 않은 곳이라고 답한다."
+                "text": "신통한 곳은 아니지만 여간 힘들지 않은 곳이라고 답한다"
               },
               {
                 "id": "B",
-                "text": "고향에 작정되었다고 답한다."
+                "text": "고향에 작정되었다고 답한다"
               },
               {
                 "id": "C",
-                "text": "아직 어디에도 작정되지 않았다고 답한다."
+                "text": "아직 어디에도 작정되지 않았다고 답한다"
               },
               {
                 "id": "D",
-                "text": "윤건과 같은 곳이라고 답한다."
+                "text": "윤건과 같은 곳이라고 답한다"
               }
             ],
             "answerId": "A",
@@ -1268,60 +1268,523 @@
               "eliminateWrongChoice": true
             }
           }
+        },
+        {
+          "stepId": "p1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 219
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "화자는 고향을 편히 쉬는 곳이 아니라 힘차게 뛰어들어야 할 곳으로 느낀다."
+              },
+              {
+                "id": "B",
+                "text": "화자는 고향에 가기 싫어 발길을 돌리려 한다."
+              },
+              {
+                "id": "C",
+                "text": "화자는 고향에 아무도 없다고 단정한다."
+              },
+              {
+                "id": "D",
+                "text": "화자는 고향을 조용히 잊어버리려 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "p2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 191
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2문단의 핵심은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "윤건은 갑갑한 차 안에서 자꾸 바깥을 내다보다가 낯익은 조선 청년을 만난다."
+              },
+              {
+                "id": "B",
+                "text": "윤건은 끝까지 차 안에서 잠만 잔다."
+              },
+              {
+                "id": "C",
+                "text": "윤건은 일본 청년과 처음 다투게 된다."
+              },
+              {
+                "id": "D",
+                "text": "윤건은 고베에 도착하자마자 집으로 돌아간다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "p3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 181
+              }
+            ]
+          },
+          "question": {
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "윤건은 그 청년을 식당차에서 다시 보며 그의 형편과 인상을 떠올린다."
+              },
+              {
+                "id": "B",
+                "text": "윤건은 그 청년이 누군지 바로 전혀 모른다고 한다."
+              },
+              {
+                "id": "C",
+                "text": "윤건은 식당차에 가지 않고 그대로 내려 버린다."
+              },
+              {
+                "id": "D",
+                "text": "윤건은 청년의 이름과 집 주소를 모두 기억한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "p4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 219
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4문단에서 청년이 꺼낸 화제는 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "졸업 뒤 진로와 취직, 희망하는 방면에 대한 질문이다."
+              },
+              {
+                "id": "B",
+                "text": "고향의 음식과 여행지 추천 이야기이다."
+              },
+              {
+                "id": "C",
+                "text": "윤건의 가족사만 캐묻는 이야기이다."
+              },
+              {
+                "id": "D",
+                "text": "청년이 바로 돈을 빌려 달라는 요구이다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "p5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 190
+              }
+            ]
+          },
+          "question": {
+            "prompt": "5문단에서 드러나는 윤건의 반응은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "윤건은 청년의 말투에 거슬림과 멸시를 느끼지만 곧 후회한다."
+              },
+              {
+                "id": "B",
+                "text": "윤건은 처음부터 청년을 깊이 존경하며 감동한다."
+              },
+              {
+                "id": "C",
+                "text": "윤건은 청년의 말을 전혀 듣지 못한다."
+              },
+              {
+                "id": "D",
+                "text": "윤건은 대화를 끊고 바로 자리를 떠난다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "p6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 258
+              }
+            ]
+          },
+          "question": {
+            "prompt": "6문단의 결론으로 가장 적절한 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "윤건은 같은 길을 가는 길동무라는 의식을 떠올리며 다시 대화를 이어 간다."
+              },
+              {
+                "id": "B",
+                "text": "윤건은 끝내 청년을 밀어내고 아무 말도 하지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "청년은 윤건에게 고향으로 돌아가지 말라고 충고한다."
+              },
+              {
+                "id": "D",
+                "text": "두 사람은 서로 다른 나라로 향하는 낯선 타인으로 남는다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s32",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 219
+              },
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 258
+              }
+            ]
+          },
+          "question": {
+            "prompt": "1문단과 6문단을 함께 볼 때 이어지는 뜻은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "고향과 조선을 향해 뛰어들려는 마음이 타인과의 길동무 의식으로 이어진다."
+              },
+              {
+                "id": "B",
+                "text": "고향에 대한 기대는 사라지고 완전한 단절만 남는다."
+              },
+              {
+                "id": "C",
+                "text": "화자는 처음과 끝에서 모두 고향을 떠나려 한다."
+              },
+              {
+                "id": "D",
+                "text": "고향에 대한 생각과 길동무 의식은 서로 아무 관련이 없다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s33",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 191
+              },
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 181
+              },
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 219
+              }
+            ]
+          },
+          "question": {
+            "prompt": "2~4문단의 흐름으로 가장 적절한 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "우연한 만남이 식당차 동행으로 이어지고, 곧 진로를 둘러싼 대화가 시작된다."
+              },
+              {
+                "id": "B",
+                "text": "윤건은 청년을 피해서 자리를 옮기고 대화는 시작되지 않는다."
+              },
+              {
+                "id": "C",
+                "text": "두 사람은 만나자마자 돈 문제로 크게 다툰다."
+              },
+              {
+                "id": "D",
+                "text": "청년은 윤건을 알아보지 못한 채 혼잣말만 한다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s34",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 219
+              },
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 190
+              },
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 258
+              }
+            ]
+          },
+          "question": {
+            "prompt": "4~6문단에서 윤건의 태도 변화로 가장 적절한 것은 무엇인가요?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "청년의 말에 반감을 느꼈다가도 결국 같은 처지의 길동무라는 점을 떠올리며 마음을 고쳐 먹는다."
+              },
+              {
+                "id": "B",
+                "text": "처음부터 끝까지 아무 감정 변화 없이 담담하게 듣기만 한다."
+              },
+              {
+                "id": "C",
+                "text": "청년을 멸시한 뒤 그 감정을 더욱 굳혀 대화를 끊어 버린다."
+              },
+              {
+                "id": "D",
+                "text": "청년의 질문이 끝나기 전에 먼저 떠나버린다."
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "화자는 고향을 편히 쉬는 곳이 아니라 힘차게 뛰어들 곳으로 여긴다." },
-        { "id": "c2", "text": "윤건은 차 안을 벗어나 이국의 밤경치를 자꾸 내다본다." },
-        { "id": "c3", "text": "윤건은 고베에서 낯익은 조선 청년을 만나 식당차로 끌려간다." },
-        { "id": "c4", "text": "그 청년은 졸업 뒤 진로와 취직 문제를 두고 윤건에게 말을 건넨다." },
-        { "id": "c5", "text": "윤건은 상대의 말투에 멸시를 느끼지만 곧 그렇게 느낀 일을 후회한다." },
-        { "id": "c6", "text": "마지막에 윤건은 같은 길을 가는 처지를 생각하며 다시 말을 이어 간다." }
+        {
+          "id": "c1",
+          "text": "화자는 고향을 편히 쉬는 곳이 아니라 힘차게 뛰어들 곳으로 여긴다."
+        },
+        {
+          "id": "c2",
+          "text": "윤건은 차 안을 벗어나 이국의 밤경치를 자꾸 내다본다."
+        },
+        {
+          "id": "c3",
+          "text": "윤건은 고베에서 낯익은 조선 청년을 만나 식당차로 끌려간다."
+        },
+        {
+          "id": "c4",
+          "text": "그 청년은 졸업 뒤 진로와 취직 문제를 두고 윤건에게 말을 건넨다."
+        },
+        {
+          "id": "c5",
+          "text": "윤건은 상대의 말투에 멸시를 느끼지만 곧 그렇게 느낀 일을 후회한다."
+        },
+        {
+          "id": "c6",
+          "text": "마지막에 윤건은 같은 길을 가는 처지를 생각하며 다시 말을 이어 간다."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "자기가 태어나거나 자라난 곳을 뜻하는 말은?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 22, "end": 23 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "?? ??? ??? ??? ?? ??? ??? ???? ??????",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 219
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q2",
-          "prompt": "함께 어울려 지내는 벗을 뜻하는 말은?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 88, "end": 89 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "?? ??? ??? ??? ?? ? ?? ??? ??? ?? ??? ?? ????",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 191
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q3",
-          "prompt": "자주 보아 눈에 익은 상태를 뜻하는 말은?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 140, "end": 142 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "?? ??? ???? ??? ??? ? ??? ?? ?? ??? ???? ??????",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 181
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q4",
-          "prompt": "마음이 언짢거나 거슬리는 느낌을 뜻하는 말은?",
-          "answerRanges": [{ "paragraphId": "p5", "start": 47, "end": 49 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "?? ??? ??? ???? ??? ??? ?? ???? ???? ??????",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 219
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
         {
           "id": "q5",
-          "prompt": "같은 길을 함께 가는 벗을 뜻하는 말은?",
-          "answerRanges": [{ "paragraphId": "p6", "start": 0, "end": 2 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "prompt": "??? ??? ??? ? ??? ??? ?? ???? ???? ??? ???? ??????",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 190
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "??? ??? ??? ?? ???? ?? ????? ?? ??? ?? ?? ??? ?????",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 258
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         }

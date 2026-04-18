@@ -32,406 +32,1042 @@
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        "지도 학습과 비지도 학습은 인공지능이 데이터를 배우는 두 가지 대표적인 방식을 설명하는 개념이다. 지도 학습은 정답이 붙어 있는 데이터를 사용해 입력과 결과의 관계를 배우는 방식이고, 비지도 학습은 정답표가 없는 데이터 속에서 스스로 비슷한 점과 차이를 찾아 구조를 파악하는 방식이다. 둘 다 데이터에서 규칙을 찾는다는 점은 같지만, 무엇을 목표로 배우는지와 데이터의 형태가 다르다. 그래서 인공지능을 이해할 때는 먼저 어떤 학습 방식인지 구별하는 일이 중요하다.",
-        "지도 학습은 시험 문제와 답안을 함께 보며 공부하는 모습에 비유할 수 있다. 예를 들어 고양이 사진에는 고양이, 강아지 사진에는 강아지라는 정답표를 붙여 주면 인공지능은 여러 예시를 보며 두 대상을 구별하는 특징을 익힐 수 있다. 스팸 메일 분류, 손글씨 숫자 판별처럼 이미 정답을 알고 있는 문제에서 자주 쓰인다. 지도 학습의 핵심은 정답이 있는 데이터를 충분히 모아 모델이 올바른 관계를 배우게 하는 데 있다.",
-        "비지도 학습은 정답표 없이 데이터끼리의 닮은 점을 찾아 묶는 방식이다. 예를 들어 고객 구매 기록을 보고 비슷한 소비 패턴을 가진 사람들을 그룹으로 나누거나, 음악 파일의 특징을 바탕으로 비슷한 곡끼리 묶는 일이 여기에 해당할 수 있다. 이 경우 인공지능은 사람이 미리 정해 준 답을 맞히는 것이 아니라, 데이터 안에 숨어 있는 구조를 스스로 찾아낸다. 그래서 비지도 학습은 분류 기준이 아직 분명하지 않을 때 데이터를 탐색하는 데 유용하다.",
-        "지도 학습과 비지도 학습은 쓰임이 다르기 때문에 어느 쪽이 무조건 더 좋다고 말할 수는 없다. 정답이 분명하고 예측 결과가 필요한 문제에서는 지도 학습이 강점을 보이고, 데이터 안의 숨은 묶음이나 특징을 먼저 알고 싶을 때는 비지도 학습이 도움이 된다. 또 실제 인공지능 시스템에서는 두 방식을 함께 쓰기도 한다. 중요한 것은 문제의 목적과 데이터의 상태에 맞게 학습 방식을 고르는 일이다.",
-        "결국 지도 학습과 비지도 학습은 인공지능이 데이터를 통해 어떻게 배우는지를 보여 주는 핵심 개념이다. 하나는 정답이 있는 자료를 바탕으로 예측 규칙을 배우고, 다른 하나는 정답 없이 데이터의 구조를 스스로 찾아낸다. 이 차이를 이해하면 인공지능이 모든 문제를 같은 방식으로 푸는 것이 아니라, 문제의 성격에 맞는 여러 학습 방식을 사용한다는 점을 알 수 있다. 그래서 인공지능을 공부할 때는 결과만 보는 것이 아니라, 그 결과가 어떤 학습 방식에서 나왔는지 함께 살피는 태도가 중요하다."
+        {
+          "id": "p1",
+          "text": "지도 학습과 비지도 학습은 인공지능이 데이터를 배우는 두 가지 대표적인 방식을 설명하는 개념이다. 지도 학습은 정답이 붙어 있는 데이터를 사용해 입력과 결과의 관계를 배우는 방식이고, 비지도 학습은 정답표가 없는 데이터 속에서 스스로 비슷한 점과 차이를 찾아 구조를 파악하는 방식이다. 둘 다 데이터에서 규칙을 찾는다는 점은 같지만, 무엇을 목표로 배우는지와 데이터의 형태가 다르다. 그래서 인공지능을 이해할 때는 먼저 어떤 학습 방식인지 구별하는 일이 중요하다."
+        },
+        {
+          "id": "p2",
+          "text": "지도 학습은 시험 문제와 답안을 함께 보며 공부하는 모습에 비유할 수 있다. 예를 들어 고양이 사진에는 고양이, 강아지 사진에는 강아지라는 정답표를 붙여 주면 인공지능은 여러 예시를 보며 두 대상을 구별하는 특징을 익힐 수 있다. 스팸 메일 분류, 손글씨 숫자 판별처럼 이미 정답을 알고 있는 문제에서 자주 쓰인다. 지도 학습의 핵심은 정답이 있는 데이터를 충분히 모아 모델이 올바른 관계를 배우게 하는 데 있다."
+        },
+        {
+          "id": "p3",
+          "text": "비지도 학습은 정답표 없이 데이터끼리의 닮은 점을 찾아 묶는 방식이다. 예를 들어 고객 구매 기록을 보고 비슷한 소비 패턴을 가진 사람들을 그룹으로 나누거나, 음악 파일의 특징을 바탕으로 비슷한 곡끼리 묶는 일이 여기에 해당할 수 있다. 이 경우 인공지능은 사람이 미리 정해 준 답을 맞히는 것이 아니라, 데이터 안에 숨어 있는 구조를 스스로 찾아낸다. 그래서 비지도 학습은 분류 기준이 아직 분명하지 않을 때 데이터를 탐색하는 데 유용하다."
+        },
+        {
+          "id": "p4",
+          "text": "지도 학습과 비지도 학습은 쓰임이 다르기 때문에 어느 쪽이 무조건 더 좋다고 말할 수는 없다. 정답이 분명하고 예측 결과가 필요한 문제에서는 지도 학습이 강점을 보이고, 데이터 안의 숨은 묶음이나 특징을 먼저 알고 싶을 때는 비지도 학습이 도움이 된다. 또 실제 인공지능 시스템에서는 두 방식을 함께 쓰기도 한다. 중요한 것은 문제의 목적과 데이터의 상태에 맞게 학습 방식을 고르는 일이다."
+        },
+        {
+          "id": "p5",
+          "text": "결국 지도 학습과 비지도 학습은 인공지능이 데이터를 통해 어떻게 배우는지를 보여 주는 핵심 개념이다. 하나는 정답이 있는 자료를 바탕으로 예측 규칙을 배우고, 다른 하나는 정답 없이 데이터의 구조를 스스로 찾아낸다. 이 차이를 이해하면 인공지능이 모든 문제를 같은 방식으로 푸는 것이 아니라, 문제의 성격에 맞는 여러 학습 방식을 사용한다는 점을 알 수 있다. 그래서 인공지능을 공부할 때는 결과만 보는 것이 아니라, 그 결과가 어떤 학습 방식에서 나왔는지 함께 살피는 태도가 중요하다."
+        }
       ]
     },
     "intensive": {
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 114 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 55
+              }
+            ]
+          },
           "question": {
             "prompt": "지도 학습과 비지도 학습은 어떤 개념인가요?",
             "choices": [
-              { "id": "A", "text": "인공지능이 데이터를 배우는 방식" },
-              { "id": "B", "text": "사람이 글을 읽는 순서" },
-              { "id": "C", "text": "숫자를 외우는 규칙" },
-              { "id": "D", "text": "그림을 그리는 방법" }
+              {
+                "id": "A",
+                "text": "인공지능이 데이터를 배우는 방식"
+              },
+              {
+                "id": "B",
+                "text": "사람이 글을 읽는 순서"
+              },
+              {
+                "id": "C",
+                "text": "숫자를 외우는 규칙"
+              },
+              {
+                "id": "D",
+                "text": "그림을 그리는 방법"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 115, "end": 286 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 55,
+                "end": 160
+              }
+            ]
+          },
           "question": {
             "prompt": "지도 학습과 비지도 학습은 각각 무엇을 바탕으로 배우나요?",
             "choices": [
-              { "id": "A", "text": "정답이 붙은 데이터와 정답표가 없는 데이터" },
-              { "id": "B", "text": "제목과 부제" },
-              { "id": "C", "text": "그림과 소리" },
-              { "id": "D", "text": "길이와 색" }
+              {
+                "id": "A",
+                "text": "정답이 붙은 데이터와 정답표가 없는 데이터"
+              },
+              {
+                "id": "B",
+                "text": "제목과 부제"
+              },
+              {
+                "id": "C",
+                "text": "그림과 소리"
+              },
+              {
+                "id": "D",
+                "text": "길이와 색"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 287, "end": 382 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 160,
+                "end": 215
+              }
+            ]
+          },
           "question": {
             "prompt": "둘 다 무엇을 찾는다는 점은 같나요?",
             "choices": [
-              { "id": "A", "text": "데이터에서 규칙" },
-              { "id": "B", "text": "문장의 주어" },
-              { "id": "C", "text": "사진의 색" },
-              { "id": "D", "text": "소리의 높낮이" }
+              {
+                "id": "A",
+                "text": "데이터에서 규칙"
+              },
+              {
+                "id": "B",
+                "text": "문장의 주어"
+              },
+              {
+                "id": "C",
+                "text": "사진의 색"
+              },
+              {
+                "id": "D",
+                "text": "소리의 높낮이"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 383, "end": 483 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 215,
+                "end": 259
+              }
+            ]
+          },
           "question": {
             "prompt": "인공지능을 이해할 때 먼저 해야 할 일은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "학습 방식인지 구별하는 일" },
-              { "id": "B", "text": "정답을 외우는 일" },
-              { "id": "C", "text": "사진을 많이 모으는 일" },
-              { "id": "D", "text": "결과만 보는 일" }
+              {
+                "id": "A",
+                "text": "학습 방식인지 구별하는 일"
+              },
+              {
+                "id": "B",
+                "text": "정답을 외우는 일"
+              },
+              {
+                "id": "C",
+                "text": "사진을 많이 모으는 일"
+              },
+              {
+                "id": "D",
+                "text": "결과만 보는 일"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 483 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 259
+              }
+            ]
+          },
           "question": {
             "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "인공지능은 데이터와 정답 유무에 따라 다른 학습 방식을 쓴다" },
-              { "id": "B", "text": "모든 학습은 같은 방식이다" },
-              { "id": "C", "text": "규칙 찾기는 중요하지 않다" },
-              { "id": "D", "text": "데이터의 형태는 상관없다" }
+              {
+                "id": "A",
+                "text": "인공지능은 데이터와 정답 유무에 따라 다른 학습 방식을 쓴다"
+              },
+              {
+                "id": "B",
+                "text": "모든 학습은 같은 방식이다"
+              },
+              {
+                "id": "C",
+                "text": "규칙 찾기는 중요하지 않다"
+              },
+              {
+                "id": "D",
+                "text": "데이터의 형태는 상관없다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
-
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 114 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 43
+              }
+            ]
+          },
           "question": {
             "prompt": "지도 학습은 어떤 모습에 비유할 수 있나요?",
             "choices": [
-              { "id": "A", "text": "시험 문제와 답안을 함께 보는 모습" },
-              { "id": "B", "text": "문장을 장식하는 모습" },
-              { "id": "C", "text": "그림을 따라 그리는 모습" },
-              { "id": "D", "text": "소리를 듣는 모습" }
+              {
+                "id": "A",
+                "text": "시험 문제와 답안을 함께 보는 모습"
+              },
+              {
+                "id": "B",
+                "text": "문장을 장식하는 모습"
+              },
+              {
+                "id": "C",
+                "text": "그림을 따라 그리는 모습"
+              },
+              {
+                "id": "D",
+                "text": "소리를 듣는 모습"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 115, "end": 238 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 43,
+                "end": 129
+              }
+            ]
+          },
           "question": {
             "prompt": "고양이와 강아지 사진에는 무엇을 붙이나요?",
             "choices": [
-              { "id": "A", "text": "정답표" },
-              { "id": "B", "text": "제목표" },
-              { "id": "C", "text": "색상표" },
-              { "id": "D", "text": "그림표" }
+              {
+                "id": "A",
+                "text": "정답표"
+              },
+              {
+                "id": "B",
+                "text": "제목표"
+              },
+              {
+                "id": "C",
+                "text": "색상표"
+              },
+              {
+                "id": "D",
+                "text": "그림표"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 239, "end": 333 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 129,
+                "end": 177
+              }
+            ]
+          },
           "question": {
             "prompt": "지도 학습은 어떤 문제에서 자주 쓰이나요?",
             "choices": [
-              { "id": "A", "text": "이미 정답을 알고 있는 문제" },
-              { "id": "B", "text": "정답이 전혀 없는 문제" },
-              { "id": "C", "text": "글자 수만 세는 문제" },
-              { "id": "D", "text": "노래를 부르는 문제" }
+              {
+                "id": "A",
+                "text": "이미 정답을 알고 있는 문제"
+              },
+              {
+                "id": "B",
+                "text": "정답이 전혀 없는 문제"
+              },
+              {
+                "id": "C",
+                "text": "글자 수만 세는 문제"
+              },
+              {
+                "id": "D",
+                "text": "노래를 부르는 문제"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 334, "end": 434 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 177,
+                "end": 231
+              }
+            ]
+          },
           "question": {
             "prompt": "지도 학습의 핵심은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "정답이 있는 데이터를 충분히 모으는 것" },
-              { "id": "B", "text": "정답을 숨기는 것" },
-              { "id": "C", "text": "비슷한 사진만 고르는 것" },
-              { "id": "D", "text": "문제를 외우는 것" }
+              {
+                "id": "A",
+                "text": "정답이 있는 데이터를 충분히 모으는 것"
+              },
+              {
+                "id": "B",
+                "text": "정답을 숨기는 것"
+              },
+              {
+                "id": "C",
+                "text": "비슷한 사진만 고르는 것"
+              },
+              {
+                "id": "D",
+                "text": "문제를 외우는 것"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 434 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 231
+              }
+            ]
+          },
           "question": {
             "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "지도 학습은 정답이 있는 데이터를 바탕으로 관계를 배우는 방식이다" },
-              { "id": "B", "text": "지도 학습은 정답이 없어도 된다" },
-              { "id": "C", "text": "예시는 필요 없다" },
-              { "id": "D", "text": "사진 분류는 자주 쓰이지 않는다" }
+              {
+                "id": "A",
+                "text": "지도 학습은 정답이 있는 데이터를 바탕으로 관계를 배우는 방식이다"
+              },
+              {
+                "id": "B",
+                "text": "지도 학습은 정답이 없어도 된다"
+              },
+              {
+                "id": "C",
+                "text": "예시는 필요 없다"
+              },
+              {
+                "id": "D",
+                "text": "사진 분류는 자주 쓰이지 않는다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
-
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 86 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 40
+              }
+            ]
+          },
           "question": {
             "prompt": "비지도 학습은 무엇 없이 묶는 방식인가요?",
             "choices": [
-              { "id": "A", "text": "정답표" },
-              { "id": "B", "text": "데이터" },
-              { "id": "C", "text": "특징" },
-              { "id": "D", "text": "패턴" }
+              {
+                "id": "A",
+                "text": "정답표"
+              },
+              {
+                "id": "B",
+                "text": "데이터"
+              },
+              {
+                "id": "C",
+                "text": "특징"
+              },
+              {
+                "id": "D",
+                "text": "패턴"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 87, "end": 197 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 40,
+                "end": 133
+              }
+            ]
+          },
           "question": {
             "prompt": "비지도 학습의 예로 무엇이 제시되었나요?",
             "choices": [
-              { "id": "A", "text": "비슷한 소비 패턴을 가진 사람들을 그룹으로 나누는 일" },
-              { "id": "B", "text": "정답표를 붙이는 일" },
-              { "id": "C", "text": "문장을 외우는 일" },
-              { "id": "D", "text": "발음을 교정하는 일" }
+              {
+                "id": "A",
+                "text": "비슷한 소비 패턴을 가진 사람들을 그룹으로 나누는 일"
+              },
+              {
+                "id": "B",
+                "text": "정답표를 붙이는 일"
+              },
+              {
+                "id": "C",
+                "text": "문장을 외우는 일"
+              },
+              {
+                "id": "D",
+                "text": "발음을 교정하는 일"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s13",
-          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 198, "end": 310 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 133,
+                "end": 198
+              }
+            ]
+          },
           "question": {
             "prompt": "비지도 학습에서 인공지능은 무엇을 스스로 찾아내나요?",
             "choices": [
-              { "id": "A", "text": "데이터 안의 구조" },
-              { "id": "B", "text": "정답표" },
-              { "id": "C", "text": "문장 길이" },
-              { "id": "D", "text": "색깔 이름" }
+              {
+                "id": "A",
+                "text": "데이터 안의 구조"
+              },
+              {
+                "id": "B",
+                "text": "정답표"
+              },
+              {
+                "id": "C",
+                "text": "문장 길이"
+              },
+              {
+                "id": "D",
+                "text": "색깔 이름"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s14",
-          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 311, "end": 393 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 198,
+                "end": 247
+              }
+            ]
+          },
           "question": {
             "prompt": "비지도 학습은 언제 유용한가요?",
             "choices": [
-              { "id": "A", "text": "분류 기준이 아직 분명하지 않을 때" },
-              { "id": "B", "text": "정답이 이미 너무 많을 때" },
-              { "id": "C", "text": "문장이 짧을 때" },
-              { "id": "D", "text": "사진이 없을 때" }
+              {
+                "id": "A",
+                "text": "분류 기준이 아직 분명하지 않을 때"
+              },
+              {
+                "id": "B",
+                "text": "정답이 이미 너무 많을 때"
+              },
+              {
+                "id": "C",
+                "text": "문장이 짧을 때"
+              },
+              {
+                "id": "D",
+                "text": "사진이 없을 때"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s15",
-          "highlight": { "ranges": [{ "paragraphId": "p3", "start": 0, "end": 393 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 247
+              }
+            ]
+          },
           "question": {
             "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "비지도 학습은 정답 없이 데이터 구조를 찾아내는 방식이다" },
-              { "id": "B", "text": "비지도 학습은 정답을 맞히는 방식이다" },
-              { "id": "C", "text": "비지도 학습은 언제나 분류 기준이 분명하다" },
-              { "id": "D", "text": "비지도 학습은 쓸모가 없다" }
+              {
+                "id": "A",
+                "text": "비지도 학습은 정답 없이 데이터 구조를 찾아내는 방식이다"
+              },
+              {
+                "id": "B",
+                "text": "비지도 학습은 정답을 맞히는 방식이다"
+              },
+              {
+                "id": "C",
+                "text": "비지도 학습은 언제나 분류 기준이 분명하다"
+              },
+              {
+                "id": "D",
+                "text": "비지도 학습은 쓸모가 없다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
-
         {
           "stepId": "s16",
-          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 110 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 53
+              }
+            ]
+          },
           "question": {
             "prompt": "지도 학습과 비지도 학습 중 어느 쪽이 무조건 더 좋다고 말할 수 있나요?",
             "choices": [
-              { "id": "A", "text": "그렇지 않다" },
-              { "id": "B", "text": "지도 학습만 그렇다" },
-              { "id": "C", "text": "비지도 학습만 그렇다" },
-              { "id": "D", "text": "둘 다 항상 그렇다" }
+              {
+                "id": "A",
+                "text": "그렇지 않다"
+              },
+              {
+                "id": "B",
+                "text": "지도 학습만 그렇다"
+              },
+              {
+                "id": "C",
+                "text": "비지도 학습만 그렇다"
+              },
+              {
+                "id": "D",
+                "text": "둘 다 항상 그렇다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s17",
-          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 111, "end": 252 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 53,
+                "end": 142
+              }
+            ]
+          },
           "question": {
             "prompt": "정답이 분명하고 예측 결과가 필요한 문제에서는 어느 방식이 강점을 보이나요?",
             "choices": [
-              { "id": "A", "text": "지도 학습" },
-              { "id": "B", "text": "비지도 학습" },
-              { "id": "C", "text": "둘 다 아니다" },
-              { "id": "D", "text": "둘 다 같다" }
+              {
+                "id": "A",
+                "text": "지도 학습"
+              },
+              {
+                "id": "B",
+                "text": "비지도 학습"
+              },
+              {
+                "id": "C",
+                "text": "둘 다 아니다"
+              },
+              {
+                "id": "D",
+                "text": "둘 다 같다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s18",
-          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 253, "end": 310 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 142,
+                "end": 176
+              }
+            ]
+          },
           "question": {
             "prompt": "실제 인공지능 시스템에서는 두 방식을 어떻게 쓰기도 하나요?",
             "choices": [
-              { "id": "A", "text": "함께" },
-              { "id": "B", "text": "절대 따로" },
-              { "id": "C", "text": "한 번만" },
-              { "id": "D", "text": "전혀 안" }
+              {
+                "id": "A",
+                "text": "함께"
+              },
+              {
+                "id": "B",
+                "text": "절대 따로"
+              },
+              {
+                "id": "C",
+                "text": "한 번만"
+              },
+              {
+                "id": "D",
+                "text": "전혀 안"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s19",
-          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 311, "end": 382 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 176,
+                "end": 218
+              }
+            ]
+          },
           "question": {
             "prompt": "중요한 것은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "문제의 목적과 데이터의 상태" },
-              { "id": "B", "text": "모델 이름" },
-              { "id": "C", "text": "정답의 색깔" },
-              { "id": "D", "text": "문장 수" }
+              {
+                "id": "A",
+                "text": "문제의 목적과 데이터의 상태"
+              },
+              {
+                "id": "B",
+                "text": "모델 이름"
+              },
+              {
+                "id": "C",
+                "text": "정답의 색깔"
+              },
+              {
+                "id": "D",
+                "text": "문장 수"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s20",
-          "highlight": { "ranges": [{ "paragraphId": "p4", "start": 0, "end": 382 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 218
+              }
+            ]
+          },
           "question": {
             "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "상황에 맞게 학습 방식을 골라야 한다" },
-              { "id": "B", "text": "무조건 지도 학습이 좋다" },
-              { "id": "C", "text": "무조건 비지도 학습이 좋다" },
-              { "id": "D", "text": "목적과 데이터는 중요하지 않다" }
+              {
+                "id": "A",
+                "text": "상황에 맞게 학습 방식을 골라야 한다"
+              },
+              {
+                "id": "B",
+                "text": "무조건 지도 학습이 좋다"
+              },
+              {
+                "id": "C",
+                "text": "무조건 비지도 학습이 좋다"
+              },
+              {
+                "id": "D",
+                "text": "목적과 데이터는 중요하지 않다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
-
         {
           "stepId": "s21",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 120 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 57
+              }
+            ]
+          },
           "question": {
             "prompt": "지도 학습과 비지도 학습은 무엇을 보여 주는 핵심 개념인가요?",
             "choices": [
-              { "id": "A", "text": "인공지능이 데이터를 통해 어떻게 배우는지" },
-              { "id": "B", "text": "문장을 쓰는 방법" },
-              { "id": "C", "text": "사람의 감정" },
-              { "id": "D", "text": "사진의 밝기" }
+              {
+                "id": "A",
+                "text": "인공지능이 데이터를 통해 어떻게 배우는지"
+              },
+              {
+                "id": "B",
+                "text": "문장을 쓰는 방법"
+              },
+              {
+                "id": "C",
+                "text": "사람의 감정"
+              },
+              {
+                "id": "D",
+                "text": "사진의 밝기"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s22",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 121, "end": 201 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 57,
+                "end": 121
+              }
+            ]
+          },
           "question": {
             "prompt": "하나는 무엇이 있는 자료를 바탕으로 배우나요?",
             "choices": [
-              { "id": "A", "text": "정답이 있는 자료" },
-              { "id": "B", "text": "정답이 없는 자료" },
-              { "id": "C", "text": "그림만 있는 자료" },
-              { "id": "D", "text": "소리만 있는 자료" }
+              {
+                "id": "A",
+                "text": "정답이 있는 자료"
+              },
+              {
+                "id": "B",
+                "text": "정답이 없는 자료"
+              },
+              {
+                "id": "C",
+                "text": "그림만 있는 자료"
+              },
+              {
+                "id": "D",
+                "text": "소리만 있는 자료"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s23",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 202, "end": 328 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 121,
+                "end": 202
+              }
+            ]
+          },
           "question": {
             "prompt": "왜 여러 학습 방식을 사용한다고 볼 수 있나요?",
             "choices": [
-              { "id": "A", "text": "문제의 성격에 맞기 때문" },
-              { "id": "B", "text": "정답이 하나라서" },
-              { "id": "C", "text": "데이터가 없어서" },
-              { "id": "D", "text": "결과만 중요해서" }
+              {
+                "id": "A",
+                "text": "문제의 성격에 맞기 때문"
+              },
+              {
+                "id": "B",
+                "text": "정답이 하나라서"
+              },
+              {
+                "id": "C",
+                "text": "데이터가 없어서"
+              },
+              {
+                "id": "D",
+                "text": "결과만 중요해서"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s24",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 329, "end": 458 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 202,
+                "end": 272
+              }
+            ]
+          },
           "question": {
             "prompt": "인공지능을 공부할 때 결과와 함께 무엇도 살펴야 하나요?",
             "choices": [
-              { "id": "A", "text": "어떤 학습 방식에서 나왔는지" },
-              { "id": "B", "text": "문장 수가 몇 개인지" },
-              { "id": "C", "text": "사진의 크기" },
-              { "id": "D", "text": "글의 제목" }
+              {
+                "id": "A",
+                "text": "어떤 학습 방식에서 나왔는지"
+              },
+              {
+                "id": "B",
+                "text": "문장 수가 몇 개인지"
+              },
+              {
+                "id": "C",
+                "text": "사진의 크기"
+              },
+              {
+                "id": "D",
+                "text": "글의 제목"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         },
         {
           "stepId": "s25",
-          "highlight": { "ranges": [{ "paragraphId": "p5", "start": 0, "end": 458 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 272
+              }
+            ]
+          },
           "question": {
             "prompt": "핵심 내용은 무엇인가요?",
             "choices": [
-              { "id": "A", "text": "결과보다 어떤 학습 방식에서 나왔는지 함께 살피는 태도가 중요하다" },
-              { "id": "B", "text": "인공지능은 모두 같은 방식으로 배운다" },
-              { "id": "C", "text": "정답 없는 학습은 쓸모가 없다" },
-              { "id": "D", "text": "결과만 보면 충분하다" }
+              {
+                "id": "A",
+                "text": "결과보다 어떤 학습 방식에서 나왔는지 함께 살피는 태도가 중요하다"
+              },
+              {
+                "id": "B",
+                "text": "인공지능은 모두 같은 방식으로 배운다"
+              },
+              {
+                "id": "C",
+                "text": "정답 없는 학습은 쓸모가 없다"
+              },
+              {
+                "id": "D",
+                "text": "결과만 보면 충분하다"
+              }
             ],
             "answerId": "A",
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "인공지능은 데이터로 배운다" },
-        { "id": "c2", "text": "지도 학습은 정답이 있는 데이터를 쓴다" },
-        { "id": "c3", "text": "비지도 학습은 정답 없이 구조를 찾는다" },
-        { "id": "c4", "text": "문제 목적과 데이터 상태에 맞춰 고른다" },
-        { "id": "c5", "text": "두 방식은 함께 쓰일 수도 있다" },
-        { "id": "c6", "text": "결과보다 학습 방식을 함께 봐야 한다" }
+        {
+          "id": "c1",
+          "text": "인공지능은 데이터로 배운다"
+        },
+        {
+          "id": "c2",
+          "text": "지도 학습은 정답이 있는 데이터를 쓴다"
+        },
+        {
+          "id": "c3",
+          "text": "비지도 학습은 정답 없이 구조를 찾는다"
+        },
+        {
+          "id": "c4",
+          "text": "문제 목적과 데이터 상태에 맞춰 고른다"
+        },
+        {
+          "id": "c5",
+          "text": "두 방식은 함께 쓰일 수도 있다"
+        },
+        {
+          "id": "c6",
+          "text": "결과보다 학습 방식을 함께 봐야 한다"
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
@@ -440,9 +1076,16 @@
           "id": "q1",
           "prompt": "정답은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 62, "end": 63 }
+            {
+              "paragraphId": "p1",
+              "start": 62,
+              "end": 63
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
@@ -450,9 +1093,16 @@
           "id": "q2",
           "prompt": "구조는 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 145, "end": 146 }
+            {
+              "paragraphId": "p1",
+              "start": 145,
+              "end": 146
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
@@ -460,9 +1110,16 @@
           "id": "q3",
           "prompt": "예측은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p4", "start": 62, "end": 63 }
+            {
+              "paragraphId": "p4",
+              "start": 62,
+              "end": 63
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
@@ -470,9 +1127,16 @@
           "id": "q4",
           "prompt": "규칙은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p1", "start": 170, "end": 171 }
+            {
+              "paragraphId": "p1",
+              "start": 170,
+              "end": 171
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         },
@@ -480,9 +1144,16 @@
           "id": "q5",
           "prompt": "탐색은 무슨 뜻인가요?",
           "answerRanges": [
-            { "paragraphId": "p3", "start": 235, "end": 236 }
+            {
+              "paragraphId": "p3",
+              "start": 235,
+              "end": 236
+            }
           ],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
           "revealOnWrong": true,
           "answerMatchMode": "ANY"
         }

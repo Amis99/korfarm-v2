@@ -1,19 +1,35 @@
 {
-  "contentId": "dr-s3-229",
+  "contentId": "dr-saussure3-229",
   "contentType": "DAILY_READING",
   "version": 1,
   "status": "PUBLISHED",
-  "title": "일일 독해(소쉬르 3) Day 229 비문학",
-  "description": "일일 독해 - 정독·복기·확인",
+  "title": "[생활문] 눈썰매장 - 가족에게 쓰는 편지",
+  "description": "눈썰매장에서의 즐거운 시간과 가족 사랑 고백",
   "targetLevel": "SAUSSURE_3",
-  "schoolGradeRange": { "min": 5, "max": 5 },
-  "area": "READING",
-  "subArea": "NONFICTION",
-  "competencies": ["READING"],
-  "tags": ["daily"],
-  "access": { "mode": "FREE" },
-  "seedReward": { "seedType": "WHEAT", "count": 3, "multiplier": 1 },
-  "timeLimitSec": 480,
+  "schoolGradeRange": {
+    "min": 3,
+    "max": 3
+  },
+  "area": "국어",
+  "subArea": "독해",
+  "competencies": [
+    "사실적 이해",
+    "추론적 이해"
+  ],
+  "tags": [
+    "비문학",
+    "문학",
+    "독해"
+  ],
+  "access": {
+    "mode": "FREE"
+  },
+  "seedReward": {
+    "seedType": "GOLD",
+    "count": 10,
+    "multiplier": 1
+  },
+  "timeLimitSec": 600,
   "assets": {},
   "payload": {
     "passage": {
@@ -21,11 +37,15 @@
       "paragraphs": [
         {
           "id": "p1",
-          "text": "화산은 지구 내부의 뜨거운 마그마가 지표면 밖으로 분출하는 현상으로, 지구에서 일어나는 강력한 자연현상 중 하나이다. 마그마는 지하 수십 킬로미터 깊이에서 암석이 녹아 만들어진 액체 상태의 물질로, 그 안에 엄청난 열과 압력을 품고 있다. 이 마그마가 지각의 약한 틈을 뚫고 지표 위로 올라오면 비로소 용암이라 불리게 된다. 분출할 때 용암뿐 아니라 화산재와 뜨거운 가스도 하늘 높이 솟아오른다. 화산 폭발은 주변 마을에 큰 피해를 입히고 항공기 운항을 멈추게 하는 등 심각한 혼란을 일으킨다. 그러나 화산 활동이 만들어 낸 비옥한 토양은 오랜 세월에 걸쳐 농사짓기에 유리한 땅을 제공해 주기도 한다."
+          "text": "어제 가족과 함께 눈썰매장에 다녀온 추억을 편지로 씀. 쌩쌩 썰매를 밀어주신 아빠의 정성이 기억에 남습니다. 나는 행복했던 순간들을 하나씩 편지에 정성껏 적었습니다."
         },
         {
           "id": "p2",
-          "text": "화산은 활동 상태에 따라 활화산, 휴화산, 사화산의 세 가지로 나뉜다. 활화산은 지금 분출하고 있거나 가까운 미래에 분출할 가능성이 높은 화산이고, 휴화산은 오랫동안 조용했지만 언제든 다시 활동할 수 있는 화산이다. 사화산은 완전히 활동을 멈추어 더 이상 분출하지 않을 것으로 판단되는 화산을 말한다. 우리나라의 백두산은 대표적인 휴화산으로 분류되며, 역사 기록에도 대규모 분출 사례가 생생하게 남아 있다. 과학자들은 화산 주변 지역의 땅 흔들림과 화산 가스 배출량을 정밀하게 관측하여 분출 시기를 미리 예측하려고 노력한다. 이 같은 꾸준한 연구 덕분에 사람들은 화산 피해를 줄이고 더 안전하게 대비할 수 있게 되었다."
+          "text": "따뜻한 코코아를 나누어 마시며 가족의 사랑을 느꼈습니다. 가족이 함께 웃는 시간은 세상에서 큰 선물입니다. 편지를 통해 내 진심을 전하고 싶어 노력했습니다."
+        },
+        {
+          "id": "p3",
+          "text": "편지 마지막에는 사랑한다는 고백과 약속을 남겼습니다. 글을 쓰며 어제의 기쁨이 되살아나 마음이 훈훈함. 가족을 사랑하는 마음이 우리 집을 행복하게 만듭니다."
         }
       ]
     },
@@ -33,287 +53,594 @@
       "timeline": [
         {
           "stepId": "s1",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 65 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 29
+              }
+            ]
+          },
           "question": {
-            "prompt": "이 문장에서 화산이란 어떤 현상이라고 설명하고 있나요?",
+            "prompt": "어디에 다녀온 편지를 썼나요?",
             "choices": [
-              "지구 표면의 차가운 공기가 빠르게 순환하는 현상",
-              "지구 내부의 뜨거운 마그마가 밖으로 나오는 현상",
-              "바닷물이 뜨거워져 수증기가 피어오르는 현상",
-              "지하수가 높은 곳에서 아래로 흘러내리는 현상"
+              {
+                "id": "A",
+                "text": "눈썰매장"
+              },
+              {
+                "id": "B",
+                "text": "여름 수영장"
+              },
+              {
+                "id": "C",
+                "text": "학교 식당"
+              },
+              {
+                "id": "D",
+                "text": "먼 사막"
+              }
             ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s2",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 66, "end": 133 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 31,
+                "end": 59
+              }
+            ]
+          },
           "question": {
-            "prompt": "마그마에 대한 설명으로 올바른 것은 무엇인가요?",
+            "prompt": "아빠의 무엇이 기억에 남나요?",
             "choices": [
-              "지표면 위에서 차갑게 굳어진 돌덩어리이다",
-              "지하 깊은 곳에서 암석이 녹아 만들어진 물질이다",
-              "바다 밑바닥에 고여 있는 짠맛이 나는 물이다",
-              "구름 속에서 생겨나는 얼음 알갱이들이다"
+              {
+                "id": "A",
+                "text": "정성"
+              },
+              {
+                "id": "B",
+                "text": "욕심"
+              },
+              {
+                "id": "C",
+                "text": "비명"
+              },
+              {
+                "id": "D",
+                "text": "화"
+              }
             ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s3",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 134, "end": 181 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 61,
+                "end": 91
+              }
+            ]
+          },
           "question": {
-            "prompt": "마그마가 용암이라 불리게 되는 조건은 무엇인가요?",
+            "prompt": "편지에 무엇을 적었나요?",
             "choices": [
-              "바닷물과 섞여 온도가 내려갈 때",
-              "지각의 약한 틈을 뚫고 지표 위로 올라올 때",
-              "하늘에서 비와 함께 땅으로 떨어질 때",
-              "지하 동굴 안에서 천천히 식어 굳을 때"
+              {
+                "id": "A",
+                "text": "행복했던 순간"
+              },
+              {
+                "id": "B",
+                "text": "슬픈 일"
+              },
+              {
+                "id": "C",
+                "text": "화난 일"
+              },
+              {
+                "id": "D",
+                "text": "졸린 일"
+              }
             ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s4",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 182, "end": 221 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 29
+              },
+              {
+                "paragraphId": "p1",
+                "start": 31,
+                "end": 59
+              },
+              {
+                "paragraphId": "p1",
+                "start": 61,
+                "end": 91
+              }
+            ]
+          },
           "question": {
-            "prompt": "용암과 함께 하늘로 솟아오르는 것은 무엇인가요?",
+            "prompt": "1문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "시원한 바람과 깨끗한 산소가 퍼져 나간다",
-              "무거운 바위와 모래가 천천히 떠오른다",
-              "화산재와 뜨거운 가스가 높이 솟아오른다",
-              "커다란 얼음 덩어리가 함께 날아오른다"
+              {
+                "id": "A",
+                "text": "눈썰매장 추억과 편지 쓰기"
+              },
+              {
+                "id": "B",
+                "text": "썰매가 무거운 이유"
+              },
+              {
+                "id": "C",
+                "text": "아빠가 화난 사연"
+              },
+              {
+                "id": "D",
+                "text": "순간을 잊은 슬픔"
+              }
             ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s5",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 222, "end": 276 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 30
+              }
+            ]
+          },
           "question": {
-            "prompt": "화산 폭발이 일으키는 피해로 맞는 것은 무엇인가요?",
+            "prompt": "무엇을 느끼며 마셨나요?",
             "choices": [
-              "주변 마을 피해와 항공기 운항 중단 같은 혼란",
-              "바닷물이 얼어붙어 배가 다닐 수 없게 되는 일",
-              "땅속 보석이 한꺼번에 쏟아져 나오는 일",
-              "세계 곳곳의 강물이 갑자기 마르는 일"
+              {
+                "id": "A",
+                "text": "가족의 사랑"
+              },
+              {
+                "id": "B",
+                "text": "얼음물"
+              },
+              {
+                "id": "C",
+                "text": "소금물"
+              },
+              {
+                "id": "D",
+                "text": "쓴 약"
+              }
             ],
-            "correctIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s6",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 277, "end": 336 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 32,
+                "end": 58
+              }
+            ]
+          },
           "question": {
-            "prompt": "화산 활동이 가져다주는 좋은 점은 무엇인가요?",
+            "prompt": "웃는 시간은 무엇인가요?",
             "choices": [
-              "비옥한 토양을 만들어 농사에 유리한 환경을 준다",
-              "도시 건물을 더 튼튼하고 높게 지을 수 있게 한다",
-              "겨울에도 따뜻한 날씨가 이어지도록 해 준다",
-              "새로운 강과 호수가 금방 만들어지게 해 준다"
+              {
+                "id": "A",
+                "text": "선물"
+              },
+              {
+                "id": "B",
+                "text": "짐"
+              },
+              {
+                "id": "C",
+                "text": "과거"
+              },
+              {
+                "id": "D",
+                "text": "지루함"
+              }
             ],
-            "correctIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s7",
-          "highlight": { "ranges": [{ "paragraphId": "p1", "start": 0, "end": 336 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 60,
+                "end": 86
+              }
+            ]
+          },
           "question": {
-            "prompt": "첫째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
+            "prompt": "무엇을 전하고 싶었나요?",
             "choices": [
-              "화산의 발생 원리와 폭발이 가져오는 피해와 이점",
-              "화산을 활동 상태에 따라 세 가지로 분류한 결과",
-              "화산 분출 시기를 예측하기 위한 과학적인 노력",
-              "우리나라 백두산의 역사적 분출 기록과 대비 방법"
+              {
+                "id": "A",
+                "text": "진심"
+              },
+              {
+                "id": "B",
+                "text": "비명"
+              },
+              {
+                "id": "C",
+                "text": "낙서"
+              },
+              {
+                "id": "D",
+                "text": "쓰레기"
+              }
             ],
-            "correctIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s8",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 39 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 30
+              },
+              {
+                "paragraphId": "p2",
+                "start": 32,
+                "end": 58
+              },
+              {
+                "paragraphId": "p2",
+                "start": 60,
+                "end": 86
+              }
+            ]
+          },
           "question": {
-            "prompt": "화산을 나누는 기준은 무엇인가요?",
+            "prompt": "2문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "화산의 높이와 둘레의 크기에 따른 구분",
-              "화산이 위치한 나라와 대륙에 따른 구분",
-              "화산의 활동 상태에 따라 세 가지로 구분",
-              "화산에서 나오는 용암의 색깔에 따른 구분"
+              {
+                "id": "A",
+                "text": "가족의 소중함과 진심 표현"
+              },
+              {
+                "id": "B",
+                "text": "코코아가 뜨거운 불평"
+              },
+              {
+                "id": "C",
+                "text": "선물이 부족한 후회"
+              },
+              {
+                "id": "D",
+                "text": "편지가 찢어진 사고"
+              }
             ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s9",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 40, "end": 120 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 28
+              }
+            ]
+          },
           "question": {
-            "prompt": "활화산과 휴화산의 차이는 무엇인가요?",
+            "prompt": "마지막에 무엇을 남겼나요?",
             "choices": [
-              "활화산은 분출 가능성이 높고 휴화산은 조용하지만 활동 가능하다",
-              "활화산은 바다에 있고 휴화산은 육지에만 있다",
-              "활화산은 크기가 크고 휴화산은 작은 화산이다",
-              "활화산은 용암이 나오고 휴화산은 가스만 나온다"
+              {
+                "id": "A",
+                "text": "고백과 약속"
+              },
+              {
+                "id": "B",
+                "text": "비명"
+              },
+              {
+                "id": "C",
+                "text": "낙서"
+              },
+              {
+                "id": "D",
+                "text": "쓰레기"
+              }
             ],
-            "correctIndex": 0,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s10",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 121, "end": 168 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 30,
+                "end": 56
+              }
+            ]
+          },
           "question": {
-            "prompt": "사화산이란 어떤 화산을 가리키나요?",
+            "prompt": "마음이 어떠한가요?",
             "choices": [
-              "현재 용암을 활발하게 내뿜고 있는 화산",
-              "오랫동안 쉬다가 곧 분출이 예상되는 화산",
-              "완전히 활동을 멈춰 더 이상 분출하지 않는 화산",
-              "물속에 잠겨 있어 눈으로 볼 수 없는 화산"
+              {
+                "id": "A",
+                "text": "훈훈함"
+              },
+              {
+                "id": "B",
+                "text": "차가움"
+              },
+              {
+                "id": "C",
+                "text": "화가 남"
+              },
+              {
+                "id": "D",
+                "text": "슬픔"
+              }
             ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s11",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 169, "end": 227 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 58,
+                "end": 86
+              }
+            ]
+          },
           "question": {
-            "prompt": "백두산은 어떤 종류의 화산으로 분류되나요?",
+            "prompt": "무엇이 우리 집을 행복하게 하나요?",
             "choices": [
-              "지금도 분출하고 있는 활화산으로 분류된다",
-              "완전히 활동이 끝난 사화산으로 분류된다",
-              "분출 기록이 남아 있는 대표적인 휴화산이다",
-              "화산이 아닌 일반 산으로 분류되어 있다"
+              {
+                "id": "A",
+                "text": "사랑하는 마음"
+              },
+              {
+                "id": "B",
+                "text": "많은 금화"
+              },
+              {
+                "id": "C",
+                "text": "비싼 옷"
+              },
+              {
+                "id": "D",
+                "text": "큰 집"
+              }
             ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         },
         {
           "stepId": "s12",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 228, "end": 293 }] },
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 28
+              },
+              {
+                "paragraphId": "p3",
+                "start": 30,
+                "end": 56
+              },
+              {
+                "paragraphId": "p3",
+                "start": 58,
+                "end": 86
+              }
+            ]
+          },
           "question": {
-            "prompt": "과학자들이 분출을 예측하기 위해 관측하는 것은 무엇인가요?",
+            "prompt": "3문단의 중심 내용은 무엇인가요?",
             "choices": [
-              "화산 주변의 동물 이동 경로를 추적한다",
-              "화산 꼭대기에 쌓인 눈의 양을 측정한다",
-              "땅 흔들림과 화산 가스 배출량을 정밀 관측한다",
-              "화산에서 흘러나온 용암의 온도만 측정한다"
+              {
+                "id": "A",
+                "text": "사랑의 고백과 가족의 기쁨"
+              },
+              {
+                "id": "B",
+                "text": "집이 좁은 불평"
+              },
+              {
+                "id": "C",
+                "text": "약속을 어긴 잘못"
+              },
+              {
+                "id": "D",
+                "text": "고백하기 싫은 마음"
+              }
             ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s13",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 294, "end": 346 }] },
-          "question": {
-            "prompt": "꾸준한 화산 연구의 효과는 무엇인가요?",
-            "choices": [
-              "화산을 완전히 멈추게 할 수 있게 되었다",
-              "화산 피해를 줄이고 안전하게 대비할 수 있게 되었다",
-              "화산을 관광 자원으로만 활용할 수 있게 되었다",
-              "화산 근처에서 보석을 캐낼 수 있게 되었다"
-            ],
-            "correctIndex": 1,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
-          }
-        },
-        {
-          "stepId": "s14",
-          "highlight": { "ranges": [{ "paragraphId": "p2", "start": 0, "end": 346 }] },
-          "question": {
-            "prompt": "둘째 문단의 중심 내용으로 가장 알맞은 것은 무엇인가요?",
-            "choices": [
-              "화산 폭발이 주변 환경에 미치는 긍정적인 영향",
-              "마그마가 용암으로 변해 흘러내리는 세부 과정",
-              "화산의 종류와 분출 예측을 위한 과학적 노력",
-              "우리나라에 존재하는 다양한 종류의 산들"
-            ],
-            "correctIndex": 2,
-            "scoring": { "correctDeltaSec": 20, "wrongDeltaSec": -40, "eliminateWrongChoice": true }
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 10,
+              "wrongDeltaSec": -5,
+              "eliminateWrongChoice": false
+            }
           }
         }
       ]
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "화산은 마그마가 지표 밖으로 분출하는 현상" },
-        { "id": "c2", "text": "마그마는 암석이 녹은 고온 고압 물질" },
-        { "id": "c3", "text": "용암·화산재·가스가 함께 솟아오름" },
-        { "id": "c4", "text": "화산은 피해도 주지만 비옥한 토양도 만듦" },
-        { "id": "c5", "text": "활화산·휴화산·사화산으로 분류됨" },
-        { "id": "c6", "text": "백두산은 분출 기록이 있는 휴화산" },
-        { "id": "c7", "text": "땅 흔들림과 가스로 분출 시기 예측" },
-        { "id": "c8", "text": "연구 덕분에 피해를 줄이고 대비 가능" }
+        {
+          "id": "c1",
+          "text": "눈썰매장 가족 여행을 다녀옴."
+        },
+        {
+          "id": "c2",
+          "text": "아빠의 정성에 감사 편지 씀."
+        },
+        {
+          "id": "c3",
+          "text": "함께 웃는 시간은 큰 선물임."
+        },
+        {
+          "id": "c4",
+          "text": "진심을 담아 편지를 적었어요."
+        },
+        {
+          "id": "c5",
+          "text": "가족 사랑이 집을 행복하게 함."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"],
-      "seedPenalty": 1
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "seedPenalty": 2
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "마그마가 지표 위로 나오면 무엇이라고 부르나요?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 134, "end": 181 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "썰매를 밀어주신 아빠의 마음?",
+          "answerText": "정성이",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 47,
+              "end": 50
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q2",
-          "prompt": "화산 폭발 시 용암과 함께 솟아오르는 것은 무엇인가요?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 182, "end": 221 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "꾸밈이 없는 참된 마음은?",
+          "answerText": "진심을",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 69,
+              "end": 72
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         },
         {
           "id": "q3",
-          "prompt": "화산 활동이 농사에 유리한 이유는 무엇인가요?",
-          "answerRanges": [{ "paragraphId": "p1", "start": 277, "end": 336 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q4",
-          "prompt": "활화산은 어떤 화산을 가리키나요?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 40, "end": 120 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "우리나라의 백두산은 어떤 화산으로 분류되나요?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 169, "end": 227 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q6",
-          "prompt": "과학자들은 화산 분출을 어떻게 예측하나요?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 228, "end": 293 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q7",
-          "prompt": "화산 연구 덕분에 사람들이 얻게 된 것은 무엇인가요?",
-          "answerRanges": [{ "paragraphId": "p2", "start": 294, "end": 346 }],
-          "scoring": { "correctDeltaSec": 30, "wrongDeltaSec": -45 },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
+          "prompt": "마음이 따뜻한 상태는?",
+          "answerText": "훈훈함",
+          "answerMatchMode": "EXACT",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 53,
+              "end": 56
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 10,
+            "wrongDeltaSec": -5,
+            "eliminateWrongChoice": false
+          },
+          "revealOnWrong": true
         }
       ]
     }

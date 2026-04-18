@@ -32,24 +32,646 @@
     "passage": {
       "format": "TEXT",
       "paragraphs": [
-        "대규모 서버가 많은 요청을 처리하려면 단순히 저장 공간만 늘리는 것으로는 부족하다. 데이터에 빠르게 접근할 수 있어야 하고, 일부 장치에 문제가 생겨도 전체 서비스가 멈추지 않아야 한다. 이 때문에 여러 기계에 데이터를 나누어 저장하고 처리하는 분산 방식이 널리 쓰이는데, 샤딩은 그중에서도 데이터를 조각 단위로 분할해 관리하는 대표적인 방법이다.",
-        "샤딩에서는 전체 데이터를 여러 샤드로 쪼개고, 각 샤드를 서로 다른 기계에 배치한다. 요청이 들어오면 라우터는 어느 샤드에 필요한 데이터가 있는지 판단해 해당 기계로 접근하고, 설정 서버는 샤드의 분할 정보와 위치를 관리한다. 이런 구조는 저장 용량과 연산 부하를 여러 장치에 나누므로, 고가의 대형 장비 하나에만 의존하지 않고도 성능을 확보하게 해 준다.",
-        "그러나 샤딩의 효율은 데이터를 어떻게 나누느냐에 크게 좌우된다. 하나의 요청을 처리하는 데 필요한 데이터가 여러 샤드에 흩어져 있으면, 각 기계에서 데이터를 끌어오고 다시 합치는 과정에서 지연이 커진다. 이른바 데이터 지역성이 중요하다는 말은, 함께 사용되는 데이터끼리 가능하면 같은 샤드 안에 배치해야 한다는 뜻이다. 그래야 기계 간 통신 비용이 줄고 성능 병목도 완화된다.",
-        "문제는 샤딩이 성능을 높이는 대신 장애 대응에는 취약할 수 있다는 점이다. 각 샤드가 서로 다른 내용을 담고 있으므로, 특정 샤드가 손상되면 그 부분 데이터를 대체할 동일한 사본이 없을 수 있다. 또 읽기 요청이 특정 샤드에만 집중되면 분산 구조를 갖추고도 일부 기계가 과부하를 겪는다. 즉 저장 분산과 부하 분산의 장점이 항상 안정성까지 보장하는 것은 아니다.",
-        "이 약점을 보완하는 대표적 방법이 복제 결합이다. 복제는 동일한 내용의 데이터를 다른 기계에도 함께 저장하는 방식으로, 한 샤드에 이상이 생겼을 때 다른 기계에 있는 복제본으로 복구할 수 있게 한다. 또한 읽기 요청을 원본 샤드와 복제본에 나누어 보내면 특정 장치에 집중되는 부하를 줄일 수 있다. 결국 샤딩은 데이터를 흩어 놓는 전략이고, 복제는 그 흩어진 구조 위에 안전장치를 더하는 전략이라고 볼 수 있다.",
-        "다만 복제를 결합해도 모든 문제가 사라지는 것은 아니다. 쓰기 작업이 일어날 때 원본과 복제본이 완전히 동시에 갱신되기는 어렵기 때문에, 짧은 시간 동안 데이터 일관성이 흔들릴 수 있다. 그래서 실제 설계에서는 무엇보다 함께 조회되는 데이터를 묶어 두는 지역성 확보와, 어느 수준의 복제까지 허용할지 정하는 판단이 함께 이루어져야 한다. 샤딩의 핵심은 단순 분할이 아니라, 성능과 안정성 사이의 균형을 어떤 구조로 만들 것인가에 있다."
+        {
+          "id": "p1",
+          "text": "대규모 서버가 많은 요청을 처리하려면 단순히 저장 공간만 늘리는 것으로는 부족하다. 데이터에 빠르게 접근할 수 있어야 하고, 일부 장치에 문제가 생겨도 전체 서비스가 멈추지 않아야 한다. 이 때문에 여러 기계에 데이터를 나누어 저장하고 처리하는 분산 방식이 널리 쓰이는데, 샤딩은 그중에서도 데이터를 조각 단위로 분할해 관리하는 대표적인 방법이다."
+        },
+        {
+          "id": "p2",
+          "text": "샤딩에서는 전체 데이터를 여러 샤드로 쪼개고, 각 샤드를 서로 다른 기계에 배치한다. 요청이 들어오면 라우터는 어느 샤드에 필요한 데이터가 있는지 판단해 해당 기계로 접근하고, 설정 서버는 샤드의 분할 정보와 위치를 관리한다. 이런 구조는 저장 용량과 연산 부하를 여러 장치에 나누므로, 고가의 대형 장비 하나에만 의존하지 않고도 성능을 확보하게 해 준다."
+        },
+        {
+          "id": "p3",
+          "text": "그러나 샤딩의 효율은 데이터를 어떻게 나누느냐에 크게 좌우된다. 하나의 요청을 처리하는 데 필요한 데이터가 여러 샤드에 흩어져 있으면, 각 기계에서 데이터를 끌어오고 다시 합치는 과정에서 지연이 커진다. 이른바 데이터 지역성이 중요하다는 말은, 함께 사용되는 데이터끼리 가능하면 같은 샤드 안에 배치해야 한다는 뜻이다. 그래야 기계 간 통신 비용이 줄고 성능 병목도 완화된다."
+        },
+        {
+          "id": "p4",
+          "text": "문제는 샤딩이 성능을 높이는 대신 장애 대응에는 취약할 수 있다는 점이다. 각 샤드가 서로 다른 내용을 담고 있으므로, 특정 샤드가 손상되면 그 부분 데이터를 대체할 동일한 사본이 없을 수 있다. 또 읽기 요청이 특정 샤드에만 집중되면 분산 구조를 갖추고도 일부 기계가 과부하를 겪는다. 즉 저장 분산과 부하 분산의 장점이 항상 안정성까지 보장하는 것은 아니다."
+        },
+        {
+          "id": "p5",
+          "text": "이 약점을 보완하는 대표적 방법이 복제 결합이다. 복제는 동일한 내용의 데이터를 다른 기계에도 함께 저장하는 방식으로, 한 샤드에 이상이 생겼을 때 다른 기계에 있는 복제본으로 복구할 수 있게 한다. 또한 읽기 요청을 원본 샤드와 복제본에 나누어 보내면 특정 장치에 집중되는 부하를 줄일 수 있다. 결국 샤딩은 데이터를 흩어 놓는 전략이고, 복제는 그 흩어진 구조 위에 안전장치를 더하는 전략이라고 볼 수 있다."
+        },
+        {
+          "id": "p6",
+          "text": "다만 복제를 결합해도 모든 문제가 사라지는 것은 아니다. 쓰기 작업이 일어날 때 원본과 복제본이 완전히 동시에 갱신되기는 어렵기 때문에, 짧은 시간 동안 데이터 일관성이 흔들릴 수 있다. 그래서 실제 설계에서는 무엇보다 함께 조회되는 데이터를 묶어 두는 지역성 확보와, 어느 수준의 복제까지 허용할지 정하는 판단이 함께 이루어져야 한다. 샤딩의 핵심은 단순 분할이 아니라, 성능과 안정성 사이의 균형을 어떤 구조로 만들 것인가에 있다."
+        }
       ]
     },
     "intensive": {
-      "timeline": []
+      "timeline": [
+        {
+          "stepId": "s1",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 194
+              }
+            ]
+          },
+          "question": {
+            "prompt": "분산 방식이 널리 쓰이는 이유로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "빠른 접근과 서비스 중단 방지를 함께 얻기 위해서이다"
+              },
+              {
+                "id": "B",
+                "text": "저장 공간을 줄이기 위해서이다"
+              },
+              {
+                "id": "C",
+                "text": "한 장치에 모든 데이터를 모으기 위해서이다"
+              },
+              {
+                "id": "D",
+                "text": "요청이 적을 때만 쓰기 위해서이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s2",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p1",
+                "start": 0,
+                "end": 194
+              }
+            ]
+          },
+          "question": {
+            "prompt": "샤딩이 무엇을 하는 대표적 방법이라고 설명하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "데이터를 조각 단위로 분할해 관리하는 방법"
+              },
+              {
+                "id": "B",
+                "text": "데이터를 한 파일로 합치는 방법"
+              },
+              {
+                "id": "C",
+                "text": "데이터를 삭제해 용량을 줄이는 방법"
+              },
+              {
+                "id": "D",
+                "text": "데이터를 그림으로 바꾸는 방법"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s3",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 199
+              }
+            ]
+          },
+          "question": {
+            "prompt": "요청이 들어왔을 때 라우터가 하는 일은 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "어느 샤드에 있는지 판단해 해당 기계로 접근한다"
+              },
+              {
+                "id": "B",
+                "text": "모든 샤드를 동시에 복사한다"
+              },
+              {
+                "id": "C",
+                "text": "데이터를 한곳에 다시 모은다"
+              },
+              {
+                "id": "D",
+                "text": "저장 용량만 늘리고 요청은 무시한다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s4",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p2",
+                "start": 0,
+                "end": 199
+              }
+            ]
+          },
+          "question": {
+            "prompt": "샤딩 구조가 성능을 확보하는 방식으로 가장 알맞은 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "저장 용량과 연산 부하를 여러 장치에 나누는 것이다"
+              },
+              {
+                "id": "B",
+                "text": "고가의 대형 장비 하나에만 의존하는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "모든 요청을 한 기계가 처리하도록 하는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "기계 사이 연결을 끊는 것이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s5",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 210
+              }
+            ]
+          },
+          "question": {
+            "prompt": "데이터 지역성이 중요하다는 말의 뜻으로 가장 적절한 것은?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "함께 쓰이는 데이터끼리 같은 샤드에 두는 것이다"
+              },
+              {
+                "id": "B",
+                "text": "모든 데이터를 한 샤드에 몰아넣는 것이다"
+              },
+              {
+                "id": "C",
+                "text": "데이터를 가능한 멀리 떨어뜨리는 것이다"
+              },
+              {
+                "id": "D",
+                "text": "데이터를 사용하지 않는 것이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s6",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p3",
+                "start": 0,
+                "end": 210
+              }
+            ]
+          },
+          "question": {
+            "prompt": "데이터가 여러 샤드에 흩어지면 생길 수 있는 문제는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "끌어오고 다시 합치는 과정에서 지연이 커진다"
+              },
+              {
+                "id": "B",
+                "text": "기계 간 통신 비용이 완전히 사라진다"
+              },
+              {
+                "id": "C",
+                "text": "항상 읽기 속도가 자동으로 빨라진다"
+              },
+              {
+                "id": "D",
+                "text": "저장 용량이 무조건 절반이 된다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s7",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 202
+              }
+            ]
+          },
+          "question": {
+            "prompt": "샤딩이 장애 대응에 취약할 수 있는 이유는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "각 샤드가 서로 다른 내용을 담아 대체 사본이 없을 수 있기 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "모든 샤드가 같은 내용을 반드시 중복하기 때문이다"
+              },
+              {
+                "id": "C",
+                "text": "장애가 나면 자동으로 모든 데이터가 복구되기 때문이다"
+              },
+              {
+                "id": "D",
+                "text": "읽기 요청이 전혀 존재하지 않기 때문이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s8",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p4",
+                "start": 0,
+                "end": 202
+              }
+            ]
+          },
+          "question": {
+            "prompt": "읽기 요청이 특정 샤드에만 집중되면 어떤 문제가 생기는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "일부 기계가 과부하를 겪을 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "모든 기계의 부하가 즉시 사라진다"
+              },
+              {
+                "id": "C",
+                "text": "장애 대응이 무조건 쉬워진다"
+              },
+              {
+                "id": "D",
+                "text": "저장 분산의 의미가 없어지지 않는다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s9",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 230
+              }
+            ]
+          },
+          "question": {
+            "prompt": "복제는 어떤 방식이라고 설명하는가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "동일한 내용을 다른 기계에도 함께 저장하는 방식"
+              },
+              {
+                "id": "B",
+                "text": "서로 다른 내용을 한 기계에만 저장하는 방식"
+              },
+              {
+                "id": "C",
+                "text": "데이터를 읽지 못하게 잠그는 방식"
+              },
+              {
+                "id": "D",
+                "text": "샤드 수를 절반으로 줄이는 방식"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s10",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p5",
+                "start": 0,
+                "end": 230
+              }
+            ]
+          },
+          "question": {
+            "prompt": "복제를 결합하면 읽기 요청에서 기대할 수 있는 효과는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "특정 장치에 집중되는 부하를 줄일 수 있다"
+              },
+              {
+                "id": "B",
+                "text": "원본 데이터가 사라지게 된다"
+              },
+              {
+                "id": "C",
+                "text": "쓰기 작업이 즉시 완전히 사라진다"
+              },
+              {
+                "id": "D",
+                "text": "모든 샤드가 한 기계로 되돌아간다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s11",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 243
+              }
+            ]
+          },
+          "question": {
+            "prompt": "복제를 결합해도 일관성이 흔들릴 수 있는 이유는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "쓰기 때 원본과 복제본이 완전히 동시에 갱신되기 어렵기 때문이다"
+              },
+              {
+                "id": "B",
+                "text": "읽기 요청이 전혀 없기 때문이다"
+              },
+              {
+                "id": "C",
+                "text": "모든 복제본이 항상 먼저 멈추기 때문이다"
+              },
+              {
+                "id": "D",
+                "text": "샤딩이 사라져서 구조가 단순해지기 때문이다"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        },
+        {
+          "stepId": "s12",
+          "highlight": {
+            "ranges": [
+              {
+                "paragraphId": "p6",
+                "start": 0,
+                "end": 243
+              }
+            ]
+          },
+          "question": {
+            "prompt": "실제 설계에서 함께 판단해야 한다고 한 두 가지는 무엇인가?",
+            "choices": [
+              {
+                "id": "A",
+                "text": "지역성 확보와 복제 허용 수준"
+              },
+              {
+                "id": "B",
+                "text": "저장 장비의 색과 크기"
+              },
+              {
+                "id": "C",
+                "text": "데이터 삭제 여부와 화면 밝기"
+              },
+              {
+                "id": "D",
+                "text": "네트워크 이름과 암호 길이"
+              }
+            ],
+            "answerId": "A",
+            "scoring": {
+              "correctDeltaSec": 20,
+              "wrongDeltaSec": -40,
+              "eliminateWrongChoice": true
+            }
+          }
+        }
+      ]
     },
     "recall": {
-      "cards": [],
-      "correctOrder": [],
+      "cards": [
+        {
+          "id": "c1",
+          "text": "분산 저장 환경에서 샤딩은 데이터를 여러 기계에 나누어 두어 성능과 장애 대응 문제를 함께 다루려는 방식으로 등장한다."
+        },
+        {
+          "id": "c2",
+          "text": "이 구조에서는 샤드와 라우터, 설정 서버가 역할을 나누어 전체 데이터와 부하를 분산한다."
+        },
+        {
+          "id": "c3",
+          "text": "다만 성능은 함께 쓰이는 데이터를 같은 샤드에 두는 지역성을 얼마나 확보하느냐에 크게 달려 있다."
+        },
+        {
+          "id": "c4",
+          "text": "반대로 샤딩만으로는 특정 샤드 손상이나 편중된 읽기 요청에 충분히 대응하기 어렵다."
+        },
+        {
+          "id": "c5",
+          "text": "그래서 복제를 결합하면 장애 복구와 읽기 부하 분산을 보완하는 안전장치를 마련할 수 있다."
+        },
+        {
+          "id": "c6",
+          "text": "결국 샤딩 설계의 핵심은 지역성과 복제 수준을 함께 조정해 성능과 안정성의 균형을 만드는 데 있다."
+        }
+      ],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
-      "questions": []
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "1문단은 샤딩의 데이터 지역성과 복제 결합라는 주제를 어떤 문제의식이나 배경에서 꺼내는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p1",
+              "start": 0,
+              "end": 194
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q2",
+          "prompt": "2문단은 첫 핵심 기준이나 원리를 어떻게 설명하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 199
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q3",
+          "prompt": "3문단은 이어지는 작동 방식이나 예시를 무엇으로 보여 주는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 210
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q4",
+          "prompt": "4문단은 논의를 어떤 대비점이나 보완 설명으로 전개하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p4",
+              "start": 0,
+              "end": 202
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q5",
+          "prompt": "5문단은 이 주제가 낳는 효과나 쟁점을 어떤 방향으로 확장하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p5",
+              "start": 0,
+              "end": 230
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        },
+        {
+          "id": "q6",
+          "prompt": "6문단은 샤딩의 데이터 지역성과 복제 결합라는 주제의 의미를 어떤 관점에서 정리하는가?",
+          "answerRanges": [
+            {
+              "paragraphId": "p6",
+              "start": 0,
+              "end": 243
+            }
+          ],
+          "scoring": {
+            "correctDeltaSec": 30,
+            "wrongDeltaSec": -45
+          },
+          "revealOnWrong": true,
+          "answerMatchMode": "ANY"
+        }
+      ]
     }
   }
 }

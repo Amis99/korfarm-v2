@@ -176,7 +176,7 @@
               {
                 "paragraphId": "p1",
                 "start": 147,
-                  "end": 204
+                "end": 204
               }
             ]
           },
@@ -215,7 +215,7 @@
               {
                 "paragraphId": "p1",
                 "start": 0,
-                  "end": 204
+                "end": 204
               }
             ]
           },
@@ -371,7 +371,7 @@
               {
                 "paragraphId": "p2",
                 "start": 151,
-                  "end": 205
+                "end": 205
               }
             ]
           },
@@ -410,7 +410,7 @@
               {
                 "paragraphId": "p2",
                 "start": 0,
-                  "end": 205
+                "end": 205
               }
             ]
           },
@@ -566,7 +566,7 @@
               {
                 "paragraphId": "p3",
                 "start": 165,
-                  "end": 232
+                "end": 232
               }
             ]
           },
@@ -605,7 +605,7 @@
               {
                 "paragraphId": "p3",
                 "start": 0,
-                  "end": 232
+                "end": 232
               }
             ]
           },
@@ -761,7 +761,7 @@
               {
                 "paragraphId": "p4",
                 "start": 178,
-                  "end": 253
+                "end": 253
               }
             ]
           },
@@ -800,7 +800,7 @@
               {
                 "paragraphId": "p4",
                 "start": 0,
-                  "end": 253
+                "end": 253
               }
             ]
           },
@@ -836,26 +836,51 @@
     },
     "recall": {
       "cards": [
-        { "id": "c1", "text": "주어와 서술어는 서로 맞물려야 뜻이 분명해진다." },
-        { "id": "c2", "text": "호응이 어긋나는 경우는 여러 가지가 있다." },
-        { "id": "c3", "text": "문장을 길게 이어 쓰면 처음 주어를 잊을 수 있다." },
-        { "id": "c4", "text": "어색한 문장은 주어를 바꾸거나 서술어를 다듬어 고친다." },
-        { "id": "c5", "text": "호응을 점검하는 습관은 읽기와 쓰기에 도움이 된다." },
-        { "id": "c6", "text": "호응을 살피는 일은 뜻이 분명한 문장을 만드는 기본 훈련이다." }
+        {
+          "id": "c1",
+          "text": "주어와 서술어는 서로 맞물려야 뜻이 분명해진다."
+        },
+        {
+          "id": "c2",
+          "text": "호응이 어긋나는 경우는 여러 가지가 있다."
+        },
+        {
+          "id": "c3",
+          "text": "문장을 길게 이어 쓰면 처음 주어를 잊을 수 있다."
+        },
+        {
+          "id": "c4",
+          "text": "어색한 문장은 주어를 바꾸거나 서술어를 다듬어 고친다."
+        },
+        {
+          "id": "c5",
+          "text": "호응을 점검하는 습관은 읽기와 쓰기에 도움이 된다."
+        },
+        {
+          "id": "c6",
+          "text": "호응을 살피는 일은 뜻이 분명한 문장을 만드는 기본 훈련이다."
+        }
       ],
-      "correctOrder": ["c1", "c2", "c3", "c4", "c5", "c6"],
+      "correctOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
       "seedPenalty": 1
     },
     "confirm": {
       "questions": [
         {
           "id": "q1",
-          "prompt": "동작은 무슨 뜻인가요?",
+          "prompt": "?? ??? '주어와 서술어의 호응'??? ??? ?? ?????? ?? ???? ??????",
           "answerRanges": [
             {
               "paragraphId": "p1",
-              "start": 74,
-              "end": 76
+              "start": 0,
+              "end": 205
             }
           ],
           "scoring": {
@@ -867,12 +892,12 @@
         },
         {
           "id": "q2",
-          "prompt": "상태는 무슨 뜻인가요?",
+          "prompt": "?? ??? '주어와 서술어의 호응'? ?? ??? ?? ???? ??? ??????",
           "answerRanges": [
             {
-              "paragraphId": "p1",
-              "start": 79,
-              "end": 81
+              "paragraphId": "p2",
+              "start": 0,
+              "end": 206
             }
           ],
           "scoring": {
@@ -884,12 +909,12 @@
         },
         {
           "id": "q3",
-          "prompt": "설득력은 무슨 뜻인가요?",
+          "prompt": "?? ??? '주어와 서술어의 호응'? ?? ??? ?? ???? ??? ??????",
           "answerRanges": [
             {
-              "paragraphId": "p4",
-              "start": 164,
-              "end": 167
+              "paragraphId": "p3",
+              "start": 0,
+              "end": 233
             }
           ],
           "scoring": {
@@ -901,29 +926,12 @@
         },
         {
           "id": "q4",
-          "prompt": "기본은 무슨 뜻인가요?",
+          "prompt": "?? ??? '주어와 서술어의 호응'? ?? ??? ??? ???? ??? ??????",
           "answerRanges": [
             {
               "paragraphId": "p4",
-              "start": 238,
-              "end": 240
-            }
-          ],
-          "scoring": {
-            "correctDeltaSec": 30,
-            "wrongDeltaSec": -45
-          },
-          "revealOnWrong": true,
-          "answerMatchMode": "ANY"
-        },
-        {
-          "id": "q5",
-          "prompt": "훈련은 무슨 뜻인가요?",
-          "answerRanges": [
-            {
-              "paragraphId": "p4",
-              "start": 241,
-              "end": 243
+              "start": 0,
+              "end": 254
             }
           ],
           "scoring": {
