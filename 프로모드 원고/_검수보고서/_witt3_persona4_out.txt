@@ -1,0 +1,136 @@
+�� ������ ��: 1000
+
+�ǽ� ���� jsonl ����: C:\Users\RENEWCOM PC\Documents\�������v2Ȩ������\���θ�� ����\_�˼�������\_witt3_persona4_suspects.jsonl
+
+=== 전체 정답 위치 분포 ===
+  ①: 265 (26.5%)
+  ②: 170 (17.0%)
+  ③: 166 (16.6%)
+  ④: 194 (19.4%)
+  ⑤: 205 (20.5%)
+
+=== 챕터별 정답 위치 분포 ===
+| 챕터 | ① | ② | ③ | ④ | ⑤ | 합계 |
+|---|---|---|---|---|---|---|
+| ch01 | 13 (26%) | 9 (18%) | 8 (16%) | 12 (24%) | 8 (16%) | 50 |
+| ch02 | 17 (34%) | 3 (6%) | 7 (14%) | 16 (32%) | 7 (14%) | 50 |
+| ch03 | 18 (36%) | 4 (8%) | 7 (14%) | 10 (20%) | 11 (22%) | 50 |
+| ch04 | 15 (30%) | 2 (4%) | 10 (20%) | 11 (22%) | 12 (24%) | 50 |
+| ch05 | 7 (14%) | 20 (40%) | 10 (20%) | 8 (16%) | 5 (10%) | 50 |
+| ch06 | 3 (6%) | 15 (30%) | 11 (22%) | 16 (32%) | 5 (10%) | 50 |
+| ch07 | 15 (30%) | 13 (26%) | 7 (14%) | 11 (22%) | 4 (8%) | 50 |
+| ch08 | 17 (34%) | 13 (26%) | 5 (10%) | 9 (18%) | 6 (12%) | 50 |
+| ch09 | 10 (20%) | 11 (22%) | 10 (20%) | 10 (20%) | 9 (18%) | 50 |
+| ch10 | 14 (28%) | 5 (10%) | 10 (20%) | 7 (14%) | 14 (28%) | 50 |
+| ch11 | 18 (36%) | 7 (14%) | 8 (16%) | 7 (14%) | 10 (20%) | 50 |
+| ch12 | 15 (30%) | 9 (18%) | 5 (10%) | 12 (24%) | 9 (18%) | 50 |
+| ch13 | 12 (24%) | 10 (20%) | 5 (10%) | 10 (20%) | 13 (26%) | 50 |
+| ch14 | 9 (18%) | 8 (16%) | 9 (18%) | 8 (16%) | 16 (32%) | 50 |
+| ch15 | 15 (30%) | 4 (8%) | 8 (16%) | 10 (20%) | 13 (26%) | 50 |
+| ch16 | 15 (30%) | 6 (12%) | 5 (10%) | 7 (14%) | 17 (34%) | 50 |
+| ch17 | 13 (26%) | 8 (16%) | 11 (22%) | 7 (14%) | 11 (22%) | 50 |
+| ch18 | 14 (28%) | 6 (12%) | 11 (22%) | 9 (18%) | 10 (20%) | 50 |
+| ch19 | 11 (22%) | 9 (18%) | 8 (16%) | 9 (18%) | 13 (26%) | 50 |
+| ch20 | 14 (28%) | 8 (16%) | 11 (22%) | 5 (10%) | 12 (24%) | 50 |
+
+=== 문항번호별 정답 위치 분포 ===
+| Q | ① | ② | ③ | ④ | ⑤ | 합계 |
+|---|---|---|---|---|---|---|
+| Q1 | 16 (7%) | 19 (9%) | 58 (26%) | 65 (30%) | 62 (28%) | 220 |
+| Q2 | 48 (22%) | 71 (32%) | 38 (17%) | 31 (14%) | 32 (15%) | 220 |
+| Q3 | 62 (28%) | 32 (15%) | 31 (14%) | 58 (26%) | 37 (17%) | 220 |
+| Q4 | 115 (52%) | 18 (8%) | 19 (9%) | 22 (10%) | 46 (21%) | 220 |
+| Q5 | 24 (20%) | 30 (25%) | 20 (17%) | 18 (15%) | 28 (23%) | 120 |
+
+=== 영역별 정답 위치 분포 ===
+| 영역 | ① | ② | ③ | ④ | ⑤ | 합계 |
+|---|---|---|---|---|---|---|
+| reading | 94 (24%) | 81 (20%) | 88 (22%) | 79 (20%) | 58 (14%) | 400 |
+| literature | 137 (27%) | 70 (14%) | 58 (12%) | 101 (20%) | 134 (27%) | 500 |
+| grammar | 34 (34%) | 19 (19%) | 20 (20%) | 14 (14%) | 13 (13%) | 100 |
+
+=== 의심 신호 분포 ===
+  총 의심 건수: 77
+  중요도: {'medium': 74, 'critical': 3}
+  신호별: {'M4': 71, 'M2': 3, 'S5': 3}
+
+=== 의심 문항 표 ===
+| 파일 | Q | 영역 | 페르소나 | 신호 | 정답 | 의심 사유 | 우선순위 |
+|---|---|---|---|---|---|---|---|
+| ch02/grammar.json | Q5 | grammar | M | M2 | ① | answer(①)과 isCorrect 선지(④) 불일치 — 셔플 누락 가능성 | critical |
+| ch04/grammar.json | Q5 | grammar | M | M2 | ③ | answer(③)과 isCorrect 선지(①) 불일치 — 셔플 누락 가능성 | critical |
+| ch10/grammar.json | Q1 | grammar | M | M2 | ③ | isCorrect=True인 선지가 0개 (1개여야 함) | critical |
+| ch01/reading_04.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch02/reading_01.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch02/reading_03.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch02/reading_05.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch03/literature_04.json | Q3 | literature | M | M4 | ① | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch03/reading_02.json | Q4 | reading | M | M4 | ① | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch03/reading_04.json | Q2 | reading | M | M4 | ⑤ | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch04/grammar.json | Q2 | grammar | M | M4 | ④ | 5선지 모두 동일 어미 " 일어났다." — 어미 단조 | medium |
+| ch04/reading_01.json | Q2 | reading | M | M4 | ① | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch05/grammar.json | Q1 | grammar | M | M4 | ④ | 5선지 모두 동일 어미 "형태소이다." — 어미 단조 | medium |
+| ch05/grammar.json | Q3 | grammar | M | M4 | ② | 5선지 모두 동일 어미 "어져 있다." — 어미 단조 | medium |
+| ch05/literature_02.json | Q5 | literature | M | M4 | ② | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch05/literature_03.json | Q4 | literature | M | M4 | ② | 5선지 모두 동일 어미 " 의미이다." — 어미 단조 | medium |
+| ch05/literature_03.json | Q5 | literature | M | M4 | ⑤ | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch05/reading_01.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch06/literature_01.json | Q2 | literature | M | M4 | ② | 5선지 모두 동일 어미 " 가리킨다." — 어미 단조 | medium |
+| ch06/literature_01.json | Q4 | literature | M | M4 | ② | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch06/reading_01.json | Q4 | reading | M | M4 | ① | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch06/reading_03.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch06/reading_04.json | Q2 | reading | M | M4 | ③ | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch07/grammar.json | Q3 | grammar | M | M4 | ④ | 5선지 모두 동일 어미 " 활용이다." — 어미 단조 | medium |
+| ch07/literature_02.json | Q2 | literature | M | M4 | ② | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch07/literature_02.json | Q4 | literature | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch07/literature_05.json | Q5 | literature | M | M4 | ③ | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch07/reading_03.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch08/literature_01.json | Q4 | literature | M | M4 | ① | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch08/literature_01.json | Q5 | literature | M | M4 | ⑤ | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch08/reading_03.json | Q4 | reading | M | M4 | ① | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch09/grammar.json | Q1 | grammar | M | M4 | ④ | 5선지 모두 동일 어미 "파생어이다." — 어미 단조 | medium |
+| ch09/grammar.json | Q4 | grammar | M | M4 | ③ | 5선지 모두 동일 어미 "파생어이다." — 어미 단조 | medium |
+| ch09/literature_03.json | Q4 | literature | M | M4 | ① | 5선지 모두 동일 어미 " 의미한다." — 어미 단조 | medium |
+| ch09/literature_05.json | Q5 | literature | M | M4 | ③ | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch09/reading_01.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch09/reading_02.json | Q2 | reading | M | M4 | ③ | 5선지 모두 동일 어미 " 방출한다." — 어미 단조 | medium |
+| ch09/reading_02.json | Q4 | reading | M | M4 | ⑤ | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch10/grammar.json | Q3 | grammar | M | M4 | ① | 5선지 모두 동일 어미 ", ㉤ 동사" — 어미 단조 | medium |
+| ch10/grammar.json | Q4 | grammar | M | M4 | ③ | 5선지 모두 동일 어미 " ㉤ 합성어" — 어미 단조 | medium |
+| ch10/literature_03.json | Q5 | literature | M | M4 | ⑤ | 5선지 모두 동일 어미 "각적 이미지" — 어미 단조 | medium |
+| ch10/reading_02.json | Q2 | reading | M | M4 | ③ | 5선지 모두 동일 어미 "를 얻는다." — 어미 단조 | medium |
+| ch10/reading_04.json | Q4 | reading | M | M4 | ⑤ | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch11/literature_01.json | Q3 | literature | M | M4 | ② | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch11/literature_03.json | Q1 | literature | M | M4 | ① | 5선지 모두 동일 어미 "하고 있다." — 어미 단조 | medium |
+| ch11/literature_03.json | Q3 | literature | M | M4 | ① | 5선지 모두 동일 어미 " 인식이다." — 어미 단조 | medium |
+| ch11/literature_04.json | Q2 | literature | M | M4 | ③ | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch11/reading_02.json | Q2 | reading | M | M4 | ⑤ | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch11/reading_03.json | Q4 | reading | S | S5 | ⑤ | 정답 길이가 평균의 2.2배 — 길이 단서 의심 (정답 7자 vs 평균 3자) | medium |
+| ch12/grammar.json | Q5 | grammar | S | S5 | ② | 정답 길이가 평균의 1.8배 — 길이 단서 의심 (정답 38자 vs 평균 21자) | medium |
+| ch12/literature_04.json | Q3 | literature | M | M4 | ① | 5선지 모두 동일 어미 " 태도이다." — 어미 단조 | medium |
+| ch12/reading_01.json | Q4 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch13/grammar.json | Q1 | grammar | M | M4 | ① | 5선지 모두 동일 어미 " ㉲ 관형절" — 어미 단조 | medium |
+| ch13/reading_01.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch13/reading_02.json | Q2 | reading | M | M4 | ① | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch13/reading_04.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 작품이다." — 어미 단조 | medium |
+| ch13/reading_05.json | Q2 | reading | M | M4 | ③ | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch14/grammar.json | Q3 | grammar | M | M4 | ② | 5선지 모두 동일 어미 "실현되었다." — 어미 단조 | medium |
+| ch14/reading_04.json | Q2 | reading | M | M4 | ③ | 5선지 모두 동일 어미 "는 것이다." — 어미 단조 | medium |
+| ch15/grammar.json | Q4 | grammar | M | M4 | ① | 5선지 모두 동일 어미 ", ㉤ 확대" — 어미 단조 | medium |
+| ch15/literature_02.json | Q5 | literature | M | M4 | ④ | 5선지 모두 동일 어미 " 관계이다." — 어미 단조 | medium |
+| ch15/reading_03.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch16/reading_02.json | Q2 | reading | M | M4 | ⑤ | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch16/reading_03.json | Q2 | reading | M | M4 | ⑤ | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch16/reading_04.json | Q2 | reading | M | M4 | ⑤ | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch17/grammar.json | Q2 | grammar | M | M4 | ③ | 5선지 모두 동일 어미 " 사례이다." — 어미 단조 | medium |
+| ch17/literature_02.json | Q5 | literature | M | M4 | ① | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch17/reading_01.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 "는 것이다." — 어미 단조 | medium |
+| ch17/reading_02.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 수 있다." — 어미 단조 | medium |
+| ch17/reading_03.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch17/reading_05.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch18/reading_01.json | Q2 | reading | M | M4 | ④ | 5선지 모두 동일 어미 "위해서이다." — 어미 단조 | medium |
+| ch18/reading_03.json | Q2 | reading | M | M4 | ② | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch18/reading_05.json | Q2 | reading | M | M4 | ③ | 5선지 모두 동일 어미 " 때문이다." — 어미 단조 | medium |
+| ch19/reading_04.json | Q2 | reading | M | M4 | ④ | 5선지 모두 동일 어미 "위해서이다." — 어미 단조 | medium |
+| ch20/grammar.json | Q2 | grammar | M | M4 | ③ | 5선지 모두 동일 어미 "능을 한다." — 어미 단조 | medium |
+| ch20/grammar.json | Q4 | grammar | S | S5 | ③ | 정답 길이가 평균의 0.3배 — 길이 단서 의심 (정답 1자 vs 평균 4자) | medium |
