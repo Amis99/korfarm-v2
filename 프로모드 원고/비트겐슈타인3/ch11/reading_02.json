@@ -116,7 +116,7 @@
         "choices": [
           {
             "id": "①",
-            "text": "FSDP를 적용하면 각 GPU가 전체 매개변수의 약 1/8 정도만 보유하게 되겠군."
+            "text": "FSDP 적용 시 GPU 간 통신이 불필요해 학습 속도가 항상 선형적으로 증가하겠군."
           },
           {
             "id": "②",
@@ -132,14 +132,14 @@
           },
           {
             "id": "⑤",
-            "text": "FSDP 적용 시 GPU 간 통신이 불필요해 학습 속도가 항상 선형적으로 증가하겠군."
+            "text": "FSDP를 적용하면 각 GPU가 전체 매개변수의 약 1/8 정도만 보유하게 되겠군."
           }
         ],
-        "answer": "⑤",
+        "answer": "①",
         "explanation": "(나) 3문단에서 FSDP는 순전파·역전파 시 all-gather, reduce-scatter 등의 통신이 필수적이라고 하였다. '통신이 불필요하다'는 적절하지 않다.",
         "distractors": [
           {
-            "id": "①",
+            "id": "⑤",
             "trap": "정답 아님: 8개 GPU → GPU당 1/8."
           },
           {
@@ -321,11 +321,11 @@
     "answerUniqueness": "전 문항 정답 유일성 확인 완료",
     "choiceLengthBalance": "모든 선택지 20~45자 범위 균형",
     "answerDistribution": {
-      "①": 1,
+      "①": 2,
       "②": 0,
       "③": 1,
       "④": 0,
-      "⑤": 2
+      "⑤": 1
     },
     "trapDiversity": "P1 정반대(1), P2 순서(4), P5 내용 왜곡(2) — 다양한 패턴 사용",
     "factCheck": "GPU vs CPU 코어/대역폭, 행렬곱셈·기울기 병렬성, FSDP(all-gather/reduce-scatter), 통신 오버헤드, NVLink/InfiniBand 사실 확인 완료",
