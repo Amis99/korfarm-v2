@@ -4,7 +4,7 @@
  *
  * 측정 항목:
  *  A. 지문 길이 (레벨군 목표 대비)
- *  B. 선택지 길이 편차 (cq_01) + 정답이 최장/최단 여부 (cq_02)
+ *  B. 선택지 길이 편차 (cq_01: 정답이 최장이고 2위 대비 10% 이상 길면 위반) + 정답이 최장/최단 여부 (cq_02)
  *  C. 한정 표현 분포 (cq_04: -만, -뿐, 오직, 반드시, 항상, 전혀, 모두, 완전히)
  *  D. 한 문항 내 중복 선택지 (cu_02)
  *  E. 챕터 내 선택지 고유도 (cu_01)
@@ -38,6 +38,45 @@ function record(level, file, ruleId, severity, msg, value) {
   findings.push({ level, file, ruleId, severity, msg, value });
 }
 
+// 새 cq_01 규칙: 정답이 5선지 중 가장 길면서, 2위 대비 정답 길이의 10% 이상 차이 나면 위반.
+// answer는 "①" 같은 마커 또는 텍스트. choices의 id와 매칭.
+function cqOneLeak(level, file, section, item, answer) {
+  if (!answer) return; // 정답을 모르면 통과
+  const choices = item.choices || [];
+  if (choices.length < 2) return;
+  const norm = s => String(s || "").trim();
+  // text에서 id 접두사("① " 등) 제거 후 본문 길이만 비교
+  const stripId = (id, t) => {
+    let x = String(t || "");
+    const idStr = norm(id);
+    if (idStr && x.startsWith(idStr)) x = x.slice(idStr.length);
+    return x.trim();
+  };
+  const correct = choices.find(c => norm(c.id) === norm(answer));
+  if (!correct) return; // 정답 매칭 실패 → 통과
+  const lens = choices.map(c => stripId(c.id, c.text).length);
+  const maxLen = Math.max(...lens);
+  const correctLen = stripId(correct.id, correct.text).length;
+  if (correctLen < maxLen) return; // 정답이 최장이 아니면 통과
+  // 정답이 최장 → 2위 길이 찾기 (정답 자신 제외, 동률은 한 번만 제외)
+  const otherLens = [];
+  let removed = false;
+  for (const c of choices) {
+    const L = stripId(c.id, c.text).length;
+    if (!removed && norm(c.id) === norm(answer)) { removed = true; continue; }
+    otherLens.push(L);
+  }
+  const secondMax = otherLens.length ? Math.max(...otherLens) : 0;
+  if (correctLen <= 0) return;
+  const ratio = (correctLen - secondMax) / correctLen;
+  if (ratio >= 0.10) {
+    const where = section ? `${section.area || ""}/${section.subtype || ""}` : "";
+    record(level, file, "cq_01", "high",
+      `정답(${answer}) 최장 ${correctLen}자, 2위 ${secondMax}자, 차이 ${(ratio*100).toFixed(0)}% (Q${item.number}${where ? ", " + where : ""})`,
+      { correctLen, secondMax, ratioPct: +(ratio*100).toFixed(1) });
+  }
+}
+
 /* ───────────── 일반 (소쉬르/프레게/러셀) 챕터 점검 ───────────── */
 function auditNormalChapter(level, file, data) {
   const sections = data.sections || [];
@@ -53,25 +92,28 @@ function auditNormalChapter(level, file, data) {
     }
   }
 
-  // 챕터 내 모든 question 객관식 모음
+  // 챕터 내 모든 question 객관식 모음 + 같은 area·subtype의 answer_explain 정답 매핑
   const allChoiceQs = [];
   for (const s of sections) {
     if (s.type === "question" && s.subtype === "객관식" && s.content?.items) {
+      // 같은 area·subtype answer_explain 찾기 (해당 섹션 뒤쪽에 있는 것)
+      const ae = sections.find(p => p.type === "answer_explain"
+        && p.area === s.area && p.subtype === s.subtype);
+      const ansMap = {};
+      if (ae?.content?.items) {
+        for (const a of ae.content.items) ansMap[String(a.refId)] = String(a.answer || "").trim();
+      }
       for (const it of s.content.items) {
         if (Array.isArray(it.choices) && it.choices.length >= 2) {
-          allChoiceQs.push({ section: s, item: it });
+          allChoiceQs.push({ section: s, item: it, answer: ansMap[String(it.number)] || null });
         }
       }
     }
   }
 
   // B + C. 선택지 길이·한정 표현
-  for (const { section, item } of allChoiceQs) {
-    const lens = item.choices.map(c => String(c.text || "").length);
-    const max = Math.max(...lens), min = Math.min(...lens);
-    if (max - min > 12)
-      record(level, file, "cq_01", "high",
-        `선택지 길이 편차 ${max-min}자 (Q${item.number}, ${section.area}/${section.subtype})`, max-min);
+  for (const { section, item, answer } of allChoiceQs) {
+    cqOneLeak(level, file, section, item, answer);
 
     // D. 한 문항 내 중복 선택지
     const seen = new Set(), texts = item.choices.map(c => (c.text || "").trim());
@@ -154,12 +196,7 @@ function auditWittReading(level, file, data) {
   // questions
   const mc = data.questions?.multipleChoice || [];
   for (const it of mc) {
-    if (Array.isArray(it.choices)) {
-      const lens = it.choices.map(c => String(c.text||"").length);
-      const max = Math.max(...lens), min = Math.min(...lens);
-      if (max-min > 14) record(level, file, "cq_01", "high",
-        `선택지 길이 편차 ${max-min}자 (Q${it.number})`, max-min);
-    }
+    cqOneLeak(level, file, { area: "비문학", subtype: "객관식" }, it, it.answer);
   }
   // summaryTable
   if (!data.summaryTable || !Array.isArray(data.summaryTable.rows) || data.summaryTable.rows.length === 0)
@@ -190,12 +227,7 @@ function auditWittLiterature(level, file, data) {
   // questions choice editor와 동일
   const mc = data.questions?.multipleChoice || [];
   for (const it of mc) {
-    if (Array.isArray(it.choices)) {
-      const lens = it.choices.map(c => String(c.text||"").length);
-      const max = Math.max(...lens), min = Math.min(...lens);
-      if (max-min > 14) record(level, file, "cq_01", "high",
-        `선택지 길이 편차 ${max-min}자 (Q${it.number})`, max-min);
-    }
+    cqOneLeak(level, file, { area: "문학", subtype: "객관식" }, it, it.answer);
   }
 }
 
@@ -221,12 +253,7 @@ function auditWittGrammar(level, file, data) {
   const qs = data.questions || [];
   if (qs.length < 3) record(level, file, "ct_01", "medium", `grammar 문항 ${qs.length}개 (적음)`, qs.length);
   for (const q of qs) {
-    if (Array.isArray(q.choices)) {
-      const lens = q.choices.map(c => String(c.text||"").length);
-      const max = Math.max(...lens), min = Math.min(...lens);
-      if (max-min > 14) record(level, file, "cq_01", "high",
-        `grammar 선택지 길이 편차 ${max-min}자 (Q${q.number})`, max-min);
-    }
+    cqOneLeak(level, file, { area: "문법", subtype: "객관식" }, q, q.answer);
   }
 }
 
