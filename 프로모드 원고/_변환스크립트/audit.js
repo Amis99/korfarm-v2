@@ -40,10 +40,20 @@ function record(level, file, ruleId, severity, msg, value) {
 
 // 새 cq_01 규칙: 정답이 5선지 중 가장 길면서, 2위 대비 정답 길이의 10% 이상 차이 나면 위반.
 // answer는 "①" 같은 마커 또는 텍스트. choices의 id와 매칭.
+// 어휘 영역 또는 정답이 짧은 단어(어휘 단답)인 경우 길이 비교 의미가 없어 제외.
 function cqOneLeak(level, file, section, item, answer) {
   if (!answer) return; // 정답을 모르면 통과
+  if (section?.area === "어휘") return; // 어휘 영역 제외
   const choices = item.choices || [];
   if (choices.length < 2) return;
+  // 모든 5선지가 짧은 경우(어휘 단답형) 제외 — 최장 본문이 12자 미만이면 길이 비교 의미 없음
+  const allLensTmp = choices.map(c => {
+    let x = String(c.text || "");
+    const idStr = String(c.id || "").trim();
+    if (idStr && x.startsWith(idStr)) x = x.slice(idStr.length);
+    return x.trim().length;
+  });
+  if (Math.max(...allLensTmp) < 12) return;
   const norm = s => String(s || "").trim();
   // text에서 id 접두사("① " 등) 제거 후 본문 길이만 비교
   const stripId = (id, t) => {
