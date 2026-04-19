@@ -164,23 +164,23 @@
         "choices": [
           {
             "id": "①",
-            "text": "매개변수 수집(all-gather) → 레이어 연산 → 매개변수 해제(release)"
+            "text": "매개변수 수집(all-gather) → 레이어 연산 수행 → 매개변수 해제(release)"
           },
           {
             "id": "②",
-            "text": "매개변수 해제 → 레이어 연산 → 매개변수 수집"
+            "text": "매개변수 해제(release) → 레이어 연산 수행 → 매개변수 수집(all-gather)"
           },
           {
             "id": "③",
-            "text": "레이어 연산 → 매개변수 수집 → 매개변수 해제"
+            "text": "레이어 연산 수행 → 매개변수 수집(all-gather) → 매개변수 해제(release)"
           },
           {
             "id": "④",
-            "text": "기울기 분산 → 매개변수 수집 → 레이어 연산"
+            "text": "기울기 분산(reduce-scatter) → 매개변수 수집(all-gather) → 레이어 연산"
           },
           {
             "id": "⑤",
-            "text": "매개변수 해제 → 기울기 분산 → 매개변수 수집"
+            "text": "매개변수 해제(release) → 기울기 분산(reduce-scatter) → 매개변수 수집"
           }
         ],
         "answer": "①",
