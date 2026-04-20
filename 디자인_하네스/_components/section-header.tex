@@ -1,0 +1,50 @@
+% ============================================================
+% section-header.tex
+% 섹션 시작 라벨 헤더 — [지문] / [활동] / [문제] 라벨
+% 좌측 액센트 바 + 라벨 + 부제 (영역 액센트 색)
+%
+% 사용:
+%   \kfSecHeader{kfAreaLiterature}{지문}{빼앗긴 들에도 봄은 오는가 / 이상화}
+%   \kfSecHeader{kfAreaConcept}{활동}{내용 확인}
+%   \kfSecHeader{kfAreaNonlit}{문제}{}
+%
+% 헤더 직후 페이지 분할 금지: \needspace{4\baselineskip} + \nopagebreak
+% ============================================================
+
+\providecommand{\kfSecHeader}[3]{%
+  \par\needspace{4\baselineskip}%
+  \vspace{3pt}%
+  \noindent
+  \begin{tikzpicture}
+    \node[anchor=west, inner sep=0pt] (bar) at (0,0) {\color{#1}\rule{3pt}{14pt}};
+    \node[anchor=west, inner sep=0pt, xshift=6pt, font=\small\bfseries\color{#1}]
+       (lbl) at (bar.east) {[\,#2\,]};
+    \node[anchor=west, inner sep=0pt, xshift=4pt, font=\small\color{kfMute}]
+       at (lbl.east) {#3};
+  \end{tikzpicture}%
+  \par\vspace{1pt}%
+  {\color{#1!50}\hrule height 0.4pt}%
+  \par\vspace{2pt}\nopagebreak%
+}
+
+% 영역별 단축 매크로
+\newcommand{\kfSecPassageVocab}[1]{\kfSecHeader{kfAreaVocab}{지문}{#1}}
+\newcommand{\kfSecPassageGrammar}[1]{\kfSecHeader{kfAreaGrammar}{지문}{#1}}
+\newcommand{\kfSecPassageConcept}[1]{\kfSecHeader{kfAreaConcept}{지문}{#1}}
+\newcommand{\kfSecPassageLit}[1]{\kfSecHeader{kfAreaLiterature}{지문}{#1}}
+\newcommand{\kfSecPassageNonlit}[1]{\kfSecHeader{kfAreaNonlit}{지문}{#1}}
+\newcommand{\kfSecPassageWeekly}[1]{\kfSecHeader{kfAreaWeekly}{지문}{#1}}
+
+\newcommand{\kfSecActVocab}[1]{\kfSecHeader{kfAreaVocab}{활동}{#1}}
+\newcommand{\kfSecActGrammar}[1]{\kfSecHeader{kfAreaGrammar}{활동}{#1}}
+\newcommand{\kfSecActConcept}[1]{\kfSecHeader{kfAreaConcept}{활동}{#1}}
+\newcommand{\kfSecActLit}[1]{\kfSecHeader{kfAreaLiterature}{활동}{#1}}
+\newcommand{\kfSecActNonlit}[1]{\kfSecHeader{kfAreaNonlit}{활동}{#1}}
+\newcommand{\kfSecActWeekly}[1]{\kfSecHeader{kfAreaWeekly}{활동}{#1}}
+
+\newcommand{\kfSecQVocab}[1]{\kfSecHeader{kfAreaVocab}{문제}{#1}}
+\newcommand{\kfSecQGrammar}[1]{\kfSecHeader{kfAreaGrammar}{문제}{#1}}
+\newcommand{\kfSecQConcept}[1]{\kfSecHeader{kfAreaConcept}{문제}{#1}}
+\newcommand{\kfSecQLit}[1]{\kfSecHeader{kfAreaLiterature}{문제}{#1}}
+\newcommand{\kfSecQNonlit}[1]{\kfSecHeader{kfAreaNonlit}{문제}{#1}}
+\newcommand{\kfSecQWeekly}[1]{\kfSecHeader{kfAreaWeekly}{문제}{#1}}

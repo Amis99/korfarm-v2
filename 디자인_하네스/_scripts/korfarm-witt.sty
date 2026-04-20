@@ -1,0 +1,29 @@
+% ============================================================
+% korfarm-witt.sty
+% 비트겐슈타인 시리즈 스타일 (모노크롬+심홍 액센트, 9.5pt, 2단)
+% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{korfarm-witt}[2026/04/19 v0.1 Wittgenstein Series Style]
+
+\definecolor{kfPrimary}{HTML}{1A1A1A}       % 검정
+\definecolor{kfPrimaryLight}{HTML}{EDEDED}  % 회색 박스
+\definecolor{kfAccent}{HTML}{B0184B}        % 심홍 (단일 액센트)
+\definecolor{kfPassageBg}{HTML}{F7F7F7}     % 모노 종이톤
+\definecolor{kfNoteBg}{HTML}{FFFFFF}
+\definecolor{kfSeriesGray}{HTML}{4B4B4B}
+
+\newcommand{\kfSeriesName}{비트겐슈타인}
+\newcommand{\kfSeriesBadge}{%
+  \tikz[baseline]{\node[draw=kfPrimary, fill=white, rounded corners=2pt,
+        inner sep=3pt, font=\footnotesize\bfseries\color{kfPrimary}]
+        {WITTGENSTEIN};}%
+}
+
+\colorlet{kfCoverBg}{kfPrimaryLight}
+\colorlet{kfCoverFg}{kfPrimary}
+
+% ---------- 2단 본문 환경 ----------
+% v3: columnsep을 base의 \kfColSep(시리즈 차등)에 위임
+\newenvironment{kfWittTwoCol}%
+  {\begin{multicols}{2}\raggedcolumns\setlength{\columnsep}{\kfColSep}\setlength{\columnseprule}{0pt}}%
+  {\end{multicols}}

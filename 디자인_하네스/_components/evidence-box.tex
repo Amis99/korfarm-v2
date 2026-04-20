@@ -1,0 +1,23 @@
+% ============================================================
+% evidence-box.tex
+% <보기> 박스 컴포넌트
+% 사용:
+%   \begin{kfEvidence}
+%     보기 본문 ...
+%   \end{kfEvidence}
+% ============================================================
+
+\newenvironment{kfEvidence}%
+  {\par\smallskip\needspace{4\baselineskip}%
+   \begin{tcolorbox}[
+     enhanced, breakable=false,
+     colback=kfPaper, colframe=kfMute,
+     boxrule=0.5pt, arc=2pt,
+     left=\kfBoxPad, right=\kfBoxPad, top=\kfBoxPad, bottom=\kfBoxPad,
+     title={\small\bfseries\color{kfInk} \,보기\,},
+     coltitle=kfInk, colbacktitle=kfPrimaryLight!50,
+     attach boxed title to top left={yshift=-2mm, xshift=6pt},
+     boxed title style={colframe=kfMute, boxrule=0.4pt, arc=1pt}
+   ]%
+  }%
+  {\end{tcolorbox}\par\smallskip}

@@ -1,0 +1,38 @@
+% ============================================================
+% activity-writing.tex
+% 글쓰기 활동 (큰 노트 영역)
+% 사용:
+%   \kfWriting{독후감}{12}     % 라벨 + 12줄 큰 노트
+%   \kfWritingPrompt{프롬프트 텍스트}
+% ============================================================
+
+\newcommand{\kfWritingPrompt}[1]{%
+  \par\smallskip%
+  \begin{tcolorbox}[
+    enhanced, breakable=false,
+    colback=kfPrimaryLight!30, colframe=kfPrimary,
+    boxrule=0.4pt, arc=3pt,
+    left=\kfBoxPad, right=\kfBoxPad, top=\kfBoxPad, bottom=\kfBoxPad,
+  ]%
+  \small\textbf{\color{kfPrimary}글쓰기 안내}\\[2pt]%
+  #1
+  \end{tcolorbox}\par\smallskip%
+}
+
+\newcommand{\kfWriting}[2]{%
+  \par\smallskip\needspace{\numexpr#2+2\relax\baselineskip}%
+  \begin{tcolorbox}[
+    enhanced, breakable=false,
+    colback=kfPaper, colframe=kfRule,
+    boxrule=0.4pt, arc=2pt,
+    left=\kfBoxPad, right=\kfBoxPad, top=\kfBoxPad, bottom=\kfBoxPad,
+    title={\footnotesize\bfseries\color{kfMute} #1},
+    coltitle=kfMute, colbacktitle=kfPaper,
+    attach boxed title to top left={yshift=-1.5mm, xshift=6pt},
+    boxed title style={colframe=kfRule, boxrule=0.3pt, arc=1pt}
+  ]%
+  \foreach \i in {1,...,#2}{%
+    \textcolor{kfRule}{\rule{\linewidth}{0.3pt}}\\[7pt]%
+  }%
+  \end{tcolorbox}\par\smallskip%
+}

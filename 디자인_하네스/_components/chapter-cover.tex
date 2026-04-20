@@ -1,0 +1,37 @@
+% ============================================================
+% chapter-cover.tex
+% 챕터 진입 페이지 (표지)
+% 사용:
+%   \kfChapterCover{1}{근대성과 자아}{Chapter 1}{이번 챕터에서는 ...}
+% ============================================================
+
+\newcommand{\kfChapterCover}[4]{%
+  \clearpage%
+  \thispagestyle{empty}%
+  \vspace*{20mm}%
+  \noindent
+  \begin{tikzpicture}[remember picture, overlay]
+    % 좌측 액센트 바
+    \fill[kfPrimary] (current page.west) ++(12mm,25mm) rectangle ++(5mm, -50mm);
+    % 챕터 번호 배지 (이중 원, 약간 작게)
+    \node[anchor=north west, inner sep=0pt] at ($(current page.north west)+(24mm,-45mm)$) {%
+      \begin{tikzpicture}
+        \draw[kfPrimary, line width=1pt] (0,0) circle (10mm);
+        \draw[kfPrimary, line width=0.4pt] (0,0) circle (8mm);
+        \node[font=\normalsize\bfseries\color{kfPrimary}] at (0,2mm) {CHAPTER};
+        \node[font=\LARGE\bfseries\color{kfPrimary}] at (0,-3mm) {#1};
+      \end{tikzpicture}%
+    };
+  \end{tikzpicture}%
+  \vspace{42mm}%
+  \par\noindent\hspace{32mm}%
+  \begin{minipage}{0.65\linewidth}%
+    {\footnotesize\color{kfMute} #3}\\[4pt]
+    {\LARGE\bfseries\color{kfPrimary} #2}\\[8pt]
+    {\color{kfRule}\rule{50mm}{0.5pt}}\\[6pt]
+    {\small\color{kfInk} #4}
+  \end{minipage}%
+  \vfill
+  \noindent\hfill\kfSeriesBadge\hspace{12mm}%
+  \clearpage%
+}

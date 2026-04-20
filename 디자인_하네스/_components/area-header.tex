@@ -1,0 +1,37 @@
+% ============================================================
+% area-header.tex
+% 영역 시작 표제 (좌측 액센트 바 + 가이드 텍스트)
+% 사용:
+%   \kfAreaStart{어휘}{kfAreaVocab}{이번 영역에서는 ... 학습합니다.}
+% 또는 시리즈 단축 매크로:
+%   \kfStartVocab{이번 영역에서는 핵심 어휘를 익힙니다.}
+% ============================================================
+
+\newcommand{\kfAreaStart}[3]{%
+  \clearpage%
+  \thispagestyle{fancy}%
+  \vspace*{2mm}%
+  \noindent
+  \begin{tikzpicture}
+    \node[anchor=west, inner sep=0pt] (bar) at (0,0) {\color{#2}\rule{5pt}{26pt}};
+    \node[anchor=west, inner sep=0pt, xshift=8pt] at (bar.east) {%
+      {\LARGE\bfseries\color{#2} #1}%
+    };
+  \end{tikzpicture}%
+  \par\vspace{4pt}
+  \noindent\hspace{14pt}%
+  \begin{minipage}{\dimexpr\linewidth-14pt\relax}%
+    \footnotesize\color{kfMute} #3
+  \end{minipage}%
+  \par\vspace{4pt}%
+  {\color{#2!60}\hrule height 1.0pt}%
+  \par\vspace{6pt}\nopagebreak%
+}
+
+% 시리즈/영역 단축 매크로
+\newcommand{\kfStartVocab}[1]{\kfAreaStart{어휘}{kfAreaVocab}{#1}}
+\newcommand{\kfStartGrammar}[1]{\kfAreaStart{문법}{kfAreaGrammar}{#1}}
+\newcommand{\kfStartConcept}[1]{\kfAreaStart{개념}{kfAreaConcept}{#1}}
+\newcommand{\kfStartLit}[1]{\kfAreaStart{문학}{kfAreaLiterature}{#1}}
+\newcommand{\kfStartNonlit}[1]{\kfAreaStart{비문학}{kfAreaNonlit}{#1}}
+\newcommand{\kfStartWeekly}[1]{\kfAreaStart{실력 확인}{kfAreaWeekly}{#1}}

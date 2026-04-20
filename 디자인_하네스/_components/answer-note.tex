@@ -1,0 +1,51 @@
+% ============================================================
+% answer-note.tex
+% 답안 작성란 (노트 스타일, 줄친 영역)
+% 사용:
+%   \kfAnswerLines{5}        % 5줄 답안란
+%   \kfAnswerNote{서술형 답안란}{8} % 라벨+8줄
+% ============================================================
+
+% 단일 줄 (필요 시 인라인)
+\newcommand{\kfAnswerLine}{%
+  \par\noindent\textcolor{kfRule}{\rule{\linewidth}{0.4pt}}\par
+}
+
+% N줄 답안란 (간단)
+\newcommand{\kfAnswerLines}[1]{%
+  \par\smallskip%
+  \begin{minipage}{\linewidth}%
+  \foreach \i in {1,...,#1}{%
+    \textcolor{kfRule}{\rule{\linewidth}{0.4pt}}\\[6pt]%
+  }%
+  \end{minipage}%
+  \par\smallskip%
+}
+
+% 라벨이 있는 노트형 답안란
+\newcommand{\kfAnswerNote}[2]{%
+  \par\smallskip\needspace{#2\baselineskip}%
+  \begin{tcolorbox}[
+    enhanced, breakable=false,
+    colback=kfPaper, colframe=kfRule,
+    boxrule=0.4pt, arc=2pt,
+    left=\kfBoxPad, right=\kfBoxPad, top=\kfBoxPad, bottom=\kfBoxPad,
+    title={\footnotesize\bfseries\color{kfMute} #1},
+    coltitle=kfMute, colbacktitle=kfPaper,
+    attach boxed title to top left={yshift=-1.5mm, xshift=6pt},
+    boxed title style={colframe=kfRule, boxrule=0.3pt, arc=1pt}
+  ]%
+  \foreach \i in {1,...,#2}{%
+    \textcolor{kfRule}{\rule{\linewidth}{0.3pt}}\\[6pt]%
+  }%
+  \end{tcolorbox}\par\smallskip%
+}
+
+% 짧은 빈칸 (단답형)
+\newcommand{\kfBlank}[1][3cm]{\underline{\hspace{#1}}}
+% 넓은 빈칸 (서술 한 줄)
+\newcommand{\kfBlankWide}[1][6cm]{\underline{\hspace{#1}}}
+% 괄호 빈칸
+\newcommand{\kfBlankParen}{(\,\hspace{1cm}\,)}
+% O/X 빈칸
+\newcommand{\kfBlankOX}{(\,\hspace{1.5cm}\,)}

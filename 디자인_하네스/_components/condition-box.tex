@@ -1,0 +1,25 @@
+% ============================================================
+% condition-box.tex
+% <조건> 박스 컴포넌트 (tcolorbox)
+% 사용:
+%   \begin{kfCondition}
+%     \item 첫째 조건
+%     \item 둘째 조건
+%   \end{kfCondition}
+% ============================================================
+
+\newenvironment{kfCondition}%
+  {\par\smallskip\needspace{4\baselineskip}%
+   \begin{tcolorbox}[
+     enhanced, breakable=false,
+     colback=kfPrimaryLight!40, colframe=kfPrimary,
+     boxrule=0.5pt, arc=2pt,
+     left=\kfBoxPad, right=\kfBoxPad, top=\kfBoxPad, bottom=\kfBoxPad,
+     title={\small\bfseries\color{kfPrimary} \,조건\,},
+     coltitle=kfPrimary, colbacktitle=kfPaper,
+     attach boxed title to top left={yshift=-2mm, xshift=6pt},
+     boxed title style={colframe=kfPrimary, boxrule=0.4pt, arc=1pt}
+   ]%
+   \begin{enumerate}[leftmargin=16pt, itemsep=1pt, topsep=1pt,
+                    label=\textbf{\arabic*.}]}%
+  {\end{enumerate}\end{tcolorbox}\par\smallskip}

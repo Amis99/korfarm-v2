@@ -1,0 +1,31 @@
+% ============================================================
+% activity-vocab.tex
+% 어휘 학습 표 (3열: 번호 - 뜻 - 빈칸)
+% 사용:
+%   \begin{kfVocab}
+%     \kfVocabItem{1}{눈으로 보고 마음으로 깨달음}
+%     \kfVocabItem{2}{사물의 이치를 따져 헤아림}
+%   \end{kfVocab}
+% ============================================================
+
+% adjustbox로 폭 강제 + 일반 tabular + p{} 열 사용
+\newenvironment{kfVocab}%
+  {\par\smallskip\needspace{4\baselineskip}%
+   \renewcommand{\arraystretch}{1.35}%
+   \arrayrulecolor{kfRule}%
+   \noindent\begin{adjustbox}{max width=\linewidth, center}%
+   \begin{tabular}{|>{\centering\arraybackslash}m{1.0cm}|m{8.5cm}|>{\centering\arraybackslash}m{4.0cm}|}%
+   \hline
+   \rowcolor{kfPrimaryLight!50}%
+   \multicolumn{1}{|c|}{\textbf{\color{kfPrimary}번호}} &
+   \multicolumn{1}{c|}{\textbf{\color{kfPrimary}뜻풀이}} &
+   \multicolumn{1}{c|}{\textbf{\color{kfPrimary}어휘 (정답 작성)}} \\\hline
+   \ignorespaces}%
+  {\end{tabular}%
+   \end{adjustbox}%
+   \arrayrulecolor{black}%
+   \par\smallskip}
+
+\newcommand{\kfVocabItem}[2]{%
+  \textbf{#1} & #2 & \rule[-1.0em]{0pt}{2.4em}\\\hline%
+}

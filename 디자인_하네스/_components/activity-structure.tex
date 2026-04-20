@@ -1,0 +1,43 @@
+% ============================================================
+% activity-structure.tex
+% 구조도 (트리 + 빈칸)
+% 사용:
+%   \begin{kfStructure}
+%     \kfNode{0}{서론}{문제 제기}
+%     \kfNode{1}{본론}{(\,\quad\,)}
+%     \kfNode{1}{본론}{근거 2}
+%     \kfNode{0}{결론}{주장 강화}
+%   \end{kfStructure}
+% ============================================================
+
+\newenvironment{kfStructure}%
+  {\par\smallskip\needspace{6\baselineskip}%
+   \begin{tcolorbox}[
+     enhanced, breakable=false,
+     colback=kfPaper, colframe=kfRule,
+     boxrule=0.4pt, arc=2pt,
+     left=\kfBoxPad, right=\kfBoxPad, top=\kfBoxPad, bottom=\kfBoxPad,
+     title={\footnotesize\bfseries\color{kfMute} 글의 구조},
+     coltitle=kfMute, colbacktitle=kfPrimaryLight!40,
+     attach boxed title to top left={yshift=-1.5mm, xshift=6pt},
+     boxed title style={colframe=kfRule, boxrule=0.3pt, arc=1pt}
+   ]%
+   \begin{tabbing}
+     \hspace{1.4cm}\=\hspace{1.4cm}\=\hspace{8cm}\kill}%
+  {\end{tabbing}\end{tcolorbox}\par\smallskip}
+
+% 노드: #1=들여쓰기 단계 (0~3), #2=라벨, #3=내용
+\newcommand{\kfNode}[3]{%
+  \ifcase#1\relax%
+    \>\>\textbf{\color{kfPrimary} ▶ #2}\quad #3\\
+  \or
+    \>\>\quad\textbf{\color{kfMute} ◦ #2}\quad #3\\
+  \or
+    \>\>\quad\quad\textbf{\color{kfMute} - #2}\quad #3\\
+  \or
+    \>\>\quad\quad\quad\textbf{\color{kfMute} \textperiodcentered\ #2}\quad #3\\
+  \fi
+}
+
+% 빈칸 노드
+\newcommand{\kfNodeBlank}[2]{\kfNode{#1}{#2}{(\hspace{2.5cm})}}

@@ -1,0 +1,127 @@
+% ============================================================
+% sample-russell.tex
+% 디자인 하네스 시범 컴파일용 샘플 (러셀 스타일)
+% ============================================================
+\documentclass[fs10]{korfarm-base}
+\usepackage{korfarm-russell}
+
+% --- 컴포넌트 로드 (TEXINPUTS에 _components 경로 포함 필요) ---
+\input{passage-note.tex}
+\input{condition-box.tex}
+\input{evidence-box.tex}
+\input{choice-list.tex}
+\input{answer-note.tex}
+\input{question-block.tex}
+\input{activity-table.tex}
+\input{activity-vocab.tex}
+\input{activity-blank.tex}
+\input{activity-ox.tex}
+\input{activity-connect.tex}
+\input{activity-writing.tex}
+\input{activity-structure.tex}
+\input{chapter-cover.tex}
+\input{area-header.tex}
+
+\begin{document}
+
+% --- 챕터 표지 ---
+\kfChapterCover{1}{근대성과 자아}{Chapter 1}%
+{이번 챕터에서는 근대 철학의 핵심 개념인 자아와 주체 형성을 살펴보고, 관련 어휘와 문법, 문학·비문학 지문을 통해 이해를 심화합니다.}
+
+% ===========================================
+% 어휘
+% ===========================================
+\kfStartVocab{이번 영역에서는 핵심 어휘 10개를 학습하고 예문 빈칸을 채워 문맥에서 사용해 봅니다.}
+
+\begin{kfVocab}
+\kfVocabItem{1}{사물의 이치를 따져 살펴 헤아림}
+\kfVocabItem{2}{눈으로 보고 마음으로 깨달음}
+\kfVocabItem{3}{의지나 생각의 방향을 굳게 정함}
+\end{kfVocab}
+
+% ===========================================
+% 문법
+% ===========================================
+\kfStartGrammar{이번 영역에서는 안긴문장과 안은문장의 구조를 학습합니다.}
+
+\begin{kfQBlock}{1}{객관식}
+\kfQStem{다음 문장에서 안긴문장의 종류를 바르게 짝지은 것은?}
+
+\begin{kfEvidence}
+나는 그가 떠난 사실을 모르고 있었다.
+\end{kfEvidence}
+
+\begin{kfChoices}
+\kfChoice 명사절
+\kfChoice 관형절
+\kfChoice 부사절
+\kfChoice 서술절
+\kfChoice 인용절
+\end{kfChoices}
+\end{kfQBlock}
+
+% ===========================================
+% 문학
+% ===========================================
+\kfStartLit{이번 영역에서는 김소월의 시 한 편을 정독하고 화자의 정서를 분석합니다.}
+
+\kfPassageNote{김소월, 「진달래꽃」}{%
+나 보기가 역겨워\\
+가실 때에는\\
+말없이 고이 보내 드리오리다.\\[10pt]
+영변에 약산\\
+진달래꽃,\\
+아름 따다 가실 길에 뿌리오리다.
+}
+
+\begin{kfQBlock}{2}{서술형}
+\kfQStem{이 시의 화자가 처한 상황과 정서를 두 문장으로 서술하시오.}
+
+\begin{kfCondition}
+\item 화자의 태도가 드러나도록 쓸 것.
+\item 한 문장은 30자 이내로 쓸 것.
+\end{kfCondition}
+
+\kfAnswerNote{답안}{4}
+\end{kfQBlock}
+
+% ===========================================
+% 비문학
+% ===========================================
+\kfStartNonlit{이번 영역에서는 사회과학 글의 구조를 분석하고 OX/연결 활동으로 정리합니다.}
+
+\kfPassageNote{사회 / 베버의 합리성 개념}{%
+베버는 근대 사회를 \uline{도구적 합리성}이 지배하는 사회로 보았다. 그는 합리성을 목적 합리성과 가치 합리성으로 구분하였으며, 근대화 과정에서 전자가 점차 우세해졌다고 분석하였다.
+
+이러한 합리화는 효율성을 높였지만 동시에 인간을 \uline{규칙의 그물}에 가두는 결과를 초래하였다.
+}
+
+\begin{kfOXList}
+\kfOXItem 베버는 합리성을 두 가지로 구분하였다. \kfOX
+\kfOXItem 가치 합리성이 근대 사회에서 점차 우세해진다. \kfOX
+\kfOXItem 합리화는 인간의 자유를 확장시키기만 하였다. \kfOX
+\end{kfOXList}
+
+\noindent\textbf{[활동] 개념 짝짓기 — 좌우를 선으로 연결하시오.}\par\medskip
+\begin{kfConnect}
+\kfPair{도구적 합리성}{효율과 수단을 중시}
+\kfPair{가치 합리성}{내적 가치를 중시}
+\kfPair{관료제}{규칙의 그물}
+\end{kfConnect}
+
+% ===========================================
+% 실력 확인
+% ===========================================
+\kfStartWeekly{이번 주 학습 내용을 종합 점검합니다. 제한시간 30분, 총 5문항.}
+
+\begin{kfQBlock}{1}{객관식}
+\kfQStem{다음 글의 중심 내용으로 가장 적절한 것은?}
+\kfChoicesInline{근대성}{합리성}{도구화}{관료제}{소외}
+\end{kfQBlock}
+
+\begin{kfQBlock}{2}{서술형}
+\kfQStem{베버가 말한 합리성의 두 종류를 비교하여 서술하시오.}
+\kfAnswerLines{4}
+\end{kfQBlock}
+
+\end{document}

@@ -1,0 +1,24 @@
+% ============================================================
+% korfarm-frege.sty
+% 프레게 시리즈 스타일 (따뜻한 톤, 11/10.5pt)
+% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{korfarm-frege}[2026/04/19 v0.1 Frege Series Style]
+
+\definecolor{kfPrimary}{HTML}{D97706}      % 주황
+\definecolor{kfPrimaryLight}{HTML}{FCE9CE}
+\definecolor{kfAccent}{HTML}{B45309}       % 진주황
+\definecolor{kfPassageBg}{HTML}{FFFAF0}    % 연크림
+\definecolor{kfNoteBg}{HTML}{FFF6E0}
+\definecolor{kfSeriesYellow}{HTML}{F4C04C}
+\definecolor{kfSeriesBrown}{HTML}{B17A4A}  % 연갈색
+
+\newcommand{\kfSeriesName}{프레게}
+\newcommand{\kfSeriesBadge}{%
+  \tikz[baseline]{\node[draw=kfPrimary, fill=kfPrimaryLight, rounded corners=3pt,
+        inner sep=3pt, font=\footnotesize\bfseries\color{kfPrimary}]
+        {FREGE};}%
+}
+
+\colorlet{kfCoverBg}{kfPrimaryLight}
+\colorlet{kfCoverFg}{kfPrimary}

@@ -1,0 +1,35 @@
+% ============================================================
+% korfarm-saussure.sty
+% 소쉬르 시리즈 스타일 (파스텔 컬러, 13/12pt)
+% 옵션: level1, level2, level3
+% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{korfarm-saussure}[2026/04/19 v0.1 Saussure Series Style]
+
+\newif\ifkfSausLvThree
+\kfSausLvThreefalse
+\DeclareOption{level1}{\kfSausLvThreefalse}
+\DeclareOption{level2}{\kfSausLvThreefalse}
+\DeclareOption{level3}{\kfSausLvThreetrue}
+\ProcessOptions\relax
+
+% ---------- 컬러 (파스텔) ----------
+\definecolor{kfPrimary}{HTML}{6FA8DC}     % 연파랑
+\definecolor{kfPrimaryLight}{HTML}{EAF2FB}
+\definecolor{kfAccent}{HTML}{F4B860}      % 연주황(액센트)
+\definecolor{kfPassageBg}{HTML}{FAF8F2}   % 연노랑 종이톤
+\definecolor{kfNoteBg}{HTML}{FFFAEC}      % 연노랑 메모톤
+\definecolor{kfSeriesPink}{HTML}{F4C7C7}  % 연분홍
+\definecolor{kfSeriesYellow}{HTML}{F6E7A2}
+
+% ---------- 시리즈 인장 ----------
+\newcommand{\kfSeriesName}{소쉬르}
+\newcommand{\kfSeriesBadge}{%
+  \tikz[baseline]{\node[draw=kfPrimary, fill=kfPrimaryLight, rounded corners=3pt,
+        inner sep=3pt, font=\footnotesize\bfseries\color{kfPrimary}]
+        {SAUSSURE};}%
+}
+
+% ---------- 챕터 표지 보조 컬러 ----------
+\colorlet{kfCoverBg}{kfPrimaryLight}
+\colorlet{kfCoverFg}{kfPrimary}

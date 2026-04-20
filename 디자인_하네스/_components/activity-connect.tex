@@ -1,0 +1,26 @@
+% ============================================================
+% activity-connect.tex
+% 좌우 선 긋기 활동 (2단 양식 + 중앙 여백)
+% 사용:
+%   \begin{kfConnect}
+%     \kfPair{사르트르}{실존은 본질에 앞선다}
+%     \kfPair{니체}{초인 사상}
+%     \kfPair{하이데거}{현존재}
+%   \end{kfConnect}
+% ============================================================
+
+\newenvironment{kfConnect}%
+  {\par\smallskip%
+   \renewcommand{\arraystretch}{1.6}%
+   \begin{tabular}{@{}>{\raggedleft\arraybackslash}m{4.5cm}
+                     @{\hspace{2.5cm}}
+                     >{\raggedright\arraybackslash}m{6.5cm}@{}}}%
+  {\end{tabular}\par\smallskip}
+
+\newcommand{\kfPair}[2]{%
+  \tikz[baseline]{\node[draw=kfRule, fill=kfPrimaryLight!30, rounded corners=2pt,
+        inner sep=4pt, font=\small]{#1};} \tikz[baseline]{\node[circle, draw=kfMute, fill=kfPaper, inner sep=1.5pt]{};}
+  &
+  \tikz[baseline]{\node[circle, draw=kfMute, fill=kfPaper, inner sep=1.5pt]{};} \tikz[baseline]{\node[draw=kfRule, fill=kfNoteBg, rounded corners=2pt,
+        inner sep=4pt, font=\small]{#2};} \\
+}

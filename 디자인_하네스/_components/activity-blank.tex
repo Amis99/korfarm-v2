@@ -1,0 +1,24 @@
+% ============================================================
+% activity-blank.tex
+% 빈칸 채우기 활동
+% 사용:
+%   \begin{kfBlankList}
+%     \kfBlankItem 첫 번째 문장에서 (\kfBlank)은(는) ...
+%     \kfBlankItem 둘째 문장에서 ...
+%   \end{kfBlankList}
+% ============================================================
+
+\newenvironment{kfBlankList}%
+  {\par\smallskip%
+   \begin{enumerate}[leftmargin=20pt, itemsep=4pt, topsep=2pt,
+                    label=\textbf{\arabic*.}, labelsep=6pt]}%
+  {\end{enumerate}\par\smallskip}
+
+\newcommand{\kfBlankItem}{\item}
+
+% 텍스트 안에 박스형 빈칸 (단어 1개 채우기)
+\newcommand{\kfBlankBox}[1][2.4cm]{%
+  \tikz[baseline=-0.5ex]{%
+    \draw[kfRule, line width=0.4pt] (0,0) -- ++(#1,0);%
+  }%
+}

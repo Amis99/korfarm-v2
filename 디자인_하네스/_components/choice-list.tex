@@ -1,0 +1,47 @@
+% ============================================================
+% choice-list.tex
+% 5선지 (① ② ③ ④ ⑤) 자동 들여쓰기 컴포넌트
+% 사용:
+%   \begin{kfChoices}
+%     \kfChoice 첫째 선택지
+%     \kfChoice 둘째 선택지
+%     \kfChoice 셋째 선택지
+%     \kfChoice 넷째 선택지
+%     \kfChoice 다섯째 선택지
+%   \end{kfChoices}
+% ============================================================
+
+\newcounter{kfChoiceCnt}
+\newcommand{\kfChoiceMark}[1]{%
+  \ifcase#1\relax%
+  \or ①\or ②\or ③\or ④\or ⑤\or ⑥\or ⑦\or ⑧\or ⑨%
+  \fi
+}
+
+% 환경: 자동 번호
+\newenvironment{kfChoices}%
+  {\setcounter{kfChoiceCnt}{0}%
+   \par\smallskip%
+   \begin{list}{}{%
+     \setlength{\leftmargin}{20pt}%
+     \setlength{\itemindent}{0pt}%
+     \setlength{\labelwidth}{18pt}%
+     \setlength{\labelsep}{6pt}%
+     \setlength{\itemsep}{2pt}%
+     \setlength{\topsep}{1pt}%
+     \setlength{\parsep}{0pt}%
+     \renewcommand{\makelabel}[1]{##1\hss}%
+   }}%
+  {\end{list}\par\smallskip}
+
+\newcommand{\kfChoice}{%
+  \stepcounter{kfChoiceCnt}%
+  \item[\textbf{\kfChoiceMark{\value{kfChoiceCnt}}}]\ignorespaces%
+}
+
+% --- 한 줄 5선지 (짧은 선택지용) ---
+\newcommand{\kfChoicesInline}[5]{%
+  \par\smallskip%
+  \noindent\textbf{①}~#1\quad\textbf{②}~#2\quad\textbf{③}~#3\quad\textbf{④}~#4\quad\textbf{⑤}~#5%
+  \par\smallskip%
+}

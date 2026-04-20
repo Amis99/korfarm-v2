@@ -1,0 +1,21 @@
+% ============================================================
+% activity-ox.tex
+% O/X 표기 활동
+% 사용:
+%   \begin{kfOXList}
+%     \kfOXItem 글쓴이는 자연을 예찬하고 있다.
+%     \kfOXItem 1연과 4연은 수미상관 구조이다.
+%   \end{kfOXList}
+% ============================================================
+
+\newenvironment{kfOXList}%
+  {\par\smallskip%
+   \begin{enumerate}[leftmargin=20pt, itemsep=4pt, topsep=2pt,
+                    label=\textbf{\arabic*.}, labelsep=6pt]}%
+  {\end{enumerate}\par\smallskip}
+
+\newcommand{\kfOXItem}{%
+  \item}
+
+% 인라인 OX 박스 (문장 끝에 부착)
+\newcommand{\kfOX}{\hfill (\hspace{0.6cm}\textbf{O}\hspace{0.6cm},\hspace{0.6cm}\textbf{X}\hspace{0.6cm})}

@@ -1,0 +1,33 @@
+% ============================================================
+% activity-sentence-reading.tex
+% 문장 독해 활동 — 문장 박스 1개 + 그에 묶인 문제 N개를 한 minipage로
+% 사용:
+%   \begin{kfSentenceUnit}{1}{"바람은 내 귀에 속삭이며..."}
+%     \kfSentQ{(1)}{서술어 '속삭이며'의 주어는?}
+%     \begin{kfChoices}
+%       \kfChoice 바람은
+%       ...
+%     \end{kfChoices}
+%   \end{kfSentenceUnit}
+% ============================================================
+
+% kfSentenceBox 매크로는 passage-note.tex에 정의됨
+
+\newenvironment{kfSentenceUnit}[2]%
+  {\par\smallskip\needspace{6\baselineskip}%
+   \noindent\begin{minipage}{\linewidth}%
+   \samepage%
+   \kfSentenceBox{문장 #1}{#2}%
+   \par\smallskip%
+  }%
+  {\end{minipage}\par\smallskip}
+
+% 같은 문장에 묶인 소문항 (문장 안내 + 발문)
+\newcommand{\kfSentQ}[2]{%
+  \par\noindent\textbf{#1}~#2\par\smallskip%
+}
+
+% 헤더 없이 문장만 있는 묶음 (sentence_ref가 없는 일반 문항)
+\newenvironment{kfSentencelessUnit}%
+  {\par\smallskip\noindent\begin{minipage}{\linewidth}\samepage}%
+  {\end{minipage}\par\smallskip}

@@ -1,0 +1,29 @@
+% ============================================================
+% korfarm-russell.sty
+% 러셀 시리즈 스타일 (차분 미드톤, 10pt, 2단 옵션)
+% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{korfarm-russell}[2026/04/19 v0.1 Russell Series Style]
+
+\definecolor{kfPrimary}{HTML}{2C3E70}      % 군청
+\definecolor{kfPrimaryLight}{HTML}{E5EAF3}
+\definecolor{kfAccent}{HTML}{6B7E3F}       % 연두/올리브
+\definecolor{kfPassageBg}{HTML}{F5F5F1}    % 차분한 종이톤
+\definecolor{kfNoteBg}{HTML}{F0F4EE}
+\definecolor{kfSeriesGray}{HTML}{8A8F9C}
+
+\newcommand{\kfSeriesName}{러셀}
+\newcommand{\kfSeriesBadge}{%
+  \tikz[baseline]{\node[draw=kfPrimary, fill=kfPrimaryLight, rounded corners=3pt,
+        inner sep=3pt, font=\footnotesize\bfseries\color{kfPrimary}]
+        {RUSSELL};}%
+}
+
+\colorlet{kfCoverBg}{kfPrimaryLight}
+\colorlet{kfCoverFg}{kfPrimary}
+
+% ---------- 러셀+(러셀2/3) 2단 본문 환경 ----------
+% v3: columnsep을 base의 \kfColSep(시리즈 차등)에 위임
+\newenvironment{kfRussellTwoCol}%
+  {\begin{multicols}{2}\raggedcolumns\setlength{\columnsep}{\kfColSep}\setlength{\columnseprule}{0pt}}%
+  {\end{multicols}}
